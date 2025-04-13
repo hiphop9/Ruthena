@@ -28,69 +28,77 @@
 //= 2.2 Removed extra setquest (quest id:3040).	[Joseph]
 //= 2.3 Instance system rewrite. [Euphy]
 //============================================================ 
+//= 한글화 by 크고아름다움
+//============================================================ 
 
 // Sealed Catacomb Entrance
 //============================================================
-monk_test,309,146,3	script	Friar Patrick#edq	412,{
+monk_test,309,146,3	script	항마수사 패트릭#edq	412,{
 	cutin "ins_cata_pri_n",2;
-	mes "[Friar Patrick]";
-	mes "The peace of this world cannot last forever... The hands of Evil are reaching into the world again...";
-	next;
-	mes "[Friar Patrick]";
-	mes "What brought you to this place?";
+	mes "[항마수사 패트릭]";
+	mes "이 어지럽고 혼란한 순간에 이런 곳을 방문하다니... 그래, 무슨 용건인가?";
 	next;
 	if (countitem(6004) > 0) {
 		set .@doll,1;
-		set .@selection,select("What is this place?:I want to enter.:About the Cursed Baphomet Doll.:Cancel.");
+		set .@selection,select("여긴 어딘가요?:들어가겠습니다.:저주받은 바포메트의 인형에 대하여.:취소.");
 	}
 	else {
-		set .@selection,select("What is this place?:I want to enter.:Cancel.");
+		set .@selection,select("여긴 어딘가요?:들어가겠습니다.:취소.");
 	}
 	switch(.@selection) {
 	case 1:
-		mes "[Friar Patrick]";
-		mes "Huh... Don't you know? This is St. Capitolina Monastery where the Brothers who wish to become monks train and pray.";
+		mes "[항마수사 패트릭]";
+		mes "흠... 정말 모르는건가? 세상의 몽크라면 꼭 한번와서 수련을 하거나 기도를 위해 오는 명망높은 케피톨리나 수도원이라네.";
 		next;
-		mes "[Friar Patrick]";
-		mes "And this place is... What can I say... Yes. It's the grave of the Devil. Grave...";
+		mes "[항마수사 패트릭]";
+		mes "하지만... 이 곳은... 그래. 악마의 무덤이지.";
+		mes "...무덤 말이야.";
 		next;
-		mes "[Friar Patrick]";
-		mes "The very place where the great Devil who once demolished this world is sleeping.";
+		mes "[항마수사 패트릭]";
+		mes "이 거대한 곳 자체가 세상을 멸망으로 몰아갈 뻔 한 악마의 무덤이지.";
 		next;
-		switch(select("Tell me more.:Stop talking.")) {
+		switch(select("좀 더 알려주세요.:대화를 그만둔다.")) {
 		case 1:
 			cutin "ins_cata_pri_n",2;
-			mes "[Friar Patrick]";
-			mes "Baphomet... is the name of the Devil... I think you have heard of his name.";
+			mes "[항마수사 패트릭]";
+			mes "바포메트... 그 악마의 이름... 자네도 한번쯤 들어보았겠지.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Numerous brave men and brothers have trained in this monastery...";
+			mes "[항마수사 패트릭]";
+			mes "수 많은 용감한 사람과 형제들이 이 수도원에서 수련을 했었지...";
 			next;
-			mes "[Friar Patrick]";
-			mes "Under this gravestone in front of you... Baphomet is sealed.";
+			mes "[항마수사 패트릭]";
+			//mes "Under this gravestone in front of you... Baphomet is sealed.";
+			mes "자네 앞에 있는 그 비석에 바포메트가 봉인되어져 있다네";
 			next;
-			mes "[Friar Patrick]";
-			mes "But... As we speak Satan Morocc is marshalling his powerful magic in order to affect all life on this continent.";
+			mes "[항마수사 패트릭]";
+			//mes "But... As we speak Satan Morocc is marshalling his powerful magic in order to affect all life on this continent.";
+			mes "하지만... 우리가 아는 마왕 모로크가 대륙의 모든 생명체에 영향을 미칠정도의 강력한 마력을 뿜어냈었다는걸 알고 있을 걸세.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Baphomet also... has awakened and is preparing for his revival, into this world, by weakening the power of the seal through the power of Satan Morocc...";
+			mes "[항마수사 패트릭]";
+			//mes "Baphomet also... has awakened and is preparing for his revival, into this world, by weakening the power of the seal through the power of Satan Morocc...";
+			mes "바포메트는 그것을 눈치채고 마왕 모로크의 힘을 이용해 봉인을 약화시켜 이 세상에 다시 나오기 위해 준비하고 있네.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Now... I'm looking for someone brave enough to reseal Baphomet in its shrine... as we once did many years ago...";
+			mes "[항마수사 패트릭]";
+			//mes "Now... I'm looking for someone brave enough to reseal Baphomet in its shrine... as we once did many years ago...";
+			mes "내 착각이 아니라면... 나는 지금 이 신전에 바포메트를 다시 봉인하기 위한 용맹한 자를 보고 있는 것일 수도 있겠군... 우리가 그랬던 것처럼...";
 			next;
-			mes "[Friar Patrick]";
-			mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+			mes "[항마수사 패트릭]";
+			//mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+			mes "이 깊고 깊은 곳의 악이 세상을 집어삼키려는 자와 싸우게 될걸세.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Train more and use your skills to protect the world from evil's looming presence...";
+			mes "[항마수사 패트릭]";
+			//mes "Train more and use your skills to protect the world from evil's looming presence...";
+			mes "좀 더 수련하고 완벽한 스킬 사용만이 이 악마의 존재에 다가갈 수 있을테니...";
 			break;
 		case 2:
 			cutin "ins_cata_pri_n",2;
-			mes "[Friar Patrick]";
-			mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+			mes "[항마수사 패트릭]";
+			//mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+			mes "이 깊고 깊은 곳의 악이 세상을 집어삼키려는 자와 싸우게 될걸세.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Train more and use your skills to protect the world from evil's looming presence...";
+			mes "[항마수사 패트릭]";
+			//mes "Train more and use your skills to protect the world from evil's looming presence...";
+			mes "좀 더 수련하고 완벽한 스킬 사용만이 이 악마의 존재에 다가갈 수 있을테니...";
 			break;
 		}
 		break;
@@ -99,8 +107,9 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 
 			set .@party_id,getcharid(1);
 
-			mes "[Friar Patrick]";
-			mes "Do you mean you'll go to the shrine and reseal Baphomet?";
+			mes "[항마수사 패트릭]";
+			//mes "Do you mean you'll go to the shrine and reseal Baphomet?";
+			mes "바포메트를 다시 봉인하기 위해 신전으로 이동할텐가?";
 			next;
 
 			// 12 hour cooldown
@@ -109,91 +118,115 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 			//set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
 			if (.@ins_bapho_check == -1) {
-				if (is_party_leader(.@party_id) == true && instance_check_party(.@party_id,2,75)) {
-					mes "[Friar Patrick]";
-					mes "Party name is "+getpartyname(.@party_id)+"...";
-					mes "Name of the leader is "+strcharinfo(0)+"...";
+				if (getpartyleader(.@party_id,2) == getcharid(0) && instance_check_party(.@party_id,1,75)) {
+					mes "[항마수사 패트릭]";
+					//mes "Party name is "+getpartyname(.@party_id)+"...";
+					mes "파티의 이름은 "+getpartyname(.@party_id)+"...";
+					//mes "Name of the leader is "+strcharinfo(0)+"...";
+					mes "리더는 "+strcharinfo(0)+"...";
 					if (instance_create("Sealed Catacomb") < 0) {
-						mes "Umm... But it seems that there is a problem here... I'll check quickly. Please wait.";
+						//mes "Umm... But it seems that there is a problem here... I'll check quickly. Please wait.";
+						mes "음... 뭔가 잘못된 것 같네... 빨리 확인해 보겠으니 조금만 기다리게나.";
 					}
 					else {
-						mes "Okay... I'll adjust the shrine's seal so that you and your group can enter.";
+						//mes "Okay... I'll adjust the shrine's seal so that you and your group can enter.";
+						mes "좋아. 자네의 파티가 신전에 들어갈 수 있게 조치해두었네.";
 						next;
-						mes "[Friar Patrick]";
-						mes "You will see a sign when the seal has broken. Please wait until the sign appears...";
+						mes "[항마수사 패트릭]";
+						//mes "You will see a sign when the seal has broken. Please wait until the sign appears...";
+						mes "봉인이 파괴되면 어떤 표식을 볼 수 있을거야. 그 표식이 나타날 때까지 기다려게.";
 						next;
-						mes "[Friar Patrick]";
-						mes "When you see the sign, put your hands on the gravestone... Then you can move inside.";
+						mes "[항마수사 패트릭]";
+						//mes "When you see the sign, put your hands on the gravestone... Then you can move inside.";
+						mes "표식이 보인다면, 비석에 손을 대게. 안으로 들어갈 수 있을걸세.";
 						next;
-						mes "[Friar Patrick]";
-						mes "One thing that you should remember is... Anyone who enters this shrine will be cursed by Baphomet and cannot enter or leave while they are cursed.";
+						mes "[항마수사 패트릭]";
+						//mes "One thing that you should remember is... Anyone who enters this shrine will be cursed by Baphomet and cannot enter or leave while they are cursed.";
+						mes "한가지 명심해야 할 것이 있네... 누구든지 이 신전에 들어가면, 바포메트의 저주로 인해 저주받는 동안엔 다시 들어가거나 나갈 수 없네.";
 						next;
-						mes "[Friar Patrick]";
-						mes "And one more thing... In this cursed area, some skills, which are protected by outer physical power are prohibited by the effect of the seal.";
+						mes "[항마수사 패트릭]";
+						//mes "And one more thing... In this cursed area, some skills, which are protected by outer physical power are prohibited by the effect of the seal.";
+						mes "한가지 더... 이 저주받은 지역은 외부의 물리적 힘에 의해 보호되어지기 때문에, 어떤 스킬은 사용이 불가능하네.";
 						next;
-						mes "[Friar Patrick]";
-						mes "For example, the skills like ^0000FFSafety Wall and Assumptio^000000... So you'd better prepare before entering the shrine.";
+						mes "[항마수사 패트릭]";
+						//mes "For example, the skills like ^0000FFSafety Wall and Assumptio^000000... So you'd better prepare before entering the shrine.";
+						mes "예를들면 ^0000FF세이프티 월 과 아숨프티오^000000 같은 것들이 그것이지. 그러니 잘 준비해야할걸세.";
 					}
 				}
 				else {
-					mes "[Friar Patrick]";
-					mes "Umm... I recognize your courage, but... I can't permit anyone to enter this place. I can only permit the leader of a party to enter first.";
+					mes "[항마수사 패트릭]";
+					//mes "Umm... I recognize your courage, but... I can't permit anyone to enter this place. I can only permit the leader of a party to enter first.";
+					mes "음... 자네의 용기를 내 인정하지만, 이곳은 아무나 들어갈 수 없네. 파티의 리더가 먼저 나와 대화를 나눠야 하네.";
 					next;
-					mes "[Friar Patrick]";
-					mes "Once the party leader is permitted, the rest of the party can enter. This is a rule of this monastery, so please understand.";
+					mes "[항마수사 패트릭]";
+					//mes "Once the party leader is permitted, the rest of the party can enter. This is a rule of this monastery, so please understand.";
+					mes "파티의 리더가 나와 대화하여 등록이 완료되면 들어갈 수 있네. 이 수도원에 규칙이니 따라주게나.";
 				}
 			}
 			else if (.@ins_bapho_check == 0 || .@ins_bapho_check == 1) {
-				mes "[Friar Patrick]";
-				mes "It seems you have entered this shrine recently... You cannot reenter because Baphomet's Curse still remains. Baphomet's Curse disappears only after a certain amount of time has passed.";
+				mes "[항마수사 패트릭]";
+				//mes "It seems you have entered this shrine recently... You cannot reenter because Baphomet's Curse still remains. Baphomet's Curse disappears only after a certain amount of time has passed.";
+				mes "이 기운은... 음... 바포메트의 저주를 받는 동안엔 들어갈 수 없네. 시간이 흘러 저주가 사라져야만이 다시 들어갈 수 있네.";
 			}
 			else if (.@ins_bapho_check == 2) {
-				mes "[Friar Patrick]";
-				mes "Umm... It seems that Baphomet's Curse has weakened. I can remove it now.";
+				mes "[항마수사 패트릭]";
+				//mes "Umm... It seems that Baphomet's Curse has weakened. I can remove it now.";
+				mes "음... 저주가 약해진 것 같구만. 남은 저주를 제거해주겠네.";
 				next;
-				mes "[Friar Patrick]";
-				mes "Haaaaaaap... Hocus Pocus Wingardium Abracadabra!!!!!";
+				mes "[항마수사 패트릭]";
+				//mes "Haaaaaaap... Hocus Pocus Wingardium Abracadabra!!!!!";
+				mes "흐으으읍!!";
+				mes "수리수리 마수리... 긔엽긔는 거꾸로해도 긔엽기!!!!!";
 				next;
 				erasequest 3040;
 				if (checkquest(3041)>=0) erasequest 3041;
 				if (checkquest(3045)>=0) erasequest 3045;
-				mes "[Friar Patrick]";
-				mes "Huu... It's over. Now that I've released Baphomet's Curse, you can enter again.";
+				mes "[항마수사 패트릭]";
+				//mes "Huu... It's over. Now that I've released Baphomet's Curse, you can enter again.";
+				mes "흠흠... 끝났네. 바포메트의 저주가 풀렸네. 이제 다시 들어갈 수 있을걸세.";
 			}
 		}
 		else {
-			mes "[Friar Patrick]";
-			mes "Umm... You should train more to enter this dangerous place... You should reach at least Lv 75 to enter here.";
+			mes "[항마수사 패트릭]";
+			//mes "Umm... You should train more to enter this dangerous place... You should reach at least Lv 75 to enter here.";
+			mes "음... 이 지역에 들어가려면 좀 더 강해져야 할것 같네... 적어도 레벨 75는 넘어야 들어갈 수 있지.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Please train more and come again.";
+			mes "[항마수사 패트릭]";
+			//mes "Please train more and come again.";
+			mes "좀 더 강해지고 난 후에 오게나.";
 		}
 		break;
 	case 3:
 		if (.@doll == 1) {
-			mes "[Friar Patrick]";
-			mes "That is... the villainous doll that you are holding... Let me see it.";
+			mes "[항마수사 패트릭]";
+			//mes "That is... the villainous doll that you are holding... Let me see it.";
+			mes "그것은... 당신이 들고있는 그 사악한 인형... 내가 좀 봐도 되겠나!?";
 			next;
-			mes "[Friar Patrick]";
+			mes "[항마수사 패트릭]";
 			mes "... ... ...";
 			next;
-			mes "[Friar Patrick]";
-			mes "That's correct... I can feel Baphomet's evil inside... So, what will you do with the doll?";
+			mes "[항마수사 패트릭]";
+			//mes "That's correct... I can feel Baphomet's evil inside... So, what will you do with the doll?";
+			mes "확실하군... 이 안에서 바포메트의 사악함이 느껴지는구나... 이 인형을 어떻게 할 셈인가?";
 			next;
-			mes "[Friar Patrick]";
-			mes "It is just a dangerous and useless thing if you do nothing with it... I'll introduce someone who can help you... Do you want to see him?";
+			mes "[항마수사 패트릭]";
+			//mes "It is just a dangerous and useless thing if you do nothing with it... I'll introduce someone who can help you... Do you want to see him?";
+			mes "그 인형은 위험하고 어디에든 쓸모 없을테니, 자네에게 도움을 줄 수 있는 사람을 알려주겠네... 그 인형을 갖고 한번 만나보게나.";
 			next;
-			mes "[Friar Patrick]";
-			mes "Go to see ^0000FFRust Blackhand^000000 who is near the main building of the monastery... He will make this doll helpful to you.";
+			mes "[항마수사 패트릭]";
+			//mes "Go to see ^0000FF러스트 블랙핸드#^000000 who is near the main building of the monastery... He will make this doll helpful to you.";
+			mes "^0000FF러스트 블랙핸드^000000를 만나보게나. 그는 이 수도원 본 건물에서 가까운 곳에 있으니... 그를 만나면 그 인형을 자네에게 도움이 될 수 있도록 만들어 줄테니.";
 			setquest 3042;
 			break;
 		}
 	case 4:
-		mes "[Friar Patrick]";
-		mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+		mes "[항마수사 패트릭]";
+		//mes "Anyone who fights for good will know, deep inside, that evil is threatening to conquer this world...";
+		mes "이 깊고 깊은 곳의 악이 세상을 집어삼키려는 자와 싸우게 될걸세.";
 		next;
-		mes "[Friar Patrick]";
-		mes "Train more and use your skills to protect the world from evil's looming presence...";
+		mes "[항마수사 패트릭]";
+		//mes "Train more and use your skills to protect the world from evil's looming presence...";
+		mes "좀 더 수련하고 완벽한 스킬 사용만이 이 악마의 존재에 다가갈 수 있을테니...";
 		break;
 	}
 	close2;
@@ -201,11 +234,12 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 	end;
 }
 
-monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
+monk_test,306,151,3	script	바포메트의 비석#edq	111,{
 	if (countitem(6002)) delitem 6002,countitem(6002); //Token_Of_Apostle
-	mes "This gravestone has a carving of a wicked devil with large horns. It arouses an ominous feeling.";
+	//mes "This gravestone has a carving of a wicked devil with large horns. It arouses an ominous feeling.";
+	mes "비석에 큰 뿔을 가진 사악한 악마의 조각이 붙어있어 불길하고 위험함이 느껴집니다."; 
 	next;
-	if(select("Touch the stone.:Step back.") == 2)
+	if(select("비석에 손을 댄다.:비석으로부터 물러선다.") == 2)
 		close;
 
 	// 12 hour cooldown
@@ -215,59 +249,71 @@ monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
 
 	if (.@ins_bapho_check == -1) {
 		switch(instance_enter("Sealed Catacomb")) {
-		case IE_OTHER:
-		case IE_NOINSTANCE:
-			mes "It's cold to the touch. It doesn't respond.";
+		case 3:
+		case 2:
+			//mes "It's cold to the touch. It doesn't respond.";
+			mes "비석은 그저 차갑기만 하고, 아무런 일도 일어나지 않습니다.";
 			close;
-		case IE_NOMEMBER:
-			mes "[Friar Patrick]";
-			mes "To enter this dangerous place, you can't go alone. Come again after you join a party.";
+		case 1:
+			mes "[항마수사 패트릭]";
+			//mes "To enter this dangerous place, you can't go alone. Come again after you join a party.";
+			mes "그 위험한 곳에 들어가려면, 혼자서는 들어갈 수 없네. 파티를 만들어서 다시 오게나.";
 			close;
-		case IE_OK:
-			mapannounce "monk_test","[" + strcharinfo(0) + "] member of the [" + getpartyname(.@party_id) + "] party has entered the Sealed Shrine.",bc_map,"0x00ff99";
+		case 0:
+			//mapannounce "monk_test","[" + strcharinfo(0) + "] member of the [" + getpartyname(.@party_id) + "] party has entered the Sealed Shrine.",bc_map,"0x00ff99";
+			mapannounce "monk_test","[" + getpartyname(.@party_id) + "] 파티의 멤버인 [" + strcharinfo(0) + "] 님이 봉인된 신전에 입장하였습니다.",bc_map,"0x00ff99";
 			setquest 3040;
 			//warp "1@cata",100,224;
 			close;
 		}
 	} else if (.@ins_bapho_check == 0 || .@ins_bapho_check == 1) {
-		mes "[Friar Patrick]";
-		mes "It seems you have entered this shrine recently... You cannot reenter because the curse of Baphomet still remains.";
-		mes "The curse of Baphomet disappears after a certain amount of time after you entered.";
+		mes "[항마수사 패트릭]";
+		//mes "It seems you have entered this shrine recently... You cannot reenter because the curse of Baphomet still remains.";
+		mes "바포메트의 저주가 아직 약해지지 않은걸 보아하니 들어간지 얼마 안된 모양이군.";
+		//mes "The curse of Baphomet disappears after a certain amount of time after you entered.";
+		mes "좀 더 시간이 지난 뒤에 다시 오게나.";
 		close;
 	} else if (.@ins_bapho_check == 2) {
-		mes "[Friar Patrick]";
-		mes "Umm... It seems the curse of Baphomet weakened. I'll clear the bad curse.";
+		mes "[항마수사 패트릭]";
+		//mes "Umm... It seems that Baphomet's Curse has weakened. I can remove it now.";
+		mes "음... 저주가 약해진 것 같구만. 남은 저주를 제거해주겠네.";
 		next;
-		mes "[Friar Patrick]";
-		mes "Haaaaaaap... Wingardium Leviosa Expecto Patronum !!!!!";
+		mes "[항마수사 패트릭]";
+		//mes "Haaaaaaap... Hocus Pocus Wingardium Abracadabra!!!!!";
+		mes "흐으으읍!!";
+		mes "수리수리 마수리... 긔엽긔는 거꾸로해도 긔엽기!!!!!";
+		next;
 		specialeffect2 EF_HOLYHIT;
 		erasequest 3040;
 		if (checkquest(3041)>=0) erasequest 3041;
 		if (checkquest(3045)>=0) erasequest 3045;
 		next;
-		mes "[Friar Patrick]";
-		mes "Huu... It's over. Now I released all of the curses on you. You can enter again.";
+		mes "[항마수사 패트릭]";
+		//mes "Huu... It's over. Now I released all of the curses on you. You can enter again.";
+		mes "흠흠... 끝났네. 바포메트의 저주가 풀렸네. 이제 다시 들어갈 수 있을걸세.";
 		close;
 	}
 }
 
-prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
+prt_monk,261,91,3	script	러스트 블랙핸드#edq	826,{
 	set .@new_maje,checkquest(3043);
-	mes "[Rust Blackhand]";
-	mes "Who are you? What do you want me for?";
+	mes "[러스트 블랙핸드]";
+	//mes "Who are you? What do you want me for?";
+	mes "누구야? 원하는게 뭐야?";
 	next;
-	mes "[Rust Blackhand]";
-	mes "You're not a monk, then what do you want?";
+	mes "[러스트 블랙핸드]";
+	//mes "You're not a monk, then what do you want?";
+	mes "몽크도 아니면서 나한테 무슨 볼일이지?";
 	next;
 	if (.@new_maje == 0 || .@new_maje == 1) {
-		mes "[Rust Blackhand]";
-		mes "Did you bring all of the ingredients?";
+		mes "[러스트 블랙핸드]";
+		mes "너희들이 뭘 해야하는지 아는 것 같은 눈치인데..?";
 		next;
 		if ((countitem(6004) > 0) && (countitem(2256) > 0) && (countitem(7799) > 29) && (countitem(7798) > 49) && (Zeny > 990000)) {
-			mes "[Rust Blackhand]";
+			mes "[러스트 블랙핸드]";
 			mes "kkk... You prepared the ingredients well. Why don't you leave it there and wait?";
 			next;
-			mes "[Rust Blackhand]";
+			mes "[러스트 블랙핸드]";
 			mes "Hmm... It's been such a long time since I last saw these wicked horns... kkk... Let me start...";
 			next;
 			mes "...";
@@ -283,145 +329,187 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 			set Zeny, Zeny-990000;
 			completequest 3043;
 			getitem 5374,1; //L_Magestic_Goat
-			mes "[Rust Blackhand]";
-			mes "It's done. You may be excited, of course. I understand...";
+			mes "[러스트 블랙핸드]";
+			//mes "It's done. You may be excited, of course. I understand...";
+			mes "됐다. 조마조마했지? 일부러 부숴버릴까봐 크크크....";
 			next;
-			mes "[Rust Blackhand]";
-			mes "I don't accept complaints or A/S requests, so use it with care. I must go...";
+			mes "[러스트 블랙핸드]";
+			//mes "I don't accept complaints or A/S requests, so use it with care. I must go...";
+			mes "내 책임은 여기까지야. 이걸로 뭘하든 너희책임이란 것을 명심하라구.";
 			close;
 		}
 		else {
-			mes "[Rust Blackhand]";
-			mes "Huu... You don't understand what I said. You cannot make anything with these ingredients.";
+			mes "[러스트 블랙핸드]";
+			//mes "Huu... You don't understand what I said. You cannot make anything with these ingredients.";
+			mes "후우... 무식하기는.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "I'll tell you the ingredients one more time, so please gather them correctly.";
+			mes "[러스트 블랙핸드]";
+			//mes "I'll tell you the ingredients one more time, so please gather them correctly.";
+			mes "한번 더 말해줄테니 그 좁아터진 머리 속에 잘좀 구겨넣어봐.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+			mes "[러스트 블랙핸드]";
+			//mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+			mes "^0000FF마력이 깃든 바포메트 인형 1개";
+			mes "마제스틱 고우트 1개";
+			mes "어둠의 결정체 30개, 어둠의 파편 50개^000000";
+			mes " 그리고 가장 중요한, 이 몸의 수고비인 ^0000FF990000^000000 제니.";
+			next;
+			mes "[러스트 블랙핸드]";
+			mes "뭐해! 얼른 가서 구해오지 않고.";
 			close;
 		}
 	}
 	else if ((.@new_maje == -1) && (countitem(6004) > 0)) {
-		switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		//switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		switch(select("마력이 깃든 바포메트 인형에 대해:대화를 중지한다.")) {
 		case 1:
-			mes "[Rust Blackhand]";
-			mes "What?... Hmmm... Did you get the doll? You're pretty good, unlike your appearance...";
+			mes "[러스트 블랙핸드]";
+			//mes "What?... Hmmm... Did you get the doll? You're pretty good, unlike your appearance...";
+			mes "뭐?... 흠... 인형을 구했다고? 보기보다는 실력이 있나보군...";
 			next;
-			mes "[Rust Blackhand]";
-			mes "Let me see... Needless to say, Patric must have sent you here to deal with the doll, right?";
+			mes "[러스트 블랙핸드]";
+			//mes "Let me see... Needless to say, Patric must have sent you here to deal with the doll, right?";
+			mes "보자... 분명히 패트릭이 그 인형을 나한테 가져오라고 했을꺼야, 내말 맞지?";
 			next;
-			mes "[Rust Blackhand]";
-			mes "Cool... I'll help you make the evil doll useful. What? What can I do?";
+			mes "[러스트 블랙핸드]";
+			//mes "Cool... I'll help you make the evil doll useful. What? What can I do?";
+			mes "좋아... 이 저주받은 인형을 쓸모있게 만들어주지.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "I can make the strong and large horns of the wicked devil Baphomet for you. A helm that has his immense power.";
+			mes "[러스트 블랙핸드]";
+			//mes "I can make the strong and large horns of the wicked devil Baphomet for you. A helm that has his immense power.";
+			mes "사악한 악마 바포메트의 거대한 뿔을 만들어 줄 수 있지. 그 악마의 힘이 깃든 그대로 말이야.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "It is called the ^4d4dffGigantic Magestic Goat^000000. You'll realize that the Magestic Goat you're familiar with is nothing in comparison.";
+			mes "[러스트 블랙핸드]";
+			//mes "It is called the ^4d4dffGigantic Magestic Goat^000000. You'll realize that the Magestic Goat you're familiar with is nothing in comparison.";
+			mes "맞아. ^4d4dffGigantic Magestic Goat^000000. 너희들이 알고있는 마제스틱 고우트 따윈 비교 조차 용서하지 못할 정도지.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "The Cursed Baphomet Doll is the most important ingredient... I'll make you if you want. What would you like to do?";
+			mes "[러스트 블랙핸드]";
+			//mes "The Cursed Baphomet Doll is the most important ingredient... I'll make you if you want. What would you like to do?";
+			mes "이 마력이 깃든 바포메트 인형은 가장 중요한 재료야. 원한다면 만들어 주마. 어때?";
 			next;
-			switch(select("I want to make one!:I don't need one.")) {
+			//switch(select("I want to make one!:I don't need one.")) {
+			switch(select("만들어주세요!:필요 없어요.")) {
 			case 1:
-				mes "[Rust Blackhand]";
-				mes "kkk... Yes, wise men take their chances when the opportunity comes. I'll tell you the ingredients. Don't forget, and bring them all.";
+				mes "[러스트 블랙핸드]";
+				//mes "kkk... Yes, wise men take their chances when the opportunity comes. I'll tell you the ingredients. Don't forget, and bring them all.";
+				mes "크크크... 좋아, 재대로 박힌 사람이라면 이런 기회를 날리진 않지. 재료를 말해줄테니 잊어먹지 말고 모두 가져오라고.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+				mes "[러스트 블랙핸드]";
+				//mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+				mes "^0000FF마력이 깃든 바포메트 인형 1개";
+				mes "마제스틱 고우트 1개";
+				mes "어둠의 결정체 30개, 어둠의 파편 50개^000000";
+				mes " 그리고 가장 중요한, 이 몸의 수고비인 ^0000FF990000^000000 제니.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "You can get the Magestic Goat from the weak Baphomet in the Labyrinth Forest. Crystal of Darkness and Fragment of Darkness are from the Incarnation of Morocc.";
+				mes "[러스트 블랙핸드]";
+				//mes "You can get the Magestic Goat from the weak Baphomet in the Labyrinth Forest. Crystal of Darkness and Fragment of Darkness are from the Incarnation of Morocc.";
+				mes "마제스틱 고우트는 프론테라의 미궁 숲에서 얻을 수 있을꺼야. 어둠의 결정체와 파편은 모로크의 현신들한테서 얻을 수 있을테지.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "I'm sure that you can get the ingredients because you sealed the real Baphomet. Can't you? kkk...";
+				mes "[러스트 블랙핸드]";
+				//mes "I'm sure that you can get the ingredients because you sealed the real Baphomet. Can't you? kkk...";
+				mes "바포메트를 봉인할 실력자라면 이 재료들을 모아올 수 있겠지, 안그래? 크크크..";
 				next;
-				mes "[Rust Blackhand]";
-				mes "You'll never know how great this hat is until you get one. If you understood, go and get the ingredients.";
-				if (isbegin_quest(3042))
-					changequest 3042,3043;
-				else
-					setquest 3043;
+				mes "[러스트 블랙핸드]";
+				//mes "You'll never know how great this hat is until you get one. If you understood, go and get the ingredients.";
+				mes "완성된 그것의 대단함을 넌 상상도 못할꺼야. 알았으면 가서 재료를 가져와.";
+				changequest 3042,3043;
 				close;
 			case 2:
-				mes "[Rust Blackhand]";
-				mes "Huh... Do you? Do whatever you want... Do you really want to let this opportunity go to waste?";
+				mes "[러스트 블랙핸드]";
+				//mes "Huh... Do you? Do whatever you want... Do you really want to let this opportunity go to waste?";
+				mes "뭐? 이런 기회를 걷어찬다고";
 				next;
-				mes "[Rust Blackhand]";
-				mes "Tut, tut... I don't care if the wicked doll threatens your life all the time!";
+				mes "[러스트 블랙핸드]";
+				//mes "Tut, tut... I don't care if the wicked doll threatens your life all the time!";
+				mes "인형가지고 꺼져버려. 멍청한 녀석.";
 				close;
 			}
 		case 2:
-			mes "[Rust Blackhand]";
-			mes "What a dull boy he is... huh...";
+			mes "[러스트 블랙핸드]";
+			//mes "What a dull boy he is... huh...";
+			mes "싱겁기는...";
 			close;
 		}
 	}
 	else if ((.@new_maje == -1) && (countitem(6004) == 0)) {
-		mes "[Rust Blackhand]";
-		mes "If you don't have business with me, go away! As you see, I make equipment for the Brothers at the monastery, not for adventurers like you. Do you understand?";
+		mes "[러스트 블랙핸드]";
+		//mes "If you don't have business with me, go away! As you see, I make equipment for the Brothers at the monastery, not for adventurers like you. Do you understand?";
+		mes "꺼져.";
 		close;
 	}
 	else if ((.@new_maje == 2) && (countitem(6004) > 0)) {
-		switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		//switch(select("About the Cursed Baphomet Doll:Stop talking.")) {
+		switch(select("마력이 깃든 바포메트 인형에 대해:대화를 그만둔다.")) {
 		case 1:
-			mes "[Rust Blackhand]";
-			mes "What?... You again? What do you want this time?";
+			mes "[러스트 블랙핸드]";
+			//mes "What?... You again? What do you want this time?";
+			mes "뭐? 또?";
 			next;
-			mes "[Rust Blackhand]";
-			mes "What? You got another doll from the wicked devil? Umm... You're much better than I thought...";
+			mes "[러스트 블랙핸드]";
+			//mes "What? You got another doll from the wicked devil? Umm... You're much better than I thought...";
+			mes "대단하군. 내가 생각했던 것보다 훨씬 대단한 놈이구나 너...";
 			next;
-			mes "[Rust Blackhand]";
-			mes "Alright... I'll help you again.";
+			mes "[러스트 블랙핸드]";
+			//mes "Alright... I'll help you again.";
+			mes "좋아. 만들어줄께.";
 			next;
-			mes "[Rust Blackhand]";
-			mes "If you want to make the doll into a ^4d4dffGigantic Magestic Goat^000000 again, I can make you another.";
+			mes "[러스트 블랙핸드]";
+			//mes "If you want to make the doll into a ^4d4dffGigantic Magestic Goat^000000 again, I can make you another.";
+			mes "이 인형을 ^4d4dff대형 마제스틱 고우트^000000로 만드는 작업 말하는 것 맞지?";
 			next;
-			mes "[Rust Blackhand]";
-			mes "I'll tell you the ingredients again. So, do you want to make?";
+			mes "[러스트 블랙핸드]";
+			//mes "I'll tell you the ingredients again. So, do you want to make?";
+			mes "재료를 말해줄께. 근데 정말 만드려는거 맞지?";
 			next;
-			switch(select("I want.:No, I don't want.")) {
+			//switch(select("I want.:No, I don't want.")) {
+			switch(select("맞아요.:아뇨 그냥 한번 떠봤어요.")) {
 			case 1:
-				mes "[Rust Blackhand]";
-				mes "kkk... Yes, wise men take their chances when the opportunity comes. I'll tell you the ingredients. Don't forget, and bring them all.";
+				mes "[러스트 블랙핸드]";
+				//mes "kkk... Yes, wise men take their chances when the opportunity comes. I'll tell you the ingredients. Don't forget, and bring them all.";
+				mes "크크크... 좋아, 재대로 박힌 사람이라면 이런 기회를 날리진 않지. 재료를 말해줄테니 잊어먹지 말고 모두 가져오라고.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+				mes "[러스트 블랙핸드]";
+				//mes "^0000FFCursed Baphomet Doll, Magestic Goat, 30 Crystal of Darkness, 50 Fragment of Darkness^000000, and the most important, production cost is ^0000FF990000^000000 Zeny.";
+				mes "^0000FF마력이 깃든 바포메트 인형 1개";
+				mes "마제스틱 고우트 1개";
+				mes "어둠의 결정체 30개, 어둠의 파편 50개^000000";
+				mes " 그리고 가장 중요한, 이 몸의 수고비인 ^0000FF990000^000000 제니.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "You can get the Magestic Goat from the weak Baphomet in the Labyrinth Forest. Crystal of Darkness and Fragment of Darkness are from the Incarnation of Morocc.";
+				mes "[러스트 블랙핸드]";
+				//mes "You can get the Magestic Goat from the weak Baphomet in the Labyrinth Forest. Crystal of Darkness and Fragment of Darkness are from the Incarnation of Morocc.";
+				mes "마제스틱 고우트는 프론테라의 미궁 숲에서 얻을 수 있을꺼야. 어둠의 결정체와 파편은 모로크의 현신들한테서 얻을 수 있을꺼야.";
 				next;
-				mes "[Rust Blackhand]";
-				mes "I'm sure that you can get the ingredients because you sealed the real Baphomet. Can't you? kkk...";
+				mes "[러스트 블랙핸드]";
+				//mes "I'm sure that you can get the ingredients because you sealed the real Baphomet. Can't you? kkk...";
+				mes "저번에도 가져왔으니 이번에도 어렵지 않겠지, 안그래? 크크크..";
 				next;
-				mes "[Rust Blackhand]";
-				mes "You'll never know how great this hat is until you get one. If you understood, go and get the ingredients.";
+				mes "[러스트 블랙핸드]";
+				//mes "You'll never know how great this hat is until you get one. If you understood, go and get the ingredients.";
+				mes "내가 죽기전에 얼른 가져오라고. 크크크";
 				//recall_completequest 3043
-				if (isbegin_quest(3042))
-					changequest 3042,3043;
-				else {
-					erasequest 3043;
-					setquest 3043;
-				}
+				changequest 3042,3043;
 				close;
 			case 2:
-				mes "[Rust Blackhand]";
-				mes "Huh... Do you? Do whatever you want... Do you really want to let this opportunity go to waste?";
+				mes "[러스트 블랙핸드]";
+				//mes "Huh... Do you? Do whatever you want... Do you really want to let this opportunity go to waste?";
+				mes "뭐? 이런 기회를 걷어찬다고";
 				next;
-				mes "[Rust Blackhand]";
-				mes "Tut, tut... I don't care if the wicked doll threatens your life all the time!";
+				mes "[러스트 블랙핸드]";
+				//mes "Tut, tut... I don't care if the wicked doll threatens your life all the time!";
+				mes "인형가지고 꺼져버려. 멍청한 녀석.";
 				close;
 			}
 		case 2:
-			mes "[Rust Blackhand]";
-			mes "What a dull boy he is... huh...";
+			mes "[러스트 블랙핸드]";
+			//mes "What a dull boy he is... huh...";
+			mes "싱겁기는...";
 			close;
 		}
 	}
 	else if ((.@new_maje == 2) && (countitem(6004) == 0)) {
-		mes "[Rust Blackhand]";
-		mes "Why are you hanging around here? If you don't want a ^4d4dffGigantic Magestic Goat^000000, go away.";
+		mes "[러스트 블랙핸드]";
+		//mes "Why are you hanging around here? If you don't want a ^4d4dffGigantic Magestic Goat^000000, go away.";
+		mes "뭘 자꾸 얼쩡대는거야? ^4d4dff대형마제스틱 고우트^000000를 얻기 싫다면 신경쓰이게 하지말고 꺼져버려.";
 		close;
 	}
 }
@@ -432,8 +520,8 @@ prt_monk,261,91,3	script	Rust Blackhand#edq	826,{
 OnInstanceInit:
 	// Pick one "true" Gravestone and 12 "false" Gravestones.
 	set .@true, rand(1,13);
-	for(set .@i,1; .@i<=13; set .@i,.@i+1) {
-		disablenpc instance_npcname("Gravestone#1F_"+.@i+((.@i == .@true)?"T":"F"));
+	for(set .@i,1; .@i<13; set .@i,.@i+1) {
+		disablenpc instance_npcname("비석#1F_1"+((.@i == .@true)?"F":"T"));
 	}
 	disablenpc instance_npcname("ins_baphomet_lotto");
 	end;
@@ -441,8 +529,8 @@ OnInstanceInit:
 
 1@cata,3,2,0	script	ins_baphomet_lotto2	-1,{
 OnEnable:
-	for(set .@i,1; .@i<=12; set .@i,.@i+1)
-		enablenpc instance_npcname("Bobbing Torch#"+.@i);
+	for(set .@i,1; .@i<12; set .@i,.@i+1)
+		enablenpc instance_npcname("흔들리는 횃불#"+.@i);
 	end;
 }
 
@@ -450,21 +538,21 @@ OnEnable:
 OnEnable:
 	set .@label$, instance_npcname("ins_baphomet_lotto3")+"::OnMyMobDead";
 	set .@map$, instance_mapname("1@cata");
-	monster .@map$,0,0,"Apostle of Baphomet",1869,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1291,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1869,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1291,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1869,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1291,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1869,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1132,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1117,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1132,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1117,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1132,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1291,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1117,1,.@label$;
-	monster .@map$,0,0,"Apostle of Baphomet",1869,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1869,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1291,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1869,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1291,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1869,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1291,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1869,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1132,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1117,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1132,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1117,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1132,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1291,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1117,1,.@label$;
+	monster .@map$,0,0,"바포메트의 사도",1869,1,.@label$;
 	end;
 
 OnDisable:
@@ -474,112 +562,137 @@ OnDisable:
 OnMyMobDead:
 	set .@map$, instance_mapname("1@cata");
 	if (mobcount(.@map$,instance_npcname("ins_baphomet_lotto3")+"::OnMyMobDead") < 1) {
-		mapannounce .@map$, "All apostles of Baphomet are dead!",bc_map,"0x00ff99";
+		//mapannounce .@map$, "All apostles of Baphomet are dead!",bc_map,"0x00ff99";
+		mapannounce .@map$, "모든 바포메트의 사도들을 물리쳤습니다!",bc_map,"0x00ff99";
 	}
-	getitem 6002,1; //Token_Of_Apostle
+	getitem 6002,1; //사도의 징표
 	end;
 }
 
 // Soul of hero near the north grave
 //============================================================
-1@cata,141,221,0	script	Gravestone#	844,3,3,{
+1@cata,141,221,0	script	비석#	844,3,3,{
 	set .@party_id,getcharid(1);
 	if ('ins_baphomet == 0) {
-		mes "The gravestone is trembling...";
+		mes "비석이 조금식 흔들리고 있다...";
 		next;
-		mes "When touching the gravestone, I hear a voice.";
+		mes "비석에 손을 대자, 목소리가 들려왔다.";
 		next;
 		specialeffect2 EF_CONE;
-		mes "[Voice of the Gravestone]";
-		mes "I have waited and waited for a brave adventurer like you who will come back here again...";
+		mes "[비석의 목소리]";
+		mes "기다렸다. 다시 이곳을 찾아올";
+		mes "자네들과 같은 사람을 기다리며..";
 		next;
 		while(1) {
-			switch(select("Who are you?:Waited for me?:Cancel.")) {
+			switch(select("당신은 누구지?:나를 기다렸다고?:대화를 취소한다.")) {
 			case 1:
-				mes "[Voice of the Gravestone]";
-				mes "I was one of the warriors to stop Baphomet like you. Now, I'm dead and only my soul remains...";
+				mes "[비석의 목소리]";
+				mes "아 나는 이 신전에서 바포메트를 봉인하기";
+				mes "위해 목숨을 바친 고대의 영웅중 한명이다.";
 				next;
-				mes "[Voice of the Gravestone]";
-				mes "As you know... We don't have much time. You can't stop Baphomet by yourselves. The power of the devil has strengthened over the years.";
+				mes "[비석의 목소리]";
+				mes "바포메트 봉인은 많은 희생을 치뤘지만,";
+				mes "결국에는 성공했다.";
+				mes "그런데 최근 어디선가 거대한 마력이 움직이면서,";
+				mes "봉인이 약해졌다.";
 				next;
-				mes "[Voice of the Gravestone]";
-				mes "In the past, my companions and I sealed Baphomet at the altar located on the 2nd basement and blocked the entrance.";
-				next;
-				mes "[Voice of the Gravestone]";
-				mes "I moved my soul's essence to my pendant, so that I could remain in this world. That's when I became this grave's guardian.";
+				mes "[비석의 목소리]";
+				mes "그에 따라, 바포메트가 다시 부활하려는 움직임";
+				mes "을 보이고 있어서, 내가 다시 깨어났다.";
 				next;
 				break;
 			case 2:
-				mes "[Voice of the Gravestone]";
-				mes "Baphomet's power is about to break the seal that we made. If you don't reactivate them... Baphomet's revival will only be a matter of time.";
+				mes "[비석의 목소리]";
+				mes "그렇다.";
+				mes "최근 미드가르드 대륙에 일어난 일로";
+				mes "봉인이 약해졌다.";
 				next;
-				mes "[Voice of the Gravestone]";
-				mes "To open the entrance, you must substantialize my soul. I'll open the entrance and reactivate the weakened seals after I am substantilized.";
+				mes "[비석의 목소리]";
+				mes "그에 따라, 바포메트가 다시 부활하려는 움직임";
+				mes "을 보이고 있어서, 내가 다시 깨어났다.";
+				mes "다행히도, 수도원에서 바포메트를 봉인하기 위한";
+				mes "용사들을 보내주는군.";
 				next;
-				mes "[Voice of the Gravestone]";
-				mes "To substantialize my soul, you should find my pendant. You can find my body near a grave here.";
+				mes "[비석의 목소리]";
+				mes "다만 이 신전에 있는 그 악마는";
+				mes "바깥 세계에 존재하는 것과는 차원이";
+				mes "다르다.";
+				mes "그대들이 바깥에서 아무리 날고 기어도";
+				mes "여기서는 힘들다.";
 				next;
-				mes "[Voice of the Gravestone]";
-				mes "If your ^0000FFparty leader^000000 brings me the pendant, my soul can be substantialized. So, hurry up.";
+				mes "[비석의 목소리]";
+				mes "그러니, 내가 그대들을 돕겠다. ";
+				mes "하지만, 그를 위해서는 우선";
+				mes "내 영혼이 실체화 되어야 한다.";
+				mes "내 영혼을 실체화하는데는";
+				mes "^FF0000영혼의 팬던트^000000라는";
+				mes "아이템이 필요하다.";
+				next;
+				mes "[비석의 목소리]";
+				mes "그 아이템을 찾아 주기 바란다.";
+				mes "이 신전 곳곳에 존재하는";
+				mes "무덤들 중 어딘가에 있을거야.";
 				set 'ins_baphomet,1;
 				close;
 			case 3:
-				mes "I can feel the voice becoming faint.";
+				mes "목소리가 점차 사라져간다.";
 				close;
 			}
 		}
 	}
 	else if ('ins_baphomet == 1) {
-		mes "[Voice of the Gravestone]";
-		mes "To open the entrance, you must substantialize my soul. I'll open the entrance and reactivate the weakened seals after I am substantilized.";
-		next;
-		mes "[Voice of the Gravestone]";
-		mes "To substantialize my soul, you should find my pendant. You can find my body near a grave here.";
-		next;
-		mes "[Voice of the Gravestone]";
-		mes "If your ^0000FFparty leader^000000 brings me the pendant, my soul can be substantialized. So, hurry up.";
+		mes "[비석의 목소리]";
+		mes "이 곳 어딘가에 있는 쓰러져 있는 무덤에";
+		mes "^FF0000영혼의 팬던트^000000가 있다.";
+		mes "그 팬던트가 있으면 나의 영혼을";
+		mes "실체화할 수 있지.";
+		mes "그 팬던트를 찾아주면,";
+		mes "바포메트와 싸우는데";
+		mes "도움을 주겠다.";
 		close;
 	}
-	else if (('ins_baphomet == 2) && is_party_leader(.@party_id) == true) {
-		mes "[Voice of the Gravestone]";
-		mes "Did you find the pendant?";
+	else if (('ins_baphomet == 2) && (getpartyleader(.@party_id,2) == getcharid(0))) {
+		mes "[비석의 목소리]";
+		mes "영혼의 팬던트는 찾았나?";
 		next;
 		if (countitem(6003) > 0) {
 			specialeffect EF_MAPPILLAR;
-			mes "[Voice of the Gravestone]";
+			mes "[비석의 목소리]";
 			mes "Yes... This is... My pendant...";
 			next;
 			delitem 6003,1; //Soul_Pendant
-			enablenpc instance_npcname("Ancient Hero's Soul#1F");
-			disablenpc instance_npcname("Gravestone#");
-			mes "[Voice of the Gravestone]";
-			mes "Now I can substantialize my soul. I'll wait for you in front of the altar of fire located at the center of this grave. Let's meet there.";
+			enablenpc instance_npcname("선대 영웅의 넋#1F");
+			disablenpc instance_npcname("비석#");
+			mes "이제 나의 영혼을 실체화 할 수";
+			mes "있게되었다. 이 무덤의 정중앙에 있는";
+			mes "불의 제단에서 그대들을 기다리고";
+			mes "있을테니 그 곳으로 오도록 하라.";
 			next;
-			mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : I'll wait for you in front of the altar of fire located at the center",bc_map,"0xFFFF00";
-			mes "I can feel the voice becoming faint.";
+			mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 자네들의 도움으로 잠시나마 나의 영혼을 실체화 할 수 있게 되었다. 이 무덤 정중앙의 불의 제단에서 그대들을 기다리고 있겠다.",bc_map,"0xFFFF00";
+			mes "목소리가 점차 사라져간다.";
 			close;
 		}
 		else {
-			mes "[Voice of the Gravestone]";
-			mes "Are you still there? Bring back my pendant as soon as possible.";
-			next;
-			mes "[Voice of the Gravestone]";
-			mes "You can find my body near a grave here. Go and get my pendant there.";
+			mes "[비석의 목소리]";
+			mes "영혼의 팬던트를";
+			mes "가져와라.";
+			mes "그래야 나의 영혼을 실체화";
+			mes "할 수 있다.";
 			close;
 		}
 	}
 	else {
-		mes "[Voice of the Gravestone]";
-		mes "I want to talk to ^0000FFa representative among your party^000000. Everyone else, wait here.";
+		mes "[비석의 목소리]";
+		mes "^0000FF파티의 대표자^000000와 이야기 하겠다. 다른 이들은 기다리거라.";
 		close;
 	}
 	end;
 
 OnTouch:
 	if ('ins_baphomet == 0) {
-		mes "'Krrrr... Krrrr...'";
+		mes "'그그그극... 그그그극...'";
 		next;
-		mes "I can feel something odd at the grave. It's like someone is calling out silently...";
+		mes "이 이상한 비석에게서 뭔가가 느껴진다. 누군가를 부르는 듯이 말이다...";
 		close;
 	}
 	end;
@@ -589,152 +702,187 @@ OnInstanceInit: // Temporary fix for @reloadscript.
 	end;
 }
 
-1@cata,176,119,4	script	Ancient Hero's Soul#1F	411,{
+1@cata,176,119,4	script	선대 영웅의 넋#1F	411,{
 	set .@party_id,getcharid(1);
 	cutin "ins_cata_champ_n",2;
 	if ('ins_baphomet == 2) {
-		mes "[Ancient Hero's Soul]";
-		mes "With your help, my soul can be substantialized. I want to talk more, but we do not have enough time...";
+		set 'ins_baphomet,3;
+		mes "[선대 영웅의 넋]";
+		//mes "With your help, my soul can be substantialized. I want to talk more, but we do not have enough time...";
+		mes "그대의 도움으로, 내 영혼을 구현화할 수 있게 되었네. 자네와 좀 더 많은 대화를 하고 싶지만, 안타깝게도 주어진 시간이 많지 않구나.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "I must be substantialized within the next hour. To reach the Main Altar underground, you must help me perform the ceremony for opening each seal.";
+		mes "[선대 영웅의 넋]";
+		//mes "I must be substantialized within the next hour. To reach the Main Altar underground, you must help me perform the ceremony for opening each seal.";
+		mes "나의 영혼을 다시 구현화해야 할게야. 각 제단의 봉인을 열기위한 의식을 수행하여 주 제단에 도달하려거든 날 도와야 한다.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "Now I'll tell you what should you do. First, collect ^0000FFEssence of Fire^000000 from the torches on the graves...";
+		mes "[선대 영웅의 넋]";
+		//mes "Now I'll tell you what should you do. First, collect ^0000FFEssence of Fire^000000 from the torches on the graves...";
+		mes "첫번째로 해야할 일은, ^0000FF불의 정수^000000를 무덤 안에 있는 횃불에서 가져와야 한다...";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "Second, all members who will enter the underground must carry a symbol, called the Token of Apostle.";
+		mes "[선대 영웅의 넋]";
+		//mes "Second, all members who will enter the underground must carry a symbol, called the Token of Apostle.";
+		mes "두번재는 아래에 내려가려면 사도의 징표를 모든 인원이 각각 가지고 있어야 한다.";
 		next;
 		while(1) {
 			cutin "ins_cata_champ_n",2;
-			switch(select("What is Essence of Fire?:What is a Token of Apostle?:What should I do?:I am ready.")) {
+			//switch(select("What is Essence of Fire?:What is a Token of Apostle?:What should I do?:I am ready.")) {
+			switch(select("불의 정수?:사도의 징표가 뭐죠?:뭘 해야하죠?:준비되었습니다.")) {
 			case 1:
 				set .@ins_baphomet_1f_1,.@ins_baphomet_1f_1+1;
-				mes "[Ancient Hero's Soul]";
-				mes "You can see the torches here and there. These torches are the essence of Thor, the god of Thunder. They are inherited from our predecessors to stop the darkness of Baphomet...";
+				mes "[선대 영웅의 넋]";
+				//mes "You can see the torches here and there. These torches are the essence of Thor, the god of Thunder. They are inherited from our predecessors to stop the darkness of Baphomet...";
+				mes "여기저기서 횃불을 볼 수 있을 것이다. 그 횃불들은 천둥의 신인 토르의 힘이지. 그것들은 우리의 선조들이 바포메트의 어둠을 억제하기 위해 위치시켰네...";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "To open the sealed underground gate, I must be purified by the ^0000FFEssence of Fire^000000 which has the power of Thor. Collect ^0000FF10 Essence of Fire^000000 from the torches.";
+				mes "[선대 영웅의 넋]";
+				//mes "To open the sealed underground gate, I must be purified by the ^0000FFEssence of Fire^000000 which has the power of Thor. Collect ^0000FF10 Essence of Fire^000000 from the torches.";
+				mes "지하 문의 봉인을 열려면, 토르의 힘을 가진 불의 정수와 정제되어져야 한다. ^0000FF불의 정수 10개^000000 를 횃불에게서 획득해야한다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "One thing you must remember is... ^0000FFEssence of Fire^000000 can only be collected by the Inheritor of Faith.";
+				mes "[선대 영웅의 넋]";
+				//mes "One thing you must remember is... ^0000FFEssence of Fire^000000 can only be collected by the Inheritor of Faith.";
+				mes "이걸 명심해야한다... ^0000FF불의 정수^000000 는 믿음을 상속받은 자만이 획득할 수 있을 것이다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "I'll give the token of the Inheritor of Faith to the party leader. Only the party leader can collect the ^0000FFEssence of Fire^000000.";
+				mes "[선대 영웅의 넋]";
+				//mes "I'll give the token of the Inheritor of Faith to the party leader. Only the party leader can collect the ^0000FFEssence of Fire^000000.";
+				mes "파티의 리더에게 우리의 믿음을 전해주겠다. 파티의 리더만이 ^0000FF불의 정수^000000를 얻을 수 있을 것이다.";
 				next;
 				break;
 			case 2:
 				set .@ins_baphomet_1f_2,.@ins_baphomet_1f_2+1;
-				mes "[Ancient Hero's Soul]";
-				mes "At that time, it was impossible to get rid of Devil Baphomet by ourselves. After numerous heroes sacrificed their lives, we could barely seal him under this Abbey.";
+				mes "[선대 영웅의 넋]";
+				//mes "At that time, it was impossible to get rid of Devil Baphomet by ourselves. After numerous heroes sacrificed their lives, we could barely seal him under this Abbey.";
+				mes "그 때에는, 우리들의 힘만으로 바포메트를 무찌르는건 불가능했다. 수 많은 영웅들이 희생된 끝에서야 겨우 이 신전에 봉인할 수 있었지.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "However, Baphomet never gave up. He continuously strengthened his power. And his power has brought new life to this shrine.";
+				mes "[선대 영웅의 넋]";
+				//mes "However, Baphomet never gave up. He continuously strengthened his power. And his power has brought new life to this shrine.";
+				mes "하지만, 바포메트는 포기하지 않았다. 그는 계속해서 힘을 키워나갔고, 그 힘이 새 생명을 신전에 불러들였지.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "Some of these monsters have magical powers. Baphomet calls them his 'Apostles'.";
+				mes "[선대 영웅의 넋]";
+				//mes "Some of these monsters have magical powers. Baphomet calls them his 'Apostles'.";
+				mes "마법력을 가진 몬스터들이며, 그들을 우리는 바포메트의 사도라고 부른다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "The apostles are cloning themselves to fill the shrine with their evil energy. They are the monsters here in this catacomb.";
+				mes "[선대 영웅의 넋]";
+				//mes "The apostles are cloning themselves to fill the shrine with their evil energy. They are the monsters here in this catacomb.";
+				mes "사도들은 이 신전을 그들의 사악한 에너지로 가득채우기 위해 자신을 복제하였고, 바로 이 수도원의 몬스터들이다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "Kill the Apostles. They can only be distinguished from their clones because they will possess a ^0000FFToken of Apostle^000000...";
+				mes "[선대 영웅의 넋]";
+				//mes "Kill the Apostles. They can only be distinguished from their clones because they will possess a ^0000FFToken of Apostle^000000...";
+				mes "사도들을 무찔러야 한다. 클론과 사도를 구분하는 것은 ^0000FF사도의 징표^000000를 갖고 있냐 없냐 차이 뿐이리라...";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "If each party member possesses a ^0000FFToken of Apostle^000000, Baphomet will not be able to perceive your entrance to the Main Altar underground.";
+				mes "[선대 영웅의 넋]";
+				//mes "If each party member possesses a ^0000FFToken of Apostle^000000, Baphomet will not be able to perceive your entrance to the Main Altar underground.";
+				mes "^0000FF사도의 징표^000000를 파티멤버가 각자 하나씩 가지고 있다면, 바포메트는 자네들이 중앙 제단에 들어간 것을 인식하지 못할 것이다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "If Baphomet perceives you when you pass through the sealed gate, he may release his tremendous magical power. Then, this abbey will be demolished.";
+				mes "[선대 영웅의 넋]";
+				//mes "If Baphomet perceives you when you pass through the sealed gate, he may release his tremendous magical power. Then, this abbey will be demolished.";
+				mes "만약 바포메트가 자네들이 봉인된 문을 통과한 것을 알아낸다면, 그의 마력을 개방하여 신전을 파괴시킬 것이다.";
 				next;
-				mes "[Ancient Hero's Soul]";
-				mes "Kill the apostles and get the ^0000FFToken of Apostle^000000.";
+				mes "[선대 영웅의 넋]";
+				//mes "Kill the apostles and get the ^0000FFToken of Apostle^000000.";
+				mes "사도들을 무찌른 후, ^0000FF사도의 징표^000000를 지녀라.";
 				next;
 				break;
 			case 3:
 				set .@ins_baphomet_1f_3,.@ins_baphomet_1f_3+1;
-				if (is_party_leader(.@party_id) == true) {
-					mes "[Ancient Hero's Soul]";
-					mes "You look like the leader of this party. You need to go and get ^0000FF10 Essence of Fire^000000 from the torches.";
+				if (getpartyleader(.@party_id,2) == getcharid(0)) {
+					mes "[선대 영웅의 넋]";
+					//mes "You look like the leader of this party. You need to go and get ^0000FF10 Essence of Fire^000000 from the torches.";
+					mes "파티의 리더로군. 자네가 횃불에게서 ^0000FF불의 정수 10개^000000 를 얻어야 하네.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "Now I'll carve you the symbol which shows you're a inheritor of faith. Be aware that no one in your party but you can collect the Essence of Fire.";
+					mes "[선대 영웅의 넋]";
+					//mes "Now I'll carve you the symbol which shows you're a inheritor of faith. Be aware that no one in your party but you can collect the Essence of Fire.";
+					mes "우리의 믿음을 자네에게 주겠네. 명심하게. 자네 말고는 아무도 불의 정수를 습득할 수 없음을 말이야.";
 					next;
 					specialeffect2 EF_HOLYHIT;
-					mes "[Ancient Hero's Soul]";
-					mes "You should also carry a ^0000FFToken of Apostle^000000, so find one for yourself too.";
+					mes "[선대 영웅의 넋]";
+					//mes "You should also carry a ^0000FFToken of Apostle^000000, so find one for yourself too.";
+					mes "^0000FF사도의 징표^000000 도 획득해야 하네.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "When all of you are ready to go, let me know. I'll open the sealed gate when you're ready.";
+					mes "[선대 영웅의 넋]";
+					//mes "When all of you are ready to go, let me know. I'll open the sealed gate when you're ready.";
+					mes "모든 준비가 끝났다면 내게 알려다오. 그러면 봉인의 문을 열겠다.";
 					next;
 				}
 				else {
-					mes "[Ancient Hero's Soul]";
-					mes "Make sure that your party leader has listened to my explanation of what you and your companions must do.";
+					mes "[선대 영웅의 넋]";
+					//mes "Make sure that your party leader has listened to my explanation of what you and your companions must do.";
+					mes "파티의 리더가 자네들이 해야할 일들을 전부 숙지하였는지 확인해 봐야할 것이다.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "Kill the Apostles of Baphomet and find their ^0000FFToken of Apostle^000000.";
+					mes "[선대 영웅의 넋]";
+					//mes "Kill the Apostles of Baphomet and find their ^0000FFToken of Apostle^000000.";
+					mes "바포메트의 사도들을 무찌른 후, 그들이 갖고있는 ^0000FF사도의 징표^000000를 찾아야 한다.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "It might be better to kill all of them because there is no way to differentiate them from their clones.";
+					mes "[선대 영웅의 넋]";
+					//mes "It might be better to kill all of them because there is no way to differentiate them from their clones.";
+					mes "그들과 그들이 복제된 것들을 구별할 수 없으니 모두를 무찌르는 수 밖에는 없을 것이다.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "Are you ready?";
-					mes "Make sure that you have listened to all that I have to say before saying that you are ready.";
+					mes "[선대 영웅의 넋]";
+					//mes "Are you ready?";
+					mes "준비가 끝났는가?";
+					//mes "Make sure that you have listened to all that I have to say before saying that you are ready.";
+					mes "자네 파티장에게 자네의 준비가 끝났다고 전해야 할 것이다.";
 					next;
 				}
 				break;
 			case 4:
 				if ((.@ins_baphomet_1f_1 > 0) && (.@ins_baphomet_1f_2 > 0) && (.@ins_baphomet_1f_3 > 0)) {
 					cutin "ins_cata_champ_n",2;
-					mes "[Ancient Hero's Soul]";
-					mes "Are you ready to go? Then I'll open this sealed gate now.";
+					mes "[선대 영웅의 넋]";
+					//mes "Are you ready to go? Then I'll open this sealed gate now.";
+					mes "준비되었는가? 그럼 문을 열겠네.";
 					next;
 					set .@exitloop,1;
 				}
 				else {
 					cutin "ins_cata_champ_a",2;
-					mes "[Ancient Hero's Soul]";
-					mes "It may be difficult but I wish you luck braving the perils of this catacomb.";
+					mes "[선대 영웅의 넋]";
+					//mes "It may be difficult but I wish you luck braving the perils of this catacomb.";
+					mes "이 일이 매우 어려울 수도 있지만, 묘지의 위험을 무릅쓴 자네들에게 행운을 빌겠다.";
 					next;
-					mes "[Ancient Hero's Soul]";
-					mes "Remember, you need to collect ^0000FF10 Essence of Fire^000000 from the torches and the ^0000FFToken of Apostle^000000 from the Apostles of Baphomet.";
+					mes "[선대 영웅의 넋]";
+					//mes "Remember, you need to collect ^0000FF10 Essence of Fire^000000 from the torches and the ^0000FFToken of Apostle^000000 from the Apostles of Baphomet.";
+					mes "명심해라. 횃불로부터 ^0000FF불의 정수 10개^000000 를 얻는 것과 바포메트의 사도들에게서 ^0000FF사도의 징표^000000를 얻어야 함을!";
 					next;
 				}
 				break;
 			}
 			if (.@exitloop) break;
 		}
-		if (is_party_leader(.@party_id) == true) {
-			mes "[Ancient Hero's Soul]";
-			mes "To remind you again, I must be substantialized within the next hour. So everyone, finish your work within that time!";
+		if (getpartyleader(.@party_id,2) == getcharid(0)) {
+			mes "[선대 영웅의 넋]";
+			//mes "To remind you again, I must be substantialized within the next hour. So everyone, finish your work within that time!";
+			mes "자네들에게 다시 알려주기 위해, 다음번에도 내가 구현화 되어야 한다. 제 시간에 맞춰서 끝내길 바란다!";
 			set 'ins_baphomet,3;
 			donpcevent instance_npcname("ins_baphomet_1f_timer")+"::OnEnable";
 			donpcevent instance_npcname("ins_baphomet_lotto2")+"::OnEnable";
 			donpcevent instance_npcname("ins_baphomet_lotto3")+"::OnEnable";
 		}
 		else {
-			mes "[Ancient Hero's Soul]";
+			mes "[선대 영웅의 넋]";
 			mes "To remind you again, I can be substantialized for the next hour. So everyone, finish your work within that time.";
+			mes "자네들에게 다시 알려주기 위해, 다음번에도 내가 구현화 되어야 한다. 제 시간에 맞춰서 끝내길 바란다.";
 			//set 'ins_baphomet,3;
 		}
 		close2;
 		cutin "",255;
 		end;
 	}
-	else if (('ins_baphomet == 3) && is_party_leader(.@party_id) == true) {
+	else if (('ins_baphomet == 3) && (getpartyleader(.@party_id,2) == getcharid(0))) {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "Did you get 10 ^0000FFEssence of Fire^000000 and ^0000FFToken of Apostle^000000?";
+		mes "[선대 영웅의 넋]";
+		//mes "Did you get 10 ^0000FFEssence of Fire^000000 and ^0000FFToken of Apostle^000000?";
+		mes "^0000FF불의 정수^000000 10개와 ^0000FF사도의 징표^000000를 가져왔는가?";
 		next;
 		if ((countitem(6001) > 9) && (countitem(6002) > 0)) {
 			delitem 6001,countitem(6001); //Essence_Of_Fire
 			set 'ins_baphomet,4;
-			mes "[Ancient Hero's Soul]";
-			mes "Okay. You've done your work. Now check your companions and tell me when everyone has finished their work.";
+			mes "[선대 영웅의 넋]";
+			//mes "Okay. You've done your work. Now check your companions and tell me when everyone has finished their work.";
+			mes "좋아. 자네는 모두 완료되었군. 이제 파티원들이 작업을 마쳤는지 확인한 다음 내게 다시 말해라.";
 		}
 		else {
-			mes "[Ancient Hero's Soul]";
-			mes "Not ready yet? You should prepare 10 ^0000FFEssence of Fire^000000 and ^0000FFToken of Apostle^000000.";
+			mes "[선대 영웅의 넋]";
+			//mes "Not ready yet? You should prepare 10 ^0000FFEssence of Fire^000000 and ^0000FFToken of Apostle^000000.";
+			mes "아직인가? 어서 ^0000FF불의 정수^000000 10개와 ^0000FF사도의 징표^000000를 가져와야 한다.";
 		}
 		close2;
 		cutin "",255;
@@ -742,70 +890,81 @@ OnInstanceInit: // Temporary fix for @reloadscript.
 	}
 	else if ('ins_baphomet == 3) {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "Do you have a ^0000FFToken of Apostle^000000?";
+		mes "[선대 영웅의 넋]";
+		//mes "Do you have a ^0000FFToken of Apostle^000000?";
+		mes "^0000FF사도의 징표^000000는 가져왔는가?";
 		next;
 		if (countitem(6002) > 0) {
 			set 'ins_baphomet,4;
-			mes "[Ancient Hero's Soul]";
-			mes "Okay. You've done your work. Tell your representative to check your companions and come to me when everyone has finished their work.";
+			mes "[선대 영웅의 넋]";
+			//mes "Okay. You've done your work. Tell your representative to check your companions and come to me when everyone has finished their work.";
+			mes "좋아. 자네는 완료되었군. 자네의 파티장에게 자네는 완료되었다고 말하라.";
 		}
 		else {
-			mes "[Ancient Hero's Soul]";
-			mes "Not ready yet? You should prepare ^0000FFToken of Apostle^000000.";
+			mes "[선대 영웅의 넋]";
+			//mes "Not ready yet? You should prepare ^0000FFToken of Apostle^000000.";
+			mes "아직인가? 어서 ^0000FF사도의 징표^000000를 가져와야 한다.";
 		}
 		close2;
 		cutin "",255;
 		end;
 	}
-	else if (('ins_baphomet == 4) && is_party_leader(.@party_id) == true) {
+	else if (('ins_baphomet == 4) && (getpartyleader(.@party_id,2) == getcharid(0))) {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "Are you ready? I opened the sealed gate. To pass the gate, you should carry a ^0000FFToken of Apostle^000000.";
+		mes "[선대 영웅의 넋]";
+		//mes "Are you ready? I opened the sealed gate. To pass the gate, you should carry a ^0000FFToken of Apostle^000000.";
+		mes "준비 되었는가? 문을 열 것이다. 문을 통과하려면 ^0000FF사도의 징표^000000를 갖고 있어야 한다.";
 		next;
 		set 'ins_baphomet,5;
 		specialeffect EF_TELEPORTATION;
 		enablenpc instance_npcname("ins_bapho_to_2f");
-		donpcevent instance_npcname("ins_baphomet_1f_timer")+"::OnDisable";
-		mes "[Ancient Hero's Soul]";
-		mes "Now you can go to the main altar. It is located in the bottom right corner of this floor.";
+		mes "[선대 영웅의 넋]";
+		//mes "Now you can go to the main altar. It is located in the bottom right corner of this floor.";
+		mes "이제 중앙 제단으로 갈 수 있을 것이다. 문은 오른쪽 아래 모서리에 있을 것이다.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "Your real battle will begin... I'll follow you soon and find a way to help you.";
+		mes "[선대 영웅의 넋]";
+		//mes "Your real battle will begin... I'll follow you soon and find a way to help you.";
+		mes "이제 진자 전투가 시작된다... 나는 자네들을 계속 따라다닐 것이며, 도움을 줄 방법을 찾을 것이다.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "Go ahead, warriors.";
+		mes "[선대 영웅의 넋]";
+		//mes "Go ahead, warriors.";
+		mes "가거라, 위대한 전사들이여.";
 		cutin "",255;
-		mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : Now you can go to the Main Altar's gate. It is located in the Southeast",bc_map,"0xFFFF00";
+		//mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : Now you can go to the Main Altar's gate. It is located in the Southeast",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 이제 주 제단의 문으로 갈 수 있다. 문은 남동쪽에 위치해 있다.",bc_map,"0xFFFF00";
 		close;
 	}
 	else if ('ins_baphomet == 4) {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "Are you ready? I opened the sealed gate. To pass the gate, you should carry a ^0000FFToken of Apostle^000000.";
+		mes "[선대 영웅의 넋]";
+		//mes "Are you ready? I opened the sealed gate. To pass the gate, you should carry a ^0000FFToken of Apostle^000000.";
+		mes "준비 되었는가? 문을 열 것이다. 문을 통과하려면 ^0000FF사도의 징표^000000를 갖고 있어야 한다.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "I'll complete opening the sealed gate when your representative tells me that you're ready.";
+		mes "[선대 영웅의 넋]";
+		//mes "I'll complete opening the sealed gate when your representative tells me that you're ready.";
+		mes "준비가 다 됐다고 자네들의 파티장이 내게 말하면 봉인된 문을 열겠다.";
 		cutin "",255;
 		close;
 	}
 	else if ('ins_baphomet == 5) {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "What are you doing? The entrance of the main altar is opened now, go and fight! The entrance is near the bottom right side of this floor.";
+		mes "[선대 영웅의 넋]";
+		//mes "What are you doing? The entrance of the main altar is opened now, go and fight! The entrance is near the bottom right side of this floor.";
+		mes "주 제단으로 갈 수 있는 문이 열렸다. 입구는 여기 이 층의 우측 하단 부근에 있다.";
 		cutin "",255;
 		close;
 	}
 	else {
 		cutin "ins_cata_champ_n",2;
-		mes "[Ancient Hero's Soul]";
-		mes "I have nothing to say to you...";
+		mes "[선대 영웅의 넋]";
+		//mes "I have nothing to say to you...";
+		mes "더 이상 해줄 수 있는 말은 없다...";
 		cutin "",255;
 		close;
 	}
 
 OnInstanceInit:
-	disablenpc instance_npcname("Ancient Hero's Soul#1F");
+	disablenpc instance_npcname("선대 영웅의 넋#1F");
 	end;
 }
 
@@ -814,14 +973,15 @@ OnInstanceInit:
 1@cata,281,12,0	script	ins_bapho_to_2f	45,1,1,{
 OnTouch:
 	if (countitem(6002) > 0) {
-		delitem 6002,countitem(6002); //Token_Of_Apostle
+		delitem 6002,countitem(6002); //사도의 징표
 		set 'ins_baphomet,5;
 		warp instance_mapname("2@cata"),80,144;
 		end;
 	}
 	else {
-		mes "[Ancient Hero's Soul]";
-		mes "Where is your Token of Apostle? I said you should carry the Token of Apostle to pass this gate.";
+		mes "[선대 영웅의 넋]";
+		//mes "Where is your Token of Apostle? I said you should carry the Token of Apostle to pass this gate.";
+		mes "사도의 징표는 어디갔느냐? 문을 지나려면 사도의 징표가 필요하다고 말했을텐데.";
 		close;
 	}
 
@@ -832,57 +992,62 @@ OnInstanceInit:
 
 // Gravestones
 //============================================================
--	script	Gravestone#SS1	-1,{
+-	script	비석#SS1	-1,{
 	if ('ins_baphomet == 1) {
-		getitem 6003,1; //Soul_Pendant
+		getitem 6003,1; //영혼의 펜던트
 		set 'ins_baphomet,2;
-		mes "A small object is shining under a leaning grave.";
+		//mes "A small object is shining under a leaning grave.";
+		mes "무덤 아래에 작은 물체가 반짝이고 있다.";
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "I think this is the pendant...";
+		//mes "I think this is the pendant...";
+		mes "이 펜던트인 모양이군.";
 		close;
 	}
 	else {
-		mes "I can only feel gloom from this Gravestone.";
+		//mes "I can only feel gloom from this Gravestone.";
+		mes "이곳에서는 어둠만이 느껴진다.";
 		close;
 	}
 }
-1@cata,86,214,0	duplicate(Gravestone#SS1)	Gravestone#1F_1T	844
-1@cata,200,209,0	duplicate(Gravestone#SS1)	Gravestone#1F_2T	844
-1@cata,230,195,0	duplicate(Gravestone#SS1)	Gravestone#1F_3T	844
-1@cata,118,182,0	duplicate(Gravestone#SS1)	Gravestone#1F_4T	844
-1@cata,193,182,0	duplicate(Gravestone#SS1)	Gravestone#1F_5T	844
-1@cata,253,156,0	duplicate(Gravestone#SS1)	Gravestone#1F_6T	844
-1@cata,88,154,0	duplicate(Gravestone#SS1)	Gravestone#1F_7T	844
-1@cata,127,116,0	duplicate(Gravestone#SS1)	Gravestone#1F_8T	844
-1@cata,90,98,0	duplicate(Gravestone#SS1)	Gravestone#1F_9T	844
-1@cata,188,84,0	duplicate(Gravestone#SS1)	Gravestone#1F_10T	844
-1@cata,244,42,0	duplicate(Gravestone#SS1)	Gravestone#1F_11T	844
-1@cata,127,32,0	duplicate(Gravestone#SS1)	Gravestone#1F_12T	844
-1@cata,267,30,0	duplicate(Gravestone#SS1)	Gravestone#1F_13T	844
+1@cata,86,214,0	duplicate(비석#SS1)	비석#1F_1T	844
+1@cata,200,209,0	duplicate(비석#SS1)	비석#1F_2T	844
+1@cata,230,195,0	duplicate(비석#SS1)	비석#1F_3T	844
+1@cata,118,182,0	duplicate(비석#SS1)	비석#1F_4T	844
+1@cata,193,182,0	duplicate(비석#SS1)	비석#1F_5T	844
+1@cata,253,156,0	duplicate(비석#SS1)	비석#1F_6T	844
+1@cata,88,154,0	duplicate(비석#SS1)	비석#1F_7T	844
+1@cata,127,116,0	duplicate(비석#SS1)	비석#1F_8T	844
+1@cata,90,98,0	duplicate(비석#SS1)	비석#1F_9T	844
+1@cata,188,84,0	duplicate(비석#SS1)	비석#1F_10T	844
+1@cata,244,42,0	duplicate(비석#SS1)	비석#1F_11T	844
+1@cata,127,32,0	duplicate(비석#SS1)	비석#1F_12T	844
+1@cata,267,30,0	duplicate(비석#SS1)	비석#1F_13T	844
 
--	script	Gravestone#SS2	-1,{
-	mes "I can only feel gloom from this Gravestone.";
+-	script	비석#SS2	-1,{
+	//mes "I can only feel gloom from this Gravestone.";
+	mes "이곳에서는 어둠만이 느껴진다.";
 	close;
 }
-1@cata,86,214,0	duplicate(Gravestone#SS2)	Gravestone#1F_1F	844
-1@cata,200,209,0	duplicate(Gravestone#SS2)	Gravestone#1F_2F	844
-1@cata,230,195,0	duplicate(Gravestone#SS2)	Gravestone#1F_3F	844
-1@cata,118,182,0	duplicate(Gravestone#SS2)	Gravestone#1F_4F	844
-1@cata,193,182,0	duplicate(Gravestone#SS2)	Gravestone#1F_5F	844
-1@cata,253,156,0	duplicate(Gravestone#SS2)	Gravestone#1F_6F	844
-1@cata,88,154,0	duplicate(Gravestone#SS2)	Gravestone#1F_7F	844
-1@cata,127,116,0	duplicate(Gravestone#SS2)	Gravestone#1F_8F	844
-1@cata,90,98,0	duplicate(Gravestone#SS2)	Gravestone#1F_9F	844
-1@cata,188,84,0	duplicate(Gravestone#SS2)	Gravestone#1F_10F	844
-1@cata,244,42,0	duplicate(Gravestone#SS2)	Gravestone#1F_11F	844
-1@cata,127,32,0	duplicate(Gravestone#SS2)	Gravestone#1F_12F	844
-1@cata,267,30,0	duplicate(Gravestone#SS2)	Gravestone#1F_13F	844
+1@cata,86,214,0	duplicate(비석#SS2)	비석#1F_1F	844
+1@cata,200,209,0	duplicate(비석#SS2)	비석#1F_2F	844
+1@cata,230,195,0	duplicate(비석#SS2)	비석#1F_3F	844
+1@cata,118,182,0	duplicate(비석#SS2)	비석#1F_4F	844
+1@cata,193,182,0	duplicate(비석#SS2)	비석#1F_5F	844
+1@cata,253,156,0	duplicate(비석#SS2)	비석#1F_6F	844
+1@cata,88,154,0	duplicate(비석#SS2)	비석#1F_7F	844
+1@cata,127,116,0	duplicate(비석#SS2)	비석#1F_8F	844
+1@cata,90,98,0	duplicate(비석#SS2)	비석#1F_9F	844
+1@cata,188,84,0	duplicate(비석#SS2)	비석#1F_10F	844
+1@cata,244,42,0	duplicate(비석#SS2)	비석#1F_11F	844
+1@cata,127,32,0	duplicate(비석#SS2)	비석#1F_12F	844
+1@cata,267,30,0	duplicate(비석#SS2)	비석#1F_13F	844
 
-// Bobbing Torches
+// 흔들리는 횃불
 //============================================================
--	script	Bobbing Torch#SS	-1,{
-	if (is_party_leader() == true) {
+-	script	흔들리는 횃불#SS	-1,{
+	set .@party_id,getcharid(1);
+	if (getpartyleader(.@party_id,2) == getcharid(0)) {
 		if (('ins_baphomet == 3) && (countitem(6001) < 11)) {
 			mes "A huge torch appearing as if it can burn everything is bobbing up and down in front of me.";
 			next;
@@ -891,7 +1056,7 @@ OnInstanceInit:
 			specialeffect2 EF_HOLYHIT;
 			getitem 6001,1; //Essence_Of_Fire
 			mes "The symbol of inheritor shines. Then a small crystal falls into my hand from the torch.";
-			disablenpc();
+			disablenpc instance_npcname(strnpcinfo(0));
 			close;
 		}
 		else if (('ins_baphomet == 3) && (countitem(6001) > 10)) {
@@ -913,22 +1078,22 @@ OnInstanceInit:
 		close;
 	}
 
-OnInstanceInit:
-	disablenpc();
-	end;
+//OnInstanceInit:
+//	disablenpc instance_npcname(strnpcinfo(0));
+//	end;
 }
-1@cata,267,210,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#1	844
-1@cata,85,182,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#2	844
-1@cata,267,154,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#3	844
-1@cata,157,139,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#4	844
-1@cata,193,138,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#5	844
-1@cata,193,102,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#6	844
-1@cata,157,102,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#7	844
-1@cata,113,112,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#8	844
-1@cata,253,56,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#9	844
-1@cata,239,56,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#10	844
-1@cata,71,42,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#11	844
-1@cata,155,14,0	duplicate(Bobbing Torch#SS)	Bobbing Torch#12	844
+1@cata,267,210,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#1	844
+1@cata,85,182,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#2	844
+1@cata,267,154,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#3	844
+1@cata,157,139,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#4	844
+1@cata,193,138,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#5	844
+1@cata,193,102,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#6	844
+1@cata,157,102,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#7	844
+1@cata,113,112,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#8	844
+1@cata,253,56,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#9	844
+1@cata,239,56,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#10	844
+1@cata,71,42,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#11	844
+1@cata,155,14,0	duplicate(흔들리는 횃불#SS)	흔들리는 횃불#12	844
 
 1@cata,1,1,0	script	ins_baphomet_1f_timer	-1,{
 OnInstanceInit:
@@ -946,33 +1111,37 @@ OnDisable:
 	end;
 
 OnTimer1800000:
-	mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : We don't have enough time! Hurry up!",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : We don't have enough time! Hurry up!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 시간이 없다! 서둘러!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer2400000:
-	mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : My body is disappearing... Hurry up!",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : My body is disappearing... Hurry up!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 몸이 사라지고있다... 빨리!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3000000:
-	mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : Everything is over... There is no other way but to wait for the next chance...",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : Everything is over... There is no other way but to wait for the next chance...",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 모든게 끝난 것 같군... 다음을 기약할 수 밖에 없겠어...",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3050000:
-	mapannounce instance_mapname("1@cata"), "Ancient Hero's Soul : We failed... However... We still have a chance. I hope you will train yourselves until the time comes.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : We failed... However... We still have a chance. I hope you will train yourselves until the time comes.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("1@cata"), "선대 영웅의 넋 : 실패했다... 하지만... 아직 기회는 남았어. 다음에 다시 올때 까지 자신들을 훈련하게.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3100000:
-	mapannounce instance_mapname("1@cata"), "You've failed to open the seal of main altar.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("1@cata"), "제단의 봉인을 열지 못했습니다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer3500000:
-	instance_warpall "monk_test",310,150, instance_id();
+	instance_warpall "monk_test",310,150;
 	stopnpctimer;
 	end;
 }
 
 2@cata,80,144,0	script	ins_2f_enter	-1,3,3,{
-OnTouch_:
+OnTouch:
 	donpcevent instance_npcname("ins_2f_enter_broad")+"::OnEnable";
 	disablenpc instance_npcname("ins_2f_enter");
 	end;
@@ -990,110 +1159,115 @@ OnEnable:
 	end;
 
 OnTimer10000:
-	mapannounce instance_mapname("2@cata"), "Baphomet : Humans... interfering again...",bc_map,"0xdb7093";
+	mapannounce instance_mapname("2@cata"), "바포메트 : 인간... 또 다시 방해하는가...",bc_map,"0xdb7093";
 	end;
 
 OnTimer13000:
-	mapannounce instance_mapname("2@cata"), "Apostle of Baphomet : Humans! Humans have invaded our sanctum!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "바포메트의 사도 : 인간! 인간들이 성소에 침입했다!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer16000:
-	mapannounce instance_mapname("2@cata"), "Apostle of Baphomet : Kill the humans! Do not stop the revival of our Master!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "바포메트의 사도 : 죽여라! 마스터의 부활을 방해하지 못하게 막아!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer18000:
-	mapannounce instance_mapname("2@cata"), "Apostle of Baphomet : Hurry up and release the seals of the altars! Our Master's return is upon us!",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "바포메트의 사도 : Hurry up and release the seals of the altars! Our Master's return is upon us!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "바포메트의 사도 : 제단의 봉인해제를 서둘러라! 우리의 마스터가 돌아오신다!",bc_map,"0xFFFF00";
 	stopnpctimer;
 	disablenpc instance_npcname("ins_2f_enter_broad");
 	end;
 }
 
 2@cata,50,67,0	script	slave_left	-1,5,5,{
-OnTouch_:
+OnTouch:
 	set .@map$, instance_mapname("2@cata");
-	mapannounce .@map$, "Apostle of Baphomet : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
-	monster .@map$,55,67,"Apostle of Baphomet",1869,1;
-	monster .@map$,51,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,58,67,"Apostle of Baphomet",1292,1;
-	monster .@map$,53,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,54,67,"Apostle of Baphomet",1869,1;
-	monster .@map$,55,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,56,67,"Apostle of Baphomet",1117,1;
-	monster .@map$,58,66,"Apostle of Baphomet",1869,1;
-	monster .@map$,56,66,"Apostle of Baphomet",1117,1;
-	monster .@map$,60,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,59,66,"Apostle of Baphomet",1117,1;
-	monster .@map$,54,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,55,66,"Apostle of Baphomet",1292,1;
-	monster .@map$,56,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,50,65,"Apostle of Baphomet",1867,1;
-	monster .@map$,61,65,"Apostle of Baphomet",1292,1;
+	//mapannounce .@map$, "바포메트의 사도 : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
+	mapannounce .@map$, "바포메트의 사도 : 인간들을 죽여라! 마스터의 부활을 방해하지 못하게 막아라!",bc_map,"0xFFFF00";
+	monster .@map$,55,67,"바포메트의 사도",1869,1;
+	monster .@map$,51,67,"바포메트의 사도",1291,1;
+	monster .@map$,58,67,"바포메트의 사도",1292,1;
+	monster .@map$,53,67,"바포메트의 사도",1291,1;
+	monster .@map$,54,67,"바포메트의 사도",1869,1;
+	monster .@map$,55,67,"바포메트의 사도",1291,1;
+	monster .@map$,56,67,"바포메트의 사도",1117,1;
+	monster .@map$,58,66,"바포메트의 사도",1869,1;
+	monster .@map$,56,66,"바포메트의 사도",1117,1;
+	monster .@map$,60,66,"바포메트의 사도",1132,1;
+	monster .@map$,59,66,"바포메트의 사도",1117,1;
+	monster .@map$,54,66,"바포메트의 사도",1132,1;
+	monster .@map$,55,66,"바포메트의 사도",1292,1;
+	monster .@map$,56,66,"바포메트의 사도",1132,1;
+	monster .@map$,50,65,"바포메트의 사도",1867,1;
+	monster .@map$,61,65,"바포메트의 사도",1292,1;
 	disablenpc instance_npcname("slave_left");
 	end;
 }
 
 2@cata,109,67,0	script	slave_right	-1,5,5,{
-OnTouch_:
+OnTouch:
 	set .@map$, instance_mapname("2@cata");
-	mapannounce .@map$, "Apostle of Baphomet : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
-	monster .@map$,105,67,"Apostle of Baphomet",1869,1;
-	monster .@map$,104,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,107,67,"Apostle of Baphomet",1869,1;
-	monster .@map$,106,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,102,67,"Apostle of Baphomet",1869,1;
-	monster .@map$,103,67,"Apostle of Baphomet",1291,1;
-	monster .@map$,103,67,"Apostle of Baphomet",1117,1;
-	monster .@map$,109,66,"Apostle of Baphomet",1117,1;
-	monster .@map$,108,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,101,66,"Apostle of Baphomet",1117,1;
-	monster .@map$,106,66,"Apostle of Baphomet",1292,1;
-	monster .@map$,102,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,104,66,"Apostle of Baphomet",1292,1;
-	monster .@map$,103,66,"Apostle of Baphomet",1132,1;
-	monster .@map$,109,65,"Apostle of Baphomet",1867,1;
-	monster .@map$,108,65,"Apostle of Baphomet",1292,1;
+	//mapannounce .@map$, "바포메트의 사도 : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
+	mapannounce .@map$, "바포메트의 사도 : 인간들을 죽여라! 마스터의 부활을 방해하지 못하게 막아라!",bc_map,"0xFFFF00";
+	monster .@map$,105,67,"바포메트의 사도",1869,1;
+	monster .@map$,104,67,"바포메트의 사도",1291,1;
+	monster .@map$,107,67,"바포메트의 사도",1869,1;
+	monster .@map$,106,67,"바포메트의 사도",1291,1;
+	monster .@map$,102,67,"바포메트의 사도",1869,1;
+	monster .@map$,103,67,"바포메트의 사도",1291,1;
+	monster .@map$,103,67,"바포메트의 사도",1117,1;
+	monster .@map$,109,66,"바포메트의 사도",1117,1;
+	monster .@map$,108,66,"바포메트의 사도",1132,1;
+	monster .@map$,101,66,"바포메트의 사도",1117,1;
+	monster .@map$,106,66,"바포메트의 사도",1292,1;
+	monster .@map$,102,66,"바포메트의 사도",1132,1;
+	monster .@map$,104,66,"바포메트의 사도",1292,1;
+	monster .@map$,103,66,"바포메트의 사도",1132,1;
+	monster .@map$,109,65,"바포메트의 사도",1867,1;
+	monster .@map$,108,65,"바포메트의 사도",1292,1;
 	disablenpc instance_npcname("slave_right");
 	end;
 }
 
 2@cata,79,39,0	script	slave_down	-1,5,5,{
-OnTouch_:
+OnTouch:
 	set .@map$, instance_mapname("2@cata");
-	mapannounce .@map$, "Apostle of Baphomet : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
-	monster .@map$,78,41,"Apostle of Baphomet",1869,1;
-	monster .@map$,79,42,"Apostle of Baphomet",1291,1;
-	monster .@map$,78,46,"Apostle of Baphomet",1869,1;
-	monster .@map$,81,41,"Apostle of Baphomet",1291,1;
-	monster .@map$,81,42,"Apostle of Baphomet",1869,1;
-	monster .@map$,79,43,"Apostle of Baphomet",1291,1;
-	monster .@map$,77,40,"Apostle of Baphomet",1117,1;
-	monster .@map$,79,41,"Apostle of Baphomet",1132,1;
-	monster .@map$,79,42,"Apostle of Baphomet",1117,1;
-	monster .@map$,79,43,"Apostle of Baphomet",1132,1;
-	monster .@map$,79,48,"Apostle of Baphomet",1117,1;
-	monster .@map$,78,49,"Apostle of Baphomet",1132,1;
-	monster .@map$,78,41,"Apostle of Baphomet",1292,1;
-	monster .@map$,74,42,"Apostle of Baphomet",1292,1;
-	monster .@map$,72,48,"Apostle of Baphomet",1867,1;
-	monster .@map$,72,38,"Apostle of Baphomet",1292,1;
+	//mapannounce .@map$, "바포메트의 사도 : Kill the humans! Don't let them interrupt the revival of our Master!",bc_map,"0xFFFF00";
+	mapannounce .@map$, "바포메트의 사도 : 인간들을 죽여라! 마스터의 부활을 방해하지 못하게 막아라!",bc_map,"0xFFFF00";
+	monster .@map$,78,41,"바포메트의 사도",1869,1;
+	monster .@map$,79,42,"바포메트의 사도",1291,1;
+	monster .@map$,78,46,"바포메트의 사도",1869,1;
+	monster .@map$,81,41,"바포메트의 사도",1291,1;
+	monster .@map$,81,42,"바포메트의 사도",1869,1;
+	monster .@map$,79,43,"바포메트의 사도",1291,1;
+	monster .@map$,77,40,"바포메트의 사도",1117,1;
+	monster .@map$,79,41,"바포메트의 사도",1132,1;
+	monster .@map$,79,42,"바포메트의 사도",1117,1;
+	monster .@map$,79,43,"바포메트의 사도",1132,1;
+	monster .@map$,79,48,"바포메트의 사도",1117,1;
+	monster .@map$,78,49,"바포메트의 사도",1132,1;
+	monster .@map$,78,41,"바포메트의 사도",1292,1;
+	monster .@map$,74,42,"바포메트의 사도",1292,1;
+	monster .@map$,72,48,"바포메트의 사도",1867,1;
+	monster .@map$,72,38,"바포메트의 사도",1292,1;
 	disablenpc instance_npcname("slave_down");
 	end;
 }
 
 // Magical Seals
 //============================================================
--	script	Magical Seal#SS	-1,{
+-	script	봉인 마법#SS	-1,{
 	set .@seal_check,checkquest(3041,PLAYTIME);
 	if (.@seal_check == 0 || .@seal_check == 1) {
 		specialeffect2 EF_SILENCEATTACK;
 		percentheal -50,0;
-		sc_start SC_Stone,30000,0;
-		mes "Your SP has not recovered yet. You lost your SP on the altar, but it seems the power of the seal has returned.";
+		sc_start Eff_Stone,30000,0;
+		//mes "Your SP has not recovered yet. You lost your SP on the altar, but it seems the power of the seal has returned.";
+		mes "SP가 회복되지 않았습니다. 당신의 SP를 제단이 흡수하였으나, 봉인의 힘이 돌아온 것으로 보입니다.";
 		close;
 	}
 	if (.@seal_check == 2) erasequest 3041;
 	specialeffect EF_LEXDIVINA;
-	disablenpc();
+	disablenpc instance_npcname(strnpcinfo(0));
 	set .@map$, instance_mapname("2@cata");
 	if (strnpcinfo(2) == "0") areamobuseskill .@map$,79,81,10,1929,"NPC_INVINCIBLEOFF",1,0,0,ET_HELP,0;
 	else if (strnpcinfo(2) == "2") areamobuseskill .@map$,123,109,10,1929,"NPC_INVINCIBLEOFF",1,0,0,ET_HELP,0;
@@ -1101,83 +1275,101 @@ OnTouch_:
 	else if (strnpcinfo(2) == "8") areamobuseskill .@map$,35,21,10,1929,"NPC_INVINCIBLEOFF",1,0,0,ET_HELP,0;
 	else if (strnpcinfo(2) == "10") areamobuseskill .@map$,35,109,10,1929,"NPC_INVINCIBLEOFF",1,0,0,ET_HELP,0;
 	percentheal -50,0;
-	sc_start SC_Stone,20000,0;
+	sc_start Eff_Stone,20000,0;
 	setquest 3041;
-	mapannounce .@map$, "The seal activated by putting magical power into the altar.",bc_map,"0x87ceeb";
-	mes "I can feel the power of the altar came back by adding magical power.";
+	//mapannounce .@map$, "The seal activated by putting magical power into the altar.",bc_map,"0x87ceeb";
+	mapannounce .@map$, "제단에 마력을 불어넣어 봉인을 활성화시켰습니다.",bc_map,"0x87ceeb";
+	//mes "I can feel the power of the altar came back by adding magical power.";
+	mes "마법의 힘이 제단에서 느껴집니다.";
 	next;
-	mes "But you can't use your magic for 3 minutes because you used your SP on the altar.";
+	//mes "But you can't use your magic for 3 minutes because you used your SP on the altar.";
+	mes "하지만 제단에 당신의 SP를 주입함으로 3분간 마법을 사용할 수 없습니다.";
 	close;
 
 OnInstanceInit:
-	disablenpc();
+	disablenpc instance_npcname(strnpcinfo(0));
 	end;
 }
-2@cata,79,81,0	duplicate(Magical Seal#SS)	Magical Seal#0	844
-2@cata,123,109,0	duplicate(Magical Seal#SS)	Magical Seal#2	844
-2@cata,123,22,0	duplicate(Magical Seal#SS)	Magical Seal#4	844
-2@cata,35,21,0	duplicate(Magical Seal#SS)	Magical Seal#8	844
-2@cata,35,109,0	duplicate(Magical Seal#SS)	Magical Seal#10	844
+2@cata,79,81,0	duplicate(봉인 마법#SS)	봉인 마법#0	844
+2@cata,123,109,0	duplicate(봉인 마법#SS)	봉인 마법#2	844
+2@cata,123,22,0	duplicate(봉인 마법#SS)	봉인 마법#4	844
+2@cata,35,21,0	duplicate(봉인 마법#SS)	봉인 마법#8	844
+2@cata,35,109,0	duplicate(봉인 마법#SS)	봉인 마법#10	844
 
-2@cata,79,65,0	script	The Main Altar#ss	844,{
-	if (('ins_baphomet == 5) && is_party_leader() == true) {
-		mes "An evil power, too terrible to describe, lies under the great altar radiating a violet color.";
+2@cata,79,65,0	script	주 제단#ss	844,{
+	set .@party_id,getcharid(1);
+	if (('ins_baphomet == 5) && (getpartyleader(.@party_id,2) == getcharid(0))) {
+		//mes "An evil power, too terrible to describe, lies under the great altar radiating a violet color.";
+		mes "끔찍한 악마의 힘을 발산하고 있는 보라빛의 거대한 제단이 자리잡고 있습니다.";
 		next;
-		mes "Complicated Magical Rune letters blink rapidly, attempting to suppress the dreadful power within.";
+		//mes "Complicated Magical Rune letters blink rapidly, attempting to suppress the dreadful power within.";
+		mes "복잡한 룬 문자들이 내부의 강력한 힘을 억제하려 빠르게 깜빡이고 있습니다.";
 		next;
-		mes "The bottom of the Main Altar trembles furiously.";
+		mes "주 제단의 바닥이 들썩이고 있습니다.";
 		next;
 		specialeffect EF_METEORSTORM;
 		specialeffect EF_METEORSTORM;
 		mes "[" + strcharinfo(0) + "]";
-		mes "Watch out! Something... Something is coming.";
+		//mes "Watch out! Something... Something is coming.";
+		mes "조심해! 뭔가... 뭔가가 오고있다!";
 		set 'ins_baphomet,6;
 		donpcevent instance_npcname("ins_2f_hero_broad")+"::OnEnable";
-		disablenpc instance_npcname("The Main Altar#ss");
+		disablenpc instance_npcname("주 제단#ss");
 		close;
 	}
 	else {
-		mes "An evil power, too terrible to describe, lies under the great altar radiating a violet color.";
+		//mes "An evil power, too terrible to describe, lies under the great altar radiating a violet color.";
+		mes "끔찍한 악마의 힘을 발산하고 있는 보라빛의 거대한 제단이 자리잡고 있습니다.";
 		next;
-		mes "Complicated Magical Rune letters blink rapidly, attempting to suppress the dreadful power within.";
+		//mes "Complicated Magical Rune letters blink rapidly, attempting to suppress the dreadful power within.";
+		mes "복잡한 룬 문자들이 내부의 강력한 힘을 억제하려 빠르게 깜빡이고 있습니다.";
 		close;
 	}
 	end;
 }
 
-2@cata,80,63,4	script	Ancient Hero's Soul#2F	411,{
+2@cata,80,63,4	script	선대 영웅의 넋#2F	411,{
 	cutin "ins_cata_champ_s",2;
 	if (checkquest(3041)>=0) erasequest 3041;
-	mes "[Ancient Hero's Soul]";
-	mes "Good job, my descendants... You've finished the long-cherished task that me and my bretheren could not complete.";
+	mes "[선대 영웅의 넋]";
+	//mes "Good job, my descendants... You've finished the long-cherished task that me and my bretheren could not complete.";
+	mes "잘했다, 후손들이여... 나와 나의 동료들이 못하였던 숙원을 풀어주었구나.";
 	next;
-	mes "[Ancient Hero's Soul]";
-	mes "I really appreciate your help.";
-	mes "Our souls can finally rest in peace...";
+	mes "[선대 영웅의 넋]";
+	//mes "I really appreciate your help.";
+	mes "정말 고맙다.";
+	//mes "Our souls can finally rest in peace...";
+	mes "우리들의 영혼이 드디어 평온하게 안식할 수 있겠어...";
 	next;
-	mes "[Ancient Hero's Soul]";
-	mes "The struggle for peace on this world will never end. But... my role here is finally over because there are brave heroes like you.";
+	mes "[선대 영웅의 넋]";
+	//mes "The struggle for peace on this world will never end. But... my role here is finally over because there are brave heroes like you.";
+	mes "이 세상의 평화를 위한 싸움은 끝나지 않을 것이다. 하지만... 자네들같이 용감한 이들로 인해 내 역활도 드디어 이것으로 끝났구나.";
 	next;
-	switch(select("Let me leave the shrine.:Stop talking.")) {
+	//switch(select("Let me leave the shrine.:Stop talking.")) {
+	switch(select("이곳에서 나가게 해주세요.:대화를 그만둔다.")) {
 	case 1:
-		mes "[Ancient Hero's Soul]";
-		mes "Okay. I'll let you and your group leave here safely.";
+		mes "[선대 영웅의 넋]";
+		//mes "Okay. I'll let you and your group leave here safely.";
+		mes "알았다. 너와 너의 일행들을 안전하게 빠져나가게 해주겠다.";
 		next;
-		mes "[Ancient Hero's Soul]";
-		mes "If you leave, please say hello to Patrick for me.";
+		mes "[선대 영웅의 넋]";
+		//mes "If you leave, please say hello to Patrick for me.";
+		mes "나간다면, 패트릭에게 안부를 전해주게나.";
+		close2;
 		cutin "",255;
 		set 'ins_baphomet,0;
 		warp "monk_test",310,150;
-		close;
 	case 2:
-		mes "[Ancient Hero's Soul]";
-		mes "Do you still have something to do here? If you're done I'll let you leave safely...";
+		mes "[선대 영웅의 넋]";
+		//mes "Do you still have something to do here? If you're done I'll let you leave safely...";
+		mes "아직 할일이 남았는가? 나가고 싶다면 다시 내게 말하라.";
 		cutin "",255;
 		close;
 	}
+	end;
 
 OnInstanceInit:
-	disablenpc instance_npcname("Ancient Hero's Soul#2F");
+	disablenpc instance_npcname("선대 영웅의 넋#2F");
 	end;
 }
 
@@ -1192,27 +1384,33 @@ OnDisable:
 	end;
 
 OnTimer3000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : My God! The seal of the Main Altar is weakening!",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : My God! The seal of the Main Altar is weakening!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 이런! 주 제단의 봉인이 약해지다니!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer6000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : My descendants... Listen carefully to what I'm going to say.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : My descendants... Listen carefully to what I'm going to say.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 후손들이여... 잘 듣게나.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer9000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The altars that control the Main Altar's power are located in the Northeast, Southeast, Southwest and Northwest corners of this room.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The altars that control the Main Altar's power are located in the Northeast, Southeast, Southwest and Northwest corners of this room.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 메인 제단에 힘을 주고있는 제단들이 동북, 동남, 남서, 북서 쪽 모서리에 있다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer12000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : Find these altars and activate their seals before Baphomet revives.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : Find these altars and activate their seals before Baphomet revives.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 제단들을 찾아서 바포메트의 봉인이 해제되기 전에 제단의 봉인을 활성화시켜야 한다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer15000:
-	mapannounce instance_mapname("2@cata"), "Baphomet : It's too late, weaklings... Now, you'll feel the despair of death!",bc_map,"0xdb7093";
+	//mapannounce instance_mapname("2@cata"), "바포메트 : It's too late, weaklings... Now, you'll feel the despair of death!",bc_map,"0xdb7093";
+	mapannounce instance_mapname("2@cata"), "바포메트 : 늦었다, 나약한 자들아... 자, 이제 죽을 때다!",bc_map,"0xdb7093";
 	end;
 
 OnTimer17000:
-	mapannounce instance_mapname("2@cata"), "Baphomet : No one can harm me here. You will be my first sacrifice.",bc_map,"0xdb7093";
+	//mapannounce instance_mapname("2@cata"), "바포메트 : No one can harm me here. You will be my first sacrifice.",bc_map,"0xdb7093";
+	mapannounce instance_mapname("2@cata"), "바포메트 : 아무도 날 막지 못해. 너희들은 나의 강림을 위한 첫 제물이 될 것이다.",bc_map,"0xdb7093";
 	donpcevent instance_npcname("control_baphomet")+"::OnEnable";
 	donpcevent instance_npcname("ins_2f_hero_broad2")+"::OnEnable";
 	stopnpctimer;
@@ -1229,17 +1427,17 @@ OnDisable:
 OnEnable:
 	enablenpc instance_npcname("control_baphomet");
 	donpcevent instance_npcname("2f_callmon_pattern_c")+"::OnEnable";
-	monster instance_mapname("2@cata"),79,64,"Baphomet#",1929,1,instance_npcname("control_baphomet")+"::OnMyMobDead";
+	monster instance_mapname("2@cata"),79,64,"바포메트#",1929,1,instance_npcname("control_baphomet")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	set .@map$, instance_mapname("2@cata");
 	if (mobcount(.@map$,instance_npcname("control_baphomet")+"::OnMyMobDead") < 1) {
 		set 'ins_baphomet,7;
-		if (isbegin_quest(3041))
-			erasequest 3041;
-		mapannounce .@map$, "Baphomet : No! Nonono! How dare these weaklings defeat me!... No!!...",bc_map,"0xdb7093";
-		enablenpc instance_npcname("Ancient Hero's Soul#2F");
+		erasequest 3041;
+		//mapannounce .@map$, "바포메트 : No! Nonono! How dare these weaklings defeat me!... No!!...",bc_map,"0xdb7093";
+		mapannounce .@map$, "바포메트 : 안돼! 안돼에에! 어떻게 너희같은 나약한 자들이 이런 힘을!... 안돼!!...",bc_map,"0xdb7093";
+		enablenpc instance_npcname("선대 영웅의 넋#2F");
 		disablenpc instance_npcname("slave_down");
 		disablenpc instance_npcname("slave_left");
 		disablenpc instance_npcname("slave_right");
@@ -1268,36 +1466,43 @@ OnEnable:
 	end;
 
 OnTimer8000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : Don't be discouraged, Baphomet can still be defeated!",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : Don't be discouraged, Baphomet can still be defeated!",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 절망하지 말라, 아직 희망이 남아있다!",bc_map,"0xFFFF00";
 	end;
 
 OnTimer11000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : Go to the altars and activate their seals.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : Go to the altars and activate their seals.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 제단으로 가서 봉인을 횔성화 시켜라.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer13000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : Once the seals recover their power, Baphomet will be vulnerable.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : Once the seals recover their power, Baphomet will be vulnerable.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 봉인의 힘을 회복시키면, 바포메트가 약해진다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer16000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : You should lure Baphomet to the unsealed Altars. Otherwise, your efforts will be futile.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : You should lure Baphomet to the unsealed Altars. Otherwise, your efforts will be futile.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 봉인되지 않은 제단으로 바포메트를 유인해라. 그렇지 않으면 바포메트가 약해지지 않는다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer19000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : We have only 1 hour to stop Baphomet. If time runs out, the power of the seals will be useless.",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : We have only 1 hour to stop Baphomet. If time runs out, the power of the seals will be useless.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 바포메트를 막을 수 있는 시간은 단 1시간. 시간이 경과되면, 봉인의 힘이 사라진다.",bc_map,"0xFFFF00";
 	end;
 
 OnTimer22000:
-	mapannounce instance_mapname("2@cata"), "Baphomet : It's useless. Make more seals. I'll crush them all. None of you will survive!",bc_map,"0xdb7093";
+	//mapannounce instance_mapname("2@cata"), "바포메트 : It's useless. Make more seals. I'll crush them all. None of you will survive!",bc_map,"0xdb7093";
+	mapannounce instance_mapname("2@cata"), "바포메트 : 쓸모없는 짓이다. 모두 죽여주마. 아무도 살아돌아갈 수 없다!",bc_map,"0xdb7093";
 	end;
 
 OnTimer26000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The magical power of the central seal is running out. Go to the central seal and put the magical power.",bc_map,"0xFFFF00";
-	enablenpc instance_npcname("Magical Seal#0");
-	disablenpc instance_npcname("Magical Seal#2");
-	disablenpc instance_npcname("Magical Seal#4");
-	disablenpc instance_npcname("Magical Seal#8");
-	disablenpc instance_npcname("Magical Seal#10");
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The magical power of the central seal is running out. Go to the central seal and put the magical power.",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 중앙 봉인의 마력이 사라졌다. 중앙으로 돌아가서 마력을 불어넣어야 한다.",bc_map,"0xFFFF00";
+	enablenpc instance_npcname("봉인 마법#0");
+	disablenpc instance_npcname("봉인 마법#2");
+	disablenpc instance_npcname("봉인 마법#4");
+	disablenpc instance_npcname("봉인 마법#8");
+	disablenpc instance_npcname("봉인 마법#10");
 	donpcevent instance_npcname("ins_2f_hero_pattern_c")+"::OnEnable";
 	stopnpctimer;
 	disablenpc instance_npcname("ins_2f_hero_broad2");
@@ -1370,21 +1575,23 @@ Ongo:
 
 OnDisable:
 	stopnpctimer;
-	disablenpc instance_npcname("Magical Seal#0");
-	disablenpc instance_npcname("Magical Seal#2");
-	disablenpc instance_npcname("Magical Seal#4");
-	disablenpc instance_npcname("Magical Seal#8");
-	disablenpc instance_npcname("Magical Seal#10");
+	disablenpc instance_npcname("봉인 마법#0");
+	disablenpc instance_npcname("봉인 마법#2");
+	disablenpc instance_npcname("봉인 마법#4");
+	disablenpc instance_npcname("봉인 마법#8");
+	disablenpc instance_npcname("봉인 마법#10");
 	donpcevent instance_npcname("ins_2f_hero_pattern")+"::OnDisable";
 	disablenpc instance_npcname("ins_2f_hero_pattern_c");
 	end;
 
 OnTimer3600000:
-	mapannounce instance_mapname("2@cata"), "Baphomet : krrrr... Now you can't stop me with the seals. All you can do is wait for death!",bc_map,"0xdb7093";
+	//mapannounce instance_mapname("2@cata"), "바포메트 : krrrr... Now you can't stop me with the seals. All you can do is wait for death!",bc_map,"0xdb7093";
+	mapannounce instance_mapname("2@cata"), "바포메트 : 크르르르... 이제 봉인따위로 날 막을 수 없다. 모두 죽음을 기다려라!",bc_map,"0xdb7093";
 	end;
 
 OnTimer3605000:
-	mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : We can't stop Baphomet with the magical power of the seals anymore. Now everything depends on God...",bc_map,"0xFFFF00";
+	//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : We can't stop Baphomet with the magical power of the seals anymore. Now everything depends on God...",bc_map,"0xFFFF00";
+	mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 봉인의 마력으로 더 이상 바포메트를 막을 수 없게 되었네. 모두 신께 기도하게나...",bc_map,"0xFFFF00";
 	donpcevent instance_npcname("ins_2f_hero_pattern_c")+"::OnDisable";
 	end;
 }
@@ -1407,44 +1614,49 @@ OnDisable:
 OnTimer70000:
 	switch(rand(1,5)) {
 	case 1:
-		mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The seal of the Main Altar is running out. Strengthen the Main Altar's seal!",bc_map,"0xFFFF00";
-		enablenpc instance_npcname("Magical Seal#0");
-		disablenpc instance_npcname("Magical Seal#2");
-		disablenpc instance_npcname("Magical Seal#4");
-		disablenpc instance_npcname("Magical Seal#8");
-		disablenpc instance_npcname("Magical Seal#10");
+		//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The seal of the Main Altar is running out. Strengthen the Main Altar's seal!",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 주 제단의 봉인이 사라졌다. 주 제단의 봉인을 강화해라!",bc_map,"0xFFFF00";
+		enablenpc instance_npcname("봉인 마법#0");
+		disablenpc instance_npcname("봉인 마법#2");
+		disablenpc instance_npcname("봉인 마법#4");
+		disablenpc instance_npcname("봉인 마법#8");
+		disablenpc instance_npcname("봉인 마법#10");
 		break;
 	case 2:
-		mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The magical power of the seal at 2 o'clock is running out. Go to 2 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
-		disablenpc instance_npcname("Magical Seal#0");
-		enablenpc instance_npcname("Magical Seal#2");
-		disablenpc instance_npcname("Magical Seal#4");
-		disablenpc instance_npcname("Magical Seal#8");
-		disablenpc instance_npcname("Magical Seal#10");
+		//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The magical power of the seal at 2 o'clock is running out. Go to 2 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 2시방향 봉인의 마력이 사라졌다. 2시방향으로 가서 봉인에 마력을 불어넣어야 한다",bc_map,"0xFFFF00";
+		disablenpc instance_npcname("봉인 마법#0");
+		enablenpc instance_npcname("봉인 마법#2");
+		disablenpc instance_npcname("봉인 마법#4");
+		disablenpc instance_npcname("봉인 마법#8");
+		disablenpc instance_npcname("봉인 마법#10");
 		break;
 	case 3:
-		mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The magical power of the seal at 4 o'clock is running out. Go to 4 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
-		disablenpc instance_npcname("Magical Seal#0");
-		disablenpc instance_npcname("Magical Seal#2");
-		enablenpc instance_npcname("Magical Seal#4");
-		disablenpc instance_npcname("Magical Seal#8");
-		disablenpc instance_npcname("Magical Seal#10");
+		//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The magical power of the seal at 4 o'clock is running out. Go to 4 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 4시방향 봉인의 마력이 사라졌다. 4시방향으로 가서 봉인에 마력을 불어넣어야 한다.",bc_map,"0xFFFF00";
+		disablenpc instance_npcname("봉인 마법#0");
+		disablenpc instance_npcname("봉인 마법#2");
+		enablenpc instance_npcname("봉인 마법#4");
+		disablenpc instance_npcname("봉인 마법#8");
+		disablenpc instance_npcname("봉인 마법#10");
 		break;
 	case 4:
-		mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The magical power of the seal at 8 o'clock is running out. Go to 8 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
-		disablenpc instance_npcname("Magical Seal#0");
-		disablenpc instance_npcname("Magical Seal#2");
-		disablenpc instance_npcname("Magical Seal#4");
-		enablenpc instance_npcname("Magical Seal#8");
-		disablenpc instance_npcname("Magical Seal#10");
+		//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The magical power of the seal at 8 o'clock is running out. Go to 8 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 8시방향 봉인의 마력이 사라졌다. 8시방향으로 가서 봉인에 마력을 불어넣어야 한다.",bc_map,"0xFFFF00";
+		disablenpc instance_npcname("봉인 마법#0");
+		disablenpc instance_npcname("봉인 마법#2");
+		disablenpc instance_npcname("봉인 마법#4");
+		enablenpc instance_npcname("봉인 마법#8");
+		disablenpc instance_npcname("봉인 마법#10");
 		break;
 	case 5:
-		mapannounce instance_mapname("2@cata"), "Ancient Hero's Soul : The magical power of the seal at 10 o'clock is running out. Go to 10 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
-		disablenpc instance_npcname("Magical Seal#0");
-		disablenpc instance_npcname("Magical Seal#2");
-		disablenpc instance_npcname("Magical Seal#4");
-		disablenpc instance_npcname("Magical Seal#8");
-		enablenpc instance_npcname("Magical Seal#10");
+		//mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : The magical power of the seal at 10 o'clock is running out. Go to 10 o'clock and put the magical power in the seal.",bc_map,"0xFFFF00";
+		mapannounce instance_mapname("2@cata"), "선대 영웅의 넋 : 10시방향 봉인의 마력이 사라졌다. 10시방향으로 가서 봉인에 마력을 불어넣어야 한다.",bc_map,"0xFFFF00";
+		disablenpc instance_npcname("봉인 마법#0");
+		disablenpc instance_npcname("봉인 마법#2");
+		disablenpc instance_npcname("봉인 마법#4");
+		disablenpc instance_npcname("봉인 마법#8");
+		enablenpc instance_npcname("봉인 마법#10");
 	}
 	stopnpctimer;
 	donpcevent instance_npcname("ins_2f_hero_pattern_c")+"::Ongo";
@@ -1455,37 +1667,37 @@ OnTimer70000:
 1@cata,1,1,0	script	ins_1f_spawn_mobs	-1,{
 OnInstanceInit:
 	set .@map$, instance_mapname("1@cata");
-	monster .@map$,0,0,"Zombie Master",1298,10;
-	monster .@map$,0,0,"Wraith Dead",1291,10;
-	//monster .@map$,0,0,"Ancient Mimic",1699,10;
-	monster .@map$,0,0,"Flame Skull",1869,10;
-	monster .@map$,0,0,"Skeleton General",1290,10;
-	monster .@map$,0,0,"Zombie Master",1298,10;
-	monster .@map$,0,0,"Skeleton General",1290,10;
-	monster .@map$,0,0,"Flame Skull",1869,10;
-	monster .@map$,0,0,"Wraith Dead",1291,10;
-	monster .@map$,0,0,"Wraith Dead",1291,10;
-	monster .@map$,0,0,"Khalitzburg",1132,10;
-	monster .@map$,0,0,"Khalitzburg",1132,10;
-	monster .@map$,0,0,"Flame Skull",1869,10;
-	monster .@map$,0,0,"Flame Skull",1869,10;
-	monster .@map$,0,0,"Ancient Mimic",1699,10;
-	monster .@map$,0,0,"Zombie Master",1298,10;
-	monster .@map$,0,0,"Ancient Mimic",1699,10;
-	monster .@map$,0,0,"Zombie Master",1298,10;
-	monster .@map$,0,0,"Wraith Dead",1291,10;
-	monster .@map$,0,0,"Skeleton General",1290,10;
-	monster .@map$,0,0,"Skeleton General",1290,10;
-	monster .@map$,0,0,"Wind Ghost",1263,10;
-	monster .@map$,0,0,"Wind Ghost",1263,10;
-	monster .@map$,0,0,"Wind Ghost",1263,10;
-	monster .@map$,0,0,"Lude",1509,10;
-	monster .@map$,0,0,"Lude",1509,10;
-	monster .@map$,0,0,"Evil Druid",1117,10;
-	monster .@map$,0,0,"Evil Druid",1117,10;
-	monster .@map$,0,0,"Evil Druid",1117,10;
-	monster .@map$,0,0,"Banshee",1867,10;
-	monster .@map$,0,0,"Dark Illusion",1302,1;
+	monster .@map$,0,0,"좀비 마스터",1298,10;
+	monster .@map$,0,0,"레이스 데드",1291,10;
+	//monster .@map$,0,0,"에인션트 미믹",1699,10;
+	monster .@map$,0,0,"플레임 스컬",1869,10;
+	monster .@map$,0,0,"스켈레톤 제네럴",1290,10;
+	monster .@map$,0,0,"좀비 마스터",1298,10;
+	monster .@map$,0,0,"스켈레톤 제네럴",1290,10;
+	monster .@map$,0,0,"플레임 스컬",1869,10;
+	monster .@map$,0,0,"레이스 데드",1291,10;
+	monster .@map$,0,0,"레이스 데드",1291,10;
+	monster .@map$,0,0,"칼리츠버그",1132,10;
+	monster .@map$,0,0,"칼리츠버그",1132,10;
+	monster .@map$,0,0,"플레임 스컬",1869,10;
+	monster .@map$,0,0,"플레임 스컬",1869,10;
+	monster .@map$,0,0,"에인션트 미믹",1699,10;
+	monster .@map$,0,0,"좀비 마스터",1298,10;
+	monster .@map$,0,0,"에인션트 미믹",1699,10;
+	monster .@map$,0,0,"좀비 마스터",1298,10;
+	monster .@map$,0,0,"레이스 데드",1291,10;
+	monster .@map$,0,0,"스켈레톤 제네럴",1290,10;
+	monster .@map$,0,0,"스켈레톤 제네럴",1290,10;
+	monster .@map$,0,0,"윈드 고스트",1263,10;
+	monster .@map$,0,0,"윈드 고스트",1263,10;
+	monster .@map$,0,0,"윈드 고스트",1263,10;
+	monster .@map$,0,0,"루드",1509,10;
+	monster .@map$,0,0,"루드",1509,10;
+	monster .@map$,0,0,"이블 드루이드",1117,10;
+	monster .@map$,0,0,"이블 드루이드",1117,10;
+	monster .@map$,0,0,"이블 드루이드",1117,10;
+	monster .@map$,0,0,"밴시",1867,10;
+	monster .@map$,0,0,"다크 일루젼",1302,1;
 	disablenpc instance_npcname("ins_1f_spawn_mobs");
 	end;
 }

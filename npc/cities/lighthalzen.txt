@@ -1,176 +1,123 @@
 //===== rAthena Script =======================================
 //= Lighthalzen City
 //===== By: ==================================================
-//=  erKURITA, Au{R}oN (Translated by Alan), $ephiroth
-//===== Current Version: =====================================
-//= 2.2
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= Lighthalzen NPCs (Temporal names for now) [erKURITA]
-//===== Additional Comments: ==================================
-//= 0.1 Placed temporal names, why there weren't on the SVN before? [erKURITA]
-//= 0.2 Implemented some crap NPCs [MasterOfMuppets]
-//= 0.3 Another load of NPCs. Scripted by Kargha [MasterOfMuppets]
-//= 0.4 More Town NPCs. [Musashiden]
-//= 0.5 Added a BIG load of Lighthalzen NPCs. [musashiden]
-//= 0.6 Fixed some typos+Coordinates. [Musashiden]
-//= 0.7 Implemented some more crap NPCs and the second entrance to biolabs [MasterOfMuppets]
-//= 0.8 Removed Duplicates [Silent]
-//= 0.9 Removed Duplicates [Toms]
-//= 1.0 Added a missing feature to the donation NPC [MasterOfMuppets]
-//= 1.0a added constants to emotions, minor optimization [Lupus]
-//= 1.0b npcid fix [KarLaeda]
-//= 1.1 Added new NPC by $ephiroth and merged other NPCs
-//=     from npc\other\lighthalzen_???.txt [Lupus]
-//= 1.2 Moved some NPCs to Lighthalzen quests. [SinSloth]
-//= 1.3 Moved some other NPCs for quests purposes. [SinSloth]
-//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 1.5 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
-//= 1.6 Massive NPC clean up, includes corrected dialogs and [L0ne_W0lf]
-//=     added missing dialogs, fixed indentation, corrected some NPC
-//=     facing positions, NPC names are more unique now. Removed
-//=     whitespace (empty lines after header and before end curly)
-//=     reduced usage of the command "goto", grammatical corrections.
-//=     Added additional missing NPCs.
-//= 1.7 Removed Auction Staff as the official auction file has been added. [L0ne_W0lf]
-//=     Corrected Lucius so he checks the donation variable. (bugreport:1103) [L0ne_W0lf]
-//= 1.7a Another fix to Lucius. (bugreport:1118) [L0ne_W0lf]
-//= 1.7b Another fix to Lucius (trivial). (bugreport:1125)
-//= 1.8 Replaced effect numerics with constants. [L0ne_W0lf]
-//= 1.9 Added Cool Corp. Event Staff, who originally resided in the DTS_warper script file. [L0ne_W0lf]
-//= 2.0 Added missing Lab Staff#amano08 NPC. (bugreport:4319) [Gepard]
-//= 2.1 Commented out Duplicate NPCs. (bugreport:4555)
-//= 2.2 Added missing NPC found in AEGIS files. [L0ne_W0lf]
-//= 2.3 Updated the second entrance to Biolabs. [Capuche]
+//한글번역 스카이러브
 //=============================================================
 
-lighthalzen,198,285,5	script	Jiwon#zen5	862,{
-	mes "[Jiwon]";
-	mes "I think we're really";
-	mes "fortunate to be able to";
-	mes "live in such a beautiful";
-	mes "and peaceful city like this.";
+lighthalzen,198,285,5	script	소녀#zen5	862,{
+	mes "[소녀]";
+	mes "울려퍼지는 피아노 소리, 안락한";
+	mes "정원, 지나가는 사람들, 좋은";
+	mes "날씨... 더이상 바랄 것이 없을";
+	mes "정도로 평화를 느낀답니다.";
 	next;
-	mes "[Jiwon]";
-	mes "It's just so nice to";
-	mes "have this pleasant weather,";
-	mes "these lush gardens and to";
-	mes "meet all of these kind people.";
-	mes "Lighthalzen is like Asgard";
-	mes "in Midgard, heaven on earth~";
+	mes "[소녀]";
+	mes "이 평화는 전부 잘 살고있는";
+	mes "우리 리히타르젠이니까 느낄 수";
+	mes "있는 것이라고 생각해요.";
+	mes "정말 좋은 마을이에요. 이";
+	mes "리히타르젠이라는 마을은.";
 	close;
 }
 
-lighthalzen,220,244,3	script	Samnang#zen2	863,{
-	mes "[Samnang]";
-	mes "^333333*Sigh...*^000000";
-	mes "It gets harder for me";
-	mes "to move around as I get";
-	mes "older. That's understandable";
-	mes "for an elderly person, right?";
+lighthalzen,220,244,3	script	할머니#zen2	863,{
+	mes "[할머니]";
+	mes "휴우... 이 나이가 되면";
+	mes "움직이기도 힘들어서 참";
+	mes "큰일이라우. 전에도 이상한";
+	mes "검은 양복들이 비키라고";
+	mes "하는데 제대로 움직이지";
+	mes "못했다우.";
 	next;
-	mes "[Samnang]";
-	mes "Just the other day, these";
-	mes "hoodlums in black suits";
-	mes "were yelling at me to get out";
-	mes "of their way. But of course,";
-	mes "I didn't move quickly enough.";
-	mes "So what did they do to me?";
+	mes "[할머니]";
+	mes "결국 그놈들이 이 노구를";
+	mes "밀쳐버리고 갔지만...대체";
+	mes "그놈들은 예의라는걸 알고나";
+	mes "있는건지 원.";
 	next;
-	mes "[Samnang]";
-	mes "They punched me.";
-	mes "Right in the womb!";
-	mes "I know that I'm not";
-	mes "pregnant, but that's";
-	mes "besides the point. Never hit";
-	mes "a lady, especially an old one!";
+	mes "[할머니]";
+	mes "이 나이가지 살았으니";
+	mes "빨리 죽으라는건지... 끌끌.";
 	close;
 }
 
-lighthalzen,261,112,3	script	Ruth#zen4	862,{
-	mes "[Ruth]";
-	mes "Sweety, isn't it";
-	mes "nice to be together";
-	mes "under this beautiful";
-	mes "sunlight? It's perfect";
-	mes "for our date. Ahhhh~";
+lighthalzen,261,112,3	script	소녀#zen4	862,{
+	mes "[소녀]";
+	mes "저기, 이렇게 좋은 날씨에";
+	mes "이렇게 분위기 좋고 상쾌한";
+	mes "이곳에서 둘이 데이트하고";
+	mes "있으니까  정말 좋지않아?";
+	mes "응? 응?";
 	next;
-	mes "[Ruth]";
-	mes "I'm so happy to be";
-	mes "with you. I feel like";
-	mes "I'm just melting with";
-	mes "happiness. Oh, I love";
-	mes "you so much, Oyoung.";
+	mes "[소녀]";
+	mes "나는 이런 분위기에서 너랑";
+	mes "있으면 너무 기뻐서 녹아내릴";
+	mes "것만 같아~ 녹아내린 나는";
+	mes "저 옆의 물처럼 투명할꺼야~";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "Whoa...";
-	mes "This couple is";
-	mes "really headed for";
-	mes "Cloud 9, aren't they?";
+	mes "... 불쾌지수가 올라간다!";
+	mes "그냥 눈길도 주지말고 휙 하고";
+	mes "지나가는게 상책이군. 우우.";
 	close;
 }
 
-lighthalzen,259,108,7	script	Oyoung#zen14	869,{
-	mes "[Oyoung]";
-	mes "Girl, you look like";
-	mes "you're comin' down with";
-	mes "the love bug. But there's";
-	mes "only one prescription for";
-	mes "this ailment, ooooh yeah...";
+lighthalzen,259,108,7	script	청년#zen14	869,{
+	mes "[청년]";
+	mes "오우예 베이비. 이 오빠의 넓은";
+	mes "품 안에 다이빙해서 수영하고";
+	mes "싶은 마인드는 없니 베이비?";
+	mes "저 옆에 있는 물 속에서 스위밍";
+	mes "하는 것보다 훨~씬 해피할거란다.";
 	next;
-	mes "[Oyoung]";
-	mes "You need yo'self";
-	mes "your daily dose of";
-	mes "vitamin O-YOUNG.";
-	mes "And your lips look like";
-	mes "they got vitamin deficiency.";
-	mes "I better take care of that~";
+	mes "[청년]";
+	mes "네가 내 품 안으로  다이빙하면";
+	mes "나는 너를 위해 파도와도  같은";
+	mes "거센 포옹을 맛 보게 할";
+	mes "시츄에이션을 만들 거란다.";
+	mes "우후흥.";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "Sweet Sister!";
-	mes "I don't know what's";
-	mes "more mind boggling--";
-	mes "The fact that he used";
-	mes "that line or the fact that";
-	mes "it's actually working...";
+	mes "... 귀 썩느다. 눈감고 귀막고";
+	mes "재빨리 지나가야겠다. 정말";
+	mes "못봐주겠군...";
 	close;
 }
 
-lighthalzen,233,121,3	script	Kariya#li_01	72,{
-	mes "[Kariya]";
-	mes "I think ''Lighthalzen'' is";
-	mes "supposed to mean ''crest of";
-	mes "light,'' though I hear that this";
-	mes "city was actually named after";
-	mes "somebody. Who knows for sure?";
+lighthalzen,233,121,3	script	여자아이::Kariya#li_01	72,{
+	mes "[카리야]";
+	mes "내 생각에 '라히타르젠'은";
+	mes "'빛의 문장'이라는 뜻으로 추정된다.";
+	mes "빛''이라는 말을 들었지만";
+	mes "도시의 이름은 실제로 그 이름을 따서 명명되었습니다";
+	mes "누군가. 누가 확실히 알겠어요?";
 	next;
-	mes "[Kariya]";
-	mes "Still, it's a fitting";
-	mes "name for the wealthiest";
-	mes "and most luxurious city in";
-	mes "all the Schwarzwald Republic.";
-	mes "So how do you like this place?";
+	mes "[카리야]";
+	mes "그래도 딱이네요";
+	mes "가장 부유한 사람의 이름";
+	mes "그리고 가장 호화로운 도시";
+	mes "슈바르츠발트 공화국 전체.";
+	mes "그래서 이 곳은 어때요?";
 	close;
 }
 
 
-lighthalzen,233,82,5	script	Sung#A	716,{
-	mes "[Sung]";
-	mes "When I grow up, I want";
-	mes "to become such a great";
-	mes "person that they'll make";
-	mes "a statue of me, just like";
-	mes "those statues over there.";
+lighthalzen,233,82,5	script	꼬마아이::Sung#A	716,{
+	mes "[꼬마아이]";
+	mes "내가 커서 원하는 걸 원해요";
+	mes "이렇게 위대해지다";
+	mes "그들이 만들 사람";
+	mes "나의 동상, 마치";
+	mes "저쪽에 있는 조각상들.";
 	next;
-	mes "[Sung]";
-	mes "Then people would be like,";
-	mes "''Hey yo. That statue. That";
-	mes "guy must have been great!''";
-	mes "Just thinking about that";
-	mes "makes me feel so good!";
+	mes "[꼬마아이]";
+	mes "그렇다면 사람들은 이렇게 생각하겠지,";
+	mes "''안녕하세요. 저 조각상. 저거";
+	mes "그 사람 정말 대단했겠구나!''";
+	mes "그냥 생각하는 중이야";
+	mes "정말 기분이 좋아요!";
 	next;
-	mes "[Sung]";
+	mes "[꼬마아이]";
 	mes "That's it. I'm gonna";
 	mes "grow up as soon as I can.";
 	mes "Ooh, and I better grow tall";
@@ -180,104 +127,104 @@ lighthalzen,233,82,5	script	Sung#A	716,{
 	close;
 }
 
-lighthalzen,89,73,3	script	Sameer#zen15	854,{
-	mes "[Sameer]";
-	mes "There are too many";
-	mes "loving couples in this city.";
-	mes "Cuddling and kissing and";
-	mes "hugging and necking. It's...";
-	mes "It's utterly distasteful.";
+lighthalzen,89,73,3	script	청년::Sameer#zen15	854,{
+	mes "[청년]";
+	mes "너무 많아요";
+	mes "이 도시에는 사랑하는 커플들이 있습니다.";
+	mes "껴안고 키스하고";
+	mes "껴안고 목을 껴안고. 이건...";
+	mes "정말 불쾌해요.";
 	next;
-	mes "[Sameer]";
-	mes "I can't believe the";
-	mes "indecency I see everyday";
-	mes "near my own home. Don't";
-	mes "they know better than to be";
-	mes "so affectionate in places";
-	mes "where the public can see them?!";
+	mes "[청년]";
+	mes "믿을 수가 없어요";
+	mes "나는 매일 보는 음란함";
+	mes "내 집 근처. 하지 마세요";
+	mes "그들은 실제보다 더 잘 알고 있습니다";
+	mes "어디서든 너무 다정해요";
+	mes "대중이 볼 수 있는 곳은 어디인가요?!";
 	next;
-	mes "[Sameer]";
-	mes "Fortunately for the";
-	mes "world, I'm a bulwark";
-	mes "of morality. In fact, I have";
-	mes "no need for a woman. All";
-	mes "I need are my ship models,";
-	mes "teen novels and dominoes.";
+	mes "[청년]";
+	mes "다행히도";
+	mes "세상, 나는 보루다";
+	mes "도덕성. 사실, 나는 가지고 있다";
+	mes "여자는 필요없어요. 모두";
+	mes "내 선박 모델이 필요해요,";
+	mes "십대 소설과 도미노.";
 	next;
-	mes "[Sameer]";
-	mes "I'm a completely well";
-	mes "adjusted individual, which";
-	mes "is why the authorities should";
-	mes "listen to me when I tell them";
-	mes "to arrest couples for indecency!";
-	mes "Hand holding. Have they no shame?!";
+	mes "[청년]";
+	mes "나는 완전히 건강해요";
+	mes "조정된 개인";
+	mes "당국이 그래야 하는 이유";
+	mes "내가 말할 때 내 말을 들어라";
+	mes "외설죄로 커플을 체포합니다!";
+	mes "손을 잡고 있어요. 부끄러움도 없나요?!";
 	close;
 }
 
-lighthalzen,45,59,7	script	Janice#zen03	863,{
-	mes "[Janice]";
-	mes "Oh no, I think I got";
-	mes "lost again. The roads";
-	mes "here are so confusing!";
-	mes "I've lived here for such";
-	mes "a long time and I still";
-	mes "can't find my way around...";
+lighthalzen,45,59,7	script	할머니::Janice#zen03	863,{
+	mes "[할머니]";
+	mes "아뇨, 알 것 같아요";
+	mes "또 길을 잃었어요. 도로";
+	mes "여기 너무 헷갈리네요!";
+	mes "나는 그런 이유로 여기에 살았습니다";
+	mes "오랜 시간이 지났는데 아직도";
+	mes "길을 찾을 수 없어요...";
 	close;
 }
 
-lighthalzen,66,94,3	script	Elmer Keays#li_03	866,{
-	mes "[Elmer Keays]";
-	mes "Walking side by side";
-	mes "with you like this reminds";
-	mes "me of the old days. Back";
-	mes "then, everyone was jealous";
-	mes "that I had such a beautiful";
-	mes "woman by my side. Heh heh~";
+lighthalzen,66,94,3	script	노인::Elmer Keays#li_03	866,{
+	mes "[노인]";
+	mes "나란히 걷는다";
+	mes "너랑 이렇게 생각나네";
+	mes "옛날의 나. 뒤로";
+	mes "그럼 다들 질투했지";
+	mes "내가 정말 아름다웠어";
+	mes "내 옆에 여자. 에헤헤~";
 	next;
-	mes "[Elmer Keays]";
-	mes "You're still the most";
-	mes "precious sight to these";
-	mes "old eyes, my dear. I'm";
-	mes "really lucky to be with you.";
+	mes "[노인]";
+	mes "아직도 넌 최고야";
+	mes "귀중한 광경";
+	mes "오래된 눈이여, 내 사랑. 나는";
+	mes "당신과 함께해서 정말 행운이에요.";
 	emotion ET_CHUP, getnpcid(0, "Margie Keays#li_02");
 	emotion ET_CHUPCHUP;
 	close;
 }
 
-lighthalzen,65,94,5	script	Margie Keays#li_02	863,{
-	mes "[Margie Keays]";
-	mes "Oh darling, the";
-	mes "weather is so nice";
-	mes "and pleasant today.";
-	mes "I'm really glad we";
-	mes "decided to go take";
-	mes "a walk together~";
+lighthalzen,65,94,5	script	노인::Margie Keays#li_02	863,{
+	mes "[노인]";
+	mes "오 자기야, 그";
+	mes "날씨가 너무 좋아요";
+	mes "오늘도 즐거웠어요.";
+	mes "정말 기뻐요";
+	mes "가기로 결정했습니다";
+	mes "같이 산책해요~";
 	close;
 }
 
-lighthalzen,78,120,3	script	Maivi#zen1	862,{
-	mes "[Maivi]";
+lighthalzen,78,120,3	script	소녀::Maivi#zen1	862,{
+	mes "[소녀]";
 	mes "...";
 	next;
-	mes "[Maivi]";
+	mes "[소녀]";
 	mes "...";
 	mes "......";
 	next;
-	mes "[Maivi]";
-	mes "Ah...";
-	mes "I just had the nicest";
-	mes "nap. This nice weather";
-	mes "never fails to relax me.";
-	mes "The air here is so clean,";
-	mes "not like that Einbroch~";
+	mes "[소녀]";
+	mes "아...";
+	mes "방금 정말 좋았어";
+	mes "낮잠. 날씨가 좋네요";
+	mes "절대 긴장을 풀지 못해요.";
+	mes "여기 공기가 너무 깨끗해요";
+	mes "아인브로흐는 그렇지 않아요~";
 	next;
-	mes "[Maivi]";
-	mes "This clean, pristine";
-	mes "environment is all thanks";
-	mes "to the Rekenber Corporation.";
-	mes "It's incredible what they can";
-	mes "do with technology now, isn't";
-	mes "it? Ahhh, it's so peaceful~";
+	mes "[소녀]";
+	mes "깨끗하고 깨끗해요";
+	mes "환경은 다 고마워요";
+	mes "레켄버 코퍼레이션에.";
+	mes "그들이 할 수 있는 일은 정말 놀랍습니다";
+	mes "지금은 기술을 사용하지 않습니다";
+	mes "그거? 아아아, 정말 평화롭구나~";
 	close;
 }
 
@@ -310,923 +257,950 @@ lighthalzen,226,210,3	script	Nannan	86,{
 }
 */
 
-lighthalzen,230,182,4	script	Klaubis#zen3	866,{
-	mes "[Klaubis]";
-	mes "Excuse me, but are you";
-	mes "a tourist? Well, welcome";
-	mes "to Lighthalzen! This city";
-	mes "has everything we need,";
-	mes "but it can be a little too";
-	mes "quiet and uneventful here.";
+lighthalzen,230,182,4	script	마을사람::Klaubis#zen3	866,{
+	mes "[마을사람]";
+	mes "실례지만 당신은 그렇습니까?";
+	mes "관광객이신가요? 천만에요";
+	mes "리히타르젠으로! 이 도시로";
+	mes "우리에게 필요한 모든 것이 있습니다";
+	mes "하지만 조금 그럴 수도 있어요";
+	mes "여기는 조용하고 아무 일도 없어요.";
 	next;
-	switch(select("Have you lived in here long?:I agree.:Have you heard about the serial killer?")) {
+	switch(select("여기서 오래 살았어??:동의합니다.:연쇄살인범에 대해 들어보셨나요?")) {
 	case 1:
-		mes "[Klaubis]";
-		mes "Yes, our family has";
-		mes "lived in this city for a";
-		mes "long time, starting with";
-		mes "my great grandfather. Let's";
-		mes "see, my family's been here";
-		mes "for about two hundred years.";
+		mes "[마을사람]";
+		mes "네, 우리 가족은 그랬어요";
+		mes "이 도시에서 한동안 살았습니다";
+		mes "오랜만에 시작합니다";
+		mes "나의 증조할아버지. 가자";
+		mes "봐요, 우리 가족이 여기 있었어요";
+		mes "약 200년 동안.";
 		next;
-		mes "[Klaubis]";
-		mes "You'd be surprised how";
-		mes "many people stay in their";
-		mes "hometowns. Even if you do";
-		mes "leave, though, you can always";
-		mes "come back. It wouldn't be your hometown if you couldn't, right?";
+		mes "[마을사람]";
+		mes "어떻게 보면 놀라실 것 같아요";
+		mes "많은 사람들이 그들의 집에 머문다";
+		mes "고향. 그렇더라도";
+		mes "떠나도 돼, 언제든 떠날 수 있어";
+		mes "돌아와. 그렇지 않으면 고향이 아니겠지?";
 		close;
 	case 2:
-		mes "[Klaubis]";
-		mes "Yes, the atmosphere";
-		mes "can get pretty listless";
-		mes "around here. But still,";
-		mes "there are plenty of nice";
-		mes "sights to enjoy here in";
-		mes "Lighthalzen, so look around~";
+		mes "[마을사람]";
+		mes "네, 분위기에요";
+		mes "아주 무기력해질 수 있어요";
+		mes "여기 근처야. 그래도,";
+		mes "좋은 게 많아요";
+		mes "여기에서 즐길 수 있는 명소";
+		mes "라이트할젠, 둘러봐~";
 		close;
 	case 3:
-		mes "[Klaubis]";
-		mes "You mean the Serial";
-		mes "Axe Murderer? I thought";
-		mes "that was an old ghost story.";
-		mes "Hm. I think that lady inside";
-		mes "the Weapon Shop would";
-		mes "know more about that tale...";
+		mes "[마을사람]";
+		mes "연재물을 말하는 거군요";
+		mes "도끼 살인자요? 제 생각엔";
+		mes "그건 옛날 괴담이었어.";
+		mes "음. 저 여자가 안에 있는 것 같아요";
+		mes "무기 상점은 그럴 것이다";
+		mes "그 이야기에 대해 더 알아보세요...";
 		close;
 	}
 }
 
-lighthalzen,232,156,3	script	Sigmund#zen3	869,{
-	mes "[Sigmund Ting]";
-	mes "You know what I noticed?";
-	mes "The guards at the border";
-	mes "to the slum seem distracted";
-	mes "sometimes. I made use of one";
-	mes "of their less attentive moments";
-	mes "and basically jumped the fence!";
+lighthalzen,232,156,3	script	청년::Sigmund#zen3	869,{
+	mes "[청년]";
+	mes "내가 뭘 알아차렸는지 알아?";
+	mes "국경의 경비병들";
+	mes "슬럼가에 정신이 팔린 것 같아";
+	mes "가끔요. 하나를 활용했어요";
+	mes "그들의 덜 세심한 순간들";
+	mes "그리고 기본적으로 울타리를 뛰어넘었습니다!";
 	next;
-	mes "[Sigmund Ting]";
-	mes "But once I was in the ";
-	mes "slums, I was pretty bored.";
-	mes "There really isn't much to";
-	mes "do there. Which makes me";
-	mes "wonder... Why guard it?";
+	mes "[청년]";
+	mes "하지만 일단 내가 ";
+	mes "빈민가, 정말 지루했어요.";
+	mes "정말 할 일이 별로 없어요";
+	mes "거기서 하세요. 그게 나를 만드는 거죠";
+	mes "궁금해요... 왜 그걸 지키나요?";
 	close;
 }
 
-lighthalzen,190,134,5	script	Joyce#zen	862,{
-	mes "[Joyce]";
-	mes "I can sense your";
-	mes "longing look within";
-	mes "the depths of my heart,";
-	mes "beating faster and faster";
-	mes "with a feverish passion~";
-	close;
-}
-
-lighthalzen,191,134,3	script	Dan Song#zen2	869,{
-	mes "[Dan Song]";
-	mes "Those eyes of yours...";
-	mes "So pure and so deep,";
-	mes "like glimmering pools";
-	mes "of light. So, so beautiful...";
-	close;
-}
-
-lighthalzen,115,159,3	script	Collins#zen1	866,{
-	mes "[Collins]";
-	mes "I really wish that my";
-	mes "son will be able to join";
-	mes "the Rekenber Corporation.";
-	mes "They certainly provide the";
-	mes "best jobs in Lighthalzen.";
+lighthalzen,190,134,5	script	소녀#zen	862,{
+	mes "[소녀]";
+	mes "당신의 그 강렬한 눈빛이 저의";
+	mes "마음을 사정없이 콕콕";
+	mes "찌르는군요. 소년의 심장은";
+	mes "두근벌렁하답니다. 아잉...";
 	next;
-	mes "[Collins]";
-	mes "Although they're a large,";
-	mes "major corporation, it's";
-	mes "almost impossible to get";
-	mes "employed by them. How";
-	mes "do people get hired there";
-	mes "in the first place anyway?";
+	mes "[" + strcharinfo(0) + "]";
+	mes "... 꼭 이런 닭살 돋는 인간들이";
+	mes "있지... 그냥 지나가버리자.";
 	close;
 }
 
-lighthalzen,77,157,5	script	Villagomez#li_01	866,{
-	mes "[Villagomez]";
-	mes "I just step out to get";
-	mes "a haircut and now I'm";
-	mes "lost. Boy oh boy, I hope";
-	mes "I don't keep my family";
-	mes "waiting. ^333333*Sigh...*^000000";
-	close;
-}
-
-lighthalzen,125,68,5	script	Kemp#zen13	97,{
-	mes "[Kemp]";
-	mes "Have you ever seen the";
-	mes "people who work in that big";
-	mes "corporation over there? I think";
-	mes "their employees are all a bit";
-	mes "off kilter for some reason.";
+lighthalzen,191,134,3	script	청년#zen2	869,{
+	mes "[청년]";
+	mes "그대의 눈동자는 너무 맑아서";
+	mes "나의 모습이 비춰보이는구려.";
+	mes "그대의 마음도 이만큼 맑고";
+	mes "아름다워. 훗.";
 	next;
-	mes "[Kemp]";
-	mes "I haven't been there";
-	mes "myself, but something";
-	mes "strange is happening with";
-	mes "all the people who work there.";
+	mes "[" + strcharinfo(0) + "]";
+	mes "... 꼭 이런 닭살 돋는 인간들이";
+	mes "있지... 그냥 지나가버리자.";	
 	close;
 }
 
-lighthalzen,138,50,7	script	Mauro#zen3	847,{
-	mes "[Mauro]";
-	mes "The youth in this city";
-	mes "have no appreciation for";
-	mes "their elders. I've worked";
-	mes "so hard to help build this";
-	mes "city for so many years and";
-	mes "this is the thanks I get?";
+lighthalzen,186,124,5	script	전단지 아르바이트#4tro	878,{
+	mes "[이모트]";
+	mes "여러분의 눈과 귀를 사로 잡을 환상의";
+	mes "쑈! 드넓은 미드가르드 그 어디서도 볼";
+	mes "수 없는 어메이징 쏘! 전에도 없없고";
+	mes "후에도 없을 판타스틱 쑈!";
 	next;
-	mes "[Mauro]";
-	mes "Bah! If it weren't for";
-	mes "us, Lighthalzen wouldn't";
-	mes "be as prosperous as it is";
-	mes "today! Those kids don't";
-	mes "know that they owe their";
-	mes "lives of luxury to us...";
+	mes "[이모트]";
+	mes "안녕? 나중에 시간 되면 한 번 구경하러";
+	mes "와~";
 	close;
 }
 
-lighthalzen,132,103,5	script	Sefith#li_01	734,{
-	mes "[Sefith]";
-	mes "Good looks. Intelligence.";
-	mes "Excellent manners. A strong,";
-	mes "manly chin and overpowering,";
-	mes "piercing eyes. Perfectly balanced passion and charisma. All the";
-	mes "good things that ladies want.";
+lighthalzen,115,159,3	script	할아버지#zen1	866,{
+	mes "[할아버지]";
+	mes "레켄베르 기업... 내 아들놈이";
+	mes "들어가서 일할 수 있으면";
+	mes "좋으련만... 헐헐.";
+	mes "역시 안정된 직장을 꼽으라면";
+	mes "대기업만한 직장이 없지!";
 	next;
-	mes "[Sefith]";
-	mes "But enough about me. Let's";
-	mes "discuss how sorry I should";
-	mes "feel for any other man living";
-	mes "in Lighthalzen. They don't hold";
-	mes "a candle to my studliness~";
+	mes "[할아버지]";
+	mes "하지만 그 대기업도 들어가기";
+	mes "힘드니 원... 기업에 들어간";
+	mes "사람들은 다 초인들인가?";
 	close;
 }
 
-lighthalzen,239,64,5	script	Jade#zen2	862,{
-	mes "[Jade]";
-	mes "I've heard that there's a";
-	mes "strange kingdom out there";
-	mes "that's basically ruled by";
-	mes "magic and swords, where";
-	mes "adventurers are enlisted";
-	mes "for the greater good.";
+lighthalzen,77,157,5	script	노인::Villagomez#li_01	866,{
+	mes "[노인]";
+	mes "나는 단지 얻으려고 밖으로 나갔을 뿐이야";
+	mes "이발하고 지금은";
+	mes "잃어버렸어. 아, 이런, 좋겠다";
+	mes "나는 가족을 지키지 않아요";
+	mes "기다려요. ^333333*한숨...*^000000";
+	close;
+}
+
+lighthalzen,125,68,5	script	청년::Kemp#zen13	97,{
+	mes "[청년]";
+	mes "혹시 본 적 있나요";
+	mes "그렇게 큰 회사에서 일하는 사람들";
+	mes "저기 회사요? 내 생각엔";
+	mes "그들의 직원들은 모두 약간";
+	mes "어떤 이유에서인지 이상해요.";
 	next;
-	mes "[Jade]";
-	mes "So are you from";
-	mes "Rune-Midgarts?";
-	mes "What do you think";
-	mes "of our city with its";
-	mes "advanced technology";
-	mes "and economy? Huh...";
+	mes "[청년]";
+	mes "거기 가본 적 없어";
+	mes "나 자신이지만 뭔가";
+	mes "이상한 일이 일어나고 있어요";
+	mes "거기서 일하는 모든 사람들.";
+	close;
+}
+
+lighthalzen,138,50,7	script	할아버지::Mauro#zen3	847,{
+	mes "[할아버지]";
+	mes "이 도시의 젊은이들";
+	mes "감사하지 않아요";
+	mes "그들의 장로들. 나는 일했어요";
+	mes "이것을 만드는 것을 돕기가 너무 어렵습니다";
+	mes "수년 동안 도시와";
+	mes "이게 내가 받은 감사 인사야?";
 	next;
-	mes "[Jade]";
-	mes "Someday, I'd like";
-	mes "to go visit the land";
-	mes "where you came from.";
-	mes "It sounds so fantastic";
-	mes "and romantic in a way...";
+	mes "[할아버지]";
+	mes "아! 그렇지 않았다면";
+	mes "우리, Lighthalzen은 그렇지 않을 거예요";
+	mes "지금처럼 번영하세요";
+	mes "오늘은! 저 아이들은 그렇지 않아";
+	mes "그들이 빚을 지고 있다는 것을 알아라";
+	mes "우리에게는 사치스러운 삶이...";
 	close;
 }
 
-lighthalzen,205,208,4	script	Greedy Looking Man#li_01	853,{
-	mes "[Khramptd]";
-	mes "The land around here";
-	mes "is some pretty expensive";
-	mes "property. Yes, it's perfect";
-	mes "for building my awesome palace!";
-	mes "I don't have enough funds at the";
-	mes "moment, but the day will come~";
-	close;
-}
-
-lhz_in02,34,212,4	script	Maggie#05	91,{
-	mes "[Maggie]";
-	mes "Sure, I sell a lot";
-	mes "of flowers here, but";
-	mes "the lease that this city";
-	mes "makes me pay cuts into";
-	mes "my profits. It's almost not";
-	mes "worth renting this property.";
+lighthalzen,132,103,5	script	마을 청년::Sefith#li_01	734,{
+	mes "[마을 청년]";
+	mes "미모. 지능.";
+	mes "매너가 훌륭해요. 강해요,";
+	mes "남자다운 턱과 압도적인,";
+	mes "꿰뚫는 눈빛. 열정과 카리스마의 완벽한 균형. 모든 것";
+	mes "여자들이 원하는 좋은 것.";
 	next;
-	mes "[Maggie]";
-	mes "I pay such a ridiculous";
-	mes "amount for the lease and the";
-	mes "laws here won't let me raise";
-	mes "the price of my flowers. Why";
-	mes "are the city officials so greedy?";
+	mes "[마을 청년]";
+	mes "나에 대해서는 이쯤으로 하자. 가자";
+	mes "얼마나 미안해해야 할지 논의해보세요";
+	mes "살아있는 다른 사람에 대해 느껴보세요";
+	mes "Lighthalzen에 있습니다. 그들은 보유하지 않습니다";
+	mes "나의 늠름함에 촛불을~";
 	close;
 }
 
-lighthalzen,202,94,5	script	Wallace#zen2	847,{
-	mes "[Wallace]";
+lighthalzen,239,64,5	script	소녀::Jade#zen2	862,{
+	mes "[소녀]";
+	mes "그런 게 있다고 들었습니다";
+	mes "저기 이상한 왕국";
+	mes "기본적으로는 다음이 지배합니다";
+	mes "마법과 칼, 어디에";
+	mes "모험가들이 입대했습니다";
+	mes "더 큰 이익을 위해.";
+	next;
+	mes "[소녀]";
+	mes "당신도 출신인가요?";
+	mes "룬 미드가르트?";
+	mes "어떻게 생각하세요?";
+	mes "우리 도시의";
+	mes "첨단 기술";
+	mes "그리고 경제? 응...";
+	next;
+	mes "[소녀]";
+	mes "언젠가는 하고 싶어요";
+	mes "땅을 방문하러 가다";
+	mes "당신은 어디서 왔어요.";
+	mes "정말 환상적이네요";
+	mes "어떤 면에서는 로맨틱하기도 하고...";
+	close;
+}
+
+lighthalzen,205,208,4	script	부유해 보이는 남자#li_01	853,{
+	mes "[크람트]";
+	mes "크, 여기가 말야!";
+	mes "이 땅에서 제일 땅값이 비싼데란";
+	mes "말이지!";
+	next;
+	mes "[크람트]";
+	mes "크, 이런 곳이야말로 이 크람트님에게";
+	mes "어울리는 마을이란 말이지!";
+	next;
+	mes "[크람트]";
+	mes "크.. 좋은 부지 잘 봐뒀다가 휘황찬란한";
+	mes "궁전이라도 지어야겠어!";
+	next;
+	mes "[크람트]";
+	mes "크, 지금은 돈이 없으니 돈 생기면";
+	mes "말이야!";
+	mes "크크크.";
+	close;
+}
+
+lhz_in02,34,212,4	script	아가씨::Maggie#05	91,{
+	mes "[아가씨]";
+	mes "물론이죠, 많이 팔아요";
+	mes "여기에는 꽃이 있지만";
+	mes "이 도시의 임대";
+	mes "내가 돈을 삭감하게 만들어요";
+	mes "내 이익은 거의 없어";
+	mes "이 부동산은 임대할 가치가 있습니다.";
+	next;
+	mes "[아가씨]";
+	mes "정말 터무니없는 돈을 내는군요";
+	mes "리스 금액 및";
+	mes "여기 법으로는 제가 키우는 것을 허용하지 않습니다";
+	mes "내 꽃값이요. 왜요?";
+	mes "시 공무원들이 그렇게 욕심이 많은 걸까요?";
+	close;
+}
+
+lighthalzen,202,94,5	script	할아버지::Wallace#zen2	847,{
+	mes "[할아버지]";
 	mes "......";
-	mes "That lady, working";
-	mes "for that one company,";
-	mes "Kafra, Mafra or whatever.";
-	mes "She certainly is very charming.";
+	mes "저 아줌마 일하시네요";
+	mes "그 회사를 위해서";
+	mes "카프라, 마프라 등등.";
+	mes "그녀는 정말 매력적이에요.";
 	next;
-	mes "[Wallace]";
-	mes "Now, if I were";
-	mes "thirty years younger...";
-	mes "Wait! I'm a rich and powerful";
-	mes "man. I could ask her out now.";
-	mes "Hm? What's that look for?";
+	mes "[할아버지]";
+	mes "지금 만약 내가 그랬다면";
+	mes "서른 살은 젊어...";
+	mes "잠깐만요! 저는 부자이고 권력자예요";
+	mes "이봐. 이제 그녀에게 데이트 신청을 할 수 있겠어.";
+	mes "음? 저 표정은 뭐야?";
 	close;
 }
 
-lighthalzen,182,102,3	script	Lucius#zen5	866,{
+lighthalzen,182,102,3	script	할아버지::Lucius#zen5	866,{
 	if (Zeny < 90000) {
-		mes "[Lucius]";
-		mes "Hello youngster~";
-		mes "Would you like to";
-		mes "make a donation";
-		mes "to help the hungry?";
+		mes "[할아버지]";
+		mes "안녕하세요 젊은이~";
+		mes "원하시나요";
+		mes "기부하세요";
+		mes "배고픈 사람들을 돕기 위해?";
 		next;
-		if (select("Sure.:No, thanks.") == 1) {
-			mes "[Lucius]";
-			mes "Now, you can donate 1 to";
-			mes "30,000 zeny that will be used";
-			mes "to support the poor and feed";
-			mes "starving children. If you wish";
-			mes "to cancel, please enter ''0.''";
+		if (select("그렇습니다.:아뇨, 고마워요.") == 1) {
+			mes "[할아버지]";
+			mes "이제 1개를 기부하실 수 있습니다";
+			mes "30,000제니가 사용될 예정입니다";
+			mes "가난한 사람들을 지원하고 먹이기 위해";
+			mes "굶주리는 아이들. 원한다면";
+			mes "취소하려면 ''0''을 입력하세요.";
 			next;
 			input .@input;
 			if (.@input > 30000 || .@input < 0) {
-				mes "[Lucius]";
-				mes "Please enter a value";
-				mes "from 1 to 30,000 in";
-				mes "order to make a donation";
-				mes "to the needy, youngster.";
+				mes "[할아버지]";
+			mes "값을 입력해주세요";
+			mes "1에서 30,000인치";
+			mes "기부 명령";
+			mes "가난한 젊은이에게.";
 				close;
 			}
 			else if (.@input == 0) {
-				mes "[Lucius]";
-				mes "How disappointing,";
-				mes "but I'm sure you have";
-				mes "your reasons. Well, when";
-				mes "you can afford to give to";
-				mes "the needy, you're welcome";
-				mes "to come back at any time.";
+				mes "[할아버지]";
+				mes "정말 실망스럽네요,";
+				mes "하지만 당신은 그랬을 거라고 확신해요";
+				mes "당신의 이유. 음, 언제";
+				mes "당신은 줄 여유가 있습니다";
+				mes "불우한 분들 천만에요";
+				mes "언제든지 다시 오겠습니다.";
 				close;
 			}
-			mes "[Lucius]";
-			mes "Thank you so much";
-			mes "for your " + .@input + " zeny donation.";
-			mes "I promise that your money";
-			mes "will be put to good use in";
-			mes "benefiting the poor and needy.";
+			mes "[할아버지]";
+			mes "정말 감사합니다";
+			mes "당신의 " + .@input + " 제니 기부를 위해.";
+			mes "나는 당신의 돈을 약속합니다";
+			mes "잘 활용될 것입니다";
+			mes "가난하고 궁핍한 사람들에게 유익을 줍니다.";
 			next;
 			if (Zeny < .@input) {
-				mes "[Lucius]";
-				mes "Still, I'm just a little";
-				mes "disappointed. An adventurer";
-				mes "like you should be donating";
-				mes "as much as you possibly can...";
+				mes "[할아버지]";
+				mes "아직은 좀 그렇네요";
+				mes "실망스럽네요. 모험가님";
+				mes "기부해야 할 것 같아요";
+				mes "가능한 한 많이...";
 				close;
 			}
 			set Zeny, Zeny-.@input;
 			set $donatedzeny,$donatedzeny + .@input;
-			mes "[Lucius]";
-			mes "So far, I've received";
-			mes "a total of " + $donatedzeny + " zeny in";
-			mes "donations. I'm glad to see";
-			mes "that there are still kind and";
-			mes "generous people in the world.";
+			mes "[할아버지]";
+			mes "지금까지 받았습니다";
+			mes "총 " + $donatedzeny + " 제니 ";
+			mes "기부. 반가워요";
+			mes "아직도 친절하고";
+			mes "세계의 관대한 사람들.";
 			if ($donatedzeny > 260000) {
 				next;
-				mes "[Lucius]";
-				mes "This should be enough";
-				mes "to send to the Poor Relief";
-				mes "Organization. Please accept";
-				mes "this small gift as a token of";
-				mes "my gratitude, adventurer. Bless";
-				mes "you, youngster and take care.";
+				mes "[할아버지]";
+				mes "이 정도면 충분할 것 같아요";
+				mes "가난한 구호 단체에 보내다";
+				mes "조직입니다. 수락해주세요";
+				mes "이 작은 선물을 증표로";
+				mes "감사합니다, 모험가님. 축복이 있기를";
+				mes "젊은이여, 조심하세요.";
 				set $donatedzeny,0;
 				getitem 603,1; //Old_Blue_Box
 				getitem 12016,1; //Speed_Up_Potion
 			}
 			close;
 		}
-		mes "[Lucius]";
-		mes "I understand. Still,";
-		mes "keep in mind that when";
-		mes "you give from your heart,";
-		mes "you will be rewarded tenfold.";
-		mes "Though I admit, the benefits";
-		mes "aren't always readily apparent.";
+		mes "[할아버지]";
+		mes "이해합니다. 그래도,";
+		mes "언제 그걸 명심하세요";
+		mes "당신은 마음에서 우러나옵니다.";
+		mes "당신은 10배의 보상을 받을 것입니다.";
+		mes "인정하지만 장점은 있어요";
+		mes "항상 쉽게 드러나는 것은 아닙니다.";
 		close;
 	}
-	mes "[Lucius]";
-	mes "Hello youngster~";
-	mes "You seem to be fairly";
-	mes "well-off. Money is good";
-	mes "to have, but be careful not";
-	mes "to become obsessed with it.";
+	mes "[할아버지]";
+	mes "안녕하세요 젊은이~";
+	mes "당신은 공정한 것 같아요";
+	mes "잘 지내요. 돈도 잘 벌어요";
+	mes "가지고 있지만 조심하지 마세요";
+	mes "그것에 집착하다.";
 	next;
-	mes "[Lucius]";
-	mes "When you have the chance,";
-	mes "please show your generosity";
-	mes "towards others who may be";
-	mes "much less fortunate than you.";
+	mes "[할아버지]";
+	mes "기회가 되면";
+	mes "관대함을 보여주세요";
+	mes "다른 사람을 향한";
+	mes "당신보다 훨씬 불행해요.";
 	close;
 }
 
-lighthalzen,147,105,3	script	Laqumet#li_02	869,{
-	mes "[Laqumet]";
-	mes "Sure, manliness is quite";
-	mes "attractive, but I think women";
-	mes "appreciate a guy who could";
-	mes "sympathize and talk with them";
-	mes "a little more. Don't you agree?";
+lighthalzen,147,105,3	script	마을 청년::Laqumet#li_02	869,{
+	mes "[마을 청년]";
+	mes "물론 남자다움은 꽤 있어요";
+	mes "매력적이지만 여자라고 생각해요";
+	mes "할 수 있는 사람을 고맙게 생각합니다";
+	mes "그들에게 공감하고 대화하라";
+	mes "조금만 더. 동의하지 않나요?";
 	next;
-	mes "[Laqumet]";
-	mes "I might not be like Sefith,";
-	mes "but I guess I've got a cute";
-	mes "smile, a good personality and";
-	mes "I'm a dandy to boot. Hopefully,";
-	mes "my honesty and loyalty will";
-	mes "help me find someone good.";
+	mes "[마을 청년]";
+	mes "나는 세피스 같지 않을지도 몰라,";
+	mes "근데 나 좀 귀여운 것 같아";
+	mes "미소도 좋고, 성격도 좋고";
+	mes "저는 정말 멋쟁이에요. 바라건대,";
+	mes "나의 정직과 충성은 입니다";
+	mes "좋은 사람 찾을 수 있게 도와주세요.";
 	close;
 }
 
-lhz_in02,242,172,1	script	Hotel Employee#zen3	868,{
-	mes "[Hotel Employee]";
-	mes "If you are experiencing";
-	mes "any sort of inconvenience,";
-	mes "please do not hesitate and";
-	mes "let us know right away.";
+lhz_in02,242,172,1	script	호텔 직원::Hotel Employee#zen3	868,{
+	mes "[호텔 직원]";
+	mes "당신이 겪고 있는 일이라면";
+	mes "어떤 불편이 있어도";
+	mes "주저하지 마시고";
+	mes "즉시 알려주세요.";
 	next;
-	mes "[Hotel Employee]";
-	mes "Please use the stairs";
-	mes "at the northern end to";
-	mes "go downstairs so that you";
-	mes "can go to the Front Desk.";
-	mes "Thank you and I hope that";
-	mes "you enjoy your stay here.";
+	mes "[호텔 직원]";
+	mes "계단을 이용해주세요";
+	mes "북쪽 끝에서";
+	mes "아래층으로 내려가서";
+	mes "프런트 데스크로 가셔도 됩니다.";
+	mes "감사합니다. 그러길 바랍니다";
+	mes "여기서 즐거운 시간 보내세요.";
 	close;
 }
 
-lhz_in02,210,189,3	script	Christopher Michael#zen	849,{
-	mes "[Christopher Michael]";
-	mes "OoooOoh~";
-	mes "Soooo comfortable.";
-	mes "Don't want to wake up.";
-	mes "Don't want to get up.";
-	mes "Ever again. OoOoooh...";
+lhz_in02,210,189,3	script	청년::Christopher Michael#zen	849,{
+	mes "[청년]";
+	mes "오오오오오~";
+	mes "정말 편해요.";
+	mes "깨어나고 싶지 않아요.";
+	mes "일어나기 싫다.";
+	mes "또다시. 오오오오오...";
 	close;
 }
 
-lhz_in02,201,181,7	script	Safwat Fahmy	853,{
-	mes "[Safwat Fahmy]";
-	mes "This hotel is nice";
-	mes "and comfortable, but";
-	mes "to be quite frank, the";
-	mes "drinks here are horrible.";
-	mes "They're unfit for drinking";
-	mes "men such as myself.";
+lhz_in02,201,181,7	script	중년::Safwat Fahmy	853,{
+	mes "[중년]";
+	mes "이 호텔은 정말 좋아요";
+	mes "편안하지만";
+	mes "솔직히 말하자면,";
+	mes "여기 음료는 정말 맛없어요.";
+	mes "그들은 술을 마실 수 없습니다";
+	mes "나 같은 남자들.";
 	next;
-	mes "[Safwat Fahmy]";
-	mes "If this is the best hotel,";
-	mes "I expect them to provide me";
-	mes "with the best alcohol. When";
-	mes "I stay at a hotel, that's what";
-	mes "I want. To spend the entire";
-	mes "day not being sober.";
+	mes "[중년]";
+	mes "이 호텔이 최고의 호텔이라면,";
+	mes "나는 그들이 나에게 제공할 것으로 기대합니다";
+	mes "최고의 술과 함께. 언제";
+	mes "나는 호텔에 묵는다, 그게 다야";
+	mes "나는 원해요. 전부 쓰고 싶어요";
+	mes "술취하지 않는 날.";
 	next;
-	mes "[Safwat Fahmy]";
-	mes "It looks like that";
-	mes "today I'll be heading";
-	mes "out to the bar again...";
-	mes "I just wish there were";
-	mes "someplace quieter to drink.";
+	mes "[중년]";
+	mes "그런 것 같아요";
+	mes "오늘은 갈게";
+	mes "다시 술집으로...";
+	mes "그냥 있었으면 좋겠어";
+	mes "좀 더 조용하게 술을 마실 수 있는 곳.";
 	close;
 }
 
-lhz_in02,251,212,3	script	Hotel Employee#zen2	868,{
-	mes "[Hotel Employee]";
-	mes "This is the Couple Suite.";
-	mes "A single can also check";
-	mes "in here, but our hotel will";
-	mes "prioritize couples when";
-	mes "assigning this room.";
+lhz_in02,251,212,3	script	호텔 직원::Hotel Employee#zen2	868,{
+	mes "[호텔 직원]";
+	mes "커플 스위트룸입니다.";
+	mes "싱글도 확인 가능합니다";
+	mes "여기에는 있지만 우리 호텔은 그럴 거예요";
+	mes "커플을 우선시하세요";
+	mes "이 방을 배정합니다.";
 	close;
 }
 
-lhz_in02,229,217,3	script	Tanoue#zen04	863,{
-	mes "[Tanoue]";
-	mes "This chair looks";
-	mes "very nice, but it really";
-	mes "chills my bottom. Brr...!";
-	mes "It's a might uncomfortable!";
+lhz_in02,229,217,3	script	할머니::Tanoue#zen04	863,{
+	mes "[할머니]";
+	mes "이 의자는 같은데";
+	mes "아주 좋은데 정말 그렇네요";
+	mes "엉덩이가 오싹해진다. 으르렁...!";
+	mes "너무 불편해요!";
 	next;
-	mes "[Tanoue]";
-	mes "You know what the";
-	mes "perfect chair would";
-	mes "be like? It would be";
-	mes "plush and have electronic";
-	mes "massage and heating controls...";
+	mes "[할머니]";
+	mes "그게 뭔지 아시죠?";
+	mes "완벽한 의자는 그럴 것이다";
+	mes "어때요? 그럴 거예요";
+	mes "플러시와 전자제품이 있어요";
+	mes "마사지와 난방 조절...";
 	close;
 }
 
-lhz_in02,209,277,5	script	Ben Allen#zen11	84,{
-	mes "[Ben Allen]";
-	mes "Aaahhh Oooooh~";
-	mes "It's sooooo comfy~";
-	mes "The air's so fresh and";
-	mes "this couch is so plush...";
-	mes "Why can't home be like this?";
+lhz_in02,209,277,5	script	청년::Ben Allen#zen11	84,{
+	mes "[청년]";
+	mes "아아아아아아아아~";
+	mes "정말 편해요~";
+	mes "공기가 너무 상쾌하고";
+	mes "이 소파 너무 푹신해요...";
+	mes "집은 왜 이렇게 안되나요?";
 	next;
-	mes "[Ben Allen]";
-	mes "I've been in those other";
-	mes "hotels and let me tell you,";
-	mes "this place is the best ever.";
-	mes "After a night's sleep over";
-	mes "here, I feel like a new man!";
+	mes "[청년]";
+	mes "다른 곳에도 가봤어";
+	mes "호텔에 대해 알려드릴게요,";
+	mes "여기가 최고야.";
+	mes "밤을 자고 나면";
+	mes "이제 새로운 남자가 된 기분이에요!";
 	close;
 }
 
-lhz_in02,221,276,1	script	Harp#zen8	869,{
-	mes "[Harp]";
-	mes "Oh sweet jiminy...";
-	mes "That Kafra Lady is so hot.";
-	mes "What a body. And those glasses.";
-	mes "I just gotta ask her out somehow.";
+lhz_in02,221,276,1	script	청년::Harp#zen8	869,{
+	mes "[청년]";
+	mes "아, 지미니...";
+	mes "저 카프라 아가씨 정말 섹시해요.";
+	mes "몸매가 정말 멋지네요. 그리고 안경도요.";
+	mes "어떻게든 그 사람한테 데이트 신청을 해야겠어.";
 	next;
-	mes "[Harp]";
-	mes "Hm, but what should";
-	mes "I do? A love letter? Naw,";
-	mes "that's kind of outdated.";
-	mes "Argh, I can't think! Just";
-	mes "looking at her makes me feel";
-	mes "so happy! Praise be to Kafra!";
+	mes "[청년]";
+	mes "흠, 그런데 어떻게 해야 하지?";
+	mes "그렇죠? 러브레터? 아니,";
+	mes "그건 좀 구식이네요.";
+	mes "아아, 생각이 안 나네요! 그냥";
+	mes "그녀를 보면 기분이 좋아진다";
+	mes "정말 행복해요! 카프라를 찬양해요!";
 	close;
 }
 
-lhz_in02,238,275,5	script	Hotel Employee#zen1	869,{
-	mes "[Hotel Employee]";
-	mes "''Hospitality with a smile";
-	mes "and total devotion to your";
-	mes "comfort.'' That's our motto";
-	mes "in the Royal Dragon Hotel.";
-	mes "Please inquire at the front";
-	mes "desk if you wish to check in.";
+lhz_in02,238,275,5	script	호텔 직원::Hotel Employee#zen1	869,{
+	mes "[호텔 직원]";
+	mes "미소로 환대";
+	mes "그리고 당신에 대한 전적인 헌신";
+	mes "편안함.'' 그것이 우리의 모토입니다.";
+	mes "로얄 드래곤 호텔에 있습니다.";
+	mes "프론트에 문의해주세요";
+	mes "체크인을 원하시면 데스크로 가세요.";
 	close;
 }
 
-lhz_in02,247,275,1	script	Hotel Employee#zen4	868,{
-	mes "[Hotel Employee]";
-	mes "Welcome to the";
-	mes "Royal Dragon Hotel Bar.";
-	mes "How about a nice night";
-	mes "cap before going to bed?";
+lhz_in02,247,275,1	script	호텔 직원::Hotel Employee#zen4	868,{
+	mes "[호텔 직원]";
+	mes "에 오신 것을 환영합니다";
+	mes "로얄 드래곤 호텔 바.";
+	mes "좋은 밤 보내세요";
+	mes "자기 전에 모자를 쓰나요?";
 	next;
-	mes "[Hotel Employee]";
-	mes "If you're looking";
-	mes "for a friend, you";
-	mes "can almost always";
-	mes "make one in this bar.";
-	mes "Alcohol certainly is the";
-	mes "grease for social gears.";
+	mes "[호텔 직원]";
+	mes "당신이 찾고 있다면";
+	mes "친구를 위해, 당신";
+	mes "거의 항상 가능해요";
+	mes "이 바에서 하나 만들어 보세요.";
+	mes "알코올은 확실히 그래요";
+	mes "소셜 장비를 위한 윤활유.";
 	close;
 }
 
-lhz_in02,271,281,2	script	Citizen#amano09	47,{
-	mes "[Hachi]";
-	mes "Oh yeah. I love-love-love";
-	mes "bars. If I don't come here";
-	mes "for the booze, then I'm here";
-	mes "for all these beautiful ladies.";
+lhz_in02,271,281,2	script	시민::Citizen#amano09	47,{
+	mes "[시민]";
+	mes "아 그래요. 사랑해요 사랑해요";
+	mes "바. 내가 여기 오지 않으면";
+	mes "술 때문에 그럼 난 여기 있어";
+	mes "이 아름다운 여성들을 위해.";
 	next;
-	mes "[Hachi]";
-	mes "Weird. It's the very first";
-	mes "time I've tried this place's";
-	mes "rum, but doesn't it taste like";
-	mes "pure sexiness to you? Huh...";
-	mes "Oh well, back to schmoozin'";
-	mes "with all the hot chicks~";
+	mes "[시민]";
+	mes "이상해요. 처음이에요";
+	mes "이 장소를 시도해 본 시간";
+	mes "럼주인데 맛이 없나요";
+	mes "순수한 섹시함? 응...";
+	mes "아, 다시 멍때리기로 돌아가자";
+	mes "핫한 여자들과 함께~";
 	close;
 }
 
-lhz_in02,277,285,4	script	Bartender#amano07	61,{
-	mes "[Duff]";
-	mes "Hey, you're from";
-	mes "Rune-Midgarts, right?";
-	mes "Please make yourself";
-	mes "at home while you're here";
-	mes "in Lighthalzen and have";
-	mes "yourself a good time.";
+lhz_in02,277,285,4	script	바텐더::Bartender#amano07	61,{
+	mes "[바텐더]";
+	mes "야, 너 여기서 왔구나";
+	mes "룬-미드가르트 맞죠?";
+	mes "자신감을 가지세요";
+	mes "여기 있는 동안 집에 있어";
+	mes "리히타르젠에 있고";
+	mes "좋은 시간 보내세요.";
 	close;
 }
 
-lhz_in02,281,280,6	script	Customer#amano13	816,{
-	mes "[Rona]";
-	mes "I hate it when guys";
-	mes "just sidle up and sort";
-	mes "of just skip Steps One";
-	mes "and Two. And before you";
-	mes "get all weird, Step Three";
-	mes "is ''Ask for my phone number.''";
+lhz_in02,281,280,6	script	고객::Customer#amano13	816,{
+	mes "[고객]";
+	mes "남자들이 싫어하는 건 싫어";
+	mes "그냥 옆에 서서 정리하세요";
+	mes "1단계를 건너뛰세요";
+	mes "그리고 두 개. 그리고 당신 앞에";
+	mes "이상해지기, 3단계";
+	mes "는 '내 전화번호를 물어보세요.''입니다.";
 	next;
-	mes "[Rona]";
-	mes "I would just really";
-	mes "appreciate it if one";
-	mes "nice boy would just";
-	mes "talk to me for real.";
+	mes "[고객]";
+	mes "그냥 정말 그랬을 텐데";
+	mes "있으면 감사하겠습니다";
+	mes "좋은 남자라면 그냥";
+	mes "진짜로 얘기해 보세요.";
 	close;
 }
 
-lhz_in02,287,282,4	script	Customer#amano10	853,{
-	mes "[Greenfield]";
-	mes "I don't believe it...";
-	mes "This unlucky streak";
-	mes "will never end, will it?";
-	mes "I lost all my Apples";
-	mes "playing Dice today.";
-	mes "Again. Oh man...";
+lhz_in02,287,282,4	script	고객::Customer#amano10	853,{
+	mes "[고객]";
+	mes "믿을 수가 없어요...";
+	mes "이 불운한 행진";
+	mes "결코 끝나지 않을 거에요, 그렇죠?";
+	mes "사과를 모두 잃어버렸어요";
+	mes "오늘은 주사위 게임을 하고 있어요.";
+	mes "또. 아 이런...";
 	next;
-	mes "[Greenfield]";
-	mes "Okay. Okay.";
-	mes "If I just keep";
-	mes "playing, eventually";
-	mes "I'll win. I mean, that's";
-	mes "the way the odds work, right?";
-	mes "Even when they're against me...";
+	mes "[고객]";
+	mes "알았어. 알았어.";
+	mes "그냥 유지한다면";
+	mes "결국 연주 중";
+	mes "내가 이길 거야. 내 말은, 그게";
+	mes "확률이 어떻게 돌아가는지 알죠?";
+	mes "그들이 나를 반대하더라도...";
 	close;
 }
 
-lhz_in02,287,273,3	script	Customer#amano11	50,{
-	mes "[Terry]";
-	mes "I'm not big on drinking,";
-	mes "but the atmosphere in this";
-	mes "place is really nice. The";
-	mes "music they play is always";
-	mes "smooth and relaxing...";
+lhz_in02,287,273,3	script	고객::Customer#amano11	50,{
+	mes "[고객]";
+	mes "저는 술을 별로 안 좋아해요,";
+	mes "하지만 여기 분위기는";
+	mes "정말 좋은 곳이에요.";
+	mes "그들이 연주하는 음악은 항상";
+	mes "부드럽고 편안해요...";
 	next;
-	mes "[Terry]";
-	mes "Yeah, this is a real cozy";
-	mes "joint. I recommend it to";
-	mes "all you tourists, actually.";
-	mes "Now why don't you kick";
-	mes "back and chill with me?";
+	mes "[고객]";
+	mes "그래, 정말 아늑하다";
+	mes "공동. 추천합니다";
+	mes "실제로 관광객 여러분.";
+	mes "이제 발로 차는 게 어때?";
+	mes "돌아가서 나랑 같이 놀아볼까?";
 	close;
 }
 
-lhz_in02,283,276,4	script	Customer#amano12	815,{
-	mes "[Sei]";
-	mes "You see that guy?";
-	mes "That guy over there is";
-	mes "always looking at me.";
-	mes "I wonder... Does he want";
-	mes "to ask me out or something?";
+lhz_in02,283,276,4	script	고객::Customer#amano12	815,{
+	mes "[고객]";
+	mes "저 사람 보여요?";
+	mes "저기 저 사람이요";
+	mes "항상 나를 바라보고 있어요.";
+	mes "궁금해요... 그 사람이 원하는 걸까요";
+	mes "나한테 데이트 신청하러 온 거야?";
 	next;
-	mes "[Sei]";
+	mes "[고객]";
 	if (Sex == SEX_MALE) {
-		mes "Well, if he does,";
-		mes "shouldn't he have";
-		mes "more guts? Or are ";
-		mes "you boys much more";
-		mes "shy than I think you are?";
+		mes "그렇다면,";
+		mes "그는 그랬어야 하지 않았나";
+		mes "배짱이 더 있나요? 아니면 ";
+		mes "너희들은 훨씬 더 많이";
+		mes "생각보다 수줍음이 많나요?";
 	}
 	else {
-		mes "Well, he is sort of";
-		mes "cute. Geez, this would";
-		mes "be so much easier if he";
-		mes "would just come up and";
-		mes "start talking to me...";
+		mes "글쎄, 그는 일종의";
+		mes "귀엽다. 이런, 이러면";
+		mes "그가 그렇게 된다면 훨씬 더 쉬워질 거예요";
+		mes "그냥 떠오르면";
+		mes "나한테 말을 걸어봐...";
 	}
 	close;
 }
 
-lighthalzen,123,212,4	script	Merpi#zen2	700,{
-	mes "[Merpi]";
-	mes "Isn't the weather nice";
-	mes "today? All this sunlight";
-	mes "will dry these clothes";
-	mes "quickly and give them";
-	mes "a fresh, lovely scent.";
+lighthalzen,123,212,4	script	마을사람::Merpi#zen2	700,{
+	mes "[마을사람]";
+	mes "날씨 좋지 않나요";
+	mes "오늘? 햇살이 가득해";
+	mes "이 옷을 말릴 거예요";
+	mes "빨리 주어라";
+	mes "신선하고 사랑스러운 향기.";
 	next;
-	mes "[Merpi]";
-	mes "Oh, an adventurer from";
-	mes "Rune-Midgarts, are you?";
-	mes "How do you like our city?";
-	mes "If you have any questions,";
-	mes "feel free to ask me anything.";
+	mes "[마을사람]";
+	mes "아, 모험가님이시군요";
+	mes "룬-미드가르트, 당신은요?";
+	mes "우리 도시는 어떤가요?";
+	mes "궁금한 점이 있으시면,";
+	mes "무엇이든 물어보세요.";
 	next;
-	switch(select("Well, I have nothing to ask...:Any news or rumors?:I like laundry too.")) {
+	switch(select("그럼 물어볼 게 없군요...:뉴스나 소문은 없나요?:나도 빨래를 좋아해요.")) {
 	case 1:
-		mes "[Merpi]";
-		mes "Oh, really?";
-		mes "Well, if you've traveled";
-		mes "all over the world, maybe";
-		mes "you've found a place just";
-		mes "like Lighthalzen, so maybe";
-		mes "you're already comfortable?";
+		mes "[마을사람]";
+		mes "아, 정말요?";
+		mes "글쎄, 여행을 가본 적이 있다면";
+		mes "아마도 전 세계적으로";
+		mes "방금 장소를 찾았군요";
+		mes "Lighthalzen과 같으니 아마도";
+		mes "이미 편해요?";
 		close;
 	case 2:
-		mes "[Merpi]";
-		mes "Well, things have";
-		mes "been pretty peaceful";
-		mes "for the past few years.";
-		mes "The only rumor floating";
-		mes "around is about some";
-		mes "weird axe murderer...";
+		mes "[마을사람]";
+		mes "글쎄요.";
+		mes "꽤 평화로웠어요";
+		mes "지난 몇 년 동안.";
+		mes "유일하게 떠돌고 있는 소문";
+		mes "약간의 정도입니다";
+		mes "이상한 도끼 살인자...";
 		close;
 	case 3:
-		mes "[Merpi]";
-		mes "Oh, that's wonderful!";
-		mes "I so love doing hand";
-		mes "laundry, though I'm not";
-		mes "quite sure why. Oh well~";
+		mes "[마을사람]";
+		mes "오, 정말 멋지네요!";
+		mes "저는 손으로 하는 걸 정말 좋아해요";
+		mes "세탁은 안 하지만";
+		mes "그 이유는 확실해요. 아 그렇군요~";
 		close;
 	}
 }
 
-lighthalzen,296,239,3	script	Berru#lhz_01	706,{
+lighthalzen,296,239,3	script	소년::Berru#lhz_01	706,{
 	switch(rand(1,3)) {
 	case 1:
-		mes "[Berru]";
-		mes "Daddy...! Waaaaah~!";
-		mes "I wanna see my Daddy!";
+		mes "[소년]";
+		mes "아빠...! 와아아아~!";
+		mes "아빠 보고 싶어요!";
 		emotion ET_CRY, getnpcid(0, "Berru#lhz_01");
 		next;
-		mes "[Pilia]";
-		mes "Berru, I don't ";
-		mes "think Daddy's coming";
-		mes "home tonight. Come on,";
-		mes "we should go to bed.";
+		mes "[소녀]";
+		mes "베루, 난 아니야 ";
+		mes "아빠가 올 것 같아";
+		mes "오늘 밤 집에 가세요. 어서,";
+		mes "우리는 자러 가야 해.";
 		next;
-		mes "[Berru]";
-		mes "No, I'm not gonna";
-		mes "sleep till Daddy gets";
-		mes "home! He said he'll";
-		mes "bring us candy tonight!";
-		mes "You go sleep first, Pilia!";
+		mes "[소년]";
+		mes "아니요, 안 할 거예요";
+		mes "아빠가 올 때까지 자요";
+		mes "집에! 집에 갈 거라고 하더군요";
+		mes "오늘 밤에 사탕 가져와!";
+		mes "먼저 자러가세요, 필리아!";
 		emotion ET_ANGER, getnpcid(0, "Berru#lhz_01");
 		next;
-		mes "[Pilia]";
-		mes "^333333*Sigh...*^000000";
-		mes "Where's our Daddy?";
-		mes "He said he found a";
-		mes "good job, but we haven't";
-		mes "heard from him since then...";
+		mes "[소녀]";
+		mes "^333333*한숨...*^000000";
+		mes "우리 아빠는 어디 계시나요?";
+		mes "그가 찾았다고 하더군요";
+		mes "잘했어, 하지만 아직은 못해";
+		mes "그 이후로 소식을 들었어요...";
 		emotion ET_THINK, getnpcid(0, "Pilia#lhz_01");
 		close;
 	case 2:
-		mes "[Pilia]";
-		mes "What's taking him";
-		mes "so long? I hope Daddy";
-		mes "comes back home soon.";
-		mes "Come on, Berru, don't cry.";
+		mes "[소녀]";
+		mes "그 사람 무슨 일이야?";
+		mes "너무 오랜만이야? 아빠가 좋겠어";
+		mes "곧 집으로 돌아옵니다.";
+		mes "자, 베루, 울지 마세요.";
 		emotion ET_THINK, getnpcid(0, "Pilia#lhz_01");
 		next;
-		mes "[Berru]";
-		mes "^333333*Sob...*^000000";
-		mes "But I'm hungry";
-		mes "and I miss Daddy!";
+		mes "[소년]";
+		mes "^333333*흐뭇...*^000000";
+		mes "하지만 배고파요";
+		mes "아빠가 그리워요!";
 		next;
-		mes "[Pilia]";
-		mes "Uncle Togii from";
-		mes "next door hasn't";
-		mes "come back either...";
+		mes "[소녀]";
+		mes "토기 삼촌";
+		mes "옆집에는 없었어요";
+		mes "둘 중 하나라도 다시 오세요...";
 		close;
 	case 3:
-		mes "[Pilia]";
-		mes "Hmm? Oh, I'm sorry,";
-		mes "but my little brother";
-		mes "just won't stop crying.";
-		mes "I'm sorry if we're loud...";
+		mes "[소녀]";
+		mes "음? 아, 미안해요,";
+		mes "하지만 내 남동생";
+		mes "울음이 멈추지 않네요.";
+		mes "시끄럽게 해서 미안...";
 		emotion ET_QUESTION, getnpcid(0, "Pilia#lhz_01");
 		next;
-		mes "[Pilia]";
-		mes "Our daddy goes to work";
-		mes "somewhere far away. He";
-		mes "finally has a good job, but";
-		mes "sometimes we don't hear";
-		mes "from him for days. We get";
-		mes "really worried about him.";
+		mes "[소녀]";
+		mes "우리 아빠는 일하러 가세요";
+		mes "어딘가 먼 곳. 그는";
+		mes "드디어 좋은 직업을 갖게 됐지만";
+		mes "때때로 우리는 듣지 못합니다";
+		mes "그에게서 며칠 동안. 우리는 얻습니다";
+		mes "정말 그 사람이 걱정돼요.";
 		next;
-		mes "[Pilia]";
-		mes "My brother Berru always";
-		mes "misses him a lot. I don't";
-		mes "know how to make him";
-		mes "stop crying! What do I do?";
+		mes "[소녀]";
+		mes "내 형제 베루는 언제나";
+		mes "그 사람이 많이 그리워요. 그렇지 않아요";
+		mes "그를 만드는 방법을 알아요";
+		mes "그만 울어! 어떡하지?";
 		emotion ET_PROFUSELY_SWEAT, getnpcid(0, "Pilia#lhz_01");
 		close;
 	}
 }
 
-lighthalzen,297,239,3	duplicate(Berru#lhz_01)	Pilia#lhz_01	818
+lighthalzen,297,239,3	duplicate(Berru#lhz_01)	소녀::Pilia#lhz_01	818
 
-lighthalzen,312,233,3	script	Beggar#lhz_02	777,3,1,{
+lighthalzen,312,233,3	script	거지::Beggar#lhz_02	777,3,1,{
 	end;
 
 OnTouch_:
-	mes "[Beggar]";
-	mes "Please...";
-	mes "My child is starving...";
-	mes "Would you give me";
-	mes "some money?";
+	mes "[거지]";
+	mes "제발...";
+	mes "우리 아이가 배고파요...";
+	mes "나한테 줄래?";
+	mes "돈 좀?";
 	next;
-	if (select("Give him some money.:Ignore him.") == 1) {
+	if (select("그에게 돈을 좀 주세요.:그를 무시하세요.") == 1) {
 		if (Zeny < 50) {
-			mes "[Beggar]";
-			mes "I appreciate your";
-			mes "kindness, but it also";
-			mes "looks like you're in need";
-			mes "of zeny, too. Would you";
-			mes "like to join me?";
+			mes "[거지]";
+		mes "감사합니다";
+		mes "친절하지만 그것도";
+		mes "필요한 것 같네요";
+		mes "제니도 마찬가지입니다. 그럴까요?";
+		mes "나랑 같이 갈래?";
 			emotion ET_SMILE;
 			close;
 		}
 		mes "[" + strcharinfo(0) + "]";
-		mes "Here you go,";
-		mes "take this.";
+		mes "여기요,";
+		mes "이걸 가져가세요.";
 		set Zeny, Zeny-50;
 		next;
-		mes "[Beggar]";
-		mes "Thank you so much.";
-		mes "I have nothing to offer you";
-		mes "in exchange, but I can share";
-		mes "a story with you and impart";
-		mes "some of the wisdom I've";
-		mes "learned over the years.";
+		mes "[거지]";
+		mes "정말 감사합니다.";
+		mes "나는 당신에게 줄 것이 아무것도 없습니다";
+		mes "교환하지만 공유할 수 있습니다";
+		mes "당신과 함께 이야기를 나누고 전합니다";
+		mes "내가 가진 지혜 중 일부";
+		mes "수년에 걸쳐 배웠습니다.";
 		emotion ET_THANKS;
 		next;
 		switch(rand(1,3)) {
 		case 1:
-			mes "[Beggar]";
-			mes "Everyone's been in";
-			mes "a situation where you";
-			mes "sometimes you feel that";
-			mes "you have to make a choice";
-			mes "between doing the right thing";
-			mes "and doing what you want, right?";
+			mes "[거지]";
+			mes "다들 들어왔어";
+			mes "당신이 있는 상황";
+			mes "가끔 그런 느낌이 들 때가 있어요";
+			mes "당신은 선택을 해야 합니다";
+			mes "옳은 일을 하는 것 사이";
+			mes "네가 원하는 대로 하고 있는 거 맞지?";
 			next;
-			mes "[Beggar]";
-			mes "You may feel trapped.";
-			mes "Well, let me tell you, when";
-			mes "it comes to a problem, all";
-			mes "the solutions available to";
-			mes "you aren't always obvious.";
-			mes "So just calm down and think.";
+			mes "[거지]";
+			mes "갇힌 듯한 느낌이 들 수도 있어요.";
+			mes "그럼, 언제인지 알려드릴게요";
+			mes "문제가 생겼어요, 모두";
+			mes "사용 가능한 솔루션";
+			mes "당신은 항상 뻔한 것은 아닙니다.";
+			mes "그럼 진정하고 생각해보세요.";
 			next;
-			mes "[Beggar]";
-			mes "What you can see and";
-			mes "understand might not match";
-			mes "with reality. Like the stars that are always there, but not visible";
-			mes "during the day, we'll always have hope, even if we can't see it.";
-			next;
-			mes "[" + strcharinfo(0) + "]";
-			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
+			mes "[거지]";
+			mes "당신이 볼 수 있는 것과";
+			mes "일치하지 않을 수도 있다는 점 이해해주세요";
+			mes "현실과 함께. 항상 존재하지만 눈에 보이지 않는 별들처럼";
+			mes "낮에는 보이지 않더라도 우리는 언제나 희망을 가질 것입니다.";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
 			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion ET_THINK, playerattached();
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
-			mes "[Beggar]";
+			mes "[거지]";
 			emotion ET_QUESTION;
-			mes "Hmm...?";
-			mes "You seem surprised~";
+			mes "음...?";
+			mes "놀랐나봐요~";
 			close;
 		case 2:
-			mes "[Beggar]";
-			mes "I sort of believe in fate and";
-			mes "sort of don't. Let me explain";
-			mes "it this way. I take life day by";
-			mes "day, with each day covering its";
-			mes "own spectrum with miracle on one end and tragedy on the other.";
+			mes "[거지]";
+			mes "나는 운명을 믿는 편이고";
+			mes "그러지 마세요. 설명할게요";
+			mes "이렇게 해요. 하루하루 인생을 살아가고 있어요";
+			mes "하루, 매일이 그 날을 덮는다";
+			mes "한 쪽 끝은 기적이고 다른 쪽 끝은 비극입니다.";
 			next;
-			mes "[Beggar]";
-			mes "So each day has the capacity";
-			mes "for experiences that can be";
-			mes "good, bad or both. I believe";
-			mes "each person can take an ";
-			mes "active role in shaping their";
-			mes "destiny, day by day.";
+			mes "[거지]";
+			mes "그래서 매일매일 여유가 있어요";
+			mes "가능한 경험을 위해";
+			mes "좋거나 나쁘거나 둘 다. 나는 믿는다";
+			mes "각 사람은 ";
+			mes "그들의 형성에 적극적인 역할";
+			mes "운명, 하루하루.";
 			next;
-			mes "[Beggar]";
-			mes "Now, there may be certain";
-			mes "things that you can't control,";
-			mes "but even a pessimist might";
-			mes "be able to agree that this";
-			mes "is a world that not only has";
-			mes "tragedy, but miracles as well.";
+			mes "[거지]";
+			mes "이제 확실히 알 수 있겠네요";
+			mes "당신이 통제할 수 없는 것들,";
+			mes "그러나 비관론자라도 그럴 수 있다";
+			mes "이것에 동의할 수 있습니다";
+			mes "이세상은 그런것만  있는것이 아니라";
+			mes "비극이기도 하지만 기적이기도 합니다.";
 			next;
-			mes "[Beggar]";
-			mes "Stand up when you're down";
-			mes "and live your life with passion. The capacity for miracles will";
-			mes "always be there and know that";
-			mes "you can be someone else's";
-			mes "miracle. Isn't that wonderful?";
-			next;
-			mes "[" + strcharinfo(0) + "]";
-			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
+			mes "[거지]";
+			mes "기분 나빠지면 일어서세요";
+			mes "열정을 갖고 인생을 살아가세요. 기적을 일으킬 수 있는 능력은 있을 것입니다";
+			mes "항상 거기에 있고 그걸 알아두세요";
+			mes "당신은 다른 사람의 것이 될 수 있습니다";
+			mes "기적. 정말 멋지지 않나요?";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
 			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion ET_THINK, playerattached();
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
-			mes "[Beggar]";
+			mes "[거지]";
 			emotion ET_QUESTION;
-			mes "Don't believe me?";
-			mes "Well, you'll see for";
-			mes "yourself, youngster.";
-			mes "There's much good in you.";
+			mes "내 말을 못 믿으시나요?";
+			mes "글쎄, 나중에 알게 될 거야";
+			mes "너 자신, 젊은이.";
+			mes "당신에겐 좋은 점이 많아요.";
 			close;
 		case 3:
-			mes "[Beggar]";
-			mes "Anger. People deal with";
-			mes "it in different ways. Some";
-			mes "suppress it. Some relish it.";
-			mes "Some fear being angry. Now,";
-			mes "to be simple, let's say there";
-			mes "are two kinds of anger.";
+			mes "[거지]";
+			mes "분노. 사람들이 다루는 것";
+			mes "다른 방식으로요. 일부";
+			mes "억누르세요. 일부는 좋아합니다.";
+			mes "어떤 사람들은 화내는 것을 두려워해요. 이제,";
+			mes "간단하게 말하면 거기라고 합시다";
+			mes "분노에는 두 가지 종류가 있습니다.";
 			next;
-			mes "[Beggar]";
-			mes "The first is the kind that";
-			mes "isn't so productive. More of";
-			mes "a frustration that you can let";
-			mes "go. Someone cut you off on the";
-			mes "freeway or a friend innocently forgot your birthday? No biggie.";
+			mes "[거지]";
+			mes "첫번째는 그런 종류야";
+			mes "그다지 생산적이지 않아요. 더 많은 것";
+			mes "당신이 허용할 수 있는 좌절감";
+			mes "가세요. 누군가가 당신의 말을 끊었습니다";
+			mes "고속도로나 친구가 순진하게 생일을 잊어버렸나요? 별거 아니예요.";
 			next;
-			mes "[Beggar]";
-			mes "Don't let this kind of";
-			mes "anger get to you or you'll";
-			mes "look like a loser. Think of";
-			mes "the big picture and if you're";
-			mes "still upset, vent appropriately. Be honest without hurting anyone.";
+			mes "[거지]";
+			mes "이런 짓은 하지 마세요";
+			mes "화가 나지 않으면 화를 낼 것입니다";
+			mes "패자처럼 보이네. 생각해봐";
+			mes "큰 그림과 만약 그렇다면";
+			mes "여전히 속상해, 적절히 화를 내라. 누구에게도 상처를 주지 않고 솔직하게 말하라.";
 			next;
-			mes "[Beggar]";
-			mes "The second kind of anger";
-			mes "is righteous anger. You've";
-			mes "been wronged and need ";
-			mes "some form of retribution. ";
-			mes "Just don't misdirect your anger";
-			mes "and respond appropriately.";
+			mes "[거지]";
+			mes "두 번째 종류의 분노";
+			mes "의로운 분노입니다. 당신은";
+			mes "부당한 일을 당했고 필요했습니다";
+			mes "어떤 형태의 보복인가. ";
+			mes "분노를 잘못된 방향으로 돌리지 마세요";
+			mes "적절하게 응답하세요.";
 			next;
-			mes "[Beggar]";
-			mes "The second kind of anger is";
-			mes "righteous anger. You've been";
-			mes "wronged and need some form";
-			mes "of retribution. Remember to";
-			mes "make appropriate confrontations";
-			mes "and don't misdirect your rage.";
+			mes "[거지]";
+			mes "두 번째 종류의 분노는";
+			mes "의로운 분노. 당신은 그랬어요";
+			mes "잘못되었기 때문에 어떤 형식이 필요합니다";
+			mes "보복. 기억하세요";
+			mes "적절한 대결을 벌이세요";
+			mes "그리고 분노를 잘못된 방향으로 돌리지 마세요.";
 			next;
-			mes "[Beggar]";
-			mes "Getting into a fight with";
-			mes "righteous anger, say to protect";
-			mes "someone dear to you, will make";
-			mes "you a hero. Fighting with anger";
-			mes "born of frustration will make you a bully. Know the difference.";
-			next;
-			mes "[" + strcharinfo(0) + "]";
-			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
+			mes "[거지]";
+			mes "싸움을 하다";
+			mes "의로운 분노, 보호하라고 말하다";
+			mes "당신에게 소중한 누군가가 만들 것입니다";
+			mes "당신은 영웅입니다. 분노로 싸우고 있습니다";
+			mes "좌절에서 태어난 사람은 당신을 깡패로 만들 것입니다. 차이점을 아십시오.";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
-			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			emotion ET_THINK, playerattached();
 			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			emotion ET_THINK, playerattached();
+			mes ". . . . . . . . . . . .";
+			mes ". . . . . . . . . . . .";
 			mes ". . . . . . . . . . . .";
 			next;
-			mes "[Beggar]";
+			mes "[거지]";
 			emotion ET_QUESTION;
-			mes "What's wrong?";
-			mes "It might be a lot";
-			mes "to take in, I know.";
+			mes "무슨 일이야?";
+			mes "아마도 많을 거예요";
+			mes "알고 있어요.";
 			close;
 		}
 	}
@@ -1236,631 +1210,630 @@ OnTouch_:
 	close;
 }
 
-lighthalzen,311,194,3	script	Reuben#lhz_02	870,{
+lighthalzen,311,194,3	script	청년::Reuben#lhz_02	870,{
 	if (rand(1,2) == 1) {
-		mes "[Reuben]";
-		mes "Someday...";
-		mes "Someday I just gotta";
-		mes "become a train conductor";
-		mes "and just get outta here!";
-		mes "I really hate this place!";
+		mes "[청년]";
+		mes "언젠가...";
+		mes "언젠가는 해야지";
+		mes "기차 차장이 되다";
+		mes "그냥 여기서 나가!";
+		mes "여기 정말 싫어요!";
 		emotion ET_ANGER;
 		next;
-		mes "[Reuben]]";
-		mes "Wh-whoa...!";
-		mes "Did you just hear";
-		mes "me talk to myself?";
-		mes "Crud! Don't be so nosy!";
+		mes "[청년]]";
+		mes "워-워...!";
+		mes "방금 들었어?";
+		mes "나 혼자 얘기해?";
+		mes "크루드! 너무 참견하지 마세요!";
 		emotion ET_FRET;
 		close;
 	}
-	mes "[Reuben]";
-	mes "Hey. What are";
-	mes "you doing just";
-	mes "looking at me?";
-	mes "I don't know you";
-	mes "from Adam, so get lost~";
+	mes "[청년]";
+	mes "야. 이게 뭐야?";
+	mes "지금 하고 있는 거야";
+	mes "나를 보고 있나요?";
+	mes "나는 당신을 모른다";
+	mes "아담에게서 왔으니 길을 잃으세요~";
 	emotion ET_ROCK;
 	close;
 }
 
-lighthalzen,306,324,3	script	Shengwen#zen7	870,{
-	mes "[Shengwen]";
-	mes "Am I just getting";
-	mes "paranoid? I really";
-	mes "think that some of";
-	mes "the people I know";
-	mes "are disappearing";
-	mes "for no good reason!";
+lighthalzen,306,324,3	script	청년::Shengwen#zen7	870,{
+	mes "[청년]";
+	mes "지금 막 받고 있는 건가요?";
+	mes "편집증? 난 정말";
+	mes "일부라고 생각해요";
+	mes "내가 아는 사람들";
+	mes "사라지고 있어요";
+	mes "아무 이유 없이요!";
 	next;
-	mes "[Shengwen]";
-	mes "I mean, all of my close";
-	mes "friends are all alright,";
-	mes "but I'm starting not to see";
-	mes "certain acquaintances and";
-	mes "familiar faces. Maybe I'm";
-	mes "just thinking too much...";
+	mes "[청년]";
+	mes "내 말은, 내 친구들 모두를 뜻해요";
+	mes "친구들은 괜찮아요";
+	mes "하지만 점점 안보이네요";
+	mes "특정 지인과";
+	mes "익숙한 얼굴들. 아마도 나는 그럴지도 모르지";
+	mes "생각이 너무 많아서...";
 	close;
 }
 
-lhz_in03,26,167,5	script	Shayna#li	850,{
-	mes "[Shayna]";
-	mes "^333333*Sigh...*^000000";
-	mes "Oh, you poor";
-	mes "darling girl...";
+lhz_in03,26,167,5	script	마을 여성::Shayna#li	850,{
+	mes "[마을 여성]";
+	mes "^333333*한숨...*^000000";
+	mes "아, 불쌍하다";
+	mes "사랑하는 소녀...";
 	close;
 }
 
-lhz_in01,134,45,3	script	Cenku Dekdam#delic	869,{
-	mes "[Cenku Dekdam]";
-	mes "Man, if you were";
-	mes "gonna take this whole";
-	mes "city and then sell it, what";
-	mes "do you think Lighthalzen's";
-	mes "price tag would be, eh?";
+lhz_in01,134,45,3	script	센쿠 데크담::Cenku Dekdam#delic	869,{
+	mes "[센쿠 데크담]";
+	mes "만약 당신이 그랬다면";
+	mes "이거 다 가져갈 거야";
+	mes "도시를 파는 것, 뭐";
+	mes "Lighthalzen의 생각인가요?";
+	mes "가격표는 어때요?";
 	next;
-	mes "[Cenku Dekdam]";
-	mes "I mean, this city";
-	mes "is basically just made";
-	mes "of money. Money is what";
-	mes "makes this city such a nice";
-	mes "and pleasant place to live.";
+	mes "[센쿠 데크담]";
+	mes "내 말은, 이 도시 말이야";
+	mes "기본적으로 그냥 만들어졌습니다";
+	mes "돈. 돈이 무엇인지";
+	mes "이 도시를 정말 멋지게 만드네요";
+	mes "살기 좋은 곳이에요.";
 	close;
 }
 
-lighthalzen,330,276,3	script	Nun#light	79,{
-	mes "[Angela]";
-	mes "Greetings, adventurer.";
-	mes "I'm Angela, a social";
-	mes "worker for the Poor";
-	mes "Relief Organization.";
+lighthalzen,330,276,3	script	수녀::Nun#light	79,{
+	mes "[수녀]";
+	mes "안녕하세요, 모험가님.";
+	mes "저는 사교계의 Angela입니다";
+	mes "가난한 사람들을 위한 일꾼";
+	mes "구호단체.";
 	next;
-	mes "[Angela]";
-	mes "I've noticed that the";
-	mes "people living here have";
-	mes "extremely bad health and";
-	mes "it's not just because of";
-	mes "their circumstances.";
+	mes "[수녀]";
+	mes "나는 그걸 알아차렸어";
+	mes "여기 사는 사람들은 있어요";
+	mes "건강이 매우 안 좋고";
+	mes "그냥 그것 때문만은 아니야";
+	mes "그들의 상황.";
 	next;
-	mes "[Angela]";
-	mes "I've filed a report";
-	mes "to my superiors, but";
-	mes "they haven't sent me";
-	mes "a response yet for some";
-	mes "reason. I'm starting to get";
-	mes "a little worried about this...";
+	mes "[수녀]";
+	mes "신고했습니다";
+	mes "내 상사에게는 하지만";
+	mes "그들이 나를 보내지 않았습니다";
+	mes "아직 응답이 없습니다";
+	mes "이유. 점점 알 것 같아";
+	mes "이건 좀 걱정되긴 하는데...";
 	close;
 }
 
-lhz_in01,134,38,3	script	Bankri Kun#kagun	798,{
-	mes "[Bankri Kun]";
-	mes "Must work...";
-	mes "Must focus...";
-	mes "Resist sleepiness...";
-	mes "Why do I keep coming";
-	mes "here? Ugh, h-horrible.";
+lhz_in01,134,38,3	script	반크리 쿤::Bankri Kun#kagun	798,{
+	mes "[반크리 쿤]";
+	mes "반드시 작동해야 합니다...";
+	mes "집중해야지...";
+	mes "졸음을 참으세요...";
+	mes "나는 왜 계속 오는 걸까";
+	mes "여기요? 윽, 끔찍해요.";
 	next;
-	mes "[Bankri Kun]";
-	mes "Hey youngster. You wanted";
-	mes "adventuring advice? Okay.";
-	mes "Um. Hm. Always. Brush.";
-	mes "Your teeth. Brush them";
-	mes "everyday. Oh, and don't";
-	mes "forget to floss, either.";
+	mes "[반크리 쿤]";
+	mes "안녕 젊은이. 당신은 원했어요";
+	mes "모험에 대한 조언이요? 알겠습니다.";
+	mes "음. 흠. 항상. 브러쉬.";
+	mes "이빨을 닦으세요.";
+	mes "매일. 아, 그러지 마세요";
+	mes "치실 쓰는 것도 잊어버리세요.";
 	next;
-	mes "[Bankri Kun]";
-	mes "Now it's time for me";
-	mes "to head back to work.";
-	mes "I'll see you later, kid.";
-	mes "Sorry my advice was so";
-	mes "lame-- I couldn't think of";
-	mes "anything else to tell you.";
+	mes "[반크리 쿤]";
+	mes "이제 시간이 됐어요";
+	mes "일하러 돌아가려고.";
+	mes "나중에 또 보자 꼬마야.";
+	mes "미안해요 내 조언이 그랬어요";
+	mes "불량-- 생각이 안 나네요";
+	mes "더 드릴 말씀은 없습니다.";
 	close;
 }
 
-lhz_in01,139,40,7	script	Enoz#oz	53,{
-	mes "[Enoz]";
-	mes "So, the novel I ordered from";
-	mes "the Rune-Midgarts Kingdom";
-	mes "just recently arrived. It's real good, by the guy who wrote";
-	mes "''Roda Frog Adventure''";
-	mes "years ago. Remember?";
+lhz_in01,139,40,7	script	에노즈::Enoz#oz	53,{
+	mes "[에노즈]";
+	mes "그럼 제가 주문한 소설은요";
+	mes "룬-미드가르트 왕국";
+	mes "최근에 도착했어요. 글 쓴 사람이 쓴 글인데 정말 맛있네요";
+	mes "''로다 개구리 모험''";
+	mes "몇 년 전이에요. 기억하시나요?";
 	next;
-	mes "[Enoz]";
-	mes "Anyway, this new book,";
-	mes "''Where the Red Plant Grows''";
-	mes "is up for the Yggdrasilberry";
-	mes "Award. I... I don't know why";
-	mes "I was compelled to share that";
-	mes "with you. Seriously, I don't...";
+	mes "[에노즈]";
+	mes "아무튼 이 책은,";
+	mes "''빨간 식물이 자라는 곳''";
+	mes "이그드라실베리를 선택했습니다";
+	mes "수상. 나... 왜인지는 모르겠어";
+	mes "나는 그걸 공유해야만 했어요";
+	mes "너와 함께. 진심으로, 난...";
 	close;
 }
 
-lhz_in01,124,28,3	script	Ellette#tre	66,{
-	mes "[Ellette]";
+lhz_in01,124,28,3	script	이레트::Ellette#tre	66,{
+	mes "[이레트]";
 	mes "...";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "Excuse me.";
+	mes "실례합니다.";
 	next;
-	mes "[Ellette]";
+	mes "[이레트]";
 	mes "...";
 	mes "......";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "Hello?";
+	mes "안녕하세요?";
 	next;
-	mes "[Ellette]";
-	mes "...Oh! Everyone!";
-	mes "I just completed";
-	mes "another one! Hooray!";
+	mes "[이레트]";
+	mes "...아! 여러분!";
+	mes "방금 완료했어요";
+	mes "또 하나! 만세!";
 	next;
-	mes "[All other Employees]";
-	mes "Wh-what?!";
-	mes "No way, not again!";
+	mes "[기타 모든 직원]";
+	mes "뭐야?!";
+	mes "안돼, 또 안 돼!";
 	next;
-	mes "[Leekal]";
-	mes "Are you even human?";
-	mes "You must have some";
-	mes "secret for that much";
-	mes "productivity. It's weird...";
+	mes "[이칼]";
+	mes "너도 인간이냐?";
+	mes "꼭 드셔야 해요";
+	mes "그 정도는 비밀이야";
+	mes "생산성. 이상하네요...";
 	next;
-	mes "[Ellette]";
-	mes "Oh, come on.";
-	mes "Maybe I'm a little";
-	mes "good at this, but there's";
-	mes "no way I can beat Cenku.";
+	mes "[이레트]";
+	mes "아, 어서.";
+	mes "어쩌면 난 좀 그럴지도 몰라";
+	mes "이건 잘하는데, 있잖아";
+	mes "나는 센쿠를 이길 수 없습니다.";
 	close;
 }
 
-lhz_in01,125,40,3	script	Dowbow Ryuei#ryusei	843,{
-	mes "[Dowbow Ryuei]";
-	mes "Just out of, oh I dunno,";
-	mes "curiosity, which word do";
-	mes "you like better? ''Uber-Cool''";
-	mes "or ''Reality?'' Pick one~";
+lhz_in01,125,40,3	script	도우봐우 류이::Dowbow Ryuei#ryusei	843,{
+	mes "[도우봐우 류이]";
+	mes "방금 나갔네요, 아, 모르겠어요,";
+	mes "호기심, 어떤 단어가 하는가";
+	mes "''Uber-Cool''이 더 마음에 드시나요?";
+	mes "또는 ''현실?'' 하나 고르세요~";
 	next;
 	if (select("Uber-Cool:Reality") == 1) {
-		mes "[Dowbow Ryuei]";
-		mes "Oh yeah? Me too!";
-		mes "Yeah, we got the same";
-		mes "outlook on life. If you don't";
-		mes "mind, I'd like to shake";
-		mes "your hand, adventurer.";
+		mes "[도우봐우 류이]";
+		mes "아 그래요? 저도요!";
+		mes "그래, 우리도 마찬가지야";
+		mes "인생에 대한 전망. 그렇지 않다면";
+		mes "마음을 흔들고 싶어요";
+		mes "당신의 손, 모험가님.";
 		emotion ET_BEST;
 		close;
 	}
-	mes "[Dowbow Ryuei]";
-	mes "Reality, eh?";
-	mes "Well, I agree that";
-	mes "being realistic has its";
-	mes "perks, I'm more of a dreamer.";
+	mes "[도우봐우 류이]";
+	mes "현실이죠?";
+	mes "글쎄요, 저도 그 점에 동의해요";
+	mes "현실적이라는 것은 그 자체입니다";
+	mes "특혜, 나는 몽상가에 가깝습니다.";
 	close;
 }
 
-lhz_in01,125,46,3	script	Leekal#lackee	849,{
-	mes "[Leekal]";
-	mes "So... Very broke.";
-	mes "Why did I spend so much";
-	mes "money on wine, women and";
-	mes "song? I regret it all, all the";
-	mes "pleasure I've had this month.";
-	mes "Yes, it was too much pleasure.";
+lhz_in01,125,46,3	script	이칼::Leekal#lackee	849,{
+	mes "[이칼]";
+	mes "그럼... 너무 망가졌네요.";
+	mes "왜 이렇게 돈을 많이 썼지?";
+	mes "와인, 여성, 그리고";
+	mes "노래? 다 후회해, 다";
+	mes "이번 달은 정말 즐거웠어요.";
+	mes "네, 너무 즐거웠습니다.";
 	next;
-	mes "[Ninjose]";
-	mes "That's what happens";
-	mes "when you're irresponsible";
-	mes "with your money. You really";
-	mes "should read this ''Anybody";
-	mes "Can Be Rich'' book.";
+	mes "[닌호세]";
+	mes "그런 일이 일어나는군요";
+	mes "당신이 무책임할 때";
+	mes "당신의 돈으로. 당신은 정말";
+	mes "이 '누구나'를 읽어보세요";
+	mes "부자가 될 수 있다' 책.";
 	close;
 }
 
-lhz_in01,116,53,7	script	Ninjose#nina	841,{
-	mes "[Ninjose]";
-	mes "At long last, I've finally";
-	mes "bought my own home. You";
-	mes "should invest your money for";
-	mes "your future too! Read this,";
-	mes "''Anybody Can Be Rich!''";
-	mes "It's such a great book!";
+lhz_in01,116,53,7	script	닌호세::Ninjose#nina	841,{
+	mes "[닌호세]";
+	mes "드디어, 드디어";
+	mes "내 집을 샀어요. 당신";
+	mes "당신의 돈을 투자해야 합니다";
+	mes "당신의 미래도 마찬가지입니다! 이것을 읽어보세요,";
+	mes "''누구나 부자가 될 수 있어요!''";
+	mes "정말 좋은 책이에요!";
 	close;
 }
 
-lhz_in01,116,39,7	script	Kejulle Rekenber#reken	822,{
-	mes "[Kejulle Rekenber]";
-	mes "Hm? Sure, my last name";
-	mes "is Rekenber and that's the";
-	mes "same name as our chairman,";
-	mes "but that's just a coincidence.";
-	mes "I'm merely a normal employee.";
-	mes "Yeah, no special treatment...";
+lhz_in01,116,39,7	script	키주리 레켄베르::Kejulle Rekenber#reken	822,{
+	mes "[키주리 레켄베르]";
+	mes "음? 물론이죠, 제 성이에요";
+	mes "Rekenber가 바로 그거예요";
+	mes "우리 회장님과 이름이 같아요.";
+	mes "하지만 그건 단지 우연일 뿐이에요.";
+	mes "저는 평범한 직장인입니다.";
+	mes "그렇습니다. 특별한 대우는 없습니다...";
 	close;
 }
 
-lhz_in01,110,40,3	script	Jorjerro#fhero	89,{
-	mes "^3355FFThis man here";
-	mes "is motionless,";
-	mes "and for all intents";
-	mes "and purposes, is";
-	mes "soundly asleep.^000000";
+lhz_in01,110,40,3	script	후헤로::Jorjerro#fhero	89,{
+	mes "^3355FF이 사람이 여기 있어요";
+	mes "움직이지 않는다";
+	mes "그리고 모든 의도를 위해";
+	mes "그리고 목적은";
+	mes "잘 자고 있어요.^000000";
 	close;
 }
 
-lhz_in01,116,45,7	script	Joshua#aya	704,{
-	mes "[Joshua]";
-	mes "What am I doing here?";
-	mes "Waiting for my dream";
-	mes "woman to fall into my lap,";
-	mes "what else does it look like?";
+lhz_in01,116,45,7	script	요슈아::Joshua#aya	704,{
+	mes "[요슈아]";
+	mes "내가 여기서 뭘 하고 있지?";
+	mes "내 꿈을 기다리며";
+	mes "내 무릎에 떨어질 여자";
+	mes "이건 또 어떤 모습이지?";
 	next;
-	mes "[Joshua]";
-	mes "Tall, blond, creamy";
-	mes "complexion and smooth";
-	mes "skin. That's right. Come";
-	mes "right to Joshua, babes.";
-	mes "I got my pheromone spray";
-	mes "on and I'm ready to cruise~";
+	mes "[요슈아]";
+	mes "키가 크고 금발이고 크림색이에요";
+	mes "안색이 좋고 매끄러워요";
+	mes "스킨. 맞아요. 오세요";
+	mes "조슈아에게 권리가 있다, 얘들아.";
+	mes "나 페로몬 스프레이 샀어";
+	mes "켜고 이제 항해할 준비가 되었습니다~";
 	close;
 }
 
-lighthalzen,326,249,5	script	Grinnel#zen6	870,{
-	mes "[Grinnel]";
-	mes "You know the men in";
-	mes "black suits? Boy, did";
-	mes "I get a scare! They actually";
-	mes "tracked me down to ask me";
-	mes "all these weird questions!";
+lighthalzen,326,249,5	script	청년::Grinnel#zen6	870,{
+	mes "[청년]";
+	mes "당신은 그 안에 있는 남자들을 알고 있어요";
+	mes "검은색 정장? 얘야, 그랬지";
+	mes "무서워요! 사실은요";
+	mes "저를 추적해서 물어봤습니다";
+	mes "이 이상한 질문들 다!";
 	next;
-	mes "[Grinnel]";
-	mes "They kept wanting to";
-	mes "know if I had ever met";
-	mes "anyone from the Rekenber";
-	mes "Corporation, if I've ever been";
-	mes "Uptown, that sort of thing. They";
-	mes "really scared the crap out of me.";
+	mes "[청년]";
+	mes "그들은 계속 원했어요";
+	mes "내가 만난 적이 있는지 알아요";
+	mes "레켄베르 출신의 누구라도";
+	mes "회사에 가본 적이 있다면";
+	mes "업타운, 그런 거요. 그들";
+	mes "정말 겁이 났어요.";
 	next;
-	mes "[Grinnel]";
-	mes "Man, living in the";
-	mes "slums is such a drag.";
-	mes "Not only is life rough,";
-	mes "but all sorts of people";
-	mes "think they can push you";
-	mes "around. I hate Lighthalzen...";
+	mes "[청년]";
+	mes "남자, 살고 있는 사람";
+	mes "빈민가는 정말 짜증나는 곳이에요.";
+	mes "인생은 힘들 뿐만 아니라,";
+	mes "하지만 온갖 종류의 사람들이 있어요";
+	mes "그들이 당신을 밀어낼 수 있다고 생각해요";
+	mes "주위에. 난 리히타르젠이 싫어...";
 	close;
 }
 
-lhz_in03,192,19,3	script	Haggar#zen1	855,{
-	mes "[Haggar]";
-	mes "Whiskey!";
-	mes "I need me some";
-	mes "hard liquor now!";
+lhz_in03,192,19,3	script	주정뱅이::Haggar#zen1	855,{
+	mes "[주정뱅이]";
+	mes "위스키!";
+	mes "좀 필요해요";
+	mes "지금 독한 술을 마시고 있어요!";
 	next;
-	mes "[Haggar]";
-	mes "Wha--? I didn't";
-	mes "order this stinkin'";
-	mes "rum! I want a man's";
-	mes "drink! Gimme whiskey!";
+	mes "[주정뱅이]";
+	mes "뭐--? 난 안 그랬어";
+	mes "이거 주문해";
+	mes "럼! 나는 남자를 원해요";
+	mes "마셔요! 위스키 주세요!";
 	close;
 }
 
-lhz_in03,193,25,2	script	Bartender#12	61,{
-	mes "[Tony]";
+lhz_in03,193,25,2	script	바텐더:Bartender#12	61,{
+	mes "[바텐더]";
 	if (Sex == SEX_MALE) {
-		mes "Hey man, I know this";
+		mes "이봐, 나 이거 알아";
 	}
 	else {
-		mes "Hey lady, I know this";
+		mes "저기 아가씨, 나 이거 알아요";
 	}
-	mes "joint is a dive, pretty much";
-	mes "on the verge of bein' totally";
-	mes "ghetto, but we're proud to";
-	mes "have the best rum in all of";
-	mes "Midgard. It's true~";
+	mes "관절은 다이빙과도 같습니다.";
+	mes "완전히 존재하기 직전";
+	mes "게토, 하지만 우리는 자랑스러워요";
+	mes "가장 좋은 럼주를 갖고 있어요";
+	mes "미드가르드. 맞아요~";
 	next;
-	mes "[Tony]";
-	mes "Just a sip of this";
-	mes "beautiful drink and";
-	mes "you're on top of the";
-	mes "world! But it's best";
-	mes "for helpin' yah relax";
-	mes "and forget your worries.";
+	mes "[바텐더]";
+	mes "한 모금만 드세요";
+	mes "아름다운 음료 그리고";
+	mes "당신은 최고의 자리에 있어요";
+	mes "세상에! 하지만 최고야";
+	mes "긴장을 풀 수 있도록 도와주셔서";
+	mes "걱정은 잊어버리세요.";
 	next;
-	mes "[Tony]";
-	mes "I don't take to bein'";
-	mes "a poet, but I do know";
-	mes "this. Our rum has the";
-	mes "sweet sweet flavor of";
-	mes "loneliness. You really";
-	mes "oughta try it when you can.";
+	mes "[바텐더]";
+	mes "나는 그런 존재가 아니라고 생각해요";
+	mes "시인이지만 나는 알아요";
+	mes "이것. 우리 럼에는 ";
+	mes "달콤달콤한 맛";
+	mes "외로움. 정말";
+	mes "할 수 있을 때 시도해 봐야겠어요.";
 	close;
 }
 
-lhz_in03,185,20,6	script	Bad Drunk#amano06	869,2,2,{
-	mes "[Garry]";
-	mes "Hey! Hey you...!";
-	mes "D'you wanna, you";
-	mes "wanna hear me tell";
-	mes "you a joke?! It goes...";
-	mes "Um, it goes like this...";
+lhz_in03,185,20,6	script	주정꾼::Bad Drunk#amano06	869,2,2,{
+	mes "[주정꾼]";
+	mes "야! 야 너...!";
+	mes "당신이 원해요, 당신";
+	mes "내 말을 듣고 싶어";
+	mes "농담이냐?! 정말...";
+	mes "음, 이렇게 되는군요...";
 	next;
-	mes "[Garry]";
-	mes "Hey riddle middle,";
-	mes "the cat and th--";
-	mes "No! No, damn it!";
-	mes "That's a song!";
-	mes "No, wait, that's";
-	mes "not a song either...";
+	mes "[주정꾼]";
+	mes "안녕 수수께끼 중간,";
+	mes "고양이와 그--";
+	mes "안돼! 안 돼, 젠장!";
+	mes "이거 노래야!";
+	mes "아니요, 잠깐만요, 그건";
+	mes "노래도 아니고...";
 	close;
 }
 
-lhz_in03,186,29,7	script	Bad Drunk#12	869,{
-	mes "[Bonse]";
-	mes "*Hiccup* I loooove";
-	mes "this rum! I caught a cold";
-	mes "once and one glass made";
-	mes "it go away! 'Course, I slept";
-	mes "for a week too, but that don't";
-	mes "matter! Pshaw! Science...";
+lhz_in03,186,29,7	script	주정꾼::Bad Drunk#12	869,{
+	mes "[주정꾼]";
+	mes "*딸꾹질* 너무좋아요";
+	mes "이 럼주야! 나 감기 걸렸어";
+	mes "한 번에 한 잔만 만들었습니다";
+	mes "저리 가버려요! 물론이죠, 잠을 잤어요";
+	mes "1주일 동안도 마찬가지지만, 그렇지 않아요";
+	mes "중요! 프쇼! 과학...";
 	next;
-	mes "[Bonse]";
-	mes "Oh, the flavor is just";
-	mes "so clean, but it's also";
-	mes "got a bit of a kick. I don't";
-	mes "know how to describe it.";
-	mes "Its the taste of happiness?";
-	mes "I'm too drunk to even tell!";
+	mes "[주정꾼]";
+	mes "아, 맛이 그냥 그래요";
+	mes "너무 깨끗하지만, 역시";
+	mes "조금 신났어요. 그렇지 않아요";
+	mes "어떻게 설명하는지 알아요.";
+	mes "행복의 맛인가요?";
+	mes "너무 취해서 말도 못해요!";
 	close;
 }
 
-lhz_in02,265,273,6	script	Lab Staff#amano08	865,{
-	mes "[Assam]";
-	mes "This place is nice";
-	mes "and usually pretty quiet.";
-	mes "I like to come here after";
-	mes "work, have a drink and just";
-	mes "chat with the bartender.";
+lhz_in02,265,273,6	script	연구실 직원::Lab Staff#amano08	865,{
+	mes "[연구실 직원]";
+	mes "여기는 좋은데";
+	mes "보통 꽤 조용해요.";
+	mes "다음에 여기에 오고 싶어요";
+	mes "일하고, 한잔 마시고 그냥";
+	mes "바텐더와 채팅하세요.";
 	next;
-	mes "[Assam]";
-	mes "The rum here is incredibly";
-	mes "good too. It might even be";
-	mes "the best in the world. I dunno";
-	mes "why, but for some reason, its";
-	mes "taste reminds me of teamwork~";
+	mes "[연구실 직원]";
+	mes "여기 럼주는 정말 맛있어요";
+	mes "역시 좋아요. 그럴 수도 있어요";
+	mes "세계 최고. 모르겠어요";
+	mes "왜, 그런데 어떤 이유에서인지, 그건";
+	mes "맛을 보면 팀워크가 생각나네요~";
 	close;
 }
 
-lhz_in03,192,93,3	script	City Girl#amano05	862,{
-	mes "[Lanko]";
-	mes "Oh, I'm only here";
-	mes "working as a waitress";
-	mes "to help out my father.";
-	mes "This job is so tiring, but";
-	mes "it's nice to see people so";
-	mes "relaxed and having a good time.";
+lhz_in03,192,93,3	script	시민::City Girl#amano05	862,{
+	mes "[란코]";
+	mes "아, 나 여기밖에 없구나";
+	mes "웨이트리스로 일해요";
+	mes "아버지를 돕기 위해.";
+	mes "이 일은 너무 힘들지만";
+	mes "사람들이 이렇게 만나서 반가워요";
+	mes "편안하고 즐거운 시간 보내고 있어요.";
 	next;
-	mes "[Lanko]";
-	mes "When I get some time";
-	mes "off, I'm going to explore";
-	mes "Lighthalzen and see all that";
-	mes "there is to see. But for now,";
-	mes "it doesn't look like we've got";
-	mes "any real shortage of drunks...";
+	mes "[란코]";
+	mes "시간이 나면";
+	mes "꺼져, 탐험하러 갈게";
+	mes "Lighthalzen과 그 모든 것을 보세요";
+	mes "볼 게 있어요. 하지만 지금은,";
+	mes "아직 없는 것 같아요";
+	mes "술취한 사람이 정말 부족해요...";
 	close;
 }
 
-lhz_in03,189,87,5	script	Drunken Man#amano01	869,{
-	mes "[Enku]";
-	mes "*Sob* I just got";
-	mes "dumped! Yeah, I thought";
-	mes "we were gonna get married,";
-	mes "but obviously I was wrong!";
-	mes "Damn it Sheryline! I loved you!";
+lhz_in03,189,87,5	script	술 취한 남자::Drunken Man#amano01	869,{
+	mes "[술 취한 남자]";
+	mes "*흐뭇* 방금 받았어요";
+	mes "버려졌어! 응, 내 생각에는";
+	mes "우리 결혼할 예정이었는데,";
+	mes "하지만 확실히 내가 틀렸어!";
+	mes "젠장 셰릴린! 사랑했어!";
 	next;
-	mes "[Enku]";
-	mes "I usually don't care for";
-	mes "drinking, especially stuff";
-	mes "like gin or rum, but today,";
-	mes "this stuff tastes just like";
-	mes "my misery. This is all the";
-	mes "comfort I need, you hear?!";
+	mes "[술 취한 남자]";
+	mes "저는 보통 관심이 없어요";
+	mes "음주, 특히 그런 것";
+	mes "진이나 럼과 비슷하지만 오늘은,";
+	mes "이건 정말 맛이 비슷해요";
+	mes "나의 비참함. 이것이 전부다";
+	mes "나에겐 위로가 필요해, 알겠어?!";
 	close;
 }
 
-lhz_in03,183,82,7	script	Drunken Man#amano02	870,{
-	mes "[Linus]";
-	mes "After ten years";
-	mes "of marriage. My";
-	mes "wife divorced me...";
+lhz_in03,183,82,7	script	술 취한 남자::Drunken Man#amano02	870,{
+	mes "[술 취한 남자]";
+	mes "10년 후";
+	mes "결혼. 내";
+	mes "아내가 이혼했다...";
 	next;
-	mes "[Linus]";
-	mes "So I guess there's no";
-	mes "place for me but here for";
-	mes "now. I don't know what it is,";
-	mes "but the rum is really good";
-	mes "today. Like, it's the flavor";
-	mes "of relaxing, joyous relief~";
+	mes "[술 취한 남자]";
+	mes "그러니까 없는 것 같아요";
+	mes "나를 위한 장소지만 여기를 위한 장소";
+	mes "지금. 그게 뭔지 모르겠어요,";
+	mes "하지만 럼주는 정말 맛있어요";
+	mes "오늘. 맛이 좋으니까";
+	mes "편안하고 즐거운 안도감~";
 	close;
 }
 
-lhz_in03,180,83,6	script	Citizen#amano03	86,{
-	mes "[Mitchell]";
-	mes "You know, everyone";
-	mes "is different, but I think";
-	mes "humans are similar enough";
-	mes "that we can all meaningfully";
-	mes "connect on some level, right?";
+lhz_in03,180,83,6	script	시민::Citizen#amano03	86,{
+	mes "[시민]";
+	mes "여러분 아시죠?";
+	mes "다르긴 하지만 내 생각에는";
+	mes "인간은 충분히 비슷하다";
+	mes "우리 모두 의미있게 할 수 있다는 것";
+	mes "어떤 수준에서는 연결되겠죠?";
 	next;
-	mes "[Mitchell]";
-	mes "Sure, a rich person might";
-	mes "have different problems than";
-	mes "a poor person, but the point";
-	mes "is, they've both got problems!";
-	mes "Pain, pleasure, sadness, joy.";
-	mes "Those link us all together.";
+	mes "[시민]";
+	mes "물론, 부자라면 그럴 수도 있지";
+	mes "다른 문제가 있어요";
+	mes "가난한 사람이지만 요점은";
+	mes "둘 다 문제가 있는 것 같군요!";
+	mes "고통, 즐거움, 슬픔, 기쁨.";
+	mes "이것들은 우리 모두를 연결해줍니다.";
 	next;
-	mes "[Mitchell]";
-	mes "So try not to be picky";
-	mes "about who's your pal and";
-	mes "who's not. We all need";
-	mes "somebody to be with, right?";
+	mes "[시민]";
+	mes "그러니 까다롭게 굴지 마세요";
+	mes "당신의 친구가 누구인지 그리고";
+	mes "그렇지 않은 사람은 없습니다. 우리 모두는 필요합니다";
+	mes "같이 있을 사람 있지?";
 	close;
 }
 
-lhz_in03,176,85,5	script	Citizen#amano04	869,{
-	mes "[Dique]";
-	mes "One of the things I look";
-	mes "forward to during my day";
-	mes "is the drink I enjoy right";
-	mes "after work. It's the most";
-	mes "relaxing thing in the world.";
+lhz_in03,176,85,5	script	청년::Citizen#amano04	869,{
+	mes "[청년]";
+	mes "내가 보는 것 중 하나";
+	mes "하루 중으로 전달";
+	mes "내가 좋아하는 음료 맞나요?";
+	mes "퇴근 후. 가장 많이";
+	mes "세상에서 편안한 것.";
 	next;
-	mes "[Dique]";
-	mes "Of course, there's";
-	mes "more to life than just";
-	mes "hanging out in pubs and";
-	mes "bars. The thing is, in my";
-	mes "case, pubs and bars are";
-	mes "all I happen to need~";
+	mes "[청년]";
+	mes "물론이죠";
+	mes "단순한 것보다 삶에 더 많은 것";
+	mes "펍에서 놀고";
+	mes "바. 문제는 내 안에 있다";
+	mes "케이스, 술집, 바는";
+	mes "내가 필요한 건 다~";
 	close;
 }
 
-lhz_in03,184,38,3	script	Loudmouth	55,{
-	mes "[Loudmouth]";
-	mes "Do you know who I am?!";
-	mes "Just look at this peg leg.";
-	mes "I was in the Comodo War,";
-	mes "Ski Troop division! I lost my";
-	mes "leg to earn your freedom!";
+lhz_in03,184,38,3	script	허풍쟁이::Loudmouth	55,{
+	mes "[허풍쟁이]";
+	mes "내가 누군지 아세요?!";
+	mes "이 말뚝다리 좀 보세요.";
+	mes "나는 코모도 전쟁에 참여했습니다.";
+	mes "스키부대! 잃어버렸어요";
+	mes "자유를 얻기 위한 다리!";
 	next;
-	mes "[Loudmouth]";
-	mes "H-hey! What's that";
-	mes "look for? What, you";
-	mes "don't believe me?!";
+	mes "[허풍쟁이]";
+	mes "안녕! 그게 뭐야";
+	mes "찾아? 뭐야, 너";
+	mes "내 말을 못 믿으시나요?!";
 	close;
 }
 
-lhz_in01,173,28,4	script	Guard#01::LhzRekGuard	868,{
-	mes "[Guard]";
-	mes "This is a";
-	mes "restricted area.";
-	mes "Please keep clear";
-	mes "if you do not have";
-	mes "special authorization.";
-	mes "Thank you for your cooperating.";
+lhz_in01,173,28,4	script	안내원#01::LhzRekGuard	868,{
+	mes "[안내원]";
+	mes "이건";
+	mes "제한 구역.";
+	mes "깨끗하게 말씀해주세요";
+	mes "없으면";
+	mes "특별 승인.";
+	mes "협조해주셔서 감사합니다.";
 	close;
 }
 
-lhz_in01,180,28,4	duplicate(LhzRekGuard)	Guard#03	868
+lhz_in01,180,28,4	duplicate(LhzRekGuard)	안내원#03	868
 
-lhz_in01,72,209,5	script	Guide#lt0	862,{
-	mes "[Lasoei]";
-	mes "Oh phooey.";
-	mes "The same customers";
-	mes "are always coming in,";
-	mes "day after day. Can it";
-	mes "get any less exciting?";
+lhz_in01,72,209,5	script	안내원::Guide#lt0	862,{
+	mes "[안내원]";
+	mes "아, 이런.";
+	mes "동일한 고객";
+	mes "항상 들어오고 있어요";
+	mes "매일매일. 할 수 있어요";
+	mes "더 덜 흥미진진해지나요?";
 	next;
-	mes "[Lasoei]";
-	mes "Oh...!";
-	mes "W-welcome~";
-	mes "C-can I help you";
-	mes "with anything?";
+	mes "[안내원]";
+	mes "아...!";
+	mes "여-어서오세요~";
+	mes "C-도와드릴까요?";
+	mes "뭔가?";
 	close;
 }
 
-lhz_in01,72,195,0	script	Guide#lt1	90,{
-	mes "[Geonuii]";
-	mes "Greetings. This path";
-	mes "leads to the Library and";
-	mes "the Laboratory. Please be";
-	mes "aware that these places";
-	mes "are restricted from access";
-	mes "by the general public.";
+lhz_in01,72,195,0	script	안내원::Guide#lt1	90,{
+	mes "[안내원]";
+	mes "안녕하세요. 이 경로입니다";
+	mes "도서관으로 연결되고";
+	mes "실험실. 제발 있어주세요";
+	mes "이러한 장소를 인식하세요";
+	mes "접근이 제한되어 있습니다";
+	mes "일반 대중에 의해.";
 	close;
 }
 
-lhz_in01,73,188,0	script	Guide#lt2	862,{
-	mes "[Bonnie]";
-	mes "Oh no...";
-	mes "Where did I put it?";
+lhz_in01,73,188,0	script	안내원::Guide#lt2	862,{
+	mes "[안내원]";
+	mes "아, 안돼...";
+	mes "내가 그걸 어디에 뒀지?";
 	close;
 }
 
-lhz_in01,35,226,5	script	Rekenber Guard#li01	867,{
+lhz_in01,35,226,5	script	레켄베르 가드::Rekenber Guard#li01	867,{
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Rekenber Guard]";
-		mes "^3355FF(Whoa, it's a member";
-		mes "of the staff!)^000000 Good day!";
+		mes "[레켄베르 가드]";
+		mes "^3355FF(와, 여기 회원이시군요!)^000000 안녕하세요!";
 		close2;
 		warp "lhz_in01",37,225;
 		end;
 	}
-	mes "[Rekenber Guard]";
-	mes "This is a restricted";
-	mes "area! Please show";
-	mes "some ID immediately!";
+	mes "[레켄베르 가드]";
+	mes "제한된 곳입니다";
+	mes "지역! 보여주세요";
+	mes "즉시 아이디를 알려주세요!";
 	next;
-	if (select("ID?:Cancel") == 1) {
-		mes "[Rekenber Guard]";
-		mes "I don't know how you";
-		mes "adventurers do things in";
-		mes "Rune-Midgarts, but over here";
-		mes "we have laws about trespassing!";
+	if (select("ID?:취소") == 1) {
+		mes "[레켄베르 가드]";
+		mes "당신은 어떤지 모르겠어요";
+		mes "모험가는 일을 한다";
+		mes "Rune-Midgarts, 하지만 여기 있어요";
+		mes "무단침입에 관한 법률이 있습니다!";
 		close;
 	}
-	mes "[Rekenber Guard]";
-	mes "Unless you have special";
-	mes "authorization, nobody is";
-	mes "allowed into the Underground";
-	mes "Laboratory for security reasons.";
+	mes "[레켄베르 가드]";
+	mes "특별한 일이 없는 한";
+	mes "인증, 아무도 없습니다";
+	mes "지하로 들어가는 것이 허용되었습니다";
+	mes "보안상의 이유로 실험실입니다.";
 	close;
 }
 
-lhz_in01,23,132,3	script	Rekenber Guard#li02	867,5,5,{
+lhz_in01,23,132,3	script	레켄베르 가드::Rekenber Guard#li02	867,5,5,{
 OnTouch_:
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Rekenber Guard]";
-		mes "Keep your eyes open.";
-		mes "I've heard rumors that some";
-		mes "adventurers from Rune-Midgarts";
-		mes "are trying to sneak into here!";
-		mes "I know the security here is";
-		mes "pretty much fail sure, but...";
+		mes "[레켄베르 가드]";
+		mes "눈을 뜨세요.";
+		mes "어떤 사람들은 그런 소문을 들었어요";
+		mes "룬 미드가르트의 모험가들";
+		mes "여기로 몰래 들어가려고 해요!";
+		mes "여기 보안은 있는 줄 알아요";
+		mes "거의 실패할 것 같지만...";
 		close;
 	}
 	else {
-		mes "[Rekenber Guard]";
-		mes "This area is restricted";
-		mes "to the public! Who are you";
-		mes "and how did you get in here?!";
-		mes "Hey, I need backup right away!";
+		mes "[레켄베르 가드]";
+		mes "제한된 구역입니다";
+		mes "대중에게! 당신은 누구입니까?";
+		mes "여기 어떻게 들어왔어?!";
+		mes "야, 지금 당장 백업이 필요해!";
 		close2;
 		warp "lhz_in01",33,224;
 	}
 	end;
 }
 
-lhz_in01,217,121,3	script	Repairman#li_01	851,{
+lhz_in01,217,121,3	script	수리공::Repairman#li_01	851,{
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Repairman]";
-		mes "No wonder these things";
-		mes "break all the time! These";
-		mes "machines have been totally";
-		mes "abused! Ugh, there's no";
-		mes "appreciation for all of this";
-		mes "convenient technology...";
+		mes "[수리공]";
+		mes "이건 당연하지";
+		mes "항상 깨져라! 이것들아";
+		mes "완전히 기계가 되어버렸어요";
+		mes "학대당했어요! 아, 없어요";
+		mes "이 모든 것에 감사드립니다";
+		mes "편리한 기술...";
 		next;
-		mes "[Repairman]";
-		mes "Yeah, all of this lab";
-		mes "equipment is really sensitive,";
-		mes "not to mention expensive. If";
-		mes "you ever handle this stuff, you";
-		mes "need to be extra cautious.";
+		mes "[수리공]";
+		mes "그래, 이 연구실 전부야";
+		mes "장비가 정말 민감해요,";
+		mes "비싸다는 건 말할 것도 없고요. 만약에";
+		mes "당신은 이런 일을 해 본 적이 있군요, 당신";
+		mes "각별히 주의가 필요합니다.";
 		close;
 	}
 	else {
-		mes "[Repairman]";
+		mes "[수리공]";
 		mes "Hey, you don't work--";
 		mes "G-guards! Hurry! There's";
 		mes "somebody over here!";
@@ -1871,75 +1844,75 @@ lhz_in01,217,121,3	script	Repairman#li_01	851,{
 	}
 }
 
-lhz_in01,203,123,3	script	Scientist#li_02	750,{
+lhz_in01,203,123,3	script	과학자::Scientist#li_02	750,{
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Scientist]";
-		mes "Alright. Pull one test";
-		mes "tube out of the machine,";
-		mes "replace the other test";
-		mes "tube over here and then";
-		mes "clean the first test tube?";
+		mes "[과학자]";
+		mes "알았어. 한 번 테스트해봐";
+		mes "기계에서 튜브를 빼내세요,";
+		mes "다른 테스트를 대체하세요";
+		mes "이곳에 튜브를 연결한 다음";
+		mes "첫 번째 시험관을 청소하시겠습니까?";
 		next;
-		mes "[Scientist]";
-		mes "Or do I clean the test tube,";
-		mes "put it into the machine and";
-		mes "then replace the other one?";
-		mes "I'm so confused with this";
-		mes "procedure! If only I didn't";
-		mes "lose the instructions...";
+		mes "[과학자]";
+		mes "아니면 시험관을 청소할까요,";
+		mes "기계에 넣고";
+		mes "그럼 다른 것을 교체할까요?";
+		mes "이게 너무 헷갈려요";
+		mes "절차를 밟아요! 그러지 않았다면";
+		mes "지침을 잃어버렸어요...";
 		close;
 	}
-	mes "[Scientist]";
-	mes "Alright. Pull one test";
-	mes "tube out of the machine,";
-	mes "replace th--hey. You're";
-	mes "not Ralphie. Wait. Guaaards!";
-	mes "Help me, there's some weirdo!";
+	mes "[과학자]";
+	mes "알았어. 한 번 테스트해봐";
+	mes "기계에서 튜브를 빼내세요,";
+	mes "대체--안녕하세요. 당신은";
+	mes "랄피가 아닙니다. 잠깐만요. 굉장해요!";
+	mes "도와주세요, 이상한 사람이 있어요!";
 	emotion ET_SURPRISE;
 	close2;
 	warp "lhz_in01",33,224;
 	end;
 }
 
-lhz_in01,199,137,3	script	Scientist#li_03	865,{
+lhz_in01,199,137,3	script	과학자::Scientist#li_03	865,{
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Scientist]";
-		mes "Whoa whoa~!";
-		mes "Please! Don't";
-		mes "touch anything!";
-		mes "I'm dealing with highly";
-		mes "volatile chemicals here!";
+		mes "[과학자]";
+		mes "워워~!";
+		mes "제발! 그러지 마세요";
+		mes "무엇이든 만져보세요!";
+		mes "나는 매우 심각한 문제를 다루고 있다";
+		mes "여기에 휘발성 화학물질이 있어요!";
 		close;
 	}
-	mes "[Scientist]";
-	mes "Guards! Hurry,";
-	mes "there's someone";
-	mes "here, and I think";
-	mes "it's one of those crazy";
-	mes "stalkers! Why, why me?!";
+	mes "[과학자]";
+	mes "경비원 여러분, 서두르세요,";
+	mes "누군가 있어요";
+	mes "여기, 내 생각엔";
+	mes "그건 미친 짓 중 하나야";
+	mes "스토커들! 왜, 왜 나야?!";
 	emotion ET_SURPRISE;
 	close2;
 	warp "lhz_in01",33,224;
 	end;
 }
 
-lhz_in01,46,125,3	script	Rekenber Guard#li03	867,5,5,{
+lhz_in01,46,125,3	script	레켄베르 가드::Rekenber Guard#li03	867,5,5,{
 OnTouch_:
 	if (isequipped(2241) && isequipped(2243)) {
-		mes "[Rekenber Guard]";
+		mes "[레켄베르 가드]";
 		mes "......................";
 		next;
-		if (select("Nice day, huh?:Cancel") == 1) {
-			mes "[Rekenber Guard]";
+		if (select("좋은 하루지?:취소") == 1) {
+			mes "[레켄베르 가드]";
 			mes "...";
 			emotion ET_FRET;
 			close;
 		}
-		mes "[Rekenber Guard]";
+		mes "[레켄베르 가드]";
 		mes "...";
 		close;
 	}
-	mes "[Rekenber Guard]";
+	mes "[레켄베르 가드]";
 	mes "...!";
 	emotion ET_SURPRISE;
 	close2;
@@ -1947,795 +1920,791 @@ OnTouch_:
 	end;
 }
 
-lhz_in01,24,140,3	script	Regenschirm Guard#40	4_M_LGTGUARD,{
-	mes "[Regenschirm Guard]";
+lhz_in01,24,140,3	script	레켄베르 가드::Regenschirm Guard#40	4_M_LGTGUARD,{
+	mes "[레켄베르 가드]";
 	if ((MISC_QUEST&512) && countitem(2657) > 0) {// Lab_Passport
-		mes "Do you wish to";
-		mes "go underground?";
+		mes "원하시나요";
+		mes "지하로 가볼까?";
 		next;
 		if (select("Yes","No") == 1) {
-			mes "[Regenschirm Guard]";
-			mes "Thank you and";
-			mes "have a nice day.";
+			mes "[레켄베르 가드]";
+			mes "고마워요 그리고";
+			mes "좋은 하루 보내세요.";
 			close2;
 			warp "lhz_dun01",149,285;
 			end;
 		}
-		mes "[Regenschirm Guard]";
-		mes "Thank you and";
-		mes "have a nice day.";
+		mes "[레켄베르 가드]";
+		mes "고마워요 그리고";
+		mes "좋은 하루 보내세요.";
 		close;
 	}
-	mes "May I help you?";
-	mes "If you would like to";
-	mes "enter, you must first";
-	mes "have a Laboratory Permit.";
-	mes "Thank you for your cooperation.";
+	mes "도와드릴까요?";
+	mes "원하신다면";
+	mes "들어가세요. 먼저 들어가세요";
+	mes "실험실 허가가 있습니다.";
+	mes "협조해주셔서 감사합니다.";
 	close;
 }
 
 
 // Lighthalzen Bank Area ------------------------------------------------------
 
-lhz_in02,34,41,1	script	Arthur#zen16	849,{
-	mes "[Arthur]";
-	mes "The chairs here are";
-	mes "so not ergonomic. And";
-	mes "they're uncomfortable too!";
-	mes "But it's sooo cool inside this";
-	mes "bank and I just wanted to get";
-	mes "get away from all this heat...";
+lhz_in02,34,41,1	script	청년::Arthur#zen16	849,{
+	mes "[청년]";
+	mes "여기 의자가 있어요";
+	mes "인체공학적이지 않아요. 그리고";
+	mes "그들도 불편해요!";
+	mes "근데 안에는 정말 멋있어";
+	mes "은행에 들어가고 싶었어요";
+	mes "더위에서 벗어나세요...";
 	close;
 }
 
-lhz_in02,28,39,3	script	Helen#zen6	703,{
-	mes "[Helen]";
-	mes "You know, maybe when";
-	mes "I grow up, I'll be a bank";
-	mes "clerk. That sounds like a";
-	mes "really nice job, don't you";
-	mes "think? It's laid back and posh...";
+lhz_in02,28,39,3	script	소녀::Helen#zen6	703,{
+	mes "[소녀]";
+	mes "아마도 언제인지 알죠";
+	mes "나는 자라서 은행이 될 거야";
+	mes "직원. 그거 같군요";
+	mes "정말 잘했어요, 그렇죠?";
+	mes "생각하세요? 여유롭고 고급스러워요...";
 	close;
 }
 
-lhz_in02,31,34,3	script	Tadem#zen6	847,{
-	mes "[Tadem]";
-	mes "I do so enjoy the";
-	mes "architectural structure";
-	mes "of this bank. It's quite";
-	mes "artistic with both classical";
-	mes "and modern elements. Would";
-	mes "you not agree? Fascinating...";
+lhz_in02,31,34,3	script	할아버지::Tadem#zen6	847,{
+	mes "[할아버지]";
+	mes "정말 즐거웠어요";
+	mes "건축 구조";
+	mes "이 은행의. 꽤 괜찮아요";
+	mes "클래식과 예술성을 겸비한";
+	mes "그리고 현대적인 요소도 있습니다.";
+	mes "동의하지 않나요? 정말 흥미롭네요...";
 	close;
 }
 
-lhz_in02,31,33,3	script	Gracie#5	863,{
-	mes "[Gracie]";
-	mes "Oh, it's so comfortable";
-	mes "in here~ Though, why are";
-	mes "we inside the bank when";
-	mes "the bank services aren't even";
-	mes "working? Yes, we're standing,";
-	mes "but we're doing it in comfort.";
+lhz_in02,31,33,3	script	할머니::Gracie#5	863,{
+	mes "[할머니]";
+	mes "아, 정말 편해요";
+	mes "여기에~ 근데 왜 있지";
+	mes "우리는 은행 안에 있을 때";
+	mes "은행 서비스가 형편없어요";
+	mes "일해요? 네, 서 있어요,";
+	mes "하지만 우리는 편안하게 하고 있어요.";
 	next;
-	mes "[Gracie]";
-	mes "In fact, it's so";
-	mes "comfortable here,";
-	mes "I think I'll refuse to leave.";
-	mes "Though, I'm willing to change";
-	mes "my mind if you can find a place";
-	mes "that's even more comfortable.";
+	mes "[할머니]";
+	mes "사실 그렇죠! 여기는 편해요";
+	mes "나는 떠나기를 거부할 것 같아요.";
+	mes "그래도 난 변할 의향이 있어";
+	mes "당신이 장소를 찾을 수 있다면 제 생각입니다";
+	mes "그게 훨씬 편해요.";
 	close;
 }
 
-lhz_in02,21,38,7	script	Bank Clerk#1::BankClerk	86,{
-	mes "[Bank Clerk]";
-	mes "Due to some critical system";
-	mes "errors, all of the bank services";
-	mes "have been temporarily stopped.";
-	mes "We apologize for any inconvenience and appreciate your understanding.";
+lhz_in02,21,38,7	script	은행 직원#1::BankClerk	86,{
+	mes "[은행 직원]";
+	mes "어떤 중요한 시스템 때문에";
+	mes "오류, 모든 은행 서비스";
+	mes "일시적으로 중단되었습니다.";
+	mes "불편을 끼쳐드려 죄송하며, 이해해 주셔서 감사합니다.";
 	close;
 }
 
-lhz_in02,21,25,7	duplicate(BankClerk)	Bank Clerk#2	86
-lhz_in02,34,22,1	duplicate(BankClerk)	Bank Clerk#3	755
+lhz_in02,21,25,7	duplicate(BankClerk)	은행 직원#2	86
+lhz_in02,34,22,1	duplicate(BankClerk)	은행 직원#3	755
 
 // Lighthalzen Prison Area -------------------------------------------------------------
 
-lhz_in02,145,177,0	script	Togii#07	849,{
-	mes "[Togii]";
-	mes "Oooh yeah...";
-	mes "Goes down smooth.";
-	mes "Morocc whiskey's the best!";
-	mes "^333333*Hiccup*^000000 Whoa, this stuff";
-	mes "really works fast! Heh heh~";
+lhz_in02,145,177,0	script	취한 아저씨::Togii#07	849,{
+	mes "[취한 아저씨]";
+	mes "아아아아아...";
+	mes "부드럽게 내려갑니다.";
+	mes "모로크 위스키가 최고예요!";
+	mes "^333333*딸꾹질*^000000 와, 이거구나";
+	mes "정말 빠르네요! 헤헤~";
 	close;
 }
 
-lhz_in02,159,198,7	script	Healthy Looking Guy#hol	85,{
-	mes "[Healthy Looking Guy]";
-	mes "Grrrrrr! Leave me alone!";
-	mes "How many times do I have";
-	mes "to keep telling you? I've never";
-	mes "hoarded item upgrade materials!";
-	mes "I swear that I'm innocent!";
+lhz_in02,159,198,7	script	건장해 보이는 남자::Healthy Looking Guy#hol	85,{
+	mes "[건장해 보이는 남자]";
+	mes "으르르르르르르! 날 내버려둬!";
+	mes "몇 번이나 남았나요?";
+	mes "계속 말하려고요? 난 한 번도 그런 적 없어요";
+	mes "비축된 아이템 업그레이드 재료!";
+	mes "나는 결백하다고 맹세합니다!";
 	close;
 }
 
-lhz_in02,157,201,6	script	Hinkley#06	870,{
-	mes "[Hinkley]";
-	mes "Meh heh heh...";
-	mes "^333333*Hiccup*^000000 Believe";
-	mes "it or notsh, I'm...";
-	mes "walkin on a... Air...";
-	mes "Nevah thought I could";
-	mes "b-be sho freee-eeee-eee~";
+lhz_in02,157,201,6	script	취한 아저씨::Hinkley#06	870,{
+	mes "[취한 아저씨]";
+	mes "으헤헤헤...";
+	mes "^333333*딸꾹질*^000000 믿으세요";
+	mes "그것이건 아니건, 나는...";
+	mes "공중 위를 걷는다...";
+	mes "네바는 할 수 있다고 생각했어요";
+	mes "비비 쇼 프리에에에에에에~";
 	next;
-	mes "^3355FFThis guy";
-	mes "is completely";
-	mes "hammered out";
-	mes "of his mind!^000000";
+	mes "^3355FF이 사람";
+	mes "완전히";
+	mes "망쳐졌다";
+	mes "그의 마음이요!^000000";
 	close;
 }
 
-lhz_in02,153,206,4	script	Millette#05	853,{
-	mes "[Millette]";
-	mes "Let me go!";
-	mes "Let me GO!!";
-	mes "LET ME GO!!!";
-	mes "I didn't do nuthin'";
-	mes "wrong! I'm innocent!";
-	mes "^333333*Hic-Hic-Hiccup...*^000000";
+lhz_in02,153,206,4	script	취한 아저씨::Millette#05	853,{
+	mes "[취한 아저씨]";
+	mes "가자!";
+	mes "가자!!";
+	mes "가자!!!";
+	mes "나는 아무 짓도 안 했어";
+	mes "틀렸어! 난 결백해!";
+	mes "^333333*딸꾹-딸꾹...*^000000";
 	next;
-	mes "[Millette]";
-	mes "What's wrong with";
-	mes "drinking and singing";
-	mes "in the street, huh?";
-	mes "Is it a crime to have";
-	mes "a beautiful tenor voice?!";
-	mes "Get me outta this joint!";
+	mes "[취한 아저씨]";
+	mes "무슨 일이야";
+	mes "마시고 노래부르기";
+	mes "길거리에서요?";
+	mes "가지고 있는 게 범죄인가요?";
+	mes "아름다운 테너 목소리?!";
+	mes "이 조인트에서 나가게 해주세요!";
 	close;
 }
 
-lhz_in02,147,222,3	script	Officer Guo#06::off_guo	85,{
-	mes "[Officer Guo]";
-	mes "Tell me...!";
-	mes "TELL ME...!!";
-	mes "Admit you did it!!";
+lhz_in02,147,221,3	script	형사#06::off_guo	85,{
+	mes "[형사]";
+	mes "말해봐...!";
+	mes "말해봐...!!";
+	mes "네가 그랬다는 걸 인정해!!";
 	next;
-	mes "[Suspect]";
-	mes "Damn it!";
-	mes "I keep telling";
-	mes "you I'm not guilty!";
+	mes "[용의자]";
+	mes "젠장!";
+	mes "계속 말해요";
+	mes "너는 무죄야!";
 	next;
-	mes "[Officer Guo]";
-	mes "^333333*Sigh...*^000000";
+	mes "[형사]";
+	mes "^333333*한숨...*^000000";
 	next;
-	mes "[Suspect]";
-	mes "You're wasting your";
-	mes "time. Just let me go.";
+	mes "[용의자]";
+	mes "당신은 시간을 낭비하고 있어요";
+	mes "시간이 됐어. 그냥 놔줘.";
 	next;
-	mes "[Officer Guo]";
-	mes "So...";
-	mes "How's your mother?";
+	mes "[형사]";
+	mes "그럼...";
+	mes "엄마는 잘 지내세요?";
 	next;
-	mes "[Suspect]";
-	mes "That's none of";
-	mes "your business!";
-	mes "She's fine, I guess.";
+	mes "[용의자]";
+	mes "그건 전혀 아니야";
+	mes "당신의 사업입니다!";
+	mes "괜찮을 것 같아요.";
 	next;
-	mes "[Officer Guo]";
-	mes "When was the last";
-	mes "time you've seen her?";
+	mes "[형사]";
+	mes "마지막은 언제였지";
+	mes "그 사람 본 적 있어?";
 	next;
-	mes "[Suspect]";
-	mes "I just told you,";
-	mes "that's none of";
-	mes "your business...!";
+	mes "[용의자]";
+	mes "방금 말했잖아";
+	mes "그건 전혀 아니야";
+	mes "당신의 사업은...!";
 	next;
-	mes "[Officer Guo]";
-	mes "You know, mothers";
-	mes "throughout the animal";
-	mes "kingdom instinctively";
-	mes "care for their young.";
-	mes "Humans are no exception.";
-	mes "Yours must be worried to death.";
+	mes "[형사]";
+	mes "엄마들 아시죠?";
+	mes "동물 전체에 걸쳐";
+	mes "본능적으로 왕국";
+	mes "그들의 새끼를 돌보세요.";
+	mes "인간도 예외는 아니다.";
+	mes "너는 정말 걱정이 많아 죽겠구나.";
 	next;
-	mes "[Suspect]";
+	mes "[용의자]";
 	mes "...";
-	mes "Man...";
-	mes "You're starting";
-	mes "to weird me out.";
+	mes "남자...";
+	mes "시작합니다";
+	mes "날 이상하게 만들려고.";
 	next;
-	mes "[Officer Guo]";
-	mes "Funny thing about humans,";
-	mes "though. It seems to be their";
-	mes "nature to lie, even when they";
-	mes "know they'll be caught. But";
-	mes "like all animals, they";
-	mes "instinctively fear pain...";
+	mes "[형사]";
+	mes "인간의 재미있는 점,";
+	mes "그래도. 그들의 것인 것 같아";
+	mes "그들이 있을 때에도 거짓말을 하는 본성";
+	mes "그들이 잡힐 걸 알지만. 하지만";
+	mes "모든 동물처럼 그들도";
+	mes "본능적으로 고통을 두려워한다...";
 	next;
-	mes "[Suspect]";
-	mes "N-no, no...";
-	mes "You gotta be...";
-	mes "You're bluffing.";
-	mes "Right?";
+	mes "[용의자]";
+	mes "아니, 아니, 아니...";
+	mes "너는...";
+	mes "너 허세 부리는구나.";
+	mes "맞지?";
 	next;
-	mes "[Officer Guo]";
-	mes "NO.";
-	mes "You're bluffing.";
-	mes "Tell me...!";
-	mes "TELL ME...!!";
-	mes "Admit you did it!!";
+	mes "[형사]";
+	mes "아니요.";
+	mes "너 허세 부리는구나.";
+	mes "말해봐...!";
+	mes "말해봐...!!";
+	mes "네가 그랬다는 걸 인정해!!";
 	close;
 }
 
-lhz_in02,142,222,6	duplicate(off_guo)	Suspect#6	870
+lhz_in02,142,222,6	duplicate(off_guo)	용의자::Suspect#6	870
 
-lhz_in01,14,28,3	script	Banquet Staff	109,{
-	mes "[Banquet Staff]";
-	mes "This Banquet Hall is used";
-	mes "to hold events such as dinner";
-	mes "parties with partners, clients";
-	mes "and other associates, and press";
-	mes "conferences. Of course, there's";
-	mes "nothing going on right now.";
+lhz_in01,14,28,3	script	파티장 스태프::Banquet Staff	109,{
+	mes "[파티장 스태프]";
+	mes "이 연회장은 사용됩니다";
+	mes "저녁 같은 행사를 열다";
+	mes "파트너, 고객과의 파티";
+	mes "및 기타 동료 및 언론";
+	mes "회의. 물론이죠";
+	mes "지금은 아무 일도 일어나지 않습니다.";
 	next;
-	mes "[Banquet Staff]";
-	mes "Sometimes peace and quiet";
-	mes "is a welcome change of pace,";
-	mes "but right now I'm feeling quite";
-	mes "bored. I think I would rather";
-	mes "be busy than twiddling my";
-	mes "thumbs, to tell the truth.";
+	mes "[파티장 스태프]";
+	mes "가끔은 평화롭고 조용해요";
+	mes "환영할 만한 변화입니다.";
+	mes "하지만 지금은 기분이 꽤 괜찮아요";
+	mes "지루해요. 차라리 그럴 것 같아요";
+	mes "나를 만지작거리는 것보다 바쁘다";
+	mes "엄지손가락을 치세요. 진실을 말해주세요.";
 	close;
 }
 
-lhz_in01,43,52,3	script	Luccet#li_party	703,{
-	mes "[Luccet]";
-	mes "Shhhh! Hey, my brother's";
-	mes "''it,'' so I gotta find a place";
-	mes "to hide! Wait, would you just";
-	mes "stand really still? I could";
-	mes "just hide behind you! No?";
-	mes "Nuts! Olly olly oxen free!";
+lhz_in01,43,52,3	script	루세::Luccet#li_party	703,{
+	mes "[루세]";
+	mes "쉿! 안녕, 내 동생꺼야";
+	mes "''그것'' 그래서 장소를 찾아야 해요";
+	mes "숨으러! 잠깐만요, 그냥";
+	mes "정말 가만히 서 있다고요? 할 수 있어요";
+	mes "그냥 뒤에 숨어요! 안 돼요?";
+	mes "견과류! 올리올리 황소는 공짜!";
 	close;
 }
 
-lhz_in01,28,33,7	script	Hanccet#li_party	706,{
-	mes "[Hanccet]";
-	mes "Man... I hate being ''it!''";
-	mes "I'm horrible at this game!";
-	mes "Alright, okay, if I were my";
-	mes "sister Luccet, where would";
-	mes "I think I would not look for";
-	mes "me? Of course...! The sewers!";
+lhz_in01,28,33,7	script	한세::Hanccet#li_party	706,{
+	mes "[한세]";
+	mes "아... 난 '그''가 되는 게 싫어!";
+	mes "나는 이 게임을 정말 못한다!";
+	mes "알았어, 알았어, 내가 나였다면";
+	mes "루셋 자매님, 어디 계시겠어요?";
+	mes "나는 찾지 않을 것 같아요";
+	mes "나? 물론이지...! 하수구!";
 	close;
 }
 
-lhz_in01,21,50,7	script	Annette#li_party	91,{
-	mes "[Annette]";
-	mes "I've heard that the";
-	mes "Rekenber Banquet Hall";
-	mes "is also used to hold weddings.";
-	mes "That must be so wonderful~";
+lhz_in01,21,50,7	script	아네트::Annette#li_party	91,{
+	mes "[아네트]";
+	mes "그렇다고 들었습니다";
+	mes "레켄버 연회장";
+	mes "결혼식에도 사용됩니다.";
+	mes "정말 멋지겠다~";
 	next;
-	mes "[Annette]";
-	mes "Even if it is more expensive,";
-	mes "I'd want to have my wedding";
-	mes "here. Marriage is only once";
-	mes "in a lifetime, ideally, so I'd";
-	mes "want to make mine the most";
-	mes "memorable experience.";
+	mes "[아네트]";
+	mes "비록 비싸더라도";
+	mes "결혼하고 싶어요";
+	mes "여기요. 결혼은 한 번뿐이에요";
+	mes "평생 동안, 이상적으로는 그렇게 할 것입니다";
+	mes "내 것을 가장 만들고 싶어";
+	mes "기억에 남는 경험.";
 	close;
 }
 
-lhz_in01,129,54,1	script	Mereth#erem	869,{
-	mes "^3355FF*Shhhhhhzzzz*";
-	mes "*Shhhhhhzzzz*^000000";
+lhz_in01,129,54,1	script	메레스::Mereth#erem	869,{
+	mes "^3355FF*쉿hhhhzzzz*";
+	mes "*쉬이이이이이이*^000000";
 	next;
-	mes "[Mereth]";
-	mes "Shhhhh....";
-	mes "Aaaaaaaahhh...";
+	mes "[메레스]";
+	mes "쉿....";
+	mes "아아아아아아...";
 	next;
-	mes "^3355FFThe employee turned his";
-	mes "head and peered into your";
-	mes "eyes through the black mask";
-	mes "on his face. Mereth stared";
-	mes "wordlessly for a moment and";
-	mes "then began to dance a lively,";
-	mes "creepily jovial jig.^000000";
+	mes "^3355FF직원이 변했습니다";
+	mes "머리를 숙이고 당신을 들여다보았습니다";
+	mes "검은 마스크 너머의 눈";
+	mes "그의 얼굴에. 메레스는 쳐다 보았다";
+	mes "잠시 말없이 그리고";
+	mes "그런 다음 활기차게 춤을 추기 시작했습니다.";
+	mes "소름끼칠 정도로 유쾌한 지그.^000000";
 	close;
 }
 
 lhz_in01,108,53,3	script	#horri	111,{
-	mes "^3355FFThis is simply a pile";
-	mes "of files, a smattering of";
-	mes "books and a family portrait.^000000";
+	mes "^3355FF이것은 단순한 더미입니다";
+	mes "파일 중, 아주 조금";
+	mes "책과 가족사진.^000000";
 	close;
 }
 
 lhz_in01,108,47,3	script	#never	111,{
-	mes "^3355FFThis desk is very";
-	mes "neat and well organized";
-	mes "in comparison to the other";
-	mes "desks you've seen in your";
-	mes "time. You take a moment to";
-	mes "fully marvel at its tidiness.^000000";
+	mes "^3355FF이 책상은 정말 좋아요";
+	mes "깔끔하고 잘 정리되어 있어요";
+	mes "다른 것과 비교하여";
+	mes "당신이 본 적이 있는 책상";
+	mes "시간. 잠시 시간을 내어";
+	mes "깔끔함에 감탄이 절로 나옵니다.^000000";
 	close;
 }
 
 lhz_in01,166,55,3	script	#crazy4u	111,{
-	mes "^3355FFThis desk has a bookshelf";
-	mes "that is crammed with all sorts";
-	mes "of books. Out of curiosity, you";
-	mes "decide to pick one out.^000000";
+	mes "^3355FF이 책상에는 책장이 있습니다";
+	mes "그건 온갖 종류의 것들로 가득 차 있어요";
+	mes "책. 호기심 때문에, 당신";
+	mes "둘 중 하나를 선택하기로 결정하세요.^000000";
 	next;
-	mes "^3355FFHowever, the book you";
-	mes "happen to touch contains";
-	mes "an amazing amount of dark";
-	mes "power, causing you to drop it.^000000";
+	mes "^3355FF하지만 책은 너야";
+	mes "만졌을 때 포함된 내용";
+	mes "엄청나게 많은 양의 어둠";
+	mes "힘이 있어서 떨어뜨리게 됩니다.^000000";
 	specialeffect EF_CURSEATTACK;
 	close;
 }
 
-lhz_in01,148,45,3	script	Noama#amano	97,{
-	mes "[Noama]";
-	mes "Hee hee~!";
-	mes "You wanna hear";
-	mes "something funny?";
-	mes "I heard there's a bar in";
-	mes "Prontera where this guy";
-	mes "sneaks singles into Jawa--";
+lhz_in01,148,45,3	script	노아마::Noama#amano	97,{
+	mes "[노아마]";
+	mes "히히~!";
+	mes "듣고 싶어";
+	mes "뭔가 재미있는 일이라도 있어?";
+	mes "바가 있다고 들었는데";
+	mes "이 사람은 프론테라에 있어요";
+	mes "자와에 싱글들을 몰래 넣다--";
 	next;
-	mes "[Mazwon]";
-	mes "Noama...!";
-	mes "These machines are";
-	mes "acting up again! Get";
-	mes "over here right now!";
+	mes "[마스완]";
+	mes "노아마...!";
+	mes "이 기계는";
+	mes "다시 행동해! Get";
+	mes "지금 바로 여기 있어요!";
 	next;
-	mes "[Noama]";
-	mes "What?!";
-	mes "Stop bugging me,";
-	mes "I didn't do anything!";
+	mes "[노아마]";
+	mes "뭐라고?!";
+	mes "그만 괴롭히세요";
+	mes "난 아무 짓도 안 했어!";
 	close;
 }
 
-lhz_in01,147,40,1	script	Mazwon#minus1	828,{
-	mes "[Mazwon]";
-	mes "Crap. Crap! Crap";
-	mes "crap crap crap crap!";
-	mes "These desk machines aren't";
-	mes "supposed to work like this!";
+lhz_in01,147,40,1	script	마스완::Mazwon#minus1	828,{
+	mes "[마스완]";
+	mes "젠장. 젠장! 젠장";
+	mes "젠장 젠장 젠장!";
+	mes "이 책상 기계는 그렇지 않아요";
+	mes "이렇게 작동할 줄이야!";
 	next;
-	mes "[Mazwon]";
-	mes "Noama...!";
-	mes "These machines are";
-	mes "acting up again! Get";
-	mes "over here right now!";
+	mes "[마스완]";
+	mes "노아마...!";
+	mes "이 기계는";
+	mes "다시 행동해! Get";
+	mes "지금 바로 여기 있어요!";
 	next;
-	mes "[Noama]";
-	mes "What?!";
-	mes "Stop bugging me,";
-	mes "I didn't do anything!";
+	mes "[노아마]";
+	mes "뭐라고?!";
+	mes "그만 괴롭히세요";
+	mes "난 아무 짓도 안 했어!";
 	close;
 }
 
-lhz_in01,157,47,1	script	Mareth#seram	797,{
-	mes "[Mareth]";
-	mes "Yoo hoo hoo~";
-	mes "Oh, how I love";
-	mes "love love chocolate!";
+lhz_in01,157,47,1	script	마레스::Mareth#seram	797,{
+	mes "[마레스]";
+	mes "유후후~";
+	mes "오, 내가 얼마나 사랑하는지";
+	mes "초콜렛 사랑해요!";
 	emotion ET_THROB;
 	next;
-	mes "[Mareth]";
-	mes "Eat it up...";
-	mes "Or just melt it.";
-	mes "Slather it all over me.";
-	mes "Booyah. New life aspiration.";
+	mes "[마레스]";
+	mes "먹어보세요...";
+	mes "아니면 그냥 녹여도 돼요.";
+	mes "내 몸 전체를 다 덮으세요.";
+	mes "부야. 새로운 삶에 대한 열망.";
 	close;
 }
 
-lhz_in01,164,45,3	script	Eiya#iaiai	91,{
-	mes "[Eiya]";
-	mes "Jorje seems so cranky";
-	mes "recently. He's usually";
-	mes "more laid back than this.";
-	mes "Oh well, I hope that he";
-	mes "feels better.";
+lhz_in01,164,45,3	script	에이아::Eiya#iaiai	91,{
+	mes "[에이아]";
+	mes "조제는 정말 짜증나는 것 같아요";
+	mes "최근에. 그는 보통";
+	mes "이것보다 더 여유롭네요.";
+	mes "아 글쎄요, 그 사람이 그러길 바라요";
+	mes "기분이 좋아졌어요.";
 	next;
-	mes "[Eiya]";
-	mes "Ooh, would you like";
-	mes "to look at my miniature";
-	mes "doll collection? I love";
-	mes "collecting cute dolls!";
+	mes "[에이아]";
+	mes "오, 원하시나요";
+	mes "내 미니어처를 보려고";
+	mes "인형 컬렉션? 사랑해요";
+	mes "귀여운 인형 모으기!";
 	close;
 }
 
-lhz_in01,135,57,3	script	Blackboard#li	111,{
-	mes "^3355FFYou found a blackboard";
-	mes "filled with scribbling. You";
-	mes "can only read some of the";
-	mes "messages that have been";
-	mes "quickly scrawled on it.^000000";
+lhz_in01,135,57,3	script	칠판::Blackboard#li	111,{
+	mes "^3355FF칠판을 찾았습니다";
+	mes "낙서로 가득 차 있어요. 당신";
+	mes "일부만 읽을 수 있습니다";
+	mes "지금까지의 메시지들";
+	mes "빨리 휘갈겨 썼습니다.^000000";
 	next;
-	mes "''Make sure everything";
-	mes "is complete by XX 00.''";
-	mes "- Jorje";
+	mes "''모든 것을 확인하세요";
+	mes "XX 00까지 완료되었습니다.''";
+	mes "- 조르제";
 	next;
-	mes "Late Fee: 59, 990 zeny";
+	mes "연체료: 59,990제니";
 	next;
-	mes "''I want to have''";
-	mes "- Ellette";
-	mes "''I want $$$ too!''";
-	mes "- Enoz";
-	mes "''How about @@@?''";
-	mes "- Ellette";
+	mes "''가지고 싶어요''";
+	mes "-엘레트";
+	mes "''저도 $$$을 원해요!''";
+	mes "-에노즈";
+	mes "''@@@은 어때요?''";
+	mes "-엘레트";
 	next;
-	mes "''I wanna buy [#@$].''";
-	mes "- Ninjose";
-	mes "''Go buy it!''";
-	mes "- Senyu";
-	mes "''Working hard and buying hard";
-	mes "is the best employee attitude.''";
-	mes "- Mazwon";
+	mes "''나는 사고 싶다[#@$].''";
+	mes "-닌죠세";
+	mes "''가서 사세요!''";
+	mes "-센유";
+	mes "''열심히 일하고 열심히 사세요";
+	mes "최고의 직원 태도입니다.''";
+	mes "-마즈원";
 	close;
 }
 
-lhz_in03,100,18,3	script	Rocky#li_house	81,{
+lhz_in03,100,18,3	script	개::Rocky#li_house	81,{
 	if (rand(1,2) == 1) {
-		mes "[Rocky]";
-		mes "Woof woof!";
+		mes "[개]";
+		mes "으으으으으으으!";
 		close;
 	}
-	mes "[Rocky]";
-	mes "Grrrrrrr...";
+	mes "[개]";
+	mes "으르르르르르르르...";
 	close;
 }
 
-lhz_in03,130,41,5	script	Jay#li_house	706,{
-	mes "[Jay]";
-	mes "My mommy and daddy";
-	mes "always come home late.";
-	mes "So I eat dinner alone.";
-	mes "All by myself. Everyday.";
+lhz_in03,130,41,5	script	남자 아이::Jay#li_house	706,{
+	mes "[남자 아이]";
+	mes "엄마 아빠";
+	mes "항상 집에 늦게 와요.";
+	mes "그래서 저녁은 혼자 먹습니다.";
+	mes "혼자서 매일.";
 	next;
-	mes "[Jay]";
-	mes "Food doesn't taste as";
-	mes "good when you're not";
-	mes "eating with anybody.";
-	mes "Maybe I'm just lonely.";
+	mes "[남자 아이]";
+	mes "음식 맛이 전혀 없어요";
+	mes "당신이 그렇지 않을 때 좋아요";
+	mes "누구랑 같이 먹어요.";
+	mes "아마도 외로울지도 몰라.";
 	close;
 }
 
-lhz_in03,129,22,7	script	Housemaid Jane#li_house1	850,{
-	mes "[Housemaid Jane]";
-	mes "This house is enormous...";
-	mes "It's clearly much too big";
-	mes "for a regularly sized family.";
-	mes "And it takes me forever to";
-	mes "make sure that it stays clean!";
+lhz_in03,129,22,7	script	가정부::Housemaid Jane#li_house1	850,{
+	mes "[가정부]";
+	mes "이 집은 엄청나네요...";
+	mes "확실히 너무 크네요";
+	mes "정규적인 규모의 가족을 위한 것입니다.";
+	mes "그리고 시간이 너무 오래 걸려요";
+	mes "깨끗한지 확인하세요!";
 	next;
-	mes "[Housemaid Jane]";
-	mes "It's not easy keeping";
-	mes "things neat and tidy when";
-	mes "you're responsible for acres";
-	mes "of indoor living space. Being";
-	mes "a maid can be pretty hard...";
+	mes "[가정부]";
+	mes "관리가 쉽지 않네요";
+	mes "일은 깔끔하고 깔끔할 때";
+	mes "당신은 에이커에 대한 책임이 있습니다";
+	mes "실내생활공간. 존재";
+	mes "하녀는 꽤 힘들 수도 있어...";
 	close;
 }
 
-lhz_in03,124,117,1	script	Housemaid Brenda#li	74,{
-	mes "[Housemaid Brenda]";
-	mes "I better dust extra";
-	mes "gently around this vase.";
-	mes "It's worth ten million zeny";
-	mes "and if it were to-- No. No!";
-	mes "I'm not even going to think it!";
+lhz_in03,124,117,1	script	가정부::Housemaid Brenda#li	74,{
+	mes "[가정부]";
+	mes "먼지를 좀 더 털어내는 게 좋을 것 같아요";
+	mes "이 꽃병 주위를 살짝 둘러보세요.";
+	mes "천만 제니의 가치가 있어요";
+	mes "그리고 만약 그렇다면-- 안돼. 안돼!";
+	mes "생각도 못 할 것 같아요!";
 	close;
 }
 
-lighthalzen,159,222,1	script	Rekenber Employee#li	109,{
-	mes "[Benatuth]";
-	mes "Down there, the repairman";
-	mes "is just finishing maintenance";
-	mes "on our chairman's private";
-	mes "Airship. Can you imagine";
-	mes "having one of those of your";
-	mes "very own to fly around in?";
+lighthalzen,159,222,1	script	레켄베르 직원::Rekenber Employee#li	109,{
+	mes "[레켄베르 직원]";
+	mes "저기 수리공이요";
+	mes "점검을 막 마친 상태입니다";
+	mes "우리 회장님 비공개로";
+	mes "비행선. 상상할 수 있나요?";
+	mes "당신의 것 중 하나를 가지고 있어요";
+	mes "날아다니기에 아주 고유한 것인가요?";
 	next;
-	mes "[Benatuth]";
-	mes "Yeah, the chairman of";
-	mes "the Rekenber Corporation...";
-	mes "He's a really powerful person.";
-	mes "It's almost scary what he can";
-	mes "do with his money, you know?";
+	mes "[레켄베르 직원]";
+	mes "네, 회장님";
+	mes "레켄베르 법인...";
+	mes "그 사람 정말 대단한 사람이에요.";
+	mes "그가 할 수 있는 일은 거의 무섭습니다";
+	mes "그 사람 돈 관리하는 거 알지?";
 	close;
 }
 
-lighthalzen,162,304,7	script	Rekenber Guard Drew#li	868,{
-	mes "[Rekenber Guard Drew]";
-	mes "Dude, check it out~";
-	mes "Official glossy photos";
-	mes "of the Kafra Ladies. Now...";
-	mes "With 20% more garter belts!";
+lighthalzen,162,304,7	script	레켄베르 가드::Rekenber Guard Drew#li	868,{
+	mes "[레켄베르 가드]";
+	mes "야, 이거 좀 봐~";
+	mes "공식 광택 사진";
+	mes "카프라 아가씨들. 지금...";
+	mes "가터벨트 20% 더 추가!";
 	emotion ET_DELIGHT;
 	next;
-	mes "[Rekenber Guard Tan]";
-	mes "So they're all wearing";
-	mes "garter belts in these?";
-	mes "Whoa, that means they";
-	mes "even got the glasses chick";
-	mes "to wear 'em too? That's the";
-	mes "best news I've heard all day!";
+	mes "[레켄베르 가드]";
+	mes "그럼 다들 입고 계시군요";
+	mes "이 안에 가터벨트가 들어있어요?";
+	mes "와, 그거 말이야";
+	mes "안경도 썼어";
+	mes "그것도 입을까? 그게 바로";
+	mes "오늘 들어본 최고의 소식이에요!";
 	emotion ET_HUK, getnpcid(0, "Rekenber Guard Tan#li");
 	next;
-	mes "[Rekenber Guard Drew]";
-	mes "Okay man, you know these";
-	mes "are limited edition collector's";
-	mes "items, so each one is worth";
-	mes "300,000 zeny. I mean, I have";
-	mes "an extra set, but I don't know";
-	mes "if you'd wanna buy them off--";
+	mes "[레켄베르 가드]";
+	mes "좋아, 이거 알지?";
+	mes "한정판 수집가의 것입니다";
+	mes "아이템은 각각 가치가 있습니다";
+	mes "300,000제니. 제 말은, 가지고 있어요";
+	mes "추가 세트인데 모르겠어요";
+	mes "만약 당신이 그것을 사고 싶다면--";
 	next;
-	mes "[Rekenber Guard Tan]";
-	mes "I'll take them all.";
-	mes "Wait, all of them except";
-	mes "for that young kid. Just the";
-	mes "idea of having her glamour";
-	mes "photo around strikes me as...";
-	mes "Yeah. Yeah, it's no good.";
+	mes "[레켄베르 가드]";
+	mes "다 가져가겠습니다.";
+	mes "잠깐만요, 빼고는 다 있어요";
+	mes "그 어린 아이를 위해. 그냥";
+	mes "그녀의 매력을 갖고 싶다는 생각";
+	mes "주변 사진이 생각보다...";
+	mes "그래. 그래, 안 좋아.";
 	close;
 }
 
-lighthalzen,163,306,3	script	Rekenber Guard Tan#li	867,{
-	mes "[Rekenber Guard Tan]";
-	mes "Whoa, whoa. Now this...";
-	mes "This is art. The lighting,";
-	mes "the angle, the... the...";
-	mes "subject matter. Oh yes.";
+lighthalzen,163,306,3	script	레켄베르 가드::Rekenber Guard Tan#li	867,{
+	mes "[레켄베르 가드]";
+	mes "워워워. 이제 이거...";
+	mes "이건 예술이에요. 조명이요,";
+	mes "각도, 그... 그...";
+	mes "주제입니다. 아 그렇군요.";
 	emotion ET_PROFUSELY_SWEAT;
 	next;
-	mes "[Rekenber Guard Drew]";
-	mes "Man, these officially licensed";
-	mes "Kafra Lady glossies... They're";
-	mes "worth every zeny we paid. Say";
-	mes "goodbye Swimsuit Calendar,";
-	mes "and hellooooo Kafra Leilah~";
+	mes "[레켄베르 가드]";
+	mes "이봐, 이거 공식 라이센스가 있는 거야";
+	mes "카프라 레이디 글로시... 그건";
+	mes "우리가 지불한 모든 제니의 가치가 있습니다. 말하세요";
+	mes "수영복 달력은 안녕,";
+	mes "안녕하세요 카프라 레일라~";
 	next;
-	mes "[Rekenber Guard Tan]";
-	mes "Leilah? Oh, you mean";
-	mes "the glasses chick? Dude...";
-	mes "Dude. She's my favorite too!";
+	mes "[레켄베르 가드";
+	mes "라일라? 아, 그 말은";
+	mes "안경 쓴 여자? 친구...";
+	mes "야. 나도 제일 좋아하는 사람이야!";
 	close;
 }
 
-lighthalzen,70,227,4	script	Delna#li_reken	102,{
-	mes "[Delna]";
-	mes "Sometimes the simple";
-	mes "pleasures can give you";
-	mes "the most happiness. For me,";
-	mes "going outside and basking in";
-	mes "the sun is the greatest thing~";
+lighthalzen,70,227,4	script	마을 여성::Delna#li_reken	102,{
+	mes "[마을 여성]";
+	mes "가끔은 간단해요";
+	mes "즐거움은 당신에게 줄 수 있습니다";
+	mes "가장 행복합니다. 나에게는";
+	mes "밖으로 나가서 햇볕을 쬐다";
+	mes "태양이 최고야~";
 	next;
-	mes "[Delna]";
-	mes "Yes, sunbathing in a quiet";
-	mes "and relaxing place can be";
-	mes "so refreshing. And if you're";
-	mes "careful about not getting a";
-	mes "sunburn or a tan, a little sun";
-	mes "can be really good for you.";
+	mes "[마을 여성]";
+	mes "네, 조용히 일광욕을 하고 있어요";
+	mes "그리고 편안한 곳이 될 수 있어요";
+	mes "정말 상쾌해요. 만약 당신이 그렇다면";
+	mes "a를 받지 못할까봐 조심하세요";
+	mes "일광화상 또는 황갈색, 약간의 태양";
+	mes "정말 좋은 일이 될 수 있어요.";
 	close;
 }
 
-lhz_in02,289,277,3	script	Martial Artist#1	753,{
-	mes "[Martial Artist]";
-	mes "Curses...";
-	mes "I've come to the";
-	mes "wrong place to seek";
-	mes "out a challenge. No";
-	mes "one here is really all";
-	mes "that mighty or competitive!";
+lhz_in02,289,277,3	script	무술가::Martial Artist#1	753,{
+	mes "[무술가]";
+	mes "저주...";
+	mes "내가 왔어요";
+	mes "찾기에 잘못된 장소";
+	mes "도전 중입니다. 아니요";
+	mes "여기 하나면 충분해요";
+	mes "그건 강력하고 경쟁적이에요!";
 	next;
-	mes "[Martial Artist]";
-	mes "This whole city thinks";
-	mes "it can buy power and safety";
-	mes "with money. They don't know";
-	mes "the value of a nice, friendly";
-	mes "brawl. Hopefully, I'll find a";
-	mes "rival around here soon...";
+	mes "[무술가]";
+	mes "이 도시 전체가 생각한다";
+	mes "힘과 안전을 살 수 있다";
+	mes "돈으로. 그들은 모른다";
+	mes "좋은 것, 친근한 것의 가치";
+	mes "말다툼. 바라건대, 내가 찾을 수 있을 거야";
+	mes "이곳에 곧 라이벌이 생겼습니다...";
 	close;
 }
 
-lighthalzen,107,107,3	script	Kosit#zen1	869,{
-	mes "[Kosit]";
-	mes "This city might have";
-	mes "more guards and rules";
-	mes "than other places, but";
-	mes "I still don't know if it's";
-	mes "really safe to live here.";
+lighthalzen,107,107,3	script	청년#zen1	869,{
+	mes "[청년]";
+	mes "이 곳은 대체 치안이 좋은건지";
+	mes "나쁜 건지  모르겠어요.";
+	mes "경비원도 많고 여러가지 치안";
+	mes "유지를 위한 정책이 있는것";
+	mes "같긴 한데...";
 	next;
-	mes "[Kosit]";
-	mes "I mean, the reason we have";
-	mes "these rules is because of all";
-	mes "the unruly gangsters that can";
-	mes "sometimes get into the city.";
-	mes "I mean, it's relatively peaceful and all. But these rules...";
+	mes "[청년]";
+	mes "심한 억제에 대한 반발심 때문";
+	mes "인지 깡패같은 해악들도 꽤나";
+	mes "많은 편이고... 빛이 강하니까";
+	mes "어둠도 그에 따라 강해졌..";
+	mes "다고나 할까요?";
 	next;
-	mes "[Kosit]";
-	mes "It's good to be safe,";
-	mes "but I don't know if it's";
-	mes "a good idea to sacrifice";
-	mes "our freedoms or standard";
-	mes "of living, you know?";
+	mes "[청년]";
+	mes "관리를 너무 엄격히 하는 것도";
+	mes "굳이 좋지만은 않은 것 같아요.";
 	close;
 }
 
-lhz_in03,32,99,3	script	Sopheap#zen1	863,{
-	mes "[Sopheap]";
-	mes "Oh, you youngsters.";
-	mes "Always traveling around";
-	mes "and having adventures and";
-	mes "fighting monsters. I certainly";
-	mes "had my fill of excitement back";
-	mes "when I was your age, long ago.";
+lhz_in03,32,99,3	script	할머니::Sopheap#zen1	863,{
+	mes "[할머니]";
+	mes "아, 젊은이들.";
+	mes "항상 여기저기 돌아다녀요";
+	mes "그리고 모험을 하고";
+	mes "괴물들과 싸우고 있어요. 저는 확실히요";
+	mes "다시 흥분이 가득 찼어요";
+	mes "내가 너희 나이였을 때, 오래전.";
 	next;
-	mes "[Sopheap]";
-	mes "Sure, I miss doing all";
-	mes "of that, but now I'm content";
-	mes "with just relaxing and resting.";
-	mes "Still, there are a lot of old folk who refuse to sit still like this~";
+	mes "[할머니]";
+	mes "그럼요, 모든 게 그리워요";
+	mes "그건 그렇지만 지금은 만족해요";
+	mes "그냥 편안하게 쉬면서요.";
+	mes "그래도 이렇게 가만히 앉아 있기를 거부하는 노인네들이 많네요~";
 	close;
 }
 
-lhz_in03,25,105,5	script	Gopal#zen4	869,{
-	mes "[Gopal]";
-	mes "Granny may be happy";
-	mes "just sitting around and";
-	mes "enjoying the peaceful life,";
-	mes "but I'm not! I'm too young";
-	mes "to just lay down and let";
-	mes "these days just pass by!";
+lhz_in03,25,105,5	script	청년::Gopal#zen4	869,{
+	mes "[청년]";
+	mes "할머니는 행복하실 거예요";
+	mes "그냥 앉아서";
+	mes "평화로운 삶을 즐긴다";
+	mes "하지만 난 아니야! 난 너무 어려";
+	mes "그냥 누워서 놔두다";
+	mes "요즘은 그냥 지나가네요!";
 	next;
-	mes "[Gopal]";
-	mes "I wanna make something";
-	mes "of myself. Maybe someday,";
-	mes "I'll found a company as big";
-	mes "as the Rekenber Corporation!";
+	mes "[청년]";
+	mes "뭔가 만들고 싶어";
+	mes "나 자신의. 어쩌면 언젠가";
+	mes "이만큼 큰 회사를 찾을게요";
+	mes "레켄베르 법인으로!";
 	close;
 }
 
-lighthalzen,176,65,5	script	Kimmy#zen3	862,{
-	mes "[Kimmy]";
-	mes "Unlike most places,";
-	mes "Lighthalzen has many";
-	mes "beautiful clothing and";
-	mes "accessory shops. This";
-	mes "place is heaven to a";
-	mes "trend-setter like me~!";
+lighthalzen,176,65,5	script	소녀::Kimmy#zen3	862,{
+	mes "[소녀]";
+	mes "대부분의 장소와는 다르게,";
+	mes "리히타르젠에는 많은 것이 있습니다";
+	mes "아름다운 옷과";
+	mes "액세서리 가게. 이거";
+	mes "여기는 천국이에요";
+	mes "나 같은 트렌드세터~!";
 	next;
-	mes "[Kimmy]";
-	mes "I don't know if you";
-	mes "adventurers are interested";
-	mes "in fashion, but you can trash";
-	mes "your old clothes and get some";
-	mes "new, unique and trendy gear";
-	mes "over here in Lighthalzen~";
+	mes "[소녀]";
+	mes "당신이 그럴지 모르겠어요";
+	mes "모험가들이 관심을 갖고 있습니다";
+	mes "패션이지만 쓰레기를 버릴 수도 있습니다";
+	mes "낡은 옷 좀 사오세요";
+	mes "새롭고 독특하며 트렌디한 장비";
+	mes "여기 리히타르젠에 있어요~";
 	close;
 }
 
-lighthalzen,364,282,3	script	Bodger#zen5	870,{
-	mes "[Bodger]";
-	mes "Another hungry day...";
-	mes "I don't have any money";
-	mes "and even if I did, there's";
-	mes "no place that sells food";
-	mes "I'd actually eat. Oh, man.";
-	mes "I'm barely living as it is.";
+lighthalzen,364,282,3	script	청년::Bodger#zen5	870,{
+	mes "[청년]";
+	mes "또 배고픈 날이네...";
+	mes "돈이 하나도 없어요";
+	mes "그리고 내가 그랬다고 해도, 거기 있어요";
+	mes "음식을 파는 곳은 없어요";
+	mes "나 진짜 먹을 뻔했어. 아, 이런.";
+	mes "이런식으로 거의 못살아요.";
 	next;
-	mes "[Bodger]";
-	mes "I hear that the people";
-	mes "who live Uptown eat totally";
-	mes "delicious, gourmet food eight";
-	mes "times a day! Hopefully it's just an exaggeration. 'Cuz if it";
-	mes "wasn't, I'd be so mad...";
+	mes "[청년]";
+	mes "사람들이 그런다고 들었어요";
+	mes "업타운에 사는 사람은 완전 먹어요";
+	mes "맛있는 미식가 음식 8";
+	mes "하루에 몇 번씩! 단지 과장이기를 바랍니다. '만약 그렇다면";
+	mes "그렇지 않았으면 너무 화가 났을 것 같아요...";
 	close;
 }
 
-lhz_in03,239,38,3	script	Avetis#zen10	849,{
-	mes "[Avetis]";
-	mes "A-ack...";
-	mes "^333333*Cough cough*^000000";
-	mes "Would you give me";
-	mes "some m-medicine?!";
-	mes "^333333*Cough cough haack*^000000";
-	mes "Sweet Christmas, it hurts...";
+lhz_in03,239,38,3	script	청년::Avetis#zen10	849,{
+	mes "[청년]";
+	mes "아아악...";
+	mes "^333333*기침기침*^000000";
+	mes "나한테 줄래?";
+	mes "약 좀 먹어?!";
+	mes "^333333*기침 기침 꿀꿀*^000000";
+	mes "달콤한 크리스마스, 아프다...";
 	next;
-	mes "[Avetis]";
-	mes "I sk-skipped work";
-	mes "because I've been too";
-	mes "sick t-to go. ^333333*Cough*^000000";
-	mes "But now I don't have";
-	mes "the money to ^333333*Haack*^000000";
-	mes "buy med-medicine... ";
+	mes "[청년]";
+	mes "나는 일을 건너뛰었어요";
+	mes "나도 그랬으니까";
+	mes "아프니까 가세요. ^333333*기침*^000000";
+	mes "하지만 지금은 없어요";
+	mes "^333333*해킹*^000000에게 돈을 주세요";
+	mes "약을 구입하세요...";
 	close;
 }
 
-lhz_in02,267,25,4	script	Diana#npc	747,{
-	mes "[Diana]";
-	mes "Oh wow, that weapon";
-	mes "is fantastic! But I'm sure";
-	mes "that it must be really";
-	mes "expensive. Huh...";
+lhz_in02,267,25,4	script	다이아나::Diana#npc	747,{
+	mes "[다이아나]";
+	mes "와, 저 무기구나";
+	mes "환상적이네요! 하지만 확신해요";
+	mes "정말 그럴 것 같아요";
+	mes "비싸다. 허...";
 	next;
-	mes "[Shop Assistant]";
-	mes "Ma'am, are you talking";
-	mes "about this Stiletto? You";
-	mes "certainly have an eye for";
-	mes "quality weapons. If you";
-	mes "don't mind me asking,";
-	mes "where are you from?";
+	mes "[점원]";
+	mes "부인, 말씀하시는 겁니까?";
+	mes "이 스틸레토에 대해서요? 당신";
+	mes "확실히 관심을 가지고 있어요";
+	mes "고급 무기. 만약 당신이";
+	mes "물어봐도 상관없어요,";
+	mes "어디서 오셨어요?";
 	next;
-	mes "[Diana]";
-	mes "Oh, I was born";
-	mes "and raised in Morocc.";
+	mes "[다이아나]";
+	mes "아, 내가 태어났어";
+	mes "모로코에서 자랐습니다.";
 	next;
-	mes "[Shop Assistant]";
-	mes "Ah yes, I've heard many";
-	mes "good things about that town.";
-	mes "You've certainly proven that";
-	mes "people from Morocc truly have";
-	mes "good taste. Now, this Stiletto";
-	mes "is a steal at 39,800 zeny...";
+	mes "[점원]";
+	mes "아 네, 많이 들었어요";
+	mes "그 마을의 좋은 점들.";
+	mes "확실히 증명했군요";
+	mes "모로코 사람들은 정말 그렇습니다";
+	mes "맛있어요. 자, 이 스틸레토";
+	mes "39,800제니는 도둑질입니다...";
 	next;
 	emotion ET_HUK;
-	mes "[Diana]";
-	mes "Huh...?!";
-	mes "That's ridiculous!";
-	mes "Never mind that, let";
-	mes "me take a look at that";
-	mes "Gladius in the corner.";
+	mes "[다이아나]";
+	mes "어...?!";
+	mes "말도 안 되는 소리야!";
+	mes "그건 신경쓰지 마세요, 놔두세요";
+	mes "나 좀 봐봐";
+	mes "글라디우스가 구석에 있어요.";
 	next;
-	mes "[Shop Assistant]";
-	mes "The Gladius?";
-	mes "Ah, that would be";
-	mes "39,800 zeny, ma'am.";
+	mes "[점원]";
+	mes "글라디우스?";
+	mes "아, 그렇겠네요";
+	mes "39,800제니, 부인.";
 	next;
-	mes "[Diana]";
-	mes "Oh, that's a really";
-	mes "good price. I'll take it!";
+	mes "[다이아나]";
+	mes "아, 정말 그렇구나";
+	mes "좋은 가격이에요. 사겠습니다!";
 	next;
-	mes "[Shop Assistant]";
-	mes "Yes, this replica really";
-	mes "does look just like an";
-	mes "actual Gladius, does it";
-	mes "not? Although not a true";
-	mes "weapon, it's quite capable of";
-	mes "opening the toughest envelopes.";
+	mes "[점원]";
+	mes "네, 정말 복제품이에요";
+	mes "정말 닮아보이네요";
+	mes "실제 Gladius는 그렇습니다";
+	mes "아니요? 사실은 아니지만";
+	mes "무기, 꽤 능력이 있어";
+	mes "가장 힘든 봉투를 열어봅니다.";
 	next;
-	mes "[Diana]";
+	mes "[다이아나]";
 	mes "...";
 	mes "......";
-	mes "I take that back.";
-	mes "This shop really sucks.";
+	mes "다시 가져가겠습니다.";
+	mes "이 가게는 정말 형편없어요.";
 	close;
 }
 
-lhz_in02,267,22,1	script	Shop Assistant#cobo	91,{
-	mes "[Shop Assistant]";
-	mes "Welcome to our";
-	mes "store where we offer";
-	mes "many unique products that";
-	mes "you can't find anywhere else.";
+lhz_in02,267,22,1	script	점원::Shop Assistant#cobo	91,{
+	mes "[점원]";
+	mes "저희에 오신 것을 환영합니다";
+	mes "우리가 제공하는 매장";
+	mes "많은 독특한 제품이 있습니다";
+	mes "다른 곳에서는 찾을 수 없습니다.";
 	next;
-	mes "[Shop Assistant]";
-	mes "However, shopping is only available to our members. There's an annual";
-	mes "membership fee that's waived when you spend a certain amount every";
-	mes "month in our store. If you invite your friends, you'll receive spe--";
+	mes "[점원]";
+	mes "단, 쇼핑은 회원들만 가능합니다. 연간행사도 있습니다";
+	mes "매회 일정 금액 이상 사용시 회원비가 면제됩니다";
+	mes "저희 매장에 한 달 동안 입점했습니다. 친구를 초대하시면 특전을 받으실 수 있습니다--";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "N-no thank you!";
-	mes "I'm not interested!";
+	mes "아니요, 고마워요!";
+	mes "관심없어요!";
 	close;
 }
 
@@ -2791,179 +2760,179 @@ lighthalzen,258,223,3	script	Srinivas#zen4	866,{
 	close;
 }
 
-lighthalzen,77,203,3	script	Victor Perfecto#zen9	869,{
-	mes "[Victor Perfecto]";
-	mes "I've heard that the";
-	mes "Rekenber Corporation";
-	mes "actually created the";
-	mes "environment in Lighthalzen";
-	mes "through artificial means.";
+lighthalzen,77,203,3	script	청년::Victor Perfecto#zen9	869,{
+	mes "[청년]";
+	mes "그렇다고 들었습니다";
+	mes "레켄버 코퍼레이션";
+	mes "실제로 생성되었습니다";
+	mes "리히타르젠의 환경";
+	mes "인위적인 수단을 통해.";
 	next;
-	mes "[Victor Perfecto]";
-	mes "It seems like it'd take";
-	mes "a lot of investment, but";
-	mes "artificially creating an";
-	mes "environment isn't impossible";
-	mes "with the means available to";
-	mes "the Rekenber Corporation.";
+	mes "[청년]";
+	mes "시간이 좀 걸릴 것 같네요";
+	mes "많은 투자가 필요하지만";
+	mes "인위적으로 생성하다";
+	mes "환경은 불가능하지 않아요";
+	mes "가능한 수단으로";
+	mes "레켄버 코퍼레이션.";
 	next;
-	mes "[Victor Perfecto]";
-	mes "^333333*Sigh...*^000000";
-	mes "Still, it's pretty";
-	mes "depressing to think";
-	mes "that the beauty of nature";
-	mes "can be man-made and";
-	mes "equated to zeny, you know?";
+	mes "[청년]";
+	mes "^333333*한숨...*^000000";
+	mes "그래도 예쁘네요";
+	mes "생각하기가 우울하다";
+	mes "자연의 아름다움";
+	mes "인위적으로 만들 수 있고";
+	mes "제니와 동일해요, 아시죠?";
 	close;
 }
 
-lighthalzen,40,107,4	script	Vergil#zen4	869,{
-	mes "[Vergil]";
-	mes "The weather is so";
-	mes "nice today, like always.";
-	mes "I just want to ditch work,";
-	mes "run outside and work out.";
+lighthalzen,40,107,4	script	마을사람::Vergil#zen4	869,{
+	mes "[마을사람]";
+	mes "날씨가 너무 좋네요";
+	mes "오늘도 언제나처럼 좋아요.";
+	mes "그냥 일을 그만두고 싶어요,";
+	mes "밖으로 달려가서 운동하세요.";
 	next;
-	switch(select("Where do you want to go?:But shouldn't you go to work?:Have you heard about the serial killer?")) {
+	switch(select("어디로 가고 싶어요?:그런데 회사에 가면 안 되나요?:연쇄살인범에 대해 들어보셨나요?")) {
 	case 1:
-		mes "[Vergil]";
-		mes "Well, those guys in";
-		mes "black suits, not to mention";
-		mes "the ruffians that manage to";
-		mes "invade town, sometimes sort";
-		mes "of make it kind of unsafe to";
-		mes "go out all by yourself.";
+		mes "[마을사람]";
+		mes "그럼 저 사람들은";
+		mes "검은색 정장은 말할 것도 없고";
+		mes "그럭저럭 해내는 악당들";
+		mes "마을을 침공하고 때로는 정렬합니다";
+		mes "위험하게 만드는 것";
+		mes "혼자서 나가세요.";
 		next;
-		mes "[Vergil]";
-		mes "But me and a buddy are";
-		mes "planning to head to the";
-		mes "Al De Baran Turbo Track";
-		mes "one of these days. Boy,";
-		mes "the last time we went,";
-		mes "he wasted a lot of zeny.";
+		mes "[마을사람]";
+		mes "하지만 나와 친구는";
+		mes "로 향할 계획";
+		mes "알 데 바란 터보 트랙";
+		mes "요즘 어느 날. 얘야,";
+		mes "저번에 갔을 때,";
+		mes "그는 제니를 많이 낭비했어요.";
 		next;
-		mes "[Vergil]";
-		mes "He actually won some";
-		mes "kind of potion as a prize";
-		mes "and let me have it. I drank";
-		mes "it and it made me move really";
-		mes "slowly. Now what kind of prize";
-		mes "is that supposed to be?!";
+		mes "[마을사람]";
+		mes "그는 실제로 약간의 승리를 거두었습니다";
+		mes "상으로 일종의 물약";
+		mes "그리고 나한테 주세요. 마셨어요";
+		mes "그것이 나를 정말 움직이게 만들었어요";
+		mes "천천히. 이제 어떤 상을 받을까?";
+		mes "그럴까요?!";
 		next;
-		mes "[Vergil]";
-		mes "I think my buddy";
-		mes "was totally scammed.";
-		mes "That, or I was totally";
-		mes "tricked by him to drink it.";
-		mes "How they came up with such a ridiculous idea for a prize!";
+		mes "[마을사람]";
+		mes "내 친구인 것 같아";
+		mes "완전히 사기를 당했어요.";
+		mes "그렇지 않으면 나는 완전히";
+		mes "그 사람이 술을 마시도록 속인 거죠.";
+		mes "어떻게 상금을 걸고 이런 말도 안되는 아이디어를 생각해냈는가!";
 		close;
 	case 2:
-		mes "[Vergil]";
-		mes "Wha--?! I didn't say";
-		mes "I was going to ditch work,";
-		mes "I just said I wanted to!";
-		mes "But just to spite you, maybe";
-		mes "just maybe, I won't go today!";
+		mes "[마을사람]";
+		mes "뭐--?! 난 말 안했는데";
+		mes "일을 그만두려고 했어요,";
+		mes "그냥 그러고 싶다고 말했어요!";
+		mes "그냥 당신을 화나게 하려는 것일 수도 있겠네요";
+		mes "아마도 오늘은 안 갈 것 같아요!";
 		next;
-		mes "[Vergil]";
-		mes "Then again, I don't";
-		mes "think I can slack on";
-		mes "this project. Curses...";
-		mes "The weekend certainly";
-		mes "doesn't come fast enough!";
+		mes "[마을사람]";
+		mes "그럼 또 그렇지 않아요";
+		mes "느슨해 질 수 있을 것 같아요";
+		mes "이 프로젝트. 저주가...";
+		mes "주말은 확실히";
+		mes "너무 빨리 안 나오네요!";
 		close;
 	case 3:
-		mes "[Vergil]";
-		mes "What, you mean that";
-		mes "axe murderer from a long";
-		mes "time ago? Well, I heard a";
-		mes "rumor that it actually wasn't";
-		mes "like that. Let's see, how";
-		mes "did the story go?";
+		mes "[마을사람]";
+		mes "그게 무슨 말이에요?";
+		mes "긴 도끼 살인자";
+		mes "얼마 전에? 음, 들었어";
+		mes "실제로는 그렇지 않았다는 소문";
+		mes "그런가. 어디 보자, 어떻게";
+		mes "이야기는 끝났나요?";
 		next;
-		mes "[Vergil]";
-		mes "I heard that some hat";
-		mes "maker, the one who makes";
-		mes "the Smokie Hat, accidentally";
-		mes "made a Person Headgear";
-		mes "instead of, like, a hat made";
-		mes "of monsters. Don't ask me how.";
+		mes "[마을사람]";
+		mes "모자가 있다고 들었는데";
+		mes "만드는 사람, 만드는 사람";
+		mes "스모키 모자, 우연히";
+		mes "사람 모자를 만들었어요";
+		mes "모자를 만든 것 대신에";
+		mes "괴물의. 방법은 묻지 마세요.";
 		next;
-		mes "[Vergil]";
-		mes "Yeah, I think relatives";
-		mes "of that Airship Captain...";
-		mes "They were totally made into";
-		mes "a hat on accident. Supposedly,";
-		mes "it looks like a Reindeer Head,";
-		mes "but now that's just too weird.";
+		mes "[마을사람]";
+		mes "네, 친척인 것 같아요";
+		mes "그 비행선 선장의...";
+		mes "그들은 완전히 만들어졌습니다";
+		mes "사고로 모자를 쓴 것 같아요. 아마,";
+		mes "순록 머리 같군요,";
+		mes "그런데 지금은 너무 이상해요.";
 		close;
 	}
 }
 
-lhz_in01,144,53,3	script	Jorje#zero	98,1,1,{
+lhz_in01,144,53,3	script	호르제::Jorje#zero	98,1,1,{
 OnTouch_:
 	switch(rand(1,3)) {
 	case 1:
-		mes "[Jorje]";
-		mes "Arrrgh, I don't";
-		mes "have any time for";
-		mes "talking! I'm in the";
-		mes "middle of an important";
-		mes "task! H-hold on a second!";
+		mes "[호르제]";
+		mes "아아아, 난 아니야";
+		mes "언제든지 시간이 있어요";
+		mes "말하고 있어요! 지금 있어요";
+		mes "중요한 것의 중간";
+		mes "할 일! 아, 잠깐만요!";
 		close;
 	case 2:
-		mes "[Jorje]";
-		mes "D-don't come any";
-		mes "closer! Anyone who";
-		mes "comes near me might";
-		mes "just screw me up! Back off!";
+		mes "[호르제]";
+		mes "아-아무도 오지마";
+		mes "더 가까이! 누구든지";
+		mes "나에게 가까이 다가온다";
+		mes "그냥 망쳐버려! 물러서!";
 		close;
 	case 3:
-		mes "[Jorje]";
-		mes "Oh man...";
-		mes "I've been working so";
-		mes "hard and haven't taken";
-		mes "any breaks. I think I'll";
-		mes "reward myself and buy";
-		mes "something like maybe--";
+		mes "[호르제]";
+		mes "아 이런...";
+		mes "나는 그렇게 일해왔어";
+		mes "힘들고 아직 취하지 않았어";
+		mes "쉬는 시간은 없나요. 그럴 것 같아요";
+		mes "나 자신에게 보상하고 구매하세요";
+		mes "어쩌면--";
 		next;
-		mes "[Jorje]";
-		mes "No! No, I'm not";
-		mes "gonna buy anything!";
-		mes "I've got my future wife";
-		mes "to think about! Must...";
-		mes "Save... More... Money!";
+		mes "[호르제]";
+		mes "아니요! 아니, 아니에요";
+		mes "뭐든 사야지!";
+		mes "내겐 미래의 아내가 있어요";
+		mes "생각해 봐야 할 것! 꼭...";
+		mes "저장... 더... 돈!";
 		close;
 	}
 	end;
 }
 
-lhz_in01,139,48,7	script	Leimi#mimir	73,{
-	mes "[Leimi]";
+lhz_in01,139,48,7	script	프레네탄::Leimi#mimir	73,{
+	mes "[프레네탄]";
 	mes "...";
 	mes "......";
 	next;
-	mes "[Leimi]";
-	mes "Oh...!";
-	mes "Good heavens!";
-	mes "Um, may I help you?";
+	mes "[프레네탄]";
+	mes "아...!";
+	mes "맙소사!";
+	mes "음, 도와드릴까요?";
 	emotion ET_HUK;
 	if (BaseJob == Job_Assassin) {
 		if (Sex == SEX_MALE) {
 			next;
-			mes "[Leimi]";
-			mes "Oh, you're an Assassin!";
-			mes "Oh, you boys are soooo cute!";
-			mes "And so cool and so mysterious all at the same time! I love you!";
+			mes "[프레네탄]";
+			mes "오, 당신은 암살자군요!";
+			mes "아, 너네들 너무 귀여워!";
+			mes "그리고 정말 멋지고 신비로운 동시에! 사랑해요!";
 		}
 		else {
 			next;
-			mes "[Leimi]";
-			mes "An Assassin...?";
-			mes "Oh, you wouldn't happen";
-			mes "to know any Assassin boys";
-			mes "that might be single, do you?";
-			mes "Oh-my-god, they're hunky-hot~";
+			mes "[프레네탄]";
+			mes "암살자...?";
+			mes "아, 그런 일은 없을 거야";
+			mes "어떤 암살자 소년이라도 알고 싶어요";
+			mes "그거 싱글일 수도 있겠네요, 그렇죠?";
+			mes "맙소사, 정말 섹시해요~";
 		}
 	}
 	close;
@@ -2973,145 +2942,145 @@ lhz_in01,138,47,0	script	#mimir_camera	-1,2,2,{
 OnTouch_:
 	if (BaseJob == Job_Assassin) {
 		if (Sex == SEX_MALE) {
-			mes "^3355FF*Click*^000000";
+			mes "^3355FF*딸깍 하는 소리*^000000";
 			next;
 			mes "["+strcharinfo(0)+"]";
-			mes "What the...?";
-			mes "That sound. Did...";
-			mes "Did someone just";
-			mes "take my picture?";
+			mes "이게 뭐야...?";
+			mes "그 소리. 그랬어요...";
+			mes "방금 누군가 그랬나요?";
+			mes "사진 찍어요?";
 			close;
 		}
 	}
 	end;
 }
 
-lhz_in02,36,274,4	script	Cool Event Staff#Saera	831,{
-	mes "[Saera]";
-	mes "Welcome to the";
-	mes "temporary headquarters";
-	mes "of Cool Event Corporation.";
-	mes "How may I help you today?";
+lhz_in02,36,274,4	script	존다 안내요원::Cool Event Staff#Saera	831,{
+	mes "[존다 안내요원]";
+	mes "임시 본부에";
+	mes "오신것을 환영합니다.";
+	mes "쿨 이벤트 코퍼레이션 소속.";
+	mes "오늘은 어떻게 도와드릴까요?";
 	next;
-	switch(select("Temporary headquarters?:Voting:No, thanks.")) {
+	switch(select("임시 본부?:투표:아니요, 감사합니다.")) {
 	case 1:
-		mes "[Saera]";
-		mes "Our headquarters building";
-		mes "is currently undergoing";
-		mes "reconstruction, so we are";
-		mes "basing our operations in";
-		mes "this place for the meantime.";
+		mes "[존다 안내요원]";
+		mes "당사 본사 건물은";
+		mes "현재 재건 작업을 진행 중이기";
+		mes "때문에 당분간은";
+		mes "이곳에서의 영업을 기반으로";
+		mes "하고 있습니다.";
 		close;
 	case 2:
 		if (lhz_boss < 17) {
-			mes "[Saera]";
-			mes "Currently, Kafra Corporation";
-			mes "and Cool Event Corp are working";
-			mes "on a collaborative program that";
-			mes "will provide direct teleport";
-			mes "services to dungeons.";
+			mes "[존다 안내요원]";
+			mes "현재는 카프라 코퍼레이션(Kafra Corporation)";
+			mes "그리고 존다 주식회사에서도 일하고 ??있어요";
+			mes "협력 프로그램에 대해";
+			mes "직접 순간이동을 제공할 것입니다";
+			mes "던전 서비스.";
 			next;
-			mes "[Saera]";
-			mes "Due to technical issues,";
-			mes "both companies cannot provide";
-			mes "teleport services to the same";
-			mes "dungeon. Therefore, we will be";
-			mes "selecting our valued customers to choose the company they want.";
+			mes "[존다 안내요원]";
+			mes "기술적인 문제로 인해,";
+			mes "두 회사 모두 제공할 수 없습니다";
+			mes "동일한 곳으로의 텔레포트 서비스";
+			mes "던전. 그러므로 우리는 될 것입니다";
+			mes "소중한 고객이 원하는 회사를 선택하는 것입니다.";
 			next;
-			mes "[Saera]";
-			mes "Only a limited number of";
-			mes "voters will be chosen, so";
-			mes "you can check your voting";
-			mes "eligibility at the headquarters";
-			mes "of both participating companies. Thank you for your patronage~";
+			mes "[존다 안내요원]";
+			mes "제한된 수의";
+			mes "유권자는 선택될 것입니다. 그래서";
+			mes "당신의 투표를 확인할 수 있습니다";
+			mes "본사에서의 자격";
+			mes "양사 모두 참여합니다. 많은 관심 부탁드립니다~";
 			close;
 		}
 		else {
-			mes "[Saera]";
-			mes "Currently, Kafra Corporation";
-			mes "and Cool Event Corp are working";
-			mes "on a collaborative program that";
-			mes "will provide direct teleport";
-			mes "services to dungeons.";
+			mes "[존다 안내요원]";
+			mes "현재는 카프라 코퍼레이션(Kafra Corporation)";
+			mes "그리고 Cool Event Corp도 일하고 ??있어요";
+			mes "협력 프로그램에 대해";
+			mes "직접 순간이동을 제공할 것입니다";
+			mes "던전 서비스.";
 			next;
-			mes "[Saera]";
-			mes "Due to technical issues,";
-			mes "both companies cannot provide";
-			mes "teleport services to the same";
-			mes "dungeon. Therefore, we will be";
-			mes "selecting a number of valued customers to vote for their choice.";
+			mes "[존다 안내요원]";
+			mes "기술적인 문제로 인해,";
+			mes "두 회사 모두 제공할 수 없습니다";
+			mes "동일한 곳으로의 텔레포트 서비스";
+			mes "던전. 그러므로 우리는 될 것입니다";
+			mes "자신의 선택에 투표할 다수의 소중한 고객을 선택합니다.";
 			next;
-			mes "[Saera]";
-			mes "I've just reviewed your";
-			mes "information and would like";
-			mes "to inform you that you are";
-			mes "indeed eligible to vote.";
-			mes "Your participation in this";
-			mes "election is much appreciated.";
+			mes "[존다 안내요원]";
+			mes "방금 귀하의 리뷰를 검토했습니다";
+			mes "정보 및 희망 사항";
+			mes "당신이 그렇다는 것을 알리기 위해";
+			mes "참으로 투표할 자격이 있습니다.";
+			mes "당신의 참여";
+			mes "선거는 정말 감사합니다.";
 			next;
-			mes "[Saera]";
-			mes "Remember that the";
-			mes "election polls can be";
-			mes "found in either Prontera";
-			mes "or Juno. Thank you very much.";
+			mes "[존다 안내요원]";
+			mes "기억하세요";
+			mes "선거 여론조사는 가능하다";
+			mes "두 프론테라 중 하나에서 발견됨";
+			mes "아니면 주노. 정말 고마워요.";
 			close;
 		}
 	case 3:
-		mes "[Saera]";
-		mes "Thank you.";
-		mes "Have a good day.";
+		mes "[존다 안내요원]";
+		mes "감사합니다.";
+		mes "좋은 하루 보내세요.";
 		close;
 	}
 }
 
-lhz_in02,40,280,6	script	Event Planner	833,{
-	mes "[Jellarin]";
-	mes "I don't like this.";
-	mes "But I don't like that";
-	mes "idea either. What will";
-	mes "I do for a new event, eh?";
+lhz_in02,40,280,6	script	존다 기획인::Event Planner	833,{
+	mes "[존다 기획인]";
+	mes "이건 마음에 안 들어요.";
+	mes "하지만 그건 마음에 안 들어요";
+	mes "둘 중 하나를 생각하세요. 무엇을 할 것인가";
+	mes "새로운 이벤트를 준비 중이군요, 그렇죠?";
 	next;
-	mes "[Jellarin]";
-	mes "I need something";
-	mes "major, something that'll";
-	mes "really shake up the world,";
-	mes "something epochal, but what?";
-	mes "Hey, do you have any ideas?";
+	mes "[존다 기획인]";
+	mes "뭔가 필요한 게 있어요";
+	mes "메이저, 뭔가";
+	mes "정말 세상을 뒤흔들었다";
+	mes "뭔가 획기적이지만 뭐?";
+	mes "야, 혹시 좋은 생각 있어?";
 	close;
 }
 
-lhz_in02,110,286,5	script	Cool Event Manager	853,{
-	mes "[Baoto]";
-	mes "Hmmm...";
-	mes "The employees seem";
-	mes "to be having too much";
-	mes "fun amongst themselves";
-	mes "recently. This does not";
-	mes "bode well at all...";
+lhz_in02,110,286,5	script	존다 중간 관리자::Cool Event Manager	853,{
+	mes "[존다 중간 관리자]";
+	mes "흠...";
+	mes "직원들이 보이는 것 같아요";
+	mes "너무 많이 먹고 있다";
+	mes "그들끼리 재미있다";
+	mes "최근에요. 그렇지 않아요";
+	mes "전혀 좋은 징조야...";
 	next;
-	mes "[Baoto]";
-	mes "It looks like I'm";
-	mes "just going to have to";
-	mes "start cracking that whip";
-	mes "more often and much";
-	mes "harder. Ha ha ha ha!";
+	mes "[존다 중간 관리자]";
+	mes "그런 것 같아요";
+	mes "그냥 해야 할 것 같아";
+	mes "채찍을 부수기 시작해";
+	mes "더 자주 그리고 많이";
+	mes "더 세게. 하하하하!";
 	close;
 }
 
-lhz_in02,36,284,0	script	Cool Event Staff#Cesuna	874,{
-	mes "[Cesuna]";
-	mes "Ack! I'm totally";
-	mes "swamped with all this";
-	mes "work! But I don't wanna";
-	mes "do any of it. That's it!";
-	mes "I totally need a break.";
+lhz_in02,36,284,0	script	존다 직원::Cool Event Staff#Cesuna	874,{
+	mes "[존다 직원]";
+	mes "알았어! 완전 그렇구나";
+	mes "이 모든 것에 휩싸였습니다";
+	mes "일해요! 하지만 난 그러고 싶지 않아요";
+	mes "아무거나 하세요. 그게 다예요!";
+	mes "정말 휴식이 필요해요.";
 	next;
-	mes "[Cesuna]";
-	mes "^333333*Sigh...*^000000";
-	mes "I wonder if Saera";
-	mes "would ever consider";
-	mes "going out with me?";
-	mes "That would be nice~";
+	mes "[존다 직원]";
+	mes "^333333*한숨...*^000000";
+	mes "세라가 궁금해요";
+	mes "고려해 볼까";
+	mes "나랑 사귄다고?";
+	mes "좋겠네요~";
 	close;
 }
 
@@ -3128,49 +3097,49 @@ lhz_in02,19,274,2	script	Maintenance Guy#lhz	851,{
 }
 */
 
-lighthalzen,337,296,3	script	Rekenber Employee#li_2	868,{
+lighthalzen,337,296,3	script	레켄베르 직원::Rekenber Employee#li_2	868,{
 	if (hg_tre > 54) {
-		mes "[Rekenber Employee]";
-		mes "Greetings. As part of our";
-		mes "effort to relieve the poor,";
-		mes "Rekenber is providing job";
-		mes "opportunities targeted for";
-		mes "citizens of the slum areas.";
+		mes "[레켄베르 직원]";
+		mes "안녕하세요. 우리의 일부로";
+		mes "가난한 사람들을 구제하기 위한 노력";
+		mes "레켄베르가 일자리를 제공하고 있습니다";
+		mes "목표로 삼은 기회";
+		mes "빈민가 지역의 시민들.";
 		next;
-		mes "[Rekenber Employee]";
-		mes "You can choose to work";
-		mes "from home, or undergo a";
-		mes "little bit of training for more";
-		mes "professional positions. This";
-		mes "is a great chance to make a";
-		mes "difference... and some money~";
+		mes "[레켄베르 직원]";
+		mes "당신은 일을 선택할 수 있습니다";
+		mes "집에서, 또는 겪다";
+		mes "더 많은 것을 위한 약간의 훈련";
+		mes "전문직. 이";
+		mes "를 만들 수 있는 좋은 기회입니다";
+		mes "차이... 그리고 돈도 좀~";
 		emotion ET_BEST;
 		close;
 	}
 }
 
-lhz_in01,221,131,7	script	Scientist#li_01	865,{
+lhz_in01,221,131,7	script	과학자::Scientist#li_01	865,{
 	if (isequipped(2241) && isequipped(2243)) {
 		if (hg_tre > 54) {
-			mes "[A Scientist]";
-			mes "What happened? All the machines are ruined and the research report are gone! The history of Regenschirm has been hacked!";
+			mes "[과학자]";
+			mes "무슨 일이 일어난 거야? 기계도 다 망가졌고 연구 보고서도 없어졌어! 레겐쉬름의 역사가 해킹됐어!";
 			close;
 		}
 		else {
-			mes "[Scientist]";
-			mes "It takes so long for";
-			mes "this device to process";
-			mes "all the data and give me";
-			mes "the results. Still, the wait";
-			mes "heightens my anticipation...";
+			mes "[과학자]";
+			mes "시간이 너무 오래 걸려요";
+			mes "이 장치를 처리해야 합니다";
+			mes "모든 데이터를 주고 나에게 주세요";
+			mes "결과. 아직은 기다림";
+			mes "기대가 높아진다...";
 			close;
 		}
 	}
 	else {
-		mes "[Scientist]";
-		mes "What?! Guards!";
-		mes "Hurry, there's an";
-		mes "intruder right here!";
+		mes "[과학자]";
+		mes "뭐야?! 경비병들!";
+		mes "서두르세요, 있어요";
+		mes "여기에 침입자가 있어요!";
 		emotion ET_SURPRISE;
 		close2;
 		warp "lhz_in01",33,224;

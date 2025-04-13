@@ -3050,6 +3050,7 @@ struct item_data
 	uint32 value_sell;
 	item_types type;
 	uint8 subtype;
+	std::map<std::string, uint16> decompoRune;
 	int maxchance; //For logs, for external game info, for scripts: Max drop chance of this item (e.g. 0.01% , etc.. if it = 0, then monsters don't drop it, -1 denotes items sold in shops only) [Lupus]
 	uint8 sex;
 	uint32 equip;
@@ -3110,6 +3111,7 @@ struct item_data
 	struct {
 		uint32 duration;
 		sc_type sc; ///< Use delay group if any instead using player's item_delay data [Cydh]
+		bool checkstatus;
 	} delay;
 
 	~item_data() {
@@ -3142,7 +3144,7 @@ private:
 
 	e_sex defaultGender( const ryml::NodeRef& node, std::shared_ptr<item_data> id );
 
-	std::string create_item_link(struct item& item, std::shared_ptr<item_data>& data);
+	std::string create_item_link(struct item& item, std::shared_ptr<item_data>& data, bool slot = false);
 
 	struct s_pricevalue {
 		bool has_buy;
@@ -3171,6 +3173,7 @@ public:
 	std::shared_ptr<item_data> search_aegisname( const char *name );
 	std::string create_item_link(struct item& item);
 	std::string create_item_link( std::shared_ptr<item_data>& data );
+	std::string create_item_link( std::shared_ptr<item_data>& data, bool slot);
 	std::string create_item_link_for_mes( std::shared_ptr<item_data>& data, bool use_brackets, const char* name );
 };
 

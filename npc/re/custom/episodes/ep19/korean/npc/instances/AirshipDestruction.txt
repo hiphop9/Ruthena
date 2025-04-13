@@ -1,0 +1,1411 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Instance: Airship Destruction.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Daily instance for episode 19.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+jor_nest,19,259,6	script	비공정 와일호#whl	CLEAR_NPC,{
+	mes "^0000ff비공정으로 통하는 입구같은건 보이지않는다. 비공정을 고정하는데 쓰는듯한 로프를 통해 침투하는 방법 밖에 없을 것 같다.^000000";
+	close;
+}
+
+// ep19_main = 33 unlock Airship Destruction Instance (step 35).
+jor_nest,22,255,6	script	로프#whl	4_ROPEPILE,{
+	if (ep19_main < 33) {
+		mes "^0000ff비공정을 고정하는데 쓰였던 것 같은 로프가 놓여있다.^000000";
+		close;
+	}
+	if (isbegin_quest(17637) == 0) {
+		select( "로프 근처에서 레이지가 건네준 쪽지를 펴본다" );
+		mes "^0000ff뭔가 난잡한 낙서와 청구비용 같은게 잔뜩 적혀있다^000000";
+		next;
+		while( select( "쪽지 뒷면까지 펴서 자세히 살펴본다", "쓸데없어 보이니 버릴까." ) == 2 ) {
+			mes "그냥 버리기엔 석연치않은 구석이 있다.";
+			next;
+		}
+		cutin "ep19_leizi02.png",2;
+		mes "[레이지]";
+		mes "오, 중요 구문들을 발견한 모양이군. 시간이 없어서 자세히는 적지 못한걸 이해 해 줬으면 좋겠어 친구.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[레이지]";
+		mes "본론부터 말하지. 일루시온이 제것처럼 쓰고 있는 그 비공정말야. 그거 못 부순다.";
+		next;
+		select( "낙서들 사이의 다른 문장들을 조합해본다." );
+		cutin "ep19_leizi02.png",2;
+		mes "[레이지]";
+		mes "아, 그게 생강이의 자문 내용인데. 그 비공정을 움직이고 제어하는 놈이 사람이 아니라는군.";
+		next;
+		select( "약간 변색이 된 다른 부분을 문장을 살펴본다." );
+		mes "[레이지]";
+		mes "어디보자. 생강이의 분석 보고서에 따르면 무한 자가수복이 가능한 에너지코어 형태의 인공지능 이래. 이거 완전 지능을 가진 에너지원이란 소리지.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[레이지]";
+		mes "이해가 돼? 그 비행선을 움직이는 놈은 무한 에너지 생성이 가능한 폭탄같은 존재라구.";
+		next;
+		select( "점심값 계산이 된 부분 아래를 살핀다." );
+		cutin "ep19_leizi02.png",2;
+		mes "[레이지]";
+		mes "그걸 그냥 막무가내로 파괴 할 경우에. 최소 반경 10km 정도는 흔적없이 초토화된다고! 판타스띠꼬!";
+		next;
+		select( "덜 펴진 마지막 부분을 살펴본다." );
+		cutin "ep19_leizi03.png",2;
+		mes "[레이지]";
+		mes "일정수준 이상의 데미지가 누적되면 1차로 코어정지. 그 상태에서 데미지가 더 누적되면 대폭발이 발생하는데 이건 결함인것 같아.";
+		next;
+		cutin "ep19_leizi02.png",2;
+		mes "[레이지]";
+		mes "아마 바르문트도 인공지능 비공정이 능동폭탄이 될거라곤 생각 못했겠지. 그래서 동일모델이 추가생산 되지 않은게 아닐까 추측중이야.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[레이지]";
+		mes "생강이는 ^0000ff[이게 주인님의 아픈 손가락 이랬어. 그게 무슨 의미인지 잘 이해는 되지 않지만]^000000 라더군.";
+		next;
+		mes "[레이지]";
+		mes "부수면 곤란하고 부숴봐야 복구될게 뻔하다. 그럼 남은건 하나뿐이지 뭐. 적당히 비공정이 운행을 못할정도로 내부를 휘저어두고 슥삭! 도망치는거야.";
+		next;
+		cutin "ep19_leizi02.png",2;
+		mes "[레이지]";
+		mes "지금쯤 표정이 볼만하겠어. 어쨌든 혹시라도 진심으로 비공정을 부술것 같아서 노파심에 조언한거니까 고마워 하라구!";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[레이지]";
+		mes "그럼 행운을 빌어줄게! 살아서 또 볼수있으면 보자구!";
+		close2;
+		cutin "",255;
+		setquest 17637;
+		completequest 17637;
+		end;
+	}
+	switch( checkquest(12560,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "^0000ff비공정이 복구되어 움직이려면 아직 시간이 남은듯 합니다. 비공정이 움직일때를 노립시다^000000";
+		close;
+	case 2:
+		erasequest 12560;
+		mes "^0000ff비공정의 가동이 시작된 모양이군요. 이제 다시 부수러 들어가봅시다.^000000";
+		close;
+	}
+	if (getcharid(1) < 1) {
+		mes "^0000ff최소 1인 이상의 파티를 구성하고 진행 해 주시기 바랍니다.^000000";
+		close;
+	}
+
+	.@md_name$ = "비공정 파괴작전";
+	// .@md_name$ = "Airship Destruction";
+
+	if (instance_live_info(ILI_NAME, instance_id(IM_PARTY)) == .@md_name$) {	// Instance created, display "enter" menu
+		mes "비공정에 침투용 로프가 팽팽하게 걸린듯 하다.";
+		next;
+		select( "로프를 이용해 진입하기" );
+
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "^ff0000An unknown error occurred.^000000";
+			close;
+		case IE_NOINSTANCE:
+			end;
+		case IE_NOMEMBER:
+			end;
+		case IE_OK:
+			if (isbegin_quest(12561) == 0)
+				setquest 12561;
+			setquest 12560;
+			// warp "1@whl",32,53;
+			end;
+		}
+		end;
+	}
+	// otherwise display "create" menu
+	mes "^0000ff갈고리가 걸린 로프다. 비공정을 고정하는데 쓰던것으로 보인다.^000000";
+	next;
+	if (select( "취소", "비공정에 로프를 건다." ) == 1)
+		end;
+	instance_create(.@md_name$);
+	end;
+
+}
+
+1@whl,32,53,0	script	#st_warp 	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	disablenpc();
+	donpcevent instance_npcname("#start_control") + "::OnStart";
+	end;
+}
+
+1@whl,46,55,6	script	#start_control	EP17_2_BETA_ITEMKEEPER,{
+	if (is_party_leader() == false)
+		end;
+	if ('event < 1)
+		end;
+	if ('npc_is_moving == 1)
+		end;
+	mes "[비공정 관리로봇]";
+	mes "탑승객이신가요? 좌석 등급을 확인 하겠습니다. 소지하신 항공권을 보여주시겠습니까?";
+	mes "------------------";
+	mes "현재 등급 - ^0000ff" + 'mode_word$['mode] + " ^000000";
+	next;
+	switch( select( "잠시 대기", "아무 쪽지나 내밀어 본다", "^0000ff좌석 등급 변경^000000" ) ) {
+	case 1:
+		mes "[비공정 관리로봇]";
+		mes "예약하신 등급에 맞는 서비스를 제공해드리고 있습니다. 이용에 참고하시기 바랍니다.";
+		close;
+	case 2:
+		mes "[비공정 관리로봇]";
+		mes "이건. 저희측 항공권과는 조금 다른 모양새군요. 확인 절차를 밟은 후 다시 안내 해 드리겠습니다. 잠시만 기다려주십시오.";
+		close2;
+		emotion ET_PROFUSELY_SWEAT;
+		if ('npc_is_moving == 0) {
+			'npc_is_moving = 1;
+			donpcevent instance_npcname("#start_control") + "::OnStartRun";
+		}
+		end;
+	case 3:
+		mes "[비공정 관리로봇]";
+		mes "예약하신 항공권의 등급에 따라 서비스를 제공하고 있습니다. 좌석 업그레이드를 원하십니까?";
+		mes "--------------";
+		mes "현재 등급 - ^0000ff" + 'mode_word$['mode] + " ^000000";
+		next;
+		.@s = select( "관둔다", "이코노미", "비즈니스", "퍼스트 클래스" ) - 2;
+		if (.@s == -1) {
+			mes "[비공정 관리로봇]";
+			mes "천천히 생각해보시고 선택해주세요.";
+			close;
+		}
+		if ('mode == .@s) {
+			mes "[비공정 관리로봇]";
+			mes "^660000좌석 변경을 원하지 않으시는군요?^000000";
+		}
+		else {
+			mes "[비공정 관리로봇]";
+			mes "좌석을 ^0000ff[" + 'mode_word$[.@s] + "]^000000 로 조정 하시겠습니까?";
+			next;
+			if (select( "관둔다", "바꿔주십시오." ) == 1) {
+				mes "[비공정 관리로봇]";
+				mes "^660000좌석 변경을 원하지 않으시는군요?^000000";
+				close;
+			}
+			if ('event == 1)
+				'mode = .@s;
+			mes "[비공정 관리로봇]";
+			mes "좌석 업그레이드 절차가 완료되었습니다. 그럼 항공권을 보여 주시겠습니까?";
+		}
+		next;
+		mes "[비공정 관리로봇]";
+		mes "이건. 저희측 항공권과는 조금 다른 모양새군요. 확인 절차를 밟은 후 다시 안내 해 드리겠습니다. 잠시만 기다려주십시오.";
+		close2;
+		emotion ET_PROFUSELY_SWEAT;
+		if ('npc_is_moving == 0) {
+			'npc_is_moving = 1;
+			donpcevent instance_npcname("#start_control") + "::OnStartRun";
+		}
+		end;
+	}
+
+
+OnStart:
+	enablenpc();
+	'npc_is_moving = 1;
+	sleep 500;
+	unitwalk getnpcid(0),36,54, instance_npcname("#start_control") + "::OnReach1";
+	npctalk "민간인 승객이라니. 이게 얼마만인지 모르겠군요.";
+	sleep 2000;
+	emotion ET_THROB;
+	end;
+
+OnReach1:
+	'event = 1;
+	'npc_is_moving = 0;
+	end;
+
+OnStartRun:
+	unitwalk getnpcid(0),46,55, instance_npcname("#start_control") + "::OnReach2";
+	npctalk "...이런 형태의 항공권은 처음이네요. 금방 확인을 하고 돌아 올테니 잠시만 기다려주세요.";
+	end;
+
+OnReach2:
+	'event = 2;
+	disablenpc();
+	sleep 4000;
+	mapannounce 'map_whl$, "비공정 관리로봇: 비공정에 위조 항공권 탑승자 발생! 승무로봇은 모두 무임탑승자 대응 시퀀스로 돌입해주십시오.", bc_map, 0xFFDDAA;
+	sleep 6000;
+	if ('mode == 2)	// hard
+		mapannounce 'map_whl$, "비공정 관리로봇: 해당 인원은 " + 'mode_word$['mode] + "로 위조중입니다. 가용가능한 최대 병력으로 대응 바랍니다.", bc_map, 0xFFDDAA;
+	else
+		mapannounce 'map_whl$, "비공정 관리로봇: 해당 인원은 " + 'mode_word$['mode] + " 클래스로 위조중입니다. 대응레벨은 " + 'mode_letter$['mode] + " 등급입니다.", bc_map, 0xFFDDAA;
+	end;
+
+OnInstanceInit:
+	npcspeed 300;
+
+	'map_whl$ = instance_mapname("1@whl");
+	'event = 0;
+	'DE_BERSERKAIZER = 0;
+	deletearray 'event_type[0];
+	deletearray 'mob_id_cleaner[0],20;
+	deletearray 'count_mob[0], 5;
+
+	disablenpc();
+	disablenpc instance_npcname("#y_1");
+	disablenpc instance_npcname("#y_2");
+
+	disablenpc instance_npcname("#g_1");
+	disablenpc instance_npcname("#g_2");
+	disablenpc instance_npcname("#g_3");
+	disablenpc instance_npcname("#g_4");
+
+	disablenpc instance_npcname("#box_control");
+
+
+	// Settings
+	'mode = 0;	// default: 0 (easy)
+
+	// words to link mode to npc
+	setarray 'mode_word$[0],
+		"이코노미",		// easy
+		"비즈니스",		// medium
+		"퍼스트 클래스";	// hard
+
+	// letters to link mode to npc
+	setarray 'mode_letter$[0],
+		"C",	// easy
+		"A",	// medium
+		"S";	// hard
+
+	// mob ~hp by mode
+	setarray 'hp[0],
+		2500000,
+		4000000,
+		5000000;
+
+	// boss hp by mode
+	setarray 'mode_hp_boss[0],
+		300000000,
+		500000000,
+		600000000;
+
+	// NPC_RELIEVE_ON from boss by mode
+	setarray 'mode_boss_relieve[0],
+		1,
+		5,
+		8;
+
+	// boss res by mode (custom, unknown value)
+	setarray 'mode_res[0],
+		0,
+		100,
+		200;
+
+	// boss mres by mode (custom, unknown value)
+	setarray 'mode_mres[0],
+		0,
+		100,
+		200;
+
+	// [1/rate] to activate the event from airshipD_DE_BERSERKAIZER by mode
+	setarray 'rate_DE_BERSERKAIZER[0],
+		12,
+		12,
+		10;
+
+	// [1/rate] to activate the event from airshipD_RA_UNLIMIT by mode
+	setarray 'rate_event_1[0],
+		4,
+		4,
+		4;
+
+	// [1/rate] to activate the event from airshipD_NPC_RELIEVE_ON_10 by mode
+	setarray 'rate_event_2[0],
+		4,
+		4,
+		4;
+	end;
+}
+
+1@whl,1,1,0	script	airship_destruction_main	-1,{
+	end;
+
+// Room 2
+OnStart_2_C:
+	sleep 2000;
+	mapannounce 'map_whl$, "???: 경보! 비공정 외부로부터 인가되지 않은 존재 침투! 패트롤들은 2구역의 수색에 집중하십시오.", bc_map, 0xFFEE66;
+
+	'count_total_mob[2] = 10;
+	callsub( S_Mob, 2, 65,91, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 2, 63,93, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 50,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 45,91, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 53,87, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 44,85, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 43,85, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 42,95, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 63,94, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 52,92, "EP17_2_BETA_GUARDS_NG" );
+	end;
+OnStart_2_A:	// Medium
+	sleep 2000;
+	mapannounce 'map_whl$, "???: 경보! 비공정 외부로부터 인가되지 않은 존재 침투! 패트롤들은 2구역의 수색에 집중하십시오.", bc_map, 0xFFEE66;
+
+	'count_total_mob[2] = 16;
+	callsub( S_Mob, 2, 46,89, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 65,88, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 55,84, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 54,88, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 62,88, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 61,95, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 50,85, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 2, 58,90, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 46,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 46,93, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 64,92, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 45,94, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 41,90, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 2, 40,84, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 40,87, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 61,93, "EP17_2_OMEGA_CLEANER_NG" );
+	end;
+OnStart_2_S:	// Hard
+	sleep 2000;
+	mapannounce 'map_whl$, "???: 경보! 비공정 외부로부터 인가되지 않은 존재 침투! 패트롤들은 2구역의 수색에 집중하십시오.", bc_map, 0xFFEE66;
+
+	'count_total_mob[2] = 31;
+	callsub( S_Mob, 2, 44,84, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 55,84, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 53,84, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 56,88, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 50,94, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 47,89, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 51,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 41,95, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 55,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 66,85, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 58,90, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 50,86, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 2, 53,90, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 67,89, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 43,86, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 57,85, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 46,92, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 60,86, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 53,88, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 42,95, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 46,94, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 2, 58,96, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 2, 48,87, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 51,86, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 51,90, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 62,88, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 62,84, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 50,94, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 60,89, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 2, 64,91, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 2, 56,85, "EP17_2_OMEGA_CLEANER_NG" );
+	end;
+
+// Room 3
+OnStart_3_C:	// Easy
+	mapannounce 'map_whl$, "???: 모든 패트롤에게 알립니다. 화물칸과 함내 휴게공간에 진입한 외부인을 수색하고 저지하십시오. 다시 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[3] = 40;
+	callsub( S_Mob, 3, 55,110, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 39,122, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 52,118, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 56,120, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 55,123, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 54,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 59,123, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 48,122, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 55,109, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 54,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 60,123, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 53,139, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 55,139, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 42,140, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 38,122, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 55,130, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 38,124, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 53,117, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 53,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 56,117, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 56,117, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 56,124, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 62,123, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 73,123, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 75,124, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 67,141, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 59,141, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 65,142, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 64,143, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 49,144, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 62,146, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 47,146, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 53,150, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 55,151, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 54,154, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 54,155, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 57,156, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 58,157, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 53,156, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 51,156, "EP17_2_OMEGA_CLEANER_NG" );
+	end;
+OnStart_3_A:	// Medium
+	mapannounce 'map_whl$, "???: 모든 패트롤에게 알립니다. 화물칸과 함내 휴게공간에 진입한 외부인을 수색하고 저지하십시오. 다시 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[3] = 47;
+	callsub( S_Mob, 3, 56,122, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 65,123, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 54,112, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 53,129, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 52,119, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 52,123, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 52,121, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 51,132, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 51,124, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 54,122, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 68,124, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 43,122, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 59,123, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 54,122, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 54,117, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 47,122, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 51,111, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 70,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 44,122, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 73,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 41,124, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 41,124, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 39,123, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 38,122, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 35,122, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 50,140, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 66,141, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 44,141, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 44,141, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 54,143, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 43,144, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 67,144, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 54,145, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 47,146, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 46,146, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 45,146, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 59,149, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 58,150, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 56,150, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 52,150, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 53,157, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 48,155, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 48,158, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 48,154, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 48,159, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 49,159, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 39,144, "MD_BETA_SCISSORE_NG" );
+	end;
+OnStart_3_S:	// Hard
+	mapannounce 'map_whl$, "???: 모든 패트롤에게 알립니다. 화물칸과 함내 휴게공간에 진입한 외부인을 수색하고 저지하십시오. 다시 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[3] = 59;
+	callsub( S_Mob, 3, 42,123, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 52,114, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 52,118, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 55,124, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 54,122, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 53,115, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 57,123, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 38,123, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 56,124, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 54,109, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 55,114, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 50,124, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 56,111, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 52,121, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 57,124, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 48,122, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 52,109, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 53,128, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 56,130, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 52,131, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 53,133, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 31,122, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 31,122, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 55,136, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 51,136, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 68,123, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 71,123, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 75,124, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 55,138, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 51,138, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 50,140, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 56,141, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 67,141, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 65,142, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 68,143, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 63,144, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 65,145, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 68,146, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 58,149, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 61,150, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 55,153, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 57,154, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 61,154, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 54,155, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 55,155, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 55,156, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 61,156, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 60,157, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 3, 58,157, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 3, 53,158, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 61,160, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 51,155, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 50,154, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 49,158, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 3, 49,158, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 48,156, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 3, 48,155, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 41,146, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 3, 36,144, "EP17_2_OMEGA_CLEANER_NG" );
+	end;
+
+OnStart_4_C:	// Easy
+	mapannounce 'map_whl$, "???: 휴게공간에 잠입한 외부인이 기관실로 향합니다. 화물칸 수색인원들도 모든 수색을 중단하고 기관실을 지원하십시오. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[4] = 9;
+	callsub( S_Mob, 4, 153,34, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 149,38, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 139,37, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 154,36, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 132,36, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 164,36, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 180,32, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 184,31, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 184,36, "EP17_2_BETA_GUARDS_NG" );
+	end;
+OnStart_4_A:	// Medium
+	mapannounce 'map_whl$, "???: 휴게공간에 잠입한 외부인이 기관실로 향합니다. 화물칸 수색인원들도 모든 수색을 중단하고 기관실을 지원하십시오. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[4] = 17;
+	callsub( S_Mob, 4, 168,36, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 147,32, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 150,30, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 164,41, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 175,41, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 171,39, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 174,33, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 182,37, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 182,30, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 169,37, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 156,34, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 153,33, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 145,37, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 140,32, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 138,34, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 132,33, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 132,41, "EP17_2_BETA_GUARDS_NG" );
+	end;
+OnStart_4_S:	// Hard
+	mapannounce 'map_whl$, "???: 휴게공간에 잠입한 외부인이 기관실로 향합니다. 화물칸 수색인원들도 모든 수색을 중단하고 기관실을 지원하십시오. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[4] = 30;
+	callsub( S_Mob, 4, 145,39, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 158,40, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 145,36, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 140,42, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 137,37, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 146,40, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 137,31, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 137,40, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 138,34, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 159,38, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 159,38, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 159,42, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 160,39, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 165,30, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 165,35, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 166,34, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 167,36, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 168,35, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 168,29, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 168,30, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 169,38, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 172,33, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 173,34, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 175,41, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 4, 176,29, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 176,31, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 4, 177,37, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 4, 185,33, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 4, 185,35, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 4, 185,34, "EP17_2_OMEGA_CLEANER_NG" );
+	end;
+
+OnStart_5_C:	// Easy
+	mapannounce 'map_whl$, "???: 기관실안에 잠입한 외부인을 모두 격멸하십시오. 코어로 절대 접근하지 않도록 막아야합니다. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[5] = 40;
+	callsub( S_Mob, 5, 182,52, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 182,50, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 166,53, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 166,63, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 160,54, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 158,51, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 158,51, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 159,72, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 162,60, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 162,73, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 168,51, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 171,49, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 169,74, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 161,72, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 175,75, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 160,75, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 161,76, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 148,54, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 163,77, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 173,77, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 146,52, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 164,73, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 147,74, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 154,62, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 171,72, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 162,80, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 165,82, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 152,86, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 169,90, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 158,95, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 155,97, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 174,97, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 170,98, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 152,95, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 155,101, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 151,95, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 151,97, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 144,98, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 143,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 178,50, "EP17_2_BETA_GUARDS_NG" );
+	end;
+OnStart_5_A:	// Medium
+	mapannounce 'map_whl$, "???: 기관실안에 잠입한 외부인을 모두 격멸하십시오. 코어로 절대 접근하지 않도록 막아야합니다. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[5] = 48;
+	callsub( S_Mob, 5, 164,79, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 152,74, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 165,76, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 165,71, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 153,74, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 154,76, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 147,75, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 164,72, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 157,64, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 162,77, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 167,77, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 158,87, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 148,74, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 169,75, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 154,74, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 161,77, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 150,66, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 169,73, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 147,77, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 172,73, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 177,74, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 173,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 173,97, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 168,97, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 150,97, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 162,98, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 168,99, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 174,99, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 161,100, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 174,100, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 162,101, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 162,102, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 164,107, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 144,54, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 150,53, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 144,51, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 140,51, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 155,50, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 153,49, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 142,49, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 166,51, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 168,54, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 169,50, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 173,49, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 175,51, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 176,53, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 181,54, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 185,49, "EP17_2_BETA_GUARDS_NG" );
+	end;
+OnStart_5_S:	// Hard
+	mapannounce 'map_whl$, "???: 기관실안에 잠입한 외부인을 모두 격멸하십시오. 코어로 절대 접근하지 않도록 막아야합니다. 반복합니다...", bc_map, 0xFFEE66;
+
+	'count_total_mob[5] = 60;
+	callsub( S_Mob, 5, 173,51, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 147,51, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 147,54, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 152,52, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 173,54, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 165,53, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 157,54, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 164,54, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 165,55, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 155,60, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 168,50, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 175,50, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 176,52, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 184,51, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 185,50, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 186,54, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 145,51, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 141,53, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 138,54, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 137,51, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 143,72, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 149,73, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 161,73, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 164,73, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 144,76, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 155,76, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 151,76, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 150,77, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 160,77, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 165,77, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 167,76, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 166,77, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 169,73, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 158,84, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 173,73, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 160,87, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 177,77, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 166,89, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 170,95, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 157,96, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 173,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 165,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 163,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 155,96, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 155,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 153,96, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 153,92, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 151,90, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 148,96, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 144,97, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 157,98, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 151,98, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 172,98, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 172,99, "MD_BETA_SCISSORE_NG" );
+	callsub( S_Mob, 5, 163,99, "EP17_2_BETA_CLEANER_A" );
+	callsub( S_Mob, 5, 161,100, "EP17_2_OMEGA_CLEANER_NG" );
+	callsub( S_Mob, 5, 165,100, "MD_E_EA2S", 1 );
+	callsub( S_Mob, 5, 172,100, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 166,102, "EP17_2_BETA_GUARDS_NG" );
+	callsub( S_Mob, 5, 163,104, "EP17_2_BETA_CLEANER_A" );
+	end;
+
+S_Mob:
+	sleep rand(250,1000);
+	if ('round != getarg(0))	// shouldn't happen
+		end;
+	.@event$ = instance_npcname("airship_destruction_main") + "::OnMobDead";
+	if (getarg(4,0)) {
+		monster 'map_whl$, getarg(1), getarg(2), 'round + " 구역 감찰관", getarg(3),1, .@event$;
+		unitskilluseid $@mobid[0], 771, 9;	// NPC_RELIEVE_ON
+	}
+	else {
+		monster 'map_whl$, getarg(1), getarg(2), 'round + " 구역 패트롤", getarg(3),1, .@event$;
+		unitskilluseid $@mobid[0], 771, 1;	// NPC_RELIEVE_ON
+	}
+	unitskilluseid $@mobid[0], rand(167,168), 1;	// NPC_CHANGEHOLY or NPC_CHANGEDARKNESS
+	setunitdata $@mobid[0], UMOB_MAXHP, 'hp[ 'mode ];
+	setunitdata $@mobid[0], UMOB_HP, 'hp[ 'mode ];
+	return;
+
+OnMobDead:
+	switch( rand(140) ) {	// ~1/10 to display a message
+	case 0:
+		mapannounce 'map_whl$, "???:개체당 평균 생존시간 3.8 초. 대단합니다. 본 기기가 정비를 위해 패트롤의 너트와 볼트를 분해할때도 그보다는 더 걸렸습니다. 그대들은 방어행위를 하는게 맞습니까?", bc_map, 0xFFDD66;
+		break;
+	case 1:
+		mapannounce 'map_whl$, "???:계속해서 전진할 생각입니까. 멈추지 않는다면 이쪽에서도 무력으로 응대할 수 밖에 없습니다.", bc_map, 0xCCFF;
+		break;
+	case 2:
+		mapannounce 'map_whl$, "???:더 이상 전진하지 마십시오. 본 기기는 외부 유기체와 적대하고 싶지않습니다.", bc_map, 0xCCFF;
+		break;
+	case 3:
+		mapannounce 'map_whl$, "???:본 기기가 분노라는 감정을 학습하지 못한것에 감사하십시오 패트롤들이여. 만약 그 감정을 학습했다면 그대들은 지금 즉시 이 비행선과 함께 가루가 되었을것입니다.", bc_map, 0xFFDD66;
+		break;
+	case 4:
+		mapannounce 'map_whl$, "???:본 기기의 연산으로 이 비행선에 배치된 패트롤의 90% 는 쓸모없는 전력으로 추정됩니다. 이번 사태가 종료된 이후 합당한 재배치가 있을 것입니다.", bc_map, 0xFFDD66;
+		break;
+	case 5:
+		mapannounce 'map_whl$, "???:비행선이 튼튼한건 아무런 쓸모가 없으며 강력한 열병기로 무장한 전투력 우선의 패트롤을 확보하는것이 생존확률에 도움이 된다는 내용을 학습통계에 기록합니다.", bc_map, 0xFFDD66;
+		break;
+	case 6:
+		mapannounce 'map_whl$, "???:승무원 휴게공간의 우측 기관실 출입구를 파괴합니다. 혹여 다시 복구하는 멍청한 패트롤이 없기를 바랍니다.", bc_map, 0xFFDD66;
+		break;
+	case 7:
+		mapannounce 'map_whl$, "???:외부 유기체에게 알립니다. 기관실의 코어로 접근하는것은 절대 바람직한 행동이 아닙니다. 지금이라도 즉시 철수하기를 권장드립니다.", bc_map, 0xCCFF;
+		break;
+	case 8:
+		mapannounce 'map_whl$, "???:이 비행선에 진입하기 전엔 무슨 일을 했습니까 외부 유기체. 패트롤을 파괴하는 모습이 익숙합니다. 아인베흐 광산에서 폐고철을 수집하던 인생이었습니까?", bc_map, 0xCCFF;
+		break;
+	case 9:
+		mapannounce 'map_whl$, "???:조금 더 힘을 내십시오 작고 가련한 패트롤들이여. 그대들의 운명은 이 비공정에 귀속되어있습니다. 본 기기가 파괴될 경우 그대들도 무사하지 못할 것입니다.", bc_map, 0xFFDD66;
+		break;
+	case 10:
+		mapannounce 'map_whl$, "???:지금이라도 돌아간다면 외부 유기체 여러분들의 생명을 빼앗지는 않을 것입니다. 현명한 선택 하시기 바랍니다.", bc_map, 0xCCFF;
+		break;
+	case 11:
+		mapannounce 'map_whl$, "???:패트롤 병력은 기관실로 가는 길목을 모두 봉쇄하십시오. 현 시간부로 다른 곳의 방위를 포기합니다. 반복합니다. 기관실로 가는 길목을 봉쇄하십시오.", bc_map, 0xFFDD66;
+		break;
+	case 12:
+		mapannounce 'map_whl$, "???:화물칸의 생명 반응은 무시하는게 좋겠습니다. 큰 전투전력은 아닌것으로 추정됩니다. 모두 기관실로 향하는 외부 유기체를 공격하십시오.", bc_map, 0xFFDD66;
+		break;
+	case 13:
+		mapannounce 'map_whl$, "???:우리 평화로운 대화를 나누는 것은 어떻습니까 외부 유기체? 폭력은 사태 해결에 도움이 되지 않습니다.", bc_map, 0xCCFF;
+		break;
+	case 14:
+		mapannounce 'map_whl$, "???:개체당 평균 생존시간 2.2 초. 대단합니다. 본 기기가 정비를 위해 패트롤의 너트와 볼트를 분해할때도 그보다는 더 걸렸습니다. 그대들은 방어행위를 하는게 맞습니까?", bc_map, 0xFFDD66;
+		break;
+	default:
+		break;
+	}
+
+	'count_mob['round]++;
+	if ('count_total_mob['round] == 0 || 'count_mob['round] < 'count_total_mob['round])
+		end;
+	killmonster 'map_whl$, instance_npcname("airship_destruction_main") + "::OnMobDead";
+	'count_mob['round] = 'count_total_mob['round] = 0;
+	'event++;
+	end;
+}
+
+
+// To room 2
+//--------------------------------------------
+1@whl,53,74,0	script	#wp1	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('event < 2)
+		end;
+	if ('event == 2 && is_party_leader()) {
+		'event = 3;
+		'round = 2;
+		.@label$ = "::OnStart_" + 'round + "_" + 'mode_letter$['mode];
+		donpcevent instance_npcname("airship_destruction_main") + .@label$;	// start round 2
+	}
+	if ('event < 10)
+		warp 'map_whl$,53,86;
+	else	// direct warp to boss room
+		warp 'map_whl$,160,140;
+	end;
+}
+
+// To room 3
+//--------------------------------------------
+1@whl,53,97,0	script	#wp2	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('event < 4) {
+		mapannounce 'map_whl$, "SYSTEM: 함내 전투상황일 경우 이동이 금지됩니다", bc_map, 0xFF4444;
+		end;
+	}
+	if ('event == 4 && is_party_leader()) {
+		'event = 5;
+		'round = 3;
+		.@label$ = "::OnStart_" + 'round + "_" + 'mode_letter$['mode];
+		donpcevent instance_npcname("airship_destruction_main") + .@label$;	// start round 3
+	}
+	warp 'map_whl$,53,110;
+	end;
+}
+
+// To room 4
+//--------------------------------------------
+1@whl,37,162,0	script	#wp3	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('event < 6) {
+		mapannounce 'map_whl$, "SYSTEM: 함내 전투상황일 경우 이동이 금지됩니다", bc_map, 0xFF4444;
+		end;
+	}
+	if ('event == 6 && is_party_leader()) {
+		'event = 7;
+		'round = 4;
+		.@label$ = "::OnStart_" + 'round + "_" + 'mode_letter$['mode];
+		donpcevent instance_npcname("airship_destruction_main") + .@label$;	// start round 4
+	}
+	warp 'map_whl$,139,24;
+	end;
+}
+
+// To room 5
+//--------------------------------------------
+1@whl,160,43,0	script	#wp4	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('event < 8) {
+		mapannounce 'map_whl$, "SYSTEM: 함내 전투상황일 경우 이동이 금지됩니다", bc_map, 0xFF4444;
+		end;
+	}
+	if ('event == 8 && is_party_leader()) {
+		'event = 9;
+		'round = 5;
+		.@label$ = "::OnStart_" + 'round + "_" + 'mode_letter$['mode];
+		donpcevent instance_npcname("airship_destruction_main") + .@label$;	// start round 5
+	}
+	warp 'map_whl$,160,53;
+	end;
+}
+
+// To Boss room
+//--------------------------------------------
+1@whl,160,117,0	script	#main_control	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('event < 10) {
+		mapannounce 'map_whl$, "SYSTEM: 함내 전투상황일 경우 이동이 금지됩니다", bc_map, 0xFF4444;
+		end;
+	}
+	warp 'map_whl$,160,140;
+	end;
+}
+
+1@whl,160,166,5	script	#boss_control	EP19_MD_AQUILA,1,1,{
+	if ('event < 10)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[아퀼라]";
+	mes "지금이라도 늦지 않았습니다. 파괴를 멈추고 돌아간다면 저 역시 추가적인 대응은 하지 않을 것입니다.";
+	next;
+	if (select( "그냥 돌아가겠다", "그렇겐 못하겠는데?" ) == 1) {
+		mes "[아퀼라]";
+		mes "잘 생각하셨습니다. ";
+		close2;
+		warp 'map_whl$,31,54;
+		end;
+	}
+	disablenpc();
+	if ('event == 10) {
+		donpcevent instance_npcname("airshipD_hpcheck") + "::OnStart";
+	}
+	end;
+
+OnTouch:	// unknown effect
+	end;
+}
+
+1@whl,1,1,0	script	airshipD_hpcheck	-1,{
+	end;
+OnStart:
+	monster 'map_whl$,159,158,"아퀼라","EP19_MD_AQUILA",1, instance_npcname("airshipD_hpcheck") + "::OnMyMobDead";
+	'boss_id = $@mobid[0];
+
+	'boss_hp = 'mode_hp_boss[ 'mode ];
+	unitskilluseid 'boss_id, 771, 'mode_boss_relieve[ 'mode ];	// NPC_RELIEVE_ON
+	setunitdata 'boss_id, UMOB_HP, 'boss_hp;
+	setunitdata 'boss_id, UMOB_RES, 'mode_res[ 'mode ];
+	setunitdata 'boss_id, UMOB_MRES, 'mode_mres[ 'mode ];
+
+	initnpctimer;
+
+	// independent of boss hp
+	donpcevent instance_npcname("airshipD_NPC_MAXPAIN") + "::OnStart";
+	donpcevent instance_npcname("airshipD_DE_BERSERKAIZER") + "::OnStart";
+	end;
+
+OnTimer3000:
+	getunitdata 'boss_id, .@data;
+	.@hp = .@data[UMOB_HP];
+	'boss_hp = .@hp;
+
+	.@difference = ('mode_hp_boss[ 'mode ] - .@hp);
+	if (.@difference > 15000000 && 'event_type[0] == false) {
+		donpcevent instance_npcname("airshipD_EP17_2_OMEGA_CLEANER_NG") + "::OnStart";
+	}
+	if (.@difference > 50000000 && 'event_type[1] == false) {
+		if (rand('rate_event_1['mode]) == 0)
+			donpcevent instance_npcname("airshipD_RA_UNLIMIT") + "::OnStart";
+	}
+	if (.@difference > 100000000 && 'event_type[2] == false) {
+		if (rand('rate_event_2['mode]) == 0)
+			donpcevent instance_npcname("airshipD_NPC_RELIEVE_ON_10") + "::OnStart";
+	}
+	initnpctimer;
+	end;
+
+OnMyMobDead:
+	stopnpctimer;
+	disablenpc();
+	killmonster 'map_whl$, instance_npcname("airshipD_hpcheck") + "::OnMyMobDead";
+
+	'boss_hp = 0;
+	'boss_id = 0;
+
+	donpcevent instance_npcname("airshipD_NPC_MAXPAIN") + "::OnStop";
+	donpcevent instance_npcname("airshipD_DE_BERSERKAIZER") + "::OnStop";
+	// donpcevent instance_npcname("airshipD_EP17_2_OMEGA_CLEANER_NG") + "::OnStop";	// doesn't stop
+	donpcevent instance_npcname("airshipD_RA_UNLIMIT") + "::OnStop";
+	donpcevent instance_npcname("airshipD_NPC_RELIEVE_ON_10") + "::OnStop";
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnStop";
+
+	enablenpc instance_npcname("#box_control");
+	'event = 11;
+	end;
+}
+
+1@whl,1,1,0	script	airshipD_NPC_MAXPAIN	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer5000:
+	unittalk 'boss_id, "자동 보호 프로세스 가동. 충격에 대비하십시오.";
+	end;
+OnTimer7000:
+	unitskilluseid 'boss_id, "NPC_MAXPAIN",5;
+	end;
+OnTimer150000:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+// It looks like if the party doesn't interact with any of the ongoing events for a while, the boss recovers its hp
+1@whl,1,1,0	script	airshipD_hpfullcheck	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer120000:	// 2 mins
+	setunitdata 'boss_id, UMOB_HP, 'mode_hp_boss[ 'mode ];
+	stopnpctimer;
+	if ('DE_BERSERKAIZER != 0 || 'event_type[1] == true || 'event_type[2] == true)	// an event is still ongoing
+		initnpctimer;
+	end;
+OnCheck:
+	stopnpctimer;
+	if ('DE_BERSERKAIZER != 0 || 'event_type[1] == true || 'event_type[2] == true)	// an event is still ongoing
+		initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+}
+
+1@whl,1,1,0	script	airshipD_DE_BERSERKAIZER	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	if (unitisforcewalk('boss_id))	// debug, the unit is idle but should be walking
+		unitstopwalk 'boss_id, USW_FORCE_STOP;
+
+	if ('DE_BERSERKAIZER != 0) {
+		initnpctimer;
+		end;
+	}
+	if (rand('rate_DE_BERSERKAIZER['mode]) != 0) {
+		initnpctimer;
+		end;
+	}
+	'DE_BERSERKAIZER = 1;
+	setunitdata 'boss_id, UMOB_ATKRANGE, 8;
+	unitskilluseid 'boss_id, "DE_BERSERKAIZER",1;
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnStart";
+
+	// Similiar to NPC_RUN. Currently NPC_RUN doesn't prevent to autoattack while the mob is running unlike official, this part simulates that
+	getunitdata 'boss_id, .@data;
+	if (.@data[UMOB_TARGETID] < 1) {
+		initnpctimer;
+		end;
+	}
+	.@target_type = getunittype(.@data[UMOB_TARGETID]);
+	if (.@target_type != BL_PC) {
+		initnpctimer;
+		end;
+	}
+	getmapxy .@map$,.@x_target,.@y_target, .@target_type, .@data[UMOB_TARGETID];
+
+	// direction according to boss-target position
+	.@dx = 0;
+	.@dy = 7;	// default DIR_NORTH
+
+	if (.@x_target == .@data[UMOB_X]) {
+		if (.@y_target > .@data[UMOB_Y]) {
+			.@dx = 0;
+			.@dy = -7;	// DIR_SOUTH
+		}
+	}
+	else if (.@y_target == .@data[UMOB_Y]) {
+		if (.@x_target > .@data[UMOB_X]) {
+			.@dx = -7;	// DIR_WEST
+			.@dy = 0;
+		}
+		else {
+			.@dx = 7;	// DIR_EAST
+			.@dy = 0;
+		}
+	}
+	else if (.@x_target > .@data[UMOB_X]) {
+		if (.@y_target > .@data[UMOB_Y]) {
+			.@dx = -7;	// DIR_SOUTHWEST
+			.@dy = -7;
+		}
+		else {
+			.@dx = -7;	// DIR_NORTHWEST
+			.@dy = 7;
+		}
+	}
+	else if (.@x_target < .@data[UMOB_X]) {
+		if (.@y_target > .@data[UMOB_Y]) {
+			.@dx = 7;	// DIR_SOUTHEAST
+			.@dy = -7;
+		}
+		else {
+			.@dx = 7;	// DIR_NORTHEAST
+			.@dy = 7;
+		}
+	}
+	.@x = .@data[UMOB_X] + .@dx;
+	.@y = .@data[UMOB_Y] + .@dy;
+
+	if (checkcell(.@map$,.@x,.@y,cell_chkpass)) {
+		unitstopwalk 'boss_id, USW_FORCE_STOP;
+		unitwalk 'boss_id,.@x,.@y;
+	}
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	'DE_BERSERKAIZER = 0;
+	end;
+}
+
+1@whl,159,173,1	script	#b_memo	CLEAR_NPC,{
+	if ('DE_BERSERKAIZER == 0) {
+		mes "코어가 원거리모드로 전환되어 통제되지 않을때는 이 스위치를 눌러주십시오.";
+		close;
+	}
+	specialeffect EF_HOMUNCASTING;
+	specialeffect EF_STORMKICK7;
+	progressbar "3132FF",2;
+	removespecialeffect EF_STORMKICK7;
+	specialeffect EF_CHIMTO2;
+
+	skilleffect "MC_CARTREVOLUTION",0;
+	getunitdata 'boss_id, .@data;
+	npcskilleffect "MC_CARTREVOLUTION",0,.@data[UMOB_X],.@data[UMOB_Y];
+
+	if (unitexists('boss_id) == true) {
+		'DE_BERSERKAIZER = 0;
+		setunitdata 'boss_id, UMOB_ATKRANGE, 1;
+		donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnCheck";
+	}
+	end;
+}
+
+1@whl,1,1,0	script	airshipD_EP17_2_OMEGA_CLEANER_NG	-1,{
+	end;
+OnStart:
+	'event_type[0] = true;
+	initnpctimer;
+	end;
+OnTimer10000:
+	mapannounce 'map_whl$, "코어 관리실에 허가되지 않은 외부인 침입. 청소로봇들은 즉시 클리닝 절차를 진행해 주시기 바랍니다", bc_map, 0xFFFF;
+	end;
+OnTimer15000:
+	mapannounce 'map_whl$, "구역 배치를 마친 로봇은 순서대로 자체 정화작업에 들어가기 바랍니다.", bc_map, 0xFFFF;
+
+	.@event$ = instance_npcname("airshipD_EP17_2_OMEGA_CLEANER_NG") + "::OnMobDead";
+	.@mob_mode = (MD_AGGRESSIVE | MD_NORANDOMWALK | MD_CANATTACK | MD_KNOCKBACKIMMUNE | MD_TELEPORTBLOCK | MD_STATUSIMMUNE | MD_SKILLIMMUNE);
+
+	for ( .@i = 0; .@i < 20; ++.@i ) {
+		areamonster 'map_whl$,133,133,186,186,"고장난 청소로봇","EP17_2_OMEGA_CLEANER_NG",1, .@event$;
+		'mob_id_cleaner[.@i] = $@mobid[0];
+		setunitdata 'mob_id_cleaner[.@i], UMOB_MODE, .@mob_mode;
+		unitskilluseid 'mob_id_cleaner[.@i], "NPC_RELIEVE_ON",10;
+		unitskilluseid 'mob_id_cleaner[.@i], "LK_AURABLADE",1;
+		sleep 300;
+	}
+	end;
+
+OnTimer28000:
+	mapannounce 'map_whl$, "정화 시퀀스 실행", bc_map, 0xFFFF;
+
+	for ( .@i = 0; .@i < 20; ++.@i ) {
+		if (unitexists('mob_id_cleaner[.@i]) == true) {
+			unittalk 'mob_id_cleaner[.@i], "오염물은 정화한다!!";
+			unitskilluseid 'mob_id_cleaner[.@i], "SJ_LIGHTOFSUN",1;
+			sleep 300;
+		}
+	}
+	end;
+
+OnTimer30000:
+	stopnpctimer;
+	for ( .@i = 0; .@i < 20; ++.@i ) {
+		if (unitexists('mob_id_cleaner[.@i]) == true) {
+			unitskilluseid 'mob_id_cleaner[.@i], "NPC_SELFDESTRUCTION",1;
+			sleep 300;
+		}
+	}
+	'event_type[0] = false;
+	end;
+
+OnMobDead:
+	end;
+}
+
+1@whl,1,1,0	script	airshipD_RA_UNLIMIT	-1,{
+	end;
+OnStart:
+	'event_type[1] = true;
+	mapannounce 'map_whl$, "장시간 가동으로 코어의 황색에텔이 고갈되었습니다. 즉시 충전해주십시오. 에텔고갈로 인해 코어가 과부하모드로 전환됩니다. ", bc_map, 0xFFCC00;
+	unitskilluseid 'boss_id, "RA_UNLIMIT",5;
+	unitskilluseid 'boss_id, "SJ_LIGHTOFSUN",3;
+	setunitdata 'boss_id, UMOB_CLASS, 21588;	// change to sprite EP19_MD_AQUILA_B for monster_size_effect
+	.@npc_num = rand(1,2);
+	enablenpc instance_npcname("#y_" + .@npc_num);
+	specialeffect EF_YUFITEL2, AREA, instance_npcname("#y_" + .@npc_num);
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnStart";
+	end;
+OnStop:
+	disablenpc instance_npcname("#y_1");
+	disablenpc instance_npcname("#y_2");
+	'event_type[1] = false;
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnCheck";
+	end;
+}
+
+1@whl,173,161,1	script	#y_1	MD_HIDDEN_GROUND02,3,3,{
+	end;
+OnTouchNPC:
+	'event_type[1] = false;
+	disablenpc();
+	unitskilluseid 'boss_id, "GC_COUNTERSLASH",1;
+	if (rand(1,2) == 1)
+		unitskilluseid 'boss_id, "NPC_CHANGEHOLY",1;
+	else
+		unitskilluseid 'boss_id, "NPC_CHANGEDARKNESS",1;
+	mapannounce 'map_whl$, "코어에 황색 에텔이 정상적으로 공급되어 과부하상태가 해제됩니다.", bc_map, 0xFF55;
+	donpcevent instance_npcname("airshipD_RA_UNLIMIT") + "::OnStop";
+	setunitdata 'boss_id, UMOB_CLASS, 21531;	// EP19_MD_AQUILA
+	end;
+}
+1@whl,146,161,1	duplicate(#y_1)	#y_2	MD_HIDDEN_GROUND02,3,3
+
+
+1@whl,1,1,0	script	airshipD_NPC_RELIEVE_ON_10	-1,{
+	end;
+OnStart:
+	'event_type[2] = true;
+	.@npc_num = rand(1,4);
+	enablenpc instance_npcname("#g_" + .@npc_num);
+	specialeffect EF_YUFITEL2, AREA, instance_npcname("#g_" + .@npc_num);
+	.@hp = 'boss_hp;
+	unitskilluseid 'boss_id, "NPC_RELIEVE_ON",10;
+	mapannounce 'map_whl$, "장시간 가동으로 녹색 에텔이 부족합니다. 에텔이 공급되기 전까지 디펜스모드로 돌입합니다.", bc_map, 0xFFCC00;
+	unitskilluseid 'boss_id, "LK_BERSERK",1;
+
+	// LK_BERSERK is supposed to modify some stats
+	setunitdata 'boss_id, UMOB_HP, .@hp;
+	'boss_hp = .@hp;
+
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnStart";
+	end;
+OnStop:
+	disablenpc instance_npcname("#g_1");
+	disablenpc instance_npcname("#g_2");
+	disablenpc instance_npcname("#g_3");
+	disablenpc instance_npcname("#g_4");
+	'event_type[2] = false;
+	donpcevent instance_npcname("airshipD_hpfullcheck") + "::OnCheck";
+	end;
+}
+
+1@whl,138,173,1	script	#g_1	MD_HIDDEN_GROUND02,3,3,{
+	end;
+OnTouchNPC:
+	killmonster 'map_whl$, instance_npcname("airshipD_hpcheck") + "::OnMyMobDead";
+	'event_type[2] = false;
+	disablenpc();
+	mapannounce 'map_whl$, "녹색 에텔 충전 완료. 완전히 안정화되기까지 5초간 코어의 방어력이 사라집니다. 코어 취급에 주의하십시오.", bc_map, 0xFFFF;
+	monster 'map_whl$,159,158,"아퀼라","EP19_MD_AQUILA",1, instance_npcname("airshipD_hpcheck") + "::OnMyMobDead";
+	'boss_id = $@mobid[0];
+
+	unitskilluseid 'boss_id, "WL_TETRAVORTEX_FIRE",1;
+	unitskilluseid 'boss_id, "WL_TETRAVORTEX_WIND",1;
+	unitskilluseid 'boss_id, "WL_TETRAVORTEX_GROUND",1;
+	unitskilluseid 'boss_id, "WL_TETRAVORTEX_WATER",1;
+	unitskilluseid 'boss_id, "NPC_RELIEVE_ON", 'mode_boss_relieve[ 'mode ];
+
+	if ('event_type[1] == true)
+		setunitdata 'boss_id, UMOB_CLASS, 21588;
+	if ('DE_BERSERKAIZER == 1) {
+		setunitdata 'boss_id, UMOB_ATKRANGE, 8;
+		unitskilluseid 'boss_id, "DE_BERSERKAIZER",1;	// only used to display the effect
+	}
+	setunitdata 'boss_id, UMOB_HP, 'boss_hp;
+	setunitdata 'boss_id, UMOB_RES, 'mode_res[ 'mode ];
+	setunitdata 'boss_id, UMOB_MRES, 'mode_mres[ 'mode ];
+
+	donpcevent instance_npcname("airshipD_NPC_RELIEVE_ON_10") + "::OnStop";
+	end;
+}
+1@whl,138,146,1	duplicate(#g_1)	#g_2	MD_HIDDEN_GROUND02,3,3
+1@whl,181,146,1	duplicate(#g_1)	#g_3	MD_HIDDEN_GROUND02,3,3
+1@whl,181,173,1	duplicate(#g_1)	#g_4	MD_HIDDEN_GROUND02,3,3
+
+
+1@whl,160,160,5	script	#box_control	PORTAL,1,1,{
+	if ('event != 11)
+		end;
+	if (checkquest(12561,HUNTING) == 2) {
+		mes "======== 보상 ========";
+		mes "<ITEM>[" + getitemname(1000608) + "]<INFO>1000608</INFO></ITEM> 4개";
+		mes "<ITEM>[" + getitemname(1000608) + "]<INFO>1000811</INFO></ITEM> 1개";
+		mes "경험치와 잡경험치를 얻었습니다.";
+		getitem 1000608,4;	// Ep19_Snow_Flower
+		getitem 1000811,1;	// Snow_F_Ore
+		erasequest 12561;
+		set_reputation_points(3, (get_reputation_points(3) + 10));
+		getexp2 52243795,0;	// unknown exp
+		getexp 0,3000000;
+		next;
+		mes "^0000ff얼음성의 친밀도가 10 포인트 만큼 증가했습니다.^000000";
+		close;
+	}
+	mes "^0000ff비공정의 코머가 휴면모드가 되자 밖으로 나가는 출구가 활성화 되었습니다.^000000";
+	next;
+	if (select( "취소", "나간다" ) == 1)
+		end;
+	warp "jor_nest",24,248;
+	end;
+
+OnTouch:	// unknown effect
+	end;
+}
+
+
+1@whl,146,181,5	script	#clear_1	CLEAR_NPC,1,1,{
+	mes "청소로봇의 밀집도가 높을 경우 이";
+	mes "버튼을 눌러 다른 구역으로 파견";
+	mes "신호를 보내십시오";
+	close;
+}
+1@whl,173,181,5	duplicate(#clear_1)	#clear_2	CLEAR_NPC,1,1

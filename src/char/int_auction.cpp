@@ -17,6 +17,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_mapif.hpp"
@@ -130,7 +131,10 @@ uint32 auction_create( std::shared_ptr<struct auction_data> auction ){
 
 		auction->auction_id = (unsigned int)SqlStmt_LastInsertId(stmt);
 		auction->auction_end_timer = add_timer( gettick() + tick , auction_end_timer, auction->auction_id, 0);
-		ShowInfo("New Auction %u | time left %" PRtf " ms | By %s.\n", auction->auction_id, tick, auction->seller_name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("신규 경매 %u | 남은 시간 %" PRtf " 밀리초 | 판매자: %s.\n", auction->auction_id, tick, auction->seller_name);
+		else
+			ShowInfo("New Auction %u | time left %" PRtf " ms | By %s.\n", auction->auction_id, tick, auction->seller_name);
 
 		auction_db[auction->auction_id] = auction;
 	}
@@ -164,7 +168,10 @@ TIMER_FUNC(auction_end_timer){
 		else
 			mail_sendmail(0, msg_txt(200), auction->seller_id, auction->seller_name, msg_txt(201), msg_txt(204), 0, &auction->item, 1);
 
-		ShowInfo("Auction End: id %u.\n", auction->auction_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("옥션 종료: id %u.\n", auction->auction_id);
+		else
+			ShowInfo("Auction End: id %u.\n", auction->auction_id);
 
 		auction->auction_end_timer = INVALID_TIMER;
 		auction_delete(auction);

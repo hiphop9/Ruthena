@@ -1,0 +1,8 @@
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Footer:
+  Imports:
+  - Path: db/import/ep19/item_db.yml

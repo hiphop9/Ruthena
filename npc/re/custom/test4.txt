@@ -1,0 +1,334 @@
+aldebaran,110,70,4	script	그레이프#hn	23,{
+	if ((BaseJob == Job_Super_Novice_E && isbegin_quest(5950) == 0)) {
+		mes "[그레이프]";
+		mes "당신에게서 자유로움의 향기가";
+		mes "느껴지네요.";
+		next;
+		select("제 몸에서 .. ");
+		unittalk 0, strcharinfo(0) +": 제 몸에서 냄새 나요?";
+		mes "[그레이프]";
+		mes "아니.. 그런 뜻은 아니고..";
+		next;
+		mes "[그레이프]";
+		mes "죄.. 죄송합니다.";
+		mes "오랜만에 알데바란에서 슈퍼 노비스를";
+		mes "만나서 반가운 마음에 한 말이었는데..";
+		next;
+		mes "[그레이프]";
+		mes "본의 아니게 실례를.. 하하하핫!";
+		next;
+		mes "[그레이프]";
+		mes "이렇게 만난 것도 인연인데 최근";
+		mes "불편하신 점은 없으신가요?";
+		next;
+		mes "[그레이프]";
+		mes "제가 이래 보여도 이 바닥에서 제법";
+		mes "굴러먹어서 힘 좀 쓰거든요.";
+		next;
+		mes "[그레이프]";
+		mes "200에서 콱! 하고 막힌 슈퍼 노비스";
+		mes "신세 한탄이라던가 그런 것들 말이에요.";
+		next;
+		select("최근에..");
+		unittalk 0, strcharinfo(0) +": 최근에 노비스라며 임무에서 배제당하는 게 일상이죠. 늘상 있던 일이라 새롭지도 않네요.";
+		mes "[그레이프]";
+		mes "아이구 저런 마음고생이 심하셨겠네요.";
+		next;
+		select("묘하게..");
+		unittalk 0, strcharinfo(0) +": 묘하게 비꼼 당하는 기분인데, 기분 탓이죠?";
+		mes "[그레이프]";
+		mes "하하히핫! 설마요. 저도 슈퍼";
+		mes "노비스인데요. 그 마음 저도 잘 알고";
+		mes "있습니다.";
+		next;
+		mes "[그레이프]";
+		mes "그래서 하는 말인데 혹시 『하이퍼";
+		mes "노비스』에 관심 없나요?";
+		next;
+		select("하이퍼 노비스?");
+		unittalk 0, strcharinfo(0) +": 하이퍼 노비스?";
+		mes "[그레이프]";
+		mes "노비스 중에 노비스! 성공한 엘리트";
+		mes "노비스들이 모인 집단이라고나 할까요?";
+		next;
+		mes "[그레이프]";
+		mes "과거를 돌아보고 미래를 개척하며";
+		mes "발전해 나가는 하이퍼 노비스!";
+		next;
+		mes "[그레이프]";
+		mes "크~ 하이퍼~ 슈퍼보다 훨씬 좋은";
+		mes "울림이지 않나요?";
+		next;
+		mes "[그레이프]";
+		mes "슈퍼가 하이퍼 해지면, 덩달아 당신의";
+		mes "고민도 해결될 거 같고 막 그러지";
+		mes "않나요?";
+		next;
+		mes "[그레이프]";
+		mes "후후훗! 영업은 여기까지!";
+		mes "지금 당신 표정이 딱! 안 사요. 지금";
+		mes "바빠요. 가 곧 튀어나올 표정이거든요.";
+		next;
+		mes "[그레이프]";
+		mes "가서 잘 생각해 보시고 하이퍼";
+		mes "노비스에 관심이 생기면, 그때 다시";
+		mes "찾아오세요.";
+		setquest 5950;
+		close;
+	}
+	if ((BaseJob == Job_Super_Novice_E && isbegin_quest(5950) == 1)){
+		mes "[그레이프]";
+		mes "결단이 빠르시네요. 충분히 생각해";
+		mes "보신 거 맞죠?";
+		next;
+		mes "[그레이프]";
+		mes "믿고 설명을 이어가도록 하지요.";
+		mes "우선은 어떤 노비스가 기억하는";
+		mes "공간으로 보내드릴 겁니다.";
+		next;
+		mes "[그레이프]";
+		mes "그 공간에서 무엇인가 얻어 나오시는";
+		mes "것도 자유. 그냥 나오시는 것도";
+		mes "자유입니다.";
+		next;
+		select("시험은..");
+		unittalk 0, strcharinfo(0) +": 시험은 그게 다 인가요?";
+		mes "[그레이프]";
+		mes "시험이 아닙니다. 생각해보세요.";
+		next;
+		mes "[그레이프]";
+		mes "그동안 노비스의 자유로운 마음가짐도.";
+		next;
+		mes "[그레이프]";
+		mes "하나에 파고드는 근성도.";
+		next;
+		mes "[그레이프]";
+		mes "어려운 자와 나눌 줄 아는 마음도.";
+		next;
+		mes "[그레이프]";
+		mes "뛰어난 모험심도. 다양한 친구들에게";
+		mes "다양한 방법으로 검증 받지 않으셨나요?";
+		next;
+		mes "[그레이프]";
+		mes "시험은 그동안 차고 넘치게 받아";
+		mes "오셨다고 생각하는데 아닐까요?";
+		next;
+		select("그렇기는..");
+		unittalk 0, strcharinfo(0) +": 그렇기는 하죠.";
+		mes "[그레이프]";
+		mes "충분한 설명이 되었겠죠?";
+		next;
+		mes "[그레이프]";
+		mes "자유를 추구하는 노비스의 이념에 따라";
+		mes "현재에 만족하고 안주하시는 분들의";
+		mes "자유도 존중합니다.";
+		next;
+		mes "[그레이프]";
+		mes "하이퍼 노비스에 도전하시려면 준비를";
+		mes "마치고 홀로 파티를 만든 다음에 말을";
+		mes "걸어주세요.";
+		next;
+		mes "[그레이프]";
+		mes "물론 도전하지 않으시는 것도";
+		mes "자유입니다.";
+		completequest 5950;
+		setquest 5951;
+		close;
+	}
+	if ((BaseJob == Job_Super_Novice_E && isbegin_quest(5951) == 1)){
+		.@party_id = getcharid(1); // 현재 캐릭터의 파티 ID를 가져옴
+		.@party_members = 0; // 파티의 멤버 수를 저장할 변수
+
+		// 파티 ID가 유효한지 확인
+		if (.@party_id > 0) {
+			// 파티 멤버 수를 확인
+			.@party_members = getpartymember(.@party_id);
+
+			// 파티 멤버 수가 1명인 경우 특정 동작 수행
+			if (.@party_members == 1) {
+				mes "[그레이프]";
+				mes "하이퍼 노비스에 도전하시겠어요?";
+				next;
+				switch(select("도전 신청을 한다.:하이퍼 노비스에 도전!:도전하지 않는다.")) {
+					case 1:
+						mes "[그레이프]";
+						mes "그럼 당신이 노비스의 기억에 스며들";
+						mes "수 있도록 준비하겠습니다. 잠시만";
+						mes "기다려주세요.";
+						instance_create("memory of Novice");
+						close;
+					case 2:
+						.@md_name$ = "memory of Novice";
+						switch( instance_enter(.@md_name$) ) {
+						case IE_OTHER:
+							mes "알 수 없는 오류가 발생했습니다.";
+							close;
+						case IE_NOINSTANCE:
+							mes "^ff0000 먼저 도전 신청을 하고 오세요!.^000000";
+							close;
+						case IE_NOMEMBER:
+							mes "등록된 회원만 "+ .@md_name$ +" 인스턴스에 입장할 수 있습니다.";
+							close;
+						case IE_OK:
+							mapannounce "파티 "+ getpartyname(.@party_id) +"의 달리", ""+ strcharinfo(0) +"가 노비스의 기억에 입장하고 있습니다.","", bc_map, 0x00ff99;
+							end;
+						}
+					case 3:
+					close;
+				}
+
+			} else {
+				mes "[그레이프]";
+				mes "파티에 다른 플레이어가 있습니다.";
+			}
+		} else {
+			mes "[그레이프]";
+			mes "당신은 파티에 속해있지 않습니다.";
+		}
+		close;
+	} else {
+		goto OnTouch;
+	}
+    OnTouch:
+            set .@random, rand(1, 5);
+            if (.@random == 1) {
+                unittalk 0, strcharinfo(0) +": 오늘 날씨가 좋네요.";
+                sleep2 2000;
+                npctalk "그레이프: 하핫! 제가 비록 눈은 보이지 않지만, 포근한 마음이 드는 것이 오늘은 날씨도 좋고.";
+                sleep2 2000;
+                npctalk "그레이프: 즐거운 하루가 될 것 같군요.";
+            } else if (.@random == 2) {
+                unittalk 0, strcharinfo(0) +": 눈이?보이지 않나요? 미안합니다.";
+                sleep2 2000;
+                npctalk "그레이프: 아! 괜찮습니다. 제게 세상은 어둠뿐인지라. 자주 있는 일이에요.";
+                sleep2 2000;
+                npctalk "그레이프: 마음이 불편하셨다면, 죄송하게 됐습니다.";
+            } else if (.@random == 3) {
+                unittalk 0, strcharinfo(0) +": 눈은 어쩌다 그렇게 됐나요?";
+                sleep2 2000;
+                npctalk "그레이프: 하핫! 모험을 즐기다 보면, 이런 일 저런 일 있는 법이죠.";
+                sleep2 2000;
+                npctalk "그레이프: 가슴 아픈 일이니 너무 캐묻지는 말아주세요.";
+            } else if (.@random == 4) {
+                unittalk 0, strcharinfo(0) +": 이름이 재미있네요.";
+                sleep2 2000;
+                npctalk "그레이프: 제 이름이요? 하핫! 포도라는 뜻이죠.";
+                sleep2 2000;
+                npctalk "그레이프: 뭐 이름과 머리색 때문에 어릴 때는 신포도라는 별명이 종종 불리곤 했답니다.";
+            } else if (.@random == 5) {
+                unittalk 0, strcharinfo(0) +": 당신은 슈퍼 노비스죠?";
+                sleep2 2000;
+                npctalk "그레이프: 아니하이.. 하핫! 그렇습니다..";
+                sleep2 2000;
+                npctalk "그레이프: 슈퍼노비스이죠. 어디에도 억매이지 않고 자유를 추구하는 슈퍼노비스 그게 접니다.";
+                sleep2 2000;
+                npctalk "그레이프: 뭐 지금은 엄청 자유롭다고는 못 하겠지만요.";
+            }
+            goto OnMainTalk;
+            end;
+    OnInit:
+        setunitdata getnpcid(0), UNPC_HAIRSTYLE, 31;
+        setunitdata getnpcid(0), UNPC_HAIRCOLOR, 4;
+        setunitdata getnpcid(0), UNPC_HEADTOP, 82;
+        setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1330;
+        setunitdata getnpcid(0), UNPC_SEX, 1;
+    OnMainTalk:
+        end;
+	
+}
+
+1@exhn,179,18,2	script	노랑#exhh1	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 20;
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+OnMainTalk:
+	end;
+}
+
+1@exhn,195,145,2	script	하양#exhh2	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 19;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+OnMainTalk:
+	end;
+}
+
+1@exhn,195,154,4	script	보라#exhh3	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 14;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 5;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+OnMainTalk:
+	end;
+}
+
+1@exhn,197,150,4	script	초록#exhh4	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 31;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 4;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+OnMainTalk:
+	end;
+}
+
+1@exhn,185,151,6	script	주홍#exhh5	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 23;
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+OnMainTalk:
+	end;
+}
+
+1@exhn,188,153,6	script	빨강#exhh6	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+OnMainTalk:
+	end;
+}
+
+1@exhn,187,145,0	script	검정#exhh7	0,{
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 11;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	disablenpc "검정#exhh7";
+OnMainTalk:
+	end;
+}
+
+1@exhn,185,148,6	script	파랑#exhh8	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 2;
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+	disablenpc "파랑#exhh8";
+OnMainTalk:
+	end;
+}
+
+1@exhn,192,143,7	script	노랑#exhh9	0,{
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 20;
+	setunitdata getnpcid(0), UNPC_SEX, 0;
+	disablenpc "노랑#exhh9";
+OnMainTalk:
+	end;
+}
+
+1@exhn,185,26,0	script	#장치	CLEAR_NPC,{
+	mes "기계장치가 반복해서 돌아가고 있다";
+	next;
+	mes "반복.. 반복해서.. 계속 반복해서..";
+    sleep2 2000;
+	mes "반복.. 반복.. 반복.. 반복.. 반복..";
+	sleep2 2000;
+	mes "반복.. 반복.. 반복.. 반복.. 반복..";
+		sleep2 2000;
+	mes "반복.. 반복.. 반복.. 반복.. 반복..";
+		sleep2 2000;
+	mes "반복.. 반복.. 반복.. 반복.. 반복..";
+	unittalk 0, strcharinfo(0) +":- 진행 상황이 저장되었습니다. -";
+	close2;
+	warp "1@exhn",80,60;
+	end;
+}

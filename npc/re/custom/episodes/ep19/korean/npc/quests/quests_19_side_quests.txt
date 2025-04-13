@@ -1,0 +1,2189 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Issgard Land of Snow Flowers
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Side quests for Episode 19
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Side Quest: Purification Saint - Step 1, 4
+icas_in,163,226,3	duplicate(dummy_cloaked_npc)	보클린드#ep19::ep19_icas_in_163_226	4_EP19_VOGLINDE
+icas_in,162,228,5	duplicate(dummy_cloaked_npc)	레하르#ep19_2::ep19_icas_in_163_228	4_EP19_LEHAR
+
+icas_in,162,224,0	script	#이모심부름	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep19_main < 10)
+		end;
+	if (ep19_side_saint == 1) {
+		if (checkweight(12322,1) == 0) {
+			mes "- Wait a minute !! -";
+			mes "- Currently you're carrying -";
+			mes "- too many items with you. -";
+			mes "- Please try again -";
+			mes "- after you loose some weight. -";
+			close;
+		}
+		mes "[보클린드]";
+		mes "어머 아가~!";
+		mes "무슨 일이니?";
+		mes "레하르는?";
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		npctalk "보클린드 : 레하르 못 봤니?", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "레하르는 다른 볼일이 있으니 먼저 가 있으라고 했다고?";
+		mes "아무튼 걔는 지가 젤 바빠요.";
+		npctalk "보클린드 : 어휴~", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[보클린드]";
+		mes "언제 올지 모르는 애까지 기다릴 시간은 없고 이모가 뭣 좀 물어볼 게 있는데 시간 괜찮니?";
+		npctalk "보클린드 : 바쁘니?", "ep19_icas_in_163_226", bc_self;
+		next;
+		switch( select( "괜찮다.", "바쁘다." ) ) {
+		case 1:
+			mes "[보클린드]";
+			mes "그래?";
+			mes "잘됐다.";
+			mes "일단 멀리 오느라 배고플 텐데 이거 하나 먹고.";
+			ep19_side_saint = 2;
+			erasequest 18128;
+			setquest 11794;
+			getitem 12322,1;	// Chocolate_Pie
+			cutin "ep19_voglinde04.png",0;
+			next;
+			mes "[보클린드]";
+			mes "그 별건 아니고 비공정 타고 올 때 있잖아.";
+			mes "같이 탔던 사람들 중에 ^e5555e머리가 이만큼 길고 해괴망측한 가방 든 카디날^000000 없었니?";
+			npctalk "보클린드 : 가방이 막 좀 그래.", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[보클린드]";
+			mes "머리카락이 이만큼… 아니 이 정도는 되던가?";
+			mes "나도 여기에 오고 나서는 서신만 주고받았지 보진 못해서 확실하진 않구.";
+			cutin "ep19_voglinde02.png",0;
+			next;
+			mes "[보클린드]";
+			mes "그… 레하르가 ^e5555e프론테라^000000에서 데려오기로 한 애가 있거든.";
+			mes "그런데 보이질 않네?";
+			mes "왔다는 보고도 없고…";
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[보클린드]";
+			mes "이 추운데 여기저기 돌아다닐 만한 애도 아니고 돌아 다녔던 안 다녔던 눈에 띄는 애라 다른 사람들이 못 봤을 리 없는데.";
+			npctalk "보클린드 : 걔가 그럴 리 없어.", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde04.png",0;
+			next;
+			select( "못 봤다." );
+			mes "[보클린드]";
+			mes "어휴…";
+			mes "골치 아프다 진짜.";
+			mes "지원 허가가 겨우 났다 했더니 애가 사라지고.";
+			npctalk "보클린드 : 내가 허가받느라 그 고생한 거 생각하면 그냥!!!", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde03.png",0;
+			next;
+			mes "[보클린드]";
+			mes "레하르도 말 끝나자마자 사라져서 어디 갔는지 보이질 않고…";
+			mes "이러고 있을 때가 아닌데…";
+			mes "으음…";
+			npctalk "보클린드 : 어쩌면 좋담?", "ep19_icas_in_163_226", bc_self;
+			next;
+			mes "[보클린드]";
+			mes "아가.";
+			mes "부탁 하나만 들어줄래?";
+			mes "이모가 지금 너무 바빠서 자릴 비울 수가 없거든?";
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[보클린드]";
+			mes "별건 아니고 ^e5555e비공정에 같이 탔던 애들^000000 있지?";
+			mes "그 애들한테 혹시 ^e5555e푸른색 옷에 머리가 이렇게 길구 베일을 쓴 카디날^000000 못 봤는지 좀 물어봐 줄래?";
+			next;
+			mes "[보클린드]";
+			mes "사정이 있어서 지금은 자세하게 알려줄 수 없지만 정말 중요한 애 거든.";
+			mes "꼭 좀 부탁할게";
+			close2;
+			cloakonnpcself( "ep19_icas_in_163_226" );
+			cutin "",255;
+			end;
+		case 2:
+			mes "[보클린드]";
+			mes "그러니?";
+			mes "그럼 어쩔 수 없지. 뭐~";
+			mes "바쁠 텐데 어서 일 보렴.";
+			cutin "ep19_voglinde02.png",0;
+			close2;
+			cloakonnpcself( "ep19_icas_in_163_226" );
+			cutin "",255;
+			end;
+		}
+	}
+	if (ep19_side_saint == 2 || ep19_side_saint == 3) {
+		cloakoffnpcself( "ep19_icas_in_130_201" );
+		if (ep19_side_saint == 3)
+			cloakoffnpcself( "ep19_icas_in_136_197" );
+		mes "[보클린드]";
+		mes "별건 아니고 ^e5555e비공정에 같이 탔던 애들^000000 있지?";
+		mes "그 애들한테 혹시 ^e5555e푸른색 옷에 머리가 이렇게 길구 베일을 쓴 카디날^000000 못 봤는지 좀 물어봐 줄래?";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		next;
+		mes "[보클린드]";
+		mes "사정이 있어서 지금은 자세하게 알려줄 수 없지만 정말 중요한 애 거든.";
+		mes "꼭 좀 부탁할게";
+		close2;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cutin "",255;
+		end;
+	}
+	if (ep19_side_saint == 4) {
+		mes "[보클린드]";
+		mes "어머.";
+		mes "" + strcharinfo(0) + " 왔니?";
+		mes "추운데 고생했다.";
+		npctalk "보클린드 : 밖이 엄청 춥지?", "ep19_icas_in_163_226", bc_self;
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "그래 그앤 찾았고?";
+		next;
+		select( "솔직히 말한다." );
+		mes "[보클린드]";
+		mes "<FONT SIZE = 16><B>아이고!!!</FONT></B>";
+		mes "<FONT SIZE = 16><B>내가 못살아 정말.</FONT></B>";
+		npctalk "보클린드 : 어휴 속 터져!", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[레하르]";
+		mes "아니!";
+		mes "이모님 그게 아니고!";
+		cloakoffnpcself( "ep19_icas_in_163_228" );
+		npctalk "레하르 : 이모님! 진정하세요!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[보클린드]";
+		mes "<FONT SIZE = 16><B>아니긴 뭐가 아냐!</FONT></B>";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "그러게 잘 챙기라고 그렇게 말했잖니!";
+		next;
+		mes "[보클린드]";
+		mes "어휴…";
+		mes "…";
+		mes "아가.";
+		mes "이모가 부탁 하나만 더 해도 될까?";
+		next;
+		mes "[보클린드]";
+		mes "여기까지 오느라 고생했는데 미안하지만, 다시 ^e5555e미드가르드^000000로 돌아가서 그 애 좀 찾아주지 않을래?";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[보클린드]";
+		mes "정말 중요한 애라서 그래.";
+		next;
+		mes "[보클린드]";
+		mes "그리고 지금 이 일에 대해서는 <B>누구한테도 말하면 안 된다.</B>";
+		mes "알았지?";
+		npctalk "보클린드 : 극비니까. 조심하렴.", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[보클린드]";
+		mes "미드가르드까지 가는 건 내가 ^e5555e헬록^000000군에게 잘 말해둘게.";
+		mes "아마 ^e5555e알데바란^000000까지는 데려다줄 수 있을 거야.";
+		mes "^e5555e프론테라^000000까지는 혼자 갈 수 있지?";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[보클린드]";
+		mes "^e5555e프론테라에 엘리스라고 복사 담당관^000000하는 애가 있거든?";
+		mes "아마 ^e5555e프론테라 성당 근처^000000에 있을 거야.";
+		mes "걔한테 내가 보냈다고 하고 <B>성녀</B>라고 하면 알 거야.";
+		npctalk "보클린드 : 자세한 건 알려줄 수 없구나.", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[레하르]";
+		mes "<FONT SIZE = 14>이모님 그런 거라면 제가 다시!</FONT>";
+		npctalk "레하르 : 이모님!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar07.png",2;
+		next;
+		mes "[보클린드]";
+		mes "넌… 잠깐 나 좀 보자.";
+		mes "따라와.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[레하르]";
+		mes "이모님!!!";
+		mes "전 진짜 억울하다니까요!";
+		mes "누군지도 말 안해 주셨잖아요!!";
+		npctalk "레하르 : 얼굴도 이름도 모르는데 어떻게 확인해요!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[보클린드]";
+		mes "누군지 왜 몰라!!";
+		mes "전에 봤잖아!!!";
+		cutin "ep19_voglinde01.png",0;
+		npctalk "보클린드 : 그러게 누가 만나보지도 않고 말만 전하래!", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[레하르]";
+		mes "그게 몇 년 전인데!!!";
+		cutin "ep19_lehar05.png",2;
+		npctalk "레하르 : 완전 꼬꼬마때 보고 못 봤다구요!", "ep19_icas_in_163_228", bc_self;
+		next;
+		mes "[보클린드]";
+		mes "그럼 아가 잘 부탁할게.";
+		mes "^e5555e헬록^000000군은 아까 비공정 내린 데 있지?";
+		mes "거기 가면 ^e5555e이상하게 생긴 오두막^000000 있거든?";
+		mes "거기서 쉬고 있을 거야.";
+		npctalk "보클린드 : 시끄럽고 기도실로 따라와.", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[레하르]";
+		mes "이모님!!";
+		mes "악!!";
+		mes "잠깐만요!!!!";
+		mes "" + strcharinfo(0) + "님!";
+		mes "살려주세요!";
+		npctalk "레하르 : 저 죽어욧!!!!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "누가 잡아 먹는다니?";
+		mes "얼른 따라와!.";
+		cutin "ep19_voglinde02.png",0;
+		ep19_side_saint = 5;
+		erasequest 11796;
+		setquest 11797;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cloakonnpcself( "ep19_icas_in_163_228" );
+		navigateto("jor_tail",211,63);
+		end;
+	}
+	if (ep19_side_saint == 5) {
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		cloakoffnpcself( "ep19_icas_in_163_228" );
+		mes "[보클린드]";
+		mes "그럼 아가 잘 부탁할게.";
+		mes "^e5555e헬록^000000군은 아까 비공정 내린 데 있지?";
+		mes "거기 가면 ^e5555e이상하게 생긴 오두막^000000 있거든?";
+		mes "거기서 쉬고 있을 거야.";
+		npctalk "보클린드 : 시끄럽고 기도실로 따라와.", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[레하르]";
+		mes "이모님!!";
+		mes "악!!";
+		mes "잠깐만요!!!!";
+		mes "" + strcharinfo(0) + "님!";
+		mes "살려주세요!";
+		npctalk "레하르 : 저 죽어욧!!!!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "누가 잡아먹는다니?";
+		mes "얼른 따라와!.";
+		cutin "ep19_voglinde02.png",0;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cloakonnpcself( "ep19_icas_in_163_228" );
+		navigateto("jor_tail",211,63);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18128) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11796) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 2
+icas_in,130,201,5	script	마람#ep19::ep19_icas_in_130_201	4_EP18_MARAM,{
+	if (ep19_side_saint == 2) {
+		mes "[마람]";
+		mes "라헬… 아니 미드가르드 대륙을 떠나 이런 곳까지 오게 되다니 뭔가 복잡미묘한 기분이네요.";
+		npctalk "마람 : 여긴 회색늑대 마을이랑도 비교가 안 될 정도로 춥네요.", "ep19_icas_in_130_201", bc_self;
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[마람]";
+		mes "얼음밖에 없는 곳이라 신기하기도 하고 점점 제가 책임져야 할 것들이 많아지고 있어서 불안하기도 하고…";
+		next;
+		mes "[마람]";
+		mes "아… 신세 한탄 같은 건 아니고 그냥 기분이 묘한 것뿐이니 신경 쓰지 마세요.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "그보다 제게 뭔가 용건이 있어서 오신 거죠?";
+		mes "무슨 일인가요?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		select( "카디날에 대해 묻는다." );
+		mes "[마람]";
+		mes "글쎄요?";
+		mes "그런 분이 있었나요?";
+		next;
+		mes "[마람]";
+		mes "비공정에 같이 탔다면 못 봤을 리가 없는데…";
+		mes "인원이 많았던 것도 아니었고요.";
+		npctalk "마람 : 우리들 말고 사람이 더 있긴 했나요?", "ep19_icas_in_130_201", bc_self;
+		next;
+		mes "[마람]";
+		mes "혹시 선실에 계셨다면 마주치지 못했을 수도 있긴 하지만.";
+		mes "비공정에 탈 때나 내릴 때도 못 본 것 같아요.";
+		next;
+		mes "[마람]";
+		mes "솔직히 정보도 너무 적고 뵌 적도 없는 분이라 우리끼리 이야기 해도 답이 나올 것 같지는 않고 ^e5555e레하르^000000님께 직접 물어보는 게 좋지 않을까요?";
+		cutin "ep18_maram_03.png",2;
+		next;
+		select( "레하르에 대해 묻는다." );
+		mes "[마람]";
+		mes "레하르님 이라면 조금 전에 밖으로 나가시는 것 같았는데…";
+		next;
+		mes "[마람]";
+		mes "앗 저기 오신다.";
+		mes "레하르님!!!";
+		cutin "ep18_maram_02.png",2;
+		ep19_side_saint = 3;
+		erasequest 11794;
+		setquest 11795;
+		close2;
+		cutin "",255;
+		navigateto("icas_in",136,197);
+		cloakoffnpcself( "ep19_icas_in_136_197" );
+		end;
+	}
+	if (ep19_side_saint == 3) {
+		mes "[마람]";
+		mes "레하르님 이라면 조금 전에 밖으로 나가시는 것 같았는데…";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "앗 저기 오신다.";
+		mes "레하르님!!!";
+		close2;
+		cutin "",255;
+		navigateto("icas_in",136,197);
+		cloakoffnpcself( "ep19_icas_in_136_197" );
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11794) == 1" );
+	end;
+}
+
+icas_in,132,201,3	duplicate(dummy_cloaked_npc)	미리암#ep19::ep19_icas_in_132_201	4_EP18_MIRIAM
+
+// Side Quest: Purification Saint - Step 3
+icas_in,136,197,3	script	레하르#ep19::ep19_icas_in_136_197	4_EP19_LEHAR,{
+	if (ep19_side_saint == 3) {
+		mes "[레하르]";
+		mes "뭔데요?";
+		mes "지금 저 넘 바쁜데 급한 일 아니면 나중에 다시 이야기해요.";
+		cutin "ep19_lehar01.png",2;
+		next;
+		select( "카디날에 대해 묻는다." );
+		mes "[레하르]";
+		mes "^e5555e머리가 길고 푸른 옷에 베일을 쓴 카디날^000000말이죠?";
+		mes "비공정에서도 인사했잖아요.";
+		npctalk "레하르 : 같이 계셨으면서 왜들 이러실까.", "ep19_icas_in_136_197", bc_self;
+		cutin "ep19_lehar02.png",2;
+		next;
+		mes "[마람]";
+		mes "같이 있었다구요?";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[레하르]";
+		mes "네.";
+		mes "마람님도 잘 알고 계시잖아요?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[미리암]";
+		mes "마람!";
+		mes "여기서 뭐 하는 거야!";
+		mes "여유 부리고 있을 때가 아냐!!";
+		cutin "ep18_miriam_01.png",0;
+		cloakoffnpcself( "ep19_icas_in_132_201" );
+		next;
+		mes "[미리암]";
+		mes "어서 다음 일정을 정하자.";
+		mes "아까 보클린드님이 하신 이야기도 다시 정리해보고 싶고.";
+		next;
+		mes "[마람]";
+		mes "진정해 미리암.";
+		mes "일단 다른 분들이랑 의논도 해봐야 하니까.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[레하르]";
+		mes "마침 오셨네요.";
+		mes "^e5555e머리가 길고 푸른 옷에 베일을 쓴 카디날!! ^000000.";
+		cutin "ep19_lehar02.png",2;
+		next;
+		mes "[마람]";
+		mes "엇…?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "네?";
+		mes "전… 카디날이 아닌데요?";
+		cutin "ep18_miriam_03.png",0;
+		next;
+		mes "[레하르]";
+		mes "…엣?";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "- 레하르의 이마에서 땀이 소나기처럼 쏟아지기 시작했다. -";
+		next;
+		mes "[미리암]";
+		mes "레하르님 갑자기 왜 그러십니까?";
+		mes "안색이 너무 안 좋으신데, 무슨 문제라도 있는 건가요?";
+		cutin "ep18_miriam_03.png",0;
+		npctalk "미리암 : 땀이!!!!!", "ep19_icas_in_132_201", bc_self;
+		next;
+		mes "[레하르]";
+		mes "자…잠깐 미리암님 프론테라 성당의 그… 엘리스님의 소개로 그…";
+		cutin "ep19_lehar03.png",2;
+		npctalk "레하르 : 그 극비의…", "ep19_icas_in_136_197", bc_self;
+		next;
+		mes "[미리암]";
+		mes "전 마람과 함께 라헬에서 왔습니다만.";
+		cutin "ep18_miriam_03.png",0;
+		next;
+		mes "[레하르]";
+		mes "아아…";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[레하르]";
+		mes "이거 아무래도 제가 착각한 것 같은데…";
+		mes "아 완전 망ㅎ…";
+		mes "…";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[마람]";
+		mes "음…";
+		mes "무슨 일인지는 잘 모르겠지만 레하르님이 이렇게나 당황하시는 걸 보니 일단 ^e5555e보클린드^000000님께 말씀드리는 게 좋지 않을까요?";
+		cutin "ep18_maram_03.png",2;
+		next;
+		select( "그게 좋을 것 같다." );
+		mes "[레하르]";
+		mes "<FONT SIZE = 16><B>아닛!! 왜 그렇게 되는 건데요!</FONT></B>";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[레하르]";
+		mes "<FONT SIZE = 16><B>저 진짜 죽어요!</FONT></B>";
+		mes "" + strcharinfo(0) + "님!!!!";
+		cutin "ep19_lehar04.png",2;
+		npctalk "레하르 : 안돼요!!!!!!!", "ep19_icas_in_136_197", bc_self;
+		ep19_side_saint = 4;
+		erasequest 11795;
+		setquest 11796;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_130_201" );
+		cloakonnpcself( "ep19_icas_in_132_201" );
+		cloakonnpcself( "ep19_icas_in_136_197" );
+		navigateto("icas_in",164,228);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11795) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 5
+jor_tail,211,63,5	script	헬록#ep19::ep19_jor_tail_211_63	4_EP19_HEALROCK,{
+	if (ep19_side_saint == 5) {
+		mes "[헬록]";
+		mes "오우~";
+		mes "<FONT SIZE = 16><B>안녕하십니까.</FONT></B>";
+		mes "" + strcharinfo(0) + "님!";
+		mes "보클린드님께 이야기는 들었습니다.";
+		mes "^e5555e미드가르드^000000로 가신다구요?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[헬록]";
+		mes "" + strcharinfo(0) + "님만 가시는 건가요?";
+		mes "너무 가벼운데… 모래주머니라도 조금 실어야 하나…";
+		npctalk "헬록 : 그냥 달리면 근손실 오는데…", "", bc_self;
+		next;
+		mes "[헬록]";
+		mes "아무튼 어서 출발해 봅시다!";
+		next;
+		select( "비공정은?" );
+		mes "[헬록]";
+		mes "비공정은 바르문트 저택 쪽으로 밖에 못 갑니다.";
+		mes "그건 이쪽에서 마음대로 정할 수 있는 게 아니라서…";
+		next;
+		mes "[헬록]";
+		mes "^e5555e알데바란^000000으로는 제가 직접 썰매를 지고 이동하고 있으니 걱정마세요.";
+		mes "제 넓은 어깨가 단단하게 고정해 줄 테니까요.";
+		mes "핫핫핫!!!";
+		npctalk "헬록 : 운동도 되고! 이게 바로 일석이조 아니겠습니까!", "", bc_self;
+		next;
+		switch( select( "출발", "대기" ) ) {
+		case 1:
+			mes "[헬록]";
+			mes "그럼 출발 합니다.";
+			mes "꽉 잡으세요!";
+			erasequest 11797;
+			setquest 11798;
+			ep19_side_saint = 6;
+			close2;
+			cutin "",255;
+			warp "aldebaran",104,105;
+			end;
+		case 2:
+			mes "[헬록]";
+			mes "그런가요?";
+			mes "그럼 준비되면 말해 주세요.";
+			close3;
+		}
+	}
+	if (ep19_side_saint >= 6 && ep19_side_saint <= 17) {
+		mes "[헬록]";
+		mes "으허억…";
+		mes "아…아이고…!!";
+		cutin "ep19_healrock03.png",2;
+		close3;
+	}
+	if (ep19_side_saint == 20) {
+		mes "[헬록]";
+		mes "안녕하세요!!!!";
+		mes "오늘도 알데바란으로 가십니까?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		switch( select( "출발", "대기" ) ) {
+		case 1:
+			mes "[헬록]";
+			mes "그럼 출발 합니다.";
+			mes "꽉 잡으세요!";
+			close2;
+			cutin "",255;
+			warp "aldebaran",104,105;
+			end;
+		case 2:
+			mes "[헬록]";
+			mes "그런가요?";
+			mes "그럼 준비되면 말해 주세요.";
+			close3;
+		}
+	}
+	mes "[헬록]";
+	mes "음핫핫핫핫!!!!";
+	mes "그럼 오늘도 열심히 삼각근을 조져볼까!";
+	cutin "ep19_healrock01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11797) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 6, 16
+aldebaran,102,103,5	script	헬록#ep19_a	4_EP19_HEALROCK,{
+	if (ep19_side_saint == 6) {
+		mes "[헬록]";
+		mes "아! " + strcharinfo(0) + "님.";
+		mes "드디어 정신이 드셨구만!";
+		mes "알데바란이에요.";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[헬록]";
+		mes "전 여러가지 협정 때문에 프론테라까진 못 가니까 여기서 기다리고 있을게요.";
+		mes "볼일이 끝나면 ^e5555e알데바란^000000으로 오세요.";
+		npctalk "헬록 : 그럼 미드가르드 온 김에 새로나온 콩단백질 파우더 쇼핑해야지!", "", bc_self;
+		erasequest 11798;
+		setquest 11799;
+		ep19_side_saint = 7;
+		close2;
+		cutin "",255;
+		navigateto("prontera",254,309);
+		end;
+	}
+	if (ep19_side_saint == 7) {
+		mes "[헬록]";
+		mes "전 여러가지 협정 때문에 프론테라까진 못 가니까 여기서 기다리고 있을게요.";
+		mes "볼일이 끝나면 ^e5555e알데바란^000000으로 오세요.";
+		cutin "ep19_healrock01.png",2;
+		npctalk "헬록 : 그럼 미드가르드 온 김에 새로나온 콩단백질 파우더 쇼핑해야지!", "", bc_self;
+		close2;
+		cutin "",255;
+		navigateto("prontera",254,309);
+		end;
+	}
+	if (ep19_side_saint == 8) {
+		mes "[헬록]";
+		mes "프론테라에서 할 일은 다 끝나셨나요?";
+		mes "끝나면 ^e5555e알데바란^000000으로 오세요.";
+		cutin "ep19_healrock01.png",2;
+		close3;
+	}
+	if (ep19_side_saint == 16) {
+		mes "[헬록]";
+		mes "오셨군요.";
+		mes "그럼 바로… 잠깐… 인원이 보클린드님이 말씀하신 것 보다 더 많아 진 것 같은데…";
+		mes "카디날 한분 같이 가시는 거 아니었나요?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[헬록]";
+		mes "다들 손에 든 건 뭐죠?";
+		mes "짐이 좀 있다구요?";
+		mes "가방이 하나…둘…아니 잠깐만요…";
+		mes "아니 못 든다는 건 아니고 짐이…";
+		cutin "ep19_healrock02.png",2;
+		next;
+		if (select( "출발", "대기" ) == 2)
+			end;
+		mes "[듀]";
+		mes "어???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[헬록]";
+		mes "그럼 갑니다…";
+		mes "으허어어어억!!!!";
+		cutin "ep19_healrock02.png",2;
+		next;
+		mes "[헬록]";
+		mes "크윽…";
+		mes "내… 내 허ㄹ…";
+		cutin "ep19_healrock03.png",2;
+		erasequest 11808;
+		setquest 11809;
+		ep19_side_saint = 17;
+		close2;
+		cutin "",255;
+		warp "jor_tail",212,60;
+		end;
+	}
+	if (ep19_side_saint == 17) {
+		mes "[헬록]";
+		mes "오셨군요.";
+		mes "그럼 바로… 잠깐… 인원이 보클린드님이 말씀하신 것 보다 더 많아 진 것 같은데…";
+		mes "카디날 한분 같이 가시는 거 아니었나요?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[헬록]";
+		mes "다들 손에 든 건 뭐죠?";
+		mes "짐이 좀 있다구요?";
+		mes "가방이 하나…둘…아니 잠깐만요…";
+		mes "아니 못 든다는 건 아니고 짐이…";
+		cutin "ep19_healrock02.png",2;
+		next;
+		if (select( "출발", "대기" ) == 2)
+			end;
+		mes "[듀]";
+		mes "어???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[헬록]";
+		mes "그럼 갑니다…";
+		mes "으허어어어억!!!!";
+		cutin "ep19_healrock02.png",2;
+		next;
+		mes "[헬록]";
+		mes "크윽…";
+		mes "내… 내 허ㄹ…";
+		cutin "ep19_healrock03.png",2;
+		close2;
+		cutin "",255;
+		warp "jor_tail",212,60;
+		end;
+	}
+	mes "[헬록]";
+	mes "안녕하세요.";
+	mes "모험가님 날씨가 참 줄죠?";
+	cutin "ep19_healrock01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11798) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11808) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 7
+prontera,254,309,3	script	복사 담당관#ep19	4_F_ACOLYTE,{
+	if (ep19_side_saint == 7) {
+		mes "[복사 담당관 엘리스]";
+		mes "어머!";
+		mes "안녕하세요.";
+		mes "무슨 일이시죠?";
+		npctalk "엘리스 : 복사가 되고 싶으신 건 아닌 것 같고…", "", bc_self;
+		cutin "acact_01.bmp",2;
+		next;
+		select( "보클린드의 심부름" );
+		mes "[복사 담당관 엘리스]";
+		mes "보클린드님이요?";
+		mes "…";
+		cutin "acact_03.bmp",2;
+		next;
+		select( "성녀" );
+		mes "[복사 담당관 엘리스]";
+		mes "거기까지 알고 계시다면 숨길 필요는 없겠네요.";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그 애라면 레하르님이 찾으시길래 약속장소로 보냈는데 또 무슨 일이라도 있나요?";
+		cutin "acact_03.bmp",2;
+		next;
+		select( "사라졌다." );
+		mes "[복사 담당관 엘리스]";
+		mes "<FONT SIZE = 16><B>네?!</FONT></B>";
+		mes "아니…";
+		mes "그냥 사라졌다로 끝날 사건이 아닌데!!!";
+		cutin "acact_04.bmp",2;
+		npctalk "엘리스 : 아니!!!!!!!!!!!!!", "", bc_self;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그 애를 데리고 어딘가를 가려면 도착할 때까지 눈을 떼지 말아야 하는데…";
+		mes "아니… 레하르님 대체…";
+		mes "…아니…";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "일단 그 애 ^e5555e숙소^000000에 가보죠.";
+		mes "어딘가 돌아다닐 애는 아니니까 돌아와 있을지도 몰라요.";
+		mes "없다면 정말… 큰일이에요.";
+		erasequest 11799;
+		setquest 11800;
+		ep19_side_saint = 8;
+		close2;
+		cutin "",255;
+		navigateto("prt_cas",20,32);
+		end;
+	}
+	if (ep19_side_saint == 8) {
+		mes "[복사 담당관 엘리스]";
+		mes "그 애를 데리고 어딘가를 가려면 도착할 때까지 눈을 떼지 말아야 하는데…";
+		mes "아니… 레하르님 대체…";
+		mes "…아니…";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "일단 그 애 ^e5555e숙소^000000에 가보죠.";
+		mes "어딘가 돌아다닐 애는 아니니까 돌아와 있을지도 몰라요.";
+		mes "없다면 정말… 큰일이에요.";
+		close3;
+	}
+	if (ep19_side_saint == 9 || ep19_side_saint == 10) {
+		mes "[복사 담당관 엘리스]";
+		mes "여기서 이럴 게 아니라 빨리 준비해서 ^e5555e이스가르드^000000로 출발하셔야죠?";
+		cutin "acact_01.bmp",2;
+		close2;
+		cutin "",255;
+		navigateto("prt_cas",20,32);
+		end;
+	}
+	mes "[복사 담당관 엘리스]";
+	mes "프테라 성당에 어서 오세요.";
+	mes "오 딘께서는 언제나 두 별려 환영하고 계신답니다.";
+	cutin "acact_02.bmp",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11799) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 8
+prt_cas,22,33,3	duplicate(dummy_cloaked_npc)	마크#ep19_cas::ep19_prt_cas_22_33	4_EP18_MARK
+prt_cas,23,32,3	duplicate(dummy_cloaked_npc)	듀#ep19_cas::ep19_prt_cas_23_32	4_EP18_DEW
+prt_cas,24,31,3	duplicate(dummy_cloaked_npc)	마기#ep19_cas::ep19_prt_cas_24_31	4_4JOB_MAGGI
+prt_cas,25,31,5	duplicate(dummy_cloaked_npc)	알프#ep19_cas::ep19_prt_cas_25_31	4_EP18_ALF
+
+prt_cas,20,32,3	script	여행용 가방#ep19_1	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 8) {
+		mes "[복사 담당관 엘리스]";
+		mes "어머!";
+		mes "가방이 있는 걸 보니 여기 있나 보네요?";
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		npctalk "엘리스 : 휴… 십년감수 했네", "ep19_prt_cas_21_31", bc_self;
+		cutin "acact_03.bmp",2;
+		next;
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		mes "[성녀]";
+		mes "언니 왔어?";
+		mes "잘됐다!";
+		mes "여기 하얀색 코트랑 분홍색 망또랑 어느 게 더 귀여워?";
+		mes "둘다 귀여워서 고를 수 없는데.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "왜 여기 있어?";
+		mes "레하르님이 데리러 오지 않았어?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[성녀]";
+		mes "레하르?";
+		mes "어… 약속장소에 갔더니 레하르는 없고 누가 편지만 주던데?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "편…지…?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "바르문트 저택으로 오라고 써 있었어.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그런데 왜 여기 있는 거야?";
+		mes "안 갔어?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "아니 그보다 바르문트 저택이면 엄청 먼 곳 아냐?";
+		mes "거기까지 너 혼자 오라고 했단 말야?";
+		next;
+		mes "[성녀]";
+		mes "가긴 갔는데…";
+		mes "아무도 없어서 심심해서 바르문트 저택 구경하다가…";
+		mes "한참을 기다려도 아무도 안 오길래 집에 왔어.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "사람을 불러 놓고 왜 안 나타난 거야!.";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "…";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "아무튼 이러고 있을 게 아니라…";
+		mes "" + strcharinfo(0) + "님이 데리러 오셨으니 따라가렴.";
+		mes "보클린드님이 기다리신 데.";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[성녀]";
+		mes "보클린드님이?";
+		mes "나 보클린드님한테 가는 거야?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[성녀]";
+		mes "그럼 어서 여행용 짐을 싸야겠다!";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "짐?????";
+		mes "그럼 잠깐 정리하고 있어 봐.";
+		mes "짐꾼 좀 잡아 올 테니까.";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "" + strcharinfo(0) + "님 죄송하지만 잠깐만 얘가 짐 싸는 것 좀 지켜봐 주시겠어요?";
+		mes "금방 돌아올게요.";
+		cutin "acact_01.bmp",2;
+		erasequest 11800;
+		setquest 11801;
+		ep19_side_saint = 9;
+		close2;
+		cutin "",255;
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		end;
+	}
+	if (ep19_side_saint == 9) {
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		mes "- 엘리스를 기다리는 동안 성녀와 대화해보자. -";
+		close;
+	}
+	if (ep19_side_saint >= 10 || ep19_side_saint <= 15) {
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		cloakoffnpcself( "ep19_prt_cas_15_31" );
+		cloakoffnpcself( "ep19_prt_cas_16_27" );
+		cloakoffnpcself( "ep19_prt_cas_26_27" );
+		cloakoffnpcself( "ep19_prt_cas_23_36" );
+		cloakoffnpcself( "ep19_prt_cas_22_30" );
+		cloakoffnpcself( "ep19_prt_cas_22_33" );
+		mes "[복사 담당관 엘리스]";
+		mes "아니 왜 가방이 더 늘어났어…";
+		mes "설마 여기 있는 걸 전부 다 가져갈 생각은 아니지?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "안돼?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "당연히 안되지!";
+		mes "꼭 필요한 것만 들고 가!";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "다 필요한 물건들이란 말야.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "" + strcharinfo(0) + "님 그런 눈으로 보지 마세요.";
+		mes "이렇게 보여도 실력은 정말 뛰어나니까요…";
+		mes "실력은…";
+		mes "정말…";
+		mes "진짜…";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "안 되겠다.";
+		mes "열어서 확인해 보지 않으면 정말 이걸 다 들고 이스가르드에 가게 될 거예요.";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "가방에 뭐가 들었는지 보고 줄일 수 있는 건 최대한 줄여 볼까요?";
+		cutin "acact_01.bmp",2;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11800) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 9
+prt_cas,18,32,5	script	성녀#ep19::ep19_prt_cas_18_32	4_EP19_FRIEDERIKE,{
+	if (ep19_side_saint == 9) {
+		mes "[프리데리케]";
+		mes "안녕하세요.";
+		mes "" + strcharinfo(0) + "님.";
+		mes "전 프리데리케예요.";
+		mes "만나서 기뻐요.";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_prt_cas_15_31" );
+		next;
+		mes "[프리데리케]";
+		mes "그런데 " + strcharinfo(0) + "님은 보클린드님이 보내서 오신 거죠?";
+		mes "이스가르드는 많이 추워요?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_prt_cas_16_27" );
+		next;
+		select( "춥다." );
+		mes "[프리데리케]";
+		mes "추운 건 질색인데.";
+		mes "거긴 집도 얼음으로 되어 있다면서요?";
+		mes "솜이불도 가져가야지!";
+		cloakoffnpcself( "ep19_prt_cas_26_27" );
+		next;
+		select( "얼음으로 된 성도 있다." );
+		mes "[프리데리케]";
+		mes "와!";
+		mes "예쁘겠다!";
+		mes "그럼 이 하늘색 드레스랑 하얀 드레스 중에 어떤 게 거기에 어울려요?";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_prt_cas_23_36" );
+		next;
+		mes "[프리데리케]";
+		mes "아!";
+		mes "드레스에 맞는 구두도 가져가야겠다!";
+		cutin "ep19_friederike01.png",2;
+		cloakoffnpcself( "ep19_prt_cas_22_30" );
+		next;
+		mes "[마크]";
+		mes "뭘 자꾸 짐을 늘리는 거야!";
+		cloakoffnpcself( "ep19_prt_cas_22_33" );
+		cutin "ep18_mark_03.png",0;
+		next;
+		mes "[마크]";
+		mes "앗!";
+		mes "" + strcharinfo(0) + "님 안녕하세요.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "아니 왜 가방이 더 늘어났어…";
+		mes "설마 여기 있는 걸 전부 다 가져갈 생각은 아니지?";
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "안돼?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "당연히 안되지!";
+		mes "꼭 필요한 것만 들고 가!";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "다 필요한 물건들이란 말야.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "" + strcharinfo(0) + "님 그런 눈으로 보지 마세요.";
+		mes "이렇게 보여도 실력은 정말 뛰어나니까요…";
+		mes "실력은…";
+		mes "정말…";
+		mes "진짜…";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "안되겠다.";
+		mes "열어서 확인해 보지 않으면 정말 이걸 다 들고 이스가르드에 가게 될 거예요.";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "가방에 뭐가 들었는지 보고 줄일 수 있는 건 최대한 줄여 볼까요?";
+		cutin "acact_01.bmp",2;
+		erasequest 11801;
+		setquest 11802;
+		ep19_side_saint = 10;
+		close3;
+	}
+	// default text
+	mes "[복사 담당관 엘리스]";
+	mes "아니 왜 가방이 더 늘어났어…";
+	mes "설마 여기 있는 걸 전부 다 가져갈 생각은 아니지?";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[프리데리케]";
+	mes "안돼?";
+	cutin "ep19_friederike02.png",2;
+	next;
+	mes "[복사 담당관 엘리스]";
+	mes "당연히 안되지!";
+	mes "꼭 필요한 것만 들고 가!";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[프리데리케]";
+	mes "다 필요한 물건들이란 말야.";
+	cutin "ep19_friederike02.png",2;
+	next;
+	mes "[복사 담당관 엘리스]";
+	mes "" + strcharinfo(0) + "님 그런 눈으로 보지 마세요.";
+	mes "이렇게 보여도 실력은 정말 뛰어나니까요…";
+	mes "실력은…";
+	mes "정말…";
+	mes "진짜…";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[복사 담당관 엘리스]";
+	mes "안 되겠다.";
+	mes "열어서 확인해 보지 않으면 정말 이걸 다 들고 이스가르드에 가게 될 거예요.";
+	next;
+	mes "[복사 담당관 엘리스]";
+	mes "가방에 뭐가 들었는지 보고 줄일 수 있는 건 최대한 줄여 볼까요?";
+	cutin "acact_01.bmp",2;
+	close3;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11801) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 10
+prt_cas,15,31,5	script	여행용 가방#ep19_2::ep19_prt_cas_15_31	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 10) {
+		mes "- 가방 속에는 두꺼운 코트가 잔뜩 들어있다. -";
+		next;
+		mes "[프리데리케]";
+		mes "이스가르드는 추우니까 겨울 코트가 있어야 돼.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그건 그렇지.";
+		mes "그럼 다음!";
+		cutin "acact_01.bmp",2;
+		erasequest 11802;
+		setquest 11803;
+		ep19_side_saint = 11;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11802) == 1" );
+	cloakonnpc();
+	end;
+}
+
+// Side Quest: Purification Saint - Step 11
+prt_cas,16,27,3	script	여행용 가방#ep19_3::ep19_prt_cas_16_27	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 11) {
+		mes "- 가방 속에는 두꺼운 코트가 잔뜩 들어있다. -";
+		next;
+		mes "[프리데리케]";
+		mes "이스가르드는 추우니까…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "다른 가방에도 코트 있었잖아.";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "그치만…";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "어차피 춥다고 밖에 나가지도 않을 거잖아.";
+		mes "아까 그 가방만 가져가!";
+		mes "그럼 다음!";
+		cutin "acact_01.bmp",2;
+		erasequest 11803;
+		setquest 11804;
+		ep19_side_saint = 12;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11803) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 12
+prt_cas,26,27,3	script	여행용 가방#ep19_4::ep19_prt_cas_26_27	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 12) {
+		mes "- 가방 속에는 곰인형이 들어있다.-";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "…";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "안돼~~!";
+		mes "안젤리카 없이는 못 잔단 말야!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그럼 인형은 이거 하나만이다.";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "응.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그럼 다음!";
+		cutin "acact_01.bmp",2;
+		erasequest 11804;
+		setquest 11805;
+		ep19_side_saint = 13;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11804) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 13
+prt_cas,23,36,3	script	여행용 가방#ep19_5::ep19_prt_cas_23_36	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 13) {
+		mes "- 가방 속에는 과자가 들어 있다. -";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "이스가르드에서는 구하기 힘들지도 모르니 이건 들고 가도 좋아.";
+		mes "그럼 다음!";
+		cutin "acact_01.bmp",2;
+		erasequest 11805;
+		setquest 11806;
+		ep19_side_saint = 14;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11805) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 14
+prt_cas,22,30,5	script	여행용 가방#ep19_6::ep19_prt_cas_22_30	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 14) {
+		mes "- 가방 속에는 바르문트의 등신대 인형이 있다. -";
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "이런 건 대체 어디서 난 거야?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "이번에 저택에 갔을 때 알파씨가 선물로 준 거야.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "아무튼 이건 이스가르드에서 돌아오면 봐.";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[프리데리케]";
+		mes "힝…";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "짐은 이 정도면 충분해!";
+		cutin "acact_01.bmp",2;
+		erasequest 11806;
+		setquest 11807;
+		ep19_side_saint = 15;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11806) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 15
+prt_cas,21,31,3	script	엘리스#ep19::ep19_prt_cas_21_31	4_F_ACOLYTE,{
+	if (ep19_side_saint == 15) {
+		mes "[복사 담당관 엘리스]";
+		mes "휴!";
+		mes "줄이고 줄였는데도 이 정도라니.";
+		mes "짐꾼이 부족하겠는데…";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[듀]";
+		mes "여~!";
+		mes "마크 여기 있냐!";
+		mes "오!";
+		mes "" + strcharinfo(0) + "도 있잖아?";
+		mes "상점가에 새로 생긴 포링볶음 가게 안 갈래?";
+		cloakoffnpcself( "ep19_prt_cas_23_32" );
+		cloakoffnpcself( "ep19_prt_cas_24_31" );
+		cloakoffnpcself( "ep19_prt_cas_25_31" );
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "나도 먹을래!";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "어~~~머!";
+		mes "듀!";
+		mes "마기!";
+		mes "알프씨!";
+		cutin "acact_03.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "마침 잘 왔어!";
+		mes "누나가 포링볶음 사줄 테니까 이 짐 옮기는 것 좀 도와주지 않을래?";
+		cutin "acact_02.bmp",2;
+		next;
+		mes "[듀]";
+		mes "뭐?";
+		mes "진짜?";
+		mes "누님이 사는 거야?";
+		cutin "ep18_dew_05.png",2;
+		next;
+		mes "[마크]";
+		mes "누나!";
+		mes "그건…";
+		mes "읔…";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "가만있어…";
+		cutin "acact_02.bmp",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "물론이지!";
+		mes "너 먹고 싶은 만큼 얼마든지 사줄게.";
+		next;
+		mes "[듀]";
+		mes "좋아!";
+		mes "바람처럼 다녀올 테니 지갑 두둑하게 준비해 두라구!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "그럼 " + strcharinfo(0) + "님 제가 알데바란까지 보내드릴게요.";
+		mes "부디 조심해서 다녀오세요.";
+		mes "그리고 프리데리케 좀 잘 부탁드리구요.";
+		cutin "acact_01.bmp",2;
+		next;
+		if (select( "이동한다.", "그만둔다." ) == 2)
+			end;
+		mes "[프리데리케]";
+		mes "언니 나 다녀올게~";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[듀]";
+		mes "어? 알데바란???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[복사 담당관 엘리스]";
+		mes "조심해서 다녀와~";
+		mes "보클린드님 말씀 잘 듣고.";
+		cutin "acact_03.bmp",2;
+		erasequest 11807;
+		setquest 11808;
+		ep19_side_saint = 16;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_prt_cas_22_33" );
+		cloakonnpcself( "ep19_prt_cas_21_31" );
+		cloakonnpcself( "ep19_prt_cas_18_32" );
+		cloakonnpcself( "ep19_prt_cas_15_31" );
+		cloakonnpcself( "ep19_prt_cas_16_27" );
+		cloakonnpcself( "ep19_prt_cas_26_27" );
+		cloakonnpcself( "ep19_prt_cas_23_36" );
+		cloakonnpcself( "ep19_prt_cas_22_30" );
+		cloakonnpcself( "ep19_prt_cas_23_32" );
+		cloakonnpcself( "ep19_prt_cas_24_31" );
+		cloakonnpcself( "ep19_prt_cas_25_31" );
+		warp "aldebaran",104,105;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11807) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 17
+icecastle,27,123,3	duplicate(dummy_cloaked_npc)	레하르#ep19_3::ep19_icecastle_27_123	4_EP19_LEHAR
+icecastle,25,121,5	duplicate(dummy_cloaked_npc)	프리데리케#ep19입구::ep19_icecastle_25_121	4_EP19_FRIEDERIKE
+icecastle,20,126,5	duplicate(dummy_cloaked_npc)	듀#ep19입구::ep19_icecastle_20_126	4_EP18_DEW
+icecastle,21,127,5	duplicate(dummy_cloaked_npc)	마크#ep19입구::ep19_icecastle_21_127	4_EP18_MARK
+icecastle,21,128,5	duplicate(dummy_cloaked_npc)	마기#ep19입구::ep19_icecastle_21_128	4_4JOB_MAGGI
+icecastle,22,129,5	duplicate(dummy_cloaked_npc)	알프#ep19입구::ep19_icecastle_22_129	4_EP18_ALF
+
+icecastle,23,123,0	script	#입구레하르	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep19_side_saint == 17) {
+		mes "[레하르]";
+		mes "아!";
+		mes "" + strcharinfo(0) + "님 드디어 오셨군요!";
+		mes "성녀님은…";
+		cutin "ep19_lehar01.png",2;
+		cloakoffnpcself( "ep19_icecastle_27_123" );
+		cloakoffnpcself( "ep19_icecastle_25_121" );
+		cloakoffnpcself( "ep19_icecastle_20_126" );
+		cloakoffnpcself( "ep19_icecastle_21_127" );
+		cloakoffnpcself( "ep19_icecastle_21_128" );
+		cloakoffnpcself( "ep19_icecastle_22_129" );
+		next;
+		mes "[프리데리케]";
+		mes "프리데리케야.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[레하르]";
+		mes "안녕하세요.";
+		mes "프리데리케님.";
+		mes "다른 분들도…";
+		mes "얼음의 성까지 오시느라 고생하셨어요.";
+		cutin "ep19_lehar07.png",2;
+		next;
+		mes "[레하르]";
+		mes "바르문트 저택에 두고 온 건 죄송해요.";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "괜찮아.";
+		mes "보클린드님한테 많이 혼났어?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[레하르]";
+		mes "?.";
+		mes "기억이 잘…";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[듀]";
+		mes "어???";
+		mes "여긴 어디야!!!";
+		mes "추워!!!";
+		mes "내 포링볶음은!!";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[마크]";
+		mes "생각보다 더 추운 곳이네요.";
+		mes "어서 이동 하는 게 좋겠어요.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[레하르]";
+		mes "아!! 그렇군요.";
+		mes "여기서 이럴 게 아니라 일단 이쪽으로 따라 오세요.";
+		mes "밖에 오래 있으면 감기 걸려요.";
+		npctalk "레하르 : 이제 기도실은 싫어요…", "ep19_icecastle_27_123", bc_self;
+		cutin "ep19_lehar05.png",2;
+		erasequest 11809;
+		setquest 11810;
+		ep19_side_saint = 18;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icecastle_27_123" );
+		cloakonnpcself( "ep19_icecastle_25_121" );
+		cloakonnpcself( "ep19_icecastle_20_126" );
+		cloakonnpcself( "ep19_icecastle_21_127" );
+		cloakonnpcself( "ep19_icecastle_21_128" );
+		cloakonnpcself( "ep19_icecastle_22_129" );
+		navigateto("icecastle",59,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11809) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 18
+icas_in,33,112,0	script	#내부인원제한	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_saint < 19)
+		end;
+	if (ep19_side_saint == 19) {
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		end;
+	}
+	cloakoffnpcself( "ep19_healrock_1" );
+
+	if (ep19_side_sea < 2) {
+		cloakonnpcself( "ep19_healrock_2" );	// force cloaked
+		end;
+	}
+	if (ep19_side_sea == 2) {
+		cloakoffnpcself( "ep19_healrock_2" );
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		end;
+	}
+	cloakoffnpcself( "ep19_healrock_2" );
+	end;
+}
+
+icas_in,34,121,3	duplicate(dummy_cloaked_npc)	보클린드#ep19_room::ep19_healrock_3	4_EP19_VOGLINDE
+icas_in,27,119,5	duplicate(dummy_cloaked_npc)	듀#ep19_room::ep19_healrock_4	4_EP18_DEW
+icas_in,30,121,5	duplicate(dummy_cloaked_npc)	마크#ep19_room::ep19_healrock_5	4_EP18_MARK
+icas_in,29,120,5	duplicate(dummy_cloaked_npc)	마기#ep19_room::ep19_healrock_6	4_4JOB_MAGGI
+icas_in,26,119,5	duplicate(dummy_cloaked_npc)	알프#ep19_room::ep19_healrock_7	4_EP18_ALF
+
+// Part of the daily quest "Friederike's Day"
+// icas_in,32,123,5	script	프리데리케#ep19_room	4_EP19_FRIEDERIKE,{
+
+// Side Quest: Purification Saint - Step 19
+icas_in,35,118,3	script	레하르#ep19_room::ep19_healrock_8	4_EP19_LEHAR,{
+	if (ep19_side_saint == 19) {
+		if (checkweight("Ep19_Snow_Flower",30) == 0) {	// Ep19_Snow_Flower
+			mes "- Wait a minute !! -";
+			mes "- Currently you're carrying -";
+			mes "- too many items with you. -";
+			mes "- Please try again -";
+			mes "- after you loose some weight. -";
+			close;
+		}
+		mes "[레하르]";
+		mes "그럼 프리데리케님은 이 방에서 지내시면 돼요.";
+		mes "필요한 게 있으실 땐 절 부르시고…";
+		mes "같이 오신 분들도 함께 지내는 것 괜찮죠?";
+		mes "프리데리케님?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "응";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[레하르]";
+		mes "나중에 제가…";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16><B>레하르님!</FONT></B>";
+		mes "<FONT SIZE = 16><B>여기 있어?</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep19_healrock_1" );
+		next;
+		mes "[???]";
+		mes "아!";
+		mes "미드가르드에서 온 손님들인가?";
+		mes "갑자기 들어와서 미안해.";
+		mes "급한 일이라…";
+		next;
+		mes "[레하르]";
+		mes "슈르르, 무슨 일인가요?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "아! 그게…";
+		mes "혹시 ^e5555e정화된 마력핵^000000 남은 거 있어?";
+		mes "조금 전에 사냥을 하다가 친구가 ^e5555e구덩이^000000에 빠졌는데 안쪽에 물이 있었는지 쫄딱 젖는 바람에 깨어나지 못하고 있어.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "불쌍하게도 깃털이 하나도 없는 친구라 다른 친구들이 깃털을 모아 입혀 줬는데도 몸이 차가워.";
+		mes "^e5555e정화된 마력핵^000000을 쓰면 금방 회복할 수 있을 거야.";
+		next;
+		mes "[슈르르]";
+		mes "르간의 ^e5555e저급 마력핵^000000이라면 가진 게 좀 있지만…";
+		mes "^e5555e정화하지 않으면 그냥 쓸모없는 돌멩이^000000일 뿐이니…";
+		next;
+		mes "[레하르]";
+		mes "저런!";
+		mes "친구분이 무사하셔야 할 텐데…";
+		mes "큰일이네요!";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[레하르]";
+		mes "마력핵이라면 어떻게든 될 것 같으니 일단 친구를 이리 데리고 오세요.";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "괜찮아?";
+		mes "^e5555e레온님도 오렐리님^000000도 지금은 여력이 없으신 것 같았는데.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[레하르]";
+		mes "그런 건 걱정하지 말고!";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "<FONT SIZE = 16><B>고마워</FONT></B>";
+		mes "금방 데려올게!";
+		cutin "ep19_iwin03.png",2;
+		cloakonnpcself( "ep19_healrock_1" );
+		next;
+		mes "[레하르]";
+		mes "그럼 프리데리케님.";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "응?";
+		mes "왜?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[레하르]";
+		mes "자!";
+		mes "이 마력핵을 정화해 보세요.";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그 더러운 건 뭐야?";
+		mes "그걸 정화해야 하는 거야?";
+		mes "만지기 싫은데…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[레하르]";
+		mes "이모님이 부탁하신 거예요.";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "힝…";
+		mes "정화만 하면 되지?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[레하르]";
+		mes "프리데리케님은 어차피 더러워지지도 않잖아요.";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그치만 만질 때 기분 나쁜걸…";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "자 여기.";
+		mes "이렇게 하면 돼?";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[레하르]";
+		mes "하…";
+		mes "예상은 했지만 허무할 정도로 간단히 해버리는군요.";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[레하르]";
+		mes "마력핵의 정화는 레온님이나 오렐리님도 할 수는 있지만 정화에 특화된 분들이 아니라서 정말 필요할 때만 조금씩 바꿀 수 있었죠.";
+		next;
+		mes "[레하르]";
+		mes "같은 양의 마력으로 할 수 있는 다른 일들을 생각하면 효율이 형편없으니까요.";
+		next;
+		mes "[레하르]";
+		mes "이모님이 그렇게 애타게 프리데리케님을 찾으신게 확실히 이해되네요.";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "정말?";
+		mes "보클린드님이 나 많이 찾으셨어?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[레하르]";
+		mes "계속 마력핵 정화에 힘써 주시면 이모님이 더 기뻐하실 거예요.";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "히히…";
+		cutin "ep19_friederike03.png",2;
+		ep19_side_saint = 20;
+		ep19_side_sea = 1;	// // Side quest : Frozen Sea
+		completequest 11811;
+		set_reputation_points(3, (get_reputation_points(3) + 50));
+		getitem 1000608,30;	// Ep19_Snow_Flower
+		cloakoffnpcself( "ep19_healrock_1" );
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11811) == 1" );
+	end;
+}
+//
+
+
+
+// Side quest : Preaching Doctrine
+jor_nest,17,97,5	script	베르나간드#1	4_EP19_RGAN_SR2,{
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	switch( isbegin_quest(8795) ) {
+	case 0:
+		mes "최상급 르간이 차분한 분위기로 무언가 말하는 것을 여럿이 둘러앉아 듣고 있다.";
+		next;
+		if (select( "같이 들어 본다.", "지나간다." ) == 2) {
+			mes "일단은 다른 곳을 둘러보자.";
+			close;
+		}
+		mes "[베르나간드]";
+		mes "...하지만 이 베르나간드는 생각이 조금 다릅니다.";
+		mes "여기 계신 신도분들은 모두 아시다시피 우리의 신은 단 한 분, 요르문간드 님이십니다.";
+		next;
+		mes "[베르나간드]";
+		mes "모두가 신의 축복으로 이 자리에 있습니다.";
+		mes "우리는 다른 종족과 다를 수밖에 없어요. 부모도 없고, 자식도 없지만 이렇게 신의 뜻에 따라 공동체를 이루고 있습니다.";
+		npctalk "새로 태어난 동족인가? 지금 설교 중이니 조용히 들어.", "ep19_jor_nest_24_97", bc_self;
+		next;
+		mes "자신을 베르나간드라고 한 최상급 르간은 이 쪽을 보더니 고개를 끄덕였다.";
+		next;
+		mes "[베르나간드]";
+		mes "새로운 신도님이 또 하나 늘었군요. 환영합시다.";
+		npctalk "어서와!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "대강 앉게.", "ep19_jor_nest_18_92", bc_self;
+		npctalk "...", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[베르나간드]";
+		mes "자, 자. 다시 조용히.";
+		mes "오늘 설법은 슬슬 마무리하려고 했는데, 사제님을 맞이했으니 이야기를 조금만 더 해 보지요.";
+		next;
+		mes "[베르나간드]";
+		mes "오랜만에... 라스간드 님의 이야기를 해 볼까요?";
+		next;
+		mes "[베르나간드]";
+		mes "지금은 바쁜 탓에 모습을 잘 보여 주지 않으시지만, 우리 요르문간드 교단의 재부흥을 위해 라스간드 님은 이 추운 땅 곳곳을 돌아다니셨습니다.";
+		mes "조금이라도 신의 은총이 남아 있는 곳에는 아끼지 않고 피를 뿌려 새 동족을 만들었지요.";
+		next;
+		mes "[베르나간드]";
+		mes "우리 선조들의 마지막 후예, 라스간드 님의 피에 맺힌 마력과, 신의 은총 가득한 이 땅의 마력이 뒤섞여, 새로운 생명이 깃들기 시작했습니다.";
+		mes "하지만 모든 것이 마음대로 되지는 않았지요. 처음 알에서 나온 것들이야말로...";
+		next;
+		mes "[베르나간드]";
+		mes "신의 선택을 받지 못한 원시 르간들이었으니까요.";
+		npctalk "속죄합니다...", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[베르나간드]";
+		mes "라스간드 님은 안타까운 마음으로 그들을 하나하나 마력핵으로 바꿨다지요.";
+		mes "그리고 오랜 세월이 흘러... 그 사이 저도 라스간드 님과 함께 하게 되었습니다만...";
+		next;
+		mes "[베르나간드]";
+		mes "피를 뿌리고, 새로운 동족을 거두는 일을 오랫동안 반복하면서, 저는 그런 생각이 들었습니다.";
+		next;
+		mes "[베르나간드]";
+		mes "지금의 우리 르간들은 계급에 상관 없이, 모두 라스간드 님의 일부이자 자손입니다.";
+		mes "부모도, 자식도 없지만 말입니다.";
+		next;
+		mes "[베르나간드]";
+		mes "그런데 어째서 이렇게 각자가 다른 결과물로 나타나는 것일까요?";
+		mes "그것은... 원하는 것에 얼마나 닿고자 하는가에 따른 것이 아닌가, 저는 생각합니다.";
+		next;
+		mes "[베르나간드]";
+		mes "라스간드 님이 겪은 고통은 우리는 알 수가 없습니다.";
+		mes "그리고 제가 겪은 오래된 일들을, 예를 들어 지금 들어오신 사제님도 아실 리가 없지요.";
+		next;
+		mes "[베르나간드]";
+		mes "라스간드 님은 인간들과 얽힌 저주로 불사신이 되셨지만...";
+		mes "인간들에 대한 복수를 끝내기도 전에, 라스간드 님의 기력이 쇠하기라도 하면 이대로 우리 종족은 파멸로 향하게 될 것입니다.";
+		next;
+		mes "[베르나간드]";
+		mes "...인간들에 대한 복수!";
+		npctalk "요르문간드 만세!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "요르문간드 만세!", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[베르나간드]";
+		mes "조상들의 원한!";
+		npctalk "라스간드 만세!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "라스간드 만세!", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[베르나간드]";
+		mes "더 늦기 전에... 힘을 재정비할 필요가 있지 않겠습니까?";
+		next;
+		mes "[베르나간드]";
+		mes "더 늦기 전에...";
+		mes "모두 준비합시다.";
+		next;
+		mes "[베르나간드]";
+		mes "오늘 설법은 이 정도로 하고 마치지요.";
+		mes "모두 편안한 시간 되십시오.";
+		npctalk "일하러 가야지...", "ep19_jor_nest_23_91", bc_self;
+		npctalk "...", "ep19_jor_nest_18_92", bc_self;
+		next;
+		mes "[유라미간드]";
+		mes "자네 잠시 나 좀 볼까.";
+		npctalk "쉿. 이 쪽 보지 말고.", "ep19_jor_nest_18_92", bc_self;
+		setquest 8795;
+		close;
+	case 1:
+		mes "[베르나간드]";
+		mes "오늘의 설법은 끝났습니다.";
+		mes "다음에 또 뵙지요, 새 사제여.";
+		close;
+	case 2:
+		mes "[베르나간드]";
+		mes "오늘의 설법은 끝났습니다.";
+		mes "다음에 또 뵙지요, 새 사제여.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8795) == 0" );
+	end;
+}
+
+jor_nest,18,92,7	script	유라미간드#1::ep19_jor_nest_18_92	4_EP19_RGAN_SR1,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	switch( isbegin_quest(8795) ) {
+	case 0:
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	case 1:
+		mes "[유라미간드]";
+		mes "자네 잠시 나 좀 볼까.";
+		npctalk "쉿. 이 쪽 보지 말고.", "", bc_self;
+		next;
+		select( "네?", "무슨 일이시죠?" );
+		mes "[유라미간드]";
+		mes "...";
+		mes "막 태어나자마자 이런 걸 들었으니 자극이 강한 것도 알겠지만.";
+		mes "새겨 들을 필요는 없어.";
+		next;
+		mes "[유라미간드]";
+		mes "베르나간드의 꿍꿍이속은 알 수가 없으니까.";
+		mes "말은 저렇게 하지만 정말 라스간드 님을 위해 행동하는 건지도 확실치가 않아.";
+		next;
+		mes "[유라미간드]";
+		mes "알아들었나?";
+		next;
+		select( "네", "모르겠어요" );
+		mes "[유라미간드]";
+		mes "...시간이 밝혀주겠지만.";
+		mes "베르나간드와 너무 친하게 지내지 마라.";
+		mes "라스간드 님은 탐탁치 않게 생각하신다.";
+		next;
+		select( "정말인가요?", "네" );
+		mes "[유라미간드]";
+		mes "...";
+		mes "...";
+		next;
+		mes "[유라미간드]";
+		mes "베르나간드의, 라스간드 님에 대한 충성심만큼은 진짜지만 말이야.";
+		next;
+		mes "[유라미간드]";
+		mes "...거 참. 알레이간드 말대로 왜 모두 라스간드 님의 피에서 태어났으면서 이렇게까지 다르지?";
+		completequest 8795;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		close;
+	case 2:
+		mes "[유라미간드]";
+		mes "누군가의 표적이 되지 않게 조심해.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8795) == 1" );
+	end;
+}
+
+jor_nest,21,99,3	script	라카노르간드#1	4_EP19_RGAN_R2,{
+	mes "[라카노르간드]";
+	mes "신의 가르침을 따를지어다...";
+	close;
+}
+
+jor_nest,24,97,3	script	한디마리간드#1::ep19_jor_nest_24_97	4_EP19_RGAN_R1,{
+	mes "[한디마리간드]";
+	mes "귀에 쏙쏙 들어오는 친절한 설법이라니까.";
+	close;
+}
+
+jor_nest,23,91,1	script	얼나구스다간드#1::ep19_jor_nest_23_91	EP19_RGAN_D,{
+	mes "[얼나구스다간드]";
+	mes "...";
+	mes "한다. 일.";
+	mes "열심히. 속죄.";
+	close;
+}
+//
+
+
+// Side quest : Curious Things
+jor_nest,239,239,3	script	델파나간드#1	4_EP19_RGAN_SR1,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	switch( isbegin_quest(8793) ) {
+	case 0:
+		mes "[델파나간드]";
+		mes "아니, 이런 데서 처음 보는 사제님이라니, 어디서 튀어나왔니? 어쩌다 여길 지나가게 됐니?";
+		mes "누구야, 얘 부화장에서 나와서 그냥 기어다니게 한 거?";
+		mes "담당 누구야?";
+		next;
+		mes "[델파나간드]";
+		mes "...응?";
+		mes "아아, 부화장 출신이 아니구나?";
+		mes "이런이런. 왜 아무도 나한테 안 알려준 거니?";
+		next;
+		mes "최상급 르간 하나가 갑자기 지나가는 걸 붙들더니 혼자 주절주절 떠들기 시작했다.";
+		next;
+		mes "[델파나간드]";
+		mes "나는, 델파나간드 님이시다.";
+		mes "대화가 가능한 르간은 모두 내 얼굴을 알고 있지.";
+		next;
+		mes "[델파나간드]";
+		mes "궁금한 것은?";
+		next;
+		select( "있어요", "없어요" );
+		mes "[델파나간드]";
+		mes "솔직한 아이구나.";
+		mes "그런데 일단 생겨났으니 내 이야기부터 들어.";
+		next;
+		mes "[델파나간드]";
+		mes "흐음...";
+		mes "보통은 몇몇 모아놓고 한 번에 가르치는데 하나만 놓고 설명을 하려니 조금 새삼스럽구나.";
+		next;
+		mes "[델파나간드]";
+		mes "우리는 거대한 뱀 요르문간드의 가호 아래 이 땅을 지키는 종족. 알에서 깨어나지만 부모가 없고 알을 키우는 것은 이 땅의 마력.";
+		mes "세상 모든 생물이 부모를 가지는 동안 우리는 살아남은 자 라스간드 님의 뜻으로 생겨나 거대한 뱀 요르문간드의 힘으로 형태를 얻었다.";
+		next;
+		mes "[델파나간드]";
+		mes "찬양할지어다, 거대한 뱀 요르문간드.";
+		mes "따를지어다, 살아남은 자 라스간드.";
+		mes "이렇게 지성을 가진 채 알에서 깨어나게 되는 것은 또한 라스간드 님의 은혜니라.";
+		mes "강한 자의 피가 강한 알을 만든다.";
+		next;
+		mes "[델파나간드]";
+		mes "지금의 우리 르간들은 모두 라스간드 님의 피에서 이어진 개체들이다.";
+		mes "부모자식 개념은 없지만 선대의 뜻을 전부 이어받은 라스간드 님이 뿌린 피가 우리 모두를 이렇게 마력의 결정체로 만들어 낸 것은 눈을 뜨고 있는 너와 내가 아는 바이다.";
+		next;
+		mes "[델파나간드]";
+		mes "유일한 최고의 르간은 라스간드 님 한 분 뿐이다.";
+		mes "그 아래, 나처럼 뛰어난 최상급 르간은 주교라 부르거라.";
+		next;
+		mes "[델파나간드]";
+		mes "너는 신의 선택 아래 사제로 태어났다.";
+		mes "저기서 알을 돌보는 저 이들은 평신도니라.";
+		mes "그조차 못 되어 거저 주어진 신의 마력조차 흡수하지 못한 채 깨어난 것들은 일을 할 수 있다면 쓸 만도 하겠지만...";
+		next;
+		mes "[델파나간드]";
+		mes "아니라면 자원일 뿐이다.";
+		mes "너의 이 지혜로 라스간드 님을 돕고 요르문간드 교단이 대륙에 세를 넓힐 수 있도록 힘쓰도록 하거라.";
+		mes "궁금한 것은?";
+		next;
+		select( "있어요", "없어요" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "없어요.";
+		next;
+		mes "[델파나간드]";
+		mes "흐음...";
+		mes "생긴 것과는 다르게 똘똘하지 못한 모양이구나.";
+		mes "아니면 내가 뭘 잘못 가르쳤나?";
+		next;
+		mes "[델파나간드]";
+		mes "여럿이 모아놓고 궁금한 게 있냐고 하면 서로 물으려고 난리던데...";
+		next;
+		mes "[델파나간드]";
+		mes "부끄러워하지 말고 물어 봐.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "...";
+		next;
+		mes "델파나간드의 이야기를 종합하면, 어느 정도 이상 되는 지능의 르간들은 대화하는 능력 등, 처음부터 어느 정도의 지식을 갖추고 알에서 나오는 것 같다.";
+		next;
+		mes "어느 정도의 말실수는 그러려니 하고 넘어갈 것 같아 다행이다.";
+		next;
+		mes "그런데 요르문간드 교단에 대한 이야기는 왜 굳이 들어야 하는 것일까?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그럼 저기...";
+		next;
+		mes "[델파나간드]";
+		mes "그래, 그래.";
+		mes "우리는 뛰어난 종족이라 당연히 궁금할 수 있지.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "왜 우리는 말은 배우고 태어났는데 이런 건 하나하나 배워야 하는 거죠?";
+		next;
+		mes "[델파나간드]";
+		mes "아아, 세상에나, 이런 어려운 질문을 하다니!";
+		mes "하지만 약간 오해가 있구나.";
+		mes "우리는 말을 배우고 태어난 게 아니란다.";
+		next;
+		mes "[델파나간드]";
+		mes "우리는 각각 라스간드 님과 다른 개체지만 라스간드 님의 피에서 비롯된 르간이라는 공통점이 있다.";
+		mes "그래서 알고 있는 것들은 르간으로서 당연한 것들이지.";
+		mes "아는 거 말해 봐.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "...";
+		next;
+		select( "르간은 르간을 먹는다" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "르간은 르간을 먹는다...";
+		next;
+		mes "[델파나간드]";
+		mes "그래. 배우지 않아도 아는 것들이지. 우리는 라스간드 님에게 당연한 것은 모두 알고 태어났다.";
+		mes "하지만 교단의 교리는 우리의 세력이 커지고, 개체수가 늘어나면 바뀔 수도 있는 것이지.";
+		next;
+		mes "[델파나간드]";
+		mes "흐음, 베르나간드의 구구절절 긴 이야기는 들었나 본데?";
+		next;
+		setquest 8793;
+		mes "[델파나간드]";
+		mes "그럼 시험을 내어 주겠다.";
+		mes "여기 부화장을 한 바퀴 돌면서, 부화장을 지키는 평신도들과 이야기를 나눠 보렴.";
+		mes "<NAVI>[말 잘 듣는 애]<INFO>jor_nest,277,257,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[게으른 애]<INFO>jor_nest,220,279,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[말 잘 안 듣는 애]<INFO>jor_nest,274,199,0,101,0</INFO></NAVI> 정도면 되지 않을까?";
+		close;
+	case 1:
+		if (isbegin_quest(8801) == 1) {
+			mes "[델파나간드]";
+			mes "어땠니? 너처럼... 뭔가 궁금해하는 아이가 있었니?";
+			mes "이제 깨달았을 거야. 각자가 할 수 있는 일을 하는 거란다.";
+			mes "너는 계속 궁금해하고, 교단을 위해 힘을 쓰렴.";
+			completequest 8801;
+			completequest 8793;
+			getitem 1000608,10;	// Ep19_Snow_Flower
+			next;
+			mes "[델파나간드]";
+			mes "할 수 있는 것을 해야지.";
+			close;
+		}
+		mes "[델파나간드]";
+		mes "부화장을 한 바퀴 돌며 평신도들과 이야기를 나눠 보렴.";
+		mes "<NAVI>[말 잘 듣는 애]<INFO>jor_nest,277,257,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[게으른 애]<INFO>jor_nest,220,279,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[말 잘 안 듣는 애]<INFO>jor_nest,274,199,0,101,0</INFO></NAVI> 정도면 되지 않을까?";
+		close;
+	case 2:
+		mes "[델파나간드]";
+		mes "너는 계속 궁금해하고, 교단을 위해 힘을 쓰렴.";
+		close;
+	}
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8793) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8801) == 1" );
+	end;
+}
+
+jor_nest,277,257,1	script	야무리스니간드#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8802) ) {
+		case 0:
+			mes "[야무리스니간드]";
+			mes "델파나간드 님이?";
+			mes "뭘 알고 있는지 물어보라고?";
+			next;
+			mes "[야무리스니간드]";
+			mes "...모르겠다, 요.";
+			next;
+			select( "좋아하는 것" );
+			mes "[야무리스니간드]";
+			mes "좋아하는 것?";
+			mes "따뜻한 곳...";
+			mes "바깥은 싫다, 요.";
+			next;
+			mes "중요한 이야기를 들을 수는 없을 것 같다.";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8802;
+			completequest 8802;
+			mes "다른 일꾼 르간을 찾아봐야겠다.";
+			close;
+		case 1:
+		case 2:
+			mes "[야무리스니간드]";
+			mes "싫어하는 것?";
+			mes "추운 곳...";
+			mes "바깥은 싫다, 요.";
+			close;
+		}
+		end;
+	}
+	mes "[야무리스니간드]";
+	mes "싫어하는 것?";
+	mes "추운 곳...";
+	mes "바깥은 싫다, 요.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8802) == 0" );
+	end;
+}
+
+jor_nest,274,199,5	script	기베디우사간드#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8804) ) {
+		case 0:
+			mes "[기베디우사간드]";
+			mes "깜짝이야!";
+			mes "놀랐... 다, 요.";
+			mes "못 보던 사제님이다.";
+			mes "요.";
+			mes "안 놀았다, 요.";
+			next;
+			mes "[기베디우사간드]";
+			mes "...알, 돌보고 있었다, 요.";
+			next;
+			select( "불만 사항" );
+			mes "[기베디우사간드]";
+			mes "불만 사항?";
+			mes "...지금까지 어떤 사제님도 그런 이야길 한 적 없었다요.";
+			next;
+			mes "[기베디우사간드]";
+			mes "우리는... 신을 따르는 신도들이다, 요.";
+			mes "...";
+			mes "일은 당연한 것이다요?";
+			mes "놀고 싶지만...";
+			mes "일은 해야 한다요.";
+			next;
+			mes "그다지 중요한 이야기를 들을 수는 없을 것 같다.";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8804;
+			completequest 8804;
+			mes "다른 일꾼 르간을 찾아봐야겠다.";
+			close;
+		case 1:
+		case 2:
+			end;
+		}
+		end;
+	}
+	mes "[기베디우사간드]";
+	mes "...딴 짓 안 했다, 요?";
+	mes "딴짓 안했다, 요?";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8804) == 0" );
+	end;
+}
+
+jor_nest,220,279,1	script	타기미로디간드#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8803) ) {
+		case 0:
+			mes "[타기미로디간드]";
+			mes "델파나간드 님이?";
+			mes "뭘 알고 있는지 물어보라고?";
+			next;
+			mes "[타기미로디간드]";
+			mes "일하기 싫다...요.";
+			next;
+			select( "하고 싶은 것" );
+			mes "[타기미로디간드]";
+			mes "하고 싶은 것?";
+			mes "바닥에 누워서... 마력이 따끈따끈한 곳에서...";
+			mes "자고 싶다, 요.";
+			mes "하지만 요르문간드교의 부흥을 위해서라면 일한다요.";
+			next;
+			mes "깊은 생각은 없는 것 같다.";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8803;
+			completequest 8803;
+			mes "델파나간드에게 보고해야겠다.";
+			close;
+		case 1:
+		case 2:
+			end;
+		}
+		end;
+	}
+	mes "[타기미로디간드]";
+	mes "따뜻한 곳에서... 자고 싶다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8803) == 0" );
+	end;
+}

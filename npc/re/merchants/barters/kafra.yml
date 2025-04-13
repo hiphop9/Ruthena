@@ -1,0 +1,125 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Barter Database
+###########################################################################
+#
+# Barter Settings
+#
+###########################################################################
+#  - Name               NPC name.
+#    Map                Map name. (Default: not on a map)
+#    X                  Map x coordinate. (Default: 0)
+#    Y                  Map y coordinate. (Default: 0)
+#    Direction          NPC가 바라보는 방향. (기본값: 북쪽)
+#    Sprite             NPC의 스프라이트 이름입니다. (기본값: FakeNpc)
+#    Items:             판매된 품목 목록입니다.
+#      - Index          상점 내부 아이템의 인덱스입니다. (0-...)
+#                       최대 인덱스는 클라이언트에 따라 다릅니다.
+#        Item           아이템의 이지스 이름입니다.
+#        Stock          재고가 있는 품목의 양입니다. 0은 무제한을 의미합니다. (기본값: 0)
+#        Zeny           Zeny의 아이템 가격입니다. (기본값: 0)
+#        RequiredItems: 필수항목 목록 (선택)
+#          - Index      필수 항목의 색인입니다. (0-4)
+#            Item       필수 아이템의 이지스 이름입니다.
+#            Amount     필수 아이템 수량입니다. (기본값: 1)
+#            Refine     필수 아이템의 레벨을 세분화합니다. (기본값: 0)
+###########################################################################
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Body:
+###########################################################################
+##= mega Booster 
+###########################################################################
+  - Name: kafra
+    Items:
+      - Index: 0
+        Item: Red_Potion_B  # [비매품] 빨간포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 1
+      - Index: 1
+        Item: White_Potion_B  # [비매품] 하얀포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 11
+      - Index: 2
+        Item: Blue_Potion_B  # [비매품] 파란포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 15
+      - Index: 3
+        Item: Center_Potion_B #[비매품 ] 집중의 포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 22
+      - Index: 4
+        Item:  Awakening_Potion_B  #[비매품] 각성의 포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 31
+      - Index: 5
+        Item: Yellow_Slim_Potion_B  # [비매품] 옐로우 슬림 포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 50
+      - Index: 6
+        Item: Berserk_Potion_B  # [비매품] 버서크  포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 70
+      - Index: 7
+        Item: White_Slim_Potion_B  #[비매품] 화이트 슬림 포션
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 105
+      - Index: 8
+        Item: Royal_Jelly_  #[비매품] 로얄제리
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 200
+      - Index: 9
+        Item:  Seed_Of_Yggdrasil_  #[비매품] 이그드라실의 씨앗
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 700
+      - Index: 10
+        Item: White_Potion_Box_  #[비매품] 하얀포션 상자
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 1000
+      - Index: 11
+        Item: White_Slim_Potion_Box_  #[비매품] 화이트 슬림포션 상자
+        RequiredItems:
+          - Index: 0
+            Item: Kafra_Coin_Kr
+            Amount: 20000

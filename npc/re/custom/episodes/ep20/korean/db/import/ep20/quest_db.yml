@@ -1,0 +1,433 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: QUEST_DB
+  Version: 3
+
+Body:
+  - Id: 8839
+    Title: 도움을 가장한 뒤치다꺼리
+  - Id: 8840
+    Title: 르간의 신뢰
+  - Id: 8841
+    Title: 하지만 생각을 해 보라고
+  - Id: 8842
+    Title: 화가 많으시군요
+  - Id: 8843
+    Title: 소리나지 않는 대답
+  - Id: 8844
+    Title: 소리나지 않는 대답의 예시-대기
+    TimeLimit: 4h
+  - Id: 8845
+    Title: 소리나지 않는 대답의 예시
+  - Id: 8846
+    Title: 여기까지 와 있는데
+  - Id: 8847
+    Title: 날시오라미간드의 일감
+  - Id: 8848
+    Title: 눔카사이가간드의 일감
+  - Id: 8849
+    Title: 온내체라멜간드의 일감
+  - Id: 8850
+    Title: 작르다구미간드의 일감
+  - Id: 8851
+    Title: 클제이나모간드의 일감
+  - Id: 8852
+    Title: 여기까지 와 있는데-대기
+    TimeLimit: 4h
+  - Id: 8853
+    Title: 여기까지 와 있지만
+  - Id: 8854
+    Title: 나는 아마도 도시락
+  - Id: 8855
+    Title: 말랑말랑 별미 수집
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+  - Id: 8856
+    Title: 말랑말랑 별미 수집-대기
+    TimeLimit: 4h
+  - Id: 8857
+    Title: 짭짤한 맛과 달달한 맛
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+  - Id: 8858
+    Title: 짭짤한 맛과 달달한 맛과 신맛
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+      - Mob: EP20_MELIBE_ICESLUG
+        Count: 20
+  - Id: 11928
+    Title: 꼬뽀의 비밀기지
+  - Id: 11929
+    Title: 꼬뽀의 비밀기지
+  - Id: 11930
+    Title: 꼬뽀의 비밀기지
+  - Id: 11931
+    Title: 꼬뽀의 비밀기지
+  - Id: 11932
+    Title: 꼬뽀의 비밀기지
+  - Id: 11933
+    Title: 꼬뽀의 비밀기지
+  - Id: 11934
+    Title: 꼬뽀의 비밀기지
+  - Id: 11935
+    Title: 꼬뽀의 비밀기지
+  - Id: 11936
+    Title: 꼬뽀의 비밀기지
+  - Id: 11937
+    Title: 꼬뽀의 비밀기지
+  - Id: 11938
+    Title: 꼬뽀의 비밀기지
+  - Id: 11939
+    Title: 꼬뽀의 비밀기지
+  - Id: 11940
+    Title: 꼬뽀의 비밀기지
+  - Id: 11941
+    Title: 꼬뽀의 비밀기지
+  - Id: 11942
+    Title: 꼬뽀의 비밀기지
+  - Id: 11943
+    Title: 꼬뽀의 비밀기지
+  - Id: 11944
+    Title: 꼬뽀의 비밀기지
+  - Id: 11945
+    Title: 꼬뽀의 비밀기지
+  - Id: 11946
+    Title: 꼬뽀의 비밀기지
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11947
+    Title: 꼬뽀의 비밀기지
+  - Id: 11948
+    Title: 에스카르고!
+  - Id: 11949
+    Title: 에스카르고!
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11950
+    Title: 에스카르고!-대기
+    TimeLimit: 4h
+  - Id: 11951
+    Title: 위험하다고!
+    Targets:
+      - Mob: EP20_NPC_COCOPO
+        Count: 10
+  - Id: 11952
+    Title: 위험하다고!-대기
+    TimeLimit: 4h
+  - Id: 11953
+    Title: 화해하면 좋겠다.(1)
+    Targets:
+      - Mob: EP20_ICEWIND1
+        Count: 10
+  - Id: 11954
+    Title: 화해하면 좋겠다.(1)-대기
+    TimeLimit: 4h
+  - Id: 11955
+    Title: 화해하면 좋겠다.(2)
+    Targets:
+      - Mob: EP20_ICEWIND2
+        Count: 10
+  - Id: 11956
+    Title: 화해하면 좋겠다.(2)-대기
+    TimeLimit: 4h
+  - Id: 12588
+    Title: 죽지 않는 자 - 대기
+    TimeLimit: 4h
+  - Id: 12589
+    Title: 죽지 않는 자(상급) - 대기
+    TimeLimit: 4h
+  - Id: 12590
+    Title: 죽지않는 자의 이야기
+  - Id: 12591
+    Title: 죽지 않는 자 무력화
+    Targets:
+      - Mob: MD_EP20_BOSS_LASGAND
+        Count: 1
+  - Id: 16691
+    Title: 탐사 범위 확대
+  - Id: 16692
+    Title: 고대 얼음 협곡의 선주민
+  - Id: 16693
+    Title: 고대 얼음 협곡 탐사
+  - Id: 16694
+    Title: 증거물과 귀환
+  - Id: 16695
+    Title: 수상한 낌새
+  - Id: 16696
+    Title: 병영 탐문
+  - Id: 16697
+    Title: 여관 탐문
+  - Id: 16698
+    Title: 뒷골목 탐색
+  - Id: 16699
+    Title: 수상한 낌새?
+  - Id: 16700
+    Title: 수상한 장치의 정체
+  - Id: 16701
+    Title: 협곡 탐사
+  - Id: 16702
+    Title: 얼음성 귀환
+  - Id: 16703
+    Title: 그 동안의 이야기
+  - Id: 16704
+    Title: 냉전과 첩보의 시대
+  - Id: 17690
+    Title: 새로운 탐색지
+  - Id: 17691
+    Title: 르간들의 은신처 잠입
+  - Id: 17692
+    Title: 르간들의 은신처 잠입
+  - Id: 17693
+    Title: 르간들의 은신처 잠입
+    Targets:
+      - Mob: EP20_RGAN_WARLOCK
+        Count: 5
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 5
+  - Id: 17694
+    Title: 르간들의 은신처 잠입
+  - Id: 17695
+    Title: 르간들의 은신처 잠입
+  - Id: 17696
+    Title: 성스럽고 성스러운
+  - Id: 17697
+    Title: 성스럽고 성스러운
+  - Id: 17698
+    Title: 성스럽고 성스러운
+  - Id: 17699
+    Title: 성스럽고 성스러운
+  - Id: 17700
+    Title: 성스럽고 성스러운
+  - Id: 17701
+    Title: 르간들의 신뢰 얻기
+  - Id: 17702
+    Title: 미로의 끝이 향하는 곳
+  - Id: 17703
+    Title: 미로의 끝이 향하는 곳
+    Targets:
+      - Mob: EP20_JORMUNGUARD1
+        Count: 2
+      - Mob: EP20_JORMUNGUARD2
+        Count: 1
+  - Id: 17704
+    Title: 미로의 끝이 향하는 곳
+  - Id: 17705
+    Title: 미로의 끝이 향하는 곳
+  - Id: 17706
+    Title: 미로의 끝이 향하는 곳
+  - Id: 17707
+    Title: 뜻밖의 재회
+  - Id: 17708
+    Title: 뜻밖의 재회
+  - Id: 17709
+    Title: 은신처 잠입 보고
+  - Id: 17710
+    Title: 뱀의 미로 청소
+    Targets:
+      - Mob: EP20_JORMUNGUARD1
+        Count: 10
+      - Mob: EP20_JORMUNGUARD2
+        Count: 10
+  - Id: 17711
+    Title: "대기: 뱀의 미로 청소"
+    TimeLimit: 4h
+  - Id: 17712
+    Title: 새 삶의 터전
+  - Id: 17713
+    Title: 새 삶의 터전
+  - Id: 17714
+    Title: 새 삶의 터전
+  - Id: 17715
+    Title: 새 삶의 터전
+  - Id: 17716
+    Title: 새 삶의 터전
+  - Id: 17717
+    Title: "대기: 취미 생활의 맛"
+    TimeLimit: 4h
+  - Id: 17718
+    Title: 취미 생활의 맛
+  - Id: 17719
+    Title: 성스럽고 성스러운
+  - Id: 17720
+    Title: 취미 생활의 맛
+  - Id: 17721
+    Title: 취미 생활의 맛
+  - Id: 18220
+    Title: 얼음성으로
+  - Id: 18221
+    Title: 레하르를 찾아서...!
+  - Id: 18222
+    Title: 조사, 조사, 조사
+  - Id: 18223
+    Title: 레하르의 표식 1
+  - Id: 18224
+    Title: 레하르의 표식 2
+  - Id: 18225
+    Title: 레하르의 표식 3
+  - Id: 18226
+    Title: 허탕이고요. 다음 장소는요.
+  - Id: 18227
+    Title: 성스러운 뿌리 동향 조사
+  - Id: 18228
+    Title: 냐르의 부름
+  - Id: 18229
+    Title: 고양이 등을 밟고 달려!
+  - Id: 18230
+    Title: 다들 여기 있었어?
+  - Id: 18231
+    Title: 그래서 무슨일이 있었는데?
+  - Id: 18232
+    Title: 분리된 성소
+  - Id: 18233
+    Title: 죽지 않는 자
+  - Id: 18234
+    Title: 아윈의 아윈 걱정
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root3
+        MapMobTargets:
+          EP20_ICEBEAR: true
+          EP20_MELIBE_ICESLUG: true
+          EP20_JORGAN_CLEANER: true
+  - Id: 18235
+    Title: 아윈의 아윈 걱정-대기
+    TimeLimit: 4h
+  - Id: 18236
+    Title: 보클린드의 섬멸작전1
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root1
+        MapMobTargets:
+          EP20_JORMUNGUARD1: true
+          EP20_JORMUNGUARD2: true
+          EP20_RGAN_WARLOCK: true
+          EP20_RGAN_HEALER: true
+          EP20_JORGAN_GUARDIAN: true
+  - Id: 18237
+    Title: 보클린드의 섬멸작전1-대기
+    TimeLimit: 4h
+  - Id: 18238
+    Title: 보클린드의 섬멸작전2
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root2
+        MapMobTargets:
+          EP20_JORMUNGUARD1: true
+          EP20_JORMUNGUARD2: true
+          EP20_JORGAN_GUARDIAN: true
+          EP20_JORGAN_WARLOCK: true
+          EP20_RGAN_HEALER: true
+  - Id: 18239
+    Title: 보클린드의 섬멸작전2-대기
+    TimeLimit: 4h
+  - Id: 18240
+    Title: 얼음성으로
+  - Id: 19158
+    Title: 그 어떤 아윈 보다 전문가
+  - Id: 19159
+    Title: 브리핑
+  - Id: 19160
+    Title: 스파이 대책회의
+  - Id: 19161
+    Title: 임무 설명
+  - Id: 19162
+    Title: 오늘의 암구호
+    TimeLimit: 4h
+  - Id: 19163
+    Title: "[대기] 스파이 수색"
+    TimeLimit: 4h
+  - Id: 19164
+    Title: 스파이 수색 성공
+  - Id: 19165
+    Title: "[대기] 첩보 정보 회수"
+    TimeLimit: 4h
+  - Id: 19166
+    Title: 첩보 정보 회수 완료
+  - Id: 19167
+    Title: 첩보 정보 회수 실패
+  - Id: 19168
+    Title: 접선을 위한 장소
+  - Id: 19169
+    Title: 접선을 위한 장소
+  - Id: 19170
+    Title: 접선을 위한 장소
+  - Id: 19171
+    Title: 접선을 위한 장소
+  - Id: 19172
+    Title: 접선을 위한 장소
+  - Id: 19173
+    Title: 접선을 위한 장소
+  - Id: 19174
+    Title: 접선을 위한 장소
+  - Id: 19175
+    Title: 접선을 위한 장소
+  - Id: 19176
+    Title: 접선을 위한 장소
+  - Id: 19177
+    Title: 접선을 위한 장소
+  - Id: 23100
+    Title: 태고의 깊은 바다
+  - Id: 23101
+    Title: 얼마나 깊든 찾을 수 있어 1
+    Targets:
+      - Mob: EP19_ICE_GANGU
+        Count: 5
+  - Id: 23102
+    Title: 얼마나 깊든 찾을 수 있어 2
+    Targets:
+      - Mob: EP19_SHINING_SEAWEED
+        Count: 5
+  - Id: 23103
+    Title: 얼음 사이 숨겨져 있는 것
+  - Id: 23104
+    Title: 얼음 사이 숨겨져 있는 것
+  - Id: 23105
+    Title: 얼음 사이 숨겨져 있는 것
+  - Id: 23106
+    Title: 작은 가지의 둥지
+  - Id: 23107
+    Title: 작은 가지의 둥지
+  - Id: 23108
+    Title: 빙산 넘고 빙해 넘어
+  - Id: 23109
+    Title: 빙산 넘고 빙해 넘어
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 5
+  - Id: 23110
+    Title: 르간 뿌리 뽑기 - 대기
+    TimeLimit: 4h
+  - Id: 23111
+    Title: 르간 뿌리 뽑기
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 15
+  - Id: 23112
+    Title: 뿌리 깊은 르간
+  - Id: 23113
+    Title: 르간 사이의 소문 수집 1
+  - Id: 23114
+    Title: 르간 사이의 소문 수집 2
+  - Id: 23115
+    Title: 르간 사이의 소문 수집 3
+  - Id: 23116
+    Title: 미로의 끝 고양이
+  - Id: 23117
+    Title: 미로의 끝 고양이
+  - Id: 23118
+    Title: 미로의 끝 고양이

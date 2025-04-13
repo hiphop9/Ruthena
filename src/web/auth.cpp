@@ -7,6 +7,7 @@
 
 #include <common/showmsg.hpp>
 #include <common/sql.hpp>
+#include <config/custom.hpp>
 
 #include "http.hpp"
 #include "sqllock.hpp"
@@ -46,7 +47,10 @@ bool isAuthorized(const Request &request, bool checkGuildLeader) {
 	}
 
 	if (SqlStmt_NumRows(stmt) <= 0) {
-		ShowWarning("Request with AID %d and token %s unverified\n", account_id, token);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("AID %d와(과) 토큰 %s이(가) 확인되지 않은 요청을 했습니다.\n", account_id, token);
+		else
+			ShowWarning("Request with AID %d and token %s unverified\n", account_id, token);
 		SqlStmt_Free(stmt);
 		loginlock.unlock();
 		return false;
@@ -80,7 +84,10 @@ bool isAuthorized(const Request &request, bool checkGuildLeader) {
 	}
 
 	if (SqlStmt_NumRows(stmt) <= 0) {
-		ShowDebug("Request with AID %d GDID %d and token %s unverified\n", account_id, guild_id, token);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("AID %d 및 GDID %d이(가) 확인되지 않은 토큰 %s이(가) 요청되었습니다.\n", account_id, guild_id, token);
+		else
+			ShowDebug("Request with AID %d GDID %d and token %s unverified\n", account_id, guild_id, token);
 		SqlStmt_Free(stmt);
 		charlock.unlock();
 		return false;

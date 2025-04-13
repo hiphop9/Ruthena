@@ -1,0 +1,269 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Separate Sanctuary from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 61 (instance "Separate sanctuary")
+jor_twig,138,152,7	script(CLOAKED)	오렐리#ep20_end02::ep20_jor_twig_138_152	4_EP19_AURELIE,{
+	if (ep20_main == 60) {
+		if (getcharid(1) < 1) {
+			cutin "ep19_aurelie01.png",0;
+			mes "[오렐리]";
+			mes "혼자는 위험하지 않겠니?";
+			mes "동료들이 있다면 파티를 맺고 가자.";
+			next;
+			mes "^4d4dff메모리얼로 진행되는 이벤트입니다.";
+			mes "파티를 결성 한 뒤 다시 시도해 주십시오.^000000";
+			mes "^4d4dff파티는 /결성 파티명 ^000000 으로 만들 수 있습니다.";
+			close3;
+		}
+		.@md_name$ = "분리된 성소";	// Separate sanctuary
+
+		cutin "ep19_aurelie01.png",0;
+		mes "[오렐리]";
+		mes "준비 됐니?";
+		mes "네가 준비 됐다고 하면 냐르 님을 대신해서 분리된 성소로 널 보내는 작업을 진행할 거야.";
+		mes "실제로 이동은 그 다음이야.";
+		next;
+		if (is_party_leader() == true)
+			.@menu$ = "예! '" + .@md_name$ + "'와 연결시켜 주세요!";
+
+		switch( select( .@menu$, "'" + .@md_name$ + "'로 들여보내 주세요!", "준비가 더 필요해요." ) ) {
+		case 1:
+			cutin "ep19_aurelie01.png",0;
+			mes "[오렐리]";
+			mes "연결될 때까지 조금 기다려볼까? 금방 될 거야.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close3;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				cutin "ep19_aurelie01.png",0;
+				mes "[오렐리]";
+				mes "잠깐 " + .@md_name$ + "까지 연결이 제대로 되었는지 확인이 필요하네...";
+				close3;
+			case IE_OK:
+				mapannounce "jor_twig", "" + getpartyname(getcharid(1)) + " 파티의 " + strcharinfo(0) + " 파티원이 " + .@md_name$ + " 에 입장합니다 ", bc_map, 0xFF99;
+				// warp "1@twas",96,66;
+				end;
+			}
+			end;
+		case 3:
+			cutin "ep19_aurelie01.png",0;
+			mes "[오렐리]";
+			mes "그래. 너무 조급하게 생각하지 마.";
+			mes "나와 레온이 힘을 보태고 있으니까 라스간드가 바로 탈출하진 못 할 거야.";
+			mes "준비가 되면 불러주렴.";
+			next;
+			mes "[오렐리]";
+			mes "혹시라도 내가 보이지 않으면 여기 있는 냐르님께 불러달라고 해.";
+			mes "바로 올게.";
+			close3;
+		}
+		end;
+	}
+	if (ep20_main == 61) {
+		cutin "ep19_aurelie01.png",0;
+		mes "[오렐리]";
+		mes "분리된 성소에서 얻은 이미르의 심장 조각 말이야.";
+		mes "그 힘을 라스간드가 일부만 사용했음에도 그런 결과라니...";
+		next;
+		mes "[오렐리]";
+		mes "어쨌든 그 조각은 돌려주러 가야겠지?";
+		mes "난 레온과 함께 결계를 좀 더 보강하고 갈테니 너만 먼저 보내줄게.";
+		close2;
+		cutin "",255;
+		warp "icecastle",73,126;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18232) == 1" );
+	end;
+}
+
+
+// 1@twas,99,67,4	script	오렐리#aurelie01::ep20_1twas_99_67	4_EP19_AURELIE,3,0,{	// effect?
+1@twas,99,67,4	script	오렐리#aurelie01::ep20_1twas_99_67	4_EP19_AURELIE,{
+	if ('step == 0) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "여기는 냐르 님이 라스간드를 분리한 공간인 것 같아.";
+		mes "나는 네가 차원의 미아가 되지 않도록 징검다리 역할이라 이 모습도 환영이나 마찬가지야.";
+		npctalk "여기는 냐르 님이 라스간드를 분리한 공간인 것 같아. 나는 징검다리라서 이 모습은 환영이지.";
+		next;
+		mes "[오렐리]";
+		mes "그러니까 여기서 오로지 믿을게 너밖에 없다는 거지.";
+		mes "라스간드가 힘을 완전히 융합하기 전에 그의 마력을 뺏자.";
+		npctalk "라스간드가 힘을 완전히 융합하기 전에 그의 마력을 뺏자. 너에게만 온전히 맡겨서 미안해.";
+		next;
+		mes "[오렐리]";
+		mes "라스간드를 처치하면 좋겠지만 아마도 힘들 거야.";
+		mes "우리 목표는 라스간드도 있지만 너의 안전한 귀환이 더 중요하니까";
+		mes "조심하도록 해.";
+		npctalk "라스간드를 처치하면 좋겠지만 아마도 힘들 거야. 조심하도록 해.";
+		close2;
+		cutin "",255;
+		if ('step == 0)
+			'step = 1;
+		disablenpc();
+		end;
+	}
+	if ('step != 3)
+		end;
+	if (ep20_main == 60) {
+		select( "라스간드를 해치운 건가요?" );
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "안타깝게도 그건 아닌거 같아.";
+		mes "냐르 님의 분신들이 라스간드의 힘을 억누르는 중이야.";
+		next;
+		mes "[냐르의 분신]";
+		mes "우뤠룩.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "응? 뭘 가져오신 거야?";
+		mes "이거 이미르의 심장 조각이잖아!";
+		next;
+		mes "[냐르의 분신]";
+		mes "우냐옹.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "이미르의 심장 조각의 힘을 완전히 흡수하기 전에 모험가의 공격이 통했구나!";
+		mes "하지만 라스간드는....";
+		next;
+		mes "[냐르의 분신]";
+		mes "엥옹...에옹..";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "그렇구나. 게오보르그가 존재하는 한 그의 운명도 함께 한다는 저주가....";
+		mes "여전히 그를 불사신으로 만들고 있지.";
+		next;
+		mes "[오렐리]";
+		mes "하지만 그건 힘으로 누를 수 있을 거라 생각했어.";
+		mes "그러기엔 라스간드의 힘이 너무나 커.";
+		next;
+		mes "[오렐리]";
+		mes "모험가, 숟가락 전법이라고 알아?";
+		mes "내가 가진게 숟가락뿐이라도 하나 하나 파다보면 언젠가 큰 산도 옮길 수 있다는 전법이야.";
+		next;
+		mes "[오렐리]";
+		mes "그러니 우리는 내일을 기약하고 일단 후퇴하자.";
+		mes "라스간드가 힘을 다시 추스리기전에 우리도 정비를 해야지.";
+		ep20_main = 61;
+		erasequest 18232;
+		setquest 18233;
+		getitem 1001254,1;	// Ep20_Ymir_Heart
+		close3;
+	}
+	cutin "ep19_aurelie01.png",2;
+	mes "[오렐리]";
+	mes "이미르의 심장 조각을 완전히 흡수하기 전에 저지할 수 있어서 다행이야.";
+	mes "연결을 더 유지하기 힘드니 일단 후퇴할까?";
+	next;
+	mes "[오렐리]";
+	mes "되찾은 이미르의 심장 조각도 원래 주인에게 돌려줘야지.";
+	mes "일단 얼음성으로 돌아가자.";
+	close2;
+	cutin "",255;
+	warp "jor_twig",136,150;
+	end;
+
+OnInstanceInit:
+	'step = 0;
+	'map_twas$ = instance_mapname("1@twas");
+	end;
+}
+
+1@twas,94,84,3	script	라스간드#lasgand01::ep20_1twas_94_84	EP20_DEMIGOD_LASGAND,{
+	if ('step == 1) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep20_lasgand_god01.png",1;
+		mes "[라스간드]";
+		mes "바곳은 잡힌 모양이지?";
+		mes "이 몸에게만 신의 사랑이 너무 극진하여 몸 둘 바를 모르겠군.";
+		npctalk "바곳은 잡힌 모양이지? 이 몸에게만 신의 사랑이 너무 극진하여 몸 둘 바를 모르겠군.";
+		next;
+		mes "[라스간드]";
+		mes "아주 같잖은 수를 썼어.";
+		mes "기껏 가뒀으면 좀 여유롭게 지켜보지 그랬나.";
+		npctalk "아주 같잖은 수를 썼어. 기껏 가뒀으면 좀 여유롭게 지켜보지 그랬나.";
+		specialeffect EF_DQ9_CHARGE3;
+		specialeffect EF_MAGICCRASHER;
+		cutin "ep20_lasgand_god02.png",1;
+		next;
+		mes "[라스간드]";
+		mes "겁도 없이 알아서 문을 열어주러 오셨군.";
+		npctalk "겁도 없이 알아서 문을 열어주러 오셨군.";
+		close2;
+		cutin "",255;
+		if ('step == 1) {
+			'step = 2;
+			specialeffect EF_DQ9_CHARGE4;
+			sleep 500;
+			npctalk "길을 열어라!!";
+			sleep 500;
+			specialeffect EF_MAGICCRASHER;
+			disablenpc();
+			donpcevent instance_npcname("twas_boss") + "::OnStart";
+		}
+		end;
+	}
+	if ('step == 3) {
+		cutin "ep20_lasgand02.png",1;
+		mes "[라스간드]";
+		mes "이게 끝이라고 생각하지 마라, 인간 애송이.";
+		mes "너희가 섬기는 잘난 게오보르그의 핏줄이 존재하는 한 나는 불사다.";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[라스간드]";
+		mes "수백년을 이스가르드의 결계 속에서 버텨온 몸이다.";
+		mes "요르문간드의 힘이 먼저 다 할지,";
+		mes "이 몸이 마력을 모두 흡수하고 이 곳을 깨버리는 게 먼저일지.";
+		mes "다시 시험해 보자고.";
+		close3;
+	}
+	npctalk "가당치도 않은 것들이 우루루 몰려왔군.";
+	end;
+}
+
+1@twas,1,1,3	script	twas_boss	-1,{
+	end;
+OnStart:
+	monster 'map_twas$,96,80,"--ja--","EP20_DEMIGOD_LASGAND",1, instance_npcname("twas_boss") + "::OnMobDead";	// 궁극의 라스간드
+	end;
+OnMobDead:
+	enablenpc instance_npcname("ep20_1twas_94_81");
+	enablenpc instance_npcname("ep20_1twas_91_83");
+	enablenpc instance_npcname("ep20_1twas_97_83");
+	enablenpc instance_npcname("ep20_1twas_94_84");
+	enablenpc instance_npcname("ep20_1twas_99_67");
+	instance_warpall 'map_twas$,96,66, instance_id();
+	if ('step == 2)
+		'step = 3;
+	end;
+}
+
+1@twas,94,81,0	script(DISABLED)	냐르의 분신#nyar01::ep20_1twas_94_81	4_EP20_NYAR,{
+	npctalk "냐르르르르....";
+	end;
+}
+1@twas,91,83,6	duplicate(ep20_1twas_94_81)	냐르의 분신#nyar02::ep20_1twas_91_83	4_EP20_NYAR
+1@twas,97,83,1	duplicate(ep20_1twas_94_81)	냐르의 분신#nyar03::ep20_1twas_97_83	4_EP20_NYAR

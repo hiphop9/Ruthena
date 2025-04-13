@@ -1,0 +1,25 @@
+From f97672857943eff63d9a6ded008a0e46c1c6132e Mon Sep 17 00:00:00 2001
+From: Atemo <capucrath@gmail.com>
+Date: Mon, 15 Nov 2021 20:08:29 +0100
+Subject: [PATCH 5/6] MAX_MOB_DROP
+
+---
+ src/map/mob.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/map/mob.hpp b/src/map/mob.hpp
+index dddcdfff1..b8002bac6 100644
+--- a/src/map/mob.hpp
++++ b/src/map/mob.hpp
+@@ -22,7 +22,7 @@ struct guardian_data;
+ //#define AUTOLOOT_DISTANCE AREA_SIZE
+ 
+ //The number of drops all mobs have and the max drop-slot that the steal skill will attempt to steal from.
+-#define MAX_MOB_DROP 10
++#define MAX_MOB_DROP 42
+ #define MAX_MVP_DROP 3
+ #define MAX_MOB_DROP_ADD 5
+ #define MAX_MVP_DROP_ADD 2
+-- 
+2.25.0.windows.1
+

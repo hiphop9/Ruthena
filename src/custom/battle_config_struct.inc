@@ -12,3 +12,13 @@
  *	 <datatype> name;
  **/
 
+	int charkami_useitem;
+	int charkami_usemoney;
+	int charkami_useitemcode;
+	int charkami_usegrantlevel;
+	int charkami_useitemamount;
+	int charkami2_useitem;
+	int charkami2_usemoney;
+	int charkami2_useitemcode;
+	int charkami2_usegrantlevel;
+	int charkami2_useitemamount;

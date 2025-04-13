@@ -1,0 +1,321 @@
+# (Incomplete) drop list, rates from playing
+
+Header:
+  Type: MOB_DB
+  Version: 3
+
+Body:
+  - Id: 21965   # EP20_COPO
+    Drops:
+      - Item: Round_Feather   # (6393) Round Feather
+        Rate: 1922
+      - Item: aegis_1001246   # (1001246) Copo's Head Feather
+        Rate: 961
+      - Item: aegis_300455   # (300455) Kpopo Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21966   # EP20_ICEWIND1
+    Drops:
+      - Item: Soft_Feather   # (7063) Soft Feather
+        Rate: 2205
+      - Item: aegis_1001244   # (1001244) Large Gray Feather
+        Rate: 1470
+      - Item: Bill_Of_Birds   # (925) Bill of Birds
+        Rate: 2205
+      - Item: aegis_300457   # (300457) Gray Icewind Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21967   # EP20_ICEWIND2
+    Drops:
+      - Item: aegis_1001245   # (1001245) Large White Feather
+        Rate: 2343
+      - Item: Soft_Feather   # (7063) Soft Feather
+        Rate: 3125
+      - Item: Bill_Of_Birds   # (925) Bill of Birds
+        Rate: 2343
+      - Item: aegis_300458   # (300458) Icewind Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21968   # EP20_EGGCOPO
+    Drops:
+      - Item: Round_Feather   # (6393) Round Feather
+        Rate: 1562
+
+  - Id: 21969   # EP20_RABBIT_ICESLUG
+    Drops:
+      - Item: Single_Cell   # (1052) Single Cell
+        Rate: 1040
+      - Item: aegis_1001233   # (1001233) Fluorescent Fluorescent Cell (Daldal)
+        Rate: 1300
+      - Item: aegis_1001085   # (1001085) Cool liquid
+        Rate: 520
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 260
+      - Item: aegis_300468   # (300468) Snow Rabbit Snail Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21970   # EP20_MELIBE_ICESLUG
+    Drops:
+      - Item: Single_Cell   # (1052) Single Cell
+        Rate: 2958
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 1315
+      - Item: aegis_1001231   # (1001231) Soft Fluorescent Cell (Sour)
+        Rate: 2301
+      - Item: aegis_1001233   # (1001233) Fluorescent Fluorescent Cell (Daldal)
+        Rate: 328
+      - Item: D_Glacier_M_Mace   # (590048)
+        Rate: 100
+      - Item: D_Glacier_Knuckle   # (560037)
+        Rate: 100
+      - Item: aegis_300469   # (300469) Melibe Snail Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21971   # EP20_ICEBEAR
+    Drops:
+      - Item: Sticky_Mucus   # (938) Sticky Mucus
+        Rate: 1418
+      - Item: aegis_1001234   # (1001234) Bear Hide
+        Rate: 3121
+      - Item: Animal's_Skin   # (919) Animal Skin
+        Rate: 1986
+      - Item: aegis_300470   # (300470) Worm Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21972   # EP20_JORMUNGUARD1
+    Drops:
+      - Item: Transparent_Cloth   # (1059) Fabric
+        Rate: 2775
+      - Item: Shadowdecon_Ore   # (25728) Rough Shadowdecon
+        Rate: 693
+      - Item: aegis_1001238   # (1001238) Mystic Magic Mass
+        Rate: 2081
+      - Item: Light_Granule   # (7938) Light Granule
+        Rate: 693
+      - Item: D_Glacier_Wand   # (550089)
+        Rate: 100
+      - Item: aegis_300460   # (300460) Jormungand Guardian Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21973   # EP20_JORMUNGUARD2
+    Drops:
+      - Item: Fluorescent_Liquid   # (7326) Fluorescent Liquid
+        Rate: 3360
+      - Item: aegis_1001238   # (1001238) Mystic Magic Mass
+        Rate: 1920
+      - Item: Light_Granule   # (7938) Light Granule
+        Rate: 528
+      - Item: Zelunium_Ore   # (25730) Rough Zelunium
+        Rate: 480
+      - Item: Transparent_Cloth   # (1059) Fabric
+        Rate: 480
+      - Item: aegis_300460   # (300460) Jormungand Guardian Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21974   # EP20_FAKE_IWIN_SN
+    Drops:
+      - Item: Ep19_Rgan_Core_F   # (1000707) Low-quality Rgan Magic Core
+        Rate: 2082
+      - Item: aegis_1001239   # (1001239) Broken Trident
+        Rate: 2082
+
+  - Id: 21975   # EP20_FAKE_IWIN_SY
+    Drops:
+      - Item: aegis_300461   # (300461) Suspicious Irwin Soldier Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21976   # EP20_FAKE_IWIN_SB
+    Drops:
+      - Item: aegis_1001241   # (1001241) Private Irwin Hat
+        Rate: 1388
+      - Item: aegis_300461   # (300461) Suspicious Irwin Soldier Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21977   # EP20_FAKE_IWIN_SG
+    Drops:
+      - Item: Ep19_Rgan_Core_F   # (1000707) Low-quality Rgan Magic Core
+        Rate: 1041
+      - Item: aegis_1001239   # (1001239) Broken Trident
+        Rate: 1041
+      - Item: Round_Feather   # (6393) Round Feather
+        Rate: 2082
+      - Item: aegis_300461   # (300461) Suspicious Irwin Soldier Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21978   # EP20_FAKE_IWIN_SR
+    Drops:
+      - Item: aegis_1001243   # (1001243) Arwin Manic Hat
+        Rate: 2081
+      - Item: aegis_1001239   # (1001239) Broken Trident
+        Rate: 1387
+      - Item: aegis_300461   # (300461) Suspicious Irwin Soldier Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21981
+    AegisName: MD_EP20_BOSS_LASGAND
+    Drops:  # note: unknown full list. Copy from MD_EP20_FALLENANGEL. map_drops.yml handle them
+      - Item: aegis_300472
+        Rate: 1
+        StealProtected: true
+    MvpDrops:
+      - Item: Old_Card_Album
+        Rate: 9000
+
+  - Id: 21982
+    AegisName: MD_EP20_FALLENANGEL
+    Drops:  # note: there are too many drops for this monster, so map_drops.yml will handle it
+      - Item: aegis_300471
+        Rate: 1
+        StealProtected: true
+    MvpDrops:
+      - Item: Magic_Card_Album
+        Rate: 9000
+      - Item: Old_Card_Album
+        Rate: 1000
+
+  - Id: 21983   # EP20_ANGEL_ICESLUG
+    Drops:
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 422
+      - Item: Single_Cell   # (1052) Single Cell
+        Rate: 1478
+      - Item: aegis_1001232   # (1001232) Soft Fluorescent Cell (salty)
+        Rate: 1690
+      - Item: aegis_1001081   # (1001081) Slippery liquid
+        Rate: 1478
+      - Item: aegis_300467   # (300467) Angel Snail Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21984   # EP20_ICEEGG
+    Drops:
+      - Item: Piece_Of_Egg_Shell   # (7032) Piece of Egg Shell
+        Rate: 4166
+      - Item: aegis_1001247   # (1001247) Kkopo Eggshell Fragment
+        Rate: 8332
+      - Item: aegis_300456   # (300456) Icewind Egg Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21985   # EP20_RGAN_WARLOCK
+    Drops:
+      - Item: EP19_Shell_Of_Rgan   # (1000822) Rgan Shell
+        Rate: 813
+      - Item: aegis_1001226   # (1001226) Legan's Advanced Magic Core
+        Rate: 1356
+      - Item: aegis_1001227   # (1001227) Coral bracelet
+        Rate: 1898
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 271
+      - Item: aegis_300462   # (300462) Greater Legan Shaman Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21986   # EP20_RGAN_HEALER
+    Drops:
+      - Item: EP19_Shell_Of_Rgan   # (1000822) Rgan Shell
+        Rate: 1200
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 720
+      - Item: aegis_1001227   # (1001227) Coral bracelet
+        Rate: 1440
+      - Item: aegis_1001226   # (1001226) Legan's Advanced Magic Core
+        Rate: 240
+      - Item: Etel_Dust   # (1000322)
+        Rate: 100
+      - Item: D_Glacier_B_Knife   # (510076)
+        Rate: 100
+      - Item: aegis_300463   # (300463) Greater Legan Healer Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21987   # EP20_JORGAN_WARLOCK
+    Drops:
+      - Item: aegis_1001228   # (1001228) Seashell hairpin
+        Rate: 1242
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 355
+      - Item: aegis_1001226   # (1001226) Legan's Advanced Magic Core
+        Rate: 1065
+      - Item: Snow_F_Ore   # (1000811) Snowflower Ore
+        Rate: 177
+      - Item: Shadowdecon   # (25729) Shadowdecon
+        Rate: 50
+      - Item: Snow_F_Stone1   # (1000812) Snowflower Gem
+        Rate: 177
+      - Item: D_Glacier_Whip   # (580033)
+        Rate: 100
+      - Item: aegis_300464   # (300464) Jormungand Cult Shaman Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21988   # EP20_JORGAN_HEALER
+    Drops:
+      - Item: aegis_1001226   # (1001226) Legan's Advanced Magic Core
+        Rate: 1702
+      - Item: aegis_1001229   # (1001229) Seaweed Belt
+        Rate: 1418
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 283
+      - Item: Zelunium_Ore   # (25730) Rough Zelunium
+        Rate: 60
+      - Item: D_Glacier_Spear   # (530034)
+        Rate: 100
+      - Item: aegis_300459   # (300459) Jormungand Church Bishop Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21989   # EP20_JORGAN_GUARDIAN
+    Drops:
+      - Item: Shadowdecon_Ore   # (25728) Rough Shadowdecon
+        Rate: 200
+      - Item: aegis_1001230   # (1001230) Scale Armor Fragment
+        Rate: 900
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 500
+      - Item: aegis_1001226   # (1001226) Legan's Advanced Magic Core
+        Rate: 1100
+      - Item: Etel_Dust   # (1000322) Etel Dust
+        Rate: 83
+      - Item: Snow_F_Ore   # (1000811) Snowflower Ore
+        Rate: 27
+      - Item: D_Glacier_Axe   # (520021)
+        Rate: 100
+      - Item: aegis_300465   # (300465) Jormungandr Shrine Guardian Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21990   # EP20_JORGAN_CLEANER
+    Drops:
+      - Item: aegis_1001233   # (1001233) Fluorescent Fluorescent Cell (Daldal)
+        Rate: 2340
+      - Item: EP19_Unknown_Cell   # (1000823) Monstrous Cell
+        Rate: 910
+      - Item: aegis_1001232   # (1001232) Soft Fluorescent Cell (salty)
+        Rate: 1040
+      - Item: Shadowdecon_Ore   # (25728) Rough Shadowdecon
+        Rate: 260
+      - Item: D_Glacier_Katar   # (610041)
+        Rate: 100
+      - Item: aegis_300466   # (300466) Jormungandr Sanctuary Scavenger Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 23060   # EP20_ARMOERDCOPO
+    Drops:
+      - Item: Piece_Of_Egg_Shell   # (7032) Piece of Egg Shell
+        Rate: 1785
+      - Item: Bill_Of_Birds   # (925) Bill of Birds
+        Rate: 3570

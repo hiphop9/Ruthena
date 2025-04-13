@@ -1,0 +1,41 @@
+//===== rAthena Script ======================================= 
+//= Rachel Airport NPCs
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Rachel Airport NPCs
+//===== Additional Comments: ================================= 
+//= 1.0 First version.
+//============================================================ 
+
+ra_fild12,295,208,0	script	toairplane#rachel	45,1,1,{
+	end;
+OnTouch:
+	mes "비공정의 이용 요금은 1200제니입니다.";
+	mes "비공정 무료이용권을 갖고 계시면";
+	mes "무료로 들어가실 수 있습니다.";
+	mes "비공정에 탑승 하시겠습니까?";
+	next;
+	if (select("예:아니오") == 1) {
+		if (countitem(7311) > 0) {
+			delitem 7311,1; //Free_Flying_Ship_Ticket
+			warp "airplane_01",245,60;
+			end;
+		}
+		if (Zeny >= 1200) {
+			set Zeny, Zeny - 1200;
+			warp "airplane_01",245,60;
+			end;
+		}
+		mes "1200제니를 지불해야만 탑승 하실 수";
+		mes "있습니다. 돈이 모자라신 것 같네요.";
+		close;
+	}
+	mes "다음에 또 이용해주세요.";
+	mes "감사합니다.";
+	close;
+}

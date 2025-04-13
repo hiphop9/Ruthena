@@ -13,6 +13,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "map.hpp" // mmysql_handle
 #include "script.hpp"
@@ -211,7 +212,10 @@ static void script_load_mapreg(void)
 		int64 uid = reference_uid(s, index);
 
 		if( i64db_exists(regs.vars, uid) ) {
-			ShowWarning("load_mapreg: duplicate! '%s' => '%s' skipping...\n",varname,value);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("load_mapreg: '%s'이(가) 중복입니다. '%s'은(는) 건너뛰는중...\n",varname,value);
+			else	
+				ShowWarning("load_mapreg: duplicate! '%s' => '%s' skipping...\n",varname,value);
 			continue;
 		}
 		if( varname[length-1] == '$' ) {

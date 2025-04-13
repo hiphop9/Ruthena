@@ -1,129 +1,129 @@
-//===== rAthena Script ======================================= 
-//= Renewal Mage Job Quest
-//===== By: ================================================== 
-//= Kisuka
-//===== Current Version: ===================================== 
+//===== rAthena 스크립트 =======================================
+//= 리뉴얼 메이지 직업 퀘스트
+//===== 게시자: ========================================= =========
+//= 키스카
+//===== 현재 버전: ======================================
 //= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Job Change to Mage Class
-//===== Additional Comments: ================================= 
-//= 1.0 First Version. [Kisuka]
-//= 1.1 Added support for Baby classes. [Euphy]
-//============================================================ 
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= 마법사 클래스로 직업 변경
+//===== 추가 의견: ==================================
+//= 1.0 첫 번째 버전. [키스카]
+//= 1.1 Baby 클래스에 대한 지원이 추가되었습니다. [유피]
+//================================================ ============
 geffen_in,164,124,4	script	Mage Guildsman#mage	123,{
 	if (Upper == 1) {
 		if (ADVJOB == Job_High_Wizard || ADVJOB == Job_Professor) {
 			if (Class == Job_Novice_High) {
-				mes "[Mage Guildsman]";
-				mes "Whoa, long time no see! But weren't you supposed to be dead?";
+				mes "[마법사 길드맨]";
+				mes "와, 오랜만이네! 그런데 너 원래 죽었어야 했던 거 아니었어?";
 				next;
-				mes "[Mage Guildsman]";
-				mes "Ah, you must have been reborn. Well, I'm glad to have you back.";
+				mes "[마법사 길드맨]";
+				mes "아, 다시 태어나셨나보군요. 다시 뵙게 되어 기쁘네요.";
 				next;
 				if (!callfunc("F_CanChangeJob")) {
-					mes "[Mage Guildsman]";
-					mes "I'm sorry, but I don't think you're ready to learn magic yet. Why don't you go finish learning the Basic Skills first?";
+					mes "[마법사 길드맨]";
+					mes "죄송하지만 아직 마법을 배울 준비가 되지 않은 것 같습니다. 우선 기본 스킬부터 익히는 것이 어떨까요?";
 					next;
-					mes "[Mage Guildsman]";
-					mes "Take your time. The more you learn, the more ready you'll be to learn magic again.";
+					mes "[마법사 길드맨]";
+					mes "시간을 가지세요. 더 많이 배울수록, 마법을 다시 배울 준비가 더 잘 될 것입니다.";
 					close;
 				}
-				mes "[Mage Guildsman]";
-				mes "Well, since you have passed the Mage test once, I will not question your qualification. You want to have your magic skills back immediately, don't you?";
+				mes "[마법사 길드맨]";
+				mes "글쎄, 당신은 마법사 시험에 한 번 합격했으니 자격을 의심하진 않겠습니다. 당신은 즉시 마법 능력을 되찾고 싶은 거죠?";
 				next;
 				skill "NV_TRICKDEAD",0,SKILL_PERM;
 				jobchange Job_Mage_High;
 				skill "MG_ENERGYCOAT",1,SKILL_PERM;
-				mes "[Mage Guildsman]";
-				mes "Wow, for some reason, you look way better than you did before. Anyway, I believe you will do a better job being a Mage as well.";
+				mes "[마법사 길드맨]";
+				mes "와, 왠지 예전보다 훨씬 좋아 보이시네요. 아무튼 마법사로서도 더 잘하실 거라 믿습니다.";
 				close;
 			}else{
-				mes "[Mage Guildsman]";
-				mes "Is there anything more I can help you with? If not, why don't you go test your skills? The world is waiting for you~!";
+				mes "[마법사 길드맨]";
+				mes "더 도와드릴 게 없나요? 그렇지 않다면 가서 실력을 시험해 보는 건 어떨까요? 세상이 당신을 기다리고 있어요~!";
 				close;
 			}
 		}else{
-			mes "[Mage Guildsman]";
-			mes "What, are you interested in the Mage guild? I didn't want to tell you this, but you don't belong here.";
+			mes "[마법사 길드맨]";
+			mes "뭐야, 마법사 길드에 관심이 있는 거야? 이런 말을 하고 싶지 않았지만 넌 여기에 속하지 않아.";
 			next;
-			mes "[Mage Guildsman]";
-			mes "I am not sure why you're still standing in front of me, but I can tell that you're not meant to be a Mage.";
+			mes "[마법사 길드맨]";
+			mes "당신이 왜 아직도 내 앞에 서 있는지는 모르겠지만, 당신이 마법사가 될 운명은 아니라는 건 알 수 있어요.";
 			close;
 		}
 	}
-	mes "[Mage Guildsman]";
+	mes "[마법사 길드맨]";
 	if(BaseJob != Job_Novice) {
 		if(BaseJob == Job_Mage) {
-			mes "Hey, haven't you realized? You're already a Mage, silly!";
-			mes "One of these days you'll realize the power inside of you when you can make Fire with your mind!";
+			mes "야, 아직도 모르냐? 넌 이미 마법사야, 바보야!";
+			mes "언젠가는 마음으로 불을 만들 수 있게 되면 내면의 힘을 깨닫게 될 거예요!";
 		} else
-			mes "Hey~ C'mon. Quit playing games. You can't be a Mage because you already have another Job.";
+			mes "야~자. 게임 그만둬. 넌 이미 다른 직업을 가지고 있으니 마법사가 될 수 없어.";
 		close;
 	}else{
-		mes "Hey?";
+		mes "안녕?";
 		next;
-		switch(select("I want to be a Mage:What are the requirements to be a Mage?:Nothing, thanks.")) {
+		switch(select("저는 마법사가 되고 싶습니다:마법사가 되기 위한 요구 사항은 무엇입니까?:아무것도 없습니다. 감사합니다.")) {
 		case 1:
-			mes "[Mage Guildsman]";
-			mes "Wanna be a Mage? Eh...";
+			mes "[마법사 길드맨]";
+			mes "마법사가 되고 싶어? 에...";
 			next;
-			mes "[Mage Guildsman]";
+			mes "[마법사 길드맨]";
 			if (Sex == SEX_MALE) {
-				mes "Hey, look at you! You're kinda cute~! Not my type though...";
+				mes "야 너 좀 봐! 좀 귀여운데~! 내 타입은 아니지만...";
 			}else{
-				mes "Oooh, you're such a hot babe~!";
-				mes "I like girls like you~";
+				mes "오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오!";
+				mes "난 너 같은 여자가 좋아~";
 			}
-			mes "Right, you said that you wanna be a Mage?";
+			mes "맞아, 마법사가 되고 싶다고 했지?";
 			next;
-			if(select("I want to be a Mage.:Nothing, thanks.") == 2) {
-				mes "[Mage Guildsman]";
-				mes "Whaaaaat~?! Right after you tell me that you wanna become a Mage, you change your mind?! Be a bit more decisive!";
+			if(select("저는 마법사가 되고 싶습니다.:아무것도 아닙니다. 감사합니다.") == 2) {
+				mes "[마법사 길드맨]";
+				mes "으아아아앙~?! 마법사가 되고 싶다고 말하자마자 마음이 바뀌었나요?! 좀 더 과감하게!";
 				close;
 			}
-			mes "[Mage Guildsman]";
+			mes "[마법사 길드맨]";
 			if (!callfunc("F_CanChangeJob")) {
-				mes "Oh, man your Basic Skill Level doesn't reach enough to be a Mage.";
-				mes "Go back and level up your Basic Skill.";
+				mes "아, 당신의 기본 스킬 레벨은 마법사가 되기에는 충분하지 않습니다.";
+				mes "돌아가서 기본 스킬 레벨을 올리세요.";
 				close;
 			}
-			mes "Alright.. sign the application form.... Wow~ you have good handwriting! Ahh, okay. That's enough.";
-			mes "You are... "+strcharinfo(0)+".";
+			mes "알았어.. 지원서에 서명해라.... 와~ 필력이 좋으시구나! 아아, 알았어. 됐어.";
+			mes "당신은... "+strcharinfo(0)+".";
 			next;
-			mes "[Mage Guildsman]";
-			mes "Hmm I can see that you've tried hard in your own way. Though it seems to be a little clumsy, but well I think it's okay!";
-			mes "Good! Always sticking to the basics is the best! I will transform you right away.";
+			mes "[마법사 길드맨]";
+			mes "흠 나름대로 열심히 노력한 모습이 보이네요. 조금 서툴긴 하지만 그래도 괜찮은 것 같아요!";
+			mes "좋아요! 항상 기본에 충실하는 것이 짱이에요! 바로 변신시켜드리겠습니다.";
 			next;
-			mes "[Mage Guildsman]";
-			mes "Hahh..! You are now a Mage, one of our colleagues!";
-			mes "We welcome you to the Mage Guild, our new friend!";
+			mes "[마법사 길드맨]";
+			mes "하하..! 당신은 이제 우리 동료 중 한명인 마법사입니다!";
+			mes "우리의 새로운 친구, 마법사 길드에 오신 것을 환영합니다!";
 			next;
-			mes "[Mage Guildsman]";
-			mes "'Welcome to the Mage Guild~'";
-			mes "Congratulations on becoming a member of the Mage Guild! Go for it!";
+			mes "[마법사 길드맨]";
+			mes "'마법사 길드에 오신 것을 환영합니다~'";
+			mes "마법사 길드의 회원이 되신 것을 축하합니다! 힘내세요!";
 			callfunc "Job_Change",Job_Mage;
-			getitem 1639,1;	// N_Rod
+			getitem 1639,1; // N_로드
 			close;
 		case 2:
-			mes "[Mage Guildsman]";
-			mes "Wanna be a Mage, eh?";
-			mes "I'd be happy to explain the requirements for a pretty girl like you!";
+			mes "[마법사 길드맨]";
+			mes "마법사가 되고 싶어?";
+			mes "당신처럼 예쁜 여자에게 필요한 조건을 설명해 드리겠습니다!";
 			next;
-			mes "[Mage Guildsman]";
-			mes "First of all, you have to reach Novice Job Level 10 and learn all of the Basic Skills.";
+			mes "[마법사 길드맨]";
+			mes "우선 노비스 직업 10레벨을 달성하고 기본스킬을 모두 배워야 합니다.";
 			next;
-			mes "[Mage Guildsman]";
-			mes "In the past, there was a complicated potion making test. Because of that, we'd lost an aplicant slowly.";
-			mes "So, we decided to accept all aplicants who meet the basic requirements.";
+			mes "[마법사 길드맨]";
+			mes "과거에는 복잡한 포션 제조 테스트가 있어서, 지원자가 서서히 줄어들었습니다.";
+			mes "그래서 기본요건을 충족하는 지원자를 모두 받아들이기로 결정했습니다.";
 			next;
-			mes "[Mage Guildsman]";
-			mes "Don't hesitate. Just be a magician!";
+			mes "[마법사 길드맨]";
+			mes "주저하지 마세요. 마술사가 되어보세요!";
 			close;
 		case 3:
-			mes "[Mage Guildsman]";
-			mes "Nothing...?";
+			mes "[마법사 길드맨]";
+			mes "아무것도...?";
 			close;
 		}
 	}

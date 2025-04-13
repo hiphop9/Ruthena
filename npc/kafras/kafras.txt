@@ -22,89 +22,113 @@
 //= 1.1 Added Izlude RE coordinates. [Euphy]
 //= 1.1a Fixed Pre-RE Call and some leftovers. [Lemongrass]
 //= 1.1b Enabled saving in Izlude duplicates (RE). [Euphy]
+//PC official 한글 번역
 //============================================================ 
 
 // Aldebaran
 //============================================================
-aldeba_in,96,181,4	script	Kafra Service	113,{
+aldeba_in,96,181,4	script	카프라서비스	113,{
 	cutin "kafra_05",2;
-	mes "[Kafra Leilah]";
-	mes "Hm...?";
-	mes "Oh, welcome to";
-	mes "the Kafra Corporation";
-	mes "Headquarters. Did you";
-	mes "need something?";
+	mes "[카프라글라리스]";
+	mes "카프라서비스 입니다.";
+	mes "손님, 무슨 용건이시지요?";
 	next;
-	switch(select("Save:Use Storage:Rent a Pushcart:Cancel")) {
+	switch(select("이 장소로 저장한다:카프라 창고를 이용한다:카트를 이용한다:그만둔다")) {
 	case 1:
-		mes "[Kafra Leilah]";
-		mes "Your Respawn Point has";
-		mes "been saved here, inside";
-		mes "of the Kafra Corporation";
-		mes "Headquarters. Thank you.";
+		mes "[카프라글라리스]";
+		mes "손님. 이곳은 카프라서비스";
+		mes "커맨드센터로서";
+		mes "카프라서비스요원의 양성, 관리등을";
+		mes "위한 기관 입니다.";
 		next;
 		savepoint "aldeba_in",96,179,1,1;
-		mes "[Kafra Leilah]";
-		mes "Please make use of";
-		mes "the Kafra Services that are";
-		mes "available throughout all of";
-		mes "Midgard. Thank you for";
-		mes "visiting the Kafra Headquarters.";
+		mes "[카프라글라리스]";
+		mes "룬 미드가드 어디에서든";
+		mes "저희 카프라 서비스를 이용해주세요.";
+		mes "카프라 본부에 방문해주셔서 감사합니다.";
 		close2;
 		break;
 	case 2:
 		if (Zeny < 20) {
-			mes "[Kafra Leilah]";
-			mes "Excuse me, but it";
-			mes "seems that you don't";
-			mes "have the 20 zeny to pay";
-			mes "the Storage access fee...";
-			close3;
+			mes "[카프라글라리스]";
+			mes "죄송합니다.";
+			mes "창고를 이용하시려면";
+			mes "20제니가 필요합니다.";
+			close;
 		}
-		mes "[Kafra Leilah]";
-		mes "Although this facility is";
-		mes "exclusively intended for";
-		mes "the training of Kafra Employee";
-		mes "and administrative functions,";
-		mes "I'll access your Storage for you.";
+		mes "[카프라글라리스]";
+		mes "손님. 이곳은 카프라서비스";
+		mes "커맨드센터로서";
+		mes "카프라서비스요원의 양성, 관리등을";
+		mes "위한 기관 입니다.";
 		next;
-		set Zeny, Zeny-20;
-		set RESRVPTS, RESRVPTS + (20/5);
-		mes "[Kafra Leilah]";
-		mes "In the future, please";
-		mes "ask the Kafra Employee on";
-		mes "duty if you wish to use";
-		mes "any of the Kafra Services.";
-		mes "Thank you for your patronage.";
-		callfunc("F_CheckKafCode");    //check your storage password, if set
-		close2;
-		openstorage;
+		mes "[카프라글라리스]";
+		mes "서비스를 받으시려면 이 알데바란을";
+		mes "포함해 세계각국에 위치해 있는";
+		mes "'카프라서비스센터'를 이용하여";
+		mes "주시기 바랍니다.";
+		mes ".. 하지만. 서비스를 해 드리죠.";
+		next;
+		mes "[카프라글라리스]";
+		mes "이용하실 창고를 선택하세요.";
+		next;
+		switch(select("1번 창고:2번 창고:3번 창고")) {
+
+		case 1:
+			callfunc("F_CheckKafCode");    //check your storage password, if set
+			set Zeny, Zeny-20;
+			set RESRVPTS, RESRVPTS + (20/5);
+			mes "[카프라글라리스]";
+			mes "이용해 주셔서 감사합니다.";
+			close2;
+			if(getstatus(SC_PREMIUM_STORAGEBOOST))
+				openstorage2 5,STOR_MODE_GET|STOR_MODE_PUT;
+			else
+				openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
+		case 2:
+			callfunc("F_CheckKafCode");    //check your storage password, if set
+			set Zeny, Zeny-20;
+			set RESRVPTS, RESRVPTS + (20/5);
+			mes "[카프라글라리스]";
+			mes "이용해 주셔서 감사합니다.";
+			close2;
+			if(getstatus(SC_PREMIUM_STORAGEBOOST))
+				openstorage2 6,STOR_MODE_GET|STOR_MODE_PUT;
+			else
+				openstorage2 2,STOR_MODE_GET|STOR_MODE_PUT;
+
+		case 3:
+			callfunc("F_CheckKafCode");    //check your storage password, if set
+			set Zeny, Zeny-20;
+			set RESRVPTS, RESRVPTS + (20/5);
+			mes "[카프라글라리스]";
+			mes "이용해 주셔서 감사합니다.";
+			close2;
+			if(getstatus(SC_PREMIUM_STORAGEBOOST))
+				openstorage2 7,STOR_MODE_GET|STOR_MODE_PUT;
+			else
+				openstorage2 3,STOR_MODE_GET|STOR_MODE_PUT;
+		}
 		break;
 	case 3:
-		mes "[Kafra Leilah]";
-		mes "My apologies, but I'm";
-		mes "not on duty. I'd assist you";
-		mes "if I could, but actually don't";
-		mes "have any available Pushcarts.";
-		mes "Why don't you ask another Kafra";
-		mes "Employee for assistance?";
+		mes "[카프라글라리스]";
+		mes "손님. 이곳은 카프라서비스";
+		mes "커맨드센터로서";
+		mes "카프라서비스요원의 양성, 관리등을";
+		mes "위한 기관 입니다.";
 		next;
-		mes "[Kafra Leilah]";
-		mes "Kafra Employees are";
-		mes "stationed all over the";
-		mes "Midgard continent,";
-		mes "and you should be able to find";
-		mes "plenty outside in Al De Baran.";
+		mes "[카프라글라리스]";
+		mes "서비스를 받으시려면 이 알데바란을";
+		mes "포함해 세계각국에 위치해 있는";
+		mes "'카프라서비스센터'를 이용하여";
+		mes "주시기 바랍니다.";
 		close2;
 		break;
 	case 4:
-		mes "[Kafra Leilah]";
-		mes "^666666*Whew...*^000000";
-		mes "Great, because I'm";
-		mes "actually on my break";
-		mes "right now. Choosing";
-		mes "''Cancel'' was a good";
-		mes "move on your part.";
+		mes "[카프라글라리스]";
+		mes "^666666'그만둔다'^000000 라 ..";
+		mes "탁월한 선택입니다 손님.";
+		mes "후후후 ......";
 		close2;
 		break;
 	}
@@ -112,307 +136,277 @@ aldeba_in,96,181,4	script	Kafra Service	113,{
 	end;
 }
 
-aldebaran,143,119,4	script	Kafra Employee::kaf_aldebaran	113,{
+aldebaran,143,119,4	script	카프라 직원::kaf_aldebaran	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,20,600;
 	savepoint "aldebaran",143,109,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Al De Baran";
+	callfunc "F_KafEnd",0,1,"알데바란 도시에서";
 }
 
 // Geffen
 //============================================================
-geffen,120,62,0	script	Kafra Employee::kaf_geffen	115,{
+geffen,120,62,0	script	카프라직원::kaf_geffen	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome~!";
-	mes "The Kafra Services";
-	mes "are always on your side.";
-	mes "So how can I help you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,30,750;
 	savepoint "geffen",119,40,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Geffen";
+	callfunc "F_KafEnd",0,1,"게펜 도시에서";
 }
 
-geffen,203,123,2	script	Kafra Employee::geffen2	114,{
+geffen,203,123,2	script	카프라직원::geffen2	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome!";
-	mes "The Kafra Corporation";
-	mes "will always support the";
-	mes "adventurers of Rune-Midgarts";
-	mes "with its excellent service. So";
-	mes "what can I do for you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,30,750;
 	savepoint "geffen",200,124,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Geffen";
+	callfunc "F_KafEnd",0,1,"게펜 도시에서";
 }
 
 // Morocc
 //============================================================
-morocc,156,97,4	script	Kafra Employee::kaf_morocc	113,{
+morocc,156,97,4	script	카프라직원::kaf_morocc	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,60,930;
 	savepoint "morocc",156,46,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Morocc";
+	callfunc "F_KafEnd",0,1,"모로크 도시에서";
 }
 
-morocc,160,258,4	script	Kafra::kaf_morocc2	114,{
+morocc,160,258,4	script	카프라직원::kaf_morocc2	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome!";
-	mes "The Kafra Corporation";
-	mes "will always support the";
-	mes "adventurers of Rune-Midgarts";
-	mes "with its excellent service. So";
-	mes "what can I do for you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,60,930;
 	savepoint "morocc",157,272,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Morocc";
+	callfunc "F_KafEnd",0,1,"모로크 도시에서";
 }
 
 // Payon
 //============================================================
-payon,181,104,4	script	Kafra Employee::kaf_payon	113,{
+payon,181,104,4	script	카프라직원::kaf_payon	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,60,930;
 	savepoint "payon",160,58,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Payon";
+	callfunc "F_KafEnd",0,1,"페이온 도시에서";
 }
 
-payon,175,226,4	script	Kafra Employee::kaf_payon2	116,{
+payon,175,226,4	script	카프라직원::kaf_payon2	116,{
 	cutin "kafra_02",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services are";
-	mes "always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,60,930;
 	savepoint "payon",257,242,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Payon";
+	callfunc "F_KafEnd",0,1,"페이온 도시에서";
 }
 
-pay_arche,55,123,0	script	Kafra Employee::kaf_payon3	4_F_KAFRA1,{
+pay_arche,55,123,0	script	카프라직원::kaf_payon3	4_F_KAFRA1,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,5,1,90,1200;
 	savepoint "pay_arche",49,144,1,1;
-	callfunc "F_KafEnd",0,1,"at the Payon Dungeon";
+	callfunc "F_KafEnd",0,1,"페이온 던전에서";
 }
 
 // Prontera
 //============================================================
-prontera,152,326,3	script	Kafra Employee::kaf_prontera	112,{
+prontera,152,326,3	script	카프라직원::kaf_prontera	112,{
 	cutin "kafra_06",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation~";
-	mes "The Kafra Services are";
-	mes "always here to support";
-	mes "you. So how can I be";
-	mes "of service today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",157,327,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	callfunc "F_KafEnd",0,1,"프론테라 도시에서";
 }
 
-prontera,151,29,0	script	Kafra Employee::kaf_prontera2	115,{
+prontera,151,29,0	script	카프라직원::kaf_prontera2	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome~!";
-	mes "The Kafra Services";
-	mes "are always on your side.";
-	mes "So how can I help you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",150,33,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	callfunc "F_KafEnd",0,1,"프론테라 도시에서";
 }
 
-prontera,29,207,6	script	Kafra Employee::kaf_prontera3	113,{
+prontera,29,207,6	script	카프라직원::kaf_prontera3	113,{
 	cutin "kafra_05",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",33,208,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	callfunc "F_KafEnd",0,1,"프론테라 도시에서";
 }
 
-prontera,282,200,2	script	Kafra Employee::kaf_prontera4	114,{
+prontera,282,200,2	script	카프라직원::kaf_prontera4	114,{
 	cutin "kafra_04",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome!";
-	mes "The Kafra Corporation";
-	mes "will always support the";
-	mes "adventurers of Rune-Midgarts";
-	mes "with its excellent service. So";
-	mes "what can I do for you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",281,203,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	callfunc "F_KafEnd",0,1,"프론테라 도시에서";
 }
 
-prontera,146,89,6	script	Kafra Employee::kaf_prontera5	117,{
+prontera,146,89,6	script	카프라직원::kaf_prontera5	117,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "prontera",116,73,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+	callfunc "F_KafEnd",0,1,"프론테라 도시에서";
 }
 
-// Juno
+// Yuno
 //============================================================
-yuno,152,187,4	script	Kafra Employee::kaf_yuno	860,{
+yuno,152,187,4	script	카프라직원::kaf_yuno	860,{
 	cutin "kafra_08",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",158,125,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Juno";
+	callfunc "F_KafEnd",0,1,"유노 도시에서";
 }
 
-yuno,327,108,4	script	Kafra Employee::kaf_yuno2	860,{
+yuno,327,108,4	script	카프라직원::kaf_yuno2	860,{
 	cutin "kafra_08",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",328,101,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Juno";
+	callfunc "F_KafEnd",0,1,"유노 도시에서";
 }
 
-yuno,277,221,4	script	Kafra Employee::kaf_yuno3	861,{
+yuno,277,221,4	script	카프라직원::kaf_yuno3	861,{
 	cutin "kafra_09",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,40,800;
 	savepoint "yuno",274,229,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Juno";
+	callfunc "F_KafEnd",0,1,"유노 도시에서";
 }
 
 // Alberta
 //============================================================
-alberta,28,229,0	script	Kafra Employee::kaf_alberta	116,{
+alberta,28,229,0	script	카프라직원::kaf_alberta	116,{
 	cutin "kafra_02",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,50,850;
 	savepoint "alberta",31,231,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Alberta";
+	callfunc "F_KafEnd",0,1,"알베르타 도시에서";
 }
 
-alberta,113,60,6	script	Kafra Employee::kaf_alberta2	112,{
+alberta,113,60,6	script	카프라직원::kaf_alberta2	112,{
 	cutin "kafra_06",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation~";
-	mes "The Kafra Services are";
-	mes "always here to support";
-	mes "you. So how can I be";
-	mes "of service today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,0,50,850;
 	savepoint "alberta",117,57,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Alberta";
+	callfunc "F_KafEnd",0,1,"알베르타 도시에서";
 }
 
 // Comodo
 //============================================================
-comodo,195,150,4	script	Kafra Employee::kaf_comodo	721,{
+comodo,195,150,4	script	카프라직원::kaf_comodo	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "You know that our";
-	mes "service is always";
-	mes "on your side~";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "저희 카프라 서부지부는";
+	mes "프로그램개편을 통해";
+	mes "더욱 높은 품질의";
+	mes "서비스를 약속드리겠습니다.";
+	next;
+	mes "[카프라 직원]";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,80,1000;
 	savepoint "comodo",204,143,1,1;
-	callfunc "F_KafEnd",0,1,"in the town of Comodo";
+	callfunc "F_KafEnd",0,1,"코모도에서";
 }
 
-cmd_fild07,136,134,4	script	Kafra Employee::kaf_cmd_fild07	721,{
+cmd_fild07,136,134,4	script	카프라직원::kaf_cmd_fild07	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "You know that our";
-	mes "service is always";
-	mes "on your side~";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,80,1000;
 	savepoint "cmd_fild07",127,134,1,1;
-	callfunc "F_KafEnd",0,1,"in Pyros Lighthouse";
+	callfunc "F_KafEnd",0,1,"파로스 등대섬에서";
 }
 
 // Izlude
 //============================================================
--	script	::kaf_izlude	-1,{
+-	script	::kaf_izlude	-1,{ //for pre-re
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "에 오신 것을 환영합니다";
+	mes "카프라 코퍼레이션.";
+	mes "카프라 서비스";
+	mes "언제나 당신 편이에요.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,40,820;
 	if (checkre(0))
 		savepoint strnpcinfo(4),129,97,1,1;
@@ -421,175 +415,253 @@ cmd_fild07,136,134,4	script	Kafra Employee::kaf_cmd_fild07	721,{
 	callfunc "F_KafEnd",0,1,"in the city of Izlude";
 }
 
+izlude,128,148,4	script	카프라 직원#guad01	4_F_KAFRA1,{
+	cutin "kafra_01",2;
+	if(isbegin_quest(21901) == 1) {
+		mes "[카프라 직원]";
+		mes "안녕하세요. 카프라 서비스는 언제나 여러분 곁에 있습니다.";
+		mes "어머, 스프라키가 이야기한 모험가가 당신인가요?";
+		next;
+		mes "[카프라 직원]";
+		mes "우선 ^4d4dff위치 저장^000000부터 해야겠네요.";
+		mes "^4d4dff전투중에 쓰러지면 저장한 장소로 귀환^000000 할 수 있답니다.";
+		next;
+		if (checkre(0))
+			savepoint strnpcinfo(4),129,97,1,1;
+		else
+			savepoint "izlude",94,103,1,1;
+		mes "[카프라 직원]";
+		mes "그러니 위험한 지역을 가실땐 꼭 근처의 카프라 서비스를 이용해 위치를 저장해 주세요.";
+		mes "^4d4dff나비의 날개^000000 라는 아이템을 사용해도 이 저장 위치로 이동되니까요.";
+		next;
+		mes "[카프라 직원]";
+		mes "그 외에도 모험가님의 ^4d4dff소지품을 저장^000000할 수 있는 ^4d4dff창고 서비스^000000와";
+		mes "근처 도시나 카프라 서비스 지역으로 이동할 수 있는 ^4d4dff공간 이동 서비스^000000를 하고 있어요."	 ;
+		next;
+		mes "[카프라 직원]";
+		mes "모두 모험에 꼭 필요한 요소니까요.";
+		mes "새로운 마을이나 도시를 방문하신다면 반드시 카프라 직원의 위치를 알아두세요.";
+		next;
+		mes "[카프라 직원]";
+		mes "자, 위치 저장은 이 곳 이즈루드로 해드렸답니다.";
+		mes "그리고 이 ^4d4dff배달용 나무상자를 도구점 모리스씨^000000에게 전해 주시겠어요?";
+		next;
+		mes "[카프라 직원]";
+		mes "저희가 물류센터도 겸하고 있어서 종종 이런 일이 발생하는데";
+		mes "이 배달은 아무래도 모험가님의 경험을 위한 의뢰 같네요.";
+		next;
+		mes "[카프라 직원]";
+		mes "자, 그럼 부탁드립니다.";
+		changequest 21901,21902;
+		getexp 3000,100;
+		getitem 1082,1;
+		close2;
+		open_quest_ui 21902;
+		navigateto("izlude_in", 69, 116, NAV_NONE, 1);
+		cutin "",255;
+		end;
+
+	}
+	if(isbegin_quest(21902) == 1) {
+		mes "[카프라 직원]";
+		mes "제가 드린 ^4d4dff배달용 나무상자^000000는 ^4d4dff도구점의 모리스^000000씨에게 전해주시면 된답니다.";
+		mes "도구점은 바로 근처에요.";
+		next;
+		if(countitem(1082) < 0) {
+			mes "[카프라 직원]";
+			mes "응? 배달용 상자를 잃어버리셨다구요?";
+			mes "...아하... 그럼 어쩔 수 없죠.";
+			mes "새 배달 상자를 드릴게요.";
+			next;
+			mes "[카프라 직원]";
+			mes "자, 여기 있습니다.";
+			mes "원래라면 잃어버린 것에 대해 보상을 해주셔야 하지만, 이런 일이 처음이시니 그냥 드릴게요.";
+			mes "^4d4dff도구점의 모리스^000000씨에게 잘 전해주세요.";
+			getitem 1082,1;
+			close3;
+		}
+		mes "[카프라 직원]";
+		mes "위치를 잘 모르겠다면 근처의 ^4d4dff안내 요원^000000에게 물어보시면 된답니다.";
+		next;
+		switch(select("잘 알겠어요:카프라 서비스를 이용하고 싶어요.")) {
+
+		case 1:
+			mes "[카프라 직원]";
+			mes "잃어버리지 말고 잘 전해주세요.";
+			close3;
+		case 2:
+			mes "[카프라 직원]";
+			mes "어머, 그럼 전국 공통 카프라 본연의 자세로 맞이해야겠군요!";
+			next;
+			break;
+		}
+	}
+	callfunc "F_KafSet";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나 여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,0,1,40,820;
+	if (checkre(0))
+		savepoint strnpcinfo(4),129,97,1,1;
+	else
+		savepoint "izlude",94,103,1,1;
+	callfunc "F_KafEnd",0,1,"이즈루드 도시에서";
+
+OnInit:
+	questinfo( QTYPE_JUMPING_PORING, QMARK_YELLOW, "isbegin_quest(21901)" );
+	end;
+}
+
 // Moscovia
 //============================================================
-moscovia,223,191,3	script	Kafra Employee::kaf_mosk	114,{
+moscovia,223,191,3	script	카프라직원::kaf_mosk	114,{
 	cutin "kafra_04",2;
 	callfunc "F_Kafra",0,3,0,80,700;
 	savepoint "moscovia",221,194,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Moscovia";
+	callfunc "F_KafEnd",0,1,"모스코비아 도시에서";
 }
 
 // Amatsu
 //============================================================
-amatsu,102,149,4	script	Kafra Employee::kaf_amatsu	116,{
+amatsu,102,149,5	script	카프라직원::kaf_amatsu	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "amatsu",116,94,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Amatsu";
+	callfunc "F_KafEnd",0,1,"아마쯔 도시에서";
 }
 
 // Ayothaya
 //============================================================
-ayothaya,212,169,5	script	Kafra Employee::kaf_ayothaya	116,{
+ayothaya,212,169,5	script	카프라직원::kaf_ayothaya	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "ayothaya",149,69,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Ayothaya";
+	callfunc "F_KafEnd",0,1,"아요타야 도시에서";
 }
 
 // Einbech
 //============================================================
-einbech,181,132,5	script	Kafra Employee#ein3::kaf_einbech	860,{
+einbech,181,132,5	script	카프라직원#ein3::kaf_einbech	860,{
 	cutin "kafra_08",2;
-	mes "[Kafra Employee]";
-	mes "Welcome~!";
-	mes "The Kafra Services";
-	mes "are always on your side.";
-	mes "So how can I help you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,40,850;
 	savepoint "einbech",182,124,1,1;
-	callfunc "F_KafEnd",0,1,"in the town of Einbech";
+	callfunc "F_KafEnd",0,1,"아인베흐에서";
 }
 
 // Einbroch
 //============================================================
-einbroch,242,205,5	script	Kafra Employee#ein2::kaf_einbroch	860,{
+einbroch,242,205,5	script	카프라직원#ein2::kaf_einbroch	860,{
 	cutin "kafra_08",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,50,800;
 	savepoint "einbroch",238,198,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Einbroch";
+	callfunc "F_KafEnd",0,1,"아인브로크 도시에서";
 }
 
-einbroch,59,203,6	script	Kafra Employee#ein1::kaf_einbroch2	861,{
+einbroch,59,203,6	script	카프라직원#ein1::kaf_einbroch2	861,{
 	cutin "kafra_09",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,50,800;
 	savepoint "einbroch",240,197,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Einbroch";
+	callfunc "F_KafEnd",0,1,"아인브로크 도시에서";
 }
 
-// Kunlun
+// Gonryun
 //============================================================
-gonryun,159,122,4	script	Kafra Employee::kaf_gonryun	116,{
+gonryun,159,122,4	script	카프라직원::kaf_gonryun	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "gonryun",160,62,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Kunlun";
+	callfunc "F_KafEnd",0,1,"쿤룬 도시에서";
 }
 
 // Lighthalzen
 //============================================================
-lighthalzen,164,100,4	script	Kafra Employee::kaf_lighthalzen	860,{
+lighthalzen,164,100,4	script	카프라직원::kaf_lighthalzen	860,{
 	cutin "kafra_08",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lighthalzen",158,94,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Lighthalzen";
+	callfunc "F_KafEnd",0,1,"리히타르젠 도시에서";
 }
 
-lighthalzen,191,320,4	script	Kafra Employee::kaf_lighthalzen2	861,{
+lighthalzen,191,320,4	script	카프라직원::kaf_lighthalzen2	861,{
 	cutin "kafra_09",2;
-	mes "[Kafra Employee]";
-	mes "Welcome~!";
-	mes "The Kafra Services";
-	mes "are always on your side.";
-	mes "So how can I help you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lighthalzen",194,313,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Lighthalzen";
+	callfunc "F_KafEnd",0,1,"리히타르젠 도시에서";
 }
 
-lhz_in02,237,284,4	script	Kafra Employee::kaf_lhz_in02	861,{
+lhz_in02,237,284,4	script	카프라직원::kaf_lhz_in02	861,{
 	cutin "kafra_09",2;
-	mes "[Kafra Employee]";
-	mes "Welcome~!";
-	mes "The Kafra Services";
-	mes "are always on your side.";
-	mes "So how can I help you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,4,1,40,800;
 	savepoint "lhz_in02",278,215,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Lighthalzen";
+	callfunc "F_KafEnd",0,1,"리히타르젠 도시에서";
 }
 
-// Luoyang
+// Louyang
 //============================================================
-louyang,210,104,5	script	Kafra Employee::kaf_louyang	4_F_KAFRA2,{
+louyang,210,104,5	script	카프라직원::kaf_louyang	4_F_KAFRA2,{
 	cutin "kafra_01",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,3,1,50,700;
 	savepoint "louyang",217,92,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Luoyang";
+	callfunc "F_KafEnd",0,1,"뤄양 도시에서";
 }
 
 // Umbala
 //============================================================
-umbala,87,160,4	script	Kafra Employee::kaf_umbala	721,{
+umbala,87,160,4	script	카프라직원::kaf_umbala	721,{
 	cutin "kafra_07",2;
 	callfunc "F_KafSet";
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "You know that our";
-	mes "service is always";
-	mes "on your side~";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,0,1,80,0;
 	savepoint "umbala",126,131,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Umbala";
+	callfunc "F_KafEnd",0,1,"움발라 도시에서";
 }
 
 // Niflheim
 //============================================================
-niflheim,202,180,3	script	Kafra Employee::kaf_niflheim	791,{
+niflheim,202,180,3	script	카프라직원::kaf_niflheim	791,{
 	callfunc "F_Kafra",1,2,1,150,0;
 	savepoint "niflheim",192,182,1,1;
 	callfunc "F_KafEnd",1,1,"in the city of Niflheim";
@@ -598,101 +670,78 @@ niflheim,202,180,3	script	Kafra Employee::kaf_niflheim	791,{
 // Dungeons and Fields
 //============================================================
 // - Byalan Island
-izlu2dun,106,58,8	script	Kafra Employee::kaf_izlu2dun	4_F_KAFRA2,{
+izlu2dun,106,58,4	script	카프라직원::kaf_izlu2dun	4_F_KAFRA2,{
 	cutin "kafra_03",2;
 	if (!checkre(0) && BaseJob == Job_Novice && job_merchant_q2 > 0) {
 		// Merchant Job Change Quest
 		// function F_MercKafra is found in /pre-re/jobs/1-1/merchant.txt
 		callfunc "F_MercKafra";
 	}
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,2,1,120,1200;
 	savepoint "izlu2dun",87,170,1,1;
-	callfunc "F_KafEnd",0,1,"at Byalan Island";
+	callfunc "F_KafEnd",0,1,"바이아란 섬에서";
 }
 
 // - Culvert Sewers
-prt_fild05,290,224,3	script	Kafra Employee::prt_fild05	114,{
+prt_fild05,290,224,3	script	카프라직원::prt_fild05	114,{
 	cutin "kafra_04",2;
-	mes "[Kafra Employee]";
-	mes "Welcome!";
-	mes "The Kafra Corporation";
-	mes "will always support the";
-	mes "adventurers of Rune-Midgarts";
-	mes "with its excellent service. So";
-	mes "what can I do for you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,1,1,40,0;
 	savepoint "prt_fild05",274,243,1,1;
-	callfunc "F_KafEnd",0,1,"at the Prontera Culverts";
+	callfunc "F_KafEnd",0,1,"프론테라 필드에서";
 }
 
 // - Coal Mine (Dead Pitt)
-mjolnir_02,83,362,4	script	Kafra Employee::kaf_mjolnir_02	116,{
+mjolnir_02,83,362,4	script	카프라직원::kaf_mjolnir_02	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,6,1,100,0;
 	savepoint "mjolnir_02",98,352,1,1;
-	callfunc "F_KafEnd",0,1,"at Mjolnir Dead Pit";
+	callfunc "F_KafEnd",0,1,"묘르닐 폐광앞에서";
 }
 
-// - Morocc Ruins
-moc_ruins,59,157,5	script	Kafra Employee::moc_ruins	114,{
+// - Morroc Ruins
+moc_ruins,59,157,0	script	카프라직원::moc_ruins	114,{
 	cutin "kafra_04",2;
-	mes "[Kafra Employee]";
-	mes "Welcome!";
-	mes "The Kafra Corporation";
-	mes "will always support the";
-	mes "adventurers of Rune-Midgarts";
-	mes "with its excellent service. So";
-	mes "what can I do for you today?";
-	callfunc "F_Kafra",5,2,1,90,1200;
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
+	callfunc "F_Kafra",5,5,1,90,1200;
 	savepoint "moc_ruins",41,141,1,1;
-	callfunc "F_KafEnd",0,1,"at the Pyramids";
+	callfunc "F_KafEnd",0,1,"피라미드에서";
 }
 
 // - Orc Dungeon
-gef_fild10,73,340,5	script	Kafra Employee::kaf_gef_fild10	116,{
+gef_fild10,73,340,5	script	카프라직원::kaf_gef_fild10	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "Kafra's Employees are";
-	mes "always ready to serve you.";
-	mes "How can I help you today?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,6,1,130,0;
 	savepoint "gef_fild10",54,326,1,1;
-	callfunc "F_KafEnd",0,1,"at the Orc Dungeon";
+	callfunc "F_KafEnd",0,1,"오크던전에서";
 }
 
 // - Treasure Island
-alb2trea,59,69,5	script	Kafra Employee::kaf_alb2trea	117,{
+alb2trea,59,69,5	script	카프라직원::kaf_alb2trea	117,{
 	cutin "kafra_01",2;
-	mes "[Kafra Employee]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra services";
-	mes "are always on your side.";
-	mes "How may I assist you?";
+	mes "[카프라 직원]";
+	mes "어서오십시오. 카프라 서비스는 언제나";
+	mes "여러분 곁에 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	callfunc "F_Kafra",5,2,1,50,0;
 	savepoint "alb2trea",92,64,1,1;
-	callfunc "F_KafEnd",0,1,"at Sunken Ship";
-}
-
-// Brasilis
-//============================================================
-brasilis,197,221,4	script	Kafra Employee::kaf_bra	4_F_KAFRA1,{
-	cutin "kafra_01",2;
-	callfunc "F_Kafra",0,3,0,80,700;
-	savepoint "brasilis",195,259,1,1;
-	callfunc "F_KafEnd",0,1,"in the city of Brasilis";
+	callfunc "F_KafEnd",0,1,"침몰선에서";
 }

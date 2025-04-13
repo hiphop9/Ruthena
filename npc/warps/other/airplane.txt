@@ -73,7 +73,4 @@ airplane_01,254,54,0	warp	air_2wp01	1,1,airplane_01,91,67
 airplane_01,87,67,0	warp	air_2wp01a	1,1,airplane_01,250,54
 airplane_01,208,53,0	warp	air_2wp02	1,1,airplane_01,239,160
 airplane_01,245,160,0	warp	air_2wp02a	1,1,airplane_01,214,54
-airplane_01,104,199,0	warp	air_2wp03	1,1,airplane_01,105,72
-airplane_01,103,72,0	warp	air_2wp03a	1,1,airplane_01,102,199
-airplane_01,104,176,0	warp	air_2wp04	1,1,airplane_01,105,52
-airplane_01,103,52,0	warp	air_2wp04a	1,1,airplane_01,102,176
+

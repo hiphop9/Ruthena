@@ -3,226 +3,236 @@
 //===== Description: =========================================
 //= NPCs in Prontera
 //===== Changelogs: ==========================================
-//= 1.0 Initial release [kobra_k88]
-//= 1.2 added baby novice check [Lupus]
-//= 1.3 Spellchecked [massdriller]
-//= 1.4 Optimized. Novices > 20 BaseJob can go to Culvert, too [Lupus]
-//= 1.5 Added a Jawaii related npc [MasterOfMuppets]
-//= 1.6 Replaced sewer_prt with (MISC_QUEST & 8) [Lupus]
-//= 1.7 Removed Duplicates [Silent]
-//= 1.8 Moved Culvert to quests/quests_prontera.txt
-//= 1.9 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//= 2.0 Removed "Hans Solo", as he is a Jawaii NPC. [L0ne_W0lf]
-//= 2.1 Disabled the Library Curator (bugreport:4105) [L0ne_W0lf]
+//한글번역 스카이러브
 //============================================================
 
 // Prontera
 //============================================================
--	script	Guard#pront::prtguard	105,{
-	mes "[Prontera Guard]";
-	mes "Welcome to Prontera.";
+-	script	병사#pront::prtguard	105,{
+	mes "프론테라에 오신것을 환영합니다.";
 	close;
 }
-prontera,223,99,1	duplicate(prtguard)	Guard#2pront	105
-prontera,229,104,5	duplicate(prtguard)	Guard#3pront	105
-prontera,47,339,5	duplicate(prtguard)	Guard#4pront	105
+prontera,223,99,1	duplicate(prtguard)	병사#2pront	105
+prontera,229,104,5	duplicate(prtguard)	병사#3pront	105
+prontera,47,339,5	duplicate(prtguard)	병사#4pront	105
 
-prontera,101,288,3	script	Shuger#pront	98,{
-	mes "[Shuger]";
-	mes "Outside the safety of the city, there is a pink beast known as ^000077Poring^000000.";
+prontera,101,288,3	script	남자#pront	98,{
+	mes "[남자]";
+	mes "마을 바깥에는 포링이라 부르는 분홍색 몬스터가 있죠.";
+	mes "귀엽게 생기고 사람에게 해도 주지 않아 별다른 문제는 되지 않지만";
+	mes "이놈은 바닥에 떨어진 물건만 보면 성큼 다가와 낼름 물건을 몸속에 흡수해 버리곤 한답니다.";
 	next;
-	mes "[Shuger]";
-	mes "Though it's cute in appearance and does not actively harm people, Poring is known to absorb items that are on the ground into its own body.";
-	next;
-	mes "[Shuger]";
-	mes "So if there's something on the ground that you want to pick up, be careful lest it be consumed by a Poring. Then again... Porings are pretty weak...";
-	next;
-	mes "[Shuger]";
-	mes "The green colored ^000077Poporing^000000 is tougher than Poring. Newbies generally make the mistake of attacking it without being aware of its power... So be careful!";
+	mes "[남자]";
+	mes "정말 여행중에 이놈에게 물건을 빼앗기면 난감하지 않을 수 없죠.";
+	mes "그래도 포링이야 좀 약한 편이니...";
+	mes "녹색으로 된 포포링은 포링보다 좀 더 강해 초보 모험가들이 어려움을 겪기에 딱 좋지요. 멋모르고 때렸다가는...!!";
 	close;
 }
 
-prontera,54,240,6	script	Tono#pront	97,{
-	mes "[Tono]";
-	mes "Did you know?";
+prontera,54,240,6	script	토노#pront	97,{
+	mes "[토노]";
+	mes "알고계십니까? 크리미의 유층이 파브르라는것을요.";
+	mes "파브르가 번데기 상태로 변한것은 푸파라고 부른답니다";
+	mes "이렇게 다른모습으로 발견되지만 실은 성체는 같은동물이 사막에 또 살고 있답니다.";
 	next;
-	mes "[Tono]";
-	mes "The larva of Creamy is Fabre. So, those green little wormy things are actually the babies of those pinkish, purply butterfly things you see around.";
-	next;
-	mes "[Tono]";
-	mes "But before Fabres can become Creamys, they go into a pupa stage. When that happens, they turn into these dark purple cocoons we call Pupa. Simple, huh?";
-	next;
-	mes "[Tono]";
-	mes "There's another monster that goes through a really big change... Pickys.";
-	next;
-	mes "[Tono]";
-	mes "Pickys are so cute when they're young, but when they grow up, they turn into those big, gawky looking Peco Pecos. Talk about awkward puberty.";
+	mes "[토노]";
+	mes "바로 페코페코지요.";
+	mes "페코페코의 어린모습은 픽키라고 부른답니다.";
+	mes "화려한 페코페코와는 다르게 픽키는 참 귀엽죠?";
 	close;
 }
 
-prontera,106,116,6	script	Merideth#pront	91,{
-	mes "[Merideth]";
-	mes "The weather was nice on my day off so my family and I went for a picnic. We chose to go to a slightly secluded area where I saw something really interesting...";
+prontera,106,116,6	script	처녀#pront	91,{
+	mes "[처녀]";
+	mes "휴일에 날씨가 좋아서 가족들과 소풍을 가게 되었죠. 약간은 한가한 곳을 찾다가 숲속에서 엄청난 것을 발견하고 말았어요. 바로 엉청난 양의 벌떼를 보았던거요.";
 	next;
-	mes "[Merideth]";
-	mes "It was a large group of Giant Hornets! What was even weirder was that they were all controlled by this one Queen Bee, following her every command.";
-	next;
-	mes "[Merideth]";
-	mes "They might just be bugs, but I think they've got the right idea. Men really ought to take commands from us women... We do things right!";
+	mes "[처녀]";
+	mes "세상에 태어나서 그렇게 많은 벌떼는 본적이 없지만 정작 그것보다 놀아운건 그 벌떼를 조종하는 듯한 여왕벌의 모습이었어요.";
+	mes "고작 꿀단지 하나로 일벌들을 간단하게 조작하다니. 이세상 남자들 모두 그렇게 다룰 수 있다면 얼마나 좋을까~";
 	close;
 }
 
-prontera,160,133,2	script	YuPi#pront	102,{
-	mes "[YuPi]";
-	mes "Although many monsters may look the same, be careful! There are variations among monsters that have the same basic form.";
+prontera,143,125,5	script	이상한 사내#pront	733,{
+	mes "[이상한 사내]";
+	mes "틀렸어. 난 갈 수 없어…";
 	next;
-	mes "[YuPi]";
-	mes "One monster, that looks just like a peaceful and weak one that you've already encountered, may actually be wild and ferocious!";
+	if (select("무슨 일이신가요?:모른체 한다") == 1) {
+		mes "[이상한 사내]";
+		mes "세상에는 고향에 남아 굳건히 마을을 지키고자 하는 이가 있는가하면, 나처럼 눈에 들어온 곳은 자신의 두 다리로 밟아 보지 않으면 분통이 터지는 이도 있지.";
+		mes "뭐, 누군가는 그저 떠돌이 늑대일 뿐이라고 했지만 말이야. 크크.";
+		next;
+		mes "[이상한 사내]";
+		mes "덕분에 뜨거운 곳, 차가운 곳, 척박한 곳 내가 안 가본 곳은 거의 없다고 봐도 무방할 정도야.";
+		mes "아~ 그래. 그 중에는 아주 황홀하고 신비한 곳도 있었어.";
+		next;
+		mes "[이상한 사내]";
+		mes "신기하게도 그곳은 여인들만이 살고 있었지.";
+		mes "그것도 아주 아름다운 절세 미녀들만 말이야. 와하하!";
+		next;
+		mes "[이상한 사내]";
+		mes "그들은 친철하게도 나를 보자마자 아주 환한 미소를 띄우며 자신들의 집으로 데려가 매우 훌륭한 접대를 해 주었어.";
+		mes "외모만큼이나 마음씨도 고운 사람들이야.";
+		next;
+		mes "[이상한 사내]";
+		mes "금빛이 번쩍이는 매끈한 과일, 방안에 가득한 달콤한 향. 모두 나를 위해 준비한 것들이라더군. 정말 너무나 상냥한 사람들이지 않아? 마치 내가 신이 된 기분이었다고!";
+		next;
+		mes "[이상한 사내";
+		mes "그녀들이말하길, 그 곳은 돈으로 시간을 사는 신기한 곳이라 했지. 돈이 떨어지면 더이상 그 곳에 머무를 수 없다고 했어.";
+		next;
+		mes "[이상한 사내]";
+		mes "난 그곳에 이미 강하게 매료되었었고, 조금 무리를 해서 수중에 가진 돈이 모두 떨어질 때가지 그녀들과 함께 했어.";
+		next;
+		mes "[이상한 사내]";
+		mes "여행에 필요한 최소한의 경비까지 모두 떨어지자, 여인들은 매우 안타까운 표정을 지으며 나를 마을 밖까지 바래다 주었어.";
+		mes "더 이상 시근을 살 돈이 없어 마을을 떠나야만 하는 나를 보며 그녀들은 큰 슬픔에 잠겼지. 나도 마음 한 구석이 뻥 뚫리는 것 같았고.";
+		next;
+		mes "[이상한 사내]";
+		mes "그렇게 허털한 마음을 안고 고향으로 돌아와 그녀들을 다시 만날 방도를 궁리해 보았지만. 지금까지 떠돌이로만 살아았던 내가 뭘 할 수 있겠어.?";
+		next;
+		mes "[이상한 사내]";
+		mes "내가 가진 기슬이라곤 산속에서 만난 떠돌이 노인에게서 배운 ^0000ff궁극의 아이템 조합법^000000 하나 뿐인데, 이 것도 영 소용이 없어.";
+		next;
+		mes "[이상한 사내]";
+		mes "왜냐고? 그 궁극의 조합법이란";
+		mes "바로 ^0000ff천사의 날개귀^000000나 ^0000ff악마의 날개귀^000000가 ^ff0000요정의 귀^000000와 함께 조합할 시 아주 강력한 힘을 가지게 된 다는 것인데,";
+		next;
+		mes "[이상한 사내]";
+		mes "그 요정의 귀는 평범한 요정의 귀를 필요로 하는 것이 아냐. ^0000ff소켓이 있는 요정의 귀^000000라니… 말도 안되잖아?";
+		mes "난 틀렸어. 그녀들과도 평생 안녕이야.";
+		close;
+	}
+	mes "[이상한 사내]";
+	mes "휴우. 그저 꿈으로 남는 것인가?";
+	close;
+	
+}
+
+prontera,160,133,2	script	유피#pront	102,{
+	mes "[유피]";
+	mes "같은형태의 몬스터여도 더욱 흉폭하게 변한녀석들이 있어요.";
+	mes "그런녀석들을 함부로 건드리면 정말 크으~~은일 나죠.";
 	next;
-	mes "[YuPi]";
-	mes "You can tell these kinds of monsters apart by their body color. Wilder and more powerful monsters have more dangerous looking colors.";
+	mes "[유피]";
+	mes "그런녀석들은 몸빛깔을보고 판단하세요.";
+	mes "강한녀석일수록 위험한빛깔을 띄고있거든요";
 	close;
 }
 
-prontera,149,202,2	script	YuNa#pront	700,{
-	mes "[YuNa]";
-	mes "Behold...";
-	mes "Mighty Odin!";
-	mes "God of wisdom!";
-	mes "God of war!";
+prontera,149,202,2	script	유나#pront	700,{
+	mes "[유나]";
+	mes "오딘은 우리가 모시고 있는 신이에요.";
+	mes "전쟁의신이기도하고 지식의 신이기도 해요.";
+	mes "지식을 덛기위해 과감히 저신의 한쪽눈을 버린분이죠. 바로 저기 분수대 가운데 동상이 바로 그";
+	mes "오딘을 본따서 만든 동상이랍니다.";
 	next;
-	mes "[YuNa]";
-	mes "Here, in Rune-Midgarts, we serve Odin, the fearsome god who sacrificed one of his eyes in order to acquire wisdom.";
+	mes "[유나]";
+	mes "그런데 정말이지 속상하다니까요..";
+	mes "조각가가 누군지 모르겠지만..";
+	mes "저렇게 엉터리로 만들어 놓다니 말이에요.";
 	next;
-	mes "[YuNa]";
-	mes "The statue you see behind of me is a sculpture of mighty Odin. But, it's a shame because it's such a bad likeness.";
+	mes "[유나]";
+	mes "우리가 알고있는 오딘과는 젼혀 딴판으로 만들었지 뭐에요..";
+	mes "작가 정식이라나 뭐라나~~";
 	next;
-	mes "[YuNa]";
-	mes "I mean, this statue is totally different from our image of Odin. I guess the sculptor took too many artistic liberties.";
-	next;
-	mes "[YuNa]";
-	mes "I bet the first time you saw this statue, you thought, '^3355FFOh, what a nice muscle man on a horse^000000.'";
-	next;
-	mes "[YuNA]";
-	mes "But this statue is obviously not muscular enough, not godly enough to fairly represent a god! Maybe if he had a halo?";
+	mes "[유나]";
+	mes "보세요. 넓은챙모자도 안쓰고 슬레이프닐도 타고있지 안잖아요.";
+	mes "정말이지 너무한다니까요.";
 	close;
 }
 
-prontera,216,70,2	script	Strife#pront	48,{
+prontera,216,70,2	script	스트라이프#pront	48,{
 	if (Class == Job_Novice) {
 		if (event_prt_nov_dreamtalk == 0) {
-			mes "[Strife]";
-			mes "Whew!";
-			mes "Man oh man...";
-			mes "I'm gonna be such";
-			mes "an awesome Knight!";
+			mes "[스트라이프]";
+			mes "전 말이에요. 꼭 멋진 기사가 될꺼에요.";
+			mes "그러기위해서 지금 수련중이죠.에헤헤";
+			mes "일단 검사부터 되야죠. 그래서 지금 수련주이랍니다.당신도 꿈이 있어서";
+			mes "지금 열심히 노력하는 중이겠죠?";
 			next;
-			mes "[Strife]";
-			mes "I know, I know...";
-			mes "First, I gotta be a Swordie. But if I keep practicing, I can become an awesome Swordie. And then after that...";
-			next;
-			mes "[Strife]";
-			mes "I'll be the most";
-			mes "awesomest Knight around!";
-			mes "It's... It's my most precious dream.";
-			next;
-			mes "[Strife]";
-			mes "MAGNUM BREAK!";
-			next;
-			if (select("I wanna be strong too!:Um... Do you best.") == 1) {
+			if (select("네:아니요") == 1) {
 				set event_prt_nov_dreamtalk,1;
-				mes "[Strife]";
-				mes "Wow...!";
-				mes "That's so awesome!";
-				mes "We both share the";
-				mes "same dream!";
-				next;
-				mes "[Strife]";
-				mes "Hey, if you wanna become a Swordie, you gotta go to Izlude. There, you can go ahead and take the Swordman job test. The first time, I, um, failed miserably. But I won't fail again!";
-				next;
-				mes "[Strife]";
-				mes "Training! Training! Gotta keep training! You need to be strong too! Once we both get stronger, we'll meet again!";
+				mes "[스트라이프]";
+				mes "검사가 되려면 프론테라의 위성도시 이즈루드에가서 시험을 봐야야해요";
+				mes "얼마전에 한번 도전했다가 아깝게 실패했지만 얍! 이젠 그런 실수는 하지말아야하죠";
 				close;
 			}
-			mes "[Strife]";
-			mes "Heh heh! I will for sure! 'Strife, the courageous Knight.' It sounds cool, doesn't it?";
+			mes "[스트라이프]";
+			mes "그러면 안되죠. 무엇이 되고 싶은지 부터 결정해야죠.";
+			mes "그렇지 않으면 나중에 후회하게될지도 몰라요";
 			close;
 		}
 		else {
-			mes "[Strife]";
-			mes "Fight...!";
-			mes "Fight Fight FIGHT!";
+			mes "[스트라이프]";
+			mes "얍! 얍! 얍!";
 			close;
 		}
 	}
 	else if (Class != Job_Novice) {
 		if (event_prt_nov_dreamtalk == 1) {
-			mes "[Strife]";
-			mes "Hey...!";
-			mes "You look different now. *Gasp* You've gotten... ^993333stronger^000000. Wow, that's so coooool!";
+			mes "[스트라이프]";
+			mes "어라 ? 당신 언젠가 만났던분 아니세요?";
+			mes "와~ 와아! 와아! 당신 정말 멋져졌군요.";
+			mes "굉장해요~ 부럽네요. 얍! 저도 좀 더 분발해야겠는걸요";
+			mes "당신도 좀 더 힘내세요.";
 			next;
-			mes "[Strife]";
-			mes "I'm so jealous!";
-			mes "I guess that means";
-			mes "that now, I gotta";
-			mes "train even harder!";
-			next;
+			mes "[스트라이프]";
+			mes "이건 음.. 그러니까 더 힘내시라구요..";
+			mes "당신을 보고 저도 좀 더";
+			mes "불타올랐으니까.";
+			mes "보답이에요.";
 			set event_prt_nov_dreamtalk,2;
 			getitem 2501,1; //Hood
-			mes "[Strife]";
-			mes "This is, well, for you to help you get even stronger. I guess I want to thank you for being such a good example.";
 			close;
 		}
 		else if (event_prt_nov_dreamtalk == 2) {
-			mes "[Strife]";
-			mes "Fight! Fight!";
+			mes "[스트라이프]";
+			mes "에잇! 에잇!";
 			close;
 		}
-		mes "[Strife]";
-		mes "Whew!";
-		mes "Man oh man...";
-		mes "I'm gonna be such";
-		mes "an awesome Knight!";
+		mes "[스트라이프]";
+		mes "전 말이에요. 꼭 멋진 기사가 될꺼에요.";
+		mes "그러기위해서 지금 수련중이죠. 에헤헤...";
+		mes "엣! 그..그눈빛은 아직도 검사도 되지못한주제에 설친다고 얕보시는거죠?";
 		next;
-		mes "[Strife]";
-		mes "I know, I know...";
-		mes "First, I gotta be a Swordie. But if I keep practicing, I can become an awesome Swordie. And then after that...";
+		mes "[스트라이프]";
+		mes "알아요. 알아요 기사가되려면 먼저 검사과정부터 밟아야한다는것.";
+		mes "그래서 이렇게 수련하고 있잖아요.";
 		next;
-		mes "[Strife]";
-		mes "I'll be the most";
-		mes "awesomest Knight around!";
-		mes "It's... It's my most precious dream.";
+		mes "[스트라이프]";
+		mes "왠지 여기서 이렇게 당당히 기사가 되어 나가시는 분들을 보면왠지 저도 뿌듯해지고 불타오르거든요.";
+		mes "그래서 일부러 프론테라까지와서 수련하는거에요.";
 		next;
-		if (select("Do your best.:Quit it, kid.") == 1) {
-			mes "[Strife]";
-			mes "Yes, yes of course! Someday, I'll even be as strong as you! When that day comes, I hope that we can train together!";
+		if (select("열심히 노력하세요:그만둔다") == 1) {
+			mes "[스트라이프]";
+			mes "당연하죠. 다음에 저도 당신처럼 강해져서 모험을 하게되면";
+			mes "그래서 어딘가에서 만나게되면 그때는 꼭 아는척해주세요";
 			close;
 		}
-		mes "[Strife]";
-		mes "Wha--?";
-		mes "Fine! But I'm gonna keep on training, and we'll see who gets the last laugh!";
+		mes "[스트라이프]";
+		mes "얍! 얍! 두고보세요. 언젠간 꼭 당신보다 강해져있을테니까요";
 		close;
 	}
 }
 
-prontera,78,150,3	script	Dairenne#pront	90,{
-	mes "[Towngirl Dairenne]";
-	mes "Ahh...";
-	mes "The streets are too crowded these days. *Cough Cough* Look at all this dust, not everything about living in the capital city is good. Anyway, may I help you?";
+prontera,78,150,3	script	다이렌#pront	90,{
+	mes "[마을처녀 다이렌]";
+	mes "아아... 요샌 광장에 사람이 많아서 복잡해. 콜록 콜록...";
+	mes "어머? 이 먼지, 아이 불결해라...";
+	mes "수도라고 해서 다 좋으건 아닌가보네.";
+	mes "흐음... 그나저나 무슨일이시죠?";
 	next;
-	if (select("Talk:Cancel") == 1) {
-		mes "[Towngirl Dairenne]";
-		mes "I wonder if you are interested in parties or dresses. Hehehe. These days, the hot topic is definitely the colorful, extravagant, magnificent dresses you can wear.";
+	if (select("대화한다:그만둔다") == 1) {
+		mes "[마을처녀 다이렌]";
+		mes "혹시 파티나 드레스에 관심이 있으신지 모르겠네요. 호호홋";
+		mes "요즘 뭐니 뭐니 해도 최고의 화제는 화려한 색으로 온통 치장된 드레스 이야기지요.";
 		next;
-		mes "[Towngirl Dairenne]";
-		mes "To get such dazzling colors, I heard you have to use a dye that you can only get in Morocc. But I also heard that the price is beyond imagination.";
-		next;
-		mes "[Towngirl Dairenne]";
-		mes "Aahhhh~ I wish I could wear such a dress. Even if it's just once...";
+		mes "[마을처녀 다이렌]";
+		mes "그 영혼마저 넋을 빼앗가 가버릴듯한 색을 내기위해서는 사막마을 모로크에서만 만들어지는 염료를 사용해야 한다는데... 그 염료의 가격이 상상을 초월한다고 하네요.";
+		mes "아아.. 한번이라도 입어 봤으면 소원이 없겠는데...";
 		close;
 	}
-	mes "[Towngirl Dairenne]";
-	mes "Eh~? Why talk to me in the first place? What a strange person.";
+	mes "[마을처녀 다이렌]";
+	mes "어머~ 참. 사람을 불러놓고... 별 이상한 사람을 다보겠네.";
 	close;
 }
 
@@ -246,81 +256,74 @@ prt_in,178,92,0	script	Curator of Library#pront	57,{
 }
 */
 
-prt_in,175,50,0	script	Library Girl#pront	71,{
-	mes "[Library Girl Ellen]";
-	mes "Here in the Eastern branch of the Prontera Library, we provide Monster Encyclopedias in which creatures are organized by their properties. We also have books on Merchant and Blacksmith skills.";
-	mes "Ooh~! The other branch of our library also has many interesting things to read! So if you get a chance, you just might want to visit.";
+prt_in,175,50,0	script	도서관 소녀#pront	71,{
+	mes "[도서관 소녀 엘렌]";
+	mes "이곳 프론테라 도서관 동부 분관에서는 생물을 속성별로 정리한 몬스터 백과사전을 제공하고 있습니다. 상인과 대장장이 기술에 관한 책도 있습니다.";
+	mes "아~! 우리 도서관의 다른 지점에도 읽을 만한 흥미로운 것들이 많이 있습니다! 그러니 기회가 된다면 꼭 한번 방문해 보시는 것도 좋을 것 같습니다.";
 	close;
 }
 
-prt_in,47,141,0	script	An Old Man#pront	56,{
-	mes "[Old Man]";
-	mes "The Prontera Culvert sewers have been left unattended for a long time. Now that place is infested with ^000077Thief Bugs^000000!";
+prt_in,47,141,0	script	아저씨#pront	56,{
+	mes "[아저씨]";
+	mes "지하수로는 오랫동안 사람이 출입하지 않았지. 가장 최근에 들어간 이의 말을 빌리자면 ^000077벌레도둑^000000들의 천국이 되었다고 하던군.";
 	next;
-	mes "[Old Man]";
-	mes "These Thief Bugs seem to quickly grab items dropped on the ground, and then run away with them... They're even more annoying than cockroaches!!";
+	mes "[아저씨]";
+	mes "이놈의 도둑벌레들 하여간 식용도 안되는 것들이 번식력은 빨라가지고 말이야... 세상이 멸망해도 살아남을 바퀴벌레 같은 녀석들이야!!";
 	close;
 }
 
-prt_in,26,31,0	script	An Old Man#2pront	54,{
-	mes "[Old Man]";
-	mes "I dunno if you'll believe me, but I saw the weirdest thing down in the ^000077Culvert Sewers^000000...";
+prt_in,26,31,0	script	아저씨#2pront	54,{
+	mes "[아저씨]";
+	mes "당신이 나의 말을 믿을지 모르겠지만 난 ^000077지하수로^000000에서 엄청난것을 보고 말았어.";
+	mes "3대째 프론테라의 지하수로 수리를 맡고 있는 나는 선대부터 내려오는 지식으로 지하수로에서 모르는 곳이 없지.";
+	mes "4층쯤이었을거야. 아마 난 그때 어둠속에서 눈부시게 빛나는 ^000077도둑벌레^000000를 보았던 것이야.";
 	next;
-	mes "[Old Man]";
-	mes "I've been training in the 3rd level for so long that there isn't anything that I don't know about in that area. But when I finally went to the 4th level...";
-	next;
-	mes "[Old Man]";
-	mes "There, I saw a shimmering light. I was completely captivated and went to approach it. It must have been some sort of beautiful fairy...";
-	next;
-	mes "[Old Man]";
-	mes "But when I got";
-	mes "close enough,";
-	mes "I saw it was";
-	mes "a ^000077Thief Bug^000000!";
-	next;
-	mes "[Old Man]";
-	mes "I've never seen a Thief Bug shining with light before! Man, just when you think you've seen it all...";
+	mes "[아저씨]";
+	mes "빛나는 도둑벌레라니!! 세상에 그렇게 하찮은 도둑벌레가 그런 성스러운 빛깔을!! 역시... 세상엔 어디나 빛나는 무언가가 있는거야.";
 	close;
 }
 
-prt_in,180,20,2	script	Bartender#pront	61,{
-	mes "[Bartender]";
-	mes "Sigh...as more and more people coming into Prontera,";
-	mes "better and better my business has become nowadays. But...";
-	mes "Well, I am having a hard time to keep a good stock of food ingredients.";
+prt_in,180,20,2	script	바텐더#pront	61,{
+	mes "[바텐더]";
+	mes "후우~ 사람이 점덤 많아지니깐말이야";
+	mes "이일도 힘들어져버렸단말이지 뭐야 장사가 잘되는건 좋지만 말이야.";
+	mes "요즘엔 재료구하기가 힘들어서 말이야";
 	next;
-	mes "[Bartender]";
-	mes "As you see, the numbers of the monsters outside of town has been greatly increased and they have caused trouble to my suppliers to deliver the goods at a right time.";
-	mes "I cannot make my ultra nice menus with common ingredients because they are super special!";
+	mes "[바텐더]";
+	mes "자네도 돌아다녀서 알겠지만 마을 바깓에 근래에 흉폭한 동물들이 많아지지 않았겠냔 말이야";
+	mes "보통의 재료가지고 우리 주점의 울트라.나이스.특급 메뉴를 소화해내기가 여간 힘들지 않겠냔 말이야";
 	next;
-	mes "[Bartender]";
-	mes "So I have been contacting super heavy champion hunters for fresh and special ingredients.";
-	mes "But the demand has exceeded the supply in these days.";
+	mes "[바텐더]";
+	mes "우린말이야 유통되고있는 그저 그런 재료를 말고도 직접고용한 슈퍼헤비급 사냥꾼들에게";
+	mes "신선한 재료들을";
+	mes "공급받고있었는데말이야";
+	mes "요즘은 우리도 사정을 다 아니까 많이 주문을 하는것도 미안하고 말이야.";
 	next;
-	mes "[Bartender]";
-	mes "I can't keep my business busy without my special menu 'Crunch Crunch Sour' and 'Savory Yum Yum'...*Sigh*";
+	mes "[바텐더]";
+	mes "이래가지고선..우리집 특별메뉴인'바삭";
+	mes "바삭이이셔'와 '고소해요냠냠'이...";
 	while(1) {
 		next;
-		switch(select("'Crunch Crunch Sour'?:'Savory Yum Yum'?:Cancel.")) {
+		switch(select("'바삭바삭아이셔'?:'고소해요냠냠'?:그만둔다.")) {
 		case 1:
-			mes "[Bartender]";
-			mes "The basic ingredients of my Crunch Crunch Sour are the ants roaming inside the Ant Hell in the desert.";
-			mes "Rumor has it that the numbers of the ants have been greatly increased and they have become more violent, so that no one wants to get in the place.";
+			mes "[바텐더]";
+			mes "저기 사막도시 모로코로 가는 길목의 개미굴에서 나는 특산개미를 가지고 만드는건데 말이야";
+			mes "거기 개미들의 숫자도 부쩍 붙어나고 사나워져서 지금은 어지간한 사냥꾼들도 들어가기를 꺼려한다지뭐야.";
 			next;
-			mes "[Bartender]";
-			mes "*Sigh*...I am afraid that my business days are numbered now.";
+			mes "[바텐더]";
+			mes "이젠 우리집 인기가 계속되는날도 얼마 안남은거 같아 아쉽단 말이야 에휴";
 			continue;
 		case 2:
-			mes "[Bartender]";
-			mes "Savory Yum Yum's basic ingredients are the grasshoppers romping in a place over the west forest. Yeah, it is the best selling menu ever.";
-			mes "Rumor has it that they have become very violent and Bees have built their habitat in the place, so that no one wants to get in there.";
+			mes "[바텐더]";
+			mes "서쪽 숲을 지나있는곳에서 잡은 메뚜기를 사용한 담백하고 고소한맛이 일품인 최고 인기 메뉴였는데 말이야";
+			mes "요즘엔 메뚜기도 포악해지고 벌떼까지 출연해 여간 애먹는게 아니라고 하더란 말이야";
 			next;
-			mes "[Bartender]";
-			mes "*Sigh*...I am afraid that my business days are numbered now.";
+			mes "[바텐더]";
+			mes "이젠 우리집 인기가 계속되는날도 얼마 안남은거같아 아쉽단 말이야 에휴";
 			continue;
 		case 3:
-			mes "[Bartender]";
-			mes "Take care of yourself~.";
+			mes "[바텐더]";
+			mes "그래 몸조심하면서 다니라구~.";
 			close;
 		}
 	}
@@ -328,378 +331,364 @@ prt_in,180,20,2	script	Bartender#pront	61,{
 
 }
 
-prt_in,173,24,2	script	Shevild#pront	85,{
-	mes "[Shevild]";
-	mes "Hey, come on over and let's drink! I have lots of interesting stories to tell!";
-	mes "I know lots of things about Prontera. I have seen many fine views and I also have explored some monster lairs around this city.";
+prt_in,173,24,2	script	슈빌트#pront	85,{
+	mes "[슈빌트]";
+	mes "이봐 이봐~ 이리와서 한잔 하라구 내가 흥미로운 이야기들을 해줄테니말이야";
+	mes "이래뵈도 프론테라주변 곳곳을";
+	mes "돌아다녀 경험이 많지";
+	mes "몬스터들이 우글거리는 곳도 가보고 경치 좋은곳도 가보고 밀이야";
 	next;
-	if (select("How could you enter monster lairs?:Cancel") == 1) {
-		mes "[Shevild]";
-		mes "I may appear to be a drunken man but I am more than meets the eye.";
-		mes "Well, I happened to enter the places for carrying weapons for hunters or for delivering stuffs and whatsoever.";
-		mes "You might think of me as a mere delivery guy,";
+	if (select("어떻게 그런곳을 구경하셨나요?:그만둔다") == 1) {
+		mes "[슈빌트]";
+		mes "이래뵈도 못하는 일이 없는 만능일꾼~~!! 이거든";
+		mes "사냥하러 갈때 무기같은것도 들어주고 여기저기 물건도 배달해주고...";
+		mes "뭐 혹자는 그거 그냥 심부름꾼 아니야? 라고 말해도";
 		next;
-		mes "[Shevild]";
-		mes "But I am very proud of my job. You know how tough the world has become?";
-		mes "No matter how hard a work is, I am not afraid of doing that.";
+		mes "[슈빌트]";
+		mes "난 이일에 나름대로 자부심을 가지고 있지 요즘 바깥세상이 얼마나 험난한지 알고있지?";
+		mes "난 말이야 그런것들에 눈하나 깜짝하지 않고 나에게 맡겨진 일들을 모두 완수해낸다고";
 		next;
-		mes "[Shevild]";
-		mes "Anyways, that is how I have explored some strange places like monster lairs...";
-		mes "That is also a reason why I keep my job.";
-		mes "Ah, I just recall being inside the maze and the spooky forest!";
+		mes "[슈빌트]";
+		mes "그렇게 여기저기다니다보니 남들이 보지못하는 이상한곳들도 구경하게되지...";
+		mes "바로 그맛에 내가 이일을 하고 있는것라니깐...";
+		mes "음... 그... 이상했던 동굴과 조심해야했던 숲이 생각나는군";
 		next;
-		switch(select("The Maze?:The Spooky Forest?:Cancel")) {
+		switch(select("이상한 동굴이요?:조심해야하는 숲이요?:이야기를 그만둔다")) {
 		case 1:
-			mes "[Shevild]";
-			mes "Yes. Few days ago, I have entered a mysterious maze following a group of hunters at the north of Prontera.";
+			mes "[슈빌트]";
+			mes "흠.. 그래그래..얼마전에 사냥꾼들을 따라 프론테라 북쪽의 이상한 동굴에 가본적이 있었지";
 			next;
-			mes "[Shevild]";
-			mes "They said that they could get lots and lots of rare items from the maze even if the maze was filled with awfully strong monsters.";
-			mes "So we went there but as soon as we entered, we were just stuck inside the maze, you know.";
+			mes "[슈빌트]";
+			mes "거기엔 굉창히 흉폭한 몬스터들이 날뛰지만 그만큼 갋어치 나가는 물건들을 구할수 있다고 하길래";
+			mes "솜씨좋은 사냥꾼들을 따라서 도전해봤었는데 들어가자 마자 길이 얼마나 헤깔리던지...";
 			next;
-			mes "[Shevild]";
-			mes "We were just circling around and then we decided to leave the place. That was one hell of the maze.";
-			mes "But I made up my mind that I would successfully explore the maze one day.";
+			mes "[슈빌트]";
+			mes "이곳으로 가도 저곳으로 가도 왠지 아까 지나왔던길 같고 앞으로 전진을 못하겠더라구";
+			mes "그래서 결국엔 빈속으로 그냥 돌아왔지 언젠가 다시한번 도전해볼 생각이라네";
 			next;
-			if (select("How can I get there?:Cancel") == 1) {
-				mes "[Shevild]";
-				mes "Err? Haven't you still toured the outside of Prontera?";
-				mes "The maze can be found inside a forest at the north of Prontera. Go check the north west side of the forest.";
+			if (select("그곳엔 어떻게  가나요?:이야기를 그만둔다") == 1) {
+				mes "[슈빌트]";
+				mes "응? 자네 프론테라 바로 외곽도 돌아다니지 않았나보군";
+				mes "북쪽 성벽으로 나가서 바로 보이는 숲의 북서쪽가장자리에 위치하고있지않나";
 				close;
 			}
-			mes "[Shevild]";
-			mes "Yeap, be careful when you adventure alone~";
+			mes "[슈빌트]";
+			mes "그래.. 항상 바깥을 돌아다닐땐 조심하라구~";
 			close;
 
 		case 2:
-			mes "[Shevild]";
-			mes "When you go outside of Prontera heading to north east, you will arrive at the peaceful ruins. I have been there a while ago, to deliver something to a priest.";
-			mes "I had to pass a forest on the way to the ruins, and the forest was filled with monkeys and raccoons.";
+			mes "[슈빌트]";
+			mes "프론테라에서 북동쪽으로 주욱 가면 멋진 유적이 있지 얼마전에 그곳에 계신 신부님께 전해줄것이 있어서 다녀왔었는데 말이야.";
+			mes "유적으로 들어서기 전에 원숭이와 너구리가 잔뜩있는숲이 자리잡고있더군";
 			next;
-			mes "[Shevild]";
-			mes "Be forewarned that the forest is not a place to go on a picnic. If you drop something on the ground, the monkeys come out from nowhere and take away all of your possessions.";
+			mes "[슈빌트]";
+			mes "거긴 정말 조심해야해 바닥에 물건이라도 잠시 떨어뜨릴라 치면 어디선가 원숭이가 뿅뿅~ 튀어나와 집어가니깐 말이야";
 			next;
-			if (select("How can I get there?:Cancel") == 1) {
-				mes "[Shevild]";
-				mes "There is no road directly leads to the ruins. But if you go north and keep heading to east, you will get there.";
-				mes "Oh, be careful on your way to the ruins because there are some weird plant things that assault passersby for no reason.";
+			if (select("그곳엔 어떻게 가나요?:이야기를 그만둔다") == 1) {
+				mes "[슈빌트]";
+				mes "길이좀 복잡해서 그렇지 북쪽으로";
+				mes "나가서 동쪽으로 계속 가다보면 바로 나온다네";
 				close;
 			}
-			mes "[Shevild]";
-			mes "Yeap, be careful when you adventure alone~";
+			mes "[슈빌트]";
+			mes "그래..항상 바깥을 돌아다닐땐 조심하라구~";
 			close;
 
 		case 3:
-			mes "[Shevild]";
-			mes "Yeap, be careful when you adventure alone~";
+			mes "[슈빌트]";
+			mes "그래..항상 바깥을 돌아다닐땐 조심하라구~";
 			close;
 		}
 	}
-	mes "[Shevild]";
-	mes "Come back any time~";
+	mes "[슈빌트]";
+	mes "그래.. 다음에라도 듣고싶으면 언제든지 오라구~";
 	close;
 }
 
-prt_in,177,20,2	script	TenSue#pront	97,{
-	switch(rand(3)) {
-	case 1:
-		mes "[TenSue]";
-		mes "What...?";
-		mes "Sick and tired of killing monsters on fields and in dungeons already? Come on...";
+prt_in,177,20,2	script	텐슈#pront	97,{
+		mes "[텐슈]";
+		mes "응? 필드와 던전에서 몬스터 때려잡는게 지겹다구?";
+		mes "허허허 꽤 수련을 많이쌓아서 자신감이 넘치는가 보구만 그렇게 생각한다면 프론테라의 이성도시인 이즈루드로 가보게나";
 		next;
-		mes "[TenSue]";
-		mes "Hahaha, it seems you're pretty confident of your strength, huh? Hmm... Why don't you go join a guild? I mean, all the tough guys are going it.";
+		mes "[텐슈]";
+		mes "그곳엔 존다기획인지 뭐시깽인지가 아레나에서 항상 포스배틀과 로얄럼블이란걸";
+		mes "열어서 무료해진 젊은이들을 다독여 준다고하던구만..";
+		mes "뭐 물론 돈은 좀 들지만 말이야.";
 		next;
-		mes "[TenSue]";
-		mes "Personally though, I don't know any guilds, so you'll have to ask around. Make some contacts, connections, you know, networking.";
-		next;
-		mes "[TenSue]";
-		mes "I don't even know if you don't like taking orders, but if that's the case, why don't you make your own guild?";
+		mes "[텐슈]";
+		mes "한번쯤 가서 즐겨보는건 어때?";
 		close;
-
-	case 2:
-		mes "[TenSue]";
-		mes "One time I walked all the way to Al de Baran, instead of taking a warp. It was pretty dangerous with all those monsters!";
-		next;
-		mes "[TenSue]";
-		mes "I almost died! Some of those monsters just kept following me and trying to kill me, even though I did nothing to them! It was pretty crazy.";
-		next;
-		mes "[TenSue]";
-		mes "Well, still, I feel that taking the scenic route was worth it. There were some pretty magnificent sights on the way.";
-		next;
-		mes "[TenSue]";
-		mes "Even the city of Al de Baran is a splendid vision to the eyes, with its elegant architecture and romantic canal.";
-		next;
-		mes "[TenSue]";
-		mes "The headquarters of Kafra Corporation is also located in Al de Baran. You should really stop by and check it out for yourself.";
-		close;
-	Default:
-		mes "[TenSue]";
-		mes "The kingdom of";
-		mes "Rune-Midgarts is ruled";
-		mes "by kind and benevolent";
-		mes "King Tristram III.";
-		next;
-		mes "[TenSue]";
-		mes "We really owe the prosperity of Rune-Midgarts to him. He was able to convince the people to welcome outsiders into Prontera, as well as establish trade to foreign lands, like Amatsu and Kunlun.";
-		next;
-		mes "[TenSue]";
-		mes "But sometimes...";
-		mes "It can be hard to believe he's such a brilliant and capable leader.";
-		next;
-		mes "[TenSue]";
-		mes "After all, the only time I see him is when he's conducting weddings. Even if a wedding isn't going on, he's still kind of loitering around the Prontera church!";
-		next;
-		mes "[TenSue]";
-		mes "But...";
-		mes "I guess you can get away with a lot of things when you happen to be lord and ruler of an entire nation.";
-		close;
-	}
 }
 
-prt_in,177,18,2	script	Marvin#pront	80,{
-	mes "[Marvin]";
-	mes "Whether it's schmoozing with a member of the opposite sex, or battling monsters, I gotta say, it's all about ^333399skills^000000.";
+prt_in,177,18,2	script	마빈#pront	80,{
+	mes "[마빈]";
+	mes "보통 스킬은 레벨 10까지 키울수있는게 보통이죠 그래서 스킬을 배우기전에 잘못 계산하시고 두려워 하시는 분들이 있죠.";
 	next;
-	mes "[Marvin]";
-	if (Sex == SEX_MALE)
-		mes "I can't help you much when it comes to the subject of talking to attractive women such as myself, but I can tell you a little more about skills that help in battle.";
-	else
-		mes "I don't really have any advice for skills when it comes to talking to a cute guy, but I can let you in on what I know about skills that help in battle.";
+	mes "[마빈]";
+	mes "흠.. 이걸 키우면 이걸 못키우겠군.. 호오 저걸 키우면 이건 마스터 못하는거 아니야? 하고 말이죠.";
+	mes "하지만 모든일엔 예외가";
+	mes "있느으으은~~~~법! 모든 스칼이 다 레벨 10에서 마스터 되는게 아니랍니다.";
 	next;
-	mes "[Marvin]";
-	mes "For most skills, the maximum level is level 10. It's easy to stress yourself out, since it takes so many points to completely master a skill. What skills should you choose?!";
+	mes "[마빈]";
+	mes "레벨 5에 마스터되는 스킬도 있고 심지어는 레벨2나 1에 마스터 되는 스킬도 있죠.";
+	mes "유용한 스킬임에도 불구하고 두려워서 배우지 못한다면 그것만큼 한심한 일이 어디있겠어요.";
 	next;
-	mes "[Marvin]";
-	mes "After all, if you spend too many skill points on one skill, you might not be able to learn another. That's right, there's a limit to the number of total skill points you can earn.";
-	next;
-	mes "[Marvin]";
-	mes "But you know what? Not every skill is mastered at level 10. You can master some skills at only level 5. And even better, some skills are already mastered at level 1 or 2.";
-	next;
-	mes "[Marvin]";
-	mes "So relax and plan ahead, so you can master all the skills that you really want to master the most. Also, don't just put skill points into anything. Remember to use your skill points wisely.";
+	mes "[마빈]";
+	mes "그러니 일단 막무가내로 스킬을 배우려 하지말고 일단 정보를 수집한다음에 수련을 하도록해요.";
+	mes "그러는게 알뜰하게 스킬포인트를 써나가는 방법이겠죠.";
 	close;
 }
 
-prt_in,284,168,3	script	Ginedin Rephere#pront	55,{
-	mes "[Tailor Ginedin Rephere]";
-	mes "11...";
-	mes "12...";
-	mes "Mmm, good. I think I'll be able to finish before tonight's party.";
+prt_in,284,168,3	script	지네다인 레프르#pront	55,{
+	mes "[의류가공사 지네다인 레프르]";
+	mes "열하나... 열둘... 음... 좋아. 어떻게는 오늘 저녁 파티 때가지는 맞출 수 있겠군.";
+	mes "아! 이런... 손님이 오셨군요. 자아 무슨일로 찾아 오셨습니까.";
 	next;
-	mes "[Tailor Ginedin Rephere]";
-	mes "Oh! I didn't realize I had a guest. How may I help you?";
-	next;
-	switch(select("Talk:Dye Clothing:Cancel")) {
+	switch(select("대화 한다:옷을 염색한다:그만둔다")) {
 	case 1:
-		mes "[Tailor Ginedin Rephere]";
-		mes "Life may have gotten a little better, but receiving all these orders? *Whew!* Young ladies these days must be very well off, so my services may no longer be a luxury.";
+		mes "[의류가공사 지네다인 레프르]";
+		mes "세상이 좀 살만한것... 같은지는 모르겠지만... 쇄도하는 드레스 주문을 맞추는 일이 하루하후 마다 버거운 것을 보니 좀 사는 아가씨들은 아주 좋은 세상을 만난것 만큼은 틀림없는것 같군요.";
+		mes "... 사치라고 생각하지 않는건 아니지만... 뭐 어떻습니까? 세상에 이런 사람들이라도 있어야 인간이 추구하는 아름다움이 발전해 나가지 않을까요?";
+		mes "물론 이건 저만의 생각이지만... 털도 비늘도 없는 인간이 저만의 개성과 아름다움을 표출할 수 있는 몇안되는 방법은 바로 옷을 통한것이 아닐까 하고 말입니다.";
 		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "Well, people like them probably further the pursuit of beauty and fashion. But, of course, that's only my opinion.";
-		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "I believe for us humans, clothes are one of the few ways to show our personality, style, and beauty.";
-		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "Considering this, I personally think my job is very helpful and rather fancy. This in itself makes it all worthwhile. Coarse fabric and rough leather burst with energy and life when colored...";
-		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "It is a very hard and tedious process, but the happiness and delight you feel when your clothes are done makes up for all the hard work.";
+		mes "[의류가공사 지네다인 레프르]";
+		mes "하하하... 그런점에서 볼때 저 나름대로 생각해 본 바로는  저의 이 일은 아주 숭고한 일이 아닐까 합니다. 굉장히 많은 보람도 느껴지구요.";
+		mes "당신도 느낄 수 있나요 투박하고 거칠은 저 면과 가죽에 화려하고 원초적인 색을 입힐때... 마치 새생명이 태어나듯 솟구치는 그 열정과 에너지...";
+		mes "매우고되고 힘든 작업이지만 완성된 드레스가 나왔을때 느껴지는 그 희열 하나만으로도 충분히 그 고생을 보상받는듯 합니다.";
 		close;
 	case 2:
-		mes "[Tailor Ginedin Rephere]";
-		mes "Ah...!";
-		mes "You came to dye";
-		mes "your clothes as well.";
-		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "But... I'm so sorry.";
-		mes "I don't have enough time to dye your clothes right now. I have so many orders that are still waiting to be done.";
-		next;
-		mes "[Tailor Ginedin Rephere]";
-		mes "I'm sorry for the inconvenience, but could you come back again next time?";
+		mes "[의류가공사 지네다인 레프르]";
+		mes "아... 당신도 옷을 염색하러 오신 거였군요.";
+		mes "그러나 죄송한데도 지금은 당신의 옷을 염색해드릴 시간적 여유가 없군요.";
+		mes "밀려있는 주문을 제때에 맞추는 일도 벅차기 때문이죠.";
+		mes "수고스럽지만다음에 오시면";
+		mes "안되겠습니까?";
 		close;
 	case 3:
-		mes "[Tailor Ginedin Rephere]";
-		mes "Feel free to take your time and relax here. I apologize that I have nothing to serve you, though.";
+		mes "[의류가공사 지네다인 레프르]";
+		mes "부담가지지 마시고 편히 있다가 가십시오. 비록 제가 바빠서 신경은 못 써 드리지만 말입니다.";
 		close;
 	}
+}
+
+prt_in,285,171,3	script	가족 관계 안내#pront	90,{
+	mes "[에밀리]";
+	mes "안녕하십니까. 성함을 말씀해주세요.";
+	next;
+	select(strcharinfo(0)+"입니다."); 
+		mes "[에밀리]";
+		mes strcharinfo(0)+"님, 무엇을 도와 드릴가요?";
+		next;
+		switch(select("나의 가족 관계 확인:세대 분리")) {
+			case 1:
+				mes "[에밀리]";
+				mes "가족 관계를 확인하고 싶으신 거군요.";
+				mes "바로 도와 드리겠습니다.";
+				close;
+			case 2:
+				mes "[에밀리]";
+				mes "누간가의 보호에서 벗어나 스스로를 책임지는 삶은 두렵기도 하지만 성장의 기회가 될 수도 있지요.";
+				close;
+
+			}
+		end;
+}
+
+prt_in,285,167,0	script	인지와 반지각인#pront	10165,{
+	mes "[디탈리]";
+	mes "안녕하십니까, 선생님. 무엇을 도와드릴까요?";
+	next;
+	close;
+
+}
+
+prt_in,285,165,5	script	이혼 안내#pront	806,{
+	mes "[노튼]";
+	mes "결혼도 안 한 사람이 이혼에 먼저 관심을 가지면 어떡하나요?";
+	close;
+
+}
+
+prt_in,285,161,3	script	밣히리#pure01	811,{
 }
 
 // Prontera Church
 //============================================================
-prt_church,103,76,0	script	Garnet#pront	67,{
-	mes "[Garnet]";
-	mes "Hello there~";
-	mes "Are you interested in learning more about helping and supporting other people?";
+prt_church,103,76,0	script	가넷#pront	67,{
+	mes "[가넷]";
+	mes "주변사람들에게 힘을 주고 도움을주는것에 진정한 행복을 찾고싶으신데 방법을 모르시겠다구요?";
+	mes "다행히도 저희에겐 다른분들을 도와드릴수 있는 능력이 있답니다.";
 	next;
-	mes "[Garnet]";
-	mes "The Acolytes and Priests trained in this church can heal people, cure them of certain conditions, and even awaken the battle potential of other adventurers.";
+	mes "[가넷]";
+	mes "지친몸을 회복시켜드릴수도 있고 잠재되어있는 능력을 일깨워줄수도있구요.";
+	mes "엣헴 뭐든지 물어보세요. 매일 신부님께 혼나긴하지만 이래뵈도 이론엔 강하답니닷";
 	next;
-	mes "[Garnet]";
-	mes "Go and ahead and ask if you have any questions about skills for Acolytes and Priests.";
 	while(1) {
 		next;
-		switch(select("About Heal:About Cure:About Increase AGI:About Angelus:About Blessing:About Warp Portal:End Conversation")) {
+		switch(select("힐에 관해서:큐어에 관해서:민첩성증가에 관해서:안젤루스에 관해서:블레싱에 관해서:워프포탈에 관해서:대화를 끝낸다")) {
 		case 1:
-			mes "[Garnet]";
-			mes "You can recover your own HP with the ^6666CCHeal^000000 skill. Healing is one of the most important ways you can help your friends in battle.";
+			mes "[가넷]";
+			mes "힐이라는 기술을 통해서 자신도 회복할수있고 원하는분을 회복시켜드릴수 있답니다.";
+			mes "힐이 2번 레벨업되면 큐어로 상태이상을 치료할수도 있구요.";
+			mes "열심히 수련하셔서 프리스트가 되시면 힐을사용하셨었던 복사님들은 그힘을 바탕으로 생츄어리라는 생명력회복지역을 만들수가 있답니다.";
 			next;
-			mes "[Garnet]";
-			mes "Even though our powers are usually used to heal others, you can actually use the ^6666CCHeal^000000 skill to hurt Undead monsters.";
-			next;
-			mes "[Garnet]";
-			mes "Just remember to hold down the ^6666CCShift^000000 key when you use Cure or Heal on Undead monsters. Just be sure to hurt the monsters though, and don't use it to help monsters.";
-			next;
-			mes "[Garnet]";
-			mes "Later, if you've learned ^6666CCHeal^000000 as an Acolyte, you can learn ^6666CCSanctuary^000000 if you become a Priest.";
-			next;
-			mes "[Garnet]";
-			mes "Priests use ^6666CCSantuary^000000 to create an area which will restore the HP of you and your friends if you rest within the Sanctuary's area.";
+			mes "[가넷]";
+			mes "이건 비밀인데요.. 이 기술을 언데드계열의 몬스터에게 걸어주면 회복이아닌 데미지를 주게된답니다. 참 쓸때는 시프트키를 누르고 사용하는거 잊지마시구요..엣헴 쉿!";
 			continue;
 		case 2:
-			mes "[Garnet]";
-			mes "Once you reach ^6666CCLevel 2 Heal^000000 as an Acolyte, you can learn ^6666CCCure^000000, which can be used to treat abnormal statuses.";
-			next;
-			mes "[Garnet]";
-			mes "This skill can be such a life saver, since almost every abnormal status can be cured with the Cure skill. Just remember that you need ^6666CCLevel 2 Heal^000000 before you can learn Cure.";
+			mes "[가넷]";
+			mes "큐어는 걸려있는 상태이상증상을 회복시켜주는 기술이랍니다.";
+			mes "이 기술을 익히려면 힐이 2이상 레벨업 되어있어야해요.";
 			continue;
 		case 3:
-			mes "[Garnet]";
-			mes "Now, the ^6666CCIncrease AGI^000000 skill can be used on you or your friends. For a while your AGI stat is increased, making you attack faster and dodge monster attacks more easily.";
-			next;
-			mes "[Garnet]";
-			mes "If you're an Acolyte that wants to learn ^6666CCIncrease AGI^000000, you need to learn ^6666CCLevel 3 Heal^000000 first.";
+			mes "[가넷]";
+			mes "움직임이 빨라지게끔하는 기술이지요 민첩성증가를 걸어주면 적에게 좀더 빠르게 공격할수도 있고 또 적의  공격을 빠르게 필할수도 있게되겠지요";
+			mes "참! 민첨성 증가를 쓰려면 힐이 3이상 레벫업이 되어있는 상태여야 해요";
 			continue;
 		case 4:
-			mes "[Garnet]";
-			mes "You can use ^6666CCAngelus^000000 to increase your Defense, as well as the Defense of other party members. Remember though, you can only use ^6666CCAngelus^000000 on other people if they are in your party.";
+			mes "[가넷]";
+			mes "안젤루스를 사용하여 자신과 다른분들의 방어력을 올려드릴수도 있어요.";
+			mes "하지만 이기술을 다른분께 사용하려면 꼭 파티로 맺어져 있어야한답니다";
 			next;
-			mes "[Garnet]";
-			mes "Before you can learn Angelus, you will need to have ^6666CCLevel 3 Divine Protection^000000.";
-			next;
-			mes "[Garnet]";
-			mes "Also, if you keep learning Angelus, you'll eventually be able to learn ^6666CCKyrie Eleison^000000. That skill helps you evade initial attacks automatically.";
+			mes "[가넷]";
+			mes "안젤루스를 사용하기위해선 디바인프로텍션이라는 언데드에 대한 자기방어력증가기술을 3이상 레벨업해둬야해요";
+			mes "그리고 안젤루스를 공부해두면 프리스트가 되었을때 기리에엘레이손이라는 적의공격 1회 무조건 방어 기술을 배울수있답니다.";
 			continue;
 		case 5:
-			mes "[Garnet]";
-			mes "^6666CCBlessing^000000 temporarily increases STR, DEX and INT. This skill will give you and your friends a great advantage in battle!";
+			mes "[가넷]";
+			mes "블레싱은 STR,DEX,INT 능력을 잠시 상승시켜주는 기술이랍니다.";
+			mes "동료들에게 큰 힘이 되드릴수 있겠지요.";
 			next;
-			mes "[Garnet]";
-			mes "Before you can learn Blessing, you must first learn ^6666CCLevel 5 Divine Protection^000000.";
+			mes "[가넷]";
+			mes "블레싱도 안젤루스와 같이 디바인 프로텍션이라는 언데드에 대한 자기방어력증가기술을 배워둬야해요.";
+			mes "하지만 안젤루스를 익히기위해서보다 2포인트 더 배워둬야하죠.";
 			continue;
 		case 6:
-			mes "[Garnet]";
-			mes "^6666CCWarp Portal^000000 is a pretty complex skill, and you need to know some other skills before you can learn it.";
+			mes "[가넷]";
+			mes "워프포탈을 열기위해선 일단 자기자신이 텔레포트할수있는 능력을 키워야해요.";
+			mes "텔레포테이션을 배우기위해선 루아흐라는  자신을 안보이게끔 변장한 적을 찾아내는 기술을 익혀둬야 하구요.";
 			next;
-			mes "[Garnet]";
-			mes "First, you need to learn ^6666CCRuwach^000000 which lets you see invisible monsters. After Ruwach, you will need to learn the ^6666CCTeleport^000000 skill.";
+			mes "[가넷]";
+			mes "마침내 워프포탈을 열수있게되면 배움의 정도에따라 최고 4군데의 장소를 기억하여 열수있게된답니다";
+			mes "하지만 꼭 한군데는 자신이 카프라직원에게 저장한 장소여야하니 그점 잊지마시구요.";
 			next;
-			mes "[Garnet]";
-			mes "Once you learn ^6666CCWarp Portal^000000, the level of the Warp Portal skill will determine how many warp destinations, or Warp Points, you can memorize.";
+			mes "[가넷]";
+			mes "불편하긴하지만 원하는 장소에가서 /기억으로 열장소를 저장해두어야한답니다.";
+			mes "위험하니까 조심조심 가셔서 빨리 저장하고 텔레포트 하세요.";
+			mes "그리고 워프포탈을 여는 기술은 굉장히 큰힘이 소모되기때문에";
 			next;
-			mes "[Garnet]";
-			mes "If you master the Warp Portal skill, you can have a maximum of 4 different Warp Points. But at least one Warp Point is designated as the Save Point that you've made with a Kafra Employee.";
-			next;
-			mes "[Garnet]";
-			mes "Well, it's a bit of hassle, but if you want to make a certain place one of your Warp Points, you need to be physically there first. Then, type in ^6666CC/memo^000000 into the command prompt.";
-			next;
-			mes "[Garnet]";
-			mes "Just so you know, you can't save a Warp Point inside of a dungeon. Oh, and don't forget, each time you make a Warp Portal, you must use 1 ^6666CCBlue Gemstone^000000 as a Catalyst.";
+			mes "[가넷]";
+			mes "꼭 블루잼스톤이라는 촉매를 사용해 줘야해요";
+			mes "그리고 던전으로는 워프할수 없으니 허튼노력하지않게 명심하시구요.";
 			continue;
 		case 7:
-			mes "["+ strcharinfo(0) +"]";
-			mes "Alright, I've";
-			mes "heard enough.";
+			mes "[가넷]";
+			mes "헤헷.제가 잘아시는분앞에서 괜히 잘난체 했나봐욤.무슨일을 하시게든 행복하세요!";
 			close;
 		}
 	}
 	end;
 }
 
-prt_church,103,71,0	script	Henson#pront	120,{
-	mes "[Henson]";
-	mes "We Priests and Acolytes are not only limited to easing the suffering of our fellow man...";
-	next;
-	mes "[Henson]";
-	mes "We also mete swift and merciless punishment to the forces of evil. Well, purifying any poor souls that may have been turned into the Undead is also another duty.";
-	next;
-	mes "[Henson]";
-	mes "Did you have any questions about Acolyte and Priest skills?";
+prt_church,103,71,0	script	핸슨#pront	120,{
+	mes "[핸슨]";
+	mes "남에게 도움을 주는것도 좋지만 언데드가 되어버린 가여운 생명을 정화시켜주는것 역시 우리의 할일이지.";
+	mes "그러기 위해선 우리가 가지고있는 기술들을 잘 연마해야 해. 자 무엇이 궁금하지?";
 	while(1) {
 		next;
-		switch(select("About Divine Protection:About Demon Bane:About Decrease AGI:About Signum Crusis :About Pneuma:About Ruwach:About Teleport:End conversation.")) {
+		switch(select("디바인프로텍션에 관해서:데몬베인에 관해서:민첩성감소에 관해서:시그넘크루시스에 관해서:흐뉴마에 관해서:루아흐에 관해서:텔레포테이션에 관해서:대화를 끝낸다")) {
 		case 1:
-			mes "[Henson]";
-			mes "If you want to permanently improve your Defense against the Undead, learn ^6666CCDivine Protection^000000.";
+			mes "[핸슨]";
+			mes "언데드에대한 방어력을 키워주려면";
+			mes "바로 이 디바인 프로텍션을";
+			mes "배워두는것이 좋지";
+			mes "가장기본이 되는 기술이기도 하고 한계";
+			mes "지속시간따윈 없으니 말이야";
 			next;
-			mes "[Henson]";
-			mes "Learning Divine Protection to certain levels will also allow you to learn other skills, like ^6666CCAngelus^000000 and ^6666CCBlessing^000000, which Garnet can explain.";
-			next;
-			mes "[Henson]";
-			mes "When you learn ^6666CCLevel 3 Divine Protection^000000, you will then be able to learn the ^6666CCDemon Bane^000000 skill.";
-			next;
-			mes "[Henson]";
-			mes "With ^6666CCDemon Bane^000000, the damage of your attacks against the Undead will be increased. Permanently.";
+			mes "[핸슨]";
+			mes "이 기술을 3포인트 이상 익히면";
+			mes "데몬베인이는 언데드에대한";
+			mes "공격력을 높여주는 기술을";
+			mes "쓸수있게되고";
+			mes "또한 모든 적에대한 방어력을 일시";
+			mes "증가시켜주는 안젤루스와 일시적으로";
+			mes "STR.DEX.INT를 상승시켜주는";
+			mes "블레싱이라는 기술도 익힐수있지.";
 			continue;
 		case 2:
-			mes "[Henson]";
-			mes "^6666CCDemon Bane^000000 increases the damage you will inflict upon the Undead. Permanently.";
+			mes "[핸슨]";
+			mes "언데드에대한 공격력을";
+			mes "증가시켜주는것이 바로 이";
+			mes "데몬베인이야";
+			mes "디바인 프로텍션을 조금 공부해둬야";
+			mes "쓸수있는 기술이지 데몬베인도 디바인";
+			mes "프로텍션과 마찬가지로";
+			mes "지속시간따위는 걱정안해도 된다네.";
 			next;
-			mes "[Henson]";
-			mes "First, you'll need to learn ^6666CCLevel 3 Divine Protection^000000 to be able to learn Demon Bane, so keep that in mind.";
-			next;
-			mes "[Henson]";
-			mes "When you learn ^6666CCLevel 3 Demon Bane^000000, you will be able to learn ^6666CCSignum Crusis^000000, which lowers the Defense of Undead monsters, as well as monsters with the Dark property.";
+			mes "[핸슨]";
+			mes "그리고 이 데몬베인을 3레벨 이상";
+			mes "공부해야 시그넘 크루시스라는";
+			mes "언데드나 암속성의 몬스터의 방어력을";
+			mes "낮추는 기술을 쓸수있지.";
 			continue;
 		case 3:
-			mes "[Henson]";
-			mes "Using ^6666CCDecrease AGI^000000 on monsters will slow their movement, attack speed, and the rate at which they can evade your own attacks. That way, you can maim them properly.";
-			next;
-			mes "[Henson]";
-			mes "Remember, you must first learn ^6666CCLevel 2 Increase AGI^000000 if you want to be able to learn the Decrease AGI skill.";
+			mes "[핸슨]";
+			mes "이 기술을 써버리면 적의 움직임을";
+			mes "둔화시킬수있다네 공격속도나";
+			mes "회피속도등이 감소하게되지";
+			mes "이 기술을 쓰려면 일단 민첩성증가를";
+			mes "1레벨이상 배워둬야해.";
 			continue;
 		case 4:
-			mes "[Henson]";
-			mes "The ^6666CCSignum Crusis^000000 skill lowers the Defense of monsters with the Undead or Dark properties. It has a wide range and can be quite powerful.";
+			mes "[핸슨]";
+			mes "언데드,암속성의 방어력을";
+			mes "하락시켜버리는 기술이고 통하는";
+			mes "사정범위가 상당히 넓지";
+			mes "하지만 어려운기술이여서 항상";
+			mes "성공하지는못하고 일정 확률로";
+			mes "걸러들게 되니 유의!";
 			next;
-			mes "[Henson]";
-			mes "However, it's a very difficult skill to use, and it has a relatively low success rate. But, do not despair if this skill is not successful all the time.";
-			next;
-			mes "[Henson]";
-			mes "When it does work, it will give you a great battle advantage. Remember, you will ^6666CCLevel 3 Demon Bane^000000 to acquire this skill.";
+			mes "[핸슨]";
+			mes "이 기술은 데몬베인이라는";
+			mes "언데드에대한 공격력 상승기술을";
+			mes "3레벨이상 배워둬야 익힐수있다네.";
 			continue;
 		case 5:
-			mes "[Henson]";
-			mes "The ^6666CCPneuma^000000 allows you to generate a barrier that will block all long-range attacks in a certain range, creating a zone that will protect you from monsters that attack from a distance.";
-			next;
-			mes "[Henson]";
-			mes "In order to become ready to learn Pneuma, you must first completely master the ^6666CCWarp Portal^000000 skill.";
+			mes "[핸슨]";
+			mes "워프포탈을 여는 기술을 마스터하면 이";
+			mes "기술을 쓸수있지";
+			mes "일정범위지역을 원거리 공격이";
+			mes "불가능한 지역으로 만들어 버릴수 있는";
+			mes "기술이야.이 지역안에 있으면";
+			mes "원거리공격을하는 적들에게선 완전히";
+			mes "안전해 진다네.";
 			continue;
 		case 6:
-			mes "[Henson]";
-			mes "Nothing can escape the eyes of the Holy! ^6666CCRuwach^000000 allows you to see monsters, as well as other adventurers, that are hidden or invisible.";
-			next;
-			mes "[Henson]";
-			mes "Once you learn Ruwach, you will be able to learn the ^6666CCTeleport^000000 skill.";
+			mes "[핸슨]";
+			mes "안보이게 숨어있는 적을 찾아내는";
+			mes "기술이지 이기술을 익혀야만";
+			mes "텔레포트를 할수있게 된다네.";
 			continue;
 		case 7:
-			mes "[Henson]";
-			mes "First, you must learn the ^6666CCRuwach^000000 skill in order to learn how to Teleport.";
+			mes "[핸슨]";
+			mes "텔레포테이션은 루아흐라는";
+			mes "숨어있는적을 찾아내는 기술을 익혀야";
+			mes "배울수있지";
+			mes "이 기술은 처음엔 자신이 원하지 않는";
+			mes "장소로 이동시켜주지만";
+			mes "마스터하게되면 카프라직원에게";
+			mes "저장해놓은곳으로 텔레포트 할수";
+			mes "있다네.";
 			next;
-			mes "[Henson]";
-			mes "The ^6666CCTeleport^000000 skill teleports you to a random location in the field or city which you are currently in. Teleport will prove useful for quick escapes, but where you may end up is... unpredictable.";
-			next;
-			mes "[Henson]";
-			mes "Once the Teleport skill is mastered, you can Teleport to the latest Save Point that you have made with a Kafra Employee. I do not know why it is that way, but the Lord works in mysterious ways.";
-			next;
-			mes "[Henson]";
-			mes "When Teleport is mastered, you can also learn the ^6666CCWarp Portal^000000 skill. Ask Garnet if you wish to know more about Warp Portal.";
+			mes "[핸슨]";
+			mes "그렇게 되면 워프포탈이라는";
+			mes "다른사람도 자신이";
+			mes "기억하고있는장소로 이동시켜줄수있는";
+			mes "기술을 익힐수 있게 되지.";
 			continue;
 		case 8:
-			mes "[Henson]";
-			mes "If you wish to understand more about an Acolyte or Priest skill, you are welcome to visit me at any time.";
+			mes "[핸슨]";
+			mes "궁금한것이 있다면 언제라도 다시 오게!.";
 			close;
 		}
 	}
@@ -708,23 +697,17 @@ prt_church,103,71,0	script	Henson#pront	120,{
 
 // Hidden Temple
 //============================================================
-prt_maze02,100,69,0	script	Soldier#pront	105,{
-	mes "[Soldier]";
-	mes "H-hey!";
-	mes "What are";
-	mes "you doing here?!";
-	next;
-	mes "[Soldier]";
-	mes "Don't you know there's a Demon living in this forest?! I can't guarantee your safety";
-	mes "if you go in!";
+prt_maze02,100,69,0	script	병사#pront	105,{
+	mes "[병사]";
+	mes "어이 무슨 연유인지는 모르겠지만 이 숲으로 들어가는 것은 자제하는게 좋을거야. 소문에 이 숲에서는 악마가 나타난다고 한다구.";
+	mes "물론 이곳에 들어갔다가 돌아온 사람이 없기때문에 알 수는 없지만 말야. 뭐...";
+	mes "물론 들어가는것은 너의 자유지.";
 	close;
 }
 
-prt_maze02,110,69,0	script	Soldier#2pront	105,{
-	mes "[Soldier]";
-	mes "*Sigh...* The last guy that entered this place haven't come back at all. He didn't listen to me and went in to gather Herbs or something dumb like that...";
-	next;
-	mes "[Soldier]";
-	mes "Whaaaat a stupid guy. Why would anyone want to throw his life away just to collect some silly Herbs?";
+prt_maze02,110,69,0	script	병사#5pront	105,{
+	mes "[병사]";
+	mes "휴... 마지막으로 이 곳을 들어간 녀석역시 돌아오지 않고있어. 어떤 약초를 캐러간다고 말려도 막무가내로 들어가던데...";
+	mes "나 같으면 그깟 약초때문에 목숨을 버리는 바보같은 일은 하지 않겠어.";
 	close;
 }

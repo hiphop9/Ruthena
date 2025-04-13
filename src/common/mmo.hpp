@@ -61,15 +61,15 @@
 	#endif
 #endif
 
-/** Max number of characters per account. Note that changing this setting alone is not enough if the client is not hexed to support more characters as well.
-* Max value tested was 265 */
+/** 계정당 최대 문자 수입니다. 클라이언트가 더 많은 문자를 지원하도록 설정되지 않은 경우 이 설정만으로는 충분하지 않습니다.
+* 테스트된 최대값은 265였습니다 */
 #ifndef MAX_CHARS
 	#if PACKETVER >= 20180124
-		#define MAX_CHARS 15
+		#define MAX_CHARS 30
 	#elif PACKETVER >= 20100413
-		#define MAX_CHARS 12
+		#define MAX_CHARS 27
 	#else
-		#define MAX_CHARS 9
+		#define MAX_CHARS 25
 	#endif
 #endif
 
@@ -117,6 +117,8 @@ typedef uint32 t_itemid;
 #ifndef MAX_BARTER_REQUIREMENTS
 	#define MAX_BARTER_REQUIREMENTS 6
 #endif
+#define MAX_RUNESLOT 5
+#define MAX_RUNEDECOMPO 8
 #ifndef WEB_AUTH_TOKEN_LENGTH
 	#define WEB_AUTH_TOKEN_LENGTH 16+1
 #endif
@@ -609,6 +611,7 @@ struct mmo_charstatus {
 	struct hotkey hotkeys[MAX_HOTKEYS_DB];
 #endif
 	bool show_equip, disable_call;
+	bool show_costume;
 	bool disable_partyinvite;
 	short rename;
 

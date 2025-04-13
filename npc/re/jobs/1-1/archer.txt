@@ -1,129 +1,129 @@
-//===== rAthena Script ======================================= 
-//= Renewal Archer Job Quest
-//===== By: ================================================== 
-//= Kisuka
-//===== Current Version: ===================================== 
+//===== rAthena 스크립트 =======================================
+//= 아처 직업 퀘스트 리뉴얼
+//===== 게시자: ========================================= =========
+//= 키스카
+//===== 현재 버전: ======================================
 //= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Job Change to Archer Class
-//===== Additional Comments: ================================= 
-//= 1.0 First Version. [Kisuka]
-//= 1.1 Added support for Baby classes. [Euphy]
-//============================================================ 
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= 아처 클래스로 직업 변경
+//===== 추가 의견: ==================================
+//= 1.0 첫 번째 버전. [키스카]
+//= 1.1 Baby 클래스에 대한 지원이 추가되었습니다. [유피]
+//================================================ ============
 payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 	if (Upper == 1) {
 		if (Class == Job_Novice_High && (ADVJOB == Job_Sniper || ADVJOB == Job_Clown || ADVJOB == Job_Gypsy)) {
-			mes "[Archer Guildsman]";
-			mes "Hey, I know you.";
-			mes "You took this test";
-			mes "before, didn't you?";
+			mes "[궁수 길드맨]";
+			mes "안녕하세요. 저는 당신을 압니다.";
+			mes "이번 시험을 치르셨군요";
+			mes "예전엔 그렇지 않았나요?";
 			next;
-			mes "[Archer Guildsman]";
-			mes "Ah, you must have been";
-			mes "to Valhalla and been reborn.";
-			mes "Wow, that's so impressive!";
+			mes "[궁수 길드맨]";
+			mes "아, 그랬나봐요";
+			mes "발할라로 가서 다시 태어났습니다.";
+			mes "와, 정말 인상적이네요!";
 			next;
 			if (!callfunc("F_CanChangeJob")) {
-				mes "[Archer Guildsman]";
-				mes "Err...";
-				mes "You'd better learn all the Basic Skills first before you can become an Archer.";
+				mes "[궁수 길드맨]";
+				mes "어...";
+				mes "궁수가 되기 전에 먼저 모든 기본 스킬을 익히는 것이 좋습니다.";
 				next;
-				mes "[Archer Guildsman]";
-				mes "Alright, see you later.";
+				mes "[궁수 길드맨]";
+				mes "알았어, 나중에 봐.";
 				close;
 			}
-			mes "[Archer Guildsman]";
-			mes "Well then. I don't";
-			mes "need to say anything else.";
-			mes "I know you'll make a great Archer...";
+			mes "[궁수 길드맨]";
+			mes "그럼. 난 안 그래";
+			mes "다른 말이 필요합니다.";
+			mes "당신은 훌륭한 궁수가 될 거라는 걸 알아요...";
 			next;
 			skill "NV_TRICKDEAD",0,SKILL_PERM;
 			jobchange Job_Archer_high;
 			skill "AC_MAKINGARROW",1,SKILL_PERM;
 			skill "AC_CHARGEARROW",1,SKILL_PERM;
-			mes "[Archer Guildsman]";
-			mes "Although there's no special";
-			mes "reward for you this time, I hope you understand. Take care of yourself.";
+			mes "[궁수 길드맨]";
+			mes "특별한 건 없지만";
+			mes "이번엔 너에게 보상을 해줄게, 이해해줬으면 좋겠어. 건강 조심해라.";
 			close;
 		}else{
-			mes "[Archer Guildsman]";
-			mes "Oh...?";
-			mes "Hey, what are";
-			mes "you doing here...?";
+			mes "[궁수 길드맨]";
+			mes "아...?";
+			mes "야, 뭐야?";
+			mes "여기서 뭐해요...?";
 			next;
-			mes "[Archer Guildsman]";
-			mes "I can tell that you're not cut out to be an Archer. It sort of feels like you're meant to do";
-			mes "something else...";
+			mes "[궁수 길드맨]";
+			mes "당신은 궁수가 되기에 적합하지 않다는 걸 알 수 있어요. 꼭 그래야만 하는 것 같은 느낌이 들거든요.";
+			mes "뭔가...";
 			close;
 		}
 	}
-	mes "[Archer Guildsman]";
-	mes "Nice to meet you. How may I help you?";
+	mes "[궁수 길드맨]";
+	mes "만나서 반가워요. 무엇을 도와드릴까요?";
 	next;
-	switch(select("I want to be an Archer.:I need the requirements, please.:Nothing, thanks.")) {
+	switch(select("저는 궁수가 되고 싶습니다.:조건이 필요합니다.:아무것도 없습니다. 감사합니다.")) {
 	case 1:
-		mes "[Archer Guildsman]";
+		mes "[궁수 길드맨]";
 		if(BaseJob != Job_Novice) {
 			if(BaseJob == Job_Archer)
-				mes "Haha, you are kidding me...";
+				mes "하하, 농담하시네요...";
 			else {
-				mes "I feel sorry but only Novices can change their job.";
-				mes "You already have your own decent job, don't you?";
+				mes "안타깝지만 직업변경은 노비스만이 할 수 있습니다.";
+				mes "당신은 이미 괜찮은 직업을 갖고 있지 않나요?";
 			}
 			close;
 		}else{
-			mes "You are... "+strcharinfo(0)+", right?";
+			mes "당신은... "+strcharinfo(0)+" 맞죠?";
 			next;
 			if (!callfunc("F_CanChangeJob")) {
-				mes "[Archer Guildsman]";
-				mes "Well, you're not at the right skill level.";
-				mes "Your job level must be at least ^4A4AFF10^000000 and your Basic Skill level should reach ^4A4AFFlevel 9";
+				mes "[궁수 길드맨]";
+				mes "글쎄, 당신은 적절한 기술 수준에 있지 않습니다.";
+				mes "당신의 직업 레벨은 최소 ^4A4AFF10^000000 이상이어야 하고 기본 스킬 레벨은 ^4A4AFF레벨 9가 되어야 합니다";
 				next;
-				mes "[Archer Guildsman]";
-				mes "Because an Archer needs extremely high concentration, so we do not accept those who have little patience.";
+				mes "[궁수 길드맨]";
+				mes "궁수는 집중력이 매우 요구되기 때문에 인내심이 부족한 사람은 받아들이지 않습니다.";
 				close;
 			}
-			mes "[Archer Guildsman]";
-			mes "Your Basic Skill is now enough..";
-			mes "....Hm~~ so you are now ready to be an Archer. I will take the step right away.";
+			mes "[궁수 길드맨]";
+			mes "이제 기본스킬은 충분합니다..";
+			mes "....흠~~ 이제 궁수가 될 준비가 되셨네요. 바로 발걸음을 떼겠습니다.";
 			next;
-			mes "[Archer Guildsman]";
-			mes "Congratulations! You are now an Archer! Also, we hope that you actively participate in many programs for the revival of the Archer Guild.";
-			mes "Ah, items have arrived from the Production Department. Here, take these! These are all yours!";
+			mes "[궁수 길드맨]";
+			mes "축하합니다! 이제 궁수가 되셨습니다! 그리고 궁수 길드의 부흥을 위한 많은 프로그램에도 적극적으로 참여해주시길 바랍니다.";
+			mes "아, 생산부에서 물건이 도착했어요. 자, 이거 가져가세요! 다 당신 거예요!";
 			callfunc "Job_Change",Job_Archer;
-			getitem 1742,1;	// N_Composite_Bow
-			getitem 12004,1;	// Arrow_Container
-			getitem 12009,1;	// Silver_Arrow_Container
-			getitem 12008,1;	// Fire_Arrow_Container
+			getitem 1742,1; // N_Composite_Bow
+			getitem 12004,1; // 화살표_컨테이너
+			getitem 12009,1; // Silver_Arrow_Container
+			getitem 12008,1; // Fire_Arrow_Container
 			next;
-			mes "[Archer Guildsman]";
-			mes "Having a bow and arrows, now you became a real Archer.";
-			mes "If you open the arrow container, there are arrows in it and then you can equip them.";
-			mes "Well, I expect to hear better news from you. It's time to say goodbye.";
-			mes "Bye.";
+			mes "[궁수 길드맨]";
+			mes "활과 화살만 있으면 이제 진짜 궁수가 되었습니다.";
+			mes "화살통을 열면 그 안에 화살이 들어있고, 장착할 수 있습니다.";
+			mes "더 좋은 소식이 들려오길 기대합니다. 이제 작별 인사를 할 시간입니다.";
+			mes "안녕.";
 			close;
 		}
 	case 2:
-		mes "[Archer Guildsman]";
-		mes "An Archer has skills using a bow and has various talents.";
-		mes "The greatest ability of an Archer is attacking enemies from a long distance.";
+		mes "[궁수 길드맨]";
+		mes "궁수는 활을 사용하는 스킬도 있고, 다양한 재능을 가지고 있습니다.";
+		mes "궁수의 가장 큰 능력은 먼 거리에서 적을 공격하는 것입니다.";
 		next;
-		mes "[Archer Guildsman]";
-		mes "Although an Archer has weaker HP, he or she can shoot enemies at a long range,";
-		mes "so an Archer is safer in a real battle.";
+		mes "[궁수 길드맨]";
+		mes "궁수는 HP가 약하지만 원거리에서 적을 사격할 수 있습니다.";
+		mes "실제 전투에서는 궁수가 더 안전하니까요.";
 		next;
-		mes "[Archer Guildsman]";
-		mes "Although an Archer in Ragnarok has lower HP, he or she has high accuracy and attack rate so that the archer can kill monsters before they get close to an Archer.";
+		mes "[궁수 길드맨]";
+		mes "라그나로크의 궁수는 체력은 낮지만 명중률과 공격률이 높아 몬스터가 궁수에게 접근하기 전에 처치할 수 있습니다.";
 		next;
-		mes "[Archer Guildsman]";
-		mes "^8C2121An Archer can change jobs to a Hunter.^000000";
-		mes "^8C2121Other than Hunter, if you are a man, you can change your job to Bard and if you are a woman, you can change your job to Dancer.^000000";
+		mes "[궁수 길드맨]";
+		mes "^8C2121궁수는 헌터로 전직할 수 있습니다.^000000";
+		mes "^8C2121헌터 외에 남자라면 바드로 전직할 수 있고, 여자라면 댄서로 전직할 수 있습니다.^000000";
 		close;
 	case 3:
-		mes "[Archer Guildsman]";
-		mes "If you have any questions, feel free to come and ask me.";
+		mes "[궁수 길드맨]";
+		mes "궁금한 점이 있으시면 언제든지 오셔서 물어보세요.";
 		close;
 	}
 }

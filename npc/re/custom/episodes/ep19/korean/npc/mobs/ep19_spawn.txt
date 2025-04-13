@@ -1,0 +1,57 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Monster spawn from episode 19
+//===== Description: =========================================
+//= The file include several new monster spawn locations.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+jor_ab01	monster	 폐기된 원시르간	21538,70	//  EP19_WASTED_RGAN_A
+jor_ab01	monster	 동굴 깔라마링	21540,70	//  EP19_CAVE_CALMARING
+jor_ab01	monster	 동굴 부동화	21541,60	//  EP19_CAVE_FLOWER
+jor_ab01	monster	 새끼 할루키게니아	21543,60	//  EP19_HALLUCIGENIA_BABY
+jor_ab01	monster	 개조된 상급 르간	21600,10	//  EP19_RE_RGAN_E
+
+jor_ab02	monster	 폐기된 중급르간	21539,70	//  EP19_WASTED_RGAN_C
+jor_ab02	monster	 할루키게니아	21542,70	//  EP19_HALLUCIGENIA
+jor_ab02	monster	 외눈 돌로카리스	21544,60	//  EP19_ONE_EYE_DOLLOCARIS
+jor_ab02	monster	 쌍눈 돌로카리스	21545,60	//  EP19_DOLLOCARIS
+jor_ab02	monster	 휘말린 중급 르간	21601,10	//  EP19_ET_RGAN_D
+
+jor_back1	monster	 빛나는 미역	21524,60	//  EP19_SHINING_SEAWEED
+jor_back1	monster	 아이스강구	21525,60	//  EP19_ICE_GANGU
+jor_back1	monster	 아이스 스트로우	21523,80	//  EP19_ICE_STRAW
+
+jor_back2	monster	 얼지 않는 꽃	21521,70	//  EP19_UNFROST_FLOWER
+jor_back2	monster	 아이스강구	21525,25	//  EP19_ICE_GANGU
+jor_back2	monster	 아이스 스트로우	21523,35	//  EP19_ICE_STRAW
+jor_back2	monster	 리마키나	21520,70	//  EP19_LIMACINA
+
+jor_back3	monster	 원시 르간	21526,30	//  EP19_RGAN_A
+jor_back3	monster	 최하급 르간	21527,15	//  EP19_RGAN_B
+jor_back3	monster	 아이스강구	21525,20	//  EP19_ICE_GANGU
+jor_back3	monster	 깔라마링	21522,70	//  EP19_CALMARING
+jor_back3	monster	 리마키나	21520,70	//  EP19_LIMACINA
+// unknown delay
+jor_back3	boss_monster	 울트라 리마키나	21537,1,7200000,600000,1	//  EP19_LIMACINA_BOSS
+
+jor_dun01	monster	 원시 르간	21526,110	//  EP19_RGAN_A
+jor_dun01	monster	 최하급 르간	21527,60	//  EP19_RGAN_B
+jor_dun01	monster	 하급 르간	21528,20	//  EP19_RGAN_C
+jor_dun01	monster	 하트헌터AT	21599,10	//  EP19_HEARTHUNTER_AT
+
+jor_dun02	monster	 최하급 르간	21527,90	//  EP19_RGAN_B
+jor_dun02	monster	 하급 르간	21528,80	//  EP19_RGAN_C
+jor_dun02	monster	 중급 르간	21529,20	//  EP19_RGAN_D
+jor_dun02	monster	 하트헌터AT	21599,10	//  EP19_HEARTHUNTER_AT
+
+jor_tail	monster	 빛나는 미역	21524,80	//  EP19_SHINING_SEAWEED
+jor_tail	monster	 아이스강구	21525,90	//  EP19_ICE_GANGU
+
+jor_tail	monster	 빛나는 미역	21524,80	//  EP19_SHINING_SEAWEED
+jor_tail	monster	 아이스강구	21525,90	//  EP19_ICE_GANGU
+
+jor_que	monster	 아이스강구	21534,3	//  EP19_MD_RGAN_E
+jor_que	monster	 빛나는 미역	21535,5	//  EP19_MD_RGAN_D
+	

@@ -17,25 +17,25 @@
 //= 1.3a Added 'disable_items' command. [Euphy]
 //============================================================ 
 
-prontera,165,60,2	script	Apprentice Craftsman	73,{
+prontera,165,60,2	script	수습 세공사::Apprentice Craftsman	73,{
 	disable_items;
-	mes "[Apprentice Craftsman]";
+	mes "[수습 세공사]";
 	if (Zeny >= 400000) {
-		mes "I've been studying ways to enhance an armor to maximize its capability.";
+		mes "나는 방어구의 성능을 최대화하기 위해 강화하는 방법을 연구해 왔습니다.";
 		next;
-		mes "[Apprentice Craftsman]";
-		mes "Enchanting is an awesome skill that infuses a mysterious status powers into the armor's hidden socket.";
+		mes "[수습 세공사]";
+		mes "인챈팅은 갑옷의 숨겨진 소켓에 신비한 상태이상 능력을 부여하는 멋진 스킬입니다.";
 		next;
-		mes "[Apprentice Craftsman]";
-		mes "However, you have to keep in mind that if there are two armors of the same kind in your possession, the Enchantment will be applied in the order they are placed in your inventory.";
+		mes "[수습 세공사]";
+		mes "다만, 같은 종류의 방어구 2개를 소지하고 있을 경우에는 인벤토리에 배치된 순서대로 인챈트가 적용된다는 점을 명심해야 합니다.";
 		next;
-		mes "[Apprentice Craftsman]";
-		mes "In that case, the Enchantment may be applied to an item which you didn't mean to Enchant. So just bring ^5555ffONE Armor^000000 you want enchanted to be safe...";
+		mes "[수습 세공사]";
+		mes "이 경우 인챈트를 의도하지 않은 아이템에 인챈트가 적용될 수 있습니다. 그러니 마법부여를 원하는 ^5555ffONE 방어구^000000만 가져오시면 안전합니다...";
 		next;
-		mes "[Apprentice Craftsman]";
-		mes "I'm not responsible for what would happen if you have more than one of the same kind in your inventory.";
+		mes "[수습 세공사]";
+		mes "귀하의 인벤토리에 동일한 종류가 두 개 이상 있을 경우 발생하는 문제에 대해 저는 책임을 지지 않습니다.";
 		next;
-		switch(select("Non Slotted Armor.:Slotted Armor.:High Grade Armor.:Maybe next time.")) {
+		switch(select("비 슬롯 갑옷.: 슬롯 갑옷.: 고급 갑옷.:아마 다음번에.")) {
 		case 1:
 			setarray .@Items[0],2307,2309,2314,2316,2321,2325,2327,2328,2330,2332,2334,2335,2341,2344,2346,2348,2350,2337,2386,2394,2395,2396;
 			set .@j,50;
@@ -50,8 +50,8 @@ prontera,165,60,2	script	Apprentice Craftsman	73,{
 			set .@j,60;
 			break;
 		case 4:
-			mes "[Apprentice Craftsman]";
-			mes "Please come back when you have any interest in enchanting your armor.";
+			mes "[수습 세공사]";
+			mes "갑옷 마법부여에 관심이 있으시면 다시 방문해 주세요.";
 			close;
 		}
 		set .@menu$,"";
@@ -60,38 +60,38 @@ prontera,165,60,2	script	Apprentice Craftsman	73,{
 		callsub S_EnchantArmor, .@Items[select(.@menu$)-1], .@j;
 		end;
 	}
-	mes "I am in charge of Enchanting Armors. Simply put, I've been studying ways to power-up armor.";
+	mes "저는 마법부여 갑옷을 담당하고 있습니다. 간단히 말해서 방어구의 파워업 방법을 연구해왔습니다.";
 	next;
-	mes "[Apprentice Craftsman]";
-	mes "If by any chance, you would want to enchant your armor, bring me 400,000 zeny and the armor you want to enchant and you are all set to go.";
+	mes "[수습 세공사]";
+	mes "혹시 갑옷에 인챈트를 하고 싶다면 40만 제니와 인챈트하려는 갑옷을 나에게 가져다주면 모든 준비가 완료된다.";
 	close;
 
 S_EnchantArmor:
 	set .@itemid,getarg(0);
 	set .@failrate,getarg(1);
-	mes "[Apprentice Craftsman]";
+	mes "[수습 세공사]";
 	if (countitem(.@itemid) == 1) {
-		mes "Socket enchant will cost you 400,000 zeny. And there will be a random option enchanted. Of course, there is a chance of breaking your armor.";
+		mes "소켓 인챈트 비용은 400,000제니입니다. 그리고 마법이 부여된 무작위 옵션이 있을 것입니다. 물론 갑옷이 깨질 가능성도 있습니다.";
 		next;
-		mes "[Apprentice Craftsman]";
-		mes "First and most importantly.";
-		mes "^ff5555Existing Refine Level of the Armor";
-		mes "and Cards will be GONE.^000000";
-		mes "Do you still want to try an Enchant?";
+		mes "[수습 세공사]";
+		mes "가장 중요한 것은.";
+		mes "^ff5555기존 방어구 제련 단계";
+		mes "그리고 카드는 사라질 것입니다.^000000";
+		mes "아직도 인챈트를 시도하고 싶나요?";
 		next;
-		if(select("Hmm... Let me think it over.:Go ahead.") == 1) {
-			mes "[Apprentice Craftsman]";
-			mes "Well, I can't blame you. Safety first, eh?";
-			mes "Now you have a nice day.";
+		if(select("흠... 다시 생각해 보겠습니다.:계속하세요.") == 1) {
+			mes "[수습 세공사]";
+			mes "글쎄, 비난할 수는 없지. 안전이 최우선이지?";
+			mes "이제 좋은 하루 보내세요.";
 			close;
 		}
-		mes "[Apprentice Craftsman]";
-		mes "Quite of an adventurer huh? Well, shall we?";
+		mes "[수습 세공사]";
+		mes "꽤 모험가죠? 글쎄요?";
 		close2;
 		specialeffect2 EF_MAPPILLAR;
 		if (Zeny < 400000) {
-			mes "[Apprentice Craftsman]";
-			mes "Sorry, but you don't have enough zeny.";
+			mes "[수습 세공사]";
+			mes "죄송합니다. 제니가 부족합니다.";
 			close;
 		}
 		progressbar "ffff00",7;
@@ -136,16 +136,16 @@ S_EnchantArmor:
 			case 36: set .@addpart,4750;break;
 			default:
 				specialeffect2 EF_PHARMACY_FAIL;
-				mes "[Apprentice Craftsman]";
-				mes "Well that's too bad.";
-				mes "The requested equipment has failed to enchant.";
+				mes "[수습 세공사]";
+				mes "정말 안됐네요.";
+				mes "요청한 장비의 마법부여에 실패했습니다.";
 				close;
 		}
 		getitem2 .@itemid, 1, 1, 0, 0, 0, 0, 0, .@addpart;
 	}
 	else {
-		mes "Hmm? There's nothing to be enchanted!";
-		mes "Please come back with just ONE equipment to be enchanted.";
+		mes "흠? 매혹될 일이 없어요!";
+		mes "마법에 걸린 장비 하나만 가지고 돌아오세요.";
 		close;
 	}
 }

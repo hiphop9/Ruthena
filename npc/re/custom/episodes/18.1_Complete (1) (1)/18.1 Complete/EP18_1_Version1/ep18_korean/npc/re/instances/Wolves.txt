@@ -1,0 +1,3241 @@
+//===== rAthena Script =======================================
+//= Instances: A Gathering Place of Wolves and Sanctuary Purification.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- A Gathering Place of Wolves is a part of the episode 18.1 main quest.
+//- Sanctuary Purification is a daily quest.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 54. (entrance npc is a part of the instance A Gathering Place of Wolves)
+rachel,167,244,5	duplicate(dummy_cloaked_npc)	수아드#sms03	4_EP18_SUAD
+
+rachel,169,245,3	script	평범한 사람#sms04	4_EP18_GW_WOMAN01,{
+	if (ep18_1_main < 50) {
+		end;
+	}
+	if (ep18_1_main == 50 || ep18_1_main == 51) {
+		mes "[평범한 사람]";
+		mes "이곳은 수리중으로 접근이 금지된 곳입니다.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		cloakoffnpc "수아드#sms03", getcharid(0);
+		mes "[수아드]";
+		mes "경계하지 않아도 돼. 이분은 우리와 함께하는 모험가야.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		cloakoffnpc "미리암#sms03", getcharid(0);
+		mes "[미리암]";
+		mes "이제 다 모인 건가?";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "그래. 준비도 끝났어. 산개해 있을 우리쪽 사람들에게 신호를 보내고 신전으로 진입하면 돼.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "빠르게 움직여야겠군.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "이곳으로 들어가면 신전 옆문 쪽으로 들어갈 수 있어. 모험가, 지금 진입하겠어?";
+		next;
+		
+		.@md_name$ = "A Gathering Place of Wolves";
+		// .@md_name$ = "늑대들의 집결지";
+
+		// player has party
+		if (is_party_leader()) {
+			// player is leader of the party
+			.@create$ = .@md_name$ + " 연다";
+		}
+
+		switch( select( .@create$, "어서 진입해요.", "준비가 필요해요." ) ) {
+		case 1:
+			if (instance_create(.@md_name$) < 0) {	// Note: not forced solo
+				mes "Party: " + getpartyname(getcharid(1)) + "";
+				mes "Leader: " + strcharinfo(0) + "";
+				mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+				close3;
+			}
+			mes "[변장한 미리암]";
+			mes "조금 기다린 후에 들어가 보는게 좋겠습니다."; // You'd better wait a little before you go in.
+			close3;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "[수아드]";
+				mes "^ff0000An unknown error occurred.^000000";
+				close3;
+			case IE_NOINSTANCE:
+				mes "[수아드]";
+				mes "파티의 리더가 신호를 보내기 전인데? 준비가 되면 어서 신호를 보내라고 해. 마냥 기다릴 수는 없으니까.";
+				close3;
+			case IE_NOMEMBER:
+				mes "[수아드]";
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close3;
+			case IE_OK:
+				mes "[수아드]";
+				mes "신호가 왔으니 움직이지. 바로 진입하자.";
+				if (ep18_1_main == 50) {
+					changequest 17519,17520;
+					ep18_1_main = 51;
+				}
+				cutin "",255;
+				mapannounce "rachel", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".",bc_map,"0x00ff99",FW_NORMAL,12;
+				// warp "1@nyr",194,30;
+				close;
+			}
+			end;
+		case 3:
+			close3;
+		}
+		end;
+	}
+	mes "[평범한 사람]";
+	mes "모험가님, 안녕하십니까. 신전 사람이 모험가님을 기다리고 있었습니다.";
+	close2;
+	cloakoffnpc "미리암#sms03", getcharid(0);
+	npctalk "모범기님, 메서오십시오.", "미리암#sms03", bc_self;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17519) == 1" );
+
+	// Sanctuary Purification
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17527,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep18_1_main >= 52 && checkquest(17527,PLAYTIME) == -1 && isbegin_quest(17522) == 0 && isbegin_quest(17523) == 0" );
+	end;
+}
+
+// Instance Sanctuary Purification entrance
+rachel,167,242,7	script	미리암#sms03	4_EP18_MIRIAM,{
+	if (checkweight(1000405,4) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	.@md_name$ = "Sanctuary Purification";
+	if (ep18_1_main >= 52) {	// repeatable instance Sanctuary Purification
+		if (BaseLevel < 170) {
+			mes "[신관]";
+			mes "You must be at least BaseLevel 170 for this instance.";
+			close;
+		}
+		if (isbegin_quest(17524) == 1 || isbegin_quest(17526) == 1) {
+			mes "[신관]";
+			mes "모험가님 어서오십시오. 고생 많으셨습니다.";
+			if (isbegin_quest(17524) == 1) {
+				erasequest 17524;
+				.@count = 2;
+			}
+			if (isbegin_quest(17526) == 1) {
+				erasequest 17526;
+				.@count += 2;
+			}
+			getitem 1000405,.@count;	// Ep18_Amethyst_Fragment
+			close;
+		}
+		switch( checkquest(17527,PLAYTIME) ) {
+		case -1:
+			if (isbegin_quest(17522) == 0 && isbegin_quest(17523) == 0)
+				callsub( S_Take, 0 );
+			break;
+		case 0:
+		case 1:
+			mes "[진관]";
+			mes "Please wait the end of the quest delay.";
+			close;
+		case 2:
+			mes "[신관]";
+			mes "안녕하십니까! 푹 쉬셨습니까? 오늘도 모험가님께서 힘을 보태주신다면 감사하겠습니다. 소탕작전은 하루에 1회 진행하고 있으니 참고하십시오.";
+			erasequest 17527;
+			if (isbegin_quest(17522) == 0 && isbegin_quest(17523) == 0)
+				callsub( S_Take, 1 );
+			break;
+		}
+		mes "[신관]";
+		mes "준비는 마치셨습니까? 합류 신호를 보내겠습니다.";
+		next;
+		switch( select( "데, 신호를 보내세요.", "진입하겠습니다.", "아직 받지 못한 임무가 있어요!", "준비가 더 필요해요." ) ) {
+		case 1:
+			mes "[신관]";
+			mes "합류 지점 전달 받았습니다. 이 비상구족으로 가면 바로 합류하실 수 있습니다. 준비를 마치면 진입하십시오.";
+			if (instance_create(.@md_name$) < 0) {
+				mes "Party: " + getpartyname(getcharid(1)) + "";
+				mes "Leader: " + strcharinfo(0) + "";
+				mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+				close;
+			}
+			end;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+				mes "The memorial dungeon Endless Tower does not exist.";
+				mes "The party leader did not generate the dungeon yet.";
+				close;
+			case IE_NOMEMBER:
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close;
+			case IE_OK:
+				mes "[신관]";
+				mes "신호가 왔으니 움직이죠. 합류 지점으로 바로 진입합시다.";
+				mapannounce "rachel", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".",bc_map,"0x00ff99",FW_NORMAL,12;
+				setquest 17527;
+				// warp "1@nyr",194,30;
+				end;
+			}
+			end;
+		case 3:
+			callsub( S_Take, 0 );
+		case 4:
+			end;
+		}
+	}
+	end;
+
+S_Take:
+	if (getarg(0) == 0) {
+		mes "[진관]";
+		mes "신전에 침투한 주요 세력은 져나갔지만 하트헌터 쪽에 넘어간 신전 가드들이나 심장을 노리는 하트헌터의 잔당이 남아있어 골치입니다.";
+		next;
+		mes "[진관]";
+		mes "자체적으로 담을 진행하고는 있지만 모험가님께서 힘 보태주신다면 감사하겠습니다. 소탕작전은 하루에 1회 진행하고 있으니 참고하십시오.";
+	}
+	next;
+	switch( select( "이왕하는 것 둘 다.", "변절한 신전가드 소탕", "하트헌터 소당", "힘들겠는데요" ) ) {
+	case 1:
+		if (isbegin_quest(17522) == 0 && isbegin_quest(17524) == 0)
+			setquest 17522;
+		if (isbegin_quest(17523) == 0 && isbegin_quest(17526) == 0)
+			setquest 17523;
+		mes "[신관]";
+		mes "현력 감사드립니다. 그럼 준비를 마치시면 말씀해 주십시오.";
+		close;
+	case 2:
+		if (isbegin_quest(17522) == 0 && isbegin_quest(17524) == 0)
+			setquest 17522;
+		mes "[신관]";
+		mes "현력 감사드립니다. 그럼 준비를 마치시면 말씀해 주십시오.";
+		close;
+	case 3:
+		if (isbegin_quest(17523) == 0 && isbegin_quest(17526) == 0)
+			setquest 17523;
+		mes "[신관]";
+		mes "현력 감사드립니다. 그럼 준비를 마치시면 말씀해 주십시오.";
+		close;
+	case 4:
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+
+// Define the instance variables and disable the unused NPCs
+1@nyr,1,1,0	script	nyr_starter	-1,{
+	end;
+OnInstanceInit:
+	'nyr_main_step = 0;
+	'nyr_daily_step = 0;
+	'code = 0;
+	'map_1nyr$ = instance_mapname("1@nyr");
+	'map_2nyr$ = instance_mapname("2@nyr");
+
+	if (instance_live_info(ILI_NAME) == "A Gathering Place of Wolves") {	// Gathering Place of Wolves instance : disable the stater NPCs of Sanctuary Purification
+		disablenpc instance_npcname("#qar101sw");
+
+		for ( .@i = 1; .@i < 16; ++.@i ) {
+			if (.@i < 10)
+				.@string$ = "0" + .@i;
+			else
+				.@string$ = "" + .@i;
+			disablenpc instance_npcname("#cell" + .@string$);
+		}
+		disablenpc instance_npcname("#cell42");
+		disablenpc instance_npcname("#cell51");
+		disablenpc instance_npcname("#cell66");
+		
+		// disablenpc instance_npcname("#cell41");	// duplicate of 8
+		disablenpc instance_npcname("#qmobg101");
+	}
+	else {	// Sanctuary Purification instance : disable the stater NPCs of A Gathering Place of Wolves
+		// Step 1 - Gathering Place of Wolves
+		disablenpc instance_npcname("미리암#dms101");
+		disablenpc instance_npcname("수아드#dms101");
+		disablenpc instance_npcname("라마쿠스#dms102");
+		disablenpc instance_npcname("쿤#dms112");
+		disablenpc instance_npcname("요피#dms122");
+		disablenpc instance_npcname("성난 군중#dms171");
+		disablenpc instance_npcname("신전가드#dms101");
+		disablenpc instance_npcname("신전가드#dms111");
+		disablenpc instance_npcname("신전가드#dms121");
+		disablenpc instance_npcname("신전가드#dms131");
+		disablenpc instance_npcname("신전가드#dms141");
+		disablenpc instance_npcname("신전가드#dms151");
+		disablenpc instance_npcname("신전가드#dms181");
+		disablenpc instance_npcname("신전가드#dms191");
+		disablenpc instance_npcname("성난 군중#dms101");
+		disablenpc instance_npcname("성난 군중#dms111");
+		disablenpc instance_npcname("성난 군중#dms121");
+		disablenpc instance_npcname("성난 군중#dms131");
+		disablenpc instance_npcname("성난 군중#dms141");
+		disablenpc instance_npcname("성난 군중#dms151");
+		disablenpc instance_npcname("성난 군중#dms161");
+		disablenpc instance_npcname("성난 군중#dms181");
+		disablenpc instance_npcname("성난 군중#dms191");
+		
+		// walls
+		setcell 'map_1nyr$,89,24,89,153,cell_walkable,0;
+		setcell 'map_1nyr$,150,24,150,153,cell_walkable,0;
+	}
+
+	// Sanctuary Purification instance - 1@nyr
+	disablenpc instance_npcname("신전가드#qdms01");
+	disablenpc instance_npcname("신전가드#qdms02");
+	disablenpc instance_npcname("신전가드#qdms03");
+	disablenpc instance_npcname("신전가드#qdms21");
+	disablenpc instance_npcname("신전가드#qdms22");
+	disablenpc instance_npcname("신전가드#qdms23");
+	disablenpc instance_npcname("신전가드#qdms31");
+	disablenpc instance_npcname("신전가드#qdms32");
+	disablenpc instance_npcname("신전가드#qdms33");
+	disablenpc instance_npcname("신전가드#qdms41");
+	disablenpc instance_npcname("신전가드#qdms42");
+
+	// disablenpc instance_npcname("#qmobg401");
+	// disablenpc instance_npcname("#qar201sw");
+
+	// warps
+	disablenpc instance_npcname("#qwpto01");
+	disablenpc instance_npcname("#qwpto02");
+	disablenpc instance_npcname("#qwpto03");
+	disablenpc instance_npcname("#areaw03");
+
+	// disablenpc instance_npcname("#qwptora");	// unknown
+
+	disablenpc instance_npcname("신전가드#qdms101");
+	disablenpc instance_npcname("신전가드#qdms111");
+	disablenpc instance_npcname("신전가드#qdms121");
+	disablenpc instance_npcname("신전가드#qdms131");
+	disablenpc instance_npcname("신전가드#qdms141");
+	disablenpc instance_npcname("신전가드#qdms151");
+	disablenpc instance_npcname("신전가드#qdms161");
+	disablenpc instance_npcname("신전가드#qdms171");
+	disablenpc instance_npcname("신전가드#qdms181");
+	disablenpc instance_npcname("신전가드#qdms102");
+	disablenpc instance_npcname("신전가드#qdms112");
+	disablenpc instance_npcname("신전가드#qdms122");
+	disablenpc instance_npcname("신전가드#qdms132");
+	disablenpc instance_npcname("신전가드#qdms142");
+	disablenpc instance_npcname("신전가드#qdms152");
+	disablenpc instance_npcname("신전가드#qdms162");
+	disablenpc instance_npcname("신전가드#qdms172");
+	disablenpc instance_npcname("신전가드#qdms182");
+
+	// Step 2 - Gathering Place of Wolves
+	disablenpc instance_npcname("미리암#dms201");
+	disablenpc instance_npcname("신전가드#dms201");
+	disablenpc instance_npcname("신전가드#dms211");
+	disablenpc instance_npcname("신전가드#dms221");
+	disablenpc instance_npcname("신전가드#dms231");
+	disablenpc instance_npcname("신전가드#dms241");
+	disablenpc instance_npcname("#msna01");
+
+	// Step 3 - Gathering Place of Wolves
+	disablenpc instance_npcname("미리암#dms301");
+	disablenpc instance_npcname("라마쿠스#dms201");
+	disablenpc instance_npcname("요피#dms221");
+	disablenpc instance_npcname("쿤#dms211");
+	disablenpc instance_npcname("신전가드#dms301");
+	disablenpc instance_npcname("신전가드#dms311");
+	disablenpc instance_npcname("신전가드#dms321");
+	disablenpc instance_npcname("신전가드#dms331");
+	disablenpc instance_npcname("신전가드#dms341");
+
+	// Step 4 - Gathering Place of Wolves
+	disablenpc instance_npcname("미리암#dms401");
+	disablenpc instance_npcname("라마쿠스#dms301");
+	disablenpc instance_npcname("쿤#dms311");
+	disablenpc instance_npcname("요피#dms321");
+	disablenpc instance_npcname("신전가드#dms401");
+	disablenpc instance_npcname("신전가드#dms411");
+	disablenpc instance_npcname("신전가드#dms421");
+	disablenpc instance_npcname("신전가드#dms431");
+	disablenpc instance_npcname("신전가드#dms441");
+
+	// Step 5 - Gathering Place of Wolves
+	disablenpc instance_npcname("미리암#dms501");
+	disablenpc instance_npcname("라마쿠스#dms401");
+	disablenpc instance_npcname("쿤#dms411");
+	disablenpc instance_npcname("요피#dms421");
+	disablenpc instance_npcname("슐랑#dms101");
+	disablenpc instance_npcname("신전가드#dms501");
+	disablenpc instance_npcname("신전가드#dms511");
+	disablenpc instance_npcname("신전가드#dms521");
+	disablenpc instance_npcname("신전가드#dms531");
+	disablenpc instance_npcname("신전가드#dms541");
+
+	// Step 6 - Gathering Place of Wolves
+	// disablenpc instance_npcname("#dmss101");
+	disablenpc instance_npcname("미리암#dms601");
+	disablenpc instance_npcname("라마쿠스#dms501");
+	disablenpc instance_npcname("쿤#dms511");
+	disablenpc instance_npcname("요피#dms521");
+	disablenpc instance_npcname("슐랑#dms201");
+	disablenpc instance_npcname("바곳#dms101");
+	disablenpc instance_npcname("대신관#dms101");
+	disablenpc instance_npcname("신전가드#dms601");
+	disablenpc instance_npcname("신전가드#dms611");
+	disablenpc instance_npcname("신전가드#dms621");
+	disablenpc instance_npcname("#effc01");
+
+	// Step 7 + 8 - Gathering Place of Wolves
+	// disablenpc instance_npcname("#dms701");
+	disablenpc instance_npcname("미리암#dms701");
+	disablenpc instance_npcname("라마쿠스#dms601");
+	disablenpc instance_npcname("쿤#dms611");
+	disablenpc instance_npcname("요피#dms621");
+	disablenpc instance_npcname("니르엔#dms101");
+	disablenpc instance_npcname("대신관#dms201");
+	disablenpc instance_npcname("바곳#dms201");
+	disablenpc instance_npcname("슐랑#dms301");
+	disablenpc instance_npcname("신전가드#dms701");
+	disablenpc instance_npcname("신전가드#dms711");
+	disablenpc instance_npcname("신전가드#dms721");
+	disablenpc instance_npcname("신전가드#dms731");
+	disablenpc instance_npcname("신전가드#dms741");
+	disablenpc instance_npcname("신전가드#dms751");
+	disablenpc instance_npcname("신전가드#dms761");
+	disablenpc instance_npcname("신전가드#dms771");
+
+	// Step 9 - Gathering Place of Wolves
+	disablenpc instance_npcname("#dmswch02");
+	disablenpc instance_npcname("미리암#dms801");
+
+	// Step 10 - Gathering Place of Wolves
+	disablenpc instance_npcname("수아드#dms102");
+
+	disablenpc instance_npcname("제드#dms101");
+	disablenpc instance_npcname("니르엔#dms201");
+
+	disablenpc instance_npcname("신전가드#dms802");
+	disablenpc instance_npcname("신전가드#dms812");
+	disablenpc instance_npcname("신전가드#dms822");
+	disablenpc instance_npcname("신전가드#dms832");
+	disablenpc instance_npcname("신전가드#dms842");
+
+	disablenpc instance_npcname("신전가드#dms801");
+	disablenpc instance_npcname("신전가드#dms811");
+	disablenpc instance_npcname("신전가드#dms821");
+	disablenpc instance_npcname("신전가드#dms831");
+	disablenpc instance_npcname("신전가드#dms841");
+	disablenpc instance_npcname("신전가드#dms851");
+	disablenpc instance_npcname("신전가드#dms861");
+	disablenpc instance_npcname("신전가드#dms871");
+	disablenpc instance_npcname("신전가드#dms881");
+	disablenpc instance_npcname("신전가드#dms891");
+
+	disablenpc instance_npcname("하트헌터#dms101");
+	disablenpc instance_npcname("하트헌터#dms111");
+	disablenpc instance_npcname("하트헌터#dms121");
+	disablenpc instance_npcname("하트헌터#dms131");
+	disablenpc instance_npcname("하트헌터#dms141");
+	disablenpc instance_npcname("하트헌터#dms151");
+	disablenpc instance_npcname("하트헌터#dms161");
+	disablenpc instance_npcname("하트헌터#dms171");
+	disablenpc instance_npcname("하트헌터#dms181");
+	disablenpc instance_npcname("하트헌터#dms191");
+
+	disablenpc instance_npcname("성난 군중#dms201");
+	disablenpc instance_npcname("성난 군중#dms211");
+	disablenpc instance_npcname("성난 군중#dms221");
+	disablenpc instance_npcname("성난 군중#dms231");
+	disablenpc instance_npcname("성난 군중#dms241");
+	disablenpc instance_npcname("성난 군중#dms251");
+	disablenpc instance_npcname("성난 군중#dms261");
+	disablenpc instance_npcname("성난 군중#dms271");
+	disablenpc instance_npcname("성난 군중#dms281");
+	disablenpc instance_npcname("성난 군중#dms291");
+
+	disablenpc instance_npcname("성난 군중#dms202");
+	disablenpc instance_npcname("성난 군중#dms212");
+	disablenpc instance_npcname("성난 군중#dms222");
+	disablenpc instance_npcname("성난 군중#dms232");
+	disablenpc instance_npcname("성난 군중#dms242");
+
+	// daily (2@nyr)
+	disablenpc instance_npcname("신전가드#2dms221");
+	disablenpc instance_npcname("신전가드#2dms231");
+	disablenpc instance_npcname("신전가드#2dms241");
+	disablenpc instance_npcname("#2mstep11");
+	disablenpc instance_npcname("신전가드#2dms201");
+	disablenpc instance_npcname("신전가드#2dms251");
+	disablenpc instance_npcname("신전가드#2dms211");
+
+	disablenpc instance_npcname("#2ar101sw");
+	disablenpc instance_npcname("신전가드#2dms101");
+	disablenpc instance_npcname("신전가드#2dms111");
+	disablenpc instance_npcname("신전가드#2dms121");
+	disablenpc instance_npcname("신전가드#2dms131");
+	disablenpc instance_npcname("신전가드#2dms141");
+	disablenpc instance_npcname("신전가드#2dms151");
+	disablenpc instance_npcname("신전가드#2dms161");
+	disablenpc instance_npcname("#2mstep01");
+	disablenpc instance_npcname("#2mstep02");
+	disablenpc instance_npcname("보안장치#2dms10");
+	disablenpc instance_npcname("#2mstep03");
+	disablenpc instance_npcname("#2mstep04");
+	disablenpc instance_npcname("보안장치#2dms20");
+	disablenpc instance_npcname("#2mstep05");
+	disablenpc instance_npcname("#2mstep06");
+	disablenpc instance_npcname("보안장치#2dms30");
+	disablenpc instance_npcname("#2mstep07");
+	disablenpc instance_npcname("#2mstep08");
+	disablenpc instance_npcname("#2mstep09");
+	disablenpc instance_npcname("보안장치#2dms40");
+	disablenpc instance_npcname("#2mstep10");
+	disablenpc instance_npcname("#msnavi01");
+	disablenpc instance_npcname("신전가드#2dms261");
+
+	disablenpc instance_npcname("#2ar201sw");
+	disablenpc instance_npcname("하트헌터#2dms50");
+
+	disablenpc instance_npcname("하트헌터#2dms10");
+	disablenpc instance_npcname("하트헌터#2dms11");
+	disablenpc instance_npcname("하트헌터#2dms12");
+	disablenpc instance_npcname("하트헌터#2dms13");
+
+	disablenpc instance_npcname("하트헌터#2dms20");
+	disablenpc instance_npcname("하트헌터#2dms21");
+	disablenpc instance_npcname("하트헌터#2dms22");
+
+	disablenpc instance_npcname("하트헌터#2dms30");
+	disablenpc instance_npcname("하트헌터#2dms31");
+	disablenpc instance_npcname("하트헌터#2dms32");
+
+	disablenpc instance_npcname("하트헌터#2dms40");
+	disablenpc instance_npcname("하트헌터#2dms41");
+	disablenpc instance_npcname("하트헌터#2dms42");
+	disablenpc instance_npcname("하트헌터#2dms43");
+	disablenpc instance_npcname("하트헌터#2dms44");
+	disablenpc instance_npcname("하트헌터#2dms45");
+	disablenpc instance_npcname("하트헌터#2dms46");
+	disablenpc instance_npcname("하트헌터#2dms47");
+	disablenpc instance_npcname("하트헌터#2dms48");
+	disablenpc instance_npcname("하트헌터#2dms49");
+
+	// warps
+	disablenpc instance_npcname("#dmswp01");
+	disablenpc instance_npcname("#dmwrp02");
+
+	disablenpc instance_npcname("#mstep01");
+	disablenpc instance_npcname("#mstep02");
+	disablenpc instance_npcname("#mstep03");
+	disablenpc instance_npcname("#mstep04");
+	disablenpc instance_npcname("#mstep05");
+	disablenpc instance_npcname("#mstep06");
+	disablenpc instance_npcname("#mstep07");
+	disablenpc instance_npcname("#mstep08");
+	disablenpc instance_npcname("#mstep09");
+	disablenpc instance_npcname("#mstep10");
+	disablenpc instance_npcname("#mstep11");
+	end;
+}
+
+//------------------------------------------------------------
+// Warp NPCs
+//------------------------------------------------------------
+1@nyr,179,168,0	warp	#dmswp01	1,1,2@nyr,34,221
+
+1@nyr,43,26,0	script	#dmwrp02	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp "rachel",117,197;
+	if ('nyr_main_step == 22) {
+		if (ep18_1_main == 51) {
+			changequest 17520,17521;
+			ep18_1_main = 52;
+		}
+	}
+	end;
+}
+
+2@nyr,56,104,0	warp	#mstep01	1,1,2@nyr,49,104
+
+2@nyr,49,55,0	script	#mstep02	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,53,55;
+	if ('nyr_main_step == 8)
+		navigateto("2@nyr",119,73);
+	end;
+}
+
+2@nyr,119,73,0	warp	#mstep03	1,1,2@nyr,119,65
+
+2@nyr,119,67,0	script	#mstep04	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,119,75;
+	if ('nyr_main_step == 10)
+		navigateto("2@nyr",183,104);
+	end;
+}
+
+2@nyr,183,104,0	warp	#mstep05	1,1,2@nyr,190,104
+
+2@nyr,186,104,0	script	#mstep06	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,180,104;
+	if ('nyr_main_step == 12)
+		navigateto("2@nyr",133,109);
+	end;
+}
+
+2@nyr,120,123,0	warp	#mstep07	1,1,2@nyr,120,126
+
+2@nyr,120,137,0	script	#mstep08	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,120,147;
+	if ('nyr_main_step == 13)
+		navigateto("2@nyr",118,199);
+	end;
+}
+
+2@nyr,120,141,0	script	#mstep09	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,120,134;
+	if ('nyr_main_step == 16)
+		navigateto("2@nyr",151,131);
+	end;
+}
+
+2@nyr,151,131,0	script	#mstep10	WARPNPC,1,1,{
+	end;
+OnTouch_:
+	warp 'map_2nyr$,159,131;
+	if ('nyr_main_step == 16)
+		navigateto("2@nyr",203,220);
+	end;
+}
+
+2@nyr,203,220,0	warp	#mstep11	1,1,1@nyr,65,169
+
+
+//------------------------------------------------------------
+// Step 1
+//------------------------------------------------------------
+1@nyr,192,31,3	script	미리암#dms101	EP18_NPC_MIRIAM,5,5,{
+	end;
+OnTouch:
+	if ('nyr_main_step == 1) {
+		navigateto("1@nyr",125,41);
+		end;
+	}
+	if ('nyr_main_step != 0)
+		end;
+
+	'nyr_main_step = 1;
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "모험가님!";
+	emotion ET_SURPRISE;
+	sleep2 1000;
+	navigateto("1@nyr",125,41);
+	setpcblock PCBLOCK_NPC, false;
+	npctalk "저 앞이 집결지예요.";
+	unitwalk getnpcid(0), 162,31, instance_npcname("미리암#dms101") + "::OnMove1";
+	sleep 2000;
+	npctalk "이쪽으로 오세요.";
+	end;
+
+OnMove1:
+	unitwalk getnpcid(0), 137,31, instance_npcname("미리암#dms101") + "::OnMove2";
+	end;
+OnMove2:
+	unitwalk getnpcid(0), 128,41, instance_npcname("미리암#dms101") + "::OnMove3";
+	npctalk "저 앞이네요.";
+	end;
+OnMove3:
+	if ('nyr_main_step != 1)
+		end;
+	'nyr_main_step = 2;
+
+	npctalk "수아드, 지금 상황은?";
+	npctalk "더 이상의 진입은 불허한다!", instance_npcname("신전가드#dms101");
+	sleep 1000;
+	npctalk "미리암, 모험가. 좀 더 이쪽으로.", instance_npcname("수아드#dms101");
+	sleep 1000;
+	npctalk "너무하네! 우리를 범죄자 취급하고 있어!", instance_npcname("쿤#dms112");
+	npctalk "우리가 못들어 올 곳에 왔나?", instance_npcname("성난 군중#dms131");
+	sleep 1500;
+	npctalk "저기, 저땅이 우리 고조할머니 땅이었다고!", instance_npcname("성난 군중#dms121");
+	npctalk "우리도 이곳에 올 권리 정도는 있지!", instance_npcname("성난 군중#dms161");
+	npctalk "파티의 리더분은 아직 도착하지 않았나요?";
+	sleep 2000;
+	npctalk "그래!! 어서 물러 나라!", instance_npcname("성난 군중#dms191");
+	npctalk "우리를 밀어냈잖아!", instance_npcname("성난 군중#dms181");
+	sleep 2000;
+	npctalk "우리가 사람으로 안 보이니?", instance_npcname("성난 군중#dms101");
+	npctalk "우리가 그렇게 만만해 보여?", instance_npcname("성난 군중#dms131");
+	sleep 2000;
+	npctalk "우리는 정당한 권리를 주장하고 있다고!", instance_npcname("성난 군중#dms121");
+	npctalk "뭐야, 돌려줘요!! 우리 땅!!", instance_npcname("성난 군중#dms181");
+	sleep 2000;
+	npctalk "우리는 이 땅의 오랜 주인이자 이주민에게 거처를 빼앗긴 실향민이다.", instance_npcname("성난 군중#dms101");
+	npctalk "우리를 방해하고 있는게 누구냐!", instance_npcname("성난 군중#dms141");
+	sleep 2000;
+	npctalk "우리는 이 땅의 오랜 주인으로서 우리의 정당한 권리를 주장하러 왔다.", instance_npcname("성난 군중#dms101");
+	npctalk "우리의 땅을 불법 점거하고 있는 자들은 물러 나라!", instance_npcname("성난 군중#dms191");
+	sleep 2000;
+	npctalk "불법 시위는 불허한다! 해산하라!", instance_npcname("신전가드#dms101");
+	npctalk "누구더러 불법이래?", instance_npcname("성난 군중#dms151");
+	npctalk "지금 우리한테 불법이라고 한 거야?", instance_npcname("성난 군중#dms171");
+	sleep 2000;
+	npctalk "우리의 요구사항은 다음과 같다!", instance_npcname("성난 군중#dms101");
+	sleep 2000;
+	npctalk "하나! 우리는 이땅의 주인이다! 불법점거한 이들은 물러나라!", instance_npcname("성난 군중#dms101");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms111");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms121");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms131");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms141");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms151");
+	sleep 300;
+	npctalk "물러나라!", instance_npcname("성난 군중#dms161");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms171");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms181");
+	npctalk "물러나라!", instance_npcname("성난 군중#dms191");
+	sleep 2000;
+	npctalk "하나! 근거 없는 차별 정책 폐기하고 우리의 권리를 인정하라!", instance_npcname("성난 군중#dms101");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms111");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms121");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms131");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms141");
+	sleep 500;
+	npctalk "인정하라!", instance_npcname("성난 군중#dms151");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms161");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms171");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms181");
+	npctalk "인정하라!", instance_npcname("성난 군중#dms191");
+	end;
+
+OnStartMove2:
+	npcspeed 100;
+	unitwalk getnpcid(0), 137,31, instance_npcname("미리암#dms101") + "::OnMove4";
+	end;
+OnMove4:
+	disablenpc instance_npcname("미리암#dms101");
+	end;
+
+OnGuy1:
+	disablenpc instance_npcname("라마쿠스#dms102");
+	end;
+OnGuy2:
+	disablenpc instance_npcname("쿤#dms112");
+	end;
+OnGuy3:
+	disablenpc instance_npcname("요피#dms122");
+	end;
+}
+
+1@nyr,125,41,3	script	수아드#dms101	4_EP18_SUAD,{
+	if (is_party_leader() == false) {
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "파티의 리더는 어디에 있지?";
+		close3;
+	}
+	if ('nyr_main_step == 2) {
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "지금 상황은 썩 좋지는 않아, 무장 가드들이 저렇게나... 경비를 늘린 것 같아.";
+		next;
+		select( "역시 상단 습격 문제가 컸나보네요." );
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "아니면 정보가 샜거나. 그러지 않고서야 이렇게 대비를 했을 리가 없지.";
+		next;
+		cutin "",255;
+		mes "[신전가드]";
+		mes "더 이상 진입은 불허한다. 순순히 체포에 응하라.";
+		next;
+		mes "[원주민들]";
+		mes "우리가 뭘 했다고! 우리는 이곳에 들어오면 안 되는 건가?";
+		next;
+		mes "[원주민들]";
+		mes "이곳은 원래 우리 땅이었어! 우리 땅에 원 주인이 들어가겠다는데 왜 말려?";
+		next;
+		mes "[원주민들]";
+		mes "지금 불법 점거하고 있는 건 당신들이야!";
+		next;
+		mes "[원주민들]";
+		mes "뭐야, 돌려줘요!! 우리 땅!!";
+		next;
+		mes "[주민 대표]";
+		mes "우리는 이 땅의 오랜 주인이자 이주민에게 거처를 빼앗긴 실향민이다.";
+		next;
+		mes "[주민 대표]";
+		mes "우리는 이 땅의 오랜 주인으로서 우리의 정당한 권리를 주장하러 왔다.";
+		next;
+		mes "[주민 대표]";
+		mes "우리의 요구사항은 다음과 같다.";
+		next;
+		mes "[주민 대표]";
+		mes "하나! 우리는...";
+		next;
+		npctalk "지금이야. 조용히 따라와.", instance_npcname("라마쿠스#dms102");
+		unitwalk getnpcid(0,instance_npcname("라마쿠스#dms102")), 145,34, instance_npcname("미리암#dms101") + "::OnGuy1";
+		sleep2 1000;
+		unitwalk getnpcid(0,instance_npcname("쿤#dms112")), 145,32, instance_npcname("미리암#dms101") + "::OnGuy2";
+		unitwalk getnpcid(0,instance_npcname("요피#dms122")), 145,31, instance_npcname("미리암#dms101") + "::OnGuy3";
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "수아드. 혹시 상단을 약탈했던 사람들에게 따로 지시를 내린 것 있어?";
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "아니? 왜?";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "저기, 저 사람들 보여? 조심스럽게 움직이고 있는. 상단 습격을 했던 무리인데.";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "따로 지시를 내린건 없는데. 단독 행동을 하려는 건가?";
+		next;
+		select("신전쪽으로 향하는 것 같은데요.");
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "사전에 이야기 되지 않은 단독 행동이라. 이미 전적이 있는데 좋은 일은 아니겠죠? 조용히 뒤를 밟아야겠어요. 또 무슨 사고를 칠지 모르니.";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "혼자 가려고?";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "뒤를 밟는 건데 여럿이 움직일 필요가 있어? 혼자서도 충분해. 너는 여기 있어. 무슨 일이 있으면 신호할게.";
+		next;
+		if ('nyr_main_step == 2) {
+			'nyr_main_step = 3;
+			enablenpc instance_npcname("#dmswp01");
+			enablenpc instance_npcname("미리암#dms201");
+		}
+		donpcevent instance_npcname("미리암#dms101") + "::OnStartMove2";
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "괜찮을지. 뒤만 밟는다지만, 저 놈들의 목적을 알 수 없으니까. 무장을 해제했다고는 하지만 무엇을 숨겼을지도 모르고...";
+		next;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 제가 따라갈게요.";
+		mes "[수아드]";
+		mes "그럼 안심이고. 내가 여기서 섣불리 움직일 수도 없으니. 미리암이 흔적을 남겼테니 그걸 따라가. 그럼 부탁하지.";
+		close2;
+		navigateto("1@nyr",179,164);
+		cutin "",255;
+		end;
+	}
+	if ('nyr_main_step == 3) {
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "조심하도록.";
+		close2;
+		navigateto("1@nyr",179,164);
+		cutin "",255;
+		end;
+	}
+	end;
+}
+
+1@nyr,130,34,1	script	라마쿠스#dms102	EP18_ARMED_VILLAGER01,{
+	end;
+OnInstanceInit:
+	npcspeed 100;
+	end;
+}
+1@nyr,132,32,1	duplicate(라마쿠스#dms102)	쿤#dms112	EP18_ARMED_VILLAGER02
+1@nyr,130,31,1	duplicate(라마쿠스#dms102)	요피#dms122	EP18_ARMED_VILLAGER03
+
+1@nyr,117,38,7	duplicate(dummy_npc)	성난 군중#dms171	4_EP18_GW_MIDDLE02
+1@nyr,139,46,3	duplicate(dummy_npc)	신전가드#dms101	4_M_RASWORD
+1@nyr,132,46,3	duplicate(dummy_npc)	신전가드#dms111	4_M_RASWORD
+1@nyr,126,46,3	duplicate(dummy_npc)	신전가드#dms121	4_M_RASWORD
+1@nyr,122,46,3	duplicate(dummy_npc)	신전가드#dms131	4_M_RASWORD
+1@nyr,118,46,5	duplicate(dummy_npc)	신전가드#dms141	4_M_RASWORD
+1@nyr,110,46,5	duplicate(dummy_npc)	신전가드#dms151	4_M_RASWORD
+
+1@nyr,120,44,5	duplicate(dummy_npc)	신전가드#dms181	4_M_RASWORD
+1@nyr,124,44,3	duplicate(dummy_npc)	신전가드#dms191	4_M_RASWORD
+1@nyr,137,38,1	duplicate(dummy_npc)	성난 군중#dms101	4_EP18_GW_MAN01
+1@nyr,124,36,1	duplicate(dummy_npc)	성난 군중#dms111	4_EP18_GW_WOMAN01
+1@nyr,131,38,1	duplicate(dummy_npc)	성난 군중#dms121	4_EP18_GW_MAN02
+1@nyr,127,34,1	duplicate(dummy_npc)	성난 군중#dms131	4_M_MIDDLE
+1@nyr,121,40,7	duplicate(dummy_npc)	성난 군중#dms141	4_EP18_GW_WOMAN02
+1@nyr,122,37,7	duplicate(dummy_npc)	성난 군중#dms151	4_EP18_GW_MIDDLE01
+1@nyr,118,35,7	duplicate(dummy_npc)	성난 군중#dms161	4_M_RACHMAN1
+1@nyr,114,36,7	duplicate(dummy_npc)	성난 군중#dms181	4_F_SHABBY
+1@nyr,116,41,7	duplicate(dummy_npc)	성난 군중#dms191	4_EP18_GW_WOMAN01
+
+
+//------------------------------------------------------------
+// Step 2
+//------------------------------------------------------------
+// (disabled since we are using Miriam)
+// 2@nyr,37,219,0	script	#ar101sw	HIDDEN_WARP_NPC,5,5
+
+2@nyr,37,219,3	script	미리암#dms201	4_EP18_MIRIAM,5,5,{
+	if (is_party_leader() == false) {
+		npctalk "파티의 리더분은요?";
+		end;
+	}
+	if ('nyr_main_step != 4)
+		end;
+	mes "[신전가드]";
+	mes "이곳은 접근이 금지된 곳이다.";
+	next;
+	cutin "ep18_miriam_01.png",2;
+	mes "[미리암]";
+	mes "나는 대신관 유스 아말의 딸, 미리암입니다. 이곳으로 수상한 사람들이 진입한 것을 보고 추적해왔습니다.";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "대신관님의 일을 도우러 오셨습니까?";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "일을, 돕다뇨...? 아버님이 이곳에 계십니까?";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "아...";
+	next;
+	mapannounce 'map_2nyr$, "덜그럭.", bc_map, 0xFFCC;
+	mes "[신전가드]";
+	mes "이곳에 수상한 사람은 없었습니다. 이만 돌아가십시오.";
+	next;
+	mapannounce 'map_2nyr$, "조심 좀 하라고.", bc_map, 0xFFCC;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "정말 수상한 사람들이 오지 않았습니까? 분명히 이곳으로 들어갔습니다. 잠시만 시간을 주시면 빠르게 확인하겠습니다.";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "이 이상 다가오시면 대응하겠습니다.";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "... 어쩔 수 없군요. 모험가님?";
+	next;
+	select("네. 제가 상대할 테니 추적하세요.");
+	mes "[미리암]";
+	mes "그럼 부탁드릴게요! 흔적을 남길테니 찾아오세요.";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "침입자...! 읍!!!";
+	if ('nyr_main_step == 4) {
+		'nyr_main_step = 5;
+		donpcevent instance_npcname("nyr_step_2") + "::OnStart";
+	}
+	close;
+
+OnTouch:
+	if ('nyr_main_step != 3)
+		end;
+	'nyr_main_step = 4;
+	npctalk "모험가님?";
+	npctalk "모험가님? 왜 여기에 계신 거죠?";
+	sleep 2000;
+	npctalk "수아드가 보낸 거겠네요. 쓸데없는 걱정을 하기는.";
+	sleep 1000;
+	enablenpc instance_npcname("신전가드#dms201");
+	enablenpc instance_npcname("신전가드#dms211");
+	enablenpc instance_npcname("신전가드#dms221");
+	enablenpc instance_npcname("신전가드#dms231");
+	enablenpc instance_npcname("신전가드#dms241");
+	sleep 500;
+	npctalk "누구냐! 신분을 밝혀라.", instance_npcname("신전가드#dms201");
+	npctalk "... 아무래도 조용히 지나가긴 힘든 것 같죠?";
+	end;
+}
+
+2@nyr,35,215,7	duplicate(dummy_npc)	신전가드#dms201	4_M_RASWORD
+2@nyr,34,212,7	duplicate(dummy_npc)	신전가드#dms211	4_M_RASWORD
+2@nyr,36,212,1	duplicate(dummy_npc)	신전가드#dms221	4_M_RASWORD
+2@nyr,33,209,7	duplicate(dummy_npc)	신전가드#dms231	4_M_RASWORD
+2@nyr,38,209,1	duplicate(dummy_npc)	신전가드#dms241	4_M_RASWORD
+
+
+2@nyr,1,1,0	script	nyr_step_2	-1,{
+	end;
+OnStart:
+	// disabled npcs from step 1
+	disablenpc instance_npcname("미리암#dms101");
+	disablenpc instance_npcname("수아드#dms101");
+	disablenpc instance_npcname("라마쿠스#dms102");
+	disablenpc instance_npcname("쿤#dms112");
+	disablenpc instance_npcname("요피#dms122");
+	disablenpc instance_npcname("성난 군중#dms171");
+	disablenpc instance_npcname("신전가드#dms101");
+	disablenpc instance_npcname("신전가드#dms111");
+	disablenpc instance_npcname("신전가드#dms121");
+	disablenpc instance_npcname("신전가드#dms131");
+	disablenpc instance_npcname("신전가드#dms141");
+	disablenpc instance_npcname("신전가드#dms151");
+	disablenpc instance_npcname("신전가드#dms181");
+	disablenpc instance_npcname("신전가드#dms191");
+	disablenpc instance_npcname("성난 군중#dms101");
+	disablenpc instance_npcname("성난 군중#dms111");
+	disablenpc instance_npcname("성난 군중#dms121");
+	disablenpc instance_npcname("성난 군중#dms131");
+	disablenpc instance_npcname("성난 군중#dms141");
+	disablenpc instance_npcname("성난 군중#dms151");
+	disablenpc instance_npcname("성난 군중#dms161");
+	disablenpc instance_npcname("성난 군중#dms181");
+	disablenpc instance_npcname("성난 군중#dms191");
+	disablenpc instance_npcname("#dmswp01");
+
+	disablenpc instance_npcname("미리암#dms201");
+	disablenpc instance_npcname("신전가드#dms201");
+	disablenpc instance_npcname("신전가드#dms211");
+	disablenpc instance_npcname("신전가드#dms221");
+	disablenpc instance_npcname("신전가드#dms231");
+	disablenpc instance_npcname("신전가드#dms241");
+	sleep 500;
+	.@label$ = instance_npcname("nyr_step_2") + "::OnMobDead";
+	monster 'map_2nyr$,35,215,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,34,212,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,36,212,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,33,209,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,38,209,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 5)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("nyr_step_2") + "::OnMobDead") < 1) {
+		'nyr_main_step = 6;
+		mapannounce 'map_2nyr$, "어디선가 싸우는 소리가 들렸는데?", bc_map, 0xFFCC;
+		enablenpc instance_npcname("#mstep01");
+		enablenpc instance_npcname("미리암#dms301");
+		enablenpc instance_npcname("라마쿠스#dms201");
+		enablenpc instance_npcname("요피#dms221");
+		enablenpc instance_npcname("쿤#dms211");
+		enablenpc instance_npcname("#msna01");
+	}
+	end;
+}
+
+2@nyr,37,145,0	script	#msna01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('nyr_main_step == 6)
+		navigateto("2@nyr",56,104);
+	end;
+}
+
+
+//------------------------------------------------------------
+// Step 3
+//------------------------------------------------------------
+2@nyr,43,94,3	script	미리암#dms301	4_EP18_MIRIAM,5,5,{
+	end;
+OnTouch:
+	if ('nyr_main_step != 6)
+		end;
+	npctalk "잘 찾아 오셨군요. 쉿- 저기 저 사람들 보여요?";
+	npctalk "책 냄새 맡으니까 졸리네.", instance_npcname("라마쿠스#dms201");
+	end;
+}
+
+2@nyr,37,93,5	script	라마쿠스#dms201	EP18_ARMED_VILLAGER01,{
+	if ('nyr_main_step != 6)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[미리암]";
+	mes "지금 여기서 뭘 하는 거야?";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "앗씨! 깜짝이야! 그러는 너야말로 여기서 뭐하는 거야? 모험가까지 달고?";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "너희는 지금 이곳에 있으면 안돼. 신전측이 알게 되면 우리의 입장이 더 난처해지기만 할 뿐이라고.";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "보면 몰라? 서고를 터는 거잖아. 여기 이곳에 이주민의 비밀이 엄청나게 많이 있을 텐데.";
+	npctalk "생각해 봐. 이걸 모두 우리가 손에 넣는다면?", instance_npcname("쿤#dms211");
+	npctalk "우리는 약점을 잡을 수 있는 거지!", instance_npcname("요피#dms221");
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "그건 차후에 생각해도 될 일이야. 일단은 돌아가. 복귀해. 지금 너희의 행동 때문에 우리가 더 위험해질 수 있어.";
+	next;
+	cutin "",255;
+	mes "[요피]";
+	mes "너나 돌아가, 미리암. 더 이상 답답한 너희와는 행동을 같이 하지 않을 거야.";
+	npctalk "데가 뭔데 우리한테 미래라 래라야?", instance_npcname("쿤#dms211");
+	next;
+	enablenpc instance_npcname("신전가드#dms301");
+	mes "[신전가드]";
+	mes "여기, 침입자다!";
+	next;
+	enablenpc instance_npcname("신전가드#dms311");
+	enablenpc instance_npcname("신전가드#dms321");
+	enablenpc instance_npcname("신전가드#dms331");
+	enablenpc instance_npcname("신전가드#dms341");
+	mes "[신전가드]";
+	mes "모두 무기를 버리고 손을 들어라!";
+	next;
+	select("어떻게 하죠?");
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "일단 수가 많지 않으니 상대 하도록 하죠.";
+	next;
+	cutin "",255;
+	mes "[쿤]";
+	mes "좋은 타이밍에 왔네. 그럼 우린 이만!";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "기다려!! 모험가님!";
+	next;
+	select("여기는 맡기세요!");
+	if ('nyr_main_step == 6) {
+		'nyr_main_step = 7;
+		donpcevent instance_npcname("nyr_step_3") + "::OnStart";
+	}
+	cutin "",255;
+	end;
+}
+
+2@nyr,35,90,5	duplicate(dummy_npc)	요피#dms221	EP18_ARMED_VILLAGER03
+2@nyr,32,93,1	duplicate(dummy_npc)	쿤#dms211	EP18_ARMED_VILLAGER02
+
+2@nyr,1,1,0	script	nyr_step_3	-1,{
+	end;
+OnStart:
+	disablenpc instance_npcname("미리암#dms301");
+	disablenpc instance_npcname("라마쿠스#dms201");
+	disablenpc instance_npcname("요피#dms221");
+	disablenpc instance_npcname("쿤#dms211");
+	disablenpc instance_npcname("신전가드#dms301");
+	disablenpc instance_npcname("신전가드#dms311");
+	disablenpc instance_npcname("신전가드#dms321");
+	disablenpc instance_npcname("신전가드#dms331");
+	disablenpc instance_npcname("신전가드#dms341");
+	.@label$ = instance_npcname("nyr_step_3") + "::OnMobDead";
+	monster 'map_2nyr$,45,96,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,47,94,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,43,96,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,47,98,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,44,98,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 7)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("nyr_step_3") + "::OnMobDead") < 1) {
+		'nyr_main_step = 8;
+		mapannounce 'map_2nyr$, "왠지 등 뒤가 오싹한데... 누가 지켜보는 것 같은...?", bc_map, 0xFFCC;
+		disablenpc instance_npcname("#mstep01");
+		enablenpc instance_npcname("#mstep02");
+		enablenpc instance_npcname("#mstep03");
+		enablenpc instance_npcname("미리암#dms401");
+		enablenpc instance_npcname("라마쿠스#dms301");
+		enablenpc instance_npcname("쿤#dms311");
+		enablenpc instance_npcname("요피#dms321");
+	}
+	end;
+}
+
+2@nyr,45,96,3	duplicate(dummy_npc)	신전가드#dms301	4_M_RASWORD
+2@nyr,47,94,3	duplicate(dummy_npc)	신전가드#dms311	4_M_RASWORD
+2@nyr,43,96,3	duplicate(dummy_npc)	신전가드#dms321	4_M_RASWORD
+2@nyr,47,98,3	duplicate(dummy_npc)	신전가드#dms331	4_M_RASWORD
+2@nyr,44,98,3	duplicate(dummy_npc)	신전가드#dms341	4_M_RASWORD
+
+
+//------------------------------------------------------------
+// Step 4
+//------------------------------------------------------------
+2@nyr,87,47,5	script	미리암#dms401	4_EP18_MIRIAM,5,5,{
+	end;
+OnTouch:
+	npctalk "이쪽에서 소리가 나요.";
+	npctalk "심... 장....", instance_npcname("라마쿠스#dms301");
+	end;
+}
+
+2@nyr,99,47,1	script	라마쿠스#dms301	EP18_ARMED_VILLAGER01,{
+	if ('nyr_main_step != 8)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[라마쿠스]";
+	mes "찾았어? 여긴 무슨 교단 얘기밖에 없냐?";
+	next;
+	mes "[쿤]";
+	mes "아직이야. 이쪽에는 없나 봐. 아, 잠깐... 교황의...?";
+	next;
+	mes "[요피]";
+	mes "관련 없는 책은 내버려 둬. 우리가 찾는 건 그게 아니잖아.";
+	next;
+	cutin "ep18_miriam_03.png",0;
+	mes "[미리암]";
+	mes "너희...!";
+	next;
+	select("쉿- 잠시만요.");
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "아무리 비밀서고라고 해도 그런 책을 이런데 아무렇게나 꽂아 뒀을 리는 없지.";
+	next;
+	mes "[쿤]";
+	mes "그럼 비밀서고 내에서도 또 비밀서고가 있는 걸까?";
+	next;
+	mes "[요피]";
+	mes "그건 나도 모르지. 그냥 찾자.";
+	next;
+	mes "[쿤]";
+	mes "제목이라도 알면 좋을 텐데.";
+	next;
+	mes "[라마쿠스]";
+	mes "그걸 알고 있으면 이러고 있겠냐. 비슷해 보이는 거는 다 가지고 오라는데. 얼른 찾아.";
+	next;
+	select("뭔가 특정 책을 찾는 것 같지 않나요?");
+	mes "[미리암]";
+	mes "특정한 책...? 약점을 잡을 책이 아니라?";
+	next;
+	cutin "ep18_miriam_03.png",0;
+	mes "[미리암]";
+	mes "아니, 이것들이? 야! 너희가 찾는게 뭐야? 목적이 뭔데?";
+	next;
+	cutin "",255;
+	mes "[요피]";
+	mes "아, 또 왔어! 왜 몰래 듣고 그래? 구린 속내가 있는 것처럼.";
+	npctalk "왜 자꾸 쫓아 와? 왜 자꾸 방해해?", instance_npcname("쿤#dms311");
+	next;
+	cutin "ep18_miriam_03.png",0;
+	mes "[미리암]";
+	mes "잊었어? 너희야말로 구린 속내를 가지고 숨어들었잖아? 찾는 책이 뭐야?";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "진짜 상처다, 너. 우리가 우리만 잘살자고 이래? 다 같이 살자고 이러는 거 모르겠어?";
+	npctalk "지금 우리를 모함하는 거야?", instance_npcname("요피#dms321");
+	npctalk "우리한테 뭐라고 그랬어?", instance_npcname("쿤#dms311");
+	next;
+	mes "[라마쿠스]";
+	mes "우리의 진심을 알아 주지는 못할 망정. 그나저나 올 때가 됐는데...";
+	next;
+	cutin "ep18_miriam_03.png",0;
+	mes "[미리암]";
+	mes "저것들을 잡아다가 입을 열게 해야만...!";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "여기다! 침입자가 여기에 있다!!!";
+	enablenpc instance_npcname("신전가드#dms401");
+	enablenpc instance_npcname("신전가드#dms411");
+	enablenpc instance_npcname("신전가드#dms421");
+	enablenpc instance_npcname("신전가드#dms431");
+	enablenpc instance_npcname("신전가드#dms441");
+	npctalk "왔다!!! 그럼 수고! 가자 얘들아!", instance_npcname("라마쿠스#dms301");
+	npctalk "제가 추적할 테니 모험가님은 이 자들을 처리해주세요!", instance_npcname("미리암#dms401");
+	next;
+	mes "[신전가드]";
+	mes "무기를 버려!!";
+	if ('nyr_main_step == 8) {
+		'nyr_main_step = 9;
+		donpcevent instance_npcname("nyr_step_4") + "::OnStart";
+	}
+	close;
+}
+
+2@nyr,93,36,3	duplicate(dummy_npc)	쿤#dms311	EP18_ARMED_VILLAGER02
+2@nyr,99,38,5	duplicate(dummy_npc)	요피#dms321	EP18_ARMED_VILLAGER03
+2@nyr,88,44,5	duplicate(dummy_npc)	신전가드#dms401	4_M_RASWORD
+2@nyr,87,46,5	duplicate(dummy_npc)	신전가드#dms411	4_M_RASWORD
+2@nyr,87,42,5	duplicate(dummy_npc)	신전가드#dms421	4_M_RASWORD
+2@nyr,85,46,5	duplicate(dummy_npc)	신전가드#dms431	4_M_RASWORD
+2@nyr,85,42,5	duplicate(dummy_npc)	신전가드#dms441	4_M_RASWORD
+
+
+2@nyr,1,1,0	script	nyr_step_4	-1,{
+	end;
+OnStart:
+	disablenpc instance_npcname("미리암#dms401");
+	disablenpc instance_npcname("라마쿠스#dms301");
+	disablenpc instance_npcname("쿤#dms311");
+	disablenpc instance_npcname("요피#dms321");
+	disablenpc instance_npcname("신전가드#dms401");
+	disablenpc instance_npcname("신전가드#dms411");
+	disablenpc instance_npcname("신전가드#dms421");
+	disablenpc instance_npcname("신전가드#dms431");
+	disablenpc instance_npcname("신전가드#dms441");
+	.@label$ = instance_npcname("nyr_step_4") + "::OnMobDead";
+	monster 'map_2nyr$,88,44,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,87,46,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,87,42,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,85,46,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,85,42,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 9)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("nyr_step_4") + "::OnMobDead") < 1) {
+		'nyr_main_step = 10;
+		mapannounce 'map_2nyr$, "왠지 불길해. 걔 아직도 우릴 따라오는 거 같은데.", bc_map, 0xFFCC;
+		disablenpc instance_npcname("#mstep02");
+		disablenpc instance_npcname("#mstep03");
+		enablenpc instance_npcname("#mstep04");
+		enablenpc instance_npcname("#mstep05");
+		enablenpc instance_npcname("미리암#dms501");
+		enablenpc instance_npcname("라마쿠스#dms401");
+		enablenpc instance_npcname("쿤#dms411");
+		enablenpc instance_npcname("요피#dms421");
+	}
+	end;
+}
+
+
+//------------------------------------------------------------
+// Step 5
+//------------------------------------------------------------
+2@nyr,209,98,5	script	미리암#dms501	4_EP18_MIRIAM,5,5,{
+	if (is_party_leader() == false)
+		npctalk "파티의 리더분이 나서기로 하지 않았나요?", instance_npcname("미리암#dms501");
+	end;
+OnTouch:
+	npctalk "저기 서가 앞 보이시죠?";
+	npctalk "이러다 손가락 다 닳겠다.", instance_npcname("라마쿠스#dms401");
+	end;
+}
+
+2@nyr,212,104,1	script	라마쿠스#dms401	EP18_ARMED_VILLAGER01,{
+	if ('nyr_main_step != 10)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[요피]";
+	mes "이제 여기가 마지막 아니야?";
+	next;
+	mes "[라마쿠스]";
+	mes "그러게. 진짜 비밀 서고가 따로 있나 봐.";
+	npctalk "어휴, 허탕만 쳤네.", instance_npcname("요피#dms421");
+	npctalk "실패했다고 책임을 묻지는 않겠지?", instance_npcname("쿤#dms411");
+	next;
+	mes "[라마쿠스]";
+	mes "애초에 그게 있는지 찾아 보라고 한 거지 있으니까 찾아 오라고 한 건 아니었잖아.";
+	next;
+	mes "[쿤]";
+	mes "철수해도 되는지 물어봐.";
+	next;
+	npctalk "여긴 늑대, 늑대.", instance_npcname("라마쿠스#dms401");
+	sleep2 2000;
+	npctalk "???: 물건은 찾았나?", instance_npcname("라마쿠스#dms401");
+	sleep2 2000;
+	npctalk "마지막 서고인데 아무래도 이곳엔 없는 것 같다.", instance_npcname("라마쿠스#dms401");
+	sleep2 2000;
+	npctalk "???: 대기하라.", instance_npcname("라마쿠스#dms401");
+	sleep2 1000;
+	npctalk "진짜 끈질기네. 가드들을 다 해치우다니 의외로 실력 있나 봐.", instance_npcname("요피#dms421");
+	mes "[쿤]";
+	mes "잠깐, 지금 내가 헛걸 보는 건가? 저기에 미리암이랑 모험가가 있어.";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "너희 지금 누구한테 연락을 한 거야?";
+	next;
+	select("사주를 받은 겁니까?");
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "사주우? 우린 그런거 안 받는데?";
+	npctalk "나 사주는 좀 믿는데.", instance_npcname("쿤#dms411");
+	npctalk "우리는 배신 같은거 안해. 절대로.", instance_npcname("요피#dms421");
+	next;
+	enablenpc instance_npcname("신전가드#dms501");
+	enablenpc instance_npcname("신전가드#dms511");
+	enablenpc instance_npcname("신전가드#dms521");
+	enablenpc instance_npcname("신전가드#dms531");
+	enablenpc instance_npcname("신전가드#dms541");
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms501")),203,95;
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms511")),201,96;
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms521")),201,93;
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms531")),199,98;
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms541")),199,92;
+
+	sleep2 500;
+	npctalk "이쪽입니다!", instance_npcname("신전가드#dms501");
+	npctalk "어이쿠!! 직접 오셨네!!", instance_npcname("라마쿠스#dms401");
+	sleep2 1000;
+	enablenpc instance_npcname("슐랑#dms101");
+	unitwalk getnpcid(0,instance_npcname("슐랑#dms101")),206,96;
+	npctalk "......", instance_npcname("슐랑#dms101");
+	npctalk "오셨슴까!", instance_npcname("라마쿠스#dms401");
+	npctalk "오셨슴까!", instance_npcname("쿤#dms411");
+	npctalk "오셨슴까!", instance_npcname("요피#dms421");
+	sleep2 2000;
+
+	cutin "ep18_shulang.png",0;
+	mes "[??]";
+	mes "서고는 여기가 마지막인가?";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "그렇습니다.";
+	next;
+	cutin "ep18_shulang.png",0;
+	mes "[??]";
+	mes "책을 찾았다면 좋았겠지만, 할 수 없지. 저쪽은 작업을 마쳤으니 여기는 이만 철수한다.";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "너는 누구지! 여기 이녀석들과 무슨 관계야?";
+	next;
+	cutin "ep18_shulang.png",0;
+	mes "[??]";
+	mes "뭐야? 뭘 붙이고 온 거야?";
+	next;
+	cutin "",255;
+	mes "[요피]";
+	mes "누가 늑대 아니랄까 봐 냄새를 맡고 멋대로 따라온겁니다. 곧 처리하겠습니다.";
+	next;
+	cutin "ep18_shulang.png",0;
+	mes "[??]";
+	mes "그럴 필요 없어. 너희는 이만 철수하고 여기는 이 신입들에게 맡기지.";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "네!!";
+	next;
+	next;
+	disablenpc instance_npcname("슐랑#dms101");
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "기다려!!!";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "침입자들은 모두 처리한다!";
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 누가 침입자야?";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "아무래도 일이 이상하게 꼬인 것 같죠? 신전가드들까지 매수되다니. 어떻게 된 일인지 알아내려면...";
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 이 사람들은 제게 맡기세요.";
+	next;
+	cutin "",255;
+	mes "[신전가드]";
+	mes "전원 대형으로!";
+	next;
+	mes "[요피]";
+	mes "안뇽~ 만나서 더러웠고 다시는 만나지 말자?";
+	if ('nyr_main_step == 10) {
+		'nyr_main_step = 11;
+		donpcevent instance_npcname("nyr_step_5") + "::OnStart";
+	}
+	close;
+}
+
+2@nyr,220,98,5	duplicate(dummy_npc)	쿤#dms411	EP18_ARMED_VILLAGER02
+2@nyr,220,95,5	duplicate(dummy_npc)	요피#dms421	EP18_ARMED_VILLAGER03
+
+2@nyr,197,96,5	duplicate(dummy_npc)	슐랑#dms101	EP18_MD_SCHULANG
+2@nyr,197,95,5	duplicate(dummy_npc)	신전가드#dms501	EP18_MD_GUARD_A
+2@nyr,197,96,5	duplicate(dummy_npc)	신전가드#dms511	EP18_MD_GUARD_A
+2@nyr,197,93,5	duplicate(dummy_npc)	신전가드#dms521	EP18_MD_GUARD_A
+2@nyr,197,98,5	duplicate(dummy_npc)	신전가드#dms531	EP18_MD_GUARD_A
+2@nyr,197,92,5	duplicate(dummy_npc)	신전가드#dms541	EP18_MD_GUARD_A
+
+
+2@nyr,1,1,0	script	nyr_step_5	-1,{
+	end;
+OnStart:
+	disablenpc instance_npcname("신전가드#dms501");
+	disablenpc instance_npcname("신전가드#dms511");
+	disablenpc instance_npcname("신전가드#dms521");
+	disablenpc instance_npcname("신전가드#dms531");
+	disablenpc instance_npcname("신전가드#dms541");
+	disablenpc instance_npcname("라마쿠스#dms401");
+	disablenpc instance_npcname("쿤#dms411");
+	disablenpc instance_npcname("요피#dms421");
+	disablenpc instance_npcname("미리암#dms501");
+	.@label$ = instance_npcname("nyr_step_5") + "::OnMobDead";
+
+	monster 'map_2nyr$,203,95,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,201,96,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,201,93,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,199,98,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,199,92,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 11)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("nyr_step_5") + "::OnMobDead") < 1) {
+		'nyr_main_step = 12;
+		mapannounce 'map_2nyr$, "삑- 보관실 잠금 해제 프로토콜 가동", bc_map, 0xFFCC;
+		disablenpc instance_npcname("#mstep04");
+		disablenpc instance_npcname("#mstep05");
+
+		enablenpc instance_npcname("#mstep06");
+		enablenpc instance_npcname("미리암#dms601");
+		enablenpc instance_npcname("라마쿠스#dms501");
+		enablenpc instance_npcname("쿤#dms511");
+		enablenpc instance_npcname("요피#dms521");
+		enablenpc instance_npcname("슐랑#dms201");
+		enablenpc instance_npcname("바곳#dms101");
+		enablenpc instance_npcname("대신관#dms101");
+		enablenpc instance_npcname("신전가드#dms601");
+		enablenpc instance_npcname("신전가드#dms611");
+		enablenpc instance_npcname("신전가드#dms621");
+	}
+	end;
+}
+
+
+//------------------------------------------------------------
+// Step 6
+//------------------------------------------------------------
+// 2@nyr,132,108,0	duplicate(dummy_npc)	#dmss101	HIDDEN_WARP_NPC,3,3
+
+2@nyr,133,109,3	script	미리암#dms601	EP18_NPC_MIRIAM,5,5,{
+	if (is_party_leader() == false) {
+		npctalk "아직 일행이 도착하지 않은 것 같은데.";
+		end;
+	}
+	if ('nyr_main_step != 12)
+		end;
+	.@miriam$ = instance_npcname("미리암#dms601");
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "뭘 하는 거죠? 사람이 몇이나 모여 있는 거야? 여기에선 잘 안보이는데, 뭣 좀 보여요?";
+	next;
+	select("모르는 사람도 몇 있네요.");
+	cutin "ep18_shulang.png",1;
+	mes "[???]";
+	mes "아직 멀었나?";
+	next;
+	cutin "",255;
+	mes "[라마쿠스]";
+	mes "이제 거의 다 된 것 같습니다.";
+	next;
+	cutin "ep18_bagot_01.png",1;
+	mes "[???]";
+	mes "정말, 참, 보안이 철저합니다요. 정~ 말 철통같네.";
+	next;
+	cutin "",255;
+	mes "[???]";
+	mes "... 그쪽은 이정도 보안도 하지 않는가?";
+	next;
+	cutin "ep18_bagot_02.png",1;
+	mes "[???]";
+	mes "영감님, 반어법 몰라?! 철통같은 보안이 번거롭고 까다로운 절차와 동의어는 아니잖아?";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "이 목소리는...";
+	emotion ET_HUK, playerattached();
+	donpcevent .@miriam$ + "::OnEffect";
+	next;
+	select("아는 사람이에요?");
+	mes "[미리암]";
+	mes "가려져 있어서 확신할 수 없지만...";
+	next;
+	cutin "",255;
+	mes "[???]";
+	mes "들어가지.";
+	if ('nyr_main_step != 12)
+		close;
+	next;
+	'nyr_main_step = 13;
+	disablenpc instance_npcname("#mstep06");
+	enablenpc instance_npcname("#mstep07");
+	enablenpc instance_npcname("#mstep08");
+
+	enablenpc instance_npcname("미리암#dms701");
+	enablenpc instance_npcname("라마쿠스#dms601");
+	enablenpc instance_npcname("쿤#dms611");
+	enablenpc instance_npcname("요피#dms621");
+	enablenpc instance_npcname("슐랑#dms301");
+	enablenpc instance_npcname("바곳#dms201");
+	enablenpc instance_npcname("신전가드#dms721");
+	enablenpc instance_npcname("신전가드#dms731");
+	enablenpc instance_npcname("신전가드#dms741");
+
+	unitwalk getnpcid(0,instance_npcname("라마쿠스#dms501")), 120,120, .@miriam$ + "::OnMove1";
+	sleep2 2000;
+	unitwalk getnpcid(0,instance_npcname("쿤#dms511")), 120,121, .@miriam$ + "::OnMove2";
+	unitwalk getnpcid(0,instance_npcname("요피#dms521")), 122,121, .@miriam$ + "::OnMove3";
+	sleep2 1000;
+	unitwalk getnpcid(0,instance_npcname("슐랑#dms201")), 120,121, .@miriam$ + "::OnMove4";
+	sleep2 500;
+	disablenpc instance_npcname("바곳#dms101");
+	disablenpc instance_npcname("대신관#dms101");
+	sleep2 1000;
+	npctalk "이쪽이에요! 어서 쫓아 가요!";
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "우리도 들어가 봐요.";
+	sleep2 1000;
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms601")), 118,121, .@miriam$ + "::OnMove5";
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms611")), 118,121, .@miriam$ + "::OnMove6";
+	unitwalk getnpcid(0,instance_npcname("신전가드#dms621")), 117,121, .@miriam$ + "::OnMove7";
+	close2;
+	unitwalk getnpcid(0,.@miriam$), 122,119, .@miriam$ + "::OnMove8";
+	cutin "",255;
+	end;
+
+OnEffect:
+	enablenpc instance_npcname("#effc01");
+	specialeffect EF_MAPPILLAR2, AREA, instance_npcname("#effc01");
+	sleep 1000;
+	npctalk "징- 철컥-", instance_npcname("#effc01");
+	end;
+
+OnMove1:
+	disablenpc instance_npcname("라마쿠스#dms501");
+	end;
+OnMove2:
+	disablenpc instance_npcname("쿤#dms511");
+	end;
+OnMove3:
+	disablenpc instance_npcname("요피#dms521");
+	end;
+OnMove4:
+	disablenpc instance_npcname("슐랑#dms201");
+	end;
+OnMove5:
+	disablenpc instance_npcname("신전가드#dms601");
+	end;
+OnMove6:
+	disablenpc instance_npcname("신전가드#dms611");
+	end;
+OnMove7:
+	disablenpc instance_npcname("신전가드#dms621");
+	end;
+OnMove8:
+	disablenpc instance_npcname("미리암#dms601");
+	end;
+
+OnTouch:
+	if ('nyr_main_step == 12)
+		npctalk "저기, 다른 사람들이 있는데요? 뭐라고 하는 거죠?";
+	end;
+}
+2@nyr,125,111,3	duplicate(dummy_npc)	라마쿠스#dms501	EP18_ARMED_VILLAGER01
+2@nyr,128,107,3	duplicate(dummy_npc)	쿤#dms511	EP18_ARMED_VILLAGER02
+2@nyr,128,104,3	duplicate(dummy_npc)	요피#dms521	EP18_ARMED_VILLAGER03
+2@nyr,125,101,1	duplicate(dummy_npc)	슐랑#dms201	EP18_MD_SCHULANG
+2@nyr,122,106,3	duplicate(dummy_npc)	바곳#dms101	4_EP18_BAGOT
+2@nyr,120,107,3	duplicate(dummy_npc)	대신관#dms101	4_M_RACHOLD
+2@nyr,115,102,5	duplicate(dummy_npc)	신전가드#dms601	EP18_MD_GUARD_A
+2@nyr,116,106,5	duplicate(dummy_npc)	신전가드#dms611	EP18_MD_GUARD_A
+2@nyr,117,98,7	duplicate(dummy_npc)	신전가드#dms621	EP18_MD_GUARD_A
+2@nyr,119,103,0	duplicate(dummy_npc)	#effc01	HIDDEN_WARP_NPC
+
+
+
+//------------------------------------------------------------
+// Step 7 + 8
+//------------------------------------------------------------
+// 2@nyr,118,199,0	duplicate(dummy_npc)	#dms701	HIDDEN_WARP_NPC,1,5
+
+2@nyr,118,199,1	script	미리암#dms701	4_EP18_MIRIAM,5,5,{
+	if (is_party_leader() == false) {
+		npctalk "파티의 리더분은요?";
+		end;
+	}
+	if ('nyr_main_step == 13) {
+		mes "[???]";
+		mes "슐랑, 확보했어? 아직이야? 이 바곳은 인내심이 바닥나기 직전이에요.";
+		next;
+		mes "[라마쿠스]";
+		mes "그런데 우리 계속 이거 입고 있어야 합니까?";
+		npctalk "답답한데.", instance_npcname("요피#dms621");
+		next;
+		cutin "ep18_shulang.png",0;
+		mes "[슐랑]";
+		mes "무슨 상관이야? 여기까지 와서. 마음대로 해.";
+		next;
+		setnpcdisplay( instance_npcname("라마쿠스#dms601"), 21308 );	// EP18_MD_HEARTHUNTER_A
+		setnpcdisplay( instance_npcname("쿤#dms611"), 21308 );	// EP18_MD_HEARTHUNTER_A
+		setnpcdisplay( instance_npcname("요피#dms621"), 21308 );	// EP18_MD_HEARTHUNTER_A
+		npctalk "거추장스러워서 죽는줄 알았어!", instance_npcname("쿤#dms611");
+		cutin "",255;
+		mes "[요피]";
+		mes "햐- 이제야 살겠네.";
+		next;
+		select("하트헌터가 위장을 했었군요.");
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "하트헌터... 당신이 말했던 그 미치광이 과학자들과 한패... 그럼 처음부터...!";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "이미르의 심장으로 개조한 하트헌터가, 아직 많이 남아 있었군요?";
+		next;
+		cutin "ep18_shulang.png",0;
+		mes "[슐랑]";
+		mes "우리 구면이던가? 아아, 추적해 온다는 잔챙이들로군. 소식은 들었지.";
+		npctalk "아, 그사람들? 우리를 너무 끈질기게 쫓아와서 깜짝 놀랐잖아. 모르는 사이에 빚을 진 줄?", instance_npcname("바곳#dms201");
+		next;
+		select("그쪽은 일루시온일 테고.");
+		cutin "ep18_bagot_02.png",1;
+		mes "[바곳]";
+		mes "앗, 깜짝이야. 바곳까지 알아? 얼굴 팔리면 곤란한데.";
+		npctalk "무슨 상관이야. 어차피 여기서 사라질 텐데.", instance_npcname("슐랑#dms301");
+		next;
+		enablenpc instance_npcname("대신관#dms201");
+		enablenpc instance_npcname("신전가드#dms701");
+		enablenpc instance_npcname("신전가드#dms711");
+		cutin "",255;
+		mes "[???]";
+		mes "준비는 다 됐네.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "...아버지??";
+		next;
+		cutin "",255;
+		mes "[유스 아말]";
+		mes "미리암, 여기까지 잘해주었다. 네 몫은 다 했으니 이제 돌아가거라.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "잘해...? 무엇을요?";
+		next;
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "와, 아버지한테 칭찬 받았네요. 좋겠다. 육아에 칭찬, 참 중요하지.";
+		mes "바곳은 언제 받았는지 기억도 안나. 음... 아! 받은 적이 없으니 기억에 없구나!";
+		npctalk "칭찬도 받았으니 이제 집에 가서 발 닦고 자면 되겠네.", instance_npcname("바곳#dms201");
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "이게 무슨, 무슨 일이에요? 왜 아버지가... 제가 뭘 했는데요?";
+		next;
+		cutin "",255;
+		mes "[유스 아말]";
+		mes "... 필요한 것을 손에 넣었으면 이만 처리하고 가지.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "아버지! 아버지!!!";
+		next;
+		cutin "ep18_bagot_01.png",4;
+		disablenpc instance_npcname("대신관#dms201");
+		mes "[바곳]";
+		mes "저런! 칭찬은 해주지만 정이 없는 아버지?";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "아버지한테 무슨 짓을 하고 있는 거지?";
+		next;
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "아, 따님은 모르겠구나? 영감님 소원이 원주민을 아루나펠츠 내에서 모두 쫓아 버리는 거라잖아. 우리가 그걸 조금 도왔지. 물론 공짜는 아니야.";
+		npctalk "늘그막에 하고 싶은 건 다 하고 사셔야지. 안 그러면 병 나.", instance_npcname("바곳#dms201");
+		npctalk "헤헤- 그쪽 흉내 괜찮았지? 우리한테도 칭찬 좀 해줘.", instance_npcname("라마쿠스#dms601");
+		next;
+		cutin "",255;
+		mes "[하트헌터]";
+		mes "미리암 너랑 네 친구들 덕에 이렇게 폭동의 그림을 완성 시킬 수 있었지. 아주 고마워!";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "그게 말이 된다고 생각해?";
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "무슨 소리람? 충동질 몇 번에 신전까지 시위하러 나와놓고는?";
+		next;
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "이제 곧 바깥의 시위는 폭동으로 번지겠죠? 그럼 영감님의 소원이 이뤄지는 거야. 그럼 또 다른 소원을 빌겠죠? 우리는 또 대가를 받고?";
+		next;
+		cutin "ep18_shulang.png",0;
+		mes "[슐랑]";
+		mes "언제까지 떠들 거야. 어서 가자고.";
+		mes "정리들 하고 와.";
+		next;
+		cutin "",255;
+		mes "[라마쿠스]";
+		mes "넷!";
+		next;
+		disablenpc instance_npcname("슐랑#dms301");
+		disablenpc instance_npcname("바곳#dms201");
+		mes "[하트헌터]";
+		mes "여기에 수아드까지 있었으면 좋았을 걸. 언제 한 번 손 봐주고 싶었는데.";
+		next;
+		mes "[하트헌터]";
+		mes "안녕, 정식으로 소개할게. 우리는 하트헌터야. 이제 곧 너희들을 여기에 묻어 줄 예정이란다.";
+		npctalk "그냥 하트헌터가 아니라고. 무지무지 쎈 하트 헌터야.", instance_npcname("쿤#dms611");
+		select("조심해요. 개조된 녀석들이니까.");
+		next;
+		cutin "ep18_miriam_03.png",2;
+		specialeffect EF_UNDEADBODY, AREA, instance_npcname("라마쿠스#dms601");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("라마쿠스#dms601");
+		mes "[미리암]";
+		mes "원래 저렇게 좀... 불길한 기운이 감도는 건가요?";
+		next;
+		select("이곳의 이미르의 심장과 공명을 하는 것 같네요.");
+		mes "[미리암]";
+		mes "한마디로 세다는 거죠? 좋아요. 빠르게 처리하고 어서 추적하죠.";
+		if ('nyr_main_step == 13) {
+			'nyr_main_step = 14;
+			donpcevent instance_npcname("nyr_step_7") + "::OnStart";
+			removespecialeffect EF_UNDEADBODY, AREA, instance_npcname("라마쿠스#dms601");
+			removespecialeffect EF_NPC_STOP, AREA, instance_npcname("라마쿠스#dms601");
+		}
+		close3;
+	}
+	if ('nyr_main_step == 15) {
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "하아... 하아... 모험가님, 괜찮으세요?";
+		next;
+		select("그보다 다들 어디로 갔을까요?");
+		enablenpc instance_npcname("니르엔#dms101");
+		enablenpc instance_npcname("신전가드#dms751");
+		enablenpc instance_npcname("신전가드#dms761");
+		enablenpc instance_npcname("신전가드#dms771");
+		npctalk "이게 다 무슨 일이죠?", instance_npcname("니르엔#dms101");
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "이게, 이게 다 무슨 소동인지.";
+		mes "모험가님...? 모험가님이 왜 이곳에 계시죠?";
+		next;
+		select("이곳에서...");
+		mes "[니르엔]";
+		mes "수상한 행동을 보이는 동료를 추적해 오셨는데 그들이 사실은 첩자였단 거군요.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "신관님도 우리 아버지랑 한 패예요?";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "신관?? 그건 또 무슨 소리죠?";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "아무래도 이 일에 우리 아버지가 연루되어 있는 것 같아서요.";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "그게 무슨... 대신관까지...? 아무래도 조사가 필요하겠군요.";
+		mes "바깥에 몰려든 사람들 중에도 괴한들이 심어둔 선동 세력이 숨어 있을 테니...";
+		next;
+		select("신전가드 중에도 있습니다.");
+		mes "[니르엔]";
+		mes "대대적인 점검이 필요하겠군요. 일단 이곳에서 무엇을 했는지부터 알아내야겠어요. 위험물은 없는지, 사라진 것은 없는지...";
+		next;
+		mes "[니르엔]";
+		mes "...!!";
+		mes "조사할 필요도 없겠군요. 이미르의 심장조각이 사라졌어요. 원래 저곳에 있어야 할 것인데.";
+		next;
+		select("역시...");
+		mes "[니르엔]";
+		mes "그것으로 대체 무엇을 할지... 상상조차 가지 않는군요.";
+		mes "이럴 것이 아니라 사실을 알리고 추적을 해야...!!";
+		next;
+		mes "[니르엔]";
+		mes "아...! 신전가드들 중에도 적세력이 있을 거라고 했죠. 우선 믿을만한 사람부터 선별해야겠군요.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "제가 갈게요. 그건 아마 저희 아버지가 가지고 갔을 거예요. 어디로 갔을지도 대충 짐작이 가니까요.";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "그것에 대해서는 일단 나가서 마저 얘기하도록 하죠. 바깥 상황이 그리 좋지는 않으니까.";
+		close2;
+		cutin "",255;
+		if ('nyr_main_step == 15) {
+			'nyr_main_step = 16;
+			disablenpc instance_npcname("니르엔#dms101");
+			disablenpc instance_npcname("신전가드#dms751");
+			disablenpc instance_npcname("신전가드#dms761");
+			disablenpc instance_npcname("신전가드#dms771");
+			disablenpc instance_npcname("미리암#dms701");
+
+			enablenpc instance_npcname("#mstep09");
+			enablenpc instance_npcname("#mstep10");
+			enablenpc instance_npcname("#mstep11");
+			enablenpc instance_npcname("미리암#dms801");
+			enablenpc instance_npcname("#dmswch02");
+
+			enablenpc instance_npcname("미리암#dms801");
+
+			enablenpc instance_npcname("신전가드#dms801");
+			enablenpc instance_npcname("신전가드#dms811");
+			enablenpc instance_npcname("신전가드#dms821");
+			enablenpc instance_npcname("신전가드#dms831");
+			enablenpc instance_npcname("신전가드#dms841");
+			enablenpc instance_npcname("신전가드#dms851");
+			enablenpc instance_npcname("신전가드#dms861");
+			enablenpc instance_npcname("신전가드#dms871");
+			enablenpc instance_npcname("신전가드#dms881");
+			enablenpc instance_npcname("신전가드#dms891");
+			enablenpc instance_npcname("성난 군중#dms211");
+			enablenpc instance_npcname("성난 군중#dms221");
+			enablenpc instance_npcname("성난 군중#dms231");
+			enablenpc instance_npcname("성난 군중#dms241");
+			enablenpc instance_npcname("성난 군중#dms251");
+			enablenpc instance_npcname("성난 군중#dms261");
+			enablenpc instance_npcname("성난 군중#dms271");
+			enablenpc instance_npcname("성난 군중#dms281");
+			enablenpc instance_npcname("성난 군중#dms291");
+
+			enablenpc instance_npcname("성난 군중#dms202");
+			enablenpc instance_npcname("성난 군중#dms212");
+			enablenpc instance_npcname("성난 군중#dms222");
+			enablenpc instance_npcname("성난 군중#dms232");
+			enablenpc instance_npcname("성난 군중#dms242");
+
+			enablenpc instance_npcname("신전가드#dms802");
+			enablenpc instance_npcname("신전가드#dms812");
+			enablenpc instance_npcname("신전가드#dms822");
+			enablenpc instance_npcname("신전가드#dms832");
+			enablenpc instance_npcname("신전가드#dms842");
+		}
+		navigateto("2@nyr",120,141);
+		end;
+	}
+	end;
+
+OnTouch:
+	if ('nyr_main_step == 13)
+		npctalk "모두 저기 모여 있네요.";
+	end;
+}
+
+2@nyr,120,206,3	duplicate(dummy_npc)	라마쿠스#dms601	EP18_ARMED_VILLAGER01
+2@nyr,119,207,3	duplicate(dummy_npc)	쿤#dms611	EP18_ARMED_VILLAGER02
+2@nyr,111,207,5	duplicate(dummy_npc)	요피#dms621	EP18_ARMED_VILLAGER03
+2@nyr,115,204,5	duplicate(dummy_npc)	슐랑#dms301	4_EP18_SHULANG
+2@nyr,117,205,3	duplicate(dummy_npc)	바곳#dms201	4_EP18_BAGOT
+
+2@nyr,112,201,5	duplicate(dummy_npc)	신전가드#dms721	4_M_RASWORD
+2@nyr,121,203,3	duplicate(dummy_npc)	신전가드#dms731	4_M_RASWORD
+2@nyr,121,201,3	duplicate(dummy_npc)	신전가드#dms741	4_M_RASWORD
+
+2@nyr,115,202,5	duplicate(dummy_npc)	대신관#dms201	4_M_RACHOLD
+
+2@nyr,113,203,5	duplicate(dummy_npc)	신전가드#dms701	4_M_RASWORD
+2@nyr,118,203,3	duplicate(dummy_npc)	신전가드#dms711	4_M_RASWORD
+2@nyr,120,202,3	duplicate(dummy_npc)	신전가드#dms751	4_M_RASWORD
+2@nyr,114,203,5	duplicate(dummy_npc)	신전가드#dms761	4_M_RASWORD
+2@nyr,115,199,7	duplicate(dummy_npc)	신전가드#dms771	4_M_RASWORD
+2@nyr,117,204,3	duplicate(dummy_npc)	니르엔#dms101	4_F_MADAME
+
+
+
+2@nyr,1,1,0	script	nyr_step_7	-1,{
+	end;
+OnStart:
+	disablenpc instance_npcname("#mstep07");
+	disablenpc instance_npcname("#mstep08");
+	disablenpc instance_npcname("미리암#dms701");
+	disablenpc instance_npcname("라마쿠스#dms601");
+	disablenpc instance_npcname("쿤#dms611");
+	disablenpc instance_npcname("요피#dms621");
+	disablenpc instance_npcname("신전가드#dms701");
+	disablenpc instance_npcname("신전가드#dms711");
+	disablenpc instance_npcname("신전가드#dms721");
+	disablenpc instance_npcname("신전가드#dms731");
+	disablenpc instance_npcname("신전가드#dms741");
+	sleep 500;
+	.@label$ = instance_npcname("nyr_step_7") + "::OnMobDead";
+	monster 'map_2nyr$,120,206,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_2nyr$,119,207,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_2nyr$,111,207,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_2nyr$,113,203,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,118,203,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,112,201,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,121,203,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	monster 'map_2nyr$,121,201,"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 14)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("nyr_step_7") + "::OnMobDead") < 1) {
+		'nyr_main_step = 15;
+		enablenpc instance_npcname("미리암#dms701");
+	}
+	end;
+}
+
+
+//------------------------------------------------------------
+// Step 9
+//------------------------------------------------------------
+1@nyr,65,169,0	script	#dmswch02	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if ('nyr_main_step == 17) {
+		navigateto("1@nyr",129,165);
+		end;
+	}
+	if ('nyr_main_step != 16)
+		end;
+	'nyr_main_step = 17;
+	donpcevent instance_npcname("미리암#dms801") + "::OnMove1";
+	navigateto("1@nyr",129,165);
+	mapannounce 'map_1nyr$, "우리도 살아있다! 우리를 알아달라!", bc_map, 0xFFCC;
+	npctalk "상황이 좋지 않은 것 같아요. 좀 더 접근해요.", instance_npcname("미리암#dms801");
+	sleep 2000;
+	npctalk "이쪽이에요.", instance_npcname("미리암#dms801");
+	mapannounce 'map_1nyr$, "우리도 살아있다! 살아있다!", bc_map, 0xFFCC;
+	sleep 3000;
+	mapannounce 'map_1nyr$, "우리는 존재한다! 존재한다!", bc_map, 0xFFCC;
+	sleep 5000;
+	mapannounce 'map_1nyr$, "이 땅의 주인에게 권리를 돌려 달라! 돌려 달라!", bc_map, 0xFFCC;
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms201");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms211");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms221");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms231");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms241");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms251");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms261");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms271");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms281");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms291");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms202");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms212");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms222");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms232");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms242");
+	sleep 5000;
+	mapannounce 'map_1nyr$, "우리도 살아있다! 살아있다!", bc_map, 0xFFCC;
+	npctalk "살아있다!", instance_npcname("성난 군중#dms201");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms211");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms221");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms231");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms241");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms251");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms261");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms271");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms281");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms291");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms202");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms212");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms222");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms232");
+	npctalk "살아있다!", instance_npcname("성난 군중#dms242");
+	sleep 5000;
+	mapannounce 'map_1nyr$, "우리는 존재한다! 존재한다!", bc_map, 0xFFCC;
+	npctalk "존재한다!", instance_npcname("성난 군중#dms201");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms211");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms221");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms231");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms241");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms251");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms261");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms271");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms281");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms291");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms202");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms212");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms222");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms232");
+	npctalk "존재한다!", instance_npcname("성난 군중#dms242");
+	sleep 5000;
+	mapannounce 'map_1nyr$, "이 땅의 주인에게 권리를 돌려 달라! 돌려 달라!", bc_map, 0xFFCC;
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms201");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms211");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms221");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms231");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms241");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms251");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms261");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms271");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms281");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms291");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms202");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms212");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms222");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms232");
+	npctalk "돌려 달라!", instance_npcname("성난 군중#dms242");
+	end;
+}
+
+1@nyr,68,163,5	script	미리암#dms801	EP18_NPC_MIRIAM,{
+	if (is_party_leader() == false) {
+		npctalk "파티의 리더분은 아직 도착하지 않으셨나요?";
+		end;
+	}
+	if ('nyr_main_step == 18) {
+		mes "[군중]";
+		mes "우리를 알아달라!";
+		next;
+		mes "[군중]";
+		mes "우리도 살아있다! 여기에 있다!!";
+		next;
+		mes "[군중]";
+		mes "이곳은 원래 우리의 땅이다!";
+		next;
+		mes "[군중]";
+		mes "땅의 주인에게 땅을 돌려 줘라!";
+		next;
+		mes "[신전가드]";
+		mes "지금 해산한다면 신전 침입에 대해선 묻지 않겠다!";
+		next;
+		mes "[신전가드]";
+		mes "정확히 30분을 주겠다! 시간 내로 돌아 가라!";
+		next;
+		mes "[군중]";
+		mes "지금 우리 협박하는 건가?";
+		next;
+		mes "[군중]";
+		mes "우리를 어떻게 할 셈이야?";
+		next;
+		mes "[군중]";
+		mes "다 잡아다가 감옥에 가둘 셈이지?";
+		next;
+		mes "[군중]";
+		mes "이렇게 된 이상 우리가 먼저 쳐들어가자!!!";
+		next;
+		cutin "ep18_miriam_03.png",1;
+		mes "[미리암]";
+		mes "뭔가 이상해요. 사람들이 과격해지려고 하는데요.";
+		next;
+		mes "[미리암]";
+		mes "상황이 좋지 않은 것 같네요. 수아드를 불러와야겠어요. 그런데 대신관께서는 어디 계시죠?";
+		npctalk "누구 수아드 좀 불러 줘! 급해!", instance_npcname("미리암#dms801");
+		next;
+		enablenpc instance_npcname("니르엔#dms201");
+		enablenpc instance_npcname("제드#dms101");
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "여기 계셨군요. 제드 대신관도 모셔왔어요.";
+		next;
+		cutin "ra_gman2.bmp",2;
+		mes "[제드]";
+		mes "무슨 일입니까? 여기에 몰려든 사람들과 관련이 있습니까? 혹, 신전 내부에...";
+		next;
+		if ('nyr_main_step == 18) {
+			'nyr_main_step = 19;
+			disablenpc instance_npcname("#mstep09");
+			disablenpc instance_npcname("#mstep10");
+			disablenpc instance_npcname("#mstep11");
+			disablenpc instance_npcname("#dmswch02");
+			enablenpc instance_npcname("수아드#dms102");
+			npctalk "무슨 일이야? 급하게 찾았다며?", instance_npcname("수아드#dms102");
+		}
+		cutin "ep18_suad_04.png",0;
+		mes "[수아드]";
+		mes "무슨 일이야? 급하게 찾았다며?";
+		close3;
+	}
+	if ('nyr_main_step == 21) {
+		'nyr_main_step = 22;
+		disablenpc instance_npcname("미리암#dms801");
+		enablenpc instance_npcname("#dmwrp02");
+		navigateto("1@nyr",45,28);
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "대충 수습이 되었으면 빠르게 움직여요. 다들 안전처에서 기다리고 있어요.";
+		close3;
+	}
+	end;
+
+OnMove1:
+	unitwalk getnpcid(0),90,153, instance_npcname("미리암#dms801") + "::OnMove2";
+	end;
+OnMove2:
+	unitwalk getnpcid(0),107,165, instance_npcname("미리암#dms801") + "::OnMove3";
+	end;
+OnMove3:
+	unitwalk getnpcid(0),128,165, instance_npcname("미리암#dms801") + "::OnMove4";
+	end;
+OnMove4:
+	'nyr_main_step = 18;
+	end;
+}
+
+
+//------------------------------------------------------------
+// Step 10
+//------------------------------------------------------------
+1@nyr,127,163,5	script	수아드#dms102	4_EP18_SUAD,{
+	if (is_party_leader() == false) {
+		npctalk "리더가 대표로 말해줬으면 좋겠는데.";
+		end;
+	}
+	if ('nyr_main_step != 19)
+		end;
+	cutin "ep18_suad_04.png",0;
+	mes "[수아드]";
+	mes "무슨 일인데?";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "우리 중에 첩자가 있어.";
+	next;
+	cutin "ep18_suad_04.png",0;
+	mes "[수아드]";
+	mes "첩자라니? 어디에?";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "수아드, 우선 이곳 상황부터 설명해. 지금 폭동 직전인 것 같은데, 맞아? 안녕하세요, 제드 대신관님.";
+	next;
+	cutin "ep18_suad_02.png",0;
+	mes "[수아드]";
+	mes "대신관이 왜 여기에 있어?";
+	next;
+	cutin "ra_gman2.bmp",2;
+	mes "[제드]";
+	mes "미리암? 미리암까지 이 일에 관련되어 있었니?";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "원인은 따로 있어요. 그 전에 상황부터 들어 봐요. 수아드?";
+	next;
+	cutin "ep18_suad_03.png",0;
+	mes "[수아드]";
+	mes "지금 아주 좋지 않아. 점점 통제를 벗어나고 있어. 신전쪽에서도 강경하게 나오고 있고 해산을 권고하고 있고. 시간이 얼마 남지 않았는데. 일단 철수를 준비 중이야..";
+	next;
+	cutin "ep18_suad_01.png",0;
+	mes "[수아드]";
+	mes "쫓아갔던 사람들은? 어떻게 됐어?";
+	next;
+	select("제가 설명 드릴게요.");
+	cutin "",255;
+	mes "- 신전 내부에서의 일을 전했다. -";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "우리 아버지랑 외부세력이 결탁해서 벌인 일이야. 아루나펠츠를 분열시키고 원주민을 탄압하려고.";
+	next;
+	cutin "ep18_suad_04.png",0;
+	mes "[수아드]";
+	mes "우리 중에... 배신자가 있어?";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "배신자라기보다는 숨어들었다고 하는 것이 맞겠지. 처음부터 우리편인 적이 없었던 거야.";
+	next;
+	cutin "ep18_suad_02.png",0;
+	mes "[수아드]";
+	mes "그러니까 처음부터 계획적인 폭동에 휘말릴 뻔했단 거지?";
+	next;
+	cutin "ra_gwoman.bmp",2;
+	mes "[니르엔]";
+	mes "이럴 때가 아닙니다. 신전 쪽에도 저들이 섞여 들였다고 하니 일단 양쪽 세력을 모두 물려야 해요.";
+	next;
+	mapannounce 'map_1nyr$, "삐이--------", bc_map, 0xFF0000;
+	cutin "ep18_suad_04.png",0;
+	mes "[수아드]";
+	mes "이 휘슬 소리는 뭐지? 우리쪽 신호가 아닌데?";
+	next;
+	cutin "",255;
+	setnpcdisplay( instance_npcname("신전가드#dms802"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("신전가드#dms812"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("신전가드#dms822"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("신전가드#dms832"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("신전가드#dms842"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("성난 군중#dms202"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("성난 군중#dms212"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("성난 군중#dms222"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("성난 군중#dms232"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	setnpcdisplay( instance_npcname("성난 군중#dms242"), 21308 );	// EP18_MD_HEARTHUNTER_A
+	npctalk "지금인가?", instance_npcname("성난 군중#dms202");
+	npctalk "지금이다!", instance_npcname("신전가드#dms832");
+	mes "[군중]";
+	mes "옷은 왜 벗어??";
+	next;
+	disablenpc instance_npcname("신전가드#dms802");
+	disablenpc instance_npcname("신전가드#dms812");
+	disablenpc instance_npcname("신전가드#dms822");
+	disablenpc instance_npcname("신전가드#dms832");
+	disablenpc instance_npcname("신전가드#dms842");
+	disablenpc instance_npcname("성난 군중#dms202");
+	disablenpc instance_npcname("성난 군중#dms212");
+	disablenpc instance_npcname("성난 군중#dms222");
+	disablenpc instance_npcname("성난 군중#dms232");
+	disablenpc instance_npcname("성난 군중#dms242");
+
+	enablenpc instance_npcname("하트헌터#dms101");
+	enablenpc instance_npcname("하트헌터#dms111");
+	enablenpc instance_npcname("하트헌터#dms121");
+	enablenpc instance_npcname("하트헌터#dms131");
+	enablenpc instance_npcname("하트헌터#dms141");
+	enablenpc instance_npcname("하트헌터#dms151");
+	enablenpc instance_npcname("하트헌터#dms161");
+	enablenpc instance_npcname("하트헌터#dms171");
+	enablenpc instance_npcname("하트헌터#dms181");
+	enablenpc instance_npcname("하트헌터#dms191");
+	mes "[신전가드]";
+	mes "경계를 늦추지 마라!";
+	next;
+	mes "[군중]";
+	mes "뭐야? 지금 뭐하는 거야??";
+	next;
+	npctalk "미안. 개인적인 감정은 없어.", instance_npcname("하트헌터#dms101");
+	npctalk "그러게 해산하랄 때 했어야지!", instance_npcname("하트헌터#dms121");
+	npctalk "아직도 무슨 상황인지 모르겠어?", instance_npcname("하트헌터#dms141");
+	npctalk "여신은 무슨 여신이야? 차라리 나를 믿어!", instance_npcname("하트헌터#dms171");
+	npctalk "어떠냐? 탄압의 맛이??", instance_npcname("하트헌터#dms191");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms101");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms111");
+	specialeffect EF_M02, AREA, instance_npcname("하트헌터#dms121");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms131");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms141");
+	specialeffect EF_M02, AREA, instance_npcname("하트헌터#dms151");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms161");
+	specialeffect EF_M02, AREA, instance_npcname("하트헌터#dms171");
+	specialeffect EF_M02, AREA, instance_npcname("하트헌터#dms181");
+	specialeffect EF_M03, AREA, instance_npcname("하트헌터#dms191");
+	mes "[군중]";
+	mes "아악!!!! 으아악!!! 신전 가드가 사람 잡는다!!!";
+	next;
+	mes "[신전가드]";
+	mes "폭동이다! 어서 제압해!!";
+	next;
+	cutin "ep18_miriam_03.png",1;
+	mes "[미리암]";
+	mes "아... 늦었어...!!";
+	next;
+	cutin "ep18_suad_02.png",0;
+	mes "[수아드]";
+	mes "무차별 공격하는 사람들을 말려야 돼.";
+	next;
+	cutin "ra_gwoman.bmp",2;
+	mes "[니르엔]";
+	mes "사람들을 대피시킬게요.";
+	if ('nyr_main_step == 19) {
+		'nyr_main_step = 20;
+		donpcevent instance_npcname("nyr_step_10") + "::OnStart";
+	}
+	close3;
+}
+
+1@nyr,1,1,0	script	nyr_step_10	-1,{
+	end;
+OnStart:
+	disablenpc instance_npcname("수아드#dms102");
+	disablenpc instance_npcname("미리암#dms801");
+	disablenpc instance_npcname("니르엔#dms201");
+	disablenpc instance_npcname("제드#dms101");
+	disablenpc instance_npcname("신전가드#dms801");
+	disablenpc instance_npcname("신전가드#dms811");
+	disablenpc instance_npcname("신전가드#dms821");
+	disablenpc instance_npcname("신전가드#dms831");
+	disablenpc instance_npcname("신전가드#dms841");
+	disablenpc instance_npcname("신전가드#dms851");
+	disablenpc instance_npcname("신전가드#dms861");
+	disablenpc instance_npcname("신전가드#dms871");
+	disablenpc instance_npcname("신전가드#dms881");
+	disablenpc instance_npcname("신전가드#dms891");
+
+	disablenpc instance_npcname("성난 군중#dms201");
+	disablenpc instance_npcname("성난 군중#dms211");
+	disablenpc instance_npcname("성난 군중#dms221");
+	disablenpc instance_npcname("성난 군중#dms231");
+	disablenpc instance_npcname("성난 군중#dms241");
+	disablenpc instance_npcname("성난 군중#dms251");
+	disablenpc instance_npcname("성난 군중#dms261");
+	disablenpc instance_npcname("성난 군중#dms271");
+	disablenpc instance_npcname("성난 군중#dms281");
+	disablenpc instance_npcname("성난 군중#dms291");
+
+	disablenpc instance_npcname("하트헌터#dms101");
+	disablenpc instance_npcname("하트헌터#dms111");
+	disablenpc instance_npcname("하트헌터#dms121");
+	disablenpc instance_npcname("하트헌터#dms131");
+	disablenpc instance_npcname("하트헌터#dms141");
+	disablenpc instance_npcname("하트헌터#dms151");
+	disablenpc instance_npcname("하트헌터#dms161");
+	disablenpc instance_npcname("하트헌터#dms171");
+	disablenpc instance_npcname("하트헌터#dms181");
+	disablenpc instance_npcname("하트헌터#dms191");
+	.@label$ = instance_npcname("nyr_step_10") + "::OnMobDead";
+	monster 'map_1nyr$,123,168,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,118,168,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,113,165,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,114,171,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,128,170,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,115,176,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,120,174,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,125,175,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,126,177,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	monster 'map_1nyr$,128,172,"하트헌터",21308,1, .@label$;	// EP18_MD_HEARTHUNTER_A
+	end;
+OnMobDead:
+	if ('nyr_main_step != 20)
+		end;
+	if (mobcount('map_1nyr$, instance_npcname("nyr_step_10") + "::OnMobDead") < 1) {
+		'nyr_main_step = 21;
+		npctalk "모험가님, 무사하세요?", instance_npcname("미리암#dms801");
+		enablenpc instance_npcname("미리암#dms801");
+	}
+	end;
+}
+
+1@nyr,113,172,5	duplicate(dummy_npc)	신전가드#dms802	4_M_RASWORD
+1@nyr,126,172,3	duplicate(dummy_npc)	신전가드#dms812	4_M_RASWORD
+1@nyr,112,178,5	duplicate(dummy_npc)	신전가드#dms822	4_M_RASWORD
+1@nyr,127,178,3	duplicate(dummy_npc)	신전가드#dms832	4_M_RASWORD
+1@nyr,118,172,5	duplicate(dummy_npc)	신전가드#dms842	4_M_RASWORD
+1@nyr,130,163,1	duplicate(dummy_npc)	니르엔#dms201	4_F_MADAME
+1@nyr,131,165,3	duplicate(dummy_npc)	제드#dms101	4_M_RACHOLD1
+
+1@nyr,130,172,3	duplicate(dummy_npc)	신전가드#dms801	4_M_RASWORD
+1@nyr,127,174,3	duplicate(dummy_npc)	신전가드#dms811	4_M_RASWORD
+1@nyr,112,174,5	duplicate(dummy_npc)	신전가드#dms821	4_M_RASWORD
+1@nyr,109,172,5	duplicate(dummy_npc)	신전가드#dms831	4_M_RASWORD
+1@nyr,116,172,5	duplicate(dummy_npc)	신전가드#dms841	4_M_RASWORD
+1@nyr,120,172,3	duplicate(dummy_npc)	신전가드#dms851	4_M_RASWORD
+1@nyr,123,172,3	duplicate(dummy_npc)	신전가드#dms861	4_M_RASWORD
+1@nyr,117,176,5	duplicate(dummy_npc)	신전가드#dms871	4_M_RASWORD
+1@nyr,122,176,3	duplicate(dummy_npc)	신전가드#dms881	4_M_RASWORD
+1@nyr,119,178,5	duplicate(dummy_npc)	신전가드#dms891	4_M_RASWORD
+
+1@nyr,123,168,3	duplicate(dummy_npc)	하트헌터#dms101	EP18_MD_HEARTHUNTER_A
+1@nyr,118,168,5	duplicate(dummy_npc)	하트헌터#dms111	EP18_MD_HEARTHUNTER_A
+1@nyr,113,165,5	duplicate(dummy_npc)	하트헌터#dms121	EP18_MD_HEARTHUNTER_A
+1@nyr,114,171,5	duplicate(dummy_npc)	하트헌터#dms131	EP18_MD_HEARTHUNTER_A
+1@nyr,128,170,3	duplicate(dummy_npc)	하트헌터#dms141	EP18_MD_HEARTHUNTER_A
+1@nyr,115,176,5	duplicate(dummy_npc)	하트헌터#dms151	EP18_MD_HEARTHUNTER_A
+1@nyr,120,174,3	duplicate(dummy_npc)	하트헌터#dms161	EP18_MD_HEARTHUNTER_A
+1@nyr,125,175,3	duplicate(dummy_npc)	하트헌터#dms171	EP18_MD_HEARTHUNTER_A
+1@nyr,123,177,3	duplicate(dummy_npc)	하트헌터#dms181	EP18_MD_HEARTHUNTER_A
+1@nyr,128,172,3	duplicate(dummy_npc)	하트헌터#dms191	EP18_MD_HEARTHUNTER_A
+
+// Note: dms201 and dms231 on the same cells on official
+1@nyr,109,167,7	duplicate(dummy_npc)	성난 군중#dms201	4_EP18_GW_MAN01
+1@nyr,117,164,1	duplicate(dummy_npc)	성난 군중#dms211	4_EP18_GW_WOMAN01
+1@nyr,109,167,7	duplicate(dummy_npc)	성난 군중#dms231	4_M_MIDDLE
+1@nyr,112,166,1	duplicate(dummy_npc)	성난 군중#dms221	4_EP18_GW_MAN02
+1@nyr,122,166,1	duplicate(dummy_npc)	성난 군중#dms241	4_EP18_GW_WOMAN02
+1@nyr,115,166,7	duplicate(dummy_npc)	성난 군중#dms251	4_EP18_GW_MIDDLE01
+1@nyr,120,167,1	duplicate(dummy_npc)	성난 군중#dms261	4_M_RACHMAN1
+1@nyr,116,170,1	duplicate(dummy_npc)	성난 군중#dms271	4_EP18_GW_MIDDLE02
+1@nyr,112,168,1	duplicate(dummy_npc)	성난 군중#dms281	4_F_SHABBY
+1@nyr,124,171,1	duplicate(dummy_npc)	성난 군중#dms291	4_EP18_GW_WOMAN01
+
+1@nyr,118,171,1	duplicate(dummy_npc)	성난 군중#dms202	4_M_RACHMAN2
+1@nyr,127,166,7	duplicate(dummy_npc)	성난 군중#dms212	4_M_DESERT
+1@nyr,125,168,7	duplicate(dummy_npc)	성난 군중#dms222	4_M_RACHMAN1
+1@nyr,123,164,7	duplicate(dummy_npc)	성난 군중#dms232	4_M_MIDDLE1
+1@nyr,127,169,7	duplicate(dummy_npc)	성난 군중#dms242	4_F_SHABBY
+
+
+
+
+//-------------------------------------------------------------------------
+// Daily quest
+//-------------------------------------------------------------------------
+1@nyr,153,145,0	warp	#qwpto01	1,7,1@nyr,146,145
+1@nyr,91,33,0	warp	#qwpto03	1,7,1@nyr,86,33
+1@nyr,120,181,0	script	#qwpto02	WARPNPC,7,1,{
+	end;
+OnTouch:
+	if ('nyr_daily_step > 12 && isbegin_quest(17522) == 1)
+		changequest 17522,17524;
+	warp 'map_2nyr$,35,222;
+	end;
+}
+1@nyr,88,146,0	warp	#areaw03	1,5,1@nyr,94,158
+// 1@nyr,43,26,0	duplicate(dummy_npc)	#qwptora	WARPNPC,7,1	// unknown
+
+// probably starter npcs
+// 1@nyr,194,30,0	script	#mson101	HIDDEN_WARP_NPC,5,5
+1@nyr,196,30,0	script	#qar101sw	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 0)
+		end;
+	'nyr_daily_step = 1;
+	disablenpc instance_npcname("#qar101sw");
+
+	enablenpc instance_npcname("신전가드#qdms101");
+	enablenpc instance_npcname("신전가드#qdms111");
+	enablenpc instance_npcname("신전가드#qdms121");
+	enablenpc instance_npcname("신전가드#qdms131");
+	enablenpc instance_npcname("신전가드#qdms141");
+	enablenpc instance_npcname("신전가드#qdms151");
+	enablenpc instance_npcname("신전가드#qdms161");
+	enablenpc instance_npcname("신전가드#qdms171");
+	enablenpc instance_npcname("신전가드#qdms181");
+
+	sleep 1000;	// note: player can walk
+	npctalk "모험가님 어서 오십시오. 이번 소탕 작전에 함께 해주셔서 감사합니다", instance_npcname("신전가드#qdms101");
+	sleep 1500;
+	npctalk "전원 집합했나?", instance_npcname("신전가드#qdms101");
+	sleep 1000;
+	npctalk "넷!!", instance_npcname("신전가드#qdms111");
+	npctalk "넷!!", instance_npcname("신전가드#qdms121");
+	npctalk "넷!!", instance_npcname("신전가드#qdms131");
+	npctalk "넷!!", instance_npcname("신전가드#qdms141");
+	npctalk "넷!!", instance_npcname("신전가드#qdms151");
+	npctalk "넷!!", instance_npcname("신전가드#qdms161");
+	npctalk "넷!!", instance_npcname("신전가드#qdms171");
+	npctalk "넷!!", instance_npcname("신전가드#qdms181");
+	sleep 1000;
+	npctalk "여신께 봉사하는 삶을 버리고 맹세를 '깨버린 변절자들이 이곳을 어지럽히고 있다!", instance_npcname("신전가드#qdms101");
+	sleep 1500;
+	npctalk "그들에게 여신의 뜻을 행사하는 것도 우리의 사명이다!!!", instance_npcname("신전가드#qdms101");
+	sleep 1500;
+	npctalk "이곳에서부터 정원 삼개 구역, 성전 입구 한개 구역 통 네개 구역을 막아뒀으니 순차적으로 정화한다.", instance_npcname("신전가드#qdms101");
+	sleep 1500;
+	npctalk "각자 위치로!!", instance_npcname("신전가드#qdms101");
+	enablenpc instance_npcname("신전가드#qdms01");
+	sleep 1500;
+
+	disablenpc instance_npcname("신전가드#qdms101");
+	disablenpc instance_npcname("신전가드#qdms111");
+	disablenpc instance_npcname("신전가드#qdms121");
+	disablenpc instance_npcname("신전가드#qdms131");
+	disablenpc instance_npcname("신전가드#qdms141");
+	disablenpc instance_npcname("신전가드#qdms151");
+	disablenpc instance_npcname("신전가드#qdms161");
+	disablenpc instance_npcname("신전가드#qdms171");
+	disablenpc instance_npcname("신전가드#qdms181");
+	end;
+}
+
+// Guards entrance daily
+1@nyr,190,31,1	duplicate(dummy_npc)	신전가드#qdms101	4_M_RASWORD
+1@nyr,186,31,5	duplicate(dummy_npc)	신전가드#qdms111	4_M_RASWORD
+1@nyr,187,32,5	duplicate(dummy_npc)	신전가드#qdms121	4_M_RASWORD
+1@nyr,188,33,5	duplicate(dummy_npc)	신전가드#qdms131	4_M_RASWORD
+1@nyr,189,34,5	duplicate(dummy_npc)	신전가드#qdms141	4_M_RASWORD
+1@nyr,185,32,5	duplicate(dummy_npc)	신전가드#qdms151	4_M_RASWORD
+1@nyr,186,33,5	duplicate(dummy_npc)	신전가드#qdms161	4_M_RASWORD
+1@nyr,187,34,5	duplicate(dummy_npc)	신전가드#qdms171	4_M_RASWORD
+1@nyr,188,35,5	duplicate(dummy_npc)	신전가드#qdms181	4_M_RASWORD
+
+
+// 1@nyr,120,173,0	duplicate(dummy_npc)	#qar201sw	HIDDEN_WARP_NPC,5,5
+// 1@nyr,108,167,0	duplicate(dummy_npc)	#qmobg401	HIDDEN_WARP_NPC,5,5
+
+// 1@nyr,165,32,0	duplicate(dummy_npc)	#qmobg101	HIDDEN_WARP_NPC,5,5
+1@nyr,1,1,0	script	#qmobg101	-1,{
+	end;
+OnStart01:
+	callsub( S_Call, 1, "아무도 우리를 막을 수 없어!", "신전가드#qdms01", 165,45, 170,58 );	// basic routine to spawn the monsters
+OnMobDead1:
+	callsub( S_Next, 2, "1구역 아직 적이 남아있다! 수색하라!", "신전가드#qdms02" );	// basic routine to enable the next npcs
+
+OnStart02:
+	callsub( S_Call, 2, "우리는 이제 더 강해졌다고!", "신전가드#qdms02", 159,114, 183,111, 186,122 );
+OnMobDead2:
+	callsub( S_Next, 3, "1구역 아직 적이 남아있다! 수색하라!", "신전가드#qdms03" );
+
+OnStart03:
+	callsub( S_Call, 3, "우리를 사냥감처럼 몰아가고 있어!! 못참아!", "신전가드#qdms03", 163,141, 164,132 );
+OnMobDead3:
+	callsub( S_Next, 4, "1구역 클리어! 전원 2구역으로 이동!!", "신전가드#qdms21", "#qwpto01" );
+
+OnStart21:
+	callsub( S_Call, 4, "너희가 내 맘을 알아?", "신전가드#qdms21", 137,124 );
+OnMobDead4:
+	callsub( S_Next, 5, "2구역 마직 적이 남아있다! 수색하라!", "신전가드#qdms22" );
+
+OnStart22:
+	callsub( S_Call, 5, "어서 피해야만!", "신전가드#qdms22", 114,111, 102,98, 108,78, 120,78, 126,110 );
+OnMobDead5:
+	callsub( S_Next, 6, "2구역 아직 적이 남아있다! 수색하라!", "신전가드#qdms23" );
+
+OnStart23:
+	callsub( S_Call, 6, "내가 그냥 당할 줄 알고?", "신전가드#qdms23", 138,61, 130,47, 125,36, 105,47, 103,35 );
+OnMobDead6:
+	callsub( S_Next, 7, "2구역 클리어! 전원 3구역으로 이동!!", "신전가드#qdms31", "#qwpto03" );
+
+OnStart31:
+	callsub( S_Call, 7, "우리가 훨 잘못했다구??", "신전가드#qdms31", 74,39, 60,32, 54,47 );
+OnMobDead7:
+	callsub( S_Next, 8, "3구역 아직 적이 남아있다! 수색하라!", "신전가드#qdms32" );
+
+OnStart32:
+	callsub( S_Call, 8, "어서 피해야만!!", "신전가드#qdms32", 62,61, 54,76, 73,97, 73,87 );
+OnMobDead8:
+	callsub( S_Next, 9, "3구역 마직 적이 남마있다! 수색하라!!", "신전가드#qdms33" );
+
+OnStart33:
+	callsub( S_Call, 9, "이크!!!", "신전가드#qdms33", 55,111, 69,114, 54,122, 49,119, 64,141, 80,141 );
+OnMobDead9:
+	callsub( S_Next, 10, "3구역 클리어! 전원 4구역으로 이동!", "신전가드#qdms41", "#areaw03" );
+
+OnStart41:
+	callsub( S_Call, 10, "진짜 질기다 더데.", "신전가드#qdms41", 94,183, 80,180, 62,183 );
+OnMobDead10:
+	callsub( S_Next, 11, "4구역 아직 적이 남아있다!", "신전가드#qdms42" );
+
+OnStart42:
+	callsub( S_Call, 11, "어서 피해야만!", "신전가드#qdms42", 119,173, 146,181, 178,182 );
+OnMobDead11:
+	if ('nyr_daily_step != 12)
+		end;
+	if (mobcount('map_1nyr$, instance_npcname("#qmobg101") + "::OnMobDead11") > 0)
+		end;
+	mapannounce 'map_1nyr$, "모든 구역 클리어! 신전 입구로 집합하라!", bc_map, 0xFFCC;
+	for ( .@i = 0; .@i < 9; ++.@i )
+		enablenpc instance_npcname("신전가드#qdms1" + .@i + "2");
+	end;
+
+S_Next:	// basic routine to mapannounce and enable the npcs
+	if ('nyr_daily_step != getarg(0))
+		end;
+	if (mobcount('map_1nyr$, instance_npcname("#qmobg101") + "::OnMobDead" + ('nyr_daily_step-1)) > 0)
+		end;
+	mapannounce 'map_1nyr$, getarg(1), bc_map, 0xFFCC;
+	for ( .@i = 2; .@i < getargcount(); ++.@i )
+		enablenpc instance_npcname( getarg(.@i) );
+	end;
+
+S_Call:	// basic routine to display the message and spawn the monsters
+	.@num = getarg(0);
+	if ('nyr_daily_step != .@num)
+		end;
+	'nyr_daily_step = .@num + 1;
+	npctalk getarg(1), instance_npcname( getarg(2) );
+	sleep 500;
+	disablenpc instance_npcname( getarg(2) );
+	getmapxy .@map$, .@x, .@y, BL_NPC, getarg(2);
+	.@label$ = instance_npcname("#qmobg101") + "::OnMobDead" + .@num;
+	areamonster 'map_1nyr$, .@x-2, .@y-2, .@x+2, .@y+2,"변절한 신전가드",21311,1, .@label$;	// EP18_MD_GUARD_B
+	for ( .@i = 3; .@i < getargcount(); .@i += 2 ) {
+		if (rand(2))
+			monster 'map_1nyr$, getarg(.@i), getarg(.@i+1),"신전가드",21310,1, .@label$;	// EP18_MD_GUARD_A
+		else
+			monster 'map_1nyr$, getarg(.@i), getarg(.@i+1),"변절한 신전가드",21311,1, .@label$;	// EP18_MD_GUARD_B
+	}
+	end;
+}
+
+1@nyr,165,32,5	script	신전가드#qdms01	4_M_RASWORD,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	.@string$ = replacestr( strnpcinfo(2), "qdms", "" );
+	donpcevent instance_npcname("#qmobg101") + "::OnStart" + .@string$;
+	end;
+}
+1@nyr,165,98,5	duplicate(신전가드#qdms01)	신전가드#qdms02	4_M_RASWORD,5,5
+1@nyr,184,141,5	duplicate(신전가드#qdms01)	신전가드#qdms03	4_M_RASWORD,5,5
+1@nyr,139,134,5	duplicate(신전가드#qdms01)	신전가드#qdms21	4_M_RASWORD,5,5
+1@nyr,102,109,5	duplicate(신전가드#qdms01)	신전가드#qdms22	4_M_RASWORD,5,5
+1@nyr,137,78,5	duplicate(신전가드#qdms01)	신전가드#qdms23	4_M_RASWORD,5,5
+1@nyr,74,32,5	duplicate(신전가드#qdms01)	신전가드#qdms31	4_M_RASWORD,5,5
+1@nyr,54,61,5	duplicate(신전가드#qdms01)	신전가드#qdms32	4_M_RASWORD,5,5
+1@nyr,65,108,5	duplicate(신전가드#qdms01)	신전가드#qdms33	4_M_RASWORD,5,5
+1@nyr,108,167,5	duplicate(신전가드#qdms01)	신전가드#qdms41	4_M_RASWORD,5,5
+1@nyr,107,178,5	duplicate(신전가드#qdms01)	신전가드#qdms42	4_M_RASWORD,5,5
+
+// Final map 1
+1@nyr,119,175,3	script	신전가드#qdms102	4_M_RASWORD,2,2,{
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 12)
+		end;
+	npctalk "넷!!", instance_npcname("신전가드#qdms112");
+	npctalk "넷!!", instance_npcname("신전가드#qdms122");
+	npctalk "넷!!", instance_npcname("신전가드#qdms132");
+	npctalk "넷!!", instance_npcname("신전가드#qdms142");
+	npctalk "넷!!", instance_npcname("신전가드#qdms152");
+	npctalk "넷!!", instance_npcname("신전가드#qdms162");
+	npctalk "넷!!", instance_npcname("신전가드#qdms172");
+	npctalk "넷!!", instance_npcname("신전가드#qdms182");
+
+	mes "[신전 가드 대장]";
+	mes "모두를 수고 많았다! 소탕은 매일 계속될 것이다! 오늘은 이만 해산하고 쉬도록!";
+	next;
+	mes "[신전 가드 대장]";
+	mes "모험가님, 도움을 주셔서 감사합니다.";
+	next;
+	mes "[신전 가드 대장]";
+	mes "성전 안의 별도의 소탕작전에도 함께 하신다 들었습니다. 그럼 잘 부탁드립니다!";
+	close2;
+	if ('nyr_daily_step != 12)
+		end;
+	'nyr_daily_step = 13;
+	enablenpc instance_npcname("#qwpto02");
+	enablenpc instance_npcname("#2ar101sw");
+	end;
+}
+1@nyr,116,171,7	duplicate(dummy_npc)	신전가드#qdms112	4_M_RASWORD
+1@nyr,118,171,7	duplicate(dummy_npc)	신전가드#qdms122	4_M_RASWORD
+1@nyr,120,171,1	duplicate(dummy_npc)	신전가드#qdms132	4_M_RASWORD
+1@nyr,122,171,1	duplicate(dummy_npc)	신전가드#qdms142	4_M_RASWORD
+1@nyr,116,173,7	duplicate(dummy_npc)	신전가드#qdms152	4_M_RASWORD
+1@nyr,118,173,7	duplicate(dummy_npc)	신전가드#qdms162	4_M_RASWORD
+1@nyr,120,173,1	duplicate(dummy_npc)	신전가드#qdms172	4_M_RASWORD
+1@nyr,122,173,1	duplicate(dummy_npc)	신전가드#qdms182	4_M_RASWORD
+
+// nowalk delimiter npcs
+1@nyr,89,24,5	duplicate(dummy_npc)	#cell01	2_MONEMUS
+1@nyr,89,37,5	duplicate(dummy_npc)	#cell02	2_MONEMUS
+1@nyr,89,58,5	duplicate(dummy_npc)	#cell03	2_MONEMUS
+1@nyr,89,65,5	duplicate(dummy_npc)	#cell04	2_MONEMUS
+1@nyr,89,106,5	duplicate(dummy_npc)	#cell05	2_MONEMUS
+1@nyr,89,113,5	duplicate(dummy_npc)	#cell06	2_MONEMUS
+1@nyr,89,134,5	duplicate(dummy_npc)	#cell07	2_MONEMUS
+1@nyr,89,153,5	duplicate(dummy_npc)	#cell08	2_MONEMUS
+1@nyr,150,134,5	duplicate(dummy_npc)	#cell09	2_MONEMUS
+1@nyr,150,153,5	duplicate(dummy_npc)	#cell10	2_MONEMUS
+1@nyr,150,24,5	duplicate(dummy_npc)	#cell11	2_MONEMUS
+1@nyr,150,37,5	duplicate(dummy_npc)	#cell12	2_MONEMUS
+1@nyr,150,58,5	duplicate(dummy_npc)	#cell13	2_MONEMUS
+1@nyr,150,65,5	duplicate(dummy_npc)	#cell14	2_MONEMUS
+1@nyr,150,106,5	duplicate(dummy_npc)	#cell15	2_MONEMUS
+1@nyr,150,113,5	duplicate(dummy_npc)	#cell66	2_MONEMUS
+
+// 1@nyr,89,153,5	duplicate(dummy_npc)	#cell41	2_MONEMUS	// duplicate of 8
+1@nyr,98,153,5	duplicate(dummy_npc)	#cell42	2_MONEMUS
+1@nyr,141,153,5	duplicate(dummy_npc)	#cell51	2_MONEMUS
+
+
+// map 2
+2@nyr,35,200,0	script	#2ar101sw	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 13)
+		end;
+	'nyr_daily_step = 14;
+	for ( .@i = 0; .@i < 7; ++.@i )
+		enablenpc instance_npcname("신전가드#2dms1" + .@i + "1");
+	npctalk "이곳은 이 성전의 핵심이다!", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	npctalk "모든 방법 시설을 점검하고 보안을 고 진입하며 힘을 기하려는 자들은 모두 처리하도록!", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	npctalk "넷!!", instance_npcname("신전가드#2dms111");
+	npctalk "넷!!", instance_npcname("신전가드#2dms121");
+	npctalk "넷!!", instance_npcname("신전가드#2dms131");
+	npctalk "넷!!", instance_npcname("신전가드#2dms141");
+	npctalk "넷!!", instance_npcname("신전가드#2dms151");
+	npctalk "넷!!", instance_npcname("신전가드#2dms161");
+	sleep 2000;
+	npctalk "각자 위치로!", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	for ( .@i = 1; .@i < 7; ++.@i )
+		disablenpc instance_npcname("신전가드#2dms1" + .@i + "1");
+	npctalk "모험가님, 소탕작전에 참여 해주셔서 감사합니다!", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	npctalk "모험가님께는 침입자들의 처리 외에도 별도의 임무를 부탁드리겠습니다.", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	npctalk "임시로 파티의 리더 분께 관리자 권한을 발급해 드릴테니 매일 바는 보안 시설의 보안번호를 새로 설정해 주십시오.", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	'code = rand(1000,9999);
+	npctalk "오늘의 보안번호는 " + 'code + "번입니다. 반드시 서고와 보관소가 빈 것을 확인한 뒤에 설정하셔야 합니다.", instance_npcname("신전가드#2dms101");
+	sleep 2000;
+	npctalk "그럼 임무 돌입합니다!", instance_npcname("신전가드#2dms101");
+	enablenpc instance_npcname("하트헌터#2dms10");
+	end;
+}
+
+2@nyr,35,187,7	script	신전가드#2dms101	4_M_RASWORD,{
+	if ('code > 0)
+		npctalk "보안번호를 잊으셨습니까? 오늘의 보안번호는 " + 'code + ". 서두르섬 시오! 저도 곧 합류하겠습니다.";
+	end;
+}
+
+2@nyr,37,191,3	duplicate(dummy_npc)	신전가드#2dms111	4_M_RASWORD
+2@nyr,35,191,3	duplicate(dummy_npc)	신전가드#2dms121	4_M_RASWORD
+2@nyr,33,191,3	duplicate(dummy_npc)	신전가드#2dms131	4_M_RASWORD
+2@nyr,33,189,5	duplicate(dummy_npc)	신전가드#2dms141	4_M_RASWORD
+2@nyr,35,189,5	duplicate(dummy_npc)	신전가드#2dms151	4_M_RASWORD
+2@nyr,37,189,5	duplicate(dummy_npc)	신전가드#2dms161	4_M_RASWORD
+
+
+// mobs spawn npcs
+2@nyr,1,1,0	script	#nyr_puri_mob_2	-1,{
+	end;
+OnStart10:
+	callsub( S_Call, 14, "아! 깜짝이야!", "하트헌터#2dms10" );
+OnMobDead14:
+	callsub( S_Next, 15, "1구역 아직 적이 남마있다! 수색하라!!", "하트헌터#2dms11" );
+
+OnStart11:
+	callsub( S_Call, 15, "뭐야? 쟤네가 왜 ??", "하트헌터#2dms11" );
+OnMobDead15:
+	callsub( S_Next, 16, "1구역 아직 적이 남마있다! 수색하라!!", "하트헌터#2dms12" );
+
+OnStart12:
+	callsub( S_Call, 16, "이크!!!", "하트헌터#2dms12" );
+OnMobDead16:
+	callsub( S_Next, 17, "1서고 부근 복도 클리어! 1서고 전립!", "하트헌터#2dms13", "#2mstep01" );
+
+OnStart13:
+	callsub( S_Call, 17, "마유! 짜증나! 우릴 좀 내버려두지!", "하트헌터#2dms13", 33,104, 31,79, 31,67, 18,81 );
+OnMobDead17:
+	callsub( S_Next, 18, "1세고 클리어! 보만호 재설정 대기 중", "#2mstep02" );
+
+OnStart20:
+	callsub( S_Call, 20, "왜 이렇게 다를 부지런해!!", "하트헌터#2dms20" );
+OnMobDead20:
+	callsub( S_Next, 21, "2구역 마격 미 남마있다! 수색하라!!", "하트헌터#2dms21" );
+
+OnStart21:
+	callsub( S_Call, 21, "우릴 좀 내버려!", "하트헌터#2dms21" );
+OnMobDead21:
+	callsub( S_Next, 22, "2세고 부 복도 클리데! 2세트 전입!!", "하트헌터#2dms22", "#2mstep03" );
+
+OnStart22:
+	callsub( S_Call, 22, "그 책만 찾으면...!! 너는 누구냐?", "하트헌터#2dms22", 94,62, 132,62, 156,48, 156,36, 132,17, 100,16, 83,33, 91,44 );
+OnMobDead22:
+	callsub( S_Next, 23, "2세고 클리어! 보만번호 재설정 대기 중", "#2mstep04" );
+
+OnStart30:
+	callsub( S_Call, 25, "가만 만들 거!!", "하트헌터#2dms30" );
+OnMobDead25:
+	callsub( S_Next, 26, "3구역 아직 적이 남아있다. 수색하라!", "하트헌터#2dms31" );
+
+OnStart31:
+	callsub( S_Call, 26, "정말 끈질기다! 질려!", "하트헌터#2dms31" );
+OnMobDead26:
+	callsub( S_Next, 27, "3서고 부근 복도 클리어! 3서고 진입!", "하트헌터#2dms32", "#2mstep05" );
+
+OnStart32:
+	callsub( S_Call, 27, "머서 보관소로 가야 하는데! !!", "하트헌터#2dms32", 195,99, 215,101, 192,80, 205,64, 214,57 );
+OnMobDead27:
+	callsub( S_Next, 28, "3세고 클리어! 보안번호 재설정 대기 중", "#2mstep06" );
+
+OnStart40:
+	callsub( S_Call, 30, "아직 원하는 건 손에 넣지 못했는데!", "하트헌터#2dms40" );
+OnMobDead30:
+	callsub( S_Next, 31, "중앙 클리어! 보관실 진입!", "#2mstep07", "#2mstep08", "하트헌터#2dms41", "하트헌터#2dms42", "하트헌터#2dms43", "하트헌터#2dms44", "하트헌터#2dms45",
+		"하트헌터#2dms46", "하트헌터#2dms47", "하트헌터#2dms48", "하트헌터#2dms49", "#2ar201sw" );
+
+S_Next:
+	if ('nyr_daily_step != getarg(0))
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("#nyr_puri_mob_2") + "::OnMobDead" + ('nyr_daily_step-1)) > 0)
+		end;
+	mapannounce 'map_2nyr$, getarg(1), bc_map, 0xFFCC;
+	for ( .@i = 2; .@i < getargcount(); ++.@i )
+		enablenpc instance_npcname( getarg(.@i) );
+	end;
+
+S_Call:
+	.@num = getarg(0);
+	if ('nyr_daily_step != .@num)
+		end;
+	'nyr_daily_step = .@num + 1;
+	npctalk getarg(1), instance_npcname( getarg(2) );
+	sleep 500;
+	disablenpc instance_npcname( getarg(2) );
+	.@label$ = instance_npcname("#nyr_puri_mob_2") + "::OnMobDead" + .@num;
+	if (getargcount() < 4) {
+		getmapxy .@map$, .@x, .@y, BL_NPC, getarg(2);
+		monster 'map_2nyr$, .@x, .@y,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	}
+	else {
+		for ( .@i = 3; .@i < getargcount(); .@i += 2 ) {
+			monster 'map_2nyr$, getarg(.@i), getarg(.@i+1),"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		}
+	}
+	end;
+
+OnFinal:
+	if ('nyr_daily_step != 32)
+		end;
+	if (mobcount('map_2nyr$, instance_npcname("#nyr_puri_mob_2") + "::OnFinal") > 0)
+		end;
+	mapannounce 'map_2nyr$, "보관실 보만번호 재설정 대기중!", bc_map, 0xFFCC;
+	disablenpc instance_npcname("#2mstep07");
+	disablenpc instance_npcname("#2mstep08");
+	enablenpc instance_npcname("#2mstep09");
+	enablenpc instance_npcname("#2mstep10");
+	end;
+}
+
+2@nyr,35,171,5	script	하트헌터#2dms10	EP18_MD_HEARTHUNTER_R,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	.@string$ = replacestr( strnpcinfo(2), "2dms", "" );
+	donpcevent instance_npcname("#nyr_puri_mob_2") + "::OnStart" + .@string$;
+	end;
+}
+2@nyr,36,146,5	duplicate(하트헌터#2dms10)	하트헌터#2dms11	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,64,131,5	duplicate(하트헌터#2dms10)	하트헌터#2dms12	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,42,104,5	duplicate(하트헌터#2dms10)	하트헌터#2dms13	EP18_MD_HEARTHUNTER_R,5,5
+
+2@nyr,69,103,5	duplicate(하트헌터#2dms10)	하트헌터#2dms20	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,106,78,5	duplicate(하트헌터#2dms10)	하트헌터#2dms21	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,94,62,5	duplicate(하트헌터#2dms10)	하트헌터#2dms22	EP18_MD_HEARTHUNTER_R,5,5
+
+2@nyr,129,75,5	duplicate(하트헌터#2dms10)	하트헌터#2dms30	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,158,104,5	duplicate(하트헌터#2dms10)	하트헌터#2dms31	EP18_MD_HEARTHUNTER_R,5,5
+2@nyr,195,99,5	duplicate(하트헌터#2dms10)	하트헌터#2dms32	EP18_MD_HEARTHUNTER_R,5,5
+
+2@nyr,174,109,5	duplicate(하트헌터#2dms10)	하트헌터#2dms40	EP18_MD_HEARTHUNTER_R,5,5
+
+
+// final battle
+2@nyr,115,177,3	script	하트헌터#2dms41	EP18_MD_HEARTHUNTER_R,5,5,{
+	end;
+OnTouch:
+	npctalk "어~ 원가 좀 나오는 것 같아~";
+	end;
+}
+
+2@nyr,126,174,5	script	하트헌터#2dms42	EP18_MD_HEARTHUNTER_R,5,5,{
+	end;
+OnTouch:
+	npctalk "자릿하다!!";
+	end;
+}
+
+2@nyr,117,207,1	duplicate(dummy_npc)	하트헌터#2dms43	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,115,206,7	duplicate(dummy_npc)	하트헌터#2dms44	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,119,206,1	duplicate(dummy_npc)	하트헌터#2dms45	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,129,199,5	duplicate(dummy_npc)	하트헌터#2dms46	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,113,194,3	duplicate(dummy_npc)	하트헌터#2dms47	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,111,209,5	duplicate(dummy_npc)	하트헌터#2dms48	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,112,206,5	duplicate(dummy_npc)	하트헌터#2dms49	EP18_MD_HEARTHUNTER_R,2,2
+2@nyr,115,201,5	duplicate(dummy_npc)	하트헌터#2dms50	EP17_1_BELLARE1
+
+2@nyr,118,200,0	script	#2ar201sw	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 31)
+		end;
+	'nyr_daily_step = 32;
+	disablenpc();
+	enablenpc instance_npcname("하트헌터#2dms50");
+	emotion ET_QUESTION, getnpcid(0,instance_npcname("하트헌터#2dms50"));
+	sleep 500;
+	npctalk "뭐야? 불청객이 왔잖아?", instance_npcname("하트헌터#2dms50");
+	sleep 2000;
+	npctalk "다를 뭐하고 있었길래 누가 들어와도 모르는 거야? 정신 차려!", instance_npcname("하트헌터#2dms50");
+	sleep 2000;
+	npctalk "머~ 취한다~ 심장의 마력에 취한다~", instance_npcname("하트헌터#2dms48");
+	sleep 2000;
+	npctalk "국가에서 허락한 유일한 마력 아니냐?", instance_npcname("하트헌터#2dms48");
+	npctalk "무슨 소리? 이건 국가에서도 허락 안 한 거라고, 잊었어?", instance_npcname("하트헌터#2dms44");
+	sleep 2000;
+	npctalk "어, 맞다. 우리 불법 침입중이었지?", instance_npcname("하트헌터#2dms49");
+	sleep 200;
+	npctalk "불법의 맛이라 그런지 더 짜릿한걸?", instance_npcname("하트헌터#2dms48");
+	npctalk "야! 이거 좀 이상해, 마무리 조작해도 심장의 마력이 총출되지 않는데?", instance_npcname("하트헌터#2dms43");
+	npctalk "그러니까 저리 비키라니까! 내가 해본다고!!", instance_npcname("하트헌터#2dms45");
+	sleep 2000;
+	npctalk "뭐? 그럼 지금 내 몸에 흐르는 이 짜릿함은 뭔데?", instance_npcname("하트헌터#2dms48");
+	sleep 2000;
+	npctalk "잘 살펴봐. 누전된 걸 수도 있어.", instance_npcname("하트헌터#2dms49");
+	npctalk "거, 기분 한번 짜릿하네.", instance_npcname("하트헌터#2dms48");
+	npctalk "전에 조작법을 어깨 너머로 봤다며? 너만 믿으라며?", instance_npcname("하트헌터#2dms50");
+	sleep 1000;
+	npctalk "그게... 잠깐만, 보안번호 불일치라고 뜨는데?", instance_npcname("하트헌터#2dms43");
+	sleep 2000;
+	npctalk "보안번호 불일치? 흠... 그건 여기 계신 모험가와 관련이 있을 것 같은데? 그렇죠?", instance_npcname("하트헌터#2dms50");
+	sleep 2000;
+	npctalk "바권 보안번호 좀 입력해주시죠? 그럼 우리 모두 정말 행복하겠다.", instance_npcname("하트헌터#2dms50");
+	sleep 2000;
+	npctalk "저리 비켜봐, 기계는 때려야 말을 듣는다고!", instance_npcname("하트헌터#2dms45");
+	npctalk "야! 누가 기계를 그렇게 다뤄?", instance_npcname("하트헌터#2dms43");
+	specialeffect EF_HIT1, AREA, instance_npcname("하트헌터#2dms45");
+	sleep 2000;
+	npctalk "앗!!! 갑자기 더 짜릿해졌어!! 이것도 기분탓이야?", instance_npcname("하트헌터#2dms48");
+	npctalk "누천 맞나 봐! 애한테서 갑자기 빛이 나!", instance_npcname("하트헌터#2dms44");
+	specialeffect EF_MAGICALATTHIT, AREA, instance_npcname("하트헌터#2dms48");
+	sleep 2000;
+	npctalk "으어어어어!!!", instance_npcname("하트헌터#2dms48");
+	npctalk "아!! 얘 멋져졌어!!!", instance_npcname("하트헌터#2dms44");
+	npctalk "왜 쟤만.. ? 뭔가 이상한데?", instance_npcname("하트헌터#2dms43");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms48");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms48");
+	sleep 2000;
+	npctalk "머...?", instance_npcname("하트헌터#2dms43");
+	npctalk "이게 뭐야?", instance_npcname("하트헌터#2dms44");
+	npctalk "역시 고장난 기계는 두드려야지!", instance_npcname("하트헌터#2dms45");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms43");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms44");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms45");
+	sleep 2000;
+	npctalk "나도 감전된 거야? 나도 몸미 미상한데?", instance_npcname("하트헌터#2dms49");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms43");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms44");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms45");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms49");
+	sleep 2000;
+	npctalk "그게 아니라 내가 성공한 거야, 봐, 우리 모두 심장이랑 공명하잔아?", instance_npcname("하트헌터#2dms45");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms49");
+	sleep 200;
+	npctalk "...", instance_npcname("하트헌터#2dms48");
+	sleep 2000;
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms41");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms42");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms46");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms47");
+	specialeffect EF_NPC_STOP, AREA, instance_npcname("하트헌터#2dms50");
+	npctalk "아무렴 어때, 심장의 마력은 빼내지 못했지만 공명은 잘되네. 그럼 이 힘를 시험해 봐야겠지?", instance_npcname("하트헌터#2dms50");
+	npctalk "마침 모험가가 있데, 딱이네.", instance_npcname("하트헌터#2dms49");
+	npctalk "잘됐네. 안 그랬으면 우리끼리 다들 뻔했는데, 그치?", instance_npcname("하트헌터#2dms45");
+	npctalk "아! 나 그런거 프론테라 가서 봤어. 다들 알을 때리고 있더라?", instance_npcname("하트헌터#2dms44");
+	sleep 2000;
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms41");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms42");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms46");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms47");
+	specialeffect EF_UNDEADBODY, AREA, instance_npcname("하트헌터#2dms50");
+	npctalk "개인적인 감정은 없지만, 이대로 보낸다면 우리가 곤란해져서요.", instance_npcname("하트헌터#2dms50");
+	sleep 2000;
+	npctalk "그냥 모른척 지나가셨다면 피차 좋았을 것들, 어쩔 수 없죠, 안녕.", instance_npcname("하트헌터#2dms50");
+
+	for ( .@i = 41; .@i < 51; ++.@i ) {
+		hideonnpc instance_npcname("하트헌터#2dms" + .@i );
+		disablenpc instance_npcname("하트헌터#2dms" + .@i );
+	}
+
+	.@label$ = instance_npcname("#nyr_puri_mob_2") + "::OnFinal";
+	monster 'map_2nyr$,122,194,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_2nyr$,118,196,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,117,207,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,115,206,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,119,206,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,113,194,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,111,209,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,112,206,"별장의 하트헌터",21312,1, .@label$;
+	monster 'map_2nyr$,115,201,"별장의 하트헌터",21313,1, .@label$;	// EP18_MD_HEARTHUNTER_F
+	end;
+}
+
+
+// warp npcs
+2@nyr,56,104,0	warp	#2mstep01	1,1,2@nyr,49,104
+
+2@nyr,49,55,0	script	#2mstep02	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,53,55;
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 18)
+		end;
+	'nyr_daily_step = 19;
+	disablenpc instance_npcname("#2mstep01");
+	enablenpc instance_npcname("보안장치#2dms10");
+	end;
+}
+
+2@nyr,119,71,0	warp	#2mstep03	1,1,2@nyr,119,65
+
+2@nyr,119,66,0	script	#2mstep04	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,117,73;
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 23)
+		end;
+	'nyr_daily_step = 24;
+	disablenpc instance_npcname("#2mstep03");
+	enablenpc instance_npcname("보안장치#2dms20");
+	end;
+}
+
+2@nyr,183,104,0	warp	#2mstep05	1,1,2@nyr,190,104
+
+2@nyr,186,104,0	script	#2mstep06	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,180,104;
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 28)
+		end;
+	'nyr_daily_step = 29;
+	disablenpc instance_npcname("#2mstep05");
+	enablenpc instance_npcname("보안장치#2dms30");
+	end;
+}
+
+2@nyr,120,123,0	script	#2mstep07	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,120,126;
+	navigateto("2@nyr",120,137);
+	end;
+}
+
+2@nyr,120,137,0	script	#2mstep08	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,120,147;
+	navigateto("2@nyr",120,197);
+	end;
+}
+
+2@nyr,120,141,0	script	#2mstep09	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,120,134;
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 32)
+		end;
+	'nyr_daily_step = 33;
+	enablenpc instance_npcname("보안장치#2dms40");
+	end;
+}
+
+2@nyr,151,131,0	script	#2mstep10	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp 'map_2nyr$,159,131;
+	navigateto("2@nyr",203,220);
+	end;
+}
+
+2@nyr,203,220,0	script	#2mstep11	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('nyr_daily_step == 35 && isbegin_quest(17523) == 1)
+		changequest 17523,17526;
+	warp "rachel",167,240;
+	end;
+}
+
+
+// Code
+2@nyr,51,57,5	script	보안장치#2dms10	4_POINT_BLUE,5,5,{
+	if (is_party_leader() == false)
+		end;
+	switch( atoi( replacestr( strnpcinfo(2), "2dms", "" ) ) ) {
+	case 10:
+		.@step = 19;
+		.@mes$ = "제 1서고 보안번호 재설정되었습니다.";
+		.@enable$ = "하트헌터#2dms20";
+		setarray .@xy[0],119,71;
+		break;
+	case 20:
+		.@step = 24;
+		.@mes$ = "제 2서고 보안번호 재설정되었습니다.";
+		.@enable$ = "하트헌터#2dms30";
+		setarray .@xy[0],183,104;
+		break;
+	case 30:
+		.@step = 29;
+		.@mes$ = "제 3서고 보안번호 재설정되었습니다.";
+		.@enable$ = "하트헌터#2dms40";
+		setarray .@xy[0],120,123;
+		break;
+	default:
+		end;
+	}
+	if ('nyr_daily_step != .@step)
+		end;
+	mes "보안번호 재설정 대기 중. 새로운 보안번호를 입력하십시오.";
+	next;
+	input .@num;
+	if (.@num != 'code) {
+		mes "입력 취소";
+		close;
+	}
+	mes .@mes$;
+	if ('nyr_daily_step == .@step) {
+		'nyr_daily_step = .@step + 1;
+		enablenpc instance_npcname( .@enable$ );
+	}
+	navigateto("2@nyr",.@xy[0],.@xy[1]);
+	close;
+OnTouch:
+	npctalk "보안번호 재설정 대기 중";
+	end;
+}
+2@nyr,115,69,5	duplicate(보안장치#2dms10)	보안장치#2dms20	4_POINT_BLUE,5,5
+2@nyr,184,100,5	duplicate(보안장치#2dms10)	보안장치#2dms30	4_POINT_BLUE,5,5
+
+2@nyr,124,138,5	script	보안장치#2dms40	4_POINT_BLUE,5,5,{
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 33)
+		end;
+	mes "보안번호 재설정 대기 중. 새로운 보안번호를 입력하십시오.";
+	next;
+	input .@num;
+	if (.@num != 'code) {
+		mes "입력 취소";
+		close;
+	}
+	mes "보관실 보안번호 재설정되었습니다.";
+	if ('nyr_daily_step == 33) {
+		'nyr_daily_step = 34;
+		enablenpc instance_npcname("#2mstep10");
+		enablenpc instance_npcname("#2mstep11");
+		enablenpc instance_npcname("신전가드#2dms201");
+		enablenpc instance_npcname("신전가드#2dms211");
+		enablenpc instance_npcname("신전가드#2dms221");
+		enablenpc instance_npcname("신전가드#2dms231");
+		enablenpc instance_npcname("신전가드#2dms241");
+		enablenpc instance_npcname("신전가드#2dms251");
+		enablenpc instance_npcname("신전가드#2dms261");
+		enablenpc instance_npcname("#msnavi01");
+		mapannounce 'map_2nyr$, "미린다고 무리가 포기할 것 같마? 비비 맛을 말마비랐는데? 두고!", bc_map, 0xFFCC;
+		sleep2 1000;
+		mapannounce 'map_2nyr$, "봐 전 구역 클리머 전원 출구쪽으로 질함!", bc_map, 0xFFCC;
+	}
+	navigateto("2@nyr",151,131);
+	close;
+OnTouch:
+	npctalk "보안번호 재설정 대기 중";
+	end;
+}
+
+2@nyr,174,135,5	script	신전가드#2dms201	4_M_RASWORD,5,5,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('nyr_daily_step != 34)
+		end;
+	'nyr_daily_step = 35;
+	npctalk "모두를 고생 많았다!";
+	sleep 2000;
+	npctalk "한동만 매일 성전을 정화해야 한다!";
+	sleep 2000;
+	npctalk "넷!!", instance_npcname("신전가드#2dms211");
+	npctalk "넷!!", instance_npcname("신전가드#2dms221");
+	npctalk "넷!!", instance_npcname("신전가드#2dms231");
+	npctalk "넷!!", instance_npcname("신전가드#2dms241");
+	npctalk "넷!!", instance_npcname("신전가드#2dms251");
+	npctalk "넷!!", instance_npcname("신전가드#2dms261");
+	npctalk "모두 미만 해산하도록!";
+	sleep 2000;
+	npctalk "고기도 고생 많으니 또 리겠습니다.";
+	end;
+}
+
+2@nyr,177,134,1	duplicate(dummy_npc)	신전가드#2dms211	4_M_RASWORD,3,0
+2@nyr,176,133,1	duplicate(dummy_npc)	신전가드#2dms221	4_M_RASWORD
+2@nyr,175,132,1	duplicate(dummy_npc)	신전가드#2dms231	4_M_RASWORD
+2@nyr,178,133,1	duplicate(dummy_npc)	신전가드#2dms241	4_M_RASWORD
+2@nyr,177,132,1	duplicate(dummy_npc)	신전가드#2dms251	4_M_RASWORD
+2@nyr,176,131,1	duplicate(dummy_npc)	신전가드#2dms261	4_M_RASWORD
+
+// 2@nyr,179,131,0	duplicate(dummy_npc)	#msnavi01	WARPNPC,3,3
+2@nyr,179,131,0	script	#msnavi01	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch_:
+	navigateto("2@nyr",203,220);
+	end;
+}

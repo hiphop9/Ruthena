@@ -14,54 +14,54 @@
 //= 1.0 First version 
 //============================================================
 
-prontera,218,218,3	script	Pet Enthusiast	96,{
-	mes "[Pet Enthusiast Jenny]";
-	mes "Oh, Hi there!";
-	mes "Are you a lover of animals like I am?";
+prontera,218,218,3	script	애완동물 애호가::Pet Enthusiast	96,{
+	mes "[애완동물 매니아 제니]";
+	mes "아, 안녕하세요!";
+	mes "당신도 저처럼 동물을 좋아하시나요?";
 	next;
-	mes "[Pet Enthusiast Jenny]";
-	mes "I know that it's really hard to keep your cute pets happy.";
-	mes "All it takes is the right kind of food.";
+	mes "[애완동물 애호가 제니]";
+	mes "귀여운 애완동물을 행복하게 해준다는 게 정말 어렵다는 걸 알아요.";
+	mes "올바른 종류의 음식만 있으면 됩니다.";
 	next;
-	mes "[Pet Enthusiast Jenny]";
-	mes "I know that sometimes it is really hard to get the right food for your pet.";
+	mes "[애완동물 애호가 제니]";
+	mes "애완동물에게 맞는 사료를 구하는 것이 때로는 정말 어렵다는 것을 알고 있습니다.";
 	next;
-	mes "[Pet Enthusiast Jenny]";
-	mes "Do you have any food that you are looking for?";
+	mes "[애완동물 애호가 제니]";
+	mes "찾고 있는 음식이 있나요?";
 	next;
 	switch(select("Yes:No")) {
 	case 1:
 		if ((countitem(7158) > 19) && (countitem(970) > 0)) {
-			mes "[Pet Enthusiast Jenny]";
-			mes "Oh, you have ^ff000020 Broken Liquor Jar^000000s and ^ff00001 Alcohol^000000!";
-			mes "Do you want to exchange them for";
-			mes "^ff000020 Spirit Liquor^000000 for your Wanderer pet?";
+			mes "[애완동물 애호가 제니]";
+			mes "아, ^ff000020 깨진 술동이^000000s와 ^ff00001 알코올^000000이 있어요!";
+			mes "교환하시겠습니까?";
+			mes "방랑자 애완동물을 위한 ^ff000020 혼령주^000000?";
 			next;
-			switch(select("Yes, please!:No thank you.")) {
+			switch(select("예, 부탁드립니다!:아니요. 감사합니다.")) {
 			case 1:
-				mes "[Pet Enthusiast Jenny]";
-				mes "Ok here you go then.";
-				mes "I hope it keeps your";
-				mes "cute pet happy.";
-				delitem 7158,20; //Broken_Wine_Vessel
-				delitem 970,1; //Alchol
-				getitem 7824,20; //Spirit_Liquor
+				mes "[애완동물 애호가 제니]";
+				mes "그럼 여기요.";
+				mes "그것이 당신을 유지하길 바랍니다";
+				mes "귀여운 애완동물은 행복해요.";
+				delitem 7158,20; //깨진 술동이
+				delitem 970,1; //알코올
+				getitem 7824,20; //혼령주
 				close;
 			case 2:
-				mes "[Pet Enthusiast Jenny]";
-				mes "Hehe, well just let me know if you change your mind.";
+				mes "[애완동물 애호가 제니]";
+				mes "헤헤, 마음이 바뀌면 꼭 알려주세요.";
 				close;
 			}
 		}
 		else {
-			mes "[Pet Enthusiast Jenny]";
-			mes "Actually, right now I can help you get Spirit Liquor for Wanderer pets.";
+			mes "[애완동물 애호가 제니]";
+			mes "사실 지금은 방랑자 애완동물을 위한 증류주 구입을 도와드릴 수 있습니다.";
 			next;
-			mes "[Pet Enthusiast Jenny]";
-			mes "All you have to do is bring me ^FF0000 20 Broken Liquor Jars^000000 and ^FF0000 1 Alcohol^000000.";
-			mes "I can give you ^FF0000 20 Spirit Liquor^000000 for that.";
+			mes "[애완동물 애호가 제니]";
+			mes "당신이 해야 할 일은 ^FF0000 깨진 술동이 20개^000000와 ^FF0000 술 1개^000000을 가져오기만 하면 됩니다.";
+			mes "그 대가로 ^FF0000 혼령주20개 ^000000를 드릴 수 있습니다.";
 			next;
-			mes "You can get the Broken Liquor Jars from Tengu monsters in Amatsu dungeon.";
+			mes "아마츠 던전의 텐구 몬스터에게서 깨진 술동이을 얻을 수 있습니다.";
 			close;
 		}
 	case 2:
@@ -69,7 +69,7 @@ prontera,218,218,3	script	Pet Enthusiast	96,{
 	}
 }
 
-prontera,220,218,3	script	Berry Toe	955,{
+prontera,220,218,3	script	베리 토::Berry Toe	955,{
 	specialeffect EF_CHANGEDARK;
 	end;
 }

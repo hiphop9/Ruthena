@@ -7,6 +7,7 @@
 #include <memory>
 
 #include <common/cbasetypes.hpp>
+#include <config/custom.hpp>
 #include <common/database.hpp>
 #include <common/ers.hpp>
 #include <common/malloc.hpp>
@@ -92,12 +93,18 @@ uint64 GuildSkillTreeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	uint16 skill_id;
 
 	if( !( skill_id = skill_name2id( name.c_str() ) ) ){
-		this->invalidWarning( node["Id"], "Invalid guild skill name \"%s\", skipping.\n", name.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Id"], "\"%s\"은(는) 잘못된 길드 스킬 이름입니다. 건너뜀.\n", name.c_str() );
+		else
+			this->invalidWarning( node["Id"], "Invalid guild skill name \"%s\", skipping.\n", name.c_str() );
 		return 0;
 	}
 
 	if( !SKILL_CHK_GUILD( skill_id ) ){
-		this->invalidWarning( node["Id"], "Guild skill \"%s\" with Id %u is out of the guild skill range [%u-%u], skipping.\n", name.c_str(), skill_id, GD_SKILLBASE, GD_MAX );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Id"], "스킬 아이디 %u이(가) 있는 길드 스킬 \"%s\"이(가) 길드 스킬 범위 [%u-%u]을(를) 벗어났습니다. 건너뜀.\n", skill_id, name.c_str(), GD_SKILLBASE, GD_MAX );
+		else
+			this->invalidWarning( node["Id"], "Guild skill \"%s\" with Id %u is out of the guild skill range [%u-%u], skipping.\n", name.c_str(), skill_id, GD_SKILLBASE, GD_MAX );
 		return 0;
 	}
 
@@ -106,7 +113,10 @@ uint64 GuildSkillTreeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 	if( !exists ){
 		if( !this->nodeExists( node, "MaxLevel" ) ){
-			this->invalidWarning( node, "Missing node \"MaxLevel\", skipping.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node, "\"MaxLevel\" 노드가 빠져있습니다. 건너뜀.\n" );
+			else
+				this->invalidWarning( node, "Missing node \"MaxLevel\", skipping.\n" );
 			return 0;
 		}
 
@@ -141,12 +151,18 @@ uint64 GuildSkillTreeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			uint16 requiredSkillId;
 
 			if( !( requiredSkillId = skill_name2id( requiredName.c_str() ) ) ){
-				this->invalidWarning( requiredNode["Id"], "Invalid required guild skill name \"%s\", skipping.\n", requiredName.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( requiredNode["Id"], "필수 길드 스킬 이름 \"%s\"이(가) 잘못되었습니다. 통과됨.\n", requiredName.c_str() );
+				else
+					this->invalidWarning( requiredNode["Id"], "Invalid required guild skill name \"%s\", skipping.\n", requiredName.c_str() );
 				return 0;
 			}
 
 			if( !SKILL_CHK_GUILD( requiredSkillId ) ){
-				this->invalidWarning( requiredNode["Id"], "Required guild skill \"%s\" with Id %u is out of the guild skill range [%u-%u], skipping.\n", requiredName.c_str(), requiredSkillId, GD_SKILLBASE, GD_MAX );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( requiredNode["Id"], "%u이(가) 있는 필수 길드 스킬 \"%s\"이(거) 길드 스킬 범위 [%u-%u]을(를) 벗어났습니다. 통과됨.\n", requiredName.c_str(), requiredSkillId, GD_SKILLBASE, GD_MAX );
+				else
+					this->invalidWarning( requiredNode["Id"], "Required guild skill \"%s\" with Id %u is out of the guild skill range [%u-%u], skipping.\n", requiredName.c_str(), requiredSkillId, GD_SKILLBASE, GD_MAX );
 				return 0;
 			}
 
@@ -155,7 +171,10 @@ uint64 GuildSkillTreeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 			if( !requirement_exists ){
 				if( !this->nodeExists( requiredNode, "Level" ) ){
-					this->invalidWarning( requiredNode, "Missing node \"Level\", skipping.\n" );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+						this->invalidWarning( requiredNode, "\"Level\" 노드가 빠져있습니다. 통과됨.\n" );
+					else
+						this->invalidWarning( requiredNode, "Missing node \"Level\", skipping.\n" );
 					return 0;
 				}
 
@@ -298,7 +317,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		uint16 mapindex = mapindex_name2idx(map_name.c_str(), nullptr);
 
 		if( mapindex == 0 ){
-			this->invalidWarning(node["Map"], "Map %s doesn't exist, skipping.\n", map_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Map"], "맵 %s은(는) 존재하지 않아 건너뜁니다.\n", map_name.c_str());
+			else
+				this->invalidWarning(node["Map"], "Map %s doesn't exist, skipping.\n", map_name.c_str());
 			return 0;
 		}
 
@@ -321,7 +343,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (npc_name.size() > NPC_NAME_LENGTH) {
-			this->invalidWarning(node["NPC"], "Npc name %s too long, skipping.\n", npc_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["NPC"], "Npc 이름 %s이(가) 너무 길어 건너뜁니다.\n", npc_name.c_str());
+			else
+				this->invalidWarning(node["NPC"], "Npc name %s too long, skipping.\n", npc_name.c_str());
 			return 0;
 		}
 
@@ -339,7 +364,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if( !script_get_constant( type_constant.c_str(), &constant ) || constant < WOE_FIRST_EDITION || constant >= WOE_MAX ){
-			this->invalidWarning( node["Type"], "Invalid WoE type %s.\n", type.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Type"], "%s은(는) 잘못된 WoE 타입입니다.\n", type.c_str() );
+			else
+				this->invalidWarning( node["Type"], "Invalid WoE type %s.\n", type.c_str() );
 			return 0;
 		}
 
@@ -386,7 +414,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if( warp_x == 0 ){
-			this->invalidWarning( node["WarpX"], "WarpX has to be greater than zero.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpX"], "WarpX는 0보다 커야합니다.\n" );
+			else
+				this->invalidWarning( node["WarpX"], "WarpX has to be greater than zero.\n" );
 			return 0;
 		}
 
@@ -394,7 +425,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		// If the map is on another map-server, we cannot verify the bounds
 		if( md != nullptr && warp_x >= md->xs ){
-			this->invalidWarning( node["WarpX"], "WarpX has to be smaller than %hu.\n", md->xs );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpX"], "WarpX는 %hu보다 작아야 합니다.\n", md->xs );
+			else
+				this->invalidWarning( node["WarpX"], "WarpX has to be smaller than %hu.\n", md->xs );
 			return 0;
 		}
 
@@ -413,7 +447,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if( warp_y == 0 ){
-			this->invalidWarning( node["WarpY"], "WarpY has to be greater than zero.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpY"], "WarpY는 0보다 커야합니다.\n" );
+			else
+				this->invalidWarning( node["WarpY"], "WarpY has to be greater than zero.\n" );
 			return 0;
 		}
 
@@ -421,7 +458,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		// If the map is on another map-server, we cannot verify the bounds
 		if( md != nullptr && warp_y >= md->ys ){
-			this->invalidWarning( node["WarpY"], "WarpY has to be smaller than %hu.\n", md->ys );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpY"], "WarpY는 %hu보다 작아야 합니다.\n", md->ys );
+			else
+				this->invalidWarning( node["WarpY"], "WarpY has to be smaller than %hu.\n", md->ys );
 			return 0;
 		}
 
@@ -440,7 +480,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if( zeny > MAX_ZENY ){
-			this->invalidWarning( node["WarpCost"], "WarpCost has to be smaller than %d.\n", MAX_ZENY );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpCost"], "WarpCost는 %d보다 작아야합니다.\n", MAX_ZENY );
+			else
+				this->invalidWarning( node["WarpCost"], "WarpCost has to be smaller than %d.\n", MAX_ZENY );
 			return 0;
 		}
 
@@ -458,7 +501,10 @@ uint64 CastleDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if( zeny_siege > MAX_ZENY ){
-			this->invalidWarning( node["WarpCostSiege"], "WarpCostSiege has to be smaller than %d.\n", MAX_ZENY );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["WarpCostSiege"], "WarpCostSiege는 %d보다 작아야합니다.\n", MAX_ZENY );
+			else
+				this->invalidWarning( node["WarpCostSiege"], "WarpCostSiege has to be smaller than %d.\n", MAX_ZENY );
 			return 0;
 		}
 
@@ -489,7 +535,10 @@ void CastleDatabase::loadingFinished(){
 				}
 
 				if( castle->client_id == castle2->client_id ){
-					ShowWarning( "Castle ClientId %hu is ambigous.\n", castle->client_id );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning( "Castle ClientId %hu은(는) 모호합니다.\n", castle->client_id );
+					else
+						ShowWarning( "Castle ClientId %hu is ambigous.\n", castle->client_id );
 					break;
 				}
 			}
@@ -497,19 +546,28 @@ void CastleDatabase::loadingFinished(){
 
 		if( castle->warp_enabled ){
 			if( castle->client_id == 0 ){
-				ShowWarning( "Warping to castle %d is enabled, but no ClientId is set. Disabling...\n", castle->castle_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "성 %d에 대한 워프가 사용가능 하도록 되어있으나 클라이언트 ID는 설정이 되어있지 않아 사용가능 하지 않도록 설정합니다...\n", castle->castle_id );
+				else
+					ShowWarning( "Warping to castle %d is enabled, but no ClientId is set. Disabling...\n", castle->castle_id );
 				castle->warp_enabled = false;
 				continue;
 			}
 
 			if( castle->warp_x == 0 ){
-				ShowWarning( "Warping to castle %d is enabled, but no WarpX is set. Disabling...\n", castle->castle_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "성 %d에 대한 워프가 설정되어있으나 WarpX가 설정되지 않아 비활성화합니다...\n", castle->castle_id );
+				else
+					ShowWarning( "Warping to castle %d is enabled, but no WarpX is set. Disabling...\n", castle->castle_id );
 				castle->warp_enabled = false;
 				continue;
 			}
 
 			if( castle->warp_y == 0 ){
-				ShowWarning( "Warping to castle %d is enabled, but no WarpY is set. Disabling...\n", castle->castle_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "성 %d에 대한 워프가 설정되어있으나 WarpY가 설정되지 않아 비활성화합니다...\n", castle->castle_id );
+				else
+					ShowWarning( "Warping to castle %d is enabled, but no WarpY is set. Disabling...\n", castle->castle_id );
 				castle->warp_enabled = false;
 				continue;
 			}
@@ -795,7 +853,10 @@ int guild_check_member(const struct mmo_guild &g) {
 			sd->guild = nullptr;
 			sd->status.guild_id=0;
 			sd->guild_emblem_id=0;
-			ShowWarning("guild: check_member %d[%s] is not member\n",sd->status.account_id,sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("guild: check_member %d[%s]은(는) 길드원이 아닙니다.\n",sd->status.account_id,sd->status.name);
+			else
+				ShowWarning("guild: check_member %d[%s] is not member\n",sd->status.account_id,sd->status.name);
 		}
 	}
 	mapit_free(iter);
@@ -855,7 +916,10 @@ int guild_recv_info(const struct mmo_guild &sg) {
 	memcpy(&g->guild, &sg, sizeof(struct mmo_guild));
 
 	if(g->guild.max_member > MAX_GUILD) {
-		ShowError("guild_recv_info: Received guild with %d members, but MAX_GUILD is only %d. Extra guild-members have been lost!\n", g->guild.max_member, MAX_GUILD);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("guild_recv_info: %d명을 길드회원으로 받았지만, 최대 길드원수(MAX_GUILD)는 %d명입니다. 초과된 길드원은 받지 않았습니다.\n", g->guild.max_member, MAX_GUILD);
+		else
+			ShowError("guild_recv_info: Received guild with %d members, but MAX_GUILD is only %d. Extra guild-members have been lost!\n", g->guild.max_member, MAX_GUILD);
 		g->guild.max_member = MAX_GUILD;
 	}
 
@@ -1107,7 +1171,10 @@ int guild_member_added(int guild_id,uint32 account_id,uint32 char_id,int flag) {
 	if(sd==nullptr || sd->guild_invite==0){
 	// cancel if player not present or invalide guild_id invitation
 		if (flag == 0) {
-			ShowError("guild: member added error %d is not online\n",account_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("guild: 맴버 추가 실패 했습니다. %d은(는) 온라인 상태가 아닙니다.\n",account_id);
+			else	
+				ShowError("guild: member added error %d is not online\n",account_id);
  			intif_guild_leave(guild_id,account_id,char_id,0,"** Data Error **");
 		}
 		return 0;
@@ -1371,7 +1438,12 @@ int guild_send_memberinfoshort(map_session_data *sd,int online) { // cleaned up 
 		if(i>=0)
 			g->guild.member[i].sd=nullptr;
 		else
-			ShowError("guild_send_memberinfoshort: Failed to locate member %d:%d in guild %d!\n", sd->status.account_id, sd->status.char_id, g->guild.guild_id);
+		{
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("guild_send_memberinfoshort: %d 길드의 길드원(계정ID번호:%d 케릭터ID번호: %d)을(를) 찾지 못했습니다!\n", g->guild.guild_id, sd->status.account_id, sd->status.char_id);
+			else
+				ShowError("guild_send_memberinfoshort: Failed to locate member %d:%d in guild %d!\n", sd->status.account_id, sd->status.char_id, g->guild.guild_id);
+		}
 		return 0;
 	}
 
@@ -1413,7 +1485,10 @@ int guild_recv_memberinfoshort(int guild_id,uint32 account_id,uint32 char_id,int
 			sd->status.guild_id=0;
 			sd->guild_emblem_id=0;
 		}
-		ShowWarning("guild: not found member %d,%d on %d[%s]\n", account_id,char_id,guild_id,g->guild.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("guild: %s(%d) 길드에 길드원 %d(%d)를 찾을 수 없습니다.\n",g->guild.name, guild_id,account_id,char_id);
+		else
+			ShowWarning("guild: not found member %d,%d on %d[%s]\n", account_id,char_id,guild_id,g->guild.name);
 		return 0;
 	}
 
@@ -2363,7 +2438,10 @@ void guild_castle_map_init(void) {
 	}
 
 	if( !castle_ids.empty() && intif_guild_castle_dataload( castle_ids ) ){
-		ShowStatus( "Requested '" CL_WHITE "%" PRIdPTR CL_RESET "' guild castles from char-server...\n", castle_ids.size() );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("케릭터 서버에서 '" CL_WHITE "%d" CL_RESET "'개의 길드성을 요청했습니다...\n", castle_ids.size());
+		else
+			ShowStatus( "Requested '" CL_WHITE "%" PRIdPTR CL_RESET "' guild castles from char-server...\n", castle_ids.size() );
 	}
 }
 
@@ -2379,7 +2457,10 @@ int guild_castledatasave(int castle_id, int index, int value) {
 	std::shared_ptr<guild_castle> gc = castle_db.find(castle_id);
 
 	if (gc == nullptr) {
-		ShowWarning("guild_castledatasave: guild castle '%d' not found\n", castle_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("guild_castledatasave: 길드 성 (ID번호: %d)을(를) 찾을 수 없습니다.\n", castle_id);
+		else
+			ShowWarning("guild_castledatasave: guild castle '%d' not found\n", castle_id);
 		return 0;
 	}
 
@@ -2425,7 +2506,10 @@ int guild_castledatasave(int castle_id, int index, int value) {
 			gc->guardian[index - CD_ENABLED_GUARDIAN00].visible = value;
 			break;
 		}
-		ShowWarning("guild_castledatasave: index = '%d' is out of allowed range\n", index);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("guild_castledatasave: 인덱스 = '%d'이(가) 허용된 범위를 벗어났습니다.\n", index);
+		else
+			ShowWarning("guild_castledatasave: index = '%d' is out of allowed range\n", index);
 		return 0;
 	}
 
@@ -2488,7 +2572,10 @@ int guild_castledataloadack(int len, struct guild_castle *gc) {
 		std::shared_ptr<guild_castle> c = castle_db.find(gc->castle_id);
 
 		if (c == nullptr) {
-			ShowError("guild_castledataloadack: castle id=%d not found.\n", gc->castle_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("guild_castledataloadack: 성ID=%d을(를) 찾을 수 없습니다.\n", gc->castle_id);
+			else
+				ShowError("guild_castledataloadack: castle id=%d not found.\n", gc->castle_id);
 			continue;
 		}
 
@@ -2510,7 +2597,10 @@ int guild_castledataloadack(int len, struct guild_castle *gc) {
 			}
 		}
 	}
-	ShowStatus("Received '" CL_WHITE "%d" CL_RESET "' guild castles from char-server.\n", n);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("케릭터 서버로부터 '" CL_WHITE "%d" CL_RESET "'개의 길드 성을 받았습니다.\n", n);
+	else
+		ShowStatus("Received '" CL_WHITE "%d" CL_RESET "' guild castles from char-server.\n", n);
 	return 0;
 }
 

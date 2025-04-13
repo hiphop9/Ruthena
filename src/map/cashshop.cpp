@@ -9,6 +9,7 @@
 #include <common/cbasetypes.hpp> // uint16, uint32
 #include <common/malloc.hpp> // CREATE, RECREATE, aFree
 #include <common/showmsg.hpp> // ShowWarning, ShowStatus
+#include <config/custom.hpp>
 
 #include "clif.hpp"
 #include "log.hpp"
@@ -36,12 +37,18 @@ uint64 CashShopDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	int64 constant;
 
 	if( !script_get_constant( tab_constant.c_str(), &constant ) ){
-		this->invalidWarning( node["Tab"], "Invalid tab %s, skipping.\n", tab_constant.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Tab"], "%s은(는) 잘못된 탭입니다. 건너뜁니다..\n", tab_constant.c_str() );
+		else
+			this->invalidWarning( node["Tab"], "Invalid tab %s, skipping.\n", tab_constant.c_str() );
 		return 0;
 	}
 
 	if( constant < CASHSHOP_TAB_NEW || constant >= CASHSHOP_TAB_MAX ){
-		this->invalidWarning( node["Tab"], "Tab %" PRId64 " is out of range, skipping.\n", constant );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Tab"], "탭 %" PRId64 "이(가) 범위를 벗어났습니다. 건너뜁니다.\n", constant );
+		else
+			this->invalidWarning( node["Tab"], "Tab %" PRId64 " is out of range, skipping.\n", constant );
 		return 0;
 	}
 
@@ -69,7 +76,10 @@ uint64 CashShopDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( it["Item"], "Cash item %s does not exist, skipping.\n", item_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( it["Item"], "캐시 아이템 %s은(는) 존재하지 않습니다. 건너뜁니다.\n", item_name.c_str() );
+			else
+				this->invalidWarning( it["Item"], "Cash item %s does not exist, skipping.\n", item_name.c_str() );
 			continue;
 		}
 
@@ -96,12 +106,18 @@ uint64 CashShopDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( price == 0 ){
-			this->invalidWarning( it["Price"], "Price has to be greater than zero." );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( it["Price"], "가격(Price)은 0보다 커야합니다." );
+			else
+				this->invalidWarning( it["Price"], "Price has to be greater than zero." );
 			return 0;
 		}
 
 		if( price > MAX_CASHPOINT ){
-			this->invalidWarning( it["Price"], "Price has to be lower than MAX_CASHPOINT(%d).", MAX_CASHPOINT );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( it["Price"], "가격(Price)은 MAX_CASHPOINT(%d)보다 낮아야 합니다.", MAX_CASHPOINT );
+			else
+				this->invalidWarning( it["Price"], "Price has to be lower than MAX_CASHPOINT(%d).", MAX_CASHPOINT );
 			return 0;
 		}
 
@@ -145,7 +161,10 @@ static bool sale_parse_dbrow( char* fields[], int columns, int current ){
 	struct sale_item_data* sale_item = nullptr;
 
 	if( !item_db.exists(nameid) ){
-		ShowWarning( "sale_parse_dbrow: Invalid ID %u in line '%d', skipping...\n", nameid, current );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning( "sale_parse_dbrow: %d줄에서 잘못된 ID %u가 있습니다. 건너뛰는중...\n", current, nameid );
+		else
+			ShowWarning( "sale_parse_dbrow: Invalid ID %u in line '%d', skipping...\n", nameid, current );
 		return false;
 	}
 
@@ -157,13 +176,19 @@ static bool sale_parse_dbrow( char* fields[], int columns, int current ){
 
 	// Check if the end is after the start
 	if( start >= end ){
-		ShowWarning( "sale_parse_dbrow: Sale for item %u was ignored, because the timespan was not correct.\n", nameid );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning( "sale_parse_dbrow: %u 아이템의 세일이 무시되었습니다. 기간이 정확하지 않습니다.\n", nameid );
+		else
+			ShowWarning( "sale_parse_dbrow: Sale for item %u was ignored, because the timespan was not correct.\n", nameid );
 		return false;
 	}
 
 	// Check if it is already in the past
 	if( end < now ){
-		ShowWarning( "sale_parse_dbrow: An outdated sale for item %u was ignored.\n", nameid );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning( "sale_parse_dbrow: 오래된 세일 아이템 %u은(는) 무시되었습니다.\n", nameid );
+		else
+			ShowWarning( "sale_parse_dbrow: An outdated sale for item %u was ignored.\n", nameid );
 		return false;
 	}
 
@@ -210,7 +235,10 @@ static void sale_read_db_sql( void ){
 		}
 
 		if( !sale_parse_dbrow( str, 4, lines ) ){
-			ShowError( "sale_read_db_sql: Cannot process table '%s' at line '%d', skipping...\n", sales_table, lines );
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError( "sale_read_db_sql: '%d'라인에서 테이블 '%s'을(를) 처리 할 수 없습니다. 건너뛰는중...\n", lines, sales_table );
+			else
+				ShowError( "sale_read_db_sql: Cannot process table '%s' at line '%d', skipping...\n", sales_table, lines );
 			continue;
 		}
 
@@ -219,7 +247,10 @@ static void sale_read_db_sql( void ){
 
 	Sql_FreeResult(mmysql_handle);
 
-	ShowStatus( "Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, sales_table );
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus( "'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%u" CL_RESET "'개의 항목을 읽어왔습니다.\n", sales_table, count );
+	else
+		ShowStatus( "Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, sales_table );
 }
 
 static TIMER_FUNC(sale_end_timer){

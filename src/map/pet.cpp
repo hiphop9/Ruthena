@@ -17,6 +17,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -47,7 +48,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( mob_name.c_str() );
 
 	if( mob == nullptr ){
-		this->invalidWarning( node["Mob"], "Mob %s does not exist and cannot be used as a pet.\n", mob_name.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Target"], "몹 %s은(는) 존재하지 않으며 펫으로 사용할 수 없습니다.\n", mob_name.c_str() );
+		else
+			this->invalidWarning( node["Mob"], "Mob %s does not exist and cannot be used as a pet.\n", mob_name.c_str() );
 		return 0;
 	}
 
@@ -76,7 +80,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( node["TameItem"], "Taming item %s does not exist.\n", item_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["TameItem"], "테이밍 아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str() );
+			else
+				this->invalidWarning( node["TameItem"], "Taming item %s does not exist.\n", item_name.c_str() );
 			return 0;
 		}
 
@@ -97,7 +104,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( node["EggItem"], "Egg item %s does not exist.\n", item_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["EggItem"], "알 아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str() );
+			else
+				this->invalidWarning( node["EggItem"], "Egg item %s does not exist.\n", item_name.c_str() );
 			return 0;
 		}
 
@@ -114,7 +124,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( node["EquipItem"], "Equip item %s does not exist.\n", item_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["EquipItem"], "장착 아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str() );
+			else
+				this->invalidWarning( node["EquipItem"], "Equip item %s does not exist.\n", item_name.c_str() );
 			return 0;
 		}
 
@@ -135,7 +148,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( node["FoodItem"], "Food item %s does not exist.\n", item_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["FoodItem"], "푸드 아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str() );
+			else
+				this->invalidWarning( node["FoodItem"], "Food item %s does not exist.\n", item_name.c_str() );
 			return 0;
 		}
 
@@ -154,7 +170,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( fullness > 100 ){
-			this->invalidWarning( node["Fullness"], "Fullness %hu exceeds maximum of 100. Capping...\n", fullness );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Fullness"], "배부름 값 %hu은(는) 최대값인 100보다 많습니다. 조정됨...\n", fullness );
+			else
+				this->invalidWarning( node["Fullness"], "Fullness %hu exceeds maximum of 100. Capping...\n", fullness );
 			fullness = 100;
 		}
 
@@ -197,7 +216,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( start > 10000 ){
-			this->invalidWarning( node["IntimacyStart"], "IntimacyStart %hu exceeds maximum of 10000. Capping...\n", start );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["IntimacyStart"], "친밀감 시작값 %hu은(는) 최대값인 10000을 초과합니다. 조정됨...\n", start );
+			else
+				this->invalidWarning( node["IntimacyStart"], "IntimacyStart %hu exceeds maximum of 10000. Capping...\n", start );
 			start = 10000;
 		}
 
@@ -272,7 +294,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( rate > 10000 ){
-			this->invalidWarning( node["CaptureRate"], "CaptureRate %hu exceeds maximum of 10000. Capping...\n", rate );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["CaptureRate"], "테이밍 성공 확율값 %hu은(는) 최대값인 10000을 초과합니다. 조정됨...\n", rate );
+			else
+				this->invalidWarning( node["CaptureRate"], "CaptureRate %hu exceeds maximum of 10000. Capping...\n", rate );
 			rate = 10000;
 		}
 
@@ -301,7 +326,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( rate > 10000 ){
-			this->invalidWarning( node["AttackRate"], "AttackRate %hu exceeds maximum of 10000. Capping...\n", rate );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["AttackRate"], "공격율 %hu은(는) 최대값인 10000을 초과합니다. 조정됨...\n", rate );
+			else
+				this->invalidWarning( node["AttackRate"], "AttackRate %hu exceeds maximum of 10000. Capping...\n", rate );
 			rate = 10000;
 		}
 
@@ -320,7 +348,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( rate > 10000 ){
-			this->invalidWarning( node["RetaliateRate"], "RetaliateRate %hu exceeds maximum of 10000. Capping...\n", rate );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["RetaliateRate"], "보복율 %hu은(는) 최대값인 10000을 초과합니다. 조정됨...\n", rate );
+			else
+				this->invalidWarning( node["RetaliateRate"], "RetaliateRate %hu exceeds maximum of 10000. Capping...\n", rate );
 			rate = 10000;
 		}
 
@@ -339,7 +370,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( rate > 10000 ){
-			this->invalidWarning( node["ChangeTargetRate"], "ChangeTargetRate %hu exceeds maximum of 10000. Capping...\n", rate );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["ChangeTargetRate"], "타겟 변경율 %hu은(는) 최대값인 10000을 초과합니다. 조정됨...\n", rate );
+			else
+				this->invalidWarning( node["ChangeTargetRate"], "ChangeTargetRate %hu exceeds maximum of 10000. Capping...\n", rate );
 			rate = 10000;
 		}
 
@@ -414,14 +448,20 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( target_name.c_str() );
 
 			if( mob == nullptr ){
-				this->invalidWarning( evolutionNode["Target"], "Evolution target %s does not exist.\n", target_name.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( evolutionNode["Target"], "진화 대상인 %s이(가) 존재하지 않습니다.\n", target_name.c_str() );
+				else
+					this->invalidWarning( evolutionNode["Target"], "Evolution target %s does not exist.\n", target_name.c_str() );
 				return 0;
 			}
 
 			uint16 targetId = mob->id;
 
 			if( !this->nodeExists( evolutionNode, "ItemRequirements" ) ){
-				this->invalidWarning( evolutionNode, "Missing required node \"ItemRequirements\".\n" );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( evolutionNode, "필수 노드인 \"ItemRequirements\"이(가) 빠졌습니다.\n" );
+				else
+					this->invalidWarning( evolutionNode, "Missing required node \"ItemRequirements\".\n" );
 				return 0;
 			}
 
@@ -444,7 +484,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 				if( item == nullptr ){
-					this->invalidWarning( requirementNode["Item"], "Evolution requirement item %s does not exist.\n", item_name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( requirementNode["Item"], "진화에 필요한 아이템인 %s이(가) 존재하지 않습니다.\n", item_name.c_str() );
+					else
+						this->invalidWarning( requirementNode["Item"], "Evolution requirement item %s does not exist.\n", item_name.c_str() );
 					return 0;
 				}
 
@@ -455,7 +498,10 @@ uint64 PetDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( amount > MAX_AMOUNT ){
-					this->invalidWarning( requirementNode["Amount"], "Amount %u exceeds the maximum of %d.\n", amount, MAX_AMOUNT );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( requirementNode["Amount"], "갯수 %u은(는) 최대치 %d을(를) 초과합니다.\n", amount, MAX_AMOUNT );
+					else
+						this->invalidWarning( requirementNode["Amount"], "Amount %u exceeds the maximum of %d.\n", amount, MAX_AMOUNT );
 					return 0;
 				}
 
@@ -897,7 +943,10 @@ std::shared_ptr<s_pet_db> pet_db_search( int key, enum e_pet_itemtype type ){
 			case PET_EQUIP: if(pet->AcceID == key) return pet; break;
 			case PET_FOOD:  if(pet->FoodID == key) return pet; break;
 			default:
-				ShowError( "pet_db_search: Unsupported type %d\n", type );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "pet_db_search: %d은(는) 지원되지 않는 타입입니다.\n", type );
+				else			
+					ShowError( "pet_db_search: Unsupported type %d\n", type );
 				return nullptr;
 		}
 	}
@@ -1149,7 +1198,10 @@ int pet_recv_petdata(uint32 account_id,struct s_pet *p,int flag)
 		int i = pet_egg_search(sd, p->pet_id);
 
 		if(i == -1) {
-			ShowError("pet_recv_petdata: Hatching pet (%d:%s) aborted, couldn't find egg in inventory!\n",p->pet_id, p->name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pet_recv_petdata: 펫 (%d:%s)의 부화가 중단돼 제거하려고 했으나 인벤토리에서 알을 찾지 못했습니다.\n",p->pet_id, p->name);
+			else
+				ShowError("pet_recv_petdata: Hatching pet (%d:%s) aborted, couldn't find egg in inventory!\n",p->pet_id, p->name);
 			sd->status.pet_id = 0;
 
 			return 1;
@@ -1197,15 +1249,21 @@ int pet_select_egg(map_session_data *sd,short egg_index)
 
 	std::shared_ptr<s_pet_db> pet = pet_db_search(sd->inventory.u.items_inventory[egg_index].nameid, PET_EGG);
 	if (!pet) {
-		ShowError("pet does not exist, egg id %u\n", sd->inventory.u.items_inventory[egg_index].nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("알 번호 %u의 펫이 존재하지 않습니다.\n", sd->inventory.u.items_inventory[egg_index].nameid);
+		else
+			ShowError("pet does not exist, egg id %u\n", sd->inventory.u.items_inventory[egg_index].nameid);
 		return 0;
 	}
 
 	if(sd->inventory.u.items_inventory[egg_index].card[0] == CARD0_PET)
 		intif_request_petdata(sd->status.account_id, sd->status.char_id, MakeDWord(sd->inventory.u.items_inventory[egg_index].card[1], sd->inventory.u.items_inventory[egg_index].card[2]) );
-	else
-		ShowError("wrong egg item inventory %d\n",egg_index);
-
+	else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("잘못된 알 아이템 인벤토리 %d\n",egg_index);
+		else
+			ShowError("wrong egg item inventory %d\n",egg_index);
+	}
 	return 0;
 }
 
@@ -2358,7 +2416,10 @@ bool pet_addautobonus(std::vector<std::shared_ptr<s_petautobonus>> &bonus, const
 	}
 
 	if (bonus.size() == MAX_PC_BONUS) {
-		ShowWarning("pet_addautobonus: Reached max (%d) number of petautobonus per pet!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pet_addautobonus: 펫당 최대 petautobonus 수에 도달했습니다!\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pet_addautobonus: Reached max (%d) number of petautobonus per pet!\n", MAX_PC_BONUS);
 		return false;
 	}
 
@@ -2376,9 +2437,12 @@ bool pet_addautobonus(std::vector<std::shared_ptr<s_petautobonus>> &bonus, const
 	}
 
 
-	if (rate < -10000 || rate > 10000)
-		ShowWarning("pet_addautobonus: Bonus rate %d exceeds -10000~10000 range, capping.\n", rate);
-
+	if (rate < -10000 || rate > 10000) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pet_addautobonus: 보너스 배율 %d은(는) 범위 -10000~10000에 도달했습니다.건너뜀.\n", rate);
+		else
+			ShowWarning("pet_addautobonus: Bonus rate %d exceeds -10000~10000 range, capping.\n", rate);
+	}
 	std::shared_ptr<s_petautobonus> entry = std::make_shared<s_petautobonus>();
 
 	entry->rate = cap_value(rate, -10000, 10000);

@@ -1,72 +1,85 @@
 //===== rAthena Script =======================================
 //= Phantasmagorika Quests (episodes 15.1).
 //===== Description: =========================================
-//= [Official Conversion]
-//--- Quests list:
-//- Phantasmagorika Main Quest
-//- Wandering Bard Quest
-//- Police Quests
-//- 'New Power Source'
-//- 'To Phantasmagorika!'
-//- 'Looking for the Traces' (part 2 of 'To Phantasmagorika!')
-//===== Changelogs: ==========================================
-//= 1.0 Initial release [Capuche]
-//= 1.1 Fixed NPC names [zackdreaver]
-//= 2.0 Updated using Aegis files [Capuche]
+//한글 번역 스카이러브
 //============================================================
 
-prontera,121,77,3	script	Phantasmagorika Spokesperson#prt::spokesperson	4_F_ZONDAGIRL,4,4,{
-	mes "[Spokesperson]";
-	mes "Good day.";
-	mes "Rekenber is recruiting adventurers for an excavation project that takes place in Phantasmagorika, the newly discovered ruins in Juperos.";
+prontera,121,77,3	script	판타스마고리카 홍보원#prt::spokesperson	4_F_ZONDAGIRL,4,4,{
+	mes "[홍보원]";
+	mes "안녕하세요~!";
+	mes "레켄베르에서는 유페로스의 신 유적지";
+	mes "판타스마고리카 계획을 함께 할 인재를";
+	mes "모집합니다~!";
 	next;
-	mes "[Spokesperson]";
-	mes "If you're interested, just come as you are.";
-	mes "Everything you need for the excavation will be provided by Rekenber.";
+	mes "[홍보원]";
+	mes "발굴작업에 필요한 모든 지원은 저희";
+	mes "레켄베르에서 해드리고요.";
+	mes "발굴에 참가하실 분은 몸만 오시면";
+	mes "된답니다~";
 	next;
-	mes "[Spokesperson]";
-	mes "Join us for adventure at the newly discovered ruins in Juperos,";
-	mes "an ancient city whose scientific knowledge has fueled the development of modern civilization.";
+	mes "[홍보원]";
+	mes "미지의 과학력으로 현재 우리들의 삶에";
+	mes "크게 기여한 유페로스에서 새로이 발견";
+	mes "된 지역을";
+	mes "여러분과 함께 하고 싶어요~";
 	next;
-	mes "[Spokesperson]";
-	mes "If you'd like to join, then form an excavation team and fill out your application.";
+	mes "[홍보원]";
+	mes "지원을 원하시면~! 당장 발굴단을";
+	mes "꾸려서 접수 해 주세요!";
 	next;
-	switch( select( "Excavation team? Application?", "Phantasmagorika?", "Bye." ) ) {
+	switch( select( "발굴단? 접수?", "판타스마코리카?", "수고하세요." ) ) {
 	case 1:
-		mes "[Spokesperson]";
-		mes "We're recruiting teams of excavators for the research of Phantasmagorika, the newly discovered ruins.";
-		mes "This project requires expertise in various fields, so we've decided to recruit";
-		mes "teams of excavators instead of individuals.";
+		mes "[홍보원]";
+		mes "새로 발견된 파타스고리카 연구에";
+		mes "동참할 발굴단을 모집하고 있어요.";
+		mes "물론 개인참가도 가능하지만 이런일은";
+		mes "여러가지 분야의 전문지식이 필요해서";
+		mes "팀단위로 일을 진행하고 있답니다.";
 		next;
-		mes "[Spokesperson]";
-		mes "You can register for the excavation project,";
-		mes "and help us however you can.";
-		mes "Registered excavators receive special benefits and commodities";
+		mes "[홍보원]";
+		mes "정식으로 발굴에 참여한다고 등록을";
+		mes "하시고 정해진 범위내에서 연구를 도와주시면";
+		mes "됩니다.";
+		mes "등록된 분들에게 레켄베르에서 각종";
+		mes "지원과 편의를 봐드리고 있어요.";
 		next;
-		mes "[Spokesperson]";
-		mes "in exchange for information that they discover in the ruins. We'll use the information to research the ruins.";
-		mes "Even if you fail to find useful information, we'll reward you just for your participation.";
+		mes "[홍보원]";
+		mes "대신 저희는 각 팀에서 연구, 발견한";
+		mes "자료를 모아 종합해 분석하는 일을";
+		mes "하고요.";
+		mes "성과가 없다고 하여도 일에 참여한";
+		mes "노고에대한 보상은 충분히";
+		mes "해드린답니다.";
 		next;
-		mes "[Spokesperson]";
-		mes "If you want to join the project, please go submit your application to the Eden Group.";
+		mes "[홍보원]";
+		mes "참여를 원하시면 지금 당장";
+		mes "낙원단으로 달려가세요!";
 		close;
 	case 2:
-		mes "[Spokesperson]";
-		mes "An ancient site was just discovered in Juperos.";
-		mes "It was hidden at the end of a long tunnel.";
+		mes "[홍보원]";
+		mes "유레로스에서 그간 발견되지 않았던";
+		mes "새로운 장소가 발견되었답니다.";
+		mes "긴 통로를 지나니 유페로스와는 또";
+		mes "다른 유적지가 있었어요.";
 		next;
-		mes "[Spokesperson]";
-		mes "Rekenber has named the site ^4d4dffPhantasmagorika^000000";
-		mes "and commenced an excavation.";
+		mes "[홍보원]";
+		mes "저희 레켄베르는 그 지역을";
+		mes "^4d4dff판타스마고리카^000000라고 부르고";
+		mes "그 지역에 대한 대대적인 발굴을";
+		mes "진행하고 있어요.";
 		next;
-		mes "[Spokesperson]";
-		mes "We're hoping to find more advanced mado gears and a higher level of scientific knowledge than what was ever discovered in the Juperos region.";
+		mes "[홍보원]";
+		mes "유페로스보다 뛰어난 마도와";
+		mes "과학문명을 얻을 수 있을 것 같아서";
+		mes "두근두근하답니다!";
 		close;
 	case 3:
-		mes "[Spokesperson]";
-		mes "Rekenber is looking for talented adventurers for the excavation of Phantasmagorika.";
-		mes "Feel free to join us anytime!";
-		mes "We need you!";
+		mes "[홍보원]";
+		mes "저희~ 레켄베르에서는~";
+		mes "판타스마고리카에서 함께 할 인재를";
+		mes "찾습니다~~";
+		mes "언제든지 찾아주세요!";
+		mes "바로 당신을 원합니다!";
 		close;
 	}
 	end;
@@ -77,7 +90,9 @@ OnTouch_:
 		end;
 	setd "." + .@npc$, 1;
 	sleep 3000;
-	npctalk "Spokesperson: Recruiting adventurers for the excavation of Phantasmagorika.";
+	npctalk "홍보원: 판타스마고리카 발굴단을 모집합니다~";
+	sleep 600;
+	npctalk "홍보원: 유적 발굴에 흥미가 있는분, 발굴 보조일을 해주실 분~ 모두 모셔요!";
 	sleep 17000;
 	setd "." + .@npc$, 0;
 	end;
@@ -86,10 +101,10 @@ OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 140 && isbegin_quest(7610) == 0" );
 	end;
 }
-morocc,208,287,3	duplicate(spokesperson)	Phantasmagorika Spokesperson#moc	4_F_ZONDAGIRL,4,4
-payon,174,113,3	duplicate(spokesperson)	Phantasmagorika Spokesperson#pay	4_F_ZONDAGIRL,4,4
-geffen,135,64,3	duplicate(spokesperson)	Phantasmagorika Spokesperson#gef	4_F_ZONDAGIRL,4,4
-alberta,119,65,3	duplicate(spokesperson)	Phantasmagorika Spokesperson#alb	4_F_ZONDAGIRL,4,2
+morocc,208,287,3	duplicate(spokesperson)	판타스마고리카 홍보원#moc	4_F_ZONDAGIRL,4,4
+payon,174,113,3	duplicate(spokesperson)	판타스마고리카 홍보원#pay	4_F_ZONDAGIRL,4,4
+geffen,135,64,3	duplicate(spokesperson)	판타스마고리카 홍보원#gef	4_F_ZONDAGIRL,4,4
+alberta,119,65,3	duplicate(spokesperson)	판타스마고리카 홍보원#alb	4_F_ZONDAGIRL,4,2
 
 moc_para01,31,14,0	script	#atnevt01	HIDDEN_WARP_NPC,1,1,{
 	end;
@@ -6175,7 +6190,7 @@ verus03,35,254,3	script	Maggi#ep15_1elb03	4_F_PINKWOMAN,{
 verus04,144,239,3	shop	Tool Merchant#verus	4_M_DEWMAN,611:-1,504:-1,656:-1,601:-1,602:-1,610:-1
 
 // ep15_1_moc_nk - Reward Coordinator
-morocc,54,190,5	script	Reward Coordinator	4_M_SAGE_C,{
+morocc,54,190,5	script	보상 담당자	4_M_SAGE_C,{
 	for ( .@i = 5252; .@i <= 5264; .@i += 2 ) {
 		if (isbegin_quest(.@i) == 1)
 			erasequest .@i;
@@ -6191,21 +6206,22 @@ morocc,54,190,5	script	Reward Coordinator	4_M_SAGE_C,{
 		delitem 6687, countitem(6687);	// LongRopes
 	if (countitem(6686) > 0)
 		delitem 6686, countitem(6686);	// Brick
-	mes "[Reward Coordinator]";
-	mes "So, um... I'm...";
-	mes "I think I'm sent here";
-	mes "to... to... Let me think...";
-	mes "Oh yes, to support the Morroc restoration work.";
+	mes "[보상 담당자]";
+	mes "에...그러니까...저는...";
+	mes "모로크 재건 사업 때문에...";
+	mes "그 어디더라... 하여간";
+	mes "여기로 막 파견되었습니다.";
 	next;
-	mes "[Reward Coordinator]";
-	mes "The restoration work is finished,";
-	mes "but I remain";
-	mes "to finish rewarding the volunteers.";
+	mes "[보상 담당자]";
+	mes "모로크의 재건은 끝났지만";
+	mes "그 동안의 임무에 대한 보상도";
+	mes "해야 하기 때문에 여기에 남아";
+	mes "있으라네요.";
 	next;
-	mes "[Reward Coordinator]";
-	mes "So, how may I help you today?";
+	mes "[보상 담당자]";
+	mes "그래서 무엇이 필요하시나요?";
 	next;
-	switch( select( "Claim rewards.", "What can I do with the Contribution Certificate Vending Machine?", "End conversation." ) ) {
+	switch( select( "보상을 받으러...", "공훈증은 무엇에 쓰나요?", "대화를 종료." ) ) {
 	case 1:
 		for ( .@i = 5251; .@i <= 5263; .@i += 2 ) {
 			if (isbegin_quest(.@i) == 1)
@@ -6216,7 +6232,7 @@ morocc,54,190,5	script	Reward Coordinator	4_M_SAGE_C,{
 		if (isbegin_quest(5270) == 1 || isbegin_quest(5271) == 1 || isbegin_quest(5272) == 1 || isbegin_quest(5273) == 1 || isbegin_quest(5274) == 1)
 			.@moc_on++;
 		if (.@moc_on > 0) {
-			mes "[Reward Coordinator]";
+			mes "[보상 담당자]";
 			mes "In recognition of your credit,";
 			mes "we will grant you a certificate.";
 			mes "The certificates can be used by the vending machine next to it.";
@@ -6227,54 +6243,57 @@ morocc,54,190,5	script	Reward Coordinator	4_M_SAGE_C,{
 			}
 			close;
 		}
-		mes "[Reward Coordinator]";
-		mes "You haven't finished your quest,";
-		mes "or never accepted one. Please check your quest history.";
+		mes "[보상 담당자]";
+		mes "당신은 진행중이거나 한 임무가";
+		mes "전혀 없었군요. 다시 한 번 확인해";
+		mes "보시길 바랍니다.";
 		close;
 	case 2:
-		mes "[Reward Coordinator]";
-		mes "Do you see the vending machine next to me?";
-		mes "You can use your Certificates with the machine";
-		mes "to get EXP and a variety of items in exchange.";
+		mes "[보상 담당자]";
+		mes "제 옆에 자판기가 보이시나요?";
+		mes "그에게 가져 가면 다양한 아이템과";
+		mes "혹은 경험치로 교환해 드립니다.";
 		next;
-		mes "[Reward Coordinator]";
-		mes "For more details, you should click the vending machine.";
+		mes "[보상 담당자]";
+		mes "자세한 것은 자판기를 직접 클릭해";
+		mes "보심이 나을 것 같습니다만...";
 		close;
 	case 3:
-		mes "[Reward Coordinator]";
-		mes "Um, so...";
-		mes "Why did you";
-		mes "talk to me, if I may ask?";
+		mes "[보상 담당자]";
+		mes "어... 그러니까.";
+		mes "구체적으로 저에게 말을";
+		mes "왜 건 것인지요?";
 		next;
-		mes "[Reward Coordinator]";
-		mes "Aww, I hate this sandy wind.";
-		mes "It leaves my nice clothes";
-		mes "sandy and nasty-feeling.";
+		mes "[보상 담당자]";
+		mes "아아, 저 모래바람이란.";
+		mes "이래서야 차려 입은 옷이 모래에";
+		mes "뒤덮여 버리겠네.";
 		close;
 	}
 }
 
-morocc,43,191,5	script	Announcement#moc_re	4_BOARD3,{
+morocc,43,191,5	script	공고문#moc_re	4_BOARD3,{
 	if (ep14_3_mocrank > $@2012_ep14_moc_most) {
 		$@2012_ep14_moc_most = ep14_3_mocrank;
 		$@2012_ep14_moc_mostname$ = strcharinfo(0);
 	}
-	mes "[Morroc Restoration Project Director Paek]";
-	mes "Currently the greatest contributor is";
-	mes "Great Adventurer " + $@2012_ep14_moc_mostname$ + ",";
-	mes "who has made a total of " + $@2012_ep14_moc_most + " contributions so far.";
-	mes "I'd like to give thanks to this adventurer on behalf of the entire city.";
+	mes "[모로크 재건 사업 본부장 백]";
+	mes "현재 가장 많은 협력을 해준 이는";
+	mes "위대한 모험가 " + $@2012_ep14_moc_mostname$ + "이며";
+	mes "자그마치" + $@2012_ep14_moc_most + "번의 임무를 수행했다.";
+	mes "이에 깊은 감사와 존경을 표한다.";
 	close;
 }
 
-morocc,52,197,6	script	Contribution Certificate Vending Machine#ep14_3	2_VENDING_MACHINE1,{
+morocc,52,197,6	script	공훈증 자판기#ep14_3	2_VENDING_MACHINE1,{
 	if (checkweight(1301,1) == 0) {
 		mes "- You are carrying too many items to proceed with the dialog -";
 		close;
 	}
 	if (BaseLevel < 80) {
-		mes "[Vending Machine Administrator]";
-		mes "Hello~ Don't touch the vending machine casually.";
+		mes "[자판기 관리인]";
+		mes "워~ 꼬마야 자판기 함부로 만지면";
+		mes "혼난다.";
 		close;
 	}
 	mes "[Contribution Certificate Vending Machine]";

@@ -16,6 +16,7 @@ enum lang_types {
 	LANG_FRN = 0x40,
 	LANG_POR = 0x80,
 	LANG_THA = 0x100,
+	LANG_ENG = 0x200,
 	LANG_MAX
 };
 
@@ -23,7 +24,7 @@ enum lang_types {
 	// Multilanguage System.
 	// Define which languages to enable (bitmask).
 	// 0xFFF will enable all, while 0x000 will enable English only.
-	#define LANG_ENABLE 0x000
+	#define LANG_ENABLE 0x200
 #endif
 
 //read msg in table

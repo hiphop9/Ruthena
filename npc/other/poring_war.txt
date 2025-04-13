@@ -19,69 +19,75 @@
 
 // Poring War Recruiter
 //============================================================
-prt_fild08,159,371,3	script	Poring War Recruiter#wop	909,{
-	mes "[Poring]";
+prt_fild08,159,371,3	script	용자모집중인포링#wop	909,{
+	mes "[포링]";
 	mes "!!!!!";
-	mes "Whoa-! Humans, ring~!!";
-	mes "Gotta hide, hide, right~!";
-	mes "They're tempting us with Jellopy! Don't be fooled!";
+	mes "캬~!인간이다링~!!";
+	mes "숨어야 한다링!";
+	mes "젤로피로 막 꼬득인다링! 넘어가면";
+	mes "안된다링!";
 	next;
-	mes "[Poring]";
-	mes "Hwak!!";
-	mes "Ring, Ring~ What's wrong with you people..?";
-	mes "Hey.. Hey, there. Hu.. Humans...";
-	mes "Poring..";
+	mes "[포링]";
+	mes "헉!";
+	mes "이 무슨 추태링..";
+	mes "이.. 이보시게. 인.. 인간이여...";
+	mes "포링..";
 	next;
-	mes "[Poring]";
-	mes "I.. I've got some interesting work for ya.. Would you be interested?";
-	mes "We.. we porings need lots and lots of brave human worriers, ring~.";
+	mes "[포링]";
+	mes "괘..괜찮은 일거리를 주선해 줄테니";
+	mes "한번 해보지 않겠냐링..";
+	mes "우.. 우리는 많.. 많은 인간용사들을";
+	mes "필요로 한다링.";
 	next;
-	switch(select("Alright, I'm with you!:What's that?:Ignore")) {
+	switch(select("가보겠다!:뭐야, 그건?:무시한다.")) {
 	case 1:
 		if (Zeny > 499) {
-			mes "[Poring]";
-			mes "Oh, and there's an entrance fee of 500 zeny, ring.";
-			mes "Have a good time, ring.";
+			mes "[포링]";
+			mes "참. 입장료 500제니 받는다링.";
+			mes "그럼 좋은시간 보내라링.";
 			delitem 7773,countitem(7773);
 			set Zeny,Zeny-500;
 			close2;
 			warp "poring_w01",112,138;
 			end;
 		} else {
-			mes "[Poring]";
-			mes "Oh, and there's an entrance fee of 500 zeny, ring.";
+			mes "[포링]";
+			mes "참. 입장료 500제니 받는다링.";
 			mes "...........";
-			mes "Hey, that's life, ring. We need zeny too you know~!";
+			mes "세상일은 원래 그런거다링.";
 			close;
 		}
 	case 2:
-		mes "[Poring]";
-		mes "That's.. because there's been a.. slight confliction in our.. Ring Society..";
-		mes "So we've got to.............have a battle to settle this problem..";
-		mes "You'll see when you get there!";
+		mes "[포링]";
+		mes "그것은.. 우리 링 사회에.. 약간의..";
+		mes "마찰이 생겼기때문에...";
+		mes "그 해결을 위한.................대항전이..";
+		mes "가보면 안다링!";
 		close;
 	case 3:
-		mes "[Poring]";
-		mes "Huhhhh! Hu.. Humans are so cold and cruel!!!";
+		mes "[포링]";
+		mes "헉! 이.. 인간은 역시 매몰차다링!!!";
 		close;
 	}
 }
 
 // Poring Vending Machine
 //============================================================
-poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
+poring_w01,100,97,3	script	포링자판기#w	909,{
 	if (checkweight(714,3) == 0) {
-		mes "- You are carrying too much items in order to use the Vending Machine. -";
+		mes "- 자판기를 사용하기 위해 너무 많은 물건을 들고 있습니다.. -";
 		close;
 	}
-	mes "It's a vending machine. You can use Poring Coints to purchase.";
+	mes "포링코인을 이용해서 물품을 구입할 수";
+	mes "있는 자판기다.";
 	next;
-	if(select("Purchase.:Read the descriptions of goods.") == 1) {
-		mes "You need Poring Coins to purchase items.";
-		mes "You cannot use any zeny.";
-		mes "Item name - Price Poring Coin(P.Co)";
+	if(select("물품을 산다.:물품의 상세 설명을 본다.") == 1) {
+		mes "물품 구입에는 '포링코인'을";
+		mes "사용합니다.";
+		mes "인간들의 제니는 사용하지 않아요.";
+		mes "상품명 - 가격 포링코인(P.Co)";
 		next;
-		switch(select("Marvelous Medal - 4 P.Co:Union of Tribe - 20 P.Co:Poring Box - 30 P.Co:Next")) {
+		switch(select("신기한 메달 - 4 P.Co:조직의 단결력 - 20 P.Co:포링상자 - 30 P.Co:다음")) {
 		case 1:
 			callsub S_PoringVending,7515,4;
 		case 2:
@@ -89,10 +95,10 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 		case 3:
 			callsub S_PoringVending,12109,30;
 		case 4:
-			mes "This is a special item.";
-			mes "Item name - Poring Coin(P.Co)";
+			mes "스페셜 아이템입니다.";
+			mes "상품명 : 가격";
 			next;
-			switch(select("Wild Rose - 15 P.Co:Doppelganger - 20 P.Co:Egnigem Cenia - 20 P.Co:Collection Item")) {
+			switch(select("와일드로즈 - 15 P.Co:도플갱어 - 20 P.Co:이그니젬세니아 - 20 P.Co:콜렉션아이템")) {
 			case 1:
 				callsub S_PoringVending,12300,15;
 			case 2:
@@ -100,12 +106,14 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 			case 3:
 				callsub S_PoringVending,12302,20;
 			case 4:
-				mes "Figures of 1st Job Class Characters including Novice are finally on sale!";
-				mes "Figures except for Novice are all ^4d4dffCharacter bound items^000000.";
-				mes "Please be aware before you make a purchase~";
-				mes "Item name - Poring Coin(P.Co)";
+				mes "현재 노비스를 비롯한 1차 직업군";
+				mes "피규어가 절찬리 판매중!";
+				mes "노비스를 제외한 다른 피규어는 ^4d4dff캐릭터";
+				mes "귀속 아이템^000000입니다.";
+				mes "구매시 주의해 주세요~";
+				mes "상품명 - 가격";
 				next;
-				switch(select("Novice Figure - 50 P.Co:Swordman Figure - 100 P.Co:Thief Figure - 100 P.Co:Merchant Figure - 100 P.Co:Acolyte Figure - 100 P.Co:Mage Figure - 100 P.Co:Archer Figure - 100 P.Co:Random Draw - 50 P.Co:Cancel")) {
+				switch(select("노비스 피규어 - 50 P.Co:검사 피규어 - 100 P.Co:도둑 피규어 - 100 P.Co:상인 피규어 - 100 P.Co:복사 피규어 - 100 P.Co:마법사 피규어 - 100 P.Co:궁수 피규어 - 100 P.Co:아무거나 뽑기 - 50 P.Co:그만둔다.")) {
 				case 1:
 					callsub S_PoringVending,2765,50;
 				case 2:
@@ -121,10 +129,11 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 				case 7:
 					callsub S_PoringVending,2769,100;
 				case 8:
-					mes "You have chosen Random Draw.";
-					mes "1 of 7 diffeent kinds of figures will be selected.";
+					mes "랜덤뽑기에 도전하셨습니다.";
+					mes "7종의 피규어 중 1종이 랜덤하게.";
+					mes "나옵니다.";
 					next;
-					if(select("Draw:Cancel") == 1) {
+					if(select("뽑는다:그만둔다") == 1) {
 						if (countitem(7539) >= 50) {
 							mes "Insert the Poring coin and pull the lever.";
 							mes "Click~ The item came out of the mouth of the Poring with a rumbling sound.";
@@ -144,68 +153,90 @@ poring_w01,100,97,3	script	Poring Vending Machine#w	909,{
 							getitem .@Random_Figure,1;
 							close;
 						} else {
-							mes "Not enough coins.";
+							mes "코인이 모자란다.";
 							close;
+
 						}
 					}
 					mes "["+strcharinfo(0)+"]";
-					mes "... Maybe next time...";
+					mes "... 다음에 살까..";
 					close;
 				case 9:
 					mes "["+strcharinfo(0)+"]";
-					mes "... Maybe next time...";
+					mes "... 다음에 살까..";
 					close;
 				}
 			}
 		}
 	}
-	mes "Selling Item List";
+	mes "판매중인 상품의 품목";
 	mes "====================";
-	mes "[Marvelous Medal]";
-	mes " : A medal made of special metal only produced in Hugel.";
+	mes "[신기한 메달]";
+	mes " : 휘겔에서만 생산되는 특별한";
+	mes "금속으로 제작된  메달.";
 	mes " ";
-	mes "[Union of Tribe]";
-	mes " : A statue with the image of a strong union of Tribes. People believe watching this statue actually helps strengthen the relationships between Tribes.";
+	mes "[조직의 단결력]";
+	mes " : 집단의 결속력을 강화하는 듯한";
+	mes "이미지의 조각상. 이 조각상을 본";
+	mes "사람들은 결속력이 강해진다고 한다.";
 	mes " ";
-	mes "[Poring Box]";
-	mes " : A box wrapped with Poring patterned wrapping paper. Something's inside.";
+	mes "[포링상자]";
+	mes " : 포장에 포링무늬 인이 찍힌 상자.";
+	mes "안에 무언가 들어있다.";
 	mes " ";
-	mes "[Wild Rose]";
-	mes " : Your friend Wild Rose will come and help you.";
+	mes "[와일드로즈]";
+	mes " : 우리들의 친구, 와일드로즈가 당신을.";
+	mes "도와주러 나타납니다.";
 	mes " ";
-	mes "[Mr. Doppel]";
-	mes " : A young nobe, Doppelganger will come and help you.";
+	mes "[도플갱어]";
+	mes " : 귀공자 도플갱어씨가 당신을";
+	mes "도와주러 나타납니다.";
 	mes " ";
-	mes "[Egnigem Cenia]";
-	mes " : A beautiful girl, Egnigem Cenia from Somatology Laboratory, is going to come and help you.";
+	mes "[이그니젬 세니아]";
+	mes " : 생체던전의 미소녀, 세니아양이";
+	mes "당신을 도와주러 나타납니다.";
 	mes " ";
-	mes "[Novice Figure]";
-	mes " : A fine figure of a Novice. Can be equiped as an '^4d4dffaccessory^000000'.";
-	mes " HP + 70, extra effect of HP + 30 when equipped by a Novices.";
+	mes "[노비스 피규어]";
+	mes " : 노비스의 모습을 본 따 만든 피규어. '";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " HP + 70, 노비스가 장착시 HP + 30의";
+	mes "추가효과.";
 	mes " ";
-	mes "[Swordman Figure]";
-	mes " : A nice figure of a Swordman. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " VIT + 1, extra effect of DEF + 2 when equipped by Swordman classes.";
+	mes "[검사 피규어]";
+	mes " : 검사의  모습을 본 따 만든 피규어. '";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " VIT + 1, 검사계열 직업이 장착시 DEF";
+	mes "+ 2의 추가효과.";
 	mes " ";
-	mes "[Merchant Figure]";
-	mes " : A fine figure of a Merchant. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " STR + 1, extra effect of CRI + 5 when equipped by Merchant classes.";
+	mes "[상인 피규어]";
+	mes " : 상인의 모습을 본 따 만든 피교어.'";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " STR + 1, 상인계열 직업이 장착시CRI";
+	mes "+ 5의 추가효과.";
 	mes " ";
-	mes "[Thief Figure]";
-	mes " : A fine Figure of a Thief. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " AGI + 1, extra effectASPD + 3% when equipped by Thief classes.";
+	mes "[도둑 피규어]";
+	mes " : 도둑의 모습을 본 따 만든 피규어.'";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " AGI + 1, 도둑계열 직업이 장착시";
+	mes "ASPD + 3%의 추가효과.";
 	mes " ";
-	mes "[Mage Figure]";
-	mes " : A fine figure of a Mage. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " INT + 1, an extra SP Recovery increase by 5% when equipped by Mage classes.";
+	mes "[마법사 피규어]";
+	mes " : 마법사의 모습을 본 따 만든 피규어. '";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " INT + 1, 마법사계열 직업이 장착시";
+	mes "SP 회복력 5% 상승의 추가효과.";
 	mes " ";
-	mes "[Acolyte Figure]";
-	mes " : A fine figure of an Acolyte. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " INT + 1, extra effct of SP + 50 when equipped by Acolyte classes.";
+	mes "[복사 피규어]";
+	mes " : 복사의 모습을 본 따 만든 피규어. '";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " INT + 1, 복사계열 직업이 장착시 SP +";
+	mes "50의 추가효과.";
 	mes " ";
-	mes "[Archer Figure]";
-	mes " : A fine figure of an Archer. Can be equipped as an '^4d4dffaccessory^000000'.";
-	mes " DEX + 1, extra effct of ATK + 10 when equipped by Archer classes.";
+	mes "[궁수 피규어]";
+	mes " : 궁수의 모습을 본 따 만든 피규어. '";
+	mes "^4d4dff악세사리^000000'로 장착이 가능하다.";
+	mes " DEX + 1, 궁수계열 직업이 장착시";
+	mes "ATK + 10의 추가효과.";
 	close;
 	end;
 
@@ -215,14 +246,14 @@ S_PoringVending:
 		delitem 7539,getarg(1); // Poring_Coin
 		getitem getarg(0),1;
 	} else {
-		mes "Not enough coins.";
+		mes "코인이 모자란다.";
 	}
 	close;
 }
 
 // Information
 //============================================================
-poring_w01,96,97,3	script	Sweet Devi#wop	738,{
+poring_w01,96,97,3	script	착한데비#wop	738,{
 	if (MaxWeight-Weight < 2000 || checkweight(1201,1) == 0) {
 		mes "- Wait a minute !! -";
 		mes "- Currently you're carrying -";
@@ -231,65 +262,75 @@ poring_w01,96,97,3	script	Sweet Devi#wop	738,{
 		mes "- after you lose some weight. -";
 		close;
 	}
-	mes "[Deviruchi]";
-	mes "Oh, Another Human Warrior!";
-	mes "How come so many humans want to join our Poring War these days?";
+	mes "[데비루치]";
+	mes "오, 또 새로운 인간용사 등장인가?";
+	mes "포링 밥그릇 싸움에 왜 이리 참견";
+	mes "하려는 인간들이 많은 거지?";
 	next;
-	mes "[Deviruchi]";
-	mes "Well, whatever, as long as I make money out of it~";
-	mes "Ok, Warriors-! Hahaha How badly have I wanted to shout it out~!!";
+	mes "[데비루치]";
+	mes "하긴 그쪽이 나도 짭짤하니 재밌지만~";
+	mes "자, 인간용사여-! 우히힉 나 이 대사 꼭";
+	mes "한번 해보고 싶었는데~!!";
+	mes "엔젤링과 데빌링의 신성한 전투에";
+	mes "그래도 참가 하겠는가?";
 	next;
-	mes "[Deviruchi]";
-	mes "You, brave warrior, are you ready to join the holy battle of Angeling and Deviling?";
+	mes "[데비루치]";
+	mes "아히힉, 부끄러워지네.";
+	mes "자, 인간. 너도 이 포링대전에 참가";
+	mes "할텐가?";
 	next;
-	mes "[Deviruchi]";
-	mes "Hehehee, I feel kinda shy now.";
-	mes "Anyway, human. Do you want to join our Poring War?";
-	next;
-	switch(select("Am I qualified to join?:How do I join the war?:Cancel:Let me out of here, please!")) {
+	switch(select("나도 참가 가능해?:전투 방식은 어떤거지?:취소:여기서 나갈래!")) {
 	case 1:
-		mes "[Deviruchi]";
-		mes "No racial discrimination! Anyone can join if they're willing to fight.";
-		mes "But the weird thing is that you humans who used to be our greatest enemies are now our participants.";
+		mes "[데비루치]";
+		mes "자기편이 되어준다면 종족을 가리지";
+		mes "않고 다 받나봐.";
+		mes "웃긴건 몬스터끼리의 싸움인데 평소에";
+		mes "그렇게 괴롭히던 인간들이 가장 많이";
+		mes "참여하고 있다는 것이지.";
 		next;
-		mes "[Deviruchi]";
-		mes "If you really want to fight in the war or whatever.. the Team recruiter's right there.";
-		mes "Also, it's totally up to you which team you want to fight for~";
+		mes "[데비루치]";
+		mes "전투든 뭐든 해보고 싶다면 저기 팀";
+		mes "모집하는 곳으로 가봐.";
+		mes "어느팀에 들어갈지는 네가";
+		mes "결정해야겠지만..";
 		close;
 	case 2:
-		mes "[Deviruchi]";
-		mes "It's simple. You see that Team recruiting room?";
-		mes "Each team is composed of 5 people. As soon as 5 members are collected, the battle starts.";
-		mes "You win if you kill the other team's Porings.";
+		mes "[데비루치]";
+		mes "간단해. 저기 팀모집 방이 보이지?";
+		mes "각 팀당 5명씩 모이면 전투가 시작된다.";
+		mes "상대방의 포링을 처치하면 이기는거야.";
 		next;
-		mes "[Deviruchi]";
-		mes "This also means that the battle needs the total of 10 members.";
+		mes "[데비루치]";
+		mes "그러기위해서는 모두 10명의 사람이";
+		mes "필요해.";
+		mes "10명의 참가자가 모두 모이면, 그";
+		mes "다음에 각각 5명씩 나뉘어져 두 팀으로";
+		mes "만들어지는 거지.";
 		next;
-		mes "[Deviruchi]";
-		mes "When all 10 members are collected, those participants get to choose a team. Each team then should have 5 members who are in the SAME party.";
+		mes "[데비루치]";
+		mes "최종적으로 엔젤링팀 5명";
+		mes "데빌링팀에 5명으로 나누ㅝ지는 거야.";
 		next;
-		mes "[Deviruchi]";
-		mes "So, finally, half of the members joins the Angeling Team";
-		mes "and the other half joins the Deviling Team.";
+		mes "[데비루치]";
+		mes "만약에 네가 언젤링팀이라면";
+		mes "전투지역의 데빌링을 처치해야겠지.";
+		mes "상대편은 두마리씩 존재하고, 한마리를";
+		mes "처치한 후 일정시간내에 나머지를";
+		mes "처치하지 못하면 부활한다더군.";
 		next;
-		mes "[Deviruchi]";
-		mes "If you're a member of the Angeling Team, your goal is to kill the Devilings at the other team's base and vice versa.";
-		next;
-		mes "[Deviruchi]";
-		mes "Each team should try killing both Porings in the other team's base. After killing one Poring, you have a limited time to kill the other Poring. Otherwise, the one you killed will come back alive.";
-		next;
-		mes "[Deviruchi]";
-		mes "It's sort of like a capture the flag game but with Porings instead. Understood?";
-		mes "And you need to make sure you know who's in which party.";
+		mes "[데비루치]";
+		mes "일종의 깃발뺏기 싸움같은거야.";
+		mes "이해했어?";
+		mes "그리고 자기편이 누구인지 확실하게";
+		mes "파티를 맺어야 한다구.";
 		close;
 	case 3:
 		mes "[" + strcharinfo(0) + "]";
-		mes "hmm, I see.";
+		mes "그렇군. 잘 알았어.";
 		close;
 	case 4:
-		mes "[Deviruchi]";
-		mes "Oh, Alright. I can help.";
-		mes "I'll send you back to your savepoint.";
+		mes "[데비루치]";
+		mes "아, 그래. 그 정도는 도와줄게.";
 		close2;
 		if (WoP_SaveMap$ != "") {
 			savepoint WoP_SaveMap$,WoP_SaveMap_X,WoP_SaveMap_Y,1,1;
@@ -356,11 +397,11 @@ OnInit:
 
 // Poring Registers
 //============================================================
-poring_w01,91,97,3	script	Poring#wop_door_all	1002,{
+poring_w01,91,97,3	script	포링#wop_door_all	1002,{
 	end;
 	
 OnInit:
-	waitingroom "[Recruiting 10 Battle Participants]",11,"Poring#wop_door_all::OnStartArena",10,500,9;
+	waitingroom "[대전참가자 모집 10명]",11,"포링#wop_door_all::OnStartArena",10,500,9;
 	enablewaitingroomevent;
 	end;
 
@@ -379,11 +420,11 @@ OnDisable:
 	end;
 }
 
-poring_w01,91,68,5	script	Poring#wop_door_a	1002,{
+poring_w01,91,68,5	script	포링#wop_door_a	1002,{
 	end;
 
 OnInit:
-	waitingroom "[Angeling Team Recruiter]",6,"Poring#wop_door_a::OnStartArena",5,0,9;
+	waitingroom "[Angeling Team Recruiter]",6,"포링#wop_door_a::OnStartArena",5,0,9;
 	enablewaitingroomevent;
 	end;
 
@@ -392,12 +433,12 @@ OnStartArena:
 	disablewaitingroomevent;
 	if ($@wop_teamcount == 0) {
 		set $@wop_teamcount,1;
-		donpcevent "Poring#wop_door_d::OnDevilingStart";
+		donpcevent "포링#wop_door_d::OnDevilingStart";
 		donpcevent "#wop_warp_rtry::OnStop";
 	}
 	else if ($@wop_teamcount == 1) {
 		donpcevent "#wop_master::OnStart";
-		donpcevent "Poring#wop_door_d::OnStop";
+		donpcevent "포링#wop_door_d::OnStop";
 		stopnpctimer;
 	}
 	end;
@@ -456,9 +497,9 @@ OnTimer55000:
 	end;
 
 OnTimer55100:
-	donpcevent "Poring#wop_door_a::OnDisable";
-	donpcevent "Poring#wop_door_d::OnDisable";
-	donpcevent "Poring#wop_door_all::OnDisable";
+	donpcevent "포링#wop_door_a::OnDisable";
+	donpcevent "포링#wop_door_d::OnDisable";
+	donpcevent "포링#wop_door_all::OnDisable";
 	set $@wop_teamcount,0;
 	donpcevent "#wop_master::OnAngelingEnd";
 	donpcevent "#wop_warp_rtry::OnEnable";
@@ -471,11 +512,11 @@ OnTimer58000:
 	end;
 }
 
-poring_w01,112,68,3	script	Poring#wop_door_d	1002,{
+poring_w01,112,68,3	script	포링#wop_door_d	1002,{
 	end;
 
 OnInit:
-	waitingroom "[Deviling Team Recruiter]",6,"Poring#wop_door_d::OnStartArena",5,0,9;
+	waitingroom "[Deviling Team Recruiter]",6,"포링#wop_door_d::OnStartArena",5,0,9;
 	enablewaitingroomevent;
 	end;
 
@@ -484,12 +525,12 @@ OnStartArena:
 	disablewaitingroomevent;
 	if ($@wop_teamcount == 0) {
 		set $@wop_teamcount,1;
-		donpcevent "Poring#wop_door_a::OnAngelingStart";
+		donpcevent "포링#wop_door_a::OnAngelingStart";
 		donpcevent "#wop_warp_rtry::OnStop";
 	}
 	else if ($@wop_teamcount == 1) {
 		donpcevent "#wop_master::OnStart";
-		donpcevent "Poring#wop_door_a::OnStop";
+		donpcevent "포링#wop_door_a::OnStop";
 		stopnpctimer;
 	}
 	end;
@@ -548,9 +589,9 @@ OnTimer55000:
 	end;
 
 OnTimer55100:
-	donpcevent "Poring#wop_door_a::OnDisable";
-	donpcevent "Poring#wop_door_d::OnDisable";
-	donpcevent "Poring#wop_door_all::OnDisable";
+	donpcevent "포링#wop_door_a::OnDisable";
+	donpcevent "포링#wop_door_d::OnDisable";
+	donpcevent "포링#wop_door_all::OnDisable";
 
 	set $@wop_teamcount,0;
 	donpcevent "#wop_master::OnDevilingEnd";
@@ -901,9 +942,9 @@ OnReset:
 	donpcevent "#wop_warp_a::OnDisable";
 	donpcevent "#wop_warp_d::OnDisable";
 	donpcevent "#wop_warp_rtry::OnDisable";
-	donpcevent "Poring#wop_door_a::OnEnable";
-	donpcevent "Poring#wop_door_d::OnEnable";
-	donpcevent "Poring#wop_door_all::OnEnable";
+	donpcevent "포링#wop_door_a::OnEnable";
+	donpcevent "포링#wop_door_d::OnEnable";
+	donpcevent "포링#wop_door_all::OnEnable";
 	stopnpctimer;
 	end;
 
@@ -1441,9 +1482,9 @@ OnTimer68100:
 	donpcevent "Mr. Doppel#wop_team_a::OnDisable";
 	donpcevent "Mr. Doppel#wop_team_d::OnDisable";
 	donpcevent "#wop_warp_rtry::OnDisable";
-	donpcevent "Poring#wop_door_a::OnEnable";
-	donpcevent "Poring#wop_door_d::OnEnable";
-	donpcevent "Poring#wop_door_all::OnEnable";
+	donpcevent "포링#wop_door_a::OnEnable";
+	donpcevent "포링#wop_door_d::OnEnable";
+	donpcevent "포링#wop_door_all::OnEnable";
 	stopnpctimer;
 	end;
 }
@@ -1646,76 +1687,79 @@ OnTouch_:
 
 // Other NPCs
 //============================================================
--	script	Angeling Side Poring#wpa	-1,{
+-	script	엔젤링파 포링#wpa	-1,{
 	end;
 }
 
--	script	Deviling Side Marin#wpd	-1,{
+-	script	데빌링파 마린#wpd	-1,{
 	end;
 }
 
-poring_w01,79,102,5	duplicate(Angeling Side Poring#wpa)	Angeling Side Poring#wa1	1002
-poring_w01,80,107,5	duplicate(Angeling Side Poring#wpa)	Angeling Side Poring#wa2	1002
-poring_w01,84,108,5	duplicate(Angeling Side Poring#wpa)	Angeling Side Poring#wa3	1002
-poring_w01,84,112,5	duplicate(Angeling Side Poring#wpa)	Angeling Side Poring#wa4	1002
-poring_w01,88,112,5	duplicate(Angeling Side Poring#wpa)	Angeling Side Poring#wa5	1002
+poring_w01,79,102,5	duplicate(엔젤링파 포링#wpa)	엔젤링파 포링#wa1	1002
+poring_w01,80,107,5	duplicate(엔젤링파 포링#wpa)	엔젤링파 포링#wa2	1002
+poring_w01,84,108,5	duplicate(엔젤링파 포링#wpa)	엔젤링파 포링#wa3	1002
+poring_w01,84,112,5	duplicate(엔젤링파 포링#wpa)	엔젤링파 포링#wa4	1002
+poring_w01,88,112,5	duplicate(엔젤링파 포링#wpa)	엔젤링파 포링#wa5	1002
 
-poring_w01,114,112,3	duplicate(Deviling Side Marin#wpd)	Deviling Side Marin#wd1	1242
-poring_w01,117,111,3	duplicate(Deviling Side Marin#wpd)	Deviling Side Marin#wd2	1242
-poring_w01,117,108,3	duplicate(Deviling Side Marin#wpd)	Deviling Side Marin#wd3	1242
-poring_w01,122,108,3	duplicate(Deviling Side Marin#wpd)	Deviling Side Marin#wd4	1242
-poring_w01,121,105,3	duplicate(Deviling Side Marin#wpd)	Deviling Side Marin#wd5	1242
+poring_w01,114,112,3	duplicate(데빌링파 마린#wpd)	데빌링파 마린#wd1	1242
+poring_w01,117,111,3	duplicate(데빌링파 마린#wpd)	데빌링파 마린#wd2	1242
+poring_w01,117,108,3	duplicate(데빌링파 마린#wpd)	데빌링파 마린#wd3	1242
+poring_w01,122,108,3	duplicate(데빌링파 마린#wpd)	데빌링파 마린#wd4	1242
+poring_w01,121,105,3	duplicate(데빌링파 마린#wpd)	데빌링파 마린#wd5	1242
 
 poring_w01,84,108,3	script	#wop_ex_1	139,3,3,{
 	end;
 
 OnTouch:
-	mes "[Porings]";
-	mes "P~ooooooooo -!!!";
-	mes "Let's teach them a lesson, ring!";
-	mes "We are no longer betting our lives for Jellopies, ring!!!";
+	mes "[포링들]";
+	mes "포오오오오오 -!!!";
+	mes "우리들의 저력을 보여줄때다링!";
+	mes "언제까지나 젤로피 하나에 목숨거는";
+	mes "우리들이 아니다링!!!";
 	next;
-	mes "[Porings]";
-	mes "Let's go! Let's fight! Let's win, win, win!!!";
-	emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa1");
-	emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa2");
-	emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa3");
-	emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa4");
-	emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa5");
+	mes "[포링들]";
+	mes "나가자! 싸우자! 이기자리이이이잉!!!!!";
+	emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa1");
+	emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa2");
+	emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa3");
+	emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa4");
+	emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa5");
 	next;
 	if (wop_team == 1) {
-		mes "[Porings]";
+		mes "[포링들]";
 		mes "Ohhhhhh, there he is, the warrior that fought for us!!";
 		mes "Oh my god... Nice, ring!";
 		mes "Poring~ Poring~ Poooooo~";
 		mes "Party of Angeling~ Popopo, Poring!";
 	}
 	else if (wop_team == 2) {
-		mes "[Porings]";
+		mes "[포링들]";
 		mes "Wait, YOU! Aren't you on the side of the Devilings?!";
 		mes "Get out now! Leave!!";
 		mes "Booooo~ Boo~ Boooo~";
-		emotion ET_HUK, getnpcid(0, "Angeling Side Poring#wa1");
-		emotion ET_FRET, getnpcid(0, "Angeling Side Poring#wa2");
-		emotion ET_HUK, getnpcid(0, "Angeling Side Poring#wa3");
-		emotion ET_FRET, getnpcid(0, "Angeling Side Poring#wa4");
-		emotion ET_SURPRISE, getnpcid(0, "Angeling Side Poring#wa5");
+		emotion ET_HUK, getnpcid(0, "엔젤링파 포링#wa1");
+		emotion ET_FRET, getnpcid(0, "엔젤링파 포링#wa2");
+		emotion ET_HUK, getnpcid(0, "엔젤링파 포링#wa3");
+		emotion ET_FRET, getnpcid(0, "엔젤링파 포링#wa4");
+		emotion ET_SURPRISE, getnpcid(0, "엔젤링파 포링#wa5");
 	}
 	else {
-		mes "[Porings]";
-		mes "Hey, human. How about fighting for us Porings on Angeling's side??!";
-		emotion ET_HELP, getnpcid(0, "Angeling Side Poring#wa1");
-		emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa2");
-		emotion ET_HELP, getnpcid(0, "Angeling Side Poring#wa3");
-		emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa4");
-		emotion ET_GO, getnpcid(0, "Angeling Side Poring#wa5");
+		mes "[포링들]";
+		mes "거기 있는 인간 우리 엔젤링 지지";
+		mes "포링들을 위해 싸우지 않겠냐링?!";
+		emotion ET_HELP, getnpcid(0, "엔젤링파 포링#wa1");
+		emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa2");
+		emotion ET_HELP, getnpcid(0, "엔젤링파 포링#wa3");
+		emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa4");
+		emotion ET_GO, getnpcid(0, "엔젤링파 포링#wa5");
 	}
 	next;
-	mes "[Porings]";
-	mes "Party of Angeling~ Popopo, Poring!";
-	mes "Victory~ Victory~ Pooooooo~";
+	mes "[포링들]";
+	mes "엔~젤링파~! 포포포 포링!";
+	mes "이겨라~ 이겨라~ 포오오오오오~";
 	next;
-	mes "- Porings are cheerfully shouting for the victory. -";
+	mes "- 포링들의 시끄러운 응원이 한창이다.";
+	mes "-";
 	close;
 }
 
@@ -1723,49 +1767,54 @@ poring_w01,119,107,3	script	#wop_ex_2	139,3,3,{
 	end;
 
 OnTouch:
-	mes "[Marins]";
-	mes "Woooooaaaaaaaaaaa!";
-	mes "Finally, it's time for us to teach those stupid pigs a lesson!!";
-	mes "Those Porings with low-grades are all idiots!!";
+	mes "[마린들]";
+	mes "우오오오오오오!";
+	mes "이번에야말로 폼위없이 바닥에";
+	mes "떨어진것이라면 아무거나 주워먹는";
+	mes "먹보 녀석들에게";
+	mes "품위란게 무엇인지 가르쳐 주자아아!!!!";
 	next;
-	mes "[Marins]";
-	mes "Let's go! Let's fight! Fight for Triumph!!!!";
-	emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd1");
-	emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd2");
-	emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd3");
-	emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd4");
-	emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd5");
+	mes "[마린들]";
+	mes "나가자! 싸우자! 이기자리이이잉!!!!!";
+	emotion ET_GO, getnpcid(0, "데빌링파 마린#wd1");
+	emotion ET_GO, getnpcid(0, "데빌링파 마린#wd2");
+	emotion ET_GO, getnpcid(0, "데빌링파 마린#wd3");
+	emotion ET_GO, getnpcid(0, "데빌링파 마린#wd4");
+	emotion ET_GO, getnpcid(0, "데빌링파 마린#wd5");
 	next;
 	if (wop_team == 2) {
-		mes "[Marins]";
+		mes "[마린들]";
 		mes "Ohhhh... Here is the warrior that fought for us!!";
 		mes "Amazing!";
 		mes "This proves that humans recognize us as true monsters!!";
 	}
 	else if (wop_team == 1) {
-		mes "[Marins]";
+		mes "[마린들]";
 		mes "Wait, YOU! Aren't you on the side of the Angelings?!";
 		mes "Get out now! Leave!!";
 		mes "Booooo~ Boo~ Boooo~";
-		emotion ET_HUK, getnpcid(0, "Deviling Side Marin#wd1");
-		emotion ET_FRET, getnpcid(0, "Deviling Side Marin#wd2");
-		emotion ET_HUK, getnpcid(0, "Deviling Side Marin#wd3");
-		emotion ET_FRET, getnpcid(0, "Deviling Side Marin#wd4");
-		emotion ET_SURPRISE, getnpcid(0, "Deviling Side Marin#wd5");
+		emotion ET_HUK, getnpcid(0, "데빌링파 마린#wd1");
+		emotion ET_FRET, getnpcid(0, "데빌링파 마린#wd2");
+		emotion ET_HUK, getnpcid(0, "데빌링파 마린#wd3");
+		emotion ET_FRET, getnpcid(0, "데빌링파 마린#wd4");
+		emotion ET_SURPRISE, getnpcid(0, "데빌링파 마린#wd5");
 	}
 	else {
-		mes "[Marins]";
-		mes "Hey, human. Don't you wanna fight for Deviling, the noble of darkness? What do you say?!";
-		emotion ET_HELP, getnpcid(0, "Deviling Side Marin#wd1");
-		emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd2");
-		emotion ET_HELP, getnpcid(0, "Deviling Side Marin#wd3");
-		emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd4");
-		emotion ET_GO, getnpcid(0, "Deviling Side Marin#wd5");
+		mes "[마린들]";
+		mes "거기있는 인간 어둠의 귀공자";
+		mes "데빌링을 위해 싸우지 않겠냐?!";
+		emotion ET_HELP, getnpcid(0, "데빌링파 마린#wd1");
+		emotion ET_GO, getnpcid(0, "데빌링파 마린#wd2");
+		emotion ET_HELP, getnpcid(0, "데빌링파 마린#wd3");
+		emotion ET_GO, getnpcid(0, "데빌링파 마린#wd4");
+		emotion ET_GO, getnpcid(0, "데빌링파 마린#wd5");
 	}
 	next;
-	mes "[Marins]";
-	mes "The world's Best Miraculous Poring! Deviling has it all! Go, Deviling, Go-!!";
+	mes "[마린들]";
+	mes "세계최강 미라클 포링! 데빌링";
+	mes "만세에에에~!!!";
 	next;
-	mes "- Marins are cheerfully shouting for the victory. -";
+	mes "- 마린들의 시끄러운 응원이 한창이다.";
+	mes "-";
 	close;
 }

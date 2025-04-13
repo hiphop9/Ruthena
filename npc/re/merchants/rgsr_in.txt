@@ -2,449 +2,486 @@
 //= Reform NPCs in rgsr_in
 //===== Changelogs: ==========================================
 //= 1.0 First Version. [Capuche]
+//PC official translate 한글화 제작자: 옥음
 //============================================================
 
-itemmall,14,50,3	script	Equipment Reform PR Agent#it01	4_F_ZONDAGIRL,{
-	mes "[Equipment Reform PR Agent]";
-	mes "Hello, adventurer!";
-	mes "Are you unhappy with your equipment now?";
-	mes "Don't you want to try a new modification than just any other normal method?";
-	mes "Join the Regenschirm Institute!";
+itemmall,14,50,3	script	장비개조 홍보요원#it01	4_F_ZONDAGIRL,{
+	mes "[장비개조 홍보요원]";
+	mes "안녕하세요, 모험가님!";
+	mes "지금 장비에 불만이 많으신가요?";
+	mes "그 어떤 방법보다 새로운 개조공법을 사용해 보고 싶지 않으신가요?";
+	mes "레겐쉬름 연구소와 함께하세요!";
 	next;
-	switch( select( "Let's go.", "Listen to the explanation.", "Quit." ) ) {
+	switch( select( "일단 가본다.", "설명을 듣는다.", "지나간다." )) {
 	case 1:
-		mes "[Equipment Reform PR Agent]";
-		mes "Good! Other facilities in the institute are confidential and are not accessible, so we will guide you on a special path where you outsiders can enter!";
+		mes "[장비개조 홍보요원]";
+		mes "좋습니다! 연구소 내 다른 시설은 기밀사항이라 출입금지이므로, 외부인 입장이 가능한 특별한 길로 안내드릴게요!";
 		close2;
 		warp "rgsr_in",125,170;
 		end;
 	case 2:
-		mes "[Equipment Reform PR Agent]";
-		mes "All around the world research is being conducted at the Regenschirm Institute to modify weapons, armor, accessories and other equipment items...";
-		mes "We're still collecting data and researching modifications, so we need a lot of adventurer's equipment to increase our modification research.";
+		mes "[장비개조 홍보요원]";
+		mes "세상의 모든! 무기, 방어구, 액세서리를 비롯한 장비류 아이템들을 개조할 수 있는 연구를 레겐쉬름 연구소에서 진행 중인데요...";
+		mes "아직은 연구, 개조와 함께 데이터를 수집하는 중이라 많은 모험가님들의 장비 개조 실적이 필요해요.";
 		next;
-		mes "[Equipment Reform PR Agent]";
-		mes "Research is ongoing, so please look forward to the addition of multiple new equipment as soon as it is completed!";
+		mes "[장비개조 홍보요원]";
+		mes "연구는 계속 진행 중이라, 완료되는 대로 여러 장비가 속속 추가될 예정이니 기대해 주세요!";
 		close;
 	case 3:
-		mes "[Equipment Reform PR Agent]";
-		mes "If you're interested later, come back!";
+		mes "[장비개조 홍보요원]";
+		mes "나중에라도 관심이 생기면 다시 오세요!";
 		close;
 	}
 }
-lighthalzen,99,156,3	duplicate(Equipment Reform PR Agent#it01)	Equipment Reform PR Agent#lh01	4_F_ZONDAGIRL
+lighthalzen,99,156,3	duplicate(장비개조 홍보요원#it01)	장비개조 홍보요원#lh01	4_F_ZONDAGIRL
 
-rgsr_in,112,167,7	script	Enchant Researcher#rg02-1	MD_ED_M_SCIENCE,{
-	mes "[Torus]";
-	mes "Huh? Do you have anyone else to see on our team other than the team leader?";
-	mes "Then that's me~";
-	mes "I am in charge of Enchants.";
-	mes "Let's see what you got?";
+rgsr_in,112,167,7	script	인챈트 연구원#rg02-1	MD_ED_M_SCIENCE,{
+	mes "[토루스]";
+	mes "으응? 팀장님 말고 우리 팀에 볼 일이 있어?";
+	mes "그럼 나지 나~";
+	mes "인챈트 담당 토루스 님이다.";
+	mes "뭘 갖고 왔는지 볼까?";
 	next;
-	if (select( "Modified OS Weapon Enchant", "Quit" ) == 2) {
-		mes "[Torus]";
-		mes "Come back whenever you need it.";
-		mes "And we need the research.";
+	if (select( "개조한 OS무기 인챈트", "그만둔다" ) == 2) {
+	mes "[토루스]";
+		mes "언제든지 필요하면 다시 오라고.";
+		mes "우리는 성과가 필요하거든.";
 		close;
 	}
-	mes "[Torus]";
-	mes "Where...";
+	mes "[토루스]";
+	mes "어디어디...";
 	close2;
 	item_enchant(33);
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad" );
+	setunittitle( getnpcid(0), "팀 아트나드" );
 	end;
 }
 
-rgsr_in,115,169,5	script	Weapon Researcher#rg02	MD_ED_M_SCIENCE,{
-	mes "[Frasa]";
-	mes "Let's see... You're a guest.";
-	mes "I like people who are sure what they want.";
-	mes "Modifiable items can also be read as <TIPBOX>[List]<INFO>9163</INFO></TIPBOX>.";
-	mes "I will try to answer any questions you have.";
+rgsr_in,115,169,5	script	무기 연구원#rg02	MD_ED_M_SCIENCE,{
+	mes "[위상]";
+	mes "어디보자... 손님이군.";
+	mes "나는 원하는 바가 확실한 사람을 좋아해.";
+	mes "개조 가능 품목은 <TIPBOX>[리스트]<INFO>9163</INFO></TIPBOX>라도 읽도록.";
+	mes "그 이외의 일이라면 원하는 걸 대답하게.";
 	next;
-	switch( select( "Thanos Weapons", "OS Weapons", "Quit" ) ) {
+	switch( select( "타노스 무기류", "OS 무기류", "그만둔다" )) {
 	case 1:
-		mes "[Frasa]";
-		mes "^0000FFThanos weapon^000000 mods have lower and intermediate levels in the modification method.";
+		mes "[위상]";
+		mes "^0000FF타노스 무기^000000라면 개조 방식에 하급과 중급이 있어.";
 		next;
-		switch( select( "Lower mods", "Intermediate mods", "Quit" ) ) {
+		switch( select( "하급 개조", "중급 개조", "그만둔다" )) {
 		case 1:
-			mes "[Frasa]";
-			mes "Thanos weapon lower modification.";
-			mes "^FF0000Refine level is reduced by 5^000000, but consumes less materials.";
-			mes "And for mods, the weapon needs to be refine level +9 or higher.";
+			mes "[위상]";
+			mes "타노스 무기 하급 개조 말이지.";
+			mes "^FF0000제련도가 5만큼 감소^000000되지만, 보다 적은 재료가 필요하지.";
+			mes "그리고 개조를 위해서는 해당 무기는 +9 이상의 제련도가 필요해.";
 			close2;
 			item_reform("Thanos_W_Reform_1");
 			end;
 		case 2:
-			mes "[Frasa]";
-			mes "Thanos Weapon intermediate modification.";
-			mes "^FF0000Refine level is reduced by 1^000000, but consumes more material.";
-			mes "And for mods, the weapon needs to be refine level +9 or higher.";
+			mes "[위상]";
+			mes "타노스 무기 중급 개조 말이지.";
+			mes "^FF0000제련도가 1만큼 감소^000000되지만, 보다 많은 재료가 필요하지.";
+			mes "그리고 개조를 위해서는 해당 무기는 +9 이상의 제련도가 필요해.";
 			close2;
 			item_reform("Thanos_W_Reform_2");
 			end;
 		case 3:
-			mes "[Frasa]";
-			mes "If you need mods, come back.";
-			mes "You are welcome any time you help us with our research.";
+			mes "[위상]";
+			mes "개조가 필요해지면 다시 오게.";
+			mes "우리 연구를 도와준다면 언제든지 환영한다.";
 			close;
 		}
 		end;
 	case 2:
-		mes "[Frasa]";
-		mes "^0000FFOS Weapons^000000...";
-		mes "For modification, the refine level must be +7 or higher.";
-		mes "Refine level does not decrease.";
-		mes "Did you bring the stuff?";
+		mes "[위상]";
+		mes "^0000FFOS 무기^000000라...";
+		mes "개조를 위해서라면 제련도가 +7 이상이어야 해.";
+		mes "제련도가 감소하거나 하지는 않아.";
+		mes "물건은 갖고 왔나?";
 		next;
-		if (select( "Convert", "Quit" ) == 2) {
-			mes "[Frasa]";
-			mes "If you need mods, come back.";
-			mes "You are welcome any time you help us with our research.";
+		if (select( "개조한다", "그만둔다" ) == 2) {
+			mes "[위상]";
+			mes "개조가 필요해지면 다시 오게.";
+			mes "우리 연구를 도와준다면 언제든지 환영한다.";
 			close;
 		}
-		mes "[Frasa]";
-		mes "Let's see what you brought.";
+		mes "[위상]";
+		mes "어디 한 번 뭘 가져왔는지 보자고.";
 		close2;
 		item_reform("OS_Weapon_Reform");
 		end;
 	case 3:
-		mes "[Frasa]";
-		mes "If you need mods, come back.";
-		mes "You are welcome any time you help us with our research.";
+		mes "[위상]";
+		mes "개조가 필요해지면 다시 오게.";
+		mes "우리 연구를 도와준다면 언제든지 환영한다.";
 		close;
 	}
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad");
+	setunittitle( getnpcid(0), "팀 아트나드");
 	end;
 }
 
-rgsr_in,115,180,5	script	Armor Researcher#rg02	MD_ED_M_SCIENCE,{
-	mes "[Algebra]";
-	mes "Ah, we've come this far, but our team's research is still lacking in experiments.";
-	mes "I'll improve it a bit next time and get the captain's permission, then let's proceed.";
-	mes "Okay?";
-	npctalk "Grimace.", "", bc_self;
+rgsr_in,115,180,5	script	방어구 연구원#rg02	MD_ED_M_SCIENCE,{
+	mes "[대수]";
+	mes "아이구, 어서 오게. 어서 와.";
+	mes "여긴 팀 프레사다.";
+	mes "어떤 걸 개조할 거야?";
+	mes "개조 가능 품목은 <TIPBOX>[리스트]<INFO>9164</INFO></TIPBOX>를 참조하도록 해.";
+	next;
+	if (select( "방어구", "그만둔다" ) == 2) {
+		mes "[대수]";
+		mes "자네는 다음에 또 오게 되어 있어.";
+		mes "우리의 연구를 확인하러 말이야!";
+		npctalk "찡끗.", "", bc_self;
+		close;
+	}
+	mes "[대수]";
+	mes "^0000FF방어구^000000라! 하급과 중급 개조를 자네에게 제시하지.";
+	next;
+	switch( select( "하급 개조", "중급 개조", "그만둔다" )) {
+		case 1:
+			mes "[대수]";
+			mes "방어구 하급 개조? 맡겨만 줘.";
+			mes "^FF0000제련도가 5만큼 감소^000000되지만, 보다 적은 재료를 소모하지.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수야.";
+			close2;
+			item_reform("FA_Armor_Reform_1");
+			end;
+		case 2:
+			mes "[대수]";
+			mes "방어구 중급 개조? 맡겨만 줘.";
+			mes "^FF0000제련도가 1만큼 감소^000000되지만, 보다 많은 재료를 소모하지.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수야.";
+			close2;
+			item_reform("FA_Armor_Reform_2");
+			end;
+		case 3:
+			mes "[대수]";
+			mes "자네는 다음에 또 오게 되어 있어.";
+			mes "우리의 연구를 확인하러 말이야!";
+			npctalk "찡끗.", "", bc_self;
+			close;
+	}
 	close;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Fresa" );
+	setunittitle( getnpcid(0), "팀 프레사" );
 	end;
 }
 
-rgsr_in,135,186, 7	script	Assistant#rg02	4_M_ALCHE_D,{
-	npctalk "Assistant: Don't touch it... It's dangerous...", "", bc_self;
-	sleep2 300;
-	npctalk "Assistant: ...Oh..............", "Assistant#rg04", bc_self;
-	npctalk "Assistant: Don't worry, it's nothing...", "Assistant#rg03", bc_self;
+rgsr_in,135,186, 7	script	조수#rg02	4_M_ALCHE_D,{
+	npctalk "조수: 만지지마세요... 위험하니까...", "", bc_self;
+	sleep2 100;
+	npctalk "조수: ...앗..............", "조수#rg04", bc_self;
+	npctalk "조수: 신경쓰지마세요아무것도아니에요...", "조수#rg03", bc_self;
 	end;
 }
 
-rgsr_in,135,189,5	script	Assistant#rg03	4_M_REPAIR,{
-	npctalk "Assistant: ...Paycheck... Give it to me...? Then ask unnecessary questions...", "", bc_self;
-	npctalk "Assistant: Of course...", "Assistant#rg02", bc_self;
+rgsr_in,135,189,5	script	조수#rg03	4_M_REPAIR,{
+	npctalk "조수: ...월급... 주냐고요...? 그런 불필요한 질문을...", "", bc_self;
+	sleep2 100;
+	npctalk "조수: 당연하죠...", "조수#rg02", bc_self;
 	end;
 }
 
-rgsr_in,137,187,3	script	Assistant#rg04	4_F_HUWOMAN,{
-	npctalk "Assistant: No, not that.... That's it. That's it...", "", bc_self;
-	sleep2 300;
-	npctalk "Assistant: Hick... It was almost a big day... You didn't see him, did you?", "Assistant#rg02", bc_self;
-	npctalk "Grid: ?", "Ore Researcher#rg02", bc_self;
+rgsr_in,137,187,3	script	조수#rg04	4_F_HUWOMAN,{
+	npctalk "조수: 아니 그거 아니야.... 저거야 저거...", "", bc_self;
+	sleep2 100;
+	npctalk "조수: 힉... 큰일날뻔했다... 박사님 못보셨지?", "조수#rg02", bc_self;
+	npctalk "격자: ?", "광석 연구원#rg02", bc_self;
 	end;
 }
 
-rgsr_in,146,169,3	script	Assistant#rg05	4_M_REPAIR,{
-	npctalk "Assistant: Quiet... I'm...", "", bc_self;
+rgsr_in,146,169,3	script	조수#rg05	4_M_REPAIR,{
+	npctalk "조수: 조용히...해요...", "", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Licht");
+	setunittitle( getnpcid(0), "팀 리히트");
 	end;
 }
 
-rgsr_in,146,167,3	script	Assistant#rg06	4_M_REPAIR,{
-	npctalk "Assistant: Our leader is a great guy. I'm still young...", "", bc_self;
+rgsr_in,146,167,3	script	조수#rg06	4_M_REPAIR,{
+	npctalk "조수: 우리 부장님은 정말 대단한 사람이야. 아직 나이도 어린데...", "", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Licht");
+	setunittitle( getnpcid(0), "팀 리히트");
 	end;
 }
 
-rgsr_in,144,170,5	script	Assistant#rg07	4_M_REPAIR,{
-	npctalk "Assistant: Hey, this data was really cool. I was wise to follow you.", "", bc_self;
+rgsr_in,144,170,5	script	조수#rg07	4_M_REPAIR,{
+	npctalk "조수: 이야, 이번 데이터는 정말 멋졌어. 부장님 따라오길 잘했다니까.", "", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Licht");
+	setunittitle( getnpcid(0), "팀 리히트");
 	end;
 }
 
-rgsr_in,106,167,5	script	Assistant#rg11	4_M_REPAIR,{
-	npctalk "Assistant: Can we move to a larger lab one day after we do more research?", "", bc_self;
-	sleep2 300;
-	npctalk "Assistant: ....Hang.", "Assistant#rg10", bc_self;
+rgsr_in,106,167,5	script	조수#rg11	4_M_REPAIR,{
+	npctalk "조수: 언젠가 성과가 나면 좀 더 큰 연구소로 옮길 수 있을까요?", "", bc_self;
+	sleep2 100;
+	npctalk "조수: ....걸.", "조수#rg10", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad" );
+	setunittitle( getnpcid(0), "팀 아트나드" );
 	end;
 }
 
-rgsr_in,109,167,3	script	Assistant#rg10	4_M_REPAIR,{
-	npctalk "Assistant: ....I'm.", "", bc_self;
-	sleep2 300;
-	npctalk "Assistant: Adventurer, please walk carefully. The building is old and the floor is a little creaky.", "Assistant#rg11", bc_self;
+rgsr_in,109,167,3	script	조수#rg10	4_M_REPAIR,{
+	npctalk "조수: ....해요.", "", bc_self;
+	sleep2 100;
+	npctalk "조수: 모험가님, 조금 살살 걸어다녀 주세요. 건물이 오래돼서 바닥이 좀 삐걱거려요. 라고 합니다.", "조수#rg11", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad" );
+	setunittitle( getnpcid(0), "팀 아트나드" );
 	end;
 }
 
-rgsr_in,146,178,3	script	Assistant#rg20	4_M_REPAIR,{
-	npctalk "Assistant: Ask our lead about any questions you have.", "", bc_self;
+rgsr_in,146,178,3	script	조수#rg20	4_M_REPAIR,{
+	npctalk "조수: 질문 사항은 저희 부장님한테 여쭤 보세요.", "", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad" );
+	setunittitle( getnpcid(0), "팀 아트나드" );
 	end;
 }
 
-rgsr_in,143,180,5	script	Assistant#rg21	4_M_REPAIR,{
-	npctalk "Assistant: Isn't it a little noisy outside?", "", bc_self;
-	sleep2 200;
-	npctalk "Assistant: I wish I could move to a good soundproofed place.", "Assistant#rg20", bc_self;
+rgsr_in,143,180,5	script	조수#rg21	4_M_REPAIR,{
+	npctalk "조수: 바깥이 좀 시끄럽지 않아?", "", bc_self;
+	sleep2 100;
+	npctalk "조수: 방음 좀 잘 되는 데로 이사가면 좋겠다.", "조수#rg20", bc_self;
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Atnad" );
+	setunittitle( getnpcid(0), "팀 아트나드" );
 	end;
 }
 
-rgsr_in,131,187,5	script	Ore Researcher#rg02	MD_ED_M_SCIENCE,{
-	mes "[Grid]";
-	mes "Come on.";
-	mes "It's a low-budget lab, so it's always like this.";
-	mes "My assistants and I refine the gemstones used in this lab. For a fee.";
+rgsr_in,131,187,5	script	광석 연구원#rg02	MD_ED_M_SCIENCE,{
+	mes "[격자]";
+	mes "어서 와요.";
+	mes "예산이 늘 부족한 연구실이다보니 이런 것까지 차리게 되었구먼.";
+	mes "이 연구실 내에서 사용하는 원석을 나와 조수들이 정제해요. 수수료 받고.";
 	next;
-	switch( select( "View the exchange list", "What are you exchanging?", "Quit" ) ) {
+	switch( select( "교환목록을 확인한다", "뭘 교환하는 거죠?", "그만둔다" )) {
 	case 1:
-		mes "[Grid]";
-		mes "Let's see...";
-		mes "Now there are these things.";
+		mes "[격자]";
+		mes "어디 보자...";
+		mes "지금은 이런 것들이 있는데.";
 		next;
-		switch( select( "Gemstone refining", "Top ore exchange", "Buy additional ore", "Cancel" ) ) {
+		switch( select( "원석 정제", "상위 광석 교환", "추가 광석 구매", "취소" )) {
 		case 1:
-			mes "[Grid]";
-			mes "Gemstone refining.";
+			mes "[격자]";
+			mes "원석 정제 말이죠.";
 			close2;
 			callshop("barter_rgsr_in_1");
 			end;
 		case 2:
-			mes "[Grid]";
-			mes "Top ore exchange.";
+			mes "[격자]";
+			mes "상위 광석 교환 말이죠.";
 			close2;
 			callshop("barter_rgsr_in_2");
 			end;
 		case 3:
-			mes "[Grid]";
-			mes "Don't have enough ore? Then there's something I'm specifically collecting...";
-			mes "Do you have a shadow decon?";
+			mes "[격자]";
+			mes "광석이 모자라나요? 그럼 제가 특별히 모으고 있는 것이 있는데...";
+			mes "쉐도우데오콘을 혹시 가지고 있나요?";
 			close2;
 			callshop("barter_rgsr_in_3");
 			end;
 		case 4:
-			mes "[Grid]";
-			mes "If you need anything, come again.";
+			mes "[격자]";
+			mes "필요한 게 있으면 또 와요.";
 			close;
 		}
 		end;
 	case 2:
-		mes "[Grid]";
-		mes "As we see in our research, the materials are very rare. There are adventurers hired by our team, but the material is not comparable to the amount we need.";
-		mes "So when the adventurers came with the materials, they decided to provide the corresponding research value.";
+		mes "[격자]";
+		mes "우리 연구는 보다시피 재료들이 매우 희귀해요. 우리 팀원들이 고용한 모험가도 있긴 하지만 필요한 양에 비하면 어림도 없죠.";
+		mes "그래서 모험가 분들이 직접 재료를 가지고 오면 그에 상응하는 연구값을 제공하기로 했어요.";
 		next;
-		mes "[Grid]";
-		mes "Luckily, we do the research and adventurers who come to us provide materials to use our technology.";
-		mes "If you want to modify something you only need to bring the presented materials.";
+		mes "[격자]";
+		mes "운이 좋죠. 우리는 연구를 하고, 찾아오시는 모험가 분들은 우리의 연구 기술을 이용하기 위해 재료를 제공하고.";
+		mes "혹시 개조를 원한다면 제시된 재료들만 가져오면 돼요.";
 		next;
-		mes "[Grid]";
-		mes "You're an adventurer, so you know what that means?";
+		mes "[격자]";
+		mes "당신도 모험가니까 무슨 의미인지 아시겠죠?";
 		close;
 	case 3:
-		mes "[Grid]";
-		mes "If you need anything, come again.";
+		mes "[격자]";
+		mes "필요한 게 있으면 또 와요.";
 		close;
 	}
 }
 
-rgsr_in,137,178,3	script	Accessories Researcher#rg02	MD_ED_M_SCIENCE,{
-	mes "[Champ]";
-	mes "Finally, I talked to an adventurer and asked him to confirm my research, was that you?";
-	mes "Unfortunately, our team hasn't done enough to get out there yet.";
+rgsr_in,137,178,3	script	액세서리 연구원#rg02	MD_ED_M_SCIENCE,{
+	mes "[챔프]";
+	mes "드디어 모험가를 불러다 연구성과 확인을 시킨다더니 자네인가?";
+	mes "아쉽게도 우리 팀은 아직 바깥에 내보낼 만큼은 성과가 안 나왔군.";
 	next;
-	mes "[Champ]";
-	mes "It's still incomplete.";
-	mes "I'll see you next time I get permission from the captain.";
+	mes "[챔프]";
+	mes "아직이야, 아직.";
+	mes "다음에 대장 허가가 떨어지면 그 때 보자.";
 	close;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Zerter");
+	setunittitle( getnpcid(0), "팀 제르테르");
 	end;
 }
 
-rgsr_in,136,171,5	script	Special Equipment Researcher#rg02	MD_ED_M_SCIENCE,{
-	mes "[Stack]";
-	mes "See Team Licht's performance?";
-	mes "We're proud of this lab.";
-	mes "Which one do you want to modify?";
-	mes "Modifiable items are located in <TIPBOX>[List]<INFO>9166</INFO></TIPBOX>.";
+rgsr_in,136,171,5	script	특수장비 연구원#rg02	MD_ED_M_SCIENCE,{
+	mes "[스택]";
+	mes "팀 리히트의 성과를 보시겠습니까?";
+	mes "우리야말로 이 연구실의 자랑이죠.";
+	mes "어떤 것을 개조하고 싶습니까?";
+	mes "개조 가능 품목은 <TIPBOX>[리스트]<INFO>9166</INFO></TIPBOX>에 있습니다.";
 	next;
-	switch( select( "Non-standard armor", "Non-standard weapon", "Quit" ) ) {
+	switch( select( "규격외 방어구", "규격외 무기", "그만둔다" )) {
 	case 1:
-		mes "[Stack]";
-		mes "^0000FFNon-standard armor^000000, there are Lower, Intermediate, and Upper levels of the modification method.";
-		mes "Non-refineable armor is only capable of Upper modification.";
+		mes "[스택]";
+		mes "^0000FF규격외 방어구^000000라면 개조 방식에 하급과 중급, 상급이 있죠.";
+		mes "제련불가 방어구는 상급 개조만 가능합니다.";
 		next;
-		switch( select( "Lower mods", "Intermediate mods", "Upper mods", "Quit" ) ) {
+		switch( select( "하급 개조", "중급 개조", "상급 개조", "그만둔다" )) {
 		case 1:
-			mes "[Stack]";
-			mes "Armor Lower Mods? Okay.";
-			mes "^FF0000Refine level is reduced by 5^000000, but consumes less material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
+			mes "[스택]";
+			mes "방어구 하급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 5만큼 감소^000000되지만, 보다 적은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
 			close2;
 			item_reform("C_Armor_Reform_1");
 			end;
 		case 2:
-			mes "[Stack]";
-			mes "Armor Intermediate Mods? Okay.";
-			mes "^FF0000Refine level is reduced by 1^000000, but consumes more material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
+			mes "[스택]";
+			mes "방어구 중급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 1만큼 감소^000000되지만, 보다 많은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
 			close2;
 			item_reform("C_Armor_Reform_2");
 			end;
 		case 3:
-			mes "[Stack]";
-			mes "Armor Upper Mods? Okay.";
-			mes "^FF0000Refine level increases by 1^000000, but consumes more material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
-			mes "^FF0000Non-refineable equipment^000000 can also be granted with advanced modifications, but the refine level does not increase.";
+			mes "[스택]";
+			mes "방어구 상급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 1 증가^000000하는 만큼 더욱 많은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
+			mes "^FF0000제련이 불가능한 장비^000000도 상급 개조로는 손을 댈 수 있습니다만, 제련도가 증가하지는 않습니다.";
 			close2;
 			item_reform("C_Armor_Reform_3");
 			end;
 		case 4:
-			mes "[Stack]";
-			mes "Already going?";
-			mes "You need to see more of our outstanding performance!";
+			mes "[스택]";
+			mes "벌써 가요?";
+			mes "우리의 이 뛰어난 성과를 좀 더 확인하셔야죠!";
 			close;
 		}
 	case 2:
-		mes "[Stack]";
-		mes "^0000FFNon-standard weapon^000000, there are Lower, Intermediate, and Upper levels of the modification method.";
+		mes "[스택]";
+		mes "^0000FF규격외 무기^000000라면 개조 방식에 하급과 중급, 상급이 있죠.";
 		next;
-		switch( select( "Lower mods", "Intermediate mods", "Upper mods", "Quit" ) ) {
+		switch( select( "하급 개조", "중급 개조", "상급 개조", "그만둔다" )) {
 		case 1:
-			mes "[Stack]";
-			mes "Weapon Lower Mods? Okay.";
-			mes "^FF0000Refine level is reduced by 5^000000, but consumes less material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
+			mes "[스택]";
+			mes "무기 하급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 5만큼 감소^000000되지만, 보다 적은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
 			close2;
 			item_reform("C_Weapon_Reform_1");
 			end;
 		case 2:
-			mes "[Stack]";
-			mes "Weapon Intermediate Mods? Okay.";
-			mes "^FF0000Refine level is reduced by 1^000000, but consumes more material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
+			mes "[스택]";
+			mes "무기 중급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 1만큼 감소^000000되지만, 보다 많은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
 			close2;
 			item_reform("C_Weapon_Reform_2");
 			end;
 		case 3:
-			mes "[Stack]";
-			mes "Weapon Advanced Mods? Okay.";
-			mes "^FF0000Refine level increases by 1^000000, but consumes more material.";
-			mes "And for modification, the equipment must have a refine level of +9 or higher.";
+			mes "[스택]";
+			mes "무기 상급 개조? 알겠습니다.";
+			mes "^FF0000제련도가 1 증가^000000하는 만큼 더욱 많은 재료를 소모하지요.";
+			mes "그리고 개조를 위해서는 해당 장비는 +9 이상의 제련도가 필수입니다.";
 			close2;
 			item_reform("C_Weapon_Reform_3");
 			end;
 		case 4:
-			mes "[Stack]";
-			mes "Already going?";
-			mes "You need to see more of our outstanding performance!";
+			mes "[스택]";
+			mes "벌써 가요?";
+			mes "우리의 이 뛰어난 성과를 좀 더 확인하셔야죠!";
 			close;
 		}
 		end;
 	case 3:
-		mes "[Stack]";
-		mes "Already going?";
-		mes "You need to see more of our outstanding performance!";
+		mes "[스택]";
+		mes "벌써 가요?";
+		mes "우리의 이 뛰어난 성과를 좀 더 확인하셔야죠!";
 		close;
 	}
 	end;
 
 OnInit:
-	setunittitle( getnpcid(0), "Team Licht");
+	setunittitle( getnpcid(0), "팀 리히트");
 	end;
 }
 
-rgsr_in,128,174,5	script	Director#rg02	1_M_LIBRARYMASTER,{
-	mes "[Director]";
-	mes "...Come on.";
-	mes "You may have heard the explanation when you came, but to briefly introduce you to this place, there is still a long way to go. We are working on converting many weapons, armor, accessories, etc. into something different.";
+rgsr_in,128,174,5	script	연구소장#rg02	1_M_LIBRARYMASTER,{
+	mes "[연구소장]";
+	mes "...어서오십시오.";
+	mes "오실 때 설명을 들었겠지만 간략하게 이 곳을 소개하자면, 아직 갈 길이 멀기는 하지만 가능한 한 많은 무기, 방어구, 액세서리 등을 다른 차원의 무언가로 개조하는 연구를 하고 있습니다.";
 	next;
-	mes "[Director]";
-	mes "It is essential to cut the refine of the equipment to be converted, but it is a labor for greater power.";
+	mes "[연구소장]";
+	mes "개조할 장비의 제련도를 필수적으로 깎게 되지만, 더 큰 힘을 위한 수고라고 보면 되겠습니다.";
 	next;
-	mes "[Director]";
-	mes "Research is ongoing, so it is not known when and where something will suddenly be completed and offered to adventurers.";
-	mes "It is... As soon as the data is collected, it will be somehow.";
+	mes "[연구소장]";
+	mes "연구는 계속 진행 중이므로 언제 어떤 것이 갑자기 완료되어 모험가 여러분께 제공될지는 알 수 없습니다.";
+	mes "그것은... 데이터가 수집되는 대로 어떻게든 되겠지요.";
 	next;
-	mes "[Director]";
-	mes "And this time, Team Licht achieved it.";
-	mes "If you're interested, check out what research was done.";
+	mes "[연구소장]";
+	mes "그러고 보니 이번에는 팀 프레사가 성과를 올렸습니다.";
+	mes "흥미가 있으시다면 무슨 연구였는지 확인해 보십시오.";
 	next;
-	mes "[Director]";
-	mes "Everyone likes it quiet, so don't talk too loud.";
+	mes "[연구소장]";
+	mes "다들 조용한 것을 좋아하니, 큰 소리로 대화하지는 마시길 바랍니다.";
 	close;
 }
 
-rgsr_in,122,160,5	script	Exit Guard#rg01	4_M_LGTGUARD,{
-	mes "[Exit guard]";
-	mes "Are you done?";
-	mes "^FF0000Return to Lighthalzen^000000?";
+rgsr_in,122,160,5	script	출구 경호원#rg01	4_M_LGTGUARD,{
+	mes "[출구 경호원]";
+	mes "용무가 끝나셨는지요?";
+	mes "^FF0000리히타르젠^000000으로 돌아가시겠습니까?";
 	next;
-	if (select( "Return.", "Work remaining." ) == 2) {
-		mes "[Exit guard]";
-		mes "Please tell us at any time when you are finished.";
+	if (select( "돌아간다.", "일이 남았다." ) == 2) {
+		mes "[출구 경호원]";
+		mes "용무가 끝나면 언제든지 말씀해 주십시오.";
 		close;
 	}
-	mes "[Exit guard]";
-	mes "Let me guide you on the way back.";
+	mes "[출구 경호원]";
+	mes "돌아가는 길을 안내해 드리겠습니다.";
 	close2;
 	warp "lighthalzen",101,156;
 	end;
 }
 
-rgsr_in,129,160,3	script	Exit Guard#rg02	4_M_LGTGUARD,{
-	mes "[Exit guard]";
-	mes "Are you done?";
-	mes "^FF0000Return to Item Mall^000000?";
+rgsr_in,129,160,3	script	출구 경호원#rg02	4_M_LGTGUARD,{
+	mes "[출구 경호원]";
+	mes "용무가 끝나셨는지요?";
+	mes "^FF0000아이템 몰^000000로 돌아가시겠습니까?";
 	next;
-	if (select( "Return.", "Work remaining." ) == 2) {
-		mes "[Exit guard]";
-		mes "Please tell us at any time when you are finished.";
+	if (select( "돌아간다.", "일이 남았다." ) == 2) {
+		mes "[출구 경호원]";
+		mes "용무가 끝나면 언제든지 말씀해 주십시오.";
 		close;
 	}
-	mes "[Exit guard]";
-	mes "Let me guide you on the way back.";
+	mes "[출구 경호원]";
+	mes "돌아가는 길을 안내해 드리겠습니다.";
 	close2;
 	warp "itemmall",16,47;
 	end;

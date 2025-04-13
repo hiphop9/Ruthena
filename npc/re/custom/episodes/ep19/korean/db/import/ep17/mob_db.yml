@@ -1,0 +1,146 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: MOB_DB
+  Version: 3
+
+Body:
+  - Id: 20631
+    AegisName: MD_BETA_SCISSORE_NG
+    Name: Broken Gardener Beta
+    Level: 135
+    Hp: 234017
+    BaseExp: 5936900
+    JobExp: 997399
+    Attack: 1336
+    Attack2: 1870
+    Defense: 311
+    MagicDefense: 79
+    Str: 116
+    Agi: 70
+    Vit: 73
+    Int: 101
+    Dex: 142
+    Luk: 61
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 190
+    AttackDelay: 926
+    AttackMotion: 321
+    DamageMotion: 246
+    Ai: 09
+  - Id: 20633
+    AegisName: EP17_2_BETA_CLEANER_A
+    Name: Broken Cleaner
+    Level: 135
+    Hp: 147134
+    Attack: 1261
+    Attack2: 1896
+    Defense: 344
+    MagicDefense: 82
+    Str: 121
+    Agi: 76
+    Vit: 86
+    Int: 126
+    Dex: 151
+    Luk: 53
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 190
+    AttackDelay: 926
+    AttackMotion: 321
+    DamageMotion: 246
+    Ai: 09
+  - Id: 20637
+    AegisName: EP17_2_BETA_ITEMKEEPER
+    Name: Broken Warehouse Manager
+    Level: 1
+    Hp: 1900983
+    Attack: 1855
+    Attack2: 2561
+    Defense: 553
+    MagicDefense: 110
+    Str: 186
+    Agi: 105
+    Vit: 49
+    Int: 167
+    Dex: 236
+    Luk: 43
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 175
+    AttackDelay: 721
+    AttackMotion: 1521
+    DamageMotion: 246
+    Ai: 09
+  - Id: 20639
+    AegisName: EP17_2_BETA_GUARDS_NG
+    Name: Broken Beta Guards
+    Level: 1
+    Hp: 1909523
+    Attack: 1956
+    Attack2: 2860
+    Defense: 522
+    MagicDefense: 110
+    Str: 207
+    Agi: 142
+    Vit: 32
+    Int: 143
+    Dex: 220
+    Luk: 31
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 190
+    AttackDelay: 721
+    AttackMotion: 1521
+    DamageMotion: 246
+    Ai: 09
+  - Id: 20641
+    AegisName: EP17_2_OMEGA_CLEANER_NG
+    Name: Broken Omega Cleaner
+    Level: 175
+    Hp: 1200685
+    BaseExp: 439121
+    JobExp: 65868
+    Attack: 1240
+    Attack2: 2731
+    Defense: 475
+    MagicDefense: 103
+    Str: 203
+    Agi: 132
+    Vit: 87
+    Int: 75
+    Dex: 241
+    Luk: 47
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 180
+    AttackDelay: 761
+    AttackMotion: 421
+    DamageMotion: 210
+    Ai: 09

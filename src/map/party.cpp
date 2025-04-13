@@ -14,6 +14,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"	//msg_txt()
@@ -658,7 +659,10 @@ int party_member_added(int party_id,uint32 account_id,uint32 char_id, int flag)
 	sd->party_invite_account = 0;
 
 	if (!p) {
-		ShowError("party_member_added: party %d not found.\n",party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("party_member_added: 파티 %d을(를) 찾을 수 없습니다.\n",party_id);
+		else
+			ShowError("party_member_added: party %d not found.\n",party_id);
 		intif_party_leave(party_id,account_id,char_id,"",PARTY_MEMBER_WITHDRAW_LEAVE);
 		return 0;
 	}
@@ -1022,7 +1026,10 @@ int party_recv_movemap( int party_id, uint32 account_id, uint32 char_id, int onl
 
 	ARR_FIND( 0, MAX_PARTY, i, p->party.member[i].account_id == account_id && p->party.member[i].char_id == char_id );
 	if( i == MAX_PARTY ) {
-		ShowError("party_recv_movemap: char %d/%d not found in party %s (id:%d)",account_id,char_id,p->party.name,party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("party_recv_movemap: %s(id:%d)파티에서 케릭터 %d/%d을(를) 찾을 수 없습니다.",p->party.name,party_id,account_id,char_id);
+		else
+			ShowError("party_recv_movemap: char %d/%d not found in party %s (id:%d)",account_id,char_id,p->party.name,party_id);
 		return 0;
 	}
 
@@ -1092,9 +1099,12 @@ int party_send_logout(map_session_data *sd)
 	ARR_FIND( 0, MAX_PARTY, i, p->data[i].sd == sd );
 	if( i < MAX_PARTY )
 		memset(&p->data[i], 0, sizeof(p->data[0]));
-	else
-		ShowError("party_send_logout: Failed to locate member %d:%d in party %d!\n", sd->status.account_id, sd->status.char_id, p->party.party_id);
-
+	else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("party_send_logout: ID번호 %d인 파티에서 파티원(계정ID번호:%d, 케릭터ID번호:%d)을(를) 찾지 못했습니다.\n", p->party.party_id, sd->status.account_id, sd->status.char_id);
+		else
+			ShowError("party_send_logout: Failed to locate member %d:%d in party %d!\n", sd->status.account_id, sd->status.char_id, p->party.party_id);
+	}
 	return 1;
 }
 

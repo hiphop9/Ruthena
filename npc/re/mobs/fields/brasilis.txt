@@ -1,16 +1,23 @@
 //===== rAthena Script =======================================
 //= Brasilis Fields Monster Spawn Script
-//===== Changelog: ===========================================
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Additional Comments: =================================
 //= 1.0 Official spawns from Aegis [Kisuka]
 //============================================================
 
 //==================================================
 // bra_fild01 - Brasilis Field
 //==================================================
-bra_fild01	monster	Curupira	2074,50,5000
-bra_fild01	monster	Dokebi	1110,10,5000
-bra_fild01	monster	Savage	1166,5,5000
-bra_fild01	monster	Headless Mule	2071,40,5000
-bra_fild01	monster	Red Mushroom	1085,5,5000
-bra_fild01	monster	Jaguar	2072,55,5000
-bra_fild01	monster	Toucan	2073,60,5000
+bra_fild01,0,0	monster	Äí·çÇÇ¶ó	2074,50,5000
+bra_fild01,0,0	monster	µµ±úºñ	1110,10,5000
+bra_fild01,0,0	monster	¼¼ºñÁö	1166,5,5000
+bra_fild01,0,0	monster	¸Ó¸®¾ø´Â ¸»	2071,40,5000
+bra_fild01,0,0	monster	ºÓÀº ¹ö¼¸	1085,5,5000
+bra_fild01,0,0	monster	Àç±Ô¾î	2072,55,5000
+bra_fild01,0,0	monster	ÅõÄ­	2073,60,5000
+

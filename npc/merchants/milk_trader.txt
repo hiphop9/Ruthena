@@ -1,74 +1,37 @@
 //===== rAthena Script =======================================
 //= Milk Trader
 //===== By: ==================================================
-//= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.5
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Trades bottles for milk
-//===== Additional Comments: =================================
-//= Fully working
-//= 1.1 Negative input bug fixed [Lupus]
-//= 1.2 Raised the price to close zeny exploit [Lupus]
-//= 1.2a Switched to Lupus's "loopless" technique.[kobra_k88]
-//= 1.3 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//= 1.4 Implemented checkweight. [L0ne_W0lf]
-//= 1.5 Fixed missed variable. (bugreport:1523) [L0ne_W0lf]
+//한글 번역 스카이러브
 //============================================================
 
-prontera,73,140,0	script	Milk Vendor	86,{
+prontera,73,140,0	script	우유상인	86,{
 	if (checkweight(1201,1) == 0) {
-		mes "^3355FFJust a minute!";
-		mes "I can't offer any of my";
-		mes "services to you because";
-		mes "you're carrying too much";
-		mes "stuff. Put your extra items in";
-		mes "Kafra Storage and come again~";
+		mes "^3355FF잠깐만요!";
+		mes "짐이 너무 많아서 서비스를 제공할 수 없습니다. 여분의 물건은 카프라 창고에 넣고 다시 오세요~";
 		close;
 	}
-	mes "[Milk Vendor]";
-	mes "Hey, hey...";
-	mes "If you bring me";
-	mes "1 Empty Bottle and";
-	mes "15 Zeny, I'll exchange";
-	mes "them for 1 Milk. How";
-	mes "does that sound?";
+	mes "[우유상인]";
+	mes "빈명을 가지고오시면 단돈 15 제니에 우유 1병을 교환해 드립니다!!";
 	next;
-	if (select("Exchange all empty bottles.:Cancel") == 1) {
+	if (select("병 모두를 교환한다.:그만둔다.") == 1) {
 		if (countitem(713) <= 0) {
-			mes "[Milk Vendor]";
-			mes "Hey...";
-			mes "You don't have";
-			mes "any Empty Bottles.";
-			mes "I can't really give you";
-			mes "this milk any other";
-			mes "way, you know...";
+			mes "[우유상인]";
+			mes "자, 빈병 주세요! 빈병!!";
+			mes "...없으세요...?";
 			close;
 		}
 		set .@bottles,countitem(713);
 		set .@total_weight,.@bottles * 50;
 		set .@total_cost,.@bottles * 15;
 		if (Zeny < .@Total_cost) {
-			mes "[Milk Vendor]";
-			mes "Oh, whoa~!";
-			mes "You don't have enough";
-			mes "zeny to exchange all";
-			mes "these Empty Bottles for";
-			mes "Milk. You need to have";
-			mes "at least " + .@total_cost + " zeny.";
+			mes "[우유상인]";
+			mes "병 갯수에 비해 돈이 부족하군요.";
+			mes "손님께서는 "+ .@total_cost +" 제니를 지불하셔야 합니다.";
 			close;
 		}
 		if (MaxWeight - Weight < .@total_weight) {
-			mes "[Milk Vendor]";
-			mes "Hmm...";
-			mes "Would you make";
-			mes "a little more room";
-			mes "in your inventory";
-			mes "before I give you";
-			mes "all of this milk?";
+			mes "[우유상인]";
+			mes "흠... 이 우유를 다 주기 전에 인벤토리에 공간을 좀 더 비워주실 수 있나요?";
 			close;
 		}
 		set Zeny, Zeny-.@total_cost;

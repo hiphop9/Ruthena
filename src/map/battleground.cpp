@@ -13,6 +13,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clif.hpp"
@@ -76,12 +77,18 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (min < 1) {
-			this->invalidWarning(node["MinPlayers"], "Minimum players %d cannot be less than 1, capping to 1.\n", min);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MinPlayers"], "최소 플레이어 %d은(는) 1보다 작을 순 없습니다. 1로 재설정됨.\n", min);
+			else
+				this->invalidWarning(node["MinPlayers"], "Minimum players %d cannot be less than 1, capping to 1.\n", min);
 			min = 1;
 		}
 
 		if (min * 2 > MAX_BG_MEMBERS) {
-			this->invalidWarning(node["MinPlayers"], "Minimum players %d exceeds MAX_BG_MEMBERS, capping to %d.\n", min, MAX_BG_MEMBERS / 2);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MinPlayers"], "최소 플레이어 %d이(가) MAX_BG_MEMBERS보다 많습니다. %d로 재설정함.\n", min, MAX_BG_MEMBERS / 2);
+			else
+				this->invalidWarning(node["MinPlayers"], "Minimum players %d exceeds MAX_BG_MEMBERS, capping to %d.\n", min, MAX_BG_MEMBERS / 2);
 			min = MAX_BG_MEMBERS / 2;
 		}
 
@@ -98,12 +105,18 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (max < 1) {
-			this->invalidWarning(node["MaxPlayers"], "Maximum players %d cannot be less than 1, capping to 1.\n", max);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MaxPlayers"], "최대 플레이어 %d은(는) 1보다 작을 순 없습니다. 1로 재설정됨.\n", max);
+			else
+				this->invalidWarning(node["MaxPlayers"], "Maximum players %d cannot be less than 1, capping to 1.\n", max);
 			max = 1;
 		}
 
 		if (max * 2 > MAX_BG_MEMBERS) {
-			this->invalidWarning(node["MaxPlayers"], "Maximum players %d exceeds MAX_BG_MEMBERS, capping to %d.\n", max, MAX_BG_MEMBERS / 2);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MaxPlayers"], "최대 플레이어 %d이(가) MAX_BG_MEMBERS보다 많습니다. %d로 재설정됨.\n", max, MAX_BG_MEMBERS / 2);
+			else
+				this->invalidWarning(node["MaxPlayers"], "Maximum players %d exceeds MAX_BG_MEMBERS, capping to %d.\n", max, MAX_BG_MEMBERS / 2);
 			max = MAX_BG_MEMBERS / 2;
 		}
 
@@ -120,7 +133,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (min > MAX_LEVEL) {
-			this->invalidWarning(node["MinLevel"], "Minimum level %d exceeds MAX_LEVEL, capping to %d.\n", min, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MinLevel"], "최소레벨 %d이(가) MAX_LEVEL보다 큽니다. %d으(로) 재설정됨.\n", min, MAX_LEVEL);
+			else
+				this->invalidWarning(node["MinLevel"], "Minimum level %d exceeds MAX_LEVEL, capping to %d.\n", min, MAX_LEVEL);
 			min = MAX_LEVEL;
 		}
 
@@ -137,7 +153,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (max > MAX_LEVEL) {
-			this->invalidWarning(node["MaxLevel"], "Maximum level %d exceeds MAX_LEVEL, capping to %d.\n", max, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MaxLevel"], "최대레벨 %d이(가) MAX_LEVEL보다 많습니다. %d으(로) 재설정됨.\n", max, MAX_LEVEL);
+			else
+				this->invalidWarning(node["MaxLevel"], "Maximum level %d exceeds MAX_LEVEL, capping to %d.\n", max, MAX_LEVEL);
 			max = MAX_LEVEL;
 		}
 
@@ -227,7 +246,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(job_name_constant.c_str(), &constant)) {
-				this->invalidWarning(node["JobRestrictions"], "Job %s does not exist.\n", job_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(node["JobRestrictions"], "%s 직업은 존재하지 않습니다.\n", job_name.c_str());
+				else
+					this->invalidWarning(node["JobRestrictions"], "Job %s does not exist.\n", job_name.c_str());
 				continue;
 			}
 
@@ -258,7 +280,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				map_entry.mapindex = mapindex_name2id(map_name.c_str());
 
 				if (map_entry.mapindex == 0) {
-					this->invalidWarning(location["Map"], "Invalid battleground map name %s, skipping.\n", map_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(location["Map"], "%s은(는) 잘못된 전장 맵입니다. 통과됨.\n", map_name.c_str());
+					else
+						this->invalidWarning(location["Map"], "Invalid battleground map name %s, skipping.\n", map_name.c_str());
 					return 0;
 				}
 
@@ -273,13 +298,19 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					return 0;
 
 				if (map_entry.bgcallscript.length() > EVENT_NAME_LENGTH) {
-					this->invalidWarning(location["StartEvent"], "StartEvent \"%s\" exceeds maximum of %d characters, capping...\n", map_entry.bgcallscript.c_str(), EVENT_NAME_LENGTH - 1);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(location["StartEvent"], "StartEvent \"%s\"은(는) 최대 글자수 %d자를 초과했습니다. 재설정됨...\n", map_entry.bgcallscript.c_str(), EVENT_NAME_LENGTH - 1);
+					else
+						this->invalidWarning(location["StartEvent"], "StartEvent \"%s\" exceeds maximum of %d characters, capping...\n", map_entry.bgcallscript.c_str(), EVENT_NAME_LENGTH - 1);
 				}
 
 				map_entry.bgcallscript.resize(EVENT_NAME_LENGTH);
 
 				if (map_entry.bgcallscript.find("::On") == std::string::npos) {
-					this->invalidWarning(location["StartEvent"], "Battleground StartEvent label %s should begin with '::On', skipping.\n", map_entry.bgcallscript.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(location["StartEvent"], "전장 시작 라벨 %s은(는) '::On'으(로) 시작해야합니다. 통과됨.\n", map_entry.bgcallscript.c_str());
+					else
+						this->invalidWarning(location["StartEvent"], "Battleground StartEvent label %s should begin with '::On', skipping.\n", map_entry.bgcallscript.c_str());
 					return 0;
 				}
 			}
@@ -298,7 +329,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					else if (it.find("TeamB") != std::string::npos)
 						team_ptr = &map_entry.team2;
 					else {
-						this->invalidWarning(team[team_name], "An invalid Team is defined.\n");
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning(team[team_name], "잘못된 팀을 정의했습니다.\n");
+						else
+							this->invalidWarning(team[team_name], "An invalid Team is defined.\n");
 						return 0;
 					}
 
@@ -309,14 +343,20 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 							return 0;
 
 						if (warp_x == 0) {
-							this->invalidWarning(node["RespawnX"], "RespawnX has to be greater than zero.\n");
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(node["RespawnX"], "RespawnX는 0보다 커야 합니다.\n");
+							else
+								this->invalidWarning(node["RespawnX"], "RespawnX has to be greater than zero.\n");
 							return 0;
 						}
 
 						map_data *md = map_getmapdata(map_mapindex2mapid(map_entry.mapindex));
 
 						if (warp_x >= md->xs) {
-							this->invalidWarning(node["RespawnX"], "RespawnX has to be smaller than %hu.\n", md->xs);
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(node["RespawnX"], "RespawnX는 %hu보다 작아야 합니다.\n", md->xs);
+							else
+								this->invalidWarning(node["RespawnX"], "RespawnX has to be smaller than %hu.\n", md->xs);
 							return 0;
 						}
 
@@ -330,14 +370,20 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 							return 0;
 
 						if (warp_y == 0) {
-							this->invalidWarning(node["RespawnY"], "RespawnY has to be greater than zero.\n");
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(node["RespawnY"], "RespawnY는 0보다 커야 합니다.\n");
+							else
+								this->invalidWarning(node["RespawnY"], "RespawnY has to be greater than zero.\n");
 							return 0;
 						}
 
 						map_data *md = map_getmapdata(map_mapindex2mapid(map_entry.mapindex));
 
 						if (warp_y >= md->ys) {
-							this->invalidWarning(node["RespawnY"], "RespawnY has to be smaller than %hu.\n", md->ys);
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(node["RespawnY"], "RespawnY는 %hu보다 작아야 합니다.\n", md->ys);
+							else
+								this->invalidWarning(node["RespawnY"], "RespawnY has to be smaller than %hu.\n", md->ys);
 							return 0;
 						}
 
@@ -351,7 +397,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						team_ptr->death_event.resize(EVENT_NAME_LENGTH);
 
 						if (team_ptr->death_event.find("::On") == std::string::npos) {
-							this->invalidWarning(team["DeathEvent"], "Battleground DeathEvent label %s should begin with '::On', skipping.\n", team_ptr->death_event.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(team["DeathEvent"], "전장 죽음 이벤트(DeathEvent) 라벨 %s은(는) '::On'으(로) 시작해야합니다. 통과됨.\n", team_ptr->death_event.c_str());
+							else
+								this->invalidWarning(team["DeathEvent"], "Battleground DeathEvent label %s should begin with '::On', skipping.\n", team_ptr->death_event.c_str());
 							return 0;
 						}
 					}
@@ -363,7 +412,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						team_ptr->quit_event.resize(EVENT_NAME_LENGTH);
 
 						if (team_ptr->quit_event.find("::On") == std::string::npos) {
-							this->invalidWarning(team["QuitEvent"], "Battleground QuitEvent label %s should begin with '::On', skipping.\n", team_ptr->quit_event.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(team["QuitEvent"], "전장 종료 이벤트(QuitEvent) %s은(는) '::On'으(로) 시작해야합니다. 통과됨.\n", team_ptr->quit_event.c_str());
+							else
+								this->invalidWarning(team["QuitEvent"], "Battleground QuitEvent label %s should begin with '::On', skipping.\n", team_ptr->quit_event.c_str());
 							return 0;
 						}
 					}
@@ -375,7 +427,10 @@ uint64 BattlegroundDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						team_ptr->active_event.resize(EVENT_NAME_LENGTH);
 
 						if (team_ptr->active_event.find("::On") == std::string::npos) {
-							this->invalidWarning(team["ActiveEvent"], "Battleground ActiveEvent label %s should begin with '::On', skipping.\n", team_ptr->active_event.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning(team["ActiveEvent"], "전장 활성이벤트(ActiveEvent) 라벨 %s은(는) '::On'으(로) 시작해야합니다. 통과됨.\n", team_ptr->active_event.c_str());
+							else
+								this->invalidWarning(team["ActiveEvent"], "Battleground ActiveEvent label %s should begin with '::On', skipping.\n", team_ptr->active_event.c_str());
 							return 0;
 						}
 					}
@@ -784,7 +839,10 @@ static TIMER_FUNC(bg_on_ready_loopback)
 	std::shared_ptr<s_battleground_queue> queue = bg_search_queue(queue_id);
 
 	if (queue == nullptr) {
-		ShowError("bg_on_ready_loopback: Invalid battleground queue %d.\n", queue_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_on_ready_loopback: 전장 대기열 %d이(가) 잘못되었습니다.\n", queue_id);
+		else
+			ShowError("bg_on_ready_loopback: Invalid battleground queue %d.\n", queue_id);
 		return 1;
 	}
 
@@ -794,7 +852,10 @@ static TIMER_FUNC(bg_on_ready_loopback)
 		bg_queue_on_ready(bg->name.c_str(), queue);
 		return 0;
 	} else {
-		ShowError("bg_on_ready_loopback: Can't find battleground %d in the battlegrounds database.\n", queue->id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_on_ready_loopback: 전장 데이터베이스에서 %d인 전장을 찾지 못했습니다.\n", queue->id);
+		else
+			ShowError("bg_on_ready_loopback: Can't find battleground %d in the battlegrounds database.\n", queue->id);
 		return 1;
 	}
 }
@@ -812,7 +873,10 @@ static TIMER_FUNC(bg_on_ready_expire)
 	std::shared_ptr<s_battleground_queue> queue = bg_search_queue(queue_id);
 
 	if (queue == nullptr) {
-		ShowError("bg_on_ready_expire: Invalid battleground queue %d.\n", queue_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_on_ready_expire: 전장 대기열 %d이(가) 잘못되었습니다.\n", queue_id);
+		else
+			ShowError("bg_on_ready_expire: Invalid battleground queue %d.\n", queue_id);
 		return 1;
 	}
 
@@ -845,7 +909,10 @@ static TIMER_FUNC(bg_on_ready_start)
 	std::shared_ptr<s_battleground_queue> queue = bg_search_queue(queue_id);
 
 	if (queue == nullptr) {
-		ShowError("bg_on_ready_start: Invalid battleground queue %d.\n", queue_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_on_ready_start: 전장 대기열 %d이(가) 잘못되었습니다.\n", queue_id);
+		else
+			ShowError("bg_on_ready_start: Invalid battleground queue %d.\n", queue_id);
 		return 1;
 	}
 
@@ -993,14 +1060,20 @@ bool bg_queue_reservation(const char *name, bool state, bool ended)
 void bg_queue_join_solo(const char *name, map_session_data *sd)
 {
 	if (!sd) {
-		ShowError("bg_queue_join_solo: Tried to join non-existent player\n.");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_join_solo: 존재하지 않는 유저가 입장하려 했습니다.\n.");
+		else
+			ShowError("bg_queue_join_solo: Tried to join non-existent player\n.");
 		return;
 	}
 
 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
 
 	if (!bg) {
-		ShowWarning("bq_queue_join_solo: Could not find battleground \"%s\" requested by %s (AID: %d / CID: %d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowWarning("bq_queue_join_solo: %s (AID: %d / CID: %d)이 요청한 전장 \"%s\"을(를) 찾을 수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, name);
+		else
+			ShowWarning("bq_queue_join_solo: Could not find battleground \"%s\" requested by %s (AID: %d / CID: %d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
 		return;
 	}
 
@@ -1020,7 +1093,10 @@ void bg_queue_join_solo(const char *name, map_session_data *sd)
 void bg_queue_join_party(const char *name, map_session_data *sd)
 {
 	if (!sd) {
-		ShowError("bg_queue_join_party: Tried to join non-existent player\n.");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_join_party: 존재하지 않는 유저가 입장하려 했습니다.\n.");
+		else
+			ShowError("bg_queue_join_party: Tried to join non-existent player\n.");
 		return;
 	}
 
@@ -1074,7 +1150,10 @@ void bg_queue_join_party(const char *name, map_session_data *sd)
 
 		bg_queue_join_multi(name, sd, list); // Join as party, all on the same side of the BG
 	} else {
-		ShowWarning("clif_parse_bg_queue_apply_request: Could not find Battleground: \"%s\" requested by player: %s (AID:%d CID:%d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowWarning("clif_parse_bg_queue_apply_request: %s (AID:%d CID:%d)이(가) 요청한 전장 \"%s\"을(를) 찾을 수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, name);
+		else
+			ShowWarning("clif_parse_bg_queue_apply_request: Could not find Battleground: \"%s\" requested by player: %s (AID:%d CID:%d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
 		clif_bg_queue_apply_result(BG_APPLY_INVALID_NAME, name, sd);
 		return; // Invalid BG name
 	}
@@ -1088,7 +1167,10 @@ void bg_queue_join_party(const char *name, map_session_data *sd)
 void bg_queue_join_guild(const char *name, map_session_data *sd)
 {
 	if (!sd) {
-		ShowError("bg_queue_join_guild: Tried to join non-existent player\n.");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_join_guild: 존재하지 않는 유저가 입장하려 합니다.\n.");
+		else
+			ShowError("bg_queue_join_guild: Tried to join non-existent player\n.");
 		return;
 	}
 
@@ -1133,7 +1215,10 @@ void bg_queue_join_guild(const char *name, map_session_data *sd)
 
 		bg_queue_join_multi(name, sd, list); // Join as guild, all on the same side of the BG
 	} else {
-		ShowWarning("clif_parse_bg_queue_apply_request: Could not find Battleground: \"%s\" requested by player: %s (AID:%d CID:%d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowWarning("clif_parse_bg_queue_apply_request: %s (AID:%d CID:%d)이(가) 요청한 전장 \"%s\"을(를) 찾을 수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, name);
+		else
+			ShowWarning("clif_parse_bg_queue_apply_request: Could not find Battleground: \"%s\" requested by player: %s (AID:%d CID:%d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
 		clif_bg_queue_apply_result(BG_APPLY_INVALID_NAME, name, sd);
 		return; // Invalid BG name
 	}
@@ -1148,14 +1233,20 @@ void bg_queue_join_guild(const char *name, map_session_data *sd)
 void bg_queue_join_multi(const char *name, map_session_data *sd, std::vector <map_session_data *> list)
 {
 	if (!sd) {
-		ShowError("bg_queue_join_multi: Tried to join non-existent player\n.");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_join_multi: 존재하지 않는 유저가 입장하려 합니다.\n.");
+		else
+			ShowError("bg_queue_join_multi: Tried to join non-existent player\n.");
 		return;
 	}
 
 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
 
 	if (!bg) {
-		ShowWarning("bq_queue_join_multi: Could not find battleground \"%s\" requested by %s (AID: %d / CID: %d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowWarning("bq_queue_join_multi: %s (AID: %d / CID: %d)이(가) 요청한 전장 \"%s\"을(를) 찾을 수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, name);
+		else
+			ShowWarning("bq_queue_join_multi: Could not find battleground \"%s\" requested by %s (AID: %d / CID: %d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
 		return;
 	}
 
@@ -1315,7 +1406,10 @@ bool bg_queue_leave(map_session_data *sd, bool apply_sc)
 	for (auto &queue : bg_queues) {
 		if (sd->bg_queue_id == queue->queue_id) {
 			if (!bg_queue_leave_sub(sd, queue->teama_members, apply_sc) && !bg_queue_leave_sub(sd, queue->teamb_members, apply_sc)) {
-				ShowError("bg_queue_leave: Couldn't find player %s in battlegrounds queue.\n", sd->status.name);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					ShowError("bg_queue_leave: 전장 대기열에서 %s 플레이어를 찾을 수 없습니다.\n", sd->status.name);
+				else
+					ShowError("bg_queue_leave: Couldn't find player %s in battlegrounds queue.\n", sd->status.name);
 				return false;
 			} else {
 				if ((queue->state == QUEUE_STATE_SETUP || queue->state == QUEUE_STATE_SETUP_DELAY) && queue->teama_members.empty() && queue->teamb_members.empty()) // If there are no players left in the queue (that hasn't started), discard it
@@ -1340,7 +1434,10 @@ bool bg_queue_on_ready(const char *name, std::shared_ptr<s_battleground_queue> q
 	std::shared_ptr<s_battleground_type> bg = battleground_db.find(queue->id);
 
 	if (!bg) {
-		ShowError("bg_queue_on_ready: Couldn't find battleground ID %d in battlegrounds database.\n", queue->id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_on_ready: 전장 ID %d을(를) 전장 데이터베이스에서 찾지 못했습니다.\n", queue->id);
+		else
+			ShowError("bg_queue_on_ready: Couldn't find battleground ID %d in battlegrounds database.\n", queue->id);
 		return false;
 	}
 
@@ -1500,7 +1597,10 @@ void bg_queue_on_accept_invite(map_session_data *sd)
 	std::shared_ptr<s_battleground_queue> queue = bg_search_queue(sd->bg_queue_id);
 
 	if (queue == nullptr) {
-		ShowError("bg_queue_on_accept_invite: Couldn't find player %s in battlegrounds queue.\n", sd->status.name);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_on_accept_invite: %s 유저를 전장 대기열에서 찾지 못했습니다.\n", sd->status.name);
+		else
+			ShowError("bg_queue_on_accept_invite: Couldn't find player %s in battlegrounds queue.\n", sd->status.name);
 		return;
 	}
 
@@ -1538,7 +1638,10 @@ void bg_queue_start_battleground(std::shared_ptr<s_battleground_queue> queue)
 
 	if (!bg) {
 		bg_queue_clear(queue, true);
-		ShowError("bg_queue_start_battleground: Could not find battleground ID %d in battlegrounds database.\n", queue->id);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError("bg_queue_start_battleground: 전장 ID %d을(를) 전장 데이터베이스에서 찾지 못했습니다.\n", queue->id);
+		else
+			ShowError("bg_queue_start_battleground: Could not find battleground ID %d in battlegrounds database.\n", queue->id);
 		return;
 	}
 

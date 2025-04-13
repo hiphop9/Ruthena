@@ -1,52 +1,7 @@
 //===== rAthena Script ======================================= 
 //= Quest NPCs related to Morocc
 //===== By: ================================================== 
-//= kobra_k88
-//===== Current Version: ===================================== 
-//= 3.2
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= - Stop Post
-//= - Binoculars Quest
-//= - Assassin Pub NPCs/supporting quest NPCS. [Disabled]
-//= - Resurrection of Satan Morocc
-//= - The Crow of the Fate
-//= - Succession of the Prince
-//===== Additional Comments: ================================= 
-//= 1.1 Fixed exploits [Lupus]
-//= 1.2 Added Dandelion's Request / Morocc Invasion quest. [SinSloth]
-//= 1.3 Updated dialogs from Binoculars Quest. [Samuray22]
-//= 1.3a added GM lvl check as in other invansion quests [Lupus]
-//= 1.4 Fixed a small bug in Dandelion's Request. [SinSloth]
-//= 1.5 Fixed a little bug with "Job_Alchemist" changed to "Job_Alchem". [Samuray22]
-//= 1.6 Fixed a nasty bug in last part of the quest. [SinSloth]
-//= 1.6a replaced item "names" with item id. [Lupus]
-//= 1.7 Fixed a bug with XP rewards. [SinSloth]
-//= 1.8 Fixed a bug which prevented reset of events. [SinSloth]
-//= 1.9 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
-//= 2.0a Corrected a Typo error ";;". [Samuray22]
-//= 2.1 Assassins will now get their request item. (bugreport:1220) [L0ne_W0lf]
-//= 2.2 Updated Binocular and Stop Post quests. [L0ne_W0lf]
-//= 2.3 Replaced effect numerics with constants. [Samuray22]
-//= 2.4 Implemented Ep. 12.1 Continental Guard Quest. [L0ne_W0lf]
-//=     Moved Dandelion's Request to a it's own file.
-//=     Added support NPCs required to finish Gaebolg quest.
-//= 2.5 Fixed Group of Evil never re-enabling. [L0ne_W0lf]
-//= 2.6 Added quest log commands for Resurrection of Satan Morocc. [L0ne_W0lf]
-//=     Added the two remaining episode 12.1 quests. 
-//=     Updated Satan Morocc Quest to allow peopel who have
-//=     finished it to return to the previous map.
-//= 2.7 Corrected weight checks, they only check for inventory slots. [L0ne_W0lf]
-//= 2.8 Disabled Assassin bar pub NPCs, as they are included in the 13.1 quests file. [L0ne_W0lf]
-//= 2.9 Fixed player dying/logging out during conversation could prevent
-//=     summoning of Satan Morocc until server reboot. [Gepard]
-//= 3.0 Updated RE/Pre-RE EXP. [Euphy]
-//= 3.1 Updated to match the latest official scripts. [Euphy]
-//= 3.2 Added GM management NPC and variable $@re_moc_time$. [Euphy]
-//= 3.3 Renewal script update for ep16.1 [Capuche]
+//한글번역 스카이러브
 //============================================================ 
 
 // Stop Post Quest
@@ -1203,74 +1158,84 @@ aldebaran,135,128,3	duplicate(ConMessenger)	Continental Messenger#05	998,3,3
 
 -	script	Continental Official	-1,{
 	if (rebirth_moc_edq > 3) {
-		mes "[Continental Guard Official]";
+		mes "[컨티넨탈 가드 사무관]";
 		mes "On behalf of the Continental Guard, I thank you for your efforts. Now, let me see if I've received any news from Headquarters that you should know...";
 		next;
-		mes "[Continental Guard Official]";
+		mes "[컨티넨탈 가드 사무관]";
 		mes "Hmm...";
 		next;
-		mes "[Continental Guard Official]";
+		mes "[컨티넨탈 가드 사무관]";
 		mes "Nothing yet. Please carry on with your current mission. Once again, thank you.";
 		close;
 	}
 	else if (rebirth_moc_edq == 0) {
-		mes "[Continental Guard Official]";
-		mes "Welcome to the Morocc Subjugation Information Center. How may I help you?";
+		mes "[컨티넨탈 가드 사무관]";
+		mes "컨티넨타 가드 사무소입니다. 무슨";
+		mes "일로 오셨습니까?";
 		next;
-		switch(select("What is this place for?:I'm here to volunteer.:Tell me about the village situation.")) {
+		switch(select("이곳은 무엇을 하는 곳입니끼?:마을의 상황에 대해서 알려주세요.:보고 못한 임무가 있습니다.:무시한다.")) {
 		case 1:
-			mes "[Continental Guard Official]";
-			mes "I'm stationed here to assist adventurers who wish to volunteer and help the Continental Guard fight Satan Morocc.";
+			mes "[컨티넨탈 가드 사무관]";
+			mes "이곳은 이 대륙 곳곳의 용기있는";
+			mes "모험가들이 마왕 모로코를 저지하고자";
+			mes "모인 컨티넨탈 가드의 등록을 담당했던";
+			mes "곳입니다.";
 			next;
-			mes "[Continental Guard Official]";
-			mes "I am sure you are already aware that Satan Morocc's revival threatens the peace of the Rune-Midgarts kingdom, and if Satan Morocc is allowed to roam free, it will devour the entire world.";
-			next;
-			mes "[Continental Guard Official]";
-			mes "The Continental Guard is currently planning an array of countermeasures to suppress Satan Morocc under the order of the kingdom.";
-			next;
-			mes "[Continental Guard Official]";
-			mes "If you have been invited by our messenger, or are confident in your skills, we encourage you to volunteer for the Continental Guards and bring peace back to this continent.";
+			mes "[컨티넨탈 가드 사무관]";
+			mes "뭐 마왕 모로크가 토벌되어 버린";
+			mes "지금은 별다른 일은 하고 있지";
+			mes "않습니다.";
 			close;
 		case 2:
 			if (BaseLevel > 79) {
-				mes "[Continental Guard Official]";
+				mes "[컨티넨탈 가드 사무관]";
 				mes "Welcome, " + strcharinfo(0) + ". I've been waiting for you. I assume our messenger informed you of our situation.";
 				next;
-				mes "[Continental Guard Official]";
+				mes "[컨티넨탈 가드 사무관]";
 				mes "Let me process your application immediately. Please wait.";
 				next;
-				mes "[Continental Guard Official]";
+				mes "[컨티넨탈 가드 사무관]";
 				mes "Now please go speak to Chief Balrog of the Continental Guard. You can find him in the center.";
 				set rebirth_moc_edq,1;
 				setquest 3050;
 				close;
 			}
 			else {
-				mes "[Continental Guard Official]";
-				mes "I applaud you for your courage, but you will need more than just courage to help us.";
+				mes "[컨티넨탈 가드 사무관]";
+				mes "사황은 보시는 대로 입니다. 마왕";
+				mes "모로크는 토벌되었고 사막도시는";
+				mes "재건되었습니다.";
 				next;
-				mes "[Continental Guard Official]";
-				mes "Satan Morocc is most powerful evil that exists in the mortal world. Snuffing out your life would be so trivial to him.";
+				mes "[컨티넨탈 가드 사무관]";
+				mes "뭐 아직 마을 주변의 잔당들까지";
+				mes "완벽하게 토벌된 것은 아니라 일부";
+				mes "지역은 출입이 통제되고 있습니다.";
 				next;
-				mes "[Continental Guard Official]";
-				mes "I strongly recommend that you just think about your own safety for now. When the final battle comes, I am sure that no place will be safe.";
+				mes "[컨티넨탈 가드 사무관]";
+				mes "그러니 가능하면 이 주위에선 저희의";
+				mes "지시를 따라 주시고 각별히 주의하여";
+				mes "봉변을 당하는 일이 없도록 하십시오.";
 				close;
 			}
 		case 3:
-			mes "[Continental Guard Official]";
-			mes "As you can see, the situation can't be worse. The village and the surrounding area were irreparably damaged by Satan Morocc's resurrection.";
+			mes "[컨티넨탈 가드 사무관]";
+			mes "보고하지 못한 임무가 있으시다고요?";
 			next;
-			mes "[Continental Guard Official]";
-			mes "Since the kingdom has dispatched Continental Guard Messengers everywhere, many able adventurers have flocked to this place, but... I'm afraid they still might not be enough to defeat the demon.";
+			mes "[컨티넨탈 가드 사무관]";
+			mes "저 죄송한데..";
 			next;
-			mes "[Continental Guard Official]";
-			mes "Please follow our instructions, at least around this area, and stay out of danger for now.";
+			select("무슨 일이죠?");
+			mes "[컨티넨탈 가드 사무관]";
+			mes "아무리 찾아봐도 컨티넨탈 가드로";
+			mes "등록된 분이 아니신 것 같은데요. 대체";
+			mes "어떤 임무를 보고하시러 온 거죠?";
 			close;
 		}
 	}
 	else {
-		mes "[Continental Guard Official]";
-		mes "Your application already has been registered. Please go speak to Chief Balrog.";
+		mes "[컨티넨탈 가드 사무관]";
+		mes "거참 바쁜 사람 불러 말 걸어 놓고는 뭘";
+		mes "하는 겁니까?";
 		close;
 	}
 }
@@ -2086,7 +2051,7 @@ moc_fild21,5,5,5	duplicate(MoroccAdmin_sec)	Morocc GlobalVar Admin::MoroccAdmin_
 
 // The Crow of the Fate
 // ============================================================
-moc_ruins,137,70,3	script	Book-Touching Man#garas	48,{
+moc_ruins,137,70,3	script	책을 어루만지는 남자#garas	48,{
 	if (BaseLevel > 59) {
 		if (checkweight(703,3) == 0) {
 			mes "- You have too many items in your inventory to proceed with this quest. -";
@@ -2403,7 +2368,8 @@ moc_ruins,137,70,3	script	Book-Touching Man#garas	48,{
 		}
 	}
 	else {
-		mes "With dreamy eyes, the man is looking down at a book in his hand.";
+		mes "남자는 게슴츠레한 눈빛을 띄며 손에";
+		mes "든 책을 살펴보고 있다.";
 		close;
 	}
 }

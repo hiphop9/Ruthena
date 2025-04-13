@@ -11,14 +11,14 @@
 
 // Main NPC :: mal_jerun
 //============================================================
-malangdo,221,174,6	script	Holink#mal_cash	559,{
+malangdo,221,174,6	script	홀라당#mal_cash	559,{
 	disable_items;
-	mes "[Holink]";
-	mes "I am the meow~ Blacksmith Holink~";
-	mes "Master of refining, Holink~";
-	mes "I am the special cat Holink who learned from Morocc~";
-	mes "My daughter is so proud of me, Holink~";
-	mes "What should Holink~ refine today?";
+	mes "[홀라당]";
+	mes "나는 야옹~대장장이 홀라당~";
+	mes "제련의 달인, 홀라당~";
+	mes "저는 모로코에서 배운 특별한 고양이 홀라당입니다~";
+	mes "내 딸은 내가 너무 자랑스러워요, 홀라당~";
+	mes "홀라당~ 오늘은 무엇을 개선해야 할까요?";
 	next;
 
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
@@ -27,49 +27,49 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 	set .@part, .@indices[ select(.@menu$) ];
 
 	if (!getequipisequiped(.@part)) {
-		mes "[Holink]";
+		mes "[홀라당]";
 		switch(.@part) {
 		case EQI_HEAD_TOP:
-			mes "My teacher Aragam said meow~";
-			mes "There's no cure for stupidity...";
+			mes "아라감 선생님이 야옹~이라고 하셨어요~";
+			mes "어리석음에는 치료법이 없어...";
 			break;
 		case EQI_ARMOR:
-			mes "There's nothing to see here, meow!!";
+			mes "여기엔 볼 게 하나도 없어, 야옹!!";
 			break;
 		case EQI_HAND_L:
-			mes "Meow? What do you want me to do with this left hand...?";
+			mes "야옹? 이 왼손으로 뭘 하길 원해요...?";
 			break;
 		case EQI_HAND_R:
-			mes "Meow? What do you want me to do with this right hand...?";
+			mes "야옹? 이 오른손으로 뭘 하길 바라는데...?";
 			break;
 		case EQI_GARMENT:
-			mes "Meow? You don't have anything on.";
+			mes "야옹? 아무것도 입지 않았잖아.";
 			break;
 		case EQI_SHOES:
-			mes "Kyang~! Do not mess with my sensitive olfactory, meow~.";
+			mes "캑~! 내 예민한 후각 건들지 마오야옹~.";
 			break;
 		case EQI_ACC_L:
 		case EQI_ACC_R:
-			mes "Meow? Where is the accessory?";
+			mes "야옹? 액세서리는 어디에 있지?";
 			break;
 		case EQI_HEAD_MID:
 		case EQI_HEAD_LOW:
-			mes "Meow? You talking about the other head parts, meow?~";
+			mes "야옹? 머리 부분을 말하는 거야, 야옹?~";
 			break;
 		}
 		close;
 	}
 	if (!getequipisenableref(.@part)) {
-		mes "[Holink]";
-		mes "Even Aragam can't refine such a thing, meow.";
+		mes "[홀라당]";
+		mes "아라감도 그런 건 다듬을 수 없잖아, 야옹.";
 		close;
 	}
 	if (getequiprefinerycnt(.@part) >= 10) {
-		mes "[Holink]";
-		mes "Meow~ Perfect refining. Did Aragam do this, meow?~";
+		mes "[홀라당]";
+		mes "야옹~완벽한 정제. 아라감이 그랬어, 야옹?~";
 		close;
 	}
-	mes "[Holink]";
+	mes "[홀라당]";
 	.@refineitemid = getequipid(.@part); // save id of the item
 	.@itemtype = getiteminfo( .@refineitemid, ITEMINFO_TYPE );
 	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
@@ -81,7 +81,7 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 	if( .@itemtype == IT_ARMOR ){
 		.@equip_lv = getequiparmorlv( .@part );
 		.@type$ = "armor";
-		mes "You have chosen an armor, meow~";
+		mes "갑옷을 선택했구나, 야옹~";
 
 		switch(.@equip_lv) {
 			case 1:
@@ -98,21 +98,21 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 		switch( .@equip_lv ){
 			case 1: // Level 1 Weapon
 				.@price = 500;
-				mes "A level 1 weapon...?";
+				mes "레벨 1 무기...?";
 				break;
 			case 2: // Level 2 Weapon
 				.@price = 2000;
-				mes "Meow, a level 2 weapon...?";
+				mes "야옹, 2레벨 무기라니...?";
 				break;
 			case 3: // Level 3 Weapon
 				.@price = 20000;
-				mes "Meow Meow~~ A level 3 weapon~~";
+				mes "야옹야옹~~ 3레벨 무기~~";
 				break;
 			case 4: // Level 4 Weapon
 				.@price = 50000;
-				mes "Me-Meow!... A level 4 weapon...!";
-				mes "I've only seen it twice while";
-				mes "learning from Aragam... Me-Meow!!";
+				mes "야옹!...4레벨 무기라니...!";
+				mes "그 동안 딱 두 번 봤어요";
+				mes "아라감에게서 배운다... 나야옹!!";
 				break;
 			default:
 				// TODO:
@@ -123,48 +123,48 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 		close;
 	}
 
-	mes "You need ^ff9999"+getitemname(.@material)+"^000000 and ^ff9999"+.@price+"^000000 Zeny for this refine, meow~";
-	mes "Want to continue, meow?~";
+	mes "^ff9999"+ getitemname(.@material) +"^000000 및 ^ff9999"+ .@price +"^000000 이 개선에는 제니가 필요해요, 야옹~";
+	mes "계속할래, 야옹?~";
 	next;
-	if(select("Yes!!:No!!") == 2) {
-		mes "[Holink]";
-		mes "Kyack!!";
-		mes "You don't believe in refine master Holink, meow?~";
+	if(select("예!!:아니요!!") == 2) {
+		mes "[홀라당]";
+		mes "캑!!";
+		mes "제련 마스터 호링크를 믿지 않는구나, 야옹~";
 		close;
 	}
 	if (getequippercentrefinery(.@part, true) < 100) {
-		mes "[Holink]";
+		mes "[홀라당]";
 		mes "Meow!!";
 		if (.@type$ == "armor")
-			mes "This armor was already refined so many times, meow.";
+			mes "이 방어구는 이미 몇 번이나 다듬어졌구나, 야옹.";
 		else {
-			mes "Danger. Danger~";
-			mes "This weapon was refined a lot, meow~";
+			mes "위험. 위험~";
+			mes "이 무기는 많이 다듬어졌어, 야옹~";
 			next;
-			mes "[Holink]";
+			mes "[홀라당]";
 		}
-		mes "You might break it if you continue";
-		mes "to try refining this item further, meow.";
+		mes "계속하면 깨질 수도 있어요";
+		mes "이 아이템을 좀 더 다듬어 보려고요, 야옹.";
 		next;
-		mes "[Holink]";
-		mes "Once the "+.@type$+" is broken, you can";
-		mes "never use it again, meow. Not to mention... all current";
-		mes "^ff0000cards and enchantments will vanish for sure^000000.";
-		mes "You still want to try, meow~?";
+		mes "[홀라당]";
+		mes ""+ .@type$ +"이 깨지면, 할 수 있습니다";
+		mes "다시는 사용하지 마세요, 야옹. 말할 것도 없이... 모두 현재";
+		mes "^ff0000카드와 마법은 반드시 사라집니다^000000.";
+		mes "아직도 해보고 싶냐, 야옹~?";
 		next;
-		if(select("Yes, I do!!:Forget about it!!") == 2) {
-			mes "[Holink]";
-			mes "Meow! Wise choice, meow.";
-			mes "But!!";
-			mes "I am not happy to see you doubting the refine master Holink, meow~";
+		if(select("네, 그렇습니다!!:잊으세요!!") == 2) {
+			mes "[홀라당]";
+			mes "야옹! 현명한 선택이야, 야옹.";
+			mes "하지만!!";
+			mes "네가 제련의 달인 호링크를 의심하는 모습이 안 좋아, 야옹~";
 			close;
 		}
 	}
 	if (countitem(.@material) == 0 || Zeny < .@price) {
-		mes "[Holink]";
-		mes "You don't have the ingredients.";
-		mes "You need ^ff9999"+getitemname(.@material)+"^000000 and ^ff9999"+.@price+"^000000 Zeny, meow~";
-		mes "Go get it, meow~";
+		mes "[홀라당]";
+		mes "재료가 없습니다.";
+		mes "^ff9999가 필요합니다"+ getitemname(.@material) +"^000000 및 ^ff9999"+ .@price +"^000000 제니, 야옹~";
+		mes "가서 가져와야옹~";
 		close;
 	}
 	delitem .@material,1;
@@ -173,30 +173,30 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 	// anti-hack
 	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
 		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
-		mes "[Holink]";
+		mes "[홀라당]";
 		emotion ET_FRET;
-		mes "Wait a second...";
-		mes "Do you think I'm stupid?!";
-		mes "You switched the item while I wasn't looking! Get out of here!";
+		mes "잠깐만요...";
+		mes "내가 바보라고 생각해요?!";
+		mes "내가 보지 않는 동안 아이템을 바꾸셨네요! 여기서 나가세요!";
 		close;
 	}
 
 	if (getequippercentrefinery(.@part, true) > rand(100)) {
 		successrefitem .@part;
-		mes "[Holink]";
-		mes "Me~ Me~ Meow! Fun fun refining~";
+		mes "[홀라당]";
+		mes "나~나~야옹! 재미있고 즐겁게 다듬어~";
 		next;
 		emotion ET_CHUP;
-		mes "[Holink]";
-		mes "Perfect!! Perfect, meow!!";
-		mes "I am the disciple of the refining wizard Aragam~";
-		mes "Holink!!";
-		mes "Another day of successful refining, meow!!";
+		mes "[홀라당]";
+		mes "완벽해!! 완벽해, 야옹!!";
+		mes "저는 제련마법사 아라감 님의 제자입니다~";
+		mes "홀라당!!";
+		mes "또 성공적인 정제의 날이야, 야옹!!";
 		close;
 	}
 	failedrefitem .@part;
-	mes "[Holink]";
-	mes "Meo~ Meow~ Kyaaak!!";
+	mes "[홀라당]";
+	mes "메오~야옹~캬아악!!";
 	next;
 	switch(rand(1,5)) {
 		case 1: emotion ET_CRY; break;
@@ -205,18 +205,18 @@ malangdo,221,174,6	script	Holink#mal_cash	559,{
 		case 4: emotion ET_SCRATCH; break;
 		case 5: emotion ET_BIGTHROB; break;
 	}
-	mes "[Holink]";
-	mes "Meow!! Aaaaakk~~!!!!";
-	mes "Kyaaak!! I have failed, meow!!";
+	mes "[홀라당]";
+	mes "야옹!! 아아아악~~!!!!";
+	mes "캬아악!! 실패했어 야옹!!";
 	next;
-	mes "[Holink]";
+	mes "[홀라당]";
 	mes "......";
 	mes "......";
-	mes "All~ Everything~ Broken, meow...";
+	mes "다~ 다~ 깨져, 야옹...";
 	next;
-	mes "[Holink]";
-	mes "Meow.... Master Aragam once said,";
-	mes "learn from your failures...";
-	mes "Human, this one failure will be the beginning of your success in the future.";
+	mes "[홀라당]";
+	mes "야옹.... 아라감 선생님께서 한번 말씀하셨죠,";
+	mes "실패로부터 교훈을 얻으세요...";
+	mes "인간아, 이번 실패가 미래의 성공의 시작이 될 것이다.";
 	close;
 }

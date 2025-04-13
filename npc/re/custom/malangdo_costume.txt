@@ -1,0 +1,2201 @@
+//===== rAthena Script =======================================
+//= Costumes NPCs.
+//===== Description: =========================================
+//= [Official Conversion]
+//= Costumes exchange/enchant NPCs in Malangdo.
+//=
+//= Note:
+//=   Although new enchant boxes are already exchanged,
+//=   their enchants are currently not supported.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//= 1.1 Corrected exchange costumes for enchant box 4-21 [Everade]
+//= 1.2 Added support for more than 120 missing enchants [Everade]
+//= 1.3 Added a temporary fix of the menu length on 아베르 드 도쉬 until new data [Capuche]
+//= 번역 및 최신화 [옥음]
+//============================================================
+
+// Costume exchange
+mal_in01,20,124,5	script	헤이담 펠로우#eventhat	4_CAT_SAILOR5,{//561
+	if (checkweight(1301,1) == 0) {
+		mes "- 여기서 잠깐 !! -";
+		mes "- 가지고 계신 아이템이 너무 많아 -";
+		mes "- 아이템을 받을 수 없습니다. -";
+		mes "- 몸을 가볍게 하시고 -";
+		mes "- 다시 시도해주세요. -";
+		close;
+	}
+	mes "[헤이담 펠로우]";
+	mes "세상의 온갖 멋진 의상을 가지고 있는 나 헤이담 펠로우.";
+	mes "냥다래가 있다면 앞뒤 보지말고 나 헤이담 펠로우에게 오시라!";
+	next;
+	switch( select( "냥다래열매를 의상으로 교환","의상을 의상스톤상자로 교환","대화를 한다" ) ) {
+	case 3:
+		mes "[헤이담 펠로우]";
+		mes "지금은 이런 배불뚝이 아저씨 같은 모습이지만, 이래봬도 소싯적엔 잘나가는 패션리더였어!";
+		next;
+		mes "[헤이담 펠로우]";
+		mes "어쩌다 이렇게 되었냐고 혀를 끌끌 차지마! 지금의 내 모습이 화려하지 않다는 건 알고 있고 그것으로 흘린 눈물이 은하수를 이룰 기세다. 크흑.";
+		next;
+		mes "[헤이담 펠로우]";
+		mes "현재가 화려하지 않다해도 이렇게 패션스톤을 통해 손님들이 아름답게 빛나는 과정을 지켜볼 수 있게 되었지. 이것으로도 난 만족해.";
+		close;
+	case 2:
+		mes "[" + strcharinfo(0) + "]";
+		mes "네가 준 이 아이템, 내겐 필요없는 거였어! 다른 것은 없는 거야?";
+		next;
+		mes "[헤이담 펠로우]";
+		mes "크읏. 그렇다면 의상스톤상자로 바꿔주지. 그렇다고 아무 물건이나 가져와선 안돼! 어디 무얼 가져왔는지 볼까?";
+		next;
+		mes "- 뒤적 뒤적 -";
+		next;
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 4 ===================
+	// ===================================================================
+	.@box_list[0] = 22826;		// Enchant_Stone_Box4
+	setarray .@item_list_0[0],
+		19608,		// C_Chick_Hat
+		19654,		// C_J_Captain_Hat
+		19712,		// C_Little_Angel_Doll
+		19721,		// C_Darkness_Helm
+		19823,		// C_White_Cat_Hood
+		19876,		// C_Rabbit_Ear_Hat
+		20036,		// C_Sword_Master_Crown
+		20145,		// C_Robo_Eye
+		20146,		// C_Angel_Spirit
+		20147,		// C_Bell_Pigeon
+		20746;		// C_Rudra_Wing
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 5 ===================
+	// ===================================================================
+	.@box_list[1] = 22868;		// Enchant_Stone_Box5
+	setarray .@item_list_1[0],
+		19643,		// C_Whikebain_Ears
+		20130,		// C_Whisper_Tall_Hat
+		20132,		// C_Subject_Aura
+		20133,		// C_Poring_Mascot_Costume
+		20199,		// C_Evil_Marcher_Hat
+		20200,		// C_Rabbit_Head_Dress
+		20201,		// C_Banshee_Master_Kiss
+		20202,		// C_Deviruchi_Balloon
+		20230,		// C_Mask_Of_Bankrupt
+		20231,		// C_Snowman_Hat
+		20232,		// C_Celines_Ribbon
+		20233,		// C_Gold_Angel_Sculpture
+		20761;		// C_Wing_Of_Happiness
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 6 ===================
+	// ===================================================================
+	.@box_list[2] = 22905;		// Enchant_Stone_Box6
+	setarray .@item_list_2[0],
+		19954,		// C_3D_Glasses
+		20071,		// C_Worg_In_Mouth
+		20239,		// C_Large_Ribbon_Muffler
+		20242,		// C_Snownow_Hat
+		20273,		// C_Soft_Sheep_Hat
+		20762;		// C_GreatDevilWing
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 7 ===================
+	// ===================================================================
+	.@box_list[3] = 22953;		// Enchant_Stone_Box7
+	setarray .@item_list_3[0],
+		18740,		// C_Hair_Of_The_Strong
+		19815,		// C_Lolita_Ten_Gallon_Hat
+		20255,		// C_Love_Cheek
+		20266,		// C_Secret_Zipper
+		20268,		// C_Sleep_Eclipse_Family
+		20286,		// C_Under_Rim_Glasses_Red
+		20329,		// C_Tare_HSchool_Doll_Hat
+		20330;		// C_Sombrero
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 8 ===================
+	// ===================================================================
+	.@box_list[4] = 23001;		// Enchant_Stone_Box8
+	setarray .@item_list_4[0],
+		5979,		// C_Angel_Fluttering
+		19158,		// C_Gemini_Eyes
+		19816,		// C_Pecopeco_Cap
+		20315,		// C_Analyze_Eye
+		20318,		// C_Charleston_Antenna
+		20325,		// C_Little_Aquarium
+		20340,		// C_Straight_Pony_BL
+		20341,		// C_Cowlick_BL
+		20342,		// C_Loose_Wave_Twin_BL
+		20349,		// C_FlyingGalapago
+		20350,		// C_Cowlick_YL
+		20351,		// C_Cowlick_GN
+		20352,		// C_Cowlick_PP
+		20353,		// C_Cowlick_RD
+		20354,		// C_Cowlick_OM
+		20355,		// C_Cowlick_BU
+		20356,		// C_Cowlick_WH
+		20357,		// C_Straight_Pony_YL
+		20358,		// C_Straight_Pony_GN
+		20359,		// C_Straight_Pony_PP
+		20360,		// C_Straight_Pony_RD
+		20361,		// C_Straight_Pony_OM
+		20362,		// C_Straight_Pony_BU
+		20363,		// C_Straight_Pony_WH
+		20364,		// C_Loose_Wave_Twin_YL
+		20365,		// C_Loose_Wave_Twin_GN
+		20366,		// C_Loose_Wave_Twin_PP
+		20367,		// C_Loose_Wave_Twin_RD
+		20368,		// C_Loose_Wave_Twin_OM
+		20369,		// C_Loose_Wave_Twin_BU
+		20370,		// C_Loose_Wave_Twin_WH
+		20396,		// C_Woodie_Hat
+		20448,		// C_Cons_Of_Water
+		20487,		// C_Floral_Waltz
+		20489,		// C_Pope_Crown
+		20504,		// C_Cupid_Wing_Pink
+		20299,		// C_Face_Crusher
+		20300;		// C_Hill_Wind_Mask
+	// ===================================================================
+	// =================== Costume Enchant Stone Box 9 ===================
+	// ===================================================================
+	.@box_list[5] = 23058;		// Enchant_Stone_Box9
+	setarray .@item_list_5[0],
+		19761,		// C_White_Lily
+		20172,		// C_Pumpkin_Head
+		20398,		// C_Niflheim_Bunny_Hat
+		20399,		// C_Crow_Tengu_Mask
+		20404,		// C_Blessing_Of_Angels
+		20405,		// C_Eremes_Scarf
+		20447;		// C_Small_Poring_Band
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 10 ===================
+	// ====================================================================
+	.@box_list[6] = 23086;		// Enchant_Stone_Box10
+	setarray .@item_list_6[0],
+		20430,		// C_Morocc_Kid_Servant
+		20432,		// C_Khalitzburg_KN_Helm
+		20433,		// C_Louise_Red_Hat
+		20440,		// C_Tone_Of_Gold
+		20458,		// C_Wild_Poring_Rider
+		20459,		// C_Valhalla_Idol
+		20464,		// C_Monochrome_RibbonHat
+		20491,		// C_Laser_Of_Eagle
+		20502,		// C_Devil_Wing
+		20507,		// C_Poring_Bag
+		31087,		// C_Dwarf_Beard
+		31088;		// C_Mad_Hatter
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 11 ===================
+	// ====================================================================
+	.@box_list[7] = 23174;		// Enchant_Stone_Box11
+	setarray .@item_list_7[0],
+		5909,		// C_Valkyrie_Circlet
+		20381,		// C_Steampunk_Hat
+		20499,		// C_Cat_Ear_Hat
+		20509,		// C_Wings_of_Uriel
+		20510,		// C_SwordWing
+		31029,		// C_Pig_Nose
+		31040,		// C_Magical_Feather
+		31055,		// C_Poring_Soap_Pipe
+		31057,		// C_Eremes_Scarf_Black
+		31062,		// C_Eleanor_Wig
+		31063,		// C_Hair_Bun_BU
+		31064,		// C_Hair_Bun_RD
+		31065,		// C_Hair_Bun_YL
+		31066,		// C_Hair_Bun_GN
+		31067,		// C_Hair_Bun_BL
+		31068,		// C_Hair_Bun_WH
+		31069,		// C_Hair_Bun_OM
+		31070,		// C_Hair_Bun_PP
+		31071,		// C_Roll_Twin_BU
+		31072,		// C_Roll_Twin_RD
+		31073,		// C_Roll_Twin_YL
+		31074,		// C_Roll_Twin_GN
+		31075,		// C_Roll_Twin_BL
+		31076,		// C_Roll_Twin_WH
+		31077,		// C_Roll_Twin_OM
+		31078,		// C_Roll_Twin_PP
+		31079,		// C_Long_Pony_BU
+		31080,		// C_Long_Pony_RD
+		31081,		// C_Long_Pony_YL
+		31082,		// C_Long_Pony_GN
+		31083,		// C_Long_Pony_BL
+		31084,		// C_Long_Pony_WH
+		31085,		// C_Long_Pony_OM
+		31086,		// C_Long_Pony_PP
+		31120,		// C_Vampire_Familiar
+		31123,		// C_Ghostring_Tall_Hat
+		31125,		// C_QueenAnzRevenge
+		31118;		// C_Assassin_Skull_Mask
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 12 ===================
+	// ====================================================================
+	.@box_list[8] = 23299;		// Enchant_Stone_Box12
+	setarray .@item_list_8[0],
+		20195,		// C_Scratching_Cat
+		20449,		// C_White_Black_Temp
+		20511,		// C_Blue_Fairy_Wing
+		20514,		// C_Thanatos_Sword
+		20765,		// C_Archangel_Wing
+		31134,		// C_Chatty_Parrot
+		31136,		// C_Clock_Casket
+		31160,		// C_Rune_Helm
+		31162,		// C_Shaving_Foam
+		31165,		// C_Piggyback
+		31186,		// C_Black_Cat
+		31300;		// C_Warm_Cat_Muffler
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 13 ===================
+	// ====================================================================
+	.@box_list[9] = 23524;		// Enchant_Stone_Box13
+	setarray .@item_list_9[0],
+		20488,		// C_Pope_Ribbon
+		31031,		// C_Tare_Pope_Casual
+		31033,		// C_BelieversCap
+		31164,		// C_Brown_Stall
+		31166,		// C_Teddy_Bear_Hood
+		31168,		// C_Mouton_Life_BL
+		31178,		// C_Flame_Muffler
+		31397;		// C_Pope_Sitting_Head
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 14 ===================
+	// ====================================================================
+	.@box_list[10] = 23629;		// Enchant_Stone_Box14
+	setarray .@item_list_10[0],
+		31415,		// C_Wanderer_Sakkat
+		19289,		// C_Moon_Eyepatch
+		19291,		// C_Shiba_Inu
+		19294,		// C_CatEars_Cyber_HeadP_R
+		20516,		// C_Wings_of_Michael
+		31180,		// C_Shura_King_Pledge
+		31329,		// C_Alice_Wig
+		31332;		// C_Khalitzburg_Helm_BL
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 15 ===================
+	// ====================================================================
+	.@box_list[11] = 23682;		// Enchant_Stone_Box15
+	setarray .@item_list_11[0],
+		19959,		// C_Drooping_Argiope
+		19960,		// C_Chain_Puppet
+		19992,		// C_Chilly_Breath
+		20515,		// C_Magic_Circle
+		20517,		// C_GiantCatBag_TW
+		31314,		// C_Ghost_Holiday
+		31396,		// C_Sorcerer_Hood
+		31398,		// C_Blinking_Thin_Eyes
+		31432,		// C_Luwmin_Ice
+		31433,		// C_Astro_Circle
+		31437,		// C_Baby_Penguin
+		31439,		// C_Fluffy_Heart_Earmuffs
+		31452,		// C_White_Cat
+		31460,		// C_Blessing_Sky_Lantern
+		31463,		// C_Flying_Drone
+		31498;		// C_Elephangel_TH
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 16 ===================
+	// ====================================================================
+	.@box_list[12] = 23770;		// Enchant_Stone_Box16
+	setarray .@item_list_12[0],
+		20033,		// C_Buddhist_Priest_Crown
+		20098,		// C_Vampire_Hairband
+		20171,		// C_Sepia_Cap
+		20174,		// C_Halloween_Hat_Orange
+		20395,		// C_BlackWitchHat
+		20482,		// C_Heaven_Cage
+		20533,		// C_PinkButterfly_Wing_T
+		20535,		// C_Digital_Space
+		20543,		// C_Halloween_Poring_Bag
+		31139,		// C_White_Rabbit_Ear
+		31249,		// C_Rabbit_Hopping
+		31489,		// C_Bouquet_Hat
+		31490,		// C_Poring_Muffler
+		31529,		// C_Happy_Rabbit_Ribbon
+		31606;		// C_Autumn_Headband
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 17 ===================
+	// ====================================================================
+	.@box_list[13] = 9510;		// Enchant_Stone_Box17
+	setarray .@item_list_13[0],
+		19990,		// C_Snow_Rabbit_Knit_Hat
+		20175,		// C_Diabolic_Headphone
+		20546,		// C_Backside_Ribbon_Bell
+		20764,		// C_Fallen_Angel_Wing
+		31440,		// C_Snow_Bear_Food
+		31565,		// C_Princess_Ribbon_Crown
+		31586,		// C_Poporing_Muffler
+		31616,		// C_Sleep_Sheep_TW
+		31625,		// C_Protect_Cloth
+		31693;		// C_LunaticMuffler
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 18 ===================
+	// ====================================================================
+	.@box_list[14] = 100019;		// Enchant_Stone_Box18
+	setarray .@item_list_14[0],
+		20257,		// C_Black_Rabbit_Bonnet
+		20486,		// C_Twin_Margaret
+		20570,		// C_HeartChocoBag
+		20572,		// C_WingOfHeart
+		31382,		// C_Cat_Ears_Punkish
+		31481,		// C_CatCoffeeCup_TW
+		31624,		// C_HeartOfCat_TW
+		31699;		// C_Smiling_Eyes
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 19 ===================
+	// ====================================================================
+	.@box_list[15] = 100052;		// Enchant_Stone_Box19
+	setarray .@item_list_15[0],
+		20022,		// C_Love_Piece
+		20519,		// C_Full_BloomCherry_Tree
+		20576,		// C_Cat_Fork
+		31027,		// C_Pretty_Bear
+		31483,		// C_CatEarRibbon_TW
+		31512,		// C_Panda_Rabbit
+		31569,		// C_OpenAir_Headset
+		31572,		// C_Mobile_Pursuit_System
+		31573,		// C_Mecha_Cat_Ears
+		31574,		// C_Cyber_Income
+		31600,		// C_Kishu_Inu
+		31614,		// C_Fox
+		31698,		// C_Pigtail_Red_Hood
+		31765,		// C_Garnet_Tiara
+		31766,		// C_Peony_Hair_Ornament
+		440000;		// C_SharkHead
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 20 ===================
+	// ====================================================================
+	.@box_list[16] = 100202;		// Enchant_Stone_Box20
+	setarray .@item_list_16[0],
+		20582,		// C_T_Bear_Bag
+		20584,		// C_Big_Foxtail
+		20588,		// C_Nifl_Bloom
+		31479,		// C_ManyStars_TW
+		31568,		// C_Floating_Ball_TW
+		31611,		// C_Dark_Snake_Lord_Stall
+		31671,		// Costume_Twin_Cannon
+		31673,		// C_Picnic_Basket
+		31688,		// C_Poring_On_Shoulder
+		31735,		// Costume_Yawata_Seal
+		31787,		// C_SavageB_On_Shoulder
+		31798,		// C_Baby_Panda
+		31799,		// C_Pretty_Bear_WH
+		31832,		// C_Bicolor_Cat_Witch_Hat
+		31884,		// C_Magic_Helm
+		400020;		// C_BeachBall
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 21 ===================
+	// ====================================================================
+	.@box_list[17] = 100314;		// Enchant_Stone_Box21
+	setarray .@item_list_17[0],
+		19802,		// C_Drooping_Nine_Tail
+		20153,		// C_Monochrome_Cap
+		20379,		// C_PocketWatch_Hair_Orna
+		20451,		// C_Sky_Of_Memory
+		20589,		// C_Gimmick_One_Feather
+		20592,		// C_Santa_Backpack
+		20593,		// C_Ice_Wing
+		20598,		// C_GiantCatBag_JP_BL
+		20599,		// C_Sakura_Wing
+		31176,		// C_Looking
+		31179,		// C_Wolf_Masquerade
+		31404,		// C_Poring_Traffic_Light
+		31497,		// C_Flowery_Vision_TH
+		31509,		// C_Fawn_Ear
+		31559,		// C_Royalguard_Necklace
+		31566,		// C_Stall_Of_Dominions
+		31601,		// C_Under_Rim_Glasses_Bu
+		31716,		// C_Blinking_Eyes_RD
+		31815,		// C_Angola_Intention
+		31849,		// C_Runaway_Accelerator
+		31848,		// C_Rose_Gothic_Bonnet
+		31906,		// C_PGstone_Knit_Hat_PK
+		31911,		// C_LittleGarden
+		31916,		// C_Frill_Collar
+		31923,		// C_Baby_Polar_Bear
+		31930,		// C_Mike_Stand
+		31931,		// C_Half_Rim_Glasses
+		31934,		// C_Blink_Eyes_Sakura
+		400073,		// C_Romance_Rose_TW
+		400074,		// C_Disapear_Time_TW
+		410005,		// C_Magic_Heir_TW
+		440002;		// C_Happy_Cat_TW
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 22 ===================
+	// ====================================================================
+	.@box_list[18] = 100502;		// Enchant_Stone_Box22
+	setarray .@item_list_18[0],
+		19292,		// 의상 살쾡이 니트 모자
+		19877,		// 의상 다크니스 아이즈
+		19910,		// 의상 할로윈 모자
+		20173,		// 의상 루드 후드
+		20221,		// 의상 이프리트의 눈
+		20237,		// 의상 분홍색 털모자
+		20240,		// 의상 눈의 선물
+		20441,		// 의상 커다란 리본 머플러(빨강)
+		20522,		// 의상 영혼의 축복
+		20603,		// 의상 큰보라 제비나비의 날개
+		20604,		// 의상 축복의 베일
+		20605,		// 의상 잎사귀 우산
+		31143,		// 의상 연꽃 화관
+		31380,		// 의상 수다쟁이 까마귀
+		31618,		// 의상 나풀나풀 춤추는 나비
+		31805,		// 의상 선글라스 야구 모자
+		31927,		// 의상 입에 무는 파란연필
+		31936,		// 의상 허니 너트 도너츠
+		31937,		// 의상 유니콘 머리 장식
+		31943;		// 의상 청개구리 후드
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 23 ===================
+	// ====================================================================
+	.@box_list[19] = 100721;		// Enchant_Stone_Box23
+	setarray .@item_list_19[0],
+		19768,
+		19806,
+		31323,
+		420016,
+		15889,
+		20607,
+		31480,
+		19581,
+		31448,
+		410062,
+		480110;
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 24 ===================
+	// ====================================================================
+	.@box_list[20] = 100920;		// Enchant_Stone_Box24
+	setarray .@item_list_20[0],
+		20339,
+		410063,
+		420071,
+		480122,
+		400163,
+		420044,
+		480126,
+		480129,
+		20281,
+		31200,
+		410056,
+		440010;
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 25 ===================
+	// ====================================================================
+	.@box_list[21] = 101103;		// Enchant_Stone_Box25
+	setarray .@item_list_21[0],
+		20155,
+		31385,
+		31852,
+		410099,
+		31409,
+		31513,
+		410095,
+		480118,
+		31148,
+		31163,
+		31189,
+		480096;
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 26 ===================
+	// ====================================================================
+	.@box_list[22] = 101271;		// Enchant_Stone_Box26
+	setarray .@item_list_22[0],
+		19867,
+		20191,
+		20335,
+		31453,
+		20021,
+		20031,
+		400204,
+		400225,
+		400254,
+		420108,
+		420109,
+		480167;
+	// ====================================================================
+	// =================== Costume Enchant Stone Box 27 ===================
+	// ====================================================================
+	.@box_list[23] = 101416;		// Enchant_Stone_Box27
+	setarray .@item_list_23[0],
+		15882,
+		31451,
+		31534,
+		400272,
+		410126,
+		420081,
+		480152,
+		480177;
+
+	while(1) {
+		setarray .@sup, 19712, 19721, 20036, 20146, 20130, 20133, 20199, 20202, 20230, 20232, 20233,
+		19954, 20268, 20286, 19158, 19816, 20325, 20340, 20341, 20342, 20350, 20351, 20352, 20353,
+		20354, 20355, 20356, 20357, 20358, 20359, 20360, 20361, 20362, 20363, 20364, 20365, 20366,
+		20367, 20368, 20369, 20370, 20489, 20398, 20399, 20404, 20430, 20440, 20459, 20464, 20491,
+		20507, 31087, 5909, 20381, 31057, 31062, 31063, 31064, 31065, 31066, 31067, 31068, 31069,
+		31071, 31072, 31073, 31074, 31075, 31076, 31077, 31079, 31080, 31081, 31082, 31083, 31084,
+		31085, 31118, 31123, 20449, 20514, 31136, 31160, 31162, 31165, 20448, 31164, 31168, 31178,
+		31397, 19291, 19294, 31180, 31329, 31415, 19960, 19992, 20515, 20517, 31314, 31398, 31432,
+		31433, 31437, 31461, 20033, 20171, 20482, 20535, 20543, 31529, 20175, 20546, 31565, 20257,
+		20570, 31481, 31624, 31699, 20022, 20519, 31483, 31569, 31572, 31574, 31698, 31766, 20582,
+		20584, 31479, 31568, 31611, 31671, 31688, 31884, 400020, 20153, 20379, 20451, 31404, 31497,
+		31566, 31601, 31716, 31848, 31911, 31923, 31931, 31934, 400074, 20221, 20240, 20441, 20604,
+		20605, 31143, 31927, 31937, 20522, 19768, 31448, 410062, 420016, 480110, 20339, 31200, 400163,
+		410063, 420044, 440010, 480122, 480129, 31409, 20335, 31453, 420108, 15882, 31451, 420081;
+
+		for ( .@i = 0; .@i < 24; ++.@i ) {
+			if (getiteminfo(.@box_list[.@i], ITEMINFO_TYPE) == -1)	// temporary check
+				continue;
+			.@size = getarraysize( getd(".@item_list_" + .@i) );
+			for ( .@h = 0; .@h < .@size; ++.@h ) {
+				.@id = getd( ".@item_list_" + .@i + "[" + .@h + "]" );
+				if (getiteminfo(.@id, ITEMINFO_TYPE) == -1)	// temporary check
+					continue;
+				if (countitem(.@id) < 1)
+					continue;
+				if (isequipped(.@id) == 1)
+					continue;
+					mes "[헤이담 펠로우]";
+					mes "^3131FF" + getitemname(.@id) + "^000000"+((.@id == .@sup)?"을":"를")+" 발견했다."; 
+					mes "의상스톤상자로 교환할래?";
+					next;
+					switch( select( "교환", "다른 것을 살펴본다", "교환을 중단한다" ) ) {
+					case 1:
+						mes "[헤이담 펠로우]";
+						if (countitem(.@id) < 1)
+							mes "아~ 갑자기 뭔가가 사라졌다...";
+						else {
+							mes "틀림없이 교환했다.";
+							delitem .@id, 1;
+							getitem .@box_list[.@i], 1;
+						}
+						mes "다른 것도 더 찾아 보마.";
+						next;
+						break;
+					case 2:
+						break;
+					case 3:
+						mes "[헤이담 펠로우]";
+						mes "냐옹? 갑자기 어디로 가버리는거야?";
+						close;
+					}
+				}
+			}
+			mes "[헤이담 펠로우]";
+			mes "더는 없는 듯 하네.";
+			next;
+			if (select( "다시 찾아본다", "그만둔다" ) == 2) {
+				mes "[헤이담 펠로우]";
+				mes "잘가~";
+				close;
+			}
+		}
+	case 1:
+		mes "^ff0000[경고]^000000";
+		mes "^ff0000냥다래열매 14개를 랜덤한 의상아이템으로 교환합니다.^000000";
+		mes "^ff0000위의 교환된 아이템은 청약철회대상에 포함되지 않으며, 냥다래열매로의 재교환 역시 불가능합니다.^000000";
+		next;
+		if (select( "진행한다","그만둔다" ) == 2) {
+			mes "[헤이담 펠로우]";
+			mes "............";
+			close;
+		}
+		if(countitem(6909) < 14) {
+			mes "- 냥다래열매가 부족합니다. -";
+			close;
+		} else {
+			mes "[헤이담 펠로우]";
+			mes "으흠흠흠~";
+			mes "언제라도 최고의 향기야. 하아악.. 이 향기에 흠뻑 취하겠어.";
+			mes "아차차. 보답으로 최고의 물건으로 바꿔줘야지.";
+			next;
+			mes "- 헤이담은 간신히 정신을 가다듬으며 더듬더듬 자신의 주머니를 뒤적거렸다. -";
+			next;
+//--------------------------------------
+//Custom--------------------------------
+			mes "[헤이담 펠로우]";
+			mes "뭐가 좋을까...";
+			mes "그렇지! 이렇게 하세.";
+			next;
+Qty:
+			mes "[헤이담 펠로우]";
+			mes "4부터 27까지의 숫자중에 좋아하는 것으로 하나 골라 보시라!";
+			mes "왜 이렇게 애매하냐고? 흐흐... 바로 내가 좋아하는 숫자이기 때문이지.";
+			mes "자넨 어떤 숫자가 맘에 드는가?";
+			next;
+			input .@Cos;
+			if(.@Cos == 77) {
+				mes "[헤이담 펠로우]";
+				mes "오오... 이건 냥냥한 행운의 숫자!!!";
+				mes "아주 좋아! 기분이 좋으니 숨겨둔 특별한 의상을 보여주도록 하지.";
+				mes "이건 내가 아끼고 아끼는 컬렉션이기 때문에 냥다래를 더 받아야겠어!";
+				mes "어때 해보겠나?";
+				next;
+				mes "^ff0000[경고]^000000";
+				mes "^ff0000냥다래열매 30개를 랜덤한 의상아이템으로 교환합니다.^000000";
+				mes "^ff0000위의 교환된 아이템은 청약철회대상에 포함되지 않으며, 냥다래열매로의 재교환 역시 불가능합니다.^000000";
+				next;
+				if (select( "도저어언!!!","그만둔다" ) == 2) {
+					mes "[헤이담 펠로우]";
+					mes "이거 정말 좋은건데...! 이런 기회 흔치않은데...!!!";
+					close;
+				}
+				if(countitem(6909) < 30) {
+					mes "- 냥다래열매가 부족합니다. -";
+					close;
+				} else {
+					mes "[헤이담 펠로우]";
+					mes "훌륭하다! 자, 이거 받아라!!!";
+					mes "자아 그럼 냥다래에 한껏 심취해 볼까나~~♬";
+					.@val = callfunc ("Special",.@val);
+					getitem 7000,2;
+					getitem2 .@val,1,0,0,0,0,0,0,0;
+					delitem 6909,30;
+					close;
+				}
+			} else if(.@Cos < 4 || .@Cos > 27) {
+				mes "[헤이담 펠로우]";
+				mes "어허.. 제시한 숫자가 맘에 들지 않는 거야? 하지만 어쩔 수 없네. 다시 제대로 골라 보라고!";
+				mes "고양이들이 좋아하는 행운의 숫자라면 봐줄지도...?";
+				next;
+				goto Qty;
+			} else {
+				mes "[헤이담 펠로우]";
+				mes "그렇단 말이지! 좋은 숫자로군. 그렇다면...";
+				next;
+			}
+//Custom--------------------------------
+//--------------------------------------
+			mes "[헤이담 펠로우]";
+			mes "에잇 모르겠다, 이거 받아라!!!";
+			mes "자아 그럼 냥다래에 한껏 심취해 볼까나~~♬";
+			setarray .@Stone$[4],
+			"Stone4", "Stone5", "Stone6", "Stone7", "Stone8", "Stone9",
+			"Stone10", "Stone11", "Stone12", "Stone13", "Stone14", "Stone15",
+			"Stone16", "Stone17", "Stone18", "Stone19", "Stone20", "Stone21",
+			"Stone22", "Stone23", "Stone24", "Stone25", "Stone26", "Stone27";
+			.@val = callfunc (.@Stone$[.@Cos],.@val);
+			getitem 7000,1;
+			getitem2 .@val,1,0,0,0,0,0,0,0;
+			delitem 6909,14;
+			close;
+		}
+	}
+}
+
+// Costume enchant (top, mid, low)
+mal_in01,22,113,3	script	아베르 드 도쉬#cos_ect	4_WHITETIGER,{//505
+	if (checkweight(1119,3) == 0) {
+		mes "[아베르 드 도쉬]";
+		mes "꺄아아아아아아악!!!";
+		mes "불룩한 가방은 질색이야!";
+		mes "모자로 아무리 멋을 낸다 한들 터질 것 같은 가방은 패션테러라고!";
+		next;
+		mes "^ff0000- 아이템을 너무 많이 들고 있는 것 같다.^000000";
+		mes "인벤토리를 정리하고 다시 오자. -";
+		close;
+	}
+	mes "[아베르 드 도쉬]";
+	mes "어서오세요! 패션스톤입니다!!";
+	next;
+	mes "[아베르 드 도쉬]";
+	mes "우리 패션 스톤에서는 각종 의상 아이템을 취급하고 있습니다.";
+	next;
+	mes "[아베르 드 도쉬]";
+	mes "의상 아이템을 더욱 멋지게 스타일링 하고 싶다면 점장인 저 '아베르 드 도쉬'에게 맡겨주세요!";
+	mes "^ff0000의상 아이템과 의상스톤은 직접 준비^000000 해오셔야 한다는 건 잊지 마세요~";
+	next;
+	set .@n, select( "그만 둔다.", "의상 스톤 인챈트", "의상 이펙트 인챈트");
+	switch(.@n) {
+	case 1:
+		mes "[아베르 드 도쉬]";
+		mes "그럼 다른 서비스도 많으니 구경해보세요~";
+		close;
+	}
+	setarray .@equip_name$[0], "상단", "중단", "하단";
+	setarray .@equip_slot[0], EQI_COSTUME_HEAD_TOP, EQI_COSTUME_HEAD_MID, EQI_COSTUME_HEAD_LOW;
+
+	for(.@i = 0; .@i < getarraysize(.@equip_slot); .@i++) {
+		if (getequipisequiped(.@equip_slot[.@i])) {
+			set .@menu$, .@menu$+""+.@equip_name$[.@i]+":";
+		} else {
+			set .@menu$, .@menu$+"^8C8C8C"+.@equip_name$[.@i]+"(비어있음)^000000:";
+		}
+	}
+	set .@i, select("그만 둔다:"+.@menu$);
+	switch(.@i) {
+	case 1:
+		mes "[아베르 드 도쉬]";
+		mes "그럼 다른 서비스도 많으니 구경해보세요~";
+		close;
+	default:
+		set .@equip_num, .@equip_slot[.@i-2];
+		if (!getequipisequiped(.@equip_num)) {
+			mes "[아베르 드 도쉬]";
+			mes "응? 장비가 어디갔죠?";
+			mes "의상 장비를 장착하지 않으면 작업을 할 수 없어요.";
+			close;
+		}
+		break;
+	}
+	.@eq_top = getequipid(EQI_COSTUME_HEAD_TOP);
+	.@eq_mid = getequipid(EQI_COSTUME_HEAD_MID);
+	.@eq_low = getequipid(EQI_COSTUME_HEAD_LOW);
+
+	set .@select, .@n - 2;
+
+	if (.@equip_num == EQI_COSTUME_HEAD_TOP) {
+		.@part = EQI_COSTUME_HEAD_TOP;
+		.@equip_id = .@eq_top;
+		.@slot = 0;
+		if(.@select == 1) {
+			setarray .@stone_id$[0],
+				25058, 29041, "트윙클이펙트",
+				25206, 29142, "일렉트릭이펙트";
+		} else if(.@select == 0) {
+			setarray .@stone_id$[0],
+				6636, 4700, "STR + 1을",	// STRStone_Top	Strength1
+				6637, 4710, "INT + 1을",	// INTStone_Top	Inteligence1
+				6638, 4730, "AGI + 1을",	// AGIStone_Top	Agility1
+				6639, 4720, "DEX + 1을",	// DEXStone_Top	Dexterity1
+				6640, 4740, "VIT + 1을",	// VITStone_Top	Vitality1
+				6641, 4750, "LUK + 1을",	// LUKStone_Top	Luck1
+				6716, 4926, "CRI + 1을",	// Cri_Stone	Critical1
+				6740, 4930, "힐, 아이템에 의한 HP 회복효과 + 2%를",	// HealStone_Top	HEAL2
+				6741, 4805, "회복계열 스킬의 회복량이 3% 증가를",	// HealStone2_Top	Heal_Amount2
+				6790, 4936, "대형 몬스터에게 주는 공격력 1% 증가를",	// BigStone_Top	ATK_BIG1
+				6791, 4937, "중형 몬스터에게 주는 공격력 1% 증가를",	// MediumStone_Top	ATK_MEDIUM1
+				6792, 4938, "소형 몬스터에게 주는 공격력 1% 증가를",	// SmallStone_Top	ATK_SMALL1
+				6943, 29028, "ATK + 1%를",	// ATKStone_Top	Atk1p_Top
+				6944, 29030, "MATK + 1%를",	// MATKStone_Top	Matk1p_Top
+				6999, 29013, "1% 확률로 적에게 준 물리 대미지의 3%를 자신의 HP로 흡수를",	// HPdrainStone_Top	HPdrain3
+				25000, 29032, "1% 확률로 적에게 준 물리 대미지의 1%를 자신의 SP로 흡수를",	// SPdrainStone_Top	SPdrain1_Top
+				25068, 4807, "ASPD + 1을",	// ASPDStone_Top	Atk_Speed1
+				25069, 29053, "스킬 후 딜레이 1% 감소. 스킬후딜레이1중단, 스킬후딜레이1하단과 함꼐 장착시, 스킬 후 딜레이 2% 추가 감소를",	// ReloadStone_Top	Skill_Delay1_Top
+				25171, 29159, "몬스터를 죽였을 시, 획득 경험치 2% 증가. 경험치 스톤(중단), 경험치 스톤(하단)과 함께 착용 시, 몬스터를 죽였을 시, 획득 경험치 3% 추가 증가를",	// EXPStone_Top	EXP2TOP
+				25172, 29156, "변동 캐스팅 3% 감소. 변동 캐스팅스톤(중단), 변동 캐스팅스톤(하단)과 함께 장착 시, 변동 캐스팅 6% 추가 감소를",	// CastingStone_Top	Casting_Top
+				25207, 29208, "2% 확률로 적에게 준 물리 대미지의 1% 를 자신의 SP로 흡수를",	//강화 SP흡수스톤(상단)
+				25210, 29210, "2% 확률로 적에게 준 물리 대미지의 3% 를 자신의 HP로 흡수를",	//강화 HP흡수스톤(상단)
+				25304, 29359, "크리티컬 데미지 + 3%, 크리티컬 스톤 중단, 하단과 함께 장착시, 크리티컬 데미지 + 6% 추가를",	// Critical_Stone_Top	Fatal_Top
+				25409, 29423, "철사장의 습득 레벨 1당 AKT +2를",	// SuraStone_Top	Sura_Top
+				25413, 29428, "스틸크로의 습득 레벨 1당 ATK +2를",	// RangerStone_Top	Ranger_Top
+				25417, 29432, "어드밴스드 북의 습득 레벨 1당 공격 후딜레이 1% 감소를",	// SorcererStone_Top	Sorcerer_Top
+				25445, 29460, "창수련의 습득 레벨 1당 ATK +2를",	// RuneknightStone_Top	Runeknight_Top
+				25450, 29464, "러닝 포션 1레벨당 ATK +2를",	// GeneticStone_Top	Genetic_Top
+				25453, 29468, "마법력 증폭 1레벨당 MATK + 2를",	// WarlockStone_Top	Warlock_Top
+				25490, 29477, "도작 1레벨당 ATK+ 2 증가를를",	// ShadowchaserStone_Top	Shadowchaser_Top
+				25494, 29481, "무기연구 1레벨당 ATK+ 2씩 증가를",	// MechanicStone_Top	Mechanic_Top
+				25498, 29485, "춤연습, 악기다루기 1레벨당 ATK+ 2 증가를",	// WanderMinstrelStone_Top	WanderMinstrel_Top
+				25706, 29513, "메디타티오 1레벨당 힐량 + 1%를",	// HighpriestStone_Top	Highpriest_Top
+				25710, 29517, "믿음 2레벨당 MHP + 1%를",	// PaladinStone_Top	Paladin_Top
+				25714, 29521, "카타르 수련 1레벨당 ATK + 2를",	// AssacrossStone_Top	Assassincross_Top
+				25800, 29613, "연주붕격 데미지 15% 증가를",	// SuraStone_Top2	Sura_Top2
+				25804, 29617, "어스 스파이크, 헤븐즈 드라이브 데미지 20% 증가를",	// SorcererStone_Top2	Sorcerer_Top2
+				25808, 29621, "스내쳐 1레벨당 ATK + 2를",	// ShadowchaserStone_Top2	Shadowchaser_Top2
+				25843, 29651, "즐거운 휴식 1레벨당 MATK + 2를",	// SoullinkerStone_Top	Soullinker_Top
+				25846, 29655, "편안한 휴식 1레벨당 ATK + 2를",	// GladiatorStone_Top	Gladiator_Top
+				25850, 29659, "인법 수련 1레벨당 ATK + 2, MATK + 2를",	// NinjaStone_Top	Ninja_Top
+				25855, 29664, "스네이크 아이 1레벨당 ATK + 2를",	// GunslingerStone_Top	Gunslinger_Top
+				25859, 29668, "할퀴기 1레벨당 MATK + 7, ATK + 7을",	// DoramStone_Top	Doram_Top
+				1000008, 310000, "윈드 워크 2레벨당 공격속도 증가(공격 후딜레이 1% 감소)를",	// RangerStone_Top2	Ranger_Top2
+				1000012, 310004, "오버트러스트 맥스 1레벨당 액스 부메랑 스킬 쿨타임 0.1초 감소를",	// MechanicStone_Top2	Mechanic_Top2
+				1000016, 310008, "마그누스 엑소르시스무스 데미지 15% 증가를",	// HighpriestStone_Top2	Highpriest_Top2
+				1000214, 310181, "메테오 스톰 데미지 20% 증가를",	// WarlockStone_Top2	Warlock_Top2
+				1000218, 310187, "믿음 1레벨당 변동 캐스팅 1%씩 감소를",	// PaladinStone_Top2	Paladin_Top2
+				1000222, 310191, "기공포 1레벨당 스킬 후 딜레이 1%씩 감소를",	// AssacrossStone_Top2	Assassincross_Top2
+				1000297, 310258, "스파이럴 피어스 1레벨 당 원거리 물리 데미지 1%씩 증가를",	// RuneknightStone_Top2	Runeknight_Top2
+				1000301, 310262, "바이오 캐니벌라이즈 1레벨 당 모든 크기의 적에게 주는 물리 데미지 1%씩 증가를",	// GeneticStone_Top2	Genetic_Top2
+				1000305, 310266, "애로우 발칸 데미지 15% 증가를",	// WanderMinsStone_Top2	WanderMins_Top2
+				1000375, 310325, "원거리 물리 데미지 3%증가. 레인지 스톤(중단), 레인지 스톤(하단)과 함께 착용 시, 원거리 물리 데미지 6% 추가 증가를",	//레인지 스톤(상단)
+				1000377, 310327, "근접 물리 데미지 3% 증가. 밀리 스톤(중단), 밀리 스톤(하단)과 함께 착용 시, 근접 물리 데미지 6% 추가 증가를",	//밀리 스톤(상단)
+				1000528, 310664, "모든 속성 마법 데미지 3% 증가. 마법력 스톤(중단), 마법력 스톤(하단)과 함께 착용 시, 모든 속성 마법 데미지 6% 추가 증가를",	//마법력 스톤(상단)
+				1000610, 310881, "드래곤 트레이닝 1레벨 당 크리티컬 데미지 2% 증가. 룬나이트 스톤(걸칠것)과 함께 장착 시, 변동 캐스팅 10% 감소. 룬나이트 스톤II(걸칠것)과 함께 장착 시, 헌드레드 스피어 데미지 15% 증가를",	//룬나이트 스톤(상단)
+				1000613, 310884, "소울 익스펜션 1레벨 당 모든 속성 마법 데미지 2% 증가. 워록 스톤(걸칠것)과 함께 장착 시, 소울 익스펜션 데미지 15% 감소. 워록 스톤II(걸칠것)과 함께 장착 시, 잭 프로스트 데미지 15% 증가를",	//워록 스톤(상단)
+				1000616, 310887, "인스피레이션 1레벨 당 고정 캐스팅 0.1초 감소. 로얄가드 스톤(걸칠것)과 함께 장착 시, 캐논 스피어 데미지 15% 감소. 로얄가드 스톤II(걸칠것)과 함께 장착 시, 레이 오브 제네시스 데미지 15% 증가를",	//로얄가드 스톤(상단)
+				1000666, 311005, "레슨 1레벨 당 변동 캐스팅 1% 감소. 원더민스 스톤(걸칠것)과 함께 장착 시, 2% 확률로 적에게 준 물리 데미지의 1% 를 자신의 SP로 흡수. 원더민스 스톤II(걸칠것)과 함께 장착 시, 메탈릭 사운드 데미지 15% 증가를",	//원더민스 스톤(상단)
+				1000669, 311008, "카트 캐논 1레벨 당 원거리 물리 데미지 2% 증가. 제네릭 스톤(걸칠것)과 함께 장착 시, 애시드 데몬스트레이션 데미지 15% 증가. 제네릭 스톤II(걸칠것)과 함께 장착 시, 스포어 익스플로젼 데미지 15% 증가를",	//제네릭 스톤(상단)
+				1000672, 311011, "스트라이킹 1레벨 당 고정 캐스팅 0.1초 감소. 소서러 스톤(걸칠것)과 함께 장착 시, 클라우드 킬 쿨타임 2초 감소. 소서러 스톤II(걸칠것)과 함께 장착 시, 어스 그레이브 데미지 15% 증가를",	//소서러 스톤(상단)
+				1000857, 311356, "크레멘티아 1레벨 당 스킬 후 딜레이 3% 감소. 아크비숍 스톤(걸칠것)과 함께 장착 시, 모든 속성 마법 데미지 15% 증가. 아크비숍 스톤II(걸칠것)과 함께 장착 시, 모든 크기의 적에게 주는 마법 데미지 15% 증가를",	//아크비숍 스톤(상단)
+				1000860, 311359, "레인저 메인 2레벨 당 스킬 후 딜레이 1% 감소. 레인저 스톤(걸칠것)과 함께 장착 시, 언리밋 스킬 쿨타임 45초 감소. 레인저 스톤II(걸칠것)과 함께 장착 시, 샤프 슈팅 데미지 15% 증가를",	//레인저 스톤(상단)
+				1000863, 311362, "긴급 탈출 1레벨 당 공격 속도 증가(공격 후 딜레이 2% 감소). 쉐도우체이서 스톤(걸칠것)과 함께 장착 시, 페인트 봄 데미지 15% 증가. 쉐도우체이서 스톤II(걸칠것)과 함께 장착 시, 1%의 확률로 적에게 준 물리 데미지의 1% SP로 흡수를",	//쉐도우체이서 스톤(상단)
+				1000968, 311427, "잠룡승천 2레벨 당 고정 캐스팅 0.1초 감소. 수라 스톤(걸칠것)과 함께 장착 시, 뇌광탄 데미지 20% 증가. 수라 스톤II(걸칠것)과 함께 장착 시, 수라신탄 데미지 15% 증가를",	//수라 스톤(상단)
+				1000971, 311430, "불과 대지의 연구 1레벨 당 변동 캐스팅 1% 감소. 미케닉 스톤(걸칠것)과 함께 장착 시, 액스 토네이도 데미지 15% 증가. 미케닉 스톤II(걸칠것)과 함께 장착 시, 부스트 너클 데미지 15% 증가를",	//미케닉 스톤(상단)
+				1000974, 311433, "새로운 독 연구 2레벨 당 스킬 후 딜레이 1% 감소. 길로틴크로스 스톤(걸칠것)과 함께 장착 시, 크로스 리퍼 슬래셔 데미지 15% 증가. 길로틴크로스 스톤II(걸칠것)과 함께 장착 시, 카운터 슬래쉬 데미지 15% 증가를",	//길로틴크로스 스톤(상단)
+				1001044, 311460, "달의 축복 1레벨 당 만월각 데미지 3% 증가, 성제 스톤(걸칠것)과 함계 장착 시, 삭월각 데미지 15% 증가를",	//성제 스톤(상단)
+				1001047, 311463, "플래티넘 알터 1레벨 당 모든 크기의 적에게 주는 물리 데미지 2% 증가, 드래곤 테일 데미지 4% 증가. 리벨리온 스톤(걸칠것)과 함께 장착 시, 배니싱 버스터 데미지 15% 증가를",	//리벨리온 스톤(상단)
+				1001050, 311466, "에스파 1레벨 당 모든 속성 마법 데미지 1% 증가. 소울리퍼 스톤(걸칠것)과 함께 장착 시, 에스파 SP 소모량 15% 감소를",	//소울리퍼 스톤(상단)
+				1001159, 311912, "카게로우&오보로의 오른손 수련 1레벨 당 모든 크기의 적에게 주는 물리 데미지 2% 증가.카게로우 스톤(걸칠것)과 함께 장착 시, 풍마수리검 난화 데미지 25% 증가를",	//카게로우 스톤(상단)
+				1001162, 311915, "카게로우&오보로의 오른손 수련 1레벨 당 모든 크기의 적에게 주는 마법 데미지 2% 증가. 오보로 스톤(걸칠것)과 함께 장착 시, 빙섬창, 풍인 데미지 25% 증가를",	//오보로 스톤(상단)
+				1001165, 311918, "개다래 줄기창 1레벨 당 개박하 메티오 데미지 5% 증가. 도람 스톤(걸칠것)과 함께 장착 시, 고정 캐스팅 0.5초 감소를",	//소환사 스톤(상단)
+				1001168, 311921, "디펜스 스톤(중단), 디펜스 스톤(하단)과 함께 장착시, DEF + 100, MDEF + 25, RES + 5, MRES + 5를",	//디펜스 스톤(상단)
+				1001327, 312403, "트렌센던스 1레벨 당 변동 캐스팅 3% 감소. 슈퍼노비스 스톤(걸칠것)과 함께 장착 시, 트렌센던스 1레벨 당, 쥬덱스 데미지 3% 증가를";	//슈퍼노비스 스톤(상단)
+		}
+	} else if (.@equip_num == EQI_COSTUME_HEAD_MID) {
+		.@part = EQI_COSTUME_HEAD_MID;
+		.@equip_id = .@eq_mid;
+		.@slot = 1;
+		if(.@select == 1) {
+			setarray .@stone_id$[0],
+				25059, 29040, "고스트이펙트",
+				25136, 29142, "일렉트릭이펙트",
+				25138, 29144, "쉬링크이펙트",
+				25176, 29160, "블루오오라이펙트",
+				25177, 29162, "쉐도우이펙트",
+				25178, 29161, "핑크글로우이펙트",
+				25224, 29224, "화이트바디이펙트",
+				25225, 29226, "진홍의파동이펙트";
+		} else if(.@select == 0) {
+			setarray .@stone_id$[0],
+				6642, 4882, "ATK + 1%를",	// ATKStone_Middle	Atk1p
+				6643, 4883, "MATK + 1%를",	// MATKStone_Middle	Matk1p
+				6717, 4927, "MaxHP + 50을",	// MaxHP_Stone	HP50
+				6742, 4931, "10초마다 HP를 10씩 회복한다를",	// HealStone_Middle	HEALHP1
+				6743, 4861, "MaxHP + 1%를",	// HPStone_Middle	MHP1
+				6744, 4929, "MaxSP + 1%를",	// SPStone_Middle	MSP1
+				6945, 4700, "STR + 1을",	// STRStone_Middle	Strength1
+				6946, 4710, "INT + 1을",	// INTStone_Middle	Inteligence1
+				6947, 4730, "AGI + 1을",	// AGIStone_Middle	Agility1
+				6948, 4720, "DEX + 1을",	// DEXStone_Middle	Dexterity1
+				6949, 4740, "VIT + 1을",	// VITStone_Middle	Vitality1
+				6950, 4750, "LUK + 1을",	// LUKStone_Middle	Luck1
+				25001, 29026, "DEF + 20을",	// DEFStone_Middle	Def20
+				25002, 29024, "LUK + 3, STR - 3을",	// ChangeLUK_Middle	LUK3STR
+				25003, 29014, "STR + 3, INT - 3을",	// ChangeSTR_Middle	STR3INT
+				25004, 29022, "AGI + 3, LUK - 3을",	// ChangeAGI_Middle	AGI3LUK
+				25005, 29016, "INT + 3, DEX - 3을",	// ChangeINT_Middle	INT3DEX
+				25006, 29020, "VIT + 3, AGI - 3을",	// ChangeVIT_Middle	VIT3AGI
+				25007, 29018, "DEX + 3, VIT - 3을",	// ChangeDEX_Middle	DEX3VIT
+				25060, 29047, "크리티컬 데미지 + 3%를",	// Critical_Stone	Fatal0
+				25061, 29048, "원거리 물리 데미지 + 3% 증가를",	// Range_Stone	Expert_Archer0
+				25070, 29054, "스킬 후 딜레이 1% 감소를",	// ReloadStone_Middle	Skill_Delay1_Middle
+				25141, 29145, "몬스터를 죽였을 시, 획득 경험치 2% 증가를",	// EXPStone_Middle	EXP2MIDDLE
+				25173, 29157, "변동 캐스팅 3% 감소를",	// CastingStone_Middle	Casting_Middle
+				25175, 29155, "물리 공격시, 1%의 확률로 적에게 렉스 에테르나 Lv1 발동을",	// LexAeternaStone_Middle	LexAeterna
+				25410, 29424, "이화접목의 습득 레벨 1당 HIT +2를",	// SuraStone_Middle	Sura_Middle
+				25414, 29429, "샤프슈팅의 고정 캐스팅 0.5초 감소를",	// RangerStone_Middle	Ranger_Middle
+				25418, 29433, "더블 캐스팅의 고정 캐스팅 0.4초 감소(다른 고정 캐스팅 감소 옵션과 중첩되지 않습니다.)를",	// SorcererStone_Middle	Sorcerer_Middle
+				25446, 29461, "스파이럴 피어스 데미지 15% 증가를",	// RuneknightStone_Middle	Runeknight_Middle
+				25451, 29465, "포션 피쳐 1레벨당 힐량 및 포션 회복량 2% 상승을",	// GeneticStone_Middle	Genetic_Middle
+				25454, 29469, "메테오 스톰 데미지 20% 증가를",	// WarlockStone_Middle	Warlock_Middle
+				25491, 29478, "독수리의 눈 1레벨당 HIT+ 2씩 증가를",	// ShadowchaseStone_Middle	Shadowchaser_Middle
+				25495, 29482, "스킨 템퍼링 1레벨당 HIT+ 3 증가를",	// MechanicStone_Middle	Mechanic_Middle
+				25499, 29486, "뮤지컬 스트라이크, 화살감아 던지기 데미지 20% 증가를",	// WanderMinstStone_Middle	WanderMinstrel_Middle
+				25707, 29514, "메이스 수련 1레벨당 크리티컬 데미지 2% 증가를",	// HighpriestStone_Middle	Highpriest_Middle
+				25711, 29518, "창 수련 2레벨당 원거리 물리 공격 1% 증가를",	// PaladinStone_Middle	Paladin_Middle
+				25715, 29522, "왼손 수련 1레벨당 HIT + 2를",	// AssacrossStone_Middle	Assassincross_Middle
+				25799, 29612, "맹룡과강 데미지 15% 증가를",	// SuraStone_Middle2	Sura_Middle2
+				25803, 29616, "화이어 볼트, 콜드 볼트, 라이트닝 볼트 데미지 20% 증가를",	// SorcererStone_Middle2	Sorcerer_Middle2
+				25807, 29620, "백 스탭 데미지 15% 증가를",	// ShadowchasStone_Middle2	Shadowchaser_Middle2
+				25844, 29652, "에스마 데미지 20% 증가를",	// SoullinkerStone_Middle	Soullinker_Middle
+				25847, 29656, "태양과 달과 별의 느낌, 태양과 달과 별의 증오 고정 캐스팅 50% 감소를",	// GladiatorStone_Middle	Gladiator_Middle
+				25851, 29660, "풍마수리검 던지기 데미지 20% 증가를",	// NinjaStone_Middle	Ninja_Middle
+				25856, 29665, "데스페라도 데미지 20% 증가를",	// GunslingerStone_Middle	Gunslinger_Middle
+				25860, 29669, "루나틱 당근난타 데미지 20% 증가를",	// DoramStone_Middle	Doram_Middle
+				1000009, 310001, "비스트 베인 2레벨당 원거리 물리 데미지 1% 증가를",	// RangerStone_Middle2	Ranger_Middle2
+				1000013, 310005, "카트 터미네이션 데미지 15% 증가를",	// MechanicStone_Middle2	Mechanic_Middle2
+				1000017, 310009, "아숨프티오 1레벨당 성속성 마법 데미지 1% 증가를",	// HighpriestStone_Middle2	Highpriest_Middle2
+				1000215, 310182, "그라비테이션 필드 1레벨당 무속성 마법 데미지 2%씩 증가를",	// WarlockStone_Middle2	Warlock_Middle2
+				1000219, 310186, "프레셔 데미지 20% 증가를",	// PaladinStone_Middle2	Paladin_Middle2
+				1000223, 310190, "소닉 블로우 데미지 20% 증가를",	// AssacrossStone_Middle2	Assassincross_Middle2
+				1000298, 310259, "볼링 배쉬 데미지 20% 증가를",	// RuneknightStone_Middle2	Runeknight_Middle2
+				1000302, 310263, "애시드 데몬 스트레이션 데미지 25% 증가를",	// GeneticStone_Middle2	Genetic_Middle2
+				1000306, 310267, "뮤지컬 스트라이크, 화살감아 던지기 1레벨 당, 무속성 마법 데미지 1%씩 증가를",	// WanderMinsStone_Middle2	WanderMins_Middle2
+				1000378, 310328, "근접 물리 데미지 3% 증가를",		//밀리 스톤(중단)
+				1000529, 310665, "모든 속성 마법 데미지 3% 증가를",	//마법력 스톤(중단)
+				1000611, 310882, "룬 마스터리 2레벨 당 근접/원거리 물리 데미지 1%씩 증가. 룬나이트 스톤(걸칠것)과 함께 장착 시, 드래곤 브레스, 드래곤 브레스-수 데미지 15% 증가. 룬나이트 스톤II(걸칠것)과 함께 장착 시, 소닉 웨이브 데미지 15% 증가를",	//룬나이트 스톤(중단)
+				1000614, 310885, "커미트 1레벨 당 고정 캐스팅 0.1초씩 감소. 워록 스톤(걸칠것)과 함께 장착 시, 크림즌 록 데미지 15% 증가. 워록 스톤II(걸칠것)과 함께 장착 시, 잭 프로스트 데미지 15% 증가를",	//워록 스톤(중단)
+				1000617, 310888, "파이어티 1레벨 당 원거리 물리 데미지, 모든 속성 마법 데미지 2% 증가. 로얄가드 스톤(걸칠것)과 함께 장착 시, 배니싱 포인트 데미지 15% 증가. 로얄가드 스톤II(걸칠것)과 함께 장착 시, 레이 오브 제니시스 소모 SP 15% 감소를",	//로얄가드 스톤(중단)
+				1000667, 311006, "순환하는 자연의 소리 1레벨 당 서비어 레인스톰, 메탈릭 사운드 스킬 쿨타임 0.1초 감소. 원더민스 스톤(걸칠것)과 함께 장착 시, 모든 크기의 적에게 주는 물리 데미지 15% 증가. 원더민스 스톤II(걸칠것)과 함께 장착 시, 모든 속성 마법 데미지 15% 증가를",	//원더민스 스톤(중단)
+				1000670, 311009, "카트개조 1레벨 당 변동 캐스팅 2% 감소. 제네릭 스톤(걸칠것)과 함께 장착 시, 카트 캐논 데미지 15% 증가. 제네릭 스톤II(걸칠것)과 함께 장착 시, 카트 토네이도 데미지 15% 증가를",	//제네릭 스톤(중단)
+				1000673, 311012, "다이아몬드 더스트 1레벨 당 변동 캐스팅 2% 감소. 소서러 스톤(걸칠것)과 함께 장착 시, 사이킥 웨이브 데미지 15% 증가. 소서러 스톤II(걸칠것)과 함께 장착 시, 바레티르 스피어 데미지 15% 증가를",	//소서러 스톤(중단)
+				1000858, 311357, "라우다 아그누스 1레벨 당 변동 캐스팅 3% 감소. 아크비숍 스톤(걸칠것)과 함께 장착 시, 아도라무스 데미지 15% 증가. 아크비숍 스톤II(걸칠것)과 함께 장착 시, 쥬덱스 데미지 15% 증가를",	//아크비숍 스톤(중단)
+				1000861, 311360, "트랩연구 1레벨 당 변동 캐스팅 1% 감소. 레인저 스톤(걸칠것)과 함께 장착 시, 애로우 스톰 데미지 15% 증가. 레인저 스톤II(걸칠것)과 함께 장착 시, 에임드 볼트 데미지 15% 증가를",	//레인저 스톤(중단)
+				1000864, 311363, "섀도우 폼 1레벨 당 스킬 후 딜레이 1% 감소. 쉐도우체이서 스톤(걸칠것)과 함께 장착 시, 트라이앵글 샷 데미지 15% 증가. 쉐도우체이서 스톤II(걸칠것)과 함께 장착 시, 페이탈 메나스 데미지 15% 증가를",	//쉐도우체이서 스톤(중단)
+				1000969, 311428, "점혈-활 1레벨 당 근접 물리 데미지 2% 증가. 수라 스톤(걸칠것)과 함께 장착 시, 놔광탄 데미지 20% 증가. 수라 스톤II(걸칠것)과 함께 장착 시, 호포 데미지 15% 증가를",	//수라 스톤(중단)
+				1000972, 311431, "마도기어 라이센스 1레벨 당 근접/원거리 물리 데미지 1% 증가. 미케닉 스톤(걸칠것)과 함께 장착 시, 액스 부메랑 데미지 15% 증가. 미케닉 스톤II(걸칠것)과 함께 장착 시, 암즈 캐논 데미지 15% 증가를",	//미케닉 스톤(중단)
+				1000975, 311434, "다크 일루젼 1레벨 당 근접 물리 데미지 2% 증가. 길로틴크로스 스톤(걸칠것)과 함께 장착 시, 롤링 커터 데미지 15% 증가. 길로틴크로스 스톤II(걸칠것)과 함께 장착 시, 크로스 임팩트 데미지 15% 증가를",	//길로틴크로스 스톤(중단)
+				1001045, 311461, "태양의 축복 1레벨 당 근접 물리 데미지 2% 증가. 성제 스톤(걸칠것)과 함께 장착 시, 태양폭발 데미지 15% 증가를",	//성제 스톤(중단)
+				1001048, 311464, "파이어 레인 1레벨 당 원거리 물리 데미지 2% 증가. 리벨리온 스톤(걸칠것)과 함께 장착 시, 라운드 트립 데미지 15% 증가를",	//리벨리온 스톤(중단)
+				1001051, 311467, "에스후 1레벨 당 모든 크기의 적에게 주는 마법 데미지 1% 증가. 소울리퍼 스톤(걸칠것)과 함께 장착 시, 에스후 데미지 15% 증가를",	//소울리퍼 스톤(중단)
+				1001160, 311913, "열 여섯번째의 밤 1레벨 당 원거리 물리 데미지 2% 증가. 카게로우 스톤(걸칠것)과 함께 장착 시, 십자베기 데미지 25% 증가를",	//카게로우 스톤(중단)
+				1001163, 311916, "명경지수 1레벨당 MSP 3% 증가. 오보로 스톤(걸칠것)과 함께 장착 시, 폭염룡, 빙정락, 삭풍 데미지 30% 증가를",	//오보로 스톤(중단)
+				1001166, 311919, "새우의 신선함 1레벨당 변동 캐스팅 2% 감소. 도람 스톤(걸칠것)과 함께 장착 시, 개박하 메테오 데미지 25% 증가를",	//소환사 스톤(중단)
+				1001169, 311922, "DEF + 20, MDEF + 4를",	//디펜스 스톤(중단)
+				1001328, 312404, "브레이크 쓰루 1레벨 당 근접 물리 데미지 2% 증가. 슈퍼노비스 스톤(걸칠것)과 함께 장착 시, 브레이크 쓰루 1레벨 당, 윈드 커터 데미지 3% 증가를";	//슈퍼노비스 스톤(중단)
+		}
+	} else if (.@equip_num == EQI_COSTUME_HEAD_LOW) {
+		.@part = EQI_COSTUME_HEAD_LOW;
+		.@equip_id = .@eq_low;
+		.@slot = 2;
+		if(.@select == 1) {
+			setarray .@stone_id$[0],
+				25137, 29143, "그린플로어이펙트",
+				25205, 29144, "쉬링크이펙트",
+				25226, 29225, "워터필드이펙트",
+				1000882, 29142, "일렉트릭이펙트";
+		} else if(.@select == 0) {
+			setarray .@stone_id$[0],
+				6644, 4884, "HIT + 1을",	// HITStone_Bottom	HIT1
+				6645, 4859, "FLEE + 1을",	// FLEEStone_Bottom	Evasion1
+				6718, 4928, "MaxSP + 10을",	// MaxSP_Stone	SP10
+				6745, 4932, "물리공격, 마법공격 시 적을 죽였을 떄 SP 1 회복을",	// HealStone_Bottom	HEALSP1
+				6951, 4861, "MaxHP + 1%를",	// HPStone_Bottom	MHP1
+				25008, 29021, "VIT + 3, LUK - 3. VIT변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. AGI + 3, LUK + 3을",	// ChangeVIT_Bottom	VIT3LUK
+				25009, 29023, "AGI + 3, STR - 3. AGI변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. LUK + 3, STR + 3을",	// ChangeAGI_Bottom	AGI3STR
+				25010, 29019, "DEX + 3, AGI - 3. DEX변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. VIT + 3, AGI + 3을",	// ChangeDEX_Bottom	DEX3AGI
+				25011, 29025, "LUK + 3, INT - 3. LUK변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. STR + 3, INT + 3을",	// ChangeLUK_Bottom	LUK3INT
+				25012, 29015, "STR + 3, DEX - 3. STR변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. INT + 3, DEX + 3을",	// ChangeSTR_Bottom	STR3DEX
+				25013, 29017, "INT + 3, VIT - 3. INT변환스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. DEX + 3, VIT + 3을",	// ChangeINT_Bottom	INT3VIT
+				25014, 29033, "MDEF + 4. 방어스톤(중단)을 추가 장착시, 아래의 능력치가 상승한다. HIT + 5, FLEE + 5를",	// MDEFStone_Bottom	Mdef4_Bottom
+				25015, 29027, "몬스터를 죽였을 시, 획득 경험치 2% 증가를",	// EXPStone_Bottom	EXP2
+				25016, 29029, "ATK + 1%. 의상 상, 중, 하단에 공격스톤 장착시, 아래의 능력치를 추가로 부여한다. ATK + 2%를",	// ATKStone_Bottom	Atk1p_Bottom
+				25017, 29031, "MATK + 1%. 의상 상, 중, 하단에 마공스톤 장착시, 아래의 능력치를 추가로 부여한다. MATK + 2%를",	// MATKStone_Bottom	Matk1p_Bottom
+				25062, 29046, "탐욕 LV.1 사용 가능을",	// Greed_Stone	Greed
+				25063, 29049, "MAXHP + 100, LV.120 이상시, MAXHP + 2%를",	// MaxHP2_Stone	HP100_
+				25064, 29050, "MAXSP + 50, LV.120 이상시, MAXSP + 2%를",	// MaxSP2_Stone	SP50_
+				25065, 29051, "해독 LV.1 사용 가능을",	// Detoxify_Stone	Detoxify
+				25066, 29052, "리커버리 LV.1 사용 가능을",	// Recovery_Stone	Recovery
+				25071, 29055, "스킬 후 딜레이 1% 감소를",	// ReloadStone_Bottom	Skill_Delay1_Bottom
+				25072, 29057, "기리에 엘레이손 LV.1 사용 가능을",	// Kyrie_Stone	Kyrie
+				25139, 29146, "아이템 감정 LV.1 사용 가능을",	// Identify_Stone	Identify
+				25140, 29147, "리저렉션 LV.1 사용 가능을",	// 리저렉션 스톤(하단)
+				25174, 29158, "변동 캐스팅 3% 감소를",	// CastingStone_Bottom	Casting_Bottom
+				25227, 29227, "힐 LV.1 사용 가능을",	// Heal_Stone	Heal
+				25228, 29229, "텔레포테이션 LV.1 사용 가능을",	// Teleport_Stone	Teleport
+				25229, 29228, "스틸 LV.1 사용 가능을",	// Steal_Stone	Steal
+				25305, 29360, "크리티컬 데미지 + 3%를",	// Critical_Stone_Bottom	Fatal_Bottom
+				25411, 29425, "연환전신장 데미지 + 20%를",	// SuraStone_Bottom	Sura_Bottom
+				25415, 29430, "애로우 샤워 데미지 + 20%를",	// RangerStone_Bottom	Ranger_Bottom
+				25419, 29434, "화이어 볼트, 콜드 볼트, 라이트닝 볼트 데미지 + 20%를",	// SorcererStone_Bottom	Sorcerer_Bottom
+				25447, 29462, "기병수련 1레벨당 공격 속도 증가(공격 후 딜레이 1% 감소)를",	// RuneknightStone_Bottom	Runeknight_Bottom
+				25452, 29466, "애시드 테러 데미지 20% 증가를",	// GeneticStone_Bottom	Genetic_Bottom
+				25455, 29470, "화이어 필라 데미지 20% 증가를",	// WarlockStone_Bottom	Warlock_Bottom
+				25492, 29479, "기습 데미지 20% 증가를",	// ShadowchaseStone_Bottom	Shadowchaser_Bottom
+				25496, 29483, "카트 터미네이션 데미지 20% 증가를",	// MechanicStone_Bottom	Mechanic_Bottom
+				25500, 29487, "애로우 발칸 데미지 20% 증가를",	// WanderMinstStone_Bottom	WanderMinstrel_Bottom
+				25708, 29515, "마그누스 엑소르시스무스 데미지 20% 증가를",	// HighpriestStone_Bottom	Highpriest_Bottom
+				25712, 29519, "홀리 크로스 데미지 20% 증가를",	// PaladinStone_Bottom	Paladin_Bottom
+				25716, 29523, "소닉 블로우 데미지 20% 증가를",	// AssacrossStone_Bottom	Assassincross_Bottom
+				25798, 29611, "디바인 프로텍션 1레벨당 ATK +2 증가를",	// SuraStone_Bottom2	Sura_Bottom2
+				25802, 29615, "오토 스펠 1레벨당 MATK + 2 증가를",	// SorcererStone_Bottom2	Sorcerer_Bottom2
+				25806, 29619, "회피율 증가 1레벨당 HIT + 1 증가를",	// ShadowchasStone_Bottom2	Shadowchaser_Bottom2
+				25845, 29653, "카아히 1레벨당 변동 캐스팅 2%씩 감소를",	// SoullinkerStone_Bottom	Soullinker_Bottom
+				25848, 29657, "태양과 달과 별의 지식 1레벨당 공격 속도 증가(공격 후 딜레이 1%씩 감소)를",	// GladiatorStone_Bottom	Gladiator_Bottom
+				25852, 29661, "폭염룡, 빙정락, 삭풍 데미지 20% 증가를",	// NinjaStone_Bottom	Ninja_Bottom
+				25857, 29666, "체인 액션 2레벨당 원거리 물리 데미지 1%씩 증가를",	// GunslingerStone_Bottom	Gunslinger_Bottom
+				25861, 29670, "개다래 줄기창 데미지 20% 증가를",	// DoramStone_Bottom	Doram_Bottom
+				1000010, 310002, "트루 사이트 1레벨당 ATK + 2를",	// RangerStone_Bottom2	Ranger_Bottom2
+				1000014, 310006, "맥시마이즈 파워 1레벨당 원거리 물리 데미지 1% 증가를",	// MechanicStone_Bottom2	Mechanic_Bottom2
+				1000018, 310010, "기리에 엘레이손 2레벨당 변동 캐스팅 1% 감소를",	// HighpriestStone_Bottom2	Highpriest_Bottom2
+				1000216, 310183, "소울 드레인 1레벨당 MATK + 2를",	// WarlockStone_Bottom2	Warlock_Bottom2
+				1000220, 310185, "그랜드 크로스 1레벨당 성속성 마법 데미지 1%씩 증가를",	// PaladinStone_Bottom2	Paladin_Bottom2
+				1000224, 310189, "어드밴스드 카타르 연구 1레벨당 모든 크기의 적에게 주는 물리 데미지 2%씩 증가를",	// AssacrossStone_Bottom2	Assassincross_Bottom2
+				1000299, 310260, "스파이럴 피어스 데미지 20% 증가를",	// RuneknightStone_Bottom2	Runeknight_Bottom2
+				1000303, 310264, "애시드 데몬 스트레이션 2레벨 당 원거리 물리 데미지 1%씩 증가를",	// GeneticStone_Bottom2	Genetic_Bottom2
+				1000307, 310268, "뮤지컬 스트라이크, 화살감아 던지기 데미지 15% 증가를",	// WanderMinsStone_Bottom2	WanderMins_Bottom2
+				1000376, 310326, "원거리 물리 데미지 3% 증가를",	//레인지 스톤(하단)
+				1000379, 310329, "근접 물리 데미지 3% 증가를",	//밀리 스톤(하단)
+				1000530, 310666, "모든 속성 마법 데미지 3% 증가를",	//마법력 스톤(하단)
+				1000612, 310883, "엔첸트 블레이드 1레벨 당 윈드 커터 데미지 5% 증가. 룬나이트 스톤(걸칠것)과 함께 장착 시, MHP/MSP + 10%. 룬나이트 스톤II(걸칠것)과 함께 장착 시, 이그니션 브레이크 데미지 15% 증가를",	//룬나이트 스톤(하단)
+				1000615, 310886, "체인 라이트닝 1레벨 당 스킬 후 딜레이 1% 감소. 워록 스톤(걸칠것)과 함께 장착 시, 체인 라이트닝 데미지 15% 증가. 워록 스톤II(걸칠것)과 함께 장착 시, 커미트 데미지 15% 증가를",	//워록 스톤(하단)
+				1000618, 310889, "문 슬래셔 1레벨 당 오버 브랜드 데미지 5%씩 증가. 로얄가드 스톤(걸칠것)과 함께 장착 시, 캐논 스피어 데미지 15% 증가. 로얄가드 스톤II(걸칠것)과 함께 장착 시, 모든 크기의 적에게 주는 마법 데미지 15% 증가를",	//로얄가드 스톤(하단)
+				1000668, 311007, "풍요의 노래 1레벨 당 고정 캐스팅 0.1초 감소. 원더민스 스톤(걸칠것)과 함께 장착 시, 서비어 레인스톰 데미지 15% 증가. 원더민스 스톤II(걸칠것)과 함께 장착 시, 진동 잔향 데미지 15% 증가를",	//원더민스 스톤(하단)
+				1000671, 311010, "검수련 1레벨 당 고정 캐스팅 0.1초 감소. 제네릭 스톤(걸칠것)과 함께 장착 시, 애시드 데몬스트레이션 데미지 15% 증가. 제네릭 스톤II(걸칠것)과 함께 장착 시, 카트 토네이도 데미지 15% 증가를",	//제네릭 스톤(하단)
+				1000674, 311013, "어스 그레이브 1레벨 당 모든 속성 마법 데미지 2% 증가. 소서러 스톤(걸칠것)과 함께 장착 시, 포이즌 버스터 데미지 15% 증가. 소서러 스톤II(걸칠것)과 함께 장착 시, 다이아몬드 더스트 데미지 15% 증가를",	//소서러 스톤(하단)
+				1000859, 311358, "엑스피아티오 1레벨 당 고정 캐스팅 0.1초 감소. 아크비숍 스톤(걸칠것)과 함께 장착 시, 모든 종족의 몬스터에게 주는 마법 데미지 15% 증가(플레이어 제외). 아크비숍 스톤II(걸칠것)과 함께 장착 시, 모든 속성 마법 데미지 15% 증가를",	//아크비숍 스톤(하단)
+				1000862, 311361, "피어브리즈 1레벨 당 원거리 물리 데미지 2% 증가. 레인저 스톤(걸칠것)과 함께 장착 시, 2% 확률로 적에게 준 물리 데미지의 1% 를 자신의 SP로 흡수. 레인저 스톤II(걸칠것)과 함께 장착 시, 모든 크기의 적에게 주는 물리 데미지 15% 증가를",	//레인저 스톤(하단)
+				1000865, 311364, "리프로듀스 1레벨 당 근접/원거리 물리 데미지 1% 증가. 쉐도우체이서 스톤(걸칠것)과 함께 장착 시, 모든 속성 적에게 주는 물리 데미지 15% 증가. 쉐도우체이서 스톤II(걸칠것)과 함께 장착 시, 모든 크기의 적에게 주는 물리 데미지 15% 증가를",	//쉐도우체이서 스톤(하단)
+				1000970, 311429, "점혈-반 1레벨 당 원거리 물리 데미지 2% 증가. 수라 스톤(걸칠것)과 함께 장착 시, 폭기산탄 데미지 15% 증가. 수라 스톤II(걸칠것)과 함께 장착 시, 수라신탄 데미지 15% 증가를",	//수라 스톤(하단)
+				1000973, 311432, "도끼 수련 2레벨 당 스킬 후 딜레이 1% 감소. 미케닉 스톤(걸칠것)과 함께 장착 시, 파워 스윙 데미지 15% 증가. 미케닉 스톤II(걸칠것)과 함께 장착 시, 발칸 암 데미지 15% 증가를",	//미케닉 스톤(하단)
+				1000976, 311435, "크로스 리퍼 슬래셔 1레벨 당 원거리 물리 데미지 2% 증가. 길롤틴크로스 스톤(걸칠것)과 함께 장착 시, 크로스 리퍼 슬래셔 데미지 15% 증가. 길로틴크로스 스톤II(걸칠것)과 함께 장착 시, 모든 종족 몬스터에게 주는 물리 데미지 15% 증가(플레이어 제외)를",	//길로틴크로스 스톤(하단)
+				1001046, 311462, "별의 축복 1레벨 당 유성낙하 데미지 4% 증가. 성제 스톤(걸칠것)과 함께 장착 시, 물리 공격 시 2% 확률로 데미지의 1% SP 흡수를",	//성제 스톤(하단)
+				1001049, 311465, "히트 배럴 1레벨당 파이어 댄스, 해머 오브 갓 데미지 4% 증가. 리벨리온 스톤(걸칠것)과 함께 장착 시, 고정 캐스팅 0.5초 감소를",	//리벨리온 스톤(하단)
+				1001052, 311468, "사악한 영혼의 저주 1레벨당 사령 폭발 스킬 쿨타임 0.1초 감소. 소울리퍼 스톤(걸칠것)과 함께 장착 시, 고정 캐스팅 0.5초 감소를",	//소울리퍼 스톤(하단)
+				1001161, 311914, "명경지수 1레벨당 팔방 쿠나이 데미지 5% 증가. 카게로우 스톤(걸칠것)과 함께 장착 시, 팔방 쿠나이 데미지 25% 증가를",	//카게로우 스톤(하단)
+				1001164, 311917, "열 여섯번째의 밤 1레벨 당 홍염화, 빙섬창, 풍인 데미지 4% 증가. 오보로 스톤(걸칠것)과 함께 장착 시, 변동 캐스팅 15% 감소를",	//오보로 스톤(하단)
+				1001167, 311920, "아크라우스 대시 1레벨 당 원거리 물리 데미지 2% 증가. 도람 스톤(걸칠것)과 함께 장착 시, 루나틱 당근난타 데미지 25% 증가를",	//소환사 스톤(하단)
+				1001170, 311923, "DEF + 20, MDEF + 4를",	//디펜스 스톤(하단)
+				1001329, 312405, "천사님 도와주세요! 사용 시, 300초간 모든 속성 마법데미지 15% 증가. 슈퍼노비스 스톤(걸칠것)과 함께 장착 시, MHP + 15%를";	//슈퍼노비스 스톤(하단)
+		}
+	}
+
+	switch(.@part) {
+		case EQI_COSTUME_HEAD_TOP:
+			switch(.@equip_id) {
+				//top
+				case 19532: //의상 빨간 토끼 머리띠
+				case 19557: //의상 아요타야 모자
+				case 19558: //의상 까마귀 모자
+				case 19559: //의상 아기 용 모자
+				case 19560: //의상 콰티 모자
+				case 19565: //의상 청나라 머리장식
+				case 19567: //의상 하타 블랙
+				case 19568: //의상 고대인의 뿔
+				case 19569: //의상 새싹 모자
+				case 19570: //의상 머큐리의 투구
+				case 19571: //의상 백무상 모자
+				case 19572: //의상 흑무상 모자
+				case 19579: //의상 빨간 날개 모자
+				//top & mid
+				case 19539: //의상 레긴레이브의 날개
+				case 19555: //의상 초승달의 투구
+				case 19561: //의상 투칸 모자
+				//top & mid & low
+				case 19556: //의상 가부키 가면
+				case 19562: //의상 재규어 모자
+				mes "[아베르 드 도쉬]";
+				mes "아앗! ^0000FF" + getitemname(.@equip_id) + "^000000에서 인챈트를 방해하는 강력한 기운이 느껴져요! 이 아이템은 인챈트 할 수 없을 것 같네요.";
+				close;
+			}
+			break;
+
+		case EQI_COSTUME_HEAD_MID:
+			switch(.@equip_id) {
+				//mid
+				case 19742: //작은 금빛날개
+				//top & mid
+				case 19539: //의상 레긴레이브의 날개
+				case 19555: //의상 초승달의 투구
+				case 19561: //의상 투칸 모자
+				//top & mid & low
+				case 19556: //의상 가부키 가면
+				case 19562: //의상 재규어 모자
+				mes "[아베르 드 도쉬]";
+				mes "아앗! ^0000FF" + getitemname(.@equip_id) + "^000000에서 인챈트를 방해하는 강력한 기운이 느껴져요! 이 아이템은 인챈트 할 수 없을 것 같네요.";
+				close;
+			}
+			break;
+
+		case EQI_COSTUME_HEAD_LOW:
+			switch(.@equip_id) {
+				//top & mid & low
+				case 19556: //의상 가부키 가면
+				case 19562: //의상 재규어 모자
+				mes "[아베르 드 도쉬]";
+				mes "아앗! ^0000FF" + getitemname(.@equip_id) + "^000000에서 인챈트를 방해하는 강력한 기운이 느껴져요! 이 아이템은 인챈트 할 수 없을 것 같네요.";
+				close;
+			}
+			break;
+
+		default:
+			mes "알 수 없는 에러 발생.";
+			close;
+	}
+
+	.@location = getiteminfo(.@equip_id, ITEMINFO_LOCATIONS);
+	.@equip_refine = getequiprefinerycnt(.@part);
+	setarray .@card[0], getequipcardid(.@part, 0), getequipcardid(.@part, 1), getequipcardid(.@part, 2), getequipcardid(.@part, 3);
+	
+	mes "[아베르 드 도쉬]";
+	mes "어머~ ^0000FF" + getitemname(.@equip_id) + "^000000!!!";
+	mes "너~~무 잘 어울리신다!";
+	mes "그럼 어떤 스톤으로 하실래요?";
+	next;
+
+	.@size = getarraysize(.@stone_id$);
+	.@offset = 0;
+
+	for ( .@i = 0; .@i < .@size; .@i += 3 ) {
+		.@id = atoi(.@stone_id$[.@i - (.@offset * 3)]);
+		if(countitem(.@id) < 1) {
+			deletearray .@stone_id$[.@i - (.@offset * 3)],3;
+			.@offset += 1;
+		} else {
+			.@stone_menu$ += sprintf( "%s(%d개 보유):", getitemname(.@id), countitem(.@id) );
+		}	
+	}
+	.@s = (select("그만 둔다.:"+.@stone_menu$) - 2) * 3;
+
+	if (.@s == -3) {
+		mes "[아베르 드 도쉬]";
+		mes "그럼 다른 서비스도 많으니 구경해보세요~";
+		mes "아! 혹시 의상 스톤의 리스트가 보이지 않는다면 가지고 있는 이상 스톤과 선택한 부위가 정확한지 다시 확인해 보세요.";
+		close;
+	}
+
+	.@stone = atoi(.@stone_id$[.@s]);
+	.@enchant = atoi(.@stone_id$[.@s+1]);
+
+	if (getequipid(.@part) < 0 || countitem(.@stone) < 1) {
+		mes "[아베르 드 도쉬]";
+		mes "흠? 재료가 부족하네요.";
+		mes "스타일링을 위해선 의상 아이템과 의상스톤 모두가 필요하답니다.";
+		close;
+	}
+	if(.@select == 1) {
+		mes "^FF0000   ※ 주의사항 ※^000000";
+		mes "^ff0000이펙트는 부위에 상관 없이 하나의 장비에 한가지만 적용 됩니다.^000000";
+		mes "^ff0000" + .@equip_name$[.@slot] + " 장비에 " + .@stone_id$[.@s+2] + "를 부여합니다.^000000";
+		mes "^FF0000인챈트할 장비와 능력치가 확실합니까?^000000";
+	} else {
+		mes "^FF0000   ※ 주의사항 ※^000000";
+		mes "^ff0000해당 작업은 실패할 확률이 있습니다.^000000";
+		mes "^ff0000또 " + .@equip_name$[.@slot] + "에 이미 능력치가 있는 경우, 슬롯을 초기화 하고 " + .@stone_id$[.@s+2] + " 부여합니다.^000000";
+		mes "^FF0000인챈트할 장비와 능력치가 확실합니까?^000000";
+	}
+	next;
+	if (select( "아니오.", "네." ) == 1) {
+		mes "[아베르 드 도쉬]";
+		mes "그럼 다른 서비스도 많으니 구경해보세요~";
+		close;
+	}
+	delitem .@stone, 1;
+
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+		close;
+
+	delequip .@part;
+	if (.@select == 1) {
+		mes "[아베르 드 도쉬]";
+		mes "당신 지금...";
+		mes "최고로 빛나고 있어...";
+		specialeffect2 581;
+		.@card[3] = .@enchant;
+	} else if (.@select == 0) {
+		if (rand(1,100) < 51) {
+			mes "[아베르 드 도쉬]";
+			mes "에...엘레강스!";
+			mes "너무 완벽해...아앙";
+			specialeffect2 581;
+			.@card[.@slot] = .@enchant;
+		} else {
+			mes "[아베르 드 도쉬]";
+			mes "어떤 역사도 실패와 좌절로 얼룩져 있기 마련이죠...";
+			mes "패션의 역사도 ...";
+			mes "죄송...실패해버렸쪙~ 데헷.";
+			specialeffect2 576;
+			.@card[.@slot] = 0;
+		}
+	}
+	getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+	close;
+}
+
+// Costume enchant (garment)
+mal_in01,20,107,3	script	레이스 라 자드#cos_ect	4_FROG,{//614
+	if (checkweight(1119,3) == 0) {
+		mes "[레이스 라 자드]";
+		mes "후... 그렇게 힘겨워보이는 어깨에 장식까지 하는건 좀...!";
+		mes "그건 장식이 아니고 짐이라구요!";
+		next;
+		mes "아이템을 너무 많이 들고 있는 것 같다.";
+		mes "인벤토리를 정리하고 다시 오자.";
+		close;
+	}
+	mes "[레이스 라 자드]";
+	mes "어서오세요! 패션스톤입니다!!";
+	mes "허전한 어깨를 아름답고 박력넘치는 '파워숄더'로 바꿔드리는 레이스 라 자드입니다.";
+	next;
+	mes "[레이스 라 자드]";
+	mes "^ff0000의상 걸칠것^000000과 ^ff0000걸칠것용 스톤^000000을 가지고오시면멋지게 업그레이드 해드려요!";
+	mes "제 수수한 몸을 보완해줄 방법을 찾다가 발견한 방법이죠!";
+	next;
+	if (select( "대화를 끝낸다.", "능력치를 부여한다." ) == 1) {
+		mes "[레이스 라 자드]";
+		mes "네. 좀 더 둘러보시겠어요?";
+		close;
+	}
+	.@part = EQI_COSTUME_GARMENT;
+	.@equip_id = getequipid(.@part);
+	
+	if (.@equip_id >= 0) {
+		set .@menu$, "걸칠것 인챈트:듀얼스톤 인챈트";
+	} else {
+		set .@menu$, "^8C8C8C걸칠것 인챈트(비어있음)^000000:^8C8C8C듀얼스톤 인챈트(비어있음)^000000";
+	}
+	
+	set .@i, select("그만 둔다:"+.@menu$);
+	switch(.@i) {
+		case 1:
+			mes "[레이스 라 자드]";
+			mes "네. 좀 더 둘러보시겠어요?";
+			close;
+		default:
+			set .@slot, .@i-2;
+			if (.@equip_id < 0) {
+				mes "[레이스 라 자드]";
+				mes "걸칠것을 어깨에 걸쳐보세요.";
+				mes "가지고만 있어서는 어울리는지 어떤지 알 수 없거든요..";
+				close;
+			}
+			break;
+	}
+
+	if(.@slot == 0) {
+		setarray .@data$[0],
+			6908, 4807, "ASPD +1을",	// ASPDStone_Robe	Atk_Speed1
+			6963, 4992, "1% 확률로 적에게 준 물리 대미지의 1% 를 자신의 HP로 흡수를",	// HPdrainStone_Robe	HPdrain1
+			6964, 4993, "1% 확률로 적에게 준 물리 대미지의 1% 를 자신의 SP로 흡수를",	// SPdrainStone_Robe	SPdrain1
+			25067, 29056, "고정 캐스팅 0.5초 감소를",	// CastingStone_Robe	FixedCasting05
+			25170, 29154, "고정 캐스팅 0.3초 감소를",	// MinorCastingStone_Robe	FixedCasting03
+			25208, 29209, "2% 확률로 적에게 준 물리 대미지의 1% 를 자신의 SP로 흡수를",	// 강화 SP흡수스톤(걸칠것)
+			25209, 29211, "2% 확률로 적에게 준 물리 대미지의 3% 를 자신의 HP로 흡수를",	// 강화 HP흡수스톤(걸칠것)
+			25302, 29362, "더블어택 Lv.3 사용 가능, 더 높은 레벨을 배우고 있을 시, 해당 레벨로 발동을",	// DoubleAttack_Stone	DoubleAttack
+			25303, 29361, "크리티컬 데미지 + 20%. 크리티컬 스톤 상단, 중단, 하단과 함께 장착시, CRI + 10을",	// Critical_Stone_Robe	Fatal_Robe
+			25306, 29358, "변동 캐스팅 10% 감소. 변동캐스팅 스톤 상단, 중단, 하단과 함께 장착시, 변동 캐스팅 5% 추가 감소를",	// CastStone_Robe	Casting_Robe
+			25412, 29426, "폭기산탄의 데미지 + 15%, 챔피언 스톤(상단)과 함께 장착 시, 폭기산탄 데미지 + 10%, 챔피언 스톤(중단)과 함께 장착 시, 광축기의 고정 캐스팅 40% 감소, 챔피언 스톤(하단)과 함게 장착 시, 폭기산탄 사용 시 높은 확률로(30%)로 오토스펠 [광축기] 발동을",	// SuraStone_Robe	Sura_Robe
+			25416, 29431, "애로우 스톰 데미지 + 10%, 스나이퍼 스톤(상단)과 함께 장착 시, 애로우 스톰 데미지 + 15%, 스나이퍼 스톤(중단)과 함께 장착 시, 변정 캐스팅 10% 감소. 스나이퍼 스톤(하단)과 함게 장착 시, 윈드 워크 사용시, 원거리 물리 공격력 60초간 5% 증가를",	// RangerStone_Robe	Ranger_Robe
+			25420, 29435, "사이킥 웨이브의 데미지 + 15%, 프로페서 스톤(상단)과 함께 장착 시, 사이킥 웨이브 데미지 + 15%, 프로페서 스톤(중단)과 함께 장착 시, 워머의 스킬 쿨타임 15초 감소. 프로페서 스톤(하단)과 함게 장착 시, 사이킥 웨이브 스킬 쿨타임 2초 감소를",	// SorcererStone_Robe	Sorcerer_Robe
+			25448, 29463, "드래곤 브레스(화), 드래곤 브레스(수) 데미지 10% 증가. 로드나이트 스톤(상단)과 함께 착용 시, 드래곤 브레스(화), 드래곤 브레스(수) 데미지 10% 증가. 로드나이트 스톤(중단)과 함께 착용 시, 드래곤 브레스(화), 드래곤 브레스(수) SP 소비 10% 감소. 로드나이트 스톤(하단)과 함게 착용 시, 스킬 후 딜레이 5% 감소를",	// RuneknightStone_Robe	Runeknight_Robe
+			25449, 29467, "카트 캐논 데미지 10% 증가. 크리에이터 스톤(상단)과 함께 착용 시, 카트 캐논 데미지 15% 증가. 크리에이터 스톤(중단)과 함께 착용 시, 하울링 오브 만드라고라 스킬 쿨타임 3초 감소. 크리에이터 스톤(하단)과 함게 착용 시, 원거리 물리 데미지 5% 증가를",	// GeneticStone_Robe	Genetic_Robe
+			25456, 29471, "크림즌 록 데미지 10% 증가. 하이위자드 스톤(상단)과 함께 착용 시, 크림즌 록 데미지 15% 증가. 하이위자드 스톤(중단)과 함께 착용 시, 소울 드레인의 2레벨당 고정 캐스팅 0.1초씩 감소. 하이위자드 스톤(하단)과 함게 착용 시, 화속성 마법 데미지 5% 증가를",	// WarlockStone_Robe	Warlock_Robe
+			25493, 29480, "트라이앵글샷 데미지 15% 증가. 스토커 스톤(상단)과 함께 착용 시, 트라이앵글샷 데미지 15% 증가. 스토커 스톤(중단)과 함께 착용 시, 원거리 물리 데미지 10% 증가. 스토커 스톤(하단)과 함게 착용 시, 트라이앵글샷 소모 SP 10% 감소를",	// ShadowchaserStone_Robe	Shadowchaser_Robe
+			25497, 29484, "액스 토네이도 데미지 15% 증가. 화이트스미스 스톤(상단)과 함께 착용 시, 2% 확률로 적에게 준 물리 대미지의 1% 를 자신의 SP로 흡수. 화이트스미스 스톤(중단)과 함께 착용 시, 액스 토네이도 스킬 쿨타임 1초 감소. 화이트스미스 스톤(하단)과 함께 착용 시, 액스 토네이도 데미지 15% 추가 증가를",	// MechanicStone_Robe	Mechanic_Robe
+			25501, 29488, "서비어 레인스톰 데미지 15% 증가. 크라운집시 스톤(상단)과 함께 착용 시, 서비어 레인스톰 데미지 15% 추가 증가. 크라운집시 스톤(중단)과 함께 착용 시, 서비어 레인스톰 스킬 쿨타임 1초 감소. 크라운집시 스톤(하단)과 함께 착용 시, 고정 캐스팅 0.5초 감소를",	// WanderMinstreStone_Robe	WanderMinstrel_Robe
+			25709, 29516, "아도라무스 데미지 15% 증가. 하이프리스트 스톤(상단)과 함께 장착 시, 아도라무스 데미지 15% 추가 증가. 하이프리스트 스톤(중단)과 함께 장착 시, 아도라무스의 스킬 쿨타임 1초 감소. 하이프리스트 스톤(하단)과 함께 장착 시, 고정 캐스팅 0.5초 감소를",	// ArchbishopStone_Robe	Archbishop_Robe
+			25713, 29520, "배니싱 포인트 데미지 15% 증가. 팔라딘 스톤(상단)과 함께 장착 시, 2% 확률로 적에게 준 물리 데미지의 1% 를 자신의 SP로 흡수. 팔라딘 스톤(중단)과 함께 장착 시, 캐논 스피어의 스킬 쿨타임 0.5초 감소. 팔라딘 스톤(하단)과 함께 장착 시, 배니싱 포인트 데미지 15% 추가 증가를",	// RoyalguardStone_Robe	Royalguard_Robe
+			25717, 29524, "롤링 커터 데미지 15% 증가. 어쌔신크로스 스톤(상단)과 함께 장착 시, 2% 확률로 적에게 준 물리 데미지의 1% 를 자신의 SP로 흡수. 어쌔신크로스 스톤(중단)과 함께 장착 시, 크로스 리퍼 슬래셔의 데미지 15% 증가. 어쌔신크로스 스톤(하단)과 함께 장착 시, 롤링 커터의 데미지 15% 추가 증가를",	// GuillcrossStone_Robe	Guillotinecross_Robe
+			25797, 29427, "수라신탄 데미지 15% 증가. 챔피언 스톤II(상단)과 함께 장착 시, 호포 데미지 15% 증가. 챔피언 스톤II(중단)과 함께 장착 시, MHP +10%. 챔피언 스톤II(하단)과 함께 장착 시, 호포 데미지 15% 증가를",	// SuraStone_Robe2	Sura_Robe2
+			25801, 29614, "다이아몬드 더스트의 데미지 15% 증가. 프로페서 스톤II(상단)과 함께 장착 시, 다이아몬드 더스트 데미지 10% 추가 증가. 프로페서 스톤II(중단)과 함께 장착 시, 어스 그레이브 데미지 20% 증가. 프로페서 스톤II(하단)과 함께 장착 시, 바레티르 스피어 스킬 쿨타임 1초 감소를",	// SorcererStone_Robe2	Sorcerer_Robe2
+			25805, 29618, "페이탈 메나스 데미지 15% 증가. 스토커 스톤II(상단)과 함께 착용 시, 페이탈 메나스 데미지 10% 증가. 스토커 스톤II(중단)과 함께 착용 시, 페이탈 메나스 소모 SP 10% 감소. 스토커 스톤II(하단)과 함께 착용 시, 1%의 확률로 적에게 준 물리 데미지의 1% SP로 흡수를",	// ShadowchaserStone_Robe2	Shadowchaser_Robe2
+			25842, 29654, "에스후 데미지 20% 증가. 소울링커 스톤(상단)과 함께 장착 시, 에스후 데미지 20% 추가 증가. 소울링커 스톤(중단)과 함께 장착 시, 에스파 데미지 20% 증가. 소울링커 스톤(하단)과 함께 장착 시, 고정 캐스팅 0.5초 감소를",	// SoulreaperStone_Robe	Soulreaper_Robe
+			25849, 29658, "유성낙하, 태양폭발, 만월각 데미지 20% 증가. 권성 스톤(상단)과 함께 장착 시, 태양폭발 데미지 15% 증가. 권성 스톤(중단)과 함께 장착 시, 유성낙하 데미지 15% 증가. 권성 스톤(하단)과 함께 장착 시, 물리 공격 시 1% 확률로 데미지의 1% SP 흡수를",	// StaremperorStone_Robe	Staremperor_Robe
+			25853, 29662, "풍마수리검 난화 데미지 25% 증가. 닌자 스톤(상단)과 함께 장착 시, 십자베기 데미지 25% 증가. 닌자 스톤(중단)과 함께 장착 시, 폭발 쿠나이 데미지 25% 증가. 닌자 스톤(하단)과 함께 장착 시, 물리 공격 시 1% 확률로 데미지의 1% SP 흡수를",	// KagerouStone_Robe	Kagerou_Robe
+			25854, 29663, "홍염화 데미지 20% 증가. 닌자 스톤(상단)과 함께 장착 시, 폭염룡, 빙정락, 삭풍 데미지 30% 증가. 닌자 스톤(중단)과 함께 장착 시, 빙섬창, 풍인 데미지 20% 증가. 닌자 스톤(하단)과 함께 장착 시, 변동 캐스팅 15% 감소를",	// OboroStone_Robe	Oboro_Robe
+			25858, 29667, "해머 오브 갓, 라운드 트립 데미지 20% 증가. 건슬링거 스톤(상단)과 함께 장착 시, 라운드 트립 데미지 15% 추가 증가. 건슬링거 스톤(중단)과 함께 장착 시, 해머 오브 갓 데미지 20% 추가 증가. 건슬링거 스톤(하단)과 함께 장착 시, 배니싱 버스터 데미지 25% 증가를",	// RebellionStone_Robe	Rebellion_Robe
+			25862, 29671, "픽키 마구쪼기, 개박하 메테오 데미지 20% 증가. 도람 스톤(상단)과 함께 장착 시, 루나틱 당근난타, 개다래 줄기창 데미지 20% 증가. 도람 스톤(중단)과 함께 장착 시, 세비지의 영혼 스킬 쿨타임 1초 감소. 도람 스톤(하단)과 함께 장착 시, 개박하 메테오 스킬 쿨타임 1초 감소를",	// DoramStone_Robe	Doram_Robe
+			1000011, 310003, "에임드 볼트 데미지 15% 증가. 스나이퍼 스톤II(상단)과 함께 장착 시, 에임드 볼트 데미지 15% 추가 증가. 스나이퍼 스톤II(중단)과 함께 장착 시, 에임드 볼트 변동 캐스팅 1초 감소. 스나이퍼 스톤II(하단)과 함께 장착 시, 언리밋 스킬 쿨타임 45초 감소를",	// RangerStone_Robe2	Ranger_Robe2
+			1000015, 310007, "암즈 캐논 데미지 15% 증가. 화이트스미스 스톤II(상단)과 함께 착용 시, 원거리 물리 데미지 10% 증가. 화이트스미스 스톤II(중단)과 함께 착용 시, 발칸 암 데미지 20% 증가. 화이트스미스 스톤II(하단)과 함께 착용 시, 부스트 너클 데미지 20% 증가를",	// MechanicStone_Robe2	Mechanic_Robe2
+			1000019, 310011, "쥬덱스 데미지 15% 증가. 하이프리스트 스톤II(상단)과 함께 장착 시, 쥬덱스 데미지 15% 추가 증가. 하이프리스트 스톤II(중단)과 함께 장착 시, 쥬덱스 소모 SP 10% 감소. 하이프리스트 스톤II(하단)과 함께 장착 시, 성속성 마법 데미지 10% 증가를",	// ArchbishopStone_Robe2	Archbishop_Robe2
+			1000213, 310180, "커미트 데미지 15% 증가. 하이 위자드 스톤Ⅱ(상단)과 함께 장착 시, 커미트 데미지 15% 추가 증가. 하이 위자드 스톤Ⅱ(중단)과 함께 장착 시, 마법력 증폭 2레벨당 고정 캐스팅 0.1초씩 감소. 하이 위자드 스톤Ⅱ(하단)과 함께 장착 시, 무속성 마법 데미지 5% 증가를",	// WarlockStone_Robe2	Warlock_Robe2
+			1000217, 310184, "레이 오브 제네시스 데미지 15% 증가. 팔라딘 스톤Ⅱ(상단)과 함께 장착 시, 오토 가드 2레벨당 고정 캐스팅 0.1초씩 감소. 팔라딘 스톤Ⅱ(중단)과 함께 장착 시, 성속성 마법 데미지 5% 증가. 팔라딘 스톤Ⅱ(하단)과 함께 장착 시, 레이 오브 제네시스 데미지 15% 추가 증가를",	// RoyalguardStone_Robe2	RoyalGuard_Robe2
+			1000221, 310188, "크리티컬 데미지 15% 증가, 카타르 수련이 10레벨인 경우, 더블 어택 3레벨 사용 가능(습득한 더블 어택의 레벨이 더 높을 경우, 해당 레벨로 발동). 어쌔신크로스 스톤Ⅱ(상단)과 함께 장착 시, ATK + 5%, 크리티컬 데미지 15% 증가. 어쌔신크로스 스톤Ⅱ(중단)과 함께 장착 시, 카운터 슬래쉬 데미지 20% 증가. 어쌔신크로스 스톤Ⅱ(하단)과 함께 장착 시, 스킬 후 딜레이 5% 감소를",	// GuillcrossStone_Robe2	Guillotinecross_Robe2
+			1000296, 310257, "이그니션 브레이크 데미지 15% 증가. 로드나이트 스톤Ⅱ(상단)과 함께 장착 시, 소닉 웨이브 데미지 20% 증가. 로드나이트 스톤Ⅱ(중단)과 함께 장착 시, 이그니션 브레이크 데미지 10% 증가. 로드나이트 스톤Ⅱ(하단)과 함께 장착 시, 헌드레드 스피어 데미지 30% 증가를",	// RuneknightStone_Robe2	Runeknight_Robe2
+			1000300, 310261, "크레이지 위드 데미지 20% 증가. 크리에이터 스톤Ⅱ(상단)과 함께 장착 시, 카트 토네이도 스킬 쿨타임 0.7초 감소. 크리에이터 스톤Ⅱ(중단)과 함께 장착 시, 스포어 익스플로젼 데미지 20% 증가. 크리에이터 스톤Ⅱ(하단)과 함께 장착 시, 애시드 데몬스트레이션 2레벨당 고정 캐스팅 0.1초씩 감소를",	// GeneticStone_Robe2	Genetic_Robe2
+			1000304, 310265, "진동잔향 데미지 15% 증가. 크라운집시 스톤Ⅱ(상단)과 함께 착용 시, 진동잔향 데미지 10% 증가. 크라운집시 스톤Ⅱ(중단)과 함께 착용 시, 진동잔향, 메탈릭 사운드 소모 SP 20% 감소. 크라운집시 스톤Ⅱ(하단)과 함께 착용 시, 메탈릭 사운드 데미지 20% 증가를",	// WanderMinsStone_Robe2	WanderMins_Robe2
+			1000922, 311426, "S.Matk + 3. 마법력 스톤(상단)과 함께 착용 시, S.Matk + 1, SPL + 1.	마법력 스톤(중단)과 함께 착용 시, S.Matk + 1, SPL + 1. 마법력 스톤(하단)과 함께 착용 시, S.Matk + 1, SPL + 1. 스펠 스톤(듀얼)과 함께 착용 시, S.Matk + 5, SPL + 3을",	// 스펠 매직 어택 스톤(걸칠것)
+			1001053, 311469, "P.ATK + 3. 밀리 스톤(상단)과 함께 착용 시, P.ATK + 1, POW + 1. 밀리 스톤(중단)과 함께 착용 시, P.ATK + 1, POW + 1. 밀리 스톤(하단)과 함께 착용 시, P.ATK + 1, POW + 1.파워 스톤(듀얼)과 함께 착용 시, P.ATK + 5, POW + 3을",	//밀리 피치컬 어택 스톤(걸칠것)
+			1001054, 311470, "P.ATK + 3. 레인지 스톤(상단)과 함께 착용 시, P.ATK + 1, CON + 1. 레인지 스톤(중단)과 함께 착용 시, P.ATK + 1, CON + 1. 레인지 스톤(하단)과 함께 착용 시, P.ATK + 1, CON + 1. 컨센트레이션 스톤(듀얼)과 함께 착용 시, P.ATK + 5, CON + 3을",	//레인지 피지컬 어택 스톤(걸칠것)
+			1001171, 311924, "DEF + 100, MDEF + 25, RES + 20, MRES + 20. 디펜스 스톤(상단), 디펜스 스톤(중단), 디펜스 스톤(하단)과 함께 장착 시, RES + 10, MRES + 10. 스태미너 위즈덤 스톤(듀얼)과 함께 장착 시, RES + 15, MRES + 15을",	//레지스트 디펜스 스톤(걸칠것)
+			1001322, 312398, "쿠나이 - 왜곡 데미지 5% 증가. 카게로우 스톤(상단)과 함께 장착 시, 쿠나이 - 왜곡 데미지 10% 증가. 카게로우 스톤(중단)과 함께 장착 시, 풍마수리검 - 구축 데미지 10% 증가. 카게로우 스톤(하단)과 함께 장착 시, 스며들기 1레벨 당 원거리 물리 데미지 3% 증가를",	//신키로 스톤(걸칠것)
+			1001323, 312399, "암전포 데미지 10% 증가. 오보로 스톤(상단)과 함께 장착 시, 적염포 데미지 10% 증가. 오보로 스톤(중단)과 함께 장착 시, 녹아내리기 1레벨 당 변동 캐스팅 3% 감소. 오보로 스톤(하단)과 함께 장착 시, 뇌전포 데미지 10% 증가를",	//시라누이 스톤(걸칠것)
+			1001324, 312400, "쉐도우 센스 2레벨 당 크리티컬 데미지 4% 증가. 길로틴크로스 스톤(상단)과 함께 장착 시, 임팩트 크레이터 데미지 10% 증가. 길로틴크로스 스톤(중단)과 함께 장착 시, 이터널 슬래쉬 데미지 10% 증가. 길로틴크로스 스톤(하단)과 함께 장착 시, 쉐도우 센스 1레벨 당 C.RATE + 1을",	//쉐도우크로스 스톤(걸칠것)
+			1001325, 312401, "플라멘 데미지 5% 증가. 아크비숍 스톤(상단)과 함께 장착 시, 플라멘 데미지 10% 증가. 아크비숍 스톤(중단)과 함께 장착 시, 피두스 아니무스 2레벨 당 성속성 마법 데미지 3% 증가. 아크비숍 스톤(하단)과 함께 장착 시, 아르비트리움 데미지 10% 증가를",	//카디날 스톤(걸칠것)
+			1001326, 312402, "트렌센던스 5레벨 습득 시, 쥬덱스 10레벨 사용가능. 팔라딘 스톤(상단)과 함께 장착 시, DEF + 120, MDEF + 15. 하이위자드 스톤(중단)과 함께 장착 시, 트렌센던스 1레벨 당, 쥬덱스 데미지 3% 증가. 스토커 스톤(하단)과 함께 장착 시, 브레이크 쓰루 1레벨 당, 윈드 커터 데미지 3% 증가를",	//슈퍼노비스 스톤(걸칠것)
+			1001419, 312476, "CRI + 10, 천기 수련 2레벨 당 모든 종족 몬스터에게 주는 물리 데미지 1%씩 증가(플레이어 제외). 성제 스톤(상단)과 함께 장착 시, 병법 수련 2레벨 당 CRI + 1, C.RATE  + 1. 성제 스톤(중단)과 함께 장착 시, 태천일양 데미지 10% 증가. 성제 스톤(하단)과 함께 장착 시, 천양 데미지 15% 증가를",	//천제 스톤(걸칠것)
+			1001420, 312477, "인크리징 액티비티 1레벨 당 화속성, 독속성 마법 데미지 2%씩 증가. 소서러 스톤(상단)과 함께 장착 시, 컨프래그레이션, 테라 드라이브 데미지 10% 증가. 소서러 스톤(중단)과 함께 장착 시, 베놈 스웜프 데미지 10% 증가. 소서러 스톤(하단)과 함께 장착 시, 스펠 인챈팅 1레벨 당 모든 속성 적에게 주는 마법 데미지 3%씩 증가를",	//엘레멘탈 마스터 스톤(걸칠것)
+			1001421, 312478, "장치 제조 1레벨 당 원거리 물리 데미지 2%씩 증가. 미케닉 스톤(상단)과 함께 장착 시, 트리플 레이저 데미지 10% 증가. 미케닉 스톤(중단)과 함께 장착 시, 투 액스 디펜딩 2레벨 당 모든 크기의 적에게 주는 물리 데미지 3%씩 증가. 미케닉 스톤(하단)과 함께 장착 시, 스파크 블래스터 데미지 15% 증가를",	//마이스터 스톤(걸칠것)
+			1001487, 312692, "프렌지 샷 2레벨 당 모든 종족 몬스터에게 주는 물리 데미지 1%씩 증가(플레이어 제외). 쉐도우체이서 스톤(상단)과 함께 장착 시, 대거&보우 마스터리 2레벨 당 모든 크기의 적에게 주는 물리 데미지 3%씩 증가. 쉐도우체이서 스톤(중단)과 함께 장착 시, CRI + 10, 프렌지 샷 데미지 10% 증가. 쉐도우체이서 스톤(하단)과 함께 장착 시, 체인 리액션 샷 데미지 15% 증가를",	//어비스체이서 스톤(걸칠것)
+			1001488, 312693, "리듬 슈팅 1레벨 당 원거리 물리 데미지 2%씩 증가. 원더민스 스톤(상단)과 함께 장착 시, 무대 매너 1레벨 당 모든 속성 적에게 주는 물리 데미지 3%씩 증가. 원더민스 스톤(중단)과 함께 장착 시, 로제 블라썸 데미지 10% 증가. 원더민스 스톤(하단)과 함께 장착 시, P.ATK + 3, 리듬 슈팅 데미지 15% 증가를",	//트루바두르&트루베르 스톤(걸칠것)
+			1001489, 313694, "네이팜 발칸 스트라이크 데미지 10% 증가. 독학-마도학 1레벨 당 수속성, 풍속성, 염속성 마법 데미지 1%씩 증가. 슈퍼노비스 스톤(상단)과 함께 장착 시, 잭 프로스트 노바 2레벨 당 모든 속성 적에게 주는 마법 데미지 3%씩 증가. 슈퍼노비스 스톤(중단)과 함께 장착 시, S.MATK + 5, 유피텔 선더 스톰 데미지 10% 증가. 슈퍼노비스 스톤(하단)과 함께 장착 시, 잭 프로스트 노바 데미지 10% 증가를",	//하이퍼노비스 스톤(걸칠것)
+			1001603, 313060, "크로스 레인 2레벨 당 레이 오브 제네시스 데미지 10% 증가. 로얄가드 스톤(상단)과 함께 장착 시, 크로스 레인 데미지 15% 증가. 로얄가드 스톤(중단)과 함께 장착 시, 모든 크기의 적에게 주는 마법 데미지 10% 증가. 로얄가드 스톤(하단)과 함께 장착 시, 쉴드 마스터리 2레벨 당 모든 속성 적에게 주는 마법 데미지 3%씩 증가를",	//임페리얼가드 스톤(걸칠것)
+			1001604, 313059, "핵 앤드 슬래셔 2레벨 당 모든 종족 몬스터에게 주는 물리 데미지 1%씩 증가(플레이어 제외). 룬나이트 스톤(상단)과 함께 장착 시, 투핸드 디펜딩 2레벨 당 모든 크기의 적에게 주는 물리 데미지 3%씩 증가. 룬나이트 스톤(중단)과 함께 장착 시, 핵 앤드 슬래셔 데미지 10% 증가. 룬나이트 스톤(하단)과 함께 장착 시, C.RATE + 3, 스톰 슬래쉬 데미지 15% 증가를",	//드래곤나이트 스톤(걸칠것)
+			1001605, 313061, "히든 카드 2레벨 당 모든 속성 적에게 주는 물리 데미지 1%씩 증가. 리벨리온 스톤(상단)과 함께 장착 시, 더 비질랜트 엣 나이트 데미지 10% 증가. 리벨리온 스톤(중단)과 함께 장착 시, 스파이럴 슈팅 데미지 15% 증가. 리벨리온 스톤(하단)과 함께 장착 시, 매거진 포 원 데미지 10% 증가를",	//나이트워치 스톤(걸칠것)
+			1001737, 313324, "메이헤믹 쏜즈 1레벨 당 원거리 물리 데미지 2%씩 증가. 제네릭 스톤(상단)과 함께 장착 시, 바이오닉 파머시 1레벨 당 모든 속성 적에게 주는 물리 데미지 3%씩 증가. 제네릭 스톤(중단)과 함께 장착 시, 메이헤믹 쏜즈 데미지 10% 증가. 제네릭 스톤(하단)과 함께 장착 시, 애시디파이드 존(수/풍/지/화) 데미지 10% 증가를",	//바이올로 스톤(걸칠것)
+			1001738, 313325, "성유세례 1레벨 당 원거리 물리 데미지 2%씩 증가. 수라 스톤(상단)과 함께 장착 시, 믿음의 의지 2레벨 당 모든 속성 적에게 주는 물리 데미지 3%씩 증가. 수라 스톤(중단)과 함께 장착 시, 폭화신탄 데미지 10% 증가. 수라 스톤(하단)과 함께 장착 시, P.ATK + 3, 성유세례 데미지 10% 증가를",	//인퀴지터 스톤(걸칠것)
+			1001739, 313326, "철호 포효 1레벨 당, ATK + 4, 원거리 물리 데미지 1%씩 증가. 소환사 스톤(상단)과 함께 장착 시, 철호 허공할퀴기 데미지 15% 증가. 소환사 스톤(중단)과 함께 장착 시, 영물 이해 2레벨 당 모든 종족 몬스터에게 주는 물리 데미지 3%씩 증가(플레이어 제외). 소환사 스톤(하단)과 함께 장착 시, 호고공 난타 데미지 10% 증가를",	//혼령사 스톤(걸칠것)
+			1001787, 313359, "소울 발칸 스트라이크 1레벨 당 모든 속성 적에게 주는 마법 데미지 1%씩 증가. 워록 스톤(상단)과 함께 장착 시, 소울 발칸 스트라이크 데미지 10% 증가. 워록 스톤(중단)과 함께 장착 시, 미스터리 일루전 데미지 10% 증가. 워록 스톤(하단)과 함께 장착 시, 투핸드 스태프 마스터리 2레벨 당 모든 크기의 적에게 주는 마법 데미지 3%씩 증가를",	//아크메이지 스톤(걸칠것)
+			1001788, 313360, "가일 스톰 1레벨 당 원거리 물리 데미지 1%씩 증가. 레인저 스톤(상단)과 함께 장착 시, 윈드 사인 1레벨 당 모든 속성 적에게 주는 물리 데미지 3%씩 증가. 레인저 스톤(중단)과 함께 장착 시, 크레시브 볼트 데미지 15% 증가. 레인저 스톤(하단)과 함께 장착 시, P.ATK + 3, 가일 스톰 데미지 10% 증가를",	//윈드호크 스톤(걸칠것)
+			1001789, 313361, "사방오행진 1레벨 당, 모든 크기의 적에게 주는 마법 데미지 2%씩 증가. 소울리퍼 스톤(상단)과 함께 장착 시, 청룡부, 주작부 데미지 15% 증가. 소울리퍼 스톤(중단)과 함께 장착 시, 백호부, 현무부 데미지 10% 증가. 소울리퍼 스톤(하단)과 함께 장착 시, 사방신부 데미지 10% 증가를";	//영도사 스톤(걸칠것)
+	} else if (.@slot == 1) {
+		setarray .@data$[0],
+			1000520, 310654, "ASPD +1을",	// ASPD스톤(듀얼)
+			1000521, 310658, "고정 캐스팅 0.1초 감소. 마이너 캐스팅 감소(걸칠것)와 함께 장착 시, 고정 캐스팅 0.3초 추가 감소를",	// 마이너캐스팅 스톤(듀얼)
+			1000522, 310659, "변동 캐스팅 5% 감소. 변동 캐스팅 감소(걸칠것)와 함께 착용시, 고정 캐스팅 0.5초 감소를",	// 변동캐스팅 스톤(듀얼)
+			1000523, 310660, "원거리 물리 데미지 4% 증가. 레인지 스톤(상단)과 함께 착용 시, 원거리 물리 데미지 2% 추가 증가. 레인지 스톤(중단)과 함께 착용 시, 원거리 물리 데미지 2% 추가 증가. 레인지 스톤(하단)과 함께 착용 시, 원거리 물리 데미지 2% 추가 증가를",	// 레인지 스톤(듀얼)
+			1000524, 310661, "근접 물리 데미지 4% 증가. 밀리 스톤(상단)과 함께 착용 시, 근접 물리 데미지 2% 추가 증가. 밀리 스톤(중단)과 함께 착용 시, 근접 물리 데미지 2% 추가 증가. 밀리 스톤(하단)과 함께 착용 시, 근접 물리 데미지 2% 추가 증가를",	// 밀리 스톤(듀얼)
+			1000525, 310663, "1% 확률로 적에게 준 물리 데미지의 1% 를 자신의 SP로 흡수를",	// SP흡수스톤(듀얼)
+			1000526, 310662, "1% 확률로 적에게 준 물리 데미지의 1% 를 자신의 HP로 흡수를",	// HP흡수스톤(듀얼)
+			1000527, 310667, "모든 속성 마법 데미지 4% 증가. 마법력 스톤(상단)과 함께 착용 시, 모든 속성 마법 데미지 2% 추가 증가. 마법력 스톤(중단)과 함께 착용 시, 모든 속성 마법 데미지 2% 추가 증가. 마법력 스톤(하단)과 함께 착용 시, 모든 속성 마법 데미지 2% 추가 증가를",	// 마법력 스톤(듀얼)
+			1000675, 311014, "스킬 후 딜레이 5% 감소를",	// 리로드 스톤(듀얼)
+			1000676, 311015, "CRT + 5를",	// 크리에이티브 스톤(듀얼)
+			1000855, 311354, "크리티컬 데미지 + 10%, CRI + 10을",	// 크리티컬 스톤(듀얼)
+			1000856, 311355, "CON + 5를",	// 컨센트레이션 스톤(듀얼)
+			1000921, 311425, "SPL + 5를",	// 스펠 스톤(듀얼)
+			1001055, 311471, "POW + 5를",	// 파워 스톤(듀얼)
+			1001172, 311925, "STA + 5, WIS + 5를";	// 스태미너 위즈덤 스톤(듀얼)
+	}
+
+	.@equip_refine = getequiprefinerycnt(.@part);
+	setarray .@card[0], getequipcardid(.@part, 0), getequipcardid(.@part, 1), getequipcardid(.@part, 2), getequipcardid(.@part, 3);
+
+	mes "[레이스 라 자드]";
+	mes "의상 ^0000FF" + getitemname(.@equip_id) + "^000000!!! 제법 센스있으시네요?";
+	mes "좋아!! 꽤 마음에 들었으니 의욕이 막 샘솟는 걸요?";
+	next;
+
+	.@size = getarraysize(.@data$);
+	.@offset = 0;
+
+	for ( .@i = 0; .@i < .@size; .@i += 3 ) {
+		.@id = atoi(.@data$[.@i - (.@offset * 3)]);
+		if(countitem(.@id) < 1) {
+			deletearray .@data$[.@i - (.@offset * 3)],3;
+			.@offset += 1;
+		} else {
+			.@stone_menu$ += sprintf( "%s(%d개 보유):", getitemname(.@id), countitem(.@id) );
+		}
+	}
+	.@s = (select("그만 둔다.:"+.@stone_menu$) - 2) * 3;
+	if (.@s == -3) {
+		mes "[레이스 라 자드]";
+		mes "네. 좀 더 둘러보시겠어요?";
+		close;
+	}
+	.@id = atoi(.@data$[.@s]);
+	.@enchant = atoi(.@data$[.@s+1]);
+	if (getequipid(.@part) < 0 || countitem(.@id) < 1) {
+		mes "[레이스 라 자드]";
+		mes "흠? 재료가 부족하네요.";
+		mes "스타일링을 위해선 의상 아이템과 의상스톤 모두가 필요하답니다.";
+		close;
+	}
+	mes "^FF0000   ※ 주의사항 ※^000000";
+	mes "^ff0000해당 작업은 실패할 확률이 있습니다.^000000";
+	mes "^ff0000또 걸칠것에 이미 능력치가 있는 경우, 슬롯을 초기화 하고 " + .@data$[.@s+2] + " 부여합니다.^000000";
+	mes "^FF0000인챈트할 장비와 능력치가 확실합니까?^000000";
+	next;
+	if (select( "아니오.", "네." ) == 1) {
+		mes "[레이스 라 자드]";
+		mes "네. 좀 더 둘러보시겠어요?";
+		close;
+	}
+
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+		close;
+
+	delitem .@id, 1;
+	delequip .@part;
+	if (rand(100) < 50) {
+		mes "[레이스 라 자드]";
+		mes "아름다워!!";
+		mes "이런 작품이 내 손에서 나왔다니!!!!";
+		specialeffect2 581;
+		.@card[.@slot] = .@enchant;
+	}
+	else {
+		mes "[레이스 라 자드]";
+		mes "이건 아냐!";
+		mes "와장창!!!!! 이런 실패작을 세상에 내놓을 수 없어!!!";
+		specialeffect2 576;
+		.@card[.@slot] = 0;
+	}
+	getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+	close;
+}
+
+mal_in01,16,117,5	marketshop	볼록렌즈	10080,611:40:99999
+
+//mal_in01,16,117,5	script	볼록렌즈#cos_ect	4_SCR_MT_ROBOTS,5,5,{//10080
+//	npctalk "돋보기 팝니다. 떨이요~";
+//	end;
+//}
+
+mal_in01,24,121,5	script	구르지오 구르마니#cos_e	4_SCR_MT_ROBOTS,{//10080
+	if (checkweight(1119,3) == 0) {
+		mes "[구르지오 구르마니]";
+		mes "짐이 너무 많으면 작업 하는데 방해가 되니까 짐을 좀 가볍게 하고 오시는게 좋아요.";
+		next;
+		mes "- 아이템을 너무 많이 들고 있는 것 같다.";
+		mes "인벤토리를 정리하고 다시 오자. -";
+		close;
+	}
+	mes "[구르지오 구르마니]";
+	mes "어서오세요! 패션스톤입니다!!";
+	next;
+	mes "[구르지오 구르마니]";
+	mes "의상 투구에 이펙트를 추가하는 서비스는 이쪽에서 받으실 수 있습니다.";
+	mes "^ff0000의상 투구와 이펙트 의상스톤만 있으면^000000 누구보다도 유니크한 이펙트 가질 수 있어요!";
+	next;
+	set .@s, select( "그만 둔다.", "이펙트를 추가한다.", "이펙트를 제거한다.(99,800Z)" );
+
+	switch(.@s) {
+		Case 1:
+			mes "[구르지오 구르마니]";
+			mes "엣! 그만 두시는 겁니까?";
+			close;
+		default:
+			set .@select, .@s - 2;
+	}
+
+	if(.@select == 0) {
+		setarray .@equip_name$[0], "상단", "중단", "하단";
+		setarray .@equip_slot[0], EQI_COSTUME_HEAD_TOP, EQI_COSTUME_HEAD_MID, EQI_COSTUME_HEAD_LOW;
+
+		for(.@i = 0; .@i < getarraysize(.@equip_slot); .@i++) {
+			if (getequipisequiped(.@equip_slot[.@i])) {
+				set .@menu$, .@menu$+""+.@equip_name$[.@i]+":";
+			} else {
+				set .@menu$, .@menu$+"^8C8C8C"+.@equip_name$[.@i]+"(비어있음)^000000:";
+			}
+		}
+		set .@i, select("그만 둔다:"+.@menu$);
+		switch(.@i) {
+		case 1:
+			mes "[구르지오 구르마니]";
+			mes "엣! 그만 두시는 겁니까?";
+			close;
+		default:
+			set .@equip_num, .@equip_slot[.@i-2];
+			if (!getequipisequiped(.@equip_num)) {
+				mes "[구르지오 구르마니]";
+				mes "이펙트를 넣고 싶은 의상 투구를 장착하고 오세요.";
+				mes "패션에 디자인도 중요하지만 핏도 놓쳐선 안된다구요!";
+				close;
+			}
+			break;
+		}
+		.@eq_top = getequipid(EQI_COSTUME_HEAD_TOP);
+		.@eq_mid = getequipid(EQI_COSTUME_HEAD_MID);
+		.@eq_low = getequipid(EQI_COSTUME_HEAD_LOW);
+
+		if (.@equip_num == EQI_COSTUME_HEAD_TOP) {
+			.@part = EQI_COSTUME_HEAD_TOP;
+			.@equip_id = .@eq_top;
+			.@slot = 0;
+			setarray .@stone_id$[0],
+				25058, 29041, "트윙클이펙트",
+				25206, 29142, "일렉트릭이펙트";
+		} else if (.@equip_num == EQI_COSTUME_HEAD_MID) {
+			.@part = EQI_COSTUME_HEAD_MID;
+			.@equip_id = .@eq_mid;
+			.@slot = 1;
+			setarray .@stone_id$[0],
+				25059, 29040, "고스트이펙트",
+				25136, 29142, "일렉트릭이펙트",
+				25138, 29144, "쉬링크이펙트",
+				25176, 29160, "블루오오라이펙트",
+				25177, 29162, "쉐도우이펙트",
+				25178, 29161, "핑크글로우이펙트",
+				25224, 29224, "화이트바디이펙트",
+				25225, 29226, "진홍의파동이펙트";
+		} else if (.@equip_num == EQI_COSTUME_HEAD_LOW) {
+			.@part = EQI_COSTUME_HEAD_LOW;
+			.@equip_id = .@eq_low;
+			.@slot = 2;
+			setarray .@stone_id$[0],
+				25137, 29143, "그린플로어이펙트",
+				25205, 29144, "쉬링크이펙트",
+				25226, 29225, "워터필드이펙트",
+				1000882, 29142, "일렉트릭이펙트";
+		}
+
+		switch(.@part) {
+			case EQI_COSTUME_HEAD_TOP:
+				switch(.@equip_id) {
+					//top
+					case 19532: //의상 빨간 토끼 머리띠
+					case 19557: //의상 아요타야 모자
+					case 19558: //의상 까마귀 모자
+					case 19559: //의상 아기 용 모자
+					case 19560: //의상 콰티 모자
+					case 19565: //의상 청나라 머리장식
+					case 19567: //의상 하타 블랙
+					case 19568: //의상 고대인의 뿔
+					case 19569: //의상 새싹 모자
+					case 19570: //의상 머큐리의 투구
+					case 19571: //의상 백무상 모자
+					case 19572: //의상 흑무상 모자
+					case 19579: //의상 빨간 날개 모자
+					//top & mid
+					case 19539: //의상 레긴레이브의 날개
+					case 19555: //의상 초승달의 투구
+					case 19561: //의상 투칸 모자
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			case EQI_COSTUME_HEAD_MID:
+				switch(.@equip_id) {
+					//mid
+					case 19742: //작은 금빛날개
+					//top & mid
+					case 19539: //의상 레긴레이브의 날개
+					case 19555: //의상 초승달의 투구
+					case 19561: //의상 투칸 모자
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			case EQI_COSTUME_HEAD_LOW:
+				switch(.@equip_id) {
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			default:
+				mes "알 수 없는 에러 발생.";
+				close;
+		}
+
+		.@location = getiteminfo(.@equip_id, ITEMINFO_LOCATIONS);
+		.@equip_refine = getequiprefinerycnt(.@part);
+		setarray .@card[0], getequipcardid(.@part, 0), getequipcardid(.@part, 1), getequipcardid(.@part, 2), getequipcardid(.@part, 3);
+		
+		mes "[구르지오 구르마니]";
+		mes "^0000FF" + getitemname(.@equip_id) + "^000000! 이펙트를 추가하기 좋은 투구로군요!";
+		mes "그럼 작업할 스톤을 골라보시겠어요?";
+		next;
+
+		.@size = getarraysize(.@stone_id$);
+		.@offset = 0;
+
+		for ( .@i = 0; .@i < .@size; .@i += 3 ) {
+			.@id = atoi(.@stone_id$[.@i - (.@offset * 3)]);
+			if(countitem(.@id) < 1) {
+				deletearray .@stone_id$[.@i - (.@offset * 3)],3;
+				.@offset += 1;
+			} else {
+				.@stone_menu$ += sprintf( "%s(%d개 보유):", .@stone_id$[.@i + 2 - (.@offset * 3)], countitem(.@id) );
+			}	
+		}
+		.@s = (select("그만 둔다.:"+.@stone_menu$) - 2) * 3;
+
+		if (.@s == -3) {
+			mes "[구르지오 구르마니]";
+			mes "엣! 그만 두시는 겁니까?";
+			close;
+		}
+
+		.@stone = atoi(.@stone_id$[.@s]);
+		.@enchant = atoi(.@stone_id$[.@s+1]);
+
+		if (getequipid(.@part) < 0 || countitem(.@stone) < 1) {
+			mes "[구르지오 구르마니]";
+			mes "흠? 재료가 부족하네요.";
+			mes "스타일링을 위해선 의상 아이템과 의상스톤 모두가 필요하답니다.";
+			close;
+		}
+		mes "^FF0000   ※ 주의사항 ※^000000";
+		mes "^ff0000이펙트는 부위에 상관 없이 하나의 장비에 한가지만 적용 됩니다.^000000";
+		mes "^ff0000" + .@equip_name$[.@slot] + " 장비에 " + .@stone_id$[.@s+2] + "를 부여합니다.^000000";
+		mes "^FF0000인챈트할 장비와 능력치가 확실합니까?^000000";
+		next;
+		if (select( "아니오.", "네." ) == 1) {
+			mes "[구르지오 구르마니]";
+			mes "엣! 그만 두시는 겁니까?";
+			close;
+		}
+		delitem .@stone, 1;
+
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+			close;
+
+		delequip .@part;
+
+		mes "[구르지오 구르마니]";
+		mes "아앗!!!! 눈부셔!!!!!!!!";
+		mes "아...아름다워요!!!!";
+		specialeffect2 581;
+		.@card[3] = .@enchant;
+
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+		close;
+	} else if(.@select == 1) {
+		mes "[구르지오 구르마니]";
+		mes "삐이이이이---------익!";
+		mes "납득할 수 없는 명령이 입력 되엇습니다.";
+		next;
+		mes "[구르지오 구르마니]";
+		mes "이런 완벽한 이펙트를 제거하는 것은 저의 작업 규칙에 어긋나는 행동입니다.";
+		next;
+		if(select("그만둔다.","제거한다.") == 1) {
+			mes "[구르지오 구르마니]";
+			mes "휴... 잘 생각 하셨어요.";
+			close;
+		}
+		mes "[구르지오 구르마니]";
+		mes "그렇게까지 말씀하신다면 어쩔 수 없지요.";
+		mes "제 작품이 누군가에게는 ERROR였던 거군요.";
+		next;
+		setarray .@equip_name$[0], "상단", "중단", "하단";
+		setarray .@equip_slot[0], EQI_COSTUME_HEAD_TOP, EQI_COSTUME_HEAD_MID, EQI_COSTUME_HEAD_LOW;
+
+		for(.@i = 0; .@i < getarraysize(.@equip_slot); .@i++) {
+			if (getequipisequiped(.@equip_slot[.@i])) {
+				set .@menu$, .@menu$+""+.@equip_name$[.@i]+":";
+			} else {
+				set .@menu$, .@menu$+"^8C8C8C"+.@equip_name$[.@i]+"(비어있음)^000000:";
+			}
+		}
+		set .@i, select("그만 둔다:"+.@menu$);
+		switch(.@i) {
+		case 1:
+			mes "[구르지오 구르마니]";
+			mes "엣! 그만 두시는 겁니까?";
+			close;
+		default:
+			set .@equip_num, .@equip_slot[.@i-2];
+			if (!getequipisequiped(.@equip_num)) {
+				mes "[구르지오 구르마니]";
+				mes "이펙트를 넣고 싶은 의상 투구를 장착하고 오세요.";
+				mes "패션에 디자인도 중요하지만 핏도 놓쳐선 안된다구요!";
+				close;
+			}
+			break;
+		}
+		.@eq_top = getequipid(EQI_COSTUME_HEAD_TOP);
+		.@eq_mid = getequipid(EQI_COSTUME_HEAD_MID);
+		.@eq_low = getequipid(EQI_COSTUME_HEAD_LOW);
+
+		if (.@equip_num == EQI_COSTUME_HEAD_TOP) {
+			.@part = EQI_COSTUME_HEAD_TOP;
+			.@equip_id = .@eq_top;
+		} else if (.@equip_num == EQI_COSTUME_HEAD_MID) {
+			.@part = EQI_COSTUME_HEAD_MID;
+			.@equip_id = .@eq_mid;
+		} else if (.@equip_num == EQI_COSTUME_HEAD_LOW) {
+			.@part = EQI_COSTUME_HEAD_LOW;
+			.@equip_id = .@eq_low;
+		}
+
+		switch(.@part) {
+			case EQI_COSTUME_HEAD_TOP:
+				switch(.@equip_id) {
+					//top
+					case 19532: //의상 빨간 토끼 머리띠
+					case 19557: //의상 아요타야 모자
+					case 19558: //의상 까마귀 모자
+					case 19559: //의상 아기 용 모자
+					case 19560: //의상 콰티 모자
+					case 19565: //의상 청나라 머리장식
+					case 19567: //의상 하타 블랙
+					case 19568: //의상 고대인의 뿔
+					case 19569: //의상 새싹 모자
+					case 19570: //의상 머큐리의 투구
+					case 19571: //의상 백무상 모자
+					case 19572: //의상 흑무상 모자
+					case 19579: //의상 빨간 날개 모자
+					//top & mid
+					case 19539: //의상 레긴레이브의 날개
+					case 19555: //의상 초승달의 투구
+					case 19561: //의상 투칸 모자
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			case EQI_COSTUME_HEAD_MID:
+				switch(.@equip_id) {
+					//mid
+					case 19742: //작은 금빛날개
+					//top & mid
+					case 19539: //의상 레긴레이브의 날개
+					case 19555: //의상 초승달의 투구
+					case 19561: //의상 투칸 모자
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			case EQI_COSTUME_HEAD_LOW:
+				switch(.@equip_id) {
+					//top & mid & low
+					case 19556: //의상 가부키 가면
+					case 19562: //의상 재규어 모자
+					mes "[구르지오 구르마니]";
+					mes "삐빗--------";
+					mes "ERROR 등록되지 않은 아이템 입니다.";
+					close;
+				}
+				break;
+
+			default:
+				mes "알 수 없는 에러 발생.";
+				close;
+		}
+
+		if (!getequipcardid(.@part, 3)) {
+			mes "[구르지오 구르마니]";
+			mes "삐빗--------";
+			mes "ERROR 이펙트 스톤이 장착되지 않은 아이템 입니다.";
+			close;
+		}
+
+		mes "[구르지오 구르마니]";
+		mes "";
+		mes "^FF0000   ※ 주의사항 ※^000000";
+		mes "^ff0000해당 작업은 의상 투구에 인챈트 된 이펙트를 제거합니다.^000000";
+		mes "";
+		mes " ^ff000099,800제니가 소모되며 이펙트 및 이펙트 스톤, 제니를 다시 복구할 수 없으니 주의하시기 바랍니다.^000000";
+		next;
+		if(select("아니오.", "네.") == 1) {
+			mes "[구르지오 구르마니]";
+			mes "휴... 잘 생각 하셨어요.";
+			close;
+		}
+		if(Zeny < 99800) {
+			mes "[구르지오 구르마니]";
+			mes "삐빗--------";
+			mes "ERROR 재료가 부족 합니다.";
+			close;
+		}
+
+		.@location = getiteminfo(.@equip_id, ITEMINFO_LOCATIONS);
+		.@equip_refine = getequiprefinerycnt(.@part);
+		setarray .@card[0], getequipcardid(.@part, 0), getequipcardid(.@part, 1), getequipcardid(.@part, 2), getequipcardid(.@part, 3);
+		
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+			close;
+
+		delequip .@part;
+
+		mes "[구르지오 구르마니]";
+		mes "이펙트 초기화가";
+		mes "완료 되었습니다....";
+		specialeffect2 576;
+
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],0;
+		close;
+	}
+}
+
+mal_in01,10,110,5	script	이브 패터#cos_ect	4_M_BIBI,{//704
+	if (checkweight(1119,3) == 0) {
+		mes "[이브 패터]";
+		mes "가방에 뭘 그렇게 잔뜩 넣어 다니는 거예요.";
+		mes "무겁지도 않아요?";
+		next;
+		mes "아이템을 너무 많이 들고 있는 것 같다.";
+		mes "인벤토리를 정리하고 다시 오자.";
+		close;
+	}
+	mes "[이브 패터]";
+	mes "어서오세요! 패션스톤입니다!!";
+	mes "요즘 새로운 의상 모자를 만드는 일에 몰두 하고 있어요.";
+	next;
+	mes "[이브 패터]";
+	mes "가게에 제가 만든 모자들이 진열되어 있는 모습을 보면 가슴이 두근거린다니까요.";
+	next;
+	
+	.@eq_top = getequipid(EQI_HEAD_TOP);
+	.@eq_mid = getequipid(EQI_HEAD_MID);
+	.@eq_low = getequipid(EQI_HEAD_LOW);
+
+	if(.@eq_top > -1) {
+		.@equip_id = .@eq_top;
+		.@slot = EQI_HEAD_TOP;
+		setarray .@result_id$[0],
+			2206, 19790, "면사포를", "면사포",
+			2207, 20205, "장식용꽃을", "장식용꽃으",
+			2210, 20073, "머리띠를", "머리띠",
+			2211, 20203, "두건을", "두건으",
+			2213, 19843, "고양이머리띠를", "고양이머리띠",
+			2215, 19633, "꽃머리띠를", "꽃머리띠",
+			2216, 20074, "비레타를", "비레타",
+			2217, 20074, "비레타를", "비레타",
+			2220, 19632, "햇을", "햇으",
+			2221, 19632, "햇을", "햇으",
+			2222, 19844, "둥근모자를", "둥근모자",
+			2223, 19844, "둥근모자를", "둥근모자",
+			2224, 19578, "고글을", "고글으",
+			2225, 19578, "고글을", "고글으",
+			2232, 20158, "서클릿을", "서클릿으",
+			2233, 20158, "서클릿을", "서클릿으",
+			2234, 19629, "티아라를", "티아라",
+			2235, 19630, "크라운을", "크라운으",
+			2244, 19847, "왕리본을", "왕리본으",
+			2245, 19789, "스위트젠틀을", "스위트젠틀으",
+			2248, 20180, "웨스턴그레이스를", "웨스턴그레이스",
+			2249, 19719, "코로넷을", "코로넷으",
+			2250, 19833, "머리끈을", "머리끈으",
+			2252, 20093, "위저드햇을", "위저드햇으",
+			2253, 20271, "장식용해바라기를", "장식용해바라기",
+			2255, 19731, "악마의머리띠를", "악마의머리띠",
+			2257, 20272, "새하얀뿔을", "새하얀뿔으",
+			2258, 19527, "샤프헤드기어를", "샤프헤드기어",
+			2259, 19635, "프로펠라를", "프로펠라",
+			2261, 20161, "프론테라군모를", "프론테라군모",
+			2264, 19849, "무낙모자를", "무낙모자",
+			2277, 19637, "간호모를", "간호모",
+			2279, 20137, "심지를", "심지",
+			2280, 19639, "삿갓을", "삿갓으",
+			2283, 19941, "귀마개를", "귀마개",
+			2284, 19939, "사슴뿔을", "사슴뿔으",
+			2285, 19797, "명사수의사과를", "명사수의사과",
+			2289, 19913, "거시기를", "거시기",
+			2290, 20114, "장례건을", "장례건으",
+			5003, 19865, "광대모자를", "광대모자",
+			5007, 19795, "로드서클릿을", "로드서클릿으",
+			5008, 20178, "풋사랑을", "풋사랑으",
+			5011, 20120, "안테나를", "안테나",
+			5012, 20050, "학사모를", "학사모",
+			5015, 20090, "장식용알껍질을", "장식용알껍질으",
+			5017, 19796, "본헬름을", "본헬름으",
+			5018, 20057, "깃털모자를", "깃털모자",
+			5019, 19737, "커세어를", "커세어",
+			5024, 20118, "케이크모자를", "케이크모자",
+			5025, 20472, "천사의투구를", "천사의투구",
+			5030, 19733, "팬더곰모자를", "팬더곰모자",
+			5032, 20348, "나들이모자를", "나들이모자",
+			5033, 20304, "너구리모자를", "너구리모자",
+			5039, 20182, "알록달록한알껍질을", "알록달록한알껍질으",
+			5041, 19861, "하트머리핀을", "하트머리핀으",
+			5042, 19845, "머리포자기를", "머리포자기",
+			5046, 19850, "본건모자를", "본건모자",
+			5049, 20207, "줄무늬머리띠를", "줄무늬머리띠",
+			5052, 20159, "청색머리띠를", "청색머리띠",
+			5053, 19580, "스핑크스모자를", "스핑크스모자",
+			5058, 19782, "늘어진고양이를", "늘어진고양이",
+			5059, 19851, "곰돌이모자를", "곰돌이모자",
+			5061, 19983, "꽃머리핀을", "꽃머리핀으",
+			5062, 19829, "밀짚모자를", "밀짚모자",
+			5063, 20049, "반창고를", "반창고",
+			5064, 19858, "변신나뭇잎을", "변신나뭇잎으",
+			5065, 20157, "푸른생선을", "푸른생선으",
+			5066, 19862, "서큐버스의뿔을", "서큐버스의뿔으",
+			5069, 19618, "여우가면을", "여우가면으",
+			5072, 19863, "인큐버스의뿔을", "인큐버스의뿔으",
+			5073, 19932, "자세교정모자를", "자세교정모자",
+			5075, 31140, "카우보이모자를", "검은색카우보이모자",
+			5076, 20119, "털모자를", "털모자",
+			5078, 20138, "해달모자를", "해달모자",
+			5081, 19786, "미스트레스의왕관을", "미스트레스의왕관으",
+			5083, 20224, "빨간테일의리본을", "빨간테일의리본으",
+			5084, 19931, "귀찮은너구리를", "귀찮은너구리",
+			5091, 20004, "커다란금방울을", "커다란금방울으",
+			5099, 31171, "네코미미를", "네코미미",
+			5100, 20092, "세일표지판을", "세일표지판으",
+			5108, 19738, "명탐정의모자를", "명탐정의모자",
+			5111, 19852, "갈라파고의모자를", "갈라파고의모자",
+			5114, 19828, "벙거지모자를", "벙거지모자",
+			5115, 19984, "패션방한모자를", "패션방한모자",
+			5117, 20181, "미스틱로즈를", "미스틱로즈",
+			5118, 19617, "강아지머리띠를", "강아지귀",
+			5120, 19828, "벙거지모자를", "벙거지모자",
+			5121, 20244, "지르타스의가면을", "지르타스의가면으",
+			5122, 20186, "메긴캡을", "메긴캡으",
+			5127, 19784, "모리아네의헬름을", "모리아네의헬름으",
+			5132, 19848, "엔젤링모자를", "엔젤링모자",
+			5137, 19716, "엘리스인형을", "엘리스인형으",
+			5141, 20017, "마리오네트인형을", "마리오네트인형으",
+			5161, 19527, "샤프헤드기어를", "샤프헤드기어",
+			5164, 19629, "티아라를", "티아라",
+			5165, 19630, "크라운을", "크라운으",
+			5166, 19580, "스핑크스모자를", "스핑크스모자",
+			5167, 19849, "무낙모자를", "무낙모자",
+			5168, 19850, "본건모자를", "본건모자",
+			5169, 31128, "각시탈을", "각시탈으",
+			5170, 19585, "깃털베레모를", "깃털베레모",
+			5173, 31036, "사또모자를", "사또모자",
+			5174, 20388, "아얌을", "아얌으",
+			5187, 19590, "트윈리본을", "트윈리본으",
+			5198, 19878, "늘어진토끼를", "늘어진토끼",
+			5210, 19859, "비상하는천사를", "비상하는천사",
+			5225, 19653, "성스러운마칭햇을", "성스러운마칭햇으",
+			5258, 19864, "아프로가발을", "아프로가발으",
+			5266, 19625, "토끼머리띠를", "토끼머리띠",
+			5297, 19677, "소울리스윙을", "소울리스윙으",
+			5302, 20121, "연꽃모자를", "연꽃모자",
+			5304, 19746, "맹목의후드를", "맹혹의후드",
+			5313, 19748, "다이아뎀을", "다이아뎀으",
+			5334, 31090, "날고싶은엔젤링을", "날고싶은엔젤링으",
+			5347, 20050, "학사모를", "학사모",
+			5348, 19847, "왕리본을", "왕리본으",
+			5351, 20271, "장식용해바라기를", "장식용해바라기",
+			5365, 20160, "백련옥모자를", "백련옥모자",
+			5367, 19821, "혜군모자를", "혜군모자",
+			5372, 31204, "늘어진하얀고양이를", "늘어진하얀고양이",
+			5375, 31205, "대형오크히어로의투구를", "대형오크히어로의투구",
+			5379, 20277, "벌룬햇을", "벌룬햇으",
+			5380, 20105, "물고기머리모자를", "물고기머리모자",
+			5381, 19682, "산타포링모자를", "산타포링모자",
+			5382, 19678, "방울리본을", "방울리본으",
+			5383, 20204, "헌팅캡을", "헌탱캡으",
+			5384, 19702, "양갈래산타모자를", "양갈래산타모자",
+			5409, 19809, "보라색카우보이모자를", "보라색카우보이모자",
+			5438, 20094, "녹색머리끈을", "녹색머리끈으",
+			5439, 20095, "빨간머리끈을", "빨간머리끈을",
+			5440, 20096, "파란머리끈을", "파란머리끈을",
+			5441, 20097, "하얀머리끈을", "하얀머리끈을",
+			5442, 20208, "넥타이를", "넥타이",
+			5444, 20226, "머리빗을", "머리빗으",
+			5449, 19951, "혼자놀기상자를", "혼자놀기상자",
+			5458, 19803, "바람개비모자를", "바람개비모자",
+			5469, 20148, "RG노블햇을", "노블햇으",
+			5488, 19702, "양갈래산타모자를", "양갈래산타모자",
+			5495, 31170, "바람의날개를", "바람의날개",
+			5535, 31182, "사이드캡을", "사이드캡으",
+			5585, 31206, "룬매듭머리띠를", "룬매듭머리띠",
+			5654, 19745, "빨간마칭햇을", "빨간마칭햇으",
+			5748, 20392, "스나이퍼고글을", "스나이퍼고글으",
+			5781, 19779, "페르시카를", "페르시카", 
+			5816, 19809, "보라색카우보이모자를", "보라색카우보이모자",
+			18730, 19860, "크리투라학원모자를", "크리투라학원모자",
+			18755, 19585, "깃털베레모를", "깃털베레모",
+			19115, 20455, "공화국의모자를", "공화국의모자",
+			19127, 20244, "지르타스의가면을", "지르타스의가면으",
+			19135, 18743, "청이의영혼을", "청이의영혼으",
+			19136, 18743, "청이의영혼을", "청이의영혼으";
+	} else if(.@eq_mid > -1) {
+		.@equip_id = .@eq_mid;
+		.@slot = EQI_HEAD_MID;
+		setarray .@result_id$[0],
+			2201, 19830, "선글래스를", "선글래스",
+			2202, 19830, "선글래스를", "선글래스",
+			2203, 19888, "글래스를", "글래스",
+			2204, 19888, "글래스를", "글래스",
+			2239, 19887, "외눈안경을", "외눈안경으",
+			2260, 20125, "미니글래스를", "미니글래스",
+			2278, 19638, "스마일을", "스마일으",
+			2296, 19734, "망원경을", "망원경으",
+			2242, 19886, "고급선글래스를", "고급선글래스", 
+			2295, 19885, "눈가리개를", "눈가리개",
+			5005, 19736, "가스마스크를", "가스마스크",
+			5006, 20142, "하트파운데이션을", "하트파운데이션으",
+			5014, 19735, "아가미의헬름을", "아가미의헬름으",
+			5043, 19846, "오페라유령가면을", "오페라유령가면으",
+			5068, 19621, "악마의날개귀를", "악마의날개귀", 
+			5074, 19781, "천사의날개귀를", "천사의날개귀",
+			5085, 19889, "두개의작은리본을", "두개의작은리본으",
+			5086, 19791, "알람가면을", "알람가면으",
+			5087, 19792, "무표정가면을", "무표정가면으",
+			5088, 19793, "놀란눈가면을", "놀란눈가면으",
+			5089, 19794, "귀찮은가면을", "귀찮은가면으",
+			5090, 19732, "고블린리더의가면을", "고블린리더의가면으",
+			5102, 19624, "동그란눈동자를", "동그란눈동자",
+			5755, 20391, "침묵의집행자를", "침묵의집행자",
+			18518, 19781, "천사의날개귀를", "천사의날개귀",
+			18519, 19621, "악마의날개귀를", "악마의날개귀", 
+			18608, 19889, "두개의작은리본을", "두개의작은리본으",
+			18874, 19887, "외눈안경을", "외눈안경으",
+			19088, 19734, "망원경을", "망원경으",
+			19089, 19885, "눈가리개를", "눈가리개",
+			19090, 19791, "알람가면을", "알람가면으",
+			19091, 19846, "오페라유령가면을", "오페라유령가면으",
+			19092, 20142, "하트파운데이션을", "하트파운데이션으",
+			19094, 19638, "스마일을", "스마일으",
+			19117, 20295, "포링선글래스를", "포링선글래스",
+			19118, 20295, "포링선글래스를", "포링선글래스";
+	} else if(.@eq_low > -1) {
+		.@equip_id = .@eq_low;
+		.@slot = EQI_HEAD_LOW;
+		setarray .@result_id$[0],
+			2218, 19634, "마스크를", "마스크",
+			2219, 19634, "마스크를", "마스크",
+			2241, 19783, "흰수염을", "흰수염으",
+			2262, 19636, "광대코를", "광대코",
+			2267, 19902, "담배를", "담배",
+			2268, 20091, "파이프담배를", "파이프담배",
+			2270, 20223, "풀잎을", "풀잎으",
+			5107, 19785, "잘구운토스트를", "잘구운토스트",
+			5110, 20054, "아기젖꼭지를", "젖꼭지",
+			5113, 19798, "분노한입을", "분노한입으",
+			5305, 19584, "해적의대거를", "해적의대거",
+			5361, 19605, "갱스카프를", "갱스카프",
+			5362, 19606, "닌자의두루마리를", "닌자의두루마리",
+			18936, 20328, "입에문황금물고기를", "입에문황금물고기",
+			19095, 20344, "해피벌룬을", "해피벌룬으";
+	}
+	
+	.@size = getarraysize(.@result_id$);
+	.@set = 0;
+
+	for ( .@i = 0; .@i < .@size; .@i += 4 ) {
+		.@id = atoi(.@result_id$[.@i]);
+		if(.@id == .@equip_id) {
+			break;
+		}
+		.@set += 4;
+	}
+
+	.@cor = atoi(.@result_id$[.@set]);
+	.@result = atoi(.@result_id$[.@set + 1]);
+	.@name$ = .@result_id$[.@set + 2];
+	.@r_name$ = .@result_id$[.@set + 3];
+
+	if(!.@equip_id) {
+		mes "[이브 패터]";
+		mes "혹시 관심이 있다면 당신이 가진 모자를 ^ff0000쓰고^000000 와보세요.";
+		mes "제가 견적을 봐드리죠!";
+		mes "목록이 너무 많아서 하나씩 살펴보기가 힘들거든요.";
+		close;
+	} else {
+		if(.@equip_id == .@cor) {
+			mes "[이브 패터]";
+			mes "흠....어디보자.....";
+			mes "" + .@name$ + " 의상 " + .@r_name$ + "로 바꿀 수 있어요.";
+			next;
+			mes "[이브 패터]";
+			mes "그럼 " + .@name$ + " 의상 " + .@r_name$ + "로 교환 하시겠어요?";
+			mes "교환에는 ^ff0000의상교환쿠폰^000000 한 장이 필요하답니다.";
+			next;
+		} else {
+			mes "[이브 패터]";
+			mes "어멋! 세상에!!!!";
+			mes "그 모자는 아직 재료가 없어요!";
+			close;
+		}
+	}
+	if(select("교환 한다.", "그만 둔다.") == 2) {
+		mes "[이브 패터]";
+		mes "흐음...";
+		mes "좀 더 고민해 보시겠어요?";
+		close;
+	}
+	if(countitem(6697) < 1) {
+		mes "[이브 패터]";
+		mes "어랏! 재료가 어디갔죠?";
+		mes "있었던 것 같은데 뿅하고 사라졌네요?";
+		close;
+	}
+	mes "[이브 패터]";
+	mes "짜쟌!!!";
+	mes "완성!!!!";
+	mes "자! 어서 써보세요!!!";
+	mes "어서!!!";
+	delequip(.@slot);
+	delitem 6697, 1;
+	getitem .@result, 1;
+	close;
+
+}
+
+mal_in01,16,113,7	script	리브리#cos_ect	4_MASK_SMOKEY,{//543
+	//--------------------------------------
+	//Custom--------------------------------
+	if(achieve_costumebox > 0) {
+		if(BaseLevel >= 230 && achieve_costumebox > 2) {
+			if(Header_Lib == 0) {
+				mes "[리브리]";
+				mes "오셨군요!!!";
+				mes "편지를 받으셨죠? 기다렸어요.";
+				mes "선물은 마음에 드셨나요? 너무 좋다구요?!";
+				mes "그렇다면 물론 더 제작해 드릴 수 있어요!!";
+				Header_Lib = 1;
+				next;
+			}
+		} else if(BaseLevel >= 200 && achieve_costumebox > 1) {
+			mes "[리브리]";
+			mes "멋진 모험가를 항상 응원하고 있답니다.";
+			mes "키다리 아저씨처럼요! 비록 저는 작지만요...";
+			close;
+		} else if(BaseLevel >= 185 && achieve_costumebox > 0) {
+			mes "[리브리]";
+			mes "경험을 쌓아가는 모험가군요!";
+			close;
+		}
+		if (checkweight(1119,3) == 0) {
+			mes "[리브리]";
+			mes "무겁네요!!!";
+			mes "새로운 출발엔 가방도 발걸음도 가볍게!!!!";
+			next;
+			mes "아이템을 너무 많이 들고 있는 것 같다.";
+			mes "인벤토리를 정리하고 다시 오자.";
+			close;
+		}
+		mes "[리브리]";
+		mes "최상의 품질을 위해서는 까다로운 재료가 필요한 법이랍니다.";
+		mes "이건 비밀이지만 궁극의 재료는 바로...!!";
+		next;
+		mes "[리브리]";
+		mes "쨔잔!!! 바로 <ITEM>[냥다래 열매]<INFO>6909</INFO></ITEM>!!!";
+		mes "이... 이것만 있으면 최고의 집중력을 끝까지 유지할 수...";
+		next;
+Qty1:
+		if(select(".....","저 갈래요.") == 1) {
+			mes "[리브리]";
+			mes "...왜 그런 눈으로 보는 거죠...?";
+			mes "약물 중독 아니라구요!!!!";
+			next;
+			goto Qty2;
+		}
+		mes "[리브리]";
+		mes "그럴 수 없어요!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "???";
+		next;
+		goto Qty1;
+Qty2:
+		if(select("그렇게 대단하다면 나도 한번...?","그만 둔다.") == 1) {
+			mes "[리브리]";
+			mes "그그그그건 안돼!!!!!!";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "...?!";
+			next;
+			mes "[리브리]";
+			mes ".....";
+			next;
+			goto Qty3;
+		}
+		mes "[리브리]";
+		mes "어디가세요..?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "...";
+		next;
+		goto Qty2;
+Qty3:
+		if(select("...선물 상자 제작 할게요") == 1) {
+			mes "[리브리]";
+			mes "바로 그거예요!!!";
+			mes "모험가님을 위해 최고의 의상을 제작해드릴게!";
+			mes "자 그럼 어떤 것으로 하겠어요?";
+			mes "다 골라봐요!!!";
+			next;
+		}
+Qty4:
+		.@i = select("보내줘요:목표달성 선물 상자:2020 부스터 목표 달성 선물 상자 1:2020 부스터 목표 달성 선물 상자 2:2021 부스터 목표 달성 선물 상자 1:2021 부스터 목표 달성 선물 상자 2");
+		switch(.@i) {
+			Case 1:
+				if(rand(4) == 0) {
+					.@message$ = "자꾸 어디가세요?!";
+				} else if(rand(4) == 1) {
+					.@message$ = "할게 있지 않아요?";
+				} else if(rand(4) == 2) {
+					.@message$ = "여기서 그냥 간다구요?";
+				} else if(rand(4) == 2) {
+					.@message$ = "이게 아니죠.";
+				}
+				mes "[리브리]";
+				mes .@message$;
+				next;
+				goto Qty4;
+			Default:
+				set .@n, .@i-2;
+			}
+		setarray .@itemid[0],1010000,1010001,1010002,1010003,1010004;
+		mes "^ff0000[경고]^000000";
+		mes "^ff0000냥다래열매 60개를 " + getitemname(.@itemid[.@n]) + " 아이템으로 교환합니다.^000000";
+		mes "^ff0000위의 교환된 아이템은 청약철회대상에 포함되지 않으며, 냥다래열매로의 재교환 역시 불가능합니다.^000000";
+		next;
+		if (select( "진행한다" ) == 1) {
+		}
+		if(countitem(6909) < 60) {
+			mes "- 냥다래열매가 부족합니다. -";
+			close;
+		} else {
+			mes "[리브리]";
+			mes "이얍!!!";
+			mes "자 받으세요~~♬";
+			mes "하아아아아 냥다래~";
+			getitem 7000,3;
+			getitem .@itemid[.@n],1;
+			delitem 6909,60;
+			close;
+		}
+	} else {
+		mes "흠냐...";
+		close;
+	}
+//Custom--------------------------------
+//--------------------------------------
+}
+
+malangdo,115,154,3	script	패션스톤#stone	4_BULLETIN_BOARD2,{ end; }

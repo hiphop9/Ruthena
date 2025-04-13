@@ -10,6 +10,7 @@
 #include <common/showmsg.hpp> // ShowInfo
 #include <common/strlib.hpp>
 #include <common/timer.hpp>  // DIFF_TICK
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"
@@ -572,8 +573,12 @@ void vending_reopen( map_session_data& sd )
 			// Immediate save
 			chrif_save(&sd, CSAVE_AUTOTRADE);
 
-			ShowInfo("Vending loaded for '" CL_WHITE "%s" CL_RESET "' with '" CL_WHITE "%d" CL_RESET "' items at " CL_WHITE "%s (%d,%d)" CL_RESET "\n",
-				sd.status.name, count, mapindex_id2name(sd.mapindex), sd.bl.x, sd.bl.y);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("'" CL_WHITE "%s" CL_RESET "'님이 가지고 있는 '" CL_WHITE "%d" CL_RESET "'개의 아이템을 " CL_WHITE "%s (%d,%d)" CL_RESET "맵에 판매상점으로 로드되었습니다.\n",
+					sd.status.name, count, mapindex_id2name(sd.mapindex), sd.bl.x, sd.bl.y);
+			else
+				ShowInfo("Vending loaded for '" CL_WHITE "%s" CL_RESET "' with '" CL_WHITE "%d" CL_RESET "' items at " CL_WHITE "%s (%d,%d)" CL_RESET "\n",
+					sd.status.name, count, mapindex_id2name(sd.mapindex), sd.bl.x, sd.bl.y);
 		}
 		aFree(data);
 	}
@@ -585,7 +590,10 @@ void vending_reopen( map_session_data& sd )
 	}
 
 	if (fail != 0) {
-		ShowError("vending_reopen: (Error:%d) Load failed for autotrader '" CL_WHITE "%s" CL_RESET "' (CID=%d/AID=%d)\n", fail, sd.status.name, sd.status.char_id, sd.status.account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("vending_reopen: (에러:%d) 자동거래자 '" CL_WHITE "%s" CL_RESET "' (케릭터ID=%d/계정ID=%d)에 대한 로드가 실패했습니다.\n", fail, sd.status.name, sd.status.char_id, sd.status.account_id);
+		else
+			ShowError("vending_reopen: (Error:%d) Load failed for autotrader '" CL_WHITE "%s" CL_RESET "' (CID=%d/AID=%d)\n", fail, sd.status.name, sd.status.char_id, sd.status.account_id);
 		map_quit(&sd);
 	}
 }
@@ -690,7 +698,10 @@ void do_init_vending_autotrade(void)
 			}
 			dbi_destroy(iter);
 
-			ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' vending autotraders with '" CL_WHITE "%d" CL_RESET "' items.\n", db_size(vending_autotrader_db), items);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("'" CL_WHITE "%d" CL_RESET "'개의 아이템과 함께 '" CL_WHITE "%d" CL_RESET "'개의 자동판매노점 로드를 완료했습니다.\n", db_size(vending_autotrader_db), items);
+			else
+				ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' vending autotraders with '" CL_WHITE "%d" CL_RESET "' items.\n", db_size(vending_autotrader_db), items);
 		}
 	}
 

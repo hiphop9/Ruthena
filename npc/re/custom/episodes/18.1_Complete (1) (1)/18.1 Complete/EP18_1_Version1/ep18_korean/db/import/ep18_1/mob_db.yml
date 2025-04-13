@@ -1,0 +1,1677 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2021 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Monster Database
+###########################################################################
+#
+# Monster Settings
+#
+###########################################################################
+# - Id                      Monster ID.
+#   AegisName               Server name to reference the monster in scripts and lookups, should use no spaces.
+#   Name                    Name in English.
+#   JapaneseName            Name in Japanese. (Default: 'Name' value)
+#   Level                   Level. (Default: 1)
+#   Hp                      Total HP. (Default: 1)
+#   Sp                      Total SP. (Default: 1)
+#   BaseExp                 Base experience gained. (Default: 0)
+#   JobExp                  Job experience gained. (Default: 0)
+#   MvpExp                  MVP experience gained. (Default: 0)
+#   Attack                  Minimum attack in pre-renewal and base attack in renewal. (Default: 0)
+#   Attack2                 Maximum attack in pre-renewal and base magic attack in renewal. (Default: 0)
+#   Defense                 Physical defense of the monster, reduces melee and ranged physical attack/skill damage. (Default: 0)
+#   MagicDefense            Magic defense of the monster, reduces magical skill damage. (Default: 0)
+#   Str                     Strength which affects attack. (Default: 1)
+#   Agi                     Agility which affects flee. (Default: 1)
+#   Vit                     Vitality which affects defense. (Default: 1)
+#   Int                     Intelligence which affects magic attack. (Default: 1)
+#   Dex                     Dexterity which affects hit rate. (Default: 1)
+#   Luk                     Luck which affects perfect dodge/lucky flee/lerfect flee/lucky dodge rate. (Default: 1)
+#   AttackRange             Attack range. (Default: 0)
+#   SkillRange              Skill cast range. (Default: 0)
+#   ChaseRange              Chase range. (Default: 0)
+#   Size                    Size. (Default: Small)
+#   Race                    Race. (Default: Formless)
+#   RaceGroups:             List of secondary groups the monster may be part of. (Optional)
+#     <group>: <value>      Group to toggle.
+#   Element                 Element. (Default: Neutral)
+#   ElementLevel            Level of element. (Default: 1)
+#   WalkSpeed               Walk speed. (Default: DEFAULT_WALK_SPEED)
+#   AttackDelay             Attack speed. (Default: 0)
+#   AttackMotion            Attack animation speed. (Default: 0)
+#   DamageMotion            Damage animation speed. (Default: 0)
+#   DamageTaken             Rate at which the monster will receive incoming damage. (Default: 100)
+#   Ai                      Aegis monster type AI behavior. (Default: 06)
+#   Class                   Aegis monster class. (Default: Normal)
+#   Modes:                  List of unique behavior not defined by AI, Class, or Attribute. (Optional)
+#     <mode>: <value>       Mode to toggle.
+#   MvpDrops:               List of possible MVP prize items. Max of MAX_MVP_DROP. (Optional)
+#     - Item                Item name.
+#       Rate                Drop rate of item. (Default: 1)
+#       RandomOptionGroup   Random Option Group applied to item on drop. (Default: None)
+#       Index               Index used for overwriting item. (Optional)
+#   Drops:                  List of possible normal item drops. Max of MAX_MOB_DROP. (Optional)
+#     - Item                Item name.
+#       Rate                Drop rate of item. (Default: 1)
+#       StealProtected      If the item is shielded from TF_STEAL. (Default: false)
+#       RandomOptionGroup   Random Option Group applied to item on drop. (Default: None)
+#       Index               Index used for overwriting item. (Optional)
+###########################################################################
+
+Header:
+  Type: MOB_DB
+  Version: 2
+
+Body:
+  - Id: 20355  # note: remove it if you already have it
+    AegisName: EP17_1_BELLARE1
+    Name: "하트 헌터 벨라레"
+
+  - Id: 20681
+    AegisName: G_EP17_2_HEART_HUNTER
+    Name: "하트헌터 척후병"
+
+  - Id: 20846  # copy of HIDDEN_MOB (similar behaviour) until we get more data
+    AegisName: MD_HIDDEN_GROUND01
+    Name: "타락의 역병"
+    Level: 170
+    Hp: 10000
+    Sp: 200
+    Attack2: 1000
+    Defense: 200
+    MagicDefense: 10
+    Str: 1
+    Agi: 1
+    Vit: 1
+    Int: 1
+    Dex: 1
+    Luk: 1
+    AttackRange: 4
+    SkillRange: 4 # cast NPC_GRADUAL_GRAVITY in range 4
+    ChaseRange: 4
+    Size: Small
+    Race: Demon
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 1000
+    AttackMotion: 1000
+    AttackDelay: 439
+    AttackMotion: 288
+    DamageMotion: 576
+    Ai: 10
+    Class: Battlefield
+    Modes:
+      Detector: true
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+
+  - Id: 20847
+    AegisName: MD_HIDDEN_GROUND02
+    Name: MD_HIDDEN_GROUND02
+  - Id: 21292
+    AegisName: EP18_ARMED_VILLAGER01
+    Name: EP18_ARMED_VILLAGER01
+  - Id: 21293
+    AegisName: EP18_ARMED_VILLAGER02
+    Name: EP18_ARMED_VILLAGER02
+  - Id: 21294
+    AegisName: EP18_ARMED_VILLAGER03
+    Name: EP18_ARMED_VILLAGER03
+
+  - Id: 21295
+    AegisName: EP18_ASH_TOAD
+    Name: "재두꺼비"
+    Level: 179
+    Hp: 1530687
+    BaseExp: 193277
+    JobExp: 93461
+    Attack: 3000
+    Attack2: 1000
+    Defense: 213
+    MagicDefense: 72
+    Str: 139
+    Agi: 131
+    Vit: 73
+    Int: 77
+    Dex: 165
+    Luk: 98
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1009
+    AttackMotion: 1008
+    DamageMotion: 936
+    Ai: 04
+    Drops:
+      - Item: Sticky_Webfoot
+        Rate: 5000
+      - Item: Spawn
+        Rate: 5000
+      - Item: EP18_Ash_Toad_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21296
+    AegisName: EP18_RAKEHAND
+    Name: "갈퀴손"
+    Level: 177
+    Hp: 1514469
+    BaseExp: 170464
+    JobExp: 80669
+    Attack: 3000
+    Attack2: 1000
+    Defense: 345
+    MagicDefense: 78
+    Str: 131
+    Agi: 101
+    Vit: 93
+    Int: 97
+    Dex: 145
+    Luk: 96
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 865
+    AttackMotion: 864
+    DamageMotion: 1512
+    Ai: 01
+    Drops:
+      - Item: Sticky_Mucus
+        Rate: 5000
+      - Item: EP18_Rakehand_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21297
+    AegisName: EP18_SPARK
+    Name: "불티"
+    Level: 181
+    Hp: 2313388
+    BaseExp: 215279
+    JobExp: 135488
+    Attack: 3000
+    Attack2: 1000
+    Defense: 256
+    MagicDefense: 82
+    Str: 169
+    Agi: 165
+    Vit: 86
+    Int: 83
+    Dex: 171
+    Luk: 77
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1594
+    AttackMotion: 1872
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Live_Coal
+        Rate: 5000
+      - Item: Burning_Heart
+        Rate: 5000
+      - Item: EP18_Spark_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21298
+    AegisName: EP18_HOT_MOLAR
+    Name: "뜨거운 어금니"
+    Level: 212
+    Hp: 4925041
+    BaseExp: 420196
+    JobExp: 208964
+    Attack: 3000
+    Attack2: 1000
+    Defense: 318
+    MagicDefense: 71
+    Str: 182
+    Agi: 157
+    Vit: 98
+    Int: 96
+    Dex: 163
+    Luk: 92
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 588
+    AttackMotion: 1152
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Claw_Of_Wolves
+        Rate: 5000
+      - Item: Cold_Magma
+        Rate: 5000
+      - Item: EP18_Hot_Molar_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21299
+    AegisName: EP18_VOLCARING
+    Name: "볼케링"
+    Level: 185
+    Hp: 2361429
+    BaseExp: 170191
+    JobExp: 101933
+    Attack: 3000
+    Attack2: 1000
+    Defense: 244
+    MagicDefense: 75
+    Str: 131
+    Agi: 117
+    Vit: 92
+    Int: 92
+    Dex: 133
+    Luk: 91
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 250
+    AttackDelay: 861
+    AttackMotion: 1584
+    DamageMotion: 602
+    Ai: 01
+    Drops:
+      - Item: Burning_Heart
+        Rate: 5000
+      - Item: EP18_Volcaring_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21300
+    AegisName: EP18_LAVA_TOAD
+    Name: "용암 두꺼비"
+    Level: 211
+    Hp: 4902338
+    BaseExp: 440391
+    JobExp: 222766
+    Attack: 3000
+    Attack2: 1000
+    Defense: 344
+    MagicDefense: 85
+    Str: 144
+    Agi: 123
+    Vit: 92
+    Int: 91
+    Dex: 163
+    Luk: 98
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 561
+    AttackMotion: 1008
+    DamageMotion: 552
+    Ai: 04
+    Drops:
+      - Item: Burning_Heart
+        Rate: 5000
+      - Item: EP18_Lava_Toad_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21301
+    AegisName: EP18_BURNING_FANG
+    Name: "불태우는 송곳니"
+    Level: 212
+    Hp: 68452211
+    BaseExp: 10706050
+    JobExp: 9794235
+    MvpExp: 10706050
+    Attack: 4524
+    Attack2: 6583
+    Defense: 741
+    MagicDefense: 391
+    Str: 239
+    Agi: 142
+    Vit: 251
+    Int: 228
+    Dex: 231
+    Luk: 86
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 14
+    Size: Large
+    Race: Brute
+    Element: Fire
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 859
+    AttackMotion: 840
+    DamageMotion: 336
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Shadowdecon_Ore
+        Rate: 1000
+      - Item: Zelunium_Ore
+        Rate: 1000
+      - Item: EP18_Burning_Fang_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21302
+    AegisName: EP18_ASHHOPPER
+    Name: "애쉬호퍼"
+    Level: 185
+    Hp: 2361429
+    BaseExp: 146982
+    JobExp: 102888
+    Attack: 3000
+    Attack2: 1000
+    Defense: 135
+    MagicDefense: 78
+    Str: 155
+    Agi: 138
+    Vit: 68
+    Int: 90
+    Dex: 127
+    Luk: 75
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 130
+    AttackDelay: 841
+    AttackMotion: 1080
+    DamageMotion: 360
+    Ai: 04
+    Drops:
+      - Item: Grasshopper's_Leg
+        Rate: 5000
+      - Item: EP18_Ashhopper_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21303
+    AegisName: EP18_ASHRING
+    Name: "애쉬링"
+    Level: 185
+    Hp: 2364513
+    BaseExp: 136982
+    JobExp: 92888
+    Attack: 3000
+    Attack2: 1000
+    Defense: 135
+    MagicDefense: 78
+    Str: 155
+    Agi: 138
+    Vit: 68
+    Int: 90
+    Dex: 127
+    Luk: 75
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 3149
+    AttackMotion: 1152
+    DamageMotion: 432
+    Ai: 01
+    Drops:
+      - Item: Sticky_Mucus
+        Rate: 5000
+      - Item: EP18_Ashring_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21304
+    AegisName: EP18_GREY_WOLF
+    Name: "회색늑대"
+    Level: 187
+    Hp: 2399581
+    BaseExp: 240947
+    JobExp: 108664
+    Attack: 3000
+    Attack2: 1000
+    Defense: 245
+    MagicDefense: 88
+    Str: 165
+    Agi: 137
+    Vit: 88
+    Int: 95
+    Dex: 147
+    Luk: 95
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 580
+    AttackMotion: 576
+    DamageMotion: 648
+    Ai: 04
+    Drops:
+      - Item: Claw_Of_Wolves
+        Rate: 5000
+      - Item: EP18_Grey_Wolf_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21305
+    AegisName: EP18_TUMBLE_RING
+    Name: "덤불링"
+    Level: 185
+    Hp: 2361738
+    BaseExp: 146982
+    JobExp: 102888
+    Attack: 3000
+    Attack2: 1000
+    Defense: 135
+    MagicDefense: 78
+    Str: 165
+    Agi: 132
+    Vit: 74
+    Int: 91
+    Dex: 131
+    Luk: 96
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 1072
+    AttackMotion: 1008
+    DamageMotion: 504
+    Ai: 01
+    Drops:
+      - Item: Root_Of_Maneater
+        Rate: 5000
+      - Item: Sticky_Mucus
+        Rate: 5000
+      - Item: Shoot
+        Rate: 5000
+      - Item: EP18_Tumble_Ring_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21306
+    AegisName: EP18_FIREWIND_KITE
+    Name: "불바람 솔개"
+    Level: 188
+    Hp: 2407556
+    BaseExp: 186982
+    JobExp: 132888
+    Attack: 3000
+    Attack2: 1000
+    Defense: 255
+    MagicDefense: 88
+    Str: 175
+    Agi: 152
+    Vit: 84
+    Int: 95
+    Dex: 161
+    Luk: 66
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 722
+    AttackMotion: 720
+    DamageMotion: 540
+    Ai: 04
+    Drops:
+      - Item: BurningFeather
+        Rate: 5000
+      - Item: EP18_Firewind_Kite_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21307
+    AegisName: EP18_PHANTOM_WOLF
+    Name: "유령늑대"
+    Level: 186
+    Hp: 2383494
+    BaseExp: 220244
+    JobExp: 100161
+    Attack: 3000
+    Attack2: 1000
+    Defense: 145
+    MagicDefense: 68
+    Str: 155
+    Agi: 132
+    Vit: 81
+    Int: 93
+    Dex: 141
+    Luk: 91
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 794
+    AttackMotion: 792
+    DamageMotion: 360
+    Ai: 04
+    Drops:
+      - Item: Transparent_Cloth
+        Rate: 5000
+      - Item: Steel
+        Rate: 5000
+      - Item: EP18_Phantom_Wolf_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21308
+    AegisName: EP18_MD_HEARTHUNTER_A
+    Name: "하트헌터"
+    Level: 178
+    Hp: 1522432
+    BaseExp: 5889
+    JobExp: 6000
+    Attack: 3000
+    Attack2: 1000
+    Defense: 172
+    MagicDefense: 98
+    Str: 108
+    Agi: 150
+    Vit: 90
+    Int: 66
+    Dex: 190
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 865
+    AttackMotion: 864
+    DamageMotion: 480
+    Ai: 04
+    
+  - Id: 21309
+    AegisName: EP18_MD_THOR_GUARD
+    Name: "기지 병사"
+    Level: 179
+    Hp: 1851144
+    BaseExp: 5889
+    JobExp: 6000
+    Attack: 3000
+    Attack2: 1000
+    Defense: 172
+    MagicDefense: 98
+    Str: 108
+    Agi: 150
+    Vit: 90
+    Int: 66
+    Dex: 190
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 650
+    AttackMotion: 648
+    DamageMotion: 480
+    Ai: 04
+
+  - Id: 21310
+    AegisName: EP18_MD_GUARD_A
+    Name: "신전가드"
+    Level: 179
+    Hp: 1831096
+    BaseExp: 242
+    JobExp: 227
+    Attack: 3000
+    Attack2: 1000
+    Defense: 80
+    MagicDefense: 90
+    Str: 108
+    Agi: 64
+    Vit: 57
+    Int: 62
+    Dex: 150
+    Luk: 42
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 650
+    AttackMotion: 648
+    DamageMotion: 480
+    Ai: 04
+    Modes:
+      NORANDOMWALK: true
+    
+  - Id: 21311
+    AegisName: EP18_MD_GUARD_B
+    Name: "변절한 신전가드"
+    Level: 182
+    Hp: 2325107
+    BaseExp: 242
+    JobExp: 227
+    Attack: 3000
+    Attack2: 1000
+    Defense: 80
+    MagicDefense: 90
+    Str: 108
+    Agi: 64
+    Vit: 57
+    Int: 62
+    Dex: 150
+    Luk: 42
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 1
+    WalkSpeed: 140
+    AttackDelay: 650
+    AttackMotion: 648
+    DamageMotion: 480
+    Ai: 04
+    Modes:
+      NORANDOMWALK: true
+
+  - Id: 21312
+    AegisName: EP18_MD_HEARTHUNTER_R
+    Name: "별장의 하트헌터"
+    Level: 184
+    Hp: 2356331
+    Attack: 3000
+    Attack2: 1000
+    Defense: 80
+    MagicDefense: 90
+    Str: 108
+    Agi: 64
+    Vit: 57
+    Int: 62
+    Dex: 150
+    Luk: 42
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 864
+    AttackMotion: 432
+    DamageMotion: 360
+    Ai: 04
+
+  - Id: 21313
+    AegisName: EP18_MD_HEARTHUNTER_F
+    Name: "공명체"
+    Level: 185
+    Hp: 2368675
+    Attack: 3000
+    Attack2: 1000
+    Defense: 80
+    MagicDefense: 90
+    Str: 108
+    Agi: 64
+    Vit: 57
+    Int: 62
+    Dex: 150
+    Luk: 42
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 589
+    AttackMotion: 288
+    DamageMotion: 360
+    Ai: 04
+
+  - Id: 21314
+    AegisName: EP18_MD_SCHULANG
+    Name: "변절자 슐랑"
+    Level: 185
+    Hp: 23439543
+    Attack: 3000
+    Attack2: 1000
+    Defense: 275
+    MagicDefense: 115
+    Str: 211
+    Agi: 338
+    Vit: 114
+    Int: 83
+    Dex: 338
+    Luk: 60
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 14
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 1441
+    AttackMotion: 1440
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: EP18_Schulang_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21315
+    AegisName: EP18_MD_DEMI_FREYJA
+    Name: "거짓된 신"
+    Level: 186
+    Hp: 25000000
+    Attack: 4000
+    Attack2: 2000
+    Defense: 455
+    MagicDefense: 112
+    Str: 211
+    Agi: 338
+    Vit: 114
+    Int: 83
+    Dex: 338
+    Luk: 60
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 14
+    Size: Large
+    Race: Angel
+    Element: Holy
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 1111
+    AttackMotion: 1104
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: EP18_Demi_Freyja_Card
+        Rate: 1
+        StealProtected: true
+
+  - Id: 21316
+    AegisName: EP18_MD_SCHULANG_R
+    Name: "슐랑"
+    Level: 185
+    Hp: 300000000
+    Attack: 7000
+    Attack2: 2000
+    Defense: 275
+    MagicDefense: 115
+    Str: 340
+    Agi: 200
+    Vit: 400
+    Int: 300
+    Dex: 400
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 738
+    AttackMotion: 1440
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Pontifex_Courage
+        Rate: 3000
+      - Item: Pontifex_Wisdom
+        Rate: 3000
+      - Item: EP18_Schulang_Card
+        Rate: 1
+        StealProtected: true
+      - Item: Adulter_F_T_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Cakram
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Katar
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lance
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_T_Staff
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rod
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Humma
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Humma
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ballista
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_A_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Revolver
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rifle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Shotgun
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Gatling
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Launcher
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lapier
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Dagger
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Axe
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Spear
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_M_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_P_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Bible
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Moon_B
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Star_B
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_S_Stick
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_D_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_model
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Knuckle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Claw
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Violin
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Harp
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Rope
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ribbon
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Mace
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Hall
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+
+  - Id: 21317
+    AegisName: EP18_MD_DEMI_FREYJA_R
+    Name: "일그러진 신"
+    Level: 185
+    Hp: 200000000
+    Attack: 7000
+    Attack2: 4000
+    Defense: 456
+    MagicDefense: 112
+    Str: 340
+    Agi: 200
+    Vit: 400
+    Int: 300
+    Dex: 400
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1112
+    AttackMotion: 1104
+    DamageMotion: 720
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Pontifex_Courage
+        Rate: 3000
+      - Item: Pontifex_Wisdom
+        Rate: 3000
+      - Item: EP18_Demi_Freyja_Card
+        Rate: 1
+        StealProtected: true
+      - Item: Adulter_F_T_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Cakram
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Katar
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lance
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_T_Staff
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rod
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Humma
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Humma
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ballista
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_A_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Revolver
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rifle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Shotgun
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Gatling
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Launcher
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lapier
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Dagger
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Axe
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Spear
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_M_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_P_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Bible
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Moon_B
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Star_B
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_S_Stick
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_D_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_model
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Knuckle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Claw
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Violin
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Harp
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Rope
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ribbon
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Mace
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Hall
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+    MvpDrops:
+      - Item: Yggdrasilberry
+        Rate: 2000
+
+  - Id: 21318
+    AegisName: EP18_MD_SANARE_R
+    Name: "여신의 수호자"
+    Level: 170
+    Hp: 5000000
+    Attack: 4524
+    Attack2: 6583
+    Defense: 503
+    MagicDefense: 122
+    Str: 239
+    Agi: 142
+    Vit: 251
+    Int: 228
+    Dex: 231
+    Luk: 86
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 626
+    AttackMotion: 1152
+    DamageMotion: 720
+    Ai: 19
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Pontifex_Courage
+        Rate: 100
+      - Item: Pontifex_Wisdom
+        Rate: 100
+
+  - Id: 21319
+    AegisName: EP18_MD_HEARTHUNTER_R2
+    Name: "별장지기"
+    Level: 170
+    Hp: 5000000
+    Attack: 4524
+    Attack2: 6583
+    Defense: 146
+    MagicDefense: 27
+    Str: 239
+    Agi: 142
+    Vit: 251
+    Int: 228
+    Dex: 231
+    Luk: 86
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 864
+    AttackMotion: 432
+    DamageMotion: 360
+    Ai: 19
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Pontifex_Courage
+        Rate: 100
+      - Item: Pontifex_Wisdom
+        Rate: 100
+
+  - Id: 21320
+    AegisName: EP18_NPC_MARAM
+    Name: EP18_NPC_MARAM
+  - Id: 21321
+    AegisName: EP18_NPC_MIRIAM
+    Name: EP18_NPC_MIRIAM
+  - Id: 21322
+    AegisName: EP18_NPC_SUAD
+    Name: EP18_NPC_SUAD
+
+  - Id: 21323
+    AegisName: EP18_GREY_GOAT
+    Name: "잿빛 고우트"
+    Level: 168
+    Hp: 962975
+    BaseExp: 99912
+    JobExp: 95662
+    Attack: 3000
+    Attack2: 1000
+    Defense: 213
+    MagicDefense: 88
+    Str: 134
+    Agi: 111
+    Vit: 78
+    Int: 81
+    Dex: 137
+    Luk: 61
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 2229
+    AttackMotion: 1080
+    DamageMotion: 336
+    Ai: 04
+    Drops:
+      - Item: Gaoat's_Skin
+        Rate: 3000
+      - Item: Goat's_Horn
+        Rate: 3000
+      - Item: Blue_Herb
+        Rate: 3000
+
+  - Id: 21324
+    AegisName: EP18_GREY_WOLF_BABY
+    Name: "새끼 회색 늑대"
+    Level: 165
+    Hp: 944679
+    BaseExp: 90947
+    JobExp: 88664
+    Attack: 3000
+    Attack2: 1000
+    Defense: 145
+    MagicDefense: 78
+    Str: 125
+    Agi: 117
+    Vit: 68
+    Int: 75
+    Dex: 117
+    Luk: 59
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1614
+    AttackMotion: 900
+    DamageMotion: 240
+    Ai: 04
+
+  - Id: 21360
+    AegisName: EP18_MD_SCHULANG_L
+    Name: "슐랑"
+    Level: 217
+    Hp: 300000000
+    Attack: 17000
+    Attack2: 8000
+    Defense: 217
+    MagicDefense: 70
+    Str: 340
+    Agi: 200
+    Vit: 400
+    Int: 300
+    Dex: 400
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 738
+    AttackMotion: 1440
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Pontifex_Tenacity
+        Rate: 3000
+      - Item: Pontifex_Belief
+        Rate: 3000
+      - Item: Purificatory_Holy_O
+        Rate: 3000
+      - Item: Sanctuary_Sudarium
+        Rate: 3000
+      - Item: Purificatory_Holy_W
+        Rate: 3000
+      - Item: Blue_Prints_Scroll
+        Rate: 3000
+      - Item: EP18_Schulang_Card
+        Rate: 1
+        StealProtected: true
+      - Item: Vivatus_F_T_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Cakram
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Katar
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lance
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_T_Staff
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Rod
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ballista
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_A_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lapier
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Dagger
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Axe
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Spear
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_M_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_P_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Bible
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Knuckle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Claw
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Violin
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Harp
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Rope
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ribbon
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Mace
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Hall
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+    MvpDrops:
+      - Item: Yggdrasilberry
+        Rate: 2000
+
+  - Id: 21361
+    AegisName: EP18_MD_DEMI_FREYJA_L
+    Name: "일그러진 신"
+    Level: 217
+    Hp: 200000000
+    Attack: 17000
+    Attack2: 10000
+    Defense: 456
+    MagicDefense: 112
+    Str: 340
+    Agi: 200
+    Vit: 400
+    Int: 300
+    Dex: 400
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1112
+    AttackMotion: 1104
+    DamageMotion: 720
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Pontifex_Tenacity
+        Rate: 3000
+      - Item: Pontifex_Belief
+        Rate: 3000
+      - Item: Purificatory_Holy_O
+        Rate: 3000
+      - Item: Sanctuary_Sudarium
+        Rate: 3000
+      - Item: Purificatory_Holy_W
+        Rate: 3000
+      - Item: Blue_Prints_Scroll
+        Rate: 3000
+      - Item: EP18_Demi_Freyja_Card
+        Rate: 1
+        StealProtected: true
+      - Item: Vivatus_F_T_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Cakram
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Katar
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lance
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_T_Staff
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Rod
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ballista
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_A_Bow
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Sword
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lapier
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Dagger
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Axe
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Spear
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_M_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_P_Book
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Bible
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Wand
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Knuckle
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Claw
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Violin
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Harp
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Rope
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ribbon
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Mace
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Hall
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+    MvpDrops:
+      - Item: Yggdrasilberry
+        Rate: 2000
+
+  - Id: 21377
+    AegisName: EP18_MD_SANARE_L
+    Name: "여신의 수호자"
+    Level: 210
+    Hp: 5000000
+    Attack: 17000
+    Attack2: 3000
+    Defense: 503
+    MagicDefense: 122
+    Str: 239
+    Agi: 142
+    Vit: 251
+    Int: 228
+    Dex: 231
+    Luk: 86
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 626
+    AttackMotion: 1152
+    DamageMotion: 720
+    Ai: 19
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Pontifex_Tenacity
+        Rate: 200
+      - Item: Pontifex_Belief
+        Rate: 200
+      - Item: Purificatory_Holy_O
+        Rate: 200
+      - Item: Sanctuary_Sudarium
+        Rate: 200
+      - Item: Purificatory_Holy_W
+        Rate: 200
+      - Item: Blue_Prints_Scroll
+        Rate: 200
+
+  - Id: 21378
+    AegisName: EP18_MD_HEARTHUNTER_L
+    Name: "별장지기"
+    Level: 210
+    Hp: 5000000
+    Attack: 17000
+    Attack2: 3000
+    Defense: 146
+    MagicDefense: 27
+    Str: 239
+    Agi: 142
+    Vit: 251
+    Int: 228
+    Dex: 231
+    Luk: 86
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 864
+    AttackMotion: 432
+    DamageMotion: 360
+    Ai: 19
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Pontifex_Tenacity
+        Rate: 200
+      - Item: Pontifex_Belief
+        Rate: 200
+      - Item: Purificatory_Holy_O
+        Rate: 200
+      - Item: Sanctuary_Sudarium
+        Rate: 200
+      - Item: Purificatory_Holy_W
+        Rate: 200
+      - Item: Blue_Prints_Scroll
+        Rate: 200

@@ -1,0 +1,189 @@
+// 서버에 다음 SQL 테이블을 로드하세요
+
+/*
+CREATE TABLE IF NOT EXISTS `E-Inquiry` (
+	`ID` bigint(20) unsigned NOT NULL auto_increment,
+	`Sender_ID` int(11) unsigned NOT NULL default '0',
+	`Sender_Name` varchar(30) NOT NULL default '',
+	`Title` text,
+	`Message` text,
+	`Status` tinyint(2) NOT NULL default '0',
+	`Inquiry_Time` datetime NOT NULL default '0000-00-00 00:00:00',
+	`Reply` text,
+	`Reply_Time` datetime NOT NULL default '0000-00-00 00:00:00',
+	`Reply_Name` varchar(30) NOT NULL default '',
+	PRIMARY KEY  (`ID`)
+) ENGINE=MyISAM;
+*/
+
+-	script	E-Inquiry	-1,{
+
+OnStartMenu:
+mes "문제가 있으신가요? GM 스태프에게 알리시겠습니까?";
+next;
+switch(select("메시지 보기", "메시지 작성", (getgmlevel() < .GMLevel)?"":"^FF0000[ GM ]^000000 메시지 관리","")) {
+	case 1:
+		do {
+			mes "어떤 종류의 메시지를 보시겠습니까?";
+			for(set .@i,0; .@i < 3; set .@i,.@i + 1)
+				set .@Found[.@i],query_sql("SELECT `ID` FROM `E-Inquiry` WHERE `Status` = " + .@i + " AND `Sender_ID`='"+getcharid(3)+"'", .@ID);
+
+			set .@Msg, select("^FF0000미응답 메시지^000000 [ ^FF0000" + .@Found[0] + "^000000 ]",
+							"^0000FF응답 메시지^000000 [ ^FF0000" + .@Found[1] + "^000000 ]",
+							"보관된 메시지 [ ^FF0000" + .@Found[2] + "^000000 ]","") - 1;							
+			set .@Replied, query_sql("SELECT `ID`, `Title`, `Message`, `Inquiry_Time`, `Reply`, `Reply_Time`, `Reply_Name` FROM `E-Inquiry` WHERE `Status`= " + .@Msg + " AND `Sender_ID`='"+getcharid(3)+"'", .@ID, .@Title$, .@Message$, .@Time$, .@Reply$, .@ReplyTime$, .@ReplyName$);
+			if (!.@Replied) {
+				mes "읽을 메시지가 없습니다.";
+				next;
+			} else {
+				set .@Menu$, "";
+				for(set .@i,0; .@i < .@Replied; set .@i,.@i + 1)
+					set .@Menu$, .@Menu$ + "^FF0000[ " + ( .@i + 1 ) + ". ]^0000FF " + .@Title$[.@i] + ":";
+				next;
+				set .@Select, select(.@Menu$) - 1;
+				mes "^FF0000날짜 :^000000 : " + .@Time$[.@Select];
+				mes "^FF0000제목^000000 : " + .@Title$[.@Select];
+				mes "^FF0000메시지^000000 : " + .@Message$[.@Select];
+				if(.@Msg > 0) {
+					mes "^0000FF답변자 ^FF0000" + .@ReplyName$[.@Select] + "^000000 : " + .@Reply$[.@Select];
+					mes "^0000FF답변 시간^000000 : " + .@ReplyTime$[.@Select];
+				}
+				next;
+				set .@MsgOpt1, select("다른 메시지 보기", (.@Msg == 1)?"보관함으로 이동":"", "메시지 삭제");
+				switch(.@MsgOpt1) {
+					case 2:
+						query_sql("UPDATE `E-Inquiry` SET `Status` = 2 WHERE `ID` = " + .@ID[.@Select] + " ");
+						mes "메시지가 보관함으로 이동되었습니다.";
+						break;
+					case 3:
+						query_sql("DELETE FROM `E-Inquiry` WHERE `ID` = " + .@ID[.@Select] + " ");
+						mes "메시지가 삭제되었습니다.";
+						break;
+					default:
+						break;
+				}
+			}
+		} while(.@MsgOpt1 < 3);
+	break;
+
+	case 2:
+		mes "^FF0000주의 :^000000 모든 메시지는 향후 참조를 위해 기록됩니다. 남용하지 마십시오. 그렇지 않으면 조치가 취해질 것입니다.";
+		do {
+			next;
+			mes "^FF0000제목^000000 : " + .@Title$;
+			mes "^FF0000메시지^000000 : " + .@Message$;
+
+			next;
+			set .@Select, select((.@Title$ == "")?"[ ^FF0000미완성^000000 ] 제목":"[ ^0000FF완성^000000 ] 제목",
+								( .@Message$ == "" )?"[ ^FF0000미완성^000000 ] 메시지":"[^0000FF완성^000000 ] 제목",
+								( .@Title$ == "" || .@Message$ == "" )?"":"^FF0000메시지 보내기^000000");
+
+			switch(.@Select) {
+				Case 1:
+					mes "문제의 제목을 입력하세요";
+					input .@Title$;
+					break;
+				Case 2:
+					mes "문제에 대해 간단히 설명하세요";
+					set .@i, 0;
+					do {
+						input getd(".@Message" + .@i + "$");
+						set .@Message$, .@Message$ + getd(".@Message" + .@i + "$") + " ";
+						set .@Continue, select("완료:메시지 계속");
+					} while(.@Continue == 2);
+					break;
+				default:
+					mes "메시지가 전송되었습니다.";
+					query_sql("INSERT INTO `E-Inquiry` ( `Sender_ID`, `Sender_Name`, `Title`, `Message`, `Status`, `Inquiry_Time` ) VALUES ( " + getcharid(3) + ",'"+escape_sql(strcharinfo(0))+"','"+escape_sql(.@Title$)+"','"+escape_sql(.@Message$)+"', 0,'"+gettimestr("%Y-%m-%d %H:%M:%S",21)+"' ) ");
+					break;
+			}
+		} while(.@Select != 3);
+		break;
+
+	case 3:
+		do {
+			mes "알겠습니다, 다음은 무엇인가요?";
+			next;
+			for(set .@i, 0; .@i < 3; set .@i, .@i + 1)
+				set .@Found[.@i], query_sql("SELECT `ID` FROM `E-Inquiry` WHERE `Status` = " + .@i + "", .@ID);
+
+			set .@Types, select("^FF0000모든 읽지 않은 메시지 보기 [ ^FF0000" + .@Found[0] + "^000000 ]",
+								"모든 답변 메시지 보기^000000 [ ^FF0000" + .@Found[1] + "^000000 ]",
+								"모든 보관된 메시지 보기 [ ^FF0000" + .@Found[2] + "^000000 ]","") - 1;
+
+			set .@ManageMSG, query_sql("SELECT `ID`, `Sender_Name`, `Title`, `Message`, `Inquiry_Time`, `Reply`, `Reply_Time`, `Reply_Name` FROM `E-Inquiry` WHERE `Status`= " + .@Types + " LIMIT 127", .@ID, .@Sender$, .@Title$, .@Message$, .@Time$, .@Reply$, .@ReplyTime$, .@ReplyName$);
+			if (!.@ManageMSG) {
+				mes "읽을 메시지가 없습니다.";
+				next;
+			} else {
+				set .@Menu$, "";
+				for(set .@i, 0; .@i < .@ManageMSG; set .@i, .@i + 1)
+					set .@Menu$, .@Menu$ + "^FF0000[ " + ( .@i + 1 ) + ". ]^0000FF " + .@Title$[.@i] + ":";
+				next;
+				set .@Select, select(.@Menu$) - 1;
+				mes "^FF0000날짜 :^000000 : " + .@Time$[.@Select];
+				mes "^FF0000작성자 :^000000 : " + .@Sender$[.@Select];
+				mes "^FF0000제목^000000 : " + .@Title$[.@Select];
+				mes "^FF0000메시지^000000 : " + .@Message$[.@Select];
+				if(.@Types > 0) {
+					mes "^0000FF답변자 ^FF0000" + .@ReplyName$[.@Select] + "^000000 : " + .@Reply$[.@Select];
+					mes "^0000FF답변 시간^000000 : " + .@ReplyTime$[.@Select];
+				}
+				next;
+				set .@MsgOpt1, select((.@Types == 2)?"":"답변 메시지", "다른 메시지 보기", "메시지 삭제");
+				switch(.@MsgOpt1) {
+					case 1:
+						set .@i, 0;
+						do {
+							input getd(".@Reply" + .@i + "$");
+							set .@Reply$, .@Reply$ + getd(".@Reply" + .@i + "$") + " ";
+							set .@Continue, select("완료:메시지 계속");
+						} while(.@Continue == 2);
+
+						query_sql("UPDATE `E-Inquiry` SET `Status` = 1, `Reply`='"+escape_sql(.@Reply$)+"', `Reply_Name`='"+escape_sql(strcharinfo(0))+"', `Reply_Time`='"+gettimestr("%Y-%m-%d %H:%M:%S",21)+"' WHERE `ID` = "+.@ID[.@Select]+" ");
+						message strcharinfo(0), "답변이 전송되었습니다.";
+						break;
+					case 3:
+						query_sql("DELETE FROM `E-Inquiry` WHERE `ID` = "+.@ID[.@Select]+" ");
+						mes "메시지가 삭제되었습니다.";
+					default:
+						break;
+				}
+			}
+		} while(.@MsgOpt1 != 1);
+	break;
+}
+close;
+
+OnInit:
+// 메시지를 읽고 관리할 최소 GM 레벨
+set .GMLevel, 80;
+end;
+
+OnPCLoginEvent:
+if(getgmlevel() < .GMLevel) {
+	set .@Replied, query_sql("SELECT `ID` FROM `E-Inquiry` WHERE `Status` = 1 AND `Sender_ID`='"+getcharid(3)+"'", .@ID);
+	if(.@Replied)
+		message strcharinfo(0), "GM 팀으로부터 "+.@Replied+" 개의 답변 메시지가 있습니다.";
+} else {
+	set .@Unread, query_sql("SELECT `ID` FROM `E-Inquiry` WHERE `Status` = 0 ", .@ID);
+	if(.@Unread)
+		message strcharinfo(0), "GM 팀이 플레이어로부터 "+.@Unread+" 개의 새로운 메시지를 받았습니다.";
+}
+if(.@Replied || .@Unread) {
+	if(select("메시지 읽기:취소") == 2) close;
+	goto OnStartMenu;
+}
+end;
+
+}
+
+// 메인 NPC
+prontera,155,190,4	script	[GM]문의하기#Main	871,{
+	doevent "E-Inquiry::OnStartMenu";
+}
+
+// 중복 NPC
+// prontera,155,181,5 duplicate(E-Inquiry#Main) E-Inquiry#1 757
+// prontera,155,182,5 duplicate(E-Inquiry#Main) E-Inquiry#2 757
+// prontera,155,183,5 duplicate(E-Inquiry#Main) E-Inquiry#3 757

@@ -1,11 +1,7 @@
 //===== rAthena Script =======================================
 //= Morocc Quest NPCs
 //===== Description: =========================================
-//= [Official Conversion]
-//= Quest NPCs related to Morocc.
-//===== Changelogs: ==========================================
-//= 1.0 Succession of the Prince removed in ep16.1 [Capuche]
-//= 1.1 Moved renewal specific npcs [zackdreaver]
+//한글번역 스카이러브
 //============================================================
 
 // Stop Post Quest
@@ -19,7 +15,7 @@ moc_ruins,118,176,4	duplicate(Alchemist)	Alchemist#moc	64
 // Resurrection of Satan Morocc
 // ============================================================
 
-morocc,176,103,3	duplicate(Continental Official)	Continental Official#mor	754
+morocc,176,103,3	duplicate(Continental Official)	컨티넨탈 가드 사무관#mor	754
 
 // Succession of the Prince
 // ============================================================

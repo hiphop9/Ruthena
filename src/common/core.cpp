@@ -7,6 +7,7 @@
 #include <csignal>
 
 #include <config/core.hpp>
+#include <config/custom.hpp>
 
 #ifndef MINICORE
 #include "database.hpp"
@@ -31,11 +32,20 @@
 
 #ifndef DEPRECATED_COMPILER_SUPPORT
 	#if defined( _MSC_VER ) && _MSC_VER < 1914
-		#error "Visual Studio versions older than Visual Studio 2017 are not officially supported anymore"
+		if(strcmpi(MessageLang,"KOR") == 0)
+			#error "비주얼 스튜디오 2017 이하의 버전은 지원하지 않습니다."
+		else
+			#error "Visual Studio versions older than Visual Studio 2017 are not officially supported anymore"
 	#elif defined( __clang__ ) && __clang_major__ < 6
-		#error "clang versions older than clang 6.0 are not officially supported anymore"
+		if(strcmpi(MessageLang,"KOR") == 0)
+			#error "clang 6.0 이하의 버전은 지원하지 않습니다."
+		else
+			#error "clang versions older than clang 6.0 are not officially supported anymore"
 	#elif !defined( __clang__ ) && defined( __GNUC__ ) && __GNUC__ < 6
-		#error "GCC versions older than GCC 6 are not officially supported anymore"
+		if(strcmpi(MessageLang,"KOR") == 0)
+			#error "GCC 6 이하의 버전은 지원하지 않습니다."
+		else
+			#error "GCC versions older than GCC 6 are not officially supported anymore"
 	#endif
 #endif
 
@@ -103,8 +113,12 @@ static BOOL WINAPI console_handler(DWORD c_event) {
 }
 
 static void cevents_init() {
-	if (SetConsoleCtrlHandler(console_handler,TRUE)==FALSE)
-		ShowWarning ("Unable to install the console handler!\n");
+	if (SetConsoleCtrlHandler(console_handler,TRUE)==FALSE) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning ("콘솔 핸들러를 설치 할 수 없습니다!\n");
+		else
+			ShowWarning ("Unable to install the console handler!\n");
+	}
 }
 #endif
 
@@ -135,7 +149,10 @@ static void sig_proc(int sn) {
 #ifndef _WIN32
 	case SIGXFSZ:
 		// ignore and allow it to set errno to EFBIG
-		ShowWarning ("Max file size reached!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning ("최대 파일 크기에 도달했습니다!\n");
+		else
+			ShowWarning ("Max file size reached!\n");
 		//run_flag = 0;	// should we quit?
 		break;
 	case SIGPIPE:
@@ -296,18 +313,32 @@ static void display_title(void) {
 	const char* svn = get_svn_revision();
 	const char* git = get_git_hash();
 
-	ShowMessage("\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS"" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "       " CL_BT_WHITE "            rAthena Development Team presents                  " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "                 ___   __  __                                    " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "           _____/   | / /_/ /_  ___  ____  ____ _                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "          / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "         / /  / ___ / /_/ / / /  __/ / / / /_/ /                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "        /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                  " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "       " CL_GREEN "              http://rathena.org/board/                        " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-	ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
-
+	if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowMessage("\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS"" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "       " CL_BT_WHITE "            라테나 개발팀 드림			                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "       " CL_BT_WHITE "                   한글화 by 루나틱				         " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                 ___   __  __                                    " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "           _____/   | / /_/ /_  ___  ____  ____ _                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "          / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "         / /  / ___ / /_/ / / /  __/ / / / /_/ /                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "        /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                  " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "       " CL_GREEN "              http://rathena.org/board/                        " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+	} else {
+		ShowMessage("\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS"" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "       " CL_BT_WHITE "            rAthena Development Team presents                  " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                 ___   __  __                                    " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "           _____/   | / /_/ /_  ___  ____  ____ _                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "          / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/                " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "         / /  / ___ / /_/ / / /  __/ / / / /_/ /                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "        /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                  " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "       " CL_GREEN "              http://rathena.org/board/                        " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+		ShowMessage("" CL_PASS "     " CL_BOLD "                                                                 " CL_PASS "" CL_CLL "" CL_NORMAL "\n");
+	}
 	if( svn[0] != UNKNOWN_VERSION )
 		ShowInfo("SVN Revision: '" CL_WHITE "%s" CL_RESET "'\n", svn);
 	else if( git[0] != UNKNOWN_VERSION )
@@ -320,11 +351,17 @@ void usercheck(void)
 #if !defined(BUILDBOT)
 #ifdef _WIN32
 	if (IsCurrentUserLocalAdministrator()) {
-		ShowWarning("You are running rAthena with admin privileges, it is not necessary.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("이 프로그램을 실행하는데 관리자 권한은 필요하지 않습니다.\n");
+		else
+			ShowWarning("You are running rAthena with admin privileges, it is not necessary.\n");
 	}
 #else
 	if (geteuid() == 0) {
-		ShowWarning ("You are running rAthena with root privileges, it is not necessary.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning ("이 프로그램을 실행하는데 루트 권한은 필요하지 않습니다.\n");
+		else
+			ShowWarning ("You are running rAthena with root privileges, it is not necessary.\n");
 	}
 #endif
 #endif
@@ -332,7 +369,10 @@ void usercheck(void)
 
 int Core::start( int argc, char **argv ){
 	if( this->get_status() != e_core_status::NOT_STARTED) {
-		ShowFatalError( "Core was already started and cannot be started again!\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError( "코어가 이미 실행중입니다.\n" );
+		else
+			ShowFatalError( "Core was already started and cannot be started again!\n" );
 		return EXIT_FAILURE;
 	}
 
@@ -345,8 +385,12 @@ int Core::start( int argc, char **argv ){
 			SERVER_NAME = ++p1;
 			size_t n = p1-argv[0]; //calc dir name len
 			pwd = safestrncpy((char*)malloc(n + 1), argv[0], n);
-			if(chdir(pwd) != 0)
-				ShowError("Couldn't change working directory to %s for %s, runtime will probably fail",pwd,SERVER_NAME);
+			if(chdir(pwd) != 0) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("%s 서버의 작업 디렉토리를 %s으(로) 변경할 수 없습니다. 런타임 에러가 날 수 있습니다.",SERVER_NAME,pwd);
+				else
+					ShowError("Couldn't change working directory to %s for %s, runtime will probably fail",pwd,SERVER_NAME);
+			}
 			free(pwd);
 		}else{
 			// On Windows the .bat files have the executeable names as parameters without any path seperator [Lemongrass]
@@ -469,9 +513,15 @@ void Core::signal_crash(){
 	this->set_status( e_core_status::STOPPING );
 
 	if( this->m_crashed ){
-		ShowFatalError( "Received another crash signal, while trying to handle the last crash!\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError( "마지막 충돌을 처리하는 동안 다른 충돌이 발생했습니다!\n" );
+		else
+			ShowFatalError( "Received another crash signal, while trying to handle the last crash!\n" );
 	}else{
-		ShowFatalError( "Received a crash signal, trying to handle it as good as possible!\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError( "충돌이 발생했습니다!\n" );
+		else
+			ShowFatalError( "Received a crash signal, trying to handle it as good as possible!\n" );
 		this->m_crashed = true;
 		this->handle_crash();
 	}

@@ -50,7 +50,7 @@
 //= 2.3b corrected Glast warp coords [Lupus] 2.3c Bailand -> Bayalan
 //= 2.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
 //= 2.5 Converted from Aegis file. (11.3) [L0ne_W0lf]
-//= 2.6 Moved Morocc NPCs to Morocc Ruins. [L0ne_W0lf]
+//= 2.6 Moved Morroc NPCs to Morroc Ruins. [L0ne_W0lf]
 //= 2.7 Fixed a typo, a - to a +. Not sure how that happened. [L0ne_w0lf]
 //= 2.8 Corrected another typo this time in a variable.
 //= 2.9 Added GM management function. [Euphy]
@@ -259,16 +259,16 @@ OnEnable:
 OnTimer60000:
 	stopnpctimer;
 	if ($DTS_PeriodCheck == 8640) {
-		set $DTS_PeriodCheck,0; //Global Variable
-		set $DTS_Result,0; //Global Variable
-		set $DTS_KafraVotes,0; //Global Variable
-		set $DTS_JondaVotes,0; //Global Variable
+		set $DTS_PeriodCheck,0; // 전역 변수
+		set $DTS_Result,0; // 전역 변수
+		set $DTS_KafraVotes,0; // 전역 변수
+		set $DTS_JondaVotes,0; // 전역 변수
 		set $DTS_JondaWins,$DTS_JondaWins-1;
 		set $DTS_VoteCount,$DTS_VoteCount+1;
 		donpcevent "Vote Timer#ein::OnEnable";
 	}
 	else {
-		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
+		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; // 전역 변수
 		donpcevent "Vote Timer3#ein::OnEnable";
 	}
 	end;
@@ -282,26 +282,26 @@ OnEnable:
 OnTimer60000:
 	stopnpctimer;
 	if ($DTS_PeriodCheck == 8640) {
-		set $DTS_PeriodCheck,0; //Global Variable
-		set $DTS_Result,0; //Global Variable
-		set $DTS_KafraVotes,0; //Global Variable
-		set $DTS_JondaVotes,0; //Global Variable
+		set $DTS_PeriodCheck,0; // 전역 변수
+		set $DTS_Result,0; // 전역 변수
+		set $DTS_KafraVotes,0; // 전역 변수
+		set $DTS_JondaVotes,0; // 전역 변수
 		set $DTS_KafraWins,$DTS_KafraWins-1;
 		set $DTS_VoteCount,$DTS_VoteCount+1;
 		donpcevent "Vote Timer#ein::OnEnable";
 	}
 	else {
-		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; //Global Variable
+		set $DTS_PeriodCheck,$DTS_PeriodCheck+1; // 전역 변수
 		donpcevent "Vote Timer4#ein::OnEnable";
 	}
 	end;
 }
 
-// Voting Poll NPCs Kafras and Cool Corp.
-// Cool Event Staff should actually be Cool Event Voting Staff
-// names had to be shortened to keep them unique.
+// 카프라와 존다 기획사 NPC들을 통해 투표
+// 존다 이벤트 직원은 실제로 존다 이벤트 투표 직원이어야 합니다. (뭔소리??)
+// 이름을 고유하게 유지하려면 이름을 짧게해야했습니다.
 function	script	F_VoteKafra	{
-	callfunc "F_ClearGarbage";				//Clear outdated, unused variables
+	callfunc "F_ClearGarbage";	// 사용되었거나 오랫동안 사용하지 않은 변수 초기화
 	switch(getarg(0)){
 	case 1: cutin "kafra_01",2; break;
 	case 2: cutin "kafra_02",2; break;
@@ -313,51 +313,83 @@ function	script	F_VoteKafra	{
 	case 8: cutin "kafra_08",2; break;
 	case 9: cutin "kafra_09",2; break;
 	}
-	mes "[Kafra Voting Staff]";
-	mes "Greetings, adventurer.";
-	mes "As you may be aware, we";
-	mes "are holding an election to";
-	mes "determine which company will";
-	mes "provide the Dungeon Teleport";
-	mes "Service. How may I help you?";
+	set .@map$,strnpcinfo(4);
+
+
+	if(.@map$ == "prontera") set .@mname$,"프론테라로";
+	if(.@map$ == "morocc") set .@mname$,"모로크로";
+	if(.@map$ == "moc_ruins") set .@mname$,"모로크로";
+	if(.@map$ == "yuno") set .@mname$,"유노로";
+	if(.@map$ == "geffen") set .@mname$,"게펜으로";
+	if(.@map$ == "payon") set .@mname$,"페이온으로";
+	if(.@map$ == "alberta") set .@mname$,"알베르타로";
+	if(.@map$ == "aldebaran") set .@mname$,"알데바란으로";
+	if(.@map$ == "lighthalzen") set .@mname$,"리히타르젠으로";
+
+	mes "[카프라 투표 홍보사원]";
+	mes "어서 오십시오.";
+	mes "존다 기획사와 카프라 서비스 사이에";
+	mes "맺어진 협정 '^FF0000상권 투표^000000'를 위해";
+	mes "카프라 본부에서 "+.@mname$+"파견된";
+	mes "투표 홍보위원입니다.";
+	mes "무엇을 도와드릴까요?";
 	next;
-	switch(select("Reason for Election:Cast a Vote:Use Teleport Service:Cancel")) {
+	switch(select("상권 투표에 대해:투표에 참여:공간이동 서비스 이용:취소")) {
 	case 1:
-		mes "[Kafra Voting Staff]";
-		mes "Cool Event Corp and the";
-		mes "Kafra Corporation have both";
-		mes "been planning to provide a";
-		mes "Teleport Service to dungeons.";
+		mes "[카프라 투표 홍보사원]";
+		mes "카프라 서비스에는 현재 고객 분들께";
+		mes "서비스 중인 공간이동 지역 외에 여러";
+		mes "던전들을 위주로 보내드리는 서비스를";
+		mes "기획하고 있었습니다.";
 		next;
-		mes "[Kafra Voting Staff]";
-		mes "But due to technological";
-		mes "limitations, only one company";
-		mes "can serve as provider for this";
-		mes "Dungeon Teleport Service at a";
-		mes "time. There, both companies have agreed to hold special elections.";
+		mes "[카프라 투표 홍보사원]";
+		mes "하지만 서비스 기획 중 존다";
+		mes "기획사에서도 그 지역은 다르지만";
+		mes "저희와 같은 개념의 서비스를 기획하고";
+		mes "있다는 사실을 알게 됐습니다.";
 		next;
-		mes "[Kafra Voting Staff]";
-		mes "Each company has its own";
-		mes "policies and guarantees in";
-		mes "regards to the Dungeon Teleport Service, and in this election, the";
-		mes "customers will ultimately decide and choose what's best for them.";
+		mes "[카프라 투표 홍보사원]";
+		mes "비슷한 서비스를 비슷한 시기에 하려";
+		mes "한 사실이 서로에게 알려지자 저희들과";
+		mes "존다는 의견 충돌로 대립하기";
+		mes "시작했죠.";
 		next;
-		mes "[Kafra Voting Staff]";
-		mes "For now, the Dungeon";
-		mes "Teleport Service will be";
-		mes "provided in a series of trial periods. This way, customers can";
-		mes "see the benefits of both companies before making the final decision.";
+		mes "[카프라 투표 홍보사원]";
+		mes "그렇게 대립을 거듭하다가 내린 결론이";
+		mes "'^FF0000상권 투표^000000'. 즉, 어떤 기업이 서비스";
+		mes "할 지 여부를 고객 분들의 소중한";
+		mes "의견을 받아서 정하자는";
+		mes "것이었습니다.";
 		next;
-		mes "[Kafra Voting Staff]";
-		mes "If you are qualified,";
-		mes "please vote in each election";
-		mes "to decide which company will";
-		mes "provide the Dungeon Teleport";
-		mes "Service for the next trial period. Thank you for your support~";
+		mes "[카프라 투표 홍보사원]";
+		mes "두 기업에서 고객들에게 어떤 서비스를";
+		mes "하겠다며 약속을 하면, 고객들은";
+		mes "그것을 듣고 자신이 원하는 곳에";
+		mes "투표를 하는 것이죠.";
+		next;
+		mes "[카프라 투표 홍보사원]";
+		mes "하지만 투표를 한 번만 하여";
+		mes "한쪽에서만 계속 서비스할 경우,";
+		mes "서로간의 마찰이 우려되어 일정기간";
+		mes "동안 투표에서 앞선 쪽에서 서비스 한";
+		mes "뒤, 재투표를 하기로 협의";
+		mes "하였습니다.";
+		next;
+		mes "[카프라 투표 홍보사원]";
+		mes "물론 재투표를 한다 해도 같은 쪽이";
+		mes "계속 이기고 질 수도 있기 때문에 그에";
+		mes "따른 메리트와 핸디캡을 서로에게";
+		mes "적용하기로 한 상태입니다.";
+		next;
+		mes "[카프라 투표 홍보사원]";
+		mes "저희 카프라 서비스에선 고객 분들께서";
+		mes "원하시는 서비스를 위해 최선을 다 할";
+		mes "것입니다. 앞으로 많은 성원 부탁";
+		mes "드립니다.";
 		break;
 	case 2:
 		//if (lhz_boss < 17) {
-		//	mes "[Kafra Voting Staff]";
+		//	mes "[카프라 투표 홍보사원]";
 		//	mes "Oh, I'm so sorry, but you";
 		//	mes "are currently not qualified to";
 		//	mes "vote. For voting qualification";
@@ -371,169 +403,152 @@ function	script	F_VoteKafra	{
 		//else {
 			if ($DTS_Result == 0) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Kafra Voting Staff]";
-					mes "We, the Kafra Corporation,";
-					mes "are planning to provide the";
-					mes "Dungeon Teleport Service";
-					mes "to the following dungeons...";
+					mes "[카프라 투표 홍보사원]";
+					mes "카프라 서비스에는 현재 고객 분들께";
+					mes "서비스 중인 공간이동 지역 외에";
+					mes "서비스 예정인 지역은";
+					mes "다음과 같습니다.";
 					next;
 					mes " ";
 					mes " ";
 					if ($DTS_KafraWins == 0) {
-						mes "^FF0000Toy Factory, Level 2^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
 					}
 					else if ($DTS_KafraWins == 1) {
-						mes "^FF0000Toy Factory, Level 2^000000";
-						mes "^FF0000Al De Baran Clock Tower, Level 3 ^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
+						mes "- ^FF0000알데바란 시계탑 지하 던전 3층 ^000000";
 					}
 					else {
-						mes "^FF0000Toy Factory, Level 2^000000";
-						mes "^FF0000Al De Baran Clock Tower, Level 3 Lava Dungeon, Level 2^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
+						mes "- ^FF0000알데바란 시계탑 지하 던전 3층 ^000000";
 					}
 					next;
-					mes "[Kafra Voting Staff]";
-					mes "If you are interested in";
-					mes "a Teleport Service to this";
-					mes "area, then please vote for";
-					mes "us. Would you like to vote";
-					mes "for the Kafra Corporation?";
+					mes "이 지역으로 공간이동 서비스를 받고";
+					mes "싶으시다면, 저희 카프라 서비스를";
+					mes "선택해주세요.";
+					mes " ";
+					mes "카프라 서비스에 소중한 한 표를";
+					mes "주시겠습니까?";
 					next;
-					switch(select("No:Yes")) {
+					switch(select("아니오:네")) {
 					case 1:
-						mes "[Kafra Voting Staff]";
-						mes "I understand. But if you";
-						mes "happen to change your mind,";
-						mes "you are welcome to come back";
-						mes "at any time. Thank you and";
-						mes "have a good day, adventurer.";
+						mes "[카프라 투표 홍보사원]";
+						mes "고객님의 뜻이 정 그러시다면 어쩔 수";
+						mes "없겠네요. 생각이 바뀌시면 투표기간";
+						mes "중 절 찾아와 말씀해주세요. 언제든";
+						mes "카프라 서비스는 여러분과 함께";
+						mes "있습니다.";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_KafraVotes,$DTS_KafraVotes+1;
-						mes "[Kafra Voting Staff]";
-						mes "Thanks for your vote!";
-						mes "We'll continue to do our best";
-						mes "to provide the highest quality";
-						mes "service to our customers. Have";
-						mes "a good day and remember that the Kafra service is on your side~";
+						mes "[카프라 투표 홍보사원]";
+						mes "정말 감사합니다. 고객님의 소중한 한";
+						mes "표를 잊지 않고, 열심히 노력하는";
+						mes "카프라 서비스가 되겠습니다.";
+						mes "좋은 하루 되세요.";
 						break;
 					}
 				}
 				else {
-					mes "[Kafra Voting Staff]";
-					mes "I'm sorry, but you've ";
-					mes "already participated in";
-					mes "this election. When the next";
-					mes "election comes, you will be";
-					mes "able to vote once again.";
-					mes "Thank you for your support~";
+					mes "[카프라 투표 홍보사원]";
+					mes "죄송합니다. 이미 투표에 참여하셔서 이번";
+					mes "투표엔 다시 참여하실 수 없습니다.";
+					mes "다음 투표 때 저희 카프라 서비스에 한";
+					mes "표 부탁 드립니다.";
+					mes " ";
+					mes "좋은 하루 되세요.";
 				}
 			}
 			else if ($DTS_Result == 3) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Kafra Voting Staff]";
-					mes "After totalling the number of";
-					mes "votes from the last election,";
-					mes "we have concluded that the";
-					mes "minimum voter participation";
-					mes "condition was not satisfied.";
+					mes "[카프라 투표 홍보사원]";
+					mes "이전 투표를 집계한 결과, 투표 참여";
+					mes "최저인원이 충족되지 않아 투표를 다시";
+					mes "진행합니다.";
 					next;
-					mes "[Kafra Voting Staff]";
-					mes "Therefore, another election to";
-					mes "determine which company will";
-					mes "provide the Dungeon Teleport";
-					mes "Service will be held. The Kafra";
-					mes "Corporation will teleport to";
-					mes "the following dungeons...";
-					next;
+					mes "[카프라 투표 홍보사원]";
+					mes "저희 카프라에서 서비스 예정인 지역은";
+					mes "다음과 같습니다.";
 					mes " ";
 					mes " ";
 					if ($DTS_KafraWins == 0) {
-						mes "^FF0000Toy Factory, Level 2^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
 					}
 					else if ($DTS_KafraWins == 1) {
-						mes "^FF0000Toy Factory, Level 2^000000";
-						mes "^FF0000Al De Baran Clock Tower, Level 3 ^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
+						mes "- ^FF0000알데바란 시계탑 지하 던전 3층 ^000000";
 					}
 					else {
-						mes "^FF0000Toy Factory, Level 2^000000";
-						mes "^FF0000Al De Baran Clock Tower, Level 3 Lava Dungeon, Level 2^000000";
+						mes "- ^FF0000장난감 던전 2층^000000";
+						mes "- ^FF0000알데바란 시계탑 지하 던전 3층 ^000000";
 					}
 					next;
-					mes "[Kafra Voting Staff]";
-					mes "If you are interested in";
-					mes "a Teleport Service to these";
-					mes "areas, then please vote for";
-					mes "us. Would you like to vote";
-					mes "for the Kafra Corporation?";
+					mes "[카프라 투표 홍보사원]";
+					mes "이 지역으로 공간이동 서비스를 받고";
+					mes "싶으시다면, 저희 카프라 서비스를";
+					mes "선택해주세요.";
+					mes " ";
+					mes "카프라 서비스에 소중한 한 표를";
+					mes "주시겠습니까?";
 					next;
-					switch(select("No:Yes")) {
+					switch(select("아니오:네")) {
 					case 1:
-						mes "[Kafra Voting Staff]";
-						mes "I understand. But if you";
-						mes "happen to change your mind,";
-						mes "you are welcome to come back";
-						mes "at any time. Thank you and";
-						mes "have a good day, adventurer.";
+						mes "[카프라 투표 홍보사원]";
+						mes "고객님의 뜻이 정 그러시다면 어쩔 수";
+						mes "없겠네요. 생각이 바뀌시면 투표기간";
+						mes "중 절 찾아와 말씀해주세요. 언제든";
+						mes "카프라 서비스는 여러분과 함께";
+						mes "있습니다.";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_KafraVotes,$DTS_KafraVotes+1;
-						mes "[Kafra Voting Staff]";
-						mes "Thanks for your vote!";
-						mes "We'll continue to do our best";
-						mes "to provide the highest quality";
-						mes "service to our customers. Have";
-						mes "a good day and remember that the Kafra service is on your side~";
+						mes "[카프라 투표 홍보사원]";
+						mes "정말 감사합니다. 고객님의 소중한 한";
+						mes "표를 잊지 않고, 열심히 노력하는";
+						mes "카프라 서비스가 되겠습니다.";
+						mes "좋은 하루 되세요.";
 						break;
 					}
 				}
 				else {
-					mes "[Kafra Voting Staff]";
-					mes "After totalling the number of";
-					mes "votes from the last election,";
-					mes "we have concluded that the";
-					mes "minimum voter participation";
-					mes "condition was not satisfied.";
+					mes "[카프라 투표 홍보사원]";
+					mes "이전 투표를 집계한 결과, 투표 참여";
+					mes "최저인원이 충족되지 않아 투표를 다시";
+					mes "진행합니다.";
 					next;
-					mes "[Kafra Voting Staff]";
-					mes "Therefore, another election to";
-					mes "determine which company will";
-					mes "provide the Dungeon Teleport";
-					mes "Service will be held. However,";
-					mes "since you've already voted, you cannot vote again in this election.";
-					next;
-					mes "[Kafra Voting Staff]";
-					mes "Your participation in these";
-					mes "elections is much appreciated,";
-					mes "and we encourage you to vote";
-					mes "again during the next election.";
-					mes "Thank you and have a nice day~";
+					mes "[카프라 투표 홍보사원]";
+					mes "하지만 이미 투표에 참여하셔서 이번";
+					mes "투표엔 다시 참여하실 수 없습니다.";
+					mes "다음 투표 때 저희 카프라 서비스에 한";
+					mes "표 부탁 드립니다.";
+					mes " ";
+					mes "좋은 하루 되세요.";
 				}
 			}
 			else {
-				mes "[Kafra Voting Staff]";
-				mes "I'm sorry, but there are";
-				mes "no elections taking place at";
-				mes "this time. When the polls are";
-				mes "open, we encourage you to take";
-				mes "part and voice your opinions.";
-				mes "Thank you for your support~";
+				mes "[카프라 투표 홍보사원]";
+				mes "죄송합니다. 지금은 투표기간이 아닙니다.";
+				mes "투표가 시작되면, 저희는 여러분이";
+				mes "투표로 의견을 말해주실것을 믿습니다.";
+				mes " ";
+				mes "감사합니다.";
 			}
 		//}
 		break;
 	case 3:
 		if ($DTS_Result == 2) {
-			mes "[Kafra Voting Staff]";
-			mes "Thank you for choosing the";
-			mes "Dungeon Teleport Service.";
-			mes "Please keep in mind that the";
-			mes "Free Warp Tickets and Kafra";
-			mes "Special Reserve Points do not";
-			mes "apply in this special service.";
+			mes "[카프라 투표 홍보사원]";
+			mes "던전 공간이동 서비스를 선택해 주셔서";
+			mes "감사합니다. 이 특별 서비스는";
+			mes "카프라 워프 무료이용권 및 적립포인트";
+			mes "는 사용할 수 없습니다.";
 			next;
 			if ($DTS_KafraWins == 0) {
-				switch(select("Toy Factory, Level 2 -> 4,000 z:Cancel")) {
+				switch(select("장난감 던전 2층 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						cutin "",255;
@@ -542,23 +557,25 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Toy Factory. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
-					mes "[Kafra Voting Staff]";
-					mes "We, here at Kafra Corporation,";
-					mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+					mes "[카프라 투표 홍보사원]";
+					mes "저희 카프라 서비스는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 			else if ($DTS_KafraWins == 1) {
-				switch(select("Toy Factory, Level 2 -> 4,000 z:Clock Tower, Level 3 -> 4,000 z:Cancel")) {
+				switch(select("장난감 던전 2층 -> 4,000 z:시계탑 지하던전 3층 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set Zeny, Zeny-4000;
@@ -567,12 +584,10 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Toy Factory. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
@@ -583,23 +598,25 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Clock Tower. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 3:
-					mes "[Kafra Voting Staff]";
-					mes "We, here at Kafra Corporation,";
-					mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+					mes "[카프라 투표 홍보사원]";
+					mes "저희 카프라 서비스는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 			else {
-				switch(select("Toy Factory, Level 2 -> 4,000 z:Clock Tower, Level 3 -> 4,000 z:Lava Dungeon, Level 2 -> 4,000 z:Cancel")) {
+				switch(select("장난감 던전 2층 -> 4,000 z:시계탑 지하던전 3층 -> 4,000 z:노그로드 던전 2층 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set Zeny, Zeny-4000;
@@ -608,12 +625,10 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Toy Factory. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
@@ -624,12 +639,10 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Clock Tower. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 3:
@@ -640,44 +653,47 @@ function	script	F_VoteKafra	{
 						end;
 					}
 					else {
-						mes "[Kafra Voting Staff]";
-						mes "I'm sorry, but you don't";
-						mes "have enough money to pay";
-						mes "the 4,000 zeny fee to teleport";
-						mes "to the Lava Dungeon. Please";
-						mes "check your funds again.";
+						mes "[카프라 투표 홍보사원]";
+						mes "이 던전으로 가기 위해서는 4,000 제니";
+						mes "가 필요합니다.";
+						mes "확인후 다시 이용해주세요.";
 					}
 					break;
 				case 4:
-					mes "[Kafra Voting Staff]";
-					mes "We, here at Kafra Corporation,";
-					mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+					mes "[카프라 투표 홍보사원]";
+					mes "저희 카프라 서비스는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 		}
 		else if ($DTS_Result == 1) {
-			mes "[Kafra Voting Staff]";
-			mes "I'm sorry, but because of";
-			mes "the results from the most";
-			mes "recent election, Cool Event";
-			mes "Corp. is currently handling";
-			mes "the Dungeon Teleport Service. We apologize for the inconvenience.";
+			mes "[카프라 투표 홍보사원]";
+			mes "죄송합니다. 고객님, 여러분들의 투표";
+			mes "결과로 인해 존다 기획사에서 공간이동 서비스를";
+			mes "하고 있습니다.";
+			mes "불편을 끼쳐 드려 죄송합니다.";
 		}
 		else {
-			mes "[Kafra Voting Staff]";
-			mes "I'm sorry, but the";
-			mes "Dungeon Teleport Service";
-			mes "is not active during the voting";
-			mes "period. Once the election is";
-			mes "over, the Dungeon Teleport";
-			mes "Service will become available.";
+			mes "[카프라 투표 홍보사원]";
+			mes "죄송합니다. 현재는 투표 기간 중이라";
+			mes "공간이동 서비스를 이용하실 수";
+			mes "없습니다. 투표가 끝난 뒤, 결과에";
+			mes "따라 이용하실 수 있습니다.";
 		}
 		break;
 	case 4:
-		mes "[Kafra Voting Staff]";
-		mes "We, here at Kafra Corporation,";
-		mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+		mes "[카프라 투표 홍보사원]";
+		mes "저희 카프라 서비스는 보다 완벽한";
+		mes "서비스와 엄격한 업무 관리로 고객";
+		mes "여러분이 안심하고 편하게 이용하실 수";
+		mes "있도록 최선을 다하고 있습니다.";
+		mes " ";
+		mes "이용해 주셔서 감사합니다.";
 		break;
 	}
 	close2;
@@ -685,82 +701,92 @@ function	script	F_VoteKafra	{
 	end;
 }
 
-yuno,162,191,4	script	Kafra Voting Staff#yuno	861,{
+yuno,162,191,4	script	카프라 투표 홍보사원#yuno	861,{
 	callfunc "F_VoteKafra",9;
 }
-prontera,164,125,4	script	Kafra Voting Staff#prt	116,{
+prontera,164,125,4	script	카프라 투표 홍보사원#prt	116,{
 	callfunc "F_VoteKafra",2;
 }
-moc_ruins,104,133,4	script	Kafra Voting Staff#moc	116,{
+/*moc_ruins,104,133,4	script	카프라 투표 홍보사원#moc	116,{
+	callfunc "F_VoteKafra",2;
+}*/
+geffen,122,37,4	script	카프라 투표 홍보사원#gef	116,{
 	callfunc "F_VoteKafra",2;
 }
-geffen,122,37,4	script	Kafra Voting Staff#gef	116,{
+payon,158,182,4	script	카프라 투표 홍보사원#pay	116,{
 	callfunc "F_VoteKafra",2;
 }
-payon,158,182,4	script	Kafra Voting Staff#pay	116,{
+alberta,119,70,4	script	카프라 투표 홍보사원#alb	116,{
 	callfunc "F_VoteKafra",2;
 }
-alberta,119,70,4	script	Kafra Voting Staff#alb	116,{
+aldebaran,145,102,4	script	카프라 투표 홍보사원#alde	116,{
 	callfunc "F_VoteKafra",2;
 }
-aldebaran,145,102,4	script	Kafra Voting Staff#alde	116,{
-	callfunc "F_VoteKafra",2;
-}
-lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
+lighthalzen,163,60,4	script	카프라 투표 홍보사원#lght	861,{
 	callfunc "F_VoteKafra",9;
 }
 
--	script	Cool Event Staff::VotingStaffCCE	874,{
+-	script	존다 투표 홍보사원::VotingStaffCCE	874,{
 	callfunc "F_ClearGarbage";				//Clear outdated, unused variables
 	cutin "zonda_01",2;
-	mes "[Cool Event Corp. Voting Staff]";
-	mes "Hello! Don't forget to make";
-	mes "your voice be heard and make";
-	mes "sure you vote in the elections";
-	mes "between Cool Event Corp. and";
-	mes "Kafra Corporation for control of the Dungeon Teleport Service!";
+	mes "[존다 투표 홍보사원]";
+	mes "안녕하세요.";
+	mes "카프라 서비스와 맺은 '^FF0000상권 투표^000000'를";
+	mes "위해 존다 기획사에서 파견된 투표";
+	mes "홍보위원입니다.";
+	mes " ";
+	mes "무엇을 도와드릴까요?";
 	next;
-	switch(select("Reason for Election:Cast a Vote:Use Teleport Service:Cancel")) {
+	switch(select("상권 투표에 대해:투표에 참여:공간이동 서비스 이용:취소")) {
 	case 1:
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Cool Event Corp. has been";
-		mes "planning to provide a new";
-		mes "Dungeon Teleport Service to";
-		mes "its customers, a service not";
-		mes "already provided by the Kafra";
-		mes "Corporation. However...";
+		mes "[존다 투표 홍보사원]";
+		mes "현재 미드가르드에 있는 공간이동";
+		mes "서비스는 대부분 카프라 서비스에서";
+		mes "보내주고 있습니다.";
 		next;
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Kafra Corporation, which";
-		mes "already monopolizes the";
-		mes "public teleportation market,";
-		mes "actually also had plans to";
-		mes "provide a similar service.";
+		mes "[존다 투표 홍보사원]";
+		mes "존다 기획사에서는 이런 카프라";
+		mes "서비스와의 차별화를 위해 여러";
+		mes "던전들을 위주로 보내드리는 서비스를";
+		mes "기획 중이었는데, 우연인지는 몰라도";
+		mes "카프라 측 역시 같은 기획을 하고";
+		mes "있었던 겁니다.";
 		next;
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Because of technological";
-		mes "limitations, only one company";
-		mes "can be chosen as the provider";
-		mes "of this Dungeon Teleport Service. Hence, we will let the customers";
-		mes "decide through these elections.";
+		mes "[존다 투표 홍보사원]";
+		mes "저희 측에선 카프라 서비스가 기존";
+		mes "상권을 거의 장악하고 있으니 신규";
+		mes "상권을 우리가 갖겟다고 했지만,";
+		mes "카프라 측 역시 쉽게 양보하지 못해 양";
+		mes "기업은 충돌하게 됐습니다.";
 		next;
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Multiple elections will be";
-		mes "held so that our customers";
-		mes "can test out the special services of each company for themselves.";
-		mes "However, keep in mind that you must be eligible in order to vote.";
+		mes "[존다 투표 홍보사원]";
+		mes "그렇게 대립 중 양 측의 합의로 나온";
+		mes "것이 바로 '^FF0000상권 투표^000000'입니다. 고객";
+		mes "분들의 소중한 투표로 정해진 기업이";
+		mes "서비스를 한다는 것이죠.";
 		next;
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "For voter eligibility";
-		mes "details, please visit our";
-		mes "headquarters in the city of";
-		mes "Lighthalzen located in the";
-		mes "Schwarzwald Republic.";
-		mes "Thank you for your time.";
+		mes "[존다 투표 홍보사원]";
+		mes "하지만, 이렇게 한 쪽이 정해져도 양";
+		mes "측의 대립이 끊임없이 반복될 것은 불";
+		mes "보듯 뻔한 일입니다.";
+		next;
+		mes "[존다 투표 홍보사원]";
+		mes "그렇기 때문에 투표는 한 번으로";
+		mes "끝나는 것이 아니라 일정 기간이";
+		mes "지나면 재투표를 하며, 재투표 시에도";
+		mes "한 쪽이 계속 이기는 것을 방지하기";
+		mes "위해 그에 따른 메리트와 핸디캡을";
+		mes "서로에게 적용하기로 했습니다.";
+		next;
+		mes "[존다 투표 홍보사원]";
+		mes "존다 기획사는 지금까지의 다른 회사와";
+		mes "차별화 된 서비스로 고객 분들에게";
+		mes "다가가려 합니다. 앞으로 많은 성원";
+		mes "부탁 드립니다.";
 		break;
 	case 2:
 		//if (lhz_boss < 17) {
-		//	mes "[Cool Event Corp. Voting Staff]";
+		//	mes "[존다 투표 홍보사원]";
 		//	mes "I'm sorry, but you are not";
 		//	mes "eligible to vote at this time.";
 		//	mes "Please visit our headquarters";
@@ -773,167 +799,156 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 		//else {
 			if ($DTS_Result == 0) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Cool Event Corp.,";
-					mes "if chosen to provide the";
-					mes "Dungeon Teleport Service,";
-					mes "will teleport adventurers to";
-					mes "the following dungeons...";
+					mes "[존다 투표 홍보사원]";
+					mes "안녕하세요. 존다 기획사입니다.";
+					mes "공간이동 서비스에 저희가 선택";
+					mes "된 경우 다음 던전으로 공간이동";
+					mes "서비스를 받으실 수 있습니다.";
 					next;
 					mes " ";
 					mes " ";
 					if ($DTS_JondaWins == 0) {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
 					}
 					else if ($DTS_JondaWins == 1) {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
-						mes "^FF0000Clock Tower, 3rd Floor^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
+						mes "- ^FF0000알데바란 시계탑 지상 3층^000000";
 					}
 					else {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
-						mes "^FF0000Clock Tower, 3rd Floor^000000";
-						mes "^FF0000Glast Heim Entrance^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
+						mes "- ^FF0000알데바란 시계탑 지상 3층^000000";
+						mes "- ^FF0000글레스트 헤임 입구^000000";
 					}
 					next;
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "If you are interested in";
-					mes "these destinations, then";
-					mes "it would be in your best";
-					mes "interest to vote for us.";
-					mes "Would you like to vote";
-					mes "for Cool Event Corp.?";
+					mes "[존다 투표 홍보사원]";
+					mes "이 지역으로 공간이동 서비스를 받고";
+					mes "싶으시다면, 저희 존다 기획사를";
+					mes "선택해주세요.";
+					mes " ";
+					mes "존다 기획사에 소중한 한 표를";
+					mes "주시겠습니까?";
 					next;
-					switch(select("No:Yes")) {
+					switch(select("아니오:예")) {
 					case 1:
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "Ah, I see... Well, if you";
-						mes "happen to change your mind,";
-						mes "feel free to come back and";
-						mes "cast your vote for Cool Event";
-						mes "Corp, alright? Have a nice day~";
+						mes "[존다 투표 홍보사원]";
+						mes "고객님의 뜻이 그러시다면 어쩔 수";
+						mes "없죠. 생각이 바뀌시면 투표기간 중 절";
+						mes "찾아와 말씀해주세요. 항상 최선을";
+						mes "다하는 존다 기획사가 되겠습니다.";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_JondaVotes,$DTS_JondaVotes+1;
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "Thank you for your vote!";
-						mes "It's customers like you who";
-						mes "ensure the success and great";
-						mes "service that you have come to";
-						mes "expect from Cool Event Corp.";
-						mes "Thank you and have a nice day~";
+						mes "[존다 투표 홍보사원]";
+						mes "정말 감사합니다. 더욱 차별화된";
+						mes "서비스로 고객 분들께 항상 최선을";
+						mes "다하겠습니다.";
+						mes " ";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					}
 				}
 				else {
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "I'm sorry, but you've";
-					mes "already cast your vote";
-					mes "in this election. However,";
-					mes "please don't let that stop you";
-					mes "from voting for Cool Event";
-					mes "Corp. in the next election~";
+					mes "[존다 투표 홍보사원]";
+					mes "죄송합니다. 이미 투표에 참여하셔서 이번";
+					mes "투표엔 다시 참여하실 수 없습니다.";
+					mes "다음 투표 때 저희 존다 기획사에 한";
+					mes "표 부탁 드립니다.";
+					mes " ";
+					mes "좋은 하루 되세요.";
 				}
 			}
 			else if ($DTS_Result == 3) {
 				if (lhz_vote <= $DTS_VoteCount) {
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Unfortunately, there wasn't";
-					mes "enough voter turnout in the";
-					mes "last election, so we're holding";
-					mes "another election to determine";
-					mes "which company will provide the";
-					mes "Dungeon Teleport Service.";
+					mes "[존다 투표 홍보사원]";
+					mes "이전 투표를 집계한 결과, 투표 참여";
+					mes "최저인원이 충족되지 않아 투표를 다시";
+					mes "진행합니다.";
 					next;
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Cool Event Corp.,";
-					mes "if chosen to provide the";
-					mes "Dungeon Teleport Service,";
-					mes "will teleport adventurers to";
-					mes "the following dungeons...";
-					next;
-					mes " ";
+					mes "[존다 투표 홍보사원]";
+					mes "저희 존다 기획사에서 서비스 예정인";
+					mes "지역은 다음과 같습니다.";
 					mes " ";
 					if ($DTS_JondaWins == 0) {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
 					}
 					else if ($DTS_JondaWins == 1) {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
-						mes "^FF0000Clock Tower, 3rd Floor^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
+						mes "- ^FF0000알데바란 시계탑 지상 3층^000000";
 					}
 					else {
-						mes "^FF0000Byalan Dungeon, Level 3^000000";
-						mes "^FF0000Clock Tower, 3rd Floor^000000";
-						mes "^FF0000Glast Heim Entrance^000000";
+						mes "- ^FF0000이즈루드 던전 지하 3층^000000";
+						mes "- ^FF0000알데바란 시계탑 지상 3층^000000";
+						mes "- ^FF0000글레스트 헤임 입구^000000";
 					}
 					next;
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "If you are interested in";
-					mes "these destinations, then";
-					mes "it would be in your best";
-					mes "interest to vote for us.";
-					mes "Would you like to vote";
-					mes "for Cool Event Corp.?";
+					mes "[존다 투표 홍보사원]";
+					mes "이 지역으로 공간이동 서비스를 받고";
+					mes "싶으시다면, 저희 존다 기획사를";
+					mes "선택해주세요.";
+					mes " ";
+					mes "존다 기획사에서 소중한 한 표를";
+					mes "주시겠습니까?";
 					next;
-					switch(select("No:Yes")) {
+					switch(select("아니오:예")) {
 					case 1:
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "Ah, I see... Well, if you";
-						mes "happen to change your mind,";
-						mes "feel free to come back and";
-						mes "cast your vote for Cool Event";
-						mes "Corp, alright? Have a nice day~";
+						mes "[존다 투표 홍보사원]";
+						mes "고객님의 뜻이 그러시다면 어쩔 수";
+						mes "없죠. 생각이 바뀌시면 투표기간 중 절";
+						mes "찾아와 말씀해주세요. 항상 최선을";
+						mes "다하는 존다 기획사가 되겠습니다.";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					case 2:
 						set lhz_vote,$DTS_VoteCount+1;
 						set $DTS_JondaVotes,$DTS_JondaVotes+1;
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "Thank you for your vote!";
-						mes "It's customers like you who";
-						mes "ensure the success and great";
-						mes "service that you have come to";
-						mes "expect from Cool Event Corp.";
-						mes "Thank you and have a nice day~";
+						mes "[존다 투표 홍보사원]";
+						mes "정말 감사합니다. 더욱 차별화된";
+						mes "서비스로 고객 분들께 항상 최선을";
+						mes "다하겠습니다.";
+						mes " ";
+						mes "그럼 좋은 하루 되세요.";
 						break;
 					}
 				}
 				else {
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Unfortunately, there wasn't";
-					mes "enough voter turnout in the";
-					mes "last election, so we're holding";
-					mes "another election to determine";
-					mes "which company will provide the";
-					mes "Dungeon Teleport Service.";
+					mes "[존다 투표 홍보사원]";
+					mes "이전 투표를 집계한 결과, 투표 참여";
+					mes "최저인원이 충족되지 않아 투표를 다시";
+					mes "진행합니다.";
 					next;
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "We appreciate that";
-					mes "you've already participated";
-					mes "in this second election by";
-					mes "casting your vote. Thank";
-					mes "you for your support~";
+					mes "[존다 투표 홍보사원]";
+					mes "하지만 이미 투표에 참여하셔서 이번";
+					mes "투표엔 다시 참여하실 수 없습니다.";
+					mes "다음 투표 때 저희 존다 기획사에 한";
+					mes "표 부탁 드립니다.";
+					mes " ";
+					mes "좋은 하루 되세요.";
 				}
 			}
 			else {
-				mes "[Cool Event Corp. Voting Staff]";
-				mes "I'm sorry, but an election is";
-				mes "not currently being held at this time. Please come and cast your";
-				mes "vote at the next election to decide which company will provide the";
-				mes "Dungeon Teleport Service.";
+				mes "[존다 투표 홍보사원]";
+				mes "죄송합니다. 고객님 지금은 투표 기간이";
+				mes "아닙니다. 투표에 참여 하실 수 없습니다.";
+				mes "다음 투표 때 저희 존다 기획사에 한 표";
+				mes "부탁드립니다.";
+				mes " ";
+				mes "좋은 하루 되세요.";
 			}
 		//}
 		break;
 	case 3:
 		if ($DTS_Result == 1) {
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "Please remember that we";
-			mes "cannot accept Free Warp Tickets";
-			mes "or award Special Reserve Points";
-			mes "for this service. Now, please";
-			mes "choose your destination.";
+			mes "[존다 투표 홍보사원]";
+			mes "던전 공간이동 서비스를 선택해 주셔서";
+			mes "감사합니다. 이 특별 서비스는";
+			mes "워프 무료이용권 및 적립포인트";
+			mes "는 사용할 수 없습니다.";
+			mes "이동하고자 하는 곳을 선택하세요.";
 			next;
 			if ($DTS_JondaWins == 0) {
-				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Cancel")) {
+				switch(select("이즈루드 던전 지하 3층 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set Zeny, Zeny-4000;
@@ -942,26 +957,26 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Always be assured that";
-					mes "Cool Event Corp. will do";
-					mes "everything in its power to";
-					mes "ensure the satisfaction of";
-					mes "its customers, young and old";
-					mes "and big and small. Thank you~";
+					mes "[존다 투표 홍보사원]";
+					mes "저희 존다 기획사는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 			else if ($DTS_JondaWins == 1) {
-				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Clock Tower, 3rd Floor -> 4,000 z:Cancel")) {
+				switch(select("이즈루드 던전 지하 3층 -> 4,000 z:알데바란 시계탑 지상 3층 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set Zeny, Zeny-4000;
@@ -970,11 +985,11 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
@@ -985,33 +1000,33 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 3:
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Always be assured that";
-					mes "Cool Event Corp. will do";
-					mes "everything in its power to";
-					mes "ensure the satisfaction of";
-					mes "its customers, young and old";
-					mes "and big and small. Thank you~";
+					mes "[존다 투표 홍보사원]";
+					mes "저희 존다 기획사는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 			else {
-				mes "[Cool Event Corp. Voting Staff]";
-				mes "Please remember that we";
-				mes "cannot accept Free Warp Tickets";
-				mes "or award Special Reserve Points";
-				mes "for this service. Now, please";
-				mes "choose your destination.";
+				mes "[존다 투표 홍보사원]";
+				mes "던전 공간이동 서비스를 선택해 주셔서";
+				mes "감사합니다. 이 특별 서비스는";
+				mes "워프 무료이용권 및 적립포인트";
+				mes "는 사용할 수 없습니다.";
+				mes "이동하고자 하는 곳을 선택하세요.";
 				next;
-				switch(select("Byalan Dungeon, Level 3 -> 4,000 z:Clock Tower, 3rd Floor -> 4,000 z:Glast Heim Entrance -> 4,000 z:Cancel")) {
+				switch(select("이즈루드 던전 지하 3층 -> 4,000 z:알데바란 시계탑 지상 3층 -> 4,000 z:글레스트 헤임 입구 -> 4,000 z:취소")) {
 				case 1:
 					if (Zeny >= 4000) {
 						set Zeny, Zeny-4000;
@@ -1020,11 +1035,11 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 2:
@@ -1035,11 +1050,11 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 3:
@@ -1050,51 +1065,51 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 						end;
 					}
 					else {
-						mes "[Cool Event Corp. Voting Staff]";
-						mes "I'm sorry, but you do";
-						mes "not have enough zeny to";
-						mes "teleport to this destination.";
-						mes "The teleport fee is 4,000 zeny.";
+						mes "[존다 투표 홍보사원]";
+						mes "죄송합니다. 고객님";
+						mes "이 던전으로 이동하시기 위한 비용은";
+						mes "4,000 제니입니다.";
+						mes "확인 후 다시 이용해주세요.";
 					}
 					break;
 				case 4:
-					mes "[Cool Event Corp. Voting Staff]";
-					mes "Always be assured that";
-					mes "Cool Event Corp. will do";
-					mes "everything in its power to";
-					mes "ensure the satisfaction of";
-					mes "its customers, young and old";
-					mes "and big and small. Thank you~";
+					mes "[존다 투표 홍보사원]";
+					mes "저희 존다 기획사는 보다 완벽한";
+					mes "서비스와 엄격한 업무 관리로 고객";
+					mes "여러분이 안심하고 편하게 이용하실 수";
+					mes "있도록 최선을 다하고 있습니다.";
+					mes " ";
+					mes "이용해 주셔서 감사합니다.";
 					break;
 				}
 			}
 		}
 		else if ($DTS_Result == 2) {
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "I'm sorry, but Cool Event";
-			mes "Corp. does not currently offer";
-			mes "the Dungeon Teleport Service";
-			mes "due to the results of the last";
-			mes "election. Please vote for us";
-			mes "next time, alright? Good day~";
+			mes "[존다 투표 홍보사원]";
+			mes "죄송합니다. 고객님.";
+			mes "저희 존다 기획사는 최근 투표 결과에 의해";
+			mes "공간이동 서비스를 제공해드리지 않습니다.";
+			mes "다음 투표 때 저희 존다 기획사에 한 표";
+			mes "부탁 드립니다.";
+			mes " ";
+			mes "그럼 좋은 하루 되세요.";
 		}
 		else {
-			mes "[Cool Event Corp. Voting Staff]";
-			mes "I'm sorry, but the";
-			mes "Dungeon Teleport Service is";
-			mes "unavailable during elections";
-			mes "and will be reactivated after the election results are announced.";
-			mes "Thank you and have a nice day.";
+			mes "[존다 투표 홍보사원]";
+			mes "죄송합니다. 현재는 투표 기간 중이라";
+			mes "공간이동 서비스를 이용하실 수";
+			mes "없습니다. 투표가 끝난 뒤, 결과에";
+			mes "따라 이용하실 수 있습니다.";
 		}
 		break;
 	case 4:
-		mes "[Cool Event Corp. Voting Staff]";
-		mes "Cool Event Corp. is always";
-		mes "working to make sure that";
-		mes "not only are our customers";
-		mes "satisfied, but that we also";
-		mes "exceed your utmost standards.";
-		mes "Thank you and have a good day.";
+		mes "[존다 투표 홍보사원]";
+		mes "저희 존다 기획사는 보다 완벽한";
+		mes "서비스와 엄격한 업무 관리로 고객";
+		mes "여러분이 안심하고 편하게 이용하실 수";
+		mes "있도록 최선을 다하고 있습니다.";
+		mes " ";
+		mes "이용해 주셔서 감사합니다.";
 		break;
 	}
 	close2;
@@ -1102,14 +1117,14 @@ lighthalzen,163,60,4	script	Kafra Voting Staff#lght	861,{
 	end;
 }
 
-yuno,153,191,6	duplicate(VotingStaffCCE)	Cool Event Staff#yuno	874
-prontera,147,125,6	duplicate(VotingStaffCCE)	Cool Event Staff#prt	874
-moc_ruins,97,133,6	duplicate(VotingStaffCCE)	Cool Event Staff#moc	874
-geffen,117,37,6	duplicate(VotingStaffCCE)	Cool Event Staff#gef	874
-payon,153,182,6	duplicate(VotingStaffCCE)	Cool Event Staff#pay	874
-alberta,114,70,6	duplicate(VotingStaffCCE)	Cool Event Staff#alb	874
-aldebaran,138,102,6	duplicate(VotingStaffCCE)	Cool Event Staff#alde	874
-lighthalzen,154,60,6	duplicate(VotingStaffCCE)	Cool Event Staff#lhz	874
+yuno,153,191,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#yuno	874
+prontera,147,125,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#prt	874
+//moc_ruins,97,133,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#moc	874
+geffen,117,37,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#gef	874
+payon,153,182,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#pay	874
+alberta,114,70,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#alb	874
+aldebaran,138,102,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#alde	874
+lighthalzen,154,60,6	duplicate(VotingStaffCCE)	존다 투표 홍보사원#lhz	874
 
 yuno,103,225,0	script	Scrutiny Association#5	-1,{
 OnInit:
@@ -1123,7 +1138,7 @@ OnEnable:
 OnTimer7200000:
 	stopnpctimer;
 	if (($DTS_Result == 0) || ($DTS_Result == 3)) {
-		announce "Currently, the Dungeon Teleport Service Provider Election is being held in all major cities. Your participation is appreciated.",bc_all,"0x70dbdb";
+		announce "현재 상권투표가 모든 주요 도시에서 열리고 있습니다. 참여해 주시면 감사하겠습니다.",bc_all,"0x70dbdb";
 	}
 	donpcevent "Scrutiny Association#5::OnEnable";
 	end;
@@ -1135,19 +1150,19 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	announce "All the votes for the Dungeon Teleport Service Provider Election have been received and counted.",bc_all,"0x70dbdb";
+	announce "상권 투표에 대한 집계가 완료되었습니다.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer5000:
-	announce "The results are now in...",bc_all,"0x70dbdb";
+	announce "그 결과 현재...",bc_all,"0x70dbdb";
 	end;
 
 OnTimer10000:
-	announce "This time, Cool Event Corp. will be the Dungeon Teleport Service Provider.",bc_all,"0x70dbdb";
+	announce "이번에는 존다 기획사가 공간이동 서비스를 실사하게 될 것입니다.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer15000:
-	announce "Many thanks to all of you who have voted and shown your support.",bc_all,"0x70dbdb";
+	announce "상권 투표에 참여해주신 모든 분들께 감사드립니다.",bc_all,"0x70dbdb";
 	stopnpctimer;
 	end;
 }
@@ -1158,178 +1173,178 @@ OnEnable:
 	end;
 
 OnTimer1000:
-	announce "All the votes for the Dungeon Teleport Service Provider Election have been received and counted.",bc_all,"0x70dbdb";
+	announce "상권 투표에 대한 집계가 완료되었습니다.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer5000:
-	announce "The results are now in...",bc_all,"0x70dbdb";
+	announce "그 결과 현재...",bc_all,"0x70dbdb";
 	end;
 
 OnTimer10000:
-	announce "This time, Kafra Corporation will be the Dungeon Teleport Service Provider.",bc_all,"0x70dbdb";
+	announce "이번에 카프라에서 공간이동 서비스를 실사하게 될 것입니다.",bc_all,"0x70dbdb";
 	end;
 
 OnTimer15000:
-	announce "Many thanks to all of you who have voted and shown your support.",bc_all,"0x70dbdb";
+	announce "상권 투표에 참여해주신 모든 분들께 감사드립니다.",bc_all,"0x70dbdb";
 	stopnpctimer;
 	end;
 }
 
 /*
-// GM only NPC used for modifying values related to the DTS system.
-// Disabled in official script.
-sec_in02,17,160,4	script	Vote Globalvar Girl#yuno	864,{
+// DTS 시스템(상권 투표 시스템)에 관련된 값을 수정하는데 사용되는 NPC이며 GM전용입니다.
+// 공식서버에서는 이 스크립트가 비활성입니다.
+sec_in02,17,160,4	script	투표 소녀#yuno	864,{
 	callfunc "F_GM_NPC";
-	mes "[Christy's Maid]";
-	mes "Lady Christy!";
+	mes "[크리스티 메이드]";
+	mes "난 소녀 크리스티!";
 	next;
 	if (callfunc("F_GM_NPC",1854,0) == 1) {
-		mes "[Christy's Maid]";
-		mes "I am Lady Christy's Maid.";
+		mes "[크리스티 메이드]";
+		mes "난 소녀 크리스티 메이드!";
 		next;
-		switch(select("Globalvar Check:Setitem Zero:Change Glbalvar")) {
+		switch(select("글로벌 변수 확인:설정아이템 초기화:글로벌 변수값 변경")) {
 		case 1:
-			mes "Current GlobalVar are";
+			mes "현재 글로벌 변수값은..";
 			next;
-			mes "[Christy's Maid]";
-			mes "Global 1 - Voting Time check : "+$DTS_Time+"";
-			mes "Global 2 - Cool Event Corp. Vote Numbers : "+$DTS_JondaVotes+"";
-			mes "Global 3 - Kafra Vote Numbers : "+$DTS_KafraVotes+"";
-			mes "Global 4 - Winner : "+$DTS_Result+"";
-			mes "Global 5 - Teleport Service Period Check: "+$DTS_PeriodCheck+"";
-			mes "Global 6 - Kafra Points : "+$DTS_KafraWins+"";
-			mes "Global 7 - Cool Event Corp. Points : "+$DTS_JondaWins+"";
-			mes "Global 8 - Setitem Check : "+$DTS_VoteCount+"";
+			mes "[크리스티 메이드]";
+			mes "글로벌  1 - 투표 타이머 확인 : "+$DTS_Time+"";
+			mes "글로벌  2 - 존다 기획사 투표수 : "+$DTS_JondaVotes+"";
+			mes "글로벌  3 - 카프라 투표수 : "+$DTS_KafraVotes+"";
+			mes "글로벌  4 - 승리팀 : "+$DTS_Result+"";
+			mes "글로벌  5 - 공간이동 서비스 기간 확인: "+$DTS_PeriodCheck+"";
+			mes "글로벌  6 - 카프라 포인트 : "+$DTS_KafraWins+"";
+			mes "글로벌  7 - 존다 기획사 포인트 : "+$DTS_JondaWins+"";
+			mes "글로벌  8 - 설정아이템 확인 : "+$DTS_VoteCount+"";
 			next;
-			mes "[Christy's Maid]";
-			mes "Current Setitem value is "+lhz_vote+".";
+			mes "[크리스티 메이드]";
+			mes "현재 설정아이템 값은 "+lhz_vote+"입니다.";
 			close;
 		case 2:
 			set lhz_vote,0;
 			close;
 		case 3:
-			mes "[Christy's Maid]";
-			mes "Which Globalvar value would you like to change?";
+			mes "[크리스티 메이드]";
+			mes "어떤 글로벌 변수 값을 변경 하시겠습니까?";
 			next;
-			switch(select("1 - Voting Time:2 - Cool Event Corp. Vote Numbers:3 - Kafra Vote Numbers:4 - Winner:5 - Teleport Service Period:6 - Kafra Warp Number:7 - Cool Event Corp. Warp Number:8 - Setitem Value")) {
+			switch(select("1 - 투표 시간:2 - 존다 기획사 투표수:3 - 카프라 투표수:4 - 승리팀:5 - 공간이동 서비스 기간:6 - 카프라 워프 수:7 - 존다 기획사 워프 수:8 - 설정아이템 값")) {
 			case 1:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 1000.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_Time,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 2:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 1000.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_JondaVotes,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 3:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 1000.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_KafraVotes,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 4:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 3.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 3)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_Result,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 5:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 1000.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 1000)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_PeriodCheck,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 6:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 2.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 2)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_KafraWins,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 7:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 2.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 2)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_JondaWins,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			case 8:
-				mes "[Christy's Maid]";
-				mes "Please enter a number among 0 and 10000.";
+				mes "[크리스티 메이드]";
+				mes "0~1000사이의 숫자를 입력하세요.";
 				next;
 				input .@input;
 				if ((.@input < 0) || (.@input > 10000)) {
-					mes "[Christy's Maid]";
-					mes "The value is incorrect.";
+					mes "[크리스티 메이드]";
+					mes "잘못된 값을 입력했습니다.";
 					close;
 				}
 				set $DTS_VoteCount,.@input;
-				mes "[Christy's Maid]";
-				mes "The value has been modified.";
+				mes "[크리스티 메이드]";
+				mes "입력하신 값으로 변경하였습니다.";
 				close;
 			}
 		}
 	}
 	else {
-		mes "[Christy's Maid]";
-		mes "Lady Christy...";
+		mes "[크리스티 메이드]";
+		mes "소녀 크리스티...";
 		close;
 	}
 }

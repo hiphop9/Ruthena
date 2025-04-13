@@ -7,7 +7,9 @@
 //      Venomous Chimera spawn timer is custom. [Capuche]
 //============================================================
 
-slabw01	monster	Human Chimera	3631,45
-slabw01	monster	Material Chimera	3632,45
+slabw01	monster	인간형 키메라	3631,45
+slabw01	monster	물질형 키메라	3632,45
 // unknown timer
-slabw01	monster	Venomous Chimera	3633,1,18000000,600000,0
+slabw01	monster	독성 강화 키메라	3633,1,18000000,600000,0
+
+

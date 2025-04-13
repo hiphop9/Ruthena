@@ -1,0 +1,82 @@
+//===== rAthena Script =======================================
+//= Dynamic NPC: Kachua's Secret Box
+//===== Description: =========================================
+//- [Official conversion]
+//= Kachua's Secret Box is a Gachapon NPC.
+//= It lets the player exchange a Kachua's Secret Key for a random item.
+//= It also gives a Kachua's Mileage Coupon for each pull.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [secretdataz]
+//============================================================
+
+sec_in02,126,178,3	script	카츄아의 비밀상자#bm	4_TREASURE_BOX,{
+	.@key$ = "K_Secret_Key";
+	mes "무엇이 들어있는지 아무도 모르는";
+	mes "카츄아의 비밀 상자!";
+	mes "^4D4DFF※<ITEM>[카츄아의 비밀열쇠]<INFO>23919</INFO></ITEM>^000000를 소모해";
+	mes "상자를 열 수 있습니다.";
+	next;
+	switch(select("^4D4DFF상자열기 1회(카츄아의 비밀열쇠 1개)^000000","^4D4DFF상자열기 연속 10 회(카츄아의 비밀열쇠 10개)^000000")) {
+		case 1:
+			mes "^FF0000[경고]^000000";
+			mes "^FF0000카츄아의 비밀열쇠 1개로 랜덤한^000000";
+			mes "^FF0000아이템 1개와 교환합니다.^000000";
+			mes "^FF0000위의 교환된 아이템은 청약철회대상에^000000";
+			mes "^FF0000포함되지 않으며, 카츄아의^000000";
+			mes "^FF0000비밀열쇠로의 재교환 역시^000000";
+			mes "^FF0000불가능합니다.^000000";
+			next;
+			if(select("진행한다","그만둔다") == 2) {
+				mes "카츄아의 비밀상자 열기를 그만두었습니다.";
+				close;
+			} else if (countitem(.@key$) < 1) {
+				mes "<ITEM>[카츄아의 비밀열쇠]<INFO>23919</INFO></ITEM>가 충분하지 않습니다.";
+				close;
+			} else {
+				if (checkweight(1201,1) == 0 || ((MaxWeight - Weight) * 100 / MaxWeight) < 10) {
+					mes "^4D4DFF인벤토리에 충분한 공간이 있는지 확인하세요.^000000";
+					close;
+				}
+				delitem(.@key$, 1);
+				getgroupitem(IG_MAIN_LUCKY_BOX); // TODO: change to consumeitem "Main_Lucky_Box" when consumeitem is fixed
+				mes "카츄아의 비밀상자를 열었습니다.";
+				mes "행운이 함께하셨나요?";
+				specialeffect2 EF_VALLENTINE;
+				close;
+			}
+		case 2:
+			mes "^FF0000[경고]^000000";
+			mes "^FF0000카츄아의 비밀열쇠 10개로 랜덤한^000000";
+			mes "^FF0000아이템 10개와 교환합니다.^000000";
+			mes "^FF0000위의 교환된 아이템은 청약철회대상에^000000";
+			mes "^FF0000포함되지 않으며, 카츄아의^000000";
+			mes "^FF0000비밀열쇠로의 재교환 역시^000000";
+			mes "^FF0000불가능합니다.^000000";
+			next;
+			if(select("진행한다","그만둔다") == 2) {
+				mes "카츄아의 비밀상자 열기를 그만두었습니다";
+				close;
+			} else if (countitem(.@key$) < 10) {
+				mes "<ITEM>[카츄아의 비밀열쇠]<INFO>23919</INFO></ITEM>가 충분하지 않습니다.";
+				close;
+			} else {
+				for (.@i = 1; .@i <= 10; ++.@i) {
+					progressbar "4d4dff",2;
+					if (checkweight(1201,1) == 0 || ((MaxWeight - Weight) * 100 / MaxWeight) < 10) {
+						mes "^4D4DFF인벤토리에 충분한 공간이 있는지 확인하세요.^000000";
+						close;
+					}
+					if (countitem(.@key$) < 1) { // Custom check, just in case
+						close;
+					}
+					delitem(.@key$, 1);
+					getgroupitem(IG_MAIN_LUCKY_BOX); // TODO: change to consumeitem "Main_Lucky_Box" when consumeitem is fixed
+					dispbottom "카추아의 비밀 상자가 " + .@i + "번 열렸습니다. 다음 상자를 열어주세요.",0xFFFFFF;
+					specialeffect2 EF_VALLENTINE;
+				}
+				mes "카츄아의 비밀상자 10개 열었습니다!";
+				mes "행운이 함께하셨나요?";
+				close;
+			}
+	}
+}

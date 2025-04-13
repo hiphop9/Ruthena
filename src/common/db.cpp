@@ -72,6 +72,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <config/custom.hpp>
 
 #include "ers.hpp"
 #include "malloc.hpp"
@@ -716,9 +717,14 @@ static void db_free_add(DBMap_impl* db, DBNode *node, DBNode **root)
 
 	DB_COUNTSTAT(db_free_add);
 	if (db->free_lock == (unsigned int)~0) {
-		ShowFatalError("db_free_add: free_lock overflow\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("db_free_add: free_lock 값이 오버플로우입니다.\n"
+					"%s 파일의 %d줄에 할당된 데이터베이스\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowFatalError("db_free_add: free_lock overflow\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 		exit(EXIT_FAILURE);
 	}
 	if (!(db->options&DB_OPT_DUP_KEY)) { // Make sure we have a key until the node is freed
@@ -730,9 +736,14 @@ static void db_free_add(DBMap_impl* db, DBNode *node, DBNode **root)
 		db->free_max = (db->free_max<<2) +3; // = db->free_max*4 +3
 		if (db->free_max <= db->free_count) {
 			if (db->free_count == (unsigned int)~0) {
-				ShowFatalError("db_free_add: free_count overflow\n"
-						"Database allocated at %s:%d\n",
-						db->alloc_file, db->alloc_line);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowFatalError("db_free_add: free_count 값이 오버플로우입니다.\n"
+							"%s 파일의 %d줄에 데이터베이스가 할당됨.\n",
+							db->alloc_file, db->alloc_line);
+				else
+					ShowFatalError("db_free_add: free_count overflow\n"
+							"Database allocated at %s:%d\n",
+							db->alloc_file, db->alloc_line);
 				exit(EXIT_FAILURE);
 			}
 			db->free_max = (unsigned int)~0;
@@ -774,7 +785,10 @@ static void db_free_remove(DBMap_impl* db, DBNode *node)
 	}
 	node->deleted = 0;
 	if (i == db->free_count) {
-		ShowWarning("db_free_remove: node was not found - database allocated at %s:%d\n", db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("db_free_remove: 노드를 찾을 수 없습니다. (데이터베이스가 할당된 파일: %s, 줄:%d)\n", db->alloc_file, db->alloc_line);
+		else
+			ShowWarning("db_free_remove: node was not found - database allocated at %s:%d\n", db->alloc_file, db->alloc_line);
 	} else {
 		db->free_count--;
 	}
@@ -792,9 +806,14 @@ static void db_free_lock(DBMap_impl* db)
 {
 	DB_COUNTSTAT(db_free_lock);
 	if (db->free_lock == (unsigned int)~0) {
-		ShowFatalError("db_free_lock: free_lock overflow\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("db_free_lock: free_lock 값이 오버플로우입니다.\n"
+					"데이터베이스가 할당된 파일: %s, 줄: %d\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowFatalError("db_free_lock: free_lock overflow\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 		exit(EXIT_FAILURE);
 	}
 	db->free_lock++;
@@ -817,9 +836,14 @@ static void db_free_unlock(DBMap_impl* db)
 
 	DB_COUNTSTAT(db_free_unlock);
 	if (db->free_lock == 0) {
-		ShowWarning("db_free_unlock: free_lock was already 0\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("db_free_unlock: free_lock이 이미 0입니다.\n"
+					"할당된 데이터베이스 파일: %s, 줄:%d\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowWarning("db_free_unlock: free_lock was already 0\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 	} else {
 		db->free_lock--;
 	}
@@ -1533,7 +1557,10 @@ static bool db_obj_exists(DBMap* self, DBKey key)
 	if (db->cache && db->cmp(key, db->cache->key, db->maxlen) == 0) {
 #if defined(DEBUG)
 		if (db->cache->deleted) {
-			ShowDebug("db_exists: Cache contains a deleted node. Please report this!!!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("db_exists: 캐시에 삭제된 노드가 있습니다. 라테나에 알려주세요.!!\n");
+			else
+				ShowDebug("db_exists: Cache contains a deleted node. Please report this!!!\n");
 			return false;
 		}
 #endif
@@ -1577,14 +1604,20 @@ static DBData* db_obj_get(DBMap* self, DBKey key)
 	DB_COUNTSTAT(db_get);
 	if (db == nullptr) return nullptr; // nullpo candidate
 	if (!(db->options&DB_OPT_ALLOW_NULL_KEY) && db_is_key_null(db->type, key)) {
-		ShowError("db_get: Attempted to retrieve non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_get: %s:%d에 할당된 데이터베이스에 대해 허용되지 않는 nullptr 키를 검색하려고 했습니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_get: Attempted to retrieve non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return nullptr; // nullpo candidate
 	}
 
 	if (db->cache && db->cmp(key, db->cache->key, db->maxlen) == 0) {
 #if defined(DEBUG)
 		if (db->cache->deleted) {
-			ShowDebug("db_get: Cache contains a deleted node. Please report this!!!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("db_get: 캐시에 삭제된 노드가 있습니다. 라테나에 알려주세요!!!\n");
+			else
+				ShowDebug("db_get: Cache contains a deleted node. Please report this!!!\n");
 			return nullptr;
 		}
 #endif
@@ -1737,7 +1770,10 @@ static DBData* db_obj_vensure(DBMap* self, DBKey key, DBCreateData create, va_li
 	DB_COUNTSTAT(db_vensure);
 	if (db == nullptr) return nullptr; // nullpo candidate
 	if (create == nullptr) {
-		ShowError("db_ensure: Create function is nullptr for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_ensure: %s 파일의 %d줄에 할당된 데이터베이스에 대한 생성된 함수가 nullptr입니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_ensure: Create function is nullptr for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return nullptr; // nullpo candidate
 	}
 	if (!(db->options&DB_OPT_ALLOW_NULL_KEY) && db_is_key_null(db->type, key)) {
@@ -1766,7 +1802,12 @@ static DBData* db_obj_vensure(DBMap* self, DBKey key, DBCreateData create, va_li
 	if (node == nullptr) {
 		va_list argscopy;
 		if (db->item_count == UINT32_MAX) {
-			ShowError("db_vensure: item_count overflow, aborting item insertion.\n"
+			if(strcmpi(MessageLang,"KOR") == 0)
+				("db_vensure: item_count가 오버플로우입니다. 아이템 추가를 중단합니다..\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d",					
+					db->alloc_file, db->alloc_line);
+			else
+				ShowError("db_vensure: item_count overflow, aborting item insertion.\n"
 					"Database allocated at %s:%d",
 					db->alloc_file, db->alloc_line);
 				return nullptr;
@@ -1865,24 +1906,40 @@ static int db_obj_put(DBMap* self, DBKey key, DBData data, DBData *out_data)
 	DB_COUNTSTAT(db_put);
 	if (db == nullptr) return 0; // nullpo candidate
 	if (db->global_lock) {
-		ShowError("db_put: Database is being destroyed, aborting entry insertion.\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_put: 데이터베이스를 폐기하고 항목추가를 중단합니다.\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_put: Database is being destroyed, aborting entry insertion.\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 	if (!(db->options&DB_OPT_ALLOW_NULL_KEY) && db_is_key_null(db->type, key)) {
-		ShowError("db_put: Attempted to use non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_put: %s파일의 %d줄에 할당된 데이터베이스에 허용되지 않는 nullptr키를 사용하려고 했습니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_put: Attempted to use non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 	if (!(db->options&DB_OPT_ALLOW_NULL_DATA) && (data.type == DB_DATA_PTR && data.u.ptr == nullptr)) {
-		ShowError("db_put: Attempted to use non-allowed nullptr data for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_put: %s파일의 %d줄에 할당된 데이터베이스에 허용되지 않는 nullptr data를 사용하려고 했습니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_put: Attempted to use non-allowed nullptr data for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 
 	if (db->item_count == UINT32_MAX) {
-		ShowError("db_put: item_count overflow, aborting item insertion.\n"
-				"Database allocated at %s:%d",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_put: item_count가 오버플로우이므로 아이템 추가를 중단합니다.\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_put: item_count overflow, aborting item insertion.\n"
+					"Database allocated at %s:%d",
+					db->alloc_file, db->alloc_line);
 		return 0;
 	}
 	// search for an equal node
@@ -1969,13 +2026,21 @@ static int db_obj_remove(DBMap* self, DBKey key, DBData *out_data)
 	DB_COUNTSTAT(db_remove);
 	if (db == nullptr) return 0; // nullpo candidate
 	if (db->global_lock) {
-		ShowError("db_remove: Database is being destroyed. Aborting entry deletion.\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_remove: 데이터베이스를 폐기하고 항목 추가를 중단합니다.\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_remove: Database is being destroyed. Aborting entry deletion.\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 	if (!(db->options&DB_OPT_ALLOW_NULL_KEY) && db_is_key_null(db->type, key)) {
-		ShowError("db_remove: Attempted to use non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_remove: %s파일의 %d줄에 할당된 데이터베이스에 허용되지 않는 nullptr키를 사용하려고 했습니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_remove: Attempted to use non-allowed nullptr key for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 
@@ -2025,7 +2090,10 @@ static int db_obj_vforeach(DBMap* self, DBApply func, va_list args)
 	DB_COUNTSTAT(db_vforeach);
 	if (db == nullptr) return 0; // nullpo candidate
 	if (func == nullptr) {
-		ShowError("db_foreach: Passed function is nullptr for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_foreach: %s 파일의 %d줄에 할당된 데이터베이스에 대해 전달된 함수가 nullptr입니다.\n",db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_foreach: Passed function is nullptr for db allocated at %s:%d\n",db->alloc_file, db->alloc_line);
 		return 0; // nullpo candidate
 	}
 
@@ -2209,15 +2277,26 @@ static int db_obj_vdestroy(DBMap* self, DBApply func, va_list args)
 	DB_COUNTSTAT(db_vdestroy);
 	if (db == nullptr) return 0; // nullpo candidate
 	if (db->global_lock) {
-		ShowError("db_vdestroy: Database is already locked for destruction. Aborting second database destruction.\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("db_vdestroy: 데이터베이스가 잠겨있어서 제거를 할 수 없습니다. 두번째 데이터베이스 삭제를 중단합니다.\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d\n",
+					db->alloc_file, db->alloc_line);
+		else
+			ShowError("db_vdestroy: Database is already locked for destruction. Aborting second database destruction.\n"
+					"Database allocated at %s:%d\n",
+					db->alloc_file, db->alloc_line);
 		return 0;
 	}
-	if (db->free_lock)
-		ShowWarning("db_vdestroy: Database is still in use, %u lock(s) left. Continuing database destruction.\n"
-				"Database allocated at %s:%d\n",
-				db->free_lock, db->alloc_file, db->alloc_line);
+	if (db->free_lock) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("db_vdestroy: 데이터베이스가 아직 사용중이며, %u의 잠금이 있습니다. 데이터베이스를 계속 삭제중입니다.\n"
+					"할당된 데이터베이스 파일:%s, 줄:%d\n",
+					db->free_lock, db->alloc_file, db->alloc_line);
+		else
+			ShowWarning("db_vdestroy: Database is still in use, %u lock(s) left. Continuing database destruction.\n"
+					"Database allocated at %s:%d\n",
+					db->free_lock, db->alloc_file, db->alloc_line);
+	}
 
 #ifdef DB_ENABLE_STATS
 	switch (db->type) {
@@ -2385,7 +2464,11 @@ DBOptions db_fix_options(DBType type, DBOptions options)
 			return (DBOptions)(options&~(DB_OPT_DUP_KEY|DB_OPT_RELEASE_KEY));
 
 		default:
-			ShowError("db_fix_options: Unknown database type %u with options %x\n", type, options);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("db_fix_options: %u은(는) %x 옵션이 있는 알 수 없는 데이터베이스 타입입니다.\n", type, options);
+			else
+				ShowError("db_fix_options: Unknown database type %u with options %x\n", type, options);
+
 		[[fallthrough]];
 		case DB_STRING:
 		case DB_ISTRING: // String databases, no fix required
@@ -2416,7 +2499,10 @@ DBComparator db_default_cmp(DBType type)
 		case DB_INT64:   return &db_int64_cmp;
 		case DB_UINT64:  return &db_uint64_cmp;
 		default:
-			ShowError("db_default_cmp: Unknown database type %u\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("db_default_cmp: %u은(는) 알 수 없는 데이터베이스 타입입니다.\n", type);
+			else
+				ShowError("db_default_cmp: Unknown database type %u\n", type);
 			return nullptr;
 	}
 }
@@ -2444,7 +2530,10 @@ DBHasher db_default_hash(DBType type)
 		case DB_INT64:   return &db_int64_hash;
 		case DB_UINT64:  return &db_uint64_hash;
 		default:
-			ShowError("db_default_hash: Unknown database type %u\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("db_default_hash: %u은(는) 알 수 없는 데이터베이스 타입입니다.\n", type);
+			else
+				ShowError("db_default_hash: Unknown database type %u\n", type);
 			return nullptr;
 	}
 }
@@ -2498,7 +2587,10 @@ DBReleaser db_custom_release(DBRelease which)
 		case DB_RELEASE_DATA:    return &db_release_data;
 		case DB_RELEASE_BOTH:    return &db_release_both;
 		default:
-			ShowError("db_custom_release: Unknown release options %u\n", which);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("db_custom_release: 알 수 없는 릴리즈 옵션: %u\n", which);
+			else
+				ShowError("db_custom_release: Unknown release options %u\n", which);
 			return nullptr;
 	}
 }
@@ -2806,95 +2898,187 @@ void db_final(void)
 {
 #ifdef DB_ENABLE_STATS
 	DB_COUNTSTAT(db_final);
-	ShowInfo(CL_WHITE "Database nodes" CL_RESET ":\n"
-			"allocated %u, freed %u\n",
-			stats.db_node_alloc, stats.db_node_free);
-	ShowInfo(CL_WHITE "Database types" CL_RESET ":\n"
-			"DB_INT     : allocated %10u, destroyed %10u\n"
-			"DB_UINT    : allocated %10u, destroyed %10u\n"
-			"DB_STRING  : allocated %10u, destroyed %10u\n"
-			"DB_ISTRING : allocated %10u, destroyed %10u\n"
-			"DB_INT64   : allocated %10u, destroyed %10u\n"
-			"DB_UINT64  : allocated %10u, destroyed %10u\n",
-			stats.db_int_alloc,     stats.db_int_destroy,
-			stats.db_uint_alloc,    stats.db_uint_destroy,
-			stats.db_string_alloc,  stats.db_string_destroy,
-			stats.db_istring_alloc, stats.db_istring_destroy,
-			stats.db_int64_alloc,   stats.db_int64_destroy,
-			stats.db_uint64_alloc,  stats.db_uint64_destroy);
-	ShowInfo(CL_WHITE "Database function counters" CL_RESET ":\n"
-			"db_rotate_left     %10u, db_rotate_right    %10u,\n"
-			"db_rebalance       %10u, db_rebalance_erase %10u,\n"
-			"db_is_key_null     %10u,\n"
-			"db_dup_key         %10u, db_dup_key_free    %10u,\n"
-			"db_free_add        %10u, db_free_remove     %10u,\n"
-			"db_free_lock       %10u, db_free_unlock     %10u,\n"
-			"db_int_cmp         %10u, db_uint_cmp        %10u,\n"
-			"db_string_cmp      %10u, db_istring_cmp     %10u,\n"
-			"db_int64_cmp       %10u, db_uint64_cmp      %10u,\n"
-			"db_int_hash        %10u, db_uint_hash       %10u,\n"
-			"db_string_hash     %10u, db_istring_hash    %10u,\n"
-			"db_int64_hash      %10u, db_uint64_hash     %10u,\n"
-			"db_release_nothing %10u, db_release_key     %10u,\n"
-			"db_release_data    %10u, db_release_both    %10u,\n"
-			"dbit_first         %10u, dbit_last          %10u,\n"
-			"dbit_next          %10u, dbit_prev          %10u,\n"
-			"dbit_exists        %10u, dbit_remove        %10u,\n"
-			"dbit_destroy       %10u, db_iterator        %10u,\n"
-			"db_exits           %10u, db_get             %10u,\n"
-			"db_getall          %10u, db_vgetall         %10u,\n"
-			"db_ensure          %10u, db_vensure         %10u,\n"
-			"db_put             %10u, db_remove          %10u,\n"
-			"db_foreach         %10u, db_vforeach        %10u,\n"
-			"db_clear           %10u, db_vclear          %10u,\n"
-			"db_destroy         %10u, db_vdestroy        %10u,\n"
-			"db_size            %10u, db_type            %10u,\n"
-			"db_options         %10u, db_fix_options     %10u,\n"
-			"db_default_cmp     %10u, db_default_hash    %10u,\n"
-			"db_default_release %10u, db_custom_release  %10u,\n"
-			"db_alloc           %10u, db_i2key           %10u,\n"
-			"db_ui2key          %10u, db_str2key         %10u,\n"
-			"db_i642key         %10u, db_ui642key        %10u,\n"
-			"db_i2data          %10u, db_ui2data         %10u,\n"
-			"db_ptr2data        %10u, db_data2i          %10u,\n"
-			"db_data2ui         %10u, db_data2ptr        %10u,\n"
-			"db_init            %10u, db_final           %10u\n",
-			stats.db_rotate_left,     stats.db_rotate_right,
-			stats.db_rebalance,       stats.db_rebalance_erase,
-			stats.db_is_key_null,
-			stats.db_dup_key,         stats.db_dup_key_free,
-			stats.db_free_add,        stats.db_free_remove,
-			stats.db_free_lock,       stats.db_free_unlock,
-			stats.db_int_cmp,         stats.db_uint_cmp,
-			stats.db_string_cmp,      stats.db_istring_cmp,
-			stats.db_int64_cmp,       stats.db_uint64_cmp,
-			stats.db_int_hash,        stats.db_uint_hash,
-			stats.db_string_hash,     stats.db_istring_hash,
-			stats.db_int64_hash,      stats.db_uint64_hash,
-			stats.db_release_nothing, stats.db_release_key,
-			stats.db_release_data,    stats.db_release_both,
-			stats.dbit_first,         stats.dbit_last,
-			stats.dbit_next,          stats.dbit_prev,
-			stats.dbit_exists,        stats.dbit_remove,
-			stats.dbit_destroy,       stats.db_iterator,
-			stats.db_exists,          stats.db_get,
-			stats.db_getall,          stats.db_vgetall,
-			stats.db_ensure,          stats.db_vensure,
-			stats.db_put,             stats.db_remove,
-			stats.db_foreach,         stats.db_vforeach,
-			stats.db_clear,           stats.db_vclear,
-			stats.db_destroy,         stats.db_vdestroy,
-			stats.db_size,            stats.db_type,
-			stats.db_options,         stats.db_fix_options,
-			stats.db_default_cmp,     stats.db_default_hash,
-			stats.db_default_release, stats.db_custom_release,
-			stats.db_alloc,           stats.db_i2key,
-			stats.db_ui2key,          stats.db_str2key,
-			stats.db_i642key,         stats.db_ui642key,
-			stats.db_i2data,          stats.db_ui2data,
-			stats.db_ptr2data,        stats.db_data2i,
-			stats.db_data2ui,         stats.db_data2ptr,
-			stats.db_init,            stats.db_final);
+if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowInfo(CL_WHITE "데이터베이스 노드" CL_RESET ":\n"
+				"할당됨: %u, 여유: %u\n",
+				stats.db_node_alloc, stats.db_node_free);
+		ShowInfo(CL_WHITE "데이터베이스 타입" CL_RESET ":\n"
+				"DB_INT     : 할당됨: %10u, 제거됨: %10u\n"
+				"DB_UINT    : 할당됨: %10u, 제거됨: %10u\n"
+				"DB_STRING  : 할당됨: %10u, 제거됨: %10u\n"
+				"DB_ISTRING : 할당됨: %10u, 제거됨: %10u\n"
+				"DB_INT64   : 할당됨: %10u, 제거됨: %10u\n"
+				"DB_UINT64  : 할당됨: %10u, 제거됨: %10u\n",
+				stats.db_int_alloc,     stats.db_int_destroy,
+				stats.db_uint_alloc,    stats.db_uint_destroy,
+				stats.db_string_alloc,  stats.db_string_destroy,
+				stats.db_istring_alloc, stats.db_istring_destroy,
+				stats.db_int64_alloc,   stats.db_int64_destroy,
+				stats.db_uint64_alloc,  stats.db_uint64_destroy);
+		ShowInfo(CL_WHITE "데이터베이스 함수 갯수" CL_RESET ":\n"
+				"db_rotate_left     %10u, db_rotate_right    %10u,\n"
+				"db_rebalance       %10u, db_rebalance_erase %10u,\n"
+				"db_is_key_null     %10u,\n"
+				"db_dup_key         %10u, db_dup_key_free    %10u,\n"
+				"db_free_add        %10u, db_free_remove     %10u,\n"
+				"db_free_lock       %10u, db_free_unlock     %10u,\n"
+				"db_int_cmp         %10u, db_uint_cmp        %10u,\n"
+				"db_string_cmp      %10u, db_istring_cmp     %10u,\n"
+				"db_int64_cmp       %10u, db_uint64_cmp      %10u,\n"
+				"db_int_hash        %10u, db_uint_hash       %10u,\n"
+				"db_string_hash     %10u, db_istring_hash    %10u,\n"
+				"db_int64_hash      %10u, db_uint64_hash     %10u,\n"
+				"db_release_nothing %10u, db_release_key     %10u,\n"
+				"db_release_data    %10u, db_release_both    %10u,\n"
+				"dbit_first         %10u, dbit_last          %10u,\n"
+				"dbit_next          %10u, dbit_prev          %10u,\n"
+				"dbit_exists        %10u, dbit_remove        %10u,\n"
+				"dbit_destroy       %10u, db_iterator        %10u,\n"
+				"db_exits           %10u, db_get             %10u,\n"
+				"db_getall          %10u, db_vgetall         %10u,\n"
+				"db_ensure          %10u, db_vensure         %10u,\n"
+				"db_put             %10u, db_remove          %10u,\n"
+				"db_foreach         %10u, db_vforeach        %10u,\n"
+				"db_clear           %10u, db_vclear          %10u,\n"
+				"db_destroy         %10u, db_vdestroy        %10u,\n"
+				"db_size            %10u, db_type            %10u,\n"
+				"db_options         %10u, db_fix_options     %10u,\n"
+				"db_default_cmp     %10u, db_default_hash    %10u,\n"
+				"db_default_release %10u, db_custom_release  %10u,\n"
+				"db_alloc           %10u, db_i2key           %10u,\n"
+				"db_ui2key          %10u, db_str2key         %10u,\n"
+				"db_i642key         %10u, db_ui642key        %10u,\n"
+				"db_i2data          %10u, db_ui2data         %10u,\n"
+				"db_ptr2data        %10u, db_data2i          %10u,\n"
+				"db_data2ui         %10u, db_data2ptr        %10u,\n"
+				"db_init            %10u, db_final           %10u\n",
+				stats.db_rotate_left,     stats.db_rotate_right,
+				stats.db_rebalance,       stats.db_rebalance_erase,
+				stats.db_is_key_null,
+				stats.db_dup_key,         stats.db_dup_key_free,
+				stats.db_free_add,        stats.db_free_remove,
+				stats.db_free_lock,       stats.db_free_unlock,
+				stats.db_int_cmp,         stats.db_uint_cmp,
+				stats.db_string_cmp,      stats.db_istring_cmp,
+				stats.db_int64_cmp,       stats.db_uint64_cmp,
+				stats.db_int_hash,        stats.db_uint_hash,
+				stats.db_string_hash,     stats.db_istring_hash,
+				stats.db_int64_hash,      stats.db_uint64_hash,
+				stats.db_release_nothing, stats.db_release_key,
+				stats.db_release_data,    stats.db_release_both,
+				stats.dbit_first,         stats.dbit_last,
+				stats.dbit_next,          stats.dbit_prev,
+				stats.dbit_exists,        stats.dbit_remove,
+				stats.dbit_destroy,       stats.db_iterator,
+				stats.db_exists,          stats.db_get,
+				stats.db_getall,          stats.db_vgetall,
+				stats.db_ensure,          stats.db_vensure,
+				stats.db_put,             stats.db_remove,
+				stats.db_foreach,         stats.db_vforeach,
+				stats.db_clear,           stats.db_vclear,
+				stats.db_destroy,         stats.db_vdestroy,
+				stats.db_size,            stats.db_type,
+				stats.db_options,         stats.db_fix_options,
+				stats.db_default_cmp,     stats.db_default_hash,
+				stats.db_default_release, stats.db_custom_release,
+				stats.db_alloc,           stats.db_i2key,
+				stats.db_ui2key,          stats.db_str2key,
+				stats.db_i642key,         stats.db_ui642key,
+				stats.db_i2data,          stats.db_ui2data,
+				stats.db_ptr2data,        stats.db_data2i,
+				stats.db_data2ui,         stats.db_data2ptr,
+				stats.db_init,            stats.db_final);
+	} else {
+		ShowInfo(CL_WHITE "Database nodes" CL_RESET ":\n"
+				"allocated %u, freed %u\n",
+				stats.db_node_alloc, stats.db_node_free);
+		ShowInfo(CL_WHITE "Database types" CL_RESET ":\n"
+				"DB_INT     : allocated %10u, destroyed %10u\n"
+				"DB_UINT    : allocated %10u, destroyed %10u\n"
+				"DB_STRING  : allocated %10u, destroyed %10u\n"
+				"DB_ISTRING : allocated %10u, destroyed %10u\n"
+				"DB_INT64   : allocated %10u, destroyed %10u\n"
+				"DB_UINT64  : allocated %10u, destroyed %10u\n",
+				stats.db_int_alloc,     stats.db_int_destroy,
+				stats.db_uint_alloc,    stats.db_uint_destroy,
+				stats.db_string_alloc,  stats.db_string_destroy,
+				stats.db_istring_alloc, stats.db_istring_destroy,
+				stats.db_int64_alloc,   stats.db_int64_destroy,
+				stats.db_uint64_alloc,  stats.db_uint64_destroy);
+		ShowInfo(CL_WHITE "Database function counters" CL_RESET ":\n"
+				"db_rotate_left     %10u, db_rotate_right    %10u,\n"
+				"db_rebalance       %10u, db_rebalance_erase %10u,\n"
+				"db_is_key_null     %10u,\n"
+				"db_dup_key         %10u, db_dup_key_free    %10u,\n"
+				"db_free_add        %10u, db_free_remove     %10u,\n"
+				"db_free_lock       %10u, db_free_unlock     %10u,\n"
+				"db_int_cmp         %10u, db_uint_cmp        %10u,\n"
+				"db_string_cmp      %10u, db_istring_cmp     %10u,\n"
+				"db_int64_cmp       %10u, db_uint64_cmp      %10u,\n"
+				"db_int_hash        %10u, db_uint_hash       %10u,\n"
+				"db_string_hash     %10u, db_istring_hash    %10u,\n"
+				"db_int64_hash      %10u, db_uint64_hash     %10u,\n"
+				"db_release_nothing %10u, db_release_key     %10u,\n"
+				"db_release_data    %10u, db_release_both    %10u,\n"
+				"dbit_first         %10u, dbit_last          %10u,\n"
+				"dbit_next          %10u, dbit_prev          %10u,\n"
+				"dbit_exists        %10u, dbit_remove        %10u,\n"
+				"dbit_destroy       %10u, db_iterator        %10u,\n"
+				"db_exits           %10u, db_get             %10u,\n"
+				"db_getall          %10u, db_vgetall         %10u,\n"
+				"db_ensure          %10u, db_vensure         %10u,\n"
+				"db_put             %10u, db_remove          %10u,\n"
+				"db_foreach         %10u, db_vforeach        %10u,\n"
+				"db_clear           %10u, db_vclear          %10u,\n"
+				"db_destroy         %10u, db_vdestroy        %10u,\n"
+				"db_size            %10u, db_type            %10u,\n"
+				"db_options         %10u, db_fix_options     %10u,\n"
+				"db_default_cmp     %10u, db_default_hash    %10u,\n"
+				"db_default_release %10u, db_custom_release  %10u,\n"
+				"db_alloc           %10u, db_i2key           %10u,\n"
+				"db_ui2key          %10u, db_str2key         %10u,\n"
+				"db_i642key         %10u, db_ui642key        %10u,\n"
+				"db_i2data          %10u, db_ui2data         %10u,\n"
+				"db_ptr2data        %10u, db_data2i          %10u,\n"
+				"db_data2ui         %10u, db_data2ptr        %10u,\n"
+				"db_init            %10u, db_final           %10u\n",
+				stats.db_rotate_left,     stats.db_rotate_right,
+				stats.db_rebalance,       stats.db_rebalance_erase,
+				stats.db_is_key_null,
+				stats.db_dup_key,         stats.db_dup_key_free,
+				stats.db_free_add,        stats.db_free_remove,
+				stats.db_free_lock,       stats.db_free_unlock,
+				stats.db_int_cmp,         stats.db_uint_cmp,
+				stats.db_string_cmp,      stats.db_istring_cmp,
+				stats.db_int64_cmp,       stats.db_uint64_cmp,
+				stats.db_int_hash,        stats.db_uint_hash,
+				stats.db_string_hash,     stats.db_istring_hash,
+				stats.db_int64_hash,      stats.db_uint64_hash,
+				stats.db_release_nothing, stats.db_release_key,
+				stats.db_release_data,    stats.db_release_both,
+				stats.dbit_first,         stats.dbit_last,
+				stats.dbit_next,          stats.dbit_prev,
+				stats.dbit_exists,        stats.dbit_remove,
+				stats.dbit_destroy,       stats.db_iterator,
+				stats.db_exists,          stats.db_get,
+				stats.db_getall,          stats.db_vgetall,
+				stats.db_ensure,          stats.db_vensure,
+				stats.db_put,             stats.db_remove,
+				stats.db_foreach,         stats.db_vforeach,
+				stats.db_clear,           stats.db_vclear,
+				stats.db_destroy,         stats.db_vdestroy,
+				stats.db_size,            stats.db_type,
+				stats.db_options,         stats.db_fix_options,
+				stats.db_default_cmp,     stats.db_default_hash,
+				stats.db_default_release, stats.db_custom_release,
+				stats.db_alloc,           stats.db_i2key,
+				stats.db_ui2key,          stats.db_str2key,
+				stats.db_i642key,         stats.db_ui642key,
+				stats.db_i2data,          stats.db_ui2data,
+				stats.db_ptr2data,        stats.db_data2i,
+				stats.db_data2ui,         stats.db_data2ptr,
+				stats.db_init,            stats.db_final);
+	}
 #endif /* DB_ENABLE_STATS */
 	ers_destroy(db_iterator_ers);
 	ers_destroy(db_alloc_ers);

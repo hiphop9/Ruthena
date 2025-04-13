@@ -13,6 +13,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -54,8 +55,12 @@ int inter_pet_tosql(int pet_id, struct s_pet* p)
 		}
 	}
 
-	if (charserv_config.save_log)
-		ShowInfo("Pet saved %d - %s.\n", pet_id, p->name);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s(%d) 큐펫을 저장했습니다.\n", p->name, pet_id);
+		else
+			ShowInfo("Pet saved %d - %s.\n", pet_id, p->name);
+	}
 	return 1;
 }
 
@@ -65,7 +70,10 @@ int inter_pet_fromsql(int pet_id, struct s_pet* p)
 	size_t len;
 
 #ifdef NOISY
-	ShowInfo("Loading pet (%d)...\n",pet_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("(%d) 큐펫을 불러오는중...\n",pet_id);
+	else
+		ShowInfo("Loading pet (%d)...\n",pet_id);
 #endif
 	memset(p, 0, sizeof(struct s_pet));
 
@@ -98,8 +106,12 @@ int inter_pet_fromsql(int pet_id, struct s_pet* p)
 		p->hungry = cap_value(p->hungry, 0, 100);
 		p->intimate = cap_value(p->intimate, 0, 1000);
 
-		if( charserv_config.save_log )
-			ShowInfo("Pet loaded (%d - %s).\n", pet_id, p->name);
+		if( charserv_config.save_log ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s(%d) 큐펫을 불러왔습니다.\n", p->name, pet_id);
+			else
+				ShowInfo("Pet loaded (%d - %s).\n", pet_id, p->name);
+		}
 	}
 	return 0;
 }
@@ -116,7 +128,10 @@ void inter_pet_sql_final(void){
 }
 //----------------------------------
 int inter_pet_delete(int pet_id){
-	ShowInfo("delete pet request: %d...\n",pet_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("삭제 요청된 큐펫: %d...\n",pet_id);
+	else
+		ShowInfo("delete pet request: %d...\n",pet_id);
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` WHERE `pet_id`='%d'", schema_config.pet_db, pet_id) )
 		Sql_ShowDebug(sql_handle);
@@ -131,7 +146,10 @@ int mapif_pet_created(int fd, uint32 account_id, struct s_pet *p)
 	if(p!=nullptr){
 		WFIFOW(fd, 6) = p->class_;
 		WFIFOL(fd, 8) = p->pet_id;
-		ShowInfo("int_pet: created pet %d - %s\n", p->pet_id, p->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("int_pet: %s(%d) 큐펫이 생성되었습니다.\n", p->name, p->pet_id);
+		else
+			ShowInfo("int_pet: created pet %d - %s\n", p->pet_id, p->name);
 	}else{
 		WFIFOB(fd, 6) = 0;
 		WFIFOL(fd, 8) = 0;
@@ -253,7 +271,10 @@ int mapif_save_pet(int fd, uint32 account_id, struct s_pet *data) {
 	RFIFOHEAD(fd);
 	len=RFIFOW(fd, 2);
 	if(sizeof(struct s_pet)!=len-8) {
-		ShowError("inter pet: data size error %" PRIuPTR " %d\n", sizeof(struct s_pet), len-8);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter pet: 데이터 크기 오류!! (펫 크기: %" PRIuPTR " , 길이: %d)\n", sizeof(struct s_pet), len-8);
+		else
+			ShowError("inter pet: data size error %" PRIuPTR " %d\n", sizeof(struct s_pet), len-8);
 	}
 
 	else{

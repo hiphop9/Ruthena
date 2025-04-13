@@ -12,6 +12,7 @@
 #include <common/mmo.hpp>
 #include <common/timer.hpp> // t_tick
 
+
 #include "packets.hpp"
 #include "script.hpp"
 
@@ -49,9 +50,13 @@ struct s_laphine_upgrade;
 struct s_captcha_data;
 enum e_macro_detect_status : uint8;
 enum e_macro_report_status : uint8;
+enum e_runedecompo_result: uint8;
 enum e_hom_state2 : uint8;
 enum _sp;
 enum e_searchstore_failure : uint16;
+enum emote_msg : int8;
+enum emotion_expansion_msg : int8;
+struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub;
 
 enum e_PacketDBVersion { // packet DB
 	MIN_PACKET_DB  = 0x064,
@@ -345,6 +350,26 @@ enum emotion_type {
 	ET_YUT5,
 	ET_YUT6,
 	ET_YUT7,
+	ET_CLICK_ME,
+	ET_DAILY_QUEST,
+	ET_EVENT,
+	ET_JOB_QUEST,
+	ET_TRAFFIC_LINE_QUEST,
+	ET_CUSTOM_1,
+	ET_CUSTOM_2,
+	ET_CUSTOM_3,
+	ET_CUSTOM_4,
+	ET_CUSTOM_5,
+	ET_CUSTOM_6,
+	ET_CUSTOM_7,
+	ET_CUSTOM_8,
+	ET_CUSTOM_9,
+	ET_CUSTOM_10,
+	ET_CUSTOM_11,
+	ET_CUSTOM_12,
+	ET_CUSTOM_13,
+	ET_CUSTOM_14,
+	ET_CUSTOM_15,
 	//
 	ET_MAX
 };
@@ -487,6 +512,7 @@ enum useskill_fail_cause : uint8_t
 	USESKILL_FAIL_THERE_ARE_NPC_AROUND = 83,
 	USESKILL_FAIL_NEED_MORE_BULLET = 84,
 	USESKILL_FAIL_COINS = 85,
+	USESKILL_FAIL_EXIST_STORE_ASSISTANT = 89,
 	// 86-99 unknown
 	USESKILL_FAIL_AP_INSUFFICIENT = 100,
 	USESKILL_FAIL_MAX
@@ -691,7 +717,8 @@ enum e_config_type : uint32 {
 	CONFIG_OPEN_EQUIPMENT_WINDOW = 0,
 	CONFIG_CALL,
 	CONFIG_PET_AUTOFEED,
-	CONFIG_HOMUNCULUS_AUTOFEED
+	CONFIG_HOMUNCULUS_AUTOFEED,
+	CONFIG_SHOW_COSTUME = 5
 };
 
 enum e_memorial_dungeon_command : uint16 {
@@ -1101,6 +1128,9 @@ void clif_displaymessage(const int fd, const char* mes);
 void clif_disp_message(struct block_list* src, const char* mes, size_t len, enum send_target target);
 void clif_broadcast(struct block_list* bl, const char* mes, size_t len, int type, enum send_target target);
 void clif_broadcast2(struct block_list* bl, const char* mes, size_t len, unsigned long fontColor, short fontType, short fontSize, short fontAlign, short fontY, enum send_target target);
+//Charkami @�� �� @�� ���� ���� by �糪ƽ
+int clif_ykami(struct block_list *bl, const char* mes, int len, unsigned long fontColor); //Y
+int clif_ymsg(struct block_list *bl, const char* mes, int len, unsigned long fontColor,enum send_target target); //Y
 void clif_heal( map_session_data& sd, int32 type, uint32 val );
 void clif_resurrection( block_list& bl );
 void clif_map_property(struct block_list *bl, enum map_property property, enum send_target t);
@@ -1380,10 +1410,12 @@ enum out_ui_type : int8 {
 	OUT_UI_QUEST,
 	OUT_UI_ATTENDANCE,
 	OUT_UI_ENCHANTGRADE,
-	OUT_UI_ENCHANT = 10,
+	OUT_UI_CHANGE_MATERIAL,
+	OUT_UI_ENCHANT
 };
 
 void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data );
+void clif_ui_open2( map_session_data& sd, enum out_ui_type ui_type );
 void clif_attendence_response( map_session_data *sd, int32 data );
 
 void clif_weight_limit( map_session_data* sd );
@@ -1416,6 +1448,20 @@ void clif_summon_hp_bar(struct mob_data& md);
 void clif_laphine_synthesis_open( map_session_data *sd, std::shared_ptr<s_laphine_synthesis> synthesis );
 void clif_laphine_upgrade_open( map_session_data* sd, std::shared_ptr<s_laphine_upgrade> upgrade );
 
+void clif_stall_vending_open(map_session_data *sd);
+void clif_stall_buying_open(map_session_data *sd);
+void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message);
+void clif_parse_stall_buying_set( int fd, map_session_data* sd );
+void clif_parse_stall_vending_set( int fd, map_session_data* sd );
+void clif_stall_showunit(map_session_data *sd, struct s_stall_data *st);
+void clif_stall_ui_close(map_session_data *sd, int type, int reason);
+void clif_parse_stall_vending_cancel( int fd, map_session_data* sd );
+void clif_parse_stall_buying_cancel( int fd, map_session_data* sd );
+void clif_parse_stall_close( int fd, map_session_data* sd );
+void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message);
+void clif_stall_vending_list(map_session_data *sd, s_stall_data *st);
+void clif_stall_buying_list(map_session_data *sd, s_stall_data *st);
+
 // Reputation System
 void clif_reputation_type( map_session_data& sd, int64 type, int64 points );
 void clif_reputation_list( map_session_data& sd );
@@ -1447,7 +1493,33 @@ void clif_macro_detector_status(map_session_data &sd, e_macro_detect_status styp
 void clif_macro_reporter_select(map_session_data &sd, const std::vector<uint32> &aid_list);
 void clif_macro_reporter_status(map_session_data &sd, e_macro_report_status stype);
 
+void clif_parse_emotion2(int fd, map_session_data *sd);
+void clif_parse_emotion_expansion_request(int fd, map_session_data *sd);
+void clif_emotion_success(struct block_list *bl, int16 packId, int16 emoteId);
+void clif_emotion_fail(map_session_data *sd, int16 packId, int16 emoteId, enum emote_msg status);
+void clif_emotion_expansion_response_success(map_session_data *sd, int16 packId, int8 isRented, uint32 RentEndTime);
+void clif_emotion_expansion_response_fail(map_session_data *sd, int16 packId, enum emotion_expansion_msg status);
+void clif_emotion_expansion_list(map_session_data *sd, std::vector<struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub> &list);
+
+void clif_rune_ui_open( map_session_data* sd );
+void clif_parse_asktag_rune( int fd, map_session_data* sd );
+void clif_bookinfo_rune( map_session_data* sd, uint16 tagID );
+void clif_setinfo_rune( map_session_data* sd, uint16 tagID );
+void clif_parse_result_rune_ui_open( int fd, map_session_data* sd );
+void clif_parse_bookactivate_rune( int fd, map_session_data* sd );
+void clif_parse_setactivate_rune( int fd, map_session_data* sd );
+void clif_setactivate_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_parse_setupgrade_rune( int fd, map_session_data* sd );
+void clif_setupgrade_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_enablerefresh_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_enablerefresh_rune2 (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_onlogenable_rune (map_session_data* sd);
+void clif_parse_decompo_rune( int fd, map_session_data* sd );
+void clif_runedecompowindow_result (map_session_data* sd, enum e_runedecompo_result result, std::unordered_map<t_itemid, uint32> material_item_list);
+
 void clif_dynamicnpc_result( map_session_data& sd, e_dynamicnpc_result result );
+// Body Size Controller
+void clif_body_size(struct block_list* bl, int val1);
 
 void clif_set_dialog_align(map_session_data& sd, int npcid, e_say_dialog_align align);
 void clif_set_npc_window_size(map_session_data& sd, int width, int height);

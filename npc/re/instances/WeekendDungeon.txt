@@ -1,49 +1,47 @@
 //===== rAthena Script =======================================
 //= Weekend Memorial Dungeon
 //===== Description: =========================================
-//= [Walkthrough Conversion]
-//= Weekend Memorial Dungeon
-//===== Changelogs: ==========================================
-//= 1.0 Initial release [Everade]
+//한글화 스카이러브
 //============================================================
 
-pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
-	mes "[Marry Jae]";
+pay_arche,44,124,5	script	마리아쥬	4_F_JOB_BLACKSMITH,{
+	mes "[마리아쥬]";
 	if (BaseLevel < 60) {
-		mes "Your base level is too low, come back when you hit level 60+.";
+		mes "좋은 날씨야. 같이 페이욘 던전 1층에서";
+		mes "피크닉이라도 즐기고 싶을 정도군.";
 		close;
 	}
 	mes "^ff0000If you attempt to tame any monsters, it will not count as a kill. Please be careful.^000000";
 	next;
 	.@day = gettime(DT_DAYOFWEEK);
 	if (.@day != SATURDAY && .@day != SUNDAY) {
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "Oh, a curious onlooker? I'm Marry Jae, the person in charge of weekends among the days of the week.";
 		next;
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "What is the weekend dungeon? Actually, it's a specially designed space for new adventurers to train.";
 		next;
 		mes "^0000FFLooking around, it's obvious that Marry Jae is talking to you.^000000";
 		next;
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "For those who do not have a party on the weekends, this place is hunting and experience gaining grounds for lonely adventurers!";
 		next;
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "Besides, the experience gain here is very generous.";
 		next;
 		select( "When is the opening time?" );
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "The dungeon will be open during:";
 		mes "^0000FFSaturday 00:00 ~ Sunday 23:59^000000";
 		next;
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "I hope to see you when the weekend arrives~";
 		close;
 	}
 	.@md_name$ = "Weekend Dungeon";
 
 	if (getcharid(1) < 1) {
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "You need to form a party of one member or more.";
 		close;
 	}
@@ -55,7 +53,7 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		switch( checkquest(12377,PLAYTIME) ) {
 		case -1:
 		case 2:
-			mes "[Marry Jae]";
+			mes "[마리아쥬]";
 			mes "Sorry, but the entry period to the " + .@md_name$ + " has expired.";
 			mes "Take a rest while waiting for the dungeon to be available again.";
 			close;
@@ -67,7 +65,7 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 	case 2:
 		erasequest 12377;
 		erasequest 12378;
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "The cooldown has expired.";
 		mes "You may re-enter the Memorial Dungeon.";
 		close;
@@ -76,14 +74,14 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 	if (is_party_leader() == true)
 		.@menu$ = "Prepare Memorial Dungeon";
 
-	mes "[Marry Jae]";
+	mes "[마리아쥬]";
 	mes "I think you're just about ready.";
 	mes "Now, would you like to enter it now?";
 	next;
 	switch( select( .@menu$, "Enter Weekend Dungeon", "Cancel" ) ) {
 	case 1:
 		instance_create(.@md_name$);
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "The Memorial Dungeon has been created.";
 		mes "You may now enter.";
 		close;
@@ -98,7 +96,7 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 			mes "An unknown error has occurred.";
 			close;
 		case IE_OK:
-			mes "[Marry Jae]";
+			mes "[마리아쥬]";
 			mes "Off you go!";
 			mapannounce "pay_arche", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
 			if (isbegin_quest(12377) == 0)
@@ -109,7 +107,7 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		}
 		end;
 	case 3:
-		mes "[Marry Jae]";
+		mes "[마리아쥬]";
 		mes "You have not prepared?";
 		mes "Can't really help it I guess.";
 		close;
@@ -117,19 +115,24 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 }
 
 //Merchant
-pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
-	.@zeny = 60000;
-	mes "[Gift Supplies Clerk]";
-	mes "I offer packaging services for those who wish to present a precious gift to a cherished one.";
+pay_arche,44,121,5	script	선물용품 점원	4_F_02,{
+	.@zeny = 200000;
+	mes "[선물용품 점원]";
+	mes "소중한분에게 비약을 선물하고 싶으신";
+	mes "분을 위해 제가 직접 포장을 해드리고";
+	mes "있습니다.";
 	next;
-	mes "[Gift Supplies Clerk]";
-	mes "If you have 5 units of <ITEM>" + getitemname(23143) + "<INFO>23143</INFO></ITEM> or <ITEM>" + getitemname(23142) + "<INFO>23142</INFO></ITEM>, I can pack it for just ^FF0000" + F_InsertComma(.@zeny) + "^000000 Zeny!";
-	mes "Do you want to pack it right now?";
+	mes "[선물용품 점원]";
+	mes "같은 종류의 비약을 5개 이상 소지하고";
+	mes "계시면 포장이 가능하며 별도로";
+	mes "20만제니를 포장비용으로 받고";
+	mes "있습니다. 지금 바로 포장 해 드릴까요?";
 	next;
-	switch( select( "Cancel", "Growth Elixir Packing", "Job Elixir Packing" ) ) {
+	switch( select( "취소", "성장비약포장", "직업비약포장" ) ) {
 	case 1:
-		mes "[Gift Supplies Clerk]";
-		mes "Come back whenever you need packaging services!";
+		mes "[선물용품 점원]";
+		mes "언제든 포장을 윈하시면 다시";
+		mes "찾아와주세요.";
 		close;
 	case 2:
 		.@item = 23142;
@@ -140,28 +143,24 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 		.@box = 23145;
 		break;
 	}
-	mes "[Gift Supplies Clerk]";
-	if (countitem(.@item) < 5) {
-		mes "Please come back when you have enough materials.";
-		close;
-	}
-	if (Zeny < .@zeny) {
-		mes "Please come back when you have enough Zeny.";
-		mes F_InsertComma(.@zeny) + "z to be specific.";
+	mes "[선물용품 점원]";
+	if (countitem(.@item) < 5 || Zeny < .@zeny ) {
+		mes "재료나 소지금이 부족하신 것 같네요.";
+		mes "준비가 되면 다시 찾아와주세요.";
 		close;
 	}
 	if (checkweight(23144,1) == 0) {
-		mes "You have too many kinds of objects. Clear your inventory.";
+		mes "개체 종류가 너무 많습니다. 인벤토리를 정리하세요.";
 		close;
 	}
 	if (MaxWeight - Weight < 10000) {
-		mes "Can't continue because you have too many heavy objects. Reduce your total weight by clearing your inventory.";
+		mes "무거운 물건이 너무 많아서 계속할 수 없습니다. 재고를 정리하여 총 무게를 줄이세요.";
 		close;
 	}
 	mes "Confirm to spend " + F_InsertComma(.@zeny) + "z to package 5 <ITEM>" + getitemname(.@item) + "<INFO>" + .@item + "</INFO></ITEM> into <ITEM>" + getitemname(.@box) + "<INFO>" + .@box + "</INFO></ITEM>?";
 	next;
 	if (select( "Yes", "No" ) == 2) {
-		mes "[Gift Supplies Clerk]";
+		mes "[선물용품 점원]";
 		mes "Come back whenever you need packaging services!";
 		close;
 	}
@@ -172,10 +171,10 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 }
 
 //Instance
-1@md_pay,239,30,6	script	Marry Jae#0_1	4_F_JOB_BLACKSMITH,{
+1@md_pay,239,30,6	script	마리아쥬#0_1	4_F_JOB_BLACKSMITH,{
 	if (is_party_leader() == false)
 		end;
-	mes "[Marry Jae]";
+	mes "[마리아쥬]";
 	mes "Before we start setting up the environment here, we'll give you the chance to choose an appropriate difficulty level.";
 	mes "I could make my own choice, but each person handles it differently based on their abilities.";
 	next;
@@ -208,7 +207,7 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 		setarray 'mob[0],3648,3642,3654;
 		break;
 	}
-	mes "[Marry Jae]";
+	mes "[마리아쥬]";
 	if (BaseLevel < .@min_level) {
 		mes "Your base level is too low to select this, you need to be level " + .@min_level + " + .";
 		close;
@@ -224,7 +223,7 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 	end;
 OnStart:
 	sleep 2500;
-	disablenpc instance_npcname("Marry Jae#0_1");
+	disablenpc instance_npcname("마리아쥬#0_1");
 
 	.@event$ = instance_npcname("map_md_pay_spawn") + "::OnFarmiliarDead";
 	killmonster 'map_md_pay$, .@event$;

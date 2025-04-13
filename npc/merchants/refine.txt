@@ -1,101 +1,101 @@
-//===== rAthena Script ======================================= 
-//= Refining NPCs
-//===== By: ==================================================
-//= Syrus22 (1.1) dafide18 (1.4) Skotlex (1.5)
-//===== Current Version: =====================================
+//===== rAthena	script	=======================================
+//= NPC 정제하기
+//===== 게시자: ========================================= =========
+//= Syrus22(1.1) dafide18(1.4) Skotlex(1.5)
+//===== 현재 버전: ======================================
 //= 3.4
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= Refining NPCs and Metal Salesmen.
-//===== Additional Comments: =================================
-//= 3.0 Updated several NPC names and locations. [Xantara]
-//=     Added WoE map Refiners.
-//= 3.1 Added the new refinement & Ore creation NPC's for +11 and above Refinement. [Masao]
-//= 3.2 Moved some scripts to Renewal file, other minor changes. [Euphy]
-//= 3.2a Added 'disable_items' command. [Euphy]
-//= 3.3 Some official script updates. [Euphy]
-//= 3.4 Added VIP features. [Euphy]
-//= 3.5 Added Refine UI [Atemo, Lemongrass]
-//============================================================
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= NPC와 금속 판매원을 정제합니다.
+//===== 추가 의견: ==================================
+//= 3.0 여러 NPC 이름과 위치가 업데이트되었습니다. [잔타라]
+//= WoE 맵 리파이너를 추가했습니다.
+//= 3.1 +11 이상 제련에 대한 새로운 제련 및 광석 생성 NPC를 추가했습니다. [마사오]
+//= 3.2 일부 스크립트를 갱신 파일로 이동하고 기타 사소한 변경 사항을 적용했습니다. [유피]
+//= 3.2a 'disable_items' 명령이 추가되었습니다. [유피]
+//= 3.3 일부 공식	script	업데이트. [유피]
+//= 3.4 VIP 기능이 추가되었습니다. [유피]
+//= 3.5 Refine UI 추가 [Atemo, Lemongrass]
+//================================================ ============
 
-// Christopher: Geffen Blacksmith
-//============================================================
-geffen_in,110,172,0	script	Christopher#1	63,{
-	mes "[Christopher Guillenrow]";
-	mes "Welcome to Christopher's Workshop. Ye can get all yer stuff for forging here. What business";
-	mes "brings ye to me?";
+// 크리스토퍼: 게펜 대장장이
+//================================================ ============
+geffen_in,110,172,0	script	크리스토퍼::Christopher#1	63,{
+	mes "[크리스토퍼 길렌로우]";
+	mes "크리스토퍼의 작업장에 오신 것을 환영합니다. 여기에서 단조에 필요한 모든 것을 얻을 수 있습니다. 무슨 사업인가요?";
+	mes "당신을 나에게 데려오나요?";
 	next;
-	switch(select("Purchase Anvil:Purchase Forging Item:Purchase Metal:Purify Rough Ores:Cancel")) {
+	switch(select("모루 구입:단조 아이템 구입:금속 구입:원석 정화:취소")) {
 	case 1:
-		mes "[Christopher Guillenrow]";
-		mes "A better Anvil gives ye a greeeater chance to make better weapons, ye know? But they'll cost ye more zeny. Just get it off yer chest and buy what fits your purposes best, laddy.";
+		mes "[크리스토퍼 길렌로우]";
+		mes "더 좋은 모루는 더 나은 무기를 만들 수 있는 기회를 제공합니다. 하지만 비용은 더 많이 들 것입니다. 그냥 마음에서 꺼내어 목적에 가장 적합한 것을 구입하세요, 아가씨.";
 		next;
-		switch(select("Anvil - 30,000 zeny:Oridecon Anvil - 120,000 zeny:Golden Anvil - 300,000 zeny:Better Anvil than the others.:Cancel.")) {
+		switch(select("모루 - 30,000 제니:오리데오콘 모루 - 120,000 제니:황금 모루 - 300,000 제니:다른 모루보다 더 좋습니다.:취소.")) {
 		case 1:
 			if (Zeny < 30000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
-			getitem 986,1; // Anvil
+			getitem 986,1; // 모루
 			Zeny = Zeny-30000;
-			mes "[Christopher Guillenrow]";
-			mes "This is the cheapest one, but efficient enough to forge most items. Thank ye fer shopping at me workshop.  Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "가장 저렴하지만 대부분의 아이템을 제작할 수 있을 만큼 효율적입니다. 제 공방에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 2:
 			if (Zeny < 120000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			getitem 987,1; // Oridecon_Anvil
 			Zeny = Zeny-120000;
-			mes "[Christopher Guillenrow]";
-			mes "Aye, friend ye have an eye for the anvil. This must be the proper anvil for a Blacksmith, eh? Thank ye fer shopping at me workshop.  Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "그래 친구야, 모루에 안목이 있구나. 대장장이에게 딱 맞는 모루겠지? 내 작업장에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 오세요.";
 			close;
 		case 3:
 			if (Zeny < 300000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			getitem 988,1; // Golden_Anvil
 			Zeny = Zeny-300000;
-			mes "[Christopher Guillenrow]";
-			mes "This one is the best among all me stuffs in me workshop! With this, ye can rule the Blacksmith world! Thank ye fer shopping at me workshop.  Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "내 공방에 있는 물건 중에 이게 제일 짱이에요! 이것만 있으면 대장장이 세계를 지배할 수 있어요! 내 공방에서 쇼핑해주셔서 감사합니다. 필요할 때 언제든지 편하게 오세요.";
 			close;
 		case 4:
-			mes "[Christopher Guillenrow]";
-			mes "Well, sorry. But I don't have anythin' harder' than the Golden Anvil.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "글쎄, 미안. 하지만 황금 모루보다 더 어려운 건 없어.";
 			next;
-			mes "[Christopher Guillenrow]";
-			mes "Me thinks 'Ringgel,' the Legendary Anvil Maker would have one. But, I don't think ye can find him, though he be somewhere in this world.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "전설의 모루 제작자인 '링겔'이 하나 갖고 있을 것 같아요. 하지만 이 세계 어딘가에 있어도 그를 찾을 수 없을 것 같아요.";
 			close;
 		case 5:
-			mes "[Christopher Guillenrow]";
-			mes "Okay, feel free to come anytime, whenever ye need. Fare ye well.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "알겠습니다. 필요하시면 언제든지 오세요. 잘 지내세요.";
 			close;
 		}
 	case 2:
-		mes "[Christopher Guillenrow]";
-		mes "A respectable blacksmith uses fine tools. Ye can become one o'those with me Stuff. Choose anything ye want.";
+		mes "[크리스토퍼 길렌로우]";
+		mes "훌륭한 대장장이는 훌륭한 도구를 사용합니다. 나와 같은 사람이 될 수 있습니다. 원하는 것은 무엇이든 선택하세요.";
 		next;
-		switch(select("Mini-Furnace - 150 zeny:Iron Hammer - 1000 zeny:Golden Hammer - 3000 zeny:Oridecon Hammer - 5000 zeny:Cancel.")) {
+		switch(select("소형로 - 150 zeny:철 망치 - 1000 zeny:황금 망치 - 3000 zeny:오리데오콘 망치 - 5000 zeny:취소.")) {
 		case 1:
-			mes "[Christopher Guillenrow]";
-			mes "It's a much needed tool fer refining metal! So, How many do ye wish to buy? If ye want to quit, just type the number '0.'";
+			mes "[크리스토퍼 길렌로우]";
+			mes "금속을 제련하는데 꼭 필요한 도구입니다! 그럼, 몇 개 구매하시겠습니까? 그만두고 싶으면 숫자 '0'을 입력하시면 됩니다.";
 			next;
 			while(1) {
 				input .@input;
 				if (.@input == 0) {
-					mes "[Christopher Guillenrow]";
-					mes "Aye, the deal is canceled. Fare ye well.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "예, 거래는 취소되었습니다. 잘 지내세요.";
 					close;
 				}
 				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[Christopher Guillenrow]";
-					mes "Ye can buy 500, er less.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "500개는 살 수 있어요, 아니면 그 이하로요.";
 					next;
 				}
 				else {
@@ -104,79 +104,79 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 			}
 			.@sell = .@input * 150;
 			if (Zeny < .@sell) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			if (checkweight(612,.@input) == 0) {
-				mes "[Christopher Guillenrow]";
-				mes "Ye look like you don't got enough room in yer inventory. Put some stuff into your Kafra Storage, why don't ye?";
+				mes "[크리스토퍼 길렌로우]";
+				mes "인벤토리에 공간이 부족한 것 같군요. 카프라 저장소에 물건을 좀 넣어두는 게 어때요?";
 				close;
 			}
 			getitem 612,.@input; // Portable_Furnace
 			Zeny = Zeny-.@sell;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미워크샵에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 2:
 			if (Zeny < 1000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			getitem 613,1; // Iron_Hammer
 			Zeny = Zeny-1000;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미워크샵에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 3:
 			if (Zeny < 3000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			getitem 614,1; // Golden_Hammer
 			Zeny = Zeny-3000;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미워크샵에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 4:
 			if (Zeny < 5000) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			getitem 615,1; // Oridecon_Hammer
 			Zeny = Zeny-5000;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미워크샵에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 5:
-			mes "[Christopher Guillenrow]";
-			mes "Feel free to come anytime, whenever ye need. Fare ye well.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "필요하시면 언제든지 오세요. 건강하세요.";
 			close;
 		}
 	case 3:
-		mes "[Christopher Guillenrow]";
-		mes "I prepare every Metal, and only the high quality ones o'course. Now then, which one do ye need?";
+		mes "[크리스토퍼 길렌로우]";
+		mes "모든 금속을 준비합니다. 품질이 좋은 금속만 준비합니다. 그럼 어떤 금속이 필요합니까?";
 		next;
-		switch(select("Phracon - 200z.:Emveretarcon - 1000z.:Cancel.")) {
+		switch(select("프라콘 - 200z.:엠베르타콘 - 1000z.:취소.")) {
 		case 1:
-			mes "[Christopher Guillenrow]";
-			mes "So, How many do ye wish to buy? If ye dont want anything, just type the number as '0.'";
+			mes "[크리스토퍼 길렌로우]";
+			mes "그럼 몇개 사고 싶으신가요? 원하시는게 없으면 '0'으로 입력하시면 됩니다.";
 			next;
 			while(1) {
 				input .@input;
 				if (.@input == 0) {
-					mes "[Christopher Guillenrow]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "거래가 완료되었습니다";
+					mes "취소되었습니다.";
+					mes "안녕하세요.";
 					close;
 				}
 				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[Christopher Guillenrow]";
-					mes "Ye can buy 500, er less.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "500개는 살 수 있어요, 아니면 그 이하로요.";
 					next;
 				}
 				else {
@@ -185,36 +185,36 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 			}
 			.@sell = .@input * 200;
 			if (Zeny < .@sell) {
-				mes "[Christopher Guillenrow]";
-				mes "Ye don't have enough money. Ye know I can't sell this at a lower price... You know how the wifey nags about Zeny.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "돈이 부족해. 이거 싼값에 못팔잖아... 와이프가 제니 잔소리하는거 알지?";
 				close;
 			}
 			if (checkweight(1010,.@input) == 0) {
-				mes "[Christopher Guillenrow]";
-				mes "Ye look like you don't have the room to carry anythin' new. Why don't ye put some things into Kafra Storage n' come back.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "새 물건을 들고 다닐 공간이 없는 것 같군요. 카프라 저장소에 물건을 좀 넣고 다시 돌아오시는 것이 어떨까요.";
 				close;
 			}
-			getitem 1010,.@input; // Phracon
+			getitem 1010,.@input; // 프라콘
 			Zeny = Zeny-.@sell;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미워크샵에서 쇼핑해주셔서 감사합니다. 필요하시면 언제든지 편하게 오세요.";
 			close;
 		case 2:
-			mes "[Christopher Guillenrow]";
-			mes "So, how many do ye wish to buy? If ye dont want anything at all, just type the number as '0.'";
+			mes "[크리스토퍼 길렌로우]";
+			mes "그럼 몇 개 사고 싶으신가요? 아무것도 원하지 않으시면 '0'으로 입력하시면 됩니다.";
 			next;
 			while(1) {
 				input .@input;
 				if (.@input == 0) {
-					mes "[Christopher Guillenrow]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "거래가 완료되었습니다";
+					mes "취소되었습니다.";
+					mes "안녕하세요.";
 					close;
 				}
 				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[Christopher Guillenrow]";
-					mes "Ye can buy 500, er less.";
+					mes "[크리스토퍼 길렌로우]";
+					mes "500개는 살 수 있어요, 아니면 그 이하로요.";
 					next;
 				}
 				else {
@@ -223,149 +223,149 @@ geffen_in,110,172,0	script	Christopher#1	63,{
 			}
 			.@sell = .@input * 1000;
 			if (Zeny < .@sell) {
-				mes "[Christopher Guillenrow]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "네가 가지고 있는 제니로는 이걸 갖게 할 수 없을 것 같아. 너 때문에 돈을 잃을 수는 없어.";
 				close;
 			}
 			if (checkweight(1011,.@input) == 0) {
-				mes "[Christopher Guillenrow]";
-				mes "Me friend... Seems to me ye don't have Inventory space. Why doncha put some things into Kafra Storage first?";
+				mes "[크리스토퍼 길렌로우]";
+				mes "내 친구... 내 생각엔 인벤토리 공간이 없는 것 같은데 왜 돈챠가 먼저 카프라 저장소에 물건을 넣어두는 걸까?";
 				close;
 			}
-			getitem 1011,.@input; // Emveretarcon
+			getitem 1011,.@input; // 엠베르타콘
 			Zeny = Zeny-.@sell;
-			mes "[Christopher Guillenrow]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need, whenever ye want.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "미 워크숍에서 쇼핑해주셔서 감사합니다. 언제든지, 필요하실 때, 원하실 때 편하게 오세요.";
 			close;
 		case 3:
-			mes "[Christopher Guillenrow]";
-			mes "Feel free to come anytime, whenever ye need. Fare ye well.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "필요하시면 언제든지 오세요. 건강하세요.";
 			close;
 		}
 	case 4:
-		mes "[Christopher Guillenrow]";
-		mes "I can purify yer Oridecon and Elunium. I make a refined Ore out of 5 o'each rough ones. Well... Which one do ye want to make?";
+		mes "[크리스토퍼 길렌로우]";
+		mes "오리데오콘과 에르늄을 정화할 수 있어요. 거친 광석 5개로 정제된 광석을 만드거든요. 음... 어떤 걸 만들고 싶나요?";
 		next;
-		switch(select("Make Oridecon:Make Elunium:Cancel.")) {
+		switch(select("오리데오콘 만들기:에르늄 만들기:취소.")) {
 		case 1:
 			if (countitem(756) < 5) {
-				mes "[Christopher Guillenrow]";
-				mes "I told ye, I need 5 o'the rough Oridecons fer one Oridecon.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "말했잖아, 오리데오콘 하나에 대략적인 오리데오콘 원석 5개가 필요하다고.";
 				close;
 			}
 			else {
-				delitem 756,5;  //Oridecon_Stone
-				getitem 984,1; // Oridecon
-				mes "[Christopher Guillenrow]";
-				mes "Here's an Oridecon fer ye. Ye will be always welcome here, I'll be waitin' for ye.";
+				delitem 756,5;  //오리데오콘_원석
+				getitem 984,1; // 오리데오콘
+				mes "[크리스토퍼 길렌로우]";
+				mes "여기 오리데오콘이 있습니다. 여기서는 언제나 환영받을 것입니다. 저는 여러분을 기다리고 있습니다.";
 				close;
 			}
 		case 2:
 			if (countitem(757) < 5) {
-				mes "[Christopher Guillenrow]";
-				mes "I told ye, I need 5 rough Eluniums fer one Elunium.";
+				mes "[크리스토퍼 길렌로우]";
+				mes "말했잖아, 에르늄 1개당 대략적인 에르늄 원석 5개가 필요하다고.";
 				close;
 			}
 			else {
-				delitem 757,5;  //Elunium_Stone
-				getitem 985,1; // Elunium
-				mes "[Christopher Guillenrow]";
-				mes "Arrr, here's yer Elunium. Yer business is always welcome here, so feel free to come again.";
+				delitem 757,5;  //에르늄_원석
+				getitem 985,1; // 에르늄
+				mes "[크리스토퍼 길렌로우]";
+				mes "아아아아, 여기 에르늄이 있습니다. 이곳에서는 언제나 환영이니, 언제든 다시 오세요.";
 				close;
 			}
 		case 3:
-			mes "[Christopher Guillenrow]";
-			mes "Feel free to come anytime, whenever ye need. Fare ye well.";
+			mes "[크리스토퍼 길렌로우]";
+			mes "필요하시면 언제든지 오세요. 건강하세요.";
 			close;
 		}
 	case 5:
-		mes "[Christopher Guillenrow]";
-		mes "Feel free to come anytime, whenever ye need and whenever ye want. Fare ye well.";
+		mes "[크리스토퍼 길렌로우]";
+		mes "필요할 때, 원할 때 언제든지 오세요. 건강하세요.";
 		close;
 	}
 }
 
-// Paul Spanner: Einbroch Blacksmith Supplier
-//============================================================
-ein_in01,38,29,0	script	Paul Spanner	63,{
+// 폴 스패너: 아인브로크 대장장이 공급업체
+//================================================ ============
+ein_in01,38,29,0	script	폴 스패너::Paul Spanner	63,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
-	mes "[Paul Spanner]";
-	mes "Welcome, my friend.";
-	mes "In my shop, you will find everything that you need in forging.";
-	mes "Tell me what you need.";
+	mes "[폴 스패너]";
+	mes "어서오세요, 친구.";
+	mes "내 가게에서는 단조에 필요한 모든 것을 찾을 수 있습니다.";
+	mes "필요한 것이 무엇인지 말해주세요.";
 	next;
-	switch(select("Purchase Anvil.:Purchase Forging Items.:Purchase Metal.:Process Ores.:Quit.")) {
+	switch(select("모루 구입.:단조 품목 구입.:금속 구입.:광석 처리:종료.")) {
 	case 1:
-		mes "[Paul Spanner]";
-		mes "Anvil is the most necessary item for Blacksmiths.";
-		mes "Since you will use an Anvil more than once, you'd better buy a nice one.";
+		mes "[폴 스패너]";
+		mes "모루는 대장장이에게 가장 필요한 아이템입니다.";
+		mes "모루는 여러번 쓸거니까 좋은거 사시는게 좋을 것 같아요.";
 		next;
-		switch(select("Anvil - 30,000z.:Oridecon Anvil - 120,000z.:Golden Anvil - 300,000z.:I need a better anvil.:Cancel.")) {
+		switch(select("모루 - 30,000z.오리데오콘 모루 - 120,000z.:황금 모루 - 300,000z.:더 나은 모루가 필요합니다.:취소.")) {
 		case 1:
 			if (Zeny < 30000) {
-				mes "[Paul Spanner]";
-				mes "With that much of money, you cannot even buy a toy anvil!";
+				mes "[폴 스패너]";
+				mes "그 돈으로는 장난감 모루도 살 수 없잖아!";
 				close;
 			}
-			getitem 986,1; //Anvil
+			getitem 986,1; //모루
 			Zeny = Zeny-30000;
-			mes "[Paul Spanner]";
-			mes "It is the cheapest anvil which has the most basic ability.";
-			mes "Thank you for using my shop. If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "가장 기본적인 능력을 갖춘 가장 저렴한 모루입니다.";
+			mes "저희 매장을 이용해 주셔서 감사합니다. 필요한 사항이 있으시면 말씀해주세요.";
 			close;
 		case 2:
 			if (Zeny < 120000) {
-				mes "[Paul Spanner]";
-				mes "With that much of money, you cannot even buy a toy anvil!";
+				mes "[폴 스패너]";
+				mes "그 돈으로는 장난감 모루도 살 수 없잖아!";
 				close;
 			}
 			getitem 987,1; //Oridecon_Anvil
 			Zeny = Zeny-120000;
-			mes "[Paul Spanner]";
-			mes "Ah, you have an eye for anvil. A Blacksmith needs an anvil at least as good as this.";
-			mes "Thank you for using my shop. If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "아, 모루에 대한 안목이 있으시군요. 대장장이라면 이 정도 품질의 모루가 필요하겠네요.";
+			mes "저희 매장을 이용해 주셔서 감사합니다. 필요한 사항이 있으시면 말씀해주세요.";
 			close;
 		case 3:
 			if (Zeny < 300000) {
-				mes "[Paul Spanner]";
-				mes "With that much of money, you cannot even buy a toy anvil!";
+				mes "[폴 스패너]";
+				mes "그 돈으로는 장난감 모루도 살 수 없잖아!";
 				close;
 			}
 			getitem 988,1; //Golden_Anvil
 			Zeny = Zeny-300000;
-			mes "[Paul Spanner]";
-			mes "I can tell your ambition to become a good Blacksmith just by looking at you to choose this Golden Anvil!";
-			mes "This anvil will surely aid you in creating the best weapons.";
+			mes "[폴 스패너]";
+			mes "이 황금 모루를 선택하는 모습만 봐도 훌륭한 대장장이가 되고자 하는 당신의 야망을 알 수 있어요!";
+			mes "이 모루는 당신이 최고의 무기를 만드는 데 반드시 도움이 될 것입니다.";
 			close;
 		case 4:
-			mes "[Paul Spanner]";
-			mes "I am sorry, but I do not sell better anvils than Golden Anvil.";
-			mes "Unless you find the legendary anvil of 'Linggell', I don't think that you could find better one than Golden Anvil in any other places.";
+			mes "[폴 스패너]";
+			mes "죄송합니다만 황금모루보다 좋은 모루는 판매하지 않습니다.";
+			mes "'링겔'이라는 전설의 모루를 찾지 않는 이상 다른 곳에서는 황금 모루보다 더 좋은 모루를 찾을 수 없을 것 같아요.";
 			close;
 		case 5:
-			mes "[Paul Spanner]";
-			mes "If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "필요하신 사항이 있으시면 말씀해주세요.";
 			close;
 		}
 	case 2:
-		mes "[Paul Spanner]";
-		mes "You need various materials to process ores and to forge weapons.";
-		mes "I have everything that you need. Take a look.";
+		mes "[폴 스패너]";
+		mes "광석을 가공하고 무기를 제작하려면 다양한 재료가 필요합니다.";
+		mes "당신이 필요로 하는 건 다 있어요. 한 번 보세요.";
 		next;
-		switch(select("Mini Furnace - 150z.:Iron Hammer - 1,000z.:Golden Hammer - 3,000z.:Oridecon Hammer - 5,000z.:Cancel.")) {
+		switch(select("소형 용광로 - 150z.:철 망치 - 1,000z.:황금 망치 - 3,000z.:오리데오콘 망치 - 5,000z.:취소.")) {
 		case 1:
 			.@item = 612;
 			.@item_cost = 150;
 			.@item_weight = 200;
-			mes "[Paul Spanner]";
-			mes "You definately need this furnce to process ores!";
+			mes "[폴 스패너]";
+			mes "광석을 처리하려면 이 화로가 반드시 필요해요!";
 			next;
 			break;
 		case 2:
@@ -384,23 +384,23 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 			.@item_weight = 400;
 			break;
 		case 5:
-			mes "[Paul Spanner]";
-			mes "If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "필요하신 사항이 있으시면 말씀해주세요.";
 			close;
 		}
-		mes "[Paul Spanner]";
-		mes "So, how many do you need? If you want to cancel the trade, enter '0'.";
+		mes "[폴 스패너]";
+		mes "그럼 몇 개가 필요한가요? 거래를 취소하려면 '0'을 입력하세요.";
 		next;
 		while(1) {
 			input .@input;
 			if (.@input == 0) {
-				mes "[Paul Spanner]";
-				mes "You have canceled the trade. If you need anything, just let me know.";
+				mes "[폴 스패너]";
+				mes "거래를 취소하셨습니다. 필요한 사항이 있으시면 말씀해주세요.";
 				close;
 			}
 			else if ((.@input < 0) || (.@input > 500)) {
-				mes "[Paul Spanner]";
-				mes "You can only buy 500 or less at a time.";
+				mes "[폴 스패너]";
+				mes "한 번에 500개 이하로만 구매하실 수 있습니다.";
 				next;
 			}
 			else {
@@ -409,26 +409,26 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 		}
 		.@sell = .@input * .@item_cost;
 		if (Zeny < .@sell) {
-			mes "[Paul Spanner]";
-			mes "You don't have enough money. Sorry, I cannot sell them at a loss.";
+			mes "[폴 스패너]";
+			mes "돈이 부족해요. 죄송합니다. 손해를 보고 팔 수는 없습니다.";
 			close;
 		}
 		if (checkweight(.@item,.@input) == 0) {
-			mes "[Paul Spanner]";
-			mes "Hey, you look pale. Why don't you go lighten your weight first.";
+			mes "[폴 스패너]";
+			mes "야, 얼굴이 창백해 보이는데 우선 몸을 가볍게 하는 게 어때?";
 			close;
 		}
 		Zeny = Zeny-.@sell;
 		getitem .@item,.@input;
-		mes "[Paul Spanner]";
-		mes "Thank you for using my shop. If you need anything, just let me know.";
+		mes "[폴 스패너]";
+		mes "저희 매장을 이용해 주셔서 감사합니다. 필요한 사항이 있으시면 말씀해주세요.";
 		close;
 	case 3:
-		mes "[Paul Spanner]";
-		mes "I have high quality metal.";
-		mes "So, which metal would you like to buy?";
+		mes "[폴 스패너]";
+		mes "나는 고품질의 금속을 가지고 있어요.";
+		mes "그럼 어떤 금속을 사고 싶으신가요?";
 		next;
-		switch(select("Phracon - 200z.:Emveretarcon - 1,000z.:Quit.")) {
+		switch(select("프라콘 - 200z.:엠베르타콘 - 1,000z.:종료.")) {
 		case 1:
 			.@item = 1010;
 			.@item_price = 200;
@@ -438,23 +438,23 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 			.@item_price = 1000;
 			break;
 		case 3:
-			mes "[Paul Spanner]";
-			mes "If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "필요하신 사항이 있으시면 말씀해주세요.";
 			close;
 		}
-		mes "[Paul Spanner]";
-		mes "So, how many of them do you need? If you want to cancel the trade, enter '0'.";
+		mes "[폴 스패너]";
+		mes "그럼 몇 개가 필요한가요? 거래를 취소하려면 '0'을 입력하세요.";
 		next;
 		while(1) {
 			input .@input;
 			if (.@input == 0) {
-				mes "[Paul Spanner]";
-				mes "The trade has been canceled. If you need anything, just let me know.";
+				mes "[폴 스패너]";
+				mes "거래가 취소되었습니다. 필요하신 사항이 있으시면 말씀해주세요.";
 				close;
 			}
 			else if ((.@input < 0) || (.@input > 500)) {
-				mes "[Paul Spanner]";
-				mes "You can buy 500 or less at a time.";
+				mes "[폴 스패너]";
+				mes "한 번에 500개 이하로 구매하실 수 있습니다.";
 				next;
 			}
 			else {
@@ -463,71 +463,71 @@ ein_in01,38,29,0	script	Paul Spanner	63,{
 		}
 		.@sell = .@input * .@item_price;
 		if (Zeny < .@sell) {
-			mes "[Paul Spanner]";
-			mes "You don't have enough money. Sorry, I cannot sell them at a loss.";
+			mes "[폴 스패너]";
+			mes "돈이 부족해요. 죄송합니다. 손해를 보고 팔 수는 없습니다.";
 			close;
 		}
 		if (checkweight(.@item,.@input) == 0) {
-			mes "[Paul Spanner]";
-			mes "Hey, you look pale. Why don't you go lighten your weight first?";
+			mes "[폴 스패너]";
+			mes "야, 얼굴이 창백해 보이는데 우선 살을 빼는 게 어때?";
 			close;
 		}
 		getitem .@item,.@input;
 		Zeny = Zeny-.@sell;
-		mes "[Paul Spanner]";
-		mes "Thank you for using my shop. If you need anything, just let me know.";
+		mes "[폴 스패너]";
+		mes "저희 매장을 이용해 주셔서 감사합니다. 필요한 사항이 있으시면 말씀해주세요.";
 		close;
 	case 4:
-		mes "[Paul Spanner]";
-		mes "I can process Oridecon and Elunium for you.";
-		mes "You need 5 ores to process them into one Oridecon or Elunium.";
-		mes "So, which one do you want to process?";
-		switch(select("Oridecon:Elunium:Quit.")) {
+		mes "[폴 스패너]";
+		mes "오리데오콘과 에르늄을 처리해드릴 수 있습니다.";
+		mes "오리데오콘이나 에르늄 하나를 가공하려면 광석 5개가 필요합니다.";
+		mes "그럼 어떤 것을 처리하시겠습니까?";
+		switch(select("오리데오콘:에르늄:종료.")) {
 		case 1:
 			if (countitem(756) < 5) {
-				mes "[Paul Spanner]";
-				mes "You need 5 ores to process them into one pure Oridecon.";
+				mes "[폴 스패너]";
+				mes "순수한 오리데오콘을 만들기 위해서는 5개의 광석이 필요합니다.";
 				close;
 			}
 			else {
 				delitem 756,5; //Oridecon_Stone
-				getitem 984,1; //Oridecon
-				mes "[Paul Spanner]";
-				mes "There you go. Thank you for using my service.";
+				getitem 984,1; //오리데오콘
+				mes "[폴 스패너]";
+				mes "자, 제 서비스를 이용해 주셔서 감사합니다.";
 				close;
 			}
 		case 2:
 			if (countitem(757) < 5) {
-				mes "[Paul Spanner]";
-				mes "You need 5 ores to process them into one pure Elunium.";
+				mes "[폴 스패너]";
+				mes "순수한 에르늄 1개를 가공하려면 광석 5개가 필요합니다.";
 				close;
 			}
 			else {
-				delitem 757,5; //Elunium_Stone
-				getitem 985,1; //Elunium
-				mes "[Paul Spanner]";
-				mes "There you go. Thank you for using my service.";
+				delitem 757,5; //에르늄_스톤
+				getitem 985,1; //에르늄
+				mes "[폴 스패너]";
+				mes "자, 제 서비스를 이용해 주셔서 감사합니다.";
 				close;
 			}
 		case 3:
-			mes "[Paul Spanner]";
-			mes "If you need anything, just let me know.";
+			mes "[폴 스패너]";
+			mes "필요하신 사항이 있으시면 말씀해주세요.";
 			close;
 		}
 	case 5:
-		mes "[Paul Spanner]";
-		mes "If you need anything, just let me know.";
+		mes "[폴 스패너]";
+		mes "필요하신 사항이 있으시면 말씀해주세요.";
 		close;
 	}
 }
 
-// Weapon/Armor Refiners
-//============================================================
-prt_in,63,60,0	script	Hollgrehenn	4_M_03,{
+// 무기/방어구 정제기
+//================================================ ============
+prt_in,63,60,0	script	홀그렌::Hollgrehenn	4_M_03,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Hollgrehenn]";
-		mes "I'm a blacksmith who can refine weapons and equipment.";
-		mes "Do you have any items that you'd like to refine?";
+		mes "[홀그렌]";
+		mes "나는 무기와 장비를 제련할 수 있는 대장장이입니다.";
+		mes "혹시 수정하고 싶은 아이템이 있으신가요?";
 		close2;
 		refineui();
 		end;
@@ -537,12 +537,12 @@ prt_in,63,60,0	script	Hollgrehenn	4_M_03,{
 	}
 }
 
-morocc_in,73,38,6	script	Aragham	4W_M_03,{
+morocc_in,73,38,6	script	아리감::Aragham	4W_M_03,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Aragham]";
-		mes "De~ sert~ Blacksmith~";
-		mes "Aragham Ssaleh~ who can refine anything Ssaleh~";
-		mes "Let me see what you'd like to refine~";
+		mes "[아라감]";
+		mes "데~ 서트~ 대장장이~";
+		mes "아라함 썰레~ 무엇이든 다듬을 수 있는 썰레~";
+		mes "무엇을 다듬고 싶은지 한번 볼까요~";
 		close2;
 		refineui();
 		end;
@@ -552,10 +552,10 @@ morocc_in,73,38,6	script	Aragham	4W_M_03,{
 	}
 }
 
-payon,144,173,5	script	Antonio	4_M_ORIENT01,{
+payon,144,173,5	script	안토니오::Antonio	4_M_ORIENT01,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Antonio]";
-		mes "Stop nagging and get me the equipment you want to refine.";
+		mes "[안토니오]";
+		mes "잔소리 그만하고 개선하고 싶은 장비를 갖다주세요.";
 		close2;
 		refineui();
 		end;
@@ -565,11 +565,11 @@ payon,144,173,5	script	Antonio	4_M_ORIENT01,{
 	}
 }
 
-alberta_in,28,58,0	script	Fredrik	4_M_03,{
+alberta_in,28,58,0	script	후레드릭::Fredrik	4_M_03,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Fredrik Hermanthorn]";
-		mes "I am a blacksmith who can refine your weapon or equipment.";
-		mes "Do you have anything that you'd like to refine?";
+		mes "[후레드릭 헤르만손]";
+		mes "나는 당신의 무기나 장비를 다듬는 대장장이입니다.";
+		mes "더 다듬고 싶은 부분이 있나요?";
 		close2;
 		refineui();
 		end;
@@ -579,10 +579,10 @@ alberta_in,28,58,0	script	Fredrik	4_M_03,{
 	}
 }
 
-yuno_in01,171,21,4	script	Lambert	4_M_ORIENT01,{
+yuno_in01,171,21,4	script	디스터브::Lambert	4_M_ORIENT01,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Lambert]";
-		mes "Wel...come... This is... the best... smithy... in Juno.";
+		mes "[디스터브]";
+		mes "어서오세요...오세요...주노에서...최고의...대장간입니다.";
 		close2;
 		refineui();
 		end;
@@ -592,11 +592,11 @@ yuno_in01,171,21,4	script	Lambert	4_M_ORIENT01,{
 	}
 }
 
-ein_in01,24,87,5	script	Manthasman	4_M_DWARF,{
+ein_in01,24,87,5	script	만타스만::Manthasman	4_M_DWARF,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Manthasman Pruhag]";
-		mes "Hahaha, you already knew it. So you'd like to refine something?";
-		mes "Let's try something risky today!";
+		mes "[만타스만 프루하그]";
+		mes "하하하 이미 알고 계시죠. 그럼 좀 다듬고 싶으신가요?";
+		mes "오늘은 좀 위험한 걸 시도해 보자!";
 		close2;
 		refineui();
 		end;
@@ -606,12 +606,12 @@ ein_in01,24,87,5	script	Manthasman	4_M_DWARF,{
 	}
 }
 
-lhz_in02,282,20,7	script	Fulerr	4_M_LGTMAN,{
+lhz_in02,282,20,7	script	풀러::Fulerr	4_M_LGTMAN,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Fulerr]";
-		mes "Hehe... You wanna refine?";
-		mes "Hehe.. Consider it done..";
-		mes "Hehe....";
+		mes "[풀러]";
+		mes "헤헤... 다듬고 싶어?";
+		mes "헤헤.. 끝이라고 생각해..";
+		mes "헤헤....";
 		close2;
 		refineui();
 		end;
@@ -621,22 +621,22 @@ lhz_in02,282,20,7	script	Fulerr	4_M_LGTMAN,{
 	}
 }
 
-//============================================================
-//= Main Refiner Function
-//============================================================
-//= To allow auto safe refining/multiple refining set the
-//= second argument to '1' in the function call.
-//= If you enable this function, be sure to edit the value of
-//= .@safe to the max safe refine in refine.yml as well.
-//============================================================
+//================================================ ============
+//= 메인 리파이너 함수
+//================================================ ============
+//= 자동 안전 정제/다중 정제를 허용하려면
+//= 함수 호출에서 '1'에 대한 두 번째 인수입니다.
+//= 이 기능을 활성화하는 경우 값을 편집해야 합니다.
+//= .@safe를 통해 Refine.yml의 최대 안전 구체화도 가능합니다.
+//================================================ ============
 function	script	refinemain	{
 	disable_items;
 	.@npc_name$ = getarg(0);
 	.@features = getarg(1);
 	mes "["+ .@npc_name$ +"]";
-	mes "I'm the Armsmith.";
-	mes "I can refine all kinds of weapons, armor and equipment, so let me";
-	mes "know what you want me to refine.";
+	mes "나는 대장장이입니다.";
+	mes "모든 종류의 무기, 방어구, 장비를 제련할 수 있으니 맡겨주세요";
+	mes "내가 무엇을 개선하고 싶은지 알아보세요.";
 	next;
 
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
@@ -649,36 +649,36 @@ function	script	refinemain	{
 	}
 	if (.@equipped == 0) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I don't think I can refine any items you have...";
+		mes "당신이 가지고 있는 어떤 아이템도 개선할 수 없을 것 같아요...";
 		close;
 	}
 	.@part = .@indices[select(.@menu$)];
 
-	if(!getequipisequiped(.@part)) { //custom check
+	if(!getequipisequiped(.@part)) { //사용자 정의 확인
 		mes "["+ .@npc_name$ +"]";
-		mes "You're not wearing";
-		mes "anything there that";
-		mes "I can refine.";
+		mes "당신은 옷을 입지 않았습니다";
+		mes "그거 뭐든지";
+		mes "수정할 수 있어요.";
 		emotion ET_FRET;
 		close;
 	}
-	//Check if the item is refinable...
+	//아이템이 정제 가능한지 확인합니다...
 	if(!getequipisenableref(.@part)) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I don't think I can";
-		mes "refine this item at all...";
+		mes "난 할 수 없을 것 같아";
+		mes "이 항목을 전혀 개선하지 마세요...";
 		close;
 	}
-	//Check to see if the items is already +10
+	//항목이 이미 +10인지 확인합니다.
 	if(getequiprefinerycnt(.@part) >= 10) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I can't refine this";
-		mes "any more. This is as";
-		mes "refined as it gets!";
+		mes "이건 개선할 수가 없어요";
+		mes "더 이상. 이건";
+		mes "최선을 다해!";
 		close;
 	}
-	.@refineitemid = getequipid(.@part); // save id of the item
-	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
+	.@refineitemid = getequipid(.@part); // 항목의 ID를 저장합니다.
+	.@refinerycnt = getequiprefinerycnt(.@part); //정제소 개수 저장
 	setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
 	.@price = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_ZENY_COST);
 	.@material = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_MATERIAL_ID);
@@ -692,18 +692,18 @@ function	script	refinemain	{
 				.@safe = 4;
 				break;
 			default:
-				// TODO:
+				// 할 것:
 				close;
 		}
 
-		// If the VIP system is enabled, the prices for non-VIP players are considerably higher.
+		// VIP 시스템이 활성화되면 VIP가 아닌 플레이어의 가격이 상당히 높아집니다.
 		if( VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE) ){
 			switch( .@equip_lv ){
 				case 1:
 					.@price = .@price * 10;
 					break;
 				default:
-					// TODO:
+					// 할 것:
 					close;
 			}
 		}
@@ -724,11 +724,11 @@ function	script	refinemain	{
 				.@safe = 4;
 				break;
 			default:
-				// TODO:
+				// 할 것:
 				close;
 		}
 
-		// If the VIP system is enabled, the prices for non-VIP players are considerably higher.
+		// VIP 시스템이 활성화되면 VIP가 아닌 플레이어의 가격이 상당히 높아집니다.
 		if( VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE) ){
 			switch( .@equip_lv ){
 				case 1:
@@ -752,71 +752,71 @@ function	script	refinemain	{
 		.@safe = 4;
 	}
 
-	// TODO: What was this? Maybe shadow?
+	// TODO: 이게 뭐였지? 아마도 그림자?
 	// case 5: .@price = .@price * 10; break;
 
 	if(.@features != 1) {
 		mes "["+ .@npc_name$ +"]";
-		mes "To refine this I need";
+		mes "이것을 개선하려면 필요해요";
 		mes "one ^003366"+getitemname(.@material)+"^000000 and";
-		mes "a service fee of " + .@price + " Zeny.";
-		mes "Do you really wish to continue?";
+		mes "서비스 수수료 " + .@price + " Zeny.";
+		mes "정말 계속하시겠습니까?";
 		next;
-		if(select("Yes:No") == 2){
+		if(select("예:아니요") == 2){
 			mes "["+ .@npc_name$ +"]";
-			mes "Yeah...";
-			mes "There's no need to";
-			mes "rush. Take your time.";
+			mes "그래...";
+			mes "그럴 필요 없어요";
+			mes "서두르세요. 천천히 하세요.";
 			close;
 		}
 		if(getequippercentrefinery(.@part) < 100) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Oh no! If I continue to";
-			mes "refine this, there's a risk it could";
+			mes "안돼! 계속하면";
+			mes "이것을 다듬으면 위험할 수 있어요";
 			switch(.@material) {
 			case 985:
-				mes "be destroyed! That means that ^FF0000this equipment^000000, and ^FF0000any cards^000000 or special properties added to this armor, ^FF0000will be gone^000000.";
+				mes "파괴됩니다! 즉, ^FF0000이 장비^000000과 ^FF0000모든 카드^000000 또는 이 방어구에 추가된 특수 속성 ^FF0000^000000이 사라집니다.";
 				break;
 			default:
-				mes "be destroyed, and you'd ^FF0000lose the weapon^000000, any ^FF0000cards in the weapon^000000,";
-				mes "or any added special properties.";
+				mes "파괴되면 ^FF0000무기^000000, 무기에 있는 ^FF0000카드^000000을 잃게 됩니다,";
+				mes "또는 추가된 특별한 속성.";
 				break;
 			}
 			next;
 			mes "["+getarg(0)+"]";
-			mes "I can't make it any clearer.";
-			mes "Once a weapon is destroyed,";
-			mes "there's no getting it back.";
-			mes "You really have a chance to";
-			mes "^FF0000lose this weapon^000000 forever.";
-			mes "Do you still want to refine?";
+			mes "더 명확하게 말할 수는 없습니다.";
+			mes "무기가 파괴되면,";
+			mes "돌려받을 수 없어요.";
+			mes "정말 그럴 기회가 있어요";
+			mes "^FF0000이 무기는 영원히 잃어버리세요^000000.";
+			mes "아직도 개선하시겠습니까?";
 			next;
-			if(select("Yes:No") == 2){
+			if(select("예:아니요") == 2){
 				mes "["+ .@npc_name$ +"]";
-				mes "I completely agree...";
-				mes "I might be a great refiner, but sometimes even I make mistakes.";
+				mes "전적으로 동의합니다...";
+				mes "나는 훌륭한 정제자이지만 때로는 실수를 할 때도 있습니다.";
 				close;
 			}
 		}
 		if((countitem(.@material) < 1) || (Zeny < .@price)) {
 			mes "["+ .@npc_name$ +"]";
-			mes "You don't seem to have";
-			mes "enough Zeny or "+getitemname(.@material)+"...";
-			mes "Go get some more. I'll be";
-			mes "here all day if you need me.";
+			mes "당신은 그렇지 않은 것 같아요";
+			mes "Zeny는 충분합니다. 또는 "+getitemname(.@material)+"...";
+			mes "가서 좀 더 사오세요. 그럴게요";
+			mes "제가 필요하시면 하루 종일 여기로 오세요.";
 			close;
 		}
 		Zeny = Zeny-.@price;
 		delitem .@material,1;
 
-		// anti-hack
+		// 해킹 방지
 		if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
 		    callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
 			mes "["+ .@npc_name$ +"]";
 			emotion ET_FRET;
-			mes "Wait a second...";
-			mes "Do you think I'm stupid?!";
-			mes "You switched the item while I wasn't looking! Get out of here!";
+			mes "잠깐만요...";
+			mes "내가 바보라고 생각해요?!";
+			mes "내가 보지 않는 동안 아이템을 바꾸셨네요! 여기서 나가세요!";
 			close;
 		}
 
@@ -826,19 +826,19 @@ function	script	refinemain	{
 			emotion (!rand(5))?ET_MONEY:ET_HUK;
 			.@lose = rand(1,3);
 			if (.@lose == 1) {
-				mes "OH! MY GOD!";
-				mes "Damn it! Not again!";
-				mes "I'm terribly sorry, but you know practice does make perfect.";
-				mes "Um, right? Heh heh...";
+				mes "오! 맙소사!";
+				mes "젠장! 또 안 돼!";
+				mes "정말 죄송하지만 연습이 완벽함을 만든다는 걸 아시죠?";
+				mes "어, 그렇죠? 에헤헤...";
 			} else if(.@lose == 2) {
-				mes "Nooooooo!";
-				mes "It broke!";
-				mes "I-I'm sorry!";
+				mes "안돼오오오오오!";
+				mes "깨졌어!";
+				mes "미안해요!";
 			} else {
-				mes "Crap!";
-				mes "It couldn't take";
-				mes "much more tempering!";
-				mes "Sorry about this...";
+				mes "젠장!";
+				mes "그럴 리가 없어";
+				mes "훨씬 더 부드러워졌어요!";
+				mes "죄송해요...";
 			}
 			close;
 		}
@@ -847,58 +847,58 @@ function	script	refinemain	{
 		emotion ET_SMILE;
 		.@win = rand(1,3);
 		if (.@win == 1) {
-			mes "Perfect!";
-			mes "Heh heh!";
-			mes "Once again,";
-			mes "flawless work";
-			mes "from the master~";
+			mes "완벽해요!";
+			mes "헤헤헤!";
+			mes "다시 한 번,";
+			mes "완벽한 작업";
+			mes "주인님으로부터~";
 		} else if(.@win == 2) {
-			mes "Success...!";
-			mes "Yet again, my amazing";
-			mes "talent truly dazzles";
-			mes "and shines today.";
+			mes "성공했어요...!";
+			mes "아직도 놀랍네요";
+			mes "재능은 정말 눈부시네요";
+			mes "오늘도 빛난다.";
 		} else {
-			mes "Heh heh!";
-			mes "I'm all done.";
-			mes "No doubt, my work is";
-			mes "to your satisfaction.";
-			mes "Sheer, utter perfection~";
+			mes "헤헤헤!";
+			mes "다 끝났어요.";
+			mes "물론 내 일은";
+			mes "당신의 만족을 위해.";
+			mes "완벽해요~";
 		}
 		close;
 	}
 
-// New Refining Functions ========================
+// 새로운 정제 함수 ========================
 	if (.@refinerycnt < .@safe) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I can refine this to the safe limit or a desired number of times. It's your choice.";
+		mes "안전한 한도나 원하는 횟수만큼 조정할 수 있습니다. 선택은 귀하의 몫입니다.";
 		next;
-		.@menu2 = select("To the safe limit, please.","I'll decide how many times.","I've changed my mind...");
+		.@menu2 = select("안전한 한계까지 부탁드립니다.","횟수는 제가 결정하겠습니다.","마음이 바뀌었습니다...");
 	} else
 		.@menu2 = 2;
 	switch(.@menu2){
-	case 1: 
+	case 1:
 		.@refinecnt = .@safe - .@refinerycnt;
 		break;
 	case 2:
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "How many times would you like me to refine your item?";
+		mes "당신의 아이템을 몇 번이나 수정하시겠습니까?";
 		next;
 		input .@refinecnt;
 		.@refinecheck = .@refinecnt + .@refinerycnt;
 		if (.@refinecnt < 1 || .@refinecheck > 10) {
 			mes "["+ .@npc_name$ +"]";
-			mes "I can't refine this item that many times.";
+			mes "이 아이템은 여러번 다듬을 수가 없어요.";
 			close;
 		}
 		if(.@refinecheck > .@safe) {
 			.@refinecheck = .@refinecheck - .@safe;
 			mes "["+ .@npc_name$ +"]";
-			mes "This will try to refine the equipment " + .@refinecheck + " times past the safe limit. Your equipment may be destroyed... is that ok?";
+			mes "이것은 안전 한계를 " + .@refinecheck + " 번 초과하여 장비를 정제하려고 시도합니다. 장비가 파괴될 수 있습니다... 괜찮습니까?";
 			next;
-			if(select("Yes...","No...") == 2){
+			if(select("예...","아니요...") == 2){
 				mes "["+ .@npc_name$ +"]";
-				mes "You said so... So be it.";
+				mes "그렇게 말했잖아요...그렇게 하세요.";
 				close;
 			}
 		}
@@ -906,21 +906,21 @@ function	script	refinemain	{
 	case 3:
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "You said so... So be it.";
+		mes "그렇게 말했잖아요...그렇게 하세요.";
 		close;
 	}
 	.@fullprice = .@price * .@refinecnt;
 	mes "["+ .@npc_name$ +"]";
-	mes "That will cost you " + .@refinecnt + " " + getitemname(.@material) + " and " + .@fullprice + " Zeny. Is that ok?";
+	mes "그러면 비용이 많이 들 겁니다. " + .@refinecnt + " " + getitemname(.@material) + " 그리고 " + .@fullprice + " Zeny. 괜찮으세요?";
 	next;
-	if(select("Yes","No...") == 2){
+	if(select("예","아니요...") == 2){
 		mes "["+ .@npc_name$ +"]";
-		mes "You said so... So be it.";
+		mes "그렇게 말했잖아요...그렇게 하세요.";
 		close;
 	}
 	if(countitem(.@material) < .@refinecnt || Zeny < .@fullprice) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Is that all you got? Unfortunately I can't work for you at a lower price. Try putting yourself in my shoes.";
+		mes "그것밖에 없나요? 아쉽게도 더 낮은 가격에는 일할 수 없습니다. 제 입장이 되어 보세요.";
 		close;
 	}
 	Zeny = Zeny - .@fullprice;
@@ -928,27 +928,27 @@ function	script	refinemain	{
 	while(.@refinecnt){
 		if (getequipisequiped(.@part) == 0) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Look here... you don't have any items on...";
+			mes "여기 보세요... 아이템이 하나도 없어요...";
 			close;
 		}
-		// anti-hack
+		// 해킹 방지
 		if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
 				callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt) || (.@menu2 == 1 && getequippercentrefinery(.@part) < 100)) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Clang... No, but did you imagine I could be so stupid?!";
-			mes "You changed it...";
-			mes "Get out before I stun you with my Hammer!!";
+			mes "삑삑... 아니, 그런데 내가 이렇게 멍청할 수 있을 거라고 상상이나 했어?!";
+			mes "바꾸셨군요...";
+			mes "내가 망치로 널 기절시키기 전에 나가!!";
 			close;
-		} 
-		mes "Clang, clang!!!";
+		}
+		mes "꽝, 꽝!!!";
 		if(.@menu2 == 2 && getequippercentrefinery(.@part) <= rand(100)) {
 			failedrefitem .@part;
 			emotion ET_HUK;
 			mes "["+ .@npc_name$ +"]";
-			mes "WAHHHH!!! I'm so sorry... I warned you this could happen...";
+			mes "으아아앙!!! 미안해요... 이런 일이 일어날 수도 있다고 경고했는데...";
 			.@refinecnt = .@refinecnt - 1;
 			if(.@refinecnt == 0) close;
-			mes "Here's the unused Zeny and materials back...";
+			mes "사용하지 않은 제니와 재료는 여기 있습니다...";
 			getitem .@material,.@refinecnt;
 			.@fullprice = .@refinecnt * .@price;
 			Zeny = Zeny + .@fullprice;
@@ -961,61 +961,61 @@ function	script	refinemain	{
 		next;
 	}
 	mes "["+ .@npc_name$ +"]";
-	mes "All finished... Come again soon.";
+	mes "다 끝났어요... 조만간 또 오세요.";
 	close;
 }
 
-// Material Salesmen
+// 자재 판매원
 //============================================================
-prt_in,56,68,5	script	Vurewell	86,{
+prt_in,56,68,5	script	양::Vurewell	86,{
 	callfunc "phramain","Vurewell";
 	end;
 }
-payon,145,178,3	script	Begnahd	88,{
+payon,145,178,3	script	양::Begnahd	88,{
 	callfunc "phramain","Begnahd";
 	end;
 }
-morocc_in,63,32,6	script	Sade	99,{
+morocc_in,64,37,6	script	마리크::Sade	99,{
 	callfunc "phramain","Sade";
 	end;
 }
-alberta_in,13,71,3	script	Kahlamanlith	86,{
+alberta_in,15,65,3	script	칼라만리스::Kahlamanlith	86,{
 	callfunc "phramain","Kahlamanlith";
 	end;
 }
-yuno_in01,171,27,4	script	Dilemma	88,{
+yuno_in01,171,27,4	script	딜레마::Dilemma	88,{
 	callfunc "phramain","Dilemma";
 	end;
 }
-ein_in01,15,87,3	script	Tirehaus	86,{
+ein_in01,15,87,3	script	티레하우스::Tirehaus	86,{
 	callfunc "phramain","Tirehaus";
 	end;
 }
-lhz_in02,278,24,3	script	Krugg	86,{
+lhz_in02,278,24,3	script	점원::Krugg	86,{
 	callfunc "phramain","Krugg";
 	end;
 }
 
-// Material Salesmen Functions
-//============================================================
+// 머티리얼 세일즈맨 함수
+//================================================ ============
 function	script	phramain	{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
 	.@npc_name$ = getarg(0);
 	mes "["+ .@npc_name$ +"]";
-	mes "I sell 2 kinds of Metal";
-	mes "for tempering weaponry.";
-	mes "I have ^007777Phracon^000000 for Level 1";
-	mes "Weapons, and ^007777Emveretarcon^000000";
-	mes "for Level 2 Weapons.";
+	mes "메탈 2종을 판매합니다";
+	mes "무기 강화용.";
+	mes "레벨 1에는 ^007777프라콘^000000이 있습니다";
+	mes "무기와 ^007777엠베르타콘^000000";
+	mes "레벨 2 무기용.";
 	next;
-	switch(select("Phracon - 200 Zeny:Emveretarcon - 1000 Zeny:Ask about other Metals")) {
+	switch(select("프라콘 - 200 Zeny:엠베르타콘 - 1000 Zeny:다른 금속에 대해 물어보세요")) {
 	case 1:
 		.@material = 1010;
 		.@price = 200;
@@ -1026,29 +1026,29 @@ function	script	phramain	{
 		break;
 	case 3:
 		mes "["+ .@npc_name$ +"]";
-		mes "Other metals?";
-		mes "Well, you'll need special metals to upgrade higher level weapons, or any kind of armor. But you know, Oridecon and Elunium is really";
-		mes "hard to just find...";
+		mes "다른 금속도요?";
+		mes "글쎄요, 더 높은 레벨의 무기나 어떤 종류의 방어구를 업그레이드하려면 특별한 금속이 필요합니다. 하지만 아시다시피 Oridecon과 Elunium은 정말 그렇습니다";
+		mes "찾기가 힘들어요...";
 		close;
 	}
 	mes "["+ .@npc_name$ +"]";
-	mes "So how many do you wish to buy?";
-	mes "If you don't want any, please enter the number, '0.'";
+	mes "그럼 몇개 사시겠어요?";
+	mes "원하지 않으시면 '0'번을 입력해주세요.";
 	next;
 	while(1) {
 		input .@input;
 		if (.@input == 0) {
 			mes "["+ .@npc_name$ +"]";
-			mes "The deal has";
-			mes "been cancelled.";
+			mes "거래가 완료되었습니다";
+			mes "취소되었습니다.";
 			close;
 		}
 		else if (.@input < 0 || .@input > 500) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Alright, you can";
-			mes "puchase up to 500.";
-			mes "No more than that,";
-			mes "got it? Good.";
+			mes "알았어, 할 수 있어";
+			mes "최대 500개까지 구매하세요.";
+			mes "그 이상은 안돼";
+			mes "알았어? 좋아.";
 			next;
 		}
 		else {
@@ -1058,213 +1058,211 @@ function	script	phramain	{
 	.@sell = .@input * .@price;
 	if (Zeny < .@sell) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Err...";
-		mes "You don't have";
-		mes "enough Zeny to buy";
-		mes ""+ .@input +" of them.";
+		mes "어...";
+		mes "당신은 없어요";
+		mes "제니를 구매할 만큼 충분해요";
+		mes ""+ .@input +" 중.";
 		close;
 	}
 	if (checkweight(.@material,.@input) == 0) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Hmm...";
-		mes "I can't give you anything if you don't have enough room in your inventory. Why don't you put your extra things in Kafra Storage and try again?";
+		mes "흠...";
+		mes "인벤토리에 공간이 부족하면 아무것도 드릴 수 없습니다. 여분의 물건은 카프라 창고에 넣어두시고 다시 시도해보시면 어떨까요?";
 		close;
 	}
 	getitem .@material,.@input;
 	Zeny = Zeny-.@sell;
 	mes "["+ .@npc_name$ +"]";
-	mes "Here you are!";
-	mes "Thank you for";
-	mes "your patronage.";
+	mes "여기 있어요!";
+	mes "고마워요";
+	mes "당신의 후원.";
 	close;
 }
 
-// Ori/Elu Refiners
-//============================================================
-prt_in,63,69,3	script	Dietrich	84,{
+// Ori/Elu 정제기
+//================================================ ============
+prt_in,63,69,3	script	디트리히::Dietrich	84,{
 	callfunc "orimain","Dietrich";
 	end;
 }
-payon,137,178,5	script	Hakhim	88,{
+payon,137,178,5	script	하킴::Hakhim	88,{
 	callfunc "orimain","Hakhim";
 	end;
 }
-morocc_in,72,32,6	script	Abdula	99,{
+morocc_in,72,32,6	script	압둘라::Abdula	99,{
 	callfunc "orimain","Abdula";
 	end;
 }
-alberta_in,21,63,5	script	Xenophon	84,{
+alberta_in,21,63,5	script	제노폰::Xenophon	84,{
 	callfunc "orimain","Xenophon Zolotas";
 	end;
 }
-yuno_in01,164,27,4	script	Delight	88,{
+yuno_in01,164,27,4	script	딜레잇::Delight	88,{
 	callfunc "orimain","Delight";
 	end;
 }
-ein_in01,18,82,6	script	Matestein	84,{
+ein_in01,18,82,6	script	마티슈타인::Matestein	84,{
 	callfunc "orimain","Matestein";
 	end;
 }
-lhz_in02,281,24,5	script	Fruel	84,{
+lhz_in02,281,24,5	script	프루일::Fruel	84,{
 	callfunc "orimain","Fruel";
 	end;
 }
 
-// Ori/Elu Functions
-//============================================================
+// Ori/Elu 함수
+//================================================ ============
 function	script	orimain	{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
 	.@npc_name$ = getarg(0);
 	mes "["+ .@npc_name$ +"]";
-	mes "I can purify your";
-	mes "Rough Oridecons or";
-	mes "Rough Eluniums. I'll need";
-	mes "5 Rough Stones to make";
-	mes "1 pure one for you.";
+	mes "당신을 정화할 수 있어요";
+	mes "거친 오리데오콘 또는";
+	mes "거친 에르늄이 필요해요.";
+	mes "5개의 거친 돌을 만들어야 합니다";
+	mes "당신을 위한 순수한 1개.";
 	next;
-	switch(select("Make Oridecon:Make Elunium:Ask about Enchanted Stones")) {
+	switch(select("오리데오콘 만들기:에르늄 만들기:인챈트된 돌에 대해 물어보세요")) {
 	case 1:
 		if (countitem(756) > 4) {
-			delitem 756,5;  //Oridecon_Stone
-			getitem 984,1; // Oridecon
+			delitem 756,5; //Oridecon_Stone
+			getitem 984,1; // 오리데오콘
 			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Oridecon.";
-			mes "You're welcome to come";
-			mes "back whenever you want.";
+			mes "여기 오리데오콘이 있습니다.";
+			mes "오세요";
+			mes "원할 때마다 돌아오세요.";
 			close;
 		}
 		else {
 			mes "["+ .@npc_name$ +"]";
-			mes "You're kidding me, right?";
-			mes "I just told you that I need 5 Rough Oridecons to make a pure Oridecon.";
+			mes "농담하는 거 맞죠?";
+			mes "순수한 오리데오콘을 만들려면 거친 오리데오콘 5개가 필요하다고 방금 말씀드렸잖아요.";
 			close;
 		}
 	case 2:
 		if (countitem(757) > 4) {
-			delitem 757,5;  //Elunium_Stone
-			getitem 985,1; // Elunium
+			delitem 757,5; //에르늄_스톤
+			getitem 985,1; // 에르늄
 			mes "["+ .@npc_name$ +"]";
-			mes "Here's your Elunium.";
-			mes "You're welcome to come";
-			mes "back whenever you want.";
+			mes "여기 당신의 에르늄이 있습니다.";
+			mes "오세요";
+			mes "원할 때마다 돌아오세요.";
 			close;
 		}
 		else {
 			mes "["+ .@npc_name$ +"]";
-			mes "You're kidding me, right?";
-			mes "I just told you that I need 5 Rough Eluniums to make a pure Elunium.";
+			mes "농담하는 거 맞죠?";
+			mes "순수한 에르늄을 만들려면 거친 에르늄 5개가 필요하다고 방금 말씀드렸잖아요.";
 			close;
 		}
 	case 3:
 		mes "["+ .@npc_name$ +"]";
-		mes "Enchanted Stones...?";
-		mes "I've been a stonesmith for 20 years, so I've heard a lot about them. Supposedly, there are";
-		mes "four different kinds.";
+		mes "인챈티드 스톤...?";
+		mes "20년 동안 석공 생활을 하다 보니 그런 얘기를 많이 들었어요. 아마 그런 것 같아요";
+		mes "4가지 종류.";
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "Each Enchanted Stone possesses one of the following elemental properties: Earth, Wind, Water and Fire.";
+		mes "각 마법이 부여된 돌은 흙, 바람, 물, 불의 속성 중 하나를 가지고 있습니다.";
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "If someone combines a Enchanted Stone with a weapon while smithing, that weapon will possess the same property as the Stone.";
+		mes "만약 누군가가 대장간을 하면서 인챈티드 스톤을 무기와 결합한다면, 그 무기는 인챈티드 스톤과 동일한 속성을 갖게 됩니다.";
 		next;
 		mes "["+ .@npc_name$ +"]";
-		mes "Needless to say, you need to have some smithing skill to produce this kind of elemental weapon.";
+		mes "이런 원소무기를 만들기 위해서는 말할 필요도 없이 대장장이 스킬이 필요합니다.";
 		close;
 	}
 }
 
-// Equipment Repairmen
-//============================================================
-alberta_in,31,65,4	script	Repairman#alb	86,{
-	callfunc "repairmain","Repairman";
+// 장비 수리공
+//================================================ ============
+alberta_in,31,65,4	script	수리공::Repairman#alb	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-moc_ruins,107,94,4	script	Repairman#moc	99,{
-	callfunc "repairmain","Repairman";
+moc_ruins,107,94,4	script	수리공::Repairman#moc	99,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-payon,143,165,4	script	Repairman#pay	88,{
-	callfunc "repairmain","Repairman";
+payon,143,165,4	script	수리공::Repairman#pay	88,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-prt_in,63,54,2	script	Repairman#prt	86,{
-	callfunc "repairmain","Grendal";
+prt_in,63,54,2	script	수리공::Repairman#prt	86,{
+	callfunc "repairmain","그렌달";
 	end;
 }
 
-yuno_in01,175,28,3	script	Repairman#juno	86,{
-	callfunc "repairmain","Repairman";
+yuno_in01,175,28,3	script	수리공::Repairman#juno	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-geffen_in,34,166,3	script	Repairman#gef	99,{
-	callfunc "repairmain","Repairman";
+geffen_in,34,166,3	script	수리공::Repairman#gef	99,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-aldeba_in,38,60,3	script	Repairman#alde	86,{
-	callfunc "repairmain","Repairman";
+aldeba_in,38,60,3	script	수리공::Repairman#alde	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-lhz_in02,284,14,3	script	Repairman#lhz	86,{
-	callfunc "repairmain","Repairman";
+lhz_in02,284,14,3	script	수리공::Repairman#lhz	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-prt_gld,139,117,4	script	Repairman#prt_gld	86,{
-	callfunc "repairmain","Repairman";
+prt_gld,139,117,4	script	수리공::Repairman#prt_gld	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-gef_fild13,263,117,4	script	Repairman#gef_fild	86,{
-	callfunc "repairmain","Repairman";
+gef_fild13,263,117,4	script	수리공::Repairman#gef_fild	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-pay_gld,295,183,4	script	Repairman#pay_gld	86,{
-	callfunc "repairmain","Repairman";
+pay_gld,295,183,4	script	수리공::Repairman#pay_gld	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-alde_gld,220,152,4	script	Repairman#alde_gld	86,{
-	callfunc "repairmain","Repairman";
+alde_gld,220,152,4	script	수리공::Repairman#alde_gld	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-aru_gld,189,336,4	script	Repairman#aru_gld	86,{
-	callfunc "repairmain","Repairman";
+aru_gld,189,336,4	script	수리공::Repairman#aru_gld	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-sch_gld,340,80,7	script	Repairman#sch_gld	86,{
-	callfunc "repairmain","Repairman";
+sch_gld,340,80,7	script	수리공::Repairman#sch_gld	86,{
+	callfunc "repairmain","수리공";
 	end;
 }
 
-// Equipment Repair Function
-//============================================================
+// 장비 수리 기능
+//================================================ ============
 function	script	repairmain	{
 	.@repairprice = 5000;
 	.@npc_name$ = getarg(0);
 	mes "["+ .@npc_name$ +"]";
-	mes "Hey there!";
-	mes "Do you want me";
-	mes "to repair any items?";
-	mes "You can count on me";
-	mes "for item repairs!";
+	mes "거기 여행자! 아이템 수리를 하고!";
+	mes "싶으신가?";
+	mes "아이템 수리는 나에게 맡기라구!";
 	next;
-	switch(select("Actually, I do have some items...:None at the moment.")) {
+	switch(select("사실 수리할 아이템이 있는데...:지금은 수리할게 없어요.")) {
 	case 1:
 		.@checkitem = 1;
 		while (1) {
@@ -1276,30 +1274,29 @@ function	script	repairmain	{
 		.@checkitem = .@checkitem-1;
 		if (!.@checkitem) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Oh wow, this is incredible!";
-			mes "You must take very good care of your things. None of your items are damaged!";
-			next;
-			mes "["+ .@npc_name$ +"]";
-			mes "If everyone is like you, I'm going to be unemployed!! Haha~!";
+			mes "이런 이런. 자네는 정말 물건을";
+			mes "잘다루는 모양이군. 손상된 아이템이";
+			mes "하나도 없는데? 자네같은 사람이";
+			mes "많으면 난 실업자가 될걸세.";
 			close;
 		}
 		mes "["+ .@npc_name$ +"]";
-		mes "Hmm...";
-		mes "Let's see...";
-		mes "Out of all your items,";
-		mes "" + .@checkitem + " are damaged.";
-		mes "Would you like to repair?";
+		mes "흠...";
+		mes "어디보자...";
+		mes "모든 아이템 중,";
+		mes "" + .@checkitem + "가 손상되었습니다.";
+		mes "수리하시겠습니까?";
 		next;
 		.@totalcost = .@repairprice*.@checkitem;
 		mes "["+ .@npc_name$ +"]";
-		mes "Each repair costs " + .@repairprice + " Zeny. So to repair all your damaged items would cost " + .@totalcost + " Zeny! Would you like to repair the items?";
+		mes "수리 비용은 " + .@repairprice + " Zeny입니다. 손상된 아이템을 모두 수리하려면 " + .@totalcost + " Zeny! 수리하시겠습니까?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("예:아니요")) {
 		case 1:
 			if (Zeny < .@totalcost) {
 				mes "["+ .@npc_name$ +"]";
-				mes "Whoa whoa...";
-				mes "Check your wallet before you receive the repair bill! I can't repair anything because you don't have enough Zeny.";
+				mes "워워...";
+				mes "수리비 청구서를 받기 전에 지갑을 확인해 보세요! 제니가 부족해서 수리를 할 수 없습니다.";
 				close;
 			}
 			.@checkitem2 = 1;
@@ -1317,77 +1314,74 @@ function	script	repairmain	{
 					.@checkitem = .@checkitem-1;
 				}
 				mes "["+ .@npc_name$ +"]";
-				mes "Okay! All done. Now, try to be a little more careful. Items have lives too you know.";
+				mes "좋아! 다 끝났어. 이제 조금 더 조심해. 아이템에도 생명이 있어.";
 				close;
 			}
 			else {
 				mes "["+ .@npc_name$ +"]";
-				mes "Mmm? Something's wrong. Wait... Equip the items you need to repair and then come back to me.";
+				mes "으응? 뭔가 문제가 생겼어. 잠깐만... 수리할 아이템을 장착하고 다시 오너라.";
 				close;
 			}
 		case 2:
 			mes "["+ .@npc_name$ +"]";
-			mes "Well, it's no skin off my nose, but it's not good to leave items damaged. You should get them repaired as soon as possible!";
+			mes "뭐, 코가 벗겨지는 건 아니지만, 물건을 훼손한 채로 놔두는 건 좋지 않아요. 빨리 수리를 받아야 해요!";
 			close;
 		}
 	case 2:
 		mes "["+ .@npc_name$ +"]";
-		mes "Hohoho...";
-		mes "You don't have";
-		mes "any business with me";
-		mes "if you don't have any";
-		mes "items to repair.";
+		mes "허허허... 수리할 아이템이 없다면";
+		mes "나한테 볼일은 없는걸세.";
 		close;
 	}
 }
 
-//============================================================ 
-// Old changelog
-//============================================================ 
-//= 1.0 by A bunch of people!
-//=     Syrus22 - Completely redid the script using functions... also
-//=     added the option for auto safe refining and multiple refining.
-//= 1.1 Negative input bug fixed [Lupus]
-//= 1.2 Added additional reparimen in Morocc and payon. Added
-//=     Christopher the blacksmith in Geffen. Edited some dialogue [kobra_k88]
-//= 1.3 New Payon Locations [Darkchild]
-//=     Corrected zeny subtraction thx to jpnmania77.[kobra_k88]
-//= 1.3a Temporary corrected an exploit. Need to check sources
-//=     to fully fix bug [Shinigami]
-//=     Fixed repairman prices [shadowlady]
-//=     Fixed bug that skips requirements thanks to sir_loon [massdriller]
-//=     Fixed itemid error thanks to -Vitamin- [massdriller]
-//= 1.4 check again item in refining procedure to avoid
-//=     hacker that can change item [dafide18]
-//= 1.5 Fixed crashing due to badly used callfunc's [Skotlex]
-//=     Lupus, don't rollback this important fix again! >.<
-//= 1.5a Corrected an unneeded callfunc, fixed the anti-bot 
-//=     exploit ruining the safe refine loop. [Skotlex]
-//= 1.5b Fixed Spelling mistakes. [Nexon] 
-//= 1.6 Replaced all breaks for ends as per the new script engine [Skotlex]
-//= 1.7 Added Einbroch Refiners (Custom names ^^;) and a duplicated BS Shop. [Poki#3]
-//= 1.8 Added Lighthalzen Refiners (Custom names again ^^;) [Poki#3]
-//= 1.8a Fixed wrong indication thanks to NeoSaro [Lupus]
-//= 1.9 Rewrote repairman, removed the Steel from repair cost [DracoRPG]
-//= 2.0 Fixed missed equppment presence check. Thx2 Coltaro [Lupus]
-//= 2.0a Added weight checks thanks to Neouni [Playtester]
-//= 2.0b Fixed the names of Lighthalzen and Einbroch refiners thanks to Maud_Dib [Kargha]
-//= 2.1 Removed Duplicates [Silent]
-//= 2.2 Changed name from "Emvertacon" to "Emveretarcon". [Samuray22]
-//=     Thanks to Barron-Monster.
-//= 2.2b Changed name from "Pharacon" to "Phracon". [Samuray22]
-//=     Thanks to Barron-Monster.
-//= 2.3 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 2.4 Updated Refiner function. cleaner, and less dated. [L0ne_w0lf]
-//= 2.5 Rather large update to the refiner and merchants. :D [L0ne_W0lf]
-//= 2.6 Fixed a few bugs with creating pure stones. [L0ne_W0lf]
-//= 2.7 Refiner function accepts additional paramater. [L0ne_W0lf]
-//=     0 = No special features; 1 = new refining features
-//=     Updated Repairmen and function. No longer shows menu.
-//= 2.7a A couple touch-ups to the repairman function. [L0ne_w0lf]
-//= 2.8 Changed the nonexistent variable .@matname$ for getitemname(.@material). (bugreport:2340) [Samuray22]
-//= 2.8 Added proper Blacksmith Supplier to Einroch. [L0ne_W0lf]
-//=     Updated dated features comment to reflect new usage.
-//= 2.8a Small bugfix. (bugreport:2418) [Paradox924X]
-//= 2.9 Moved Morocc repairman to Morocc Ruins. [L0ne_W0lf]
-//============================================================
+//================================================ ============
+// 이전 변경 로그
+//================================================ ============
+//= 1.0 by A 잔뜩!
+//= Syrus22 - 함수를 사용하여 스크립트를 완전히 다시 작성했습니다... 또한
+//= 자동 안전 정제 및 다중 정제 옵션을 추가했습니다.
+//= 1.1 음수 입력 버그 수정 [Lupus]
+//= 1.2 Morocc 및 payon에 추가 수리가 추가되었습니다. 추가됨
+//= 게펜의 대장장이 크리스토퍼. 일부 대화를 편집했습니다 [kobra_k88]
+//= 1.3 새로운 Payon 위치 [Darkchild]
+//= zeny 빼기 thx를 jpnmania77로 수정했습니다.[kobra_k88]
+//= 1.3a 익스플로잇을 임시로 수정했습니다. 출처 확인 필요
+//= 버그를 완전히 수정하기 위해 [Shinigami]
+//= 수리공 가격 고정 [shadowlady]
+//= sir_loon [massdriller] 덕분에 요구사항을 건너뛰는 버그 수정
+//= -Vitamin- [massdriller] 덕분에 항목 ID 오류가 수정되었습니다.
+//= 1.4 방지하기 위해 정제 절차에서 항목을 다시 확인합니다.
+//= 아이템을 변경할 수 있는 해커 [dafide18]
+//= 1.5 callfunc의 [Skotlex]를 잘못 사용하여 충돌이 발생하는 문제를 해결했습니다.
+//= 루푸스, 이 중요한 수정 사항을 다시 롤백하지 마세요! >.<
+//= 1.5a 불필요한 callfunc 수정, 안티봇 수정
+//= 안전한 정제 루프를 망치는 악용. [스코틀렉스]
+//= 1.5b 철자 오류를 수정했습니다. [넥슨]
+//= 1.6 새로운	script	엔진 [Skotlex]에 따라 끝 부분의 모든 중단을 대체했습니다.
+//= 1.7 Einbroch Refiners(사용자 정의 이름^^;) 및 중복된 BS Shop을 추가했습니다. [포키#3]
+//= 1.8 Lighthalzen Refiners 추가 (사용자 정의 이름 다시 ^^;) [Poki#3]
+//= 1.8a NeoSaro [Lupus] 덕분에 잘못된 표시 수정
+//= 1.9 수리공 재작성, 수리 비용에서 강철 제거 [DracoRPG]
+//= 2.0 누락된 장비 존재 확인 문제를 수정했습니다. Thx2 콜타로 [루푸스]
+//= 2.0a Neouni [Playtester] 덕분에 가중치 확인이 추가되었습니다.
+//= 2.0b Maud_Dib [Kargha] 덕분에 Lighthalzen 및 Einbroch 정제기의 이름이 수정되었습니다.
+//= 2.1 중복 제거됨 [무음]
+//= 2.2 이름이 "Emvertacon"에서 "Emveretarcon"으로 변경되었습니다. [사무라이22]
+//= Barron-Monster에게 감사드립니다.
+//= 2.2b 이름을 "Pharacon"에서 "Phracon"으로 변경했습니다. [사무라이22]
+//= Barron-Monster에게 감사드립니다.
+//= 2.3 적절한 제한 사항에 포함되도록 NPC 이름을 수정했습니다. [L0ne_W0lf]
+//= 2.4 Refiner 함수가 업데이트되었습니다. 더 깨끗하고 덜 오래되었습니다. [L0ne_w0lf]
+//= 2.5 정제소와 상인에 대한 대규모 업데이트입니다. :D [L0ne_W0lf]
+//= 2.6 순수석 생성과 관련된 몇 가지 버그를 수정했습니다. [L0ne_W0lf]
+//= 2.7 Refiner 함수는 추가 매개변수를 허용합니다. [L0ne_W0lf]
+//= 0 = 특별한 기능이 없습니다. 1 = 새로운 구체화 기능
+//= 수리공 및 기능이 업데이트되었습니다. 더 이상 메뉴를 표시하지 않습니다.
+//= 2.7a 수리공 기능에 대한 몇 가지 수정 사항입니다. [L0ne_w0lf]
+//= 2.8 getitemname(.@material)에 대해 존재하지 않는 변수 .@matname$을 변경했습니다. (버그 보고:2340) [Samuray22]
+//= 2.8 아인로크에 적절한 대장장이 공급업체를 추가했습니다. [L0ne_W0lf]
+//= 새로운 사용법을 반영하기 위해 날짜가 지정된 기능 설명을 업데이트했습니다.
+//= 2.8a 작은 버그 수정. (버그 보고:2418) [Paradox924X]
+//= 2.9 모로코 수리공을 모로코 유적지로 옮겼습니다. [L0ne_W0lf]
+//================================================ ============

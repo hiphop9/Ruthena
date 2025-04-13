@@ -1,0 +1,573 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: MOB_DB
+  Version: 3
+
+Body:
+  - Id: 21965
+    AegisName: EP20_COPO
+    Name: 꼬뽀
+    Level: 220
+    Hp: 14711277
+    Defense: 310
+    MagicDefense: 167
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 866
+    AttackMotion: 864
+
+  - Id: 21966
+    AegisName: EP20_ICEWIND1
+    Name: 잿빛 아이스윈드
+    Level: 220
+    Hp: 17344773
+    Defense: 297
+    MagicDefense: 159
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 881
+    AttackMotion: 864
+
+  - Id: 21967
+    AegisName: EP20_ICEWIND2
+    Name: 아이스윈드
+    Level: 244
+    Hp: 28012565
+    Defense: 247
+    MagicDefense: 252
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Wind
+    ElementLevel: 3
+
+  - Id: 21968
+    AegisName: EP20_EGGCOPO
+    Name: 멋쟁이 꼬뽀
+    Level: 222
+    Hp: 16739740
+    Defense: 321
+    MagicDefense: 174
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Wind
+    ElementLevel: 1
+    WalkSpeed: 140
+    AttackDelay: 865
+    AttackMotion: 864
+
+  - Id: 21969
+    AegisName: EP20_RABBIT_ICESLUG
+    Name: 눈토끼달팽이
+    Level: 220
+    Hp: 17545012
+    Defense: 336
+    MagicDefense: 128
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 140
+
+  - Id: 21970
+    AegisName: EP20_MELIBE_ICESLUG
+    Name: 멜리베달팽이
+    Level: 244
+    Hp: 36665831
+    Defense: 357
+    MagicDefense: 197
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Wind
+    ElementLevel: 2
+
+  - Id: 21971
+    AegisName: EP20_ICEBEAR
+    Name: 곰벌레
+    Level: 243
+    Hp: 25609178
+    Defense: 255
+    MagicDefense: 134
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Fire
+    ElementLevel: 2
+
+  - Id: 21972
+    AegisName: EP20_JORMUNGUARD1
+    Name: 요르문간드 가디언-P
+    Level: 222
+    Hp: 18988110
+    Defense: 341
+    MagicDefense: 130
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 630
+    AttackMotion: 1344
+
+  - Id: 21973
+    AegisName: EP20_JORMUNGUARD2
+    Name: 요르문간드 가디언-Y
+    Level: 222
+    Hp: 17847680
+    Defense: 229
+    MagicDefense: 230
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 773
+    AttackMotion: 768
+
+  - Id: 21974
+    AegisName: EP20_FAKE_IWIN_SN
+    Name: 수상한 아윈 훈련병
+    Level: 220
+    Hp: 15888468
+    Defense: 310
+    MagicDefense: 197
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 140
+
+  - Id: 21975
+    AegisName: EP20_FAKE_IWIN_SY
+    Name: 수상한 아윈 이병
+    Level: 221
+    Hp: 17936738
+    Defense: 309
+    MagicDefense: 166
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 140
+
+  - Id: 21976
+    AegisName: EP20_FAKE_IWIN_SB
+    Name: 수상한 아윈 일병
+    Level: 223
+    Hp: 19746167
+    Defense: 313
+    MagicDefense: 169
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+
+  - Id: 21977
+    AegisName: EP20_FAKE_IWIN_SG
+    Name: 수상한 아윈 상병
+    Level: 224
+    Hp: 17621745
+    Defense: 325
+    MagicDefense: 177
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 150
+
+  - Id: 21978
+    AegisName: EP20_FAKE_IWIN_SR
+    Name: 수상한 아윈 조병
+    Level: 225
+    Hp: 18073002
+    Defense: 320
+    MagicDefense: 174
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 180
+
+  - Id: 21979
+    AegisName: EP20_DEMIGOD_LASGAND
+    Name: 궁극의 라스간드
+    Level: 225
+    Hp: 62647916
+    Defense: 252
+    MagicDefense: 135
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Undead
+    Element: Poison
+    ElementLevel: 4
+
+  - Id: 21980
+    AegisName: EP20_BOSS_CLANER
+    Name: 성지 청소 반장
+    Level: 250
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Poison
+    ElementLevel: 4
+    DamageTaken: 10
+
+  - Id: 21981
+    AegisName: MD_EP20_BOSS_LASGAND
+    Name: 궁극의 라스간드
+    Level: 222
+    Hp: 2000000000
+    Defense: 527
+    MagicDefense: 286
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Undead
+    Element: Poison
+    ElementLevel: 4
+    AttackMotion: 1476
+
+  - Id: 21982
+    AegisName: MD_EP20_FALLENANGEL
+    Name: 타락한 천사 달팽이
+    Level: 225
+    Hp: 206537987
+    Defense: 359
+    MagicDefense: 196
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Water
+    ElementLevel: 4
+    WalkSpeed: 130
+    AttackDelay: 614
+    AttackMotion: 612
+    DamageMotion: 480
+
+  - Id: 21983
+    AegisName: EP20_ANGEL_ICESLUG
+    Name: 천사달팽이
+    Level: 222
+    Hp: 15734483
+    Defense: 304
+    MagicDefense: 163
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Holy
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackMotion: 1476
+
+  - Id: 21984
+    AegisName: EP20_ICEEGG
+    Name: 아이스윈드의 알
+    Level: 215
+    Hp: 6951869
+    Defense: 300
+    MagicDefense: 161
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 1000
+
+  - Id: 21985
+    AegisName: EP20_RGAN_WARLOCK
+    Name: 상급 르간 주술사
+    Level: 223
+    Hp: 20283828
+    Defense: 305
+    MagicDefense: 164
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 160
+    AttackDelay: 483
+    AttackMotion: 936
+
+  - Id: 21986
+    AegisName: EP20_RGAN_HEALER
+    Name: 상급 르간 치유사
+    Level: 223
+    Hp: 20291081
+    Defense: 329
+    MagicDefense: 179
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 140
+    AttackDelay: 379
+    AttackMotion: 1248
+
+  - Id: 21987
+    AegisName: EP20_JORGAN_WARLOCK
+    Name: 요르문간드 교단 주술사
+    Level: 227
+    Hp: 22457464
+    Defense: 347
+    MagicDefense: 191
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 693
+    AttackMotion: 864
+
+  - Id: 21988
+    AegisName: EP20_JORGAN_HEALER
+    Name: 요르문간드 교단 주교
+    Level: 230
+    Hp: 24183470
+    Defense: 341
+    MagicDefense: 187
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 3281
+    AttackMotion: 1080
+
+  - Id: 21989
+    AegisName: EP20_JORGAN_GUARDIAN
+    Name: 요르문간드 성지 수호자
+    Level: 225
+    Hp: 20506906
+    Defense: 361
+    MagicDefense: 138
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 1004
+    AttackMotion: 1092
+
+  - Id: 21990
+    AegisName: EP20_JORGAN_CLEANER
+    Name: 요르문간드 성지 청소부
+    Level: 244
+    Hp: 39954819
+    Defense: 497
+    MagicDefense: 217
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+
+  - Id: 21991
+    AegisName: MD_EP20_JOR_G_P
+    Name: 요르문간드 가디언
+    SkillRange: 10
+    ChaseRange: 12
+
+  - Id: 21992
+    AegisName: MD_EP20_JOR_G_Y
+    Name: 요르문간드 가디언
+    SkillRange: 10
+    ChaseRange: 12
+
+  - Id: 21993
+    AegisName: MD_EP20_JOR_WARLOCK
+    Name: 르간 주술사
+    SkillRange: 10
+    ChaseRange: 12
+
+  - Id: 21994
+    AegisName: EP20_MD_HEARTHUNTER1
+    Name: 하트헌터
+    SkillRange: 10
+    ChaseRange: 12
+
+  - Id: 21995
+    AegisName: EP20_NPC_COCOPO
+    Name: 꼬꼬뽀
+    Level: 220
+    Hp: 10
+    Defense: 0
+    MagicDefense: 0
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 126
+
+  - Id: 21996
+    AegisName: EP20_SNOW_ANGEL
+    Name: 눈보라 천사
+    Level: 235
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Holy
+    ElementLevel: 4
+    DamageTaken: 10
+
+  - Id: 21997
+    AegisName: G_EP20_JORMUNGUARD1
+    Name: 요르문간드 가디언-P
+    Level: 222
+    Hp: 18988110
+    Defense: 341
+    MagicDefense: 130
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 630
+    AttackMotion: 1344
+
+  - Id: 21998
+    AegisName: G_EP20_JORMUNGUARD2
+    Name: 요르문간드 가디언-Y
+    Level: 222
+    Hp: 17847680
+    Defense: 229
+    MagicDefense: 230
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 773
+    AttackMotion: 768
+
+  - Id: 22000
+    AegisName: G_EP20_ANGEL_ICESLUG
+    Name: 맛있는 달팽이
+    Level: 222
+    Hp: 16734483
+    Defense: 304
+    MagicDefense: 163
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Holy
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 590
+    AttackMotion: 1476
+
+  - Id: 22004
+    AegisName: EP20_MD_BOX1
+    Name: 수상한 보관선
+
+  - Id: 22005
+    AegisName: EP20_MD_BOX2
+    Name: 수상한 보관선
+
+  - Id: 22006
+    AegisName: EP20_NPC_NYAR
+    Name: EP20_NPC_NYAR
+
+  - Id: 22007
+    AegisName: EP20_NPC_LASGAND
+    Name: EP20_NPC_LASGAND
+
+  - Id: 23060
+    AegisName: EP20_ARMOERDCOPO
+    Name: 든든한 꼬뽀
+    Level: 243
+    Hp: 34890060
+    Defense: 342
+    MagicDefense: 187
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Water
+    ElementLevel: 1
+

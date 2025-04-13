@@ -63,57 +63,57 @@ Expanded Super Novice: EXSUPNOV_Q -> job_super2
 
 // Main NPCs :: job_repair
 //============================================================
-prt_in,38,104,4	script	Valerie	811,{
+prt_in,38,104,4	script	밟히리::Valerie	811,{
 	if (checkweight(1201,1) == 0) {
-		mes "I think you have too many items. Let's try it again after you take some out.";
+		mes "아이템이 너무 많은 것 같아요. 좀 꺼낸 후 다시 시도해 보세요.";
 		close;
 	}
 	if (MaxWeight - Weight < 1000) {
-		mes "You're overweight with items so I don't think we can proceed any further. Challenge me after you've taken some items off.";
+		mes "아이템이 너무 많아서 더 이상 진행할 수 없을 것 같아요. 아이템을 조금 뺀 후에 도전해보세요.";
 		close;
 	}
-	mes "[Valerie]";
-	mes "I am Valerie; I help those with abnormalities. I am friends with Valkyrie.";
+	mes "[밟히리]";
+	mes "저는 발레리입니다. 저는 비정상적인 사람들을 도와줍니다. 저는 발키리와 친구입니다.";
 	next;
-	mes "[Valerie]";
-	mes "If both abnormalities disappear then we must start the test over from scratch. What would you like to do?";
+	mes "[밟히리]";
+	mes "두 가지 이상이 모두 사라지면 처음부터 다시 테스트를 시작해야 합니다. 어떻게 하시겠습니까?";
 	next;
-	switch(select("I don't have any abnormalities:I think my body has some abnormalities")) {
+	switch(select("저는 아무런 이상이 없습니다:내 몸에 뭔가 이상이 있는 것 같아")) {
 	case 1:
-		mes "[Valerie]";
-		mes "That's a relief. Then please take care.";
+		mes "[밟히리]";
+		mes "다행이다. 그럼 몸조심하세요.";
 		close;
 	case 2:
-		mes "[Valerie]";
-		mes "Are you sure you want to intialize it and start over?";
+		mes "[밟히리]";
+		mes "정말 초기화하고 다시 시작하시겠습니까?";
 		next;
-		if(select("Nope:Yes, I want to start completely over") == 1) {
-			mes "[Valerie]";
-			mes "I understand. I'll see you next time";
+		if(select("아니요:예, 완전히 다시 시작하고 싶습니다.") == 1) {
+			mes "[밟히리]";
+			mes "이해합니다. 다음에 또 만나요";
 			close;
 		}
-		mes "[Valerie]";
-		mes "All items related to the existing conditions will disappear. Are you okay with this?";
+		mes "[밟히리]";
+		mes "기존 조건과 관련된 아이템은 모두 사라집니다. 괜찮으신가요?";
 		next;
-		if(select("Nope:Yes, I want to start completely over.") == 1) {
-			mes "[Valerie]";
-			mes "I understand. I'll see you next time.";
+		if(select("아니요:예, 완전히 다시 시작하고 싶습니다..") == 1) {
+			mes "[밟히리]";
+			mes "알겠습니다. 다음에 뵙겠습니다.";
 			close;
 		}
-		mes "[Valerie]";
-		mes "It seems that there are a sea of people who seemed to be cursed of not being able to get a significant other after going through with this. Are you still okay with this? ";
+		mes "[밟히리]";
+		mes "이 일을 겪고도 애인을 얻지 못한다고 욕먹는 사람들이 많은 것 같아요. 그래도 괜찮으세요?";
 		next;
-		if(select("Nope:I still want to intialize.") == 1) {
-			mes "[Valerie]";
-			mes "I understand. I will see you next time.";
+		if(select("아니요:아직 초기화하고 싶습니다.") == 1) {
+			mes "[밟히리]";
+			mes "알겠습니다. 다음에 뵙겠습니다.";
 			close;
 		}
-		mes "[Valerie]";
-		mes "In extreme cases, some become crippled and can get ulcers. Do you still want to intilize former processes?";
+		mes "[밟히리]";
+		mes "심한 경우 일부는 불구가 되고 궤양이 생길 수도 있습니다. 아직도 이전 프로세스를 활성화시키시겠습니까?";
 		next;
-		if(select("Nope:Please intilize the former processes") == 1) {
-			mes "[Valerie]";
-			mes "I understand. I will see you next time";
+		if(select("아니요: 이전 프로세스를 자세히 설명해주세요.") == 1) {
+			mes "[밟히리]";
+			mes "알겠습니다. 다음에 뵙겠습니다";
 			close;
 		}
 		specialeffect2 EF_INVENOM;
@@ -121,14 +121,14 @@ prt_in,38,104,4	script	Valerie	811,{
 
 		// Warlock - quest items
 		if (isequipped(2796) || isequipped(2797)) {
-			mes "[Valerie]";
-			mes "Please unequip the Magical Stone or Magical Stone Ring and try again.";
+			mes "[밟히리]";
+			mes "마법석이나 마법석 반지를 장착 해제한 후 다시 시도해주세요.";
 			close;
 		}
 		if (countitem(2796) || countitem(2797)) {
 			if (isequipped(2796) || isequipped(2797)) {
-				mes "[Valerie]";
-				mes "Please talk to me after your replace all Magical Stones.";
+				mes "[밟히리]";
+				mes "마법석을 모두 교체한 후 연락주세요.";
 				close;
 			}
 			setarray .@items[0], 2796, 2797, 6152, 6151; //Magical_Stone,Magical_Stone_,Glittering_Crystal,Peice_Of_Great_Bradium
@@ -136,26 +136,26 @@ prt_in,38,104,4	script	Valerie	811,{
 				if (countitem(.@items[.@i]))
 					delitem .@items[.@i], countitem(.@items[.@i]);
 			}
-			mes "[Valerie]";
-			mes "You're carrying something that is unnecessary. I will sort it out for you.";
+			mes "[밟히리]";
+			mes "쓸데없는 물건을 들고 계시네요. 제가 정리해드립니다.";
 			close;
 		}
 
 		// Baby and third job characters meet no further conditions.
 		if (eaclass()&(EAJL_BABY|EAJL_THIRD)) {
-			mes "[Valerie]";
-			mes "I don't think you should have any further business with me.";
+			mes "[밟히리]";
+			mes "내 생각엔 당신이 나와 더 이상 거래를 할 필요는 없을 것 같아요.";
 			close;
 		}
 
 		// Rebirth - variable
 		if ((Class >= Job_Swordman && Class <= Job_Crusader2) && ADVJOB != 0) {
 			set ADVJOB,0;
-			mes "[Valerie]";
-			mes "You're carrying big karma- You should erase it.";
+			mes "[밟히리]";
+			mes "너는 큰 카르마를 안고 있으니 지워야지.";
 			next;
-			mes "[Valerie]";
-			mes "Please talk to me again as there could be additional problems.";
+			mes "[밟히리]";
+			mes "추가적인 문제가 있을 수 있으니 다시 말씀해주세요.";
 			close;
 		}
 
@@ -211,8 +211,8 @@ prt_in,38,104,4	script	Valerie	811,{
 		else if (BaseJob == Job_Sage)
 			callsub L_Third, "job_soc", 12098, 12096, 12098;
 
-		mes "[Valerie]";
-		mes "I don't think you should have any further business with me.";
+		mes "[밟히리]";
+		mes "내 생각엔 당신이 나와 더 이상 거래를 할 필요는 없을 것 같아요.";
 		close;
 	}
 
@@ -221,11 +221,11 @@ L_Second:
 		setd getarg(0),0;
 		if (checkquest(getarg(1)) == 2)
 			erasequest getarg(1);
-		mes "[Valerie]";
-		mes "I will help clear your problems for you that came from your former attempts.";
+		mes "[밟히리]";
+		mes "이전 시도로 인해 발생한 문제를 해결하는 데 도움을 드리겠습니다.";
 		next;
-		mes "[Valerie]";
-		mes "Please talk to me again as there could be additional problems.";
+		mes "[밟히리]";
+		mes "추가적인 문제가 있을 수 있으니 다시 말씀해주세요.";
 		close;
 	} else
 		return;
@@ -245,48 +245,50 @@ L_Third:
 			if (checkquest(getarg(4)) > -1)
 				erasequest getarg(4);
 		}
-		mes "[Valerie]";
-		mes "I will help clear your problems for you that came from your former attempts.";
+		mes "[밟히리]";
+		mes "이전 시도로 인해 발생한 문제를 해결하는 데 도움을 드리겠습니다.";
 		next;
-		mes "[Valerie]";
-		mes "Please talk to me again as there could be additional problems.";
+		mes "[밟히리]";
+		mes "추가적인 문제가 있을 수 있으니 다시 말씀해주세요.";
 		close;
 	} else
 		return;
 }
 
 -	script	Valerie#sign	-1,{
-	mes "^ff00ffI couldn't pay the office rent so I am temporarily relocating to the building across from the Prontera Refinery.^000000";
-	mes " ";
-	mes "^ff00ffValerie^000000";
+	mes "^cccccc사무실 임대료를 내지못해^000000";
+	mes "^cccccc프론테라 제련소 맞은 편 건물로^000000";
+	mes "^cccccc이전합니다.^000000";
+	mes "^cccccc밟히리^000000";
 	close;
 }
-in_moc_16,17,33,4	duplicate(Valerie#sign)	Valerie#asn	837
-ein_in01,13,28,4	duplicate(Valerie#sign)	Valerie#bls	837
-hu_in01,386,377,4	duplicate(Valerie#sign)	Valerie#hnt	837
-prt_in,88,108,4	duplicate(Valerie#sign)	Valerie#knt	837
-prt_church,19,36,4	duplicate(Valerie#sign)	Valerie#prst	837
-gef_tower,110,30,4	duplicate(Valerie#sign)	Valerie#wiz	837
-comodo,215,155,4	duplicate(Valerie#sign)	Valerie#danc	837
+
+in_moc_16,17,33,4	duplicate(Valerie#sign)	밟히리::Valerie#asn	837
+ein_in01,13,28,4	duplicate(Valerie#sign)	밟히리::Valerie#bls	837
+hu_in01,386,377,4	duplicate(Valerie#sign)	밟히리::Valerie#hnt	837
+prt_in,88,108,4	duplicate(Valerie#sign)	밟히리::Valerie#knt	837
+prt_church,19,36,4	duplicate(Valerie#sign)	밟히리::Valerie#prst	837
+gef_tower,110,30,4	duplicate(Valerie#sign)	밟히리::Valerie#wiz	837
+comodo,215,155,4	duplicate(Valerie#sign)	밟히리::Valerie#danc	837
 // prt_castle,45,167,4	duplicate(Valerie#sign)	Valerie#cru	837
-prt_monk,59,253,4	duplicate(Valerie#sign)	Valerie#mnk	837
-moc_ruins,90,104,4	duplicate(Valerie#sign)	Valerie#rg	837
-yuno_in02,43,62,4	duplicate(Valerie#sign)	Valerie#sag	837
-prt_church,103,86,4	duplicate(Valerie#sign)	Valerie#arch	837
-que_job01,75,92,4	duplicate(Valerie#sign)	Valerie#gc	837
-yuno,129,150,4	duplicate(Valerie#sign)	Valerie#mech	837
-tur_dun01,159,40,4	duplicate(Valerie#sign)	Valerie#ran	837
-prt_in,167,24,4	duplicate(Valerie#sign)	Valerie#rk	837
-spl_in02,81,102,4	duplicate(Valerie#sign)	Valerie#wl	837
-alde_alche,38,181,4	duplicate(Valerie#sign)	Valerie#alche	837
-alberta,198,129,4	duplicate(Valerie#sign)	Valerie#min	837
-in_rogue,376,104,4	duplicate(Valerie#sign)	Valerie#sc	837
-ve_in,244,122,4	duplicate(Valerie#sign)	Valerie#shu	837
-xmas,166,209,4	duplicate(Valerie#sign)	Valerie#wan	837
+prt_monk,59,253,4	duplicate(Valerie#sign)	밟히리::Valerie#mnk	837
+moc_ruins,90,104,4	duplicate(Valerie#sign)	밟히리::Valerie#rg	837
+yuno_in02,43,62,4	duplicate(Valerie#sign)	밟히리::Valerie#sag	837
+prt_church,103,86,4	duplicate(Valerie#sign)	밟히리::Valerie#arch	837
+que_job01,75,92,4	duplicate(Valerie#sign)	밟히리::Valerie#gc	837
+yuno,129,150,4	duplicate(Valerie#sign)	밟히리::Valerie#mech	837
+tur_dun01,159,40,4	duplicate(Valerie#sign)	밟히리::Valerie#ran	837
+prt_in,167,24,4	duplicate(Valerie#sign)	밟히리::Valerie#rk	837
+spl_in02,81,102,4	duplicate(Valerie#sign)	밟히리::Valerie#wl	837
+alde_alche,38,181,4	duplicate(Valerie#sign)	밟히리::Valerie#alche	837
+alberta,198,129,4	duplicate(Valerie#sign)	밟히리::Valerie#min	837
+in_rogue,376,104,4	duplicate(Valerie#sign)	밟히리::Valerie#sc	837
+ve_in,244,122,4	duplicate(Valerie#sign)	밟히리::Valerie#shu	837
+xmas,166,209,4	duplicate(Valerie#sign)	밟히리::Valerie#wan	837
 
 sec_in02,12,40,5	script	Job Repair	57,1,1,{
 	callfunc "F_GM_NPC";
-	mes "Please input your password.";
+	mes "비밀번호를 입력해주세요.";
 	next;
 	if (callfunc("F_GM_NPC","1854",1) == 1) {
 		set job_arch,100;

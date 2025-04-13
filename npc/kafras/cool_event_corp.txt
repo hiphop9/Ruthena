@@ -24,62 +24,73 @@
 //callfunc "F_CoolEventCorp","<menu>","<location>","<save map>",<x>,<y>,"<warp map>";
 function	script	F_CoolEventCorp	{
 	cutin "zonda_01",2;
-	mes "[Cool Event Corp. Staff]";
-	mes "Welcome to Cool Event Corp.";
-	mes "Our staff is always working";
-	mes "to surpass your expactations";
-	mes "for quality service. So how";
-	mes "may I assist you today?";
+	mes "[존다 기획사 직원]";
+	mes "어서오십시오. 존다 기획사는 언제나";
+	mes "최고의 서비스를 하고 있습니다.";
+	mes "어떤 서비스를 원하십니까?";
 	next;
 	switch(select(getarg(0))) {
 	case 1:
-		mes "[Cool Event Corp. Staff]";
-		mes "Your Respawn Point";
-		mes "has been saved here";
+		mes "[존다 기획사 직원]";
+		mes "저장 되었습니다.";
+		mes "이용해 주셔서 감사합니다.";
 		mes getarg(1)+".";
-		mes "Thank you for using the";
-		mes "Cool Event Corp. service~";
+/*		mes "Thank you for using the";
+		mes "Cool Event Corp. service~";*/
 		savepoint getarg(2),getarg(3),getarg(4),1,1;
 		close2;
 		break;
 	case 2:
-		mes "[Cool Event Corp. Staff]";
+		mes "[존다 기획사 직원]";
 		if(!callfunc("F_CanOpenStorage")){
-			mes "I'm sorry, but you";
-			mes "need the Novice's";
-			mes "Basic Skill Level 6 to";
-			mes "use the Storage Service.";
+			mes "죄송합니다. 고객님";
+			mes "창고를 이용하시려면 초보자";
+			mes "스킬레벨을 6 이상 올리시거나 새로운";
+			mes "기본기능 스킬을 익히셔야 합니다.";
 			close2;
 			break;
 		}
 		if(Zeny < 40){
-			mes "I'm sorry, but you don't";
-			mes "have enough Zeny to use";
-			mes "the Storage Service. Our";
-			mes "Storage access fee is 40 Zeny.";
+			mes "죄송합니다. 고객님";
+			mes "창고를 이용하시려면 40제니가";
+			mes "필요합니다.";
 			close2;
 			break;
 		}
-		set Zeny, Zeny - 40;
-		mes "Let me open your personal";
-		mes "storage for you right away.";
-		mes "Thanks for supporting Cool";
-		mes "Event Corp. by using our";
-		mes "services. Have a good day~";
+		mes "이용하실 창고를 선택 해 주세요.";
+		next;
+		switch(select("1번 창고:2번 창고")) {
+
+		case 1:
+			set .@sno,0;
+			break;
+		case 2:
+			set .@sno,1;
+			break;
+		}
+	
 		callfunc("F_CheckKafCode");	//check your storage password, if set
+
+		mes "창고를 열겠습니다.";
+		mes "이용해 주셔서 감사합니다.";
 		close2;
-		openstorage;
+		set Zeny, Zeny - 40;
+	
+		if(.@sno <= 0)
+			openstorage;
+		else
+			openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
+		
 		break;
 	case 3:
-		mes "Please choose";
-		mes "your destination.";
+		mes "목적지를 선택하세요.";
 		next;
 		if (VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE))
 			set .@cost,4400;
 		else
 			set .@cost,2200;
 		.@destination$ = getarg(5);
-		if (select(.@destination$ +" -> "+ .@cost +" z:Cancel") == 1) {
+		if (select(.@destination$ +" -> "+ .@cost +" z:취소") == 1) {
 			if ((countitem(7060) != 0) || (Zeny >= .@cost)) {
 				if (countitem(7060) != 0) {
 					delitem 7060,1; //Warp_Free_Ticket
@@ -87,48 +98,39 @@ function	script	F_CoolEventCorp	{
 				else {
 					set Zeny,Zeny-.@cost;
 				}
-				if (.@destination$ == "Veins") warp "veins",205,101;
-				else if (.@destination$ == "Rachel") warp "rachel",115,125;
+				if (.@destination$ == "베인스") warp "veins",205,101;
+				else if (.@destination$ == "라헬") warp "rachel",115,125;
 				cutin "",255;
 				end;
 			}
 			else {
-				mes "[Cool Event Corp. Staff]";
-				mes "I'm sorry, but you don't have";
-				mes "enough zeny for the Teleport";
-				mes "Service. The fee to teleport";
-				mes "to "+ .@destination$ +" is "+.@cost+" zeny.";
+				mes "[존다 기획사 직원]";
+				mes "죄송합니다. 고객님,";
+				mes ""+ .@destination$ +"으(로) 공간이동 서비스를";
+				mes "받기 위해서는 "+.@cost+" 제니가 필요합니다.";
 			}
 		}
 		close2;
 		break;
 	case 4:
-		mes "[Cool Event Corp. Staff]";
+		mes "[존다 기획사 직원]";
 		if(BaseClass != Job_Merchant){
-			mes "I'm sorry, but the";
-			mes "Pushcart rental service";
-			if (checkre(0))
-				mes "is only available to Merchant classes.";
-			else {
-				mes "is only available to Merchants,";
-				mes "Blacksmiths, White Smiths,";
-				mes "Alchemists and Creators.";
-			}
+			mes "죄송합니다.";
+			mes "카트는 상인계열 직업군에 속한 분들만";
+			mes "사용하실 수 있습니다.";
 			close2;
 			break;
 		}
 		if(getskilllv("MC_PUSHCART") == 0){
-			mes "You can only rent a cart after";
-			mes "learning the Pushcart Skill.";
+			mes "죄송합니다.";
+			mes "카트를 사용하실려면 푸쉬카트";
+			mes "스킬을 배우고 오셔야 합니다.";
 			close2;
 			break;
 		}
 		if(checkcart() == 1){
-			mes "You already have";
-			mes "a Pushcart equipped.";
-			mes "Unfortunately, we can't";
-			mes "rent more than one to";
-			mes "each customer at a time.";
+			mes "이미 카트를 사용중입니다.";
+			mes "다음에 다시 이용해주세요.";
 			close2;
 			break;
 		}
@@ -138,17 +140,16 @@ function	script	F_CoolEventCorp	{
 			close2;
 			break;
 		}
-		mes "The Pushcart rental";
-		mes "fee is 800 Zeny. Would";
-		mes "you like to rent a Pushcart?";
+		mes "카트를 대여 하는데 필요한 비용이";
+		mes "800 제니가 필요합니다.";
+		mes "카트를 대여하시겠습니까?";
 		next;
-		if(select("Rent a Pushcart:Cancel") == 1){
+		if(select("카트를 대여받는다:취소") == 1){
 			if(Zeny < 800){
-				mes "[Cool Event Corp. Staff]";
-				mes "I'm sorry, but you";
-				mes "don't have enough";
-				mes "Zeny to pay the Pushcart";
-				mes "rental fee of 800 Zeny.";
+				mes "[존다 기획사 직원]";
+				mes "죄송합니다.";
+				mes "카트를 대여하기 위해서는";
+				mes "800 제니가 필요합니다.";
 			} else {
 				set Zeny, Zeny - 800;
 				setcart;
@@ -157,47 +158,47 @@ function	script	F_CoolEventCorp	{
 		close2;
 		break;
 	case 5:
-		callfunc("F_SetKafCode","[Cool Event Corp. Staff]","Cool Event Corp.");
+		callfunc("F_SetKafCode","[존다 기획사 직원]","존다 기획사");
 		//the function closes msg and removes cutins
 	case 6:
 	default:
-		mes "[Cool Event Corp. Staff]";
-		mes "Cool Event Corp. is always";
-		mes "striving to provide the best";
-		mes "services for our customers.";
-		mes "Help us become the best by";
-		mes "providing us with your opinions";
-		mes "and honest feedback. Thank you.";
+		mes "[존다 기획사 직원]";
+		mes "저희 존다 기획사는 언제나 최고의";
+		mes "서비스를 제공하고 있습니다. 혹시";
+		mes "불편한점이 있으시면 언제든지 말씀해";
+		mes "주시길 바랍니다.";
+		mes "다음엔 보다 나은 서비스로";
+		mes "찾아뵙겠습니다.";
 		close2;
 	}
 	cutin "", 255;
 	end;
 }
 
-lighthalzen,94,248,3	script	Cool Event Corp Staff::CoolEventCorpStaffLighthalzen	4_M_ZONDAMAN,{
+lighthalzen,94,248,3	script	존다 기획사 직원::CoolEventCorpStaffLighthalzen	4_M_ZONDAMAN,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage::Rent a Pushcart:Storage Password Service:Cancel",
-		"in the town of Lighthalzen","lighthalzen",95,240;
+		"저장 서비스 이용:창고 서비스 이용::카트 서비스 이용:설정 서비스 이용:취소",
+		"리히타르젠에서","lighthalzen",95,240;
 	end;
 }
 
-hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	4_M_ZONDAMAN,{
+hugel,88,168,4	script	존다 기획사 직원::CoolEventCorpStaffHugel	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage::Rent a Pushcart:Storage Password Service:Cancel",
-		"in the village of Hugel","hugel",96,155;
+		"저장 서비스 이용:창고 서비스 이용::카트 서비스 이용:설정 서비스 이용:취소",
+		"휴겔 마을에서","hugel",96,155;
 	end;
 }
 
-rachel,109,138,5	script	Cool Event Corp. Staff::CoolEventCorpStaffRachel	4_M_ZONDAMAN,{
+rachel,109,138,5	script	존다 기획사 직원::CoolEventCorpStaffRachel	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
-		"in the town of Rachel","rachel",113,137,"Veins";
+		"저장 서비스 이용:창고 서비스 이용:공간이동 서비스 이용:카트 서비스 이용:설정 서비스 이용:취소",
+		"라헬 마을에서","rachel",113,137,"Veins";
 	end;
 }
 
-veins,208,128,5	script	Cool Event Corp. Staff::CoolEventCorpStaffVeins	4_M_ZONDAMAN,{
+veins,208,128,5	script	존다 기획사 직원::CoolEventCorpStaffVeins	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
+		"저장 서비스 이용:창고 서비스 이용:공간이동 서비스 이용:카트 서비스 이용:설정 서비스 이용:취소",
 		"in the town of Veins","veins",204,103,"Rachel";
 	end;
 }

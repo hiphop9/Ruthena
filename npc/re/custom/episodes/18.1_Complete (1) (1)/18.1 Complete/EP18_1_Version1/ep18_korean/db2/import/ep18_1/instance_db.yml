@@ -1,0 +1,58 @@
+
+Header:
+  Type: INSTANCE_DB
+  Version: 1
+
+Body:
+  - Id: 100
+    Name: "오즈의 미로"
+    Enter:
+      Map: 1@oz
+      X: 284
+      Y: 167
+
+  - Id: 101
+    Name: "토르 군수기지"
+    Enter:
+      Map: 1@tcamp
+      X: 103
+      Y: 237
+
+  - Id: 102
+    Name: "늑대들의 집결지"
+    Enter:
+      Map: 1@nyr
+      X: 194
+      Y: 30
+    AdditionalMaps:
+      2@nyr: true
+
+  - Id: 103
+    Name: "성소 정화"
+    Enter:
+      Map: 1@nyr
+      X: 194
+      Y: 30
+    AdditionalMaps:
+      2@nyr: true
+
+  - Id: 104
+    Name: "대신관의 별장"
+    Enter:
+      Map: 1@adv
+      X: 123
+      Y: 17
+
+  - Id: 105
+    Name: "기만의 별장"
+    Enter:
+      Map: 1@advs
+      X: 111
+      Y: 19
+
+  - Id: 106
+    Name: "기만의 별장 상급"
+    Enter:
+      Map: 1@advs
+      X: 111
+      Y: 19

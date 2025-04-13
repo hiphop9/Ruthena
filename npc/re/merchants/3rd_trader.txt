@@ -26,117 +26,117 @@
 -	shop	Herb_Seller	HIDDEN_NPC,no,7932:4000,7933:4000,7934:4000,7935:4000,7936:4000,7937:4000,7931:5000
 
 -	script	::phs	HIDDEN_NPC,{
-	npctalk "Do you need poison?", "", bc_self;
+	npctalk "독초가 필요하신가요?", "", bc_self;
 	callshop "Herb_Seller",1;
 	end;
 }
 
-job3_guil01,79,96,3	duplicate(phs)	Poison Herb Merchant	4_F_YUNYANG
-morocc,193,100,4	duplicate(phs)	Poison Herb Merchant#moc	4_F_YUNYANG
-lhz_in02,16,205,4	duplicate(phs)	Poison Herb Merchant#lhz	4_F_YUNYANG
+job3_guil01,79,96,3	duplicate(phs)	독초 판매원	4_F_YUNYANG
+morocc,193,100,4	duplicate(phs)	독초 판매원#moc	4_F_YUNYANG
+lhz_in02,16,205,4	duplicate(phs)	독초 판매원#lhz	4_F_YUNYANG
 
 // Rune Stone Merchants (Rune Knight) :: rune_3rd_trader
 //============================================================
 -	shop	Runes_Seller	HIDDEN_NPC,no,12737:1000,12734:2500,12738:7500,12735:18000,12736:50000,7939:20000,7938:10000
 
 -	script	::runesale	HIDDEN_NPC,{
-	npctalk "There are several types of runes.", "", bc_self;
+	npctalk "여러가지 룬 있어요.", "", bc_self;
 	callshop "Runes_Seller",1;
 	end;
 }
 
-job3_rune01,90,62,3	duplicate(runesale)	Rune Merchant#job3	4W_M_01
-prontera,168,228,3	duplicate(runesale)	Rune Merchant#prt	4W_M_01
+job3_rune01,90,62,3	duplicate(runesale)	룬 판매원#job3	4W_M_01
+prontera,168,228,3	duplicate(runesale)	룬 판매원#prt	4W_M_01
 
 // Rare Herb Merchants (Guillotine Cross) :: rare_herb_3rd_trader
 //============================================================
-job3_guil01,91,93,3	script	Rare Herb Collector	1_M_03,{
+job3_guil01,91,93,3	script	희귀 독초 채집가	1_M_03,{
 	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만 !! -";
+		mes "- 지금 너는 너무 많은 아이템을 -";
+		mes "- 들고다니고 있어. -";
+		mes "- 무게랑 소지아이템 개수를 -";
+		mes "- 충분히 확인한 후 와줘. -";
 		close;
 	}
 	if (Class == Job_Guillotine_Cross || Class == Job_Guillotine_Cross_T || Class == Job_Baby_Guillotine_Cross) {
-		mes "[Rare Poison Herb Collector]";
-		mes "I wander around the world and collect rare poison herbs. Recently, I started dealing in the herb called Izidor. If you are interested, you can buy them.";
+		mes "[희귀 독초 채집가]";
+		mes "나는 세상을 떠돌며 희귀한 독초를 수집하는 사람이라네. 최근엔, 이지도르 라고 불리는 식물을 다루기 시작했지. 관심있나?";
 		next;
-		.@i = select("How can I buy them?:Exchange it for Animal Blood:Exchange it for a Bitter Herb:Exchange it for a Deadly Noxious Herb:Exchange it for a Frozen Rose:Exchange it for Ment:Exchange it for Hinalle")-2;
+		.@i = select("이지도르를 살려면 어떻게 해야하죠?:가축의 피와 교환한다.:쓰디쓴 풀로 교환한다.:맹독초와 교환한다.:얼어붙은 장미로 교환한다:멘트로 교환한다.:히나레로 교환한다.")-2;
 		if (.@i == -1) {
-			mes "[Rare Poison Herb Collector]";
-			mes "You can buy them for 10,000 zeny and one of these rare items, Animal Blood, Bitter Herb, Deadly Noxious Herb, Frozen Rose, Ment or an Hinalle.";
+			mes "[희귀 독초 채집가]";
+			mes "단 돈 10,000제니와 가축의 피, 쓰디쓴 풀, 맹독초, 얼어붙은 장미, 멘트, 히나레 중 하나를 가져오면 이지도르 한 송이와 교환해주겠네.";
 			next;
-			mes "[Rare Poison Herb Collector]";
-			mes "Why do I ask money? That's just to pay a little respect to a collector like me. Ha ha ha...";
+			mes "[희귀 독초 채집가]";
+			mes "왜 돈을 요구하냐고? 나같은 희귀 수집가를 후원한다고 생각하게. 하 하 하";
 			close;
 		} else {
-			setarray .@exchange[0],702,621,631,749,605,703;
+			setarray .@exchange[0],702,621,631,749,708,703; //안티페인먼트 -> 멘트 변경
 			.@item = .@exchange[.@i];
 			.@price = 10000;
 
-			mes "[Rare Poison Herb Collector]";
-			mes "How many do you want?";
-			mes "You can only buy a maximum of '2000' ea.";
-			mes "Enter '0' if you want to cancel.";
+			mes "[희귀 독초 채집가]";
+			mes "얼마나 원하는가?";
+			mes "살 때 숫자는 최대 숫자 2,000을 넘겨선 안된다네.";
+			mes "그리고 0 을 입력하면 거래가 취소될껄세.";
 			next;
 			input .@amount;
 			if (.@amount == 0) {
-				mes "[Rare Poison Herb Collector]";
-				mes "You've cancelled the trade.";
+				mes "[희귀 독초 채집가]";
+				mes "거래가 취소되었다네.";
 				close;
 			}
 			if (.@amount > 2000) {
-				mes "[Rare Poison Herb Collector]";
-				mes "The number must be less than 2,000!";
+				mes "[희귀 독초 채집가]";
+				mes "구매개수는 2,000 보다 작아야 한다네!";
 				close;
 			}
 			.@total = .@amount * .@price;
 			if (countitem(.@item) < .@amount || Zeny < .@total) {
-				mes "[Rare Poison Herb Collector]";
-				mes "Hey, come back when you have all the requirements for the exchange.";
+				mes "[희귀 독초 채집가]";
+				mes "자네가 갖고있는 아이템의 개수가 맞는지 확인해봤나?";
 				close;
 			}
-			mes "[Rare Poison Herb Collector]";
-			mes "Good. I've received the money and the special item.";
+			mes "[희귀 독초 채집가]";
+			mes "좋군. 여기 이지도르 받게나.";
 			delitem .@item, .@amount;
 			Zeny = Zeny - .@total;
 			getitem 709, .@amount; //Izidor
 			close;
 		}
 	}
-	mes "[Rare Poison Herb Collector]";
-	mes "I wander around the world and collect rare poison herbs. But I don't feel like selling my herbs to a person like you... ha ha ha...";
+	mes "[희귀 독초 채집가]";
+	mes "나는 세상을 떠돌며 희귀한 독초를 수집하고 있다네. 하지만 내 느낌엔 자네같은 독과 관련 없는사람에겐 팔면 안될 것 같구만... 하 하 하";
 	close;
 }
 
-// Point Merchants (Sorcerer) :: point_3rd_trader
+// 속성 포인트 스톤s (Sorcerer) :: point_3rd_trader
 //============================================================
--	shop	Shard_Seller	HIDDEN_NPC,no,6360:200,6363:200,6361:200,6362:200
+-	shop	Shard_Seller	HIDDEN_NPC,no,6360:200,6363:200,6361:200,6362:200,1000291:1000,1000292:1000,1000293:1000,1000294:1000,1000295:1000
 
 -	script	::pss	HIDDEN_NPC,{
-	npctalk "Do you have an element for each property?", "", bc_self;
+	npctalk "속성별 포인트 스톤을 보여드리겠습니다.", "", bc_self;
 	callshop "Shard_Seller",1;
 	end;
 }
 
-gef_tower,105,172,5	duplicate(pss)	Point Merchant#Sorcerer	8_F_GIRL
-prt_in,131,66,0	duplicate(pss)	Point Merchant#Prontera	8_F_GIRL
-alberta,105,52,7	duplicate(pss)	Point Merchant#Alberta	8_F_GIRL
-aldebaran,133,114,5	duplicate(pss)	Point Merchant#Aldebaran	8_F_GIRL
-comodo,193,159,5	duplicate(pss)	Point Merchant#Comodo	8_F_GIRL
-geffen,129,49,5	duplicate(pss)	Point Merchant#Geffen	8_F_GIRL
-izlude,138,163,5	duplicate(pss)	Point Merchant#Izlude	8_F_GIRL	// Old coordinates: izlude (135,121)
-izlude_a,138,163,5	duplicate(pss)	Point Merchant#Izlude_a	8_F_GIRL
-izlude_b,138,163,5	duplicate(pss)	Point Merchant#Izlude_b	8_F_GIRL
-izlude_c,138,163,5	duplicate(pss)	Point Merchant#Izlude_c	8_F_GIRL
-izlude_d,138,163,5	duplicate(pss)	Point Merchant#Izlude_d	8_F_GIRL
-malangdo,214,163,5	duplicate(pss)	Point Merchant#Malangdo	8_F_GIRL
-mora,115,118,3	duplicate(pss)	Point Merchant#Mora	8_F_GIRL
-ra_in01,256,273,3	duplicate(pss)	Point Merchant#Rachel	8_F_GIRL
-veins,202,128,5	duplicate(pss)	Point Merchant#Veins	8_F_GIRL
-dicastes01,207,200,5	duplicate(pss)	Point Merchant#Dicastes	8_F_GIRL
-manuk,261,206,3	duplicate(pss)	Point Merchant#Manuk	8_F_GIRL
-splendide,207,160,5	duplicate(pss)	Point Merchant#Splendide	8_F_GIRL
-mid_camp,224,237,3	duplicate(pss)	Point Merchant#Midgard	8_F_GIRL
+gef_tower,105,172,5	duplicate(pss)	속성 포인트 스톤 상인#Sorcerer	8_F_GIRL
+prt_in,131,66,0	duplicate(pss)	속성 포인트 스톤 상인#Prontera	8_F_GIRL
+alberta,105,52,7	duplicate(pss)	속성 포인트 스톤 상인#Alberta	8_F_GIRL
+aldebaran,133,114,5	duplicate(pss)	속성 포인트 스톤 상인#Aldebaran	8_F_GIRL
+comodo,193,159,5	duplicate(pss)	속성 포인트 스톤 상인#Comodo	8_F_GIRL
+geffen,129,49,5	duplicate(pss)	속성 포인트 스톤 상인#Geffen	8_F_GIRL
+izlude,138,163,5	duplicate(pss)	속성 포인트 스톤 상인#Izlude	8_F_GIRL	// Old coordinates: izlude (135,121)
+izlude_a,138,163,5	duplicate(pss)	속성 포인트 스톤 상인#Izlude_a	8_F_GIRL
+izlude_b,138,163,5	duplicate(pss)	속성 포인트 스톤 상인#Izlude_b	8_F_GIRL
+izlude_c,138,163,5	duplicate(pss)	속성 포인트 스톤 상인#Izlude_c	8_F_GIRL
+izlude_d,138,163,5	duplicate(pss)	속성 포인트 스톤 상인#Izlude_d	8_F_GIRL
+malangdo,214,163,5	duplicate(pss)	속성 포인트 스톤 상인#Malangdo	8_F_GIRL
+mora,115,118,3	duplicate(pss)	속성 포인트 스톤 상인#Mora	8_F_GIRL
+ra_in01,256,273,3	duplicate(pss)	속성 포인트 스톤 상인#Rachel	8_F_GIRL
+veins,202,128,5	duplicate(pss)	속성 포인트 스톤 상인#Veins	8_F_GIRL
+dicastes01,207,200,5	duplicate(pss)	속성 포인트 스톤 상인#Dicastes	8_F_GIRL
+manuk,261,206,3	duplicate(pss)	속성 포인트 스톤 상인#Manuk	8_F_GIRL
+splendide,207,160,5	duplicate(pss)	속성 포인트 스톤 상인#Splendide	8_F_GIRL
+mid_camp,224,237,3	duplicate(pss)	속성 포인트 스톤 상인#Midgard	8_F_GIRL

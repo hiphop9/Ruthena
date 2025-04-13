@@ -62,6 +62,9 @@
     <ClInclude Include="elemental.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="emotes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="guild.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -125,6 +128,9 @@
     <ClInclude Include="quest.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rune.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="script.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -135,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="skill.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stall.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="status.hpp">
@@ -194,6 +203,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="elemental.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="emotes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="guild.cpp">
@@ -256,6 +268,9 @@
     <ClCompile Include="quest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rune.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="script.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -263,6 +278,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="status.cpp">

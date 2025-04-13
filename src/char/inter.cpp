@@ -19,6 +19,7 @@
 #include <common/socket.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_logif.hpp"
@@ -410,7 +411,10 @@ void geoip_readdb(void){
 	geoip_cache = (unsigned char *) aMalloc(sizeof(unsigned char) * bufa.st_size);
 	if(fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db) != bufa.st_size) { ShowError("geoip_cache reading didn't read all elements \n"); }
 	fclose(db);
-	ShowStatus("Finished Reading " CL_GREEN "GeoIP" CL_RESET " Database.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("" CL_GREEN "GeoIP" CL_RESET " 데이터 베이스를 모두 읽어왔습니다..\n");
+	else
+		ShowStatus("Finished Reading " CL_GREEN "GeoIP" CL_RESET " Database.\n");
 }
 /* [Dekamaster/Nightroad] */
 /* There are millions of entries in GeoIP and it has its own algorithm to go quickly through them */
@@ -620,7 +624,10 @@ void inter_savereg(uint32 account_id, uint32 char_id, const char *key, uint32 in
 		if( session_isValid(login_fd) )
 			chlogif_send_global_accreg( key, index, int_value, string_value, is_string );
 		else {
-			ShowError("Login server unavailable, can't perform update on '%s' variable for AID:%" PRIu32 " CID:%" PRIu32 "\n",key,account_id,char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("로그인 서버를 사용할 수 없습니다 (AID: %" PRIu32 ", CID: %" PRIu32 ")에 대한 '%s' 변수에 대한 업데이트를 수행 할 수 없습니다.\n",account_id,char_id,key);
+			else
+				ShowError("Login server unavailable, can't perform update on '%s' variable for AID:%" PRIu32 " CID:%" PRIu32 "\n",key,account_id,char_id);
 		}
 	} else if ( key[0] == '#' ) { // local account reg
 		if( is_string ) {
@@ -678,10 +685,16 @@ int inter_accreg_fromsql(uint32 account_id, uint32 char_id, int fd, int type)
 				Sql_ShowDebug(sql_handle);
 			break;
 		case 1: //account2 reg
-			ShowError("inter_accreg_fromsql: Char server shouldn't handle type 1 registry values (##). That is the login server's job!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("inter_accreg_fromsql: 케릭터 서버는 타입 1의 레지스트리 값(##)을 처리하지 않아야합니다. 그것은 로그인 서버의 일입니다!\n");
+			else
+				ShowError("inter_accreg_fromsql: Char server shouldn't handle type 1 registry values (##). That is the login server's job!\n");
 			return 0;
 		default:
-			ShowError("inter_accreg_fromsql: Invalid type %d\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("inter_accreg_fromsql: 잘못된 타입 %d\n", type);
+			else
+				ShowError("inter_accreg_fromsql: Invalid type %d\n", type);
 			return 0;
 	}
 
@@ -760,7 +773,10 @@ int inter_accreg_fromsql(uint32 account_id, uint32 char_id, int fd, int type)
 			break;
 #if 0 // This is already checked above.
 		case 1: //account2 reg
-			ShowError("inter_accreg_fromsql: Char server shouldn't handle type 1 registry values (##). That is the login server's work!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("inter_accreg_fromsql: 케릭터 서버는 타입 1의 레지스트리 값(##)을 처리하지 않아야합니다. 그것은 로그인 서버의 작업입니다!\n");
+			else
+				ShowError("inter_accreg_fromsql: Char server shouldn't handle type 1 registry values (##). That is the login server's work!\n");
 			return 0;
 #endif // 0
 	}
@@ -838,7 +854,10 @@ int inter_config_read(const char* cfgName)
 
 	fp = fopen(cfgName, "r");
 	if(fp == nullptr) {
-		ShowError("File not found: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s 파일이 존재하지 않습니다.\n", cfgName);
+		else
+			ShowError("File not found: %s\n", cfgName);
 		return 1;
 	}
 
@@ -874,7 +893,10 @@ int inter_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo ("Done reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo ("%s를(을) 읽었습니다.\n", cfgName);
+	else
+		ShowInfo ("Done reading %s.\n", cfgName);
 
 	return 0;
 }
@@ -918,12 +940,18 @@ uint64 InterServerDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 	if( !existing ){
 		if( !this->nodeExists( node, "Name" ) ){
-			this->invalidWarning( node, "Node \"Name\" is missing.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node, "\"Name\" 노드가 빠져있습니다.\n" );
+			else
+				this->invalidWarning( node, "Node \"Name\" is missing.\n" );
 			return 0;
 		}
 
 		if( !this->nodeExists( node, "Table" ) ){
-			this->invalidWarning( node, "Node \"Table\" is missing.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node, "\"Table\" 노드가 빠져있습니다.\n" );
+			else
+				this->invalidWarning( node, "Node \"Table\" is missing.\n" );
 			return 0;
 		}
 
@@ -980,10 +1008,17 @@ int inter_init_sql(const char *file)
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();
-	ShowInfo("Connect Character DB server.... (Character Server)\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("케릭터 DB 서버에 연결중.... (케릭터 서버)\n");
+	else
+		ShowInfo("Connect Character DB server.... (Character Server)\n");
 	if( SQL_ERROR == Sql_Connect(sql_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), (uint16)char_server_port, char_server_db.c_str()))
 	{
-		ShowError("Couldn't connect with username = '%s', host = '%s', port = '%d', database = '%s'\n",
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("유저 이름 = '%s', 비밀번호 = '%s', 호스트 = '%s', 포트 = '%d', 데이터베이스 = '%s'으로 연결 할 수 없습니다.\n", 
+			char_server_id, char_server_pw, char_server_ip, char_server_port, char_server_db);
+		else
+			ShowError("Couldn't connect with username = '%s', host = '%s', port = '%d', database = '%s'\n",
 			char_server_id.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str());
 		Sql_ShowDebug(sql_handle);
 		Sql_Free(sql_handle);
@@ -1191,10 +1226,16 @@ int mapif_parse_WisRequest(int fd)
 	if ( fd <= 0 ) {return 0;} // check if we have a valid fd
 
 	if( RFIFOW( fd, 2 ) - headersize >= WHISPER_MESSAGE_SIZE ){
-		ShowWarning("inter: Wis message size too long.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("inter: 귓속말 메시지 크기가 너무 깁니다.\n");
+		else
+			ShowWarning("inter: Wis message size too long.\n");
 		return 0;
 	} else if (RFIFOW(fd,2)-headersize <= 0) { // normaly, impossible, but who knows...
-		ShowError("inter: Wis message doesn't exist.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter: 귓속말 메시지가 없습니다.\n");
+		else
+			ShowError("inter: Wis message doesn't exist.\n");
 		return 0;
 	}
 

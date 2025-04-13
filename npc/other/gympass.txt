@@ -17,50 +17,46 @@
 //= 1.3 Updated script, and fixed potential errors. [L0ne_W0lf]
 //============================================================ 
 
-payon,173,141,4	script	Ripped Cabus#GymPass	899,{
-	mes "[Ripped]";
-	mes "Hey, there. People aren't";
-	mes "as physically active as they";
-	mes "used to be. Even if you fight";
-	mes "for a living, your body might";
-	mes "be weak and flabby in some";
-	mes "areas. Know what I mean?";
+payon,173,141,4	script	중력성인#GymPass	899,{
+	mes "[성인]";
+	mes "Oh~ 반갑소~";
+	mes "Me는 저 멀리 중력성에서 온";
+	mes "중력성인이라고 하오.";
 	next;
-	mes "[Ripped]";
-	mes "Hey, train with me, and I can";
-	mes "guarantee that you'll be able";
-	mes "to lift and carry more of your";
-	mes "stuff. Just gimme your";
-	mes "^FF0000Gym Pass^000000 each time,";
-	mes "and we'll be good to go.";
+	mes "[성인]";
+	mes "Why 여기에 왔느냐! 하면 여기";
+	mes "사람들은 너무 가볍게 하고 다녀서";
+	mes "참다 못해 여기로 슝~ 하고";
+	mes "중력 점프를 해 왔다오~";
 	next;
-	mes "[Ripped]";
-	mes "But don't get too excited:";
-	mes "no matter how much training";
-	mes "I take you through, you can";
-	mes "overdo it. You ever hear of";
-	mes "anyone that got too buff?";
-	mes "That's cuz they're dead. See?";
+	mes "[성인]";
+	mes "So~ 어떻게 무겁게 하고 다닐수 있게";
+	mes "하느냐오!";
+	mes "Me에게 '^FF0000헬스장 회원권^000000'을 가져오면";
+	mes "중력의 마법을 부려 당신의 소지량을";
+	mes "200 만큼 늘려주지오!";
 	next;
-	mes "[Ripped]";
-	mes "I'd say that it'd be safe";
-	mes "for you to seriously train";
-	mes "with me and increase your";
-	mes "item carrying capacity ^FF000010 times^000000.";
-	mes "So... Are you ready to sweat?";
+	mes "[성인]";
+	mes "But! 조심하게 있지오.";
+	mes "This~ 사람들은 너무 나약해오.";
+	mes "So~ 중력의 마법을 ^FF000010번^000000 이상받으면";
+	mes "견디질 못해오.";
 	next;
-	switch(select("Yes:No:Um, my workouts wore off.")) {
+	mes "[성인]";
+	mes "Hey~ 중력의 마법을 받을건가 당신은?";
+	next;
+	switch(select("예:아니요:마법이 사라졌어요~")) {
 	case 1:
 		if (gympassmemory < 10) {
 			set .@add_carry,gympassmemory + 1;
 			set .@remain_carry,10 - .@add_carry;
 			if (countitem(7776) > 0) {
-				mes "[Ripped]";
-				mes "Oh, awesome, I see you";
-				mes "brought your Gym Pass.";
-				mes "Alright, just do what I do,";
-				mes "and try to feel the burn.";
-				mes "Ready? Let's do this.";
+				mes "[성인]";
+				mes "오, 멋지다. 보이네";
+				mes "체육관 이용권을 가져왔습니다.";
+				mes "좋아, 내가 하던 대로 해라";
+				mes "그리고 화상을 느껴보세요.";
+				mes "준비됐나요? 해보자.";
 				next;
 				specialeffect2 EF_EARTHSPIKE;
 				next;
@@ -70,56 +66,51 @@ payon,173,141,4	script	Ripped Cabus#GymPass	899,{
 				next;
 				specialeffect2 EF_SIGHTRASHER;
 				next;
-				mes "[Ripped]";
-				mes "There, you should be able";
-				mes "to carry more stuff with you.";
-				mes "Let's see, we can increase";
-				mes "your item carrying capacity";
-				mes "^FF00000" + .@remain_carry + "^000000 more times if we continue";
-				mes "training together like this.";
+				mes "[성인]";
+				mes "그럼 그럴 수 있겠네요";
+				mes "더 많은 물건을 가지고 다니기 위해.";
+				mes "어디보자, 늘릴 수 있다";
+				mes "귀하의 물품 운반 능력";
+				mes "^FF00000"+ .@remain_carry +"계속하면 ^000000번 더";
+				mes "이렇게 같이 훈련해요.";
 				delitem 7776,1; //Max_Weight_Up_Scroll
 				set gympassmemory,.@add_carry;
 				skill "ALL_INCCARRY",.@add_carry,SKILL_PERM_GRANT;
 				close;
 			}
 			else {
-				mes "[Ripped]";
-				mes "Dude, what'd I tell you?";
-				mes "You gotta bring me your";
-				mes "^FF0000Gym Pass^000000 if you wanna";
-				mes "work out, and build up your";
-				mes "item carrying muscles.";
+				mes "[성인]";
+				mes "Boo~ 당신은 '^FF0000헬스장 회원권^000000'이";
+				mes "없어오!~";
+				mes "That 없으면 중력의 마법을 쓸 수";
+				mes "없어오~";
 				close;
 			}
 		}
 		else {
-			mes "[Ripped]";
-			mes "Dude, I don't think we can";
-			mes "build up your item carrying";
-			mes "muscles anymore than that.";
-			mes "It's too dangerous for your";
-			mes "body if we even tried! C'mon,";
-			mes "I told you about the limits.";
+			mes "[성인]";
+			mes "야, 우리는 할 수 없을 것 같아";
+			mes "나르는 물건을 준비하세요";
+			mes "그보다 근육이 더 많아요.";
+			mes "너에겐 너무 위험해";
+			mes "우리가 시도해 본다면 몸이 좋아! 어서,";
+			mes "한도에 대해 말씀드렸습니다.";
 			close;
 		}
 	case 2:
-		mes "[Ripped]";
-		mes "Aw, that's too bad.";
-		mes "Well, come back if you";
-		mes "change your mind. Tell";
-		mes "your friends about me:";
-		mes "if they're flabby, I'll help";
-		mes "get them in shape.";
+		mes "[성인]";
+		mes "Oh~ 전 실망햇어오~";
+		mes "You는 너무 나약해오.";
 		close;
 	case 3:
 		if (gympassmemory > 0) {
-			mes "[Ripped]";
-			mes "What happened?";
-			mes "You let your item carrying";
-			mes "muscles just atrophy? Lucky";
-			mes "for you, there's such a thing";
-			mes "as muscle memory. It's won't take";
-			mes "as long to build 'em back up...";
+			mes "[성인]";
+			mes "무슨 일이 있었나요?";
+			mes "아이템을 운반하게 해주세요";
+			mes "근육이 위축됐나? 럭키";
+			mes "당신에게는 그런 것이 있습니다";
+			mes "근육 기억으로. 걸리지 않을 거예요";
+			mes "다시 복구할 수만 있다면...";
 			next;
 			specialeffect2 EF_EARTHSPIKE;
 			next;
@@ -129,22 +120,22 @@ payon,173,141,4	script	Ripped Cabus#GymPass	899,{
 			next;
 			specialeffect2 EF_SIGHTRASHER;
 			next;
-			mes "[Ripped]";
-			mes "How about that?";
-			mes "Your item carrying";
-			mes "muscles grew back,";
-			mes "just like that! Try not to";
-			mes "wimp out again, okay?";
+			mes "[성인]";
+			mes "그건 어때요?";
+			mes "귀하의 물품 운반";
+			mes "근육이 다시 자랐어요";
+			mes "그렇군요! 그러지 마세요";
+			mes "또 겁먹어, 알았지?";
 			skill "ALL_INCCARRY",gympassmemory,SKILL_PERM_GRANT;
 			close;
 		}
 		else {
-			mes "[Ripped]";
-			mes "Uhh...";
-			mes "We didn't work out";
-			mes "together before.";
-			mes "I'm sure about that.";
+			mes "[성인]";
+			mes "Oops~ 당신은 마법을 받은 적이";
+			mes "없군오!";
+			mes "So~! 없는게 당연해오~ 마법이";
 			close;
 		}
 	}
 }
+itemmall,16,78,4	duplicate(중력성인#GymPass)	중력성인#GymPass1	899

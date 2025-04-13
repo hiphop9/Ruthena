@@ -17,6 +17,7 @@
 #include "core.hpp"
 #include "showmsg.hpp"
 #include "timer.hpp"
+#include "../config/custom.hpp"
 
 using namespace rathena::server_core;
 
@@ -34,7 +35,7 @@ const char* SQL_CONF_NAME;
 const char* LOGIN_CONF_NAME;
 //common conf (used by multiple serv)
 const char* LAN_CONF_NAME; //char-login
-const char* MSG_CONF_NAME_EN; //all
+const char* MSG_CONF_NAME_KOR; //all
 
 /**
  * Function to check if the specified option has an argument following it.
@@ -47,7 +48,10 @@ const char* MSG_CONF_NAME_EN; //all
  */
 bool opt_has_next_value(const char* option, int i, int argc){
 	if (i >= argc - 1) {
-		ShowWarning("Missing value for option '%s'.\n", option);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("'%s' 옵션에 대한 값이 빠져있습니다.\n", option);
+		else
+			ShowWarning("Missing value for option '%s'.\n", option);
 		return false;
 	}
 
@@ -64,15 +68,23 @@ bool opt_has_next_value(const char* option, int i, int argc){
 void display_versionscreen(bool do_exit)
 {
 	const char* svn = get_svn_revision();
-	if( svn[0] != UNKNOWN_VERSION )
-		ShowInfo("rAthena SVN Revision: '" CL_WHITE "%s" CL_RESET "'\n", svn);
-	else {
+	if( svn[0] != UNKNOWN_VERSION ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("라테나 SVN 리비전: '" CL_WHITE "%s" CL_RESET "'\n", svn);
+		else
+			ShowInfo("rAthena SVN Revision: '" CL_WHITE "%s" CL_RESET "'\n", svn);
+	} else {
 		const char* git = get_git_hash();
 		if( git[0] != UNKNOWN_VERSION )
 			ShowInfo("rAthena Git Hash: '" CL_WHITE "%s" CL_RESET "'\n", git);
 	}
-	ShowInfo(CL_GREEN "Website/Forum:" CL_RESET "\thttp://rathena.org/\n");
-	ShowInfo("Open " CL_WHITE "README.md" CL_RESET " for more information.\n");
+	if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowInfo(CL_GREEN "웹사이트/포럼:" CL_RESET "\thttp://rathena.org/\n");
+		ShowInfo("더 많은 정보는" CL_WHITE "README.md" CL_RESET " 파일을 참조하세요.\n");
+	} else {
+		ShowInfo(CL_GREEN "Website/Forum:" CL_RESET "\thttp://rathena.org/\n");
+		ShowInfo("Open " CL_WHITE "README.md" CL_RESET " for more information.\n");
+	}
 	if (do_exit)
 		exit(EXIT_SUCCESS);
 }
@@ -95,7 +107,10 @@ int cli_get_options(int argc, char ** argv) {
 			continue;
 
 		if (arg[0] != '-' && (arg[0] != '/' || arg[1] == '-')) {// -, -- and /
-			ShowError("Unknown option '%s'.\n", argv[i]);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("'%s' 옵션은 알 수 없는 옵션입니다.\n", argv[i]);
+			else
+				ShowError("Unknown option '%s'.\n", argv[i]);
 			exit(EXIT_FAILURE);
 		}
 		else if ((++arg)[0] == '-') {// long option
@@ -109,7 +124,7 @@ int cli_get_options(int argc, char ** argv) {
 			}
 			else if (strcmp(arg, "msg-config") == 0) {
 				if (opt_has_next_value(arg, i, argc))
-					MSG_CONF_NAME_EN = argv[++i];
+					MSG_CONF_NAME_KOR = argv[++i];
 			}
 			else if (strcmp(arg, "run-once") == 0) { // close the map-server as soon as its done.. for testing [Celest]
 				global_core->set_run_once( true );
@@ -123,7 +138,10 @@ int cli_get_options(int argc, char ** argv) {
 							LOGIN_CONF_NAME = argv[++i];
 					}
 					else {
-						ShowError("Unknown option '%s'.\n", argv[i]);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowError("'%s' 옵션은 알 수 없는 옵션입니다.\n", argv[i]);
+						else
+							ShowError("Unknown option '%s'.\n", argv[i]);
 						exit(EXIT_FAILURE);
 					}
 				}else if( global_core->get_type() == e_core_type::CHARACTER ){
@@ -136,7 +154,10 @@ int cli_get_options(int argc, char ** argv) {
 							INTER_CONF_NAME = argv[++i];
 					}
 					else {
-						ShowError("Unknown option '%s'.\n", argv[i]);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowError("'%s' 옵션은 알 수 없는 옵션입니다.\n", argv[i]);
+						else
+							ShowError("Unknown option '%s'.\n", argv[i]);
 						exit(EXIT_FAILURE);
 					}
 				}
@@ -166,7 +187,10 @@ int cli_get_options(int argc, char ** argv) {
 						LOG_CONF_NAME = argv[++i];
 				}
 				else {
-					ShowError("Unknown option '%s'.\n", argv[i]);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("'%s' 옵션은 알 수 없는 옵션입니다.\n", argv[i]);
+					else
+						ShowError("Unknown option '%s'.\n", argv[i]);
 					exit(EXIT_FAILURE);
 				}
 			}
@@ -181,7 +205,10 @@ int cli_get_options(int argc, char ** argv) {
 					display_versionscreen(true);
 					break;
 				default:
-					ShowError("Unknown option '%s'.\n", argv[i]);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("'%s' 옵션은 알 수 없는 옵션입니다.\n", argv[i]);
+					else
+						ShowError("Unknown option '%s'.\n", argv[i]);
 					exit(EXIT_FAILURE);
 				}
 		}

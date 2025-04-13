@@ -1,0 +1,10 @@
+
+Header:
+  Type: MOB_DB
+  Version: 3
+
+Footer:
+  Imports:
+  - Path: db/import/ep20/mob_db.yml
+  - Path: db/import/ep20/mob_db_unknown_stats.yml
+  - Path: db/import/ep20/mob_drops.yml

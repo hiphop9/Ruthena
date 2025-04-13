@@ -1,0 +1,355 @@
+
+Header:
+  Type: SKILL_DB
+  Version: 3
+
+Body:
+  - Id: 752
+    Name: NPC_GRADUAL_GRAVITY
+    Description: Gradual Gravity
+    MaxLevel: 3
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Range: 9
+    Flags:
+      IsNpc: true
+    Hit: Single
+    HitCount: 1
+    Duration2: 3000
+
+  - Id: 769
+    Name: NPC_RAINOFMETEOR
+    Description: Rain of Meteor
+    MaxLevel: 10
+    Type: Magic
+    TargetType: Ground
+    Range: 9
+    Flags:
+      IsNpc: true
+    Hit: Multi_Hit
+    HitCount:
+      - Level: 1
+        Count: 2
+      - Level: 2
+        Count: 3
+      - Level: 3
+        Count: 3
+      - Level: 4
+        Count: 4
+      - Level: 5
+        Count: 4
+      - Level: 6
+        Count: 5
+      - Level: 7
+        Count: 5
+      - Level: 8
+        Count: 6
+      - Level: 9
+        Count: 6
+      - Level: 10
+        Count: 7
+    Element: Fire
+    SplashArea:
+      - Level: 1
+        Area: 3
+      - Level: 2
+        Area: 3
+      - Level: 3
+        Area: 5
+      - Level: 4
+        Area: 5
+      - Level: 5
+        Area: 7
+      - Level: 6
+        Area: 7
+      - Level: 7
+        Area: 9
+      - Level: 8
+        Area: 9
+      - Level: 9
+        Area: 11
+      - Level: 10
+        Area: 11
+    Duration1:
+      - Level: 1
+        Time: 800
+      - Level: 2
+        Time: 900
+      - Level: 3
+        Time: 1000
+      - Level: 4
+        Time: 1100
+      - Level: 5
+        Time: 1200
+      - Level: 6
+        Time: 1300
+      - Level: 7
+        Time: 1400
+      - Level: 8
+        Time: 1500
+      - Level: 9
+        Time: 1600
+      - Level: 10
+        Time: 1700
+    Unit:
+      Id: Dummyskill
+      Range: 3
+      Interval: 160
+      Target: Enemy
+      Flag:
+        PathCheck: true
+
+  - Id: 771
+    Name: NPC_RELIEVE_ON
+    Description: NPC_RELIEVE_ON
+    MaxLevel: 1
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    HitCount: 1
+    Duration1: -1
+
+  - Id: 772
+    Name: NPC_RELIEVE_OFF
+    Description: NPC_RELIEVE_OFF
+    MaxLevel: 1
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    HitCount: 1
+    Duration1: 60000
+
+  - Id: 756
+    Name: NPC_WIDEBLEEDING2
+    Description: Wide Bleeding 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 108000
+  - Id: 757
+    Name: NPC_WIDESILENCE2
+    Description: Wide Silence 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+  - Id: 758
+    Name: NPC_WIDESTUN2
+    Description: Wide Stun 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 4500
+  - Id: 759
+    Name: NPC_WIDESTONE2
+    Description: Wide Petrify 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 17000
+  - Id: 760
+    Name: NPC_WIDESLEEP2
+    Description: Wide Sleep 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+  - Id: 761
+    Name: NPC_WIDECURSE2
+    Description: Wide Curse 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+  - Id: 762
+    Name: NPC_WIDECONFUSE2
+    Description: Wide Confusion 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+  - Id: 763
+    Name: NPC_WIDEFREEZE2
+    Description: Wide Freeze 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 27000
+  - Id: 764
+    Name: NPC_BLEEDING2
+    Description: Bleeding 2
+    MaxLevel: 5
+    Type: Weapon
+    TargetType: Attack
+    Flags:
+      IsNpc: true
+    Range: -9
+    Hit: Single
+    HitCount: 1
+    Element: Weapon
+    Duration2: 108000
+  - Id: 768
+    Name: NPC_HELLJUDGEMENT2
+    Description: Hell's Judgement 2
+    MaxLevel: 10
+    Type: Weapon
+    TargetType: Self
+    DamageFlags:
+      Splash: true
+    Flags:
+      IsNpc: true
+      TargetTrap: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea: 14
+    Duration2: 18000

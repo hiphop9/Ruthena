@@ -10,6 +10,7 @@
 #include <common/showmsg.hpp>
 #include <common/sql.hpp> // SQL_INNODB
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "homunculus.hpp"
@@ -94,7 +95,10 @@ static char log_picktype2char(e_log_pick_type type)
 	}
 
 	// should not get here, fallback
-	ShowDebug("log_picktype2char: Unknown pick type %d.\n", type);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("log_picktype2char: 알수 없는 줍기 타입 %d.\n", type);
+	else
+		ShowDebug("log_picktype2char: Unknown pick type %d.\n", type);
 	return 'X';
 }
 
@@ -113,7 +117,10 @@ static char log_chattype2char(e_log_chat_type type)
 	}
 
 	// should not get here, fallback
-	ShowDebug("log_chattype2char: Unknown chat type %d.\n", type);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("log_chattype2char: 알수 없는 채팅 타입 %d.\n", type);
+	else
+		ShowDebug("log_chattype2char: Unknown chat type %d.\n", type);
 	return 'O';
 }
 
@@ -125,7 +132,10 @@ static char log_cashtype2char( e_log_cash_type type ){
 			return 'K';
 	}
 
-	ShowDebug("log_chattype2char: Unknown chat type %d.\n", type);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("log_chattype2char: 알수 없는 채팅 타입 %d.\n", type);
+	else
+		ShowDebug("log_chattype2char: Unknown chat type %d.\n", type);
 	return 'O';
 }
 
@@ -137,7 +147,10 @@ static char log_feedingtype2char(e_log_feeding_type type) {
 			return 'P';
 	}
 
-	ShowDebug("log_feedingtype2char: Unknown feeding type %d.\n", type);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("log_feedingtype2char: 알수 없는 먹이 타입 %d.\n", type);
+	else
+		ShowDebug("log_feedingtype2char: Unknown feeding type %d.\n", type);
 	return 'O';
 }
 
@@ -611,7 +624,10 @@ int log_config_read(const char* cfgName)
 
 	if( ( fp = fopen(cfgName, "r") ) == nullptr )
 	{
-		ShowError("Log configuration file not found at: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("로그 설정 파일 %s을(를) 찾을 수 없습니다.\n", cfgName);
+		else
+			ShowError("Log configuration file not found at: %s\n", cfgName);
 		return 1;
 	}
 
@@ -680,8 +696,12 @@ int log_config_read(const char* cfgName)
 			//support the import command, just like any other config
 			else if( strcmpi(w1,"import") == 0 )
 				log_config_read(w2);
-			else
-				ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("파일 '%s'에 알수 없는 설정 '%s'가 있습니다.\n", cfgName, w1);
+				else	
+					ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+			}
 		}
 	}
 
@@ -693,37 +713,64 @@ int log_config_read(const char* cfgName)
 
 		if( log_config.enable_logs && log_config.filter )
 		{
-			ShowInfo("Logging item transactions to %s '%s'.\n", target, log_config.log_pick);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("아이템 거래를 %s '%s'에 기록중입니다.\n", target, log_config.log_pick);
+			else
+				ShowInfo("Logging item transactions to %s '%s'.\n", target, log_config.log_pick);
 		}
 		if( log_config.branch )
 		{
-			ShowInfo("Logging monster summon item usage to %s '%s'.\n", target, log_config.log_pick);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("소환몬스터 아이템 사용을 %s '%s'에 기록중입니다.\n", target, log_config.log_pick);
+			else
+				ShowInfo("Logging monster summon item usage to %s '%s'.\n", target, log_config.log_pick);
 		}
 		if( log_config.chat )
 		{
-			ShowInfo("Logging chat to %s '%s'.\n", target, log_config.log_chat);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s에 '%s'에 대한 채팅을 기록중입니다..\n", target, log_config.log_chat);
+			else
+				ShowInfo("Logging chat to %s '%s'.\n", target, log_config.log_chat);
 		}
 		if( log_config.commands )
 		{
-			ShowInfo("Logging commands to %s '%s'.\n", target, log_config.log_gm);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s에 '%s'에 대한 명령어를 기록중입니다..\n", target, log_config.log_gm);
+			else
+				ShowInfo("Logging commands to %s '%s'.\n", target, log_config.log_gm);
 		}
 		if( log_config.mvpdrop )
 		{
-			ShowInfo("Logging MVP monster rewards to %s '%s'.\n", target, log_config.log_mvpdrop);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s에 '%s'에 대한 MVP 보상에 대한 기록중입니다.\n", target, log_config.log_mvpdrop);
+			else
+				ShowInfo("Logging MVP monster rewards to %s '%s'.\n", target, log_config.log_mvpdrop);
 		}
 		if( log_config.npc )
 		{
-			ShowInfo("Logging 'logmes' messages to %s '%s'.\n", target, log_config.log_npc);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s에 '%s'에 대한 'logmes' 메시지를 기록중입니다..\n", target, log_config.log_npc);
+			else
+				ShowInfo("Logging 'logmes' messages to %s '%s'.\n", target, log_config.log_npc);
 		}
 		if( log_config.zeny )
 		{
-			ShowInfo("Logging Zeny transactions to %s '%s'.\n", target, log_config.log_zeny);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("%s에 '%s'에 대한 제니 거래를 기록중입니다..\n", target, log_config.log_zeny);
+			else
+				ShowInfo("Logging Zeny transactions to %s '%s'.\n", target, log_config.log_zeny);
 		}
 		if( log_config.cash ){
-			ShowInfo( "Logging Cash transactions to %s '%s'.\n", target, log_config.log_cash );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo( "%s에 '%s'에 대한 캐시 거래를 기록중입니다..\n", target, log_config.log_cash );
+			else
+				ShowInfo( "Logging Cash transactions to %s '%s'.\n", target, log_config.log_cash );
 		}
 		if( log_config.feeding ){
-			ShowInfo( "Logging Feeding items to %s '%s'.\n", target, log_config.log_feeding );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo( "%s에 '%s'에 대한 먹이 아이템을 기록중입니다.\n", target, log_config.log_feeding );
+			else
+				ShowInfo( "Logging Feeding items to %s '%s'.\n", target, log_config.log_feeding );
 		}
 	}
 

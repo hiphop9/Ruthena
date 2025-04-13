@@ -1,944 +1,1446 @@
 //===== rAthena Script =======================================
-//= Al De Baran Town
-//===== By: ==================================================
-//= rAthena Dev Team; L0ne_W0lf
-//===== Current Version: =====================================
-//= 2.3
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Al De Baran Town NPCs
-//===== Additional Comments: =================================
-//= 1.1 Added RS125 NPC.  Added another Kafra Reserve points agent.
-//=     The 2nd reserve points agent is not complete yet.
-//= 1.2 Lottery input number fix [Lupus], 1.2a - label typo fixed
-//= 1.3 Gatekeeper's bug fixed (wrong check and wrong item ID
-//=     for underground), fixed some typos [Lupus]
-//= 1.4 Fixed Typos & Spellcheck [massdriller]
-//= 1.5 Finally added the Special Reserve 2 Lotto 8))
-//=  with official prizes (80% official, 4-5 entries are made up)
-//=  also changed typo Orange Potions -> Red Potions [Lupus]
-//= 1.6 Fixed bug (missing label), optimized all menus [Lupus]
-//= 1.7 Fixed exploits [Lupus] 1.8 Removed Duplicates [Silent]
-//= 1.9 Fixed a bunch of typos with information from Crono/Hollengrhen [Evera]
-//= 1.9a Now Pavianne doesn't sell Kafra Passes. She refunds them [Lupus]
-//= 2.0 Re-made all the dialog-only NPCs with official dialogs.
-//=     Kafra and Clock Tower NPCs pending remake. [DZeroX]
-//= 2.01 removed all .GATs [Lupus]
-//= 2.1 Rescripted most NPCs to Aegis 10.3 standards. [L0ne_W0lf]
-//= 2.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
-//= 2.3 Fixed exploit with kafra pass
-//= 2.4 Updated Kafra Reserve to official dialog. [Capuche]
+// Á¦ÀÛ ½ºÄ«ÀÌ·¯ºê
 //============================================================
 
-// Al De Baran
+// ¾Ëµ¥¹Ù¶õ
 //============================================================
-aldebaran,113,70,4	script	Forger Munster#alde	48,{
-	mes "[Munster]";
-	mes "My family used to live in Geffen. So I guess it was natural that we studied forging and eventually became Blacksmiths. Then, we finally moved to this town,";
-	mes "Al De Baran.";
+aldebaran,113,70,4	script	Á¦·Ã°ø¸Õ½ºÅÍ#alde	48,{
+	mes "[¸Õ½ºÅÍ]";
+	mes "ÀúÈñ ÁıÀº º»·¡ °ÔÆæÀÌ¾ú´Âµ¥";
+	mes "ÀÛ³â °Ü¿ï ÀÌ°÷ ¾Ëµ¥¹Ù¶õÀ¸·Î";
+	mes "ÀÌ»ç ¿Ô´ä´Ï´Ù..";
 	next;
-	if (select("About ^3355FFItem Upgrade^000000:Quit") == 1) {
-		mes "[Munster]";
-		mes "My father was a famous blacksmith in Geffen, and he taught me a lot about forging equipment.";
+	if (select("'^3355FFÁ¦·Ã^000000'¿¡ °üÇÏ¿©..:´ëÈ­¸¦ ±×¸¸µĞ´Ù") == 1) {
+		mes "[¸Õ½ºÅÍ]";
+		mes "¾Æ¹öÁö²²¼­´Â";
+		mes "ºí·¢½º¹Ì½ºÀÇ ¸¶À» °ÔÆæ¿¡¼­µµ";
+		mes "²Ï ÀÌ¸§ÀÌ ³ª¼Ì´ø ºí·¢½º¹Ì½º¼ÌÁÒ";
+		mes "¾î¸Ó´ÏÀÇ °íÇâÀ¸·Î ÀÌ»ç¿Ô°Åµç¿ä";
 		next;
-		mes "[Munster]";
-		mes "One of the fundamentals is that the success probability of upgrading an item depends on the level of the weapon.";
+		mes "[¸Õ½ºÅÍ]";
+		mes "Àúµµ °¡²û ¾Æ¹öÁöÀÇ ÀÏÀ» µµ¿Í¿ä";
+		mes "ÃÖ±Ù¿¡ ¹è¿ì°í ÀÖ´Â ÀÏÀº";
+		mes "¹«±âÀÇ ·¹º§¿¡ µû¸¥";
+		mes "Á¦·ÃÈ®·ü¿¡ °ü·ÃµÈ °Å¶ø´Ï´Ù";
 		next;
-		mes "[Munster]";
-		mes "For level 1 weapons, you may upgrade up to + 7 without the risk of breaking the weapon. Level 2 weapons can be upgraded to +6. Level 3 weapons can be upgraded to +5 safely.";
+		mes "[¸Õ½ºÅÍ]";
+		mes "1 ·¹º§ÀÇ ¹«±â´Â";
+		mes "+7±îÁö ·¹·ÃÇÒ¼ö ÀÖÀ¸¸ç";
+		mes "2 ·¹º§ÀÇ ¹«±â´Â 6";
+		mes "±×¸®°í 3·¹º§ÀÇ ¹«±â´Â";
+		mes "5±îÁö Á¦·ÃÀÌ °¡´ÉÇØ¿ä";
+		mes "4·¹º§ÀÇ °æ¿ì¿¡´Â";
 		next;
-		mes "[Munster]";
-		mes "For level 4 weapons, you can upgrade + 4 without too much risk. As for armors, you can upgrade them to +4. But if the upgrade for the equipment fails, it will be destroyed!";
+		mes "[¸Õ½ºÅÍ]";
+		mes "º¸Åë 4°¡Áö °¡´ÉÇÏÁÒ..";
+		mes "¹æ¾î±¸ÀÇ °æ¿ì¿¡´Â";
+		mes "ÀÏ¹İÀûÀ¸·Î 4±îÁö·¡¿ä";
+		mes "Á¦·ÃÀÌ ½ÇÆĞÇÒ °æ¿ì¿¡´Â";
+		mes "°­µµ¸¦ °ßµ®³»Áö ¸øÇÏ´Â Àåºñ°¡";
+		mes "ÆÄ±«µÇ°í ¸¸µ¥¿ä !!";
 		close;
 	}
-	mes "[Munster]";
-	mes "Hmm...";
-	mes "If you get a chance, try to visit my father's workshop here in Al de Baran. If I may say so, he's a pretty talented Blacksmith.";
+	mes "[¸Õ½ºÅÍ]";
+	mes "¾ÆÁ÷ ¾Æ¹öÁöÀÇ";
+	mes "Á¦·Ã¼Ò°¡ ¾îµğ ÀÖ´ÂÁö";
+	mes "¸ğ¸£´Â »ç¶÷ÀÌ ´õ ¸¹Áö¸¸";
+	mes "ÀÌ ¾Ëµ¥¹Ù¶õ¿¡¼­µµ";
+	mes "¾Æ¹öÁö°¡ À¯¸íÇØ Á³À¸¸é ÁÁ°Ú¾î¿ä";
 	close;
 }
 
-aldebaran,64,104,4	script	Smithing Guy#alde	55,{
-	mes "[Quatro]";
-	mes "Have you heard that a famous Blacksmith moved here from Geffen?";
+aldebaran,64,104,4	script	Á¦·Ã¾ÆÀú¾¾#alde	55,{
+	mes "[ÄâÆ®·Î]";
+	mes "ÀÌ ¾Ëµ¥¹Ù¶õ¿¡";
+	mes "°ÔÆæ¿¡¼­ ²Ï À¯¸íÇÑ";
+	mes "´ëÀåÀåÀÌ°¡ ¿Ô´Ù°í ÇÏ´Âµ¥ ..";
 	next;
-	if (select("Famous Blacksmith?:End Conversation") == 1) {
-		mes "[Quatro]";
-		mes "From what I've heard, he's one of those Blacksmiths that can upgrade your weapons and armor. When you upgrade a weapon, its attack strength is increased.";
+	if (select("À¯¸íÇÑ ´ëÀåÀåÀÌ¿¡ ´ëÇØ?:´ëÈ­¸¦ ±×¸¸µĞ´Ù") == 1) {
+		mes "[ÄâÆ®·Î]";
+		mes "±×·±µ¥ ¸»ÀÌ¾ß µè±â·Î´Â";
+		mes "¹«±â·¹º§¿¡ µû¶ó";
+		mes "Ãß°¡µÇ´Â °ø°İ·ÂÀÇ ¼¼±â°¡";
+		mes "´Ş¶óÁø´Ù´øµ¥ ..";
 		next;
-		mes "[Quatro]";
-		mes "For each upgrade level, attack strength increases by 2 for level 1 weapons. On level 2 weapons, 3 attack strength is added.";
-		next;
-		mes "[Quatro]";
-		mes "On level 3 weapons, 5 attack strength is added for each level, and for level 4 weapons, 7 attack strength is added for each level.";
+		mes "[ÄâÆ®·Î]";
+		mes "1 ·¹º§ÀÏ °æ¿ì¿¡´Â 2";
+		mes "2 ·¹º§ÀÇ °æ¿ì 3 ¾¿";
+		mes "3 ·¹º§Àº ¹«·Á 5 !";
+		mes "4 ·¹º§Àº 7 ÀÌ³ª ÇÑ´Ù´õ±º!!";
 		close;
 	}
-	mes "[Quatro]";
-	mes "This Blacksmith's family lives here, since his wife is sick and weak. Because of her condition, she needs to take medicinal herbs that grow near Al de Baran.";
-	next;
-	mes "[Quatro]";
-	mes "They also have a dutiful son who's always helping out with the family business. I'm sure that kid will grow up to become a good Blacksmith like his father.";
+	mes "[ÄâÆ®·Î]";
+	mes "¾Æ³»°¡ ¸÷ÀÌ ¾àÇØ¼­";
+	mes "¾Ëµ¥¹Ù¶õ ÁÖ¸é¿¡¼­ ÀÚ¶ó³ª´Â ¾àÃÊ¸¦";
+	mes "²ÙÁØÈ÷ º¹¿ëÇØ¾ß ÇÑ´Ù´õ±º";
+	mes "¾Æµé ³à¼®µµ È¿ÀÚ¶ó°í";
+	mes "¾Æ¹öÁö ÀÏÀ» ¾ÆÁÖ Àß µµ¿ÍÁØ´Ù³× ..";
+	mes "³à¼® ±¦ÂúÀº ºí·¢½º¹Ì½º°¡ µÉ°É¼¼";
 	close;
 }
 
-aldebaran,49,93,4	script	Young Man#alde	83,{
-	mes "[Miller]";
-	mes "Aren't level 4 weapons cool!";
-	mes "I can't believe such powerful";
-	mes "weapons exist!";
+aldebaran,49,93,4	script	¹«±â·¹º§Ã»³â#alde	83,{
+	mes "[¹Ğ·¹¾Ë]";
+	mes "±×°Å ¾Æ¼¼¿ä ? ¹«±â Áß¿¡¼­´Â";
+	mes "3 ·¹º§ »Ó¸¸ÀÌ ¾Æ´Ñ ..";
+	mes "4 ·¹º§ÀÇ ¹«±â¶ó´Â°Ô Á¸ÀçÇÑ´Ù´Â°ÍÀ»!!";
 	next;
-	mes "[Miller]";
-	mes "Well, they're rarely seen in the open market, but boss monsters will drop them by a low chance if you happen to be able to kill them.";
+	mes "[¹Ğ·¹¾Ë]";
+	mes "½ÃÁß¿¡¼­´Â ±¸ÇÏ±â Èûµç";
+	mes "ÀÌ 4 ·¹º§ ¹«±âµéÀº";
+	mes "º¸½º ¸ó½ºÅÍµéÀ» ÇØÄ¡¿üÀ» °æ¿ì¿¡";
+	mes "¾ÆÁÖ ³·Àº È®·ü·Î";
+	mes "³ª¿Ã ¶§ °¡ ÀÖ´ä´Ï´Ù";
 	close;
 }
 
-aldebaran,81,61,4	script	Shell Gathering Lady#ald	101,{
-	mes "[Joanne]";
-	mes "I enjoy gathering shells from the sea. It's really fun and relaxing~";
+aldebaran,81,61,4	script	Á¶°³ÀâÀÌ¾Æ°¡¾¾#ald	101,{
+	mes "[Á¶¾Ø]";
+	mes "¹Ù´Ù¿¡¼­ Á¶°³ Áİ´Â °É ÁÁ¾ÆÇØ¿ä. Á¤¸» Àç¹ÌÀÖ°í Æí¾ÈÇØ¿ä~";
 	next;
-	if (select("Shell Gathering?:End Conversation") == 1) {
-		mes "[Joanne]";
-		mes "When you see bubbles popping up from the sand or muddy puddles, try digging into the ground a bit. You might find some shells underneath the ground!";
+	if (select("Á¶°³ ¼öÁı?:´ëÈ­ Á¾·á") == 1) {
+		mes "[Á¶¾Ø]";
+		mes "¸ğ·¡³ª ÁøÈë ¿õµ¢ÀÌ¿¡¼­ °ÅÇ°ÀÌ ¼Ú¾Æ¿À¸£´Â °ÍÀ» º¸¸é ¶¥À» Á¶±İ ÆÄº¸¼¼¿ä. ¶¥ ¹Ø¿¡¼­ Á¶°³²®ÁúÀ» ¹ß°ßÇÒ ¼öµµ ÀÖ½À´Ï´Ù!";
 		next;
-		mes "[Joanne]";
-		mes "Have you heard";
-		mes "of Ambernite?";
-		mes "That shell monster";
-		mes "is pretty tough~";
+		mes "[Á¶¾Ø]";
+		mes "µé¾îº¸¼Ì³ª¿ä";
+		mes "¾Ú¹ö³ªÀÌÆ®ÀÇ?";
+		mes "Àú ²®Áú ±«¹°";
+		mes "²Ï ÈûµéÁö~";
 		next;
-		mes "[Joanne]";
-		mes "It's usually seen at the beach near the west province of Prontera. If you ever try attacking it without being prepared, you might be in trouble.";
+		mes "[Á¶¾Ø]";
+		mes "º¸Åë ÇÁ·ĞÅ×¶ó ¼­ºÎÁö¹æ ±ÙÃ³ ÇØº¯¿¡¼­ ÈçÈ÷ º¼ ¼ö ÀÖ´Ù. ÁØºñ ¾øÀÌ °ø°İÇÏ·Á ÇÑ´Ù¸é Å«ÀÏ³¯ ¼öµµ ÀÖ´Ù.";
 		next;
-		mes "[Joanne]";
-		mes "Ambernite is";
-		mes "pretty strong!";
-		mes "So look out for it!";
+		mes "[Á¶¾Ø]";
+		mes "¾Ú¹ö³ªÀÌÆ®´Â";
+		mes "¾ÆÁÖ °­ÇØ¿ä!";
+		mes "±×·¯´Ï Á¶½ÉÇÏ¼¼¿ä!";
 		close;
 	}
-	mes "[Joanne]";
-	mes "Ambernite is";
-	mes "pretty strong!";
-	mes "So look out for it!";
+	mes "[Á¶¾Ø]";
+	mes "¾Ú¹ö³ªÀÌÆ®´Â";
+	mes "¾ÆÁÖ °­ÇØ¿ä!";
+	mes "±×·¯´Ï Á¶½ÉÇÏ¼¼¿ä!";
 	close;
 }
 
-aldebaran,46,129,4	script	Canal Guy#alde	97,{
-	mes "[Panama]";
-	mes "Al De Baran is known world wide as the City of Canals. The waterways really add a sophisticated, romantic touch to our fair city.";
+aldebaran,46,129,4	script	¿îÇÏÃ»³â#alde	97,{
+	mes "[ÆÄ³ª¸¶]";
+	mes "¾Ëµ¥¹Ù¶õÀº ¹Ìµå°¡¸£µå ¾îµğ¿¡¼­µµ";
+	mes "ÀÌ °÷ÀÇ ÀÌ¾ß±â¸¦";
+	mes "µéÀ»¼ö ÀÖÀ»¸¸Å­";
+	mes "À¯¸íÇÑ ¿îÇÏÀÇ µµ½Ã ÀÔ´Ï´Ù";
 	next;
-	switch(select("About the Canals:End Conversation")) {
+	switch(select("¿îÇÏÀÇ µµ½Ã¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Panama]";
-		mes "Well, a canal is an artificial waterway used for travel,";
-		mes "shipping, or irrigation.";
+		mes "[ÆÄ³ª¸¶]";
+		mes "¿îÇÏ¶õ ..";
+		mes "³»·ú¿¡ ¼±¹ÚÀÇ Ç×ÇØ³ª";
+		mes "³óÁöÀÇ °ü°³ ..";
+		mes "¹è¼ö ¶Ç´Â ¿ë¼ö¸¦ À§ÇÏ¿©";
+		mes "ÀÎ°øÀûÀ¸·Î ¸¸µç ¼ö·Î (â©ÖØ) ÀÌÁö¿ä";
 		next;
-		mes "[Panama]";
-		mes "However, the canals over here are just for show. If we needed to transport anything, we just use the Kafra Corporation Teleport service!";
+		mes "[ÆÄ³ª¸¶]";
+		mes "¿îÇÏ¶õ, ÀÏ¹İÀûÀ¸·Î º¼¶§¿¡";
+		mes "±³Åë±â°üÀÇ ÀÏºÎºĞ ÀÔ´Ï´Ù";
+		mes "¿îÇÏÀÇ ´ëºÎºĞÀº À°Áö¸¦ ±¼ÂøÇÏ¿©";
+		mes "¸¸µå³ª";
+		mes "¸Å¸³ (ØØØ¡) À» ÇÒ ¶§ ³²°ÜµĞ ¼ö·Î ..";
+		next;
+		mes "[ÆÄ³ª¸¶]";
+		mes "ÇÏÃµ¿¡ ¼ÕÁúÀ» ÇÏ¿© ¸¸µç";
+		mes "ÀÎ°ø¼ö·Îµµ ¿îÇÏ¶ó°í";
+		mes "ºÎ¸£±âµµ ÇÏÁö¿ä";
 		close;
 		break;
 	case 2:
-		mes "[Panama]";
-		mes "I have that you will enjoy your stay in Al De Baran.";
+		mes "[ÆÄ³ª¸¶]";
+		mes "¾Ëµ¥¹Ù¶õ¿¡¼­ Áñ°Å¿î ½Ã°£À» º¸³»½Ç ¼ö ÀÖÀ» °Å¶ó ¹Ï½À´Ï´Ù.";
 		close;
 		break;
 	}
 }
 
-aldebaran,67,154,4	script	Forest Guy#alde	98,{
-	mes "[Isenberg]";
-	mes "Mt. Mjolnir and Payon Forest.";
-	mes "Both of those places are tough";
-	mes "to travel through.";
+aldebaran,67,154,4	script	»ê±æÃ»³â#alde	98,{
+	mes "[¾ÆÀÌÁ¨¹ö±×]";
+	mes "¹¦¸£´Ò »ê¸Æ . ÆäÀÌ¿æÀÇ ½£";
+	mes "¸ğµÎ ÇèÇÏµğ ÇèÇÑ";
+	mes "ÁöÇüÀ¸·Î À¯¸íÇÏÁö¿ä";
 	next;
-	switch(select("Mt.Mjolnir?:Payon Forest...?:End Conversation")) {
+	switch(select("¸ğ¸£´Ò »ê¸Æ¿¡ ´ëÇÏ¿©:ÆäÀÌ¿æ ½£¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Isenberg]";
-		mes "To arrive here from Prontera or Geffen, you've got to cross the Mjolnir Mountains.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "·é-¹Ìµå°¡Ã÷¿Õ±¹ÀÇ ¼öµµ";
+		mes "ÇÁ·ĞÅ×¶ó¿Í ¸¶¹ıµµ½Ã °ÔÆæÀ¸·ÎºÎÅÍ";
+		mes "ÀÌ °÷ ¾Ëµ¥¹Ù¶õ±îÁö";
+		mes "¿À·Á¸é ¹İµå½Ã °ÅÃÄ¾ß ÇÏ´Â »ê¸Æ..";
+		mes "¹¦ ¸£ ´Ò !";
 		next;
-		mes "[Isenberg]";
-		mes "If you've made it here by foot without using the Kafra Teleportation service,";
-		mes "then good job!";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "±â»ç ±æµå¿Í ·é-¹Ìµå°¡Ã÷ ¿Õ±ÃÀÇ";
+		mes "¼öµµ ÇÁ·ĞÅ×¶ó..";
+		mes "¸¶¼ú»ç (Magician)¿Í";
+		mes "´ëÀåÀåÀÌ (Black Smith) ÀÇ";
+		mes "¸¶À» °ÔÆæ";
 		next;
-		mes "[Isenberg]";
-		mes "The Mjolnir Mountains are really steep, and it's full of aggressive and hostile monsters. So it's always a risk to travel through there alone.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "±×¸®°í ¸ùÅ©ÀÇ »ç¿øÀ¸·ÎºÎÅÍ";
+		mes "ÀÌ ¾Ëµ¥¹Ù¶õÀ¸·Î µµÂøÇÏ·Á¸é";
+		mes "¹İµå½Ã ¹¦¸£´ÒÀ»";
+		mes "°ÅÃÄ¾ß¸¸ ÇÏÁö¿ä..";
+		mes "¹¦¸£´Ò »ê¸ÆÀº";
+		mes "»ê¼¼°¡ °¡ÆÄ¸£°í ÇèÇÑµ¥´Ù°¡..";
+		next;
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "»ç³³°í °­·ÂÇÑ";
+		mes "¼±Á¦°ø°İ ¸ó½ºÅÍ°¡ ´ëºÎºĞÀÌ¹Ç·Î";
+		mes "Áö³ª¿À±â°¡ Èûµåµ¥";
+		mes "¿À½Ã´À¶ó °í»ıÇÏ¼Ì½À´Ï´Ù";
 		close;
 	case 2:
-		mes "[Isenberg]";
-		mes "If you wish to visit Alberta or the city of Payon, you must first travel through the Payon Forest.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "¸ğ·ÎÄÚÀÇ »ç¸·À¸·ÎºÎÅÍ";
+		mes "¾Ëº£¸£Å¸. ±×¸®°í";
+		mes "ÆäÀÌ¿æÀ¸·Î °¡±â ±îÁö¿¡´Â";
+		mes "¹Şµå½Ã ÆäÀÌ¿æÀÇ ½£À»";
+		mes "Áö³ª¼­ °¡¾ß¸¸ ÇÕ´Ï´Ù";
 		next;
-		mes "[Isenberg]";
-		mes "The Payon Forest is a winding, intricate maze where it's easy to get lost. Unless you concentrate and keep track of your path, you might be stuck wandering in that dangerous place.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "¾Ëº£¸£Å¸¿Í ÆäÀÌ¿æÀÇ »çÀÌ¿¡";
+		mes "À§Ä¡ÇÑ ÀÌ ½£ÀÇ ÁöÇüÀº";
+		mes "»ó´çÈ÷ º¹ÀâÇÑ ¹Ì·Î¿Íµµ";
+		mes "°°ÀÌ ±¸¼ºµÇ¾îÀÖ±â ¶§¹®¿¡";
+		mes "¿Ø¸¸ÇÑ ÁıÁß·ÂÀ» ½ñ¾Æº×Áö ¾Ê°í¼­´Â";
+		mes "Çì¸Å´Ù°¡ ÁöÃÄ¹ö¸®°í ¸»Áö¿ä";
 		next;
-		mes "[Isenberg]";
-		mes "Payon, the Archer Village, was built deep inside this steep and rugged forest so that it may be protected from outside invaders. So I guess that a good decision on their part.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "¾Ëº£¸£Å¸ÀÇ ½£";
+		mes "ÀÌ¶ó°í ÇÏÁö ¾Ê°í";
+		mes "ÆäÀÌ¿æÀÇ ½£";
+		mes "ÀÌ¶ó°í ÇÏ´Â ÀÌÀ¯¿¡´Â";
+		next;
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "±Ã¼ö¸¶À» ÆäÀÌ¿æÀÇ °æ¿ì";
+		mes "¿Ü¼¼ÀÇ Ä§·«À» ¹ŞÁö ¾Ê±â À§ÇØ";
+		mes "ÁÖ°ÅÁö¸¦ . ¿ÜºÎ ±¹°¡·ÎºÎÅÍ";
+		mes "°£¼·¹ŞÁö ¾Ê´Â";
+		mes "±í°í ÇèÇÑ »ê¼ÓÀ» ÅÃÇßÀ¸¹Ç·Î";
+		next;
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "ÀÌ ÀÌÀ¯¿¡¼­ ¿Ü±¹ÀÎµéÀÇ ¿Õ·¡°¡ ÀæÀº";
+		mes "¾Ëº£¸£Å¸ º¸´Ù´Â ÆäÀÌ¿æ ÂÊÀÇ ÀÌ¸§À»";
+		mes "µû¿Â°ÍÀÌ ¾Æ´Ñ°¡ »ı°¢ÇÕ´Ï´Ù";
 		close;
 	case 3:
-		mes "[Isenberg]";
-		mes "The huge mountains surrounding this town";
-		mes "blocks people from outside to come into this town.";
-		mes "That may be a part of the reason how we have been able to";
-		mes "keep this beautiful canal and mysterious alchemy";
-		mes "without any influence from outside.";
+		mes "[¾ÆÀÌÁ¨¹ö±×]";
+		mes "10 ºí·°µµ ³Ñ´Â ¾öÃ»³­ ±Ô¸ğÀÇ »ê¸ÆÀÌ";
+		mes "Å¸ Áö¹æÀ¸·ÎºÎÅÍÀÇ ¿©Çà°´µéÀ»";
+		mes "°ï¶õÇÏ°Ô ¸¸µé±âµµ ÇÏÁö¿ä";
+		mes "´öºĞ¿¡ ¿îÇÏ¿Í ¿¬±İ¼úµîÀÇ";
+		mes "°³¼º¾î¸° ½Åºñ·Î¿î ºĞÀ§±â¸¦";
+		mes "ÁöÅ³¼ö ÀÖ°Ô µÇ¾ú½À´Ï´Ù¸¸..";
 		close;
 	}
 }
 
-aldebaran,90,170,4	script	Slot Guy#alde	47,{
-	mes "[Epthiel]";
-	mes "Some weapons or armor have Slots where you can insert Cards obtained from monsters.";
+aldebaran,90,170,4	script	½½·ÔÃ»³â#alde	47,{
+	mes "[¿¦Æ¼¾ó]";
+	mes "¹«±â ¶Ç´Â ¹æ¾î±¸Áß¿¡´Â";
+	mes "½½·Ô (Slot) ÀÌ¶ó´Â°ÍÀÌ ÀÖ¾î¼­";
+	mes "¸ó½ºÅÍ¸¦ ¾²·¯¶ß·ÈÀ» ¶§";
+	mes "¾ò¾î³½ ¸ó½ºÅÍ Ä«µå¸¦ ³¢¿ö³Ö´Â";
+	mes "±¸¸ÛÀÌ ÀÖ´Â °æ¿ì°¡ ÀÖ´ä´Ï´Ù";
 	next;
-	switch(select("About the number of Slots:Relation between Cards and Slots:End Conversation")) {
+	switch(select("½½·Ô¼ö¿¡ ´ëÇØ..:¸ó½ºÅÍ Ä«µå¿Í ½½·ÔÀÇ °ü°è:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Epthiel]";
-		mes "Items dropped by monsters possess more Slots than ordinary weapons or armor sold in NPC shops.";
+		mes "[¿¦Æ¼¾ó]";
+		mes "ÀÏ¹İ »óÁ¡¿¡¼­ ÆÈ°íÀÖ´Â";
+		mes "Á¤Ç° ¹«±â¿Í ¹æ¾î±¸ÀÇ ½½·Ô¼ö º¸´Ù";
+		mes "¸ó½ºÅÍ·ÎºÎÅÍ Àü¸®Ç°À¸·Î ¾òÀº";
+		mes "¾ÆÀÌÅÛÀÏ °æ¿ì¿¡ ½½·Ô¼ö°¡ ´õ ¸¹¾Æ¿ä";
 		next;
-		mes "[Epthiel]";
-		mes "I guess you can assume that an item with more Slots is more valuable than the same item with fewer Slots.";
+		mes "[¿¦Æ¼¾ó]";
+		mes "ÀÌ·¯ÇÑ ¾ÆÀÌÅÛ¿¡´Â Ä«µå°¡";
+		mes "µÎÀåÀÌ»ó µé¾î°¡´Â °æ¿ì°¡ ÀÖ¾î";
+		mes "¾ÆÀÌÅÛÀÇ °¡Ä¡¸¦";
+		mes "´õ´õ¿í ºû³¾¼ö°¡ ÀÖÁö¿ä";
 		close;
 	case 2:
-		mes "[Epthiel]";
-		mes "Once a Card is inserted into a Slot, it is impossible to remove it. So please be careful when you insert Cards into weapons or armor.";
-		next;
-		mes "[Epthiel]";
-		mes "Also, when you mouse over equipment in the Item Window or Vending Window, the name of the item will be followed by the number of its Slots in brackets.";
-		next;
-		mes "[Epthiel]";
-		mes "For example, a Shield with 1 Slot, when moused over, would display the name 'Shield [1].'";
-		next;
-		mes "[Epthiel]";
-		mes "You may also right-click an item, and check the Card Slot window below the item description window for the number of Slots.";
+		mes "[¿¦Æ¼¾ó]";
+		mes "½½·Ô¿¡ ÇÑ¹ø ³¢¿ö³ÖÀº Ä«µå´Â";
+		mes "´Ù½Ã´Â »¬¼ö°¡ ¾ø°Ô µÇ¹Ç·Î";
+		mes "ÁÖÀÇÇØ¼­ »ç¿ëÇÏ½Ã±â ¹Ù¶ø´Ï´Ù";
+		mes "³¢¿ì±â Àü¿¡ ´Ù½ÃÇÑ¹ø";
+		mes "°õ°õÈ÷ »ı°¢ÇØ º¸¼¼¿ä";
 		close;
 	case 3:
-		mes "[Epithiel]";
-		mes "Have you ever obtained a card from a monster?";
+		mes "[¿¦Æ¼¾ó]";
+		mes "¸ó½ºÅÍ·ÎºÎÅÍ ¾òÀº Ä«µå¸¦";
+		mes "°¡Áö°í °è½Å°¡¿ä?";
 		close;
 	}
 }
 
-aldebaran,117,181,4	script	Phracon Guy#alde	48,{
-	mes "[Joy]";
-	mes "Level 1 weapons, which are the lowest grade, need a metal named ^3355FFPhracon^000000 in order to be upgraded.";
+aldebaran,72,240,6	script	Ã¼ÀÎÁö¿ş°Ç#alde13	851,{
+	mes "[Ã¼ÀÎÁö¿ş°Ç]";
+	mes "³ª´Â ¯˜Æ® ¾ÆÆ¼½ºÆ® Ã¼ÀÎÁö¿ş°Ç!";
+	mes "»óÀÎµé¿¡°Ô Ä«Æ®Ã¼ÀÎÁö2¸¦ ¾Ë·ÁÁÖ±â";
+	mes "À§ÇØ ÀÌÁî·çµå¿¡¼­ºÎÅÍ µû¶ó¿ÔÁö.";
 	next;
-	switch(select("About Phracon:Advice about Phracon:End Conversation")) {
+		mes "[Ã¼ÀÎÁö¿ş°Ç],";
+		mes "Èì, ±×·±µ¥ ÀÚ³×´Â »óÀÎÀÌ ¾Æ´Ï±º...";
+		mes "¾Æ½¬¿ö, Á¤¸»·Î ¾Æ½¬¿ö.";
+		next;
+		mes "[Ã¼ÀÎÁö¿ş°Ç]";
+		mes "Ä«Æ® ¾ÆÆ®´Â ¿À·ÎÁö »óÀÎ°ú »óÀ§";
+		mes "Á÷¾÷µé¸¸ÀÇ ¿¹¼ú ¼¼°è¶ó³×. ÀÚ³×µµ";
+		mes "¹è¿öº¸°í ½Í´Ù¸é ´ÙÀ½ »ı¿¡³ª ´Ù½Ã";
+		mes "¿ÍÁà¾ß ÇÏ°Ú±º.";
+		next;
+		mes "[Ã¼ÀÎÁö¿ş°Ç]";
+		mes "Ã¼ÀÎÁö¿ş°ÇÀº ÀÌ¸¸ ¹°·¯°¡µµ·Ï ÇÏÁö!";
+		close;
+}	
+aldebaran,117,181,4	script	ÇÁ¶óÄÜÃ»³â#alde	48,{
+	mes "[Áê¾ó¸®]";
+	mes "Àåºñ ¾ÆÀÌÅÛÁß";
+	mes "°¡Àå ³·Àº µî±Ş (Level 1)ÀÇ";
+	mes "¹«±â¸¦ Á¦·ÃÇÏ´Âµ¥¿¡´Â";
+	mes "'ÇÁ¶óÄÜ'ÀÌ¶ó´Â";
+	mes "±İ¼ÓÀÌ ÇÊ¿äÇÕ´Ï´Ù";
+	next;
+	switch(select("ÇÁ¶óÄÜ¿¡ ´ëÇÏ¿©:ÇÁ¶óÄÜ¿¡ ´ëÇÑ ´ã¹éÇÑ Á¶¾ğ:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Joy]";
-		mes "Phracon is a pretty common metal and can be found all over the Midgard continent.";
+		mes "[Áê¾ó¸®]";
+		mes "ÇÁ¶óÄÜÀÌ¶õ.. ¿À·¡ÀüºÎÅÍ";
+		mes "¹Ìµå°¡¸£µå Àü¿ª¿¡ °ÉÃÄ";
+		mes "¼ö¸¹Àº »ç¶÷µéÀÌ »ç¿ëÇØ ¿Ô´ø";
+		mes "°¡Àå º¸ÆíÀûÀÎ Á¦·Ã¿ë";
+		mes "±İ¼ÓÀÌ¶ó ÇÒ¼ö ÀÖ°Ú½À´Ï´Ù";
 		next;
-		mes "[Joy]";
-		mes "Although it lacks the strength of other metals, it's easy to find and obtain. You can get Phracons by killing monsters or by buying them in Forging Shops in towns.";
+		mes "[Áê¾ó¸®]";
+		mes "ºñ·Ï °­Ã¶ÀÌ³ª";
+		mes "¿©·¯°¡Áö Èñ±ÍÇÑ ±¤¼®µé°ú";
+		mes "ºñ±³ÇØ¼­ ³ôÀº °­µµ¸¦";
+		mes "°¡Áö°í ÀÖÁö´Â ¾ÊÁö¸¸..";
 		next;
-		mes "[Joy]";
-		mes "When you no longer need Phracons because you are using higher level weapons, you can sell them for some zeny!";
+		mes "[Áê¾ó¸®]";
+		mes "ÀÏ¹İÀÎµéµµ °£´ÜÈ÷";
+		mes "¼Õ¿¡ ³ÖÀ»¼ö ÀÖ´Ù´Â ¹ü¿ë¼º¿¡¼­";
+		mes "ÀûÀİÀº ÀÎ±â¸¦ ´©¸®°í ÀÖÁö¿ä";
+		next;
+		mes "[Áê¾ó¸®]";
+		mes "ÀÌ ÇÁ¶óÄÜÀº";
+		mes "¸ó½ºÅÍ·ÎºÎÅÍ Àü¸®Ç°À¸·Î ¾ò°Å³ª";
+		mes "´ëÀåÀåÀÌµéÀÌ ¸ğ¿©ÀÖ´Â Á¦·Ã¼Ò¿¡¼­";
+		mes "±İ¼ÓÆÇ¸Å¸¦";
+		mes "Àü¹®ÀûÀ¸·Î µµ¸Ã¾Æ ÇÏ´Â";
+		next;
+		mes "[Áê¾ó¸®]";
+		mes "Á¦·Ã°øÀ¸·ÎºÎÅÍ ±¸ÀÔÇÏ¿©";
+		mes "È¹µæÇÒ¼ö ÀÖ½À´Ï´Ù";
+		mes "¾î´ÀÁ¤µµ ·¹º§ÀÌ ¿À¸¥µÚ¿¡...";
+		mes "°í±Ş ·¹º§ÀÇ ¹«±â¸¦";
+		mes "»ç¿ëÇÒ¼ö ÀÖ°Ô µÉ °æ¿ì";
+		next;
+		mes "[Áê¾ó¸®]";
+		mes "ÇÁ¶óÄÜÀ» ¼Õ¿¡ ³Ö¾ú¾îµµ..";
+		mes "¾îµğ¿¡ ¾µ±î -";
+		mes "¸·¸·ÇÒ °æ¿ì°¡ ÀÖ´Âµ¥¿ä..";
+		mes "±×·²¶© ÆÈ¾Æ¹ö¸®¼¼¿ä !!";
+		mes "¹«·Á 100 Á¦´ÏÀÇ Çö±İÀ»";
+		mes "°Å¸ÓÁæ¼ö ÀÖ´ä´Ï´Ù. ¢Ü";
 		close;
 	case 2:
-		mes "[Joy]";
-		mes "Well, I hear lots of monsters carry Phracons and will drop them once killed. Why don't you go hunting for them?";
+		mes "[Áê¾ó¸®]";
+		mes "ÇÁ¶óÄÜÀ» °¡Áö°í ÀÖ´Â";
+		mes "¸ó½ºÅÍ´Â ²Ï ¸¹´Ù°í µé¾ú´Âµ¥¿ä";
+		mes "ÀÇ¿Ü·Î ¼Õ½±°Ô °¡Áú¼ö ÀÖ´Â";
+		mes "±İ¼ÓÀÌ´Ï ÇÑ¹ø";
+		mes "Ã£¾Æº¸½Ã´Â°Ç ¾î¶³±î¿ä ?";
 		next;
-		mes "[Joy]";
-		mes "It shouldn't be too difficult. Once I found a Phracon that dropped after killing a Bebe Savage! But if you're desperate, you can always buy them at the Forging Shop.";
+		mes "[Áê¾ó¸®]";
+		mes "¾ó¸¶Àü ÈŞÀÏ ¿¡´Â";
+		mes "¿·Áı ÁÖÁ¡ ¸¶½ºÅÍ  ¾ÆÀú¾¾¿Í ÇÔ²²";
+		mes "»ç³ÉÀ» ³ª°£ÀûÀÌ ÀÖ¾ú´Âµ¥..";
+		mes "¸äµÅÁöÀÇ »õ³¢·ÎºÎÅÍ";
+		mes "¾òÀºÀûµµ ÀÖ½À´Ï´Ù";
 		close;
 	case 3:
-		mes "[Joy]";
-		mes "Good luck with finding Phracons!";
+		mes "[Áê¾ó¸®]";
+		mes "ÁÁÀº ÇÁ¶óÄÜ ±¸ÇÏ¼¼¿ä -";
 		close;
 	}
 }
 
-aldebaran,121,231,4	script	Alchemy Guy#alde	49,{
-	mes "[Chemirre]";
-	mes "Alchemists, one of the 2nd Jobs, are able to create items out of several materials using knowledge from the ancient age of Al De Baran.";
+aldebaran,121,231,4	script	¿¬±İ¼úÃ»³â#alde	49,{
+	mes "[ÄÉ¹Ì¾ó]";
+	mes "¿¬±İ¼ú»ç (alchemist) ¶õ °í´ë";
+	mes "¾Ëµ¥¹Ù¶õ¿¡¼­";
+	mes "ºñ±İ¼Ó (İäÑÑáÕ) À» ÀÎ°øÀû ¼ö´ÜÀ¸·Î";
+	mes "±Í±İ¼ÓÀ¸·Î ÀüÈ¯ÇÏ´Â °ÍÀ» ¸ñÇ¥·Î";
+	mes "»ï¾Ò´ø";
+	mes "È­ÇĞ . °úÇĞÀÚµéÀ» ÀÏÄÂ´Â";
+	mes "2Â÷ Á÷¾÷¸íÀÌÁö";
 	next;
-	switch(select("About Alchemy in Payon:Definition of Alchemy:. . . . .:End Conversation")) {
+	switch(select("ÆäÀÌ¿æ ¿¬±İ¼ú¿¡ ´ëÇÏ¿©:¿¬±İ¼ú»çÀÇ ÀÇ¹Ì:. . . . .:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Chemirre]";
-		mes "Most people don't know that there was an oriental form of Alchemy that developed in Payon.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "°ÅÀÇ °°Àº ¹«·Æ";
+		mes "ÆäÀÌ¿æ ¿¡¼­´Â";
+		mes "µµ±³ (Ô³Îç) ¿¡¼­ ³ª¿Í";
+		mes "º¹¿ë¿¡ ÀÇÇÏ¿© »ç¶÷ÀÌ Àå¼öÇÏ°í";
+		mes "½Å¼± (ãêà¹) À¸·Î";
+		mes "È­ÇÒ ¼ö ÀÖ´Â '´Ü(Ó¡)'";
 		next;
-		mes "[Chemirre]";
-		mes "These Payon Alchemists were able to create Gold out of different materials. However, Payon Alchemy never advanced as much as the Alchemy in Al De Baran.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "Áï ±İÀÇ Á¦ÃâÀ» Ãß±¸ÇÏ´Â";
+		mes "ÁÖ¼ú°ú »ç»óÀÌ ÀÖ¾î¼­";
+		mes "°úÇĞ»ç»ó ¿¬±İ¼ú°ú ´ëºñÇÏ¿©";
+		mes "ÆäÀÌ¿æ ¿¬±İ¼úÀÌ¶ó°í Çß´Ù³×";
 		next;
-		mes "[Chemirre]";
-		mes "Materials for Alchemy in Payon were scarce and interest in that field eventually waned. Now, you can only study Alchemy here in Al De Baran.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "Çã³ª ÆäÀÌ¿æ Áö¹æ¿¡¼­ÀÇ";
+		mes "È­ÇĞÀº ¹ß´ŞÇÏÁö ¸øÇß´ø°ÍÀÌ";
+		mes "¾Ëµ¥¹Ù¶õ°ú´Â ´Ù¸£°Ô";
+		mes "ÀÚ¿¬È¯°æÀÌ ³Ê¹«³ªµµ Ã´¹ÚÇØ¼­";
+		mes "¿¬±İ¼ú ¿¬±¸¿¡ ÇÊ¿äÇÑ";
+		mes "ÁÁÀº Àç·á°¡ ºÎÁ·Çß´Ù³×";
 		next;
-		mes "[Chemirre]";
-		mes "Still, I can't help but wonder what secrets were lost after the Payon art of Alchemy disappeared from the face of the Earth...";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "±×¸®ÇÏ¿© Áö±İ";
+		mes "¹Ìµå°¡¸£µå Àü¿ªÀ» ÅëÆ²¾î¼­";
+		mes "' ¿¬±İ¼ú 'ÇÏ¸é";
+		mes "ÀÌ ¾Ëµ¥¹Ù¶õÀÇ ¿¬±İ¼ú±æµå ¹Û¿¡";
+		mes "¶°¿À¸£´Â °ÍÀÌ ¾ø°Ô µÈ°ÅÁö ..";
 		close;
 	case 2:
-		mes "[Chemirre]";
-		mes "Alchemists specialize in chemical research in order to create useful items out of various things.";
-		next;
-		mes "[Chemirre]";
-		mes "I also hear that they create all sorts of Potions, and can even summon certain monsters! It seems that their studies have all sorts of nifty applications.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "¿¬±İ¼ú»ç¶ó ÇÔÀº";
+		mes "È­ÇĞ¹æ¸é¿¡ ´ÉÅëÇÏ¿©";
+		mes "¿©·¯°¡Áö ¹°ÁúÀ» È¥ÇÕÇÏ¿©";
+		mes "±â´ÉÀûÀÎ ¾ÆÀÌÅÛÀ» Á¶ÇÕÇØ ³»´Â";
+		mes "´É·ÂÀ» °¡Áö°í ÀÖ´Ù³×";
 		close;
 	case 3:
-		mes "[Chemirre]";
-		mes "You are bored, aren't you?";
-		mes "Alright then, I will tell you a story about monster cards and item slots.";
-		mes "As you already know, if you ever have obtained a monster card before,";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "µûºĞÇÑ°¡ º¸±¸¸¸ ±×·¸´Ù¸é";
+		mes "¸ó½ºÅÍ Ä«µå¿Í ½½·Ô¿¡ °ü·ÃµÈ";
+		mes "ÀÌ¾ß±â¸¦ ´Ã¾î ³õ¾Æ ÁÖÁö ..";
+		mes "¸ó½ºÅÍ Ä«µå¸¦ ÇÑÀåÀÌ¶óµµ";
+		mes "°®°í ÀÖ´Ù¸é ÀÌ¹Ì ´«Ä¡ Ã«°ÚÁö¸¸";
 		next;
-		mes "[Chemirre]";
-		mes "you can only insert a monster card to an item";
-		mes "that satisfies the card's location requirement.";
-		mes "For instance, let's say, you have obtained a Poring Card.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "ÇØ´ç Ä«µå¿¡´Â Àåºñ À§Ä¡¿¡";
+		mes "°ü·ÃµÈ ½½·Ô ¼Ó¼ºÀÌ ÀÖ¾î¼­";
+		mes "¹İµå½Ã ±× Á¾·ùÀÇ ¾ÆÀÌÅÛ¿¡¸¸";
+		mes "ÀåÂøÀÌ °¡´ÉÇÏ°Ô²û µÇ¾î ÀÖÁö";
+		mes "¿¹¸¦µé¾î Æ÷¸µÄ«µå¸¦ ¾ò¾ú´Ù°í ÇÏÀÚ";
 		next;
-		mes "[Chemirre]";
-		mes "When you right click on the card, you will see";
-		mes "its ability as LUK+2 and Perfect Dodge+1";
-		mes "and its location as 'Armor'. ";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "Æ÷¸µÄ«µåÀÇ ¾Õ¸é¿¡´Â";
+		mes "LUK + 2 / ¿ÏÀüÈ¸ÇÇ + 1 ÀÌ¶ó´Â";
+		mes "È¿´É¿¡ ´ëÇÑ ¼öÄ¡¿Í";
+		mes "ÀåÂøºÎÀ§°¡ ' °©¿Ê '";
+		mes "ÀÌ¶ó°í Ç¥±â µÇ¾îÀÖ´Âµ¥";
 		next;
-		mes "[Chemirre]";
-		mes "If you try to insert this card to a dagger with many slots,";
-		mes "it is not going to work because the card only can be inserted to";
-		mes "armor items.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "ÀÌ Ä«µå¸¦ ¾Æ¹«¸®  ½½·ÔÀÌ ¸¹Àº";
+		mes "´Ü°Ë·ù¿¡ ³¢¿ì·Á°íÇØµµ";
+		mes "³¢¿öÁöÁö ¾ÊÀ½ÀÌ¾ß -";
+		mes "¶ó´Â ÀÌ¾ß±âÁö";
 		next;
-		mes "[Chemirre]";
-		mes "Almost every armor items that are being sold";
-		mes "in town shops do not have slots on them.";
-		mes "That means, you can only obtain";
-		mes "slotted armors by hunting monsters.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "¶Ç . ´ëºÎºĞ ¸¶À» »óÁ¡¿¡¼­";
+		mes "ÆÇ¸ÅÇÏ°íÀÖ´Â °©¿Ê·ù´Â";
+		mes "½½·ÔÀ» Æ÷ÇÔÇÏ°í ÀÖÁö ¾ÊÀº";
+		mes "°æ¿ì°¡ ´õ·¯ ÀÖÀ¸¹Ç·Î";
+		mes "¸ó½ºÅÍ·ÎºÎÅÍÀÇ";
+		mes "Àü¸®Ç° µûÀ§¿¡³ª Á¶ÇÕÀÌ";
+		mes "°¡´ÉÇÏ´Ï ±â¾ïÇØ µÎ¶ó±¸";
 		next;
-		mes "[Chemirre]";
-		mes "Ah, let me tell you how you can insert a card to an item.";
-		mes "If you want to insert a card on your equipped armor,";
-		mes "you must unequip the armor first.";
-		mes "And then, double click a card that you want to use.";
-		mes "Then a list of armor, that you can insert the card, will be displayed.";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "¾Æ . ±×¸®°í ¸ó½ºÅÍ Ä«µå¸¦";
+		mes "Àåºñ¿¡ ³¢¿ö³Ö´Â ¹æ¹ıÀº";
+		mes "Àåºñ¸¦ ÇØÁ¦½ÃÄÑ";
+		mes "¾ÆÀÌÅÛ ¸®½ºÆ®¿¡ ¶ç¿ö³õÀºÈÄ";
+		mes "ÇØ´ç Ä«µå¸¦ ´õºíºí¸¯ÇÏ¿©";
+		mes "»ç¿ëÇÏ¸é";
 		next;
-		mes "[Chemirre]";
-		mes "It is not that complicated, is it?";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "¾î¶² Àåºñ¿Íµµ Á¶ÇÕÇÒ°ÍÀÎ°¡¿¡";
+		mes "´ëÇÑ ¸®½ºÆ®°¡ ³ª¿À´Ï";
+		mes "¼Õ½±°Ô ³¢¿ö³ÖÀ»¼ö ÀÖÁö";
 		close;
 	case 4:
-		mes "[Chemirre]";
-		mes "You can talk about Rune-Midgarts' alchemy";
-		mes "without talking about the Al De Baran Alchemist Guild!";
-		mes "Long Live Alchemists!";
+		mes "[ÄÉ¹Ì¾ó]";
+		mes "¹Ìµå°¡¸£µå ¿¬±İ¼ú ÇÏ¸é -";
+		mes "¾Ëµ¥¹Ù¶õ ¿¬±İ¼ú»ç ±æµå !!";
+		mes "¿¬±İ¼ú»ç¿© ¿µ¿øÇÏ¶ó !!";
 		close;
 	}
 }
 
-aldebaran,86,228,4	script	Little Kid#alde	62,{
-	mes "[Bebe]";
-	mes "A while ago I went out for a walk toward Mt. Mjolnir with my pet Savage Bebe. His name is NukNuk!";
-	mes "We got attacked, but luckily we weren't hurt.";
+aldebaran,86,228,4	script	²¿¸¶¾ÆÀÌ#alde	62,{
+	mes "[º£º£]";
+	mes "¾ó¸¶Àü ÀúÈñ Áı¿¡¼­";
+	mes "Å°¿ì´Â »õ³¢µÅÁö";
+	mes "' º£º£º¬ ' À» µ¥¸®°í";
+	mes "¹¦¸£´Ò »ê¸Æ ÂÊÀ¸·Î";
+	mes "»êÃ¥À» ³ª°¬¾ú´õ·¨¾î¿ä..";
+	mes "º£º£º¬Àº ¸äµÅÁö »õ³¢ÀÇ";
+	mes "ÀÏÁ¾À¸·Î¼­ . ¾ÆÁÖ ±Í¿©¿î";
+	mes "ÇÎÅ©ºû ²¿¸¶ µÅÁö ¿´´ä´Ï´Ù";
 	next;
-	switch(select("Attacked?:About Mt.Mjolnir:End Conversation")) {
+	switch(select("º£º£º¬ ÀÌ¾ß±â:¹¦¸£´Ò »ê¸ÆÀÇ ºĞÀ§±â¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Bebe]";
-		mes "I was walking up a narrow path, and out of the blue, a giant and ugly plant started to attack me and NukNuk!";
+		mes "[º£º£]";
+		mes "»ê±æÀ» µû¶ó";
+		mes "ÁÖ¿í ¿Ã¶ó°¡°í ÀÖ¾ú´Âµ¥";
+		mes "¿¹»Û ²ÉÀÌ¶ó »ı°¢µÇ¾ú´ø";
+		mes "Ä¿¶ó¶õ ±«½Ä¹°ÀÌ  Àú ¿Í º£º£º¬À»";
+		mes "¸Ú»ì°Ô ±¸´Â °ÍÀÌ¾ú¾î¿ä";
 		next;
-		mes "[Bebe]";
-		mes "I was so surprised, so me and NukNuk had to run away. I threw rocks at it, but I don't think I hurt it. It must have been really strong!";
+		mes "[º£º£]";
+		mes "³Ê¹« ³î·¡¼­ ¸ÖÂî°¨Ä¡ ¶³¾îÁ®¼­";
+		mes "±æ°¡¿¡ ¶³¾îÁø µ¹À»";
+		mes "´øÁ® º¸¾ÒÁö¸¸ (¸Å¿ì ºñ°ÌÇÏ°Ôµµ )";
+		mes "³à¼®Àº ²ô¶±µµ ¾ÈÇß¾î¿ä";
+		mes "¾öÃ» ´Ü´ÜÇÑ ³à¼®ÀÎ°¡ºÁ¿ä !";
 		next;
-		mes "[Bebe]";
-		mes "What really surprised me was the plant that attacked me was a huge flower with the face of a person! So, look out for those. They're dangerous!";
+		mes "[º£º£]";
+		mes "´õ¿í ³î¶ó¿î°ÍÀº";
+		mes "»ç¶÷ÀÇ ¾ó±¼À» ´àÀº ²É";
+		mes "ÀÌ¾ú´Ù´Â »ç½ÇÀÌ¿¹¿ä !";
+		mes "°¡±îÀÌ ´Ù°¡¼­¸é";
+		mes "ÀÌ»¡·Î ¹°¾î ¶â´Â´Ù´Ï±î¿ä !";
 		close;
 	case 2:
-		mes "[Bebe]";
-		mes "Even though people are fascinated by the scenic beauty of Mt. Mjolnir, it's full of dangerous monsters!";
+		mes "[º£º£]";
+		mes "¹¦¸£´Ò »ê¸ÆÀº . °¢Á¾ È­·ÁÇÑ ½Ä¹°°ú";
+		mes "¿¹»Ú°Ô »ı°åÁö¸¸ ¹«¼­¿î °ïÃæ";
+		mes "µ¿¹°µéÀÌ °¡µæÇÏ´ä´Ï´Ù";
+		mes "²É . ¹ú·¹ .. Æ¯È÷ ¹ú°ú ³ªºñ";
+		mes "³ª¹æµîÀ» ÇÔºÎ·Î °Çµå¸®¸é ¾ÈµÇ¿ä";
 		next;
-		mes "[Bebe]";
-		mes "There are Flowers, Insects, Bees, Butterflies and Moths that are big enough to kill you if you're not careful!";
-		next;
-		mes "[Bebe]";
-		mes "Then again, most of these monsters won't hurt you if you don't attack first. But some of them will attack you once they see you!";
+		mes "[º£º£]";
+		mes "´ëºÎºĞÀÇ Áü½Â . ¹ú·¹µéÀº";
+		mes "¿ì¸®°¡ °ø°İÇÏÁö¸¸ ¾Ê´Â´Ù¸é";
+		mes "Â¥Áõ¼¯ÀÎ ÇØ¸¦ ³¢Ä¡Áö";
+		mes "¾ÊÀ»Å×´Ï±î¿ä ..";
 		close;
 	case 3:
-		mes "[Bebe]";
-		mes "By the way, where is my NukNuk...?";
-		mes "NukNuk! Come out!";
+		mes "[º£º£]";
+		mes "±×·±µ¥ º£º£º¬Àº ¾îµğ°£°ÅÁö .. ?";
+		mes "º£º£º¬¾Æ ! ÀÌ¸® ³ª¿À·Ã !";
 		close;
 	}
 }
 
-aldebaran,159,242,4	script	Insect Guy#alde	119,{
-	mes "[Stromme]";
-	mes "Even to a strong Swordman, the Insects or Mt. Mjolnir pose a considerable threat. You've got to know your enemy before engaging it in battle!";
+aldebaran,159,242,4	script	°ïÃæ¾ÆÀú¾¾#alde	119,{
+	mes "[½ºÆ®·Õ]";
+	mes "¹¦¸£´Ò »ê¸Æ ..";
+	mes "»ê±æÀ» °É¾îº¸¸é";
+	mes "´©±¸¶óµµ ¾Ë¼öÀÖ´Â »ç½Ç !";
+	mes "¹Ù·Î °ïÃæÀÇ ½À¼º¿¡ µû¶ó";
+	mes "°­ÇÏ±â°¡ ³ª´¶´Ù´Â°ÍÀ»..";
+	mes "±×´ë´Â ¾Ë°í ÀÖ´À´¢ ?";
 	next;
-	if (select("About Insects:End Conversation") == 1) {
-		mes "[Stromme]";
-		mes "Honey Bees, Butterflies and Moths seem like simple creatures, but that doesn't mean you should underestimate them.";
+	if (select("°ïÃæ¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù") == 1) {
+		mes "[½ºÆ®·Õ]";
+		mes "²Ü¹úÀÌ³ª . ³ªºñ .. ³ª¹æµîÀº";
+		mes "²É °ú ²É »çÀÌ¸¦ ³¯¾Æ´Ù´Ï¸ç";
+		mes "²ÜÀ» »¡¾Æ¸Ô°í »ìÁö";
+		mes "²Éµé¿¡°Ô ²É°¡·ç¸¦ ¹¯È÷¸ç";
+		mes "´Ù´Ï±â ¶§¹®¿¡";
+		mes "²ÉÀÇ ¼öºĞÀ» µ½±âµµ ÇÏ´Â";
+		mes "°í¸¿°íµµ ±Í¿©¿î°Íµé..";
 		next;
-		mes "[Stromme]";
-		mes "These Insects have evolved over time, and can counter attacks from threats like you adventurers!";
+		mes "[½ºÆ®·Õ]";
+		mes "¾Æ ¹°·Ğ ±×·¸´Ù°í ÇØ¼­";
+		mes "³à¼®µéÀ» ¾èÀâ¾Æ º¸¸é";
+		mes "¾ÈµÇ´Ù´Â »ç½ÇÀ» ÀØÁö¸»¾ÆÁà";
+		mes "»ıÁ¸ÇÏ±â À§ÇØ¼­";
+		mes "³ª¸§´ë·ÎÀÇ ÀüÅõ·ÂÀ»";
+		mes "°®Ãßµµ·Ï ÁøÈ­ÇßÀ¸´Ï ¸»¾ß";
 		next;
-		mes "[Stromme]";
-		mes "There are also carnivorous Insects, such as praying Spiders, praying Mantises, and the millipede like Argiopes.";
+		mes "[½ºÆ®·Õ]";
+		mes "±×¸®°í . ÀÌ·¯ÇÑ °ïÃæµéÀ»";
+		mes "Àâ¾Æ¸Ô´Â À°½Ä °ïÃæÀÌ ÀÖ¾î";
+		mes "»ç¸¶±Í¶óµç°¡ °Å¹Ì";
+		mes "±×¸®°í Áö³×µîÀÌ";
+		mes "±× ´ëÇ¥ÀûÀÎ ³à¼®µéÀÎµ¥";
 		next;
-		mes "[Stromme]";
-		mes "These monsters have mutated and are too strong for a person at certain levels. You should especially watch out for Argiopes.";
+		mes "[½ºÆ®·Õ]";
+		mes "¸ó½ºÅÍ·Î Å»¹Ù²ŞÇÑ  ³à¼®µéÀº";
+		mes "¿Ø¸¸ÇÑ ·¹º§·Î´Â ÇÑ¸¶¸®";
+		mes "»ó´ëÇÏ±â ¹÷ÂûÁ¤µµ·Î °­·ÂÇÏÁö";
+		mes "Æ¯È÷ Áö³×ÀÎÁö °Å¸Ó¸®ÀÎÁö";
+		mes "±Àº¬ÀÌÀÎÁö ¾Ë¼ö ¾ø´Â ³à¼®!";
 		next;
-		mes "[Stromme]";
-		mes "Luckily, their eyesight is pretty bad, so it won't notice you if you walk a safe distance away from it.";
+		mes "[½ºÆ®·Õ]";
+		mes "Á¶½ÉÇÏ¶ó±¸ !";
+		mes "´Ü ÇÑ¹æ¿¡ ¿ä´Ü°­À» °Ç³Ê¹ö·Á !";
+		mes "ºÒÇàÁß ´ÙÇàÀÎ Á¡Àº";
+		mes "ÀÌ Áö³×³à¼®ÀÇ";
+		mes "½Ã·ÂÀÌ ¹«ÁøÀå ¾ÈÁÁ¾Æ¼­";
+		next;
+		mes "[½ºÆ®·Õ]";
+		mes "¸Ö¸® µ¹¾Æ°¡¸é";
+		mes "´«Ä¡Ã¤Áö ¸øÇÑ´Ù´Â »ç½Ç ..";
 		close;
 	}
-	mes "[Stromme]";
-	mes "No matter how harmless and pretty insects are,";
-	mes "take heed to not touch them.";
-	mes "They are extremely strong unlike their innocent looking.";
-	mes "Don't belittle the livings in the Mt. Mjolnir.";
+	mes "[½ºÆ®·Õ]";
+	mes "¾Æ¹«¸® ¿¹»Ú°í ³ª¾àÇØ";
+	mes "º¸ÀÌ´Â ¹«´ç¹ú·¹ °°Àº °ïÃæµµ";
+	mes "ÇÔºÎ·Î ´ëÇß´Ù°¡´Â";
+	mes "Å« ÄÚ ´ÙÃÄ¿ä -";
+	mes "¹¦¸£´Ò »ê¸ÆÀÇ ´ëÀÚ¿¬À»";
+	mes "¿ì½À°Ô º¸¸é ¾ÈµÈ´Ü´Ù ..";
 	close;
 }
 
-aldebaran,60,70,4	script	Sylvia#alde	69,{
-	mes "[Sylvia]";
-	mes "I came all the way here from Prontera because I heard the Kafra Main Office was somewhere here in Al De Baran.";
+aldebaran,60,70,4	script	¾Æ°¡¾¾#alde	69,{
+	mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+	mes "ÀÌ ¾Ëµ¥¹Ù¶õ ¸¶À» ¾îµò°¡¿¡";
+	mes "Ä«ÇÁ¶ó¼­ºñ½º º»»ç°¡";
+	mes "ÀÖ´Ù°íÇØ¼­ ÇÁ·ĞÅ×¶ó¿¡¼­ ÀÌ°÷";
+	mes "¾Ëµ¥¹Ù¶õ±îÁö ¸Õ±æÀ» ¿Ô´ä´Ï´Ù";
+	mes "±×.. ±×·±µ¥.. È÷À×";
 	next;
-	mes "[Sylvia]";
-	mes "It shouldn't be that hard to find, but I'm awful at following directions. I always get lost, no matter how hard I try!";
+	mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+	mes "Ä«ÇÁ¶ó¼­ºñ½º º»»ç¸¦";
+	mes "Ã£±â ½ÃÀÛÇÑÁö 5 ½Ã°£ÀÌ³ª";
+	mes "Áö³µ´Âµ¥.. µµ´ëÃ¼ ¾îµòÁö..";
+	mes "¿ì¾Æ¾Ó - Àú´Â .. ÀÌ·¸°Ô";
+	mes "¶È¶ÈÇØ º¸¿©µÎ ±æÄ¡¶ø´Ï´Ù";
 	next;
-	mes "[Sylvia]";
-	mes "If that wasn't bad enough, I left my Magnifiers back in Prontera, so now I have to find someone to help me with these weapons I've got to appraise!";
+	mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+	mes "¾Æ ±×¸®±¸ Á¦°¡ ¾Ë°íÀÖ´Â";
+	mes "À¯¿ëÇÑ Á¤º¸°¡ ÇÏ³ª ÀÖ´Âµ¥";
+	mes "¾Ë·Áµå¸±°¡¿ä ?";
 	next;
-	if (select("Appraise?:That's very nice.") == 1) {
-		mes "[Sylvia]";
-		mes "Equipment that is dropped by monsters can't be equipped right away.";
+	if (select("´ëÈ­¸¦ ÁøÇàÇÑ´Ù:±×¸¸µĞ´Ù") == 1) {
+		mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+		mes "Àåºñ ¾ÆÀÌÅÛÀÇ °æ¿ì";
+		mes "°« ±¸ÀÔÇß°Å³ª";
+		mes "°¢Á¾ ¸ó½ºÅÍµé¿¡°Ô¼­";
+		mes "Àü¸®Ç°À¸·Î";
+		mes "¹Ş¾ÒÀ» °æ¿ì¿¡";
 		next;
-		mes "[Sylvia]";
-		mes "If you right-click the equippable item in the Item Inventory, you'll see that it is Unidentified and that Appraisal is needed. What to do?";
+		mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+		mes "Àåºñ ¾ÆÀÌÅÛÀÎµ¥µµ ºÒ±¸ÇÏ°í";
+		mes "Àåºñ°¡ ºÒ°¡´ÉÇÒ¶§°¡ ÀÖ½À´Ï´Ù.";
+		mes "ÀÌ·± ¶§ ¿¡´Â .. Àğ¾È !!";
+		mes "^3355FFµ¸ º¸ ±â !!^000000";
 		next;
-		mes "[Sylvia]";
-		mes "Well, in that case, you've gotta use ^3355FF Magnifier^000000!";
-		next;
-		mes "[Sylvia]";
-		mes "Even without a Blacksmith, Alchemist or Merchant in your party, you can appraise your equipment! Of course, a Magnifier is consumed each time you use one...";
+		mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+		mes "µ¸º¸±â¸¦ »ç¿ëÇÏ½Ã¸é";
+		mes "ÆÄÆ¼ ³»¿¡";
+		mes "ºí·¢½º¹Ì½º°¡ ¾ø¾îµµ";
+		mes "°£´ÜÈ÷ ¾ÆÀÌÅÛ °¨Á¤À»";
+		mes "ÇÒ¼ö°¡ ÀÖÁö·Õ¿ä";
 		close;
 	}
-	mes "[Sylvia]";
-	mes "Hey...";
-	mes "Was that a hint of sarcasm in your voice when you said that?";
+	mes "[¼¼´¢¸®Å¸½Çºñ¾Æ]";
+	mes "Ä¡ÀÌ.....";
 	close;
 }
 
-aldebaran,93,80,4	script	Issei#alde	48,{
-	mes "[Issei]";
-	mes "Al De Baran is such a wonderful place with its romantic canals and classic architecture. I love nothing more than to stroll through this city with my beautiful girlfriend.";
+aldebaran,183,159,3	script	·¯±Û#rugle	20,{
+	mes "[·¯±Û]";
+	mes "¾È³ç~!!";
+	mes "¾Ëµ¥¹Ù¶õ±îÁö´Â ¹«½¼ ÀÏ·Î??";
+	mes "¾Æ, ³­ ·¯±ÛÀÌ¶ó°í ÇØ.";
+	mes "³Í ¸ğÇè°¡±¸³ª.";
 	next;
-	if (select("You have a girlfriend?:End Conversation.") == 1) {
-		mes "[Issei]";
-		mes "Hey...";
-		mes "Is that so hard to believe?! Yeah, ask anyone! She really exists! Although, sometimes, just sometimes mind you, she gets too excited about weapons and armor.";
-		next;
-		mes "[Issei]";
-		mes "I mean, instead of enjoying a romantic dinner, she'll just go on about how equipment dropped from monsters is higher quality than those sold in shops...";
-		next;
-		mes "[Issei]";
-		mes "I mean, why should I care if equipment dropped by monsters tend to have more Slots?! I can't even kill a Poring!";
-		next;
-		mes "[Issei]";
-		mes "As you can see,";
-		mes "I'm a lover,";
-		mes " not a fighter.";
-		close;
+	mes "[·¯±Û]";
+	mes "³ª´Â ´Ã È­·ÁÇÑ °ÍÀ» ÁÁ¾ÆÇßÁö." ;
+	mes "¿äÁò µé¾î¼­´Â ¹º°¡ »õ·Î¿î °ÍÀÌ ¾ø³ª";
+	mes "°í¹ÎÀ» Çß¾î.";
+	mes "±×·¡¼­ ÃÖ±Ù¿¡ Á» ÀÛ¾÷À» ÇØºÃ´Âµ¥";
+	mes "¸»¾ß.";
+	mes "¹Ù·Î ^0000FFÀÇ»ó °ñµç ¹ÙÀÌ¿Ã·¿^000000!!";
+	next;
+	mes "[·¯±Û]";
+	mes "ÀÚ, º¸¿©?";
+	mes "ÀÌ °í±Ş½º·´°í È­·ÁÇÑ ¿Õ°ü~~!!";
+	mes "Áö±İ ³»°¡ ¾²°í ÀÖ´Â°Å!!";
+	next;
+	mes "[·¯±Û]";
+	mes "³»°¡ ¸»ÇÏ´Â Àç·á¸¦ °¡Á®¿À¸é";
+	mes "³Ê¿¡°Ôµµ ÀÌ°ÍÀ» ¸¸µé¾îÁÙ°Ô!!";
+	next;
+	switch(select("¾î¶² Àç·á°¡ ÇÊ¿äÇÑµ¥?:^0000FFÀÇ»ó °ñµç ¹ÙÀÌ¿Ã·¿^000000À» ¸¸µé¾î Áà:´ÙÀ½¿¡ ¿Ã°Ô")) {
+		case 1:
+			mes "[·¯±Û]";
+			mes "ÁÁ¾ÆÁÁ¾Æ~ ³Êµµ ÀÌ°É °¡Áö°í";
+			mes "½ÍÀº°Å±¸³ª!";
+			mes "^0000FFº°ÀÇ °¡·ç^000000 22°³, ^0000FF¸Å¿ì ´Ü´ÜÇÑ ²®Áú^000000";
+			mes "50°³, ^0000FFºÎµå·¯¿î ÅĞ^000000 300°³, ^0000FFº¸¶ó»ö ¿°·á^000000";
+			mes "3°³¾ß!";
+			mes "±×¸®°í Á¶ÇÕ ¼ö¼ö·á·Î ^0000FF200¸¸ Á¦´Ï^000000°¡";
+			mes "ÇÊ¿äÇØ.";
+			next;
+			mes "[·¯±Û]";
+			mes "^0000FFº¸¶ó»ö ¿°·á^000000´Â";
+			mes "^0000FF¸ğ·ÎÄÚ^000000¿¡ ÀÖ´Â<NAVI>[¿°·á Á¦ÀÛÀÚ]<INFO>morocc_in,146,99</INFO></NAVI>¸¦";
+			mes "Ã£¾Æ°¡¸é ¾òÀ» ¼ö ÀÖ¾î.";
+			next;
+			mes "[·¯±Û]";
+			mes "³ª¸ÓÁö Àç·áµéÀº Áö¿ª °÷°÷¿¡¼­ »ç³ÉÀ»";
+			mes "ÇÏ´Ù º¸¸é";
+			mes "¾òÀ» ¼ö ÀÖ´Â °ÍµéÀÌ¾ß.";
+			mes "¾Æ¸¶ ³ÊÈñ Ã¢°í ¾È¿¡µµ ÀÖÀ»°É?";
+			next;
+			mes "[·¯±Û]";
+			mes "Á÷Á¢ ±¸ÇÏ´Â °ÍÀÌ Èûµé´Ù¸é";
+			mes "´Ù¸¥ ¸ğÇè°¡µé°ú °Å·¡¸¦ ÇØµµ ÁÁÀ» °Í";
+			mes "°°¾Æ!";
+			mes "Àç·á¸¦ °¡Á®¿À¸é ¸¸µé¾îÁÙ°Ô.";
+			mes "¾ÆÁÖ °í±Ş½º·´°Ô!!";
+			close;
+			break;
+		case 2:
+			mes "[·¯±Û]";
+			mes "¿À, Àç·á°¡ ¸ğµÎ ÁØºñµÈ°Å¾ß?";
+			mes "ÀÚ, ¾îµğ º¼°¡³ª~~";
+			next;
+			if (countitem(1001) < 22 || countitem(943) < 50 || countitem(949) < 300 || countitem(981) < 3) {
+					mes "[·¯±Û]";
+					mes "¾Æ´Ï,¾Æ´Ï, ¾Æ´Ï¾ß!";
+					mes "Àç·á°¡ ºÎÁ·ÇÏÀİ´Ï.";
+					mes "^0000FFº°ÀÇ °¡·ç^000000 22°³, ^0000FF¸Å¿ì ´Ü´ÜÇÑ ²®Áú^000000";
+					mes "50°³, ^0000FFºÎµå·¯¿î ÅĞ^000000 300°³, ^0000FFº¸¶ó»ö ¿°·á^000000";
+					mes "3°³¾ß.";
+					close;
+			}
+			else if(Zeny < 2000000){
+				mes "[·¯±Û]";
+				mes "¾Æ´Ï,¾Æ´Ï ¼ö¼ö·á°¡";
+				mes "ºÎÁ·ÇÏÀİ´Ï";
+				mes "¼ö¼ö·á´Â 200¸¸ Á¦´Ï¾ß";
+				close;
+				}
+			mes "[·¯±Û]";
+			mes "ÁÁ¾Ò¾î, ÇÏ³ªµµ ºüÁü ¾øÀÌ";
+			mes "°¡Á®¿Ô±¸³ª!";
+			mes "½Ç·Â ¹ßÈÖ¸¦ ÇØº¸°Ú´Ù.";
+			mes "Àá½Ã¸¸ ±â´Ù·ÁºÁ!!";
+			next;
+			mes "[·¯±Û]";
+			mes ".";
+			next;
+			mes "[·¯±Û]";
+			mes "..";
+			next;
+			mes "[·¯±Û]";
+			mes "...";
+			next;
+			mes "[·¯±Û]";
+			mes "ÀÚÀÚÀÚ~ ¿Ï¼º µÇ¾ú¾î!";
+			mes "^0000FFÀÇ»ó °ñµç ¹ÙÀÌ¿Ã·¿^000000ÀÌ¾ß~";
+			next;
+			set Zeny,Zeny - 2000000;
+			delitem 1001,22; //º°ÀÇ °¡·ç
+			delitem 943,50; //¸Å¿ì ´Ü´ÜÇÑ ²®Áú
+			delitem 949,300; //ºÎµå·¯¿ò ÅĞ
+			delitem 981,3; //º¸¶ó»ö ¿°·á
+			getitem 31709,1; //ÀÇ»ó °ñµç ¹ÙÀÌ¿Ã·¿
+			mes "[·¯±Û]";
+			mes "³Êµµ ÀÌÁ¦ È­·ÁÇØÁú ¼ö ÀÖ°Ô µÇ¾ú¾î!";
+			mes "±×·³ Á¶½ÉÈ÷ µé¾î°¡~";
+			close;
+			break;
+		case 3:
+			mes "[·¯±Û]";
+			mes "±×·¡, ¾Ë°Ú¾î~";
+			mes "^0000FFÀÇ»ó °ñµç ¹ÙÀÌ¿Ã·¿^000000ÀÌ ÇÊ¿äÇÏ¸é.";
+			mes "³¯ Ã£¾Æ¿À¸é µÈ´Ù!";
+			close;
+			break;
 	}
-	mes "[Issei]";
-	mes "So, you don't think of me stupid, do you?";
+    goto OnMainTalk;
+    end;
+
+OnInit:
+	setunitdata (getnpcid(0),UNPC_HAIRSTYLE,4);
+	setunitdata (getnpcid(0),UNPC_HAIRCOLOR,2);
+	setunitdata (getnpcid(0),UNPC_HEADBOTTOM,1886);
+	setunitdata (getnpcid(0),UNPC_SEX,0);
+end;
+OnMainTalk:
+    end;
+}
+
+
+
+aldebaran,219,135,1	script	¸¶À»»ç¶÷#aldgf	709,{
+	mes "[ÇÁ·©Å©]";
+	mes "¿À´ÃÀº °í±â°¡ ÀâÈ÷·Á³ª~";
+	mes "³»ÀÏÀº °í±â°¡ ÀâÈ÷·Á³ª~";
+	mes "°í±â¸¦ °¡µæ ½Ç¾î ¹è°¡ ¸Á°¡Á®µµ";
+	mes "ÁÁÀ¸´Ï °í±â³ª ¸¹ÀÌ ÀâÇûÀ¸¸é~";
 	close;
 }
 
-aldebaran,180,46,4	script	Joo Jahk#alde	88,{
-	mes "[Joo Jahk]";
-	mes "I'm a tourist";
-	mes "from Payon,";
-	mes "the City of Forests.";
+aldebaran,93,80,4	script	±ä´Ù¸®Ã»³â#alde	48,{
+	mes "[µàÄ«Æ¼]";
+	mes "ÀÌ °÷ ¾Ëµ¥¹Ù¶õÀº º¸½Ã °÷°÷¿¡ ¼ö·Î°¡";
+	mes "ÆÄ¿©ÀÖ¾î";
+	mes "¿©±âÀú±â ¸¼Àº ¹°ÀÌ Èå¸£´Â ´öÅÃ¿¡";
+	mes "¼ö·ÃÇÑ °æ°üÀ» ÀÚ¶ûÇÏÁÒ";
+	mes "±× . ·¯ . ³ª";
 	next;
-	mes "[Joo Jahk]";
-	mes "The tempature here in Al De Baran is very cool, probably because of the waterways. Do you think the water in the canals is drinkable?";
-	next;
-	mes "[Joo Jahk]";
-	mes "Well, it's too late for me, since I already drank some. Still, I'm a little worried...";
-	next;
-	if (select("Continue.:End conversation.") == 1) {
-		mes "[Joo Jahk]";
-		mes "On one of my travels around Midgard, I've heard from a really high level Mage that physical attacks, or magic with Neutral Property, won't damage Spiritual Property monsters.";
+	mes "[µàÄ«Æ¼]";
+	mes "¾îÁ¬¹ã. °¡Á·µé ¸ô·¡ ¿©ÀÚÄ£±¸¸¦";
+	mes "¸¸³ª·¯ ³ª°¡´øµµÁß";
+	mes "Àú ¼ö·Î¿¡ ¹ßÀÌ ºüÁ®¼­";
+	mes "ÇÑ¹ãÀÇ µ¥ÀÌÆ®¸¦ ±ò²ûÇÏ°Ô Áñ±âÁö";
+	mes "¸øÇß¾î¿ä";
+	if (select("Àú·±Àú·± ¾ÈµÆ±º¿ä:Âü . ³× . ±×·¡¼­¿ä ") == 1) {
+		mes "[µàÄ«Æ¼]";
+		mes "¾îÁ¦ ¹æ¾î±¸Á¡ ¸·³»µşÀÎ";
+		mes "Á¦ ¿©ÀÚÄ£±¸¿¡°Ô µéÀº ÀÌ¾ß±âÀÎµ¥";
+		mes "¹«±âÁ¡ ¹æ¾î±¸Á¡ µµ±¸Á¡ µî¿¡¼­ ÆÄ´Â";
+		mes "Á¤Ç° ¾ÆÀÌÅÛ º¸´Ù";
 		next;
-		mes "[Joo Jahk]";
-		mes "Maybe that advice will come in handy, now that you know that. Always remember the importance of the Properties of your skills and weapons when battling monsters.";
+		mes "[µàÄ«Æ¼]";
+		mes "°¢ Á¾ ¸ó½ºÅÍµé·ÎºÎÅÍ ¾òÀº Àü¸®Ç°";
+		mes "¾ÆÀÌÅÛ ÂÊÀÌ ¼º´ÉÀÌ ÁÁÀº °æ¿ì°¡";
+		mes "¸¹´Ù°í ÇÏ´õ±º¿ä";
+		next;
+		mes "[µàÄ«Æ¼]";
+		mes "Àü¹® ¿ë¾î·Î";
+		mes "'½½·ÔÀÌ ¸¹´Ù'¶ó°íÇÑ´Ù³ª¿ä ?";
+		mes "Àú´Â ¹«½¼ ¶æÀÎÁö";
+		mes "Á¤È®È÷´Â ¸ğ¸£°Ú½À´Ï´Ù¸¸..";
 		close;
 	}
-	mes "[Joo Jahk]";
-	mes "On the other hand, the water I drank did taste pretty good. Hopefully it didn't have anything too weird in it...";
+	mes "[µàÄ«Æ¼]";
+	mes "¿ì¿ì¿ì..";
+	mes "Àı ¾î·¯¹ö¸®ÇÑ ³à¼®ÀÌ¶ó°í";
+	mes "»ı°¢ ÇÏ½Ã´Â °ÅÁÒ ?";
 	close;
 }
 
-aldebaran,212,122,4	script	Citizen#alde	97,{
-	mes "[Gavin]";
-	mes "Welcome!";
-	mes "The town of";
-	mes "Al De Baran";
-	mes "welcomes you!";
+aldebaran,180,46,4	script	µ¿¾çÀÎ#alde	88,{
+	mes "[ÇÏÁÖÀÛ]";
+	mes "Àú´Â ÆäÀÌ¿æÀÌ¶ó´Â ½£¼ÓÀÇ ³ª¶ó·ÎºÎÅÍ";
+	mes "¿Â °ü±¤°´ÀÔ´Ï´Ù.";
+	mes "ÀÌ°÷Àº .. ¼ö·Î¿¡ ¹°ÀÌ Èå¸®°í ÀÖ¾î";
+	mes "¸Å¿ì ½Ã¿øÇÏ±º¿ä";
 	next;
-	mes "[Gavin]";
-	mes "Well, that might be an exaggeration. After all, it's just me that's welcoming you.";
-	mes "Hey there!";
+	mes "[ÇÏÁÖÀÛ]";
+	mes "±×·±µ¥ .. ÀÌ ¹° ..";
+	mes "¸¶¼Åµµ µÇ´Â°É±î¿ä ?";
+	mes "Àú ..... ÀÌ¹Ì ¸¶¼Å¹ö·È½À´Ï´Ù¸¸ ..";
 	next;
-	if (select("Now, tell me about monsters.:End conversation.") == 1) {
-		mes "[Gavin]";
-		mes "Monsters...?";
-		mes "Aren't we straying off topic a little bit? Ah, you must be one of those adventurers!";
+	if (select("´ëÈ­¸¦ ÁøÇàÇÑ´Ù:±×¸¸µĞ´Ù") == 1) {
+		mes "[ÇÏÁÖÀÛ]";
+		mes "¹Ìµå°¡¸£µå °÷°÷À» ¿©ÇàÇÏ°í ÀÖ´Â";
+		mes "ÁßÀÔ´Ï´Ù";
+		mes "¾Ëµ¥¹Ù¶õ±îÁö ¿À´Â µµÁß¿¡";
+		mes "¾î¶² °í±Ş ¸¶¹ı»çºĞ²² ÀüÇØµéÀº ÀÌ¾ß±â";
+		mes "ÀÎµ¥¿ä";
 		next;
-		mes "[Gavin]";
-		mes "Can't get your mind off the job, eh? Alright, now there was some monster that I saw just recently...";
+		mes "[ÇÏÁÖÀÛ]";
+		mes "½ÇÃ¼°¡ ¾ø´Â ^3355FF¿°¼Ó¼º^00000 ¸ó½ºÅÍÀÇ °æ¿ì";
+		mes "¹«¼Ó¼º °ø°İ ¶Ç´Â ¸¶¹ıÀ¸·Î´Â";
+		mes "µ¥¹ÌÁö¸¦ ÁÖ±â°¡ ¸Å¿ì Èûµé´Ù°í";
+		mes "ÇÏ´õ¶ó±¸¿ä";
 		next;
-		mes "[Gavin]";
-		mes "Ah, now I remember! Just a few days ago, I saw a really interesting looking monster! It was a Poring with Angel's wings!";
-		next;
-		mes "[Gavin]";
-		mes "I swear! He was jumping around somewhere near Mt. Mjolnir with some ordinary Porings. I think he was, like, their leader.";
+		mes "[ÇÏÁÖÀÛ]";
+		mes "µµ¿òÀÌ µÇ°å±â¸¦ º÷´Ï´Ù";
+		mes "±×·³ ..";
 		close;
 	}
-	mes "[Gavin]";
-	mes "Awww...";
-	mes "Don't be too disappointed that there's only one person in your welcome wagon!";
+	mes "[ÇÏÁÖÀÛ]";
+	mes "ÀÌ °÷ ¾Ëµ¥¹Ù¶õÀº";
+	mes "ÁÖº¯ È¯°æÀÌ ±ú²ıÇØ¼­ÀÎÁö";
+	mes "¹°¸ÀÀÌ ¾ÆÁÖ ÁÁ±º¿ä";
+	mes "¹î¼ÓÀÇ ¹°Àº °ÆÁ¤ÇÏÁö ¾Ê¾Æµµ ±¦ÂúÀ»";
+	mes "°Í °°½À´Ï´Ù";
 	close;
 }
 
-aldebaran,146,124,4	script	Town Girl#alde	101,{
-	mes "[Nastasia]";
-	mes "Somewhere in the world there is an ^3355FFAssassin Guild^000000, where they teach people the subtle art of assassination.";
+aldebaran,212,122,4	script	¾Ëµ¥¹Ù¶õ½Ã¹Î#alde	97,{
+	mes "[°³ºó]";
+	mes "¿Í~~~~";
+	mes "¾Ëµ¥¹Ù¶õ ¸¶À»¿¡";
+	mes "¿À½Å°ÍÀ» Áø½ÉÀ¸·Î";
+	mes "È¯¿µÇÕ´Ï´Ù!";
 	next;
-	mes "[Nastasia]";
-	mes "But isn't killing illegal? And do they even collect educational tuition?";
+	mes "[°³ºó]";
+	mes "¾È³çÇÏ¼¼¿ä!";
+	mes "±Û½ê, ±×°Ç °úÀåÀÏ ¼öµµ ÀÖ´Ù. °á±¹, ´ç½ÅÀ» È¯¿µÇÏ´Â °ÍÀº ³ª»ÓÀÔ´Ï´Ù.";
 	next;
-	if (select("Continue conversation.:End Conversation.") == 1) {
-		mes "[Nastasia]";
-		mes "Although Assassins benefit from being very quick and having lots of AGI, they should still have some DEX.";
+	if (select("ÀÌÁ¦ ¸ó½ºÅÍ¿¡ ´ëÇØ ¸»ÇØ º¸¼¼¿ä.:´ëÈ­¸¦ Á¾·áÇÕ´Ï´Ù.") == 1) {
+		mes "[°³ºó]";
+		mes "¸ó½ºÅÍ...?";
+		mes "¿ì¸® ¾ê±â°¡ Á» ºø³ª°¡´Â °Å ¾Æ³Ä? ¾Æ, ³Êµµ ±×·± ¸ğÇè°¡±¸³ª!";
 		next;
-		mes "[Nastasia]";
-		mes "DEX is especially important if you want to hit monsters with wings. Those monsters are quick moving and fast in attacking.";
+		mes "[°³ºó]";
+		mes "ÀÏ ¶§¹®¿¡ Á¤½ÅÀ» ¸ø Â÷¸®°Ú±¸³ª, ÀÀ? ¾Ë¾Ò¾î, ÃÖ±Ù¿¡ º» ±«¹°ÀÌ ÀÖ¾ú¾î...";
 		next;
-		mes "[Nastasia]";
-		mes "In general, if you want to hit monsters that are as fast, or even faster, than you are, you're going to need some DEX.";
+		mes "[°³ºó]";
+		mes "¾Æ ÀÌÁ¦ »ı°¢³ª³×¿ä! ¸çÄ¥Àü¿¡ Á¤¸» ½Å±âÇÏ°Ô »ı±ä ¸ó½ºÅÍ¸¦ ºÃ½À´Ï´Ù! ¹Ù·Î Ãµ»çÀÇ ³¯°³¸¦ °¡Áø Æ÷¸µÀÌ¾ú½À´Ï´Ù!";
+		next;
+		mes "[°³ºó]";
+		mes "¸Í¼¼ÇÕ´Ï´Ù! ±×´Â Æò¹üÇÑ Æ÷¸µµé°ú ÇÔ²² ¹¨´Ï¸£ »ê ±ÙÃ³¸¦ ¶Ù¾î´Ù´Ï°í ÀÖ¾ú½À´Ï´Ù. ³» »ı°¢¿£ ±× »ç¶÷ÀÌ ±×µéÀÇ ¸®´õ¿´´ø °Í °°¾Æ¿ä.";
 		close;
 	}
-	mes "[Nastasia]";
-	mes "It's usually said that in this world, nothing is free. Still, if you don't have to pay money to learn to be an Assassin...";
+	mes "[°³ºó]";
+	mes "¾Æ¾Æ¾Æ...";
+	mes "È¯¿µ¸¶Â÷¿¡ »ç¶÷ÀÌ ÇÑ ¸í»ÓÀÌ¶ó°í ³Ê¹« ½Ç¸ÁÇÏÁö ¸¶¼¼¿ä!";
 	close;
 }
 
-aldebaran,143,136,4	script	Bell Keeper#A	89,{
-	mes "[Bell Keeper]";
-	mes "I have been charged by the Committee of 'Heaven on Earth' to guard this entrance of the Clock Tower.";
+aldebaran,146,124,4	script	¸¶À»¼Ò³à#alde	101,{
+	mes "[Ä·»şÇÁÆ®]";
+	mes "ÀÌ ¼¼°è ¾îµò°¡¿¡´Â '^3355FF¾î½Ø½Å±æµå^000000'";
+	mes "¶ó´Â °÷ÀÌ ÀÖ¾î¼­";
+	mes "»ç¶÷À» ±âÃ´¾øÀÌ »ìÇØÇÏ´Â ±â¼úÀ»";
+	mes "°¡¸£ÃÄ ÁØ´Ù°í ÇÏ³×¿ä";
+	mes "±× °÷ ..";
 	next;
-	if (select("About Clock Tower.:Quit.") == 1) {
-		mes "[Bell Keeper]";
-		mes "Every floor of this tower is connected to each other by a certain device we like to call 'Warp Gear.'";
+	mes "[Ä·»şÇÁÆ®]";
+	mes "ºÒ¹ıÀÌ°ÚÁÒ ?";
+	mes ".....";
+	mes "ºÒ¹ıÀÎµ¥ . ±â¼ú¼ö·á¸¦ ÇÏ´Âµ¥ ºñ¿ëÀÌ";
+	mes "µé±î¿ä ?";
+	next;
+	if (select("´ëÈ­¸¦ ÁøÇàÇÑ´Ù:±×¸¸µĞ´Ù") == 1) {
+		mes "[Ä·»şÇÁÆ®]";
+		mes "³¯°³°¡ ´Ş·ÁÀÖ¾î  ºñÇà´É·ÂÀÌ ÀÖ´Â";
+		mes "¸ó½ºÅÍµéÀº ´ëºÎºĞ";
+		mes "ÀÌµ¿ . °ø°İ¼Óµµ°¡ ¸Å¿ì»¡¶ó";
+		mes "ÀÌÂÊ¿¡¼­ÀÇ °ø°İÀ» ¼º°ø½ÃÅ°±â°¡";
+		mes "¸Å¿ì Èûµé´ä´Ï´Ù";
 		next;
-		mes "[Bell Keeper]";
-		mes "Even though there are interconnecting warps everywhere in the Clock Tower, beware the 'Random Warp.'";
-		next;
-		mes "[Bell Keeper]";
-		mes "The 'Random Warp' will transport you to an unknown spot. Be advised if you don't want to suddenly be separated from your party...";
-		next;
-		mes "[Bell Keeper]";
-		mes "Remember, Random Warps are shown in green on the mini-map. So keep your eyes peeled for that, as well as for those dangerous Clocks.";
+		mes "[Ä·»şÇÁÆ®]";
+		mes "³à¼®µéÀ» »ó´ëÇÏ±â À§ÇØ¼­´Â";
+		mes "´õ¿í Á¤±³ÇÑ ¼Õ³î¸² (DEX) ÀÌ";
+		mes "ÇÊ¿äÇÏ°ÚÁö¿ä ?";
 		close;
 	}
-	mes "[Bell Keeper]";
-	mes "Please take heed that this Clock Tower is filled with extremely dangerous monsters.";
+	mes "[Ä·»şÇÁÆ®]";
+	mes "»õ»ó¿¡ °øÂ¥°¡ ¾ø´Ù´Â ¸» Ã³·³";
+	mes "¹°·Ğ ¹«·á·Î ±³À°À» ¹ŞÀ»¼ö ÀÖ°Å³ª";
+	mes "ÇÏÁö´Â ¾ÊÀ»°Í°°³×¿ä";
+	mes "¿ì¿ì¿õ..";
 	close;
 }
 
+aldebaran,143,136,4	script	Á¾Áö±â#A	89,{
+	mes "[º¥ÀÚ¹Î È¦]";
+	mes "³ª´Â ¾Ëµ¥¹Ù¶õÀÇ ½Ã°èÅ¾À» °ü¸®ÇÏ´Â";
+	mes "Á¾Áö±â¶ó³×.";
+	mes "ÀÚ³× ÀÌ ½Ã°èÅ¾¿¡ °ü½ÉÀÌ ¸¹Àº";
+	mes "¸ğ¾çÀÌ±º? ¾î¶²°¡ ÁÁÀº Á¤º¸ ÇÏ³ª¸¦";
+	mes "¾Ë·ÁÁÖµµ·Ï ÇÒ±î?";
+	next;
+	if (select("½Ã°èÅ¾¿¡ ´ëÇÏ¿© µè´Â´Ù.:±×¸¸µĞ´Ù.") == 1) {
+		mes "[º¥ÀÚ¹Î È¦]";
+		mes "ÀÌ ½Ã°èÅ¾¾ÈÀº ¸ğÁ¾ÀÇ ÀåÄ¡¸¦ ÅëÇØ";
+		mes "¿©·¯ÃşµéÀÌ ÇÏ³ª·Î ¹­¿©ÀÖ´Ù°í ÇÒ ¼ö";
+		mes "ÀÖÁö.";
+		mes "¹Ù·Î 'Ãş°£ ¿¬µ¿ ¿öÇÁ ½Ã½ºÅÛ'ÀÌ¶ó°í";
+		mes "ÇÏ´Â ÀåÄ¡¶ó³×.";
+		next;
+		mes "[º¥ÀÚ¹Î È¦]";
+		mes "½Ã°èÅ¾ °÷°÷¿¡ Á¸ÀçÇÏ´Â ¿öÇÁµéÀº ¼­·Î";
+		mes "¿¬µ¿µÇ´Â °÷µµ ÀÖÁö¸¸ ¾îµğ¿¡ ¶³¾îÁúÁö";
+		mes "¸ğ¸£´Â '·£´ı¿öÇÁ'¶ó´Â ÀåÄ¡µµ";
+		mes "Á¸ÀçÇÑ´Ù³×.";
+		mes "µ¿·á¿Í ÇÔ²² ÀÌ ½Ã°èÅ¾¾È¿¡ µé¾î°¥";
+		mes "ÀÛÁ¤ÀÌ¶ó¸é ÀÌ ·£´ı¿öÇÁ¸¦ Á¶½ÉÇÏ´Â";
+		mes "°ÍÀÌ ÁÁÀ»°ÍÀÌ¾ß..";
+		next;
+		mes "[º¥ÀÚ¹Î È¦]";
+		mes "ÈùÆ®¸¦ ¾Ë·ÁÁÖÀÚ¸é ·£´ı¿öÇÁ´Â";
+		mes "¹Ì´Ï¸Ê»ó¿¡ ÃÊ·Ï»öÀ¸·Î Ç¥½ÃµÈ´Ù³×.";
+		mes "±×·¯´Ï ¹Ì´Ï¸ÊÀ» ÁÖÀ§ÇØ¼­ º¸´Â °ÍÀÌ";
+		mes "ÁÁÀ» °ÍÀÌ¾ß.";
+		mes "½Ã°èµé°ú ÁÁÀº ½Ã°£ º¸³»±æ ¹Ù¶ó³×.";
+		mes "ÈÄÈÄÈÄ...";
+		close;
+	}
+	mes "[º¥ÀÚ¹Î È¦]";
+	mes "Á¶½ÉÇÏ°Ô... ½Ã°èÅ¾Àº ¹«¼­¿î °÷ÀÌ¾ß.";
+	mes "Áö±İÀº ¾î¶»°Ô µ¹¾Æ°¡´ÂÁö ³ªÁ¶Â÷µµ";
+	mes "¸ğ¸¥´Ù³×...";
+	close;
+}
+
+aldebaran,144,59,4	script	¸¶À»»ç¶÷#A11	448,{
+	mes "[Æ®·ç¸Õ]";
+	mes "¾Æ¾Æ, Âü¸»ÀÌÁö ¸ÅÀÏ Ã»¼Ò¸¦ ÇÏ¸é ¹¹";
+	mes "ÇÏ³Ä°í.";
+	mes "ÀÌ·¸°Ô ÁöÀúºĞÇØÁö´Â°É!";
+	close;
+}
 // Inside Al De Baran
 //============================================================
-aldeba_in,232,241,4	script	RS125#alde	48,{
+aldeba_in,232,241,4	script	¾Ëµ¥¹Ù¶õ¼Ò½Ã¹Î#alde	48,{
 	mes "[RS125]";
-	mes "I may sound inhuman rather robotic";
-	mes "however, I hope you will not be afraid of me. I am as humane as you are.";
+	mes "Á¦ ÀÌ¸§ÀÌ ºñÀÎ°£ÀûÀÌ°í Á¦ ¸»Åõ°¡";
+	mes "°ÇÁ¶ ÇÏ´Ù°í ÇÏ¿©";
+	mes "Àı µÎ·Á¿ö¸¶¼¼¿ä . ¸¶À½¸¸Àº µû¶æÇÑ";
+	mes "³à¼® ÀÌ¶ø´Ï´Ù ..";
 	next;
 	mes "[RS125]";
-	mes "I may have a machine heart and I may disturb you with loud noises from the heart,";
-	mes "that will never stop me from running for future of Al De Baran.";
+	mes "ºñ·Ï Á¦ °¡½¿ ¼Ó ¿¡´Â Æò¹üÇÑ »ç¶÷°ú´Â";
+	mes "´Ù¸£°Ô ..";
+	mes "¹ÌÃµÇÑ 2 ÇàÁ¤ ½ÉÀåÀÌ ¶Ù°í ÀÖ°í";
+	mes "±× ½Ã²ô·¯¿î ½ÉÀåÀ½ÀÌ ±Í¿¡ °Å½½¸°´Ù";
+	mes "ÇÒÁö¶óµµ ..";
+	mes "Àü ¾Ëµ¥¹Ù¶õÀÇ ¹Ì·¡¸¦ À§ÇØ ´Ş¸±°Ì´Ï´Ù";
 	next;
-	if (select("Listen to his story.:End Conversation") == 1) {
+	if (select("»çÁ¤À» µè´Â´Ù:´ëÈ­¸¦ ±×¸¸µĞ´Ù") == 1) {
 		mes "[RS125]";
-		mes "It's been 3 years already.";
-		mes "My brother 996 used to be a short track athlete in the Al De Baran city field team.";
-		mes "Back then, people gave him a nickname, 'Al De Baran's Peco Peco',";
-		mes "for his amazingly fast legs...";
+		mes "..¹ú½á 3 ³âÀÌ Áö³µ±º¿ä ..";
+		mes "Á¦ ÇüÀÌ¾ú´ø 996 Àº ¾Ëµ¥¹Ù¶õ ´ëÇ¥";
+		mes "´Ü°Å¸® À°»ó¼±¼ö·Î¼­ ..";
+		mes "ÇÑ¶§ ' ¾Ëµ¥¹Ù¶õÀÇ ÆäÄÚÆäÄÚ ' ¶ó";
+		mes "ºÒ¸®¿ïÁ¤µµ·Î";
+		mes "ºü¸¥ ´Ù¸®¸¦ ÀÚ¶ûÇß¾úÁö¿ä ..";
 		next;
 		mes "[RS125]";
-		mes "He became so popular for his exciting play,";
-		mes "so every time when the 'Al De Baran Turbo Track' was held once every 4 years,";
-		mes "many people from all over the continent came to this city only to see my brother.";
-		mes "I was his manager at the time and I was so stressed out because of his fans.";
+		mes "4 ³â¸¶´Ù ÇÑ¹ø¾¿ ¾Ëµ¥¹Ù¶õ¿¡¼­ ¿­¸®´Â '";
+		mes "¾Ëµ¥¹Ù¶õ ÅÍº¸Æ®·¢ ' ¿¡¼­´Â";
+		mes "ÇüÀÇ ¸ğ½ÀÀ» Àá±ñÀÌ¶óµµ º¸·Á°í";
+		mes "¸ğ¿©µå´Â ¼¼°è °¢ÁöÀÇ ÆÒµé ¼ºÈ­¿¡ ..";
+		mes "¸Å´ÏÁ®¿´´ø Á¦°¡ ³ëÀÌ·ÎÁ¦¿¡ °É¸±";
+		mes "Áö°æÀÌ¾úÀ¸´Ï±î";
+		mes "±× ÀÎ±â´Â Á¤¸» ´ë´ÜÇßÁö¿ä ..";
 		next;
 		mes "[RS125]";
-		mes "However, there is nothing last forever...";
-		mes "One day, a girl from Payon beat my brother from a game.";
+		mes "ÇÏÁö¸¸ . ¿µ¿øÇÑ °ÍÀº ¾ø´Â¹ı ..";
+		mes "ÆäÀÌ¿æÀÌ¶ó´Â ¿ïÃ¢ÇÑ ½£¼Ó ¸¶À»ÀÇ ¾î´À";
+		mes "»ê°ñ¼Ò³à°¡ .";
+		mes "Á¦ ÇüÀÇ µ¶ÁÖ¸¦ ¸·¾Æ³»¾ú½À´Ï´Ù.";
 		next;
 		mes "[RS125]";
-		mes "My brother couldn't accept the fact that he lost the game";
-		mes "so he did too much of practice and had a serious heart attack.";
-		mes "He is still in bed.";
+		mes "ÇüÀº ±× µÚ·Î °úµµÇÏ°Ô ¹«¸®ÇÑ ÈÆ·Ã¿¡";
+		mes "µû¸¥ ½ÉÀåÀÌ»óÀ¸·Î";
+		mes "Áö±İ º´»ó¿¡¼­ Á¦ ¸ğ½ÀÀ» ¹Ù¶óº¸°í";
+		mes "ÀÖ´ä´Ï´Ù .";
 		next;
 		mes "[RS125]";
-		mes "I am my brother's only hope and the future of Al De Baran!";
-		mes "Please wish me luck, I will beat her, 'Breezy Havana' from Payon!";
+		mes "Àü . ÀÌ ¾Æµ¥¹Ù¶õÀÇ ¹Ì·¡ÀÌÀÚ ÇüÀÇ";
+		mes "Èñ¸ÁÀÌ¿¹¿ä !";
+		mes "ÁöÄÑºÁÁÖ¼¼¿ä . ¹İµå½Ã ÆäÀÌ¿æÀÇ '";
+		mes "»êµé¹Ù¶÷ ÇÏ¹Ù³ª '¸¦ ²ª°í¾ß";
+		mes "¸»°Ú½À´Ï´Ù !";
 		close;
 	}
 	mes "[RS125]";
-	mes "I want to travel around the world one of these days.";
-	mes "If I can see the ocean from the port of Alberta, it must be so wonderful.";
-	mes "After the next year's athletic competition, I will go on a round-the-world tour with my brother.";
+	mes "¾ğÁ¨°¡´Â ¼¼°èÀÏÁÖ¸¦ ÇÏ°í ½Í¾î¿ä .";
+	mes "Ç×±¸µµ½Ã ¾Ëº£¸£Å¸¿¡¼­ ¹Ù¶óº¸´Â";
+	mes "¹Ù´Ù´Â ¾ó¸¶³ª ¸ÚÁú±î¿ä ..";
+	mes "³»³âÀÇ À°»ó´ëÈ¸°¡ ³¡³ª¸é Á¦ Çü°ú";
+	mes "¼¼°èÀÏÁÖ¸¦ ½ÃµµÇÒ°Å¿¹¿ä .";
 	close;
 }
 
-aldeba_in,223,121,4	script	Threatening-Looking Man	63,{
-	mes "[Threatening-Looking Man]";
-	mes "Hey, you don't come inside someone else's house without permission.";
-	mes "This is ridiculous!";
-	mes "How dare you to come inside of my house and talk to me as if that is a normal thing to do?";
+aldeba_in,221,231,4	script	ÂîÇª¸° ³²ÀÚ#aldein1	47,{
+	mes "[Dr. M]";
+	mes "ÇÏ¾Æ.. ÀÌ ¿¬±¸´Â ¾ğÁ¦Âë ³¡ÀÌ ³¯·±Áö..";
+	mes "¹º°¡ ±âºĞ ÀüÈ¯ ÇÒ °Å¶óµµ ÀÖ¾úÀ¸¸é..";
+	close;
+}
+
+aldeba_in,223,121,4	script	Çè»ó±ÄÀº ¾ÆÀú¾¾	63,{
+	mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+	mes "¾îÀÌ . ³²ÀÇ Áı¿¡ ÇÔºÎ·Î µé¾î¿À´Â°ÍÀÌ";
+	mes "¾Æ´Ï¾ß .";
+	mes "ÀÚ³× µÇ°Ô È²´çÇÏ±¸¸¸";
+	mes "¹» ¹Ï°í ¼ºÅ­¼ºÅ­ µé¾î¿Í ³»°Ô ¶±ÇÏ´Ï";
+	mes "¸»À» °Å³ª ?";
 	next;
-	mes "[Threatening-Looking Man]";
-	mes "Hahahaha...chill out, I was just joking.";
+	mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+	mes "ÈÊÈÊÈÊ .. ¾Ë°íÀÖ³× ¾Ë°íÀÖ¾î .";
+	mes "³»°¡ Àá½Ã Çö½Ç¼¼°è¿Í  Âø°¢À» Çß±¸¸¸";
+	mes "±×·¡ ..";
 	next;
-	if (select("Continue:Quit") == 1) {
-		mes "[Threatening-Looking Man]";
-		mes "You may know this already, but";
-		mes "we have a system called, the mercenary system in this world.";
-		mes "Yes, I am a mercenary soldier.";
+	if (select("´ëÈ­¸¦ Áö¼ÓÇÑ´Ù:±×¸¸µĞ´Ù") == 1) {
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "ÀÚ³× . ÀÌ¹Ì ¾Ë°íÀÖ´ÂÁö ¸ğ¸£°ÚÁö¸¸";
+		mes "ÀÌ ¼¼°è¿¡´Â ¿ëº´ ½Ã½ºÅÛÀÌ¶õ°Ô";
+		mes "Á¸ÀçÇÏ³×";
+		mes "±×¸®°í ³ª ¶ÇÇÑ ±× ¿ëº´ÀÌ¶õ ³à¼®µé Áß";
+		mes "ÇÏ³ªÀÌÁö ..";
 		next;
-		mes "[Threatening-Looking Man]";
-		mes "It is simple. You just pay for someone to aid you in fight.";
-		mes "Better mercenary soldier you want, more money you have to pay, you know?";
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "¿ëº´ÀÇ ÀÇ¹Ì¿Í ½Ã½ºÅÛÀº Á¤¸» ´Ü¼øÇÏÁö";
+		mes "µ·À¸·Î °°ÀÌ ½Î¿öÁÙ ³ğÀ» Ã£´Â°Å¾ß ..";
+		mes "½Ç·ÂÀÌ ÀÖ´Â¸¸Å­ °ªÀÌ ³ª°¡°ÚÁö ..";
 		next;
-		mes "[Threatening-Looking Man]";
-		mes "Let's stop talking about boring stuffs.";
-		mes "I will tell you how you can find a good mercenary soldier.";
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "µûºĞÇÑ ÀÌ¾ß±â´Â ±×¸¸µÎ°í";
+		mes "ÁÁÀº ¿ëº´À» °í¸£´Â ¼±º°¹ıÀ»";
+		mes "°£´ÜÇÏ°Ô ÀÌ¾ß±â ÇØÁÖ°Ú³×";
 		next;
-		mes "[Threatening-Looking Man]";
-		mes "Check its nose if it is clean and wet.";
-		mes "A good mercenary soldier must have the wet nose";
-		mes "because it shows that the soldier is at his best in health condition.";
-		mes "If the nose is dry, that means that he caught a cold.";
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "¸ÕÀú ÄàÀÜµîÀÌ ±ú²ıÇÑ°¡ º¸°Ô³ª";
+		mes "ÁÁÀº ¿ëº´Àº °Ç°­»óÅÂ¿¡ µû¶ó ÄàÀÜµîÀÌ";
+		mes "¾ğÁ¦³ª ÃËÃËÇÏ°Ô Á¥¾îÀÖ¾î¾ß ÇÏ³× .";
+		mes "ÄÚ°¡ ¸»¶óÀÖÀ¸¸é";
+		mes "°¨±â¿¡ °É·Á ÀÖ´Ù´Â ÀÌ¾ß±â°¡ µÇÁö ..";
 		next;
-		mes "[Threatening-Looking Man]";
-		mes "And don't forget to check the soldier's ankle.";
-		mes "The best mercenary soldier has thin ankles and a white neck!";
-		mes "If he has long hair, it's better! If the hair is permed and wavy, that's perfect!";
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "±×¸®°í ¹ß¸ñÀÌ °¡´Ã¾î¾ß ÇÏ³×";
+		mes "¿ª½Ã  ¿ëº´ÀÌ¶ó°í ÇÏ¸é °¡´À´Ù¶õ ¹ß¸ñ°ú";
+		mes "»õÇÏ¾á ¸ñ´ú¹Ì¶ó³× !";
+		mes "±ä »ı¸Ó¸® ¶Ç´Â µ· Á» ÆÛºÎÀº ¼ÂÆÃ";
+		mes "ÆÛ¸Ó¶ó¸é ±İ»óÃ·È­ °ÚÁö ?!";
 		next;
-		mes "[Threatening-Looking Man]";
-		mes "Lastly, you have to check whether he is ready to serve you with quality service!";
-		mes "That means, he must do his best in aiding you in fight!";
+		mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+		mes "¸¶Áö¸·À¸·Î¿ëº´ÀÌ¶óÇÔÀº ..";
+		mes "¼­ºñ½º¶ó³× !";
+		mes "¼ÒºñÀÚ°¡ ¸¶Áö¸· ÇÑ¹æ¿ï ±îÁö";
+		mes "Â¥³»µå½Ç¼ö ÀÖµµ·Ï";
+		mes "°ç¿¡¼­ º¸Á¶ . Á¶¾ğÀ» ¾Æ³¢Áö ¾Ê´Â°ÍÀÌ";
+		mes "ÁøÁ¤ÇÑ ¿ëº´ÀÌ¶ó³× !";
+		mes "¹°¼ö°Ç Á¦¶§ °¥¾Æµå¸®´Â°Í ÀØÁö¸»°í !";
 		close;
 	}
-	mes "[Threatening-Looking Man]";
-	mes "Get out, now!";
-	mes "If you a cop, show me a warrant,";
-	mes "if you are a member of my family, prove it with your birth mark!";
+	mes "[Çè»ó±ÄÀº ¾ÆÀú¾¾]";
+	mes "¾ó¸¥ ³ª°¡Áö ¸øÇØ ?";
+	mes "°æÂûÀÌ¶ó¸é ¼ö»ö¿µÀå ..";
+	mes "¿ì¸® Áı¾È »ç¶÷ÀÌ¶ó¸é ¾ûµ¢ÀÌÀÇ";
+	mes "¸ù°í¹İÁ¡À» º¸¿©ºÁ !";
 	close;
 }
 
-aldeba_in,219,61,4	script	Friendly-Looking Man#ald	109,{
-	mes "[Friendly-Looking Man]";
-	mes "You don't have to listen to a guy right next to my room.";
-	mes "Two years ago, he was in a mercenary training center and fell off from a tree";
-	mes "while trying to gather a nut from it.";
+aldeba_in,219,61,4	script	ÀÎ»óÁÁÀº¾ÆÀú¾¾#ald	109,{
+	mes "[ÀÎ»óÁÁÀº¾ÆÀú¾¾]";
+	mes "¿·¹æÀÇ Çè»ó±ÄÀº ¾ÆÀú¾¾ ÀÌ¾ß±â¸¦";
+	mes "±Í´ã¾Æ µèÁö ¸»°Ô³ª..";
+	mes "Á¦ÀÛ³â »ç¼³ ¿ëº´ ÈÆ·Ã¼Ò¿¡¼­";
+	mes "³ª¹«¿­¸Å¸¦ ³ë¸®´Ù°¡";
+	mes "³ª¹«¿¡¼­ ¸Ó¸®ºÎÅÍ ¶³¾îÁ® Àú";
+	mes "¸ğ¾çÀÌ¶ó³×..";
 	next;
-	mes "[Friendly-Looking Man]";
-	mes "He keeps talking to himself loud and it gives me a headache...";
-	mes "Gosh!";
+	mes "[ÀÎ»óÁÁÀº¾ÆÀú¾¾]";
+	mes "°è¼Ó ´ëÈ­¸¦ ³ª´©´Ï ³ªµµ ¹ÌÄ¥°Í°°³× ..";
+	mes "¾îÀÌ±¸ ¸Ó¸®¾ÆÆÛ !";
 	close;
 }
 
-aldeba_in,152,47,4	script	Fussy Man#alde	97,{
-	mes "[Fussy Man]";
-	mes "Aaaaarrrggghhh...I AM IN TROUBLE!";
-	mes "My little chicken has left me!";
-	mes "Oh, my god! Oh, my god!";
+aldeba_in,152,47,4	script	È£µé°©Ã»³â#alde	97,{
+	mes "[È£µé°©Ã»³â]";
+	mes "Å© Å© Å© .. Å«ÀÏ³µ¾î¿ä¿À !";
+	mes "Á¦°¡ ±â¸£´ø ¿ì¸® ±Í¿©¿î »Æ¾Æ¸®°¡";
+	mes "ÁıÀ» ³ª°¡¹ö¸° °ÍÀÌ¾î¿ä !!";
 	next;
-	if (select("What do you call the chicken?:. . . . .") == 1) {
-		mes "[Fussy Man]";
-		mes "I used to call it 'Amazing Picky'...";
-		mes "*Sob* What should I do! How could this happen!";
-		mes "Please, please help me to find my sweet little chicken!";
+	if (select("º´¾Æ¸® ÀÌ¸§ÀÌ ¹¹¿¹¿ä?:. . . . .") == 1) {
+		mes "[È£µé°©Ã»³â]";
+		mes "' ±²ÀåÆÇÇÈÅ° ' ¶ó°í ÇØ¿ä ..";
+		mes "¾û¾û ÀÌ¸¦ ¾îÂ°¿¡ ~";
+		mes "Á¦¹ß ¿ì¸® ±Í¿°µÕÀÌ¸¦ Ã£¾ÆÁÖ¼¼¿ä¿À ~";
 		next;
-		if (select("What? That is such a boring name!:. . . . .") == 1) {
-			mes "[Fussy Man]";
-			mes "Don't be so ridiculous!";
-			mes "'Amazing Picky' is the most wonderful and the most unique name";
-			mes "in this world, and my chicken deserves the name!";
+		if (select("¹¹¾ß ! ÈçÇÏµò ÈçÇÑ ÀÌ¸§ÀÌÀİ¾Æ ?:. . . . .") == 1) {
+			mes "[È£µé°©Ã»³â]";
+			mes "¹«½¼ ¸»µµ ¾ÈµÇ´Â ¸»¾¸À» !";
+			mes "¿ì¸® ' ±²ÀåÇÑÇÈÅ° ' ´Â ÀÌ ¼¼»ó¿¡";
+			mes "ÇÏ³ª¹Û¿¡´Â ¾ø´Â";
+			mes "¹«Áö¸·ÁöÇÏ°Ô ±Í¿©¿î º´¾Æ¸® ¶ó±¸¿ä !!";
+			mes "ÀÌ¾Å =3";
 			close;
 		}
-		mes "[Fussy Man]";
-		mes "You don't care, do you?";
-		mes "I am only child in my family, so I have been thinking of my little chicken as my brother!";
-		mes "I want my chicken back...*Sob*";
+		mes "[È£µé°©Ã»³â]";
+		mes "Àı ¿ì½À°Ô º¸½Ã´Â±º¿ä !";
+		mes "Àü ÇüÁ¦°¡ ¾ø¾î¼­ ±Í¿°µÕÀÌ º´¾Æ¸®¸¦";
+		mes "µ¿»ıÃ³·³ »ı°¢Çß´Ü ¸»¿¹¿ä !";
+		mes "À¸Çã¾û ¾û¾û¾û ;;;;;";
 		close;
 	}
-	mes "[Fussy Man]";
-	mes "You don't care, do you?";
-	mes "I am only child in my family, so I have been thinking of my little chicken as my brother!";
-	mes "I want my chicken back...*Sob*";
+	mes "[È£µé°©Ã»³â]";
+	mes "Àı ¿ì½À°Ô º¸½Ã´Â±º¿ä !";
+	mes "Àü ÇüÁ¦°¡ ¾ø¾î¼­ ±Í¿°µÕÀÌ º´¾Æ¸®¸¦";
+	mes "µ¿»ıÃ³·³ »ı°¢Çß´Ü ¸»¿¹¿ä !";
+	mes "À¸Çã¾û ¾û¾û¾û ;;;;;";
 	close;
 }
 
-aldeba_in,156,179,4	script	Master#alde	61,{
-	mes "[Master]";
-	mes "The Kafra Corporation Headquarters is located here in Al De Baran.";
-	mes "Do you know";
-	mes "what that means?";
+aldeba_in,156,179,4	script	¸¶½ºÅÍ#alde	61,{
+	mes "[¸¶½ºÅÍ]";
+	mes "¾Ëµ¥¹Ù¶õ¿¡´Â Ä«ÇÁ¶ó º»»ç°¡ ÀÖ¾î¿ä ..";
+	mes "±× °÷ ¾ğ´ÏµéÀÌ °¡²û ÀúÈñ ¹Ù¿¡";
+	mes "³î·¯¿À´Âµ¥";
+	mes "±²ÀåÈ÷ À¯ÄèÇÑ ½Ä±¸µéÀÌ ¾Æ´Ò¼ö";
+	mes "¾ø´ä´Ï´Ù";
 	next;
-	mes "[Master]";
-	mes "That means those cute Kafra Employees come here for their lunch breaks! Isn't that great?!";
+	mes "[¸¶½ºÅÍ]";
+	mes "ÀÚ¾Æ . ¹Ù·Î ÀÌ ½ÃÁ¡¿¡¼­ ´ç½Å²² Áú¹® !";
+	mes "±×´ëÀÇ ¿©¼º ÃëÇâÀ» ¾Ë¾Æº¸´Â ' ÅÊÅ¥";
+	mes "¸¶½ºÅÍ ' ½Ã°£ÀÔ´Ï´Ù !";
+	mes "¾Æ .¾Æ . ÅÃÀÌ ³²¼ºÀÌµç ¿©¼ºÀÌµç ±×°Ç";
+	mes "»ó°ü¾ø½À´Ï´Ù .";
 	next;
-	mes "[Master]";
-	mes "Alright, then!";
-	mes "Pop Quiz Time!";
-	mes "Who's your";
-	mes "favorite Kafra girl?";
+	mes "[¸¶½ºÅÍ]";
+	mes "±×Àú . Æò¼Ò¿¡ . ¾Æ¾Ñ ÀÌ ´©³ª ! ¾ğ´Ï !";
+	mes "¾ÆÁÖ¾ÆÁÖ ¸ÚÁ® ÁÖ´Âµ¥ ~";
+	mes ".. ¶ó°í »ı°¢Çß´ø Ä«ÇÁ¶ó¾ğ´Ï¸¦ ¼±ÅÃÇØ";
+	mes "ÁÖ´Â °Ì´Ï´å !";
 	next;
 	if (Sex == SEX_FEMALE) {
-		mes "[Master]";
-		mes "Oh, and don't worry. I know that girls have some kind of opinion about how pretty other girls are.";
+		mes "[¸¶½ºÅÍ]";
+		mes "¾Æ, ±×¸®°í °ÆÁ¤ÇÏÁö ¸¶¼¼¿ä. ³ª´Â ¿©ÀÚµéÀÌ ´Ù¸¥ ¿©ÀÚµéÀÌ ¾ó¸¶³ª ¿¹»ÛÁö¿¡ ´ëÇØ ¾î´À Á¤µµ ÀÇ°ßÀ» °¡Áö°í ÀÖ´Ù´Â °ÍÀ» ¾Ë°í ÀÖ½À´Ï´Ù.";
 		next;
 	}
-	if (select("Awesome!:No way, I ain't a perv.") == 1) {
-		mes "[Master]";
-		mes "Alright, here we go!";
-		mes "Choose your favorite Kafra Lady!";
+	if (select("¿À¿À Àç¹Õ°Ú´Â°É !:¿¡ÀÌ ¾ÈÇØ¿ä ..") == 1) {
+		mes "[¸¶½ºÅÍ]";
+		mes "ÀÚ¾Æ ±×·³ º¸±â°¡ ³ª°©´Ï´Ù !";
+		mes "ÆäÀÌÁö¸¦ ½ÅÁßÈ÷ ³Ñ±â¼¼¿ä¿À !";
 		next;
-		mes "[Master]";
-		mes "The original Kafra Mascot, the classic blue haired lady! Candidate Number One: ^3355FFPavianne^000000!";
+		mes "[¸¶½ºÅÍ]";
+		mes "¿ì¸®µéÀÇ ¿À¸®Áö³¯ Ä«ÇÁ¶ó ¾ğ´Ï";
+		mes "Å¬·¡½ÄÇÑ Çª¸¥ ¸Ó¸®Ä®ÀÌ ¸ÚÁ®¿ä";
+		mes "±âÈ£ (1) ¹ø ' ^3355FFµğÆ÷¸£Å×^000000 '!!";
+		mes "Æ÷´ÏÅ×ÀÏÀÇ Â÷ºĞÇÑ ÀÌ¹ÌÁö·Î";
+		mes "´ú··°Å¸®´Â ³²ÀÚ°í±³»ı ¼Ò´ÔµéÀ» »ç·Î";
+		mes "Àâ¾Ò´Ù !";
+		mes "±âÈ£ (2) ¹ø ' ^5533FFÅ×ÀÏ¸µ^000000 ' !!";
+		mes "±ä »ı¸Ó¸®°¡ Ã­¾Ï Æ÷ÀÎÆ® ³ª±ß³ª±ß ±×";
+		mes "ÀÚÃ¼ ! ÆäÀÌ¿æ Ãâ½ÅÀÇ";
+		mes "±âÈ£ (3) ¹ø ' ^555555¼Ò¸°^000000 ' !!";
 		next;
-		mes "[Master]";
-		mes "Her graceful ponytail takes men's breath away! The fan favorite amongst teen males! Candidate Number Two: ^5533FFBlossom^000000!";
+		mes "[¸¶½ºÅÍ]";
+		mes "º¸ÀÕ½¬ÇÑ ¼ôÄÆ¿¡ ¸¶³É ¾¿¾¿ÇÏ¿©";
+		mes "È°±â¾öÃÄ ¹ö¸®´Â ..";
+		mes "±âÈ£ (4) ¹ø ' ^1133DDºñ´Ö^000000 ' !!";
+		mes "³ÃÁ¤ÇÏ°í Ä§ÂøÇÑ OL ½ºÅ¸ÀÏ·Î";
+		mes "³ª°¡ÁÖ¸¶ ! ·°¼Å¸®ÇÑ ¾È°æÅ×°¡ ¾î¿ï¸®´Â";
+		mes "±âÈ£ (5) ¹ø ' ^33FF55±Û¶ó¸®½º^000000 ' !!";
+		mes "¾ç°¥·¡ ¸Ó¸®¿¡ »Ç¿ë»Ç¿ë ~ ¾î·Áº¸ÀÌµÎ";
+		mes "Á¦ ÇÒ ¸òÀº ´Ù ÇÑ´Ù±¸¿ä !";
+		mes "±âÈ£ (6) ¹ø ' ^AAAA00´õºí·ù^000000 ' !!";
 		next;
-		mes "[Master]";
-		mes "Her long, straight hair, like silk from the East, is her charm point. Direct from Payon, it's Candidate Number Three: ^555555Jasmine^000000!";
+		mes "¸¶½ºÅÍ";
+		mes "ÇùÂù : (ÁÖ) Ä«ÇÁ¶ó¼­ºñ½º";
+		mes ". . . . . (À¯) Á¸´ÙÀÌº¥Æ®";
+		mes "ÀÌ»óÀÔ´Ï´Ù";
 		next;
-		mes "[Master]";
-		mes "A tomboy with bright orange, shortly cut hair. Candidate Number Four: ^1133DDRoxie^000000!";
-		next;
-		mes "[Master]";
-		mes "Intelligent, sophisticated and never seen without her luxurious glasses. It's Candidate Number Five: ^33FF55Leilah^000000!";
-		next;
-		mes "[Master]";
-		mes "Pretty, cute and fresh faced. Although She looks young and immature, she's the best staff!";
-		mes "Candidate Number (6) ^AAAA00Curly Sue^000000 !!";
-		next;
-		switch(select("(1) Pavianne:(2) Blossom:(3) Jasmine:(4) Roxie:(5) Leilah:(6) Curly Sue")) {
+		switch(select("(1) µğÆ÷¸£Å×:(2) Å×ÀÏ¸µ:(3) ¼Ò¸°:(4) ºñ´Ö:(5) ±Û¶ó¸®½º:(6) ´õºí·ù")) {
 		case 1:
-			mes "[Master]";
-			mes "Oh~";
-			mes "So you're a lover of classics. I respect that very much.";
-			next;
-			mes "[Master]";
-			mes "I'll also guess that you tend to enjoy the original movie more than sequels, and dislike bad imitations. Am I right?";
+			mes "[¸¶½ºÅÍ]";
+			mes "¿À¿ì ³°Àº°ÍÀ» ¼±È£ÇÏ´Â ´ç½ÅÀº";
+			mes "¹«Ã´ÀÌ³ª °íÁö½ÄÇÑ »ç¶÷ !";
+			mes "½Å ¹®¹°À» ¹Ş¾ÆµéÀÌ¼¼¿ä ! Çö½Ç·ÎºÎÅÍ";
+			mes "µµ¸ÁÃÄ ºÁ¾ß ¼Ò¿ë ¾ø½À´Ï´Ù !";
 			close;
+			
 		case 2:
-			mes "[Master]";
-			mes "Hmmm...";
-			mes "Blossom strikes me as the girl-next-door type. So I guess that's the type of girl you're attracted to, eh?";
+			mes "[¸¶½ºÅÍ]";
+			mes "Áö³ªÄ¡°Ô ÁÖÀÇ»ê¸¸ ÇÏ½Ã±º¿ä !";
+			mes "´ç½ÅÀÇ ÆÄÆ®³Ê ¿ª½Ã ÁÖÀÇ»ê¸¸ Çß´Ù°¡´Â";
+			mes "..";
+			mes "ÁÖº¯¿¡ ¹ÎÆó¸¸ ³¢Ä¡°Ô µÉ°ÍÀÔ´Ï´Ù !";
 			close;
 		case 3:
-			mes "[Master]";
-			mes "So...";
-			mes "Long, luxurious hair is important to you, hmm? I suppose it such hair makes a woman look quite elegant.";
+			mes "[¸¶½ºÅÍ]";
+			mes "ÀÌµµ Àúµµ ¾Æ´Ï¸é";
+			mes "°úµµÇÏ°Ô ½Ì°Ì´Ù´Â ¼Ò¸® µè±â ½Ê»ó";
+			mes "ÀÔ´Ï´Ù .";
+			mes "»î¿¡ ÀÇ¿åÀ» °¡Áö¼¼¿ä !";
 			close;
 		case 4:
-			mes "[Master]";
-			mes "Ah, so you tend to like active, spontaneous types. I can understand that...";
-			next;
-			mes "[Master]";
-			mes "Since Roxie isn't exactly the demure housewife type, you probably have an open mind when it comes to defining femininity, right?";
+			mes "[¸¶½ºÅÍ]";
+			mes "¾ğÁ¦±îÁö ²Ş¼Ó¿¡¼­ Çã¿ìÀû °Å¸®°í";
+			mes "ÀÌ»óÇüÀ» Ã£¾Æ Çì¸Å½Ç°Ì´Ï±î ?";
+			mes "Çö½ÇÀ» Á÷½ÃÇÏ¼¼¿ä !";
 			close;
 		case 5:
-			mes "[Master]";
-			mes "Ah, so you like the intellectual type. That's good, that's good.";
-			next;
-			mes "[Master]";
-			mes "Still, that Leilah can be cold as stone sometimes. I've seen her shrug off many young men and crush even more hearts!";
+			mes "[¸¶½ºÅÍ]";
+			mes "½Ã´ÏÄÃÇÑ ´ç½Å¿¡°Ô ÇÑ¸¶µğ !";
+			mes "¸¶À½À» ¿©¼¼¿ä !";
+			mes "È¥ÀÚ ³îÁö ¸¶½Ã°í¿ä !";
 			close;
 		case 6:
-			mes "[Master]";
-			mes "Say whaaat?!";
-			mes "She's too young!";
+			mes "[¸¶½ºÅÍ]";
+			mes "ÀÌ .. ÀÌ·± !";
+			mes "¾î¸° ¿¬ÀÎÀ» °¥±¸ ÇÏ½Ã´Â ´ç½Å !";
+			mes "¹ö . ¹üÁËÀÔ´Ï´Ù ! ÇäÇä .";
 			close;
 		}
 	}
-	mes "[Master]";
-	mes "But I worked so hard on this delightful survey! Come now, be a sport! Admiring a pretty woman is like appreciating fine art.";
+	mes "[¸¶½ºÅÍ]";
+	mes "À¸¾Æ¾Ç !! ¾îÁ¦ ¹ãÀ» ¼¼¿ö ¸¸µé¾î³õÀº";
+	mes "¸ÚÁø ¾ÓÄÉÀÌÆ®°¡ ÀÌ¸®µµ °£´ÜÈ÷";
+	mes "±úÁ®¹ö¸®´Ù´Ö !!";
+	mes "´ç½Å ¹Ì¿ö¾î¾û";
 	close;
 }
 
-aldeba_in,84,166,4	script	Kafra Service#alde	117,{
+aldeba_in,84,166,4	script	Ä«ÇÁ¶ó¼­ºñ½º#alde	117,{
 	cutin "kafra_01",2;
-	mes "[Kafra Pavianne]";
-	mes "Welcome! I'm Pavianne,";
-	mes "one of the senior Kafra Employees. The Kafra Corporation Service is always trying to satisfy 100 % of our customers' expectations.";
+	mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+	mes "¾î¼­¿À½Ê½Ã¿À ! Ä«ÇÁ¶ó¼­ºñ½º ÃÊ´ë";
+	mes "Ä«ÇÁ¶ó Å¸ÀÔ ' µğÆ÷¸£Å× ' ÀÔ´Ï´Ù !";
+	mes "Àß ºÎÅ¹µå¸³´Ï´Ù .";
 	next;
-	mes "[Kafra Pavianne]";
-	mes "Due to a change in customer support policy, we no longer accept Kafra Passes. However, we are offering refunds for our customers who still possess these passes.";
+	mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+	mes "ÀúÈñ Ä«ÇÁ¶ó¼­ºñ½º´Â ¾ğÁ¦³ª °í°´´ÔÀÇ";
+	mes "¸¸Á·µµ¿¡ ±â¿©ÇÏ±â À§ÇØ¼­";
+	mes "¼º½Ç . ½Å¿ë . Á¤Á÷ . 3 ´ë ¿øÄ¢À»";
+	mes "¹ÙÅÁÀ¸·Î ..";
+	mes "Ã¶Ã³ÇÑ ¼­ºñ½º ÈÆ·Ã°ú °ü¸®¸¦ ÅëÇØ";
+	mes "ÃÖ¼±À» ´ÙÇØ °í°´´ÔÀ» ¸ğ½Ã°í ÀÖ½À´Ï´Ù";
+	mes ".";
 	next;
-	if (select("Sell Kafra Pass:Alright, bye~") == 1) {
+	mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+	mes "ÇÏÁö¸¸ °ÆÁ¤¸¶¼¼¿ä !";
+	mes "Áö±İ±îÁö »ç¿ëÇÏ½ÃÁö ¾Ê°í °¡Áö°í";
+	mes "°è¼Ì´ø Ä«ÇÁ¶ó ÆĞ½º´Â";
+	mes "¼ÒÁ¤ÀÇ °æÇèÄ¡·Î º¸»óÇØµå¸®°í";
+	mes "ÀÖÀ¸´Ï±î¿ä .";
+	next;
+	if (select("Ä«ÇÁ¶óÆĞ½º º¸»ó ¹Ş±â.:¾È³çÈ÷ °è¼¼¿ä.") == 1) {
 		if (countitem(1084) == 0) {
-			mes "[Kafra Pavianne]";
-			mes "I'm sorry,";
-			mes "but you don't";
-			mes "have any Kafra Passes.";
+			mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+			mes "¿¡¿§ ? ³ó´ãÀÌ½ÃÁÒ ? °í°´´Ô²²¼­´Â";
+			mes "Ä«ÇÁ¶óÆĞ½º¸¦ °¡Áö°í °è½ÃÁö ¾Ê¾Æ¿ä!";
+			mes "ÇÏ±ä .. ÀÌÁ¨ ±¸ÇÒ ¼ö¾ø´Â ¹°°ÇÀÌ";
+			mes "µÇ¾î¹ö·ÈÀ¸´Ï±î ¹«¸®µµ ¾Æ´ÏÁÒ .";
 			close2;
 			cutin "",255;
 			end;
 		}
 		else {
 			set .@kafrapassmoney,countitem(1084)*2000;
-			mes "[Kafra Pavianne]";
-			mes "Let's see...";
+			mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+			mes "¾îµğ º¸ÀÚ ...";
 			if (countitem(1084) == 1) {
-				mes "You have 1 Kafra Pass.";
-				mes "You can sell that pass to us for 2000 zeny. Would you like to sell this Kafra Pass back to the Kafra Corporation?";
+				mes "Ä«ÇÁ¶ó ÆĞ½º°¡ 1°³ ÀÖ½À´Ï´Ù.";
+				mes "ÇØ´ç ÆĞ½º¸¦ 2000Á¦´Ï¿¡ ÆÇ¸ÅÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ÀÌ Ä«ÇÁ¶ó ÆĞ½º¸¦ Ä«ÇÁ¶ó ÄÚÀÎÀ¸·Î ´Ù½Ã ÆÇ¸ÅÇÏ½Ã°Ú½À´Ï±î?";
 			}
 			else {
-				mes "You have "+ countitem(1084) +" Kafra Passes.";
-				mes "If you want to sell them to us, you will receive "+ .@kafrapassmoney +" zeny. Would you like to sell these back to the Kafra Corporation?";
+				mes ""+ countitem(1084) +" Ä«ÇÁ¶ó ÆĞ½º°¡ ÀÖ½À´Ï´Ù.";
+				mes "¿ì¸®¿¡°Ô ÆÇ¸ÅÇÏ°í ½Í´Ù¸é "+ .@kafrapassmoney +" zeny¸¦ ¹Ş°Ô µË´Ï´Ù. ÀÌ Á¦Ç°À» Ä«ÇÁ¶ó ÄÚÀÎ¿¡ ´Ù½Ã ÆÇ¸ÅÇÏ½Ã°Ú½À´Ï±î?";
 			}
 			next;
-			if (select("Yes:No") == 1) {
+			if (select("¿¹:¾Æ´Ï¿ä") == 1) {
 				if (countitem(1084) == 0) {
-					mes "[Kafra Pavianne]";
-					mes "I'm sorry, but you don't have any Kafra Passes.";
+					mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+					mes "ÁË¼ÛÇÕ´Ï´Ù. Ä«ÇÁ¶óÆĞ½º°¡ ¾ø½À´Ï´Ù.";
 					close2;
 					cutin "",255;
 					end;
 				}
 				delitem 1084,countitem(1084); //Kapra's_Pass
 				set Zeny,Zeny+.@kafrapassmoney;
-				mes "[Kafra Pavianne]";
-				mes "Thank you.";
+				mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+				mes "ÀÌ¿ëÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù !";
 			}
 			close2;
 			cutin "",255;
 			end;
 		}
 	}
-	mes "[Kafra Pavianne]";
-	mes "Thank you,";
-	mes "have a good day.";
+	mes "[Ä«ÇÁ¶óµğÆ÷¸£Å×]";
+	mes "ÀÌ¿ëÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù !";
+	mes "Ä«ÇÁ¶óµğÆ÷¸£Å× ¿´½À´Ï´Ù .";
 	close2;
 	cutin "",255;
 	end;
 }
 
-aldeba_in,83,245,4	script	Kafra Service#2alde	116,{
+aldeba_in,83,245,4	script	Ä«ÇÁ¶ó¼­ºñ½º#2alde	116,{
 	cutin "kafra_02",2;
-	mes "[Kafra Blossom]";
-	mes "Welcome to the";
-	mes "Kafra Corporation.";
-	mes "The Kafra Employees are";
-	mes "always here to serve you.";
+	mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+	mes "..... Å«¾ğ´Ï (Æ÷¸£Å×) ´Â ¾ğÁ¦³ª";
+	mes "±×·¸´Ù´Ï±ñ !";
+	mes "±ñ±ñÇØ°¡Áö°í ¸»ÀÌ¾ß .";
+	mes "º»»ç¿¡¼­´Â º»»ç´ä°Ô ´Ù¸¥ ¼¼°è¿¡¼­";
+	mes "º¼¼ö¾ø´Â";
+	mes "Á¶±İÀº ´Ù¸¥ Ä«ÇÁ¶óÀÇ »öÀ» ¹àÇô¾ßÁö";
 	next;
-	mes "[Kafra Blossom]";
-	mes "We appreciate your continued use of the Kafra Service. Please feel free to ask me if you have any questions.";
+	mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+	mes "ÀÚ¾Æ ! ¾È³çÇÏ½Ã¿Í¿ä ~ Ä«ÇÁ¶ó";
+	mes "Å×ÀÏ¸µ Å¸ÀÔ ÀÔ´Ï´Ù .";
+	mes "¾ÕÀ¸·ÎµÎ ÀúÈñ Ä«ÇÁ¶ó¼­ºñ½º";
+	mes "¾Ö¿ëÇØÁÖ½Ã¿É°í ..";
+	mes "Àú . Å×ÀÏ¸µÀ» ÀØÁö ¸»¾ÆÁÖ¼¼¿ä¿À";
 	next;
-	switch(select("How does Kafra Storage work?:How do you teleport people?")) {
+	switch(select("Ä«ÇÁ¶ó¾ğ´Ï ! ÆÒÀÌ¿¹¿ä !:¿¡ÇìÇì")) {
 	case 1:
-		mes "[Kafra Blossom]";
-		mes "Well, adventurers like yourself can place items into Kafra Storage, so that you don't have to carry all of your stuff around.";
+		mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+		mes "¾Ñ½Î !";
+		mes "Á¤¸» °¨»çµå¸³´Ï´Ù ~";
+		mes "ÀÚ . ¿©±â »çÀÎ ..";
 		next;
-		mes "[Kafra Blossom]";
-		mes "Now, the Kafra Storage Window is separated into three tabs into which items are automatically sorted.";
+		mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+		mes "^3355FF- ½» »è ½» »è -Item^000000";
 		next;
-		mes "[Kafra Blossom]";
-		mes "The ^3355FFItem^000000, ^3355FFEquip^000000, and ^3355FFEtc^000000 tabs work just like the tabs in your character Item Inventory.";
-		next;
-		mes "[Kafra Blossom]";
-		mes "Multiple items of the same type will only take up one Slot in the Item and Etc. tabs. For example, 324 Jellopies would take up only one Slot, and 22 Red Potions would take another Slot.";
-		next;
-		mes "[Kafra Blossom]";
-		mes "However, in the Equip tab, each and every single item takes up its own Slot. I guess that's because each and every single equipment can be uniquely upgraded by forging or through Cards.";
-		next;
-		mes "[Kafra Blossom]";
-		mes "There's a total of 300 Slots for all three item categories in the Kafra Storage, so it might be helpful to remember that.";
-		next;
+		mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+		mes "ÇìÇì .. ¾ÆÀÌÅÛ ÀÎº¥Åä¸®¸¦";
+		mes "È®ÀÎÇØ º¸¼Åµµ  ¼Ò¿ë¾øÀ»°Å¿¹¿ä";
+		mes "Á¦ »çÀÎÀº ´ç½ÅÀÇ °¡½¿¿¡ ..";
 		break;
 	case 2:
-		mes "[Kafra Blossom]";
-		mes "Oh, I get that question all the time. '^CC0066Oh Blossom, how do you do it?^000000' Well...";
-		next;
-		mes "[Kafra Blossom]";
-		mes "Well, I couldn't really go too much into detail, of course. That's confidential information. But I can tell you our teleportation works through a mix of magic and technology.";
-		next;
-		mes "[Kafra Blossom]";
-		mes "Also, the Kafra girls alone can't teleport our customers. We just receive and process your teleportation request.";
-		next;
-		mes "[Kafra Blossom]";
-		mes "Behind the scenes, skilled professionals and technicians are working 24 hours a day to ensure that you teleport quickly and safely to your destination.";
-		next;
+		mes "[Ä«ÇÁ¶óÅ×ÀÏ¸µ]";
+		mes "¿¡ÇìÇì ?";
+		mes ". . . . . .";
+		mes "°Ü¿ì ±× ´ë»ç »Ó ?";
+		mes "¿¡À× . ½Ì°Å¿î ¼Õ´Ô °°À¸´Ï¶ó±Ã ..";
 		break;
-	}
-	mes "[Kafra Blossom]";
-	mes "Anyway, I hope you enjoy your visit here in the Kafra Corporation Headquarters.";
-	if (rand(1,11) == 9) {
-		next;
-		mes "[Kafra Blossom]";
-		mes "...";
-		next;
-		mes "[Kafra Blossom]";
-		mes "...";
-		mes "......";
-		next;
-		mes "[Kafra Blossom]";
-		mes "Oh Mansoo...";
 	}
 	close2;
 	cutin "",255;
 	end;
 }
 
-aldeba_in,24,245,4	script	Kafra Jasmine#alde	115,{
+aldeba_in,24,245,4	script	Ä«ÇÁ¶ó¼­ºñ½º#alde12	115,{
 	cutin "kafra_03",2;
-	mes "[Kafra Jasmine]";
-	mes "Welcome!";
-	mes "The Kafra service is";
-	mes "always on your side.";
+	mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+	mes "ÇÏÀÌ - Ä«ÇÁ¶ó No . 1 Å¸ÀÔ ¼Ò¸° ÀÔ´Ï´Ù";
+	mes "ÀÌ°÷ ¾Ëµ¥¹Ù¶õÀÇ Ä«ÇÁ¶ó º»»ç±îÁö";
+	mes "¿ÍÁÖ¼Å¼­ Á¤¸» °¨»çµå·Á¿ä !";
 	next;
-	mes "[Kafra Jasmine]";
-	mes "Thank you for coming all the way to visit us at the Kafra Corporation Headquarters here in Al De Baran!";
+	mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+	mes "ÀúÈñ Ä«ÇÁ¶ó¼­ºñ½º´Â ¾ğÁ¦³ª °í°´";
+	mes "¿©·¯ºĞ °ç¿¡ ÀÖ½À´Ï´Ù !";
+	mes "¿ÀÃµÆÈ¹é³â ÀüÅëÀÇ ÀúÈñ";
+	mes "Ä«ÇÁ¶ó¼­ºñ½º´Â ..";
+	mes "Á¶ÀßÁ¶ÀßÁ¶ÀßÁ¶ÀßÁ¶Àß";
 	next;
-	mes "[Kafra Jasmine]";
-	mes "The Kafra Service is always behind our customers with a dependable reputation that has been established over five thousand, eight hundred years...";
-	next;
-	switch(select("What?! I can't believe that!:Ahh~ Shut Up!:Your service is great!")) {
+	switch(select("¿ÀÃµÆÈ¹é³â ?! ¹ÏÀ»¼ö ¾ø¾î !¾Æ°¡¾¾ ½Ã²ô·¯¿ö¿ä:³²ÀÚÄ£±¸ ÀÖ¾î¿ä ?")) {
 	case 1:
-		mes "["+ strcharinfo(0) +"]";
-		mes "What?!";
-		mes "I can't";
-		mes "believe that!";
+		mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+		mes "ÀáÀÚÄÚ µé¾î¿ä ! ÀÌ°Å ¿Ü¿ì´À¶ó°í";
+		mes "ÀÏÁÖÀÏÀÌ³ª °É·È´Ü¸»¾æ !";
+		mes "³­ ´Ù¸¥ Ä«ÇÁ¶ó ¿ä¿ø°ú ´Ş¶ó¼­ ¸Ó¸®°¡";
+		mes "¾ÈÁÁ´Ü ¸»¾æ !";
+		mes "..... ÇÖ .. ³»°¡ ¹«½¼ ¸»À» ..";
 		next;
-		mes "["+ strcharinfo(0) +"]";
-		mes "FIVE THOUSAND AND EIGHT HUNDRED YEARS?! THAT'S INSANE!";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "Arrrrghh! Shut up and listen! It took me a week to memorize all this! My memory isn't as good as the other Kafra Employees...!";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "Now, um...";
-		mes "As I was saying, the Kafra Corporation was founded eight thousand, five hundred years ago by, um, Emilio Alexander Kafra... Inventor of the word 'Kafra?'";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "He...";
-		mes "He was a great man. He... Argh! I can't remember!";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "Oh no...!";
-		mes "This can't be the right story! Five million, eight hundred years?! It's impossible!";
+		mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+		mes "È£È£È£ ¼Õ´Ô .. Áö±İ ¼î ¿´¾î¿ä ..";
+		mes "±×·¡¿ä .. Ä¼ .. Ä«ÇÁ¶ó¿¡¼­ ¼Õ´Ô";
+		mes "¿©·¯ºĞ¿¡°Ô Àú .. ÀüÇØµå¸®´Â ~";
+		mes "µå¸²¼î ! ( .. ¶ó°í´Â ÇÏÁö¸¸ 1 ÀÎ ¿ø¸Ç¼î";
+		mes ")";
 		break;
 	case 2:
-		mes "[Kafra Jasmine]";
-		mes "Listen...";
-		mes "Punk.";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "I was a member of the Kafra Garrison before joining the Kafra Service Team. My specialty was ^990000Magnum Break^000000, so if you know what's good for you, don't mess with me.";
-		next;
-		mes "[Kafra Jasmine]";
-		mes "I'm trying my best to live as quietly and as femininely as I can, so don't make me break your knuckles! You got it?!";
+		mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+		mes ". . . . .";
+		mes "Àü Ä«ÇÁ¶ó ¼­ºñ½º ÆÀ¿¡ µé¾î¿À±âÀü¿¡";
+		mes "°¡ÇÁ¶ó °æºñ´ë ¼Ò¼Ó ÀÌ¾ú´ä´Ï´Ù ..";
+		mes "Æ¯±â´Â ¹è½¬ !!";
+		mes ".. ¿´Áö¸¸ Á¶¿ëÈ÷ ¿¹»Ú°Ô »ì±â·Î";
+		mes "°á½ÉÇß¾î¿ä ..";
+		mes "¼Õ´Ô .. ÀÚ±Ø ÇÏÁö ¸»¾ÆÁÖ¼¼¿ä ..";
 		break;
 	case 3:
-		mes "[Kafra Jasmine]";
-		mes "Hooray!";
-		mes "That's great news to hear. We're always working hard to make sure that our customers are satisfied with the services that we provide.";
+		mes "[Ä«ÇÁ¶ó¼Ò¸°]";
+		mes "¾î¸Ó¾î¸Ó . Ä«ÇÁ¶ó¼­ºñ½º ¿ä¿øÀº";
+		mes "³²ÀÚÄ£±¸¸¦ ¸¸µé¸é ¾ÈµÇ´Â";
+		mes "¼¼»ó¿¡ ¸»µµ¾ÈµÇ ~ ±ÔÄ¢¿¡ ¾ô¸ÅÀÌ°í";
+		mes "ÀÖ´ä´Ï´Ù";
+		mes ". . . . . ";
+		mes ". . . . . . . . . . . .";
 		break;
 	}
 	close2;
@@ -946,103 +1448,77 @@ aldeba_in,24,245,4	script	Kafra Jasmine#alde	115,{
 	end;
 }
 
-aldeba_in,142,238,4	script	Kafra Service#3alde	114,{
+aldeba_in,142,238,4	script	Ä«ÇÁ¶ó¼­ºñ½º#3alde	114,{
 	cutin "kafra_04",2;
-	mes "[Kafra Roxie]";
-	mes "Welcome~!";
-	mes "The Kafra Corporation will always support Midgard's adventurers with our excellent services.";
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "¾î¼­¿À¼¼¿ä ! Ä«ÇÁ¶ó Å¸ÀÔ ºñ´ÖÀÔ´Ï´Ù";
+	mes "¢»";
+	mes "¼Õ´Ô²²¸¸ ÀüÇØµå¸®´Â Ä«ÇÁ¶ó Æ¯±ŞºñÈ­ !";
 	next;
-	mes "[Kafra Roxie]";
-	mes "My name is Roxie!";
-	mes "I hope you enjoy";
-	mes "your visit here in";
-	mes "Kafra Corporation's";
-	mes "Headquarters.";
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "½ÇÀº .. ÀúÈñ Ä«ÇÁ¶ó¼­ºñ½º°¡ ¸»ÀÌÁÒ ~";
+	mes "ÀÌÀü¿¡´Â Ä«ÇÁ¶ó ¼­ºñ½º¶õ °£ÆÇÀÌ";
+	mes "¾Æ´Ï¾ú´ä´Ï´Ù ~";
+	mes "ÀÚ¾Æ . ±×·³ ¹«¾ùÀÌ¾úÀ»±î¿ä ?";
 	next;
-	mes "[Kafra Roxie]";
-	mes "I'm here to answer any of your questions regarding Kafra Corporations policies, as well as take note of any of your feedback.";
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "Â¥ÀğÀğÀğÀÜÂ¥ÀÚÀÜ ! ±×°ÍÀº ³î¶ø°Ôµµ !";
+	mes "Ä« ! ÇÁ ! ( ¶ì¸®¸®¸µ ¢İ )";
+	mes "ÇÖ . ÈŞ´ëÆùÀÌ .. Àá½Ã¸¸¿ä ¢»";
 	next;
-	switch(select("Kafra Policies:I love Kafra!")) {
-	case 1:
-		mes "[Kafra Roxie]";
-		mes "So, you'd like more details on our policies and eligibility for our services? What would you like me to explain?";
-		next;
-		switch(select("Kafra Storage:Cart Rental:Actually, never mind.")) {
-		case 1:
-			mes "[Kafra Roxie]";
-			mes "As you probably already know, our customers must have at least Basic Skill level 6 in order to use the Kafra Storage.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "As for the reason for this certain policy, we've had problems with young, fresh faced Novices that would put everything into their Storage.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "Now you remember your days as a Novice. Everything was new and exciting, but zeny was scarce. Well, a lot of Novices would even put their weapons and armor in Kafra Storage.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "However, by this time, they've already spent what little zeny they had to open their Storage. But they don't have enough to access their Storage again!";
-			next;
-			mes "[Kafra Roxie]";
-			mes "So, these weaponless, armorless Novices must fight monsters with their bare hands until they gather the zeny to open their Kafra Storage again!";
-			next;
-			mes "[Kafra Roxie]";
-			mes "It's a silly mistake, to be sure, but we here at Kafra Corporation value human life, and decided on the Basic Skill Level 6 Requirement to prevent this kind of mishap.";
-			break;
-		case 2:
-			mes "[Kafra Roxie]";
-			mes "As you may know, the Kafra Corporation has a special relationship with the Merchant Guild, as well as the Blacksmith and Alchemist guilds in Midgard.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "The Kafra Corporation only rents Carts to Merchants, Blacksmiths and Alchemists since these job associations have a special contract with us.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "Also, it'd be really impractical to rent carts out to people who couldn't create or sell goods.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "As for Super Novices, well, we're really not supposed to rent carts to them since the Super Novice Society in Al De Baran doesn't have a contract with us.";
-			next;
-			mes "[Kafra Roxie]";
-			mes "If a Kafra Employee rented a Cart to a Super Novice, she'd probably get in big trouble with Leilah...";
-			break;
-		case 3:
-			mes "[Kafra Roxie]";
-			mes "Oh, alright~!";
-			mes "If you have any questions,";
-			mes "please let me know!";
-			break;
-		}
-		break;
-	case 2:
-		mes "[Kafra Roxie]";
-		mes "Thank you!";
-		mes "It's great to know that we're appreciated by our customers! All of us are working hard to make sure that our service meets your standards of excellence~";
-		break;
-	}
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "¿¹¿¦ Ä«ÇÁ¶ó Å¸ÀÔ ºñ´Ö ÀÔ´Ï´Ù ¢»";
+	mes "¾Ñ . º»ºÎÀå´Ô ! ¿½ ! ¿½ ! ..... ¿½ !";
+	mes "¿¾ ?!";
+	next;
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "¾Ñ .  ¾Æ´Õ´Ï´å !";
+	mes "¾Æ .. ¾Æ´Õ´Ï´å !!";
+	mes "¿½ ! ¾Ë°Ú½À´Ï´å !!";
+	next;
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "ÂûÄ¬ ¡Ù";
+	mes "..... ÇìÇìÇì ..";
+	mes ". . . . . ";
+	next;
+	mes "[Ä«ÇÁ¶óºñ´Ö]";
+	mes "Àú±â Àú . ¼Õ´Ô";
+	mes "Á¶±İ Àü µéÀ¸¼Ì´ø ³»¿ëÀº";
+	mes "Àú¾î . ÀØ¾îÁÖ½Ã±â ¹Ù¶ø´Ï´Ù . ÇìÇì ~";
+	mes ". . . . .";
 	close2;
 	cutin "",255;
 	end;
 }
 
-aldeba_in,91,244,4	script	Kafra Service#4alde	112,{
+aldeba_in,91,244,4	script	Ä«ÇÁ¶ó¼­ºñ½º#4alde	112,{
 	cutin "kafra_06",2;
-	mes "[Kafra Curly Sue]";
-	mes "Hello, hello!!";
-	mes "I'm Curly Sue,";
-	mes "the newest member";
-	mes "of the Kafra Staff!";
+	mes "[Ä«ÇÁ¶ó´õºí·ù]";
+	mes "¾È³çÇÏÂ°¿©¾î !!";
+	mes "Ä«ÇÁ¶ó¼­ºñ½ºÀÇ ±Í¿°µÕÀÌ¸·³» ~";
+	mes "Ä«ÇÁ¶ó Å¸ÀÔ ´õºí·ù ¶ó°í ÇÕ´Ï´Ù¾Æ ~";
 	next;
-	mes "[Kafra Curly Sue]";
-	mes "I may still need to learn more about serving our customers, but I'm always doing my best!";
+	mes "[Ä«ÇÁ¶ó´õºí·ù]";
+	mes "Àú´Â ½ÅÀÔÀ¸·Î¼­ Ä«ÇÁ¶ó ¼­ºñ½º¿¡¼­";
+	mes "¿©·¯ºĞÀ» ºË°Ô µÈÁö";
+	mes "¾ó¸¶ µÇÁö ¾Ê¾ÒÁö¸¸ . ¾ğÁ¦³ª ÃÖ¼±À»";
+	mes "´ÙÇÏ°í ÀÖ½À´Ï´Ù !";
+	mes "¾Æ¹«ÂÉ·Ï Àß ºÎÅ¹ µå¸³´Ï´Ù¾Æ ~";
 	next;
-	if (select("Where's your mommy, kid?:End conversation.") == 1) {
-		mes "[Kafra Curly Sue]";
-		mes "Waaaaaaah~!";
-		mes "I'm not a kid!";
+	if (select("¸îÂ© ?:±×¸¸µĞ´Ù") == 1) {
+		mes "[Ä«ÇÁ¶ó´õºí·ù]";
+		mes ". . . . . .";
+		mes "ÀÌÀ× !!";
+		mes "¾î¸°¾Ö Ãë±Ş ÇÏÁö ¸¶¼¼¿©¾û !!";
 		close2;
 		cutin "",255;
 		end;
 	}
-	mes "[Kafra Curly Sue]";
-	mes "Here at Kafra Corporation, we are all doing our very best to give you the excellent service that you expect from us.";
+	mes "[Ä«ÇÁ¶ó´õºí·ù]";
+	mes "ÀúÈñ Ä«ÇÁ¶ó¼­ºñ½º¿¡´Â";
+	mes "ÃÖ ! »ó ! ÀÇ ¼­ºñ½º¸¦ Á¦°øÇØ µå¸®±â";
+	mes "À§ÇØ . ÃÖ ! ¼± ! À» ´ÙÇÏ°í ÀÖ½À´Ï´Ù .";
+	mes "ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù .";
 	close2;
 	cutin "",255;
 	end;
@@ -1051,52 +1527,52 @@ aldeba_in,91,244,4	script	Kafra Service#4alde	112,{
 // Kafra Special Reserve Point NPCs
 //============================================================
 // Special Reserve ----------------------------------------------
-aldeba_in,79,161,7	script	Kafra Employee#reserve1	4_F_KAFRA3,{
+aldeba_in,79,161,7	script	Ä«ÇÁ¶óÁ÷¿ø#reserve1	4_F_KAFRA3,{
 	if (checkweight(1201,1) == 0) {
-		mes "^3355FFWait a minute! Right now,";
-		mes "you're carrying too many items";
-		mes "in your inventory. Please come";
-		mes "back after storing some of";
-		mes "your things in Kafra Storage.";
+		mes "^3355FFÀá±ñ¸¸¿ä! ¹Ù·Î Áö±İ,";
+		mes "´ç½ÅÀº ³Ê¹« ¸¹Àº ¹°°ÇÀ» °¡Áö°í ÀÖ¾î¿ä";
+		mes "ÀÎº¥Åä¸®¿¡ ÀÖ½À´Ï´Ù. ¿À¼¼¿ä";
+		mes "ÀÏºÎ ³»¿ëÀ» ÀúÀåÇÑ ÈÄ ´Ù½Ã µ¹¾Æ¿È";
+		mes "Kafra Storage¿¡ ÀÖ´Â ¹°°Çµé.";
 		close;
 	}
-	mes "[Kafra Employee]";
-	mes "Welcome, "+ strcharinfo(0) +"~";
-	mes "Here, you can exchange";
-	mes "the Special Reserve Points";
-	mes "you've earned by using the";
-	mes "Kafra Services for some";
-	mes "neat and useful prizes~";
+	mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+	mes "È¯¿µÇÕ´Ï´Ù,"+ strcharinfo(0) +"~";
+	mes "¿©±â¼­ ±³È¯ÀÌ °¡´ÉÇØ¿ä";
+	mes "Æ¯º° ¿¹ºñ Æ÷ÀÎÆ®";
+	mes "´ç½ÅÀº ~À» »ç¿ëÇÏ¿© ¼öÀÍÀ» ¾ò¾ú½À´Ï´Ù";
+	mes "ÀÏºÎ »ç¶÷µéÀ» À§ÇÑ Kafra ¼­ºñ½º";
+	mes "±ò²ûÇÏ°í À¯¿ëÇÑ »óÇ°~";
 	next;
-	mes "[Kafra Employee]";
-	mes "Please remember that each window has a different amount of special reserve points you can Use";
-	mes "You can use ^7D0781from 100p to 3000p^000000 in here.";
+	mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+	mes "°¢ Ã¢¸¶´Ù »ç¿ëÇÒ ¼ö ÀÖ´Â Æ¯º° Àû¸³ Æ÷ÀÎÆ®°¡ ´Ù¸£´Ù´Â Á¡À» ±â¾ïÇÏ¼¼¿ä";
+	mes "¿©±â¼­ ^7D0781100p¿¡¼­ 3000p^000000±îÁö »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.";
 	next;
-	mes "[Kafra Employee]";
+	mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 	if ((MaxWeight - Weight) < 11000) {
-		mes "Um, but I don't think";
-		mes "you're able to carry";
-		mes "very much right now.";
-		mes "It looks like you have";
-		mes "too much stuff inside";
-		mes "your inventory.";
+		mes "À½, ÇÏÁö¸¸ ³» »ı°¢¿£ ¾Æ´Ñ °Í °°¾Æ";
+		mes "´ç½ÅÀº ÈŞ´ëÇÒ ¼ö ÀÖ¾î¿ä";
+		mes "Áö±İÀº ¾ÆÁÖ ¸¹ÀÌ¿ä.";
+		mes "±×·± °Í °°¾Æ¿ä";
+		mes "¾È¿¡ ¹°°ÇÀÌ ³Ê¹« ¸¹¾Æ¿ä";
+		mes "±ÍÇÏÀÇ ÀÎº¥Åä¸®.";
 		next;
-		mes "[Kafra Employee]";
-		mes "Please put some of";
-		mes "your things into Kafra";
-		mes "Storage. To use this";
-		mes "service, we ask that you";
-		mes "have about ^FF00001,100^000000 free units";
-		mes "of weight in your inventory.";
+		mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+		mes "¸î°³¸¸ ³Ö¾îÁÖ¼¼¿ä";
+		mes "³× ¹°°ÇÀ» Kafra¿¡ ³Ö´Ù";
+		mes "ÀúÀå°ø°£. ÀÌ°ÍÀ» »ç¿ëÇÏ·Á¸é";
+		mes "¼­ºñ½º¸¦ ¿äÃ»ÇÕ´Ï´Ù";
+		mes "¾à ^FF00001,100^000000°³ÀÇ ¹«·á À¯´ÖÀÌ ÀÖ½À´Ï´Ù";
+		mes "ÀÎº¥Åä¸®ÀÇ ¹«°ÔÀÔ´Ï´Ù.";
 		close;
 	}
 	.@total = RESRVPTS;
-	mes "Let's see...";
+	mes "¾îµğº¸ÀÚ...";
 	mes strcharinfo(0) +"...";
-	mes "Ah, you have a total of";
-	mes .@total +" Special Reserve Points.";
-	mes "Now what you would like";
-	mes "to exchange them for?";
+	mes "¾Æ, ´ç½ÅÀº ÃÑ";
+	mes .@total +" Æ¯º° Àû¸³ Æ÷ÀÎÆ®.";
+	mes "ÀÌÁ¦ ´ç½ÅÀÌ ¿øÇÏ´Â °ÍÀº ¹«¾ùÀÔ´Ï±î";
+	mes "±³È¯ÇÒ·¡?";
 	next;
 	setarray .@select_price[0], 516, 100,7, 200,15, 300,25, 400,35, 500,50, 600,60, 700,75, 800,85, 900,100, 1000;// <item_id>,<points required>,<item quantity>
 	.@s = select( "100 = Potato 7 ea", "200 = Potato 15 ea", "300 = Potato 25 ea", "400 = Potato 35 ea", "500 = Potato 50 ea", "600 = Potato 60 ea", "700 = Potato 75 ea",
@@ -1108,385 +1584,204 @@ aldeba_in,79,161,7	script	Kafra Employee#reserve1	4_F_KAFRA3,{
 		.@choose_sub_select = 1;
 	}
 	if (.@s != 12) {// cancel
-		mes "[Kafra Employee]";
+		mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 		.@index_points = .@s * 2 - 1;
 		.@index_quantity = .@s * 2;
 		if (.@total < .@select_price[.@index_points]) {
 			.@points = .@select_price[.@index_points] - .@total;
-			mes "I'm sorry, but you don't";
-			mes "enough Special Reserve";
-			mes "Points to exchange for this";
-			mes "reward. You need at least";
-			mes "^0000FF"+ .@points +"^000000 more points.";
+			mes "ÃÖ¼Ò 100Á¡ ÀÌ»óÀÇ Æ÷ÀÎÆ®ºÎÅÍ Ä«ÇÁ¶ó";
+			mes "ÄÚÀÎÀ¸·Î ±³È¯ °¡´ÉÇÕ´Ï´Ù. ÇöÀç";
+			mes "º¸¿äÇÏ½Å Æ÷ÀÎÆ®´Â ^0000FF"+ .@total +"^000000 Á¡ÀÌ½Ê´Ï´Ù";
 			close;
 		}
 		.@total = .@total - .@select_price[.@index_points];
-		mes "After receiving this";
-		mes "reward, you'll have";
-		mes "^AC0000"+ .@total +"^000000 Special Reserve";
-		mes "Points left. Would you";
-		mes "like to redeem your";
-		mes "points for this reward?";
+		mes "ÀÌ°ÍÀ» ¹ŞÀº ÈÄ";
+		mes "º¸»óÀ» ¹Ş°Ô µÉ °Å¿¹¿ä";
+		mes "^AC0000"+ .@total +"^000000 Æ¯º° º¸À¯·®";
+		mes "Æ÷ÀÎÆ®°¡ ³²¾Ò½À´Ï´Ù. ±×·¸°Ô ÇÏ½Ã°Ú½À´Ï±î";
+		mes "´ç½ÅÀ» ±¸¼ÓÇÏ°í ½Í½À´Ï´Ù";
+		mes "ÀÌ º¸»ó¿¡ Æ÷ÀÎÆ®°¡ ÀÖ³ª¿ä?";
 		next;
-		if (select( "Exchange.", "Cancel" ) == 1) {
+		if (select( "±³È¯.", "Ãë¼Ò" ) == 1) {
 			RESRVPTS = .@total;
 			if (.@s < 10)
 				getitem .@select_price[0], .@select_price[.@index_quantity];
 			else {
-				mes "[Kafra Employee]";
+				mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 				if (.@choose_sub_select == 0) {
-					mes "^0000FF1st Lottery Chance!!^000000";
-					mes "It's time to test out";
-					mes "your luck. Get ready!";
+					mes "^0000FF1Â÷ ·Î¶Ç Âù½º!!^000000";
+					mes "Å×½ºÆ®ÇØº¼ ½Ã°£ÀÌ¿¡¿ä";
+					mes "Çà¿îÀ» ºô¾î¿ä. ÁØºñÇÏ¼¼¿ä!";
 				}
 				else {
-					mes "Uh oh...";
-					mes "It's that time again~";
-					mes "It's Kafra Lottery Time!";
-					mes "Let's see how good your";
-					mes "luck is today. Ready?";
+					mes "¾î¾î...";
+					mes "¶Ç ±×¶§°¡ ¿Ô±¸³ª~";
+					mes "Ä«ÇÁ¶ó º¹±Ç ½Ã°£ÀÌ¿¡¿ä!";
+					mes "´ç½ÅÀÌ ¾ó¸¶³ª ÁÁÀºÁö ÇÑ¹ø º¼±î¿ä";
+					mes "¿À´ÃÀº Çà¿îÀÌ¿¡¿ä. ÁØºñµÆ³ª¿ä?";
 				}
 				next;
-				mes "[Kafra Employee]";
-				mes "How many times";
-				mes "would you like to spin";
-				mes "the lottery machine?";
-				mes "You can spin it 1 to 5 times.";
+				mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+				mes "¸î ¹øÀÌ³ª";
+				mes "µ¹¸±·¡?";
+				mes "º¹±Ç ±â°è¿ä?";
+				mes "1~5¹ø µ¹¸®½Ã¸é µË´Ï´Ù.";
 				next;
 				while( input(.@input,1,5) != 0 ) {
-					mes "[Kafra Employee]";
-					mes "Excuse me...?";
-					mes "Please choose";
-					mes "a number from 1 to 5.";
+					mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+					mes "½Ç·ÊÇÕ´Ï´Ù...?";
+					mes "¼±ÅÃÇØÁÖ¼¼¿ä";
+					mes "1ºÎÅÍ 5±îÁöÀÇ ¼ıÀÚÀÔ´Ï´Ù.";
 					next;
 				}
 				.@choose_prize = rand(1,20);
 				while( .@input != .@random_while ) {
 					.@sound_word = rand(1,3);
 					if (.@sound_word == 1) {
-						mes "^3355FFDrrrrrrrrrrrrrrrrrr...";
-						mes "Tuum tuum tuum!^000000";
+						mes "^3355FFµå¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£...";
+						mes "¶Ñ¿ò¶Ñ¿ò¶Ñ¿ò!^000000";
 					}
 					else if (.@sound_word == 2) {
-						mes "^3355FFChika chika chika";
-						mes "Shooooooooooom~^000000";
+						mes "^3355FFÄ¡Ä« Ä¡Ä« Ä¡Ä«";
+						mes "½´¿ì¿ì¿ì¿ì¿ì¿ì¿ì~^000000";
 					}
 					else if (.@sound_word == 3) {
-						mes "^3355FFTuk tuk tuk tuk";
-						mes "Flaaaaaavaaaaah~^000000";
+						mes "^3355FFÅöÅöÅöÅö";
+						mes "À¸¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ~^000000";
 					}
 					next;
 					.@random_while++;
 				}
-				mes "[Kafra Employee]";
+				mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 				if (.@choose_sub_select == 0) {
-					mes "Ooh, something";
-					mes "came out! Let's see";
-					mes "what you've won~";
-					mes "Oh goodness, it's...!";
+					mes "¾Æ, ¹º°¡¿ä";
+					mes "³ª¿Ô¾î¿ä! º¸ÀÚ";
+					mes "¹«¾ùÀ» ¾ò¾ú³ª¿ä~";
+					mes "¸¿¼Ò»ç, ±×°Ç...!";
 					next;
-					mes "[Kafra Employee]";
+					mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 					if (.@choose_prize <= 10) {
 						getitem 516,100;// Sweet_Potato
-						mes "Hm? F-fourth prize?";
-						mes "You got the 4th prize!!";
-						mes "Well, that's not too bad.";
-						mes "That's 100 Potatoes!";
-						mes "When they're sliced, then fried, they make a great snack when";
-						mes "drinking with your friends~";
+						mes "À½? F-4µî»ó?";
+						mes "4µî»óÀ» ¹ŞÀ¸¼Ì½À´Ï´Ù!!";
+						mes "±Û½ê, ³ª»ÚÁö´Â ¾ÊÀºµ¥.";
+						mes "°¨ÀÚ 100°³³×¿ä!";
+						mes "Àß¶ó¼­ Æ¢°Ü¼­ ¸ÔÀ¸¸é ÈÇ¸¢ÇÑ °£½ÄÀÌ µË´Ï´Ù";
+						mes "Ä£±¸µé°ú ¼ú ÇÑÀÜ~";
 					}
 					else if (.@choose_prize <= 15) {
 						getitem 602,4;// Wing_Of_Butterfly
-						mes "It's Third Prize!";
-						mes "4 Butterfly Wings~";
-						mes "When you're in trouble,";
-						mes "just wave one of these";
-						mes "to take you away...";
-						mes "To your safe place.";
+						mes "3µî»óÀÌ¿¡¿ä!";
+						mes "³ªºñ³¯°³ 4°³~";
+						mes "Èûµç ÀÏÀÌ ÀÖÀ» ¶§,";
+						mes "ÀÌ°Í Áß ÇÏ³ª¸¸ Èçµé¸é µÅ¿ä";
+						mes "´ç½ÅÀ» µ¥·Á°¡·Á°í...";
+						mes "¾ÈÀüÇÑ °÷À¸·Î.";
 					}
 					else if (.@choose_prize <= 19) {
 						getitem 2403,1;// Shoes
-						mes "Second Prize!";
-						mes "A brand new shiny pair";
-						mes "of Shoes! Its elegant design";
-						mes "and durability comes with our";
-						mes "highest recommendation. We";
-						mes "hope you enjoy your new shoes~";
+						mes "2µî»ó!";
+						mes "¹İÂ¦ÀÌ´Â »õ Á¦Ç°ÀÔ´Ï´Ù";
+						mes "½Å¹ß! ¿ì¾ÆÇÑ µğÀÚÀÎÀÌ¿¡¿ä";
+						mes "±×¸®°í ³»±¸¼ºÀº ¿ì¸®¿Í ÇÔ²² Á¦°øµË´Ï´Ù";
+						mes "°¡Àå ÃßÃµÇÕ´Ï´Ù. ¿ì¸®´Â";
+						mes "»õ ½Å¹ßÀ» Áñ°Üº¸¼¼¿ä~";
 					}
 					else if (.@choose_prize == 20) {
 						getitem 2328,1;// Wooden_Mail
-						mes "Whoa...!";
-						mes "First Prize!";
-						mes "Your very own";
+						mes "¿ì¿Í...!";
+						mes "1µî»ó!";
+						mes "´ç½Å¸¸ÀÇ °Í";
 						next;
-						mes "set of Wooden Mail!";
-						mes "Today must be your";
-						mes "lucky day, adventurer!";
+						mes "³ª¹« ¸ŞÀÏ ¼¼Æ®!";
+						mes "¿À´ÃÀº ´ç½ÅÀÇ ³¯ÀÌ°ÚÁÒ";
+						mes "Çà¿îÀÇ ³¯ÀÌ±º¿ä, ¸ğÇè°¡´Ô!";
 					}
 				}
 				else {
-					mes "It looks like";
-					mes "something came";
-					mes "out! What could it be?";
-					mes "Ooh, you just won...";
+					mes "±×·² °Í °°¾Æ¿ä";
+					mes "¹º°¡ ¿Ô´Ù";
+					mes "¾Æ¿ô! ±×°Ô ¹¹ÁÒ?";
+					mes "¾Æ, ¹æ±İ ½Â¸®ÇÏ¼Ì³×¿ä...";
 					next;
-					mes "[Kafra Employee]";
+					mes "[Ä«ÇÁ¶ó Á÷¿ø]";
 					if (.@choose_prize <= 10) {
 						getitem 501,100;// Red_Potion
-						mes "F-fourth prize...?!";
-						mes "Boooo! 100 Red Potions.";
-						mes "Wait.. That's actually pretty";
-						mes "good! Yaaaaaay~ Now you";
-						mes "can look like a high roller by";
-						mes "sharing them with your friends!";
+						mes "F-4µî»ó...?!";
+						mes "¿ì¿Í! »¡°£ ¹°¾à 100°³.";
+						mes "Àá±ñ.. Á¤¸» ¿¹»Ú³×¿ä";
+						mes "ÁÁ¾Æ! ¾ß¾Æ¾Æ¾Æ¾Æ~ ÀÌÁ¦ ³Ê¾ß";
+						mes "ÇÏÀÌ·Ñ·¯Ã³·³ º¸ÀÏ ¼öµµ ÀÖ¾î¿ä";
+						mes "Ä£±¸µé°ú °øÀ¯ÇØ¿ä!";
 					}
 					else if (.@choose_prize <= 16) {
 						getitem 2201,1;// Sunglasses
-						mes "Third Prize!";
-						mes "Your very own pair";
-						mes "of suave Sunglasses!";
-						mes "It'll give you an edge in";
-						mes "the war of looking cool,";
-						mes "or when playing poker~";
+						mes "3µî»ó!";
+						mes "´ç½Å¸¸ÀÇ Ä¿ÇÃ";
+						mes "¸ÚÁø ¼±±Û¶ó½º¿¡¿ä!";
+						mes "ÀÌ°ÍÀÌ ´ç½Å¿¡°Ô À¯¸®ÇÒ °ÍÀÔ´Ï´Ù";
+						mes "¸ÚÁ® º¸ÀÌ´Â ÀüÀï";
+						mes "¶Ç´Â Æ÷Ä¿ÇÒ ¶§~";
 					}
 					else if (.@choose_prize <= 19) {
 						getitem 2226,1;// Cap
-						mes "Second Prize!";
-						mes "A... Cap? Hmmm,";
-						mes "these have pretty good";
-						mes "Defense, but I'm not so";
-						mes "sure of how fashionable";
-						mes "this hat is. Oh well...";
+						mes "2µî»ó!";
+						mes "¾Æ... Ä¸? Èì,";
+						mes "ÀÌ°Å ²Ï ±¦Âú¾Æ¿ä";
+						mes "¹æ¾îÇÏÁö¸¸ ³ª´Â ±×·¸Áö ¾Ê½À´Ï´Ù";
+						mes "¾ó¸¶³ª À¯ÇàÇÏ´ÂÁö È®½ÅÇØ¿ä";
+						mes "ÀÌ ¸ğÀÚ´Â.. ¾Æ ¹¹...";
 					}
 					else if (.@choose_prize == 20) {
 						getitem 505,3;// Blue_Potion
-						mes "Oh wow...!";
-						mes "First Prize!";
-						mes "3 Blue Potions~";
-						mes "With enough of these,";
-						mes "you can use your skills";
-						mes "with a bit more impunity~";
+						mes "¾Æ¿Í...!";
+						mes "1µî»ó!";
+						mes "ÆÄ¶õ Æ÷¼Ç 3°³~";
+						mes "ÀÌ°Å¸é ÃæºĞÇØ¿ä,";
+						mes "´ç½ÅÀº ´ç½ÅÀÇ ±â¼úÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù";
+						mes "Á¶±İ ´õ Ã³¹ú¹ŞÁö ¾Ê°í~";
 					}
 				}
 			}
 			next;
 		}
 	}
-	mes "[Kafra Employee]";
-	mes "Alright then. Please";
-	mes "use our services to";
-	mes "collect more and more";
-	mes "Special Reserve Points";
-	mes "for even better rewards.";
-	mes "Thank you for your patronage.";
+	mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+	mes "±×·³¿ä. ºÎÅ¹µå·Á¿ä";
+	mes "´ç»çÀÇ ¼­ºñ½º¸¦ »ç¿ëÇÏ´Ù";
+	mes "´õ ¸¹ÀÌ ¼öÁıÇÏ¼¼¿ä";
+	mes "Æ¯º° ¿¹ºñ Æ÷ÀÎÆ®";
+	mes "´õ ³ªÀº º¸»óÀ» À§ÇØ.";
+	mes "°í°´´ÔÀÇ ¼º¿ø¿¡ °¨»çµå¸³´Ï´Ù.";
 	close;
 }
 
-aldeba_in,88,161,3	script	Kafra Employee#reserve2	4_F_KAFRA3,{
-	mes "[Kafra Employee]";
-	mes "Welcome~ "+ strcharinfo(0) +".";
-	mes "Currently, we, Kafra Center is having a special event for our customers.";
+aldeba_in,88,161,3	script	Ä«ÇÁ¶óÁ÷¿ø#reserve2	4_F_KAFRA3,{
+	mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+	mes "°í°´´ÔÀÇ ¼º¿ø¿¡ º¸´äÇÏ±â À§ÇØ";
+	mes "^0000cd<ITEM>Ä«ÇÁ¶ó ÄÚÀÎ<INFO>1000320</INFO></ITEM>^000000À¸·Î »çÀºÇ°À»";
+	mes "±³È¯ÇØµå¸®°í ÀÖ½À´Ï´Ù. ÇÑ¹ø";
+	mes "µÑ·¯º¸½Ã°Ú¾î¿ä?";
 	next;
-	mes "[Kafra Employee]";
-	mes "You can get free gifts by using special reserve points with ^FF0000Special Kafra ^529DFFGift Event!^000000";
-	mes "Kafra Corporation added new gifts in this event.";
-	next;
-	mes "[Kafra Employee]";
-	mes "Do you want to use your points?";
-	next;
-	if (select( "Yes, I do","Maybe in next time" ) == 1) {
-		mes "[Kafra Employee]";
-		if ((MaxWeight - Weight) < 11000) {
-			mes "....Oh dear... What are you carrying so many things...?";
-			mes "I don't think you can keep the received items~";
-			next;
-			mes "[Kafra Employee]";
-			mes "I'm sorry~ but~";
-			mes "Please, visit Kafra warehouse and store your items until you have free space of ^0000FF1100^000000 and come back.";
-			mes "I apologize for inconvenience~";
+	switch(select("´ÙÀ½±âÈ¸¿¡:»óÇ°À» µÑ·¯º»´Ù")){
+		case 1:
+			mes "[Ä«ÇÁ¶ó Á÷¿ø]";
+			mes "´ÙÀ½¿¡ ¶Ç ¹æ¹®ÇØÁÖ½Ê½Ã¿À";
 			close;
-		}
-		mes "Your special reserve points are ^FF0000"+ RESRVPTS +"^000000~";
-		mes "Choose a category to test your luck.";
-		next;
-		setarray .@points[1],5000,7000,10000;
-		.@s = select( "5000p = 1st Lottery Chance!", "7000p = 2nd Lottery Chance!", "10000p = 3rd Lottery Chance!", "Cancel" );
-		if (.@s != 4) {
-			mes "[Kafra Employee]";
-			if (RESRVPTS < .@points[.@s]) {
-				mes "I'm sorry~ dear~";
-				mes "You can't choose the selected chance because you do not have enough special reserve points.";
-				mes "Please check your special reserve points and choose another one~";
-				close;
-			}
-			RESRVPTS = RESRVPTS - .@points[.@s];
-			mes "^0000FF"+ F_GetNumSuffix(.@s) +" Lottery Chance!!^000000";
-			next;
-			mes "[Kafra Employee]";
-			mes "It's time to try your luck.";
-			next;
-			mes "[Kafra Employee]";
-			mes "Let's see how lucky you are. Now! Get ready!";
-			next;
-			.@sound_word = rand(1,3);
-			if (.@sound_word == 1)
-				mes "'Drrrrrr~ Drrrrrr~'";
-			else if (.@sound_word == 2)
-				mes "'Rrrrrrr...'";
-			else if (.@sound_word == 3)
-				mes "'Boing.. Boing.. Clink!'";
-			next;
-			mes "[Kafra Employee]";
-			mes "Something has come out~ Let's see what you got~";
-			mes "G~ U~ E~ S~ S~ W~ H~ A~ T~";
-			next;
-			mes "[Kafra Employee]";
-			mes "^FF0000Oh, my goodness! It's!!^000000";
-			next;
-			mes "[Kafra Employee]";
-			.@choose_prize = rand(1,20);
-			if (.@s == 1) {
-				if (.@choose_prize < 15) {
-					getitem 501,150;// Red_Potion
-					mes "What a pity!";
-					mes "You got the 4th prize!!";
-					mes "The prize is ^00FF00150 Red Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "Whoa~ 150 potions! It is enough to share with your friends~";
-				}
-				else if (.@choose_prize < 18) {
-					getitem 645,15;// Center_Potion
-					mes "The 3rd~~";
-					mes "The 3rd prize!";
-					mes "The prize is ^00FF0015 Concentration Potion~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "We always use this when we need to concentrate on something.";
-					mes "However, overdose is not good for your body~";
-				}
-				else if (.@choose_prize < 20) {
-					getitem 505,3;// Blue_Potion
-					mes "The 2nd~~";
-					mes "The 3rd prize~~";
-					mes "The prize is ^00FF003 Blue Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "Try these when your spiritual power is low~";
-				}
-				else if (.@choose_prize == 20) {
-					getitem 608,1;// Seed_Of_Yggdrasil
-					mes "Whoa~!! The first... The First!!!";
-					mes "Congratulations~~ You got the 1st prize~";
-					mes "The prize is ^00FF001 Yggdrasil Seed~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "I guess you spent entire luck for this lottery chance~";
-				}
-			}
-			else if (.@s == 2) {
-				if (.@choose_prize < 15) {
-					getitem 504,10;// White_Potion
-					mes "What a pity!";
-					mes "You got the 4th prize!!";
-					mes "The prize is ^00FF0010 White Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "The greatest among potions! Use it before you fall into faint~";
-				}
-				else if (.@choose_prize < 18) {
-					getitem 656,15;// Awakening_Potion
-					mes "The 3rd~~";
-					mes "The 3rd prize!";
-					mes "The prize is ^00FF0015 Awakening Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "An awakening potion is better than a concentration potion!";
-					mes "Overdose is not good for your body~";
-				}
-				else if (.@choose_prize < 20) {
-					getitem 657,10;// Berserk_Potion
-					mes "The 2nd~~";
-					mes "The 3rd prize~~";
-					mes "The prize is ^00FF0010 Berserk Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "Overdose may cause madness~";
-				}
-				else if (.@choose_prize == 20) {
-					getitem 608,1;// Seed_Of_Yggdrasil
-					getitem 607,1;// Yggdrasilberry
-					mes "Whoa~!! The first... The First!!!";
-					mes "Congratulations~~ You got the 1st prize~";
-					mes "The prize is ^00FF001 Yggdrasilberry~^000000";
-					mes "The prize is ^00FF001 Yggdrasil Seed~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "I guess you spent entire luck for this lottery chance~";
-				}
-			}
-			else if (.@s == 3) {
-				if (.@choose_prize < 15) {
-					getitem 504,30;// White_Potion
-					mes "What a pity!";
-					mes "You got the 4th prize!!";
-					mes "The prize is ^00FF0030 White Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "The greatest among potions! Use it before you fall into faint~";
-				}
-				else if (.@choose_prize < 18) {
-					getitem 505,10;// Blue_Potion
-					mes "The 3rd~~";
-					mes "The 3rd prize!";
-					mes "The prize is ^00FF0010 Blue Potions~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "Try these when your spiritual power is low~";
-				}
-				else if (.@choose_prize < 20) {
-					getitem 608,1;// Seed_Of_Yggdrasil
-					getitem 526,10;// Royal_Jelly
-					mes "The 2nd~~";
-					mes "The 3rd prize~~";
-					mes "The prize is ^00FF001 Yggdrasil Seed~^000000";
-					mes "The prize is ^00FF0010 Royal Jellies~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "What a gift set~";
-					mes "These are very healthy food so ~";
-				}
-				else if (.@choose_prize == 20) {
-					getitem 607,3;// Yggdrasilberry
-					getitem 608,2;// Seed_Of_Yggdrasil
-					mes "Whoa~!! The first... The First!!!";
-					mes "Congratulations~~ You got the 1st prize~";
-					mes "The prize is ^00FF003 Yggdrasilberries~^000000";
-					mes "The prize is ^00FF002 Yggdrasil Seeds~^000000";
-					next;
-					mes "[Kafra Employee]";
-					mes "I guess you spent entire luck for this lottery chance~";
-				}
-			}
-			mes "Congratulations~~";
-			close;
-		}
+		case 2:
+			close2;
+			callshop "kafra";
 	}
-	mes "[Kafra Employee]";
-	mes "No Problem~";
-	mes "Collect more~ and more~ special reserve points~";
-	mes "Thank you for using Kafra Corporation's services~~";
-	close;
 }
 
 // Inside Clock Tower
 //============================================================
-c_tower3,10,249,4	script	Gatekeeper#ct	84,{
+c_tower3,10,249,4	script	¹®Áö±â#ct	84,{
 	//Key_Of_Clock_Tower
 	callfunc "F_ClockTowerGate","4th",7026,"c_tower4",185,44;
 }
 
-alde_dun03,264,16,4	script	Gatekeeper#ct1	101,{
+alde_dun03,264,16,4	script	¹®Áö±â#ct1	101,{
 	//Underground_Key
 	callfunc "F_ClockTowerGate","B4th",7027,"alde_dun04",79,267;
 }
@@ -1495,101 +1790,101 @@ function	script	F_ClockTowerGate	{
 	.@floor$ = getarg(0);
 	.@item_req = getarg(1);
 
-	mes "[Gatekeeper Boy]";
-	mes "Welcome to";
-	mes "Kinase - Blue Gallino";
-	mes "The one of Local Speciality in Aldebaran.";
-	mes "You can't go through from "+ .@floor$ +" Floor,";
-	mes "Please go back.";
+	mes "[¹®Áö±â]";
+	mes "È¯¿µÇÕ´Ï´Ù";
+	mes "Å°³ªÁ¦ - ºí·ç °¥¸®³ë";
+	mes "¾Ëµ¥¹Ù¶õÀÇ Æ¯»ê¹° Áß ÇÏ³ªÀÔ´Ï´Ù.";
+	mes ""+ .@floor$ +" Floor¿¡¼­´Â Áö³ª°¥ ¼ö ¾ø½À´Ï´Ù.";
+	mes "µ¹¾Æ°¡ÁÖ¼¼¿ä.";
 	next;
-	switch(select("About Clock Tower:About the "+ .@floor$ +" Floor:Move to the "+ .@floor$ +" Floor:End Dialogue")) {
+	switch(select("½Ã°èÅ¾ Á¤º¸:"+ .@floor$ +" Ãş Á¤º¸:"+ .@floor$ +" ÃşÀ¸·Î ÀÌµ¿:´ëÈ­ Á¾·á")) {
 	case 1:
-		mes "[Gatekeeper Boy]";
-		mes "Homeland of Alchemy, Aldebaran!";
-		mes "Long Time ago, there were";
-		mes "3 Legendary Alchemists...They are";
-		mes "Bruke Seimer";
-		mes "Philip Warisez";
-		mes "And ..";
+		mes "[¹®Áö±â]";
+		mes "¿¬±İ¼úÀÇ °íÇâ, ¾Ëµ¥¹Ù¶õ!";
+		mes "¿À·¡Àü¿¡ ±×·± ÀÏÀÌ ÀÖ¾ú¾î¿ä";
+		mes "3¸íÀÇ Àü¼³ÀûÀÎ ¿¬±İ¼ú»ç...±×µéÀº";
+		mes "ºê·çÅ© ¼¼ÀÌ¸Ó";
+		mes "ÇÊ¸³ ¿Í¸®¼¼Áî";
+		mes "±×¸®°í ..";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "Romero Specialre!";
-		mes "This venerable architecture is";
-		mes "their masterpiece.";
-		mes "I assume you would feel something unusual";
-		mes "While on the way to this floor,";
-		mes "Every feature of This Clocktower ";
+		mes "[¹®Áö±â]";
+		mes "·Î¸Ş·Î ½ºÆä¼È·¹!";
+		mes "ÀÌ ÈÇ¸¢ÇÑ °ÇÃà¹°Àº";
+		mes "±×µéÀÇ °ÉÀÛ.";
+		mes "¹º°¡ ÀÌ»óÇÑ ´À³¦À» ¹ŞÀ» °Í °°¾Æ¿ä";
+		mes "ÀÌ ÃşÀ¸·Î °¡´Â ±æ¿¡";
+		mes "ÀÌ ½Ã°èÅ¾ÀÇ ¸ğµç ±â´É ";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "Consists of Mysterious Ancient Magics.";
-		mes "If you just wander around here,";
-		mes " without any intention";
+		mes "[¹®Áö±â]";
+		mes "½ÅºñÇÑ °í´ë ¸¶¹ıÀ¸·Î ±¸¼ºµÇ¾î ÀÖ½À´Ï´Ù.";
+		mes "¿©±â¸¸ µ¹¾Æ´Ù´Ï¸é";
+		mes "ÀÇµµ ¾øÀÌ";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "By any means,";
-		mes "You will meet with a mishap";
-		mes "by Gatekeeper Creatures.";
-		mes "Please be careful ..";
+		mes "[¹®Áö±â]";
+		mes "¾î¶² ¼ö´ÜÀ» ½á¼­¶óµµ";
+		mes "´ç½ÅÀº ºÒÇàÀ» °Ş°Ô µÉ °Å¿¹¿ä";
+		mes "¹®Áö±â »ı¹° Á¦ÀÛ.";
+		mes "Á¶½ÉÇÏ¼¼¿ä..";
 		close;
 	case 2:
-		mes "[Gatekeeper Boy]";
-		mes "Ancient Alchemists";
-		mes "Sealed the Gate of 4th Floor using an Alchemistic Device ";
-		mes "To keep something";
-		mes "From Evil Creatures and Human Enemies.";
-		mes "To go through this door";
+		mes "[¹®Áö±â]";
+		mes "°í´ë ¿¬±İ¼ú»ç";
+		mes "¿¬±İ¼ú ÀåÄ¡¸¦ ÀÌ¿ëÇØ 4Ãş ¹®À» ºÀ¼âÇß½À´Ï´Ù. ";
+		mes "¹º°¡¸¦ °£Á÷ÇÏ´Ù";
+		mes "»ç¾ÇÇÑ »ı¹°°ú ÀÎ°£ÀÇ ÀûÀ¸·ÎºÎÅÍ.";
+		mes "ÀÌ ¹®À¸·Î µé¾î°¡·Á¸é";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "It needs a Key.";
-		mes "That Key has rumored to be possessed by Gatekeeper Creatures";
-		mes "Prowling around here.";
+		mes "[¹®Áö±â]";
+		mes "¿­¼è°¡ ÇÊ¿äÇØ¿ä.";
+		mes "±× ¿­¼è´Â ¹®Áö±â »ı¹°ÀÌ ¼ÒÀ¯ÇÏ°í ÀÖ´Ù´Â ¼Ò¹®ÀÌ µ¹¾Ò½À´Ï´Ù.";
+		mes "ÀÌ ±ÙÃ³¸¦ ¹èÈ¸ÇÏ°í ÀÖ¾î¿ä.";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "The Key is the Intensiveness of Ancient Alchemy,";
-		mes "By hearsay When used once,";
-		mes "It will be released from being spelled";
-		mes "And be disappeared.";
+		mes "[¹®Áö±â]";
+		mes "ÇÙ½ÉÀº °í´ë ¿¬±İ¼úÀÇ Áı¾à¼º";
+		mes "¼Ò¹®¿¡ µû¸£¸é ÇÑ ¹ø¸¸ »ç¿ëÇÏ¸é,";
+		mes "Ã¶ÀÚ°¡ Ç®¸± °ÍÀÔ´Ï´Ù";
+		mes "±×¸®°í »ç¶óÁ®¹ö·Á.";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "If that key";
-		mes "Comes into your possession,";
-		mes "Please show me.";
-		mes "The one who possesses the Key";
-		mes "Will have access to go through";
-		mes "This Gate with his own will!";
+		mes "[¹®Áö±â]";
+		mes "±× Å°¶ó¸é";
+		mes "´ç½ÅÀÇ ¼ÒÀ¯°¡ µË´Ï´Ù.";
+		mes "º¸¿©ÁÖ¼¼¿ä.";
+		mes "¿­¼è¸¦ °¡Áø ÀÚ";
+		mes "Á¢¼ÓÀÌ °¡´ÉÇÕ´Ï´Ù";
+		mes "ÀÌ ¹®Àº ÀÚ½ÅÀÇ ÀÇÁö·Î ÀÌ·ç¾îÁ³½À´Ï´Ù!";
 		next;
-		mes "[Gatekeeper Boy]";
-		mes "I will give you a chance.";
+		mes "[¹®Áö±â]";
+		mes "±âÈ¸¸¦ µå¸®°Ú½À´Ï´Ù.";
 		mes ". . . . .";
 		close;
 	case 3:
 		if (countitem(.@item_req) > 0) {
-			mes "[Gatekeeper Boy]";
-			mes "Hmm! I already felt that you are not an Ordinary person,";
-			mes "Now it seems to be successful in Speculation.";
-			mes "Please, you may enter.";
-			mes "May God bless you ..";
+			mes "[¹®Áö±â]";
+			mes "Èì! ³­ ÀÌ¹Ì ´ç½ÅÀÌ º¸Åë »ç¶÷ÀÌ ¾Æ´Ï¶ó´Â °É ´À²¼¾î¿ä,";
+			mes "ÀÌÁ¦´Â ÃßÃø¿¡ ¼º°øÇÑ °Í °°½À´Ï´Ù.";
+			mes "µé¾î°¡¼Åµµ µË´Ï´Ù.";
+			mes "½ÅÀÇ Ãàº¹ÀÌ ÀÖ±â¸¦..";
 			close2;
 			delitem .@item_req,1;
 			warp getarg(2),getarg(3),getarg(4);
 			end;
 		}
 		else {
-			mes "[Gatekeeper Boy]";
+			mes "[¹®Áö±â]";
 			mes ". . . . . .";
-			mes "Unfortunately you don't have a privilege";
-			mes "To enter this Gate ..";
-			mes "You won't be able to go through";
-			mes "As long as Ancient Alchemists";
-			mes " Don't grant you.";
+			mes "¾ÈÅ¸±õ°Ôµµ ´ç½Å¿¡°Ô´Â Æ¯±ÇÀÌ ¾ø½À´Ï´Ù";
+			mes "ÀÌ ¹®À¸·Î µé¾î°¡·Á¸é..";
+			mes "³Ê´Â Åë°úÇÒ ¼ö ¾øÀ» °Å¾ß";
+			mes "°í´ë ¿¬±İ¼ú»ç¸¸Å­";
+			mes " Çã¶ôÇÏÁö ¸¶¼¼¿ä.";
 			close;
 		}
 	case 4:
-		mes "[Gatekeeper Boy]";
-		mes "This Clock Tower";
-		mes "Is the place where the 3 Ancient Legendary Alchemists";
-		mes "Has left their Spirits and Skills.";
-		mes "Please Do not Scribble or Damage on the Interior.";
+		mes "[¹®Áö±â]";
+		mes "ÀÌ ½Ã°èÅ¾";
+		mes "°í´ë Àü¼³ÀÇ ¿¬±İ¼ú»ç 3¸íÀÌ ÀÖ´Â °÷ÀÌ¿¡¿ä";
+		mes "Á¤½Å°ú ±â¼úÀ» ÀÒ¾ú½À´Ï´Ù.";
+		mes "³»ºÎ¿¡ ³«¼­³ª ÈÑ¼ÕÀ» ÇÏÁö ¸»¾ÆÁÖ¼¼¿ä.";
 		close;
 	}
 }

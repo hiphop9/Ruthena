@@ -10,150 +10,150 @@
 //= 1.3 Added clan helper. [exneval]
 //============================================================
 
-prontera,138,183,7	script	Clan Helper	703,{
-	mes "[Clan Helper]";
-	mes "Do you want to build connections without being in a guild?";
+prontera,138,183,7	script	클랜도우미::Clan Helper	703,{
+	mes "[클랜 도우미]";
+	mes "길드에 속하지 않고 인맥을 쌓고 싶습니까?";
 	next;
-	mes "[Clan Helper]";
-	mes "Can't find the perfect guild for yourself?";
+	mes "[클랜 도우미]";
+	mes "자신에게 완벽한 길드를 찾을 수 없습니까?";
 	next;
-	mes "[Clan Helper]";
-	mes "You can join or leave clans freely! Just join!";
+	mes "[클랜 도우미]";
+	mes "클랜에 자유롭게 가입하거나 탈퇴할 수 있습니다! 그냥 가입하세요!";
 	next;
-	mes "[Clan Helper]";
-	mes "Now, come on in and meet the masters of the Kingdom's best clans!";
+	mes "[클랜 도우미]";
+	mes "자, 이제 들어와서 왕국 최고의 클랜의 마스터들을 만나보세요!";
 	close;
 }
 
-prt_in,33,114,5	script	Raffam Oranpere	10058,{
+prt_in,33,114,5	script	라펌 오란피어::Raffam Oranpere	10058,{
 	cutin "laperm01.bmp", 2;
-	mes "[Raffam Oranpere]";
-	mes "Hi! I'm Raffam, master of the ^3131FFSword Clan^000000 in the Rune-Midgarts Kingdom.";
+	mes "[라팜 오란페레]";
+	mes "안녕하세요! 저는 룬-미드가르츠 왕국의 ^3131FF소드 클랜^000000의 마스터 라팸입니다.";
 	next;
-	switch( select( "Clan Information:Join.:Leave." ) ){
+	switch( select( "클랜정보:가입.:탈퇴." ) ){
 		case 1:
-			switch( select( "What are Clans?:About the Sword Clan:Cancel." ) ){
+			switch( select( "클랜이 뭔가요?:소드 클랜 소개:취소." ) ){
 				case 1:
-					mes "[Raffam Oranpere]";
-					mes "The ^3131FFClans^000000 are a type of guild ran by the Kingdom.";
-					mes "They don't participate in the Siege, so members are free to join/leave anytime.";
+					mes "[라팜 오란페레]";
+					mes "^3131FFClans^000000는 왕국에서 운영하는 일종의 길드입니다.";
+					mes "그들은 공성전에 참여하지 않으므로 회원은 언제든지 자유롭게 가입 / 탈퇴 할 수 있습니다.";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "I wish we could join the Siege. I'd love flying over on my dragon and burning everyone in my way!";
-					mes "Oops, too thrilled!";
+					mes "[라팜 오란페레]";
+					mes "공성전에 참가하고 싶어요. 드래곤을 타고 날아가서 방해하는 모든 사람을 불태우고 싶어요!";
+					mes "웁스, 너무 신나요!";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "Join us, if no Clan suits your taste.";
-					mes "New members are given ^3131FFfree stat bonuses^000000.";
+					mes "[라팸 오란페레]";
+					mes "당신의 취향에 맞는 클랜이 없다면 우리와 함께하십시오.";
+					mes "신규 회원에게는 ^3131FF무료 스탯 보너스가 주어집니다^000000.";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "Melee stats are offered as the name ^3131FFSword Clan^000000 suggests, but not all members are Melee classes.";
-					mes "Don't feel pressured, just count on me!";
+					mes "[라팜 오란페레]";
+					mes "근접 스탯은 ^3131FF소드 클랜^000000이라는 이름에서 알 수 있듯이 제공되지만 모든 구성원이 근접 직업은 아닙니다.";
+					mes "부담 갖지 마세요, 저만 믿으세요!";
 					next;
 					cutin "laperm02.bmp", 2;
-					mes "[Raffam Oranpere]";
-					mes "Differences in variety creates the fun.";
-					mes "These odd bunches never bore me in the party.";
+					mes "[라팸 오란페레]";
+					mes "다양성의 차이가 재미를 만듭니다.";
+					mes "이 이상한 다발은 파티에서 나를 지루하게하지 않았습니다.";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "And who knows you might meet your soul mate in the Clan? Hahah!";
+					mes "[라팸 오란 페레]";
+					mes "그리고 클랜에서 소울메이트를 만날지 누가 알겠어요? 하하!";
 					break;
 				case 2:
-					mes "[Raffam Oranpere]";
-					mes "The ^3131FFSword Clan^000000 mainly supports Melee adventurers.";
-					mes "Join for free ^FF0000<STR+1, VIT+1, MHP+30, MSP+10>^000000!";
+					mes "[라팜 오란페레]";
+					mes "^3131FF소드 클랜^000000은 주로 근접 모험가를 지원합니다.";
+					mes "무료 가입 ^FF0000<STR+1, VIT+1, MHP+30, MSP+10>^000000!";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "Remember, no Siege participation.";
-					mes "You should contact other guilds for Siege.";
+					mes "[라팸 오란페레]";
+					mes "기억하세요, 공성전 참여는 안됩니다.";
+					mes "공성전을 위해 다른 길드에 연락해야합니다.";
 					next;
-					mes "[Raffam Oranpere]";
-					mes "A question?";
-					mes "Excited to join me? Hahah!";
+					mes "[라팸 오란페레]";
+					mes "질문이 있으십니까?";
+					mes "나와 함께하게되어 흥분? 하하!";
 					break;
 				case 3:
 					break;
 			}			
 			break;
 		case 2:
-			mes "[Raffam Oranpere]";
-			mes "Oh, you'll join? Good choice!";
-			mes "Let's check the Clan policy then to begin admission procedures.";
+			mes "[라팜 오란페레]";
+			mes "오, 가입하시겠다고요? 좋은 선택입니다!";
+			mes "그럼 클랜 정책을 확인하여 가입 절차를 시작합시다.";
 			next;
-			mes "[Raffam Oranpere]";
-			mes "^3131FFClansmen^000000 cannot participate in the Siege.";
-			mes "New members are given these stat bonuses: ^FF0000<STR+1, VIT+1, MHP+30, MSP+10>^000000.";
-			mes "You with me so far?";
+			mes "[라팸 오란페레]";
+			mes "^3131FFClansmen^000000은 공성전에 참가할 수 없습니다.";
+			mes "신규 회원에게는 이러한 스탯 보너스가 주어집니다: ^ff0000<str+1, vit+1, mhp+30, msp+10>^000000.";
+			mes "지금까지 나와 함께?";
 			next;
-			if( select( "Yes.:No." ) == 1 ){
-				mes "[Raffam Oranpere]";
-				mes "You can join and leave a Clan anytime, but if you don't login for ^FF0000more than 2 weeks^000000, you'll be ^FF0000expelled^000000.";
-				mes "Clan masters exist for reason, like I.";
-				mes "Understood?";
+			if( select( "예.:아니오." ) == 1 ){
+				mes "[라팜 오란페레]";
+				mes "언제든지 클랜에 가입하고 탈퇴 할 수 있지만 ^FF0000 이상 2 주 동안 로그인하지 않으면 ^FF0000 제명됩니다.";
+				mes "클랜 마스터는 저처럼 이유가 있어서 존재합니다.";
+				mes "알겠어?";
 				next;
-				if( select( "Yes.:No." ) == 1 ){
-					mes "[Raffam Oranpere]";
-					mes "Great, sign your name here to register.";
+				if( select( "예.:아니오." ) == 1 ){
+					mes "[라팜 오란페레]";
+					mes "좋아요, 등록하려면 여기에 이름을 서명하세요.";
 					next;
 					input .@name$;
-					mes "[Raffam Oranpere]";
-					mes "So, you're ^3131FF" + strcharinfo( 0 ) + "^000000! Nice name!";
-					mes "Let me register you.";
+					mes "[래팸 오란페레]";
+					mes "그래서, 당신은 ^3131FF" + strcharinfo( 0 ) + "^000000! 이름 멋지네요!";
+					mes "등록하겠습니다.";
 					next;
 					if( getcharid( 2 ) ){
-						mes "[Raffam Oranpere]";
-						mes "Come back to join after you leave your current guild.";
-						close3;
+						mes "[라팜 오란페레]";
+						mes "현재 길드를 떠난 후 다시 가입하세요.";
+						close;
 					}else if( getcharid( 5 ) != 0 ){
 						cutin "laperm04.bmp", 2;
-						mes "[Raffam Oranpere]";
-						mes "Eh? Oh, you're in a Clan.";
-						mes "Don't mess with me, it's not cool!";
+						mes "[라팸 오란페레]";
+						mes "어? 오, 너 클랜에 있구나.";
+						mes "날 건드리지 마, 쿨하지 않아!";
 					}else{
 						cutin "laperm02.bmp", 2;
 						if (clan_join(SWORDCLAN)) {
 							sc_start2 SC_SWORDCLAN, INFINITE_TICK, 0, SWORDCLAN;
-							mes "[Raffam Oranpere]";
-							mes "Welcome to the ^3131FFSword Clan^000000!";
-							mes "You can review Clan info with ^3131FFCtrl+G^000000.";
-							mes "At your service!";
+							mes "[라팸 오란페레]";
+							mes "^3131FFSword 클랜에 오신 것을 환영합니다^000000!";
+							mes "^3131FFCtrl+G^000000로 클랜 정보를 확인할 수 있습니다.";
+							mes "서비스에!";
 						} else
-							mes "An error has occurred.";
+							mes "오류가 발생했습니다.";
 					}
 				}else{
-					mes "[Raffam Oranpere]";
-					mes "Uh, oh. Let's go back to the beginning.";
+					mes "[라팜 오란페레]";
+					mes "어, 오. 처음으로 돌아가 봅시다.";
 				}
 			}else{
 				cutin "laperm03.bmp", 2;
-				mes "[Raffam Oranpere]";
-				mes "Uh, oh. Let's go back to the beginning.";
+				mes "[라팜 오란페레]";
+				mes "어, 오. 처음으로 돌아가 봅시다.";
 			}
 			break;
 		case 3:
 			cutin "laperm01.bmp", 2;
-			mes "[Raffam Oranpere]";
-			mes "You want to leave?";
-			mes "No problem. I hope you'll find a more suitable Clan.";
-			mes "Ready for withdrawal?";
+			mes "[라팜 오란페레]";
+			mes "떠나고 싶어?";
+			mes "괜찮아요. 더 적합한 클랜을 찾길 바랍니다.";
+			mes "탈퇴할 준비가 되셨나요?";
 			next;
-			if( select( "Continue.:Cancel." ) == 1 ){
+			if( select( "계속.:취소." ) == 1 ){
 				if( getcharid( 5 ) == 0 ){
 					cutin "laperm04.bmp", 2;
-					mes "[Raffam Oranpere]";
-					mes "Wait, you're not with us! Grr, don't make me breathe fire at you!";
+					mes "[라팜 오란페레]";
+					mes "잠깐, 당신은 우리와 함께 있지 않아요! 불을 뿜게 만들지 마!";
 				}else if( getcharid( 5 ) != SWORDCLAN ){
 					cutin "laperm04.bmp", 2;
-					mes "[Raffam Oranpere]";
-					mes "Hey, talk to your guild master if you want to leave.";
+					mes "[라팜 오란페레]";
+					mes "이봐, 떠나고 싶으면 길드 마스터에게 말하세요.";
 				}else{
 					if (clan_leave()) {
 						sc_end SC_SWORDCLAN;
-						mes "[Raffam Oranpere]";
-						mes "Okay, it's done. But let's not be strangers, okay?";
-						mes "It was nice having you!";
+						mes "[라팜 오란페레]";
+						mes "좋아, 끝났어. 하지만 낯선 사람이되지 말자, 알았지?";
+						mes "만나서 반가웠어요!";
 					} else
-						mes "An error has occurred.";
+						mes "오류가 발생했습니다.";
 				}
 			}
 			break;
@@ -167,74 +167,74 @@ OnInit:
 	end;
 }
 
-prt_in,35,114,5	script	Devon Aire	10059,{
+prt_in,35,114,5	script	데본 에어::Devon Aire	10059,{
 	cutin "debon01.bmp", 2;
-	mes "[Devon Aire]";
-	mes "I'm Devon, master of the ^3131FFArc Wand Clan^000000.";
+	mes "[데본 에어]";
+	mes "저는 ^3131FF아크 완드 클랜의 마스터 데본입니다^000000.";
 	next;
-	switch( select( "Clan Information:Join.:Leave." ) ){
+	switch( select( "클랜정보:가입.:탈퇴." ) ){
 		case 1:
-			switch( select( "What are Clans?:About the Arc Wand Clan:Cancel." ) ){
+			switch( select( "클랜이 뭔가요?:아크완드 클랜 소개:취소." ) ){
 				case 1:
-					mes "[Devon Aire]";
-					mes "The ^3131FFClans^000000 are ran by the Kingdom, not privately like others.";
-					mes "And I manage one of them.";
+					mes "[데본 에어]";
+					mes "^3131FFClans^000000은 다른 사람들처럼 개인적으로 운영되는 것이 아니라 왕국에서 운영합니다.";
+					mes "그리고 나는 그들 중 하나를 관리합니다.";
 					next;
 					cutin "debon02.bmp", 2;
-					mes "[Devon Aire]";
+					mes "[데본 에어]";
 					mes "...";
-					mes "What's with that look? You got a problem?";
+					mes "그 표정은 뭐야? 무슨 문제 있어요?";
 					next;
 					cutin "birman01.bmp", 2;
-					mes "[Berman Aire]";
-					mes "Brother, you're scaring a potential member, be nice.";
+					mes "[버만 에어]";
+					mes "형, 넌 잠재적 인 회원을 겁주고있어, 친절하게 굴어.";
 					next;
 					cutin "debon02.bmp", 2;
-					mes "[Devon Aire]";
+					mes "[데본 에어]";
 					mes "...";
 					next;
 					cutin "debon01.bmp", 2;
-					mes "[Devon Aire]";
-					mes "Join if you are seeking a place to fit in. We give ^3131FFfree bonus stats^000000. But no Siege participation.";
+					mes "[데본 에어]";
+					mes "어울릴 곳을 찾고 있다면 가입하세요. 3131FF무료 보너스 스탯^000000을 제공합니다. 하지만 공성전 참여는 안됩니다.";
 					next;
-					mes "[Devon Aire]";
-					mes "Most members are offensive Mage classes as the name ^3131FFArc Wand Clan^000000 suggests, but that's no requirement.";
+					mes "[데본 에어]";
+					mes "^3131FF아크완드 클랜^000000이라는 이름에서 알 수 있듯이 대부분의 회원은 공격적인 마법사 직업이지만, 꼭 필요한 것은 아닙니다.";
 					next;
 					cutin "debon02.bmp", 2;
-					mes "[Devon Aire]";
-					mes "...Hey, Shaam Rumi.";
-					mes "Stop hitting on my brother and get to work.";
+					mes "[데본 에어]";
+					mes "...이봐, 샴 루미.";
+					mes "내 동생한테 작업 걸지 말고 일해.";
 					next;
 					cutin "sham03.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "Whatever!";
+					mes "[샴 루미]";
+					mes "뭐든지!";
 					next;
 					cutin "debon02.bmp", 2;
-					mes "[Devon Aire]";
-					mes "...Hmpf!";
-					mes "Listen, Crossbow Clan's master is evil.";
+					mes "[데본 에어]";
+					mes "...흠프!";
+					mes "들어봐, 석궁 클랜의 주인은 사악해.";
 					next;
 					cutin "sham02.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "Get over me, Devon! Don't spread rumors!";
+					mes "[샴 루미]";
+					mes "날 잊어 버려, 데본! 소문 퍼뜨리지 마!";
 					next;
 					cutin "birman01.bmp", 2;
-					mes "[Berman Aire]";
-					mes "Haha. Stop it. You two are making a scene.";
-					mes "Come on, back to work guys.";
+					mes "[버먼 에어]";
+					mes "하하. 그만해. 너희 둘이 소란을 피우고 있잖아.";
+					mes "어서, 일하러 가자.";
 					break;
 				case 2:
 					cutin "debon01.bmp", 2;
-					mes "[Devon Aire]";
-					mes "The ^3131FFArc Wand Clan^000000 mainly supports offensive Mage classes.";
-					mes "We offer ^FF0000<INT+1, DEX+1, MHP+30, MSP+10>^000000 to new members. Don't ask for more; it's the Kingdom's rule.";
+					mes "[데본 에어]";
+					mes "^3131FF아크완드 클랜^000000은 주로 공격적인 마법사 클래스를 지원합니다.";
+					mes "우리는 신규 회원에게 ^FF0000<INT+1, DEX+1, MHP+30, MSP+10>^000000을 제공합니다. 더 많은 것을 요구하지 마십시오; 그것은 왕국의 규칙입니다.";
 					next;
-					mes "[Devon Aire]";
-					mes "^3131FFClansmen^000000 can't participate in the Siege.";
-					mes "If you like the Siege, then go join a regular guild.";
+					mes "[데본 에어]";
+					mes "^3131FFClansmen^000000은 공성전에 참여할 수 없습니다.";
+					mes "공성전을 좋아한다면 일반 길드에 가입하세요.";
 					next;
-					mes "[Devon Aire]";
-					mes "That is all. No questions.";
+					mes "[데본 에어]";
+					mes "그게 다입니다. 질문 없습니다.";
 					break;
 				case 3:
 					break;
@@ -242,85 +242,85 @@ prt_in,35,114,5	script	Devon Aire	10059,{
 			break;
 		case 2:
 			cutin "debon01.bmp", 2;
-			mes "[Devon Aire]";
+			mes "[데본 에어]";
 			mes "...";
-			mes "Let's check the Clan policy then to begin admission procedures.";
+			mes "그럼 클랜 정책을 확인하여 입회 절차를 시작합시다.";
 			next;
-			mes "[Devon Aire]";
-			mes "^3131FFClansmen^000000 cannot participate in the Siege.";
-			mes "New members are given these stat bonuses: ^FF0000<INT+1, DEX+1, MHP+30, MSP+10>^000000.";
-			mes "You with me so far?";
+			mes "[데본 에어]";
+			mes "^3131FFClansmen^000000은 공성전에 참가할 수 없습니다.";
+			mes "신규 회원에게는 다음과 같은 스탯 보너스가 주어집니다: ^ff0000<지능+1, 힘+1, 체력+30, 방어력+10>^000000.";
+			mes "지금까지 나와 함께?";
 			next;
-			if( select( "Yes.:No." ) == 1 ){
-				mes "[Devon Aire]";
-				mes "You can join and leave a Clan anytime, but if you don't login for ^FF0000more than 2 weeks^000000, you'll be ^FF0000expelled^000000.";
-				mes "Do you agree?";
+			if( select( "예.:아니오." ) == 1 ){
+				mes "[데본 에어]";
+				mes "언제든지 클랜에 가입하고 탈퇴 할 수 있지만 ^FF0000 이상 2 주 동안 로그인하지 않으면 ^FF0000 추방됩니다^000000.";
+				mes "동의하십니까?";
 				next;
-				if( select( "Yes.:No." ) == 1 ){
-					mes "[Devon Aire]";
-					mes "Sign your name here.";
+				if( select( "예.:아니오." ) == 1 ){
+					mes "[데본 에어]";
+					mes "여기에 이름을 서명하세요.";
 					next;
 					input .@name$;
-					mes "[Devon Aire]";
+					mes "[데본 에어]";
 					mes "^3131FF" + strcharinfo( 0 ) + "^000000.....";
-					mes "Good, let me invite you in.";
+					mes "좋아요, 초대하겠습니다.";
 					next;
 					if( getcharid( 2 ) ){
-						mes "[Devon Aire]";
-						mes "Leave your guild first to join my Clan, duh.";
-						close3;
+						mes "[데본 에어]";
+						mes "내 클랜에 가입하려면 먼저 길드를 탈퇴하세요.";
+						close;
 					}else if( getcharid( 5 ) != 0 ){
 						cutin "debon03.bmp", 2;
-						mes "[Devon Aire]";
-						mes "You're already in a Clan. You joking?!";
-						mes "Oh, I can be funny, too--FIRE PILLAR!";
+						mes "[데본 에어]";
+						mes "당신은 이미 클랜에 속해 있습니다. 농담하는거야?!";
+						mes "오, 나도 웃길 수 있어요-불기둥!";
 					}else{
 						if (clan_join(ARCWANDCLAN)) {
 							sc_start2 SC_ARCWANDCLAN, INFINITE_TICK, 0, ARCWANDCLAN;
-							mes "[Devon Aire]";
-							mes "You have joined the ^3131FFArc Wand Clan^000000.";
+							mes "[데본 에어]";
+							mes "당신은 ^3131FF아크 지팡이 클랜에 가입했습니다^000000.";
 							next;
-							mes "[Devon Aire]";
-							mes "You can review Clan info with ^3131FFCtrl+G^000000.";
-							mes "So don't bother me later.";
+							mes "[데본 에어]";
+							mes "^3131FFCtrl+G^000000로 클랜 정보를 검토할 수 있습니다.";
+							mes "그러니 나중에 귀찮게 하지마.";
 							next;
-							mes "[Devon Aire]";
-							mes "That's all. Visit often or be expelled. Dismissed.";
+							mes "[데본 에어]";
+							mes "그게 다입니다. 자주 방문하거나 추방됩니다. 해산.";
 						} else
-							mes "An error has occurred.";
+							mes "오류가 발생했습니다.";
 					}
 				}else{
-					mes "[Devon Aire]";
-					mes "Then I don't want you.";
+					mes "[데본 에어]";
+					mes "그럼 난 널 원하지 않아.";
 				}
 			}else{
-				mes "[Devon Aire]";
-				mes "Gosh, listen to the policy again.";
+				mes "[데본 에어]";
+				mes "이런, 정책을 다시 들어보세요.";
 			}
 			break;
 		case 3:
-			mes "[Devon Aire]";
-			mes "Want to leave, huh?";
-			mes "I understand, it's about Sieges. If not, why are..Never mind..";
-			mes "I'll process your withdrawal.";
+			mes "[데본 에어]";
+			mes "떠나고 싶어?";
+			mes "알았어요, 공성전 때문이군요. 그렇지 않다면, 왜 ... 신경 쓰지 ...";
+			mes "탈퇴 처리하겠습니다.";
 			next;
-			if( select( "Continue.:Cancel." ) == 1 ){
+			if( select( "계속.:취소." ) == 1 ){
 				if( getcharid( 5 ) == 0 ){
 					cutin "debon03.bmp", 2;
-					mes "[Devon Aire]";
-					mes "Naughty children deserve a good Jupitel Thunder.";
+					mes "[데본 에어]";
+					mes "장난 꾸러기 아이들은 좋은 주피텔 썬더를받을 자격이 있습니다.";
 				}else if( getcharid( 5 ) != ARCWANDCLAN ){
 					cutin "debon02.bmp", 2;
-					mes "[Devon Aire]";
-					mes "You're barking up the wrong tree. Go to your Clan master.";
+					mes "[데본 에어]";
+					mes "당신은 엉뚱한 나무를 짖고 있습니다. 클랜 마스터에게 가십시오.";
 				}else{
 					if (clan_leave()) {
 						sc_end SC_ARCWANDCLAN;
-						mes "[Devon Aire]";
-						mes "You are withdrawn from the Clan.";
-						mes "Now leave. I don't feel like talking anymore.";
+						mes "[데본 에어]";
+						mes "당신은 클랜에서 탈퇴했습니다.";
+						mes "이제 떠나. 더 이상 말하고 싶지 않아요.";
 					} else
-						mes "An error has occurred.";
+						mes "오류가 발생했습니다.";
 				}
 			}		
 			break;
@@ -334,137 +334,137 @@ OnInit:
 	end;
 }
 
-prt_in,37,114,5	script	Berman Aire	10060,{
+prt_in,37,114,5	script	버만 에어::Berman Aire	10060,{
 	cutin "birman01.bmp", 2;
-	mes "[Berman Aire]";
-	mes "Nice to meet you. I'm Berman Aire, master of the ^3131FFGolden Mace Clan^000000.";
-	mes "I'm also the older brother of Devon Aire. Devon looks tough, but he's kind hearted.";
+	mes "[버먼 에어]";
+	mes "만나서 반갑습니다. 저는 ^3131FF골든메이스 클랜의 마스터 버먼 에어입니다^000000.";
+	mes "저는 데본 에어의 형이기도 합니다. 데본은 터프해 보이지만 마음씨도 착해요.";
 	next;
-	switch( select( "Clan Information:Join.:Leave." ) ){
+	switch( select( "클랜정보:가입.:탈퇴." ) ){
 		case 1:
-			switch( select( "What are Clans?:About the Golden Mace Clan:Cancel." ) ){
+			switch( select( "클랜이 뭔가요?:골든 메이스 클랜 소개:취소." ) ){
 				case 1:
-					mes "[Berman Aire]";
-					mes "The ^3131FFClans^000000 are established by the Kingdom to help adventurers connect and share information.";
+					mes "[버먼 에어]";
+					mes "^3131FFClans^000000은 모험가들이 연결하고 정보를 공유 할 수 있도록 왕국에서 설립했습니다.";
 					next;
-					mes "[Berman Aire]";
-					mes "Because the Kingdom runs the Clan, there is no Siege participation, but at least the members are given ^3131FFstat bonuses^000000.";
-					mes "The stat bonuses are small, but can be very useful for beginning adventurers.";
+					mes "[버먼 에어]";
+					mes "왕국이 클랜을 운영하기 때문에 공성전 참여는 없지만 적어도 회원에게는 ^3131FF스탯 보너스^000000가 주어집니다.";
+					mes "스탯 보너스는 작지만 초보 모험가에게는 매우 유용 할 수 있습니다.";
 					next;
-					mes "[Berman Aire]";
-					mes "We're named the ^3131FFGolden Mace Clan^000000, but we don't discriminate against applicants based on their classes.";
-					mes "The name is just to help you easily choose your Clan.";
+					mes "[버먼 에어]";
+					mes "우리는 ^3131FF골든 메이스 클랜^000000으로 명명되었지만 지원자의 직업에 따라 차별을 두지 않습니다.";
+					mes "이름은 클랜을 쉽게 선택할 수 있도록 돕기위한 것입니다.";
 					next;
 					cutin "sham02.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "Berman, enough with the explanation. Let's go hang out in Glast Heim.";
+					mes "[샴 루미]";
+					mes "버먼, 설명은 충분해. 글래스트 하임에서 놀러 가자.";
 					next;
 					cutin "debon03.bmp", 2;
-					mes "[Devon Aire]";
-					mes "... Hey.";
+					mes "[데본 에어]";
+					mes "... 안녕.";
 					next;
 					cutin "sham03.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "Ooh, you're scaring me.";
-					mes "Berman, call me when you can!~";
+					mes "[샴 루미]";
+					mes "오, 무서워요.";
+					mes "버먼, 가능하면 전화해줘요~";
 					next;
 					cutin "birman03.bmp", 2;
-					mes "[Berman Aire]";
-					mes "Hah hah, I apologize for their bickering.";
+					mes "[버만 에어]";
+					mes "하하, 말다툼에 대해 사과드립니다.";
 					next;
 					cutin "birman01.bmp", 2;
-					mes "[Berman Aire]";
-					mes "Do you have a question?";
-					mes "If you're tired of traveling alone, join us! You can join and leave the Clan anytime you want.";
+					mes "[버만 에어]";
+					mes "질문이 있으세요?";
+					mes "혼자 여행하는 것이 지겹다면 우리와 함께하세요! 언제든지 클랜에 가입하고 탈퇴할 수 있습니다.";
 					break;
 				case 2:
-					mes "[Berman Aire]";
-					mes "The ^3131FFGolden Mace Clan^000000 mainly helps supportive classes.";
-					mes "We offer ^FF0000<INT+1, LUK+1, MHP+30, MSP+10>^000000 to new members.";
+					mes "[버먼 에어]";
+					mes "^3131FF골든 메이스 클랜^000000은 주로 지원 클래스를 돕습니다.";
+					mes "우리는 신입 회원에게 ^FF0000<INT+1, LUK+1, MHP + 30, MSP + 10>^000000을 제공합니다.";
 					next;
-					mes "[Berman Aire]";
-					mes "As I told you earlier, Clans cannot join the Siege because they already belong to the Kingdom.";
-					mes "If you want to be in the Siege, then I recommend you join a regular guild.";
+					mes "[버만 에어]";
+					mes "앞서 말했듯이, 클랜은 이미 왕국에 속해 있기 때문에 공성전에 참여할 수 없습니다.";
+					mes "공성전에 참여하고 싶다면 일반 길드에 가입하는 것이 좋습니다.";
 					next;
-					mes "[Berman Aire]";
-					mes "Do you understand what the Clans are about now?";
+					mes "[버먼 에어]";
+					mes "이제 클랜이 무엇인지 이해하십니까?";
 					break;
 				case 3:
 					break;
 			}
 			break;
 		case 2:
-			mes "[Berman Aire]";
-			mes "Great!";
-			mes "Let's check the Clan policy then to begin admission procedures.";
+			mes "[버만 에어]";
+			mes "좋아요!";
+			mes "그럼 클랜 정책을 확인하여 입회 절차를 시작합시다.";
 			next;
-			mes "[Berman Aire]";
-			mes "^3131FFClansmen^000000 cannot participate in the Siege.";
-			mes "As our new member, you'll receive the following stat bonuses: ^FF0000<INT+1, LUK+1, MHP+30, MSP+10>^000000.";
-			mes "Do you agree?";
+			mes "[버만 에어]";
+			mes "^3131FFClansmen^000000은 공성전에 참가할 수 없습니다.";
+			mes "신규 회원은 다음과 같은 스탯 보너스를 받게 됩니다: ^ff0000<인트+1, 루크+1, 마력+30, 마력+10>^000000.";
+			mes "동의하십니까?";
 			next;
-			if( select( "Yes.:No." ) == 1 ){
-				mes "[Berman Aire]";
-				mes "You can join and leave a Clan anytime, but if you don't login for ^FF0000more than 2 weeks^000000, you'll be ^FF0000expelled^000000.";
-				mes "Do you agree to maintain good standing in the Clan?";
+			if( select( "예.:아니오." ) == 1 ){
+				mes "[버만 에어]";
+				mes "언제든지 클랜에 가입하고 탈퇴 할 수 있지만 ^FF0000 이상 2 주 동안 로그인하지 않으면 ^FF0000 추방됩니다^000000.";
+				mes "당신은 클랜에서 좋은 상태를 유지하는 데 동의합니까?";
 				next;
-				if( select( "Yes.:No." ) == 1 ){
-					mes "[Berman Aire]";
-					mes "Now, please write your name here.";
+				if( select( "예.:아니오." ) == 1 ){
+					mes "[버만 에어]";
+					mes "자, 여기에 이름을 적어주세요.";
 					next;
 					input .@name$;
-					mes "[Berman Aire]";
-					mes "^3131FF" + strcharinfo( 0 ) + "^000000! What a good name!";
-					mes "Okay, then...";
+					mes "[버만 에어]";
+					mes "^3131FF" + strcharinfo( 0 ) + "^000000! 정말 좋은 이름이네요!";
+					mes "좋아, 그럼...";
 					next;
 					if( getcharid( 2 ) ){
-						mes "[Berman Aire]";
-						mes "Oh, no.";
-						mes "In order to join, you first have to leave your current guild.";
-						close3;
+						mes "[버만 에어]";
+						mes "오, 안돼.";
+						mes "가입하려면 먼저 현재 길드를 탈퇴해야합니다.";
+						close;
 					}else if( getcharid( 5 ) != 0 ){
-						mes "[Berman Aire]";
-						mes "You're already in a Clan.";
-						mes "You're just confused, right?";
+						mes "[버만 에어]";
+						mes "당신은 이미 클랜에 속해 있습니다.";
+						mes "헷갈리신 거죠?";
 					}else{
 						if (clan_join(GOLDENMACECLAN)) {
 							sc_start2 SC_GOLDENMACECLAN, INFINITE_TICK, 0, GOLDENMACECLAN;
 							cutin "birman02.bmp", 2;
-							mes "[Berman Aire]";
-							mes "Welcome to the ^3131FFGolden Mace Clan^000000!";
+							mes "[버만 에어]";
+							mes "^3131FF골든메이스 클랜에 오신 것을 환영합니다^000000!";
 							next;
-							mes "[Berman Aire]";
-							mes "You can review Clan info with ^3131FFCtrl+G^000000.";
+							mes "[버먼에어]";
+							mes "^3131FFCtrl+G^000000로 클랜 정보를 확인할 수 있습니다.";
 							next;
-							mes "[Berman Aire]";
-							mes "Please remember the few precautions I gave you, and enjoy your Clan activities!";
+							mes "[버먼에어]";
+							mes "몇 가지 주의사항을 기억하시고 클랜 활동을 즐기시기 바랍니다!";
 						} else
-							mes "An error has occurred.";
+							mes "오류가 발생했습니다.";
 					}
 				}
 			}
 			break;
 		case 3:
-			mes "[Berman Aire]";
-			mes "With meeting, there is parting.";
-			mes "I hope you enjoyed your time in the ^3131FFGolden Mace Clan^000000.";
-			mes "Now, should I process your withdrawal?";
+			mes "[버만 에어]";
+			mes "만남이 있으면 이별이 있습니다.";
+			mes "^3131FF골든메이스 클랜에서 즐거운 시간 보내셨길 바랍니다^000000.";
+			mes "이제, 당신의 탈퇴를 처리해야합니까?";
 			next;
-			if( select( "Continue.:Cancel." ) == 1 ){
+			if( select( "계속.:취소." ) == 1 ){
 				if( getcharid( 5 ) == 0 ){
-					mes "[Berman Aire]";
-					mes "You can't leave the Clan without joining it first.";
+					mes "[버먼에어]";
+					mes "먼저 클랜에 가입하지 않으면 클랜을 탈퇴할 수 없습니다.";
 				}else if( getcharid( 5 ) != GOLDENMACECLAN ){
-					mes "[Berman Aire]";
-					mes "I'm sorry, but I can't remove you from another Clan...";
+					mes "[버먼에어]";
+					mes "죄송하지만 다른 클랜에서 삭제할 수 없습니다...";
 				}else{
 					if (clan_leave()) {
 						sc_end SC_GOLDENMACECLAN;
-						mes "[Berman Aire]";
-						mes "It's processed.";
-						mes "Come back anytime to the ^3131FFGolden Mace Clan^000000. I'll be here.";
+						mes "[버먼에어]";
+						mes "처리되었습니다.";
+						mes "언제든 ^3131FF골든메이스 클랜^000000으로 돌아와. 내가 여기 있을게.";
 					} else
-						mes "An error has occurred.";
+						mes "오류가 발생했습니다.";
 				}
 			}
 			break;
@@ -478,146 +478,146 @@ OnInit:
 	end;
 }
 
-prt_in,39,114,5	script	Shaam Rumi	10027,{
+prt_in,39,114,5	script	샴 루미::Shaam Rumi	10027,{
 	cutin "sham01.bmp", 2;
-	mes "[Shaam Rumi]";
-	mes "Hi, there! I'm Shaam, master of the ^3131FFCrossbow Clan^000000";
-	mes "What can I do for you?";
+	mes "[샴 루미]";
+	mes "안녕하세요! 저는 ^3131FFC크로스보우 클랜의 마스터 샤암입니다^000000";
+	mes "무엇을 도와드릴까요?";
 	next;
-	switch( select( "Clan Information:Join.:Leave." ) ){
+	switch( select( "클랜정보:가입.:탈퇴." ) ){
 		case 1:
-			switch( select( "What are Clans?:About the Crossbow Clan:Cancel." ) ){
+			switch( select( "클랜이 뭔가요?:석궁 클랜 소개:취소." ) ){
 				case 1:
-					mes "[Shaam Rumi]";
-					mes "The Clans were established by the Rune-Midgarts Kingdom to...";
-					mes "Raffam, why were our ^3131FFclans^000000 made?";
+					mes "[샴 루미]";
+					mes "클랜은 룬-미드가르츠 왕국에 의해 설립되어 ...";
+					mes "라팜, 우리 ^3131FF클랜^000000은 왜 만들어졌나요?";
 					next;
 					cutin "laperm01.bmp", 2;
-					mes "[Raffam Oranpere]";
-					mes "Did you sleep in class? Gosh.";
-					mes "The Clans help lone adventurers connect with each other and share information.";
+					mes "[라팸 오란페레]";
+					mes "수업시간에 잤어? 세상에.";
+					mes "클랜은 고독한 모험가들이 서로 연결하고 정보를 공유하도록 돕습니다.";
 					next;
 					cutin "sham01.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "A-ha, got it! Thank you, Captain!";
-					mes "You heard that too, right?";
+					mes "[샴 루미]";
+					mes "아하, 알았어요! 고마워요, 캡틴!";
+					mes "너도 들었지?";
 					next;
-					mes "[Shaam Rumi]";
-					mes "Run by the Kingdom itself, the Clans are not allowed to participate in the Siege, but the good news is that the members are given some ^3131FFstat bonuses^000000.";
+					mes "[샴 루미]";
+					mes "왕국 자체에서 운영하는 클랜은 공성전에 참여할 수 없지만 좋은 소식은 구성원에게 ^3131FF스탯 보너스^000000가 제공된다는 것입니다.";
 					next;
-					mes "[Shaam Rumi]";
-					mes "In case you wonder if the ^3131FFCrossbow Clan^000000 only recruits Archers, no, it doesn't.";
-					mes "All the Clans accept all classes. You can choose the one that suits your needs best.";
+					mes "[샴 루미]";
+					mes "^3131FFC석궁 클랜^000000이 궁수만 모집하는지 궁금하다면, 아니요, 그렇지 않습니다.";
+					mes "모든 클랜은 모든 클래스를 받아들입니다. 당신은 당신의 필요에 가장 적합한 것을 선택할 수 있습니다.";
 					next;
 					cutin "sham02.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "That should cover everything there is to know.";
-					mes "Berman, let's go hang out in Glast Heim.";
+					mes "[샴 루미]";
+					mes "알아야 할 모든 것을 다룰 것입니다.";
+					mes "버먼, 글라스트 하임에 놀러 가자.";
 					next;
 					cutin "debon03.bmp", 2;
-					mes "[Devon Aire]";
-					mes "You...";
+					mes "[데본 에어]";
+					mes "당신...";
 					next;
 					cutin "sham03.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "Ooh, scary! You're so protective of your brother.";
+					mes "[샴 루미]";
+					mes "우, 무서워! 당신은 동생을 너무 보호하고 있어요.";
 					break;
 				case 2:
-					mes "[Shaam Rumi]";
-					mes "The ^3131FFCrossbow Clan^000000 is ideal for ranged classes.";
+					mes "[샴 루미]";
+					mes "^3131FFC석궁 클랜^000000은 원거리 클래스에 이상적입니다.";
 					next;
-					mes "[Shaam Rumi]";
-					mes "Eh, let me check the Clan manual. Ah, and we offer stat bonuses to new members: ^FF0000<DEX+1, AGI+1, MHP+30, MSP+10>^000000.";
+					mes "[샴 루미]";
+					mes "어, 클랜 매뉴얼을 확인해볼게요. 아, 그리고 우리는 신규 회원에게 능력치 보너스를 제공합니다: ^ff0000<덱스+1, 공격력+1, 마력+30, 방어력+10>^000000.";
 					next;
-					mes "[Shaam Rumi]";
-					mes "The Clans are not allowed to participate in the Siege; you should join a private guild instead for Siege.";
-					mes "The Clans are for adventurers that hate being tied down.";
+					mes "[샴 루미]";
+					mes "클랜은 공성전에 참여할 수 없습니다. 대신 공성전을 위해 개인 길드에 가입해야합니다.";
+					mes "클랜은 묶여있는 것을 싫어하는 모험가를위한 것입니다.";
 					next;
-					mes "[Shaam Rumi]";
-					mes "Do you have a question?";
+					mes "[샴 루미]";
+					mes "질문이 있으신가요?";
 					break;
 				case 3:
 					break;
 			}
 			break;
 		case 2:
-			mes "[Shaam Rumi]";
-			mes "Oh, yeah? Good choice!";
-			mes "Let's check the Clan policy then to begin admission procedures.";
+			mes "[샴 루미]";
+			mes "오, 그래요? 좋은 선택입니다!";
+			mes "그럼 클랜 정책을 확인하여 입회 절차를 시작합시다.";
 			next;
-			mes "[Shaam Rumi]";
-			mes "^3131FFClansmen^000000 cannot participate in the Siege.";
-			mes "As our new member, you'll receive the following stat bonuses: ^FF0000<DEX+1, AGI+1, MHP+30, MSP+10>^000000.";
-			mes "Do you agree?";
+			mes "[샴 루미]";
+			mes "^3131FFClansmen^000000은 공성전에 참가할 수 없습니다.";
+			mes "신규 회원은 다음과 같은 스탯 보너스를 받게됩니다: ^ff0000<덱스+1, 공격력+1, 마력+30, 방어력+10>^000000.";
+			mes "동의하십니까?";
 			next;
-			if( select( "Yes.:No." ) == 1 ){
-				mes "[Shaam Rumi]";
-				mes "You can join and leave a Clan anytime, but if you don't login for ^FF0000more than 2 weeks^000000, you'll be ^FF0000expelled^000000.";
-				mes "Do you promise you'll maintain good standing?";
+			if( select( "예.:아니오." ) == 1 ){
+				mes "[샴 루미]";
+				mes "언제든지 클랜에 가입하고 탈퇴할 수 있지만, ^FF0000주^000000일 이상 로그인하지 않으면 ^FF0000제명^000000됩니다.";
+				mes "좋은 상태를 유지할 것을 약속합니까?";
 				next;
-				if( select( "Yes.:No." ) == 1 ){
-					mes "[Shaam Rumi]";
-					mes "Good, write your name here.";
+				if( select( "예.:아니오." ) == 1 ){
+					mes "[샴 루미]";
+					mes "좋아요, 여기에 이름을 적으세요.";
 					next;
 					input .@name$;
-					mes "[Shaam Rumi]";
+					mes "[샴 루미]";
 					mes "^3131FF" + strcharinfo( 0 ) + "^000000..!";
-					mes "Ugh, your penmanship needs work. Let me process your application.";
+					mes "어, 당신의 글씨는 수정이 필요합니다. 신청서를 처리하겠습니다.";
 					next;
 					if( getcharid( 2 ) ){
-						mes "[Shaam Rumi]";
-						mes "Did you finish things up with your guild?";
-						close3;
+						mes "[샴 루미]";
+						mes "길드와의 일을 끝냈습니까?";
+						close;
 					}else if( getcharid( 5 ) != 0 ){
-						mes "[Shaam Rumi]";
-						mes "Eh, you're already in a Clan. Hey, this isn't funny.";
+						mes "[샴 루미]";
+						mes "어, 당신은 이미 클랜에 속해 있군요. 이봐, 이건 재미없어.";
 					}else{
 						if (clan_join(CROSSBOWCLAN)) {
 							sc_start2 SC_CROSSBOWCLAN, INFINITE_TICK, 0, CROSSBOWCLAN;
 							cutin "sham02.bmp", 2;
-							mes "[Shaam Rumi]";
-							mes "Welcome to the ^3131FFCrossbow Clan^000000!";
+							mes "[샴 루미]";
+							mes "^3131FFC크로스보우 클랜에 오신 것을 환영합니다^000000!";
 							next;
 							cutin "sham01.bmp", 2;
-							mes "[Shaam Rumi]";
-							mes "You can review Clan info with ^3131FFCtrl+G^000000.";
+							mes "[샴 루미]";
+							mes "^3131FFCtrl+G^000000로 클랜 정보를 확인할 수 있습니다.";
 							next;
-							mes "[Shaam Rumi]";
-							mes "Don't pick fights with other clansmen. Be social.";
-							mes "If you need help, you can always whisper me, okay? See you around!";
+							mes "[샴 루미]";
+							mes "다른 클랜원들과 싸우지 마세요. 사교적이 되십시오.";
+							mes "도움이 필요하면 언제든지 속삭여도 돼요, 알았죠? 또 보자!";
 						} else
-							mes "An error has occurred.";
+							mes "오류가 발생했습니다.";
 					}
 				}else{
-					mes "[Shaam Rumi]";
-					mes "All right then. I'm just going to go have some fun.";
+					mes "[샴 루미]";
+					mes "그럼 알았어요. 가서 놀고 올게요.";
 				}
 			}else{
-				mes "[Shaam Rumi]";
-				mes "Ah, do you need time to think about this? No problem.";
+				mes "[샴 루미]";
+				mes "아, 이것에 대해 생각할 시간이 필요하십니까? 문제 없어요.";
 			}
 			break;
 		case 3:
-			mes "[Shaam Rumi]";
-			mes "Why, did you find a better Clan?";
-			mes "I'm disappointed, but it's your call. Let me process your withdrawal.";
+			mes "[샴 루미]";
+			mes "왜, 더 나은 클랜을 찾았어?";
+			mes "실망스럽지만 당신의 결정입니다. 탈퇴를 처리하겠습니다.";
 			next;
-			if( select( "Continue.:Cancel." ) == 1 ){
+			if( select( "계속.:취소." ) == 1 ){
 				if( getcharid( 5 ) == 0 ){
 					cutin "sham04.bmp", 2;
-					mes "[Shaam Rumi]";
-					mes "I can't let you leave--you're not even in my Clan!";
+					mes "[샴 루미]";
+					mes "당신을 떠나게 할 수 없어요. 당신은 내 클랜에 속하지도 않아요!";
 				}else if( getcharid( 5 ) != CROSSBOWCLAN ){
-					mes "[Shaam Rumi]";
-					mes "Sorry, but I don't meddle with other Clans' business.";
+					mes "[샴 루미]";
+					mes "미안하지만 나는 다른 클랜의 일에 간섭하지 않습니다.";
 				}else{
 					if (clan_leave()) {
 						sc_end SC_CROSSBOWCLAN;
-						mes "[Shaam Rumi]";
-						mes "It's done.";
-						mes "If you ever miss us, don't hesitate to come back, alright?";
+						mes "[샴 루미]";
+						mes "끝났어요.";
+						mes "우리가 그리우면 주저하지 말고 다시 오세요, 알았죠?";
 					} else
-						mes "An error has occurred.";
+						mes "오류가 발생했습니다.";
 				}
 			}
 			break;

@@ -6,9 +6,9 @@
 
 //= Forgotten Valley
 //============================================================
-ba_lost,0,0	monster	Pitaya	20649,50,5000
-ba_lost,0,0	monster	Pitaya	20650,50,5000
-ba_lost,0,0	monster	Pitaya	20651,50,5000
-ba_lost,0,0	monster	Pitaya	20652,50,5000
-ba_lost,0,0	monster	Pitaya	20653,30,5000
-ba_lost,0,0,0,0	boss_monster	Boss Pitaya	20648,1,7200000,600000,0
+ba_lost,0,0	monster	피타야	20649,50,5000
+ba_lost,0,0	monster	피타야	20650,50,5000
+ba_lost,0,0	monster	피타야	20651,50,5000
+ba_lost,0,0	monster	피타야	20652,50,5000
+ba_lost,0,0	monster	피타야	20653,30,5000
+ba_lost,0,0,0,0	boss_monster	보스 야옹이	20648,1,7200000,600000,0

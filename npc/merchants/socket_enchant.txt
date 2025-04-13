@@ -30,52 +30,52 @@
 //= 2.0a Added 'disable_items' command. [Euphy]
 //============================================================
 
--	script	Seiyablem#dummy::SocketEnchant	-1,{
+-	script	세야블렘#dummy::SocketEnchant	-1,{
 	if (checkweight(1201,1) == 0)
 	{
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
-	mes "[Seiyablem]";
-	mes "I'm an engineer that specializes in adding Slots to normal Weapons and Armor.";
-	mes "My service fee, the required materials and the chance of success all depend on the specific item I'm working on.";
+	mes "[세야블렘]";
+	mes "저는 일반 무기와 방어구에 슬롯을 추가하는 일을 전문으로 하는 엔지니어입니다.";
+	mes "서비스 비용, 필요한 재료, 성공 가능성은 모두 제가 작업 중인 특정 항목에 따라 다릅니다.";
 	next;
-	mes "[Seiyablem]";
-	mes "Adding Slots may seem simple, but it's far more complicated than it looks.";
-	mes "If you're interested in my service, let me know.";
+	mes "[세야블렘]";
+	mes "슬롯을 추가하는 것은 간단해 보이지만 보기보다 훨씬 복잡합니다.";
+	mes "제 서비스에 관심이 있으시면 연락주세요.";
 	next;
-	switch(select("Add Slot to Weapon:Add Slot to Armor:Slot Attempt Info:Cancel"))
+	switch(select("무기에 슬롯 추가:방어구에 슬롯 추가:슬롯 시도 정보:취소"))
 	{
 		case 1:
-			mes "[Seiyablem]";
-			mes "You want to add a Slot to a weapon?";
-			mes "I categorize weapons by their difficulty in adding a Slot, C Class being easiest and S Class the most difficult.";
-			mes "Which class would you like to try?";
+			mes "[세야블렘]";
+			mes "무기에 슬롯을 추가하시겠습니까?";
+			mes "저는 슬롯 추가 난이도에 따라 무기를 분류하는데 C클래스가 가장 쉽고 S클래스가 가장 어렵습니다.";
+			mes "어떤 수업을 듣고 싶나요?";
 			next;
-			switch(select("C Class:B Class:A Class:S Class"))
+			switch(select("C 클래스:B 클래스:A 클래스:S 클래스"))
 			{
 				case 1:
-					mes "[Seiyablem]";
-					mes "C Class, eh?";
-					mes "Now, I can only upgrade certain equipment in that class, so please choose one of the following items, so we can try to add a Slot to it.";
+					mes "[세야블렘]";
+					mes "C클래스죠?";
+					mes "이제 해당 클래스의 특정 장비만 업그레이드할 수 있으니 다음 항목 중 하나를 선택해 슬롯을 추가해 보도록 하겠습니다.";
 					next;
-					switch(select("Trident:Rope:Violin"))
+					switch(select("삼지창:로프:바이올린"))
 					{
 						case 1: callfunc "Func_Socket",1460,1461,40,66,200,1010,10;
 						case 2: callfunc "Func_Socket",1950,1951,40,66,200,1010,10;
 						case 3: callfunc "Func_Socket",1901,1902,40,66,200,1010,10;
 					}
 				case 2:
-					mes "[Seiyablem]";
-					mes "B Class?";
-					mes "Alright, this is the average equipment category.";
-					mes "Please choose the weapon to which you'd like me to try to add a Slot.";
+					mes "[세야블렘]";
+					mes "B등급?";
+					mes "알겠습니다. 일반적인 장비 카테고리입니다.";
+					mes "슬롯을 추가할 무기를 선택해주세요.";
 					next;
-					switch(select("Chain:Gladius:Gakkung Bow:Pike:Haedonggum:Lute:Wire:Waghnakh:Arbalest Bow"))
+					switch(select("체인:글라디우스:각궁활:창:해동검:류트:철사:와그나크:석궁"))
 					{
 						case 1: callfunc "Func_Socket",1519,1520,40,61,300,1010,10;
 						case 2: callfunc "Func_Socket",1219,1220,40,61,300, 984, 1,999,5;
@@ -88,12 +88,12 @@
 						case 9: callfunc "Func_Socket",1713,1715,40,61,300, 984, 2,999,5;
 					}
 				case 3:
-					mes "[Seiyablem]";
-					mes "Ooh, A Class.";
-					mes "This is some high risk territory!";
-					mes "Alright, which weapon would you like me to try adding a Slot?";
+					mes "[세야블렘]";
+					mes "아, A클래스.";
+					mes "여기는 위험도가 높은 지역이에요!";
+					mes "알겠습니다. 어떤 무기에 슬롯을 추가해 드릴까요?";
 					next;
-					switch(select("Hunter Bow:Survivor's Rod(INT):Zweihander:Flamberge:Infiltrator:Ballista:Stunner:Berserk:Claymore"))
+					switch(select("헌터 보우:생존자의 막대(INT):츠바이핸더:플랑베르주:침입자:발리스타:멋진 것:맹렬한:클레이모어"))
 					{
 						case 1: callfunc "Func_Socket",1718,1726,40,61,500,984,2,999,10;
 						case 2: callfunc "Func_Socket",1619,1620,40,61,500,984,5,999,10;
@@ -106,13 +106,13 @@
 						case 9: callfunc "Func_Socket",1163,1172,40,61,500,984,2,999,10; // NPC says "5 Oridecon" (Aegis) but takes only 2
 					}
 				case 4:
-					mes "[Seiyablem]";
-					mes "Whoa, whoa, whoa...";
-					mes "S class? Alright...";
-					mes "It'd be a near miracle if I can actually pull this off.";
-					mes "Okay... Which weapon shall we try adding a Slot to?";
+					mes "[세야블렘]";
+					mes "워,워,워...";
+					mes "S급? 알겠습니다...";
+					mes "실제로 이걸 해낼 수 있다면 기적에 가까운 일이겠죠.";
+					mes "그럼... 어떤 무기에 슬롯을 추가해볼까?";
 					next;
-					switch(select("Gungnir:Poison Knife:Ice Pick:Sucsamad:Ginnungagap:Cutlas:Crescent Scythe:Survivor's Rod(DEX)"))
+					switch(select("궁니르:독칼:얼음 곡괭이:숙사마드:긴눙가가프:커틀라스:초승달낫:생존자의 지팡이(DEX)"))
 					{
 						case 1: callfunc "Func_Socket", 1413, 1418,40,51,1000,984,5,999,10;
 						case 2: callfunc "Func_Socket", 1239,13016,40,51,1000,984,5,999,10;
@@ -125,22 +125,22 @@
 					}
 			}
 		case 2:
-			mes "[Seiyablem]";
-			mes "Armor, you said?";
-			mes "Sure, no problem.";
-			mes "Armor is divided into 4 different classes, depending on the work difficulty.";
-			mes "C Class is the easiest one, and S Class he hardest one.";
-			mes "Which class would you like to try?";
+			mes "[세야블렘]";
+			mes "갑옷이라고 했나?";
+			mes "그렇습니다. 문제없습니다.";
+			mes "방어구는 작업 난이도에 따라 4가지 등급으로 나누어집니다.";
+			mes "C클래스가 가장 쉽고, S클래스가 가장 어렵습니다.";
+			mes "어떤 수업을 듣고 싶나요?";
 			next;
-			switch(select("C Class:B Class:A Class:S Class"))
+			switch(select("C 클래스:B 클래스:A 클래스:S 클래스"))
 			{
 				case 1:
-					mes "[Seiyablem]";
-					mes "C Class Armor, eh?";
-					mes "Sounds reasonable.";
-					mes "Which armor would you like to try adding a Slot?";
+					mes "[세야블렘]";
+					mes "C급 방어구죠?";
+					mes "합리적인 것 같네요.";
+					mes "어떤 방어구에 슬롯을 추가하시겠습니까?";
 					next;
-					switch(select("Mantle:Coat:Circlet:Biretta"))
+					switch(select("맨틀:코트:서클릿:비레타"))
 					{
 						case 1: callfunc "Func_Socket",2307,2308,40,66,200,999,3;
 						case 2: callfunc "Func_Socket",2309,2310,40,66,200,999,3;
@@ -148,11 +148,11 @@
 						case 4: callfunc "Func_Socket",2216,2217,40,66,200,999,3;
 					}
 				case 2:
-					mes "[Seiyablem]";
-					mes "You have chosen average B Class.";
-					mes "So, what kind of armor do you have?";
+					mes "[세야블렘]";
+					mes "보통 B클래스를 선택하셨습니다.";
+					mes "그럼 어떤 갑옷을 갖고 계시나요?";
 					next;
-					switch(select("Mirror Shield:Chain Mail:Saint Robe:Silk Robe:Boots:Shoes:Muffler:Guard:Buckler:Shield:Bongun Hat"))
+					switch(select("거울방패:체인메일:성녀의 로브:실크 로브:부츠:신발:머플러:가드:버클러:방패:봉운모자"))
 					{
 						case 1:  callfunc "Func_Socket",2107,2108,40,61,250,999,5;
 						case 2:  callfunc "Func_Socket",2314,2315,40,61,250,999,5;
@@ -167,12 +167,12 @@
 						case 11: callfunc "Func_Socket",5046,5168,40,61,250,999,5;
 					}
 				case 3:
-					mes "[Seiyablem]";
-					mes "Ooh, A Class.";
-					mes "This is some high risk territory!";
-					mes "Alright, which armor would you like me to try adding a Slot?";
+					mes "[세야블렘]";
+					mes "아, A클래스.";
+					mes "여기는 위험도가 높은 지역이에요!";
+					mes "알겠습니다. 어떤 방어구에 슬롯을 추가해 드릴까요?";
 					next;
-					switch(select("Gemmed Sallet:Bucket Hat:Memory Book:Tights:Legion Plate Armor:Full Plate:Thief Clothes:Greaves:Coif:Manteau:Helm:Ninja Suit:Orc Helm:Ancient Cape:Monk Hat:Golden Gear:Brooch:Munak Hat"))
+					switch(select("보석 덧신:양동이 모자:기억의 책:스타킹:군단 판금 방어구:풀 플레이트:도둑 옷:경화:코이프:망토:투구:닌자 슈트:오크 투구:고대 망토:몽크 모자:황금 장비:브로치:무낙 모자"))
 					{
 						case 1:  callfunc "Func_Socket",2230,2231,40,61,400,985,1;
 						case 2:  callfunc "Func_Socket",5114,5120,40,61,400,985,1;
@@ -194,12 +194,12 @@
 						case 18: callfunc "Func_Socket",2264,5167,40,61,300,985,1;
 					}
 				case 4:
-					mes "[Seiyablem]";
-					mes "Um... S Class?";
-					mes "You sure about this?";
-					mes "Alright... Let me know the Armor to which you'd like to add a Slot, and I'll tell what I need to try it.";
+					mes "[세야블렘]";
+					mes "음... S급?";
+					mes "이거 확실해요?";
+					mes "알겠습니다... 슬롯을 추가하고 싶은 방어구를 알려주시면, 어떤 방어구를 시도해야 할지 알려드리겠습니다.";
 					next;
-					switch(select("Majestic Goat:Spiky Band:Bone Helm:Corsair:Crown:Tiara:Sphinx Hat:Robe of Cast:Earring:Ring:Bow Thimble"))
+					switch(select("장엄한 염소:뾰족한 고리:뼈 투구:해적:왕관:티아라:스핑크스 모자:시전의 로브:귀걸이:반지:활 골무"))
 					{
 						case 1:  callfunc "Func_Socket",2256,5160,40,51,2000,985,2;
 						case 2:  callfunc "Func_Socket",2258,5161,40,51,2000,985,2;
@@ -215,33 +215,33 @@
 					}
 			}
 		case 3:
-			mes "[Seiyablem]";
-			mes "Well, I haven't really refined the art of Slot Addition.";
-			mes "It's so complicated that I'd be lying if I told you that I knew every factor that affected the process.";
-			mes "Still, I do notice a few trends...";
+			mes "[세야블렘]";
+			mes "글쎄요, 저는 슬롯 추가 기술을 아직 다듬지 않았습니다.";
+			mes "너무 복잡해서 과정에 영향을 미치는 모든 요소를 ??알고 있다고 말하면 거짓말이 될 것입니다.";
+			mes "그래도 몇 가지 추세는 눈에 띕니다...";
 			next;
-			mes "[Seiyablem]";
-			mes "In some towns, Slot addition attempts are more successful for equipment with fewer upgrades.";
-			mes "In other towns, the opposite is true.";
-			mes "isn't that really peculiar?";
+			mes "[세야블렘]";
+			mes "어떤 마을에서는 업그레이드 횟수가 적은 장비의 슬롯 추가 시도가 더 성공적입니다.";
+			mes "다른 동네는 그 반대예요.";
+			mes "정말 특이하지 않나요?";
 			next;
-			mes "[Seiyablem]";
-			mes "Oh, there's also something really important that you should know.";
-			mes "If you ask me to add a Slot to something, make sure that you don't have multiples of it in your inventory.";
+			mes "[세야블렘]";
+			mes "아, 그리고 꼭 알아야 할 중요한 사실이 있어요.";
+			mes "무언가에 슬롯을 추가하라고 하면 인벤토리에 슬롯이 여러 개 있지 않은지 확인하세요.";
 			next;
-			mes "[Seiyablem]";
-			mes "Here's an example: if you have a +7 Manteau and a normal Manteau in your inventory, then I will randomly pick one of them for my Slot Addition attempt.";
-			mes "Just remember to be careful.";
+			mes "[세야블렘]";
+			mes "예를 들면, 인벤토리에 7개의 망토와 일반 망토가 있다면 슬롯 추가 시도를 위해 그 중 하나를 무작위로 선택하겠습니다.";
+			mes "조심하세요.";
 			next;
-			mes "[Seiyablem]";
-			mes "Again, ^FF0000only carry one of the equipment to which you want me to add a Slot^000000.";
-			mes "All other equipment with the same name should be placed in your Kafra Storage, got it?";
+			mes "[세야블렘]";
+			mes "다시 한번 말하지만 ^FF0000슬롯을 추가하길 원하는 장비 중 하나만 가지고 다니세요^000000.";
+			mes "동일한 이름을 가진 다른 장비들은 모두 카프라 창고에 넣어야겠죠?";
 			close;
 		case 4:
-			mes "[Seiyablem]";
-			mes "Take it easy, adventurer.";
-			mes "If you ever want to try adding a Slot to some of your equipment, come back and let me know.";
-			mes "Seeya~";
+			mes "[세야블렘]";
+			mes "진정하세요, 모험가님.";
+			mes "장비에 슬롯을 추가하고 싶으시면 다시 오셔서 알려주세요.";
+			mes "봐요~";
 			close;
 	}
 }
@@ -253,47 +253,47 @@ function	script	Func_Socket	{
 	setarray .@req_amount[0], getarg(6), getarg(8,0);
 
 	disable_items;
-	mes "[Seiyablem]";
-	mes "You want to add a Slot to a "+ getitemname(.@item_id) +"?";
-	mes "Alright, please bring me ^FF0000"+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +"^000000, "+ (.@item_req[1] != 0 && .@req_amount[1] != 0 ? ("^FF0000"+ .@req_amount[1] +" "+ getitemname(.@item_req[1]) + (.@req_amount[1] > 1 && .@item_req[1] != 999 ? "s":"") + "^000000 ") : "") + "and my ^FF0000" + (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 zeny^000000 service fee.";
-	mes "Ah, and don't forget to bring that "+ getitemname(.@item_id) +"!";
+	mes "[세야블렘]";
+	mes "슬롯을 추가하고 싶습니다."+ getitemname(.@item_id) +"?";
+	mes "알았어 ^FF0000을 가져다줘"+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +"^000000, "+ (.@item_req[1] != 0 && .@req_amount[1] != 0 ? ("^FF0000"+ .@req_amount[1] +" "+ getitemname(.@item_req[1]) + (.@req_amount[1] > 1 && .@item_req[1] != 999 ? "s":"") + "^000000 ") : "") + "그리고 내게 ^FF0000" + (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 zeny^000000 서비스 수수료.";
+	mes "아, 그리고 그거 가져오는 것도 잊지 마세요"+ getitemname(.@item_id) +"!";
 	next;
-	mes "[Seiyablem]";
+	mes "[세야블렘]";
 	if (getiteminfo(.@item_id, ITEMINFO_LOCATIONS) & EQP_HAND_R) // weapon
 	{
-		mes "I can try to add a slot now if you have the required items and zeny.";
-		mes "However, you should know that there's a chance that I might fail.";
-		mes "Therefore, I need to give you a fair warning...";
+		mes "필요한 아이템과 제니가 있다면 이제 슬롯을 추가해 볼 수 있습니다.";
+		mes "하지만 제가 실패할 확률도 있다는 걸 아셔야 해요.";
+		mes "그래서 정당한 경고를 드리고 싶은데요...";
 		next;
-		mes "[Seiyablem]";
-		mes "If this attempt to add a Slot to your Weapon fails, then the ^FF0000Weapon^000000, ^FF0000and any Cards compounded to it will be destroyed^000000.";
+		mes "[세야블렘]";
+		mes "무기에 슬롯을 추가하려는 시도가 실패하면 ^FF0000무기^000000, ^FF0000및 여기에 결합된 모든 카드가 ^000000 파괴됩니다.";
 	}
 	else // armor
 	{
-		mes "If you have all the required materials, my zeny service fee and the Armor, then we can go ahead with the Slot Addition attempt.";
-		mes "But before that, I must warn you of the risk.";
+		mes "필요한 재료와 제니 서비스 비용, 방어구가 모두 준비되어 있다면 슬롯 추가를 진행해 보세요.";
+		mes "하지만 그 전에 위험에 대해 경고해야겠습니다.";
 		next;
-		mes "[Seiyablem]";
-		mes "If this attempt to add a Slot to your Armor fails, then the ^FF0000Armor^000000, ^FF0000it's upgrades^000000 ^FF0000and any Cards compounded to it will be destroyed^000000.";
+		mes "[세야블렘]";
+		mes "방어구에 슬롯을 추가하려는 시도가 실패하면 ^FF0000방어구^000000, ^FF0000그것의 업그레이드^000000 ^FF0000및 여기에 결합된 모든 카드가 파괴됩니다^000000.";
 	}
-	mes "Do you still want to try to add a Slot?";
+	mes "아직도 슬롯을 추가하시겠습니까?";
 	next;
-	switch(select("Attempt Slot Addition:Cancel"))
+	switch(select("슬롯 추가 시도:취소"))
 	{
 		case 1:
 			if ((Zeny >= .@zeny_req*1000) && countitem(.@item_req[0]) >= .@req_amount[0] && countitem(getarg(7,512)) >= .@req_amount[1] && countitem(.@item_id) > 0)// if there's no getarg(7) and getarg(8) provided, check itemcount against 0 (we still need a valid item ID though)
 			{
-				mes "[Seiyablem]";
-				mes "Alright then, let the work begin!";
-				mes "You'd better pray for a successful result.";
+				mes "[세야블렘]";
+				mes "자, 그럼 작업을 시작하겠습니다!";
+				mes "성공적인 결과를 위해 기도하는 것이 좋겠습니다.";
 				next;
 				set .@a, rand(1,100);
 				if ((.@a > getarg(2)) && (.@a < getarg(3)))
 				{
 					specialeffect getarg(3) == 51 ? EF_LORD : EF_SANCTUARY; // only S Class items have Lord of Vermillion effect
-					mes "[Seiyablem]";
-					mes "Great, it seems to be successful.";
-					mes "It looks pretty well done. Congratulations!";
+					mes "[세야블렘]";
+					mes "좋아요, 성공한 것 같아요.";
+					mes "정말 잘 된 것 같아요. 축하드려요!";
 					delitem .@item_id,1;
 					delitem .@item_req[0],.@req_amount[0];
 					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
@@ -301,68 +301,68 @@ function	script	Func_Socket	{
 					Zeny = Zeny - .@zeny_req *1000;
 					getitem getarg(1),1;
 					next;
-					mes "[Seiyablem]";
-					mes "See you again, buddy!";
+					mes "[세야블렘]";
+					mes "또 만나요 ??친구!";
 					close;
 				}
 				else
 				{
 					specialeffect EF_SUI_EXPLOSION;
-					mes "[Seiyablem]";
-					mes "Wah! ...I am so sorry, it failed.";
-					mes "However, I am completely innocent.";
-					mes "This is your luck, and it is destined by god, okay?";
-					mes "Don't be so disappointed, and try next time.";
+					mes "[세야블렘]";
+					mes "와! ...정말 미안해요, 실패했어요.";
+					mes "그러나 나는 전혀 결백합니다.";
+					mes "이건 네 행운이고 신이 정한 거야, 알았지?";
+					mes "너무 실망하지 마시고 다음에 도전해보세요.";
 					delitem .@item_id,1;
 					delitem .@item_req[0],.@req_amount[0];
 					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
 						delitem .@item_req[1],.@req_amount[1];
 					Zeny = Zeny - .@zeny_req *1000;
 					next;
-					mes "[Seiyablem]";
-					mes "I wish you good luck next time!";
+					mes "[세야블렘]";
+					mes "다음번에도 행운을 빌어요!";
 					close;
 				}
 			}
 			else
 			{
-				mes "[Seiyablem]";
-				mes "I'd like to go ahead with this Slot Addition attempt, but you're missing a few things.";
-				mes "You sure that you have the equipment, required materials and the zeny?";
+				mes "[세야블렘]";
+				mes "이번 슬롯 추가를 진행하고 싶은데 몇 가지 빠진 것이 있습니다.";
+				mes "장비와 필요한 재료, 제니가 확실합니까?";
 				close;
 			}
 		case 2:
-			mes "[Seiyablem]";
-			mes "Need some time to think about it, huh?";
-			mes "Alright, I can understand.";
-			mes "Just remember that life's no fun if you're always playing it safe~";
+			mes "[세야블렘]";
+			mes "생각해볼 시간이 좀 필요한 거겠죠?";
+			mes "알겠습니다. 알겠습니다.";
+			mes "항상 안전하게 살면 인생은 재미없다는 걸 기억하세요~";
 			close;
 	}
 }
 
-payon,140,151,5	duplicate(SocketEnchant)	Seiyablem#pay	84
-lhz_in02,281,35,5	duplicate(SocketEnchant)	Seiyablem#lhz	84
-prt_in,33,70,5	duplicate(SocketEnchant)	Seiyablem#prt	84
-morocc,51,41,4	duplicate(SocketEnchant)	Seiyablem#moc	84
+payon,140,151,5	duplicate(SocketEnchant)	세야블렘#pay	84
+lhz_in02,281,35,5	duplicate(SocketEnchant)	세야블렘#lhz	84
+prt_in,33,70,5	duplicate(SocketEnchant)	세야블렘#prt	84
+morocc,51,41,4	duplicate(SocketEnchant)	세야블렘#moc	84
 
--	script	Young Man#dummy::SocketMan	-1,{
-	mes "[Young Man]";
-	mes "I'm considering becoming a Slotting Engineer.";
-	mes "It's a new field where you can add Slots to equipment, and it'd be cool if I can work in such a lucrative career.";
+-	script	동네청년#dummy::SocketMan	-1,{
+	mes "[동네청년]";
+	mes "저는 슬로팅 엔지니어가 되는 것을 고려하고 있습니다.";
+	mes "장비에 슬롯을 추가할 수 있는 새로운 분야인데, 이렇게 수익성이 좋은 직업에서 일할 수 있다면 정말 좋을 것 같아요.";
 	next;
-	mes "[Young Man]";
-	mes "There's a huge element of luck involved in successfully adding Slots from what I can understand.";
-	mes "You fail sometimes, but if you're super lucky, you can add two Slots.";
-	mes "Crazy. Huh?";
+	mes "[동네청년]";
+	mes "내가 이해할 수 있는 한 슬롯을 성공적으로 추가하는 데에는 엄청난 행운의 요소가 관련되어 있습니다.";
+	mes "가끔 실패하기도 하지만 운이 좋으면 슬롯을 두 개 추가할 수 있습니다.";
+	mes "미쳤어. 응?";
 	next;
-	mes "[Young Man]";
-	mes "But don't get too excited.";
-	mes "Only certain equipment can handle the addition of two extra Slots.";
-	mes "There's so much more I have to learn before I can even be an apprentice...";
+	mes "[동네청년]";
+	mes "하지만 너무 흥분하지 마세요.";
+	mes "특정 장비만이 추가 슬롯 2개를 추가할 수 있습니다.";
+	mes "견습생이 되기 전에 배워야 할 것이 너무 많습니다...";
 	close;
 }
 
-prt_in,31,57,1	duplicate(SocketMan)	Young Man#prt	97
-payon,143,143,7	duplicate(SocketMan)	Young Man#pay	97
-morocc,60,42,3	duplicate(SocketMan)	Young Man#moc	97
-lhz_in02,269,33,5	duplicate(SocketMan)	Young Man#lhz	97
+prt_in,31,57,1	duplicate(SocketMan)	동네청년#prt	97
+payon,143,143,7	duplicate(SocketMan)	동네청년#pay	97
+morocc,60,42,3	duplicate(SocketMan)	동네청년#moc	97
+lhz_in02,269,33,5	duplicate(SocketMan)	동네청년#lhz	97

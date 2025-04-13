@@ -24,7 +24,7 @@ brasilis,96,50,8,8	monster	Strange Hydra	2081,5,5000
 //==================================================
 // Alberta Ship, Swapping the Deck
 //==================================================
-alb_ship,0,0	monster	Strange Mouse	2057,25
+alb_ship,0,0	monster	¿ÃªÛ«— ¡„	2057,25
 
 //==================================================
 // Prontera, Training Dummy Area (removed)
@@ -35,3 +35,4 @@ alb_ship,0,0	monster	Strange Mouse	2057,25
 // prontera,259,66	monster	Dummy Lv100	2410,1,5000
 // prontera,251,55	monster	Dummy Lv150	2411,1,5000
 // prontera,259,55	monster	Dummy Lv150	2411,1,5000
+

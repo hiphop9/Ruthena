@@ -1,56 +1,32 @@
 //===== rAthena Script ======================================= 
 //= Rogue Job Quest
 //===== By: ================================================== 
-//= kobra_k88
-//===== Current Version: ===================================== 
-//= 2.9
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Job quest for Rogue classes
-//===== Additional Comments: ================================= 
-//= 2.4 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
-//=     No longer uses function "F_BlockHigh"
-//= 2.4a Deleted unused variables. [Samuray22]
-//= 2.4b Changed a Problem with JobLevel what made 
-//=     impossible get a Gladius [3]. (bugreport:481) [Samuray22]
-//= 2.4c Corrected a Typo error ";;" and a typo error with "rouge". (bugreport:909) [Samuray22]
-//= 2.5 Added dummy "OnMyMobDead" labels. (bugreport:1100) [L0ne_W0lf]
-//= 2.6 Fixed a few bugs in the Rogue Guildsman. [L0ne_W0lf]
-//= 2.7 Fixed a bug on Markie question 5, bugreport:1600 [Brainstorm]
-//= 2.8 Moved "Thug" to Morocc Ruins. [L0ne_W0lf]
-//= 2.9 Added Quest Log commands. [Kisuka]
+//한글번역 스카이러브
 //============================================================ 
 
-moc_ruins,86,103,1	script	Thug#rg	118,{
-	mes "[Thug]";
-	mes "*Sigh...*";
-	mes "What is life?";
-	mes "And what use";
-	mes "is money? ...Damn.";
-	mes "Damn this worthless life!";
+moc_ruins,87,103,1	script	불량해보이는 청년#rg	118,{
+	mes "[불량해보이는 청년]";
+	mes "에휴. 인생아. 돈아. 제길...이 더러운";
+	mes "놈의 세상!";
 	next;
-	mes "[Thug]";
-	mes "Hey, kid.";
-	mes "What the hell";
-	mes "are you lookin' at?";
+	mes "[불량해보이는 청년]";
+	mes "제길...씨..넌 뭘봐!";
 	next;
-	if (select("Me? N-nothing!':........") == 1) {
-		mes "[Thug]";
-		mes "Then get the";
-		mes "hell out of my face!";
-		mes "Didn't you hear me?";
-		mes "Get lost!";
+	if (select("아니.. 그냥.:........") == 1) {
+		mes "[불량해보이는 청년]";
+		mes "저리 가! 귀찮아. 짜증나!";
 		close;
 	}
-	mes "[Thug]";
-	mes "Hmmm...";
-	mes "Maybe I'll swing by the ^0000FFRogue Guild^000000 in ^0000FFParos Lighthouse^000000...";
+	mes "[불량해보이는 청년]";
+	mes "에이... 나도 ^0000FF파로스 등대섬^000000에 있다는";
+	mes "^0000FF로그 길드^000000에나 가 볼까...";
 	next;
-	mes "[Thug]";
-	mes "I needz my money,";
-	mes "and they best have it...";
+	mes "[불량해보이는 청년]";
+	mes "이놈이나 저놈이나 하나같이 다들";
+	mes "'정의,정의,정의' !!";
+	next;
+	mes "[불량해보이는 청년]";
+	mes "나는 내가 살고 싶은대로 살꺼야!";
 	close;
 }
 

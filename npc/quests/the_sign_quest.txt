@@ -2559,7 +2559,7 @@ payon_in03,11,31,4	script	Daewoon#sign	808,{
 }
 
 aldeba_in,139,103,5	script	Monograph#sign	111,{
-	mes "[Sir Jore]";
+	mes "[요르님]";
 	mes "Uwah~!";
 	mes "Stop reading my";
 	mes "research monograph!";
@@ -2567,131 +2567,131 @@ aldeba_in,139,103,5	script	Monograph#sign	111,{
 	close;
 }
 
-aldeba_in,155,101,3	script	Sir Jore#sign	805,7,7,{
+aldeba_in,155,101,3	script	요르님#sign	805,7,7,{
 	callfunc "F_UpdateSignVars";
 	if ((gettime(DT_HOUR) > 16) && (gettime(DT_HOUR) < 22)) {
 		if (sign_q == 15) {
 			mes "["+ strcharinfo(0) +"]";
-			mes "Excuse me...";
+			mes "죄송합니다...";
 			next;
 			emotion ET_HUK;
-			mes "^313FFF*Clink*^000000";
+			mes "^313FFF*땡그랑 소리*^000000";
 			next;
-			mes "[Sir Jore]";
+			mes "[요르님]";
 			mes "...";
 			mes "......";
 			next;
 			emotion ET_PROFUSELY_SWEAT;
-			mes "[Sir Jore]";
+			mes "[요르님]";
 			mes "...";
 			mes "......";
-			mes "...No!";
-			mes "Look what";
-			mes "you made me do!";
+			mes "...안돼!";
+			mes "뭐야?";
+			mes "너 때문에 그랬어!";
 			next;
 			emotion ET_CRY;
-			mes "[Sir Jore]";
-			mes "I've been fiddling";
-			mes "with this sample for";
-			mes "five hours. And now";
-			mes "it's ruined! ^333333*Sob*^000000";
+			mes "[요르님]";
+			mes "난 장난을 쳤어";
+			mes "이 샘플을 사용하여";
+			mes "5시간. 그리고 지금";
+			mes "망가졌어! ^333333*Sob*^000000";
 			next;
 			emotion ET_CRY;
-			mes "[Sir Jore]";
+			mes "[요르님]";
 			mes "^333333*Sob*^000000";
-			mes "I came to this town";
-			mes "so I could focus on";
-			mes "my research without";
-			mes "any interruptions. So";
-			mes "why are you here?";
+			mes "나는 이 마을에 왔다";
+			mes "집중할 수 있도록";
+			mes "내 연구는 없이";
+			mes "어떤 중단이라도. 그래서";
+			mes "왜 여기 있어?";
 			next;
-			switch(select("Daewoon sent me.:Oops, sorry. Later~")) {
+			switch(select("대운님이 보내주셨어요.:앗, 죄송해요. 나중에~")) {
 			case 1:
 				emotion ET_SWEAT;
-				mes "[Sir Jore]";
-				mes "O-oh!";
-				mes "That's right.";
-				mes "You're here to be";
-				mes "tested for the piece";
-				mes "of the Sobbing Starlight.";
+				mes "[요르님]";
+				mes "오오!";
+				mes "맞아요.";
+				mes "당신은 여기 존재합니다";
+				mes "부분에 대한 테스트를 거쳤습니다";
+				mes "흐느끼는 별빛의.";
 				next;
 				emotion ET_PROFUSELY_SWEAT;
-				mes "[Sir Jore]";
-				mes "So...";
-				mes "Er. Then, what...";
-				mes "W-what's your name?";
+				mes "[요르님]";
+				mes "그럼...";
+				mes "어. 그럼 뭐...";
+				mes "여- 이름이 뭐예요?";
 				next;
-				select(strcharinfo(0) +", thanks.");
-				mes "[Sir Jore]";
-				mes "N-nice to meet you.";
-				mes "My name is Jore. Just";
-				mes "a normal person who loves";
-				mes "research. S-sorry if I seem";
-				mes "a little nervous! I'm actually";
-				mes "quite... shy around people.";
+				select(strcharinfo(0) +", 감사해요.");
+				mes "[요르님]";
+				mes "아-만나서 반가워요.";
+				mes "제 이름은 조레예요. 그냥";
+				mes "사랑하는 평범한 사람";
+				mes "연구. 아, 그런 것 같으면 미안해요";
+				mes "좀 긴장돼요! 사실은 좀 긴장돼요";
+				mes "아주... 사람들 앞에서는 수줍음이 많아요.";
 				next;
-				mes "[Sir Jore]";
-				mes "Oh no...!";
-				mes "If you were able to";
-				mes "find me, there will be";
-				mes "others! When would I get";
-				mes "the time to do my research?!";
-				mes "N-no! I h-h-hate people!!";
+				mes "[요르님]";
+				mes "아, 안돼...!";
+				mes "할 수 있었다면";
+				mes "나를 찾으세요, 있을 거예요";
+				mes "다른 사람들! 언제 받을 수 있나요?";
+				mes "조사할 시간이군요?!";
+				mes "안-안돼! 난 사람이 으-으- 싫어!!";
 				next;
-				mes "[Sir Jore]";
-				mes "Still, I did promise";
-				mes "M-M-Metz and he is my";
-				mes "friend. So I must accept";
-				mes "some guests. Even if hundreds";
-				mes "of them knock on my door...";
+				mes "[요르님]";
+				mes "그래도 약속은 했어요";
+				mes "음-음-메츠 그리고 그는 내꺼야";
+				mes "친구. 그러니 받아들여야 해";
+				mes "몇몇 손님. 비록 수백명이라도";
+				mes "그들 중 내 집 문을 두드리네...";
 				next;
-				mes "[Sir Jore]";
-				mes "But first of all,";
-				mes "I'm going to need";
-				mes "a new research sample.";
-				mes "I think it's only fair that";
-				mes "you get it for me since you";
-				mes "made me ruin the last one.";
+				mes "[요르님]";
+				mes "하지만 우선,";
+				mes "필요할 것 같아요";
+				mes "새로운 연구 샘플입니다.";
+				mes "그게 공평하다고 생각해요";
+				mes "당신이 나한테 선물을 주었으니까요";
+				mes "마지막 것을 망치게 만들었어요.";
 				next;
-				mes "[Sir Jore]";
-				mes "N-now, d-don't worry.";
-				mes "The items are actually";
-				mes "quite easy to get. It's";
-				mes "five hours part that's";
-				mes "hard. Now, let's see...";
+				mes "[요르님]";
+				mes "그-이제, 걱정하지 마세요.";
+				mes "항목은 실제로 있습니다";
+				mes "아주 쉽게 구할 수 있어요. 그렇죠";
+				mes "그건 5시간 분량이야";
+				mes "힘들다. 자, 어디 보자...";
 				next;
 				set sign_q,16;
-				mes "[Sir Jore]";
-				mes "Just bring me";
-				mes "10 Empty Test Tubes,";
-				mes "10 Green Herbs and";
-				mes "2 Yggdrasil Leafs.";
+				mes "[요르님]";
+				mes "그냥 데려가세요";
+				mes "빈 시험관 10개,";
+				mes "10가지 녹색 허브와";
+				mes "2개의 이그드라실 잎.";
 				next;
-				mes "[Sir Jore]";
-				mes "You see, l-lately I've";
-				mes "been studying Biology. ";
-				mes "I think the secret to life";
-				mes "can be found in the Leaf of";
-				mes "Yggdrasil. They can be used";
-				mes "to revive the dead, after all.";
+				mes "[요르님]";
+				mes "알다시피, 최근에는 그랬어요";
+				mes "생물학을 공부하고 있어요.";
+				mes "인생의 비결은 내 생각에";
+				mes "의 잎사귀에서 찾을 수 있습니다";
+				mes "위그드라실. 사용할 수 있어요";
+				mes "결국 죽은자를 살리기 위해서입니다.";
 				next;
 				emotion ET_SWEAT;
-				mes "[Sir Jore]";
-				mes "Oh, and make sure to";
-				mes "bring those things to me";
-				mes "me before I go to bed at";
-				mes "precisely 10:00 PM PST.";
-				mes "I do have a regular sleeping";
-				mes "schedule, you know.";
+				mes "[요르님]";
+				mes "아, 그리고 꼭 하세요";
+				mes "그런 것들을 나에게 가져오세요";
+				mes "잠들기 전의 나";
+				mes "정확히 오후 10시(PST)입니다.";
+				mes "나는 규칙적으로 잠을 잔다";
+				mes "일정이요.";
 				close;
 			case 2:
 				emotion ET_CRY;
-				mes "[Sir Jore]";
-				mes "I spent five hours";
-				mes "observing the changes";
-				mes "in that research sample.";
-				mes "All of that hard work lost!";
-				mes "^333333*Wah~!*^000000";
+				mes "[요르님]";
+				mes "5시간을 보냈어요";
+				mes "변화를 관찰하는 중";
+				mes "해당 연구 샘플에 포함되어 있습니다.";
+				mes "그동안의 노력이 모두 사라졌어요!";
+				mes "^333333*와~!*^000000";
 				close;
 			}
 		}
@@ -2702,225 +2702,250 @@ aldeba_in,155,101,3	script	Sir Jore#sign	805,7,7,{
 				delitem 511,10; //Green_Herb
 				set sign_q,17;
 				emotion ET_THANKS;
-				mes "[Sir Jore]";
-				mes "Ah! Th-thank you for";
-				mes "bringing what I need.";
-				mes "Now I can continue my";
-				mes "research. Oh, and see if";
-				mes "you're worthy of obtaining";
-				mes "the Sobbing Starlight.";
+				mes "[요르님]";
+				mes "아! 고마워요";
+				mes "필요한 것을 가져오세요.";
+				mes "이제 계속할 수 있어요";
+				mes "조사해 보세요. 아, 그리고 혹시나 확인해보세요";
+				mes "당신은 얻을 가치가 있어요";
+				mes "흐느끼는 별빛.";
 				next;
-				mes "[Sir Jore]";
-				mes "Now, for your assignment.";
-				mes "Have you ever heard about";
-				mes "the ^CE3131Stone of Sage^000000? Rumors about";
-				mes "it have been spreading around, but no one has confirmed the truth about it, "+ strcharinfo(0) +".";
+				mes "[요르님]";
+				mes "이제 임무를 수행하세요.";
+				mes "들어본 적 있나요?";
+				mes "^CE3131현자의 돌^000000? 소문이 돌죠";
+				mes "그것이 널리 퍼지고 있지만 아무도 그것에 대한 진실을 확인하지 않았습니다. "+ strcharinfo(0) +".";
 				next;
-				mes "[Sir Jore]";
-				mes "Although I have no clue";
-				mes "what the Stone of S-S-age";
-				mes "may actually be, I have a gut";
-				mes "feeling that I need it to bring";
-				mes "my Biology research to the next step. This is how you'll help me.";
+				mes "[요르님]";
+				mes "아무것도 모르지만";
+				mes "S-S-age의 돌은 무엇인가";
+				mes "실제로 그럴지도 모르지만, 나는 직감이 있어요";
+				mes "가져와야 할 것 같은 느낌";
+				mes "나의 생물학 연구는 다음 단계로 나아갑니다. 이것이 당신이 나를 도울 수 있는 방법입니다.";
 				next;
 				set sign_q,17;
-				mes "[Sir Jore]";
-				mes "I need you to investigate";
-				mes "this Stone of Sage by finding";
-				mes "a father and daughter who were";
-				mes "famous for being great Alchemists. They vanished deep into a forest, but I believe they know something.";
+				mes "[요르님]";
+				mes "조사 좀 해주세요";
+				mes "현자의 돌을 찾아서";
+				mes "아버지와 딸";
+				mes "훌륭한 연금술사로 유명합니다. 깊은 숲 속으로 사라졌지만 뭔가 알고 있는 것 같아요.";
 				close;
 			}
 			else {
-				mes "[Sir Jore]";
-				mes "Please bring m-me";
-				mes "10 Empty Test Tube,";
-				mes "10 Green Herb and";
-				mes "2 Leaf of Yggdrasil";
-				mes "so that I can make a";
-				mes "new research sample.";
+				mes "[요르님]";
+				mes "저를 데려오세요";
+				mes "10개의 빈 시험관,";
+				mes "10개의 녹색 허브와";
+				mes "위그드라실 잎 2개";
+				mes "내가 만들 수 있도록";
+				mes "새로운 연구 샘플.";
 				close;
 			}
 		}
 		else if (sign_q == 17) {
-			mes "[Sir Jore]";
-			mes "I want you to find two";
-			mes "Alchemists, a father and";
-			mes "daughter, who have gone into";
-			mes "seclusion deep in some forest";
-			mes "so that I can learn more about";
-			mes "the Stone of Sage.";
+			mes "[요르님]";
+			mes "두 개를 찾아주세요";
+			mes "연금술사, 아버지 그리고";
+			mes "들어간 딸";
+			mes "어떤 숲 속 깊은 곳에 은둔하다";
+			mes "더 자세히 알아볼 수 있도록";
+			mes "현자의 돌.";
 			next;
-			mes "[Sir Jore]";
-			mes "Of course, this will";
-			mes "possibly further my";
-			mes "research, but it's also";
-			mes "how I'll judge whether or";
-			mes "not you're qualified for my";
-			mes "piece of the Sobbing Starlight.";
+			mes "[요르님]";
+			mes "물론이죠";
+			mes "아마도 더 내";
+			mes "연구지만 그것도 그렇죠";
+			mes "또는 여부를 어떻게 판단할 것인가";
+			mes "당신은 나에게 자격이 없어요";
+			mes "흐느끼는 별빛의 조각.";
 			close;
 		}
 		else if (sign_q < 15) {
-			mes "[Sir Jore]";
-			mes "The mystery of life.";
-			mes "The desire to discover its";
-			mes "secrets drives me through";
-			mes "all the research and sacrifice.";
+			mes "[요르님]";
+			mes "생명의 신비.";
+			mes "그것을 발견하려는 욕구";
+			mes "비밀이 나를 이끈다";
+			mes "모든 연구와 희생.";
 			next;
-			mes "[Sir Jore]";
-			mes "I-I'm not that confident in";
-			mes "my abilities, but I do believe that everything in this world is created by certain rules. Still, would I be punished by God for trying to create life he did not intend?";
+			mes "[요르님]";
+			mes "나, 난 그다지 자신이 없어";
+			mes "내 능력은 있지만, 이 세상의 모든 것은 특정한 법칙에 의해 창조된다고 믿습니다. 그럼에도 불구하고 신이 의도하지 않은 생명을 창조하려고 했다면 신이 벌을 받게 될까요?";
 			next;
-			mes "[Sir Jore]";
-			mes "But I can't stop now.";
-			mes "One of these days, someone";
-			mes "will reveal the secret of life.";
-			mes "Why not me? That knowledge";
-			mes "would make humans greater";
-			mes "than any other race...";
+			mes "[요르님]";
+			mes "하지만 이제 멈출 수가 없어요.";
+			mes "요즘 누군가가";
+			mes "인생의 비밀을 밝혀줄 것이다.";
+			mes "나는 왜 안 되지? 그 지식";
+			mes "인간을 더 위대하게 만들 것입니다";
+			mes "다른 종족보다...";
 			close;
 		}
 		else if (sign_q == 19) {
-			mes "[Sir Jore]";
-			mes "Ah, you've returned.";
-			mes "So, did you learn what";
-			mes "exactly is the Stone of Sage?";
+			mes "[요르님]";
+			mes "아, 돌아오셨군요.";
+			mes "그럼 뭘 배웠나요?";
+			mes "정확히 현자의 돌이 맞나요?";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "Well, I'm not sure,";
-			mes "but I was told that it's";
-			mes "red and can cure people.";
-			mes "But it might be something";
-			mes "we're already familiar with.";
+			mes "글쎄, 잘 모르겠어,";
+			mes "그러나 나는 그것이라고 들었습니다";
+			mes "빨간색이고 사람들을 치료할 수 있습니다.";
+			mes "하지만 뭔가 있을 수도 있겠네요";
+			mes "우리는 이미 익숙합니다.";
 			next;
-			mes "[Sir Jore]";
-			mes "That's all...?";
-			mes "Maybe it was nothing";
-			mes "but a rumor after all.";
-			mes "A-anyway, please tell me";
-			mes "what you think it might be.";
+			mes "[요르님]";
+			mes "그게 다야...?";
+			mes "어쩌면 아무것도 아니었을지도 몰라";
+			mes "하지만 결국 소문이에요.";
+			mes "아, 어쨌든 말해주세요";
+			mes "당신이 생각하는 것은 무엇일까요.";
 			next;
 			input .@input$;
 			if (compare(.@input$,"red gemstone")) {
-				mes "[Sir Jore]";
-				mes "What...! Huh.";
-				mes "Perhaps I should just";
-				mes "forget about the Stone of";
-				mes "Sage and just research.";
-				mes "Still, I'm so ashamed of";
-				mes "relying on a rumor...";
+				mes "[요르님]";
+				mes "뭐야...! 허.";
+				mes "아마도 그냥 해야 할 것 같아요";
+				mes "돌에 대해서는 잊어버리세요";
+				mes "현자와 연구만 하세요.";
+				mes "그래도 너무 부끄러워요";
+				mes "소문에 의존해서...";
 				next;
 				set sign_q,20;
 				getitem 7177,1; //Part_Of_Star's_Sob
-				mes "[Sir Jore]";
-				mes "Thank you very much";
-				mes "for helping me. Now I can";
-				mes "go back to my studies and";
-				mes "hope that nobody bothers me.";
-				mes "But that'll never happen.";
-				mes "^333333*Sigh...*^000000";
+				mes "[요르님]";
+				mes "정말 감사합니다";
+				mes "도와주셔서. 이제 할 수 있어요";
+				mes "공부하러 돌아가서";
+				mes "아무도 나를 괴롭히지 않기를 바랍니다.";
+				mes "하지만 그런 일은 절대 일어나지 않을 거예요.";
+				mes "^333333*한숨...*^000000";
 				next;
-				mes "[Sir Jore]";
-				mes "W-well, you've earned this";
-				mes "piece of the Sobbing Starlight.";
-				mes "For the next piece, you must visit ^0063FFLady Jesqurienne^000000 in Geffen, the city of magic. Since she travels often, she's probably in the Inn.";
+				mes "[요르님]";
+				mes "음, 당신은 이것을 얻었습니다";
+				mes "흐느끼는 별빛의 조각.";
+				mes "다음 작품을 위해서는 마법의 도시 게펜에 있는 ^0063FF레이디 제스퀴리엔^000000을 만나셔야 합니다. 그녀는 자주 여행을 다니기 때문에 여관에 있을 것입니다.";
 				next;
-				mes "[Sir Jore]";
-				mes "O-o-okay then.";
-				mes "Good luck getting";
-				mes "all the pieces of ";
-				mes "Sobbing Starlight,";
-				mes ""+ strcharinfo(0) +". Farewell~";
+				mes "[요르님]";
+				mes "아, 그럼요.";
+				mes "행운을 빌어요";
+				mes "의 모든 조각";
+				mes "흐느끼는 별빛,";
+				mes ""+ strcharinfo(0) +".안녕~";
 				close;
 			}
 			else {
-				mes "[Sir Jore]";
-				mes "Err...?";
-				mes "I don't think";
-				mes "I quite understood";
-				mes "you. What did you say?";
+				mes "[요르님]";
+				mes "어...?";
+				mes "아닌 것 같아요";
+				mes "이해했어요";
+				mes "너. 뭐라고 했어?";
 				close;
 			}
 		}
 		else if (sign_q == 20) {
-			mes "[Sir Jore]";
-			mes "Now you must visit";
+			mes "[요르님]";
+			mes "이제 방문하셔야 합니다";
 			mes "^0063FFLady Jesqurienne^000000 in";
-			mes "Geffen. Good luck";
-			mes "passing her test.";
+			mes "게펜. ??행운을 빌어요";
+			mes "시험에 합격했어요.";
 			close;
 		}
 		else {
-			mes "[Sir Jore]";
-			mes "H-how is this supposed";
-			mes "to work? Like this? No!";
-			mes "No, that's not right!";
-			mes "Think, Jore, think...";
-			mes "What's the answer?!";
+			mes "[요르님]";
+			mes "아, 이게 어떻게 된 일이지?";
+			mes "일하러? 이렇게? 안돼!";
+			mes "아니요, 그건 옳지 않아요!";
+			mes "생각해, 조레, 생각해봐...";
+			mes "대답은 뭐죠?!";
 			close;
 		}
 	}
 	else if ((gettime(DT_HOUR) > 6) && (gettime(DT_HOUR) < 17)) {
-		mes "^3355FFYou find a tense man";
-		mes "holding test tubes between";
-		mes "his fingers, standing in a pile";
-		mes "of books. He seems to be in";
-		mes "agony for some reason.";
+		mes "^3355FF긴장된 남자를 발견했어요";
+		mes "시험관을 사이에 두고";
+		mes "그의 손가락이 더미 속에 서 있다";
+		mes "책. 그는 안에 있는 것 같다";
+		mes "어떤 이유에서인지 고통스럽습니다.";
 		next;
-		switch(select("Speak to him.:Ignore him.")) {
+		switch(select("그 사람에게 말해보세요.:그 사람을 무시하세요.")) {
 		case 1:
 			mes "["+ strcharinfo(0) +"]";
-			mes "Excuse me...";
+			mes "죄송합니다...";
 			next;
-			mes "[Sir Jore]";
+			mes "[요르님]";
 			mes "...";
 			mes "......";
 			next;
-			mes "^3355FFToo preoccupied with";
-			mes "his thoughts, this strange";
-			mes "man is unable to hear you.^000000";
+			mes "^3355FFToo가 바쁘다";
+			mes "그의 생각이 이상하네요";
+			mes "남자는 당신의 말을 들을 수 없습니다.^000000";
 			next;
-			switch(select("Try again.:Ignore him.")) {
+			switch(select("다시 시도하세요.:그 사람을 무시하세요.")) {
 			case 1:
 				mes "["+ strcharinfo(0) +"]";
-				mes "EXCUSE ME!";
+				mes "실례합니다!";
 				next;
-				mes "[Sir Jore]";
+				mes "[요르님]";
 				mes "...!";
-				mes "Oh, h-h-hello.";
-				mes "Sorry, but I'm kind of";
-				mes "busy right now. Yes, yes,";
-				mes "would you come back at";
-				mes "precisely 5:00 PM PST?";
+				mes "아, 아아아 안녕하세요.";
+				mes "죄송하지만 저는 좀 그렇네요";
+				mes "지금은 바빠요. 네, 네,";
+				mes "돌아오실래요?";
+				mes "정확히 오후 5시(PST)인가요?";
 				next;
-				mes "[Sir Jore]";
-				mes "Let's see...";
-				mes "Now if I recalibrated";
-				mes "the faust exhaust, then";
-				mes "the bioneutron analyzer";
-				mes "would need to be adjusted";
-				mes "for cytoplasmic balance...";
+				mes "[요르님]";
+				mes "어디보자...";
+				mes "이제 재교정을 해보면";
+				mes "그럼 파우스트 배기장치죠";
+				mes "생중성자 분석기";
+				mes "조정이 필요할 것 같아요";
+				mes "세포질 균형을 위해...";
 				close;
 			case 2:
-				mes "^3355FFYou decide to leave";
-				mes "him alone and let him";
-				mes "continue mumbling to";
-				mes "himself and playing";
-				mes "with his test tubes.^000000";
+				mes "^3355FF떠나기로 결정하셨습니다";
+				mes "그를 혼자 있게 놔두세요";
+				mes "계속 중얼거리다";
+				mes "그 자신과 놀기";
+				mes "그의 시험관을 가지고.^000000";
 				close;
 			}
 		case 2:
-			mes "^3355FFYou decide to leave";
-			mes "him alone and let him";
-			mes "continue mumbling to";
-			mes "himself and playing";
-			mes "with his test tubes.^000000";
+			mes "^3355FF떠나기로 결정하셨습니다";
+			mes "그를 혼자 있게 놔두세요";
+			mes "계속 중얼거리다";
+			mes "그 자신과 놀기";
+			mes "그의 시험관을 가지고.^000000";
 			close;
 		}
 	}
 	else {
-		mes "[Sir Jore]";
-		mes "...z...z...Z";
+		mes "[요르님]";
+		mes "하아.........";
+		mes "신이란 정말 위대해요.";
+		mes "무에서 유를 드는 것..";
+		mes "생명 탄생의 그 오묘함과";
+		mes "신비로움.";
+		next;
+		mes "[요르님]";
+		mes "전 미약한 학자일 뿐이지만";
+		mes "에........ 음........";
+		mes "..노력할 뿐이죠.";
+		mes "신의 영역으로의 도전....";
+		mes "......벌 받을 짓일까요?";
+		next;
+		mes "[요르님]";
+		mes "자신은.. 없지만... 전 믿고";
+		mes "있어요. 이 세상의 모든 만";
+		mes "물은 특정한 조건에 의해서";
+		mes "그 형태를 이루게 된다는 것";
+		mes "을.....";
+		next;
+		mes "[요르님]";
+		mes "생명의 탄생도 마찬가지..";
+		mes "..언젠가는 그 비밀이..꼭";
+		mes "밝혀질 거예요.. 그 날엔..";
+		mes "인간은 한층 더 위해한 종";
+		mes "족이 되겠죠?...";
 		close;
 	}
 	close;
@@ -2937,121 +2962,121 @@ OnTouch_:
 	end;
 }
 
-aldeba_in,156,118,4	script	Piru Piru#sign	102,{
+aldeba_in,156,118,4	script	피르피르#sign	102,{
 	callfunc "F_UpdateSignVars";
-	mes "[Piru Piru]";
+	mes "[피르피르]";
 	if ((gettime(DT_HOUR) >= 12) && (gettime(DT_HOUR) <= 24)) { //235959
 		if (sign_q == 17) {
 			emotion ET_CRY;
-			mes "Oh, I'm sooo tired~";
-			mes "But we can't sleep yet.";
-			mes "*Sob* Master, can't we";
-			mes "just call it a day already?";
+			mes "아, 너무 피곤해~";
+			mes "하지만 우리는 아직 잠을 잘 수 없습니다.";
+			mes "*흐뭇* 주인님, 그렇죠?";
+			mes "그냥 하루만 하자구요?";
 			next;
-			switch(select("What do you do in here?:About vanished Alchemists:What is the Stone of Sage?")) {
+			switch(select("여기서 무엇을 하시나요?:사라진 연금술사에 대하여:현자의 돌은 무엇입니까?")) {
 			case 1:
-				mes "[Piru Piru]";
-				mes "My master, Sir Jore,";
-				mes "is researching a way to";
-				mes "create artificial life! Still,";
-				mes "it's not easy and we haven't";
-				mes "accomplished anything yet...";
+				mes "[피르피르]";
+				mes "나의 주인님, 조레 선생님,";
+				mes "방법을 연구 중입니다";
+				mes "인공생명을 창조하세요! 그래도,";
+				mes "쉬운 일이 아니고 우리도 해본 적이 없어요";
+				mes "아직 아무것도 성취하지 못했습니다...";
 				next;
-				mes "[Piru Piru]";
-				mes "It doesn't help that my";
-				mes "master spends all of his";
-				mes "time on research. He hasn't";
-				mes "been taking care of himself";
-				mes "and is losing a lot of weight.";
-				mes "I'm really worried about him.";
+				mes "[피르피르]";
+				mes "도움이 안 돼요";
+				mes "주인은 그의 모든 것을 소비합니다";
+				mes "연구할 시간이 있어. 아직 연구하지 않았어";
+				mes "자신을 돌보고 있어요";
+				mes "살이 많이 빠지고 있어요.";
+				mes "그 사람이 정말 걱정돼요.";
 				close;
 			case 2:
-				mes "[Piru Piru]";
-				mes "Oh, the father and daughter";
-				mes "who were both Alchemists, right? Did you know they vanished because they invented the monster potion summoning skill?";
+				mes "[피르피르]";
+				mes "아, 아버지와 딸이구나";
+				mes "둘 다 연금술사였죠? 몬스터 포션 소환 스킬을 발명했기 때문에 사라진 거 알고 계셨나요?";
 				next;
-				mes "[Piru Piru]";
-				mes "Their discovery caused";
-				mes "such great hysteria in the";
-				mes "scientific community. In the";
-				mes "end they had no choice but";
-				mes "to live in seclusion deep";
-				mes "in the ^CE3131forest to the south^000000.";
+				mes "[피르피르]";
+				mes "그들의 발견으로 인해";
+				mes "정말 대단한 히스테리야";
+				mes "과학 공동체. 에서";
+				mes "결국 그들은 선택의 여지가 없었습니다";
+				mes "깊은 은둔생활을 하다";
+				mes "^CE3131남쪽 숲^000000에 있습니다.";
 				next;
-				mes "[Piru Piru]";
-				mes "They devoted their lives";
-				mes "to their research, just like";
-				mes "my master. If he makes a major";
-				mes "breakthrough, we'll have to";
-				mes "disappear like they did...";
+				mes "[피르피르]";
+				mes "그들은 목숨을 바쳤다";
+				mes "그들의 연구에, 마치";
+				mes "나의 스승님. 만약 그가 전공을 하게 된다면";
+				mes "획기적으로 발전해야 해";
+				mes "그들처럼 사라지네요...";
 				close;
 			case 3:
-				mes "[Piru Piru]";
-				mes "Hmm? Well, I wouldn't";
-				mes "know anything about that.";
-				mes "In fact, I'm always staying";
-				mes "in this lab, so I never hear";
-				mes "any rumors or news outside.";
+				mes "[피르피르]";
+				mes "흠? 글쎄, 난 안 그럴 거야";
+				mes "그건 아는 게 없어요.";
+				mes "사실 저는 항상 머물고 있어요";
+				mes "이 연구실에서는 듣지 못해요";
+				mes "밖에 소문이나 뉴스가 있어요.";
 				close;
 			}
 		}
 		else {
 			emotion ET_CRY;
-			mes "Oh, I'm sooo tired~";
-			mes "But we can't sleep yet.";
-			mes "*Sob* Master, can't we";
-			mes "just call it a day already?";
+			mes "아아.. 이젠 그만 자고 싶어..!";
+			mes "그렇다고 스승임 몰래 졸 수도";
+			mes "없고..";
+			mes "끄응.. 괴로워..흑흑..";
+			mes "스승님~이제 그만 해요~~~";
 			next;
-			select("What do you do in here?");
-			mes "[Piru Piru]";
-			mes "My master, Sir Jore,";
-			mes "is researching a way to";
-			mes "create artificial life! Still,";
-			mes "it's not easy and we haven't";
-			mes "accomplished anything yet...";
+			select("여기는 뭐하는곳인가요?");
+			mes "[피르피르]";
+			mes "여기는 저의 스승이신 요르님님";
+			mes "의 연구실이에요. 스승임은 요즘";
+			mes "인공적인 방법을 통한 새로운";
+			mes "종의 탄생을 연구중이세요.";
 			next;
-			mes "[Piru Piru]";
-			mes "It doesn't help that my";
-			mes "master spends all of his";
-			mes "time on research. He hasn't";
-			mes "been taking care of himself";
-			mes "and is losing a lot of weight.";
-			mes "I'm really worried about him.";
+			mes "[피르피르]";
+			mes "물론 쉽진 않겠죠.";
+			mes "스승님이나 저나 이 일에 매달린";
+			mes "지도 어느덧...에에...기억도";
+			mes "나지 않을 정도로 오래-전부터";
+			mes "해왔는데. 아직도 오리무중이랍";
+			mes "니다...";
 			close;
 		}
 	}
 	else if ((gettime(DT_HOUR) >= 6) && (gettime(DT_HOUR) < 12)) {
-		mes "Everyday we study and";
-		mes "take notes and test and";
-		mes "experiment and record";
-		mes "results and... Horrible!";
+		mes "우리는 매일 공부하고";
+		mes "메모하고 테스트하고";
+		mes "실험 및 기록";
+		mes "결과는... 끔찍해요!";
 		next;
-		mes "[Piru Piru]";
-		mes "Although my master and I are the only ones who use this lab, we do have a set working schedule. We work from 10 AM to 5 PM and have our free time from 5 PM to 10 PM, which is when Master goes to bed.";
+		mes "[피르피르]";
+		mes "저와 스승님만이 이 연구실을 사용하지만 정해진 근무 일정이 있습니다. 오전 10시부터 오후 5시까지 일하고, 오후 5시부터 오후 10시까지 자유시간을 가집니다. 침대.";
 		next;
-		mes "[Piru Piru]";
-		mes "Of course, Master";
-		mes "is happy if he can";
-		mes "just do more research.";
-		mes "In any case, please visit";
-		mes "us after 5 PM if you have";
-		mes "any business with us.";
+		mes "[피르피르]";
+		mes "물론이죠, 스승님";
+		mes "할 수 있으면 행복해요";
+		mes "좀 더 조사해 보세요.";
+		mes "어쨌든 꼭 방문해 보세요";
+		mes "오후 5시 이후에 연락주세요";
+		mes "우리와 어떤 사업이든.";
 		close;
 	}
 	else {
 		mes "....Zzz...Zzz...";
 		mes "Zzz....Zzz......";
 		next;
-		switch(select("Wake her up:Leave her sleep")) {
+		switch(select("그녀를 깨워라:그녀를 잠들게 놔두세요")) {
 		case 1:
-			mes "[Piru Piru]";
-			mes "Wh-wha...?";
-			mes "Why do you gotta";
-			mes "wake me up? Come back";
-			mes "after 10:00 AM tomorrow, kay?";
+			mes "[피르피르]";
+			mes "뭐...?";
+			mes "왜 그래야 하는데?";
+			mes "날 깨워? 돌아와";
+			mes "내일 오전 10시 이후에 알죠?";
 			close;
 		case 2:
-			mes "[Piru Piru]";
+			mes "[피르피르]";
 			mes "Zzzz.....Zzzzz...";
 			close;
 		}
@@ -3093,11 +3118,13 @@ OnTouch_:
 	end;
 }
 
+/* Currently broken.
 prt_maze02,25,161,0	script	#music	-1,7,7,{
 OnTouch_:
-	soundeffect "effect\\석양의 어쌔신.wav",1;
+	soundeffect "effect\\¼®¾??? ¾?½Ø½?.wav",1;
 	end;
 }
+*/
 
 prt_maze02,132,132,0	script	#skill	-1,{
 OnEnable:
@@ -6131,32 +6158,38 @@ alberta_in,154,171,5	script	Maid#s10	758,{
 	}
 }
 
-alde_alche,169,162,7	script	Alchemist#sign	749,{
+alde_alche,169,162,7	script	알케미스트#sign	749,{
 	callfunc "F_UpdateSignVars";
-	mes "[Melkaba]";
+	mes "[멜카바]";
 	if (sign_q < 46) {
-		mes "Most Alchemists seek out the";
-		mes "Stone of Sage, but in my opinion, their goals are too short sighted. There are more important studies";
-		mes "to be conducted in the name of science for the good of mankind...";
+		mes "알케미스트들의 궁극의 목표가";
+		mes "현자의 돌이라고들 하지만.";
+		mes "모든 알케미스트들이 그런 것은";
+		mes "아니네. 나처럼 다른 걸";
+		mes "연구하는 자들도 있지.";
 		next;
-		switch(select("...:So what are you studying?")) {
+		switch(select(".....:어떤 걸 연구하시길래?")) {
 		case 1:
-			mes "[Melkaba]";
-			mes "In the end, the ";
-			mes "Stone of Sage may";
-			mes "just be a simple rumor.";
-			mes "After all, thousands of";
-			mes "Alchemists have already";
-			mes "failed to create it.";
+			mes "[멜카바]";
+			mes "어떤 의미에서 현자의 돌은";
+			mes "말 그래도  환상일지도 모르기";
+			mes "때문일세.";
+			mes "이 수없이 많고 오래된";
+			mes "알케미스트들이 아직도 만들지";
+			mes "못하고 있는 걸 보면 말일세.";
 			close;
 		case 2:
-			mes "[Melkaba]";
-			mes "What am I studying?";
-			mes "Well, my expertise is...";
-			mes "Different. If you must";
-			mes "know, it's a secret~";
-			mes "If any man found out";
-			mes "about my research...";
+			mes "[멜카바]";
+			mes "음?";
+			mes "난 말인가...";
+			mes "허허.....";
+			mes "난 조금 색다른걸 연구하고 있지";
+			next;
+			mes "멜카바";
+			mes "자세한 사항은 비밀일세.";
+			mes "많은 사람들이 알게 되면";
+			mes "곤란해서 말이세.";
+			mes "허헛.";
 			close;
 		}
 	}
@@ -6169,7 +6202,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 		next;
 		switch(select("Vigorgra?:Oh, I'm sorry.")) {
 		case 1:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "What?! Who told you";
 			mes "that I could make that?!";
 			mes "Oh, no matter. I suppose";
@@ -6179,7 +6212,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 			next;
 			switch(select("No, I don't want it!:I need Vigorgra for... a friend.")) {
 			case 1:
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "You immature--!";
 				mes "You come all this";
 				mes "way to bother me?";
@@ -6187,13 +6220,13 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 				mes "shame into my lab!";
 				close;
 			case 2:
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "Oh right.";
 				mes "Your friend.";
 				mes "I understand you.";
 				mes "Crystal clear.";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "Well, since you know";
 				mes "about my secret research,";
 				mes "I'll do you a favor so long as";
@@ -6201,13 +6234,13 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 				mes "Of course, I can't just give";
 				mes "you Vigorgra for free...";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "Now, write this";
 				mes "down. These are the";
 				mes "ingredients I need to";
 				mes "make a bottle of Vigorgra.";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "^ff00001 Ment";
 				mes "20 Honey";
 				mes "10 Royal Jelly";
@@ -6215,7 +6248,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 				mes "1 Hinalle Leaflet";
 				mes "1 Empty Bottle.^000000";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "Alright.";
 				mes "Now go and";
 				mes "bring all those";
@@ -6225,7 +6258,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 				close;
 			}
 		case 2:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "There's no need";
 			mes "to apologize. But";
 			mes "I'd appreciate it if";
@@ -6243,14 +6276,14 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 		next;
 		switch(select("Not yet...:Yes.")) {
 		case 1:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "Well, let me";
 			mes "remind you of";
 			mes "what you need to";
 			mes "bring to me in case";
 			mes "you forgot already...";
 			next;
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "^ff00001 Ment";
 			mes "20 Honey";
 			mes "10 Royal Jelly";
@@ -6258,27 +6291,27 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 			mes "1 Hinalle Leaflet";
 			mes "1 Empty Bottle.^000000";
 			next;
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "Take your time...";
 			mes "In the end, you're";
 			mes "the one who's got";
 			mes "the need for it, anyway.";
 			close;
 		case 2:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "Great...!";
 			mes "Now let me check";
 			mes "to see if you have";
 			mes "everything ready...";
 			next;
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			if ((countitem(526) < 10) || (countitem(518) < 20) || (countitem(948) < 30) || (countitem(520) < 1) || (countitem(708) < 1) || (countitem(713) < 1)) {
 				mes "Hmm, you're still";
 				mes "missing some of the";
 				mes "ingredients. Now, listen";
 				mes "carefully. I need you to get...";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "^ff00001 Ment";
 				mes "20 Honey";
 				mes "10 Royal Jelly";
@@ -6294,13 +6327,13 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 				mes "I'll make you a bottle";
 				mes "of Vigorgra.";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				mes "If you ask me again,";
 				mes "I won't speak to you!";
 				mes "And I'll need to charge";
 				mes "you 10,000 zeny.";
 				next;
-				mes "[Melkaba]";
+				mes "[멜카바]";
 				if (Zeny < 10000) {
 					mes "Huh...";
 					mes "It doesn't look like";
@@ -6331,7 +6364,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 					mes "......";
 					mes ".........";
 					next;
-					mes "[Melkaba]";
+					mes "[멜카바]";
 					if (rand(1,100) < 98) {
 						specialeffect EF_PHARMACY_OK;
 						mes "Ah! Success!";
@@ -6349,7 +6382,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 						delitem 713,1; //Empty_Bottle
 						set sign_q,48;
 						getitem 7044,1; //Vigorgra
-						mes "[Melkaba]";
+						mes "[멜카바]";
 						mes "Um, just remember";
 						mes "not to take too much";
 						mes "at one time. Can't have";
@@ -6384,7 +6417,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 		next;
 		switch(select("...:So what are you studying?")) {
 		case 1:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "In the end, the";
 			mes "Stone of Sage may";
 			mes "just be a simple rumor.";
@@ -6393,7 +6426,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 			mes "failed to create it.";
 			close;
 		case 2:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "What am I studying?";
 			mes "Well, my expertise is...";
 			mes "Different. If you must";
@@ -6410,7 +6443,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 		next;
 		switch(select("...:So what are you studying?")) {
 		case 1:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "In the end, the";
 			mes "Stone of Sage may";
 			mes "just be a simple rumor.";
@@ -6419,7 +6452,7 @@ alde_alche,169,162,7	script	Alchemist#sign	749,{
 			mes "failed to create it.";
 			close;
 		case 2:
-			mes "[Melkaba]";
+			mes "[멜카바]";
 			mes "What am I studying?";
 			mes "Well, my expertise is...";
 			mes "Different. If you must";

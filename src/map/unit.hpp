@@ -20,7 +20,7 @@ extern const short dirx[DIR_MAX]; ///lookup to know where will move to x accordi
 extern const short diry[DIR_MAX]; ///lookup to know where will move to y according dir
 
 struct unit_data {
-	struct block_list *bl; ///link to owner object BL_PC|BL_MOB|BL_PET|BL_NPC|BL_HOM|BL_MER|BL_ELEM
+	struct block_list *bl; ///link to owner object BL_PC|BL_MOB|BL_PET|BL_NPC|BL_HOM|BL_MER|BL_ELEM|BL_STALL
 	struct walkpath_data walkpath;
 	struct skill_timerskill *skilltimerskill[MAX_SKILLTIMERSKILL];
 	std::vector<std::shared_ptr<s_skill_unit_group>> skillunits;
@@ -46,6 +46,7 @@ struct unit_data {
 	bool immune_attack; ///< Whether the unit is immune to attacks
 	uint8 dir;
 	unsigned char target_count;
+	uint8 body_size;
 	struct s_udState {
 		unsigned change_walk_target : 1 ;
 		unsigned skillcastcancel : 1 ;

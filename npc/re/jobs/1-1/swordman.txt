@@ -1,126 +1,540 @@
-//===== rAthena Script ======================================= 
-//= Renewal Swordman Job Quest
-//===== By: ================================================== 
-//= Kisuka
-//===== Current Version: ===================================== 
+//===== rAthena 스크립트 =======================================
+//= 리뉴얼 소드맨 직업 퀘스트
+//===== 게시자: ========================================= =========
+//= 키스카
+//===== 현재 버전: ======================================
 //= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Job Change to Swordman Class
-//===== Additional Comments: ================================= 
-//= 1.0 First Version. [Kisuka]
-//= 1.1 Added support for Baby classes. [Euphy]
-//============================================================ 
-izlude_in,74,172,4	script	Swordman#swd	119,{
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= 소드맨 클래스로 직업 변경
+//===== 추가 의견: ==================================
+//= 1.0 첫 번째 버전. [키스카]
+//= 1.1 Baby 클래스에 대한 지원이 추가되었습니다. [유피]
+//================================================ ============
+izlude_in,74,172,4	script	소드맨 길드원#swd	119,{
 	if (Upper == 1) {
 		if (Class == Job_Novice_High && (ADVJOB == Job_Lord_Knight || ADVJOB == Job_Paladin)) {
-			mes "[Swordman]";
-			mes "It...";
-			mes "Can't be...";
-			mes "You've been reborn, haven't you?";
+			mes "[소드맨]";
+			mes "그것은...";
+			mes "그럴 리가 없어...";
+			mes "당신은 다시 태어났죠?";
 			next;
-			mes "[Swordman]";
-			mes "I see you're retreading the path of the Swordman! Once you've gotten used to brandishing a sword, you can never go back!!";
+			mes "[소드맨]";
+			mes "검사의 길을 다시 걷고 있는 것 같군요! 검을 휘두르는 데 익숙해지면 다시는 돌아갈 수 없습니다!!";
 			next;
 			if (!callfunc("F_CanChangeJob")) {
-				mes "[Swordman]";
-				mes "Hmm? Ah, you must first master the Basic Skills before you are ready to become a Swordman.";
+				mes "[소드맨]";
+				mes "흠? 아, 검사가 되려면 기본스킬을 먼저 익히셔야 합니다.";
 				next;
-				mes "[Swordman]";
-				mes "Come back to me when you have finished learning the Basic Novice Skills.";
+				mes "[소드맨]";
+				mes "초심자 기본 스킬을 익히고 나면 나에게 다시 오세요.";
 				close;
 			}
-			mes "[Swordman]";
-			mes "Excellent! Let me promote you to a Swordman right away!";
+			mes "[소드맨]";
+			mes "좋아요! 바로 검사로 진급시켜드리겠습니다!";
 			next;
 			skill "NV_TRICKDEAD",0,SKILL_PERM;
 			jobchange Job_Swordman_High;
 			skill "SM_MOVINGRECOVERY",1,SKILL_PERM;
 			skill "SM_FATALBLOW",1,SKILL_PERM;
 			skill "SM_AUTOBERSERK",1,SKILL_PERM;
-			mes "[Swordman]";
-			mes "Hmm... You look like a well-experienced Swordman. Still, I'm sure that you must train to improve your skills and gain strength!";
+			mes "[소드맨]";
+			mes "흠.. 노련한 검객 같군요. 그래도 실력을 키우고 힘을 얻으려면 수련을 해야 할 것 같아요!";
 			close;
 		}else{
-			mes "[Swordman]";
-			mes "Hm...?";
-			mes "You're a reborn";
-			mes "warrior, aren't you?";
+			mes "[소드맨]";
+			mes "음...?";
+			mes "당신은 다시 태어났어요";
+			mes "전사님, 그렇죠?";
 			next;
-			mes "[Swordman]";
-			mes "Hmmm...";
-			mes "It seems that being";
-			mes "a Swordman is not part";
-			mes "of your destiny. I'm sorry,";
-			mes "but it seems there is nothing";
-			mes "I can do for you.";
+			mes "[소드맨]";
+			mes "흠...";
+			mes "그런 것 같아요";
+			mes "검객은 일부가 아니다";
+			mes "당신의 운명. 미안해요,";
+			mes "그런데 아무것도 없는 것 같아요";
+			mes "나는 당신을 위해 할 수 있습니다.";
 			close;
 		}
 	}
-	mes "[Swordman Guildsman]";
-	mes "This is the Swordman Guild.";
-	mes "Why are you here?";
+	mes "[소드맨 길드원]";
+	mes "이 곳은 검사길드다.";
+	mes "무슨 용무인가?";
 	next;
-	switch(select("Tell me about being a Swordman.:I want to be a Swordman.:Nothing.")) {
+	switch(select("검사(소드맨)에 대해서", "검사(소드맨)로 전직한다.", "취소")) {
 	case 1:
-		mes "[Swordman Guildsman]";
-		mes "So you wish to know more about the mighty Swordman? Okay!";
+		mes "[소드맨 길드원]";
+		mes "소드맨에 대해 알고 싶다고? 좋아! 설명해주지.";
 		next;
-		mes "[Swordman Guildsman]";
-		mes "The most distinctive feature of the Swordman is that the Swordman can show us his/her real abilities in close combat.";
-		mes "There are three reasons!";
+		mes "[소드맨 길드원]";
+		mes "소드맨의 가장 큰 특징은 근접전에서는 최강의 위력을 발휘한다는 것이다.";
+		mes "근접전에 최강인 이유는 세가지!";
 		next;
-		mes "[Swordman Guildsman]";
-		mes "First, Swordman has higher HP than other jobs.";
-		mes "Second, except for Bows and Rods, Swordman can use all other weapons so they can fight at their optimal ability.";
-		mes "And third, most of the skills of the Swordman give powerful physical attacks.";
+		mes "[소드맨 길드원]";
+		mes "첫 번째, 타 직업에 비해 HP가 비교적으로 높다.";
+		mes "두 번째, 활과 지팡이를 제외한 모든 무기를 다룰 수 있어 상황에 따른 필요한 무기를 십분 활용할 수 있다.";
+		mes "세 번째, 소드맨의 스킬은 대부분 강력한 물리타격을 줄 수 있는 스킬로 이루어져 있다.";
 		next;
-		mes "[Swordman Guildsman]";
-		mes "Though I gave you a simple explanation, I believe you understand the core meaning of what it is to be a Swordman.";
-		mes "In my opinion, Swordman is the best job ever!";
+		mes "[소드맨 길드원]";
+		mes "간단한 설명이지만 대충 알아들었을거라 생각한다.";
+		mes "그리고 나의 개인적인 생각을 덛붙이자면 '소드맨'은 무슨 짓을 해도 폼나는 세계 최강의 직업이라고 생각한다!";
 		close;
 	case 2:
-		mes "[Swordman Guildsman]";
+		mes "[소드맨 길드맨]";
 		if(BaseJob != Job_Novice) {
 			if(BaseJob == Job_Swordman) {
-				mes "You are already an excellent Swordman, aren't you?";
-				mes "Just devote yourself to be a great Swordman.";
+				mes "당신은 이미 훌륭한 검객이군요, 그렇죠?";
+				mes "훌륭한 검사가 되기 위해 헌신하세요.";
 			}else{
-				mes "You already have one of the other jobs, don't you?";
-				mes "You've gone too far with that joke.";
+				mes "당신은 이미 다른 직업 중 하나를 갖고 있지 않나요?";
+				mes "그 농담은 너무 지나치셨어요.";
 			}
 			close;
 		}else{
 			if (!callfunc("F_CanChangeJob")) {
-				mes "I'm sorry to tell you this but to be a Swordman, you must reach at least ^4A4AFFJob Level 10^000000.";
-				mes "and ^4A4AFFBasic Skill Level 9^000000.";
+				mes "죄송하지만 검사가 되려면 최소한 ^4A4AFFJob 레벨 10^000000을 달성해야 합니다.";
+				mes "그리고 ^4A4AFF기본 스킬레벨 9^000000.";
 				next;
-				mes "[Swordman Guildsman]";
-				mes "Want to be a Swordman without having the minimum requirement?";
-				mes "Do you think being a Swordman is that easy?";
+				mes "[소드맨 길드맨]";
+				mes "최소 조건 없이 검객이 되고 싶나요?";
+				mes "검사가 되는 게 그렇게 쉬운 줄 알아?";
 				close;
 			}
-			mes "Hmm, both your Job Level and Basic Skill Level check out.";
-			mes "Good. Do you want to be a Swordman right away?";
+			mes "직업레벨도, 기본스킬도 충분히 준비 해 왔군.";
+			mes "좋아. 망설임도 없이 확실하게 소드맨으로 전직하겠나?";
 			next;
-			if(select("Yes, I do.:I'll consider it again.") == 2) {
-				mes "[Swordman Guildsman]";
-				mes "Yeah. Prudent decision is needed for choosing a job.";
-				mes "But I feel sorry... that you consider it again after overcoming all the hardships....";
+			next;
+			if(select( "네, 전직합니다.", "다시 생각할게요." ) == 2) {
+				mes "[소드맨 길드원]";
+				mes "그래. 직업의 선택은 신중할수록 좋아.";
+				mes "하지만 애써 여기까지 와서 다시 고민이라니... 조금 섭섭하군.";
 				close;
 			}
-			mes "[Swordman Guildsman]";
-			mes "Congratulations! From now on, you are going to live a Swordman's life!";
-			mes "Let's do it right now!";
+			mes "[소드맨 길드원]";
+			mes "축하한다! 자네는 이제부터 소드맨이라는 멋진 업종에 종사하게 된 것이다!";
+			mes "지금 바로 작업에 들어가마!";
 			next;
-			mes "[Swordman Guildsman]";
-			mes "Congratulations again for being a Swordman and I hope that you participate in many activities for the revival of our guild.";
 			callfunc "Job_Change",Job_Swordman;
-			getitem 13415,1; // N_Falchion
+			getitem 13415,1;
+			mes "[소드맨 길드원]";
+			mes "소드맨이 된 것을 다시 한 번 축하하며 앞으로 있을 소드맨 길드의 부홍을 위해 많은 참여 바란다.";
+			next;
+			mes "[소드맨 길드원]";
+			mes "원래대로라면 충분한 수행레벨과 시련을 거친 뒤에야 배울 수 있는";
+			mes "^4d4dff추가 스킬^000000도 함께 가르쳐줬다.";
+			next;
+			mes "[소드맨 길드원]";
+			mes "많이 이른것 같지만, 편법보다는 정도를 선택한 너에게 이정도 혜택은 줘야겠지.";
+			next;
+			mes "[소드맨 길드원]";
+			mes "그러고보니 ^4d4dff이즈루드의 낙원단^000000에서 연락이 왔다.";
+			mes "^4d4dff의뢰^000000가 있다고 하더군.";
+			next;
+			mes "[소드맨 길드원]";
+			mes "앞으로의 여정을 생각하면 반드시 참가하는게 좋다고 생각한다.";
+			mes "^4d4dff이즈루드 크리투라 학원의 스프라키^000000를 만나 보도록.";
+			setquest 21009;
 			close;
 		}
 	case 3:
 		close;
 	}
+}
+
+izlude_in,70,168,5	script	검사 2차 전직 상담원#kn	645,{
+	if(BaseJob == Job_Swordman && !checkquest(1233)) {
+		mes "[검사 에칼토]";
+		mes "다음 전직을 위해 훈련 중인가요?";
+		mes "내가 당신에게 도움을 줄 수 있을 것";
+		mes "같군요.";
+		next;
+		switch( select( "필요 없겠군요.", "매우 도움이 필요해요." )) {
+			case 1:
+				mes "[검사 에칼토]";
+				mes "영업사원이 물건 팔겠다는 것도";
+				mes "아닌데, 매몰차게 거절해버리네!";
+				close;
+				break;
+			case 2:
+					mes "[검사 에칼토]";
+					mes "어디 무엇부터 도울지 우리";
+					mes "차분히 살펴보기로 합시다.";
+					next;
+					switch( select( "헌 옷 보상 교환", "검사의 주요 능력치", "주요 무기", "좀 더 심화 된 설명" )) {
+						case 1:
+							mes "[검사 에칼토]";
+							mes "잠시 숨을 돌리고";
+							mes "마저 이야기 하기로 합시다!";
+							setquest 1233;
+							getitem 7059,4;
+							close;
+							break;
+						case 2:
+							
+						break;
+						case 3:
+							
+						break;
+						case 4:
+							
+						break;
+				}
+		}
+	}else if(isbegin_quest(1233) == 1) {
+		while(1) {
+			mes "[검사 에칼토]";
+			mes "궁금한 걸 차근차근";
+			mes "해결해 봅시다!";
+			next;
+			switch( select( "검사 스킬 설명", "스킬, 스테이터스 초기화", "2차 전직", "안정된 성장 방법", "본격 훈련" )) {
+				case 1:
+					mes "[검사 에칼토]";
+					mes "^0000FFHP회복력 향상^000000은 패시브 스킬로,";
+					mes "자연 체력 회복 속도를 향상시켜";
+					mes "줘요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF인듀어^000000는 액티브 스킬로,";
+					mes "일정시간 동안 적에게 공격을";
+					mes "당해도 이동이나 공격이 가능하지요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF프로보크^000000는 액티브 스킬로,";
+					mes "지정된 적을 흥분시켜 공격력을";
+					mes "높이는 대신 방어력을 낮춰줘요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF한손검 수련^000000은 패시브 스킬로,";
+					mes "스킬 레벨이 높을 수록 한손검";
+					mes "사용 시에 공격력이 증가하게 되죠.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF양손검 수련^000000 역시 패시브 스킬로,";
+					mes "한손검 수련처럼 스킬 레벨이";
+					mes "올라갈 수록 양손검 사용시의";
+					mes "공격력이 증가하게 돼요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF배쉬^000000는 액티브 스킬로,";
+					mes "지정된 적을 강하게 공격하여";
+					mes "높은 데미지를 입히는 것으로";
+					mes "전직 이후에도 두루 쓰이는";
+					mes "효과적인 공격 스킬이에요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF매그넘 브레이크^000000는 액티브 스킬로,";
+					mes "주위에 있는 적들 전체에게 데미지를";
+					mes "입힌 후 밀어내는 화속성 스플래쉬";
+					mes "공격이에요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF급소치기^000000는 패시브 스킬로,";
+					mes "배쉬(6LV이상) 사용 시 일정확률로";
+					mes "적을 스턴에 걸리게 만들어요.";
+					mes "잡레벨 30이상, 배쉬 6레벨 이상의";
+					mes "조건을 만족시킨 뒤 프론테라의";
+					next;
+					mes "[검사 에칼토]";
+					mes "기사단에서 '레온 폰 프리슈'를";
+					mes "만나면 ^0000FF급소치기^000000를";
+					mes "가르쳐 줄 거예요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF오토 버서크^000000는 패시브 스킬로,";
+					mes "빈사상태(HP25%이하)에 처하게 되면";
+					mes "분노하게 되며, 이때의 분노상태는";
+					mes "프로보크 LV10에 걸린 것과 같아져요";
+					next;
+					mes "[검사 에칼토]";
+					mes "잡레벨 30이상을 만족시킨 뒤";
+					mes "프론테라 제련소에 있는 후안을";
+					mes "찾아가면 ^0000FF오토 버서크^000000를 익힐 수";
+					mes "있을 거예요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "^0000FF이동시 HP회복^000000은 패시브 스킬로,";
+					mes "이동시에도 HP가 회복되는 유용한";
+					mes "스킬이에요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "잡레벨 35이상을 만족시킨 뒤";
+					mes "이즈루드 가옥 내에 있는";
+					mes "기사 디토마소를 찾아가면";
+					mes "^0000FF이동시 HP회복^000000을 배울 수 있을";
+					mes "거예요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "궁금한 걸 차근차근";
+					mes "해결해 봅시다!";
+					next;
+					break;
+				case 2:
+					mes "[검사 에칼토]";
+					mes "이즈루드 광장에 있는 ^0000FF최면술사^000000를";
+					mes "찾아가면 스킬이나 스테이터스를";
+					mes "초기화 하여 다시 원하는 대로";
+					mes "분배할 수 있을 거예요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "노비스에서 1차 직업까지";
+					mes "제한 없이 이용가능하니";
+					mes "참고하세요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "궁금한 걸 차근차근";
+					mes "해결해 봅시다!";
+					next;
+					break;
+				case 3:
+					mes "[검사 에칼토]";
+					mes "잡레벨 40을 만족시키면";
+					mes "2차 전직을 신청할 수 있어요.";
+					mes "공격에 특화된 직업을 원한다면";
+					mes "나이트가 적합하며,";
+					next;
+					mes "[검사 에칼토]";
+					mes "전직 신청은";
+					mes "프론테라 북서쪽에 있는";
+					mes "기사단에서 가능해요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "방어에 특화된 직업을 원한다면";
+					mes "크루세이더가 적합하며, 전직 신청은";
+					mes "프론테라 북쪽에 있는 성에서";
+					mes "크루세이더 리더를 통해 가능해요.";
+					next;
+					mes "[검사 에칼토]";
+					mes "두 직업 모두 전직 시험을 거쳐야";
+					mes "하며, 전직을 완료하게 되면";
+					mes "이동 수단인 페코페코를";
+					mes "탈 수 있어요.";
+					next;
+					break;
+				case 4:
+					mes "[검사 에칼토]";
+					mes "낙원단에 등록을 하고 자신의";
+					mes "레벨 대에 맞는 퀘스트를 수행한다면";
+					mes "보다 순조로운 성장이 가능할 거예요";
+					next;
+					mes "[검사 에칼토]";
+					mes "이곳에 마침 파견나온";
+					mes "낙원단 공간이동사가 있으니 말을";
+					mes "걸어보세요.";
+					next;
+					break;
+				case 5:
+					mes "[검사 에칼토]";
+					mes "설명은 충분히 들었나요?";
+					mes "그럼 본격 훈련으로 넘어가 볼까요?";
+					next;
+					switch( select( "아직 더 듣겠어요.", "본격 훈련을 시작합시다!" )) {
+						case 1:
+							mes "[검사 에칼토]";
+							mes "좋아요 궁금한 걸";
+							mes "다시 질문해보세요.";
+							close;
+						case 2:
+							mes "[검사 에칼토]";
+							mes "상담 내용은 제 조수 포딘이";
+							mes "언제든 친절하게 다시";
+							mes "들려 줄 겁니다.";
+							mes "그럼 차분히 맘을 가라앉히고";
+							mes "훈련을 시작해봅시다!";
+							erasequest 1233;
+							setquest 1234;
+							getitem 7059,8;
+							close;
+							break;
+						}
+				}
+			}
+	}
+	if(BaseJob != Job_Swordman) {
+		mes "[검사 에칼토]";
+		mes "나는 검사들의 2차 전직을 돕는";
+		mes "상담원이오. 때문에 당신이 내게";
+		mes "말을 걸어도, 나는 딱히 할 말이";
+		mes "없다, 이거지.";
+		close;
+	}
+	end;
+}
+
+izlude_in,68,170,5	script	검사 포딘#knight	417,{
+	if(BaseJob == Job_Swordman) {
+	while(1) {
+		mes "[검사 포딘]";
+		mes "다시 한 번 궁금한 걸 차근차근";
+		mes "해결해 봅시다!";
+		next;
+		switch( select( "검사의 주요 능력치", "주요 무기", "검사 스킬 설명", "스킬, 스테이터스 초기화", "2차 전직", "안정된 성장 방법" )) {
+			case 1:
+				mes "[검사 포딘]";
+				mes "^0000FFVit^000000는 ^FF0000HP회복능력^000000에 영향을 미쳐요.";
+				mes "^0000FFStr^000000은 ^FF0000힘과 공격력^000000에 영향을 주지요.";
+				mes "^0000FFDex^000000는 ^FF0000공격의 정확도^000000를 높여주고,";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FFAgi^000000는 ^FF0000공격속도^000000와 ^FF0000회피율^000000을 높이는데";
+				mes "^0000FFLuk^000000은 ^FF0000크리티컬 확률^000000을 높이는데";
+				mes "각각 영향을 미쳐요.";
+				next;
+				mes "[검사 에칼토]";
+				mes "오른쪽 방에 있는 검사 아론에게서";
+				mes "보다 자세한 정보를 얻을 수 있을";
+				mes "거예요.";
+				next;
+				break;
+			case 2:
+				mes "[검사 포딘]";
+				mes "검사의 주된 무기는 검이며,";
+				mes "활과 지팡이를 제외한 모든 무기를";
+				mes "다룰 수 있어요.";
+				next;
+				mes "[검사 에칼토]";
+				mes "이후에 나이트나 크루세이더로";
+				mes "전직을 하게 되면 검과 창을 주로";
+				mes "쓰게 되며, 크루세이더의 경우는";
+				mes "방패를 이용해 방어력을 높일 수가";
+				mes "있지요.";
+				next;
+				break;
+			case 3:
+				mes "[검사 포딘]";
+				mes "^0000FFHP회복력 향상^000000은 패시브 스킬로,";
+				mes "자연 체력 회복 속도를 향상시켜";
+				mes "줘요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF인듀어^000000는 액티브 스킬로,";
+				mes "일정시간 동안 적에게 공격을";
+				mes "당해도 이동이나 공격이 가능하지요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF프로보크^000000는 액티브 스킬로,";
+				mes "지정된 적을 흥분시켜 공격력을";
+				mes "높이는 대신 방어력을 낮춰줘요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF한손검 수련^000000은 패시브 스킬로,";
+				mes "스킬 레벨이 높을 수록 한손검";
+				mes "사용 시에 공격력이 증가하게 되죠.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF양손검 수련^000000 역시 패시브 스킬로,";
+				mes "한손검 수련처럼 스킬 레벨이";
+				mes "올라갈 수록 양손검 사용시의";
+				mes "공격력이 증가하게 돼요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF배쉬^000000는 액티브 스킬로,";
+				mes "지정된 적을 강하게 공격하여";
+				mes "높은 데미지를 입히는 것으로";
+				mes "전직 이후에도 두루 쓰이는";
+				mes "효과적인 공격 스킬이에요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF매그넘 브레이크^000000는 액티브 스킬로,";
+				mes "주위에 있는 적들 전체에게 데미지를";
+				mes "입힌 후 밀어내는 화속성 스플래쉬";
+				mes "공격이에요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF급소치기^000000는 패시브 스킬로,";
+				mes "배쉬(6LV이상) 사용 시 일정확률로";
+				mes "적을 스턴에 걸리게 만들어요.";
+				mes "잡레벨 30이상, 배쉬 6레벨 이상의";
+				mes "조건을 만족시킨 뒤 프론테라의";
+				next;
+				mes "[검사 포딘]";
+				mes "기사단에서 '레온 폰 프리슈'를";
+				mes "만나면 ^0000FF급소치기^000000를";
+				mes "가르쳐 줄 거예요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF오토 버서크^000000는 패시브 스킬로,";
+				mes "빈사상태(HP25%이하)에 처하게 되면";
+				mes "분노하게 되며, 이때의 분노상태는";
+				mes "프로보크 LV10에 걸린 것과 같아져요";
+				next;
+				mes "[검사 포딘]";
+				mes "잡레벨 30이상을 만족시킨 뒤";
+				mes "프론테라 제련소에 있는 후안을";
+				mes "찾아가면 ^0000FF오토 버서크^000000를 익힐 수";
+				mes "있을 거예요.";
+				next;
+				mes "[검사 포딘]";
+				mes "^0000FF이동시 HP회복^000000은 패시브 스킬로,";
+				mes "이동시에도 HP가 회복되는 유용한";
+				mes "스킬이에요.";
+				next;
+				mes "[검사 포딘]";
+				mes "잡레벨 35이상을 만족시킨 뒤";
+				mes "이즈루드 가옥 내에 있는";
+				mes "기사 디토마소를 찾아가면";
+				mes "^0000FF이동시 HP회복^000000을 배울 수 있을";
+				mes "거예요.";
+				next;
+				break;
+			case 4:
+				mes "[검사 포딘]";
+				mes "이즈루드 광장에 있는 ^0000FF최면술사^000000를";
+				mes "찾아가면 스킬이나 스테이터스를";
+				mes "초기화 하여 다시 원하는 대로";
+				mes "분배할 수 있을 거예요.";
+				next;
+				mes "[검사 포딘]";
+				mes "노비스에서 1차 직업까지";
+				mes "제한 없이 이용가능하니";
+				mes "참고하세요.";
+				next;
+				break;
+			case 5:
+				mes "[검사 포딘]";
+				mes "잡레벨 40을 만족시키면";
+				mes "2차 전직을 신청할 수 있어요.";
+				mes "공격에 특화된 직업을 원한다면";
+				mes "나이트가 적합하며,";
+				next;
+				mes "[검사 포딘]";
+				mes "전직 신청은";
+				mes "프론테라 북서쪽에 있는";
+				mes "기사단에서 가능해요.";
+				next;
+				mes "[검사 포딘]";
+				mes "방어에 특화된 직업을 원한다면";
+				mes "크루세이더가 적합하며, 전직 신청은";
+				mes "프론테라 북쪽에 있는 성에서";
+				mes "크루세이더 리더를 통해 가능해요.";
+				next;
+				mes "[검사 포딘]";
+				mes "두 직업 모두 전직 시험을 거쳐야";
+				mes "하며, 전직을 완료하게 되면";
+				mes "이동 수단인 페코페코를";
+				mes "탈 수 있어요.";
+				next;
+				break;
+			case 6:
+				mes "[검사 포딘]";
+				mes "낙원단에 등록을 하고 자신의";
+				mes "레벨 대에 맞는 퀘스트를 수행한다면";
+				mes "보다 순조로운 성장이 가능할 거예요";
+				next;
+				mes "[검사 포딘]";
+				mes "이곳에 마침 파견나온";
+				mes "낙원단 공간이동사가 있으니 말을";
+				mes "걸어보세요.";
+				close;
+			}
+		}
+	}
+	if(BaseJob != Job_Swordman) {
+		mes "[검사 포딘]";
+		mes "나는 에칼토님과 함께 검사들의";
+		mes "2차 전직을 돕는 상담원이오. 때문에";
+		mes "당신이 내게 말을 걸어도, 나는 딱히";
+		mes "할 말이 없지요.";
+		}
+	end;
 }

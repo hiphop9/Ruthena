@@ -1,0 +1,8 @@
+
+Header:
+  Type: ITEM_REFORM_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep19/item_reform.yml

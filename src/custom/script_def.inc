@@ -9,3 +9,6 @@
  **/
 
 //BUILDIN_DEF(example,""),
+	BUILDIN_DEF(specialeffect3,"iii"), // skill effect on unit
+	BUILDIN_DEF(unitisforcewalk, "i"),
+	BUILDIN_DEF(numisstr,"i"), //Ãß°¡ ·ç³ªÆ½(The Lunatic)

@@ -1,0 +1,8 @@
+
+Header:
+  Type: QUEST_DB
+  Version: 2
+
+Footer:
+  Imports:
+  - Path: db/import/ep19/quest_db.yml

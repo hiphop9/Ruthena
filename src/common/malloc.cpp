@@ -9,6 +9,7 @@
 
 #include "core.hpp"
 #include "showmsg.hpp"
+#include <config/custom.hpp>
 
 #if defined(__64BIT__)
 	#define FREED_POINTER 0xdeadbeafL
@@ -77,7 +78,10 @@ void* aMalloc_(size_t size, const char *file, int line, const char *func)
 	void *ret = MALLOC(size, file, line, func);
 	// ShowMessage("%s:%d: in func %s: aMalloc %d\n",file,line,func,size);
 	if (ret == nullptr){
-		ShowFatalError("%s:%d: in func %s: aMalloc error out of memory!\n",file,line,func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("%s 파일의 %d 줄에 함수 %s이(가) 메모리 부족으로 aMalloc 오류가 발생했습니다.\n",file,line,func);
+		else
+			ShowFatalError("%s:%d: in func %s: aMalloc error out of memory!\n",file,line,func);
 		exit(EXIT_FAILURE);
 	}
 
@@ -88,7 +92,10 @@ void* aCalloc_(size_t num, size_t size, const char *file, int line, const char *
 	void *ret = CALLOC(num, size, file, line, func);
 	// ShowMessage("%s:%d: in func %s: aCalloc %d %d\n",file,line,func,num,size);
 	if (ret == nullptr){
-		ShowFatalError("%s:%d: in func %s: aCalloc error out of memory!\n", file, line, func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("%s 파일의 %d 줄에 함수 %s이(가) 메모리 부족으로 aCalloc 오류가 발생했습니다.\n", file, line, func);
+		else
+			ShowFatalError("%s:%d: in func %s: aCalloc error out of memory!\n", file, line, func);
 		exit(EXIT_FAILURE);
 	}
 	return ret;
@@ -98,7 +105,10 @@ void* aRealloc_(void *p, size_t size, const char *file, int line, const char *fu
 	void *ret = REALLOC(p, size, file, line, func);
 	// ShowMessage("%s:%d: in func %s: aRealloc %p %d\n",file,line,func,p,size);
 	if (ret == nullptr){
-		ShowFatalError("%s:%d: in func %s: aRealloc error out of memory!\n",file,line,func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("%s 파일의 %d 줄에 함수 %s이(가) 메모리 부족으로 aRealloc 오류가 발생했습니다.\n",file,line,func);
+		else
+			ShowFatalError("%s:%d: in func %s: aRealloc error out of memory!\n",file,line,func);
 		exit(EXIT_FAILURE);
 	}
 	return ret;
@@ -108,7 +118,10 @@ char* aStrdup_(const char *p, const char *file, int line, const char *func)
 	char *ret = STRDUP(p, file, line, func);
 	// ShowMessage("%s:%d: in func %s: aStrdup %p\n",file,line,func,p);
 	if (ret == nullptr){
-		ShowFatalError("%s:%d: in func %s: aStrdup error out of memory!\n", file, line, func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("%s 파일의 %d 줄에 함수 %s이(가) 메모리 부족으로 aStrdup 오류가 발생했습니다.\n", file, line, func);
+		else
+			ShowFatalError("%s:%d: in func %s: aStrdup error out of memory!\n", file, line, func);
 		exit(EXIT_FAILURE);
 	}
 	return ret;
@@ -306,11 +319,17 @@ void* _mmalloc(size_t size, const char *file, int line, const char *func )
 			{
 				if( head->line != 0xfdfd )
 				{
-					ShowError("Memory manager: freed-data is changed. (freed in %s line %d)\n", head->file,head->line);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("Memory manager: freed-data가 변경되었습니다. (freed in %s line %d)\n", head->file,head->line);
+					else
+						ShowError("Memory manager: freed-data is changed. (freed in %s line %d)\n", head->file,head->line);
 				}
 				else
 				{
-					ShowError("Memory manager: not-allocated-data is changed.\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("Memory manager: not-allocated-data가 변경되었습니다.\n");
+					else
+						ShowError("Memory manager: not-allocated-data is changed.\n");
 				}
 				break;
 			}
@@ -645,9 +664,15 @@ static void memmgr_final (void)
 	}
 #ifdef LOG_MEMMGR
 	if(count == 0) {
-		ShowInfo("Memory manager: No memory leaks found.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("Memory manager: 메모리 누수가 없습니다.\n");
+		else
+			ShowInfo("Memory manager: No memory leaks found.\n");
 	} else {
-		ShowWarning("Memory manager: Memory leaks found and fixed.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("Memory manager: 메모리 누수를 발견하여 해결되었습니다.\n");
+		else
+			ShowWarning("Memory manager: Memory leaks found and fixed.\n");
 		fclose(log_fp);
 	}
 #endif /* LOG_MEMMGR */
@@ -657,7 +682,10 @@ static void memmgr_init (void)
 {
 #ifdef LOG_MEMMGR
 	sprintf(memmer_logfile, "log/%s.leaks", SERVER_NAME);
-	ShowStatus("Memory manager initialised: " CL_WHITE "%s" CL_RESET "\n", memmer_logfile);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("메모리 관리자 초기화: " CL_WHITE "%s" CL_RESET "\n", memmer_logfile);
+	else
+		ShowStatus("Memory manager initialised: " CL_WHITE "%s" CL_RESET "\n", memmer_logfile);
 	memset(hash_unfill, 0, sizeof(hash_unfill));
 #endif /* LOG_MEMMGR */
 }

@@ -1,0 +1,617 @@
+//===== rAthena Script =======================================
+//= Instance: The Maze of Oz.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Part of the episode 18.1 main quest.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 28.
+ra_fild10,179,176,5	script	상인#ep18_협곡	4_EP18_MERCHANT,{
+	// .@md_name$ = "오즈의 미로";
+	.@md_name$ = "The Maze of Oz";
+
+	if (ep18_1_main == 29) {
+		mes "[변장한 미리암]";
+		mes "지금부터 <FONT SIZE = 14><B>^e5555e" + .@md_name$ + "^000000</FONT></B>에 들어갑니다.";
+		mes "^e5555e준비를 마치고 다시^000000 말해 주십시오.";
+		cutin "ep18_merchant.png",2;
+		changequest 11717,11719;
+		ep18_1_main = 30;
+		close3;
+	}
+	if (ep18_1_main == 30) {
+		mes "[변장한 미리암]";
+		mes "그럼 ^e5555e" + .@md_name$ + "^000000로 출발하겠습니다.";
+		next;
+		if (getcharid(1) == 0 || is_party_leader() == false) {
+			mes "[변장한 미리암]";
+			mes "만약을 위해 ^ff0000파티를 결성^000000하고 들어가는 게 좋을 것 같습니다.";
+			close;
+		}
+		switch( select( "문을 연다.", "들어 간다.", "그만 둔다." ) ) {
+		case 1:
+			if (instance_create(.@md_name$) < 0) {
+				mes "Party: " + getpartyname(getcharid(1)) + "";
+				mes "Leader: " + strcharinfo(0) + "";
+				mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+				close;
+			}
+			mes "[변장한 미리암]";
+			mes "조금 기다린 후에 들어가 보는게 좋겠습니다."; // You'd better wait a little before you go in.
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "[변장한 미리암]";
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+				mes "[변장한 미리암]";
+				mes "^ff0000Your party leader has not yet created the dungeon.^000000";
+				close;
+			case IE_NOMEMBER:
+				mes "[변장한 미리암]";
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close;
+			case IE_OK:
+				mapannounce "ra_fild10", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".",bc_map,"0x00ff99",FW_NORMAL,12;
+				end;
+			}
+		case 3:
+			end;
+		}
+	}
+	cutin "ep18_merchant.png",2;
+	mes "[상인]";
+	mes "누군가가 이 근처에 있었던 것 같은데 금방 사라져 버렸군. 어디로 갔지?";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11717) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11719) == 1" );
+	end;
+}
+
+// Step 1
+1@oz,284,164,3	script	밧줄#outoz	4_ROPEPILE,{
+	mes "밧줄을 이용해 위로 올라갈 수 있을 것 같다.";
+	next;
+	if (select( "밧줄을 사용해 올라간다.", "사용하지 않는다." ) == 2)
+		end;
+	warp "ra_fild10",180,174;
+	end;
+}
+
+1@oz,282,175,3	script	미리암#ozmd1	4_EP18_MIRIAM,{
+	if ('event_oz != 0)
+		end;
+	'event_oz = 1;
+	.@miriam1$ = instance_npcname("미리암#ozmd1");
+	.@maggi1$ = instance_npcname("마기#ozmd1");
+	.@mark1$ = instance_npcname("마크#ozmd1");
+	.@tamarin1$ = instance_npcname("타마린#ozmd1");
+	.@miriam2$ = instance_npcname("미리암#ozmd2");
+
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "미리암 : 여기가 오즈의 미로 입구입니다.", .@miriam1$;
+	cutin "ep18_miriam_03.png",2;
+	sleep2 2000;
+	npctalk "미리암 : 다들 조심해서 움직여 주십시오.", .@miriam1$;
+	sleep2 2000;
+	npctalk "마기 : 콜록콜록 뭔가 뜨겁고 먼지가 잔뜩……", .@maggi1$;
+	cutin "4job_maggi_02.PNG",2;
+	enablenpc .@maggi1$;
+	enablenpc .@mark1$;
+	enablenpc .@tamarin1$;
+	sleep2 2000;
+	npctalk "마크 : 괜찮아?", .@mark1$;
+	cutin "ep18_mark_01.png",2;
+	sleep2 2000;
+	npctalk "미리암 : 바로 아래에 용암이 흐르고 있어 늘 재가 흩날리고 있습니다.", .@miriam1$;
+	cutin "ep18_miriam_03.png",2;
+	sleep2 2000;
+	npctalk "미리암 : 용암재에 불씨가 남아있을지도 모르니 조심해주십시오.", .@miriam1$;
+	sleep2 2000;
+	npctalk "미리암 : 잘못 들이마셨다간 폐에 화상을 입게 될 겁니다.", .@miriam1$;
+	sleep2 2000;
+	npctalk "미리암 : 이 근처엔 몬스터가 없는 것 같으니 일단 천천히 이동해서 다시 상황을 살피는 게 좋겠습니다.", .@miriam1$;
+	sleep2 2000;
+	npctalk "미리암 : 일단 북쪽으로 난 길을 따라와 주십시오.", .@miriam1$;
+	sleep2 2000;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+
+	disablenpc .@maggi1$;
+	disablenpc .@mark1$;
+	disablenpc .@tamarin1$;
+	disablenpc .@miriam1$;
+	enablenpc .@miriam2$;
+	end;
+}
+
+1@oz,279,175,5	duplicate(dummy_npc)	마기#ozmd1	4_4JOB_MAGGI
+1@oz,280,175,3	duplicate(dummy_npc)	마크#ozmd1	4_EP18_MARK
+1@oz,279,177,3	duplicate(dummy_npc)	타마린#ozmd1	4_EP18_TAMARIN
+
+
+// Step 2
+1@oz,271,272,3	script	미리암#ozmd2	4_EP18_MIRIAM,{
+	if ('event_oz != 1)
+		end;
+	'event_oz = 2;
+	.@miriam2$ = instance_npcname("미리암#ozmd2");
+	'miriam3$ = instance_npcname("미리암#ozmd3");
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "미리암 : 저 앞에 보이는 다리를 건너면 진짜 오즈의 미로 입니다.", .@miriam2$;
+	sleep2 2000;
+	npctalk "미리암 : 다리를 건너는 건 각별히 조심해야하니 다리 앞에서 다시 이야기 합시다.", .@miriam2$;
+	sleep2 2000;
+	setpcblock PCBLOCK_NPC, false;
+	disablenpc .@miriam2$;
+	enablenpc 'miriam3$;
+	end;
+
+OnInstanceInit:
+	'miriam3_id = 0;
+	'event_oz = 0;
+
+	'map_name$ = instance_mapname(strnpcinfo(4));
+	disablenpc instance_npcname("미리암#ozmd2");
+	disablenpc instance_npcname("미리암#ozmd3");
+	disablenpc instance_npcname("미리암#ozmd4");
+	disablenpc instance_npcname("마람#ozmd5");
+	disablenpc instance_npcname("미리암#ozmd5");
+	disablenpc instance_npcname("마람#ozmd7");
+	disablenpc instance_npcname("#oz_way");
+	disablenpc instance_npcname("마람#ozmd6");
+	disablenpc instance_npcname("마기#ozmd1");
+	disablenpc instance_npcname("마크#ozmd1");
+	disablenpc instance_npcname("타마린#ozmd1");
+	disablenpc instance_npcname("마기#ozmd3");
+	disablenpc instance_npcname("마크#ozmd3");
+	disablenpc instance_npcname("타마린#ozmd3");
+	disablenpc instance_npcname("마람#ozmd4");
+	disablenpc instance_npcname("마기#ozmd5");
+	disablenpc instance_npcname("마크#ozmd5");
+	disablenpc instance_npcname("타마린#ozmd5");
+	disablenpc instance_npcname("마람#ozmd8");
+	disablenpc instance_npcname("마기#ozmd6");
+	disablenpc instance_npcname("마크#ozmd6");
+	disablenpc instance_npcname("타마린#ozmd6");
+	disablenpc instance_npcname("미리암#ozmd7");
+	disablenpc instance_npcname("이므릴#ozmd7");
+	end;
+}
+
+
+// Step 3
+1@oz,241,272,3	script	미리암#ozmd3	EP18_NPC_MIRIAM,{
+	if ('event_oz != 2)
+		end;
+	'event_oz = 3;
+	'miriam3$ = instance_npcname("미리암#ozmd3");
+	.@maggi3$ = instance_npcname("마기#ozmd3");
+	.@mark3$ = instance_npcname("마크#ozmd3");
+	.@tamarin3$ = instance_npcname("타마린#ozmd3");
+
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "미리암 : 이 다리는 위험하니 짐을 나눠들고 차례대로 건너는 게 좋겠습니다.", 'miriam3$;
+	sleep2 2000;
+	npctalk "미리암 : 그럼 제가 먼저 건널테니 천천히 따라오시기 바랍니다. 발아래는 보지 않는 게 도움이 될 겁니다.", 'miriam3$;
+	sleep2 2000;
+	npctalk "타마린 : 와… 바닥이 보이지 않네요.", .@tamarin3$;
+	enablenpc .@maggi3$;
+	enablenpc .@mark3$;
+	enablenpc .@tamarin3$;
+	sleep2 2000;
+	npctalk "마기 : 다리가 엄청 낡은 것 같은데…", .@maggi3$;
+	sleep2 2000;
+	npctalk "마크 : 다들 조심해요.", .@mark3$;
+	sleep2 2000;
+	setpcblock PCBLOCK_NPC, false;
+	disablenpc .@maggi3$;
+	disablenpc .@mark3$;
+	disablenpc .@tamarin3$;
+	'miriam3_id = getnpcid(0);
+
+	unitwalk 'miriam3_id,231,272, 'miriam3$ + "::OnEvent1";	// several events are required to palliate to our too short value of MAX_WALKPATH (32) used to calculate the pathing
+	end;
+OnEvent1:
+	unitwalk 'miriam3_id,211,272, 'miriam3$ + "::OnEvent2";
+	end;
+OnEvent2:
+	unitwalk 'miriam3_id,191,272, 'miriam3$ + "::OnEvent3";
+	end;
+OnEvent3:
+	unitwalk 'miriam3_id,171,272, 'miriam3$ + "::OnEvent4";
+	end;
+OnEvent4:
+	unitwalk 'miriam3_id,157,272, 'miriam3$ + "::OnEvent5";
+	end;
+OnEvent5:
+	disablenpc 'miriam3$;
+	enablenpc instance_npcname("미리암#ozmd4");
+	enablenpc instance_npcname("재두꺼비#ozmd1");
+	end;
+}
+
+1@oz,245,272,3	duplicate(dummy_npc)	마기#ozmd3	4_4JOB_MAGGI
+1@oz,244,273,3	duplicate(dummy_npc)	마크#ozmd3	4_EP18_MARK
+1@oz,244,270,3	duplicate(dummy_npc)	타마린#ozmd3	4_EP18_TAMARIN
+
+
+// Step 4 + 5
+1@oz,157,272,3	script	미리암#ozmd4	4_EP18_MIRIAM,{
+	if ('event_oz != 3)
+		end;
+	'event_oz = 4;
+
+	.@miriam4$ = instance_npcname("미리암#ozmd4");
+	.@tamarin4$ = instance_npcname("타마린#ozmd4");
+	.@ashtoad2$ = instance_npcname("재두꺼비#ozmd2");
+	.@maggi4$ = instance_npcname("마기#ozmd4");
+	.@mark4$ = instance_npcname("마크#ozmd4");
+	.@ashtoad3$ = instance_npcname("재두꺼비#ozmd3");
+
+	setpcblock PCBLOCK_NPC, true;
+	mapannounce 'map_name$, "미리암 : 아앗!! 몬스터가!!!", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 1500;
+	mapannounce 'map_name$, "미리암 : 이 무례한 녀석은 제가 맡도록 하겠습니다.", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 1500;
+	mapannounce 'map_name$, "타마린 : 뒤쪽에도 나타났어요!!!", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 2000;
+	enablenpc .@tamarin4$;
+	sleep2 500;
+	enablenpc .@ashtoad2$;
+	mapannounce 'map_name$, "마기 : 꺄악!!!", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 500;
+	enablenpc .@maggi4$;
+	enablenpc .@mark4$;
+	mapannounce 'map_name$, "마크 : 앞쪽 지원 부탁해요!!!", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 1000;
+	'mob_count_oz = 0;
+	monster 'map_name$,145,274,"재두꺼비",21295,1, .@miriam4$ + "::OnMobDead";	// EP18_ASH_TOAD
+	enablenpc .@ashtoad3$;
+	monster 'map_name$,143,278,"재두꺼비",21295,1, .@miriam4$ + "::OnMobDead";	// EP18_ASH_TOAD
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+// Note: on official the event starts right after killing the 2 mobs. The character can't move.
+// There is no OnTouch area, a character outside the npc range can't see the dialog. Intended ?
+OnMobDead:
+	'mob_count_oz++;
+	if ('mob_count_oz < 2)
+		end;
+	if ('event_oz != 4)
+		end;
+	'event_oz = 5;
+
+	.@tamarin4$ = instance_npcname("타마린#ozmd4");
+	.@ashtoad2$ = instance_npcname("재두꺼비#ozmd2");
+	.@maggi4$ = instance_npcname("마기#ozmd4");
+	.@mark4$ = instance_npcname("마크#ozmd4");
+	.@ashtoad3$ = instance_npcname("재두꺼비#ozmd3");
+	.@maram4$ = instance_npcname("마람#ozmd4");
+	.@ashtoad1$ = instance_npcname("재두꺼비#ozmd1");
+	.@tamarin4$ = instance_npcname("타마린#ozmd4");
+	.@miriam4$ = instance_npcname("미리암#ozmd4");
+
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "타마린 : 해치웠어요!!!", .@tamarin4$;
+	disablenpc .@ashtoad2$;
+	sleep2 2000;
+	npctalk "마기 : 이쪽도!!", .@maggi4$;
+	disablenpc .@ashtoad3$;
+	sleep2 2000;
+	npctalk "미리암 : 후… 대단한 몬스터는 아니었지만 평범한 상인들이었다면 위험했을 겁니다.", .@miriam4$;
+	disablenpc .@ashtoad1$;
+	sleep2 2000;
+	npctalk "마람 : " + strcharinfo(0) + " 괜찮으세요?", .@maram4$;
+	enablenpc .@maram4$;
+	sleep2 2000;
+	npctalk "미리암 : 늦었잖아! 마람!!!", .@miriam4$;
+	sleep2 2000;
+	npctalk "마람 : 오는 길에 몬스터를 만나서 조금 늦었어요.", .@maram4$;
+	sleep2 2000;
+	npctalk "미리암 : 아까 우리가 지나온 길엔 몬스터가 없었는데.", .@miriam4$;
+	sleep2 2000;
+	npctalk "마람 : 그래? 대체 어디서 이렇게나 몬스터가 솟아나는 거지…", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 이 몬스터들 때문에 물자이동도 점점 힘들어지고 있어서 큰일이야.", .@maram4$;
+	sleep2 2000;
+	npctalk "타마린 : 지상으로 다니면?", .@tamarin4$;
+	sleep2 2000;
+	npctalk "타마린 : 예전엔 협곡을 지나다닐 수 있는 다리가 있었다고 들었거든요?", .@tamarin4$;
+	sleep2 2000;
+	npctalk "타마린 : 지금도 잔해가 남아있긴 하니까…", .@tamarin4$;
+	sleep2 2000;
+	npctalk "마람 : 위에 있던 다리는 강경파의 공격을 피해 달아나던 원주민들이 건너는 걸 보고 없애버렸다고 하네요.", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 다리건너편은 화산재 때문에 사람이 살 수 없는 땅이 되어버렸으니 말려 죽일 심산이었겠죠.", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 다시 다리를 만드는 건 어렵지 않지만…", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 숨어 있는 입장이다 보니 다리 같은 걸 만들어서 여기에 숨어있다고 광고를 할 순 없잖아요.", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 지금은 위험하고 불편하지만 오즈의 미로를 사용할 수 밖에 없어요.", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 이런 상태라 지금까지 들키지 않은 것일 수도 있구요.", .@maram4$;
+	sleep2 2000;
+	npctalk "미리암 : 오즈의 미로가 없었다면…", .@miriam4$;
+	sleep2 2000;
+	npctalk "미리암 : 지금보다 훨씬 더 힘들었을 겁니다.", .@miriam4$;
+	sleep2 2000;
+	npctalk "마람 : 맞아.", .@maram4$;
+	sleep2 2000;
+	npctalk "마람 : 자~ 그럼 우리 사랑스러운 오즈의 미로 길을 다시 걸어 볼까?", .@maram4$;
+	sleep2 2000;
+	npctalk "미리암 : 뭐라는 건지…", .@miriam4$;
+	sleep2 2000;
+	npctalk "미리암 : " + strcharinfo(0) + " 지금부터는 갈림길이 나올 때까지 쭉 아래로 내려가시면 됩니다.", .@miriam4$;
+	sleep2 2000;
+	npctalk "미리암 : 몬스터가 나타나지 않으면 좋겠지만…", .@miriam4$;
+	sleep2 1000;
+	disablenpc .@maram4$;
+	setpcblock PCBLOCK_NPC, false;
+
+	disablenpc .@maggi4$;
+	disablenpc .@mark4$;
+	disablenpc .@tamarin4$;
+	disablenpc .@miriam4$;
+	enablenpc instance_npcname("마람#ozmd5");
+	end;
+}
+
+1@oz,156,272,5	duplicate(dummy_disabled_instance_npc)	재두꺼비#ozmd1	EP18_ASH_TOAD
+1@oz,164,272,3	duplicate(dummy_disabled_instance_npc)	재두꺼비#ozmd2	EP18_ASH_TOAD
+1@oz,153,275,5	duplicate(dummy_disabled_instance_npc)	재두꺼비#ozmd3	EP18_ASH_TOAD
+1@oz,155,275,3	duplicate(dummy_disabled_instance_npc)	마기#ozmd4	4_4JOB_MAGGI
+1@oz,156,274,3	duplicate(dummy_disabled_instance_npc)	마크#ozmd4	4_EP18_MARK
+1@oz,161,272,5	duplicate(dummy_disabled_instance_npc)	타마린#ozmd4	4_EP18_TAMARIN
+
+1@oz,162,275,3	duplicate(dummy_npc)	마람#ozmd4	4_EP18_MARAM
+
+
+// Step 6
+1@oz,98,172,3	script	마람#ozmd5	EP18_NPC_MARAM,{
+	if ('event_oz != 5)
+		end;
+	'event_oz = 6;
+	.@miriam$ = instance_npcname("미리암#ozmd5");
+	.@maram$ = instance_npcname("마람#ozmd5");
+
+	enablenpc .@miriam$;
+	enablenpc instance_npcname("마기#ozmd5");
+	enablenpc instance_npcname("마크#ozmd5");
+	enablenpc instance_npcname("타마린#ozmd5");
+	npctalk "마람 : 예전엔 이 정도는 아니었는데 토르화산의 영향인지 아래쪽 땅이 녹기 시작하면서 몬스터들이 더 많이 나타나고 있어요.";
+	setpcblock PCBLOCK_NPC, true;
+	sleep2 2000;
+	npctalk "마람 : 특히 땅이 많이 녹은 지역은 몬스터를 피하려다가 용암 때문에 크게 다치거나 돌아오지 못하게 되는 사람들도 많으니까……";
+	sleep2 2000;
+	npctalk "마람 : 오즈의 미로가 언제까지 버텨줄지…";
+	sleep2 3000;
+	mapannounce 'map_name$, "??? : 으아악!!!!!!!!!!!!!!!!!!!", bc_map, 0x00B7EE,FW_NORMAL,16;
+	sleep2 2000;
+	npctalk "마람 : 이 목소리는?!?!?!?!?";
+	sleep2 2000;
+	npctalk "미리암 : 이므릴!!!!", .@miriam$;
+	sleep2 2000;
+	setpcblock PCBLOCK_NPC, false;
+	npctalk "마람 : 친구가 곤경에 처한 것 같아요! 먼저 갈테니 조심해서 따라와 주세요!";
+	disablenpc instance_npcname("마기#ozmd5");
+	disablenpc instance_npcname("마크#ozmd5");
+	disablenpc instance_npcname("타마린#ozmd5");
+	unitwalk getnpcid(0),68,165, .@maram$ + "::OnMove";
+	donpcevent .@miriam$ + "::OnMove";
+	end;
+OnMove:
+	disablenpc instance_npcname("마람#ozmd5");
+	enablenpc instance_npcname("마람#ozmd7");
+	enablenpc instance_npcname("이므릴#ozmd6");
+	end;
+}
+
+1@oz,97,167,3	script	미리암#ozmd5	EP18_NPC_MIRIAM,{
+	end;
+OnMove:
+	npcwalkto 67,164;
+	end;
+}
+
+1@oz,92,170,3	duplicate(dummy_npc)	마기#ozmd5	4_4JOB_MAGGI
+1@oz,91,169,3	duplicate(dummy_npc)	마크#ozmd5	4_EP18_MARK
+1@oz,89,170,5	duplicate(dummy_npc)	타마린#ozmd5	4_EP18_TAMARIN
+
+
+
+// Step 7
+1@oz,68,165,3	script	마람#ozmd7	4_EP18_MARAM,{
+	if ('event_oz != 6)
+		end;
+	'event_oz = 7;
+	npctalk "마람 : 이므릴 괜찮아?";
+	donpcevent instance_npcname("이므릴#ozmd6") + "::OnStart";
+	disablenpc instance_npcname("마람#ozmd7");
+	end;
+}
+
+
+// Step 8
+1@oz,61,163,5	script	이므릴#ozmd6	4_EP18_IMRIL,{
+	end;
+
+OnStart:
+	'mob_count_oz = 0;
+	.@npc_name$ = instance_npcname("이므릴#ozmd6");
+	monster 'map_name$,64,164,"재두꺼비",21295,1, .@npc_name$ + "::OnMobDead";	// EP18_ASH_TOAD
+	monster 'map_name$,62,161,"갈퀴손",21296,1, .@npc_name$ + "::OnMobDead";	// EP18_RAKEHAND
+	end;
+
+OnMobDead:
+	'mob_count_oz++;
+	if ('mob_count_oz < 2)
+		end;
+	if ('event_oz != 7)
+		end;
+	'event_oz = 8;
+
+	.@maram8$ = instance_npcname("마람#ozmd8");
+	.@imril6$ = instance_npcname("이므릴#ozmd6");
+	.@miriam5$ = instance_npcname("미리암#ozmd5");
+	.@maggi6$ = instance_npcname("마기#ozmd6");
+	.@mark6$ = instance_npcname("마크#ozmd6");
+	.@tamarin6$ = instance_npcname("타마린#ozmd6");
+
+	setpcblock PCBLOCK_NPC, true;
+	enablenpc .@maram8$;
+	npctalk "이므릴 : 고마워! 거의 다 와서 죽을뻔 했네!", .@imril6$;
+	sleep2 2000;
+	npctalk "이므릴 : 분위기가 심상치 않으니까 아래쪽으로는 내려가지 마.", .@imril6$;
+	sleep2 2000;
+	npctalk "미리암 : 저번보다 몬스터가 더 자주 보이는 것 같긴해.", .@miriam5$;
+	sleep2 2000;
+	npctalk "이므릴 : 그런데 그 사람들은?", .@imril6$;
+	enablenpc .@maggi6$;
+	enablenpc .@mark6$;
+	enablenpc .@tamarin6$;
+	sleep2 2000;
+	npctalk "마람 : 가끔 어머니의 일을 도와주시는 모험가님 들이야.", .@maram8$;
+	sleep2 2000;
+	npctalk "마람 : 믿을만한 분들이니 그렇게 경계하지마.", .@maram8$;
+	sleep2 2000;
+	npctalk "이므릴 : 넌 너무 쉽게 사람을 믿어버린다니까.", .@imril6$;
+	sleep2 2000;
+	npctalk "미리암 : 그러게.", .@miriam5$;
+	sleep2 2000;
+	npctalk "마람 : 아무튼 몬스터가 더 나오기 전에 빨리 탈출하자.", .@maram8$;
+	sleep2 2000;
+	npctalk "마람 : 얼마 안 남았어.", .@maram8$;
+	sleep2 2000;
+	npctalk "마람 : 잘 보이진 않지만 여기 위쪽으로 나있는 길을 따라 쭉 이동하시면 되요!", .@maram8$;
+	sleep2 2000;
+	npctalk "타마린 : 이쪽길인 것 같아요!", .@tamarin6$;
+	disablenpc .@maggi6$;
+	disablenpc .@mark6$;
+	disablenpc .@tamarin6$;
+	disablenpc .@maram8$;
+	enablenpc instance_npcname("#oz_way");
+	setpcblock PCBLOCK_NPC, false;
+	end;
+}
+
+1@oz,68,165,3	duplicate(dummy_npc)	마람#ozmd8	4_EP18_MARAM
+1@oz,61,168,3	duplicate(dummy_npc)	마기#ozmd6	4_4JOB_MAGGI
+1@oz,65,167,3	duplicate(dummy_npc)	마크#ozmd6	4_EP18_MARK
+1@oz,59,171,3	duplicate(dummy_npc)	타마린#ozmd6	4_EP18_TAMARIN
+
+
+
+// Step 9
+1@oz,58,256,5	script	#oz_way	1_SHADOW_NPC,3,3,{
+	end;
+OnTouch:
+	if ('event_oz != 8)
+		end;
+	'event_oz = 9;
+	enablenpc instance_npcname("마람#ozmd6");
+	end;
+}
+
+// Step 10 (maybe not required ?)
+1@oz,44,255,5	script	마람#ozmd6	4_EP18_MARAM,{
+	if ('event_oz != 9)
+		end;
+	'event_oz = 10;
+	npctalk "마람 : 이쪽이에요!!!";
+	initnpctimer;
+	end;
+OnTimer2000:
+	disablenpc instance_npcname("마람#ozmd6");
+	enablenpc instance_npcname("마람#ozmd9");
+	enablenpc instance_npcname("밧줄#outoz2");
+	end;
+}
+
+// Step 11
+// (Step 29 on the main quest).
+1@oz,21,189,5	script	마람#ozmd9	4_EP18_MARAM,{
+	if ('event_oz != 10)
+		end;
+	'event_oz = 11;
+
+	.@maram9$ = instance_npcname("마람#ozmd9");
+	.@miriam7$ = instance_npcname("미리암#ozmd7");
+	.@imril7$ = instance_npcname("이므릴#ozmd7");
+
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "마람 : 이 앞의 밧줄을 타고 올라가면 밖으로 나갈 수 있어요.", .@maram9$;
+	enablenpc .@miriam7$;
+	enablenpc .@imril7$;
+	sleep2 2000;
+	npctalk "이므릴 : 난 여기 숨겨진 물건을 좀 챙겨서 갈테니 먼저 올라가.", .@imril7$;
+	sleep2 2000;
+	npctalk "미리암 : 다들 많이 지쳤어. 어서 올라가자.", .@miriam7$;
+	if (ep18_1_main == 30) {
+		changequest 11719,11720;
+		ep18_1_main = 31;
+	}
+	disablenpc .@miriam7$;
+	disablenpc .@imril7$;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("마람#ozmd9");
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11719) == 1" );
+	end;
+}
+
+1@oz,22,187,5	duplicate(dummy_npc)	미리암#ozmd7	4_EP18_MIRIAM
+1@oz,16,185,3	duplicate(dummy_npc)	이므릴#ozmd7	4_EP18_IMRIL
+
+
+// Step 12
+1@oz,28,190,3	script	밧줄#outoz2	4_ROPEPILE,{
+	if ('event_oz < 11)
+		end;
+	mes "밧줄을 이용해 위로 올라갈 수 있을 것 같다.";
+	next;
+	switch( select( "밧줄을 사용해 올라간다.", "사용하지 않는다." ) ) {
+	case 1:
+		close2;
+		warp "gw_fild01",275,337;
+		end;
+	case 2:
+		end;
+	}
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("밧줄#outoz2");
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11720) == 1" );
+	end;
+}
+
+
+// Spawn monsters
+1@oz,22,207,5	script	#oz01	1_SHADOW_NPC,4,4,{
+	end;
+OnTouch_:
+	getmapxy .@map$,.@x,.@y, BL_NPC;
+	monster 'map_name$,.@x-1,.@y,"재두꺼비",21295,1;	// EP18_ASH_TOAD
+	monster 'map_name$,.@x+1,.@y,"재두꺼비",21296,1;	// EP18_RAKEHAND
+	disablenpc instance_npcname( strnpcinfo(0) );
+	end;
+}
+
+1@oz,30,237,5	duplicate(#oz01)	#oz02	1_SHADOW_NPC,4,4
+1@oz,44,264,5	duplicate(#oz01)	#oz03	1_SHADOW_NPC,4,4
+1@oz,62,247,5	duplicate(#oz01)	#oz04	1_SHADOW_NPC,4,4
+1@oz,72,222,5	duplicate(#oz01)	#oz05	1_SHADOW_NPC,4,4
+1@oz,79,203,5	duplicate(#oz01)	#oz06	1_SHADOW_NPC,4,4
+1@oz,124,261,5	duplicate(#oz01)	#oz07	1_SHADOW_NPC,4,4
+1@oz,139,279,5	duplicate(#oz01)	#oz08	1_SHADOW_NPC,4,4
+

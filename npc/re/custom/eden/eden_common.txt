@@ -1,0 +1,1325 @@
+//=============== 낙원단 =====================================
+// 제작자: 루나틱
+//============================================================
+moc_para01,29,35,5	script	낙원단 물류담당자#para01	995,{
+
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+		mes "- 소지하고 계신 아이템이 많아";
+		mes "퀘스트를 진행 할 수 없습니다.. -";
+		close;
+	}
+	if(checkquest(21441,PLAYTIME) == 2) erasequest 21441;
+	if(checkquest(21422,PLAYTIME) == 2) erasequest 21422;
+
+	//========= 일괄처리 설정 ==============
+	// 1-30 구간
+	set .edenq_lv1_t1,914;
+	set .edenq_lv1_t2,918;
+	set .edenq_lv1_t3,940;
+	set .edenq_lv1_t4,946;
+	set .edenq_lv1_t5,925;
+	set .edenq_lv1_t6,948;
+
+	// 35-55 구간
+	set .edenq_lv2_t1,907;
+	set .edenq_lv2_t2,942;
+	set .edenq_lv2_t3,1041;
+	set .edenq_lv2_t4,961;
+	set .edenq_lv2_t5,950;
+
+	// 60-80 구간
+	set .edenq_lv3_t1,1028;
+	set .edenq_lv3_t2,1020;
+	set .edenq_lv3_t3,944;
+	set .edenq_lv3_t4,1042;
+	set .edenq_lv3_t5,7124;
+
+	// 85-100 구간
+	set .edenq_lv4_t1,7264;
+	set .edenq_lv4_t2,967;
+	set .edenq_lv4_t3,1038;
+	set .edenq_lv4_t4,7561;
+	
+	set .msg1,0;
+
+	if(countitem(.edenq_lv1_t1) >= 30 || countitem(.edenq_lv1_t2) >= 30 || countitem(.edenq_lv1_t3) >= 30 || countitem(.edenq_lv1_t4) >= 30 ||
+	countitem(.edenq_lv1_t5) >= 30 || countitem(.edenq_lv1_t6) >= 30 || countitem(.edenq_lv2_t2) >= 30 || countitem(.edenq_lv2_t3) >= 30 ||
+	countitem(.edenq_lv2_t4) >= 30 || countitem(.edenq_lv2_t5) >= 30 || countitem(.edenq_lv3_t1) >= 30 || countitem(.edenq_lv3_t2) >= 30 || 
+	countitem(.edenq_lv3_t3) >= 30 || countitem(.edenq_lv3_t4) >= 30 || countitem(.edenq_lv3_t5) >= 30 || countitem(.edenq_lv4_t1) >= 30 ||
+	countitem(.edenq_lv4_t2) >= 30 || countitem(.edenq_lv4_t3) >= 30 || countitem(.edenq_lv4_t4) >= 30) {
+	
+		mes "[낙원단 물류담당자]";
+	}
+	
+	if(countitem(.edenq_lv1_t1) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",914,30,5000,21441);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<솜털 납품> 완료.";
+
+	}
+	if(countitem(.edenq_lv1_t2) >= 30) {
+	
+		set .isQue,callfunc("EDenQuest_ItemControl",918,30,5400,21422);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<끈적이는물갈퀴 납품> 완료.";
+	}
+	if(countitem(.edenq_lv1_t3) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",940,30,5940,21423);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<메뚜기뒷다리 납품> 완료.";
+	}
+	if(countitem(.edenq_lv1_t4) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",946,30,7020,21424);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<달팽이껍질 납품> 완료.";
+	}
+	if(countitem(.edenq_lv1_t5) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",925,30,9720,21425);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<새의부리 납품> 완료.";
+	}
+	if(countitem(.edenq_lv1_t6) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",948,30,10800,21426);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<곰발바닥 납품> 완료.";
+	}
+	if(countitem(.edenq_lv2_t1) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",907,30,13980,21427);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<고목나무진 납품> 완료.";
+	}
+	if(countitem(.edenq_lv2_t2) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",942,30,16200,21428);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<원숭이꼬리 납품> 완료.";
+	}
+	if(countitem(.edenq_lv2_t3) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",1041,30,19980,21429);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<랜턴 납품> 완료.";
+	}
+	if(countitem(.edenq_lv2_t4) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",961,30,22140,21430);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<소라 납품> 완료.";
+	}
+	if(countitem(.edenq_lv2_t5) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",950,30,28560,21431);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<인어의심장 납품> 완료.";
+	}
+	if(countitem(.edenq_lv3_t1) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",1028,30,34380,21432);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<멧돼지의갈기털 납품> 완료.";
+	}
+	if(countitem(.edenq_lv3_t2) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",1020,30,35640,21433);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<긴머리카락 납품> 완료.";
+	}
+	if(countitem(.edenq_lv3_t3) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",944,30,36000,21434);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<말발굽 납품> 완료.";
+	}
+	if(countitem(.edenq_lv3_t4) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",1042,30,48600,21435);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<짧은다리 납품> 완료.";
+	}
+	if(countitem(.edenq_lv3_t5) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",7124,30,62040,21436);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<모래덩어리 납품> 완료.";
+	}
+	if(countitem(.edenq_lv4_t1) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",7264,30,72060,21437);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<말라버린 모래 납품> 완료.";
+	}
+	if(countitem(.edenq_lv4_t2) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",967,30,78300,21438);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<거북이등껍질 납품> 완료.";
+	}
+	if(countitem(.edenq_lv4_t3) >= 30) {
+		
+		set .isQue,callfunc("EDenQuest_ItemControl",1038,30,108360,21439);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<새끼악마의뿔 납품> 완료.";
+	}
+	if(countitem(.edenq_lv4_t4) >= 30) {
+
+		set .isQue,callfunc("EDenQuest_ItemControl",7561,30,116640,21440);
+		if(.isQue == 0) goto EnoughAgrement;
+		if(.isQue == -1) goto NotEnought;
+		set .msg1,.msg1+1;
+		mes "<얼음심장 납품> 완료.";
+	}
+	
+	if(.msg1 > 0) {
+		mes "총 "+.msg1+"건의 완료된 납품 정산을 먼저";
+		mes "도와드렸습니다.";
+		close;
+	}
+	E_MainMenu:
+	mes "[낙원단 물류담당자]";
+	mes "낙원단에서는 각종 장비를 제작하기";
+	mes "위한 재료를 납품 받고 있습니다.";
+	next;
+	switch(select("LV 1~30:LV 35~55:LV 60~80:LV 85~100:그만둔다")) {
+	
+	case 1:
+		if(checkquest(21441) == 1) set .edenq_lv1_1$,"^CCCCCC솜털 납품(완료)^000000";
+		else set .edenq_lv1_1$,"솜털 납품 [1]";
+		if(checkquest(21422) == 1) set .edenq_lv1_2$,"^CCCCCC끈적이는물갈퀴 납품(완료)^000000";
+		else set .edenq_lv1_2$,"끈적이는물갈퀴 납품 [10]";
+		if(checkquest(21423) == 1) set .edenq_lv1_3$,"^CCCCCC메뚜기뒷다리 납품(완료)^000000";
+		else set .edenq_lv1_3$,"메뚜기뒷다리 납품 [15]";
+		if(checkquest(21424) == 1) set .edenq_lv1_4$,"^CCCCCC달팽이껍질 납품(완료)^000000";
+		else set .edenq_lv1_4$,"달팽이껍질 납품 [10]";
+		if(checkquest(21424) == 1) set .edenq_lv1_5$,"^CCCCCC새의부리 납품(완료)^000000";
+		else set .edenq_lv1_5$,"새의부리 납품 [25]";
+		if(checkquest(21424) == 1) set .edenq_lv1_6$,"^CCCCCC곰발바닥 납품(완료)^000000";
+		else set .edenq_lv1_6,"곰발바닥 납품 [30]";
+
+		switch(select(.edenq_lv1_1$,.edenq_lv1_2$,.edenq_lv1_3$,.edenq_lv1_4$,.edenq_lv1_5$,.edenq_lv1_6$,"그만둔다")) {
+
+		case 1:
+			if(checkquest(21441) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[솜털 납품 의뢰]";
+			mes "요구 물품 : 솜털 30 개";
+			mes "보상: Exp 5000";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",914,30,5000,21441);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<솜털 납품> 완료.";
+			close;
+		case 2:
+			if(checkquest(21422) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[끈적이는물갈퀴 납품 의뢰]";
+			mes "요구 물품 : 끈적이는물갈퀴 30 개";
+			mes "보상: Exp 5400";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",918,30,5400,21422);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<끈적이는물갈퀴 납품> 완료.";
+			close;
+
+		case 3:
+			if(checkquest(21423) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[메뚜기뒷다리 납품 의뢰]";
+			mes "요구 물품 : 메뚜기뒷다리 30 개";
+			mes "보상: Exp 5940";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",940,30,5940,21423);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<메뚜기뒷다리 납품> 완료.";
+			close;
+		case 4:
+			if(checkquest(21424) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[달팽이껍질 납품 의뢰]";
+			mes "요구 물품 : 달팽이껍질 30 개";
+			mes "보상: Exp 7020";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",946,30,7020,21424);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<달팽이껍질 납품> 완료.";
+			close;
+		case 5:
+			if(checkquest(21425) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[새의부리 납품 의뢰]";
+			mes "요구 물품 : 새의부리 30 개";
+			mes "보상: Exp 9720";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",925,30,9720,21425);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<새의부리 납품> 완료.";
+			close;
+		case 6:
+			if(checkquest(21426) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[곰발바닥 납품 의뢰]";
+			mes "요구 물품 : 곰발바닥 30 개";
+			mes "보상: Exp 10800";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",948,30,10800,21426);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<곰발바닥 납품> 완료.";
+			close;
+		case 7:
+			goto E_MainMenu;
+		}
+	case 2:
+		if(checkquest(21427) == 1) set .edenq_lv2_1$,"^CCCCCC고목나무진 납품(완료)^000000";
+		else set .edenq_lv2_1$,"고목나무진 납품 [35]";
+		if(checkquest(21428) == 1) set .edenq_lv2_2$,"^CCCCCC원숭이꼬리 납품(완료)^000000";
+		else set .edenq_lv2_2$,"원숭이꼬리 납품 [40]";
+		if(checkquest(21429) == 1) set .edenq_lv2_3$,"^CCCCCC랜턴 납품(완료)^000000";
+		else set .edenq_lv2_3$,"랜턴 납품 [45]";
+		if(checkquest(21430) == 1) set .edenq_lv2_4$,"^CCCCCC소라 납품(완료)^000000";
+		else set .edenq_lv2_4$,"소라 납품 [50]";
+		if(checkquest(21431) == 1) set .edenq_lv2_5$,"^CCCCCC인어의심장 납품(완료)^000000";
+		else set .edenq_lv2_5$,"인어의심장 납품 [55]";
+
+		switch(select(.edenq_lv2_1$,.edenq_lv2_2$,.edenq_lv2_3$,.edenq_lv2_4$,.edenq_lv2_5$,"그만둔다")) {
+
+		case 1:
+			if(checkquest(21427) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[고목나무진 납품 의뢰]";
+			mes "요구 물품 : 고목나무진 30 개";
+			mes "보상: Exp 13980";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",907,30,13980,21427);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<고목나무진 납품> 완료.";
+			close;
+		case 2:
+			if(checkquest(21428) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[원숭이꼬리 납품 의뢰]";
+			mes "요구 물품 : 원숭이꼬리 30 개";
+			mes "보상: Exp 16200";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",942,30,16200,21428);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<원숭이꼬리 납품> 완료.";
+			close;
+
+		case 3:
+			if(checkquest(21429) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[랜턴 납품 의뢰]";
+			mes "요구 물품 : 랜턴 30 개";
+			mes "보상: Exp 19980";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",1041,30,19980,21429);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<랜턴 납품> 완료.";
+			close;
+		case 4:
+			if(checkquest(21430) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[소라 납품 의뢰]";
+			mes "요구 물품 : 소라 30 개";
+			mes "보상: Exp 22140";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",961,30,22140,21430);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<소라 납품> 완료.";
+			close;
+		case 5:
+			if(checkquest(21431) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[인어의심장 납품 의뢰]";
+			mes "요구 물품 : 인어의심장 30 개";
+			mes "보상: Exp 28560";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",950,30,28560,21431);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<인어의심장 납품> 완료.";
+			close;
+		case 6:
+			goto E_MainMenu;
+		}
+
+	case 3:
+		if(checkquest(21432) == 1) set .edenq_lv3_1$,"^CCCCCC멧돼지의갈기털 납품(완료)^000000";
+		else set .edenq_lv3_1$,"멧돼지의갈기털 납품 [60]";
+		if(checkquest(21433) == 1) set .edenq_lv3_2$,"^CCCCCC긴머리카락 납품(완료)^000000";
+		else set .edenq_lv3_2$,"긴머리카락 납품 [65]";
+		if(checkquest(21434) == 1) set .edenq_lv3_3$,"^CCCCCC말발굽 납품(완료)^000000";
+		else set .edenq_lv3_3$,"말발굽 납품 [70]";
+		if(checkquest(21435) == 1) set .edenq_lv3_4$,"^CCCCCC짧은다리 납품(완료)^000000";
+		else set .edenq_lv3_4$,"짧은다리 납품 [75]";
+		if(checkquest(21436) == 1) set .edenq_lv3_5$,"^CCCCCC모래덩어리 납품(완료)^000000";
+		else set .edenq_lv3_5$,"모래덩어리 납품 [80]";
+
+		switch(select(.edenq_lv3_1$,.edenq_lv3_2$,.edenq_lv3_3$,.edenq_lv3_4$,.edenq_lv3_5$,"그만둔다")) {
+
+		case 1:
+			if(checkquest(21432) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[멧돼지의갈기털 납품 의뢰]";
+			mes "요구 물품 : 멧돼지의갈기털 30 개";
+			mes "보상: Exp 34380";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",1028,30,34380,21432);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<멧돼지의갈기털 납품> 완료.";
+			close;
+		case 2:
+			if(checkquest(21433) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[긴머리카락 납품 의뢰]";
+			mes "요구 물품 : 긴머리카락 30 개";
+			mes "보상: Exp 35640";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",1020,30,35640,21433);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<긴머리카락 납품> 완료.";
+			close;
+
+		case 3:
+			if(checkquest(21434) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[말발굽 납품 의뢰]";
+			mes "요구 물품 : 말발굽 30 개";
+			mes "보상: Exp 36000";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",944,30,36000,21434);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<말발굽 납품> 완료.";
+			close;
+		case 4:
+			if(checkquest(21435) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[짧은다리 납품 의뢰]";
+			mes "요구 물품 : 짧은다리 30 개";
+			mes "보상: Exp 48600";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",1042,30,48600,21435);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<짧은다리 납품> 완료.";
+			close;
+		case 5:
+			if(checkquest(21436) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[모래덩어리 납품 의뢰]";
+			mes "요구 물품 : 모래덩어리 30 개";
+			mes "보상: Exp 62040";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",7124,30,62040,21436);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<모래덩어리 납품> 완료.";
+			close;
+		case 6:
+			goto E_MainMenu;
+		}
+
+	case 4:
+		if(checkquest(21437) == 1) set .edenq_lv4_1$,"^CCCCCC말라버린 모래 납품(완료)^000000";
+		else set .edenq_lv4_1$,"말라버린 모래 납품 [85]";
+		if(checkquest(21438) == 1) set .edenq_lv4_2$,"^CCCCCC거북이등껍질 납품(완료)^000000";
+		else set .edenq_lv4_2$,"거북이등껍질 납품 [90]";
+		if(checkquest(21439) == 1) set .edenq_lv4_3$,"^CCCCCC새끼악마의뿔 납품(완료)^000000";
+		else set .edenq_lv4_3$,"새끼악마의뿔 납품 [95]";
+		if(checkquest(21440) == 1) set .edenq_lv4_4$,"^CCCCCC얼음심장 납품(완료)^000000";
+		else set .edenq_lv4_4$,"얼음심장 납품 [100]";
+
+		switch(select(.edenq_lv4_1$,.edenq_lv4_2$,.edenq_lv4_3$,.edenq_lv4_4$,.edenq_lv4_5$,"그만둔다")) {
+
+		case 1:
+			if(checkquest(21437) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[말라버린 모래 납품 의뢰]";
+			mes "요구 물품 : 말라버린 모래 30 개";
+			mes "보상: Exp 72060";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",7264,30,72060,21437);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<말라버린 모래 납품> 완료.";
+			close;
+		case 2:
+			if(checkquest(21438) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[거북이등껍질 납품 의뢰]";
+			mes "요구 물품 : 거북이등껍질 30 개";
+			mes "보상: Exp 78300";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",967,30,78300,21438);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<거북이등껍질 납품> 완료.";
+			close;
+
+		case 3:
+			if(checkquest(21439) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[새끼악마의뿔 납품 의뢰]";
+			mes "요구 물품 : 새끼악마의뿔 30 개";
+			mes "보상: Exp 108360";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",1038,30,108360,21439);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<새끼악마의뿔 납품> 완료.";
+			close;
+		case 4:
+			if(checkquest(21440) == 1) {
+				mes "[낙원단 물류담당자]";
+				mes "죄송합니다.";
+				mes "지금은 납품 받은 물자가 충분하여";
+				mes "더이상 납품을 받을 수 없습니다.";
+				mes "잠시 후에 다시 와주시기 바랍니다.";
+				next;
+				goto E_MainMenu;
+			}
+			mes "[얼음심장 납품 의뢰]";
+			mes "요구 물품 : 얼음심장 30 개";
+			mes "보상: Exp 116640";
+			next;
+			menu "납품 한다.",-,"그만 둔다.",P_Close;
+
+			set .isQue,callfunc("EDenQuest_ItemControl",7561,30,116640,21440);
+			if(.isQue == 0) goto EnoughAgrement;
+			if(.isQue == -1) goto NotEnought;
+			mes "[낙원단 물류담당자]";
+			mes "<얼음심장 납품> 완료.";
+			close;
+		case 5:
+			goto E_MainMenu;
+		}
+
+	case 5:
+		mes "[낙원단 물류담당자]";
+		mes "안녕히 가세요.";
+		close;
+
+
+	}
+P_Close:
+	goto E_MainMenu;
+NotEnought:
+	mes "[낙원단 물류담당자]";
+	mes "납품 수량이 부족합니다.";
+	next;
+	goto E_MainMenu;
+
+EnoughAgrement:
+	mes "[낙원단 물류담당자]";
+	mes "납품이 정상적으로 이루어지지";
+	mes "않았습니다.";
+	mes "운영진에게 문의하세요.";
+	close;
+
+}
+moc_para01,27,35,5	script	사무담당 라임 이베노르	4_F_EDEN_OFFICER,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+		mes "소지하고 계시는 아이템의 갯수가 많아";
+		mes "퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해";
+		mes "주시기 바랍니다.";
+		close;
+	}
+	cutin "laime_evenor01.bmp",2;
+
+	if (countitem(6219) > 0) {
+		mes "[라임 이베노르]";
+		mes "많은 모험가 분들이 낙원단을 찾아";
+		mes "주신 덕분에, 얼마 전 부터 새로이";
+		mes "기능이 추가된 낙원단의 증표를";
+		mes "지급하고 있습니다.";
+		mes "물론 기존의 낙원단원들에게도 혜택을";
+		mes "누릴 수 있도록 교환해드리고 있지요.";
+		next;
+		mes "[라임 이베노르]";
+		mes "새로운 낙원단의 증표는 약간의";
+		mes "시간텀이 있지만 현재 저장된 장소로";
+		mes "이동할 수 있는 기능을 가지고";
+		mes "있습니다.";
+		mes "어때요, 교환하시겠습니까?";
+		next;
+		if (select("물론이다:교환하지 않는다") == 2){
+			mes "[라임 이베노르]";
+			mes "바꾸지 않을만한 이유는... 뭘까요?";
+			close2;
+			cutin "",255;
+		}
+		delitem 6219,1;
+		getitem 22508,1;
+		mes "[라임 이베노르]";
+		mes "교환해 드렸습니다. 앞으로도 잘";
+		mes "부탁드립니다.";
+		close2;
+		cutin "",255;
+	}
+	mes "[라임 이베노르]";
+	mes "꿈과 낭만을 좇는 이들이여 그대들의";
+	mes "낙원은 연인의 품안도 아스가르드의";
+	mes "나팔소리에 의한 것도 아닌 바로 이곳";
+	mes "낙원단과 함께 함에 있습니다.";
+	mes "반갑습니다. 무엇을 도와드릴까요?";
+	next;
+	while (1) {
+		switch (select("낙원단이란?:낙원단 등록:의뢰 등록:의뢰 검색:대화 종료")) {
+		case 1:
+			mes "[라임 이베노르]";
+			mes "낙원단에서는 미드가르드 각자의";
+			mes "어려움에 처한 이들의 의뢰를 접수하고";
+			mes "문제를 해결해주는 일을 하고 있습니다.";
+			next;
+			mes "[라임 이베노르]";
+			mes "의뢰주로부터 연락이 오면 우리는 해당";
+			mes "의뢰 내용을 게시하고 낙원단원들에게";
+			mes "소개를 하죠.";
+			next;
+			mes "[라임 이베노르]";
+			mes "낙원단원들은 각자 의뢰를 살펴보고";
+			mes "자신에게 맞는 조건의 일을 찾아";
+			mes "해결할 수 있습니다.";
+			mes "물론 의뢰인으로부터 정당한 보수도";
+			mes "받을 수 있지요.";
+			next;
+			mes "[라임 이베노르]";
+			mes "낙원단에서의 의뢰활동을 통해";
+			mes "초급자는 이 낯설고도 넓은 세계에";
+			mes "적응하고 살아가는 방법을 배울 수";
+			mes "있으며, 중급자 이상은 세계를";
+			mes "여행하며 여러 인연을 쌓아갈 수";
+			mes "있습니다. 물론 전문가로서의 명예와";
+			mes "재화도 그에 따라 축적될 것입니다.";
+			next;
+			break;
+		case 2:
+			if (!callfunc("F_HasEdenGroupMark")) {
+				mes "[라임 이베노르]";
+				mes "간단한 등록절차를 통해 누구나";
+				mes "낙원단의 일원이 될 수 있습니다.";
+				mes "낙원단과 함께 하시겠습니까?";
+				next;
+				switch (select("네:아니오")) {
+				case 1:
+					mes "[라임 이베노르]";
+					mes "예, 그럼 여기에 이름을 적어주세요.";
+					input .@input$;
+					next;
+					mes "[라임 이베노르]";
+					mes "다 적으셨나요?";
+					mes "어디보자.";
+					next;
+					mes "[라임 이베노르]";
+					mes "이름이 ^3131FF보"+.@input$+"바^000000.. 맞습니까?";
+					mes "에? 아니라고요?";
+					next;
+					emotion ET_SWEAT;
+					mes "[라임 이베노르]";
+					mes "하지만 여기 써있는 건 분명...";
+					mes "흐음, 분명 꽤 난해한 글씨긴 합니다만.";
+					next;
+					mes "[라임 이베노르]";
+					mes "이름을 다시 적어주시겠습니까? 이번엔";
+					mes "^3131FF또박또박^000000 제대로 부탁드립니다.";
+					input .@input$;
+					next;
+					mes "[라임 이베노르]";
+					mes "아아, ^3131FF"+strcharinfo(0)+"^000000 였군요.";
+					mes "이번엔 제대로 확인했습니다.";
+					next;
+					emotion ET_BEST;
+					mes "[라임 이베노르]";
+					mes "낙원단 명단에 당신의 이름을";
+					mes "기입했습니다.";
+					mes "낙원단에 오신 것을 환영합니다!";
+					next;
+					mes "[라임 이베노르]";
+					mes "앞으로 낙원단으로서 여러 의뢰를";
+					mes "수행하며 훌륭한 해결사로서의 선전을";
+					mes "기원합니다.";
+					getitem 22508,1; //Para_Team_Mark_
+					next;
+					break;
+				case 2:
+					mes "[라임 이베노르]";
+					mes "낙원단에 대해 아직 궁금한 점이라도";
+					mes "남으셨습니까?";
+					next;
+					break;
+				}
+			} else {
+				mes "[라임 이베노르]";
+				mes "이미 낙원단에 가입된 상태입니다.";
+				next;
+			}
+			break;
+		case 3:
+			mes "[라임 이베노르]";
+			mes "낙원단에 요청하고자 하는 의뢰가";
+			mes "있으십니까?";
+			next;
+			if(select("네:아니오") == 1) {
+				mes "[라임 이베노르]";
+				mes "자, 그럼 여기 서류에 이름을";
+				mes "적어주세요.";
+				input .@input$;
+				next;
+				mes "[라임 이베노르]";
+				mes "^3131FF"+strcharinfo(0)+"^000000.. 이 이름이 맞습니까?";
+				mes "흠. 글씨를 잘 못쓰시는군요.";
+				mes "알아보기가...";
+				next;
+				mes "[라임 이베노르]";
+				mes "^3131FF"+strcharinfo(0)+"^000000님, 의뢰하고자 하는 내용을";
+				mes "알려주세요.";
+				mes "어느 지역에서 수행하게 되는 의뢰입니까?";
+				input .@input$;
+				next;
+				mes "[라임 이베노르]";
+				mes "^3131FF수행처: "+.@inputstr$+"^000000";
+				mes "흠.. 일단 기입해 두도록 하죠.";
+				next;
+				mes "[라임 이베노르]";
+				mes "어떤 일을 수행하게 되는지 의뢰내용을";
+				mes "개략적으로 적어주세요.";
+				mes "'포링 10마리 처리'이런 식으로요.";
+				input .@input$;
+				next;
+				mes "[라임 이베노르]";
+				mes "다 쓰셨습니까?";
+				mes "어디보자.";
+				next;
+				mes "[라임 이베노르]";
+				mes "음...........";
+				next;
+				mes "[라임 이베노르]";
+				mes "으으음..................";
+				next;
+				emotion ET_THINK;
+				mes "[라임 이베노르]";
+				mes "의뢰 등록 이전에 저의 의뢰를";
+				mes "받아보시는게 어떻겠습니까?";
+				next;
+				emotion ET_HNG;
+				mes "[라임 이베노르]";
+				mes "^3131FF의뢰자: 라임 이베노르^000000";
+				mes "^3131FF수행내용: 글씨교정소에서 한달간 훈련^000000";
+				mes "참으로 난해한 글씨로군요.";
+				next;
+				mes "[라임 이베노르]";
+				mes "^3131FF수행내용:"+.@input$+"^000000";
+				mes "어쨌든 무사히 등록된 것 같습니다.";
+				next;
+				mes "[라임 이베노르]";
+				mes "현재 등록건수가 상당하여 게시판에";
+				mes "등록되기 까지는 시간이 좀 걸릴 것";
+				mes "같군요.";
+				mes "차분히 순서를 기다려 주시면";
+				mes "감사하겠습니다.";
+				next;
+			}
+			break;
+		case 4:
+			if (callfunc("F_HasEdenGroupMark")) {
+				mes "[라임 이베노르]";
+				mes "우선은 낙원단 가입 등록 절차를 마친";
+				mes "후 이야기를 하도록 하죠.";
+				cutin "",255;
+				close;
+			}
+			else {
+				mes "[라임 이베노르]";
+				mes "낙원단의 일원으로서 낙원단에 접수된";
+				mes "의뢰들을 수행하고 싶으십니까?";
+				next;
+				mes "[라임 이베노르]";
+				mes "우측 벽면의 게시판에서 여러 종류의";
+				mes "의뢰들이 당신의 선택을 기다리고";
+				mes "있습니다.";
+				mes "의뢰수행 조건과 내용을 읽어보시고";
+				mes "자신의 능력에 맞추어 좋은 선택을";
+				mes "하시기 바랍니다.";
+				next;
+			}
+			break;
+		case 5:
+			mes "[라임 이베노르]";
+			mes "더 궁금하신 사항이 있으시면 언제든지";
+			mes "저를 찾아주세요.";
+			cutin "",255;
+			close;
+		}
+	}
+	cutin "",255;
+	close;
+}
+
+-	script	낙원단 공간이동사#0::eto	-1,{
+	mes "[낙원단 공간이동사]";
+	mes "이 세계의 모든 것이 낯설은";
+	mes "수련생이여 목표없이 방황중인";
+	mes "모험가여, 내게로 오세요!";
+	mes "당신의 어려움을 타파해 줄 낙원단";
+	mes "등장!";
+	next;
+	mes "[낙원단 공간이동사]";
+	mes "당신의 모험생활에 도움이 되는 의뢰";
+	mes "중개를 원하십니까?";
+	next;
+	switch (select("낙원단으로 이동.:^2956FF조언을 구한다.^000000:대화를 마친다.")) {
+	case 1:
+		mes "[낙원단 공간이동사]";
+		mes "자아, 갑시다! 우리들의 아지트로!";
+		set nak_warp,strnpcinfo(2);
+		close2;
+		warp "moc_para01",31,14;
+		end;
+	case 2:
+		mes "[낙원단 공간이동사]";
+		mes "낙원단에서 내려온 지시가 아직";
+		mes "없네요^^";
+		mes "곧 조언을 하도록 준비하겠습니다";
+		close;
+		//=========== 아래는 구현이 안되었음 =============
+		mes "[낙원단 공간이동사]";
+		mes "제가 해드릴 수 있는 조언은";
+		mes "모험가님의 등급에 맞는 의뢰인들을";
+		mes "소개시켜 주는 것 정도네요.";
+		next;
+		mes "[낙원단 공간이동사]";
+		mes "모험가님은.. 음...";
+		mes "^2956FF프론테라 인근^000000과 ^2956FF페이온쪽^000000을 살펴";
+		mes "보세요.";
+		mes "분명 모험가님의 도움을 필요로 하는";
+		mes "사람들이 있을 거에요.";
+		next;
+		switch(select("프론테라 인근 의뢰자 소개:페이욘 지역의 의뢰자 소개")) {
+
+		case 1:
+			mes "[낙원단 공간이동사]";
+			mes "모험가님의 레벨이 10 전후라면";
+			mes "[프론테라 서쪽 필드의 폴]을 만나";
+			mes "보세요.";
+			mes "좀 더 강한 것을 목표로 한다면";
+			mes "[이즈루드의 교관 폰테스]님을 소개 해";
+			mes "드리죠.";
+			close;
+			
+		case 2:
+			mes "[낙원단 공간이동사]";
+			mes "15레벨 페이욘 쪽 의뢰자들 명단입니다.";
+			mes "[페이욘의 걱정많은 아가씨]";
+			mes "[페이욘의 걱정많은 할머니]";
+			mes "[페이욘의 걱정많은 할아버지]";
+			mes "[페이욘의 마을 할아버지]";
+			next;
+			mes "[낙원단 공간이동사]";
+			mes "[페이욘의 마을 할아버지]의 의뢰를";
+			mes "하면...";
+			mes "나중에 다른 여러가지 일도 받으실 수";
+			mes "있을거에요.";
+			close;
+
+		}
+	case 3:
+		mes "[낙원단 공간이동사]";
+		mes "앞날이 막막할 땐 언제든지 낙원단을";
+		mes "찾아주세요!";
+		close;
+	}
+}
+prontera,124,76,3	duplicate(eto)	낙원단 공간이동사#1	729
+moc_ruins,68,164,3	duplicate(eto)	낙원단 공간이동사#2	729
+geffen,132,66,3	duplicate(eto)	낙원단 공간이동사#3	729
+alberta,124,67,3	duplicate(eto)	낙원단 공간이동사#4	729
+aldebaran,133,119,5	duplicate(eto)	낙원단 공간이동사#5	729
+izlude_in,68,162,1	duplicate(eto)	낙원단 공간이동사#6	729
+prt_church,103,78,3	duplicate(eto)	낙원단 공간이동사#7	729
+geffen_in,160,104,5	duplicate(eto)	낙원단 공간이동사#8	729
+moc_prydb1,53,126,3	duplicate(eto)	낙원단 공간이동사#9	729
+payon_in02,58,58,1	duplicate(eto)	낙원단 공간이동사#11	729
+payon,177,111,3	duplicate(eto)	낙원단 공간이동사#12	729
+que_ng,33,73,3	duplicate(eto)	낙원단 공간이동사#13	729
+que_ng,144,161,5	duplicate(eto)	낙원단 공간이동사#14	729
+yuno,144,189,5	duplicate(eto)	낙원단 공간이동사#15	729
+rachel,125,144,3	duplicate(eto)	낙원단 공간이동사#16	729
+comodo,202,151,4	duplicate(eto)	낙원단 공간이동사#17	729
+hugel,93,153,4	duplicate(eto)	낙원단 공간이동사#18	729
+veins,220,109,4	duplicate(eto)	낙원단 공간이동사#19	729
+einbroch,250,211,4	duplicate(eto)	낙원단 공간이동사#20	729
+lighthalzen,164,86,4	duplicate(eto)	낙원단 공간이동사#21	729
+amatsu,100,145,5	duplicate(eto)	낙원단 공간이동사#22	729
+ayothaya,221,191,3	duplicate(eto)	낙원단 공간이동사#23	729
+louyang,224,107,3	duplicate(eto)	낙원단 공간이동사#24	729
+gonryun,162,122,5	duplicate(eto)	낙원단 공간이동사#25	729
+moscovia,209,197,5	duplicate(eto)	낙원단 공간이동사#26	729
+brasilis,191,224,3	duplicate(eto)	낙원단 공간이동사#27	729
+dewata,192,193,5	duplicate(eto)	낙원단 공간이동사#28	729
+morocc,161,97,5	duplicate(eto)	낙원단 공간이동사#29	729
+izlude,131,148,4	duplicate(eto)	낙원단 공간이동사#30	729
+izlude_a,131,148,4	duplicate(eto)	낙원단 공간이동사#30::eto_iz_a	729
+izlude_b,131,148,4	duplicate(eto)	낙원단 공간이동사#30::eto_iz_b	729
+izlude_c,131,148,4	duplicate(eto)	낙원단 공간이동사#30::eto_iz_c	729
+izlude_d,131,148,4	duplicate(eto)	낙원단 공간이동사#30::eto_iz_d	729
+umbala,105,158,3	duplicate(eto)	낙원단 공간이동사#31	729
+malaya,225,218,4	duplicate(eto)	낙원단 공간이동사#32	729
+verus04,116,243,0	duplicate(eto)	낙원단 공간이동사#33	729
+
+moc_para01,30,10,0	script	#eden_out	45,1,1,{
+OnTouch:
+	switch (nak_warp) {
+		case 1: warp "prontera",116,72; end;
+		case 2: warp "moc_ruins",64,161; end;
+		case 3: warp "geffen",120,39; end;
+		case 4: warp "alberta",117,56; end;
+		case 5: warp "aldebaran",168,112; end;
+		case 6: warp "izlude_in",73,165; end;
+		case 7: warp "prt_church",99,78; end;
+		case 8: warp "geffen_in",162,99; end;
+		case 9: warp "moc_prydb1",51,118; end;
+		case 10: warp "alberta_in",73,43; end;
+		case 11: warp "payon_in02",64,60; end;
+		case 12: warp "payon",161,58; end;
+		case 13: warp "que_ng",33,63; end;
+		case 14: warp "que_ng",144,166; end;
+		case 15: warp "yuno",158,125; end;
+		case 16: warp "rachel",115,125; end;
+		case 17: warp "comodo",192,145; end;
+		case 18: warp "hugel",88,148; end;
+		case 19: warp "veins",216,104; end;
+		case 20: warp "einbroch",246,204; end;
+		case 21: warp "lighthalzen",159,95; end;
+		case 22: warp "amatsu",110,150; end;
+		case 23: warp "ayothaya",217,178; end;
+		case 24: warp "louyang",217,103; end;
+		case 25: warp "gonryun",155,120; end;
+		case 26: warp "moscovia",218,198; end;
+		case 27: warp "brasilis",190,220; end;
+		case 28: warp "dewata",192,182; end;
+		case 29: warp "morocc",161,97; end;
+		case 30: warp "izlude",134,118; end;	// Old coordinates: (127,142)
+		case 31: warp "umbala",94,154; end;
+		case 32: warp "malaya",234,199; end;
+		case 33: warp "verus04",115,243; end;
+		default: warp "prontera",116,72; end;
+	}
+	end;
+}
+
+
+moc_para01,16,22,7	script	늙은 모험가#eden	900,{
+	mes "[늙은 모험가]";
+	mes "라임 이베노르인지 뭔지 저 머리에";
+	mes "피도 안마른 녀석이 아직 팔팔한 이";
+	mes "몸을 몰라뵙고 그저 '잡상인은 받지";
+	mes "않습니다'라잖아!?";
+	next;
+	mes "[늙은 모험가]";
+	mes "이래뵈도 나도 낙원단에 가입하러";
+	mes "왔거늘 이게 무슨 푸대접인지!";
+	mes "자네도 내가 잡상인 처럼 보이나?";
+	close;
+}
+
+moc_para01,182,48,3	script	낙원단 요리사#eden	886,{
+	set .@eggf,rand(1,118);
+	set .@eggf_1,.@eggf + 1;
+	set .@eggf_2,.@eggf + 2;
+	set .@eggf_6,.@eggf + 6;
+	mes "[낙원단 요리사]";
+	mes ""+.@eggf+".. "+.@eggf_1+"... "+.@eggf_2+".... "+.@eggf_6+"..?";
+	next;
+	emotion ET_CRY;
+	mes "[낙원단 요리사]";
+	mes "아앗! 이게 몇 번째 계란후라이였지?";
+	mes "으아아아앙!!! 또 처음부터 세야하잖아!!";
+	next;
+	emotion ET_CRY;
+	mes "[낙원단 요리사]";
+	mes "아가씨는 왜 나에게 이런 일을";
+	mes "의뢰랍시고 시키는거죠?";
+	next;
+	emotion ET_CRY;
+	mes "[낙원단 요리사]";
+	mes "계란후라이를 123개나 만들어서 뭐에";
+	mes "쓰시려고! 혼자 다 드실거도 아니면서";
+	mes "이건 절 단순히 괴롭히고 싶어서";
+	mes "그런게 분명해요! 으아아앙!!!";
+	close;
+}
+
+moc_para01,172,28,5	script	수습 낙원단원#eden	883,{
+	mes "[수습 낙원단원]";
+	mes "내가 여기 낙원단을 와서 느낀건데";
+	next;
+	mes "[수습 낙원단원]";
+	mes "정말 열심히 하지 않으면 안될거 같아...";
+	next;
+	mes "[수습 낙원단원]";
+	mes "근데 난 파머시조차 성공해본 적이";
+	mes "없잖아?";
+	emotion ET_OTL;
+	next;
+	mes "[수습 낙원단원]";
+	mes "난 아마 안될거야...";
+	emotion ET_CRY;
+	close;
+}
+
+moc_para01,20,35,5	script	사무보조 니데	814,{
+	mes "[니데]";
+	mes "제가 낙원단에 들어온게 엊그제 같은데";
+	mes "생각해보면 벌써 계절이 몇번이나";
+	mes "바뀌었지 뭐에요?";
+	mes "정말 일거리가 어찌나 많은지 시간가는";
+	mes "줄 모르고 있었어요.";
+	next;
+	mes "[니데]";
+	mes "곰곰히 생각해보면 하루하루가";
+	mes "전쟁과도 같은 나날이었어요.";
+	next;
+	mes "[니데]";
+	mes "^3131FF우측 식당^000000의 주방장은";
+	mes "대체 음식에 향신료를 어찌나";
+	mes "써대는지, 로비까지 그 자극적인";
+	mes "냄새가 끊이질 않아 정말이지 수시로";
+	mes "통풍을 시켜주지 않으면 여기가";
+	mes "로비인지 식당인지 알수가 없을";
+	mes "정도에요.";
+	next;
+	mes "[니데]";
+	mes "거기다 ^3131FF로비 북쪽^000000의 문 건너에서는";
+	mes "^3131FF연무장^000000의 함성소리가 그치질 않고,";
+	next;
+	emotion ET_ANGER;
+	mes "[니데]";
+	mes "^3131FF2층 숙소^000000에서는 아가씨의 신경질적인";
+	mes "비명 소리가 계단을 타고 내려와";
+	mes "연무장의 함성소리에 맞춰 합창을";
+	mes "이룬다니까요?";
+	next;
+	mes "[니데]";
+	mes "아, 아가씨는 우리 낙원단의 보스를";
+	mes "말하는거에요.";
+	next;
+	mes "[니데]";
+	mes "대체 하루종일 뭘 하는지 꽥- 이라거나";
+	mes "아악- 이라거나 캬악- 이라거나, 혹은";
+	mes "뭔가 펑! 하는 소리가 들리기도 하고";
+	mes "정말이지 알 수가 없는 분이에요.";
+	next;
+	emotion ET_HUK;
+	mes "[니데]";
+	mes "핫!";
+	mes "쉿... 제가 이런 마을 한건 비밀이에요!";
+	next;
+	mes "[니데]";
+	emotion ET_OHNO;
+	mes "이베노르씨는 저래보ㅗ여도 속을 알 수";
+	mes "없는 능구렁이같은 사람이라 몰래";
+	mes "아가씨에게 고자질을 할지 모른다고요.";
+	next;
+	emotion ET_HNG, getnpcid(0, "사무담당 라임 이베노르");
+	mes "[라임 이베노르]";
+	mes "저 그런 사람 아닙니다~";
+	next;
+	emotion ET_KEK;
+	mes "[니데]";
+	mes "어맛! 다 들렸나봐! 꺄악!";
+	close;
+}
+moc_para01,18,35,5	script	성실한 소길#EdenSo	88,{
+
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+	
+		mes "[성실한 소길]";
+		mes "가방이 가득 차서 의뢰를 진행할 수";
+		mes "없습니다. 가방을 정리하고 오셔서";
+		mes "다시 말을 걸어 주세요.";
+		close;
+	}
+
+}
+moc_para01,48,39,0	script	EdenStorage#EdenWarp01	45,1,1,{
+	
+	end;
+
+OnTouch:
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "[라임 이베노르]";
+		mes "아, 그 곳은 낙원단 전용 공간입니다.";
+		mes "안으로 들어가시려면 저에게서 낙원단";
+		mes "가입신청서를 작성하셔야 합니다.";
+		close;
+	}
+
+	warp "moc_para01",106,14;
+	end;
+}
+function	script	F_HasEdenGroupMark	{
+	return (countitem(6219) > 0 || countitem(22508) > 0);
+}
+function	script	EDenQuest_ItemControl	{
+
+	set .ItemID,getarg(0);
+	set .Amount,getarg(1);
+	set .Exp,getarg(2);
+	set .QID,getarg(3);
+	
+	if(.ItemID <= 500 || .Amount <= 0 || .Exp <= 0 || .QID <= 0) return 0;
+	if(countitem(.ItemID) < .Amount) return -1;
+
+	delitem .ItemID,.Amount;
+	getexp .Exp,0;
+	setquest .QID;
+	
+	return 1;
+}

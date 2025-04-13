@@ -24,6 +24,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"
@@ -36,6 +37,7 @@
 #include "clan.hpp"
 #include "clif.hpp"
 #include "elemental.hpp"
+#include "emotes.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -52,9 +54,11 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "skill.hpp"
 #include "status.hpp"
+#include "stall.hpp"
 #include "storage.hpp"
 #include "trade.hpp"
 #include "unit.hpp"
@@ -283,12 +287,18 @@ int clif_setip(const char* ip) {
 	char ip_str[16];
 	map_ip = host2ip(ip);
 	if (!map_ip) {
-		ShowWarning("Failed to Resolve Map Server Address! (%s)\n", ip);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("맵서버 주소를 분석하는데 실패 했습니다. (IP: %s)\n", ip);
+		else
+			ShowWarning("Failed to Resolve Map Server Address! (%s)\n", ip);
 		return 0;
 	}
 
 	safestrncpy(map_ip_str, ip, sizeof(map_ip_str));
-	ShowInfo("Map Server IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(map_ip, ip_str));
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("맵서버 IP주소 : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(map_ip, ip_str));
+	else
+		ShowInfo("Map Server IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(map_ip, ip_str));
 	return 1;
 }
 
@@ -297,9 +307,15 @@ void clif_setbindip(const char* ip)
 	bind_ip = host2ip(ip);
 	if (bind_ip) {
 		char ip_str[16];
-		ShowInfo("Map Server Bind IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(bind_ip, ip_str));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("맵서버 바인드 IP주소 : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(bind_ip, ip_str));
+		else
+			ShowInfo("Map Server Bind IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(bind_ip, ip_str));
 	} else {
-		ShowWarning("Failed to Resolve Map Server Address! (%s)\n", ip);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("맵서버 주소를 분석하는데 실패했습니다. (IP: %s)\n", ip);
+		else
+			ShowWarning("Failed to Resolve Map Server Address! (%s)\n", ip);
 	}
 }
 
@@ -328,7 +344,10 @@ uint32 clif_refresh_ip(void)
 	new_ip = host2ip(map_ip_str);
 	if (new_ip && new_ip != map_ip) {
 		map_ip = new_ip;
-		ShowInfo("Updating IP resolution of [%s].\n", map_ip_str);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("[%s]의 IP 분석을 업데이트 중입니다.\n", map_ip_str);
+		else
+			ShowInfo("Updating IP resolution of [%s].\n", map_ip_str);
 		return map_ip;
 	}
 	return 0;
@@ -456,9 +475,15 @@ static int clif_send_sub(struct block_list *bl, va_list ap)
 
 	WFIFOHEAD(fd, len);
 	if (WFIFOP(fd,0) == buf) {
-		ShowError("WARNING: Invalid use of clif_send function\n");
-		ShowError("         Packet x%4x use a WFIFO of a player instead of to use a buffer.\n", WBUFW(buf,0));
-		ShowError("         Please correct your code.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowError("주의: clif_send 함수의 사용이 잘못되었습니다.\n");
+			ShowError("         패킷 x%4x는 버퍼를 사용하는 대신 플레이어의 WFIFO를 사용합니다.\n", WBUFW(buf,0));
+			ShowError("         코드를 수정하십시오.\n");
+		} else {
+			ShowError("WARNING: Invalid use of clif_send function\n");
+			ShowError("         Packet x%4x use a WFIFO of a player instead of to use a buffer.\n", WBUFW(buf,0));
+			ShowError("         Please correct your code.\n");
+		}
 		// don't send to not move the pointer of the packet for next sessions in the loop
 		//WFIFOSET(fd,0);//## TODO is this ok?
 		//NO. It is not ok. There is the chance WFIFOSET actually sends the buffer data, and shifts elements around, which will corrupt the buffer.
@@ -740,7 +765,10 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 		break;
 
 	default:
-		ShowError("clif_send: Unrecognized type %d\n",type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("clif_send: 인식할 수 없는 타입 %d\n",type);
+		else
+			ShowError("clif_send: Unrecognized type %d\n",type);
 		return -1;
 	}
 
@@ -1669,6 +1697,7 @@ static inline bool clif_npc_mayapurple(block_list *bl) {
  **/
 int clif_spawn( struct block_list *bl, bool walking ){
 	struct view_data *vd;
+	struct unit_data* ud = unit_bl2ud(bl);
 
 	vd = status_get_viewdata(bl);
 	if( !vd || vd->class_ == JT_INVISIBLE )
@@ -1684,6 +1713,9 @@ int clif_spawn( struct block_list *bl, bool walking ){
 		clif_spawn_unit( bl, AREA_WOS );
 	}
 
+	if (ud != nullptr && ud->body_size)
+		clif_body_size(bl, ud->body_size);
+	
 	if (vd->cloth_color)
 		clif_refreshlook(bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,AREA_WOS);
 	if (vd->body_style)
@@ -2010,6 +2042,9 @@ void clif_move( struct unit_data& ud )
 
 	clif_set_unit_walking( *bl, nullptr, ud, AREA_WOS );
 
+	if (ud.body_size)
+		clif_body_size(bl, ud.body_size);
+
 	if (vd->cloth_color)
 		clif_refreshlook(bl, bl->id, LOOK_CLOTHES_COLOR, vd->cloth_color, AREA_WOS);
 	if (vd->body_style)
@@ -2107,7 +2142,12 @@ void clif_changemapserver( map_session_data& sd, const char* map, uint16 x, uint
 #endif
 
 #ifdef DEBUG
-	ShowDebug( "Sending the client (%d %d.%d.%d.%d) to map-server with ip %d.%d.%d.%d and port %hu\n", sd.status.account_id, CONVIP(session[sd.fd]->client_addr), CONVIP(ip), port );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug(
+			"클라이언트 (%d %d.%d.%d.%d)을(를) IP %d.%d.%d.%d 및 포트 %hu을(를) 이용하여 맵서버로 전송합니다.\n",
+			sd.status.account_id, CONVIP(session[sd.fd]->client_addr), CONVIP(ip), port );
+	else
+		ShowDebug( "Sending the client (%d %d.%d.%d.%d) to map-server with ip %d.%d.%d.%d and port %hu\n", sd.status.account_id, CONVIP(session[sd.fd]->client_addr), CONVIP(ip), port );
 #endif
 
 	clif_send( &packet, sizeof( packet ), &sd.bl, SELF );
@@ -3806,7 +3846,10 @@ void clif_updatestatus( map_session_data& sd, enum _sp type ){
 #endif
 
 	default:
-		ShowError("clif_updatestatus : unrecognized type %d\n",type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("clif_updatestatus : 인식할 수 없는 타입 %d\n",type);
+		else
+			ShowError("clif_updatestatus : unrecognized type %d\n",type);
 		return;
 	}
 
@@ -3986,8 +4029,10 @@ void clif_changelook(struct block_list *bl, int type, int val) {
 #if PACKETVER < 20150513
 				return;
 #else
+#if PACKETVER_MAIN_NUM < 20231220
 				if (val && sd && sd->sc.option&OPTION_COSTUME)
  					val = 0;
+#endif
  				vd->body_style = val;
 #endif
 				break;
@@ -4974,7 +5019,7 @@ static void clif_getareachar_pc(map_session_data* sd,map_session_data* dstsd)
 }
 
 void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
-	struct unit_data *ud;
+	struct unit_data* ud;
 	struct view_data *vd;
 	bool option = false;
 	unsigned int option_val = 0;
@@ -4999,6 +5044,9 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 	}else{
 		clif_set_unit_idle( bl, false, SELF, &sd->bl );
 	}
+
+	if (ud != nullptr && ud->body_size)
+		clif_body_size(bl, ud->body_size);
 
 	if (vd->cloth_color)
 		clif_refreshlook(&sd->bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,SELF);
@@ -5543,6 +5591,16 @@ static int clif_getareachar(struct block_list* bl,va_list ap)
 	case BL_SKILL:
 		skill_getareachar_skillunit_visibilty_single((TBL_SKILL*)bl, &sd->bl);
 		break;
+	case BL_STALL:
+		{
+			struct s_stall_data* st = map_id2st(bl->id);
+			clif_stall_showunit(sd,st);
+			if(st->type == 0)
+				clif_showstallboard(&sd->bl,st->vender_id,st->message);
+			else
+				clif_buyingstall_entry(&sd->bl,st->vender_id,st->message);
+		}
+		break;
 	default:
 		if(&sd->bl == bl)
 			break;
@@ -5592,6 +5650,9 @@ int clif_outsight(struct block_list *bl,va_list ap)
 			if(!(((TBL_NPC*)bl)->is_invisible))
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
 			break;
+		case BL_STALL:
+			clif_clearunit_single(bl->id,CLR_OUTSIGHT, *tsd);
+			break;
 		default:
 			if((vd=status_get_viewdata(bl)) && vd->class_ != JT_INVISIBLE)
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
@@ -5630,6 +5691,17 @@ int clif_insight(struct block_list *bl,va_list ap)
 			break;
 		case BL_SKILL:
 			skill_getareachar_skillunit_visibilty_single((TBL_SKILL*)bl, &tsd->bl);
+			break;
+		case BL_STALL:
+			{
+				map_session_data *ssd = map_id2sd(tbl->id);
+				struct s_stall_data* st = map_id2st(bl->id);
+				clif_stall_showunit(ssd,st);
+				if(st->type == 0)
+					clif_showstallboard(&ssd->bl,st->vender_id,st->message);
+				else
+					clif_buyingstall_entry(&ssd->bl,st->vender_id,st->message);
+			}
 			break;
 		default:
 			clif_getareachar_unit(tsd,bl);
@@ -6465,6 +6537,15 @@ void clif_status_change_sub(struct block_list *bl, int id, int type, int flag, t
 	clif_send(buf, packet_len(WBUFW(buf,0)), bl, target_type);
 }
 
+void clif_body_size(struct block_list *bl, int val1) {
+	map_session_data *sd = NULL;
+
+	nullpo_retv(bl);
+
+	sd = BL_CAST(BL_PC, bl);
+
+	clif_status_change_sub(bl, bl->id, 1421, 1, 9999, val1, 0, 0, ((sd ? (pc_isinvisible(sd) ? SELF : AREA) : AREA_WOS)));
+}
 /* Sends status effect to clients around the bl
  * @param bl Object that has the effect
  * @param type Status icon see enum efst_type
@@ -6701,6 +6782,55 @@ void clif_broadcast(struct block_list* bl, const char* mes, size_t len, int type
 	clif_send( p, p->PacketLength, bl, target );
 }
 
+//Charkami @잡 및 @말 관련 정의 by 루나틱
+/*==========================================
+ * Send Charkami in ChatWin by Lunatic
+ *------------------------------------------*/
+int clif_ykami(struct block_list* bl, const char* mes, int len, unsigned long fontColor)
+{
+	unsigned char *buf = (unsigned char*)aMalloc((12 + len)*sizeof(unsigned char));
+	fontColor = (fontColor & 0x0000FF) << 16 | (fontColor & 0x00FF00) | (fontColor & 0xFF0000) >> 16; // RGB to BGR
+	int fontSize=10;
+
+	WBUFW(buf,0)  = 0x2c1;
+	WBUFW(buf, 2) = len + 12;
+	WBUFL(buf, 8) = fontColor;
+	WBUFW(buf,10) = fontSize;
+/*	WBUFW(buf, 8) = fontType;
+	WBUFW(buf,10) = fontSize;
+	WBUFW(buf,12) = fontAlign;
+	WBUFW(buf,14) = fontY;*/
+	memcpy(WBUFP(buf,12), mes, len);
+	clif_send(buf, WBUFW(buf,2), bl, ALL_CLIENT);
+
+	if( buf )
+		aFree(buf);
+	return 0;
+}
+//Charkami @잡 및 @말 관련 정의 by 루나틱
+/*==========================================
+ * Send Message in ChatWin by Lunatic
+ *------------------------------------------*/
+int clif_ymsg(struct block_list* bl, const char* mes, int len, unsigned long fontColor, enum send_target target)
+{
+	unsigned char *buf = (unsigned char*)aMalloc((12 + len)*sizeof(unsigned char));
+	fontColor = (fontColor & 0x0000FF) << 16 | (fontColor & 0x00FF00) | (fontColor & 0xFF0000) >> 16; // RGB to BGR
+
+	WBUFW(buf,0)  = 0x2C1;
+	WBUFW(buf, 2) = len + 12;
+	WBUFL(buf, 8) = fontColor;
+/*	WBUFW(buf, 8) = fontType;
+	WBUFW(buf,10) = fontSize;
+	WBUFW(buf,12) = fontAlign;
+	WBUFW(buf,14) = fontY;*/
+	memcpy(WBUFP(buf,12), mes, len);
+	clif_send(buf, WBUFW(buf,2), bl, target);
+
+	if( buf )
+		aFree(buf);
+	return 0;
+}
+
 /*==========================================
  * Displays a message on a 'bl' to all it's nearby clients
  * 008d <PacketLength>.W <GID>.L <message>.?B (ZC_NOTIFY_CHAT)
@@ -6711,7 +6841,10 @@ void clif_GlobalMessage( block_list& bl, const char* message, enum send_target t
 	int16 len = (int16)( strlen( message ) + 1 );
 
 	if( len > CHAT_SIZE_MAX ) {
-		ShowWarning("clif_GlobalMessage: Truncating too long message '%s' (len=%" PRId16 ").\n", message, len);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_GlobalMessage: '%s'의 메시지가 너무 길어 일부분을 줄입니다. (길이=%" PRId16 ").\n", message, len);
+		else
+			ShowWarning("clif_GlobalMessage: Truncating too long message '%s' (len=%" PRId16 ").\n", message, len);
 		len = CHAT_SIZE_MAX;
 	}
 
@@ -6765,7 +6898,10 @@ void clif_channel_msg(struct Channel *channel, const char *msg, unsigned long co
 	msg_len = (unsigned short)(strlen(msg) + 1);
 
 	if( msg_len > sizeof(buf)-12 ) {
-		ShowWarning("clif_channel_msg: Truncating too long message '%s' (len=%u).\n", msg, msg_len);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_channel_msg: '%s'의 메시지 길이가 너무 길어 줄이는중입니다. (길이=%u).\n", msg, msg_len);
+		else
+			ShowWarning("clif_channel_msg: Truncating too long message '%s' (len=%u).\n", msg, msg_len);
 		msg_len = sizeof(buf)-12;
 	}
 
@@ -7580,6 +7716,21 @@ void clif_showvendingboard( map_session_data& sd, enum send_target target, struc
 }
 
 
+/// Displays a stall board to target/area (ZC_STORE_ENTRY).
+/// 0131 <owner id>.L <message>.80B
+void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message)
+{
+
+	nullpo_retv(bl);
+
+	struct PACKET_ZC_STORE_ENTRY p = {};
+	p.packetType = HEADER_ZC_STORE_ENTRY;
+	p.makerAID = stall_id;
+	safestrncpy( p.storeName, message, 80);
+	clif_send(&p, sizeof(p), bl, AREA);
+
+}
+
 /// Removes a vending board from screen (ZC_DISAPPEAR_ENTRY).
 /// 0132 <owner id>.L
 void clif_closevendingboard(struct block_list* bl, int fd)
@@ -8007,7 +8158,10 @@ void clif_party_message( struct party_data& party, uint32 account_id, const char
 	}
 
 	if (len > CHAT_SIZE_MAX) {
-		ShowWarning( "clif_party_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", party_id=%d).\n", mes, len, CHAT_SIZE_MAX, party.party.party_id );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_party_message:  '%s'의 메시지를 줄입니다. (길이=%d, 최대=%" PRIuPTR ", 파티ID번호=%d).\n", mes, len, CHAT_SIZE_MAX, party.party.party_id);
+		else
+			ShowWarning( "clif_party_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", party_id=%d).\n", mes, len, CHAT_SIZE_MAX, party.party.party_id );
 		len = CHAT_SIZE_MAX;
 	}
 
@@ -9181,7 +9335,10 @@ void clif_guild_message( const struct mmo_guild& g, uint32 account_id, const cha
 	}
 	else if( len > sizeof(buf)-5 )
 	{
-		ShowWarning("clif_guild_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", guild_id=%d).\n", mes, len, sizeof(buf)-5, g.guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_guild_message: '%s' 메시지를 줄입니다. (길이=%d, 최대=%" PRIuPTR ", 길드ID번호=%d).\n", mes, len, sizeof(buf)-5, g.guild_id);
+		else
+			ShowWarning("clif_guild_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", guild_id=%d).\n", mes, len, sizeof(buf)-5, g.guild_id);
 		len = sizeof(buf)-5;
 	}
 
@@ -9310,8 +9467,11 @@ void clif_guild_broken( map_session_data& sd, int flag ){
 /// 00c0 <id>.L <type>.B
 /// type:
 ///     enum emotion_type
-void clif_emotion(struct block_list *bl,int type)
-{
+void clif_emotion(struct block_list *bl,int type){
+
+#if PACKETVER >= 20230802
+		clif_emotion_success(bl, 0, type);
+#else
 	unsigned char buf[8];
 
 	nullpo_retv(bl);
@@ -9320,6 +9480,7 @@ void clif_emotion(struct block_list *bl,int type)
 	WBUFL(buf,2)=bl->id;
 	WBUFB(buf,6)=type;
 	clif_send(buf,packet_len(0xc0),bl,AREA);
+#endif
 }
 
 
@@ -9435,7 +9596,10 @@ void clif_disp_message(struct block_list* src, const char* mes, size_t len, enum
 	if( len == 0 ) {
 		return;
 	} else if( len > sizeof(buf)-5 ) {
-		ShowWarning("clif_disp_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", aid=%d).\n", mes, len, sizeof(buf)-5, src->id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_disp_message: '%s' 메시지를 줄입니다. (길이=%d, 최대=%" PRIuPTR ", 계정ID번호=%d).\n", mes, len, sizeof(buf)-5, src->id);
+		else
+			ShowWarning("clif_disp_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", aid=%d).\n", mes, len, sizeof(buf)-5, src->id);
 		len = sizeof(buf)-5;
 	}
 
@@ -9708,7 +9872,10 @@ void clif_messagecolor_target(struct block_list *bl, unsigned long color, const 
 	nullpo_retv(bl);
 
 	if (msg_len > sizeof(buf) - 12) {
-		ShowWarning("clif_messagecolor: Truncating too long message '%s' (len=%u).\n", msg, msg_len);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_messagecolor: 메시지 '%s'이(가) 너무 길어 일부분을 줄입니디. (길이=%u).\n", msg, msg_len);
+		else
+			ShowWarning("clif_messagecolor: Truncating too long message '%s' (len=%u).\n", msg, msg_len);
 		msg_len = sizeof(buf) - 12;
 	}
 
@@ -10010,10 +10177,14 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 			break;
 		case BL_CHAT:
 		case BL_SKILL:
+		case BL_STALL:
 			// Newer clients request this, but do not need an answer
 			return;
 		default:
-			ShowError("clif_name: bad type %d(%d)\n", bl->type, bl->id);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("clif_name: 타입 %d(%d이(가) 불량입니다.)\n", bl->type, bl->id);
+			else
+				ShowError("clif_name: bad type %d(%d)\n", bl->type, bl->id);
 			return;
 	}
 }
@@ -10053,7 +10224,10 @@ void clif_disp_overhead_(struct block_list *bl, const char* mes, enum send_targe
 	len_mes = static_cast<decltype(len_mes)>( strlen(mes) + 1 ); //Account for \0
 
 	if (len_mes > sizeof(buf)-8) {
-		ShowError("clif_disp_overhead: Message too long (length %d)\n", len_mes);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("clif_disp_overhead: 메시지가 너무 깁니다. (길이: %d)\n", len_mes);
+		else
+			ShowError("clif_disp_overhead: Message too long (length %d)\n", len_mes);
 		len_mes = sizeof(buf)-8; //Trunk it to avoid problems.
 	}
 	// send message to others
@@ -10182,7 +10356,10 @@ void clif_hate_info(map_session_data *sd, unsigned char hate_level,int class_, u
 	} else if( mobdb_checkid(class_) ) {
 		clif_starskill(sd, mob_db.find(class_)->jname.c_str(), class_, hate_level, type ? 10 : 11);
 	} else {
-		ShowWarning("clif_hate_info: Received invalid class %d for this packet (char_id=%d, hate_level=%u, type=%u).\n", class_, sd->status.char_id, (unsigned int)hate_level, (unsigned int)type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_hate_info: 이 패킷에 대해 유효하지 않은 클래스 %d을(를) 받았습니다. (케릭터ID번호=%d, 증오 레벨(hate_level)=%u, 타입=%u).\n", class_, sd->status.char_id, (unsigned int)hate_level, (unsigned int)type);
+		else
+			ShowWarning("clif_hate_info: Received invalid class %d for this packet (char_id=%d, hate_level=%u, type=%u).\n", class_, sd->status.char_id, (unsigned int)hate_level, (unsigned int)type);
 	}
 }
 
@@ -10380,7 +10557,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 
 	// basic structure check for the 4-byte header
 	if( packetLength < 4 ){
-		ShowWarning("clif_process_message: Received malformed packet from player '%s' (no message data)!\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_process_message: 플레이어 '%s'의 잘못된 패킷을 받았습니다. (메시지 데이터가 없습니다.)\n", sd->status.name);
+		else
+			ShowWarning("clif_process_message: Received malformed packet from player '%s' (no message data)!\n", sd->status.name);
 		return false;
 	}else{
 		inputLength = packetLength - 4;
@@ -10390,7 +10570,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 	if( whisperFormat ) {	
 		// name has fixed width
 		if( inputLength < NAME_LENGTH + 1 ) {
-			ShowWarning("clif_process_message: Received malformed packet from player '%s' (packet length is incorrect)!\n", sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("clif_process_message: 플레이어 '%s'의 잘못된 패킷을 받았습니다. (패킷 길이가 잘못됨)\n", sd->status.name);
+			else	
+				ShowWarning("clif_process_message: Received malformed packet from player '%s' (packet length is incorrect)!\n", sd->status.name);
 			return false;
 		}
 
@@ -10401,7 +10584,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 
 		// only restriction is that the name must be zero-terminated
 		if( name[nameLength] != '\0' ) {
-			ShowWarning("clif_process_message: Player '%s' sent an unterminated name!\n", sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("clif_process_message: 플레이어 '%s'이(가) 종결되지 않은 이름을 보냈습니다!\n", sd->status.name);
+			else
+				ShowWarning("clif_process_message: Player '%s' sent an unterminated name!\n", sd->status.name);
 			return false;
 		}
 
@@ -10415,7 +10601,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 		
 		// check if there's enough data provided
 		if( inputLength < nameLength + seperatorLength + 1 ){
-			ShowWarning("clif_process_message: Received malformed packet from player '%s' (no username data)!\n", sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("clif_process_message: 플레이어 '%s'의 잘못된 패킷을 받았습니다. (유저이름(username) 데이터가 없습니다)\n", sd->status.name);
+			else
+				ShowWarning("clif_process_message: Received malformed packet from player '%s' (no username data)!\n", sd->status.name);
 			return false;
 		}
 
@@ -10426,7 +10615,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 			strncmp( name + nameLength, seperator, seperatorLength ) ) // followed by the seperator
 		{
 			//Hacked message, or infamous "client desynch" issue where they pick one char while loading another.
-			ShowWarning("clif_process_message: Player '%s' sent a message using an incorrect name! Forcing a relog...\n", sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("clif_process_message: 플레이어 '%s'이(가) 잘못된 이름을 사용하여 메시지를 보냈습니다! 강제로 다시 기록중...\n", sd->status.name);
+			else
+				ShowWarning("clif_process_message: Player '%s' sent a message using an incorrect name! Forcing a relog...\n", sd->status.name);
 			set_eof(sd->fd); // Just kick them out to correct it.
 			return false;
 		}
@@ -10438,13 +10630,19 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 #if PACKETVER < 20151001
 	// the declared length must match real length
 	if( messageLength != strnlen(message, messageLength)+1 ) {
-		ShowWarning("clif_process_message: Received malformed packet from player '%s' (length is incorrect)!\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_process_message: 플레이어 '%s'의 잘못된 패킷을 받았습니다. (길이가 잘못되었습니다.)\n", sd->status.name);
+		else	
+			ShowWarning("clif_process_message: Received malformed packet from player '%s' (length is incorrect)!\n", sd->status.name);
 		return false;
 	}
 
 	// verify <message> part of the packet
 	if( message[messageLength-1] != '\0' ) {	// message must be zero-terminated
-		ShowWarning("clif_process_message: Player '%s' sent an unterminated message string!\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_process_message: 플레이어 '%s'(이)가 종결되지 않은 메시지 문자열을 보냈습니다.\n", sd->status.name);
+		else
+			ShowWarning("clif_process_message: Player '%s' sent an unterminated message string!\n", sd->status.name);
 		return false;
 	}
 #else
@@ -10458,7 +10656,10 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 		// Also, the physical size of strings that use multibyte encoding can go multiple times over the chatbox capacity.
 		// Neither the official client nor server place any restriction on the length of the data in the packet,
 		// but we'll only allow reasonably long strings here. This also makes sure that they fit into the `chatlog` table.
-		ShowWarning("clif_process_message: Player '%s' sent a message too long ('%.*s')!\n", sd->status.name, CHAT_SIZE_MAX-1, message);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("clif_process_message: 플레이어 '%s'이(가) 너무 긴 메시지를 보냈습니다. ('%.*s')!\n", sd->status.name, CHAT_SIZE_MAX-1, message);
+		else
+			ShowWarning("clif_process_message: Player '%s' sent a message too long ('%.*s')!\n", sd->status.name, CHAT_SIZE_MAX-1, message);
 		return false;
 	}
 	
@@ -10576,7 +10777,10 @@ void clif_parse_WantToConnection(int fd, map_session_data* sd)
 	t_tick client_tick; //The client tick is a tick, therefore it needs be unsigned. [Skotlex]
 
 	if (sd) {
-		ShowError("clif_parse_WantToConnection : invalid request (character already logged in)\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("clif_parse_WantToConnection : 잘못된 요청입니다. (이미 로그인한 케릭터)\n");
+		else
+			ShowError("clif_parse_WantToConnection : invalid request (character already logged in)\n");
 		return;
 	}
 
@@ -10590,7 +10794,19 @@ void clif_parse_WantToConnection(int fd, map_session_data* sd)
 	err = clif_parse_WantToConnection_sub(fd);
 
 	if( err ){ // connection rejected
-		ShowInfo("clif_parse: Disconnecting session #%d with unknown connect packet 0x%04x(length:%d)%s\n", fd, cmd, RFIFOREST(fd), (
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowInfo("clif_parse: 세션 #%d을(를) 알수 없는 패킷 버전 %s(으)로 인하여 연결이 해제됐습니다. (p:0x%04x,l:%d).\n", fd, (
+				err == 1 ? "." :
+				err == 2 ? ", 잘못된 account_id를 가지고있을 가능성이 있습니다." :
+				err == 3 ? ", 잘못된 char_id를 가지고있을 가능성이 있습니다." :
+				/* Uncomment when checks are added in clif_guess_PacketVer. [FlavioJS]
+				err == 4 ? ", possibly for having an invalid login_id1." :
+				err == 5 ? ", possibly for having an invalid client_tick." :
+				*/
+				err == 6 ? ", 잘못된 성별을 가지고있을 가능성이 있습니다." :
+				". 에러!! 잘못된 에러코드"), cmd, RFIFOREST(fd));
+		} else {
+			ShowInfo("clif_parse: Disconnecting session #%d with unknown connect packet 0x%04x(length:%d)%s\n", fd, cmd, RFIFOREST(fd), (
 				err == 1 ? "." :
 				err == 2 ? ", possibly for having an invalid account_id." :
 				err == 3 ? ", possibly for having an invalid char_id." :
@@ -10600,6 +10816,7 @@ void clif_parse_WantToConnection(int fd, map_session_data* sd)
 				*/
 				err == 6 ? ", possibly for having an invalid sex." :
 				". ERROR invalid error code"));
+		}
 		
 		WFIFOHEAD(fd,packet_len(0x6a));
 		WFIFOW(fd,0) = 0x6a;
@@ -10624,7 +10841,10 @@ void clif_parse_WantToConnection(int fd, map_session_data* sd)
 	//Check for double login.
 	bl = map_id2bl(account_id);
 	if(bl && bl->type != BL_PC) {
-		ShowError("clif_parse_WantToConnection: a non-player object already has id %d, please increase the starting account number\n", account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("clif_parse_WantToConnection: 플레이어가 아닌 객체는 이미 ID가 %d입니다. 시작 계정번호를 늘리세요.\n", account_id);
+		else
+			ShowError("clif_parse_WantToConnection: a non-player object already has id %d, please increase the starting account number\n", account_id);
 		WFIFOHEAD(fd,packet_len(0x6a));
 		WFIFOW(fd,0) = 0x6a;
 		WFIFOB(fd,2) = 3; // Rejected by server
@@ -10875,6 +11095,7 @@ void clif_parse_LoadEndAck(int fd,map_session_data *sd)
 			sd->state.night = 1;
 			clif_status_load(&sd->bl, EFST_SKE, 1);
 		}
+		emotes_get_player_packs(sd);
 
 		// Notify everyone that this char logged in [Skotlex].
 		map_foreachpc(clif_friendslist_toggle_sub, sd->status.account_id, sd->status.char_id, 1);
@@ -11516,6 +11737,7 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		return;
 	}
 
+#if PACKETVER < 20230802
 	int emoticon = RFIFOB(fd,packet_db[RFIFOW(fd,0)].pos[0]);
 
 	if (battle_config.basic_skill_check == 0 || pc_checkskill(sd, NV_BASIC) >= 2 || pc_checkskill(sd, SU_BASIC_SKILL) >= 1) {
@@ -11550,6 +11772,7 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		clif_emotion(&sd->bl, emoticon);
 	} else
 		clif_skill_fail( *sd, 1, USESKILL_FAIL_LEVEL, 1 );
+#endif
 }
 
 
@@ -12587,8 +12810,12 @@ void clif_parse_StatusUp(int fd,map_session_data *sd)
 	int increase_amount = RFIFOB(fd,packet_db[RFIFOW(fd,0)].pos[1]);
 
 	if( increase_amount < 0 ) {
-		ShowDebug("clif_parse_StatusUp: Negative 'increase' value sent by client! (fd: %d, value: %d)\n",
-			fd, increase_amount);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("clif_parse_StatusUp: 클라이언트가 보낸 부정적 '증가' 값! (fd: %d, 값: %d)\n",
+				fd, increase_amount);
+		else 
+			ShowDebug("clif_parse_StatusUp: Negative 'increase' value sent by client! (fd: %d, value: %d)\n",
+				fd, increase_amount);
 	}
 	pc_statusup(sd,RFIFOW(fd,packet_db[RFIFOW(fd,0)].pos[0]),increase_amount);
 }
@@ -12605,7 +12832,10 @@ void clif_parse_traitstatus_up( int fd, map_session_data *sd ){
 	const PACKET_CZ_ADVANCED_STATUS_CHANGE* p = reinterpret_cast<PACKET_CZ_ADVANCED_STATUS_CHANGE*>( RFIFOP( fd, 0 ) );
 
 	if( p->amount < 0 ){
-		ShowDebug( "clif_parse_traitstatus_up: Negative 'increase' value sent by client! %s (AID: %d, CID: %d, value: %d)\n", sd->status.name, sd->status.account_id, sd->status.char_id, p->amount );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug( "clif_parse_traitstatus_up: 클라이언트 %s (AID: %d, CID: %d, value: %d)에서 음수 '증가값'을 보냈습니다!\n", sd->status.name, sd->status.account_id, sd->status.char_id, p->amount );
+		else
+			ShowDebug( "clif_parse_traitstatus_up: Negative 'increase' value sent by client! %s (AID: %d, CID: %d, value: %d)\n", sd->status.name, sd->status.account_id, sd->status.char_id, p->amount );
 		return;
 	}
 
@@ -13184,7 +13414,10 @@ void clif_parse_NpcSelectMenu(int fd,map_session_data *sd){
 
 	if( (select > sd->npc_menu && select != 0xff) || select == 0 ) {
 			TBL_NPC* nd = map_id2nd(npc_id);
-			ShowWarning("Invalid menu selection on npc %d:'%s' - got %d, valid range is [%d..%d] (player AID:%d, CID:%d, name:'%s')!\n", npc_id, (nd)?nd->name:"invalid npc id", select, 1, sd->npc_menu, sd->bl.id, sd->status.char_id, sd->status.name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("NPC '%s'(%d)의 메뉴선택이 잘못되었습니다 - %d을(를) 가지고 있고, 유효한 범위는 [%d..%d]입니다. (플레이어 계정ID번호:%d, 케릭터 ID번호:%d, 이름:'%s')!\n", (nd)?nd->name:"잘못된 NPC ID번호", npc_id, select, 1, sd->npc_menu, sd->bl.id, sd->status.char_id, sd->status.name);
+			else
+				ShowWarning("Invalid menu selection on npc %d:'%s' - got %d, valid range is [%d..%d] (player AID:%d, CID:%d, name:'%s')!\n", npc_id, (nd)?nd->name:"invalid npc id", select, 1, sd->npc_menu, sd->bl.id, sd->status.char_id, sd->status.name);
 			clif_GM_kick(nullptr,sd);
 		return;
 	}
@@ -13969,7 +14202,11 @@ void clif_parse_VendingListReq(int fd, map_session_data* sd)
 	if( sd->npc_id ) {// using an NPC
 		return;
 	}
-	vending_vendinglistreq(sd,RFIFOL(fd,packet_db[RFIFOW(fd,0)].pos[0]));
+	int vender_id = RFIFOL(fd,packet_db[RFIFOW(fd,0)].pos[0]);
+	if(vender_id >= START_STALL_NUM)
+		stall_vending_listreq(sd,vender_id);
+	else
+		vending_vendinglistreq(sd,vender_id);
 }
 
 
@@ -13991,7 +14228,11 @@ void clif_parse_PurchaseReq2(int fd, map_session_data* sd){
 #if PACKETVER >= 20100105
 	const PACKET_CZ_PC_PURCHASE_ITEMLIST_FROMMC2* p = reinterpret_cast<PACKET_CZ_PC_PURCHASE_ITEMLIST_FROMMC2*>( RFIFOP( fd, 0 ) );
 
-	vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
+	if(p->UniqueID >= START_STALL_NUM) {
+		stall_vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
+		clif_msg_color(sd, 2917, color_table[COLOR_CYAN]);
+	} else
+		vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
 
 	// whether it fails or not, the buy window is closed
 	sd->vended_id = 0;
@@ -14115,7 +14356,10 @@ void clif_parse_GuildRequestInfo(int fd, map_session_data *sd)
 		clif_guild_expulsionlist(sd);
 		break;
 	default:
-		ShowError("clif: guild request info: unknown type %d\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("clif: 길드 요청 정보: 알수 없는 타입 %d\n", type);
+		else
+			ShowError("clif: guild request info: unknown type %d\n", type);
 		break;
 	}
 }
@@ -14245,7 +14489,10 @@ void clif_parse_GuildChangeEmblem(int fd,map_session_data *sd){
 	}
 	emb_val = clif_validate_emblem(emblem, emblem_len);
 	if(emb_val == EMBVALIDATE_ERR_RAW_FILEFORMAT){
-		ShowWarning("clif_parse_GuildChangeEmblem: Rejected malformed guild emblem (size=%lu, accound_id=%d, char_id=%d, guild_id=%d).\n", emblem_len, sd->status.account_id, sd->status.char_id, sd->status.guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse_GuildChangeEmblem: 잘못된 길드 엠블럼이 거부됐습니다. (크기=%lu, 계정ID번호=%d, 케릭터ID번호=%d, 길드ID번호=%d).\n", emblem_len, sd->status.account_id, sd->status.char_id, sd->status.guild_id);
+		else
+			ShowWarning("clif_parse_GuildChangeEmblem: Rejected malformed guild emblem (size=%lu, accound_id=%d, char_id=%d, guild_id=%d).\n", emblem_len, sd->status.account_id, sd->status.char_id, sd->status.guild_id);
 		clif_messagecolor(&sd->bl,color_table[COLOR_RED],msg_txt(sd,386),false,SELF); //"The chosen emblem was detected invalid\n"
 		return;
 	} else if(emb_val == EMBVALIDATE_ERR_TRANSPARENCY){
@@ -16079,7 +16326,10 @@ void clif_Mail_read( map_session_data *sd, int mail_id ){
 	ARR_FIND(0, MAIL_MAX_INBOX, i, sd->mail.inbox.msg[i].id == mail_id);
 	if( i == MAIL_MAX_INBOX ) {
 		clif_Mail_return(sd->fd, mail_id, 1); // Mail doesn't exist
-		ShowWarning("clif_parse_Mail_read: char '%s' trying to read a message not the inbox.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse_Mail_read: 케릭터 '%s'이(가) 받은 편지함이 아닌 메시지를 읽으려고합니다.\n", sd->status.name);
+		else
+			ShowWarning("clif_parse_Mail_read: char '%s' trying to read a message not the inbox.\n", sd->status.name);
 		return;
 	} else {
 		struct mail_message *msg = &sd->mail.inbox.msg[i];
@@ -16558,7 +16808,10 @@ void clif_parse_Mail_send(int fd, map_session_data *sd){
 		return;
 
 	if( RFIFOW(fd,info->pos[0]) < 69 ) {
-		ShowWarning("Invalid Msg Len from account %d.\n", sd->status.account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("계정 %d의 잘못된 메시지 길이입니다.\n", sd->status.account_id);
+		else
+			ShowWarning("Invalid Msg Len from account %d.\n", sd->status.account_id);
 		return;
 	}
 
@@ -16567,7 +16820,10 @@ void clif_parse_Mail_send(int fd, map_session_data *sd){
 	uint16 length = RFIFOW(fd, 2);
 
 	if( length < 0x3e ){
-		ShowWarning("Too short...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("너무 짧습니다...\n");
+		else
+			ShowWarning("Too short...\n");
 		clif_Mail_send(sd, WRITE_MAIL_FAILED);
 		return;
 	}
@@ -16727,12 +16983,18 @@ void clif_parse_Auction_setitem(int fd, map_session_data *sd){
 		sd->auction.amount = 0;
 
 	if( idx < 0 || idx >= MAX_INVENTORY ) {
-		ShowWarning("Character %s trying to set invalid item index in auctions.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("캐릭터 %s이(가) 옥션에 잘못된 아이템 색인(인덱스)을 설정하려고했습니다.\n", sd->status.name);
+		else
+			ShowWarning("Character %s trying to set invalid item index in auctions.\n", sd->status.name);
 		return;
 	}
 
 	if( amount != 1 || amount > sd->inventory.u.items_inventory[idx].amount ) { // By client, amount is always set to 1. Maybe this is a future implementation.
-		ShowWarning("Character %s trying to set invalid amount in auctions.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("케릭터 %s이(가) 옥션에 잘못된 갯수를 설정하려 합니다.\n", sd->status.name);
+		else
+			ShowWarning("Character %s trying to set invalid amount in auctions.\n", sd->status.name);
 		return;
 	}
 
@@ -16811,17 +17073,26 @@ void clif_parse_Auction_register(int fd, map_session_data *sd)
 
 	// Invalid Situations...
 	if( sd->auction.amount < 1 ) {
-		ShowWarning("Character %s trying to register auction without item.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("캐릭터 %s 님이 아이템 없이 옥션에 등록하려고합니다.\n", sd->status.name);
+		else
+			ShowWarning("Character %s trying to register auction without item.\n", sd->status.name);
 		return;
 	}
 
 	if( auction.price >= auction.buynow ) {
-		ShowWarning("Character %s trying to alter auction prices.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("캐릭터 %s이(가) 옥션(경매) 가격을 변경하려고합니다.\n", sd->status.name);
+		else
+			ShowWarning("Character %s trying to alter auction prices.\n", sd->status.name);
 		return;
 	}
 
 	if( auction.hours < 1 || auction.hours > 48 ) {
-		ShowWarning("Character %s trying to enter an invalid time for auction.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("케릭터 %s이(가) 옥션(경매)에 잘못된 시간을 입력하려고 합니다.\n", sd->status.name);
+		else
+			ShowWarning("Character %s trying to enter an invalid time for auction.\n", sd->status.name);
 		return;
 	}
 
@@ -17275,7 +17546,10 @@ void clif_parse_cashshop_buy( int fd, map_session_data *sd ){
 	int s_itl = sizeof( p->items[0] );
 
 	if( p->packetLength < sizeof( *p ) || p->packetLength != sizeof( *p ) + p->count * s_itl ){
-		ShowWarning( "Player %u sent incorrect cash shop buy packet (len %u:%" PRIdPTR ")!\n", sd->status.char_id, p->packetLength, sizeof( *p ) + p->count * s_itl );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("플레이어 %u가 잘못된 캐시샵 구매 패킷을 보냈습니다. (길이 %u:%" PRIdPTR ")!\n", sd->status.char_id, p->packetLength, sizeof( *p ) + p->count * s_itl );
+		else
+			ShowWarning( "Player %u sent incorrect cash shop buy packet (len %u:%" PRIdPTR ")!\n", sd->status.char_id, p->packetLength, sizeof( *p ) + p->count * s_itl );
 		return;
 	}
 
@@ -17463,8 +17737,21 @@ void clif_parse_configuration( int fd, map_session_data* sd ){
 
 			sd->hd->homunculus.autofeed = flag;
 			break;
+			
+		case CONFIG_SHOW_COSTUME:
+			if(flag == true)
+				sd->status.show_costume = false;
+			else
+				sd->status.show_costume = true;
+
+			pc_set_costume_view(sd);
+
+			break;
 		default:
-			ShowWarning( "clif_parse_configuration: received unknown configuration type '%d'...\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "clif_parse_configuration: 알수 없는 설정 타입 '%d'을(를) 전달 받았습니다...\n", type );
+			else
+				ShowWarning( "clif_parse_configuration: received unknown configuration type '%d'...\n", type );
 			return;
 	}
 
@@ -17516,7 +17803,10 @@ std::string clif_quest_string( std::shared_ptr<s_quest_objective> objective ){
 		case RC_ANGEL:		race_name = "Angel"; break;
 		case RC_DRAGON:		race_name = "Dragon"; break;
 		default:
-			ShowWarning( "clif_quest_string: Unsupported race %d - using empty string...\n", objective->race );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "clif_quest_string: %d은(는) 지원하지 않는 종족입니다. 빈문자를 사용합니다...\n", objective->race );
+			else
+				ShowWarning( "clif_quest_string: Unsupported race %d - using empty string...\n", objective->race );
 			[[fallthrough]];
 		case RC_ALL:		race_name = ""; break;
 	}
@@ -17528,7 +17818,10 @@ std::string clif_quest_string( std::shared_ptr<s_quest_objective> objective ){
 		case SZ_MEDIUM:	size_name = "Medium"; break;
 		case SZ_BIG:	size_name = "Large"; break;
 		default:
-			ShowWarning( "clif_quest_string: Unsupported size %d - using empty string...\n", objective->size );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "clif_quest_string: %d은(는) 지원하지 않는 크기입니다. 빈문자를 사용합니다...\n", objective->size );
+			else
+				ShowWarning( "clif_quest_string: Unsupported size %d - using empty string...\n", objective->size );
 			[[fallthrough]];
 		case SZ_ALL:	size_name = ""; break;
 	}
@@ -17547,7 +17840,10 @@ std::string clif_quest_string( std::shared_ptr<s_quest_objective> objective ){
 		case ELE_GHOST:		ele_name = "Ghost Element"; break;
 		case ELE_UNDEAD:	ele_name = "Undead Element"; break;
 		default:
-			ShowWarning( "clif_quest_string: Unsupported element %d - using empty string...\n", objective->element );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "clif_quest_string: %d은(는) 지원하지 않는 엘리멘탈입니다. 빈문자열을 사용합니다...\n", objective->element );
+			else
+				ShowWarning( "clif_quest_string: Unsupported element %d - using empty string...\n", objective->element );
 			[[fallthrough]];
 		case ELE_ALL:		ele_name = ""; break;
 	}
@@ -18312,7 +18608,10 @@ void clif_parse_bg_queue_apply_request(int fd, map_session_data *sd)
 	else if (type == 4) // Guild
 		bg_queue_join_guild(name, sd);
 	else {
-		ShowWarning("clif_parse_bg_queue_apply_request: Received invalid queue type: %d from player %s (AID:%d CID:%d).\n", type, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse_bg_queue_apply_request: %s으(로)부터 잘못 전달된 큐 타입: %d (AID:%d CID:%d).\n",sd->status.name,  type, sd->status.account_id, sd->status.char_id);
+		else
+			ShowWarning("clif_parse_bg_queue_apply_request: Received invalid queue type: %d from player %s (AID:%d CID:%d).\n", type, sd->status.name, sd->status.account_id, sd->status.char_id);
 		clif_bg_queue_apply_result(BG_APPLY_INVALID_APP, name, sd); // Someone sent an invalid queue type packet
 		return;
 	}
@@ -18344,7 +18643,10 @@ void clif_bg_queue_apply_notify(const char *name, map_session_data *sd)
 	std::shared_ptr<s_battleground_queue> queue = bg_search_queue(sd->bg_queue_id);
 
 	if (queue == nullptr) {
-		ShowError("clif_bg_queue_apply_notify: Player is not in a battleground queue.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("clif_bg_queue_apply_notify: 전장 대기열에 없는 플레이어입니다.\n");
+		else
+			ShowError("clif_bg_queue_apply_notify: Player is not in a battleground queue.\n");
 		return;
 	}
 
@@ -18391,7 +18693,10 @@ void clif_parse_bg_queue_cancel_request(int fd, map_session_data *sd)
 		else
 			success = bg_queue_leave(sd);
 	} else {
-		ShowWarning("clif_parse_bg_queue_cancel_request: Player trying to request leaving non-existent queue with name: %s (AID:%d CID:%d).\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse_bg_queue_cancel_request: 이름이 없는 대기열을 떠나려고 하는 플레이어: %s (AID:%d CID:%d).\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+		else
+			ShowWarning("clif_parse_bg_queue_cancel_request: Player trying to request leaving non-existent queue with name: %s (AID:%d CID:%d).\n", sd->status.name, sd->status.account_id, sd->status.char_id);
 		success = false;
 	}
 
@@ -18766,6 +19071,19 @@ void clif_parse_ItemListWindowSelected(int fd, map_session_data* sd) {
 		return; // Canceled by player.
 	}
 
+#if PACKETVER >= 20230802
+	switch (type) {
+	case 0: // Change Material
+		sd->menuskill_id = GN_CHANGEMATERIAL;
+		break;
+	case 1:
+		break;
+	default:
+		clif_menuskill_clear(sd);
+		return; // Prevent hacking.
+	}
+#endif
+
 	if( sd->menuskill_id != SO_EL_ANALYSIS && sd->menuskill_id != GN_CHANGEMATERIAL ) {
 		clif_menuskill_clear(sd);
 		return; // Prevent hacking.
@@ -18867,7 +19185,10 @@ static void clif_parse_ReqOpenBuyingStore( int fd, map_session_data* sd ){
 	// TODO: Make this check global for all variable length packets.
 	// minimum packet length
 	if( p->packetLength < sizeof( *p ) ){
-		ShowError( "clif_parse_ReqOpenBuyingStore: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_ReqOpenBuyingStore: 악성 패킷 (예상길이=%" PRIdPTR ", 길이=%u, 계정ID번호=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		else
+			ShowError( "clif_parse_ReqOpenBuyingStore: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
 		return;
 	}
 
@@ -18888,7 +19209,10 @@ static void clif_parse_ReqOpenBuyingStore( int fd, map_session_data* sd ){
 	int packet_len = p->packetLength - sizeof( *p );
 
 	if( packet_len % sizeof( p->items[0] ) ){
-		ShowError( "clif_parse_ReqOpenBuyingStore: Unexpected item list size %u (account_id=%d, block size=%" PRIdPTR ")\n", packet_len, sd->bl.id, sizeof( p->items[0] ) );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_ReqOpenBuyingStore: 예기치 않은 아이템 목록 크기: %u (계정ID번호=%d, 블록 크기=%" PRIdPTR ")\n", packet_len, sd->bl.id, sizeof( p->items[0] ) );
+		else
+			ShowError( "clif_parse_ReqOpenBuyingStore: Unexpected item list size %u (account_id=%d, block size=%" PRIdPTR ")\n", packet_len, sd->bl.id, sizeof( p->items[0] ) );
 		return;
 	}
 
@@ -18965,6 +19289,19 @@ void clif_buyingstore_entry( map_session_data& sd, struct block_list* tbl ){
 #endif
 }
 
+/// Notifies clients in area of a buying stall (ZC_BUYING_STORE_ENTRY).
+/// 0814 <stall id>.L <store name>.80B
+void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message)
+{	
+	struct PACKET_ZC_BUYING_STORE_ENTRY p = {};
+
+	p.packetType = HEADER_ZC_BUYING_STORE_ENTRY;
+	p.makerAID = stall_id;
+	safestrncpy( p.storeName, message, 80);
+
+	clif_send(&p, sizeof(p), bl, AREA);
+}
+
 /// Request to close own buying store (CZ_REQ_CLOSE_BUYING_STORE).
 /// 0815
 static void clif_parse_ReqCloseBuyingStore(int fd, map_session_data* sd)
@@ -19003,7 +19340,10 @@ static void clif_parse_ReqClickBuyingStore(int fd, map_session_data* sd)
 
 	account_id = RFIFOL(fd,packet_db[RFIFOW(fd,0)].pos[0]);
 
-	buyingstore_open(sd, account_id);
+	if(account_id >= START_STALL_NUM)
+		stall_buying_listreq(sd, account_id);
+	else
+		buyingstore_open(sd, account_id);
 }
 
 
@@ -19042,7 +19382,10 @@ static void clif_parse_ReqTradeBuyingStore( int fd, map_session_data* sd ){
 
 	// minimum packet length
 	if( p->packetLength < sizeof( *p ) ){
-		ShowError( "clif_parse_ReqTradeBuyingStore: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_ReqTradeBuyingStore: 악성 패킷 (예상된 길이=%" PRIdPTR ", 길이=%u, 계정ID번호=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		else
+			ShowError( "clif_parse_ReqTradeBuyingStore: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
 		return;
 	}
 
@@ -19050,11 +19393,18 @@ static void clif_parse_ReqTradeBuyingStore( int fd, map_session_data* sd ){
 	int packet_len = p->packetLength - sizeof( *p );
 
 	if( packet_len % sizeof( p->items[0] ) ){
-		ShowError( "clif_parse_ReqTradeBuyingStore: Unexpected item list size %u (account_id=%d, buyer_id=%d, block size=%" PRIdPTR ")\n", packet_len, sd->bl.id, p->AID, sizeof( p->items[0] ) );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("clif_parse_ReqTradeBuyingStore: 예기치 못한 아이템 목록 크기: %u (계정ID번호=%d, 구매자 ID=%d, 블록 크기=%" PRIdPTR ")\n", packet_len, sd->bl.id, p->AID, sizeof( p->items[0] ) );
+		else
+			ShowError( "clif_parse_ReqTradeBuyingStore: Unexpected item list size %u (account_id=%d, buyer_id=%d, block size=%" PRIdPTR ")\n", packet_len, sd->bl.id, p->AID, sizeof( p->items[0] ) );
 		return;
 	}
 
-	buyingstore_trade( sd, p->AID, p->storeId, p->items, packet_len / sizeof( p->items[0] ) );
+	if(p->storeId >= START_STALL_NUM) {
+		stall_buying_purchasereq(sd, p->AID, p->storeId, p->items, packet_len / sizeof( p->items[0] ) );
+		clif_msg(sd, 2947);
+	} else
+		buyingstore_trade( sd, p->AID, p->storeId, p->items, packet_len / sizeof( p->items[0] ) );
 }
 
 
@@ -19152,7 +19502,10 @@ static void clif_parse_SearchStoreInfo( int fd, map_session_data *sd ){
 
 	// minimum packet length
 	if( p->packetLength < sizeof( *p ) ){
-		ShowError( "clif_parse_SearchStoreInfo: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_SearchStoreInfo: 악성 패킷 (예상된 길이=%" PRIdPTR ", 길이=%u, 계정ID번호=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
+		else
+			ShowError( "clif_parse_SearchStoreInfo: Malformed packet (expected length=%" PRIdPTR ", length=%u, account_id=%d).\n", sizeof( *p ), p->packetLength, sd->bl.id );
 		return;
 	}
 
@@ -19166,23 +19519,35 @@ static void clif_parse_SearchStoreInfo( int fd, map_session_data *sd ){
 
 	int count = packet_len / sizeof( p->items[0] );
 
-	if( count < p->itemsCount + p->cardsCount ){
-		ShowError( "clif_parse_SearchStoreInfo: Malformed packet (expected count=%u, count=%u, account_id=%d).\n", p->itemsCount + p->cardsCount, count, sd->bl.id );
+	if( count < p->itemsCount + p->cardsCount ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_SearchStoreInfo: 잘못된 패킷 (예상 개수=%u, 실제 개수=%u, 계정 ID=%d).\n", p->itemsCount + p->cardsCount, count, sd->bl.id );
+		else
+			ShowError( "clif_parse_SearchStoreInfo: Malformed packet (expected count=%u, count=%u, account_id=%d).\n", p->itemsCount + p->cardsCount, count, sd->bl.id );
 		return;
 	}
 
 	if ( p->searchType > SEARCHTYPE_BUYING_STORE ) {
-		ShowError( "clif_parse_SearchStoreInfo: Invalid search type %u (account_id=%d).\n", p->searchType, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_SearchStoreInfo: 잘못된 검색 유형 %u (계정 ID=%d).\n", p->searchType, sd->bl.id );
+		else
+			ShowError( "clif_parse_SearchStoreInfo: Invalid search type %u (account_id=%d).\n", p->searchType, sd->bl.id );
 		return;
 	}
 
 	if ( p->minPrice > battle_config.vending_max_value ) {
-		ShowError( "clif_parse_SearchStoreInfo: Invalid min price %u (account_id=%d).\n", p->minPrice, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_SearchStoreInfo: 잘못된 최소 가격 %u (계정 ID=%d).\n", p->minPrice, sd->bl.id );
+		else
+			ShowError( "clif_parse_SearchStoreInfo: Invalid min price %u (account_id=%d).\n", p->minPrice, sd->bl.id );
 		return;
 	}
 
 	if ( p->maxPrice > battle_config.vending_max_value ) {
-		ShowError( "clif_parse_SearchStoreInfo: Invalid max price %u (account_id=%d).\n", p->maxPrice, sd->bl.id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "clif_parse_SearchStoreInfo: 잘못된 최대 가격 %u (계정 ID=%d).\n", p->maxPrice, sd->bl.id );
+		else
+			ShowError( "clif_parse_SearchStoreInfo: Invalid max price %u (account_id=%d).\n", p->maxPrice, sd->bl.id );
 		return;
 	}
 
@@ -19365,12 +19730,18 @@ void clif_parse_debug(int fd,map_session_data *sd)
 		{// variable length
 			packet_len = RFIFOW(fd,2);  // clif_parse ensures, that this amount of data is already received
 		}
-		ShowDebug("Packet debug of 0x%04X (length %d), %s session #%d, %d/%d (AID/CID)\n", cmd, packet_len, sd->state.active ? "authed" : "unauthed", fd, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("0x%04X의 패킷 디버그 (길이 %d), %s 세션 #%d, %d/%d (AID/CID)\n", cmd, packet_len, sd->state.active ? "인증됨" : "인증되지 않음", fd, sd->status.account_id, sd->status.char_id);
+		else
+			ShowDebug("Packet debug of 0x%04X (length %d), %s session #%d, %d/%d (AID/CID)\n", cmd, packet_len, sd->state.active ? "authed" : "unauthed", fd, sd->status.account_id, sd->status.char_id);
 	}
 	else
 	{
 		packet_len = static_cast<decltype(packet_len)>( RFIFOREST(fd) );
-		ShowDebug("Packet debug of 0x%04X (length %d), session #%d\n", cmd, packet_len, fd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("0x%04X의 패킷 디버그 (길이 %d), 세션 #%d\n", cmd, packet_len, fd);
+		else
+			ShowDebug("Packet debug of 0x%04X (length %d), session #%d\n", cmd, packet_len, fd);
 	}
 
 	ShowDump(RFIFOP(fd,0), packet_len);
@@ -19527,8 +19898,10 @@ int clif_skill_itemlistwindow( map_session_data *sd, uint16 skill_id, uint16 ski
 	sd->menuskill_id = skill_id; // To prevent hacking.
 	sd->menuskill_val = skill_lv;
 
+#if PACKETVER < 20230802
 	if( skill_id == GN_CHANGEMATERIAL )
 		skill_lv = 0; // Changematerial
+#endif
 
 	WFIFOHEAD(fd, packet_len(0x7e3));
 	WFIFOW(fd,0) = 0x7e3;
@@ -19737,7 +20110,10 @@ void clif_sub_ranklist(unsigned char *buf,int idx,map_session_data* sd, enum e_r
 		// PK currently unsupported
 		case RANK_KILLER:		list = nullptr; size = 0; break;
 		default:
-			ShowError( "clif_sub_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingtype );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "clif_sub_ranklist: 랭킹 타입 '%d'은(는) 지원되지 않습니다. 이것을 보고하세요.\n", rankingtype );
+			else
+				ShowError( "clif_sub_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingtype );
 			return;
 	}
 
@@ -19810,7 +20186,10 @@ void clif_ranklist(map_session_data *sd, int16 rankingType) {
 		case RANK_TAEKWON:		cmd = 0x226; break;
 		case RANK_KILLER:		cmd = 0x238; break;
 		default:
-			ShowError( "clif_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingType );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "clif_ranklist: 랭킹 타입 '%d'은(는) 지원되지 않습니다. 이것을 보고하세요.\n", rankingType );
+			else
+				ShowError( "clif_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingType );
 			return;
 	}
 
@@ -19832,7 +20211,10 @@ void clif_ranklist(map_session_data *sd, int16 rankingType) {
 		case RANK_KILLER:
 			break;
 		default:
-			ShowError( "clif_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingType );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "clif_ranklist: 랭킹 타입 '%d'은(는) 지원되지 않습니다. 이것을 보고하세요.\n", rankingType );
+			else
+				ShowError( "clif_ranklist: Unsupported ranking type '%d'. Please report this.\n", rankingType );
 			return;
 	}
 
@@ -19883,7 +20265,10 @@ void clif_update_rankingpoint(map_session_data &sd, int rankingtype, int point) 
 		case RANK_ALCHEMIST:	cmd = 0x21c; break;
 		case RANK_TAEKWON:		cmd = 0x224; break;
 		default:
-			ShowError( "clif_update_rankingpoint: Unsupported ranking type '%d'. Please report this.\n", rankingtype );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "clif_update_rankingpoint: 랭킹 타입 '%d'은(는) 지원되지 않습니다. 이것을 보고하세요.\n", rankingtype );
+			else
+				ShowError( "clif_update_rankingpoint: Unsupported ranking type '%d'. Please report this.\n", rankingtype );
 			return;
 	}
 
@@ -20125,7 +20510,10 @@ void clif_showscript(struct block_list* bl, const char* message, enum send_targe
 	len = strlen(message)+1;
 
 	if( len > sizeof(buf)-8 ) {
-		ShowWarning("clif_showscript: Truncating too long message '%s' (len=%" PRIuPTR ").\n", message, len);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_showscript: 메시지 '%s'이(가) 너무 길어 일부를 줄입니다. (길이=%" PRIuPTR ").\n", message, len);
+		else
+			ShowWarning("clif_showscript: Truncating too long message '%s' (len=%" PRIuPTR ").\n", message, len);
 		len = sizeof(buf)-8;
 	}
 
@@ -20169,11 +20557,13 @@ void clif_clan_message( struct clan& clan, const char *mes, size_t len ){
 	static size_t len_max = sizeof( packet_buffer ) - sizeof( *p ) - 1;
 
 	// Is the length bigger than the maximum message length
-	if( len > len_max ){
-		ShowWarning( "clif_clan_message: Truncated message '%s' (len=%" PRIuPTR ", max=%" PRIuPTR ", clan_id=%d).\n", mes, len, len_max, clan.id );
+	if( len > len_max ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning( "clif_clan_message: 메시지가 잘렸습니다 '%s' (길이=%" PRIuPTR ", 최대 길이=%" PRIuPTR ", 클랜 ID=%d).\n", mes, len, len_max, clan.id );
+		else
+			ShowWarning( "clif_clan_message: Truncated message '%s' (len=%" PRIuPTR ", max=%" PRIuPTR ", clan_id=%d).\n", mes, len, len_max, clan.id );
 		len = len_max;
 	}
-
 	p->PacketType = HEADER_ZC_NOTIFY_CLAN_CHAT;
 	p->PacketLength = sizeof( *p );
 	
@@ -20361,12 +20751,21 @@ void DumpUnknown(int fd,TBL_PC *sd,int cmd,int packet_len)
 		fprintf(fp, "\n");
 		fclose(fp);
 	} else {
-		ShowError("Failed to write '%s'.\n", packet_txt);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("'%s'을(를) 쓰지 못했습니다.\n", packet_txt);
+		else
+			ShowError("Failed to write '%s'.\n", packet_txt);
 		// Dump on console instead
 		if( sd ) {
-			ShowDebug("Unknown packet 0x%04X (length %d), %s session #%d, %d/%d (AID/CID) at %s\n", cmd, packet_len, sd->state.active ? "authed" : "unauthed", fd, sd->status.account_id, sd->status.char_id,datestr);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("알수 없는 패킷 0x%04X (길이 %d), %s 세션 #%d, %d/%d (AID/CID) at %s\n", cmd, packet_len, sd->state.active ? "인증된" : "인증안된", fd, sd->status.account_id, sd->status.char_id,datestr);
+			else
+				ShowDebug("Unknown packet 0x%04X (length %d), %s session #%d, %d/%d (AID/CID) at %s\n", cmd, packet_len, sd->state.active ? "authed" : "unauthed", fd, sd->status.account_id, sd->status.char_id,datestr);
 		} else {
-			ShowDebug("Unknown packet 0x%04X (length %d), session #%d at %s\n", cmd, packet_len, fd,datestr);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("알수 없는 패킷 0x%04X (길이 %d), 세션 #%d at %s\n", cmd, packet_len, fd,datestr);
+			else
+				ShowDebug("Unknown packet 0x%04X (length %d), session #%d at %s\n", cmd, packet_len, fd,datestr);
 		}
 
 		ShowDump(RFIFOP(fd,0), packet_len);
@@ -21543,6 +21942,31 @@ void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data ){
 #endif
 }
 
+void clif_ui_open2( map_session_data& sd, enum out_ui_type ui_type){
+#if PACKETVER >= 20151202
+	// If the UI requires state tracking
+	switch( ui_type ){
+		case OUT_UI_STYLIST:
+			sd.state.stylist_open = true;
+			break;
+		case OUT_UI_ENCHANTGRADE:
+#if PACKETVER_MAIN_NUM >= 20200916 || PACKETVER_RE_NUM >= 20200724
+			sd.state.enchantgrade_open = true;
+			break;
+#else
+			return;
+#endif
+	}
+
+	struct PACKET_ZC_UI_OPEN_V2 p = {};
+
+	p.PacketType = HEADER_ZC_UI_OPEN_V2;
+	p.UIType = ui_type;
+
+	clif_send( &p, sizeof( p ), &sd.bl, SELF );
+#endif
+}
+
 /// Request to open an UI window of the given type
 /// 0A68 <type>.B
 void clif_parse_open_ui( int fd, map_session_data* sd ){
@@ -22514,11 +22938,62 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 
 void clif_parse_stylist_buy( int fd, map_session_data* sd ){
 #if PACKETVER >= 20151104
-#if PACKETVER >= 20180516
-	const PACKET_CZ_REQ_STYLE_CHANGE2* p = reinterpret_cast<PACKET_CZ_REQ_STYLE_CHANGE2*>( RFIFOP( fd, 0 ) );
+#if PACKETVER >= 20231218
+	struct PACKET_CZ_REQ_STYLE_CHANGE3* p = (struct PACKET_CZ_REQ_STYLE_CHANGE3*)RFIFOP(fd, 0);
+#elif PACKETVER >= 20180516
+	struct PACKET_CZ_REQ_STYLE_CHANGE2* p = (struct PACKET_CZ_REQ_STYLE_CHANGE2*)RFIFOP(fd, 0);
 #else
-	const PACKET_CZ_REQ_STYLE_CHANGE* p = reinterpret_cast<PACKET_CZ_REQ_STYLE_CHANGE*>( RFIFOP( fd, 0 ) );
+	struct PACKET_CZ_REQ_STYLE_CHANGE* p = (struct PACKET_CZ_REQ_STYLE_CHANGE*)RFIFOP(fd, 0);
 #endif
+#if PACKETVER >= 20231218
+	_look look = LOOK_HAIR_COLOR;
+	for (int i = 0; i < p->count; i++) {
+		int offset = 8 * i;
+		p->PacketLength = sizeof( *p );
+		p->PacketLength += offset;
+		p->category = RFIFOW(fd, 6 + offset);
+		p->index = RFIFOW(fd, 10 + offset);
+
+		switch (p->category) {
+			case 0:
+				look = LOOK_HAIR_COLOR;
+				break;
+			case 1:
+				look = LOOK_HAIR;
+				break;
+			case 2:
+				look = LOOK_CLOTHES_COLOR;
+				break;
+			case 3:
+				look = LOOK_HEAD_TOP;
+				break;
+			case 4:
+				look = LOOK_HEAD_MID;
+				break;
+			case 5:
+				look = LOOK_HEAD_BOTTOM;
+				break;
+			case 6:
+				look = LOOK_HAIR;
+				break;
+			case 8:
+				look = LOOK_CLOTHES_COLOR;
+				break;
+			case 9:
+				look = LOOK_BODY2;
+				break;
+			default:
+				look = LOOK_HAIR_COLOR;
+				ShowError("p->category : %d, undefined category\n", p->category); //Leave this for possible existence of case 7
+				break;
+		}
+		if (((p->category == 0 && p->index >= 0) || p->index > 0) && !clif_parse_stylist_buy_sub(sd, look, p->index)) {
+			clif_stylist_response(sd, true);
+			return;
+		}
+	}
+	RFIFOSKIP(fd, p->PacketLength - 14);
+#else
 	if( p->HeadPalette != 0 && !clif_parse_stylist_buy_sub( sd, LOOK_HAIR_COLOR, p->HeadPalette ) ){
 		clif_stylist_response( sd, true );
 		return;
@@ -22554,6 +23029,7 @@ void clif_parse_stylist_buy( int fd, map_session_data* sd ){
 		clif_stylist_response( sd, true );
 		return;
 	}
+#endif
 #endif
 
 	clif_stylist_response( sd, false );
@@ -25063,6 +25539,312 @@ void clif_parse_partybooking_reply( int fd, map_session_data* sd ){
 #endif
 }
 
+/// Presents a list of items that can be sell.
+void clif_stall_vending_open(map_session_data *sd){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	int len = MAX_INVENTORY * sizeof( struct STALL_VENDING_UI_OPEN_sub ) + sizeof( struct PACKET_ZC_STALL_VENDING_UI_OPEN );
+
+	// Preallocate the maximum size
+	WFIFOHEAD( fd, len );
+
+	struct PACKET_ZC_STALL_VENDING_UI_OPEN *p = (struct PACKET_ZC_STALL_VENDING_UI_OPEN *)WFIFOP( fd, 0 );
+
+	int c = 0;
+
+	for( int i = 0; i < MAX_INVENTORY; i++ ){
+		if( sd->inventory.u.items_inventory[i].nameid > 0 && sd->inventory_data[i] ){
+			if( !pc_can_trade_item(sd, i))
+				continue;
+
+			p->items[c].index = i + 2; // client index
+			c++;
+		}
+	}
+
+	if( c > 0 ){
+		p->packetType = HEADER_ZC_STALL_VENDING_UI_OPEN;
+
+		// Recalculate real length
+		len = c * sizeof( struct STALL_VENDING_UI_OPEN_sub ) + sizeof( struct PACKET_ZC_STALL_VENDING_UI_OPEN );
+		p->PacketLength = len;
+		p->slots = 2 + sd->stallvending_level;
+
+		WFIFOSET( fd, len );
+
+		sd->state.prevend = 1;
+		sd->state.stall_ui_open = 1;
+	} else
+		clif_stall_ui_close(sd,100,STALLSTORE_OK);
+#endif
+}
+
+/// Open the buying stall UI
+void clif_stall_buying_open(map_session_data *sd){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	sd->state.prevend = 1;
+	sd->state.stall_ui_open = 1;
+
+	struct PACKET_ZC_STALL_BUYING_UI_OPEN p = {};
+
+	p.packetType = HEADER_ZC_STALL_BUYING_UI_OPEN;
+	p.slot = 2 + sd->stall_skill_lv;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_stall_vending_set( int fd, map_session_data* sd ){
+#if PACKETVER >= 20170208
+	const struct PACKET_CZ_STALL_VENDING_SET *p = (struct PACKET_CZ_STALL_VENDING_SET *)RFIFOP( fd, 0 );
+
+	uint8* data = (uint8*)p->items;
+	short count = (p->PacketLength - sizeof(PACKET_CZ_STALL_VENDING_SET)) / 8;
+
+	stall_vending_setup( sd, p->storeName, p->xPos, p->yPos, data, count );
+#endif
+}
+
+void clif_parse_stall_buying_set( int fd, map_session_data* sd ){
+#if PACKETVER >= 20170208
+	const struct PACKET_CZ_STALL_BUYING_SET *p = (struct PACKET_CZ_STALL_BUYING_SET *)RFIFOP( fd, 0 );
+
+	short count = (p->PacketLength - sizeof(PACKET_CZ_STALL_BUYING_SET)) / 10;
+
+	stall_buying_setup( sd, p->storeName, p->xPos, p->yPos, p->items, count, p->total_price );
+#endif
+}
+
+void clif_stall_showunit(map_session_data *sd, struct s_stall_data *st){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+	nullpo_retv( st );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	struct PACKET_ZC_STALL_CHAR_DETAILS p = {};
+
+	p.packetType = HEADER_ZC_STALL_CHAR_DETAILS;
+	p.vender_id = st->vender_id;
+	p.job = st->vd.class_;
+	p.xPos = st->bl.x;
+	p.yPos = st->bl.y;
+	p.sex = st->vd.sex;
+	p.head = st->vd.hair_style;
+	p.weapon = st->vd.weapon;
+	p.shield = st->vd.shield;
+	p.MidAccessory = st->vd.head_mid;
+	p.TopAccessory = st->vd.head_top;
+	p.BottomAccessory = st->vd.head_bottom;
+	p.headpalette = st->vd.hair_color;
+#if PACKETVER_MAIN_NUM >= 20180801 || PACKETVER_RE_NUM >= 20180801 || PACKETVER_ZERO_NUM >= 20180808
+	p.unknow = (st->vd.robe) * 65536 + st->vd.cloth_color;
+	p.BodyStyle = st->vd.body_style;
+#else
+	p.bodypalette = st->vd.cloth_color;
+	p.BackAccessory = st->vd.robe;
+#endif
+	safestrncpy(p.name, st->message, NAME_LENGTH);
+
+	clif_send( &p, sizeof( p ), &sd->bl, AREA );
+#endif
+}
+
+/// Close the shop ui when set
+void clif_stall_ui_close(map_session_data *sd, int type, int reason){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	if(reason != STALLSTORE_POSITION){
+		sd->state.prevend = 0;
+		sd->state.workinprogress = WIP_DISABLE_NONE;
+		sd->state.stall_ui_open = 0;
+	}
+
+	struct PACKET_ZC_STALL_UI_CLOSE p = {};
+
+	p.packetType = HEADER_ZC_STALL_UI_CLOSE;
+	p.type = type;
+	p.reason = reason;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+/// List items of the stall vending
+void clif_stall_vending_list(map_session_data *sd, s_stall_data *st){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	sd->vended_id = st->vender_id;
+
+	short j = 0;
+	for(int i = 0; i < st->vend_num ; i++){
+		if(st->items_inventory[i].amount > 0)
+			j++;
+	}
+	if(j == 0)
+		return; // no items
+
+	int len = sizeof(struct PACKET_ZC_STALL_VENDING_LIST_REQUEST) + j * sizeof(struct STALL_VENDING_LIST_REQUEST_sub);
+
+	WFIFOHEAD( fd, len );
+
+	struct PACKET_ZC_STALL_VENDING_LIST_REQUEST* p = (struct PACKET_ZC_STALL_VENDING_LIST_REQUEST*)WFIFOP( fd, 0 );
+
+	p->packetType = HEADER_ZC_STALL_VENDING_LIST_REQUEST;
+	p->PacketLength = len;
+	p->unique_id = st->unique_id;
+	p->vender_id = st->vender_id;
+	if(st->owner_id == sd->status.char_id)
+		p->myStall = 1;
+	else
+		p->myStall = 0;
+	p->expireTime = (st->expire_time - static_cast<int32>(time(nullptr))) * 1000; //if 0 == unlimited on client..
+
+	short slot = 0;
+	for(int i = 0; i < st->vend_num ; i++){
+		if(st->items_inventory[i].amount > 0){
+			struct item_data* data = itemdb_search( st->items_inventory[i].nameid );
+
+			p->items[slot].price = st->price[i];
+			p->items[slot].amount = st->items_inventory[i].amount;
+			p->items[slot].index = i+1;
+			p->items[slot].itemType = itemtype( st->items_inventory[i].nameid );
+			p->items[slot].itemId = client_nameid( st->items_inventory[i].nameid );
+			p->items[slot].identified = st->items_inventory[i].identify;
+			p->items[slot].damaged = st->items_inventory[i].attribute;
+			clif_addcards( &p->items[slot].slot, &st->items_inventory[i] );
+			clif_add_random_options(p->items[slot].option_data, st->items_inventory[i]);
+			p->items[slot].location = pc_equippoint_sub( sd, data );
+			p->items[slot].viewSprite = data->look;
+			p->items[slot].refine = st->items_inventory[i].refine;
+#if PACKETVER_MAIN_NUM >= 20191016 || PACKETVER_RE_NUM >= 20191016 || PACKETVER_ZERO_NUM >= 20191008
+			p->items[slot].enchantgrade = st->items_inventory[i].enchantgrade;
+#endif
+			slot++;
+		}
+	}
+
+	WFIFOSET( fd, len );
+#endif
+}
+
+/// List items of the stall buying
+void clif_stall_buying_list(map_session_data *sd, s_stall_data *st){
+#if PACKETVER >= 20170208
+	nullpo_retv( sd );
+
+	int fd = sd->fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	sd->vended_id = st->vender_id;
+
+	short j = 0;
+	for(int i = 0; i < st->vend_num ; i++){
+		if(st->amount[i] > 0)
+			j++;
+	}
+	if(j == 0)
+		return; // no items
+
+	int len = sizeof(struct PACKET_ZC_STALL_BUYING_LIST_REQUEST) + j * sizeof(struct PACKET_ZC_MYITEMLIST_BUYING_STORE_sub);
+
+	WFIFOHEAD( fd, len );
+
+	struct PACKET_ZC_STALL_BUYING_LIST_REQUEST* p = (struct PACKET_ZC_STALL_BUYING_LIST_REQUEST*)WFIFOP( fd, 0 );
+
+	p->packetType = HEADER_ZC_STALL_BUYING_LIST_REQUEST;
+	p->PacketLength = len;
+	p->unique_id = st->unique_id;
+	p->vender_id = st->vender_id;
+	if(st->owner_id == sd->status.char_id)
+		p->myStall = 1;
+	else
+		p->myStall = 0;
+	p->expireTime = (st->expire_time - static_cast<int32>(time(nullptr))) * 1000; //if 0 == unlimited on client..
+
+	uint64 total_price = 0;
+	short k = 0;
+	for(int i = 0; i < st->vend_num ; i++){
+		if(st->amount[i] > 0){
+			p->items[k].price = st->price[i];
+			p->items[k].amount = st->amount[i];
+			p->items[k].itemType = itemtype( st->itemId[i] );
+			p->items[k].itemId = st->itemId[i];
+
+			total_price += static_cast<uint64>(st->price[i]) * static_cast<uint64>(st->amount[i]);
+			k++;
+		}
+	}
+	p->total_price = total_price;
+	// Safety check before sending the packet
+	if (len <= sizeof(struct PACKET_ZC_STALL_BUYING_LIST_REQUEST)) {
+		// Log error or handle the case where no items are actually being sent
+		// This could be a simple return, or you might log this as an error for debugging.
+		ShowError("clif_stall_buying_list: Attempted to send packet with invalid length.\n");
+		return;
+	}
+
+	WFIFOSET( fd, len );
+#endif
+}
+
+void clif_parse_stall_vending_cancel( int fd, map_session_data* sd ){
+#if PACKETVER >= 20170208
+	clif_stall_ui_close(sd,100,STALLSTORE_OK);
+#endif
+}
+
+void clif_parse_stall_buying_cancel( int fd, map_session_data* sd ){
+#if PACKETVER >= 20170208
+	clif_stall_ui_close(sd,101,STALLSTORE_OK);
+#endif
+}
+
+// Close from owner
+void clif_parse_stall_close( int fd, map_session_data* sd ){
+#if PACKETVER >= 20170208
+	const struct PACKET_CZ_STALL_CLOSE *p = (struct PACKET_CZ_STALL_CLOSE *)RFIFOP( fd, 0 );
+
+	stall_close(sd, p->srcId);
+#endif
+}
+
 void clif_parse_reset_skill( int fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203
 	const PACKET_CZ_RESET_SKILL* p = reinterpret_cast<PACKET_CZ_RESET_SKILL*>( RFIFOP( fd, 0 ) );
@@ -25120,6 +25902,539 @@ void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y)
 #endif  // PACKETVER_MAIN_NUM >= 20220504
 }
 
+void clif_rune_ui_open( map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_OPEN_RUNE_UI p = {};
+
+	p.packetType = HEADER_ZC_OPEN_RUNE_UI;
+	p.state = 1;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_result_rune_ui_open( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_RESULT_OPEN_RUNE_UI* p = (struct PACKET_CZ_RESULT_OPEN_RUNE_UI*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_result_rune_ui_open result ui open state %d\n",p->state);
+
+	sd->state.runeui_open = p->state;
+#endif
+}
+
+void clif_parse_asktag_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_ASK_TAG_LOAD_RUNE* p = (struct PACKET_CZ_ASK_TAG_LOAD_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_asktab_rune tagID %d\n",p->tagID);
+
+	clif_bookinfo_rune(sd, p->tagID);
+	clif_setinfo_rune(sd, p->tagID);
+#endif
+}
+
+void clif_bookinfo_rune( map_session_data* sd, uint16 tagID ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_BOOK_INFO_RUNE* p = (struct PACKET_ZC_BOOK_INFO_RUNE*)packet_buffer;;
+
+	p->packetType = HEADER_ZC_BOOK_INFO_RUNE;
+	p->book_amount = 0;
+
+    for (const s_runebook_data& runebook_data : sd->runeBooks) {
+        if (runebook_data.tagId == tagID) {
+			struct PACKET_BOOK_LIST_RUNE_sub* booklist_rune = &p->booklist_rune[p->book_amount];
+			booklist_rune->runebookid = static_cast<uint32>(runebook_data.bookId);
+
+			p->book_amount++;
+        }
+    }
+
+	p->packetLength = sizeof( struct PACKET_ZC_BOOK_INFO_RUNE ) + ( sizeof( struct PACKET_BOOK_LIST_RUNE_sub ) * p->book_amount );
+	p->unknown = 0;
+	p->tagID = tagID;
+
+	//ShowError("clif_setinfo_rune tagID %d \n", p->tagID);
+	clif_send( p, p->packetLength, &sd->bl, SELF );
+#endif
+}
+
+void clif_setinfo_rune( map_session_data* sd, uint16 tagID ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_INFO_RUNE* p = (struct PACKET_ZC_SET_INFO_RUNE*)packet_buffer;
+
+	p->packetType = HEADER_ZC_SET_INFO_RUNE;
+	p->set_amount = 0;
+
+	for (const s_runeset_data& set_data : sd->runeSets) {
+		if(set_data.tagId == tagID){
+			struct PACKET_SET_LIST_RUNE_sub* setlist_rune = &p->setlist_rune[p->set_amount];
+			setlist_rune->runesetid = static_cast<uint32>(set_data.setId);
+			setlist_rune->upgrade = set_data.upgrade;
+			setlist_rune->failcount = set_data.failcount;
+		}
+
+		p->set_amount++;
+	}
+
+	p->packetLength = sizeof( struct PACKET_ZC_BOOK_INFO_RUNE ) + ( sizeof( struct PACKET_SET_LIST_RUNE_sub ) * p->set_amount );
+	p->unknown = 0;
+	p->tagID = tagID;
+
+	//ShowError("clif_setinfo_rune tagID %d \n", p->tagID);
+	clif_send( p, p->packetLength, &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && !sd->runeactivated_data.loaded){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+		sd->runeactivated_data.loaded = true;
+	}
+#endif
+}
+
+void clif_parse_bookactivate_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_BOOK_ACTIVATE_RUNE* p = (struct PACKET_CZ_BOOK_ACTIVATE_RUNE*)RFIFOP( fd, 0 );
+
+	struct PACKET_ZC_BOOK_RESULT_RUNE pm = {};
+
+	pm.packetType = HEADER_ZC_BOOK_RESULT_RUNE;
+	pm.runebookid = p->runebookid;
+	pm.tagID = p->tagID;
+	pm.result = rune_bookactivate(sd,p->tagID,p->runebookid);
+
+	//ShowError("clif_parse_bookactivate_rune tagID %d runebookid %d result %d\n",p->tagID, p->runebookid, pm.result);
+	clif_send( &pm, sizeof( pm ), &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && sd->runeactivated_data.tagID == pm.tagID){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+	}
+#endif
+}
+
+void clif_parse_setactivate_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_SET_ACTIVATE_RUNE* p = (struct PACKET_CZ_SET_ACTIVATE_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_setactivate_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+
+	clif_setactivate_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_setactivate_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_RESULT_RUNE p = {};
+
+	p.packetType = HEADER_ZC_SET_RESULT_RUNE;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+
+	p.result = rune_setactivate(sd,tagID,runesetid);
+	p.upgrade = 0;
+	p.failcount = 0;
+
+	//ShowError("clif_setactivate_rune result %d upgrade : %d failcount %d \n",p.result, p.upgrade, p.failcount);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_setupgrade_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_SET_UPGRADE_RUNE* p = (struct PACKET_CZ_SET_UPGRADE_RUNE*)RFIFOP( fd, 0 );
+	//ShowError("clif_parse_setupgrade_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+
+	clif_setupgrade_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_setupgrade_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_RESULT_RUNE2 p = {};
+
+	p.packetType = HEADER_ZC_SET_RESULT_RUNE2;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+
+	std::tuple<uint8, uint16, uint16>  rune_setupgrade_result = rune_setupgrade(sd, tagID, runesetid);
+	p.result = std::get<0>(rune_setupgrade_result);
+	p.upgrade = std::get<1>(rune_setupgrade_result);
+	p.failcount = std::get<2>(rune_setupgrade_result);
+
+	//ShowError("clif_setupgrade_rune result %d upgrade : %d failcount %d \n",p.result, p.upgrade, p.failcount);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && sd->runeactivated_data.tagID == tagID && sd->runeactivated_data.runesetid == runesetid){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+	}
+#endif
+}
+
+void clif_parse_enable_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_ENABLE_RUNE* p = (struct PACKET_CZ_ENABLE_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_enable_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+
+	clif_enablerefresh_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_enablerefresh_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_REFRESH_ENABLE_RUNE p = {};
+
+	p.packetType = HEADER_ZC_REFRESH_ENABLE_RUNE;
+	p.tagID = tagID;
+
+	if(rune_changestate(sd, tagID, runesetid))
+		p.runesetid = runesetid;
+	else
+		p.runesetid = 0;
+
+	//ShowError("clif_enablerefresh_rune tagID %d runesetid %d \n",p.tagID, p.runesetid);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_enablerefresh_rune2 (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_REFRESH_ENABLE_RUNE2 p = {};
+
+	p.packetType = HEADER_ZC_REFRESH_ENABLE_RUNE2;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+
+	//ShowError("clif_enablerefresh_rune2 tagID %d runesetid %d \n",p.tagID, p.runesetid);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_onlogenable_rune (map_session_data* sd){
+#if PACKETVER >= 20230802
+	//ShowError("clif_onlogenable_rune \n");
+	struct PACKET_ZC_ONLOG_ENABLE_RUNE p = {};
+	bool isSelectedSet = false;
+
+	for (auto& set_data : sd->runeSets) {
+		if(set_data.selected){
+			isSelectedSet = true;
+			p.tagID = sd->runeactivated_data.tagID = static_cast<uint16>(set_data.tagId);
+			p.runesetid = sd->runeactivated_data.runesetid = static_cast<uint32>(set_data.setId);
+			p.upgrade = sd->runeactivated_data.upgrade = static_cast<uint8>(set_data.upgrade);
+			p.failcount = set_data.failcount;
+			rune_count_bookactivated(sd, p.tagID, p.runesetid);
+
+			break;
+		}
+		if(isSelectedSet)
+			break;
+	}
+
+	if(!isSelectedSet)
+		return;
+
+	p.packetType = HEADER_ZC_ONLOG_ENABLE_RUNE;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_decompo_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	std::unordered_map<t_itemid, uint32> material_item_list;
+
+	struct PACKET_CZ_RUNE_DECOMPO* p = (struct PACKET_CZ_RUNE_DECOMPO*)RFIFOP( fd, 0 );
+
+	if( !sd->state.runeui_open ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UINOTOPENED, material_item_list);
+		return;
+	}
+
+	uint16 index = server_index( p->index );
+
+	if( index >= MAX_INVENTORY ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVENTORYSPACE, material_item_list);
+		return;
+	}
+
+	if( sd->inventory_data[index] == nullptr ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_NOCARD, material_item_list);
+		return;
+	}
+
+	struct item& selected_item = sd->inventory.u.items_inventory[index];
+
+    if (selected_item.nameid != p->itemId) {
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UNKNOWN, material_item_list);
+		return;
+    }
+
+	struct item_data* id = itemdb_search(selected_item.nameid);
+
+    // Checking if decompoRune is empty
+    if (id->decompoRune.empty()) {
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+		return;
+    }
+
+	uint32 amount;
+	if(p->type == 1)
+		amount = 1;
+	else
+		amount = 30;
+
+	uint8 runeEntryit = 0;
+	for (const auto& runeEntry : id->decompoRune) {
+		runeEntryit++;
+
+		//ShowError("runeEntryit %d runeEntry.Second %d p->type %d \n",runeEntryit,runeEntry.second, p->type);
+
+		if(runeEntryit != p->type)
+			continue;
+
+		std::shared_ptr<s_runedecompo_db> runedecompo_data = runedecompo_db.find( runeEntry.second );
+		if(runedecompo_data == nullptr){
+			//ShowError("runedecompo_data not found in db \n");
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+			return;
+		}
+
+		std::unordered_map<uint16, uint16> materials;
+
+		if( sd->inventory.u.items_inventory[index].amount < amount ){
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_NOTENOUGHITEMS, material_item_list);
+			return;
+		}
+
+		uint32 material_weight = 0;
+
+		//ShowError("runedecompo_data size %d \n",runedecompo_data->materials.size());
+		for( const auto &materialEntry : runedecompo_data->materials ){
+			struct s_runedecompo_material_data material_data = materialEntry.second;
+			//ShowError("Material list itemid %d, amountmin %d amountmax %d \n",material_data.material,material_data.amountmin,material_data.amountmax);
+
+			uint32 chance = material_data.chance;
+			if( chance == 0 ){
+				clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+				return;
+			}
+			if( chance < 100000 && rnd_value( 0, 100000 ) > chance )
+				continue;
+
+			std::shared_ptr<item_data> item = item_db.find(material_data.material);
+			material_weight += item->weight;
+
+			uint32 random_amount = rnd_value( material_data.amountmin, material_data.amountmax );
+			material_item_list[material_data.material] = random_amount;
+			//ShowError("random_amount %d \n", random_amount);
+		}
+
+		if(sd->weight + material_weight > sd->max_weight){
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_WEIGHT, material_item_list);
+			return;
+		}
+
+		for( const auto& materialEntry : materials ){
+			if( pc_delitem( sd, materialEntry.first, materialEntry.second, 0, 0, LOG_TYPE_OTHER )  != 0 ){
+				clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UNKNOWN, material_item_list);
+				return;
+			}
+		}
+
+		for( const auto& materialEntry : material_item_list ){
+			struct item item_material = {};
+
+			item_material.nameid = materialEntry.first;
+			item_material.identify = 1;
+
+			pc_additem( sd, &item_material, materialEntry.second, LOG_TYPE_OTHER );
+		}
+	}
+
+	if (pc_delitem(sd, index, amount, 0, 0, LOG_TYPE_OTHER) != 0){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+		return;
+	}
+
+	clif_runedecompowindow_result( sd, ZC_RUNEDECOMPO_SUCCESS, material_item_list );
+#endif
+}
+
+void clif_runedecompowindow_result (map_session_data* sd, enum e_runedecompo_result result, std::unordered_map<t_itemid, uint32> material_item_list){
+#if PACKETVER >= 20230802
+	//ShowError("clif_runedecompowindow_result : %d \n", result);
+	struct PACKET_ZC_RESULT_RUNE_DECOMPO p = {};
+
+	p.packetType = HEADER_ZC_RESULT_RUNE_DECOMPO;
+	p.result = result;
+
+	uint8 material_number = 0;
+	if(result == ZC_RUNEDECOMPO_SUCCESS){
+		for (const auto& materialEntry : material_item_list) {
+            p.itemlistdecompo_rune[material_number] = materialEntry.first;
+            p.amountlistdecompo_rune[material_number] = materialEntry.second;
+
+			material_number++;
+			if (material_number > MAX_RUNEDECOMPO)
+				break;
+		}
+	}
+
+	for(int i = material_number; i < MAX_RUNEDECOMPO; i++){
+		p.itemlistdecompo_rune[material_number] = 0;
+		p.amountlistdecompo_rune[material_number] = 0;
+	}
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_emotion2(int fd, map_session_data *sd) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+	const struct PACKET_CZ_REQ_EMOTION2 *p = (PACKET_CZ_REQ_EMOTION2 *)RFIFOP(fd, 0);
+	emotes_use(sd, p->packId, p->emoteId);
+#endif
+}
+
+void clif_parse_emotion_expansion_request(int fd, map_session_data *sd) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+	const struct PACKET_CZ_EMOTION_EXPANTION_REQ *p = (PACKET_CZ_EMOTION_EXPANTION_REQ *)RFIFOP(fd, 0);
+	emotes_expantion_buy(sd, p->packId, p->itemId, p->amount);
+#endif
+}
+
+void clif_emotion_success(struct block_list *bl, int16 packId, int16 emoteId) {
+#if PACKETVER >= 20230802
+	nullpo_retv(bl);
+
+	struct PACKET_ZC_EMOTION_SUCCESS p = { 0 };
+	p.packetType = HEADER_ZC_EMOTION_SUCCESS;
+	p.GID = bl->id;
+	p.packId = packId;
+	p.emoteId = emoteId;
+	clif_send(&p, sizeof(p), bl, AREA);
+#endif
+}
+
+void clif_emotion_fail(map_session_data *sd, int16 packId, int16 emoteId, enum emote_msg status) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	const int fd = sd->fd;
+	WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_FAIL));
+	struct PACKET_ZC_EMOTION_FAIL *p = (PACKET_ZC_EMOTION_FAIL *)WFIFOP(fd, 0);
+	p->packetType = HEADER_ZC_EMOTION_FAIL;
+	p->packId = packId;
+	p->emoteId = emoteId;
+	p->status = status;
+	WFIFOSET(fd, sizeof(struct PACKET_ZC_EMOTION_FAIL));
+#endif
+}
+
+void clif_emotion_expansion_response_success(map_session_data *sd, int16 packId, int8 isRented, uint32 RentEndTime) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	const int fd = sd->fd;
+	WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS));
+	struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS *p = (PACKET_ZC_EMOTION_EXPANSION_SUCCESS *)WFIFOP(fd, 0);
+	p->packetType = HEADER_ZC_EMOTION_EXPANSION_SUCCESS;
+	p->packId = packId;
+	p->isRented = isRented;
+	p->timestamp = RentEndTime; // rental end time, 0 for permanent
+	WFIFOSET(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS));
+#endif
+}
+
+void clif_emotion_expansion_response_fail(map_session_data *sd, int16 packId, enum emotion_expansion_msg status) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	const int fd = sd->fd;
+	WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_FAIL));
+	struct PACKET_ZC_EMOTION_EXPANSION_FAIL *p = (PACKET_ZC_EMOTION_EXPANSION_FAIL *)WFIFOP(fd, 0);
+	p->packetType = HEADER_ZC_EMOTION_EXPANSION_FAIL;
+	p->packId = packId;
+	p->status = status;
+	WFIFOSET(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_FAIL));
+#endif
+}
+
+void clif_emotion_expansion_list(map_session_data *sd, std::vector<struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub> &list) {
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	const int fd = sd->fd;
+	WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST) + sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub) * list.size());
+	struct PACKET_ZC_EMOTION_EXPANTION_LIST *p = (PACKET_ZC_EMOTION_EXPANTION_LIST *)WFIFOP(fd, 0);
+	p->packetType = HEADER_ZC_EMOTION_EXPANTION_LIST;
+	p->timestamp = time(NULL);
+#if PACKETVER >= 20230920
+	p->timezone = 60 * 9; // kRO UTC+9 = 540
+#endif
+	for (auto i = 0; i < list.size(); ++i)
+		p->list[i] = list[i];
+	p->packetLength = sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST) + sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub) * list.size();
+	WFIFOSET(fd, p->packetLength);
+#endif
+}
+
+void clif_quest_status_ack(map_session_data* const sd, const PACKET_CZ_QUEST_STATUS_REQ_SUB* const QuestList, const uint16 QuestCount)
+{
+	uint8 Buffer[2048];
+	
+	const uint16 PacketLength = sizeof(PACKET_ZC_QUEST_STATUS_ACK) + QuestCount * sizeof(PACKET_ZC_QUEST_STATUS_ACK_SUB);
+	if (PacketLength > sizeof(Buffer))
+	{
+		// Buffer Overflow
+		return;
+	}
+
+	PACKET_ZC_QUEST_STATUS_ACK* const Packet = reinterpret_cast<PACKET_ZC_QUEST_STATUS_ACK*>(Buffer);
+	Packet->PacketType = HEADER_ZC_QUEST_STATUS_ACK;
+	Packet->PacketLength = PacketLength;
+
+	PACKET_ZC_QUEST_STATUS_ACK_SUB* const List = reinterpret_cast<PACKET_ZC_QUEST_STATUS_ACK_SUB*>(Buffer + sizeof(PACKET_ZC_QUEST_STATUS_ACK));
+	for (size_t Num = 0; Num < QuestCount; ++Num)
+	{
+		const uint32 QuestID = QuestList[Num].QuestID;
+		uint8 QuestStatus = Q_INACTIVE;
+
+		for (size_t QuestNum = 0; QuestNum < sd->num_quests; ++QuestNum)
+		{
+			if (QuestID == sd->quest_log[QuestNum].quest_id)
+			{
+				QuestStatus = (sd->quest_log[QuestNum].state == Q_COMPLETE);
+				break;
+			}
+		}
+
+		List[Num].QuestID = QuestID;
+		List[Num].QuestStatus = QuestStatus;
+
+	}
+
+	clif_send(Packet, Packet->PacketLength, &sd->bl, SELF);
+}
+
+void clif_parse_quest_status(const int fd, map_session_data* const sd)
+{
+	const PACKET_CZ_QUEST_STATUS_REQ* const Packet = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ*>(RFIFOP(fd, 0));
+	if (Packet->PacketLength <= (sizeof(PACKET_CZ_QUEST_STATUS_REQ) + sizeof(PACKET_CZ_QUEST_STATUS_REQ_SUB)))
+	{
+		return;
+	}
+
+	const PACKET_CZ_QUEST_STATUS_REQ_SUB* const QuestList = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ_SUB*>(RFIFOP(fd, sizeof(PACKET_CZ_QUEST_STATUS_REQ)));
+	const uint16 QuestCount = uint16(int16(Packet->PacketLength - sizeof(PACKET_CZ_QUEST_STATUS_REQ)) / sizeof(PACKET_CZ_QUEST_STATUS_REQ_SUB));
+	clif_quest_status_ack(sd, QuestList, QuestCount);
+}
+
 /*==========================================
  * Main client packet processing function
  *------------------------------------------*/
@@ -25146,19 +26461,31 @@ static int clif_parse(int fd)
 				//Disassociate character from the socket connection.
 				session[fd]->session_data = nullptr;
 				sd->fd = 0;
-				ShowInfo("Character '" CL_WHITE "%s" CL_RESET "' logged off (using @autotrade).\n", sd->status.name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("케릭터 '" CL_WHITE "%s" CL_RESET "'이(가) 로그오프 되었습니다. (@자동거래 사용중)\n", sd->status.name);
+				else
+					ShowInfo("Character '" CL_WHITE "%s" CL_RESET "' logged off (using @autotrade).\n", sd->status.name);
 			} else
 			if (sd->state.active) {
 				// Player logout display [Valaris]
-				ShowInfo("Character '" CL_WHITE "%s" CL_RESET "' logged off.\n", sd->status.name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("케릭터 '" CL_WHITE "%s" CL_RESET "'이(가) 로그오프 되었습니다.\n", sd->status.name);
+				else
+					ShowInfo("Character '" CL_WHITE "%s" CL_RESET "' logged off.\n", sd->status.name);
 				clif_quitsave(fd, sd);
 			} else {
 				//Unusual logout (during log on/off/map-changer procedure)
-				ShowInfo("Player AID:%d/CID:%d logged off.\n", sd->status.account_id, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("플레이어 계정ID번호:%d/케릭터ID번호:%d이(가) 로그오프 되었습니다.\n", sd->status.account_id, sd->status.char_id);
+				else
+					ShowInfo("Player AID:%d/CID:%d logged off.\n", sd->status.account_id, sd->status.char_id);
 				map_quit(sd);
 			}
 		} else {
-			ShowInfo("Closed connection from '" CL_WHITE "%s" CL_RESET "'.\n", ip2str(session[fd]->client_addr, nullptr));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("'" CL_WHITE "%s" CL_RESET "'에서 연결이 닫혔습니다.\n", ip2str(session[fd]->client_addr, nullptr));
+			else
+				ShowInfo("Closed connection from '" CL_WHITE "%s" CL_RESET "'.\n", ip2str(session[fd]->client_addr, nullptr));
 		}
 		do_close(fd);
 		return 0;
@@ -25185,7 +26512,10 @@ static int clif_parse(int fd)
 
 	// filter out invalid / unsupported packets
 	if (cmd > MAX_PACKET_DB || cmd < MIN_PACKET_DB || packet_db[cmd].len == 0) {
-		ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x, %d bytes received), disconnecting session #%d.\n", cmd, RFIFOREST(fd), fd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse: 지원되지 않는 패킷을 전달받았습니다. (패킷 0x%04x, %d 바이트 받음), 세션 #%d을(를) 연결 해제중...\n", cmd, RFIFOREST(fd), fd);
+		else
+			ShowWarning("clif_parse: Received unsupported packet (packet 0x%04x, %d bytes received), disconnecting session #%d.\n", cmd, RFIFOREST(fd), fd);
 
 #ifdef DUMP_INVALID_PACKET
 		ShowDump(RFIFOP(fd,0), RFIFOREST(fd));
@@ -25196,14 +26526,20 @@ static int clif_parse(int fd)
 		if( !sd ){
 #ifdef PACKET_OBFUSCATION
 			if( cmd2 >= MIN_PACKET_DB && cmd2 < MAX_PACKET_DB && packet_db[cmd2].len != 0 && packet_db[cmd2].func == clif_parse_WantToConnection ){
-				ShowWarning( "clif_parse: It looks like you have enabled PACKET_OBFUSCATION on server side, but disabled it on client side.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "clif_parse: 서버 측에서 PACKET_OBFUSCATION을 활성화했지만 클라이언트 측에서 비활성화 한 것으로 보입니다.\n");
+				else	
+					ShowWarning( "clif_parse: It looks like you have enabled PACKET_OBFUSCATION on server side, but disabled it on client side.\n" );
 			}
 #else
 			// Try to use the initial keys for the decryption of the packet ID.
 			cmd = (cmd ^ ((((clif_cryptKey[0] * clif_cryptKey[1]) + clif_cryptKey[2]) >> 16) & 0x7FFF));
 
 			if( cmd >= MIN_PACKET_DB && cmd < MAX_PACKET_DB && packet_db[cmd].len != 0 && packet_db[cmd].func == clif_parse_WantToConnection ){
-				ShowWarning( "clif_parse: It looks like you have disabled PACKET_OBFUSCATION on server side, but enabled it on client side.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "clif_parse: 서버 측에서 PACKET_OBFUSCATION을 비활성화했지만 클라이언트 측에서 활성화 한 것으로 보입니다.\n" );
+				else
+					ShowWarning( "clif_parse: It looks like you have disabled PACKET_OBFUSCATION on server side, but enabled it on client side.\n" );
 			}
 #endif
 		}
@@ -25221,7 +26557,10 @@ static int clif_parse(int fd)
 
 		packet_len = RFIFOW(fd,2);
 		if (packet_len < 4 || packet_len > 32768) {
-			ShowWarning("clif_parse: Received packet 0x%04x specifies invalid packet_len (%d), disconnecting session #%d.\n", cmd, packet_len, fd);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("clif_parse: 수신된 패킷 0x%04x는 유효하지 않은 packet_len (%d)을 지정합니다. 세션 #%d을(를) 연결해제중...\n", cmd, packet_len, fd);
+			else
+				ShowWarning("clif_parse: Received packet 0x%04x specifies invalid packet_len (%d), disconnecting session #%d.\n", cmd, packet_len, fd);
 #ifdef DUMP_INVALID_PACKET
 			ShowDump(RFIFOP(fd,0), RFIFOREST(fd));
 #endif
@@ -25230,7 +26569,10 @@ static int clif_parse(int fd)
 		}
 	}
 	if ((int)RFIFOREST(fd) < packet_len){
-		ShowWarning( "clif_parse: Received packet 0x%04x with expected packet length %d, but only %d bytes remaining, disconnecting session #%d.\n", cmd, packet_len, RFIFOREST( fd ), fd );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning( "clif_parse: 수신된 패킷 0x%04x의 길이가 %d이지만 %d 바이트만 남음. #%d의 세션을 연결 해제중.\n", cmd, packet_len, RFIFOREST( fd ), fd );
+		else
+			ShowWarning( "clif_parse: Received packet 0x%04x with expected packet length %d, but only %d bytes remaining, disconnecting session #%d.\n", cmd, packet_len, RFIFOREST( fd ), fd );
 #ifdef DUMP_INVALID_PACKET
 		ShowDump( RFIFOP( fd, 0 ), RFIFOREST( fd ) );
 #endif
@@ -25287,7 +26629,10 @@ void packetdb_addpacket( uint16 cmd, uint16 length, void (*func)(int, map_sessio
 	}
 
 	if( i == MAX_PACKET_POS ){
-		ShowError( "Too many positions found for packet 0x%04x (max=%d).\n", cmd, MAX_PACKET_POS );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "패킷 0x%04x(최대=%d)에 대해 너무 많은 위치를 찾았습니다.\n", cmd, MAX_PACKET_POS );
+		else
+			ShowError( "Too many positions found for packet 0x%04x (max=%d).\n", cmd, MAX_PACKET_POS );
 	}
 
 	va_end(argp);
@@ -25302,12 +26647,21 @@ void packetdb_readdb(){
 #include "clif_packetdb.hpp"
 #include "clif_shuffle.hpp"
 
-	ShowStatus("Using packet version: " CL_WHITE "%d" CL_RESET ".\n", PACKETVER);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("사용중인 패킷 버전: " CL_WHITE "%d" CL_RESET ".\n", PACKETVER);
+	else	
+		ShowStatus("Using packet version: " CL_WHITE "%d" CL_RESET ".\n", PACKETVER);
 
 #ifdef PACKET_OBFUSCATION
-	ShowStatus("Packet Obfuscation: " CL_GREEN "Enabled" CL_RESET ". Keys: " CL_WHITE "0x%08X, 0x%08X, 0x%08X" CL_RESET "\n", clif_cryptKey[0], clif_cryptKey[1], clif_cryptKey[2]);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("패킷 난독(Obfuscation)화: " CL_GREEN "사용함" CL_RESET ". 키값: " CL_WHITE "0x%08X, 0x%08X, 0x%08X" CL_RESET "\n", clif_cryptKey[0], clif_cryptKey[1], clif_cryptKey[2]);
+	else	
+		ShowStatus("Packet Obfuscation: " CL_GREEN "Enabled" CL_RESET ". Keys: " CL_WHITE "0x%08X, 0x%08X, 0x%08X" CL_RESET "\n", clif_cryptKey[0], clif_cryptKey[1], clif_cryptKey[2]);
 #else
-	ShowStatus("Packet Obfuscation: " CL_RED "Disabled" CL_RESET ".\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("패킷 난독화(Obfuscation): " CL_RED "사용안함" CL_RESET ".\n");
+	else
+		ShowStatus("Packet Obfuscation: " CL_RED "Disabled" CL_RESET ".\n");
 #endif
 }
 
@@ -25336,7 +26690,10 @@ void do_init_clif(void) {
 
 	set_defaultparse(clif_parse);
 	if( make_listen_bind(bind_ip,map_port) == -1 ) {
-		ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",map_port);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("'" CL_WHITE "%d" CL_RESET "'번 포트에 바인딩을 실패 했습니다.\n",map_port);
+		else	
+			ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",map_port);
 		exit(EXIT_FAILURE);
 	}
 

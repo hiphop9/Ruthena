@@ -1,141 +1,132 @@
 //===== rAthena Script =======================================
 //= Amatsu Town
 //===== By: ==================================================
-//= rAthena Dev Team
-//===== Current Version: =====================================
-//= 1.4
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Amatsu Town Script
-//===== Additional Comments: =================================
-//= 1.3 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
-//=     Moved elemental stone trader to 'elemental_trader.txt'
-//= 1.4 Moved Alberta NPC to pre-re/re paths. [Euphy]
-//============================================================
-
-// Amatsu Transportation
+//한글번역 스카이러브
 //============================================================
 -	script	::Sea_Captain_amatsu	-1,{
-	mes "[Walter Moers]";
-	mes "Hey, there.";
-	mes "Have you ever heard that there";
-	mes "are totally different countries";
-	mes "than the Rune-Midgarts Kingdom?";
+	mes "[발터 뫼어스]";
+	mes "이봐, 자네. 바다 건너에서는 지금";
+	mes "우리가 사는 룬-미드가츠 왕궁과";
+	mes "전혀 다른 나라들이 있다는 사실";
+	mes "을 들어본 적이 있는가?";
 	next;
-	switch(select("About Amatsu...:Go to Amatsu:Cancel")) {
+	switch(select("아마쯔에 대해서...:아마쯔로 간다.:취소한다.")) {
 	case 1:
-		mes "[Walter Moers]";
-		mes "I heard that a drifting ship";
-		mes "accidentally discovered it...";
-		mes "The ship was totally destroyed";
-		mes "by a raging storm in heavy fog.";
-		mes " ";
+		mes "[발터 뫼어스]";
+		mes "소문으로는, 어떤 뱃놈이 항로를";
+		mes "잃고 표류하던 도중에 우연히 발";
+		mes "견하게 되었다고 하더군...";
+		mes "심한 폭풍우와 안개에 배가 아주";
+		mes "작살난게 틀림없어.";
 		next;
-		mes "[Walter Moers]";
-		mes "Anyway, the ship was wrecked";
-		mes "on the beach. It was there";
-		mes "he arrived at a town called Amatsu.";
+		mes "[발터 뫼어스]";
+		mes "여하튼 난파를 당하고 도착한 그";
+		mes "마을이 바로 아마쯔라고 불리는";
+		mes "곳이였다네. 거기 사람들에게";
+		mes "치료도 받으며 회복했겠지.";
+		mes "거기서 오랫동안 고생하며 한장";
+		mes "의 해도를 완성했다고 하던가?";
 		next;
-		mes "[Walter Moers]";
-		mes "The towners took pity on him";
-		mes "and took care of his wounds.";
-		mes "He lived there until he finished making a map.";
+		mes "[발터 뫼어스]";
+		mes "그는 돌아오자마자 죽였다느데,";
+		mes "해도만큼은 트리스탄 3세에게";
+		mes "전해졌지. 국왕께서는 아마쯔를";
+		mes "향한 항로를 개척하는 자에게";
+		mes "포상을 하겠다고 공표하시면서,";
+		mes "해도의 복사본을 나누어주셨지.";
 		next;
-		mes "[Walter Moers]";
-		mes "He passed away when he returned";
-		mes "to Rune-Midgarts. Fortunately,";
-		mes "the map was given to our king, Tristan III.";
+		mes "[발터 뫼어스]";
+		mes "포상보다, 다른 나라와 무역을";
+		mes "선점할 수 있게 된다면, 그걸로";
+		mes "벌어들일 이득이 엄청나겠지.";
+		mes "그래서 수많은 모험가들과 용감";
+		mes "한 선장들이 해도를 들고 바다에";
+		mes "도전하셨단 말씀이야...";
 		next;
-		mes "[Walter Moers]";
-		mes "King Tristan III announced";
-		mes "that he would reward any";
-		mes "person brave enough to venture to Amatsu, and spread copies of this map.";
+		mes "[발터 뫼어스]";
+		mes "하지만 전부 실패했지! 거대한";
+		mes "해류와 기상변화를 이겨내려면,";
+		mes "항새술이나 바다에 대한 많은";
+		mes "경험이 있어야 하는데, 다들 그";
+		mes "포상과 무역 선점에 눈이 멀어서";
+		mes "제대로 준비도 안했던거야.";
 		next;
-		mes "[Walter Moers]";
-		mes "Many brave and adventurous";
-		mes "sea captains took the";
-		mes "challenge. Great fortune could";
-		mes "be made in trade with Amatsu, as well as the rewards from King Tristan III...";
+		mes "[발터 뫼어스]";
+		mes "그러던중에 아마쯔까지 완벽한";
+		mes "뱃길을 발견한 사람이 있었지...";
+		mes "그게 바로 나, 발터 뫼어스님이";
+		mes "아마쯔와 교역을 시작하신 분!";
+		mes "하하하! 그런 얘기란 말이다.";
 		next;
-		mes "[Walter Moers]";
-		mes "However, they all failed!";
-		mes "To overcome various currents";
-		mes "and bad weather, lots of";
-		mes "experience is required. But they were all blinded by their greed...";
-		next;
-		mes "[Walter Moers]";
-		mes "Finally, a great man discovered";
-		mes "the perfect sealane to Amatsu...";
-		mes "Right! That is me. Sir Walter";
-		mes "Moers. I started the trade with Amatsu! Hahaha! Well, that's all about Amatsu.";
-		next;
-		mes "[Walter Moers]";
-		mes "I made good money from trades";
-		mes "for years, and now I'm interested";
-		mes "in tourism. If you want to go to Amatsu, let me know~!";
+		mes "[발터 뫼어스]";
+		mes "몇년간 교역으로 짭짤한 재미를";
+		mes "보다가, 이제는 관광업도 한번";
+		mes "손대보시려고 하는거란 말이지.";
+		mes "혹시 아마쯔에 가보고 싶다면,";
+		mes "이몸에게 얘기하라구...!";
 		close;
 	case 2:
-		mes "[Walter Moers]";
-		mes "Oh yeah? It's a long way to";
-		mes "Amatsu. That's why we are";
-		mes "charging a fare. You don't think that crossing oceans and currents is easy, do you?";
+		mes "[발터 뫼어스]";
+		mes "그래? 아마쯔까지는 아주 멀지.";
+		mes "그래서 조금 요금이 비싸다고.";
+		mes "대양과 해류를 넘어서 가는 곳이";
+		mes "쉬울꺼라 생각한건 아니겠지?";
 		next;
-		mes "[Walter Moers]";
-		mes "10,000 zeny for a round-trip! I've";
-		mes "got a stately room in a sturdy and";
-		mes "safe trade ship for you. It is a ";
-		mes "reasonable fare when you consider";
-		mes "that this isn't a one way trip.";
+		mes "[발터 뫼어스]";
+		mes "왕복 10,000 제니! 내 튼튼하고";
+		mes "안전한 무역선에 특별히 객실을";
+		mes "마련해두었다. 돌아올 경우에는";
+		mes "무료로 올 수 있도록, 이정도의";
+		mes "가격은 받아야겠어.";
 		next;
-		mes "[Walter Moers]";
-		mes "Shall we go now? You didn't forget";
-		mes "the fare, right? Let's go.";
+		mes "[발터 뫼어스]";
+		mes "그럼, 출발해볼까? 여행비는 잘";
+		mes "챙겨두었겠지? 어서 가자구.";
 		next;
-		if (select("All Aboard!:Cancel") == 1) {
+		if (select("출발!:취소") == 1) {
 			if (Zeny > 9999) {
-				mes "[Walter Moers]";
-				mes "Alright, I will start the engine!";
+				mes "[발터 뫼어스]";
+				mes "좋았어, 바로 출발하지!";
 				close2;
 				set Zeny, Zeny-10000;
 				warp "amatsu",197,83;
 				end;
 			}
-			mes "[Walter Moers]";
-			mes "Were you even listening to me?";
-			mes "10,000 zeny. If you got";
-			mes "nothing, find some treasure";
-			mes "somewhere, like in a wrecked ship...Show me the money!";
+			mes "[발터 뫼어스]";
+			mes "내 얘기는 어디다 팔아먹었나?";
+			mes "10,000 제니. 그게 아니라면";
+			mes "난파선이나 가서 보물이라도";
+			mes "찾아오던지... 여행비를 다시";
+			mes "챙겨오게나.";
 			close;
 		}
-		mes "[Walter Moers]";
-		mes "If you are an adventurer,";
-		mes "this is a great chance";
-		mes "to experience a different culture...Well, it is up to you.";
+		mes "[발터 뫼어스]";
+		mes "모험가라면, 이 대륙을 벗어나서";
+		mes "새로운 문물을 접하기를 꿈꾸는";
+		mes "것 만큼 좋은게 없을텐데...";
+		mes "뭐, 좋을대로 하게나.";
 		close;
 	case 3:
-		mes "[Walter Moers]";
-		mes "If you are tired of your daily";
-		mes "life, take a trip to a distant";
-		mes "country across the ocean.";
-		mes "Someplace like, oh I don't know, Amatsu~";
+		mes "[발터 뫼어스]";
+		mes "지금 생활이 식상하다면, 가끔은";
+		mes "바다 건너 먼 나라로 관광여행을";
+		mes "떠나는 것도 좋다네.";
 		close;
 	}
 }
 
-amatsu,194,79,5	script	Sea Captain#ama2	709,{
-	mes "[Walter Moers]";
-	mes "You came... Did you enjoy";
-	mes "your trip to Amatsu...?";
-	mes "Alright, I will take you";
-	mes "back to Alberta.";
+amatsu,194,79,5	script	무역선 선장#ama2	709,{
+	mes "[발터 뫼어스]";
+	mes "벌써 돌아가려는가, 아마쯔 구경";
+	mes "은 충분히 즐겼겠지...? 그래.";
+	mes "그럼 알베르타로  돌오가는 배에";
+	mes "태워주도록 하겠네.";
 	next;
-	if (select("Back to Alberta:Cancel") == 1) {
-		mes "[Walter Moers]";
-		mes "Let's go then. You must have";
-		mes "so many things to talk about,";
-		mes "right? All aboard now.";
+	if (select("알베르타로 돌아간다:취소한다.") == 1) {
+		mes "[발터 뫼어스]";
+		mes "출발하기로 하지. 돌아가서 친구";
+		mes "들에게 자랑할 꺼리가 많을꺼야.";
+		mes "그럼, 배에 올라타게나.";
 		close2;
 		if (checkre(0))
 			warp "alberta",244,72;
@@ -143,446 +134,456 @@ amatsu,194,79,5	script	Sea Captain#ama2	709,{
 			warp "alberta",243,91;
 		end;
 	}
-	mes "[Walter Moers]";
-	mes "Well, take your time.";
-	mes "The ship to Alberta is";
-	mes "always ready to depart...";
+	mes "[발터 뫼어스]";
+	mes "그럼 천천히 더 둘러ㅓ보다 오게.";
+	mes "알베르타로 돌아가는 배는 매일";
+	mes "준비되어 있으니 말일세...";
 	close;
 }
 
 // Generic Amatsu NPCs
 //============================================================
-amatsu,230,160,3	script	Well-side Maiden#ama	757,{
-	mes "[Yuuko]";
-	mes "I usually come to this well to";
-	mes "draw water, but never when it's";
-	mes "foggy or rainy. For some reason";
-	mes "whenever the weather is a";
-	mes "certain way, I feel like...";
+amatsu,230,160,3	script	우물가처녀#ama	757,{
+	mes "[유우코]";
+	mes "매일 물을 길으러 오긴 하지만";
+	mes "안개가 끼거나 비가 오는 날엔";
+	mes "이 근처에는 얼씬도 하지 않아요.";
 	next;
-	mes "[Yuuko]";
-	mes "...someone...or some thing is";
-	mes "struggling to crawl out from";
-	mes "the bottom of this well...";
-	mes "It really gives me the creeps.";
+	mes "[유우코]";
+	mes "마치 이 우물 깊은 곳에서";
+	mes "누군가 우물벽을 짚고";
+	mes "올라오는듯한 기분이 들어서";
+	mes "소름이 끼치는거 있죠.";
 	close;
 }
 
-amatsu,179,107,4	script	John#ama	86,{
-	mes "[John]";
-	mes "Yo~";
-	mes "You're not from around here.";
-	mes "Heh, another outsider.";
-	mes "Just like me...";
+amatsu,179,107,4	script	요한#ama	86,{
+	mes "[요한]";
+	mes "요-";
+	mes "자네도 나와같이";
+	mes "이곳 출신이 아닌가보군.";
 	next;
-	mes "[John]";
-	mes "It's been five long years";
-	mes "since I've started doing";
-	mes "business here...";
+	mes "[요한]";
+	mes "내가 이자리에서";
+	mes "장사를 한지 올해로";
+	mes "5년이 다 되어가네.";
 	next;
-	mes "[John]";
-	mes "At first, I thought, 'What";
-	mes "a great chance!' when the";
-	mes "trade between the Rune-Midgarts";
-	mes "Kingdom and Amatsu started.";
+	mes "[요한]";
+	mes "룬 미드가츠 왕국과";
+	mes "이곳 아마쯔간의 교역이";
+	mes "처음으로 시도 되었을 때";
+	mes "난 '기회다!' 라고 생각했었지.";
 	next;
-	mes "[John]";
-	mes "I wanted to do something great";
-	mes "and make the most of this";
-	mes "new opportunity.";
+	mes "[요한]";
+	mes "무엇인가 남과는 다른 색다른 일을";
+	mes "시작해보고 싶었거든.";
 	next;
-	mes "[John]";
-	mes "And so, I decided to go to";
-	mes "Amatsu so I could learn to make";
-	mes "Amatsu cuisine. Then, I could";
-	mes "return to my hometown and make";
-	mes "this exotic food for everyone.";
+	mes "[요한]";
+	mes "그래서 아마쯔로 건너와서";
+	mes "이 곳의 요리를 배워";
+	mes "다시 나의 고향으로 돌아가";
+	mes "사름들에게 색다른 요리를";
+	mes "맛보게 하리라-라고 다짐했었다네.";
 	next;
-	mes "[John]";
-	mes "But, I fell in love with Amatsu";
-	mes "and I ended up sticking around";
-	mes "here for the last five years.";
-	mes "During all that time, I've";
-	mes "been learning Amatsu cuisine,";
+	mes "[요한]";
+	mes "뭐 결국엔 이렇게";
+	mes "이곳에 정이 들어버려서";
+	mes "5년이 지난 지금에도";
+	mes "이곳에 남아있지만 말야.";
 	next;
-	mes "[John]";
-	mes "and cooking these dishes for";
-	mes "the towners, and enjoying myself";
-	mes "by talking to the locals,";
-	mes "transfixed in this very spot.";
+	mes "[요한]";
+	mes "뭐 여튼 그때부터 늘 이자리에서";
+	mes "마을 사람들과 이런저런 얘기를";
+	mes "나누며회포를 풀었건만";
 	next;
-	mes "[John]";
-	mes "But recently, across the street,";
-	mes "the Sushi Master opened his shop.";
-	mes "...";
-	mes "Now, my only customers are flies.";
+	mes "[요한]";
+	mes "언젠가부터 바로 길건너편에";
+	mes "초방명인이 가게를 연 이후론";
+	mes "파리만 날리고 있다네.";
 	next;
-	mes "[John]";
-	mes "I was hoping to fulfill my";
-	mes "dream of becoming a renowned chef";
-	mes "in Amatsu, but...";
-	mes "I guess it's over...";
+	mes "[요한]";
+	mes "내 평생, 인생의 낙을";
+	mes "이곳에서 찾고 있었지만";
+	mes "이젠 그것도 끝인가보군..";
 	close;
 }
 
-amatsu,205,163,3	script	Mimi#ama	759,{
-	mes "[Mimi]";
-	mes "Puhuhu~!";
-	mes "Did you see Miss Amatsu near";
-	mes "the Harbor? Isn't she";
-	mes "preeeetty?";
+amatsu,205,163,3	script	미미#ama	759,{
+	mes "[미미]";
+	mes "후훗~!";
+	mes "항구 근처에 있는 아마쯔 진 언니";
+	mes "봤어요?";
+	mes "너어어무 예쁘죠?";
 	next;
-	mes "[Mimi]";
-	mes "I'm going to enter the Miss";
-	mes "Amatsu Contest when I'm older.";
+	mes "[미미]";
+	mes "저도 어른이 되면 아마쯔아가씨";
+	mes "선발대회에 참가할거에요.";
 	next;
-	mes "[Mimi]";
-	mes "I'm sure that I'm the prettiest";
-	mes "in this town but...";
-	mes "A lady can always use a little more makeup.";
+	mes "[미미]";
+	mes "뭐 지금 이대로도 충분히 이 마을에서";
+	mes "제일 예쁘다고 생각되지만...";
+	mes "여자는 늘 언제나 자신을 가꾸어야";
+	mes "하는 법이거든요. 후훗.";
 	close;
 }
 
-amatsu,185,115,3	script	Drunken Man#ama	765,{
-	mes "[Kosake]";
-	mes "*Hiccup*...My wife is just like,";
-	mes "...like a man...*Hiccup*...";
-	mes "I'm going to really...*Hiccup*...not go home this time...Hiccup";
+amatsu,185,115,3	script	술취한 아저씨#ama	765,{
+	mes "[코사케]";
+	mes "히꾹..이놈의 마누라";
+	mes "힘만 쎄가지고..히꾹..";
+	mes "내가 이번엔 정말..히꾹.. 집에";
+	mes "들어가나봐라..히꾹";
 	next;
-	if (select("Stop drinking and go home:Let's drink together") == 1) {
-		mes "[Kosake]";
-		mes "What?! Do you want me to get";
-		mes "hit by my wife's big fist?";
-		mes "That's right! I said 'big fist!'";
+	if (select("아쩌시 그만 드시고 집에 돌아가세요:아쩌시 저도 같이 마셔요") == 1) {
+		mes "[코사케]";
+		mes "뭐?! 나더러 그 마누라의 솥뚜껑만한";
+		mes "손으로 맞으라고?";
+		mes "히꾹.. 자네가 못봐서 그래.";
+		mes "우리 마누라는 젊었을 적에";
+		mes "호랑이도 맨손으로 잡았었다네..";
 		next;
-		mes "[Kosake]";
-		mes "Sad to say, I married a woman";
-		mes "with man hands...";
-		mes "Big, strong hands that can kill a tiger.";
+		mes "[코사케]";
+		mes "코..코뭐시기란 마을에 가서";
+		mes "조금 잃었다고 사람을 이렇게";
+		mes "무식하게 때리고 말이지..히꾹";
 		next;
 		mes "[Druken Man]";
-		mes "It was in Ko...Koko-something";
-		mes "town. She hit me because I";
-		mes "lost some money...*Hiccup*";
-		next;
-		mes "[Druken Man]";
-		mes "Life~~ is~~ nothing~~~";
-		mes "What is zeny~~~~ ";
-		mes "*Hiccup*...... *Hiccup*.......";
+		mes "덧~~없는~~ 인새앵~~~";
+		mes "제니가 다 뭐냐~~~~ ";
+		mes "히꾹...... 히꾹.......";
 		mes ".......................";
-		mes "........Z.z..z...zzz...";
+		mes "........쿨...............";
 		close;
 	}
-	mes "[Kosake]";
-	mes "Heh heh... nice lad...";
-	mes "But you know *Hiccup*";
-	mes "I can't give you any of mine! Heheheh...";
+	mes "[코사케]";
+	mes "큭큭.. 좋은 젊은이구만..";
+	mes "히꾹.. 근데 말이지.. 히꾹";
+	mes "내 술은 줄 수 없다네.. 큭큭..";
 	next;
-	mes "[Kosake]";
-	mes "If you buy me a drink, I will think about it...Hehehe...*Hiccup*..";
+	mes "[코사케]";
+	mes "자네가 내 술까지 쏜다면 다시";
+	mes "생각해보지..큭큭...히꾹..";
 	close;
 }
 
-amatsu,217,179,1	script	Grandma#ama	760,{
-	mes "[Hatsue]";
-	mes "I'm worried about my husband.";
-	mes "He lost a lot of money in some distant town today.";
+amatsu,217,179,1	script	할머니#ama	760,{
+	mes "[하츠에]";
+	mes "남편이 너무 도박에 빠져서 걱정이에요.";
+	mes "오늘도  저 멀리 마을까지 나가서";
+	mes "돈이나 잔뜩 잃고 오고..";
 	next;
-	mes "[Hatsue]";
-	mes "I got so mad at him, he ran off in";
-	mes "fear! I'm worried...what if he";
-	mes "went to the bar and starts drinking again? The man just doesn't have any backbone. *Phew*";
+	mes "[하츠에]";
+	mes "너무 화가나서  나도 모르게 있는거";
+	mes "없는거 다 들고 역정을 냈는데";
+	mes "어디 술집에 가서 술이나 마시고";
+	mes "있는건 아닌지.. 소심한 사람이라..휴우.";
 	close;
 }
 
-amatsu,287,266,3	script	Jyaburo#ama	766,{
-	mes "[Jyaburo]";
-	mes "This place is special to me.";
-	mes "It's filled with memories of my wife.";
+amatsu,287,266,3	script	쟈부로#ama	766,{
+	mes "[쟈부로]";
+	mes "여긴 나와 우리 할멈의";
+	mes "추억의 장소라네.";
 	next;
-	mes "[Jyaburo]";
-	mes "It was under that big tree where";
-	mes "I first told her I loved her. At";
-	mes "the time, I really didn't know that she also had feelings for me.";
+	mes "[쟈부로]";
+	mes "..내가 그 때 요 아래에 있는";
+	mes "커다란 나무에서 그녀에게 고백을";
+	mes "했었더랬지..";
+	mes "설마 그녀도 나에게";
+	mes "마음이 있는 줄은 몰랐어.";
 	next;
-	mes "[Jyaburo]";
-	mes "After that day, we had many";
-	mes "conversations here. Quiet";
-	mes "and peaceful, this was our";
-	mes "favorite place to be together.";
+	mes "[쟈부로]";
+	mes "그 후로 우리는 이곳에서 많은";
+	mes "이야기를 나눴었다네.";
+	mes "여긴 한적하고 평화로워서";
+	mes "최고의 장소였어.";
+	mes "행복한 시간들이 계속되었지.";
 	next;
-	mes "[Jyaburo]";
-	mes "When I close my eyes here, I";
-	mes "can picture our good times,";
-	mes "and it feels like it all happened yesterday.";
-	mes "...";
+	mes "[쟈부로]";
+	mes "지금도 눈을 감으면 그 때의 일들이";
+	mes "선명하게 떠오른다네.";
+	mes "마치 어제의 일이었던냥...후후..";
 	next;
-	mes "[Jyaburo]";
-	mes "My wife passed away...";
-	mes "So now I only come here by";
-	mes "myself...But I feel like I'm with her whenever I'm here.";
+	mes "[쟈부로]";
+	mes "우리 할멈은 이미 세상을 떠나서";
+	mes "이젠 나 홀로 이곳을 찾지만,";
+	mes "이곳을 올때마다 마치 할멈이 곁에";
+	mes "있어주는 기분이 들어 우울한 기분이";
+	mes "싹 가신다네.";
 	next;
-	mes "[Jyaburo]";
-	mes "Do you have anyone that you";
-	mes "think about? If you have a";
-	mes "special someone, don't hesitate";
-	mes "or hold back. Be sure to treat";
-	mes "that person specially.";
+	mes "[쟈부로]";
+	mes "혹시 자네 지금 내 말을 들으며";
+	mes "떠오르는 사람이 있나?";
+	mes "있다면, 망설이지도 주저하지도 말고";
+	mes "할 수 있는 만큼 최대한  소중히";
+	mes "대해주게.";
 	next;
-	mes "[Jyaburo]";
-	mes "Human beings live such short";
-	mes "lives. But we're able to laugh";
-	mes "throughout life and forget the";
-	mes "sadness.";
-	mes "...Always be happy.";
+	mes "[쟈부로]";
+	mes "인간이란, 평생 웃고  살아도";
+	mes "그 생은 실로 짧다네.";
+	mes "우울한 마음은 떨쳐버리고";
+	mes "언제나 행복하게 살게나.";
 	close;
 }
 
 // Legendary Tree
 //============================================================
-amatsu,269,221,1	script	Propose Girl#ama	758,{
+amatsu,269,221,1	script	고백 소녀#ama	758,{
 	set jap_tree,1;
-	mes "[Hutari Shioko]";
-	mes "It is a pleasure to meet you.";
-	mes "My name is Hutari Shioko.";
-	mes "My hobby is listening to music.";
-	mes "I'm an avid fan of classical music.";
+	mes "[후타리 시오코]";
+	mes "만나서 반가워요. 제 이름은";
+	mes "후타리 시오코입니다. 취미는";
+	mes "음악감상으로, 고전음악을 주로";
+	mes "듣는 편이예요.";
 	next;
-	mes "[Hutari Shioko]";
-	mes "There is an old story about";
-	mes "the hill in our town.";
-	mes "Have you heard this story before?";
+	mes "[후타리 시오코]";
+	mes "우리 마을의 이 작은 언덕에는";
+	mes "전설이 하나 내려오고 있답니다.";
+	mes "혹시 알고 계신가요?";
 	next;
-	mes "[Hutari Shioko]";
-	mes "It is said that if you propose";
-	mes "under that tree, you and your";
-	mes "lover will live a happy life for all eternity.";
+	mes "[후타리 시오코]";
+	mes "저 나무 아래에서 고백을 받으면";
+	mes "두사람은 영원히 행복한 관계가";
+	mes "될 수 있다는 전설이지요.";
 	next;
-	mes "[Hutari Shioko]";
-	mes "However, the proposal can not be";
-	mes "done at any given time. The legend states that it can only be done on Saturday evenings.";
+	mes "[후타리 시오코]";
+	mes "하지만 아무 때나 해서는 안되고";
+	mes "꼭 토요일 저녁에 고백해야지만";
+	mes "이루어 진다고 그래요.";
 	next;
-	mes "[Hutari Shioko]";
-	mes "After the proposal, the reply must";
-	mes "be answered before Sunday evening. This is the most crucial part of it.";
+	mes "[후타리 시오코]";
+	mes "그리고, 토요일 저녁에 고백을";
+	mes "받은 다음에는 일요일 저녁까지";
+	mes "꼭 대답을 해주어야 한다네요.";
 	next;
 	emotion ET_BIGTHROB;
-	mes "[Hutari Shioko]";
-	mes "If you like someone...";
-	mes "You should try proposing";
-	mes "under that tree. I'm sure ";
-	mes "happy things will happen, if you do.";
+	mes "[후타리 시오코]";
+	mes "혹시 좋아하는 사람이 있다면...";
+	mes "한번쯤 저 나무 아래에서 약속을";
+	mes "하고 고백해보는건 어떨까요?";
+	mes "분명히 좋은 일들이 생길꺼예요.";
 	close;
 }
 
-amatsu,243,202,3	script	Drama Teacher#ama	760,{
+amatsu,243,202,3	script	연극 선생님#ama	760,{
 	set jap_tree,2;
-	mes "[Garakame sensei]";
-	mes "This is a beautiful place";
-	mes "with everlasting cherry blossoms.";
-	mes "Also, this town is the origin of";
-	mes "legendary play, 'White Dryad.' ";
+	mes "[가라카메 선생]";
+	mes "이곳은 언제나 벚꽃이 피어있는";
+	mes "아름다운 장소란다. 또한 여기는";
+	mes "전설의 연근인 '백천녀'가 태어";
+	mes "난 곳이기도 하지...";
 	next;
 	if (Sex == SEX_MALE) {
-		mes "[Garakame sensei]";
-		mes "If you know a girl who is";
-		mes "talented in acting, please";
-		mes "bring her to me. I have been";
-		mes "searching for a girl who could";
-		mes "play the role as the 'White Dryad.'";
+		mes "[가라카메 선생]";
+		mes "혹시 연기에 소질이 있어 보이는";
+		mes "여자애를 알고 있다면, 나에게";
+		mes "데려오려무나. 오랫동안 나는,";
+		mes "'백천녀'를 연기할 아이를 찾고";
+		mes "있었단다.";
 		next;
-		mes "[Garakame sensei]";
-		mes "The 'White Dryad' is a nymph of";
-		mes "cherry tree... It has been hard to";
-		mes "find a girl who can perform";
-		mes "as the 'White Dryad...'";
+		mes "[가라카메 선생]";
+		mes "'백천녀'란 벚나무의 정령...";
+		mes "인간을 뛰어넘은 혼신의 연기를";
+		mes "할 수 있는 그런 사람은 정말";
+		mes "드물지...";
 		close;
 	}
 	emotion ET_SURPRISE;
-	mes "[Garakame sensei]";
-	mes "Are you interested in acting?";
-	mes "I need someone who sees";
-	mes "the passion in acting and";
-	mes "can understand my vision.";
+	mes "[가라카메 선생]";
+	mes "보아하니, 너는 연기를 좋아하는";
+	mes "사람인거 같구나. 하지만 내가";
+	mes "찾는 사람은 그러한 마음만으로";
+	mes "할 수 있는 사람이 아니란다.";
 	next;
-	mes "[Garakame sensei]";
-	mes "When you stand on the stage,";
-	mes "you need to become the";
-	mes "character. Your acting needs";
-	mes "to touch the hearts of the";
-	mes "audience and touch their souls.";
+	mes "[가라카메 선생]";
+	mes "무대에 서는 순간, 실제로 맡은";
+	mes "배역의 인물이 되어야 한단다.";
+	mes "깨어지기  쉬운 가면을 쓰고,";
+	mes "무대에서 희노애락의 감정들을";
+	mes "관객들에게 전해줘야만 하지.";
 	next;
-	mes "[Garakame sensei]";
-	mes "Everyone's life is like a ";
-	mes "drama, right? Enjoy your life";
-	mes "as what you are and find me";
-	mes "someday when you are ready.";
+	mes "[가라카메 선생]";
+	mes "지금의 생활도, 너에게는 하나의";
+	mes "연극이라고 할 수 있겠지...?";
+	mes "자신의 역할에 충실하게 살다가";
+	mes "나를 한번쯤 찾아오려무나.";
 	close;
 }
 
-amatsu,283,203,1	script	Bonubonu#ama1	1323,{
+amatsu,283,203,1	script	보누보누#ama1	1323,{
 	end;
 }
 
-amatsu,283,203,1	script	Bonubonu#ama2	111,{
+amatsu,283,203,1	script	보누보누#ama2	111,{
 	set jap_tree,3;
 	emotion ET_PROFUSELY_SWEAT;
-	mes "[Bonubonu]";
-	mes "That tree on the hill is";
-	mes "a very old tree. It is a big";
-	mes "cherry tree with everlasting blossoms.";
+	mes "[보누보누]";
+	mes "이 언던의 나무는 아주 오래된";
+	mes "나무예요. 커다랗고 계속 벚꽃이";
+	mes "피어잇는 왕벚꽃나무지요.";
 	next;
 	emotion ET_PROFUSELY_SWEAT;
-	mes "[Bonubonu]";
-	mes "There is something about this";
-	mes "tree that makes me forget about";
-	mes "all the troubles in my life when I sit under it.";
+	mes "[보누보누]";
+	mes "그리고  정말 고마운 나무랍니다.";
+	mes "슬픈 일이나  괴로운 일이 있으면";
+	mes "언제나 저 나무 아래에 앉았죠.";
 	next;
 	emotion ET_PROFUSELY_SWEAT;
-	mes "[Bonubonu]";
-	mes "Everything about this tree is";
-	mes "simply wonderful...";
-	mes "I can't really describe how";
-	mes "I feel when I look at it...";
-	mes "It just leaves me breathless...";
+	mes "[보누보누]";
+	mes "그러면 슬픈 일도 괴로운 일도";
+	mes "모두 잊을 수 있거든요....";
+	mes "저 나무는 우리들을 위로해주고";
+	mes "괴로운 일을 잊게 해주는 신기한";
+	mes "나무예요.";
 	next;
 	emotion ET_PROFUSELY_SWEAT;
-	mes "[Bonubonu]";
-	mes "You should visit the tree and";
-	mes "spend some time there.";
-	mes "It is really a miraculous and gracious tree...";
+	mes "[보누보누]";
+	mes "슬픈 일이나 괴로운 일이 있으면";
+	mes "저 나무 아래에서 앉아보세요.";
+	mes "정말 신기하고 고마운 나무...";
 	close;
 }
 
-amatsu,274,178,7	script	Veterinarian#ama	735,{
+amatsu,274,178,7	script	수의사#ama	735,{
 	set jap_tree,4;
-	mes "[Sakura Seiichi]";
-	mes "Ah... I'm not a weirdo so";
-	mes "don't panic. I'm just an ordinary";
-	mes "veterinarian. My job is curing";
-	mes "sick animals.";
-	mes " ";
+	mes "[사쿠라 세이이치]";
+	mes "아... 수상한 사람은 아니니까,";
+	mes "놀라지 말도록 해. 나는 그저";
+	mes "평범한 수의사니끼. 아픈 동물을";
+	mes "치료하는 것을 직업으로 삼고";
+	mes "있단다.";
 	next;
-	mes "[Sakura Seiichi]";
-	mes "By the way... Do you know?";
-	mes "The story about the cherry tree";
-	mes "on the hill...I guess you haven't heard about it...";
+	mes "[사쿠라 세이이치]";
+	mes "그런데... 그거 혹시 아니?";
+	mes "언던위에 있는 벚나무에 대한";
+	mes "이야기를... 처음 들어볼 수도";
+	mes "있겠지.";
 	next;
-	mes "[Sakura Seiichi]";
-	mes "That tree has a secret of";
-	mes "keeping its beauty and whiteness.";
-	mes "The secret is...";
-	mes "There are corpses buried under...";
-	mes "that tree...";
+	mes "[사쿠라 세이이치]";
+	mes "저 나무가 언제나 하얗고 정말";
+	mes "아름다운 모습을 유지할 수 있는";
+	mes "비결이 있단다...";
+	mes "그건... 저 나무 아래에 시체가";
+	mes "묻혀있기 때문이지...";
 	next;
-	if (select("How horrible!:You have got to be kidding.") == 1) {
-		mes "[Sakura Seiichi]";
-		mes "Kuhuhu... They could be...";
-		mes "By the way, do you want";
-		mes "make a bet on it...?";
+	if (select("묻혀있는 사람들은 괴롭지 않을가요?:무슨 바보같은 소리를...") == 1) {
+		mes "[사쿠라 세이이치]";
+		mes "후훗... 그럴지도 모르겠군...";
+		mes "그나저나 나와 내기를 하나 하지";
+		mes "않겠나...?";
 		next;
 		emotion ET_THINK;
-		mes "[Sakura Seiichi]";
-		mes "If I..........";
+		mes "[사쿠라 세이이치]";
+		mes "만약에 내가...";
 		mes "............";
 		mes ".........";
 		next;
-		mes "^3355FFHis voice was getting lower";
-		mes "and lower as the wind blew.";
-		mes "Finally, I couldn't even hear his voice. I can't even recall what he was trying to tell me...^000000";
+		mes "^3355FF그의 목소리 바람 소리 속에서^000000";
+		mes "조금씩 작아지다가, 마침내 전혀";
+		mes "들리지 않게 되었다. 그가 어떤";
+		mes "이야기를 하려 했는지도 잘 생각";
+		mes "나지 않을 정도로...";
 		close;
 	}
-	mes "[Sakura Seiichi]";
-	mes "I can't help it if you think that way. But one day, you too could be buried underneath...";
+	mes "[사쿠라 세이이치]";
+	mes "그렇게 들린다면, 상관없겠지...";
+	mes "조심해라. 언젠가 너에게도 그런";
+	mes "일이 일어날 수 있으니...";
 	next;
 	emotion ET_THINK;
-	mes "[Sakura Seiichi]";
-	mes "Haha... Hahaha.....";
+	mes "[사쿠라 세이이치]";
+	mes "하하하... 하하하하.....";
 	mes "...............";
 	mes "...........";
 	next;
-	mes "^3355FFHis laugh was getting lower";
-	mes "and lower as the wind blew.";
-	mes "Finally, I couldn't even hear anything. I can't even recall what he was trying to tell me...^000000";
+	mes "^3355FF그의 웃음은 바람 소리 속에서^000000";
+	mes "조금씩 작아지다가, 마침내 전혀";
+	mes "들리지 않게 되었다. 그가 어떤";
+	mes "의도에서 내게 그런 말을 했는지";
+	mes "잘 모르겠다...";
 	close;
 }
 
-amatsu,262,197,1	script	Legendary Tree	111,{
+amatsu,262,197,1	script	전설의 나무	111,{
 	if (jap_tree == 1) {
-		mes "^3355FFAs she mentioned, this tree";
-		mes "seems to be a famous place";
-		mes "for proposing lovers.";
-		mes "There were several carved symbols";
-		mes "of hearts and initials of lovers";
-		mes "on the bark.^000000";
+		mes "^3355FF그녀가 얘기한 대로, 이 나무는^000000";
+		mes "여러 사람들이 사랑을 고백하는";
+		mes "장소로 유명한 모양이다.";
+		mes "가끔 장난스럽게 하트를 새기고";
+		mes "연인들의 이니셜을 새긴 표시도";
+		mes "몇개씩 보였다.";
 		next;
-		mes "^3355FFBesides proposals, people";
-		mes "gather under this tree when";
-		mes "they discuss important";
-		mes "matters. I could listen to";
-		mes "all kinds of stories";
-		mes "in this magnificent place.^000000";
+		mes "^3355FF사랑 고백뿐만 아니라, 무언가^000000";
+		mes "중요한 이야기를 하는 경우에도";
+		mes "이곳에서 만난다고  한다.";
+		mes "이런 멋진 장소에서라면, 누가";
+		mes "무슨 이야기를 해준다고 해도";
+		mes "전부 들어줄 수 있을거 같다.";
 		close;
 	}
 	else if (jap_tree == 2) {
-		mes "^3355FFThe legendary play, 'White Dryad'.....";
-		mes "I never heard about that title but";
-		mes "it sounds familiar.";
-		mes "Nymph of cherry tree... What would";
-		mes "be her position in the play?^000000";
+		mes "^3355FF전설의 연극 '백천녀'.....^000000";
+		mes "처음 들어보는 제목인데, 왠지";
+		mes "낯설지 않은 느낌이 들었다.";
+		mes "벚나무의 정령... 대체 어떠한";
+		mes "연기를 보여주는 연극일까?";
 		next;
 		if (Sex == SEX_MALE) {
-			mes "^3355FFI would like to find";
-			mes "a person who is talented";
-			mes "in acting and help her until";
-			mes "she performs the play. However,";
-			mes "it seems to be easier said than done.^000000";
+			mes "^3355FF괜찮다면 연기에 뛰어난 재능을^000000";
+			mes "가진 누군가를 찾아내서, 내가";
+			mes "도울 수 있는 모든 수단을 써서";
+			mes "라도 도와주고 싶다는 생각이";
+			mes "들었다... 하지만 쉽게 찾을 수 있을거";
+			mes "같지는 않았다.";
 			close;
 		}
-		mes "^3355FFI might have talent in";
-		mes "acting which hasn't been discovered yet. I thought, 'If I dress up, I should perform as the 'White Dryad...'^000000";
+		mes "^3355FF혹시 나에게 연기의 재능이 숨어^000000";
+		mes "있는지 않을까? 지금의 생활에서";
+		mes "좀 더 변화를 준다면, 혹시라도";
+		mes "내가 '백천녀'의 연기를 할 수도";
+		mes "있을지 모르겠다는 생각이 들었다...";
 		close;
 	}
 	else if (jap_tree == 3) {
-		mes "^3355FFUnlike other cherry trees,";
-		mes "this tree has a strong fragrance.";
-		mes "I just fell into a relaxed";
-		mes "mood. The fragrance eased";
-		mes "my burdens and I felt";
-		mes "very comfortable.^000000";
+		mes "^3355FF다른 벚나무들과 다르게 향긋한^000000";
+		mes "꽃향기가 진하게 나고 있었다";
+		mes "신비로운 분위기에 빠져있다보니";
+		mes "무언가 마음 속에사 무겁게 남아";
+		mes "있던 일들이 하나 둘 사라지며";
+		mes "편안한 기분이 되었다.";
 		next;
-		mes "^3355FFIt was just for a few moments";
-		mes "but I could forget the";
-		mes "burdens of life. I wish to";
-		mes "come back again and";
-		mes "sit under this tree...^000000";
+		mes "^3355FF잠시나마 평화로운 느낌속에서^000000";
+		mes "생활의 피곤함도 조금은 잊을 수";
+		mes "있었다. 언제든 다시 이 나무를";
+		mes "찾게 된다면, 기쁜마음으로";
+		mes "앉아 있을 수 있으면 좋을텐데...";
 		close;
 	}
 	else if (jap_tree == 4) {
-		mes "^3355FFThis strong fragrance";
-		mes "is making me dizzy. Not like";
-		mes "other cherry trees, this tree's";
-		mes "shimmering white petals";
-		mes "felt strange.^000000";
+		mes "^3355FF정신이 몽롱해질 정도로 진한^000000";
+		mes "꽃향기가 풍겨오고 있었다. 다른";
+		mes "벚나무와 틀리게 차가울  정도로";
+		mes "하얀 꽃잎들이, 이상하게 음산한";
+		mes "느낌을 주고 있었다.";
 		next;
-		mes "^3355FFIt feels as if my soul is";
-		mes "being drained if I stay here";
-		mes "longer. After a glimpse of";
-		mes "the cherry tree, I thought to";
-		mes "myself, 'I must get out of here quickly.'^000000";
+		mes "^3355FF오래동안 이런 곳에 머물다가는^000000";
+		mes "누군가에게 영혼까지 송두리채";
+		mes "뺏겨버릴 것만 같았다. 잠시동안";
+		mes "벚나무를 바라보니, 어서 다른";
+		mes "곳으로 가야만 하겠다는 생각이 들었다.";
 		close;
 	}
-	mes "^3355FFThere was a cherry tree";
-	mes "on the hill. It doesn't look";
-	mes "like the other trees.";
-	mes "This tree seems to have";
-	mes "a long history...^000000";
+	mes "^3355FF언덕 위에 단 한그루의 벚나무가^000000";
+	mes "서 있었다. 다른 나무들과 틀린";
+	mes "늒미이 드는 것으로 보아, 뭔가";
+	mes "사연이 가득한 나무인 것처럼";
+	mes "생각되었다.";
 	next;
-	mes "^3355FFAre there any people";
-	mes "who live here? I took";
-	mes "a look around and found";
-	mes "someone down the hill.";
-	mes "I better ask her about this tree.^000000";
+	mes "^3355FF누군가 근처에 있는 사람은 알고^000000";
+	mes "있지 않을까? 주위를 둘러보니";
+	mes "언덕 아래 누군가가 있었다.";
+	mes "이 나무에 대해서 한번 물어보는.";
+	mes "것이 좋을 것 같다.";
 	close;
 }
 

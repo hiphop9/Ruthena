@@ -1,211 +1,221 @@
 //===== rAthena Script =======================================
 //= Alberta Town
 //===== By: ==================================================
-//= DZeroX
-//===== Current Version: =====================================
-//= 1.6
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= Town-specific Alberta NPCs
-//===== Additional Comments: =================================
-//= 1.0 Converted from Aegis 10.4 [DZeroX]
-//= 1.1 Optimized, missing next, REMOVED .GATs! again [Lupus]
-//= 1.2 Implemented progression fixes provided by $ephiroth. [L0ne_W0lf]
-//= 1.2b More pregression clean up provided by Barron-Monster. [L0ne_W0lf]
-//= 1.3 Removed npc "Tourist#al" as it's a quest NPC. [L0ne_W0lf]
-//= 1.4 Removed "Fastidious Old Man" duplicate. [L0ne_W0lf]
-//= 1.5 Updated to match AEGIS script. [Kisuka]
-//= 1.6 Added Izlude RE coordinates. [Euphy]
-//= 1.7 Bug fixes and syntax. [Capuche]
+//한글화 스카이러브
 //============================================================
 
-alberta,97,51,0	script	Fabian	84,{
-	mes "[Fabian]";
-	mes "Man... When you travel all around the world, you'll hear of some crazy things.";
-	next;
-	mes "[Fabian]";
-	mes "Once, I heard that there are Cards which contain the power of monsters. If someone happens to get their hands on a card, they'll be able to use that monster's power.";
-	next;
-	mes "[Fabian]";
-	mes "I'm guessing it's some sort of fad or scam, where they make you collect all the cards or whatever. I mean, how can a card really hold the power of a monster?!";
-	next;
-	mes "[Fabian]";
-	mes "Seriously...";
+alberta,97,51,0	script	상인#Fabian	84,{
+	mes "[상인]";
+	mes "세상을 돌다보면 여러가지 소문들을";
+	mes "접하게 되지. 개중에는 이런 것도";
+	mes "있다오. 몬스터들의 힘을 마법으로";
+	mes "봉인해 놓은 카드라는 것이 있다고";
+	mes "말야.";
+	mes "그 카드를 이용하면 강력한 힘을";
+	mes "소요할 수도 있을 거라고... 훗 뭐 물론";
+	mes "이것또한 뜬소문에 불과하겠지만 말야.";
 	close;
 }
 
-alberta,53,39,0	script	Steiner	100,{
-	mes "[Steiner]";
-	mes "Oh...!";
-	mes "Welcome to Alberta,";
-	mes "young adventurer!";
-	next;
-	mes "[Steiner]";
-	mes "Pardon me if I seem distracted. I'm milling about, trying to make a plan. You see, I hear that there is a store in Geffen that sells armor that is resistant to magic.";
-	next;
-	mes "[Steiner]";
-	mes "If I buy a lot of them in bulk, and then resell them here for a higher price...";
+alberta,53,39,0	script	상인#Steiner	100,{
+	mes "[상인]";
+	mes "오 처음 보는 얼굴인데? 반갑네. 그런데";
+	mes "내가 지금 생각할 게 있으니 대화는";
+	mes "나중에 하자구.";
+	mes "마법의 도시 게펜에서 마법에 대한";
+	mes "저항력을 가지고 있는 신비한";
+	mes "방어구를 판다고 들었거든. 그걸";
+	mes "대량으로 유통시킬 수 있다면 부자가";
+	mes "될 수 있을텐데 말야.";
 	close;
 }
 
-alberta_in,20,183,0	script	Chad	1_M_03,{
-	mes "[Chad]";
-	mes "People say the legendary weapon Gungnir never misses its target. I wonder if it's possibly true...";
-	next;
-	mes "[Chad]";
-	mes "People also say that babies are assembled by the storks before delivery, girls dig guys who act like jerks, and that Santa Claus exists! But only in Lutie.";
-	next;
-	mes "[Chad]";
-	mes "I wonder...";
-	mes "If any of that";
-	mes "is possibly";
-	mes "true...";
+alberta_in,20,183,0	script	청년#Chad	1_M_03,{
+	mes "[상인]";
+	mes "전설속에 등장하는 궁그닐이라는";
+	mes "무기는 한번 목표로한 상대를 절대로";
+	mes "놓치는 법이 없다고 하는데 말야...";
+	mes "정말로 있다면... 재미있을거 같지?";
 	close;
 }
 
-alberta,131,139,2	script	Drunken Old Man	1_M_JOBGUIDER,{
-	mes "[Deagle]";
-	mes "^666666*Hiccup*^000000";
-	mes "Wh-what are you";
-	mes "staring at? Get lost!!";
+alberta,131,139,2	script	주정뱅이#Drunken Old Man	1_M_JOBGUIDER,{
+	mes "[주정뱅이]";
+	mes "딸꾹.... 응?.... 뭐..뭘보는거야?";
+	mes "저리가지못해!!";
 	next;
-	switch(select("Say nothing.","Leave him alone.")) {
+	switch(select("그냥 있는다.","자리를 비킨다.")) {
 	case 1:
-		mes "[Deagle]";
-		mes "Hahahaha ^666666*hiccup*^000000... You've got some nerve. I may look worthless now, but I used to be a sailor on the 'Going Mary.'";
+		mes "[주정뱅이]";
+		mes "웨헤헤헤 딸꾹...";
+		mes "배짱있는녀석이구만..";
+		mes "헤.. 내가 이래뵈도 말이쥐~ 딸꾹";
+		mes "예전엔 잘나가던 고잉메리호의";
+		mes "선원이였단말이지";
 		next;
-		switch(select("Never heard of it.","Really? No kidding!")) {
+		switch(select("그게 무슨 배인가요?","와!멋지군요!")) {
 		case 1:
-			mes "[Deagle]";
-			mes "Never heard of it?! Everybody knows th'notorious pirate ship 'Going Mary!' ^666666*Hiccup~*^000000";
+			mes "[주정뱅이]";
+			mes "엥? 모른다구?";
+			mes "때끼!그 잘나가던 해적이였던";
+			mes "고잉메리단을 모른단말이?! 딸꾹~";
 			next;
-			mes "[Deagle]";
-			mes "Ah~ The ol'days. If only... If only we hadn't run into that STORM...^666666*hiccup*^000000";
+			mes "[주정뱅이]";
+			mes "아~ 그립다.. 그때 그 태풍만";
+			mes "아니였어도 흑흑... 딸꾹";
+			mes "특히 울 선장님이 생각나는군..딸꾹";
+			mes "선장님이 휘두른칼에 살아남는 녀석은";
+			mes "없었는데 말이야";
 			next;
-			mes "[Deagle]";
-			mes "AH~ Captain. I miss our cap'n more than anything... No foe survived before cap'n's sword.";
+			mes "[주정뱅이]";
+			mes "울 선장님이 말이야아아아~! 딸꾹 칼을";
+			mes "한번 휘이~ 하구 휘두르면 말이야아~!";
+			mes "목표된놈 뿐만이아니라 주변놈들까지";
+			mes "불덩이에 휩쓸려서 놀아났었지.우리";
+			mes "선장님의 솜씨도 솜씨지만 그칼에";
+			mes "신비한 힘이 있었던거 같아.";
+			next;
+			mes "[주정뱅이]";
+			mes "아~~ 흑흑.. 그립구나 모두들 보구싶다";
+			mes "우울해졌어 그만 저리 비켜줄래?";
 			close;
 		case 2:
-			mes "[Deagle]";
-			mes "That's right! NOBODY meshes with the crew of the 'Going Mary!' And nobody can beat out cap'n in a sword fight!";
+			mes "[주정뱅이]";
+			mes "울 선장님이 말이야아아아~! 딸꾹 칼을";
+			mes "한번 휘이~ 하구 휘두르면 말이야아~!";
+			mes "목표된놈 뿐만이아니라 주변놈들까지";
+			mes "불덩이에 휩쓸려서 놀아났었지.우리";
+			mes "선장님의 솜씨도 솜씨지만 그칼에";
+			mes "신비한 힘이 있었던거 같아.";
 			next;
-			mes "[Deagle]";
-			mes "CAPTAIN~!!! ^666666*HICCUP~*^000000 He would swing his sword like this, then... THEN!!";
-			next;
-			mes "[Deagle]";
-			mes "The bastard the captain was fighting, and anyone of his friends near him, were surrounded in flame!";
-			next;
-			mes "[Deagle]";
-			mes "Man, that sword must have had some sort of mysterious power, or the captain was just that good...!";
-			next;
-			mes "[Deagle]";
-			mes "Phew~~ ^666666*Sob* *Sob...*^000000 God, I miss everyone! Now I'm depressed! Please, go away now.";
+			mes "[주정뱅이]";
+			mes "아~~ 흑흑.. 그립구나 모두들 보구싶다";
+			mes "우울해졌어 그만 저리 비켜줄래?";
 			close;
 		}
 	case 2:
-		mes "[Deagle]";
-		mes "That's right!";
-		mes "Go AWAY~";
+		mes "[주정뱅이]";
+		mes "그래! 빨랑 꺼져러리라구!~";
 		close;
 	}
 }
 
-alberta,58,80,2	script	Shakir	99,{
-	mes "[Shakir]";
+alberta,58,80,2	script	상인아저씨#Shakir	99,{
+	mes "[상인아저씨]";
 	if (rand(2)) {
-		mes "We Merchants have our own negotiating skill when we sell goods. This skill can get us more money than when other people sell goods.";
+		mes "우리상인들은 특유의 흥정기술로";
+		mes "물건들을 다른사람보다 비싸게";
+		mes "팔아먹을수 있다네.";
+		mes "다른사람이 제발 쫌더 비싸게";
+		mes "쳐주세요!~~~ 하고 흥정할때.";
 		next;
-		mes "[Shakir]";
-		mes "It's more than just yelling 'You'll have to give more money please!' You need to have charisma, and master rhetoric!";
-		next;
-		mes "[Shakir]";
-		mes "We can get up to 24 % more zeny with this incredible skill. But remember to train hard to acquire it!!";
+		mes "[상인아저씨]";
+		mes "우린 무려 24%나 더 비 싸게 상점에 팔";
+		mes "수 있지! 하지만 그러기위한 수련을";
+		mes "게을리하면 안돼!";
 	} else {
-		mes "We Merchants can";
-		mes "open roadside stands";
-		mes "to do business.";
+		mes "우리상인들은 노점을 열어 장사를";
+		mes "할수있지 디스카운트 기술로 상점에서";
+		mes "헐값에 필요한 물품들을 산 후에";
+		mes "카트를 빌려서 카트에다 잔뜩싣고서";
+		mes "파는거야.";
 		next;
-		mes "[Shakir]";
-		mes "With the Discount skill, we can buy goods really cheap from the stores in towns and load them into the cart we rent.";
-		next;
-		mes "[Shakir]";
-		mes "Then afterwards, we can travel anywhere, and sells our goods to make a profit!";
-		next;
-		mes "[Shakir]";
-		mes "This way, business is more convenient and safe. Don't fall asleep, although it's too easy to do that.";
+		mes "[상인아저씨]";
+		mes "일일이 거래하는것보다 훨씬 간편하고";
+		mes "실수할일도 없지. 너무편하다고";
+		mes "장사하면서 졸거나 하지나 말라구.";
 	}
 	close;
 }
 
-alberta,62,156,2	script	Sonya	102,{
-	mes "[Sonya]";
+alberta,62,156,2	script	피나#Sonya	102,{
+	mes "[피나]";
 	switch(rand(3)){
 	case 0:
-		mes "Hey, you know, this one time I was walking through the forest and I saw this little green stem moving around.";
+		mes "어느날 길을 걷다가 숲속에 이쁘게";
+		mes "뾰족솟은 연두색 풀을 봤어요.";
+		mes "너무 이쁘길래 만져보려구 손을";
+		mes "대려는데 그 풀이 갑자기 휙~ 하더니";
+		mes "제 손을 찰싹 때리지 뭐에요.";
 		next;
-		mes "[Sonya]";
-		mes "I went to see what it was and when I went to touch it. The stem actually slapped my hand!";
-		next;
-		mes "[Sonya]";
-		mes "It startled me, so I jumped back a bit and then I realized it wasn't a stem, but a very small animal.";
-		next;
-		mes "[Sonya]";
-		mes "I was lucky I didn't upset it. Even the smallest animal can be dangerous if angered.";
+		mes "[피나]";
+		mes "너무 너무 놀래서 뒤로 물러서서 보니";
+		mes "풀이 아니더라구요. 아주 작은 귀여운";
+		mes "동물이였어요.";
+		mes "하지만 저처럼 실수로라도 놀래키지";
+		mes "마세요. 원래는 온순해도  화나니까";
+		mes "무섭더라구요.";
 		close;
 	case 1:
-		mes "You know those lazy looking bears that live in the forest on the way to Payon?";
+		mes "알베르타와 연결되어있는 숲에서";
+		mes "페이욘방향으로 가는 숲에는 참";
+		mes "멍청하게 생긴 곰들이 살고 있죠.";
+		mes "윙윙 파리가지고 장난이나치고요.";
 		next;
-		mes "[Sonya]";
-		mes "Just for fun, I threw a rock at it and all of sudden it rushed at me! I was sooooo scared, I started to run away, then BAM!!!";
-		next;
-		mes "[Sonya]";
-		mes "It ran into a low tree branch and knocked itself out! I swear, I'll never provoke an animal for fun again!";
+		mes "[피나]";
+		mes "장난이나 쳐볼려고 나뭇가지를 툭";
+		mes "던졌는데 갑자기 달려들어서 얼마나";
+		mes "놀랐는지 제가 재빠르게 휙 하고";
+		mes "도망쳤길래 망정이지 옆에있는 나무가";
+		mes "우지끈 할정도로 쎈 힘이였어요.";
+		mes "어떤 동물이든 섣불리 건드리면";
+		mes "안되겠구나라고 생각했지요.";
 		close;
 	case 2:
-		mes "I once saw a pack of wolves take on one of those huge, lazy bears!";
-		next;
-		mes "[Sonya]";
-		mes "Wolves are much more cooperative than they may seem. If one of them is attacked, then any nearby wolves will run to help.";
-		next;
-		mes "[Sonya]";
-		mes "I'd think twice if you ever want to fight one when others of its kind are around. Be careful: don't get ganged up on!";
+		mes "아시나요? 늑대들은 보기보다 협동심이";
+		mes "강하답니다.동료가 위험에 빠지면 당장";
+		mes "도와주려 달려들죠.";
+		mes "의리있는 동물이니 건드릴땐";
+		mes "조심하는게 좋아요.";
 		close;
 	}
 }
 
-alberta,93,174,2	script	Grandmother Alma	103,{
-	mes "[Grandmother Alma]";
-	mes "Some time ago,";
-	mes "a derelict ship";
-	mes "drifted into";
-	mes "Alberta harbour.";
+alberta,93,174,2	script	할머니#Grandmother Alma	103,{
+	mes "[할머니]";
+	mes "얼마전에 왠 다 부서진배가 알베르타";
+	mes "어귀에 흘러들어왔다우.";
+	mes "혹시 생존자라도 남아있나 해서 마을";
+	mes "청년들이 몇명 배안으로 들어갔다가";
+	mes "아주 기겁을 하고 나왔었지 안에";
+	mes "생존자는  고사하고 시체들이 일어나서";
+	mes "걸어다닌다고 하더라구.";
 	next;
-	mes "[Grandmother Alma]";
-	mes "Hoping to save any survivors, some of the townspeople ventured into the ship. However, they all ran out terrified, saying that corpses were walking around inside the ship.";
+	mes "[할머니]";
+	mes "그리고 뭔지 모를 바다생물들이";
+	mes "우글우글 나오는데 차마 입구에서 더";
+	mes "들어가지 못하고 돌아왔다고";
+	mes "하더구만....";
 	next;
-	mes "[Grandmother Alma]";
-	mes "The ship was also packed with dangerous marine organisms, and they couldn't get inside, even if they wanted to.";
+	mes "[할머니]";
+	mes "그런 사정으로 보기 좋지않아도 어쩔수";
+	mes "없이 저렇게 다 부서진배를 섬에";
+	mes "놔두고 가라앉기만을 기다리고";
+	mes "있었는데 그 소문을 어디서 들었는지";
+	mes "존다기획이라는곳에서 시에 큰돈을";
+	mes "내고 배처리를 맡겨달라고 하더이다.";
 	next;
-	mes "[Grandmother Alma]";
-	mes "We couldn't do anything about that ominous looking ship, and just left it as it was. Nowadays, exploration teams try to enter that ship and wipe out its monsters.";
-	next;
-	mes "[Grandmother Alma]";
-	mes "So it might be a good experience for a young person like yourself to be a recruit. But, it's still not worth risking your life if you're not strong enough.";
+	mes "[할머니]";
+	mes "그러더니 글쎄 그 난파선에 젊은이들을";
+	mes "끌어들여 몬스터 처리를 하더구만 뭐..";
+	mes "젊은이들에겐 자신을";
+	mes "시험해보고싶지않냐라고 꼬득이는거";
+	mes "같은데.. 젊은나이에 그런 경험도";
+	mes "좋겠지....";
+	mes "하지만 위험하지 않으련지 원.....";
 	close;
 }
 
-alberta,189,151,5	script	Fisk	4W_SAILOR,{
-	mes "[Fisk]";
-	mes "Ahoy mate,";
-	mes "where'd ya";
-	mes "wanna go?";
+alberta,189,151,5	script	선원#Fisk	4W_SAILOR,{
+	mes "[선원]";
+	mes "어디로 모실까요?";
 	next;
-	switch(select("Sunken Ship -> 250 zeny.","Izlude Marina -> 500 zeny.","Never mind.")) {
+	switch(select("난파선 -> 250제니.","이즈루드 항구 -> 500제니.","그만둔다.")) {
 	case 1:
 		if (Zeny < 250) {
-			mes "[Fisk]";
-			mes "Hey now, don't try to cheat me! I said 250 zeny!";
+			mes "[선원]";
+			mes "흠! 안됩니다. 절대 250 제니";
+			mes "받겠습니다!";
 			close;
 		}
 		Zeny = Zeny - 250;
@@ -213,8 +223,9 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 		end;
 	case 2:
 		if (Zeny < 500) {
-			mes "[Fisk]";
-			mes "Ain't no way yer getting there without the 500 zeny first!";
+			mes "[선원]";
+			mes "흠! 안됩니다. 절대로 500 제니";
+			mes "받겠습니다!";
 			close;
 		}
 		Zeny = Zeny - 500;
@@ -224,185 +235,202 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 			warp "izlude",176,182;
 		end;
 	case 3:
-		mes "[Fisk]";
-		mes "Alright...";
-		mes "Landlubber.";
+		mes "[선원]";
+		mes "좋으실대로....";
 		close;
 	}
 }
 
-alb2trea,39,50,6	script	Fisk#a2t	4W_SAILOR,{
-	mes "[Fisk]";
-	mes "So you wanna head back to the mainland in Alberta, eh?";
-	next;
-	if (select("Yes please.","I changed my mind.") == 1)
+alb2trea,39,50,6	script	선원#Fisk#a2t	4W_SAILOR,{
+	mes "[선원]";
+	mes "돌아가시겠습니까?";
+	if (select("알베르타로 돌아간다.", "그만둔다.") == 1)
 		warp "alberta",192,169;
 	close;
 }
 
-alberta,195,151,2	script	Paul	4_M_04,{
-	mes "[Paul]";
-	mes "Good day~";
-	mes "Would you like";
-	mes "to join the";
-	mes "exploration team";
-	mes "of the Sunken Ship?";
+alberta,195,151,2	script	포치#Paul	4_M_04,{
+	mes "[포치]";
+	mes "안녕하십니까 저희 존다기획에서";
+	mes "마련한 무료해진 젊은이들을 위한";
+	mes "던전탐헌 환상적인 쵸야쵸야난파선에";
+	mes "입장하시겠습니까?";
+	mes "아! 한가지 미리 알아두셔야할점은";
+	mes "어지간한  수준이 아니시면 함부로";
+	mes "도전하시지 말라는 거지요~ 에헴.";
 	next;
-	mes "[Paul]";
-	mes "Oh! Before you join, I must warn you. If you're not that strong, you may not want to go.";
+	mes "[포치]";
+	mes "어때요? 준비는 되셨는지요. 자 그럼";
+	mes "선택해주세요.";
+	mes "참!입장료는 200z 입니다.";
 	next;
-	mes "[Paul]";
-	mes "So, want";
-	mes "to sign up?";
-	mes "The admission";
-	mes "fee is only";
-	mes "200 Zeny.";
-	next;
-	switch(select("Sign me up!","Uh, no thanks.")) {
+	switch(select("입장","포기한다")) {
 	case 1:
 		if (Zeny < 200) {
-			mes "[Paul]";
-			mes "It seems you don't have the money, my friend. But please come back when you're able to pay.";
+			mes "[포치]";
+			mes "손님 돈이 모자르시네요.다음번에";
+			mes "여유가되시면 들러주세요.";
 			close;
 		}
 		Zeny = Zeny - 200;
 		warp "alb2trea",62,69;
 		close;
 	case 2:
-		mes "[Paul]";
-		mes "Alright, well...";
-		mes "I'll be around";
-		mes "if you change";
-		mes "your mind.";
+		mes "[포치]";
+		mes "다음에 꼭 들러주세요.";
 		close;
 	}
 }
 
-alberta,190,173,4	script	Phelix	4_M_03,{
-	mes "[Phelix]";
+alberta,190,173,4	script	펠릭스#Phelix	4_M_03,{
+	mes "[펠릭스]";
 	if ((MaxWeight - Weight) < 10000) {
-		mes "Wait a moment!!";
-		mes "You have brought too many things!";
-		mes "You cannot accept any more items!";
-		mes "Please reduce the amount of items,";
-		mes "then come see me again.";
+		mes "잠깐만요!!";
+		mes "짐을 너무 많이 가져왔네요!";
+		mes "더 이상 아이템을 받을 수 없습니다!";
+		mes "아이템 수량을 줄여주세요,";
+		mes "그럼 또 보러오세요.";
 		close;
 	}
 	if (@event_zelopy == 0) {
-		mes "The hell are you doing here?";
-		mes "There is nothing you can get for free on this ship, if you want somethin', work for it!!";
+		mes "이 베엔 왠일이야?";
+		mes "아무리 어슬렁 거려봤자 이배에";
+		mes "얻어먹을것같은거 없다고. 뭔가";
+		mes "얻고싶으면 일을해 일을!!";
 		next;
-		mes "[Phelix]";
-		mes "Hmm, so why don't you bring me 10 Jellopies and I will give 1 potion. How's that sound?";
-		mes "Or if that's too hard for your pansy ass, 3 Jellopies for 1 Carrot.";
+		mes "[펠릭스]";
+		mes "흠 하지만 자네가 만약 젤로피 10개를";
+		mes "주워온다면 내 포션하개로";
+		mes "바꿔줄수있지.";
+		mes "뭐 그게 어렵다면 젤로피3개를";
+		mes "주워오면 고구마하나를 줄수도있고.";
 		next;
-		mes "[Phelix]";
-		mes "If you're interested in my offer, get me the stuff I mentioned.";
+		mes "[펠릭스]";
+		mes "관심있다면 필요한것들 챙겨서 다시";
+		mes "들르게나.";
 		@event_zelopy = 1;
 		close;
 	}
-	mes "Hmm.. you want to exchange Jellopies for Red Potions or some Carrots eh? Well.. which one?";
+	mes "흠..젤로피들을 빨깐포션 이나";
+	mes "고구마로 교환하고 싶나? 자..";
+	mes "어떤것으로 바꿔줄까?";
 	next;
-	switch(select("Red Potions please.","Carrots please.")) {
+	switch(select("빨간포션이요.","고구마요.")) {
 	case 1:
-		mes "[Phelix]";
-		mes "Alright...";
-		mes "Let's see";
-		mes "what'cha got...";
+		mes "[펠릭스]";
+		mes "그럼 가져온것들을 한번 보기로 하지..";
 		next;
-		mes "[Phelix]";
+		mes "[펠릭스]";
 		if (countitem(909) < 10) {
-			mes "Hey! Weren't you listening? I said 10 Jellopies for 1 Red Potion.. are ya deaf?";
+			mes "이런! 모자르는군 젤로피 10개당";
+			mes "빨간포션 하나라고.. 알겠나?";
 			close;
 		} else {
 			.@max = countitem(909)/10;
-			mes "Hmm, not bad...";
-			mes "How many potions";
-			mes "do you want to get?";
+			mes "호오...이정도면 빨깐포션으로";
+			mes "교환해줄수 있겠군.";
+			mes "포션 몇개로 바꾸길 원해?";
 			next;
-			switch(select("As many as I can, please.","I want this many.","Never mind, I like my jellopy.")) {
+			switch(select("있는대로 모두 바꿔주세요","갯수를 정하도록하죠","생각해보니 그만 둘래요")) {
 			case 1:
 				delitem 909,.@max*10;// Jellopy
 				getitem 501,.@max;// Red_Potion
 				break;
 			case 2:
-				mes "[Phelix]";
-				mes "I'm not giving you more than 100 at a time so don't bother, OK? If you don't want any, just say '0'.";
-				mes "Right now, the most you can get is " + .@max + " but remember, 100 at most, you want to break my back?.";
+				mes "[펠릭스]";
+				mes "100개 이하로 적어봐. 바꾸고 싶지";
+				mes "않으면 '0'이라고 적고.";
+				mes "자네가 가지고 있는 재료로는 최대 "+ .@max +"개";
+				mes "까지 바꿔줄수있겠군.";
+				next;
+				L_Carrot:
 				input .@amount;
 				next;
-				mes "[Phelix]";
+				mes "[펠릭스]";
 				if (.@amount <= 0) {
-					mes "Much obliged, come again anytime.";
+					mes "그럼... 다음에 또 생각이 들거랑";
+					mes "다시오게.";
 					close;
 				}
 				if (.@amount > 100) {
-					mes "Hey, what'd I say? 100 at a time at most, you're trying to kill me aren't you!";
+					mes "100 개 이상은 무리야. 다시 정하게나.";
+					goto L_Carrot;
 					close;
 				}
 				if (countitem(909) < .@amount*10) {
-					mes "Hmm, it looks like you don't have enough. Go get more Jellopies if you want anything else from me.";
+					mes "이런 젤로피가 모자르는걸.";
+					mes "젤로피를 더 모아서 다시 오게나";
 					close;
 				}
 				delitem 909,.@amount*10;// Jellopy
 				getitem 501,.@amount;// Red_Potion
 				break;
 			case 3:
-				mes "[Phelix]";
-				mes "No problem,";
-				mes "see you next time.";
+				mes "[펠릭스]";
+				mes "그럼 다음에 또 오게나.";
 				close;
 			}
-			mes "[Phelix]";
-			mes "There you go! As I promised. Don't go suckin' them all down at once.";
+			mes "[펠릭스]";
+			mes "옛다~! 약속한 포션이다. 유용하게";
+			mes "쓰도록해.";
 			close;
 		}
 	case 2:
-		mes "[Phelix]";
-		mes "Alright, let's see what ya got...";
+		mes "[펠릭스]";
+		mes "좋아, 뭘 얻었는지 볼까...";
 		next;
-		mes "[Phelix]";
+		mes "[펠릭스]";
 		if (countitem(909) < 3) {
-			mes "Hmm, look pansy ass, I said 3 Jellopies for 1 Carrot.. got it?";
+			mes "이런! 모자르는군 젤로피 3개당 고구마";
+			mes "하나라고.. 알겠나?";
 			close;
 		}
 		.@max = countitem(909)/3;
-		mes "Not too bad pansy...";
-		mes "How many do you want?";
+		mes "오호.. 이정도면 고구마로 교환해줄수";
+		mes "있겠군.";
+		mes "고구마 몇개로 바꾸길 원해?";
 		next;
-		switch(select("As many as I can get, please","I want this many.","Never mind, I like my jellopy.")) {
+		switch(select("있는대로 모두 바꿔주세요","갯수를 정하도록하죠","생각해보니 그만 둘래요")) {
 		case 1:
 			delitem 909,.@max*3;// Jellopy
 			getitem 515,.@max;// Carrot
 			break;
 		case 2:
-			mes "[Phelix]";
-			mes "Right I'm not giving you more than 100 at a time so don't bother, okay? If you don't want any, just say '0'.";
+			mes "[펠릭스]";
+			mes "100개 이하로 적어봐. 바꾸고 싶지";
+			mes "않으면 '0'이라고 적고.";
+			mes "자네가 가지고 있는 재료로는 최대 "+ .@max +"개";
+			mes "까지 바꿔줄수있겠군.";
+			next;
+			L_Carrot1:
 			input .@amount;
 			next;
-			mes "[Phelix]";
+			mes "[펠릭스]";
 			if (.@amount == 0) {
-				mes "Alright then, see you next time.";
+				mes "그럼... 다음에 또 생각이 들거랑";
+				mes "다시오게.";
 				close;
 			}
 			if (.@amount > 100) {
-				mes "Hey pansy ass, I said 100 at most, no more than that! I'm not going to break my back for the likes of you!";
+				mes "100 개 이상은 무리야. 다시 정하게나.";
+				goto L_Carrot1;
 				close;
 			}
 			if (countitem(909) < .@amount*3) {
-				mes "Seems you don't have enough. Go get some more if you want anything else.";
+				mes "이런 젤로피가 모자르는걸.";
+				mes "젤로피를 더 모아서 다시 오게나";
 				close;
 			}
 			delitem 909,.@amount*3;// Jellopy
 			getitem 515,.@amount;// Carrot
 			break;
 		case 3:
-			mes "[Phelix]";
-			mes "Catch'ya later.";
+			mes "[펠릭스]";
+			mes "그럼 다음에 또 오게나.";
 			close;
 		}
-		mes "[Phelix]";
-		mes "There you go~! As I promised. Try not to stuff yer face.";
+		mes "옛다~! 약속한 고구마다. 유용하게";
+		mes "쓰도록해.";
 		close;
 	}
 }

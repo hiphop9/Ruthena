@@ -20,50 +20,90 @@
 //= 2.0 Moved some NPC to Pre-re path. [Capuche]
 //============================================================
 
-alberta,111,59,5	script	Bulletin Board#1	837,{
-	mes "[Alberta: The Port City]";
-	mes "Welcome to Alberta, the Port City.";
+alberta,111,59,5	script	팻말#1	837,{
+	mes "[상업도시 알베르타]";
+	mes "상업도시 알베르타에 오신 것을";
+	mes "환영합니다. 해상교역을 통해";
+	mes "성장한 도시답게 밝은 분위기와";
+	mes "자유로운 상권이 형성되어";
+	mes "있습니다. 현재는 해외의 여러";
+	mes "나라들까지 교역범위를 넓히고";
+	mes "있습니다.";
 	next;
-	mes "[Alberta: The Port City]";
-	mes "In Alberta, you can find the Merchant guild where adventurers can change their job to merchant";
+	mes "[상업도시 알베르타]";
+	mes "주요 건물로는 상인으로 전직이";
+	mes "가능한 상인길드가 존재하고 있으며,";
+	mes "해외의 여러 나라들로 갈 수 있는";
+	mes "항로가 부두에 존재하고 있습니다.";
 	next;
-	mes "[Alberta: The Port City]";
-	mes "As a city that provides dependable sea travel, Alberta has provided the means for the foreign commerce that has brought prosperity to the Rune-Midgarts Kingdom.";
+	mes "[상업도시 알베르타]";
+	mes "뱃사람들 사이에서 '거북이섬'";
+	mes "이라는 곳에 대한 소문이 존재하니,";
+	mes "한번쯤 진실을 찾아 보시는 것도";
+	mes "좋겠군요. 그리고 침몰선도 근처에서";
+	mes "하나 발견했다니 거기에 흥미있으신";
+	mes "분이라면 한번쯤 찾아가보시길";
+	mes "바랍니다.";
 	next;
-	mes "[Alberta: The Port City]";
-	mes "On the docks, you may find representatives from foreign lands that will guide tourists to their countries.";
-	next;
-	mes "[Alberta: The Port City]";
-	mes "Among seafarers, there is a rumor of a place known as ^338C60Turtle Island^000000. Intrepid adventurers may seek to investigate this rumor and learn the truth for themselves";
-	next;
-	mes "[Alberta: The Port City]";
-	mes "There is also a sunken ship that has been discovered near Alberta, and it has become a popular area for adventurers to explore";
-	next;
-	mes "[Alberta: The Port City]";
-	mes "From Alberta, ^1F3A11Payon^000000 is located to the Northwest. You can board passenger ships at the dock to travel to ^5E5C69Izlude^000000.";
-	mes "Enjoy your travels."; 
+	mes "[상업도시 알베르타]";
+	mes "북서쪽으로 페이욘, 항구를 통해";
+	mes "침몰선, 이즈루드와 기타 여러 나라로";
+	mes "갈 수 있습니다.";
 	close;
 }
 
-geffen,124,65,5	script	Bulletin Board#2	837,{
-	mes "[Geffen: The City of Magic]";
-	mes "Welcome to Geffen, the City of Magic. Geffen is well known for its various legends related to magic.";
+geffen,124,65,5	script	팻말#2	837,{
+	mes "[마법도시 게펜]";
+	mes "마법도시게펜에 오신 것을";
+	mes "환영합니다. 이 곳 게펜은 여러가지";
+	mes "마법에 관련된 전설로 유명한";
+	mes "곳입니다.";
 	next;
-	mes "[Geffen: The City of Magic]";
-	mes "Points of interest in the city include the Forge, where people can change their jobs to Blacksmith, the Magic Academy for aspiring mages, and the Geffen Tower for the Wizard job change.";
+	mes "[마법도시 게펜]";
+	mes "주요 건물로는 각종 대장용품을";
+	mes "살 수 있는 대장간, 마법사의 전직이";
+	mes "가능한 마법학교, 위저드의 전직을";
+	mes "할 수 있는 게펜타워가 있습니다.";
 	next;
-	mes "[Geffen: The City of Magic]";
-	mes "Underneath the Geffen Tower lies a dungeon in which dreadful monsters are rumored to appear.";
+	mes "[마법도시 게펜]";
+	mes "게펜타워 지하에는 상당히 강한";
+	mes "적들이 나온다는 게펜던전이 있으니";
+	mes "주의하세요. 그리고 엘프들의 비보가";
+	mes "잠들어 있다는 또다른 마법도시";
+	mes "게페니아가 있다는 전설이 전해지고";
+	mes "있습니다.";
 	next;
-	mes "[Geffen: The City of Magic]";
-	mes "It is said that the lost city of Gefenia, a place of elven lore and legend, is hidden within the depths of this dungeon.";
-	next;
-	mes "[Geffen: The City of Magic]";
-	mes "From Geffen, the ^828E28Orc Village^000000 is located to the South, ^4C6055Glast Heim^000000 to the West, ^6D6FE0Prontera^000000 to the far East, and ^744B2DMt. Mjolnir^000000 to the North. Enjoy your stay here in Geffen.";
+	mes "[마법도시 게펜]";
+	mes "남쪽으로 가면 오크 마을, 서쪽으로는";
+	mes "글래시트 헤임, 동쪽으로는 프론테라,";
+	mes "북쪽으로는 묘르닐 산맥이 나옵니다.";
 	close;
 }
 
-izlu2dun,104,92,5	script	Bulletin Board#4	837,{
+izlude,45,101,5	script	팻말#3	837,{
+	mes "[위성도시 이즈루드]";
+	mes "위성도시 이즈루드에 오신 것을";
+	mes "환영합니다. 이 곳 이즈루드는 룬";
+	mes "미드가츠 수도 프론테라의 여러가지";
+	mes "역할을 분담하고 있습니다.";
+	next;
+	mes "[위성도시 이즈루드]";
+	mes "주요 건물로는 모험가 육성을 지원하는";
+	mes "크리투라 학원을 중심으로,";
+	mes "검사로 전직이 가능한 검사 길드,";
+	mes "아레나, OX퀴즈 대회장이 있습니다. 그";
+	mes "외에도";
+	mes "항구를 통해서 알베르타와 바이아란";
+	mes "섬으로 이동할 수 있습니다.";
+	next;
+	mes "[위성도시 이즈루드]";
+	mes "서북쪽으로 가시면 프론테라가,";
+	mes "남쪽으로 가시면 페이욘에 가실 수";
+	mes "있습니다.";
+	close;
+}
+
+/*izlu2dun,104,92,5	script	팻말#4	837,{
 	mes "[Byalan Island]";
 	mes "^6B1312Caution!^000000";
 	mes "The Izlude dungeon is comprised of 5 levels. The first few levels are suited for newer adventurers.";
@@ -75,316 +115,329 @@ izlu2dun,104,92,5	script	Bulletin Board#4	837,{
 	mes "With a few exceptions, most of the monsters in this dungeon are of the Water attribute. Therefore, a Wind attribute weapon will help you greatly";
 	close;
 }
+*/
 
-payon,178,108,5	script	Bulletin Board#06	837,{
-	mes "[Payon: The Mountain City]";
-	mes "Welcome to Payon, the mountain city. Payon has recently been renovated, so we hope you enjoy the clean, nice streets and buildings.";
+payon,178,108,5	script	팻말#06	837,{
+	mes "[산악도시 페이욘]";
+	mes "산악도시 페이욘에 오신 것을";
+	mes "환영합니다. 이 곳 페이욘은";
+	mes "궁수들의 마을로 유명하며 산악지형";
+	mes "답게 사냥꾼들의 출신으로 인해";
+	mes "활을 만들고 다루는 기술이 발달해";
+	mes "있습니다.";
 	next;
-	mes "[Payon: The Mountain City]";
-	mes "Payon is famous for being a city of archery. For a long time, its citizens have made their living by hunting with bows and arrows. Bow crafting and training have also been developed here in Payon";
+	mes "[산악도시 페이욘]";
+	mes "주요 건물로는 중앙궁이 있으며";
+	mes "궁수로 전직가능한 궁수마을이 바로";
+	mes "오른쪽에 있습니다. 페이욘은 여러";
+	mes "도시 중 유일하게 대대적인 공사를";
+	mes "통해 모습이 변경된 마을이기도 합니다.";
 	next;
-	mes "[Payon: The Mountain City]";
-	mes "Payon has various armor and weapons, especially for the Archer class. If you wish to become an Archer, it would be best to become familiar with this city.";
+	mes "[산악도시 페이욘]";
+	mes "궁수마을 근처에는 페이욘 던전이";
+	mes "있으니 주의해 주시길 바랍니다.";
+	mes "그리고 페이욘은 궁수들의 고향인";
+	mes "만큼 페이욘 특산품인 궁수용 무기,";
+	mes "방어구등이 있습니다. 궁수가";
+	mes "되고자 하시는 분에게 많은 도움이";
+	mes "되길 바랍니다.";
 	next;
-	mes "[Payon: The Mountain City]";
-	mes "Payon Palace is located in the center of the city. The Archer Village is located in the Northern part of Payon. There, people can change their jobs to Archer.";
-	next;
-	mes "[Payon: The Mountain City]";
-	mes "Near the Archer Village, you can find the ^2F0400Payon Cave^000000 where Undead monsters reside.";
-	next;
-	mes "[Payon: The Mountain City]";
-	mes "From Payon, ^123972Alberta^000000 is located to the Southeast, and ^866C4BMorocc^000000 is to the West. ^5E5C69Izlude^000000 and ^6D6FE0Prontera^000000 are North of Payon.";
-	mes "Enjoy your travels."; 
+	mes "[산악도시 페이욘]";
+	mes "남동쪽에는 알베르타, 서쪽에는";
+	mes "모로크, 북쪽으로는 프론테라,";
+	mes "이즈루드에 갈 수 있습니다.";
 	close;
 }
 
-pay_arche,79,31,5	script	Bulletin Board#07	837,{
-	mes "[Archer Village]"; 
-	mes "Welcome to the Payon Archer Village where Novices can change their jobs to Archer.";
+pay_arche,79,31,5	script	팻말#07	837,{
+	mes "[페이욘 궁수마을]"; 
+	mes "페이욘 궁수마을에 오신 것을";
+	mes "환영합니다. 궁수마을에서는 궁수";
+	mes "적직을 할 수 있으며, 활, 타이즈";
+	mes "등의 궁수용 물품을 판매하고 있습니다.";
 	next;
-	mes "[Archer Village]";
-	mes "The Archer Village provides Bows and Tights that are available for purchase. These are necessities for new Archers and Hunters.";
-	next;
-	mes "[Archer Village]";
-	mes "If you wish to become an Archer, it is suggested to become familiar with this village. For aspiring Hunters, the Hunter Guild is located in a field that is East of Payon.";
+	mes "[페이욘 궁수마을]";
+	mes "궁수가 되기를 꿈꾸는 분이라면";
+	mes "한번쯤 들러보시길 바랍니다.아울러";
+	mes "페이욘 마을 오른쪽으로 가시다보면";
+	mes "헌터길드가 있다는 소문이 있더군요.";
 	close;
 }
 
-prontera,148,49,5	script	Bulletin Board#09	837,{
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "Welcome to Prontera, the capital city of Rune-Midgard.";
+prontera,148,49,5	script	팻말#09	837,{
+	mes "[룬 미드가츠 왕국 수도 프론테라]";
+	mes "룬 미드가츠 왕국의 수도";
+	mes "프론테라에 오신 것을 환영합니다.";
+	mes "이 곳 프론테라는 대륙의 중앙에";
+	mes "위치하고 있어 사람들의 왕래가";
+	mes "많은 상업과 교역의 도시로";
+	mes "유명합니다.";
 	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "Prontera is located in the center of the Rune-Midgard continent and is very well-known as a city of flourishing commerce.";
+	mes "[룬 미드가츠 왕국 수도 프론테라]";
+	mes "주요 건물로는 크루세이더 전직이";
+	mes "가능한 프론테라 성과, 복사,";
+	mes "프리스트 전직이 가능하며 결혼식도";
+	mes "거행하는 프론테라 대성당, 기사단";
+	mes "등이 있습니다.";
 	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "In this city, you can fint the Sanctuary, where people can change their jobs to Acolyte and Priest.";
+	mes "[룬 미드가츠 왕국 수도 프론테라]";
+	mes "그 외에도 많은 사람들과 상점들이";
+	mes "있으니 잘 둘러보기길 바랍니다.";
 	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "You can also find the Castle, where people can change their jobs to Crusader.";
+	mes "[룬 미드가츠 왕국 수도 프론테라]";
+	mes "그리고 중앙 분수대 5시 방향에는";
+	mes "매우 유명한 대장장이 홀그렌이";
+	mes "있으니, 자신의 장비를 손보고";
+	mes "싶으신 분은 한번쯤 들러보시길";
+	mes "바랍니다. 단, '으허허허허헉!!'";
+	mes "이라는 소리를 듣지 않게 장비를 손";
+	mes "볼때는 잘 고려해주시길 바랍니다.";
 	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "Please feel free to explore the streets of Prontera, as there are various tourist attractions within the city.";
-	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "When you need to upgrade your weapons and armors, please visit the building in the 5 o'clock direction from the fountain in the center of Prontera.";
-	next;
-	mes "[Prontera: Capital of the]";
-	mes "[Rune-Midgarts Kingdom]";
-	mes "From Prontera, ^5E5C69Izlude^000000 is located to the Southeast, ^1F3A11Payon^000000 to the far South, ^683C1FGeffen^000000 to the far West and ^2D3832Al De Baran^000000 to the far North.";
-	mes "Enjoy your time in Prontera.";
+	mes "[룬 미드가츠 왕국 수도 프론테라]";
+	mes "남동쪽에는 이즈루드, 남쪽으로 주욱";
+	mes "내려가시면 페이욘, 서쪽으로는 게펜,";
+	mes "북쪽으로 가시면 알데바란에 도착하실";
+	mes "수 있습니다.";
 	close;
 }
 
-morocc,152,110,5	script	Bulletin Board#11	837,{
-	mes "[Morocc: The Frontier Town]";
-	mes "Welcome to Morocc, the City of the Desert. Morocc was built on an oasis, so this town can accomodate its many visitors and travelers.";
-	next;
-	mes "[Morocc: The Frontier Town]";
-	mes "Morocc Castle lies in the center of this city. Please feel free to explore this town, and enjoy its unique atmosphere. However, watch your pockets and beware of Rogues and Thieves.";
-	next;
-	mes "[Morocc: The Frontier Town]";
-	mes "From Morocc, the ^660000Pyramid Dungeon^000000 can be found to the Northwest, and the ^660000Sphinx Dungeon^000000 can be found to the West. To the Southeast, you may find ^660000Ant Hell^000000.";
-	next;
-	mes "[Morocc: The Frontier Town";
-	mes "The Assassin Guild is rumored to be located to the Southeast. When you head East from Morocc, and then North, you will arrive at ^3355FFProntera^000000.";
+prontera,165,60,5	script	알림판#30	837,{
+	mes "^0000cd잠시 수련을 위해 먼 여행을 떠납니다.";
+	mes "충분히 강해지기 전에는 돌아오지 않을";
+	mes "예정입니다.^000000";
+	mes "- 수습 세공사-";
 	close;
 }
 
-comodo,210,148,5	script	Bulletin Board#12	837,{
-	mes "[Comodo: The Beach City]";
-	mes "Welcome! This town of Comodo is";
-	mes "surrounded by many ancient relics";
-	mes "from a forgotten era.";
+morocc,152,110,5	script	팻말#11	837,{
+	mes "[사막도시 모로크]";
+	mes "사막도시 모로크에 오신 것을";
+	mes "환영합니다. 이 곳 모르크는 상당히";
+	mes "황량한 지역임에도 불구하고";
+	mes "사막을 오가는 사람들에게";
+	mes "오아시스 같은 역할을 하는 곳입니다.";
 	next;
-	mes "[Comodo: The Beach City]";
-	mes "Only in Comodo can you find the";
-	mes "Dancer Guild and Bard Guild which";
-	mes "provide the opportunity for";
-	mes "adventurers to change their jobs to";
-	mes "Dancers and Bards.";
+	mes "[사막도시 모로크]";
+	mes "주요 건물로는 모로크 성이 있으며,";
+	mes "프론테라의 홀그렌과 쌍벽을 이루는";
+	mes "유명한 대장장이 아라감이 있습니다";
+	mes "자신의 장비를 손보고 싶으신 분은";
+	mes "들러주시길 바랍니다. 단, 경고를";
+	mes "무시하고 한 행동에 대해서는 자신이";
+	mes "책임을 질 줄 알기를...";
 	next;
-	mes "[Comodo: The Beach City]";
-	mes "You can also visit the Casino,";
-	mes "which is a popular as a tourist";
-	mes "attraction and place to lounge";
-	next;
-	mes "[Comodo: The Beach City]";
-	mes "You can buy Berserk Potions, a";
-	mes "special product of Comodo, from the";
-	mes "Tool Dealers in the area.";
-	next;
-	mes "[Comodo: The Beach City]";
-	mes "There are 3 caves around Comodo";
-	mes "that are inhabited by many";
-	mes "different monsters. If you enter";
-	mes "these areas, please be extremely";
-	mes "careful.";
-	next;
-	mes "[Comodo: The Beach City]";
-	mes "From Comodo, you can travel to";
-	mes "^866C4BMorocc^000000 through the East Cave";
-	mes "and to ^7D2272Umbala^000000 through the North";
-	mes "Cave.";
-	next;
-	mes "[Comodo: The Beach City]";
-	mes "To the East, you can find ^BF2B0DParos";
-	mes "^BF2B0DLighthouse^000000, where the Rogue Guild";
-	mes "is located. Enjoy the Comodo night";
-	mes "life~";
+	mes "[사막도시 모로크]";
+	mes "북서쪽으로 가시면 피라미드 던전,";
+	mes "서쪽으로는 스핑크스던전이 있으며,";
+	mes "동북쪽으로 가시면 프론테라가";
+	mes "나옵니다. 남동쪽 어딘가에 개미들의";
+	mes "던전과 어쌔신 길드가 있다는 소문이";
+	mes "있습니다.";
 	close;
 }
 
-umbala,137,94,5	script	Bulletin Board#13	837,{
-	mes "[Umbala: The Utan Village]";
-	mes "Welcome to Umbala,";
-	mes "the village of the Utan tribe.";
+comodo,210,148,5	script	팻말#12	837,{
+	mes "[해변도시 코모도]";
+	mes "해변도시 코모도에 오신 것을";
+	mes "환영합니다. 코모도 주변에는";
+	mes "잊혀진 고대문명을 나타내는 듯한";
+	mes "유적들이 즐비합니다.";
 	next;
-	mes "[Umbala: The Utan Village]";
-	mes "Umbala, as well as the Utan tribe";
-	mes "which speak their own unique";
-	mes "language, was recently discovered";
-	mes "by a few intrepid adventurers.";
+	mes "[해변도시 코모도]";
+	mes "주요 건물로는 댄서, 바드 전직이";
+	mes "가능한 길드가 있으며, 코모도만의";
+	mes "명물인 카지노가 있습니다.";
 	next;
-	mes "[Umbala: The Utan Village]";
-	mes "Scholars believe that Umbala may be";
-	mes "the border between our world";
-	mes "and another realm. They believe the";
-	mes "junction between the worlds might";
-	mes "be the Yggdrasil tree to the North.";
+	mes "[해변도시 코모도]";
+	mes "코모도 주변에는 동굴이 3개가";
+	mes "있습니다. 각각의 동굴마다 위험도,";
+	mes "출현 몬스터가 다르기 때문에";
+	mes "주의해 주세요. 그리고 코모도만의";
+	mes "특산품인 버서크 포션도 코모도의";
+	mes "도구상인이 판매하고 있으니 많은";
+	mes "애용바랍니다.";
 	next;
-	mes "[Umbala: The Utan Village]";
-	mes "Points of interest include the";
-	mes "Chief's House, the Shaman's House,";
-	mes "and the Bungee Jump Area. Thousands";
-	mes "of tourists visit the Bungee Jump";
-	mes "Area to test their courage.";
-	next;
-	mes "[Umbala: The Utan Village]";
-	mes "From Umbala, head South to go to";
-	mes "^D91B73Comodo^000000. Please enjoy your";
-	mes "stay here in Umbala.";
+	mes "[해변도시 코모도]";
+	mes "동쪽 동굴을 통해서는 모로크, 북쪽";
+	mes "동굴을 통해서는 움발라로 갈 수";
+	mes "있습니다. 동쪽의 파로스등대섬에는";
+	mes "로그 전직에 관한 장소도 있다니";
+	mes "참고하시길 바랍니다.";
 	close;
 }
 
-gef_fild09,227,29,4	script	Bulletin Board::OrcsBoard	835,{
-	mes "[Orc Village]";
-	mes "^6B1312Caution!^000000";
-	mes "Beyond this point";
-	mes "lies the Orc Village.";
+umbala,137,94,5	script	팻말#13	837,{
+	mes "[우탄족마을 움발라]";
+	mes "우탄족마을 움발라에 오신 것을";
+	mes "환영합니다. 이 곳 움발라는";
+	mes "우탄족만의 언어를 사용하는 그동안";
+	mes "알려지지 않은 신비한 곳이었습니다";
+	mes "이세계와 저서계의 경계지점이라고";
+	mes "일컫어지고 있지요.";
 	next;
-	mes "[Orc Village]";
-	mes "Be aware that this village is";
-	mes "teeming with dangerous Orcs, namely";
-	mes "Orc Warriors, Orc Ladies and High";
-	mes "Orcs. Two boss monsters, ^6B1312Orc Hero^000000";
-	mes "and ^6B1312Orc Lord^000000 will also appear at certain times.";
+	mes "[우탄족마을 움발라]";
+	mes "주요 건물로는 추장님의 집,";
+	mes "샤먼님의 집, 번지점프대가";
+	mes "있습니다. 움발라의 명물의";
+	mes "번지점프대에는 하루에 수도 없는";
+	mes "사람들이 자신의 용기를 시험해보기";
+	mes "위해서 뛰어내리고는 합니다.";
+	next;
+	mes "[우탄족마을 움발라]";
+	mes "남쪽으로는 코모도, 북쪽으로 가면";
+	mes "이그드라실의 줄기를 통해 이계의";
+	mes "도시가 나온다고 하는 소문이 있습니다.";
 	close;
 }
 
-gef_fild13,202,31,5	duplicate(OrcsBoard)	Bulletin Board#orc1	835
-
-gef_fild13,29,206,5	script	Bulletin Board::KoboldsBoard	836,{
-
-	mes "[Kobold Village]";
-	mes "^6B1312Caution!^000000";
-	mes "You're heading to the Kobold Village.";
-	mes "Please be aware this village is filled with many kobolds.";
+gef_fild09,227,29,4	script	팻말#::OrcsBoard	835,{
+	mes "[오크마을]";
+	mes "주의! 이곳으로 들어가면";
+	mes "오크마을이 나옵니다. 오크워리어,";
+	mes "오크레이디, 하이오크등이 출현하니";
+	mes "주의해 주시길 바랍니다. 가끔";
+	mes "오크히어로, 오크로드라는";
+	mes "보스몬스터가 출현하니 조심하세요.";
 	close;
 }
 
-gef_fild08,211,24,5	duplicate(KoboldsBoard)	Bulletin Board#kb1	836
+gef_fild13,202,31,5	duplicate(OrcsBoard)	팻말#orc1	835
 
-gef_fild10,109,23,5	script	Bulletin Board#15	836,{
+gef_fild13,29,206,5	script	팻말#::KoboldsBoard	836,{
 
-	mes "[Goblin Village]";
-	mes "^6B1312Caution!^000000";
-	mes "You're heading to the Goblin Village.";
-	mes "Please be aware this village is filled with many goblins.";
+	mes "[코볼트마을]";
+	mes "주의! 이 곳으로 들어가면 코볼트";
+	mes "마을이 나옵니다. 각종 코볼트등이";
+	mes "출현하니 주의해 주시길 바랍니다.";
 	close;
 }
 
-yuno,154,112,5	script	Bulletin Board#17	837,{
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "Welcome to Juno, the City of Sages.";
-	mes "Juno is kept aloft in the air by";
-	mes "the power of the Ymir Heart";
-	mes "Pieces";
-	next;
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "Those interested in becoming Sages";
-	mes "should visit the Sage Castle for";
-	mes "more information on the Sage job";
-	mes "and its requirements.";
-	next;
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "Other notable places include the";
-	mes "Monster Museum, Magic Academy";
-	mes "and the Juno Library.";
-	next;
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "Somewhere around Juno, there is";
-	mes "information regarding secret access";
-	mes "to the world where adventurers may";
-	mes "be reborn with newfound strength.";
-	next;
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "To the Southeast of Juno lies ^6B1312Nogg";
-	mes "^6B1312Road^000000, the Magma Dungeon. Nogg Road";
-	mes "is infamous for its aggressive";
-	mes "creatures, so be careful";
-	next;
-	mes "[Juno: Capital of]";
-	mes "[The Schwarzwald Republic]";
-	mes "From Juno, ^2D3832Al De Baran^000000, a city of";
-	mes "the Rune-Midgarts Kingdom, is";
-	mes "located to the South.";
+gef_fild08,211,24,5	duplicate(KoboldsBoard)	팻말#kb1	836
+
+gef_fild10,109,23,5	script	팻말#15	836,{
+
+	mes "[코볼트마을]";
+	mes "주의! 이 곳으로 들어가면 코볼트";
+	mes "마을이 나옵니다. 각종 코볼트등이";
+	mes "출현하니 주의해 주시길 바랍니다.";
 	close;
 }
 
-aldebaran,145,105,5	script	Bulletin Board#18	837,{
-	mes "[Al De Baran: The Border City]";
-	mes "Welcome to Al De Baran, the border";
-	mes "city of the Rune-Midgarts Kingdom.";
-	mes "Al De Baran's beautiful canals and";
-	mes "majestic Clock Tower are a source";
-	mes "of pride for its citizens.";
+yuno,154,112,5	script	팻말#17	837,{
+	mes "[슈발츠 공화국 수도 유노]";
+	mes "현자의 도시 유노에 오신 것을";
+	mes "환영합니다. 이 곳은 이미르의 심장";
+	mes "조각의 힘을 원동력으로 공주에 떠";
+	mes "있는 도시랍니다.";
 	next;
-	mes "[Al De Baran: The Border City]";
-	mes "Adventurers can explore the Clock";
-	mes "Tower located in the city's center.";
-	mes "Other notable places are the Kafra";
-	mes "Corporation Headquarters, and the";
-	mes "Alchemist Guild which provides the";
-	mes "Alchemist job change.";
+	mes "[슈발츠 공화국 수도 유노]";
+	mes "주요 건물로는 세이지로의 전직이";
+	mes "가능한 세이지 캐슬, 몬스터 박물관,";
+	mes "마법아카데미, 도서관, 비공정등이";
+	mes "있습니다.";
 	next;
-	mes "[Al De Baran: The Border City]";
-	mes "There is a fully trained Santa";
-	mes "Claus somewhere in Al De Baran who";
-	mes "can send you to the magical town of";
-	mes "^1D2585Lutie^000000. If you're interested in";
-	mes "seeing it for yourself, you must";
-	mes "seek Santa Claus.";
+	mes "[슈발츠 공화국 수도 유노]";
+	mes "유노 어디가에는 사람을 다시";
+	mes "태어나게 하는 공간으로 갈 수 있게";
+	mes "하는 곳도 있다니 잘 찾아보세요.";
+	mes "남종쪽 필드에는 '노그로드'라는";
+	mes "용암던전이 있습니다. 굉장히";
+	mes "위험한 곳이니 주의하시길 바랍니다.";
 	next;
-	mes "[Al De Baran: The Border City]";
-	mes "From this city, ^60D5FDJuno^000000 is located to";
-	mes "the North, and ^6D6FE0Prontera^000000 is located";
-	mes "to the South.";
+	mes "[슈발츠 공화국 수도 유노]";
+	mes "남쪽으로 내려가시면 룬 미드가츠";
+	mes "왕국의 알데바란이 나옵니다. 가는";
+	mes "필드에 선공 몬스터들이 많고 위험한";
+	mes "곳이니 조심하세요.";
 	close;
 }
 
-xmas_fild01,75,80,5	script	Bulletin Board#22	837,{
-	mes "[Winter Town, Lutie]";
-	mes "Welcome to Lutie, the town of snowfall.";
-	mes "Manufacturing toys in the toy factory is the main";
-	mes "business of this town.";
+aldebaran,145,105,5	script	팻말#18	837,{
+	mes "[국경도시 알데바란]";
+	mes "국경도시 알데바란에 오신 것을";
+	mes "환영합니다. 거대한 운하와 도시의";
+	mes "상징이 되어버린 큰 시계탑이 이";
+	mes "도시의 자랑거리입니다. 현재 룬";
+	mes "미드가르츠 왕궁의 국경지역을";
+	mes "담당하고 있습니다.";
 	next;
-	mes "[Winter Town, Lutie]";
-	mes "You can access to the toy factory dungeon";
-	mes "at the north of Lutie.";
-	mes "Please remember to visit Lutie in Christmas season.";
-	mes "There are various event held with joy.";
-	mes "Please beware of ^6B1312Stormy Knight^000000 and ^6B1312Hatii^000000 the boss monsters of the toy factory dungeon.";
+	mes "[국경도시 알데바란]";
+	mes "주요 건물로는 도시 중앙에";
+	mes "위치하고 있는 거대한 시계탑 던전,";
+	mes "카프라 서비스 본사, 알케미스트로";
+	mes "전직이 가능한 연금술사 길드등이";
+	mes "있습니다.";
+	next;
+	mes "[국경도시 알데바란]";
+	mes "시계탑 근처 어딘가에 산타가";
+	mes "'루티에'라는 마을로 보내준다고";
+	mes "하니, 관심이 있으신 분은 한번쯤";
+	mes "가보시길 바랍니다.";
+	next;
+	mes "[국경도시 알데바란]";
+	mes "북쪽으로는 유노, 남쪽으로는";
+	mes "프론테라에 가실 수 있습니다.";
 	close;
 }
 
-niflheim,200,191,5	script	Bulletin Board#25	837,{
-	mes "[City of the Dead, Niflheim]";
-	mes "Welcome to Niflheim, the City of the Dead.";
-	mes "Niflheim was known as the other world where";
-	mes "you come after the death.";
-	mes "However, recently people found out a secret path behind of a mysterious tree.";
-	mes "So, you will find many other people travelling around this area.";
+xmas_fild01,75,80,5	script	팻말#22	837,{
+	mes "[눈의 마을 루티에]";
+	mes "눈의 마을 루티에에 오신 것을";
+	mes "환영합니다. 언제나 눈이 내리는";
+	mes "마을로써 장난감 공장에서 생산된";
+	mes "장난감을 파는 것이 이 마을의";
+	mes "특징입니다.";
 	next;
-	mes "[City of the Dead, Niflheim]";
-	mes "As a tourist attraction, The Witch's castle is suggested.";
-	mes "Unlike normal towns, it is prohibited to save respawn point or";
-	mes "warp point inside Niflheim. Also monsters spawn within the town as well.";
+	mes "[눈의 마을 루티에]";
+	mes "북쪽으로 계속 가시면 루티에";
+	mes "마을로 들어가실 수 있으며, 루티에";
+	mes "마을 북쪽부분에는 장난감 던전으로";
+	mes "들어가실 수 있습니다.";
 	next;
-	mes "[City of the Dead, Niflheim]";
-	mes "Especially, please be attentive with a boss monster";
-	mes "called ^6B1312Lord of the Death^000000.";
+	mes "[눈의 마을 루티에]";
+	mes "매년 특정한 날이 오면 특별한";
+	mes "이벤트가 벌어진다고 하니";
+	mes "기억해두세요~ 참, 이 곳에서는";
+	mes "강력한 보스몬스터인 하티가 나오니";
+	mes "주의해주세요.";
+	close;
+}
+
+niflheim,200,191,5	script	팻말#25	837,{
+	mes "[죽은자의나라 니플헤임]";
+	mes "죽은자의 나라 니플헤임에 오신";
+	mes "것을 환영합니다. 이 곳 니플헤임은";
+	mes "죽은 자들만이 올 수 있는 곳이라고";
+	mes "합니다. 그러나 신비한 나무를 통해";
+	mes "현재는 죽은 자가 아니더라도 출입하는";
+	mes "사람들을 볼 수 있습니다.";
 	next;
-	mes "[City of the Dead, Niflheim]";
-	mes "When you go ahead west, you will arrive at ^6B1312Valley of Gyoll^000000";
-	mes "where all the powerful and fearful monsters dwell upon.";
-	mes "It is suggested to leave the area immediately in case of a new solo adventurer.";
+	mes "[죽은자의나라 니플헤임]";
+	mes "주요 건물로는 마녀의 성 등이";
+	mes "있습니다. 이곳 니플헤임은";
+	mes "일반적인 다른 마을과는 다르게";
+	mes "기억, 저장도 할 수 없고, 마을에서";
+	mes "몬스터도 출현한답니다.";
+	next;
+	mes "[죽은자의나라 니플헤임]";
+	mes "지금 이 글을 읽고 계신 당신의";
+	mes "주변에도 몬스터가 당신을 노리고";
+	mes "달려오고 있을지도 모르겠군요. 가끔";
+	mes "출현하는 죽은자의 주인이라는";
+	mes "보스몬스터는 특히 조심하시기";
+	mes "바랍니다.";
+	next;
+	mes "[죽은자의나라 니플헤임]";
+	mes "서쪽으로 가시면 굘의 골짜기가";
+	mes "나오며 이곳보다 훨씬 강력한";
+	mes "몬스터가 다수 존재합니다. 왠만한";
+	mes "경험이 없으시거나 혼자일 경우는 빨리";
+	mes "돌아가시길 바랍니다.";
 	close;
 }
 
 /*
-moc_fild15,267,264,5	script	Bulletin Board#26	837,{
+moc_fild15,267,264,5	script	팻말#26	837,{
 	mes "[Ant Hell]";
 	mes "^6B1312Caution!^000000";
 	mes "Ant Hell is consisting of 2 levels.";
@@ -400,7 +453,7 @@ moc_fild15,267,264,5	script	Bulletin Board#26	837,{
 }
 */
 
-glast_01,369,308,5	script	Bulletin Board#28	837,{
+/*glast_01,369,308,5	script	팻말#28	837,{
 	mes "[Glast Heim]";
 	mes "Glast Heim is an enormous dungeon with countless levels.";
 	mes "This dungeon is definately not for new or experienced adventurers";
@@ -416,3 +469,4 @@ glast_01,369,308,5	script	Bulletin Board#28	837,{
 	mes "Enjoy your dungeon expedition.";
 	close;
 }
+*/

@@ -14,6 +14,7 @@
 #include <common/strlib.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "chrif.hpp"
@@ -75,7 +76,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			double timediff = solve_time(const_cast<char *>(time.c_str()));
 
 			if (timediff <= 0) {
-				this->invalidWarning(node["TimeLimit"], "Incorrect TimeLimit format %s given, skipping.\n", time.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["TimeLimit"], "지정된 TimeLimit 포멧 %s이(가) 잘못되었습니다. 통과됨.\n", time.c_str());
+				else
+					this->invalidWarning(node["TimeLimit"], "Incorrect TimeLimit format %s given, skipping.\n", time.c_str());
 				return 0;
 			}
 			quest->time = static_cast<time_t>(timediff);
@@ -84,7 +88,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int32 day, hour, minute, second, week;
 
 			if (split_exact_quest_time(const_cast<char *>(time.c_str()), &week, &day, &hour, &minute, &second) == 0) {
-				this->invalidWarning(node["TimeLimit"], "Incorrect TimeLimit format %s given, skipping.\n", time.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["TimeLimit"], "지정된 TimeLimit 포멧 %s이(가) 잘못되었습니다. 통과됨.\n", time.c_str());
+				else
+					this->invalidWarning(node["TimeLimit"], "Incorrect TimeLimit format %s given, skipping.\n", time.c_str());
 				return 0;
 			}
 			if (week > 0)
@@ -108,12 +115,18 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		for (const auto& targetNode : targets) {
 			if (quest->objectives.size() >= MAX_QUEST_OBJECTIVES) {
-				this->invalidWarning(targetNode, "Targets list exceeds the maximum of %d, skipping.\n", MAX_QUEST_OBJECTIVES);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(targetNode, "타겟 목록이 최대 %d을(를) 초과합니다. 통과됨.\n", MAX_QUEST_OBJECTIVES);
+				else
+					this->invalidWarning(targetNode, "Targets list exceeds the maximum of %d, skipping.\n", MAX_QUEST_OBJECTIVES);
 				return 0;
 			}
 
 			if (!this->nodeExists(targetNode, "Mob") && !this->nodeExists(targetNode, "Id")) {
-				this->invalidWarning(targetNode, "Missing Target 'Mob' or 'Id', skipping.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(targetNode, "타겟 'Mob' 또는 'Id'이(가) 빠졌습니다. 통과됨.\n");
+				else
+					this->invalidWarning(targetNode, "Missing Target 'Mob' or 'Id', skipping.\n");
 				return 0;
 			}
 
@@ -131,7 +144,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 				if (!mob) {
-					this->invalidWarning(targetNode["Mob"], "Mob %s does not exist, skipping.\n", mob_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(targetNode["Mob"], "%s 몹은 존재하지 않습니다. 통과됨.\n", mob_name.c_str());
+					else
+						this->invalidWarning(targetNode["Mob"], "Mob %s does not exist, skipping.\n", mob_name.c_str());
 					return 0;
 				}
 
@@ -143,11 +159,17 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			}
 			else {
 				if (!this->asUInt16(targetNode, "Id", index)) {
-					this->invalidWarning(targetNode, "Missing 'Id', skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(targetNode, "'Id'이(가) 빠졌습니다. 통과됨.\n");
+					else
+						this->invalidWarning(targetNode, "Missing 'Id', skipping.\n");
 					return 0;
 				}
 				if (index == 0) {
-					this->invalidWarning(targetNode["Id"], "'Id' can't be 0, skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(targetNode["Id"], "'Id'은(는) 0일 수 없습니다. 통과됨.\n");
+					else
+						this->invalidWarning(targetNode["Id"], "'Id' can't be 0, skipping.\n");
 					return 0;
 				}
 
@@ -165,7 +187,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 			if (!targetExists) {
 				if (!this->nodeExists(targetNode, "Count")) {
-					this->invalidWarning(targetNode["Count"], "Targets has no Count value specified, skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(targetNode["Count"], "타겟에 지정된 카운트 값이 없습니다. 통과됨.\n");
+					else
+						this->invalidWarning(targetNode["Count"], "Targets has no Count value specified, skipping.\n");
 					return 0;
 				}
 
@@ -198,7 +223,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						return 0;
 
 					if (target->min_level > level) {
-						this->invalidWarning(targetNode["MaxLevel"], "%d's MinLevel is greater than MaxLevel. Defaulting MaxLevel to %d.\n", target->min_level, MAX_LEVEL);
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["MaxLevel"], "%d의 최소레벨이 최대레벨보다 큽니다. 최대레벨을 %d으(로) 기본설정합니다.\n", target->min_level, MAX_LEVEL);
+						else
+							this->invalidWarning(targetNode["MaxLevel"], "%d's MinLevel is greater than MaxLevel. Defaulting MaxLevel to %d.\n", target->min_level, MAX_LEVEL);
 						level = MAX_LEVEL;
 					}
 
@@ -215,12 +243,18 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(race_constant.c_str(), &constant)) {
-						this->invalidWarning(targetNode["Race"], "Invalid race %s, skipping.\n", race.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Race"], "%s은(는) 잘못된 종족입니다. 통과됨.\n", race.c_str());
+						else
+							this->invalidWarning(targetNode["Race"], "Invalid race %s, skipping.\n", race.c_str());
 						return 0;
 					}
 
 					if (constant < RC_FORMLESS || constant > RC_ALL || constant == RC_PLAYER_HUMAN || constant == RC_PLAYER_DORAM) {
-						this->invalidWarning(targetNode["Race"], "Unsupported race %s, skipping.\n", race.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Race"], "%s은(는) 지원되지 않는 종족입니다. 통과됨.\n", race.c_str());
+						else
+							this->invalidWarning(targetNode["Race"], "Unsupported race %s, skipping.\n", race.c_str());
 						return 0;
 					}
 
@@ -237,12 +271,18 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(size_constant.c_str(), &constant)) {
-						this->invalidWarning(targetNode["Size"], "Invalid size type %s, skipping.\n", size_.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Size"], "%s은(는) 잘못된 사이즈 타입입니다. 통과됨.\n", size_.c_str());
+						else
+							this->invalidWarning(targetNode["Size"], "Invalid size type %s, skipping.\n", size_.c_str());
 						return 0;
 					}
 
 					if (constant < SZ_SMALL || constant > SZ_ALL) {
-						this->invalidWarning(targetNode["size"], "Unsupported size %s, skipping.\n", size_.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["size"], "%s은(는) 잘못된 사이즈입니다. 통과됨.\n", size_.c_str());
+						else
+							this->invalidWarning(targetNode["size"], "Unsupported size %s, skipping.\n", size_.c_str());
 						return 0;
 					}
 
@@ -259,12 +299,18 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(element_constant.c_str(), &constant)) {
-						this->invalidWarning(targetNode["Element"], "Invalid element %s, skipping.\n", element.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Element"], "%s은(는) 잘못된 요소(엘레멘트)입니다. 통과됨.\n", element.c_str());
+						else
+							this->invalidWarning(targetNode["Element"], "Invalid element %s, skipping.\n", element.c_str());
 						return 0;
 					}
 
 					if (constant < ELE_NEUTRAL || constant > ELE_ALL) {
-						this->invalidWarning(targetNode["Element"], "Unsupported element %s, skipping.\n", element.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Element"], "%s은(는) 지원되지 않는 요소(엘레멘트)입니다. 통과됨.\n", element.c_str());
+						else
+							this->invalidWarning(targetNode["Element"], "Unsupported element %s, skipping.\n", element.c_str());
 						return 0;
 					}
 
@@ -280,7 +326,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					uint16 mapindex = mapindex_name2idx(location.c_str(), nullptr);
 
 					if (mapindex == 0 && strcmpi(location.c_str(), "All") != 0) {
-						this->invalidWarning(targetNode["Location"], "Map \"%s\" not found.\n", location.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(targetNode["Location"], "맵 \"%s\"을(를) 찾지 못했습니다.\n", location.c_str());
+						else
+							this->invalidWarning(targetNode["Location"], "Map \"%s\" not found.\n", location.c_str());
 						return 0;
 					}
 
@@ -306,7 +355,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 						if (!mob) {
-							this->invalidWarning(MapMobTargetsNode[MapMobTargetsIt.key()], "Mob %s does not exist, skipping.\n", mob_name.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning(MapMobTargetsNode[MapMobTargetsIt.key()], "몬스터 %s은(는) 존재하지 않습니다. 건너뜀.\n", mob_name.c_str());
+							else
+								this->invalidWarning(MapMobTargetsNode[MapMobTargetsIt.key()], "Mob %s does not exist, skipping.\n", mob_name.c_str());
 							continue;
 						}
 
@@ -358,7 +410,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 				if (!mob) {
-					this->invalidWarning(dropNode["Mob"], "Mob %s does not exist, skipping.\n", mob_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(dropNode["Mob"], "몬스터 %s은(는) 존재하지 않습니다. 통과됨.\n", mob_name.c_str());
+					else
+						this->invalidWarning(dropNode["Mob"], "Mob %s does not exist, skipping.\n", mob_name.c_str());
 					continue;
 				}
 
@@ -380,12 +435,18 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 			if (!targetExists) {
 				if (!this->nodeExists(dropNode, "Item")) {
-					this->invalidWarning(dropNode["Item"], "Drops has no Item value specified, skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(dropNode["Item"], "드롭에 지정된 아이템이 없습니다. 통과됨.\n");
+					else
+						this->invalidWarning(dropNode["Item"], "Drops has no Item value specified, skipping.\n");
 					continue;
 				}
 
 				if (!this->nodeExists(dropNode, "Rate")) {
-					this->invalidWarning(dropNode["Item"], "Drops has no Rate value specified, skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(dropNode["Item"], "드롭에 지정된 확율이 없습니다. 통과됨.\n");
+					else
+						this->invalidWarning(dropNode["Item"], "Drops has no Rate value specified, skipping.\n");
 					continue;
 				}
 
@@ -402,7 +463,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 				if (!item) {
-					this->invalidWarning(dropNode["Item"], "Item %s does not exist, skipping.\n", item_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(dropNode["Item"], "아이템 %s은(는) 존재하지 않습니다. 통과됨.\n", item_name.c_str());
+					else
+						this->invalidWarning(dropNode["Item"], "Item %s does not exist, skipping.\n", item_name.c_str());
 					continue;
 				}
 
@@ -416,7 +480,10 @@ uint64 QuestDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					return 0;
 
 				if (!itemdb_isstackable(target->nameid)) {
-					this->invalidWarning(dropNode["Count"], "Item %s is not stackable, capping to 1.\n", itemdb_name(target->nameid));
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(dropNode["Count"], "아이템 %s은(는) 중첩되지 않습니다. 1로 조정됨.\n", itemdb_name(target->nameid));
+					else
+						this->invalidWarning(dropNode["Count"], "Item %s is not stackable, capping to 1.\n", itemdb_name(target->nameid));
 					count = 1;
 				}
 
@@ -597,7 +664,10 @@ int quest_add(map_session_data *sd, int quest_id)
 	}
 
 	if (quest_check(sd, quest_id, HAVEQUEST) >= 0) {
-		ShowError("quest_add: Character %d already has quest %d.\n", sd->status.char_id, quest_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_add: 캐릭터 %d에 이미 퀘스트 %d이(가) 있습니다.\n", sd->status.char_id, quest_id);
+		else
+			ShowError("quest_add: Character %d already has quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
@@ -638,17 +708,26 @@ int quest_change(map_session_data *sd, int qid1, int qid2)
 	std::shared_ptr<s_quest_db> qi = quest_search(qid2);
 
 	if (!qi) {
-		ShowError("quest_change: quest %d not found in DB.\n", qid2);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_change: DB에서 퀘스트 %d을(를) 찾을 수 없습니다.\n", qid2);
+		else
+			ShowError("quest_change: quest %d not found in DB.\n", qid2);
 		return -1;
 	}
 
 	if (quest_check(sd, qid2, HAVEQUEST) >= 0) {
-		ShowError("quest_change: Character %d already has quest %d.\n", sd->status.char_id, qid2);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_change: 케릭터 %d에 이미 퀘스트 %d이(가) 존재합니다.\n", sd->status.char_id, qid2);
+		else
+			ShowError("quest_change: Character %d already has quest %d.\n", sd->status.char_id, qid2);
 		return -1;
 	}
 
 	if (quest_check(sd, qid1, HAVEQUEST) < 0) {
-		ShowError("quest_change: Character %d doesn't have quest %d.\n", sd->status.char_id, qid1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_change: 케릭터 %d에 퀘스트 %d이(가) 없습니다.\n", sd->status.char_id, qid1);
+		else
+			ShowError("quest_change: Character %d doesn't have quest %d.\n", sd->status.char_id, qid1);
 		return -1;
 	}
 
@@ -656,7 +735,10 @@ int quest_change(map_session_data *sd, int qid1, int qid2)
 
 	ARR_FIND(0, sd->avail_quests, i, sd->quest_log[i].quest_id == qid1);
 	if (i == sd->avail_quests) {
-		ShowError("quest_change: Character %d has completed quest %d.\n", sd->status.char_id, qid1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_change: 케릭터 %d이(가) 퀘스트 %d을(를) 완료했습니다.\n", sd->status.char_id, qid1);
+		else
+			ShowError("quest_change: Character %d has completed quest %d.\n", sd->status.char_id, qid1);
 		return -1;
 	}
 
@@ -689,7 +771,10 @@ int quest_delete(map_session_data *sd, int quest_id)
 	//Search for quest
 	ARR_FIND(0, sd->num_quests, i, sd->quest_log[i].quest_id == quest_id);
 	if (i == sd->num_quests) {
-		ShowError("quest_delete: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_delete: 케릭터 %d에 퀘스트 %d이(가) 없습니다.\n", sd->status.char_id, quest_id);
+		else
+			ShowError("quest_delete: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
@@ -852,7 +937,10 @@ int quest_update_status(map_session_data *sd, int quest_id, e_quest_state status
 
 	ARR_FIND(0, sd->avail_quests, i, sd->quest_log[i].quest_id == quest_id);
 	if (i == sd->avail_quests) {
-		ShowError("quest_update_status: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("quest_update_status: 케릭터 %d에 퀘스트 %d이(가) 없습니다.\n", sd->status.char_id, quest_id);
+		else
+			ShowError("quest_update_status: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
@@ -923,7 +1011,10 @@ int quest_check(map_session_data *sd, int quest_id, e_quest_check_type type)
 			}
 			return 0;
 		default:
-			ShowError("quest_check_quest: Unknown parameter %d",type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("quest_check_quest: %d은(는) 알수 없는 파라메터입니다.",type);
+			else
+				ShowError("quest_check_quest: Unknown parameter %d",type);
 			break;
 	}
 

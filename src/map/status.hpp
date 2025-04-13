@@ -1312,6 +1312,16 @@ enum sc_type : int16 {
 	SC_AGIUP,
 	SC_PROTECTION,
 
+	//premium buff
+	SC_KAFRA_ITEMBOOST,
+	SC_KAFRA_EXPBOOST,
+	SC_SUB_DEADPENALTY,
+	SC_SUB_ITEMBOOST,
+	SC_SUB_EXPBOOST,
+	SC_PREMIUM_STORAGEBOOST,
+	SC_PREMIUM_ITEMBOOST,
+	SC_PREMIUM_EXPBOOST,
+
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
 
@@ -3058,6 +3068,8 @@ enum e_status_change_flag : uint16 {
 	SCF_REMOVEONUNEQUIPARMOR,
 	SCF_REMOVEONHERMODE,
 	SCF_REQUIRENOWEAPON,
+	//premium buff
+	SCF_NOTICKSAVE,
 	SCF_MAX
 };
 

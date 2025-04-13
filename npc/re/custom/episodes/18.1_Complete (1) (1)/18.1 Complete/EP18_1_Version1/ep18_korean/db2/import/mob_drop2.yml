@@ -1,0 +1,16 @@
+###########################################################################
+# - Id                      Monster ID.
+#   Drops2:                 List of possible drops. There is no limit. The items are not displayed by the @-commands.
+#                           The items can't be Stolen.
+#     - Item                Aegis Item name.
+#       Rate                Drop rate of Item. (Range: 1-10000, Default: 1)
+#       RandomOptionGroup   Random Option Group applied to Item on drop. (Default: None)
+###########################################################################
+
+Header:
+  Type: MOB_DROP2_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep18_1/mob_drop2.yml

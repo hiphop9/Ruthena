@@ -1,40 +1,15 @@
 //===== rAthena Script =======================================
 //= Morocc Town
 //===== By: ==================================================
-//= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
-//= 2.2
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Morocc Town NPCs
-//===== Additional Comments: =================================
-//= Fully working
-//= Fixed Lapidary sprite, Implemented ANTHELL trigger
-//= (in both NPC/Warps) [Lupus]. Removed it from NPC and put in Warp
-//= 1.3 Removed some NPC due to Assassin Job Quest [kobra_k88]
-//= 1.3b mobs name corrected [Lupus], 1.3c - Adv classes support
-//= 1.4 Fixed typos [Nexon]
-//= 1.5 Added a lvl 4 weapon quest related NPC [MasterOfMuppets]
-//= 1.6 Added Bartender NPC, made by Persian69 [Vicious_Pucca]
-//= 1.7 Removed Duplicates [Silent]
-//= 1.8 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
-//= 1.9 Removed duplicate NPC, changed temp char vars to temp npc. [L0ne_W0;f]
-//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
-//= 2.0a Fixed outdated info about Milk [Lupus]
-//= 2.1 Updated/Added NPCs for episode 12.1. [L0ne_W0lf]
-//= 2.2 Removed duplicate bartender NPC. (bugreport:4555) [L0ne_W0lf]
+//ÇÑ±Û¹ø¿ª ½ºÄ«ÀÌ·¯ºê
 //============================================================
 
-// Morocc
-//============================================================
-morocc,150,120,5	script	Soldier - Morocc#01::MocSoldier	707,3,3,{
+/*morocc,150,120,5	script	Soldier - Morocc#01::MocSoldier	707,3,3,{
 	mes "[Morocc Soldier]";
-	mes "Hey, you! Stop there.";
+	mes "ÀÌºÁ, ³Ê! °Å±â ¸ØÃç¶ó.";
 	next;
 	mes "[Morocc Soldier]";
-	mes "This is a restricted area. You can't come any further!";
+	mes "ÀÌ°÷Àº Á¦ÇÑ ±¸¿ªÀÔ´Ï´Ù. ´õ ÀÌ»ó ¿Ã ¼ö ¾ø½À´Ï´Ù!";
 	close;
 
 OnTouch_:
@@ -131,7 +106,7 @@ morocc,223,102,0	script	Volunteer - Morocc#06::MocVolunteer	741,{
 	specialeffect EF_HIT2,AREA,"Volunteer - Morocc#06";
 	next;
 	mes "[Morocc Volunteer]";
-	mes "Heyyy, you're being too harsh, Señorita. Your fist may be as fragile as you are, but it sure can hurt somebody.";
+	mes "Heyyy, you're being too harsh, Se?orita. Your fist may be as fragile as you are, but it sure can hurt somebody.";
 	next;
 	mes "[Ringing Voice]";
 	mes "Anyways, isn't that a crib? I think I heard something like that before..";
@@ -142,577 +117,908 @@ morocc,223,102,0	script	Volunteer - Morocc#06::MocVolunteer	741,{
 }
 
 morocc,226,102,4	duplicate(MocVolunteer)	Volunteer - Morocc#07	726
+*/
 
-moc_ruins,123,154,0	script	Young Man#moc01	99,{
-	mes "[Young Man]";
-	mes "The town's completely destroyed, but that giant triangular structure hasn't been harmed at all. Maybe it's protected by some kinda special power.";
+moc_ruins,123,154,0	script	Ã»³â#moc01	99,{
+	mes "[Ã»³â]";
+	mes "¸¶À»ÀÌ ÃÊÅäÈ­°¡ µÇ¾úÁö¸¸, ÀúÂÊ¿¡ Àú";
+	mes "°Å´ëÇÑ »ï°¢ Á¶Çü¹°Àº ÇØ¸¦ ÀÔÁö";
+	mes "¾Ê¾Ò¾î¿ä. Æ¯º°ÇÑ ÈûÀ¸·Î º¸È£¹Ş°í";
+	mes "ÀÖ´ÂÁöµµ ¸ğ¸£ÁÒ.";
 	next;
-	mes "[Young Man]";
-	mes "You know...Those giant, triangular buildings at the NorthWest corner of Morocc known are known to us as Pyramids...";
+	mes "[Ã»³â]";
+	mes "¿ì¸®´Â ¸¶À» ±¸¼®¿¡ ÀÚ¸®ÀâÀº Àú";
+	mes "°Å´ëÇÑ »ï°¢ Á¶Çü¹°À» ÇÇ¶ó¹Ìµå¶ó";
+	mes "ºÎ¸£ÁÒ. ¾ğÁ¦ºÎÅÍ ÀÖ¾ú´ÂÁö´Â ¸ô¶ó¿ä.";
+	mes "Á¦ ÇÒ¾Æ¹öÁöÀÇ ÇÒ¾Æ¹öÁö ¶§µµ °è¼Ó";
+	mes "±×ÀÚ¸®¿¡ ÀÖ¾ú´Ù°í ÇÕ´Ï´Ù.";
 	next;
-	mes "[Young Man]";
-	mes "Those things have been around here for thousands and thousands of years. No one knows when and why they were built, or who built them.";
+	mes "[Ã»³â]";
+	mes "¹«¾ù ¶§¹®¿¡ , ¾ğÁ¦ ¸¸µé¾î Á³´ÂÁö´Â";
+	mes "¾Æ‘™ ¸ğ¸£Áö¸¸ ÇÏ³ª´Â È®½ÇÇØ¿ä. Àú";
+	mes "¾È¿¡´Â ¹«½Ã¹«½ÃÇÑ ¸ó½ºÅÍµéÀÌ";
+	mes "¿ì±Û°Å¸°´Ù´Â °ÅÁÒ. ±×·¡¼­ ¾Æ¹«µµ";
+	mes "°¡±îÀÌ °¡Áö ¾Ê´Â´ä´Ï´Ù.";
 	next;
-	mes "[Young Man]";
-	mes "All we know is that tons of monsters live inside those weird buildings. You might wanna stay away from those really dangerous places.";
-	next;
-	mes "[Young Man]";
-	mes "Those monsters in the Pyramid would be very, very sensitive to sweet flash smell of people....";
+	mes "[Ã»³â]";
+	mes "´ç½Åµµ °¡°¡ÀÌ °¡Áö ¾Ê´Â°Ô ½Å»ó¿¡";
+	mes "ÁÁÀ» °Å¿¡¿ä.";
+	mes "ÇÇ¶ó¹Ìµå ¾ÈÀÇ ¸ó½ºÅÍµéÀº ¿ÜÁöÀÎÀÇ";
+	mes "´ŞÄŞÇÑ »ì³¿»õ¿¡ ¹Î°¨ÇÏ´Ï±î¿ä. ÈåÈå...";
 	close;
 }
 
-moc_ruins,128,153,0	script	Grampa#moc	61,{
-	mes "[Old Scholar]";
-	mes "I've devoted my life to researching the mysterious pyramids near Morocc. I haven't been able to concretely confirm anything yet, but...";
+moc_ruins,128,153,0	script	ÇÒ¾Æ¹öÁö#moc	61,{
+	mes "[ÇÇ¶ó¹Ìµå ¿¬±¸ÀÚ]";
+	mes "³ª´Â ÀÌ¸¶À»ÀÇ ÇÇ¶ó¹ÌµåÀÇ ¿¬±¸¿¡";
+	mes "ÀÏ»ıÀ» ¹ÙÃÄ ¸¹Àº°ÍÀ» ¾Ë¾Æ³»¾úÁö.";
+	mes "¾ÆÁ÷ Á¤È®ÇÑ °ÍÀº ¾Ë ¼ö ¾øÁö¸¸ Àú";
+	mes "ÇÇ¶ó¹Ìµå´Â ºĞ¸í °í´ëÀÇ ¿ÕÀÇ ½Ã½ÅÀ»";
+	mes "¸ğ½Ã±â À§ÇÑ Å« ¹«´ıÀ» °ÍÀÌ¾ß.";
 	next;
-	mes "[Old Scholar]";
-	mes "I'm sure that the largest pyramid contains the tomb of the ancient king, Osiris! I'm willing to stake my life on it!";
+	mes "[ÇÇ¶ó¹Ìµå ¿¬±¸ÀÚ]";
+	mes "¾Æ¸¶µµ Àú °Ç¹° ±íÀº °÷¿¡´Â °í´ëÀÇ";
+	mes "À§´ëÇÑ ¿Õ ¿À½Ã¸®½º°¡ Àáµé¾î";
+	mes "ÀÖÀ»°Å¾ß. ³» ¿¬±¸°¡ Á¦´ë·Î µÈ";
+	mes "°ÍÀÌ¶ó¸é ¸»¾ß...";
 	close;
 }
 
-moc_ruins,132,144,0	script	Wolf Young Man#moc	85,{
-	mes "[Young Man]";
-	mes "I remember I said the bandits of desert are the desert wolves.. Those bastards always roam around in a bunch and they would get so cruel and outrageous if one of them got attacked.";
+moc_ruins,132,144,0	script	Ã»³â#moc02	85,{
+	mes "[Ã»³â]";
+	mes "»ç¸·ÀÇ ¹«¹ıÀÚ¸¦ ³» Àü¿¡ µ¥ÀúÆ®";
+	mes "¿ïÇÁ¶ó°í ¸»Çß´ø ÀûÀÌ ÀÖÁö. Ç×»ó";
+	mes "¹«¸®¸¦ Áö¾î µ¹¾Æ´Ù´Ï´Â ¸ÁÇÒ ³à¼®µé,";
+	mes "±×·¯´Ù ÀÚ±â µ¿·á°¡ °ø°İ´çÇÏ¸é »ç³³°Ô";
+	mes "µ¹º¯ÇÏ´Â ÀÜÈ¤ÇÑ Áü½ÂÀÌÁö.";
 	next;
-	mes "[Young Man]";
-	mes "They are so vicious, and I'm telling ya, I'm no kidding. You can only find some bones and rotten milk in the backpack after these wolves sweep through.";
-	mes "Those things are so mean and vicious..";
+	mes "[Ã»³â]";
+	mes "ÀÎ°£ÀÌ°í ¹¹°í ¾ø´Ù´Ï±ñ? Àå³­ ¾Æ³Ä.";
+	mes "³à¼®µéÀÌ Áö³ª°£ ÀÚ¸®¿£ »À¶û °¡¹æ";
+	mes "¼ÓÀÇ »óÇÑ ¿ìÀ¯ ¹Û¿¡ ¾È ³²¾Æ.";
+	mes "Á¤¸» ÀÎÁ¤»çÁ¤ ¾ø´Â ¹«¸®¾ß...";
 	next;
-	mes "[Young Man]";
-	mes "But the thing is that.. I even kinda feel those merciless cold-blooded monsters are nothing to be afraid of, compared to what has happened in Morocc. Morocc is already a hell.";
+	mes "[Ã»³â]";
+	mes "Çã³ª, ÀÌ¹ø »çÅÂ¸¦ °Ş°í³ª´Ï ±×";
+	mes "Áü½Â¹«¸®°¡ ¿ÀÈ÷·Á ±Í¿©¿ö º¸ÀÏ";
+	mes "Áö°æÀÌ¾ß. ±«¸ê»óÅÂÀÇ ¸ğ·ÎÅ©¸¦ ºÁ.";
+	mes "ÀÌ¹Ì ±× °÷Àº Áö¿ÁÀÌ¶ó°í.";
 	close;
 }
 
-moc_ruins,115,144,3	script	Muka Young Man#moc	83,{
-	mes "[Young Man]";
-	mes "I work in the trading business, so I always have to cross the hot, dry Morocc Desert on business.";
+moc_ruins,115,144,3	script	Ã»³â#moc03	83,{
+	mes "[Ã»³â]";
+	mes "³ª´Â ÀÌ°÷°ú ÇÁ·ĞÅ×¶ó¸¦ ¿À°¡¸ç ¹«¿ªÀ»";
+	mes "ÇÏ°í ÀÖÁö. ´öºĞ¿¡ Àú ¶ß°Ì°í °ÇÁ¶ÇÑ";
+	mes "»ç¸·À» ¸î ¹é¹øÀÌ³ª µé¶ô°Å·È´ÂÁö ¸ğ¸¦";
+	mes "Á¤µµ¾ß.";
 	next;
-	mes "[Young Man]";
-	mes "But I can't do that anymore.";
+	mes "[Ã»³â]";
+	mes "Çã³ª, ÀÌÁ¦ ±×°Íµµ ¸ø ÇÏ°Ô »ı°å¾î.";
 	next;
-	mes "[Young Man]";
-	mes "Now that I can't, I kind of miss the old days.";
+	mes "[Ã»³â]";
+	mes "¸ø ÇÏ°Ô µÇ´Ï »õ»ï ±×¸®¿ö Áö´Â±º.";
+	mes "»ç¸·À» Áö³ª´Ù ¸ñÀÌ ³Ê¹« ¸»¶ó";
+	mes "¼±ÀÎÀåÀ» Àß¶ó ¹°À» ¾òÀ¸·Á Çß´Âµ¥...";
+	mes "°©ÀÚ±â ±×°ÍÀÌ Ä§À» ½î¾Æ´ë¾î";
+	mes "ºñ¸íÈ¾»çÇÒ »· Çß´ø ±â¾ïÀÌ¶ó´ø°¡...";
 	next;
-	mes "[Young Man]";
-	mes "Like this one time, while I was in the middle of the desert, I got so thirsty that I caught a cactus.. but before I was able to cut it, it slapped me! Then it shot me in the arse with all these needles...";
-	next;
-	mes "[Young Man]";
-	mes "Later, I learned that it wasn't a normal cactus I found, but the monster we call 'Muka.'";
-	mes "Now I come to think of it, it was fun as much as dangerous.";
+	mes "[Ã»³â]";
+	mes "¹«Ä« ¸»ÀÌ¾ß, ¹«Ä«. ¼±ÀÎÀåÀÌ¶û ²À ´àÀº";
+	mes "¸ó½ºÅÍ.";
+	mes "Áö±İ¿Í¼­  »ı°¢ÇÏ¸é ¸ñ¼ûÀÌ À§ÇèÇÏ±ä";
+	mes "Çß¾îµµ Âü Àç¹ÌÀÖ¾úÁö.";
 	close;
 }
 
-moc_ruins,109,138,0	script	Diamond Young Man#moc	99,{
-	mes "[Young Man]";
-	mes "The undisputed queen of jewels has to be the Diamond. After looking at it just once, no one can deny its beauty.";
+moc_ruins,109,138,0	script	Ã»³â#moc04	99,{
+	mes "[Ã»³â]";
+	mes "º¸¼® ÁßÀÇ º¸¼®ÀÌ¶õ ¿ª½Ã";
+	mes "´ÙÀÌ¾Æ¸óµåÁö. ±× Åõ¸íÇÔÀÌ ³»ºñÃß´Â";
+	mes "¿µ·ÕÇÑ ºûÀ» º»»ç¶÷Àº ´Ù¸¥ º¸¼®ÂëÀº";
+	mes "½Ã½ÃÇÏ´Ù°í »ı°¢ÇÏ°Ô µÉ°ÍÀÌ¶õ ¸»¾¸.";
+	mes "±×·¡¼­ ¿ª½Ã °ªµµ ¸Å¿ì °í°¡ÀÎµ¥...";
 	next;
-	mes "[Young Man]";
-	mes "Many factors determine its value, but the most important thing is its size.";
+	mes "[Ã»³â]";
+	mes "±× °ªÀÌ °áÁ¤µÇ´Â ¿äÀÎÀº ¿©·¯°¡Áö°¡";
+	mes "ÀÖ°ÚÁö¸¸ Å©±â°¡ °¡Àå Áß¿äÇÏ´Ù°í";
+	mes "ºÁ¾ßÁö.";
 	next;
-	mes "[Young Man]";
-	mes "It should also be a perfect crystal, not cracked or chipped, if you want to sell the Diamond for a lot of zeny.";
+	mes "[Ã»³â]";
+	mes "¾î¾î... ÇÏÁö¸¸ ¾Æ¹«¸® Å«";
+	mes "´ÙÀÌ¾Æ¸óµå¶óµµ °áÁ¤¼Ó¿¡ ºó °ø°£ÀÌ";
+	mes "ÀÖ´Ù°Å³ª °Ñ¿¡ ±İÀÌ¶óµµ °¡ ÀÖ´Ù¸é";
+	mes "°ª¾îÄ¡°¡ ¶Ñ¿í¶³¾îÁö°Ô µÈ´Ù´Â °ÍÀ»";
+	mes "ÁÖÀÇÇØ¾ß ÇØ.";
 	next;
-	mes "[Young Man]";
-	mes "But look! The hardest stone in the world got broken in two!";
+	mes "[Ã»³â]";
+	mes "±×·±µ¥ ÀÌ°É ºÁ! ¼¼»ó¿¡¼­ ±× ¾î¶² °Í";
+	mes "º¸´Ù ³ôÀº °­µµ¸¦ ÀÚ¶ûÇÏ°í ÀÖ´Ù´Â ÀÌ";
+	mes "º¸¼®ÀÌ ÀÌ·¸°Ô ¶Ò ÂÉ°³Á³¾î!";
 	next;
-	mes "[Young Man]";
-	mes "I know it's not the time to worry about some gemstones but.. this.. was my everything..";
+	mes "[Ã»³â]";
+	mes "¸¶À» »óÈ²ÀÌ ÀÌ·¸°Ô µ¹¾Æ°¡´Âµ¥µµ";
+	mes "ÅÂÆòÇÏ°Ô º¸¼®ÀÌ³ª °ÆÁ¤ÇÒ ¶§´Â";
+	mes "¾Æ´ÏÁö¸¸, ±×·¡µµ ÀÌ°Ô ³»";
+	mes "ÀüÀç»êÀÌ¾ú´Âµ¥...";
 	close;
 }
 
-morocc,54,251,0	script	Young Man#moc02	89,{
-	mes "[Drunken Young Man]";
-	mes "Wait a second..! Are you perhaps an adventurer? Welcome! How's your trip?";
-	mes "Heh heh~ Let me tell you a story. You know I just got out of that Tavern, there, huh?";
+morocc,32,296,4	script	»ç¸·ÀÇ ÈçÇÑ µµµÏ#nb01	118,{
+	if (Class == Job_Novice) {
+		mes "[»çÈçµµ]";
+		mes "¹¹¾ß? ³ëºñ½º³×?";
+		mes "¹¹ Ã£¾Æ?";
+		mes "³»°¡ ¾Æ´Â°Å¶ó¸é ¿À´Ã¸¸ Ä£Ã¶È÷";
+		mes "¾Ë·ÁÁÖ¸¶.";
+		next;
+		switch(select("µµµÏ±æµå À§Ä¡:ÇÇ¶ó¹Ìµå À§Ä¡:»óÀÎµé ´Ù ¾îµğ ÀÖ³ª?")) {
+			case 1:
+				mes "[»çÈçµµ]";
+				mes "µµµÏ±æµå?";
+				mes "±×°Å¾ß ^9900FFÇÇ¶ó¹Ìµå ÁöÇÏ^000000¿¡ ÀÖÁö.";
+				next;
+				mes "[»çÈçµµ]";
+				mes "ÇÇ¶ó¹Ìµå´Â ¿©±â ¸ğ¸£Å© ºÏ¼­ Ãâ±¸·Î";
+				mes "³ª°¡¸é ¹Ù·Î º¸¿©.";
+				mes "´« ¾Õ¿¡ ±×³É µü º¸ÀÏ°Å¾ß.";
+				close;
+			case 2:
+				mes "[»çÈçµµ]";
+				mes "Áö±İ ³×°¡ ¼­ ÀÖ´Â ¸ğ·ÎÅ© ºÏ¼­Ãâ±¸·Î";
+				mes "³ª°¡¸é...!";
+				mes "¿À¾Æ½Ã½º ³ª¿À°Åµç?";
+				next;
+				mes "[»çÈçµµ]";
+				mes "^9900FF¿À¾Æ½Ã½º ºÏ¼­ÂÊ^000000¿¡ ±×³É µü! ÇÏ°í ÀÖ´Ù.";
+				mes "ÀÏ´Ü °¡ ºÁ. °¡º¸¸é ¾Ë¾Æ.";
+				close;
+			case 3:
+				mes "[»çÈçµµ]";
+				mes "¸¶¿ÕÀÌ ³¯¶Ú ÈÄ »ç¶÷µéÀÌ ºÏ¼­ÂÊ";
+				mes "¿À¾Æ½Ã½º·Î ´Ù ÇÇ³­°¬Áö.";
+				mes "ÀÌ Ãâ±¸·Î ³ª°¡¸é ÀÛÀº ¿À¾Æ½Ã½º°¡";
+				mes "³ª¿Í.";
+				next;
+				mes "[»çÈçµµ]";
+				mes "¿À¾Æ½Ã½º ÁÖº¯À¸·Î »óÀÎµéÀÌ ÀÖÀ»°Å¾ß.";
+				mes "°¡º¸¶ó°í.";
+				close;
+			}
+		}
+	mes "[»çÈçµµ]";
+	mes "¹» º¸½´?";
+	mes "¹¹? ³»ÀÌ¸§ ¿ô°Ü?";
+	mes "¾ÆÇÏ, ÀÌ ¾ç¹İ ¹¹ ¸ğ¸£½Ã³×.";
+	mes "ÀÌ°Å ¿¹¸íÀÌ¶ó´Â°Å¾ß. ¿¹¸í.";
 	next;
-	mes "[Drunken Young Man]";
-	mes "I heard the Satan Morocc has revived. It just got out of cracking the time and the space blar... hic~";
+	mes "[»çÈçµµ]";
+	mes "¾ó¸¶³ª ¸ÚÁø ¿¹¸íÀÌ¾ß?";
+	mes "¸ğ·¡ À§¿¡ ÈçÀûµµ ¾È³²±â´Â µµµÏÀÌ¶õ";
+	mes "¶æÀÌ¾ß.";
+	mes "»ç¸·ÀÇ ÈçÇÑ µµµÏÀÌ ¾Æ´Ï¶ó°í!";
 	next;
-	mes "[Drunken Young Man]";
-	mes "Ah... I kinda wanna see that Satan with my own eyes, but! I really shouldn't. I shouldn't even dream of seeing that Satan in person.";
+	mes "[»çÈçµµ]";
+	mes "±×·±µ¥ ¹¹ È¤½Ã ±æÃ£¾Æ?";
+	mes "»óÀÎµéÀÌ¶ó¸é ¸¶¿ÕÀÌ ³¯¶Ú ÈÄ ºÏ¼­ÂÊ";
+	mes "¿À¾Æ½Ã½º·Î ´Ù ÇÇ³­°¬Áö.";
+	mes "ÀÌ Ãâ±¸·Î ³ª°¡¸é ÀÛÀº ¿À¾Æ½Ã½º°¡";
+	mes "³ª¿Í.";
 	next;
-	mes "[Drunken Young Man]";
-	mes "But I think there'd be nothing to lose if you, a person of bravery, who came through the wile desert try to find it, don't you think? Teehee~ Don't forget to buy me a drink when you find it!";
-	mes "Hic!";
-	next;
-	mes "[Drunken Young Man]";
-	mes "Anyway, do you know where we are? I just had a little drink at a tavern, but all of a sudden, the whole town's disappeared when I got out.. or, some five hundred years have passed???!";
+	mes "[»çÈçµµ]";
+	mes "´ë°Ô ³ëÁ¡»óÀÎµéÀÌ ÇÇ³­ °¬Áö¸¸ ¸»¾ß.";
 	close;
 }
 
-moc_ruins,94,117,0	script	Pale Looking Young Man	48,{
-	mes "[Pale-looking Young Man]";
-	mes "... That day... I saw the bloody moon in the sky. It was too silent that it felt so spooky.";
+morocc,54,251,0	script	Ã»³â#moc10	89,{
+	mes "[À½ÁÖÃ»³â]";
+	mes "È÷È÷... µş±¹! ¿À, ´ç½Å ¿ÜÁöÀÎÀÎ°¡?";
+	mes "¹İ°©¼Ò! ¿©ÇàÀº Áñ°Ì¼Ò?";
+	mes "ÀÌ·¸°Ô ¸¸³­ °Íµµ ÀÎ¿¬ÀÌ´Ï ³»  ÇÑ ¸¶µğ";
+	mes "ÇØÁÖ¸®´Ù. Áö±İ ÁÖÁ¡¿¡¼­ ÇÑ ÀÜ ÇÏ´Ù°¡";
+	mes "Èê·ÁµéÀº ÀÌ¾ß±âÀÎµ¥ ¸»ÀÌÁÒ?";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "Not even a whistle of dry wind, and the air so heavy and stuffy, I could hardly breathe.";
+	mes "[À½ÁÖÃ»³â]";
+	mes "¾Æ, ±Û½ê ¸¶¿Õ ¸ğ·ÎÅ©°¡ ºÎÈ°À» Çß´ÙÁö";
+	mes "¹¹¿ä. Áö±İ ¾îµğ ½Ã°ø°£ÀÇ ±Õ¿­ÀÎ°¡";
+	mes "¹¹½Ã±ä°¡¸¦ ¶Õ°í ³ª¿Ô´Ù°í ÇÏ´Âµ¥...";
+	mes "È÷²õ.";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "But then, Bang! It was right that time that I saw the enormous amount of smoke rising up at the Castle of Morocc with an earsplitting sound.";
+	mes "[À½ÁÖÃ»³â]";
+	mes "¾Æ... ÀÌ´«À¸·Î Á÷Á¢ º¸°íµµ ½ÍÁö¸¸";
+	mes "³ª°°Àº ³à¼®Àº ²Şµµ  ¸ø ²Ù¾î º¼";
+	mes "ÀÌ¾ß±â°ÚÁö.";
+	mes "»ç¸·À» ¶Õ°í ¿Â ´ç½Å Á¤µµÀÇ ¿ë±âÀÖ´Â";
+	mes "»ç¶÷ÀÌ¶ó¸é ÇÑ¹ø Ã£¾ÆºÁµµ ¼ÕÇØ´Â ¾Æ´Ò";
+	mes "°Å °°Àºµ¥?¾î¶§¿ä? È÷È÷~ Ã£À¸¸é ¼ú";
+	mes "ÇÑ ÀÜ »ç¼î!";
+	mes "³£!";
 	next;
-	mes "[Pale-looking Young Man]";
-	mes "All happened so fast. The Oasis of the Castle was all dried up and the town was destroyed. And... and that voice... I heard a voice.";
-	next;
-	mes "[Pale-looking Young Man]";
-	mes "Blood... Blood is what it takes to pay for the soul... and that dark sound of laughter...";
-	mes "Aah!!! It's... It's still ringing in my ears!!! Aahhhhh!!!!";
-	next;
-	mes "- It'd be better not to disturb him anymore -";
+	mes "[À½ÁÖÃ»³â]";
+	mes "±×³ªÀú³ª ¿©±â°¡ ¾îµòÁö ¾Ë°Ú¼Ò?";
+	mes "ÁÖÁ¡¼­ ¼ú ÇÑÀÜ ÇÏ°í ³ª¿Ô´Âµ¥...";
+	mes "¾îÂ°¼­ ¸¶À»ÀÌ »ç¶óÁ® ÀÖ´Â°ÇÁö...? ±×»õ";
+	mes "ÇÑ ¿À¹é³âÀÌ¶óµµ Èê·¶³ª?!";
 	close;
 }
 
-moc_ruins,115,82,0	script	Little Girl#moc	703,{
-	mes "[Little Girl]";
-	mes "-Crying-";
+moc_ruins,94,117,0	script	¾È»öÀÌ Ã¢¹éÇÑ Ã»³â	48,{
+	mes "[¾È»öÀÌ Ã¢¹éÇÑ Ã»³â]";
+	mes "... ±× ³¯Àº... ÇÍºûÀÇ ´ŞÀÌ ¶¹¾ú¾î¿ä.";
+	mes "±×°Í »©°í´Â ±âºĞ ³ª»Ü Á¤µµ·Î Àû¸·ÇÑ";
+	mes "¹äÀÌ¾úÁö¿ä.";
 	next;
-	mes "[Little Girl]";
-	mes "I'm so scared! Where's mom and dad...! hhooooo... Where's our house...";
+	mes "[¾È»öÀÌ Ã¢¹éÇÑ Ã»³â]";
+	mes "°ÇÁ¶ÇÑ »ç¸·¹Ù¶÷ Á¶Â÷ ºÒÁö ¾Ê¾Æ,";
+	mes "°ø±â´Â ¼ûÀÌ ¸·ÈúÁ¤µµ·Î ¹«°Ì°í";
+	mes "°©°©Çß¾î¿ä. ±×¶§ ´À´å¾øÀÌ ±²À½°ú";
+	mes "ÇÔ²² ¾öÃ»³­ ¼öÁõ±â°¡ ¸ğ·ÎÅ©";
+	mes "Áß¾Ó¼º¿¡¼­ ÇÇ¾î¿Ã¶úÁÒ.";
 	next;
-	mes "[Little Boy]";
-	mes "Please stop crying, Eliese... You could even faint if you cry all day long, you know...";
+	mes "[¾È»öÀÌ Ã¢¹éÇÑ Ã»³â]";
+	mes "¼ø½Ä°£ÀÌ¾ú¾î¿ä. Áß¾Ó¼ºÀÇ ¿À¾Æ½Ã½º°¡";
+	mes "Áõ¹ßÇØ ¹ö¸®°í ¸ğ·ÎÅ© ¸¶À»ÀÌ ±«¸ê";
+	mes "»óÅÂ°¡ µÇ¾î¹ö·± °Ç Á¤¸»";
+	mes "¼ø½Ä°£ÀÌ¾ú¾î¿ä. ±×¸®°í... ±×¸®°í ±×";
+	mes "¸ñ¼Ò¸®... ¸ñ¼Ò¸®°¡ µé·Á¿Ô¾î¿ä.";
 	next;
-	mes "[Little Girl]";
-	mes "No! No... Mommy... Daddy....";
+	mes "[¾È»öÀÌ Ã¢¹éÇÑ Ã»³â]";
+	mes "ÇÇ´Â... ÇÇ´Â ¿µÈ¥ÀÇ È­Æó¶ó°í... ±×¸®°í";
+	mes "±× °ËÀº ¿ôÀ½¼Ò¸®...";
+	mes "¾Æ¾Æ!!! ¾ÆÁ÷µµ ±Ó°¡¿¡... ±× ¸ñ¼Ò¸®°¡!!!";
+	mes "¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ!!!!!!";
+	next;
+	mes "[¾È»öÀÌ Ã¢¹éÇÑ Ã»³â]";
+	mes "- ¾ÈÁ¤À» ÃëÇÒ ¼ö ÀÖµµ·Ï ´õÀÌ»ó ¸»À»";
+	mes "°ÉÁö¾Ê´Â °ÍÀÌ ÁÁ°Ú´Ù -";
 	close;
 }
 
-moc_ruins,118,82,1	script	Little Boy#moc	706,{
-	mes "[Little Boy]";
-	mes "............... Let's stop crying, Eliese...";
+moc_ruins,115,82,0	script	²¿¸¶ ¾ÆÀÌ#moc05	703,{
+	mes "[²¿¸¶ ¿©ÀÚ ¾ÆÀÌ]";
+	mes "ÈæÈæ, ¿ì¾Ó. ½È¾î, ¹«¼­¿ö...";
 	next;
-	mes "[Little Girl]";
-	mes "Nooooooo... Mommy... Daddy....!!";
+	mes "[²¿¸¶ ¿©ÀÚ ¾ÆÀÌ]";
+	mes "¾ö¸¶ ¾Æºü ¾îµğÀÖ¾î... ÀÌÀÌÀ×... ¿ì¸®Áı";
+	mes "¾îµğ°¬¾î... ¿ì¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Ó.";
 	next;
-	mes "[Little Boy]";
-	mes "Mom and Dad are now...";
+	mes "[²¿¸¶ ³²ÀÚ ¾ÆÀÌ]";
+	mes "±×¸¸ ¿ï¾î, ¿¤Á¦... ±×·¯´Ù ¾²·¯Áö°Ú¾î...";
 	next;
-	mes "[Little Girl]";
-	mes "No...... noooooo...";
-	next;
-	mes "[Little Boy]";
-	mes "Right, you love ice-cream, don't you? I.. I can get you an ice-cream if you stop crying. Don't cry, Eliese, please.. Ok? Don't...";
+	mes "[²¿¸¶ ¿©ÀÚ ¾ÆÀÌ]";
+	mes "À¸¾Æ¾Ó, ½È¾î... ¾ö¸¶¾Æ... ¾Æºü¾Æ¾Æ¾Æ....";
 	close;
 }
 
-moc_ruins,121,116,4	script	Picky Lady#moc	66,{
-	mes "[Syvia]";
-	mes "The fields of Rune-Midgarts are infested with wild and dangerous monsters..But, you've got to admit a bunch of them are soooo cute!";
-	mes "You know, like how Spore sticks out its tongue after you kill it..";
+moc_ruins,118,82,1	script	²¿¸¶ ¾ÆÀÌ#moc06	706,{
+	mes "[²¿¸¶ ³²ÀÚ ¾ÆÀÌ]";
+	mes "............... ±×¸¸ ¿ï¾î, ¿¤Á¦...";
 	next;
-	mes "[Syvia]";
-	mes "Or, how little Picky wears that tiny egg shell sometimes?..";
+	mes "[²¿¸¶ ¿©ÀÚ ¾ÆÀÌ]";
+	mes "¿ì¾Æ¾Æ¾Æ¾Æ¾Æ¾Æ¾Ó... ¾ö¸¶¾Æ...";
+	mes "¾Æºü¾Æ¾Æ¾Æ¾Æ....!!";
 	next;
-	mes "[Syvia]";
-	mes "I can't believe what just has happened.. Our town used to be the one with those cute little monsters, not that kinda of vicious dreadful Evil sleeping in! Whew...";
+	mes "[²¿¸¶ ³²ÀÚ ¾ÆÀÌ]";
+	mes "¾ö¸¶ ¾Æºü´Â ÀÌÁ¦...";
 	next;
-	mes "[Syvia]";
-	mes "I'm so scared... I just wanna ease my mind watching over those cute little Porings...";
+	mes "[²¿¸¶ ¿©ÀÚ ¾ÆÀÌ]";
+	mes "¿Àºü¾Æ¾Æ¾Æ¾Æ... À¸Çã¾û...";
 	next;
-	switch(select("What about Angeling?:How about Ghostring?:Quit Conversation")) {
+	mes "[²¿¸¶ ³²ÀÚ ¾ÆÀÌ]";
+	mes "¸¶, ¸Â¾Æ, ³Ê ¾ÆÀÌ½ºÅ©¸² ÁÁ¾ÆÇÏÁö?";
+	mes "¿ïÀ½ ±×Ä¡¸é ³»°¡ ¾ÆÀÌ½ºÅ©¸² »çÁÙ°Ô.";
+	mes "¿ïÁö¸¶, ¿¤Á¦. ¿ïÁö¸¶. ÀÀ? ¿ïÁö¸¶¾Æ...";
+	close;
+}
+
+moc_ruins,121,116,4	script	ÇÈÅ°¾Æ°¡¾¾#moc	66,{
+	mes "[½Çºñ¾ÆÁ¦]";
+	mes "¹Ìµå°¡¸£µå Àü¿ª¿¡´Â Á¤¸» ±Í¿©¿î";
+	mes "¸ó½ºÅÍµéÀÌ °¡µæÇßÁö¿ä.";
+	mes "¾²·¯Áú ¶§ Çô¸¦ »©²ÄÈ÷ ³»´Â ½ºÆ÷¾Æ";
+	mes "¶ó´ø°¡...";
+	next;
+	mes "[½Çºñ¾ÆÁ¦]";
+	mes "ÀÚ½ÅÀÌ ±ú¶ß¸®°í ³ª¿Â ´Ş°¿ ²®ÁúÀ»";
+	mes "µÚÁı¾î¾²°í »Ï¿Ë »Ï¿Ë ¶Ù¾î´Ù´Ï´Â";
+	mes "»ç¸·»õ ÇÈÅ° µîµî...";
+	next;
+	mes "[½Çºñ¾ÆÁ¦]";
+	mes "±×·¸°Ô ±Í¿±°í ¹«ÇØÇÑ ¸ó½ºÅÍµéµµ";
+	mes "ÀÖ´Âµ¥, ¾î¶»°Ô µÈ°É±î¿ä? ¿ì¸® ¸¶À»¿¡";
+	mes "±×·± ¹«½Ã¹«½ÃÇÑ ¸¶¿ÕÀÌ Àáµé¾î ÀÖ¾úÀ»";
+	mes "ÁÙÀÌ¾ß! ¾Æ¾Æ...";
+	next;
+	mes "[½Çºñ¾ÆÁ¦]";
+	mes "³Ê¹«³ª ¹«¼·°í µÎ·Á¿ö¿ä.... ±Í¿©¿î";
+	mes "Æ÷¸µÀÌ³ª º¸¸é¼­ ¸¶À½À» ¾ÈÁ¤½ÃÅ°°í";
+	mes "½Í¾î¿ä...";
+	next;
+	switch(select("¿£Á©¸µÀÌ¶õ?:°í½ºÆ®¸µÀÌ¶õ?:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Syvia]";
-		mes "Ooh! Angeling is just like Poring, except it has angel wings! Of course, I don't know if they can actually fly..";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "¿£Á©¸µÀÌ¶õ ÇÁ·ĞÅ×¶ó ³²ºÎÁö¹æÀÇ";
+		mes "Æ÷¸µ¸¸ÀÌ »Ğ»Ğ ¶Ù¾î´Ù´Ñ´Ù´Â";
+		mes "Æ÷¸µ¹ç¿¡¼­ µå¹°°Ô ¹ß°ßµÇ´Â Ãµ»ç";
+		mes "Æ÷¸µÀ» ÀÌ¾ß±â ÇÕ´Ï´Ù.";
 		next;
-		mes "[Syvia]";
-		mes "Angelings are rarely seen, but can be found among large groups of Porings living in one of the fields south of Prontera.";
-		mes "Angeling is a high level monster with Holy property, so it's immune to most magic, aside from spells that have Neutral or Shadow attack properties.";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "³à¼®µéÀº ¼º¼Ó¼º °í·¹º§ ÀÌ¹Ç·Î ¿Ø¸¸ÇÑ";
+		mes "¸¶¹ı¿¡´Â ²ŞÂ½µµ ¾ÊÁö¿ä.";
+		mes "¿ÀÁ÷ ¹«¼Ó¼º. ±×¸®°í ¾Ï¼Ó¼º ¸¶¹ı°ú";
+		mes "°ø°İ¿¡¸¸ Å¸°İÀ» ÀÔÀ»°Å¿¹¿ä.";
 		next;
-		mes "[Syvia]";
-		mes "Hehe~ Don't you think I know a lot about Porings? I love them soooo much";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "ÈÄÈÄ, Àú Á¤¸» ¸¹Àº °É ¾Ë°í ÀÖÁö¿ä?";
+		mes "Æ÷¸µ ¸Å´Ï¾Æ°Åµç¿ä.";
 		next;
-		mes "[Syvia]";
-		mes "Hehe... Poring... Hee......";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "ÈÄÈÄ... Æ÷¸µ... ÈÄÈÄ......";
 		close;
 	case 2:
-		mes "[Syvia]";
-		mes "Ghostring is an evil ghost Poring. It's rarely seen, but can be found among mass groups of Porings living in one of the fields south of Prontera.";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "°í½ºÆ®¸µÀÌ¶õ ³à¼®Àº ÇÁ·ĞÅ×¶ó";
+		mes "³²ºÎÁö¹æÀÇ Æ÷¸µ¸¸ÀÌ »Ç¿ë»Ç¿ë";
+		mes "¶Ù¾î´Ù´Ñ´Ù´Â Æ÷¸µ ÇÊµå¿¡¼­ µå¹°°Ô";
+		mes "¹ß°ßµÇ´Â »ç¾ÇÇÑ À¯·ÉÆ÷¸µÀ» ÀÌ¾ß±â";
+		mes "ÇÑ´ä´Ï´Ù.";
 		next;
-		mes "[Syvia]";
-		mes "Ghostring is a high-leveled monster with the Ghost property, so it can withstand all physical attacks.";
-		mes "Damage can only be caused to Ghostring through magic spells or weapons with an a specific property.";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "¿ä³à¼®µéÀº ¿°¼Ó¼º °í·¹º§ÀÌ¹Ç·Î";
+		mes "¹«¼Ó¼º ¹°¸®°ø°İÀ» ¹ŞÁö ¾Ê°í...";
+		mes "¸¶¹ıÀÌ³ª ±âÅ¸ ¼Ó¼ºÀ¸·Î¸¸ µ¥¹ÌÁö¸¦";
+		mes "ÁÙ¼ö ÀÖÁö¿ä";
 		next;
-		mes "[Syvia]";
-		mes "Hehe~ Don't you think I know a lot about Porings? I love them soooo much~";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "Àú´Â Æ÷¸µ¿¡ ´ëÇØ¼­´Â ¸ğ¸£´Â°Ô ¾ø´Â";
+		mes "Æ÷¸µ ¸Å´Ï¾Æ ¶ø´Ï´Ù.";
 		next;
-		mes "[Syvia]";
-		mes "Hehe... Poring... Teehee......";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "ÈÄÈÄ... Æ÷¸µ... ÈÄÈÄ......";
 		close;
 	case 3:
-		mes "[Syvia]";
-		mes "Hehe... Poring... Teehee......";
+		mes "[½Çºñ¾ÆÁ¦]";
+		mes "ÈÄÈÄ... Æ÷¸µ... ÈÄÈÄ......";
 		close;
 	}
 }
 
-moc_ruins,155,107,4	script	Ant Man#moc	47,{
-	mes "[Akira]";
-	mes "Hey, you. Did you cross the desert?";
+moc_ruins,155,107,4	script	°³¹Ì¾ÆÀú¾¾#moc	47,{
+	mes "[¾Æ¸®Ä«¸®]";
+	mes "ÀÌº¸½Ã°Ô, ÀÚ³Ù »ç¸·À» °Ç³Ê¿Ô´Â°¡?";
 	next;
-	mes "[Akira]";
-	mes "When you walk through the desert about one map North and 3 maps East, you'll find the entrance to Ant Hell.";
+	mes "[¾Æ¸®Ä«¸®]";
+	mes "±×·³ ÀÌ ¸¶À»·ÎºÎÅÍ ºÏÂÊÀ¸·Î ÇÑ ¸Ê...";
+	mes "µ¿ÂÊÀ¸·Î ¼¼¸ÊÁ¤µµ¿¡ ¶³¾îÁ®ÀÖ´ø ±×";
+	mes "°³¹ÌÁö¿Áµ¿±¼ÀÌ ¾î¶»°Ô µÇ¾ú´ÂÁö ¾Ë°í";
+	mes "ÀÖÀ»Áöµµ ¸ğ¸£°Ú±º.";
 	next;
-	mes "[Akira]";
-	mes "There are two different entrances to the Ant Hell. When you get inside, the 1st and the 2nd underground levels of winding looking caves are connected to each other.";
+	mes "[¾Æ¸®Ä«¸®]";
+	mes "°³¹ÌÁö¿Áµ¿±¼ÀÇ ÀÔ±¸´Â µÎ°³ÀÏ¼¼.";
+	mes "¾ÈÀ¸·Î µé¾î°¡º¸¸é ¸÷½Ã ²¿ºÒ²¿ºÒÇÑ";
+	mes "µ¿±¼ÀÌ ÁöÇÏ 1Ãş°ú 2ÃşÀ¸·Î ÀÌ¾îÁ®ÀÖÁö.";
 	next;
-	mes "[Akira]";
-	mes "I'm really wondered how those entrances are after the horrible destruction, but I can't go out.. If you ever hear anything about it, please get me informed.";
+	mes "[¾Æ¸®Ä«¸®]";
+	mes "±× µ¿±¼ÀÇ ÀÔ±¸µéÀº ÀÌ¹ø ³­¸®¿¡ ¾î¶²";
+	mes "¿µÇâÀ» ¹Ş¾ÒÀ»Áö ±Ã±İÇÑµ¥ ¹ÛÀ¸·Î";
+	mes "³»º¸³»ÁÖÁú ¾Ê¾Æ¼­ ¸»ÀÌÁö... È¤½Ã";
+	mes "¼Ò½ÄÀ» ¾Ë°Åµç ¾Ë·ÁÁÖ°Ô.";
 	next;
-	switch(select("About 'Ant Hell':About Ants:End Conversation")) {
+	switch(select("'°³¹ÌÁö¿Áµ¿±¼'¿¡ ´ëÇÏ¿©:°³¹Ì¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Akira]";
-		mes "That cave is sure a dangerous hell, sticky and all... There are 2 underground levels.";
-		mes "Just head East till you see the bridge which connects to the Payon Forest.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "ÁöÇÏ 1, 2 ÃşÀ¸·Î ÀÌ·ç¾îÁ®ÀÖ´Â";
+		mes "²öÀû²öÀû ²Ã²Ã Àç¼ö¾ø´Â µ¿±¼ÀÌ ¾Æ´Ò¼ö";
+		mes "¾øÁöºñ...";
+		mes "¸ğ·ÎÅ©¿¡¼­ °ğ Àå µ¿ÂÊÀ¸·Î °È´Ùº¸¸é";
+		mes "ÆäÀÌ¿æ ½£°ú ¸¶ÁÖÄ¡´Â ´Ù¸®°¡ ³ª¿Ã°É¼¼.";
 		next;
-		mes "[Akira]";
-		mes "In the map right before that bridge, head north to find the entrance to Ant Hell, though I'm not sure if it's still there.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "¹Ù·Î ±× ¸Ê ÀÌÀüÀÇ 4 °Å¸® ¸Ê¿¡¼­";
+		mes "À­ÂÊÀ¸·Î ¿Ã¶ó°¡¸é '°³¹ÌÁö¿Áµ¿±¼'ÀÇ";
+		mes "ÀÔ±¸ Áß ÇÏ³ª°¡ ÀÖ¾ú´Âµ¥... ¾ÆÁ÷µµ";
+		mes "°Å±â ÀÖÀ»·±°¡ ¸ğ¸£°Ú±º.";
 		close;
 	case 2:
-		mes "[Akira]";
-		mes "Ant Hell is swarming with Ant monsters. You'll notice that they all classed with different names...";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "µ¿±¼ ³»ºÎ¿¡´Â °Å´ë °³¹Ì ±«¹°µéÀÌ";
+		mes "»õ±î¸Ä°Ô ¿ì±Û°Å¸®´Âµ¥ Á¶±İ¸¸";
+		mes "³à¼®µéÀ» »ó´ëÇÏ´Ù  º¸¸é °³¹Ì ³ğµé";
+		mes "ÀÌ¸§¿¡ °¢°¢ °³¼ºÀÌ ÀÖ´Ù´Â°ÍÀ» ´À³¥¼ö";
+		mes "ÀÖÀ»²¨¾ß...";
 		next;
-		mes "[Akira]";
-		mes "Andre is the weakest, Piere is comparatively average, and Deniro is the strongest Ant. Keep that in mind so you can fight the Ants suitable to your level.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "³ğµéÀÇ ÀÌ¸§Àº °­·ÂÇÑ ¼øÀ¸·Î ¾Óµå·¹,";
+		mes "ÇÇ¿¡¸£, µ¥´Ï·Î¶ó³×.";
 		next;
-		mes "[Akira]";
-		mes "Andre is colored in Ivory, Yellowish Green is Piere, and the Red one is Deniro.";
-		mes "It's really easy to distinguish those from Bitata, the common ants because they look very different.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "¾ÆÀÌº¸¶óºûÀÇ ¾Óµå·¹, È²·Ï»öÀÇ ³à¼®ÀÌ";
+		mes "ÇÇ¿¡¸£, »õ»¡°£ °³¹Ì°¡ µ¥´Ï·Î.";
+		mes "ºñÅ¸Å¸ ¶ó´Â ÀÏ°³¹Ì´Â ¸ğ½ÀÀÌ Á¯Çô";
+		mes "´Ù¸£´Ï ±¸ºĞÇÏ±â ¸Å¿ì ½±Áö.";
 		next;
-		mes "[Akira]";
-		mes "Oh, and those ants are greedy as Porings and will try to steal your items, so keep that in mind.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "¾Æ ±×¸®°í °³¹ÌµéÀº Æ÷¸µ°ú ¸¶Âù°¡Áö·Î";
+		mes "¾ÆÀÌÅÛÀ» Å½ÇÏ´Ï Àß »ı°¢ÇØ¼­ °¡º¸¶ó°í.";
 		next;
-		mes "[Akira]";
-		mes "If you ever, could cross the desert without any disturbances from the Satan...";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "¸¶¿ÕÀÇ ¹æÇØ¸¦ ¹ŞÁö ¾Ê°í ¹«»çÈ÷";
+		mes "»ç¸·À» È¾´ÜÇÒ ¼ö ÀÖ´Ù¸é ¸»ÀÌÁö...";
 		close;
 	case 3:
-		mes "[Akira]";
-		mes "There's also an old man called Guias, the spirit of the earth. He's pretty hard to deal with.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "'°³¹ÌÁö¿Áµ¿±¼' ¾È¿¡´Â °³¹Ì»Ó¸¸ÀÌ";
+		mes "¾Æ´Ï¶ó ¸Å¿ì »ó´ëÇÏ±â °ñÄ¡¾ÆÇÂ ¶¥ÀÇ";
+		mes "Á¤·É °¡ÀÌ¾Æ½º ÇÒ¾Æ¹öÁöµµ »ì°íÀÖÁö.";
 		next;
-		mes "[Akira]";
-		mes "Sharp teeth and strong jaws of the ants would be something that you should be careful of, but the shovelling skills of that old grandpa is very strong that you should watch out.";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "³¯Ä«·Î¿î ÀÌ»¡°ú ÅÎÀÇ °³¹Ìµµ °³¹ÌÁö¸¸";
+		mes "°¡ÀÌ¾Æ½º ÇÒ¹è´Â Æ¯±âÀÎ »ğÁúÀÌ ¸Å¿ì";
+		mes "°­ÇÏ´Ï Á¶½ÉÇÏ°Ô³ª.";
 		next;
-		mes "[Akira]";
-		mes "...Well, what am I talking about? What is left to be afraid when the Satan of Morocc is revived? Huh..huhhuh...";
+		mes "[¾Æ¸®Ä«¸®]";
+		mes "...¸¶¿Õ ¸ğ¸£Å©°¡ µ¹¾Æ´Ù´Ï´Â ÀÌ ¸¶´ç¿¡";
+		mes "¹» Á¶½ÉÇÏ¶õ°ÇÁö³ª µµ Âü. ÇãÇãÇã.";
 		close;
 	}
 }
 
-moc_ruins,143,43,4	script	Assassin Boy#moc	118,{
-	mes "[Slayer Kid]";
-	mes "Unbeatable in man-to-man fights, Assassins always overcome their enemies! Erm, always overcome their enemies without a trace.";
+moc_ruins,143,43,4	script	¾î½Ø½Å Ã»³â#moc	118,{
+	mes "[½½·¹ÀÌ¾îÅ°Áî]";
+	mes "1 : 1 Á÷Á¢°ø°İ ÀüÅõÁ÷Á¾À¸·Î¼­ °¡Àå";
+	mes "ÀûÀ» ±ò²ûÇÏ°Ô ÇØÄ¡¿î´Ù°í ÇÏ´Â ¾î½Ø½Å!";
 	next;
-	mes "[Slayer Kid]";
-	mes "But what did they do when this destruction happened in Morocc!!!";
+	mes "[½½·¹ÀÌ¾îÅ°Áî]";
+	mes "µµ´ëÃ¼... ¸ğ·ÎÅ©°¡ ÀÌ·¸°Ô";
+	mes "ºØ±«µÉ¶§±îÁö ¾î½Ø½ÅÀº ¾îµğ¼­";
+	mes "¹¹Çß³ª!!!";
 	next;
-	switch(select("?????:Where I can find the Assassin clan?:End Conversation")) {
+	switch(select("?????:¾î½Ø¾À ±æµå´Â ¾îµğ¿¡ ÀÖ³ª¿ä?:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Slayer Kid]";
-		mes "I hear Assassins practice killing people, quietly and stealthfully..";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¾î½Ø½ÅÀº ±âÃ´¾øÀÌ ´Ù°¡°¡ ÈçÀûÀ»";
+		mes "³²±âÁö ¾Ê°í »ìÇØÇÏ´Â ±â¼úÀ» Àü¼ö";
+		mes "¹Ş´Â´Ù°íµé ÇÏ´Âµ¥...";
 		next;
-		mes "[Slayer Kid]";
-		mes "I left home three years ago, and have been searching for their secret base ever since...";
-		mes "Are they really that invisible?!";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¾î½Ø½Å ±æµå¸¦ Ã£¾Æ Çì¸ÇÁö ÀÌ¾ğ 3 ³â...";
+		mes "ÀÌÁ¦ ½½½½ ³ªÅ¸³ª ÁÙ ¶§ µµ µÇÁö";
+		mes "¾Ê¾Ò´À³Ä?!";
 		next;
-		mes "[Slayer Kid]";
-		mes "Well.. Maybe it'd too late now..";
-		mes "Now that the whole town's destroyed... I don't even care what happens next...";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¹¹... ÀÌ¹Ì ´Ê¾ú³ª...";
+		mes "¸¶À»µµ ºØ±«µÇ¾ú°í ¸»ÀÌÁö... ÀÌÁ¨";
+		mes "¾î¶»°Ô µÇ¾îµµ ÁÁ¾Æ...";
 		close;
 	case 2:
-		mes "[Slayer Kid]";
-		mes "You know what...";
-		mes "It seemed to be impossible to find.";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "±×°Ô ¸»ÀÌÁö...";
+		mes "¾Æ¹«¸® Ã£¾Æµµ ¾ø´Â °ÍÀÌ¾ß.";
 		next;
-		mes "[Slayer Kid]";
-		mes "Well, I hear that if you leave this town and go 2 maps east, and then 2 maps South, you should be able to find it..";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "ÀüÇØµéÀº ÀÌ¾ß±â·Î´Â ÀÌ ¸ğ·ÎÅ©";
+		mes "¸¶À»·ÎºÎÅÍ µ¿ÂÊÀ¸·Î 2 ¸Ê . ³²ÂÊÀ¸·Î 2";
+		mes "¸Ê Á¤µµ °É¾î°¡¸é ¸ğ·¡ÆøÇ³¼ÓÀÇ";
+		mes "¾î½Ø½Å±æµå, '¼Ò±×¶óÆ® ÃÑº»»ê ½Å±â·ç";
+		mes "Å¸¿ö'°¡ ³ªÅ¸³­´Ù°í µé¾ú´Âµ¥...";
 		next;
-		mes "[Slayer Kid]";
-		mes "The 'Mirage Tower,' the head building of Sograt Desert, is supposed to appear in this awesome sandstorm! But, I still haven't found it.";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "±× °÷ÀÇ ±æµå ¸¶½ºÅÍÀÎ ¾î½Ø½Å";
+		mes "Å©·Î½º¿¡°Ô ÀÎÁ¤À» ¹ŞÀ¸¸é";
+		mes "¾î½Ø½ÅÀ¸·Î ÀüÁ÷ÀÌ °¡´ÉÇÏ´Ù°í ÇØ.";
 		next;
-		mes "[Slayer Kid]";
-		mes "If you find them, and the clan master thinks you're qualified, you can become an Assassin! Or, at least, I think..";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¾î½Ø½Å Å©·Î½º¶õ, ¾î½Ø½Å Áß¿¡¼­µµ";
+		mes "ÃÖ°íÀÇ ¾Ï»ìÀÚ¿¡°Ô¸¸ ¼ö¿©ÇÏ´Â";
+		mes "°í±Ş¹®Àå!";
 		next;
-		mes "[Slayer Kid]";
-		mes "And I hear the coolest Assassin of them all is the Assassin Cross! But, that's even a bigger mystery~ You won't be able to see them unless you're a great thief!";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¿ì¼öÇÏÁö ¸øÇÑ µµµÏÀÌ¶ó¸é ¾î½Ø½Å";
+		mes "Å©·Î½ºÀÇ ¸ğ½ÀÀ» º¸´Â °Í Á¶Â÷";
+		mes "Èûµé°ÚÁö¿ä...";
 		next;
-		mes "[Slayer Kid]";
-		mes "But then... What the hell were they doing when Morocc was destroyed?!!!";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "ÇÏÁö¸¸... ¸ğ·ÎÅ©°¡ ÀÌ·¸°Ô";
+		mes "ºØ±«µÉ¶§°¡Áö ´ëÃ¼ ¾î½Ø½Å Å©·Î½ºµéÀº";
+		mes "¾îµğ¼­ ¹¹Çß³ª!!!";
 		close;
 	case 3:
-		mes "[Slayer Kid]";
-		mes "Assassin is one of the advanced jobs for Thief, and specializes in fighting with Neutral and Poison property attacks.";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "¾î½Ø½ÅÀÌ¶õ µµµÏ (Thief) À¸·ÎºÎÅÍ";
+		mes "ÀüÁ÷°¡´ÉÇÑ Á÷Á¾À¸·Î¼­ 1 : 1 ÀüÅõ Æ¯È÷";
+		mes "¹«¼Ó¼º + µ¶¼º Á÷Á¢°ø°İ¿¡ ´ÉÇÑ";
+		mes "¿©·¯°¡Áö ½ºÅ³À» º¸À¯ÇÏ°íÀÖ´Â 2 Â÷";
+		mes "Á÷¾÷ÀÌÁö¿ä.";
 		next;
-		mes "[Slayer Kid]";
-		mes "They're also very sneaky! I hear that they're able to cloak so that no one can see them!";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "ÆÀ¿øµéÀ» À§ÇØ¼­ ¸ğ½ÀÀ» °¨Ãß°í ÀûÀÌ";
+		mes "¿ì±Û¿ì±ÛÇÑ Áö¿ª¿¡ È¦·Î ÀáÀÔÇÏ¿© ¾Æ¹«";
+		mes "ÇÇÇØ ¾øÀÌ ÀûÁøÀ» Á¤ÂûÇÒ¼ö ÀÖ´Â";
+		mes "´É·Âµµ °®Ãß°í ÀÖ´ä´Ï´Ù.";
 		next;
-		mes "[Slayer Kid]";
-		mes "But then... What the hell were they doing when Morocc was destroyed?!!!";
+		mes "[½½·¹ÀÌ¾îÅ°Áî]";
+		mes "ÇÏÁö¸¸... ¸ğ·ÎÅ©°¡ ÀÌ·¸°Ô";
+		mes "ºØ±«µÉ¶§±îÁö ´ëÃ¼ ¾î½Ø½ÅµéÀº ¾îµğ¼­";
+		mes "¹¹Çß³ª!!!";
 		close;
 	}
 }
 
-moc_ruins,173,141,4	script	Dimitri#moc	49,{
-	mes "[Dimitri]";
-	mes "The desert of Morocc has the highest average temperature in Midgard. You might as well think twice before you sit on the sand in the middle of the desert, cause your ass will be toasted.";
+moc_ruins,173,141,4	script	¶ß²ö¾ÆÀú¾¾#moc	49,{
+	mes "[µ¥ÀúÆ®¸®]";
+	mes "¸ğ·ÎÅ© Áö¹æ »ç¸·Àº ¹Ìµå°¡¸£µå";
+	mes "Àü¿ª¿¡¼­ °¡Àå Æò±Õ±â¿ÂÀÌ ³ôÀº °÷";
+	mes "À¸·Î¼­ ÇÔºÎ·Î »ç¸· ÇÑ°¡¿îµ¥";
+	mes "¸ğ·¡¹Ù´Ú¿¡ ÅĞÆÛ´ö ÁÖÀú ¾ÉÀ¸¸é";
+	mes "¾ûµ¢ÀÌ°¡ ÀÍ°í ¸»Áö¿ä.";
 	next;
-	switch(select("About the desert sands:About the remedy for Fatigue:End Conversation")) {
+	switch(select("»ç¸·ÀÇ ¸ğ·¡¿¡ ´ëÇÏ¿©:ÇÇ·ÎÈ¸º¹¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Dimitri]";
-		mes "......What I mean is that...";
-		mes "It seems like it should be all burnt, but it's not!";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "......±×·±µ¥ ÀÌ°Ô ¸»ÀÌÁÒ...";
+		mes "½ÇÀº ÀÍ¾î¾ß Á¤»óÀÎµ¥  ±×·¸Áö°¡ ¾Ê¾Æ¿ä!";
 		next;
-		mes "[Dimitri]";
-		mes "You can sit down and take a rest whenever you need to and your ass won't burn. I guess the Morocc sand doesn't conduct heat as much as it should.";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "ÀÌÀ¯´Â ¸ğ·ÎÅ© »ç¸·ÀÇ ¸ğ·¡´Â ¿­";
+		mes "Àüµµ¼ºÀÌ ¸Å¿ì ³·±â ¶§¹®¿¡ ÈŞ½ÄÀ»";
+		mes "ÃëÇÏ·Á ÁÖÀú ¾É¾Æµµ... ¸¶³É µû²öµû²öÇÒ";
+		mes "Á¤µµ¶ø´Ï´Ù.";
 		next;
-		mes "[Dimitri]";
-		mes "That's why everyone could recover the HP and SP in the middle of desert.";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "±×·¡¼­ ¸ğµÎµé »ç¸· ÇÑ°¡¿îµ¥¿¡¼­ HP";
+		mes "¿Í SP ¸¦ È¸º¹ÇÒ ¼ö ÀÖ´Â °Å¿¹¿ä.";
 		next;
-		mes "[Dimitri]";
-		mes "Now I come to think of it, maybe the reason why Morocc has exceptionally high average temperature is because that Satan is sealed within.";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "Áö±İ¿Í¼­ »ı°¢ÇØº¸¸é, ¸ğ·ÎÅ© Áö¹æÀÌ";
+		mes "À¯µ¶ Æò±Õ ±â¿ÂÀÌ ³ôÀº °Ç ¸¶¿ÕÀÌ";
+		mes "ºÀÀÎµÇ¾îÀÖ¾ú±â ¶§¹®ÀÌÁö ¾ÊÀ»±î";
+		mes "½Í±º¿ä.";
 		close;
 	case 2:
-		mes "[Dimitri]";
-		mes "Recovery!";
-		mes "That's what the potions are for!";
-		mes "Red Potions have become steadily popular since they're so affordable, even though they only recover a little bit of HP.";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "ÇÇ·Î È¸º¹!";
+		mes "±×°ÍÀº ¸ğµç Æ÷¼ÇµéÀÇ ¼Ò¸Á!";
+		mes "Æ¯È÷ »¡°­Æ÷¼ÇÀº ³·Àº È¸º¹¼öÄ¡¿¡µµ";
+		mes "ºÒ±¸ÇÏ°í ¸Å¿ì Àú·ÅÇÑ °¡°İ°ú ºÎ´ãÀÌ";
+		mes "ÀûÀº ¹«°Ô µîÀ¸·Î ¾ğÁ¦³ª ²ÙÁØÇÑ";
+		mes "ÀÎ±â¸¦ ´©¸®°í ÀÖ½ÀÁÒ.";
 		next;
-		mes "[Dimitri]";
-		mes "Try this bottle of ice-cold potion when you go into the Oasis around the Pyramid...";
-		mes "Yeah.. you want this bad.. but the situation's not good...";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "ÇÇ¶ó¹Ìµå ÁÖº¯ ¿À¾Æ½Ã½º¿¡ Ã·º¡";
+		mes "¶Ù¾îµé¾î°¡ ½Ã¿ö¾ğÇÑ Æ÷¼Ç ÇÑº´...";
+		mes "¸Ô°í ½Í¾îµµ, »óÈ²ÀÌ ¸»ÀÌ ¾Æ´ÏÁÒ. ³×...";
 		close;
 	case 3:
-		mes "[Dimitri]";
-		mes "Sometimes 'Milk' comes out of 'PecoPeco's Egg.' Now..";
-		mes "I'm not sure how the cow's milk comes out of some bird's egg...";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "'ÆäÄÚÆäÄÚÀÇ¾Ë'À» ±ú¶ß¸®´Ùº¸¸é";
+		mes "'¿ìÀ¯'°¡ ³ª¿À´Â °æ¿ì°¡ Á¾Á¾ ÀÖ½ÀÁÒ.";
+		mes "¾îÂ°¼­ ¼ÒÀÇ Á¥ÀÌ »õÀÇ ¾Ë¿¡¼­";
+		mes "Æ¢¾î³ª¿À´Â°¡ ±Ã±İÇÏ³×¿ä...";
 		next;
-		mes "[Dimitri]";
-		mes "I may not be a man of science, but how is that even possible?.";
-		mes "I mean, did the Milk come prepackaged with the egg, or did it get in there somehow?..";
-		mes "Oh, whatever.. It's just not the time for this.";
+		mes "[µ¥ÀúÆ®¸®]";
+		mes "ÇÏÁö¸¸ ´Ş°¿¿¡¼­ '¿ìÀ¯'¶ó´Ï...";
+		mes "ÀÇ¿Ü·Î ¾î¿ï...";
+		mes "·ÁºÁ¾ß ¹¹ ¾îÂ¼°Ú¾î¿ä. »óÈ²ÀÌ";
+		mes "ÀÌÁö°æÀÎµ¥...";
 		close;
 	}
 }
 
-moc_ruins,174,120,4	script	Fly Man#moc	54,{
-	mes "[Armani]";
-	mes "Ooh, Woooowwww.";
+moc_ruins,174,120,4	script	ÆÄ¸®¾ÆÀú¾¾#moc	54,{
+	mes "[¹Â´Ù¾Ë¸¶´Ï]";
+	mes "¿ô,¿ì¿À¿À¿À¿À¿À.";
 	next;
-	mes "[Armani]";
-	mes "I... I really saw it.... The Fly Lord gets shattered in pieces in a blink of an eye...";
+	mes "[¹Â´Ù¾Ë¸¶´Ï]";
+	mes "³­... º¸¾Ò´Ù³×... »ç¸·ÆÄ¸®µéÀÇ ¿Õ";
+	mes "'µå·¡°ïÇÃ¶óÀÌ'°¡ ÇÑ¼ø°£ Àí´õ¹Ì°¡";
+	mes "µÇ¾î¹ö¸®´Â ±¤°æÀ» ¸»ÀÌÁö...";
 	next;
-	mes "[Armani]";
-	mes "What is really going on? Would it be possible for us to survive??";
+	mes "[¹Â´Ù¾Ë¸¶´Ï]";
+	mes "ÀÌ ¼¼»óÀº Á¤¸» ¾î¶»°Ô µÇ´Â °ÍÀÎ°¡?";
+	mes "¿ì¸° »ì¾Æ³²À» ¼ö ÀÖ´Â °ÍÀÎ°¡?";
 	next;
-	switch(select("The Fly Lord?!")) {
+	switch(select("µå... µå·¡°ïÇÃ¶óÀÌ?!")) {
 	case 1:
-		mes "[Armani]";
-		mes "Yes, yes! I'm talking about the Dragon Fly, master of all flies!!";
-		mes "The Dragon Fly is a special one that stays in the North-east of the town.";
+		mes "[¹Â´Ù¾Ë¸¶´Ï]";
+		mes "ÀÌ ¸¶À» ºÏµ¿ÂÊ¿¡ ºĞ¸í ºĞÀ§±â°¡ ´Ù¸¥";
+		mes "ÆÄ¸® ÇÑ¸¶¸®°¡ Á¸ÀçÇØ!";
+		mes "³à¼®ÀÇ ÀÌ¸§Àº »ç¸·ÆÄ¸®µéÀÇ ¿Õ";
+		mes "'µå·¡°ïÇÃ¶óÀÌ'!";
 		next;
-		mes "[Armani]";
-		mes "It's so much stronger than the other flies.";
+		mes "[¹Â´Ù¾Ë¸¶´Ï]";
+		mes "³à¼®Àº »ç¸·ÆÄ¸®µé Áß¿¡¼­µµ";
+		mes "¿ìµÎ¸Ó¸®¿¡ ¼ÓÇÏ´Âµ¥ ´Ù¸¥ ÆÄ¸®µé°ú´Â";
+		mes "ºñ±³µµ ¾ÈµÇ´Â ÀüÅõ·ÂÀ» °¡Áö°í ÀÖÁö.";
 		next;
-		mes "[Armani]";
-		mes "And when you kill it, there's even a chance that you might earn a ^880000Clip^000000 item!";
+		mes "[¹Â´Ù¾Ë¸¶´Ï]";
+		mes "³·Àº È®·üÀÌ±â´Â ÇÏÁö¸¸ 'Å¬·´'ÀÌ¶ó°í";
+		mes "ÇÏ´Â ±ÍÇÑ º¸¹°À» ¶³¾î¶ß¸®±âµµ ÇÏÁö...";
 		next;
-		mes "[Armani]";
-		mes "Anyways, don't you think the Satan Morocc is so cruel?";
-		mes "They may not be the same kind, but still isn't it cruel to take that monster's soul with a single blow?";
+		mes "[¹Â´Ù¾Ë¸¶´Ï]";
+		mes "±×°Ç±×·¸°í, ¸¶¿Õ ¸ğ¸£Å©µµ Âü";
+		mes "¹«ÀÚºñÇÏÁö ¾ÊÀº°¡?";
+		mes "°°Àº µ¿Á·Àº ¾Æ´ÒÁö ¸ô¶óµµ ÀÎ°£°ú";
+		mes "´ë¸³ ÁßÀÎ ¸ó½ºÅÍÀÇ ¸ñ¼ûÀ» ¾Æ¹«·¸Áö";
+		mes "¾Ê°Ô ¾Ñ¾Æ°¥ ¼ö ÀÖ´Ù´Ï ¸»ÀÌ¾ß.";
 		next;
-		mes "[Armani]";
-		mes "What should we do when this dreadful evil has come to life again!";
+		mes "[¹Â´Ù¾Ë¸¶´Ï]";
+		mes "±×·± ¸¶¿ÕÀÌ ºÎÈ°ÇßÀ¸´Ï ¿ì¸° ÀÌÁ¦";
+		mes "¾îÂ¼¸é ÁÁ´Ü ¸»ÀÎ°¡!";
 		close;
 	}
 }
 
-moc_ruins,173,70,4	script	Uncle Morocc#moc	48,{
-	mes "[Phlanette]";
-	mes "Morocc is located in an extremely dry region, surrounded by desert.";
-	mes "No place in the world is as hot as Morocc.";
+moc_ruins,173,70,4	script	¸ğ·ÎÅ©¾ÆÀú¾¾#moc	48,{
+	mes "[ÇÃ¶ó³İÆ®]";
+	mes "¸ğ·ÎÅ© Áö¹æÀº »ç¸·¿¡ µÑ·¯½Î¿©ÀÖ´Â";
+	mes "±Øµµ·Î °ÇÁ¶ÇÑ Áö´ëÀÌÁö.";
+	mes "Àü¼¼°è ¾îµğ¸¦ µÑ·¯ºÁµµ ¸ğ·ÎÅ©¸¸Å­";
+	mes "´ş°í °ÇÁ¶ÇÑ°÷Àº ¾ø¾î.";
 	next;
-	mes "[Phlanette]";
-	mes "I have a hunch that this hot and dry climate in Morocc is because of that Satan sealed deeper underground for so long.";
+	mes "[ÇÃ¶ó³İÆ®]";
+	mes "±×·¸°Ô ¸ğ·ÎÅ©°¡ ´ş°í °ÇÁ¶ÇÑ ÀÌÀ¯´Â";
+	mes "¾Æ¹«µµ ¸ğ·ÎÅ© ¶¥ ¹Ø ±í¼÷ÇÑ °÷¿¡";
+	mes "ºÀÀÎµÇ¾îÀÖ´ø ¸¶¿Õ ¶§¹®ÀÌ";
+	mes "¾Æ´Ï¾úÀ»±îÇÏ´Â »ı°¢ÀÌ µç´Ù³×.";
 	next;
-	switch(select("Tell me about the desert.:Quit Conversation")) {
+	switch(select("»ç¸· ÀÌ¾ß±â:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Phlanette]";
-		mes "Um.. I'll briefly tell ya about the desert if you want to know.";
-		mes "Due to low annual rainfall, low humidity and high evaporation rate, little vegetation can be found in the desert.";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "»ç¸·ÀÇ Á¤ÀÇ¿¡ ´ëÇØ ÀÌ¾ß±â ÇÏÁö.";
+		mes "°­¼ö·®ÀÌ ÀûÀº µ¥ ¹İÇØ Áõ¹ß·®ÀÌ ¸¹¾Æ";
+		mes "ÃÊ¸ñÀÌ °ÅÀÇ ÀÚ¶ö ¼ö ¾ø´Â ºÒ¸ğÀÇ";
+		mes "ÅäÁö¸¦ ¶æÇØ.";
 		next;
-		mes "[Phlanette]";
-		mes "Nonetheless, there are a few hardy plants that can survive and grow in the desert.";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "¾Æ¹«¸® °ÇÁ¶ÇÏ¿© ¼öºĞÀÌ ¾ø´Ù°í ÇØµµ";
+		mes "½Ä¹°ÀÌ ÀüÇô »ì ¼ö ¾ø´Â »ç¸·Àº µå¹°°í,";
+		mes "º¸Åë Ç®°ú °ü¸ñÀÌ ÀÚ¶ó´Âµ¥ ±× ¼ö°¡";
+		mes "Èñ¹ÚÇÑ »óÅÂ¸¦ ¸»ÇÏÁö.";
 		next;
-		mes "[Phlanette]";
-		mes "Unfortunately some of those plants growing around Morocc have been mutated into monsters.";
-		mes "One of those is Muka, the mutated cactus..";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "¸ğ·ÎÅ© »ç¸· ÁÖº¯¿¡´Â ÀÌ Ç®°ú °ü¸ñÀÌ";
+		mes "¸ó½ºÅÍÈ­ÇÑ °æ¿ìµµ ÀÖ¾î.";
+		mes "¼±ÀÎÀå ¸ó½ºÅÍÀÎ '¹«Ä«'°¡ ±× ´ëÇ¥ÀûÀÎ";
+		mes "¿¹Áö ..";
 		next;
-		mes "[Phlanette]";
-		mes "However, now that the Satan has revived, no one's sure of what changes would be made in the life cycles of Morocc.";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "Çã³ª, ¸¶¿ÕÀÌ ºÎÈ°ÇÑ Áö±İ ÀÌ ¸ğ·ÎÅ©ÀÇ";
+		mes "»ıÅÂ°¡ ¾î¶»°Ô º¯È­ÇÒÁö´Â ¾ÆÁ÷ ¾Æ¹«µµ";
+		mes "¸ğ¸¥´Ù³×.";
 		close;
 	case 2:
-		mes "[Phlanette]";
-		mes "Here and there!";
-		mes "Sand everywhere...";
-		mes "Oh, I curse you, the desert of Morocc!!";
-		mes "Damn you!";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "¾îµğ¸¦ µÑ·¯ºÁµµ ¸ğ·¡ »Ó!";
+		mes "¿À¿À. ÀÌÁ¦´Â Áö°Ü¿ìÀÌ...";
+		mes "±¥¾ÂÇÏ±â ±îÁöÇÑ ¸ğ·ÎÅ© »ç¸·!!";
+		mes "½È´Ù¾Æ!";
 		next;
-		mes "[Phlanette]";
-		mes "But our of all this hatred, I didn't want it to be completely destroyed...";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "ÇÏÁö¸¸ ±×·¸´Ù°íÇØµµ, ÀÌ·¸°Ô ºØ±«µÇ±æ";
+		mes "¿øÇß´ø °Ç ¾Æ´Ï¾ú³×¸¸...";
 		next;
-		mes "[Phlanette]";
-		mes "How come it's never possible to know its value while it's still around?";
+		mes "[ÇÃ¶ó³İÆ®]";
+		mes "¿Ö ´Ã »ç¶÷Àº ÀÒ°í³ª¼­¾ß ¼ÒÁßÇÔÀ»";
+		mes "´À³¢°í ¸¶´Â °ÍÀÎ°¡?";
 		close;
 	}
 }
 
-moc_fild16,199,212,4	script	 Uncle Assassin#moc	55,{
-	mes "[Hashisid]";
-	mes "...Assassins are trained";
-	mes "to approach their enemies stealthily,";
-	mes " as well as";
-	mes "to shroud their intent.";
-	mes "For this purpose,";
-	mes "we never";
-	mes "look our targets in the eye.";
+moc_fild16,199,212,4	script	 ¾î½Ø½ÅÁß³â#moc	55,{
+	mes "[ÇÏ½Ã½Ë]";
+	mes ". . . . . ¾î½Ø½ÅÀº";
+	mes "´«À» ¸¶ÁÖÄ¡Áö";
+	mes "¾Ê´Â°ÍÀÌ Áß¿äÇØ";
+	mes "¾Ï»ìÀÇ Å¸ÄÏÀÌ";
+	mes "ÇÁ·Î .. ¶Ç´Â ´«Ä¡°¡";
+	mes "ºü¸¥»ç¶÷ÀÌ¶ó¸é";
+	mes "»ì±â¸¦ ´À³¥Å×´Ï±î ¸»ÀÌ¾ß.";
 	next;
-	switch(select("Notion of Assassin:Quit Conversation")) {
+	switch(select("¾î½Ø½ÅÀÇ Á¤ÀÇ¿¡ ´ëÇÏ¿©:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[Hashisid]";
-		mes "Well, then..";
-		mes "I'll tell you what it is!";
-		mes "Assassins ..";
-		mes "may be commonly known as";
-		mes "infiltrators and murderers";
-		mes "who kill without remorse.";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "¾î½Ø½ÅÀÇ »çÀüÀû ÀÇ¹Ì¿¡";
+		mes "´ëÇÏ¿© ³ªºÒ³ªºÒ ´ëÁÖ¸¶ !";
+		mes "¾î½Ø½ÅÀÌ¶õ . ÀÚ°´ ..";
+		mes "¾Ï»ìÀÚ.. ±×¸®°í ÀÎ°İ";
+		mes "ÆòÆÇµîÀ» ÈÑ¼Õ½ÃÅ°´Â";
+		mes "»ç¶÷À» ÀÏÄÂÁö";
 		next;
-		mes "[Hashisid]";
-		mes "In actuality,";
-		mes "the Assassin clan";
-		mes "is forbidden to harm innocent people,";
-		mes "or at least,";
-		mes "not without good reason";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "¿ì¸® ¾î½Ø½Å ±æµå´Â";
+		mes "»ç¶÷ÀÇ µŞ¼Ò¹®À»";
+		mes "³ª»Ú°Ô ¸¸µé°Å³ª";
+		mes "ÁÖ·Î »ç¶÷¸¸À» »ìÇØÇÏ°Å³ª";
+		mes "ÇÏÁö´Â ¾Ê¾Æ";
 		next;
-		mes "[Hashisid]";
-		mes "Our true directive is to assassinate evil creatures,";
-		mes "and to use our stealth to gather intelligence";
-		mes "for the good of all Rune-Midgarts.";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "ÁÖ ÀÓ¹«´Â ¸ó½ºÅÍ¸¦";
+		mes "´ë»óÀ¸·ÎÇÑ 1 : 1 ¾Ï»ì";
+		mes "¶Ç´Â Á¤º¸ ¼öÁıÀÌÁö";
 		close;
 	case 2:
-		mes "[Hashisid]";
-		mes "Once upon a time,";
-		mes "our ancestors would";
-		mes "smoke tobacco called 'Hashish'";
-		mes "before performing their duties.";
-		mes "However, we no longer do so,";
-		mes "since insect or animal monsters are";
-		mes "very sensitive to the smell.";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "¿À·¡ Àü¿¡´Â";
+		mes "Çì½Ã (Hashish) ¶ó°í ÇÏ´Â";
+		mes "¹°´ã¹è¸¦ ¸¶½Ã°í³ª¼­";
+		mes "ÀÏÀ» ¼öÇàÇß´ÙÁö¸¸";
+		mes "¿ì¸® ±æµå¿¡¼­´Â ÈÄ°¢ÀÌ";
+		mes "¿¹¹ÎÇÑ °ïÃæÀÌ³ª";
+		mes "µ¿¹° ¸ó½ºÅÍµéÀÌ";
 		next;
-		mes "[Hashisid]";
-		mes "We strictly prohibit";
-		mes "smoking or eating";
-		mes "anything that has";
-		mes "strong smell...";
-		mes "If you ever,";
-		mes "try eating those";
-		mes "smelly garlic bread with spices,";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "´ã¹è³¿»õ¸¦ ¸Ã°í";
+		mes "´«Ä¡¸¦ Ã¤±â ¶§¹®¿¡";
+		mes "ÀÌ¸¦ ±İÁöÇÏ°í ÀÖÁö ..";
+		mes "ÀÚ³×µµ ÇâÀÌ ±¸¸®±¸¸®ÇÑ";
+		mes "¼Ò½º¸¦ ÀÜ¶à ¾ñÀº";
+		mes "¸¶´Ã»§ °°Àº °ÍÀ»";
+		mes "¿ÕÃ¢ ¸Ô°í";
 		next;
-		mes "[Hashisid]";
-		mes "and try hiding against";
-		mes "those wild boars or wolves,";
-		mes "believe me,";
-		mes "you'll be ripped in pieces.";
+		mes "[ÇÏ½Ã½Ë]";
+		mes "¸äµÅÁö³ª ´Á´ë¸¦";
+		mes "»ó´ë·Î ÇÏÀÌµùÀ»";
+		mes "½ÃµµÇß´Ù°¡´Â ¼ø½Ä°£¿¡";
+		mes "°É·¹°¡ µÉ°É¼¼";
 		close;
 	}
 }
 
-moc_fild16,211,254,4	script	Assassin#07rhea_30	118,{
-	mes "[La Conte]";
-	mes "Once Thiefs are promoted";
-	mes "to Assassins, which is very professional";
-	mes "they will be able to vary their battle style.";
-	mes "their battle style.";
-	mes "There are 2 main battle styles available to Assassins.";
-	mes "They may either wield dual daggers,";
-	mes "or fight with a set of Katars!";
+moc_fild16,211,254,4	script	¾î½Ø½ÅÃÑ°¢#07rhea_30	118,{
+	mes "[µğºñ¼¼ºì]";
+	mes "µµÀûÀÇ »ó±Ş Á÷¾÷ÀÎ";
+	mes "¾î½Ø½ÅÀÇ·Î ÀüÁ÷ÈÄ¿¡´Â";
+	mes "°ø°İÆ¯¼ºÀ» ´Ş¸®";
+	mes "Áñ±æ¼ö ÀÖ½À´Ï´Ù";
+	mes "Ä«Å¸¸£°èÀÇ ¾ç¼Õ¹«±â¿Í";
+	mes "´Ü°ËÀ» »ç¿ëÇÑ ÀÌµµ·ù";
+	mes "°ø°İÀÌ ±× ºĞ±âÀÔÁÒ!";
 	next;
-	switch(select("Specialty of Katar:Specialty of Dual Daggers:Quit Conversation")) {
+	switch(select("Ä«Å¸¸£°èÀÇ °ø°İÆ¯¼º:ÀÌµµ·ù°èÀÇ °ø°İÆ¯¼º:´ëÈ­¸¦ ±×¸¸µĞ´Ù")) {
 	case 1:
-		mes "[La Conte]";
-		mes "A set of Katars is";
-		mes "worn on both of the hands,";
-		mes "and allows Assassins";
-		mes "to quickly slash their enemies.";
-		mes "Anyone can buy a basic set of Katars";
-		mes "in Morocc somewhere.";
-		mes "Of course, only Assassins can use them.";
+		mes "[µğºñ¼¼ºì]";
+		mes "»ç¸·ÀÇ ¸¶À» ¸ğ·ÎÅ©ÀÇ";
+		mes "¹«±âÁ¡¿¡¼­ ±¸ÀÔ °¡´ÉÇÑ";
+		mes "Ä«Æ®¶ó°èÀÇ ¹«±â´Â";
+		mes "¾ç¼Õ¹«±â·Î¼­ . ¾ç¼Õ¿¡";
+		mes "³¢¿ö Àçºü¸£°Ô º£¾î³»´Â";
+		mes "±â¼úÀ» ÇÊ¿ä·ÎÇÏ´Â";
+		mes "Àåºñ ÀÔ´Ï´Ù.";
 		next;
-		mes "[La Conte]";
-		mes "The right Katar";
-		mes "usually does more damage,";
-		mes "while the left Katar";
-		mes "is used for the follow-through.";
-		mes "But since Katars are equipped on both hands,";
-		mes "you can't equip a shield or an extra weapon.";
+		mes "[µğºñ¼¼ºì]";
+		mes "¿ìÃøº£±â°¡ ÁÖ º£±â·Î¼­";
+		mes "ÁÂÃøÆÈÀÇ ¾àÇÑ º£±â°¡";
+		mes "ÀÌ¸¦ µ½½À´Ï´Ù";
+		mes "¾ç¼Õ¹«±âÀÌ¹Ç·Î ´Ù¸¥";
+		mes "ÇÑÂÊ¿¡ ´Ù¸¥ Àåºñ´Â";
+		mes "Âø¿ëÇÒ ¼ö ¾ø°Ô µË´Ï´Ù";
 		next;
-		mes "[La Conte]";
-		mes "Compared to Dual Daggers,";
-		mes "Katars have faster attack speed.";
-		mes "Also, the ^663399Sonic Blow^000000 skill";
-		mes "can only be used with Katars.";
+		mes "[µğºñ¼¼ºì]";
+		mes "ÀÌµµ·ù¿¡ ºñÇÏ¿© ¸Å¿ì";
+		mes "½Å¼ÓÇÑ  ¼Óµµ¸¦ ÀÚ¶ûÇÏ¸ç";
+		mes "' ¼Ò´Ğºí·Î¿ì '¶ó°í ÇÏ´Â";
+		mes "Ä«Å¸¸£Àåºñ½ÃÀÇ °íÀ¯";
+		mes "½ºÅ³À» »ç¿ëÇÒ ¼ö ÀÖ°Ô";
+		mes "µË´Ï´Ù";
 		next;
-		mes "[La Conte]";
-		mes "You can learn the Sonic Blow skill";
-		mes "at ^663399Level 4 Katar Mastery^000000.";
-		mes "If you're an Assassin,";
-		mes "it's a handy skill to know.";
+		mes "[µğºñ¼¼ºì]";
+		mes "' ¼Ò´Ğºí·Î¿ì ' ´Â Ä«Å¸¸£";
+		mes "¼ö·Ã ½ºÅ³ ·¹º§ 4 ÀÌ»óÀÏ ¶§";
+		mes "½ºÅ³¾÷À» ÇÒ ¼ö ÀÖ°Ô µË´Ï´Ù";
+		mes "' ¼Ò´Ğºí·Î¿ì ' ¶õ Ä«Å¸¸£¸¦";
+		mes "ÀÌ¿ëÇÑ Áø°øº£±â ±â¼ú·Î¼­";
 		next;
-		mes "[La Conte]";
-		mes "Sonic Blow is the skill";
-		mes "that inflicts 8 continuous hits of";
-		mes "Neutral damage.";
+		mes "[µğºñ¼¼ºì]";
+		mes "8 ¿¬Å¸ÀÇ ¹«¼Ó¼º";
+		mes "µ¥¹ÌÁö¸¦ Àçºü¸£°Ô";
+		mes "°¡°İÇÕ´Ï´Ù";
 		close;
 	case 2:
-		mes "[La Conte]";
-		mes "Dual Daggers";
-		mes "enables you to equip";
-		mes "2 different kinds of Daggers";
-		mes "at the same time.";
-		mes "Of course,";
-		mes "there are other weapons you can equip";
-		mes "aside from daggers,";
+		mes "[µğºñ¼¼ºì]";
+		mes "' ÀÌµµ·ù½ºÅ³ ' ÀÌ¶õ";
+		mes "¾ç¼Õ¿¡ °¢°¢ ´Ù¸¥ ´Ü°ËÀ»";
+		mes "Àåºñ ÇÒ¼ö ÀÖ°Ô µÇ´Â";
+		mes "±â¼ú ÀÔ´Ï´Ù";
+		mes "¾ç¼Õ¿¡ °¢°¢ ' ´Ü°Ë '";
+		mes "ÀÌ¿ÜÀÇ ´Ş¤¤ Àåºñµµ";
+		mes "Âø¿ë °¡´ÉÇÏÁö¸¸";
 		next;
-		mes "[La Conte]";
-		mes "but they'll probably";
-		mes "be lacking in attack speed.";
-		mes "So I suggest daggers.";
-		mes "Also, without a dagger";
-		mes "in your right hand,";
-		mes " you won't be able to use";
-		mes "the ^663399Double Attack^000000 skill.";
+		mes "[µğºñ¼¼ºì]";
+		mes "´Ü°Ë ¸¸Å­ÀÇ ¼Óµµ´Â";
+		mes "³ª¿ÀÁö ¾ÊÀ¸¹Ç·Î";
+		mes "´Ü°ËÀ» ÃßÃµÇÕ´Ï´Ù";
+		mes "Æ¯È÷ ¿À¸¥¼Õ¿¡ ´Ü°ËÀ»";
+		mes "ÀåÂøÇÏ°Ô µÇ¸é";
+		mes "' ´õºí½ºÅ³ ' ÀÌ ±×·¡·Î";
+		mes "Àû¿ëµÇ¹Ç·Î";
 		next;
-		mes "[La Conte]";
-		mes "So with Dual Daggers,";
-		mes "you would have a double attack";
-		mes "with the right hand dagger,";
-		mes " and a single attack with your left hand weapon.";
+		mes "[µğºñ¼¼ºì]";
+		mes "¿À¸¥¼Õ ´õºí + ¿Ş¼Õ Àåºñ";
+		mes "= ' 3 ¿¬Å¸ ' ¶ó´Â";
+		mes "²É´Ù¿î ¿¬ÃâÀ»";
+		mes "°¡´ÉÇÏ°Ô ¸¸µé¾îÁİ´Ï´Ù";
 		next;
-		mes "[La Conte]";
-		mes "So that's three strikes";
-		mes "in one blow!";
-		mes "You can't argue";
-		mes "against that kind of damage!";
+		mes "[µğºñ¼¼ºì]";
+		mes "¾çÂÊ¼Õ¿¡ °¢°¢ ´Ù¸¥";
+		mes "´Ü°ËÀÇ Æ¯¼ºÀ»";
+		mes "±×´ë·Î »ç¿ëÇÏ¹Ç·Î";
+		mes "º¸´Ù ÀÚÀ¯µµ ³ôÀº";
+		mes "°ø°İ¹æ¹ıÀ» ¸¸µé¾î";
+		mes "³ª¾Æ°¥ ¼ö ÀÖ½À´Ï´Ù";
 		close;
 	case 3:
-		mes "[La Conte]";
-		mes "Hopefully";
-		mes "you will make good use of";
-		mes "the weapons at your disposal.";
-		mes "Remember";
-		mes "the importance of";
-		mes "strategy and";
-		mes "planning your attacks.";
+		mes "[µğºñ¼¼ºì]";
+		mes "ÇöÀç °¡Áö°í ÀÖ´Â";
+		mes "¹«±âÀÇ Æ¯¼º°ú ..";
+		mes "¾ÕÀ¸·ÎÀÇ °èÈ¹À»";
+		mes "¸é¹ĞÈ÷ Á¶ÇÕÇÏ¿©";
+		mes "ºĞ±â¸¦ Àß ¼±ÅÃ";
+		mes "ÁÁÀº °á°ú ÀÖÀ¸½Ã±æ";
+		mes "¹Ù¸³´Ï´Ù";
 		close;
 	}
 }
 
+moc_ruins,101,124,6	script	Á¶¿ø ¾î´Ï½ºÆ®	881,{
+	mes "[¾î´Ï½ºÆ®]";
+	mes "¸ğÇè°¡½Ã±º¿ä.";
+	mes "...´ç½ÅÀÌ Á» ´õ °­Çß´õ¶ó¸é";
+	mes "¹ÙÁş°¡¶ûÀÌ¶óµµ Àâ°í ¸Å´Ş·Á¼­ ¾Ö¿øÇØ";
+	mes "º¸°Ú´Âµ¥...";
+	next;
+	mes "^9900FF40·¹º§ ÀÌ»ó ¼öÇà °¡´ÉÇÑ Äù½ºÆ®ÀÔ´Ï´Ù.^000000";
+	close;
+}
+
+moc_ruins,104,122,1	script	³ëÇĞÀÚ	897,{
+	mes "[³ëÇĞÀÚ]";
+	mes "¾Æ.. ÀÚ³×, ¸ğÇè°¡ÀÎ°¡?";
+	mes "³» ±äÈ÷ ºÎÅ¹À» Á»..";
+	next;
+	mes "[·ç¹Î]";
+	mes "¾ÈµÅ, ¿°°¨.";
+	mes "ÀÌ Ä£±¸ ½Ç·ÂÀ¸·Î´Â ¹«¸®¾ß.";
+	next;
+	mes "[·ç¹Î]";
+	mes "È¤½Ã ÀÌ ¸¶À»¿¡¼­ ¹º°¡ ÀÏÀ» ÇÒ";
+	mes "¿ä·®ÀÌ¸é Á» ´õ ·¹º§À» ¿Ã¸®°í ¿À´Â°Ô";
+	mes "ÁÁ°Ú¾î.";
+	mes "Æ¯È÷ ÇÇ¶ó¹Ìµå³ª ½ºÇÎÅ©½º´Â";
+	mes "À§ÇèÇÏ´Ï±î...";
+	next;
+	mes "^9900FF·¹º§ 50 ÀÌ»óºÎÅÍ ¼öÇà °¡´ÉÇÑ";
+	mes "Äù½ºÆ®ÀÔ´Ï´Ù.^000000";
+	close;
+}
+
+moc_ruins,105,124,4	script	·ç¹Î	638,{
+	mes "[·ç¹Î]";
+	mes "³Ê.. ¾ÆÁ÷ °¥ ±æÀÌ ¸Ö±º?";
+	close;
+}
+
+moc_ruins,85,142,4	script	½É½ÉÇÑ ¸¶½¬	82,{
+	mes "[¸¶½¬]";
+	mes "À½.. ¸ğ·ÎÅ©´Â ¾ğÁ¦ º¹±¸ µÉ±î?";
+	mes "¾Æ.. ½É½ÉÇØ. ½É½ÉÇÏ´Ù.";
+	close;
+}
+
+moc_ruins,141,125,4	script	¼ö»óÇÑ »ç¶÷	83,{
+	mes "[¼ö»óÇÑ »ç¶÷]";
+	mes "°Å±â!! ÃÊº¸ÀÚ!";
+	mes "¸ÚÁø ÀÎ»ıÀ» »ì°í ½Í³ª? Á» ´õ ÆíÇÑ";
+	mes "»ıÈ°À» ¿µÀ¯ÇÏ°í ½Í³ª!?";
+	mes "±×·¸´Ù¸é µµµÏÀÌ µÇ¾î µµµÏ±æµå¿¡";
+	mes "ÀÔ´ÜÇÏ°Å¶ó! µµµÏ±æµå´Â ¾ğÁ¦³ª";
+	mes "³ÊÈñµéÀ» È¯¿µÇÑ´Ù! Áö±İ ´çÀå";
+	mes "°¡ÀÔÇÏ¶ó!";
+	next;
+	mes "[¼ö»óÇÑ »ç¶÷]";
+	mes "Àå¼Ò´Â ÇÇ¶ó¹Ìµå ´øÀü 1Ãş Áß¾Ó¿¡";
+	mes "ÁöÇÏ·Î ÅëÇÏ´Â °è´ÜÀ¸·Î ³»·Á°¡¸é ÀÖ´Ù!";
+	close;
+}
 // Other NPCs
 //============================================================
 //Bartender
@@ -758,7 +1064,7 @@ morocc_in,166,76,3	script	Bartender#02	46,{
 
 // Assassin Guild Guards
 //===================================================
-moc_fild16,195,281,4	script	Assassin Guardian#1::SinGuard	707,{
+/*moc_fild16,195,281,4	script	Assassin Guardian#1::SinGuard	707,{
 	mes "[Assassin Guardian]";
 	if(BaseJob == Job_Assassin) {
 		mes "Welcome.";
@@ -779,4 +1085,4 @@ moc_fild16,200,231,4	duplicate(SinGuard)	Assassin Guardian#5	707
 moc_fild16,211,231,4	duplicate(SinGuard)	Assassin Guardian#6	707
 moc_fild16,200,257,4	duplicate(SinGuard)	Assassin Guardian#7	707
 moc_fild16,211,257,4	duplicate(SinGuard)	Assassin Guardian#8	707
-
+*/

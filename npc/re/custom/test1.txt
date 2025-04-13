@@ -1,0 +1,351 @@
+/*prontera,155,171,4	script	그레이프#hn2	23,{
+	mes "[그레이프]";
+	mes "금방 올꺼야.";
+	next;
+	switch(select("다나와!:들어가!")) {
+	case 1:
+		mes "[그레이프]";
+		mes "금방 올꺼야.";
+		enablenpc "[휴이]";
+		enablenpc "[카이]";
+		enablenpc "[이름없는자]";
+		enablenpc "[바르카디]";
+		enablenpc "[주시하는 자]";
+		enablenpc "[단테]";
+		enablenpc "[가일 마로비츠]";
+		close;
+	case 2:
+		mes "[그레이프]";
+		mes "자, 모두 제자리로 돌아가세요...";
+		disablenpc "[휴이]";
+		disablenpc "[카이]";
+		disablenpc "[이름없는자]";
+		disablenpc "[바르카디]";
+		disablenpc "[주시하는 자]";
+		disablenpc "[단테]";
+		disablenpc "[가일 마로비츠]";
+		close;
+	}
+	close;
+
+OnInit:
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 31;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 4;
+	setunitdata getnpcid(0), UNPC_HEADTOP, 82;
+	setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1330;
+	setunitdata getnpcid(0), UNPC_SEX, 1;	
+	end;
+}
+
+
+/*prontera,151,176,1	script	[휴이]	1_M_JOBTESTER,{
+	end;
+OnInit:
+	disablenpc();
+	end;	
+}
+
+prontera,151,174,1	script	[카이]	4_M_JOB_ASSASSIN,{
+	end;
+OnInit:
+	disablenpc();
+	end;	
+}
+
+prontera,151,172,1	script	[이름없는자]	1_M_MOC_LORD,{
+	end;
+OnInit:
+	disablenpc();
+	end;	
+}
+
+prontera,151,170,2	script	[바르카디]	4_F_JOB_ASSASSIN,{
+	end;
+OnInit:
+	disablenpc();
+	end;
+}
+
+prontera,151,168,1	script	[주시하는 자]	2_M_THIEFMASTER,{
+	end;
+OnInit:
+	disablenpc();
+	end;
+}
+
+prontera,151,166,1	script	[단테]	2_M_THIEFMASTER,{
+	end;
+OnInit:
+	disablenpc();
+	end;
+}
+
+prontera,151,164,1	script	[가일 마로비츠]	1_M_JOBTESTER,{
+	end;
+OnInit:
+	disablenpc();
+	end;
+}
+
+-	script	#moc_assin_dup1	-1,{
+	end;
+
+OnInit:
+	disablenpc();
+	end;
+}
+
+prontera,151,176,1	duplicate(#moc_assin_dup1)	[휴이]	55
+prontera,151,174,1	duplicate(#moc_assin_dup1)	[카이]	730
+prontera,151,172,1	duplicate(#moc_assin_dup1)	[이름없는자]	106
+prontera,151,170,2	duplicate(#moc_assin_dup1)	[바르카디]	725
+prontera,151,168,1	duplicate(#moc_assin_dup1)	[주시하는 자]	118
+prontera,151,166,1	duplicate(#moc_assin_dup1)	[단테]	118
+prontera,151,164,1	duplicate(#moc_assin_dup1)	[가일 마로비츠]	55
+*/
+
+/*-	script	spawn_woe	-1,{
+
+//mosk_ship 맵에서 포링이나 스콜피온 퍼밀리어 등등 중에 랜덤으로 하나가 결정되어 출현합니다
+
+
+
+OnInit:
+	setarray .mob_ID, 1001, 1002, 1004, 1005; // add more mob id
+	setarray .map_event$, "iz_int","iz_int01","iz_int02","iz_int03","iz_int04"; // yours woe map
+	.size_mob = getarraysize( .mob_ID );
+	.size_map = getarraysize( .map_event$ );
+
+	.@r = rand( .size_mob );
+	.@m = rand( .size_map );
+	monster .map_event$[.@m],0,0,"--ja--", .mob_ID[.@r],1,"";
+	announce "몬스터 " + strmobinfo( 1,.mob_ID[.@r] ) + " 가 " + .map_event$[.@m] + " 맵에 스폰되었습니다!",0; 
+	end;
+
+/*OnMinute00:
+	.@r = rand( .size_mob );
+	.@m = rand( .size_map );
+	monster .map_event$[.@m],0,0,"--ja--", .mob_ID[.@r],1,"";
+	announce "a "+ strmobinfo( 1,.mob_ID[.@r] ) +" is spawn in "+ .map_event$[.@m] +" !",0;
+	end;
+}
+*/
+
+prontera,151,191,5	script	전직도우미	897,{
+
+    mes "[Class Master]";
+    mes "Welcome to the Job Changer.";
+    next;
+
+    if (Class == 0) goto FirstJob;  // 1차 전직
+    if (Class >= 1 && Class <= 6) goto SecondJob;  // 2차 전직
+    if (Class >= 4008 && Class <= 4022) goto ThirdJob;  // 3차 전직
+    if (Class >= 4054 && Class <= 4108) goto FourthJob;  // 4차 전직
+    if (Class == 22 || Class == 23) goto BabyJob;  // 베이비 전직
+    close;
+
+FirstJob:
+    mes "[Class Master]";
+    mes "You are eligible to change to a first job.";
+    next;
+    menu "Swordman", SWORDMAN, "Magician", MAGICIAN, "Archer", ARCHER, "Acolyte", ACOLYTE, "Merchant", MERCHANT, "Thief", THIEF;
+    
+    SWORDMAN:
+        jobchange 1;
+        mes "You are now a Swordman!";
+        close;
+
+    MAGICIAN:
+        jobchange 2;
+        mes "You are now a Magician!";
+        close;
+
+    ARCHER:
+        jobchange 3;
+        mes "You are now an Archer!";
+        close;
+
+    ACOLYTE:
+        jobchange 4;
+        mes "You are now an Acolyte!";
+        close;
+
+    MERCHANT:
+        jobchange 5;
+        mes "You are now a Merchant!";
+        close;
+
+    THIEF:
+        jobchange 6;
+        mes "You are now a Thief!";
+        close;
+
+SecondJob:
+    if (JobLevel < 40) {
+        mes "[Class Master]";
+        mes "You need at least Job Level 40 to advance to the second job.";
+        close;
+    }
+    
+    mes "[Class Master]";
+    mes "You are eligible to change to a second job.";
+    next;
+    menu "Knight", KNIGHT, "Wizard", WIZARD, "Hunter", HUNTER, "Priest", PRIEST, "Blacksmith", BLACKSMITH, "Assassin", ASSASSIN;
+
+    KNIGHT:
+        jobchange 7;
+        mes "You are now a Knight!";
+        close;
+
+    WIZARD:
+        jobchange 8;
+        mes "You are now a Wizard!";
+        close;
+
+    HUNTER:
+        jobchange 9;
+        mes "You are now a Hunter!";
+        close;
+
+    PRIEST:
+        jobchange 10;
+        mes "You are now a Priest!";
+        close;
+
+    BLACKSMITH:
+        jobchange 11;
+        mes "You are now a Blacksmith!";
+        close;
+
+    ASSASSIN:
+        jobchange 12;
+        mes "You are now an Assassin!";
+        close;
+
+ThirdJob:
+    if (BaseLevel < 99 || JobLevel < 50) {
+        mes "[Class Master]";
+        mes "You need at least Base Level 99 and Job Level 50 to advance to the third job.";
+        close;
+    }
+
+    mes "[Class Master]";
+    mes "You are eligible to change to a third job.";
+    next;
+    menu "Rune Knight", RUNEKNIGHT, "Warlock", WARLOCK, "Ranger", RANGER, "Archbishop", ARCHBISHOP, "Mechanic", MECHANIC, "Guillotine Cross", GUILLOTINECROSS;
+
+    RUNEKNIGHT:
+        jobchange 4054;
+        mes "You are now a Rune Knight!";
+        close;
+
+    WARLOCK:
+        jobchange 4055;
+        mes "You are now a Warlock!";
+        close;
+
+    RANGER:
+        jobchange 4056;
+        mes "You are now a Ranger!";
+        close;
+
+    ARCHBISHOP:
+        jobchange 4057;
+        mes "You are now an Archbishop!";
+        close;
+
+    MECHANIC:
+        jobchange 4058;
+        mes "You are now a Mechanic!";
+        close;
+
+    GUILLOTINECROSS:
+        jobchange 4060;
+        mes "You are now a Guillotine Cross!";
+        close;
+
+FourthJob:
+    if (BaseLevel < 200 || JobLevel < 70) {
+        mes "[Class Master]";
+        mes "You need at least Base Level 200 and Job Level 70 to advance to the fourth job.";
+        close;
+    }
+
+    mes "[Class Master]";
+    mes "You are eligible to change to a fourth job.";
+    next;
+    menu "Dragon Knight", DRAGONKNIGHT, "Archmage", ARCHMAGE, "Windhawk", WINDHAWK, "Cardinal", CARDINAL, "Biolo", BIOLO, "Shadow Cross", SHADOWCROSS;
+
+    DRAGONKNIGHT:
+        jobchange 4087;
+        mes "You are now a Dragon Knight!";
+        close;
+
+    ARCHMAGE:
+        jobchange 4088;
+        mes "You are now an Archmage!";
+        close;
+
+    WINDHAWK:
+        jobchange 4089;
+        mes "You are now a Windhawk!";
+        close;
+
+    CARDINAL:
+        jobchange 4090;
+        mes "You are now a Cardinal!";
+        close;
+
+    BIOLO:
+        jobchange 4091;
+        mes "You are now a Biolo!";
+        close;
+
+    SHADOWCROSS:
+        jobchange 4093;
+        mes "You are now a Shadow Cross!";
+        close;
+
+BabyJob:
+    if (BaseLevel < 10) {
+        mes "[Class Master]";
+        mes "You need at least Base Level 10 to become a baby class.";
+        close;
+    }
+    
+    mes "[Class Master]";
+    mes "You are eligible to change to a baby job.";
+    next;
+    menu "Baby Swordman", BABYSWORDMAN, "Baby Magician", BABYMAGICIAN, "Baby Archer", BABYARCHER, "Baby Acolyte", BABYACOLYTE, "Baby Merchant", BABYMERCHANT, "Baby Thief", BABYTHIEF;
+
+    BABYSWORDMAN:
+        jobchange 4023;
+        mes "You are now a Baby Swordman!";
+        close;
+
+    BABYMAGICIAN:
+        jobchange 4024;
+        mes "You are now a Baby Magician!";
+        close;
+
+    BABYARCHER:
+        jobchange 4025;
+        mes "You are now a Baby Archer!";
+        close;
+
+    BABYACOLYTE:
+        jobchange 4026;
+        mes "You are now a Baby Acolyte!";
+        close;
+
+    BABYMERCHANT:
+        jobchange 4027;
+        mes "You are now a Baby Merchant!";
+        close;
+
+    BABYTHIEF:
+        jobchange 4028;
+        mes "You are now a Baby Thief!";
+        close;
+
+}

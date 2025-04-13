@@ -24,19 +24,19 @@
 //==================================================
 // hu_fild01 - Thanatos Tower
 //==================================================
-hu_fild01,0,0	monster	Novus	1715,105,5000
-hu_fild01,0,0	monster	Novus	1718,36,5000
-hu_fild01,0,0	monster	Geographer	1368,10,5000
-hu_fild01,0,0	monster	Dragon Egg	1721,10,5000
+hu_fild01,0,0	monster	노버스	1715,105,5000
+hu_fild01,0,0	monster	노버스	1718,36,5000
+hu_fild01,0,0	monster	지오그래퍼	1368,10,5000
+hu_fild01,0,0	monster	드래곤의 알	1721,10,5000
 
 //==================================================
 // hu_fild02 - Hugel Field
 //==================================================
-hu_fild02,0,0	monster	Novus	1715,126,5000
-hu_fild02,0,0	monster	Novus	1718,37,5000
-hu_fild02,0,0	monster	Geographer	1368,37,5000
-hu_fild02,0,0	monster	Dragon Egg	1721,25,5000
-hu_fild02,0,0	monster	Gryphon	1259,3,3600000
+hu_fild02,0,0	monster	노버스	1715,126,5000
+hu_fild02,0,0	monster	노버스	1718,37,5000
+hu_fild02,0,0	monster	지오그래퍼	1368,37,5000
+hu_fild02,0,0	monster	드래곤의 알	1721,25,5000
+hu_fild02,0,0	monster	그리폰	1259,3,3600000
 
 //==================================================
 // hu_fild03 - Disabled on Renewal
@@ -45,30 +45,31 @@ hu_fild02,0,0	monster	Gryphon	1259,3,3600000
 //==================================================
 // hu_fild04 - Hugel Field
 //==================================================
-hu_fild04,0,0	monster	Novus	1718,100,5000
-hu_fild04,0,0	monster	Novus	1715,30,5000
-hu_fild04,0,0	monster	Geographer	1368,30,5000
-hu_fild04,0,0	monster	Dragon Egg	1721,20,5000
-hu_fild04,0,0	monster	Yellow Plant	1081,10
-hu_fild04,206,210,30,18	monster	Blue Plant	1079,4,120000,600000
-hu_fild04,206,120,10,10	monster	Blue Plant	1079,2,120000,600000
+hu_fild04,0,0	monster	노버스	1718,100,5000
+hu_fild04,0,0	monster	노버스	1715,30,5000
+hu_fild04,0,0	monster	지오그래퍼	1368,30,5000
+hu_fild04,0,0	monster	드래곤의 알	1721,20,5000
+hu_fild04,0,0	monster	노란 풀	1081,10
+hu_fild04,206,210,30,18	monster	파란 풀	1079,4,120000,600000
+hu_fild04,206,120,10,10	monster	파란 풀	1079,2,120000,600000
 
 //==================================================
 // hu_fild05 - The Abyss Lake
 //==================================================
-hu_fild05,0,0	monster	Novus	1718,130,5000
-hu_fild05,0,0	monster	Novus	1715,35,5000
-hu_fild05,0,0	monster	Dragon Egg	1721,20,5000
+hu_fild05,0,0	monster	노버스	1718,130,5000
+hu_fild05,0,0	monster	노버스	1715,35,5000
+hu_fild05,0,0	monster	드래곤의 알	1721,20,5000
 
 //==================================================
 // hu_fild06 - Hugel Field
 //==================================================
-hu_fild06,0,0	monster	Shellfish	1074,87,5000
-hu_fild06,0,0	monster	Crab	1073,35,5000
-hu_fild06,0,0	monster	Aster	1266,35,5000
-hu_fild06,234,251,14,120	monster	Green Plant	1080,10,600000
-hu_fild06,234,251,14,120	monster	Yellow Plant	1081,10,600000
+hu_fild06,0,0	monster	조개	1074,87,5000
+hu_fild06,0,0	monster	게	1073,35,5000
+hu_fild06,0,0	monster	에스터	1266,35,5000
+hu_fild06,234,251,14,120	monster	초록 풀	1080,10,600000
+hu_fild06,234,251,14,120	monster	노란 풀	1081,10,600000
 
 //==================================================
 // hu_fild07 - Disabled on Renewal
 //==================================================
+

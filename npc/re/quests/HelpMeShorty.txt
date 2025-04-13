@@ -1,90 +1,123 @@
-//===== rAthena Script =======================================
-//= Dynamic NPC: HelpMeShorty.
-//===== Description: =========================================
-//- [Walkthrough conversion]
-//= Short quest to allow the player to summon, via an item, a dynamic NPC that gives basic game information.
-//= After level 30, the player can get a costume in exchange for the item.
-//===== Changelogs: ==========================================
-//= 1.0 First version. [Capuche]
-//============================================================
+//===== rAthena script =======================================
+//= 동적 NPC: HelpMeShorty.
+//===== 설명: =========================================
+//- [둘러보기 변환]
+//= 플레이어가 아이템을 통해 기본 게임 정보를 제공하는 동적 NPC를 소환할 수 있도록 하는 쇼티 퀘스트입니다.
+//= 레벨 30 이후 플레이어는 아이템과 교환하여 의상을 얻을 수 있습니다.
+//===== 변경 내역: ========================================= =
+//= 1.0 첫 번째 버전. [카푸체]
+//================================================ ============
 
-// Starter
-izlude,173,210,3	script	Black Shadow#fgtg01	4_CENERE,5,5,{
+// 스타터
+izlude,173,210,3	script	검은 그림자#fgtg01	4_CENERE,5,5,{
 	if (isbegin_quest(14688) == 0 && BaseLevel < 31) {
-		mes "[Black Shadow]";
-		mes "Take me! You have to take responsibility for me for making eye contact!";
+		mes "[검은 그림자]";
+		mes "나를 데리고 가! 눈 마주쳤으니까 나를";
+		mes "책임을 져야 돼!";
 		next;
-		mes "[Black Shadow]";
-		mes "If you take me, ^0000cdI'll help too^000000. I'll really help you in many ways! I'll teach you ^0000cda lot of things^000000!!";
+		mes "[검은 그림자]";
+		mes "날 데리고 가면 ^0000cd나도 도와 줄 거다^000000.";
+		mes "진짜로 여러모로 도와줄게! 작고 약한"; 
+		mes "선샘미에게 ^0000cd이것저것 많이 알려줄게^000000!!";
 		next;
-		mes "[Shorty Notice]";
-		mes "^EE0000If you choose to accompany Shorty, the item ^0000cd<Help Me Shorty>^EE0000 will be automatically placed in your inventory.";
+		mes "[쇼티 안내문]";
+		mes "^EE0000쇼티와 동행하기를 선택하게 되면";
+		mes "^0000cd<도와줘 쇼피>^EE0000 아이템이 자동으로";
+		mes "인벤토리 안으로 들어옵니다.";
 		next;
-		mes "[Shorty Notice]";
-		mes "If you use the <Help Me Shorty> item in your ^EE0000inventory, you can summon Shorty and get ^0000cdhelp and advice^EE0000 from it.";
+		mes "[쇼티 안내문]";
+		mes "^EE0000인벤토리 안의 <도움말 쇼티>";
+		mes "아이템을 사용하면 쇼티를 불러낼 수";
+		mes "있으며 쇼티로부터 ^0000cd각종 도움과 조언^EE0000을";
+		mes "받을 수 있습니다.";
 		next;
-		mes "[Shorty Notice]";
-		mes "^EE0000When you reach level 31 or higher, you can receive a quest that takes you to Shorty. Completing this quest will send you away and receive a reward at the same time.";
+		mes "[쇼티 안내문]";
+		mes "^EE0000사용자의 레렙이 31이상이 되면 쇼티를";
+		mes "목적지까지 데려다 주는 퀘스트를 받을";
+		mes "수 있습니다. 해당 퀘스트를 완료하면";
+		mes "쇼티를 떠나 보내며 동시에 보상을";
+		mes "받을 수 있습니다.";
 		next;
-		mes "[Shorty Notice]";
-		mes "^EE0000Before reaching level 31, you can send Shorty away at any time via the ^0000cd<Let's Break Up>^EE0000 menu, but you will never be able to make Shorty your ally again after that.";
+		mes "[쇼티 안내문]";
+		mes "^EE000031레벨에 도달하기전이라도 ^0000cd<우리";
+		mes "이제 헤어져>^EE0000메뉴를 통해 언데든";
+		mes "쇼티를 떠나보낼 수 있지만 이후";
+		mes "다시는 쇼티를 동료로 삼을 수";
+		mes "없습니다.";
 		next;
-		if (select( "Well, let's go together.", "I don't want to go together." ) == 2) {
-			mes "[Black Shadow]";
-			mes "Can you do this without my help? You will surely not be able to walk ten steps and think of me. Isn't life about helping each other? It can't be like this.";
+		if (select( "그러지 뭐. 같이 가자","같이 다니기 싫은데." ) == 2) {
+			mes "[검은 그림자]";
+			mes "도움이 필요한 나에게 이럴 수 있냐?";
+			mes "선샘미는 분명 열 걸음도 못 가서 내";
+			mes "생각이 날 거다. 서로 도우면서 사는게";
+			mes "인생 아니냐. 이럴 수는 없는 거다.";
 			close;
 		}
-		mes "[Black Shadow]";
-		mes "Phew- I'm glad. Are we friends now?";
+		mes "[검은 그림자]";
+		mes "휘유- 다행이다. 우리 이제 동료지이?";
 		next;
-		mes "[Black Shadow]";
-		mes "By the way, what's with those eyes...? Are you afraid of me? I was doing this to stand out, wait a minute...";
+		mes "[검은 그림자]";
+		mes "그런데 그 눈빛은 뭐냐...? 혹시 내가";
+		mes "무섭냐? 눈에 띄려고  이 모습을 하고";
+		mes "있었는데, 잠시만...";
 		next;
 		cloakonnpcself();
-		cloakoffnpcself("Mysterious Creature#fgtg01" );
-		mes "[Black Shadow]";
-		mes "Is this enough?";
+		cloakoffnpcself("신비한 생물#fgtg01" );
+		mes "[검은 그림자]";
+		mes "이 정도면 됐겠지?";
 		next;
-		mes "[Shorty]";
-		mes "My name is Shorty!!";
+		mes "[쇼티]";
+		mes "내 이름은 쇼티!!";
 		next;
-		mes "[Shorty]";
-		mes "What is your name?";
+		mes "[쇼티]";
+		mes "선샘미의 이름은 뭐냐?";
 		next;
-		select( "My name is " + strcharinfo(0) + "." );
-		mes "[Shorty]";
-		mes "It's an easy name to say. Do you have a bag? That's the one you wear around your waist. It's just the right size for me to fit in.";
+		select( "내 이름은 " + strcharinfo(0) + "." );
+		mes "[쇼티]";
+		mes "부르기 쉽고 좋은 이름이다. 선샘미,";
+		mes "가방을 가지고 있겠지?허리에 두른";
+		mes "그거 말이다. 내가 들어가기 딱 좋은";
+		mes "크기다.";
 		next;
-		select( "You want to go in the bag?" );
-		mes "[Shorty]";
-		mes "I can fit in your bag. What are you so surprised about? It won't be long. I'll be leaving soon.";
+		select( "가방 안에 들어가겠다고?" );
+		mes "[쇼티]";
+		mes "가방 안에 들어갈 수도 있지 뭘 그리";
+		mes "놀라고 그러냐? 오래 있지는 않을 거다.";
+		mes "금방 떠날 거니까.";
 		next;
-		mes "[Shorty]";
-		mes "Press ^0000cdALT+E^000000 to see the inside of the bag, press the consumption tab and I will be right there.";
+		mes "[쇼티]";
+		mes "^0000cdALT+E^000000를 누르면 가방 안을 볼 수";
+		mes "있는데 소비탭을 누르면 바로 거기에";
+		mes "내가 있을 거다.";
 		next;
-		mes "[Shorty]";
-		mes "When you want to call me, press ^0000cd<Help Me Shorty>^000000 twice quickly and I'll come out of your bag and help you. How about it? Isn't it great?";
+		mes "[쇼티]";
+		mes "나를 부르고  싶을 땐 ^0000cd<도와줘 쇼티>^000000를";
+		mes "빠르게 두 번 느리면 내가 가방에서";
+		mes "나와서 도와 줄게. 어때? 나쁘지 않지?";
 		next;
-		mes "[Shorty]";
-		mes "If you don't like me in the bag, take me to ^0000cdSalty^000000. That's my destination, so when the time comes, I will leave ^0000cdyour bag^000000.";
+		mes "[쇼티]";
+		mes "내가 가방 안에 있는 것이 싫으면 나를";
+		mes "^0000cd솔티에게 데라다^000000 줘. 거기가 내";
+		mes "목적지니까 그때가 되면 ^0000cd선샘미의";
+		mes "가방을 떠날^000000 거다.";
 		next;
-		select( "Where is that person?" );
-		mes "[Shorty]";
-		mes "I'll tell you later. I want to rest for now.";
+		select( "그 사람은 어디에 있는데?" );
+		mes "[쇼티]";
+		mes "차차 알려줄게. 지금은 좀 쉬고 싶어.";
 		next;
-		mes "[Shorty]";
-		mes "Good luck in the future!";
+		mes "[쇼티]";
+		mes "앞으로 잘 부타캐!";
 		setquest 14688;
 		completequest 14688;
 		getitem 23278,1;	// HelpmeShorty
-		cloakonnpcself("Mysterious Creature#fgtg01" );
+		cloakonnpcself("신비한 생물#fgtg01" );
 		close;
 	}
 	end;
 
 OnTouch:
 	if (isbegin_quest(14688) == 0 && BaseLevel < 31)
-		npctalk "Save me! Hug me quickly! Save me!", "", bc_self;
+		npctalk "나를 살려라! 나를 빨리 안아줘! 나를 구해!", "", bc_self;
 	end;
 
 OnInit:
@@ -93,90 +126,90 @@ OnInit:
 	end;
 }
 
-//izlude,173,210,3	script	Mysterious Creature#fgtg01	4_GALAPAGO,5,5,{	// unknown OnTouch effect
-izlude,173,210,3	duplicate(dummy_cloaked_npc)	Mysterious Creature#fgtg01	4_GALAPAGO
+//izlude,173,210,3 script 신비한 생물#fgtg01 4_GALAPAGO,5,5,{ // 알 수 없는 OnTouch 효과
+izlude,173,210,3	duplicate(dummy_cloaked_npc)	신비한 생물#fgtg01	4_GALAPAGO
 
 izlude,161,199,0	script	#fgtg01	HIDDEN_WARP_NPC,3,5,{
 	end;
 OnTouch:
 	if (isbegin_quest(14688) == 0 && BaseLevel < 31)
-		cloakoffnpcself( "Black Shadow#fgtg01" );
+		cloakoffnpcself( "검은 그림자#fgtg01" );
 	end;
 }
 izlude,194,209,0	duplicate(#fgtg01)	#fgtg02	HIDDEN_WARP_NPC,3,5
 izlude,173,210,0	duplicate(#fgtg01)	#fgtg03	HIDDEN_WARP_NPC,3,5
 
 
-// Exchange npc. Step 1 of 2
-payon_in01,193,23,3	script	Chanmo#fgtg01	1_F_ORIENT_01,{
+// npc를 교환합니다. 2단계 중 1단계
+payon_in01,193,23,3	script	찬모#fgtg01	1_F_ORIENT_01,{
 	if (isbegin_quest(14693) == 1) {
 		cloakoffnpcself( "Shorty#fgtg004" );
-		mes "[Shorty]";
-		mes "Salty! Salty~ I'm here~ Did you wait? Did you wait a long time?";
+		mes "[쇼티]";
+		mes "솔티! 솔티~ 나왔어요~ 기다렸어요? 오래 기다리셨나요?";
 		next;
-		mes "[In the inn]";
+		mes "[여관에서]";
 		mes "......";
 		next;
-		mes "[Shorty]";
-		mes "Salty, Salty? Salty? Where have you been Salty?";
+		mes "[쇼티]";
+		mes "솔티, 솔티? 솔티? 솔티 어디 있었어?";
 		next;
-		mes "[Chanmo]";
-		mes "Who are you talking about?";
+		mes "[찬모]";
+		mes "누구 말하는 거야?";
 		next;
-		mes "[Shorty]";
-		mes "I came to find Salty.. I came, but there is no Salty.";
+		mes "[쇼티]";
+		mes "솔티 찾으러 왔는데.. 왔는데 솔티가 없네.";
 		next;
-		mes "[Chanmo]";
-		mes "Salty? Ah, you're talking about the woman who is staying in the room. I sent her on an errand.";
+		mes "[찬모]";
+		mes "솔티? 아, 방에 묵고 있는 여자 얘기죠. 제가 심부름을 보냈어요.";
 		next;
-		mes "[Shorty]";
-		mes "Errands? Why?";
+		mes "[쇼티]";
+		mes "심부름? 왜요?";
 		next;
-		mes "[Chanmo]";
-		mes "I'm bored. I sent her to get some jelly and acorns.";
+		mes "[찬모]";
+		mes "심심해요. 젤리랑 도토리 사오라고 보냈어요.";
 		next;
-		mes "[Shorty]";
-		mes "Hey! Where are you coming from? We came to see Salty, why did you send Salty away~";
+		mes "[쇼티]";
+		mes "야! 너 어디서 왔니? 솔티 보러 왔는데 왜 솔티를 보내냐~";
 		next;
-		mes "[Chanmo]";
-		mes "I didn't force anyone to come, and I pulled Zug's head and rolled it over. So I sent him out.";
+		mes "[찬모]";
+		mes "누구도 오라고 강요하지 않고 저그의 머리를 잡아당겨 굴려 보냈습니다.";
 		next;
-		mes "[Shorty]";
-		mes "Then can I wait here?";
+		mes "[쇼티]";
+		mes "그럼 여기서 기다리면 되나요?";
 		next;
-		mes "[Chanmo]";
-		mes "If you're in a hurry, you can help. You can find the";
-		mes "<NAVI>[Coco's nest]<INFO>prt_fild10,318,191,0,101,0</INFO></NAVI> in the south-southwest of Prontera. You can get a bunch of acorns from Coco.";
+		mes "[찬모]";
+		mes "급하다면 도움을 줄 수 있어요. 찾을 수 있어요.";
+		mes "<NAVI>[코코의 둥지]<INFO>prt_fild10,318,191,0,101,0</INFO></NAVI> 프론테라 남서쪽에 있습니다. 코코에게서 도토리를 잔뜩 얻을 수 있습니다.";
 		next;
-		mes "[Shorty]";
-		mes "Hm.. Alright. Master, let's go too. To the Coco's nest.";
+		mes "[쇼티]";
+		mes "흠.. 알았어. 주인님도 가자. 코코 둥지로.";
 		next;
-		select("Are you here?");
-		mes "[Shorty]";
-		mes "I miss Salty. Let's go see Salty.";
+		select("여기 계세요?");
+		mes "[쇼티]";
+		mes "솔티 보고싶다. 솔티 보러 가자.";
 		next;
-		select("Okay then.");
-		mes "[Shorty]";
-		mes "Well then, let's go!!!";
+		select("그럼 좋아요.");
+		mes "[쇼티]";
+		mes "그럼 가자!!!";
 		cloakonnpcself("Shorty#fgtg004");
 		completequest 14693;
 		setquest 14694;
 		close;
 	}
-	mes "[Chanmo]";
-	mes "I need to pick some acorn and jelly today.";
+	mes "[찬모]";
+	mes "오늘은 도토리와 젤리를 따야 해요.";
 	close;
 }
 
 payon_in01,190,24,5	duplicate(dummy_cloaked_npc)	Shorty#fgtg004	4_GALAPAGO
 
 
-// Exchange npc. Step 2 of 2
+// npc를 교환합니다. 2/2단계
 prt_fild10,318,191,0	script	#salt01	HIDDEN_WARP_NPC,3,5,{
 	end;
 OnTouch:
 	if (isbegin_quest(14694) == 1)
-		cloakoffnpcself( "Salty#fgtg01" );
+		cloakoffnpcself( "솔티#fgtg01" );
 	end;
 }
 prt_fild10,262,39,0	duplicate(#salt01)	#salt02	HIDDEN_WARP_NPC,3,5
@@ -188,72 +221,72 @@ prt_fild10,311,167,0	duplicate(#salt01)	#salt07	HIDDEN_WARP_NPC,3,5
 prt_fild10,298,212,0	duplicate(#salt01)	#salt08	HIDDEN_WARP_NPC,3,5
 
 
-prt_fild10,318,191,3	script	Salty#fgtg01	4_F_ALCHE_A,{
+prt_fild10,318,191,3	script	솔티#fgtg01	4_F_ALCHE_A,{
 	if (isbegin_quest(14694) == 1) {
-		mes "[Salty]";
-		mes "Alas! Acorns! Muk-muk, acorn jelly! What do you do with acorns? You eat acorn jelly~";
+		mes "[솔티]";
+		mes "아아! 도토리야! 묵묵, 도토리묵! 도토리는 어떡해? 도토리묵을 먹어~";
 		next;
 		cloakoffnpcself( "Shorty#fgtg005" );
-		mes "[Shorty]";
-		mes "You look excited, Salty. Were you happy without me?";
+		mes "[쇼티]";
+		mes "솔티, 신나 보여요. 나 없이도 행복하셨나요?";
 		next;
-		mes "[Salty]";
-		mes "Huh? Uh-huh??? Shorty!!!!!!!!!!";
+		mes "[솔티]";
+		mes "어? 어어??? 쇼티!!!!!!!!!!";
 		next;
-		mes "[Shorty]";
-		mes "Did you have fun without me? Did you have fun without me...";
+		mes "[쇼티]";
+		mes "나 없이 즐거웠어? 나 없이 즐거웠어...";
 		next;
-		mes "[Salty]";
-		mes "Shorty, why are you here? One day I received a letter saying you were leaving!!!";
+		mes "[솔티]";
+		mes "꼬마야 너 왜 여기 있어? 어느 날 네가 떠난다는 편지를 받았어!!!";
 		next;
-		mes "[Shorty]";
-		mes "There are a number of circumstances. This situation will be explained by my master here.";
+		mes "[쇼티]";
+		mes "여러 가지 상황이 있습니다. 이 상황에 대해서는 여기 주인님이 설명해 드리겠습니다.";
 		next;
-		mes "[Salty]";
-		mes "What? You kidnapped our Shorty??";
+		mes "[솔티]";
+		mes "뭐라구요? 우리 쇼티를 납치했어요??";
 		next;
-		select( "No, that's not it..." );
-		mes "[Salty]";
-		mes "Oh yeah? But Shorty! What's going on here?";
+		select( "아니요, 그게 아닙니다..." );
+		mes "[솔티]";
+		mes "아 그래요? 그런데 쇼티! 무슨 일이에요?";
 		next;
-		mes "[Shorty]";
-		mes "I went to Payon and came here because the grandmother who cooks muk said you went here.";
+		mes "[쇼티]";
+		mes "파이욘에 갔다가 묵 끓이는 할머니가 여기 갔다고 해서 왔어요.";
 		next;
-		mes "[Salty]";
-		mes "Okay! I'm on the verge of going too, but let's stop at Prontera for a while and then go to Payon. Let's go pack up some stuff and travel the continent!";
+		mes "[솔티]";
+		mes "알았어! 나도 갈 예정인데 프론테라에 잠시 있다가 페이욘으로 가자. 짐 싸서 대륙여행 가자!";
 		next;
-		mes "[Shorty]";
-		mes "Yeah! Master, the adventures we had together were fun!";
+		mes "[쇼티]";
+		mes "네! 스승님, 우리가 함께한 모험은 즐거웠어요!";
 		next;
-		mes "[Salty]";
-		mes "I have to say thank you. It looks like you were carrying Shorty in that little bag.";
+		mes "[솔티]";
+		mes "고마워요. 저 작은 가방에 쇼티를 담고 있었던 것 같아요.";
 		next;
-		mes "[Shorty]";
-		mes "Master, thank you so much.";
+		mes "[쇼티]";
+		mes "스승님, 정말 감사합니다.";
 		next;
-		select( "Are you leaving?" );
-		mes "[Shorty]";
-		mes "Our relationship will not end here. Remember that you met me. Salty, is there anything else? Something to remember.";
+		select( "가시나요?" );
+		mes "[쇼티]";
+		mes "우리 인연은 여기서 끝나지 않아요. 저를 만났다는 걸 기억해주세요. 솔티 씨, else 건 없나요? 기억에 남는 일이 있어요.";
 		next;
-		mes "[Salty]";
-		mes "Uh-huh, something like that.";
+		mes "[솔티]";
+		mes "어어, 그런거요.";
 		next;
-		mes "[Shorty]";
-		mes "Is this all? Penguin? Penguin? Do you like penguins better than me?";
+		mes "[쇼티]";
+		mes "이게 다야? 펭귄? 펭귄? 나보다 펭귄을 더 좋아하니?";
 		next;
-		mes "[Salty]";
-		mes "No, it's not... Originally I bought it in Paros to remember you, but now that I think about it, you're not a penguin, so I just kept it. Isn't it cute?";
+		mes "[솔티]";
+		mes "아니 그게 아니고.. 원래는 널 기억하려고 파로스에서 샀는데, 지금 생각해보면 펭귄이 아니어서 그냥 놔뒀던 거야. 귀엽지?";
 		next;
-		mes "[Shorty]";
-		mes "Cute.";
+		mes "[쇼티]";
+		mes "귀엽다.";
 		next;
-		mes "[Salty]";
-		mes "I'll give this to you. Thanks for taking care of Shorty! Shorty, let's go!";
+		mes "[솔티]";
+		mes "이거 줄게 쇼티 잘 챙겨줘서 고마워! 쇼티 가자!";
 		next;
 		specialeffect EF_TELEPORTATION2;
 		cloakonnpcself();
-		mes "[Shorty]";
-		mes "Master, even if a lot of time passes, don't forget me and become a great adventurer who makes a name for yourself on the continent!";
+		mes "[쇼티]";
+		mes "스승님, 시간이 많이 흘러도 저를 잊지 마시고 대륙에 이름을 떨치는 위대한 모험가가 되어주세요!";
 		specialeffect EF_TELEPORTATION2, AREA, "Shorty#fgtg005";
 		cloakonnpcself( "Shorty#fgtg005" );
 		erasequest 14694;
@@ -272,37 +305,57 @@ OnInit:
 	end;
 }
 
-prt_fild10,315,189,7	duplicate(dummy_cloaked_npc)	Shorty#fgtg005	4_GALAPAGO
+prt_fild10,315,189,7	duplicate(dummy_cloaked_npc)	쇼티::Shorty#fgtg005	4_GALAPAGO
 
 
-// Base for the dynamic npc
-izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
+// 동적 npc의 기본
+izlude,1,1,0	script	쇼티::Shorty#fgtg01	4_GALAPAGO,{
 	if (isbegin_quest(14689) == 0) {
-		mes "[Shorty]";
-		mes "Good job. If you need my help in the future, you can call me like this.";
+		mes "[쇼티]";
+		mes "잘했어. 앞으로 내 도움이 필요하면";
+		mes "나를 이렇게 부르면 돼.";
 		next;
-		select( "How can you help me?" );
-		mes "[Shorty]";
-		mes "After arriving here for the first time you didn't know anything, right? I'll teach you everything I know. ^0000cdAsk me anything!^000000";
+		select( "나를 어떻게 도와줄 건데?" );
+		mes "[쇼티]";
+		mes "선샘미는 처음 이곳에 도착해서 아무";
+		mes "것도 모를 거 아니야? 내가 아는건";
+		mes "^0000cd모두 다 가르쳐 줄게^000000. 나한테 다 물어";
+		mes "봐라!";
 		next;
-		mes "[Shorty]";
-		mes "And I'll provide you with various good ^0000cdservices^000000 to help you with hunting.";
+		mes "[쇼티]";
+		mes "그리고 선샘미의 사냥에 도움이 되도록";
+		mes "여러가지 좋은 ^0000cd서비스^000000를 해줄게.";
 		next;
-		mes "[Shorty]";
-		mes "The only thing I can do is ^0000cdincrease agility^000000 to move quickly, and ^0000cdblessing^000000 to increase strength, dexterity and intelligence, but it will definitely help, right?";
+		mes "[쇼티]";
+		mes "내가 할 수 있는 건 빠르게 움직일 수";
+		mes "있는 ^0000cd민첩성 증가^000000랑 힘과 손재주와";
+		mes "지능을 높일 수 있는 ^0000cd블레싱^000000 정도";
+		mes "뿐이지만 분명 도움이 될걸?";
 		next;
-		mes "[Shorty]";
-		mes "Yeah! If you call me and don't say anything for a minute, I'll go back into the bag.";
+		mes "[쇼티]";
+		mes "참! 나를 불러 놓고선 1분간 아무런";
+		mes "말이 없으면 다시 가방 안에 들어 갈";
+		mes "거야.";
 		next;
-		mes "[Shorty]";
-		mes "And when the business is over, just leave me be. I'll look around for you and go in the bag. I follow along very well.";
+		mes "[쇼티]";
+		mes "그리고 볼일이 끝나도 가만 내버려두고";
+		mes "먼저 가. 주변을 둘러 보다가 알아서";
+		mes "가방 안에 들어 갈게. 나 되게 잘";
+		mes "따라간다.";
 		next;
-		select( "When are you going to find someone named Salty?" );
-		mes "[Shorty]";
-		mes "Not now, master. This Shorty, from the Galapagos knows grace. When you can take off your starter tee and start the adventure on your own, Shorty then goes away.";
+		select( "솔티란 사람은 언제 찾으러 가?" );
+		mes "[쇼티]";
+		mes "지금은 아니야, 선샘미. 이 쇼티,";
+		mes "은혜를 아는 갈라파고다. 선샘미가";
+		mes "초보티를 벗고 스스로의 힘으로 모험을";
+		mes "시작할 수 있을때, 그때 데려다 주면";
+		mes "된다.";
 		next;
-		mes "[Shorty]";
-		mes "At that time, even if you hold on to me and cry, I will leave you. Before that, you have to increase your level to about ^0000cdlevel 31^000000. Until then, let's do our best in the future.";
+		mes "[쇼티]";
+		mes "그때는 날 붙잡고 울어도 선샘미를";
+		mes "떠날 거다. 그러려면 ^0000cd31 레벨^000000";
+		mes "정도까지는 커야 한다. 그때가지 우리";
+		mes "앞으로 잘 해 보자.";
 		setquest 14689;
 		completequest 14689;
 		next;
@@ -314,139 +367,152 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 	case 0:
 		if (BaseLevel < 31)
 			break;
-		mes "[Shorty]";
-		mes "You has grown wonderfully. So now I want to meet Salty. She'll be worried about me.";
+		mes "[쇼티]";
+		mes "훌륭하게 성장했구나. 이제 솔티를 만나고 싶다. 솔티가 나를 걱정할 것이다.";
 		next;
-		select( "Now did you get that idea?" );
-		mes "[Shorty]";
-		mes "The last letter from Salty said it was from ^0000cdPayon's inn^000000.";
+		select( "이제 그 아이디어를 얻으셨나요?" );
+		mes "[쇼티]";
+		mes "솔티이 보낸 마지막 편지에는 ^0000cdPayon의 여관^000000에서 보낸 편지라고 적혀 있었습니다.";
 		next;
-		mes "[Shorty]";
-		mes "Let's go";
-		mes "find the <NAVI>[Inn]<INFO>payon_in01,193,23,0,101,0</INFO></NAVI> in Payon.";
+		mes "[쇼티]";
+		mes "가자";
+		mes "페이욘에서 <NAVI>[여관]<INFO>payon_in01,193,23,0,101,0</INFO></NAVI>을 찾으세요.";
 		setquest 14693;
 		close;
 	case 1:
 		break;
 	case 2:
-		mes "[Shorty]";
-		mes "Who are you? Who are you talking to me? I don't like people I don't know talking to or touching me.";
+		mes "[쇼티]";
+		mes "너 누구야? 나한테 누구한테 말하는 거야? 모르는 사람이 나한테 말하거나 만지는 건 싫어.";
 		close;
 	}
 	if (BaseLevel < 31) {
 		switch( rand(4) ) {
 		case 0:
-			mes "[Shorty]";
-			mes "Open the item window and you will see ^0000cdfour tabs^000000. Can you see it?";
+			mes "[쇼티]";
+			mes "아이템창을 열면 ^0000cd4개의 탭^000000이 보입니다. 보이시나요?";
 			next;
-			mes "[Shorty]";
-			mes "If you drag and drop items that are not used frequently or should not be sold to NPCs, put them in the ^0000cd<Personal tab>, and press the trade lock button^000000 at the bottom, you will not accidentally sell these items.";
+			mes "[쇼티]";
+			mes "자주 사용하지 않거나 NPC에게 판매하면 안 되는 아이템을 드래그 앤 드롭하여 ^0000cd<개인 탭>에 넣고 하단의 거래 잠금 버튼^000000을 누르면 실수로 판매하는 일이 없습니다. 아이템.";
 			break;
 		case 1:
-			mes "[Shorty]";
-			mes "Master, have you ever pressed the ^0000cdF12 key^000000? Small white squares will float around.";
+			mes "[쇼티]";
+			mes "스승님, ^0000cdF12 키^000000를 눌러보신 적 있으신가요? 작은 흰색 사각형이 떠다닐 겁니다.";
 			next;
-			mes "[Shorty]";
-			mes "Drag the skill icon or item there. If you release it, you can use skills and icons quickly and easily by simply pressing the ^0000cdshortcut button^000000. It's really convenient.";
+			mes "[쇼티]";
+			mes "스킬 아이콘이나 아이템을 거기로 드래그하세요. 놓으면 ^0000cd단축버튼^000000만 누르면 스킬과 아이콘을 쉽고 빠르게 사용할 수 있습니다. 정말 편리합니다.";
 			break;
 		case 2:
-			mes "[Shorty]";
-			mes "He said that if you don't need the hats or clothes you got at the academy, you can exchange them for useful stuff at the ^0000cdvending machine at the job change office for each job^000000.";
+			mes "[쇼티]";
+			mes "아카데미에서 얻은 모자나 옷가지들이";
+			mes "필요 없게 되면 각 직업 별 전직소에";
+			mes "있는 ^0000cd자판기에서 유용한 물건으로 바꿀";
+			mes "수^000000 있다고 한다.";
 			next;
-			mes "[Shorty]";
-			mes "Salty also used it very well. I would like clams if possible.";
+			mes "[쇼티]";
+			mes "솔티도 너무 잘 사용했어요. 가능하면 조개도 먹고 싶어요.";
 			break;
 		case 3:
-			mes "[Shorty]";
-			mes "Let's leave after checking where the hunt was. There may be monster cards left.";
+			mes "[쇼티]";
+			mes "사냥 장소를 확인하고 떠나자. 몬스터카드가 남아있을 수도 있다.";
 			next;
-			mes "[Shorty]";
-			mes "This is a valuable tip that Salty taught me~ Do you have a monster card?";
+			mes "[쇼티]";
+			mes "솔티가 가르쳐준 귀중한 꿀팁이에요~ 혹시 몬스터카드 있나요?";
 			break;
 		}
-		setarray .@menu$[0], "Give me strength!", "Where should I go?", "Isn't there anything good?", "How do I take skills and stats?", "Tell me how to operate." ;
+		setarray .@menu$[0], "나에게 힘을 줘!", "나 어디로 가야 돼?", "좋은 거 없어?", "스킬이랑 스텟은 어떻게 찍어?", "조작 방법 좀 알려줘." ;
 	}
 	else {
 		switch( rand(4) ) {
 		case 0:
-			mes "[Shorty]";
-			mes "Master, did you know that besides the Midgard continent known to us, you can go to new and mysterious places by boat? Mainly Al... Al... Allegro?";
+			mes "[쇼티]";
+			mes "스승님, 우리가 알고 있는 미드가르드 대륙 외에도 배를 타고 새롭고 신비로운 곳으로 갈 수 있다는 사실을 알고 계셨나요? 주로 알... 알... 알레그로?";
 			next;
-			mes "[Shorty]";
-			mes "^0000cdAh! You can go by boat from Alberta^000000! Let's go later! Master! It's a new adventure!";
+			mes "[쇼티]";
+			mes "^0000cdAh! 알버타에서도 배로 갈 수 있어요^000000! 나중에 가자! 스승님! 새로운 모험이에요!";
 			break;
 		case 1:
-			mes "[Shorty]";
-			mes "I heard that there are quite a few dungeons that even a young adventurer like yourself can go too.";
+			mes "[쇼티]";
+			mes "너 같은 어린 모험가도 갈 수 있는 던전이 꽤 많다고 들었어.";
 			next;
-			select( "Why am I so stupid!" );
-			mes "[Shorty]";
-			mes "Master, what you're saying? Anyway, underground waterways, Payon's caves, ant dungeons, and shipwrecks. Don't you want to become the ruler of the dungeon, master?";
+			select( "나는 왜 이렇게 멍청한가!" );
+			mes "[쇼티]";
+			mes "스승님, 무슨 말씀이신가요? 아무튼 지하수로, 페이욘의 동굴, 개미 던전, 난파선. 던전의 지배자가 되고 싶지 않으신가요, 스승님?";
 			next;
-			select( "If you fight for me." );
-			mes "[Shorty]";
-			mes "Master, you should save your body because you only have one life.";
+			select( "당신이 나를 위해 싸운다면." );
+			mes "[쇼티]";
+			mes "스승님, 생명은 한번뿐이니까 몸을 구하셔야 합니다.";
 			break;
 		case 2:
-			mes "[Shorty]";
-			mes "Is master ready? I really want to go!";
+			mes "[쇼티]";
+			mes "스승님 준비됐나요? 꼭 가고 싶어요!";
 			next;
-			select( "What is it? Where is it?" );
-			mes "[Shorty]";
-			mes "You don't know Ohiso, Boiso, Saiso, ^0000cdParamarket^000000? What would master do without me, really?";
+			select( "이게 뭐죠? 어디에 있나요?" );
+			mes "[쇼티]";
+			mes "오이소(Ohiso), 보이소(Boiso), 사이소(Saiso), ^0000cdParamarket^000000을 모르시나요? 스승님께서 나 없이 무엇을 하실 겁니까?";
 			next;
-			mes "[Shorty]";
-			mes "Paramarket is a place that sells items that are hard to find in the market or street stalls in limited quantities and for a limited time. It is a very good place to do business.";
+			mes "[쇼티]";
+			mes "파라마켓은 시장이나 노점에서 구하기 힘든 물건들을 한정된 수량, 한정된 시간 while 판매하는 곳이에요. 장사하기 아주 좋은 곳이에요.";
 			next;
-			select( "How do I get there?" );
-			mes "[Shorty]";
-			mes "Talk to the Paramarket Windman in ^0000cdParadise Corridor^000000 and he will send you there.";
+			select( "거기 어떻게 가나요?" );
+			mes "[쇼티]";
+			mes "^0000cdParadise Corridor^000000에 있는 Paramarket Windman과 대화하면 그가 당신을 그곳으로 보내줄 것입니다.";
 			break;
 		case 3:
-			mes "[Shorty]";
-			mes "Master, sometimes when you want to buy something from a street vendor, you may wonder if they are selling it now and who is selling it.";
+			mes "[쇼티]";
+			mes "스승님, 가끔 노점상에서 물건을 사려고 할 때 지금 파는 것인지, 누가 파는 것인지 궁금하실 때가 있습니다.";
 			next;
-			select( "That's right. I can't even look through all the stalls." );
-			mes "[Shorty]";
-			mes "In that case, you can use the ^0000cdcatalog^000000. Currently, it is said that ^0000cdvending machines in Paradise or Alberta's merchant^000000 are selling it.";
+			select( "그렇습니다. 매점을 다 둘러볼 수도 없어요." );
+			mes "[쇼티]";
+			mes "그럴 경우 ^0000cd카탈로그^000000를 이용하시면 됩니다. 현재는 파라다이스나 앨버타 상인^000000의 ^0000cd자판기에서 판매하고 있다고 합니다.";
 			next;
-			mes "[Shorty]";
-			mes "I want to go shopping today too.";
+			mes "[쇼티]";
+			mes "나도 오늘도 쇼핑하러 가고 싶어요.";
 			break;
 		}
-		setarray .@menu$[5], "Anything good?";
+		setarray .@menu$[5], "뭐 좋은 일이라도 있나요?";
 	}
 	next;
-	mes "[Shorty]";
-	mes "Do you need more help from me?";
+	mes "[쇼티]";
+	mes "내 도움이 더 필요해?";
 	next;
-	switch( select( .@menu$[0], .@menu$[1], .@menu$[2], .@menu$[3], .@menu$[4], .@menu$[5 ], "Information guide", "I'm curious about what you're talking about.", "Break up now." ) ) {
+	switch( select( .@menu$[0], .@menu$[1], .@menu$[2], .@menu$[3], .@menu$[4], .@menu$[5 ], "정보 안내", "무슨 말씀인지 궁금합니다.", "이제 헤어지세요." ) ) {
 	case 1:
 		switch( checkquest(14695,PLAYTIME) ) {
 		case -1:
-			mes "[Shorty]";
-			mes "Master, I'll give you the help I promised you before. Increased agility and blessing.";
+			mes "[쇼티]";
+			mes "선샘미야, 내가 전에 선샘미한테";
+			mes "약속했던 도움을 줄게. 민첩성 증가와";
+			mes "블레싱 말이다.";
 			next;
-			mes "[Shorty]";
-			mes "But I learned this over the shoulder, and once I do it, my soul gets tired, so I can't give it indefinitely. Although it can take me half an hour to refresh myself.";
+			mes "[쇼티]";
+			mes "그런데 내가 이걸 어깨 너머로";
+			mes "배웠더니 한 번 하고 나면 영혼까지";
+			mes "피곤해져서 무한정으로 줄 수는 없어.";
+			mes "30분 정도면 기운을 차릴 수 있긴";
+			mes "하지만.";
 			next;
-			mes "[Shorty]";
-			mes "If you want to know when you can get it again, open the quest window with ALT+U and check the time displayed at the bottom.";
+			mes "[쇼티]";
+			mes "언제 또 받을 수 있는지 궁금하면";
+			mes "ALT+U키로 퀘스트 창을 열어서 하단에";
+			mes "표시된 시간을 체크해 봐.";
 			next;
-			mes "[Shorty]";
-			mes "Go! Master!!";
+			mes "[쇼티]";
+			mes "가라! 선샘미!!";
 			npcskill "AL_INCAGI",10,99,60;
 			npcskill "AL_BLESSING",10,99,60;
 			setquest 14695;
 			close;
 		case 0:
 		case 1:
-			mes "[Shorty]";
-			mes "Master, it hasn't even been 30 minutes yet. I'm still struggling. I'll give you more strength if you get up, so please wait.";
+			mes "[쇼티]";
+			mes "선샘미야, 아직 30분이 지나지 않았다.";
+			mes "나 아직 힘들다. 기운 차리면 또 힘을";
+			mes "줄테니까 기다려라.";
 			close;
 		case 2:
-			mes "[Shorty]";
-			mes "Go! Master!!";
+			mes "[쇼티]";
+			mes "가라! 선샘미!!";
 			npcskill "AL_INCAGI",10,99,60;
 			npcskill "AL_BLESSING",10,99,60;
 			erasequest 14695;
@@ -455,267 +521,280 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 		}
 		end;
 	case 2:
-		mes "[Shorty]";
-		mes "What would you like to learn about master?";
+		mes "[쇼티]";
+		mes "스승님에 대해 무엇을 배우고 싶으세요?";
 		next;
-		switch( select( "The path of a novice adventurer!", "I want to help people around me.", "I don't like the set path.", "There is no place I want to go." ) ) {
+		switch( select( "초보 모험가의 길!", "주변 사람들에게 도움을 주고 싶다.", "정해진 길은 마음에 들지 않는다.", "가고 싶은 곳은 없다." ) ) {
 		case 1:
-			mes "[Shorty]";
-			mes "I think I saw one ^0000cd<Thinking Archer>^000000 teacher near the entrance to Izlude, but he seemed to have a lot of thoughts. Why don't you go and ask what's going on? Let's go, let's go~";
+			mes "[쇼티]";
+			mes "이즈루드 입구 근처에서 ^0000cd<생각하는 궁수>^000000 선생님 한 분 보신 것 같은데, 생각이 많은 것 같더라고요. 가서 무슨 일인지 물어보시는 건 어떨까요? 가자, 가~ ";
 			close;
 		case 2:
-			mes "[Shorty]";
-			mes "Why don't you meet Paul and Anne at the outside ^0000cdProntera's West Gate ^000000? As I was passing by, I heard that they needed help.";
+			mes "[쇼티]";
+			mes "밖 ^0000cd프론테라 서문^000000에서 폴과 앤을 만나보시는 건 어떨까요? 지나가다가 도움이 필요하다는 소식을 들었습니다.";
 			next;
-			mes "[Shorty]";
-			mes "Or why not listen to the anxious middle-aged man in ^0000cdPayon^000000?";
+			mes "[쇼티]";
+			mes "아니면 ^0000cdPayon^000000에 있는 불안한 중년남자의 말을 들어보는 건 어떨까요?";
 			close;
 		case 3:
-			mes "[Shorty]";
-			mes "Pressing ^0000cdCtrl+`^000000 will open the map.";
+			mes "[쇼티]";
+			mes "^0000cdCtrl+`^000000을 누르면 지도가 열립니다.";
 			next;
-			mes "[Shorty]";
-			mes "Do you see a box for selecting a region in the upper left corner?";
+			mes "[쇼티]";
+			mes "왼쪽 상단에 지역을 선택하는 박스가 보이나요?";
 			next;
-			mes "[Shorty]";
-			mes "After selecting the area you want to see, check the ^0000cdmonster tab^000000 in the upper right corner or press the ^0000cdTab key^000000, you will see the name and level of the monster most distributed in that area.";
+			mes "[쇼티]";
+			mes "보고 싶은 지역을 선택한 후 오른쪽 상단의 ^0000cd몬스터 탭^000000을 확인하거나 ^0000cdTab 키^000000를 누르면 해당 지역에 가장 많이 분포되어 있는 몬스터의 이름과 레벨이 표시됩니다.";
 			next;
-			mes "[Shorty]";
-			mes "It would be better to go on an adventure to a place that matches the level of master. If there is ^0000cda lot of level difference with monsters^000000, you can't get 100% of the experience. You have to calculate the level difference as well, right?";
+			mes "[쇼티]";
+			mes "마스터의 레벨에 맞는 곳으로 모험을 떠나는 것이 더 좋을 것 같습니다. ^0000cda 몬스터와 레벨 차이가 많이^000000라면 경험치를 100% 얻을 수 없습니다. 계산을 해야 합니다. 레벨차이도 나죠?";
 			next;
-			mes "[Shorty]";
-			mes "If you press the town you want to go to, the navigation menu will appear. Press the ^0000cd<Guide to the target> button at the bottom^000000 and exit the map to get guidance.";
+			mes "[쇼티]";
+			mes "가고 싶은 마을을 누르면 내비게이션 메뉴가 나옵니다. 하단의 ^0000cd<목표지 안내> 버튼^000000을 누르고 지도에서 나가면 안내를 받을 수 있습니다.";
 			close;
 		case 4:
-			mes "[Shorty]";
-			mes "Master, are you bored? Then you can chat with the people around you.";
+			mes "[쇼티]";
+			mes "스승님, 심심하시죠? 그러면 주변 사람들과 대화도 나눌 수 있어요.";
 			next;
-			mes "[Shorty]";
-			mes "Other than that, it would be okay to try ^0000cdParadise's quest^000000. Do you want to go to Paradise? They say they will give you a weapon if you go.";
+			mes "[쇼티]";
+			mes "그 외에는 ^0000cd파라다이스의 퀘스트^000000도 해보면 좋을 것 같아요. 파라다이스에 가실래요? 가면 무기를 준다고 하더군요.";
 			next;
-			mes "[Shorty]";
-			mes "Where do you want to go? Write ^0000cd/place^000000 in the chat window and compare your current location with the map that appears by pressing the ^0000cdCtrl+` keys^000000.";
+			mes "[쇼티]";
+			mes "어디로 가고 싶으세요? 채팅창에 ^0000cd/place^000000라고 쓰고 ^0000cdCtrl+` 키^000000를 눌러 나타나는 지도와 현재 위치를 비교해 보세요.";
 			next;
-			switch( select( "Prontera", "Geffen", "Payon", "Morroc", "Alberta", "Done" ) ) {
+			switch( select( "프론테라", "게펜", "페이욘", "모로크", "앨버타", "완료" ) ) {
 			case 1:
-				mes "[Shorty]";
-				mes "Click on <NAVI>[Prontera]<INFO>prontera,124,76,0,101,0</INFO></NAVI> to find it.";
+				mes "[쇼티]";
+				mes "<NAVI>[Prontera]<INFO>prontera,124,76,0,101,0</INFO></NAVI>를 클릭하여 찾으세요.";
 				break;
 			case 2:
-				mes "[Shorty]";
-				mes "Click on <NAVI>[Geffen]<INFO>geffen,132,66,0,101,0</INFO></NAVI> to find it.";
+				mes "[쇼티]";
+				mes "<NAVI>[Geffen]<INFO>geffen,132,66,0,101,0</INFO></NAVI>를 클릭하여 찾으세요.";
 				break;
 			case 3:
-				mes "[Shorty]";
-				mes "Click on <NAVI>[Payon]<INFO>payon,177,111,0,101,0</INFO></NAVI> to find it.";
+				mes "[쇼티]";
+				mes "<NAVI>[Payon]<INFO>payon,177,111,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 				break;
 			case 4:
-				mes "[Shorty]";
-				mes "Click on <NAVI>[Morroc: Paradise Space Traveler]<INFO>morocc,161,97,0,101,0</INFO></NAVI> to find it.";
+				mes "[쇼티]";
+				mes "<NAVI>[Morroc: Paradise Space Traveler]<INFO>morocc,161,97,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 				next;
-				mes "[Shorty]";
-				mes "Morroc is where Paradise is, so wouldn't it be ok to walk around?";
+				mes "[쇼티]";
+				mes "모로크는 천국이 있는 곳이니까 돌아다녀도 괜찮지 않을까요?";
 				next;
-				mes "[Shorty]";
-				mes "Go to <NAVI>[Morroc Paradise]<INFO>morocc,206,285,0,101,0</INFO></NAVI>.";
+				mes "[쇼티]";
+				mes "<NAVI>[모로크 파라다이스]<INFO>morocc,206,285,0,101,0</INFO></NAVI>로 이동하세요.";
 				break;
 			case 5:
-				mes "[Shorty]";
-				mes "Click on <NAVI>[Alberta]<INFO>alberta,124,67,0,101,0</INFO></NAVI> to find it.";
+				mes "[쇼티]";
+				mes "<NAVI>[Alberta]<INFO>alberta,124,67,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 				break;
 			case 6:
-				mes "[Shorty]";
-				mes "Okay? Then I'll look around a bit and get back into the bag.";
+				mes "[쇼티]";
+				mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 				close;
 			}
 			next;
-			mes "[Shorty]";
-			mes "Go and register with Lime Ivenor first, then check the bulletin board next to it.";
+			mes "[쇼티]";
+			mes "Lime Ivenor에 먼저 가서 회원가입을 하고, 옆에 있는 게시판을 확인하세요.";
 			next;
-			mes "[Shorty]";
-			mes "It would be nice to go around towns and fields to find and help people in need. Those who need help will find it easier to find with a <!> sign above their heads.";
+			mes "[쇼티]";
+			mes "마을이나 들판을 돌아다니며 도움이 필요한 사람을 찾아 도와주면 좋을 것 같아요. 도움이 필요한 사람은 머리 위에 <!> 표시가 있어서 찾기가 더 쉽습니다.";
 			close;
 		}
 		end;
 	case 3:
-		mes "[Shorty]";
-		mes "You didn't join the Paradise Club?";
+		mes "[쇼티]";
+		mes "뭐가 좋을까.. 험한 세상을 헤쳐나갈 수";
+		mes "있도록 작은 기술을 익히고 싶어?";
+		mes "아니면 기초 지식을 익히고 싶어?";
 		next;
-		mes "[Shorty]";
-		mes "Do you want to go to ^0000cdParadise^000000? They say that if you go to Paradise, they will give you weapons.";
+		mes "[쇼티]";
+		mes "^0000cdParadise^000000에 가실래요? 파라다이스에 가면 무기를 준다고 하더군요.";
 		next;
-		mes "[Shorty]";
-		mes "Where do you want to go? Write /place in the chat window and compare your current location with the map that appears by pressing the ^0000cdCtrl+` keys^^000000. Where is the nearest?";
+		mes "[쇼티]";
+		mes "어디로 가고 싶어요? 채팅창에 /place라고 쓰고 현재 위치를 ^0000cdCtrl+` 키를 눌러 나타나는 지도와 비교해 보세요^^000000. 가장 가까운 곳은 어디인가요?";
 		next;
-		switch( select( "Prontera", "Geffen", "Payon", "Morroc", "Alberta", "Done" ) ) {
+		switch( select( "프론테라", "게펜", "페이욘", "모로크", "알베르타", "완료" ) ) {
 		case 1:
-			mes "[Shorty]";
-			mes "Click on <NAVI>[Prontera]<INFO>prontera,124,76,0,101,0</INFO></NAVI> to find it.";
+			mes "[쇼티]";
+			mes "<NAVI>[Prontera]<INFO>prontera,124,76,0,101,0</INFO></NAVI>를 클릭하여 찾으세요.";
 			break;
 		case 2:
-			mes "[Shorty]";
-			mes "Click on <NAVI>[Geffen]<INFO>geffen,132,66,0,101,0</INFO></NAVI> to find it.";
+			mes "[쇼티]";
+			mes "<NAVI>[Geffen]<INFO>geffen,132,66,0,101,0</INFO></NAVI>를 클릭하여 찾으세요.";
 			break;
 		case 3:
-			mes "[Shorty]";
-			mes "Click on <NAVI>[Payon]<INFO>payon,177,111,0,101,0</INFO></NAVI> to find it.";
+			mes "[쇼티]";
+			mes "<NAVI>[Payon]<INFO>payon,177,111,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 			break;
 		case 4:
-			mes "[Shorty]";
-			mes "Click on <NAVI>[Morroc: Paradise Space Traveler]<INFO>morocc,161,97,0,101,0</INFO></NAVI> to find it.";
+			mes "[쇼티]";
+			mes "<NAVI>[Morroc: Paradise Space Traveler]<INFO>morocc,161,97,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 			next;
-			mes "[Shorty]";
-			mes "Morroc is where Paradise is, so wouldn't it be ok to walk around?";
+			mes "[쇼티]";
+			mes "모로크는 천국이 있는 곳이니까 돌아다녀도 괜찮지 않을까요?";
 			next;
-			mes "[Shorty]";
-			mes "Go to <NAVI>[Morroc Paradise]<INFO>morocc,206,285,0,101,0</INFO></NAVI>.";
+			mes "[쇼티]";
+			mes "<NAVI>[모로크 파라다이스]<INFO>morocc,206,285,0,101,0</INFO></NAVI>로 이동하세요.";
 			break;
 		case 5:
-			mes "[Shorty]";
-			mes "Click on <NAVI>[Alberta]<INFO>alberta,124,67,0,101,0</INFO></NAVI> to find it.";
+			mes "[쇼티]";
+			mes "<NAVI>[알베르타]<INFO>alberta,124,67,0,101,0</INFO></NAVI>를 클릭하시면 찾으실 수 있습니다.";
 			break;
 		case 6:
-			mes "[Shorty]";
-			mes "Okay? Then I'll look around a bit and get back into the bag.";
+			mes "[쇼티]";
+			mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 			close;
 		}
 		next;
-		mes "[Shorty]";
-		mes "^0000cdGo and register with Lime Ivenor first^000000, and then talk to the Boyana Ur and Paradise Logistics staff on either side.";
+		mes "[쇼티]";
+		mes "^0000cd가서 Lime Ivenor에 먼저 등록하세요^000000. 그리고 양쪽에 있는 Boyana Ur 및 Paradise Logistics 직원과 대화하세요.";
 		next;
-		mes "[Shorty]";
-		mes "After some quests and training, they gave me equipment.";
+		mes "[쇼티]";
+		mes "몇번의 퀘스트와 훈련을 거쳐 장비를 주었습니다.";
 		close;
 	case 4:
-		mes "[Shorty]";
-		mes "What are you curious about with status and skills?";
+		mes "[쇼티]";
+		mes "스테이터스랑 스킬에 대해서 어떤 점이";
+		mes "궁금해?";
 		next;
-		switch( select( "I'm curious about skills.", "I'm curious about statuses.", "I'm not interested anymore." ) ) {
+		switch( select( "스테이터스 올리기", "스킬 익히기", "궁금한 거 없어." ) ) {
 		case 1:
-			mes "[Shorty]";
-			mes "Press the ^0000cdAlt+S keys^000000 to bring up the skill list window.";
+			mes "[쇼티]";
+			mes "스테이터스 올리가? 이건 선샘미한테";
+			mes "필요한 걸 올리면 된다.";
 			next;
-			mes "[Shorty]";
-			mes "If you check the item ^0000cd<View skill description> in the upper right corner^000000, you can view the description of the skill when you hover the mouse over the skill icon.";
+			mes "[쇼티]";
+			mes "일단 선샘미가 무슨 직업을 가질";
+			mes "건지에 따라 올려야 하는 스탯도";
+			mes "다르지만 ^0000cd지금은 초보니깐 Dex나";
+			mes "Str을 먼저 찍는 것이 초본 사냥엔 유리^000000";
+			mes "하다.";
 			next;
-			mes "[Shorty]";
-			mes "You can learn this skill by consuming ^0000cd<Skill Points>^000000 that can be obtained whenever your job level increases. You can check the skill points you have in the lower left corner of this window.";
+			mes "[쇼티]";
+			mes "^0000cdAlt+A^000000 키를 누르면 스탯 창이 뜰 거다.";
+			mes "각 항목 옆에 있는 ▶버튼을 누르면";
+			mes "선샘미가 갖고 있는 스테이터스";
+			mes "포인트의 한도 내에서 숫자가 올라갈";
+			mes "가야.";
 			next;
-			mes "[Shorty]";
-			mes "Master currently has " + SkillPoint + " skill point " + (SkillPoint > 1 ? "s" : "") + ".";
+			mes "[쇼티]";
+			mes "직업 별로 올리는 스테이터스가";
+			mes "궁금하다면 아카데미의 2층에 있는";
+			mes "직업 안내 선샘미들을 찾아 가라.";
 			next;
-			mes "[Shorty]";
-			mes "Does master know about the skill tree? If master hovers the mouse over the skill they want to learn, the skills and skill levels to learn first will appear.";
+			mes "[쇼티]";
+			mes "만약 아카테미 등록을 하지 않았다면";
+			mes "1층에 들어가자마자 나오는";
+			mes "<NAVI>[스프라키]<INFO>iz_ac01,102,44</INFO></NAVI>에게 등록을 하고 2층으로";
+			mes "올라 가면 돼.";
 			next;
-			mes "[Shorty]";
-			mes "That's the skill tree. However, the skill points consumed when learning a skill are limited, so you can't learn all the skills.";
+			mes "[쇼티]";
+			mes "혹시 스테터미스를 잘못 올렸다고";
+			mes "걱정할 것 없다. 상위 직업을 가진";
+			mes "사람들은 ^0000cd이즈루드의 최면술사^000000가";
+			mes "언제든지 초기화를 해준다. 노비스는";
+			mes "안되지만.";
 			next;
-			mes "[Shorty]";
-			mes "There are a total of 49 skill points that can be used for learning before master changes to a higher job. This condition is called stagnation.";
+			mes "[쇼티]";
+			mes "스테이터스에 관해서는 선샘미의";
+			mes "레벨이 좀 더 오르면 자세히 알려";
+			mes "주겠다.";
 			next;
-			mes "[Shorty]";
-			mes "^0000cdIf your job level is 40 you can change your job to a secondary job^000000, but it is recommended that you change jobs when you reach level 50.";
+			mes "[쇼티]";
+			mes "스테이터스랑 스킬에 대해서 어떤 점이";
+			mes "궁금해?";
 			next;
-			mes "[Shorty]";
-			mes "Because it simplifies the transfer process. What greater reason could there be than this?";
-			next;
-			mes "[Shorty]";
-			mes "Don't worry too much if you think you've raised your skills incorrectly.";
-			next;
-			mes "[Shorty]";
-			mes "You can reset it at any time until master changes to a higher job.";
-			next;
-			mes "[Shorty]";
-			mes "Go to <NAVI>[Izlude: The Hypnotist]<INFO>izlude,127,175,0,101,0</INFO></NAVI> for guidance.";
-			close;
+			break;
 		case 2:
-			mes "[Shorty]";
-			mes "Let's see, master...";
+			mes "[쇼티]";
+			mes "어디 볼까요, 선생님...";
 			next;
-			mes "[Shorty]";
-			mes "I heard that for Taekwon, you should raise mainly Str, Agi, and Dex. For more information,";
-			mes "please visit <NAVI>[Payon: Ahri]<INFO>payon,245,295,0,101,0</INFO></NAVI>.";
+			mes "[쇼티]";
+			mes "태권은 Str, Agi, Dex 위주로 키워야 한다고 들었습니다. 자세한 내용은";
+			mes "<NAVI>[Payon: Ahri]<INFO>payon,245,295,0,101,0</INFO></NAVI>를 방문해 주세요.";
 			next;
-			mes "[Shorty]";
-			mes "Don't worry too much if you think you've raised your status incorrectly.";
+			mes "[쇼티]";
+			mes "잘못해서 등급을 올렸다고 생각되더라도 너무 걱정하지 마세요.";
 			next;
-			mes "[Shorty]";
-			mes "You can reset it at any time until master changes to a higher job.";
-			mes "Go to <NAVI>[Izlude: The Hypnotist]<INFO>izlude,127,175,0,101,0</INFO></NAVI> for guidance.";
-			close;
+			mes "[쇼티]";
+			mes "마스터가 상위 직업으로 변경되기 전까지는 언제든지 초기화가 가능합니다.";
+			mes "<NAVI>[Izlude: 최면술사]<INFO>izlude,127,175,0,101,0</INFO></NAVI>를 방문하여 안내를 받으세요.";
+			break;
 		case 3:
-			mes "[Shorty]";
-			mes "Call me anytime if you have any questions. I'll look around a bit and get back into the bag.";
-			close;
+			mes "[쇼티]";
+			mes "궁금한 점이 있으면 언제든지 전화주세요. 잠시 둘러보고 가방에 들어갈게요.";
+			break;
 		}
-		end;
+		close;
 	case 5:
-		switch( select( "Basic Operation", "Shortcut Guide", "Cancel" ) ) {
+		switch( select( "기본 조작", "단축키 안내", "취소" ) ) {
 		case 1:
 			while(1) {
-				mes "[Shorty]";
-				mes "What are you curious about?";
+				mes "[쇼티]";
+				mes "무엇이 궁금하세요?";
 				next;
-				switch( select( "Move and Attack", "Talk with NPC", "Check Quest", "Check Status and Skills", "Unequip Equipment", "Trade" ) ) {
+				switch( select( "이동 및 공격", "NPC와 대화", "퀘스트 확인", "상태 및 스킬 확인", "장비 해제", "거래" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "^0000cd<Move>^000000 - Click the place you want to go ^0000cdwith the mouse^000000.";
-					mes "^0000cd<Attack>^000000 - Click the target ^0000cdto attack with the mouse^000000.";
+					mes "[쇼티]";
+					mes "^0000cd<이동>^000000 - 가고 싶은 곳을 ^0000cd마우스로 클릭하세요^000000.";
+					mes "^0000cd<공격>^000000 - 대상을 클릭하면 ^0000cd마우스로 공격합니다^000000.";
 					next;
-					mes "[Shorty]";
-					mes "How is it? Simple, right? You can also move the viewpoint by holding down the right mouse button and rotating it.";
+					mes "[쇼티]";
+					mes "어때요? 간단하죠? 마우스 오른쪽 버튼을 누르고 회전시키면 시점 이동도 가능합니다.";
 					break;
 				case 2:
-					mes "[Shorty]";
-					mes "<Conversation> - Click the target ^0000cdto chat with the mouse^000000.";
+					mes "[쇼티]";
+					mes "<대화> - 대상 ^0000cd를 클릭하면 마우스^000000으로 대화할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Sometimes you have to get close to talk to someone.";
+					mes "[쇼티]";
+					mes "가끔은 누군가와 대화를 나누기 위해 가까이 다가가야 할 때도 있어요.";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "Click the ^0000cdquest icon in the main menu located in the upper left corner.";
-					mes "Shortcut: ^0000cdAlt+U^000000";
+					mes "[쇼티]";
+					mes "메인 메뉴 좌측 상단의 ^0000cdquest 아이콘을 클릭하세요.";
+					mes "바로가기: ^0000cdAlt+U^000000";
 					next;
-					mes "[Shorty]";
-					mes "When master receives a quest, the quest information is briefly displayed on the right side of the screen, so you can check it.";
+					mes "[쇼티]";
+					mes "마스터가 퀘스트를 받으면 화면 오른쪽에 퀘스트 정보가 간략하게 표시되어 확인할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "If there is a quest you do not want to see in the list of quests, place the mouse pointer over the title and press the right mouse button to send it to the pending tab.";
+					mes "[쇼티]";
+					mes "퀘스트 목록에서 보고 싶지 않은 퀘스트가 있다면 제목에 마우스 포인터를 올리고 마우스 오른쪽 버튼을 눌러 대기 탭으로 보내주세요.";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "<Check status> - Click the ^0000cdstatus icon in the main menu located at the top left corner^000000.";
-					mes "Shortcut: ^0000cdAlt+A^000000";
+					mes "[쇼티]";
+					mes "<상태 확인> - 메인메뉴 좌측상단 ^000000의 ^0000cdstatus 아이콘을 클릭하세요.";
+					mes "바로가기: ^0000cdAlt+A^000000";
 					next;
-					mes "[Shorty]";
-					mes "<Check skill> - Click the ^0000cdskill icon in the main menu located at the top left corner^000000.";
-					mes "Shortcut: ^0000cdAlt+S^000000";
+					mes "[쇼티]";
+					mes "<스킬 확인> - 메인 메뉴 좌측상단 ^0000000cdskill 아이콘을 클릭하세요.";
+					mes "바로가기: ^0000cdAlt+S^000000";
 					next;
-					mes "[Shorty]";
-					mes "Don't forget! The skill has to be activated by double clicking the icon you want to use and is casted by pressing the left mouse button once!";
+					mes "[쇼티]";
+					mes "잊지 마세요! 스킬은 사용하고 싶은 아이콘을 더블클릭하면 발동되며, 마우스 왼쪽 버튼을 한번 누르면 시전됩니다!";
 					break;
 				case 5:
-					mes "[Shorty]";
-					mes "<Equip and unequip equipment> - Click the ^0000cdequipment icon in the main menu located at the top left corner^000000.";
-					mes "Shortcut: ^0000cdAlt+Q^000000";
+					mes "[쇼티]";
+					mes "<장비 장착 및 해제> - 메인 메뉴 좌측 상단 ^00000c장비 해제 아이콘을 클릭하세요.";
+					mes "바로가기: ^0000cdAlt+Q^000000";
 					next;
-					mes "[Shorty]";
-					mes "Usually, you can equip and disarm by double-clicking the left mouse button in the inventory or equipment window.";
+					mes "[쇼티]";
+					mes "보통 인벤토리나 장비창에서 마우스 왼쪽 버튼을 더블클릭하면 장착과 해제가 가능합니다.";
 					next;
-					mes "[Shorty]";
-					mes "Arrows and bullets can only be equipped by dragging them from the inventory to the character in the equipment window.";
+					mes "[쇼티]";
+					mes "화살과 총알은 인벤토리에서 장비창의 캐릭터로 드래그해야만 장착할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "If master becomes a Merchant, you can pull a cart, which can be borrowed from the Kafra Staff in each town.";
+					mes "[쇼티]";
+					mes "마스터가 상인이 되면 수레를 끌 수 있고, 각 마을의 카프라 직원에게 빌릴 수 있습니다.";
 					break;
 				case 6:
-					mes "[Shorty]";
-					mes "<Store Trade> - Click on the merchant NPC ^0000cdto trade^000000.";
-					mes "<User Transaction> - Right-click the player you want to trade with and select ^0000cdTrade^000000.";
+					mes "[쇼티]";
+					mes "<상점거래> - 상인NPC ^0000cd거래를 클릭하세요^000000.";
+					mes "<사용자 거래> - 거래하려는 플레이어를 마우스 오른쪽 버튼으로 클릭한 후 ^0000cdTrade^000000을 선택하세요.";
 					next;
-					mes "[Shorty]";
-					mes "<Buy and sell stalls> - Click the mouse on the stalls window.";
+					mes "[쇼티]";
+					mes "<매점판매> - 매점창에서 마우스를 클릭하세요.";
 					break;
 				}
 				next;
@@ -723,193 +802,193 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 			end;
 		case 2:
 			while(1) {
-				mes "[Shorty]";
-				mes "What are you curious about?";
+				mes "[쇼티]";
+				mes "무엇이 궁금하세요?";
 				next;
-				switch( select( "Tip of the Day", "Command List", "Skills and Items Shortcut Window", "Shortcut Key List and Registration", "Command List", "Emotion List" ) ) {
+				switch( select( "오늘의 팁", "명령 목록", "스킬 및 아이템 단축키 창", "단축키 목록 및 등록", "명령 목록", "감정 목록" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "Type ^0000cd/tip^000000 in the chat window.";
+					mes "[쇼티]";
+					mes "채팅창에 ^0000cd/tip^000000을 입력하세요.";
 					next;
-					mes "[Shorty]";
-					mes "A lot of life information is contained in this. Whenever I'm bored, I read these.";
+					mes "[쇼티]";
+					mes "생활정보가 많이 담겨있습니다. 심심할 때마다 읽어요.";
 					break;
 				case 2:
-					mes "[Shorty]";
-					mes "Type ^0000cd/h^000000 in the chat window.";
+					mes "[쇼티]";
+					mes "채팅창에 ^0000cd/h^000000을 입력하세요.";
 					next;
-					mes "[Shorty]";
-					mes "You can see the necessary information for Novice adventurers.";
+					mes "[쇼티]";
+					mes "초보자 모험가들에게 꼭 필요한 정보를 보실 수 있습니다.";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "Press the ^0000cdF12 key^000000 to register consumption items, skills, and equipment by dragging them to the shortcut window.";
+					mes "[쇼티]";
+					mes "^0000cdF12 키^000000를 누르면 소비아이템, 스킬, 장비를 바로가기창으로 드래그하여 등록할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Did you know that quick item use and equipment replacement are essential for effective combat?";
+					mes "[쇼티]";
+					mes "효과적인 전투를 위해서는 빠른 아이템 활용과 장비 교체가 필수라는 사실, 알고 계셨나요?";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "Press the ^0000cdAlt+M keys^000000 to register frequently used shortcut commands~";
+					mes "[쇼티]";
+					mes "자주 사용하는 단축키를 등록하려면 ^0000cdAlt+M키^000000를 누르세요~";
 					next;
-					mes "[Shorty]";
-					mes "I use this function to register frequently used commands.";
+					mes "[쇼티]";
+					mes "자주 사용하는 명령어를 등록하는 기능입니다.";
 					break;
 				case 5:
-					mes "[Shorty]";
-					mes "Press the ^0000cdAlt+Y keys^000000 to check the command list and turn it ON/OFF.";
+					mes "[쇼티]";
+					mes "^0000cdAlt+Y 키^000000를 누르면 명령어 목록을 확인하고 ON/OFF할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "You can check and turn on/off various options by master's choice.";
+					mes "[쇼티]";
+					mes "마스터의 선택에 따라 다양한 옵션을 확인하고 on/off 할 수 있습니다.";
 					break;
 				case 6:
-					mes "[Shorty]";
-					mes "Press the ^0000cdAlt+L keys^000000 to view and use the list of emotions and shortcut commands.";
+					mes "[쇼티]";
+					mes "^0000cdAlt+L 키^000000를 누르면 감정 목록과 단축키 목록을 확인하고 사용할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Master, do you know that conversation isn't just about words? Appropriate use of emotion makes the conversation richer.";
+					mes "[쇼티]";
+					mes "스승님, 대화는 말로만 하는 게 아니라는 걸 아시나요? 감정을 적절히 활용하면 대화가 더욱 풍성해집니다.";
 					break;
 				}
 				next;
 			}
 			end;
 		case 3:
-			mes "[Shorty]";
-			mes "Yes. Call me again if you need me.";
+			mes "[쇼티]";
+			mes "네. 필요하시면 다시 전화주세요.";
 			close;
 		}
 		end;
 	case 6:
-		mes "[Shorty]";
-		mes "Master doesn't want to succeed? Salty says she's training hard because she wants to succeed.";
+		mes "[쇼티]";
+		mes "스승님은 성공하고 싶지 않으세요? 솔티는 성공하고 싶어서 열심히 훈련한다고 합니다.";
 		next;
-		mes "[Shorty]";
-		mes "The tradition is ^0000cdbeing born again in Valhalla and returning to Novice^000000. But it's not a normal Novice, it's called a High Novice.";
+		mes "[쇼티]";
+		mes "전통은 ^0000cd발할라에서 다시 태어나 노비스로 돌아가는 것^000000입니다. 하지만 평범한 노비스가 아니고 하이 노비스라고 부릅니다.";
 		next;
-		mes "[Shorty]";
-		mes "In other words, it's evolution. People who have passed down say that there are many advantages to getting the job of the past again.";
+		mes "[쇼티]";
+		mes "즉, 진화죠. 물려받은 사람들은 예전의 직업을 다시 잡으면 장점이 많다고 하더라고요.";
 		next;
-		mes "[Shorty]";
-		mes "There are many statuses, and above all, if you have a secondary job, you can increase your ^0000cdjob level to 70^000000. You will be able to use more skills.";
+		mes "[쇼티]";
+		mes "스테이터스에는 여러 가지가 있으며, 무엇보다도 부직업을 가지게 되면 ^0000cdjob 레벨을 70^000000까지 올릴 수 있습니다. 더 많은 스킬을 사용할 수 있게 됩니다.";
 		next;
-		mes "[Shorty]";
-		mes "If you want to succeed, find a person named";
-		mes "<NAVI>[Metheus Sylph]<INFO>yuno_in02,88,164,0,101,0</INFO></NAVI> ^0000cdat Sage Academy in Yuno^000000, and he will guide you.";
+		mes "[쇼티]";
+		mes "성공하고 싶다면 이름이 있는 사람을 찾아라";
+		mes "<NAVI>[메테우스 실프]<INFO>yuno_in02,88,164,0,101,0</INFO></NAVI> ^0000cdat 세이지 아카데미 유노^000000, 그가 당신을 안내할 것입니다.";
 		next;
-		mes "[Shorty]";
-		mes "If you're not interested in transcending, you can just change jobs. But he said that it's better to pass it on when you think about the future.";
+		mes "[쇼티]";
+		mes "초월에 관심이 없으면 그냥 직업을 바꾸면 됩니다. 하지만 미래를 생각할 때 넘기는 게 낫다고 하더군요.";
 		next;
-		mes "[Shorty]";
-		mes "If you are not interested in changing jobs or transcending...";
+		mes "[쇼티]";
+		mes "전직이나 초월에 관심이 없다면...";
 		next;
-		mes "[Shorty]";
-		mes "The continent is full of festivals all year round. How about participating in the festival when master is also free?";
+		mes "[쇼티]";
+		mes "대륙은 1년 내내 축제로 가득 차 있습니다. 주인도 한가할 때 축제에 참가해 보는 것은 어떨까요?";
 		next;
-		mes "[Shorty]";
-		mes "Now...";
+		mes "[쇼티]";
+		mes "지금...";
 		next;
-		mes "[Shorty]";
-		mes "I heard that there will be a winter hunting contest hosted by the royal family at the royal palace! I want to do a hunting contest! I want to do it! Fight monsters!!! Let's go to Prontera!!!!";
+		mes "[쇼티]";
+		mes "왕궁에서 왕가 주최로 겨울 사냥 대회가 열린다고 들었어요! 사냥 대회를 하고 싶어요! 하고 싶어요! 몬스터들과 싸워요!!! 프론테라로 가요!!!!" ;
 		next;
-		mes "[Shorty]";
-		mes "I'll definitely take you with me, okay?";
+		mes "[쇼티]";
+		mes "꼭 널 데리고 갈게, 알았지?";
 		close;
 	case 7:
-		mes "[Shorty]";
-		mes "Master, I'll tell you the basics, but literally just the basics.";
+		mes "[쇼티]";
+		mes "스승님, 기본을 말씀드리지만 말 그대로 기본만 말씀드리겠습니다.";
 		next;
-		mes "[Shorty]";
-		mes "For more information";
-		mes "try using";
-		mes "<URL>[Rune Midgarts Library]<INFO>http://ro.gnjoy.com/guide/runemidgarts/,1024,768</INFO></URL>";
+		mes "[쇼티]";
+		mes "자세한 내용은";
+		mes "사용해 보세요";
+		mes "<URL>[룬 미드가르트 라이브러리]<INFO>http://ro.gnjoy.com/guide/runemidgarts/,1024,768</INFO></URL>";
 		next;
-		mes "[Shorty]";
-		mes "What information are you curious about?";
+		mes "[쇼티]";
+		mes "어떤 정보가 궁금하세요?";
 		next;
-		switch( select("Location Information", "Quest Information", "Hunting Field Information", "System Information", "Cancel" ) ) {
+		switch( select("위치 정보", "퀘스트 정보", "사냥터 정보", "시스템 정보", "취소" ) ) {
 		case 1:
 			while(1) {
-				mes "[Shorty]";
-				mes "Where are you curious?";
+				mes "[쇼티]";
+				mes "어디가 궁금하세요?";
 				next;
-				switch( select( "Midgard Continent", "Far-Star Continent", "Malangdo", "Local Area", "Otherworld", "I'm not interested" ) ) {
+				switch( select( "미드가르드 대륙", "극성 대륙", "말랑도", "로컬 에리어", "이세계", "관심 없음" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "^0000cdMidgard Continent^000000 is said to have the greatest influence of the three kingdoms of Arunafelts, Schwaldzwald, and Rune-Midgarts. Each continent has an airship you can readily use.";
+					mes "[쇼티]";
+					mes "^0000cd미드가르드 대륙^000000은 아루나펠트, 슈발츠발트, 룬-미드가르트 삼국의 영향력이 가장 크다고 합니다. 각 대륙에는 쉽게 사용할 수 있는 비행선이 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdRune-Midgarts^000000. A kingdom ruled by seven royal families and the power of magic prevails.";
+					mes "[쇼티]";
+					mes "^0000cdRune-Midgarts^000000. 일곱 왕가가 통치하고 마법의 힘이 지배하는 왕국.";
 					next;
-					mes "[Shorty]";
-					mes "The capital is Prontera, the satellite city of Izlude, Geffen where wizards gather, Payon to the east, Alberta where you can go travel to different regions, Aldebaran with the clock tower, and Morroc.";
+					mes "[쇼티]";
+					mes "수도는 이즈루데의 위성도시 프론테라, 마법사들이 모이는 게펜, 동쪽의 페이욘, 다양한 지역을 여행할 수 있는 알버타, 시계탑이 있는 알데바란, 모로크이다.";
 					next;
-					mes "[Shorty]";
-					mes "We met at Izlude in Rune-Midgarts Kingdom. Remember? Also Payon with Salty, and Paros from where I left. They're all in Rune-Midgats.";
+					mes "[쇼티]";
+					mes "우리는 Rune-Midgarts 왕국의 Izlude에서 만났습니다. 기억하시나요? Payon과 Salty도 있고, 제가 떠난 곳의 Paros도 있습니다. 그들은 모두 Rune-Midgats에 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdArunafelz^000000. This is a church that worships a goddess. So, there is a Pope. Of course, you can't meet anyone, but is it possible? Maybe we can meet at least once.";
+					mes "[쇼티]";
+					mes "^0000cdArunafelz^000000. 이곳은 여신을 숭배하는 교회다. 그래서 교황이 있다. 물론 누구도 만날 수는 없지만 가능할까? 한 번쯤은 만날 수 있지 않을까.";
 					next;
-					mes "[Shorty]";
-					mes "Arunafelz has a temple capital, Rachel, and a canyon town, Veins.";
+					mes "[쇼티]";
+					mes "아루나펠츠에는 사원 수도인 레이첼과 협곡 마을인 베인스가 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdSchwaldzwald^000000 Republic. As the name suggests, there is a president. The capital city, Yuno, is floating in the air, so it's worth a visit. It must be spectacular.";
+					mes "[쇼티]";
+					mes "^0000cdSchwaldzwald^000000 공화국. 이름 그대로 대통령이 있다. 수도인 유노가 공중에 떠 있으니 한번 가볼만한 가치가 있다. 장관이겠구나.";
 					next;
-					mes "[Shorty]";
-					mes "And there is Lighthalzen, where the headquarters of Rekenberg is located, there is the mining town of Einbroch, the mines of Einbech, and there is also the rural village of Hugel.";
+					mes "[쇼티]";
+					mes "그리고 레켄베르그의 본부가 있는 라이트할젠도 있고, 광산마을 아인브로흐도 있고, 아인베흐의 광산도 있고, 시골마을 휴겔도 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "There are other Utan villages such as Umbala, or Niflheim, the land of the dead. It's a place I've always wanted to visit!";
+					mes "[쇼티]";
+					mes "우탄 마을 말고도 움발라나 죽음의 땅 니플헤임 같은 곳도 있어요. 꼭 가보고 싶었던 곳이에요!";
 					break;
 				case 2:
-					mes "[Shorty]";
-					mes "Many people thought that there was only the continent of Midgard on this land, but one day, people appeared in the form of ^0000cdcats^000000. No one knew where they came from.";
+					mes "[쇼티]";
+					mes "많은 사람들이 이 땅에는 미드가르드 대륙만 있다고 생각하고 있었는데, 어느 날 ^0000cdcats^000000의 형태로 사람들이 나타났습니다. 그들이 어디서 왔는지 아는 사람은 아무도 없었습니다.";
 					next;
-					mes "[Shorty]";
-					mes "These people, called Doram, are from a place far across the sea, the ^0000cdFar-Star Continent^000000. They said that the road was opened for them only recently.";
+					mes "[쇼티]";
+					mes "도람이라는 사람들은 바다 건너 멀리 ^0000cd원성대륙^000000에서 왔습니다. 최근에야 길이 열렸다고 하네요.";
 					next;
-					mes "[Shorty]";
-					mes "In the Far-Star Continent, the port city ^0000cdLasagna^000000 is the most famous. I want to go there too.";
+					mes "[쇼티]";
+					mes "이별대륙에서는 항구도시 ^0000cd라자냐^000000가 가장 유명해요. 저도 꼭 가보고 싶어요.";
 					next;
-					mes "[Shorty]";
-					mes "To get here, take the boat from Malangdo or Izlude. Do you remember where we got off?";
+					mes "[쇼티]";
+					mes "여기까지 가려면 말랑도나 이즈루데에서 배를 타세요. 우리가 어디서 내린지 기억하시나요?";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "You've seen people in the form of cats, called Dorams, who come and go. They haven't had their first contact with this Midgard continent, but now they have taken root and established themselves everywhere.";
+					mes "[쇼티]";
+					mes "도람이라는 고양이의 모습으로 왔다 갔다 하는 사람들을 본 적이 있을 것이다. 그들은 미드가르드 대륙에 처음으로 접촉한 적은 없지만, 이제는 곳곳에 뿌리를 내리고 자리를 잡았다.";
 					next;
-					mes "[Shorty]";
-					mes "It turns out that while sailing in a faraway place called the Far-Star continent, they met a storm and fell to a place called Malangdo. Literally, the ship fell from the sky.";
+					mes "[쇼티]";
+					mes "파별대륙이라는 머나먼 곳을 항해하던 중 폭풍을 만나 말랑도라는 곳으로 추락한 것으로 밝혀졌습니다. 말그대로 배는 하늘에서 떨어졌습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Dorams have a lot of magical talents, so if you go to ^0000cdMalangdo^000000 you will have a good time.";
+					mes "[쇼티]";
+					mes "도람들은 마법의 재능이 많으니 ^0000cd말랑도^000000에 가면 즐거운 시간을 보낼 수 있을 것 같아요.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdYou can take the boat^000000 from Izlude. If you have Canned Malangdo that can be obtained in a special way, you can use it to travel to there.";
+					mes "[쇼티]";
+					mes "^0000cd이즈루드에서 ^000000배를 탈 수 있습니다. 특별한 방법으로 얻을 수 있는 말랑도 통조림이 있다면 그곳으로 여행을 갈 수 있습니다.";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "If you want to feel the atmosphere of a foreign country, you should go to that ^0000cdlocal region^000000. ^0000cdIf you go to Alberta's dock^000000, you can meet the sailors who send people to each local region.";
+					mes "[쇼티]";
+					mes "이국의 분위기를 느끼고 싶다면 그 ^0000cd지역^000000에 가보세요. ^0000cd알버타의 부두^000000에 가면 각 지역으로 사람을 보내는 선원들을 만날 수 있어요.";
 					next;
-					mes "[Shorty]";
-					mes "Amatsu, Kunlun, Moscovia, Brasilis, Ayothaya, Dewata, Port Malaya, Rock Ridge, etc. The unknown world is waiting for you.";
+					mes "[쇼티]";
+					mes "아마츠, 쿤룬, 모스코비아, 브라질리스, 아요타야, 데와타, 포트말라야, 록리지 등 미지의 세계가 여러분을 기다리고 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Doesn't it make your heart flutter just by hearing the words? See you later, master.";
+					mes "[쇼티]";
+					mes "말만 들어도 설레지 않나요? 이따 뵙겠습니다 선생님.";
 					break;
 				case 5:
-					mes "[Shorty]";
-					mes "Uh, I know, here. If you go through the eastern part of Morroc or talk to Agent Catson in Paradise, they'll send you there.";
+					mes "[쇼티]";
+					mes "어, 알아요. 여기요. 모로크 동부로 가거나 파라다이스에 있는 캣슨 요원과 대화하면 그곳으로 보내줄 거예요.";
 					next;
-					mes "[Shorty]";
-					mes "You can meet people you've never seen before.";
+					mes "[쇼티]";
+					mes "한 번도 본 적 없는 사람들을 만날 수 있어요.";
 					next;
-					mes "[Shorty]";
-					mes "From the base of the Expeditionary Forces of the Three Kingdoms, you can go to Splendid, Eclage, Manuk or El Dicastes.";
+					mes "[쇼티]";
+					mes "삼국 원정군의 거점에서는 스플렌디드, 에클라주, 마누크, 엘디카스테스로 갈 수 있습니다.";
 					break;
 				case 6:
-					mes "[Shorty]";
-					mes "Okay? Then I'll look around a bit and get back into the bag.";
+					mes "[쇼티]";
+					mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 					close;
 				}
 				next;
@@ -917,54 +996,54 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 			end;
 		case 2:
 			while(1) {
-				mes "[Shorty]";
-				mes "What quest are you curious about?";
+				mes "[쇼티]";
+				mes "어떤 퀘스트가 궁금하세요?";
 				next;
-				switch( select( "General Quest", "Monthly Event", "Paradise", "I'm not interested" ) ) {
+				switch( select( "일반 퀘스트", "월간 이벤트", "파라다이스", "관심 없음" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "^0000cdWhy don't you meet Paul and Anne at^000000 the outside Prontera's West Gate? As I was passing by, I heard that they needed help.";
+					mes "[쇼티]";
+					mes "^0000cd프론테라 서문 밖^000000에서 폴과 앤을 만나보시는 건 어떨까요? 지나가다가 도움이 필요하다는 소식을 들었습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Or why not listen to the anxious middle-aged man from ^0000cdPayon^000000?";
+					mes "[쇼티]";
+					mes "아니면 ^0000cdPayon^000000의 불안한 중년남자의 말을 들어보는 건 어떨까요?";
 					next;
-					mes "[Shorty]";
-					mes "For more information on quests";
-					mes "see also";
-					mes "<URL>[Rune Midgarts Library]<INFO>http://ro.gnjoy.com/guide/runemidgarts/questlist.asp,1024,768</INFO></URL>";
+					mes "[쇼티]";
+					mes "퀘스트에 대한 자세한 내용은";
+					mes "또한 참조하세요";
+					mes "<URL>[룬 미드가르트 라이브러리]<INFO>http://ro.gnjoy.com/guide/runemidgarts/questlist.asp,1024,768</INFO></URL>";
 					next;
-					mes "[Shorty]";
-					mes "You will be able to learn about the flow of this world and know what major events are happening.";
+					mes "[쇼티]";
+					mes "이 세상의 흐름에 대해 배울 수 있고 어떤 주요 사건이 일어나고 있는지 알 수 있습니다.";
 					close;
 				case 2:
-					mes "[Shorty]";
-					mes "The continent is full of festivals all year round. How about participating in the festival when master is also free?";
+					mes "[쇼티]";
+					mes "대륙은 1년 내내 축제로 가득 차 있습니다. 주인도 한가할 때 축제에 참가해 보는 것은 어떨까요?";
 					next;
-					mes "[Shorty]";
-					mes "Now...";
+					mes "[쇼티]";
+					mes "지금...";
 					next;
-					mes "[Shorty]";
-					mes "I heard that there will be a winter hunting contest hosted by the royal family at the royal palace! want to do a hunting contest! I want to do it! Fight monsters!!! Let's go to Prontera!!!!";
+					mes "[쇼티]";
+					mes "왕궁에서 왕가 주최로 겨울 사냥대회가 열린다고 들었는데! 사냥대회 하고 싶다! 하고 싶다! 몬스터들과 싸워라!!! 프론테라로 가자!!!!";
 					next;
-					mes "[Shorty]";
-					mes "I'll definitely take you with me, okay?";
+					mes "[쇼티]";
+					mes "꼭 널 데리고 갈게, 알았지?";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "^0000cdHave you been to Paradise^000000?";
+					mes "[쇼티]";
+					mes "^0000cd파라다이스^000000에 가본 적 있나요?";
 					next;
-					mes "[Shorty]";
-					mes "There are many quests waiting for master. Besides, they also provide equipment for beginners.";
+					mes "[쇼티]";
+					mes "마스터님을 기다리는 퀘스트가 많습니다. 게다가 초보자를 위한 장비도 제공됩니다.";
 					next;
-					mes "[Shorty]";
-					mes "Of course, it's not free, but you have to solve a simple quest from Paradise. Besides, they also rent out shadow equipment.";
+					mes "[쇼티]";
+					mes "물론 무료는 아니지만 파라다이스에서 간단한 퀘스트를 풀어야 합니다. 게다가 쉐도우 장비도 대여해 줍니다.";
 					next;
-					mes "[Shorty]";
-					mes "If you have any questions, go to the Paradise Office.";
+					mes "[쇼티]";
+					mes "궁금한 점이 있으시면 파라다이스 오피스로 가세요.";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "Okay? Then I'll look around a bit and get back into the bag.";
+					mes "[쇼티]";
+					mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 					close;
 				}
 				next;
@@ -972,64 +1051,64 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 			end;
 		case 3:
 			while(1) {
-				mes "[Shorty]";
-				mes "I wonder where..";
+				mes "[쇼티]";
+				mes "어디인지 궁금해요..";
 				next;
-				switch( select( "Field Hunting Guide", "Dungeon Guide", "Other Dungeon Guide", "Enough" ) ) {
+				switch( select( "필드 사냥 가이드", "던전 가이드", "기타 던전 가이드", "충분" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "Press the ^0000cdCtrl+` keys^000000 to open a map.";
+					mes "[쇼티]";
+					mes "^0000cdCtrl+` 키^000000를 누르면 지도가 열립니다.";
 					next;
-					mes "[Shorty]";
-					mes "Do you see a box for selecting an area at the top left? After selecting the area you want to see, check the ^0000cdmonster tab^000000 in the upper right corner or press the ^0000cdTab key^000000, you will see the name and level of the monster most distributed in that area.";
+					mes "[쇼티]";
+					mes "왼쪽 상단에 지역을 선택하는 박스 보이시죠? 보고 싶은 지역을 선택한 후 오른쪽 상단의 ^0000cdmonster 탭^000000을 확인하거나 ^0000cdTab 키^000000를 누르면 보이는데요. 해당 지역에 가장 많이 분포하는 몬스터의 이름과 레벨.";
 					next;
-					mes "[Shorty]";
-					mes "It would be better to go on an adventure to a place that matches the level of master. ^0000cdIf there is a lot of level difference with monsters, you can't get 100% of the experience^000000. You have to calculate the level difference as well, right?";
+					mes "[쇼티]";
+					mes "마스터의 레벨에 맞는 곳으로 모험을 떠나는 게 나을 것 같아요. ^0000cd몬스터와 레벨 차이가 많이 나면 경험치를 100% 얻을 수 없습니다^000000. 계산을 해야 해요. 레벨차이도 나죠?";
 					next;
-					mes "[Shorty]";
-					mes "If you press the town you want to go to, the navigation menu will appear. Press the ^0000cd<Guide to the target> button at the bottom^000000 and exit the map to get guidance.";
+					mes "[쇼티]";
+					mes "가고 싶은 마을을 누르면 내비게이션 메뉴가 나옵니다. 하단의 ^0000cd<목표지 안내> 버튼^000000을 누르고 지도에서 나가면 안내를 받을 수 있습니다.";
 					break;
 				case 2:
-					mes "[Shorty]";
-					mes "Press the ^0000cdCtrl+` keys^000000 to open a map.";
+					mes "[쇼티]";
+					mes "^0000cdCtrl+` 키^000000를 누르면 지도가 열립니다.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdDo you see a box where you can select an area^000000 in the upper left? If you select an area you want to check out then you will see it marked with a red box the map with ^0000cdthe name of the main dungeon^000000 written on it." ;
+					mes "[쇼티]";
+					mes "^0000cd왼쪽 상단에 ^000000 지역을 선택할 수 있는 상자가 보이나요? 확인하고 싶은 지역을 선택하면 빨간색 상자로 표시되어 있는 것을 볼 수 있습니다. 지도에는 ^0000cd메인 이름이 있습니다. 던전^000000이라고 적혀 있어요." ;
 					next;
-					mes "[Shorty]";
-					mes "Then check the ^0000cdmonster tab in the upper right corner or press the Tab key^000000 to display the level of the dungeon.";
+					mes "[쇼티]";
+					mes "그다음 오른쪽 상단의 ^0000cdmonster 탭을 확인하거나 Tab키^000000를 누르면 던전의 레벨이 표시됩니다.";
 					next;
-					mes "[Shorty]";
-					mes "Sometimes, some dungeons can only be entered through special quests, so you need to gather information as well, alright?";
+					mes "[쇼티]";
+					mes "특수 퀘스트를 통해서만 입장할 수 있는 던전도 있기 때문에 정보도 모아야겠죠?";
 					next;
-					mes "[Shorty]";
-					mes "Why don't you try the underground waterway first? The Swordsman Guild is always recruiting, but I heard it's good for beginner adventurers to gain experience.";
+					mes "[쇼티]";
+					mes "지하수로부터 한번 가보는 건 어때요? 검객 길드에서는 상시 모집을 하고 있는데, 초보 모험가들이 경험치를 쌓는 것도 좋다고 들었습니다.";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "There are a lot of memorial dungeons, nightmare dungeons, illusion dungeons...etc.";
+					mes "[쇼티]";
+					mes "기억던전, 악몽던전, 환상던전...등등이 많아요.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdMemorial Dungeon^000000";
-					mes "In addition to the regular dungeons, there are also special dungeons. Usually, they say that it is a special place created by an unknown power in this world.";
+					mes "[쇼티]";
+					mes "^0000cd기념 던전^000000";
+					mes "일반 던전 외에도 특수 던전도 있어요. 보통 이 세계에 알려지지 않은 힘이 만들어낸 특별한 장소라고들 하던데.";
 					next;
-					mes "[Shorty]";
-					mes "A lot of experienced adventurers usually go, but they say there are a few low-level places that can be reached with a little training. Either in Orc Village or Rachel...";
+					mes "[쇼티]";
+					mes "보통 경험 많은 모험가들이 많이 가는데, 조금만 훈련하면 갈 수 있는 낮은 레벨의 장소도 몇 군데 있다고 하더군요. 오크마을이나 레이첼이나...";
 					next;
-					mes "[Shorty]";
-					mes "It is said to be located in villages and general fields, and there are many places called Dimensional Rifts.";
+					mes "[쇼티]";
+					mes "마을이나 일반 필드에 위치하고 있다고 하며, 차원의 균열이라 불리는 곳이 많이 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdNightmare Dungeon^000000";
-					mes "It is said that it is a dungeon that is much more difficult of a challenge than a normal dungeon. Even the monsters are not like the monsters we know of. When you find the dungeon, if someone suspicious tells you that it will send you to a more difficult place, try it out." ;
+					mes "[쇼티]";
+					mes "^0000cd악몽던전^000000";
+					mes "일반 던전에 비해 난이도가 훨씬 높은 던전이라고 합니다. 심지어 몬스터들도 우리가 아는 몬스터들과는 다릅니다. 던전을 발견했을 때 수상한 사람이 보내준다고 하면 보내주겠다고 합니다. 더 어려운 곳으로 가보세요." ;
 					next;
-					mes "[Shorty]";
-					mes "^0000cdIllusion Dungeon^000000";
-					mes "No one knows what kind of dungeon these dungeons are. I guess it's something like a dream or a fantasy. There is a special stone that only comes from here, and everyone says that they aim for the stone and fight for it. They say that the stone can be exchanged for powerful weapons. ";
+					mes "[쇼티]";
+					mes "^0000cd일루젼 던전^000000";
+					mes "이 던전이 어떤 던전인지는 아무도 모릅니다. 꿈 같기도 하고 환상 같기도 합니다. 이곳에서만 나오는 특별한 돌이 있는데 다들 그 돌을 노리고 싸운다고 합니다. 그들은 그 돌은 강력한 무기로 교환될 수 있다고 합니다.";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "Okay? Then I'll look around a bit and get back into the bag.";
+					mes "[쇼티]";
+					mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 					close;
 				}
 				next;
@@ -1037,167 +1116,167 @@ izlude,1,1,0	script	Shorty#fgtg01	4_GALAPAGO,{
 			end;
 		case 4:
 			while(1) {
-				mes "[Shorty]";
-				mes "So, what basic info do you want to know?";
-				mes "Refer to <URL>[guide]<INFO>http://ro.gnjoy.com/guide/systeminfo/,1024,768</INFO></URL> for the Basic.";
+				mes "[쇼티]";
+				mes "그럼 어떤 기본정보를 알고 싶으신가요?";
+				mes "기본은 <URL>[가이드]<INFO>http://ro.gnjoy.com/guide/systeminfo/,1024,768</INFO></URL>를 참고하세요.";
 				next;
-				switch( select( "Party", "Guilds and Clans", "Smelt", "Enchant", "Family", "Chat" ) ) {
+				switch( select( "파티", "길드 및 클랜", "제련", "인챈트", "가족", "채팅" ) ) {
 				case 1:
-					mes "[Shorty]";
-					mes "Sometimes you would like to be with your friends, if they fight in dungeons, enjoy adventures together, or sometimes just sit and chat.";
+					mes "[쇼티]";
+					mes "때때로 친구들과 함께 던전에서 싸우고 싶고, 함께 모험을 즐기고 싶고, 때로는 그냥 앉아서 이야기를 나누고 싶을 때도 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "In that case, make a party and do it together.";
+					mes "[쇼티]";
+					mes "그렇다면 파티를 만들어 같이 해보세요.";
 					next;
-					mes "[Shorty]";
-					mes "The party window can be easily opened and with the ^0000cdAlt+Z keys^000000. When evenly distributing experience for hunting, the difference of ^0000cdlevel between party members^000000 can be equal to or less than 15.";
+					mes "[쇼티]";
+					mes "파티창은 ^0000cdAlt+Z키^000000로 쉽게 열 수 있습니다. 사냥 경험치를 균등하게 분배할 때 파티원 간 ^0000cd레벨^000000의 차이는 15 이하가 될 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "If you click the circle on the left in the chat window at the bottom, you can designate a chat partner, and you can send a message only to party members there, so it's useful.";
+					mes "[쇼티]";
+					mes "하단 채팅창 왼쪽 동그라미를 클릭하면 채팅 상대를 지정할 수 있고, 거기에 있는 파티원에게만 메시지를 보낼 수도 있어서 유용합니다.";
 					break;
 				case 2:
-					mes "[Shorty]";
-					mes "Sometimes you will want to belong somewhere and feel a bond with someone. In that case, you just need to belong to a ^0000cdguild or clan^000000.";
+					mes "[쇼티]";
+					mes "가끔 어딘가에 속하고 싶고, 누군가와 유대감을 느끼고 싶을 때가 있습니다. 그럴 경우에는 ^0000cd길드나 클랜^000000에 속해 있으면 됩니다.";
 					next;
-					mes "[Shorty]";
-					mes "The biggest characteristic of a guild is a battle over a hideout. It is also called a siege.";
+					mes "[쇼티]";
+					mes "길드의 가장 큰 특징은 아지트를 두고 벌어지는 전투입니다. 공성전이라고도 합니다.";
 					next;
-					mes "[Shorty]";
-					mes "You can enter a guild that has already been formed by invitation, or you can buy Empelium sold at the office to create a guild.";
+					mes "[쇼티]";
+					mes "초대를 통해 이미 결성된 길드에 가입할 수도 있고, 사무실에서 판매하는 엠펠리움을 구매하여 길드를 만들 수도 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "In addition to the sense of belonging, the guild can enjoy various benefits such as the guild's own skills and dedicated warehouse.";
+					mes "[쇼티]";
+					mes "길드원은 소속감 외에도 길드 고유의 스킬, 전용 창고 등 다양한 혜택을 누릴 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "For details";
-					mes "refer to <URL>[Guild Guide]<INFO>http://ro.gnjoy.com/guide/systeminfo/systemGuild1.asp,1024,768</INFO></URL>";
+					mes "[쇼티]";
+					mes "자세한 내용은";
+					mes "<URL>[길드 가이드]<INFO>http://ro.gnjoy.com/guide/systeminfo/systemGuild1.asp,1024,768</INFO></URL>를 참조하세요.";
 					next;
-					mes "[Shorty]";
-					mes "If joining a guild is burdensome, then a ^0000cdclan^000000 would be good. It may be difficult to feel as close to others like in a guild, but the clan also has various benefits.";
+					mes "[쇼티]";
+					mes "길드 가입이 부담스럽다면 ^0000cdclan^000000도 좋을 것 같아요. 길드처럼 친밀감을 느끼기 어려울 수도 있지만, 클랜에도 다양한 혜택이 있어요.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdThe building in the lower left corner of Prontera Central Fountain^000000 is the Clan Headquarters, so take a look.";
+					mes "[쇼티]";
+					mes "^0000cd프론테라 중앙분수대 좌측하단 건물^000000이 혈맹본부이니 한번 살펴보세요.";
 					break;
 				case 3:
-					mes "[Shorty]";
-					mes "Do you want to make the equipment you have stronger? In that case, you can find the ^0000cdsmelter^000000 in each town.";
+					mes "[쇼티]";
+					mes "가지고 있는 장비를 더 강하게 만들고 싶나요? 그렇다면 각 마을마다 ^0000cdsmelter^000000를 찾을 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Smelting requires special items and zeny. It depends on the type and level of the equipment.";
+					mes "[쇼티]";
+					mes "제련에는 특별한 아이템과 제니가 필요합니다. 장비의 종류와 레벨에 따라 다릅니다.";
 					next;
-					mes "[Shorty]";
-					mes "One thing to be aware of is that there is a safe refinement level in smelting, and if you proceed with refining above a certain level, the equipment has a chance to be destroyed. You must have good luck.";
+					mes "[쇼티]";
+					mes "한 가지 주의할 점은 제련에는 안전한 제련도가 있다는 점이며, 일정 수준 이상으로 제련을 진행하면 장비가 파괴될 확률이 있습니다. 행운이 따르리라 믿습니다.";
 					next;
-					mes "[Shorty]";
-					mes "Oh, besides the smelter in each town, I heard that the^0000cd<Item Mall>^000000 offers a higher success chance of smelting.";
+					mes "[쇼티]";
+					mes "아, 각 마을에 있는 제련소 외에도 ^0000cd<아이템 몰>^000000이 제련 성공 확률이 더 높다고 들었습니다.";
 					next;
-					mes "[Shorty]";
-					mes "If you are curious, go to ^0000cd<cash sales guide>^000000 in each town. They will guide you there.";
+					mes "[쇼티]";
+					mes "궁금하시면 각 마을의 ^0000cd<현금판매 안내>^000000로 가보세요. 안내해드리겠습니다.";
 					break;
 				case 4:
-					mes "[Shorty]";
-					mes "If you want to make your equipment stronger or give it a special ability, why not try to ^0000cdenchant^000000 it?";
+					mes "[쇼티]";
+					mes "장비를 더 강하게 만들고 싶거나 특별한 능력을 부여하고 싶다면 ^0000cdenchant^000000해 보는 것은 어떨까요?";
 					next;
-					mes "[Shorty]";
-					mes "^0000cd<Malangdo>, <Item Mall>^000000, or ^0000cd<Seyablem> and <Leyablem>^000000 which can be found in major towns, are mainly doing this.";
+					mes "[쇼티]";
+					mes "^0000cd<말랑도>, <아이템몰>^000000, 혹은 대도시에 있는 ^0000cd<세이블엠>, <레이블엠>^000000이 주로 하고 있어요.";
 					next;
-					mes "[Shorty]";
-					mes "Equipment obtained from a specific dungeon or a specific area can only be ^0000cdenchanted^000000 from in that area.";
+					mes "[쇼티]";
+					mes "특정 던전이나 특정 지역에서 획득한 장비는 해당 지역에서만 ^0000cd인챈트^000000할 수 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "However, not all equipment can be enchanted, so you should check the conditions carefully.";
+					mes "[쇼티]";
+					mes "단, 모든 장비에 인챈트가 가능한 것은 아니므로 조건을 잘 확인하셔야 합니다.";
 					break;
 				case 5:
-					mes "[Shorty]";
-					mes "Are you sure you want to be with another person for the rest of your life? Then you can start a ^0000cdfamily^000000.";
+					mes "[쇼티]";
+					mes "정말 다른 사람과 평생을 함께하고 싶나요? 그러면 ^0000cdfamily^000000을 시작해 보세요.";
 					next;
-					mes "[Shorty]";
-					mes "^0000cdYou can marry the person you like^000000, or you can adopt a ^0000cdchild^000000. It is also possible for you to be adopted as the child of another couple.";
+					mes "[쇼티]";
+					mes "^0000cd좋아하는 사람과 결혼할 수도 있고^000000^0000cd자식^000000을 입양할 수도 있습니다. 다른 부부의 자녀로 입양하는 것도 가능합니다.";
 					next;
-					mes "[Shorty]";
-					mes "They say that you can gain special marriage skills to use as a family.";
+					mes "[쇼티]";
+					mes "가족끼리 사용할 수 있는 특별한 결혼스킬을 얻을 수 있다고 합니다.";
 					next;
-					mes "[Shorty]";
-					mes "If you are interested in getting married, go to the Church of Prontera or the Wedding Hall of Lasagna. You will need some supplies before you can marry. The Church of Prontera can only marry humans.";
+					mes "[쇼티]";
+					mes "결혼하고 싶다면 프론테라 교회나 라자냐 결혼식장으로 가세요. 결혼하려면 준비물이 필요해요. 프론테라 교회는 오직 인간과만 결혼할 수 있어요.";
 					next;
-					mes "[Shorty]";
-					mes "Adoption requires a wedded couple's level to be 70 or higher and the child to be adopted is a Novice or a first class.";
+					mes "[쇼티]";
+					mes "입양은 부부레벨 70이상, 입양할 아이가 노비스 또는 1등급이어야 합니다.";
 					next;
-					mes "[Shorty]";
-					mes "The Family Division of the Prontera District Office says that you can purchase items necessary for a wedding or check with family-related matters, so if you need it, go check it out.";
+					mes "[쇼티]";
+					mes "프론테라 구청 가족과에서는 결혼식에 필요한 물품을 구매하거나 가족에 관한 사항을 확인할 수 있으니 필요하신 분들은 꼭 들러보세요.";
 					next;
-					mes "[Shorty]";
-					mes "You can refer to";
-					mes "<URL>[Family]<INFO>http://ro.gnjoy.com/guide/systeminfo/systemLovers1.asp,1024,768</INFO></URL> for more details.";
+					mes "[쇼티]";
+					mes "참고하시면 됩니다";
+					mes "<URL>[가족]<INFO>http://ro.gnjoy.com/guide/systeminfo/systemLovers1.asp,1024,768</INFO></URL> 자세한 내용을 확인하세요.";
 					break;
 				case 6:
-					mes "[Shorty]";
-					mes "Can you see the message window at the bottom? You can chat with other people by entering your message there or you can also send other message types there as well.";
+					mes "[쇼티]";
+					mes "하단에 메시지 창이 보이나요? 거기에 메시지를 입력하여 다른 사람과 채팅을 할 수도 있고, 다른 메시지를 보낼 수도 있습니다.";
 					next;
-					mes "[Shorty]";
-					mes "If you want to chat with a small number of people who are neither party nor guild members, you can open a chat window.";
+					mes "[쇼티]";
+					mes "파티원도, 길드원도 아닌 소수의 사람들과 채팅을 하고 싶다면 채팅창을 열면 됩니다.";
 					next;
-					mes "[Shorty]";
-					mes "You can simply open the chat window with the ^0000cdAlt+C keys^000000. You can also set the maximum number of participants and and a password.";
+					mes "[쇼티]";
+					mes "^0000cdAlt+C키^000000으로 간단하게 채팅창을 열 수 있습니다. 최대 참여자 수와 비밀번호도 설정할 수 있습니다.";
 					break;
 				}
 				next;
 			}
 			end;
 		case 5:
-			mes "[Shorty]";
-			mes "Okay? Then I'll look around a bit and get back into the bag.";
+			mes "[쇼티]";
+			mes "알았어? 그럼 좀 둘러보고 다시 가방에 들어갈게.";
 			close;
 		}
 		end;
 	case 8:
-		mes "[Shorty]";
-		mes "Aww!!! I'm Shorty! What's my master's name?";
+		mes "[쇼티]";
+		mes "아앗!!! 난 쇼티야! 내 주인님 이름이 뭐야?";
 		next;
-		select( "Master?" );
-		mes "[Shorty]";
-		mes "The first person you meet should be called Master.";
+		select( "마스터?" );
+		mes "[쇼티]";
+		mes "처음 만나는 사람을 스승님이라고 불러야 합니다.";
 		next;
-		select( "Are you talking about a teacher?" );
-		mes "[Shorty]";
-		mes "Yeah. That's it. I'm Galapago Shorty, I'm a good talker.";
+		select( "선생님 말씀이신가요?" );
+		mes "[쇼티]";
+		mes "네. 바로 그거예요. 저는 갈라파고 쇼티예요. 말을 잘해요.";
 		next;
-		select("Why are you here?" );
-		mes "[Shorty]";
-		mes "Salty! Salty is my friend. I'm here to meet Salty. So you must take me to Salty.";
+		select("당신은 왜 여기에 있나요?" );
+		mes "[쇼티]";
+		mes "솔티! 솔티는 내 친구야. 난 솔티를 만나러 왔어. 그러니 날 솔티에게 데려가줘야 해.";
 		next;
-		mes "[Shorty]";
-		mes "Well then, let's go!";
+		mes "[쇼티]";
+		mes "그럼 가자!";
 		close;
 	case 9:
-		mes "[Shorty]";
-		mes "What...? Master...? What? Let's break up? Here? Now? Are you serious?";
+		mes "[쇼티]";
+		mes "뭐...? 주인님...? 뭐? 헤어지자? 여기서? 지금? 진심이에요?";
 		next;
-		mes "[Shorty]";
-		mes "Is there anything you didn't like? Was I not quiet in my bag? Oh, that's what you didn't like, yes... Then there's nothing I can do.";
+		mes "[쇼티]";
+		mes "혹시 마음에 안 드는 거라도 있었나? 내가 가방 속에 조용히 있지 않았나? 아, 그게 마음에 들지 않았던 거지... 그럼 어쩔 수 없지.";
 		next;
-		mes "[Shorty]";
-		mes "Then you won't take me to ^0000cdSalty^000000? Salty will be grateful of you for taking me there. I'll pay thanks because Salty knows grace.";
+		mes "[쇼티]";
+		mes "그럼 나를 ^0000cdSalty^000000으로 데려가지 않겠다는 겁니까? 솔티는 나를 데려다준 당신에게 감사할 거예요. 솔티는 은혜를 알기 때문에 감사할 것입니다.";
 		next;
-		if (select( "Let's go our separate ways.", "Let's go together until then." ) == 2) {
-			mes "[Shorty]";
-			mes "Okay. Well said, master. Even if I get stuck in the bag, I'll get out of it quickly.";
+		if (select( "우리 각자의 길로 갑시다.", "그때까지 함께 갑시다." ) == 2) {
+			mes "[쇼티]";
+			mes "알겠습니다. 그렇군요, 스승님. 가방에 갇히더라도 빨리 빠져나오겠습니다.";
 			next;
-			mes "[Shorty]";
-			mes "Let's help each other a little bit more. Okay?";
+			mes "[쇼티]";
+			mes "조금만 더 서로 돕자. 알았지?";
 			close;
 		}
-		mes "[Shorty]";
-		mes "Yes. Master has a stone cold heart. Then there is nothing that can be done. I think our relationship ends here.";
+		mes "[쇼티]";
+		mes "그렇습니다. 스승님은 마음이 너무 차갑습니다. 그렇다면 어쩔 수 없습니다. 우리 관계는 여기서 끝나는 것 같습니다.";
 		next;
-		mes "[Shorty]";
-		mes "I don't know how it was with you, but I enjoyed our time together.";
+		mes "[쇼티]";
+		mes "너와는 어땠는지 모르겠지만, 함께한 시간은 즐거웠어.";
 		next;
-		mes "[Shorty]";
-		mes "Stay healthy and I bid you well. I hope master will not forget that Galapago was there.";
+		mes "[쇼티]";
+		mes "건강하세요. 잘 부탁드립니다. 스승님께서 갈라파고가 있었다는 사실을 잊지 않으셨으면 좋겠습니다.";
 		next;
-		mes "[Shorty]";
-		mes "Well then, master, goodbye. Goodbye!";
+		mes "[쇼티]";
+		mes "그럼 선생님, 안녕히 계세요. 안녕히 계세요!";
 		switch( isbegin_quest(14693) ) {
 		case 0:
 			setquest 14693;

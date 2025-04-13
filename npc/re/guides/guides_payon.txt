@@ -3,61 +3,57 @@
 //===== Description: =========================================
 //= Guides for the city of Payon.
 //===== Changelogs: ==========================================
-//= 1.0 Initial release for Renewal [L0ne_W0lf]
-//= 1.1 Fixed and optimized. [Euphy]
-//= 1.2 Navigation system update. [Euphy]
 //============================================================
 
-payon,160,67,3	script	Guide#01payon::GuidePayon	708,{
+payon,160,67,3	script	안내요원#01payon::GuidePayon	708,{
 	cutin "pay_soldier",2;
-	mes "[Payon Guide]";
-	mes "Welcome to ^8B4513Payon^000000,";
-	mes "the Mountain Village.";
-	mes "Do you need help navigating the village?";
-	F_Navi("[Payon Guide]");
+	mes "[페이욘 안내요원]";
+	mes "산악도시 ^8B4513페이욘^000000에 오신 것을,";
+	mes "환영합니다.";
+	mes "안내가 필요하신가요?";
 	next;
 	while (1) {
-		switch(select("[ Main Facilities ]:[ Merchants & Helpers ]:Remove Marks from Mini-Map:Cancel")) {
+		switch(select("[    주요 시설    ]:[ 상인 & 도우미 ]:미니맵 표시 지우기:대화를 종료한다.")) {
 		case 1:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Archer Village ]:[ Tool Shop ]:[ Weapon & Armor Shop ]:[ Inn & Tavern ]:[ Central Palace ]:[ Palace Court ]:[ Royal Kitchen ]:Previous Menu")) {
+				switch(select("[      궁수 마을        ]:[        도 구 점        ]:[ 무기,  방어구 상점 ]:[     여관 및 주전     ]:[        중앙 궁         ]:[        궁 내전         ]:[       궁 수랏간       ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					mes "[Payon Guide]";
-					mes F_Navi("Archer Village","payon,227,328","^B9062F")+" is where";
-					mes "the Archer Association resides.";
-					mes "Please use the far north gate to enter the village.";
-					mes "Would you like to check any other locations?";
+					mes "[페이욘 안내요원]";
+					mes "궁수 협회가 있는 곳입니다.";
+					mes "북쪽 끝의 문을 통해";
+					mes F_Navi("궁수마을","payon,227,328","^B9062F")+"로 가실수 있습니다.";
+					mes "다른 안내가 필요하신가요?";
 					viewpoint 1,227,328,0,0xFF0000;
 					next;
 					break;
 				case 2:
-					callsub L_Mark, F_Navi("Tool Shop","payon,144,85","^0000FF");
+					callsub L_Mark, F_Navi("도구점","payon,144,85","^0000FF");
 					viewpoint 1,144,85,1,0x0A82FF;
 					next;
 					break;
 				case 3:
-					callsub L_Mark, F_Navi("Weapon & Armor Shop","payon,139,159","^FF5400");
+					callsub L_Mark, F_Navi("무기및방어구상점","payon,139,159","^FF5400");
 					viewpoint 1,139,159,2,0xFFB400;
 					next;
 					break;
 				case 4:
-					callsub L_Mark, F_Navi("Inn & Tavern","payon,220,117","^006400");
+					callsub L_Mark, F_Navi("여관및주점","payon,220,117","^006400");
 					viewpoint 1,220,117,3,0xAAFF00;
 					next;
 					break;
 				case 5:
-					callsub L_Mark, F_Navi("Central Palace","payon,155,245","^7F3300");
+					callsub L_Mark, F_Navi("중앙궁","payon,155,245","^7F3300");
 					viewpoint 1,155,245,4,0xD2691E;
 					next;
 					break;
 				case 6:
-					callsub L_Mark, F_Navi("Palace Court","payon,107,325","^800080");
+					callsub L_Mark, F_Navi("궁내전","payon,107,325","^800080");
 					viewpoint 1,107,325,5,0xDA70D6;
 					next;
 					break;
 				case 7:
-					callsub L_Mark, F_Navi("Royal Kitchen","payon,154,325","^B9062F");
+					callsub L_Mark, F_Navi("궁수랏간","payon,154,325","^B9062F");
 					viewpoint 1,154,325,6,0xFF0000;
 					next;
 					break;
@@ -70,71 +66,75 @@ payon,160,67,3	script	Guide#01payon::GuidePayon	708,{
 		case 2:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Eden Teleport Officer ]:[ Kafra Shop ]:[ Repair / Armsmith ]:[ Kafra Employee ]:[ Trap Specialist ]:[ Seiayblem ]:[ Leablem ]:[ Jade ]:[ Pet Groomer ]:[ Chef Assistant ]:Previous Menu")) {
+				switch(select("[  낙원단 공간이동사  ]:[   캐시 판매 안내인   ]:[ 수리 및 제련 기술자 ]:[      카프라 직원       ]:[      트랩 전문가       ]:[        세야블렘         ]:[        레아블럼         ]:[          제이드          ]:[      테이밍 상인       ]:[     요리 재료 상인    ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					callsub L_Mark, F_Navi("Eden Teleport Officer","payon,177,111","^0000FF");
+					callsub L_Mark, F_Navi("낙원단공간이동사","payon,177,111","^0000FF");
 					viewpoint 1,177,111,7,0x0A82FF;
 					next;
 					break;
 				case 2:
-					callsub L_Mark, F_Navi("Kafra Shop Girls","payon,164,157","^FF5400");
+					callsub L_Mark, F_Navi("캐시판매안내인","payon,164,157","^FF5400");
 					viewpoint 1,164,157,8,0xFFB400;
 					next;
 					break;
 				case 3:
-					callsub L_Mark, F_Navi("Repairman & Armsmith","payon,144,170","^006400");
+					callsub L_Mark, F_Navi("수리및제련기술자","payon,144,170","^006400");
 					viewpoint 1,144,170,9,0xAAFF00;
 					next;
 					break;
 				case 4:
-					callsub L_Mark, "^7F3300Kafra Employees^000000";
+					mes "[페이욘 안내요원]";
+					mes "^006400카프라 직원^000000의";
+					mes "위치는 미니맵의 ^0000FF상자모양 아이콘^000000을";
+					mes "클릭하시면 안내 됩니다.";
+					mes "다른 안내가 필요하신가요?";
 					viewpoint 1,181,104,10,0xD2691E;
 					viewpoint 1,175,226,11,0xD2691E;
 					next;
 					break;
 				case 5:
-					callsub L_Mark, F_Navi("Trap Specialist","payon,123,109","^800080");
+					callsub L_Mark, F_Navi("트랩전문가","payon,123,109","^800080");
 					viewpoint 1,123,109,12,0xDA70D6;
 					next;
 					break;
 				case 6:
-					mes "[Payon Guide]";
-					mes F_Navi("Seiyablem","payon,140,151","^B9062F");
-					mes "is a technician";
-					mes "who can create ^0000FFslots^000000 on weapons and armors,";
-					mes "but not all equipment";
-					mes "can be slotted. Well, that's what he says.";
-					mes "Would you like to check any other locations?";
+					mes "[페이욘 안내요원]";
+					mes F_Navi("세야블렘","payon,140,151","^B9062F")+"은";
+					mes "무기나 방어구에 ^FF5400소켓^000000을";
+					mes "만들어주는 기술자입니다.";
+					mes "모든 물건이 가능한 건";
+					mes "아니라고 합니다.";
+					mes "다른 안내가 필요하신가요?";
 					viewpoint 1,140,151,13,0xFF0000;
 					next;
 					break;
 				case 7:
-					mes "[Payon Guide]";
-					mes F_Navi("Leablem","payon,236,199","^0000FF");
-					mes "is a technician";
-					mes "who can create ^0000FFslots^000000 on weapons and armors,";
-					mes "but not all equipment";
-					mes "can be slotted. Well, that's what he says.";
-					mes "Would you like to check any other locations?";
+					mes "[페이욘 안내요원]";
+					mes F_Navi("레아블렘","payon,236,199","^0000FF")+"은";
+					mes "무기나 방어구에 ^0000FF소켓^000000을";
+					mes "만들어주는 기술자입니다.";
+					mes "모든 물건이 가능한 건";
+					mes "아니라고 합니다.";
+					mes "다른 안내가 필요하신가요?";
 					viewpoint 1,236,199,14,0x0A82FF;
 					next;
 					break;
 				case 8:
-					mes "[Payon Guide]";
-					mes F_Navi("Jade","payon,173,238","^FF5400");
-					mes "can exchange different types of";
-					mes "^FF5400Gemstones^000000.";
-					mes "Would you like to check any other locations?";
+					mes "[페이욘 안내요원]";
+					mes F_Navi("제이드","payon,173,238","^FF5400")+"는";
+					mes "서로 다른 종유릐 ^FF5400젬스톤^000000을";
+					mes "교환해 준다고 합니다.";
+					mes "다른 안내가 필요하신가요?";
 					viewpoint 1,173,238,15,0xFFB400;
 					next;
 					break;
 				case 9:
-					callsub L_Mark, F_Navi("Pet Groomer","payon,177,131","^006400");
+					callsub L_Mark, F_Navi("테이밍상인","payon,177,131","^006400");
 					viewpoint 1,177,131,16,0xAAFF00;
 					next;
 					break;
 				case 10:
-					callsub L_Mark, F_Navi("Chef Assistant","payon,206,119","^7F3300");
+					callsub L_Mark, F_Navi("요리재료상인","payon,206,119","^7F3300");
 					viewpoint 1,206,119,17,0xD2691E;
 					next;
 					break;
@@ -145,9 +145,9 @@ payon,160,67,3	script	Guide#01payon::GuidePayon	708,{
 			}
 			break;
 		case 3:
-			mes "[Payon Guide]";
-			mes "Sure, I'll remove all marks from your mini-map.";
-			mes "Is there anything else I can do for you?";
+			mes "[페이욘 안내요원]";
+			mes "표시를 지워드리겠습니다.";
+			mes "다른 도움이 필요하신가요?";
 			viewpoint 2,1,1,0,0xFFFF00;
 			viewpoint 2,1,1,1,0x000000;
 			viewpoint 2,1,1,2,0xFF0000;
@@ -169,8 +169,8 @@ payon,160,67,3	script	Guide#01payon::GuidePayon	708,{
 			next;
 			break;
 		case 4:
-			mes "[Payon Guide]";
-			mes "Enjoy your stay.";
+			mes "[페이욘 안내요원]";
+			mes "즐거운 여행 되시길 바랍니다.";
 			close2;
 			cutin "",255;
 			end;
@@ -178,94 +178,89 @@ payon,160,67,3	script	Guide#01payon::GuidePayon	708,{
 	}
 	end;
 L_Mark:
-	mes "[Payon Guide]";
-	mes "Let me mark the location of the";
-	mes getarg(0);
-	mes "on your mini-map.";
-	mes "Would you like to check any other locations?";
+	mes "[페이욘 안내요원]";
+	mes getarg(0)+"의";
+	mes "위치를 미니 맵에";
+	mes "표시해 드리겠습니다.";
+	mes "다른 안내가 필요하신가요?";
 	return;
 }
 
-payon,151,182,6	duplicate(GuidePayon)	Guide#02payon	708
-payon,221,85,6	duplicate(GuidePayon)	Guide#03payon	708
-payon,233,324,4	duplicate(GuidePayon)	Guide#04payon	708
+payon,151,182,6	duplicate(GuidePayon)	안내요원#02payon	708
+payon,221,85,6	duplicate(GuidePayon)	안내요원#03payon	708
+payon,233,324,4	duplicate(GuidePayon)	안내요원#04payon	708
 
-pay_arche,86,33,4	script	Guide#05payon	708,{
+pay_arche,86,33,4	script	안내요원#05payon	708,{
 	cutin "pay_soldier",2;
-	mes "[Payon Guide]";
-	mes "Welcome to ^8B4513Archer Village^000000,";
-	mes "a subsidiary village of Payon.";
-	mes "Do you need help navigating the village?";
-	F_Navi("[Payon Guide]");
+	mes "[페이욘 안내요원]";
+	mes "어서오세요.";
+	mes "여기는 산악도시 페이욘에 속한";
+	mes "^8B4513궁수 마을^000000 입니다.";
+	mes "안내가 필요하신가요?";
 	next;
-	set .@str$,"Would you like to check any other locations?";
+	set .@str$,"다른 도움이 필요하신가요?";
 	while (1) {
-		switch(select("[ Payon Dungeon ]:[ Archer Guild ]:[ Tool Shop ]:[ Kafra Employee ]:[ Mercenary Guildsman ]:[ Alchemist Guildsman ]:[ Eden Teleport Officer ]:Remove Marks from Mini-Map:Cancel")) {
+		switch(select("[      페이욘 던전       ]:[        궁수 길드        ]:[         도 구 점         ]:[      카프라  직원      ]:[   용병 길드 관계자   ]:[  알케미스트 길드원  ]:[  낙원단 공간이동사  ]:미니 맵 표시 지우기:대화를 종료한다.")) {
 		case 1:
-			mes "[Payon Guide]";
-			mes "Let me mark the entrance of";
-			mes "the "+F_Navi("Payon Dungeon","pay_arche,38,131","^B9062F");
-			mes "on your mini-map.";
+			mes "[페이욘 안내요원]";
+			mes F_Navi("페이욘 던전 입구","pay_arche,38,131","^800080")+"의";
+			mes "위치를 미니 맵에";
+			mes "표시해 드리겠습니다";
 			mes .@str$;
 			viewpoint 1,38,131,0,0xFF0000;
 			next;
 			break;
 		case 2:
-			mes "[Payon Guide]";
-			mes "The "+F_Navi("Archer Guild","pay_arche,143,164","^0000FF");
-			mes "is where you can change";
-			mes "your job to Archer.";
+			mes "[페이욘 안내요원]";
+			mes F_Navi("궁수 길드","pay_arche,143,164","^0000FF")+"는";
+			mes "궁수 전직을 위해";
+			mes "많은 모험가 분들이";
+			mes "찾는 장소입니다.";
 			mes .@str$;
 			viewpoint 1,143,164,1,0x0A82FF;
 			next;
 			break;
 		case 3:
-			mes "[Payon Guide]";
-			mes "Let me mark the location of the";
-			mes F_Navi("Tool Shop","pay_arche,72,156","^FF5400");
-			mes "on your mini-map.";
-			mes .@str$;
+			callsub L_Mark, F_Navi("도구점","payon,72,156","^FF5400");
 			viewpoint 1,72,156,2,0xFFB400;
 			next;
 			break;
 		case 4:
-			mes "[Payon Guide]";
-			mes "Let me mark the location of the ^006400Kafra Employee^000000";
-			mes "on your mini-map.";
+			mes "[페이욘 안내요원]";
+			mes "^006400카프라 직원^000000의";
+			mes "위치는 미니맵의 ^0000FF상자모양 아이콘^000000을";
+			mes "클릭하시면 안내 됩니다.";
 			mes .@str$;
 			viewpoint 1,55,123,3,0xAAFF00;
 			next;
 			break;
 		case 5:
-			mes "[Payon Guide]";
-			mes "Let me mark the location of the";
-			mes F_Navi("Mercenary Guildsman","pay_arche,101,166","^7F3300");
-			mes "on your mini-map.";
+			mes "[페이욘 안내요원]";
+			mes "^8B4513활 용병길드 관계자^000000 및";
+			mes F_Navi("용병물품판매상","pay_arche,101,166","^7F3300");
+			mes "의 위치를 미니 맵에";
+			mes "표시해 드리겠습니다.";
 			mes .@str$;
 			viewpoint 1,101,166,4,0xD2691E;
 			next;
 			break;
 		case 6:
-			mes "[Payon Guide]";
-			mes "Let me mark the location of the";
-			mes F_Navi("Alchemist Guildsman","pay_arche,126,113,","^800080");
-			mes "on your mini-map.";
-			mes .@str$;
+			callsub L_Mark, F_Navi("알케미스트길드원","pay_arche,126,113,","^800080");
 			viewpoint 1,127,113,5,0xDA70D6;
 			next;
 			break;
 		case 7:
-			mes "[Payon Guide]";
-			mes "The "+F_Navi("Eden Teleport Officer","pay_arche,143,164","^0000FF");
-			mes "is currently staying inside";
-			mes "the Archer Guild building.";
+			mes "[페이욘 안내요원]";
+			mes F_Navi("낙원단공간이동사","pay_arche,143,164","^0000FF")+"는 현재";
+			mes "궁수 길드 건물 내에";
+			mes "위차하고 있습니다.";
 			mes .@str$;
 			viewpoint 1,143,164,6,0x0A82FF;
 			next;
 			break;
 		case 8:
-			mes "[Payon Guide]";
-			mes "Sure, I'll remove all marks from your mini-map.";
+			mes "[페이욘 안내요원]";
+			mes "표시를 지워 드리겠습니다.";
 			mes .@str$;
 			viewpoint 2,1,1,0,0xFFFF00;
 			viewpoint 2,1,1,1,0x000000;
@@ -277,11 +272,19 @@ pay_arche,86,33,4	script	Guide#05payon	708,{
 			next;
 			break;
 		case 9:
-			mes "[Payon Guide]";
-			mes "Enjoy your stay.";
+			mes "[페이욘 안내요원]";
+			mes "즐거운 여행 되시길 바랍니다.";
 			close2;
 			cutin "",255;
 			end;
 		}
 	}
+	end;
+L_Mark:
+	mes "[페이욘 안내요원]";
+	mes getarg(0)+"의";
+	mes "위치를 미니 맵에";
+	mes "표시해 드리겠습니다.";
+	mes "다른 안내가 필요하신가요?";
+	return;
 }

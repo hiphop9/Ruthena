@@ -17,55 +17,69 @@
 //============================================================
 
 //prontera,146,95,3	script	Mergician#pron	1_M_WIZARD,{
-itemmall,35,75,3	script	Mergician#mall	1_M_WIZARD,{
+itemmall,35,75,3	script	하챠브라#mall	1_M_WIZARD,{
 	if (checkweight(1301,1) == 0) {
-		mes "- Wait a second !! -";
-		mes "- You are carrying too many items -";
-		mes "- or too much weight to proceed. -";
-		mes "- Come back after -";
-		mes "- arranging your inventory. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 너무 많은 물건을 들고 있습니다 -";
+		mes "- 또는 진행하기에는 너무 많은 무게입니다. -";
+		mes "- 인벤토리를 정리해서 -";
+		mes "- 다음에 다시 오세요 -";
 		close;
 	}
-	mes "[Mergician]";
-	mes "Do you believe in the miracle of Merge god?? If so, repeat my spell loudly as I pronounce it!!!";
-	mes "Merge Merge, Merrrrge!!!";
+	mes "[하챠브라]";
+	mes "하챠교의 기적을 믿는가? 믿는다면";
+	mes "나를 따라 마법의 주문을 외시게!";
+	mes "하챠브라 하챠브라 다하챠브라~~~!!";
 	next;
-	switch(select("Merrrrge!!!!:What is the miracle of Merge?:Abandon...")) {
+	switch(select("하챠브라!:하챠교의 기적이란?:대화를 마친다")) {
 	case 2:
-		mes "[Mergician]";
-		mes "There is an order which rules the world and keeps the world to go well.";
+		mes "[하챠브라]";
+		mes "세계는 하나의 질서를 유지하며";
+		mes "굴러가고 있다";
 		next;
-		mes "[Mergician]";
-		mes "But there has been a bad factor which totally jeopardised this rule!!";
+		mes "[하챠브라]";
+		mes "하지만 그 질서를 무시하는 일이";
+		mes "얼마전까지 벌어지고 있었지";
 		next;
-		mes "[Mergician]";
-		mes "Those things which are separated even if they are composed by the same material!!";
+		mes "[하챠브라]";
+		mes "같은 물질로 구성되어 있음에도";
+		mes "불구하고  다른 존재인냥 무리를 벗어나";
+		mes "있는 것들 말야!";
 		next;
-		mes "[Mergician]";
-		mes "Have you never experienced this bad incident??";
-		mes "The fact that I had ^3131FFthe same potion, but appearing more than twice in your inventory!!^000000 So unpleasant!!!";
+		mes "[하챠브라]";
+		mes "그대는 그런 경험이 없는가?";
+		mes "마치 ^3131FF똑같은 포션임에도 불구하고";
+		mes "하나의 묶음으로  겹쳐지지 않던 경험^000000";
+		mes "말이다!";
 		next;
-		mes "[Mergician]";
-		mes "Believe in Mergism. That is the truth.";
-		mes "Then I can help you be happy and content.";
+		mes "[하챠브라]";
+		mes "하차교를 믿거라.";
+		mes "그렇다면 하챠신의 기적이 너를 행복케";
+		mes "하리라.";
 		close;
 	case 1:
-		mes "[Mergician]";
-		mes "This is the total holy ritual to pray to the Great God, Merge! and I am borrowing the power for a while!!";
+		mes "[하챠브라]";
+		mes "이것은 미천한 인간의 몹으로 위대한";
+		mes "신 하챠님의 힘을 빌리는 불경한 의식!";
 		next;
-		mes "[Mergician]";
-		mes "And if you eagerly want to be blessed by Merge, be humble and shout out loud! Merge Merge, Merrrrge!!!";
+		mes "[하챠브라]";
+		mes "진정 하챠교의 기적을 바란다면 머리를";
+		mes "조아려 경건한 마음으로 소리높여";
+		mes "외치게하라! 하챠브라 다하챠브라!!!";
 		next;
-		switch(select("Merrrrge!:Don't follow what he says.")) {
+		switch(select("다하챠브라!:외치지 않는다.")) {
 		case 1:
 			mergeitem;
-			mes "[Mergician]";
-			mes "Merge just heard your wish and let it be realised!";
-			mes "Open your inventory to check the miracle!";
+			mes "[하챠브라]";
+			mes "그대의 진심이 신께 닿았다";
+			mes "가방을 열어 위대한 기적의 결과를";
+			mes "확인하거라!";
 			close;
 		case 2:
-			mes "[Mergician]";
-			mes "You jerk!!! You just broke the whole rhythm! Why can't you get my flow and follow me?! Idiot!";
+			mes "[하챠브라]";
+			mes "너ㅣ이 노오옴! 리듬이 깨지지";
+			mes "않았느냐! 왜 쿵하면 짝하고 말하지";
+			mes "못하는게냐";
 			close;
 		}
 	case 3:

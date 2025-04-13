@@ -1,31 +1,30 @@
-# This file is a part of rAthena.
-#   Copyright(C) 2017 rAthena Development Team
-#   https://rathena.org - https://github.com/rathena
+# 이 파일은 Rathena의 일부입니다.
+# 저작권(C) 2017 Rathena 개발팀
+# http://rathena.org -
+# https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# 이 프로그램은 자유로운 소프트웨어이므로 프리 소프트웨어 재단이 배포한
+# GNU General Public License의 조건에 따라 라이센스 버전 3 또는
+# 그 이후 버전(사용자 선택에 따라)을 재배포 및 수정할 수 있습니다.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# 이 프로그램은 상업적 또는 특정 목적에 대한 적합성에 대한 보증없이
+# 유용하게 배포됩니다.
+# 자세한 내용은 GNU General Public License를 참조하세요.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###########################################################################
-# Atcommand Database
-###########################################################################
-#
-# Atcommand Settings
+# 이 프로그램과 함께 GNU General Public License 사본을 받았어야 합니다.
+# 그렇지 않으면 <http://www.gnu.org/licenses/>을 참조하세요.
 #
 ###########################################################################
-# - Command                  Command name.
-#   Aliases:                 Aliases for the command. (Optional)
+# 명령어 데이터베이스
+###########################################################################
+#
+# Atcommand 설정
+#
+###########################################################################
+# - Command                  명령어 이름.
+#   Aliases:                 명령어에 대한 별칭. (옵션)
 #     - <AliasName>
-#   Help                     Help message for the command. (Optional)
+#   Help                     명령어에 대한 도움말. (옵션)
 ###########################################################################
 
 Header:
@@ -36,287 +35,393 @@ Body:
   - Command: help
     Aliases:
       - h
+      - 도움말
     Help: |
-      Params: <command>
-      Shows help for specified command.
+      인수: <명령어>
+      도움말을 보고 싶은 명령어를 지정하세요.
   - Command: noask
+    Aliases:
+      - 노에스크
     Help: |
-      Auto rejects deals/invites.
+      거래/초대를 자동으로 차단합니다.
   - Command: gmotd
     Help: |
-      Broadcasts the Message of The Day to all players.
+      모든 플레이어에게 메시지를 방송으로 보냅니다.
   - Command: me
+    Aliases:
+      - 안내문
     Help: |
-      Params: <message>
-      Displays normal text as a message in this format: *name message* (like /me in mIRC).
+      인수: <메시지>
+      일반 텍스트를 다음 형식으로 메시지를 표시합니다. (*이름* mIRC의 /me 처럼).
   - Command: fakename
+    Aliases:
+      - 별명
     Help: |
-      Params: <name>
-      Changes your name to your choice temporarily.
+      인수: <이름>
+      이름을 임시로 선택한 이름으로 변경합니다.
   - Command: npctalk
     Aliases:
-      - npctalkc
+      - 엔피씨대화c
+      - 엔피씨대화
+      - npc대화
     Help: |
-      Params: <NPC name> <message>
-      Forces a NPC to display a message in normal chat.
+      인수: <NPC 이름> <메시지>
+      NPC가 일반 채팅으로 메시지를 표시합니다.
   - Command: broadcast
+    Aliases:
+      - 방송
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow).
+      인수: <메시지>
+      귀하의 이름과 함께 메시지를 방송합니다. (노란색).
   - Command: kami
+    Aliases:
+      - 공지
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in yellow).
+      인수: <메시지>
+      귀하의 이름과 함께 방송합니다. (노란색).
   - Command: kamib
+    Aliases:
+      - 공지2
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in blue).
+      인수: <메시지>
+      귀하의 이름과 함께 방송됩니다. (파란색).
   - Command: localbroadcast
+    Aliases:
+      - 지역방송
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow) only on your map.
+      인수: <메시지>
+      귀하의 이름과 함께 해당 지역에만 방송합니다. (노란색)
   - Command: commands
+    Aliases:
+      - 명령어
     Help: |
-      Displays a list of commands that you can use.
+      귀하가 사용할 수 있는 명령어 목록을 보여줍니다.
   - Command: rates
+    Aliases:
+      - 배율
+      - 경험치배율
+      - 서버정보
     Help: |
-      Displays the server's current rates.
+      서버의 현재 배율을 확인합니다.
   - Command: uptime
+    Aliases:
+      - 업타임
     Help: |
-      Displays how long the server has been online.
+      서버가 오픈 후 얼마나 유지되고 있는지 그 시간을 확인합니다.
   - Command: showdelay
+    Aliases:
+      - 딜레이보기
     Help: |
-      Shows/hides the "There is a delay after this skill" message.
+      "이 스킬 이후 지연이 있습니다."를 보여주거나 숨깁니다.
   - Command: exp
+    Aliases:
+      - 경험치
     Help: |
-      Displays current levels and % progress.
+      현재 레벨의 경험치율을 보여줍니다.
   - Command: mobinfo
     Aliases:
-      - monsterinfo
-      - mi
+      - 몹정보
+      - 몬스터정보
     Help: |
-      Params: <monster name|ID>
-      Shows monster info (stats, exp, drops etc).
+      인수: <몬스터 이름|ID>
+      몬스터 정보를 확인합니다. (스텟, 경험치, 드롭정보등).
   - Command: iteminfo
     Aliases:
-      - ii
+      - 아이템정보
+      - 템정보
     Help: |
-      Params: <item name|ID>
-      Shows item info (type, price etc).
+      인수: <아이템 이름|ID>
+      아이템 정보를 봅니다. (타입, 판매가격등).
   - Command: whodrops
+    Aliases:
+      - 누구드롭
     Help: |
-      Params: <item name|ID>
-      Shows who drops an item (monster with highest drop rates).
+      인수: <아이템 이름|ID>
+      어떤 몬스터가 지정된 아이템을 드롭하는지 확인합니다. (드롭율이 높은 몬스터 순서대로 표시).
   - Command: version
+    Aliases:
+      - 버전
     Help: |
-      Displays SVN version of the server.
+      서버의 SVN 버전을 확인합니다.
   - Command: email
+    Aliases:
+      - 이메일
+      - 메일
     Help: |
-      Params: <current email> <new email>
-      Changes your account e-mail address.
+      인수: <현재 이메일> <새로운 이메일>
+      이메일 주소를 변경합니다.
   - Command: where
+    Aliases:
+      - 어디
     Help: |
-      Params: <char name>
-      Tells you the location of a character.
+      인수: <케릭터 이름>
+      케릭터 위치를 알려줍니다.
   - Command: time
     Aliases:
-      - date
-      - serverdate
-      - servertime
+      - 시간
+      - 서버시간
+      - 날짜
     Help: |
-      Shows the date and time of the server.
+      서버의 현재 날짜와 시간을 보여줍니다.
   - Command: showexp
+    Aliases:
+      - 경험치보기
     Help: |
-      Displays/hides experience gained.
+      획득한 경험치를 확인하거나 숨깁니다.
   - Command: showzeny
+    Aliases:
+      - 제니보기
     Help: |
-      Displays/hides Zeny gained.
+      획득한 제니를 확인하거나 숨깁니다.
   - Command: mobsearch
+    Aliases:
+      - 몹검색
+      - 몬스터검색
+      - 몹찾기
+      - 몬스터찾기
     Help: |
-      Params: <monster name|ID>
-      Shows the location of a certain mob on the current map.
+      인수: <몬스터 이름|ID>
+      현재 맵에 해당 몬스터의 위치를 표시합니다.
   - Command: who
     Aliases:
-      - whois
+      - 누구
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their party and guild.
+      인수: [<이름>]
+      접속중인 플레이어를 표시합니다. (파티와 길드도 같이 표시)
   - Command: who2
+    Aliases:
+      - 누구2
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their job.
+      인수: [<이름>]
+      접속중인 플레이어를 표시합니다. (직업도 같이 표시)
   - Command: who3
+    Aliases:
+      - 누구3
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their location.
+      인수: [<이름>]
+      접속중인 플레이어를 표시합니다. (플레이어의 현재 위치도 같이 표시)
   - Command: whomap
+    Aliases:
+      - 누구맵
     Help: |
-      @whomap/@whomap2/@whomap3 [map] - like @who/@who2/@who3 but only for specified map.
+      @whomap/@whomap2/@whomap3/@누구맵 [map] - @who/@who2/@who3/@누구/@누구2/@누구3 와 유사하지만 해당 맵에 한해서만 찾습니다.
   - Command: whogm
+    Aliases:
+      - 지엠누구
+      - 누구지엠
+      - 운영자
     Help: |
-      Params: [match_text] - Like @who+@who2+who3, but only for GM.
+      인수: [이름] - @who+@who2+@who3+@누구 와 유사하지만 오직 지엠만 찾습니다.
   - Command: guildspy
+    Aliases:
+      - 길드스파이
     Help: |
-      Params: <guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
+      인수: <길드 이름|id> - 입력한 길드내에 대화내용을 봅니다. (채팅 로그를 하도록 활성화 해야합니다.)
   - Command: partyspy
+    Aliases:
+      - 파티스파이
     Help: |
-      @partyspy <party name|id> - You will receive all messages of the party channel (Chat logging must be enabled)
+      인수: <파티 이름|id> - 해당 파티내의 대화내용을 봅니다. (채팅 로그를 하도록 활성화 해야합니다.)
   - Command: mapinfo
+    Aliases:
+      - 맵정보
     Help: |
-      Params: [<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
+      인수: [<0-3> [맵]] - 지정한 맵에 대한 정보를 확인합니다. (기본 정보 +: 0: 아무것도 안함, 1: 플레이어, 2: NPC, 3: 채팅방).
   - Command: go
+    Aliases:
+      - 마을
     Help: |
-      Params: <city name|number>
-      Warps you to a city.
-      -3: (Memo point 2)  14: louyang         31: mora
-      -2: (Memo point 1)  15: start point     32: dewata
-      -1: (Memo point 0)  16: prison/jail     33: malangdo island
-       0: prontera              17: jawaii             34: malaya port
-       1: morocc                18: ayothaya       35: eclage
-       2: geffen                  19: einbroch       36: lasagna
-       3: payon                  20: lighthalzen
-       4: alberta                 21: einbech
-       5: izlude                   22: hugel
-       6: aldebaran           23: rachel
-       7: xmas (lutie)        24: veins
-       8: comodo               25: moscovia
-       9: yuno                     26: midgard camp
-      10: amatsu               27: manuk
-      11: gonryun              28: splendide
-      12: umbala               29: brasilis
-      13: niflheim              30: el dicastes
+      인수: <도시 이름|번호>
+      도시로 워프합니다.
+      -3: (기억된 포인트 2)  14: 뤄양         31: 모라
+      -2: (기억된 포인트 1)  15: 시작 포인트     32: 데와타
+      -1: (기억된 포인트 0)  16: 감옥     33: 말랑도 섬
+       0: 프론테라              17: 자와이             34: 말라야 공항
+       1: 모로크                18: 아요타야       35: 엘클라쥬
+       2: 게펜                  19: 아인브로크       36: 라자냐
+       3: 페이온                  20: 리히타르젠
+       4: 알베르타                 21: 아인베흐
+       5: 이즈루드                   22: 휴겔
+       6: 알데바란           23: 라헬
+       7: 눈의 마을 (루티에)        24: 베인스
+       8: 코모도               25: 모스코비아
+       9: 유노                     26: 미드가드 캠프
+      10: 아마쯔               27: 마누크
+      11: 곤륜              28: 스플랑디드
+      12: 움발라               29: 브라실리스
+      13: 니플헤임              30: 엘 디카스테스
   - Command: jumpto
     Aliases:
-      - goto
-      - warpto
+      - 점프투
+      - 이동
+      - 출두
     Help: |
-      Params: <char name>
-      Warps you to selected character.
+      인수: <케릭터 이름>
+      선택한 케릭터에게로 이동합니다.
   - Command: follow
+    Aliases:
+      - 추적
+      - 따라가기
     Help: |
-      Params: <char name>
-      Follow a player.
+      인수: <케릭터 이름>
+      케릭터를 따라갑니다.
   - Command: mount
     Aliases:
-      - mountpeco
+      - 페코페코
+      - 페코
+      - 탑승
     Help: |
-      Give/remove a job-based mount (class is required, but not the skill).
+      해당 직업의 탑승체에 탑승하거나 내립니다. (클래스가 필요하며 이건 스킬이 아닙니다.)
   - Command: mount2
+    Aliases:
+      - 탑승2
+      - 페코2
+      - 페코페코2
     Help: |
-      Give/remove a cash mount.
+      캐시용 탑승체에 탑승하거나 내립니다.
   - Command: disguise
+    Aliases:
+      - 변신
     Help: |
-      Params: <monster name|ID>
-      Change your appearence to other players to a mob.
+      인수: <몬스터 이름|ID>
+      다른 플레이어에 대한 모습을 몬스터로 변경합니다.
   - Command: undisguise
+    Aliases:
+      - 변신해제
     Help: |
-      Restore your normal appearance.
+      원래 모습으로 변경합니다.
   - Command: disguiseguild
+    Aliases:
+      - 길드변신
     Help: |
-      Disguises all online characters of a guild.
+      해당 길드에 접속중인 모든 케릭터의 모습을 변경합니다.
   - Command: undisguiseguild
+    Aliases:
+      - 길드변신해제
     Help: |
-      Restore the normal appearance of all characters of a guild.
+      해당 길드의 접속중인 모든 케릭터를 원래 모습으로 되돌립니다.
   - Command: model
+    Aliases:
+      - 모델
+      - 겉모습
     Help: |
-      Params:  <hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
+      인수:  <헤어 ID: 0-17> <헤어색상: 0-8> <옷색상: 0-4> - 케릭터의 외관을 변경합니다.
   - Command: size
+    Aliases:
+      - 크기
     Help: |
-      Params:  <0-2> Changes your size (0-Normal 1-Small 2-Large)
+      인수:  <0-2> 귀하의 크기를 변경합니다. (0-보통 1-작게 2-크게)
   - Command: sizeall
+    Aliases:
+      - 모두크기
+      - 전체크기
     Help: |
-      Changes the size of all players.
+      모든 플레이어에 대한 크기를 변경합니다.
   - Command: sizeguild
+    Aliases:
+      - 길드크기
     Help: |
-      Changes the size of all online characters of a guild.
+      길드에 접속중인 모든 케릭터에 대한 크기를 변경합니다.
   - Command: hide
+    Aliases:
+      - 숨기
+      - 하이딩
     Help: |
-      Makes you character invisible (GM invisibility). Type again to become visible.
+      귀하의 케릭터를 안보이게 합니다. (GM용 숨기). 다시 한번 사용하면 해제합니다.
   - Command: save
+    Aliases:
+      - 저장
+      - 위치저장
     Help: |
-      Sets respawn point to current spot.
+      귀환 위치를 현재 위치로 저장합니다.
   - Command: load
     Aliases:
-      - return
+      - 로드
+      - 귀환
     Help: |
-      Warps you to your save point.
+      귀하의 저장된 위치로 이동합니다.
   - Command: warp
     Aliases:
-      - rura
-      - mapmove
+      - 워프
+      - 맵이동
     Help: |
-      Params: <mapname> [<x> <y>]
-      Warps you to the selected map and position.
+      인수: <맵이름> [<x> <y>]
+      선택한 맵의 지정된 좌표로 이동합니다.
   - Command: jump
+    Aliases:
+      - 점프
     Help: |
-      Params: [<x> [<y>]]
-      Randomly warps you like a flywing.
+      인수: [<x> [<y>]]
+      해당 좌표로 이동하거나 랜덤위치로 이동합니다.
   - Command: jobchange
     Aliases:
-      - job
+      - 직업
+      - 전직
     Help: |
-      Params: <job name|ID>
-      Changes your job.
-      ----- Novice / 1st Class -----
-         0 Novice              1 Swordman            2 Magician            3 Archer
-         4 Acolyte              5 Merchant               6 Thief
-      ----- 2nd Class -----
-         7 Knight               8 Priest                     9 Wizard               10 Blacksmith
-        11 Hunter           12 Assassin            14 Crusader          15 Monk
-        16 Sage              17 Rogue                 18 Alchemist         19 Bard
-        20 Dancer
-      ----- High Novice / High 1st Class -----
-      4001 Novice High     4002 Swordman High    4003 Magician High    4004 Archer High
-      4005 Acolyte High     4006 Merchant High       4007 Thief High
-      ----- Transcendent 2nd Class -----
-      4008 Lord Knight      4009 High Priest             4010 High Wizard      4011 Whitesmith
-      4012 Sniper               4013 Assassin Cross   4015 Paladin              4016 Champion
-      4017 Professor         4018 Stalker                    4019 Creator               4020 Clown
-      4021 Gypsy
-      ----- 3rd Class (Regular) -----
-      4054 Rune Knight    4055 Warlock                 4056 Ranger            4057 Arch Bishop
-      4058 Mechanic         4059 Guillotine Cross  4066 Royal Guard   4067 Sorcerer
-      4068 Minstrel            4069 Wanderer              4070 Sura                 4071 Genetic
-      4072 Shadow Chaser
-      ----- 3rd Class (Transcendent) -----
-      4060 Rune Knight    4061 Warlock                 4062 Ranger             4063 Arch Bishop
-      4064 Mechanic         4065 Guillotine Cross  4073 Royal Guard    4074 Sorcerer
-      4075 Minstrel            4076 Wanderer              4077 Sura                  4078 Genetic
-      4079 Shadow Chaser
-      ----- 4th Class -----
-      4252 Dragon Knight    4253 Meister                    4254 Shadow Cross     4255 Arch Mage
-      4256 Cardinal               4257 Windhawk              4258 Imperial Guard     4259 Biolo
-      4260 Abyss Chaser     4261 Elemental Master 4262 Inquisitor               4263 Troubadour
-      4264 Trouvere
-      ----- Expanded Class -----
-           23 Super Novice      24 Gunslinger              25 Ninja                 4045 Super Baby
-      4046 Taekwon           4047 Star Gladiator     4049 Soul Linker
-      4190 Ex. Super Novice  4191 Ex. Super Baby
-      4211 Kagerou            4212 Oboro             4215 Rebellion        4218 Summoner
-      4239 Star Emperor   4240 Soul Reaper
-      4302 Sky Emperor    4303 Soul Ascetic         4304 Shinkiro                 4305 Shiranui
-      4306 Night Watch     4307 Hyper Novice        4308 Spirit Handler
-      ----- Baby Novice And Baby 1st Class -----
-      4023 Baby Novice      4024 Baby Swordman    4025 Baby Magician   4026 Baby Archer
-      4027 Baby Acolyte      4028 Baby Merchant       4029 Baby Thief
-      ---- Baby 2nd Class ----
-      4030 Baby Knight     4031 Baby Priest         4032 Baby Wizard         4033 Baby Blacksmith
-      4034 Baby Hunter    4035 Baby Assassin   4037 Baby Crusader    4038 Baby Monk
-      4039 Baby Sage       4040 Baby Rogue        4041 Baby Alchemist   4042 Baby Bard
-      4043 Baby Dancer
-      ---- Baby 3rd Class ----
-      4096 Baby Rune Knight  4097 Baby Warlock     4098 Baby Ranger           4099 Baby Arch Bishop
-      4100 Baby Mechanic       4101 Baby Glt. Cross  4102 Baby Royal Guard  4103 Baby Sorcerer
-      4104 Baby Minstrel          4105 Baby Wanderer   4106 Baby Sura             4107 Baby Genetic
-      4108 Baby Shadow Chaser
-      ---- Expanded Baby Class ----
-      4220 Baby Summoner        4222 Baby Ninja        4223 Baby Kagero         4224 Baby Oboro
-      4225 Baby Taekwon       4226 Baby Star Glad    4227 Baby Soul Linker    4228 Baby Gunslinger
-      4229 Baby Rebellion   4241 Baby Star Emperor    4242 Baby Soul Reaper
+      인수: <직업 이름|ID>
+      귀하의 직업을 변경합니다.
+      ----- 노비스 / 1차 직업군 -----
+         0 노비스              1 검사            2 마법사      3 궁수
+         4 복사              5 상인               6 도둑
+      ----- 2차 직업군 -----
+         7 기사               8 프리스트                     9 위자드         10 블랙스미스
+        11 헌터           12 어쌔신            14 크루세이더          15 몽크
+        16 세이지              17 로그                 18 알케미스트         19 바드
+        20 댄서
+      ----- 하이 노비스 / 전승 1차 직업군 -----
+      4001 하이 노비스     4002 전승 검사    4003 전승 마법사    4004 전승 궁수
+      4005 전승 복사     4006 전승 상인       4007 전승 도둑
+      ----- 전승 2차 직업군 -----
+      4008 로드나이트      4009 하이프리스트             4010 하이위자드      4011 화이트스미스
+      4012 스나이퍼               4013 어쌔신크로스   4015 팔라딘              4016 챔피언
+      4017 프로페서         4018 스토커                    4019 크리에이터               4020 크로운
+      4021 집시
+      ----- 3차 직업군 (일반) -----
+      4054 룬 나이트    4055 워록                 4056 레인저            4057 아크 비숍
+      4058 미케닉         4059 길로틴 크로스  4066 로얄가드   4067 소서러
+      4068 민스트럴            4069 원더러              4070 수라                 4071 제네릭
+      4072 쉐도우 체이서
+      ----- 3차 직업군 (초월) -----
+      4060 룬 나이트    4061 워록                 4062 레인저             4063 아크 비숍
+      4064 미케닉         4065 길로틴 크로스  4073 로얄가드   4074 소서러
+      4075 민스트럴            4076 원더러              4077 수라                  4078 제네릭
+      4079 쉐도우 체이서
+      ----- 4차 직업군 -----
+      4252 드래곤 나이트    4253 마이스터                    4254 쉐도우 크로스     4255 아크 메이지
+      4256 카디날               4257 윈드호크              4258 임페리얼 가드     4259 바이올로
+      4260 어비스 체이서     4261 엘레멘탈 마스터 4262 인퀴지터               4263 트루바두르
+      4264 트루베르
+      ----- 확장 직업군 -----
+           23 슈퍼 노비스      24 건슬링거              25 닌자                 4045 슈퍼 베이비
+      4046 태권소년/소녀           4047 권성     4049 소울링커
+      4190 확장 슈퍼노비스  4191 확장 슈퍼베이비
+      4211 카게로우            4212 오보로             4215 리벨리온        4218 슈머너
+      4239 성제   4240 소울리퍼
+      4302 천제    4303 영도사         4304 신키로                 4305 시라누이
+      4306 나이트 워치     4307 하이퍼 노비스        4308 혼령사
+      ----- 애기노비스 및 애기 1차직업군 -----
+      4023 애기 노비스      4024 애기 검사    4025 애기 마법사   4026 애기 궁수
+      4027 애기 복사      4028 애기 상인       4029 애기 도둑
+      ---- 애기 2차 직업군 ----
+      4030 애기 기사     4031 애기 프리스트         4032 애기 위자드         4033 애기 블랙스미스
+      4034 애기 헌터    4035 애기 어쌔신   4037 애기 크루세이더    4038 애기 몽크
+      4039 애기 세이지       4040 애기 로그        4041 애기 알케미스트   4042 애기 바드
+      4043 애기 댄서
+      ---- 애기 3차 직업군 ----
+      4096 애기 룬나이트  4097 애기 워록     4098 애기 레인저           4099 애기 아크 비숍
+      4100 애기 메카닉       4101 애기 길로틴 크로스  4102 애기 로얄가드  4103 애기 소서러
+      4104 애기 민스트럴          4105 애기 원더러   4106 애기 수라             4107 애기 제네틱
+      4108 애기 쉐도우 체이서
+      ---- 확장 애기 직업군 ----
+      4220 애기 슈머너        4222 애기 닌자        4223 애기 캉가루         4224 애기 오보로
+      4225 애기 태권소년/소녀       4226 애기 권성    4227 애기 소울링커    4228 애기 건슬링거
+      4229 애기 리벨리온   4241 애기 스타 엠페러    4242 애기 소울 리퍼
   - Command: option
+    Aliases:
+      - 옵션
     Help: |
-      Params: <param1> <param2>(stackable) <param3>(stackable)
-      Adds different visual effects on or around your character.
+      인수: <param1> <param2>(stackable) <param3>(stackable)
+      케릭터 또는 케릭터 주변에 다양한 효과를 줍니다.
        <param1>       <param2>        <param3>
       01: Stone      01: Sight       01: Sight          512: Cart Lv. 4
       02: Frozen     02: Curse       02: Hiding        1024: Cart Lv. 5
@@ -328,710 +433,1145 @@ Body:
       16: (Nothing) 128: D. Poison  128: Cart Lv. 2
       32: (Nothing) 256: Fear       256: Cart Lv. 3
   - Command: heal
+    Aliases:
+      - 힐
     Help: |
-      Params: [<HP> <SP>]
-      Heals the desired amount of HP and SP. No value specified will do a full heal.
+      인수: [<HP> <SP>]
+      지정한 HP와 SP만큼 회복합니다. 값을 지정하지 않을 경우 전체회복함.
   - Command: healap
     Help: |
       Params: [<AP>]
-      Heals the desired amount of AP. No value specified will do a full AP heal.
+      원하는 양의 AP를 치유합니다. 특정한 값이 지정되지 않으면 전체 AP를 치유합니다.
   - Command: dye
     Aliases:
-      - ccolor
+      - 옷염색
     Help: |
-      Params: <clothes palette no.>
-      Changes your characters clothes color.
+      인수: <옷 패턴 번호.>
+      옷의 색상을 변경합니다.
   - Command: hairstyle
     Aliases:
-      - hstyle
+      - 헤어스타일
+      - 머리모양
     Help: |
-      Params: <hairstyle no.>
-      Changes your hair style.
+      인수: <헤어스타일 번호.>
+      머리모양을 변경합니다.
   - Command: haircolor
     Aliases:
-      - hcolor
+      - 헤어컬러
+      - 머리색
+      - 머리색상
+      - 염색
     Help: |
-      Params <hair palette no.>
-      Changes your hair color.
+      Params <머리색상 패턴 번호.>
+      머리의 색상을 변경합니다.
   - Command: speed
+    Aliases:
+      - 속도
     Help: |
-      Params: <1-1000>
-      Changes you walking speed. 1 being the fastest and 1000 the slowest. Default is 150.
+      인수: <1-1000>
+      걷는 속도를 변경합니다. 1에 가까울수록 빠르며 1000에 가까울수록 느려집니다. 기본 속도는 150.
   - Command: effect
+    Aliases:
+      - 효과
     Help: |
-      Params: <effect id> [<flag>]
-      Give an effect to your character.
+      인수: <효과 id> [<flag>]
+      귀하의 케릭터에 효과를 부여합니다.
   - Command: dropall
+    Aliases:
+      - 모두드랍
+      - 모두드롭
+      - 전부드랍
+      - 전부드롭
     Help: |
-      Params: [<item type>]
-      Throws all your possession on the ground. No type specified will drop all items.
+      인수: [<아이템 타입>]
+      지정한 타입의 아이템을 전부 땅에 드롭합니다. 타입을 지정하지 않을 경우 모든 아이템을 버립니다.
   - Command: stockall
     Help: |
       Params: [<item type>]
-      Transfer items from cart to your inventory. No type specified will transfer all items.
+      장바구니에서 아이템을 인벤토리로 이동합니다. 특정한 유형이 지정되지 않으면 모든 아이템을 이동시킵니다.
   - Command: storeall
+    Aliases:
+      - 창고보관
     Help: |
-      Puts all your possessions in storage.
+      모든 소지품을 창고에 보관합니다.
   - Command: killable
+    Aliases:
+      - 죽이기2
     Help: |
-      Make your character killable.
+      귀하의 케릭터를 죽입니다.
   - Command: memo
+    Aliases:
+      - 메모
     Help: |
-      Params: [memo position]
-      Set/change a memo location (no position: display memo points).
+      인수: [메모 위치]
+      위치를 기록 또는 변경합니다. (위치 지정 안할 경우: 기억된 포인트를 보여줍니다.)
   - Command: spiritball
+    Aliases:
+      - 기
     Help: |
-      Params: <1-100>
-      Gives you "spirit spheres" like from the skill "Call Spirits".
+      인수: <1-100>
+      구체를 생성합니다.
   - Command: questskill
+    Aliases:
+      - 퀘스트스킬
     Help: |
-      Params: <#>
-      Gives you the specified quest skill
-      Novice = 142: First Aid, 143: Act Dead
-      Archer = 147: Create Arrow, 148: Charge Arrow
-      Swordman = 144: Moving HP Recovery, 145: Attack Weak Point, 146: Auto Berserk
-      Acolyte = 156: Holy Light
-      Thief = 149: Throw Sand, 150: Back Sliding, 151: Take Stone, 152: Throw Stone
-      Merchant = 153: Cart Revolution, 154: Change Cart, 155: Crazy Uproar, 2535: Open Buying Store
-      Magician = 157: Energy Coat
-      Hunter = 1009: Phantasmic Arrow
-      Bard = 1010: Pang Voice
-      Dancer = 1011: Wink of Charm
-      Knight = 1001: Charge Attack
-      Crusader = 1002: Shrink
-      Priest = 1014: Redemptio
-      Monk = 1015: Ki Translation, 1016: Ki Explosio
-      Assassin = 1003: Sonic Acceleration, 1004: Throw Venom Knife
-      Rogue = 1005: Close Confine
-      Blacksmith = 1012: Unfair Trick, 1013: Greed
-      Alchemist = 238: Basis of Life
-      Wizard = 1006: Sight Blaster
-      Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
+      인수: <#>
+      지정한 퀘스트 스킬을 획득합니다.
+      노비스 = 142: 응급치료, 143: 죽은척 하기
+      궁수 = 147: 화살 만들기, 148: 챠지 에로우
+      검사 = 144: 이동중 HP 회복, 145: 급소치기, 146: 오토 버서커
+      복사 = 156: 홀리 라이트
+      도둑 = 149: 모래뿌리기, 150: 백 슬라이딩, 151: 돌줍기, 152: 돌던지기
+      상인 = 153: 카트 레볼루션, 154: 체인지 카트, 155: 고성방가, 2535: 구매상점 열기
+      마법사 = 157: 에너지 코트
+      헌터 = 1009: 판타즈믹 에로우
+      바드 = 1010: 팽보이스
+      댄서 = 1011: 매혹의 윙크
+      기사 = 1001: 챠지 어택
+      크루세이더 = 1002: 슈링크
+      프리스트 = 1014: 희생
+      몽크 = 1015: 진기 주입, 1016: 발경
+      어썌신 = 1003: 소닉 엑셀레이션, 1004: 배넘나이프
+      로그 = 1005: 클로즈 컴파인
+      블랙스미스 = 1012: 수상쩍은 상술, 1013: 탐욕
+      알케미스트 = 238: 생명윤리
+      위자드 = 1006: 사이트 블래스터
+      세이지 = 1007: 엘레멘탈 컨버터, 1008: 엘레멘탈 체인지 (수속성), 1017: 엘레멘탈 체인지 (지속성), 1018: 엘레멘탈 체인지 (화속성), 1019: 엘레멘탈 체인지 (풍속성)
   - Command: lostskill
+    Aliases:
+      - 로스트 스킬
     Help: |
-      Params: <#>
-      Takes away the specified quest skill from you
-      Novice = 142: First Aid, 143: Act Dead
-      Archer = 147: Create Arrow, 148: Charge Arrow
-      Swordman = 144: Moving HP Recovery, 145: Attack Weak Point, 146: Auto Berserk
-      Acolyte = 156: Holy Light
-      Thief = 149: Throw Sand, 150: Back Sliding, 151: Take Stone, 152: Throw Stone
-      Merchant = 153: Cart Revolution, 154: Change Cart, 155: Crazy Uproar, 2535: Open Buying Store
-      Magician = 157: Energy Coat
-      Hunter = 1009: Phantasmic Arrow
-      Bard = 1010: Pang Voice
-      Dancer = 1011: Wink of Charm
-      Knight = 1001: Charge Attack
-      Crusader = 1002: Shrink
-      Priest = 1014: Redemptio
-      Monk = 1015: Ki Translation, 1016: Ki Explosio
-      Assassin = 1003: Sonic Acceleration, 1004: Throw Venom Knife
-      Rogue = 1005: Close Confine
-      Blacksmith = 1012: Unfair Trick, 1013: Greed
-      Alchemist = 238: Basis of Life
-      Wizard = 1006: Sight Blaster
-      Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
+      인수: <#>
+      지정한 퀘스트 스킬을 버립니다.
+      노비스 = 142: 응급치료, 143: 죽은척 하기
+      궁수 = 147: 화살 만들기, 148: 챠지 에로우
+      검사 = 144: 이동중 HP 회복, 145: 급소치기, 146: 오토 버서커
+      복사 = 156: 홀리 라이트
+      도둑 = 149: 모래뿌리기, 150: 백 슬라이딩, 151: 돌줍기, 152: 돌던지기
+      상인 = 153: 카트 레볼루션, 154: 체인지 카트, 155: 고성방가, 2535: 구매상점 열기
+      마법사 = 157: 에너지 코트
+      헌터 = 1009: 판타즈믹 에로우
+      바드 = 1010: 팽보이스
+      댄서 = 1011: 매혹의 윙크
+      기사 = 1001: 챠지 어택
+      크루세이더 = 1002: 슈링크
+      프리스트 = 1014: 희생
+      몽크 = 1015: 진기 주입, 1016: 발경
+      어썌신 = 1003: 소닉 엑셀레이션, 1004: 배넘나이프
+      로그 = 1005: 클로즈 컴파인
+      블랙스미스 = 1012: 수상쩍은 상술, 1013: 탐욕
+      알케미스트 = 238: 생명윤리
+      위자드 = 1006: 사이트 블래스터
+      세이지 = 1007: 엘레멘탈 컨버터, 1008: 엘레멘탈 체인지 (수속성), 1017: 엘레멘탈 체인지 (지속성), 1018: 엘레멘탈 체인지 (화속성), 1019: 엘레멘탈 체인지 (풍속성)
   - Command: skillid
+    Aliases:
+      - 스킬아이디
+      - 스킬ID
     Help: |
-      Params: <name>
-      Look up a skill by name
+      인수: <이름>
+      이름으로 스킬을 찾습니다.
   - Command: useskill
+    Aliases:
+      - 스킬사용
     Help: |
-      Params: <skillid> <skillv> <target>
-      Use a skill on target
+      인수: <스킬번호> <스킬레벨> <대상>
+      대상에게 스킬을 사용합니다.
   - Command: skilltree
+    Aliases:
+      - 스킬트리
     Help: |
-      Params: <skillnum> <charname>
-      Prints the skill tree needed to get a skill for the target player.
+      인수: <스킬번호> <케릭터 이름>
+      대상 플레이어의 스킬을 얻는데 필요한 스킬 트리를 출력합니다.
   - Command: marry
+    Aliases:
+      - 결혼
     Help: |
-      Params: <player name>
-      Marry another player.
+      인수: <플레이어 이름>
+      결혼합니다.
   - Command: divorce
+    Aliases:
+      - 이혼
     Help: |
-      Divorce player.
+      이혼합니다.
   - Command: alive
+    Aliases:
+      - 부활
     Help: |
-      Revives yourself from death.
+      부활시킵니다.
   - Command: blvl
     Aliases:
-      - lvup
-      - blevel
-      - baselvl
-      - baselvup
-      - baselevel
-      - baselvlup
+      - 렙업
+      - 레벨업
+      - 랩업
+      - 래벨업
+      - 베이스레벨업
+      - 베이스레벨
     Help: |
-      Params: <number of levels>
-      Raises your base level the desired number of levels.
+      인수: <레벨 수치>
+      지정한 레벨수치만큼 기본레벨을 올립니다.
   - Command: jlvl
     Aliases:
-      - jlevel
-      - joblvl
-      - joblvup
-      - joblevel
-      - joblvlup
+      - 잡업
+      - 잡렙
+      - 잡랩
+      - 잡렙업
+      - 잡랩업
+      - 잡레벨업
     Help: |
-      Params: <number of levels>
-      Raises your job level the desired number of levels.
+      인수: <레벨 수치>
+      지정한 레벨수치만큼 직업 레벨을 올립니다.
   - Command: allskill
     Aliases:
-      - allskills
-      - skillall
-      - skillsall
+      - 올스킬
+      - 스킬올
+      - 모든스킬배우기
     Help: |
-      Give you all skills.
+      모든 스킬을 배웁니다.
   - Command: stpoint
+    Aliases:
+      - 스텟포인트
+      - 스탯포인트
     Help: |
-      Params: <number of points> - Gives you the desired number of stat points.
+      인수: <포인트량> - 지정한 포인트만큼 스테이터스 포인트를 획득합니다.
   - Command: trpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of trait stat points.
+      매개변수: <포인트 수> - 원하는 트레이트 스탯 포인트의 수를 제공합니다..
   - Command: skpoint
+    Aliases:
+      - 스킬포인트
     Help: |
-      Params: <number of points> - Gives you the desired number of skill points.
+      인수: <포인트량> - 지정한 포인트만큼 스킬 포인트를 획득합니다.
   - Command: zeny
+    Aliases:
+      - 제니
     Help: |
-      Params: <amount> - Gives you desired amount of Zeny.
+      인수: <수량> - 지정한 만큼 제니를 획득합니다.
   - Command: cash
+    Aliases:
+      - 캐시
     Help: |
-      Params: <amount> - Gives you the specified amount of cash points.
+      인수: <캐시량> - 지정한 캐시량만큼 캐시포인트를 획득합니다.
   - Command: points
+    Aliases:
+      - 포인트
     Help: |
-      Params: <amount> - Gives you the specified amount of Kafra Points.
+      인수: <포인트양> - 지정한 포인트양만큼 카프라 포인트를 획득합니다.
   - Command: str
+    Aliases:
+      - 힘
     Help: |
-      Params: <amount>
-      Raises STR by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 STR을 얻습니다.
   - Command: agi
+    Aliases:
+      - 어질
     Help: |
-      Params: <amount>
-      Raises AGI by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 AGI을(를) 얻습니다.
   - Command: dex
+    Aliases:
+      - 덱스
     Help: |
-      Params: <amount>
-      Raises DEX by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 DEX을(를) 얻습니다.
   - Command: vit
+    Aliases:
+      - 바이탈
     Help: |
-      Params: <amount>
-      Raises VIT by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 VIT을(를) 얻습니다.
   - Command: int
+    Aliases:
+      - 인트
     Help: |
-      Params: <amount>
-      Raises INT by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 INT을(를) 얻습니다.
   - Command: luk
+    Aliases:
+      - 럭
     Help: |
-      Params: <amount>
-      Raises LUK by given amount.
+      인수: <값>
+      Raises 지정한 값만큼 LUK을(를) 얻습니다.
   - Command: pow
     Help: |
-      Params: <amount>
-      Raises POW by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 POW을(를) 얻습니다.
   - Command: sta
     Help: |
-      Params: <amount>
-      Raises STA by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 STA를 얻습니다.
   - Command: wis
     Help: |
-      Params: <amount>
-      Raises WIS by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 WIS를 얻습니다.
   - Command: spl
     Help: |
-      Params: <amount>
-      Raises SPL by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 SPL를 얻습니다.
   - Command: con
     Help: |
-      Params: <amount>
-      Raises CON by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 CON을 얻습니다.
   - Command: crt
     Help: |
-      Params: <amount>
-      Raises CRT by given amount.
+      Params: <값>
+      Raises 지정한 값만큼 CRT를 얻습니다.
   - Command: allstats
     Aliases:
-      - allstat
-      - statall
-      - statsall
+      - 올스텟
+      - 올스테이터스
+      - 스텟올
     Help: |
-      Params: <value>
-      Adds value in all stats (maximum if no value).
+      인수: <값>
+      지정한 값만큼 모든 스테이터스를 올립니다. (값을 지정하지 않으면 최대치로 올립니다.)
   - Command: alltraits
     Aliases:
-      - alltrait
-      - traitall
+      - 올특성
+      - 모든특성
       - traitsall
     Help: |
-      Params: <value>
-      Adds value in all traits (maximum if no value).
+      Params: <값>
+      지정한 값만큼 모든 특성을 올립니다. (값을 지정하지 않으면 최대치로 올립니다.)
   - Command: addwarp
+    Aliases:
+      - 워프추가
+      - 워프생성
     Help: |
-      Params: <map name> <x coord> <y coord> <NPC name>
+      인수: <맵이름> <x 좌표> <y 좌표> <NPC 이름>
   - Command: killmonster2
+    Aliases:
+      - 킬몬스터2
+      - 킬몹2
     Help: |
-      Kills all monsters of your map (without drops).
+      현재 맵에 있는 모든 몬스터를 제거합니다. (아이템은 드롭되지 않습니다.)
   - Command: monster
     Aliases:
-      - spawn
+      - 몬스터
+      - 몹
+      - 스폰
     Help: |
-      Params: <monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
-      @monster2 <desired_monster_name> <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
-      @spawn/@monster/@summon/@monster2 "desired monster name" <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
-      @spawn/@monster/@summon/@monster2 <monster name|ID> "desired monster name" [<number to spawn> [<x coord> [<y coord>]]]
-      Spawns the desired monster with any desired name.
+      인수: <몬스터 이름|ID> [<스폰할 개체수> [<원하는 몬스터 이름> [<x 좌표> [<y 좌표>]]]]
+      @monster2 <원하는 몬스터 이름> <몬스터 이름|ID> [<스폰할 개체수> [<x 좌표> [<y 좌표>]]]
+      @spawn/@monster/@summon/@monster2 "원하는 몬스터 이름" <몬스터 이름|ID> [<스폰할 개체수> [<x 좌표> [<y 좌표>]]]
+      @spawn/@monster/@summon/@monster2 <몬스터 이름|ID> "원하는 몬스터 이름" [<스폰할 개체수> [<x 좌표> [<y 좌표>]]]
+      원하는 몬스터를 원하는 몬스터 이름으로 등장시킵니다.
   - Command: monstersmall
+    Aliases:
+      - 작은몹
+      - 작은몬스터
     Help: |
-      Params: <monster name|ID>
-      Spawns a smaller version of a monster.
+      인수: <몬스터 이름|ID>
+      몬스터를 소형으로 소환합니다.
   - Command: monsterbig
+    Aliases:
+      - 큰몬스터
+      - 큰몹
     Help: |
-      Params: <monster name|ID>
-      Spawns a larger version of a monster.
+      인수: <몬스터 이름|ID>
+      몬스터를 대형으로 소환합니다.
   - Command: killmonster
+    Aliases:
+      - 킬몹
+      - 킬몬스터
     Help: |
-      Params: <map>
-      Kill all monsters of the map (they drop)
+      인수: <맵>
+      맵에 있는 모든 몬스터를 제거합니다. (드롭을 합니다.)
   - Command: autoloot
+    Aliases:
+      - 오토루팅
+      - 자동루팅
     Help: |
-      Params: <on|off|#>
-      Makes items go straight into your inventory.
+      인수: <on|off|#>
+      아이템이 자동으로 인벤토리로 들어오게 하거나 취소합니다.
   - Command: autotrade
     Aliases:
-      - at
+      - 자동거래
     Help: |
-      Allows you to vend while you are offline.
+      자동으로 거래하도록 해놓고 케릭터를 오프라인으로 합니다.
   - Command: changegm
+    Aliases:
+      - 길마변경
+      - 길드장변경
+      - 길드마스터변경
     Help: |
-      Params: <charname>
-      Changes the leader of your guild (You must be guild leader)
+      인수: <케릭터 이름>
+      귀하의 길드에 대한 마스터를 지정한 케릭터로 변경합니다. (길드마스터만 사용가능)
   - Command: changeleader
+    Aliases:
+      - 파장변경
+      - 파티장변경
     Help: |
-      Params: <charname>
-      Changes the leader of your party (You must be party leader)
+      인수: <케릭터 이름>
+      귀하의 파티에 대한 파티장을 변경합니다. (파티장만 사용가능)
   - Command: request
+    Aliases:
+      - 리퀘스트
+      - 운영자에게
     Help: |
-      Params: <message>
-      Sends a message to all connected GMs (via the gm whisper system)
+      인수: <메시지>
+      접속중인 모든 GM에게 메시지를 보냅니다. (귓속말을 사용)
   - Command: sound
+    Aliases:
+      - 소리
+      - 사운드
     Help: |
-      Params: <path to file in data folder or GRF file>
-      Plays a sound from the data folder or GRF file located on the client.
+      인수: <데이터 폴더 경로 또는 GRF 파일경로>
+      클라이언트에 있는 데이터 폴더 또는 GRF 파일의 사운드를 재생합니다.
   - Command: clone
+    Aliases:
+      - 클론
+      - 복제
     Help: |
-      Params: <charname>
-      Spawns a supportive clone of the given player.
+      인수: <케릭터 이름>
+      지정된 플레이어를 지원하는 복제품을 만듭니다.
   - Command: slaveclone
+    Aliases:
+      - 슬레이브클론
+      - 슬레이브
     Help: |
-      Params: <charname>
-      Spawns a supportive clone of the given player that follows the creator around.
+      인수: <케릭터 이름>
+      만든 사람 주위를 따라다니는 지정된 플레이어를 지원하는 복제품을 만듭니다.
   - Command: evilclone
+    Aliases:
+      - 악마클론
+      - 이블클론
     Help: |
-      Params: <charname>
-      Spawns an aggressive clone of the given player.
+      인수: <케릭터 이름>
+      지정된 플레이어의 공격적인 복제품을 만듭니다.
   - Command: changesex
+    Aliases:
+      - 성전환
+      - 성별전환
     Help: |
-      Changes your gender.
+      성별을 변경합니다.
   - Command: duel
+    Aliases:
+      - 듀얼
+      - 듀엘
+      - 결투
     Help: |
-      Starts a duel.
+      결투를 합니다.
   - Command: invite
+    Aliases:
+      - 초대
     Help: |
-      Invites a player to a duel.
+      결투에 플레이어를 초대합니다.
   - Command: accept
+    Aliases:
+      - 승인
+      - 수락
     Help: |
-      Accepts an invitation to a duel.
+      결투 초대에 수락을 합니다.
   - Command: reject
+    Aliases:
+      - 거부
     Help: |
-      Rejects an invitation to a duel.
+      결투 초대에 거부합니다.
   - Command: leave
+    Aliases:
+      - 나가기
+      - 해산
     Help: |
-      Leaves a duel.
+      결투를 해산합니다.
   - Command: mail
+    Aliases:
+      - 메일
     Help: |
-      Open mail box.
+      메일함을 엽니다.
   - Command: storage
+    Aliases:
+      - 창고
     Help: |
-      Opens storage.
+      창고를 엽니다.
   - Command: itemreset
     Aliases:
-      - clearinventory
+      - 아이템리셋
+      - 인벤비우기
+      - 비우기
     Help: |
-      Remove all your items.
+      모든 아이템을 삭제합니다.
   - Command: guildstorage
     Aliases:
-      - gstorage
+      - 길드창고
     Help: |
-      Opens guild storage.
+      길드창고를 엽니다.
   - Command: idsearch
+    Aliases:
+      - 아이템찾기
+      - 아이템검색
+      - 템검색
+      - 템찾기
     Help: |
-      Params: <part_of_item_name>
-      Search all items that name have part_of_item_name
+      인수: <검색어>
+      이름에 검색어가 포함된 모든 아이템을 찾습니다.
   - Command: refine
+    Aliases:
+      - 제련
     Help: |
-      Params: <equip position> <+/- amount>
+      인수: <장착 위치> <+/- 값>
   - Command: grade
     Help: |
-      Params: <equip position> <+/- amount>
+      매개변수: <장비 위치> <+/- 양>
   - Command: produce
+    Aliases:
+      - 제조
     Help: |
-      Params: <equip name or equip ID> <element> <# of very's>
-      Element: 0=None 1=Ice 2=Earth 3=Fire 4=Wind
-      You can add up to 3 Star Crumbs and 1 element
+      인수: <장비 이름 또는 ID> <속성> <# 무지쏀>
+      속성: 0=없음 1=수속성 2=지속성 3=화속성 4=풍속성
+      별의 조각3개, 속성1개까지 추가 할 수 있습니다.
   - Command: repairall
+    Aliases:
+      - 모두수리
     Help: |
-      Repair all items of your inventory
+      인벤토리에 있는 모든 아이템을 수리합니다.
   - Command: item
+    Aliases:
+      - 아이템
+      - 템
     Help: |
-      Params: <item name or ID> <quantity>
-      Gives you the desired item.
+      인수: <아이템 이름 또는 ID> <갯수>
+      지정한 아이템을 획득합니다.
   - Command: item2
+    Aliases:
+      - 아이템2
+      - 템2
     Help: |
-      Params: <item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
-      Gives you the desired item.
+      인수: <아이템 이름 또는 ID> <갯수> <감정여부> <제련도> <깨짐여부> <카드1> <카드2> <카드3> <카드4>
+      해당 아이템을 획득합니다.
   - Command: pvpon
+    Aliases:
+      - PVP시작
+      - PK시작
     Help: |
-      Enables PvP on the current map
+      현재 맵을 PVP모드로 변경합니다.
   - Command: pvpoff
+    Aliases:
+      - PVP종료
+      - PK종료
     Help: |
-      Disables PvP on the current map
+      현재 맵의 PVP모드를 종료합니다.
   - Command: gvgon
     Aliases:
-      - gpvpon
+      - 길드전시작
+      - 길전시작
     Help: |
-      Enables GvG on the current map
+      현재 맵을 GVG모드로 전환합니다.
   - Command: gvgoff
     Aliases:
-      - gpvpoff
+      - 길드전종료
+      - 길전종료
     Help: |
-      Disables GvG on the current map
+      현재 맵의 GVG모드를 종료합니다.
   - Command: agitstart
+    Aliases:
+      - 공성전시작
+      - 공성시작
     Help: |
-      Starts War of Emperium
+      공성전을 시작합니다.
   - Command: agitend
+    Aliases:
+      - 공성전종료
+      - 공성종료
     Help: |
-      End War of Emperium
+      공성전을 종료합니다.
   - Command: party
+    Aliases:
+      - 파티
     Help: |
-      Params: <party_name>
-      Create a party.
+      인수: <파티 이름>
+      파티를 만듭니다.
   - Command: guild
+    Aliases:
+      - 길드
     Help: |
-      Params: <guild_name>
-      Create a guild.
+      인수: <길드 이름>
+      길드를 만듭니다.
   - Command: glvl
     Aliases:
-      - glevel
-      - guildlvl
-      - guildlvup
-      - guildlevel
-      - guildlvlup
+      - 길업
+      - 길드렙업
+      - 길드레벨업
+      - 길드랩업
+      - 길드래벨업
     Help: |
-      Params: <# of levels>
-      Raise Guild by desired number of levels
+      인수: <# 레벨>
+      길드의 레벨을 지정한 레벨로 올립니다.
   - Command: guildrecall
+    Aliases:
+      - 길드소환
     Help: |
-      Params: <guild name|ID>
-      Warps all online characters of a guild to you.
+      인수: <길드 이름|ID>
+      접속중인 해당 길드원 모두를 소환합니다.
   - Command: partyrecall
+    Aliases:
+      - 파티소환
     Help: |
-      Params: <party name|ID>
-      Warps all online characters of a party to you.
+      인수: <파티 이름|ID>
+      접속중인 해당 파티원 전원을 소환합니다.
   - Command: petrename
+    Aliases:
+      - 펫이름
+      - 펫이름변경
+      - 펫이름바꾸기
     Help: |
-      Re-enable pet rename
+      펫 이름을 변경하도록 활성화합니다.
   - Command: pettalk
+    Aliases:
+      - 펫대화
+      - 펫토크
     Help: |
-      Params: <message>
-      Makes your pet say a message.
+      인수: <메시지>
+      펫이 말을 합니다.
   - Command: petfriendly
+    Aliases:
+      - 펫친밀도
     Help: |
-      Params: <#>
-      Set pet friendly amount (0-1000) 1000 = Max
+      인수: <#>
+      펫의 친밀도를 설정합니다. (0-1000) 1000 = 최대
   - Command: pethungry
+    Aliases:
+      - 펫밥주기
+      - 펫밥
+      - 펫먹이주기
     Help: |
-      Params: <#>
-      Set pet hungry amount (0-100) 100 = Max
+      인수: <#>
+      펫의 배고픔 정도를 설정합니다. (0-100) 100 = 최대
   - Command: hatch
+    Aliases:
+      - 부화
+      - 펫부화
     Help: |
-      Create a pet from your inventory eggs list.
+      가지고 있는 알 목록중 원하는 펫을 부화합니다.
   - Command: makeegg
+    Aliases:
+      - 알만들기
+      - 펫알
     Help: |
-      Params: <pet_id>
-      Gives pet egg for monster number in pet DB
+      인수: <펫 ID>
+      펫 DB에 있는 몬스터 번호에 대한 큐펫 알을 만듭니다.
   - Command: kick
+    Aliases:
+      - 킥
+      - 추방
     Help: |
-      Params: <char name>
-      Kicks specified character off the server
+      인수: <케릭터 이름>
+      지정한 케릭터를 서버에서 추방합니다.
   - Command: unjail
     Aliases:
-      - discharge
+      - 석방
+      - 감옥해제
     Help: |
-      Params: <char name>
-      Discharges specified character/prisoner
+      인수: <케릭터 이름>
+      지정한 케릭터를 감옥에서 석방합니다.
   - Command: kill
     Aliases:
-      - die
+      - 킬
+      - 죽음
     Help: |
-      Kills player.
+      플레이어를 죽입니다.
   - Command: recall
+    Aliases:
+      - 리콜
+      - 소환
     Help: |
-      Params: <char name>
-      Warps target character to you.
+      인수: <케릭터 이름>
+      케릭터를 소환합니다.
   - Command: raise
     Aliases:
-      - revive
+      - 부활
     Help: |
-      Params: <char name>
-      Revives target character.
+      인수: <케릭터 이름>
+      케릭터를 부활시킵니다.
   - Command: block
+    Aliases:
+      - 블럭
+      - 블록
     Help: |
-      Params: <char name>
-      Permanently blocks an account.
+      인수: <케릭터 이름>
+      계정을 영구적으로 차단합니다.
   - Command: unblock
+    Aliases:
+      - 블럭해제
+      - 블록해제
     Help: |
-      Params: <char name>
-      Unblocks an account.
+      인수: <케릭터 이름>
+      계정을 블록해제합니다.
   - Command: ban
     Aliases:
-      - banish
+      - 밴
+      - 차단
     Help: |
-      Params: <time> <name>\n" "Temporarily ban an account.
-      time usage: adjustment (+/- value) and element (y/a, m, d/j, h, mn, s)
-      Example: @ban +1m-2mn1s-6y testplayer
+      인수: <시간> <이름>\n" "계정을 임시로 차단합니다.
+      시간 사용방법: (+/- 값)을 조정 및 요소 (y/a, m, d/j, h, mn, s)
+      예제: @벤 +1m-2mn1s-6y testplayer
   - Command: unban
     Aliases:
-      - unbanish
+      - 언벤
+      - 벤해제
+      - 차단해제
     Help: |
-      Params: <name> - Unban a account
+      인수: <이름> - 계정의 벤을 해제합니다.
   - Command: jail
+    Aliases:
+      - 감옥
     Help: |
-      Params: <char name> - Sends specified character in jails
+      인수: <케릭터 이름> - 지정된 케릭터를 감옥으로 보냅니다.
   - Command: trade
+    Aliases:
+      - 거래
     Help: |
-      Params: <char name> - Open a trade window with a another player
+      인수: <케릭터 이름> - 다른 플레이어와의 거래창을 엽니다.
   - Command: recallall
+    Aliases:
+      - 모두소환
     Help: |
-      Warps every character online to you.
+      접속중인 모든 케릭터를 소환합니다.
   - Command: doom
+    Aliases:
+      - 둠
+      - 서버추방
     Help: |
-      Kills all NON GM chars on the server.
+      서버내에 모든 운영자가 아닌 케릭터를 추방합니다.
   - Command: doommap
+    Aliases:
+      - 둠맵
+      - 맵추방
     Help: |
-      Kills all non GM characters on the map.
+      해당 맵에 있는 운영자가 아닌 모든 케릭터를 추방합니다.
   - Command: raisemap
+    Aliases:
+      - 맵부활
     Help: |
-      Resurrects all characters on the map.
+      맵에 있는 모든 케릭터를 부활시킵니다.
   - Command: night
+    Aliases:
+      - 밤
     Help: |
-      Enables night mode on all maps, all characters are affected.
+      모든 맵을 밤모드로 변경합니다. 모든 케릭터가 영향 받습니다.
   - Command: day
+    Aliases:
+      - 낮
     Help: |
-      Disables night mode and restores regular lighting, all characters are affected.
+      전 맵을 낮으로 변경합니다. 모든 케릭터가 영향 받습니다.
   - Command: skillon
+    Aliases:
+      - 스킬온
+      - 스킬켜기
     Help: |
-      Turn skills on for a map.
+      맵에 대해 스킬을 사용하도록 전환합니다.
   - Command: skilloff
+    Aliases:
+      - 스킬오프
+      - 스킬끄기
     Help: |
-      Turn skills off for a map.
+      맵에 대해 스킬을 사용하지 못하도록 전환합니다.
   - Command: snow
+    Aliases:
+      - 눈
     Help: |
-      Makes all maps to have the snow weather effect.
+      모든 맵에 눈이 내리도록 합니다.
   - Command: clouds
+    Aliases:
+      - 구름
     Help: |
-      Makes all maps to have the cloudy weather effect.
+      모든 맵에 구름을 생성합니다.
   - Command: clouds2
+    Aliases:
+      - 구름2
     Help: |
-      Makes all maps to have another cloudy weather effect.
+      모든 맵에 또다른 구름을 생성합니다.
   - Command: fog
+    Aliases:
+      - 안개
     Help: |
-      Makes all maps to have the fog weather effect.
+      모든 맵에 안개를 생성합니다.
   - Command: fireworks
+    Aliases:
+      - 불꽃
     Help: |
-      Makes all maps to have the fireworks weather effect.
+      모든 맵에 불꽃을 생성합니다.
   - Command: sakura
+    Aliases:
+      - 벚꽃
     Help: |
-      Makes all maps to have the sakura weather effect.
+      모든 맵에 벚꽃이 흩날리도록 합니다.
   - Command: leaves
+    Aliases:
+      - 낙엽
     Help: |
-      Makes all maps to have the leaves weather effect.
+      모든 맵에 낙엽이 떨어지도록 합니다.
   - Command: shownpc
+    Aliases:
+      - 엔피씨보이기
+      - 앤피씨보이기
+      - 엔피시보이기
+      - npc보이기
     Help: |
-      Params: <NPC name>
-      Enable a NPC.
+      인수: <NPC 이름>
+      NPC를 활성화합니다.
   - Command: hidenpc
+    Aliases:
+      - 엔피씨숨기기
+      - 앤피씨숨기기
+      - 엔피시숨기기
+      - NPC숨기기
     Help: |
-      Params: <NPC name>
-      Disable a NPC.
+      인수: <NPC 이름>
+      NPC를 숨깁니다.
   - Command: npcmove
+    Aliases:
+      - 엔피씨이동
+      - 엔피시이동
     Help: |
-      Params: <x coord> <y coord> <NPC name>
-      Move a NPC.
+      인수: <x 촤표> <y 좌표> <NPC 이름>
+      엔피씨를 이동합니다.
   - Command: loadnpc
+    Aliases:
+      - 엔피씨로드
+      - 엔피시로드
+      - npc로드
     Help: |
-      Params: <path to script>
-      Load the specified script file path.
+      인수: <스크립트 경로>
+      지정한 스크립트 경로를 이용해 npc를 불러옵니다.
   - Command: unloadnpc
+    Aliases:
+      - 언로드엔피씨
+      - 언로드엔피시
+      - npc언로드
     Help: |
-      Params: <NPC name>
-      Unload the specified NPC according to name.
+      인수: <NPC 이름>
+      지정한 npc를 제거합니다.
   - Command: unloadnpcfile
+    Aliases:
+      - 언로드엔피씨파일
+      - 언로드엔피시파일
+      - npc언로드파일
     Help: |
-      Params: <path>
-      Unload the specified script file path.
+      인수: <경로>
+      지정된 스크립트 파일에 해당하는 모든 엔피씨를 제거합니다.
   - Command: adjgroup
+    Aliases:
+      - 그룹추가
     Help: |
-      Params: <level> <char name>
-      Do a temporary adjustment of the group level of a player.
+      인수: <레벨> <케릭터 이름>
+      지정된 플레이어의 그룹레벨을 임시적으로 조정합니다.
   - Command: addperm
+    Aliases:
+      - 권한추가
     Help: |
-      Params: <permission_name>
-      Temporarily add a permission to a player.
+      인수: <권한 이름>
+      플레이어에게 임시로 권한을 추가합니다.
   - Command: rmvperm
+    Aliases:
+      - 권한삭제
+      - 권한제거
     Help: |
-      Params: <permission_name>
-      Temporarily remove a permission from a player.
+      인수: <권한 이름>
+      플레이어의 권한을 임시로 삭제합니다.
   - Command: kickall
+    Aliases:
+      - 모두추방
     Help: |
-      Kick all characters off the server
+      서버내에 있는 모든 케릭터를 추방합니다.
   - Command: mapexit
+    Aliases:
+      - 맵종료
+      - 종료
+      - 맵서버종료
     Help: |
-      Kick all players and shut down map-server.
+      모든 플레이어를 추방하고 맵서버를 닫습니다.
   - Command: gat
+    Aliases:
+      - 디버깅
+      - 갓
     Help: |
-      For debugging (you inspect around gat)
+      디버깅을 합니다. (점검하기 위해)
   - Command: send
+    Aliases:
+      - 센드
+      - 전송
     Help: |
-      Params: <Hex Number> [<value>]
-      For debugging (packet variety)
+      인수: <16진수값> [<값>]
+      디버깅을 위한 명령어입니다. (패킷 다양성)
   - Command: nuke
+    Aliases:
+      - 누크
+      - 폭파
     Help: |
-      Params: <char name>
-      Blow somebody up, including those surrounding them.
+      인수: <케릭터 이름>
+      주변 사람들을 포함하여 지정한 케릭터를 폭파합니다.
   - Command: reloadachievementdb
+    Aliases:
+      - 리로드달성과제
+      - 달성과제리로드
+      - 달성과제디비
     Help: |
-      Reload achievement database.
+      도전과제 데이터베이스를 다시 로드합니다.
   - Command: reloadatcommand
+    Aliases:
+      - 명령어디비
+      - 명령어디비리로드
+      - 명령어리로드
     Help: |
-      Reload atcommand settings.
+      명령어를 다시 불러옵니다.
   - Command: reloadattendancedb
+    Aliases:
+      - 출석리로드
+      - 출석디비
+      - 출석디비리로드
     Help: |
-      Reload attendance database.
+      출석 데이터베이스를 다시 불러옵니다.
   - Command: reloadbattleconf
+    Aliases:
+      - 배틀디비
+      - 배틀설정리로드
+      - 배틀디비리로드
+      - 베틀디비
+      - 베틀설정리로드
+      - 베틀디비리로드
     Help: |
-      Reload battle settings.
+      베틀(battle) 설정을 다시 불러옵니다.
   - Command: reloadcashdb
     Aliases:
       - reloadcashshop
+      - 캐시로드
     Help: |
-      Reload cash shop database.
+      캐시 상점 데이터베이스를 다시 불러옵니다.
   - Command: reloadinstancedb
+    Aliases:
+      - 인스턴스디비
+      - 인스턴스디비리로드
+      - 인스턴스리로드
     Help: |
-      Reload instance database.
+      인스턴스 데이터베이스를 다시 불러옵니다.
   - Command: reloaditemdb
+    Aliases:
+      - 아이템디비
+      - 아이템디비리로드
     Help: |
-      Reload item database.
+      아이템 데이터베이스를 다시 불러옵니다.
   - Command: reloadmobdb
+    Aliases:
+      - 몹디비
+      - 몹디비리로드
+      - 몬스터디비
+      - 몬스터디비리로드
     Help: |
-      Reload monster database.
+      몬스터 데이터베이스를 다시 불러옵니다.
   - Command: reloadmotd
+    Aliases:
+      - 인사말리로드
+      - 인사말디비
+      - 오늘의메시지리로드
     Help: |
-      Reload Message of the Day.
+      오늘의 메시지를 다시 불러옵니다.
   - Command: reloadmsgconf
+    Aliases:
+      - 메시지리로드
+      - 메시지디비리로드
     Help: |
-      Reload message configuration.
+      설정 메시지를 다시 불러옵니다.
   - Command: reloadpcdb
+    Aliases:
+      - 피씨디비
+      - 피씨디비리로드
     Help: |
-      Reload player settings.
+      플레이어 설정을 다시 불러옵니다.
   - Command: reloadquestdb
+    Aliases:
+      - 퀘스트디비
+      - 퀘스트디비리로드
     Help: |
-      Reload quest database.
+      퀘스트 데이터베이스를 다시 불러옵니다.
   - Command: reloadscript
+    Aliases:
+      - 스크립트
+      - 스크립트디비
+      - 스크립트리로드
     Help: |
-      Reload all scripts.
+      모든 스크립트를 다시 불러옵니다.
   - Command: reloadskilldb
+    Aliases:
+      - 스킬디비
+      - 스킬디비리로드
+      - 스킬리로드
     Help: |
-      Reload skills definition database.
+      스킬이 정의된 데이터베이스를 다시 불러옵니다.
   - Command: reloadstatusdb
+    Aliases:
+      - 스테이터스디비
+      - 스텟디비
+      - 스텟디비리로드
+      - 스테이터스리로드
+      - 스테이터스디비리로드
+      - 스타터스디비
+      - 스타터스디비리로드
     Help: |
-      Reload status settings.
+      스테이터스 설정을 다시 불러옵니다.
   - Command: reload
+    Aliases:
+      - 리로드
     Help: |
-      Params: <type>
-      Reload a database or configuration file.
+      인수: <타입>
+      데이터베이스 또는 설정파일을 다시 불러옵니다.
       itemdb                mobdb          skilldb
       atcommand       battleconf     statusdb
       pcdb                    motd             script
       questdb              msgconf       packetdb
-      cashdb
   - Command: langtype
+    Aliases:
+      - 언어타입
+      - 언어
+      - 언어형식
     Help: |
-      Params: <language>
-      Changes your language setting.
+      인수: <언어>
+      언어를 변경합니다.
   - Command: limitedsale
+    Aliases:
+      - 한정세일
     Help: |
-      Opens the limited sale window.
+      한정 세일 창을 엽니다.
   - Command: changedress
     Aliases:
-      - nocosplay
+      - 옷삭제
+      - 드레스삭제
     Help: |
-      Removes all character costumes.
+      모든 케릭터의 코스튬을 삭제합니다.
   - Command: camerainfo
     Aliases:
-      - viewpointvalue
-      - setcamera
+      - 카메라정보
+      - 카메라설정
     Help: |
-      Shows or updates the client's camera settings.
+      클라이언트의 카메라 설정을 표시하거나 업데이트 할 수 있습니다.
   - Command: resetstat
     Aliases:
-      - streset
+      - 스텟초기화
+      - 초기화스텟
+      - 스테이터스초기화
+      - 스탯초기화
   - Command: resetskill
     Aliases:
-      - skreset
+      - 스킬초기화
+      - 초기화스킬
+      - 리셋스킬
   - Command: homlevel
     Aliases:
-      - hlvl
-      - hlevel
-      - homlvl
-      - homlvup
+      - 호문렙업
+      - 호문랩업
+      - 호문업
+      - 호문레벨업
   - Command: homevolution
     Aliases:
-      - homevolve
+      - 호문진화
   - Command: mutearea
     Aliases:
-      - stfu
+      - 지역음소거
   - Command: monsterignore
     Aliases:
-      - battleignore
+      - 몹무시
   - Command: accinfo
     Aliases:
-      - accountinfo
+      - 계정정보
   - Command: channel
     Aliases:
-      - main
+      - 채널
   - Command: autoloottype
     Aliases:
-      - aloottype
+      - 오토루팅타입
   - Command: cloneequip
     Aliases:
-      - eqclone
+      - 클론장비
   - Command: clonestat
     Aliases:
-      - stclone
+      - 클론스탯
+      - 클론스텟
   - Command: reloadnpcfile
     Aliases:
-      - reloadnpc
+      - 리로드엔피씨파일
+      - 엔피씨리로드파일
+      - 엔피시리로드파일
   - Command: addfame
     Aliases:
+      - 팜포인트
       - famepoint
       - famepoints
+  - Command: charkami
+    Aliases:
+      - 잡
+      - 전체말
+    Help: |
+      전체말을 합니다.
+  - Command: charkamisetup
+    Aliases: 
+      - 잡설정
+      - 전체말설정
+    Help: |
+      전체말에 대한 설정을 합니다.
+  - Command: charkami_color
+    Aliases: 
+      - 잡색
+      - 잡컬러
+      - 잡색깔
+    Help: |
+      전체말에 대한 색상을 설정합니다. (Hex코드 사용. ex: 0xFFFFFF)
+  - Command: charkami2
+    Aliases: 
+      - 말
+      - 전체말2
+    Help: |
+      채팅창에만 나타나는 전체말을 사용합니다.
+  - Command: charkamisetup2
+    Aliases: 
+      - 말설정
+      - 전체말설정2
+    Help: |
+      채팅창에만 나타나는 전체말에 대한 설정을 합니다.
+  - Command: charkami2_color
+    Aliases: 
+      - 말색
+      - 말컬러
+      - 말색깔
+    Help: |
+      채팅창에만 나타나는 전체말에 대한 색깔을 설정을 합니다.
+  - Command: charkami_allon
+    Aliases: 
+      - 잡시작
+      - 전체말시작
+    Help: |
+      전체말에 시작합니다. 모든 유저는 전체말을 사용할 수 있게 됩니다.(운영자 전용)
+  - Command: charkami_alloff
+    Aliases: 
+      - 잡중지
+      - 전체말중지
+    Help: |
+      전체말에 중지합니다. 모든 유저는 전체말 명령어를 사용할 수 없습니다. (운영자 전용)
+  - Command: charkami2_allon
+    Aliases: 
+      - 말시작
+      - 전체말시작2
+    Help: |
+      채팅창에만 나타나는 전체말에 시작합니다. 모든 유저는 전체말을 사용할 수 있게 됩니다.(운영자 전용)
+  - Command: charkami2_alloff
+    Aliases: 
+      - 말중지
+      - 전체말중지2
+    Help: |
+      채팅창에만 나타나는 전체말에 중지합니다. 모든 유저는 전체말을 사용할 수 없게 됩니다.(운영자 전용)
+  - Command: all_identify
+    Aliases: 
+      - 모두감정2
+      - 전부감정	
+    Help: |
+      소유한 모든 아이템을 한번에 감정합니다.
   - Command: enchantgradeui
     Help: |
-      Opens the enchantgrade UI.
+      인첸트 등급 Ui를 오픈했습니다.
   - Command: roulette
     Help: |
-      Opens the roulette UI.
+      룰렛 UI를 오픈했습니다.
   - Command: setcard 
     Help: |
-      Adds a card or enchant to the specific slot of the equipment.
+      장비의 특정 슬롯에 카드 또는 인챈트를 추가합니다.
 
 Footer:
   Imports:

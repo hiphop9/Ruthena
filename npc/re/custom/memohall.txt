@@ -1,0 +1,556 @@
+// NPC scripts
+
+prt_fild08,147,359,5	script	차원 수호 기념관 안내#m	105,5,5,{
+OnTouch:
+	unittalk getnpcid(0, "차원 수호 기념관 안내#m"), "대륙을 수호한 영웅을 기리는 차원 수호 기념관에 방문하십시오!";
+	end;
+}
+
+prt_fild08,144,355,5	script	차원 수호 기념관 안내#m5925	105,{
+	mes "[기념관 입장 안내]";
+	mes "지금 차원 수호 기념관으로 이동하시겠습니까?";
+	next;
+	switch( select( "지금 바로 이동", "차원 수호 기념관?" )) {
+		case 1:
+			mes "[기념관 입장 안내]";
+			mes "바로 기념관으로 모시겠습니다!";
+			close2;
+				cutin "prt_soldier.bmp", 255;
+				warp "memohall",205,17;				
+		break;
+		case 2:
+			mes "[기념관 입장 안내]";
+			mes "일전에 차원의 균열 너머의 세력들이 침공한 일이 있었음은 잘 아시겠지요?";
+			mes "하지만 다행히도 대륙의 각지에서 수호하기 위해 힘을 모아 애써주셔서 무사히 퇴치하였습니다.";
+			next;
+			mes "[기념관 입장 안내]";
+			mes "차원 수호 기념관은 그 당시 각지에서 애써주신 영웅들을 기리는 기념관입니다. 관심이 있으시다면 방문해보십시오!";
+			close2;
+			cutin "prt_soldier.bmp", 255;
+		break;
+	}
+	end;
+}
+
+prt_fild08,144,362,5	script	차원 수호 기념 동상#ms01	21637,{
+	end;
+}
+
+prt_fild08,142,359,5	script	차원 수호 기념 동상#ms02	21637,{
+	end;
+}
+
+prt_fild08,142,361,5	script	차원 수호 기념 동상#ms03	21639,{
+	end;
+}
+
+prt_fild08,140,362,5	script	차원 수호 기념 동상#ms04	21637,{
+	end;
+}
+
+memohall,210,26,4	script	경비 병사#msa07	105,{
+	end;
+}
+
+memohall,201,26,4	script	경비 병사#msa08	105,{
+	end;
+}
+
+memohall,210,59,4	script	경비 병사#msa05	105,{
+	end;
+}
+
+memohall,201,59,4	script	경비 병사#msa06	105,{
+	end;
+}
+
+memohall,164,83,5	script	침공에 맞선 영웅#ll11	4255,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 2146;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<한님요>");
+	end;
+}
+
+memohall,164,92,5	script	침공에 맞선 영웅#ll13	4252,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1361;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 158;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1418;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<제르가 디스>");
+	end;
+}
+
+memohall,164,101,5	script	침공에 맞선 영웅#ll14	4256,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 22;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1555;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 158;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1745;
+		setunitdata getnpcid(0), UNPC_ROBE, 1;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<와카리마시따>");
+	end;
+}
+
+memohall,182,104,7	script	관람객#q05	10311,{
+	unittalk getnpcid(0, "관람객#q05"), "어지러워... 그날의 고함 소리가 들리는 것 같아.";
+	end;
+}
+
+memohall,170,110,3	script	관람객#q09	709,{
+	unittalk getnpcid(0, "관람객#q09"), "이렇게 평범하게 생긴 사람들이 어떻게 그런 용기를 냈지?";
+	end;
+}
+
+memohall,164,110,5	script	침공에 맞선 영웅#ll16	4260,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1827;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 158;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 2003;
+		setunitdata getnpcid(0), UNPC_ROBE, 8;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<Po_Do_R>");
+	end;
+}
+
+memohall,164,119,5	script	침공에 맞선 영웅#ll17	4256,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 5;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 7;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 142;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<쿠왕의비숍>");
+	end;
+}
+
+memohall,184,124,5	script	관람객#q08	85,{
+	unittalk getnpcid(0, "관람객#q08"), "우리같은 평범한 사람들은 그저 마음 졸이는 것밖에 더 했나. 물자나 지원할 수 있어서 다행이었지.";
+	end;
+}
+
+memohall,164,129,5	script	침공에 맞선 영웅#ll18	4257,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 22;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1481;
+		setunitdata getnpcid(0), UNPC_ROBE, 52;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<펠록모험가_19AF>");
+	end;
+}
+
+memohall,164,138,5	script	침공에 맞선 영웅#rr20	4256,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 22;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1481;
+		setunitdata getnpcid(0), UNPC_ROBE, 52;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<희네>");
+	end;
+}
+
+memohall,164,147,5	script	침공에 맞선 영웅#ll21	4256,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1481;
+		setunitdata getnpcid(0), UNPC_ROBE, 52;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<멜랑루스>");
+	end;
+}
+
+memohall,170,150,3	script	관람객#q06	10210,{
+	unittalk getnpcid(0, "관람객#q06"), "이때 생각 나네...";
+	end;
+}
+
+memohall,164,156,5	script	침공에 맞선 영웅#ll23	4254,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1085;
+		setunitdata getnpcid(0), UNPC_ROBE, 51;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<크앙크앙>");
+	end;
+}
+
+memohall,164,165,5	script	침공에 맞선 영웅#ll24	4302,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1003;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 1417;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 2018;
+		setunitdata getnpcid(0), UNPC_ROBE, 119;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<쿠뜨제로>");
+	end;
+}
+
+memohall,183,174,5	script	#cry01	21637,{
+	end;
+}
+
+memohall,185,176,5	script	#cry00	21639,{
+	end;
+}
+
+memohall,187,174,5	script	#cry02	21637,{
+	end;
+}
+
+memohall,197,166,4	script	경비 병사#msa01	105,{
+	end;
+}
+
+memohall,200,164,5	script	기념관 안내#msa00	833,{
+	mes "[기념관 안내]";
+	mes "침공의 시작은 그 누구도 예상치 못한 순간이었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "차원의 균열이 생기며 밀려오던 차원의 군단들. 그들을 보는 순간 모두가 얼어 붙었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "시시각각 프론테라를 향해 조여 오던 위기 앞에서 다행히 대현자가 나타나 도움의 손길을 주었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "이에 룬-미드가츠 왕국은 빠르게 왕국 방위군을 조직해 대응을 준비하였습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "하지만 그보다 먼저, 왕국의 위기 앞에 곳곳에서 정의감에 스스로 일어나 뭉친 영웅들이 있었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "왕국 방위군은 그들을 임시 방위군으로 편성되어 왕국 방위군과 함께 차원의 군단에 맞섰습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "왕국 방위군과 임시 방위군뿐 아니라 곳곳에서 각계의 평범한 사람들이 자신의 자리에서 침착하게 최선을 다했습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "그리하여 침공 기간 동안 큰 혼란 없이 질서유지를 할 수 있었고, 보급도 원활히 할 수 있었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "그 누구도 섣불리 나서지 못하던 그 때에 이러한 작은 용기가 모여 큰 힘이 되어 결국엔 이겨낼 수 있었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "후에 그 빛나는 이름과 업적을 영원히 남기기 위하여 이 기념관을 세워 그분들의 업적을 기리고 있습니다.";
+	mes "감사합니다.";
+	close;
+	end;
+}
+
+memohall,214,166,4	script	경비 병사#msa02	105,{
+	end;
+}
+
+memohall,224,175,5	script	#cry04	21637,{
+	end;
+}
+
+memohall,226,177,5	script	#cry03	21639,{
+	end;
+}
+
+memohall,228,175,5	script	#cry05	21637,{
+	end;
+}
+
+memohall,247,156,3	script	침공에 맞선 영웅#rr19	4302,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 12;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 375;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<천제1호>");
+	end;
+}
+
+memohall,247,165,3	script	침공에 맞선 영웅#rr202549	4257,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 31;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<샤프한레인저>");
+	end;
+}
+
+memohall,247,147,3	script	침공에 맞선 영웅#rr18	4257,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 13;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 7;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<애스로>");
+	end;
+}
+
+memohall,242,139,7	script	관람객#q01	696,{
+	unittalk getnpcid(0, "관람객#q01"), "이야, 되게 생동감 있게 잘 꾸며놨네. 이야, 진짜 멋있네.";
+	end;
+}
+
+memohall,247,138,3	script	침공에 맞선 영웅#rr17	4258,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 2;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1361;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 1684;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 3;
+		setunitdata getnpcid(0), UNPC_ROBE, 17;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<실리아>");
+	end;
+}
+
+memohall,241,137,7	script	관람객#q02	10003,{
+	unittalk getnpcid(0, "관람객#q02"), "어이고~ 작품으로만 봐도 무서운데 실제로는 얼마나 더 무서웠을 거야.";
+	end;
+}
+
+memohall,247,129,3	script	침공에 맞선 영웅#rr16	4256,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 21;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1486;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<풀잎사귀>");
+	end;
+}
+
+memohall,229,124,3	script	관람객#q03	695,{
+	unittalk getnpcid(0, "관람객#q03"), "휴- 구경을 하도 했더니 다리가 너무 아프네.";
+	end;
+}
+
+memohall,247,119,3	script	침공에 맞선 영웅#rr15	4255,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 40;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 8;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1073;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 1733;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1312;
+		setunitdata getnpcid(0), UNPC_ROBE, 65;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<청구역하이위져드_CCA4>");
+	end;
+}
+
+memohall,247,110,3	script	침공에 맞선 영웅#rr14	4252,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 23;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 3;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 804;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 1332;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_ROBE, 1;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<브룬부름>");
+	end;
+}
+
+memohall,247,101,3	script	침공에 맞선 영웅#rr13	4306,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 30;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 0;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 1003;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<나이트위치*>");
+	end;
+}
+
+memohall,247,92,3	script	침공에 맞선 영웅#rr12	4302,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 29;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 1189;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_ROBE, 119;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<Night Sky*>");
+	end;
+}
+
+memohall,247,83,3	script	침공에 맞선 영웅#rr11	4262,{
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 1;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 6;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 2283;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 954;
+		setunitdata getnpcid(0), UNPC_ROBE, 1437;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+		setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "<지롤하고자빠졌네>");
+	end;
+}
+
+memohall,210,91,1	script	어린이 관람객#q05	891,{
+	unittalk getnpcid(0, "어린이 관람객#q05"), "나 전에 여기 와 봤는데. 또 왔어...";
+	end;
+}
+
+memohall,213,91,1	script	어린이 관람객#q06	958,{
+	unittalk getnpcid(0, "어린이 관람객#q06"), "저거 뭐지?";
+	end;
+}
+
+memohall,210,94,1	script	어린이 관람객#q03	706,{
+	unittalk getnpcid(0, "어린이 관람객#q03"), "오와, 진짜 크다!!";
+	end;
+}
+
+memohall,213,94,1	script	어린이 관람객#q04	716,{
+	unittalk getnpcid(0, "어린이 관람객#q04"), "여기에 우리 이모 동상 서 있다고 했는데 오딨지이?";
+	end;
+}
+
+memohall,210,97,1	script	어린이 관람객#q01	703,{
+	unittalk getnpcid(0, "어린이 관람객#q01"), "여기가 우리집이면 좋겠다.";
+	end;
+}
+
+memohall,213,97,1	script	어린이 관람객#q02	82,{
+	unittalk getnpcid(0, "어린이 관람객#q02"), "냄새 좋다아~ 꽃냄샌가아?";
+	end;
+}
+
+memohall,212,100,5	script	선생님#q00	702,{
+	setpcblock PCBLOCK_NPC,true;
+	unittalk getnpcid(0, "선생님#q00"), "자, 기념관에서는 어떻게 해야 하죠?";
+	sleep2 1000;
+	unittalk getnpcid(0, "어린이 관람객#q01"), "조용히 해요!";
+	unittalk getnpcid(0, "어린이 관람객#q02"), "합!!!";
+	unittalk getnpcid(0, "어린이 관람객#q03"), "조용히!";
+	unittalk getnpcid(0, "어린이 관람객#q04"), "쉿---!!!";
+	unittalk getnpcid(0, "어린이 관람객#q05"), "조용조용!!";
+	unittalk getnpcid(0, "어린이 관람객#q06"), "조~용~히~ 보~기~";
+	setpcblock PCBLOCK_NPC,false;
+	end;
+}
+
+memohall,222,123,7	script	관람객#q04	10001,{
+	unittalk getnpcid(0, "관람객#q04"), "기념관 분위기 너무 좋다. 볼 것도 많고";
+	end;
+}
+
+memohall,208,128,3	script	기념관 안내#q12	904,{
+	mes "[기념관 안내]";
+	mes "어서 오십시오! 차원 수호 기념관에 오신 것을 환영합니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "과거, 차원의 균열을 통해 차원의 군단이 이 대륙으로 침공한 일이 있었습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "룬-미드가츠 왕국의 수도 프론테라를 중심으로 엄청난 공세로 밀려 들어 왔습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "이 상황판은 그 당시의 상황판을 본따 만든 것으로, 당시에 시시가가 프론테라를 향해 좁혀오는 차원의 군단의 공세를 보실 수 있습니다.";
+	next;
+	mes "[기념관 안내]";
+	mes "다행히 왕국의 방위군뿐만 아니라 곳곳에서 정의감과 용기만으로 떨쳐 일어난 개개인의 영웅들이 있어 그들을 물리칠 수 있었습니다.";
+	close;
+
+	end;
+}
+
+memohall,200,132,4	script	경비 병사#msa03	105,{
+	end;
+}
+
+memohall,211,132,4	script	경비 병사#msa04	105,{
+	end;
+}
+
+memohall,207,146,3	script	초보 모험가#q11	0,{
+	OnTouch:
+	unittalk getnpcid(0, "초보 모험가#q11"), "이건 봐도봐도 안 질리네.";	
+	end;
+
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 9;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 8;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 872;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 2;
+		setunitdata getnpcid(0), UNPC_SEX, 0;
+	end;
+}
+
+memohall,205,146,5	script	초보 모험가#q12	0,{
+	OnTouch:
+	unittalk getnpcid(0, "초보 모험가#q12"), "이제 알겠어. 저거 진짜 힘들었단 걸...";	
+	end;
+	OnInit:
+		setunitdata getnpcid(0), UNPC_HAIRSTYLE, 9;
+		setunitdata getnpcid(0), UNPC_HAIRCOLOR, 8;
+		setunitdata getnpcid(0), UNPC_HEADTOP, 0;
+		setunitdata getnpcid(0), UNPC_HEADMIDDLE, 872;
+		setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+		setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 2;
+		setunitdata getnpcid(0), UNPC_ROBE, 107;
+		setunitdata getnpcid(0), UNPC_SEX, 1;
+	end;
+}
+
+memohall,187,124,3	script	관람객#q07	711,{
+	unittalk getnpcid(0, "관람객#q07"), "여기 봤수? 아휴 나는 자다가도 그 날만 생각하면... 그때마다 이곳에 와서 마음을 달랜다우.";
+	end;
+}
+
+memohall,205,13,0	warp	#wp02	1,1,prt_fild08,148,356

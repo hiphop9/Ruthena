@@ -14,6 +14,7 @@
 #include <common/nullpo.hpp>
 #include <common/random.hpp>
 #include <common/showmsg.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "map.hpp"
@@ -85,11 +86,17 @@ int path_blownpos(int16 m,int16 x0,int16 y0,int16 dx,int16 dy,int count)
 		return -1;
 
 	if( count>25 ){ //Cap to prevent too much processing...?
-		ShowWarning("path_blownpos: count too many %d !\n",count);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("path_blownpos: 너무 많이 카운트 되었습니다. (%d번)\n",count);
+		else
+			ShowWarning("path_blownpos: count too many %d !\n",count);
 		count=25;
 	}
 	if( dx > 1 || dx < -1 || dy > 1 || dy < -1 ){
-		ShowError("path_blownpos: illegal dx=%d or dy=%d !\n",dx,dy);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("path_blownpos: dx=%d 또는 dy=%d은(는) 올바르지 않습니다.\n",dx,dy);
+		else
+			ShowError("path_blownpos: illegal dx=%d or dy=%d !\n",dx,dy);
 		dx=(dx>0)?1:((dx<0)?-1:0);
 		dy=(dy>0)?1:((dy<0)?-1:0);
 	}
@@ -212,7 +219,10 @@ static int heap_update_node(struct node_heap *heap, struct path_node *node)
 	int i;
 	ARR_FIND(0, BHEAP_LENGTH(*heap), i, BHEAP_DATA(*heap)[i] == node);
 	if (i == BHEAP_LENGTH(*heap)) {
-		ShowError("heap_update_node: node not found\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("heap_update_node: 노드를 찾을 수 없습니다.\n");
+		else
+			ShowError("heap_update_node: node not found\n");
 		return 1;
 	}
 	BHEAP_UPDATE(*heap, i, NODE_MINTOPCMP);

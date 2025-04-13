@@ -1,0 +1,19 @@
+
+Header:
+  Type: CONSTANT_DB
+  Version: 1
+
+Body:
+# temporary npc ID until npc.hpp update
+  - Name: 4_EP20_LASGAND
+    Value: 10536
+  - Name: 4_EP20_NYAR
+    Value: 10537
+  - Name: 4_EP20_DEVICE_BLUE
+    Value: 10538
+  - Name: 4_EP20_DEVICE_RED
+    Value: 10539
+  - Name: 4_EP20_DEVICE_BLACK
+    Value: 10540
+  - Name: REPU_EP20
+    Value: 4

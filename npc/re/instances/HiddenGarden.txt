@@ -16,11 +16,11 @@
 ba_maison,120,320,0	script	#herbs_chk	HIDDEN_WARP_NPC,3,3,{
 	end;
 OnTouch:
-	//You can start this quest without registering on alpha
-	if (isbegin_quest(12497) == 0) {	// story
+	//알파에 등록하지 않고도 이 퀘스트를 시작할 수 있습니다.
+	if (isbegin_quest(12497) == 0) {	// 이야기
 		cloakoffnpcself( "#he_admin1" );
 		specialeffect EF_WHITEBODY, AREA, "#he_admin1";
-		npctalk "Stand back from the perimeter of the security area. Outsiders are prohibited from accessing it.", "#he_admin1", bc_self;
+		npctalk "보안 구역 경계선에서 물러나세요. 외부인의 접근은 금지되어 있습니다.", "#he_admin1", bc_self;
 		end;
 	}
 	// daily

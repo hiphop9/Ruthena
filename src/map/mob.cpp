@@ -22,6 +22,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -167,7 +168,10 @@ TIMER_FUNC(mvptomb_delayspawn){
 
 	if (nd) {
 		if (nd->u.tomb.spawn_timer != tid) {
-			ShowError("mvptomb_delayspawn: Timer mismatch: %d != %d\n", tid, nd->u.tomb.spawn_timer);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mvptomb_delayspawn: 일치하지 않는 타이머: %d != %d\n", tid, nd->u.tomb.spawn_timer);
+			else
+				ShowError("mvptomb_delayspawn: Timer mismatch: %d != %d\n", tid, nd->u.tomb.spawn_timer);
 			return 0;
 		}
 		nd->u.tomb.spawn_timer = INVALID_TIMER;
@@ -504,11 +508,17 @@ int mob_get_random_id(int type, enum e_random_monster_flags flag, int lv)
 		flag = static_cast<e_random_monster_flags>(flag&~RMF_MOB_NOT_BOSS);
 	
 	if (!summon) {
-		ShowError("mob_get_random_id: Invalid type (%d) of random monster.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_get_random_id: 랜덤 몬스터의 타입(%d)이(가) 잘못되었습니다.\n", type);
+		else
+			ShowError("mob_get_random_id: Invalid type (%d) of random monster.\n", type);
 		return 0;
 	}
 	if (summon->list.empty()) {
-		ShowError("mob_get_random_id: Random monster type %d is not defined.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_get_random_id: 랜덤 몬스터 타입 %d은(는) 정의되지 않았습니다.\n", type);
+		else
+			ShowError("mob_get_random_id: Random monster type %d is not defined.\n", type);
 		return 0;
 	}
 
@@ -531,7 +541,10 @@ int mob_get_random_id(int type, enum e_random_monster_flags flag, int lv)
 	}
 
 	if (!mob_db.exists( summon->default_mob_id )) {
-		ShowError("mob_get_random_id: Default monster is not defined for type %d.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_get_random_id: 타입 %d에 대한 기본 몬스터가 정의되어있지 않습니다.\n", type);
+		else
+			ShowError("mob_get_random_id: Default monster is not defined for type %d.\n", type);
 		return 0;
 	}
 
@@ -787,7 +800,10 @@ static TIMER_FUNC(mob_spawn_guardian_sub){
 
 	if (bl->type != BL_MOB)
 	{
-		ShowError("mob_spawn_guardian_sub: Block error!\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_spawn_guardian_sub: 블록 에러!\n");
+		else
+			ShowError("mob_spawn_guardian_sub: Block error!\n");
 		return 0;
 	}
 
@@ -797,13 +813,19 @@ static TIMER_FUNC(mob_spawn_guardian_sub){
 
 	if (g == nullptr)
 	{	//Liberate castle, if the guild is not found this is an error! [Skotlex]
-		ShowError("mob_spawn_guardian_sub: Couldn't load guild %d!\n", (int)data);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_spawn_guardian_sub: 길드 %d을(를) 로드할 수 없습니다.\n", (int)data);
+		else
+			ShowError("mob_spawn_guardian_sub: Couldn't load guild %d!\n", (int)data);
 		if (md->mob_id == MOBID_EMPERIUM)
 		{	//Not sure this is the best way, but otherwise we'd be invoking this for ALL guardians spawned later on.
 			md->guardian_data->guild_id = 0;
 			if (md->guardian_data->castle->guild_id) //Free castle up.
 			{
-				ShowNotice("Clearing ownership of castle %d (%s)\n", md->guardian_data->castle->castle_id, md->guardian_data->castle->castle_name);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowNotice("성 %d(%s)의 소유권을 삭제합니다.\n", md->guardian_data->castle->castle_id, md->guardian_data->castle->castle_name);
+				else
+					ShowNotice("Clearing ownership of castle %d (%s)\n", md->guardian_data->castle->castle_id, md->guardian_data->castle->castle_name);
 				guild_castledatasave(md->guardian_data->castle->castle_id, CD_GUILD_ID, 0);
 			}
 		} else {
@@ -838,7 +860,10 @@ int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobnam
 
 	if(m<0)
 	{
-		ShowWarning("mob_spawn_guardian: Map [%s] not found.\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_spawn_guardian: 맵 [%s]을(를) 찾을 수 없습니다.\n", mapname);
+		else
+			ShowWarning("mob_spawn_guardian: Map [%s] not found.\n", mapname);
 		return 0;
 	}
 
@@ -857,13 +882,19 @@ int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobnam
 	}
 	else if( guardian < 0 || guardian >= MAX_GUARDIANS )
 	{
-		ShowError("mob_spawn_guardian: Invalid guardian index %d for guardian %d (castle map %s)\n", guardian, mob_id, mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_spawn_guardian: 가디언(%d)에 대한 가디언 인덱스(%d)가 잘못되었습니다. (성 맵: %s)\n", mob_id, guardian, mapname);
+		else
+			ShowError("mob_spawn_guardian: Invalid guardian index %d for guardian %d (castle map %s)\n", guardian, mob_id, mapname);
 		return 0;
 	}
 
 	if((x<=0 || y<=0) && !map_search_freecell(nullptr, m, &x, &y, -1,-1, 1))
 	{
-		ShowWarning("mob_spawn_guardian: Couldn't locate a spawn cell for guardian class %d (index %d) at castle map %s\n",mob_id, guardian, mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_spawn_guardian: 성 맵 %s에서 가디언 클래스 %d (인덱스 %d)에 대한 스폰 셀을 찾을 수 없습니다.\n", mapname,mob_id, guardian);
+		else
+			ShowWarning("mob_spawn_guardian: Couldn't locate a spawn cell for guardian class %d (index %d) at castle map %s\n",mob_id, guardian, mapname);
 		return 0;
 	}
 	data.x = x;
@@ -876,11 +907,18 @@ int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobnam
 	std::shared_ptr<guild_castle> gc = castle_db.mapname2gc(mapname);
 	if (gc == nullptr)
 	{
-		ShowError("mob_spawn_guardian: No castle set at map %s\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_spawn_guardian: %s 맵에 설정된 성이 없습니다.\n", mapname);
+		else
+			ShowError("mob_spawn_guardian: No castle set at map %s\n", mapname);
 		return 0;
 	}
-	if (!gc->guild_id)
-		ShowWarning("mob_spawn_guardian: Spawning guardian %d on a castle with no guild (castle map %s)\n", mob_id, mapname);
+	if (!gc->guild_id) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_spawn_guardian: 소유 길드가 없는 성에 가디언 %d을(를) 소환합니다.(성 맵: %s)\n", mob_id, mapname);
+		else
+			ShowWarning("mob_spawn_guardian: Spawning guardian %d on a castle with no guild (castle map %s)\n", mob_id, mapname);
+	}
 	else
 		g = guild_search(gc->guild_id);
 
@@ -890,7 +928,10 @@ int mob_spawn_guardian(const char* mapname, int16 x, int16 y, const char* mobnam
 		if (md2 && md2->bl.type == BL_MOB &&
 			md2->guardian_data && md2->guardian_data->number == guardian)
 		{
-			ShowError("mob_spawn_guardian: Attempted to spawn guardian in position %d which already has a guardian (castle map %s)\n", guardian, mapname);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_spawn_guardian: 소환 하려는 위치에 이미 가디언 %d이(가) 있습니다. (성 맵: %s)\n", guardian, mapname);
+			else
+				ShowError("mob_spawn_guardian: Attempted to spawn guardian in position %d which already has a guardian (castle map %s)\n", guardian, mapname);
 			return 0;
 		}
 	}
@@ -939,7 +980,10 @@ int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int
 
 	if( (m = map_mapname2mapid(mapname)) < 0 )
 	{
-		ShowWarning("mob_spawn_bg: Map [%s] not found.\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_spawn_bg: 맵 [%s]을(를) 찾을 수 없습니다.\n", mapname);
+		else	
+			ShowWarning("mob_spawn_bg: Map [%s] not found.\n", mapname);
 		return 0;
 	}
 
@@ -955,7 +999,10 @@ int mob_spawn_bg(const char* mapname, int16 x, int16 y, const char* mobname, int
 	data.id = mob_id;
 	if( (x <= 0 || y <= 0) && !map_search_freecell(nullptr, m, &x, &y, -1,-1, 1) )
 	{
-		ShowWarning("mob_spawn_bg: Couldn't locate a spawn cell for guardian class %d (bg_id %d) at map %s\n",mob_id, bg_id, mapname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_spawn_bg: %s 맵에서 가디언 클래스 %d (bg_id %d)의 스폰 셀을 찾을 수 없습니다.\n", mapname,mob_id, bg_id);
+		else
+			ShowWarning("mob_spawn_bg: Couldn't locate a spawn cell for guardian class %d (bg_id %d) at map %s\n",mob_id, bg_id, mapname);
 		return 0;
 	}
 
@@ -1041,7 +1088,10 @@ TIMER_FUNC(mob_delayspawn){
 	{
 		if( md->spawn_timer != tid )
 		{
-			ShowError("mob_delayspawn: Timer mismatch: %d != %d\n", tid, md->spawn_timer);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_delayspawn: 일치하지 않는 타이머: %d != %d\n", tid, md->spawn_timer);
+			else
+				ShowError("mob_delayspawn: Timer mismatch: %d != %d\n", tid, md->spawn_timer);
 			return 0;
 		}
 		md->spawn_timer = INVALID_TIMER;
@@ -1673,7 +1723,10 @@ int mob_randomwalk(struct mob_data *md,t_tick tick)
 		if(battle_config.mob_stuck_warning) {
 			md->move_fail_count++;
 			if(md->move_fail_count>1000){
-				ShowWarning("MOB can't move. random spawn %d, class = %d, at %s (%d,%d)\n",md->bl.id,md->mob_id,map_getmapdata(md->bl.m)->name, md->bl.x, md->bl.y);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("몬스터가 움직일 수 없습니다. 랜덤 스폰= %d, 클래스 = %d, %s (%d,%d)\n",md->bl.id,md->mob_id,map_getmapdata(md->bl.m)->name, md->bl.x, md->bl.y);
+				else
+					ShowWarning("MOB can't move. random spawn %d, class = %d, at %s (%d,%d)\n",md->bl.id,md->mob_id,map_getmapdata(md->bl.m)->name, md->bl.x, md->bl.y);
 				md->move_fail_count=0;
 				mob_spawn(md);
 			}
@@ -2326,7 +2379,10 @@ TIMER_FUNC(mob_timer_delete){
 	{
 		if( md->deletetimer != tid )
 		{
-			ShowError("mob_timer_delete: Timer mismatch: %d != %d\n", tid, md->deletetimer);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_timer_delete: 일치하지 않는 타이머: %d != %d\n", tid, md->deletetimer);
+			else		
+				ShowError("mob_timer_delete: Timer mismatch: %d != %d\n", tid, md->deletetimer);
 			return 0;
 		}
 		//for Alchemist CANNIBALIZE [Lupus]
@@ -2565,6 +2621,13 @@ int mob_getdroprate(struct block_list *src, std::shared_ptr<s_mob_db> mob, int b
 		if (src->type == BL_PC) { // Player specific drop rate adjustments
 			map_session_data *sd = (map_session_data*)src;
 			int drop_rate_bonus = 100;
+			
+			if (sd->sc.getSCE(SC_PREMIUM_ITEMBOOST))
+				drop_rate += sd->sc.getSCE(SC_PREMIUM_ITEMBOOST)->val1;
+			if (sd->sc.getSCE(SC_SUB_ITEMBOOST))
+				drop_rate += sd->sc.getSCE(SC_SUB_ITEMBOOST)->val1;
+			if (sd->sc.getSCE(SC_KAFRA_ITEMBOOST))
+				drop_rate += sd->sc.getSCE(SC_KAFRA_ITEMBOOST)->val1;
 
 			// In PK mode players get an additional drop chance bonus of 25% if there is a 20 level difference
 			if( battle_config.pk_mode && (int)(mob->lv - sd->status.base_level) >= 20 ){
@@ -2889,7 +2952,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		}
 	}
 
-	if( !(type&1) && !map_getmapflag(m, MF_NOMOBLOOT) && !md->state.rebirth && (
+	if( !(type&1) && !map_getmapflag(m, MF_NOMOBLOOT) && !(md->get_bosstype() != BOSSTYPE_MVP && map_getmapflag(m, MF_NOLOOTNORMALMOB)) && !md->state.rebirth && (
 		!md->special_state.ai || //Non special mob
 		battle_config.alchemist_summon_reward == 2 || //All summoned give drops
 		(md->special_state.ai==AI_SPHERE && battle_config.alchemist_summon_reward == 1) //Marine Sphere Drops items.
@@ -3334,7 +3397,10 @@ int mob_guardian_guildchange(struct mob_data *md)
 	auto g = guild_search(md->guardian_data->castle->guild_id);
 	if (g == nullptr)
 	{	//Properly remove guardian info from Castle data.
-		ShowError("mob_guardian_guildchange: New Guild (id %d) does not exists!\n", md->guardian_data->guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_guardian_guildchange: 새로운 길드(id %d)가 존재하지 않습니다.\n", md->guardian_data->guild_id);
+		else
+			ShowError("mob_guardian_guildchange: New Guild (id %d) does not exists!\n", md->guardian_data->guild_id);
 		if (md->guardian_data->number >= 0 && md->guardian_data->number < MAX_GUARDIANS)
 			guild_castledatasave(md->guardian_data->castle->castle_id, CD_ENABLED_GUARDIAN00 + md->guardian_data->number, 0);
 		unit_free(&md->bl,CLR_OUTSIGHT);
@@ -4431,14 +4497,20 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 				return false;
 
 			if (index >= max) {
-				this->invalidWarning(dropit["Index"], "Invalid monster %s index %hu. Must be between 0~%hu, skipping.\n", nodeName.c_str(), index, max - 1);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(dropit["Index"], "%s은(는) 잘못된 몬스터입니다. (index: %hu). 범위는 0~%hu사이어야 합니다.\n", nodeName.c_str(), index, max - 1);
+				else
+					this->invalidWarning(dropit["Index"], "Invalid monster %s index %hu. Must be between 0~%hu, skipping.\n", nodeName.c_str(), index, max - 1);
 				continue;
 			}
 		} else {
 			index = i++;
 
 			if (index >= max) {
-				this->invalidWarning(dropit, "Maximum of %d monster %s met, skipping.\n", max, nodeName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(dropit, "최대 %d개의 몬스터 %s이(가) 중복됩니다. 건너뜁니다.\n", max, nodeName.c_str());
+				else
+					this->invalidWarning(dropit, "Maximum of %d monster %s met, skipping.\n", max, nodeName.c_str());
 				continue;
 			}
 		}
@@ -4451,7 +4523,10 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(dropit["Item"], "Monster %s item %s does not exist, skipping.\n", nodeName.c_str(), item_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(dropit["Item"], "%s 몬스터의 아이템 %s은(는) 존재하지 않습니다. 건너뜁니다.\n", nodeName.c_str(), item_name.c_str());
+			else
+				this->invalidWarning(dropit["Item"], "Monster %s item %s does not exist, skipping.\n", nodeName.c_str(), item_name.c_str());
 			continue;
 		}
 
@@ -4475,8 +4550,12 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 			if (!this->asString(dropit, "RandomOptionGroup", group_name))
 				return false;
 
-			if (!random_option_group.option_get_id(group_name.c_str(), group))
-				this->invalidWarning(dropit["RandomOptionGroup"], "Unknown random option group %s for monster %s, defaulting to no group.\n", group_name.c_str(), nodeName.c_str());
+			if (!random_option_group.option_get_id(group_name.c_str(), group)) {
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(dropit["RandomOptionGroup"], "그룹 %s은(는) %s 몬스터에 대한 알 수 없는 랜덤 옵션 그룹입니다. 기본값인 그룹없음으로 설정합니다.\n", group_name.c_str(), nodeName.c_str());
+				else
+					this->invalidWarning(dropit["RandomOptionGroup"], "Unknown random option group %s for monster %s, defaulting to no group.\n", group_name.c_str(), nodeName.c_str());
+			}
 		}
 
 		drops[index].nameid = item->nameid;
@@ -4523,7 +4602,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (!((mob_id > MIN_MOB_DB && mob_id < MAX_MOB_DB) || (mob_id > MIN_MOB_DB2 && mob_id < MAX_MOB_DB2))) {
-		this->invalidWarning(node["Id"], "Invalid monster ID %d, must be in range %d-%d or %d-%d.\n", mob_id, MIN_MOB_DB, MAX_MOB_DB, MIN_MOB_DB2, MAX_MOB_DB2);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning(node["Id"], "%d은(는) 잘못된 몬스터 ID입니다. 가능 범위: %d-%d 또는 %d-%d.\n", mob_id, MIN_MOB_DB, MAX_MOB_DB, MIN_MOB_DB2, MAX_MOB_DB2);
+		else
+			this->invalidWarning(node["Id"], "Invalid monster ID %d, must be in range %d-%d or %d-%d.\n", mob_id, MIN_MOB_DB, MAX_MOB_DB, MIN_MOB_DB2, MAX_MOB_DB2);
 		return false;
 	}
 
@@ -4546,7 +4628,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\"은(는) 최대 글자 수 %d을(를) 초과합니다. 건너뜀...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -4560,7 +4645,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Name"], "Name \"%s\"은(는) 최대 글자 수 %d을(를) 초과합니다. 건너뜀...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -4574,7 +4662,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["JapaneseName"], "JapaneseName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["JapaneseName"], "JapaneseName \"%s\"은(는) 최대 글자 수 %d을(를) 초과합니다. 건너뜀...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["JapaneseName"], "JapaneseName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -4666,7 +4757,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["Defense"], "Invalid monster defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Defense"], "%d은(는) 잘못된 몬스터 방어력입니다. 건너뜀...\n", def);
+			else
+				this->invalidWarning(node["Defense"], "Invalid monster defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -4680,7 +4774,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["MagicDefense"], "Invalid monster magic defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MagicDefense"], "%d은(는) 잘못된 몬스터 마법 방어력입니다. 건너뜀...\n", def);
+			else
+				this->invalidWarning(node["MagicDefense"], "Invalid monster magic defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -4796,12 +4893,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(size_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Size"], "Unknown monster size %s, defaulting to Small.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Size"], "%s은(는) 알 수 없는 몬스터 크기입니다. 기본값인 Small로 설정합니다.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Unknown monster size %s, defaulting to Small.\n", size.c_str());
 			constant = SZ_SMALL;
 		}
 
 		if (constant < SZ_SMALL || constant > SZ_BIG) {
-			this->invalidWarning(node["Size"], "Invalid monster size %s, defaulting to Small.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Size"], "%s은(는) 잘못된 몬스터 크기입니다. 기본값인 Small로 설정합니다.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Invalid monster size %s, defaulting to Small.\n", size.c_str());
 			constant = SZ_SMALL;
 		}
 
@@ -4818,12 +4921,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(race_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Race"], "Unknown monster race %s, defaulting to Formless.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Race"], "%s은(는) 알 수 없는 몬스터 종족입니다. 기본값인 Formless로 설정합니다.\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Unknown monster race %s, defaulting to Formless.\n", race.c_str());
 			constant = RC_FORMLESS;
 		}
 
 		if (!CHK_RACE(constant)) {
-			this->invalidWarning(node["Race"], "Invalid monster race %s, defaulting to Formless.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Race"], "%s은(는) 잘못된 몬스터 종족입니다. 기본값인 Formless로 설정합니다.\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Invalid monster race %s, defaulting to Formless.\n", race.c_str());
 			constant = RC_FORMLESS;
 		}
 
@@ -4840,12 +4949,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(raceName_constant.c_str(), &constant)) {
-				this->invalidWarning(raceNode[raceit.key()], "Unknown monster race group %s, skipping.\n", raceName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(raceNode[raceit.key()], "%s은(는) 알 수 없는 몬스터 종족 그룹입니다. 건너뜁니다.\n", raceName.c_str());
+				else
+					this->invalidWarning(raceNode[raceit.key()], "Unknown monster race group %s, skipping.\n", raceName.c_str());
 				continue;
 			}
 
 			if (!CHK_RACE2(constant)) {
-				this->invalidWarning(raceNode[raceit.key()], "Invalid monster race group %s, skipping.\n", raceName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(raceNode[raceit.key()], "%s은(는) 잘못된 몬스터 종족 그룹입니다. 건너뜁니다.\n", raceName.c_str());
+				else
+					this->invalidWarning(raceNode[raceit.key()], "Invalid monster race group %s, skipping.\n", raceName.c_str());
 				continue;
 			}
 
@@ -4871,12 +4986,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(ele_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Element"], "Unknown monster element %s, defaulting to Neutral.\n", ele.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Element"], "%s은(는) 알 수 없는 몬스터 Element입니다. 기본값인 Neutral로 설정합니다.\n", ele.c_str());
+			else
+				this->invalidWarning(node["Element"], "Unknown monster element %s, defaulting to Neutral.\n", ele.c_str());
 			constant = ELE_NEUTRAL;
 		}
 
 		if (!CHK_ELEMENT(constant)) {
-			this->invalidWarning(node["Element"], "Invalid monster element %s, defaulting to Neutral.\n", ele.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Element"], "%s은(는) 잘못된 몬스터 Element입니다. 기본값인 Neutral로 설정합니다.\n", ele.c_str());
+			else
+				this->invalidWarning(node["Element"], "Invalid monster element %s, defaulting to Neutral.\n", ele.c_str());
 			constant = ELE_NEUTRAL;
 		}
 
@@ -4890,7 +5011,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (!CHK_ELEMENT_LEVEL(level)) {
-			this->invalidWarning(node["ElementLevel"], "Invalid monster element level %hu, defaulting to 1.\n", level);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["ElementLevel"], "%hu은(는) 잘못된 몬스터 Element 레벨입니다. 기본값인 1로 설정합니다.\n", level);
+			else
+				this->invalidWarning(node["ElementLevel"], "Invalid monster element level %hu, defaulting to 1.\n", level);
 			level = 1;
 		}
 
@@ -4904,7 +5028,10 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (speed < MIN_WALK_SPEED || speed > MAX_WALK_SPEED) {
-			this->invalidWarning(node["WalkSpeed"], "Invalid monster walk speed %hu, capping...\n", speed);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["WalkSpeed"], "%hu은(는) 잘못된 몬스터 걷기 속도입니다. 건너뜀...\n", speed);
+			else
+				this->invalidWarning(node["WalkSpeed"], "Invalid monster walk speed %hu, capping...\n", speed);
 			speed = cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
 		}
 
@@ -4972,12 +5099,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(ai_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Ai"], "Unknown monster AI %s, defaulting to 06.\n", ai.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Ai"], "%s은(는) 알 수 없는 몬스터 AI입니다. 기본값인 06으로 설정합니다.\n", ai.c_str());
+			else
+				this->invalidWarning(node["Ai"], "Unknown monster AI %s, defaulting to 06.\n", ai.c_str());
 			constant = MONSTER_TYPE_06;
 		}
 
 		if (constant < MD_NONE || constant > MD_MASK) {
-			this->invalidWarning(node["Ai"], "Invalid monster AI %s, defaulting to 06.\n", ai.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Ai"], "%s은(는) 잘못된 몬스터 AI입니다. 기본값인 06으로 설정합니다.\n", ai.c_str());
+			else
+				this->invalidWarning(node["Ai"], "Invalid monster AI %s, defaulting to 06.\n", ai.c_str());
 			constant = MONSTER_TYPE_06;
 		}
 
@@ -4994,12 +5127,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(class_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Class"], "Unknown monster class %s, defaulting to Normal.\n", class_.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Class"], "%s은(는) 알 수 없는 몬스터 클래스입니다. 기본값인 Normal로 설정합니다.\n", class_.c_str());
+			else
+				this->invalidWarning(node["Class"], "Unknown monster class %s, defaulting to Normal.\n", class_.c_str());
 			constant = CLASS_NORMAL;
 		}
 
 		if (constant < CLASS_NORMAL || constant > CLASS_EVENT) {
-			this->invalidWarning(node["Class"], "Invalid monster class %s, defaulting to Normal.\n", class_.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Class"], "%s은(는) 잘못된 몬스터 클래스입니다. 기본값인 Normal로 설정합니다.\n", class_.c_str());
+			else
+				this->invalidWarning(node["Class"], "Invalid monster class %s, defaulting to Normal.\n", class_.c_str());
 			constant = CLASS_NORMAL;
 		}
 
@@ -5016,12 +5155,18 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(modeName_constant.c_str(), &constant)) {
-				this->invalidWarning(modeNode[modeit.key()], "Unknown monster mode %s, skipping.\n", modeName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(modeNode[modeit.key()], "%s은(는) 알 수 없는 몬스터 모드입니다. 건너뜀.\n", modeName.c_str());
+				else
+					this->invalidWarning(modeNode[modeit.key()], "Unknown monster mode %s, skipping.\n", modeName.c_str());
 				continue;
 			}
 
 			if (constant < MD_NONE || constant > MD_SKILLIMMUNE) {
-				this->invalidWarning(modeNode[modeit.key()], "Invalid monster mode %s, skipping.\n", modeName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(modeNode[modeit.key()], "%s은(는) 잘못된 몬스터 모드입니다. 건너뜀.\n", modeName.c_str());
+				else
+					this->invalidWarning(modeNode[modeit.key()], "Invalid monster mode %s, skipping.\n", modeName.c_str());
 				continue;
 			}
 
@@ -5354,12 +5499,18 @@ static int mob_read_sqldb(void)
 		uint32 total_columns = Sql_NumColumns(mmysql_handle);
 		uint64 total_rows = Sql_NumRows(mmysql_handle), rows = 0, count = 0;
 
-		ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", total_rows, mob_db_name[fi]);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%" PRIdPTR CL_RESET "'개를 불러오고 있습니다.\n", mob_db_name[fi], total_rows);
+		else
+			ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", total_rows, mob_db_name[fi]);
 
 		// process rows one by one
 		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) {
 #ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus("Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, mob_db_name[fi]);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus("'" CL_WHITE "%s" CL_RESET "' 테이블에서 [%" PRIu64 "/%" PRIu64 "] 로딩중.." CL_CLL "\r", mob_db_name[fi],++rows, total_rows);
+			else
+				ShowStatus("Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, mob_db_name[fi]);
 #endif
 			std::vector<std::string> data = {};
 
@@ -5382,7 +5533,10 @@ static int mob_read_sqldb(void)
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_db_name[fi]);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%" PRIu64 CL_RESET "'개의 항목을 읽어왔습니다.\n", mob_db_name[fi], count);
+		else
+			ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_db_name[fi]);
 	}
 
 	mob_db.loadingFinished();
@@ -5408,7 +5562,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 	if (mob == nullptr) {
-		this->invalidWarning(node["Mob"], "Unknown mob %s.\n", mob_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Mob"], "%s은(는) 알수 없는 몬스터입니다.\n", mob_name.c_str());
+		else
+			this->invalidWarning(node["Mob"], "Unknown mob %s.\n", mob_name.c_str());
 		return 0;
 	}
 
@@ -5422,14 +5579,20 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		if (script_get_constant(sprite.c_str(), &constant)) {
 			if (npcdb_checkid(constant) == 0 && pcdb_checkid(constant) == 0) {
-				this->invalidWarning(node["Sprite"], "Unknown sprite constant %s.\n", sprite.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["Sprite"], "%s은(는) 알수 없는 스프라이트 상수입니다.\n", sprite.c_str());
+				else
+					this->invalidWarning(node["Sprite"], "Unknown sprite constant %s.\n", sprite.c_str());
 				return 0;
 			}
 		} else {
 			std::shared_ptr<s_mob_db> sprite_mob = mobdb_search_aegisname(sprite.c_str());
 
 			if (sprite_mob == nullptr) {
-				this->invalidWarning(node["Sprite"], "Unknown mob sprite constant %s.\n", sprite.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["Sprite"], "%s은(는) 알수 없는 몬스터 스프라이트 상수입니다.\n", sprite.c_str());
+				else
+					this->invalidWarning(node["Sprite"], "Unknown mob sprite constant %s.\n", sprite.c_str());
 				return 0;
 			}
 
@@ -5438,13 +5601,19 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		mob->vd.class_ = (unsigned short)constant;
 	} else {
-		this->invalidWarning(node["Sprite"], "Sprite is missing.\n");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Sprite"], "스프라이트가 빠져있습니다.\n");
+		else
+			this->invalidWarning(node["Sprite"], "Sprite is missing.\n");
 		return 0;
 	}
 
 	if (this->nodeExists(node, "Sex")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["Sex"], "Sex is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Sex"], "성별은 직업 스프라이트에만 적용됩니다.\n");
+			else
+				this->invalidWarning(node["Sex"], "Sex is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5458,12 +5627,18 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(sex_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Sex"], "Unknown sex constant %s.\n", sex.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Sex"], "%s은(는) 알수 없는 성별 상수입니다.\n", sex.c_str());
+			else
+				this->invalidWarning(node["Sex"], "Unknown sex constant %s.\n", sex.c_str());
 			return 0;
 		}
 
 		if (constant < SEX_FEMALE || constant > SEX_MALE) {
-			this->invalidWarning(node["Sex"], "Sex %s is not valid.\n", sex.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Sex"], "%s은(는) 유효하지 않은 성별입니다.\n", sex.c_str());
+			else
+				this->invalidWarning(node["Sex"], "Sex %s is not valid.\n", sex.c_str());
 			return 0;
 		}
 
@@ -5472,7 +5647,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "HairStyle")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["HairStyle"], "HairStyle is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HairStyle"], "헤어스타일은 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["HairStyle"], "HairStyle is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5482,7 +5660,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (hair_style < MIN_HAIR_STYLE || hair_style > MAX_HAIR_STYLE) {
-			this->invalidWarning(node["HairStyle"], "HairStyle %d is out of range %d~%d. Setting to MIN_HAIR_STYLE.\n", hair_style, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HairStyle"], "헤어스타일 %d은(는) %d~%d 범위를 벗어났습니다. MIN_HAIR_STYLE으(로) 설정함.\n", hair_style, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
+			else
+				this->invalidWarning(node["HairStyle"], "HairStyle %d is out of range %d~%d. Setting to MIN_HAIR_STYLE.\n", hair_style, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
 			hair_style = MIN_HAIR_STYLE;
 		}
 
@@ -5491,7 +5672,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "HairColor")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["HairColor"], "HairColor is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HairColor"], "머리색상(헤어컬러)은 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["HairColor"], "HairColor is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5501,7 +5685,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (hair_color < MIN_HAIR_COLOR || hair_color > MAX_HAIR_COLOR) {
-			this->invalidWarning(node["HairColor"], "HairColor %d is out of range %d~%d. Setting to MIN_HAIR_COLOR.\n", hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HairColor"], "머리색(헤어컬러) %d은(는) %d~%d 범위를 벗어났습니다. MIN_HAIR_COLOR로 설정함.\n", hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
+			else
+				this->invalidWarning(node["HairColor"], "HairColor %d is out of range %d~%d. Setting to MIN_HAIR_COLOR.\n", hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
 			hair_color = MIN_HAIR_COLOR;
 		}
 
@@ -5510,7 +5697,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "ClothColor")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["ClothColor"], "ClothColor is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["ClothColor"], "옷색상(ClothColor)은 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["ClothColor"], "ClothColor is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5520,7 +5710,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (cloth_color < MIN_CLOTH_COLOR || cloth_color > MAX_CLOTH_COLOR) {
-			this->invalidWarning(node["ClothColor"], "ClothColor %d is out of range %d~%d. Setting to MIN_CLOTH_CLOR.\n", cloth_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["ClothColor"], "옷색상(ClothColor) %d은(는) %d~%d 범위를 벗어났습니다. MIN_CLOTH_CLOR으(로) 설정.\n", cloth_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
+			else
+				this->invalidWarning(node["ClothColor"], "ClothColor %d is out of range %d~%d. Setting to MIN_CLOTH_CLOR.\n", cloth_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
 			cloth_color = MIN_CLOTH_COLOR;
 		}
 
@@ -5529,7 +5722,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "Weapon")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["Weapon"], "Weapon is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Weapon"], "무기는 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["Weapon"], "Weapon is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5541,7 +5737,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( weapon.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["Weapon"], "Weapon %s is not a valid item.\n", weapon.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Weapon"], "%s은(는) 유효한 무기 아이템이 아닙니다.\n", weapon.c_str());
+			else
+				this->invalidWarning(node["Weapon"], "Weapon %s is not a valid item.\n", weapon.c_str());
 			return 0;
 		}
 
@@ -5550,7 +5749,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "Shield")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["Shield"], "Shield is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Shield"], "방패는 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["Shield"], "Shield is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5562,7 +5764,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( shield.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["Shield"], "Shield %s is not a valid item.\n", shield.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Shield"], "%s은(는) 유효한 방패 아이템이 아닙니다.\n", shield.c_str());
+			else
+				this->invalidWarning(node["Shield"], "Shield %s is not a valid item.\n", shield.c_str());
 			return 0;
 		}
 
@@ -5571,7 +5776,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "HeadTop")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["HeadTop"], "HeadTop is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadTop"], "상단 투구는 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["HeadTop"], "HeadTop is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5583,7 +5791,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( head.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["HeadTop"], "HeadTop %s is not a valid item.\n", head.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadTop"], "%s은(는) 유효한 상단 투구 아이템이 아닙니다.\n", head.c_str());
+			else
+				this->invalidWarning(node["HeadTop"], "HeadTop %s is not a valid item.\n", head.c_str());
 			return 0;
 		}
 
@@ -5592,7 +5803,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "HeadMid")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["HeadMid"], "HeadMid is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadMid"], "중단 투구는 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["HeadMid"], "HeadMid is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5604,7 +5818,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( head.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["HeadMid"], "HeadMid %s is not a valid item.\n", head.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadMid"], "%s은(는) 유효한 중단 투구 아이템이 아닙니다.\n", head.c_str());
+			else
+				this->invalidWarning(node["HeadMid"], "HeadMid %s is not a valid item.\n", head.c_str());
 			return 0;
 		}
 
@@ -5613,7 +5830,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "HeadLow")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["HeadLow"], "HeadLow is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadLow"], "하단 투구는 직업 스프라이트에만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["HeadLow"], "HeadLow is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5625,7 +5845,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( head.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["HeadLow"], "HeadLow %s is not a valid item.\n", head.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["HeadLow"], "%s은(는) 유효한 하단 투구 아이템이 아닙니다.\n", head.c_str());
+			else
+				this->invalidWarning(node["HeadLow"], "HeadLow %s is not a valid item.\n", head.c_str());
 			return 0;
 		}
 
@@ -5634,7 +5857,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 	if (this->nodeExists(node, "Robe")) {
 		if (pcdb_checkid(mob->vd.class_) == 0) {
-			this->invalidWarning(node["Robe"], "Robe is only applicable to Job sprites.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Robe"], "로브는 Job 스프라이트에만 적용됩니다.\n");
+			else
+				this->invalidWarning(node["Robe"], "Robe is only applicable to Job sprites.\n");
 			return 0;
 		}
 
@@ -5646,7 +5872,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname(robe.c_str());
 
 		if (item == nullptr) {
-			this->invalidWarning(node["Robe"], "Robe %s is not a valid item.\n", robe.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Robe"], "로브 %s은(는) 유효하지 않은 아이템입니다.\n", robe.c_str());
+			else
+				this->invalidWarning(node["Robe"], "Robe %s is not a valid item.\n", robe.c_str());
 			return 0;
 		}
 
@@ -5657,7 +5886,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<s_pet_db> pet_db_ptr = pet_db.find(mob->id);
 
 		if (pet_db_ptr == nullptr) {
-			this->invalidWarning(node["PetEquip"], "PetEquip is only applicable to defined pets.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["PetEquip"], "펫 장비는 정의된 펫에게만 적용가능합니다.\n");
+			else
+				this->invalidWarning(node["PetEquip"], "PetEquip is only applicable to defined pets.\n");
 			return 0;
 		}
 
@@ -5669,7 +5901,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( equipment.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["PetEquip"], "PetEquip %s is not a valid item.\n", equipment.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["PetEquip"], "%s은(는) 유효한 펫 장비 아이템이 아닙니다.\n", equipment.c_str());
+			else
+				this->invalidWarning(node["PetEquip"], "PetEquip %s is not a valid item.\n", equipment.c_str());
 			return 0;
 		}
 
@@ -5686,7 +5921,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(option_constant.c_str(), &constant)) {
-				this->invalidWarning(optionNode, "Unknown option constant %s, skipping.\n", option.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optionNode, "%s은(는) 알수 없는 옵션 상수입니다. 통과됨.\n", option.c_str());
+				else
+					this->invalidWarning(optionNode, "Unknown option constant %s, skipping.\n", option.c_str());
 				continue;
 			}
 
@@ -5697,7 +5935,10 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 #ifdef NEW_CARTS
 			if (constant & OPTION_CART) {
-				this->invalidWarning(optionNode, "OPTION_CART was replace by SC_PUSH_CART, skipping.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optionNode, "OPTION_CART이(가) SC_PUSH_CART으(로) 변경되었습니다. 통과됨.\n");
+				else
+					this->invalidWarning(optionNode, "OPTION_CART was replace by SC_PUSH_CART, skipping.\n");
 				continue;
 			}
 #endif
@@ -5736,7 +5977,10 @@ uint64 MobSummonDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	int64 constant;
 
 	if (!script_get_constant(group_name_constant.c_str(), &constant) || constant < MOBG_BRANCH_OF_DEAD_TREE || constant >= MOBG_MAX) {
-		this->invalidWarning(node["Group"], "Invalid monster group %s.\n", group_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Group"], "%s은(는) 잘못된 몬스터 그룹입니다.\n", group_name.c_str());
+		else
+			this->invalidWarning(node["Group"], "Invalid monster group %s.\n", group_name.c_str());
 		return 0;
 	}
 
@@ -5762,7 +6006,10 @@ uint64 MobSummonDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 		if (mob == nullptr) {
-			this->invalidWarning(node["Default"], "Unknown mob %s.\n", mob_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Default"], "%s은(는) 알 수 없는 몬스터입니다.\n", mob_name.c_str());
+			else
+				this->invalidWarning(node["Default"], "Unknown mob %s.\n", mob_name.c_str());
 			return 0;
 		}
 
@@ -5785,7 +6032,10 @@ uint64 MobSummonDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 			if (mob == nullptr) {
-				this->invalidWarning(mobit["Mob"], "Unknown mob %s.\n", mob_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(mobit["Mob"], "%s은(는) 알 수 없는 몬스터입니다.\n", mob_name.c_str());
+				else
+					this->invalidWarning(mobit["Mob"], "Unknown mob %s.\n", mob_name.c_str());
 				continue;
 			}
 
@@ -5797,8 +6047,12 @@ uint64 MobSummonDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			uint16 mob_id = mob->id;
 
 			if (rate == 0) {
-				if (summon->list.erase(mob_id) == 0)
-					this->invalidWarning(mobit["Rate"], "Failed to remove %s, the monster doesn't exist in group %s.\n", mob_name.c_str(), group_name.c_str());
+				if (summon->list.erase(mob_id) == 0) {
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(mobit["Rate"], "%s 그룹에 %s 몬스터가 존재하지 않아 제거에 실패했습니다.\n", group_name.c_str(), mob_name.c_str());
+					else
+						this->invalidWarning(mobit["Rate"], "Failed to remove %s, the monster doesn't exist in group %s.\n", mob_name.c_str(), group_name.c_str());
+				}
 				continue;
 			}
 
@@ -5865,7 +6119,10 @@ uint64 MobChatDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (msg.length() > (CHAT_SIZE_MAX-1)) {
-			this->invalidWarning(node["Dialog"], "Message too long!\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Dialog"], "메시지가 너무 깁니다.!\n");
+			else
+				this->invalidWarning(node["Dialog"], "Message too long!\n");
 			return 0;
 		}
 		chat->msg = msg;
@@ -5968,7 +6225,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	if (mob_id > 0 && mob == nullptr)
 	{
 		if (mob_id != last_mob_id) {
-			ShowError("mob_parse_row_mobskilldb: Non existant Mob id %d\n", mob_id);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_parse_row_mobskilldb: 몬스터ID %d은(는) 존재하지 않습니다.\n", mob_id);
+			else	
+				ShowError("mob_parse_row_mobskilldb: Non existant Mob id %d\n", mob_id);
 			last_mob_id = mob_id;
 		}
 		return false;
@@ -5984,13 +6244,19 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 
 	if( strcmp(str[1],"clear") == 0 && skill->mob_id != 0 ) {
 		mob_skill_db.erase(skill->mob_id);
-		ShowInfo("Cleared skill for mob id '%d'\n", mob_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("몬스터ID '%d'에 대한 스킬을 삭제했습니다.\n", mob_id);
+		else
+			ShowInfo("Cleared skill for mob id '%d'\n", mob_id);
 		return true;
 	}
 
 	if (skill->skill.size() >= MAX_MOBSKILL) {
 		if (mob_id != last_mob_id) {
-			ShowError("mob_parse_row_mobskilldb: Too many skills for monster %d[%s]\n", mob_id, mob->sprite.c_str());
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_parse_row_mobskilldb: 몬스터 %d[%s]에 대한 스킬이 너무 많습니다.\n", mob_id, mob->sprite.c_str());
+			else
+				ShowError("mob_parse_row_mobskilldb: Too many skills for monster %d[%s]\n", mob_id, mob->sprite.c_str());
 			last_mob_id = mob_id;
 		}
 		return false;
@@ -6003,7 +6269,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	if( j < ARRAYLENGTH(state) )
 		ms->state = state[j].id;
 	else {
-		ShowError("mob_parse_row_mobskilldb: Unrecognized state '%s' in line %d\n", str[2], current);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mob_parse_row_mobskilldb: %d줄에 인식할 수 없는 상태 '%s'가 있습니다.\n", current, str[2]);
+		else
+			ShowError("mob_parse_row_mobskilldb: Unrecognized state '%s' in line %d\n", str[2], current);
 		return false;
 	}
 
@@ -6011,10 +6280,17 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	j = atoi(str[3]);
 	if (j <= 0 || j > MAX_SKILL_ID || !skill_get_index(j)) //fixed Lupus
 	{
-		if (mob_id < 0)
-			ShowError("mob_parse_row_mobskilldb: Invalid Skill ID (%d) for all mobs\n", j);
-		else
-			ShowError("mob_parse_row_mobskilldb: Invalid Skill ID (%d) for mob %d (%s)\n", j, mob_id, mob->sprite.c_str());
+		if (mob_id < 0) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_parse_row_mobskilldb: %d은(는) 모든 몬스터에 대한 잘못된 스킬입니다.\n", j);
+			else
+				ShowError("mob_parse_row_mobskilldb: Invalid Skill ID (%d) for all mobs\n", j);
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("mob_parse_row_mobskilldb: %d은(는) 몬스터 %d (%s)에 대한 잘못된 스킬입니다.\n", j, mob_id, mob->sprite.c_str());
+			else
+				ShowError("mob_parse_row_mobskilldb: Invalid Skill ID (%d) for mob %d (%s)\n", j, mob_id, mob->sprite.c_str());
+		}
 		return false;
 	}
 	ms->skill_id = j;
@@ -6048,7 +6324,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	if( j < ARRAYLENGTH(target) )
 		ms->target = target[j].id;
 	else {
-		ShowWarning("mob_parse_row_mobskilldb: Unrecognized target %s for %d\n", str[9], mob_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_parse_row_mobskilldb: 대상 %s은(는) %d에 대해 인식할 수 없는 대상입니다.\n", str[9], mob_id);
+		else
+			ShowWarning("mob_parse_row_mobskilldb: Unrecognized target %s for %d\n", str[9], mob_id);
 		ms->target = MST_TARGET;
 	}
 
@@ -6057,15 +6336,25 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	{	//Ground skill.
 		if (ms->target > MST_AROUND)
 		{
-			ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target for ground skill %d (%s) for %s.\n",
-				ms->skill_id, skill_get_name(ms->skill_id),
-				mob_id < 0 ? "all mobs" : mob->sprite.c_str());
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("mob_parse_row_mobskilldb: %s(%d) 지면스킬은 %s의 잘못된 몬스터 스킬대상입니다.\n",
+				skill_get_name(ms->skill_id),ms->skill_id,
+				mob_id < 0 ? "모든 몬스터" : mob->sprite.c_str());
+			else
+				ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target for ground skill %d (%s) for %s.\n",
+					ms->skill_id, skill_get_name(ms->skill_id),
+					mob_id < 0 ? "all mobs" : mob->sprite.c_str());
 			ms->target = MST_TARGET;
 		}
 	} else if (ms->target > MST_MASTER) {
-		ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target 'around' for non-ground skill %d (%s) for %s.\n",
-			ms->skill_id, skill_get_name(ms->skill_id),
-			mob_id < 0 ? "all mobs" : mob->sprite.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_parse_row_mobskilldb: %s에 대한 비지면스킬 %d(%s)에 대한 잘못된 몹 스킬입니다.\n",
+			mob_id < 0 ? "모든 몬스터" : mob->sprite.c_str(),
+			ms->skill_id, skill_get_name(ms->skill_id));
+		else
+			ShowWarning("mob_parse_row_mobskilldb: Wrong mob skill target 'around' for non-ground skill %d (%s) for %s.\n",
+				ms->skill_id, skill_get_name(ms->skill_id),
+				mob_id < 0 ? "all mobs" : mob->sprite.c_str());
 		ms->target = MST_TARGET;
 	}
 
@@ -6074,7 +6363,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	if( j < ARRAYLENGTH(cond1) )
 		ms->cond1 = cond1[j].id;
 	else {
-		ShowWarning("mob_parse_row_mobskilldb: Unrecognized condition 1 %s for %d\n", str[10], mob_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("mob_parse_row_mobskilldb: %d에 대한 인식 할 수없는 조건 1의 '%s'.\n", mob_id, str[10]);
+		else
+			ShowWarning("mob_parse_row_mobskilldb: Unrecognized condition 1 %s for %d\n", str[10], mob_id);
 		ms->cond1 = -1;
 	}
 
@@ -6118,7 +6410,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 			ms->msg_id = id;
 		else {
 			ms->msg_id = 0;
-			ShowWarning("mob_parse_row_mobskilldb: Unknown chat ID %s for monster %d.\n", str[18], mob_id);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("mob_parse_row_mobskilldb: %s은(는) %d 몬스터에 대한 알 수 없는 채팅 ID입니다.\n");
+			else
+				ShowWarning("mob_parse_row_mobskilldb: Unknown chat ID %s for monster %d.\n", str[18], mob_id);
 		}
 	}
 	else
@@ -6138,7 +6433,10 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
  *------------------------------------------*/
 static void mob_readskilldb(const char* basedir, bool silent) {
 	if( battle_config.mob_skill_rate == 0 ) {
-		ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("몬스터의 스킬사용이 불가능하도록 설정되어있습니다. 몬스터 스킬을 읽지 않았습니다.\n");
+		else
+			ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
 		return;
 	}
 	sv_readdb(basedir, "mob_skill_db.txt", ',', 19, 19, -1, &mob_parse_row_mobskilldb, silent);
@@ -6157,7 +6455,10 @@ static int mob_read_sqlskilldb(void)
 	int fi;
 
 	if( battle_config.mob_skill_rate == 0 ) {
-		ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("몬스터의 스킬사용이 불가능하도록 설정되어있습니다. 몬스터 스킬을 읽지 않았습니다.\n");
+		else
+			ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
 		return 0;
 	}
 
@@ -6193,7 +6494,10 @@ static int mob_read_sqlskilldb(void)
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_skill_db_name[fi]);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%u" CL_RESET "'개의 항목을 읽어왔습니다.\n", mob_skill_db_name[fi], count);
+		else
+			ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_skill_db_name[fi]);
 	}
 	return 0;
 }
@@ -6216,7 +6520,10 @@ uint64 MobItemRatioDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	std::shared_ptr<item_data> item = item_db.search_aegisname(item_name.c_str());
 
 	if (item == nullptr) {
-		this->invalidWarning(node["Item"], "Item %s does not exist, skipping.\n", item_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning(node["Item"], "아이템 %s이(가) 존재하지 않아 건너뜁니다.\n", item_name.c_str());
+		else
+			this->invalidWarning(node["Item"], "Item %s does not exist, skipping.\n", item_name.c_str());
 		return 0;
 	}
 
@@ -6253,7 +6560,10 @@ uint64 MobItemRatioDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(mob_name.c_str());
 
 			if (mob == nullptr) {
-				this->invalidWarning(node["List"], "Unknown mob %s, skipping.\n", mob_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(node["List"], "%s은(는) 알 수 없는 몬스터이므로 건너뜁니다.\n", mob_name.c_str());
+				else
+					this->invalidWarning(node["List"], "Unknown mob %s, skipping.\n", mob_name.c_str());
 				continue;
 			}
 			uint16 mob_id = mob->id;
@@ -6321,7 +6631,10 @@ static void mob_drop_ratio_adjust(void){
 
 				// Item is not known anymore(should never happen)
 				if( !id ){
-					ShowWarning( "Monster \"%s\"(id:%u) is dropping an unknown item(id: %u)\n", mob->name.c_str(), mob_id, nameid );
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning( "몬스터 \"%s\"(id:%u)이(가) 알수 없는 아이템(id: %u)을(를) 드롭중입니다.\n", mob->name.c_str(), mob_id, nameid );
+					else
+						ShowWarning( "Monster \"%s\"(id:%u) is dropping an unknown item(id: %u)\n", mob->name.c_str(), mob_id, nameid );
 					mob->mvpitem[j].nameid = 0;
 					mob->mvpitem[j].rate = 0;
 					continue;
@@ -6351,7 +6664,10 @@ static void mob_drop_ratio_adjust(void){
 
 			// Item is not known anymore(should never happen)
 			if( !id ){
-				ShowWarning( "Monster \"%s\"(id:%hu) is dropping an unknown item(id: %u)\n", mob->name.c_str(), mob_id, nameid );
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning( "몬스터 \"%s\"(id:%hu)이(가) 알수 없는 아이템(id: %u)을(를) 드롭중입니다.\n", mob->name.c_str(), mob_id, nameid );
+				else
+					ShowWarning( "Monster \"%s\"(id:%hu) is dropping an unknown item(id: %u)\n", mob->name.c_str(), mob_id, nameid );
 				mob->dropitem[j].nameid = 0;
 				mob->dropitem[j].rate = 0;
 				continue;
@@ -6465,7 +6781,10 @@ uint64 MapDropDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	uint16 mapindex = mapindex_name2idx( mapname.c_str(), nullptr );
 
 	if( mapindex == 0 ){
-		this->invalidWarning( node["Map"], "Unknown map \"%s\".\n", mapname.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Map"], "\"%s\"은(는) 알 수 없는 맵입니다.\n", mapname.c_str() );
+		else
+			this->invalidWarning( node["Map"], "Unknown map \"%s\".\n", mapname.c_str() );
 		return 0;
 	}
 
@@ -6511,7 +6830,10 @@ uint64 MapDropDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( mobname.c_str() );
 
 			if( mob == nullptr ){
-				this->invalidWarning( monsterNode["Monster"], "Unknown monster \"%s\".\n", mobname.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( monsterNode["Monster"], "\"%s\"은(는) 알 수 없는 몬스터입니다.\n", mobname.c_str() );
+				else
+					this->invalidWarning( monsterNode["Monster"], "Unknown monster \"%s\".\n", mobname.c_str() );
 				return 0;
 			}
 
@@ -6561,7 +6883,10 @@ bool MapDropDatabase::parseDrop( const ryml::NodeRef& node, std::unordered_map<u
 		std::shared_ptr<item_data> item = item_db.search_aegisname( itemname.c_str() );
 
 		if( item == nullptr ){
-			this->invalidWarning( node["Item"], "Item %s does not exist.\n", itemname.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Item"], "%s은(는) 존재하지 않는 아이템입니다.\n", itemname.c_str() );
+			else
+				this->invalidWarning( node["Item"], "Item %s does not exist.\n", itemname.c_str() );
 			return false;
 		}
 
@@ -6580,11 +6905,17 @@ bool MapDropDatabase::parseDrop( const ryml::NodeRef& node, std::unordered_map<u
 				drops.erase( index );
 				return true;
 			}else{
-				this->invalidWarning( node["Rate"], "Rate %" PRIu32 " is below minimum of 1.\n", rate );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( node["Rate"], "Rate %" PRIu32 "이(가) 최소값인 1보다 낮습니다.\n", rate );
+				else
+					this->invalidWarning( node["Rate"], "Rate %" PRIu32 " is below minimum of 1.\n", rate );
 				return false;
 			}
 		}else if( rate > 100000 ){
-			this->invalidWarning( node["Rate"], "Rate %" PRIu32 " exceeds maximum of 100000.\n", rate );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Rate"], "Rate %" PRIu32 "이(가) 최대값인 100000보다 높습니다.\n", rate );
+			else
+				this->invalidWarning( node["Rate"], "Rate %" PRIu32 " exceeds maximum of 100000.\n", rate );
 			return false;
 		}
 
@@ -6599,7 +6930,10 @@ bool MapDropDatabase::parseDrop( const ryml::NodeRef& node, std::unordered_map<u
 		}
 
 		if( !random_option_group.option_get_id( name, drop->randomopt_group ) ){
-			this->invalidWarning( node["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["RandomOptionGroup"], "\"%s\"은(는) 알 수 없는 랜덤 옵션 그룹입니다.\n", name.c_str() );
+			else
+				this->invalidWarning( node["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
 			return false;
 		}
 	}else{
@@ -6632,8 +6966,12 @@ static void mob_skill_db_set_single_sub(std::shared_ptr<s_mob_db> mob, struct s_
 		mob->skill.push_back(skill->skill[i]);
 	}
 
-	if (i < skill->skill.size())
-		ShowWarning("Monster '%s' (%d, src:%d) reaches max skill limit %d. Ignores '%zu' skills left.\n", mob->sprite.c_str(), mob->id, skill->mob_id, MAX_MOBSKILL, skill->skill.size() - i);
+	if (i < skill->skill.size()) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("몬스터 '%s' (%d, src:%d)은(는) 최대 스킬 제한 %d에 도달했습니다. '%zu'의 스킬을 무시했습니다.\n", mob->sprite.c_str(), mob->id, skill->mob_id, MAX_MOBSKILL, skill->skill.size() - i);
+		else
+			ShowWarning("Monster '%s' (%d, src:%d) reaches max skill limit %d. Ignores '%zu' skills left.\n", mob->sprite.c_str(), mob->id, skill->mob_id, MAX_MOBSKILL, skill->skill.size() - i);
+	}
 }
 
 /**
@@ -6791,9 +7129,15 @@ static int mob_reload_sub( struct mob_data *md, va_list args ){
 	md->db = mob_db.find(md->mob_id);
 
 	if( md->db == nullptr ){
-		ShowWarning( "mob_reload_sub: Monster %s (ID: %hu) does not exist anymore.\n", md->name, md->mob_id );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning( "mob_reload_sub: 몬스터 %s (ID: %hu)은(는) 존재하지 않습니다.\n", md->name, md->mob_id );
+		else
+			ShowWarning( "mob_reload_sub: Monster %s (ID: %hu) does not exist anymore.\n", md->name, md->mob_id );
 		if( md->bl.prev != nullptr ){
-			ShowDebug( "mob_reload_sub: The monster was removed from map %s (%hu/%hu).\n", map_mapid2mapname( md->bl.m ), md->bl.x, md->bl.y );
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowDebug( "mob_reload_sub: 맵 %s (%hu/%hu)에서 몬스터를 제거 했습니다.\n", map_mapid2mapname( md->bl.m ), md->bl.x, md->bl.y );
+			else
+				ShowDebug( "mob_reload_sub: The monster was removed from map %s (%hu/%hu).\n", map_mapid2mapname( md->bl.m ), md->bl.x, md->bl.y );
 		}
 
 		unit_remove_map( &md->bl, CLR_OUTSIGHT );

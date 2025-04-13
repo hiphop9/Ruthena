@@ -18,117 +18,118 @@
 //==================================================
 // iz_dun00 - Undersea Tunnel
 //==================================================
-iz_dun00,0,0	monster	Plankton	1161,88,5000
-iz_dun00,0,0	monster	Marina	1141,61,5000
-iz_dun00,0,0	monster	Vadon	1066,20,5000
-iz_dun00,0,0	monster	Kukre	1070,20,5000
-iz_dun00,0,0	monster	Hydra	1068,20,5000
-iz_dun00,0,0	monster	Black Mushroom	1084,6,180000,90000
+iz_dun00,0,0	monster	플랑크톤	1161,88,5000
+iz_dun00,0,0	monster	마리나	1141,61,5000
+iz_dun00,0,0	monster	바돈	1066,20,5000
+iz_dun00,0,0	monster	쿠크레	1070,20,5000
+iz_dun00,0,0	monster	히드라	1068,20,5000
+iz_dun00,0,0	monster	검은 버섯	1084,6,180000,90000
 
 //==================================================
 // iz_dun01 - Undersea Tunnel
 //==================================================
-iz_dun01,0,0	monster	Vadon	1066,60,5000
-iz_dun01,0,0	monster	Kukre	1070,50,5000
-iz_dun01,0,0	monster	Hydra	1068,30,5000
-iz_dun01,0,0	monster	Marina	1141,15,5000
-iz_dun01,0,0	monster	Cornutus	1067,15,5000
-iz_dun01,0,0	monster	Plankton	1161,10,5000
-iz_dun01,0,0	monster	Black Mushroom	1084,10,180000,90000
+iz_dun01,0,0	monster	바돈	1066,60,5000
+iz_dun01,0,0	monster	쿠크레	1070,50,5000
+iz_dun01,0,0	monster	히드라	1068,30,5000
+iz_dun01,0,0	monster	마리나	1141,15,5000
+iz_dun01,0,0	monster	커너투스	1067,15,5000
+iz_dun01,0,0	monster	플랑크톤	1161,10,5000
+iz_dun01,0,0	monster	검은 버섯	1084,10,180000,90000
 
 //==================================================
 // iz_dun02 - Undersea Tunnel
 //==================================================
-iz_dun02,0,0	monster	Cornutus	1067,60,5000
-iz_dun02,0,0	monster	Marse	1144,40,5000
-iz_dun02,0,0	monster	Obeaune	1044,40,5000
-iz_dun02,0,0	monster	Hydra	1068,40,5000
-iz_dun02,0,0	monster	Merman	1264,1,5000
-iz_dun02,0,0	monster	Black Mushroom	1084,15,180000,90000
+iz_dun02,0,0	monster	커너투스	1067,60,5000
+iz_dun02,0,0	monster	마르스	1144,40,5000
+iz_dun02,0,0	monster	오본느	1044,40,5000
+iz_dun02,0,0	monster	히드라	1068,40,5000
+iz_dun02,0,0	monster	머맨	1264,1,5000
+iz_dun02,0,0	monster	검은 버섯	1084,15,180000,90000
 
 //==================================================
 // iz_dun03 - Undersea Tunnel
 //==================================================
-iz_dun03,0,0	monster	Phen	1158,45,5000
-iz_dun03,0,0	monster	Marc	1045,40,5000
-iz_dun03,0,0	monster	Swordfish	1069,40,5000
-iz_dun03,0,0	monster	Marine Sphere	1142,20,5000
-iz_dun03,0,0	monster	Merman	1264,3,5000
-iz_dun03,200,144	monster	Hydra	1068,1,282000,150000
-iz_dun03,178,253	monster	Hydra	1068,1,300000,150000
-iz_dun03,193,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,196,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,199,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,202,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,205,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,208,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,211,143	monster	Hydra	1068,1,300000,150000
-iz_dun03,108,249	monster	Hydra	1068,1,300000,150000
-iz_dun03,180,251	monster	Hydra	1068,1,300000,150000
-iz_dun03,176,260	monster	Hydra	1068,1,300000,150000
-iz_dun03,80,163	monster	Hydra	1068,1,300000,150000
-iz_dun03,204,57	monster	Hydra	1068,1,302000,150000
-iz_dun03,204,60	monster	Hydra	1068,1,304000,150000
-iz_dun03,203,47	monster	Hydra	1068,1,305000,150000
-iz_dun03,206,144	monster	Hydra	1068,1,305000,150000
-iz_dun03,209,144	monster	Hydra	1068,1,308000,150000
-iz_dun03,204,51	monster	Hydra	1068,1,309000,150000
-iz_dun03,203,144	monster	Hydra	1068,1,310000,150000
-iz_dun03,204,54	monster	Hydra	1068,1,310000,150000
-iz_dun03,203,59	monster	Hydra	1068,1,312000,150000
-iz_dun03,204,48	monster	Hydra	1068,1,313000,150000
-iz_dun03,194,144	monster	Hydra	1068,1,316000,150000
-iz_dun03,203,53	monster	Hydra	1068,1,317000,150000
-iz_dun03,191,144	monster	Hydra	1068,1,321000,150000
-iz_dun03,212,144	monster	Hydra	1068,1,321000,150000
-iz_dun03,203,50	monster	Hydra	1068,1,323000,150000
-iz_dun03,203,56	monster	Hydra	1068,1,323000,150000
-iz_dun03,197,144	monster	Hydra	1068,1,2960000,150000
+iz_dun03,0,0	monster	휀	1158,45,5000
+iz_dun03,0,0	monster	마르크	1045,40,5000
+iz_dun03,0,0	monster	소드 피쉬	1069,40,5000
+iz_dun03,0,0	monster	마린 스피어	1142,20,5000
+iz_dun03,0,0	monster	머맨	1264,3,5000
+iz_dun03,200,144	monster	히드라	1068,1,282000,150000
+iz_dun03,178,253	monster	히드라	1068,1,300000,150000
+iz_dun03,193,143	monster	히드라	1068,1,300000,150000
+iz_dun03,196,143	monster	히드라	1068,1,300000,150000
+iz_dun03,199,143	monster	히드라	1068,1,300000,150000
+iz_dun03,202,143	monster	히드라	1068,1,300000,150000
+iz_dun03,205,143	monster	히드라	1068,1,300000,150000
+iz_dun03,208,143	monster	히드라	1068,1,300000,150000
+iz_dun03,211,143	monster	히드라	1068,1,300000,150000
+iz_dun03,108,249	monster	히드라	1068,1,300000,150000
+iz_dun03,180,251	monster	히드라	1068,1,300000,150000
+iz_dun03,176,260	monster	히드라	1068,1,300000,150000
+iz_dun03,80,163	monster	히드라	1068,1,300000,150000
+iz_dun03,204,57	monster	히드라	1068,1,302000,150000
+iz_dun03,204,60	monster	히드라	1068,1,304000,150000
+iz_dun03,203,47	monster	히드라	1068,1,305000,150000
+iz_dun03,206,144	monster	히드라	1068,1,305000,150000
+iz_dun03,209,144	monster	히드라	1068,1,308000,150000
+iz_dun03,204,51	monster	히드라	1068,1,309000,150000
+iz_dun03,203,144	monster	히드라	1068,1,310000,150000
+iz_dun03,204,54	monster	히드라	1068,1,310000,150000
+iz_dun03,203,59	monster	히드라	1068,1,312000,150000
+iz_dun03,204,48	monster	히드라	1068,1,313000,150000
+iz_dun03,194,144	monster	히드라	1068,1,316000,150000
+iz_dun03,203,53	monster	히드라	1068,1,317000,150000
+iz_dun03,191,144	monster	히드라	1068,1,321000,150000
+iz_dun03,212,144	monster	히드라	1068,1,321000,150000
+iz_dun03,203,50	monster	히드라	1068,1,323000,150000
+iz_dun03,203,56	monster	히드라	1068,1,323000,150000
+iz_dun03,197,144	monster	히드라	1068,1,2960000,150000
 
 //==================================================
 // iz_dun04 - Undersea Tunnel
 //==================================================
-iz_dun04,0,0	monster	Merman	1264,61,5000
-iz_dun04,0,0	monster	Strouf	1065,58,5000
-iz_dun04,0,0	monster	Marine Sphere	1142,11,5000
-iz_dun04,0,0	monster	Swordfish	1069,11,5000
-iz_dun04,0,0	monster	Deviace	1108,3,5000
-iz_dun04,80,246	monster	Hydra	1068,1,294000,150000
-iz_dun04,79,246	monster	Hydra	1068,1,300000,150000
-iz_dun04,111,41	monster	Hydra	1068,1,300000,150000
-iz_dun04,111,35	monster	Hydra	1068,1,300000,150000
-iz_dun04,124,233	monster	Hydra	1068,1,300000,150000
-iz_dun04,38,115	monster	Hydra	1068,1,300000,150000
-iz_dun04,38,129	monster	Hydra	1068,1,300000,150000
-iz_dun04,61,135	monster	Hydra	1068,1,300000,150000
-iz_dun04,79,234	monster	Hydra	1068,1,302000,150000
-iz_dun04,111,38	monster	Hydra	1068,1,303000,150000
-iz_dun04,134,233	monster	Hydra	1068,1,305000,150000
-iz_dun04,58,135	monster	Hydra	1068,1,305000,150000
-iz_dun04,42,116	monster	Hydra	1068,1,306000,150000
-iz_dun04,33,129	monster	Hydra	1068,1,308000,150000
-iz_dun04,42,129	monster	Hydra	1068,1,312000,150000
-iz_dun04,80,233	monster	Hydra	1068,1,318000,150000
-iz_dun04,69,243	monster	Hydra	1068,1,321000,150000
-iz_dun04,33,115	monster	Hydra	1068,1,321000,150000
+iz_dun04,0,0	monster	머맨	1264,61,5000
+iz_dun04,0,0	monster	스트라우프	1065,58,5000
+iz_dun04,0,0	monster	마린 스피어	1142,11,5000
+iz_dun04,0,0	monster	소드 피쉬	1069,11,5000
+iz_dun04,0,0	monster	데비어스	1108,3,5000
+iz_dun04,80,246	monster	히드라	1068,1,294000,150000
+iz_dun04,79,246	monster	히드라	1068,1,300000,150000
+iz_dun04,111,41	monster	히드라	1068,1,300000,150000
+iz_dun04,111,35	monster	히드라	1068,1,300000,150000
+iz_dun04,124,233	monster	히드라	1068,1,300000,150000
+iz_dun04,38,115	monster	히드라	1068,1,300000,150000
+iz_dun04,38,129	monster	히드라	1068,1,300000,150000
+iz_dun04,61,135	monster	히드라	1068,1,300000,150000
+iz_dun04,79,234	monster	히드라	1068,1,302000,150000
+iz_dun04,111,38	monster	히드라	1068,1,303000,150000
+iz_dun04,134,233	monster	히드라	1068,1,305000,150000
+iz_dun04,58,135	monster	히드라	1068,1,305000,150000
+iz_dun04,42,116	monster	히드라	1068,1,306000,150000
+iz_dun04,33,129	monster	히드라	1068,1,308000,150000
+iz_dun04,42,129	monster	히드라	1068,1,312000,150000
+iz_dun04,80,233	monster	히드라	1068,1,318000,150000
+iz_dun04,69,243	monster	히드라	1068,1,321000,150000
+iz_dun04,33,115	monster	히드라	1068,1,321000,150000
 
 //==================================================
 // iz_dun05 - Undersea Tunnel F6
 //==================================================
-iz_dun05,0,0	monster	Sropho	2201,50,5000
-iz_dun05,0,0	monster	Sedora	2204,60,5000
-iz_dun05,0,0	monster	Pot Dofle	2203,30,5000
-iz_dun05,0,0	monster	King Dramoh	2198,25,5000
-iz_dun05,0,0,0,0	boss_monster	Kraken	2202,1,7200000,1800000,0
+iz_dun05,0,0	monster	스로포	2201,50,5000
+iz_dun05,0,0	monster	세도라	2204,60,5000
+iz_dun05,0,0	monster	도프레 항아리	2203,30,5000
+iz_dun05,0,0	monster	킹 드라모	2198,25,5000
+iz_dun05,0,0,0,0	boss_monster	크라켄	2202,1,7200000,1800000,0
+
 
 //==================================================
 // Illusion of Underwater
 //==================================================
-iz_d04_i	monster	Deep Sea Sropho	20801,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Obeaune	20802,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Merman	20805,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Marse	20804,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Deviace	20803,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	심해의 스로포	20801,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	심해의 오본느	20802,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	심해의 머멘	20805,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	심해의 마르스	20804,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	심해의 데비어스	20803,45,5000,0,"iz_d04_i_boss::OnMobDead"
 
 -	script	iz_d04_i_boss	-1,{
 	end;
@@ -160,11 +161,11 @@ OnTimer7200000:
 	end;
 }
 
-iz_d05_i	monster	Deep Sea Strouf	20808,45,5000,0,"iz_d05_i_boss::OnMobDead"
-iz_d05_i	monster	Deep Sea Swordfish	20807,45,5000,0,"iz_d05_i_boss::OnMobDead"
-iz_d05_i	monster	Deep Sea Phen	20809,45,5000,0,"iz_d05_i_boss::OnMobDead"
-iz_d05_i	monster	Deep Sea Sedora	20806,45,5000,0,"iz_d05_i_boss::OnMobDead"
-iz_d05_i	monster	Deep Sea King Dramoh	20810,45,5000,0,"iz_d05_i_boss::OnMobDead"
+iz_d05_i	monster	심해의 스트라우프	20808,45,5000,0,"iz_d05_i_boss::OnMobDead"
+iz_d05_i	monster	심해의 소드피쉬	20807,45,5000,0,"iz_d05_i_boss::OnMobDead"
+iz_d05_i	monster	심해의 휀	20809,45,5000,0,"iz_d05_i_boss::OnMobDead"
+iz_d05_i	monster	심해의 세도라	20806,45,5000,0,"iz_d05_i_boss::OnMobDead"
+iz_d05_i	monster	심해의 킹 드라모	20810,45,5000,0,"iz_d05_i_boss::OnMobDead"
 
 -	script	iz_d05_i_boss	-1,{
 	end;

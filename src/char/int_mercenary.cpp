@@ -11,6 +11,7 @@
 #include <common/socket.hpp>
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -119,8 +120,12 @@ bool mapif_mercenary_load(int merc_id, uint32 char_id, struct s_mercenary *merc)
 	Sql_GetData(sql_handle,  3, &data, nullptr); merc->kill_count = atoi(data);
 	Sql_GetData(sql_handle,  4, &data, nullptr); merc->life_time = strtoll( data, nullptr, 10 );
 	Sql_FreeResult(sql_handle);
-	if( charserv_config.save_log )
-		ShowInfo("Mercenary loaded (ID: %d / Class: %d / CID: %d).\n", merc->mercenary_id, merc->class_, merc->char_id);
+	if( charserv_config.save_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("용병이 로드 되었습니다. (ID: %d / Class: %d / CID: %d).\n", merc->mercenary_id, merc->class_, merc->char_id);
+		else
+			ShowInfo("Mercenary loaded (ID: %d / Class: %d / CID: %d).\n", merc->mercenary_id, merc->class_, merc->char_id);
+	}
 
 	return true;
 }

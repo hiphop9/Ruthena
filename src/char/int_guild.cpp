@@ -9,6 +9,7 @@
 #include <unordered_map>
 
 #include <common/cbasetypes.hpp>
+#include <config/custom.hpp>
 #include <common/malloc.hpp>
 #include <common/mmo.hpp>
 #include <common/showmsg.hpp>
@@ -72,8 +73,12 @@ TIMER_FUNC(guild_save_timer){
 
 		// Nothing to save, guild is ready for removal.
 		if( g->save_flag == GS_REMOVE ){
-			if (charserv_config.save_log)
-				ShowInfo("Guild Unloaded (%d - %s)\n", g->guild.guild_id, g->guild.name);
+			if (charserv_config.save_log) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("(%d - %s)의 길드가 언로드 되었습니다.\n", g->guild.guild_id, g->guild.name);
+				else
+					ShowInfo("Guild Unloaded (%d - %s)\n", g->guild.guild_id, g->guild.name);
+			}
 			it = guild_db.erase( it );
 		}else{
 			it++;
@@ -126,7 +131,10 @@ int inter_guild_tosql( mmo_guild &g, int flag ){
 	if (g.guild_id<=0 && g.guild_id != -1) return 0;
 
 #ifdef NOISY
-	ShowInfo("Save guild request (" CL_BOLD "%d" CL_RESET " - flag 0x%x).",g.guild_id, flag);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("(" CL_BOLD "%d" CL_RESET " - flag 0x%x)의 길드를 저장하도록 SQL에 보냈습니다.",g.guild_id, flag);
+	else
+		ShowInfo("Save guild request (" CL_BOLD "%d" CL_RESET " - flag 0x%x).",g.guild_id, flag);
 #endif
 
 	Sql_EscapeStringLen(sql_handle, esc_name, g.name, strnlen(g.name, NAME_LENGTH));
@@ -327,8 +335,12 @@ int inter_guild_tosql( mmo_guild &g, int flag ){
 		}
 	}
 
-	if (charserv_config.save_log)
-		ShowInfo("Saved guild (%d - %s):%s\n",g.guild_id,g.name,t_info);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("저장된 길드: (%d - %s):%s\n",g.guild_id,g.name,t_info);
+		else
+			ShowInfo("Saved guild (%d - %s):%s\n",g.guild_id,g.name,t_info);
+	}
 	return 1;
 }
 
@@ -350,7 +362,10 @@ std::shared_ptr<CharGuild> inter_guild_fromsql( int32 guild_id ){
 	}
 
 #ifdef NOISY
-	ShowInfo("Guild load request (%d)...\n", guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("(%d)의 길드 데이터를 불러오는중...\n", guild_id);
+	else
+		ShowInfo("Guild load request (%d)...\n", guild_id);
 #endif
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT g.`name`,c.`name`,g.`guild_lv`,g.`connect_member`,g.`max_member`,g.`average_lv`,g.`exp`,g.`next_exp`,g.`skill_point`,g.`mes1`,g.`mes2`,g.`emblem_len`,g.`emblem_id`,COALESCE(UNIX_TIMESTAMP(g.`last_master_change`),0), g.`emblem_data` "
@@ -375,7 +390,10 @@ std::shared_ptr<CharGuild> inter_guild_fromsql( int32 guild_id ){
 	Sql_GetData(sql_handle,  4, &data, nullptr); g->guild.max_member = atoi(data);
 	if( g->guild.max_member > MAX_GUILD )
 	{	// Fix reduction of MAX_GUILD [PoW]
-		ShowWarning("Guild %d:%s specifies higher capacity (%d) than MAX_GUILD (%d)\n", guild_id, g->guild.name, g->guild.max_member, MAX_GUILD);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("%d:%s의 길드 맴버수(%d)가 정의된 MAX_GUILD(%d)보다 많습니다.\n", guild_id, g->guild.name, g->guild.max_member, MAX_GUILD);
+		else
+			ShowWarning("Guild %d:%s specifies higher capacity (%d) than MAX_GUILD (%d)\n", guild_id, g->guild.name, g->guild.max_member, MAX_GUILD);
 		g->guild.max_member = MAX_GUILD;
 	}
 	Sql_GetData(sql_handle,  5, &data, nullptr); g->guild.average_lv = atoi(data);
@@ -434,7 +452,10 @@ std::shared_ptr<CharGuild> inter_guild_fromsql( int32 guild_id ){
 				m->gender = SEX_MALE;
 				break;
 			default:
-				ShowWarning( "inter_guild_fromsql: Unsupported gender %c for char_id %u. Defaulting to male...\n", *data, m->char_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "inter_guild_fromsql: %c은(는) 케릭터 ID %u에 대한 지원하지 않는 성별입니다. 남성을 기본으로...\n", *data, m->char_id );
+				else
+					ShowWarning( "inter_guild_fromsql: Unsupported gender %c for char_id %u. Defaulting to male...\n", *data, m->char_id );
 				m->gender = SEX_MALE;
 				break;
 		}
@@ -529,8 +550,12 @@ std::shared_ptr<CharGuild> inter_guild_fromsql( int32 guild_id ){
 	// But set it to be removed, in case it is not needed for long.
 	g->save_flag |= GS_REMOVE;
 
-	if (charserv_config.save_log)
-		ShowInfo("Guild loaded (%d - %s)\n", guild_id, g->guild.name);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("불러온 길드: (%d - %s)\n", guild_id, g->guild.name);
+		else
+			ShowInfo("Guild loaded (%d - %s)\n", guild_id, g->guild.name);
+	}
 
 	return g;
 }
@@ -547,7 +572,10 @@ uint16 inter_guild_storagemax(int guild_id)
 	uint16 max = 0;
 
 	if( g == nullptr ){
-		ShowError("Guild %d not found!\n", guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("길드 %d을(를) 찾을 수 없습니다.\n", guild_id);
+		else
+			ShowError("Guild %d not found!\n", guild_id);
 		return 0;
 	}
 
@@ -576,8 +604,12 @@ int inter_guildcastle_tosql( std::shared_ptr<struct guild_castle> gc ){
 
 	if (SQL_ERROR == Sql_Query(sql_handle, StringBuf_Value(&buf)))
 		Sql_ShowDebug(sql_handle);
-	else if(charserv_config.save_log)
-		ShowInfo("Saved guild castle (%d)\n", gc->castle_id);
+	else if(charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("저장된 길드의 성: (%d)\n", gc->castle_id);
+		else
+			ShowInfo("Saved guild castle (%d)\n", gc->castle_id);
+	}
 
 	StringBuf_Destroy(&buf);
 	return 0;
@@ -630,8 +662,12 @@ std::shared_ptr<struct guild_castle> inter_guildcastle_fromsql( int castle_id ){
 
 	castle_db[gc->castle_id] = gc;
 
-	if (charserv_config.save_log)
-		ShowInfo("Loaded guild castle (%d - guild %d)\n", castle_id, gc->guild_id);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("불러온 길드 성: (%d - 길드ID번호: %d)\n", castle_id, gc->guild_id);
+		else
+			ShowInfo("Loaded guild castle (%d - guild %d)\n", castle_id, gc->guild_id);
+	}
 
 	return gc;
 }
@@ -668,7 +704,10 @@ int inter_guild_CharOnline(uint32 char_id, int guild_id)
 	auto g = inter_guild_fromsql( guild_id );
 
 	if( g == nullptr ){
-		ShowError("Character %d's guild %d not found!\n", char_id, guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%d 케릭터의 길드 %d를 찾을 수 없습니다.\n", char_id, guild_id);
+		else
+			ShowError("Character %d's guild %d not found!\n", char_id, guild_id);
 		return 0;
 	}
 
@@ -759,11 +798,17 @@ uint64 GuildExpDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (level == 0) {
-		this->invalidWarning(node, "The minimum guild level is 1.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning(node, "길드 레벨은 최소1 이상이어야 합니다.\n");
+		else
+			this->invalidWarning(node, "The minimum guild level is 1.\n");
 		return 0;
 	}
 	if (level >= MAX_GUILDLEVEL) {
-		this->invalidWarning(node["Level"], "Guild level %d exceeds maximum level %d, skipping.\n", level, MAX_GUILDLEVEL);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning(node["Level"], "길드 레벨 %d은(는) 최대 레빌인 %d 레벨을 초과합니다, 통과됨.\n", level, MAX_GUILDLEVEL);
+		else
+			this->invalidWarning(node["Level"], "Guild level %d exceeds maximum level %d, skipping.\n", level, MAX_GUILDLEVEL);
 		return 0;
 	}
 
@@ -773,7 +818,10 @@ uint64 GuildExpDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (exp > MAX_GUILD_EXP) {
-		this->invalidWarning(node["Exp"], "Guild exp %" PRIu64 " exceeds max of %" PRIu64 ".\n", exp, MAX_GUILD_EXP);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning(node["Exp"], "길드 경험치 %" PRIu64 "은(는) 최대 경험치인 %" PRIu64 "을(를) 초과합니다.\n", exp, MAX_GUILD_EXP);
+		else
+			this->invalidWarning(node["Exp"], "Guild exp %" PRIu64 " exceeds max of %" PRIu64 ".\n", exp, MAX_GUILD_EXP);
 		return 0;
 	}
 
@@ -797,8 +845,12 @@ GuildExpDatabase guild_exp_db;
 
 void GuildExpDatabase::loadingFinished() {
 	for (uint16 level = 1; level < MAX_GUILDLEVEL; level++) {
-		if (this->get_nextexp(level) == 0)
-			ShowError("Missing experience for guild level %d.\n", level);
+		if (this->get_nextexp(level) == 0) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("길드 레벨 %d에 대한 경험치가 빠져있습니다..\n", level);
+			else
+				ShowError("Missing experience for guild level %d.\n", level);
+		}
 	}
 }
 
@@ -891,7 +943,10 @@ int guild_calcinfo( std::shared_ptr<CharGuild> g ){
 	g->guild.max_member = 16 + guild_checkskill(g, GD_EXTENSION) * 6;
 	if(g->guild.max_member > MAX_GUILD)
 	{
-		ShowError("Guild %d:%s has capacity for too many guild members (%d), max supported is %d\n", g->guild.guild_id, g->guild.name, g->guild.max_member, MAX_GUILD);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s(%d) 길드의 길드원 수(%d)가 지원되는 최대 길드원 수(%d) 보다 많습니다.\n",g->guild.name, g->guild.guild_id, g->guild.max_member, MAX_GUILD);
+		else
+			ShowError("Guild %d:%s has capacity for too many guild members (%d), max supported is %d\n", g->guild.guild_id, g->guild.name, g->guild.max_member, MAX_GUILD);
 		g->guild.max_member = MAX_GUILD;
 	}
 
@@ -909,7 +964,10 @@ int guild_calcinfo( std::shared_ptr<CharGuild> g ){
 			}
 			else
 			{
-				ShowWarning("Guild %d:%s, member %d:%s has an invalid level %d\n", g->guild.guild_id, g->guild.name, g->guild.member[i].char_id, g->guild.member[i].name, g->guild.member[i].lv);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("%s(%d)길드의 길드원인 %s(%d)님의 레벨(%d)이 잘못 되었습니다.\n", g->guild.name,g->guild.guild_id, g->guild.member[i].name, g->guild.member[i].char_id, g->guild.member[i].lv);
+				else
+					ShowWarning("Guild %d:%s, member %d:%s has an invalid level %d\n", g->guild.guild_id, g->guild.name, g->guild.member[i].char_id, g->guild.member[i].name, g->guild.member[i].lv);
 			}
 
 			if(g->guild.member[i].online)
@@ -955,7 +1013,10 @@ int mapif_guild_noinfo(int fd,int guild_id)
 	WBUFW(buf,0)=0x3831;
 	WBUFW(buf,2)=8;
 	WBUFL(buf,4)=guild_id;
-	ShowWarning("int_guild: info not found %d\n",guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowWarning("int_guild: %d 길드에 대한 정보가 없습니다.\n",guild_id);
+	else
+		ShowWarning("int_guild: info not found %d\n",guild_id);
 	if(fd<0)
 		chmapif_sendall(buf,8);
 	else
@@ -1001,7 +1062,10 @@ int mapif_guild_withdraw(int guild_id,uint32 account_id,uint32 char_id,int flag,
 	memcpy(WBUFP(buf,15),mes,40);
 	memcpy(WBUFP(buf,55),name,NAME_LENGTH);
 	chmapif_sendall(buf,55+NAME_LENGTH);
-	ShowInfo("int_guild: guild withdraw (%d - %d: %s - %s)\n",guild_id,account_id,name,mes);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("int_guild: %d 길드에서 %s(%d)님께서 탈퇴하셨습니다. (탈퇴 메시지: %s)\n",guild_id,name,account_id,mes);
+	else
+		ShowInfo("int_guild: guild withdraw (%d - %d: %s - %s)\n",guild_id,account_id,name,mes);
 	return 0;
 }
 
@@ -1027,7 +1091,10 @@ int mapif_guild_broken(int guild_id,int flag)
 	WBUFL(buf,2)=guild_id;
 	WBUFB(buf,6)=flag;
 	chmapif_sendall(buf,7);
-	ShowInfo("int_guild: Guild broken (%d)\n",guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("int_guild: %d 의 길드가 해체 되었습니다.\n",guild_id);
+	else
+		ShowInfo("int_guild: Guild broken (%d)\n",guild_id);
 	return 0;
 }
 
@@ -1189,10 +1256,16 @@ int mapif_parse_CreateGuild(int fd,uint32 account_id,char *name,struct guild_mem
 {
 	int i=0;
 #ifdef NOISY
-	ShowInfo("Creating Guild (%s)\n", name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s 길드가 생성되었습니다.\n", name);
+	else
+		ShowInfo("Creating Guild (%s)\n", name);
 #endif
 	if(search_guildname(name) != 0){
-		ShowInfo("int_guild: guild with same name exists [%s]\n",name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("int_guild: %s의 이름과 동일한 길드가 이미 존재합니다.\n",name);
+		else
+			ShowInfo("int_guild: guild with same name exists [%s]\n",name);
 		mapif_guild_created(fd,account_id,nullptr);
 		return 0;
 	}
@@ -1240,11 +1313,17 @@ int mapif_parse_CreateGuild(int fd,uint32 account_id,char *name,struct guild_mem
 	// Create the guild
 	if (!inter_guild_tosql(g->guild,GS_BASIC|GS_POSITION|GS_SKILL|GS_MEMBER)) {
 		//Failed to Create guild....
-		ShowError("Failed to create Guild %s (Guild Master: %s)\n", g->guild.name, g->guild.master);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s의 길드 생성을 실패 했습니다. (길드 마스터: %s)\n", g->guild.name, g->guild.master);
+		else
+			ShowError("Failed to create Guild %s (Guild Master: %s)\n", g->guild.name, g->guild.master);
 		mapif_guild_created(fd,account_id,nullptr);
 		return 0;
 	}
-	ShowInfo("Created Guild %d - %s (Guild Master: %s)\n", g->guild.guild_id, g->guild.name, g->guild.master);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s(%d) 길드가 만들어졌습니다. (길드 마스터: %s)\n",  g->guild.name,g->guild.guild_id, g->guild.master);
+	else
+		ShowInfo("Created Guild %d - %s (Guild Master: %s)\n", g->guild.guild_id, g->guild.name, g->guild.master);
 
 	// Add to cache
 	guild_db[g->guild.guild_id] = g;
@@ -1253,9 +1332,14 @@ int mapif_parse_CreateGuild(int fd,uint32 account_id,char *name,struct guild_mem
 	mapif_guild_created(fd, account_id, &g->guild);
 	mapif_guild_info(fd,g->guild);
 
-	if(charserv_config.log_inter)
-		inter_log("guild %s (id=%d) created by master %s (id=%d)\n",
-			name, g->guild.guild_id, master->name, master->account_id );
+	if(charserv_config.log_inter) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			inter_log("%s(id=%d)의 이름을 가진 길드가 길드 마스터 %s(id=%d)에 의해 생성되었습니다.\n",
+				name, g->guild.guild_id, master->name, master->account_id );
+		else
+			inter_log("guild %s (id=%d) created by master %s (id=%d)\n",
+				name, g->guild.guild_id, master->name, master->account_id );
+	}
 
 	return 0;
 }
@@ -1497,7 +1581,10 @@ int mapif_parse_GuildBasicInfoChange(int fd,int guild_id,int type,const char *da
 			g->save_flag |= GS_LEVEL;
 			return 0;
 		default:
-			ShowError("int_guild: GuildBasicInfoChange: Unknown type %d\n",type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("int_guild: 길드 기본정보 변경: %d의 알수 없는 타입.\n",type);
+			else
+				ShowError("int_guild: GuildBasicInfoChange: Unknown type %d\n",type);
 			break;
 	}
 	mapif_guild_basicinfochanged(guild_id,type,data,len);
@@ -1534,8 +1621,12 @@ int mapif_parse_GuildMemberInfoChange(int fd,int guild_id,uint32 account_id,uint
 
 	// Not Found
 	if(i==g->guild.max_member){
-		ShowWarning("int_guild: GuildMemberChange: Not found %d,%d in guild (%d - %s)\n",
-			account_id,char_id,guild_id,g->guild.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("int_guild: 길드맴버 변경: %s(%d) 길드내에 해당 길드원(AID: %d, CID: %d)이 없습니다.\n",
+				g->guild.name,guild_id,account_id,char_id);
+		else
+			ShowWarning("int_guild: GuildMemberChange: Not found %d,%d in guild (%d - %s)\n",
+				account_id,char_id,guild_id,g->guild.name);
 		return 0;
 	}
 
@@ -1614,7 +1705,10 @@ int mapif_parse_GuildMemberInfoChange(int fd,int guild_id,uint32 account_id,uint
 			break;
 		}
 		default:
-		  ShowError("int_guild: GuildMemberInfoChange: Unknown type %d\n",type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+			  ShowError("int_guild: 길드맴버 정보변경: %d의 알수 없는 타입.\n",type);
+			else
+			  ShowError("int_guild: GuildMemberInfoChange: Unknown type %d\n",type);
 		  break;
 	}
 	return 0;
@@ -1632,14 +1726,20 @@ int inter_guild_charname_changed(int guild_id,uint32 account_id, uint32 char_id,
 	auto g = inter_guild_fromsql( guild_id );
 
 	if( g == nullptr ){
-		ShowError("inter_guild_charrenamed: Can't find guild %d.\n", guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter_guild_charrenamed: %d의 길드를 찾을 수 없습니다.\n", guild_id);
+		else
+			ShowError("inter_guild_charrenamed: Can't find guild %d.\n", guild_id);
 		return 0;
 	}
 
 	ARR_FIND(0, g->guild.max_member, i, g->guild.member[i].char_id == char_id);
 	if( i == g->guild.max_member )
 	{
-		ShowError("inter_guild_charrenamed: Can't find character %d in the guild\n", char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter_guild_charrenamed: %d의 케릭터를 해당 길드내에서 찾을 수 없습니다.\n", char_id);
+		else
+			ShowError("inter_guild_charrenamed: Can't find character %d in the guild\n", char_id);
 		return 0;
 	}
 
@@ -1826,7 +1926,10 @@ int mapif_parse_GuildCastleDataSave(int fd, int castle_id, int index, int value)
 	std::shared_ptr<struct guild_castle> gc = inter_guildcastle_fromsql( castle_id );
 
 	if( gc == nullptr ){
-		ShowError("mapif_parse_GuildCastleDataSave: castle id=%d not found\n", castle_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("mapif_parse_GuildCastleDataSave: 성 ID=%d가 없습니다.\n", castle_id);
+		else
+			ShowError("mapif_parse_GuildCastleDataSave: castle id=%d not found\n", castle_id);
 		return 0;
 	}
 
@@ -1853,7 +1956,10 @@ int mapif_parse_GuildCastleDataSave(int fd, int castle_id, int index, int value)
 				gc->guardian[index - CD_ENABLED_GUARDIAN00].visible = value;
 				break;
 			}
-			ShowError("mapif_parse_GuildCastleDataSave: not found index=%d\n", index);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("mapif_parse_GuildCastleDataSave: 인덱스=%d를 찾을 수 없습니다.\n", index);
+			else
+				ShowError("mapif_parse_GuildCastleDataSave: not found index=%d\n", index);
 			return 0;
 	}
 	inter_guildcastle_tosql(gc);
@@ -1895,7 +2001,10 @@ int mapif_parse_GuildMasterChange(int fd, int guild_id, const char* name, int le
 	if (len < NAME_LENGTH)
 		g->guild.master[len] = '\0';
 
-	ShowInfo("int_guild: Guildmaster Changed to %s (Guild %d - %s)\n",g->guild.master, guild_id, g->guild.name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("int_guild: %s(%d) 길드의 길드마스터가 %s 님으로 변경됐습니다.\n", g->guild.name,guild_id,g->guild.master);
+	else
+		ShowInfo("int_guild: Guildmaster Changed to %s (Guild %d - %s)\n",g->guild.master, guild_id, g->guild.name);
 	g->save_flag |= (GS_BASIC|GS_MEMBER); //Save main data and member data.
 	return mapif_guild_master_changed(g->guild, g->guild.member[0].account_id, g->guild.member[0].char_id, g->guild.last_leader_change);
 }

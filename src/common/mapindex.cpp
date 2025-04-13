@@ -9,6 +9,7 @@
 #include "mmo.hpp"
 #include "showmsg.hpp"
 #include "strlib.hpp"
+#include <config/custom.hpp>
 
 DBMap *mapindex_db;
 struct _indexes {
@@ -27,7 +28,10 @@ const char* mapindex_getmapname(const char* string, char* output) {
 
 	size_t len = strnlen(string, MAP_NAME_LENGTH_EXT);
 	if (len == MAP_NAME_LENGTH_EXT) {
-		ShowWarning("(mapindex_normalize_name) Map name '%*s' is too long!\n", 2*MAP_NAME_LENGTH_EXT, string);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("(mapindex_normalize_name) 맵 이름 '%*s'은(는) 너무 깁니다!\n", 2*MAP_NAME_LENGTH_EXT, string);
+		else
+			ShowWarning("(mapindex_normalize_name) Map name '%*s' is too long!\n", 2*MAP_NAME_LENGTH_EXT, string);
 		len--;
 	}
 	if (len >= 4 && stricmp(&string[len-4], ".gat") == 0)
@@ -54,7 +58,10 @@ const char* mapindex_getmapname_ext(const char* string, char* output) {
 	len = safestrnlen(buf, MAP_NAME_LENGTH);
 
 	if (len == MAP_NAME_LENGTH) {
-		ShowWarning("(mapindex_normalize_name) Map name '%*s' is too long!\n", 2*MAP_NAME_LENGTH, buf);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("(mapindex_normalize_name) 맵 이름 '%*s'은(는) 너무 깁니다!\n", 2*MAP_NAME_LENGTH, buf);
+		else
+			ShowWarning("(mapindex_normalize_name) Map name '%*s' is too long!\n", 2*MAP_NAME_LENGTH, buf);
 		len--;
 	}
 	safestrncpy(dest, buf, len+1);
@@ -78,24 +85,36 @@ int mapindex_addmap(int index, const char* name) {
 	}
 
 	if (index < 0 || index >= MAX_MAPINDEX) {
-		ShowError("(mapindex_add) Map index (%d) for \"%s\" out of range (max is %d)\n", index, name, MAX_MAPINDEX);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("(mapindex_add) \"%s\"에 대한 맵 인덱스(%d)가 범위를 벗어났습니다. (최대: %d)\n", name, index, MAX_MAPINDEX);
+		else
+			ShowError("(mapindex_add) Map index (%d) for \"%s\" out of range (max is %d)\n", index, name, MAX_MAPINDEX);
 		return 0;
 	}
 
 	mapindex_getmapname(name, map_name);
 
 	if (map_name[0] == '\0') {
-		ShowError("(mapindex_add) Cannot add maps with no name.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("(mapindex_add) 이름이 없는 맵은 추가할 수 없습니다.\n");
+		else
+			ShowError("(mapindex_add) Cannot add maps with no name.\n");
 		return 0;
 	}
 
 	if (strlen(map_name) >= MAP_NAME_LENGTH) {
-		ShowError("(mapindex_add) Map name %s is too long. Maps are limited to %d characters.\n", map_name, MAP_NAME_LENGTH);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("(mapindex_add) 맵 이름 %s은(는) 너무 깁니다. 맵 이름은 %d자까지 가능 합니다.\n", map_name, MAP_NAME_LENGTH);
+		else
+			ShowError("(mapindex_add) Map name %s is too long. Maps are limited to %d characters.\n", map_name, MAP_NAME_LENGTH);
 		return 0;
 	}
 
 	if (mapindex_exists(index)) {
-		ShowWarning("(mapindex_add) Overriding index %d: map \"%s\" -> \"%s\"\n", index, indexes[index].name, map_name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("(mapindex_add) 인덱스 %d 재정의: 맵 \"%s\" -> \"%s\"\n", index, indexes[index].name, map_name);
+		else
+			ShowWarning("(mapindex_add) Overriding index %d: map \"%s\" -> \"%s\"\n", index, indexes[index].name, map_name);
 		strdb_remove(mapindex_db, indexes[index].name);
 	}
 
@@ -115,14 +134,21 @@ unsigned short mapindex_name2idx(const char* name, const char *func) {
 	if( (i = strdb_iget(mapindex_db, map_name)) )
 		return i;
 
-	if (func)
-		ShowDebug("(%s) mapindex_name2id: Map \"%s\" not found in index list!\n", func, map_name);
+	if (func) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("(%s) mapindex_name2id: \"%s\"인 맵을 인덱스 목록에서 찾을 수 없습니다.\n", func, map_name);
+		else
+			ShowDebug("(%s) mapindex_name2id: Map \"%s\" not found in index list!\n", func, map_name);
+	}
 	return 0;
 }
 
 const char* mapindex_idx2name(unsigned short id, const char *func) {
 	if (id >= MAX_MAPINDEX || !mapindex_exists(id)) {
-		ShowDebug("(%s) mapindex_id2name: Requested name for non-existant map index [%d] in cache.\n", func, id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("(%s) mapindex_id2name: 캐시에 존재하지 않는 맵 인덱스[%d]에 대해 요청된 이름입니다.\n", func, id);
+		else
+			ShowDebug("(%s) mapindex_id2name: Requested name for non-existant map index [%d] in cache.\n", func, id);
 		return indexes[0].name; // dummy empty string so that the callee doesn't crash
 	}
 	return indexes[id].name;
@@ -149,10 +175,16 @@ void mapindex_init(void) {
 		if( ( fp = fopen( path, "r" ) ) == nullptr ){
 			// It is only fatal if it is the main file
 			if( i == 0 ){
-				ShowFatalError("Unable to read mapindex config file %s!\n", path );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowFatalError("mapindex 구성 파일인 %s을(를) 읽을 수 없습니다!\n", path );
+				else
+					ShowFatalError("Unable to read mapindex config file %s!\n", path );
 				exit(EXIT_FAILURE); //Server can't really run without this file.
 			}else{
-				ShowWarning("Unable to read mapindex config file %s!\n", path );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("mapindex 구성 파일인 %s을(를) 읽을 수 없습니다!\n", path );
+				else
+					ShowWarning("Unable to read mapindex config file %s!\n", path );
 				break;
 			}
 		}
@@ -184,7 +216,10 @@ void mapindex_init(void) {
 void mapindex_check_mapdefault(const char *mapname) {
 	mapname = mapindex_getmapname(mapname, nullptr);
 	if( !strdb_iget(mapindex_db, mapname) ) {
-		ShowError("mapindex_init: Default map '%s' not found in cache! Please change in (by default in) char_athena.conf!\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("mapindex_init: 캐시에 기본 맵인 '%s'을(를) 찾을 수 없습니다! char_athena.conf 파일에서 변경(default)하세요!\n", mapname);
+		else
+			ShowError("mapindex_init: Default map '%s' not found in cache! Please change in (by default in) char_athena.conf!\n", mapname);
 	}
 }
 

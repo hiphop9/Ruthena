@@ -12,6 +12,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -225,8 +226,12 @@ bool mapif_homunculus_load(int homun_id, struct s_homunculus* hd)
 	}
 	Sql_FreeResult(sql_handle);
 
-	if( charserv_config.save_log )
-		ShowInfo("Homunculus loaded (ID: %d - %s / Class: %d / CID: %d).\n", hd->hom_id, hd->name, hd->class_, hd->char_id);
+	if( charserv_config.save_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("호문클루스가 로드되었습니다. (ID: %d - %s / Class: %d / CID: %d).\n", hd->hom_id, hd->name, hd->class_, hd->char_id);
+		else
+			ShowInfo("Homunculus loaded (ID: %d - %s / Class: %d / CID: %d).\n", hd->hom_id, hd->name, hd->class_, hd->char_id);
+	}
 
 	return true;
 }
@@ -239,7 +244,10 @@ bool mapif_homunculus_delete(int homun_id)
 		Sql_ShowDebug(sql_handle);
 		return false;
 	}
-	ShowInfo("Homunculus '%d' has been deleted.\n", homun_id);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("'%d'의 호문클루스는 제거 되었습니다.\n", homun_id);
+	else
+		ShowInfo("Homunculus '%d' has been deleted.\n", homun_id);
 	return true;
 }
 

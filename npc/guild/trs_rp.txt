@@ -1,20 +1,16 @@
-//===== rAthena Script ======================================= 
-//= Treasure Room Protection
-//===== By: ================================================== 
-//= Masao
-//===== Current Version: ===================================== 
-//= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Restricts Treasure Room entry to Guild Masters only.
-//===== Additional Comments: ================================= 
-//= 1.0 Converted from the official script.
-//= 1.1 Reverted back and optimized. [Daegaladh]
-//============================================================ 
+//------------------------------------------------------------------------------
+// Empelium Forums - http://em-24.com
+// SRO - http://www.sro.kr
+// SuperNovice Korea - http://www.supernovice.co.kr
+//------------------------------------------------------------------------------
+// rAthena Project
+// Last Attempt Version: v7606 (02-15-2023)
+//------------------------------------------------------------------------------
+// 제작: Masao (v1.1)
+// 한글화: Parodius(NPIKA)
+//------------------------------------------------------------------------------
 
-// Main NPC :: ban_stealer
+// 마스터방 프로텍터
 //============================================================
 -	script	Gld_Trea_Protect::Gld_Trea_Protect	-1,{
 	end;

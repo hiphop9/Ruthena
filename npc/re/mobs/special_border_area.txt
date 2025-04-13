@@ -7,6 +7,7 @@
 //= 1.1 Several corrections [Everade]
 //============================================================
 
-sp_os,0,0	monster	Heart Hunter Bellare	20355,112,5000
-sp_os,0,0	monster	Heart Hunter Sanare	20357,108,5000
-sp_os,0,0	monster	Venenum	20363,5,5000
+sp_os,0,0	monster	하트 헌터 벨라레	20355,112,5000
+sp_os,0,0	monster	하트 헌터 사나레	20357,108,5000
+sp_os,0,0	monster	베네눔	20363,5,5000
+

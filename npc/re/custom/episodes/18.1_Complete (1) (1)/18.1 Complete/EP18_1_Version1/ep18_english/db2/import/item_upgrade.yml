@@ -1,0 +1,8 @@
+
+Header:
+  Type: ITEM_UPGRADE_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep18_1/item_upgrade.yml

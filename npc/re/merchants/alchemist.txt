@@ -16,49 +16,49 @@
 
 // Main NPC :: craft_book_alche_skill_npc
 //============================================================
-alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
-	mes "[Craft Book Merchant]";
-	mes "Welcome.";
-	mes "I'm here to sell";
-	mes "^0000FFspecial craft books^000000 for Geneticists.";
+alde_alche,31,186,3	script	제조책 판매원#alde	883,{
+	mes "[제조책 판매원]";
+	mes "안녕하세요.";
+	mes "이 곳에서는 제네릭의";
+	mes "^0000FF특별한 제조책^000000을 판매하고 있습니다.";
 	next;
-	mes "[Craft Book Merchant]";
-	mes "Geneticists have some skills";
-	mes "that require craft books to activate.";
+	mes "[제조책 판매원]";
+	mes "제네릭 제조책을 소지하고 있어야";
+	mes "발동되는스킬이 존재합니다.";
 	next;
-	mes "[Craft Book Merchant]";
-	mes "The more craft books you have,";
-	mes "the more skills you can use.";
+	mes "[제조책 판매원]";
+	mes "물론 소유하고 있는 책의 종류가";
+	mes "많으면 사용할 수 있는 스킬의 수도";
+	mes "많아집니다.";
 	next;
-	mes "[Craft Book Merchant]";
-	mes "Please understand that";
-	mes "I specialize in the sale of these special books and";
-	mes "I ^FF0000don't sell other items^000000.";
+	mes "[제조책 판매원]";
+	mes "특별한 책을 취급하는 만큼";
+	mes "^FF0000다른 아이템의 거래는 불가^000000하니";
+	mes "이 점 양해해 주세요.";
 	next;
-	mes "[Craft Book Merchant]";
-	mes "Would you like to take a look at my craft books?";
+	mes "[제조책 판매원]";
+	mes "그럼, 제조책을 보시겠어요";
 	next;
-	if(select("Sure.:No.") == 2) {
-		mes "[Craft Book Merchant]";
-		mes "Thank you for visiting my shop.";
-		mes "Please be safe on your travels.";
+	if(select("예.:아니오.") == 2) {
+		mes "[제조책 판매원]";
+		mes "그럼, 제조책 리스트를 보여드릴게요.";
 		close;
 	}
 	if (checkweight(1201,1) == 0) {
-		mes "[Craft Book Merchant]";
-		mes "I'm sorry, but your inventory is almost full.";
-		mes "Please empty your inventory first.";
+		mes "[제조책 판매원]";
+		mes "음, 죄송하지만 인벤토리가 가득 찬거같은데..";
+		mes "인벤토리를 먼저 비우고 와주시겠어요?";
 		close;
 	}
 	if (MaxWeight - Weight < 2500) {
-		mes "[Craft Book Merchant]";
-		mes "Please empty your inventory first.";
+		mes "[제조책 판매원]";
+		mes "먼저, 인벤토리 무게를 확보하고 와주세요.";
 		close;
 	}
-	mes "[Craft Book Merchant]";
-	mes "Okay then, here's the list of available craft books.";
+	mes "[제조책 판매원]";
+	mes "그럼, 제조책 리스트를 보여드릴게요.";
 	next;
-	switch(select("[Apple Bomb Craft Book] 100,000 zeny:[Pineapple Bomb Craft Book] 100,000 zeny:[Coconut Bomb Craft Book] 100,000 zeny:[Melon Bomb Craft Book] 100,000 zeny:[Banana Bomb Craft Book] 100,000 zeny:[Plant Gene Cultivation Method] 100,000 zeny:[Superior Potion Craft Manual] 100,000 zeny:[Mix Cooking Book] 100,000 zeny:[Health Improvement Research Book] 100,000 zeny:[Vigor Drink Recipe] 100,000 zeny:Close")){
+	switch(select("[사과폭탄제조책] 100,000 zeny:[파인애플폭탄제조책] 100,000 zeny:[야자열매폭탄제조책] 100,000 zeny:[멜론폭탄제조책] 100,000 zeny:[바나나폭탄제조책] 100,000 zeny:[식물유전자재배법] 100,000 zeny:[상급포션제조매뉴얼] 100,000 zeny:[믹스쿠킹요리책] 100,000 zeny:[체력증진연구서] 100,000 zeny:[활력드링크제조법] 100,000 zeny:구매를 종료한다")){
 	case 1: set .@item,6279; break;
 	case 2: set .@item,6280; break;
 	case 3: set .@item,6281; break;
@@ -70,52 +70,64 @@ alde_alche,31,186,3	script	Craft Book Merchant#alde	883,{
 	case 9: set .@item,11023; break;
 	case 10: set .@item,11024; break;
 	case 11:
-		mes "[Craft Book Merchant]";
-		mes "Thank you for your patronage.";
-		mes "Please come again.";
+		mes "[제조책 판매원]";
+		mes "그럼 다음에 또 뵙겠습니다.";
+		mes "감사합니다. 안녕히 가세요.";
 		close;
 	}
-	mes "[Craft Book Merchant]";
-	mes "^0000FF["+getitemname(.@item)+"] costs";
-	mes "100,000 zeny.";
-	mes "How many would you like to purchase?";
+	mes "[제조책 판매원]";
+	mes "^0000FF["+getitemname(.@item)+"]^000000은";
+	mes "100,000 zeny 입니다.";
+	mes "구매할실 권 수를 말씀해 주세요.";
 	next;
 	input .@amount;
 	if (.@amount == 0) {
-		mes "[Craft Book Merchant]";
-		mes "Would you like to see some different books?";
+		mes "[제조책 판매원]";
+		mes "다른 책들을 보시겠습니까?";
 		close;
 	}
 	if (.@amount < 1 || .@amount > 99 ){
-		mes "[Craft Book Merchant]";
-		mes "You cannot purchase more than 100 at a time.";
+		mes "[제조책 판매원]";
+		mes "한번에 100개 이상은 구매하실수 없습니다.";
 		close;
 	}
-	mes "[Craft Book Merchant]";
-	mes "You've entered "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 to be purchased.";
-	mes "Would you like to continue?";
+	mes "[제조책 판매원]";
+	mes "구매하시려는 수량이 "+.@amount+"x ^0000FF["+getitemname(.@item)+"]^000000 맞으신가요?";
+	mes "계속 진행하시겠어요?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("네:아니오") == 1) {
 		set .@total, .@amount * 100000;
 		if (Zeny < .@total) {
-			mes "[Craft Book Merchant]";
-			mes "I'm sorry, but you don't have enough money.";
+			mes "[제조책 판매원]";
+			mes "죄송하지만 제니가 충분하지 않네요.";
 			close;
 		}
 		if (checkweight(.@item,.@amount) == 0){
-			mes "[Craft Book Merchant]";
-			mes "It doesn't seem like you can carry everything.";
-			mes "Please check the space in your inventory.";
+			mes "[제조책 판매원]";
+			mes "들고가실 공간이 충분해보이지 않는데..";
+			mes "먼저 인벤토리 공간과 무게를 확인해주세요.";
 			close;
 		}
-		mes "[Craft Book Merchant]";
-		mes "Thank you for your patronage.";
+		mes "[제조책 판매원]";
+		mes "거래 감사합니다.";
 		set Zeny,Zeny - .@total;
 		getitem .@item,.@amount;
 		close;
 	}
-	mes "[Craft Book Merchant]";
-	mes "Please take your time";
-	mes "before you make your decision.";
+	mes "[제조책 판매원]";
+	mes "결정하시면 다시 와주세요~";
+	mes "감사합니다.";
 	close;
+}
+
+-	marketshop	Combination	-1,1000275:1000:-1
+
+alde_alche,32,187,4	script	조합 판매원#alde	744,{
+		mes "[조합 판매원]";
+		mes "네, 비커요?";
+		mes "비커?비커 어디에 쓰지?";
+		mes "좌우간 비커요?네, 있어요!";
+		close2;
+		callshop "Combination";
+		end;
 }

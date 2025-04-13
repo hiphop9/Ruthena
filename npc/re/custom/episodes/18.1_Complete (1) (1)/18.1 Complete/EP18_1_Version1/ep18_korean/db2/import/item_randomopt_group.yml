@@ -1,0 +1,8 @@
+
+Header:
+  Type: RANDOM_OPTION_GROUP
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep18_1/item_randomopt_group.yml

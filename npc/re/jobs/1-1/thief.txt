@@ -1,34 +1,34 @@
-//===== rAthena Script ======================================= 
-//= Renewal Thief Job Quest
-//===== By: ================================================== 
-//= Kisuka
-//===== Current Version: ===================================== 
+//===== rAthena 스크립트 =======================================
+//= 갱신 도둑 직업 퀘스트
+//===== 게시자: ========================================= =========
+//= 키스카
+//===== 현재 버전: ======================================
 //= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Job Change to Thief Class
-//===== Additional Comments: ================================= 
-//= 1.0 First Version. [Kisuka]
-//= 1.1 Added support for Baby classes. [Euphy]
-//============================================================ 
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= 도둑 클래스로 직업 변경
+//===== 추가 의견: ==================================
+//= 1.0 첫 번째 버전. [키스카]
+//= 1.1 Baby 클래스에 대한 지원이 추가되었습니다. [유피]
+//================================================ ============
 moc_prydb1,39,129,2	script	Thief Guide#thief	69,{
 	if (Upper == 1) {
 		if (ADVJOB == Job_Assassin_Cross || ADVJOB == Job_Stalker) {
 			if (Class == Job_Novice_High) {
-				mes "[Thief Guide]";
-				mes "Huh? Do I know you? It's creepy that you seem so familiar. You don't have a twin, do you?";
+				mes "[도둑 가이드]";
+				mes "어? 내가 당신을 아는가? 너무 낯익은 것 같아 소름끼친다. 쌍둥이는 없지?";
 				next;
 				if (!callfunc("F_CanChangeJob")) {
-					mes "[Thief Guide]";
-					mes "What, do you want to be a Thief? I'm sorry, but you look like you need more training.";
+					mes "[도둑 가이드]";
+					mes "뭐야, 도둑이 되고 싶어? 미안하지만 훈련이 더 필요한 것 같구나.";
 					next;
-					mes "[Thief Guide]";
-					mes "Take your time and learn all the Basic Skills, will you? Well then, see you later~!";
+					mes "[도둑 가이드]";
+					mes "시간을 갖고 기본 스킬을 다 배워보실래요? 그럼 이따 만나요~!";
 					close;
 				}
-				mes "[Thief Guide]";
-				mes "Well, I got this feeling like you've been through a lifetime of fighting, so I'm promoting you to a Thief right this minute. I better give you tough guys what you want...";
+				mes "[도둑 가이드]";
+				mes "글쎄요, 당신이 평생 싸움을 겪은 것 같아서 지금 당장 당신을 도둑으로 승급시키려고 합니다. 터프가이들에게 당신이 원하는 것을 주는 것이 좋을 것 같아요...";
 				next;
 				skill "NV_TRICKDEAD",0,SKILL_PERM;
 				jobchange Job_Thief_High;
@@ -36,167 +36,167 @@ moc_prydb1,39,129,2	script	Thief Guide#thief	69,{
 				skill "TF_BACKSLIDING",1,SKILL_PERM;
 				skill "TF_PICKSTONE",1,SKILL_PERM;
 				skill "TF_THROWSTONE",1,SKILL_PERM;
-				mes "[Thief Guide]";
-				mes "Since you've become a Thief, live as a Thief. Now, go for it! Next~";
+				mes "[도둑 가이드]";
+				mes "도둑이 되었으니 도둑으로 살아라. 자, 해보자! 다음~";
 				close;
 			}else{
-				mes "[Thief Guide]";
+				mes "[도둑 가이드]";
 				if (Sex == SEX_MALE)
-					mes "Hey, dude.";
+					mes "안녕 친구.";
 				else
-					mes "Hey, baby~";
+					mes "안녕 자기야~";
 				close;
 			}
 		}else{
-			mes "[Thief Guide]";
+			mes "[도둑 가이드]";
 			if (Sex == SEX_MALE)
-				mes "Hey, dude.";
+				mes "안녕 친구.";
 			else
-				mes "Hey, baby.";
-			mes "...Hey! You look too goody-goody to want to be a Thief!! Now scram, I'm busy. Next!";
+				mes "안녕, 자기야.";
+			mes "...야! 도둑이 되기엔 너무 착해 보이는데!! 자, 난 바쁘다. 다음!";
 			close;
 		}
 	}
 	if(q_job_thief == 1) {
-		mes "[Thief Guildsman]";
-		mes "Ehh... Seems like a beloved "+(Sex == SEX_MALE?"son":"daughter")+" of a rich family, but why are you here in this dirty place?";
+		mes "[도둑 길드맨]";
+		mes "에에...부잣집에서 사랑하는 "+(Sex == SEX_MALE?"son":"daughter")+" 같은데 왜 이런 더러운 곳에 있는 걸까요?";
 		next;
-		mes "[Thief Guildsman]";
-		mes "Well, I'm not in charge of making you a Thief. I just accept applications, get it?";
-		mes "If you want to become a Thief, ask the sharp-eyed guy next to me.";
+		mes "[도둑 길드맨]";
+		mes "글쎄요, 저는 당신을 도둑으로 만드는 일을 맡는 것이 아닙니다. 단지 지원서를 받는 것뿐입니다. 알겠죠?";
+		mes "도둑이 되고 싶다면 내 옆에 있는 눈썰미 좋은 놈에게 물어보세요.";
 		close;
 	}
-	mes "[Thief Guildsman]";
+	mes "[도둑 길드맨]";
 	if(BaseJob != Job_Novice) {
 		if(BaseJob == Job_Thief) {
-			mes "Hey~ if you have any trouble, get it out to me anytime, huh?";
+			mes "야~ 무슨 일 있으면 언제든지 얘기해, 응?";
 			close;
 		}else{
-			mes "What the heck...?";
+			mes "도대체 무슨...?";
 			if(Sex == SEX_MALE) {
-				mes "Huh... you are a "+jobname(Class)+", blockhead!";
+				mes "어... 너 "+Jobname(Class)+"이구나, 멍청아!";
 				next;
-				mes "[Thief Guildsman]";
-				mes "Hey, brother.";
+				mes "[도둑 길드맨]";
+				mes "안녕하세요, 형제님.";
 			}else{
 				next;
-				mes "[Thief Guildsman]";
-				mes "Hey, lady.";
+				mes "[도둑 길드맨]";
+				mes "안녕하세요 아가씨.";
 			}
-			mes "Why are you here? Go back to your place~ go back~~";
+			mes "왜 왔어? 제자리로 돌아가~ 돌아가~~";
 			close;
 		}
 	}
-	mes "Ehh... Seems like a beloved "+(Sex == SEX_MALE?"son":"daughter")+" of a rich family, but why are you here in this dirty place?";
+	mes "에에...부잣집에서 사랑하는 "+(Sex == SEX_MALE?"son":"daughter")+" 같은데 왜 이런 더러운 곳에 있는 걸까요?";
 	next;
-	if(select("I want to be a Thief.:Nothing.") == 2) {
-		mes "[Thief Guildsman]";
-		mes "You know you cannot be a thief without an application...";
-		mes "What's on your mind...?";
+	if(select("나는 도둑이 되고 싶습니다.:아무것도 없습니다.") == 2) {
+		mes "[도둑 길드맨]";
+		mes "신청 없이는 도둑이 될 수 없다는 거 아시죠...";
+		mes "무슨 생각을 하고 계시나요...?";
 		close;
 	}
-	mes "[Thief Guildsman]";
-	mes "Well, are you that proud of it?";
-	mes "You're telling me so proudly that you want to be a Thief! Why don't you go to all the villages and advertise yourself for being a thief?";
-	mes "'Ha ha ha! Go put up a banner that says 'I will be a proud thief who steals other people's stuff.'";
+	mes "[도둑 길드맨]";
+	mes "글쎄, 그렇게 자랑스러워?";
+	mes "도둑이 되고 싶다고 자랑스럽게 말하잖아! 마을마다 다니면서 도둑이라는 광고를 하는 게 어때?";
+	mes "'하하하! 가서 '나는 남의 물건을 훔치는 자랑스러운 도둑이 될 것이다'라고 적힌 현수막을 걸어라.";
 	next;
-	mes "[Thief Guildsman]";
-	mes "Do you want to be a thief so badly?";
+	mes "[도둑 길드맨]";
+	mes "그렇게 도둑이 되고 싶냐?";
 	next;
-	switch(select("Yes.:No.:How about you?")) {
+	switch(select("예.:아니요.:당신은 어때요?")) {
 	case 1:
-		mes "[Thief Guildsman]";
-		mes "Oh, do you...? Huh.. well... I do live and learn to see strange people like you.";
+		mes "[도둑 길드맨]";
+		mes "아, 혹시...? 응.. 뭐... 난 너 같은 이상한 사람들을 보면서 배우며 살아가고 있어.";
 		next;
 		break;
 	case 2:
-		mes "[Thief Guildsman]";
-		mes "Then why are you here? Do you think you can become a thief so easily?";
+		mes "[도둑 길드맨]";
+		mes "그럼 넌 왜 여기 있는 거야? 그렇게 쉽게 도둑이 될 수 있을 것 같아?";
 		next;
 		break;
 	case 3:
-		mes "[Thief Guildsman]";
-		mes "Eh..? me? me?";
-		mes "Well... I just fit well to being a thief... characteristically... I don't mind this silly matter.";
+		mes "[도둑 길드맨]";
+		mes "어..? 나? 나?";
+		mes "글쎄요... 저는 도둑이 되는 게 딱 맞는 것 같아요... 특성상... 이런 어리석은 일에는 별로 개의치 ??않습니다.";
 		next;
 		break;
 	}
-	mes "[Thief Guildsman]";
-	mes "Anyway, in the outside world, never say that you want to be a Thief!!";
+	mes "[도둑 길드맨]";
+	mes "그나저나 바깥세상에서는 절대 도둑이 되고 싶다고 말하지 마세요!!";
 	next;
-	mes "[Thief Guildsman]";
-	mes "So, do you want to apply for being a Thief?";
+	mes "[도둑 길드맨]";
+	mes "그럼 도둑이 되기 위해 지원하시겠습니까?";
 	next;
-	if(select("Yes, I do.:No.") == 2) {
-		mes "[Thief Guildsman]";
-		mes "Well... do what you want to do~ Go your way~";
+	if(select("예, 그렇습니다.:아니요.") == 2) {
+		mes "[도둑 길드맨]";
+		mes "그럼... 하고 싶은대로 하세요~ 가세요~";
 		close;
 	}
-	mes "[Thief Guildsman]";
-	mes "Alright, tell me your name. Huh? What?";
-	mes ""+strcharinfo(0)+". So "+strcharinfo(0)+", right...?";
+	mes "[도둑 길드맨]";
+	mes "알았어, 이름을 말해봐. 응? 뭐라고?";
+	mes ""+strcharinfo(0)+". 그럼 "+strcharinfo(0)+" 맞죠...?";
 	next;
 	if (!callfunc("F_CanChangeJob")) {
-		mes "[Thief Guildsman]";
-		mes "I can see your strong will to become a Thief......";
-		mes "But only with your will, you cannot make it in a real fight, can you?";
-		mes "So go and reach at least Basic Skill Level 9.";
+		mes "[도둑 길드맨]";
+		mes "도둑이 되려는 강한 의지가 보이네요......";
+		mes "하지만 의지만으로는 실제 싸움에 나갈 수 없잖아요?";
+		mes "그러니 가서 기본 스킬 레벨 9 이상을 달성하세요.";
 		close;
 	}
-	mes "[Thief Guildsman]";
-	mes "Hmm.... I found your interesting criminal records from the data of the detective agency. Well you seem to have what it takes to be a good thief.";
-	mes ""+strcharinfo(0)+". I now declare that you have passed the job interview!";
+	mes "[도둑 길드맨]";
+	mes "흠.... 탐정사무소 자료에서 흥미로운 범죄기록을 찾았네요. 그럼 당신은 좋은 도둑이 될 자질을 갖춘 것 같군요.";
+	mes ""+strcharinfo(0)+". 이제 당신이 면접에 합격했음을 선언합니다!";
 	next;
-	mes "[Thief Guildsman]";
-	mes "Well, I'm not in charge of making you a Thief. I just accept applications, get it?";
-	mes "If you want to become a Thief, ask the guy next to me.";
+	mes "[도둑 길드맨]";
+	mes "글쎄요, 저는 당신을 도둑으로 만드는 일을 맡는 것이 아닙니다. 단지 지원서를 받는 것뿐입니다. 알겠죠?";
+	mes "도둑이 되고 싶다면 내 옆에 있는 아저씨에게 물어보세요.";
 	set q_job_thief,1;
 	close;
 }
 
 moc_prydb1,42,133,2	script	Thief Guildsman#thief	118,{
 	if(q_job_thief == 1) {
-		mes "[Thief Guildsman]";
-		mes "Alright. You must have passed the job interview, huh?";
-		mes "Good. I'll accept you.";
-		mes "Let's begin the job-changing ceremony of our guild!";
+		mes "[도둑 길드맨]";
+		mes "알았어. 면접은 합격했겠지?";
+		mes "좋아. 받아줄게.";
+		mes "우리 길드 전직식을 시작하겠습니다!";
 		next;
-		mes "[Commander of Thief Guild]";
+		mes "[도둑길드 사령관]";
 		mes "'"+strcharinfo(0)+".'";
-		mes "'For those who are ready, the moonlight shall open the way. Now you are fully ready, I now officially allow you to become a member of the Thief Guild.'";
+		mes "'준비된 자에게는 달빛이 길을 열어줄 것이다. 이제 모든 준비가 끝났으니 이제 정식으로 도적 길드의 회원이 되는 것을 허락한다.'";
 		callfunc "Job_Change",Job_Thief;
 		set q_job_thief,0;
-		getitem 13041,1;	// N_Main_Gauche
+		getitem 13041,1; // N_Main_Gauche
 		next;
-		mes "[Commander of Thief Guild]";
-		mes "'Congratulations on becoming a Thief.'";
-		mes "'From now on, keep the rules of our guild and be an honorable member.'";
-		mes "'If you bring us any disgrace by breaking our rules, you better watch your back.'";
-		mes "'Anyway, I expect you to be a great thief.'";
+		mes "[도둑길드 사령관]";
+		mes "'도둑이 된 것을 축하합니다.'";
+		mes "'이제부터 우리 길드의 규칙을 지키고 명예로운 회원이 되십시오.'";
+		mes "'만약 우리의 규칙을 어겨 우리에게 불명예를 가져온다면, 뒤를 조심하는 것이 좋을 것입니다.'";
+		mes "'어쨌든 당신은 대단한 도둑이기를 기대합니다.'";
 		next;
-		mes "[Brad]";
-		mes "Heee~Yaaaa~! Congratulations! My friend.";
-		mes "My name is 'Brad'. I'm in charge of human resources here.";
-		mes "I'm not sure for now but you'll have more chances to see me later on.";
+		mes "[브래드]";
+		mes "히에~야아아아~! 축하해! 친구야.";
+		mes "제 이름은 '브래드'입니다. 여기서 인사담당을 맡고 있어요.";
+		mes "지금은 잘 모르겠지만 나중에 저를 만날 기회가 더 많을 거예요.";
 		next;
-		mes "[Brad]";
-		mes "Okay, I've done what I can do to you, so go on your way. I'm quite a busy man.";
-		mes "See you again.";
+		mes "[브래드]";
+		mes "그래, 난 너에게 할 수 있는 일을 했으니 어서 가거라. 나는 꽤 바쁜 사람이다.";
+		mes "또 만나요.";
 		close;
 	}
 	if(BaseJob != Job_Novice) {
 		if(BaseJob == Job_Thief) {
-			mes "[Brad]";
-			mes "I don't have any special events now. So go on your way and come back later.";
+			mes "[브래드]";
+			mes "지금은 특별한 일이 없으니 가던 길을 갔다가 나중에 다시 오세요.";
 		}else{
-			mes "[Thief Guildsman]";
-			mes "Hey~ Hey~ You're not a novice or a thief!";
-			mes "What are you doing here? You're not welcome to make this place your home~ Hweeeee~ Get outta here~";
+			mes "[도둑 길드맨]";
+			mes "야~야~ 넌 초보도 도둑도 아니야!";
+			mes "여기서 뭐하는 거야? 이곳을 집으로 삼으면 안 돼~ 휘이에에~ 여기서 나가~";
 		}
 		close;
 	}
-	mes "[Thief Guildsman]";
-	mes "Ho? Why is a novice like you visiting here?";
-	mes "If you are here to be a Thief, ask the nasty-tempered lady right next to me.";
+	mes "[도둑 길드맨]";
+	mes "호? 왜 당신같은 초보가 여기까지 왔나요?";
+	mes "도둑이 되려고 왔으면 바로 옆에 있는 성질 급한 아주머니에게 물어보세요.";
 	close;
 }

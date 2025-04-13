@@ -17,68 +17,68 @@
 //==================================================
 // gef_dun00 - Geffen Dungeon
 //==================================================
-gef_dun00,0,0	monster	Hunter Fly	1035,30,5000
-gef_dun00,0,0	monster	Poison Spore	1077,25,5000
-gef_dun00,0,0	monster	Poporing	1031,15,5000
-gef_dun00,91,106	monster	Red Plant	1078,1,300000,150000
-gef_dun00,92,108	monster	Yellow Plant	1081,1,300000,150000
-gef_dun00,114,106	monster	Green Plant	1080,1,300000,150000
-gef_dun00,0,0	monster	Red Plant	1078,1,300000,150000
-gef_dun00,0,0	monster	Shining Plant	1083,1,3000000,1500000
-gef_dun00,0,0	monster	Red Plant	1078,10,180000,90000
-gef_dun00,89,111,3,3	monster	Black Mushroom	1084,3,180000,90000
-gef_dun00,121,109,3,3	monster	Black Mushroom	1084,3,180000,90000
+gef_dun00,0,0	monster	헌터 플라이	1035,30,5000
+gef_dun00,0,0	monster	포이즌 스포아	1077,25,5000
+gef_dun00,0,0	monster	포포링	1031,15,5000
+gef_dun00,91,106	monster	빨간 풀	1078,1,300000,150000
+gef_dun00,92,108	monster	노란 풀	1081,1,300000,150000
+gef_dun00,114,106	monster	초록 풀	1080,1,300000,150000
+gef_dun00,0,0	monster	빨간 풀	1078,1,300000,150000
+gef_dun00,0,0	monster	빛나는 풀	1083,1,3000000,1500000
+gef_dun00,0,0	monster	빨간 풀	1078,10,180000,90000
+gef_dun00,89,111,3,3	monster	검은 버섯	1084,3,180000,90000
+gef_dun00,121,109,3,3	monster	검은 버섯	1084,3,180000,90000
 
 //==================================================
 // gef_dun01 - Geffen Dungeon
 //==================================================
-gef_dun01,0,0	monster	Ghoul	1036,40,5000
-gef_dun01,0,0	monster	Jakk	1130,40,5000
-gef_dun01,0,0	monster	Nightmare	1061,30,5000
-gef_dun01,0,0	monster	Zombie	1015,25,5000
-gef_dun01,0,0	monster	Drainliar	1111,20,5000
-gef_dun01,0,0,0,0	boss_monster	Dracula	1389,1,3600000,600000,1
-gef_dun01,234,121	monster	Blue Plant	1079,1,300000,100000
-gef_dun01,0,0	monster	Black Mushroom	1084,5,180000,90000
-gef_dun01,188,104,10,10	monster	White Plant	1082,3,180000,90000
-gef_dun01,263,115,10,10	monster	White Plant	1082,3,180000,90000
-gef_dun01,48,67,10,10	monster	White Plant	1082,2,180000,90000
-gef_dun01,150,237,10,10	monster	White Plant	1082,2,180000,90000
+gef_dun01,0,0	monster	구울	1036,40,5000
+gef_dun01,0,0	monster	잭	1130,40,5000
+gef_dun01,0,0	monster	나이트메어	1061,30,5000
+gef_dun01,0,0	monster	좀비	1015,25,5000
+gef_dun01,0,0	monster	드레인리어	1111,20,5000
+gef_dun01,0,0,0,0	boss_monster	드라큘라	1389,1,3600000,600000,1
+gef_dun01,234,121	monster	파란 풀	1079,1,300000,100000
+gef_dun01,0,0	monster	검은 버섯	1084,5,180000,90000
+gef_dun01,188,104,10,10	monster	하얀 풀	1082,3,180000,90000
+gef_dun01,263,115,10,10	monster	하얀 풀	1082,3,180000,90000
+gef_dun01,48,67,10,10	monster	하얀 풀	1082,2,180000,90000
+gef_dun01,150,237,10,10	monster	하얀 풀	1082,2,180000,90000
 
 //==================================================
 // gef_dun02 - Geffenia
 //==================================================
-gef_dun02,0,0	monster	Deviruchi	1109,45,5000
-gef_dun02,0,0	monster	Marionette	1143,30,5000
-gef_dun02,0,0	monster	Nightmare	1061,20,5000
-gef_dun02,0,0	monster	Whisper	1179,20,5000
-gef_dun02,0,0	monster	Ghoul	1036,10,5000
-gef_dun02,0,0	monster	Hunter Fly	1035,10,5000
-gef_dun02,0,0,0,0	boss_monster	Doppelganger	1046,1,7200000,600000,1
-gef_dun02,214,212,10,10	monster	White Plant	1082,3,180000,90000
-gef_dun02,215,67,10,10	monster	White Plant	1082,3,180000,90000
-gef_dun02,72,210,20,20	monster	White Plant	1082,3,180000,90000
-gef_dun02,106,151,20,7	monster	White Plant	1082,3,180000,90000
-gef_dun02,58,167,10,10	monster	Shining Plant	1083,1,1800000,900000
-gef_dun02,185,83,3,3	monster	Shining Plant	1083,1,1800000,900000
+gef_dun02,0,0	monster	데비루치	1109,45,5000
+gef_dun02,0,0	monster	마리오네트	1143,30,5000
+gef_dun02,0,0	monster	나이트메어	1061,20,5000
+gef_dun02,0,0	monster	위스퍼	1179,20,5000
+gef_dun02,0,0	monster	구울	1036,10,5000
+gef_dun02,0,0	monster	헌터 플라이	1035,10,5000
+gef_dun02,0,0,0,0	boss_monster	도플갱어	1046,1,7200000,600000,1
+gef_dun02,214,212,10,10	monster	하얀 풀	1082,3,180000,90000
+gef_dun02,215,67,10,10	monster	하얀 풀	1082,3,180000,90000
+gef_dun02,72,210,20,20	monster	하얀 풀	1082,3,180000,90000
+gef_dun02,106,151,20,7	monster	하얀 풀	1082,3,180000,90000
+gef_dun02,58,167,10,10	monster	빛나는 풀	1083,1,1800000,900000
+gef_dun02,185,83,3,3	monster	빛나는 풀	1083,1,1800000,900000
 
 //==================================================
 // gef_dun03 - Geffenia
 //==================================================
-gef_dun03,0,0	monster	Wraith	1192,14,5000
-gef_dun03,0,0	monster	Wind Ghost	1263,5,5000
-gef_dun03,0,0	monster	Hellion Revenant	1626,1,600000,300000
-gef_dun03,0,0	monster	Shining Plant	1083,5,1800000,900000
-gef_dun03,0,0	monster	White Plant	1082,18,180000,90000
+gef_dun03,0,0	monster	레이쓰	1192,14,5000
+gef_dun03,0,0	monster	윈드고스트	1263,5,5000
+gef_dun03,0,0	monster	헬리온 레버넌트	1626,1,600000,300000
+gef_dun03,0,0	monster	빛나는 풀	1083,5,1800000,900000
+gef_dun03,0,0	monster	하얀 풀	1082,18,180000,90000
 
 //==================================================
 // gef_d01_i - Illusion of Vampire
 //==================================================
-gef_d01_i	monster	White Plant	1082,12
-gef_d01_i	monster	Blue Plant	1079,2
-gef_d01_i	monster	Matt Drainliar	3750,25
-gef_d01_i	monster	Living Dead	3751,10
-gef_d01_i	monster	Starving Living Dead	3752,20
-gef_d01_i	monster	Living Dead	3753,30
-gef_d01_i	monster	Sweet Nightmare	3754,25
-gef_d01_i	monster	Black Mushroom	3755,15
+gef_d01_i	monster	하얀 풀	1082,12
+gef_d01_i	monster	파란 풀	1079,2
+gef_d01_i	monster	매트 드레인리어	3750,25
+gef_d01_i	monster	안식을 빼앗긴 자	3751,10
+gef_d01_i	monster	안식을 빼앗긴 자	3752,20
+gef_d01_i	monster	안식을 빼앗긴 자	3753,30
+gef_d01_i	monster	스위트 나이트메어	3754,25
+gef_d01_i	monster	반디 버섯	3755,15

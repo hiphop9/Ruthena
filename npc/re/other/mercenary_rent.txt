@@ -15,14 +15,14 @@
 //= 1.2 Change the hidden name to fix a bug. [Capuche]
 //============================================================
 
-izlude,47,170,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Sword	4_M_JOB_KNIGHT2
-izlude_a,47,170,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Sword1	4_M_JOB_KNIGHT2
-izlude_b,47,170,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Sword2	4_M_JOB_KNIGHT2
-izlude_c,47,170,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Sword3	4_M_JOB_KNIGHT2
-izlude_d,47,170,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Sword4	4_M_JOB_KNIGHT2
+izlude,47,170,4	duplicate(Mercenary Manager#main)	용병길드 관계자#검	4_M_JOB_KNIGHT2
+izlude_a,47,170,4	duplicate(Mercenary Manager#main)	용병길드 관계자#검1	4_M_JOB_KNIGHT2
+izlude_b,47,170,4	duplicate(Mercenary Manager#main)	용병길드 관계자#검2	4_M_JOB_KNIGHT2
+izlude_c,47,170,4	duplicate(Mercenary Manager#main)	용병길드 관계자#검3	4_M_JOB_KNIGHT2
+izlude_d,47,170,4	duplicate(Mercenary Manager#main)	용병길드 관계자#검4	4_M_JOB_KNIGHT2
 
-izlude,55,170,4	duplicate(MercMerchant)	Mercenary Merchant#Sword	4_F_HUWOMAN
-izlude_a,55,170,4	duplicate(MercMerchant)	Mercenary Merchant#Swo_a	4_F_HUWOMAN
-izlude_b,55,170,4	duplicate(MercMerchant)	Mercenary Merchant#Swo_b	4_F_HUWOMAN
-izlude_c,55,170,4	duplicate(MercMerchant)	Mercenary Merchant#Swo_c	4_F_HUWOMAN
-izlude_d,55,170,4	duplicate(MercMerchant)	Mercenary Merchant#Swo_d	4_F_HUWOMAN
+izlude,55,170,4	duplicate(MercMerchant)	용병물품 판매상#검	4_F_HUWOMAN
+izlude_a,55,170,4	duplicate(MercMerchant)	용병물품 판매상#검_a	4_F_HUWOMAN
+izlude_b,55,170,4	duplicate(MercMerchant)	용병물품 판매상#검_b	4_F_HUWOMAN
+izlude_c,55,170,4	duplicate(MercMerchant)	용병물품 판매상#검_c	4_F_HUWOMAN
+izlude_d,55,170,4	duplicate(MercMerchant)	용병물품 판매상#검_d	4_F_HUWOMAN

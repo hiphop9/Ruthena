@@ -1,38 +1,38 @@
 //===== rAthena Script =======================================
-//= Cash Shop Functions
+//= 캐시 상점 기능
 //===== Description: =========================================
-//= Functions related to the VIP system.
+//= VIP 시스템 관련 기능.
 //===== Changelogs: ==========================================
-//= 1.0 Moved VIP_Third_Class function
-//=		from other/CashShop_Functions. [Capuche]
+//= 1.0 VIP_Third_Class 기능 이동
+//=		기타/캐시샵_기능에서 제공됩니다. [Capuche]
 //============================================================
 
 // VIP Functions
 //============================================================
 function	script	VIP_Third_Class	{
 	if (!vip_status(VIP_STATUS_ACTIVE)) {
-		mes "[Voice from nowhere]";
-		mes "Access to Premium content is only available to those who possess a certain amount of Reset Stones.";
+		mes "[어디선가 들려오는 목소리]";
+		mes "프리미엄 콘텐츠는 일정량의 프리미엄 리셋 돌을 보유한 사람만 이용할 수 있습니다.";
 		next;
 		if (countitem(6320) < 1) {
-			mes "[Voice from nowhere]";
-			mes "In order to change to third class, you must bring 1 ^0000CCReset Stone^000000 or have a Premium account.";
-			//mes "Please visit our iShop to purchase the ^0000CCReset Stone^000000.";
+			mes "[어디선가 들려오는 목소리]";
+			mes "3등급으로 변경하시려면 ^0000CC프리미엄 리셋 돌^000000 1개를 가져오거나 프리미엄 계정을 가지고 있어야 합니다.";
+			//mes "^0000CC프리미엄 리셋 돌^000000 매하려면 캐시 샵을 방문하십시오..";
 			close;
 		} else {
-			mes "[Voice from nowhere]";
-			mes "Would you like to participate in this quest for 1 ^0000CCReset Stone^000000?";
+			mes "[어디선가 들려오는 목소리]";
+			mes "이 재설정 ^0000CC프리미엄 리셋 돌^000000 1개 퀘스트에 참여하시겠습니까??";
 			next;
-			switch(select("Yes:No")) {
+			switch(select("예:아니오")) {
 			case 1:
-				mes "[Voice from nowhere]";
-				mes "Good luck, adventurer.";
-				delitem 6320,1; //Premium_Reset_Stone
+				mes "[어디선가 들려오는 목소리]";
+				mes "모험가,행운을 빌어요.";
+				delitem 6320,1; //프리미엄 리셋 돌
 				next;
 				break;
 			case 2:
-				mes "[Voice from nowhere]";
-				mes "Very well.";
+				mes "[어디선가 들려오는 목소리]";
+				mes "아주 좋아.";
 				close;
 			}
 		}

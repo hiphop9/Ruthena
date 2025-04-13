@@ -539,7 +539,7 @@
 	end;
 }
 
--	script	Crusader#God_	-1,{
+-	script	Å©·ç¼¼ÀÌ´õ#God_	-1,{
 	if ($God1 >= $@god_check1 && $God2 < $@god_check2) {
 		if (god_eremes > 22 && god_eremes < 25) {
 			mes "[Max Von Shedough]";
@@ -1538,7 +1538,7 @@ prt_in,172,106,0	script	Librarian#megin	833,{
 	close;
 }
 
-geffen_in,109,161,3	script	Crusader#God1	751,{
+geffen_in,109,161,3	script	Å©·ç¼¼ÀÌ´õ#God1	751,{
 	if ($God1 >= $@god_check1 && $God2 < $@god_check2) {
 		if (god_eremes > 17 && god_megin_1 < 2) {
 			mes "[Zan.Huadoku]";
@@ -2266,32 +2266,32 @@ in_rogue,243,61,0	script	Suspicious Man#megin	748,{
 	}
 }
 
-alberta,196,146,0	script	Crusader#megin2	751,{
+alberta,196,146,0	script	Å©·ç¼¼ÀÌ´õ#megin2	751,{
 	if ($God1 >= $@god_check1 && $God2 < $@god_check2) {
 		if (god_eremes == 18) {
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "^333333*Yawn...*^000000";
 			mes "It's quiet and boring, as per usual. Let's see if there's any Swordmen I can recruit today.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Eh...?";
 			next;
 			switch(select("Ask him about Rebarev Doug.:Ask him how he's been doing.:Ask him about the last mission of the 1st Squad.")) {
 			case 1:
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Ah! Yeah, our old leader back in the 1st Squad. Heh. I haven't seen him since we were disbanded.";
 				close;
 			case 2:
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Me? Yeah, I'm always busy recruiting future Crusaders.";
 				mes "We always welcome Swordmen";
 				mes "of great ability!";
 				next;
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "How does it sound? Why don't you volunteer to become a Crusader?";
 				close;
 			case 3:
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Last mission?";
 				mes "Eh, I don't really remember it.";
 				close;
@@ -2299,79 +2299,79 @@ alberta,196,146,0	script	Crusader#megin2	751,{
 		}
 		else if (god_eremes > 18) {
 			if (god_megin_3 == 0 || god_megin_3 == 1) {
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "^333333*Yawn...*^000000";
 				mes "It's quiet and boring, as per usual. Let's see if there's any Swordmen I can recruit today.";
 				next;
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Eh...?";
 				next;
 				switch(select("Ask him about Rebarev Doug.:Ask him how he's been doing.:Ask about 1st Squad's final mission.")) {
 				case 1:
 					if (god_megin_3 == 1) {
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Ah right. Our old leader.";
 						mes "Now I remember: He was";
 						mes "a pretty self righteous jerk";
 						mes "now that I think about it!";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Can you believe he used to say that ^0000FFno one is more religious than him in this world^000000?! That's egoism right there. And maybe insanity.";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Anyway, everyone in the squad";
 						mes "took pride in their faith. When";
 						mes "you're having a rough time in the";
 						mes "real world, you depend on religion, you know?";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Anyways, in the records about";
 						mes "our squad, it says that one of us was punished for insubordination, rebelling or something. That's";
 						mes "a complete lie.";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "During our final mission,";
 						mes "our old leader had a huge argument with one us over something we found. I remember it being some kind of godly artifact, but I can't clearly remember what it was.";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Although there was an obvious dispute, I think it was our squad leader who was out of line.";
 						mes "I... I can't really say...";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "I can't for the life of me";
 						mes "remember how the guy who";
 						mes "argued with the squad leader";
 						mes "looked like. The higher-ups";
 						mes "musta did something to me...";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Anyway, I know for sure that whatever that guy did, it wasn't insubordination. In fact, I think he might've been right!";
 						next;
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "That's all I can remember.";
 						mes "I better take some Green Herbs now. My head throbs like crazy whenever I think about that time.";
 						set god_megin_3,2;
 						close;
 					}
 					else {
-						mes "[Jack O]";
+						mes "[Àè ¿À]";
 						mes "Ah! Yeah, our old leader back in the 1st Squad. Heh. I haven't seen him since we were disbanded.";
 						close;
 					}
 				case 2:
-					mes "[Jack O]";
+					mes "[Àè ¿À]";
 					mes "Me? Yeah, I'm not doing so bad. Keeping busy recruiting future Crusaders. We welcome all";
 					mes "Swordmen if they show potential~";
 					close;
 				case 3:
-					mes "[Jack O]";
+					mes "[Àè ¿À]";
 					mes "Huh...?";
 					mes "Why would";
 					mes "you want to know?";
 					next;
 					mes "^3355FFYou tell him what you've read in the records for the 1st Squad. Afterwards, Jack O looks a little confused.^000000";
 					next;
-					mes "[Jack O]";
+					mes "[Àè ¿À]";
 					mes "Huh...?";
 					mes "I might not be able to remember";
 					mes "a whole lot from back then, but the part about ^0000FFinsubordination^000000 can't be right. I'm sure of that.";
@@ -2382,20 +2382,20 @@ alberta,196,146,0	script	Crusader#megin2	751,{
 				}
 			}
 			else if (god_megin_3 == 2) {
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Our old leader was";
 				mes "so arrogant to the point";
 				mes "of being a little off his rocker.";
 				next;
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "I mean, normal people";
 				mes "don't say things like '^0000FFI am the most religious man in the universe! Kneel before me!^000000' Yeah. Not a normal thing to say.";
 				next;
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Anyway, if the squad";
 				mes "leader punished anyone for insubordination, I'm sure that it was unwarranted. I don't remember too much, but I'm sure of that.";
 				next;
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "Excuse me, I need to take some Green Herbs. Taking these seems";
 				mes "to be the only thing that works for my headache.";
 				next;
@@ -2405,14 +2405,14 @@ alberta,196,146,0	script	Crusader#megin2	751,{
 				close;
 			}
 			else {
-				mes "[Jack O]";
+				mes "[Àè ¿À]";
 				mes "^333333*Yawn...*^000000";
 				mes "It's quiet and boring, as per usual. Let's see if there's any Swordmen I can recruit today.";
 				close;
 			}
 		}
 		else {
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Hey kid!";
 			mes "Ever think about";
 			mes "bein' a Crusader?";
@@ -2421,90 +2421,90 @@ alberta,196,146,0	script	Crusader#megin2	751,{
 	}
 	else {
 		if (BaseClass == Job_Swordman){
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Hey kid!";
 			mes "Ever think about";
 			mes "bein' a Crusader?";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Basically, you'd be volunteering to be part of our military, as well as train for the Holy War.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "If you have some faith and know how to wield a sword, you'll be more than welcome here.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Just think about my suggestion";
 			mes "and come back if you're interested. Alright then, see you later~";
 			close;
 		}
 		else {
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "^333333*Yawn...*^000000";
 			mes "It's quiet and boring, as per usual. Let's see if there's any Swordmen I can recruit today.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "Huh...?";
 			mes "Are you interested in knowing more about Crusaders? Hahaha, I guess that must be the case.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "By the way, bring a doll to";
 			mes "the kid in front of me. If you're lucky, she'll give you something neat in return. What it is, I don't know. I've got no dolls.";
 			next;
-			mes "[Jack O]";
+			mes "[Àè ¿À]";
 			mes "In accordance with the Crusader code, I'm not supposed to lie. So yeah, you can trust me!";
 			close2;
 		}
 	}
 }
 
-aldebaran,66,213,0	script	Lady#megin	69,{
+aldebaran,66,213,0	script	?????#megin	69,{
 	if (checkweight(1301,3) == 0) {
-		mes "- You are carrying too many items!";
+		mes "- ??? ???? ?????? ??? ?????!";
 		close;
 	}
 	if ($God1 >= $@god_check1 && $God2 < $@god_check2) {
 		if (god_eremes == 18) {
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "^333333*Sigh...*^000000 I haven't gotten any response from them. I don't know";
 			mes "if I can wait much longer to join the Kafra Corporation.";
 			close;
 		}
 		else if (god_eremes > 18 && god_eremes < 26) {
 			if (god_megin_4 < 2) {
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "^333333*Sigh...*^000000 I haven't gotten any response from them. I don't know";
 				mes "if I can wait much longer to join the Kafra Corporation.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "Oh, an adventurer! I actually used to work in the same field that you do. More specifically, I used to be a Crusader.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "My name is Emma Searth. Right now, I'm following my dream and applying to be a Kafra Lady. So my days of wielding a sword are over.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "Sadly, I haven't succeeded yet because I was diagnosed with";
 				mes "some weird ^0000FFamnesia^000000.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "Of course, I understand that";
 				mes "Kafra Corporation is a large, professional company, but";
 				mes "if I can work for them even if it's just part-time...";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "Is it that big of a problem?";
 				mes "I suppose they're worried";
 				mes "that I'd forget important customer information once I'm hired.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "It's strange. When I was";
 				mes "a Crusader, I remembered";
 				mes "everything lucidly, and I never had any problems recalling the past.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "But now I get these migraines whenever I try to focus on my memories from those times";
 				mes "when I used to fight in the Prontera Military.";
 				next;
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "^333333*Sigh...*^000000";
 				next;
 				switch(select("About her past.:Why be a Kafra Lady?:About memories she can remember.")) {
@@ -2515,31 +2515,31 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 						mes "seems to bring clarity";
 						mes "to her thoughts.^000000";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "I was born in a wealthy family where I was raised to learn etiquette, fencing, Peco riding, and music lessons since I was";
 						mes "born. I suppose you can say I'm pretty well educated.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "However, my parents weren't";
 						mes "pleased when they learned that I wanted to become a Kafra Lady.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "My parents insisted that";
 						mes "I become a Sage or a Scholar.";
 						mes "In the end, I ended up running";
 						mes "away from them by joining the Crusaders.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Luckily, the Crusaders were advertising their recruitment at the time, so I took that chance. Plus, having military experience might even help me join Kafra!";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Since I did so well in Boot Camp,";
 						mes "I got the chance to join an elite squad. My squad was often assigned difficult missions, and we never failed to complete those.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Eventually, my reputation as a female Crusader, and being in a respectable military position, was enough to satisfy my family.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "But after that day,";
 						mes "everything went wrong.";
 						mes "I only remember that it";
@@ -2547,7 +2547,7 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 						mes "Somehow, I feel like we were";
 						mes "even betrayed...";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "I think I can";
 						mes "try to remember";
 						mes "my comrades...";
@@ -2555,27 +2555,27 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 						close;
 					}
 					else {
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Ah, let's not talk about it. It's too depressing. Maybe if you had some sort of ^0000FFmemory^000000 aid, I might be able to recall my forgotten past. Anything, like a reminder, a scheduler, a bookmark, a string...";
 						close;
 					}
 				case 2:
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "One day, I happened to see Ms. Leilah at work here in Al De Baran. She was shining with confidence and commanded respect, even from her customers!";
 					next;
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "She carried herself like a professional, no matter what the situation. Even though I knew she was tired from working in the summer heat, she made everything look effortless!";
 					next;
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "When the male customers try to flirt with her, she never loses her poise. She just adjusts her glasses and does what she needs to do.";
 					next;
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "To me, she's like a lone, guardian angel. At that moment, it seemed the world existed just to be mocked by Ms. Leila.";
 					next;
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "I've also heard that Kafra Ladies are always traveling around the world, which is something I've always dreamed of doing.";
 					next;
-					mes "[Emma Searth]";
+					mes "[???? ?©­?]";
 					mes "Ms. Leilah is my idol,";
 					mes "and she's the reason why";
 					mes "I want to become a Kafra Lady.";
@@ -2586,17 +2586,17 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 						next;
 						mes "^3355FFRemembering that a Green Herb was able to relieve Jack O, you gave a Green Herb to Emma. She takes it, and looks a little more relaxed.^000000";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "I'm not even sure";
 						mes "how much I can remember";
 						mes "and how much I've actually";
 						mes "forgotten.";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Let me...";
 						mes "Try to remember every one in our squad. Let's see, there was Jack O, The Nineball. Z-Zan. Zan.H-Huadoku. C-Cuaque Donon. Myself. Um, E... Eni... Egni... Um...";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "Egni...";
 						mes "Egnigem?^000000";
 						mes "Who was that?";
@@ -2610,7 +2610,7 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 					else {
 						mes "^3355FFEmma Searth clutches her head and winces as she suffers from another migraine.^000000";
 						next;
-						mes "[Emma Searth]";
+						mes "[???? ?©­?]";
 						mes "I'm not even sure";
 						mes "how much I can remember";
 						mes "and how much I've actually";
@@ -2620,19 +2620,19 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 				}
 			}
 			else if (god_megin_4 > 1) {
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "^0000FFJack O, The Nineball, Zan.Huadoku, Cuaque Donon, Egnigem.^000000 Oh, I really miss those guys...";
 				close;
 			}
 			else {
-				mes "[Emma Searth]";
+				mes "[???? ?©­?]";
 				mes "^333333*Sigh...*^000000 I haven't gotten any response from them. I don't know";
 				mes "if I can wait much longer to join the Kafra Corporation.";
 				close;
 			}
 		}
 		else if (god_eremes == 25) {
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "Egnigem...";
 			mes "That name makes";
 			mes "me so sad. I'm not";
@@ -2640,7 +2640,7 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 			close;
 		}
 		else if (god_eremes == 26 || god_eremes == 27) {
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "Egnigem...";
 			mes "That name makes";
 			mes "me so sad. I'm not";
@@ -2648,10 +2648,10 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 			next;
 			mes "^3355FFEmma turns away before you can see her cry. Still, her shoulders heave with each sob as you imagine the hardship she's had to endure.^000000";
 			next;
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "I wish I knew what that name really means. I'm sure it's linked to an important memory from my past.";
 			next;
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "I really appreciate you coming here to talk to me about the old days. I, I want you to have this.";
 			set god_eremes,28;
 			getitem 603,1; // Old_Blue_Box
@@ -2679,7 +2679,7 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 			close;
 		}
 		else if (god_eremes == 28) {
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "Egnigem...";
 			mes "That name makes";
 			mes "me so sad. I'm not";
@@ -2689,19 +2689,24 @@ aldebaran,66,213,0	script	Lady#megin	69,{
 			close;
 		}
 		else {
-			mes "[Emma Searth]";
+			mes "[???? ?©­?]";
 			mes "^333333*Sigh...*^000000 I haven't gotten any response from them. I don't know";
 			mes "if I can wait much longer to join the Kafra Corporation.";
 			close;
 		}
 	}
 	else {
-		mes "[Emma Searth]";
-		mes "I hear the Kafra Ladies always travel around the world, something I've always dreamed of doing! Hopefully, one of these days, I'll be able to work for the Kafra Corporation too.";
+		mes "[???? ?©­?]";
+		mes "?????? ?????? ???????? ?????";
+		mes "???? ?????? ???? ?????";
+		mes "???????? ?????? ???? ???????..";
+		mes "???? ????? ??? ????.";
 		next;
-		mes "[Emma Searth]";
-		mes "^333333*Sigh...*^000000";
-		mes "Still, it's discouraging. I haven't heard anything from them...";
+		mes "[???? ?©­?]";
+		mes "??... ???? ?? ??¡Æ ???????... ????";
+		mes "?????? ????...";
+		mes "????? ?????????? ???? ???";
+		mes "?????...";
 		close;
 	}
 }

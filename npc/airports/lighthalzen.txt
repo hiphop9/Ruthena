@@ -12,21 +12,21 @@
 //= 1.0 First version.
 //============================================================ 
 
-lhz_airport,143,43,5	script	Airport Staff#lhz_air1a::lhz_airport1	90,{
-	mes "[Airport Staff]";
-	mes "Welcome to the";
-	mes "Lighthalzen Airport,";
-	mes "where we offer nonstop";
-	mes "flights to Einbroch, Juno and Hugel.";
+lhz_airport,143,43,5	script	공항 직원#lhz_air1a::lhz_airport1	90,{
+	mes "[공항 직원]";
+	mes "안녕하세요. 저희 항공은 항상";
+	mes "고객님의 편안한 여행을 위해 최선을";
+	mes "다하고 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	next;
-	if (select("Board the Airship.:Cancel.") == 1) {
-		mes "[Airport Staff]";
-		mes "The boarding fee is";
-		mes "1,200 zeny, but you can";
-		mes "waive the fee if you redeem";
-		mes "a Free Ticket for Airship.";
+	if (select("공항 내부로 들어간다:취소") == 1) {
+		mes "[공항 직원]";
+		mes "비공정의 이용 요금은 1200제니입니다.";
+		mes "비공정 무료이용권을 갖고 계시면";
+		mes "무료로 들어가실 수 있습니다. 공항";
+		mes "내부로 들어 가시겠습니까?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("예:아니오") == 1) {
 			if (countitem(7311) > 0) {
 				delitem 7311,1; //Free_Flying_Ship_Ticket
 				warp "lhz_airport",148,51;
@@ -37,49 +37,45 @@ lhz_airport,143,43,5	script	Airport Staff#lhz_air1a::lhz_airport1	90,{
 				warp "lhz_airport",148,51;
 				end;
 			}
-			mes "[Airship Staff]";
-			mes "I'm sorry, but you don't";
-			mes "have 1,200 zeny to pay";
-			mes "for the boarding fee.";
+			mes "[공항 직원]";
+			mes "1200제니를 지불해야만 들어가실 수";
+			mes "있습니다. 돈이 모자라신 것 같네요.";
 			close;
 		}
 	}
-	mes "[Airport Staff]";
-	mes "Thank you and";
-	mes "please come again.";
-	mes "Have a good day~";
+	mes "[공항 직원]";
+	mes "다음에 또 이용해주세요.";
+	mes "감사합니다.";
 	close;
 }
 
-lhz_airport,158,43,5	duplicate(lhz_airport1)	Airship Staff#lhz_air1b	90
-lhz_airport,126,43,5	duplicate(lhz_airport1)	Airship Staff#lhz_air1c	90
+lhz_airport,158,43,5	duplicate(lhz_airport1)	공항 직원#lhz_air1b	90
+lhz_airport,126,43,5	duplicate(lhz_airport1)	공항 직원#lhz_air1c	90
 
-lhz_airport,143,49,3	script	Arrival Staff#lhz_air2a::lhz_airport2	90,{
-	mes "[Arrival Staff]";
-	mes "Welcome to Lighthalzen Airport.";
-	mes "Please let me guide you to the";
-	mes "main terminal if you are arriving from your flight. Otherwise, please";
-	mes "board the departing Airship to reach your intended destination.";
+lhz_airport,143,49,3	script	공항 직원#lhz_air2a::lhz_airport2	90,{
+	mes "[공항 직원]";
+	mes "안녕하세요. 저희 항공은 항상";
+	mes "고객님의 편안한 여행을 위해 최선을";
+	mes "다하고 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	next;
-	if (select("Exit to main terminal.:Cancel.") == 1) {
-		mes "[Arrival Staff]";
-		mes "Once you're in the main terminal, you will need to pay the fee again";
-		mes "to board an Airship. You should";
-		mes "only exit if Lighthalzen is your intended destination. Shall we";
-		mes "proceed to the main terminal?";
+	if (select("공항 내부에서 나간다.:취소") == 1) {
+		mes "[공항 직원]";
+		mes "내부에서 나갔다가 다시 들어오시려면";
+		mes "요금을 지불하셔야 합니다.";
+		mes "나가시겠습니까?";
 		next;
-		if (select("Yes:No") == 1) {
+		if (select("예:아니오") == 1) {
 			warp "lhz_airport",142,40;
 			end;
 		}
 	}
-	mes "[Arrival Staff]";
-	mes "Alright, thank you";
-	mes "for your patronage";
-	mes "and I hope you have";
-	mes "a pleasant flight~";
+	mes "[공항 직원]";
+	mes "다음에 또 이용해주세요.";
+	mes "감사합니다.";
 	close;
+
 }
 
-lhz_airport,126,51,3	duplicate(lhz_airport2)	Arrival Staff#lhz_air2b	90
-lhz_airport,158,50,3	duplicate(lhz_airport2)	Arrival Staff#lhz_air2c	90
+lhz_airport,126,51,3	duplicate(lhz_airport2)	공항 직원#lhz_air2b	90
+lhz_airport,158,50,3	duplicate(lhz_airport2)	공항 직원#lhz_air2c	90

@@ -1,0 +1,193 @@
+# uses the content of this file instead of item_upgrade.yml if you want to keep the grade
+
+Header:
+  Type: ITEM_UPGRADE_DB
+  Version: 1
+
+Body:
+  - Item: Pontifex_Courage    # 100650
+    TargetItem:
+      - Item: Adulter_F_T_Sword    # 600017
+      - Item: Adulter_F_Cakram    # 610020
+      - Item: Adulter_F_Katar    # 610021
+      - Item: Adulter_F_Lance    # 630012
+      - Item: Adulter_F_T_Staff    # 640019
+      - Item: Adulter_F_Rod    # 640020
+      - Item: Adulter_F_Humma    # 650008
+      - Item: Adulter_F_C_Humma    # 650009
+      - Item: Adulter_F_C_Bow    # 700030
+      - Item: Adulter_F_Ballista    # 700031
+      - Item: Adulter_F_A_Bow    # 700032
+      - Item: Adulter_F_Revolver    # 800003
+      - Item: Adulter_F_Rifle    # 810002
+      - Item: Adulter_F_Shotgun    # 820002
+      - Item: Adulter_F_Gatling    # 830003
+      - Item: Adulter_F_Launcher    # 840002
+      - Item: Adulter_F_G_Sword    # 500025
+      - Item: Adulter_F_Lapier    # 500026
+      - Item: Adulter_F_Dagger    # 510032
+      - Item: Adulter_F_Axe    # 520008
+      - Item: Adulter_F_G_Spear    # 530013
+      - Item: Adulter_F_M_Book    # 540019
+      - Item: Adulter_F_P_Book    # 540020
+      - Item: Adulter_F_Bible    # 540021
+      - Item: Adulter_F_Moon_B    # 540022
+      - Item: Adulter_F_Star_B    # 540023
+      - Item: Adulter_F_Wand    # 550024
+      - Item: Adulter_F_S_Stick    # 550025
+      - Item: Adulter_F_D_Wand    # 550026
+      - Item: Adulter_F_F_Wand    # 550027
+      - Item: Adulter_F_F_model    # 550028
+      - Item: Adulter_F_Knuckle    # 560018
+      - Item: Adulter_F_Claw    # 560019
+      - Item: Adulter_F_Violin    # 570017
+      - Item: Adulter_F_Harp    # 570018
+      - Item: Adulter_F_C_Rope    # 580017
+      - Item: Adulter_F_Ribbon    # 580018
+      - Item: Adulter_F_Mace    # 590021
+      - Item: Adulter_F_Hall    # 590022
+    Result: |
+      callfunc("F_Pontifex_Courage", .@opts[0], .@vals[0], .@opts[1], .@vals[1]);
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,@last_lapine_refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);
+  - Item: Pontifex_Wisdom    # 100651
+    TargetItem:
+      - Item: Adulter_F_T_Sword    # 600017
+      - Item: Adulter_F_Cakram    # 610020
+      - Item: Adulter_F_Katar    # 610021
+      - Item: Adulter_F_Lance    # 630012
+      - Item: Adulter_F_T_Staff    # 640019
+      - Item: Adulter_F_Rod    # 640020
+      - Item: Adulter_F_Humma    # 650008
+      - Item: Adulter_F_C_Humma    # 650009
+      - Item: Adulter_F_C_Bow    # 700030
+      - Item: Adulter_F_Ballista    # 700031
+      - Item: Adulter_F_A_Bow    # 700032
+      - Item: Adulter_F_Revolver    # 800003
+      - Item: Adulter_F_Rifle    # 810002
+      - Item: Adulter_F_Shotgun    # 820002
+      - Item: Adulter_F_Gatling    # 830003
+      - Item: Adulter_F_Launcher    # 840002
+      - Item: Adulter_F_G_Sword    # 500025
+      - Item: Adulter_F_Lapier    # 500026
+      - Item: Adulter_F_Dagger    # 510032
+      - Item: Adulter_F_Axe    # 520008
+      - Item: Adulter_F_G_Spear    # 530013
+      - Item: Adulter_F_M_Book    # 540019
+      - Item: Adulter_F_P_Book    # 540020
+      - Item: Adulter_F_Bible    # 540021
+      - Item: Adulter_F_Moon_B    # 540022
+      - Item: Adulter_F_Star_B    # 540023
+      - Item: Adulter_F_Wand    # 550024
+      - Item: Adulter_F_S_Stick    # 550025
+      - Item: Adulter_F_D_Wand    # 550026
+      - Item: Adulter_F_F_Wand    # 550027
+      - Item: Adulter_F_F_model    # 550028
+      - Item: Adulter_F_Knuckle    # 560018
+      - Item: Adulter_F_Claw    # 560019
+      - Item: Adulter_F_Violin    # 570017
+      - Item: Adulter_F_Harp    # 570018
+      - Item: Adulter_F_C_Rope    # 580017
+      - Item: Adulter_F_Ribbon    # 580018
+      - Item: Adulter_F_Mace    # 590021
+      - Item: Adulter_F_Hall    # 590022
+    Result: |
+      callfunc("F_Pontifex_Wisdom", .@opts[0], .@vals[0], .@opts[1], .@vals[1]);
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,@last_lapine_refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);
+  - Item: Pontifex_Tenacity    # 100652
+    TargetItem:
+      - Item: Vivatus_F_T_Sword    # 600018
+      - Item: Vivatus_F_Cakram    # 610022
+      - Item: Vivatus_F_Katar    # 610023
+      - Item: Vivatus_F_Lance    # 630013
+      - Item: Vivatus_F_T_Staff    # 640021
+      - Item: Vivatus_F_Rod    # 640022
+      - Item: Vivatus_F_C_Bow    # 700033
+      - Item: Vivatus_F_Ballista    # 700034
+      - Item: Vivatus_F_A_Bow    # 700035
+      - Item: Vivatus_F_G_Sword    # 500027
+      - Item: Vivatus_F_Lapier    # 500028
+      - Item: Vivatus_F_Dagger    # 510033
+      - Item: Vivatus_F_Axe    # 520009
+      - Item: Vivatus_F_G_Spear    # 530014
+      - Item: Vivatus_F_M_Book    # 540024
+      - Item: Vivatus_F_P_Book    # 540025
+      - Item: Vivatus_F_Bible    # 540026
+      - Item: Vivatus_F_Wand    # 550029
+      - Item: Vivatus_F_Knuckle    # 560020
+      - Item: Vivatus_F_Claw    # 560021
+      - Item: Vivatus_F_Violin    # 570019
+      - Item: Vivatus_F_Harp    # 570020
+      - Item: Vivatus_F_C_Rope    # 580019
+      - Item: Vivatus_F_Ribbon    # 580020
+      - Item: Vivatus_F_Mace    # 590023
+      - Item: Vivatus_F_Hall    # 590024
+    Result: |
+      callfunc("F_Pontifex_Tenacity", .@opts[0], .@vals[0], .@opts[1], .@vals[1]);
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,@last_lapine_refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);
+  - Item: Pontifex_Belief    # 100653
+    TargetItem:
+      - Item: Vivatus_F_T_Sword    # 600018
+      - Item: Vivatus_F_Cakram    # 610022
+      - Item: Vivatus_F_Katar    # 610023
+      - Item: Vivatus_F_Lance    # 630013
+      - Item: Vivatus_F_T_Staff    # 640021
+      - Item: Vivatus_F_Rod    # 640022
+      - Item: Vivatus_F_C_Bow    # 700033
+      - Item: Vivatus_F_Ballista    # 700034
+      - Item: Vivatus_F_A_Bow    # 700035
+      - Item: Vivatus_F_G_Sword    # 500027
+      - Item: Vivatus_F_Lapier    # 500028
+      - Item: Vivatus_F_Dagger    # 510033
+      - Item: Vivatus_F_Axe    # 520009
+      - Item: Vivatus_F_G_Spear    # 530014
+      - Item: Vivatus_F_M_Book    # 540024
+      - Item: Vivatus_F_P_Book    # 540025
+      - Item: Vivatus_F_Bible    # 540026
+      - Item: Vivatus_F_Wand    # 550029
+      - Item: Vivatus_F_Knuckle    # 560020
+      - Item: Vivatus_F_Claw    # 560021
+      - Item: Vivatus_F_Violin    # 570019
+      - Item: Vivatus_F_Harp    # 570020
+      - Item: Vivatus_F_C_Rope    # 580019
+      - Item: Vivatus_F_Ribbon    # 580020
+      - Item: Vivatus_F_Mace    # 590023
+      - Item: Vivatus_F_Hall    # 590024
+    Result: |
+      callfunc("F_Pontifex_Belief", .@opts[0], .@vals[0], .@opts[1], .@vals[1]);
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,@last_lapine_refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);
+  - Item: GrayWolf_7_Ticket    # 100626
+    NeedRefineMax: 6
+    NotSocketEnchantItem: false
+    TargetItem:
+      - Item: Gray_W_Suits    # 450177
+      - Item: Gray_W_Robe    # 450178
+      - Item: Gray_W_Manteau    # 480091
+      - Item: Gray_W_Muffler    # 480090
+      - Item: Gray_W_Boots    # 470087
+      - Item: Gray_W_Shoes    # 470088
+    Result: |
+      callfunc("F_GrayWolf_7_Ticket", .@refine);
+      .@opts[0] = 0;
+      .@vals[0] = 0;
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,.@refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);
+  - Item: GrayWolf_9_Ticket    # 100627
+    NeedRefineMax: 8
+    NotSocketEnchantItem: false
+    TargetItem:
+      - Item: Gray_W_Suits    # 450177
+      - Item: Gray_W_Robe    # 450178
+      - Item: Gray_W_Manteau    # 480091
+      - Item: Gray_W_Muffler    # 480090
+      - Item: Gray_W_Boots    # 470087
+      - Item: Gray_W_Shoes    # 470088
+    Result: |
+      callfunc("F_GrayWolf_9_Ticket", .@refine);
+      .@opts[0] = 0;
+      .@vals[0] = 0;
+      .@params[0] = 0;
+      getitembound4(@last_lapine_id,1,1,.@refine,0,@last_lapine_card1,@last_lapine_card2,@last_lapine_card3,@last_lapine_card4,@last_lapine_bound,@last_lapine_grade,.@opts,.@vals,.@params);

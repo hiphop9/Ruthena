@@ -11,6 +11,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "login.hpp"
 #include "loginlog.hpp"
@@ -190,15 +191,21 @@ void ipban_init(void) {
 	sql_handle = Sql_Malloc();
 	if( SQL_ERROR == Sql_Connect(sql_handle, ipban_db_username.c_str(), ipban_db_password.c_str(), ipban_db_hostname.c_str(), ipban_db_port, ipban_db_database.c_str()) )
 	{
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
-			ipban_db_username.c_str(), ipban_db_hostname.c_str(), ipban_db_port, ipban_db_database.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("uname='%s',host='%s',port='%hu',database='%s'으(로) 연결할 수 없습니다.\n",
+				ipban_db_username.c_str(), ipban_db_hostname.c_str(), ipban_db_port, ipban_db_database.c_str());		
+		else
+			ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+				ipban_db_username.c_str(), ipban_db_hostname.c_str(), ipban_db_port, ipban_db_database.c_str());
 		Sql_ShowDebug(sql_handle);
 		Sql_Free(sql_handle);
 		exit(EXIT_FAILURE);
 	}
-
-	ShowInfo("Ipban connection made.\n");
-
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("Ipban 연결을 만들었습니다.\n");
+	else
+		ShowInfo("Ipban connection made.\n");
+		
 	if( !ipban_codepage.empty() && SQL_ERROR == Sql_SetEncoding(sql_handle, ipban_codepage.c_str()) )
 		Sql_ShowDebug(sql_handle);
 

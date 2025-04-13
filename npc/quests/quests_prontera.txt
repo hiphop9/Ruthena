@@ -49,7 +49,7 @@
 
 // Prontera Culvert :: prt_npc
 //============================================================
-prt_in,88,105,2	script	Recruiter	105,{
+prt_in,88,105,2	script	기사단 모집관::Recruiter	105,{
 	if (MISC_QUEST & 8) {
 		mes "[Recruiter]";
 		mes "Ah...";
@@ -141,7 +141,7 @@ S_Volunteer:
 	return;
 }
 
-prt_fild05,270,212,5	script	Culvert Guardian	105,{
+prt_fild05,270,212,5	script	지하수로 관리병::Culvert Guardian	105,{
 	if (MISC_QUEST & 8) {
 		mes "[Culvert Guardian]";
 		mes "Ah, you're one of our volunteers. This is the entrance of the Prontera Culvert.";
@@ -164,21 +164,21 @@ prt_fild05,270,212,5	script	Culvert Guardian	105,{
 
 // Ph.D Hat Quest :: npc_6cript
 //============================================================
-prt_in,38,108,4	script	Teacher	53,{
+prt_in,38,108,4	script	학사모선생님::Teacher	53,{
 	if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
-		mes "[Teacher]";
-		mes "Oh...";
-		mes "Those Flowers in your hand are...";
+		mes "[학사모선생님]";
+		mes "아...";
+		mes "당신 손에 있는 꽃은...";
 		next;
-		switch(select("Show Flowers:Present Flowers:Cancel")) {
+		switch(select("꽃을 보여주세요:선물꽃:취소")) {
 		case 1:
-			mes "[Teacher]";
-			mes "Ah...";
-			mes "Those are definitely the 4 kinds of Flowers I was looking for! Would you give them to me?";
+			mes "[학사모선생님]";
+			mes "아...";
+			mes "제가 찾던 꽃 4종이 바로 이거네요! 나한테 주실래요?";
 			next;
-			mes "[Teacher]";
-			mes "If you would...";
-			mes "I'll give you my precious item.";
+			mes "[학사모선생님]";
+			mes "그렇다면...";
+			mes "내 소중한 물건을 드리겠습니다.";
 			close;
 		case 2:
 			if ((countitem(710) > 0) && (countitem(703) > 0) && (countitem(704) > 0) && (countitem(708) > 0)) {
@@ -187,60 +187,60 @@ prt_in,38,108,4	script	Teacher	53,{
 				delitem 704,1;  //Aloe
 				delitem 708,1;  //Ment
 				getitem 5012,1;	//Ph.D_Hat
-				mes "[Teacher]";
-				mes "I really really appreciate you what you've done for me. I'm truly grateful. I will give my precious item to you as promised.";
+				mes "[학사모선생님]";
+				mes "저를 위해 해주신 일들 정말 정말 감사드립니다. 진심으로 감사드립니다. 소중한 물건은 약속대로 드리겠습니다.";
 				next;
-				mes "[Teacher]";
-				mes "This is the Hat I've worn on my Graduation from my University. It reminds me of my happy school days. Please take this...";
+				mes "[학사모선생님]";
+				mes "대학 졸업식 때 썼던 모자예요. 행복했던 학창시절이 생각나네요. 가져가세요...";
 				close;
 			}
 			else {
-				mes "[Teacher]";
-				mes "... Oh, I'm Sorry.";
-				mes "But that's not what I'm looking for. Maybe you need to study flowers a little bit?";
+				mes "[학사모선생님]";
+				mes "... 아, 미안해요.";
+				mes "그런데 내가 찾는 건 그게 아니잖아. 꽃 공부를 좀 해야 할 것 같은데?";
 				close;
 			}
 		}
 	}
 	else {
-		mes "[Teacher]";
-		mes "Don't you think...";
-		mes "Flowers are pretty?";
+		mes "[학사모선생님]";
+		mes "그렇지 않나요...";
+		mes "꽃이 예쁘죠?";
 		next;
-		switch(select("Talk:Quit")) {
+		switch(select("말하다:그만두다")) {
 		case 1:
-			mes "[Teacher]";
-			mes "When I was young,";
-			mes "I had no friends and";
-			mes "studied all the time.";
+			mes "[학사모선생님]";
+			mes "어렸을 때,";
+			mes "나는 친구도 없었고";
+			mes "항상 공부했어요.";
 			next;
-			mes "[Teacher]";
-			mes "Sometimes I regret what I did when I was younger, but it's not a big deal now. Through hard study, I finished entire educational courses earlier than all the other students.";
+			mes "[학사모선생님]";
+			mes "어렸을 때 후회할 때도 있지만 지금은 별거 아니다. 열심히 공부해서 다른 학생들보다 전 과정을 빨리 마쳤다.";
 			next;
-			mes "[Teacher]";
-			mes "However...";
-			mes "I was sad and sometimes lonely. Whenever the studying got too hard, I needed someone who would listen to me. Finally, one day, I met my best friend.";
+			mes "[학사모선생님]";
+			mes "하지만...";
+			mes "슬프고 때로는 외로웠어요. 공부가 너무 힘들 때마다 내 말을 들어줄 사람이 필요했어요. 드디어 어느 날 가장 친한 친구를 만났어요.";
 			next;
-			mes "[Teacher]";
-			mes "When I saw a Pretty Flower blooming in the abandoned Garden, I realized It was my friend which shared my fate.";
+			mes "[학사모선생님]";
+			mes "버려진 정원에 핀 예쁜 꽃을 보고 운명을 함께한 친구였음을 깨달았습니다.";
 			next;
-			mes "[Teacher]";
-			mes "Although it is a Common and Normal Flower to others, she gave me the reason to study again. I could achieve my goals because of her.";
+			mes "[학사모선생님]";
+			mes "남들에겐 흔하고 평범한 꽃이지만 다시 공부할 이유를 주셨네요. 제가 목표를 이룰 수 있었던 건 그녀 덕분이에요.";
 			next;
-			mes "[Teacher]";
-			mes "So recently...";
-			mes "I am trying to pay her back. Now I am studying Flowers, and plan to over the whole world with them.";
+			mes "[학사모선생님]";
+			mes "최근에...";
+			mes "나는 그녀에게 보답하려고 노력하고 있습니다. 지금은 꽃을 공부하고 있으며 꽃으로 전 세계를 여행할 계획입니다.";
 			next;
-			mes "[Teacher]";
-			mes "To accomplish my work...";
-			mes "I need bunches of flowers. But for someone who rarely goes outside, it is really hard to find all the flowers I need.";
+			mes "[학사모선생님]";
+			mes "일을 완수하기 위해...";
+			mes "꽃다발이 필요합니다. 하지만 밖에 나갈 일이 거의 없는 사람에게는 필요한 꽃을 모두 찾기가 정말 어렵습니다.";
 			next;
-			mes "[Teacher]";
-			mes "I need 1 ^3355FFIllusion Flower^000000 ,1 ^3355FFHinalle^000000,1 ^3355FFAloe^000000 and 1 ^3355FFMent^000000. If you can bring them to me, I'd give you my treasure...";
+			mes "[학사모선생님]";
+			mes "저는 ^3355FF환상의 꽃^000000 1개, ^3355FFHinalle^000000 1개, ^3355FFAloe^000000 1개, ^3355FFMent^000000 1개가 필요합니다. 저에게 가져오시면 보물을 드리겠습니다...";
 			close;
 		case 2:
-			mes "[Teacher]";
-			mes "One of these days I will cover this whole world with Flowers.";
+			mes "[학사모선생님]";
+			mes "언젠가 나는 이 세상을 꽃으로 덮을 것이다.";
 			close;
 		}
 	}
@@ -248,7 +248,7 @@ prt_in,38,108,4	script	Teacher	53,{
 
 // Geoborg Family Curse :: prt_curse
 //============================================================
-prontera,248,212,3	script	Busy Boy#prt	706,3,3,{
+prontera,248,212,3	script	바빠 보이는 소년::Busy Boy#prt	706,3,3,{
 	callsub S_CheckWeight; //Check Player's weight
 	if (BaseLevel > 59) {
 		if (prt_curse == 0) {
@@ -932,7 +932,7 @@ yuno,311,195,3	script	Historian#prt01	754,{
 	}
 }
 
-morocc_in,45,126,3	script	Historian#prt02	702,{
+morocc_in,45,126,3	script	역사학자::Historian#prt02	702,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
 		mes "^3355FFWait a second!";
 		mes "Right now, you're carrying";
@@ -1366,7 +1366,7 @@ S_GiveName:
 	close;
 }
 
-mjolnir_01,135,168,3	script	Historian#prt03	754,{
+mjolnir_01,135,168,3	script	역사학자::Historian#prt03	754,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
 		mes "^3355FFWait a second!";
 		mes "Right now, you're carrying";
@@ -1557,8 +1557,8 @@ S_Song:
 mjolnir_01,298,302,0	script	#prt_poem01	-1,2,2,{
 OnTouch:
 	if (prt_curse == 11) {
-		mes "^FF0000*The great serpent*^000000";
-		mes "^FF0000*swallowed the sea.*^000000";
+		mes "^FF0000*거대한 뱀*^000000";
+		mes "^FF0000*바다를 삼켰다.*^000000";
 		close;
 	}
 	end;
@@ -1567,8 +1567,8 @@ OnTouch:
 mjolnir_01,300,297,0	script	#prt_poem02	-1,2,2,{
 OnTouch:
 	if (prt_curse == 11) {
-		mes "^FF0000*The great serpent*^000000";
-		mes "^FF0000*swallowed the sea.*^000000";
+		mes "^FF0000*거대한 뱀*^000000";
+		mes "^FF0000*바다를 삼켰다.*^000000";
 		close;
 	}
 	end;
@@ -1577,8 +1577,8 @@ OnTouch:
 mjolnir_01,292,288,0	script	#prt_poem03	-1,2,2,{
 OnTouch:
 	if (prt_curse == 11) {
-		mes "^FF0000*The eagle of the rainbow*^000000";
-		mes "^FF0000*swallowed the serpent.*^000000";
+		mes "^FF0000*무지개의 독수리*^000000";
+		mes "^FF0000*뱀을 삼켰다.*^000000";
 		close;
 	}
 	end;
@@ -1587,8 +1587,8 @@ OnTouch:
 mjolnir_01,302,286,0	script	#prt_poem04	-1,2,2,{
 OnTouch:
 	if (prt_curse == 11) {
-		mes "^FF0000*Then snake scales*^000000";
-		mes "^FF0000*grew on the eagle...*^000000";
+		mes "^FF0000*그런 다음 뱀 비늘*^000000";
+		mes "^FF0000*독수리 위에서 자랐다...*^000000";
 		close;
 	}
 	end;
@@ -1597,19 +1597,19 @@ OnTouch:
 mjolnir_01,313,279,0	script	#prt_poem05	-1,2,2,{
 OnTouch:
 	if (prt_curse == 11) {
-		mes "^FF0000*And it slowly died...*^000000";
+		mes "^FF0000*그리고 서서히 죽어갔다...*^000000";
 		close;
 	}
 	end;
 }
 
-mjolnir_01,312,269,5	script	Dog#prt	81,{
+mjolnir_01,312,269,5	script	개::Dog#prt	81,{
 	mes "[Dog]";
 	mes "Bow Wow!";
 	close;
 }
 
-mjolnir_01,313,269,5	script	Dazed Boy#prt	706,{
+mjolnir_01,313,269,5	script	멍한 표정의 소년::Dazed Boy#prt	706,{
 	if (prt_curse == 11) {
 		mes "[Absent-Minded Boy]";
 		mes "The great serpent";
@@ -1757,7 +1757,7 @@ mjolnir_01,313,269,5	script	Dazed Boy#prt	706,{
 	}
 }
 
-mjolnir_01,316,268,3	script	Exhausted-Looking Woman	879,{
+mjolnir_01,316,268,3	script	지친 표정의 여성::Exhausted-Looking Woman	879,{
 	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
 		mes "^3355FFWait a second!";
 		mes "Right now, you're carrying";
@@ -2174,7 +2174,7 @@ mjolnir_01,316,268,3	script	Exhausted-Looking Woman	879,{
 prt_church,115,122,0	warp	#sazekan	1,1,prt_church,168,106
 prt_church,166,106,0	warp	#prtchhall	1,1,prt_church,112,122
 
-prt_church,185,106,3	script	Father Bamph	60,{
+prt_church,185,106,3	script	사제 밤프::Father Bamph	60,{
 	if (prt_curse == 13) {
 		mes "[Father Bamph]";
 		mes "Welcome to";
@@ -2960,7 +2960,7 @@ prt_church,185,106,3	script	Father Bamph	60,{
 	}
 }
 
-prt_church,184,110,3	script	Father Biscuss	60,{
+prt_church,184,110,3	script	사제 비스커스::Father Biscuss	60,{
 	if (prt_curse == 54) {
 		mes "[Father Biscuss]";
 		mes "Hmm, I still suspect that";
@@ -3048,7 +3048,7 @@ prt_church,177,113,3	script	#gototomb	111,{
 	end;
 }
 
-prt_church,23,89,3	script	Father Biscuss#tomb	60,{
+prt_church,23,89,3	script	사제 비스커스::Father Biscuss#tomb	60,{
 	mes "[Father Biscuss]";
 	mes "Hm...?";
 	mes "Are you ready to";
@@ -3370,7 +3370,7 @@ prt_church,24,111,5	script	#prince3	887,{
 	}
 }
 
-moc_fild16,201,295,5	script	Assassin Guildsman#poiso	884,{
+moc_fild16,201,295,5	script	어쌔신길드 관계자::Assassin Guildsman#poiso	884,{
 	if (prt_curse == 23) {
 		mes "[Assassin Guildsman]";
 		mes "What business";
@@ -3604,7 +3604,7 @@ OnTouch:
 	}
 }
 
-prt_in,162,99,4	script	Librarian#curse	67,{
+prt_in,162,99,4	script	도서관 사서::Librarian#curse	67,{
 	if (checkweight(1201,1) == 0) {
 		mes "^3355FFWait a second!";
 		mes "Right now, you're carrying";

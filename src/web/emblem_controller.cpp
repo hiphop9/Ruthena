@@ -9,6 +9,7 @@
 
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
+#include <config/custom.hpp>
 
 #include "auth.hpp"
 #include "http.hpp"
@@ -28,11 +29,17 @@ HANDLER_FUNC(emblem_download) {
 
 	bool fail = false;
 	if (!req.has_file("GDID")) {
-		ShowDebug("Missing GuildID field for emblem download.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("GuildID 필드가 빠져있어 엠블렘 다운로드를 못했습니다.\n");
+		else
+			ShowDebug("Missing GuildID field for emblem download.\n");
 		fail = true;
 	}
 	if (!req.has_file("WorldName")) {
-		ShowDebug("Missing WorldName field for emblem download.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블렘 다운로드에 대한 WorldName 필드가 빠져있습니다.\n");
+		else
+			ShowDebug("Missing WorldName field for emblem download.\n");
 		fail = true;
 	}
 	if (fail) {
@@ -96,7 +103,10 @@ HANDLER_FUNC(emblem_download) {
 	sl.unlock();
 
 	if (emblem_size > MAX_EMBLEM_SIZE) {
-		ShowDebug("Emblem is too big, current size is %d and the max length is %d.\n", emblem_size, MAX_EMBLEM_SIZE);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블렘이 너무 큽니다. (현재 크기: %d , 최대 크기: %d)\n", emblem_size, MAX_EMBLEM_SIZE);
+		else
+			ShowDebug("Emblem is too big, current size is %d and the max length is %d.\n", emblem_size, MAX_EMBLEM_SIZE);
 		res.status = HTTP_BAD_REQUEST;
 		res.set_content("Error", "text/plain");
 		return;
@@ -107,7 +117,10 @@ HANDLER_FUNC(emblem_download) {
 	else if (!strcmp(filetype, "GIF"))
 		content_type = "image/gif";
 	else {
-		ShowError("Invalid image type %s, rejecting!\n", filetype);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s은(는) 잘못된 이미지 타입니다. 거절함.!\n", filetype);
+		else
+			ShowError("Invalid image type %s, rejecting!\n", filetype);
 		res.status = HTTP_NOT_FOUND;
 		res.set_content("Error", "text/plain");
 		return;
@@ -127,19 +140,31 @@ HANDLER_FUNC(emblem_upload) {
 
 	bool fail = false;
 	if (!req.has_file("GDID")) {
-		ShowDebug("Missing GuildID field for emblem upload.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블럼 업로드에 대한 GuildID 필드가 빠져있습니다.\n");
+		else
+			ShowDebug("Missing GuildID field for emblem upload.\n");
 		fail = true;
 	}
 	if (!req.has_file("WorldName")) {
-		ShowDebug("Missing WorldName field for emblem upload.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블럼 업로드에 대한 WorldName 필드가 빠져있습니다.\n");
+		else
+			ShowDebug("Missing WorldName field for emblem upload.\n");
 		fail = true;
 	}
 	if (!req.has_file("Img")) {
-		ShowDebug("Missing Img field for emblem upload.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블럼 업로드에 대한 Img 필드가 빠져있습니다.\n");
+		else
+			ShowDebug("Missing Img field for emblem upload.\n");
 		fail = true;
 	}
 	if (!req.has_file("ImgType")) {
-		ShowDebug("Missing ImgType for emblem upload.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블럼 업로드에 대한 ImgType이 빠져있습니다.\n");
+		else
+			ShowDebug("Missing ImgType for emblem upload.\n");
 		fail = true;
 	}
 	if (fail) {
@@ -165,7 +190,10 @@ HANDLER_FUNC(emblem_upload) {
 
 	auto length = img.length();
 	if (length > MAX_EMBLEM_SIZE) {
-		ShowDebug("Emblem is too big, current size is %lu and the max length is %d.\n", length, MAX_EMBLEM_SIZE);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("엠블렘 크기가 너무 큽니다. (현재 크기: %lu, 최대 크기: %d)\n", length, MAX_EMBLEM_SIZE);
+		else
+			ShowDebug("Emblem is too big, current size is %lu and the max length is %d.\n", length, MAX_EMBLEM_SIZE);
 		res.status = HTTP_BAD_REQUEST;
 		res.set_content("Error", "text/plain");
 		return;
@@ -173,13 +201,19 @@ HANDLER_FUNC(emblem_upload) {
 
 	if (imgtype_str == "GIF") {
 		if (!web_config.allow_gifs) {
-			ShowDebug("Client sent GIF image but GIF image support is disabled.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("클라이언트로부터 GIF를 전송받았으나 GIF 이미지 지원이 꺼져있습니다.\n");
+			else
+				ShowDebug("Client sent GIF image but GIF image support is disabled.\n");
 			res.status = HTTP_BAD_REQUEST;
 			res.set_content("Error", "text/plain");
 			return;
 		}
 		if (img.substr(0, 3) != "GIF") {
-			ShowDebug("Server received ImgType GIF but received file does not start with \"GIF\" magic header.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("서버가 ImgType GIF를 수신했지만 수신된 파일이 \"GIF\" 매직 헤더로 시작되지 않습니다.\n");
+			else
+				ShowDebug("Server received ImgType GIF but received file does not start with \"GIF\" magic header.\n");
 			res.status = HTTP_BAD_REQUEST;
 			res.set_content("Error", "text/plain");
 			return;
@@ -188,19 +222,28 @@ HANDLER_FUNC(emblem_upload) {
 	}
 	else if (imgtype_str == "BMP") {
 		if (length < 14) {
-			ShowDebug("File size is too short\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("파일 크키가 너무 작습니다.\n");
+			else
+				ShowDebug("File size is too short\n");
 			res.status = HTTP_BAD_REQUEST;
 			res.set_content("Error", "text/plain");
 			return;
 		}
 		if (img.substr(0, 2) != "BM") {
-			ShowDebug("Server received ImgType BMP but received file does not start with \"BM\" magic header.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("서버가 ImgType BMP를 수신했지만 수신된 파일이 \"BM\" 매직 헤더로 시작되지 않습니다.\n");
+			else
+				ShowDebug("Server received ImgType BMP but received file does not start with \"BM\" magic header.\n");
 			res.status = HTTP_BAD_REQUEST;
 			res.set_content("Error", "text/plain");
 			return;
 		}
 		if (RBUFL(img_cstr, 2) != length) {
-			ShowDebug("Bitmap size doesn't match size in file header.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("비트맵 크기가 파일 헤더의 크기와 일치하지 않습니다.\n");
+			else
+				ShowDebug("Bitmap size doesn't match size in file header.\n");
 			res.status = HTTP_BAD_REQUEST;
 			res.set_content("Error", "text/plain");
 			return;
@@ -216,7 +259,10 @@ HANDLER_FUNC(emblem_upload) {
 					transcount++;
 			}
 			if (((transcount * 300) / (length - offset)) > inter_config.emblem_transparency_limit) {
-				ShowDebug("Bitmap transparency check failed.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("비트맵 투명성 검사에 실패 했습니다.\n");
+				else
+					ShowDebug("Bitmap transparency check failed.\n");
 				res.status = HTTP_BAD_REQUEST;
 				res.set_content("Error", "text/plain");
 				return;

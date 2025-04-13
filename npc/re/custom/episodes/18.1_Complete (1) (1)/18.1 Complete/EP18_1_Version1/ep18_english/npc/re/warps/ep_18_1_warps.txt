@@ -1,0 +1,19 @@
+//===== rAthena Script =======================================
+//= Warps from episode 18.1
+//===== Description: =========================================
+//= The file include several warps.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+oz_dun01,112,30,0	warp	to_oz_dun02	1,1,oz_dun02,142,279
+oz_dun02,142,284,0	warp	to_oz_dun01	1,1,oz_dun01,112,34
+gw_fild01,135,9,0	warp	gw_fild01_to_gw_fild02	1,1,gw_fild02,122,385
+gw_fild02,122,391,0	warp	gw_fild02_to_gw_fild01	1,1,gw_fild01,135,14
+wolfvill,276,25,0	warp	wolfvill_to_gw_fild01	1,1,gw_fild01,25,101
+que_thr,186,58,0	warp	#Secret passage - Logistics base	2,2,thor_v01,169,169
+
+rachel,25,125,0	warp	rachel74	1,1,ra_fild11,353,226
+ra_fild11,360,226,0	warp	ra022	1,1,rachel,30,125
+ra_fild11,21,290,0	warp	ra023	1,1,ra_fild10,379,283
+ra_fild10,384,287,0	warp	ra024	1,1,ra_fild11,28,290

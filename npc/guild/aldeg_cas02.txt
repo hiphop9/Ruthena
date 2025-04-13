@@ -1,45 +1,38 @@
-//===== rAthena Script =======================================
-//= War of Emperium (Al De Baran) - Hohenschwangau
-//===== By: ==================================================
-//= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.2
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= NPCs that relate to Al De Baran Guild Castle 2
-//===== Additional Comments: =================================
-//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
-//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
-//= 1.2 Partially rewrote Script. [Masao]
-//============================================================
+//------------------------------------------------------------------------------
+// Empelium Forums - http://em-24.com
+// SRO - http://www.sro.kr
+// SuperNovice Korea - http://www.supernovice.co.kr
+//------------------------------------------------------------------------------
+// rAthena Project
+// Last Attempt Version: v7606 (02-15-2023)
+//------------------------------------------------------------------------------
+// 제작: L0ne_W0lf (v1.3)
+// 수정: Masao (v1.4)
+// 한글화: Parodius(NPIKA)
+//------------------------------------------------------------------------------
 
-// Guild Flags (Outside Castle)
+// 길드 깃발 (외성)
 //============================================================
--	script	Hohenschwangau#1::OutsideFlagsA2	722,{
-
+-	script	호헨슈반가우#1::OutsideFlagsA2	722,{
 	set .@GID, GetCastleData("aldeg_cas02",1);
-
 	if (.@GID == 0) {
-		mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
-		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
-		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "[ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes "　";
+		mes "1. 신성 룬 미드가츠 왕국령에";
+		mes "　의해 아직 이 아지트는 마스터가";
+		mes "　정해지지 않았다";
+		mes "　";
+		mes "2. 모든 예심을 극복하고 엠펠리움을";
+		mes "　파괴하는 자에게, 국왕은 이 성의";
+		mes "　소유권을 부여 할 것이다";
 		close;
 	}
 	if (getcharid(2) == .@GID) {
-		mes "[ Echoing Voice ]";
-		mes "Brave ones...";
-		mes "Do you wish to return to your honorable place?";
+		mes "[ 울리는 목소리 ]";
+		mes "용감한 자들이여...";
+		mes "그대의 명예로움으로 돌아가겠는가?";
 		next;
-		if(select("Return to the guild castle.:Quit.") == 1) {
+		if (select("아지트로 돌아간다.:그만둔다.") == 1) {
 			close2;
 			if (getcharid(2) == GetCastleData("aldeg_cas02",1)) {
 				warp "aldeg_cas02",220,190;
@@ -49,16 +42,12 @@
 		}
 		close;
 	}
-	mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
-	mes " ";
-	mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-	mes "we approve that this place is in";
-	mes "the private prossession of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild.";
-	mes " ";
-	mes "2. The guild Master of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild is";
-	mes "^ff0000"+GetGuildMaster(.@GID)+"^000000";
-	mes "If there is anyone who objects to this,";
-	mes "prove your strength and honor with a steel blade in your hand.";
+	mes "[ 신성 룬 미드가츠 왕국 포고령 ]";
+	mes "　";
+	mes "1. 이곳은 신성 룬 미드가츠 왕국령에 ";
+	mes "따라, ^FF0000"+GetGuildName(.@GID)+"^000000 길드의 사유물임을 인정한다.";
+	mes "　";
+	mes "2. ^FF0000"+GetGuildName(.@GID)+"^000000 길드의 마스터는 ^FF0000"+GetGuildMaster(.@GID)+"^000000 이며, 이사항에 이의가 있는 자는 검을들어 자신의 힘과 명예를 증명하라.";
 	close;
 
 OnRecvCastleA02:
@@ -66,12 +55,12 @@ OnRecvCastleA02:
 	end;
 }
 
-alde_gld,99,251,4	duplicate(OutsideFlagsA2)	Hohenschwangau#1-2	722
-alde_gld,99,244,4	duplicate(OutsideFlagsA2)	Hohenschwangau#2	722
+alde_gld,99,251,4	duplicate(OutsideFlagsA2)	호헨슈반가우#1-2	722
+alde_gld,99,244,4	duplicate(OutsideFlagsA2)	호헨슈반가우#2	722
 
-// Guild Flags (Inside Castle)
+// 길드 깃발 (내성)
 //============================================================
--	script	Hohenschwangau#3::InsideFlagsA2	722,{
+-	script	호헨슈반가우#3::InsideFlagsA2	722,{
 	end;
 
 OnRecvCastleA02:
@@ -79,40 +68,40 @@ OnRecvCastleA02:
 	end;
 }
 
-aldeg_cas02,82,71,2	duplicate(InsideFlagsA2)	Hohenschwangau#3-2	722
-aldeg_cas02,67,30,2	duplicate(InsideFlagsA2)	Hohenschwangau#4	722
-aldeg_cas02,183,140,2	duplicate(InsideFlagsA2)	Hohenschwangau#5	722
-aldeg_cas02,212,152,2	duplicate(InsideFlagsA2)	Hohenschwangau#6	722
-aldeg_cas02,108,39,2	duplicate(InsideFlagsA2)	Hohenschwangau#7	722
-aldeg_cas02,57,213,2	duplicate(InsideFlagsA2)	Hohenschwangau#8	722
-aldeg_cas02,103,53,2	duplicate(InsideFlagsA2)	Hohenschwangau#9	722
-aldeg_cas02,73,53,2	duplicate(InsideFlagsA2)	Hohenschwangau#10	722
-aldeg_cas02,63,41,2	duplicate(InsideFlagsA2)	Hohenschwangau#11	722
-aldeg_cas02,229,6,2	duplicate(InsideFlagsA2)	Hohenschwangau#12	722
-aldeg_cas02,230,40,2	duplicate(InsideFlagsA2)	Hohenschwangau#13	722
-aldeg_cas02,197,40,2	duplicate(InsideFlagsA2)	Hohenschwangau#14	722
-aldeg_cas02,32,213,2	duplicate(InsideFlagsA2)	Hohenschwangau#15	722
-aldeg_cas02,121,29,2	duplicate(InsideFlagsA2)	Hohenschwangau#16	722
+aldeg_cas02,82,71,2	duplicate(InsideFlagsA2)	호헨슈반가우#3-2	722
+aldeg_cas02,67,30,2	duplicate(InsideFlagsA2)	호헨슈반가우#4	722
+aldeg_cas02,183,140,2	duplicate(InsideFlagsA2)	호헨슈반가우#5	722
+aldeg_cas02,212,152,2	duplicate(InsideFlagsA2)	호헨슈반가우#6	722
+aldeg_cas02,108,39,2	duplicate(InsideFlagsA2)	호헨슈반가우#7	722
+aldeg_cas02,57,213,2	duplicate(InsideFlagsA2)	호헨슈반가우#8	722
+aldeg_cas02,103,53,2	duplicate(InsideFlagsA2)	호헨슈반가우#9	722
+aldeg_cas02,73,53,2	duplicate(InsideFlagsA2)	호헨슈반가우#10	722
+aldeg_cas02,63,41,2	duplicate(InsideFlagsA2)	호헨슈반가우#11	722
+aldeg_cas02,229,6,2	duplicate(InsideFlagsA2)	호헨슈반가우#12	722
+aldeg_cas02,230,40,2	duplicate(InsideFlagsA2)	호헨슈반가우#13	722
+aldeg_cas02,197,40,2	duplicate(InsideFlagsA2)	호헨슈반가우#14	722
+aldeg_cas02,32,213,2	duplicate(InsideFlagsA2)	호헨슈반가우#15	722
+aldeg_cas02,121,29,2	duplicate(InsideFlagsA2)	호헨슈반가우#16	722
 
-// Guild Flag (Town)
+// 길드 깃발 (마을)
 //============================================================
-aldebaran,149,97,4	duplicate(InsideFlagsA2)	Hohenschwangau#17	722
+aldebaran,149,97,4	duplicate(InsideFlagsA2)	호헨슈반가우#17	722
 
-// Kafra Employee
+// 카프라 직원
 //============================================================
-aldeg_cas02,84,74,0	duplicate(guildkafra)	Kafra Staff#aldeg_cas02	117
+aldeg_cas02,84,74,0	duplicate(guildkafra)	카프라 직원#aldeg_cas02	117
 
-// Steward
+// 집사
 //============================================================
-aldeg_cas02,78,74,0	duplicate(cm)	Chenchenlie#aldeg_cas02	55
+aldeg_cas02,78,74,0	duplicate(cm)	첸첸리#aldeg_cas02	55
 
-// Treasure Room Lever
+// 마스터방 출구 레버
 //============================================================
 aldeg_cas02,139,234,0	script	#lever_A02	111,{
-	mes " ";
-	mes "There's a small lever. Will you pull it?";
+	mes "　";
+	mes "레버가 있습니다. 당기시겠습니까?";
 	next;
-	if(select("Pull.:Do not.") == 1) {
+	if (select("당긴다.:당기지 않는다.") == 1) {
 		close2;
 		warp "aldeg_cas02",78,75;
 		end;
@@ -120,18 +109,18 @@ aldeg_cas02,139,234,0	script	#lever_A02	111,{
 	close;
 }
 
-// Guild Dungeon Lever
+// 길드 던젼 레버
 //============================================================
 aldeg_cas02,194,136,0	duplicate(gdlever)	#aldeg_cas02	111
 
-// Guild Treasure Spawns
+// 길드 보물 소환
 //============================================================
 aldeg_cas02,135,230,0	duplicate(Gld_Trea_Spawn)	Treasure#aldeg_cas02	-1
 
-// AGIT Manager
+// 공성전 매니저
 //============================================================
 aldeg_cas02,214,24,0	duplicate(Gld_Agit_Manager)	Agit#aldeg_cas02	-1
 
-// Guardians
+// 가디언
 //============================================================
 aldeg_cas02,78,74,0	duplicate(Gld_Guard_Template)	Guardian#aldeg_cas02	-1

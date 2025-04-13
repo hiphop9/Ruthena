@@ -17,46 +17,45 @@
 
 // 'Doctor Band', 'Feather Bonnet', 'Opera Masque', 'Sakkat Hat' Quest
 //============================================================
-aldeba_in,152,166,4	script	Trader#01	86,{
-	mes "[Trader]";
-	mes "Who is this mysterious man?";
-	mes "I, the enigmatic and debonair 'Trader?'";
+aldeba_in,152,166,4	script	어떤상인#01	86,{
+	mes "[어떤상인]";
+	mes "하하하! 내가 바로 수문의 수수깨끼의";
+	mes "상인이여 !";
+	mes "이 미드가르드 전세계를 좁다하고";
+	mes "싸돌아다니지 !";
+	mes "자아 .. 독특한 물품을 팔고 있으니까 .";
+	mes "구경이나 해보라구 !";
 	next;
-	mes "[Trader]";
-	mes "Traveling about the Midgard Continent, with all of his wonderful hats? Nobody knows...";
+	mes " (1) .^3355FF의사머리띠^000000 : 반다나 1 개 + 철 50";
+	mes "개 + 손상된다이아몬드  + 3500 제니";
+	mes " (2) . ^3355FFF깃털모자^000000 : 올드스테로맨스 1 개 +";
+	mes "새의깃털 300 개 + 500 제니";
+	mes " (3) . ^3355FF오페라가면^000000 : 강철 20 개 +";
+	mes "노래하는풀 1 개 + 5000 제니";
+	mes " (4) . ^3355FF삿갓^000000 : 나무조각 120 개 + 10000";
+	mes "제니";
 	next;
-	mes "[Trader]";
-	mes "For what purpose do I collect and trade these hats from all around the world? Choose a hat, get closer to unraveling the mystery...";
-	next;
-	mes " (1) ^3355FFDoctor Band^000000:";
-	mes "1 Red Bandana + 50 Irons + 1 Cracked Diamond + 3500 Zeny";
-	mes " (2)^3355FFFeather Bonnet^000000:";
-	mes "1 Romantic Gent + 300 Feather of Birds + 500 Zeny";
-	mes " (3) ^3355FFPhantom of Opera^000000:";
-	mes "20 Iron + 1 Singing Plant + 5000 Zeny ";
-	mes " (4) ^3355FFSakkat^000000:";
-	mes "120 Trunks + 10000 Zeny ";
-	next;
-	switch(select(" Doctor Band : Feather Bonnet : Phantom of Opera : Sakkat ")) {
+	switch(select(" 의사머리띠 : 깃털모자 : 오페라가면 : 삿갓 ")) {
 	case 1:
 		if ((countitem(2275) > 0) && (countitem(998) > 49) && (countitem(733) > 0) && (Zeny > 3499)) {
 			delitem 2275,1; //Red_Bandana
 			delitem 998,50; //Iron
 			delitem 733,1; //Crystal_Jewel___
 			set Zeny, Zeny-3500;
-			mes "[Trader]";
-			mes "Hm! You don't have a medical license, do you? It's alright, I've heard about a rogue, unlicensed physician who performed medical miracles! But... That might have been a comic book.";
+			mes "[어떤상인]";
+			mes "흠! 당신은 의사 자격증이 없군요, 그렇죠? 괜찮아요, 의학적 기적을 행한 무면허 무면허 의사에 대한 이야기를 들었습니다! 그런데... 그건 만화였을 수도 있어요.";
 			next;
-			mes "[Trader]";
-			mes "Oh whatever. Just don't get caught.";
+			mes "[어떤상인]";
+			mes "어쨌든. 잡히지 마세요.";
 			getitem 2273,1; //Doctor_Cap
 			close;
 		}
 		else {
-			mes "[Trader]";
-			mes "You guy~";
-			mes "Check the requirements again.";
-			mes "You don't look like an idiot though. So c'mon man, get real.";
+			mes "[어떤상인]";
+			mes "이봐이봐 . 내가 불러준 필요품목을";
+			mes "자알 확인하라구.";
+			mes "젊은 사람이 머리가 안좋은것 같구만 ..";
+			mes "정신 차리자 우리 . 응 ?";
 			close;
 		}
 	case 2:
@@ -64,15 +63,17 @@ aldeba_in,152,166,4	script	Trader#01	86,{
 			delitem 2247,1; //Oldman's_Romance
 			delitem 916,300; //Feather_Of_Birds
 			set Zeny, Zeny-500;
-			mes "[Trader]";
-			mes "Ooh~! You have good fashion sense. I know you've had a hard time collecting this stuff, but this hat is worth it. Take it. All you need now is a fur coat and a cane!";
+			mes "[어떤상인]";
+			mes "오오~! 패션감각이 좋으시네요. 이거 모으시느라 고생하셨겠지만 이 모자는 소장가치가 있습니다. 가져가세요. 이제 모피코트와 지팡이만 있으면 됩니다!";
 			getitem 5018,1; //Feather_Bonnet
 			close;
 		}
 		else {
-			mes "[Trader]";
-			mes "You guy~";
-			mes "Go check my requirements again. You don't look like an idiot though. C'mon man, get real.";
+			mes "[어떤상인]";
+			mes "이봐이봐 . 내가 불러준 필요품목을";
+			mes "자알 확인하라구.";
+			mes "젊은 사람이 머리가 안좋은것 같구만 ..";
+			mes "정신 차리자 우리 . 응 ?";
 			close;
 		}
 	case 3:
@@ -80,31 +81,37 @@ aldeba_in,152,166,4	script	Trader#01	86,{
 			delitem 998,20; //Iron
 			delitem 707,1; //Singing_Plant
 			set Zeny, Zeny-5000;
-			mes "[Trader]";
-			mes "This one? It's a little bit scary, though it has some sort of romantic quality. What do you think? You like it? Alright, take it, it's yours!";
+			mes "[어떤상인]";
+			mes "이거요? 조금 무섭긴 하지만 로맨틱한 느낌도 있어요. 어떻게 생각하시나요? 마음에 드시나요? 좋아요, 받아보세요!";
 			getitem 2281,1; //Phantom_Of_Opera
 			close;
 		}
 		else {
-			mes "[Trader]";
-			mes "Buffoon. Go check the requirements again. ^3355FFPhantom of Opera^000000 isn't easy to come by. So c'mon man, get real.";
+			mes "[어떤상인]";
+			mes "이봐이봐 . 내가 불러준 필요품목을";
+			mes "자알 확인하라구.";
+			mes "젊은 사람이 머리가 안좋은것 같구만 ..";
+			mes "정신 차리자 우리 . 응 ?";
 			close;
 		}
 	case 4:
 		if ((countitem(1019) > 119) && (Zeny > 9999)){ //Wooden_Block 
 			delitem 1019,120; //Wooden_Block
 			set Zeny, Zeny-10000;
-			mes "[Trader]";
-			mes "If you have a chance to visit the Uplander Village, Payon, please go and meet the Sakkat Craftsman.";
+			mes "[어떤상인]";
+			mes "업랜더 마을 페이욘을 방문할 기회가 있다면 꼭 삿갓 장인을 만나보세요.";
 			next;
-			mes "[Trader]";
-			mes "He's never sold Sakkat to Traders other than me, since only I can recognize its quality. Due to its rarity, Sakkat has become a very unique and exceptional product. Okay! Take it, it's yours!";
+			mes "[어떤상인]";
+			mes "그는 나 이외의 트레이더에게 삿갓을 판매한 적이 없습니다. 오직 나만이 그 품질을 알아볼 수 있기 때문입니다. 희소성으로 인해 삿갓은 매우 독특하고 뛰어난 제품이 되었습니다. 좋아요! 가져가세요, 그것은 당신 것입니다!";
 			getitem 2280,1; //Sahkkat
 			close;
 		}
 		else {
-			mes "[Trader]";
-			mes "MORON~ Check my requirements again. C'mon man, you don't look like an idiot, so get real~";
+			mes "[어떤상인]";
+			mes "이봐이봐 . 내가 불러준 필요품목을";
+			mes "자알 확인하라구.";
+			mes "젊은 사람이 머리가 안좋은것 같구만 ..";
+			mes "정신 차리자 우리 . 응 ?";
 			close;
 		}
 	}

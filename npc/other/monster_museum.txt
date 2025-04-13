@@ -22,7 +22,7 @@
 //= 1.4a "S_BonusREward" -> "S_BonusReward" [Paradox924X]
 //============================================================ 
 
-yuno_in03,32,15,3	script	Museum Guide	67,{
+yuno_in03,32,15,3	script	몬스터박물관 안내원::Museum Guide	67,{
 	mes "[Cenia]";
 	mes "Welcome to the Monster Museum.";
 	next;

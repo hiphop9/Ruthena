@@ -1,0 +1,85 @@
+Episode 18: Direction of Prayer
+-------------------------------
+
+-------------------------------
+// Before you start
+-------------------------------
+
+- You need to talk to last NPC of 17.2 to start the main quest.
+  However I don't provide the final dialog of 17.2, you need to add it yourself in the NPC at the beginning of quests_18_1_main.txt
+- According to https://hazyforest.com/instances:villa_of_deception
+  the boss monsters can drop any kind of Adulter or Vivatus weapons which exceed the default monster max drop (MAX_MOB_DROP 10).
+  -> if you're using the monster data from yml increases MAX_MOB_DROP to 42 in mob.hpp and uses the files in db/ folder.
+  -> if you're using the monster data from SQL (or if you don't want to increase MAX_MOB_DROP) apply the mob_drop2 patch and uses the files in db2/ folder. Don't use the db/ folder.
+- Apply the patch 0001-removespecialeffect.patch from patch/ folder if you don't have removespecialeffect script command.
+- Apply the patch 0001-new_skills.patch from patch/ folder.
+- IF you're using the lapine system AND the grade system :
+  For now you need to apply the 0001-lapine_grade.patch + 0001-getitembound4.patch + uses the content of the file "item_upgrade_getitembound4.yml" instead of "item_upgrade.yml".
+  These changes are here to keep the enchant grade when using the lapine system.
+
+-------------------------------
+// Notes
+-------------------------------
+
+- I only support my version and fix the issue on the version.
+- Until we get more data some monster stats are customs you may customize as your content.
+- I provided a workaround of the enchant, item Reform and reputation UI until rathena support them. If you have them you need to edit the script yourself.
+- As such I provided the script command 'getitembound4' to keep the Grade. This command is optional and is disabled by default in the script. Uncomment them in the script if you want to use it
+  and don't forget to comment 'getitem3'. Apply the patch 0001-getitembound4.patch from patch/ folder.
+- The item DB doesn't have the Grade item bonus since rathena doesn't fully support them yet. If your server support this feature you need to add the bonus yourself.
+- The villa of deception have some settings, feel free to check and play with them.
+- I provided a version of the episode in Korean and in English. The version in english is a quick translation of the Korean version. The Korean scripts are left for those who have the will to translate it.
+- This version has been made to be as close as possible of the official version on KRO. However some missing data (for example when the player retalk to the npc after
+  having the quest) have been replaced by standard english/Korean dialog when it seems pertinent.
+- Note that the version doesn't contain the skill NPC_CANE_OF_EVIL_EYE.
+- A client supporting the BarterMarket system is required.
+- The Lapine enchant is using the system from the version provided in the Pull Request https://github.com/rathena/rathena/pull/4348
+  Any other version is not supported by me.
+- Any reseller of this work will be blacklister from me forever.
+
+
+-------------------------------
+// Content
+-------------------------------
+
+Main Story Quest
+Starter quests and Daily Quests:
+	Investigation of Oz Labyrinth
+	Training Grey Wolves
+	Ahab's Request
+	Collecting Folklore
+	Purifying Water
+	Transporting Goods
+	Clinic Construction
+	Checking Traps for Food
+	Clearing Firewind Kites
+	Childhood Friends
+	Helping the Children
+	Price of Labor
+	Gather Opinions in Rachel
+	Picking Half Flowers
+Daily Instances:
+	Sanctuary Purification
+	Villa of Deception (Normal and Advanced)
+Monsters Fields / Dungeons spawn
+Monsters database and monsters skills (some parts are obviously customs until we get more data)
+Item Exchange (custom)
+Enchantment (custom)
+Lapine enchant
+News monsters skills:
+	NPC_GRADUAL_GRAVITY
+	NPC_WIDEBLEEDING2
+	NPC_WIDESILENCE2
+	NPC_WIDESTUN2
+	NPC_WIDESTONE2
+	NPC_WIDESLEEP2
+	NPC_WIDECURSE2
+	NPC_WIDECONFUSE2
+	NPC_WIDEFREEZE2
+	NPC_RAINOFMETEOR
+	NPC_RELIEVE_ON
+	NPC_RELIEVE_OFF
+	NPC_BLEEDING2
+	NPC_HELLJUDGEMENT2
+
+

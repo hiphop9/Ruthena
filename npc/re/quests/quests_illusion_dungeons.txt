@@ -1,20 +1,7 @@
 //===== rAthena Script =======================================
 //= Terra Gloria - Illusion
 //===== Description: =========================================
-//= [Walkthrough Conversion]
-//= Quest NPCs - Illusion series
-//
-//- Note: Probably missing some questinfo on Illusion of Vampire.
-//===== Changelog: ===========================================
-//= 1.0 Illusion of Moonlight initial release [crazyarashi]
-//= 1.1 Script & function cleanup [Everade]
-//= 1.2 Added Illusion of Vampire [Capuche]
-//= 1.3 Added Illusion of Frozen [Capuche]
-//= 1.4 Added Illusion of Turtle [Capuche]
-//= 1.5 Added Illusion of Luanda [Capuche]
-//= 1.6 Added Illusion of Underwater [Capuche]
-//= 1.7 Added Illusion of Twins [Capuche]
-//= 1.8 Added Illusion of Teddy Bear [Atemo]
+//???? ????????
 //============================================================
 
 //============================================================
@@ -139,9 +126,9 @@ payon,167,229,3	script	Elder Jagyeom#illusion_moonlight	4_M_HUOLDARMY,{
 	close;
 }
 
-pay_arche,48,137,4	script	Young Scholar#ill_moon_arch	4_F_03,{
+pay_arche,48,137,4	script	??? ????#ill_moon_arch	4_F_03,{
 	if (illusion_moonlight == 0) {
-		npctalk "Why aren't they coming out already...","",bc_self;
+		npctalk "?? ????? ???????.....","",bc_self;
 		end;
 	}
 	if (illusion_moonlight == 1) {
@@ -179,7 +166,7 @@ pay_arche,48,137,4	script	Young Scholar#ill_moon_arch	4_F_03,{
 		cloakoffnpcself( "Payon Soldier#ill_moon_arch" );
 		cloakoffnpcself( "Muyeon#ill_moon_arch" );
 		sleep2 750;
-		npctalk "There they are! They look fine!","Young Scholar#ill_moon_arch",bc_self;
+		npctalk "There they are! They look fine!","??? ????#ill_moon_arch",bc_self;
 		sleep2 1500;
 		npctalk "Ugh, I don't want to train anymore!","Muyeon#ill_moon_arch",bc_self;
 		npctalk "...","Payon Soldier#ill_moon_arch",bc_self;
@@ -280,7 +267,7 @@ payon_in03,33,95,3	script	Muyeon#ill_moon_pin	4_F_TAEKWON,{
 	}
 	if (illusion_moonlight == 2) {
 		.@elder$ = "Jagyeom#ill_moon_pin";
-		.@scholar$ = "Young Scholar#ill_moon_pin";
+		.@scholar$ = "??? ????#ill_moon_pin";
 		setpcblock PCBLOCK_ALL,true;
 		npctalk "Whatever you say, I'm not doing it anymore.","",bc_self;
 		sleep2 2500;
@@ -583,7 +570,7 @@ payon_in03,30,96,5	script	Jagyeom#ill_moon_pin	4_M_HUOLDARMY,{
 	close;
 }
 
-payon_in03,33,93,1	script	Young Scholar#ill_moon_pin	4_F_03,{
+payon_in03,33,93,1	script	??? ????#ill_moon_pin	4_F_03,{
 	if (illusion_moonlight < 2) {
 		mes "[ Young Scholar ]";
 		mes "Payon is home for sacred creatures since ancient times.";
@@ -631,9 +618,9 @@ pay_dun03,140,46,0	script	Shimmering Portal#ill_moon_in	4_ENERGY_BLUE,{
 	if (illusion_moonlight == 5) {
 		mes "There's a shimmering portal in the air.";
 		next;
-		cloakoffnpcself( "Young Scholar#ill_moon_pdun" );
+		cloakoffnpcself( "??? ????#ill_moon_pdun" );
 		cloakoffnpcself( "Junghee#ill_moon_pdun" );
-		npctalk "*Panting* You're here.","Young Scholar#ill_moon_pdun",bc_self;
+		npctalk "*Panting* You're here.","??? ????#ill_moon_pdun",bc_self;
 		mes "[ Young Scholar ]";
 		mes "I was alarmed when you suddenly disappeared.";
 		mes "Do you think this is one of the nightmares that Muyeon...";
@@ -652,11 +639,11 @@ pay_dun03,140,46,0	script	Shimmering Portal#ill_moon_in	4_ENERGY_BLUE,{
 		setquest 7781;
 		close2;
 		setpcblock PCBLOCK_NPC, true;
-		specialeffect EF_SPINMOVE,AREA,"Young Scholar#ill_moon_pdun";
-		specialeffect EF_DQ9_CHARGE,AREA,"Young Scholar#ill_moon_pdun";
+		specialeffect EF_SPINMOVE,AREA,"??? ????#ill_moon_pdun";
+		specialeffect EF_DQ9_CHARGE,AREA,"??? ????#ill_moon_pdun";
 		sleep2 350;
 		npctalk "Arghhhhh-!","",bc_self;
-		cloakonnpcself( "Young Scholar#ill_moon_pdun" );
+		cloakonnpcself( "??? ????#ill_moon_pdun" );
 		sleep2 500;
 		npctalk "Chunghae!","Junghee#ill_moon_pdun",bc_self;
 		sleep2 2000;
@@ -685,7 +672,7 @@ OnInit:
 }
 
 pay_dun03,143,45,4	duplicate(dummy_cloaked_npc)	Junghee#ill_moon_pdun	4_M_PAY_SOLDIER
-pay_dun03,138,43,7	duplicate(dummy_cloaked_npc)	Young Scholar#ill_moon_pdun	4_F_03
+pay_dun03,138,43,7	duplicate(dummy_cloaked_npc)	??? ????#ill_moon_pdun	4_F_03
 
 pay_d03_i,140,46,0	script	Shimmering Portal#ill_moon_out	4_ENERGY_BLUE,{
 	mes "I can go back to the ruined village.";
@@ -8719,29 +8706,29 @@ S_MenuHunt:
 //= Illusion of Underwater
 //============================================================
 // prt_in,157,66,4	script	Jerrymon#jerry	1_M_01,{
-prt_elib,57,18,4	script	Jerrymon#jerry	1_M_01,{
+prt_elib,57,18,4	script	力府阁::Jerrymon#jerry	1_M_01,{
 	if (ill_underwater == 0) {
-		mes "[Jerrymon]";
-		mes "Um... Uhm...";
+		mes "[力府阁]";
+		mes "澜... 栏澜...";
 		next;
-		mes "[Jerrymon]";
-		mes "Oh, what a surprise!!";
+		mes "[力府阁]";
+		mes "绢咐. 濒娄捞具!!";
 		next;
-		mes "[Jerrymon]";
-		mes "What's up? I'm busy right now, so I'll talk to you later.";
+		mes "[力府阁]";
+		mes "公郊老捞烈? 璃 瘤陛 官悔聪 捞具扁绰 唱吝俊 佃摆嚼聪促.";
 		close;
 	}
 	if (ill_underwater == 1) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Um... Uhm...";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Oh, what a surprise!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "What's up? I'm a bit busy right now...";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Ah, you're the one introduced by Raket. I've been waiting for you.";
 		mes "Can you show me your fishing rod?";
 		next;
@@ -8757,84 +8744,84 @@ prt_elib,57,18,4	script	Jerrymon#jerry	1_M_01,{
 		next;
 		mes ".....";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yes, that's right... this substance is just that... to discover it again like this...";
 		next;
 		select( "What material are you talking about?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Adventurer, do you know where the deepest part of the sea is?";
 		next;
 		select( "Well...??" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "It is a place called the ^4d4dffTrench^000000. To put it simply, you can think of it as a deep cliff in the sea.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "It is known that there are hundreds of different types of trenches in the world's oceans.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The widest and deepest known trench is the ^4d4dffBahia Trench^000000 near Izlude.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "There are rare life forms at the bottom of the trench, and marine scientists like myself have shown great interest and have been exploring them.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Though shallow trenches can be explored to some extent.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "But in the case of the Bahia Trench, scientists have calculated that scientifically, no life can exist because it is so incredibly deep.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I recently found out that there is life in the Bahia Trench.";
 		next;
 		select( "How do you know that??" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "You can tell by the stone that contains my magic.";
 		next;
 		select( "A stone with magical power?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yes, I'm a mage-turned-oceanographer. I learned magic for oceanography.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Enchant a large boulder and make it fall to the floor where the trench exists.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The magic on the dropped stone is connected to me, so by measuring the distance, I can get a little idea of how deep it is and what's going on near the stone.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "To tell you what I found out...";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The composition of normal sea water and deep sea water is almost the same. But the only difference is the deep sea of Bahia Trench.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Should I say it's like water and oil? There's a section where they never mix.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "A strong boundary was formed where they meet each other, and it felt as if the deep seawater in that section was desperately blocking the seawater coming down from above.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The water pressure is also much lower than that of normal seawater, so it is assumed that it has a favorable environment for life.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "We call it ^4d4dffdeep seawater^000000";
 		next;
 		select( "Is this gloss related to what you said?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yes! That's right!!";
 		mes "We only identified the existence of Abyssal Seawater deep in the Bahia Trench, and it was very difficult to obtain samples. This fishing rod has a lot of Abyssal Seawater on it...";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Could you leave this fishing rod with me? I think I can figure something out if I extract this sea water and turn it into essence.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Oh, and I heard that the fishing rod was found today. Can I ask you to check if there is another floating substance in the nearby sea?";
 		next;
 		if (select( "Okay, I'll be back.", "I'm a bit busy right now..." ) == 2) {
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Please come back to me when you're done!";
 			close;
 		}
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yes, thanks! I'll be waiting for you!!";
 		close2;
 		if (countitem(25898) > 0)
@@ -8844,88 +8831,88 @@ prt_elib,57,18,4	script	Jerrymon#jerry	1_M_01,{
 		end;
 	}
 	if (ill_underwater == 2) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I'm sorry to bother you, but please. I'll be waiting for you here.";
 		close;
 	}
 	if (ill_underwater == 3) {
 		if (countitem(25899) < 1) {
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "I'm sorry to bother you, but please. I'll be waiting for you here.";
 			close;
 		}
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Ah, welcome, adventurer!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The investigation is going smoothly~";
 		mes "Hey, could you take a look at this?";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "See those two little water bottles here?";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "One side is normal seawater, and the other side is seawater mixed with seawater from the abyss buried in fishing rods. I'll try mixing these two.";
 		next;
 		mes " - Jerrymon poured both waters into one bottle and began to shake them together. - ";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Now, look. As I said before, they don't mix at all, do they?";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "This... this!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "If you shake it like crazy!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "<FONT COLOR = E68F8F><FONT SIZE = 16><B>Wow!!!!!!</FONT></FONT></B>";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "<FONT COLOR = E68F8F><FONT SIZE = 16><B>Uwachachaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!!!!</FONT></FONT></B>";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "<FONT COLOR = E68F8F><FONT SIZE = 16><B>Ahhhhhhh!!!!!!</FONT></FONT></B>";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh...";
 		next;
 		select( "Oh, I'm going to catch someone, is it okay?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Keep... Whoa... Whoa... OK now.";
 		next;
 		mes "- Looking into the bottle Jerrymon is holding, I can clearly see the shape of the vortex. - ";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Now, do you see this whirlpool!! This is the passage that connects to the bottom of the Bahia Trench!";
 		next;
 		select( "??? Isn't that just a whirlpool created by shaking it?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "No. This is the stone that contains my magical power. Let's look at it.";
 		next;
 		mes " - Jerrymon put a glowing stone into the bottle. The glowing stone was sucked into the whirlpool inside the bottle and disappeared without a trace! - ";
 		next;
 		select( "No, how could it be?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Did I ever tell you that the stone that contains my magic can measure the distance to me?";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "It feels the same as the last time I threw a pebble into the Bahia Trench..";
 		mes "If you follow this whirlpool, you may be able to find the owner of the fishing rod.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The problem is... the amount of essence on a fishing rod can't make a whirlpool large enough for a person to fit in.";
 		next;
 		select( "Is this amount okay?" );
 		mes "- Showed the ^4d4dff" + getitemname(25899) + "^000000 received from Gein to Jerrymon. - ";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Oh, just in case, I actually found it!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "With this amount, I think I can create a vortex of fissures that normal people can enter. You can pass it to me.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The place is too small to do this much here, so let's do it in Izlude. In order to get help from your friends.";
 		mes "Then see you in Izlude!!";
 		close2;
@@ -8936,11 +8923,11 @@ prt_elib,57,18,4	script	Jerrymon#jerry	1_M_01,{
 		end;
 	}
 	if (ill_underwater == 4) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Then let's meet in Izlude!!";
 		close;
 	}
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "I'm sorry to bother you, but please. I'll be waiting for you here.";
 	close;
 
@@ -8960,7 +8947,7 @@ OnTouch:
 		cloakoffnpcself( "Sirood#SRD2" );
 	end;
 }
-izlude,132,54,0	duplicate(Sirood#SRD1)	Jerrymon#jerry1	HIDDEN_WARP_NPC,4,4
+izlude,132,54,0	duplicate(Sirood#SRD1)	力府阁::Jerrymon#jerry1	HIDDEN_WARP_NPC,4,4
 
 izlude,126,53,4	script	Sirood#SRD2	1_M_04,{
 	mes "[Sirood]";
@@ -8971,237 +8958,251 @@ izlude,126,53,4	script	Sirood#SRD2	1_M_04,{
 	close;
 }
 
-izlude,129,49,4	script	Soup#Soup	1_M_02,{
+izlude,129,49,4	script	????#Soup	1_M_02,{
 	if (ill_underwater < 5) {
-		mes "[Soup]";
-		mes "Hello, my name is Soup, a friend of Sirood who is missing.";
+		mes "[????]";
+		mes "????????, ?????? ?±???? ???";
+		mes "??????? ????.";
 		next;
-		mes "[Soup]";
-		mes "The four of us, Sirood, Raket, Gein, and I often enjoyed fishing.";
+		mes "[????]";
+		mes "???? ?±??, ????, ???? ????? ?????";
+		mes "???? ???┆? ???????.";
 		next;
-		mes "[Soup]";
-		mes "That windy day... I had been feeling very guilty for not stopping Sirood from going fishing.";
+		mes "[????]";
+		mes "?? ?????? ??????? ??... ?±??";
+		mes "??????? ?????? ???? ?????? ????";
+		mes "??? ???? ? ??????? ??????";
+		mes "????????.";
 		next;
-		mes "[Soup]";
-		mes "When I heard that Sirood's fishing pole was found, I jumped out.";
+		mes "[????]";
+		mes "?±???? ????揘 ????????";
+		mes "???? ??? ?ヨ????? ????";
+		mes "????????.";
 		next;
-		mes "[Soup]";
-		mes "You must have a clue about something?";
+		mes "[????]";
+		mes "??????? ????? ??????";
 		close;
 	}
 	if (ill_underwater < 7) {
-		mes "[Soup]";
+		mes "[????]";
 		mes "I did my best.";
 		next;
-		mes "[Soup]";
+		mes "[????]";
 		mes "Should Sirood come back safely?";
 		close;
 	}
-	mes "[Soup]";
+	mes "[????]";
 	mes "Sirood is back with us.";
 	next;
-	mes "[Soup]";
+	mes "[????]";
 	mes "Thanks to you, adventurer. Thank you very much.";
 	close;
 }
 
-izlude,135,51,4	script	Raket#Raket	1_F_MERCHANT_01,{
+izlude,135,51,4	script	????#Raket	1_F_MERCHANT_01,{
 	if (ill_underwater < 5) {
-		mes "[Raket]";
-		mes "It's been exactly 3 months since Sirood went missing.";
+		mes "[????]";
+		mes "?±?? ??????? ???? ?? 3??????";
+		mes "???? ????.";
 		next;
-		mes "[Raket]";
-		mes "Sirood's fishing rod was found.";
+		mes "[????]";
+		mes "?±???? ????揘 ????????.";
 		next;
-		mes "[Raket]";
-		mes "I felt that way.";
+		mes "[????]";
+		mes "???? ??? ?????? ????????.";
 		next;
-		select( "What do you think?" );
-		mes "[Raket]";
-		mes "Why is this only discovered now, isn't this a message from someone?";
+		select( "?? ????????" );
+		mes "[????]";
+		mes "?? ???????? ??????????, ?????";
+		mes "???????? ?????? ??????? ???????";
 		next;
-		select( "Looking at it, it doesn't make sense." );
-		mes "[Raket]";
-		mes "Ha... It's just my delusion. I especially miss that child today.";
+		select( "??? ???? ????? ?????? ????." );
+		mes "[????]";
+		mes "??... ??? ???? ?????? ???????.";
+		mes "??????? ?????? ?? ????? ????";
+		mes "??????.";
 		close;
 	}
 	if (ill_underwater < 7) {
-		mes "[Raket]";
+		mes "[????]";
 		mes "Heh heh... It's so hard to use all your strength...";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "But for Sirood's sake...";
 		close;
 	}
-	mes "[Raket]";
+	mes "[????]";
 	mes "Thank you so much!!";
 	next;
-	mes "[Raket]";
+	mes "[????]";
 	mes "Now you can fish with Sirood again.";
 	next;
-	mes "[Raket]";
+	mes "[????]";
 	mes "I'm so glad...";
 	close;
 }
 
-izlude,132,49,5	script	Gein#Gein	4W_M_01,{
+izlude,132,49,5	script	????#Gein	4W_M_01,{
 	if (checkweight(1201,3) == 0) {
 		mes "You have too many items.";
 		mes "Please clean up your items and try again.";
 		close;
 	}
 	if (BaseLevel < 140) {
-		mes "[Gein]";
-		mes "Haha... why did this only get discovered now??";
-		mes "It's impossible, this is...";
+		mes "[????]";
+		mes "???... ??∑?? ????? ??????? ????";
+		mes "??????";
+		mes "???? ?? ???? ?????, ???...";
 		next;
-		mes "- I feel serious anguish from this person. Let's come back after I've become level 140. -";
+		mes "- ????????? ????? ??????";
+		mes "????????. 140 ???? ?????? ?????? ????";
+		mes "??? ??? ???????? ????. -";
 		close;
 	}
 	if (ill_underwater == 0) {
-		mes "[Gein]";
+		mes "[????]";
 		mes "Haha...why did this only get discovered now??";
 		mes "It's impossible, this is...";
 		next;
 		select( "Do you have any concerns?" );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Oh, hello...";
 		next;
 		mes "- He is very fidgety with a fishing pole in his hand. It doesn't look like he's out fishing. - ";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "This fishing rod belongs to my friend <FONT COLOR = 4D4DFF><FONT SIZE = 16><B>Sirood</FONT></FONT></B> who went missing three months ago. I found something!!!";
 		next;
 		select( "Disappeared?" );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Yes... Sirood is a fishing fanatic and came here to fish whenever he had a chance.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Influenced by Sirood, we also fell in love with fishing, and the four of us often had a good time.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Sirood's passion for fishing was to the point that he invited us to go fishing even in the rain and wind.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "The day Sirood went missing was exactly the same rainy and windy day. I put on my raincoat and went to go fishing.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "We were invited to go out together, but they all declined.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Sirood went fishing alone and we haven't seen him since...";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "I should have stopped you from leaving...";
 		next;
 		mes "- Gein started talking again after wiping away tears for a moment. -";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "The news of Sirood's disappearance immediately spread throughout Izlude and a large-scale search was conducted with a lot of time and manpower invested, but the search ended without finding any clues.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "After that, we got together and ran everywhere to find Sirood, but there was no result, and we were about to give up.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "But just now!!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "After 3 months!!!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Sirood's fishing pole has risen above sea level. His item was nowhere to be found during the search!";
 		next;
 		select( "Now, calm down... Are you sure it's Sirood's fishing rod?" );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Yes, I'm sure! It's the fishing rod I've always seen.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "This fishing rod was made by Sirood himself, so it is the only one. You can see the initials on the handle here, S.R.D!!";
 		next;
 		select( "Oh, then why now..." );
-		mes "[Gein]";
+		mes "[????]";
 		mes "I'm so surprised and shocked right now that I don't know what to do.";
 		next;
 		mes "- But looking closely at the fishing rod, I feel something different. This wooden fishing rod has been submerged in water for 3 months, but it still looks the same, and I can see a bit of shiny gloss... -";
 		next;
 		select( "Isn't this fishing rod a bit strange over there?" );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Strange, what is it?";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Uh...";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Uh.....??";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "It's been submerged in water for 3 months... but it hasn't corroded at all. It's completely fine??";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Hmm... And it seems to have a subtle glow... It seems like the fishing rod is coated?";
 		next;
 		mes "-The person who seemed to be Gein's friend who was listening to the story opened his mouth. -";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "Where is it, I want to see it!! What's wrong??";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "This fishing rod... It was submerged in the water for 3 months, but it was found in its original form, or worse, in a state of disrepair.";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "Ugh...";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "Um...";
 		next;
 		mes "- Raket looked intently at his fishing pole, then answered Gein. -";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "I'm not sure either?";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Certainly!! I don't know, but would you?";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "Ummm... but I know someone who might know a little about this rod.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Who??";
 		next;
 		select( "Who?" );
-		mes "[Raket]";
+		mes "[????]";
 		mes "His name is <FONT COLOR = 4D4DFF><FONT SIZE = 16><B>Jerrymon</FONT></FONT></B>, a marine scientist. I've met my father a few times. I know you are in the East Library of Prontera.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Ah, ah... then... hey adventurer!! I'm sorry for the first meeting, but can I ask you a favor?? We can't get out of here in Izlude...";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Please go see Jerrymon and show him this fishing rod...even if it's trivial...I hope he has some information..";
 		next;
 		if (select( "Okay. Let's go.", "Sorry. I'm a bit busy right now..." ) == 2) {
-			mes "[Gein]";
+			mes "[????]";
 			mes "No... are you sure?";
 			next;
-			mes "[Gein]";
+			mes "[????]";
 			mes "Are you turning around after hearing about this heartbreaking story and mysterious clue...";
 			close;
 		}
-		mes "[Gein]";
+		mes "[????]";
 		mes "Ugh... Thanks!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "^4d4dffJerrymon^000000 should still be at the <NAVI>[East Library]<INFO>prontera,192,264,</INFO></NAVI> in Prontera.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Now, I'll give you the fishing rod, a keepsake from Sirood. Thank you...";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "What??? It's a keepsake!! You don't even know if Sirood is alive or dead!!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Uhhh... yes I made a mistake, this is the fishing rod Sirood left behind. Please take good care of it.";
 		next;
-		mes "[Raket]";
+		mes "[????]";
 		mes "I'll tell Jerrymon about the contents in advance through my father!";
 		next;
 		mes "[Gein & Raket & Soup]";
@@ -9213,47 +9214,47 @@ izlude,132,49,5	script	Gein#Gein	4W_M_01,{
 		end;
 	}
 	if (ill_underwater == 1) {
-		mes "[Gein]";
+		mes "[????]";
 		mes "You can go to Prontera's <NAVI>[East Library]<INFO>prontera,192,264,</INFO></NAVI> as Raket told you.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Take care of yourself!! I hope there is even the smallest clue...";
 		close;
 	}
 	if (ill_underwater == 2) {
-		mes "[Gein]";
+		mes "[????]";
 		mes "Ah, you're here!!!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Do you have any information about Sirood?";
 		next;
 		mes "- I relayed what I heard from Jerrymon. -";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Ah... I see, I've never heard of a trench before.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "I can't believe there's such a big and deep trench near Izlude...";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Oh, by the way, is there anything else you need for coming back here?";
 		next;
 		select( "I was wondering if there was anything else found besides the fishing rod." );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Oh right!!";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "It's a chunk scooped up with a landing net near where the fishing rod was found.";
 		next;
 		mes " - This lump is what Jerrymon said.";
 		mes "^4d4dffIt must be the essence of the abyss^000000. - ";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Something shiny and has the same feeling of Sirood's fishing rod, so I secured it for now.";
 		mes "Could this nugget help?";
 		next;
 		select( "Thanks, that would be a great help." );
-		mes "[Gein]";
+		mes "[????]";
 		mes "Are you going back to Jerrymon? Please be careful.";
 		close2;
 		getitem 25899,1;	// E_Abyss1
@@ -9262,22 +9263,22 @@ izlude,132,49,5	script	Gein#Gein	4W_M_01,{
 		end;
 	}
 	if (ill_underwater == 3) {
-		mes "[Gein]";
+		mes "[????]";
 		mes "I hope Sirood will appear in front of us intact, just as the fishing rod appeared intact...";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Please let me know if you have any new information!";
 		close;
 	}
 	if (ill_underwater < 7) {
-		mes "[Gein]";
+		mes "[????]";
 		mes "Heh...heh...Hello adventurer, heh...heh... I'm so tired I can't move...";
 		close;
 	}
-	mes "[Gein]";
+	mes "[????]";
 	mes "Thank you, adventurer.";
 	next;
-	mes "[Gein]";
+	mes "[????]";
 	mes "To be able to meet Sirood again is like a dream.";
 	close;
 
@@ -9287,46 +9288,46 @@ OnInit:
 	end;
 }
 
-izlude,132,54,4	script(CLOAKED)	Jerrymon#jerry2	1_M_01,{
+izlude,132,54,4	script(CLOAKED)	力府阁::Jerrymon#jerry2	1_M_01,{
 	if (ill_underwater < 4)
 		end;
 	if (ill_underwater == 4) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Ah you're here!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "We are fully prepared while the adventurers are coming.";
 		next;
 		mes "- Gein gasps to say hello to his two friends. - ";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "Ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha... ah, welcome adventurer.";
 		next;
-		mes "[Gein]";
+		mes "[????]";
 		mes "I'm not sure what the principle is, but I stirred it diligently as Jerrymon-sama told me to!!";
 		next;
 		mes "[Raket & Soup]";
 		mes "Hee... hee... hee... ah... hello.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		specialeffect EF_MAP_MAGICZONE3;
 		mes "Okay, shall we begin?";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "The whirlpool will be created soon.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Hold my hand when I give you a signal!!";
 		next;
 		select( "No, wait. Are you leaving right now?" );
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yes, yes, go ahead and don't think about it! Just trust me~~!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Okay now. Take my hand!";
 		next;
 		specialeffect EF_CASTSPIN2, AREA;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Wow! It spins round and round~~!!";
 		close2;
 		ill_underwater = 5;
@@ -9335,26 +9336,26 @@ izlude,132,54,4	script(CLOAKED)	Jerrymon#jerry2	1_M_01,{
 		warp "iz_d04_i",130,227;
 		end;
 	}
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "Hello!!";
 	next;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "Thanks to you, Adventurer, I am having a fun and exciting time every day.";
 	next;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "Would you like to go to the deep sea again? I will follow you!!";
 	next;
 	if (select( "Please", "I'll go next time" ) == 2) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Yeah... Then I'll be waiting for you.";
 		close;
 	}
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	specialeffect EF_MAP_MAGICZONE3;
 	mes "Good.";
 	next;
 	specialeffect EF_CASTSPIN2;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "Come on! Let's go~~!! Yay!!";
 	close2;
 	specialeffect EF_CASTSPIN2, AREA;
@@ -9367,7 +9368,7 @@ OnInit:
 }
 
 
-iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
+iz_d04_i,127,228,4	script	力府阁::Jerrymon#jerry3	1_M_01,{
 	if (checkweight(1201,3) == 0) {
 		mes "You have too many items.";
 		mes "Please clean up your items and try again.";
@@ -9378,68 +9379,68 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 	if (ill_underwater == 5) {
 		switch( checkquest(3411,HUNTING) ) {
 		case -1:
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Wow... this purple sea... it's fantastic!!!";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "It's so amazing that we can breathe without gills, there's no sea pressure, and even marine life that I've never seen before...!!!";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "There's more than one or two things to look into, I'll be busy.";
 			mes "Wow... so exciting!!! I think this is the most thrilling moment in my 14 years as an oceanographer!";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Lululala~~~";
 			next;
 			select( "Oh hey, I'm here to find Sirood..." );
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Ah, ah... that, right? That should take precedence.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "In order to bring Sirood back ashore, we need an additional ^4d4dff" + getitemname(25899) + "^000000. The question is how to get it...";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "I've been watching the deep sea creatures here, and I've seen some of them glow with the essence of the abyss.";
 			mes "And they seem to threaten us sometimes.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "In that sense, could you handle some of the deep sea creatures? Maybe we can get ^4d4dff" + getitemname(25899) + "^000000 from them.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Please take out 10 each of ^4d4dff" + getmonsterinfo("ILL_SROPHO", MOB_NAME) + "^000000, ^4d4dff" + getmonsterinfo("ILL_DEVIACE", MOB_NAME) + "^000000, and ^4d4dff" + getmonsterinfo("ILL_MARSE", MOB_NAME) + "^000000.";
 			next;
 			if (select( "Okay", "I'll do it next time" ) == 2) {
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Yes yes~ I'll be waiting for you here!";
 				close;
 			}
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Yes yes~ I'll be waiting for you here!";
 			close2;
 			setquest 3411;
 			end;
 		case 0:
 		case 1:
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Please take out 10 each of ^4d4dff" + getmonsterinfo("ILL_SROPHO", MOB_NAME) + "^000000, ^4d4dff" + getmonsterinfo("ILL_DEVIACE", MOB_NAME) + "^000000, and ^4d4dff" + getmonsterinfo("ILL_MARSE", MOB_NAME) + "^000000.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "I'll be waiting for you here.";
 			close;
 		case 2:
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Thank you for your hard work, you also brought ^4d4dff" + getitemname(25899) + "^000000!! As expected, my prediction was correct.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "It looks like we only need about 10 ^4d4dff" + getitemname(25899) + "^000000 to send Sirood back ashore.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "If you collect them, I'll create a whirlpool for you.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Oh, and this is a stone I found while researching. I've been keeping it because it looks like something that could be used by adventurers, so please take it.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Then be careful!";
 			close2;
 			getitem 25271,2;	// IllusionStone
@@ -9453,40 +9454,40 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 	}
 	if (ill_underwater == 6) {
 		if (countitem(25899) < 10) {
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Please bring ^4d4dff10 " + getitemname(25899) + "^000000.";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "I'd like to save it myself, but as you can see I'm weak, heck.";
 			close;
 		}
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Thank you for your hard work!! You brought 10 ^4d4dff" + getitemname(25899) + "^000000.";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Would you like to go ashore now?";
 		next;
 		if (select( "Go ashore", "Not going up now" ) == 2) {
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Talk to me when you're ready to go ashore!";
 			close;
 		}
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I found this again while waiting for adventurer. Please accept it!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Okay, let's condense this...";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Huh...!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Now, Adventurer and Sirood!! Can you help me?? Ehhh!!!!";
 		next;
 		mes "- A huge whirlpool was created in front of Jerrymon! -";
 		specialeffect EF_MAP_MAGICZONE3;
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Then I'll cross first!!! Follow me carefully!";
 		specialeffect EF_CASTSPIN2;
 		close2;
@@ -9503,43 +9504,43 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 
 	// daily
 	if ((checkquest(3414,PLAYTIME) == 0 || checkquest(3414,PLAYTIME) == 1) && (checkquest(3416,PLAYTIME) == 0 || checkquest(3416,PLAYTIME) == 1)) {
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I have everything I need for today's survey, thank you!!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Looks like you've finished your business. Would you like to move to Izlude?";
 		next;
 		if (select( "Move", "Do not move" ) == 2) {
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Please let me know if you need any help!";
 			close;
 		}
 		specialeffect EF_MAP_MAGICZONE3;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Okay, huh!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I'm going to cross~~ Ah!!";
 		specialeffect EF_CASTSPIN2;
 		close2;
 		warp "izlude",128,54;
 		end;
 	}
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "Hello, research is going well.";
 	next;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "If we do well, we might be able to make the vortex linking here and Izlude last forever!";
 	next;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "So, can you help me a bit more?";
 	next;
-	mes "[Jerrymon]";
+	mes "[力府阁]";
 	mes "I need more ^4d4dff" + getitemname(25899) + "^000000, and I'd like you to take care of the ^4d4dffDeep Sea Creatures^000000 that get in the way of my research.";
 	next;
 	switch( select( "Okay", "I'll do it next time", "I want to go back to Izlude" ) ) {
 	case 1:
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Thanks!! Can you do something for me?";
 		next;
 
@@ -9564,7 +9565,6 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 			.@menu$[0] = "^999999" + getitemname(25899) + " Collection - Pending^000000";
 			break;
 		case 2:
-			.@menu$[0] = "Collect " + getitemname(25899) + "";
 			break;
 		}
 
@@ -9588,7 +9588,6 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 			.@menu$[1] = "^999999Deep Sea Creatures Killed - Pending^000000";
 			break;
 		case 2:
-			.@menu$[1] = "Kill Deep Sea Creatures";
 			break;
 		}
 
@@ -9606,28 +9605,28 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 			}
 			switch( isbegin_quest(3413) ) {
 			case 0:
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "^4d4dff" + getitemname(25899) + "^000000 can be obtained from all the deep sea creatures here.";
 				mes "I need 10 right now.";
 				next;
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Then take care of yourself~~!!";
 				close2;
 				setquest 3413;
 				end;
 			case 1:
 				if (countitem(25899) < 10) {
-					mes "[Jerrymon]";
+					mes "[力府阁]";
 					mes "I need 10 ^4d4dff" + getitemname(25899) + "^000000.";
 					next;
-					mes "[Jerrymon]";
+					mes "[力府阁]";
 					mes "Come back to me when you've collected all the essences!";
 					close;
 				}
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "You've collected all the " + getitemname(25899) + "!!";
 				next;
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Thank you, I'll put it to good use in my research.";
 				close2;
 				delitem 25899,10;	// E_Abyss1
@@ -9653,24 +9652,24 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 			}
 			switch( checkquest(3415,HUNTING) ) {
 			case -1:
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Please kill 10 each of ^4d4dff" + getmonsterinfo("ILL_SROPHO", MOB_NAME) + "^000000, ^4d4dff" + getmonsterinfo("ILL_DEVIACE", MOB_NAME) + "^000000 and ^4d4dff" + getmonsterinfo("ILL_MARSE", MOB_NAME) + "^000000 that roam around here.";
 				next;
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Then take care of yourself~~!!";
 				close2;
 				setquest 3415;
 				end;
 			case 0:
 			case 1:
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "Please kill 10 each of ^4d4dff" + getmonsterinfo("ILL_SROPHO", MOB_NAME) + "^000000, ^4d4dff" + getmonsterinfo("ILL_DEVIACE", MOB_NAME) + "^000000, and ^4d4dff" + getmonsterinfo("ILL_MARSE", MOB_NAME) + "^000000.";
 				close;
 			case 2:
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "You've finished dealing with all the deep sea creatures, thank you for your hard work.";
 				next;
-				mes "[Jerrymon]";
+				mes "[力府阁]";
 				mes "I'll get back to you if I need help. Thanks!!";
 				close2;
 				getitem 25271,1;	// IllusionStone
@@ -9681,24 +9680,24 @@ iz_d04_i,127,228,4	script	Jerrymon#jerry3	1_M_01,{
 			}
 			end;
 		case 3:
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "The only person I can ask for is you...";
 			next;
-			mes "[Jerrymon]";
+			mes "[力府阁]";
 			mes "Feel free to tell me if you change your mind!!";
 			close;
 		}
 		end;
 	case 2:
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I'll be staying here for a while, so let me know if you change your mind!!";
 		close;
 	case 3:
 		specialeffect EF_MAP_MAGICZONE3;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "Okay, huh!";
 		next;
-		mes "[Jerrymon]";
+		mes "[力府阁]";
 		mes "I'm going to cross~~ Ah!!";
 		specialeffect EF_CASTSPIN2;
 		close2;
@@ -11812,996 +11811,3 @@ ant_d02_i,125,73,6	script(CLOAKED)	Vitata#part9	ILL_VITATA,{
 
 ant_d02_i,128,73,6	duplicate(dummy_cloaked_npc)	Quiet Maya#part10	ILL_MAYA
 ant_d02_i,129,73,2	duplicate(dummy_cloaked_npc)	Vitata#part11	ILL_VITATA
-
-
-//============================================================
-//= Illusion of Teddy Bear
-//============================================================
-
-ein_d02_i,161,189,3	script	Exit#IBTin	4_ENERGY_BLUE,{
-	warp "ein_dun01",189,80;
-	end;
-}
-
-einbroch,149,242,5	script	Coughing young man#ITB	4_M_NFMAN,3,3,{
-	if (BaseLevel < 150) {
-		mes "[Coughing young man]";
-		mes "The time has passed...";
-		mes "Why haven't you come back yet...";
-		mes "Cough Cough!!";
-		next;
-		mes "^ff0000∝ You can start this quest from level 150.^000000";
-		close;
-	}
-	if (ill_teddy == 0) {
-		mes "[Coughing young man]";
-		mes "The time has passed...";
-		mes "Why haven't you come back yet...";
-		mes "Cough Cough!!";
-		next;
-		mes "[Coughing young man]";
-		mes "Cough...cough...cough...";
-		mes "Ha ha ha... did something happen?";
-		mes "If I don't go and check it myself...";
-		mes "Cough cough";
-		mes "Cough...lucky...";
-		next;
-		mes "-plop-";
-		next;
-		if (select( "Help him", "Ignore" ) == 2) {
-			mes "[Coughing young man]";
-			mes "...cough...";
-			mes "Cough cough... cough";
-			close;
-		}
-		mes "[Coughing young man]";
-		mes "...cough...";
-		mes "Thank you.";
-		mes "Cough cough... cough";
-		next;
-		select( "You'd better take a break" );
-		mes "[Coughing young man]";
-		mes "Cough...";
-		mes "That's true, but... Cough... My friend who went to the mine for work hasn't come back yet... Cough.";
-		next;
-		mes "[Coughing young man]";
-		mes "A few days ago, as soon as work was over... he left... he said he would come back...";
-		mes "He hasn't come back...cough...yet.";
-		next;
-		mes "[Coughing young man]";
-		mes "Cough...cough cough...cough";
-		mes "I've talked to the guards, but...cough...cough...they didn't take it seriously...";
-		next;
-		mes "[Coughing young man]";
-		mes "^ff0000Steven^000000 is not that kind of guy...Cough cough";
-		mes "If he hasn't contacted me yet, something must have happened.";
-		next;
-		mes "[Coughing young man]";
-		mes "It seemed like he was going to ^ff0000the first floor of the mine in Einbech^000000.";
-		mes "If you look around, maybe you'll find a clue...even if it's just a small thing?";
-		ill_teddy = 1;
-		setquest 11556;
-		close;
-	}
-	if (ill_teddy == 1) {
-		mes "[Coughing young man]";
-		mes "A few days ago, as soon as work was over... he left... he said he would come back...";
-		mes "He hasn't come back...cough...yet.";
-		next;
-		mes "[Coughing young man]";
-		mes "Cough...cough cough...cough";
-		mes "I've talked to the guards, but...cough...cough...they didn't take it seriously...";
-		next;
-		mes "[Coughing young man]";
-		mes "^ff0000Steven^000000 is not that kind of guy...Cough cough";
-		mes "If he hasn't contacted me yet, something must have happened.";
-		next;
-		mes "[Coughing young man]";
-		mes "It seemed like he was going to ^ff0000the first floor of the mine in Einbech^000000.";
-		mes "If you look around, maybe you'll find a clue...even if it's just a small thing?";
-		close;
-	}
-	if (ill_teddy < 5) {
-		mes "[Coughing young man]";
-		mes "Ah! Cough Cough!";
-		mes "You're back!";
-		mes "Steven is...cough";
-		mes "Did you find him?";
-		close;
-	}
-	if (ill_teddy == 5) {
-		mes "[Acid]";
-		mes "Ah! Cough Cough!";
-		mes "You're back!";
-		mes "Steven is...cough";
-		mes "Did you find him?";
-		next;
-		select( "Pass the money" );
-		mes "[Acid]";
-		mes "....";
-		mes "As expected...cough cough...what happened?";
-		next;
-		mes "[Acid]";
-		mes "There's no way they just sent money like this when nothing happened.";
-		next;
-		mes "[Acid]";
-		mes "I ..cough..must go myself...cough..cough..";
-		mes "Maybe it doesn't help much, but...cough";
-		mes "My dearest friend...cough..may be in danger, but I can't stay still!...cluck";
-		next;
-		mes "[Acid]";
-		mes "Cough cough..Adventurer..Cough..Take me with you!";
-		mes "Please!";
-		ill_teddy = 6;
-		erasequest 11560;
-		setquest 11561;
-		close;
-	}
-	if (ill_teddy == 6) {
-		mes "[Acid]";
-		mes "I ..cough..must go myself...cough..cough..";
-		mes "Maybe it doesn't help much, but...cough";
-		mes "My dearest friend...cough..may be in danger, but I can't stay still!...cluck";
-		next;
-		mes "[Acid]";
-		mes "Cough cough..Adventurer..Cough..Take me with you!";
-		mes "Please!";
-		close;
-	}
-	mes "[Acid]";
-	mes "I've been in the mines for most of these days, so my cough seems to be getting better.";
-	mes "My body has become healthy!";
-	mes "The air here is worse than the mine... Cough";
-	close;
-
-OnTouch:
-	if (BaseLevel >= 150 && ill_teddy == 0)
-		npctalk "Coughing young man: Cough Cough!!", "", bc_self;
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 150 && ill_teddy == 0" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11560) == 1" );
-	end;
-}
-
-ein_dun01,198,79,3	script	Teddy Bear#ITB10	4_NASARIAN,{
-	if (ill_teddy == 1) {
-		mes "[Teddy Bear in line]";
-		mes "Stand in line!";
-		next;
-		select( "Why are you standing here?" );
-		mes "[Teddy Bear in line]";
-		mes "What?";
-		mes "Do you think I'd give such advanced information to a stranger I am seeing for the first time?";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "If you're that curious, stand behind me and wait for your turn!";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "Information isn't something you get for free.";
-		mes "All the time and effort...";
-		next;
-		mes "[???????????]";
-		mes "AAAAAAAAAA!!!!";
-		mes "Let go!!!!";
-		mes "You furry bastards!!!!";
-		next;
-		mes "- A man's scream is heard from the front of the line. Let's check the situation at the front. -";
-		ill_teddy = 2;
-		erasequest 11556;
-		setquest 11557;
-		close;
-	}
-	if (ill_teddy == 2) {
-		mes "[Teddy Bear in line]";
-		mes "Have you heard something strange?";
-		next;
-		mes "- A man's scream is heard from the front of the line. Let's check the situation at the front. -";
-		close;
-	}
-	mes "[Teddy Bear in line]";
-	mes "Stand in line!";
-	close;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11556) == 1" );
-	end;
-}
-
-ein_dun01,189,84,7	script	Bear#3	4_NASARIAN,{
-	mes "[Teddy Bear in line]";
-	mes "Hey there!!! Don't cut in line!!!";
-	close;
-}
-
-ein_dun01,189,82,7	duplicate(dummy_npc)	Bear#4	4_NASARIAN
-ein_dun01,190,80,7	duplicate(dummy_npc)	Bear#5	4_NASARIAN
-ein_dun01,191,80,5	duplicate(dummy_npc)	Bear#6	4_NASARIAN
-
-ein_dun01,195,80,5	script	Resident#8	4_M_EINMAN2,{
-	mes "[Resident]";
-	mes "One day, everyone started queuing up here, so I stood here too.";
-	mes "What's in front?";
-	mes "Well? I'm just here because I'm curious...";
-	close;
-}
-
-ein_dun01,196,80,1	script	Bear#9	4_NASARIAN,{
-	mes "[Teddy Bear in line]";
-	mes "Everyone stands in line for days waiting for their turn.";
-	close;
-}
-
-ein_dun01,189,85,7	script	Teddy Bear#IBT1	4_NASARIAN,{
-	if (ill_teddy < 2) {
-		mes "[Teddy Bear in line]";
-		mes "Whoops, it's my turn to go in soon.";
-		close;
-	}
-	if (ill_teddy == 2) {
-		mes "[Teddy Bear in line]";
-		mes "Whh..what happened?";
-		mes "I heard a scream when the man in front of me just entered.";
-		next;
-		select( "About the man." );
-		mes "[Teddy Bear in line]";
-		mes "What?";
-		mes "I didn't even have time to look at that!";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "Flaw... Hehe... .";
-		mes "I've been waiting in line for days, but suddenly I'm not interested anymore...";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "If you're really curious, I'll give you my position. Why don't you go in and check it out?";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "I...it's not because I'm scared!";
-		mes "I just... I guess what is inside is boring for me now.";
-		mes "Because I've lost interest?!";
-		ill_teddy = 3;
-		erasequest 11557;
-		setquest 11558;
-		close;
-	}
-	if (ill_teddy == 3) {
-		mes "[Teddy Bear in line]";
-		mes "Flaw... Hehe... .";
-		mes "I've been waiting in line for days, but suddenly I'm not interested anymore...";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "If you're really curious, I'll give you my position. Why don't you go in and check it out?";
-		next;
-		mes "[Teddy Bear in line]";
-		mes "I...it's not because I'm scared!";
-		mes "I just... I guess what is inside is boring for me now.";
-		mes "Because I've lost interest?!";
-		close;
-	}
-	mes "[Teddy Bear in line]";
-	mes "What?";
-	mes "The guy in front has already ran away!";
-	mes "Don't get confused!";
-	close;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11557) == 1" );
-	end;
-}
-
-ein_dun01,189,87,3	script	An entrance somewhere#IBTin	4_ENERGY_BLUE,{
-	if (ill_teddy < 3) {
-		mes "- Can't get in yet -";
-		close;
-	}
-	warp "ein_d02_i",168,197;
-	end;
-}
-
-
-ein_d02_i,170,193,5	script	Steven#IBT	4W_M_02,3,3,{
-	if (checkweight(1201,3) == 0) {
-		mes "- Wait a moment!!";
-		mes "- You have too many items. -";
-		mes "- You can't receive this. -";
-		mes "- Lighten your weight and -";
-		mes "- try again. -";
-		close;
-	}
-	if (ill_teddy < 3)
-		end;
-	if (ill_teddy == 3) {
-		mes "[Steven]";
-		mes "Can't you let me go?!";
-		mes "Let me go!";
-		mes "This sucks!!!!";
-		npctalk "Steven: Can't you let me go?!", "", bc_self;
-		cloakoffnpcself( "White Teddy Bear#IBT" );
-		cloakoffnpcself( "Teddy Bear#IBT" );
-		next;
-		mes "[Teddy Bear]";
-		mes "Oops!";
-		mes "Caught, I got caught!";
-		mes "Let's run!!!!";
-		npctalk "White Teddy Bear: Caught, I got caught!", "White Teddy Bear#IBT", bc_self;
-		npctalk "Teddy Bear: Let's Run!!!!", "Teddy Bear#IBT", bc_self;
-		ill_teddy = 4;
-		erasequest 11558;
-		setquest 11559;
-		close2;
-		cloakonnpcself( "White Teddy Bear#IBT" );
-		cloakonnpcself( "Teddy Bear#IBT" );
-		end;
-	}
-	if (ill_teddy == 4) {
-		mes "[Steven]";
-		mes "What...";
-		mes "That's...";
-		next;
-		mes "[Steven]";
-		mes "Hey!";
-		mes "You there!";
-		mes "Did you see that too?";
-		mes "The Teddy Bear just...";
-		next;
-		select( "Tell him about the coughing young man." );
-		mes "[Steven]";
-		mes "Huh? The coughing young man in Einbroch asked you to find me?";
-		mes "Is it Acid...";
-		next;
-		mes "[Steven]";
-		mes "I told him I'd come back right away, but what the hell was the rumor about? There were a lot of people and monsters waiting in line.";
-		next;
-		mes "[Steven]";
-		mes "So how was Acid?";
-		mes "He couldn't sleep well because his cough got so bad.";
-		next;
-		mes "[Steven]";
-		mes "I have to go back and send him to the hospital, but...";
-		mes "If I'm not mistaken, that's...";
-		next;
-		mes "[Steven]";
-		mes "Ugh...things got messy...";
-		next;
-		mes "[Steven]";
-		mes "Hey.";
-		mes "Do me a favor.";
-		mes "He has to go to the hospital today and won't have enough money.";
-		next;
-		mes "[Steven]";
-		mes "I think I need to do some work here.";
-		mes "You go back and tell him that I'm all right.";
-		mes "Give him this money too.";
-		next;
-		mes "[Steven]";
-		mes "Please.";
-		mes "When I go back... I don't have anything, but I'll give you something in return.";
-		npctalk "Steven: Please.", "", bc_self;
-		ill_teddy = 5;
-		erasequest 11559;
-		setquest 11560;
-		close;
-	}
-	if (ill_teddy == 5) {
-		mes "[Steven]";
-		mes "Hey.";
-		mes "Do me a favor.";
-		mes "He has to go to the hospital today and won't have enough money.";
-		next;
-		mes "[Steven]";
-		mes "I think I need to do some work here.";
-		mes "You go back and tell him that I'm all right.";
-		mes "Give him this money too.";
-		next;
-		mes "[Steven]";
-		mes "Please.";
-		mes "When I go back... I don't have anything, but I'll give you something in return.";
-		npctalk "Steven: Please.", "", bc_self;
-		close;
-	}
-	if (ill_teddy == 6) {
-		mes "[Steven]";
-		mes "Oh you are here?";
-		mes "Did he go to the hospital?";
-		next;
-		mes "[Acid]";
-		mes "Steven!";
-		mes "Why make people so worried...";
-		cloakoffnpcself( "Acid#IBT_inN01" );
-		next;
-		mes "[Steven]";
-		mes "No... why are you here?";
-		mes "Go to the hospital!";
-		next;
-		mes "[Acid]";
-		mes "Do I have a hospital or a shop now?!";
-		next;
-		mes "[Steven]";
-		mes "Ugh...";
-		mes "Okay...okay!";
-		mes "Be quiet for now!";
-		mes "Can you hear something strange coming from the north?";
-		npctalk "Steven: Ugh... nagging...", "", bc_self;
-		ill_teddy = 7;
-		erasequest 11561;
-		setquest 11562;
-		close2;
-		cloakonnpcself( "Acid#IBT_inN01" );
-		end;
-	}
-	if (ill_teddy == 7) {
-		mes "[Steven]";
-		mes "Ugh...";
-		mes "Okay!";
-		mes "Be quiet for now!";
-		mes "Can you hear something strange coming from the north?";
-		npctalk "Steven: Ugh... nagging...", "", bc_self;
-		close;
-	}
-	if (ill_teddy == 8) {
-		if (checkquest(11563,HUNTING) != 2 || checkquest(11564,HUNTING) != 2) {
-			mes "[Steven]";
-			mes "Too many of them.";
-			mes "This is too dangerous.";
-			mes "Let's clear things up and talk again.";
-			close;
-		}
-		mes "[Steven]";
-		mes "Whoa...";
-		mes "Did you send them out?";
-		next;
-		mes "[Acid]";
-		mes "Aren't those just Teddy Bears?";
-		mes "Invading... they called themselves Nazarians, right?";
-		cloakoffnpcself( "Acid#IBT_inN01" );
-		next;
-		mes "[Steven]";
-		mes "What the hell is going on...";
-		mes "I'm out of my mind...";
-		next;
-		select( "About Teddy Bear" );
-		mes "[Acid]";
-		mes "Steven brought it because he said he was looking for something salty to eat at home.";
-		next;
-		mes "[Acid]";
-		mes "The pay is so good compared to the job, and the delivery place is also a mine, so it was a bit suspicious...";
-		next;
-		mes "[Acid]";
-		mes "I've been told that idiot is excited.";
-		next;
-		mes "[Steven]";
-		mes "What an idiot!";
-		mes "Thanks to you, I get hospital bills and your cough...";
-		mes "Oh... Come to think of it, you don't cough anymore, do you?";
-		npctalk "Steven: What an idiot!", "", bc_self;
-		next;
-		mes "[Acid]";
-		mes "Uh... is that so?";
-		mes "Come to think of it, I feel like I can breathe easier!";
-		next;
-		mes "[Steven]";
-		mes "No matter how many times I went to the hospital, there was no improvement...";
-		mes "Maybe it was just the bad air!";
-		npctalk "Steven: Air worse than in the mine...", "", bc_self;
-		next;
-		mes "[Acid]";
-		mes "No, that's not important right now...";
-		mes "The doll we made is alive and moving!";
-		mes "They even tried to kidnap you!";
-		next;
-		mes "[Steven]";
-		mes "Kidnapped... Come to think of it, I helped a man who was being chased by a terrific Teddy Bear on the way back.";
-		next;
-		mes "[Steven]";
-		mes "...I'm not the only one brought here, am I?";
-		mes "I guess I'll have to stay here and watch the situation.";
-		mes "Acid! You can go back to the village for now.";
-		next;
-		mes "[Steven]";
-		mes "Thank you for helping me too.";
-		mes "I can't give you much, but I'll give you the rare ore I found earlier.";
-		mes "It might come in handy somewhere!";
-		ill_teddy = 9;
-		erasequest 11563;
-		erasequest 11564;
-		getitem 25271,5; // IllusionStone
-		getexp 3500000,2500000;
-		close2;
-		cloakonnpcself( "Acid#IBT_inN01" );
-		end;
-	}
-
-	// daily
-	switch( checkquest(11566,PLAYTIME) ) {
-	case -1:
-		break;
-	case 0:
-	case 1:
-		mes "[Steven]";
-		mes "Get some rest";
-		mes "If you overdo it, you'll only ruin your health.";
-		close;
-	case 2:
-		erasequest 11566;
-		break;
-	}
-	switch( checkquest(11565,HUNTING) ) {
-	case -1:
-		mes "[Steven]";
-		mes "Ugh...";
-		mes "Where do these guys keep popping up?";
-		next;
-		mes "[Steven]";
-		mes "If you're familiar with combat, puppeteers who aren't familiar with combat won't find it easy to get out of here.";
-		next;
-		mes "[Steven]";
-		mes "For now, I'm also taking care of it, but I'm not good enough alone.";
-		mes "If you're not busy right now, help me defeat " + getmonsterinfo("ILL_PITMAN", MOB_NAME) + ", " + getmonsterinfo("ILL_MINERAL", MOB_NAME) + ", and " + getmonsterinfo("ILL_OBSIDIAN", MOB_NAME) + ".";
-		mes "I think I'll be able to breathe a little more if I catch 10 of them.";
-		next;
-		if (select( "Accept", "Quit" ) == 2) {
-			mes "[Steven]";
-			mes "Okay...";
-			close;
-		}
-		mes "[Steven]";
-		mes "Then please help me defeat";
-		mes "10 " + getmonsterinfo("ILL_PITMAN", MOB_NAME) + ", " + getmonsterinfo("ILL_MINERAL", MOB_NAME) + ", and " + getmonsterinfo("ILL_OBSIDIAN", MOB_NAME) + "!";
-		setquest 11565;
-		close;
-	case 0:
-	case 1:
-		mes "[Steven]";
-		mes "How are you?";
-		mes "How are things going with " + getmonsterinfo("ILL_PITMAN", MOB_NAME) + ", " + getmonsterinfo("ILL_MINERAL", MOB_NAME) + ", and " + getmonsterinfo("ILL_OBSIDIAN", MOB_NAME) + "?";
-		close;
-	case 2:
-		mes "[Steven]";
-		mes "Whoa...";
-		mes "Good job!";
-		mes "Are you feeling a little safer now?";
-		erasequest 11565;
-		setquest 11566;
-		getitem 25271,1; // IllusionStone
-		getexp 1000000,900000;
-		close;
-	}
-	end;
-
-OnTouch:
-	if (ill_teddy == 3) {
-		mes "[Steven]";
-		mes "Can't you let me go?!";
-		mes "Let me go!";
-		mes "This sucks!!!!";
-		npctalk "Steven: Can't you let me go?!", "", bc_self;
-		cloakoffnpcself( "White Teddy Bear#IBT" );
-		cloakoffnpcself( "Teddy Bear#IBT" );
-		next;
-		mes "[Teddy Bear]";
-		mes "Oops!";
-		mes "Caught, I got caught!";
-		mes "Let's run!!!!";
-		npctalk "White Teddy Bear: Caught, I got caught!", "White Teddy Bear#IBT", bc_self;
-		npctalk "Teddy Bear: Let's Run!!!!", "Teddy Bear#IBT", bc_self;
-		ill_teddy = 4;
-		erasequest 11558;
-		setquest 11559;
-		close2;
-		cloakonnpcself( "White Teddy Bear#IBT" );
-		cloakonnpcself( "Teddy Bear#IBT" );
-		end;
-	}
-	end;
-
-OnInit:
-	// main quest
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11558) == 1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11559) == 1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11561) == 1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11563,HUNTING) == 2 && checkquest(11564,HUNTING) == 2" );
-
-	// daily
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ill_teddy == 9 && checkquest(11565,HUNTING) == -1 && checkquest(11566,PLAYTIME) == -1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11565,HUNTING) == 2" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11566,PLAYTIME) == 2" );
-	end;
-}
-
-ein_d02_i,135,229,1	duplicate(dummy_cloaked_npc)	Acid#IBT_inN	4_M_NFMAN
-ein_d02_i,169,193,5	duplicate(dummy_cloaked_npc)	White Teddy Bear#IBT	4_TEDDY_BEAR_W
-ein_d02_i,171,193,3	duplicate(dummy_cloaked_npc)	Teddy Bear#IBT	4_NASARIAN
-ein_d02_i,172,192,1	duplicate(dummy_cloaked_npc)	Acid#IBT_inN01	4_M_NFMAN
-
-ein_d02_i,132,233,0	script	#ITBSuspicious place	HIDDEN_WARP_NPC,3,3,{
-	end;
-OnTouch:
-	if (ill_teddy == 7) {
-		mes "[??????]";
-		mes "Um hahahahahahahahaha!!!!";
-		mes "Listen, people!";
-		mes "Finally the day has come when we will rise again!";
-		cloakoffnpcself( "??????#IBT_inB01" );
-		cloakoffnpcself( "??????#IBT_inB02_1" );
-		cloakoffnpcself( "??????#IBT_inB03" );
-		cloakoffnpcself( "??????#IBT_inB04" );
-		cloakoffnpcself( "??????#IBT_inB05" );
-		cloakoffnpcself( "??????#IBT_inB06" );
-		cloakoffnpcself( "??????#IBT_inB07" );
-		cloakoffnpcself( "??????#IBT_inB08" );
-		cloakoffnpcself( "??????#IBT_inB09" );
-		cloakoffnpcself( "??????#IBT_inB10" );
-		cloakoffnpcself( "??????#IBT_inB11" );
-		cloakoffnpcself( "??????#IBT_inB12" );
-		cloakoffnpcself( "??????#IBT_inB13" );
-		cloakoffnpcself( "??????#IBT_inB15" );
-		cloakoffnpcself( "??????#IBT_inB16" );
-		cloakoffnpcself( "??????#IBT_inB17" );
-		cloakoffnpcself( "??????#IBT_inB18" );
-		cloakoffnpcself( "??????#IBT_inB19" );
-		cloakoffnpcself( "??????#IBT_inB20" );
-		cloakoffnpcself( "??????#IBT_inB21" );
-		cloakoffnpcself( "??????#IBT_inB22" );
-		npctalk "?????? : Mmmhahahahahahahahahaha!!!!", "??????#IBT_inB01", bc_self;
-		next;
-		mes "[??????]";
-		mes "Forget the shameful past of being trapped in the dark and damp ground.";
-		npctalk "?????? : Forget the shameful past of being trapped in the dark and damp ground.", "????????#IBT_inB01", bc_self;
-		next;
-		mes "[??????]";
-		mes "This land!!!";
-		npctalk "?????? : This land!!!", "????????#IBT_inB01", bc_self;
-		sleep2 500;
-		mes "This world!!!!";
-		npctalk "?????? : This world!!!!", "??????#IBT_inB01", bc_self;
-		sleep2 500;
-		mes "Until the day they are at our feet, us Nazarians!!!!";
-		npctalk "?????? : Until the day they are at our feet, us Nazarians!!!!", "??????#IBT_inB01", bc_self;
-		sleep2 500;
-		mes "Will not stop the invasion!";
-		npctalk "?????? : Will not stop the invasion!", "??????#IBT_inB01", bc_self;
-		next;
-		mes "[Nazarians]";
-		mes "Okay! A new body has arrived!";
-		mes "We will plant our holy core into the body that is only an empty shell!";
-		next;
-		mes "[??????]";
-		mes "Drivius! Come on get it!!!";
-		next;
-		mes "[Drivius]";
-		mes "Yes!!! His Majesty is here!!!";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "Ha ha... look!";
-		mes "This bright and beautiful figure...";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "People!!!";
-		mes "Welcome!";
-		mes "Brave newly born soldiers!!!!";
-		cloakonnpcself( "??????#IBT_inB02_1" );
-		cloakoffnpcself( "??????#IBT_inB02_2" );
-		npctalk "?????? : ...oh...ahah...", "??????#IBT_inB01", bc_self;
-		next;
-		mes "[Nazarians]";
-		mes "Waaaaaaaa!!!!";
-		mes "Long live the Emperor!!!!";
-		next;
-		mes "[Nazarians]";
-		mes "Hooray!!! Hooray!!!";
-		next;
-		mes "[Nazarians]";
-		mes "Look at those dashing soldiers over there!!!";
-		mes "Awesome!!!!";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "The world will bow before the mighty power of the Nazarians!!!!!";
-		next;
-		mes "[Nazarians]";
-		mes "Waaaaaaaa!!!!";
-		mes "Long live the Emperor!!!!";
-		mes "Hooray!!! Hooray!!!";
-		cloakoffnpcself( "Steven#IBT_inN" );
-		cloakoffnpcself( "Acid#IBT_inN" );
-		next;
-		mes "[Steven]";
-		mes "Wait what's that?";
-		mes "Isn't that the doll we made?";
-		next;
-		mes "[Acid]";
-		mes "I guess so?";
-		next;
-		mes "[Steven]";
-		mes "It does not only look like that, it is the one we made!";
-		next;
-		mes "[Steven]";
-		mes "It's the one who made a mess because you sewed wrong?? Yes!";
-		next;
-		mes "[Acid]";
-		mes "What a mess...";
-		mes "That one has its own cuteness point?";
-		next;
-		mes "[Steven]";
-		mes "...cute horns...";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "Hmm...";
-		mes "Oops...";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "It looks like a rat has lurked into the sacred assembly.";
-		next;
-		mes "[Emperor of Nazarians]";
-		mes "Warriors of Nazarians!!!!";
-		mes "Punish the intruder!!!";
-		next;
-		mes "[Nazarians]";
-		mes "From our name!";
-		mes "We'll do it!";
-		next;
-		mes "[Nazarians]";
-		mes "Waaaaaaa!!!";
-		mes "Punish them!";
-		mes "It's an intruder!!!";
-		next;
-		mes "[Steven]";
-		mes "Oops!";
-		mes "Looks like we got caught?!";
-		next;
-		mes "[Steven]";
-		mes "Hey!";
-		mes "There are many enemies, so let's scatter and run away!";
-		next;
-		mes "[Steven]";
-		mes "Take care of those chasing us appropriately.";
-		mes "Then see you near the exit in a minute!";
-		ill_teddy = 8;
-		erasequest 11562;
-		setquest 11563;
-		setquest 11564;
-		close2;
-		cloakonnpcself( "Steven#IBT_inN" );
-		cloakonnpcself( "Acid#IBT_inN" );
-		cloakonnpcself( "??????#IBT_inB01" );
-		cloakonnpcself( "??????#IBT_inB02_2" );
-		cloakonnpcself( "??????#IBT_inB03" );
-		cloakonnpcself( "??????#IBT_inB04" );
-		cloakonnpcself( "??????#IBT_inB05" );
-		cloakonnpcself( "??????#IBT_inB06" );
-		cloakonnpcself( "??????#IBT_inB07" );
-		cloakonnpcself( "??????#IBT_inB08" );
-		cloakonnpcself( "??????#IBT_inB09" );
-		cloakonnpcself( "??????#IBT_inB10" );
-		cloakonnpcself( "??????#IBT_inB11" );
-		cloakonnpcself( "??????#IBT_inB12" );
-		cloakonnpcself( "??????#IBT_inB13" );
-		cloakonnpcself( "??????#IBT_inB15" );
-		cloakonnpcself( "??????#IBT_inB16" );
-		cloakonnpcself( "??????#IBT_inB17" );
-		cloakonnpcself( "??????#IBT_inB18" );
-		cloakonnpcself( "??????#IBT_inB19" );
-		cloakonnpcself( "??????#IBT_inB20" );
-		cloakonnpcself( "??????#IBT_inB21" );
-		cloakonnpcself( "??????#IBT_inB22" );
-		end;
-	}
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11562) == 1" );
-	end;
-}
-
-ein_d02_i,142,244,3	duplicate(dummy_cloaked_npc)	??????#IBT_inB01	4_NASARIAN_EM
-ein_d02_i,141,244,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB02_1	4_TEDDY_BEAR_B_L
-ein_d02_i,141,244,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB02_2	4_TEDDY_BEAR_B
-ein_d02_i,140,244,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB03	4_TEDDY_BEAR_W
-ein_d02_i,141,240,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB04	4_NASARIAN
-ein_d02_i,139,240,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB05	4_TEDDY_BEAR_W
-ein_d02_i,140,238,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB06	4_NASARIAN
-ein_d02_i,136,240,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB07	4_TEDDY_BEAR_W
-ein_d02_i,133,240,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB08	4_TEDDY_BEAR_B
-ein_d02_i,142,237,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB09	4_NASARIAN
-ein_d02_i,140,236,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB10	4_TEDDY_BEAR_W
-ein_d02_i,142,243,1	duplicate(dummy_cloaked_npc)	??????#IBT_inB11	4_NASARIAN
-ein_d02_i,144,242,3	duplicate(dummy_cloaked_npc)	??????#IBT_inB12	4_NASARIAN
-ein_d02_i,144,240,1	duplicate(dummy_cloaked_npc)	??????#IBT_inB13	4_NASARIAN
-ein_d02_i,141,246,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB14	4_TEDDY_BEAR_W
-ein_d02_i,141,237,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB15	4_NASARIAN
-ein_d02_i,141,242,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB16	4_TEDDY_BEAR_B
-ein_d02_i,137,240,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB17	4_NASARIAN
-ein_d02_i,136,238,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB18	4_NASARIAN
-ein_d02_i,138,238,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB19	4_NASARIAN
-ein_d02_i,141,241,7	duplicate(dummy_cloaked_npc)	??????#IBT_inB20	4_TEDDY_BEAR_B
-ein_d02_i,145,241,1	duplicate(dummy_cloaked_npc)	??????#IBT_inB21	4_NASARIAN
-ein_d02_i,140,243,5	duplicate(dummy_cloaked_npc)	??????#IBT_inB22	4_NASARIAN
-ein_d02_i,133,233,7	duplicate(dummy_cloaked_npc)	Steven#IBT_inN	4W_M_02
-
-ein_d02_i,168,206,5	script	Gloomy Teddy Bear#ITB	4_TEDDY_BEAR_B_L,{
-	if (checkweight(1201,3) == 0) {
-		mes "- Wait a moment!!";
-		mes "- You have too many items. -";
-		mes "- You can't receive this. -";
-		mes "- Lighten your weight and -";
-		mes "- try again. -";
-		close;
-	}
-	if (ill_teddy < 9) {
-		mes "[Gloomy Teddy Bear]";
-		mes "Ah...";
-		mes "Is this a dream or reality...";
-		mes "Am I dead... or am I alive...";
-		next;
-		mes "[Gloomy Teddy Bear]";
-		mes "We're... not supposed to come back...";
-		mes "I have to go back...";
-		close;
-	}
-	switch( checkquest(11569,PLAYTIME) ) {
-	case -1:
-		break;
-	case 0:
-	case 1:
-		mes "[Gloomy Teddy Bear]";
-		mes "Whoops...don't rush me like that...";
-		close;
-	case 2:
-		erasequest 11569;
-		break;
-	}
-	switch( checkquest(11567,HUNTING) ) {
-	case -1:
-		mes "[Gloomy Teddy Bear]";
-		mes "Ah...";
-		mes "Is this a dream or reality...";
-		mes "Am I dead... or am I alive...";
-		next;
-		mes "[Gloomy Teddy Bear]";
-		mes "We're... not supposed to come back...";
-		mes "I have to go back...";
-		next;
-		mes "[Gloomy Teddy Bear]";
-		mes "Hey... don't just stand there, help me...";
-		mes "Me... the Nazarians...";
-		next;
-		mes "[Gloomy Teddy Bear]";
-		mes "^ff0000Kill 10 " + getmonsterinfo("ILL_TEDDY_BEAR_R", MOB_NAME) + ", " + getmonsterinfo("ILL_TEDDY_BEAR_Y", MOB_NAME) + ", " + getmonsterinfo("ILL_TEDDY_BEAR_G", MOB_NAME) + ", " + getmonsterinfo("ILL_TEDDY_BEAR_B", MOB_NAME) + ", and " + getmonsterinfo("ILL_TEDDY_BEAR_W", MOB_NAME) + "^000000 and return them to the depths... to rest...";
-		next;
-		if (select( "Accept", "Quit" ) == 2) {
-			mes "[Gloomy Teddy Bear]";
-			mes "...Ah...";
-			close;
-		}
-		mes "[Gloomy Teddy Bear]";
-		mes "I want to end this... infernal nightmare...";
-		mes "Come on...";
-		setquest 11567;
-		setquest 11568;
-		close;
-	case 0:
-	case 1:
-		mes "[Gloomy Teddy Bear]";
-		mes "Ah... When will the peaceful rest...";
-		mes "...is the request yet...";
-		close;
-	case 2:
-		switch( checkquest(11568,HUNTING) ) {
-		case -1:
-			end;
-		case 0:
-		case 1:
-			mes "[Gloomy Teddy Bear]";
-			mes "Ah... When will the peaceful rest...";
-			mes "...is the request yet...";
-			close;
-		case 2:
-			mes "[Gloomy Teddy Bear]";
-			mes "Why is it still... not going away...";
-			mes "This horrible nightmare...";
-			erasequest 11567;
-			erasequest 11568;
-			setquest 11569;
-			getitem 25271,1; // IllusionStone
-			getexp 1300000,1000000;
-			close;
-		}
-		end;
-	}
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ill_teddy == 9 && checkquest(11569,PLAYTIME) == -1 && checkquest(11567,HUNTING) == -1 && checkquest(11568,HUNTING) == -1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11569,PLAYTIME) == 2" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11567,HUNTING) == 2 && checkquest(11568,HUNTING) == 2" );
-	end;
-}
-
-
-ein_d02_i,191,192,3	script	Porcelain Doll Craftsman#ITB	4_F_HUWOMAN,{
-	if (checkweight(1201,3) == 0) {
-		mes "- Wait a moment!!";
-		mes "- You have too many items. -";
-		mes "- You can't receive this. -";
-		mes "- Lighten your weight and -";
-		mes "- try again. -";
-		close;
-	}
-	if (ill_teddy < 9) {
-		mes "[Porcelain Doll Craftsman]";
-		mes "Kyaaaaaa!!!!!";
-		mes "You were surprised!";
-		close;
-	}
-	switch( checkquest(11571,PLAYTIME) ) {
-	case -1:
-		break;
-	case 0:
-	case 1:
-		mes "[Porcelain Doll Craftsman]";
-		mes "Adventurer, welcome back.";
-		mes "Thanks to you, I have been able to continue my studies in the deep parts of the mine.";
-		mes "Please come back again at dawn.";
-		close;
-	case 2:
-		erasequest 11571;
-		break;
-	}
-	switch( checkquest(11570,HUNTING) ) {
-	case -1:
-		mes "[Porcelain Doll Craftsman]";
-		mes "Kyaaaaaa!!!!!";
-		mes "You were surprised!";
-		next;
-		mes "[Porcelain Doll Craftsman]";
-		mes "Have you ever seen a huge ^ff0000" + getmonsterinfo("ILL_TEDDY_BEAR_S", MOB_NAME) + "^000000 nearby?";
-		mes "I barely made it to the entrance, but when I try to leave, he shows up and has been hiding here for days.";
-		next;
-		if (select( "Help", "Quit" ) == 2) {
-			mes "[Porcelain Doll Craftsman]";
-			mes "Sob!";
-			mes "It's over!!!";
-			mes "I'm stuck here forever!";
-			close;
-		}
-		mes "[Porcelain Doll Craftsman]";
-		mes "Alive!!!";
-		mes "Did you see that?";
-		mes "It's a huge ^ff0000" + getmonsterinfo("ILL_TEDDY_BEAR_S", MOB_NAME) + "^000000.";
-		mes "You must kill it!";
-		setquest 11570;
-		close;
-	case 0:
-	case 1:
-		mes "[Porcelain Doll Craftsman]";
-		mes "How are you?";
-		mes "Have you killed ^ff0000" + getmonsterinfo("ILL_TEDDY_BEAR_S", MOB_NAME) + "^000000?";
-		close;
-	case 2:
-		// unknown text
-		erasequest 11570;
-		setquest 11571;
-		getitem 25271,1; // IllusionStone
-		getexp 1500000,1100000;
-		end;
-	}
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ill_teddy == 9 && checkquest(11571,PLAYTIME) == -1 && checkquest(11570,HUNTING) == -1" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11571,PLAYTIME) == 2" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11570,HUNTING) == 2" );
-	end;
-}
-
-ein_d02_i,169,244,1	script	White Bear#ITBz01	4_TEDDY_BEAR_W,3,3,{
-	end;
-OnTouch:
-	npctalk "White Teddy Bear: Ah... dear Charlotte... to be in a place like this...", "", bc_self;
-	end;
-}
-
-ein_d02_i,169,244,1	script	Sirumsireum Teddy Bear#ITBz02	4_TEDDY_BEAR_B_L,{
-	npctalk "Teddy Bear: What have you done to me...", "", bc_self;
-	end;
-}

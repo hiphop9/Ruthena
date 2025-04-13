@@ -1346,48 +1346,48 @@ um_in,156,77,5	script	Tabezthan#lv4	788,{
 	}
 }
 
-aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
+aldebaran,178,239,3	script	빌세이어#lv4	712,{
 	if (lv4_weapon == 55) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Pyroxene, Turquoise and Phlogopite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 54) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Citrin, Agate";
 		mes "and Muscovite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 53) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "What...?";
 		mes "Waltboughst's research?";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "How do you know him?";
 		mes "Were you a friend of his while";
 		mes "he was still alive? This must be";
 		mes "an act of providence...";
 		next;
 		if (rand(1,2) == 1) {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Citrin, Agate";
 			mes "and Muscovite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1395,11 +1395,11 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			close;
 		}
 		else {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Pyroxene, Turquoise and Phlogopite. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1408,32 +1408,32 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		}
 	}
 	if ((lv4_weapon == 49) || (lv4_weapon == 50)) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Don't you have anything better to do? Quit bothering me and do your best to reach your own goals.";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sigh...*^000000";
 		mes "Still, trying your";
 		mes "best won't always result";
 		mes "in success though.";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^660000But that's no excuse!^000000";
 		mes "Every successful man in";
 		mes "history has tried his best!";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "I hope you remember that. It's something I used to tell my sons when they were alive. Ha ha ha~";
 		set lv4_weapon,50;
 		close;
 	}
 	if (lv4_weapon == 45) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Turquoise,";
 		mes "Biotite and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1441,12 +1441,12 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		close;
 	}
 	if (lv4_weapon == 46) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Phlogopite,";
 		mes "Citrine and Pyroxene. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1454,23 +1454,23 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		close;
 	}
 	if (lv4_weapon == 44) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "What...?";
 		mes "Hein's research?";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "How do you know him?";
 		mes "Were you a friend of his while";
 		mes "he was still alive? This must be";
 		mes "an act of providence...";
 		next;
 		if (rand(1,2) == 1) {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Turquoise,";
 			mes "Biotite and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1478,12 +1478,12 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			close;
 		}
 		else {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Phlogopite,";
 			mes "Citrine and Pyroxene. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1492,64 +1492,64 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		}
 	}
 	if ((lv4_weapon == 40) || (lv4_weapon == 41)) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "No matter how much you're willing to pay me, I'm not going to forge you any weapons.";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Even during my weapon making days,";
 		mes "I never accepted money from any of";
 		mes "my clients. Do you know why?";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "I always told my sons: 'Never accept payment to forge a good weapon. ^333333It brings bad luck.^000000' Don't ask me how that works. It just is.";
 		set lv4_weapon,41;
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Even if you offer me something more precious than money, I won't do any weapon smithing for you. Although I might have back when my sons were still alive...";
 		close;
 	}
 	if (lv4_weapon == 37) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Biotite,";
 		mes "Agate and Citrin. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 36) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Muscovite,";
 		mes "Peridot and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 35) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "What...?";
 		mes "Reyghema's research?";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "How do you know him?";
 		mes "Were you a friend of his while";
 		mes "he was still alive? This must be";
 		mes "an act of providence...";
 		next;
 		if (rand(1,2) == 1) {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Muscovite,";
 			mes "Peridot and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1557,12 +1557,12 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			close;
 		}
 		else {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Biotite,";
 			mes "Agate and Citrin. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1571,56 +1571,56 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		}
 	}
 	if ((lv4_weapon == 31) || (lv4_weapon == 32)) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "All of my sons broke my heart by dying too young. I remember that I always used to tell them: 'Enjoy your youth. ^333333Live without regret.^000000'";
 		set lv4_weapon,32;
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "But I never suspected that their lives would be cut so short. Please remember to live life in such a way that regret won't haunt you later. That's the best advice I can give to you.";
 		close;
 	}
 	if (lv4_weapon == 27) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Turquoise,";
 		mes "Peridot and Agate. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 28) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "Hmm...";
 		mes "You'll need 30 Phlogopite,";
 		mes "Pyroxene and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "^333333*Sniff*^000000";
 		mes "All of my sons passed away";
 		mes "before they could finish their research. I should have been the one to have died. They were still so young...";
 		close;
 	}
 	if (lv4_weapon == 26) {
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "What...?";
 		mes "Kayron's research?";
 		next;
-		mes "[Bill Thayer]";
+		mes "[빌세이어]";
 		mes "How do you know him?";
 		mes "Were you a friend of his while";
 		mes "he was still alive? This must be";
 		mes "an act of providence...";
 		next;
 		if (rand(1,2) == 1) {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Turquoise,";
 			mes "Peridot and Agate. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1628,12 +1628,12 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 			close;
 		}
 		else {
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "Hmm...";
 			mes "You'll need 30 Phlogopite,";
 			mes "Pyroxene and Rose Quartz. I'm sure those are the materials you need, but I have no idea what the end product is supposed to be...";
 			next;
-			mes "[Bill Thayer]";
+			mes "[빌세이어]";
 			mes "^333333*Sniff*^000000";
 			mes "All of my sons passed away";
 			mes "before they could finish their research. I should have been the one to have died. They were still so young...";
@@ -1642,22 +1642,22 @@ aldebaran,178,239,3	script	Bill Thayer#lv4	712,{
 		}
 	}
 	if ((lv4_weapon == 22) || (lv4_weapon == 23)) {
-		mes "[Bill Thayer]";
-		mes "Listen, I told you...";
-		mes "There's nothing I can do.";
-		mes "^333333I'm utterly helpless here.^000000";
+		mes "[빌세이어]";
+		mes "들어봐, 내가 말했잖아...";
+		mes "내가 할 수 있는 일은 아무것도 없다.";
+		mes "^333333여기서는 정말 무력해요^000000";
 		set lv4_weapon,23;
 		next;
-		mes "[Bill Thayer]";
-		mes "There's no point in asking me to do anything. Ever since my sons passed away, I haven't been able to function. Please leave me alone.";
+		mes "[빌세이어]";
+		mes "나한테 뭘 해달라고 부탁해도 소용없어요. 아들들이 세상을 떠난 이후로 저는 제 기능을 하지 못했습니다. 저를 내버려두세요.";
 		close;
 	}
-	mes "[Bill Thayer]";
-	mes "Leave me alone...";
-	mes "I'm just a broken old man.";
+	mes "[빌세이어]";
+	mes "날 내버려둬...";
+	mes "나는 단지 망가진 노인일 뿐이다.";
 	next;
-	mes "[Bill Thayer]";
-	mes "I don't make weapons anymore for anyone. Maybe I was a well known weaponsmith once, but I just can't bring myself to do any work ever since my sons passed away...";
+	mes "[빌세이어]";
+	mes "저는 더 이상 누구를 위한 무기도 만들지 않습니다. 한때는 잘 알려진 무기 제작자였을지 모르지만, 아들들이 세상을 떠난 이후로는 어떤 일도 할 수 없습니다...";
 	close;
 }
 

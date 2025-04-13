@@ -1,0 +1,1038 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Sticky Sea from Episode 20 (daily quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Sidequest - Step 18
+jor_back4,103,264,3	duplicate(dummy_cloaked_npc)	프리데리케#ep20_7::ep20_jor_back4_103_264	4_EP19_FRIEDERIKE
+
+jor_back4,101,265,3	script	꼬뽀#ep20_5	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 < 17)
+		end;	// note: no text before and after exit
+	if (ep20_sidequest_1 == 17) {
+		mes "[프리데리케]";
+		mes "앗!!";
+		mes "이런 곳에 어린애가 있어요!";
+		cutin "ep19_friederike01.png",2;
+		cloakoffnpcself( "ep20_jor_back4_103_264" );
+		next;
+		mes "[프리데리케]";
+		mes "얘 괜찮아?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "다쳤니?";
+		mes "금방 치료해줄게.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "어쩌다가 이렇게 먼 데까지 온 거야?";
+		mes "위험하게.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그런데 너 마을에선 못 본 것 같은데…";
+		next;
+		mes "[꼬뽀]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "왜 아무 말이 없을까?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "…T.T";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "앗 갑자기 왜 울어!!";
+		mes "울지마~";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "삑…삐익";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "앗!";
+		mes "이 솜털은 로로휴의!!!";
+		mes "너 혹시 로로휴가 어디 있는지 알고 있니?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "삐익";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "서..설마 로로휴한테 무슨 일이 생긴 건 아니지?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님 이 아이 공용어도 못하는 것 같고 뭔가 좀 이상해요.";
+		mes "뭔가 어린아이치고 깃털도 많고…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "…삑삑";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "삑…T.T";
+		next;
+		mes "[프리데리케]";
+		mes "응?";
+		mes "뭐 하는 거야?";
+		mes "솜이…";
+		mes "구멍…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "설마!";
+		mes "로로휴가 이 안에 있는 거야?";
+		next;
+		mes "[꼬뽀]";
+		mes "삑…T.T";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴가 어떻게 여기까지 온 거야…";
+		mes "이 애가 말한 게 맞으면 구덩이에 빠진 것 같은데…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "으으음…";
+		mes "저번에 봤던 동굴처럼 독으로 오염되어 있다거나 그런 건 없고…";
+		next;
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님 지금 경비대를 기다리고 있기엔 상황이 너무 안 좋은 것 같아요.";
+		mes "우리끼리라도 먼저 들어가 봐요!";
+		next;
+		mes "[프리데리케]";
+		mes "이 아이가 안으로 들어가는 방법을 알지도 몰라요!";
+		ep20_sidequest_1 = 18;
+		erasequest 11944;
+		setquest 11945;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_jor_back4_103_264" );
+		end;
+	}
+	if (ep20_sidequest_1 == 18 || (ep20_sidequest_1 == 20 && isbegin_quest(11948) > 0 && checkquest(11949,HUNTING) < 2)) {
+		if (getcharid(1) < 1) {
+			mes "[꼬뽀]";
+			mes "삑!!";
+			mes "뽁뽁!!";
+			next;
+			mes "[꼬뽀]";
+			mes "뽁~~";
+			mes "- ^ff0000파티를 결성^000000하는 게 좋을 것 같다. -";
+			close;
+		}
+		mes "[꼬뽀]";
+		mes "삑!!";
+		mes "뽁뽁!!";
+		next;
+		.@md_name$ = "끈적이는 바다";
+
+		switch( select( "구덩이 입구를 살펴본다.", "구덩이에 들어 간다.", "그만 둔다." ) ) {
+		case 1:
+			mes "[꼬뽀]";
+			mes "삐욕";
+			mes "- 입구가 열릴 때까지 기다리자. -";
+
+			if (is_party_leader() == true)	// note: members can see this menu?
+				instance_create(.@md_name$);
+
+			// note: the quest is given back in this menu for each instance creation
+			if (ep20_sidequest_1 == 18 && isbegin_quest(11946) == 1) {
+				erasequest 11946;
+				setquest 11945;
+			}
+			if (ep20_sidequest_1 == 20 && isbegin_quest(11948) == 2) {
+				if (isbegin_quest(11948) == 2)
+					erasequest 11948;
+				if (isbegin_quest(11949) > 0)
+					erasequest 11949;
+				setquest 11948;
+			}
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[꼬뽀]";
+				mes "뾰뽁?";
+				mes "- 아직 ^ff0000입구가 안열린 것^000000 같다. 다시 시도해 보자. -";
+				close;
+			case IE_OK:
+				mapannounce "jor_back4", "" + getpartyname(getcharid(1)) + " 파티의 " + strcharinfo(0) + "님이 " + .@md_name$ + "로 가라앉습니다.", bc_map, 0xFF99;
+				// warp "1@slug",44,56;
+				end;
+			}
+			end;
+		case 3:
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11944) == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11948) == 1" );
+	end;
+}
+
+1@slug,40,52,0	script	#slugout	WARPNPC,2,2,{
+	end;
+OnTouch:
+	mes "- 던전 밖으로 나갈 수 있습니다. -";
+	if (select( "던전을 나간다.", "탐사를 계속한다." ) == 2) {
+		mes "- 그대로 던전을 탐사합니다. -";
+		close;
+	}
+	mes "- 던전 밖으로 나갑니다. -";
+	close2;
+	warp "jor_back4",100,253;
+	end;
+
+OnMobDead:
+	monster 'map_slug$,0,0,"--ja--","EP20_NPC_COCOPO",1, instance_npcname("#slugout") + "::OnMobDead";
+	end;
+
+OnInstanceInit:
+	'map_slug$ = instance_mapname("1@slug");
+	'step = 0;
+
+	// Spawn the mini monsters COCOPO
+	monster 'map_slug$,0,0,"--ja--","EP20_NPC_COCOPO",80, instance_npcname("#slugout") + "::OnMobDead";
+	end;
+
+}
+
+// Step 1
+1@slug,50,61,5	duplicate(dummy_cloaked_npc)	프리데리케#sl1::ep20_1slug_50_61	4_EP19_FRIEDERIKE
+
+1@slug,52,61,3	script	로로휴#sl1	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 18) {
+		if ('step == 0) {
+			mes "[로로휴]";
+			mes "앗!!!";
+			mes "" + strcharinfo(0) + "님!";
+			mes "프리데리케님!!";
+			cutin "ep20_cocopo02.png",2;
+			cloakoffnpcself( instance_npcname("ep20_1slug_50_61") );
+			next;
+			mes "[프리데리케]";
+			mes "로로휴!";
+			mes "무사했구나!";
+			mes "걱정했잖아!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "여긴 어디야.";
+			mes "어쩌다가 이렇게 위험한 곳에 오게 된 거야.";
+			next;
+			mes "[로로휴]";
+			mes "어…";
+			mes "그…그게…";
+			cutin "ep20_cocopo01.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "다친 덴 없어?";
+			mes "어서 돌아가자.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[로로휴]";
+			mes "어…";
+			mes "아직 안 돼.";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "아직이라니…";
+			mes "여긴 너무 위험하잖아,";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[로로휴]";
+			mes "그…그게…";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "무슨 일이야?";
+			mes "솔직하게 말해주지 않으면 지금 바로 널 데리고 돌아갈 거야.";
+			cutin "ep19_friederike04.png",2;
+			next;
+			mes "[로로휴]";
+			mes "그…";
+			mes "친구가…훌쩍";
+			mes "괴물한테… 훌쩍 잡…훌쩍…잡혀갔어!";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[로로휴]";
+			mes "" + strcharinfo(0) + "님…";
+			mes "프리데리케님…";
+			mes "내 친구 구해줘!!!";
+			mes "으아아아아앙!!!!";
+			next;
+			mes "[프리데리케]";
+			mes "뭐?!";
+			mes "큰일이야!";
+			mes "어서 구해야 해!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "로로휴 친구를 잡아간 괴물이 어느 쪽으로 갔어?";
+			next;
+			mes "[로로휴]";
+			mes "훌쩍…";
+			mes "이쪽.";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "" + strcharinfo(0) + "님 어서 로로휴의 친구를 구하러 가요.";
+			mes "괴물에게 잡혀갔다면 머뭇거릴 시간이 없어요.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "로로휴를 혼자 두는 것도 위험하니 경비대가 올 때까지는 데리고 있는 게 좋겠어요.";
+			next;
+			mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+			cloakonnpcself( instance_npcname("ep20_1slug_50_61") );
+			cutin "",255;
+			if (isbegin_quest(11945) == 1) {
+				erasequest 11945;
+				setquest 11946;
+			}
+			if ('step == 0 && is_party_leader() == true) {
+				'step = 1;
+				donpcevent instance_npcname("slug_mob_1") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",83,127);
+			end;
+		}
+		end;
+	}
+	if (ep20_sidequest_1 < 20)
+		end;
+
+	// daily
+	if (isbegin_quest(11948) == 1 || 'step == 0) {
+		mes "[로로휴]";
+		mes "앗!!!";
+		mes "" + strcharinfo(0) + "님!";
+		mes "프리데리케님!!";
+		cutin "ep20_cocopo02.png",2;
+		cloakoffnpcself( instance_npcname("ep20_1slug_50_61") );
+		next;
+		mes "[프리데리케]";
+		mes "로로휴!!!!";
+		mes "여긴 왜 또 온 거야!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[로로휴]";
+		mes "프리데리케님이 걱정되서 따라왔지!";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "빨리 돌아가지 않으면 보클린드님한테 이른다!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[로로휴]";
+		mes "치… 알았어.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴도 자꾸 따라오고 달팽이를 먹으러 온 꼬뽀들도 많고…";
+		mes "오지말라고 할 수도 없으니 위험한 몬스터들은 정리해두는 게 좋겠어요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_50_61") );
+		cutin "",255;
+		if (isbegin_quest(11948) == 1) {
+			completequest 11948;
+			setquest 11949;
+		}
+		if ('step == 0 && is_party_leader() == true) {
+			'step = 1;
+			donpcevent instance_npcname("slug_mob_1") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",83,127);
+		end;
+	}
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11945) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11948) == 1" );
+	end;
+}
+
+// unknown usage
+// 1@slug,52,61,3	script	로로휴#sl1_1	EP20_NPC_COCOPO,{
+	// end;
+// OnInstanceInit:
+	// disablenpc instance_npcname("로로휴#sl1_1");
+	// end;
+// }
+// unknown usage
+// 1@slug,143,313,0	script	#slsl11	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,109,313,0	script	#slsl12	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,106,330,0	script	#slsl13	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,48,314,0	script	#slsl14	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,59,315,0	script	#slsl15	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,69,310,0	script	#slsl16	HIDDEN_WARP_NPC,4,4,{
+// 1@slug,55,295,0	script	#slsl17	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,143,313,0	script	#slsl21	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,109,313,0	script	#slsl22	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,106,330,0	script	#slsl23	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,48,314,0	script	#slsl24	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,59,315,0	script	#slsl25	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,69,310,0	script	#slsl26	HIDDEN_WARP_NPC,4,4,{
+// 1@slug,55,295,0	script	#slsl27	HIDDEN_WARP_NPC,7,7,{
+
+1@slug,83,98,0	script	#slsl01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	// note: no ignoretimeout on official
+	if ('step == 0 || (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20) || (ep20_sidequest_1 == 18 && isbegin_quest(11945) == 0 && isbegin_quest(11946) == 0) || (ep20_sidequest_1 == 20 && isbegin_quest(11948) != 2)) {
+		mes "- 다음 지역으로 이동하기 위해서는 퀘스트 진행이 필요 합니다. -";
+		close2;
+		warp 'map_slug$,44,56;
+		end;
+	}
+	end;
+}
+1@slug,92,95,0	duplicate(#slsl01)	#slsl02	HIDDEN_WARP_NPC,5,5
+1@slug,111,77,0	duplicate(#slsl01)	#slsl03	HIDDEN_WARP_NPC,5,5
+
+
+// Step 2
+1@slug,1,1,5	script	slug_mob_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_1") + "::OnMobDead";
+	monster 'map_slug$,66,69,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,60,73,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,61,74,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,65,68,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,73,82,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,81,100,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,86,121,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,88,124,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_1") + "::OnMobDead" ) > 0)
+		end;
+	enablenpc instance_npcname("ep20_1slug_83_127");
+	'step = 2;
+	end;
+}
+
+1@slug,86,127,3	duplicate(dummy_cloaked_npc)	로로휴#sl2::ep20_1slug_86_127	EP20_NPC_COCOPO
+1@slug,85,126,3	duplicate(dummy_cloaked_npc)	프리데리케#sl2::ep20_1slug_85_126	4_EP19_FRIEDERIKE
+
+1@slug,83,127,5	script(DISABLED)	꼬뽀#sl2::ep20_1slug_83_127	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 2 || 'step == 3) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[꼬뽀]";
+			mes "삑!!!";
+			mes "삐익!!!";
+			cloakoffnpcself( instance_npcname("ep20_1slug_85_126") );
+			next;
+			mes "[프리데리케]";
+			mes "여기도 출몰 지역이니까 잘 확인해봐요.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			cutin "",255;
+			cloakonnpcself( instance_npcname("ep20_1slug_85_126") );
+			mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+			if ('step == 2) {
+				'step = 3;
+				donpcevent instance_npcname("slug_mob_2") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",46,186);
+			end;
+		}
+		mes "[꼬뽀]";
+		mes "뽁?";
+		cloakoffnpcself( instance_npcname("ep20_1slug_85_126") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_86_127") );
+		next;
+		mes "[로로휴]";
+		mes "뭐 정말?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴는 그거 알아들을 수 있는 거야?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[로로휴]";
+		mes "어?";
+		mes "응?";
+		mes "조…금?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그렇구나.";
+		mes "그런데 찾고 있는 친구 이름은 뭐야?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[로로휴]";
+		mes "어…";
+		mes "이름?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "나중에 흩어져서 찾게 될지도 모르니까 이름을 알아야 하지 않을까?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[로로휴]";
+		mes "그렇네, 그애 이름은 삐욕뽁…이야.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "삐욕뽁?";
+		mes "들어본 적 없는 이름이야.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[로로휴]";
+		mes "프리데리케님이 만난 적 없을지도…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그런가?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[로로휴]";
+		mes "이쪽 길…인데 달팽이들이 가로막고 있잖아!";
+		mes "빨리 처치하고 가자.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_86_127") );
+		cloakonnpcself( instance_npcname("ep20_1slug_85_126") );
+		cutin "",255;
+		if ('step == 2) {
+			'step = 3;
+			donpcevent instance_npcname("slug_mob_2") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",46,186);
+		end;
+	}
+	end;
+}
+
+
+// Step 3
+1@slug,1,1,5	script	slug_mob_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_2") + "::OnMobDead";
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,69,145,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,62,147,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,47,182,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,44,181,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,47,167,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_2") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_83_127");
+	enablenpc instance_npcname("ep20_1slug_46_186");
+	'step = 4;
+	end;
+}
+
+
+1@slug,49,185,3	duplicate(dummy_cloaked_npc)	프리데리케#sl3::ep20_1slug_49_185	4_EP19_FRIEDERIKE
+1@slug,50,186,3	duplicate(dummy_cloaked_npc)	로로휴#sl3::ep20_1slug_50_186	EP20_NPC_COCOPO
+
+1@slug,46,186,5	script(DISABLED)	꼬뽀#sl3::ep20_1slug_46_186	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 4 || 'step == 5) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[꼬뽀]";
+			mes "삐삐삐";
+			mes "삑";
+			cloakoffnpcself( instance_npcname("ep20_1slug_49_185") );
+			next;
+			mes "[프리데리케]";
+			mes "저렇게 귀여워도 생각보다 강해서 평범한 달팽이 정도는 손쉽게 사냥한다고 하더라구요. ";
+			mes "평범하지 않은 게 나오니까 문제긴 한가?";
+			cutin "ep19_friederike05.png",2;
+			next;
+			cloakonnpcself( instance_npcname("ep20_1slug_49_185") );
+			mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+			cutin "",255;
+			if ('step == 4) {
+				'step = 5;
+				donpcevent instance_npcname("slug_mob_3") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",159,309);
+			end;
+		}
+		mes "[꼬뽀]";
+		mes "삑삑뽁!";
+		mes "삐익뽁!";
+		cloakoffnpcself( instance_npcname("ep20_1slug_49_185") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_50_186") );
+		next;
+		mes "[로로휴]";
+		mes "얘가 괴물이 이쪽 길로 가는 걸 봤데!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "길 알려줘서 고마워.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		cutin "",255;
+		mes "[꼬뽀]";
+		mes "뽁~";
+		next;
+		mes "[로로휴]";
+		mes "빨리 가자!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "생각해보니까 말이야.";
+		mes "삐욕뽁은 어떻게 마을 밖으로 나온 거야?";
+		mes "마을 입구에 있던 경비대에서는 아무 말 없던데.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[로로휴]";
+		mes "모…못봤겠지.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[로로휴]";
+		mes "솜으로 대충 만들어진 가짜에 속아서 내가 나가는 것도 몰랐잖아.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "맞아!";
+		mes "안 그래도 바쁜 경비대에 그런 짓궂은 장난이나 치고!";
+		mes "돌아가면 엄청 혼날 줄 알아.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[로로휴]";
+		mes "히익…";
+		mes "또 달팽이가!!!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "얼렁뚱땅 넘어갈 생각 하지마!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		cloakonnpcself( instance_npcname("ep20_1slug_50_186") );
+		cloakonnpcself( instance_npcname("ep20_1slug_49_185") );
+		cutin "",255;
+		mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+		if ('step == 4) {
+			'step = 5;
+			donpcevent instance_npcname("slug_mob_3") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",159,309);
+		end;
+	}
+	end;
+}
+
+
+
+// step 4
+1@slug,1,1,5	script	slug_mob_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_3") + "::OnMobDead";
+	monster 'map_slug$,63,205,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,207,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,76,227,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,76,234,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,82,229,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,81,240,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,110,271,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,138,282,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,148,303,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,152,305,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,155,305,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,155,307,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_3") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_46_186");
+	enablenpc instance_npcname("ep20_1slug_159_309");
+	'step = 6;
+	end;
+}
+
+
+1@slug,157,307,5	duplicate(dummy_cloaked_npc)	프리데리케#sl4::ep20_1slug_157_307	4_EP19_FRIEDERIKE
+1@slug,161,307,3	duplicate(dummy_cloaked_npc)	로로휴#sl4::ep20_1slug_161_307	EP20_NPC_COCOPO
+
+1@slug,159,309,3	script(DISABLED)	꼬뽀#sl4::ep20_1slug_159_309	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 6 || 'step == 7) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[꼬뽀]";
+			mes "삑삑삑!!!";
+			mes "삐욕?";
+			cloakoffnpcself( instance_npcname("ep20_1slug_157_307") );
+			next;
+			mes "[프리데리케]";
+			mes "그런데 이렇게 위험을 감수하면서까지 먹을 정도로 맛있는 걸까요?";
+			mes "나중에 레하르에게 물어봐야 겠어요.";
+			cutin "ep19_friederike05.png",2;
+			next;
+			cloakonnpcself( instance_npcname("ep20_1slug_157_307") );
+			mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+			cutin "",255;
+			if ('step == 6) {
+				donpcevent instance_npcname("slug_mob_4") + "::OnStart";
+				enablenpc instance_npcname("#slsl001");
+				enablenpc instance_npcname("#slsl002");
+				'step = 7;
+			}
+			close2;
+			navigateto("1@slug",66,336);
+			end;
+		}
+		mes "[꼬뽀]";
+		mes "뽁뽁?";
+		cloakoffnpcself( instance_npcname("ep20_1slug_157_307") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_161_307") );
+		next;
+		mes "[로로휴]";
+		mes "이쪽이래!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "잠깐… 아무래도 수상해.";
+		mes "로로휴 뭔가 숨기는 거 있지?";
+		mes "솔직히 말해.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[로로휴]";
+		mes "뭐가 수상해!";
+		mes "아무것도 숨기는 거 없어.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴 숨기는 거 있을 땐, 내 눈 계속 피하는걸?";
+		mes "거짓말해도 소용없다구.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[로로휴]";
+		mes "에…";
+		mes "그게… 그게…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[로로휴]";
+		mes "사실은…";
+		mes "…";
+		next;
+		mes "[로로휴]";
+		mes "솔직하게 말하면 엄마한텐 말 안 할 거야?";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "좋아.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[로로휴]";
+		mes "…";
+		mes "삐욕뽁은 얼음성에 사는 애가 아니고 고대 얼음 협곡에 사는 애 거든…";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "뭐?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[로로휴]";
+		mes "어른들이 알면 삐욕뽁이랑 못 만나게 될 거야.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "끄응...";
+		mes "그래도 이렇게 위험한 곳에 오면 안 돼…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[로로휴]";
+		mes "그렇게 무서운 괴물이 나온 건 이번이 처음이야.";
+		mes "평소엔 그냥 삐욕뽁이 밥 먹으러 오는 곳이었다고.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[로로휴]";
+		mes "그냥…";
+		mes "삐욕뽁이랑 함께 새로 나온 포링글칩을 먹고 싶었어.";
+		next;
+		mes "[프리데리케]";
+		mes "로로휴…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그래.";
+		mes "어서 삐욕뽁을 찾아서 돌아가자.";
+		mes "일단은 길을 막는 달팽이들 부터 처치 해야겠지?";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_161_307") );
+		cloakonnpcself( instance_npcname("ep20_1slug_157_307") );
+		cutin "",255;
+		if ('step == 6) {
+			donpcevent instance_npcname("slug_mob_4") + "::OnStart";
+			enablenpc instance_npcname("#slsl001");
+			enablenpc instance_npcname("#slsl002");
+			'step = 7;
+		}
+		close2;
+		navigateto("1@slug",66,336);
+		end;
+	}
+	end;
+}
+
+1@slug,148,309,0	warp2(DISABLED)	#slsl001	2,2,1@slug,88,340
+1@slug,100,340,0	warp2(DISABLED)	#slsl002	2,2,1@slug,155,300
+
+
+// step 5
+1@slug,1,1,5	script	slug_mob_4	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_4") + "::OnMobDead";
+	monster 'map_slug$,76,339,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,83,339,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,62,330,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,58,331,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,58,340,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,55,336,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_4") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_159_309");
+	enablenpc instance_npcname("ep20_1slug_66_336");
+	'step = 8;
+	end;
+}
+
+1@slug,68,337,3	duplicate(dummy_cloaked_npc)	프리데리케#sl5::ep20_1slug_68_337	4_EP19_FRIEDERIKE
+1@slug,67,334,3	duplicate(dummy_cloaked_npc)	로로휴#sl5::ep20_1slug_67_334	EP20_NPC_COCOPO
+
+1@slug,66,336,5	script(DISABLED)	꼬뽀#sl5::ep20_1slug_66_336	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 8) {
+		if (is_party_leader() == false)
+			end;
+		if (ep20_sidequest_1 == 20) {
+			mes "[삐욕뽁]";
+			mes "삑~!";
+			cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+			next;
+			mes "[프리데리케]";
+			mes "위험해!";
+			mes "저 괴물이 또 나타났어요!!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+			cutin "",255;
+			cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+			close2;
+			if ('step == 8) {
+				donpcevent instance_npcname("slug_mob_5") + "::OnStart";
+				'step = 9;
+			}
+			disablenpc();
+			end;
+		}
+		mes "[로로휴]";
+		mes "삐욕뽁!!!";
+		cutin "ep20_cocopo01.png",2;
+		cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_67_334") );
+		next;
+		mes "[삐욕뽁]";
+		mes "삑~!";
+		cutin "",255;
+		next;
+		mes "[프리데리케]";
+		mes "위험해!";
+		mes "로로휴!!!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "- 다음 단계로 가기 위해서는 파티장의 진행이 필요 합니다. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+		cloakonnpcself( instance_npcname("ep20_1slug_67_334") );
+		cutin "",255;
+		close2;
+		if ('step == 8) {
+			donpcevent instance_npcname("slug_mob_5") + "::OnStart";
+			'step = 9;
+		}
+		disablenpc();
+		end;
+	}
+	if ('step == 10) {
+		if (ep20_sidequest_1 == 18) {
+			mes "[로로휴]";
+			mes "고마워.";
+			mes "" + strcharinfo(0) + "님,";
+			mes "프리데리케님.";
+			cutin "ep20_cocopo02.png",2;
+			cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+			cloakoffnpcself( instance_npcname("ep20_1slug_67_334") );
+			next;
+			mes "[프리데리케]";
+			mes "휴…";
+			mes "둘 다 무사해서 다행이야.";
+			cutin "ep19_friederike03.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "삐욕뽁도 어디 다친 덴 없지?";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "모두 무사하니까 빨리 마을로 돌아가요.";
+			mes "여긴 애들한테 너무 위험해요.";
+			cutin "ep19_friederike02.png",2;
+			ep20_sidequest_1 = 19;
+			erasequest 11946;
+			setquest 11947;
+			close2;
+			cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+			cloakonnpcself( instance_npcname("ep20_1slug_67_334") );
+			cutin "",255;
+			warp "jor_back4",100,253;
+			end;
+		}
+		if (ep20_sidequest_1 == 20) {
+			if (checkquest(11949,HUNTING) == 2) {
+				if (checkweight(1001217,3) == 0) {
+					mes "- 여기서 잠깐 !! -";
+					mes "- 가지고 계신 아이템이 너무 많아 -";
+					mes "- 퀘스트를 진행할 수 없습니다. -";
+					mes "- 몸을 가볍게 하시고 -";
+					mes "- 다시 시도해주세요. -";
+					close;
+				}
+				mes "[삐욕뽁]";
+				mes "삑~!";
+				cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+				next;
+				mes "[프리데리케]";
+				mes "그래!";
+				mes "이 아이들을 보고 있으면 말은 통하지 않지만 마음으로 느낄 수 있는 것 같아요.";
+				cutin "ep19_friederike05.png",2;
+				next;
+				mes "[프리데리케]";
+				mes "삐욕뽁이랑도 좀 친해진 것 같고…";
+				next;
+				mes "[삐욕뽁]";
+				mes "뽁뽁~!";
+				cutin "",255;
+				erasequest 11948;
+				erasequest 11949;
+				setquest 11950;
+				getitem 1001217,3;	// Ep20_Cat_Whiskers
+				if (get_reputation_points( REPU_EP20 ) >= 3000)
+					getitem 1001217,1;	// Ep20_Cat_Whiskers
+				getexp2 34152989,0;
+				getexp 0,4283013;
+				add_reputation_points( REPU_EP20, 5 );
+				close2;
+				cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+				warp "jor_back4",100,253;
+				end;
+			}
+			// (fall through)
+		}
+		// (fall through)
+	}
+	mes "[삐욕뽁]";
+	mes "뽁뽁??";
+	if (select( "던전을 나간다.", "탐사를 계속한다." ) == 2) {
+		mes "- 그대로 던전을 탐사합니다. -";
+		close;
+	}
+	mes "- 던전 밖으로 나갑니다. -";
+	close2;
+	warp "jor_back4",100,253;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11946,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11949,HUNTING) == 2" );
+	end;
+}
+
+// Step 6
+1@slug,1,1,5	script	slug_mob_5	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_5") + "::OnMobDead";
+	monster 'map_slug$,50,338,"--ja--","MD_EP20_FALLENANGEL",1, .@event$;	// 21982
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_5") + "::OnMobDead" ) > 0)
+		end;
+	'step = 10;
+	disablenpc instance_npcname("#slsl001");
+	disablenpc instance_npcname("#slsl002");
+	enablenpc instance_npcname("ep20_1slug_66_336");
+	end;
+}

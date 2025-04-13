@@ -1,0 +1,35 @@
+prontera,160,185,3,	script	그레이프#hn	23,{
+    setdialogalign(DIALOG_ALIGN_CENTER);
+ 		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		mes "sky";
+		next;
+		switch(select("뭐가 문제야?:닫기")) {
+			case 1:
+				break;
+
+			case 2:
+				close;
+}
+	
+    OnInit:
+		setunittitle getnpcid(0),"<타나토스타워 보상지급>";
+        setunitdata getnpcid(0), UNPC_HAIRSTYLE, 31;
+        setunitdata getnpcid(0), UNPC_HAIRCOLOR, 4;
+        setunitdata getnpcid(0), UNPC_HEADTOP, 82;
+        setunitdata getnpcid(0), UNPC_HEADBOTTOM, 1330;
+        setunitdata getnpcid(0), UNPC_SEX, 1;
+    OnMainTalk:
+        end;
+	
+}

@@ -14,6 +14,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clif.hpp"
@@ -68,11 +69,17 @@ uint64 HomExpDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (level == 0) {
-		this->invalidWarning(node["Level"], "The minimum level is 1.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning(node["Level"], "최소 레벨은 1입니다.\n");
+		else
+			this->invalidWarning(node["Level"], "The minimum level is 1.\n");
 		return 0;
 	}
 	if (level >= MAX_LEVEL) {
-		this->invalidWarning(node["Level"], "Homunculus level %d exceeds maximum level %d, skipping.\n", level, MAX_LEVEL);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning(node["Level"], "호문클루스 레벨 %d이(가) 최대 레벨 %d을(를) 초과하여 건너뜁니다.\n", level, MAX_LEVEL);
+		else
+			this->invalidWarning(node["Level"], "Homunculus level %d exceeds maximum level %d, skipping.\n", level, MAX_LEVEL);
 		return 0;
 	}
 
@@ -503,7 +510,10 @@ int hom_levelup(struct homun_data *hd)
 	int m_class;
 
 	if ((m_class = hom_class2mapid(hd->homunculus.class_)) == -1) {
-		ShowError("hom_levelup: Invalid class %d.\n", hd->homunculus.class_);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("hom_levelup: %d은(는) 잘못된 클래스입니다..\n", hd->homunculus.class_);
+		else
+			ShowError("hom_levelup: Invalid class %d.\n", hd->homunculus.class_);
 		return 0;
 	}
 
@@ -514,7 +524,10 @@ int hom_levelup(struct homun_data *hd)
 		std::shared_ptr<s_homunculus_db> homun_s_db = homunculus_db.homun_search(hd->homunculus.prev_class);
 
 		if (homun_s_db == nullptr) {
-			ShowError("hom_levelup: Failed to find database entry for %d.\n", hd->homunculus.prev_class);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("hom_levelup: %d에 대한 데이터베이스 항목을 찾을 수 없습니다.\n", hd->homunculus.prev_class);
+			else
+				ShowError("hom_levelup: Failed to find database entry for %d.\n", hd->homunculus.prev_class);
 			return 0;
 		}
 
@@ -576,11 +589,18 @@ int hom_levelup(struct homun_data *hd)
 
 	if ( hd->master && battle_config.homunculus_show_growth ) {
 		char output[256] ;
-		sprintf(output,
-			"Growth: hp:%d sp:%d str(%.2f) agi(%.2f) vit(%.2f) int(%.2f) dex(%.2f) luk(%.2f) ",
-			growth_max_hp, growth_max_sp,
-			growth_str/10.0, growth_agi/10.0, growth_vit/10.0,
-			growth_int/10.0, growth_dex/10.0, growth_luk/10.0);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			sprintf(output,
+				"성장: HP:%d SP:%d STR(%.2f) AGI(%.2f) VIT(%.2f) INT(%.2f) DEX(%.2f) LUK(%.2f) ",
+				growth_max_hp, growth_max_sp,
+				growth_str/10.0, growth_agi/10.0, growth_vit/10.0,
+				growth_int/10.0, growth_dex/10.0, growth_luk/10.0);
+		else
+			sprintf(output,
+				"Growth: hp:%d sp:%d str(%.2f) agi(%.2f) vit(%.2f) int(%.2f) dex(%.2f) luk(%.2f) ",
+				growth_max_hp, growth_max_sp,
+				growth_str/10.0, growth_agi/10.0, growth_vit/10.0,
+				growth_int/10.0, growth_dex/10.0, growth_luk/10.0);
 		clif_messagecolor(&hd->master->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
 	}
 	return 1;
@@ -624,7 +644,10 @@ int hom_evolution(struct homun_data *hd)
 		return 0;
 
 	if (!hom_change_class(hd, hd->homunculusDB->evo_class)) {
-		ShowError("hom_evolution: Can't evolve homunc from %d to %d\n", hd->homunculus.class_, hd->homunculusDB->evo_class);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("hom_evolution: %d에서 %d으(로) 호문클루스를 진화시킬 수 없습니다.\n", hd->homunculus.class_, hd->homunculusDB->evo_class);
+		else
+			ShowError("hom_evolution: Can't evolve homunc from %d to %d\n", hd->homunculus.class_, hd->homunculusDB->evo_class);
 		return 0;
 	}
 
@@ -692,7 +715,10 @@ int hom_mutate(struct homun_data *hd, int homun_id)
 	prev_class = hd->homunculus.class_;
 
 	if (!hom_change_class(hd, homun_id)) {
-		ShowError("hom_mutate: Can't evolve homunc from %d to %d\n", hd->homunculus.class_, homun_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("hom_mutate: %d에서 %d으(로) 호문클루스를 진화시킬 수 없습니다.\n", hd->homunculus.class_, homun_id);
+		else
+			ShowError("hom_mutate: Can't evolve homunc from %d to %d\n", hd->homunculus.class_, homun_id);
 		return 0;
 	}
 
@@ -734,7 +760,10 @@ void hom_gainexp(struct homun_data *hd,t_exp exp)
 		return;
 
 	if((m_class = hom_class2mapid(hd->homunculus.class_)) == -1) {
-		ShowError("hom_gainexp: Invalid class %d. \n", hd->homunculus.class_);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("hom_gainexp: %d은(는) 잘못된 클래스입니다. \n", hd->homunculus.class_);
+		else
+			ShowError("hom_gainexp: Invalid class %d. \n", hd->homunculus.class_);
 		return;
 	}
 
@@ -855,7 +884,10 @@ void hom_menu(map_session_data *sd, int type)
 			hom_delete(sd->hd, -1);
 			break;
 		default:
-			ShowError("hom_menu : unknown menu choice : %d\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("hom_menu : 알수 없는 메뉴 선택 : %d\n", type);
+			else
+				ShowError("hom_menu : unknown menu choice : %d\n", type);
 			break;
 	}
 }
@@ -1043,7 +1075,10 @@ void hom_alloc(map_session_data *sd, struct s_homunculus *hom)
 	std::shared_ptr<s_homunculus_db> homun_db = homunculus_db.homun_search(hom->class_);
 
 	if (homun_db == nullptr) {
-		ShowError("hom_alloc: unknown class [%d] for homunculus '%s', requesting deletion.\n", hom->class_, hom->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("hom_alloc: 호문클루스 '%s'에 대한 알수 없는 클래스 [%d], 삭제를 요청 중입니다.\n", hom->name, hom->class_);
+		else
+			ShowError("hom_alloc: unknown class [%d] for homunculus '%s', requesting deletion.\n", hom->class_, hom->name);
 		sd->status.hom_id = 0;
 		intif_homunculus_requestdelete(hom->hom_id);
 		return;
@@ -1487,7 +1522,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 	int64 class_tmp;
 
 	if (!script_get_constant(class_name_constant.c_str(), &class_tmp)) {
-		this->invalidWarning(node["Class"], "Invalid homunculus Class \"%s\", skipping.\n", class_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Class"], "\"%s\"은(는) 잘못된 호문클루스 클래스입니다. 건너뜀\n", class_name.c_str());
+		else
+			this->invalidWarning(node["Class"], "Invalid homunculus Class \"%s\", skipping.\n", class_name.c_str());
 		return 0;
 	}
 
@@ -1527,7 +1565,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		int64 constant;
 
 		if (!script_get_constant(evo_class_name_constant.c_str(), &constant)) {
-			this->invalidWarning(node["EvolutionClass"], "Invalid homunculus Evolution Class %s, skipping.\n", evo_class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["EvolutionClass"], "%s은(는) 잘못된 호문클루스 진화 클래스입니다. 건너뜀.\n", evo_class_name.c_str());
+			else
+				this->invalidWarning(node["EvolutionClass"], "Invalid homunculus Evolution Class %s, skipping.\n", evo_class_name.c_str());
 			return 0;
 		}
 
@@ -1546,7 +1587,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname(food.c_str());
 
 		if (item == nullptr) {
-			this->invalidWarning(node["Food"], "Invalid homunculus Food %s, skipping.\n", food.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Food"], "%s은(는) 잘못된 호문클루스 음식입니다. 건너뜀.\n", food.c_str());
+			else
+				this->invalidWarning(node["Food"], "Invalid homunculus Food %s, skipping.\n", food.c_str());
 			return 0;
 		}
 
@@ -1578,7 +1622,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		int64 constant;
 
 		if (!script_get_constant(race_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Race"], "Invalid homunculus Race %s, skipping.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Race"], "%s은(는) 잘못된 호문클루스 Race입니다. 건너뜀\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Invalid homunculus Race %s, skipping.\n", race.c_str());
 			return 0;
 		}
 
@@ -1598,7 +1645,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		int64 constant;
 
 		if (!script_get_constant(element_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Element"], "Invalid homunculus Element %s, skipping.\n", element.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Element"], "%s은(는) 잘못된 호문클루스 Element입니다. 건너뜀.\n", element.c_str());
+			else
+				this->invalidWarning(node["Element"], "Invalid homunculus Element %s, skipping.\n", element.c_str());
 			return 0;
 		}
 
@@ -1618,7 +1668,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		int64 constant;
 
 		if (!script_get_constant(size_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Size"], "Invalid homunculus Size %s, skipping.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Size"], "%s은(는) 잘못된 호문클루스 크기입니다. 건너뜀.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Invalid homunculus Size %s, skipping.\n", size.c_str());
 			return 0;
 		}
 
@@ -1638,7 +1691,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		int64 constant;
 
 		if (!script_get_constant(size_constant.c_str(), &constant)) {
-			this->invalidWarning(node["EvolutionSize"], "Invalid homunculus EvolutionSize %s, skipping.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["EvolutionSize"], "%s은(는) 잘못된 호문클루스 진화 크기입니다. 건너뜀.\n", size.c_str());
+			else
+				this->invalidWarning(node["EvolutionSize"], "Invalid homunculus EvolutionSize %s, skipping.\n", size.c_str());
 			return 0;
 		}
 
@@ -1655,7 +1711,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 			return 0;
 
 		if (aspd > 2000) {
-			this->invalidWarning(node["AttackDelay"], "Homunculus AttackDelay %hu exceeds 2000, capping.\n", aspd);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["AttackDelay"], "호문클루스 AttackDelay %hu은(는) 최대 크기인 2000 이상입니다. 조정됨.\n", aspd);
+			else
+				this->invalidWarning(node["AttackDelay"], "Homunculus AttackDelay %hu exceeds 2000, capping.\n", aspd);
 			aspd = 2000;
 		}
 
@@ -1678,7 +1737,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 				return 0;
 
 			if (!util::vector_exists(stat_list, stat_name)) {
-				this->invalidWarning(statusNode["Type"], "Invalid Status Type %s, skipping.\n", stat_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(statusNode["Type"], "%s은(는) 잘못된 Status Type입니다. 건너뜀.\n", stat_name.c_str());
+				else
+					this->invalidWarning(statusNode["Type"], "Invalid Status Type %s, skipping.\n", stat_name.c_str());
 				return 0;
 			}
 
@@ -1736,67 +1798,115 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		// Cap values
 		if (hom->gmin.HP > hom->gmax.HP) {
 			hom->gmin.HP = hom->gmax.HP;
-			this->invalidWarning(node, "GrowthMinimum HP %d is greater than GrowthMaximum HP %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.HP, hom->gmax.HP, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum HP %d은(는) GrowthMaximum HP %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.HP, hom->gmax.HP);
+			else
+				this->invalidWarning(node, "GrowthMinimum HP %d is greater than GrowthMaximum HP %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.HP, hom->gmax.HP, class_name.c_str());
 		}
 		if (hom->gmin.SP > hom->gmax.SP) {
 			hom->gmin.SP = hom->gmax.SP;
-			this->invalidWarning(node, "GrowthMinimum SP %d is greater than GrowthMaximum SP %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.SP, hom->gmax.SP, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum SP %d은(는) GrowthMaximum SP %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.SP, hom->gmax.SP);
+			else
+				this->invalidWarning(node, "GrowthMinimum SP %d is greater than GrowthMaximum SP %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.SP, hom->gmax.SP, class_name.c_str());
 		}
 		if (hom->gmin.str > hom->gmax.str) {
 			hom->gmin.str = hom->gmax.str;
-			this->invalidWarning(node, "GrowthMinimum STR %d is greater than GrowthMaximum STR %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.str, hom->gmax.str, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum STR %d은(는) GrowthMaximum STR %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.str, hom->gmax.str);
+			else
+				this->invalidWarning(node, "GrowthMinimum STR %d is greater than GrowthMaximum STR %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.str, hom->gmax.str, class_name.c_str());
 		}
 		if (hom->gmin.agi > hom->gmax.agi) {
 			hom->gmin.agi = hom->gmax.agi;
-			this->invalidWarning(node, "GrowthMinimum AGI %d is greater than GrowthMaximum AGI %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.agi, hom->gmax.agi, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum AGI %d은(는) GrowthMaximum AGI %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.agi, hom->gmax.agi);
+			else
+				this->invalidWarning(node, "GrowthMinimum AGI %d is greater than GrowthMaximum AGI %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.agi, hom->gmax.agi, class_name.c_str());
 		}
 		if (hom->gmin.vit > hom->gmax.vit) {
 			hom->gmin.vit = hom->gmax.vit;
-			this->invalidWarning(node, "GrowthMinimum VIT %d is greater than GrowthMaximum VIT %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.vit, hom->gmax.vit, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum VIT %d은(는) GrowthMaximum VIT %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.vit, hom->gmax.vit);
+			else
+				this->invalidWarning(node, "GrowthMinimum VIT %d is greater than GrowthMaximum VIT %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.vit, hom->gmax.vit, class_name.c_str());
 		}
 		if (hom->gmin.int_ > hom->gmax.int_) {
 			hom->gmin.int_ = hom->gmax.int_;
-			this->invalidWarning(node, "GrowthMinimum INT %d is greater than GrowthMaximum INT %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.int_, hom->gmax.int_, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum INT %d은(는) GrowthMaximum INT %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.int_, hom->gmax.int_);
+			else
+				this->invalidWarning(node, "GrowthMinimum INT %d is greater than GrowthMaximum INT %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.int_, hom->gmax.int_, class_name.c_str());
 		}
 		if (hom->gmin.dex > hom->gmax.dex) {
 			hom->gmin.dex = hom->gmax.dex;
-			this->invalidWarning(node, "GrowthMinimum DEX %d is greater than GrowthMaximum DEX %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.dex, hom->gmax.dex, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum DEX %d은(는) GrowthMaximum DEX %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.dex, hom->gmax.dex);
+			else
+				this->invalidWarning(node, "GrowthMinimum DEX %d is greater than GrowthMaximum DEX %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.dex, hom->gmax.dex, class_name.c_str());
 		}
 		if (hom->gmin.luk > hom->gmax.luk) {
 			hom->gmin.luk = hom->gmax.luk;
-			this->invalidWarning(node, "GrowthMinimum LUK %d is greater than GrowthMaximum LUK %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.luk, hom->gmax.luk, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 GrowthMinimum LUK %d은(는) GrowthMaximum LUK %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->gmin.luk, hom->gmax.luk);
+			else
+				this->invalidWarning(node, "GrowthMinimum LUK %d is greater than GrowthMaximum LUK %d for homunculus %s, capping minimum to maximum.\n", hom->gmin.luk, hom->gmax.luk, class_name.c_str());
 		}
 		if (hom->emin.HP > hom->emax.HP) {
 			hom->emin.HP = hom->emax.HP;
-			this->invalidWarning(node, "EvolutionMinimum HP %d is greater than EvolutionMaximum HP %d for homunculus %s, capping minimum to maximum.\n", hom->emin.HP, hom->emax.HP, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum HP %d은(는) EvolutionMaximum HP %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.HP, hom->emax.HP);
+			else
+				this->invalidWarning(node, "EvolutionMinimum HP %d is greater than EvolutionMaximum HP %d for homunculus %s, capping minimum to maximum.\n", hom->emin.HP, hom->emax.HP, class_name.c_str());
 		}
 		if (hom->emin.SP > hom->emax.SP) {
 			hom->emin.SP = hom->emax.SP;
-			this->invalidWarning(node, "EvolutionMinimum SP %d is greater than EvolutionMaximum SP %d for homunculus %s, capping minimum to maximum.\n", hom->emin.SP, hom->emax.SP, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum SP %d은(는) EvolutionMaximum SP %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.SP, hom->emax.SP);
+			else
+				this->invalidWarning(node, "EvolutionMinimum SP %d is greater than EvolutionMaximum SP %d for homunculus %s, capping minimum to maximum.\n", hom->emin.SP, hom->emax.SP, class_name.c_str());
 		}
 		if (hom->emin.str > hom->emax.str) {
 			hom->emin.str = hom->emax.str;
-			this->invalidWarning(node, "EvolutionMinimum STR %d is greater than EvolutionMaximum STR %d for homunculus %s, capping minimum to maximum.\n", hom->emin.str, hom->emax.str, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum STR %d은(는) EvolutionMaximum STR %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.str, hom->emax.str);
+			else
+				this->invalidWarning(node, "EvolutionMinimum STR %d is greater than EvolutionMaximum STR %d for homunculus %s, capping minimum to maximum.\n", hom->emin.str, hom->emax.str, class_name.c_str());
 		}
 		if (hom->emin.agi > hom->emax.agi) {
 			hom->emin.agi = hom->emax.agi;
-			this->invalidWarning(node, "EvolutionMinimum AGI %d is greater than EvolutionMaximum AGI %d for homunculus %s, capping minimum to maximum.\n", hom->emin.agi, hom->emax.agi, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum AGI %d은(는) EvolutionMaximum AGI %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.agi, hom->emax.agi);
+			else
+				this->invalidWarning(node, "EvolutionMinimum AGI %d is greater than EvolutionMaximum AGI %d for homunculus %s, capping minimum to maximum.\n", hom->emin.agi, hom->emax.agi, class_name.c_str());
 		}
 		if (hom->emin.vit > hom->emax.vit) {
 			hom->emin.vit = hom->emax.vit;
-			this->invalidWarning(node, "EvolutionMinimum VIT %d is greater than EvolutionMaximum VIT %d for homunculus %s, capping minimum to maximum.\n", hom->emin.vit, hom->emax.vit, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum VIT %d은(는) EvolutionMaximum VIT %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.vit, hom->emax.vit);
+			else
+				this->invalidWarning(node, "EvolutionMinimum VIT %d is greater than EvolutionMaximum VIT %d for homunculus %s, capping minimum to maximum.\n", hom->emin.vit, hom->emax.vit, class_name.c_str());
 		}
 		if (hom->emin.int_ > hom->emax.int_) {
 			hom->emin.int_ = hom->emax.int_;
-			this->invalidWarning(node, "EvolutionMinimum INT %d is greater than EvolutionMaximum INT %d for homunculus %s, capping minimum to maximum.\n", hom->emin.int_, hom->emax.int_, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum INT %d은(는) EvolutionMaximum INT %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.int_, hom->emax.int_);
+			else
+				this->invalidWarning(node, "EvolutionMinimum INT %d is greater than EvolutionMaximum INT %d for homunculus %s, capping minimum to maximum.\n", hom->emin.int_, hom->emax.int_, class_name.c_str());
 		}
 		if (hom->emin.dex > hom->emax.dex) {
 			hom->emin.dex = hom->emax.dex;
-			this->invalidWarning(node, "EvolutionMinimum DEX %d is greater than EvolutionMaximum DEX %d for homunculus %s, capping minimum to maximum.\n", hom->emin.dex, hom->emax.dex, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum DEX %d은(는) EvolutionMaximum DEX %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.dex, hom->emax.dex);
+			else
+				this->invalidWarning(node, "EvolutionMinimum DEX %d is greater than EvolutionMaximum DEX %d for homunculus %s, capping minimum to maximum.\n", hom->emin.dex, hom->emax.dex, class_name.c_str());
 		}
 		if (hom->emin.luk > hom->emax.luk) {
 			hom->emin.luk = hom->emax.luk;
-			this->invalidWarning(node, "EvolutionMinimum LUK %d is greater than EvolutionMaximum LUK %d for homunculus %s, capping minimum to maximum.\n", hom->emin.luk, hom->emax.luk, class_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "호문클루스 %s에 대한 EvolutionMinimum LUK %d은(는) EvolutionMaximum LUK %d 보다 큽니다. 최소값을 최대값으로 조정합니다.\n", class_name.c_str(), hom->emin.luk, hom->emax.luk);
+			else
+				this->invalidWarning(node, "EvolutionMinimum LUK %d is greater than EvolutionMaximum LUK %d for homunculus %s, capping minimum to maximum.\n", hom->emin.luk, hom->emax.luk, class_name.c_str());
 		}
 	}
 
@@ -1815,12 +1925,18 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 				uint16 skill_id = skill_name2id(skill_name.c_str());
 
 				if (skill_id == 0) {
-					this->invalidWarning(skill["Skill"], "Invalid homunculus skill %s, skipping.\n", skill_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["Skill"], "%s은(는) 잘못된 호문클루스 스킬입니다. 건너뜀.\n", skill_name.c_str());
+					else
+						this->invalidWarning(skill["Skill"], "Invalid homunculus skill %s, skipping.\n", skill_name.c_str());
 					return 0;
 				}
 
 				if (!SKILL_CHK_HOMUN(skill_id)) {
-					this->invalidWarning(skill["Skill"], "Homunculus skill %s (%u) is out of the homunculus skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["Skill"], "호문클루스 스킬 %s (%u)은(는) 호문클루스 스킬 범위 [%u-%u]을(를) 벗어났습니다. 건너뜀.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
+					else
+						this->invalidWarning(skill["Skill"], "Homunculus skill %s (%u) is out of the homunculus skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
 					return 0;
 				}
 
@@ -1840,8 +1956,12 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 					}
 				}
 
-				if (!found)
-					this->invalidWarning(skill["Clear"], "Failed to remove nonexistent skill %s from homunuculus %s.\n", skill_db.find(entry.id)->name, class_name.c_str());
+				if (!found) {
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["Clear"], "호문클루스 %s에서 존재하지 않는 스킬 %s을(를) 제거하지 못했습니다.\n", class_name.c_str(), skill_db.find(entry.id)->name);
+					else
+						this->invalidWarning(skill["Clear"], "Failed to remove nonexistent skill %s from homunuculus %s.\n", skill_db.find(entry.id)->name, class_name.c_str());
+				}
 				continue;
 			}
 
@@ -1854,7 +1974,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 				uint16 db_level = skill_get_max(entry.id);
 
 				if (level > db_level) {
-					this->invalidWarning(skill["MaxLevel"], "Skill %s exceeds maximum defined skill level %d from homunuculus %s, capping.\n", skill_db.find(entry.id)->name, db_level, class_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["MaxLevel"], "호문클루스 %s의 스킬 %s은(는) 최대로 정의된 스킬 레벨 %d보다 큽니다. 조정됨.\n", class_name.c_str(), skill_db.find(entry.id)->name, db_level);
+					else
+						this->invalidWarning(skill["MaxLevel"], "Skill %s exceeds maximum defined skill level %d from homunuculus %s, capping.\n", skill_db.find(entry.id)->name, db_level, class_name.c_str());
 					level = db_level;
 				}
 
@@ -1873,7 +1996,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 					config_max = battle_config.hom_S_max_level;
 
 				if (level > config_max) {
-					this->invalidWarning(skill["RequiredLevel"], "Homunculus Required Skill level %u exceeds maximum level %u, capping.\n", level, config_max);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["RequiredLevel"], "호문클루스 필수 스킬 레벨 %u은(는) 최대 레벨 %u보다 큽니다. 조정됨.\n", level, config_max);
+					else
+						this->invalidWarning(skill["RequiredLevel"], "Homunculus Required Skill level %u exceeds maximum level %u, capping.\n", level, config_max);
 					level = config_max;
 				}
 
@@ -1890,7 +2016,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 					return 0;
 
 				if (intimacy > 1000) {
-					this->invalidWarning(skill["RequiredIntimacy"], "Homunculus Required Intimacy %u exceeds maximum intimacy 1000, capping.\n", intimacy);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["RequiredIntimacy"], "호문클루스 필요 친밀도 %u은(는) 최대 친밀도 1000보다 큽니다. 조정됨.\n", intimacy);
+					else
+						this->invalidWarning(skill["RequiredIntimacy"], "Homunculus Required Intimacy %u exceeds maximum intimacy 1000, capping.\n", intimacy);
 					intimacy = 1000;
 				}
 
@@ -1907,7 +2036,10 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 					return 0;
 
 				if (evo && hom->base_class == hom->evo_class) {
-					this->invalidWarning(skill["RequireEvolution"], "Homunculus %s does not have any evolution making skill %s unobtainable, skipping.\n", class_name.c_str(), skill_db.find(entry.id)->name);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(skill["RequireEvolution"], "호문클루스 %s은(는) 진화를 하지 않기 때문에 스킬 %s을(를) 가질 수 없습니다. 건너뜀.\n", class_name.c_str(), skill_db.find(entry.id)->name);
+					else
+						this->invalidWarning(skill["RequireEvolution"], "Homunculus %s does not have any evolution making skill %s unobtainable, skipping.\n", class_name.c_str(), skill_db.find(entry.id)->name);
 					return 0;
 				}
 
@@ -1932,12 +2064,18 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 						skill_id = skill_name2id(skill_name.c_str());
 
 						if (skill_id == 0) {
-							this->invalidWarning(prereqskill["Skill"], "Invalid homunculus skill %s, skipping.\n", skill_name.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning(prereqskill["Skill"], "%s은(는) 잘못된 호문클루스 스킬입니다. 건너뜀.\n", skill_name.c_str());
+							else
+								this->invalidWarning(prereqskill["Skill"], "Invalid homunculus skill %s, skipping.\n", skill_name.c_str());
 							return 0;
 						}
 
 						if (!SKILL_CHK_HOMUN(skill_id)) {
-							this->invalidWarning(prereqskill["Skill"], "Homunculus skill %s (%u) is out of the homunculus skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning(prereqskill["Skill"], "호문클루스 스킬 %s (%u)은(는) 호문클루스 스킬 범위 [%u-%u]보다 큽니다. 건너뜀.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
+							else
+								this->invalidWarning(prereqskill["Skill"], "Homunculus skill %s (%u) is out of the homunculus skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, HM_SKILLBASE, HM_SKILLBASE + MAX_HOMUNSKILL - 1);
 							return 0;
 						}
 					}
@@ -1958,8 +2096,12 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 							}
 						}
 
-						if (!found)
-							this->invalidWarning(prereqskill["Clear"], "Failed to remove nonexistent prerequisite skill %s from homunuculus %s.\n", skill_db.find(skill_id)->name, class_name.c_str());
+						if (!found) {
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning(prereqskill["Clear"], "호문클루스 %s에서 존재하지 않는 필수 구성요소 스킬 %s을(를) 제거하지 못했습니다.\n", class_name.c_str(), skill_db.find(skill_id)->name);
+							else
+								this->invalidWarning(prereqskill["Clear"], "Failed to remove nonexistent prerequisite skill %s from homunuculus %s.\n", skill_db.find(skill_id)->name, class_name.c_str());
+						}
 						continue;
 					}
 

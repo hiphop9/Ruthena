@@ -16,5 +16,6 @@
 //==================================================
 // ecl_fild01 - Blooming Flower Land
 //==================================================
-ecl_fild01,0,0	monster	Menblatt	2363,73,5000
-ecl_fild01,0,0	monster	Petal	2364,73,5000
+ecl_fild01,0,0	monster	∏«∫Ì∏¥	2363,73,5000
+ecl_fild01,0,0	monster	∆‰≈ª	2364,73,5000
+

@@ -1,0 +1,1177 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 10
+icecastle,202,168,0	script	#ep20_re08	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep20_main == 9) {
+		cloakoffnpcself( "ep20_icecastle_201_171" );
+		end;
+	}
+	end;
+}
+
+icecastle,201,171,3	script(CLOAKED)	레하르#ep20_re07::ep20_icecastle_201_171	4_EP19_LEHAR,{
+	if (ep20_main != 9)
+		end;
+	if (is_party_leader() == false) {
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "먼저 준비를 마치고 오세요! 그러니까, 1인 파티를 맺고 오시면 돼요!";
+		close3;
+	}
+	.@md_name$ = "협곡 탐사";
+
+	switch( select( "" + .@md_name$ + " 준비하기", "" + .@md_name$ + " 출발하기" ) ) {
+	case 1:
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "오셨어요! 탐사 준비를 다 하고 오신 모양이군요.";
+		mes "그러면 잠시 숨을 돌리시고, 마음의 준비도 하시고! '" + .@md_name$ + " 출발하기'를 눌러서 출발해 주세요.";
+		if (is_party_leader() == true)
+			instance_create(.@md_name$);
+		close3;
+	case 2:
+		if (is_party_leader() == false)
+			end;
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "^ff0000An unknown error occurred.^000000";
+			close;
+		case IE_NOINSTANCE:
+		case IE_NOMEMBER:
+			cutin "ep19_lehar01.png",2;
+			mes "[레하르]";
+			mes "아직 준비중이에요! 조금 더 기다렸다 다시 입장해 주세요.";
+			close3;
+		case IE_OK:
+			// warp "1@20cn1",94,79;
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16701) == 1" );
+	end;
+}
+
+
+// Step 1
+1@20cn1,95,78,0	script	#ep20MD_re00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step >= 1) {	// re-enabled
+		enablenpc instance_npcname("ep20_120cn1_91_80");
+		end;
+	}
+	end;
+}
+
+1@20cn1,91,80,5	script	레하르#ep20MD_re01::ep20_120cn1_91_80	4_EP19_LEHAR,2,2,{
+	if ('step == 0) {
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "그럼 저는 여기서 헤어질게요.";
+		mes "3시 방향으로 조금 더 가시면 " + strcharinfo(0) + " 님 지정 구역이에요.";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "정찰! 화이팅입니다!";
+		emotion ET_BEST;
+		next;
+		cutin "",255;
+		sleep2 500;
+		npctalk "레하르 : 화이팅!";
+		disablenpc();
+		if ('step == 0)
+			'step = 1;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "탐색을 시작해 볼까…….";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "또 습격받지 않도록 몸을 숨기고 조심조심 살펴보는 게 좋겠지.";
+		navigateto("1@20cn1",171,105);
+		close;
+	}
+	cutin "ep19_lehar02.png",2;
+	mes "[레하르]";
+	mes "정찰! 화이팅입니다!";
+	close2;
+	cutin "",255;
+	disablenpc();
+	end;
+
+OnTouch:
+	npctalk "레하르 : 여기예요, 모험가님!";
+	end;
+}
+
+
+// Step 2
+1@20cn1,165,105,0	script	#ep20MD_re01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 1) {
+		enablenpc instance_npcname("ep20_120cn1_173_103");
+		enablenpc instance_npcname("ep20_120cn1_171_105");
+		end;
+	}
+	end;
+}
+
+1@20cn1,173,103,3	script(DISABLED)	낯선 아윈#ep20MD_re02::ep20_120cn1_173_103	EP20_FAKE_IWIN_SR,{
+	emotion ET_PROFUSELY_SWEAT;
+	mes "[낯선 아윈]";
+	mes "여기는 우리 담당인데?";
+	mes "다, 당신은 설마!?";
+	close;
+
+OnInstanceInit:
+	'step = 0;
+	'map_20cn2$ = instance_mapname("1@20cn2");
+	end;
+}
+
+1@20cn1,171,105,5	script(DISABLED)	낯선 아윈#ep20MD_re01::ep20_120cn1_171_105	EP20_FAKE_IWIN_SB,2,2,{
+	if ('step < 1)
+		end;
+	if ('step == 1) {
+		mes "[낯선 아윈]";
+		mes "잠깐! 거기 누구냐!";
+		mes "다 봤다! 숨을 생각 하지 말고 이리 나와!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "몰래 지켜보려고 했더니... 어라?";
+		mes "아윈? 여기 담당이에요?";
+		next;
+		mes "[낯선 아윈]";
+		mes "담당? 그야 담당이긴 하지만…….";
+		mes "어엇! 당신은?";
+		next;
+		mes "[다른 낯선 아윈]";
+		mes "얼음성에서 본 그때 그 모험가……!";
+		mes "아, 아니. 흠흠, 여긴 무슨 일이에요?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "뭔가 꼬인 모양이네요. 레하르 씨가 여긴 제가 맡은 구역이라고 했는데.";
+		mes "여러분도 여길 순찰하기로 한 건가요? 그런데 어쩐지 낯선 얼굴 같기도 하고.";
+		next;
+		emotion ET_HUK;
+		sleep2 500;
+		emotion ET_HUK, getnpcid(0, instance_npcname("ep20_120cn1_173_103"));
+		mes "[낯선 아윈]";
+		mes "흠칫.";
+		next;
+		mes "[다른 낯선 아윈]";
+		mes "그, 그럴리가요오. 저희가 병사가 된지 얼마 안 돼서 그런 거 아닐까요?";
+		next;
+		emotion ET_SWEAT;
+		mes "[낯선 아윈]";
+		mes "마, 맞아요! 병사가 되는 건~ 저희의 오랜 꿈이었답니다~";
+		mes "병사가 되어서~ 모두를 지키는~ 꿈이었어요.";
+		next;
+		emotion ET_SWEAT, getnpcid(0, instance_npcname("ep20_120cn1_173_103"));
+		mes "[다른 낯선 아윈]";
+		mes "맞아요, 맞습니다! 우리 얼굴을 인간분들은 잘 못 구별하시더라구요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(어쩐지 좀 미심쩍기는 하지만. 설마 그래도 아윈인데……. 기분 탓이겠지.)";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그럼 서로 열심히 합시다.";
+		mes "순찰할 구역에 대해서는 다시 확인해보기로 하고...";
+		mes "가볼까요?";
+		next;
+		mes "[낯선 아윈들]";
+		mes "좋아요, 앞장서세요!";
+		mes "저희도 순찰을 시작할게요~!";
+		next;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "…….";
+	next;
+	specialeffect2 EF_MAGMA_FLOW;
+	mes "[낯선 아윈들]";
+	mes "공격해!";
+	close2;
+	warp 'map_20cn2$,271,138;
+	if ('step == 1)
+		'step = 2;
+	// disablenpc instance_npcname("ep20_120cn1_173_103");
+	// disablenpc instance_npcname("ep20_120cn1_171_105");
+	enablenpc instance_npcname("ep20_120cn2_271_134");
+	if ('step >= 5)	// re-enter
+		enablenpc instance_npcname("ep20_120cn2_269_136");
+	end;
+
+OnTouch:
+	npctalk "낯선 아윈 : 누구냐!!";
+	npctalk "낯선 아윈 : 거기 멈춰!!", instance_npcname("ep20_120cn1_173_103");
+	end;
+}
+
+
+// Step 3, 4
+1@20cn2,264,135,5	duplicate(dummy_disabled_npc)	바곳#ep20MD_re01::ep20_120cn2_264_135	4_EP18_BAGOT
+
+1@20cn2,271,134,3	script(DISABLED)	레하르#ep20MD_re02::ep20_120cn2_271_134	4_EP19_LEHAR,2,2,{
+	if ('step == 2) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "…….";
+		next;
+		emotion ET_THINK, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "………….";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "……………….";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "………차리세요…!!";
+		next;
+		mes "[레하르]";
+		mes "정신 차리세요, " + strcharinfo(0) + " 님!!";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_KEK, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "으악! 머리 아파…… 뒷통수가 얼얼하군.";
+		mes "설마 했는데 진짜로 배신자였나.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "레하르 씨도 잡혀 와 있었잖아요. 괜찮아요, 레하르 씨!?";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "윽……. 방심했다가 당했습니다.";
+		mes "아윈 중에 배신자가 있을 줄이야. 어떻게 이런 일이?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "저도 생각도 못했어요.";
+		mes "하지만 이대로 있을 수는 없죠. 탈출할 방법이 있을지 생각해 봐야……..";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "으으, 그러게 말이에요. 어서 탈출할 방법이 있을지 머리를 모아 봐야……..";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mapannounce 'map_20cn2$, "바곳 : 라스간드 님. 제 제안은 생각해 보셨는지요?", bc_map, 0xFFFF99;
+		sleep2 500;
+		emotion ET_SURPRISE;
+		mes "[레하르]";
+		mes "앗, 밖에서 무슨 소리가 들립니다! 들어 보죠!";
+		next;
+		cutin "",255;
+		ignoretimeout(true);
+		// note: timer inaccurate
+		mapannounce 'map_20cn2$, "바곳 : 지금 남아있는 요르문간드의 신체로 '부활'을 시도했다가는,", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 남은 마력마저 사라질 수도 있다고 말씀드렸죠.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 그래. 그 이야기는 벌써 지겹게 들었다.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 이미 껍데기뿐인 신체라서 그렇다고 했나?", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 안타깝게도 그렇답니다.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 들이는 투자에 비해 효율이 떨어질 거란 이야기지요.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 하지만 바곳 네가 말한 방법은 너무 무모해.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 나 스스로가 그 마력을 직접 사용하라고?", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 예에, 그러믄요. 그리고 직접 신이 되시는 겁니다.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 결계를 파훼하고 이스가르드에서 나가, 미드가르드 대륙을 직접 손에 넣으시는 겁니다!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 비로소 진정한 대륙의 패자로서 이곳에 군림하시게 되는 거죠!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 세계를 지배하시는 지배자로서 임하셔서!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : …….", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 제법…… 구미가 당기는 이야기를 할 줄 아는군.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 후훗, 바곳은 언제나 그랬지요.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 좋아. 허락하도록 하지. 연구를 진행하도록.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 하해와 같은 은혜에 깊은 감사를 드립니다.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "바곳 : 언제나 라스간드님께 영광만이 있기를.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "라스간드 : 훗……. 정말이지 입을 잘 놀리는 사내야.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		emotion ET_THINK;
+		mapannounce 'map_20cn2$, "바곳 : ……갔나.", bc_map, 0xFFFF99;
+		ignoretimeout(false);
+		sleep2 2000;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "앗, 연구실로 들어오려나봐요.";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_264_135");
+		sleep2 500;
+		cutin "ep18_bagot_02.png",2;
+		emotion ET_SCRATCH, getnpcid(0, instance_npcname("ep20_120cn2_264_135"));
+		mes "[바곳]";
+		mes "흥……. 비위 맞추기 까다로운 뱀 같으니.";
+		mes "하지만 그 대가로 바곳이 원하는 걸 얻어냈으니 나쁘지 않은 거래였어요.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "후훗, 시치미를 떼는 척 하면서도 그런 걸 욕망하다니.";
+		mes "하지만 덕분에 할 수 있어……!";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "바곳은 '신'을 창조하는 초월자가 된다……!";
+		mes "진정, 인간을 뛰어넘은 기적을 이루는 거예요!";
+		next;
+		emotion ET_THINK;
+		sleep2 500;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "우와, 앞뒤에서 하는 말이 너무 달라.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "어라? 깨어나 있었나요? 뭐 상관없지.";
+		mes "여러분은 곧 이 일의 재료가 될 테니까요, 나의 제물들.";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "제물이라니 그런 게 될 줄 알고. 어서 꺼내줘!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그럴 순 없지. ";
+		mes "지금까지 우리를 그렇게 방해하던 귀찮은 존재를, 이제야 겨우 잡아들였는걸요.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "여러분의 마력이라면 분명 실험에 충분한 도움이 되겠지요.";
+		mes "바곳은 아주 기쁘답니다.";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "우리를 실험에 쓰도록 가만있을 것 같아?!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그럼요. 오히려 순순히 기뻐해야 한다고 생각하는데.";
+		mes "영광스러워하세요. 신의 창조에 밑거름이 될 수 있다는 사실에.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "너무 진지하게 이상한 말을 하니까 대답하기가 어렵네요, 그쵸? " + strcharinfo(0) + " 님…….";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "그런 말을 할 수 있는 것도 머지 않았어요.";
+		mes "그럼 허튼 생각 말고 얌전히 있도록.";
+		close2;
+		if ('step == 2)
+			'step = 3;
+		npctalk "레하르 : 으윽, 가버렸어요.";
+		cutin "",255;
+		disablenpc instance_npcname("ep20_120cn2_264_135");
+		end;
+	}
+	if ('step == 3) {
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "하아, 이제 어떻게 하면 좋죠. 나갈 방법이 없어 보이는데.";
+		next;
+		specialeffect EF_SPR_LIGHTPRINT;
+		mes "[레하르]";
+		mes "에잇! 잇! 하아아앗! 핫!";
+		mes "부수는 것도 잘 안 되는군요. 단단하게도 잠가 뒀네!";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "분명 방법이 있을 겁니다. 감옥에 허점이 없다면, 누군가 식사를 가져다 주는 틈을 노린다든지…….";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_273_136");
+		sleep2 500;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "…….";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "그렇지만 다들 이렇게 우리 말을 듣지도 않고 제 할 말만 하고 가버린다면 곤란하겠는데요…….";
+		next;
+		cutin "ep20_nyar03.png",1;
+		sleep2 500;
+		emotion ET_OK, getnpcid(0, instance_npcname("ep20_120cn2_273_136"));
+		mes "[하얀 고양이]";
+		mes "…….";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		emotion ET_HUK;
+		mes "[레하르]";
+		mes "으악! 뭐가! 뭐가 제 다리를 스치고 지나갔어요! 아주…… 폭신한 게?";
+		next;
+		cutin "",255;
+		select( "이게 뭐지?", "고, 고양이?" );	// note: the selection doesn't change the dialog
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "야-옹.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "고, 고양이 같이 생기기는 했고, 야옹 하고 우는 것 같기도 한데…….";
+		mes "그런데 이렇게 길쭉한 고양이는 처음 봐요. 어, 언제부터 이 안에 있었지?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[하얀 고양이]";
+		mes "?";
+		close2;
+		cutin "",255;
+		if ('step == 3) {
+			'step = 4;
+			donpcevent instance_npcname("ep20_120cn2_273_136") + "::OnStart";
+		}
+		end;
+	}
+	cutin "ep19_lehar03.png",2;
+	mes "[레하르]";
+	mes "어떻게 하면 좋죠. 나갈 방법이 없어 보이는데.";
+	close3;
+
+OnTouch:
+	npctalk "레하르 : 모험가님! 모험가님!";
+	end;
+}
+
+1@20cn2,273,136,3	script(DISABLED)	고양이#ep20MD_re01::ep20_120cn2_273_136	EP20_NPC_NYAR,{
+	end;
+OnStart:
+	npcspeed 200;
+	unitwalk getnpcid(0),269,136, instance_npcname("ep20_120cn2_273_136") + "::OnMove";
+	end;
+OnMove:
+	'step = 5;
+	disablenpc();
+	enablenpc instance_npcname("ep20_120cn2_269_136");
+	npctalk "고양이 : 양냥.", instance_npcname("ep20_120cn2_269_136");
+	end;
+}
+
+
+// Step 5
+1@20cn2,269,136,3	script(DISABLED)	고양이#ep20MD_re01_1::ep20_120cn2_269_136	EP20_NPC_NYAR,{
+	if ('step < 5)
+		end;
+	if ('step == 5) {
+		cutin "ep20_nyar01.png",1;
+		mes "[하얀 고양이]";
+		mes "뭉냑.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "으악, 걸으니까 더 긴 것 같아요.";
+		mes "문으로 다가갔어!";
+		next;
+		cutin "",255;
+		select( "이상한 소리를 내네……." );
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "고양이는 원래 그렇잖아요.";
+		mes "어? 어어, 어어어! " + strcharinfo(0) + " 님, 저것 좀 보세요!";
+		next;
+		specialeffect 1044;
+		mes "[레하르]";
+		mes "고양이가 발톱으로 긁으니까……, 자물쇠가 점점 부서져 내리고 있어요!";
+		mes "어떻게 이런 일이 일어날 수 있는 거죠? 가능한가?";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "고양아, 어떻게 이런 일이 가능한 거니?";
+		mes "설명해 주지 않을래?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "우왁, 자물쇠가 완전히 풀렸다!";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[하얀 고양이]";
+		mes "(따라오라는 듯이 꼬리를 흔들고 철창 밖으로 나간다)";
+		next;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[레하르]";
+	mes "어, 어서 따라가 봐요!";
+	close2;
+	cutin "",255;
+	warp 'map_20cn2$,52,283;
+	navigateto("1@20cn2",62,258);
+	if ('step == 5)
+		'step = 6;
+	disablenpc;
+	disablenpc instance_npcname("ep20_120cn2_271_134");
+	enablenpc instance_npcname("ep20_120cn2_69_266");
+	enablenpc instance_npcname("ep20_120cn2_71_264");
+	enablenpc instance_npcname("ep20_120cn2_62_258");
+	enablenpc instance_npcname("ep20_120cn2_63_257");
+	end;
+}
+
+
+// Step 6
+1@20cn2,69,266,3	script(DISABLED)	라스간드#ep20MD_re02::ep20_120cn2_69_266	EP20_NPC_LASGAND,{
+	npctalk "라스간드 : ……흥, 퍽이나 잘 되어가는…….";
+	end;
+}
+
+1@20cn2,71,264,1	script(DISABLED)	바곳#ep20MD_re02::ep20_120cn2_71_264	4_EP18_BAGOT,{
+	npctalk "바곳 : ……그러니까 그곳에 관해서는…….";
+	end;
+}
+
+1@20cn2,63,257,3	script(DISABLED)	고양이#ep20MD_re02::ep20_120cn2_63_257	EP20_NPC_NYAR,{
+	cutin "ep20_nyar03.png",1;
+	mes "[하얀 고양이]";
+	mes "?y오옹.";
+	close3;
+}
+
+1@20cn2,62,258,3	script(DISABLED)	레하르#ep20MD_re03::ep20_120cn2_62_258	4_EP19_LEHAR,2,2,{
+	if ('step < 6)
+		end;
+	if ('step == 6) {
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "?y오옹.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		emotion ET_SURPRISE;
+		mes "[레하르]";
+		mes "앗, 여기 멈추라는 뜻인가봐요. 아주 작게 울었어요.";
+		mes "저기 바곳과 라스간드가 있어요! 숨읍시다!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "계획은 잘 되어 가고 있어요, 라스간드님.";
+		mes "그곳에 대한 계획도 마찬가지로요.";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		select( "그곳이라니?" );
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "그러게 말이에요. 일단 마저 들어 보죠.";
+		mes "아직은 모르는 것 투성이니까요.";
+		next;
+		cutin "ep20_lasgand01.png",1;
+		mes "[라스간드]";
+		mes "잘 되고 있기는. 지금까지는 찾지도 못하고 있었지만 말이야.";
+		mes "어쨌든, 공략을 계속한다. 실마리를 잡았으니 단숨에 뚫어야겠지.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "그래도 거기의 존재를 발견했으니 크게 한 걸음 나간 것 아니겠어요?";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[하얀 고양이]";
+		mes "(어쩐지 안절부절못하며 제자리에서 빙글빙글 돈다)";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "고양이가 뭔가 이상한데요. 왜 그러니, 고양아?";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[하얀 고양이]";
+		mes "애웅…….";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[라스간드]";
+		mes "어쨌든, 그곳은 하루빨리 뚫을 수 있도록.";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "그래야겠지요. 그럼 라스간드 님, 다음 일정은…….";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		if ('step == 6) {
+			'step = 7;
+			disablenpc instance_npcname("ep20_120cn2_69_266");
+			disablenpc instance_npcname("ep20_120cn2_71_264");
+
+			enablenpc instance_npcname("ep20_120cn2_57_220");
+			enablenpc instance_npcname("ep20_120cn2_57_223");
+			enablenpc instance_npcname("ep20_120cn2_53_219");
+			enablenpc instance_npcname("ep20_120cn2_52_221");
+			enablenpc instance_npcname("ep20_120cn2_54_222");
+			enablenpc instance_npcname("ep20_120cn2_63_227");
+			enablenpc instance_npcname("ep20_120cn2_64_224");
+		}
+		mes "[레하르]";
+		mes "아, 갔어요.";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아앙.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "고양이가 다시 걸음을 옮기네요.";
+		mes "저희, 이 고양이를 믿고 따라가면 되는 걸까요?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[하얀 고양이]";
+		mes "웅냥!";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "아이쿠, 말을 알아들은 것처럼 냉큼 대답하네.";
+		mes "따라가 보자구요.";
+		close2;
+		cutin "",255;
+		disablenpc();
+		disablenpc instance_npcname("ep20_120cn2_63_257");
+		navigateto("1@20cn2",64,224);
+		end;
+	}
+	cutin "ep19_lehar02.png",2;
+	mes "[레하르]";
+	mes "자, 어서 따라가 보자구요.";
+	close2;
+	cutin "",255;
+	disablenpc instance_npcname("ep20_120cn2_69_266");
+	disablenpc instance_npcname("ep20_120cn2_71_264");
+
+	enablenpc instance_npcname("ep20_120cn2_57_220");
+	enablenpc instance_npcname("ep20_120cn2_57_223");
+	enablenpc instance_npcname("ep20_120cn2_53_219");
+	enablenpc instance_npcname("ep20_120cn2_52_221");
+	enablenpc instance_npcname("ep20_120cn2_54_222");
+	enablenpc instance_npcname("ep20_120cn2_63_227");
+	enablenpc instance_npcname("ep20_120cn2_64_224");
+
+	disablenpc();
+	disablenpc instance_npcname("ep20_120cn2_63_257");
+	navigateto("1@20cn2",64,224);
+	end;
+
+OnTouch:
+	npctalk "레하르 : 쉿, 이쪽이에요!";
+	end;
+}
+
+
+// Step 7
+1@20cn2,57,220,1	script(DISABLED)	르간#ep20MD_re02::ep20_120cn2_57_220	4_EP19_RGAN_SR1,{
+	npctalk "르간 : 아하하학! 콜록, 콜록. 깃털 뿜지 말라고!";
+	end;
+}
+
+1@20cn2,57,223,3	script(DISABLED)	르간#ep20MD_re01::ep20_120cn2_57_223	4_EP19_RGAN_SR3,{
+	npctalk "르간 : 아……, 부지런히 일하기 싫다. 가서 눕고 싶다.";
+	end;
+}
+
+1@20cn2,53,219,7	script(DISABLED)	르간#ep20MD_re03::ep20_120cn2_53_219	4_EP19_RGAN_SR2,{
+	npctalk "르간 : 그 인간 녀석의 말을 들어야 한다니 자존심 상해.";
+	end;
+}
+
+1@20cn2,52,221,7	script(DISABLED)	르간#ep20MD_re04::ep20_120cn2_52_221	4_EP19_RGAN_SR3,{
+	npctalk "르간 : 으음……, 저런 몸으로 움직일 수나 있나?";
+	end;
+}
+
+1@20cn2,54,222,5	script(DISABLED)	아윈#ep20MD_re01::ep20_120cn2_54_222	EP20_FAKE_IWIN_SR,{
+	npctalk "아윈 : 콜록콜록! 깃털이 입에 들어간 것 같아.";
+	end;
+}
+
+1@20cn2,63,227,3	script(DISABLED)	고양이#ep20MD_re03::ep20_120cn2_63_227	EP20_NPC_NYAR,{
+	npctalk "고양이 : 냐갈앵.";
+	end;
+}
+
+1@20cn2,52,221,7	duplicate(dummy_disabled_npc)	르간#ep20MD_re04_1::ep20_120cn2_52_221_B	EP20_FAKE_IWIN_SR
+
+1@20cn2,64,224,3	script(DISABLED)	레하르#ep20MD_re04::ep20_120cn2_64_224	4_EP19_LEHAR,2,2,{
+	if ('step < 7)
+		end;
+	if ('step == 7) {
+		cutin "ep20_nyar03.png",1;
+		mes "[하얀 고양이]";
+		mes "웅먕먀!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "응? 고양이가 또 멈췄어요.";
+		mes "아이쿠, 또 르간들이 잔뜩 모여 있는 곳이었군요. 함부로 나갔다간 들킬 뻔 했네!";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "어? 그런데 저기 르간들 틈에 있는 거…….";
+		next;
+		cutin "",255;
+		select( "나도 봤다고 한다." );
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "그렇죠?! 아윈 아닌가요?";
+		mes "설마, 누가 붙잡힌 건가……!";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "욹냥, 먕.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "옷자락을 물어 당기고 있어요. 흥분하지 말라는 것 같네요.";
+		mes "그래요. 지금 뛰쳐나가 봤자 저희도 잡힐 뿐이겠죠. 심호흡, 심호흡.";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "조용히……, 틈을 노려봅시다.";
+		next;
+		cutin "",255;
+		mes "[르간]";
+		mes "우우, 하찮은 인간 놈이 우리에게 귀찮은 일을 시키고 있어.";
+		next;
+		mes "[르간]";
+		mes "그래도 어쩌겠어. 그놈의 말이 위대하신 라스간드 님의 말씀이나 마찬가지라고 여기라시는데.";
+		next;
+		mes "[아윈]";
+		mes "그래도 이 모습이 뭐야. 우스꽝스럽고, 걷기도 너무 불편해.";
+		mes "이렇게 털이 풀풀 날리는 거대한 몸으로 대체 어떻게 움직이는 거지?";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "어라? 지금 붙잡힌 아윈 씨가 하는 말 들었어요? 뭔가 이상해요.";
+		next;
+		cutin "",255;
+		mes "[르간]";
+		mes "정말 싫다. 그렇지만 나도 변신해야겠지.";
+		mes "그 녀석들도 우리로 잘만 변신해서 돌아다녔잖아.";
+		next;
+		disablenpc instance_npcname("ep20_120cn2_52_221");
+		enablenpc instance_npcname("ep20_120cn2_52_221_B");
+		mes "[르간]";
+		mes "약아빠진 녀석들. 이번에는 우리한테 당해 봐라. 캭캬캭!!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "……!!!!!";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "저 르간……, 아윈으로 변했어요!";
+		mes "르간들도 우리처럼 아윈으로 변신하는 방법을 알아낸 거군요!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "으와아, 큰일이네요!";
+		mes "이 사실을 얼른 얼음성으로 돌아가서 알려야겠어요!";
+		next;
+		mes "[레하르]";
+		mes "빨리 탈출해야 할 텐데 말이에요. 우웃, 조바심나요.";
+		close2;
+		cutin "",255;
+		if ('step == 7) {
+			'step = 8;
+			warp 'map_20cn2$,101,95;
+			navigateto("1@20cn2",107,65);
+			disablenpc instance_npcname("ep20_120cn2_57_220");
+			disablenpc instance_npcname("ep20_120cn2_57_223");
+			disablenpc instance_npcname("ep20_120cn2_53_219");
+			disablenpc instance_npcname("ep20_120cn2_52_221");
+			disablenpc instance_npcname("ep20_120cn2_54_222");
+			disablenpc instance_npcname("ep20_120cn2_63_227");
+			disablenpc instance_npcname("ep20_120cn2_64_224");
+			disablenpc instance_npcname("ep20_120cn2_52_221_B");
+
+			enablenpc instance_npcname("ep20_120cn2_107_65");
+			enablenpc instance_npcname("ep20_120cn2_109_63");
+		}
+		end;
+	}
+	cutin "ep19_lehar05.png",2;
+	mes "[레하르]";
+	mes "으와아, 큰일이네요!";
+	mes "이 사실을 얼른 얼음성으로 돌아가서 알려야겠어요!";
+	close2;
+	cutin "",255;
+	warp 'map_20cn2$,101,95;
+	navigateto("1@20cn2",107,65);
+	disablenpc instance_npcname("ep20_120cn2_57_220");
+	disablenpc instance_npcname("ep20_120cn2_57_223");
+	disablenpc instance_npcname("ep20_120cn2_53_219");
+	disablenpc instance_npcname("ep20_120cn2_52_221");
+	disablenpc instance_npcname("ep20_120cn2_54_222");
+	disablenpc instance_npcname("ep20_120cn2_63_227");
+	disablenpc instance_npcname("ep20_120cn2_64_224");
+	disablenpc instance_npcname("ep20_120cn2_52_221_B");
+
+	if ('step >= 10) {
+		enablenpc instance_npcname("ep20_120cn2_96_65");
+		enablenpc instance_npcname("ep20_120cn2_98_63");
+	}
+	else {
+		enablenpc instance_npcname("ep20_120cn2_107_65");
+		enablenpc instance_npcname("ep20_120cn2_109_63");
+	}
+	end;
+
+OnTouch:
+	npctalk "레하르 : 음? 고양이가 또 멈췄어요.";
+	end;
+}
+
+
+// Step 8, 9
+1@20cn2,109,63,3	script(DISABLED)	레하르#ep20MD_re05::ep20_120cn2_109_63	4_EP19_LEHAR,{
+	npctalk "레하르 : 뛰죠!";
+	end;
+}
+
+1@20cn2,107,65,3	script(DISABLED)	고양이#ep20MD_re04::ep20_120cn2_107_65	EP20_NPC_NYAR,2,2,{
+	if ('step < 8)
+		end;
+	if ('step == 8) {
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "야아아아옹.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "좋아요. 살금살금 갑시다. 살금살금…….";
+		next;
+		cutin "",255;
+		mapannounce 'map_20cn2$, "경보 : 비상! 비상 사태다!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "경보 : 얼음성의 잔당들이 탈출했다!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "경보 : 모두 제자리로! 경계를 강화하라!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mes "[르간]";
+		mes "갑자기 이게 무슨 소리야?";
+		mes "뭐가 탈출했다고?";
+		next;
+		mes "[르간]";
+		mes "경계 태세! 모두 자리로 가!";
+		mes "그 녀석들은 우리로 변신할 수 있다! 서로를 감시하고 못 보던 녀석이 있다면 신고해!";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "으으, 역시 대비가 되어있군요. 어떡하죠?!";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[하얀 고양이]";
+		mes "냥냥냐얔!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "고양이가 움직이기 시작했어요! 우악! 얼른 따라가 봐요!";
+		close2;
+		cutin "",255;
+		if ('step == 8) {
+			'step = 9;
+			disablenpc instance_npcname("ep20_120cn2_109_63");
+			donpcevent instance_npcname("ep20_120cn2_107_65") + "::OnStart";
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	npctalk "고양이 : 이야아아아아아아앙.";
+	end;
+
+OnStart:
+	npcspeed 200;
+	unitwalk getnpcid(0),96,65, instance_npcname("ep20_120cn2_107_65") + "::OnMove";
+	end;
+OnMove:
+	'step = 10;
+	disablenpc();
+	enablenpc instance_npcname("ep20_120cn2_96_65");
+	enablenpc instance_npcname("ep20_120cn2_98_63");
+	end;
+}
+
+
+// Step 10
+1@20cn2,95,60,5	duplicate(dummy_disabled_npc)	르간#ep20MD_re06::ep20_120cn2_95_60	4_EP19_RGAN_SR3
+1@20cn2,94,64,1	duplicate(dummy_disabled_npc)	르간#ep20MD_re07::ep20_120cn2_94_64	4_EP19_RGAN_SR1
+1@20cn2,92,62,7	duplicate(dummy_disabled_npc)	르간#ep20MD_re05::ep20_120cn2_92_62	4_EP19_RGAN_SR2
+
+1@20cn2,98,63,3	script(DISABLED)	레하르#ep20MD_re05_1::ep20_120cn2_98_63	4_EP19_LEHAR,{
+	npctalk "레하르 : 고양아! 고양이님!";
+	end;
+}
+
+1@20cn2,96,65,3	script(DISABLED)	고양이#ep20MD_re04_1::ep20_120cn2_96_65	EP20_NPC_NYAR,{
+	if ('step < 10)
+		end;
+	if ('step == 10) {
+		enablenpc instance_npcname("ep20_120cn2_95_60");
+		enablenpc instance_npcname("ep20_120cn2_94_64");
+		enablenpc instance_npcname("ep20_120cn2_92_62");
+		select( "저기 누가 오는데?!" );
+		npctalk "르간 : 도망친 놈들이라는 거, 어디 있는 걸까?", instance_npcname("ep20_120cn2_92_62");
+		sleep2 500;
+		npctalk "르간 : 설마 근처에 숨어있지는 않겠지. 으으, 오싹해라.", instance_npcname("ep20_120cn2_95_60");
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "그러게요! 고양아! 저기 누가 오는데!?";
+		mes "고양아! 고양이님! 이대로라면 들킬 텐데!!";
+		next;
+		npctalk "르간 : 찾으면 혼쭐을 내 줘야지.", instance_npcname("ep20_120cn2_92_62");
+		sleep2 500;
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_92_62");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_95_60");
+		npctalk "르간 : 우리가 찾으면 라스간드님께 칭찬을 받을지도 몰라!", instance_npcname("ep20_120cn2_94_64");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_94_64");
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "…….";
+		next;
+		npctalk "르간 : 그러니까 의심가는 녀석들은 놓치지 말자고.", instance_npcname("ep20_120cn2_94_64");
+		sleep2 500;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "어라?";
+		mes "우, 우릴 못 보는 것 같아요.";
+		next;
+		disablenpc instance_npcname("ep20_120cn2_92_62");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_92_62");
+		disablenpc instance_npcname("ep20_120cn2_95_60");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_95_60");
+		disablenpc instance_npcname("ep20_120cn2_94_64");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_94_64");
+		cutin "ep19_lehar06.png",2;
+		mes "[레하르]";
+		mes "이, 이것도 고양이의 능력일까요? 아까 자물쇠를 부순 것처럼?";
+		next;
+		cutin "",255;
+		select( "얼른 오라는 것 같은데" );
+		cutin "ep19_lehar06.png",2;
+		mes "[레하르]";
+		mes "아이쿠, 옷 뜯어지겠어요. 그만 잡아당겨, 고양아!";
+		mes "오래 가는 능력은 아닌가봐요. ";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "그래도 덕분에 살았네요. 너 정말 유능하다.";
+		mes "어디서 이런 똑똑이가 나타났담?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[하얀 고양이]";
+		mes "(우쭐한 듯 턱을 치켜들고 꼬리를 빳빳이 세우더니, 다시 달리기 시작한다)";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "아, 얼른 따라가요!";
+		close2;
+		cutin "",255;
+		disablenpc();
+		disablenpc instance_npcname("ep20_120cn2_98_63");
+		navigateto("1@20cn2",33,14);
+		if ('step == 10) {
+			'step = 11;
+			enablenpc instance_npcname("ep20_120cn2_34_20");
+			enablenpc instance_npcname("ep20_120cn2_32_22");
+			enablenpc instance_npcname("#ep20MD_re02");
+		}
+		end;
+	}
+	cutin "ep19_lehar05.png",2;
+	mes "[레하르]";
+	mes "아, 얼른 따라가요!";
+	close2;
+	cutin "",255;
+	disablenpc();
+	disablenpc instance_npcname("ep20_120cn2_98_63");
+	navigateto("1@20cn2",33,14);
+	enablenpc instance_npcname("ep20_120cn2_34_20");
+	enablenpc instance_npcname("ep20_120cn2_32_22");
+	enablenpc instance_npcname("#ep20MD_re02");
+	end;
+}
+
+
+// Step 11
+1@20cn2,34,20,5	script(DISABLED)	고양이#ep20MD_re05::ep20_120cn2_34_20	EP20_NPC_NYAR,{
+	npctalk "고양이 : 이야앙.";
+	end;
+}
+
+1@20cn2,32,22,5	script(DISABLED)	레하르#ep20MD_re06::ep20_120cn2_32_22	4_EP19_LEHAR,2,2,{
+	if ('step == 11) {
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "여긴…….";
+		mes "이 문, 어디서 본 것 같지 않아요?";
+		next;
+		cutin "",255;
+		select( "뱀의 둥지 가장 안쪽" );
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "그렇지요! 드디어 탈출할 수 있을 것 같아요.";
+		mes "어디 보자……, 음! 좋아요. 안쪽에서는 어렵지 않게 열 수 있게 되어 있어요.";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아옹~";
+		next;
+		cutin "",255;
+		select( "정말 고맙다." );
+		emotion ET_THROB;
+		sleep2 500;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "그러게. 정말 고마워, 이름도 모르는 고양아.";
+		mes "덕분에 무사히 여기까지 왔어.";
+		next;
+		emotion ET_BIGTHROB;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "혹시 갈 곳이 없다면 우리랑 같이 갈래?";
+		mes "얼음성에 집을 마련해 줄게.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[하얀 고양이]";
+		mes "이야앙.";
+		next;
+		cutin "ep19_lehar07.png",2;
+		mes "[레하르]";
+		mes "얘 방금 고개 젓지 않았어요? 우연인가? 정말 말을 알아들은 걸까요?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "뭐, 우연이겠지요.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "뱀의 둥지에는 아직 활동중인 우리 쪽 사람들도 있을 거예요.";
+		mes "얼른 가봐요!";
+		if ('step == 11)
+			'step = 12;
+		close3;
+	}
+	if ('step == 12) {
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "뱀의 둥지에는 아직 활동중인 우리 쪽 사람들도 있을 거예요.";
+		mes "얼른 가봐요!";
+		close3;
+	}
+	end;
+
+OnTouch:
+	npctalk "레하르 : 아앗, 여기 좀 보세요!";
+	end;
+}
+
+
+// Step 12
+1@20cn2,31,19,5	duplicate(dummy_disabled_npc)	라스간드#ep20MD_re03::ep20_120cn2_31_19	EP20_NPC_LASGAND
+1@20cn2,30,21,5	duplicate(dummy_disabled_npc)	바곳#ep20MD_re03::ep20_120cn2_30_21	4_EP18_BAGOT
+
+1@20cn2,33,15,0	script(DISABLED)	#ep20MD_re02	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('step < 12)
+		end;
+	if ('step == 12) {
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "이리로 나가 봐요. 어서요!";
+		next;
+		cutin "",255;
+		select( "그러도록 하자." );
+		disablenpc instance_npcname("ep20_120cn2_34_20");
+		sleep2 500;
+		disablenpc instance_npcname("ep20_120cn2_32_22");
+		specialeffect2 EF_CLOAKING3;
+		mes "…….";
+		next;
+		mes "………….";
+		next;
+		mes "………………";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_31_19");
+		sleep2 500;
+		enablenpc instance_npcname("ep20_120cn2_30_21");
+		npctalk "바곳 : 찾았습니다, 라스간드 님.", instance_npcname("ep20_120cn2_30_21");
+		emotion ET_THINK, getnpcid(0, instance_npcname("ep20_120cn2_30_21"));
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "여기까지 흔적이 이어져 있군요.";
+		mes "이건 뱀의 둥지로 가는 문.";
+		next;
+		mes "[바곳]";
+		mes "과연, 열려 있습니다.";
+		next;
+		cutin "ep20_lasgand02.png",1;
+		mes "[라스간드]";
+		mes "이리로 드나든 게 확실하군.";
+		mes "여기까지 들키지 않고 나오다니. 그것도 이 마력 흔적의 주인이 가진 능력인가?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "이 마력……, 설마 그 모험가와 함께 잡았던 보라색 머리카락의 성직자인 걸까요.";
+		mes "아니면 다른 조력자가 있었던 걸까요.";
+		next;
+		cutin "ep20_lasgand02.png",1;
+		mes "[라스간드]";
+		mes "다른 조력자라. 그런 불쾌한 가정은 하고 싶지 않지만.";
+		mes "그러나 고려해봐야 하겠군. 평범한 미물이라면 보일 수 없는 능력들을 보였으니.";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "예에. 그렇군요.";
+		mes "여기의 문은 잠그고 경비를 강화하도록 할까요?";
+		next;
+		cutin "ep20_lasgand04.png",1;
+		mes "[라스간드]";
+		mes "그럴 필요 없다. 오히려 미끼로 삼도록 하지.";
+		mes "문은 열어둬라. 언제든 그들이 돌아올 수 있도록 해.";
+		next;
+		mes "[라스간드]";
+		mes "그 녀석들은 반드시 다시 돌아온다.";
+		mes "그때 붙잡아서 내 앞에 무릎꿇리리라.";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[라스간드]";
+		mes "나를 능멸한 대가를 치르게 해 주지.";
+		mes "반드시 잡아서 데려다놓도록.";
+		if (ep20_main == 9) {
+			ep20_main = 10;
+			erasequest 16701;
+			setquest 16702;
+		}
+		if ('step == 12)
+			'step = 13;
+		close2;
+		warp "icecastle",22,123;
+		end;
+	}
+	warp "icecastle",22,123;
+	end;
+}

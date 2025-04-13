@@ -1,96 +1,86 @@
 //===== rAthena Script ======================================= 
 //= Elemental Stone Trader
 //===== By: ================================================== 
-//= rAthena Team & MasterOfMuppets
-//===== Current Version: ===================================== 
-//= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Trade impure types of elemental stones for pure ones.
-//===== Additional Comments: ================================= 
-//= 1.0 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//= 1.1 Optimized. [Euphy]
+//한글번역 스카이러브
 //============================================================ 
 
-ama_in02,61,27,7	script	Alchemist#ama	749,{
-	mes "[Laspuchin Gregory]";
-	mes "KeekeekeeKeheheh.";
-	mes "This is amazing!";
-	mes "The results are extraordinary!!";
+ama_in02,61,27,7	script	연금술사#ama	749,{
+	mes "[라스푸친 그레고리]";
+	mes "키키키키키케케케케케.";
+	mes "정말 놀라운 일이야! 이런 실험";
+	mes "결과는 대 평생 처음이로다!!";
 	next;
-	mes "[Laspuchin Gregory]";
-	mes "Using my skills in this distant";
-	mes "land was unexpected...";
-	mes "Keheheh... The lord of palace";
-	mes "was quite accomodating.";
+	mes "[라스푸친 그레고리]";
+	mes "이런 먼 곳까지 와서 내 능력을";
+	mes "쓰게 되리라고는 상상도 못하던";
+	mes "일이지만... 케케케... 성주라는";
+	mes "녀석, 의외로  재미있는 자였어.";
 	next;
-	mes "[Laspuchin Gregory]";
-	mes "Oops, I better be careful...";
-	mes "If the guild finds out my";
-	mes "location, stupid Myster will";
-	mes "get mad at me. Kehehehkeh...";
+	mes "[라스푸친 그레고리]";
+	mes "이크, 이크, 조심해야지... 여기";
+	mes "있다는걸 조합에서 알게 된다면";
+	mes "그 빌어먹을 마이스터가 불같이";
+	mes "화를 내겠지. 케케케케...";
 	next;
-	mes "[Laspuchin Gregory]";
-	mes "What? Wanna say something?";
-	mes "If you are here for tourism,";
-	mes "enjoy your day off, then go back to your hometown.";
-	mes "Keekeekee... Or else,";
-	mes "I will let you taste my acid bottle...!";
+	mes "[라스푸친 그레고리]";
+	mes "뭐냐? 나한테 할 얘기라도 있냐?";
+	mes "관광으로 왔으면 조용히 보다가";
+	mes "고향으로 돌아가던가 해.";
+	mes "키키키... 아니면 염산병이라도";
+	mes "맛보게 해줄테다...!";
 	next;
-	if (select("Please, excuse me:Do you need help?") == 1) {
-		mes "[Laspuchin Gregory]";
-		mes "Keheheh... Did you hear";
-		mes "what I said? It would be";
-		mes "better to forget...";
-		mes "Keekeekeekeekee...";
+	if (select("실례했습니다.:도와드릴 일이라도 있을까요?") == 1) {
+		mes "[라스푸친 그레고리]";
+		mes "케케케... 뭔가 들었다면 말야,";
+		mes "조용히 잊어벼리는게 좋아...";
+		mes "그러는게 네 신상에 좋을테니...";
+		mes "키키키키키...";
 		close;
 	}
-	mes "[Laspuchin Gregory]";
-	mes "Help, eh?...";
-	mes "Now that I think about it...";
-	mes "I need some items right now...";
-	mes "Keeheeheekeehee...";
+	mes "[라스푸친 그레고리]";
+	mes "도와준다라고 했나... 흠, 그거";
+	mes "괜찮지. 지금 당장이라도 내가";
+	mes "원하는 물건들이 있으니까...";
+	mes "키키키키키...";
 	next;
-	mes "[Laspuchin Gregory]";
-	mes "Sir Laspuchin needs some";
-	mes "enchant stones for an experiment.";
-	mes "I will use it efficiently...";
-	mes "Do you have them now?";
+	mes "[라스푸친 그레고리]";
+	mes "라스푸친님께서 실험을 하시는데";
+	mes "필요한 속성석을 몇개 구해주면";
+	mes "아주 요긴하게 잘 써주실텐데...";
+	mes "혹시 지금 가지고 있는게 있나?";
 	next;
-	if (select("Nope:I got some") == 1) {
-		mes "[Laspuchin Gregory]";
-		mes "Then, find 8 stones of one kind.";
-		mes "If you bring 8 of one kind of";
-		mes "enchant stones, I will change it";
-		mes "to a better one...";
+	if (select("아니오.:몇개 있습니다.") == 1) {
+		mes "[라스푸친 그레고리]";
+		mes "그렇다면 말이지, 속성석을 아무";
+		mes "종류나 8개씩 구해와, 속성에";
+		mes "관계없이 한 종류만 구해온다면";
+		mes "내가 좋은 것으로 바꿔주지...";
 		next;
-		mes "[Laspuchin Gregory]";
-		mes "Then, find 8 stones of one kind.";
-		mes "not the round gemstones but";
-		mes "enchant stones.";
-		mes "If you bring the wrong stones,";
-		mes "I will throw a flame bottle!";
+		mes "[라스푸친 그레고리]";
+		mes "그렇다면 말이지, 속성석을 아무";
+		mes "둥그스름한 속성 원석이 아니라,";
+		mes "모양이 전부 틀린 속성석이다.";
+		mes "헷갈려서 잘못 가져오고 울거나";
+		mes "하면 발등에 화염병을 먹일테니!";
 		next;
-		mes "[Laspuchin Gregory]";
-		mes "Bring me stones, slave~!!";
-		mes "And keep your promise! Kehehehkehkeh...";
+		mes "[라스푸친 그레고리]";
+		mes "그럼 가져와! 도와준다고 했으니";
+		mes "약속을 지켜라! 케케케케케...";
 		close;
 	}
-	mes "[Laspuchin Gregory]";
-	mes "Uh-huh, what did you bring?";
+	mes "[라스푸친 그레고리]";
+	mes "호오, 어떤걸 가지고 있지?";
 	next;
 	setarray .@Items[1],995,997,994,996;
-	set .@i, .@Items[select("Mystic Frozen:Great Nature:Flame Heart:Rough Wind")];
-	mes "[Laspuchin Gregory]";
+	set .@i, .@Items[select("미스틱 프로즌:그레이트 네이쳐:프레임 하트:러프 윈드")];
+	mes "[라스푸친 그레고리]";
 	if (countitem(.@i) > 7) {
 		mes "I will take 8 of them and";
 		mes "give you an enchant stone.";
 		mes "How's that sound?";
 		mes "Keheheh.....";
 		next;
-		mes "[Laspuchin Gregory]";
+		mes "[라스푸친 그레고리]";
 		mes "HeeHee, what do you want? Choose one!";
 		next;
 		set .@menu$, "";
@@ -100,7 +90,7 @@ ama_in02,61,27,7	script	Alchemist#ama	749,{
 		}
 		set .@menu$, .@menu$+"Cancel the trade";
 		set .@j, select(.@menu$);
-		mes "[Laspuchin Gregory]";
+		mes "[라스푸친 그레고리]";
 		if (.@j == 5) {
 			mes "Oh, well.";
 			mes "Don't tell anyone about my location...";
@@ -125,7 +115,7 @@ ama_in02,61,27,7	script	Alchemist#ama	749,{
 			mes "bring me 4 more stones. 8 + 4 = 12...";
 			mes "Requires ^0000FF12^000000 stones.";
 			next;
-			mes "[Laspuchin Gregory]";
+			mes "[라스푸친 그레고리]";
 			mes "Bring me stones, slave~!!";
 			mes "And keep your promise! Kehheheheheh...";
 			close;
@@ -144,17 +134,17 @@ ama_in02,61,27,7	script	Alchemist#ama	749,{
 		mes "Bring me just 8 stones!";
 		mes "Keheheh.....";
 		next;
-		mes "[Laspuchin Gregory]";
+		mes "[라스푸친 그레고리]";
 		mes "Bring me stones, slave~!!";
 		mes "And keep your promise! Keheheheheh...";
 		close;
 	}
-	mes "Keheheh~ Check your pockets";
-	mes "before you tell me";
-	mes "how foolish you are.....";
+	mes "케케케, 어디 있는지 주머니부터";
+	mes "살펴보고 얘기해라, 멍청하게";
+	mes "어디서 잊어먹고 왔나보군.....";
 	next;
-	mes "[Laspuchin Gregory]";
-	mes "Bring me stones! You said you are going to help me!";
-	mes "Keep your promises! Kehehehkehkeh...";
+	mes "[라스푸친 그레고리]";
+	mes "다시 가져와! 도와준다고 했으니";
+	mes "약속을 지켜라! 케케케케케...";
 	close;
 }

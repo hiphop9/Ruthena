@@ -1,0 +1,2396 @@
+//=========================
+// 낙원단 챔피온 퀘스트
+//==========================
+
+moc_para01,16,33,4	script	챔피언 사냥 의뢰#ChampionHunt	4_BOARD3,{
+
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "가방이 가득 차서 의뢰를 진행할 수";
+		mes "없습니다. 가방을 정리한 뒤 다시";
+		mes "게시판을 확인해주시기 바랍니다.";
+		close;
+	}
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "- 의뢰를 받기 위해서는 -";
+		mes "- ^4d4dff'낙원단의 증표'^000000가 있어야 합니다. -";
+		close;
+	}
+	callsub QuestSettings;
+	callsub DelWaitQuest;
+
+	mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+	mes "낙원단에서 발행하는 챔피언 몬스터";
+	mes "사냥 의뢰 게시판입니다.";
+	mes "^5d7fff완료한 챔피언 몬스터 사냥 보상^000000을";
+	mes "^5d7fff한꺼번에^000000 받으려면 ^5d7fff성실한 소길^000000에게";
+	mes "문의해 주세요.";
+	next;
+	switch(select("룬 미드가츠 동부 방면:룬 미드가츠 중부 방면:룬 미드가츠 서부 방면:슈발츠발드 필드 방면:슈발츠발드 던전 방면:아루나펠츠 방면:로컬-이계 방면:열람 중지")) {
+
+	case 1:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff룬 미드가츠 동부^000000 - 프론테라, 페이욘";
+		mes "방면 챔피언 몬스터 사냥 의뢰";
+		mes "게시판입니다.";
+		next;
+		CMenu1:
+		if(BaseLevel < 10)  {
+			set .Mnu1$,"^999999[10] 떠도는 호넷^000000";
+			set .Mnu2$,"^999999[10] 떠도는 로커^000000";
+			set .Mnu3$,"^999999[10] 떠도는 엠버 나이트^000000";
+		} else {
+			if(isbegin_quest(.Q1_1_No) == 1 && checkquest(.Q1_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999떠도는 호넷-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_1_No) == 1 && checkquest(.Q1_1_No,HUNTING) == 2) {
+				set .Mnu1$,"떠도는 호넷-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_1_No2) == 1) {
+				set .Mnu1$,"^999999떠도는 호넷-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[10] 떠도는 호넷";
+			}
+			if(isbegin_quest(.Q1_2_No) == 1 && checkquest(.Q1_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999떠도는 로커-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_2_No) == 1 && checkquest(.Q1_2_No,HUNTING) == 2) {
+				set .Mnu2$,"떠도는 로커-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_2_No2) == 1) {
+				set .Mnu2$,"^999999떠도는 로커-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[10] 떠도는 로커";
+			}
+			if(isbegin_quest(.Q1_3_No) == 1 && checkquest(.Q1_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999떠도는 엠버 나이트-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_3_No) == 1 && checkquest(.Q1_3_No,HUNTING) == 2) {
+				set .Mnu3$,"떠도는 엠버 나이트-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_3_No2) == 1) {
+				set .Mnu3$,"^999999떠도는 엠버 나이트-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[10] 떠도는 엠버 나이트";
+			}
+		}
+		if(BaseLevel < 20)  {
+			set .Mnu4$,"^999999[20] 두목 무카^000000";
+			set .Mnu5$,"^999999[20] 두목 빅풋^000000";
+		} else {
+			if(isbegin_quest(.Q1_4_No) == 1 && checkquest(.Q1_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999두목 무카-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_4_No) == 1 && checkquest(.Q1_4_No,HUNTING) == 2) {
+				set .Mnu4$,"두목 무카-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_4_No2) == 1) {
+				set .Mnu4$,"^999999두목 무카-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[20] 두목 무카";
+			}
+			if(isbegin_quest(.Q1_5_No) == 1 && checkquest(.Q1_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999두목 빅풋-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_5_No) == 1 && checkquest(.Q1_5_No,HUNTING) == 2) {
+				set .Mnu5$,"두목 빅풋-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_5_No2) == 1) {
+				set .Mnu5$,"^999999두목 빅풋-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[20] 두목 빅풋";
+			}
+		}
+		if(BaseLevel < 30)  {
+			set .Mnu6$,"^999999[30] 튼튼한 호른^000000";
+			set .Mnu7$,"^999999[30] 빠른 엘더 윌로우^000000";
+			set .Mnu8$,"^999999[30] 튼튼한 코코^000000";
+			set .Mnu9$,"^999999[30] 빠른 요요^000000";
+		} else {
+			if(isbegin_quest(.Q1_6_No) == 1 && checkquest(.Q1_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999튼튼한 호른-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_6_No) == 1 && checkquest(.Q1_6_No,HUNTING) == 2) {
+				set .Mnu6$,"튼튼한 호른-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_6_No2) == 1) {
+				set .Mnu6$,"^999999튼튼한 호른-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[30] 튼튼한 호른";
+			}
+			if(isbegin_quest(.Q1_7_No) == 1 && checkquest(.Q1_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999빠른 엘더 윌로우-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_7_No) == 1 && checkquest(.Q1_7_No,HUNTING) == 2) {
+				set .Mnu7$,"빠른 엘더 윌로우-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_7_No2) == 1) {
+				set .Mnu7$,"^999999빠른 엘더 윌로우-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[30] 빠른 엘더 윌로우";
+			}
+			if(isbegin_quest(.Q1_8_No) == 1 && checkquest(.Q1_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999튼튼한 코코-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_8_No) == 1 && checkquest(.Q1_8_No,HUNTING) == 2) {
+				set .Mnu8$,"튼튼한 코코-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_8_No2) == 1) {
+				set .Mnu8$,"^999999튼튼한 코코-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[30] 튼튼한 코코";
+			}
+			if(isbegin_quest(.Q1_9_No) == 1 && checkquest(.Q1_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999빠른 요요-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_9_No) == 1 && checkquest(.Q1_9_No,HUNTING) == 2) {
+				set .Mnu9$,"빠른 요요-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_9_No2) == 1) {
+				set .Mnu9$,"^999999빠른 요요-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[30] 빠른 요요";
+			}
+		}
+		if(BaseLevel < 40)  {
+			set .Mnu10$,"^999999[40] 떠도는 백련옥^000000";
+		} else {
+			if(isbegin_quest(.Q1_10_No) == 1 && checkquest(.Q1_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999떠도는 백련옥-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q1_10_No) == 1 && checkquest(.Q1_10_No,HUNTING) == 2) {
+				set .Mnu10$,"떠도는 백련옥-보상 대기중";
+			}
+			else if(isbegin_quest(.Q1_10_No2) == 1) {
+				set .Mnu10$,"^999999떠도는 백련옥-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[40] 떠도는 백련옥";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,10,.Q1_1_No,.Q1_1_No2,.Q1_1_Mob,.Q1_1_Kill,.Q1_1_Exp,.Q1_1_Jexp,.Q1_1_Item,.Q1_1_ItemAmount;
+			goto CMenu1;
+		case 2:
+			callsub QuestSelMenu,10,.Q1_2_No,.Q1_2_No2,.Q1_2_Mob,.Q1_2_Kill,.Q1_2_Exp,.Q1_2_Jexp,.Q1_2_Item,.Q1_2_ItemAmount;
+			goto CMenu1;
+		case 3:
+			callsub QuestSelMenu,10,.Q1_3_No,.Q1_3_No2,.Q1_3_Mob,.Q1_3_Kill,.Q1_3_Exp,.Q1_3_Jexp,.Q1_3_Item,.Q1_3_ItemAmount;
+			goto CMenu1;
+		case 4:
+			callsub QuestSelMenu,20,.Q1_4_No,.Q1_4_No2,.Q1_4_Mob,.Q1_4_Kill,.Q1_4_Exp,.Q1_4_Jexp,.Q1_4_Item,.Q1_4_ItemAmount;
+			goto CMenu1;
+		case 5:
+			callsub QuestSelMenu,20,.Q1_5_No,.Q1_5_No2,.Q1_5_Mob,.Q1_5_Kill,.Q1_5_Exp,.Q1_5_Jexp,.Q1_5_Item,.Q1_5_ItemAmount;
+			goto CMenu1;
+		case 6:
+			callsub QuestSelMenu,30,.Q1_6_No,.Q1_6_No2,.Q1_6_Mob,.Q1_6_Kill,.Q1_6_Exp,.Q1_6_Jexp,.Q1_6_Item,.Q1_6_ItemAmount;
+			goto CMenu1;
+		case 7:
+			callsub QuestSelMenu,30,.Q1_7_No,.Q1_7_No2,.Q1_7_Mob,.Q1_7_Kill,.Q1_7_Exp,.Q1_7_Jexp,.Q1_7_Item,.Q1_7_ItemAmount;
+			goto CMenu1;
+		case 8:
+			callsub QuestSelMenu,30,.Q1_8_No,.Q1_8_No2,.Q1_8_Mob,.Q1_8_Kill,.Q1_8_Exp,.Q1_8_Jexp,.Q1_8_Item,.Q1_8_ItemAmount;
+			goto CMenu1;
+		case 9:
+			callsub QuestSelMenu,30,.Q1_9_No,.Q1_9_No2,.Q1_9_Mob,.Q1_9_Kill,.Q1_9_Exp,.Q1_9_Jexp,.Q1_9_Item,.Q1_9_ItemAmount;
+			goto CMenu1;
+		case 10:
+			callsub QuestSelMenu,40,.Q1_10_No,.Q1_10_No2,.Q1_10_Mob,.Q1_10_Kill,.Q1_10_Exp,.Q1_10_Jexp,.Q1_10_Item,.Q1_10_ItemAmount;
+			goto CMenu1;
+		case 11:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 2:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff룬 미드가츠 중부^000000 - 게펜, 오크 마을,";
+		mes "글래스트 헤임 방면 챔피언 몬스터";
+		mes "사냥 의뢰 게시판입니다.";
+		next;
+		CMenu2:
+		if(BaseLevel < 40)  {
+			set .Mnu1$,"^999999[40] 분노의 오크 워리어^000000";
+			set .Mnu2$,"^999999[40] 빠른 고블린^000000";
+			set .Mnu3$,"^999999[40] 떠도는 고블린^000000";
+		} else {
+			if(isbegin_quest(.Q2_1_No) == 1 && checkquest(.Q2_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999분노의 오크 워리어-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_1_No) == 1 && checkquest(.Q2_1_No,HUNTING) == 2) {
+				set .Mnu1$,"분노의 오크 워리어-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_1_No2) == 1) {
+				set .Mnu1$,"^999999분노의 오크 워리어-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[40] 분노의 오크 워리어";
+			}
+			if(isbegin_quest(.Q2_2_No) == 1 && checkquest(.Q2_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999빠른 고블린-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_2_No) == 1 && checkquest(.Q2_2_No,HUNTING) == 2) {
+				set .Mnu2$,"빠른 고블린-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_2_No2) == 1) {
+				set .Mnu2$,"^999999빠른 고블린-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[40] 빠른 고블린";
+			}
+			if(isbegin_quest(.Q2_3_No) == 1 && checkquest(.Q2_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999떠도는 고블린-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_3_No) == 1 && checkquest(.Q2_3_No,HUNTING) == 2) {
+				set .Mnu3$,"떠도는 고블린-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_3_No2) == 1) {
+				set .Mnu3$,"^999999떠도는 고블린-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[40] 떠도는 고블린 나이트";
+			}
+		}
+		if(BaseLevel < 75)  {
+			set .Mnu4$,"^999999[75] 빠른 쁘띠^000000";
+			set .Mnu5$,"^999999[75] 튼튼한 쁘띠^000000";
+		} else {
+			if(isbegin_quest(.Q2_4_No) == 1 && checkquest(.Q2_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999빠른 쁘띠-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_4_No) == 1 && checkquest(.Q2_4_No,HUNTING) == 2) {
+				set .Mnu4$,"빠른 쁘띠-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_4_No2) == 1) {
+				set .Mnu4$,"^999999빠른 쁘띠-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[75] 빠른 쁘띠";
+			}
+			if(isbegin_quest(.Q2_5_No) == 1 && checkquest(.Q2_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999튼튼한 쁘띠-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_5_No) == 1 && checkquest(.Q2_5_No,HUNTING) == 2) {
+				set .Mnu5$,"튼튼한 쁘띠-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_5_No2) == 1) {
+				set .Mnu5$,"^999999튼튼한 쁘띠-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[75] 튼튼한 쁘띠";
+			}
+		}
+		if(BaseLevel < 100)  {
+			set .Mnu6$,"^999999[100] 떠도는 캐럿^000000";
+			set .Mnu7$,"^999999[100] 분노의 메이저우로스^000000";
+		} else {
+			if(isbegin_quest(.Q2_6_No) == 1 && checkquest(.Q2_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999떠도는 캐럿-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_6_No) == 1 && checkquest(.Q2_6_No,HUNTING) == 2) {
+				set .Mnu6$,"떠도는 캐럿-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_6_No2) == 1) {
+				set .Mnu6$,"^999999떠도는 캐럿-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[100] 떠도는 캐럿";
+			}
+			if(isbegin_quest(.Q2_7_No) == 1 && checkquest(.Q2_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999분노의 메이저우로스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_7_No) == 1 && checkquest(.Q2_7_No,HUNTING) == 2) {
+				set .Mnu7$,"분노의 메이저우로스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_7_No2) == 1) {
+				set .Mnu7$,"^999999분노의 메이저우로스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[100] 분노의 메이저우로스";
+			}
+		}
+		if(BaseLevel < 110)  {
+			set .Mnu8$,"^999999[110] 튼튼한 레이드릭^000000";
+			set .Mnu9$,"^999999[110] 빠른 레이드릭^000000";
+			set .Mnu10$,"^999999[110] 분노의 배회하는 자^000000";
+		} else {
+			if(isbegin_quest(.Q2_8_No) == 1 && checkquest(.Q2_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999튼튼한 레이드릭-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_8_No) == 1 && checkquest(.Q2_8_No,HUNTING) == 2) {
+				set .Mnu8$,"튼튼한 레이드릭-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_8_No2) == 1) {
+				set .Mnu8$,"^999999튼튼한 레이드릭-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[110] 튼튼한 레이드릑";
+			}
+			if(isbegin_quest(.Q2_9_No) == 1 && checkquest(.Q2_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999빠른 레이드릭-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_9_No) == 1 && checkquest(.Q2_9_No,HUNTING) == 2) {
+				set .Mnu9$,"빠른 레이드릭-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_9_No2) == 1) {
+				set .Mnu9$,"^999999빠른 레이드릭-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[110] 빠른 레이드릭";
+			}
+			if(isbegin_quest(.Q2_10_No) == 1 && checkquest(.Q2_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999분노의 배회하는 자-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q2_10_No) == 1 && checkquest(.Q2_10_No,HUNTING) == 2) {
+				set .Mnu10$,"분노의 배회하는 자-보상 대기중";
+			}
+			else if(isbegin_quest(.Q2_10_No2) == 1) {
+				set .Mnu10$,"^999999분노의 배회하는 자-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[110] 분노의 배회하는 자";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,40,.Q2_1_No,.Q2_1_No2,.Q2_1_Mob,.Q2_1_Kill,.Q2_1_Exp,.Q2_1_Jexp,.Q2_1_Item,.Q2_1_ItemAmount;
+			goto CMenu2;
+		case 2:
+			callsub QuestSelMenu,40,.Q2_2_No,.Q2_2_No2,.Q2_2_Mob,.Q2_2_Kill,.Q2_2_Exp,.Q2_2_Jexp,.Q2_2_Item,.Q2_2_ItemAmount;
+			goto CMenu2;
+		case 3:
+			callsub QuestSelMenu,40,.Q2_3_No,.Q2_3_No2,.Q2_3_Mob,.Q2_3_Kill,.Q2_3_Exp,.Q2_3_Jexp,.Q2_3_Item,.Q2_3_ItemAmount;
+			goto CMenu2;
+		case 4:
+			callsub QuestSelMenu,75,.Q2_4_No,.Q2_4_No2,.Q2_4_Mob,.Q2_4_Kill,.Q2_4_Exp,.Q2_4_Jexp,.Q2_4_Item,.Q2_4_ItemAmount;
+			goto CMenu2;
+		case 5:
+			callsub QuestSelMenu,75,.Q2_5_No,.Q2_5_No2,.Q2_5_Mob,.Q2_5_Kill,.Q2_5_Exp,.Q2_5_Jexp,.Q2_5_Item,.Q2_5_ItemAmount;
+			goto CMenu2;
+		case 6:
+			callsub QuestSelMenu,100,.Q2_6_No,.Q2_6_No2,.Q2_6_Mob,.Q2_6_Kill,.Q2_6_Exp,.Q2_6_Jexp,.Q2_6_Item,.Q2_6_ItemAmount;
+			goto CMenu2;
+		case 7:
+			callsub QuestSelMenu,100,.Q2_7_No,.Q2_7_No2,.Q2_7_Mob,.Q2_7_Kill,.Q2_7_Exp,.Q2_7_Jexp,.Q2_7_Item,.Q2_7_ItemAmount;
+			goto CMenu2;
+		case 8:
+			callsub QuestSelMenu,110,.Q2_8_No,.Q2_8_No2,.Q2_8_Mob,.Q2_8_Kill,.Q2_8_Exp,.Q2_8_Jexp,.Q2_8_Item,.Q2_8_ItemAmount;
+			goto CMenu2;
+		case 9:
+			callsub QuestSelMenu,110,.Q2_9_No,.Q2_9_No2,.Q2_9_Mob,.Q2_9_Kill,.Q2_9_Exp,.Q2_9_Jexp,.Q2_9_Item,.Q2_9_ItemAmount;
+			goto CMenu2;
+		case 10:
+			callsub QuestSelMenu,110,.Q2_10_No,.Q2_10_No2,.Q2_10_Mob,.Q2_10_Kill,.Q2_10_Exp,.Q2_10_Jexp,.Q2_10_Item,.Q2_10_ItemAmount;
+			goto CMenu2;
+		case 11:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 3:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff룬 미드가츠 서부^000000 - 코모도, 무명섬,";
+		mes "방면 챔피언 몬스터 사냥 의뢰";
+		mes "게시판입니다.";
+		next;
+		CMenu3:
+		if(BaseLevel < 50)  {
+			set .Mnu1$,"^999999[50] 분노의 샌드맨^000000";
+		} else {
+			if(isbegin_quest(.Q3_1_No) == 1 && checkquest(.Q3_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999분노의 샌드맨-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_1_No) == 1 && checkquest(.Q3_1_No,HUNTING) == 2) {
+				set .Mnu1$,"분노의 샌드맨-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_1_No2) == 1) {
+				set .Mnu1$,"^999999분노의 샌드맨-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[50] 분노의 샌드맨";
+			}
+		}
+		if(BaseLevel < 60)  {
+			set .Mnu2$,"^999999[60] 빠른 퍼씰^000000";
+			set .Mnu3$,"^999999[60] 떠도는 그로브^000000";
+			set .Mnu4$,"^999999[60] 튼튼한 엘리게이터^000000";
+			set .Mnu5$,"^999999[60] 분노의 우탄파이터^000000";
+			set .Mnu6$,"^999999[60] 빠른 드라이어드^000000";
+		} else {
+			if(isbegin_quest(.Q3_2_No) == 1 && checkquest(.Q3_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999빠른 퍼씰-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_2_No) == 1 && checkquest(.Q3_2_No,HUNTING) == 2) {
+				set .Mnu2$,"빠른 퍼씰-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_2_No2) == 1) {
+				set .Mnu2$,"^999999빠른 퍼씰린-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[60] 빠른 퍼씰";
+			}
+			if(isbegin_quest(.Q3_3_No) == 1 && checkquest(.Q3_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999떠도는 그로브-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_3_No) == 1 && checkquest(.Q3_3_No,HUNTING) == 2) {
+				set .Mnu3$,"떠도는 그로브-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_3_No2) == 1) {
+				set .Mnu3$,"^999999떠도는 그로브-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[60] 떠도는 그로브";
+			}
+			if(isbegin_quest(.Q3_4_No) == 1 && checkquest(.Q3_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999튼튼한 엘리게이터-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_4_No) == 1 && checkquest(.Q3_4_No,HUNTING) == 2) {
+				set .Mnu4$,"튼튼한 엘리게이터-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_4_No2) == 1) {
+				set .Mnu4$,"^999999튼튼한 엘리게이터-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[60] 튼튼한 엘리게이터";
+			}
+			if(isbegin_quest(.Q3_5_No) == 1 && checkquest(.Q3_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999분노의 우탄파이터-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_5_No) == 1 && checkquest(.Q3_5_No,HUNTING) == 2) {
+				set .Mnu5$,"분노의 우탄파이터-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_5_No2) == 1) {
+				set .Mnu5$,"^999999분노의 우탄파이터-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[60] 분노의 우탄파이터";
+			}
+			if(isbegin_quest(.Q3_6_No) == 1 && checkquest(.Q3_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999빠른 드라이어드-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_6_No) == 1 && checkquest(.Q3_6_No,HUNTING) == 2) {
+				set .Mnu6$,"빠른 드라이어드-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_6_No2) == 1) {
+				set .Mnu6$,"^999999빠른 드라이어드-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[60] 빠른 드라이어드";
+			}
+		}
+		if(BaseLevel < 120)  {
+			set .Mnu7$,"^999999[120] 빠른 좀비 슬러터^000000";
+			set .Mnu8$,"^999999[120] 빠른 밴시^000000";
+			set .Mnu9$,"^999999[120] 두목 네크로맨서^000000";
+		} else {
+			if(isbegin_quest(.Q3_7_No) == 1 && checkquest(.Q3_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999빠른 좀비 슬러터-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_7_No) == 1 && checkquest(.Q3_7_No,HUNTING) == 2) {
+				set .Mnu7$,"빠른 좀비 슬러터-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_7_No2) == 1) {
+				set .Mnu7$,"^999999빠른 좀비 슬러터-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[120] 빠른 좀비 슬러터";
+			}
+			if(isbegin_quest(.Q3_8_No) == 1 && checkquest(.Q3_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999빠른 밴시-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_8_No) == 1 && checkquest(.Q3_8_No,HUNTING) == 2) {
+				set .Mnu8$,"빠른 밴시-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_8_No2) == 1) {
+				set .Mnu8$,"^999999빠른 밴시-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[120] 빠른 밴시";
+			}
+			if(isbegin_quest(.Q3_9_No) == 1 && checkquest(.Q3_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999두목 네크로맨서-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q3_9_No) == 1 && checkquest(.Q3_9_No,HUNTING) == 2) {
+				set .Mnu9$,"두목 네크로맨서-보상 대기중";
+			}
+			else if(isbegin_quest(.Q3_9_No2) == 1) {
+				set .Mnu9$,"^999999두목 네크로맨서-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[120] 두목 네크로맨서";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,50,.Q3_1_No,.Q3_1_No2,.Q3_1_Mob,.Q3_1_Kill,.Q3_1_Exp,.Q3_1_Jexp,.Q3_1_Item,.Q3_1_ItemAmount;
+			goto CMenu3;
+		case 2:
+			callsub QuestSelMenu,60,.Q3_2_No,.Q3_2_No2,.Q3_2_Mob,.Q3_2_Kill,.Q3_2_Exp,.Q3_2_Jexp,.Q3_2_Item,.Q3_2_ItemAmount;
+			goto CMenu3;
+		case 3:
+			callsub QuestSelMenu,60,.Q3_3_No,.Q3_3_No2,.Q3_3_Mob,.Q3_3_Kill,.Q3_3_Exp,.Q3_3_Jexp,.Q3_3_Item,.Q3_3_ItemAmount;
+			goto CMenu3;
+		case 4:
+			callsub QuestSelMenu,60,.Q3_4_No,.Q3_4_No2,.Q3_4_Mob,.Q3_4_Kill,.Q3_4_Exp,.Q3_4_Jexp,.Q3_4_Item,.Q3_4_ItemAmount;
+			goto CMenu3;
+		case 5:
+			callsub QuestSelMenu,60,.Q3_5_No,.Q3_5_No2,.Q3_5_Mob,.Q3_5_Kill,.Q3_5_Exp,.Q3_5_Jexp,.Q3_5_Item,.Q3_5_ItemAmount;
+			goto CMenu3;
+		case 6:
+			callsub QuestSelMenu,60,.Q3_6_No,.Q3_6_No2,.Q3_6_Mob,.Q3_6_Kill,.Q3_6_Exp,.Q3_6_Jexp,.Q3_6_Item,.Q3_6_ItemAmount;
+			goto CMenu3;
+		case 7:
+			callsub QuestSelMenu,120,.Q3_7_No,.Q3_7_No2,.Q3_7_Mob,.Q3_7_Kill,.Q3_7_Exp,.Q3_7_Jexp,.Q3_7_Item,.Q3_7_ItemAmount;
+			goto CMenu3;
+		case 8:
+			callsub QuestSelMenu,120,.Q3_8_No,.Q3_8_No2,.Q3_8_Mob,.Q3_8_Kill,.Q3_8_Exp,.Q3_8_Jexp,.Q3_8_Item,.Q3_8_ItemAmount;
+			goto CMenu3;
+		case 9:
+			callsub QuestSelMenu,120,.Q3_9_No,.Q3_9_No2,.Q3_9_Mob,.Q3_9_Kill,.Q3_9_Exp,.Q3_9_Jexp,.Q3_9_Item,.Q3_9_ItemAmount;
+			goto CMenu3;
+		case 10:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 4:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff슈발츠발드 필드^000000 방면 챔피언 몬스터";
+		mes "사냥 의뢰 게시판입니다.";
+		next;
+		CMenu4:
+		if(BaseLevel < 40)  {
+			set .Mnu1$,"^999999[40] 빠른 조개^000000";
+		} else {
+			if(isbegin_quest(.Q4_1_No) == 1 && checkquest(.Q4_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999빠른 조개-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_1_No) == 1 && checkquest(.Q4_1_No,HUNTING) == 2) {
+				set .Mnu1$,"빠른 조개-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_1_No2) == 1) {
+				set .Mnu1$,"^999999빠른 조개-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[40] 빠른 조개";
+			}
+		}
+		if(BaseLevel < 70)  {
+			set .Mnu2$,"^999999[70] 튼튼한 지오그래퍼^000000";
+			set .Mnu3$,"^999999[70] 두목 그랜드 페코^000000";
+			set .Mnu4$,"^999999[70] 두목 고우트^000000";
+			set .Mnu5$,"^999999[70] 빠른 슬리퍼^000000";
+		} else {
+			if(isbegin_quest(.Q4_2_No) == 1 && checkquest(.Q4_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999튼튼한 지오그래퍼-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_2_No) == 1 && checkquest(.Q4_2_No,HUNTING) == 2) {
+				set .Mnu2$,"튼튼한 지오그래퍼-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_2_No2) == 1) {
+				set .Mnu2$,"^999999튼튼한 지오그래퍼-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[70] 튼튼한 지오그래퍼";
+			}
+			if(isbegin_quest(.Q4_3_No) == 1 && checkquest(.Q4_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999두목 그랜드 페코-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_3_No) == 1 && checkquest(.Q4_3_No,HUNTING) == 2) {
+				set .Mnu3$,"두목 그랜드 페코-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_3_No2) == 1) {
+				set .Mnu3$,"^999999두목 그랜드 페코-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[70] 두목 그랜드 페코";
+			}
+			if(isbegin_quest(.Q4_4_No) == 1 && checkquest(.Q4_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999두목 고우트-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_4_No) == 1 && checkquest(.Q4_4_No,HUNTING) == 2) {
+				set .Mnu4$,"두목 고우트-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_4_No2) == 1) {
+				set .Mnu4$,"^999999두목 고우트-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[70] 두목 고우트";
+			}
+			if(isbegin_quest(.Q4_5_No) == 1 && checkquest(.Q4_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999빠른 슬리퍼-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_5_No) == 1 && checkquest(.Q4_5_No,HUNTING) == 2) {
+				set .Mnu5$,"빠른 슬리퍼-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_5_No2) == 1) {
+				set .Mnu5$,"^999999빠른 슬리퍼-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[70] 빠른 슬리퍼";
+			}
+		}
+		if(BaseLevel < 80)  {
+			set .Mnu6$,"^999999[80] 빠른 스템웜^000000";
+			set .Mnu7$,"^999999[80] 튼튼한 홀덴^000000";
+			set .Mnu8$,"^999999[80] 빠른 라플레시아^000000";
+			set .Mnu9$,"^999999[80] 두목 베노머스^000000";
+			set .Mnu10$,"^999999[80] 분노의 녹시어스^000000";
+			set .Mnu11$,"^999999[80] 떠도는 노버스^000000";
+		} else {
+			if(isbegin_quest(.Q4_6_No) == 1 && checkquest(.Q4_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999빠른 스템웜-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_6_No) == 1 && checkquest(.Q4_6_No,HUNTING) == 2) {
+				set .Mnu6$,"빠른 스템웜-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_6_No2) == 1) {
+				set .Mnu6$,"^999999빠른 스템웜-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[80] 빠른 스템웜";
+			}
+			if(isbegin_quest(.Q4_7_No) == 1 && checkquest(.Q4_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999튼튼한 홀덴-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_7_No) == 1 && checkquest(.Q4_7_No,HUNTING) == 2) {
+				set .Mnu7$,"튼튼한 홀덴-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_7_No2) == 1) {
+				set .Mnu7$,"^999999튼튼한 홀덴-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[80] 튼튼한 홀덴";
+			}
+			if(isbegin_quest(.Q4_8_No) == 1 && checkquest(.Q4_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999빠른 라플레시아-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_8_No) == 1 && checkquest(.Q4_8_No,HUNTING) == 2) {
+				set .Mnu8$,"빠른 라플레시아-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_8_No2) == 1) {
+				set .Mnu8$,"^999999빠른 라플레시아-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[80] 빠른 라플레시아";
+			}
+			if(isbegin_quest(.Q4_9_No) == 1 && checkquest(.Q4_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999두목 베노머스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_9_No) == 1 && checkquest(.Q4_9_No,HUNTING) == 2) {
+				set .Mnu9$,"두목 베노머스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_9_No2) == 1) {
+				set .Mnu9$,"^999999두목 베노머스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[80] 두목 베노머스";
+			}
+			if(isbegin_quest(.Q4_10_No) == 1 && checkquest(.Q4_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999분노의 녹시어스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_10_No) == 1 && checkquest(.Q4_10_No,HUNTING) == 2) {
+				set .Mnu10$,"분노의 녹시어스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_10_No2) == 1) {
+				set .Mnu10$,"^999999분노의 녹시어스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[80] 분노의 녹시어스";
+			}
+			if(isbegin_quest(.Q4_11_No) == 1 && checkquest(.Q4_11_No,HUNTING) != 2) {
+				set .Mnu11$,"^999999떠도는 노버스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q4_11_No) == 1 && checkquest(.Q4_11_No,HUNTING) == 2) {
+				set .Mnu11$,"떠도는 노버스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q4_11_No2) == 1) {
+				set .Mnu11$,"^999999떠도는 노버스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu11$,"[80] 떠도는 노버스";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":"+.Mnu11$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,40,.Q4_1_No,.Q4_1_No2,.Q4_1_Mob,.Q4_1_Kill,.Q4_1_Exp,.Q4_1_Jexp,.Q4_1_Item,.Q4_1_ItemAmount;
+			goto CMenu4;
+		case 2:
+			callsub QuestSelMenu,70,.Q4_2_No,.Q4_2_No2,.Q4_2_Mob,.Q4_2_Kill,.Q4_2_Exp,.Q4_2_Jexp,.Q4_2_Item,.Q4_2_ItemAmount;
+			goto CMenu4;
+		case 3:
+			callsub QuestSelMenu,70,.Q4_3_No,.Q4_3_No2,.Q4_3_Mob,.Q4_3_Kill,.Q4_3_Exp,.Q4_3_Jexp,.Q4_3_Item,.Q4_3_ItemAmount;
+			goto CMenu4;
+		case 4:
+			callsub QuestSelMenu,70,.Q4_4_No,.Q4_4_No2,.Q4_4_Mob,.Q4_4_Kill,.Q4_4_Exp,.Q4_4_Jexp,.Q4_4_Item,.Q4_4_ItemAmount;
+			goto CMenu4;
+		case 5:
+			callsub QuestSelMenu,70,.Q4_5_No,.Q4_5_No2,.Q4_5_Mob,.Q4_5_Kill,.Q4_5_Exp,.Q4_5_Jexp,.Q4_5_Item,.Q4_5_ItemAmount;
+			goto CMenu4;
+		case 6:
+			callsub QuestSelMenu,80,.Q4_6_No,.Q4_6_No2,.Q4_6_Mob,.Q4_6_Kill,.Q4_6_Exp,.Q4_6_Jexp,.Q4_6_Item,.Q4_6_ItemAmount;
+			goto CMenu4;
+		case 7:
+			callsub QuestSelMenu,80,.Q4_7_No,.Q4_7_No2,.Q4_7_Mob,.Q4_7_Kill,.Q4_7_Exp,.Q4_7_Jexp,.Q4_7_Item,.Q4_7_ItemAmount;
+			goto CMenu4;
+		case 8:
+			callsub QuestSelMenu,80,.Q4_8_No,.Q4_8_No2,.Q4_8_Mob,.Q4_8_Kill,.Q4_8_Exp,.Q4_8_Jexp,.Q4_8_Item,.Q4_8_ItemAmount;
+			goto CMenu4;
+		case 9:
+			callsub QuestSelMenu,80,.Q4_9_No,.Q4_9_No2,.Q4_9_Mob,.Q4_9_Kill,.Q4_9_Exp,.Q4_9_Jexp,.Q4_9_Item,.Q4_9_ItemAmount;
+			goto CMenu4;
+		case 10:
+			callsub QuestSelMenu,80,.Q4_10_No,.Q4_10_No2,.Q4_10_Mob,.Q4_10_Kill,.Q4_10_Exp,.Q4_10_Jexp,.Q4_10_Item,.Q4_10_ItemAmount;
+			goto CMenu4;
+		case 11:
+			callsub QuestSelMenu,80,.Q4_11_No,.Q4_11_No2,.Q4_11_Mob,.Q4_11_Kill,.Q4_11_Exp,.Q4_11_Jexp,.Q4_11_Item,.Q4_11_ItemAmount;
+			goto CMenu4;
+		case 12:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 5:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff슈발츠발드 던전^000000 방면 챔피언 몬스터";
+		mes "사냥 의뢰 게시판입니다.";
+		next;
+		CMenu5:
+		if(BaseLevel < 100)  {
+			set .Mnu1$,"^999999[100] 분노의 나이트메어 테러^000000";
+		} else {
+			if(isbegin_quest(.Q5_1_No) == 1 && checkquest(.Q5_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999분노의 나이트메어 테러-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_1_No) == 1 && checkquest(.Q5_1_No,HUNTING) == 2) {
+				set .Mnu1$,"분노의 나이트메어 테러-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_1_No2) == 1) {
+				set .Mnu1$,"^999999분노의 나이트메어 테러-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[100] 분노의 나이트메어 테러";
+			}
+		}
+		if(BaseLevel < 110)  {
+			set .Mnu2$,"^999999[110] 두목 에인션트 미믹^000000";
+			set .Mnu3$,"^999999[110] 튼튼한 데스워드^000000";
+			set .Mnu4$,"^999999[110] 분노의 베나투^000000";
+			set .Mnu5$,"^999999[110] 빠른 디미크^000000";
+		} else {
+			if(isbegin_quest(.Q5_2_No) == 1 && checkquest(.Q5_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999두목 에인션트 미믹-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_2_No) == 1 && checkquest(.Q5_2_No,HUNTING) == 2) {
+				set .Mnu2$,"두목 에인션트 미믹-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_2_No2) == 1) {
+				set .Mnu2$,"^999999두목 에인션트 미믹-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[110] 두목 에인션트 미믹";
+			}
+			if(isbegin_quest(.Q5_3_No) == 1 && checkquest(.Q5_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999튼튼한 데스워드-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_3_No) == 1 && checkquest(.Q5_3_No,HUNTING) == 2) {
+				set .Mnu3$,"튼튼한 데스워드-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_3_No2) == 1) {
+				set .Mnu3$,"^999999튼튼한 데스워드-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[110] 튼튼한 데스워드";
+			}
+			if(isbegin_quest(.Q5_4_No) == 1 && checkquest(.Q5_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999분노의 베나투-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_4_No) == 1 && checkquest(.Q5_4_No,HUNTING) == 2) {
+				set .Mnu4$,"분노의 베나투-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_4_No2) == 1) {
+				set .Mnu4$,"^999999분노의 베나투-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[110] 분노의 베나투";
+			}
+			if(isbegin_quest(.Q5_5_No) == 1 && checkquest(.Q5_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999빠른 디미크-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_5_No) == 1 && checkquest(.Q5_5_No,HUNTING) == 2) {
+				set .Mnu5$,"빠른 디미크-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_5_No2) == 1) {
+				set .Mnu5$,"^999999빠른 디미크-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[110] 빠른 디미크";
+			}
+		}
+		if(BaseLevel < 120)  {
+			set .Mnu6$,"^999999[120] 분노의 페러스^000000";
+			set .Mnu7$,"^999999[120] 튼튼한 어시더스^000000";
+			set .Mnu8$,"^999999[120] 떠도는 위로하는 자^000000";
+			set .Mnu9$,"^999999[120] 두목 감시하는 자^000000";
+		} else {
+			if(isbegin_quest(.Q5_6_No) == 1 && checkquest(.Q5_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999분노의 페러스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_6_No) == 1 && checkquest(.Q5_6_No,HUNTING) == 2) {
+				set .Mnu6$,"분노의 페러스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_6_No2) == 1) {
+				set .Mnu6$,"^999999분노의 페러스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[120] 분노의 페러스";
+			}
+			if(isbegin_quest(.Q5_7_No) == 1 && checkquest(.Q5_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999튼튼한 어시더스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_7_No) == 1 && checkquest(.Q5_7_No,HUNTING) == 2) {
+				set .Mnu7$,"튼튼한 어시더스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_7_No2) == 1) {
+				set .Mnu7$,"^999999튼튼한 어시더스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[120] 튼튼한 어시더스";
+			}
+			if(isbegin_quest(.Q5_8_No) == 1 && checkquest(.Q5_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999떠도는 위로하는 자-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_8_No) == 1 && checkquest(.Q5_8_No,HUNTING) == 2) {
+				set .Mnu8$,"떠도는 위로하는 자-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_8_No2) == 1) {
+				set .Mnu8$,"^999999떠도는 위로하는 자-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[120] 떠도는 위로하는 자";
+			}
+			if(isbegin_quest(.Q5_9_No) == 1 && checkquest(.Q5_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999두목 감시하는 자-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_9_No) == 1 && checkquest(.Q5_9_No,HUNTING) == 2) {
+				set .Mnu9$,"두목 감시하는 자-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_9_No2) == 1) {
+				set .Mnu9$,"^999999두목 감시하는 자-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[120] 두목 감시하는 자";
+			}
+		}
+		if(BaseLevel < 130) {
+			set .Mnu10$,"^999999[130] 두목 라우렐 뷘더^000000";
+		}
+		else {
+			if(isbegin_quest(.Q5_10_No) == 1 && checkquest(.Q5_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999두목 라우렐 뷘더-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_10_No) == 1 && checkquest(.Q5_10_No,HUNTING) == 2) {
+				set .Mnu10$,"두목 라우렐 뷘더-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_10_No2) == 1) {
+				set .Mnu10$,"^999999두목 라우렐 뷘더-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[130] 두목 라우렐 뷘더";
+			}
+		}
+
+		if(BaseLevel < 140) {
+			set .Mnu11$,"^999999[140] 튼튼한 셰실 디먼^000000";
+		}
+		else {
+			if(isbegin_quest(.Q5_11_No) == 1 && checkquest(.Q5_11_No,HUNTING) != 2) {
+				set .Mnu11$,"^999999튼튼한 셰실 디먼-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q5_11_No) == 1 && checkquest(.Q5_11_No,HUNTING) == 2) {
+				set .Mnu11$,"튼튼한 셰실 디먼-보상 대기중";
+			}
+			else if(isbegin_quest(.Q5_11_No2) == 1) {
+				set .Mnu11$,"^999999튼튼한 셰실 디먼-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu11$,"[140] 튼튼한 셰실 디먼";
+			}
+		}
+		
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":"+.Mnu11$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,100,.Q5_1_No,.Q5_1_No2,.Q5_1_Mob,.Q5_1_Kill,.Q5_1_Exp,.Q5_1_Jexp,.Q5_1_Item,.Q5_1_ItemAmount;
+			goto CMenu5;
+		case 2:
+			callsub QuestSelMenu,110,.Q5_2_No,.Q5_2_No2,.Q5_2_Mob,.Q5_2_Kill,.Q5_2_Exp,.Q5_2_Jexp,.Q5_2_Item,.Q5_2_ItemAmount;
+			goto CMenu5;
+		case 3:
+			callsub QuestSelMenu,110,.Q5_3_No,.Q5_3_No2,.Q5_3_Mob,.Q5_3_Kill,.Q5_3_Exp,.Q5_3_Jexp,.Q5_3_Item,.Q5_3_ItemAmount;
+			goto CMenu5;
+		case 4:
+			callsub QuestSelMenu,110,.Q5_4_No,.Q5_4_No2,.Q5_4_Mob,.Q5_4_Kill,.Q5_4_Exp,.Q5_4_Jexp,.Q5_4_Item,.Q5_4_ItemAmount;
+			goto CMenu5;
+		case 5:
+			callsub QuestSelMenu,110,.Q5_5_No,.Q5_5_No2,.Q5_5_Mob,.Q5_5_Kill,.Q5_5_Exp,.Q5_5_Jexp,.Q5_5_Item,.Q5_5_ItemAmount;
+			goto CMenu5;
+		case 6:
+			callsub QuestSelMenu,120,.Q5_6_No,.Q5_6_No2,.Q5_6_Mob,.Q5_6_Kill,.Q5_6_Exp,.Q5_6_Jexp,.Q5_6_Item,.Q5_6_ItemAmount;
+			goto CMenu5;
+		case 7:
+			callsub QuestSelMenu,120,.Q5_7_No,.Q5_7_No2,.Q5_7_Mob,.Q5_7_Kill,.Q5_7_Exp,.Q5_7_Jexp,.Q5_7_Item,.Q5_7_ItemAmount;
+			goto CMenu5;
+		case 8:
+			callsub QuestSelMenu,120,.Q5_8_No,.Q5_8_No2,.Q5_8_Mob,.Q5_8_Kill,.Q5_8_Exp,.Q5_8_Jexp,.Q5_8_Item,.Q5_8_ItemAmount;
+			goto CMenu5;
+		case 9:
+			callsub QuestSelMenu,120,.Q5_9_No,.Q5_9_No2,.Q5_9_Mob,.Q5_9_Kill,.Q5_9_Exp,.Q5_9_Jexp,.Q5_9_Item,.Q5_9_ItemAmount;
+			goto CMenu5;
+		case 10:
+			callsub QuestSelMenu,130,.Q5_10_No,.Q5_10_No2,.Q5_10_Mob,.Q5_10_Kill,.Q5_10_Exp,.Q5_10_Jexp,.Q5_10_Item,.Q5_10_ItemAmount;
+			goto CMenu5;
+		case 11:
+			callsub QuestSelMenu,140,.Q5_11_No,.Q5_11_No2,.Q5_11_Mob,.Q5_11_Kill,.Q5_11_Exp,.Q5_11_Jexp,.Q5_11_Item,.Q5_11_ItemAmount;
+			goto CMenu5;
+		case 12:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 6:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff아루나펠츠^000000 방면 챔피언 몬스터";
+		mes "사냥 의뢰 게시판입니다.";
+		next;
+		CMenu6:
+		if(BaseLevel < 90)  {
+			set .Mnu1$,"^999999[90] 튼튼한 로우윈^000000";
+			set .Mnu2$,"^999999[90] 두목 스태포^000000";
+		} else {
+			if(isbegin_quest(.Q6_1_No) == 1 && checkquest(.Q6_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999튼튼한 로우윈-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_1_No) == 1 && checkquest(.Q6_1_No,HUNTING) == 2) {
+				set .Mnu1$,"튼튼한 로우윈-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_1_No2) == 1) {
+				set .Mnu1$,"^999999튼튼한 로우윈-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[90] 튼튼한 로우윈";
+			}
+		}
+		if(BaseLevel < 100)  {
+			set .Mnu3$,"^999999[100] 빠른 힐 윈드^000000";
+			set .Mnu4$,"^999999[100] 튼튼한 코볼트^000000";
+			set .Mnu5$,"^999999[100] 빠른 코볼트 아쳐^000000";
+			set .Mnu6$,"^999999[100] 튼튼한 스노이어^000000";
+			set .Mnu7$,"^999999[100] 빠른 아이스 타탄^000000";
+		} else {
+			if(isbegin_quest(.Q6_2_No) == 1 && checkquest(.Q6_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999빠른 힐 윈드-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_2_No) == 1 && checkquest(.Q6_2_No,HUNTING) == 2) {
+				set .Mnu2$,"빠른 힐 윈드-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_2_No2) == 1) {
+				set .Mnu2$,"^999999빠른 힐 윈드-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[100] 빠른 힐 윈드";
+			}
+			if(isbegin_quest(.Q6_3_No) == 1 && checkquest(.Q6_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999튼튼한 코볼트-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_3_No) == 1 && checkquest(.Q6_3_No,HUNTING) == 2) {
+				set .Mnu3$,"튼튼한 코볼트-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_3_No2) == 1) {
+				set .Mnu3$,"^999999튼튼한 코볼트-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[100] 튼튼한 코볼트";
+			}
+			if(isbegin_quest(.Q6_4_No) == 1 && checkquest(.Q6_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999빠른 코볼트 아쳐-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_4_No) == 1 && checkquest(.Q6_4_No,HUNTING) == 2) {
+				set .Mnu4$,"빠른 코볼트 아쳐-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_4_No2) == 1) {
+				set .Mnu4$,"^999999빠른 코볼트 아쳐-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[100] 빠른 코볼트 아쳐";
+			}
+			if(isbegin_quest(.Q6_5_No) == 1 && checkquest(.Q6_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999튼튼한 스노이어-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_5_No) == 1 && checkquest(.Q6_5_No,HUNTING) == 2) {
+				set .Mnu5$,"튼튼한 스노이어-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_5_No2) == 1) {
+				set .Mnu5$,"^999999튼튼한 스노이어-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[100] 튼튼한 스노이어";
+			}
+			if(isbegin_quest(.Q6_5_No) == 1 && checkquest(.Q6_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999튼튼한 스노이어-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_5_No) == 1 && checkquest(.Q6_5_No,HUNTING) == 2) {
+				set .Mnu5$,"튼튼한 스노이어-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_5_No2) == 1) {
+				set .Mnu5$,"^999999튼튼한 스노이어-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[100] 튼튼한 스노이어";
+			}
+			if(isbegin_quest(.Q6_6_No) == 1 && checkquest(.Q6_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999튼튼한 스노이어-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_6_No) == 1 && checkquest(.Q6_6_No,HUNTING) == 2) {
+				set .Mnu6$,"튼튼한 스노이어-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_6_No2) == 1) {
+				set .Mnu6$,"^999999튼튼한 스노이어-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[100] 튼튼한 스노이어";
+			}
+			if(isbegin_quest(.Q6_7_No) == 1 && checkquest(.Q6_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999빠른 아이스 타탄-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_7_No) == 1 && checkquest(.Q6_7_No,HUNTING) == 2) {
+				set .Mnu7$,"빠른 아이스 타탄-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_7_No2) == 1) {
+				set .Mnu7$,"^999999빠른 아이스 타탄-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[100] 빠른 아이스 타탄";
+			}
+		}
+		if(BaseLevel < 120)  {
+			set .Mnu8$,"^999999[120] 두목 이실라^000000";
+			set .Mnu9$,"^999999[120] 두목 에키오^000000";
+			set .Mnu10$,"^999999[120] 빠른 아가브^000000";
+		} else {
+			if(isbegin_quest(.Q6_8_No) == 1 && checkquest(.Q6_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999두목 이실라-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_8_No) == 1 && checkquest(.Q6_8_No,HUNTING) == 2) {
+				set .Mnu8$,"두목 이실라-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_8_No2) == 1) {
+				set .Mnu8$,"^999999두목 이실라-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[120] 두목 이실라";
+			}
+			if(isbegin_quest(.Q6_9_No) == 1 && checkquest(.Q6_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999두목 에키오-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_9_No) == 1 && checkquest(.Q6_9_No,HUNTING) == 2) {
+				set .Mnu9$,"두목 에키오-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_9_No2) == 1) {
+				set .Mnu9$,"^999999두목 에키오-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[120] 두목 에키오";
+			}
+			if(isbegin_quest(.Q6_10_No) == 1 && checkquest(.Q6_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999빠른 아가브-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q6_10_No) == 1 && checkquest(.Q6_10_No,HUNTING) == 2) {
+				set .Mnu10$,"빠른 아가브-보상 대기중";
+			}
+			else if(isbegin_quest(.Q6_10_No2) == 1) {
+				set .Mnu10$,"^999999빠른 아가브-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[120] 빠른 아가브";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,90,.Q6_1_No,.Q6_1_No2,.Q6_1_Mob,.Q6_1_Kill,.Q6_1_Exp,.Q6_1_Jexp,.Q6_1_Item,.Q6_1_ItemAmount;
+			goto CMenu6;
+		case 2:
+			callsub QuestSelMenu,90,.Q6_2_No,.Q6_2_No2,.Q6_2_Mob,.Q6_2_Kill,.Q6_2_Exp,.Q6_2_Jexp,.Q6_2_Item,.Q6_2_ItemAmount;
+			goto CMenu6;
+		case 3:
+			callsub QuestSelMenu,100,.Q6_3_No,.Q6_3_No2,.Q6_3_Mob,.Q6_3_Kill,.Q6_3_Exp,.Q6_3_Jexp,.Q6_3_Item,.Q6_3_ItemAmount;
+			goto CMenu6;
+		case 4:
+			callsub QuestSelMenu,100,.Q6_4_No,.Q6_4_No2,.Q6_4_Mob,.Q6_4_Kill,.Q6_4_Exp,.Q6_4_Jexp,.Q6_4_Item,.Q6_4_ItemAmount;
+			goto CMenu6;
+		case 5:
+			callsub QuestSelMenu,100,.Q6_5_No,.Q6_5_No2,.Q6_5_Mob,.Q6_5_Kill,.Q6_5_Exp,.Q6_5_Jexp,.Q6_5_Item,.Q6_5_ItemAmount;
+			goto CMenu6;
+		case 6:
+			callsub QuestSelMenu,100,.Q6_6_No,.Q6_6_No2,.Q6_6_Mob,.Q6_6_Kill,.Q6_6_Exp,.Q6_6_Jexp,.Q6_6_Item,.Q6_6_ItemAmount;
+			goto CMenu6;
+		case 7:
+			callsub QuestSelMenu,100,.Q6_7_No,.Q6_7_No2,.Q6_7_Mob,.Q6_7_Kill,.Q6_7_Exp,.Q6_7_Jexp,.Q6_7_Item,.Q6_7_ItemAmount;
+			goto CMenu6;
+		case 8:
+			callsub QuestSelMenu,120,.Q6_8_No,.Q6_8_No2,.Q6_8_Mob,.Q6_8_Kill,.Q6_8_Exp,.Q6_8_Jexp,.Q6_8_Item,.Q6_8_ItemAmount;
+			goto CMenu6;
+		case 9:
+			callsub QuestSelMenu,120,.Q6_9_No,.Q6_9_No2,.Q6_9_Mob,.Q6_9_Kill,.Q6_9_Exp,.Q6_9_Jexp,.Q6_9_Item,.Q6_9_ItemAmount;
+			goto CMenu6;
+		case 10:
+			callsub QuestSelMenu,120,.Q6_10_No,.Q6_10_No2,.Q6_10_Mob,.Q6_10_Kill,.Q6_10_Exp,.Q6_10_Jexp,.Q6_10_Item,.Q6_10_ItemAmount;
+			goto CMenu6;
+		case 11:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+	case 7:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "^5d7fff로컬 지역, 이계^000000 방면 챔피언 몬스터";
+		mes "사냥 의뢰 게시판입니다.";
+		next;
+		CMenu7:
+		if(BaseLevel < 20)  {
+			set .Mnu1$,"^999999[20] 분노의 스모키^000000";
+		} else {
+			if(isbegin_quest(.Q7_1_No) == 1 && checkquest(.Q7_1_No,HUNTING) != 2) {
+				set .Mnu1$,"^999999분노의 스모키-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_1_No) == 1 && checkquest(.Q7_1_No,HUNTING) == 2) {
+				set .Mnu1$,"분노의 스모키-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_1_No2) == 1) {
+				set .Mnu1$,"^999999분노의 스모키-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu1$,"[20] 분노의 스모키";
+			}
+		}
+		if(BaseLevel < 50)  {
+			set .Mnu2$,"^999999[50] 두목 경단동자^000000";
+		} else {
+			if(isbegin_quest(.Q7_2_No) == 1 && checkquest(.Q7_2_No,HUNTING) != 2) {
+				set .Mnu2$,"^999999두목 경단동자-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_2_No) == 1 && checkquest(.Q7_2_No,HUNTING) == 2) {
+				set .Mnu2$,"두목 경단동자-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_2_No2) == 1) {
+				set .Mnu2$,"^999999두목 경단동자-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu2$,"[50] 두목 경단동자";
+			}
+		}
+		if(BaseLevel < 70)  {
+			set .Mnu3$,"^999999[70] 분노의 투칸^000000";
+			set .Mnu4$,"^999999[70] 튼튼한 사이드 와인더^000000";
+			set .Mnu5$,"^999999[70] 빠른 카라카사^000000";
+		} else {
+			if(isbegin_quest(.Q7_3_No) == 1 && checkquest(.Q7_3_No,HUNTING) != 2) {
+				set .Mnu3$,"^999999분노의 투칸-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_3_No) == 1 && checkquest(.Q7_3_No,HUNTING) == 2) {
+				set .Mnu3$,"분노의 투칸-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_3_No2) == 1) {
+				set .Mnu3$,"^999999분노의 투칸-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu3$,"[70] 분노의 투칸";
+			}
+			if(isbegin_quest(.Q7_4_No) == 1 && checkquest(.Q7_4_No,HUNTING) != 2) {
+				set .Mnu4$,"^999999튼튼한 사이드 와인더-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_4_No) == 1 && checkquest(.Q7_4_No,HUNTING) == 2) {
+				set .Mnu4$,"분노의 사이드 와인더-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_4_No2) == 1) {
+				set .Mnu4$,"^999999분노의 사이드 와인더-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu4$,"[70] 분노의 사이드 와인더";
+			}
+			if(isbegin_quest(.Q7_5_No) == 1 && checkquest(.Q7_5_No,HUNTING) != 2) {
+				set .Mnu5$,"^999999빠른 카라카사-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_5_No) == 1 && checkquest(.Q7_5_No,HUNTING) == 2) {
+				set .Mnu5$,"빠른 카라카사-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_5_No2) == 1) {
+				set .Mnu5$,"^999999빠른 카라카사-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu5$,"[70] 빠른 카라카사";
+			}
+		}
+		if(BaseLevel < 80)  {
+			set .Mnu6$,"^999999[80] 떠도는 식양^000000";
+		} else {
+			if(isbegin_quest(.Q7_6_No) == 1 && checkquest(.Q7_6_No,HUNTING) != 2) {
+				set .Mnu6$,"^999999떠도는 식양-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_6_No) == 1 && checkquest(.Q7_6_No,HUNTING) == 2) {
+				set .Mnu6$,"떠도는 식양-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_6_No2) == 1) {
+				set .Mnu6$,"^999999떠도는 식양-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu6$,"[80] 떠도는 식양";
+			}
+		}
+		if(BaseLevel < 100)  {
+			set .Mnu7$,"^999999[100] 떠도는 루시올라 베스파^000000";
+		} else {
+			if(isbegin_quest(.Q7_7_No) == 1 && checkquest(.Q7_7_No,HUNTING) != 2) {
+				set .Mnu7$,"^999999떠도는 루시올라 베스파-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_7_No) == 1 && checkquest(.Q7_7_No,HUNTING) == 2) {
+				set .Mnu7$,"떠도는 루시올라 베스파-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_7_No2) == 1) {
+				set .Mnu7$,"^999999떠도는 루시올라 베스파-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu7$,"[100] 떠도는 루시올라 베스파";
+			}
+		}
+		if(BaseLevel < 110)  {
+			set .Mnu8$,"^999999[110] 튼튼한 핀귀큘라 다크^000000";
+		} else {
+			if(isbegin_quest(.Q7_8_No) == 1 && checkquest(.Q7_8_No,HUNTING) != 2) {
+				set .Mnu8$,"^999999튼튼한 핀귀큘라-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_8_No) == 1 && checkquest(.Q7_8_No,HUNTING) == 2) {
+				set .Mnu8$,"튼튼한 핀귀큘라-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_8_No2) == 1) {
+				set .Mnu8$,"^999999튼튼한 핀귀큘라-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu8$,"[110] 튼튼한 핀귀큘라";
+			}
+		}
+		if(BaseLevel < 120)  {
+			set .Mnu9$,"^999999[120] 빠른 센티페데^000000";
+		} else {
+			if(isbegin_quest(.Q7_9_No) == 1 && checkquest(.Q7_9_No,HUNTING) != 2) {
+				set .Mnu9$,"^999999빠른 센티페데-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_9_No) == 1 && checkquest(.Q7_9_No,HUNTING) == 2) {
+				set .Mnu9$,"빠른 센티페데-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_9_No2) == 1) {
+				set .Mnu9$,"^999999빠른 센티페데-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu9$,"[120] 빠른 센티페데";
+			}
+		}
+		if(BaseLevel < 130)  {
+			set .Mnu10$,"^999999[130] 두목 돌로메데스^000000";
+			set .Mnu11$,"^999999[130] 떠도는 사슴뿔 스카라바^000000";
+			set .Mnu12$,"^999999[130] 두목 미밍^000000";
+			set .Mnu13$,"^999999[130] 분노의 꼬마 파툼^000000";
+		} else {
+			if(isbegin_quest(.Q7_10_No) == 1 && checkquest(.Q7_10_No,HUNTING) != 2) {
+				set .Mnu10$,"^999999두목 돌레메데스-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_10_No) == 1 && checkquest(.Q7_10_No,HUNTING) == 2) {
+				set .Mnu10$,"두목 돌로메데스-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_10_No2) == 1) {
+				set .Mnu10$,"^999999두목 돌로메데스-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu10$,"[130] 두목 돌로메데스";
+			}
+			if(isbegin_quest(.Q7_11_No) == 1 && checkquest(.Q7_11_No,HUNTING) != 2) {
+				set .Mnu11$,"^999999떠도는 사슴뿔 스카라바-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_11_No) == 1 && checkquest(.Q7_11_No,HUNTING) == 2) {
+				set .Mnu11$,"떠도는 사슴뿔 스카라바-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_11_No2) == 1) {
+				set .Mnu11$,"^999999떠도는 사슴뿔 스카라바-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu11$,"[130] 떠도는 사슴뿔 스카라바";
+			}
+			if(isbegin_quest(.Q7_12_No) == 1 && checkquest(.Q7_12_No,HUNTING) != 2) {
+				set .Mnu12$,"^999999두목 미밍-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_12_No) == 1 && checkquest(.Q7_12_No,HUNTING) == 2) {
+				set .Mnu12$,"두목 미밍-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_12_No2) == 1) {
+				set .Mnu12$,"^999999두목 미밍-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu12$,"[130] 두목 미밍";
+			}
+			if(isbegin_quest(.Q7_13_No) == 1 && checkquest(.Q7_13_No,HUNTING) != 2) {
+				set .Mnu13$,"^999999분노의 꼬마 파툼-사냥중^000000";
+			}
+			else if(isbegin_quest(.Q7_13_No) == 1 && checkquest(.Q7_13_No,HUNTING) == 2) {
+				set .Mnu13$,"분노의 꼬마 파툼-보상 대기중";
+			}
+			else if(isbegin_quest(.Q7_13_No2) == 1) {
+				set .Mnu13$,"^999999분노의 꼬마 파툼-재수행 대기중^000000";
+			}
+			else {
+				set .Mnu13$,"[130] 분노의 꼬마 파툼";
+			}
+		}
+		 
+		switch(select(.Mnu1$+":"+.Mnu2$+":"+.Mnu3$+":"+.Mnu4$+":"+.Mnu5$+":"+.Mnu6$+":"+.Mnu7$+":"+.Mnu8$+":"+.Mnu9$+":"+.Mnu10$+":열람 종료")) {
+
+		case 1:
+			callsub QuestSelMenu,20,.Q7_1_No,.Q7_1_No2,.Q7_1_Mob,.Q7_1_Kill,.Q7_1_Exp,.Q7_1_Jexp,.Q7_1_Item,.Q7_1_ItemAmount;
+			goto CMenu7;
+		case 2:
+			callsub QuestSelMenu,50,.Q7_2_No,.Q7_2_No2,.Q7_2_Mob,.Q7_2_Kill,.Q7_2_Exp,.Q7_2_Jexp,.Q7_2_Item,.Q7_2_ItemAmount;
+			goto CMenu7;
+		case 3:
+			callsub QuestSelMenu,70,.Q7_3_No,.Q7_3_No2,.Q7_3_Mob,.Q7_3_Kill,.Q7_3_Exp,.Q7_3_Jexp,.Q7_3_Item,.Q7_3_ItemAmount;
+			goto CMenu7;
+		case 4:
+			callsub QuestSelMenu,70,.Q7_4_No,.Q7_4_No2,.Q7_4_Mob,.Q7_4_Kill,.Q7_4_Exp,.Q7_4_Jexp,.Q7_4_Item,.Q7_4_ItemAmount;
+			goto CMenu7;
+		case 5:
+			callsub QuestSelMenu,70,.Q7_5_No,.Q7_5_No2,.Q7_5_Mob,.Q7_5_Kill,.Q7_5_Exp,.Q7_5_Jexp,.Q7_5_Item,.Q7_5_ItemAmount;
+			goto CMenu7;
+		case 6:
+			callsub QuestSelMenu,80,.Q7_6_No,.Q7_6_No2,.Q7_6_Mob,.Q7_6_Kill,.Q7_6_Exp,.Q7_6_Jexp,.Q7_6_Item,.Q7_6_ItemAmount;
+			goto CMenu7;
+		case 7:
+			callsub QuestSelMenu,100,.Q7_7_No,.Q7_7_No2,.Q7_7_Mob,.Q7_7_Kill,.Q7_7_Exp,.Q7_7_Jexp,.Q7_7_Item,.Q7_7_ItemAmount;
+			goto CMenu7;
+		case 8:
+			callsub QuestSelMenu,110,.Q7_8_No,.Q7_8_No2,.Q7_8_Mob,.Q7_8_Kill,.Q7_8_Exp,.Q7_8_Jexp,.Q7_8_Item,.Q7_8_ItemAmount;
+			goto CMenu7;
+		case 9:
+			callsub QuestSelMenu,120,.Q7_9_No,.Q7_9_No2,.Q7_9_Mob,.Q7_9_Kill,.Q7_9_Exp,.Q7_9_Jexp,.Q7_9_Item,.Q7_9_ItemAmount;
+			goto CMenu7;
+		case 10:
+			callsub QuestSelMenu,130,.Q7_10_No,.Q7_10_No2,.Q7_10_Mob,.Q7_10_Kill,.Q7_10_Exp,.Q7_10_Jexp,.Q7_10_Item,.Q7_10_ItemAmount;
+			goto CMenu7;
+		case 11:
+			callsub QuestSelMenu,130,.Q7_11_No,.Q7_10_No2,.Q7_11_Mob,.Q7_11_Kill,.Q7_11_Exp,.Q7_11_Jexp,.Q7_11_Item,.Q7_11_ItemAmount;
+			goto CMenu7;
+		case 12:
+			callsub QuestSelMenu,130,.Q7_12_No,.Q7_10_No2,.Q7_12_Mob,.Q7_12_Kill,.Q7_12_Exp,.Q7_12_Jexp,.Q7_12_Item,.Q7_12_ItemAmount;
+			goto CMenu7;
+		case 13:
+			callsub QuestSelMenu,130,.Q7_13_No,.Q7_10_No2,.Q7_13_Mob,.Q7_13_Kill,.Q7_13_Exp,.Q7_13_Jexp,.Q7_13_Item,.Q7_13_ItemAmount;
+			goto CMenu7;
+		case 14:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		}
+
+	case 8:
+			mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+			mes "게시판 열람을 종료합니다.";
+			close;
+		
+	}
+
+	NoLevel:
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "레벨이 부족해 의뢰를 받을 수";
+		mes "없습니다.";
+		mes " ";
+		mes "-"+getarg(0)+"레벨 이상 수행 가능-";
+		next;
+		return;
+		
+
+//================================================
+// 퀘스트 메뉴 선택시 메시지
+// arg0=레벨, 1=퀘스트 번호, 2=퀘스트대기번호
+// arg3=몬스터번호, 4=몬스터 킬수, 5=경험치
+// arg6=잡 경험치, 7=아이템번호, 8=아이템 갯수
+//=================================================
+QuestSelMenu:
+	if(BaseLevel < getarg(0)) {
+		callsub NoLevel,getarg(0);
+		return;
+	}
+	if(isbegin_quest(getarg(1)) == 1 && checkquest(getarg(1),HUNTING) != 2) {
+		callsub QuestIng,getarg(1),getarg(3),getarg(4);
+		return;
+	}
+	if(isbegin_quest(getarg(1)) == 1 && checkquest(getarg(1),HUNTING) == 2) {
+		callsub QuestComplete,getarg(1),getarg(2),getarg(3),getarg(4),getarg(5),getarg(6),getarg(7),getarg(8);
+		return;
+	}
+	if(isbegin_quest(getarg(2)) == 1) {
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes "오늘은 이미 의뢰를 수행하였습니다.";
+		mes "내일 다시 와 주세요.";
+		next;
+		return;
+	}
+	mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+	mes "챔피언 몬스터 ^5d7fff"+getmonsterinfo(getarg(3),MOB_NAME)+"^000000 사냥";
+	mes "의뢰를 받으시겠습니까?";
+	mes " ";
+	mes "대상: "+getmonsterinfo(getarg(3),MOB_NAME)+" "+getarg(4)+"마리";
+	mes "보상: Exp "+getarg(5)+", Jexp "+getarg(6)+",";
+	if(getarg(7) > 0)
+		mes ""+getitemname(getarg(7))+" "+getarg(8)+"개";
+	next;
+	switch(select("받는다:받지 않는다")) {
+
+	case 1:
+
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes ""+getmonsterinfo(getarg(3),MOB_NAME)+" 사냥 의뢰를 받았습니다.";
+		setquest getarg(1);
+		next;
+		break;
+
+	case 2:
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes ""+getmonsterinfo(getarg(3),MOB_NAME)+" 사냥 의뢰를";
+		mes "거절하였습니다.";
+		next;
+		break;
+
+	}
+	return;
+
+//================================================
+// 퀘스트 메시지들
+// arg0 = 퀘스트번호, arg1=몬스터 번호, arg2=사냥 수
+//================================================
+QuestIng:
+	mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+	mes "챔피언 몬스터 "+getmonsterinfo(getarg(1),MOB_NAME)+" "+getarg(2)+"마리를";
+	mes "사냥해 주시기 바랍니다.";
+	mes "또는, 의뢰를 취소하시겠습니까?";
+	next;
+	switch(select("취소하지 않는다:취소한다.")) {
+
+	case 1:
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes ""+getmonsterinfo(getarg(1),MOB_NAME)+" 사냥을 계속합니다.";
+		next;
+		return;
+				
+	case 2:
+		erasequest getarg(0);
+		mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+		mes ""+getmonsterinfo(getarg(1),MOB_NAME)+" 사냥 의뢰를";
+		mes "취소하였습니다.";
+		next;
+		return;
+	}
+
+end;
+
+//================================================
+// 퀘스트 완료시
+// arg0 = 퀘스트번호, arg1=퀘스트 번호2, arg2=몬스터 번호
+// arg3 = 몬스터 킬수, arg4=경험치, arg5 = 잡경험치
+// arg6= 보상아이템, arg7=보상아이템 갯수
+//================================================
+
+QuestComplete:
+	mes "[챔피언 몬스터 사냥 의뢰 게시판]";
+	mes ""+getmonsterinfo(getarg(2),MOB_NAME)+" "+getarg(3)+"마리를 사냥하였습니다.";
+	mes "보상을 지급합니다.";
+	mes " ";
+	mes "보상: Exp "+getarg(4)+", Jexp "+getarg(5)+"";
+	if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+		
+		.QEExp = ((getarg(4) / 100)*$EdenQuestPer)+getarg(4);
+		.QEJExp = ((getarg(5) / 100)*$EdenQuestPer)+getarg(5);
+
+		mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+	}
+	else {
+		.QEExp = 0;
+		.QEJExp = 0;
+	}
+	if(getarg(6) > 0)
+		mes ""+getitemname(getarg(6))+" "+getarg(7)+"개";
+	
+	erasequest getarg(0);
+	setquest getarg(1);
+	getexp getarg(4),getarg(5);
+	getexp .QEExp,.QEJExp;
+	if(getarg(6) > 0)
+		getitem getarg(6),getarg(7);
+	next;
+	return;
+
+//================================================
+// 퀘스트 변수 설정
+//================================================
+QuestSettings:
+
+.Q1_1_Title$ = "떠도는 호넷 사냥";
+.Q1_1_No = 21501; //퀘스트 시작번호
+.Q1_1_No2 = 21502; //퀘스트 대기번호
+.Q1_1_Mob = 2798;
+.Q1_1_Kill = 1;
+.Q1_1_Exp = 600;
+.Q1_1_Jexp = 1350;
+.Q1_1_Item = 7060;
+.Q1_1_ItemAmount = 1;
+
+.Q1_2_Title$ = "떠도는 로커 사냥";
+.Q1_2_No = 21503; //퀘스트 시작번호
+.Q1_2_No2 = 21504; //퀘스트 대기번호
+.Q1_2_Mob = 2680;
+.Q1_2_Kill = 1;
+.Q1_2_Exp = 740;
+.Q1_2_Jexp = 1670;
+.Q1_2_Item = 1350;
+.Q1_2_ItemAmount = 1;
+
+.Q1_3_Title$ = "떠도는 엠버 나이트 사냥";
+.Q1_3_No = 21505; //퀘스트 시작번호
+.Q1_3_No2 = 21506; //퀘스트 대기번호
+.Q1_3_Mob = 2905;
+.Q1_3_Kill = 1;
+.Q1_3_Exp = 870;
+.Q1_3_Jexp = 1940;
+.Q1_3_Item = 1350;
+.Q1_3_ItemAmount = 1;
+
+.Q1_4_Title$ = "두목 무카 사냥";
+.Q1_4_No = 21507; //퀘스트 시작번호
+.Q1_4_No2 = 21508; //퀘스트 대기번호
+.Q1_4_Mob = 2741;
+.Q1_4_Kill = 1;
+.Q1_4_Exp = 1080;
+.Q1_4_Jexp = 3650;
+.Q1_4_Item = 1350;
+.Q1_4_ItemAmount = 1;
+
+.Q1_5_Title$ = "두목 빅풋 사냥";
+.Q1_5_No = 21509; //퀘스트 시작번호
+.Q1_5_No2 = 21510; //퀘스트 대기번호
+.Q1_5_Mob = 2884;
+.Q1_5_Kill = 1;
+.Q1_5_Exp = 1350;
+.Q1_5_Jexp = 4550;
+.Q1_5_Item = 1350;
+.Q1_5_ItemAmount = 1;
+
+.Q1_6_Title$ = "튼튼한 호른 사냥";
+.Q1_6_No = 21511; //퀘스트 시작번호
+.Q1_6_No2 = 21512; //퀘스트 대기번호
+.Q1_6_Mob = 2800;
+.Q1_6_Kill = 1;
+.Q1_6_Exp = 1620;
+.Q1_6_Jexp = 5450;
+.Q1_6_Item = 1350;
+.Q1_6_ItemAmount = 1;
+
+.Q1_7_Title$ = "빠른 엘더 윌로우 사냥";
+.Q1_7_No = 21513; //퀘스트 시작번호
+.Q1_7_No2 = 21514; //퀘스트 대기번호
+.Q1_7_Mob = 2839;
+.Q1_7_Kill = 1;
+.Q1_7_Exp = 1740;
+.Q1_7_Jexp = 5900;
+.Q1_7_Item = 1350;
+.Q1_7_ItemAmount = 1;
+
+.Q1_8_Title$ = "튼튼한 코코 사냥";
+.Q1_8_No = 21515; //퀘스트 시작번호
+.Q1_8_No2 = 21516; //퀘스트 대기번호
+.Q1_8_Mob = 2869;
+.Q1_8_Kill = 1;
+.Q1_8_Exp = 2030;
+.Q1_8_Jexp = 6840;
+.Q1_8_Item = 1350;
+.Q1_8_ItemAmount = 1;
+
+.Q1_9_Title$ = "빠른 요요 사냥";
+.Q1_9_No = 21517; //퀘스트 시작번호
+.Q1_9_No2 = 21518; //퀘스트 대기번호
+.Q1_9_Mob = 2608;
+.Q1_9_Kill = 1;
+.Q1_9_Exp = 2030;
+.Q1_9_Jexp = 6840;
+.Q1_9_Item = 1350;
+.Q1_9_ItemAmount = 1;
+
+.Q1_10_Title$ = "떠도는 백련옥 사냥";
+.Q1_10_No = 21519; //퀘스트 시작번호
+.Q1_10_No2 = 21520; //퀘스트 대기번호
+.Q1_10_Mob = 2768;
+.Q1_10_Kill = 1;
+.Q1_10_Exp = 3470;
+.Q1_10_Jexp = 11120;
+.Q1_10_Item = 1350;
+.Q1_10_ItemAmount = 1;
+
+.Q2_1_Title$ = "분노의 오크 워리어 사냥";
+.Q2_1_No = 21521; //퀘스트 시작번호
+.Q2_1_No2 = 21522; //퀘스트 대기번호
+.Q2_1_Mob = 2722;
+.Q2_1_Kill = 1;
+.Q2_1_Exp = 2630;
+.Q2_1_Jexp = 12150;
+.Q2_1_Item = 0;
+.Q2_1_ItemAmount = 1;
+
+.Q2_2_Title$ = "빠른 고블린 사냥";
+.Q2_2_No = 21523; //퀘스트 시작번호
+.Q2_2_No2 = 21524; //퀘스트 대기번호
+.Q2_2_Mob = 2814;
+.Q2_2_Kill = 1;
+.Q2_2_Exp = 2760;
+.Q2_2_Jexp = 9320;
+.Q2_2_Item = 0;
+.Q2_2_ItemAmount = 1;
+
+.Q2_3_Title$ = "떠도는 고블린 사냥";
+.Q2_3_No = 21525; //퀘스트 시작번호
+.Q2_3_No2 = 21526; //퀘스트 대기번호
+.Q2_3_Mob = 2813;
+.Q2_3_Kill = 1;
+.Q2_3_Exp = 2760;
+.Q2_3_Jexp = 9320;
+.Q2_3_Item = 0;
+.Q2_3_ItemAmount = 1;
+
+.Q2_4_Title$ = "빠른 쁘띠 사냥";
+.Q2_4_No = 21527; //퀘스트 시작번호
+.Q2_4_No2 = 21528; //퀘스트 대기번호
+.Q2_4_Mob = 2714;
+.Q2_4_Kill = 1;
+.Q2_4_Exp = 9650;
+.Q2_4_Jexp = 29610;
+.Q2_4_Item = 0;
+.Q2_4_ItemAmount = 1;
+
+.Q2_5_Title$ = "튼튼한 쁘띠 사냥";
+.Q2_5_No = 21529; //퀘스트 시작번호
+.Q2_5_No2 = 21530; //퀘스트 대기번호
+.Q2_5_Mob = 2715;
+.Q2_5_Kill = 1;
+.Q2_5_Exp = 9650;
+.Q2_5_Jexp = 29610;
+.Q2_5_Item = 0;
+.Q2_5_ItemAmount = 1;
+
+.Q2_6_Title$ = "떠도는 캐럿 사냥";
+.Q2_6_No = 21786; //퀘스트 시작번호
+.Q2_6_No2 = 21787; //퀘스트 대기번호
+.Q2_6_Mob = 2800;
+.Q2_6_Kill = 1;
+.Q2_6_Exp = 17490;
+.Q2_6_Jexp = 43263;
+.Q2_6_Item = 0;
+.Q2_6_ItemAmount = 1;
+
+.Q2_7_Title$ = "분노의 메이저우로스 사냥";
+.Q2_7_No = 21788; //퀘스트 시작번호
+.Q2_7_No2 = 21789; //퀘스트 대기번호
+.Q2_7_Mob = 2767;
+.Q2_7_Kill = 1;
+.Q2_7_Exp = 27810;
+.Q2_7_Jexp = 65340;
+.Q2_7_Item = 0;
+.Q2_7_ItemAmount = 1;
+
+.Q2_8_Title$ = "튼튼한 레이드릭 사냥";
+.Q2_8_No = 21790; //퀘스트 시작번호
+.Q2_8_No2 = 21791; //퀘스트 대기번호
+.Q2_8_Mob = 2691;
+.Q2_8_Kill = 1;
+.Q2_8_Exp = 27000;
+.Q2_8_Jexp = 61626;
+.Q2_8_Item = 0;
+.Q2_8_ItemAmount = 1;
+
+.Q2_9_Title$ = "빠른 레이드릭 사냥";
+.Q2_9_No = 21792; //퀘스트 시작번호
+.Q2_9_No2 = 21793; //퀘스트 대기번호
+.Q2_9_Mob = 2690;
+.Q2_9_Kill = 1;
+.Q2_9_Exp = 27000;
+.Q2_9_Jexp = 64626;
+.Q2_9_Item = 0;
+.Q2_9_ItemAmount = 1;
+
+.Q2_10_Title$ = "분노의 배회하는 자 사냥";
+.Q2_10_No = 21794; //퀘스트 시작번호
+.Q2_10_No2 = 21795; //퀘스트 대기번호
+.Q2_10_Mob = 2620;
+.Q2_10_Kill = 1;
+.Q2_10_Exp = 33045;
+.Q2_10_Jexp = 110631;
+.Q2_10_Item = 0;
+.Q2_10_ItemAmount = 1;
+
+.Q3_1_Title$ = "분노의 샌드맨 사냥";
+.Q3_1_No = 21531; //퀘스트 시작번호
+.Q3_1_No2 = 21532; //퀘스트 대기번호
+.Q3_1_Mob = 2674;
+.Q3_1_Kill = 1;
+.Q3_1_Exp = 4920;
+.Q3_1_Jexp = 15840;
+.Q3_1_Item = 0;
+.Q3_1_ItemAmount = 1;
+
+.Q3_2_Title$ = "빠른 퍼씰 사냥";
+.Q3_2_No = 21533; //퀘스트 시작번호
+.Q3_2_No2 = 21534; //퀘스트 대기번호
+.Q3_2_Mob = 2829;
+.Q3_2_Kill = 1;
+.Q3_2_Exp = 2700;
+.Q3_2_Jexp = 9090;
+.Q3_2_Item = 0;
+.Q3_2_ItemAmount = 1;
+
+.Q3_3_Title$ = "떠도는 그로브 사냥";
+.Q3_3_No = 21535; //퀘스트 시작번호
+.Q3_3_No2 = 21536; //퀘스트 대기번호
+.Q3_3_Mob = 2808;
+.Q3_3_Kill = 1;
+.Q3_3_Exp = 3830;
+.Q3_3_Jexp = 12330;
+.Q3_3_Item = 0;
+.Q3_3_ItemAmount = 1;
+
+.Q3_4_Title$ = "튼튼한 엘리게이터 사냥";
+.Q3_4_No = 21537; //퀘스트 시작번호
+.Q3_4_No2 = 21538; //퀘스트 대기번호
+.Q3_4_Mob = 2907;
+.Q3_4_Kill = 1;
+.Q3_4_Exp = 3830;
+.Q3_4_Jexp = 12330;
+.Q3_4_Item = 0;
+.Q3_4_ItemAmount = 1;
+
+.Q3_5_Title$ = "분노의 우탄파이터 사냥";
+.Q3_5_No = 21539; //퀘스트 시작번호
+.Q3_5_No2 = 21540; //퀘스트 대기번호
+.Q3_5_Mob = 2611;
+.Q3_5_Kill = 1;
+.Q3_5_Exp = 5580;
+.Q3_5_Jexp = 17960;
+.Q3_5_Item = 0;
+.Q3_5_ItemAmount = 1;
+
+.Q3_6_Title$ = "빠른 드라이어드 사냥";
+.Q3_6_No = 21541; //퀘스트 시작번호
+.Q3_6_No2 = 21542; //퀘스트 대기번호
+.Q3_6_Mob = 2843;
+.Q3_6_Kill = 1;
+.Q3_6_Exp = 6590;
+.Q3_6_Jexp = 21110;
+.Q3_6_Item = 0;
+.Q3_6_ItemAmount = 1;
+
+.Q3_7_Title$ = "빠른 좀비 슬러터 사냥";
+.Q3_7_No = 21796; //퀘스트 시작번호
+.Q3_7_No2 = 21797; //퀘스트 대기번호
+.Q3_7_Mob = 2603;
+.Q3_7_Kill = 1;
+.Q3_7_Exp = 31035;
+.Q3_7_Jexp = 80238;
+.Q3_7_Item = 0;
+.Q3_7_ItemAmount = 1;
+
+.Q3_8_Title$ = "빠른 밴시 사냥";
+.Q3_8_No = 21798; //퀘스트 시작번호
+.Q3_8_No2 = 21799; //퀘스트 대기번호
+.Q3_8_Mob = 2887;
+.Q3_8_Kill = 1;
+.Q3_8_Exp = 44070;
+.Q3_8_Jexp = 103950;
+.Q3_8_Item = 0;
+.Q3_8_ItemAmount = 1;
+
+.Q3_9_Title$ = "두목 네크로맨서 사냥";
+.Q3_9_No = 21800; //퀘스트 시작번호
+.Q3_9_No2 = 21801; //퀘스트 대기번호
+.Q3_9_Mob = 2736;
+.Q3_9_Kill = 1;
+.Q3_9_Exp = 44850;
+.Q3_9_Jexp = 148005;
+.Q3_9_Item = 0;
+.Q3_9_ItemAmount = 1;
+
+.Q4_1_Title$ = "빠른 조개 사냥";
+.Q4_1_No = 21543; //퀘스트 시작번호
+.Q4_1_No2 = 21544; //퀘스트 대기번호
+.Q4_1_Mob = 2666;
+.Q4_1_Kill = 1;
+.Q4_1_Exp = 3180;
+.Q4_1_Jexp = 10220;
+.Q4_1_Item = 0;
+.Q4_1_ItemAmount = 1;
+
+.Q4_2_Title$ = "튼튼한 지오그래퍼 사냥";
+.Q4_2_No = 21545; //퀘스트 시작번호
+.Q4_2_No2 = 21546; //퀘스트 대기번호
+.Q4_2_Mob = 2825;
+.Q4_2_Kill = 1;
+.Q4_2_Exp = 7410;
+.Q4_2_Jexp = 22730;
+.Q4_2_Item = 0;
+.Q4_2_ItemAmount = 1;
+
+.Q4_3_Title$ = "두목 그랜드 페코 사냥";
+.Q4_3_No = 21547; //퀘스트 시작번호
+.Q4_3_No2 = 21548; //퀘스트 대기번호
+.Q4_3_Mob = 2811;
+.Q4_3_Kill = 1;
+.Q4_3_Exp = 7320;
+.Q4_3_Jexp = 22460;
+.Q4_3_Item = 0;
+.Q4_3_ItemAmount = 1;
+
+.Q4_4_Title$ = "두목 고우트 사냥";
+.Q4_4_No = 21549; //퀘스트 시작번호
+.Q4_4_No2 = 21550; //퀘스트 대기번호
+.Q4_4_Mob = 2816;
+.Q4_4_Kill = 1;
+.Q4_4_Exp = 8790;
+.Q4_4_Jexp = 26910;
+.Q4_4_Item = 0;
+.Q4_4_ItemAmount = 1;
+
+.Q4_5_Title$ = "빠른 슬리퍼 사냥";
+.Q4_5_No = 21551; //퀘스트 시작번호
+.Q4_5_No2 = 21552; //퀘스트 대기번호
+.Q4_5_Mob = 2656;
+.Q4_5_Kill = 1;
+.Q4_5_Exp = 8520;
+.Q4_5_Jexp = 26100;
+.Q4_5_Item = 0;
+.Q4_5_ItemAmount = 1;
+
+.Q4_6_Title$ = "빠른 스템웜 사냥";
+.Q4_6_No = 21553; //퀘스트 시작번호
+.Q4_6_No2 = 21554; //퀘스트 대기번호
+.Q4_6_Mob = 2641;
+.Q4_6_Kill = 1;
+.Q4_6_Exp = 8910;
+.Q4_6_Jexp = 27320;
+.Q4_6_Item = 0;
+.Q4_6_ItemAmount = 1;
+
+.Q4_7_Title$ = "튼튼한 홀덴 사냥";
+.Q4_7_No = 21555; //퀘스트 시작번호
+.Q4_7_No2 = 21556; //퀘스트 대기번호
+.Q4_7_Mob = 2745;
+.Q4_7_Kill = 1;
+.Q4_7_Exp = 9950;
+.Q4_7_Jexp = 30560;
+.Q4_7_Item = 0;
+.Q4_7_ItemAmount = 1;
+
+.Q4_8_Title$ = "빠른 라플레시아 사냥";
+.Q4_8_No = 21557; //퀘스트 시작번호
+.Q4_8_No2 = 21558; //퀘스트 대기번호
+.Q4_8_Mob = 2695;
+.Q4_8_Kill = 1;
+.Q4_8_Exp = 9650;
+.Q4_8_Jexp = 29610;
+.Q4_8_Item = 0;
+.Q4_8_ItemAmount = 1;
+
+.Q4_9_Title$ = "두목 베노머스 사냥";
+.Q4_9_No = 21559; //퀘스트 시작번호
+.Q4_9_No2 = 21560; //퀘스트 대기번호
+.Q4_9_Mob = 2624;
+.Q4_9_Kill = 1;
+.Q4_9_Exp = 9800;
+.Q4_9_Jexp = 30060;
+.Q4_9_Item = 0;
+.Q4_9_ItemAmount = 1;
+
+.Q4_10_Title$ = "분노의 녹시어스 사냥";
+.Q4_10_No = 21561; //퀘스트 시작번호
+.Q4_10_No2 = 21562; //퀘스트 대기번호
+.Q4_10_Mob = 2727;
+.Q4_10_Kill = 1;
+.Q4_10_Exp = 7320;
+.Q4_10_Jexp = 40140;
+.Q4_10_Item = 0;
+.Q4_10_ItemAmount = 1;
+
+.Q4_11_Title$ = "떠도는 노버스 사냥";
+.Q4_11_No = 21563; //퀘스트 시작번호
+.Q4_11_No2 = 21564; //퀘스트 대기번호
+.Q4_11_Mob = 2728;
+.Q4_11_Kill = 1;
+.Q4_11_Exp = 10770;
+.Q4_11_Jexp = 33840;
+.Q4_11_Item = 0;
+.Q4_11_ItemAmount = 1;
+
+.Q5_1_Title$ = "분노의 나이트메어 테러 사냥";
+.Q5_1_No = 21802; //퀘스트 시작번호
+.Q5_1_No2 = 21803; //퀘스트 대기번호
+.Q5_1_Mob = 2732;
+.Q5_1_Kill = 1;
+.Q5_1_Exp = 18315;
+.Q5_1_Jexp = 54399;
+.Q5_1_Item = 0;
+.Q5_1_ItemAmount = 1;
+
+.Q5_2_Title$ = "두목 에인션트 미믹 사냥";
+.Q5_2_No = 21804; //퀘스트 시작번호
+.Q5_2_No2 = 21805; //퀘스트 대기번호
+.Q5_2_Mob = 2903;
+.Q5_2_Kill = 1;
+.Q5_2_Exp = 23865;
+.Q5_2_Jexp = 61380;
+.Q5_2_Item = 0;
+.Q5_2_ItemAmount = 1;
+
+.Q5_3_Title$ = "튼튼한 데스워드 사냥";
+.Q5_3_No = 21806; //퀘스트 시작번호
+.Q5_3_No2 = 21807; //퀘스트 대기번호
+.Q5_3_Mob = 2859;
+.Q5_3_Kill = 1;
+.Q5_3_Exp = 25005;
+.Q5_3_Jexp = 57072;
+.Q5_3_Item = 0;
+.Q5_3_ItemAmount = 1;
+
+.Q5_4_Title$ = "분노의 베나투 사냥";
+.Q5_4_No = 21808; //퀘스트 시작번호
+.Q5_4_No2 = 21809; //퀘스트 대기번호
+.Q5_4_Mob = 2625;
+.Q5_4_Kill = 1;
+.Q5_4_Exp = 23865;
+.Q5_4_Jexp = 60438;
+.Q5_4_Item = 0;
+.Q5_4_ItemAmount = 1;
+
+.Q5_5_Title$ = "빠른 디미크 사냥";
+.Q5_5_No = 21810; //퀘스트 시작번호
+.Q5_5_No2 = 21811; //퀘스트 대기번호
+.Q5_5_Mob = 2853;
+.Q5_5_Kill = 1;
+.Q5_5_Exp = 28425;
+.Q5_5_Jexp = 76773;
+.Q5_5_Item = 0;
+.Q5_5_ItemAmount = 1;
+
+.Q5_6_Title$ = "분노의 페러스 사냥";
+.Q5_6_No = 21812; //퀘스트 시작번호
+.Q5_6_No2 = 21813; //퀘스트 대기번호
+.Q5_6_Mob = 2832;
+.Q5_6_Kill = 1;
+.Q5_6_Exp = 40800;
+.Q5_6_Jexp = 88704;
+.Q5_6_Item = 0;
+.Q5_6_ItemAmount = 1;
+
+.Q5_7_Title$ = "튼튼한 어시더스 사냥";
+.Q5_7_No = 21814; //퀘스트 시작번호
+.Q5_7_No2 = 21815; //퀘스트 대기번호
+.Q5_7_Mob = 2912;
+.Q5_7_Kill = 1;
+.Q5_7_Exp = 44070;
+.Q5_7_Jexp = 100584;
+.Q5_7_Item = 0;
+.Q5_7_ItemAmount = 1;
+
+.Q5_8_Title$ = "떠도는 위로하는 자 사냥";
+.Q5_8_No = 21816; //퀘스트 시작번호
+.Q5_8_No2 = 21817; //퀘스트 대기번호
+.Q5_8_Mob = 2650;
+.Q5_8_Kill = 1;
+.Q5_8_Exp = 36630;
+.Q5_8_Jexp = 119244;
+.Q5_8_Item = 0;
+.Q5_8_ItemAmount = 1;
+
+.Q5_9_Title$ = "두목 감시하는 자 사냥";
+.Q5_9_No = 21818; //퀘스트 시작번호
+.Q5_9_No2 = 21819; //퀘스트 대기번호
+.Q5_9_Mob = 2726;
+.Q5_9_Kill = 1;
+.Q5_9_Exp = 41670;
+.Q5_9_Jexp = 126225;
+.Q5_9_Item = 0;
+.Q5_9_ItemAmount = 1;
+
+.Q5_10_Title$ = "두목 라우렐 뷘더 사냥";
+.Q5_10_No = 21820; //퀘스트 시작번호
+.Q5_10_No2 = 21821; //퀘스트 대기번호
+.Q5_10_Mob = 2692;
+.Q5_10_Kill = 1;
+.Q5_10_Exp = 43875;
+.Q5_10_Jexp = 162606;
+.Q5_10_Item = 0;
+.Q5_10_ItemAmount = 1;
+
+.Q5_11_Title$ = "튼튼한 셰실 디먼 사냥";
+.Q5_11_No = 21822; //퀘스트 시작번호
+.Q5_11_No2 = 21823; //퀘스트 대기번호
+.Q5_11_Mob = 2667;
+.Q5_11_Kill = 1;
+.Q5_11_Exp = 248505;
+.Q5_11_Jexp = 818976;
+.Q5_11_Item = 0;
+.Q5_11_ItemAmount = 1;
+
+.Q6_1_Title$ = "튼튼한 로우윈 사냥";
+.Q6_1_No = 21565; //퀘스트 시작번호
+.Q6_1_No2 = 21566; //퀘스트 대기번호
+.Q6_1_Mob = 2677;
+.Q6_1_Kill = 1;
+.Q6_1_Exp = 15210;
+.Q6_1_Jexp = 42800;
+.Q6_1_Item = 0;
+.Q6_1_ItemAmount = 1;
+
+.Q6_2_Title$ = "두목 스태포 사냥";
+.Q6_2_No = 21567; //퀘스트 시작번호
+.Q6_2_No2 = 21568; //퀘스트 대기번호
+.Q6_2_Mob = 2643;
+.Q6_2_Kill = 1;
+.Q6_2_Exp = 14160;
+.Q6_2_Jexp = 39870;
+.Q6_2_Item = 0;
+.Q6_2_ItemAmount = 1;
+
+.Q6_3_Title$ = "빠른 힐 윈드 사냥";
+.Q6_3_No = 21824; //퀘스트 시작번호
+.Q6_3_No2 = 21825; //퀘스트 대기번호
+.Q6_3_Mob = 2804;
+.Q6_3_Kill = 1;
+.Q6_3_Exp = 17100;
+.Q6_3_Jexp = 42273;
+.Q6_3_Item = 0;
+.Q6_3_ItemAmount = 1;
+
+.Q6_4_Title$ = "튼튼한 코볼트 사냥";
+.Q6_4_No = 21826; //퀘스트 시작번호
+.Q6_4_No2 = 21827; //퀘스트 대기번호
+.Q6_4_Mob = 2785;
+.Q6_4_Kill = 1;
+.Q6_4_Exp = 20460;
+.Q6_4_Jexp = 50637;
+.Q6_4_Item = 0;
+.Q6_4_ItemAmount = 1;
+
+.Q6_5_Title$ = "빠른 코볼트 아쳐 사냥";
+.Q6_5_No = 21828; //퀘스트 시작번호
+.Q6_5_No2 = 21829; //퀘스트 대기번호
+.Q6_5_Mob = 2784;
+.Q6_5_Kill = 1;
+.Q6_5_Exp = 19440;
+.Q6_5_Jexp = 77814;
+.Q6_5_Item = 0;
+.Q6_5_ItemAmount = 1;
+
+.Q6_6_Title$ = "튼튼한 스노이어 사냥";
+.Q6_6_No = 21830; //퀘스트 시작번호
+.Q6_6_No2 = 21831; //퀘스트 대기번호
+.Q6_6_Mob = 2652;
+.Q6_6_Kill = 1;
+.Q6_6_Exp = 17490;
+.Q6_6_Jexp = 43263;
+.Q6_6_Item = 0;
+.Q6_6_ItemAmount = 1;
+
+.Q6_7_Title$ = "빠른 아이스 티탄 사냥";
+.Q6_7_No = 21832; //퀘스트 시작번호
+.Q6_7_No2 = 21833; //퀘스트 대기번호
+.Q6_7_Mob = 2794;
+.Q6_7_Kill = 1;
+.Q6_7_Exp = 24510;
+.Q6_7_Jexp = 78507;
+.Q6_7_Item = 0;
+.Q6_7_ItemAmount = 1;
+
+.Q6_8_Title$ = "두목 이실라 사냥";
+.Q6_8_No = 21834; //퀘스트 시작번호
+.Q6_8_No2 = 21835; //퀘스트 대기번호
+.Q6_8_Mob = 2791;
+.Q6_8_Kill = 1;
+.Q6_8_Exp = 33690;
+.Q6_8_Jexp = 76971;
+.Q6_8_Item = 0;
+.Q6_8_ItemAmount = 1;
+
+.Q6_9_Title$ = "두목 에키오 사냥";
+.Q6_9_No = 21836; //퀘스트 시작번호
+.Q6_9_No2 = 21837; //퀘스트 대기번호
+.Q6_9_Mob = 2841;
+.Q6_9_Kill = 1;
+.Q6_9_Exp = 35970;
+.Q6_9_Jexp = 82170;
+.Q6_9_Item = 0;
+.Q6_9_ItemAmount = 1;
+
+.Q6_10_Title$ = "빠른 아가브 사냥";
+.Q6_10_No = 21838; //퀘스트 시작번호
+.Q6_10_No2 = 21839; //퀘스트 대기번호
+.Q6_10_Mob = 2911;
+.Q6_10_Kill = 1;
+.Q6_10_Exp = 38340;
+.Q6_10_Jexp = 87516;
+.Q6_10_Item = 0;
+.Q6_10_ItemAmount = 1;
+
+.Q7_1_Title$ = "분노의 스모키 사냥";
+.Q7_1_No = 21569; //퀘스트 시작번호
+.Q7_1_No2 = 21570; //퀘스트 대기번호
+.Q7_1_Mob = 2654;
+.Q7_1_Kill = 1;
+.Q7_1_Exp = 1350;
+.Q7_1_Jexp = 4550;
+.Q7_1_Item = 0;
+.Q7_1_ItemAmount = 1;
+
+.Q7_2_Title$ = "두목 경단동자 사냥";
+.Q7_2_No = 21571; //퀘스트 시작번호
+.Q7_2_No2 = 21572; //퀘스트 대기번호
+.Q7_2_Mob = 2683;
+.Q7_2_Kill = 1;
+.Q7_2_Exp = 4190;
+.Q7_2_Jexp = 13410;
+.Q7_2_Item = 0;
+.Q7_2_ItemAmount = 1;
+
+.Q7_3_Title$ = "분노의 투칸 사냥";
+.Q7_3_No = 21573; //퀘스트 시작번호
+.Q7_3_No2 = 21574; //퀘스트 대기번호
+.Q7_3_Mob = 2630;
+.Q7_3_Kill = 1;
+.Q7_3_Exp = 5190;
+.Q7_3_Jexp = 12240;
+.Q7_3_Item = 0;
+.Q7_3_ItemAmount = 1;
+
+.Q7_4_Title$ = "튼튼한 사이드 와인더 사냥";
+.Q7_4_No = 21575; //퀘스트 시작번호
+.Q7_4_No2 = 21576; //퀘스트 대기번호
+.Q7_4_Mob = 2662;
+.Q7_4_Kill = 1;
+.Q7_4_Exp = 5670;
+.Q7_4_Jexp = 18230;
+.Q7_4_Item = 0;
+.Q7_4_ItemAmount = 1;
+
+.Q7_5_Title$ = "빠른 카라카사 사냥";
+.Q7_5_No = 21577; //퀘스트 시작번호
+.Q7_5_No2 = 21578; //퀘스트 대기번호
+.Q7_5_Mob = 2789;
+.Q7_5_Kill = 1;
+.Q7_5_Exp = 6320;
+.Q7_5_Jexp = 19350;
+.Q7_5_Item = 0;
+.Q7_5_ItemAmount = 1;
+
+.Q7_6_Title$ = "떠도는 식양 사냥";
+.Q7_6_No = 21579; //퀘스트 시작번호
+.Q7_6_No2 = 21580; //퀘스트 대기번호
+.Q7_6_Mob = 2793;
+.Q7_6_Kill = 1;
+.Q7_6_Exp = 9900;
+.Q7_6_Jexp = 34380;
+.Q7_6_Item = 0;
+.Q7_6_ItemAmount = 1;
+
+.Q7_7_Title$ = "떠도는 루시올라 베스파 사냥";
+.Q7_7_No = 21840; //퀘스트 시작번호
+.Q7_7_No2 = 21841; //퀘스트 대기번호
+.Q7_7_Mob = 2773;
+.Q7_7_Kill = 1;
+.Q7_7_Exp = 22095;
+.Q7_7_Jexp = 53607;
+.Q7_7_Item = 0;
+.Q7_7_ItemAmount = 1;
+
+.Q7_8_Title$ = "튼튼한 핀귀큘라 다크 사냥";
+.Q7_8_No = 21842; //퀘스트 시작번호
+.Q7_8_No2 = 21843; //퀘스트 대기번호
+.Q7_8_Mob = 2710;
+.Q7_8_Kill = 1;
+.Q7_8_Exp = 20475;
+.Q7_8_Jexp = 71775;
+.Q7_8_Item = 0;
+.Q7_8_ItemAmount = 1;
+
+.Q7_9_Title$ = "빠른 센티페데 사냥";
+.Q7_9_No = 21844; //퀘스트 시작번호
+.Q7_9_No2 = 21845; //퀘스트 대기번호
+.Q7_9_Mob = 2873;
+.Q7_9_Kill = 1;
+.Q7_9_Exp = 31200;
+.Q7_9_Jexp = 80487;
+.Q7_9_Item = 0;
+.Q7_9_ItemAmount = 1;
+
+.Q7_10_Title$ = "두목 돌로메데스 사냥";
+.Q7_10_No = 21846; //퀘스트 시작번호
+.Q7_10_No2 = 21847; //퀘스트 대기번호
+.Q7_10_Mob = 2850;
+.Q7_10_Kill = 1;
+.Q7_10_Exp = 50265;
+.Q7_10_Jexp = 153054;
+.Q7_10_Item = 0;
+.Q7_10_ItemAmount = 1;
+
+.Q7_11_Title$ = "떠도는 사슴뿔 스카라바 사냥";
+.Q7_11_No = 21848; //퀘스트 시작번호
+.Q7_11_No2 = 21849; //퀘스트 대기번호
+.Q7_11_Mob = 2896;
+.Q7_11_Kill = 1;
+.Q7_11_Exp = 47475;
+.Q7_11_Jexp = 156024;
+.Q7_11_Item = 0;
+.Q7_11_ItemAmount = 1;
+
+.Q7_12_Title$ = "두목 미밍 사냥";
+.Q7_12_No = 21850; //퀘스트 시작번호
+.Q7_12_No2 = 21851; //퀘스트 대기번호
+.Q7_12_Mob = 2751;
+.Q7_12_Kill = 1;
+.Q7_12_Exp = 69225;
+.Q7_12_Jexp = 187110;
+.Q7_12_Item = 0;
+.Q7_12_ItemAmount = 1;
+
+.Q7_13_Title$ = "분노의 꼬마 파툼 사냥";
+.Q7_13_No = 21852; //퀘스트 시작번호
+.Q7_13_No2 = 21853; //퀘스트 대기번호
+.Q7_13_Mob = 2777;
+.Q7_13_Kill = 1;
+.Q7_13_Exp = 73125;
+.Q7_13_Jexp = 193050;
+.Q7_13_Item = 0;
+.Q7_13_ItemAmount = 1;
+
+return;
+
+//===============================
+// 대기중인 퀘스트 삭제
+//===============================
+
+DelWaitQuest:
+	if(checkquest(.Q1_1_No2,PLAYTIME) == 2) erasequest .Q1_1_No2;
+	if(checkquest(.Q1_2_No2,PLAYTIME) == 2) erasequest .Q1_2_No2;
+	if(checkquest(.Q1_3_No2,PLAYTIME) == 2) erasequest .Q1_3_No2;
+	if(checkquest(.Q1_4_No2,PLAYTIME) == 2) erasequest .Q1_4_No2;
+	if(checkquest(.Q1_5_No2,PLAYTIME) == 2) erasequest .Q1_5_No2;
+	if(checkquest(.Q1_6_No2,PLAYTIME) == 2) erasequest .Q1_6_No2;
+	if(checkquest(.Q1_7_No2,PLAYTIME) == 2) erasequest .Q1_7_No2;
+	if(checkquest(.Q1_8_No2,PLAYTIME) == 2) erasequest .Q1_8_No2;
+	if(checkquest(.Q1_9_No2,PLAYTIME) == 2) erasequest .Q1_9_No2;
+	if(checkquest(.Q1_10_No2,PLAYTIME) == 2) erasequest .Q1_10_No2;
+	if(checkquest(.Q2_1_No2,PLAYTIME) == 2) erasequest .Q2_1_No2;
+	if(checkquest(.Q2_2_No2,PLAYTIME) == 2) erasequest .Q2_2_No2;
+	if(checkquest(.Q2_3_No2,PLAYTIME) == 2) erasequest .Q2_3_No2;
+	if(checkquest(.Q2_4_No2,PLAYTIME) == 2) erasequest .Q2_4_No2;
+	if(checkquest(.Q2_5_No2,PLAYTIME) == 2) erasequest .Q2_5_No2;
+	if(checkquest(.Q2_6_No2,PLAYTIME) == 2) erasequest .Q2_6_No2;
+	if(checkquest(.Q2_7_No2,PLAYTIME) == 2) erasequest .Q2_7_No2;
+	if(checkquest(.Q2_8_No2,PLAYTIME) == 2) erasequest .Q2_8_No2;
+	if(checkquest(.Q2_9_No2,PLAYTIME) == 2) erasequest .Q2_9_No2;
+	if(checkquest(.Q2_10_No2,PLAYTIME) == 2) erasequest .Q2_10_No2;
+	if(checkquest(.Q3_1_No2,PLAYTIME) == 2) erasequest .Q3_1_No2;
+	if(checkquest(.Q3_2_No2,PLAYTIME) == 2) erasequest .Q3_2_No2;
+	if(checkquest(.Q3_3_No2,PLAYTIME) == 2) erasequest .Q3_3_No2;
+	if(checkquest(.Q3_4_No2,PLAYTIME) == 2) erasequest .Q3_4_No2;
+	if(checkquest(.Q3_5_No2,PLAYTIME) == 2) erasequest .Q3_5_No2;
+	if(checkquest(.Q3_6_No2,PLAYTIME) == 2) erasequest .Q3_6_No2;
+	if(checkquest(.Q3_7_No2,PLAYTIME) == 2) erasequest .Q3_7_No2;
+	if(checkquest(.Q3_8_No2,PLAYTIME) == 2) erasequest .Q3_8_No2;
+	if(checkquest(.Q3_9_No2,PLAYTIME) == 2) erasequest .Q3_9_No2;
+	if(checkquest(.Q4_1_No2,PLAYTIME) == 2) erasequest .Q4_1_No2;
+	if(checkquest(.Q4_2_No2,PLAYTIME) == 2) erasequest .Q4_2_No2;
+	if(checkquest(.Q4_3_No2,PLAYTIME) == 2) erasequest .Q4_3_No2;
+	if(checkquest(.Q4_4_No2,PLAYTIME) == 2) erasequest .Q4_4_No2;
+	if(checkquest(.Q4_5_No2,PLAYTIME) == 2) erasequest .Q4_5_No2;
+	if(checkquest(.Q4_6_No2,PLAYTIME) == 2) erasequest .Q4_6_No2;
+	if(checkquest(.Q4_7_No2,PLAYTIME) == 2) erasequest .Q4_7_No2;
+	if(checkquest(.Q4_8_No2,PLAYTIME) == 2) erasequest .Q4_8_No2;
+	if(checkquest(.Q4_9_No2,PLAYTIME) == 2) erasequest .Q4_9_No2;
+	if(checkquest(.Q4_10_No2,PLAYTIME) == 2) erasequest .Q4_10_No2;
+	if(checkquest(.Q4_11_No2,PLAYTIME) == 2) erasequest .Q4_11_No2;
+	if(checkquest(.Q5_1_No2,PLAYTIME) == 2) erasequest .Q5_1_No2;
+	if(checkquest(.Q5_2_No2,PLAYTIME) == 2) erasequest .Q5_2_No2;
+	if(checkquest(.Q5_3_No2,PLAYTIME) == 2) erasequest .Q5_3_No2;
+	if(checkquest(.Q5_4_No2,PLAYTIME) == 2) erasequest .Q5_4_No2;
+	if(checkquest(.Q5_5_No2,PLAYTIME) == 2) erasequest .Q5_5_No2;
+	if(checkquest(.Q5_6_No2,PLAYTIME) == 2) erasequest .Q5_6_No2;
+	if(checkquest(.Q5_7_No2,PLAYTIME) == 2) erasequest .Q5_7_No2;
+	if(checkquest(.Q5_8_No2,PLAYTIME) == 2) erasequest .Q5_8_No2;
+	if(checkquest(.Q5_9_No2,PLAYTIME) == 2) erasequest .Q5_9_No2;
+	if(checkquest(.Q5_10_No2,PLAYTIME) == 2) erasequest .Q5_10_No2;
+	if(checkquest(.Q5_11_No2,PLAYTIME) == 2) erasequest .Q5_11_No2;
+	if(checkquest(.Q6_1_No2,PLAYTIME) == 2) erasequest .Q6_1_No2;
+	if(checkquest(.Q6_2_No2,PLAYTIME) == 2) erasequest .Q6_2_No2;
+	if(checkquest(.Q6_3_No2,PLAYTIME) == 2) erasequest .Q6_3_No2;
+	if(checkquest(.Q6_4_No2,PLAYTIME) == 2) erasequest .Q6_4_No2;
+	if(checkquest(.Q6_5_No2,PLAYTIME) == 2) erasequest .Q6_5_No2;
+	if(checkquest(.Q6_6_No2,PLAYTIME) == 2) erasequest .Q6_6_No2;
+	if(checkquest(.Q6_7_No2,PLAYTIME) == 2) erasequest .Q6_7_No2;
+	if(checkquest(.Q6_8_No2,PLAYTIME) == 2) erasequest .Q6_8_No2;
+	if(checkquest(.Q6_9_No2,PLAYTIME) == 2) erasequest .Q6_9_No2;
+	if(checkquest(.Q6_10_No2,PLAYTIME) == 2) erasequest .Q6_10_No2;
+	if(checkquest(.Q7_1_No2,PLAYTIME) == 2) erasequest .Q7_1_No2;
+	if(checkquest(.Q7_2_No2,PLAYTIME) == 2) erasequest .Q7_2_No2;
+	if(checkquest(.Q7_3_No2,PLAYTIME) == 2) erasequest .Q7_3_No2;
+	if(checkquest(.Q7_4_No2,PLAYTIME) == 2) erasequest .Q7_4_No2;
+	if(checkquest(.Q7_5_No2,PLAYTIME) == 2) erasequest .Q7_5_No2;
+	if(checkquest(.Q7_6_No2,PLAYTIME) == 2) erasequest .Q7_6_No2;
+	if(checkquest(.Q7_7_No2,PLAYTIME) == 2) erasequest .Q7_7_No2;
+	if(checkquest(.Q7_8_No2,PLAYTIME) == 2) erasequest .Q7_8_No2;
+	if(checkquest(.Q7_9_No2,PLAYTIME) == 2) erasequest .Q7_9_No2;
+	if(checkquest(.Q7_10_No2,PLAYTIME) == 2) erasequest .Q7_10_No2;
+	if(checkquest(.Q7_11_No2,PLAYTIME) == 2) erasequest .Q7_11_No2;
+	if(checkquest(.Q7_12_No2,PLAYTIME) == 2) erasequest .Q7_12_No2;
+	if(checkquest(.Q7_13_No2,PLAYTIME) == 2) erasequest .Q7_13_No2;
+
+	return;
+
+}

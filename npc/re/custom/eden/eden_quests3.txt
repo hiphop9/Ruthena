@@ -1,0 +1,4708 @@
+//===== rAthena Script =======================================
+//= Eden Group Quest - Quests NPCs
+//===== Description: =========================================
+//= Eden Group Headquarter NPCs.
+//===== Changelogs: ==========================================
+//= 1.0 First Version. [L0ne_W0lf]
+//= 1.1 Removed unencoded comments (Korean -> Gibberish)
+//=     Readded the GM helper NPC, commented out.
+//= 1.2 Some little optimization here and there. [Masao]
+//= 1.3 Added Instructor Ur and the new Quests which come
+//=     alongside him. Special thanks to Chilly for the base. [Masao]
+//= 1.4 Partial cleaning and bug fixing. [Euphy]
+//= 1.4a Added 'npcskill' command. [Euphy]
+//= 1.4b Added 'disable_items' command. [Euphy]
+//= 1.5 Added GM management function. [Euphy]
+//= 1.6 Kagerou/Oboro support (Class -> BaseClass) [Euphy]
+//= 2.0 Updated Instructor Ur's quests. [Capuche]
+//= 2.1 Updated Blacksmith Thorn and Weapons Expert NPC. [Capuche]
+//= 2.2 Added support to Para_Team_Mark_ in Eden Group. [Ragno]
+//= 2.3 Added use of F_HasEdenGroupMark function. [Ragno]
+//============================================================
+
+moc_para01,25,35,4	script	낙원단 교관 보야#para01	4_M_KNIGHT_GOLD,{
+	mes "[교관 보야]";
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "낙원단단원이 아닌 자가 나에게 무슨 볼";
+		mes "일이 있다는 거지?";
+		next;
+		mes "[교관 보야]";
+		mes "혹시 또 모르지. 낙원단에 가입한다면";
+		mes "그 볼 일이 생길지도.";
+		mes "옆에 서 있는 <NAVI>[라임 이베노르]<INFO>moc_para01,27,35,0,000,0</INFO></NAVI>에게";
+		mes "가입 상담을 해 보도록.";
+		close;
+	}
+	if(baselevel < 10) goto NotLevel;
+	else if(baselevel >= 100) {
+		mes "쉐도우 장비가 필요해서 왔어?";
+		mes "그거라면 낙원단 무기고에 있는 <NAVI>[에밀]<INFO>moc_para01,110,91,0,000,0</INFO></NAVI>";
+		mes "에게로 가. <ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>로 얼마든지";
+		mes "대여해주고 있으니까.";
+		next;
+		mes "[교관 보야]";
+		mes "낙원단 주화가 없다면 100레벨 이상의";
+		mes "의뢰 게시판을 살펴 봐.";
+		mes "언제나 낙원단 주화를 들고 모험가를";
+		mes "기다리고 있는 의뢰들이 많이 있어.";
+		close;
+	}
+	else if (!isbegin_quest(17533)) {
+		mes "흠... 보아하니 기본 장비 말고도 더";
+		mes "강력한 장비가 필요한 것 같은데. 내";
+		mes "말이 맞나?";
+		mes "괜히 사람 많은 곳에서 주눅 들어서 할";
+		mes "말도 못 하는 건 아니지?";
+		next;
+		switch (select("장비 필요한 것 맞아요.:그, 그냥 둘러 보러 왔어요.")) {
+			mes "[교관 보야]";
+		case 1:
+			mes "내가 그런 장비를 지원하는 건 맞는데,";
+			mes "좀 특수한 장비거든. 쉐도우 장비가";
+			mes "뭔지는 알고?";
+			next;
+			switch(select("네, 알아요.:그게 뭔데요?")) {
+
+			case 1:
+				mes "[교관 보야]";
+				mes "그럼 이야기가 빠르겠군. 잘됐어.";
+				next;
+				mes "[교관 보야]";
+				mes "쉐도우 장비가 필요하면 무기고에 있는";
+				mes "관리자 <NAVI>[에밀]<INFO>moc_para01,110,91,0,000,0</INFO></NAVI>을 만나 봐.";
+				mes "네게 딱 맞춘 쉐도우 장비를 ^0404fb72시간^000000";
+				mes "^0404fb동안 대여^000000해 줄 거야.";
+				setquest 17533;
+				close;
+
+			case 2:
+				mes "[교관 보야]";
+				mes "쉐도우 장비는 사용자의 잠재력을 끌어";
+				mes "올리는 특수한 장비야. 기본 장비를";
+				mes "장착하고서도 추가로 장착할 수 있단";
+				mes "말이야.";
+				next;
+				mes "[교관 보야]";
+				mes "예를 들어 가죽 갑옷은 얇고 가벼워서";
+				mes "활동하기 좋지만, 높은 방어력을";
+				mes "기대하긴 어렵지.";
+				mes "하지만 거기에 다른 갑옷을 덧댄다면?";
+				mes "더 강력한 방어력을 얻을 수 있겠지?";
+				mes "쉐도우 장비가 바로 그런 역할이야.";
+				next;
+				mes "[교관 보야]";
+				mes "ALT+Q 키를 눌러서 장비창을 열어 봐.";
+				mes "거기에 특수 장비란이 보일 거야. 바로";
+				mes "그곳에 쉐도우 장비들을 장착할 수가";
+				mes "있는 거지.";
+				next;
+				mes "[교관 보야]";
+				mes "궁금하면 한 번 사용해 보든가. 손해는";
+				mes "없을 테니까. 어때? 생각있어?";
+				next;
+				switch(select("네!!! 엄청요!!!:다음에 다시 올게요.")) {
+
+				case 1:
+					mes "[교관 보야]";
+					mes "기운차서 좋군.";
+					next;
+					mes "[교관 보야]";
+					mes "쉐도우 장비가 필요하면 무기고에 있는";
+					mes "관리자 <NAVI>[에밀]<INFO>moc_para01,110,91,0,000,0</INFO></NAVI>을 만나 봐.";
+					mes "네게 딱 맞춘 쉐도우 장비를 ^0404fb72시간^000000";
+					mes "^0404fb동안 대여^000000해 줄 거야.";
+					setquest 17533;
+					close;
+
+
+				case 2:
+					mes "[교관 보야]";
+					mes "너, 꼭 나를 장사꾼처럼 만든다?";
+					mes "아무튼 지금은 생각 없다는 거지?";
+					mes "알았어. 하지만 기억해 둬. 너는 반드시";
+					mes "나를 다시 찾아 올 거라는 것을.";
+					close;
+
+				}
+			}
+
+		case 2:
+			mes "그래? 의뢰 게시판이라도 보러 왔나?";
+			close;
+		}
+	}
+	if (checkquest(17533) == 1) {
+		mes "왔나? 바깥 날씨는 어때?";
+		mes "그나저나.....";
+		next;
+		mes "[교관 보야]";
+		mes "<NAVI>[에밀]<INFO>moc_para01,110,91,0,000,0</INFO></NAVI>은 만나 봤어? 낙원단 무기고에";
+		mes "들어가자마자 보일 테니 찾기는 어렵지";
+		mes "않을거야.";
+		close;
+	}
+	if (isbegin_quest(17534) == 1 ) {
+		mes "왔나? 바깥 날씨는 어때?";
+		mes "그나저나.....";
+		next;
+		mes "[교관 보야]";
+		mes "왔군. 어때? 쉐도우 장비는 만족스럽나?";
+		mes "대여 시간이 지나면 다시 찾아가";
+		mes "대여하도록 해.";
+		next;
+		mes "[교관 보야]";
+		mes "그러고 보니... 왜 기본 장비가 없어?";
+		mes "쉐도우 장비로만 버틸 셈이야? 쉐도우";
+		mes "장비는 어디까지나 보조적인 역할을 할";
+		mes "뿐이라고.";
+		next;
+		mes "[교관 보야]";
+		mes "쓸만한 장비가 없다면 이 옆에 있는";
+		mes "우르라는 교관과 기본 장비에 대해";
+		mes "상담해 봐.";
+		completequest 17534;
+		if (!isbegin_quest(17528))
+			setquest 17535;
+		close;
+	}
+	if (isbegin_quest(17535) == 1 || isbegin_quest(17534) == 2) {
+		mes "왔나? 바깥 날씨는 어때?";
+		mes "그나저나.....";
+		next;
+		mes "[교관 보야]";
+		mes "기본 장비에 관해서라면 이 옆에 있는";
+		mes "교관 우르와 상의해 봐.";
+		close;
+	}
+	mes "왔나? 바깥 날씨는 어때?";
+	mes "그나저나.....";
+	next;
+	mes "[교관 보야]";
+	mes "쉐도우 장비를 추가적으로 대여하고";
+	mes "싶다면 낙원단 무기고에 있는 <NAVI>[에밀]<INFO>moc_para01,110,91,0,000,0</INFO></NAVI>을";
+	mes "만나 보도록.";
+	close;
+
+
+NotLevel:
+	mes "장비를 받으러 왔나? 그렇지만 나이프";
+	mes "하나 드는 것이 고작일텐데?";
+	mes "베이스 레벨이 10이 되면 다시 찾아 와.";
+	mes "그때라면 쓸 수 있는 것이 있을 테니까.";
+	close;
+OnInit:
+	questinfo QTYPE_QUEST, QMARK_YELLOW, "!isbegin_quest(17533) && countitem(22508) == 1 && BaseLevel < 100 && BaseLevel >= 10";
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17534) == 1 && countitem(22508) == 1 && BaseLevel < 100 && !isbegin_quest(17535)";
+}
+
+moc_fild11,180,253,5	script	Talking Dog#para03	972,{
+	if (para_suv01 == 1) {
+		mes "[Talking Dog]";
+		mes "kkkkuuuuahhh.";
+		mes "rrrrrruuuuhh.";
+		mes "bowwow..";
+		next;
+		mes "[Talking Dog]";
+		mes "What's up?";
+		mes "You are!";
+		mes "A member of the Eden Group.";
+		mes "Have you come to give me a meal? I don't like drinks.";
+		next;
+		switch (select("Boya is really perfect.:Boya is really great.:Boya is really soft.")) {
+		case 1:
+			mes "[Talking Dog]";
+			mes "Uhh...";
+			mes "What are you saying.";
+			close;
+		case 2:
+			mes "[Talking Dog]";
+			mes "Ahh... um...";
+			mes "Gosh, did you come here to participate in the training?";
+			mes "If Boya sent you then you know that it's battle training.";
+			mes "Bow wow...";
+			next;
+			mes "[Talking Dog]";
+			mes "If so, should I start securing this oasis more clearly?";
+			mes "Can you see a Condor flying?";
+			next;
+			mes "[Talking Dog]";
+			mes "Can you scare them away for me?";
+			mes "So people can use this oasis safer and more comfortably.";
+			next;
+			mes "[Talking Dog]";
+			mes "We should hunt at least 10 Condors, ok?";
+			mes "I will sleep for a while.";
+			mes "Krrrr woo bow...";
+			set para_suv01,2;
+			changequest 7128,7129;
+			close;
+		case 3:
+			mes "[Talking Dog]";
+			mes "Are you ok?";
+			mes "Haven't you seen a talking dog before?";
+			mes "What are you talking about?";
+			close;
+		}
+	}
+	if (para_suv01 == 2) {
+		if (checkquest(7129,HUNTING) == 2) {
+			mes "[Talking Dog]";
+			mes "Woooohh...";
+			mes "Great!";
+			mes "I can feel my youth from you.";
+			next;
+			mes "[Talking Dog]";
+			mes "Nevermind.";
+			mes "Let's find the next target kk!";
+			mes "Ok. Let's drive the Desert Wolves out of here.";
+			next;
+			mes "[Talking Dog]";
+			mes "If they grow up they will become dangerous.";
+			mes "......";
+			next;
+			mes "[Talking Dog]";
+			mes "Why, why are you looking at me like that?";
+			mes "They are wolves and I am a nice dog.";
+			mes "But I haven't always been a dog my entire life.";
+			next;
+			mes "[Talking Dog]";
+			mes "I will show you that don't have to pity me at all.";
+			next;
+			mes "[Talking Dog]";
+			mes "They pee wherever and have no shame.";
+			mes "Just waving their tails when they grow up and biting people without any care!";
+			next;
+			mes "[Talking Dog]";
+			mes "You must hunt at least 10!";
+			mes "Exactly 10!";
+			mes "Go go go!";
+			set para_suv01,3;
+			changequest 7129,7130;
+			close;
+		}
+		mes "[Talking Dog]";
+		mes "First lets follow the bald and noisy bird.";
+		mes "Yes Condors.";
+		mes "Kill 10 Condors. It seems to easy, right?";
+		mes "Oh, if you are tired I will help you.";
+		next;
+		mes "-When the dog barked, your HP and SP recovered.-";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 3) {
+		if (checkquest(7130,HUNTING) == 2) {
+			mes "[Talking Dog]";
+			mes "You are so perfect.";
+			next;
+			mes "[Talking Dog]";
+			mes "Or not. Hehe, anyway thanks for your help.";
+			mes "The oasis has almost been secured now.";
+			mes "Ok, it's the last step!";
+			next;
+			mes "[Talking Dog]";
+			mes "There's an annoying monster that hides in the sand and poisons people out of nowhere.";
+			next;
+			mes "[Talking Dog]";
+			mes "All beautiful things have some poison inside but these actually kill.";
+			mes "Kill Scorpions which are called the poison of the desert!";
+			next;
+			mes "[Talking Dog]";
+			mes "It's the last step so let's make it simple";
+			mes "Just hunt 5!";
+			mes "Bow wow!";
+			set para_suv01,4;
+			changequest 7130,7131;
+			close;
+		}
+		mes "[Talking Dog]";
+		mes "I don't want you to show any pity.";
+		mes "I am dog with a golden heart.";
+		next;
+		mes "[Talking Dog]";
+		mes "After hunting the 10 Desert Wolves come back again.";
+		mes "Oh, if you are tired I will help you.";
+		next;
+		mes "-When the dog barked, your HP and SP recovered.-";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 4) {
+		if (checkquest(7131,HUNTING) == 2) {
+			mes "[Talking Dog]";
+			mes "Um. Excellent.";
+			mes "You are awesome!";
+			next;
+			mes "[Talking Dog]";
+			mes "Thanks to your effort the oasis is secure.";
+			mes "Don't look around!";
+			mes "If I say it's secure!";
+			mes "Uhuhuhuh aaaang!";
+			next;
+			mes "[Talking Dog]";
+			mes "Here here here.";
+			mes "If I dig more and more, I can find Scorpions but";
+			mes "this oasis will be safer for sure.";
+			next;
+			mes "[Talking Dog]";
+			mes "You can be proud and confident by yourself and do your best.";
+			mes "You've helped a lot to make my rest comfortable.";
+			next;
+			mes "[Talking Dog]";
+			mes "You've helped to conquer the desert,";
+			mes "and passed the beginner training steps so I will stamp my feet.";
+			mes "krrrrreuung. hup.";
+			next;
+			mes "[Talking Dog]";
+			mes "Go back to the Eden Group headquarters and show it to the flashy Rune Knight.";
+			mes "Let me say again that you are great!";
+			mes "Hooooohooo~";
+			set para_suv01,5;
+			changequest 7131,7132;
+			close;
+		}
+		mes "[Talking Dog]";
+		mes "Let's hunt only 5 Scorpions.";
+		mes "So we can make peace in this oasis.";
+		next;
+		mes "[Talking Dog]";
+		mes "When I take a nap they won't chew my tail any more.";
+		mes "Due to his mistake my feet won't be hurt at all.";
+		next;
+		mes "[Talking Dog]";
+		mes "You can fight.";
+		mes "I can rest more comfortably.";
+		mes "Other people are going to be safer too.";
+		next;
+		mes "[Talking Dog]";
+		mes "Everyone will think fondly of the Eden Group.";
+		mes "Oh, if you are tired I will help you.";
+		next;
+		mes "-When the dog barked, your HP and SP recovered.-";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 5) {
+		mes "[Talking Dog]";
+		mes "kkkkkaaaaauuuunnng.";
+		mes "oopssss kup.";
+		next;
+		mes "[Talking Dog]";
+		mes "Why are you still here?";
+		mes "You are done here.";
+		mes "Hooooo bow wow.";
+		close;
+	}
+	if (para_suv01 > 5) {
+		mes "[Talking Dog]";
+		mes "Hey man~ What's going on?";
+		mes "What about the Rune Knight?";
+		mes "Krrrrr...";
+		mes "Hyuk huk...";
+		next;
+		mes "[Talking Dog]";
+		mes "The Eden Group is cool.";
+		mes "They're a really good group.";
+		mes "They accepted a wandering talking dog.";
+		mes "Take care and good luck.";
+		close;
+	}
+	mes "Hey look.";
+	mes "I'm a talking dog.";
+	mes "Not a wolf.";
+	mes "I wasn't a dog originally...";
+	next;
+	if (callfunc("F_HasEdenGroupMark")) {
+		mes "[Talking Dog]";
+		mes "Anyway are you a Eden Group member?";
+		mes "Oh good to see you.";
+		mes "I am also a member of Eden Group.";
+		mes "Take care and good luck.";
+		close;
+	}
+	mes "[Talking Dog]";
+	mes "Why are you looking at me like that?";
+	mes "......";
+	close;
+}
+
+prt_sewb1,131,262,3	script	Timid Cat#para04	422,{
+	if (para_suv01 < 6) {
+		mes "[Timid Cat]";
+		mes "Meow...";
+		mes "Who are you meow?";
+		mes "Why are you here meow?";
+		close;
+	}
+	if (para_suv01 == 6) {
+		mes "[Timid Cat]";
+		mes "Come on meow...";
+		mes "I may be standing here and talking to you like this meow but I am a still a cat meow...";
+		next;
+		mes "[Timid Cat]";
+		mes "Dear human you are";
+		mes "a member of my group?";
+		mes "Re... really...!";
+		mes "Dear Boya's help is like a giant and...";
+		next;
+		switch (select("Beautiful Saury:Fresh Mackerel:Beautiful Tuna")) {
+		case 1:
+			mes "[Timid Cat]";
+			mes "Big and beautiful Saury...";
+			mes "I am shy.";
+			close;
+		case 2:
+			mes "[Timid Cat]";
+			mes "I want to eat mackerel.";
+			mes "Where are the big and fresh mackerel meow?";
+			close;
+		case 3:
+			mes "[Timid Cat]";
+			mes "Do you know the big and beautiful tuna?";
+			mes "Dear Boya sent you here for sure.";
+			mes "How do I explain this...?";
+			next;
+			mes "[Timid Cat]";
+			mes "Did something pass under my feet just now meow?";
+			mes "Do you want to kill a cat.";
+			mes "The environment here is terrible.";
+			next;
+			mes "[Timid Cat]";
+			mes "Anyway I'm doing what I was assigned to do.";
+			mes "So hi, hello and welcome.";
+			next;
+			mes "[Timid Cat]";
+			mes "Did you come here to have a battle?";
+			mes "Hunt those Thief Bugs, hurry up!";
+			mes "Hunt at least 10!";
+			mes "Meooow!";
+			next;
+			mes "[Timid Cat]";
+			mes "I really don't like those nasty crawlers...";
+			mes "Meow~!";
+			next;
+			mes "^4d4dffThe cat was suprised by";
+			mes "a thief bug and froze in";
+			mes "place. Hunt those";
+			mes "Thief Bugs around here.^000000";
+			set para_suv01,7;
+			changequest 7133,7134;
+			close;
+		}
+	}
+	if (para_suv01 == 7) {
+		if (checkquest(7134,HUNTING) == 2) {
+			mes "[Timid Cat]";
+			mes "Now do you understand the dirty and humid underground sewers?";
+			mes "Eeeh look what's next meow.";
+			next;
+			mes "[Timid Cat]";
+			mes "It's a symbol of dirt next to those Thief Bugs.";
+			mes "Hunt some Tarou to make the sewers cleaner.";
+			next;
+			mes "[Timid Cat]";
+			mes "For our members joining this mission.";
+			mes "Hunt 10 Tarou.";
+			mes "Easy, ain't it?";
+			next;
+			mes "[Timid Cat]";
+			mes "Why didn't I ask you at once? kkk..??";
+			mes "Umm........";
+			mes "Because it's just a training mission.";
+			next;
+			mes "[Timid Cat]";
+			mes "Training missions are hard and anoying.";
+			mes "So go hurry and hunt 10 Tarou.";
+			set para_suv01,8;
+			changequest 7134,7135;
+			close;
+		}
+		mes "[Timid Cat]";
+		mes "Clean the sewers. Now the first step is hunting Thief Bugs.";
+		mes "Isn't that simple, meow?";
+		next;
+		mes "[Timid Cat]";
+		mes "Take care to check your map so you don't get lost.";
+		mes "It's a service meeow.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 8) {
+		if (checkquest(7135,HUNTING) == 2) {
+			mes "[Timid Cat]";
+			mes "Great job~!";
+			mes "How'd you get rid of those dirty bugs and Tarou. You are brave.";
+			next;
+			mes "[Timid Cat]";
+			mes "Now have courage because I'm sending you to a stronger opponent.";
+			mes "But first in order to test your courage, hunt Familiars.";
+			next;
+			mes "[Timid Cat]";
+			mes "Familiars will bite you so be careful.";
+			mes "They are mean.";
+			mes "They scare me so just hunt 5 and that should be enough.";
+			next;
+			mes "[Timid Cat]";
+			mes "That will show me that you are brave.";
+			mes "Meow~!";
+			next;
+			mes "[Timid Cat]";
+			mes "I don't have anything...";
+			mes "......";
+			mes "What do you want meow? Familiars are waiting to fight with you, hurry up, move~!";
+			set para_suv01,9;
+			changequest 7135,7136;
+			close;
+		}
+		mes "[Timid Cat]";
+		mes "If you can't kill the Tarou you might get all kinds of dirty diseases.";
+		mes "So be proud of yourself and do your best to kill them.";
+		next;
+		mes "[Timid Cat]";
+		mes "I will help you a little.";
+		mes "Here, I have recovered your strengh meow..";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 9) {
+		if (checkquest(7136,HUNTING) == 2) {
+			mes "[Timid Cat]";
+			mes "You are great meow~";
+			mes "You killed them so quickly!";
+			mes "Meow...";
+			next;
+			mes "[Timid Cat]";
+			mes "Now you are not scared of bugs and tarou at all.";
+			mes "Thanks for participating in the Conquer the Culvert training mission.";
+			next;
+			mes "[Timid Cat]";
+			mes "Now go back to the headquarters and ask Instructor Boya to make sure he has the beautiful tuna...";
+			mes "I will be waiting here.";
+			next;
+			mes "[Timid Cat]";
+			mes "Do you know how to get to the Eden Group Headquarters?";
+			mes "Prontera is the closest city from here.";
+			mes "Go to Prontera and find an Eden Group Teleporter.";
+			set para_suv01,10;
+			changequest 7136,7137;
+			close;
+		}
+		mes "[Timid Cat]";
+		mes "Familiars are really scary.";
+		mes "They're always flying.";
+		next;
+		mes "[Timid Cat]";
+		mes "It's the last course so cheer up.";
+		mes "I will help you a little.";
+		mes "Here, I have recovered your strengh meow..";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 >= 10) {
+		mes "[Timid Cat]";
+		mes "You've completed 'Conquer the Culvert'.";
+		mes "Go back to the Eden Group headquarters to report to Boya.";
+		next;
+		mes "[Timid Cat]";
+		mes "Boya might eat my tuna while he is waiting for you.";
+		close;
+	}
+	mes "[Timid Cat]";
+	mes "How are you meeow?";
+	mes "Did you volunteer to conquer the Culvert?";
+	mes "You are a member of the Edgen Group for sure.";
+	mes "You are helping to make the world a better place.";
+	close;
+}
+
+pay_arche,41,136,3	script	Eden Member Karl#para05	904,{
+	if (para_suv01 < 13) {
+		if (callfunc("F_HasEdenGroupMark")) {
+			mes "[Karl]";
+			mes "Hey, how are you?";
+			mes "Good to see you~";
+			mes "Are you going inside?";
+			close;
+		}
+		mes "[Karl]";
+		mes "Umm...?";
+		mes "You are not the one I am waiting for.";
+		close;
+	}
+	if (para_suv01 == 13) {
+		mes "[Karl]";
+		mes "Hello?";
+		mes "Since I got a report, I was waiting for you.";
+		mes "You came here to join the training mission, right?";
+		next;
+		mes "[Karl]";
+		mes "Have you ever entered this cave before?";
+		mes "I don't know if you already heard some stories in this village.";
+		next;
+		mes "[Karl]";
+		mes "There are many of dead souls that change their appearance as if they are real people and make threatening remarks.";
+		mes "It's too bad, isn't it?";
+		next;
+		mes "[Karl]";
+		mes "That's why we chose this place as step 2 of the battle training mission.";
+		mes "This step is called 'Conquer Ghost Cave~'.";
+		mes "Help people to enjoy their nights comfortably.";
+		next;
+		mes "[Karl]";
+		mes "There are many dangerous things there. Hmm...";
+		mes "To you the 1st floor is enough.";
+		next;
+		mes "[Karl]";
+		mes "Lets conquer the dangerous ghost cave...";
+		mes "Kill the bone Skeletons in there.";
+		next;
+		mes "[Karl]";
+		mes "The bones are from Skeletons.";
+		mes "Actually Skeletons or just normal bones are all the same but...";
+		next;
+		mes "[Karl]";
+		mes "Skeletons are one of the basic undead classes.";
+		mes "Undead never ever. Hunt 15 undead Skeletons.";
+		next;
+		mes "[Karl]";
+		mes "If you feel like you're in danger don't hesitate to just leave.";
+		mes "You're not worried about getting hurt are you?";
+		set para_suv01,14;
+		changequest 7138,7139;
+		close;
+	}
+	if (para_suv01 == 14) {
+		if (checkquest(7139,HUNTING) == 2) {
+			mes "[Karl]";
+			mes "Did you get how the undead work?";
+			mes "As you know undead never die so, blessing of live person it's same as curse to them.";
+			next;
+			mes "[Karl]";
+			mes "So... skills which can save people like Heal and Resurrection.";
+			mes "Those things are really strong attacks to undead class.";
+			next;
+			mes "[Karl]";
+			mes "Anyway... that's it..";
+			mes "Next... I guess you already see while you were killing Skeletons.";
+			mes "Some green things are picking up all of the stuff dropped by the dead monsters.";
+			next;
+			mes "[Karl]";
+			mes "Do you know Porings? Maybe they are related to them.";
+			mes "They look really bad, maybe they have been eating poison or something.";
+			next;
+			mes "[Karl]";
+			mes "Ok if you're ready go and kill those Poporings.";
+			mes "You should hunt 10 of them.";
+			next;
+			set para_suv01,15;
+			changequest 7139,7140;
+			close;
+		}
+		mes "[Karl]";
+		mes "Skeletons are basic undead.";
+		mes "Use the Heal or Resurrection skill.";
+		mes "If you can.";
+		next;
+		mes "[Karl]";
+		mes "Just in case I will recover all your energy.";
+		mes "It's the last step so be careful.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 15) {
+		if (checkquest(7140,HUNTING) == 2) {
+			mes "[Karl]";
+			mes "Did you get back what the Poporing stole?";
+			mes "This cave is really deep and there are lots of precious things that they could have picked up.";
+			next;
+			mes "[Karl]";
+			mes "You did really great job. Excellent.";
+			mes "The 1st floor is safer now. Thanks for helping.";
+			next;
+			mes "[Karl]";
+			mes "You've completed all of the training missions so go back to the headquarters and get approval from the flashy Rune Knight.";
+			next;
+			mes "[Karl]";
+			mes "You might get a new uniform.";
+			mes "Haha. I will keep tabs on your progression.";
+			set para_suv01,16;
+			changequest 7140,7141;
+			close;
+		}
+		mes "[Karl]";
+		mes "Poporings are stronger than you expect.";
+		mes "If you treat them the same as a normal Poring it will get you in trouble.";
+		next;
+		mes "[Karl]";
+		mes "Just in case I will recover all your energy.";
+		mes "It's the last step so be careful.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 >= 16) {
+		mes "[Karl]";
+		mes "I already informed Boya at the Eden Group headquarters.";
+		mes "If you go there he will give you a big welcome.";
+		next;
+		mes "[Karl]";
+		mes "You will get a new uniform, aren't you excited?";
+		mes "Hahaha..";
+		close;
+	}
+	mes "[Karl]";
+	mes "Killing undead?";
+	mes "Do your best to make the world safer.";
+	mes "It's one of the goals of the Eden Group.";
+	close;
+}
+
+anthell01,29,264,5	script	Eden Member Cloud#para06	899,{
+	if (para_suv01 < 17) {
+		if (callfunc("F_HasEdenGroupMark")) {
+			mes "[Cloud]";
+			mes "Oops.";
+			mes "You are a member of my group.";
+			mes "Why did you come here, are you looking for danger?";
+			next;
+			mes "[Cloud]";
+			mes "One of the strongest boss monsters is in here.";
+			mes "Be careful when exploring here.";
+			close;
+		}
+		mes "[Cloud ]";
+		mes "What are you looking at?";
+		mes "We are not related to each other, are we...";
+		close;
+	}
+	if (para_suv01 == 17) {
+		mes "[Cloud]";
+		mes "Hello?";
+		mes "Why did you come here, looking for danger?";
+		next;
+		switch (select("Conquer Ant Hell:Just wanted to meet you:Where am I?")) {
+		case 1:
+			mes "[Cloud]";
+			mes "Uh. Conquer Ant Hell? Did you say that?";
+			mes "You are a trainee.";
+			mes "You have come to the right place.";
+			next;
+			mes "[Cloud]";
+			mes "At first I will explain about Ant Hell.";
+			mes "Ants dug a cave in the sand and it is linked to the surface. That's Ant Hell.";
+			next;
+			mes "[Cloud]";
+			mes "Sand flowed into the hole gradually.";
+			mes "If anyone steps on the hole they will fall into the cave through the hole in the sand..";
+			next;
+			mes "[Cloud]";
+			mes "It's hard to survive from there.";
+			mes "To us it seems like a normal happening so it isn't a matter of survival like to normal people.";
+			next;
+			mes "[Cloud]";
+			mes "Many kinds of ants have come to live here.";
+			mes "There is a boss monster named Maya so you should be more cautious.";
+			next;
+			mes "[Cloud]";
+			mes "Ok let's try to hunt the weakest ant first.";
+			mes "Pierre is the name of the weakest ant.";
+			mes "They are just down here.";
+			next;
+			mes "[Cloud]";
+			mes "In the case of ants, they assist eachother when attacked.";
+			mes "Be careful and kill 15 Pierre ants.";
+			set para_suv01,18;
+			changequest 7142,7143;
+			close;
+		case 2:
+			mes "[Cloud]";
+			mes "......";
+			mes "Haha... are you joking?";
+			mes "You are exhausted from the extremely hot weather in the desert.";
+			next;
+			mes "[Cloud]";
+			mes "I am a busy man.";
+			mes "One of the trainees was planning to visit me but that person still hasn't showed yet. I am getting nervous.";
+			close;
+		case 3:
+			mes "[Cloud]";
+			mes "Where you are?";
+			mes "You are in Anth Hell southwest of Morocc.";
+			mes "Morocc is the closest city, northeast of here.";
+			close;
+		}
+	}
+	if (para_suv01 == 18) {
+		if (checkquest(7143,HUNTING) == 2) {
+			mes "[Cloud]";
+			mes "Hey, what was it?";
+			mes "Maybe you saw an Andre when you were hunting Pierre.";
+			next;
+			mes "[Cloud]";
+			mes "Well, now let's hunt Andre aswel.";
+			mes "Ahah the way you're looking at me, ''why didn't I ask you to do this all at once'' right?";
+			next;
+			mes "[Cloud]";
+			mes "Ain't it more fun this way?";
+			mes "Hey, now your next target is 15 Andre!";
+			mes "You are strong so it will be fine!";
+			next;
+			mes "[Cloud]";
+			mes "If you can't find Andre go deeper into the cave.";
+			mes "Ah, and be careful of Maya.";
+			set para_suv01,19;
+			changequest 7143,7144;
+			close;
+		}
+		mes "[Cloud]";
+		mes "What do you think of Ant Hell?";
+		mes "Can you stay longer?";
+		mes "Ok, I will recover your strengh so, keep going.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 19) {
+		if (checkquest(7144,HUNTING) == 2) {
+			mes "[Cloud]";
+			mes "Great. You seem to have killed all of the Andre.";
+			mes "How do you think about fighting ants?";
+			mes "Was it good?";
+			next;
+			mes "[Cloud]";
+			mes "Hey, cheer up.";
+			mes "To conquer Ant Hell you have one step left.";
+			mes "You might have guessed your next target already.";
+			next;
+			mes "[Cloud]";
+			mes "Vitata!";
+			mes "How can I say... He seems like honey.";
+			mes "Pierre is a worker. Andre is a guardian and so... Vitata is like a mother.";
+			next;
+			mes "[Cloud]";
+			mes "They are really kind to kids and women but don't show any pity to ants.";
+			mes "Hunt the Vitata who takes care of the ant eggs.";
+			next;
+			mes "[Cloud]";
+			mes "If somebody falls into Ant Hell it might be a bit safer than before.";
+			mes "Now it's the last step so cheer up and let's kill 10 Vitata.";
+			next;
+			mes "[Cloud]";
+			mes "If you feel you're in too much danger. Just come back.";
+			mes "I will heal you.";
+			set para_suv01,20;
+			changequest 7144,7145;
+			close;
+		}
+		mes "[Cloud]";
+		mes "See, to cheer you up I will heal you until you finish the training.";
+		mes "Chin up and cheer up.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 20) {
+		if (checkquest(7145,HUNTING) == 2) {
+			mes "[Cloud]";
+			mes "Oh... it might have been an anoying fight.";
+			mes "You finished so fast.";
+			next;
+			mes "[Cloud]";
+			mes "Good job. Go back to the headquarters and report.";
+			mes "You've completed the training quickly.";
+			next;
+			mes "[Cloud]";
+			mes "You will get good news.";
+			mes "You did a really good job even under the hot weather.";
+			set para_suv01,21;
+			changequest 7145,7146;
+			close;
+		}
+		mes "[Cloud]";
+		mes "See, to cheer up I will heal you until you finish the training.";
+		mes "Chin up and cheer up.";
+		next;
+		mes "[Cloud]";
+		mes "Just Vitata, isn't that an easy opponent?";
+		mes "If you see Maya just run away.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 >= 21) {
+		mes "[Cloud]";
+		mes "It's enough to say that you've conquered Ant Hell.";
+		mes "Aren't you getting used to it here?";
+		next;
+		mes "[Cloud]";
+		mes "Go back to the headquarters and report that you completed the mission, hurry up";
+		mes "you will receive good news.";
+		mes "You will receive the Eden Group uniform aswel.";
+		close;
+	}
+	mes "[Cloud]";
+	mes "I am really proud of the Eden Group.";
+	mes "Does the uniform look good on me?";
+	mes "Haha...";
+	close;
+}
+
+in_orcs01,38,175,3	script	Eden Member Hooksha	803,{
+	if (para_suv01 < 24) {
+		if (callfunc("F_HasEdenGroupMark")) {
+			mes "[Hooksha]";
+			mes "Unbelievable why did you come here?";
+			mes "Um... You are not on the third step of the training?";
+			mes "Yeeee~ I'm excited~";
+			next;
+			mes "[Hooksha]";
+			mes "I am a little bored waiting for trainees. Where are they?";
+			close;
+		}
+		mes "[Hooksha]";
+		mes "Hello.";
+		mes "Why did you come here?";
+		mes "Umm... Aaaaa...";
+		next;
+		mes "[Hooksha]";
+		mes "Why don't you join my group?";
+		mes "If you have interest in joining us,";
+		mes "you won't regret your decision.";
+		close;
+	}
+	if (para_suv01 == 24) {
+		mes "[Hooksha]";
+		mes "Hello.";
+		mes "Are you a trainee?";
+		mes "Yeah I can tell.";
+		mes "So shall we begin?";
+		next;
+		mes "[Hooksha]";
+		mes "Actually I don't like this training mission much but anyway let me explain it to you.";
+		next;
+		mes "[Hooksha]";
+		mes "As you know this is Orc Village.";
+		mes "Orcs don't like humans.";
+		mes "They don't try to communicate with us. When they see humans they immediately attack us.";
+		next;
+		mes "[Hooksha]";
+		mes "Sadly humans don't want to communicate with them either.";
+		mes "So we decided to take a strong approach towards them.";
+		mes "Actually we'd like to get rid of them all.";
+		next;
+		mes "[Hooksha]";
+		mes "We're trying to conquer Orc Village.";
+		mes "It's the proper place to finish the beginners training mission for an adventurer like you.";
+		next;
+		mes "[Hooksha]";
+		mes "That's why we've chosen this place for this mission.";
+		mes "Ok, we don't have a lot of time so let's begin.";
+		mes "First let's eliminate the weakest one.";
+		next;
+		mes "[Hooksha]";
+		mes "It's better to kill them before they grow up.";
+		mes "Hunt 10 Orc Babies.";
+		mes "Don't pity them because when they grow up they become aggressive Orc Warriors.";
+		next;
+		mes "[Hooksha]";
+		mes "Good or bad this is how it is going to be.";
+		mes "Even if they are babies don't hesitate.";
+		set para_suv01,25;
+		changequest 7147,7148;
+		close;
+	}
+	if (para_suv01 == 25) {
+		if (checkquest(7148,HUNTING) == 2) {
+			mes "[Hooksha]";
+			mes "Great. Awesome.";
+			mes "It's not very pleasant so let's move on.";
+			next;
+			mes "[Hooksha]";
+			mes "On the next step we will fight with Orc Warriors.";
+			mes "When Orc Babies grow up they become strong Orc Warriors.";
+			next;
+			mes "[Hooksha]";
+			mes "They all are powerful warriors.";
+			mes "When you were fighting Orc Babies, you probably have been attacked by them.";
+			next;
+			mes "[Hooksha]";
+			mes "Now it's time to hunt 10 Orc Warriors.";
+			mes "If you are in trouble just come back here to safety.";
+			mes "Do you understand?";
+			set para_suv01,26;
+			changequest 7148,7149;
+			close;
+		}
+		mes "[Hooksha]";
+		mes "There are Orc Warriors, Orc Ladies and Orc Babies in Orc Village.";
+		mes "They are really aggressive.";
+		next;
+		mes "[Hooksha]";
+		mes "You look tired I will recover your health.";
+		mes "If you are in trouble just come back here to safety.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 26) {
+		if (checkquest(7149,HUNTING) == 2) {
+			mes "[Hooksha]";
+			mes "Now you can move on to the next step.";
+			next;
+			mes "[Hooksha]";
+			mes "Exactly... now it's time to hunt Orc Ladies.";
+			mes "If you want to conquer Orc Village completely, you should kill them before they have more Orc Babies.";
+			next;
+			mes "[Hooksha]";
+			mes "But you don't need to kill all of them.";
+			mes "Go and hunt 10 Orc Ladies.";
+			next;
+			mes "[Hooksha]";
+			mes "You can already feel the strong power from outside...";
+			mes "Don't hesitate to attack them.";
+			set para_suv01,27;
+			changequest 7149,7150;
+			close;
+		}
+		mes "[Hooksha]";
+		mes "You should be exhausted by now.";
+		mes "But you still have more targets, understand.";
+		next;
+		mes "[Hooksha]";
+		mes "You look tired, I will recover your health.";
+		mes "If you are in trouble just come back here to safety.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 27) {
+		if (checkquest(7150,HUNTING) == 2) {
+			mes "[Hooksha]";
+			mes "Great job.";
+			mes "Now you should understand how the orc tribe works here in Orc Village.";
+			mes "You've followed the training mission well under hot and humid circumstances.";
+			mes "You have now completed the 'Conquer Orc Village!' training mission. Congratulations.";
+			next;
+			mes "[Hooksha]";
+			mes "Go back and report to the Eden Group headquarters.";
+			mes "I'm sure they will have good news for you.";
+			set para_suv01,28;
+			changequest 7150,7151;
+			close;
+		}
+		mes "[Hooksha]";
+		mes "Orc Lady is the last target.";
+		mes "Cheer up~!";
+		next;
+		mes "[Hooksha]";
+		mes "You look tired, I will recover your health.";
+		mes "If you are in trouble just come back here to safety.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 28) {
+		mes "[Hooksha]";
+		mes "You have completed the training mission.";
+		mes "Go back to the Eden Group headquarters and report there.";
+		close;
+	}
+	if (para_suv01 == 29) {
+		mes "[Hooksha]";
+		mes "Have you come here to join in the training?";
+		mes "You look like an expert.";
+		next;
+		mes "[Hooksha]";
+		mes "This isn't a good place to talk so let's hurry.";
+		mes "This place is linked with the dungeon of Orc Village.";
+		next;
+		mes "[Hooksha]";
+		mes "Can you see that way.";
+		mes "There is a cave under the ground, normal orcs don't come here.";
+		next;
+		mes "[Hooksha]";
+		mes "The safest place is in here.";
+		mes "There are many undead monsters down there.";
+		next;
+		mes "[Hooksha]";
+		mes "The undead monsters are dangerous and threatening.";
+		mes "Don't hesitate when fighting them.";
+		next;
+		mes "[Hooksha]";
+		mes "Now hunt those undead monsters down there.";
+		next;
+		mes "[Hooksha]";
+		mes "Try to hunt 20 Orc zombies in the dungeon.";
+		mes "They are really well organized.";
+		next;
+		mes "[Hooksha]";
+		mes "They will attack you anywhere without hesitating.";
+		mes "May Freya bless you.";
+		set para_suv01,30;
+		changequest 7152,7153;
+		close;
+	}
+	if (para_suv01 == 30) {
+		if (checkquest(7153,HUNTING) == 2) {
+			mes "[Hooksha]";
+			mes "It's different from what you saw in Payon, right?";
+			mes "Although you managed to kill the Orc Zombies, you can't be sure you are much stronger..";
+			next;
+			mes "[Hooksha]";
+			mes "So don't go deeper into that cave or you will die for sure.";
+			next;
+			mes "[Hooksha]";
+			mes "The next target is the Orc Skeleton who was walking next to the Orc Zombies.";
+			mes "Hunt 20 Orc Skeletons.";
+			next;
+			mes "[Hooksha]";
+			mes "It's the last step of the training mission in the Orc Dungeon.";
+			mes "It's all up to you.";
+			next;
+			mes "[Hooksha]";
+			mes "Ok, cheer up and see you again.";
+			mes "Hunt 20 Orc Skeletons.";
+			set para_suv01,31;
+			changequest 7153,7154;
+			close;
+		}
+		mes "[Hooksha]";
+		mes "Can you stay longer?";
+		mes "You look tired, I will recover your health.";
+		mes "If you are in trouble just come back here to safety.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 31) {
+		if (checkquest(7154,HUNTING) == 2) {
+			mes "[Hooksha]";
+			mes "Your training mission has been completed.";
+			mes "Go back to the Eden Group headquarters and report.";
+			mes "I would like to say more in detail but I'm getting so tired.";
+			next;
+			mes "[Hooksha]";
+			mes "Recently trainees have come here more and more so, I can't sleep at all.";
+			mes "I mean not due to you.";
+			mes "Anyway I will inform the group so go there and report.";
+			next;
+			set para_suv01,32;
+			changequest 7154,7155;
+			close;
+		}
+		mes "[Hooksha]";
+		mes "Can you stay longer?";
+		mes "You look tired I will recover your health.";
+		mes "If you are in trouble just come back here to safety.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 32) {
+		mes "[Hooksha]";
+		mes "Don't you have to report back to the Eden Group headquarters?";
+		mes "I am so tired leave me alone.";
+		close;
+	}
+	if (para_suv01 > 32) {
+		mes "[Hooksha]";
+		mes "Uh? What Orc? Explore the dungeon?";
+		mes "You are having such a hard time.";
+		next;
+		mes "[Hooksha]";
+		mes "This place is really good to take a rest because Orcs don't come here.";
+		mes "Ho hum...";
+		close;
+	}
+}
+
+iz_dun04,43,46,3	script	Eden Member Callandiva	745,{
+	if (para_suv01 < 33) {
+		if (callfunc("F_HasEdenGroupMark")) {
+			mes "[Callandiva]";
+			mes "How did you get so deep in this ocean city?";
+			mes "Ah, that symbol is of our group.";
+			mes "You're a trainee for sure.";
+			next;
+			mes "[Callandiva]";
+			mes "What? You aren't?";
+			mes "I... see... I see...";
+			mes "Ok... keep going.";
+			close;
+		}
+		mes "[Callandiva]";
+		mes "Mysteriously although we're under the sea you can still breathe here.";
+		mes "Do you know why?";
+		next;
+		mes "[Callandiva]";
+		mes "Let's see due to the moisture my skin is so soft.";
+		mes "My fingers and toes are not attached to each other amazing.";
+		next;
+		mes "[Callandiva]";
+		mes "I was really shocked and scared when the Eden Group dispatched me here.";
+		mes "Now I love this environment so much.";
+		mes "It's really calm...";
+		close;
+	}
+	if (para_suv01 == 33) {
+		mes "[Callandiva]";
+		mes "How did you get so deep in this ocean city?";
+		mes "Ah, that symbol is of our group.";
+		mes "You're a trainee for sure.";
+		next;
+		mes "[Callandiva]";
+		mes "Good to see you!";
+		mes "Alright, look down.";
+		mes "Ancient buildings are sleeping under the water. They were actually built under the sea.";
+		next;
+		mes "[Callandiva]";
+		mes "As you know we don't have any trouble living here.";
+		mes "But if you see over there... yes right there.";
+		next;
+		mes "[Callandiva]";
+		mes "Can you see a humanoid fish with a very threatening spear?";
+		mes "He is called a Merman and is a really professional warrior.";
+		next;
+		mes "[Callandiva]";
+		mes "Okay, go and hunt 15 Merman.";
+		mes "That will be your 1st training mission here.";
+		set para_suv01,34;
+		changequest 7156,7157;
+		close;
+	}
+	if (para_suv01 == 34) {
+		if (checkquest(7157,HUNTING) == 2) {
+			mes "[Callandiva]";
+			mes "Oh, you came back~!";
+			mes "What did you think of those threatening Mermans?";
+			mes "Actually, I thought that you would chicken out~";
+			next;
+			mes "[Callandiva]";
+			mes "Good your next opponent will be...~";
+			mes "Yes, this one...";
+			mes "The monster that is holding a trident.";
+			next;
+			mes "[Callandiva]";
+			mes "His main abilities are magical.";
+			mes "The monster is called Strouf!";
+			mes "Now, it's time to fight with a real magician!";
+			next;
+			mes "[Callandiva]";
+			mes "Try avoiding the Mermans and hunt 10 Strouf, kill them.";
+			set para_suv01,35;
+			changequest 7157,7158;
+			close;
+		}
+		mes "[Callandiva]";
+		mes "Oh are you tired?";
+		mes "Mermans are not easy opponents.";
+		mes "I will help you recover so cheer up.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 == 35) {
+		if (checkquest(7158,HUNTING) == 2) {
+			mes "[Callandiva]";
+			mes "Did you kill all the Strouf already?";
+			mes "I wasn't counting that you'd make it.";
+			mes "I have eyes on the top of my head haha.";
+			next;
+			mes "[Callandiva]";
+			mes "Of course I'm just kidding.";
+			mes "Don't look at me like that~ it was a joke~!";
+			mes "Now you're feeling more at ease about this.";
+			next;
+			mes "[Callandiva]";
+			mes "Go back to the headquarters and report it.~";
+			mes "You will receive the last uniform from the Eden Group headquarters.";
+			next;
+			mes "[Callandiva]";
+			mes "This training mission is made for beginners.";
+			mes "So it might be useless to you or not.";
+			next;
+			mes "[Callandiva]";
+			mes "Anyway you did great job!";
+			set para_suv01,36;
+			changequest 7158,7159;
+			close;
+		}
+		mes "[Callandiva]";
+		mes "Oh are you tired?";
+		mes "Strouf are not easy opponents.";
+		mes "I can help you recover so cheer up.";
+		npcskill "AL_HEAL",11,99,60;
+		percentheal 100,100;
+		close;
+	}
+	if (para_suv01 >= 36) {
+		mes "[Callandiva]";
+		mes "I won't give help to you anymore.";
+		mes "Go back to our headquarters and report about this training mission.";
+		close;
+	}
+	mes "[Callandiva]";
+	mes "Mysteriously although we're under the sea you can still breathe here.";
+	mes "Do you know why?";
+	next;
+	mes "[Callandiva]";
+	mes "Let's see due to the moisture my skin is so soft.";
+	mes "My fingers and toes are not attached to each other amazing.";
+	next;
+	mes "[Callandiva]";
+	mes "I was really shocked and scared when the Eden Group dispatched me here.";
+	mes "Now I love this environment so much.";
+	mes "It's really calm...";
+	close;
+}
+
+moc_para01,112,96,5	script	Administrator Michael	4_M_RUSMAN1,{
+	mes "[Michael]";
+	mes "너는 여기에 왜 왔니?";
+	next;
+	switch (select("보급품을 얻으려면: 여기가 어디입니까?: 장비 업그레이드")) {
+		mes "[Michael]";
+	case 1:
+		if (para_suv01 == 11) {
+			mes "If you've completed step 1";
+			mes "we can supply you with a Eden Group Hat, Uniform, Manteau and Boots.";
+			mes "^4d4dffCheck your inventory first.^000000";
+			next;
+			if (select("Let me check my inventory:I have enough room.") == 1) {
+				mes "[Michael]";
+				mes "Make sure you have enough room for the supplies.";
+				close;
+			}
+			mes "[Michael]";
+			mes "Two of the supplies, the ^4d4dffHat and Manteau^000000,";
+			mes "will only be given out once.";
+			mes "So treat them with caution and care.";
+			next;
+			mes "[Michael]";
+			mes "As for the Boots and the Uniforms, you will receive better quality ones based on your course grades.";
+			next;
+			mes "[Michael]";
+			mes "One Eden Group Hat.";
+			mes "One Eden Group Uniform I.";
+			mes "One pair of Eden Group Boots I.";
+			mes "One Eden Group Manteau.";
+			mes "A total of 4 supplies, that's all.";
+			para_suv01 = 12;
+			para_suv02 = 1;
+			getitem 5583,1; //Para_Team_Hat1
+			getitem 2560,1; //Para_Team_Manteau1
+			getitem 2456,1; //Para_Team_Boots1
+			getitem 15009,1; //Para_Team_Uniform1
+			next;
+			mes "[Michael]";
+			mes "Is that correct?";
+			mes "It is manufactured for beginners so they don't have the best effect but they're still cheaper than equipment in the shops.";
+			next;
+			mes "[Michael]";
+			mes "We made them especially for the Eden Group.";
+		}
+		else if (para_suv01 == 22) {
+			mes "If you've completed step 2, we offer extra weapons including the basic equipment.";
+			next;
+			mes "[Michael]";
+			mes "We have chosen the proper weapon for each class.";
+			mes "But we can't support some classes that can't join us.";
+			next;
+			mes "[Michael]";
+			mes "We can't manufacture all of the weapons in the world, don't you agree?";
+			next;
+			mes "[Michael]";
+			mes "We will supply 1 Weapon, Shoes and Uniform so a total of three things.";
+			mes "Also we supply extra things to consider some members who can't use some of the supplies.";
+			next;
+			mes "[Michael]";
+			mes "^4d4dffPlease check your inventory to get those items.^000000";
+			next;
+			if (select("I will make more space.:I have got enough space.") == 1) {
+				mes "[Michael]";
+				mes "Make enough space.";
+				close;
+			}
+			mes "[Michael]";
+			if (Class == Job_Swordman || Class == Job_Swordman_High || Class == Job_Knight || Class == Job_Crusader) {
+				callsub S_Select,"We have one and Two-handed swords",
+					1192,"Eden Slayer I","Two-handed sword","Attack 162","",//P_Slayer1
+					13423,"Eden Saber I","One-handed sword","Attack 147","This is what we strive for.";//P_Sabre1
+			}
+			if (Class == Job_Thief || Class == Job_Thief_High || Class == Job_Assassin || Class == Job_Rogue || Class == Job_Ninja || Class == Job_Novice || Class == Job_Novice_High) {
+				callsub S_Select,"",
+					13050,"Eden Dagger I","Dagger","MATK+60, attack 124","This is what we strive for.";//P_Dagger1
+			}
+			if (Class == Job_Merchant || Class == Job_Merchant_High || Class == Job_Blacksmith || Class == Job_Alchemist) {
+				callsub S_Select,"We have a mace and a One-handed sword",
+					13423,"Eden Saber I","One-handed sword","Attack 147","This is what we strive for.",// P_Sabre1
+					16004,"Eden Mace I","Mace","Attack 142","";// P_Mace1
+			}
+			if (Class == Job_Archer || Class == Job_Archer_High || Class == Job_Hunter || Class == Job_Dancer || Class == Job_Bard) {
+				callsub S_Select,"",
+					1747,"Eden Bow I","Bow","Attack 82","";//P_Bow1
+			}
+			if (Class == Job_Acolyte || Class == Job_Acolyte_High || Class == Job_Priest || Class == Job_Monk) {
+				callsub S_Select,"We have a mace and a staff",
+					16004,"Eden Mace I","Mace","Attack 142","", //P_Mace1
+					1650,"Eden Staff I","Staff","INT+2, MATK+125, attack 60",""; //P_Staff1
+			}
+			if (Class == Job_Mage || Class == Job_Mage_High || Class == Job_Wizard || Class == Job_Sage) {
+				callsub S_Select,"",
+					1650,"Eden Staff I","Staff","INT+2, MATK+125, attack 60","";//P_Staff1
+			}
+			if (Class == Job_Gunslinger) {
+				callsub S_Select,"",
+					13112,"Eden Revolver I","Revolver","HIT-5, attack 44","";//P_Revolver1
+			}
+			if (Class == Job_Summoner) {
+				callsub S_Select,"",
+					1699,"Eden Foxtail Staff I","Staff","MATK+135, attack 120","";//P_Foxtail1
+			}
+			mes "Let me see... you will receive..";
+			mes "the Eden Group Boots II and Uniform II.";
+			next;
+			mes "[Michael]";
+			para_suv01 = 23;
+			getitem 13050,1; //P_Dagger1
+			getitem 2457,1; //Para_Team_Boots2
+			getitem 15010,1; //Para_Team_Uniform2
+			if (para_suv02 == 0) {
+				mes "I don't know what weapon will suit you so, you'll get a Dagger.";
+				mes "You don't have a record of receiving any supplies";
+				mes "so, you'll receive the Eden Group Hat and Manteau aswell.";
+				getitem 5583,1; //Para_Team_Hat
+				getitem 2560,1; //Para_Team_Manteau
+				para_suv02 = 2;
+				next;
+				mes "[Michael]";
+				mes "Check your supplies again and look after it.";
+				close;
+			}
+			para_suv02 = 2;
+			mes "A Weapon, Uniform and Boots all 3 supplies.";
+			mes "I don't know what weapon will suit you so, you'll get a Dagger.";
+			mes "Please check it again.";
+			next;
+			mes "[Michael]";
+			mes "I hope they're useful to you.";
+		}
+		else if (para_suv01 == 37) {
+			mes "You've completed the last training course.";
+			mes "It's time for you to receive a new weapon.";
+			next;
+			mes "[Michael]";
+			mes "We have more upgraded weapons, uniforms and boots.";
+			mes "Ah, in case of the weapon that was made only for 1st jobs.";
+			mes "So, I can't offer them to higher jobs.";
+			next;
+			mes "[Michael]";
+			mes "^4d4dffPlease check you inventory to get those supplies.^000000";
+			next;
+			if (select("I'll come back.:I have enough room.") == 1) {
+				mes "[Michael]";
+				mes "Make sure you have enough room.";
+				close;
+			}
+			mes "[Michael]";
+			if (Class == Job_Swordman || Class == Job_Swordman_High || Class == Job_Knight || Class == Job_Crusader) {
+				callsub S_Select,"We have one and Two-handed swords",
+					13424,"Eden Saber II","One-handed sword","Attack 170","",///P_Sabre2
+					1193,"Eden Slayer II","Two-handed sword","Attack 185","";//P_Slayer2
+			}
+			if (Class == Job_Thief || Class == Job_Thief_High || Class == Job_Assassin || Class == Job_Rogue || Class == Job_Novice || Class == Job_Novice_High || Class == Job_Super_Novice || Class == Job_Soul_Linker || Class == Job_Ninja) {
+				callsub S_Select,"",
+					13051,"Eden Dagger II","Dagger","MATK+70, attack 158","";//P_Dagger2
+			}
+			if (Class == Job_Acolyte || Class == Job_Acolyte_High || Class == Job_Priest || Class == Job_Monk) {
+				callsub S_Select,"We have a mace and a staff",
+					16005,"Eden Mace II","Mace","Attack 163","", //P_Mace2
+					1651,"Eden Staff II","Staff","INT+3, MATK+150, attack 60",""; //P_Staff2
+			}
+			if (Class == Job_Archer || Class == Job_Archer_High || Class == Job_Hunter || Class == Job_Dancer || Class == Job_Bard) {
+				callsub S_Select,"",
+					1748,"Eden Bow II","Bow","Attack 82","";//P_Bow2
+			}
+			if (Class == Job_Mage || Class == Job_Mage_High || Class == Job_Wizard || Class == Job_Sage) {
+				callsub S_Select,"",
+					1651,"Eden Staff II","Staff","INT+3, MATK+155, attack 60","";//P_Staff2
+			}
+			if (Class == Job_Merchant || Class == Job_Merchant_High || Class == Job_Blacksmith || Class == Job_Alchemist) {
+				callsub S_Select,"We have a mace and a One-handed sword",
+					13424,"Eden Saber II","One-handed sword","Attack 170","",//P_Sabre2
+					16005,"Eden Mace II","Mace","Attack 163","";// P_Mace2
+			}
+			if (Class == Job_Gunslinger) {
+				callsub S_Select,"",
+					13113,"Eden Revolver II","Revolver","HIT-5, attack 60","";//P_Revolver2
+			}
+			if (Class == Job_Summoner) {
+				callsub S_Select,"",
+					26100,"Eden Foxtail Staff II","Staff","MATK+165, attack 135","";//P_Foxtail1
+			}
+			mes "Let me see... you will receive..";
+			mes "the Eden Group Boots III and Uniform III.";
+			next;
+			para_suv01 = 38;
+			getitem 2458,1; //Para_Team_Boots3
+			getitem 15011,1; //Para_Team_Uniform3
+			mes "[Michael]";
+			if (para_suv02 == 0) {
+				mes "You don't have a record of receiving any supplies";
+				mes "so, you'll receive the Eden Group Hat and Manteau aswell.";
+				para_suv02 = 3;
+				getitem 5583,1; //Para_Team_Hat
+				getitem 2560,1; //Para_Team_Manteau
+				next;
+				mes "[Michael]";
+				mes "Check your supplies again and look after it.";
+				close;
+			}
+			para_suv02 = 3;
+			mes "A Uniform and Boots all 2 supplies.";
+			mes "Please check it again.";
+			next;
+			mes "[Michael]";
+			mes "I hope they're useful to you.";
+		}
+		else {
+			mes "Wait...I will check the record...";
+			mes "...";
+			mes "...hummmm.";
+			next;
+			mes "[Michael]";
+			mes "Sorry, but I can't find any record that you can obtain supplies.";
+			mes "Are you sure?";
+		}
+		close;
+	case 2:
+		mes "We store weapons, armor and other goods which were created by the Eden Group here.";
+		mes "We also have a lot of special stuff.";
+		next;
+		mes "[Michael]";
+		mes "To prepare for emergencies, we hav enough equipment and supplies for an entire army.";
+		mes "Frankly... we don't have a use for it now but in case soemthing happens like in Morocc.";
+		next;
+		mes "[Michael]";
+		mes "Just take a look around and don't touch anything.";
+		next;
+		mes "[Michael]";
+		mes "If I make a mistake, Reke will punish me.";
+		close;
+	case 3:
+		mes "You mean upgrading equipment, right?";
+		mes "We can only upgrade the Eden Group Hat.";
+		next;
+		mes "[Michael]";
+		if (para_suv02 == 3) {
+			if (countitem(5583) > 0) {
+				disable_items;
+				mes "What status bonus do you want to upgrade?";
+				next;
+				switch (select("Upgrade STR:Upgrade AGI:Upgrade VIT:Upgrade INT:Upgrade DEX:Upgrade LUK:Nevermind.")) {
+				case 1: callsub S_Upgrade,"STR",4701;
+				case 2: callsub S_Upgrade,"AGI",4731;
+				case 3: callsub S_Upgrade,"VIT",4741;
+				case 4: callsub S_Upgrade,"INT",4711;
+				case 5: callsub S_Upgrade,"DEX",4721;
+				case 6: callsub S_Upgrade,"LUK",4751;
+				case 7:
+					mes "[Michael]";
+					mes "Why? It'll be beter than it is.";
+					mes "Anyway, we can only offer you one Hat.";
+					next;
+					mes "[Michael]";
+					mes "What you do with it is up to you.";
+					close;
+				}
+			}
+			mes "First come with a Hat that you want me to upgrade.";
+			mes "Make sure that it's in your inventory, got it?";
+			close;
+		}
+		if (para_suv02 == 4) {
+			mes "Umm, didn't you upgrade this already?";
+			mes "According to the records";
+			mes ""+strcharinfo(0)+": Has already upgraded their Hat.";
+			next;
+			mes "[Michael]";
+			mes "We can only offer 1 upgrade.";
+			mes "Sorry but I can't do it twice.";
+			close;
+		}
+		mes "You haven't received all the supplies up to step 3.";
+		mes "Upgrading your Hat is a special service.";
+		next;
+		mes "[Michael]";
+		mes "Sorry but I can't help you.";
+		close;
+	}
+S_Upgrade:
+	mes "[Michael]";
+	mes "I see.";
+	mes "I will ^4d4dffUpgrade "+ getarg(0) +"^000000.";
+	mes "Are you sure?";
+	next;
+	switch (select("Yes I am.:No wait.")) {
+	case 1:
+		mes "[Michael]";
+		mes "I will start to upgrade.";
+		next;
+		mes "[Michael]";
+		mes "Here you are.";
+		para_suv02 = 4;
+		delitem 5583,1;
+		getitem2 5583,1,1,0,0,0,0,0,getarg(1);
+		close;
+	case 2:
+		mes "[Michael]";
+		mes "Don't you want to upgrade?";
+		close;
+	}
+
+S_Select:
+	.@total_arg = getargcount();
+	if (.@total_arg < 7)
+		mes "We only have 1 weapon for you.";
+	else {
+		mes "What kind of weapon do you want?";
+		mes getarg(0);
+		mes "Here are the options.";
+	}
+	next;
+	mes "[Michael]";
+	for ( .@i = 1; .@i < .@total_arg; .@i += 5 ) {
+		set .@menu$, .@menu$ + getarg(.@i+1) + ":";
+		mes getarg(.@i+1)+": "+ getarg(.@i+2) +". "+ getarg(.@i+3) +".";
+	}
+	if (.@total_arg < 7)
+		mes "It is Lv. 2 and the required level is "+ (para_suv01 == 22 ? "26" : "40") +".";
+	else
+		mes "Both of them are Lv. 2 weapons and the required level is "+ (para_suv01 == 22 ? "26" : "40") +".";
+	next;
+	mes "[Michael]";
+	mes "They also can't be traded with other players or be refined.";
+	next;
+	//			callsub S_Select,"We have one and Two-handed swords",
+		//			13424,"Eden Saber II","One-handed sword","Attack 170","",///P_Sabre2
+			//		1193,"Eden Slayer II","Two-handed sword","Attack 185","";//P_Slayer2
+	if (.@total_arg < 7) {
+		.@i = 1;
+		mes "[Michael]";
+		mes "You'll receive the "+ getarg(.@i+1) +".";
+		next;
+		mes "[Michael]";
+	}
+	else {
+		.@i = (select(.@menu$) -1) *5 +1;
+		mes "[Michael]";
+		mes "You've chosen the "+ getarg(.@i+1) +".";
+	}
+	if (para_suv01 == 22) {
+		mes "Additionally you'll receive the Eden Group Boots II and Uniform II.";
+		next;
+		getitem 2457,1;	// Para_Team_Boots2
+		getitem 15010,1;// Para_Team_Uniform2
+		para_suv01 = 23;
+	}
+	else {
+		mes "Additionally you'll receive the Eden Group Boots III and Uniform III.";
+		next;
+		getitem 2458,1;// Para_Team_Boots3
+		getitem 15011,1;// Para_Team_Uniform3
+		para_suv01 = 38;
+	}
+	getitem getarg(.@i),1;
+	mes "[Michael]";
+	if (para_suv02 == 0) {
+		mes "You don't have a record of receiving any supplies";
+		mes "so, you'll receive the Eden Group Hat and Manteau aswell.";
+		getitem 5583,1;// Para_Team_Hat
+		getitem 2560,1;// Para_Team_Manteau
+		if (para_suv01 == 22)
+			para_suv02 = 2;
+		else
+			para_suv02 = 3;
+		next;
+		mes "[Michael]";
+		mes "Check your supplies again and look after it.";
+	}
+	else {
+		if (para_suv01 == 22)
+			para_suv02 = 2;
+		else
+			para_suv02 = 3;
+		mes "A "+ getarg(.@i+2) +", Uniform and Boots all 3 supplies.";
+		mes "Please check it again.";
+		next;
+		mes "[Michael]";
+		mes "I hope they're useful to you.";
+		mes getarg(.@i+4);
+	}
+	close;
+}
+
+moc_para01,179,44,3	script	Chef	820,{
+	mes "[Chef]";
+	mes "What's up?";
+	mes "Do you want a Meal? Or do you have other business?";
+	next;
+	switch (select("Order a meal.:Talk.")) {
+	case 1:
+		mes "[Chef]";
+		mes "Choose one of the three course meals A, B or C.";
+		mes "Do you want a explanation?";
+		next;
+		switch (select("I want a explanation.:Order course meal A:Order course meal B:Order course meal C:End Conversation.")) {
+		case 1:
+			mes "[Chef]";
+			mes "Uh? what do you want to know?";
+			next;
+			switch (select("About course meal A.:About course meal B.:About course meal C.:End Conversation.")) {
+			case 1:
+				mes "[Chef]";
+				mes "Course meal A is for nomal people.";
+				mes "It has three kinds of dishes and the main is....";
+				mes " ";
+				mes "-Chef is trying to point to a dish in the picture. There is a black roll.-";
+				next;
+				mes "[Chef]";
+				mes "It's made of sea grass so, it's dry like paper.";
+				mes "It's a roll with steamed rice, vegetables and meat inside.";
+				mes "It seems simple but it is really good and healthy.";
+				next;
+				mes "[Chef]";
+				mes "The ingredients mix well with the spicy sauce.";
+				mes "It is also mixed with chopped meat like sausages.";
+				next;
+				mes "[Chef]";
+				mes "It's simple and cheap so it is really popular with everyone.";
+				mes "Just 3,000 Zeny.";
+				mes "You will feel satisfied after eating it.";
+				close;
+			case 2:
+				mes "[Chef]";
+				mes "Um course meal B is.";
+				mes "I make a sauce with aromatic vegetables and meat in a soup.";
+				next;
+				mes "[Chef]";
+				mes "The meat is boiled so it is fork tender in the soup.";
+				mes "When the soup is almost done I add noodles for the finishing touch.";
+				next;
+				mes "[Chef]";
+				mes "It's a good dish to share with your friends.";
+				mes "It's 4,000 Zeny.";
+				mes "It's a very fun dish to enjoy.";
+				close;
+			case 3:
+				mes "[Chef]";
+				mes "Now for course meal C...";
+				mes "It's a masterpiece of meat... Legend of the meat class!";
+				next;
+				mes "[Chef]";
+				mes "Beef, bacon,";
+				mes "strip loin,";
+				mes "rib eye roll";
+				mes "...";
+				next;
+				mes "[Chef]";
+				mes "Do you need more information?";
+				mes "Don't worry.";
+				mes "I use the besk oak to smoke it.";
+				mes "Ah, it's 5,000 Zeny. Cheap isn't it? I only use the best meat so don't worry.";
+				close;
+			case 4:
+				mes "[Chef]";
+				mes "I don't have enough time to chat with you...";
+				close;
+			}
+		case 2:
+			mes "[Chef]";
+			mes "Course meal A?";
+			mes "Ah, Kim-dduck-soon.";
+			mes "It's the representative meal for normal citizens.";
+			next;
+			if (callfunc("F_HasEdenGroupMark")) {
+				if (Zeny > 2699) {
+					mes "[Chef]";
+					mes "Hey, here you are.";
+					mes "Enjoy your meal.";
+					next;
+					mes "- After eating the meal, You feel a little bit full.";
+					mes "You've recovered some HP and SP. -";
+					set Zeny, Zeny - 2700;
+					percentheal 50,0;
+					percentheal 0,50;
+					close;
+				}
+				mes "[Chef]";
+				mes "This meal costs 3,000 zeny but I will serve it for 2,700.";
+				mes "Since you are a eden member you get a 10% discount so, it's 2,700 zeny.";
+				close;
+			}
+			if (Zeny > 2999) {
+				mes "[Chef]";
+				mes "Hey, here you are.";
+				mes "Enjoy your meal.";
+				next;
+				mes "- After eating the meal, You feel a little bit full.";
+				mes "You've recovered some HP and SP. -";
+				set Zeny, Zeny - 3000;
+				percentheal 50,0;
+				percentheal 0,50;
+				close;
+			}
+			mes "[Chef]";
+			mes "This meal costs 3,000 zeny.";
+			mes "How many times do I have to tell you?";
+			close;
+		case 3:
+			mes "[Chef]";
+			mes "Course meal B?";
+			mes "This food with meat and vegetables in hot soup has it's origins from nomadic life under the cold and dry nature.";
+			next;
+			if (callfunc("F_HasEdenGroupMark")) {
+				if (Zeny > 3599) {
+					mes "[Chef]";
+					mes "Hey, here you are.";
+					mes "Enjoy your meal.";
+					next;
+					mes "- After eating the meal, You feel a little bit full.";
+					mes "You've recovered some HP and SP. -";
+					set Zeny, Zeny - 3600;
+					percentheal 75,0;
+					percentheal 0,75;
+					close;
+				}
+				mes "[Chef]";
+				mes "This meal costs 4,000 zeny but I will serve it for 3,600.";
+				mes "Since you are a eden member you get a 10% discount so, it's 3,600 zeny.";
+				close;
+			}
+			if (Zeny > 3999) {
+				mes "[Chef]";
+				mes "Hey, here you are.";
+				mes "Enjoy your meal.";
+				next;
+				mes "- After eating the meal, You feel a little bit full.";
+				mes "You've recovered some HP and SP. -";
+				set Zeny, Zeny - 4000;
+				percentheal 75,0;
+				percentheal 0,75;
+				close;
+			}
+			mes "[Chef]";
+			mes "This meal costs 4,000 zeny.";
+			mes "How many times do I have to tell you?";
+			close;
+		case 4:
+			if (callfunc("F_HasEdenGroupMark")) {
+				if (Zeny > 4499) {
+					mes "[Chef]";
+					mes "Hey, here you are.";
+					mes "Enjoy your meal.";
+					next;
+					mes "- The Rib Eye Roll is grilled on the oak.";
+					mes "- After eating the meal, You feel a little bit full.";
+					mes "You've recovered your HP and SP. -";
+					set Zeny, Zeny - 4500;
+					percentheal 100,0;
+					percentheal 0,100;
+					close;
+				}
+				mes "[Chef]";
+				mes "This meal costs 5,000 zeny but I will serve it for 4,500.";
+				mes "Since you are a eden member you get a 10% discount so, it's 4,500 zeny.";
+				close;
+			}
+			if (Zeny > 4999) {
+				mes "[Chef]";
+				mes "Hey, here you are.";
+				mes "Enjoy your meal.";
+				next;
+				mes "Hey, here you are.";
+				mes "- The Rib Eye Roll is grilled on the oak.";
+				mes "- After eating the meal, You feel a little bit full.";
+				mes "You've recovered your HP and SP. -";
+				set Zeny, Zeny - 5000;
+				percentheal 100,0;
+				percentheal 0,100;
+				close;
+			}
+			mes "[Chef]";
+			mes "This meal costs 5,000 zeny.";
+			mes "How many times do I have to tell you?";
+			close;
+		case 5:
+			mes "[Chef]";
+			mes "It's up to you.";
+			close;
+		}
+	case 2:
+		if (callfunc("F_HasEdenGroupMark")) {
+			mes "[Chef]";
+			mes "Most jobs should be managed by yourself. So it might be difficult, right?";
+			mes "Actually it's harmful so they have requested continuously.";
+			next;
+			mes "[Chef]";
+			mes "Can't we all work together by helping each other out?";
+			mes "Anyway, you...";
+			next;
+			if (para_suv01 == 0) {
+				if (BaseLevel < 41) {
+					mes "[Chef]";
+					mes "How are you?";
+					mes "Ah... now you don't look like a beginner.";
+					mes "Do you want to know some good information?";
+					next;
+					mes "[Chef]";
+					mes "The Eden Group... sometimes receives jobs.";
+					mes "But they also manufacture armor and weapons by themselves.";
+					next;
+					mes "[Chef]";
+					mes "If you want, you can get a uniform from the Eden Group.";
+					next;
+					mes "[Chef]";
+					mes "To get it you need to complete their missions.";
+					mes "If you have any interest, meet Instructor Boya at the desk.";
+					close;
+				}
+				mes "[Chef]";
+				mes "You look like an expert...";
+				mes "umm emm.. ";
+				mes "umm emm.. ummm..";
+				next;
+				mes "[Chef]";
+				mes "Yes! I found a thing that you are missing!";
+				mes "You didn't get eden group uniform?";
+				next;
+				mes "[Chef]";
+				mes "Hmm, it's not neccessary but if you remain with the eden group, it would be a good symbol.";
+				next;
+				mes "[Chef]";
+				mes "You can't get it easily but..";
+				mes "If you have an interest, ask Instructor Boya at the desk.";
+				close;
+			}
+			mes "[Chef]";
+			mes "Sure, the uniform goes well with you.";
+			mes "Oh, sure.";
+			mes "The leader makes the designs these days.";
+			next;
+			mes "[Chef]";
+			mes "Ahah..especially the hat.";
+			mes "To.. me.. the hat... um.";
+			mes "It goes well with Laime but with Luke... I don't know..";
+			next;
+			switch (select("What about the hat?:Luke?")) {
+			case 1:
+				mes "[Chef]";
+				mes "Nothing. It's so cute.";
+				mes "I am concerned about the ribbon.";
+				mes "But, it is essential that I wear this hat..";
+				next;
+				mes "[Chef]";
+				mes "Hahahah I don't care.";
+				mes "I don't care at all!";
+				mes "Hahaha.. aaaahahahaha... ";
+				close;
+			case 2:
+				mes "[Chef]";
+				mes "He is a knife expert.";
+				mes "One of our guard leaders.";
+				mes "Who is also in charge of the security in this office.";
+				next;
+				mes "[Chef]";
+				mes "Almost everyone just hired wonders about him.";
+				mes "But Laime and Luke are totally different.";
+				next;
+				mes "[Chef]";
+				mes "The leaders have worked together for a long time.";
+				mes "But the leader wants to hide his past...";
+				next;
+				mes "[Chef]";
+				mes "What I guess is... he might be a son of a rich family.";
+				mes "Rumor is that Luke was the family guard.";
+				mes "Laime was a servant? Wasn't she?";
+				mes "What do you think about my story?";
+				next;
+				select(".....");
+				mes "[Chef]";
+				mes "............";
+				mes "Ahah..hey~ even if I talked useless things don't look at me like that";
+				mes "but it's really true that three people established this Eden Group.";
+				close;
+			}
+		}
+		mes "[Chef]";
+		mes "Uh? Missions. Did you find the right place?";
+		mes "Also let me se... you are not one of our members. How can I give you work?";
+		next;
+		mes "[Chef]";
+		mes "Just eat in the restaurant.";
+		mes "We serve meals to everyone.";
+		mes "I am pretty sure they taste great!";
+		close;
+	}
+}
+
+moc_para01,23,35,5	script	낙원단 교관 우르#2nd01	4_M_KNIGHT_BLACK,{
+	mes "[교관 우르]";
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "아니 세상에! 아직도 우리 단원이 아닌";
+		mes "친구가 있었나?";
+		mes "이참에 낙원단원에 가입하는 것이 어때?";
+		next;
+		mes "[교관 우르]";
+		mes "낙원단에 가입하면 기본적인 장비";
+		mes "지원부터 다양한 혜택이 있는데.";
+		mes "모험가들의 수준에 맞춘 의뢰도 중개";
+		mes "해준다고.";
+		next;
+		mes "[교관 우르]";
+		mes "생각이 있다면 옆에 있는 <NAVI>[라임]<INFO>moc_para01,27,35,0,000,0</INFO></NAVI>에게";
+		mes "상담을 받아 봐.";
+		close;
+	}
+	if(BaseLevel >= 100) {
+		if(isbegin_quest(17536) == 1) {
+			
+			mes "안녕!! 좋은 하루 보내고 있어?";
+			next;
+			mes "[교관 우르]";
+			mes "토른님께 가져다 드릴 탄력있는 줄이랑";
+			mes "코볼트의 털은 구해 왔어?";
+			next;
+			if(countitem(7200) >= 15 && countitem(1034) >= 3) {
+				mes "[교관 우르]";
+				mes "좋은 걸로 잘 구해 왔네. 멋있어. 이걸";
+				mes "<NAVi>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님께 가져다 그리면 좋은";
+				mes "방어구를 주실 거야. 어서 가 봐.";
+				close;
+			}
+			mes "[교관 우르]";
+			mes "어... 아직 못구했나 보네?";
+			mes "^0404fb탄력있는 줄 15개랑 코볼트의 털 3개^000000만";
+			mes "구해서 토른님께 가져다 드리면";
+			mes "되니까. 어렵지는 않지?";
+			close;
+		}
+		if(isbegin_quest(17537) == 1) {
+			if(countitem(7318) < 15) {
+				mes "[교관 우르]";
+				mes "미하엘님한테 가져다 드릴 오래된";
+				mes "곡괭이는 구했어?";
+				next;
+				mes "[교관 우르]";
+				mes "어... 아직 못구했나 보네?";
+				mes "^0404fb오래된 곡괭이 15개^000000만 구해서";
+				mes "미하엘님께 가져다 드리면 되니까.";
+				mes "어렵지는 않지?";
+				close;
+			}
+			else {
+			
+				mes "[교관 우르]";
+				mes "딱 맞춰 구해 왔네. 잘했어. 이대로";
+				mes "<NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>님께 가져다 드려. 좋은";
+				mes "무기를 내주실 거야.";
+				close;
+			}
+		}
+	
+		mes "안녕!! 멋진 친구! 내 도움이 필요해서";
+		mes "찾아온 거지?";
+		next;
+		switch(select("좀 더 좋은 장비 없을까요?:그냥 왔어요.")) {
+
+		case 1:
+			mes "[교관 우르]";
+			mes "난 이렇게 적극적인 친구들이 좋더라.";
+			mes "도움이 필요할 때 도움을 구하러 오는";
+			mes "친구들 말이야.";
+			mes "마침 잘 왔어. 좀 더 좋은 장비, 물론";
+			mes "있지.";
+			next;
+			mes "[교관 우르]";
+			mes "더 좋은 장비를 지급 받으려면";
+			mes "간단하게 해야 할 일이 있어.";
+			next;
+			mes "[교관 우르]";
+			mes "'네가 사용할 장비에 쓸 재료는 네가";
+			mes "구해 와라'";
+			mes "무슨 말인지 알겠지?";
+			next;
+			mes "[교관 우르]";
+			mes "^0404fb탄력있는 줄 15개랑 코볼트의 털 3개^000000.";
+			mes "이건 <NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님께 가져다 드리면 되고.";
+			next;
+			mes "[교관 우르]";
+			mes "어디 보자... ^0404fb오래된 곡괭이 15개^000000. 이건";
+			mes "<NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>님께 가져다 드리면 돼.";
+			next;
+			mes "[교관 우르]";
+			mes "수량에 맞춰서 구해 오면 좋은 장비를";
+			mes "받을 수 있어. 어서 다녀와.";
+			setquest 17536;
+			setquest 17537;
+			close;
+
+		case 2:
+			mes "[교관 우르]";
+			mes "그래? 여기가 이제 제 2의 고향이 된 것";
+			mes "같지?";
+			mes "편안히 쉬었다 가. 혹시 도움이";
+			mes "필요하면 날 찾아 오고. 구체적인 예를";
+			mes "들자면, 새로운 장비가 필요할 때";
+			mes "말이야. 알았지?";
+			close;
+		}
+	}
+	if(!isbegin_quest(17528) == 1) {
+		if(baselevel < 10) goto NotLevel;
+		if(baselevel <= 30) mes "안녕. 병아리?";
+		mes "도움이 필요해 보이는데. 맞춰 볼까?";
+		mes "장비가 필요해서 온 거지?";
+		next;
+		if(baselevel <= 30) {
+			switch(select("네!!! 장비가 필요해요!:장비를 줘요?:구경하러 왔어요.")) {
+		
+			case 1:
+				mes "[교관 우르]";
+				mes "하하하! 맞았다! 그럴 줄 알았지!";
+				next;
+				mes "[교관 우르]";
+				mes "혹시 낙원단 무기고에는 가 봤어?";
+				mes "앞으로 너에게 지속적으로 장비를";
+				mes "지급해 주실분들의 얼굴을 한 번씩";
+				mes "보고 인사를 하고 오는 것이 좋겠지?";
+				mes "낙원단 무기고에 다들 계시니까 한 번";
+				mes "찾아 가 봐.";
+				next;
+				mes "[교관 우르]";
+				mes "제일 먼저 방어구를 담당하는 관리자";
+				mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님을 만나보는 것이 좋겠다.";
+				mes "제일 어르신이니까 말이야.";
+				mes "그럼 다녀와.";
+				if(isbegin_quest(17535) == 1) completequest 17534;
+				setquest 17528;
+				close;
+
+			case 2:
+				mes "[교관 우르]";
+				mes "물론! 우리 낙원단은 각종 의뢰를";
+				mes "중개하고 있는 건 알고 있지?";
+				mes "이곳을 찾는 많은 모험가들이 의뢰를";
+				mes "더 많이 수행해준다면 우리한테도";
+				mes "좋다는 말이야. 무슨 말인지 알겠지?";
+				next;
+				mes "[교관 우르]";
+				mes "그래서 낙원단에 가입한 모험가들에게";
+				mes "각종 혜택을 제공하는 중이거든.";
+				mes "장비를 지원하는 것도 같은 이유고.";
+				next;
+				mes "[교관 우르]";
+				mes "이 넓은 세계에 거의 빈 손이나";
+				mes "마찬가지로 떨어져서 막막하지 않았어?";
+				mes "우리도 한때 그랬어서 그 맘 다 안단다.";
+				next;
+				switch(select("저도 장비 받고 싶어요!:앗. 그렇군요.")) {
+				
+				case 1:
+					mes "[교관 우르]";
+					mes "하하하! 이런 적극적인 자세, 나는 아주";
+					mes "좋아해.";
+					next;
+					mes "[교관 우르]";
+					mes "혹시 낙원단 무기고에는 가 봤어?";
+					mes "앞으로 너에게 지속적으로 장비를";
+					mes "지급해 주실분들의 얼굴을 한 번씩";
+					mes "보고 인사를 하고 오는 것이 좋겠지?";
+					mes "낙원단 무기고에 다들 계시니까 한 번";
+					mes "찾아 가 봐.";
+					next;
+					mes "[교관 우르]";
+					mes "제일 먼저 방어구를 담당하는 관리자";
+					mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님을 만나보는 것이 좋겠다.";
+					mes "제일 어르신이니까 말이야.";
+					mes "그럼 다녀와.";
+					if(isbegin_quest(17535) == 1) completequest 17534;
+					setquest 17528;
+					close;
+				case 2:
+					mes "[교관 우르]";
+					mes "너에게는 별로 관심이 가지 않는";
+					mes "이야기였구나.";
+					mes "나중에라도 장비가 필요하면 언제든";
+					mes "나를 찾아 와. 제법 쓸만한 것들을 많이";
+					mes "갖춰놨거든.";
+					close;
+				}
+			case 3:
+				mes "[교관 우르]";
+				mes "그래? 내가 틀렸네. 그럼 둘러 보고 가.";
+				mes "유쾌한 친구들이 많다구.";
+				mes "시간이 나면 의뢰게시판도 한 번 보고.";
+				mes "장비가 필요하면 언제든 나를 찾아 와.";
+				close;
+			}
+		}
+		else {
+			switch(select("네!!! 장비가 필요해요!:구경하러 왔어요.")) {
+		
+			case 1:
+				mes "[교관 우르]";
+				mes "하하하! 맞았다! 그럴 줄 알았지!";
+				mes "마침 잘됐네. 지금이라면 기본 방어구";
+				mes "외에 중급 무기도 받을 수 있거든.";
+				next;
+				mes "[교관 우르]";
+				mes "혹시 낙원단 무기고에는 가 봤어?";
+				mes "앞으로 너에게 지속적으로 장비를";
+				mes "지급해 주실분들의 얼굴을 한 번씩.";
+				mes "보고 인사를 하고 오는 것이 좋겠지?";
+				mes "낙원단 무기고에 다들 계시니까 한 번";
+				mes "찾아 가 봐.";
+				next;
+				mes "[교관 우르]";
+				mes "제일 먼저 방어구를 담당하는 관리자";
+				mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님을 만나보는 것이 좋겠다.";
+				mes "제일 어르신이니까 말이야.";
+				mes "그럼 다녀와.";
+				if(isbegin_quest(17535) == 1) completequest 17534;
+				setquest 17528;
+				close;
+			case 2:
+				mes "[교관 우르]";
+				mes "그래? 내가 틀렸네. 그럼 둘러 보고 가.";
+				mes "유쾌한 친구들이 많다구.";
+				mes "시간이 나면 의뢰게시판도 한 번 보고.";
+				mes "장비가 필요하면 언제든 나를 찾아 와.";
+				close;
+			}
+
+		}
+	}
+	else if(isbegin_quest(17528) == 1) {
+		
+		if(baselevel >= 45) {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			next;
+			mes "[교관 우르]";
+			mes "인사는 아직이야? 누구를 먼저 만나야";
+			mes "하는지 잊었어?";
+			next;
+			mes "[교관 우르]";
+			mes "제일 먼저 방어구를 담당하는 관리자";
+			mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님을 만나보는 것이 좋겠다.";
+			mes "제일 어르신이니까 말이야.";
+			mes "그럼 다녀와.";
+			close;
+		}
+		else {
+
+			mes "병아리 왔어?";
+			next;
+			mes "[교관 우르]";
+			mes "인사는 아직이야? 누구를 먼저 만나야";
+			mes "하는지 잊었어?";
+			next;
+			mes "[교관 우르]";
+			mes "제일 먼저 방어구를 담당하는 관리자";
+			mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>님을 만나보는 것이 좋겠다.";
+			mes "제일 어르신이니까 말이야.";
+			mes "그럼 다녀와.";
+			close;
+		}	
+	}
+	else if(isbegin_quest(17529) == 1) {
+		
+		if(BaseLevel < 45) {
+
+			mes "병아리 왔어?";
+			next;
+		} else {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			next;
+		}
+		mes "[교관 우르]";
+		mes "토른님께는 인사를 드렸구나?";
+		mes "그럼 다음은 무기를 담당하는 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>";
+		mes "님을 만나서 인사드려.";
+		close;
+	}
+	else if(isbegin_quest(17530 == 1)) {
+
+		if(BaseLevel < 45) {
+			mes "병아리 왔어?";
+			next;
+		}
+		else {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			next;
+		}
+		mes "[교관 우르]";
+		mes "미하엘님은 만나 봤어? 그럼 이제 기본";
+		mes "장비를 담당하는 <NAVI>[비케이]<INFO>moc_para01,110,79,0,000,0</INFO></NAVI>님을 만나 볼";
+		mes "차례네.";
+		mes "비케이님이 너에게 필요한 기본 장비를";
+		mes "주실 거야. 그럼 다녀 와!";
+		close;
+	}
+	else if(isbegin_quest(17531) == 1) {
+
+		if(BaseLevel < 45) {
+		
+			mes "병아리 왔어?";
+			next;
+		}
+		else {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			next;
+		}
+		mes "[교관 우르]";
+		mes "장비 담당자분들은 다 만나 보고 왔어?";
+		mes "어때? 든든하지 않아?";
+		next;
+		mes "[교관 우르]";
+		mes "그럼 앞으로도 도움이 필요하면";
+		mes "언제든지 찾아 와.";
+			completequest 17531;
+		close;
+	}
+	else if(isbegin_quest(17535) == 1) {
+
+		if(BaseLevel < 45) {
+		
+			mes "병아리 왔어?";
+			next;
+		}
+		else {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			next;
+		}
+		mes "[교관 우르]";
+		mes "장비 담당자분들은 다 만나 보고 왔어?";
+		mes "어때? 든든하지 않아?";
+		next;
+		mes "[교관 우르]";
+		mes "그럼 앞으로도 도움이 필요하면";
+		mes "언제든지 찾아 와.";
+			completequest 17535;
+		close;
+	}
+
+	else {
+
+		if(BaseLevel < 45) {
+			mes "병아리 왔어?";
+			next;
+		}
+
+		else {
+			mes "병아리 왔어?";
+			mes "어느덧 45레벨이 넘었네. 이제";
+			mes "병아리라고 부르지도 못하겠어. 네";
+			mes "레벨에서 쓸만한 무기를 찾고 있다면";
+			mes "미하엘님과 상담해 봐.";
+			setquest 17529;
+			next;
+		}
+
+		mes "[교관 우르]";
+		mes "장비가 더 필요해? 지급 받은 장비를";
+		mes "잃어버렸다면 무기고에 다시 가 봐.";
+		mes "<NAVI>[비케이]<INFO>moc_para01,110,79,0,000,0</INFO></NAVI>님이 다시 지급해주실 거야.";
+		if(BaseLevel >= 45) {
+
+			mes "중급 무기가 필요하다면 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>님을";
+			mes "찾아가 보고.";
+		}
+		close;
+	}
+
+NotLevel:
+	mes "어디 보자, 어이쿠!";
+	mes "어제 태어난 친구네?";
+	next;
+	mes "[교관 우르]";
+	mes "베이스 레벨이 10이 되면 나를 찾아";
+	mes "와요. 병아리가 쓸 만한 장비들을";
+	mes "알아봐 줄 테니까. 알았지?";
+	close;
+OnInit:
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17531) == 1 && countitem(22508) == 1";
+	questinfo QTYPE_QUEST, QMARK_YELLOW, "!isbegin_quest(17528) && countitem(22508) == 1 && BaseLevel >= 10";
+	end;
+}
+
+
+moc_para01,110,91,3	script	관리자 에밀::Emil	70,{
+	
+	if(!isbegin_quest(17533)) {
+		
+		if(BaseLevel >= 100) {
+		
+			mes "[에밀]";
+			mes "안녕? 쉐도우 장비를 대여하러 왔구나?";
+			mes "고급 쉐도우 장비 세트를 대여해줄까?";
+			mes "고급 쉐도우 장비 한 세트, 72시간 대여";
+			mes "에 <ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM> 20개다.";
+			next;
+			if(countitem(25223) < 20) {
+				menu "^CCCCCC고급 쉐도우 장비세트요. - 낙원단 주화 부족^000000",-,"기본 쉐도우 장비 세트요.",SS_Default;
+				
+				mes "[에밀]";
+				mes "이봐, 낙원단 주화가 모자란데? 한 세트";
+				mes "72시간 대여에 ^0000ff낙원단 주화 20개^000000라고.";
+				mes "주화가 모자라다면 의뢰 게시판에서";
+				mes "100레벨 이상의 의뢰를 수행하면 얻을";
+				mes "수 있어.";
+				close;
+			}
+			else {
+				menu "고급 쉐도우 장비세트요.",-,"기본 쉐도우 장비 세트요.",SS_Default;
+				
+				mes "[에밀]";
+				mes "자, 여기 고급 쉐도우 장비 세트야.";
+				mes "멋진 놈으로 골라왔찌. 시간이 지나면";
+				mes "또 빌려줄 테니까 언제든 오라구!";
+				callsub SS_HighShadow,BaseJob;
+				close;
+			
+			}
+
+		}
+		mes "[에밀]";
+		mes "뭐냐? 쉐도우 장비에 관심이 있냐?";
+		mes "나는 지금 좀 바쁘니까 로비에 있는";
+		mes "<NAVI>[교관 보야]<INFO>moc_para01,25,35,0,000,0</INFO></NAVI>에게 가서 물어 봐.";
+		close;
+	}
+	else if(isbegin_quest(17533) == 1) {
+	
+		mes "[에밀]";
+		mes "뭐냐? 못 보던 얼굴인데? 보야가";
+		mes "보내서 왔냐?";
+		mes "그럼 기본 쉐도우 장비가 필요해서 온";
+		mes "거겠지?";
+		next;
+		mes "[에밀]";
+		mes "그런데 쉐도우 장비가 뭔지는 아냐?";
+		next;
+		switch(select("네! 알고 있어요.:아뇨! 모르겠어요!")) {
+		
+		case 1:
+			mes "[에밀]";
+			mes "그러냐? 기특한걸. 특별히 네가";
+			mes "100레벨이 되기 전까지는 기본 쉐도우";
+			mes "장비를 무료로 빌려줄게.";
+			next;
+			mes "[에밀]";
+			mes "농담이고, 낙원단은 원래 99레벨까지의";
+			mes "모험가에게는 기본 쉐도우 장비 세트를";
+			mes "^2400ff72시간 동안 무료로 대여^000000해주고 있어.";
+			next;
+			mes "[에밀]";
+			mes "^2400ff100레벨^000000이 넘으면 ^2400ff고급 쉐도우 장비를^000000";
+			mes "^2400ff대여^000000해 주지. 물론 공짜는 아니야.";
+			mes "<ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>를 받고 있거든. 하지만";
+			mes "이건 나중 일이고.";
+			next;
+			mes "[에밀]";
+			mes "자, 여기 기본 쉐도우 장비 세트다.";
+			mes "세트로 장착했을 경우에 얻을 수 있는";
+			mes "특수 효능도 있으니 되도록 꼭 세트";
+			mes "모두 장착하도록 해.";
+			next;
+			mes "[에밀]";
+			mes "대여시간이 다 되어 장비가 사라졌다고";
+			mes "울지 말고 또 와서 빌리렴. 자, 이제";
+			mes "다시 <NAVI>[보야]<INFO>moc_para01,25,35,0,000,0</INFO></NAVI>에게 돌아가서 너 쉐도우";
+			mes "장비 세트를 자랑해. 만나서 반가웠다.";
+			rentitem 24687,259200;
+			rentitem 24688,259200;
+			rentitem 24689,259200;
+			rentitem 24690,259200;
+			rentitem 24691,259200;
+			rentitem 24692,259200;
+			completequest 17533;
+			setquest 17534;
+			close;
+
+
+
+		case 2:
+			mes "[에밀]";
+			mes "모른다고? 보야한테 그런 것도 안 듣고";
+			mes "왔냐? 어쩔 수 없지.";
+			next;
+			mes "[에밀]";
+			mes "한마디로 쉐도우 장비는 사용자의";
+			mes "잠재력을 끌어 올리는 특수한 장비야.";
+			mes "기본 장비를 장착하고서도 추가로";
+			mes "장착할 수 있는 장비란다.";
+			next;
+			mes "[에밀]";
+			mes "예를 들어 가죽 갑옷은 얇고 가벼워서";
+			mes "활동하기 좋지만, 높은 방어력을";
+			mes "기대하기는 어렵지.";
+			mes "하지만 거기에 다른 갑옷을 덧댄다면?";
+			mes "더 강력한 방어력을 얻을 수 있겠지?";
+			mes "쉐도우 장비가 바로 그런 역할이야.";
+			next;
+			mes "[에밀]";
+			mes "쉐도우 장비는 되도록 대여해주는 한";
+			mes "세트 모두를 장착하도록 해. 세트를";
+			mes "모두 장착했을 때 얻을 수 있는 특수";
+			mes "효능도 있으니까 말이야.";
+			next;
+			mes "[에밀]";
+			mes "장착한 쉐도우 장비는 ALT+Q 키를";
+			mes "눌러 나오는 장비창의 특수 장비란에서";
+			mes "확인할 수 있어.";
+			next;
+			mes "[에밀]";
+			mes "백 번 듣는 것 보다는 한 번 경험해";
+			mes "보는 것이 좋겠지. 장착해 볼 테야?";
+			next;
+			switch(select("네!!:아뇨, 괜찮아요.")) {
+			
+			case 1:
+				mes "[에밀]";
+				mes "자, 여기 기본 쉐도우 장비 세트다.";
+				next;
+				mes "[에밀]";
+				mes "대여시간이 다 되어 장비가 사라졌다고";
+				mes "울지 말고 또 와서 빌리렴. 자, 이제";
+				mes "다시 [보야]에게 돌아가서 네 쉐도우";
+				mes "장비 세트를 자랑해. 만나서 반가웠다.";
+				rentitem 24687,259200;
+				rentitem 24688,259200;
+				rentitem 24689,259200;
+				rentitem 24690,259200;
+				rentitem 24691,259200;
+				rentitem 24692,259200;
+				completequest 17533;
+				setquest 17534;
+				close;
+	
+			case 2:
+				mes "[에밀]";
+				mes "아니, 왜? 한 번 장착해 봐. 돈 안";
+				mes "받는다니까?";
+				mes "거 참... 나중에라도 생각이 바뀌면";
+				mes "언제든 찾아 와.";
+				close;
+
+				
+			}
+		}
+	}
+	else if(isbegin_quest(17534) == 1) {
+
+		mes "[에밀]";
+		mes "보야에게 돌아가서 자랑은 했어?";
+		mes "아니면 또 빌리러 온 거야?";
+		next;
+		menu "또 대여하러 왔어요.",-;
+
+		mes "[에밀]";
+		mes "뭐? 보야에게 자랑도 하기 전에 벌써";
+		mes "시간이 그렇게 됐어? 뭘 하느라?";
+		mes "어서 [보야]에게 보고나 하고 와.";
+		mes "이쪽도 대여 기록이 보고되지 않으면";
+		mes "곤란하다고. 대여는 보고를 하고 와서";
+		mes "해. 어서!";
+		close;
+	}
+	else  {
+
+		mes "[에밀]";
+		mes "왔냐? 기본 쉐도우 장비를 대여하러 온";
+		mes "거야?";
+		next;
+		switch(select("네! 대여해 주세요!:안부를 물으러 왔어요.")) {
+	
+		case 1:
+			mes "[에밀]";
+			mes "그래. 그래. 여기 기본 쉐도우 장비";
+			mes "세트다. 이것들을 장착하고 부지런히";
+			mes "모험을 다니라고. 행운을 빈다!";
+			rentitem 24687,259200;
+			rentitem 24688,259200;
+			rentitem 24689,259200;
+			rentitem 24690,259200;
+			rentitem 24691,259200;
+			rentitem 24692,259200;
+			close;
+		case 2:
+
+			mes "[에밀]";
+			mes "뭐? 안부? 우리가 안부를 물을";
+			mes "사이였냐?";
+			mes "그래도 기분은 나쁘지 않네. 너도 좋은";
+			mes "하루 보내라!";
+			close;
+		}
+	}
+SS_HighShadow:
+
+	set .bj,getarg(0);
+	
+	rentitem 24693,259200;
+	rentitem 24694,259200;
+	rentitem 24695,259200;
+	rentitem 24696,259200;
+	rentitem 24697,259200;
+	rentitem 24693,259200;
+	
+	// 3차직업 기사
+	if(.bj == 7) rentitem 24698,259200;
+	
+	// 3차직업 마법사
+	if(.bj == 9) rentitem 24704,259200;
+
+	// 3차직업 궁수
+	if(.bj == 11) rentitem 24708,259200;
+	
+	// 3차직업 아크비숍
+	if(.bj == 8) rentitem 24706,259200;
+	
+	// 3차직업 미케닉
+	if(.bj == 10) rentitem 24700,259200;
+
+	// 3차직업 길로틴 크로스
+	if(.bj == 12) rentitem 24702,259200;
+
+	// 3차직업 로얄가드
+	if(.bj == 14) rentitem 24699,259200;
+	
+	// 3차직업 소서러
+	if(.bj == 16) rentitem 24705,259200;
+	
+	// 3차직업 민스트럴
+	if(.bj == 19) rentitem 24709,259200;
+	
+	// 3차직업 원더러
+	if(.bj == 20) rentitem 24709,259200;
+
+	// 3차직업 수라
+	if(.bj == 15) rentitem 24707,259200;
+	
+	// 3차직업 제네릭
+	if(.bj == 18) rentitem 24701,259200;
+	
+	// 3차직업 쉐도우체이서
+	if(.bj == 17) rentitem 24703,259200;
+	
+	// 3차직업 성제
+	if(.bj == 4047) rentitem 24712,259200;
+	
+	// 3차직업 소울리퍼
+	if(.bj == 4049 ) rentitem 24713,259200;
+	
+	// 3차직업 카게로우&오보로
+	if(.bj == 4211 || .bj == 4212) rentitem 24710,259200;
+	
+	// 3차직업 리벨리온
+	if(.bj == 4215) rentitem 24711,259200;
+	
+	// 3차직업 확장 슈퍼노비스
+	if(.bj == 23) rentitem 24715,259200;
+	
+	// 소환사(도람족)
+	if(.bj == 4218) rentitem 24714,259200;
+	
+	delitem 25223,20;
+
+	return;
+
+SS_Default:
+	mes "[에밀]";
+	mes "뭐? 별일이네? 옛 추억이라도";
+	mes "떠올리려는 거야? 아니면 낙원단";
+	mes "주화가 없어?";
+	mes "아니, 뭐... 각자 사정이 있겠지.";
+	next;
+	mes "[에밀]";
+	mes "대여해달라니까 대여는 해 주지만... 네";
+	mes "수준에 맞는 장비가 필요하면 다시";
+	mes "찾아 와. <ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>가 필요하면";
+	mes "의뢰 게시판을 살펴 보라구.";
+	rentitem 24687,259200;
+	rentitem 24688,259200;
+	rentitem 24689,259200;
+	rentitem 24690,259200;
+	rentitem 24691,259200;
+	rentitem 24692,259200;
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17533) == 1 && !isbegin_quest(17534)" );
+	setunittitle getnpcid(0),"쉐도우 장비";
+	setunitdata getnpcid(0),UNPC_GROUP_ID,1;
+	end;
+
+}
+moc_para01,110,87,3	script	관리자 토른#AmorToren	813,{
+	
+	if(BaseLevel >= 100) {
+		if(checkquest(17528) == 1) completequest(17528);
+
+		if(!isbegin_quest(17536)) {
+
+			mes "[토른]";
+			mes "안녕하신가. 보아하니 베이스 레벨이";
+			mes "100이 넘었네. 고급 방어구를 받고 싶은";
+			mes "게지?";
+			mes "그렇지만 절차를 생략해서야 되나.";
+			next;
+			mes "[토른]";
+			mes "들어 온 문을 도로 나가서 로비에 있는";
+			mes "교관 <NAVI>[우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>를 만나 보게.";
+			mes "우르가 고급 방어구를 받을 수 있는";
+			mes "방법을 안내해 줄 테니까.";
+			close;
+		}
+		if(isbegin_quest(17536) == 1) {
+			if(countitem(7200) >= 15 && countitem(1034) >= 3) {
+				
+				mes "[토른]";
+				mes "오, 어서 오게. 우르에게 자네가 사용할";
+				mes "방어구의 재료를 구해오라는 안내는";
+				mes "받았겠지?";
+				next;
+				mes "[토른]";
+				mes "어디 보자, 전부 가져 왔나?";
+				next;
+				mes "[토른]";
+				mes "아주 좋은 걸로 잘 구해 왔네. 그럼";
+				mes "고급 방어구를 내줘야지.";
+				next;
+				mes "[토른]";
+				mes "고급 방어구에는 물리형과 마법형이";
+				mes "있는데, 먼저 목록을 볼 텐가?";
+				next;
+				switch(select("네, 보여주세요.:아뇨, 괜찮아요.")) {
+				
+				case 1:
+					mes "= 물리형 고급 방어구 =";
+					mes "<ITEM>[낙원단 고급 캡]<INFO>400139</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 슈츠]<INFO>450185</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 망토]<INFO>480105</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 부츠]<INFO>470069</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 링]<INFO>490126</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 글러브]<INFO>490127</INFO></ITEM>";
+					next;
+					mes "= 마법형 고급 방어구 =";
+					mes "<ITEM>[낙원단 고급 모자]<INFO>400140</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 로브]<INFO>450186</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 머플러]<INFO>480106</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 슈즈]<INFO>470093</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 매직링]<INFO>490128</INFO></ITEM>";
+					mes "<ITEM>[낙원단 고급 네클리스]<INFO>490129</INFO></ITEM>";
+					next;
+					mes "[토른]";
+					mes "각각 이렇게 준비되어 있네.";
+					next;
+					break;
+
+				case 2:
+					mes "[토른]";
+					mes "자신에게 무엇이 필요한지 확실히 아는";
+					mes "친구로구먼.";
+					next;
+					break;
+
+				}
+				mes "[토른]";
+				mes "그래, 물리형 고급 방어구가 필요한가?";
+				mes "아니면 마법형 고급 방어구가 필요한가?";
+				next;
+				switch(select("물리형 고급 방어구:마법형 고급 방어구")) {
+				
+				case 1:
+					mes "[토른]";
+					mes "자, 여기 물리형 고급 방어구 일체라네.";
+					mes "사용하다가 혹시라도 잃어버리면 다시";
+					mes "오게.";
+					next;
+					mes "[토른]";
+					mes "[낙원단 주화]만 있다면 내 얼마든지";
+					mes "다시 내줄 테니까.";
+					next;
+					delitem 7200,15;
+					delitem 1034,3;
+					getitem 400139,1;
+					getitem 450185,1;
+					getitem 480105,1;
+					getitem 470069,1;
+					getitem 490126,1;
+					getitem 490127,1;
+					completequest 17536;
+					mes "[토른]";
+					mes "아직 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>에게선 고급 무기를 받지";
+					mes "않았나 보군? 서둘러 가 보게.";
+					mes "그럼, 잘 가게!";
+					close;
+				case 2:
+					mes "[토른]";
+					mes "자, 여기 마법형 고급 방어구 일체라네.";
+					mes "사용하다가 혹시라도 잃어버리면 다시";
+					mes "오게.";
+					next;
+					mes "[토른]";
+					mes "<ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>만 있다면 내 얼마든지";
+					mes "다시 내줄 테니까.";
+					next;
+					delitem 7200,15;
+					delitem 1034,3;
+					getitem 400140,1;
+					getitem 450186,1;
+					getitem 480106,1;
+					getitem 470093,1;
+					getitem 490128,1;
+					getitem 490129,1;
+					completequest 17536;
+					mes "[토른]";
+					mes "아직 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>에게선 고급 무기를 받지";
+					mes "않았나 보군? 서둘러 가 보게.";
+					mes "그럼, 잘 가게!";
+					close;
+				}
+
+			}
+			else {
+				mes "[토른]";
+				mes "오, 어서 오게. 우르에게 자네가 사용할";
+				mes "방어구의 재료를 구해오라는 안내는";
+				mes "받았겠지?";
+				next;
+				mes "[토른]";
+				mes "어디 보자, 전부 가져 왔나?";
+				next;
+				mes "[토른]";
+				mes "아직 좀 모자란 걸?";
+				next;
+				mes "[토른]";
+				mes "^0404fb탄력있는 줄 15개랑 코볼트의 털 3개^000000만";
+				mes "가지고 오게. 내 좋은 물건으로 바꿔줄";
+				mes "테니까.";
+				close;
+			}
+		}
+		if(isbegin_quest(17537) == 1) {
+		
+			mes "[토른]";
+			mes "고급 무기는 필요하지 않은 게야?";
+			mes "고급 무기에 사용될 재료를 가지고";
+			mes "어서 미하엘에게 가 봐.";
+			next;
+			mes "[토른]";
+			mes "아니면, 고급 방어구가 필요해서 온";
+			mes "게야?";
+			next;
+			switch(select("고급 방어구가 필요해서요.:이제 가려구요.")) {
+
+			case 1:
+				mes "[토른]";
+				mes "방어구가 필요해서 온 거였구만? 그럼";
+				mes "필요한건 얼른 가져가고 어서 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>";
+				mes "에게 가 봐.";
+				close2;
+				callshop "Edens01",1;
+				end;
+			case 2:
+
+				mes "[토른]";
+				mes "그래, 어서 가 보게. <NAVI>[사람]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>을 너무";
+				mes "기다리게 하면 못써.";
+				close;
+
+			}
+		}
+		mes "[토른]";
+		mes "어서 오시게. 고급 방어구가 필요해서";
+		mes "온 게지?";
+		next;
+		mes "[토른]";
+		mes "<ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>10개로 원하는 종류의";
+		mes "고급 방어구를 가져가게.";
+		close2;
+		callshop "Edens01",1;
+		end;
+	}
+	if(!isbegin_quest(17528)) {
+	
+		mes "[토른]";
+		mes "안녕하신가. 나에게 볼 일이 있나?";
+		mes "그렇지만 세상엔 절차라는 게 있지";
+		mes "않나?";
+		next;
+		mes "[토른]";
+		mes "마음이 아무리 급해도 먼저 로비에";
+		mes "있는 <NAVI>[교관 우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>를 먼저 만나서";
+		mes "안내를 받아 보게.";
+		close;
+	}
+	if(isbegin_quest(17528) == 1) {
+	
+		mes "[토른]";
+		mes "안녕하신가. 귀여운 친구로구만.";
+		mes "눈빛이 썩 맘에 드는 친구야.";
+		next;
+		mes "[토른]";
+		mes "지금 당장은 내가 지급하는 고급";
+		mes "방어구를 받지는 못하겠지만, 곧 다시";
+		mes "만날 것 같은 예감이 드는군.";
+		next;
+		mes "[토른]";
+		mes "베이스 레벨이 100이 넘으면";
+		mes "우르에게서 고급 방어구에 대한 안내를";
+		mes "받고 나한테 다시 오게. 내 바로 내어줄";
+		mes "테니.";
+		next;
+		mes "[토른]";
+		mes "<NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>은 만나 봤나? 아직인가? 그럼";
+		mes "이 친구는 무얼하는지 직접 물어 보게.";
+		mes "만나서 반가웠네. 하하하!";
+		completequest 17528;
+		setquest 17529;
+		close;
+	}
+	if(isbegin_quest(17529) == 1) {
+	
+		mes "[토른]";
+		mes "나에게 아직 할 말이 남았나? 하지만";
+		mes "옆에서 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>이 자기한텐 언제 오나";
+		mes "쳐다 보고 있잖나.";
+		close;
+	}
+	if(BaseLevel < 100) {
+
+		mes "[토른]";
+		mes "어서오시게. 지난번에 봤던 그 귀여운";
+		mes "친구로구만.";
+		next;
+		mes "[토른]";
+		mes "왜? 어서 고급 방어구를 가지고 싶어서";
+		mes "조바심이 나? 걱정 말게. 내가 볼 땐 곧";
+		mes "사용할 수 있을 테니 말이야. 하하하!";
+		close;
+	
+	}
+OnInit:
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17536) && countitem(7200) >= 15 && countitem(1034) >= 3";
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17528) == 1 && !isbegin_quest(17529)";
+	setunittitle getnpcid(0),"고급 방어구";
+	end;
+}
+moc_para01,110,83,3	script	관리자 미하엘#MTWMichale	967,{
+
+	
+	if(BaseLevel >= 100) {
+		if(checkquest(17529) == 1) completequest(17529);
+
+		if(!isbegin_quest(17537)) {
+			mes "[미하엘]";
+			mes "고급 무기를 지급 받으러 오신";
+			mes "모양이군요?";
+			mes "사용할 무기에 들어갈 재료는 직접";
+			mes "구해 오셔야 해요. 재료 안내는 로비에";
+			mes "있는 <NAVI>[교관 우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>에게서 안내 받을 수";
+			mes "있습니다.";
+			next;
+			mes "[미하엘]";
+			mes "아님, 혹시 중급 무기가 필요해서 다시";
+			mes "온 건가요?";
+			next;
+			switch(select("괜찮아요.:네, 필요해요!")) {
+			
+			case 1:
+				mes "[미하엘]";
+				mes "그래요. 중급 무기보다는 고급 무기를";
+				mes "써야 할 때니까요. 어서 가 봐요.";
+				close;
+			case 2:
+
+				mes "[미하엘]";
+				mes "정말 급한가 보군요?";
+				next;
+				callsub MLv_Weapon,BaseJob;
+				mes "괜찮은 걸로 잘 골랐네요. 그럼 다음에";
+				mes "또 봐요. 다른 무기가 필요하면 언제든";
+				mes "찾아 오고요.";
+				close;
+
+
+			}
+		}
+		else if(isbegin_quest(17537) == 1) {
+			mes "[미하엘]";
+			mes "어서와요. 우르님에게서 안내 받은";
+			mes "재료는 가지고 왔겠죠?";
+			next;
+			if(countitem(7318) < 15) {
+				mes "[미하엘]";
+				mes "흠... 좀 모자란데요? ^0404fb오래된 곡괭이^000000";
+				mes "^0404fb15개^000000라고 안내 받지 못하셨나요?";
+				mes "수량에 맞춰 가져오셔야 돼요.";
+				next;
+				mes "[미하엘]";
+				mes "아, 혹시 중급 무기를 받으러 오신";
+				mes "거예요?";
+				next;
+				switch(select("아니에요. 재료 가지고 올게요:네, 중급 무기 주세요.")) {
+				
+				case 1:
+					mes "[미하엘]";
+					mes "그럼, 재료를 기다리고 있을게요.";
+					close;
+
+				case 2:
+					mes "[미하엘]";
+					mes "그랬군요. 중급 무기 드릴게요.";
+					next;
+					callsub MLv_Weapon,BaseJob;
+					mes "[미하엘]";
+					mes "괜찮은 걸로 잘 골랐네요. 그럼 다음에";
+					mes "또 봐요. 다른 무기가 필요하면 언제든";
+					mes "찾아 오고요.";
+					close;
+
+				}
+			}
+			else {
+
+				mes "[미하엘]";
+				mes "수량에 맞춰 잘 가져오셨네요. 그럼";
+				mes "고급 무기를 드릴게요. 직업에 맞춰";
+				mes "준비 했는데 어떤 것으로 하실 건가요?";
+				next;
+				callsub Eden_HW,BaseJob;
+				delitem 7318,15;
+				completequest 17537;
+				mes "[미하엘]";
+				mes "그럼, 좋은 하루 보내요!";
+				close;
+			}
+		}
+		if(isbegin_quest(17536) == 1) {
+		
+			mes "[미하엘]";
+			mes "<NAVI>[토른]<INFO>moc_para01,110,87,0,000,0</INFO></NAVI>에겐 아직 안 간 거예요? 고급";
+			mes "방어구를 받고 싶으면 어서 가 봐요.";
+			next;
+			switch(select("새 무기를 받고 싶어요.:네. 가볼게요.")) {
+
+			case 1:
+				mes "[미하엘]";
+				mes "그래요. 천천히 구경하고 맘에 꼭 드는";
+				mes "무기를 받아 가요.";
+				close2;
+				callsub EDenHWShop,BaseJob;
+				end;
+			case 2:
+				mes "[미하엘]";
+				mes "그래요. 어서 가 봐요.";
+				close;
+			}
+		}
+		mes "[미하엘]";
+		mes "안녕! 반가워요. 혹시 무기가 필요해서";
+		mes "왔어요?";
+		next;
+		switch(select("고급 무기를 받으러 왔어요.:중급 무기를 받으러 왔어요.")) {
+
+		case 1:
+			mes "[미하엘]";
+			mes "그래요. 잘 왔어요. 천천히 구경하고";
+			mes "맘에 꼭 드는 무기를 받아 가요.";
+			close2;
+			callsub EDenHWShop,BaseJob;
+			end;
+		case 2:
+			mes "[미하엘]";
+			mes "굳이? 아니, 아니에요. 그래요. 중급";
+			mes "무기. 드릴게요.";
+			next;
+			callsub MLv_Weapon,BaseJob;
+			mes "[미하엘]";
+			mes "괜찮은 걸로 잘 골랐네요. 그럼 다음에";
+			mes "또 봐요. 다른 무기가 필요하면 언제든";
+			mes "찾아 오고요.";
+			close;
+
+		}
+	}
+	if(!isbegin_quest(17528) == 1) {
+	
+		mes "[미하엘]";
+		mes "안녕? 무기에 관심이 있어요? 그럼";
+		mes "로비에 있는 <NAVI>[우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>님과 먼저 이야기";
+		mes "해 볼래요?";
+		close;
+	}
+	if(isbegin_quest(17528) == 1) {
+		
+		mes "[미하엘]";
+		mes "안녕하세요. 반가워요. 그런데";
+		mes "토른님과 말씀 나누려던 것 아니었어요?";
+		close;
+	}
+	if(isbegin_quest(17529) == 1 || isbegin_quest(17529) == 2 ) {
+
+		mes "[미하엘]";
+		mes "안녕하세요. 반가워요. 저는 중급 무기";
+		mes "및 고급 무기 담당 미하엘이라고 해요.";
+		next;
+		mes "[미하엘]";
+		mes "지금 당장 사용할 무기는 지급할 수는";
+		mes "없지만, 조금 더 성장하면 저에게";
+		mes "오세요. 좋은 무기를 드릴게요.";
+		next;
+		mes "[미하엘]";
+		mes "베이스 레벨이 45가 되면 중급 무기를,";
+		mes "100레벨이 넘으면 고급 무기를 받을 수";
+		mes "있어요.";
+		next;
+		mes "[미하엘]";
+		mes "그럼 지금 당장 사용할 장비는 어디서";
+		mes "얻는지 궁금하겠죠? 그건 제 옆에 있는";
+		mes "<NAVI>[비케이]<INFO>moc_para01,110,79,0,000,0</INFO></NAVI>에게서 받을 수 있어요.";
+		mes "그러니 어서 가 봐요.";
+		next;
+		if(BaseLevel < 45) {
+			mes "[미하엘]";
+			mes "그럼 조심히 가요.";
+			completequest 17529;
+			setquest 17530;
+			close;
+		}
+		if(BaseLevel >= 45 && BaseLevel < 100) {
+			mes "[미하엘]";
+			mes "앗, 그런데 이제 보니 중급 무기를 받을";
+			mes "수 있는 레벨이었군요? 중급 무기를";
+			mes "받을래요?";
+			next;
+			switch(select("네, 주세요!:괜찮아요.")) {
+			
+			case 1:
+				if (Class == Job_Novice){
+					mes "[미하엘]";
+					mes "노비스님은 중급 무기르 받을 수가 없습니다.";
+					close;
+				}
+				mes "[미하엘]";
+				mes "그럼 중급 무기를 받고 비케이에게 꼭";
+				mes "가요. 알았죠?";
+				next;
+				callsub "MLv_Weapon",BaseJob;
+				mes "[미하엘]";
+				mes "괜찮은 걸로 잘 골랐네요. 그럼 다음에";
+				mes "또 봐요. 다른 무기가 필요하면 언제든";
+				mes "찾아 오고요.";
+				completequest 17529;
+				setquest 17530;
+				close;
+			case 2:
+				mes "[미하엘]";
+				mes "그래요. 중급 무기가 필요하면 언제든";
+				mes "찾아 와요. 그럼 조심히 가요.";
+				completequest 17529;
+				setquest 17530;
+				close;
+			}
+		}
+	}
+	if(isbegin_quest(17530) == 1) {
+		
+		mes "[미하엘]";
+		mes "<NAVI>[비케이]<INFO>moc_para01,110,79,0,000,0</INFO></NAVI>에게 가서 기본 장비를";
+		mes "받으라니까, 왜 다시 왔어요?";
+		next;
+		if(baselevel < 45) {
+			mes "[미하엘]";
+			mes "그럼 조심히 가요.";
+			close;
+		}
+		mes "[미하엘]";
+		mes "혹시 중급 무기가 필요해서 다시 온건가요?";
+		next;
+		switch(select("네, 필요해요!:괜찮아요.")) {
+
+		
+		case 1:
+			mes "[미하엘]";
+			mes "아, 그럼 드려야지. 중급 무기. 잠시만...";
+			next;
+			callsub "MLv_Weapon",BaseJob;
+			mes "[미하엘]";
+			mes "괜찮은 걸로 잘 골랐네요. 그럼 다음에";
+			mes "또 봐요. 다른 무기가 필요하면 언제든";
+			mes "찾아 오고요.";
+			close;
+		case 2:
+			mes "[미하엘]";
+			mes "그래요, 중급 무기가 필요하면 언제든";
+			mes "찾아 오고요. 그럼 조심히 가요.";
+			close;
+		}
+
+	}
+
+	if(BaseLevel < 45) {
+		mes "[미하엘]";
+		mes "안녕! 또 보네요. 반가워요.";
+		close;
+	}
+EDenHWShop: // 고급 무기 상점
+
+	set .Cs,getarg(0);
+
+	// 3차직업 기사
+	//600021,630015
+	if(.Cs == 7) callshop "Edens02_Rune",1;
+	
+	// 3차직업 마법사
+	//640023,640024;
+	if(.Cs == 9) callshop "Edens02_Warlock",1;
+
+	// 3차직업 궁수
+	// 700042,700043
+	if(.Cs == 11) callshop "Edens02_Ranger",1;
+	
+	// 3차직업 아크비숍
+	// 550041,590029
+	if(.Cs == 8) callshop "Edens02_Bishop",1;
+	
+	// 3차직업 미케닉
+	// 520012,620012
+	if(.Cs == 10) callshop "Edens02_Mechanic",1;
+
+	// 3차직업 길로틴 크로스
+	// 610026,610027
+	if(.Cs == 12) callshop "Edens02_GCross",1;
+
+	// 3차직업 로얄가드
+	// 500036,530018
+	if(.Cs == 14) callshop "Edens02_RGard",1;
+	
+	// 3차직업 소서러
+	// 540031,540032
+	if(.Cs == 16) callshop "EDenHWShop_Socer",1;
+	
+	// 3차직업 민스트럴
+	// 570022,570023
+	if(.Cs == 19) callshop "Edens02_Mins",1;
+	
+	// 3차직업 원더러
+	// 580022,580023
+	if(.Cs == 20) callshop "Edens02_Wonder",1;
+
+	// 3차직업 수라
+	// 560024,560025
+	if(.Cs == 15) callshop "Edens02_Sura",1;
+	
+	// 3차직업 제네릭
+	// 500037,590028
+	if(.Cs == 18) callshop "Edens02_Gene",1;
+	
+	// 3차직업 쉐도우체이서
+	// 510038,700041
+	if(.Cs == 17) callshop "Edens02_SChae",1;
+	
+	// 3차직업 성제
+	// 540033,540034
+	if(.Cs == 4047) callshop "Edens02_SG",1;
+	
+	// 3차직업 소울리퍼
+	// 640025,640026
+	if(.Cs == 4049 ) callshop "Edens02_Soul",1;
+	
+	// 3차직업 카게로우&오보로
+	// 650012,650013
+	if(.Cs == 4211 || .Cs == 4212) callshop "Edens02_KaO",1;
+	
+	// 3차직업 리벨리온
+	// 800006,830004
+	if(.Cs == 4215) callshop "Edens02_Rebel",1;
+	
+	// 3차직업 확장 슈퍼노비스
+	// 510039,550044
+	if(.Cs == 23) callshop "Edens02_Snovice",1;
+	
+	// 소환사(도람족)
+	// 550042,550043
+	if(.Cs == 4218) callshop "Edens02_Summ",1;
+	
+	return;
+	
+Eden_HW: // 고급무기
+	set .Cs,getarg(0);
+
+	if(.Cs == 7) { // 3차직업 기사
+	
+		mes "[미하엘]";
+		mes "낙원단 룬나이트 <ITEM>[투핸드 소드]<INFO>600021</INFO></ITEM>와";
+		mes "낙원단 룬나이트 <ITEM>[랜스]<INFO>630015</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 룬나이트 투핸드 소드:낙원단 룬나이트 랜스")) {
+		
+		case 1:
+			callsub GiveItem_Hw,600021,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,630015,1;
+			return;
+
+		}
+	}
+	if(.Cs == 9) { // 3차직업 마법사
+	
+		mes "[미하엘]";
+		mes "낙원단 워록 <ITEM>[스태프]<INFO>640023</INFO></ITEM>와";
+		mes "낙원단 워록 <ITEM>[완드]<INFO>640024</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 워록 스태프:낙원단 워록 완드")) {
+		
+		case 1:
+			callsub GiveItem_Hw,640023,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,630015,1;
+			return;
+
+		}
+	}
+	if(.Cs == 11) { // 3차직업 궁수
+	
+		mes "[미하엘]";
+		mes "낙원단 레인저 <ITEM>[보우]<INFO>700042</INFO></ITEM>와";
+		mes "낙원단 레인저 <ITEM>[크로스보우]<INFO>700043</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 레인저 보우:낙원단 레인저 크로스보우")) {
+		
+		case 1:
+			callsub GiveItem_Hw,700042,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,700043,1;
+			return;
+
+		}
+	}
+	if(.Cs == 8) { // 3차직업 아크비숍
+	
+		mes "[미하엘]";
+		mes "낙원단 아크비숍 <ITEM>[지팡이]<INFO>550041</INFO></ITEM>와";
+		mes "낙원단 아크비숍 <ITEM>[메이스]<INFO>590029</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 아크비숍 지팡이:낙원단 아크비숍 메이스")) {
+		
+		case 1:
+			callsub GiveItem_Hw,550041,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,590029,1;
+			return;
+
+		}
+	}
+	if(.Cs == 10) { // 3차직업 미케닉
+	
+		mes "[미하엘]";
+		mes "낙원단 미케닉 <ITEM>[액스]<INFO>520012</INFO></ITEM>와";
+		mes "낙원단 미케닉 <ITEM>[투핸드 액스]<INFO>620012</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 미케닉 액스:낙원단 미케닉 투핸드 액스")) {
+		
+		case 1:
+			callsub GiveItem_Hw,520012,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,620012,1;
+			return;
+
+		}
+	}
+	if(.Cs == 12) { // 3차직업 길로틴 크로스
+	
+		mes "[미하엘]";
+		mes "낙원단 길로틴 크로스 <ITEM>[챠크람]<INFO>610026</INFO></ITEM>과";
+		mes "낙원단 길로틴 크로스 <ITEM>[카타르]<INFO>610027</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 길로틴 크로스 챠크람:낙원단 길로틴 크로스 카타르")) {
+		
+		case 1:
+			callsub GiveItem_Hw,610026,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,610027,1;
+			return;
+
+		}
+	}
+	if(.Cs == 14) { // 3차직업 로얄가드
+	
+		mes "[미하엘]";
+		mes "낙원단 로얄가드 <ITEM>[소드]<INFO>500036</INFO></ITEM>와";
+		mes "낙원단 로얄가드 <ITEM>[스피어]<INFO>530018</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 로얄가드 소드:낙원단 로얄가드 스피어")) {
+		
+		case 1:
+			callsub GiveItem_Hw,500036,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,500018,1;
+			return;
+
+		}
+	}
+	if(.Cs == 16) { // 3차직업 소서러
+	
+		mes "[미하엘]";
+		mes "낙원단 소서러 <ITEM>[매직북]<INFO>540031</INFO></ITEM>과";
+		mes "낙원단 소서러 <ITEM>[스펠북]<INFO>540032</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 소서러 매직북:낙원단 소서러 스펠북")) {
+		
+		case 1:
+			callsub GiveItem_Hw,540031,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,540032,1;
+			return;
+
+		}
+	}
+	if(.Cs == 19) { // 3차직업 민스트럴
+	
+		mes "[미하엘]";
+		mes "낙원단 민스트럴 <ITEM>[바이올린]<INFO>570022</INFO></ITEM>와";
+		mes "낙원단 민스트럴 <ITEM>[하프]<INFO>570023</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 민스트럴 바이올린:낙원단 민스트럴 하프")) {
+		
+		case 1:
+			callsub GiveItem_Hw,570022,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,570023,1;
+			return;
+
+		}
+	}
+	if(.Cs == 20) { // 3차직업 원더러
+	
+		mes "[미하엘]";
+		mes "낙원단 원더러 <ITEM>[휩]<INFO>580022</INFO></ITEM>와";
+		mes "낙원단 원더러 <ITEM>[로프]<INFO>580023</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 원더러 휩:낙원단 원더러 로프")) {
+		
+		case 1:
+			callsub GiveItem_Hw,580022,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,580023,1;
+			return;
+
+		}
+	}
+	if(.Cs == 15) { // 3차직업 수라
+	
+		mes "[미하엘]";
+		mes "낙원단 수라 <ITEM>[너클]<INFO>560024</INFO></ITEM>와";
+		mes "낙원단 수라 <ITEM>[크로]<INFO>560025</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 수라 너클:낙원단 수라 크로")) {
+		
+		case 1:
+			callsub GiveItem_Hw,560024,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,560025,1;
+			return;
+
+		}
+	}
+	if(.Cs == 18) { // 3차직업 제네릭
+	
+		mes "[미하엘]";
+		mes "낙원단 제네릭 <ITEM>[소드]<INFO>500037</INFO></ITEM>와";
+		mes "낙원단 제네릭 <ITEM>[메이스]<INFO>590028</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 제네릭 소드:낙원단 제네릭 메이스")) {
+		
+		case 1:
+			callsub GiveItem_Hw,500037,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,590028,1;
+			return;
+
+		}
+	}
+	if(.Cs == 17) { // 3차직업 쉐도우체이서
+	
+		mes "[미하엘]";
+		mes "낙원단 쉐도우 체이서 <ITEM>[대거]<INFO>510038</INFO></ITEM>와";
+		mes "낙원단 쉐도우 체이서 <ITEM>[보우]<INFO>700041</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 쉐도우 체이서 대거:낙원단 쉐도우 체이서 보우")) {
+		
+		case 1:
+			callsub GiveItem_Hw,510038,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,700041,1;
+			return;
+
+		}
+	}
+	if(.Cs == 4047) { // 3차직업 성제
+	
+		mes "[미하엘]";
+		mes "낙원단 성제 <ITEM>[태양서]<INFO>540033</INFO></ITEM>와";
+		mes "낙원단 성제 <ITEM>[문북]<INFO>540034</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 성제 태양서:낙원단 성제 문북")) {
+		
+		case 1:
+			callsub GiveItem_Hw,540033,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,540034,1;
+			return;
+
+		}
+	}
+	if(.Cs == 4049 ) { // 3차직업 소울리퍼
+	
+		mes "[미하엘]";
+		mes "낙원단 소울리퍼 <ITEM>[스태프]<INFO>640025</INFO></ITEM>와";
+		mes "낙원단 소울리퍼 <ITEM>[소울스틱]<INFO>640026</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 소울리퍼 스태프:낙원단 소울리퍼 소울스틱")) {
+		
+		case 1:
+			callsub GiveItem_Hw,640025,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,640026,1;
+			return;
+
+		}
+	}
+	if(.Cs == 4211 || .Cs == 4212) { // 3차직업 카게로우&오보로
+	
+		mes "[미하엘]";
+		mes "낙원단 카게로우&오보로 <ITEM>[풍마수리검]<INFO>650012</INFO></ITEM>와";
+		mes "낙원단 카게로우&오보로 <ITEM>[십자 풍마수리검]<INFO>650013</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 카게로우&오보로 풍마수리검:낙원단 카게로우&오보로 십자 풍마수리검")) {
+		
+		case 1:
+			callsub GiveItem_Hw,650012,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,650013,1;
+			return;
+
+		}
+	}
+	if(.Cs == 4215) { // 3차직업 리벨리온
+	
+		mes "[미하엘]";
+		mes "낙원단 리벨리온 <ITEM>[리볼버]<INFO>800006</INFO></ITEM>와";
+		mes "낙원단 리벨리온 <ITEM>[개틀링건]<INFO>830004</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 리벨리온 리볼버:낙원단 리벨리온 개틀링건")) {
+		
+		case 1:
+			callsub GiveItem_Hw,800006,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,830004,1;
+			return;
+
+		}
+	}
+	if(.Cs == 23) { // 3차직업 확장 슈퍼노비스
+	
+		mes "[미하엘]";
+		mes "낙원단 슈퍼노비스 <ITEM>[대거]<INFO>510039</INFO></ITEM>와";
+		mes "낙원단 슈퍼노비스 <ITEM>[완드]<INFO>550044</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 슈퍼노비스 대거:낙원단 슈퍼노비스 완드")) {
+		
+		case 1:
+			callsub GiveItem_Hw,510039,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,550044,1;
+			return;
+
+		}
+	}
+	if(.Cs == 4218) { // 소환사(도람족)
+	
+		mes "[미하엘]";
+		mes "낙원단 소환사 <ITEM>[강아지풀]<INFO>550042</INFO></ITEM>와";
+		mes "낙원단 소환사 <ITEM>[강아지풀 모형]<INFO>550043</INFO></ITEM>중에서 어떤 걸로";
+		mes "받고 싶어요?";
+		next;
+		switch(select("낙원단 소환사 강아지풀:낙원단 소환사 강아지풀 모형")) {
+		
+		case 1:
+			callsub GiveItem_Hw,550042,1;
+			return;
+			
+		case 2:
+			callsub GiveItem_Hw,550043,1;
+			return;
+
+		}
+	}
+GiveItem_Hw:
+	mes "[미하엘]";
+	mes "좋은 걸 골랐네요. 요청한 무기를";
+	mes "드릴게요.";
+	mes "다른 고급 무기가 필요하거나 지급";
+	mes "받은 걸 잃어버리면 언제든 다시 와요.";
+	mes "<ITEM>[낙원단 주화]<INFO>25223</INFO></ITEM>10개만 주면 새 무기를";
+	mes "드릴게요.";
+	next;
+	if(isbegin_quest(17536) == 1) {
+			
+		mes "[미하엘]";
+		mes "그러고보니 아직 [토른]에게서 고급";
+		mes "방어구를 받지 않았나 보네요? 어서 가";
+		mes "봐요.";
+		next;
+	}
+	getitem getarg(0),getarg(1);
+	return;
+
+MLv_Weapon: //중급 무기
+	set .Jobs,getarg(0);
+	
+	if(.Jobs == 23) { //슈퍼노비스
+		
+		//550040 , 500035
+		mes "[미하엘]";
+		mes "낙원단 슈퍼노비스 <ITEM>[소드]<INFO>500035</INFO></ITEM>와";
+		mes "낙원단 슈퍼노비스 <ITEM>[지팡이]<INFO>550040</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 슈퍼노비스 소드:낙원단 슈퍼노비스 지팡이")) {
+		
+		case 1:
+			getitem 500035,1;
+			return;
+		case 2:
+			getitem 550040,1;
+			return;
+		}
+	}
+
+	else if(.Jobs == 7) { // 나이트
+	
+		//600020 , 620012
+		mes "[미하엘]";
+		mes "낙원단 나이트 <ITEM>[투핸드 소드]<INFO>600020</INFO></ITEM>와";
+		mes "낙원단 나이트 <ITEM>[랜스]<INFO>620012</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 나이트 투핸드 소드:낙원단 나이트 랜스")) {
+		
+		case 1:
+			getitem 600020,1;
+			return;
+		case 2:
+			getitem 620012,1;
+			return;
+		}
+	}
+	else if(.Jobs == 14) { // 크루
+	
+		//500033 , 530017
+		mes "[미하엘]";
+		mes "낙원단 크루세이더 <ITEM>[소드]<INFO>500033</INFO></ITEM>와";
+		mes "낙원단 크루세이더 <ITEM>[스피어]<INFO>530017</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 크루세이더 소드:낙원단 크루세이더 스피어")) {
+		
+		case 1:
+			getitem 500033,1;
+			return;
+		case 2:
+			getitem 530017,1;
+			return;
+		}
+	}
+	else if(.Jobs == 9) { // 위자드
+	
+		//550034 , 550035
+		mes "[미하엘]";
+		mes "낙원단 위자드 <ITEM>[스태프]<INFO>550034</INFO></ITEM>와";
+		mes "낙원단 위자드 <ITEM>[완드]<INFO>550035</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 위자드 스태프:낙원단 위자드 완드")) {
+		
+		case 1:
+			getitem 550034,1;
+			return;
+		case 2:
+			getitem 550035,1;
+			return;
+		}
+	}
+	else if(.Jobs == 18) { // 세이지
+	
+		//540027 , 540028
+		mes "[미하엘]";
+		mes "낙원단 세이지 <ITEM>[매직북]<INFO>540027</INFO></ITEM>와";
+		mes "낙원단 세이지 <ITEM>[스펠북]<INFO>540028</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 세이지 스태프:낙원단 세이지 완드")) {
+		
+		case 1:
+			getitem 540027,1;
+			return;
+		case 2:
+			getitem 540028,1;
+			return;
+		}
+	}
+	else if(.Jobs == 11) { // 헌터
+	
+		//700038 , 700039
+		mes "[미하엘]";
+		mes "낙원단 헌터 <ITEM>[보우]<INFO>700038</INFO></ITEM>와";
+		mes "낙원단 헌터 <ITEM>[크로스 보우]<INFO>700039</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 헌터 보우:낙원단 헌터 크로스 보우")) {
+		
+		case 1:
+			getitem 700038,1;
+			return;
+		case 2:
+			getitem 700039,1;
+			return;
+		}
+	}
+	else if(.Jobs == 19 || Jobs == 20) { // 바드//댄서
+		
+		if(.Jobs == 19) {
+			//570021 , 700040
+			mes "[미하엘]";
+			mes "낙원단 바드 <ITEM>[바이올린]<INFO>570021</INFO></ITEM>와";
+			mes "낙원단 바드댄서 <ITEM>[보우]<INFO>700040</INFO></ITEM>중에서 어떤";
+			mes "걸로 받고 싶어요?";
+			next;
+			switch(select("낙원단 바드 바이올린:낙원단 바드댄서 보우")) {
+			
+			case 1:
+				getitem 570021,1;
+				return;
+			case 2:
+				getitem 700040,1;
+				return;
+			}
+		}
+		if(.Jobs == 20) { //댄서
+			//580021,700040
+			mes "[미하엘]";
+			mes "낙원단 댄서 <ITEM>[로프]<INFO>580021</INFO></ITEM>와";
+			mes "낙원단 바드댄서 <ITEM>[보우]<INFO>700040</INFO></ITEM>중에서 어떤";
+			mes "걸로 받고 싶어요?";
+			next;
+			switch(select("낙원단 댄서 로프:낙원단 바드댄서 보우")) {
+			
+			case 1:
+				getitem 580021,1;
+				return;
+			case 2:
+				getitem 700040,1;
+				return;
+			}
+		}
+	}
+	else if(.Jobs == 8) { // 프리스트
+	
+		//550036 , 590027
+		mes "[미하엘]";
+		mes "낙원단 프리스트 <ITEM>[지팡이]<INFO>550036</INFO></ITEM>와";
+		mes "낙원단 프리스트 <ITEM>[메이스]<INFO>590027</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 프리스트 지팡이:낙원단 프리스트 메이스")) {
+		
+		case 1:
+			getitem 550036,1;
+			return;
+		case 2:
+			getitem 590027,1;
+			return;
+		}
+	}
+	else if(.Jobs == 15) { // 몽크
+	
+		//560022 , 560023
+		mes "[미하엘]";
+		mes "낙원단 몽크 <ITEM>[너클]<INFO>560022</INFO></ITEM>와";
+		mes "낙원단 몽크 <ITEM>[크로]<INFO>560023</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 몽크 너클:낙원단 몽크 크로")) {
+		
+		case 1:
+			getitem 560022,1;
+			return;
+		case 2:
+			getitem 560023,1;
+			return;
+		}
+	}
+	else if(.Jobs == 10) { // 블랙스미스
+	
+		//520011 , 620011
+		mes "[미하엘]";
+		mes "낙원단 블랙스미스 <ITEM>[액스]<INFO>520011</INFO></ITEM>와";
+		mes "낙원단 블랙스미스 <ITEM>[투핸드 액스]<INFO>620011</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 블랙스미스 액스:낙원단 블랙스미스 투핸드 액스")) {
+		
+		case 1:
+			getitem 520011,1;
+			return;
+		case 2:
+			getitem 620011,1;
+			return;
+		}
+	}
+	else if(.Jobs == 18) { // 알케미스트
+	
+		//500034 , 590026
+		mes "[미하엘]";
+		mes "낙원단 알케미스트 <ITEM>[소드]<INFO>500034</INFO></ITEM>와";
+		mes "낙원단 알케미스트 <ITEM>[메이스]<INFO>590026</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 알케미스트 소드:낙원단 알케미스트 메이스")) {
+		
+		case 1:
+			getitem 500034,1;
+			return;
+		case 2:
+			getitem 590026,1;
+			return;
+		}
+	}
+	else if(.Jobs == 12) { // 어쌔신
+	
+		//610024 , 610025
+		mes "[미하엘]";
+		mes "낙원단 어쌔신 <ITEM>[차크람]<INFO>610024</INFO></ITEM>와";
+		mes "낙원단 어쌔신 <ITEM>[카타르]<INFO>610025</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 어쌔신 차크람:낙원단 어쌔신 카타르")) {
+		
+		case 1:
+			getitem 610024,1;
+			return;
+		case 2:
+			getitem 610025,1;
+			return;
+		}
+	}
+	else if(.Jobs == 17) { // 로그
+	
+		//510036 , 700037
+		mes "[미하엘]";
+		mes "낙원단 로그 <ITEM>[대거]<INFO>510036</INFO></ITEM>와";
+		mes "낙원단 로그 <ITEM>[보우]<INFO>700037</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 로그 대거:낙원단 로그 보우")) {
+		
+		case 1:
+			getitem 510036,1;
+			return;
+		case 2:
+			getitem 700037,1;
+			return;
+		}
+	}
+	else if(.Jobs == 24) { // 건슬링거
+	
+		//800005 , 810003
+		mes "[미하엘]";
+		mes "낙원단 건슬링거 <ITEM>[리볼버]<INFO>800005</INFO></ITEM>와";
+		mes "낙원단 건슬링거 <ITEM>[라이플]<INFO>810003</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 건슬링거 리볼버:낙원단 건슬링거 라이플")) {
+		
+		case 1:
+			getitem 800005,1;
+			return;
+		case 2:
+			getitem 810003,1;
+			return;
+		}
+	}
+	else if(.Jobs == 25) { // 닌자
+	
+		//650010 , 650011
+		mes "[미하엘]";
+		mes "낙원단 닌자 <ITEM>[풍마수리검]<INFO>650010</INFO></ITEM>와";
+		mes "낙원단 닌자 <ITEM>[십자풍마수리검]<INFO>650011</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 닌자 풍마수리검:낙원단 닌자 십자풍마수리검")) {
+		
+		case 1:
+			getitem 650010,1;
+			return;
+		case 2:
+			getitem 650011,1;
+			return;
+		}
+	}
+	else if(.Jobs == 4047) { // 권성
+	
+		//540029 , 540030
+		mes "[미하엘]";
+		mes "낙원단 권성 <ITEM>[격투서]<INFO>540029</INFO></ITEM>와";
+		mes "낙원단 권성 <ITEM>[투법서]<INFO>540030</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 권성 격투서:낙원단 권성 투법서")) {
+		
+		case 1:
+			getitem 540029,1;
+			return;
+		case 2:
+			getitem 540030,1;
+			return;
+		}
+	}
+	else if(.Jobs == 4049) { // 소울링커
+	
+		//510037 , 550037
+		mes "[미하엘]";
+		mes "낙원단 소울링커 <ITEM>[대거]<INFO>510037</INFO></ITEM>와";
+		mes "낙원단 소울링커 <ITEM>[지팡이]<INFO>550037</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 소울링커 대거:낙원단 소울링커 지팡이")) {
+		
+		case 1:
+			getitem 510037,1;
+			return;
+		case 2:
+			getitem 550037,1;
+			return;
+		}
+	}
+	else if(.Jobs == 4218) { // 도람족 소환사
+	
+		//550038 , 550039
+		mes "[미하엘]";
+		mes "낙원단 도람 <ITEM>[강아지풀]<INFO>550038</INFO></ITEM>와";
+		mes "낙원단 도람 <ITEM>[강아지풀 모형]<INFO>550039</INFO></ITEM>중에서 어떤";
+		mes "걸로 받고 싶어요?";
+		next;
+		switch(select("낙원단 도람 강아지풀:낙원단 도람 강아지풀 모형")) {
+		
+		case 1:
+			getitem 550038,1;
+			return;
+		case 2:
+			getitem 550039,1;
+			return;
+		}
+	}
+	else if(.Jobs < 7){
+		mes "[미하엘]";
+		mes "아.. 중급 무기를 받으려면 최소";
+		mes "2차 전직은 하고 오셔야 해요.";
+		next;
+		return;
+	}
+
+OnInit:
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17529) == 1 && !isbegin_quest(17530)";
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17537) && countitem(7318) >= 15";
+	setunittitle getnpcid(0),"중급 고급 무기";
+	end;
+}
+moc_para01,110,79,3	script	관리자 비케이#2nd11	4_M_REPAIR,{
+
+	if(BaseLevel >= 100) {
+		if(checkquest(17530) == 1) completequest(17530);
+		mes "[비케이]";
+		mes "안녕! 뭔가 필요해서 나에게 왔겠지?";
+		next;
+		mes "[비케이]";
+		mes "음... 베이스 레벨이 100이 넘었잖아?";
+		mes "그럼 좀 더 고급 장비를 사용하는 것이";
+		mes "좋을 텐데?";
+		next;
+		mes "[비케이]";
+		mes "고급 무기는 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>에게, 고급";
+		mes "방어구는 <NAVI>[토른]<INFO>moc_para01,110,89,0,000,0</INFO></NAVI>씨에게서 받을 수";
+		mes "있어. 한 번 가 볼래?";
+		next;
+		switch(select("알겠어요.:기본 장비가 필요해서 왔어요.")) {
+
+		case 1:
+			mes "[비케이]";
+			mes "좋은 장비를 받길 바랄게! 안녕!";
+			close;
+		case 2:
+			mes "[비케이]";
+			mes "아, 그래? 왜 굳이 수준에도 안 맞는 걸";
+			mes "받겠다고 하는 거야? 받고 싶다니까";
+			mes "주기는 하겠는데... 뭐, 아무튼.";
+			next;
+			mes "[비케이]";
+			mes "기본 무기가 필요해? 아니면, 기본";
+			mes "방어구?";
+			next;
+			switch(select("기본 무기가 필요해요.:기본 방어구가 필요해요.")) {
+			
+			case 1:
+				goto Eden_Default_Weapon;
+				end;
+			case 2:
+				goto Eden_DefaultAmor;
+				end;
+
+			}
+		}
+	}
+	if(!isbegin_quest(17528) == 1) {
+	
+		mes "[비케이]";
+		mes "안녕? 기본 장비를 받고 싶어? 그럼";
+		mes "먼저 로비에 있는 <NAVI>[교관 우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>를 먼저";
+		mes "만나서 안내를 받아 볼래?";
+		close;
+	}
+	if(isbegin_quest(17528) == 1) {
+		
+		mes "[비케이]";
+		mes "안녕? 신입이구나? 그럼 나 말고";
+		mes "토른을 먼저 만나 봐.";
+		close;
+	}
+
+	if(isbegin_quest(17529) == 1) {
+		
+		mes "[비케이]";
+		mes "안녕? 신입이구나? 그럼 나 말고";
+		mes "<NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>을 먼저 만나 봐. 바로 옆에";
+		mes "보이지?";
+		close;
+	}
+
+	if(isbegin_quest(17530) == 1) {
+	
+		mes "[비케이]";
+		mes "안녕? 신입이구나? 우르가 보내서";
+		mes "왔지? 다른 분들은 다 만나 봤고?";
+		mes "나는 초보 모험가들이 사용하는 장비를";
+		mes "지급하는 비케이야. 반가워. 앗, 나만";
+		mes "반가운 건 아니지?";
+		next;
+		mes "[비케이]";
+		mes "이제 기본 장비를 지급할 텐데, 혹시";
+		mes "어떤 무기를 사용할지는 정했어? 무기";
+		mes "목록을 보여줄까?";
+		next;
+		switch(select("네! 무기 목록을 보여주세요.:괜찮아요.")) {
+		
+		case 1:
+			mes "[비케이]";
+			mes "자, 여기 낙원단 무기 목록이야. 어떤";
+			mes "걸 써야 좋을지 잘 살펴 봐.";
+			next;
+			mes "= 기본 무기 목록 =";
+			mes "<ITEM>[낙원단 소드]<INFO>500032</INFO></ITEM>";
+			mes "<ITEM>[낙원단 액스]<INFO>520010</INFO></ITEM>";
+			mes "<ITEM>[낙원단 메이스]<INFO>590025</INFO></ITEM>";
+			mes "<ITEM>[낙원단 대거]<INFO>510035</INFO></ITEM>";
+			mes "<ITEM>[낙원단 보우]<INFO>700036</INFO></ITEM>";
+			mes "<ITEM>[낙원단 롯드]<INFO>550032</INFO></ITEM>";
+			mes "<ITEM>[낙원단 리볼버]<INFO>800004</INFO></ITEM>";
+			mes "<ITEM>[낙원단 강아지풀]<INFO>550033</INFO></ITEM>";
+			next;
+			break;
+
+		case 2:
+			mes "[비케이]";
+			mes "그래? 네가 필요한 걸 확실히 알고";
+			mes "있구나? 좋은 자세야.";
+			next;
+			break;
+
+		}
+		mes "[비케이]";
+		mes "그럼 무슨 무기를 받을지 정했어?";
+		next;
+		switch(select("낙원단 소드:낙원단 액스:낙원단 메이스:낙원단 대거:낙원단 보우:낙원단 롯드:낙원단 리볼버:낙원단 강아지풀")) {
+			
+		case 1:
+			set .BWeapon,500032;
+			break;
+		case 2:
+			set .BWeapon,520010;
+			break;
+
+		case 3:
+			set .BWeapon,590025;
+			break;
+		case 4:
+			set .BWeapon,510035;
+			break;
+		case 5:
+			set .BWeapon,700036;
+			break;
+
+		case 6:
+			set .BWeapon,550032;
+			break;
+
+		case 7:
+			set .BWeapon,800004;
+			break;
+
+		case 8:
+			set .BWeapon,550033;
+			break;
+
+		}
+		mes "[비케이]";
+		mes "무기는 정했고... 그럼 방어구는";
+		mes "물리형과 마법형이 있는데 어떤 걸";
+		mes "사용하고 싶어?";
+		mes "물론 써보고 맞지 않으면 다시 와서";
+		mes "다른 걸로 받아가도 되고.";
+		next;
+		mes "[비케이]";
+		mes "방어구도 목록이 있는데, 한번 볼래?";
+		next;
+		switch(select("네, 보여주세요.:아뇨, 괜찮아요.")) {
+
+		case 1:
+
+			mes "[비케이]";
+			mes "뭘 골라야 할지 모르겠다면 네 직업이";
+			mes "뭔지 다시 한 번 떠올려 봐.";
+			next;
+			mes "[비케이]";
+			mes "검사계열이나 도둑계열처럼 육탄";
+			mes "전투형 직업을 가졌다면 물리형";
+			mes "방어구를 선택하는 것이 좋겠고.";
+			mes "마술사 계열이나 복사 계열처럼 주로";
+			mes "스킬을 주로 사용하는 직업이면 마법형";
+			mes "방어구가 도움이 되겠지.";
+			next;
+			mes "= 물리형 기본 방어구 목록 =";
+			mes "<ITEM>[낙원단 캡]<INFO>400137</INFO></ITEM>";
+			mes "<ITEM>[낙원단 슈츠]<INFO>450183</INFO></ITEM>";
+			mes "<ITEM>[낙원단 망토]<INFO>480103</INFO></ITEM>";
+			mes "<ITEM>[낙원단 부츠]<INFO>470067</INFO></ITEM>";
+			mes "<ITEM>[낙원단 링]<INFO>490122</INFO></ITEM>";
+			mes "<ITEM>[낙원단 글러브]<INFO>490123</INFO></ITEM>";
+			next;
+			mes "= 마법형 기본 방어구 목록 =";
+			mes "<ITEM>[낙원단 모자]<INFO>400138</INFO></ITEM>";
+			mes "<ITEM>[낙원단 로브]<INFO>450184</INFO></ITEM>";
+			mes "<ITEM>[낙원단 머플러]<INFO>480104</INFO></ITEM>";
+			mes "<ITEM>[낙원단 슈즈]<INFO>470068</INFO></ITEM>";
+			mes "<ITEM>[낙원단 매직링]<INFO>490124</INFO></ITEM>";
+			mes "<ITEM>[낙원단 네클리스]<INFO>490125</INFO></ITEM>";
+			next;
+			break;
+
+		case 2:
+			mes "[비케이]";
+			mes "그래? 네가 필요한 걸 확실히 알고";
+			mes "있구나? 좋은 자세야.";
+			next;
+			break;
+		}
+		mes "[비케이]";
+		mes "그래서, 어떤 방어구를 받을지 마음은";
+		mes "정했어?";
+		next;
+		switch(select("물리형 방어구요.:마법형 방어구요.")) {
+		
+		case 1:
+			mes "[비케이]";
+			mes "자, 여기 네가 선택한 "+getitemname(.BWeapon)+".";
+			mes "물리형 방어구.";
+			next;
+			set .BAType,1;
+			break;
+
+		case 2:
+			mes "[비케이]";
+			mes "자, 여기 네가 선택한 "+getitemname(.BWeapon)+".";
+			mes "마법형 방어구.";
+			next;
+			set .BAType,2;
+			break;
+		}
+		mes "[비케이]";
+		mes "열심히 쓰고 잃어버리거나 다른 걸";
+		mes "받고 싶으면 또 와. 얼마든지 내줄";
+		mes "테니까. 알았지?";
+		next;
+		if(BaseLevel < 45) {
+			
+			mes "[비케이]";
+			mes "참! 45레벨이 되면 아까 만났던";
+			mes "미하엘씨에게 중급 무기를 받으러 가.";
+			mes "잊으면 안된다?";
+			next;
+
+		}
+		mes "[비케이]";
+		mes "이제 <NAVI>[우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>에게 가서 기본 장비를";
+		mes "지급 받았다고 보고하면 되겠다. 어서";
+		mes "가 봐.";
+		completequest 17530;
+		setquest 17531;
+		getitem .BWeapon,1;
+		if(.BAType == 1) {
+			
+			getitem 400137,1;
+			getitem 450183,1;
+			getitem 480103,1;
+			getitem 470067,1;
+			getitem 490122,1;
+			getitem 490123,1;
+		}
+		else {
+			getitem 400138,1;
+			getitem 450184,1;
+			getitem 480104,1;
+			getitem 470068,1;
+			getitem 490124,1;
+			getitem 490125,1;
+		}
+		close;
+	}
+	if(isbegin_quest(17531) == 1) {
+
+		mes "[비케이]";
+		mes "<NAVI>[우르]<INFO>moc_para01,23,35,0,000,0</INFO></NAVI>한테 가 봐. 기본 장비를 모두";
+		mes "지급 받았다고 얘기하면 돼.";
+		close;
+	}
+
+	mes "[비케이]";
+	mes "안녕! 뭔가 필요해서 나에게 왔겠지?";
+	next;
+	
+	if(BaseLevel >= 45) {
+		mes "[비케이]";
+		mes "음... 혹시 중급 무기를 받으러 온 거야?";
+		mes "그거라면 이 옆에 있는 <NAVI>[미하엘]<INFO>moc_para01,110,83,0,000,0</INFO></NAVI>에게";
+		mes "가 볼래?";
+		next;
+		switch(select("알겠어요.:기본 장비가 필요해서 왔어요.")) {
+
+		case 1:
+			mes "[비케이]";
+			mes "좋은 무기 받길 바랄게! 안녕!";
+			close;
+		case 2:
+			mes "[비케이]";
+			mes "아, 그래? 내가 잘못 알았구나?";
+			next;
+		}
+	}
+	mes "[비케이]";
+	mes "기본 무기가 필요해? 아니면, 기본";
+	mes "방어구?";
+	next;
+	switch(select("기본 무기가 필요해요:기본 방어구가 필요해요.")) {
+
+	case 1:
+		goto Eden_Default_Weapon;
+		end;
+	case 2:
+		goto Eden_Default_Amor;
+		end;
+
+	}
+
+
+
+Eden_Default_Weapon:
+	mes "[비케이]";
+	mes "기본 무기 중에서 어떤거?";
+	next;
+	switch(select("낙원단 소드:낙원단 엑스:낙원단 메이스:낙원단 대거:낙원단 보우:낙원단 롯드:낙원단 리볼버:낙원단 강아지풀")) {
+			
+	case 1:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 소드. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(500032)) {
+			getitem 500032,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 2:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 엑스. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(520010)) {
+			getitem 520010,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 3:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 메이스. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(590025)) {
+			getitem 590025,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 4:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 대거. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(510035)) {
+			getitem 510035,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 5:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 보우. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(700036)) {
+			getitem 700036,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 6:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 롯드. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(550032)) {
+			getitem 550032,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 7:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 리볼버. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(800004)) {
+			getitem 800004,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	case 8:
+		mes "[비케이]";
+		mes "자, 네가 요청한 낙원단 강아지풀. 그럼";
+		mes "멋진 모험을 하길 빌게!";
+		if (!countitem(550033)) {
+			getitem 550033,1;
+		} else {
+			mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+		}
+		close;
+		break;
+	}
+
+Eden_Default_Amor:
+	mes "[비케이]";
+	mes "방어구는? 어떤 유형의 기본 방어구가";
+	mes "필요한데?";
+	next;
+	switch(select("물리형 기본 방어구요.:마법형 기본 방어구요.")) {
+	case 1:
+		mes "[비케이]";
+		mes "물리형 방어구? 그 중에서도 어떤거?";
+		next;
+		switch(select("낙원단 캡:낙원단 슈츠:낙원단 망토:낙원단 부츠:낙원단 링:낙원단 글러브:물리형 기본 방어구 전부요!")) {
+
+		case 1:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 캡. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(400137)) {
+				getitem 400137,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 2:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 슈츠. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(450183)) {
+				getitem 450183,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 3:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 망토. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(480103)) {
+				getitem 480103,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 4:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 부츠. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(470067)) {
+				getitem 470067,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 5:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 링. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(490122)) {
+				getitem 490122,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 6:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 글러브. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(490123)) {
+				getitem 490123,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 7:
+			mes "[비케이]";
+			mes "아, 물리형 기본 방어구 세트가";
+			mes "필요하구나? 자, 가져가. 유용하게 쓰길";
+			mes "바랄게!";
+			next;
+			if (!countitem(400137) && !countitem(450183) && !countitem(480103) && !countitem(470067) && !countitem(490122) && !countitem(490123)) {
+				getitem 400137,1;
+				getitem 450183,1;
+				getitem 480103,1;
+				getitem 470067,1;
+				getitem 490122,1;
+				getitem 490123,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		}
+	case 2:
+		mes "[비케이]";
+		mes "마법형 방어구? 그 중에서도 어떤거?";
+		next;
+		switch(select("낙원단 모자:낙원단 로브:낙원단 머플러:낙원단 슈즈:낙원단 매직링:낙원단 네클리스:마법형 기본 방어구 전부요!")) {
+	
+		case 1:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 모자. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(400138)) {
+				getitem 400138,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 2:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 로브. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(450184)) {
+				getitem 450184,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 3:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 머플러. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(480104)) {
+				getitem 480104,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 4:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 슈즈. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(470068)) {
+				getitem 470068,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 5:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 매직링. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(490124)) {
+				getitem 490124,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 6:
+			mes "[비케이]";
+			mes "자, 네가 요청한 낙원단 네클리스. 그럼 멋진";
+			mes "모험을 하길 빌게!";
+			if (!countitem(490125)) {
+				getitem 490125,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+			break;
+		case 7:
+			mes "[비케이]";
+			mes "아, 마법형 기본 방어구 세트가";
+			mes "필요하구나? 자, 가져가. 유용하게 쓰길";
+			mes "바랄게!";
+			next;
+			if (!countitem(400138) && !countitem(450184) && !countitem(480104) && !countitem(470068) && !countitem(490124) && !countitem(490125)) {
+				getitem 400138,1;
+				getitem 450184,1;
+				getitem 480104,1;
+				getitem 470068,1;
+				getitem 490124,1;
+				getitem 490125,1;
+			} else {
+				mes "이미 필요한 아이템 중 일부를 보유하고 있습니다.";
+			}
+			close;
+		}
+	}
+OnInit:
+		
+	questinfo QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17530) == 1 && !isbegin_quest(17535)";
+	setunittitle getnpcid(0),"초보자 장비";
+	end;
+}

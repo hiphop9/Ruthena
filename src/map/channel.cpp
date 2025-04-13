@@ -13,6 +13,7 @@
 #include <common/socket.hpp> //set_eof
 #include <common/strlib.hpp> //safestrncpy
 #include <common/timer.hpp>  // DIFF_TICK
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clif.hpp" //clif_chsys_msg
@@ -72,9 +73,12 @@ struct Channel* channel_create(struct Channel *tmp_chan) {
 			break;
 	}
 
-	if (battle_config.etc_log)
-		ShowInfo("Create channel %s alias %s type=%d, owner=%d/%d/%d\n",channel->name,channel->alias,channel->type,channel->char_id,channel->m,channel->gid);
-
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("%s 채널이 생성되었으며 별명(Alias)은 %s 타입이 %d이며, 주인은 %d/%d/%d입니다.\n",channel->name,channel->alias,channel->type,channel->char_id,channel->m,channel->gid);
+		else	
+			ShowInfo("Create channel %s alias %s type=%d, owner=%d/%d/%d\n",channel->name,channel->alias,channel->type,channel->char_id,channel->m,channel->gid);
+	}
 	return channel;
 }
 
@@ -158,8 +162,12 @@ int channel_delete(struct Channel *channel, bool force) {
 		}
 		dbi_destroy(iter);
 	}
-	if (battle_config.etc_log)
-		ShowInfo("Deleting channel %s alias %s type %d\n",channel->name,channel->alias,channel->type);
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("별명(alias)이 %s이고 타입이 %d인 '%s' 채널을 삭제 했습니다.\n",channel->name,channel->alias,channel->type);
+		else
+			ShowInfo("Deleting channel %s alias %s type %d\n",channel->name,channel->alias,channel->type);
+	}
 	db_destroy(channel->users);
 	db_destroy(channel->banned);
 	if (channel->groups)
@@ -1333,11 +1341,17 @@ bool channel_read_sub(config_setting_t *chan, struct Channel *tmp_chan, uint8 i)
 		return false;
 
 	if (!config_setting_lookup_string(chan, "name", &name)) {
-		ShowError("Please input channel 'name' at '%s' line '%d'! Skipping...\n", chan->file, chan->line);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("'%s'파일의 %d줄에 채널 'name'을 입력하세요. 건너뛰는중..\n", chan->file, chan->line);
+		else
+			ShowError("Please input channel 'name' at '%s' line '%d'! Skipping...\n", chan->file, chan->line);
 		return false;
 	}
 	if (config_setting_lookup_string(chan, "type", &type_str) && !script_get_constant(type_str, &type)) {
-		ShowError("Invalid channel type %s at '%s' line '%d'! Skipping...\n", type_str, chan->file, chan->line);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("'%s'파일의 %d줄에 %s은(는) 잘못된 채널 타입입니다. Skipping...\n", chan->file, chan->line, type_str);
+		else	
+			ShowError("Invalid channel type %s at '%s' line '%d'! Skipping...\n", type_str, chan->file, chan->line);
 		return false;
 	}
 	config_setting_lookup_string(chan, "password", &password);
@@ -1392,7 +1406,10 @@ void channel_read_config(void) {
 	config_setting_t *chan_setting = nullptr;
 
 	if (conf_read_file(&channels_conf, channel_conf)) {
-		ShowError("Cannot read file '%s' for channel connfig.\n", channel_conf);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("채널 설정을 위한 '%s'파일을 읽을 수 없습니다.\n", channel_conf);
+		else
+			ShowError("Cannot read file '%s' for channel connfig.\n", channel_conf);
 		return;
 	}
 
@@ -1482,7 +1499,10 @@ void channel_read_config(void) {
 			}
 		}
 
-		ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' channels in '" CL_WHITE "%s" CL_RESET "'.\n", db_size(channel_db), channel_conf);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%d" CL_RESET "'개의 채널을 읽어왔습니다.\n", channel_conf, db_size(channel_db));
+		else
+			ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' channels in '" CL_WHITE "%s" CL_RESET "'.\n", db_size(channel_db), channel_conf);
 		config_destroy(&channels_conf);
 	}
 }

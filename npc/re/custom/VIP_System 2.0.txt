@@ -1,0 +1,122 @@
+prontera,140,226,6	script	피버방시피::VIP System	109,{
+if (getgroupid()<4) {
+goto Prem;
+}
+
+set .@Timer, vip_status(VIP_STATUS_EXPIRE);
+
+mes "[ VIP NPC ]";
+mes "환영합니다."+strcharinfo(0)+",";
+mes "메뉴를 선택해주세요.";
+mes "^FF0000귀하의 VIP 상태는 에 만료됩니다:^000000";
+mes gettimestr("%Y-%m/%d %H:%M:%S",21,vip_status(VIP_STATUS_EXPIRE));
+mes "^FF0000남은 시간: ^000000" + callfunc("Time2Str",.@Timer);
+close;
+
+Prem:
+set .@day,1000;
+set .@week,5000;
+set .@month,20000;
+if (getgroupid()>60) {
+mes "[ VIP NPC ]";
+mes "죄송합니다. GM 직원은 이 기능을 사용할 수 없습니다.";
+close;
+}
+
+mes "[ VIP NPC ]";
+mes "베리쿠트 비야야는 VIP를 요구합니다.";
+mes "24시간 "+.@day+" 캐시포인트";
+mes "일주일 "+.@week+" 캐시 포인트";
+mes "1 개월 "+.@month+" 캐시 포인트";
+mes "현재 현금 포인트"+#CASHPOINTS+".";
+next;
+switch(select("24시간:일주일:1개월,감사해요.")) {
+case 1:
+if (#CASHPOINTS < .@day) {
+mes "[ VIP NPC ]";
+mes "캐시포인트가 부족해요.";
+mes ""+.@day+" 이 기능을 사용하려면 현금 포인트가 필요합니다.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@day;
+atcommand "@vip +24h "+strcharinfo(0)+"";
+mes "[ VIP NPC ]";
+mes "서비스를 즐기세요.";
+dispbottom "현재 현금 포인트 "+#CASHPOINTS+".";
+close;
+
+case 2:
+if (#CASHPOINTS < .@week) {
+mes "[ VIP NPC ]";
+mes "현금 포인트가 충분하지 않습니다.,";
+mes ""+.@week+" 이 기능을 사용하려면 현금 포인트가 필요합니다.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@week;
+atcommand "@vip +7d "+strcharinfo(0)+"";
+mes "[ VIP NPC ]";
+mes "서비스를 즐기세요.";
+dispbottom "현재 현금 포인트"+#CASHPOINTS+".";
+close;
+
+case 3:
+if (#CASHPOINTS < .@month) {
+mes "[ VIP NPC ]";
+mes "캐시포인트가 부족해요.";
+mes ""+.@month+"이 기능을 사용하려면 현금 포인트가 필요합니다.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@month;
+atcommand "@vip +1m "+strcharinfo(0)+"";
+mes "[ VIP NPC ]";
+mes "서비스를 즐기세요.";
+dispbottom "현재 현금 포인트"+#CASHPOINTS+".";
+close;
+
+case 4:
+mes "[ VIP NPC ]";
+mes "다음에 또 만나요.";
+close;
+}
+
+}
+
+// --------------------------------------------------
+//	Duplicates:
+// --------------------------------------------------
+alberta,33,240,4	duplicate(VIP System)	VIP System#alb	109
+aldebaran,146,116,4	duplicate(VIP System)	VIP System#alde	109
+amatsu,205,87,4	duplicate(VIP System)	VIP System#ama	109
+ayothaya,212,172,6	duplicate(VIP System)	VIP System#ayo	109
+comodo,191,161,4	duplicate(VIP System)	VIP System#com	109
+einbech,55,36,6	duplicate(VIP System)	VIP System#einbe	109
+einbroch,72,206,4	duplicate(VIP System)	VIP System#einbr	109
+geffen,127,66,4	duplicate(VIP System)	VIP System#gef	109
+gonryun,162,126,4	duplicate(VIP System)	VIP System#gon	109
+hugel,102,148,4	duplicate(VIP System)	VIP System#hug	109
+izlude,128,152,4	duplicate(VIP System)	VIP System#izl	109	//Pre-RE: (132,120)
+jawaii,248,134,4	duplicate(VIP System)	VIP System#jaw	109
+lighthalzen,154,104,4	duplicate(VIP System)	VIP System#lhz	109
+louyang,205,105,6	duplicate(VIP System)	VIP System#lou	109
+manuk,272,150,6	duplicate(VIP System)	VIP System#man	109
+mid_camp,216,286,4	duplicate(VIP System)	VIP System#mid	109
+morocc,146,89,4	duplicate(VIP System)	VIP System#mor	109
+moscovia,226,195,4	duplicate(VIP System)	VIP System#mos	109
+niflheim,199,180,4	duplicate(VIP System)	VIP System#nif	109
+payon,178,109,4	duplicate(VIP System)	VIP System#pay	109
+rachel,138,122,4	duplicate(VIP System)	VIP System#rac	109
+splendide,198,153,4	duplicate(VIP System)	VIP System#spl	109
+umbala,97,148,3	duplicate(VIP System)	VIP System#umb	109
+veins,211,120,4	duplicate(VIP System)	VIP System#ve	109
+xmas,142,139,6	duplicate(VIP System)	VIP System#xmas	109
+yuno,164,50,4	duplicate(VIP System)	VIP System#yuno	109
+//Welgaia,136,119,5	duplicate(VIP System)	VIP System#base	109
+
+// --------------------------------------------------
+//	Duplicates (Renewal):
+// --------------------------------------------------
+brasilis,199,225,4	duplicate(VIP System)	VIP System#bra	109
+dewata,202,190,6	duplicate(VIP System)	VIP System#dew	109
+dicastes01,196,197,6	duplicate(VIP System)	VIP System#dic	109
+malangdo,137,116,6	duplicate(VIP System)	VIP System#mal	109
+malaya,234,218,6	duplicate(VIP System)	VIP System#ma	109

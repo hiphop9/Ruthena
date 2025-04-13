@@ -1,53 +1,19 @@
 //===== rAthena Script =======================================
 //= Izlude Town
 //===== By: ==================================================
-//= kobra_k88
-//= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.9a
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Izlude town NPCs
-//===== Additional Comments: =================================
-//= Fully working
-//= 1.1 fixed 2 zeny bugs/checks [Lupus]
-//= 1.2 Fixed a lot of typos [Nexon]
-//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
-//= 1.4 Added a Jawaii related npc. 1.4a Fixed a small bug to
-//=     the Jawaii warper, thanks to reddozen and Silent [MasterOfMuppets]
-//= 1.5 Replaced iz_move_alberta with MISC_QUEST & 16 [Lupus]
-//= 1.6 Removed Duplicates [Silent]
-//= 1.7 Split quest to quests/quests_izlude.txt [Evera]
-//= 1.71 Optimized. Also thanks to CAHTEXHuK [Lupus]
-//= 1.72 Small bugfix [Paradox924X]
-//= 1.8 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
-//=     Removed Honeymoon Helper, as she is a Jawaii NPC.
-//=     Moved Signs to the msg_boards file.
-//= 1.8a Made Red/Cebalis as a single NPC + duplicate [Lupus]
-//= 1.9 Fixed a small problem with Dega. (Ne default case) [L0ne_W0lf]
-//=     Re-added NPC dialog for Cebalis. The dialog differs
-//=     (even if slightly,) after the five or so lines.
-//= 1.9a A part of Kylick's dialogue is Pre-Renewal only. [Euphy]
-//============================================================
-
-// Izlude
+//한글번역 스카이러브
 //============================================================
 -	script	::Sailor_izlude	-1,{
-	mes "[Sailor]";
-	mes "Hey everybody!";
-	mes "Attention, attention!";
-	mes "Come and ride the wind";
-	mes "on a fascinating Ship!";
-	mes "Hurry, hurry!";
+	mes "[선원]";
+	mes "초고속으로 운행하지만 안전은 보장";
+	mes "못하는 배가 항시 준비 되어 있습니다!!";
+	mes "자자! 오세요!";
 	next;
-	switch(select("Byalan Island -> 150 Zeny.:Alberta Marina  -> 500 Zeny.:Cancel.")) {
+	switch(select("바이아란 섬 -> 150 제니.:알베르타 항구 -> 500 제니.:그만둔다.")) {
 	case 1:
 		if (Zeny < 150) {
-			mes "[Sailor]";
-			mes "150 Zeny!";
-			mes "Only 150 Zeny to ride!";
+			mes "[선원]";
+			mes "150 제니! 150 제니 입니다!";
 			close;
 		}
 		set Zeny, Zeny - 150;
@@ -55,9 +21,8 @@
 		end;
 	case 2:
 		if (Zeny < 500) {
-			mes "[Sailor]";
-			mes "500 Zeny!";
-			mes "Only 500 Zeny to ride!";
+			mes "[선원]";
+			mes "500 제니! 500 제니 입니다!";
 			close;
 		}
 		set Zeny, Zeny - 500;
@@ -69,153 +34,181 @@
 }
 
 -	script	::Bonne_izlude	-1,{
-	mes "[Bonne]";
-	mes "Greetings!";
-	mes "Izlude welcomes you.";
+	mes "[본느]";
+	mes "어서오세요. 저희 이즈루드에 오신걸";
+	mes "진심으로 환영합니다.";
+	mes "저희 이즈루드는 룬-미드가츠 왕국의";
+	mes "수도인 프론테라의 위성도시로";
+	mes "검사들을 배양해낼뿐만아니라";
+	mes "해양경비까지 맡고있는 아주~ 중요한";
+	mes "도시랍니다.";
 	next;
-	mes "[Bonne]";
-	mes "Izlude is the satellite city of Prontera, capital of the Rune-Midgarts kingdom.";
-	next;
-	mes "[Bonne]";
-	mes "Izlude is key to our kingdom because of the Swordsman Association located here, as well as the fact that Izlude is in charge of protecting the Rune-Midgarts coastline.";
-	next;
-	mes "[Bonne]";
-	mes "I know, this bridge might look weak and fragile, but it is actually state of the art, built with the most sophisticated technology.";
-	next;
-	mes "[Bonne]";
-	mes "No matter how strong storms may be, or how many people may stand on it, this bridge will NEEEEVER collapse.";
-	next;
-	mes "[Bonne]";
-	mes "Please enjoy";
-	mes "your visit";
-	mes "here in Izlude.";
+	mes "[본느]";
+	mes "그리고 저희 이즈루드의 최첨단기술로";
+	mes "만들어진 이 다리는 보기엔 이렇게";
+	mes "얇고 길어 약해보여도";
+	mes "거센 비바람에도 끄떡없고 몇천명이";
+	mes "올라가도 절대 무너지지 않는답니다.";
+	mes "시험해보셔도 좋아요.";
+	mes "저희 이즈루드에서 모쪼록";
+	mes "즐거운시간을 보내고 가시길 빕니다.";
 	close;
 }
 
 -	script	::Charfri_izlude	-1,{
-	mes "[Charfri]";
+	mes "[샤프리]";
 	switch(rand(2)) {
 	case 1:
-		mes "Some people may think Izlude is just a satellite city of Prontera, and not really that important...";
+		mes "저희  도시보고 프론테라의";
+		mes "위성도시라고 얕보지만 이즈루드는";
+		mes "바다도 접해있고 아름다운 바이란섬도";
+		mes "가지고있는 훌륭한 도시랍니다.";
 		next;
-		mes "[Charfri]";
-		mes "But Izlude is a beautiful town right next to the ocean, as well as beautiful Byalan Island.";
-		next;
-		mes "[Charfri]";
-		mes "You'll have to board on a ship at the port to get to Byalan Island. There are dangerous dungeons on that island, so don't go snooping around just anywhere.";
+		mes "[샤프리]";
+		mes "바이란섬에 가려면 항구에서";
+		mes "배를타시면되요 섬엔 위험한 동굴도";
+		mes "있으니 함부로 여기저기 드나들지는";
+		mes "마세요.";
 		close;
 	default:
-		mes "Though it is very beautiful, Byalan Island has a mysterious dungeon that extends deep under the sea.";
+		mes "바이란섬은 아름답긴하지만 저기 깊은";
+		mes "바닷속까지 연결되어있는 이상한";
+		mes "동굴이 있는 곳이기도 하답니다.";
 		next;
-		mes "[Charfri]";
-		mes "People who've actually been there have said that if you go deep enough, the dungeon actually descends underwater.";
+		mes "[샤프리]";
+		mes "그 동굴에 다녀온 사람들이 말하기를";
+		mes "깉이 내려가면 동굴은 물속에";
+		mes "잠겨있대요.";
+		mes "하지만 어ㄸ너 신비한힘이 작용한는지";
+		mes "그곳에선 신기하게 사람도 물고기처럼";
+		mes "숨을쉴수있다고 하더군요.";
 		next;
-		mes "[Charfri]";
-		mes "Surprisingly, once you're underwater, you can breathe just like a fish. Maybe some kind of supernatural force is in effect.";
-		next;
-		mes "[Charfri]";
-		mes "Ah...";
-		mes "The people who've seen the underwater view say it is so fantastic that they've kept dreaming of it ever since.";
-		next;
-		mes "[Charfri]";
-		mes "But unfortunately, the monsters are too strong for ordinary people to merely go sightseeing there. Still, just once, I'd like to go down there...";
+		mes "[샤프리]";
+		mes "물속에서 일렁이는 풍경이 정말 꿈에도";
+		mes "잊지못할만큼 환상적이라고 하네요.";
+		mes "하지만 험악한 몬스터들이 많이";
+		mes "출몰하기때문에 아무나 함부로";
+		mes "드나들수 없는곳 이래요.";
+		mes "저도 꼭 한번 가보고싶지만 너무";
+		mes "위험한곳이니 그저 상상만";
+		mes "할뿐이랍니다.";
 		close;
 	}
 }
 
 -	script	::Cuskoal_izlude	-1,{
-	mes "[Cuskoal]";
+	mes "[쿠스코알]";
 	switch(rand(2)) {
 	case 1:
-		mes "The Arena here is THE place for capable young people from all over the Rune-Midgarts Kingdom to challenge themselves and test their skills.";
+		mes "이곳에 있는 아레나는 룬 미드가츠";
+		mes "왕국 전곳에서 능력있는 젊은이들이";
+		mes "자신을 시험해보고자 많이";
+		mes "들리는곳이지요.";
+		mes "단계별로 몬스터들이 나와 대결을";
+		mes "벌일 수 있기 때문에 얼마만큼의";
+		mes "스테이지를 통과할수있느냐에따라";
+		mes "능력을 판가름할 수 있답니다.";
 		next;
-		mes "[Cuskoal]";
-		mes "You can battle with monsters of differing levels. So, the number of stages you survive will be a testament to your battle prowess.";
-		next;
-		mes "[Cuskoal]";
-		mes "So, whaddya say?";
+		mes "[쿠스코알]";
+		mes "어때요 당신도 한번 도전해 보는것이?";
 		close;
 	default:
-		mes "The pubs in Prontera are always full of people from local areas and from out-of-town. It can get pretty busy.";
-		next;
-		mes "[Cuskoal]";
-		mes "It's a pretty good place to stop by for general information and to listen to rumors.";
-		next;
-		mes "[Cuskoal]";
-		mes "So if you listen carefully, you just might get lucky and learn some very useful information for yourself.";
+		mes "프론테라의 주점안은 항상 주민과";
+		mes "타지에서 온사람들의 대화로";
+		mes "시끌시끌하죠.";
+		mes "여러곳의 사람이 모이는 곳이라 항상";
+		mes "정보가 넘쳐나는곳이기도해요 잘 귀를";
+		mes "기울여보면 유용한 정보들을 많이 접할";
+		mes "수 있을꺼에요.";
 		close;
 	}
 }
 
 -	script	::Dega_izlude	-1,{
-	mes "[Dega]";
+	mes "[드가]";
 	switch(rand(3)) {
 	case 1:
-		mes "Mt. Mjornir, located north of Prontera, is a tough";
-		mes "and steep climb.";
+		mes "프론테라 북쪽에 있는 묘르닐 산맥은";
+		mes "정말이지 험준하고 넘기 힘든 산이지요.";
+		mes "산세가 험난한 것도 험난한거지만";
+		mes "아실지모르겠는데 거기엔 정말로";
+		mes "무시무시한 곤충들이 살고 있답니다.";
 		next;
-		mes "[Dega]";
-		mes "Aside from the dangers of the mountain itself, insanely vicious insects live there too. I mean, they'll just attack you for no reason.";
-		next;
-		mes "[Dega]";
-		mes "If you ever want to visit somewhere past Mt. Mjolnir, then you prepare yourself for the challenge.  Or you could walk around it.";
+		mes "[드가]";
+		mes "정말로 건드리지도 않고 얌전히 가만히";
+		mes "지나갈려고 해도 먼저 덤벼드는";
+		mes "녀석들이 있어요.";
+		mes "혹시 묘르닐산맥 넘어에 가시려는 곳이";
+		mes "있다면 어지간히 자신감에 넘치지";
+		mes "않는한 돌아가세요.";
 		close;
 	case 2:
-		mes "Some monsters in the world have the unique ability to sense mystical energy, and can detect Magic spells before they are cast.";
-		next;
-		mes "[Dega]";
-		mes "Golem of the desert is one of them. Don't underestimate it due to its sluggishness...";
-		next;
-		mes "[Dega]";
-		mes "If you try to cast magic near it, it will notice and saunter over to smash you. So you better watch out for Golem.";
+		mes "세상에는 특이하게 마법의 힘을 미리";
+		mes "감지할 수 있는 능력을 가진 생물들이";
+		mes "있어요.";
+		mes "저쪽 사막의 고렘도 그런 종류중의";
+		mes "하나죠. 느리다고 얕보고 마법을";
+		mes "쓸라치면 어느샌가 알아차리고";
+		mes "쿵!쿵!쿵!쿵! 다가와 버리니까";
+		mes "조심하셔야 해요.";
 		close;
 	default:
-		mes "There's a very delightful place where you can find every";
-		mes "type of Poring.";
+		mes "남동쪽에 위치한 페이욘이란 도시를";
+		mes "가는 길목에 사막과 숲이 연결되어있는";
+		mes "다리가 있는 부근엔 모든종류의 포링을";
+		mes "만나볼수있는 아주 귀여운곳이";
+		mes "있답니다.";
 		next;
-		mes "[Dega]";
-		mes "It's somewhere near the bridge connecting the forest and the desert, on the way to the city of Payon which is Southeast from here.";
+		mes "[드가]";
+		mes "그곳엔 분홍색 포링뿐만아니라";
+		mes "사막에서 살고있는 드롭프스라던지";
+		mes "연두빛 포포링도 만나볼수있지요.";
+		mes "하지만 조심하세요 어느새 옆에";
+		mes "유령처럼 떠다니는 고스트링을 보게";
+		mes "될지도 모르니까요.";
 		next;
-		mes "[Dega]";
-		mes "There are not only pink Porings but also Drops, which can be found at the desert, and the green Poporing.";
-		next;
-		mes "[Dega]";
-		mes "But be careful, before you realize it, you may come face to face with Ghostring, a deadly Poring that floats around in the air like a ghost.";
-		next;
-		mes "[Dega]";
-		mes "Well, of course, they are all very cute, but Ghostring is an EXCEPTION. It is very very dangerous.";
-		next;
-		mes "[Dega]";
-		mes "If you are lucky enough, you might even bump into Angeling, the Poring with Angel wings.";
+		mes "[드가]";
+		mes "물론 아주아주 귀여운 포링들이지만";
+		mes "고스트링만큼은 정말로 무섭답니다.";
+		mes "혹시 모르죠 운이 따라서 날개달린";
+		mes "엔젤링을 보게될지도 모르니까요.";
 		next;
 		while(1) {
-			switch(select("Ghostring?:Angeling?:End Conversation.")) {
+			switch(select("고스트링?:엔젤링?:대화를 끝낸다")) {
 			case 1:
-				mes "[Dega]";
-				mes "Ghostring is a grayish Poring that floats around in the air like a ghost. Just like other ghosts, physical attacks can't do any damage to it.";
+				mes "[드가]";
+				mes "고스트링은 회색빛이 감돌고 붕붕";
+				mes "떠다닌 유령포링이랍니다. 유령인만큼";
+				mes "직접공격은 통하지 않는다고 하더군요.";
+				mes "검사나 궁수등 직접공격이";
+				mes "주류인분들이 고스트링을 만나면 꽁지";
+				mes "빠지게 도망가는 수밖에 없죠.";
 				next;
-				mes "[Dega]";
-				mes "Those whose main attack methods are physical like Swordman and Archer might have to run for their lives when facing Ghostrings.";
-				next;
-				mes "[Dega]";
-				mes "But don't leave just yet~! There is great news for people with those jobs. Making a weapon of some elemental property is the key.";
-				next;
-				mes "[Dega]";
-				mes "This way, even a Swordman or an Archer can inflict damage, the way Magic does, on Ghostrings.";
+				mes "[드가]";
+				mes "하지만 이런분들께도 한가지 희망은";
+				mes "있답니다. 바로 무기에 속성을 가지게";
+				mes "해주는것이죠.";
+				mes "그렇게 되면 마법처럼 고스트링에게";
+				mes "데미지를 입힐 수 있답니다.";
 				next;
 				break;
 			case 2:
-				mes "[Dega]";
-				mes "Angelings are immune to Magic attacks. If people who can only attack with Magic face an Angeling, then it's time for";
-				mes "them to run.";
+				mes "[드가]";
+				mes "엔젤링에게 마법은 통하지";
+				mes "않는답니다. 모든 마법을 튕겨내버리고";
+				mes "말죠.";
+				mes "만약 마법을 쓰시는분이 이 엔젤링을";
+				mes "만났다면 걸음아 나살려라~ 하고";
+				mes "도망가 버리는수 밖에없어요.";
 				next;
-				mes "[Dega]";
-				mes "If you've got an extra knife or sword, you could give it a shot. But it will be very difficult alone, don't you think?";
+				mes "[드가]";
+				mes "칼이 있다면 한번 덤벼보는것도";
+				mes "좋겠지만 혼자선 힘들겠죠?";
 				next;
 				break;
 			case 3:
-				mes "[Dega]";
-				mes "Good Luck~";
+				mes "[드가]";
+				mes "행운을 빌게요~";
 				close;
 			}
 		}
@@ -224,290 +217,283 @@
 
 -	script	::Kylick_izlude	-1,{
 	if (!checkre(0) && rand(2)) {
-		mes "[Kylick]";
-		mes "I was thinking, even though the people of Izlude live so close to the ocean...";
+		mes "[키릭]";
+		mes "Izlude 사람들이 바다와 너무 가까이 살고 있는데도 불구하고...";
 		next;
-		mes "[Kylick]";
-		mes "There are other cultures that have completely developed by living off of the sea. Of course, I'm talking about Amatsu.";
+		mes "[키릭]";
+		mes "완전히 바다에서 생활하면서 발달한 문화도 있어요. 물론 아마츠를 말하는 거죠.";
 		next;
-		mes "[Kylick]";
-		mes "I hear the cuisine there is really good! Although the idea of eating raw fish is new to me, I would love to go there, and try it just once!";
+		mes "[키릭]";
+		mes "거기 음식이 정말 맛있다고 들었어요! 회를 먹는다는 생각은 처음이지만 꼭 한 번 가보고 싶어요!";
 		close;
 	} else {
-		mes "[Kylick]";
-		mes "Don't you think Binoculars";
-		mes "are really COOL?! You can";
-		mes "see all sorts of places...!";
+		mes "[키릭]";
+		mes "엣헴~! 저희 이즈루드는요. 이 땅위의";
+		mes "안전뿐만아니라 바로 저기 보이는 넓은";
+		mes "바다의 안전도 책임지고 있답니다.";
 		next;
-		mes "[Kylick]";
-		mes "Here in Izlude, we are responsible for maintaining peace not only on land but also at sea. That's why this city has a huge telescope.";
-		next;
-		mes "[Kylick]";
-		mes "This telescope constantly watches over the sea, so that we can prevent any serious trouble from happening. You know...";
-		next;
-		mes "[Kylick]";
-		mes "An ounce of";
-		mes "prevention is worth";
-		mes "a pound of cure";
-		mes "after all, right?";
+		mes "[키릭]";
+		mes "때문에 커다란 망원경을 설치하고  바다";
+		mes "멀리까지 미리미리 살펴두지요. 모든건";
+		mes "미리미리 대비해놓는게 제일이니까요.";
 		close;
 	}
 }
 
 -	script	::Red_izlude	-1,{
-	mes "[Red]";
-	mes "The only skill that's needed for a Swordman is ^FF2400Bash^000000! Bash, Bash and ONLY ^FF2400Bash^000000! No need to waste time and effort for smaller skills! Everything else is for cowards and wusses!";
+	mes "[레드]";
+	mes "검사에겐 다른건 필요없어 무조건 한방기! 배쉬! 배쉬!! 배쉬!!! 뿐이지!";
+	mes "쪼잔하게 다른 짠기술 이리저리 수련할필요따윈없다구";
 	next;
-	mes "[Cebalis]";
-	mes "What are you talking about!? The ideal Swordman resolutely stands alone, surrounded by countless enemies and smashing them all with one awesome attack.";
+	mes "[시발리스]";
+	mes "무슨소리?뭐니뭐니해도 검사의로망은 홀로 적진에 뛰어들어 당당히 맞서는것이지 그럴때 필요한게 바로 매그넘 브레이크~!";
+	mes "공격한놈 뿐만아니라 주변에서 어슬렁거린 놈들에게까지 폭발데미지를 줄수있지 본인도 조금 피해를 입긴하지만 그정도야 검사라면 당연히 감수해야하는것 아니겠어?!";
 	next;
-	mes "[Cebalis]";
-	mes "^EE0000MAGNUM BREAK!^000000";
-	mes "That's right, Magnum Break";
-	mes "is the skill that does";
-	mes "the job right~!!";
+	mes "[레드]";
+	mes "그러니까 어리석다는거야 이친구야! 뭐가 남자의 로망이냐? 자기까지 피해보면서 그런 위험하고 바보같은짓을하다니 자네 약해빠진주제에 저번에 그기술한번 잘못썼다가";
+	mes "지나가다 엉뚱하게 맞은 포링때들이 우르르 몰려와서 기겁해서 도망온거 아직도 기억난다네";
 	next;
-	mes "[Cebalis]";
-	mes "Well... Sometimes the explosive damage might accidentally hit some wandering monsters, and those guys end up coming after you, but that's a risk a Swordman should be willing to take!!";
+	mes "[시발리스]";
+	mes "큼. 그...그런...일 따윈 잊게 어쨌든 검사라면 매..매그넘 브레이크 라고~!!";
+	mes "배쉬따윈 매그넘브레이크를 익히기위한 중간과정일뿐이야.";
 	next;
-	mes "[Red]";
-	mes "That's exactly why you're dumb, you idiot! And what's this about the 'the ideal Swordman?' I still remember the last time you used Magnum Break...";
+	mes "[레드]";
+	mes "이런.. 이봐 거기 듣고있는 자네.. 그래 바로 당신말이야 당신은 어떻게 생각하나? 한방기인 배쉬와 스플래쉬데미지 기술인 매그넘 브레이크!";
+	mes "어느쪽이 우수하다고 생각해?";
 	next;
-	mes "[Red]";
-	mes "You ended up running away from all those monsters you hit with that stupid skill! Weakling! All those Porings around you got hit and they all tried to kill you. ";
-	next;
-	mes "[Cebalis]";
-	mes "Hmpf. As I recall, you were running away too, apparently too busy to use your precious Bash. In any case, Magnum Break is THE skill for a Swordman~!!";
-	next;
-	mes "[Cebalis]";
-	mes "Something simplistic like Bash";
-	mes "is just one of the little steps towards Magnum Break.";
-	next;
-	mes "[Red]";
-	mes "Oh man~";
-	mes "Hey, I know you just";
-	mes "heard everything.";
-	mes "So what do you think?";
-	next;
-	mes "[Red]";
-	mes "Which one do you think is better? The critical damage skill, ^FF2400Bash^000000, or the Splash damage skill, ^EE0000Magnum Break^000000?";
-	next;
-	if (select("Bash:Magnum Break") == 1)  {
+	if (select("배쉬:매그넘 브레이크") == 1)  {
 		if (BaseClass == Job_Swordman) {
-			mes "[Red]";
-			mes "Hahahaha!!! I knew you'd see things my way!! You ARE a great guy!! Undoubtedly, only ^FF2400Bash^000000 suits a Swordman. Please tell that to this BONEHEAD over here~ Hahaha!";
+			mes "[레드]";
+			mes "핫핫핫!! 처음 딱 볼때부터 알았다니깐";
+			mes "당신은 정말 멋진 사람이로군 그렇지";
+			mes "검사는 역시 배쉬라니깐.";
+			mes "저 얼간이에게도 좀 가르쳐 주라고";
 			next;
-			mes "[Red]";
-			mes "Hmm, let me give you a bit of advice. After you achieve level 5 'Bash', the amount of SP consumed by the skill increases greatly, so watch out for your SP.";
+			mes "[레드]";
+			mes "흠 내가 자네를 위해 살짝";
+			mes "충고해주는데 배쉰느 레벨5가 넘어가면";
+			mes "에스피소모량이 극심해지니 신중이";
+			mes "사용하도록해";
 			close;
 		}
-		mes "[Red]";
-		mes "Hahahaha!! See!? Someone who pursues a different job agrees with me~! You really are a great guy! Hahaha!! Undoubtedly, only ^FF2400Bash^000000 suits a Swordman. Please tell that to this NIMROD over here~ Hahaha!";
+		mes "[레드]";
+		mes "핫핫핫!! 이것보게 심지어 다른일을 하는 사람까지도 이렇게 말하지 않나.핫핫!당신은 정말 멋진 사람이로군";
+		mes "그렇지 검사는 역시 배쉬라니깐. 저 얼간이에게도 좀 가르쳐 주라고";
 		close;
 	}
 	if (BaseClass == Job_Swordman) {
-		mes "[Cebalis]";
-		mes "Alright!! ^EE0000Magnum Break^000000 is the BEST!! Now you're talking~!! You know the stuff~ HaHaHa!";
+		mes "[시발리스]";
+		mes "그렇치! 매그넘브레이크가 최고지.";
+		mes "당신은 뭘 좀아는사람이구만 그래";
+		mes "내 자네를 위해 충고하나하지";
+		mes "매그넘브레이크는 화속성의";
+		mes "공격이라네.";
+		mes "수속성의 몬스터에게는 약하지만";
+		mes "언데드와 지속성의 몬스터에게는";
+		mes "직방이지!";
 		next;
-		mes "[Cebalis]";
-		mes "You wanna know some useful information? Okay, okay lemme tell ya! Magnum Break has Fire Property.";
-		next;
-		mes "[Cebalis]";
-		mes "So it won't be too effective against monsters with the Water property, but this is THE skill to use against Undead and Earth property monsters!";
-		next;
-		mes "[Cebalis]";
-		mes "And most importantly, look around before you use it. Otherwise you'll be in BIG trouble~ ";
+		mes "[시발리스]";
+		mes "그리고 주위를 잘살피고 상대를";
+		mes "파악한후 칼을 휘둘러야지 그렇지";
+		mes "않으면 위험해질수도 있으니";
+		mes "주의하게나";
 		close;
 	}
-	mes "[Cebalis]";
-	mes "Right?! ^EE0000Magnum Break^000000 is THE BEST!!! You know what you're talking about, eh? I don't know why this jerkface is being sooooo stubborn.";
+	mes "[시발리스]";
+	mes "그렇지! 매그넘브레이크가 최고지. 당신은 뭘 좀 아는사람이구만! 저 멍청이는 왜 저렇게 고집인지 모르겠다니깐.";
 	close;
 }
-
 -	script	::Cebalis_izlude	-1,{
-	mes "[Red]";
-	mes "The only skill that's needed for a Swordman is ^FF2400Bash^000000! Bash, Bash and ONLY ^FF2400Bash^000000! No need to waste time and effort on smaller skills~~ Everything else is for cowards and wusses!";
+	mes "[레드]";
+	mes "검사에겐 다른건 필요없어 무조건 한방기! 배쉬! 배쉬!! 배쉬!!! 뿐이지!";
+	mes "쪼잔하게 다른 짠기술 이리저리 수련할필요따윈없다구";
 	next;
-	mes "[Cebalis]";
-	mes "What are you talking about!? The ideal Swordman resolutely stands alone, surrounded by countless foes, smashing them all with one awesome attack...";
+	mes "[시발리스]";
+	mes "무슨소리?뭐니뭐니해도 검사의로망은 홀로 적진에 뛰어들어 당당히 맞서는것이지 그럴때 필요한게 바로 매그넘 브레이크~!";
+	mes "공격한놈 뿐만아니라 주변에서 어슬렁거린 놈들에게까지 폭발데미지를 줄수있지 본인도 조금 피해를 입긴하지만 그정도야 검사라면 당연히 감수해야하는것 아니겠어?!";
 	next;
-	mes "[Cebalis]";
-	mes "^EE0000MAGNUM BREAK!^000000";
-	mes "That's right, Magnum Break";
-	mes "is the perfect";
-	mes "Swordman skill.";
+	mes "[레드]";
+	mes "그러니까 어리석다는거야 이친구야! 뭐가 남자의 로망이냐? 자기까지 피해보면서 그런 위험하고 바보같은짓을하다니 자네 약해빠진주제에 저번에 그기술한번 잘못썼다가";
+	mes "지나가다 엉뚱하게 맞은 포링때들이 우르르 몰려와서 기겁해서 도망온거 아직도 기억난다네";
 	next;
-	mes "[Cebalis]";
-	mes "Well...";
-	mes "Sometimes the explosion accidentally hits some monsters that are just wandering around.";
+	mes "[시발리스]";
+	mes "큼. 그...그런...일 따윈 잊게 어쨌든 검사라면 매..매그넘 브레이크 라고~!!";
+	mes "배쉬따윈 매그넘브레이크를 익히기위한 중간과정일뿐이야.";
 	next;
-	mes "[Cebalis]";
-	mes "Then they all end up coming after you, but that's a risk a true Swordman should be willing to take.";
+	mes "[레드]";
+	mes "이런.. 이봐 거기 듣고있는 자네.. 그래 바로 당신말이야 당신은 어떻게 생각하나? 한방기인 배쉬와 스플래쉬데미지 기술인 매그넘 브레이크!";
+	mes "어느쪽이 우수하다고 생각해?";
 	next;
-	mes "[Red]";
-	mes "That's exactly why you're dumb, you idiot! And what was that about the 'ideal Swordman?' You remember the last time you used Magnum Break?!";
-	next;
-	mes "[Red]";
-	mes "You had to run away from all those Porings hit by that stupid skill! You weakling! All those Porings that you hit tried to kill you! ";
-	next;
-	mes "[Cebalis]";
-	mes "Oh shut up. And those were Poporings. As I recall, you were running away too, apparently too busy to use your precious Bash.";
-	next;
-	mes "[Cebalis]";
-	mes "In any case, Magnum Break is THE skill for a Swordman~!! Something simplistic like Bash is just one of those little steps towards Magnum Break.";
-	next;
-	mes "[Red]";
-	mes "Oh man~";
-	mes "Hey, I know you";
-	mes "heard everything.";
-	mes "So what do you think?";
-	next;
-	mes "[Red]";
-	mes "Which one do you think is better? The critical damage skill, ^FF2400Bash^000000, or the Splash damage skill, ^EE0000Magnum Break^000000?";
-	next;
-	if (select("Bash:Magnum Break") == 1) {
+	if (select("배쉬:매그넘 브레이크") == 1)  {
 		if (BaseClass == Job_Swordman) {
-			mes "[Red]";
-			mes "Hahahaha!!! I knew you'd see things my way!! You ARE a great guy!! Without a doubt, only ^FF2400Bash^000000 suits a Swordman. Please tell that to FUNBOY over here!! Hahaha.";
+			mes "[레드]";
+			mes "핫핫핫!! 처음 딱 볼때부터 알았다니깐";
+			mes "당신은 정말 멋진 사람이로군 그렇지";
+			mes "검사는 역시 배쉬라니깐.";
+			mes "저 얼간이에게도 좀 가르쳐 주라고";
 			next;
-			mes "[Red]";
-			mes "Hmm, let me give you a bit of advice. After you achieve level 5 Bash, the amount of SP consumed by the skill increases greatly, so watch out for your SP.";
+			mes "[레드]";
+			mes "흠 내가 자네를 위해 살짝";
+			mes "충고해주는데 배쉰느 레벨5가 넘어가면";
+			mes "에스피소모량이 극심해지니 신중이";
+			mes "사용하도록해";
 			close;
 		}
-		mes "[Red]";
-		mes "Hahahaha!!";
-		mes "See!? Someone who pursues a different job agrees with me~! You really are a great guy! Hahaha!!";
-		next;
-		mes "[Red]";
-		mes "Without a doubt, only ^FF2400Bash^000000 suits a Swordman. Please tell that to this MORON over here!! Hahaha~";
+		mes "[레드]";
+		mes "핫핫핫!! 이것보게 심지어 다른일을 하는 사람까지도 이렇게 말하지 않나.핫핫!당신은 정말 멋진 사람이로군";
+		mes "그렇지 검사는 역시 배쉬라니깐. 저 얼간이에게도 좀 가르쳐 주라고";
 		close;
-	}
+		}
 	if (BaseClass == Job_Swordman) {
-		mes "[Cebalis]";
-		mes " Alright!! ^EE0000Magnum Break^000000 is the BEST!! Now you're talking~!! You know your stuff, kid. HaHaHa~!";
+		mes "[시발리스]";
+		mes "그렇치! 매그넘브레이크가 최고지.";
+		mes "당신은 뭘 좀아는사람이구만 그래";
+		mes "내 자네를 위해 충고하나하지";
+		mes "매그넘브레이크는 화속성의";
+		mes "공격이라네.";
+		mes "수속성의 몬스터에게는 약하지만";
+		mes "언데드와 지속성의 몬스터에게는";
+		mes "직방이지!";
 		next;
-		mes "[Cebalis]";
-		mes "You wanna know some useful information? Okay, okay lemme tell ya! The explosion from 'Magnum Break' has the Fire Property.";
-		next;
-		mes "[Cebalis]";
-		mes "So it won't be very effective against Water property monsters, but this is THE skill to use against Undead and Earth property monsters.!";
-		next;
-		mes "[Cebalis]";
-		mes "And most importantly, look around before you use it. Otherwise you'll be in BIG trouble~ ";
+		mes "[시발리스]";
+		mes "그리고 주위를 잘살피고 상대를";
+		mes "파악한후 칼을 휘둘러야지 그렇지";
+		mes "않으면 위험해질수도 있으니";
+		mes "주의하게나";
 		close;
 	}
-	mes "[Cebalis]";
-	mes "I'm right, aren't I?! ^EE0000Magnum Break^000000 is THE BEST!!! You know what you're talking about, eh? I don't know why this LARDFACE is sooooo stubborn.";
+	mes "[시발리스]";
+	mes "그렇지! 매그넘브레이크가 최고지. 당신은 뭘 좀 아는사람이구만! 저 멍청이는 왜 저렇게 고집인지 모르겠다니깐.";
 	close;
 }
 
 -	script	::Soldier_izlude	-1,{
-	mes "[Soldier]";
-	mes "HeHeHeHe..HaHaHaHa ";
-	mes "Huh? Why am I so happy?";
-	mes "You wanna know?";
+	mes "[병사]";
+	mes "에헤헤헤";
+	mes "응?뭐가 그리 기분좋냐구?";
+	mes "알려주까?";
 	next;
-	if (select("Sure, why?:Not really, I don't care.") == 1) {
-		mes "[Soldier]";
-		mes "Ah~~ There's not much for us to do these days. You see, Merchants buy items dropped by monsters. But you knew that, right? ";
+	if (select("네 왜그러시는거에요?:아니요") == 1) {
+		mes "[병사]";
+		mes "아아.. 요즘 일거리가 팍 줄어버렸거든";
+		mes "자네도 알고있겠지? 몬스터를 잡아서";
+		mes "나오는 전리품들은 상인들이 돈을 주고";
+		mes "사들이고 있는거 말이야";
 		next;
-		if (select("Of course:Eh? Really?") == 1) {
-			mes "[Soldier]";
-			mes "HaHa~ In fact, that was actually part of our job. But there were more and more hunters who came to us in order to get paid and it became too much to handle.";
+		if (select("네 알아요:에? 그래요?") == 1) {
+			mes "[병사]";
+			mes "훗 사실 그거 우리 일이였거든";
+			mes "그런데 요즘들어 사냥꾼들이";
+			mes "부쩍늘었잖아 그래서 우리만으로는";
+			mes "감당하기 너무 벅찼었어";
 			next;
-			mes "[Soldier]";
-			mes "We had to work overtime every day. Ah, it was a nightmare...! Anyway, the government eventually made a wise decision in creating the Registration System.";
+			mes "[병사]";
+			mes "정말이지 매일 야근의 연속이였다니깐";
+			mes "그때를 생각하면.. 우으으으~~~";
+			mes "어쨌든 그래서 정부에서 약은수를";
+			mes "쓴거야 판매증을 소지하고 있어야만";
+			mes "현상금지급소에서 돈을 지불하게끔";
+			mes "한거지";
 			next;
-			mes "[Soldier]";
-			mes "The Office of Prize Compensation only pays those who have the Registration. Of course, you'd have to be a merchant and stay in the same place all day long.";
+			mes "[병사]";
+			mes "판매증은 다른 많은 사람들에게서";
+			mes "전리품을 사들일 수 있는 기본적으로";
+			mes "자금이 있고 일정한장소에 항상 있는";
+			mes "상인들에게 나눠주고 말이야";
 			next;
-			mes "[Soldier]";
-			mes "The Office gives away the registration to any merchant who fulfills those requirements. So nowadays, the hunters sell their goods to the registered merchants.";
-			next;
-			mes "[Soldier]";
-			mes "So nowadays, the hunters sell their goods to the registered merchants.  Not too many people come to us for that anymore.";
-			next;
-			mes "[Soldier]";
-			mes "I mean we are still busy, but that's nothing compared to how it was before. People who have felt suffering know how to appreciate even the slightest comfort.";
+			mes "[병사]";
+			mes "그렇게 되서 지금은 찾아오는사람이";
+			mes "팍!줄어버려서 말이야 사실 그리";
+			mes "널널한것도  아니지만 무지하게 편하게";
+			mes "느껴진단말이야~";
+			mes "역시 사람은 한번쯤은 힘든일을";
+			mes "겪어봐야 편하게 뭔지 알게된다니깐";
+			mes "하하하!";
 			close;
 		}
-		mes "[Soldier]";
-		mes "What?! What do you mean you didn't know?! Well, you know you can get items by killing monsters. If you bring and sell those to a merchant, you can make some money. ";
+		mes "[병사]";
+		mes "몰랐단 말이야?!";
+		mes "흠.. 이런..이런.. 몬스터를 잡으면";
+		mes "나오는 전리품들 있잖아 그걸 가져다가";
+		mes "상인들한테 팔면 꽤 짭잘한 수입이";
+		mes "된다구";
+		mes "어쨌든!";
 		next;
-		mes "[Soldier]";
-		mes "HaHa, in fact, that used to be part of our job. But there were more and more hunters who come in order to get paid, so it became too much to handle.";
+		mes "[병사]";
+		mes "훗 사실 그거 우리 일이였거든";
+		mes "그런데 요즘들어 사냥꾼들이";
+		mes "부쩍늘었잖아 그래서 우리만으로는";
+		mes "감당하기 너무 벅찼었어";
 		next;
-		mes "[Soldier]";
-		mes "We had to work overtime every day. Ah, it was a nightmare...! Anyway, the government eventually made a wise decision in creating the Registration System.";
+		mes "[병사]";
+		mes "정말이지 매일 야근의 연속이였다니깐";
+		mes "그때를 생각하면.. 우으으으~~~";
+		mes "어쨌든 그래서 정부에서 약은수를";
+		mes "쓴거야 판매증을 소지하고 있어야만";
+		mes "현상금지급소에서 돈을 지불하게끔";
+		mes "한거지";
 		next;
-		mes "[Soldier]";
-		mes "The Office of Prize Compensation only pays those who have the Registration. Of course, you'd have to be a merchant and stay in the same place all day long.";
+		mes "[병사]";
+		mes "판매증은 다른 많은 사람들에게서";
+		mes "전리품을 사들일 수 있는 기본적으로";
+		mes "자금이 있고 일정한장소에 항상 있는";
+		mes "상인들에게 나눠주고 말이야";
 		next;
-		mes "[Soldier]";
-		mes "The Office gives away the registration to any merchant who fulfills those requirements. So nowadays, the hunters sell their goods to the registered merchants.";
-		next;
-		mes "[Soldier]";
-		mes "So nowadays, the hunters sell their goods to the registered merchants.  Not too many people come to us for that anymore.";
-		next;
-		mes "[Soldier]";
-		mes "I mean we are still busy, but that's nothing compared to how it was before. People who have felt suffering know how to appreciate even the slightest comfort.";
+		mes "[병사]";
+		mes "그렇게 되서 지금은 찾아오는사람이";
+		mes "팍!줄어버려서 말이야 사실 그리";
+		mes "널널한것도  아니지만 무지하게 편하게";
+		mes "느껴진단말이야~";
+		mes "역시 사람은 한번쯤은 힘든일을";
+		mes "겪어봐야 편하게 뭔지 알게된다니깐";
+		mes "하하하!";
 		close;
 	}
-	mes "[Soldier]";
-	mes "Okay Good Bye~~";
+	mes "[병사]";
+	mes "그래 잘가~";
 	close;
 }
 
 // Inside Izlude
 //============================================================
-izlude_in,125,164,2	script	Aaron#izlude	65,{
-	mes "[Aaron]";
-	mes "Don't you think Strong VIT and training in a unique breathing method which enables quick HP recovery are the greatest advantages for a Swordman?";
+izlude_in,125,164,2	script	아론#izlude	65,{
+	mes "[아론]";
+	mes "음? 검사? 검사라면 뭐니 뭐니해도 강인한 체력과 그동안 훈련한 특별호흡법으로 누구보다도 빨리 HP를 회복할수있다는게 장점 아닐까?";
 	next;
-	mes "[Aaron]";
-	mes "If you train your skills very hard, you can even see your HP recovering. The amount";
-	mes "recovered depends";
-	mes "vitality, or VIT.";
+	mes "[아론]";
+	mes "열심히 스킬을 쌓아올리면 자신도 회복되는걸 느낄수 있을 정도로라네 그리고 HP회복능력은 VIT에 영향을 받으니 VIT에 많이 투자하면 그만큼 회복력도 커지지.";
 	next;
-	mes "[Aaron]";
-	mes "So if you invest more of your stats in VIT, you'll recover more HP overall when resting.";
+	mes "[아론]";
+	mes "하지만 역시 공격력도 강한게 좋겠지? 강한 데미지를 주려면 무기도 좋아야 겠지만 STR을 올림으로써 보조를 해줄수 있다네 무기가 좋아도 힘이 딸리면 휘두르기 힘들지 않나.";
 	next;
-	mes "[Aaron]";
-	mes "But of course, it'd be good to have high Attack, wouldn't it? You can either acquire a good weapon or bring up your STR to support you Attack.";
+	mes "[아론]";
+	mes "또한 정확하게 검을 휘두르는기술도 중요하지 이것은 DEX를 통해 수련할수 있다네 정확하게 칼을 휘두르게되면 최소데미지와 최대데미지의차이가 크게 나지 않게 되지.";
 	next;
-	mes "[Aaron]";
-	mes "You know you'll need some strength anyway to swing good weapons easily, anyway.";
+	mes "[아론]";
+	mes "흠.. 좀 지루하지? 더 들을텐가?";
 	next;
-	mes "[Aaron]";
-	mes "Another important thing is how accurate you can hit your opponents. DEX is the key here. If you train DEX, then the gap between the MIN and MAX damage will also decrease.";
-	next;
-	mes "[Aaron]";
-	mes "Hm...";
-	mes "Are you bored by all this talk? Or do you want me to go on?";
-	next;
-	if (select("Tell me more please.:End conversation.") == 1) {
-		mes "[Aaron]";
-		mes "Hmm...";
-		mes "In that case, I'll explain about the other attributes to you briefly. In order to attack and evade quickly, you've gotta pay attention to AGI. ";
+	if (select( "더 알려주세요:대화를 끝낸다:" ) == 1) {
+		mes "[아론]";
+		mes "흠 그렇다면 다른 능력치에 대해서도 간단하게나마 설명을 해주지.";
+		mes "몸놀림을 빠르게해서 적을 빠르게 공격한다거나 적의 공격을 쉽게 피하고자한다면 AGI을 키우면 된다네";
 		next;
-		mes "[Aaron]";
-		mes "In case you want to make more critical hits, it's a good idea to invest in LUK. INT also increases Max SP, which is needed to use various skills... But it's really up to you.";
+		mes "[아론]";
+		mes "크리티컬을 노리는경우라면 LUK에 조금 투자하는것도 좋겠지.";
+		mes "INT로 키워지는 SP는 여러가지 기술을 쓸때 쓰이지만 글쎄.. 알아서 조절하라구.";
 		close;
 	}
-	mes "[Aaron]";
-	mes "Okay then,";
-	mes "train hard~~";
+	mes "[아론]";
+	mes "그래 열심히 훈련하라구~";
 	close;
 }
 
 // Izlude Dungeon
 //============================================================
-izlu2dun,108,27,0	script	Sailor#2izlude	100,{
-	mes "[Sailor]";
-	mes "Wanna";
-	mes "head back?";
+izlu2dun,108,27,0	script	선원#2izlude	100,{
+	mes "[선원]";
+	mes "돌아가시겠습니까?";
 	next;
-	if (select("Yeah, I'm tired to death.:Nope, I love this place!") == 1) {
+	if (select("돌아간다.:그만둔다.") == 1) {
 		if(checkre(0))
 			warp "izlude",197,210;
 		else

@@ -6,8 +6,8 @@
 
 //= Varmundt Mansion Garden
 //============================================================
-ba_maison,0,0	monster	Broken Beta	20630,15,5000
-ba_maison,0,0	monster	Omega Cleaner	20640,5,5000
-ba_maison,0,0	monster	Guardian Parts	20679,15,5000
-ba_maison,0,0	monster	Bookworm	20683,2,5000
-ba_maison,0,0	monster	Roaming Spellbook	20684,1,5000
+ba_maison,0,0	monster	고장난 베타	20630,15,5000
+ba_maison,0,0	monster	청소로봇Ω	20640,5,5000
+ba_maison,0,0	monster	가디언 부품	20679,15,5000
+ba_maison,0,0	monster	책벌레	20683,2,5000
+ba_maison,0,0	monster	배회하는 마법서	20684,1,5000

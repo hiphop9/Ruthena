@@ -1,45 +1,38 @@
-//===== rAthena Script =======================================
-//= War of Emperium (Geffen) - Eeyorbriggar
-//===== By: ==================================================
-//= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.2
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= NPCs that relate to Geffen Guild Castle 2
-//===== Additional Comments: =================================
-//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
-//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
-//= 1.2 Partially rewrote Script. [Masao]
-//============================================================
+//------------------------------------------------------------------------------
+// Empelium Forums - http://em-24.com
+// SRO - http://www.sro.kr
+// SuperNovice Korea - http://www.supernovice.co.kr
+//------------------------------------------------------------------------------
+// rAthena Project
+// Last Attempt Version: v7606 (02-15-2023)
+//------------------------------------------------------------------------------
+// 제작: L0ne_W0lf (v1.3)
+// 수정: Masao (v1.4)
+// 한글화: Parodius(NPIKA)
+//------------------------------------------------------------------------------
 
-// Guild Flag (Outside Castle)
+// 길드 깃발 (외성)
 //============================================================
--	script	Eeyorbriggar#1::OutsideFlagsG2	722,{
-
+-	script	욜브리거#1::OutsideFlagsG2	722,{
 	set .@GID, GetCastleData("gefg_cas02",1);
-
 	if (.@GID == 0) {
-		mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
-		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
-		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		mes "[ 신성 룬 미드가츠 왕국 포고령 ]";
+		mes "　";
+		mes "1. 신성 룬 미드가츠 왕국령에";
+		mes "　의해 아직 이 아지트는 마스터가";
+		mes "　정해지지 않았다";
+		mes "　";
+		mes "2. 모든 예심을 극복하고 엠펠리움을";
+		mes "　파괴하는 자에게, 국왕은 이 성의";
+		mes "　소유권을 부여 할 것이다";
 		close;
 	}
 	if (getcharid(2) == .@GID) {
-		mes "[ Echoing Voice ]";
-		mes "Brave ones...";
-		mes "Do you wish to return to your honorable place?";
+		mes "[ 울리는 목소리 ]";
+		mes "용감한 자들이여...";
+		mes "그대의 명예로움으로 돌아가겠는가?";
 		next;
-		if(select("Return to the guild castle.:Quit.") == 1) {
+		if (select("아지트로 돌아간다.:그만둔다.") == 1) {
 			close2;
 			if (getcharid(2) == GetCastleData("gefg_cas02",1)) {
 				warp "gefg_cas02",178,43;
@@ -49,65 +42,62 @@
 		}
 		close;
 	}
-	mes "[ Edict of the Divine Rune-Midgarts Kingdom ]";
-	mes " ";
-	mes "1. Follow the ordinance of The Divine Rune-Midgarts Kingdom, ";
-	mes "we approve that this place is in";
-	mes "the private prossession of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild.";
-	mes " ";
-	mes "2. The guild Master of ^ff0000"+GetGuildName(.@GID)+"^000000 Guild is";
-	mes "^ff0000"+GetGuildMaster(.@GID)+"^000000";
-	mes "If there is anyone who objects to this,";
-	mes "prove your strength and honor with a steel blade in your hand.";
+	mes "[ 신성 룬 미드가츠 왕국 포고령 ]";
+	mes "　";
+	mes "1. 이곳은 신성 룬 미드가츠 왕국령에 ";
+	mes "따라, ^FF0000"+GetGuildName(.@GID)+"^000000 길드의 사유물임을 인정한다.";
+	mes "　";
+	mes "2. ^FF0000"+GetGuildName(.@GID)+"^000000 길드의 마스터는 ^FF0000"+GetGuildMaster(.@GID)+"^000000 이며, 이사항에 이의가 있는 자는 검을들어 자신의 힘과 명예를 증명하라.";
 	close;
 
-OnRecvCastleG02:
-	FlagEmblem GetCastleData("gefg_cas02",1);
-	end;
-}
-
-gef_fild13,303,243,4	duplicate(OutsideFlagsG2)	Eeyorbriggar#1-2	722
-gef_fild13,312,243,4	duplicate(OutsideFlagsG2)	Eeyorbriggar#2	722
-gef_fild13,290,243,4	duplicate(OutsideFlagsG2)	Eeyorbriggar#3	722
-gef_fild13,324,243,4	duplicate(OutsideFlagsG2)	Eeyorbriggar#4	722
-
-// Guild Flag (Inside Castle)
-//============================================================
--	script	Eeyorbriggar#5::InsideFlagsG2	722,{
-	end;
 
 OnRecvCastleG02:
 	FlagEmblem GetCastleData("gefg_cas02",1);
 	end;
 }
 
-gefg_cas02,65,130,5	duplicate(InsideFlagsG2)	Eeyorbriggar#5-2	722
-gefg_cas02,30,123,5	duplicate(InsideFlagsG2)	Eeyorbriggar#6	722
-gefg_cas02,65,139,6	duplicate(InsideFlagsG2)	Eeyorbriggar#7	722
-gefg_cas02,37,177,6	duplicate(InsideFlagsG2)	Eeyorbriggar#8	722
-gefg_cas02,37,168,6	duplicate(InsideFlagsG2)	Eeyorbriggar#9	722
-gefg_cas02,68,47,2	duplicate(InsideFlagsG2)	Eeyorbriggar#10	722
-gefg_cas02,68,36,2	duplicate(InsideFlagsG2)	Eeyorbriggar#11	722
+gef_fild13,303,243,4	duplicate(OutsideFlagsG2)	욜브리거#1-2	722
+gef_fild13,312,243,4	duplicate(OutsideFlagsG2)	욜브리거#2	722
+gef_fild13,290,243,4	duplicate(OutsideFlagsG2)	욜브리거#3	722
+gef_fild13,324,243,4	duplicate(OutsideFlagsG2)	욜브리거#4	722
 
-// Guild Flag (Town)
+// 길드 깃발 (내성)
 //============================================================
-geffen,112,129,1	duplicate(InsideFlagsG2)	Eeyorbriggar#12	722
+-	script	욜브리거#5::InsideFlagsG2	722,{
+	end;
 
-// Kafra Employee
+OnRecvCastleG02:
+	FlagEmblem GetCastleData("gefg_cas02",1);
+	end;
+}
+
+gefg_cas02,65,130,5	duplicate(InsideFlagsG2)	욜브리거#5-2	722
+gefg_cas02,30,123,5	duplicate(InsideFlagsG2)	욜브리거#6	722
+gefg_cas02,65,139,6	duplicate(InsideFlagsG2)	욜브리거#7	722
+gefg_cas02,37,177,6	duplicate(InsideFlagsG2)	욜브리거#8	722
+gefg_cas02,37,168,6	duplicate(InsideFlagsG2)	욜브리거#9	722
+gefg_cas02,68,47,2	duplicate(InsideFlagsG2)	욜브리거#10	722
+gefg_cas02,68,36,2	duplicate(InsideFlagsG2)	욜브리거#11	722
+
+// 길드 깃발 (마을)
 //============================================================
-gefg_cas02,23,66,3	duplicate(guildkafra)	Kafra Staff#gefg_cas02	117
+geffen,112,129,1	duplicate(InsideFlagsG2)	욜브리거#12	722
 
-// Steward
+// 카프라 직원
 //============================================================
-gefg_cas02,12,66,5	duplicate(cm)	Esmarehk#gefg_cas02	55
+gefg_cas02,23,66,3	duplicate(guildkafra)	카프라 직원#gefg_cas02	117
 
-// Treasure Room Exit
+// 집사
+//============================================================
+gefg_cas02,12,66,5	duplicate(cm)	에즈머렉#gefg_cas02	55
+
+// 마스터방 출구 레버
 //============================================================
 gefg_cas02,145,114,0	script	#lever_G02	111,{
-	mes " ";
-	mes "There's a small lever. Will you pull it?";
+	mes "　";
+	mes "레버가 있습니다. 당기시겠습니까?";
 	next;
-	if(select("Pull.:Do not.") == 1) {
+	if (select("당긴다.:당기지 않는다.") == 1) {
 		close2;
 		warp "gefg_cas02",12,67;
 		end;
@@ -115,18 +105,18 @@ gefg_cas02,145,114,0	script	#lever_G02	111,{
 	close;
 }
 
-// Guild Dungeon Switch
+// 길드 던젼 레버
 //============================================================
 gefg_cas02,167,40,0	duplicate(gdlever)	#gefg_cas02	111
 
-// Guild Treasure Spawns
+// 길드 보물 소환
 //============================================================
 gefg_cas02,140,116,0	duplicate(Gld_Trea_Spawn)	Treasure#gefg_cas02	-1
 
-// AGIT Manager
+// 공성전 매니저
 //============================================================
 gefg_cas02,176,178,0	duplicate(Gld_Agit_Manager)	Agit#gefg_cas02	-1
 
-// Guardians
+// 가디언
 //============================================================
 gefg_cas02,12,66,5	duplicate(Gld_Guard_Template)	Guardian#gefg_cas02	-1

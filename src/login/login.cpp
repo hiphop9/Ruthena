@@ -23,6 +23,7 @@
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
 #include <config/core.hpp>
+#include <config/custom.hpp>
 
 #include "account.hpp"
 #include "ipban.hpp"
@@ -228,7 +229,10 @@ int login_mmo_auth_new(const char* userid, const char* pass, const char sex, con
 	if( new_reg_tick == 0 )
 		new_reg_tick = gettick();
 	if( DIFF_TICK(tick, new_reg_tick) < 0 && num_regs >= login_config.allowed_regs ) {
-		ShowNotice("Account registration denied (registration limit exceeded)\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("계정등록이 거부되었습니다. (등록제한 초과)\n");
+		else
+			ShowNotice("Account registration denied (registration limit exceeded)\n");
 		return 3;
 	}
 
@@ -241,7 +245,10 @@ int login_mmo_auth_new(const char* userid, const char* pass, const char sex, con
 
 	// check if the account doesn't exist already
 	if( accounts->load_str(accounts, &acc, userid) ) {
-		ShowNotice("Attempt of creation of an already existant account (account: %s, sex: %c)\n", userid, sex);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("생성하려는 계정이 이미 존재합니다. (계정명: %s, 성별: %c)\n", userid, sex);
+		else
+			ShowNotice("Attempt of creation of an already existant account (account: %s, sex: %c)\n", userid, sex);
 		return 1; // 1 = Incorrect Password
 	}
 
@@ -265,7 +272,10 @@ int login_mmo_auth_new(const char* userid, const char* pass, const char sex, con
 	if( !accounts->create(accounts, &acc) )
 		return 0;
 
-	ShowNotice("Account creation (account %s, id: %d, sex: %c)\n", acc.userid, acc.account_id, acc.sex);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowNotice("계정이 생성되었습니다. (계정명: %s(%d), 성별: %c)\n", acc.userid, acc.account_id, acc.sex);
+	else
+		ShowNotice("Account creation (account %s, id: %d, sex: %c)\n", acc.userid, acc.account_id, acc.sex);
 
 	if( DIFF_TICK(tick, new_reg_tick) > 0 ) {// Update the registration check.
 		num_regs = 0;
@@ -308,7 +318,10 @@ int login_mmo_auth(struct login_session_data* sd, bool isServer) {
 		for( dnsbl_serv = strtok(login_config.dnsbl_servs,","); dnsbl_serv != nullptr; dnsbl_serv = strtok(nullptr,",") ) {
 			sprintf(ip_dnsbl, "%s.%s", r_ip, trim(dnsbl_serv));
 			if( host2ip(ip_dnsbl) ) {
-				ShowInfo("DNSBL: (%s) Blacklisted. User Kicked.\n", r_ip);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("DNSBL: (%s)은(는) 블랙리스트입니다. 사용자를 추방했습니다.\n", r_ip);
+				else		
+					ShowInfo("DNSBL: (%s) Blacklisted. User Kicked.\n", r_ip);
 				return 3;
 			}
 		}
@@ -324,7 +337,10 @@ int login_mmo_auth(struct login_session_data* sd, bool isServer) {
 		{
 			// Encoded password
 			if( sd->passwdenc != 0 ){
-				ShowError( "Account '%s' could not be created because client side password encryption is enabled.\n", sd->userid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "계정 '%s'은(는) 클라이언트측의 비밀번호 암호화의 활성화로 인하여 생성이 실패 했습니다. \n", sd->userid );
+				else
+					ShowError( "Account '%s' could not be created because client side password encryption is enabled.\n", sd->userid );
 				return 0; // unregistered id
 			}
 
@@ -340,34 +356,52 @@ int login_mmo_auth(struct login_session_data* sd, bool isServer) {
 	}
 
 	if( !accounts->load_str(accounts, &acc, sd->userid) ) {
-		ShowNotice("Unknown account (account: %s, ip: %s)\n", sd->userid, ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("알수 없는 계정입니다. (계정명: %s, IP: %s)\n", sd->userid, ip);
+		else
+			ShowNotice("Unknown account (account: %s, ip: %s)\n", sd->userid, ip);
 		return 0; // 0 = Unregistered ID
 	}
 
 	if( !isServer && sex_str2num( acc.sex ) == SEX_SERVER ){
-		ShowWarning( "Connection refused: ip %s tried to log into server account '%s'\n", ip, sd->userid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning( "연결이 거부된: ip %s 가 서버 계정에 로그인하려고 했습니다 '%s'\n", ip, sd->userid );
+		else
+			ShowWarning( "Connection refused: ip %s tried to log into server account '%s'\n", ip, sd->userid );
 		return 0; // 0 = Unregistered ID
 	}
 
 	if( !login_check_password( *sd, acc ) ) {
-		ShowNotice("Invalid password (account: '%s', ip: %s)\n", sd->userid, ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("(계정: '%s', ip: %s)잘못된 비밀번호 입니다.\n", sd->userid, ip);
+		else
+			ShowNotice("Invalid password (account: '%s', ip: %s)\n", sd->userid, ip);
 		return 1; // 1 = Incorrect Password
 	}
 
-	if( acc.expiration_time != 0 && acc.expiration_time < time(nullptr) ) {
-		ShowNotice("Connection refused (account: %s, expired ID, ip: %s)\n", sd->userid, ip);
+	if( acc.expiration_time != 0 && acc.expiration_time < time(NULL) ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("연결이 거부되었습니다. (계정명: %s, 만료된 ID, IP: %s)\n", sd->userid, ip);
+		else
+			ShowNotice("Connection refused (account: %s, expired ID, ip: %s)\n", sd->userid, ip);
 		return 2; // 2 = This ID is expired
 	}
 
 	if( acc.unban_time != 0 && acc.unban_time > time(nullptr) ) {
 		char tmpstr[24];
 		timestamp2string(tmpstr, sizeof(tmpstr), acc.unban_time, login_config.date_format);
-		ShowNotice("Connection refused (account: %s, banned until %s, ip: %s)\n", sd->userid, tmpstr, ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("연결이 거부되었습니다. (계정명: %s, %s까지 밴(추방), IP: %s)\n", sd->userid, tmpstr, ip);
+		else
+			ShowNotice("Connection refused (account: %s, banned until %s, ip: %s)\n", sd->userid, tmpstr, ip);
 		return 6; // 6 = Your are Prohibited to log in until %s
 	}
 
 	if( acc.state != 0 ) {
-		ShowNotice("Connection refused (account: %s, state: %d, ip: %s)\n", sd->userid, acc.state, ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("연결이 거부되었습니다. (계정명: %s, 상태: %d, IP: %s)\n", sd->userid, acc.state, ip);
+		else
+			ShowNotice("Connection refused (account: %s, state: %d, ip: %s)\n", sd->userid, acc.state, ip);
 		return acc.state - 1;
 	}
 
@@ -391,19 +425,28 @@ int login_mmo_auth(struct login_session_data* sd, bool isServer) {
 			int i;
 
 			if( !sd->has_client_hash ) {
-				ShowNotice("Client didn't send client hash (account: %s, ip: %s)\n", sd->userid, ip);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowNotice("클라이언트가 클라이언트 해시값을 보내지 않았습니다. (계정명: %s, ip: %s)\n", sd->userid, ip);
+				else	
+					ShowNotice("Client didn't send client hash (account: %s, ip: %s)\n", sd->userid, ip);
 				return 5;
 			}
 
 			for( i = 0; i < 16; i++ )
 				sprintf(&smd5[i * 2], "%02x", sd->client_hash[i]);
 
-			ShowNotice("Invalid client hash (account: %s, sent md5: %s, ip: %s)\n", sd->userid, smd5, ip);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("유효하지 않은 클라이언트 해시값 (계정명: %s, 보낸 암호화값(md5): %d, IP: %s)\n", sd->userid, smd5, ip);
+			else
+				ShowNotice("Invalid client hash (account: %s, sent md5: %s, ip: %s)\n", sd->userid, smd5, ip);
 			return 5;
 		}
 	}
 
-	ShowNotice("Authentication accepted (account: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowNotice("인증을 되었습니다. (계정명: %s(%d), ip: %s)\n", sd->userid, acc.account_id, ip);
+	else
+		ShowNotice("Authentication accepted (account: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
 
 	// update session data
 	sd->account_id = acc.account_id;
@@ -424,9 +467,12 @@ int login_mmo_auth(struct login_session_data* sd, bool isServer) {
 		safestrncpy( sd->web_auth_token, acc.web_auth_token, WEB_AUTH_TOKEN_LENGTH );
 	}
 
-	if( sd->sex != 'S' && sd->account_id < START_ACCOUNT_NUM )
-		ShowWarning("Account %s has account id %d! Account IDs must be over %d to work properly!\n", sd->userid, sd->account_id, START_ACCOUNT_NUM);
-
+	if( sd->sex != 'S' && sd->account_id < START_ACCOUNT_NUM ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("%s 계정이 %d인 계정아이디를 가지려 합니다. 계정이 제대로 작동하려면 계정ID가 %d 이상이어야합니다.\n", sd->userid, sd->account_id, START_ACCOUNT_NUM);
+		else
+			ShowWarning("Account %s has account id %d! Account IDs must be over %d to work properly!\n", sd->userid, sd->account_id, START_ACCOUNT_NUM);
+	}
 	return -1; // account OK
 }
 
@@ -536,8 +582,11 @@ int login_lan_config_read(const char *lancfgName) {
 	int line_num = 0, s_subnet=ARRAYLENGTH(subnet);
 	char line[1024], w1[64], w2[64], w3[64], w4[64];
 
-	if((fp = fopen(lancfgName, "r")) == nullptr) {
-		ShowWarning("LAN Support configuration file is not found: %s\n", lancfgName);
+	if((fp = fopen(lancfgName, "r")) == NULL) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("LAN지원 설정파일인 %s을(를) 찾을 수 없습니다.\n", lancfgName);
+		else
+			ShowWarning("LAN Support configuration file is not found: %s\n", lancfgName);
 		return 1;
 	}
 
@@ -549,13 +598,19 @@ int login_lan_config_read(const char *lancfgName) {
 
 		if(sscanf(line,"%63[^:]: %63[^:]:%63[^:]:%63[^\r\n]", w1, w2, w3, w4) != 4)
 		{
-			ShowWarning("Error syntax of configuration file %s in line %d.\n", lancfgName, line_num);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("설정파일 %s내 %d줄의 구문이 오류입니다.\n", lancfgName, line_num);
+			else	
+				ShowWarning("Error syntax of configuration file %s in line %d.\n", lancfgName, line_num);
 			continue;
 		}
 
 		if( strcmpi(w1, "subnet") == 0 ){
 			if(subnet_count>=s_subnet) { //We skip instead of break in case we want to add other conf in that file.
-				ShowError("%s: Too many subnets defined, skipping line %d...\n", lancfgName, line_num);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("%s: 너무 많은 서브넷이 정의되어 %d줄을 건너 뜁니다...\n", lancfgName, line_num);
+				else
+					ShowError("%s: Too many subnets defined, skipping line %d...\n", lancfgName, line_num);
 				continue;
 			}
 			subnet[subnet_count].mask = str2ip(w2);
@@ -564,7 +619,10 @@ int login_lan_config_read(const char *lancfgName) {
 
 			if( (subnet[subnet_count].char_ip & subnet[subnet_count].mask) != (subnet[subnet_count].map_ip & subnet[subnet_count].mask) )
 			{
-				ShowError("%s: Configuration Error: The char server (%s) and map server (%s) belong to different subnetworks!\n", lancfgName, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("%s: 설정 오류: 케릭터 서버(%s)와 맵서버(%s)가 서로 다른 서브 네트워크에 있습니다.\n", lancfgName, w3, w4);
+				else
+					ShowError("%s: Configuration Error: The char server (%s) and map server (%s) belong to different subnetworks!\n", lancfgName, w3, w4);
 				continue;
 			}
 
@@ -572,9 +630,12 @@ int login_lan_config_read(const char *lancfgName) {
 		}
 	}
 
-	if( subnet_count > 1 ) /* only useful if there is more than 1 available */
-		ShowStatus("Read information about %d subnetworks.\n", subnet_count);
-
+	if( subnet_count > 1 ) { /* only useful if there is more than 1 available */
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("%d개의 서브 네트워크에 대한 정보를 읽습니다.\n", subnet_count);
+		else
+			ShowStatus("Read information about %d subnetworks.\n", subnet_count);
+	}
 	fclose(fp);
 	return 0;
 }
@@ -588,8 +649,11 @@ int login_lan_config_read(const char *lancfgName) {
 bool login_config_read(const char* cfgName, bool normal) {
 	char line[1024], w1[32], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
-	if (fp == nullptr) {
-		ShowError("Configuration file (%s) not found.\n", cfgName);
+	if (fp == NULL) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("설정파일 %s을(를) 찾을 수 없습니다.\n", cfgName);
+		else
+			ShowError("Configuration file (%s) not found.\n", cfgName);
 		return false;
 	}
 	while(fgets(line, sizeof(line), fp)) {
@@ -605,7 +669,10 @@ bool login_config_read(const char* cfgName, bool normal) {
 				login_config.login_ip = host2ip(w2);
 				if( login_config.login_ip ) {
 					char ip_str[16];
-					ShowStatus("Login server binding IP address : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowStatus("로그인 서버 바인딩 IP 주소 : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
+					else		
+						ShowStatus("Login server binding IP address : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
 				}
 			}
 			else if( !strcmpi(w1, "login_port") )
@@ -622,8 +689,12 @@ bool login_config_read(const char* cfgName, bool normal) {
 			stdout_with_ansisequence = config_switch(w2);
 		else if(!strcmpi(w1,"console_silent")) {
 			msg_silent = atoi(w2);
-			if( msg_silent ) /* only bother if we actually have this enabled */
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+			if( msg_silent ) { /* only bother if we actually have this enabled */
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("콘솔 자동 설정: %d\n", atoi(w2));
+				else		
+					ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+			}
 		}
 		else if (strcmpi(w1, "console_msg_log") == 0)
 			console_msg_log = atoi(w2);
@@ -702,10 +773,16 @@ bool login_config_read(const char* cfgName, bool normal) {
 		else if(strcmpi(w1, "chars_per_account") == 0) { //maxchars per account [Sirius]
 			login_config.char_per_account = atoi(w2);
 			if( login_config.char_per_account > MAX_CHARS ) {
-				ShowWarning("Exceeded limit of max chars per account '%d'. Capping to '%d'.\n", login_config.char_per_account, MAX_CHARS);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("계정당 최대 케릭터수(%d) 제한을 초과 했습니다. '%d'으(로) 재설정합니다.\n", login_config.char_per_account, MAX_CHARS);
+				else
+					ShowWarning("Exceeded limit of max chars per account '%d'. Capping to '%d'.\n", login_config.char_per_account, MAX_CHARS);
 				login_config.char_per_account = MAX_CHARS;
 			}else if( login_config.char_per_account < 0 ){
-				ShowWarning("Max chars per account '%d' is negative. Capping to '%d'.\n", login_config.char_per_account, MIN_CHARS);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("계정(%d)당 최대 케릭터수가 0보다 작습니다. '%d'으(로) 재설정합니다.\n", login_config.char_per_account, MAX_CHARS);
+				else
+					ShowWarning("Max chars per account '%d' is negative. Capping to '%d'.\n", login_config.char_per_account, MIN_CHARS);
 				login_config.char_per_account = MIN_CHARS;
 			}
 		}
@@ -718,8 +795,12 @@ bool login_config_read(const char* cfgName, bool normal) {
 			else
 				login_config.vip_sys.char_increase = atoi(w2);
 			if (login_config.vip_sys.char_increase > (unsigned int) MAX_CHARS-login_config.char_per_account) {
-				ShowWarning("vip_char_increase too high, can only go up to %d, according to your char_per_account config %d\n",
-					MAX_CHARS-login_config.char_per_account,login_config.char_per_account);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("vip_char_increase가 너무 많습니다. char_per_account 설정값 %d에 따라 %d까지만 이동할 수 있습니다.\n",
+						MAX_CHARS-login_config.char_per_account,login_config.char_per_account);
+				else		
+					ShowWarning("vip_char_increase too high, can only go up to %d, according to your char_per_account config %d\n",
+						MAX_CHARS-login_config.char_per_account,login_config.char_per_account);
 				login_config.vip_sys.char_increase = MAX_CHARS-login_config.char_per_account;
 			}
 		}
@@ -737,7 +818,10 @@ bool login_config_read(const char* cfgName, bool normal) {
 		}
 	}
 	fclose(fp);
-	ShowInfo("Finished reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s 읽기 완료.\n", cfgName);
+	else
+		ShowInfo("Finished reading %s.\n", cfgName);
 	return true;
 }
 
@@ -815,7 +899,10 @@ void LoginServer::finalize(){
 	}
 
 	login_log(0, "login server", 100, "login server shutdown");
-	ShowStatus("Terminating...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Terminating...\n");
 
 	if( login_config.log_login )
 		loginlog_final();
@@ -842,11 +929,17 @@ void LoginServer::finalize(){
 		login_fd = -1;
 	}
 
-	ShowStatus("Finished.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("완료되었습니다.\n");
+	else
+		ShowStatus("Finished.\n");
 }
 
 void LoginServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Shutting down...\n");
 	// TODO proper shutdown procedure; kick all characters, wait for acks, ...  [FlavioJS]
 	do_shutdown_loginchrif();
 	flush_fifos();
@@ -888,25 +981,37 @@ bool LoginServer::initialize( int argc, char* argv[] ){
 	add_timer_interval(gettick() + 600*1000, login_online_data_cleanup, 0, 0, 600*1000);
 
 	// Account database init
-	if( accounts == nullptr ) {
-		ShowFatalError("do_init: account engine not found.\n");
+	if( accounts == NULL ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("do_init: 계정엔진을 찾을 수 없습니다.\n");
+		else
+			ShowFatalError("do_init: account engine not found.\n");
 		return false;
 	} else {
 		if(!accounts->init(accounts)) {
-			ShowFatalError("do_init: Failed to initialize account engine.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowFatalError("do_init: 계정엔진을 초기화 하는데 실패 했습니다.\n");
+			else	
+				ShowFatalError("do_init: Failed to initialize account engine.\n");
 			return false;
 		}
 	}
 
 	// server port open & binding
 	if( (login_fd = make_listen_bind(login_config.login_ip,login_config.login_port)) == -1 ) {
-		ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",login_config.login_port);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("'" CL_WHITE "%d" CL_RESET "'번 포트에 바인드 하지 못했습니다.\n",login_config.login_port);
+		else
+			ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",login_config.login_port);
 		return false;
 	}
 
 	do_init_logincnslif();
 
-	ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("로그인 서버가 " CL_GREEN "준비" CL_RESET "되었습니다. (서버가 포트번호 %u에서 수신 대기중입니다.)\n\n", login_config.login_port);
+	else
+		ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
 	login_log(0, "login server", 100, "login server started");
 
 	return true;

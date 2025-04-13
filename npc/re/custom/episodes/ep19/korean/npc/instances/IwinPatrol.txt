@@ -1,0 +1,1175 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Instance: Iwin Patrol.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Daily instance of episode 19.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 10 to 11
+icecastle,23,115,8	script	순찰대장#iws	EP19_NPC_IWIN_SR,{
+	if (checkweight(1201,3) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 10) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "독수리 순찰대? 뭐하는 부대죠?";
+		next;
+		mes "[순찰대장]";
+		mes "주기적으로 얼어붙은 비늘 지역 순찰 임무를 담당하는 부대라오.";
+		next;
+		mes "[순찰대장]";
+		mes "뭐 지금은 아윈들로 구성되었고 우리끼리만 순찰을 전담하고 있지만.. ";
+		next;
+		mes "[순찰대장]";
+		mes "이곳 이스가드르 얼음의 성에 모험가들이 유입되기 시작했으니.";
+		next;
+		mes "[순찰대장]";
+		mes "자네 같은 자들이 더 많아지면, 같이 순찰도 나가고 친분을 쌓을 기회가 생기지 않겠소?";
+		next;
+		mes "[순찰대장]";
+		mes "하하핫! 그날을 기대하고 있소.";
+		close;
+	}
+	if (ep19_main == 10) {
+		mes "[순찰대장]";
+		mes "공고를 보고 찾아 온 건가? 응? 아니라고?";
+		next;
+		mes "[순찰대장]";
+		mes "뭐 어쨌든 잘 찾아왔네.";
+		mes "내가 독수리 순찰대의 순찰대장 마샤 지지 해피 레브 이브 앨리스 로이드 브로드-마인디드 테스 보어텍스라오.";
+		next;
+		cloakoffnpcself( "exiwp_189" );
+		sleep2 1000;
+		npctalk "호리류: 효로료 대장 순찰 완료 보고드립니다.", "exiwp_189", bc_self;
+		sleep2 500;
+		npctalk "순찰대장: 별일 없지?", "", bc_self;
+		sleep2 500;
+		npctalk "호리류: 네 별 일없습니다.", "exiwp_189", bc_self;
+		sleep2 500;
+		npctalk "호리류: 어?! 저기 재들이 이번에 얼음의 성에 충원되었다는 모험가들입니까?", "exiwp_189", bc_self;
+		sleep2 500;
+		npctalk "순찰대장: 아! 그러고 보니 그런 이야기를 듣긴 했지. 여튼 수고했다. 쉬어라.", "", bc_self;
+		sleep2 500;
+		npctalk "호리류: 넵.", "exiwp_189", bc_self;
+		sleep2 500;
+		cloakonnpcself( "exiwp_189" );
+		mes "[순찰대장]";
+		mes "이거 이거 귀한 분들이셨네, 귀한 분들을 기다리게 해서 미안하게 됐군. 보고받는 게 더 중요한 일이라.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "효로료라고 하는구나?";
+		next;
+		npctalk "(칫! 외부 생명체들이란..)", "", bc_self;
+		mes "[순찰대장]";
+		mes "흠흠.. 뭐 정식 순찰 대원도 아닌데 편한 대로 부르시고. 독수리 순찰대 가입 서류요.";
+		next;
+		mes "[순찰대장]";
+		mes "뭐 굳이 가입을 받아야 싶기도 한데. 절차상의 문제라는 게 있으니까. 잘 읽어보고 서명해 주시게나.";
+		next;
+		mes "[독수리 순찰대 가입 서류]";
+		mes "르간이 아니시죠?";
+		mes "신체는 건강하죠?";
+		mes "마음은 여유롭죠?";
+		mes "급한 일이 없다면, 매일 순찰에 참여하실 거죠?";
+		mes "----";
+		mes "위 내용에 동의한다면, 서명해주세요.";
+		next;
+		select( "서명한다." );
+		mes "[순찰대장]";
+		mes "평소에 연습이라도 했나? 서명이 참 멋들어지는군. 독수리 순찰대 명예 대원으로 이름을 올려놓겠네.";
+		next;
+		ep19_main = 11;
+		erasequest 18127;
+		setquest 5972;
+		mes "[순찰대장]";
+		mes "혼자도 좋고 동료와 함께해도 좋다네. 파티를 만들고 순찰에 나설 준비가 되면 내게 말해주게나.";
+		close;
+	}
+
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 21530) {
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "(아! 깜짝이야.)", "", bc_self;
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "순찰대장: 모험가가 르간으로 변신할 수 있게 되었다더니 그건가 보군.", "", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+	}
+
+	.@md_name$ = "아윈과 함께하는 순찰";
+
+	if (isbegin_quest(5974) == 1) {
+		erasequest 5974;
+		setquest 5973;
+		mes "[순찰대장]";
+		mes "이상하군. 순찰을 하다 급한 일이라도 있었던 겐가? 애들은 이미 순찰을 다녀왔으니.. 또 보낼 순 없고 내일 다시 오시게.";
+		close;
+	}
+	switch( checkquest(5973,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:	// note: player can re-enter if the instance is still active, but no reward !
+		mes "[순찰대장]";
+		mes "순찰은 이미 다녀오지 않았나? 무슨 일 있나?";
+		next;
+		switch( select( "순찰을 떠나겠다.", "잡담을 한다.", "그냥 와봤다." ) ) {
+		case 1:
+			mes "[순찰대장]";
+			mes "부지런한 친구로군. 권장하지는 않지만, 다른 파티에 껴서 가겠다면, 뭐.. 말리지는 않겠네.";
+			next;
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+				mes "[순찰대장]";
+				mes "그럼 쉬시게.";
+				close;
+			case IE_NOMEMBER:
+				mes "[순찰대장]";
+				mes "혼자 가더라도 파티를 만들어 달라고 내가 말하지 않았던가? 혹시 안 했나? 그럼 지금 했으니 가서 파티를 만들어오게.";
+				close;
+			case IE_OK:
+				mapannounce "icecastle", "" + strcharinfo(0) + ": 순찰 다녀오겠습니다.", bc_map, 0xDF297;
+				// warp "1@iwp",380,229;
+				end;
+			}
+			end;
+		case 2:
+			callsub( S_Talk );
+		case 3:
+			mes "[순찰대장]";
+			mes "싱거운 친구로군. 심심하면 성 주변이라도 한 바퀴 돌 게나. 추워서 움직이기 싫을 거야.";
+			close;
+		}
+	case 2:
+		erasequest 5973;
+		npctalk "순찰대장: 그러고 보니 순찰 나갈 때가 되었나? 준비되면, 말하게.", "", bc_self;
+		break;
+	}
+	if (ep19_main == 11) {	// note: slightly different dialogue from daily quests
+		mes "[순찰대장]";
+		mes "첫 순찰이지? 혼자 보내는 것도 아니고 순찰 대원들과 함께하니까 겁내지 않아도 된다네.";
+		next;
+		switch( select( "순찰 인원을 보고한다.", "순찰을 떠나겠다.", "잠시만 기다려달라." ) ) {
+		case 1:
+			if (is_party_leader() == false) {
+				mes "[순찰대장]";
+				mes "혼자 가더라도 파티를 만들어 달라고 내가 말하지 않았던가? 혹시 안 했나? 그럼 지금 했으니 가서 파티를 만들어오게.";
+				close;
+			}
+			instance_create(.@md_name$);
+			getpartymember getcharid(1), 2;
+			mes "[순찰대장]";
+			mes "순찰 인원을 " + $@partymembercount  + "명으로 등록해놨네. 등록 인원이 다 갈 필요는 없지만, 순찰을 나가서는 인원 체크를 할 테니 꼭 모두 참여해 주게.";
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+				mes "[순찰대장]";
+				mes "아직 대원들의 준비가 끝나지 않았으니 조금만 기다리게.";
+				close;
+			case IE_NOMEMBER:
+				mes "[순찰대장]";
+				mes "혼자 가더라도 파티를 만들어 달라고 내가 말하지 않았던가? 혹시 안 했나? 그럼 지금 했으니 가서 파티를 만들어오게.";
+				close;
+			case IE_OK:
+				mapannounce "icecastle", "" + strcharinfo(0) + ": 순찰 다녀오겠습니다.", bc_map, 0xDF297;
+				setquest 5974;
+				// warp "1@iwp",380,229;
+				end;
+			}
+			end;
+		case 3:
+			mes "[순찰대장]";
+			mes "순찰이 급한 것은 아니니 천천히 하게. 정 바쁘면 대원들만 보내도 된다네.";
+			close;
+		}
+	}
+	mes "[순찰대장]";
+	mes "아! 시간이 벌써 그렇게 되었나?";
+	next;
+	switch( select( "순찰 인원을 보고한다.", "순찰을 떠나겠다.", "잡담을 한다." ) ) {
+	case 1:
+		if (is_party_leader() == false) {
+			mes "[순찰대장]";
+			mes "혼자 가더라도 파티를 만들어 달라고 내가 말하지 않았던가? 혹시 안 했나? 그럼 지금 했으니 가서 파티를 만들어오게.";
+			close;
+		}
+		instance_create(.@md_name$);
+		getpartymember getcharid(1), 2;
+		mes "[순찰대장]";
+		mes "순찰 인원을 " + $@partymembercount  + "명으로 등록해놨네. 등록 인원이 다 갈 필요는 없지만, 순찰을 나가서는 인원 체크를 할 테니 꼭 모두 참여해 주게.";
+		close;
+	case 2:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "^ff0000An unknown error occurred.^000000";
+			close;
+		case IE_NOINSTANCE:
+			mes "[순찰대장]";
+			mes "아직 대원들의 준비가 끝나지 않았으니 조금만 기다리게.";
+			close;
+		case IE_NOMEMBER:
+			mes "[순찰대장]";
+			mes "혼자 가더라도 파티를 만들어 달라고 내가 말하지 않았던가? 혹시 안 했나? 그럼 지금 했으니 가서 파티를 만들어오게.";
+			close;
+		case IE_OK:
+			mapannounce "icecastle", "" + strcharinfo(0) + ": 순찰 다녀오겠습니다.", bc_map, 0xDF297;
+			setquest 5974;
+			// warp "1@iwp",380,229;
+			end;
+		}
+		end;
+	case 3:
+		callsub( S_Talk );
+	}
+	end;
+
+S_Talk:
+	switch( rand(8) ) {
+	case 0:
+		mes "[" + strcharinfo(0) + "]";
+		mes "저.. 호리류가..";
+		next;
+		mes "[순찰대장]";
+		mes "아 호리류 일병 말하나? 혹시 외부를 돌아다니는 모험가들에게 깃털을 가져다 달라고 부탁하는 걸 말하고 싶은 건가?";
+		next;
+		mes "[순찰대장]";
+		mes "이미 알고 있는 일이네. 뭐 나도 추운데 대원들은 안 춥겠나?";
+		next;
+		mes "[순찰대장]";
+		mes "보급을 더 좋은 걸로 바꿔줄 수 있는 것도 아니고 그렇게라도 추위를 피해보겠다는데..";
+		next;
+		mes "[순찰대장]";
+		mes "그걸 가지고 뭘 어쩌겠나. 알면서도 모르는 척 넘어가 주는 거지.";
+		close;
+	case 1:
+		mes "[" + strcharinfo(0) + "]";
+		mes "추위를 극복하는 방법을 알려주세요.";
+		next;
+		mes "[순찰대장]";
+		mes "추위를 극복하는 방법이라? 털을 기르도록 털이 길면 덜 추워진다.";
+		next;
+		mes "[순찰대장]";
+		mes "내가 볼 때 여기 주변의 모험가들은 따듯한 곳에서 와서 그런지 너무 춥게 입고 다니는 경향이 있다.";
+		close;
+	case 2:
+		mes "[" + strcharinfo(0) + "]";
+		mes "순찰대 밥은 잘 나오나요?";
+		next;
+		mes "[순찰대장]";
+		mes "비교적 잘 나오는 편이다.";
+		next;
+		mes "[순찰대장]";
+		mes "뭐 가끔 괴물의 먹이같은 좋아하는 아윈은 없는데 꾸준하게 나오는 영문 모를 반찬이 있긴 하지만..";
+		next;
+		mes "[순찰대장]";
+		mes "평균적으로 봤을 때 잘 나오는 편이라고 볼 수 있지.";
+		close;
+	case 3:
+		mes "[" + strcharinfo(0) + "]";
+		mes "보급관은 어떤 아윈인가요?";
+		next;
+		mes "[순찰대장]";
+		mes "보급관? 아 고리르 보급관 말하는 건가?";
+		next;
+		mes "[순찰대장]";
+		mes "뭐 문제가 아주 없다고는 못 하겠지만, 비교적 성실하고 착실한 친구지.";
+		next;
+		mes "[순찰대장]";
+		mes "대원들에게 시도 때도 없이 요원 행세를 하려고 해서 마편을 몇 번 긁히더니..";
+		next;
+		mes "[순찰대장]";
+		mes "충격받았나 요즘은 안 하는 것 같더군.";
+		close;
+	case 4:
+		mes "[" + strcharinfo(0) + "]";
+		mes "말린 아이스강구 진짜 맛있어요? 전 별로 던데..";
+		next;
+		mes "[순찰대장]";
+		mes "없어서 못 먹지. 난 오히려 그게 왜 별로인지 모르겠군.";
+		close;
+	case 5:
+		mes "[" + strcharinfo(0) + "]";
+		mes "마샤.. 순찰대장님.";
+		next;
+		mes "[순찰대장]";
+		mes "내 이름은 마샤 지지 해피 레브 이브 앨리스 로이드 브로드-마인디드 테스 보어텍스다.";
+		next;
+		mes "[순찰대장]";
+		mes "마음대로 줄여 부르려면 그냥 호로료라고 불러라.";
+		close;
+	case 6:
+		mes "[" + strcharinfo(0) + "]";
+		mes "독수리 순찰대는 평소에 뭘 하나요?";
+		next;
+		mes "[순찰대장]";
+		mes "우리 구역에 혹시 르간이 침입하지 않았는지 감시하는 일을 하지.";
+		next;
+		mes "[순찰대장]";
+		mes "얼어붙은 비늘 언덕 순찰도 그래서 하는 거다.";
+		next;
+		mes "[순찰대장]";
+		mes "아 그리고 모험가들이 순찰에 참여하고 나서 사고가 크게 줄어들어 고맙게 생각하고 있다. 계속 부탁하지.";
+		close;
+	default:
+		mes "[" + strcharinfo(0) + "]";
+		mes "대원들 이름을 다 아나요?";
+		next;
+		mes "[순찰대장]";
+		mes "물론이지. 누구 이름이 궁금하지";
+		next;
+		switch( select( "보리라 신병", "뽀로롱 신병", "호루룽 신병", "로루르 이병", "토라리 이병", "또라롱 이병", "호리류 일병", "포라랑 일병", "쏘루르 일병", "모루랑 상병", "모루류 상병", "뽀루료 상병" ) ) {
+		case 1:
+			mes "[순찰대장]";
+			mes "보리라 신병 의 이름은..";
+			mes "이사벨 벅 홀리스 다.";
+			close;
+		case 2:
+			mes "[순찰대장]";
+			mes "뽀로롱 신병의 이름은..";
+			mes "슈퍼노바 셀프-컨트롤드 쿠퍼 다.";
+			close;
+		case 3:
+			mes "[순찰대장]";
+			mes "호루룽 신병의 이름은..";
+			mes "애기 가브리엘 덴버 다.";
+			close;
+		case 4:
+			mes "[순찰대장]";
+			mes "로루르 이병의 이름은..";
+			mes "바이올렛 마틸다 루이스 라비아 다.";
+			close;
+		case 5:
+			mes "[순찰대장]";
+			mes "토라리 이병의 이름은..";
+			mes "테드 엘도라 조우 이사벨 이다.";
+			close;
+		case 6:
+			mes "[순찰대장]";
+			mes "또라롱 이병의 이름은..";
+			mes "할리 하드-월킹 빅토리아 에반 이다.";
+			close;
+		case 7:
+			mes "[순찰대장]";
+			mes "호리류 일병의 이름은..";
+			mes "레브 디알로 카르멘 제퍼슨 린다 이다.";
+			close;
+		case 8:
+			mes "[순찰대장]";
+			mes "포라랑 일병의 이름은..";
+			mes "아비드 오블리비언 데이지 에스테반 래피 다.";
+			close;
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18127) == 1" );
+
+	// first time
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main == 11 && isbegin_quest(5974) == 0 && checkquest(5973,PLAYTIME) == -1" );
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main == 11 && isbegin_quest(5974) == 0 && checkquest(5973,PLAYTIME) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main > 11 && isbegin_quest(5974) == 0 && checkquest(5973,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main > 11 && isbegin_quest(5974) == 0 && checkquest(5973,PLAYTIME) == 2" );
+	end;
+}
+icecastle,21,118,6	duplicate(dummy_cloaked_npc)	일병 호리류#exiwp::exiwp_189	EP19_NPC_IWIN_SB
+
+
+// warps
+1@iwp,98,10,0	script	MD퇴장워프#꼬리1::ep19_md_iwp_98_10	WARPNPC,2,2,{
+	mes "[안내]";
+	mes "아윈과 함께하는 순찰";
+	mes "메모리얼 던전에서 나갑니다. 일부 진행 상황이 저장되지 않을 수 있습니다.";
+	next;
+	if (select( "나가지 않는다.", "나간다." ) == 1)
+		end;
+	warp "icecastle",20,123;
+	end;
+}
+1@iwp,214,390,0	duplicate(ep19_md_iwp_98_10)	MD퇴장워프#평원	WARPNPC,2,2
+1@iwp,385,229,0	duplicate(ep19_md_iwp_98_10)	MD퇴장워프#얼음성	WARPNPC,2,2
+
+
+// random npcs + mobs spawn
+1@iwp,1,1,0	script	iwp_mobs_respawn	-1,{
+	end;
+OnInstanceInit:
+	sleep 10;
+	deletearray 'step_player;
+	deletearray 'npc_step;
+	'map_iwp$ = instance_mapname("1@iwp");
+	'step = 0;
+	'final_enabled = 0;
+
+	// choose a random npc (each npc has a random set of dialog)
+	// For now only one set has been parsed
+	// 'npc_index = rand(1,3);
+	'npc_index = 2;
+
+	// store the npc visible name and name for npctalk
+	'EP19_NPC_IWIN_SG$ = instance_npcname("ep19_iwp_set" + 'npc_index + "_SG");
+	'EP19_NPC_IWIN_SN$ = instance_npcname("ep19_iwp_set" + 'npc_index + "_SN");
+	'EP19_NPC_IWIN_SY$ = instance_npcname("ep19_iwp_set" + 'npc_index + "_SY");
+	'EP19_NPC_IWIN_SB$ = instance_npcname("ep19_iwp_set" + 'npc_index + "_SB");
+
+	'EP19_NPC_IWIN_SG_id = getnpcid(0, 'EP19_NPC_IWIN_SG$);
+	'EP19_NPC_IWIN_SN_id = getnpcid(0, 'EP19_NPC_IWIN_SN$);
+	'EP19_NPC_IWIN_SY_id = getnpcid(0, 'EP19_NPC_IWIN_SY$);
+	'EP19_NPC_IWIN_SB_id = getnpcid(0, 'EP19_NPC_IWIN_SB$);
+
+	'EP19_NPC_IWIN_SG_visible$ = 'npc_visible_name$[ 'EP19_NPC_IWIN_SG_id ];
+	'EP19_NPC_IWIN_SN_visible$ = 'npc_visible_name$[ 'EP19_NPC_IWIN_SN_id ];
+	'EP19_NPC_IWIN_SY_visible$ = 'npc_visible_name$[ 'EP19_NPC_IWIN_SY_id ];
+	'EP19_NPC_IWIN_SB_visible$ = 'npc_visible_name$[ 'EP19_NPC_IWIN_SB_id ];
+
+	for ( .@i = 1; .@i < 4; .@i++ ) {
+		disablenpc instance_npcname("ep19_iwp_set" + .@i + "_SG");
+		disablenpc instance_npcname("ep19_iwp_set" + .@i + "_SN");
+		disablenpc instance_npcname("ep19_iwp_set" + .@i + "_SY");
+		disablenpc instance_npcname("ep19_iwp_set" + .@i + "_SB");
+	}
+	enablenpc 'EP19_NPC_IWIN_SG$;
+	enablenpc 'EP19_NPC_IWIN_SN$;
+	enablenpc 'EP19_NPC_IWIN_SY$;
+	enablenpc 'EP19_NPC_IWIN_SB$;
+
+	// mob spawn
+	setarray 'mob_id[0],
+		21524,	// EP19_SHINING_SEAWEED
+		21525,	// EP19_ICE_GANGU
+		21523,	// EP19_ICE_STRAW
+	'event$[0] = instance_npcname("iwp_mobs_respawn") + "::OnMobDead0";	// EP19_SHINING_SEAWEED
+	'event$[1] = instance_npcname("iwp_mobs_respawn") + "::OnMobDead1";	// EP19_ICE_GANGU
+	'event$[2] = instance_npcname("iwp_mobs_respawn") + "::OnMobDead2";	// EP19_ICE_STRAW
+
+	monster 'map_iwp$,0,0,"--ja--",21524,1, .@event$[0];
+	monster 'map_iwp$,0,0,"--ja--",21525,1, .@event$[1];
+	monster 'map_iwp$,0,0,"--ja--",21523,1, .@event$[2];
+	end;
+
+OnMobDead0: callsub( S_Spawn, 0 );
+OnMobDead1: callsub( S_Spawn, 1 );
+OnMobDead2: callsub( S_Spawn, 2 );
+
+S_Spawn:
+	sleep 5000;
+	.@i = getarg(0);
+	monster 'map_iwp$,0,0,"--ja--",'mob_id[.@i],1, 'event$[.@i];
+	end;
+}
+
+1@iwp,370,224,0	script	상병 모루랑#set01::ep19_iwp_set1_SG	EP19_NPC_IWIN_SG,{
+	end;
+OnInstanceInit:
+	npcspeed 400;
+
+	'npc_visible_name$[ getnpcid(0) ] = strnpcinfo(1);
+	end;
+}
+1@iwp,370,227,0	duplicate(ep19_iwp_set1_SG)	신병 보리라#set01::ep19_iwp_set1_SN	EP19_NPC_IWIN_SN
+1@iwp,370,230,0	duplicate(ep19_iwp_set1_SG)	이병 로루르#set01::ep19_iwp_set1_SY	EP19_NPC_IWIN_SY
+1@iwp,370,233,0	duplicate(ep19_iwp_set1_SG)	일병 호리류#set01::ep19_iwp_set1_SB	EP19_NPC_IWIN_SB
+
+1@iwp,370,224,0	duplicate(ep19_iwp_set1_SG)	상병 모루류#set02::ep19_iwp_set2_SG	EP19_NPC_IWIN_SG
+1@iwp,370,227,0	duplicate(ep19_iwp_set1_SG)	신병 뽀로롱#set02::ep19_iwp_set2_SN	EP19_NPC_IWIN_SN
+1@iwp,370,230,0	duplicate(ep19_iwp_set1_SG)	이병 토라리#set02::ep19_iwp_set2_SY	EP19_NPC_IWIN_SY
+1@iwp,370,233,0	duplicate(ep19_iwp_set1_SG)	일병 포라랑#set02::ep19_iwp_set2_SB	EP19_NPC_IWIN_SB
+
+1@iwp,370,224,0	duplicate(ep19_iwp_set1_SG)	상병 뽀루료#set03::ep19_iwp_set3_SG	EP19_NPC_IWIN_SG
+1@iwp,370,227,0	duplicate(ep19_iwp_set1_SG)	신병 호루룽#set03::ep19_iwp_set3_SN	EP19_NPC_IWIN_SN
+1@iwp,370,230,0	duplicate(ep19_iwp_set1_SG)	이병 또라롱#set03::ep19_iwp_set3_SY	EP19_NPC_IWIN_SY
+1@iwp,370,233,0	duplicate(ep19_iwp_set1_SG)	일병 쏘루르#set03::ep19_iwp_set3_SB	EP19_NPC_IWIN_SB
+
+
+// starter npc
+1@iwp,375,229,4	script	순찰대장#stiwp	EP19_NPC_IWIN_SR,{
+	if (ep19_main < 11)
+		end;
+	if ('step != 0)
+		end;
+	if (ep19_main == 11) {
+		npctalk "순찰대장: 처음이니 가볍게 설명하도록 하지.";
+		mes "[순찰대장]";
+		mes "처음이니 가볍게 설명하도록 하지.";
+		next;
+		npctalk "순찰대장: 우리 든든한 독수리 순찰대원들과 산책.. 아니 흠흠..";
+		mes "[순찰대장]";
+		mes "우리 든든한 독수리 순찰대원들과 산책.. 아니 흠흠..";
+		next;
+		npctalk "순찰대장: 순찰을 다녀오면 된다. 뭐 실질적인 순찰은 우리 대원들이 하겠지만..";
+		mes "[순찰대장]";
+		mes "순찰을 다녀오면 된다. 뭐 실질적인 순찰은 우리 대원들이 하겠지만..";
+		next;
+		npctalk "순찰대장: 여럿이 순찰할 때 더 안전한 것도 무시하지 못 한다.";
+		mes "[순찰대장]";
+		mes "여럿이 순찰할 때 더 안전한 것도 무시하지 못 한다.";
+	}
+	else {
+		npctalk "순찰대장: 뭐 처음도 아니고 설명은 필요 없지?";
+		mes "[순찰대장]";
+		mes "뭐 처음도 아니고 설명은 필요 없지?";
+	}
+	next;
+	if ('step == 0) {
+		'step = 1;
+		npcspeed 400;
+		donpcevent instance_npcname( strnpcinfo(0) ) + "::OnStart";	// this npc move near the warp on right and disappear
+		donpcevent instance_npcname("iwp_patrol_move") + "::OnStart";
+		donpcevent instance_npcname("iwp_patrol_talk") + "::OnStart";
+	}
+	npctalk "순찰대장: 그럼 출발!";
+	mes "[순찰대장]";
+	mes "그럼 출발!";
+	close;
+
+OnStart:
+	unitwalk getnpcid(0),385,229, instance_npcname( strnpcinfo(0) ) + "::OnEnd";
+	sleep 500;
+	npctalk "순찰대장: 순찰을 마칠 때쯤 마중 나가도록 하지.";
+	end;
+OnEnd:
+	disablenpc();
+	end;
+}
+
+
+1@iwp,1,1,0	script	iwp_patrol_move	-1,{
+	end;
+OnStart:
+	callsub( S_FirstMove, 'EP19_NPC_IWIN_SG_id );
+	sleep 200;
+	callsub( S_FirstMove, 'EP19_NPC_IWIN_SN_id );
+	sleep 200;
+	callsub( S_FirstMove, 'EP19_NPC_IWIN_SY_id );
+	sleep 200;
+	callsub( S_FirstMove, 'EP19_NPC_IWIN_SB_id );
+	end;
+
+S_FirstMove:
+	.@npc_id = getarg(0);
+	'npc_step[ .@npc_id ] = 0;
+
+	unitwalk .@npc_id, 370,219, instance_npcname("iwp_patrol_move") + "::OnMove00";
+	'npc_step[ .@npc_id ]++;
+	return;
+
+S_Move:
+	.@string$ = ( (getarg(0) < 10) ? "0" + getarg(0) : getarg(0) );
+	unitwalk 0, getarg(1), getarg(2), instance_npcname("iwp_patrol_move") + "::OnMove" + .@string$;
+	set getarg(0), getarg(0) + 1;
+	if (getarg(3,0))
+		'step = getarg(3,0);
+	if (getarg(4,0) && 'final_enabled == 0) {
+		'final_enabled = 1;
+		enablenpc instance_npcname("ep19_ediwp");
+	}
+	end;
+
+OnMove00: callsub( S_Move, 'npc_step[ getattachedrid() ], 340,219 );
+OnMove01: callsub( S_Move, 'npc_step[ getattachedrid() ], 332,227 );
+OnMove02: callsub( S_Move, 'npc_step[ getattachedrid() ], 309,227 );
+OnMove03: callsub( S_Move, 'npc_step[ getattachedrid() ], 309,207 );
+OnMove04: callsub( S_Move, 'npc_step[ getattachedrid() ], 309,191 );
+OnMove05: callsub( S_Move, 'npc_step[ getattachedrid() ], 286,168 );
+OnMove06: callsub( S_Move, 'npc_step[ getattachedrid() ], 286,140 );
+OnMove07: callsub( S_Move, 'npc_step[ getattachedrid() ], 306,120 );
+OnMove08: callsub( S_Move, 'npc_step[ getattachedrid() ], 306,116 );
+OnMove09: callsub( S_Move, 'npc_step[ getattachedrid() ], 311,111 );
+OnMove10: callsub( S_Move, 'npc_step[ getattachedrid() ], 311,94, 2 );	// step 2
+OnMove11: callsub( S_Move, 'npc_step[ getattachedrid() ], 306,89 );
+OnMove12: callsub( S_Move, 'npc_step[ getattachedrid() ], 306,80 );
+OnMove13: callsub( S_Move, 'npc_step[ getattachedrid() ], 279,80 );
+OnMove14: callsub( S_Move, 'npc_step[ getattachedrid() ], 269,90 );
+OnMove15: callsub( S_Move, 'npc_step[ getattachedrid() ], 253,90 );
+OnMove16: callsub( S_Move, 'npc_step[ getattachedrid() ], 242,101 );
+OnMove17: callsub( S_Move, 'npc_step[ getattachedrid() ], 230,101 );
+OnMove18: callsub( S_Move, 'npc_step[ getattachedrid() ], 216,87 );
+OnMove19: callsub( S_Move, 'npc_step[ getattachedrid() ], 209,87 );
+OnMove20: callsub( S_Move, 'npc_step[ getattachedrid() ], 192,70 );
+OnMove21: callsub( S_Move, 'npc_step[ getattachedrid() ], 192,56 );
+OnMove22: callsub( S_Move, 'npc_step[ getattachedrid() ], 162,66 );
+OnMove23: callsub( S_Move, 'npc_step[ getattachedrid() ], 132,56 );
+OnMove24: callsub( S_Move, 'npc_step[ getattachedrid() ], 115,77, 3 );	// step 3
+OnMove25: callsub( S_Move, 'npc_step[ getattachedrid() ], 131,93 );
+OnMove26: callsub( S_Move, 'npc_step[ getattachedrid() ], 131,110 );
+OnMove27: callsub( S_Move, 'npc_step[ getattachedrid() ], 143,122 );
+OnMove28: callsub( S_Move, 'npc_step[ getattachedrid() ], 143,137 );
+OnMove29: callsub( S_Move, 'npc_step[ getattachedrid() ], 134,139 );
+OnMove30: callsub( S_Move, 'npc_step[ getattachedrid() ], 117,156 );
+OnMove31: callsub( S_Move, 'npc_step[ getattachedrid() ], 117,169 );
+OnMove32: callsub( S_Move, 'npc_step[ getattachedrid() ], 128,180 );
+OnMove33: callsub( S_Move, 'npc_step[ getattachedrid() ], 128,200 );
+OnMove34: callsub( S_Move, 'npc_step[ getattachedrid() ], 128,222 );
+OnMove35: callsub( S_Move, 'npc_step[ getattachedrid() ], 139,233 );
+OnMove36: callsub( S_Move, 'npc_step[ getattachedrid() ], 139,242 );
+OnMove37: callsub( S_Move, 'npc_step[ getattachedrid() ], 129,252 );
+OnMove38: callsub( S_Move, 'npc_step[ getattachedrid() ], 129,260 );
+OnMove39: callsub( S_Move, 'npc_step[ getattachedrid() ], 150,281, 4 );	// step 4
+OnMove40: callsub( S_Move, 'npc_step[ getattachedrid() ], 153,281 );
+OnMove41: callsub( S_Move, 'npc_step[ getattachedrid() ], 153,284 );
+OnMove42: callsub( S_Move, 'npc_step[ getattachedrid() ], 160,291 );
+OnMove43: callsub( S_Move, 'npc_step[ getattachedrid() ], 145,306 );
+OnMove44: callsub( S_Move, 'npc_step[ getattachedrid() ], 145,312 );
+OnMove45: callsub( S_Move, 'npc_step[ getattachedrid() ], 137,320 );
+OnMove46: callsub( S_Move, 'npc_step[ getattachedrid() ], 138,327 );
+OnMove47: callsub( S_Move, 'npc_step[ getattachedrid() ], 160,327 );
+OnMove48: callsub( S_Move, 'npc_step[ getattachedrid() ], 179,327 );
+OnMove49: callsub( S_Move, 'npc_step[ getattachedrid() ], 185,333 );
+OnMove50: callsub( S_Move, 'npc_step[ getattachedrid() ], 194,333 );
+OnMove51: callsub( S_Move, 'npc_step[ getattachedrid() ], 194,346 );
+OnMove52: callsub( S_Move, 'npc_step[ getattachedrid() ], 202,354 );
+OnMove53: callsub( S_Move, 'npc_step[ getattachedrid() ], 215,354, 5 );	// step 5
+OnMove54: callsub( S_Move, 'npc_step[ getattachedrid() ], 215,373 );
+OnMove55: callsub( S_Move, 'npc_step[ getattachedrid() ], 240,373 );
+OnMove56: callsub( S_Move, 'npc_step[ getattachedrid() ], 240,362 );
+OnMove57: callsub( S_Move, 'npc_step[ getattachedrid() ], 244,358 );
+OnMove58: callsub( S_Move, 'npc_step[ getattachedrid() ], 244,343, 6, true );	// step 6 + enabled final npc
+OnMove59: callsub( S_Move, 'npc_step[ getattachedrid() ], 252,335 );
+OnMove60: callsub( S_Move, 'npc_step[ getattachedrid() ], 264,335 );
+OnMove61: callsub( S_Move, 'npc_step[ getattachedrid() ], 264,320 );
+OnMove62: callsub( S_Move, 'npc_step[ getattachedrid() ], 287,320 );
+OnMove63: callsub( S_Move, 'npc_step[ getattachedrid() ], 293,314 );
+OnMove64: callsub( S_Move, 'npc_step[ getattachedrid() ], 306,314 );
+OnMove65:
+	if (getattachedrid() != 'EP19_NPC_IWIN_SB_id)
+		callsub( S_Move, 'npc_step[ getattachedrid() ], 306,311 );
+	else {
+		'step = 7;
+		unittalk 'EP19_NPC_IWIN_SB_id, 'EP19_NPC_IWIN_SB_visible$ + ": 도착.";
+	}
+	end;
+OnMove66:
+	if (getattachedrid() != 'EP19_NPC_IWIN_SY_id)
+		callsub( S_Move, 'npc_step[ getattachedrid() ], 306,308 );
+	else
+		unittalk 'EP19_NPC_IWIN_SY_id, 'EP19_NPC_IWIN_SY_visible$ + ": 도착.";
+	end;
+OnMove67:
+	if (getattachedrid() != 'EP19_NPC_IWIN_SN_id)
+		callsub( S_Move, 'npc_step[ getattachedrid() ], 306,305 );
+	else
+		unittalk 'EP19_NPC_IWIN_SN_id, 'EP19_NPC_IWIN_SN_visible$ + ": 도착.";
+	end;
+OnMove68:
+	unittalk getattachedrid(), 'EP19_NPC_IWIN_SG_visible$ + ": 도착.";
+	end;
+}
+
+1@iwp,1,1,0	script	iwp_patrol_talk	-1,{
+	end;
+OnStart:
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 순찰 다녀옴다~", 'EP19_NPC_IWIN_SG$;
+	sleep 1000;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 어이 신병 깃털 안에 뜨신 거 좀 넣어왔냐?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 안 가져왔습니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 왜 그랬냐? 뭐 네가 춥지 내가 춥냐. 다음부터는 챙겨라.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 네 알겠습니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 5000;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 신병? 자 주변에 얼음이 보이지?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 네 보입니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 뾰족한데 찔리면 아프겠지?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 네 아픕니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 조심해야 할까? 무시해도 될까?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 조심해야 됩니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 그래그래.", 'EP19_NPC_IWIN_SG$;
+	sleep 3000;
+	callsub( S_RandomText );
+	sleep 3000;
+	callsub( S_RandomText );
+	sleep 3000;
+	callsub( S_RandomText );
+	sleep 3000;
+	callsub( S_RandomText );
+	sleep 3000;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 야야야! 신병!", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 왜 그러십니까? 모루류 상병님?", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 저 바위 아래 지나갈 때 위에 봐봐. 고드름 엄청 많음.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 왁! 하고 소리 지르면 흔들거려.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 헉!!! 위험한 거 아닙니까?", 'EP19_NPC_IWIN_SN$;
+	sleep 1000;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 응 위험하지 그러니까 조심하라고 한눈팔다 다치면 너만 손해다잉~ 알겠어?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 네 알겠습니다.", 'EP19_NPC_IWIN_SN$;
+	for ( .@i = 0; .@i < 9; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	sleep 3000;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 모루류 상병님? 궁금한 게 있는데 말입니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 뭔데?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 얼음 다리의 얼음은 얼마나 오래 있었을까요?", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 그걸 내가 어떻게 아냐?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 모루류 상병님도 모르시는 게 있으시군요.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 와 우리 신병 노 답이네, 노 답이야. 아!!! 내가 얼음의 나이는 몰라도 그건 안다.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 미끄러져서 넘어지면 쪽팔리고 위험하다는 거! 그리고!!", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 안 다쳐도 누군가에게 생명의 위협을 느끼게 된다는 거!", 'EP19_NPC_IWIN_SG$;
+	for ( .@i = 0; .@i < 3; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 여기에서 멍청하게 넘어지는 아윈은 없을 거라 믿는다.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 넵 조심하겠습니다.", 'EP19_NPC_IWIN_SN$;
+	npctalk 'EP19_NPC_IWIN_SY_visible$ + ": 넵 조심하겠습니다.", 'EP19_NPC_IWIN_SY$;
+	npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 넵 조심하겠습니다.", 'EP19_NPC_IWIN_SB$;
+	for ( .@i = 0; .@i < 10; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아따! 고드름 살벌하네 조심해야 쓰것다.", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 특히 포라랑 너! 내가 뭔 말 하는지 알지?", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 아 모루류 상병님 알았습니다. 진짜 여기 올 때마다 저러시네", 'EP19_NPC_IWIN_SB$;
+	for ( .@i = 0; .@i < 4; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 왜 아윈은 비늘이 없을까? 내가 고민을 좀 해봤는데 말이야.", 'EP19_NPC_IWIN_SG$;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 여기가 얼어붙은 비늘 언덕이잖아? 여기에 비늘이 있어서 아윈에게 비늘이 없는 거지!", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": ?", 'EP19_NPC_IWIN_SN$;
+	npctalk 'EP19_NPC_IWIN_SY_visible$ + ": ?", 'EP19_NPC_IWIN_SY$;
+	npctalk 'EP19_NPC_IWIN_SB_visible$ + ": ?", 'EP19_NPC_IWIN_SB$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 미안하다 나도 내가 뭔 소릴 한 건지 모르겠어.", 'EP19_NPC_IWIN_SG$;
+	for ( .@i = 0; .@i < 18; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 토라리 이등병님.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SY_visible$ + ": 왱?", 'EP19_NPC_IWIN_SY$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 아.. 아닙니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SY_visible$ + ": ?", 'EP19_NPC_IWIN_SY$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SY_visible$ + ": 신병? 혹시 막 숨지고 싶고 그러니?", 'EP19_NPC_IWIN_SY$;
+	sleep 500;
+	emotion ET_KIK, 'EP19_NPC_IWIN_SG_id;
+	emotion ET_KIK, 'EP19_NPC_IWIN_SB_id;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 신병! 순찰 끝나고 아강 스프 콜?", 'EP19_NPC_IWIN_SG$;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 아닙니다. 괜찮습니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아니 네가 해놓으라고.. 아.. 답답하네..", 'EP19_NPC_IWIN_SG$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 시.. 시정하겠습니다.", 'EP19_NPC_IWIN_SN$;
+	sleep 500;
+	npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 네 네 그러세요.", 'EP19_NPC_IWIN_SG$;
+	for ( .@i = 0; .@i < 9; ++.@i ) {
+		sleep 3000;
+		callsub( S_RandomText );
+	}
+	end;
+
+S_RandomText:
+	switch( rand(10) ) {
+	case 0:	// x5
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 야! 신병..", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 신병! 뽀로롱!", 'EP19_NPC_IWIN_SN$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아까 말하려다 말았는데 막! 정신이 오락가락하고 그러냐?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SN_visible$ + ": 죄.. 죄송합니다.", 'EP19_NPC_IWIN_SN$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아니.. 근무 전에 화장실 가서 선임들을 10분씩이나 기다리게 만드냐?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		emotion ET_OHNO, 'EP19_NPC_IWIN_SG_id;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 하.. 진짜 환장하겠네.", 'EP19_NPC_IWIN_SG$;
+		break;
+	case 1:	// x7
+		npctalk 'EP19_NPC_IWIN_SY_visible$ + ": 모루류 상병님 그 소식 들으셨습니까?", 'EP19_NPC_IWIN_SY$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 무슨 소식?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SY_visible$ + ": 누가 마편 써서 보급관님 징계 먹으신답니다.", 'EP19_NPC_IWIN_SY$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아.. 그거.. 내가 쓴 거야.", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		emotion ET_SURPRISE, 'EP19_NPC_IWIN_SN_id;
+		emotion ET_QUESTION, 'EP19_NPC_IWIN_SY_id;
+		emotion ET_HUK, 'EP19_NPC_IWIN_SB_id;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 어디서 뭘 본 건지. 말끝마다 요원은! 요원은!", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 한두 번도 아니고 화나잖아.", 'EP19_NPC_IWIN_SG$;
+		break;
+	case 2:	// x4
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 야! 포라랑~", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 일병! 포라랑! 왜 그러심까?", 'EP19_NPC_IWIN_SB$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 너 머리 돌이지? 어떻게 아윈이 고드름이랑 박았는데 고드름만 부서지냐?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 고드름이 약한 겁니다. 제가 강한 거구요.", 'EP19_NPC_IWIN_SB$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 올~ 자신감~", 'EP19_NPC_IWIN_SG$;
+		break;
+	case 3:	// x9
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 아 맞다. 순찰대장님이 그러는데..", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 샤워장에서 홀딱 젖은 깃털로 생활관까지 뛰어간 아윈이 있다던데..", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 우리 중에는 없지?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		emotion ET_PROFUSELY_SWEAT, 'EP19_NPC_IWIN_SN_id;
+		emotion ET_QUESTION, 'EP19_NPC_IWIN_SY_id;
+		emotion ET_QUESTION, 'EP19_NPC_IWIN_SB_id;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 하긴 그런 정신 나간 아윈이 있겠어.", 'EP19_NPC_IWIN_SG$;
+		break;
+	case 4:	// x4
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 깔라마링 맛있더라. 근데 잡기 까다롭지 않아?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		emotion ET_DELIGHT, 'EP19_NPC_IWIN_SN_id;
+		emotion ET_KEK, 'EP19_NPC_IWIN_SY_id;
+		emotion ET_STARE_ABOUT, 'EP19_NPC_IWIN_SB_id;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 저 애들아? 나 지금 누구랑 대화하니?", 'EP19_NPC_IWIN_SG$;
+		break;
+	case 5:	// x5
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 요즘 르간이 안보이는 것 같지 않아?", 'EP19_NPC_IWIN_SG$;
+		sleep 500;
+		emotion ET_COOL, 'EP19_NPC_IWIN_SB_id;
+		npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 모루류 상병님이 여기 딱하고 계신데 르간이 여기까지 왜 내려옵니까?", 'EP19_NPC_IWIN_SB$;
+		sleep 500;
+		npctalk 'EP19_NPC_IWIN_SB_visible$ + ": 저기 평원쪽이라면 또 모를까.", 'EP19_NPC_IWIN_SB$;
+		sleep 500;
+		emotion ET_KIK, 'EP19_NPC_IWIN_SG_id;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 역시 그렇지?", 'EP19_NPC_IWIN_SG$;
+		break;
+	default:
+		sleep 2000;
+		break;
+	}
+	sleep 1000;
+	return;
+}
+
+
+// Related to the main quest
+1@iwp,260,390,4	script	의문의 청년#dlunch::ep19_dlunch_iwp	4_EP19_LUNCH,{
+	if (ep19_main == 11) {
+		cutin "ep19_lunch01.png",2;
+		mes "[의문의 청년]";
+		mes "으에에! 혹시 절 잡아가려고 오셨나요?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "아니야.";
+		next;
+		mes "[의문의 청년]";
+		mes "오! 다행이다. 저 여기까지 힘들게 도망쳤거든요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그런데 너 아침이랑 참 비슷하게 생겼구나? 굳이 말하자면 아침이가 성장하면 너 같은 모습일 것 같아.";
+		next;
+		mes "[의문의 청년]";
+		mes "아침이? 그게 누군가요?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "으엣? 아침이 몰라? 너랑 비슷하게 생긴 아인데, 루두스에서 만났었지 아마?.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "아직 거기 있는지는 잘 모르겠네.";
+		next;
+		mes "[의문의 청년]";
+		mes "루두스? 루두스.. 루두스..";
+		next;
+		mes "[의문의 청년]";
+		mes "오! 있다! 제 데이터에는 폐기된 실험체들을 버리는 장소라고 되어있네요.";
+		next;
+		mes "[의문의 청년]";
+		mes "데이터로 추측해보건데 아마도 그 아침이란 아이는 제 초기 모델 같아요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "초기 모델?";
+		next;
+		cutin "ep19_lunch02.png",2;
+		mes "[의문의 청년]";
+		mes "저는 일루시온의 실험체거든요.";
+		next;
+		mes "[의문의 청년]";
+		mes "그 아침이라 부르시는 실험체를 일루시온의 과학자들이 개량하고 또 개량해서 만들어진 게 저에요.";
+		next;
+		mes "[의문의 청년]";
+		mes "그 아침이라는 실험체와 비교하면, 210426배쯤 뛰어난 존재라고 할 수 있죠!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그.. 그렇구나. 그런데 어쩌다 여기까지 오게 된 거야?";
+		next;
+		cutin "ep19_lunch01.png",2;
+		mes "[의문의 청년]";
+		mes "오! 날카로운 질문이시네요. 하지만 글쎄요? 그건 저도 잘 모르겠어요.";
+		next;
+		mes "[의문의 청년]";
+		mes "저도 이곳에 도착하고 과학자들이 다른 실험을 하느라 관리가 뜸할 때 도망쳐 나온 거라.";
+		next;
+		mes "[의문의 청년]";
+		mes "근데 저기 조류들이 순찰을 다니는 것으로 봐서는 여기도 안전한 것 같지는 않네요.";
+		next;
+		mes "[의문의 청년]";
+		mes "평원 쪽이 더 안전할 것 같아요. 저는 지금 평원 쪽으로 가야할 것 같은데.. 기회가 되면 또 봐요.";
+		next;
+		mes "[의문의 청년]";
+		mes "이야기 나눠 즐거웠어요.";
+		next;
+		cutin "",255;
+		cloakonnpcself();
+		ep19_main = 12;
+		setquest 5983;
+		mes "청년은 그렇게 사라졌다. 얼어붙은 비늘 평원 방향으로 간다고 했지? 시간이 되면 찾아가 보자.";
+		close;
+	}
+	end;
+
+OnInstanceInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep19_main == 11" );
+	end;
+}
+
+
+// Daily quest : Do not Feed Wildlife
+1@iwp,359,349,0	script	무언가#df00::hode_df00	HODE,{
+	if (checkweight(528,1) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	mes "「^4A94F7무언가^000000」가 흙으로 살짝 덮여있는 것 같다. 움직이는 것 같은데 이거 흙 맞지?";
+	next;
+	if (select( "들춰 본다.", "그냥 둔다." ) == 2) {
+		mes "그래! 무서운 「무언가」가 나올지도 모르니 그냥 두도록 하자.";
+		close;
+	}
+	progressbar "FFFFFF",1;
+
+	.@r = rand(100);
+	if (.@r < 35 || isbegin_quest(5978) == 0) {
+		mes "에이.. 뭐야 그냥 평범한 흙더미잖아?";
+		disablenpc();
+		initnpctimer;
+		close;
+	}
+	if (.@r < 50) {
+		mes "으악! 벌레잖아? 대체 뭐가 있었던 거야?!";
+		disablenpc();
+		initnpctimer;
+		getmapxy .@map$,.@x,.@y, BL_NPC;
+		monster .@map$,.@x,.@y,"--ja--",1608,5, instance_npcname( strnpcinfo(0) ) + "::OnMobDead";	// G_THIEF_BUG__
+		close;
+	}
+	erasequest 5978;
+	setquest 5979;
+	getitem 528,1;	// Monster's_Feed
+	disablenpc();
+	initnpctimer;
+	mes "누군가 이곳에 둔 먹이를 찾았다. 보급관 고리르에게 가져다 주자.";
+	close;
+
+OnTimer30000:
+	enablenpc();
+	stopnpctimer;
+	killmonster 'map_iwp$, instance_npcname( strnpcinfo(0) ) + "::OnMobDead";
+	end;
+
+OnMobDead:
+	end;
+}
+1@iwp,113,142,0	duplicate(hode_df00)	무언가#df01	HODE
+1@iwp,342,292,0	duplicate(hode_df00)	무언가#df02	HODE
+1@iwp,292,259,0	duplicate(hode_df00)	무언가#df03	HODE
+1@iwp,265,154,0	duplicate(hode_df00)	무언가#df04	HODE
+1@iwp,278,103,0	duplicate(hode_df00)	무언가#df05	HODE
+1@iwp,152,60,0	duplicate(hode_df00)	무언가#df06	HODE
+1@iwp,100,70,0	duplicate(hode_df00)	무언가#df07	HODE
+1@iwp,136,175,0	duplicate(hode_df00)	무언가#df08	HODE
+1@iwp,149,239,0	duplicate(hode_df00)	무언가#df09	HODE
+
+
+// checkpoints for players
+1@iwp,279,80,0	script	체크포인트#pcp01	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	if ('step < 2)
+		end;
+	if ('step_player[ getcharid(0) ] != 0)
+		end;
+	'step_player[ getcharid(0) ] = 1;
+	emotion ET_SURPRISE, playerattached();
+	end;
+}
+
+1@iwp,131,110,0	script	체크포인트#pcp02	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	if ('step < 3)
+		end;
+	if ('step_player[ getcharid(0) ] != 1)
+		end;
+	'step_player[ getcharid(0) ] = 2;
+	emotion ET_SURPRISE, playerattached();
+	end;
+}
+
+1@iwp,145,306,0	script	체크포인트#pcp03	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	if ('step < 4)
+		end;
+	if ('step_player[ getcharid(0) ] != 2)
+		end;
+	'step_player[ getcharid(0) ] = 3;
+	emotion ET_SURPRISE, playerattached();
+	end;
+}
+
+1@iwp,240,373,0	script	체크포인트#pcp04	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	if ('step < 5)
+		end;
+	if (ep19_main == 11) {
+		cloakoffnpcself( instance_npcname("ep19_dlunch_iwp") );
+		navigateto("1@iwp",260,390);
+		viewpoint 1,260,390,1,0xFF0000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 모루류 저기 구석에 뭔가 있는 것 같은데?", bc_self;
+		sleep2 500;
+		npctalk 'EP19_NPC_IWIN_SG_visible$ + ": 그런가요? 전 못 본거 같은데요. 정 신경 쓰이시면, 확인하고 오시는 건 어떨 까요?", 'EP19_NPC_IWIN_SG$;
+	}
+	if ('step_player[ getcharid(0) ] != 3)
+		end;
+	'step_player[ getcharid(0) ] = 4;
+	emotion ET_SURPRISE, playerattached();
+	end;
+}
+
+1@iwp,264,310,0	script	체크포인트#pcp05	HIDDEN_WARP_NPC,10,20,{
+	end;
+OnTouch:
+	if ('step < 6)
+		end;
+	if ('step_player[ getcharid(0) ] != 4)
+		end;
+	'step_player[ getcharid(0) ] = 5;
+	emotion ET_SURPRISE, playerattached();
+	if (isbegin_quest(5972) == 1)	// note: no idea what it's for
+		erasequest 5972;
+	erasequest 5974;
+	setquest 5975;
+	end;
+}
+
+// Final step
+1@iwp,301,315,6	script	순찰대장#ediwp::ep19_ediwp	EP19_NPC_IWIN_SR,{
+	if ('step < 7) {
+		mes "[순찰대장]";
+		mes "여기까지 오느라 고생 많았네. 기왕 고생한 거 우리 대원들이 순찰을 마칠 때까지 잠시 기다려주겠나?";
+		close;
+	}
+	if ('step_player[ getcharid(0) ] != 5) {	// ongoing / player didn't walk on all the checkpoints
+		mes "[순찰대장]";
+		mes "자네나 자네 동료 그 누구도 우리 대원들과 순찰을 제대로 돈 자는 없는 모양이군.";
+		next;
+		mes "[순찰대장]";
+		mes "순찰을 제대로 하지 않았으니 보상도 못 주네. 뭐 지금이라도 혼자 돌고 온다면, 챙겨주겠지만..";
+		next;
+		mes "[순찰대장]";
+		mes "놀다 온 자네가 우리 순찰 구역을 알려나 모르겠군.";
+		close;
+	}
+	if (isbegin_quest(5973) == 1) {	// already completed
+		mes "[순찰대장]";
+		mes "오늘 순찰도 수고 많았네. 그건 그렇고 얼음의 성으로 돌아간다면 내가 데려다 주지.";
+	}
+	else {
+		switch( isbegin_quest(5975) ) {
+		case 0:	// ongoing / player didn't walk on all the checkpoints
+			mes "[순찰대장]";
+			mes "자네나 자네 동료 그 누구도 우리 대원들과 순찰을 제대로 돈 자는 없는 모양이군.";
+			next;
+			mes "[순찰대장]";
+			mes "순찰을 제대로 하지 않았으니 보상도 못 주네. 뭐 지금이라도 혼자 돌고 온다면, 챙겨주겠지만..";
+			next;
+			mes "[순찰대장]";
+			mes "놀다 온 자네가 우리 순찰 구역을 알려나 모르겠군.";
+			close;
+		case 1:
+			erasequest 5975;
+			setquest 5973;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp2 52243795,0;
+			getexp 0,3000000;
+			mes "[순찰대장]";
+			mes "오늘 순찰도 수고 많았네. 이번 순찰의 약소한 보상일세.";
+			next;
+			mes "[순찰대장]";
+			mes "그건 그렇고 어디로 가겠나? 얼음의 성으로 돌아간다면 내가 데려다 주지.";
+		case 2:
+			end;
+		}
+	}
+	next;
+	if (select( "얼음의 성으로..", "아직 볼일이 남았다." ) == 2) {
+		mes "[순찰대장]";
+		mes "그러시다면야 뭐 여기서 헤어지도록 할까? 내일 또 보세.";
+		close;
+	}
+	mes "[순찰대장]";
+	mes "자 그럼 얼음의 성으로 가볼까?";
+	close2;
+	warp "icecastle",20,123;
+	end;
+
+OnInstanceInit:
+	disablenpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5975) == 1" );
+	end;
+}

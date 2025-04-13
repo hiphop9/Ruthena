@@ -16,31 +16,31 @@
 
 // Main NPC :: stonechange
 //============================================================
-geffen_in,99,174,5	script	Ore Tester#sorty	8_F_GIRL,{
+geffen_in,99,174,5	script	광석 감별사::Ore Tester#sorty	8_F_GIRL,{
 	mes "[Ore Tester Sorty]";
-	mes "Do you have ^3131FFany same type of ores in your inventories^000000 which take many spaces?";
-	mes "I can distinguish your ores and organize them right away~!";
+	mes "혹시 인벤토리에 ^3131FF공백이 많이 차지하는 같은 종류의 광석^000000이 있습니까?";
+	mes "광석을 구분해서 바로 정리할 수 있습니다~!";
 	next;
 	switch(select("Refine my Ore.:Cancel.")) {
 	case 1:
-		mes "[Ore Tester Sorty]";
-		mes "At the moment I can only distinguish ^FF0000Steel^000000, ^FF0000Iron^000000, ^FF0000Iron Ore^000000, and ^FF0000Rough Oridecon^000000 and organize them.";
-		mes "Please note that ^3131FFother items are unable^000000!";
+		mes "[광석 감별사]";
+		mes "지금은 ^FF0000철^000000, ^FF0000철^000000, ^FF0000철광석^000000, ^FF0000거친 오리데콘^000000만 구분하여 정리할 수 있습니다.";
+		mes "^3131다른 아이템은 불가능합니다^000000!";
 		next;
 		mes "[Ore Tester Sorty]";
-		mes "So, would you like me to organize your ores?";
+		mes "그럼, 광석을 정리해 드릴까요?";
 		next;
-		.@i = select("Steel, please.:Iron, please.:Iron Ore, please.:Rough Oridecon, please.:No, thanks.");
+		.@i = select("강철:철:철광석:거친 오리데콘:괜찮아요.");
 		if (.@i == 5) {
-			mes "[Ore Tester Sorty]";
-			mes "Huh, I really hate messy people!";
+			mes "[광석 감별사]";
+			mes "어, 난 지저분한 사람들이 정말 싫어!";
 			close;
 		}
 		setarray .@ores[0],999,998,1002,756;
 		.@item = .@ores[.@i-1];
 		if (countitem(.@item) == 0) {
 			mes "[Ore Tester Sorty]";
-			mes "You don't have any "+getitemname(.@item)+"...";
+			mes "현재"+getitemname(.@item)+"... 이 없습니다.";
 			close;
 		}
 		// while(1) {
@@ -56,12 +56,12 @@ geffen_in,99,174,5	script	Ore Tester#sorty	8_F_GIRL,{
 		.@count = countitem(.@item);
 		delitem .@item, .@count;
 		getitem .@item, .@count;
-		mes "[Ore Tester Sorty]";
-		mes "It's done. Looks great! Don't you think so?";
+		mes "[광석 감별사]";
+		mes "완료되었습니다. 멋지네요! 그렇지 않나요?";
 		close;
 	case 2:
-		mes "[Ore Tester Sorty]";
-		mes "It seems that your bag is clean? Huhu! You might be the master of cleaning!";
+		mes "[광석 감별사]";
+		mes "가방이 깨끗한 것 같나요? 후후! 당신은 청소의 달인일지도 몰라요!";
 		close;
 	}
 }

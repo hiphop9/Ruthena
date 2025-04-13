@@ -17,9 +17,9 @@
 //= 1.4 Added checkweight, and input min/max values. [L0ne_W0lf]
 //============================================================
 
-prontera,123,102,5	script	Merchant#pron	85,{
+prontera,123,102,5	script	상인#pron	85,{
 	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Haha!";
 		mes "What are you, superhuman?";
 		mes "You're carrying so much stuff!";
@@ -27,21 +27,21 @@ prontera,123,102,5	script	Merchant#pron	85,{
 		mes "into Kafra Storage~";
 		close;
 	}
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Good day!";
 	mes "Have you collected any";
 	mes "items like Shells or Fluff?";
 	mes "What about Jellopies? Oh yeah,";
 	mes "I need those for something.";
 	next;
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Of course, I won't ask you";
 	mes "to give me that stuff for free. What about if I trade a Red Potion for 5 Shells, 10 Fluff,";
 	mes "or 10 Jellopies?";
 	next;
 	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
 	case 1:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "So which item do";
 		mes "you want to bring me?";
 		mes "Shells, Fluffs, or Jellopies?";
@@ -51,20 +51,20 @@ prontera,123,102,5	script	Merchant#pron	85,{
 		case 2: callfunc "F_PotExchange",909,10;
 		case 3: callfunc "F_PotExchange",914,10;
 		case 4:
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "Sure~";
 			mes "No problem.";
 			close;
 		}
 	case 2:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "A rip-off...?";
 		mes "If you check the market value";
 		mes "of the items being traded, I'm actually the one getting";
 		mes "ripped off here.";
 		close;
 	case 3:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Alright,";
 		mes "no problem.";
 		mes "But come back to me";
@@ -73,9 +73,9 @@ prontera,123,102,5	script	Merchant#pron	85,{
 	}
 }
 
-morocc,180,259,3	script	Merchant#Morocc	85,{
+morocc,180,259,3	script	상인#Morocc	85,{
 	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Haha!";
 		mes "What are you, superhuman?";
 		mes "You're carrying so much stuff!";
@@ -83,21 +83,21 @@ morocc,180,259,3	script	Merchant#Morocc	85,{
 		mes "into Kafra Storage~";
 		close;
 	}
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Good day!";
 	mes "Have you collected any";
 	mes "Shells or Feathers of Bird?";
 	mes "What about Jellopies? Oh yeah,";
 	mes "I need those for something.";
 	next;
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Of course, I won't ask you";
 	mes "to give me that stuff for free. What about if I trade a Red Potion for 5 Shells, 7 Feathers of Bird";
 	mes "or 10 Jellopies?";
 	next;
 	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
 	case 1:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "So which item do";
 		mes "you want to bring me?";
 		mes "Shells, Feathers of Birds,";
@@ -108,20 +108,20 @@ morocc,180,259,3	script	Merchant#Morocc	85,{
 		case 2: callfunc "F_PotExchange",916,7;
 		case 3: callfunc "F_PotExchange",909,10;
 		case 4:
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "Sure~";
 			mes "No problem.";
 			close;
 		}
 	case 2:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "A rip-off...?";
 		mes "If you check the market value";
 		mes "of the items being traded, I'm actually the one getting";
 		mes "ripped off here.";
 		close;
 	case 3:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Alright,";
 		mes "no problem.";
 		mes "But come back to me";
@@ -130,9 +130,9 @@ morocc,180,259,3	script	Merchant#Morocc	85,{
 	}
 }
 
-payon,200,134,5	script	Merchant#pay	85,{
+payon,200,134,5	script	상인#pay	85,{
 	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Haha!";
 		mes "What are you, superhuman?";
 		mes "You're carrying so much stuff!";
@@ -140,20 +140,20 @@ payon,200,134,5	script	Merchant#pay	85,{
 		mes "into Kafra Storage~";
 		close;
 	}
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Good day!";
 	mes "Have you collected";
 	mes "items like Tree Roots?";
 	mes "What about Jellopies? Oh yeah,";
 	mes "I need those for something.";
 	next;
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Of course, I won't ask you";
 	mes "to give me that stuff for free. What about if I trade a Red Potion for 6 Tree Roots or 10 Jellopies?";
 	next;
 	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
 	case 1:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "So which item do";
 		mes "you want to bring me?";
 		mes "Tree Roots, or Jellopies?";
@@ -162,20 +162,20 @@ payon,200,134,5	script	Merchant#pay	85,{
 		case 1: callfunc "F_PotExchange",902,6;
 		case 2: callfunc "F_PotExchange",909,10;
 		case 3:
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "Sure~";
 			mes "No problem.";
 			close;
 		}
 	case 2:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "A rip-off...?";
 		mes "If you check the market value";
 		mes "of the items being traded, I'm actually the one getting";
 		mes "ripped off here.";
 		close;
 	case 3:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Alright,";
 		mes "no problem.";
 		mes "But come back to me";
@@ -184,66 +184,66 @@ payon,200,134,5	script	Merchant#pay	85,{
 	}
 }
 
-aldebaran,152,63,5	script	Merchant#alde	85,{
+aldebaran,152,63,5	script	상인#alde	85,{
 	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
-		mes "[Merchant]";
-		mes "Haha!";
-		mes "What are you, superhuman?";
-		mes "You're carrying so much stuff!";
-		mes "You better put some of that";
-		mes "into Kafra Storage~";
+		mes "[상인]";
+		mes "하하!";
+		mes "너 초인적인 존재야?";
+		mes "짐을 너무 많이 가지고 다니시네요!";
+		mes "그거 좀 넣어두는 게 좋을 것 같아요";
+		mes "카프라 저장소로~";
 		close;
 	}
-	mes "[Merchant]";
-	mes "Good day!";
-	mes "Have you collected any";
-	mes "Worm Peelings or Feather of Birds?";
-	mes "How about Jellopies? Oh yeah,";
-	mes "I need those for something.";
+	mes "[상인]";
+	mes "좋은 하루 되세요!";
+	mes "혹시 수집한 적 있나요?";
+	mes "벌레 껍질인가요, 아니면 새 깃털인가요?";
+	mes "젤로피는 어때요? 아 예,";
+	mes "뭔가 필요해서요.";
 	next;
-	mes "[Merchant]";
-	mes "Of course, I won't ask you";
-	mes "to give me that stuff for free. What about if I trade a Red Potion for 1 Worm Peeling, 7 Feather of Birds, or 10 Jellopies?";
+	mes "[상인]";
+	mes "물론이죠. 묻지 않겠습니다";
+	mes "그걸 공짜로 주려고요. 빨간 물약을 벌레 껍질 1개, 새 깃털 7개, 젤리 10개로 바꾸면 어떨까요?";
 	next;
-	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
+	switch(select("물론이죠!:내 생각엔 그건 바가지인 것 같아요!:아니요, 고마워요.")) {
 	case 1:
-		mes "[Merchant]";
-		mes "So which item do";
-		mes "you want to bring me?";
-		mes "Feathers of Birds?";
-		mes "Worm Peelings?";
-		mes "Or Jellopies?";
+		mes "[상인]";
+		mes "그래서 어떤 항목을 해야 할까요?";
+		mes "나를 데려오시겠어요?";
+		mes "새의 깃털이요?";
+		mes "벌레 껍질이 벗겨졌나요?";
+		mes "아니면 젤리?";
 		next;
-		switch(select("Worm Peelings:Feathers of Birds:Jellopies:Cancel")) {
+		switch(select("벌레 껍질:새의 깃털:젤로피:취소")) {
 		case 1: callfunc "F_PotExchange",955,1;
 		case 2: callfunc "F_PotExchange",916,7;
 		case 3: callfunc "F_PotExchange",909,10;
 		case 4:
-			mes "[Merchant]";
-			mes "Sure~";
-			mes "No problem.";
+			mes "[상인]";
+			mes "그럼요~";
+			mes "문제없어요.";
 			close;
 		}
 	case 2:
-		mes "[Merchant]";
-		mes "A rip-off...?";
-		mes "If you check the market value";
-		mes "of the items being traded, I'm actually the one getting";
-		mes "ripped off here.";
+		mes "[상인]";
+		mes "바가지...?";
+		mes "시가를 확인해보면";
+		mes "거래되는 아이템 중 실제로 얻는 사람은 바로 나입니다";
+		mes "여기서 찢어졌습니다.";
 		close;
 	case 3:
-		mes "[Merchant]";
-		mes "Alright,";
-		mes "no problem.";
-		mes "But come back to me";
-		mes "if you change your mind.";
+		mes "[상인]";
+		mes "알았어,";
+		mes "문제없어요.";
+		mes "하지만 나한테 다시 와줘";
+		mes "마음이 바뀌면.";
 		close;
 	}
 }
 
-geffen,173,88,5	script	Merchant#geff	85,{
+geffen,173,88,5	script	상인#geff	85,{
 	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Haha!";
 		mes "What are you, superhuman?";
 		mes "You're carrying so much stuff!";
@@ -251,20 +251,20 @@ geffen,173,88,5	script	Merchant#geff	85,{
 		mes "into Kafra Storage~";
 		close;
 	}
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Good day!";
 	mes "Have you collected any";
 	mes "items like Shells or Chrysalises?";
 	mes "What about Jellopies? Oh yeah,";
 	mes "I need those for something.";
 	next;
-	mes "[Merchant]";
+	mes "[상인]";
 	mes "Of course, I won't ask you";
 	mes "to give me that stuff for free. What about if I trade a Red Potion for 5 Shells or 6 Chrysalises, or 10 Jellopies?";
 	next;
 	switch(select("Sure!:I think it's a rip-off!:No, thanks.")) {
 	case 1:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "So which item do";
 		mes "you want to bring me?";
 		mes "Shells, Chrysalises, or Jellopies?";
@@ -274,20 +274,20 @@ geffen,173,88,5	script	Merchant#geff	85,{
 		case 2: callfunc "F_PotExchange",915,6;
 		case 3: callfunc "F_PotExchange",909,10;
 		case 4:
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "Sure~";
 			mes "No problem.";
 			close;
 		}
 	case 2:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "A rip-off...?";
 		mes "If you check the market value";
 		mes "of the items being traded, I'm actually the one getting";
 		mes "ripped off here.";
 		close;
 	case 3:
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Alright,";
 		mes "no problem.";
 		mes "But come back to me";
@@ -301,7 +301,7 @@ function	script	F_PotExchange	{
 	.@req_amount = getarg(1);
 
 	if (countitem(.@item_req) < .@req_amount) {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Hey, where are";
 		mes "all those "+ getitemname(.@item_req) +"";
 		mes "that you promised?";
@@ -309,29 +309,29 @@ function	script	F_PotExchange	{
 		close;
 	}
 	else {
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Okay, let me check";
 		mes "how many "+ getitemname(.@item_req) +" you";
 		mes "have on you. Hmm...";
 		next;
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "You have";
 		mes "a total of "+ countitem(.@item_req) +" "+ getitemname(.@item_req) +".";
 		mes "I can give you a total";
 		mes "of "+ (countitem(.@item_req)/.@req_amount) +" Red Potions for those.";
 		next;
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "What do you say?";
 		mes "Do we have a deal?";
 		next;
 		if (select("Deal.:No deal.") == 1) {
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "You know the exact";
 			mes "number of Red Potions";
 			mes "you want to receive for";
 			mes "those "+ getitemname(.@item_req) +", don't you?";
 			next;
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "Now, I can trade you";
 			mes "a minimum of 1 Red Potion";
 			mes "and a maximum of 100 Red Potions";
@@ -341,7 +341,7 @@ function	script	F_PotExchange	{
 			while(1) {
 				input .@input,0,101;
 				if (.@input == 0) {
-					mes "[Merchant]";
+					mes "[상인]";
 					mes "What...?";
 					mes "Why the hell do you";
 					mes "even bother to talk to me?";
@@ -349,7 +349,7 @@ function	script	F_PotExchange	{
 					close;
 				}
 				else if (.@input > 100) {
-					mes "[Merchant]";
+					mes "[상인]";
 					mes "I can't give you more";
 					mes "than 100 Red Potions";
 					mes "at once. Let's try";
@@ -362,11 +362,11 @@ function	script	F_PotExchange	{
 			}
 			.@put_out_item = .@input * .@req_amount;
 			if (countitem(.@item_req) < .@put_out_item) {
-				mes "[Merchant]";
+				mes "[상인]";
 				mes "Uh oh, the number you entered doesn't seem right. You better check the number of Red Potions that you can trade for again.";
 				close;
 			}
-			mes "[Merchant]";
+			mes "[상인]";
 			mes "There you go!";
 			mes "Check how many Red Potions";
 			mes "I've given you, it should be good. Thanks, that was a good deal~";
@@ -374,7 +374,7 @@ function	script	F_PotExchange	{
 			getitem 501,.@input; //Red_Potion
 			close;
 		}
-		mes "[Merchant]";
+		mes "[상인]";
 		mes "Huh~";
 		mes "Alright.";
 		mes "Though aren't";

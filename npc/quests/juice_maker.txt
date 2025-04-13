@@ -1,104 +1,88 @@
 //===== rAthena Script =======================================
 //= Juice Maker Quest
 //===== By: ==================================================
-//= kobra_k88
-//===== Current Version: =====================================
-//= 2.1
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Learn where to turn apples, bananas, carrots, and grapes
-//= into juice.
-//= Condition if done: (MISC_QUEST & 1)
-//===== Additional Comments: =================================
-//= 1.9 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//=     Added tracking variables in, which are unset when complete.
-//= 2.0 Added missing checkweight. [L0ne_W0lf]
-//= 2.1 Fixed dialog for if your missing the needed items (He always said the dialog for grape juice). [Kisuka]
+//한글번역 스카이러브
 //============================================================
 
-prt_in,49,172,3	script	Marianne#juice	53,{
+prt_in,49,172,3	script	마리에느#juice	53,{
 	if ((MISC_QUEST&1) || morison_meat == 15) {
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Whew...!";
 		mes "Still, he won't eat anything unless it's Meat. But maybe he will eat fruit if it was cut so that it was easy to eat. Like, if it was blended into juice...";
 		next;
 		set mother_marienu,0;
 		set morison_meat,0;
 		set MISC_QUEST,MISC_QUEST | 1;
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Ah! Come to think of it, I heard they were making fruit juice somewhere. Now where was it... Payon Village, or Morocc?";
 		close;
 	}
 	if (mother_marienu == 1) {
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Morrison!! Eat some fruits!! You don't want to become a slobby fat pig when you grow up, do you?";
 		next;
 		if (select("Talk:Cancel") == 1) {
-			mes "[Housewife Marianne]";
+			mes "[주부 마리에느]";
 			mes "Hm? ...You!";
 			mes "You're the one who gave, my little Morrison that Meat?! Did you come here thinking I wouldn't know about it?!";
 			next;
-			mes "[Housewife Marianne]";
+			mes "[주부 마리에느]";
 			mes "Go away, get out of my house NOW!!";
 			close;
 		}
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Morrison!! I'm going to be very very mad if you keep doing this!";
 		close;
 	}
 	if (morison_meat > 0) {
 		set mother_marienu,1;
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Oh!!.... This...";
 		mes "what is this...??";
 		mes "How could you do something like this to my boy?!";
 		next;
-		mes "[Housewife Marianne]";
+		mes "[주부 마리에느]";
 		mes "Argh! Get out of my house right this instant!";
 		close;
 	}
-	mes "[Housewife Marianne]";
-	mes "Morrison!! Please eat some fruits!! Please~!";
+	mes "[주부 마리에느]";
+	mes "모리슨!! 어서 과일좀 먹어!! 좀 먹으란 말이야~!";
+	mes "어휴~!! 내가 못살아. 꼭 쓸데없는것만 지 아빨 닮아가지고는...";
 	next;
-	mes "[Housewife Marinaa]";
-	mes "Sigh~!! Like father, like son...";
-	next;
-	switch(select("Talk:Cancel")) {
-		mes "[Housewife Marianne]";
-		mes "*Sigh*... This is Morrison...";
-		mes "My one and only son.";
-		next;
-		mes "[Housewife Marianne]";
-		mes "But these days, he just won't eat fruits. His face is so dull because he refuses to eat healthy. He just wants to eat Meat. I need to find a way to feed him fruits or vegetables....";
+	if (select("대화한다:그만둔다") == 1) {
+		mes "[주부 마리에느]";
+		mes "휴... 이 아이는 모리슨이라고... 제 아들 이랍니다.";
+		mes "그런데 요즘 이녀석이 통 과일을 먹으려 들지 않는 거에요. 과일을 하도 안먹어서 얼굴색이 칙칙하기 까지 하고...";
+		mes "계속 고기만 먹으려 하네요... 휴우... 어떻게든 과일이나채소를 먹여야 할텐데...";
 		close;
+		
 	}
-	mes "[Housewife Marianne]";
-	mes "Morrison!! You're going to be in big trouble if you keep this up!";
+	mes "[주부 마리에느]";
+	mes "모리슨!! 너 짜구 이러면 혼난다!";
 	close;
+	
 }
 
-prt_in,47,173,3	script	Morrison#juice	97,{
+prt_in,47,173,3	script	모리슨#juice	97,{
 	if ((MISC_QUEST&1) || morison_meat == 15) {
-		mes "[Little Morrison]";
+		mes "[꼬마 모리슨]";
 		mes "Bleh... Forget it.";
 		mes "I'm just going to shrivel to death just eating fruits. Don't bother worrying about me .";
 		close;
 	}
 	if (morison_meat > 9) {
-		mes "[Little Morrison]";
+		mes "[꼬마 모리슨]";
 		mes "Ah... so full~";
 		mes "I think I can live now.";
 		mes "You don't have to give me any more Meat. I feel like I'm going to explode if I eat any more.";
 		if (morison_meat == 10) {
 			next;
 			set morison_meat,morison_meat+1;
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "Oh... and... um.";
 			mes "Take this.";
 			next;
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "It's a little something I've been saving to eat for later, but since you gave me Meat, I think I can pass on the sweets.";
 			close;
 			getitem 529,3; //Candy
@@ -106,21 +90,21 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 		}
 		close;
 	}
-	mes "[Little Morrison]";
-	mes "Agh....Noooo!!!";
-	mes "No, don't make me eat it! I can't bear to taste fruits!";
+	mes "[꼬마 모리슨]";
+	mes "아....아아악!!! 아.. 안먹어";
+	mes "에잇.. 과일따위, 안먹는다고요!!";
 	next;
 	if (countitem(517) > 0) {
-		switch(select("Talk:Show the Meat:Cancel")) {
+		switch(select("대화한다:그만둔다")) {
 		case 1:
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "Aaaagh!! Once or twice is enough!! I refuse to eat any more fruits! You have to peel them and there's so much juice that it makes you feel icky...";
 			next;
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "And they're all slippery and sour... Even if I eat it, I still feel hungry. Aaaah~! Give me Meat!";
 			close;
 		case 2:
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "Ooh! M-Meaaat~";
 			mes "Ah... hu...hungry...";
 			mes "The scent of Meat...";
@@ -130,7 +114,7 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 			if (select("Give Meat:Don't Give Meat") == 1) {
 				delitem 517,1; //Meat
 				set morison_meat,morison_meat+1;
-				mes "[Little Morrison]";
+				mes "[꼬마 모리슨]";
 				mes "Wow~!!! Meat!!";
 				mes "So yummy!";
 				mes "Thank you,";
@@ -140,32 +124,27 @@ prt_in,47,173,3	script	Morrison#juice	97,{
 				close;
 			}
 			set morison_meat,15;
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "Waah...!";
 			mes "Fine, I get it now.";
 			mes "Adults are all the same!";
 			close;
 		case 3:
-			mes "[Little Morrison]";
+			mes "[꼬마 모리슨]";
 			mes "Aaaaah!!! No matter what, I'm not going to eat fruits and vegetables!";
 			close;
 		}
 	}
-	if (select("Talk:Cancel") == 1) {
-		mes "[Little Morrison]";
-		mes "Aaah!! I can't eat any more fruits!";
-		next;
-		mes "[Little Morrison]";
-		mes "I refuse to eat any more fruits! You have to peel them and there's so much juice that it makes you feel icky...";
-		next;
-		mes "[Little Morrison]";
-		mes "And they're all slippery and sour... Even if I eat it, I still feel hungry.";
-		mes "Aaaah~!";
-		mes "Give me Meat!";
+	if (select("대화를 한다:그만둔다") == 1) {
+		mes "[꼬마 모리슨]";
+		mes "아아아악!! 한두번이지!! 이젠 더이상 과일 못먹겠어요!";
+		mes "사실... 과일같은거... 일단 껍질벗겨야 되서 귀찮구 먹을때 물이 많아서 흥건해서 기분나쁘고";
+		mes "게다가 시큼하고  미끌거리기 까지... 그리고 먹고나면 허전해요. 아아아악! 고기를 줘요~";
 		close;
 	}
-	mes "[Little Morrison]";
-	mes "Aaaaah!!! No matter what, I'm not going to eat fruits and vegetables!";
+	mes "[꼬마 모리슨]";
+	mes "아아악!! 아무리 그래도 난 야채랑";
+	mes "과일은 먹을 수 없어요!";
 	close;
 }
 

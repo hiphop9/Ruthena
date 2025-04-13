@@ -18,5 +18,14 @@
 
 // Prontera
 //============================================================
-prontera,52,344,5	duplicate(prtguard)	Guard#1pront	105
+prontera,52,344,5	duplicate(prtguard)	병사#1pront	105
 
+prontera,139,98,5	script	수상한 사람#pr121	10144,{
+    mes "[수상한 사람]";
+    mes "라자냐는 '말랑도'에 모여 살고 있는";
+    mes "'고양이상단'의 고향이라는데.";
+    mes "아 그러고 보니 그 고양이 상단사람들";
+    mes "고양이가 아나라 '도람'이라고 한다";
+    mes "더군요.";
+    close;
+}

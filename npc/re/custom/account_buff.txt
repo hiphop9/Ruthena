@@ -1,0 +1,64 @@
+//프리미엄 버프 스크립트
+
+
+-	script	프리미엄 버프:Account_buff	-1,{
+OnPCLoginEvent:
+	if (#pexp_start + #pdrop_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_ITEMBOOST,#pdrop_duration,30,0,0,#pdrop_start;
+	} else {
+		#pdrop_start = 0;
+		#pdrop_duration = 0;
+	}
+	if (#pexp_start + #pexp_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_EXPBOOST,#pexp_duration,30,0,0,#pexp_start;
+	} else {
+		#pexp_start = 0;
+		#pexp_duration = 0;
+	}
+	if (#ppenalty_start + #ppenalty_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_DEADPENALTY,#ppenalty_duration,50,0,0,#ppenalty_start;
+	} else {
+		#ppenalty_start = 0;
+		#ppenalty_duration = 0;
+	}
+	if (#pre_start + #pre_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_PREMIUM_STORAGEBOOST,#pre_duration,0,0,0,#pre_start;
+		sc_start4 SC_PREMIUM_ITEMBOOST,#pre_duration,20,0,0,#pre_start;
+		sc_start4 SC_PREMIUM_EXPBOOST,#pre_duration,20,0,0,#pre_start;
+	} else {
+		#pre_start = 0;
+		#pre_duration = 0;
+	}
+	end;
+}
+
+-	script	프리미엄 버프1::Account_buff	-1,{
+OnPCLoginEvent:
+	if (#pdrop_start + #pdrop_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_ITEMBOOST,#pdrop_duration,30,0,0,#pdrop_start;
+	} else {
+		#pdrop_start = 0;
+		#pdrop_duration = 0;
+	}
+	if (#pexp_start + #pexp_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_EXPBOOST,#pexp_duration,30,0,0,#pexp_start;
+	} else {
+		#pexp_start = 0;
+		#pexp_duration = 0;
+	}
+	if (#ppenalty_start + #ppenalty_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_SUB_DEADPENALTY,#ppenalty_duration,50,0,0,#ppenalty_start;
+	} else {
+		#ppenalty_start = 0;
+		#ppenalty_duration = 0;
+	}
+	if (#pre_start + #pre_duration/1000 > gettimetick(2)) {
+		sc_start4 SC_PREMIUM_STORAGEBOOST,#pre_duration,0,0,0,#pre_start;
+		sc_start4 SC_PREMIUM_ITEMBOOST,#pre_duration,20,0,0,#pre_start;
+		sc_start4 SC_PREMIUM_EXPBOOST,#pre_duration,20,0,0,#pre_start;
+	} else {
+		#pre_start = 0;
+		#pre_duration = 0;
+	}
+	end;
+}

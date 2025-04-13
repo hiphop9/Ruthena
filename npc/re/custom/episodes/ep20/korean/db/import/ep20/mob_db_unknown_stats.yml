@@ -1,0 +1,765 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: MOB_DB
+  Version: 3
+
+Body:
+  - Id: 21965
+    AegisName: EP20_COPO
+    BaseExp: 378702
+    JobExp: 265091
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21966
+    AegisName: EP20_ICEWIND1
+    BaseExp: 385382
+    JobExp: 269767
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21967
+    AegisName: EP20_ICEWIND2
+    BaseExp: 604690
+    JobExp: 423283
+    Attack: 9000
+    Attack2: 1200
+    MagicResistance: 190
+    Resistance: 130
+    Str: 310
+    Agi: 180
+    Vit: 100
+    Int: 150
+    Dex: 200
+    Luk: 180
+    WalkSpeed: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21968
+    AegisName: EP20_EGGCOPO
+    BaseExp: 394611
+    JobExp: 276228
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21969
+    AegisName: EP20_RABBIT_ICESLUG
+    BaseExp: 380040
+    JobExp: 266028
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 1152
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21970
+    AegisName: EP20_MELIBE_ICESLUG
+    BaseExp: 619699
+    JobExp: 433789
+    Attack: 9000
+    Attack2: 1200
+    MagicResistance: 190
+    Resistance: 130
+    Str: 310
+    Agi: 180
+    Vit: 100
+    Int: 150
+    Dex: 200
+    Luk: 180
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 02
+
+  - Id: 21971
+    AegisName: EP20_ICEBEAR
+    BaseExp: 586911
+    JobExp: 410838
+    Attack: 9000
+    Attack2: 1200
+    MagicResistance: 190
+    Resistance: 130
+    Str: 310
+    Agi: 180
+    Vit: 100
+    Int: 150
+    Dex: 200
+    Luk: 180
+    WalkSpeed: 120
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 04
+    Modes:
+      Detector: true
+
+  - Id: 21972
+    AegisName: EP20_JORMUNGUARD1
+    BaseExp: 416881
+    JobExp: 291817
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+    Modes:
+      Detector: true
+
+  - Id: 21973
+    AegisName: EP20_JORMUNGUARD2
+    BaseExp: 412611
+    JobExp: 288828
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+    Modes:
+      Detector: true
+
+  - Id: 21974
+    AegisName: EP20_FAKE_IWIN_SN
+    BaseExp: 378702
+    JobExp: 265091
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21975
+    AegisName: EP20_FAKE_IWIN_SY
+    BaseExp: 386605
+    JobExp: 270624
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21976
+    AegisName: EP20_FAKE_IWIN_SB
+    BaseExp: 402721
+    JobExp: 281905
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21977
+    AegisName: EP20_FAKE_IWIN_SG
+    BaseExp: 410939
+    JobExp: 287657
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21978
+    AegisName: EP20_FAKE_IWIN_SR
+    BaseExp: 421113
+    JobExp: 294779
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21979
+    AegisName: EP20_DEMIGOD_LASGAND
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackRange: 2
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+
+  - Id: 21980
+    AegisName: EP20_BOSS_CLANER
+    Hp: 275042400
+    BaseExp: 0
+    JobExp: 0
+    Attack: 15000
+    Attack2: 3000
+    Defense: 650
+    MagicDefense: 150
+    MagicResistance: 450
+    Resistance: 250
+    Str: 400
+    Agi: 240
+    Vit: 220
+    Int: 380
+    Dex: 260
+    Luk: 180
+    AttackRange: 2
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+
+  - Id: 21981
+    AegisName: MD_EP20_BOSS_LASGAND
+    BaseExp: 0
+    JobExp: 0
+    Attack: 15000
+    Attack2: 3000
+    MagicResistance: 250
+    Resistance: 250
+    Str: 400
+    Agi: 240
+    Vit: 220
+    Int: 380
+    Dex: 260
+    Luk: 180
+    AttackRange: 2
+    WalkSpeed: 170
+    AttackDelay: 864
+    DamageMotion: 864
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+
+  - Id: 21982
+    AegisName: MD_EP20_FALLENANGEL
+    BaseExp: 606591
+    JobExp: 424614
+    MvpExp: 404394
+    Attack: 15000
+    Attack2: 3000
+    MagicResistance: 450
+    Resistance: 250
+    Str: 400
+    Agi: 240
+    Vit: 220
+    Int: 380
+    Dex: 360
+    Luk: 180
+    AttackRange: 2
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+
+  - Id: 21983
+    AegisName: EP20_ANGEL_ICESLUG
+    BaseExp: 401571
+    JobExp: 281100
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21984
+    AegisName: EP20_ICEEGG
+    BaseExp: 378702
+    JobExp: 265091
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+
+  - Id: 21985
+    AegisName: EP20_RGAN_WARLOCK
+    BaseExp: 420480
+    JobExp: 294336
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21986
+    AegisName: EP20_RGAN_HEALER
+    BaseExp: 416927
+    JobExp: 291849
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21987
+    AegisName: EP20_JORGAN_WARLOCK
+    BaseExp: 451623
+    JobExp: 316136
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21988
+    AegisName: EP20_JORGAN_HEALER
+    BaseExp: 482901
+    JobExp: 338031
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21989
+    AegisName: EP20_JORGAN_GUARDIAN
+    BaseExp: 439230
+    JobExp: 307461
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21990
+    AegisName: EP20_JORGAN_CLEANER
+    BaseExp: 625451
+    JobExp: 437816
+    Attack: 9000
+    Attack2: 1200
+    MagicResistance: 190
+    Resistance: 130
+    Str: 310
+    Agi: 180
+    Vit: 100
+    Int: 150
+    Dex: 200
+    Luk: 180
+    AttackRange: 2
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 21991
+    AegisName: MD_EP20_JOR_G_P
+    Level: 220
+    Hp: 8000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    Defense: 341
+    MagicDefense: 130
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackRange: 2
+    Size: Small
+    Race: Demon
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 630
+    AttackMotion: 1344
+    DamageMotion: 478
+    Ai: 04
+
+  - Id: 21992
+    AegisName: MD_EP20_JOR_G_Y
+    Level: 220
+    Hp: 8000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    Defense: 229
+    MagicDefense: 230
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackRange: 2
+    Size: Small
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 773
+    AttackMotion: 768
+    DamageMotion: 478
+    Ai: 04
+
+  - Id: 21993
+    AegisName: MD_EP20_JOR_WARLOCK
+    Level: 220
+    Hp: 8000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    Defense: 347
+    MagicDefense: 191
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackRange: 2
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 693
+    AttackMotion: 864
+    DamageMotion: 478
+    Ai: 04
+
+  - Id: 21994
+    AegisName: EP20_MD_HEARTHUNTER1
+    Level: 220
+    Hp: 8000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    Defense: 230
+    MagicDefense: 230
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    AttackRange: 1
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 441
+    AttackMotion: 1080
+    DamageMotion: 478
+    Ai: 04
+
+  - Id: 21995
+    AegisName: EP20_NPC_COCOPO
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1
+    Attack2: 1
+    Str: 1
+    Agi: 1
+    Vit: 1
+    Int: 1
+    Dex: 1
+    Luk: 1
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+
+  - Id: 21996
+    AegisName: EP20_SNOW_ANGEL
+    Hp: 180000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 15000
+    Attack2: 3000
+    MagicResistance: 450
+    Resistance: 250
+    Str: 400
+    Agi: 240
+    Vit: 220
+    Int: 380
+    Dex: 260
+    Luk: 180
+    AttackRange: 2
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+
+  - Id: 21997
+    AegisName: G_EP20_JORMUNGUARD1
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+    Modes:
+      Detector: true
+
+  - Id: 21998
+    AegisName: G_EP20_JORMUNGUARD2
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 01
+    Modes:
+      Detector: true
+
+  - Id: 22000
+    AegisName: G_EP20_ANGEL_ICESLUG
+    BaseExp: 0
+    JobExp: 0
+    Attack: 8300
+    Attack2: 1000
+    MagicResistance: 140
+    Resistance: 140
+    Str: 280
+    Agi: 190
+    Vit: 125
+    Int: 120
+    Dex: 180
+    Luk: 150
+    DamageMotion: 864
+    Ai: 04
+
+  - Id: 22004
+    AegisName: EP20_MD_BOX1
+    Level: 1
+    Hp: 10
+    Class: Boss
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+
+  - Id: 22005
+    AegisName: EP20_MD_BOX2
+    Level: 1
+    Hp: 10
+    Class: Boss
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+
+  - Id: 23060
+    AegisName: EP20_ARMOERDCOPO
+    BaseExp: 593293
+    JobExp: 415305
+    Attack: 9000
+    Attack2: 1200
+    MagicResistance: 190
+    Resistance: 130
+    Str: 310
+    Agi: 180
+    Vit: 100
+    Int: 150
+    Dex: 200
+    Luk: 180
+    WalkSpeed: 170
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 864
+    Ai: 01
+

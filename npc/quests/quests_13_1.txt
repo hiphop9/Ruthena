@@ -34,56 +34,56 @@
 // Onward to the New World :: ep13_gogo
 //============================================================ 
 function	script	Promotional_Staff	{
-	mes "[Promotional Staff]";
-	mes "We are looking for adventurers who are super curious and extremely brave.";
-	mes "Join us for a wonderful adventure!";
+	mes "[홍보요원]";
+	mes "저희는 호기심이 많고 용감한 모험가님을 찾고 있습니다.";
+	mes "멋진 모험에 함께 해주세요!";
 	next;
-	mes "[Promotional Staff]";
-	mes "Hey, you're a knowledgeable person, right? Are you interested in my story?";
+	mes "[홍보요원]";
+	mes "야, 너 지식이 풍부한 사람이구나? 내 이야기에 관심있니?";
 	next;
-	switch(select("Yes.:No, thanks.")) {
+	switch(select("예.:아니요, 고마워요..")) {
 	case 1:
-		mes "[Promotional Staff]";
-		mes "You're a real adventurer.";
-		mes "Good for you!";
-		mes "You won't regret it.";
+		mes "[홍보요원]";
+		mes "당신은 진정한 모험가이군요.";
+		mes "잘됐네요!";
+		mes "후회하지 않으실 겁니다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "I usually send adventurers to";
-		mes "newly found places for research.";
-		mes "It's quite challeging, as nobody's ever been to these places.";
+		mes "[홍보요원]";
+		mes "저는 주로 모험가들을 보냅니다.";
+		mes "새롭게 발견된 연구 장소.";
+		mes "아무도 이곳에 가본 적이 없기 때문에 꽤 도전적이에요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "The missions are quite dangerous,";
-		mes "so only those who are courageous";
-		mes "are qualified for the challenge";
-		mes "of this mission.";
+		mes "[홍보요원]";
+		mes "임무는 꽤 위험해요.";
+		mes "용감한 사람만이";
+		mes "도전할 자격이 있습니다";
+		mes "이 임무의.";
 		next;
-		mes "[Promotional Staff]";
-		mes "I'm not sure that you're strong enough, but you seem brave. How about going to the kingdom receptionist? He should be in the first room of Prontera Castle.";
+		mes "[홍보요원]";
+		mes "당신이 충분히 강할지는 모르겠지만, 용감해 보이는군요. 왕국 접수원에게 가보는 건 어때요? 그 사람은 프론테라 성의 첫 번째 방에 있을 거에요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "From what I've heard about this place... It's not a new continent.";
-		mes "I don't know where it is.";
-		mes "Hmm... Inside of the sky?";
+		mes "[홍보요원]";
+		mes "제가 듣기로는 이곳은... 신대륙이 아니거든요.";
+		mes "어디인지 모르겠어요.";
+		mes "흠..하늘 속인가?";
 		next;
-		mes "[Promotional Staff]";
-		mes "Could just be a rumor,";
-		mes "but I don't know exactly.";
-		mes "It's not my business.";
+		mes "[홍보요원]";
+		mes "그냥 소문일 수도 있어요,";
+		mes "하지만 정확히는 모르겠어요.";
+		mes "그건 내 알 바 아니다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Anyway, I'm supposed to inform many adventurers about it.";
-		mes "There's no time to waste!";
+		mes "[홍보요원]";
+		mes "어쨌든 많은 모험가님들께 알려드려야겠습니다.";
+		mes "더 이상 낭비할 시간이 없어요!";
 		close;
 	case 2:
-		mes "[Promotional Staff]";
-		mes "Huh, I thought you were a real adventurer. You're missing a big opportunity. You're definitely not brave. Absolutely not!";
+		mes "[홍보요원]";
+		mes "응, 진짜 모험가인줄 알았는데 큰 기회를 놓치셨네요. 정말 용감하지 않으시네요. 절대 아닙니다!";
 		close;
 	}
 }
 
-prontera,163,53,3	script	Promotional Staff#prt	100,{
+prontera,163,53,3	script	홍보요원#prt	100,{
 	callfunc "Promotional_Staff";
 	end;
 }
@@ -354,147 +354,147 @@ prontera,163,53,3	script	Promotional Staff#prt	100,{
 	}
 }
 
-aldebaran,127,138,3	script	Promotional Staff#alde	100,{
+aldebaran,127,138,3	script	홍보요원#alde	100,{
 	if (ep13_ryu > 3) {
-		mes "[Promotional Staff]";
-		mes "Did you try out for the test, or are you already enjoying your adventures?";
+		mes "[홍보요원]";
+		mes "테스트를 해보셨나요, 아니면 이미 모험을 즐기고 계신가요?";
 		close;
 	}
 	if (ep13_ryu == 3) {
-		mes "[Promotional Staff]";
-		mes "Just visit the ^FF0000Promotional Staff in Geffen^000000. You have no business with me anymore. Bless you. I wish you a safe adventure.";
+		mes "[홍보요원]";
+		mes "그냥 게펜에 있는 ^FF0000홍보직원^000000을 방문하세요. 당신은 더 이상 나와 거래할 일이 없습니다. 축복합니다. 안전한 모험을 기원합니다.";
 		close;
 	}
 	if (ep13_ryu == 2) {
 		if (countitem(909) < 300) {
-			mes "[Promotional Staff]";
-			mes "Don't forget to bring... ^FF0000300 Jellopy^000000.";
-			mes "Got it? ^FF0000300 Jellopy^000000!";
-			mes "Let me know once you got them.";
+			mes "[홍보요원]";
+			mes "잊지 말고 가져가세요... ^FF0000300 젤리^000000.";
+			mes "알았어? ^FF0000300 젤리피^000000!";
+			mes "받으면 꼭 알려주세요.";
 			close;
 		}
-		mes "[Promotional Staff]";
-		mes "Hey! Let me know once you collect all of them.";
-		mes "Don't disturb me anymore. I'm a busy man... What a waste.";
+		mes "[홍보요원]";
+		mes "야! 다 모으면 알려줘.";
+		mes "더 이상 방해하지 마세요. 바쁜 사람이거든요... 아깝네요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Hm? Did you bring all of them?";
-		mes "No! It's quite an annoying job";
-		mes "I'm impressed that you managed to do such a menial thing to bring 300 Jellopy!";
+		mes "[홍보요원]";
+		mes "응? 다 가져왔어?";
+		mes "아니요! 정말 짜증나는 일이군요";
+		mes "젤로피 300개를 가져오는 이런 비천한 일을 했다는 게 정말 감동이에요!";
 		next;
-		mes "[Promotional Staff]";
-		mes "You have guts kid!";
-		mes "You're a good-willed person!";
-		mes "Ok, you win!";
-		mes "You pass!!";
+		mes "[홍보요원]";
+		mes "너 정말 배짱이 있구나 꼬마야!";
+		mes "당신은 좋은 사람이군요!";
+		mes "그래, 네가 이겼어!";
+		mes "합격!!";
 		next;
-		mes "[Promotional Staff]";
-		mes "Adventurers like you";
-		mes "are not common";
-		mes "A hard-boiled soldier!";
-		mes "Stronger than me!";
+		mes "[홍보요원]";
+		mes "당신 같은 모험가님";
+		mes "흔하지 않다";
+		mes "열심히 일하는 군인이군요!";
+		mes "나보다 더 강해!";
 		next;
-		mes "[Promotional Staff]";
-		mes "Now can you go to the";
-		mes "Promotional Staff in Geffen?";
-		mes "He will test you again.";
+		mes "[홍보요원]";
+		mes "이제 가보실 수 있나요?";
+		mes "게펜의 홍보담당 직원이요?";
+		mes "그가 너를 다시 시험할 것이다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "You know this isn't an easy quest.";
-		mes "You resolved to carry it out, didn't you?";
-		mes "Brace yourself for it.";
+		mes "[홍보요원]";
+		mes "이건 쉬운 퀘스트가 아닌거 아시죠?";
+		mes "그걸 실행하기로 결심했지, 그렇지?";
+		mes "힘내세요.";
 		next;
 		delitem 909,300; //Jellopy
 		changequest 10058,10059;
 		set ep13_ryu,3;
-		mes "[Promotional Staff]";
-		mes "Anyway you did the first step.";
-		mes "Bless you!";
+		mes "[홍보요원]";
+		mes "어쨌든 첫 번째 단계는 완료하셨네요.";
+		mes "축복을 빌어요!";
 		close;
 	}
 	if (ep13_ryu == 1) {
-		mes "[Promotional Staff]";
-		mes "We want the adventurers who are super curious and extremely brave. Join us for a wonderful adventure!";
+		mes "[홍보요원]";
+		mes "저희는 호기심이 많고 용감한 모험가를 원합니다. 멋진 모험에 함께 해주세요!";
 		next;
-		mes "[Promotional Staff]";
-		mes "Hey, you're a well-versed person, right? Are you interested in my story?";
+		mes "[홍보요원]";
+		mes "야, 너 참 잘 아는 사람이구나? 내 이야기에 관심 있니?";
 		next;
-		select("I have something for you.");
-		mes "[Promotional Staff]";
-		mes "For me??";
-		mes "I hate annoying stuff.";
+		select("당신에게 드릴 말씀이 있습니다.");
+		mes "[홍보요원]";
+		mes "나를 위해서??";
+		mes "저는 귀찮은걸 싫어해요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Ahh... I sensed that I would get your request.";
-		mes "The recruiter sent you here to get tested?";
-		mes "Hmm.";
+		mes "[홍보요원]";
+		mes "아... 네 부탁을 받을 줄 알았어.";
+		mes "채용 담당자가 당신을 여기로 테스트하라고 보냈나요?";
+		mes "흠.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Ah! They always push me,";
-		mes "to suffer from so much work";
-		mes "I live a hard life!";
+		mes "[홍보요원]";
+		mes "아! 항상 저를 밀어내요,";
+		mes "너무 많은 일로 고생하다";
+		mes "나는 열심히 살아요!";
 		next;
-		mes "[Promotional Staff]";
-		mes "My job is testing if you are strong and brave enough for this adventure.";
-		mes "What a bother!";
+		mes "[홍보요원]";
+		mes "내 임무는 당신이 이 모험을 할 만큼 강하고 용감한지 테스트하는 것입니다.";
+		mes "뭔가 귀찮아!";
 		next;
-		mes "[Promotional Staff]";
-		mes "I will accept you if you bring me ^FF0000300 Jellopy^000000.";
-		mes "I believe that you can bring them to me.";
-		mes "Are you ready?";
+		mes "[홍보요원]";
+		mes "^FF0000300젤로피^000000 가져오시면 받아드리겠습니다.";
+		mes "나는 당신이 그것을 나에게 가져다 줄 수 있다고 믿습니다.";
+		mes "준비됐나요?";
 		next;
 		changequest 10057,10058;
 		set ep13_ryu,2;
-		mes "[Promotional Staff]";
-		mes "Just go ahead and hunt monsters, or whatever and collect 300 jellopies.";
-		mes "Then we can go forward.";
+		mes "[홍보요원]";
+		mes "몬스터 사냥이든 뭐든 젤리 300개 모으세요.";
+		mes "그럼 앞으로 나아갈 수 있겠네요.";
 		close;
 	}
 	callfunc "Promotional_Staff";
 	end;
 }
 
-geffen,90,67,3	script	Promotional Staff#gef	100,{
+geffen,90,67,3	script	홍보요원#gef	100,{
 	if (ep13_ryu > 6) {
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Did you take the test?";
 		mes "Or are you already enjoying your adventure?";
 		close;
 	}
 	if (ep13_ryu == 6) {
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "You didn't visit ^FF0000Izlude^000000, did you?";
 		mes "Or do you have any business in Geffen?";
 		close;
 	}
 	if (ep13_ryu == 5) {
 		if (countitem(723) == 0) {
-			mes "[Promotional Staff]";
+			mes "[홍보요원]";
 			mes "^FF00001 Ruby!!^000000.";
 			mes "Don't you forget it!";
 			mes "Hurry up! Time is zeny!";
 			close;
 		}
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Wow, you brought a genuine Jewel.";
 		mes "You are absolutely qualified.";
 		mes "I can tell these things.";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Am I exaggerating?";
 		mes "It's true that you're";
 		mes "considerably strong.";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Ok! My job is done.";
 		mes "Good job!!";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Next step is Izlude!";
 		mes "You can get tested by the Promotional Staff there.";
 		mes "Hurry up!";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "The unknown place...";
 		mes "It is a very dangerous place so you must go through these tests before we can send you....";
 		mes "We're pretty picky.";
@@ -502,28 +502,28 @@ geffen,90,67,3	script	Promotional Staff#gef	100,{
 		delitem 723,1; //Cardinal_Jewel
 		changequest 10061,10062;
 		set ep13_ryu,6;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "I hope you can do it!";
 		mes "Good luck!";
 		close;
 	}
 	if (ep13_ryu == 4) {
 		if (countitem(721) == 0) {
-			mes "[Promotional Staff]";
+			mes "[홍보요원]";
 			mes "The one you should bring me is";
 			mes "^FF0000Emerald^000000. Can you get it?";
 			close;
 		}
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "You brought it so soon!";
 		mes "You're a real adventurer!";
 		mes "I will accept this Emerald as evidence.";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "This isn't something I wanted to keep for myself.";
 		mes "You know that, right?";
 		next;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Next bring me ^FF00001 Ruby^000000.";
 		mes "I can't judge you with only one jewel.";
 		mes "So I need one more stone.";
@@ -531,39 +531,39 @@ geffen,90,67,3	script	Promotional Staff#gef	100,{
 		delitem 721,1; //Azure_Jewel
 		changequest 10060,10061;
 		set ep13_ryu,5;
-		mes "[Promotional Staff]";
+		mes "[홍보요원]";
 		mes "Please bring me a Ruby.";
 		mes "As I mentioned, this is the second request.";
 		mes "I will wait until you bring me a stone again.";
 		close;
 	}
 	if (ep13_ryu == 3) {
-		mes "[Promotional Staff]";
-		mes "We are recruiting adventurers who are strong and curious. Try your life at something more challenging.";
+		mes "[홍보요원]";
+		mes "강하고 호기심이 강한 모험가님들을 모집합니다. 좀 더 도전적인 삶을 살아보세요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Hey, you're a knowledgeable person, right? Are you interested in my story?";
+		mes "[홍보요원]";
+		mes "야, 너 지식이 풍부한 사람이구나? 내 이야기에 관심있니?";
 		next;
-		select("The Staff in Aldebaran sent me.");
-		mes "[Promotional Staff]";
-		mes "Oh he did?";
+		select("알데바란의 직원이 저에게 보냈습니다.");
+		mes "[홍보요원]";
+		mes "아 그 사람이 그랬어?";
 		next;
-		mes "[Promotional Staff]";
-		mes "Ok, I guess that it's time for the second part of your test.";
+		mes "[홍보요원]";
+		mes "좋아, 이제 두 번째 테스트 시간이 된 것 같다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "I need you to gather some stones for me.";
+		mes "[홍보요원]";
+		mes "돌 좀 모아주세요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "I will accept you if you bring ^FF00001 Emerald^000000.";
-		mes "Are you ready?";
+		mes "[홍보요원]";
+		mes "^FF00001 에메랄드^000000 가져오시면 받아드리겠습니다.";
+		mes "준비됐나요?";
 		next;
 		changequest 10059,10060;
 		set ep13_ryu,4;
-		mes "[Promotional Staff]";
-		mes "Just bring me ^ff00001 Emerald^000000.";
-		mes "That isn't hard for you right?";
-		mes "Then we can go forward.";
+		mes "[홍보요원]";
+		mes "^ff00001 에메랄드^000000 가져오세요.";
+		mes "그건 어렵지 않죠?";
+		mes "그럼 앞으로 나아갈 수 있겠네요.";
 		close;
 	}
 	callfunc "Promotional_Staff";
@@ -572,130 +572,130 @@ geffen,90,67,3	script	Promotional Staff#gef	100,{
 
 -	script	::PromotionalStaff_izlude	-1,{
 	if (ep13_ryu > 8) {
-		mes "[Promotional Staff]";
-		mes "I bless you for your future! May it be full of happiness!";
+		mes "[홍보요원]";
+		mes "당신의 앞날을 축복합니다! 행복이 가득하시길!";
 		close;
 	}
 	if (ep13_ryu == 8) {
-		mes "[Promotional Staff]";
-		mes "The test is done!";
-		mes "If you have any other business, go to the palace.";
+		mes "[홍보요원]";
+		mes "테스트가 완료되었습니다!";
+		mes "다른 일 있으면 궁으로 가세요.";
 		close;
 	}
 	if (ep13_ryu == 7) {
 		if (BaseLevel < 70) {
-			mes "[Promotional Staff]";
-			mes "You don't look that strong.";
-			mes "Nothing but skin and bones!";
-			mes "Not reliable.";
-			mes "You should level up more before";
-			mes "considering this adventure.";
+			mes "[홍보요원]";
+			mes "그렇게 강해 보이지는 않는데.";
+			mes "가죽과 뼈밖에 없어요!";
+			mes "신뢰할 수 없습니다.";
+			mes "그 전에 레벨을 더 올려야 해요";
+			mes "이 모험을 고려하고 있습니다.";
 			next;
-			mes "[Promotional Staff]";
-			mes "I don't need adventurers who are";
-			mes "body-builders... but at least";
-			mes "someone not so little!!";
+			mes "[홍보요원]";
+			mes "나는 그런 모험가가 필요하지 않아요";
+			mes "보디빌더들... 하지만 적어도";
+			mes "그렇게 작지도 않은 사람!!";
 			close;
 		}
-		mes "[Promotional Staff]";
-		mes "Wow! You are considerably";
-		mes "stronger than before!";
-		mes "Let me see...";
-		mes "You look different!";
+		mes "[홍보요원]";
+		mes "와! 정말 대단하시네요";
+		mes "이전보다 더 강해졌어요!";
+		mes "어디 좀 볼까...";
+		mes "당신은 달라보이네요!";
 		next;
-		mes "[Promotional Staff]";
-		mes "Um...";
+		mes "[홍보요원]";
+		mes "음...";
 		next;
-		mes "[Promotional Staff]";
-		mes "Ok, it's done!";
-		mes "You seemed a sore weak of a soul,";
-		mes "but now, you're quite stronger than";
-		mes "before. Great! You will do!!";
+		mes "[홍보요원]";
+		mes "좋아, 끝났어!";
+		mes "당신은 정말 영혼이 약한 사람 같았어요,";
+		mes "하지만 지금은 당신보다 훨씬 강해요";
+		mes "전에. 좋아요! 그럴 거예요!!";
 		next;
-		mes "[Promotional Staff]";
-		mes "We have quite high expectations to meet.";
-		mes "Though the new place is dangerous,";
-		mes "no need to check thoroughly";
-		mes "anymore.";
+		mes "[홍보요원]";
+		mes "우리는 기대하는 바가 매우 큽니다.";
+		mes "새로운 곳은 위험하지만,";
+		mes "철저하게 확인할 필요는 없습니다";
+		mes "더 이상.";
 		next;
-		mes "[Promotional Staff]";
-		mes "It's not a hell-hole!";
-		mes "Ukk!";
+		mes "[홍보요원]";
+		mes "지옥같은 곳은 아니예요!";
+		mes "으윽!";
 		next;
-		mes "[Promotional Staff]";
-		mes "Anyway, just go back to the";
-		mes "Recruiter. I will forward to him";
-		mes "that you passed all the steps. Good";
-		mes "job, friend!";
+		mes "[홍보요원]";
+		mes "어쨌든 다시 돌아가세요";
+		mes "채용자님. 그 사람에게 전달하겠습니다";
+		mes "모든 단계를 통과했습니다. 좋아요";
+		mes "일, 친구!";
 		next;
 		changequest 10063,10064;
 		set ep13_ryu,8;
-		mes "[Promotional Staff]";
-		mes "Bless all of your heart,";
-		mes "for your great future!";
+		mes "[홍보요원]";
+		mes "온 마음을 축복하소서,";
+		mes "당신의 위대한 미래를 위해!";
 		close;
 	}
 	if (ep13_ryu == 6) {
-		mes "[Promotional Staff]";
-		mes "We are recruiting adventurers";
-		mes "who are quite strong and curious.";
+		mes "[홍보요원]";
+		mes "모험가를 모집합니다";
+		mes "매우 강하고 호기심이 많은 사람입니다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Hey, you're a knowledgeable adventurer. Are you interested in my story?";
+		mes "[홍보요원]";
+		mes "야, 당신은 지식이 풍부한 모험가이군요. 제 이야기에 관심이 있으신가요?";
 		next;
-		select("I have something for you.");
-		mes "[Promotional Staff]";
-		mes "Um, you're the one sent to be tested, correct? You are in the right place. I'm the Promotional Staff in Izlude.";
+		select("당신에게 드릴 말씀이 있습니다.");
+		mes "[홍보요원]";
+		mes "음, 테스트를 위해 파견된 사람이 바로 당신이군요. 제대로 오셨습니다. 저는 이즈루드의 홍보담당입니다.";
 		next;
-		mes "[Promotional Staff]";
-		mes "I guess you're qualified enough to go... I think no more testing is needed.";
+		mes "[홍보요원]";
+		mes "당신은 갈 자격이 충분한 것 같아요... 더 이상 테스트는 필요하지 않을 것 같아요.";
 		next;
-		mes "[Promotional Staff]";
-		mes "Let me see...";
+		mes "[홍보요원]";
+		mes "어디 좀 볼까...";
 		next;
 		if (BaseLevel > 69) {
-			mes "[Promotional Staff]";
-			mes "I think you're good enough!";
-			mes "No more testing!!";
-			mes "Ok! You pass!";
+			mes "[홍보요원]";
+			mes "당신은 충분히 좋은 것 같아요!";
+			mes "더 이상 테스트하지 마세요!!";
+			mes "좋아! 합격이야!";
 			next;
-			mes "[Promotional Staff]";
-			mes "We have quite high expectations to meet.";
-			mes "Though the new place is dangerous,";
-			mes "no need to check thoroughly right now.";
+			mes "[홍보요원]";
+			mes "우리는 기대하는 바가 매우 큽니다.";
+			mes "새로운 곳은 위험하지만,";
+			mes "지금은 자세히 확인할 필요가 없습니다.";
 			next;
-			mes "[Promotional Staff]";
-			mes "It's not a hell-hole!";
-			mes "Ukk...";
+			mes "[홍보요원]";
+			mes "지옥같은 곳은 아니예요!";
+			mes "으윽...";
 			next;
-			mes "[Promotional Staff]";
-			mes "Anyway, just go back to the recruiter.";
-			mes "I will forward to him that you passed all the steps.";
-			mes "Good job, friend!";
+			mes "[홍보요원]";
+			mes "어쨌든 채용 담당자에게 돌아가세요.";
+			mes "당신이 모든 단계를 통과했다는 사실을 그 사람에게 전달하겠습니다.";
+			mes "수고했어, 친구!";
 			next;
 			changequest 10062,10064;
 			set ep13_ryu,8;
-			mes "[Promotional Staff]";
-			mes "May Freya bless you,";
-			mes "for your great future!";
+			mes "[홍보요원]";
+			mes "프레야의 축복이 있기를,";
+			mes "당신의 위대한 미래를 위해!";
 			close;
 		}
 		else {
-			mes "[Promotional Staff]";
-			mes "Hmm...";
+			mes "[홍보요원]";
+			mes "흠...";
 			next;
-			mes "[Promotional Staff]";
-			mes "You don't look that strong.";
-			mes "Nothing but skin and bones!";
-			mes "Not reliable.";
-			mes "I can't let you pass.";
+			mes "[홍보요원]";
+			mes "그렇게 강해 보이지는 않는데.";
+			mes "가죽과 뼈밖에 없어요!";
+			mes "신뢰할 수 없습니다.";
+			mes "당신을 지나갈 수 없어요.";
 			next;
 			changequest 10062,10063;
 			set ep13_ryu,7;
-			mes "[Promotional Staff]";
-			mes "Please level up a little more. I";
-			mes "can't accept that you're strong";
-			mes "enough. Sorry.";
+			mes "[홍보요원]";
+			mes "레벨을 좀 더 올려주세요. I";
+			mes "당신이 강하다는 사실을 받아들일 수 없어요";
+			mes "충분해요. 죄송해요.";
 			close;
 		}
 	}
@@ -703,20 +703,20 @@ geffen,90,67,3	script	Promotional Staff#gef	100,{
 	end;
 }
 
-lighthalzen,220,292,3	script	Guide#ep13_1	899,{
+lighthalzen,220,292,3	script	가이드#ep13_1	899,{
 	if (ep13_ryu > 8) {
-		mes "[Guide]";
-		mes "Welcome! You've arrived at Lighthalzen, which is the base of three kingdoms.";
+		mes "[가이드]";
+		mes "어서오세요! 삼국의 본거지인 라이할젠에 도착하셨습니다.";
 		next;
-		mes "[Guide]";
-		mes "You have to register your name. Go to the 2nd floor in Rekenbereu on the northwest side.";
+		mes "[가이드]";
+		mes "이름을 등록해야 합니다. 북서쪽 레켄베르우 2층으로 가세요.";
 		next;
-		mes "[Guide]";
-		mes "Be careful not to lose your way!";
+		mes "[가이드]";
+		mes "길 잃지 않도록 조심하세요!";
 		close;
 	}
-	mes "[Guide]";
-	mes "Welcome! You've arrived at Lighthalzen, which is the base of three kingdoms.";
+	mes "[가이드]";
+	mes "어서오세요! 삼국의 본거지인 라이할젠에 도착하셨습니다.";
 	close;
 }
 
@@ -1375,7 +1375,7 @@ ra_temple,119,113,3	script	Alliance Manager#ra	935,{
 	close;
 }
 
-lhz_in01,32,22,3	script	Officer A	109,{
+lhz_in01,32,22,3	script	????::Officer A	109,{
 	if (ep13_ryu == 20) {
 		mes "[Officer]";
 		mes "Why don't you go back there?";
@@ -1484,7 +1484,7 @@ lhz_in01,32,22,3	script	Officer A	109,{
 	close;
 }
 
-lhz_in01,30,24,5	script	Officer B	109,{
+lhz_in01,30,24,5	script	????::Officer B	109,{
 	if (ep13_ryu == 20) {
 		mes "[Officer]";
 		mes "Why don't you go back there?";

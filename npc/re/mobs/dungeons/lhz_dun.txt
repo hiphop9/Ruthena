@@ -29,48 +29,49 @@
 //==================================================
 // lhz_dun01 - Somatology Laboratory
 //==================================================
-lhz_dun01,0,0	monster	Remover	1682,101,5000
-lhz_dun01,0,0	monster	Anopheles	1627,70,5000
-lhz_dun01,0,0	monster	Metaling	1613,50,5000
-lhz_dun01,0,0	monster	Kavach Icarus	1656,13,5000
-lhz_dun01,0,0	monster	Errende Ebecee	1655,13,5000
-lhz_dun01,0,0	monster	Laurell Weinder	1657,11,5000
-lhz_dun01,0,0	monster	Wickebine Tres	1653,11,5000
-lhz_dun01,0,0	monster	Armeyer Dinze	1654,8,5000
-lhz_dun01,0,0	monster	Egnigem Cenia	1652,8,5000
-lhz_dun01,0,0	monster	Gemini-S58	1681,1,5000
+lhz_dun01,0,0	monster	리무버	1682,101,5000
+lhz_dun01,0,0	monster	위레스	1627,70,5000
+lhz_dun01,0,0	monster	메탈링	1613,50,5000
+lhz_dun01,0,0	monster	카바크 이카루스	1656,13,5000
+lhz_dun01,0,0	monster	이렌드 에베시	1655,13,5000
+lhz_dun01,0,0	monster	라우렐 뷘더	1657,11,5000
+lhz_dun01,0,0	monster	휘케바인 트리스	1653,11,5000
+lhz_dun01,0,0	monster	아르마이어 딘제	1654,8,5000
+lhz_dun01,0,0	monster	이그니젬 세니아	1652,8,5000
+lhz_dun01,0,0	monster	제미니-S58	1681,1,5000
 
 //==================================================
 // lhz_dun02 - Somatology Laboratory
 //==================================================
-lhz_dun02,0,0	monster	Laurell Weinder	1657,50,5000
-lhz_dun02,0,0	monster	Wickebine Tres	1653,50,5000
-lhz_dun02,0,0	monster	Kavach Icarus	1656,50,5000
-lhz_dun02,0,0	monster	Errende Ebecee	1655,50,5000
-lhz_dun02,0,0	monster	Egnigem Cenia	1652,50,5000
-lhz_dun02,0,0	monster	Armeyer Dinze	1654,50,5000
-lhz_dun02,0,0	monster	Remover	1682,20,5000
-lhz_dun02,0,0	monster	Gemini-S58	1681,10,5000
-lhz_dun02,0,0	monster	Eremes Guile	1635,1,5000
-lhz_dun02,0,0,0,0	boss_monster	Egnigem Cenia	1658,1,7200000,600000,1
+lhz_dun02,0,0	monster	라우렐 뷘더	1657,50,5000
+lhz_dun02,0,0	monster	휘케바인 트리스	1653,50,5000
+lhz_dun02,0,0	monster	카바크 이카루스	1656,50,5000
+lhz_dun02,0,0	monster	이렌드 에베시	1655,50,5000
+lhz_dun02,0,0	monster	이그니젬 세니아	1652,50,5000
+lhz_dun02,0,0	monster	아르마이어 딘제	1654,50,5000
+lhz_dun02,0,0	monster	리무버	1682,20,5000
+lhz_dun02,0,0	monster	제미니-S58	1681,10,5000
+lhz_dun02,0,0	monster	에레메스 가일	1635,1,5000
+lhz_dun02,0,0,0,0	boss_monster	이그니젬 세니아	1658,1,7200000,600000,1
 
 //==================================================
 // lhz_dun03 - Somatology Laboratory
 //==================================================
-lhz_dun03,0,0	monster	Cecil Damon	1638,81,5000
-lhz_dun03,0,0	monster	Kathryne Keyron	1639,57,5000
-lhz_dun03,0,0	monster	Margaretha Sorin	1637,42,5000
-lhz_dun03,0,0	monster	Howard Alt-Eisen	1636,42,5000
-lhz_dun03,0,0	monster	Eremes Guile	1635,42,5000
-lhz_dun03,0,0	monster	Seyren Windsor	1634,42,5000
-lhz_dun03,139,158,20,11	monster	Assassin Cross Eremes	1641,1,2580000,2340000
-lhz_dun03,138,138,36,34	monster	High Wizard Kathryne	1645,1,2580000,2460000
-lhz_dun03,114,138,12,16	monster	Lord Knight Seyren	1640,1,2700000,2400000
-lhz_dun03,139,117,20,11	monster	Sniper Cecil	1644,1,2700000,2500000
-lhz_dun03,163,138,12,16	monster	Whitesmith Howard	1642,1,3000000,2700000
-lhz_dun03,138,138,36,34	monster	High Priest Margaretha	1643,1,3300000,3000000
+lhz_dun03,0,0	monster	셰실 디먼	1638,81,5000
+lhz_dun03,0,0	monster	카트린느 케이론	1639,57,5000
+lhz_dun03,0,0	monster	마가레타 소린	1637,42,5000
+lhz_dun03,0,0	monster	하워드 알트아이젠	1636,42,5000
+lhz_dun03,0,0	monster	에레메스 가일	1635,42,5000
+lhz_dun03,0,0	monster	세이렌 윈저	1634,42,5000
+lhz_dun03,139,158,20,11	monster	어쌔신크로스 에레메스	1641,1,2580000,2340000
+lhz_dun03,138,138,36,34	monster	하이위자드 카트린느	1645,1,2580000,2460000
+lhz_dun03,114,138,12,16	monster	로드나이트 세이렌	1640,1,2700000,2400000
+lhz_dun03,139,117,20,11	monster	스나이퍼 셰실	1644,1,2700000,2500000
+lhz_dun03,163,138,12,16	monster	화이트스미스 하워드	1642,1,3000000,2700000
+lhz_dun03,138,138,36,34	monster	하이프리스트 마가레타	1643,1,3300000,3000000
 
 lhz_dun03,0,0,0	script	mvp_lhz_dun03	-1,{
+
 OnTimer6000000: // delay1 = 6000000 ms (100 min)
 	stopnpctimer;
 	sleep rand(0,30)*60000; // 0 to 30 minutes
@@ -110,22 +111,23 @@ OnMy99Dead:
 //========================================================================================
 // lhz_dun04 - Bio-life Labs 4F
 //========================================================================================
-lhz_dun04,0,0	monster	Randel	2221,42,5000
-lhz_dun04,0,0	monster	Flamel	2222,42,5000
-lhz_dun04,0,0	monster	Celia	2223,81,5000
-lhz_dun04,0,0	monster	Chen	2224,42,5000
-lhz_dun04,0,0	monster	Gertie	2225,57,5000
-lhz_dun04,0,0	monster	Alphoccio	2226,42,5000
-lhz_dun04,0,0	monster	Trentini	2227,42,5000
-lhz_dun04,0,0	monster	Paladin Randel	2228,1,3300000,3000000
-lhz_dun04,0,0	monster	Creator Flamel	2229,1,3300000,3000000
-lhz_dun04,0,0	monster	Professor Celia	2230,1,3300000,3000000
-lhz_dun04,0,0	monster	Champion Chen	2231,1,3300000,3000000
-lhz_dun04,0,0	monster	Stalker Gertie	2232,1,3300000,3000000
-lhz_dun04,0,0	monster	Clown Alphoccio	2233,1,3300000,3000000
-lhz_dun04,0,0	monster	Gypsy Trentini	2234,1,3300000,3000000
+lhz_dun04,0,0	monster	랜달 로랜스	2221,42,5000
+lhz_dun04,0,0	monster	플라멜 이뮬	2222,42,5000
+lhz_dun04,0,0	monster	실리아 알데	2223,81,5000
+lhz_dun04,0,0	monster	첸 리우	2224,42,5000
+lhz_dun04,0,0	monster	거티 위	2225,57,5000
+lhz_dun04,0,0	monster	아르보치오 바실	2226,42,5000
+lhz_dun04,0,0	monster	트렌티니	2227,42,5000
+lhz_dun04,0,0	monster	팔라딘 랜달	2228,1,3300000,3000000
+lhz_dun04,0,0	monster	크리에이터 플라멜	2229,1,3300000,3000000
+lhz_dun04,0,0	monster	프로페서 실리아	2230,1,3300000,3000000
+lhz_dun04,0,0	monster	챔피언 첸	2231,1,3300000,3000000
+lhz_dun04,0,0	monster	스토커 거티	2232,1,3300000,3000000
+lhz_dun04,0,0	monster	크로운 아르보치오	2233,1,3300000,3000000
+lhz_dun04,0,0	monster	집시 트렌티니	2234,1,3300000,3000000
 
 lhz_dun04,0,0,0	script	mvp_lhz_dun04	-1,{
+
 OnTimer6000000: // delay1 = 6000000 ms (100 min)
 	stopnpctimer;
 	sleep rand(0,30)*60000; // 0 to 30 minutes

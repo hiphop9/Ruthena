@@ -16,6 +16,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_mapif.hpp"
@@ -126,7 +127,10 @@ int inter_party_tosql(struct party *p, int flag, int index)
 	party_id = p->party_id;
 
 #ifdef NOISY
-	ShowInfo("Save party request (" CL_BOLD "%d" CL_RESET " - %s).\n", party_id, p->name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("("CL_BOLD"%d"CL_RESET" - %s)의 파티에 대해 저장을 DB에 요청했습니다.\n", party_id, p->name);
+	else
+		ShowInfo("Save party request (" CL_BOLD "%d" CL_RESET " - %s).\n", party_id, p->name);
 #endif
 	Sql_EscapeStringLen(sql_handle, esc_name, p->name, strnlen(p->name, NAME_LENGTH));
 
@@ -183,8 +187,12 @@ int inter_party_tosql(struct party *p, int flag, int index)
 			Sql_ShowDebug(sql_handle);
 	}
 
-	if( charserv_config.save_log )
-		ShowInfo("Party Saved (%d - %s)\n", party_id, p->name);
+	if( charserv_config.save_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s(%d) 파티가 저장되었습니다.\n", p->name, party_id);
+		else
+			ShowInfo("Party Saved (%d - %s)\n", party_id, p->name);
+	}
 	return 1;
 }
 
@@ -198,7 +206,10 @@ std::shared_ptr<struct party_data> inter_party_fromsql( int party_id ){
 	int i;
 
 #ifdef NOISY
-	ShowInfo("Load party request (" CL_BOLD "%d" CL_RESET ")\n", party_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("("CL_BOLD"%d"CL_RESET")의 파티 데이터 로드를 DB에 요청했습니다.\n", party_id);
+	else
+		ShowInfo("Load party request (" CL_BOLD "%d" CL_RESET ")\n", party_id);
 #endif
 	if( party_id <= 0 )
 		return nullptr;
@@ -249,8 +260,12 @@ std::shared_ptr<struct party_data> inter_party_fromsql( int party_id ){
 	}
 	Sql_FreeResult(sql_handle);
 
-	if( charserv_config.save_log )
-		ShowInfo("Party loaded (%d - %s).\n", party_id, p->party.name);
+	if( charserv_config.save_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("%s(%d) 파티 데이터를 로드했습니다.\n",p->party.name, party_id );
+		else
+			ShowInfo("Party loaded (%d - %s).\n", party_id, p->party.name);
+	}
 
 	//init state
 	int_party_calc_state(p);
@@ -264,7 +279,10 @@ int inter_party_sql_init(void)
 {
 	// Remove parties with no members on startup from party_db. [Skotlex]
 	if (charserv_config.clear_parties) {
-		ShowStatus("Cleaning party table...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("파티 테이블 비우는중...\n");
+		else
+			ShowStatus("Cleaning party table...\n");
 		if (SQL_ERROR == Sql_Query(sql_handle, "DELETE FROM `%s` USING `%s` LEFT JOIN `%s` ON `%s`.leader_id =`%s`.account_id AND `%s`.leader_char = `%s`.char_id WHERE `%s`.account_id IS NULL",
 								   schema_config.party_db, schema_config.party_db, schema_config.char_db, schema_config.party_db, schema_config.char_db, schema_config.party_db, schema_config.char_db, schema_config.char_db))
 			Sql_ShowDebug(sql_handle);
@@ -372,7 +390,10 @@ int mapif_party_created(int fd,uint32 account_id,uint32 char_id,struct party *p)
 		WFIFOB(fd,10)=0;
 		WFIFOL(fd,11)=p->party_id;
 		memcpy(WFIFOP(fd,15),p->name,NAME_LENGTH);
-		ShowInfo("int_party: Party created (%d - %s)\n",p->party_id,p->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("int_party: %s(%d) 파티가 생성되었습니다.\n",p->name,p->party_id);
+		else
+			ShowInfo("int_party: Party created (%d - %s)\n",p->party_id,p->name);
 	}else{
 		WFIFOB(fd,10)=1;
 		WFIFOL(fd,11)=0;
@@ -392,7 +413,10 @@ void mapif_party_noinfo(int fd, int party_id, uint32 char_id)
 	WFIFOL(fd,4) = char_id;
 	WFIFOL(fd,8) = party_id;
 	WFIFOSET(fd,12);
-	ShowWarning("int_party: info not found (party_id=%d char_id=%d)\n", party_id, char_id);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowWarning("int_party: (파티 ID=%d 케릭터 ID=%d)에 대한 정보를 찾을 수 없습니다.\n", party_id, char_id);
+	else
+		ShowWarning("int_party: info not found (party_id=%d char_id=%d)\n", party_id, char_id);
 }
 
 //Digest party information
@@ -861,7 +885,10 @@ int inter_party_CharOnline(uint32 char_id, int party_id)
 	std::shared_ptr<struct party_data> p = inter_party_fromsql( party_id );
 
 	if(!p) {
-		ShowError("Character %d's party %d not found!\n", char_id, party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("케릭터 %d의 파티 %d을(를) 찾을 수 없습니다.\n", char_id, party_id);
+		else
+			ShowError("Character %d's party %d not found!\n", char_id, party_id);
 		return 0;
 	}
 
@@ -939,14 +966,20 @@ int inter_party_charname_changed(int party_id, uint32 char_id, char *name)
 	std::shared_ptr<struct party_data> p = inter_party_fromsql( party_id );
 
 	if( p == nullptr || p->party.party_id == 0 ){
-		ShowError("inter_party_charname_changed: Can't find party %d.\n", party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter_party_charname_changed: %d의 파티를 찾을 수 업습니다..\n", party_id);
+		else
+			ShowError("inter_party_charname_changed: Can't find party %d.\n", party_id);
 		return 0;
 	}
 
 	ARR_FIND(0, MAX_PARTY, i, p->party.member[i].char_id == char_id);
 	if( i == MAX_PARTY )
 	{
-		ShowError("inter_party_charname_changed: Can't find character %d in party %d.\n", char_id, party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter_party_charname_changed: 파티 %d에서 케릭터 %d을(를) 찾을 수 없습니다.\n", party_id, char_id);
+		else
+			ShowError("inter_party_charname_changed: Can't find character %d in party %d.\n", char_id, party_id);
 		return 0;
 	}
 

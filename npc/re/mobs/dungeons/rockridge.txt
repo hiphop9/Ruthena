@@ -10,20 +10,22 @@
 //============================================================
 
 // Rock Ridge Mine
-rockmi1,0,0	monster	Thief Bug	1051,10
-rockmi1,0,0	monster	Gaster	3740,40
-rockmi1,0,0	monster	Elite Buffalo Bandit	3747,10
-rockmi1,0,0	monster	Elite Buffalo Bandit	3748,20
-rockmi1,0,0	monster	Elite Buffalo Bandit	3749,30
-rockmi1,0,0	boss_monster	Spider Chariot	3741,1,7200000,600000,1
+rockmi1,0,0	monster	도둑벌레	1051,10
+rockmi1,0,0	monster	가스터	3740,40
+rockmi1,0,0	monster	엘리트 소적단	3747,10
+rockmi1,0,0	monster	엘리트 소적단	3748,20
+rockmi1,0,0	monster	엘리트 소적단	3749,30
+rockmi1,0,0	boss_monster	거미전차	3741,1,7200000,600000,1
 
 // Rock Ridge Mine
-rockmi2,100,36,20,20	monster	Purple Ore	3742,31
+rockmi2,100,36,20,20	monster	보랏빛 광석	3742,31
 
 // Culvert
-harboro2,0,0	monster	Swamp Arclouze	3787,30
-harboro2,0,0	monster	Brown Rat	3788,30
-harboro2,0,0	monster	Anopheles	1627,10
-harboro2,0,0	monster	Black Mushroom	1084,20
-harboro2,0,0	monster	Thief Bug	1051,10
-harboro2,50,259,10,6	monster	Sea Anemone	3743,20
+harboro2,0,0	monster	습지 아크라우스	3787,30
+harboro2,0,0	monster	시궁쥐	3788,30
+harboro2,0,0	monster	위레스	1627,10
+harboro2,0,0	monster	검은 버섯	1084,20
+harboro2,0,0	monster	도둑벌레	1051,10
+harboro2,50,259,10,6	monster	말미잘	3743,20
+
+

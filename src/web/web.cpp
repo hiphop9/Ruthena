@@ -24,6 +24,7 @@
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
 #include <config/core.hpp>
+#include <config/custom.hpp>
 
 #include "charconfig_controller.hpp"
 #include "emblem_controller.hpp"
@@ -113,8 +114,10 @@ bool web_config_read(const char* cfgName, bool normal) {
 	char line[1024], w1[32], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
 	if (fp == nullptr) {
-		ShowError("Configuration file (%s) not found.\n", cfgName);
-		return false;
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("설정 파일(%s)을(를) 찾지 못했습니다.\n", cfgName);
+		else
+			ShowError("Configuration file (%s) not found.\n", cfgName);		return false;
 	}
 	while (fgets(line, sizeof(line), fp)) {
 		if (line[0] == '/' && line[1] == '/')
@@ -154,7 +157,10 @@ bool web_config_read(const char* cfgName, bool normal) {
 			web_config.allow_gifs = config_switch(w2) == 1;
 	}
 	fclose(fp);
-	ShowInfo("Finished reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s을(를) 정상적으로 읽어왔습니다.\n", cfgName);
+	else
+		ShowInfo("Finished reading %s.\n", cfgName);
 	return true;
 }
 
@@ -168,7 +174,10 @@ int inter_config_read(const char* cfgName)
 
 	fp = fopen(cfgName, "r");
 	if(fp == nullptr) {
-		ShowError("File not found: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s 파일이 존재하지 않습니다.\n", cfgName);
+		else
+			ShowError("File not found: %s\n", cfgName);
 		return 1;
 	}
 
@@ -250,7 +259,10 @@ int inter_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo ("Done reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo ("%s을(를) 정상적으로 읽어왔습니다.\n", cfgName);
+	else
+		ShowInfo ("Done reading %s.\n", cfgName);
 
 	return 0;
 }
@@ -273,7 +285,10 @@ void web_set_defaults() {
 int web_sql_init(void) {
 	// login db connection
 	login_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Login DB server.....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("로그인 DB서버에 연결하는 중입니다.....\n");
+	else
+		ShowInfo("Connecting to the Login DB server.....\n");
 
 	if (SQL_ERROR == Sql_Connect(login_handle, login_server_id.c_str(), login_server_pw.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str())) {
 		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
@@ -282,15 +297,21 @@ int web_sql_init(void) {
 		Sql_Free(login_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Login Server Connection)\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("연결 성공! (로그인 서버)\n");
+	else
+		ShowStatus("Connect success! (Login Server Connection)\n");
 
 	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(login_handle, default_codepage.c_str()))
+		if (SQL_ERROR == Sql_SetEncoding(login_handle, "utf8"))
 			Sql_ShowDebug(login_handle);
 	}
 
 	char_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Char DB server.....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("케릭터 DB 서버에 연결하는 중입니다.....\n");
+	else
+		ShowInfo("Connecting to the Char DB server.....\n");
 
 	if (SQL_ERROR == Sql_Connect(char_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str())) {
 		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
@@ -299,15 +320,21 @@ int web_sql_init(void) {
 		Sql_Free(char_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Char Server Connection)\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("연결 성공! (케릭터 서버)\n");
+	else
+		ShowStatus("Connect success! (Char Server Connection)\n");
 
 	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(char_handle, default_codepage.c_str()))
+		if (SQL_ERROR == Sql_SetEncoding(char_handle, "utf8"))
 			Sql_ShowDebug(char_handle);
 	}
 
 	map_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Map DB server.....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("맵 DB 서버에 연결하는 중입니다.....\n");
+	else
+		ShowInfo("Connecting to the Map DB server.....\n");
 
 	if (SQL_ERROR == Sql_Connect(map_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str())) {
 		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
@@ -316,15 +343,21 @@ int web_sql_init(void) {
 		Sql_Free(map_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Map Server Connection)\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("연결 성공! (맵 서버)\n");
+	else
+		ShowStatus("Connect success! (Map Server Connection)\n");
 
 	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(map_handle, default_codepage.c_str()))
+		if (SQL_ERROR == Sql_SetEncoding(map_handle, "utf8"))
 			Sql_ShowDebug(map_handle);
 	}
 
 	web_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Web DB server.....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("웹 DB 서버에 연결하는 중입니다.....\n");
+	else
+		ShowInfo("Connecting to the Web DB server.....\n");
 
 	if (SQL_ERROR == Sql_Connect(web_handle, web_server_id.c_str(), web_server_pw.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str())) {
 		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
@@ -333,10 +366,13 @@ int web_sql_init(void) {
 		Sql_Free(web_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Web Server Connection)\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("연결 성공! (웹 서버)\n");
+	else
+		ShowStatus("Connect success! (Web Server Connection)\n");
 
 	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(web_handle, default_codepage.c_str()))
+		if (SQL_ERROR == Sql_SetEncoding(web_handle, "utf8"))
 			Sql_ShowDebug(web_handle);
 	}
 
@@ -346,16 +382,28 @@ int web_sql_init(void) {
 
 int web_sql_close(void)
 {
-	ShowStatus("Close Login DB Connection....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("로그인 DB 연결을 종료합니다....\n");
+	else
+		ShowStatus("Close Login DB Connection....\n");
 	Sql_Free(login_handle);
 	login_handle = nullptr;
-	ShowStatus("Close Char DB Connection....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("케릭터 DB 연결을 종료합니다....\n");
+	else
+		ShowStatus("Close Char DB Connection....\n");
 	Sql_Free(char_handle);
 	char_handle = nullptr;
-	ShowStatus("Close Map DB Connection....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("맵 DB 연결을 종료합니다....\n");
+	else
+		ShowStatus("Close Map DB Connection....\n");
 	Sql_Free(map_handle);
 	map_handle = nullptr;
-	ShowStatus("Close Web DB Connection....\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("웹 DB 연결을 종료합니다....\n");
+	else
+		ShowStatus("Close Web DB Connection....\n");
 	Sql_Free(web_handle);
 	web_handle = nullptr;
 
@@ -367,14 +415,20 @@ int web_sql_close(void)
  *  dealloc..., function called at exit of the web-server
  */
 void WebServer::finalize(){
-	ShowStatus("Terminating...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Terminating...\n");
 #ifdef WEB_SERVER_ENABLE
 	http_server->stop();
 	svr_thr.join();
 	web_sql_close();
 #endif
 	do_final_msg();
-	ShowStatus("Finished.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("완료.\n");
+	else
+		ShowStatus("Finished.\n");
 }
 
 /**
@@ -394,7 +448,10 @@ void WebServer::handle_crash(){
  *------------------------------------------------------*/
 void display_helpscreen(bool do_exit)
 {
-	ShowInfo("Usage: %s\n", SERVER_NAME);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("사용 방법: %s\n", SERVER_NAME);
+	else
+		ShowInfo("Usage: %s\n", SERVER_NAME);
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -403,21 +460,36 @@ void display_helpscreen(bool do_exit)
 void logger(const Request & req, const Response & res) {
 	// make this a config
 	if (web_config.print_req_res) {
-		ShowDebug("Incoming Headers are:\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("수신 헤더:\n");
+		else
+			ShowDebug("Incoming Headers are:\n");
 		for (const auto & header : req.headers) {
 			ShowDebug("\t%s: %s\n", header.first.c_str(), header.second.c_str());
 		}
-		ShowDebug("Incoming Pages are:\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("수신 페이지:\n");
+		else
+			ShowDebug("Incoming Pages are:\n");
 		for (const auto & file : req.files) {
 			ShowDebug("\t%s: %s\n", file.first.c_str(), file.second.content.c_str());
 		}
-		ShowDebug("Outgoing Headers are:\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("송신 헤더:\n");
+		else
+			ShowDebug("Outgoing Headers are:\n");
 		for (const auto & header : res.headers) {
 			ShowDebug("\t%s: %s\n", header.first.c_str(), header.second.c_str());
 		}
-		ShowDebug("Response status is: %d\n", res.status);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("응답 상태:\n");
+		else
+			ShowDebug("Response status is: %d\n", res.status);
 		// since the body may be binary, might not print entire body (has null character).
-		ShowDebug("Body is:\n%s\n", res.body.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("바디:\n%s\n", res.body.c_str());
+		else
+			ShowDebug("Body is:\n%s\n", res.body.c_str());
 	}
 	ShowInfo("%s [%s %s] %d\n", req.remote_addr.c_str(), req.method.c_str(), req.path.c_str(), res.status);
 }
@@ -425,7 +497,10 @@ void logger(const Request & req, const Response & res) {
 
 bool WebServer::initialize( int argc, char* argv[] ){
 #ifndef WEB_SERVER_ENABLE
-	ShowStatus("The web-server is " CL_GREEN "stopping" CL_RESET " (PACKETVER too old to use).\n\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("웹서버가 " CL_GREEN "중지되었습니다" CL_RESET " (오래된 패킷 버전을 사용중입니다.).\n\n");
+	else
+		ShowStatus("The web-server is " CL_GREEN "stopping" CL_RESET " (PACKETVER too old to use).\n\n");
 	this->signal_shutdown();
 	return true;
 #else
@@ -443,7 +518,10 @@ bool WebServer::initialize( int argc, char* argv[] ){
 
 	web_sql_init();
 
-	ShowStatus("Starting server...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("서버가 시작되었습니다...\n");
+	else
+		ShowStatus("Starting server...\n");
 
 	http_server = std::make_shared<httplib::Server>();
 	// set up routes
@@ -476,16 +554,25 @@ bool WebServer::initialize( int argc, char* argv[] ){
 
 		if (http_server->is_running())
 			break;
-		ShowDebug("Web server not running, sleeping 1 second.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("웹서버가 실행중이지 않습니다. 대기 1초.\n");
+		else
+			ShowDebug("Web server not running, sleeping 1 second.\n");
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
 	if (!http_server->is_running()) {
-		ShowError("Web server hasn't started, stopping.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("웹서버가 시작되지 않았습니다. 중지합니다.\n");
+		else
+			ShowError("Web server hasn't started, stopping.\n");
 		return false;
 	}
 
-	ShowStatus("The web-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", web_config.web_port);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("웹서버가 " CL_GREEN "준비 되었습니다." CL_RESET " (%u 포트로부터 수신을 대기합니다.).\n\n", web_config.web_port);
+	else
+		ShowStatus("The web-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", web_config.web_port);
 	return true;
 #endif
 }

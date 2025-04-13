@@ -114,17 +114,17 @@ function	script	F_Invest_Status	{
 //callfunc "F_Invest_Abyss","<variable>","<NPC name>"{,"<addon message>"};
 function	script	F_Invest_Abyss	{
 	.@npc_name$ = getarg(1);
-	mes "There are 2 ways to invest, by Zeny or the Investment Certificate given out by the Cat Paw Merchant Guild.";
-	mes "Which way would you like to make your investment?";
+	mes "투자 방법은 제니와 캣포 상인 길드에서 발급하는 투자증명서를 사용하는 두 가지 방법이 있습니다.";
+	mes "어떤 방법으로 투자하시겠습니까?";
 	next;
-	switch(select("Invest with Zeny.:Invest with Investment Certificates.:Cancel")) {
+	switch(select("Zeny로 투자하세요.:투자인증서로 투자하세요.:취소")) {
 	case 1:
 		mes .@npc_name$;
-		mes "So you've decided to invest in Zeny.";
-		mes "Minimum investment unit is ^4d4dff10,000 Zeny^000000.";
-		mes "You can invest a maximum of 50 units which is ^4d4dff500,000 Zeny^000000.";
+		mes "그래서 Zeny에 투자하기로 결정하셨나요?";
+		mes "최소 투자 단위는 ^4d4dff10,000 Zeny^000000입니다.";
+		mes "^4d4dff500,000Zeny^000000만큼 최대 50개까지 투자할 수 있습니다.";
 		next;
-		switch(select("1 unit 10,000 Zeny:10 units 100,000 Zeny:50 units 500,000 Zeny:Another amount:Cancel")) {
+		switch(select("1개 10,000제니:10개 100,000제니:50개 500,000제니:추가금액:취소")) {
 		case 1:
 			set .@units,1;
 			break;
@@ -136,46 +136,46 @@ function	script	F_Invest_Abyss	{
 			break;
 		case 4:
 			mes .@npc_name$;
-			mes "Please enter the amount you want to invest.";
-			mes "Please choose between 1 to 200.";
-			mes "Please enter 0 to cancel.";
+			mes "투자하고 싶은 금액을 입력해주세요.";
+			mes "1~200 중 하나를 선택해주세요.";
+			mes "취소하시려면 0을 입력해주세요.";
 			next;
 			input .@units;
 			if (.@units < 0 || .@units > 200) {
 				mes .@npc_name$;
-				mes "You've exceeded the amount per investment.";
-				mes "Please try again.";
+				mes "1회 투자금액을 초과하셨습니다.";
+				mes "다시 시도해 주세요.";
 				close;
 			} else if (.@units == 0) {
 				mes .@npc_name$;
-				mes "Canceled.";
+				mes "취소되었습니다.";
 				close;
 			} else
 				break;
 		case 5:
 			mes .@npc_name$;
-			mes "Canceled.";
+			mes "취소되었습니다.";
 			close;
 		}
 		set .@zeny, .@units * 10000;
 		if (Zeny < .@zeny) {
 			mes .@npc_name$;
-			mes "You do not have enough money.";
+			mes "돈이 부족해요.";
 			close;
 		}
 		mes .@npc_name$;
-		mes "You've invested "+callfunc("F_InsertPlural",.@units,"unit")+" "+callfunc("F_InsertComma",.@zeny)+" Zeny"+getarg(2,"")+".";
-		mes "Not much but this is a small gift. You can exchange it with items in Malangdo.";
+		mes callfunc("F_InsertPlural",.@units,"unit") +" "+ callfunc("F_InsertComma",.@zeny) +" Zeny"+ getarg(2,"") +"투자하셨습니다.";
+		mes "많지는 않지만 작은 선물입니다. 말랑도에 있는 아이템으로 교환하실 수 있습니다.";
 		set Zeny, Zeny-.@zeny;
 		setd getarg(0), getd(getarg(0)) + .@units;
 		getitem 6488,.@units; //Thanks_Invest_Ticket
 		close;
 	case 2:
 		mes .@npc_name$;
-		mes "Wow, you've brought Investment Certificates.";
-		mes "How many certificates will you submit?";
+		mes "와, 투자증명서를 가져오셨군요.";
+		mes "몇 개의 인증서를 제출하시겠습니까?";
 		next;
-		switch(select("1 Investment Certificate:5 Investment Certificates:Another amount:Cancel")) {
+		switch(select("1 투자증명서:5 투자증명서:다른 금액:취소")) {
 		case 1:
 			set .@tickets,1;
 			break;
@@ -184,43 +184,43 @@ function	script	F_Invest_Abyss	{
 			break;
 		case 3:
 			mes .@npc_name$;
-			mes "Please enter the number of Investment Certificates you want to submit.";
-			mes "Please choose between 1 to 20.";
-			mes "Please enter 0 to cancel.";
+			mes "제출하려는 투자증명서의 개수를 입력하세요.";
+			mes "1~20 중 하나를 선택해주세요.";
+			mes "취소하시려면 0을 입력해주세요.";
 			next;
 			input .@tickets;
 			if (.@tickets < 0 || .@tickets > 20) {
 				mes .@npc_name$;
-				mes "You've exceeded the amount per investment.";
-				mes "Please try again.";
+				mes "1회 투자금액을 초과하셨습니다.";
+				mes "다시 시도해 주세요.";
 				close;
 			} else if (.@tickets == 0) {
 				mes .@npc_name$;
-				mes "Canceled.";
+				mes "취소되었습니다.";
 				close;
 			} else
 				break;
 		case 4:
 			mes .@npc_name$;
-			mes "Canceled.";
+			mes "취소되었습니다.";
 			close;
 		}
 		if (countitem(6489) < .@tickets) {
 			mes .@npc_name$;
-			mes "Looks like you have fewer Investment Certificates than you want to submit.";
+			mes "제출하려는 투자증명서보다 적은 수의 투자증명서가 있는 것 같습니다.";
 			close;
 		}
 		set .@units, .@tickets * 10;
 		mes .@npc_name$;
-		mes .@tickets+" Investment Certificate"+((.@tickets == 1)?" is":"s are")+" the same as an investment of "+.@units+" units ("+((.@units < 100)?.@units:insertchar(""+.@units,",",1))+"0,000z)"+getarg(2,"")+".";
-		mes "Not much but this is a small gift. You can exchange it with items in Malangdo.";
+		mes .@tickets+" 투자 증명서"+ ((.@tickets == 1)?" is":"s are") +"는 "+ .@units +" 단위 ("+((.@units < 100)?.@units:insertchar(""+.@units,",",1))+"0,000z)"+getarg(2,"")+".";
+		mes "많지는 않지만 작은 선물입니다. 말랑도에 있는 아이템으로 교환하실 수 있습니다.";
 		delitem 6489,.@tickets; //Cats_Invest_Certif
 		setd getarg(0), getd(getarg(0)) + .@units;
 		getitem 6488,.@units; //Thanks_Invest_Ticket
 		close;
 	case 3:
 		mes .@npc_name$;
-		mes "Canceled.";
+		mes "취소되었습니다.";
 		close;
 	}
 }
@@ -325,7 +325,7 @@ OnCalculate:
 	}
 	end;
 OnInvest_start:
-	announce "From now on, we are going to start the investments to connect the 'Abyss Gate' in the WOE areas: Valkyrie Realm, Greenwood Lake, Luina, Britoniah.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "이제부터 WOE 지역인 발키리 렐름, 그린우드 레이크, 루이나, 브리토니아에 '어비스 게이트'를 연결하기 위한 투자를 시작할 예정입니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	set $fund_prt01,0;
 	set $fund_prt02,0;
 	set $fund_prt03,0;
@@ -349,12 +349,12 @@ OnInvest_start:
 	donpcevent "Investment_total#fund00::OnEnable";
 	end;
 OnInvest_stop:
-	announce "We've finished the investments to connect the 'Abyss Gate'.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "'심연의 문' 연결 투자를 완료했습니다.'.",bc_all,0xFF0000; //FW_NORMAL 10
 	donpcevent "Investment_total#fund00::OnReset";
 	donpcevent "#fund_master::OnCalculate_Election";
 	end;
 OnResult:
-	announce "We've got the results of the investments for the 'Abyss Gate'. You can check through the Investment Status Board in each WOE area.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "'심연의 문' 투자 결과를 가져왔습니다. WOE 지역별 투자현황게시판을 통해 확인하실 수 있습니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	if ($2011_agit_invest == 4) {
 		set $fund_prt01,0;
 		set $fund_prt02,0;
@@ -391,22 +391,22 @@ OnReset:
 
 prt_gld,2,2,0	script	Investment_total#fund00	844,{
 	callfunc "F_GM_NPC";
-	mes "Is this not working properly?";
+	mes "이게 제대로 안되는 걸까요?";
 	next;
 	if (callfunc("F_GM_NPC",1854,0) == 1) {
-		mes "If you think the investment timer is dead, please adjust the timer.";
+		mes "투자 타이머가 종료되었다고 생각하시면 타이머를 조정해 주세요.";
 		next;
-		switch(select("Turn on the timer:Cancel")) {
+		switch(select("타이머 켜기:취소")) {
 		case 1:
 			donpcevent "Investment_total#fund00::OnTimerReset";
-			mes "You've turned on the timer.";
+			mes "타이머를 켰습니다.";
 			close;
 		case 2:
-			mes "Canceled.";
+			mes "취소되었습니다.";
 			close;
 		}
 	} else {
-		mes "I don't need to adjust anything now.";
+		mes "지금은 아무것도 조정할 필요가 없습니다.";
 		close;
 	}
 
@@ -452,7 +452,7 @@ OnTimer3600000:
 			if ($agit_result_timer % 10 == 5 || $agit_result_timer % 10 == 0 || $agit_result_timer == 58) {
 				set $agit_result_notice, $agit_result_notice+1;
 				donpcevent "Investment_total#fund00::OnVarInit";
-				announce "No. "+$agit_result_notice+" Interim statement is now available. You can check through the Investment Status Board in each WOE area.",bc_all,0xFF0000; //FW_NORMAL 10
+				announce "아니요. "+ $agit_result_notice +" 이제 임시 명세서를 사용할 수 있습니다. WOE 지역별 투자현황게시판을 통해 확인하실 수 있습니다.",bc_all,0xFF0000; //FW_NORMAL 10
 			}
 
 			donpcevent "Investment_total#fund00::OnTimerReset";
@@ -467,8 +467,8 @@ OnTimer3600000:
 
 prt_gld,164,98,3	script	Revoting Manager#Invest1	421,{
 	mes "[Revoting Manager]";
-	mes "We are not accepting additional votes.";
-	mes "Please wait for our results announcement.";
+	mes "추가투표는 받지 않습니다.";
+	mes "결과발표를 기다려주세요.";
 	close;
 OnInit:
 	set .@invest_status, callfunc("F_Invest_Status");
@@ -538,7 +538,7 @@ OnTimer60000:
 		set $agit_revoting_timer, $agit_revoting_timer+1;
 		donpcevent "Revoting Manager#Invest1::OnTimerReset";
 	} else if (.@revote == 30) {
-		announce "Cat Paw Merchant Guild: Now we are going to close the additional vote. We will announce the results soon.",bc_all,0xFF0000; //FW_NORMAL 10
+		announce "고양이발 상인 길드: 이제 추가 투표를 마감하겠습니다. 곧 결과를 발표하겠습니다.",bc_all,0xFF0000; //FW_NORMAL 10
 		donpcevent "Revoting Manager#Invest2::OnDisable";
 		donpcevent "Revoting Manager#Invest1::OnEnable";
 		set $agit_revoting_timer, $agit_revoting_timer+1;
@@ -559,7 +559,7 @@ prt_gld,164,98,3	script	Revoting Manager#Invest2	421,{
 	set .@invest, $2011_agit_invest;
 	if (.@invest < 11) {
 		mes "[Revoting Manager]";
-		mes "No! This is not the time to take a revote.";
+		mes "아니요! 지금은 투표를 할 때가 아닙니다.";
 		close2;
 		disablenpc "Revoting Manager#Invest2";
 		end;
@@ -567,22 +567,22 @@ prt_gld,164,98,3	script	Revoting Manager#Invest2	421,{
 	set .@playtime, checkquest(7349,PLAYTIME);
 	if (.@playtime == 0 || .@playtime == 1) {
 		mes "[Revoting Manager]";
-		mes "You've already participated in the vote.";
-		mes "Please relax and wait for the results.";
+		mes "이미 투표에 참여하셨습니다.";
+		mes "편안한 마음으로 결과를 기다려주세요.";
 		close;
 	} else if (.@playtime == 2)
 		erasequest 7349;
 	mes "[Revoting Manager]";
-	mes "Would you like to participate in the vote for choosing where to connect the 'Abyss Gate'?";
+	mes "'어비스 게이트' 연결 위치 투표에 참여하시겠습니까?";
 	next;
-	if(select("Participate in the vote.:Skip for now.") == 2) {
+	if(select("투표에 참여하세요.:지금은 건너뛰세요.") == 2) {
 		mes "[Revoting Manager]";
-		mes "You've canceled the vote.";
+		mes "투표를 취소하셨습니다.";
 		close;
 	}
 	mes "[Revoting Manager]";
-	mes "You can vote once and won't need to invest for your choice.";
-	mes "Plesae choose one WOE area.";
+	mes "한 번만 투표하면 되며, 선택한 항목에 투자할 필요가 없습니다.";
+	mes "WOE 지역을 하나 선택해주세요.";
 	next;
 
 	// Create menu.
@@ -600,8 +600,8 @@ prt_gld,164,98,3	script	Revoting Manager#Invest2	421,{
 	set .@vote, select(implode(.@menu$,":"))-1;
 
 	mes "[Revoting Manager]";
-	mes "You've voted for "+.@menu$[.@vote]+".";
-	mes "Thanks for voting.";
+	mes .@menu$[.@vote] +"에 투표하셨습니다.";
+	mes "투표해주셔서 감사합니다.";
 	setquest 7349;
 	setd "$fund_"+.@candidates$[.@vote]+"_extra", getd("$fund_"+.@candidates$[.@vote]+"_extra") + 1;
 	close;
@@ -634,16 +634,16 @@ OnNotice_on:
 	initnpctimer;
 	end;
 OnTimer5000:
-	announce "Cat Paw Merchant Guild: As no WOE area has reached the maximum investment level to connect the 'Abyss Gate'...",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "고양이발 상인 길드 : '어비스 게이트'를 연결할 수 있는 최대 투자 수준에 도달한 WOE 지역이 없기 때문에...",bc_all,0xFF0000; //FW_NORMAL 10
 	end;
 OnTimer8000:
-	announce "Cat Paw Merchant Guild: We were about to connect the 'Abyss Gate' to the WOE area which invested most.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "고양이발 상인 길드 : 가장 많이 투자한 WOE 지역에 '심연의 문'을 연결하려고 했습니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	end;
 OnTimer11000:
-	announce "Cat Paw Merchant Guild: However, there were areas which invested the same amount. So we will put them to a vote.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "고양이발 상인 길드: 그런데 같은 금액을 투자하는 지역도 있었어요. 그래서 우리는 그것들을 투표에 부칠 것입니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	end;
 OnTimer14000:
-	announce "Cat Paw Merchant Guild: Additional votes will be available for 30 minutes. You can vote in Valkyrie Realm.",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "고양이발 상인 길드 : 30분 동안 추가 투표가 가능합니다. 발키리 영역에서 투표할 수 있습니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	end;
 OnTimer20000:
 	explode(.@candidates$, callsub(OnGetCandidates, $2011_agit_invest),"|");
@@ -657,7 +657,7 @@ OnTimer20000:
 		else if (.@candidates$[.@i] == "prt")
 			set .@choices$[.@i],"Valkyrie Realm";
 	}
-	announce "Cat Paw Merchant Guild: The candidates for the additional vote are... "+implode(.@choices$," vs. ")+".",bc_all,0xFF0000; //FW_NORMAL 10
+	announce "고양이 발 상인 길드: 추가 투표 후보는... "+ implode(.@choices$," vs. ") +"입니다.",bc_all,0xFF0000; //FW_NORMAL 10
 	set $fund_prt_extra,0;
 	set $fund_pay_extra,0;
 	set $fund_gef_extra,0;
@@ -699,198 +699,198 @@ OnAgitInvest:
 -	script	Cat Paw Merchant Guild	-1,{
 
 	if (compare(strnpcinfo(4),"alde")) {
-		set .@npc$,"alde";
-		set .@name$,"Megrez";
-		set .@realm$,"Luina";
-		set .@intro$,"Luina Branch Manager in Al De Baran";
+		set .@npc$,"알데";
+		set .@name$,"메그레즈";
+		set .@realm$,"루이나";
+		set .@intro$,"알데바란 루이나 지점장";
 	} else if (compare(strnpcinfo(4),"gef")) {
-		set .@npc$,"gef";
-		set .@name$,"Meraq";
-		set .@realm$,"Britoniah";
-		set .@intro$,"Britoniah Branch Manager";
+		set .@npc$,"게펜";
+		set .@name$,"메라크";
+		set .@realm$,"브리튼아";
+		set .@intro$,"브리튼아 지점장";
 	} else if (compare(strnpcinfo(4),"pay")) {
-		set .@npc$,"pay";
-		set .@name$,"Phecda";
-		set .@realm$,"Greenwood Lake";
-		set .@intro$,"Payon Greenwood Lake Branch Manager";
+		set .@npc$,"폐욘";
+		set .@name$,"페크다";
+		set .@realm$,"그린우드 레이크";
+		set .@intro$,"페이욘 그린우드 레이크 지점장";
 	} else if (compare(strnpcinfo(4),"prt")) {
-		set .@npc$,"prt";
-		set .@name$,"Dubae";
-		set .@realm$,"Valkyrie Realm";
-		set .@intro$,"Prontera Valkyrie Realm Branch Manager";
+		set .@npc$,"프론테라";
+		set .@name$,"두바이";
+		set .@realm$,"발키리 영역";
+		set .@intro$,"프론테라 발키리 영역 지점장";
 	}
 	set .@n$,"["+.@name$+"]";
 
 	mes .@n$;
-	mes "I'm "+.@name$+", the "+.@intro$+" of the Cat Paw Merchant Guild.";
-	mes "I consult about investments for the Abyss Gate development.";
-	mes "How may I help you?";
+	mes "저는 고양이발 상인 길드의 "+ .@intro$ +" "+ .@name$ +" 입니다.";
+	mes "어비스 게이트 개발을 위한 투자 상담을 하고 있습니다.";
+	mes "무엇을 도와드릴까요?";
 	next;
-	switch(select("What is the Abyss Gate?:Investing in the gate development?:I want to invest in this area.:Cancel")) {
+	switch(select("어비스 게이트란?:게이트 개발에 투자하고 있나요?:이 지역에 투자하고 싶습니다.:취소")) {
 	case 1:
 		mes .@n$;
-		mes "It is only called the Abyss Gate for convenience but it's simply a ^4d4dffgap to another dimension^000000.";
+		mes "편의상 심연의 문이라고 부르지만 단순히 ^4d4dffgap^000000일 뿐입니다.";
 		next;
 		mes .@n$;
-		mes "More of these gaps are found here and there after Morocc created the Crack of Dimension.";
-		mes "I personally think that the Abyss Gate found recently is part of the past or even from the future.";
+		mes "모로크가 차원의 균열을 만든 이후 여기저기서 이러한 틈이 더 많이 발견되었습니다.";
+		mes "최근 발견된 어비스 게이트는 개인적으로 과거의 일부이거나 미래의 일부라고 생각합니다.";
 		next;
 		mes .@n$;
-		mes "It is said that the Abyss Gate forcefully connects to another dimension beyond our world.";
-		mes "Probably because there are those that follow the Emperium's power.";
+		mes "어비스 게이트는 우리 세계 너머의 다른 차원과 강제로 연결되어 있다고 합니다.";
+		mes "아마도 제국의 힘을 따르는 자가 있기 때문일 겁니다.";
 		next;
 		mes .@n$;
-		mes "There are a total of 4 Abyss Gates found so far. They all connect to the Agit region overflowing with the Emperium's force.";
+		mes "현재까지 발견된 어비스 게이트는 총 4개입니다. 모두 제국의 힘이 넘치는 아지트 지역과 연결되어 있습니다.";
 		next;
 		mes .@n$;
-		mes "We named each by dimension beyond the gap.";
-		mes "^4d4dffWay of the Warrior, Hill of the Dead, Winds of the Ancient, and the Hero's Tears.^000000";
-		mes "And all these four gaps are called the ^4d4dffAbyss Gate^000000.";
+		mes "간극 너머의 차원별로 각각 이름을 붙였습니다.";
+		mes "^4d4dff전사의 길, 망자의 언덕, 고대의 바람, 그리고 영웅의 눈물.^000000";
+		mes "그리고 이 네 개의 틈은 모두 ^4d4dff심연의 문^000000이라고 불립니다.";
 		next;
 		mes .@n$;
-		mes "The gap may lead to the past, future or even an unknown world.";
-		mes "The power the Abyss Gate holds is both fearful but sweet";
+		mes "그 틈은 과거, 미래, 어쩌면 미지의 세계로 이어질 수도 있다.";
+		mes "어비스 게이트의 힘은 두렵지만 달콤합니다";
 		next;
 		mes .@n$;
-		mes "Are you also interested in exploring the Abyss Gate?";
-		mes "Ha ha. You'll need to go through several steps before exploring.";
+		mes "당신도 어비스 게이트 탐험에 관심이 있나요?";
+		mes "하하. 탐색하기 전에 몇 가지 단계를 거쳐야 합니다.";
 		next;
 		mes .@n$;
-		mes "If you are interested,";
-		mes "will you take the time to sit down and talk about investing in maintaining the Abyss Gate?";
+		mes "관심 있으신가요?";
+		mes "잠시 시간을 내어 심연의 문 유지 관리에 대한 투자에 대해 이야기해 보시겠습니까?";
 		close;
 	case 2:
 		mes .@n$;
-		mes "Are you curious about investing in the Gate development?";
-		mes "What do you want to know about?";
+		mes "게이트 개발에 대한 투자가 궁금하세요?";
+		mes "무엇에 대해 알고 싶으세요?";
 		next;
-		switch(select("About the Gate?:About investments?:How to invest?:Benefits from investing?")) {
+		switch(select("문에 대하여?:투자에 대하여?:투자 방법은 무엇입니까?:투자를 통해 얻을 수 있는 이점은 무엇입니까?")) {
 		case 1:
 			mes .@n$;
-			mes "The Gate is what it is named after, a door.";
-			mes "A dimensional passageway that connects here to there.";
+			mes "게이트(Gate)라는 이름이 붙은 게 문이에요.";
+			mes "여기서 저기로 연결되는 차원의 통로입니다.";
 			next;
 			mes .@n$;
-			mes "The Abyss Gate was created as a very unstable path from beyond the dimensional gap,";
-			mes "therefore traveling through the Gate will need an artificial dimension connection.";
+			mes "어비스 게이트는 차원의 틈 너머에서 매우 불안정한 통로로 생성되었습니다,";
+			mes "그러므로 게이트를 통과하려면 인공적인 차원 연결이 필요합니다.";
 			next;
 			mes .@n$;
-			mes "Humans are far from having the advanced technology that's needed";
-			mes "but our Cat Paw Merchant Guild holds the high technology to use the Crack of Dimension.";
+			mes "인간은 필요한 첨단 기술을 보유하고 있지 않습니다.";
+			mes "하지만 우리 Cat Paw Merchant Guild는 차원의 균열을 사용할 수 있는 높은 기술을 보유하고 있습니다.";
 			next;
 			mes .@n$;
-			mes "So we made a proposal.";
-			mes "With the promise of support the Cat Paw Merchant Guild and paying for the immense expense for maintaining the connection with the Gate,";
-			mes "we will make the connection to the Crack of Dimension.";
+			mes "그래서 제안을 했어요.";
+			mes "고양이발 상인 길드를 지원하고 게이트와의 연결을 유지하는 데 막대한 비용을 지불하겠다는 약속으로,";
+			mes "차원의 균열에 연결해보겠습니다.";
 			next;
 			mes .@n$;
-			mes "Of course working on the Crack of Dimension is no easy job and it does come with risks.";
-			mes "There are cases where people go missing from traveling between.";
+			mes "물론 차원의 균열 작업은 쉬운 일이 아니며 위험도 따릅니다.";
+			mes "여행 중에 사람들이 실종되는 경우가 있어요.";
 			next;
 			mes .@n$;
-			mes "The best maintaining duration is about 4 days";
-			mes "You invest in us and we create the door that connects to the dimensional gap.";
+			mes "가장 좋은 유지기간은 4일 정도입니다";
+			mes "당신이 우리에게 투자하면 우리는 차원의 틈새로 연결되는 문을 만듭니다.";
 			next;
 			mes .@n$;
-			mes "Doesn't this sound like the perfect win-win proposal?";
+			mes "완벽한 윈-윈 제안 같지 않나요?";
 			close;
 		case 2:
 			mes .@n$;
-			mes "Forcing through the unstable dimensional gap and creating a passageway is very dangerous.";
-			mes "Not to mention the huge resources needed.";
+			mes "불안정한 차원의 틈새를 억지로 뚫고 통로를 만드는 것은 매우 위험합니다.";
+			mes "엄청난 자원이 필요한 것은 말할 것도 없고요.";
 			next;
 			mes .@n$;
-			mes "If you take care of the charges and also the danger pay by investing in the Cat Paw Merchant Guild,";
-			mes "we'll create and maintain the gate regardless of the risks.";
+			mes "고양이발 상인 길드에 투자해서 위험과 비용을 모두 처리한다면,";
+			mes "리스크에 관계없이 게이트를 만들고 유지하겠습니다.";
 			next;
 			mes .@n$;
-			mes "But then of course the money involved for the gate costs will be extreme.";
-			mes "It will be easy if you can find investors to share the amount.";
+			mes "그렇다면 당연히 게이트 비용이 엄청나게 들겠죠.";
+			mes "금액을 공유할 투자자를 찾는 것은 쉬울 것입니다.";
 			next;
 			mes .@n$;
-			mes "There is a basic charge to start connecting the gate.";
-			mes "Results depend on the how much investment money is collected.";
+			mes "게이트 연결을 시작하려면 기본요금이 있습니다.";
+			mes "투자금을 얼마나 모으느냐에 따라 결과가 달라집니다.";
 			next;
 			mes .@n$;
-			mes "The Abyss Gate exists in each Agit region.";
-			mes "Can you imagine how much money and sacrifice our guild will have to go through to develop in all areas?";
+			mes "어비스 게이트는 각 아지트 지역에 존재합니다.";
+			mes "우리 길드가 모든 분야에서 발전하려면 얼마나 많은 돈과 희생을 치뤄야 할지 상상이 가시나요?";
 			next;
 			mes .@n$;
-			mes "This explains the regional competition in investments.";
-			mes "If not enough gate maintenance costs are collected then it is obvious the region with the most investments will receive the benefits";
+			mes "이것은 투자에 있어서 지역적 경쟁을 설명합니다.";
+			mes "게이트 유지관리 비용이 충분하지 않으면 가장 많은 투자를 한 지역이 혜택을 받을 것이 분명합니다.";
 			next;
 			mes .@n$;
-			mes "If ^4d4dffthe Abyss Gate is successfully connected then the dungeon of the hideout area";
-			mes "will be open to others instead of being guild exclusive^000000 which will be very attractive for investment.";
+			mes "^4d4dff어비스 게이트가 성공적으로 연결되었다면 은신처 던전입니다";
+			mes "길드 독점이 아닌 다른 사람들에게 개방될 것이므로^000000 투자하기에 매우 매력적일 것입니다.";
 			next;
 			mes .@n$;
-			mes "But then again, this is only for when the gate is connected.";
+			mes "그럼 또 말씀드리지만 게이트가 연결되어 있을 때만 해당됩니다.";
 			close;
 		case 3:
 			mes .@n$;
-			mes "It's simple.";
-			mes "Visit the branch manager of the ^4d4dffregion you want to invest in during the investment duration^000000 and make your investment.";
+			mes "간단해요.";
+			mes "투자기간^000000 동안 투자하고 싶은 ^4d4dff지역 지점장을 방문하여 투자하세요.";
 			next;
 			mes .@n$;
-			mes "We usually receive ^4d4dffthe common currency here, Zeny^000000.";
-			mes "But since we're talking about supporting our Cat Paw Merchant Guild, you can also invest with items in demand in Malangdo.";
+			mes "우리는 보통 ^4d4dff여기서 공통 통화인 Zeny^000000을 받습니다.";
+			mes "근데 저희 고양이발 상인 길드를 지원하는 얘기니까 말랑도에서 수요가 있는 아이템으로 투자도 하시면 됩니다.";
 			next;
 			mes .@n$;
-			mes "Provide the items in need to Namis in Malangdo who is in charge of general affairs in our guild.";
-			mes "Bring back your Investment Certificate to add it to the investment tribute.";
+			mes "우리 길드의 총무를 맡고 있는 말랑도의 나미스에게 필요한 물품을 전해주십시오.";
+			mes "투자 공물에 추가하려면 투자 증명서를 가져오세요.";
 			next;
 			mes .@n$;
-			mes "You must visit and invest at the region you want in order for your investment to be counted as a tribute.";
+			mes "원하는 지역을 방문하여 투자해야 조공으로 인정됩니다.";
 			close;
 		case 4:
 			mes .@n$;
-			mes "The Abyss Gate is basically contracting and connecting with the castle that owns the Agit;";
-			mes "therefore, we will provide all we have once the costs for connecting and maintaining the gate are sufficient.";
+			mes "어비스 게이트는 기본적으로 아지트를 소유한 성과 연결되어 계약을 맺고 있습니다;";
+			mes "그러므로 게이트 연결 및 유지 비용이 충분해지면 우리가 가진 모든 것을 제공할 것입니다.";
 			next;
 			mes .@n$;
-			mes "In terms of the minimum and maximum costs for the whole work,";
-			mes "if the collected investment ^4d4dffexceeds the minimum costs^000000, we can connect you to the ^4d4dffdeepest layer of an unknown guild dungeon^000000.";
+			mes "전체 작업의 최소 및 최대 비용 측면에서,";
+			mes "모은 투자금이 ^4d4dff최소 비용^000000을 초과하면 ^4d4dff알 수 없는 길드 던전의 가장 깊은 레이어^000000에 연결해 드릴 수 있습니다.";
 			next;
 			mes .@n$;
-			mes "If investments exceed the maximum costs, that region will be connected to the";
-			mes "^4d4dffAbyss Gate^000000 regardless of the investment rank which includes the deepest layer of the guild dungeon.";
+			mes "투자금이 최대 비용을 초과할 경우 해당 지역은 다음 지역으로 연결됩니다.";
+			mes "길드던전의 최심층을 포함하는 투자순위와 관계없이 ^4d4dffAbyss Gate^000000.";
 			next;
 			mes .@n$;
-			mes "^ff0000If there is no Agit region that reached the maximum investment, then the region with the";
-			mes "highest investment participation will get the Abyss Gate connected with the investment collected from all regions.^000000";
+			mes "^ff0000최대 투자금액에 도달한 아지트 지역이 없다면 해당 지역은";
+			mes "최고의 투자 참여로 모든 지역에서 모은 투자금이 어비스 게이트로 연결됩니다.^000000";
 			next;
 			mes .@n$;
-			mes "Once the Abyss Gate is connected, the deepest layer (2F) of the guild dungeon";
-			mes "will be open to all adventurers that participated in the regional investment.";
+			mes "어비스 게이트가 연결되면 길드 던전의 가장 깊은 층(2F)";
+			mes "지역 투자에 참여해주신 모든 모험가분들께 공개됩니다.";
 			next;
 			mes .@n$;
-			mes "Visits to the dungeon will be counted for the next investment for the Agit region";
-			mes "so being in good terms with the guild that claims the Agit castle will be a bonus.";
+			mes "아지트 지역의 다음 투자시 던전 방문 횟수가 카운트됩니다.";
+			mes "그래서 아지트 성을 주장하는 길드와 좋은 관계를 유지하는 것은 덤이 될 것 같아요.";
 			next;
 			mes .@n$;
-			mes "By the way, it isn't easy to maintain the connection with the Abyss Gate and investments and reconnection is needed weekly";
-			mes "so please continue your support and investment if you want the power of the unknown.";
+			mes "그런데 어비스 게이트와의 연결을 유지하기가 쉽지 않고 매주 투자와 재접속이 필요합니다";
+			mes "그러니 미지의 힘을 원하신다면 앞으로도 많은 응원과 투자 부탁드립니다.";
 			close;
 		}
 	case 3:
 		if (checkweight(1201,1) == 0 || MaxWeight - Weight < 1000) {
-			mes "- Currently you're carrying -";
-			mes "- too many items with you. -";
-			mes "- Please try again after you -";
-			mes "- lose some weight. -";
+			mes "- 현재 당신은 -";
+			mes "- 아이템이 너무 많아요. -";
+			mes "- 확인 후 다시 시도해 주세요 -";
+			mes "- 살 좀 빼세요. -";
 			close;
 		}
 		if (countitem(6488) >= 4800) {
 			mes .@n$;
-			mes "You have too many Thank You Tickets to receive any more.";
-			mes "Cannot give you any more tickets. Please use your ticket and come back.";
-			mes "The ticket can be exchanged with various items in Malangdo.";
+			mes "감사티켓이 너무 많아서 더 이상 받을 수 없습니다.";
+			mes "더 이상 티켓을 드릴 수 없습니다. 티켓을 사용하신 후 다시 오시기 바랍니다.";
+			mes "이 티켓은 말랑도의 다양한 아이템으로 교환할 수 있습니다.";
 			close;
 		}
 		if (callfunc("F_Invest_Status") != 1) {
 			mes .@n$;
-			mes "We do not receive investments now.";
-			mes "Please come back during the investment duration.";
+			mes "지금은 투자를 받지 않습니다.";
+			mes "투자기간 내에 다시 방문해 주세요.";
 			close;
 		}
 		set .@guild, getcharid(2);
@@ -905,24 +905,24 @@ OnAgitInvest:
 				set .@menu$, .@menu$+"^aaaaaaNot the guild that claimed "+.@castle_name$[.@i]+"^000000:";
 		}
 		mes .@n$;
-		mes "Would you like to invest in the ^4d4dff"+.@realm$+"^000000 region?";
-		mes "If there is a castle occupied already, you will invest in the castle and the guild that is occupying it.";
+		mes "^4d4dff"+ .@realm$ +"^000000 지역에 투자하시겠습니까?";
+		mes "이미 점령된 성이 있다면 해당 성과 점령중인 길드에 투자하게 됩니다.";
 		next;
 		if (.@castles_owned) {
 			set .@i, select(.@menu$+"Cancel");
 			if (.@i == 6) {
 				mes .@n$;
-				mes "Canceled.";
+				mes "취소되었습니다.";
 				close;
 			}
 			if (.@guild != .@owner_id[.@i]) {
 				mes .@n$;
-				mes "The guild that is occupying "+.@castle_name$[.@i]+" is "+.@owner_name$[.@i]+".";
-				mes "Doesn't look like your guild.";
+				mes ""+ .@castle_name$[.@i] +"를 점유하고 있는 길드는 "+ .@owner_name$[.@i] +"입니다.";
+				mes "당신의 길드가 아닌 것 같습니다.";
 				close;
 			}
 			mes .@n$;
-			mes "Invest under "+.@castle_name$[.@i]+"'s"+.@owner_name$[.@i]+" guild name.";
+			mes ""+ .@castle_name$[.@i] +"'s"+ .@owner_name$[.@i] +" 길드 이름에 투자하세요.";
 			callfunc "F_Invest_Abyss","$fund_"+.@npc$+"0"+.@i,.@n$;
 			end;
 		} else {
@@ -932,8 +932,8 @@ OnAgitInvest:
 		}
 	case 4:
 		mes .@n$;
-		mes "Is that so?";
-		mes "Please come back whenever you are interested in investing in the Abyss Gate development.";
+		mes "그런가요?";
+		mes "Abyss Gate 개발에 관심이 있으신 분들은 언제든지 들러주세요.";
 		close;
 	}
 }
@@ -941,58 +941,58 @@ OnAgitInvest:
 -	script	Gate Manager#realm	-1,{
 
 	if (compare(strnpcinfo(4),"alde")) {
-		set .@npc$,"alde";
-		set .@name$,"Alkor";
-		set .@gate$,"Hero's Tears";
-		set .@realm$,"Luina";
+		set .@npc$,"알데";
+		set .@name$,"알코르";
+		set .@gate$,"영웅의 눈물";
+		set .@realm$,"루이나";
 	} else if (compare(strnpcinfo(4),"gef")) {
-		set .@npc$,"gef";
-		set .@name$,"Mizar";
-		set .@gate$,"Hill of the Dead";
-		set .@realm$,"Britoniah";
+		set .@npc$,"게펜";
+		set .@name$,"미자르";
+		set .@gate$,"죽음의 언덕";
+		set .@realm$,"브리튼아";
 	} else if (compare(strnpcinfo(4),"pay")) {
-		set .@npc$,"pay";
-		set .@name$,"Alkaid";
-		set .@gate$,"Winds of the Ancient";
-		set .@realm$,"Greenwood Lake";
+		set .@npc$,"폐욘";
+		set .@name$,"알카이드";
+		set .@gate$,"고대의 바람";
+		set .@realm$,"그린우드 레이크";
 	} else if (compare(strnpcinfo(4),"prt")) {
-		set .@npc$,"prt";
-		set .@name$,"Arios";
-		set .@gate$,"Way of the Warrior";
-		set .@realm$,"Valkyrie Realm";
+		set .@npc$,"프론";
+		set .@name$,"아리오스";
+		set .@gate$,"전사의 길";
+		set .@realm$,"발키리 영역";
 	}
 	set .@n$,"["+.@name$+"]";
 
 	if (callfunc("F_Invest_Status") != 3) {
 		mes .@n$;
-		mes "There are currently no connected dungeon gates.";
+		mes "현재 연결된 던전게이트가 없습니다.";
 		close;
 	}
 	set .@status, getd("$"+.@npc$+"_invest_result");
 	if (.@status == 3) {
 		mes .@n$;
-		mes "We've successfully connected the Abyss Gate ["+.@gate$+"] with the help from your investment.";
-		mes "The Agit dungeon will be open to everyone with a small entrance fee in "+.@realm$+".";
+		mes "여러분의 투자에 힘입어 심연의 문 ["+ .@gate$ +"] 연결에 성공했습니다.";
+		mes "아지트 던전은 "+ .@realm$ +"에서 소액의 입장료만 내면 누구나 이용할 수 있습니다.";
 		next;
 		mes .@n$;
-		mes "Please visit as often as possible since the entrance fee is saved as an investment for the region.";
-		mes "Do you want to enter the Agit dungeon?";
+		mes "입장료는 지역에 대한 투자로 아끼기 때문에 자주 방문해주세요.";
+		mes "아지트 던전에 입장하시겠습니까?";
 		next;
-		set .@i, select(.@realm$+" Dungeon 1F - 10000z:"+.@realm$+" Dungeon 2F - 10000z:Cancel");
+		set .@i, select(.@realm$+"던전 1F - 10000z:"+.@realm$+" 던전 2F - 10000z:Cancel");
 		if (.@i == 3) {
 			mes .@n$;
-			mes "Canceled.";
+			mes "취소되었습니다.";
 			close;
 		}
 		if (Zeny < 10000) {
 			mes .@n$;
-			mes "I'm collecting a small entrance fee.";
-			mes "Your contribution will be saved for the next investment.";
-			mes "Entrance fee is 10000z.";
+			mes "소량의 입장료를 모으고 있습니다.";
+			mes "귀하의 기여는 다음 투자를 위해 저장됩니다.";
+			mes "입장료는 10000z입니다.";
 			close;
 		}
 		mes .@n$;
-		mes "I'm sending you to the "+.@realm$+" Agit Dungeon "+.@i+"F.";
+		mes .@realm$ +" 아지트 던전 "+ .@i +"F로 보내드립니다.";
 		set Zeny, Zeny-10000;
 		setd "$fund_"+.@npc$+"_extra", getd("$fund_"+.@npc$+"_extra") + 1;
 		close2;
@@ -1007,13 +1007,13 @@ OnAgitInvest:
 		end;
 	} else if (.@status == 2) {
 		mes .@n$;
-		mes "The "+.@realm$+" Agit Dungeon 2F is now available but since it is not connected with the Abyss Gate,";
-		mes "the Agit dungeon is only accessible to the Agit guild.";
+		mes .@realm$ +" 아지트 던전 2층은 이용 가능하지만 어비스 게이트와 연결되어 있지 않기 때문에,";
+		mes "아지트 던전은 아지트 길드만 입장할 수 있습니다.";
 		close;
 	} else {
 		mes .@n$;
-		mes .@realm$+" was not chosen to be connected with a gate this time.";
-		mes "Please wait for the next investment duration.";
+		mes .@realm$ +" 이번에는 게이트와 연결되도록 선택되지 않았습니다.";
+		mes "다음 투자기간을 기다려주세요.";
 		close;
 	}
 	end;

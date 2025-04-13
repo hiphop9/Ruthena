@@ -8,6 +8,7 @@
 
 #include <common/showmsg.hpp>
 #include <common/sql.hpp>
+#include <config/custom.hpp>
 
 #include "auth.hpp"
 #include "http.hpp"
@@ -141,7 +142,10 @@ HANDLER_FUNC(merchantstore_load) {
 
 	if (SqlStmt_NumRows(stmt) <= 0) {
 		SqlStmt_Free(stmt);
-		ShowDebug("[AccountID: %d, World: \"%s\"] Not found in table, sending new info.\n", account_id, world_name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("[AccountID: %d, World: \"%s\"]을(를) 테이블에서 찾을 수 없습니다. 새로운 정보를 보냅니다.\n", account_id, world_name);
+		else
+			ShowDebug("[AccountID: %d, World: \"%s\"] Not found in table, sending new info.\n", account_id, world_name);
 		sl.unlock();
 		res.set_content("{\"Type\": 1}", "application/json");
 		return;

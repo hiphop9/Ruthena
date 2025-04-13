@@ -9,20 +9,20 @@
 //= 1.2 iRO conversion for 2 NPCs [Capuche, Everade]
 //============================================================
 
-sp_cor,152,158,4	script	Butterfly Merchant#sp_cor	4_M_ORIENT01,{
-	mes "[Butterfly Merchant]";
-	mes "Hey, nice to meet you.";
-	mes "I'm selling " + getitemname(100903) + ", do you want to buy it?";	// Teleport_Ep17_01
+sp_cor,152,158,4	script	나비 상인#sp_cor	4_M_ORIENT01,{
+	mes "[나비 상인]";
+	mes "안녕하세요, 만나서 반가워요.";
+	mes ""+ getitemname(100903) +"을 판매하고 있는데, 구매하시겠습니까?"; // Teleport_Ep17_01
 	close2;
 	callshop "shop_sp_cor";
 	end;
 }
 
-sp_cor,136,156,3	script	Grace Operator#ext162	4_M_REPAIR,{
-	mes "[Grace Operator]";
-	mes "Hello.";
-	mes "We have ^4d4dffGrace^000000 equipment that can be exchanged for " + mesitemlink( 25723 ) + ".";
-	mes "I will guide you to exchange items according to your job.";
+sp_cor,136,156,3	script	그레이스 교환원#ext162	4_M_REPAIR,{
+	mes "[그레이스 교환원]";
+	mes "안녕하세요.";
+	mes ""+ mesitemlink( 25723 ) +"로 교환할 수 있는 ^4d4dff그레이스^000000 장비가 있습니다.";
+	mes "직업에 따른 아이템 교환을 안내해드리겠습니다.";
 	close2;
 	switch( eaclass() & EAJ_THIRDMASK ) {
 	case EAJ_RUNE_KNIGHT:
@@ -109,66 +109,66 @@ sp_cor,136,156,3	script	Grace Operator#ext162	4_M_REPAIR,{
 }
 
 // Enchanting Supply Exchange NPC - Official iRO Conversion
-sp_cor,108,130,5	script	Rebellion#rm171_7	4_F_REBELLION3,{
+sp_cor,108,130,5	script	리벨리온#rm171_7	4_F_REBELLION3,{
 	if (isbegin_quest(17019) == 0) {
-		mes "[Rebellion]";
-		mes "The Rebellion is using this building for the moment.";
-		mes "Along with a few others around it.";
+		mes "[리벨리온]";
+		mes "현재 반란군이 이 건물을 사용하고 있습니다.";
+		mes "주변에 몇몇 다른 사람들과 함께요.";
 		next;
-		mes "[Rebellion]";
-		mes "We haven't been this busy for a long time.";
-		mes "I don't like that we're working with the President and the company, but it still feels good to be busy with something.";
+		mes "[리벨리온]";
+		mes "이렇게 바쁜 건 오랜만이에요.";
+		mes "사장이랑 회사랑 같이 일한다는 건 마음에 안 들지만, 뭔가 바쁘게 지내는 건 그래도 기분이 좋아요.";
 		close;
 	}
 	if (isbegin_quest(16353) < 2) {
-		mes "[Rebellion]";
-		mes "So, you received the message. The Captains are having a meeting on the inside. Captain Elena Volkova must have called you.";
-		mes "... I was going to call her, but she's already here.";
-		cloakoffnpcself( "Elena Volkova#rm171_0" );
-		npctalk "Elena Volkova: Ah, I've been looking for you, Adventurer.", "Elena Volkova#rm171_0", bc_self;
+		mes "[리벨리온]";
+		mes "그래서 메시지를 받으셨군요. 선장님들께서 내부에서 회의를 하고 계십니다. 엘레나 볼코바 선장님께서 전화하셨나봐요.";
+		mes "...전화하려고 했는데 벌써 와있네요.";
+		cloakoffnpcself( "엘레나 볼코바#rm171_0" );
+		npctalk "엘레나 볼코바: 아, 찾고 있었어 모험가님.", "엘레나 볼코바#rm171_0", bc_self;
 		if (isbegin_quest(16352) == 0)
 			setquest 16352;
 		close;
 	}
 	if (isbegin_quest(16360) < 2) {
-		mes "[Rebellion]";
-		mes "The Rebellion is using this building for the moment.";
-		mes "Along with a few others around it.";
+		mes "[리벨리온]";
+		mes "현재 반란군이 이 건물을 사용하고 있습니다.";
+		mes "주변에 몇몇 다른 사람들과 함께요.";
 		next;
-		mes "[Rebellion]";
-		mes "We haven't been this busy for a long time.";
-		mes "I don't like that we're working with the President and the company, but it still feels good to be busy with something.";
+		mes "[리벨리온]";
+		mes "이렇게 바쁜 건 오랜만이에요.";
+		mes "사장이랑 회사랑 같이 일한다는 건 마음에 안 들지만, 뭔가 바쁘게 지내는 건 그래도 기분이 좋아요.";
 		close2;
 		if (isbegin_quest(16352) == 1)
 			erasequest 16352;
 		end;
 	}
-	mes "[Rebellion]";
-	mes "Did you bring Damaged Weapons? Would you like to see that science criminal? He's in there. Want me to call him for you?";
-	mes "Or do you have business with me? I can exchange Weapon Modification Devices and Armor Modification Modules.";
-	cloakoffnpcself( "Elyumina#rm171_4" );
-	npctalk "Rebellion: Hey, criminal. You're wanted.", "Rebellion#rm171_7", bc_self;
-	npctalk "Elyumina: Alright, alright! I'm coming! You're so pathetic that without me, you'll have to fight with bean bags.", "Elyumina#rm171_4", bc_self;
+	mes "[리벨리온]";
+	mes "손상된 무기를 가져오셨나요? 그 과학범을 만나보실래요? 그 사람이 거기 있어요. 제가 대신 전화해 드릴까요?";
+	mes "아니면 저랑 할 일이 있으신가요? 무기 개조 장치와 방어구 개조 모듈을 교환해 드릴 수 있습니다.";
+	cloakoffnpcself( "엘류미나#rm171_4" );
+	npctalk "리벨리온: 이봐, 범죄자. 당신은 수배 중입니다.", "리벨리온#rm171_7", bc_self;
+	npctalk "엘류미나: 알았어 알았어! 내가 간다! 넌 너무 한심해서 나 없으면 콩주머니 들고 싸워야 할 것 같아.", "엘류미나#rm171_4", bc_self;
 	next;
-	switch (select("See Elyumina.", "Request Weapon Modification Device.", "Request Armor Modification Module.")) {
+	switch (select("엘류미나를 보세요.", "무기 개조 장치를 요청하세요.", "방어구 개조 모듈을 요청하세요.")) {
 	case 1:
-		mes "[Rebellion]";
-		mes "Okay, enjoy your conversation.";
-		mes "It took a long time to coax him, but he eventually agreed to modify our weapons and armor. He's pretty good at it, too. He's been working all day, every day.";
+		mes "[리벨리온]";
+		mes "좋아요, 대화를 즐겨보세요.";
+		mes "그를 달래는 데 오랜 시간이 걸렸지만 결국 우리의 무기와 방어구를 개조하는 데 동의했습니다. 그 사람도 꽤 능숙해요. 하루 종일 일하고 있어요.";
 		close;
 	case 2:
-		npctalk "Elyumina: What? If you were just going to keep me standing here like a statue, why did you even call me? You jerks!", "Elyumina#rm171_4", bc_self;
+		npctalk "엘류미나: 무엇? 나를 그냥 동상처럼 여기 서 있게 할 거면 왜 나한테 전화한 거야? 이 바보들아!", "엘류미나#rm171_4", bc_self;
 		if (checkweight(1201,3) == 0) {
-			mes "[Rebellion]";
-			mes "Do you want a Weapon Modification Device? It's 5 " + mesitemlink( 25723 ) + " or 1 million Zeny.";
-			mes "Your bag is full. Please make some room first.";
+			mes "[리벨리온]";
+			mes "무기 개조 장치를 원하시나요? 5 "+ mesitemlink( 25723 ) +" 또는 100만 제니입니다.";
+			mes "가방이 꽉 찼습니다. 먼저 공간을 확보해주세요.";
 			close;
 		}
-		mes "[Rebellion]";
-		mes "Do you want a Weapon Modification Device? It's 5 " + mesitemlink( 25723 ) + " or 1 million Zeny.";
-		mes "If you want a weapon, you can talk to Elyumina.";
+		mes "[리벨리온]";
+		mes "무기 개조 장치를 원하시나요? 5 "+ mesitemlink( 25723 ) +" 또는 100만 제니입니다.";
+		mes "무기를 원한다면 엘류미나에게 말을 걸면 됩니다.";
 		next;
-		if (select("Request Weapon Modification Device (Physical).", "Request Weapon Modification Device (Magic).") == 1) {
+		if (select("무기 개조 장치(물리)를 요청합니다.", "무기 개조 장치(마법)를 요청합니다.") == 1) {
 			// .@item_id = 23773;	// EP17_1_SPC02
 			.@group = IG_EP17_1_SPC02;
 			setarray .@ids[0],23776,23777,23778;
@@ -177,75 +177,75 @@ sp_cor,108,130,5	script	Rebellion#rm171_7	4_F_REBELLION3,{
 			.@group = IG_EP17_1_SPC03;	// EP17_1_SPC03
 			setarray .@ids[0],23779,23780,23781;
 		}
-		mes "[Rebellion]";
-		mes "I can randomly give you a " + mesitemlink( .@ids[0] ) + ",";
+		mes "[리벨리온]";
+		mes "무작위로 줄 수 있어요 " + mesitemlink( .@ids[0] ) + ",";
 		mes mesitemlink( .@ids[1] ) + ",";
-		mes "or " + mesitemlink( .@ids[2] ) + ".";
-		mes "Which one do you have, 5 Cor Cores or 1 million Zeny?";
+		mes "또는" + mesitemlink( .@ids[2] ) + ".";
+		mes "5코르 코어와 100만 제니 중 어느 것을 갖고 계시나요?";
 		next;
 		disable_items;
-		switch (select("5 Cor Cores", "1 million Zeny")) {
+		switch (select("5 코르 코어", "100만 제니")) {
 		case 1:
 			if (checkweight(1201,3) == 0) {
-				mes "[Rebellion]";
-				mes "There seems to be a problem. Please check if your bag has enough free space, and you have all the exchange materials you need.";
+				mes "[리벨리온]";
+				mes "문제가 있는 것 같습니다. 가방에 여유 공간이 충분한지, 필요한 교환 재료가 모두 있는지 확인해주세요.";
 				close;
 			}
 			if (countitem(25723) < 5) {
-				mes "[Rebellion]";
-				mes "You don't have enough Cor Cores. Please check your bag again.";
+				mes "[리벨리온]";
+				mes "코코어가 부족합니다. 가방을 다시 확인해 주세요.";
 				close;
 			}
 			delitem 25723,5;	// EP17_1_EVT39
 			break;
 		case 2:
 			if (checkweight(1201,3) == 0) {
-				mes "[Rebellion]";
-				mes "There seems to be a problem. Please check if your bag has enough free space, and you have all the exchange materials you need.";
+				mes "[리벨리온]";
+				mes "문제가 있는 것 같습니다. 가방에 여유 공간이 충분한지, 필요한 교환 재료가 모두 있는지 확인해주세요.";
 				close;
 			}
 			if (Zeny < 1000000) {
-				mes "[Rebellion]";
-				mes "You don't have enough Zeny. Please check your wallet again.";
+				mes "[리벨리온]";
+				mes "제니가 부족합니다. 지갑을 다시 확인해 주세요.";
 				close;
 			}
 			Zeny -= 1000000;
 		}
 		// consumeitem .@item_id;
 		getgroupitem(.@group);
-		mes "[Rebellion]";
-		mes "I gave you the best I had left.";
-		mes "If you want to refine it, the <NAVI>[Tin Can]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI> next to me can take good care of you.";
+		mes "[리벨리온]";
+		mes "내가 가진 가장 좋은 것을 당신에게 주었어요.";
+		mes "정제하고 싶으시다면 제 옆에 있는 <NAVI>[틴캔]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI>이 잘 챙겨드리겠습니다.";
 		close;
 	case 3:
-		npctalk "Elyumina: What? If you were just going to keep me standing here like a statue, why did you even call me? You brutes!", "Elyumina#rm171_4", bc_self;
-		mes "[Rebellion]";
-		mes "Do you want an Armor Modification Module? It's 30 " + mesitemlink( 25669 ) + " and 5 " + mesitemlink( 25723 ) + ".";
+		npctalk "엘류미나: 무엇? 나를 그냥 동상처럼 여기 서 있게 할 거면 왜 나한테 전화한 거야? 이 짐승들아!", "엘류미나#rm171_4", bc_self;
+		mes "[리벨리온]";
+		mes "방어구 개조 모듈을 원하시나요? 30개의 "+ mesitemlink( 25669 ) +"와 5개의 "+ mesitemlink( 25723 ) +"입니다.";
 		if (checkweight(1201,3) == 0) {
-			mes "Your bag is full. Please make some room first.";
+			mes "가방이 꽉 찼습니다. 먼저 공간을 확보해주세요.";
 			close;
 		}
-		mes "The kind you get is randomly decided.";
+		mes "어떤 종류를 얻을지는 무작위로 결정됩니다.";
 		next;
-		if (select("Request Armor Modification Module.", "Cancel.") == 2) {
-			mes "[Rebellion]";
-			mes "Feel feel to talk to me if you want Armor Modification Modules.";
+		if (select("방어구 개조 모듈을 요청하세요.", "취소.") == 2) {
+			mes "[리벨리온]";
+			mes "방어구 개조 모듈을 원하시면 저에게 말씀해 주세요.";
 			close;
 		}
 		disable_items;
 		if (countitem(25669) < 30 || countitem(25723) < 5) {
-			mes "[Rebellion]";
-			mes "Each Module requires 30 Mysterious Components and 5 Cor Cores. You don't have them all. Please check.";
+			mes "[리벨리온]";
+			mes "각 모듈에는 신비한 부품 30개와 코 코어 5개가 필요합니다. 다 가지고 있지는 않습니다. 확인해주세요.";
 			close;
 		}
 		if (checkweight(1201,3) == 0) {
-			mes "[Rebellion]";
-			mes "There seems to be a problem. Please check if your bag has enough free space, and you have all the exchange materials you need.";
+			mes "[리벨리온]";
+			mes "문제가 있는 것 같습니다. 가방에 여유 공간이 충분한지, 필요한 교환 재료가 모두 있는지 확인해주세요.";
 			close;
 		}
-		mes "[Rebellion]";
-		mes "I gave you an Armor Modification Module.";
-		mes "If you want to refine it, the <NAVI>[Tin Can]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI> next to me can take good care of you.";
+		mes "[리벨리온]";
+		mes "당신에게 방어구 개조 모듈을 주었습니다.";
+		mes "정제하고 싶으시다면 제 옆에 있는 <NAVI>[틴캔]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI>이 잘 챙겨드리겠습니다.";
 		delitem 25669,30;	// EP17_1_EVT02
 		delitem 25723,5;	// EP17_1_EVT39
 		// consumeitem 23775;	// EP17_1_SPC04
@@ -260,78 +260,78 @@ OnInit:
 }
 
 // Equipment Exchange NPC - Official iRO Conversion
-sp_cor,111,130,3	script	Elyumina#rm171_4	4_EP17_ELYUMINA,{
+sp_cor,111,130,3	script	엘류미나#rm171_4	4_EP17_ELYUMINA,{
 	if (isbegin_quest(16360) < 2) {
 		cutin "ep171_elyumina02",0;
-		mes "[Elyumina]";
-		mes "Argh! Why do you keep asking for me when I need to focus on my research? I'm busy, alright? If you're bored, go bring me more damaged weapons!";
+		mes "[엘류미나]";
+		mes "아아! 연구에 집중해야 하는데 왜 자꾸 나한테 물어보는 거지? 바쁜데 알겠지? 심심하면 가서 손상된 무기를 더 가져오너라!";
 		close2;
-		cloakonnpcself( "Elyumina#rm171_3" );
+		cloakonnpcself( "엘류미나#rm171_3" );
 		cutin "",255;
 		end;
 	}
 	if (checkweight(28136,2) == 0) {
 		cutin "ep171_elyumina03",0;
-		mes "[Elyumina]";
-		mes "Didn't you come for weapons or armor? Your bag is full. I don't have time to wait for you while you rummage through your bag. Come back later.";
+		mes "[엘류미나]";
+		mes "무기나 방어구 사러 온 거 아니었어? 가방이 꽉 찼어. 가방 뒤지는 동안 기다릴 시간도 없잖아. 나중에 다시 와.";
 		next;
-		mes " - Your bag is full. Please make some room, and then talk to me again. -";
+		mes " - 가방이 꽉 찼습니다. 공간을 확보하신 후 다시 통화해주세요. -";
 		close3;
 	}
 	cutin "ep171_elyumina01",0;
-	mes "[Elyumina]";
-	mes "What is it so important that you had to interrupt my research? This had better be important.";
+	mes "[엘류미나]";
+	mes "당신이 내 연구를 방해할 정도로 중요한 것이 무엇입니까? 이것이 더 중요할 것입니다.";
 	next;
 	cutin "",255;
-	switch (select("Request OS Weapon.", "Request Illusion Armor.")) {
+	switch (select("OS 무기를 요청하세요.", "일루젼 아머를 요청하세요.")) {
 	case 1:
 		cutin "ep171_elyumina01",0;
-		mes "[Elyumina]";
-		mes "OS weapons? I'll handle that if you bring me 1 " + mesitemlink( 25668 ) + " and 50 " + mesitemlink( 25669 ) + ".";
-		mes "I'll give you whatever kind I want to give you, among the ones I have. Why should I let you pick?";
+		mes "[엘류미나]";
+		mes "OS 무기요? "+ mesitemlink( 25668 ) +" 1개와 "+ mesitemlink( 25669 ) +" 50개를 가져오시면 처리해 드리겠습니다.";
+		mes "내게 있는 것 중에서 내가 주고 싶은 것은 무엇이든지 다 주겠다. 왜 고르게 놔두어야 하느냐?";
 		next;
 		cutin "",255;
-		if (select("Exchange OS Weapon.", "Check the available list.") == 2) {
+		if (select("OS 무기를 교환하세요.", "사용 가능한 목록을 확인하세요.") == 2) {
 			cutin "ep171_elyumina03",0;
-			mes "[Elyumina]";
-			mes "Tsk, tsk. I said everything I make is good. Do you really have to choose? Alright, then listen up.";
+			mes "[엘류미나]";
+			mes "쯧쯧. 내가 만든 건 다 좋다고 했어. 꼭 선택해야 해? 알았어, 그럼 잘 들어.";
 			next;
-			mes "[Elyumina]";
-			mes "Sword: " + mesitemlink( 13493 );
-			mes "Two-handed Sword: " + mesitemlink( 21047 );
-			mes "Staff: " + mesitemlink( 26151 );
-			mes "Book: " + mesitemlink( 28629 );
-			mes "Axe: " + mesitemlink( 28136 );
-			mes "Mace: " + mesitemlink( 16088 );
-			mes "Bow: " + mesitemlink( 18178 );
-			mes "Crossbow: " + mesitemlink( 18179 );
-			mes "Katar: " + mesitemlink( 28038 );
-			mes "Knuckle: " + mesitemlink( 1862 );
-			mes "Sniper Rifle: " + mesitemlink( 28253 );
-			mes "Dagger: " + mesitemlink( 28755 );
-			mes "Bow: " + mesitemlink( 18180 );
-			mes "Lance: " + mesitemlink( 32019 );
-			mes "Mace: " + mesitemlink( 16089 );
+			mes "[엘류미나]";
+			mes "한손검: " + mesitemlink( 13493 );
+			mes "양손검: " + mesitemlink( 21047 );
+			mes "스태프: " + mesitemlink( 26151 );
+			mes "책: " + mesitemlink( 28629 );
+			mes "도끼: " + mesitemlink( 28136 );
+			mes "메이스: " + mesitemlink( 16088 );
+			mes "활: " + mesitemlink( 18178 );
+			mes "석궁: " + mesitemlink( 18179 );
+			mes "카타르: " + mesitemlink( 28038 );
+			mes "둔기: " + mesitemlink( 1862 );
+			mes "스나이퍼 총: " + mesitemlink( 28253 );
+			mes "단검: " + mesitemlink( 28755 );
+			mes "보우: " + mesitemlink( 18180 );
+			mes "창: " + mesitemlink( 32019 );
+			mes "메이스: " + mesitemlink( 16089 );
 			close3;
 		}
 		disable_items;
 		if (countitem(25668) < 1 || countitem(25669) < 50) {
 			cutin "ep171_elyumina03",0;
-			mes "[Elyumina]";
-			mes "I told you, bring me 1 Damaged Weapon and 50 Mysterious Components. You should listen when people talk.";
+			mes "[엘류미나]";
+			mes "말했잖아, 손상된 무기 1개와 신비한 부품 50개를 가져오라고 했어. 사람들이 얘기할 때는 잘 들어야 해.";
 			close3;
 		}
 		if (checkweight(28136,2) == 0) {
 			cutin "ep171_elyumina03",0;
-			mes "[Elyumina]";
-			mes "... What the? There's a problem.";
-			mes "Not on my end, of course. This is on you. Check if your bag is full or you have all the materials you need.";
+			mes "[엘류미나]";
+			mes "...뭐야? 문제가 생겼어.";
+			mes "물론 내 입장은 아니죠. 이건 당신 몫이에요. 가방이 꽉 차 있는지, 필요한 재료가 모두 있는지 확인하세요.";
 			close3;
 		}
 		cutin "ep171_elyumina04",0;
-		mes "[Elyumina]";
-		mes "There. If you want another, then bring me more Damaged Weapons and Mysterious Components.";
-		mes "I'm locked up in here, fixing toys, because of you. You can deal with this, right?";
+		mes "[엘류미나]";
+		mes "자. 또 갖고 싶다면 손상된 무기와 신비한 부품을 더 가져오세요.";
+		mes "난 너 때문에 여기 갇혀서 장난감을 고치고 있잖아. 넌 감당할 수 있지?";
 		delitem 25668,1;	// EP17_1_EVT01
 		delitem 25669,50;	// EP17_1_EVT02
 		// consumeitem 23772;	// EP17_1_SPC01
@@ -339,12 +339,12 @@ sp_cor,111,130,3	script	Elyumina#rm171_4	4_EP17_ELYUMINA,{
 		close3;
 	case 2:
 		cutin "ep171_elyumina04",0;
-		mes "[Elyumina]";
-		mes "If you want Illusion armor, bring me 50 " + mesitemlink( 25723 ) + ". I'll give you a piece.";
-		mes "Let's see... Ooh, when did I make so many varieties? Alright, I feel generous. What do you want?";
+		mes "[엘류미나]";
+		mes "일루젼 방어구를 원하시면 "+ mesitemlink( 25723 ) +" 50개를 가져오세요. 조각을 드리겠습니다.";
+		mes "어디 보자... 아 내가 언제 이렇게 종류를 많이 만들었지? 알았어 넉넉한 마음이 든다. 뭘 원해?";
 		next;
 		cutin "",255;
-		switch (select("Illusion Armor", "Illusion Engine Wing", "Illusion Leg", "Illusion Booster", "Illusion Battle Chip")) {
+		switch (select("일루시온 아머", "일루시온 엔진윙", "일루시온 Leg", "일루시온 Booster", "일루시온 Battle Chip")) {
 		case 1:
 			setarray .@item[0],15376,15377;
 			break;
@@ -362,7 +362,7 @@ sp_cor,111,130,3	script	Elyumina#rm171_4	4_EP17_ELYUMINA,{
 			break;
 		}
 		cutin "ep171_elyumina01",0;
-		mes "[Elyumina]";
+		mes "[엘류미나]";
 		mes mesitemlink( .@item[0] );
 		mes mesitemlink( .@item[1] );
 		mes "Which one?";
@@ -370,27 +370,27 @@ sp_cor,111,130,3	script	Elyumina#rm171_4	4_EP17_ELYUMINA,{
 		cutin "",255;
 		.@id = .@item[ select( getitemname(.@item[0]), getitemname(.@item[1]) ) -1 ];
 		cutin "ep171_elyumina04",0;
-		mes "[Elyumina]";
-		mes "Alright, " + getitemname(.@id) + ", right? Do you really want to trade it for 50 Cor Cores?";
+		mes "[엘류미나]";
+		mes "알겠습니다. "+ getitemname(.@id) +" 맞죠? 정말 코 코어 50개로 교환하시겠습니까?";
 		next;
 		cutin "",255;
-		if (select( "Exchange.", "Do not exchange." ) == 2) {
+		if (select( "교환하세요.", "교환하지 마세요." ) == 2) {
 			cutin "ep171_elyumina03",0;
-			mes "[Elyumina]";
-			mes "Hey, are you kidding me? Hey, I tried to be nice!";
+			mes "[엘류미나]";
+			mes "야, 장난해? 야, 난 친절하려고 노력했어!";
 			close3;
 		}
 		disable_items;
 		if (countitem(25723) < 50) {
 			cutin "ep171_elyumina02",0;
-			mes "[Elyumina]";
-			mes "Hey, are you kidding me? You don't have all the Cor Cores! Hey, I tried to be nice!";
+			mes "[엘류미나]";
+			mes "야, 장난해? 코르 코어가 다 없잖아! 야, 나 착하게 굴려고 노력했어!";
 			enable_items;
 			close3;
 		}
 		cutin "ep171_elyumina04",0;
-		mes "[Elyumina]";
-		mes "Here, take this " + getitemname(.@id) + ". I bet it's probably the best armor you've ever had. You really ought to be grateful.";
+		mes "[엘류미나]";
+		mes "자, 이거 "+ getitemname(.@id) +"를 가져가세요. 아마 당신이 가진 갑옷 중 최고일 거라고 장담합니다. 정말 감사해야 할 것 같아요.";
 		delitem 25723,50;	// EP17_1_EVT390
 		getitem .@id,1;
 		enable_items;
@@ -406,31 +406,31 @@ OnInit:
 // Illusion Enchanter - Walkthrough Conversion
 sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 	if(!checkweight(1201,1) || (MaxWeight - Weight) < 1000){
-		mes "You can't proceed with the conversation because you have a large quantity of items.";
-		mes "Please organize your items and try again.";
+		mes "아이템의 양이 많아 대화를 진행할 수 없습니다.";
+		mes "상품을 정리하고 다시 시도해 주세요.";
 		close;
 	}
 	disable_items;
 	mes "[RS26]";
 	mes strcharinfo(0)+".";
-	mes "Welcome, Welcome!";
+	mes "환영합니다, 환영합니다!";
 	next;
-	switch (select("Explore the devices.:Enchant Illusion Armor.:Enchant Illusion Engine Wing.:Enchant Illusion Leg.:Enchant Illusion Accessory [R]:Enchant Illusion Accessory [L]")) {
+	switch (select("장치를 탐색하십시오.:환영 갑옷 마법부여.:환영 엔진 날개 마법부여:환상 다리 마법부여:환영 액세서리 마법부여 [R]:환영 액세서리 마법부여 [L]")) {
 	case 1:
-		mes "^0000FF# I'm the latest hologram technology perfected to show natural responses and gestures. #^000000";
+		mes "^0000FF# 나는 자연스러운 반응과 몸짓을 보여주기 위해 완성된 최신 홀로그램 기술입니다. #^000000";
 		next;
 		mes "[RS26]";
-		mes "My technology can only be found in future cities. I am RS26, a Regenschirm robotic machine.";
-		npctalk "Rebellion : Oh, that machine is useless without a module.","Rebellion#171_cor_merchant",bc_self;
+		mes "나의 기술은 미래 도시에서만 찾을 수 있습니다. 나는 Regenschirm 로봇 기계 RS26입니다.";
+		npctalk "리벨리온 : 아, 저 기계는 모듈이 없으면 쓸모가 없군요.","리벨리온#171_cor_merchant",bc_self;
 		next;
 		mes "[RS26]";
-		mes "If you bring Illusion equipment with strengthening modules, I will improve them as you desire.";
+		mes "강화모듈이 포함된 일루젼 장비를 가져오시면 원하시는대로 강화해드리겠습니다.";
 		next;
 		mes "[RS26]";
-		mes "Since these modules work with the standard equipment, they will not destroy the items. However, the number of upgrades can vary depending on the equipment.";
+		mes "이 모듈은 표준 장비와 함께 작동하기 때문에 아이템을 파괴하지는 않습니다. 단, 장비에 따라 업그레이드 횟수가 달라질 수 있습니다.";
 		next;
 		mes "[RS26]";
-		mes "Please come back if you need my help~";
+		mes "도움이 필요하시면 다시 오세요~";
 		close;
 	case 2:
 		.@part = EQI_ARMOR;
@@ -458,10 +458,10 @@ sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 		setarray .@id,32208,32210;
 		break;
 	}
-	switch (select("Cancel.:Normal Grade.:Rare Grade.:Unique Grade.:Legendary Grade.")) {
+	switch (select("취소.:보통등급.:레어등급.:유니크등급.:전설등급.")) {
 	case 1:
 		mes "[RS26]";
-		mes "I'm stopping here.";
+		mes "여기서 멈추겠습니다.";
 		close;
 		
 	case 2:
@@ -488,15 +488,15 @@ sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 	for(.@i = .@min; .@i < (.@max + 1); .@i++){
 		.@module_id[getarraysize(.@module_id)] = .@i;
 		.@item_name$ = getitemname(.@i);
-		.@item_name$ = replacestr(.@item_name$,"Modification Module (","");
+		.@item_name$ = replacestr(.@item_name$,"수정 모듈 (","");
 		.@item_name$ = replacestr(.@item_name$,")","");
-		.@menu$ += (!countitem(.@i) ? "^AAAAAA":"") + .@item_name$ + (!countitem(.@i) ? "^000000:":":");
+		.@menu$ += (!countitem(.@i) ? "^아아아아아":"") + .@item_name$ + (!countitem(.@i) ? "^000000:":":");
 	}
 	.@s = select(.@menu$);
 	switch( .@s ) {
 	case 1:
 		mes "[RS26]";
-		mes "I'm stopping here.";
+		mes "여기서 멈추겠습니다.";
 		close;
 		
 	default:
@@ -509,7 +509,7 @@ sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 		copyarray .@check[0],.@card[0],4;
 		if (!.@equip_id || .@id[0] != .@equip_id && .@id[1] != .@equip_id) {
 			mes "[RS26]";
-			mes "The equipment needs to be checked. That thing is not something this device can work with.";
+			mes "장비를 점검해야 합니다. 이 장비에서는 작동할 수 없는 장치입니다.";
 			close;
 		}
 		.@var$ = module_check(.@module_id[.@s],.@part,.@index);
@@ -517,33 +517,33 @@ sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 		switch (atoi(.@s$[0])) {
 			case 1:
 				mes "[RS26]";
-				mes "The module needs to be checked. This device cannot detect it.";
+				mes "모듈을 확인해야 합니다. 이 장치에서는 모듈을 감지할 수 없습니다.";
 				close;
 			case 2:
 				mes "[RS26]";
-				mes "Looks like the equipment you're trying to strengthen is already at it's limit.";
+				mes "강화하려는 장비가 이미 한계에 도달한 것 같습니다.";
 				close;
 			case 3:
 				mes "[RS26]";
-				mes "You need to have a module that matches the efficacy to proceed with enhancement.";
+				mes "강화를 진행하려면 효능에 맞는 모듈이 있어야 합니다.";
 				close;
 			case 4:
 				mes "[RS26]";
-				mes "The capabilities of this module can be enchanted up to " + .@s$[1] + " " + (atoi(.@s$[1]) > 1 ? "times":"time") +". It seems that the module threshold is already at it's limit.";
+				mes "이 모듈의 기능은 "+ .@s$[1] +" "+ (atoi(.@s$[1]) > 1 ? "times":"time") +"까지 강화될 수 있습니다. 모듈 임계값이 이미 한계에 도달했습니다.";
 				close;
 			case 5:
 				.@item_name$ = getitemname(.@module_id[.@s]);
-				.@item_name$ = replacestr(.@item_name$,"Modification Module (","");
+				.@item_name$ = replacestr(.@item_name$,"수정 모듈 (","");
 				.@item_name$ = replacestr(.@item_name$,")","");
 				mes "[RS26]";
-				mes "^0000FFYou have selected " + getitemname(.@equip_id) + " " + .@item_name$ + "^000000";
+				mes "^0000FF"+ getitemname(.@equip_id) +" "+ .@item_name$ +"^000000을 선택하셨습니다.";
 				mes "------------------";
-				mes "The selected module can be enchanted up to ^0000FF" + .@s$[2] + " " +  (atoi(.@s$[2]) > 1 ? "times":"time") +  "^000000 on the equipment. This equipment is currently enchanted with this module by ^0000FF" + .@s$[1] + ".";
-				mes "Do you want to proceed?";
+				mes "선택한 모듈은 장비에 최대 ^0000FF"+ .@s$[2] +" "+ (atoi(.@s$[2]) > 1 ? "times":"time") +"^000000까지 마법을 부여할 수 있습니다. . 이 장비는 현재 ^0000FF"+ .@s$[1] +"이 모듈은에 매료되었습니다.";
+				mes "계속하시겠습니까?";
 				next;
-				if (select("I'll think about it more...:Let's proceed.") == 1) {
+				if (select("좀 더 생각해 볼게요...:계속 합시다.") == 1) {
 					mes "[RS26]";
-					mes "Then, please visit me again when you need my help~";
+					mes "그럼 도움이 필요하시면 다시 찾아주세요~";
 					close;
 				}
 				for (.@i = 1; .@i < 4; .@i++) {
@@ -560,7 +560,7 @@ sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
 				delequip .@part;
 				getitem2 .@equip_id,1,1,.@refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
 				mes "[RS26]";
-				mes "Attempting to upgrade the slot ^990000" + .@augment_slot + "^000000 of the equipment.";
+				mes "장비의 ^990000 슬롯 업그레이드를 시도 중입니다."+ .@augment_slot +"장비의 ^000000.";
 				close;
 		}
 	}

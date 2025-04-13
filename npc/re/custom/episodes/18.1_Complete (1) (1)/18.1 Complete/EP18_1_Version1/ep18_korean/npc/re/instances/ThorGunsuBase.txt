@@ -1,0 +1,463 @@
+//===== rAthena Script =======================================
+//= Instance: Thor Gunsu Base.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Part of the episode 18.1 main quest.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 47.
+que_thr,133,53,5	script	마람#군수기지1	4_EP18_MARAM,{
+	if (ep18_1_main != 45 && ep18_1_main != 46)
+		end;
+	if (ep18_1_main == 45) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "도착하셨군요, 모험가님!";
+		mes "여기까지 오시느라 수고하셨어요.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "역시 이 다음이 진짜인 모양이군요. 경비가 지금까지와는 다른데…….";
+		mes "경비병에게 들키지 않도록 주의하면서 안을 뒤져보도록 하죠.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "경비병의 시야를 최대한 벗어나서 움직이도록 해요.";
+		mes "잘못해서 들키면 공격을 받을 테니 만약 돌파하지 못한 경우에는 여기서 다시 만나요.";
+		changequest 16577,16578;
+		ep18_1_main = 46;
+		next;
+	}
+	else if (ep18_1_main == 46) {
+		mes "[마람]";
+		mes "최대한 경비탑의 눈을 피해서 들어가보도록 하자구요.";
+		next;
+	}
+
+	.@md_name$ = "Thor Gunsu Base";
+	// .@md_name$ = "토르 군수기지";
+	cutin "",255;
+	mes "^FF0000던전 안에서 몬스터 테이밍 등 임의의 처리를 할 경우 정상 진행으로 간주하지 않습니다. 유의해주시기 바랍니다.^000000";
+	next;
+	// player has party
+	if (is_party_leader()) {
+		// player is leader of the party
+		.@create$ = .@md_name$ + " 연다";
+	}
+	switch( select( .@create$, .@md_name$ + " 입장" ) ) {
+	case 1:
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "신청이 완료되면 제게 다시 말을 걸어 ^0000CD토르 군수기지 입장^000000을 선택해 주세요.";
+		if (instance_create(.@md_name$) < 0) {
+			mes "Party: " + getpartyname(getcharid(1)) + "";
+			mes "Leader: " + strcharinfo(0) + "";
+			mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+			close3;
+		}
+		close3;
+	case 2:
+		// Note: instance not forced solo
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[마람]";
+			mes "^ff0000An unknown error occurred.^000000";
+			close;
+		case IE_NOINSTANCE:
+			cutin "ep18_maram_01.png",2;
+			mes "[마람]";
+			mes "던전이 아직 생성되지 않은 것 같은데요? 잠시 후에 확인해 주세요.";
+			close3;
+		case IE_NOMEMBER:
+			mes "[마람]";
+			mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+			close;
+		case IE_OK:
+			mapannounce "que_thr", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".",bc_map,"0x00ff99",FW_NORMAL,12;
+			// warp 1@tcamp,103,237;
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16577) == 1" );
+	end;
+}
+
+1@tcamp,106,237,3	script	마람#기지1	4_EP18_MARAM,{
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "조심해서 안쪽을 탐사해 봐요.";
+	mes "아까 민들레 씨에게 듣기론, 사람은 많이 없지만 여기저기 있는 감시탑들이 꽤 넓은 범위를 감시한다고 해요.";
+	next;
+	mes "[마람]";
+	mes "감시탑에 들키면 병사들이 나타날 테니 주의해서 들키지 않도록 해요.";
+	mes "그럼, 뭔가 발견하시면 연락주세요!";
+	close3;
+
+OnInstanceInit:
+	'map_tcamp$ = instance_mapname("1@tcamp");
+
+	disablenpc instance_npcname("서류 더미#기지1");
+	disablenpc instance_npcname("서류 더미#기지2");
+	disablenpc instance_npcname("서류 더미#기지3");
+	disablenpc instance_npcname("서류 더미#기지4");
+	disablenpc instance_npcname("서류 더미#기지5");
+	disablenpc instance_npcname("마람#잠금장치1");
+	disablenpc instance_npcname("마람#잠금장치2");
+	disablenpc instance_npcname("마람#잠금장치3");
+	disablenpc instance_npcname("마람#잠금장치4");
+
+	setcell 'map_tcamp$,137,216,142,216,cell_walkable,0;
+	setcell 'map_tcamp$,135,145,144,145,cell_walkable,0;
+	setcell 'map_tcamp$,223,105,223,110,cell_walkable,0;
+	setcell 'map_tcamp$,80,94,80,100,cell_walkable,0;
+
+	// it seems some monsters spawn randomly
+	monster 'map_tcamp$,0,0,"기지 병사",21310,18;	// EP18_MD_GUARD_A
+	monster 'map_tcamp$,0,0,"기지 병사",21309,18;	// EP18_MD_THOR_GUARD
+	end;
+}
+
+// unknown npc effect
+// 1@tcamp,244,152,3	duplicate(dummy_npc)	#리모컨1	CLEAR_NPC
+
+
+//-------------------------------------------------------------------
+// Traps
+//-------------------------------------------------------------------
+1@tcamp,120,228,3	script	감시탑#감시1	4_SYSTEM_BOX,7,7,{
+	end;
+OnTouch:
+	npctalk "침입자 발견. 배제합니다.";
+	mapannounce 'map_tcamp$, "침입자 발견, 침입자 발견. 즉각 배제합니다.", bc_map, 0xFF0000;
+	getmapxy .@map$,.@x,.@y, BL_NPC;
+
+	areamonster 'map_tcamp$,.@x-2,.@y-2,.@x+2,.@y+2,"기지 병사",21309,3;	// EP18_MD_THOR_GUARD
+	areamonster 'map_tcamp$,.@x-2,.@y-2,.@x+2,.@y+2,"기지 병사",21310,3;	// EP18_MD_GUARD_A
+	end;
+OnTimer2000:
+	specialeffect EF_WARP;
+	initnpctimer;
+	end;
+OnInstanceInit:
+	initnpctimer;
+	end;
+}
+
+1@tcamp,135,228,3	duplicate(감시탑#감시1)	감시탑#감시2	4_SYSTEM_BOX,7,7
+1@tcamp,152,133,3	duplicate(감시탑#감시1)	감시탑#감시3	4_SYSTEM_BOX,7,7
+1@tcamp,167,133,3	duplicate(감시탑#감시1)	감시탑#감시4	4_SYSTEM_BOX,7,7
+1@tcamp,182,133,3	duplicate(감시탑#감시1)	감시탑#감시5	4_SYSTEM_BOX,7,7
+1@tcamp,161,96,3	duplicate(감시탑#감시1)	감시탑#감시6	4_SYSTEM_BOX,7,7
+1@tcamp,146,96,3	duplicate(감시탑#감시1)	감시탑#감시7	4_SYSTEM_BOX,7,7
+1@tcamp,116,102,3	duplicate(감시탑#감시1)	감시탑#감시8	4_SYSTEM_BOX,7,7
+1@tcamp,88,92,3	duplicate(감시탑#감시1)	감시탑#감시9	4_SYSTEM_BOX,7,7
+1@tcamp,240,148,3	duplicate(감시탑#감시1)	감시탑#감시10	4_SYSTEM_BOX,7,7
+1@tcamp,156,71,3	duplicate(감시탑#감시1)	감시탑#감시11	4_SYSTEM_BOX,7,7
+1@tcamp,176,194,3	duplicate(감시탑#감시1)	감시탑#감시12	4_SYSTEM_BOX,7,7
+1@tcamp,192,194,3	duplicate(감시탑#감시1)	감시탑#감시13	4_SYSTEM_BOX,7,7
+1@tcamp,142,153,3	duplicate(감시탑#감시1)	감시탑#감시14	4_SYSTEM_BOX,7,7
+1@tcamp,142,168,3	duplicate(감시탑#감시1)	감시탑#감시15	4_SYSTEM_BOX,7,7
+1@tcamp,192,179,3	duplicate(감시탑#감시1)	감시탑#감시16	4_SYSTEM_BOX,7,7
+1@tcamp,237,90,3	duplicate(감시탑#감시1)	감시탑#감시17	4_SYSTEM_BOX,7,7
+
+
+//-------------------------------------------------------------------
+// Walls
+//-------------------------------------------------------------------
+1@tcamp,138,216,3	script	잠금장치#1-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("마람#잠금장치1");
+	enablenpc .@maram$;
+	npctalk "마람 : 잠시만 기다려주세요. 제가 여는 방법을 알아요.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "마람 : 자, 이제 지나갈 수 있어요!", .@maram$;
+	disablenpc instance_npcname("잠금장치#1-1");
+	disablenpc instance_npcname("잠금장치#1-2");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,137,216,142,216,cell_walkable,1;
+	end;
+}
+1@tcamp,141,216,3	duplicate(잠금장치#1-1)	잠금장치#1-2	4_ROPEPILE
+1@tcamp,140,218,3	duplicate(dummy_npc)	마람#잠금장치1	4_EP18_MARAM
+
+1@tcamp,136,145,3	script	잠금장치#2-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("마람#잠금장치2");
+	enablenpc .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "조심하면서 나아가 보는 게 좋겠어요.", .@maram$;
+	disablenpc instance_npcname("잠금장치#2-1");
+	disablenpc instance_npcname("잠금장치#2-2");
+	disablenpc instance_npcname("잠금장치#2-3");
+	disablenpc instance_npcname("잠금장치#2-4");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,135,145,144,145,cell_walkable,1;
+	end;
+}
+1@tcamp,138,145,3	duplicate(잠금장치#2-1)	잠금장치#2-2	4_ROPEPILE
+1@tcamp,141,145,3	duplicate(잠금장치#2-1)	잠금장치#2-3	4_ROPEPILE
+1@tcamp,143,145,3	duplicate(잠금장치#2-1)	잠금장치#2-4	4_ROPEPILE
+1@tcamp,142,147,3	duplicate(dummy_npc)	마람#잠금장치2	4_EP18_MARAM
+
+1@tcamp,223,109,3	script	잠금장치#3-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("마람#잠금장치3");
+	enablenpc .@maram$;
+	npctalk "마람 : 이 건물, 제법 수상해 보이죠? 이 안에도 감시 시스템이 있을 게 분명해요.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "마람 : 이번에도 들키지 않게 주의하면서, 조심해서 탐사해 보자구요.", .@maram$;
+	disablenpc instance_npcname("잠금장치#3-1");
+	disablenpc instance_npcname("잠금장치#3-2");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,223,105,223,110,cell_walkable,1;
+	end;
+}
+1@tcamp,223,106,3	duplicate(잠금장치#3-1)	잠금장치#3-2	4_ROPEPILE
+1@tcamp,226,114,3	duplicate(dummy_npc)	마람#잠금장치3	4_EP18_MARAM
+
+1@tcamp,80,99,3	script	잠금장치#4-1	4_ROPEPILE,{
+	.@maram$ = instance_npcname("마람#잠금장치4");
+	enablenpc .@maram$;
+	npctalk "마람 : 꽤 깊숙히 들어온 것 같은데. 필요한 걸 무사히 발견해야 할 텐데 말이에요.", .@maram$;
+	progressbar_npc "3131FF",10;
+	npctalk "마람 : 우리의 행운을 빌도록 할까요?", .@maram$;
+	disablenpc instance_npcname("잠금장치#4-1");
+	disablenpc instance_npcname("잠금장치#4-2");
+	disablenpc instance_npcname("잠금장치#4-3");
+	disablenpc .@maram$;
+	setcell 'map_tcamp$,80,94,80,100,cell_walkable,1;
+
+	enablenpc instance_npcname("서류 더미#기지1");
+	enablenpc instance_npcname("서류 더미#기지2");
+	enablenpc instance_npcname("서류 더미#기지3");
+	enablenpc instance_npcname("서류 더미#기지4");
+	enablenpc instance_npcname("서류 더미#기지5");
+	enablenpc instance_npcname("미리암#기지1");
+	enablenpc instance_npcname("마람#기지5");
+	end;
+}
+1@tcamp,80,97,3	duplicate(잠금장치#4-1)	잠금장치#4-2	4_ROPEPILE
+1@tcamp,80,95,3	duplicate(잠금장치#4-1)	잠금장치#4-3	4_ROPEPILE
+1@tcamp,82,100,3	duplicate(dummy_npc)	마람#잠금장치4	4_EP18_MARAM
+
+
+//-------------------------------------------------------------------
+// Final
+//-------------------------------------------------------------------
+1@tcamp,32,100,3	script	서류 더미#기지1	4_EP18_PAPERS,{
+	mes "[서류 더미]";
+	mes "온갖 서류가 뒤죽박죽 놓여 있다.";
+	mes "중간에서 몇 장을 꺼내 보니… 무기 사용기한 및 판매 내역서다.";
+	next;
+	mes "[서류 더미]";
+	mes "심지어 날짜는 아주 최근. 민들레 씨에게 대량의 무기를 넘긴 기록도 남아있다.";
+	mes "원하던 것을 찾은 듯하다. 서류를 품에 넣었다.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpc instance_npcname("서류 더미#기지1"), getcharid(0);
+	end;
+}
+
+1@tcamp,49,123,3	script	서류 더미#기지2	4_EP18_PAPERS,{
+	mes "[서류 더미]";
+	mes "온갖 서류가 뒤죽박죽 놓여 있다.";
+	mes "맨 윗장에는… 점심 회식 메뉴 결정전?";
+	next;
+	mes "[서류 더미]";
+	mes "튀겨서 소스를 묻힌 생선 요리를 메뉴로 정한 모양이다….";
+	mes "중요하지 않은 서류만을 놓고 떠난 듯하다. 일단은 챙겨 보자.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpc instance_npcname("서류 더미#기지2"), getcharid(0);
+	end;
+}
+
+1@tcamp,29,86,3	script	서류 더미#기지3	4_EP18_PAPERS,{
+	mes "[서류 더미]";
+	mes "온갖 서류가 뒤죽박죽 놓여 있다.";
+	mes "중간에서 하나를 꺼내 보니… 군수기지 경비원 배치도?";
+	next;
+	mes "[서류 더미]";
+	mes "날짜를 보니 한참 전 문서다.";
+	mes "중요하지 않은 서류만을 놓고 떠난 듯하다. 일단은 챙겨 보자.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpc instance_npcname("서류 더미#기지3"), getcharid(0);
+	end;
+}
+
+1@tcamp,60,122,3	script	서류 더미#기지4	4_EP18_PAPERS,{
+	mes "[서류 더미]";
+	mes "온갖 서류가 뒤죽박죽 놓여 있다.";
+	mes "맨 윗장은… '마그마링에게 감자를 먹이고 잠시 후 사냥하면 구운감자를 떨굴까?'";
+	next;
+	mes "[서류 더미]";
+	mes "……이런 게 왜 여기에. 하지만 결과가 궁금해!";
+	mes "중요하지 않은 서류만을 놓고 떠난 듯하다. 일단은 챙겨 보자.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpc instance_npcname("서류 더미#기지4"), getcharid(0);
+	end;
+}
+
+1@tcamp,31,84,3	script	서류 더미#기지5	4_EP18_PAPERS,{
+	mes "[서류 더미]";
+	mes "온갖 서류가 뒤죽박죽 놓여 있다.";
+	mes "중간에서 한 장 뽑아 보니… 펜으로 교황쿠키 아이싱을 따라 그린 교황님 일러스트가 나왔다.";
+	next;
+	mes "[서류 더미]";
+	mes "웬 그림이지? 게다가 엄청 잘 그렸어….";
+	mes "중요하지 않은 서류만을 놓고 떠난 듯하다. 일단은 챙겨 보자.";
+	close2;
+	getitem 1000409,1;	// Ep18_Docu_File
+	cloakonnpc instance_npcname("서류 더미#기지5"), getcharid(0);
+	end;
+}
+
+
+1@tcamp,34,100,3	script	미리암#기지1	4_EP18_MIRIAM,3,3,{
+	disable_items;
+	if (countitem(1000409) < 5) {	// Ep18_Docu_File
+		cutin "ep18_miriam_02.png",2;
+		mes "[미리암]";
+		mes "역시 능력있으시군요, 모험가님. 저는 온갖 연줄을 동원해서 알아낸 위치였는데.";
+		mes "모험가님과 마람은 단번에 찾아내신 모양이군요.";
+		next;
+		mes "[미리암]";
+		mes "여기의 서류들을 좀 읽어보세요. 우리가 찾던 내용이 있습니다.";
+		mes "제가 전부 설명해드리는 것보단, 일단 직접 보고 오시는 게 나을 것 같습니다.";
+		close3;
+	}
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		mes "[미니 엘리]";
+		mes "가방에서 꺼내줘요. 머리 위에 올려주세요.";
+		close;
+	}
+	cutin "ep18_miriam_02.png",2;
+	mes "[미리암]";
+	mes "…….";
+	next;
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "아니, 미리암! 너 어떻게 여기 있는 거야?";
+	mes "따로 조사한다고 하더니!";
+	next;
+	cutin "ep18_miriam_01.png",2;
+	mes "[미리암]";
+	mes "너와 모험가님이야말로 어떻게 여기까지 캐낸 거야?";
+	mes "역시 능력 좋네. 내가 온갖 연줄을 동원해서 알아낸 위치였는데, 단번에 찾아냈잖아.";
+	next;
+	cutin "ep18_maram_02.png",2;
+	mes "[마람]";
+	mes "우리가 좀 하지. 그렇죠, 모험가님?";
+	mes "아무튼, 무슨 정보를 얻은 거야?";
+	next;
+	cutin "ep18_miriam_02.png",2;
+	mes "[미리암]";
+	mes "여기 이 서류를 봐.";
+	next;
+	cutin "",255;
+	mes "[미니 엘리]";
+	mes "이 서류는 무기 판매 내역서로군요. 제게도 보여주세요.";
+	mes "이 자들이 처분한 무기, 화기들, 전부 사용기한이 채 일 년도 남지 않은 것들입니다.";
+	next;
+	cutin "ep18_miriam_03.png",2;
+	mes "[미리암]";
+	mes "이런 무기를 함부로 팔다니.";
+	mes "관리가 제대로 안된 무기라면 제기능을 못할 수도 있어.";
+	next;
+	cutin "ep18_maram_03.png",2;
+	mes "[마람]";
+	mes "뒷구멍으로 나오는 무기들 질이 다 그렇지.";
+	mes "……라지만, 하필 이 시점이라는 게 걸리네.";
+	next;
+	mes "[마람]";
+	mes "일 년이라면 사용기한이 넉넉하다고 할 수는 없지만 빠듯하지는 않아.";
+	mes "왜 하필 우리가 시위를 준비하는 이 순간 쏟아져 나왔을까?";
+	next;
+	mes "[마람]";
+	mes "곧바로 처분할 필요가 없었을 텐데.";
+	next;
+	npctalk "마람: 하아, 이것 참 재미있네.", instance_npcname("마람#기지5");
+	sleep2 300;
+	cutin "ep18_miriam_02.png",2;
+	mes "[미리암]";
+	mes "여기는, 내 양아버지가 관리하는 군수기지 중 한 곳이야.";
+	mes "혹시나 했는데, 정말 이런 시점에 튀어나오다니.";
+	next;
+	cutin "",255;
+	select( "양아버지라면 유스 아말 신관님?", "강경파에 전쟁 찬성파인 그 양아버지?" );
+	cutin "ep18_miriam_02.png",2;
+	mes "[미리암]";
+	mes "맞습니다, 모험가님. 장부를 살펴보니 아무래도 양아버지까지 엮인 것 같지는 않지만 말입니다.";
+	mes "아무래도 말단에서의 단독 비리인 것 같아요, 무기 유출 사건은.";
+	next;
+	mes "[미리암]";
+	mes "좀 더 자세히 파 봐야겠지만 지금으로서는 그렇게 추측됩니다.";
+	mes "아참, 서류는 이리 주세요. 제가 증거물로 가져가겠습니다.";
+	delitem 1000409,5;	// Ep18_Docu_File
+	if (isbegin_quest(16578) == 1) {
+		erasequest 16578;
+		setquest 16579;
+	}
+	close2;
+	cutin "",255;
+	npctalk "마람: 하아, 이것 참 재미있네.", instance_npcname("마람#기지5");
+	end;
+
+OnTouch:
+	npctalk "미리암 : 앗, 모험가님? 마람 너도!?";
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16578) == 1 && countitem(1000409) > 4" );	// Ep18_Docu_File
+	disablenpc instance_npcname("미리암#기지1");
+	end;
+}
+
+1@tcamp,32,102,3	script	마람#기지5	4_EP18_MARAM,{
+	if (isbegin_quest(16579) == 0) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "여기 미리암이 있을 줄은 몰랐는데. 그렇죠, 모험가님?";
+		close3;
+	}
+	cutin "ep18_maram_02.png",2;
+	mes "[마람]";
+	mes "따로 움직였지만 결국 같은 위치라니.";
+	mes "그래도 그 과정에서 얻은 게 달랐으니 나름대로 의미가 있으려나.";
+	next;
+	cutin "ep18_miriam_02.png",2;
+	mes "[미리암]";
+	mes "그럼 나는 잠시 자리를 비워야겠군.";
+	mes "알아낸 점에 대해 양아버지께 전달해야겠어.";
+	next;
+	mes "[미리암]";
+	mes "단독 비리라면 아직 양아버지께서도 모르고 계실 확률이 있으니까.";
+	next;
+	cutin "ep18_maram_03.png",2;
+	mes "[마람]";
+	mes "정말 단독 비리일까. 그 점이 아무래도 마음에 걸리지만.";
+	mes "나도 라헬에 전달할 것이 있으니 미리암, 같이 가자.";
+	next;
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "나가는 지름길을 알려드릴 테니 모험가님은 수아드에게 여기서 알아낸 일들을 전해 주시겠어요?";
+	mes "저희도 금방 따라갈테니 먼저 가서 말씀해 주세요.";
+	if (ep18_1_main == 46) {
+		ep18_1_main = 47;
+		erasequest 16579;
+		setquest 16580;
+		getitem "Ep18_Amethyst_Fragment",50;
+	}
+	close2;
+	warp "wolfvill",162,154;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16579) == 1" );
+	disablenpc instance_npcname("마람#기지5");
+	end;
+}

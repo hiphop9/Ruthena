@@ -12,6 +12,7 @@
 #include <common/socket.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -331,8 +332,12 @@ int intif_wis_message(map_session_data *sd, char *nick, char *mes, size_t mes_le
 	safestrncpy(WFIFOCP(inter_fd,8+2*NAME_LENGTH), mes, mes_len);
 	WFIFOSET(inter_fd, WFIFOW(inter_fd,2));
 
-	if (battle_config.etc_log)
-		ShowInfo("intif_wis_message from %s to %s (message: '%s')\n", sd->status.name, nick, mes);
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s님이 %s님께 받은 귓속말 메시지(intif_wis_message) (메시지: '%s')\n",  nick,sd->status.name, mes);
+		else
+			ShowInfo("intif_wis_message from %s to %s (message: '%s')\n", sd->status.name, nick, mes);
+	}
 
 	return 1;
 }
@@ -353,8 +358,12 @@ int intif_wis_reply(int id, int flag)
 	WFIFOB(inter_fd,6) = flag; // flag: 0: success to send wisper, 1: target character is not loged in?, 2: ignored by target
 	WFIFOSET(inter_fd,7);
 
-	if (battle_config.etc_log)
-		ShowInfo("intif_wis_reply: id: %d, flag:%d\n", id, flag);
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("intif_wis_replay: id: %d, 플래그:%d\n", id, flag);
+		else
+			ShowInfo("intif_wis_reply: id: %d, flag:%d\n", id, flag);
+	}
 
 	return 1;
 }
@@ -382,8 +391,12 @@ int intif_wis_message_to_gm(char *wisp_name, int permission, char *mes)
 	safestrncpy(WFIFOCP(inter_fd,8+NAME_LENGTH), mes, mes_len);
 	WFIFOSET(inter_fd, WFIFOW(inter_fd,2));
 
-	if (battle_config.etc_log)
-		ShowNotice("intif_wis_message_to_gm: from: '%s', required permission: %d, message: '%s'.\n", wisp_name, permission, mes);
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("intif_wis_message_to_gm: 보낸이: '%s', 필요한 권한: %d, 메시지: '%s'.\n", wisp_name, permission, mes);
+		else
+			ShowNotice("intif_wis_message_to_gm: from: '%s', required permission: %d, message: '%s'.\n", wisp_name, permission, mes);
+	}
 
 	return 1;
 }
@@ -437,7 +450,10 @@ int intif_saveregistry(map_session_data *sd)
 		++len;
 
 		if (!lValid) { //this is sql colum size, must be retrive from config
-			ShowError("intif_saveregistry: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd->status.account_id, sd->status.char_id, varname, len);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif_saveregistry: 변수 이름 길이가 너무 깁니다. (계정ID번호: %d, 케릭터ID번호: %d): '%s' 길이=%" PRIuPTR "\n", sd->status.account_id, sd->status.char_id, varname, len);
+			else		
+				ShowError("intif_saveregistry: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd->status.account_id, sd->status.char_id, varname, len);
 			continue;
 		}
 		WFIFOB(inter_fd, plen) = (unsigned char)len; // won't be higher; the column size is 32
@@ -459,7 +475,10 @@ int intif_saveregistry(map_session_data *sd)
 				lValid = script_check_RegistryVariableLength(1,p->value,&len);
 				++len;
 				if ( !lValid ) { // error can't be higher; the column size is 254. (nb the transmission limit with be fixed with protobuf revamp)
-					ShowDebug( "intif_saveregistry: Variable value length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR " to be saved with current system and will be truncated\n",sd->status.account_id, sd->status.char_id,p->value,len);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowDebug( "intif_saveregistry: 변수 값의 길이가 너무 깁니다. (계정ID번호: %d, 케릭터ID번호: %d): '%s' 길이=%" PRIuPTR "은(는) 현재 시스템과 함께 저장되며 나머지는 잘립니다.\n",sd->status.account_id, sd->status.char_id,p->value,len);
+					else		
+						ShowDebug( "intif_saveregistry: Variable value length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR " to be saved with current system and will be truncated\n",sd->status.account_id, sd->status.char_id,p->value,len);
 					len = 254;
 					p->value[len - 1] = '\0'; //this is backward for old char-serv but new one doesn't need this
 				}
@@ -1421,7 +1440,10 @@ void intif_parse_Registers(int fd)
 		case 0:
 			break;
 		default:
-			ShowError("intif_parse_Registers: Unrecognized type %d\n",RFIFOB(fd,12));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif_parse_Registers: 인식할 수 없는 타입 %d\n",RFIFOB(fd,12));
+			else
+				ShowError("intif_parse_Registers: Unrecognized type %d\n",RFIFOB(fd,12));
 			return;
 	}
 
@@ -1501,25 +1523,40 @@ int intif_parse_LoadGuildStorage(int fd)
 	sd = map_id2sd( RFIFOL(fd,4) );
 	if (flag){ //If flag != 0, we attach a player and open the storage
 		if(sd == nullptr){
-			ShowError("intif_parse_LoadGuildStorage: user not found (AID: %d)\n",RFIFOL(fd,4));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif_parse_LoadGuildStorage: 유저를 찾을 수 없습니다. (계정ID번호: %d)\n",RFIFOL(fd,4));
+			else
+				ShowError("intif_parse_LoadGuildStorage: user not found (AID: %d)\n",RFIFOL(fd,4));
 			return 0;
 		}
 	}
 	gstor = guild2storage(guild_id);
 	if (!gstor) {
-		ShowWarning("intif_parse_LoadGuildStorage: error guild_id %d not exist\n",guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("intif_parse_LoadGuildStorage: 에러! 길드ID(guild_id) %d이(가) 없습니다.\n",guild_id);
+		else
+			ShowWarning("intif_parse_LoadGuildStorage: error guild_id %d not exist\n",guild_id);
 		return 0;
 	}
 	if (gstor->status) { // Already open.. lets ignore this update
-		ShowWarning("intif_parse_LoadGuildStorage: storage received for a client already open (User %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("intif_parse_LoadGuildStorage: 클라이언트에게 전달받은 창고는 이미 열려있습니다. (유저 %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
+		else
+			ShowWarning("intif_parse_LoadGuildStorage: storage received for a client already open (User %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
 		return 0;
 	}
 	if (gstor->dirty) { // Already have storage, and it has been modified and not saved yet! Exploit! [Skotlex]
-		ShowWarning("intif_parse_LoadGuildStorage: received storage for an already modified non-saved storage! (User %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("intif_parse_LoadGuildStorage: 이미 수정되어 저장되지 않은 창고에 대한 창고를 받았습니다! (유저 %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
+		else
+			ShowWarning("intif_parse_LoadGuildStorage: received storage for an already modified non-saved storage! (User %d:%d)\n", flag?sd->status.account_id:1, flag?sd->status.char_id:1);
 		return 0;
 	}
 	if (RFIFOW(fd,2)-13 != sizeof(struct s_storage)) {
-		ShowError("intif_parse_LoadGuildStorage: data size error %d %" PRIuPTR "\n",RFIFOW(fd,2)-13 , sizeof(struct s_storage));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_LoadGuildStorage: 데이터 크기 에러 %d %" PRIuPTR "\n",RFIFOW(fd,2)-13 , sizeof(struct s_storage));
+		else
+			ShowError("intif_parse_LoadGuildStorage: data size error %d %" PRIuPTR "\n",RFIFOW(fd,2)-13 , sizeof(struct s_storage));
 		gstor->status = false;
 		return 0;
 	}
@@ -1549,8 +1586,12 @@ int intif_parse_SaveGuildStorage(int fd)
  */
 int intif_parse_PartyCreated(int fd)
 {
-	if(battle_config.etc_log)
-		ShowInfo("intif: party created by account %d\n\n", RFIFOL(fd,2));
+	if(battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("intif: %d 계정에 의해 파티가 만들어졌습니다.\n\n", RFIFOL(fd,2));
+		else
+			ShowInfo("intif: party created by account %d\n\n", RFIFOL(fd,2));
+	}
 	party_created(RFIFOL(fd,2), RFIFOL(fd,6),RFIFOB(fd,10),RFIFOL(fd,11), RFIFOCP(fd,15));
 	return 1;
 }
@@ -1563,13 +1604,20 @@ int intif_parse_PartyCreated(int fd)
 int intif_parse_PartyInfo(int fd)
 {
 	if( RFIFOW(fd,2) == 12 ){
-		ShowWarning("intif: party noinfo (char_id=%d party_id=%d)\n", RFIFOL(fd,4), RFIFOL(fd,8));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("intif: 파티 정보가 없습니다. (케릭터 ID=%d 파티ID=%d)\n", RFIFOL(fd,4), RFIFOL(fd,8));
+		else
+			ShowWarning("intif: party noinfo (char_id=%d party_id=%d)\n", RFIFOL(fd,4), RFIFOL(fd,8));
 		party_recv_noinfo(RFIFOL(fd,8), RFIFOL(fd,4));
 		return 0;
 	}
 
-	if( RFIFOW(fd,2) != 8+sizeof(struct party) )
-		ShowError("intif: party info : data size error (char_id=%d party_id=%d packet_len=%d expected_len=%" PRIuPTR ")\n", RFIFOL(fd,4), RFIFOL(fd,8), RFIFOW(fd,2), 8+sizeof(struct party));
+	if( RFIFOW(fd,2) != 8+sizeof(struct party) ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif: party info : 데이터 크기 에러 (케릭터 ID=%d 파티ID=%d 패킷길이=%d 요구된 길이=%" PRIuPTR ")\n", RFIFOL(fd,4), RFIFOL(fd,8), RFIFOW(fd,2), 8+sizeof(struct party));
+		else
+			ShowError("intif: party info : data size error (char_id=%d party_id=%d packet_len=%d expected_len=%" PRIuPTR ")\n", RFIFOL(fd,4), RFIFOL(fd,8), RFIFOW(fd,2), 8+sizeof(struct party));
+	}
 	party_recv_info((struct party *)RFIFOP(fd,8), RFIFOL(fd,4));
 	return 1;
 }
@@ -1581,8 +1629,12 @@ int intif_parse_PartyInfo(int fd)
  */
 int intif_parse_PartyMemberAdded(int fd)
 {
-	if(battle_config.etc_log)
-		ShowInfo("intif: party member added Party (%d), Account(%d), Char(%d)\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10));
+	if(battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("intif: 파티원이 파티(%d), 계정(%d), 캐릭터(%d)를 추가했습니다.\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10));
+		else
+			ShowInfo("intif: party member added Party (%d), Account(%d), Char(%d)\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10));
+	}
 	party_member_added(RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10), RFIFOB(fd, 14));
 	return 1;
 }
@@ -1605,8 +1657,12 @@ int intif_parse_PartyOptionChanged(int fd)
  */
 int intif_parse_PartyMemberWithdraw(int fd)
 {
-	if(battle_config.etc_log)
-		ShowInfo("intif: party member withdraw: Type(%d) Party(%d), Account(%d), Char(%d), Name(%s)\n",RFIFOB(fd,14+NAME_LENGTH),RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOCP(fd,14));
+	if(battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("intif: 파티원 탈퇴: 타입(%d) 파티(%d), 계정(%d), 케릭터(%d), 이름(%s)\n",RFIFOB(fd,14+NAME_LENGTH),RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOCP(fd,14));
+		else
+			ShowInfo("intif: party member withdraw: Type(%d) Party(%d), Account(%d), Char(%d), Name(%s)\n",RFIFOB(fd,14+NAME_LENGTH),RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOCP(fd,14));
+	}
 	party_member_withdraw(RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOCP(fd,14),(enum e_party_member_withdraw)RFIFOB(fd,14+NAME_LENGTH));
 	return 1;
 }
@@ -1663,12 +1719,19 @@ int intif_parse_GuildCreated(int fd)
 int intif_parse_GuildInfo(int fd)
 {
 	if(RFIFOW(fd,2) == 8) {
-		ShowWarning("intif: guild noinfo %d\n",RFIFOL(fd,4));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("intif: 길드 정보 없음 %d\n",RFIFOL(fd,4));
+		else
+			ShowWarning("intif: guild noinfo %d\n",RFIFOL(fd,4));
 		guild_recv_noinfo(RFIFOL(fd,4));
 		return 0;
 	}
-	if( RFIFOW(fd,2)!=sizeof(struct mmo_guild)+4 )
-		ShowError("intif: guild info : data size error Gid: %d recv size: %d Expected size: %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct mmo_guild)+4);
+	if( RFIFOW(fd,2)!=sizeof(struct mmo_guild)+4 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif: guild info : 길드ID(Gid) 데이터 크기 에러: %d 받은 크기: %d 요구된 크기: %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct mmo_guild)+4);
+		else
+			ShowError("intif: guild info : data size error Gid: %d recv size: %d Expected size: %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct mmo_guild)+4);
+	}
 	guild_recv_info(*(struct mmo_guild *)RFIFOP(fd,4));
 	return 1;
 }
@@ -1680,8 +1743,12 @@ int intif_parse_GuildInfo(int fd)
  */
 int intif_parse_GuildMemberAdded(int fd)
 {
-	if(battle_config.etc_log)
-		ShowInfo("intif: guild member added %d %d %d %d\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOB(fd,14));
+	if(battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("intif: 추가된 길드맴버 %d %d %d %d\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOB(fd,14));
+		else
+			ShowInfo("intif: guild member added %d %d %d %d\n",RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOB(fd,14));
+	}
 	guild_member_added(RFIFOL(fd,2),RFIFOL(fd,6),RFIFOL(fd,10),RFIFOB(fd,14));
 	return 1;
 }
@@ -1789,8 +1856,12 @@ int intif_parse_GuildMemberInfoChanged(int fd)
  */
 int intif_parse_GuildPosition(int fd)
 {
-	if( RFIFOW(fd,2)!=sizeof(struct guild_position)+12 )
-		ShowError("intif: guild info : data size error %d %d %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct guild_position)+12);
+	if( RFIFOW(fd,2)!=sizeof(struct guild_position)+12 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif: 길드 정보 : 데이터 크기 에러 %d %d %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct guild_position)+12);
+		else
+			ShowError("intif: guild info : data size error %d %d %" PRIuPTR "\n",RFIFOL(fd,4),RFIFOW(fd,2),sizeof(struct guild_position)+12);
+	}
 	guild_position_changed(RFIFOL(fd,4),RFIFOL(fd,8),(struct guild_position *)RFIFOP(fd,12));
 	return 1;
 }
@@ -1898,8 +1969,12 @@ int intif_parse_RecvPetData(int fd)
 	int len;
 	len=RFIFOW(fd,2);
 	if(sizeof(struct s_pet)!=len-9) {
-		if(battle_config.etc_log)
-			ShowError("intif: pet data: data size error %" PRIuPTR " %d\n",sizeof(struct s_pet),len-9);
+		if(battle_config.etc_log) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif: 펫 데이터: 데이터 크기 에러 %" PRIuPTR " %d\n",sizeof(struct s_pet),len-9);
+			else
+				ShowError("intif: pet data: data size error %" PRIuPTR " %d\n",sizeof(struct s_pet),len-9);
+		}
 	}
 	else{
 		memcpy(&p,RFIFOP(fd,9),sizeof(struct s_pet));
@@ -1916,9 +1991,12 @@ int intif_parse_RecvPetData(int fd)
  */
 int intif_parse_SavePetOk(int fd)
 {
-	if(RFIFOB(fd,6) == 1)
-		ShowError("pet data save failure\n");
-
+	if(RFIFOB(fd,6) == 1) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("펫 데이터 저장 실패\n");
+		else
+			ShowError("pet data save failure\n");
+	}
 	return 1;
 }
 
@@ -1929,9 +2007,12 @@ int intif_parse_SavePetOk(int fd)
  */
 int intif_parse_DeletePetOk(int fd)
 {
-	if(RFIFOB(fd,2) == 1)
-		ShowError("pet data delete failure\n");
-
+	if(RFIFOB(fd,2) == 1) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("펫 데이터 삭제 실패\n");
+		else
+			ShowError("pet data delete failure\n");
+	}
 	return 1;
 }
 
@@ -1973,8 +2054,12 @@ int intif_parse_CreateHomunculus(int fd)
 	int len;
 	len=RFIFOW(fd,2)-9;
 	if(sizeof(struct s_homunculus)!=len) {
-		if(battle_config.etc_log)
-			ShowError("intif: create homun data: data size error %" PRIuPTR " != %d\n",sizeof(struct s_homunculus),len);
+		if(battle_config.etc_log) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif: 생성된 호문 데이터: 데이터 크기 에러 %" PRIuPTR " != %d\n",sizeof(struct s_homunculus),len);
+			else
+				ShowError("intif: create homun data: data size error %" PRIuPTR " != %d\n",sizeof(struct s_homunculus),len);
+		}
 		return 0;
 	}
 	hom_recv_data(RFIFOL(fd,4), (struct s_homunculus*)RFIFOP(fd,9), RFIFOB(fd,8)) ;
@@ -1993,8 +2078,12 @@ int intif_parse_RecvHomunculusData(int fd)
 	len=RFIFOW(fd,2)-9;
 
 	if(sizeof(struct s_homunculus)!=len) {
-		if(battle_config.etc_log)
-			ShowError("intif: homun data: data size error %" PRIuPTR " %d\n",sizeof(struct s_homunculus),len);
+		if(battle_config.etc_log) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif: 호문클루스 데이터: 데이터 크기 에러 %" PRIuPTR " %d\n",sizeof(struct s_homunculus),len);
+			else
+				ShowError("intif: homun data: data size error %" PRIuPTR " %d\n",sizeof(struct s_homunculus),len);
+		}
 		return 0;
 	}
 	hom_recv_data(RFIFOL(fd,4), (struct s_homunculus*)RFIFOP(fd,9), RFIFOB(fd,8));
@@ -2008,9 +2097,12 @@ int intif_parse_RecvHomunculusData(int fd)
  */
 int intif_parse_SaveHomunculusOk(int fd)
 {
-	if(RFIFOB(fd,6) != 1)
-		ShowError("homunculus data save failure for account %d\n", RFIFOL(fd,2));
-
+	if(RFIFOB(fd,6) != 1) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("계정 %d에 대한 호문클루스 데이터 저장을 실패했습니다.\n", RFIFOL(fd,2));
+		else
+			ShowError("homunculus data save failure for account %d\n", RFIFOL(fd,2));
+	}
 	return 1;
 }
 
@@ -2021,9 +2113,12 @@ int intif_parse_SaveHomunculusOk(int fd)
  */
 int intif_parse_DeleteHomunculusOk(int fd)
 {
-	if(RFIFOB(fd,2) != 1)
-		ShowError("Homunculus data delete failure\n");
-
+	if(RFIFOB(fd,2) != 1) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("호문클루스 데이터 삭제 실패!\n");
+		else
+			ShowError("Homunculus data delete failure\n");
+	}
 	return 1;
 }
 
@@ -2078,7 +2173,10 @@ void intif_parse_questlog(int fd)
 
 		for(int i = 0; i < num_received; i++) {
 			if(!quest_search(received[i].quest_id)) {
-				ShowError("intif_parse_QuestLog: quest %d not found in DB.\n", received[i].quest_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("intif_parse_QuestLog: 퀘스트 %d을(를) DB에서 찾을 수 없습니다.\n", received[i].quest_id);
+				else
+					ShowError("intif_parse_QuestLog: quest %d not found in DB.\n", received[i].quest_id);
 				continue;
 			}
 			if(received[i].state != Q_COMPLETE) // Insert at the beginning
@@ -2109,8 +2207,12 @@ void intif_parse_questsave(int fd)
 	int cid = RFIFOL(fd, 2);
 	TBL_PC *sd = map_id2sd(cid);
 
-	if( !RFIFOB(fd, 6) )
-		ShowError("intif_parse_questsave: Failed to save quest(s) for character %d!\n", cid);
+	if( !RFIFOB(fd, 6) ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_questsave: 캐릭터 %d의 퀘스트를 저장하지 못했습니다!\n", cid);
+		else
+			ShowError("intif_parse_questsave: Failed to save quest(s) for character %d!\n", cid);
+	}
 	else if( sd )
 		sd->save_quest = false;
 }
@@ -2189,7 +2291,10 @@ void intif_parse_achievements(int fd)
 			std::shared_ptr<s_achievement_db> adb = achievement_db.find( received[i].achievement_id );
 
 			if (!adb) {
-				ShowError("intif_parse_achievements: Achievement %d not found in achievement_db.\n", received[i].achievement_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("intif_parse_achievementlog: 달성과제 %d을(를) 데이터베이스(DB)에서 찾을 수 없습니다.\n", received[i].achievement_id);
+				else
+					ShowError("intif_parse_achievements: Achievement %d not found in achievement_db.\n", received[i].achievement_id);
 				continue;
 			}
 
@@ -2234,8 +2339,12 @@ void intif_parse_achievementsave(int fd)
 	if (!sd) // User not online anymore
 		return;
 
-	if (!RFIFOB(fd, 6))
-		ShowError("intif_parse_achievementsave: Failed to save achievement(s) for character %s (%d)!\n", sd->status.name, cid);
+	if (!RFIFOB(fd, 6)) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_achievementsave: %s(케릭터ID번호: %d)님의 달성과제를 저장하는데 실패 했습니다!\n", sd->status.name, cid);
+		else
+			ShowError("intif_parse_achievementsave: Failed to save achievement(s) for character %s (%d)!\n", sd->status.name, cid);
+	}
 }
 
 /**
@@ -2341,13 +2450,19 @@ int intif_parse_Mail_inboxreceived(int fd)
 
 	if (sd == nullptr)
 	{
-		ShowError("intif_parse_Mail_inboxreceived: char not found %d\n",RFIFOL(fd,4));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_inboxreceived: 케릭터 %d을(를) 찾을 수 없습니다.\n",RFIFOL(fd,4));
+		else
+			ShowError("intif_parse_Mail_inboxreceived: char not found %d\n",RFIFOL(fd,4));
 		return 0;
 	}
 
 	if (RFIFOW(fd,2) - 10 != sizeof(struct mail_data))
 	{
-		ShowError("intif_parse_Mail_inboxreceived: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 10, sizeof(struct mail_data));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_inboxreceived: 데이터 크기 에러 %d %" PRIuPTR "\n", RFIFOW(fd,2) - 10, sizeof(struct mail_data));
+		else
+			ShowError("intif_parse_Mail_inboxreceived: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 10, sizeof(struct mail_data));
 		return 0;
 	}
 
@@ -2423,7 +2538,10 @@ int intif_parse_Mail_getattach(int fd)
 
 	if (RFIFOW(fd, 2) - 16 != sizeof(struct item)*MAIL_MAX_ITEM)
 	{
-		ShowError("intif_parse_Mail_getattach: data size error %d %" PRIuPTR "\n", RFIFOW(fd, 2) - 16, sizeof(struct item));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_getattach: 데이터 크기 에러 %d (아이템 크기 : %" PRIuPTR " )\n",RFIFOW(fd, 2) - 16, sizeof(struct item));
+		else
+			ShowError("intif_parse_Mail_getattach: data size error %d %" PRIuPTR "\n", RFIFOW(fd, 2) - 16, sizeof(struct item));
 		return 0;
 	}
 
@@ -2431,7 +2549,10 @@ int intif_parse_Mail_getattach(int fd)
 
 	if (sd == nullptr)
 	{
-		ShowError("intif_parse_Mail_getattach: char not found %d\n",RFIFOL(fd,4));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_getattach: 케릭터 %d을(를) 찾을 수 없습니다.\n",RFIFOL(fd,4));
+		else
+			ShowError("intif_parse_Mail_getattach: char not found %d\n",RFIFOL(fd,4));
 		return 0;
 	}
 
@@ -2483,7 +2604,10 @@ int intif_parse_Mail_delete(int fd)
 	map_session_data *sd = map_charid2sd(char_id);
 	if (sd == nullptr)
 	{
-		ShowError("intif_parse_Mail_delete: char not found %d\n", char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_delete: 케릭터 %d을(를) 찾을 수 없습니다.\n", char_id);
+		else
+			ShowError("intif_parse_Mail_delete: char not found %d\n", char_id);
 		return 0;
 	}
 
@@ -2543,7 +2667,10 @@ int intif_parse_Mail_return(int fd)
 
 	if( sd == nullptr )
 	{
-		ShowError("intif_parse_Mail_return: char not found %d\n",RFIFOL(fd,2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_return: 케릭터 %d을(를) 찾을 수 없습니다.\n",RFIFOL(fd,2));
+		else
+			ShowError("intif_parse_Mail_return: char not found %d\n",RFIFOL(fd,2));
 		return 1;
 	}
 
@@ -2605,7 +2732,10 @@ static void intif_parse_Mail_send(int fd)
 
 	if( RFIFOW(fd,2) - 4 != sizeof(struct mail_message) )
 	{
-		ShowError("intif_parse_Mail_send: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 4, sizeof(struct mail_message));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Mail_send: 데이터 크기 에러 %d (메일 메시지 크기 : %" PRIuPTR " )\n", RFIFOW(fd,2) - 4, sizeof(struct mail_message));
+		else
+			ShowError("intif_parse_Mail_send: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 4, sizeof(struct mail_message));
 		return;
 	}
 
@@ -2769,7 +2899,10 @@ static void intif_parse_Auction_register(int fd)
 
 	if( RFIFOW(fd,2) - 4 != sizeof(struct auction_data) )
 	{
-		ShowError("intif_parse_Auction_register: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 4, sizeof(struct auction_data));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_Auction_register: 데이터 크기 에러 %d (경매 데이터 크기: %" PRIuPTR " )\n", RFIFOW(fd,2) - 4, sizeof(struct auction_data));
+		else
+			ShowError("intif_parse_Auction_register: data size error %d %" PRIuPTR "\n", RFIFOW(fd,2) - 4, sizeof(struct auction_data));
 		return;
 	}
 
@@ -2978,8 +3111,12 @@ int intif_parse_mercenary_received(int fd)
 	int len = RFIFOW(fd,2) - 5;
 	if( sizeof(struct s_mercenary) != len )
 	{
-		if( battle_config.etc_log )
-			ShowError("intif: create mercenary data size error %" PRIuPTR " != %d\n", sizeof(struct s_mercenary), len);
+		if( battle_config.etc_log ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif: 생성한 용병 데이터 크기 에러 %" PRIuPTR " != %d\n", sizeof(struct s_mercenary), len);
+			else		
+				ShowError("intif: create mercenary data size error %" PRIuPTR " != %d\n", sizeof(struct s_mercenary), len);
+		}
 		return 0;
 	}
 
@@ -3030,9 +3167,12 @@ int intif_mercenary_delete(int merc_id)
  */
 int intif_parse_mercenary_deleted(int fd)
 {
-	if( RFIFOB(fd,2) != 1 )
-		ShowError("Mercenary data delete failure\n");
-
+	if( RFIFOB(fd,2) != 1 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("용병 데이터 삭제 실패!\n");
+		else
+			ShowError("Mercenary data delete failure\n");
+	}
 	return 1;
 }
 
@@ -3063,9 +3203,12 @@ int intif_mercenary_save(struct s_mercenary *merc)
  */
 int intif_parse_mercenary_saved(int fd)
 {
-	if( RFIFOB(fd,2) != 1 )
-		ShowError("Mercenary data save failure\n");
-
+	if( RFIFOB(fd,2) != 1 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("용병 데이터 저장 실패!\n");
+		else
+			ShowError("Mercenary data save failure\n");
+	}
 	return 1;
 }
 
@@ -3103,8 +3246,12 @@ int intif_parse_elemental_received(int fd)
 	int len = RFIFOW(fd,2) - 5;
 	if( sizeof(struct s_elemental) != len )
 	{
-		if( battle_config.etc_log )
-			ShowError("intif: create elemental data size error %" PRIuPTR " != %d\n", sizeof(struct s_elemental), len);
+		if( battle_config.etc_log ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("intif: 생성한 속성(엘레멘탈) 데이터 크기 에러 %" PRIuPTR " != %d\n", sizeof(struct s_elemental), len);
+			else
+				ShowError("intif: create elemental data size error %" PRIuPTR " != %d\n", sizeof(struct s_elemental), len);
+		}
 		return 0;
 	}
 
@@ -3155,9 +3302,12 @@ int intif_elemental_delete(int ele_id)
  */
 int intif_parse_elemental_deleted(int fd)
 {
-	if( RFIFOB(fd,2) != 1 )
-		ShowError("Elemental data delete failure\n");
-
+	if( RFIFOB(fd,2) != 1 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("속성(엘레멘탈) 데이터 삭제 실패\n");
+		else
+			ShowError("Elemental data delete failure\n");
+	}
 	return 1;
 }
 
@@ -3188,9 +3338,12 @@ int intif_elemental_save(struct s_elemental *ele)
  */
 int intif_parse_elemental_saved(int fd)
 {
-	if( RFIFOB(fd,2) != 1 )
-		ShowError("Elemental data save failure\n");
-
+	if( RFIFOB(fd,2) != 1 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("속성(엘레멘탈) 데이터 저장 실패\n");
+		else
+			ShowError("Elemental data save failure\n");
+	}
 	return 1;
 }
 
@@ -3372,7 +3525,10 @@ void intif_itembound_guild_retrieve(uint32 char_id,uint32 account_id,int guild_i
 	WFIFOSET(inter_fd,12);
 	if (gstor)
 		gstor->lock = true; //Lock for retrieval process
-	ShowInfo("Request guild bound item(s) retrieval for CID = " CL_WHITE "%d" CL_RESET ", AID = %d, Guild ID = " CL_WHITE "%d" CL_RESET ".\n", char_id, account_id, guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("케릭터ID번호 = " CL_WHITE "%d" CL_RESET ", 계정ID번호 = %d, 길드 ID번호 = " CL_WHITE "%d" CL_RESET "에 대한 길드 바운드 아이템 검색을 요청합니다.\n", char_id, account_id, guild_id);
+	else
+		ShowInfo("Request guild bound item(s) retrieval for CID = " CL_WHITE "%d" CL_RESET ", AID = %d, Guild ID = " CL_WHITE "%d" CL_RESET ".\n", char_id, account_id, guild_id);
 }
 
 /**
@@ -3400,7 +3556,10 @@ void intif_parse_itembound_store2gstorage(int fd) {
 	struct s_storage *gstor = guild2storage(guild_id);
 
 	if (!gstor) {
-		ShowError("intif_parse_itembound_store2gstorage: Guild '%d' not found.\n", guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_itembound_store2gstorage: 길드 '%d'을(를) 찾을 수 없습니다.\n", guild_id);
+		else
+			ShowError("intif_parse_itembound_store2gstorage: Guild '%d' not found.\n", guild_id);
 		return;
 	}
 
@@ -3412,7 +3571,10 @@ void intif_parse_itembound_store2gstorage(int fd) {
 		if (!storage_guild_additem2(gstor, item, item->amount))
 			failed++;
 	}
-	ShowInfo("Retrieved '" CL_WHITE "%d" CL_RESET "' (failed: %d) guild bound item(s) for Guild ID = " CL_WHITE "%d" CL_RESET ".\n", count, failed, guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("길드 ID = " CL_WHITE "%d" CL_RESET "의 '" CL_WHITE "%d" CL_RESET "'개 길드 바운딩 아이템이 검색됨 (실패함: %d).\n", guild_id, count, failed);
+	else
+		ShowInfo("Retrieved '" CL_WHITE "%d" CL_RESET "' (failed: %d) guild bound item(s) for Guild ID = " CL_WHITE "%d" CL_RESET ".\n", count, failed, guild_id);
 	gstor->lock = false;
 	gstor->status = false;
 }
@@ -3432,12 +3594,18 @@ static bool intif_parse_StorageReceived(int fd)
 	size_t sz_stor = sizeof(struct s_storage);
 
 	if (!sd) {
-		ShowError("intif_parse_StorageReceived: No player online for receiving inventory/cart/storage data (AID: %d)\n", account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_StorageReceived: 인벤토리/카트/창고 데이터를 수신할 플레이어가 접속중이지 않습니다. (계정ID번호: %d)\n", account_id);
+		else
+			ShowError("intif_parse_StorageReceived: No player online for receiving inventory/cart/storage data (AID: %d)\n", account_id);
 		return false;
 	}
 
 	if (!RFIFOB(fd, 9)) {
-		ShowError("intif_parse_StorageReceived: Failed to load! (AID: %d, type: %d)\n", account_id, type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_StorageReceived: 로드하지 못했습니다. (계정ID번호: %d, 타입: %d)\n", account_id, type);
+		else
+			ShowError("intif_parse_StorageReceived: Failed to load! (AID: %d, type: %d)\n", account_id, type);
 		return false;
 	}
 
@@ -3462,16 +3630,25 @@ static bool intif_parse_StorageReceived(int fd)
 
 	if (stor->stor_id == p->stor_id) {
 		if (stor->status) { // Already open.. lets ignore this update
-			ShowWarning("intif_parse_StorageReceived: storage received for a client already open (User %d:%d)\n", sd->status.account_id, sd->status.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("intif_parse_StorageReceived: 클라이언트에게 전달받은 창고는 이미 열려있습니다. (유저 계정ID번호:%d , 케릭터ID번호:%d)\n", sd->status.account_id, sd->status.char_id);
+			else
+				ShowWarning("intif_parse_StorageReceived: storage received for a client already open (User %d:%d)\n", sd->status.account_id, sd->status.char_id);
 			return false;
 		}
 		if (stor->dirty) { // Already have storage, and it has been modified and not saved yet! Exploit!
-			ShowWarning("intif_parse_StorageReceived: received storage for an already modified non-saved storage! (User %d:%d)\n", sd->status.account_id, sd->status.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("intif_parse_StorageReceived: 이미 수정되어 저장되지 않은 창고에 대한 창고를 전달 받았습니다. (유저 %d:%d)\n", sd->status.account_id, sd->status.char_id);
+			else
+				ShowWarning("intif_parse_StorageReceived: received storage for an already modified non-saved storage! (User %d:%d)\n", sd->status.account_id, sd->status.char_id);
 			return false;
 		}
 	}
 	if (RFIFOW(fd,2)-10 != sz_stor) {
-		ShowError("intif_parse_StorageReceived: data size error %d %" PRIuPTR "\n",RFIFOW(fd,2)-10 , sz_stor);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse_StorageReceived: 데이터 크기 에러 %d (창고 크기: %" PRIuPTR " )\n",RFIFOW(fd,2)-10 , sz_stor);
+		else
+			ShowError("intif_parse_StorageReceived: data size error %d %" PRIuPTR "\n",RFIFOW(fd,2)-10 , sz_stor);
 		stor->status = false;
 		return false;
 	}
@@ -3589,8 +3766,12 @@ static void intif_parse_StorageSaved(int fd)
 			default:
 				break;
 		}
-	} else
-		ShowError("Failed to save inventory/cart/storage data (AID: %d, type: %d).\n", RFIFOL(fd, 2), RFIFOB(fd, 7));
+	} else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("인벤토리/카트/창고 데이터를 저장하는데 실패 했습니다. (계정ID번호: %d, 타입: %d).\n", RFIFOL(fd, 2), RFIFOB(fd, 7));
+		else
+			ShowError("Failed to save inventory/cart/storage data (AID: %d, type: %d).\n", RFIFOL(fd, 2), RFIFOB(fd, 7));
+	}
 }
 
 /**
@@ -3614,8 +3795,12 @@ void intif_parse_StorageInfo_recv(int fd) {
 		storage_db[storage->id] = storage;
 	}
 
-	if (battle_config.etc_log)
-		ShowInfo("Received '" CL_WHITE PRIdPTR CL_RESET "' storage info from inter-server.\n", storage_db.size());
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("인터서버(inter-server)로부터 '" CL_WHITE "%d" CL_RESET "'개의 창고 정보를 받았습니다.\n", storage_db.size());
+		else
+			ShowInfo("Received '" CL_WHITE PRIdPTR CL_RESET "' storage info from inter-server.\n", storage_db.size());
+	}
 }
 
 /**
@@ -3890,7 +4075,10 @@ int intif_parse(int fd)
 	case 0x38A2:	intif_parse_clan_onlinecount(fd); break;
 
 	default:
-		ShowError("intif_parse : unknown packet %d %x\n",fd,RFIFOW(fd,0));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("intif_parse : 알수 없는 패킷 %d %x\n",fd,RFIFOW(fd,0));
+		else
+			ShowError("intif_parse : unknown packet %d %x\n",fd,RFIFOW(fd,0));
 		return 0;
 	}
 

@@ -2016,3 +2016,383 @@ Body:
           - Index: 0
             Item: Evt_Cos_Coin
             Amount: 30
+  - Name: barter_costume_3
+    Items:
+      - Index: 0
+        Item: C_Loli_Ruri_Moon
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 1
+        Item: C_Mermaid_Wig
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 2
+        Item: C_Halloween_Cat_Long
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 50
+      - Index: 3
+        Item: C_Halloween_Cat_Short
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 50
+      - Index: 4
+        Item: C_Disguise_Mantle
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 50
+      - Index: 5
+        Item: C_Big_Ribbon_Cloak
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 6
+        Item: C_Rabbit_Winged_Robe
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 7
+        Item: C_Book_Of_Magic
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 8
+        Item: C_Phalanx
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 9
+        Item: C_Evil_Druid_Cross
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 10
+        Item: C_Evil_Scythe
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 11
+        Item: C_Gift_of_Panagia
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 12
+        Item: C_Snow_Fox_TW
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 13
+        Item: C_Valkyrie_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 14
+        Item: C_VIP_Hair_Female
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 15
+        Item: C_Popping_Poring_Aura
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 16
+        Item: Calabash
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 17
+        Item: C_VIP_Hair_Male
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 18
+        Item: C_AngelRibbonWing_TW
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 19
+        Item: C_Swirling_Flame
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 20
+        Item: C_Kings_Twin_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 21
+        Item: C_Deviruchi_Apron
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 22
+        Item: C_Tiger
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 23
+        Item: C_White_Corone
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 24
+        Item: c_Sweet_Corone
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 25
+        Item: C_Hopping_Twin_Pigtail
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 26
+        Item: C_WL_Hair_BU
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 27
+        Item: C_Fish_Marche
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 28
+        Item: C_WL_Hair_BL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 29
+        Item: C_WL_Hair_GN
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 30
+        Item: C_WL_Hair_OM
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 31
+        Item: C_WL_Hair_PK
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 32
+        Item: C_WL_Hair_PP
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 33
+        Item: C_WL_Hair_RD
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 34
+        Item: C_WL_Hair_WH
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 35
+        Item: C_WL_Hair_YL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 36
+        Item: C_SR_Hair_SV
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 37
+        Item: C_SR_Hair_BL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 38
+        Item: C_SR_Hair_GN
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 39
+        Item: C_SR_Hair_OM
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 40
+        Item: C_SR_Hair_PK
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 41
+        Item: C_SR_Hair_PP
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 42
+        Item: C_SR_Hair_RD
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 43
+        Item: C_SR_Hair_WH
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 44
+        Item: C_SR_Hair_YL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 45
+        Item: C_Tiger_WH
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 46
+        Item: C_Tiger_BL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 47
+        Item: C_Mermaid_Wig_Peach
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 48
+        Item: C_Magic_Circle_BL
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 49
+        Item: C_Fluffy_Lovely_Fox
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 50
+        Item: C_Hooked_Straw_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 51
+        Item: C_Belka_Strelka
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 52
+        Item: C_Yesterday_Once_More_K
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 53
+        Item: C_Released_Ground
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 54
+        Item: C_Starry_Long_Wave
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 250
+      - Index: 55
+        Item: C_Astrologer_T_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 56
+        Item: C_Faith_Of_Yggdrasil
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 57
+        Item: C_Magestic_Goat
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 58
+        Item: C_Flower_L_Knitting
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 59
+        Item: C_Protect_Cloth_B
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 60
+        Item: C_Big_Magic_Book
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 61
+        Item: C_Muranyasa
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150
+      - Index: 62
+        Item: C_Magic_Celestial_Globe
+        RequiredItems:
+          - Index: 0
+            Item: Evt_Cos_Coin
+            Amount: 150

@@ -1,0 +1,14 @@
+//===== rAthena Script ======================================= 
+//= Global NPCs
+//===== Description: ========================================= 
+//= General npcs which should be loaded first.
+//===== Additional Comments: ================================= 
+//= 1.0 Added "dummy_disabled_instance_npc". [Capuche]
+//============================================================ 
+
+-	script	dummy_disabled_instance_npc	-1,{
+	end;
+OnInstanceInit:
+	disablenpc();
+	end;
+}

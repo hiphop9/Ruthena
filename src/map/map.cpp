@@ -22,6 +22,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"
@@ -35,6 +36,7 @@
 #include "clif.hpp"
 #include "duel.hpp"
 #include "elemental.hpp"
+#include "emotes.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -50,6 +52,8 @@
 #include "pc.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
+#include "stall.hpp"
 #include "storage.hpp"
 #include "trade.hpp"
 
@@ -87,6 +91,9 @@ char mob_skill2_table[32] = "mob_skill_db2";
 #endif
 char sales_table[32] = "sales";
 char vendings_table[32] = "vendings";
+char stalls_table[32] = "stalls";
+char stalls_vending_items_table[32] = "stalls_vending_items";
+char stalls_buying_items_table[32] = "stalls_buying_items";
 char vending_items_table[32] = "vending_items";
 char market_table[32] = "market";
 char partybookings_table[32] = "party_bookings";
@@ -142,6 +149,9 @@ bool agit_flag = false;
 bool agit2_flag = false;
 bool agit3_flag = false;
 int night_flag = 0; // 0=day, 1=night [Yor]
+//@잡 플래그 설정
+int charkami_flag =0;
+int charkami2_flag =0;
 
 struct charid_request {
 	struct charid_request* next;
@@ -179,6 +189,7 @@ const char *MSG_CONF_NAME_IDN;
 const char *MSG_CONF_NAME_FRN;
 const char *MSG_CONF_NAME_POR;
 const char *MSG_CONF_NAME_THA;
+const char *MSG_CONF_NAME_EN; //영어 설정
 
 char wisp_server_name[NAME_LENGTH] = "Server"; // can be modified in char-server configuration file
 
@@ -239,8 +250,12 @@ int map_freeblock (struct block_list *bl)
 	{
 		aFree(bl);
 		bl = nullptr;
-		if (block_free_count >= block_free_max)
-			ShowWarning("map_freeblock: too many free block! %d %d\n", block_free_count, block_free_lock);
+		if (block_free_count >= block_free_max) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("map_freeblock: 너무 많은 빈 블록 %d %d\n", block_free_count, block_free_lock);
+			else
+				ShowWarning("map_freeblock: too many free block! %d %d\n", block_free_count, block_free_lock);
+		}
 	} else
 		block_free[block_free_count++] = bl;
 
@@ -268,7 +283,10 @@ int map_freeblock_unlock (void)
 		}
 		block_free_count = 0;
 	} else if (block_free_lock < 0) {
-		ShowError("map_freeblock_unlock: lock count < 0 !\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_freeblock_unlock: 잠긴 갯수(lock count) < 0 !\n");
+		else
+			ShowError("map_freeblock_unlock: lock count < 0 !\n");
 		block_free_lock = 0;
 	}
 
@@ -279,7 +297,10 @@ int map_freeblock_unlock (void)
 // Called each 1s
 TIMER_FUNC(map_freeblock_timer){
 	if (block_free_lock > 0) {
-		ShowError("map_freeblock_timer: block_free_lock(%d) is invalid.\n", block_free_lock);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_freeblock_timer: block_free_lock(%d)은(는) 잘못되었습니다.\n", block_free_lock);
+		else
+			ShowError("map_freeblock_timer: block_free_lock(%d) is invalid.\n", block_free_lock);
 		block_free_lock = 1;
 		map_freeblock_unlock();
 	}
@@ -343,7 +364,10 @@ int map_addblock(struct block_list* bl)
 
 	if( m < 0 )
 	{
-		ShowError("map_addblock: invalid map id (%d), only %d are loaded.\n", m, map_num);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_addblock: (%d)은 잘못된 맵입니다. %d개만 로드되었습니디.\n", m, map_num);
+		else
+			ShowError("map_addblock: invalid map id (%d), only %d are loaded.\n", m, map_num);
 		return 1;
 	}
 
@@ -354,7 +378,10 @@ int map_addblock(struct block_list* bl)
 
 	if( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys )
 	{
-		ShowError("map_addblock: out-of-bounds coordinates (\"%s\",%d,%d), map is %dx%d\n", mapdata->name, x, y, mapdata->xs, mapdata->ys);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_addblock: (\"%s\",%d,%d)은(는) 범위를 벗어난 좌표입니다. 이 맵의 크기는  %dx%d 입니다.\n", map[m].name, x, y, map[m].xs, map[m].ys);
+		else
+			ShowError("map_addblock: out-of-bounds coordinates (\"%s\",%d,%d), map is %dx%d\n", mapdata->name, x, y, mapdata->xs, mapdata->ys);
 		return 1;
 	}
 
@@ -694,9 +721,12 @@ int map_foreachinrangeV(int (*func)(struct block_list*,va_list),struct block_lis
 		}
 	}
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinrange: block count too many!\n");
-
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachinrange: 블록 수가 너무 많습니다.\n");
+		else
+			ShowWarning("map_foreachinrange: block count too many!\n");
+	}
 	map_freeblock_lock();
 
 	for( i = blockcount; i < bl_list_count; i++ ) {
@@ -816,8 +846,12 @@ int map_foreachinareaV(int(*func)(struct block_list*, va_list), int16 m, int16 x
 		}
 	}
 
-	if (bl_list_count >= BL_LIST_MAX)
-		ShowWarning("map_foreachinarea: block count too many!\n");
+	if (bl_list_count >= BL_LIST_MAX) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachinarea: 블록수가 너무 많습니다!\n");
+		else
+			ShowWarning("map_foreachinarea: block count too many!\n");
+	}
 
 	map_freeblock_lock();
 
@@ -917,8 +951,12 @@ int map_forcountinrange(int (*func)(struct block_list*,va_list), struct block_li
 			}
 		}
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_forcountinrange: block count too many!\n");
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_forcountinrange: 블록수가 너무 많습니다.!\n");
+		else
+			ShowWarning("map_forcountinrange: block count too many!\n");
+	}
 
 	map_freeblock_lock();
 
@@ -977,9 +1015,12 @@ int map_forcountinarea(int (*func)(struct block_list*,va_list), int16 m, int16 x
 					if( bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1 && bl_list_count < BL_LIST_MAX )
 						bl_list[ bl_list_count++ ] = bl;
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_forcountinarea: block count too many!\n");
-
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_forcountinarea: 블록수가 너무 많습니다!\n");
+		else
+			ShowWarning("map_forcountinarea: block count too many!\n");
+	}
 	map_freeblock_lock();
 
 	for( i = blockcount; i < bl_list_count; i++ )
@@ -1109,8 +1150,12 @@ int map_foreachinmovearea(int (*func)(struct block_list*,va_list), struct block_
 
 	}
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinmovearea: block count too many!\n");
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachinmovearea: 블록수가 많습니다!\n");
+		else
+			ShowWarning("map_foreachinmovearea: block count too many!\n");
+	}
 
 	map_freeblock_lock();	// Prohibit the release from memory
 
@@ -1158,8 +1203,12 @@ int map_foreachincell(int (*func)(struct block_list*,va_list), int16 m, int16 x,
 			if( bl->x == x && bl->y == y && bl_list_count < BL_LIST_MAX)
 				bl_list[ bl_list_count++ ] = bl;
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachincell: block count too many!\n");
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachincell: 블록수가 많습니다!\n");
+		else
+			ShowWarning("map_foreachincell: block count too many!\n");
+	}
 
 	map_freeblock_lock();
 
@@ -1510,8 +1559,12 @@ int map_foreachindir(int(*func)(struct block_list*, va_list), int16 m, int16 x0,
 		}
 	}
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachindir: block count too many!\n");
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachindir: 블록 수가 너무 많습니다!\n");
+		else
+			ShowWarning("map_foreachindir: block count too many!\n");
+	}
 
 	map_freeblock_lock();
 
@@ -1556,8 +1609,12 @@ int map_foreachinmap(int (*func)(struct block_list*,va_list), int16 m, int type,
 				if( bl_list_count < BL_LIST_MAX )
 					bl_list[ bl_list_count++ ] = bl;
 
-	if( bl_list_count >= BL_LIST_MAX )
-		ShowWarning("map_foreachinmap: block count too many!\n");
+	if( bl_list_count >= BL_LIST_MAX ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("map_foreachinmap: 블록 수가 너무 많습니다!\n");
+		else
+			ShowWarning("map_foreachinmap: block count too many!\n");
+	}
 
 	map_freeblock_lock();
 
@@ -1596,7 +1653,10 @@ int map_get_new_object_id(void)
 	}
 
 	if( i == last_object_id ) {
-		ShowError("map_addobject: no free object id!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_addobject: 사용가능한 오브젝트(객체)ID가 없습니다.!\n");
+		else
+			ShowError("map_addobject: no free object id!\n");
 		return 0;
 	}
 
@@ -1614,7 +1674,10 @@ TIMER_FUNC(map_clearflooritem_timer){
 	struct flooritem_data* fitem = (struct flooritem_data*)idb_get(id_db, id);
 
 	if (fitem == nullptr || fitem->bl.type != BL_ITEM || (fitem->cleartimer != tid)) {
-		ShowError("map_clearflooritem_timer : error\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_clearflooritem_timer : 에러\n");
+		else
+			ShowError("map_clearflooritem_timer : error\n");
 		return 1;
 	}
 
@@ -1734,7 +1797,10 @@ int map_search_freecell(struct block_list *src, int16 m, int16 *x, int16 *y, int
 
 	if( !src && (!(flag&1) || flag&2) )
 	{
-		ShowDebug("map_search_freecell: Incorrect usage! When src is nullptr, flag has to be &1 and can't have &2\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("map_search_freecell: 잘못된 사용입니다. src가 nullptr이면, 플래그는 &1이어야하고 &2는 가질 수 없습니다.\n");
+		else
+			ShowDebug("map_search_freecell: Incorrect usage! When src is nullptr, flag has to be &1 and can't have &2\n");
 		return 0;
 	}
 
@@ -2247,6 +2313,11 @@ struct s_elemental_data* map_id2ed(int id) {
 	return BL_CAST(BL_ELEM, bl);
 }
 
+struct s_stall_data* map_id2st(int id) {
+	struct block_list* bl = map_id2bl(id);
+	return BL_CAST(BL_STALL, bl);
+}
+
 struct chat_data* map_id2cd(int id){
 	struct block_list* bl = map_id2bl(id);
 	return BL_CAST(BL_CHAT, bl);
@@ -2645,7 +2716,10 @@ bool map_addnpc(int16 m,struct npc_data *nd)
 
 	if( mapdata->npc_num == MAX_NPC_PER_MAP )
 	{
-		ShowWarning("too many NPCs in one map %s\n",mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("하나의 맵 %s에 너무 많은 NPC가 있습니다.\n",mapdata->name);
+		else
+			ShowWarning("too many NPCs in one map %s\n",mapdata->name);
 		return false;
 	}
 
@@ -2703,7 +2777,10 @@ int map_addinstancemap(int src_m, int instance_id, bool no_mapflag)
 
 	if(strlen(name) > 20) {
 		// against buffer overflow
-		ShowError("map_addinstancemap: Map name \"%s\" is too long.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_addisntancemap: \"%s\"이(란) 맵이름은 너무 길어서 추가 할 수 없습니다.\n", name);
+		else
+			ShowError("map_addinstancemap: Map name \"%s\" is too long.\n", name);
 		return -2;
 	}
 
@@ -2719,7 +2796,10 @@ int map_addinstancemap(int src_m, int instance_id, bool no_mapflag)
 		dst_m = map_num++;
 	else {
 		// Out of bounds
-		ShowError("map_addinstancemap failed. map_num(%d) > map_max(%d)\n", map_num, MAX_MAP_PER_SERVER);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_addinstancemap은 실패했습니다. map_num(%d) > map_max(%d)\n",map_num, MAX_MAP_PER_SERVER);
+		else
+			ShowError("map_addinstancemap failed. map_num(%d) > map_max(%d)\n", map_num, MAX_MAP_PER_SERVER);
 		return -3;
 	}
 
@@ -2763,7 +2843,10 @@ int map_addinstancemap(int src_m, int instance_id, bool no_mapflag)
 	if(!no_mapflag)
 		map_data_copy(dst_map, src_map);
 
-	ShowInfo("[Instance] Created map '%s' (%d) from '%s' (%d).\n", dst_map->name, dst_map->m, name, src_map->m);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("[인스턴스] '%s' (%d)님이 '%s' (%d) 맵을 생성했습니다.\n", name, src_map->m,dst_map->name, dst_map->m);
+	else
+		ShowInfo("[Instance] Created map '%s' (%d) from '%s' (%d).\n", dst_map->name, dst_map->m, name, src_map->m);
 
 	map_addmap2db(dst_map);
 
@@ -2899,7 +2982,10 @@ void map_spawnmobs(int16 m)
 
 	if (battle_config.etc_log && k > 0)
 	{
-		ShowStatus("Map %s: Spawned '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, k);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("맵 %s: '" CL_WHITE "%d" CL_RESET "'마리의 몬스터가 스폰되었습니다.\n",map[m].name, k);
+		else
+			ShowStatus("Map %s: Spawned '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, k);
 	}
 }
 
@@ -2936,7 +3022,10 @@ TIMER_FUNC(map_removemobs_timer){
 
 	if (m < 0)
 	{	//Incorrect map id!
-		ShowError("map_removemobs_timer error: timer %d points to invalid map %d\n",tid, m);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_removemobs_timer 에러: 타이머 %d이(가) 잘못된 맵 %d 위치에 있습니다.\n",tid, m);
+		else
+			ShowError("map_removemobs_timer error: timer %d points to invalid map %d\n",tid, m);
 		return 0;
 	}
 
@@ -2944,7 +3033,10 @@ TIMER_FUNC(map_removemobs_timer){
 
 	if (mapdata->mob_delete_timer != tid)
 	{	//Incorrect timer call!
-		ShowError("map_removemobs_timer mismatch: %d != %d (map %s)\n",mapdata->mob_delete_timer, tid, mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+	 		ShowError("map_removemobs_timer 불일치: %d != %d (맵 %s)\n",map[m].mob_delete_timer, tid, map[m].name);
+		else
+			ShowError("map_removemobs_timer mismatch: %d != %d (map %s)\n",mapdata->mob_delete_timer, tid, mapdata->name);
 		return 0;
 	}
 	mapdata->mob_delete_timer = INVALID_TIMER;
@@ -2953,8 +3045,12 @@ TIMER_FUNC(map_removemobs_timer){
 
 	count = map_foreachinmap(map_removemobs_sub, m, BL_MOB);
 
-	if (battle_config.etc_log && count > 0)
-		ShowStatus("Map %s: Removed '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, count);
+	if (battle_config.etc_log && count > 0) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("맵 %s: '" CL_WHITE "%d" CL_RESET "'마리의 몬스터를 제거 했습니다.\n",mapdata->name, count);
+		else
+			ShowStatus("Map %s: Removed '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, count);
+	}
 
 	return 1;
 }
@@ -3169,7 +3265,10 @@ inline static struct mapcell map_gat2cell(int gat) {
 		case 5: cell.walkable = 0; cell.shootable = 1; cell.water = 0; break; // gap (snipable)
 		case 6: cell.walkable = 1; cell.shootable = 1; cell.water = 0; break; // ???
 		default:
-			ShowWarning("map_gat2cell: unrecognized gat type '%d'\n", gat);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("map_gat2cell: '%d'은(는) 인식할 수 없는 GAT 타입입니다.\n", gat);
+			else
+				ShowWarning("map_gat2cell: unrecognized gat type '%d'\n", gat);
 			break;
 	}
 
@@ -3183,7 +3282,10 @@ static int map_cell2gat(struct mapcell cell)
 	if( cell.walkable == 1 && cell.shootable == 1 && cell.water == 1 ) return 3;
 	if( cell.walkable == 0 && cell.shootable == 1 && cell.water == 0 ) return 5;
 
-	ShowWarning("map_cell2gat: cell has no matching gat type\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowWarning("map_cell2gat: 셀에 일치하는 gat 타입이 없습니다.\n");
+	else
+		ShowWarning("map_cell2gat: cell has no matching gat type\n");
 	return 1; // default to 'wall'
 }
 
@@ -3301,7 +3403,10 @@ void map_setcell(int16 m, int16 x, int16 y, cell_t cell, bool flag)
 		case CELL_ICEWALL:		 mapdata->cell[j].icewall = flag;		  break;
 		case CELL_NOBUYINGSTORE: mapdata->cell[j].nobuyingstore = flag; break;
 		default:
-			ShowWarning("map_setcell: invalid cell type '%d'\n", (int)cell);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("map_setcell: '%d'은(는) 잘못된 셀 타입입니다.\n", (int)cell);
+			else	
+				ShowWarning("map_setcell: invalid cell type '%d'\n", (int)cell);
 			break;
 	}
 }
@@ -3465,7 +3570,10 @@ int map_setipport(unsigned short mapindex, uint32 ip, uint16 port)
 		return 0;
 	if(ip == clif_getip() && port == clif_getport()) {
 		//That's odd, we received info that we are the ones with this map, but... we don't have it.
-		ShowFatalError("map_setipport : received info that this map-server SHOULD have map '%s', but it is not loaded.\n",mapindex_id2name(mapindex));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("map_setipport : 이 맵 서버가 '%s' 맵을 가져야한다는 정보를 받았습니다. 하지만 로드되지 않았습니다.\n",mapindex_id2name(mapindex));
+		else
+			ShowFatalError("map_setipport : received info that this map-server SHOULD have map '%s', but it is not loaded.\n",mapindex_id2name(mapindex));
 		exit(EXIT_FAILURE);
 	}
 	mdos->ip   = ip;
@@ -3536,7 +3644,10 @@ static char *map_init_mapcache(FILE *fp)
 
 	// Read file into buffer..
 	if(fread(buffer, 1, size, fp) != size) {
-		ShowError("map_init_mapcache: Could not read entire mapcache file\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("map_init_mapcache: 맵캐시(mapcache)파일 전체를 읽지 못했습니다.\n");
+		else
+			ShowError("map_init_mapcache: Could not read entire mapcache file\n");
 		return nullptr;
 	}
 
@@ -3575,7 +3686,10 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		size = (unsigned long)info->xs*(unsigned long)info->ys;
 
 		if(size > MAX_MAP_SIZE) {
-			ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("map_readfromcache: %s이(가) %d의 MAX_MAP_SIZE를 초과했습니다.\n", info->name, MAX_MAP_SIZE);
+			else	
+				ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
 			return 0; // Say not found to remove it from list.. [Shinryo]
 		}
 
@@ -3604,7 +3718,10 @@ int map_addmap(char* mapname)
 	}
 
 	if (map_num >= MAX_MAP_PER_SERVER - 1) {
-		ShowError("Could not add map '" CL_WHITE "%s" CL_RESET "', the limit of maps has been reached.\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("'" CL_WHITE "%s" CL_RESET "'의 맵을 추가 할 수 없습니다. 맵 한계에 도달했습니다.\n",mapname);
+		else
+			ShowError("Could not add map '" CL_WHITE "%s" CL_RESET "', the limit of maps has been reached.\n", mapname);
 		return 1;
 	}
 
@@ -3615,7 +3732,10 @@ int map_addmap(char* mapname)
 
 static void map_delmapid(int id)
 {
-	ShowNotice("Removing map [ %s ] from maplist" CL_CLL "\n",map[id].name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowNotice("맵목록에서 맵[ %s ]을(를) 삭제합니다." CL_CLL "\n",map[id].name);
+	else
+		ShowNotice("Removing map [ %s ] from maplist" CL_CLL "\n",map[id].name);
 	for (int i = id; i < map_num - 1; i++)
 		map[i] = map[i + 1];
 	map_num--;
@@ -3792,9 +3912,12 @@ int map_readallmaps (void)
 	// Has the uncompressed gat data of all maps, so just one allocation has to be made
 	std::vector<char *> map_cache_buffer = {};
 
-	if( enable_grf )
-		ShowStatus("Loading maps (using GRF files)...\n");
-	else {
+	if( enable_grf ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("맵을 로드중입니다 (GRF파일들을 사용중)...\n");
+		else
+			ShowStatus("Loading maps (using GRF files)...\n");
+	} else {
 		// Load the map cache files in reverse order to account for import
 		const std::vector<std::string> mapcachefilepath = {
 			"db/" DBIMPORT "/map_cache.dat",
@@ -3803,10 +3926,16 @@ int map_readallmaps (void)
 		};
 
 		for(const auto &mapdat : mapcachefilepath) {
-			ShowStatus( "Loading maps (using %s as map cache)...\n", mapdat.c_str() );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus( "맵을 로드중입니다 (맵캐시로 %s을(를) 사용중)...\n", mapdat.c_str() );
+			else	
+				ShowStatus( "Loading maps (using %s as map cache)...\n", mapdat.c_str() );
 
 			if( ( fp = fopen(mapdat.c_str(), "rb")) == nullptr) {
-				ShowFatalError( "Unable to open map cache file " CL_WHITE "%s" CL_RESET "\n", mapdat.c_str());
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowFatalError( "맵 캐시파일 " CL_WHITE "%s" CL_RESET "을(를) 열 수 없습니다.\n", mapdat.c_str() );
+				else
+					ShowFatalError( "Unable to open map cache file " CL_WHITE "%s" CL_RESET "\n", mapdat.c_str());
 				continue;
 			}
 
@@ -3814,7 +3943,10 @@ int map_readallmaps (void)
 			map_cache_buffer.push_back(map_init_mapcache(fp));
 
 			if( !map_cache_buffer.back() ) {
-				ShowFatalError( "Failed to initialize mapcache data (%s)..\n", mapdat.c_str());
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowFatalError( "맵 캐시 데이터 파일 (%s)을(를) 초기화하는데 실패 했습니다.\n", mapdat.c_str());
+				else
+					ShowFatalError( "Failed to initialize mapcache data (%s)..\n", mapdat.c_str());
 				exit(EXIT_FAILURE);
 			}
 
@@ -3824,7 +3956,10 @@ int map_readallmaps (void)
 
 	int maps_removed = 0;
 
-	ShowStatus("Loading %d maps.\n", map_num);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("%d개의 맵을 불러오고 있습니다.\n", map_num);
+	else
+		ShowStatus("Loading %d maps.\n", map_num);
 
 	for (int i = 0; i < map_num; i++) {
 		size_t size;
@@ -3835,7 +3970,10 @@ int map_readallmaps (void)
 
 #ifdef DETAILED_LOADING_OUTPUT
 		// show progress
-		ShowStatus("Loading maps [%i/%i]: %s" CL_CLL "\r", i, map_num, mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("맵 로딩중 [%i/%i]: %s" CL_CLL "\r", i, map_num, mapdata->name);
+		else
+			ShowStatus("Loading maps [%i/%i]: %s" CL_CLL "\r", i, map_num, mapdata->name);
 #endif
 
 		if( enable_grf ){
@@ -3860,7 +3998,10 @@ int map_readallmaps (void)
 		mapdata->index = idx;
 
 		if (uidb_get(map_db,(unsigned int)mapdata->index) != nullptr) {
-			ShowWarning("Map %s already loaded!" CL_CLL "\n", mapdata->name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("맵 %s은(는) 이미 로드되었습니다." CL_CLL "\n", mapdata->name);
+			else
+				ShowWarning("Map %s already loaded!" CL_CLL "\n", mapdata->name);
 			if (mapdata->cell) {
 				aFree(mapdata->cell);
 				mapdata->cell = nullptr;
@@ -3902,11 +4043,18 @@ int map_readallmaps (void)
 		}
 	}
 
-	if (maps_removed)
-		ShowNotice("Maps removed: '" CL_WHITE "%d" CL_RESET "'" CL_CLL ".\n", maps_removed);
+	if (maps_removed) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("'" CL_WHITE "%d" CL_RESET "'개의 맵이 제거 되었습니다.\n",maps_removed);
+		else
+			ShowNotice("Maps removed: '" CL_WHITE "%d" CL_RESET "'" CL_CLL ".\n", maps_removed);
+	}
 
 	// finished map loading
-	ShowInfo("Successfully loaded '" CL_WHITE "%d" CL_RESET "' maps." CL_CLL "\n",map_num);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("'" CL_WHITE "%d" CL_RESET "'개의 맵이 성공적으로 로드되었습니다." CL_CLL "\n",map_num);
+	else
+		ShowInfo("Successfully loaded '" CL_WHITE "%d" CL_RESET "' maps." CL_CLL "\n",map_num);
 
 	return 0;
 }
@@ -3937,35 +4085,56 @@ int parse_console(const char* buf){
 
 	if( n != 5 ){ //end string and display
 		if( n < 2 ) {
-			ShowNotice("Type of command: '%s'\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("명령어 타입: '%s'\n", type);
+			else
+				ShowNotice("Type of command: '%s'\n", type);
 			command[0] = '\0';
 			mapname[0] = '\0';
 		}
 		else {
-			ShowNotice("Type of command: '%s' || Command: '%s'\n", type, command);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("명령어 타입: '%s' || 명령어: '%s'\n", type, command);
+			else
+				ShowNotice("Type of command: '%s' || Command: '%s'\n", type, command);
 			mapname[0] = '\0';
 		}
 	}
-	else
-		ShowNotice("Type of command: '%s' || Command: '%s' || Map: '%s' Coords: %d %d\n", type, command, mapname, x, y);
+	else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("명령어 타입: '%s' || 명령어: '%s' || 맵: '%s' 좌표: %d %d\n", type, command, mapname, x, y);
+		else
+			ShowNotice("Type of command: '%s' || Command: '%s' || Map: '%s' Coords: %d %d\n", type, command, mapname, x, y);
+	}
 
 	if(strcmpi("admin",type) == 0 ) {
 		if(strcmpi("map",command) == 0){
 			int16 m = map_mapname2mapid(mapname);
 			if( m < 0 ){
-				ShowWarning("Console: Unknown map.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("콘솔: 알수 없는 맵입니다.\n");
+				else
+					ShowWarning("Console: Unknown map.\n");
 				return 0;
 			}
 			sd.bl.m = m;
 			map_search_freecell(&sd.bl, m, &sd.bl.x, &sd.bl.y, -1, -1, 0);
-			if( x > 0 )
-				sd.bl.x = x;
-			if( y > 0 )
-				sd.bl.y = y;
+		if( x > 0 )
+			sd.bl.x = x;
+		if( y > 0 )
+			sd.bl.y = y;
+
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowNotice("현재 위치: '%s' 좌표: %d %d\n", mapname, x, y);
+		else
 			ShowNotice("Now at: '%s' Coords: %d %d\n", mapname, x, y);
 		}
-		else if( !is_atcommand(sd.fd, &sd, command, 2) )
-			ShowInfo("Console: Invalid atcommand.\n");
+		else if( !is_atcommand(sd.fd, &sd, command, 2) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("콘솔: 잘못된 명령어입니다.\n");
+			else
+				ShowInfo("Console: Invalid atcommand.\n");
+		}
 	}
 	else if( n == 2 && strcmpi("server", type) == 0 ){
 		if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 ){
@@ -3976,11 +4145,20 @@ int parse_console(const char* buf){
 		ers_report();
 	}
 	else if( strcmpi("help", type) == 0 ) {
-		ShowInfo("Available commands:\n");
-		ShowInfo("\t admin:@<atcommand> => Uses an atcommand. Do NOT use commands requiring an attached player.\n");
-		ShowInfo("\t admin:map:<map> <x> <y> => Changes the map from which console commands are executed.\n");
-		ShowInfo("\t server:shutdown => Stops the server.\n");
-		ShowInfo("\t ers_report => Displays database usage.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowInfo("사용가능한 명령어:\n");
+			ShowInfo("\t admin:@<atcommand> => 관리자명령어(atcommand)를 사용합니다. 플레이어를 필요로 하는 명령어는 사용하지 마세요.\n");
+			ShowInfo("\t admin:map:<map> <x> <y> => 콘솔 명령이 실행되는 맵을 변경합니다.\n");
+			ShowInfo("\t server:shutdown => 서버를 중지시킵니다.\n");
+			ShowInfo("\t ers_report => 데이터베이스 사용방법을 보여줍니다.\n");
+		}
+		else {
+			ShowInfo("Available commands:\n");
+			ShowInfo("\t admin:@<atcommand> => Uses an atcommand. Do NOT use commands requiring an attached player.\n");
+			ShowInfo("\t admin:map:<map> <x> <y> => Changes the map from which console commands are executed.\n");
+			ShowInfo("\t server:shutdown => Stops the server.\n");
+			ShowInfo("\t ers_report => Displays database usage.\n");
+		}
 	}
 
 	return 0;
@@ -3997,7 +4175,10 @@ int map_config_read(const char *cfgName)
 	fp = fopen(cfgName,"r");
 	if( fp == nullptr )
 	{
-		ShowError("Map configuration file not found at: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("맵 설정파일인 %s 파일을 찾을 수 없습니다.\n", cfgName);
+		else
+			ShowError("Map configuration file not found at: %s\n", cfgName);
 		return 1;
 	}
 
@@ -4024,8 +4205,12 @@ int map_config_read(const char *cfgName)
 			stdout_with_ansisequence = config_switch(w2);
 		else if(strcmpi(w1,"console_silent")==0) {
 			msg_silent = atoi(w2);
-			if( msg_silent ) // only bother if its actually enabled
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+			if( msg_silent ){ // only bother if its actually enabled
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowInfo("콘솔 자동 설정: %d\n", atoi(w2));
+				else	
+					ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+			}
 		} else if (strcmpi(w1, "userid")==0)
 			chrif_setuserid(w2);
 		else if (strcmpi(w1, "passwd") == 0)
@@ -4071,8 +4256,12 @@ int map_config_read(const char *cfgName)
 			safestrncpy(db_path,w2,ARRAYLENGTH(db_path));
 		else if (strcmpi(w1, "console") == 0) {
 			console = config_switch(w2);
-			if (console)
-				ShowNotice("Console Commands are enabled.\n");
+			if (console) {
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowNotice("콘솔 명령어가 사용 가능합니다.\n");
+				else
+					ShowNotice("Console Commands are enabled.\n");
+			}
 		} else if (strcmpi(w1, "enable_spy") == 0)
 			enable_spy = config_switch(w2);
 		else if (strcmpi(w1, "use_grf") == 0)
@@ -4083,8 +4272,12 @@ int map_config_read(const char *cfgName)
 			safestrncpy(console_log_filepath, w2, sizeof(console_log_filepath));
 		else if (strcmpi(w1, "import") == 0)
 			map_config_read(w2);
-		else
-			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+		else {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("%s 파일에 알수 없는 설정 '%s'가 있습니다.\n", w1, cfgName);
+			else
+				ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+		}
 	}
 
 	fclose(fp);
@@ -4099,7 +4292,10 @@ void map_reloadnpc_sub(const char *cfgName)
 	fp = fopen(cfgName,"r");
 	if( fp == nullptr )
 	{
-		ShowError("Map configuration file not found at: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("맵 설정파일인 %s을(를) 찾을 수 없습니다.\n", cfgName);
+		else
+			ShowError("Map configuration file not found at: %s\n", cfgName);
 		return;
 	}
 
@@ -4126,8 +4322,12 @@ void map_reloadnpc_sub(const char *cfgName)
 			npc_delsrcfile(w2);
 		else if (strcmpi(w1, "import") == 0)
 			map_reloadnpc_sub(w2);
-		else
-			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+		else {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("%s 파일에 알수 없는 설정 '%s'이(가) 있습니다.\n", w1, cfgName);
+			else	
+				ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+		}
 	}
 
 	fclose(fp);
@@ -4152,7 +4352,10 @@ int inter_config_read(const char *cfgName)
 
 	fp=fopen(cfgName,"r");
 	if(fp==nullptr){
-		ShowError("File not found: %s\n",cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("%s 파일을 찾을 수 없습니다.\n",cfgName);
+		else
+			ShowError("File not found: %s\n",cfgName);
 		return 1;
 	}
 	while(fgets(line, sizeof(line), fp))
@@ -4228,7 +4431,10 @@ int inter_config_read(const char *cfgName)
 		else
 		if(strcmpi(w1,"use_sql_db")==0) {
 			db_use_sqldbs = config_switch(w2);
-			ShowStatus ("Using SQL dbs: %s\n",w2);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus ("SQL DB 사용여부: %s\n",w2);
+			else
+				ShowStatus ("Using SQL dbs: %s\n",w2);
 		} else
 		if(strcmpi(w1,"log_db_ip")==0)
 			log_db_ip = w2;
@@ -4277,19 +4483,29 @@ int map_sql_init(void)
 	mmysql_handle = Sql_Malloc();
 	qsmysql_handle = Sql_Malloc();
 
-	ShowInfo("Connecting to the Map DB Server....\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("Map DB 서버에 연결중....\n");
+	else	
+		ShowInfo("Connecting to the Map DB Server....\n");
 	if( SQL_ERROR == Sql_Connect(mmysql_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str()) ||
 		SQL_ERROR == Sql_Connect(qsmysql_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str()) )
 	{
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%d',database='%s'\n",
-			map_server_id.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("uname='%s',passwd='%s',host='%s',port='%d',database='%s'(으)로 연결 할 수 없습니다.\n",
+				map_server_id, map_server_pw, map_server_ip, map_server_port, map_server_db.c_str());
+		else
+			ShowError("Couldn't connect with uname='%s',host='%s',port='%d',database='%s'\n",
+				map_server_id.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str());
 		Sql_ShowDebug(mmysql_handle);
 		Sql_Free(mmysql_handle);
 		Sql_ShowDebug(qsmysql_handle);
 		Sql_Free(qsmysql_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Map Server Connection)\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("연결 성공! (맵서버 연결)\n");
+	else
+		ShowStatus("Connect success! (Map Server Connection)\n");
 
 	if( !default_codepage.empty() ) {
 		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage.c_str()) )
@@ -4302,7 +4518,10 @@ int map_sql_init(void)
 
 int map_sql_close(void)
 {
-	ShowStatus("Close Map DB Connection....\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("맵 DB 연결을 닫는중....\n");
+	else
+		ShowStatus("Close Map DB Connection....\n");
 	Sql_Free(mmysql_handle);
 	Sql_Free(qsmysql_handle);
 	mmysql_handle = nullptr;
@@ -4310,7 +4529,10 @@ int map_sql_close(void)
 
 	if (log_config.sql_logs)
 	{
-		ShowStatus("Close Log DB Connection....\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("로그 DB연결을 닫는중....\n");
+		else
+			ShowStatus("Close Log DB Connection....\n");
 		Sql_Free(logmysql_handle);
 		logmysql_handle = nullptr;
 	}
@@ -4323,15 +4545,25 @@ int log_sql_init(void)
 	// log db connection
 	logmysql_handle = Sql_Malloc();
 
-	ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Connecting to the Log Database " CL_WHITE "%s" CL_RESET " At " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": " CL_WHITE "%s" CL_RESET "의 로그 데이터베이스 " CL_WHITE "%s" CL_RESET "에 연결중 ...\n",log_db_db.c_str(),log_db_ip.c_str());
+	else
+		ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Connecting to the Log Database " CL_WHITE "%s" CL_RESET " At " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
 	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id.c_str(), log_db_pw.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str()) ){
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
-			log_db_id.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("uname='%s',host='%s',port='%hu',database='%s'으(로) 연결 할 수 없습니다.\n",
+				log_db_id.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str());
+		else
+			ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+				log_db_id.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str());
 		Sql_ShowDebug(logmysql_handle);
 		Sql_Free(logmysql_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": Successfully '" CL_GREEN "connected" CL_RESET "' to Database '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": 데이터베이스 '" CL_WHITE "%s" CL_RESET "'에 성공적으로 '" CL_GREEN "연결" CL_RESET "'되었습니다.\n", log_db_db.c_str());
+	else
+		ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": Successfully '" CL_GREEN "connected" CL_RESET "' to Database '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
 
 	if( !default_codepage.empty() )
 		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage.c_str()) )
@@ -4558,14 +4790,20 @@ bool map_getmapflag_name( enum e_mapflag mapflag, char* output ){
 int map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *args)
 {
 	if (m < 0 || m >= MAX_MAP_PER_SERVER) {
-		ShowWarning("map_getmapflag: Invalid map ID %d.\n", m);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("map_getmapflag: %d은(는) 잘못된 맵 ID입니다..\n", m);
+		else
+			ShowWarning("map_getmapflag: Invalid map ID %d.\n", m);
 		return -1;
 	}
 
 	struct map_data *mapdata = &map[m];
 
 	if (mapflag < MF_MIN || mapflag >= MF_MAX) {
-		ShowWarning("map_getmapflag: Invalid mapflag %d on map %s.\n", mapflag, mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("map_getmapflag: %d은(는) %s 맵에서 잘못된 맵플레그입니다.\n", mapflag, mapdata->name);
+		else
+			ShowWarning("map_getmapflag: Invalid mapflag %d on map %s.\n", mapflag, mapdata->name);
 		return -1;
 	}
 
@@ -4608,14 +4846,20 @@ int map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *ar
 bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_mapflag_args *args)
 {
 	if (m < 0 || m >= MAX_MAP_PER_SERVER) {
-		ShowWarning("map_setmapflag: Invalid map ID %d.\n", m);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("map_setmapflag: %d은(는) 잘못된 맵번호입니다.\n", m);
+		else
+			ShowWarning("map_setmapflag: Invalid map ID %d.\n", m);
 		return false;
 	}
 
 	struct map_data *mapdata = &map[m];
 
 	if (mapflag < MF_MIN || mapflag >= MF_MAX) {
-		ShowWarning("map_setmapflag: Invalid mapflag %d on map %s.\n", mapflag, mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("map_setmapflag: %s맵에 잘못된 맵플레그 %d이(가) 있습니다.\n", mapdata->name, mapflag);
+		else			
+			ShowWarning("map_setmapflag: Invalid mapflag %d on map %s.\n", mapflag, mapdata->name);
 		return false;
 	}
 
@@ -4643,27 +4887,45 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 				}
 				if (mapdata->getMapFlag(MF_GVG)) {
 					mapdata->setMapFlag(MF_GVG, false);
-					ShowWarning("map_setmapflag: Unable to set GvG and PvP flags for the same map! Removing GvG flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG and PvP flags for the same map! Removing GvG flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_TE)) {
 					mapdata->setMapFlag(MF_GVG_TE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG TE and PvP flags for the same map! Removing GvG TE flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG TE 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG TE 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG TE and PvP flags for the same map! Removing GvG TE flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_DUNGEON)) {
 					mapdata->setMapFlag(MF_GVG_DUNGEON, false);
-					ShowWarning("map_setmapflag: Unable to set GvG Dungeon and PvP flags for the same map! Removing GvG Dungeon flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 던전 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 던전 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG Dungeon and PvP flags for the same map! Removing GvG Dungeon flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_CASTLE)) {
 					mapdata->setMapFlag(MF_GVG_CASTLE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG Castle and PvP flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 성 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 성 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG Castle and PvP flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_TE_CASTLE)) {
 					mapdata->setMapFlag(MF_GVG_TE_CASTLE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG TE Castle and PvP flags for the same map! Removing GvG TE Castle flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG TE 성 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG TE 성 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG TE Castle and PvP flags for the same map! Removing GvG TE Castle flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_BATTLEGROUND)) {
 					mapdata->setMapFlag(MF_BATTLEGROUND, false);
-					ShowWarning("map_setmapflag: Unable to set Battleground and PvP flags for the same map! Removing Battleground flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 전장 및 PvP 플레그를 동시에 설정할 수 없습니다! %s맵에서 전장 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set Battleground and PvP flags for the same map! Removing Battleground flag from %s.\n", mapdata->name);
 				}
 			}
 			break;
@@ -4677,12 +4939,19 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 				clif_map_property_mapall(m, MAPPROPERTY_AGITZONE);
 				if (mapdata->getMapFlag(MF_PVP)) {
 					mapdata->setMapFlag(MF_PVP, false);
-					if (!battle_config.pk_mode)
-						ShowWarning("map_setmapflag: Unable to set PvP and GvG flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+					if (!battle_config.pk_mode) {
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowWarning("map_setmapflag: PvP 및 GvG 플레그를 동시에 설정할 수 없습니다! %s맵에서 PvP 플레그를 제거중..\n", mapdata->name);
+						else
+							ShowWarning("map_setmapflag: Unable to set PvP and GvG flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+					}
 				}
 				if (mapdata->getMapFlag(MF_BATTLEGROUND)) {
 					mapdata->setMapFlag(MF_BATTLEGROUND, false);
-					ShowWarning("map_setmapflag: Unable to set Battleground and GvG flags for the same map! Removing Battleground flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 전장 및 GvG 플레그를 동시에 설정할 수 없습니다! %s맵에서 전장 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set Battleground and GvG flags for the same map! Removing Battleground flag from %s.\n", mapdata->name);
 				}
 			}
 			break;
@@ -4691,16 +4960,26 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			if (status) {
 				if (mapflag == MF_GVG_CASTLE && mapdata->getMapFlag(MF_GVG_TE_CASTLE)) {
 					mapdata->setMapFlag(MF_GVG_TE_CASTLE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG TE Castle and GvG Castle flags for the same map! Removing GvG TE Castle flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG TE 성 및 GvG 성 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG TE Castle and GvG Castle flags for the same map! Removing GvG TE Castle flag from %s.\n", mapdata->name);
 				}
 				if (mapflag == MF_GVG_TE_CASTLE && mapdata->getMapFlag(MF_GVG_CASTLE)) {
 					mapdata->setMapFlag(MF_GVG_CASTLE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG Castle and GvG TE Castle flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 성 및 GvG TE 성 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 성 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG Castle and GvG TE Castle flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_PVP)) {
 					mapdata->setMapFlag(MF_PVP, false);
-					if (!battle_config.pk_mode)
-						ShowWarning("npc_parse_mapflag: Unable to set PvP and GvG%s Castle flags for the same map! Removing PvP flag from %s.\n", (mapflag == MF_GVG_CASTLE ? nullptr : " TE"), mapdata->name);
+					if (!battle_config.pk_mode) {
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowWarning("npc_parse_mapflag: PVP 및 GvG%s 성 플레그를 동시에 맵에 설정할 수 없습니다! %s맵에서 PvP 플레그를 제거중..\n", (mapflag == MF_GVG_CASTLE ? nullptr : " TE"), mapdata->name);
+						else
+							ShowWarning("npc_parse_mapflag: Unable to set PvP and GvG%s Castle flags for the same map! Removing PvP flag from %s.\n", (mapflag == MF_GVG_CASTLE ? nullptr : " TE"), mapdata->name);
+					}
 				}
 			}
 			mapdata->setMapFlag(mapflag, status);
@@ -4708,8 +4987,12 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 		case MF_GVG_DUNGEON:
 			if (status && mapdata->getMapFlag(MF_PVP)) {
 				mapdata->setMapFlag(MF_PVP, false);
-				if (!battle_config.pk_mode)
-					ShowWarning("map_setmapflag: Unable to set PvP and GvG Dungeon flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+				if (!battle_config.pk_mode) {
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: PvP 및 GvG 던전 플레그를 동시에 설정할 수 없습니다! %s맵에서 PvP 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set PvP and GvG Dungeon flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+				}
 			}
 			mapdata->setMapFlag(mapflag, status);
 			break;
@@ -4718,11 +5001,17 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			if (status) {
 				if (mapflag == MF_NOBASEEXP && mapdata->getMapFlag(MF_BEXP) != 100) {
 					mapdata->setMapFlag(MF_BEXP, false);
-					ShowWarning("map_setmapflag: Unable to set BEXP and No Base EXP flags for the same map! Removing BEXP flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 경험치 획득 및 경험치 비획득 플레그를 동시에 설정할 수 없습니다! %s맵에서 경험치 획득 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set BEXP and No Base EXP flags for the same map! Removing BEXP flag from %s.\n", mapdata->name);
 				}
 				if (mapflag == MF_NOJOBEXP && mapdata->getMapFlag(MF_JEXP) != 100) {
 					mapdata->setMapFlag(MF_JEXP, false);
-					ShowWarning("map_setmapflag: Unable to set JEXP and No Job EXP flags for the same map! Removing JEXP flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 직업 경험치 획득 및 직업 경험치 비획득 플레그를 동시에 설정할 수 없습니다! %s맵에서 직업 경험치 획득 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set JEXP and No Job EXP flags for the same map! Removing JEXP flag from %s.\n", mapdata->name);
 				}
 			}
 			mapdata->setMapFlag(mapflag, status);
@@ -4732,7 +5021,10 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 				nullpo_retr(false, args);
 
 				if (mapdata->drop_list.size() == MAX_DROP_PER_MAP) {
-					ShowWarning("map_setmapflag: Reached the maximum number of drop list items for mapflag pvp_nightmaredrop on %s. Skipping.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: %s맵에 mapflag_pvp_nightmaredrop의 드롭목록이 최대 갯수에 도달했습니다. 스킵중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Reached the maximum number of drop list items for mapflag pvp_nightmaredrop on %s. Skipping.\n", mapdata->name);
 					break;
 				}
 
@@ -4779,11 +5071,17 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 
 				if (mapflag == MF_JEXP && mapdata->getMapFlag(MF_NOJOBEXP)) {
 					mapdata->setMapFlag(MF_NOJOBEXP, false);
-					ShowWarning("map_setmapflag: Unable to set No Job EXP and JEXP flags for the same map! Removing No Job EXP flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 직업 경험치 비획득 및 직업 경험치 획득 플레그를 동시에 설정할 수 없습니다! %s맵에서 직업 경험치 비획득 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set No Job EXP and JEXP flags for the same map! Removing No Job EXP flag from %s.\n", mapdata->name);
 				}
 				if (mapflag == MF_BEXP && mapdata->getMapFlag(MF_NOBASEEXP)) {
 					mapdata->setMapFlag(MF_NOBASEEXP, false);
-					ShowWarning("map_setmapflag: Unable to set No Base EXP and BEXP flags for the same map! Removing No Base EXP flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: 경험치 비획득 및 경험치 획득 플레그를 동시에 설정할 수 없습니다! %s맵에서 경험치 비획득 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set No Base EXP and BEXP flags for the same map! Removing No Base EXP flag from %s.\n", mapdata->name);
 				}
 				mapdata->setMapFlag(mapflag, args->flag_val);
 			} else
@@ -4795,20 +5093,33 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 
 				if (mapdata->getMapFlag(MF_PVP)) {
 					mapdata->setMapFlag(MF_PVP, false);
-					if (!battle_config.pk_mode)
-						ShowWarning("map_setmapflag: Unable to set PvP and Battleground flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+					if (!battle_config.pk_mode) {
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowWarning("map_setmapflag: PvP 및 전장 플레그를 동시에 설정할 수 없습니다! %s맵에서 PvP 플레그를 제거중..\n", mapdata->name);
+						else
+							ShowWarning("map_setmapflag: Unable to set PvP and Battleground flags for the same map! Removing PvP flag from %s.\n", mapdata->name);
+					}
 				}
 				if (mapdata->getMapFlag(MF_GVG)) {
 					mapdata->setMapFlag(MF_GVG, false);
-					ShowWarning("map_setmapflag: Unable to set GvG and Battleground flags for the same map! Removing GvG flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 및 전장 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG and Battleground flags for the same map! Removing GvG flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_DUNGEON)) {
 					mapdata->setMapFlag(MF_GVG_DUNGEON, false);
-					ShowWarning("map_setmapflag: Unable to set GvG Dungeon and Battleground flags for the same map! Removing GvG Dungeon flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 던전 및 전장 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 던전 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG Dungeon and Battleground flags for the same map! Removing GvG Dungeon flag from %s.\n", mapdata->name);
 				}
 				if (mapdata->getMapFlag(MF_GVG_CASTLE)) {
 					mapdata->setMapFlag(MF_GVG_CASTLE, false);
-					ShowWarning("map_setmapflag: Unable to set GvG Castle and Battleground flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("map_setmapflag: GvG 성 및 전장 플레그를 동시에 설정할 수 없습니다! %s맵에서 GvG 성 플레그를 제거중..\n", mapdata->name);
+					else
+						ShowWarning("map_setmapflag: Unable to set GvG Castle and Battleground flags for the same map! Removing GvG Castle flag from %s.\n", mapdata->name);
 				}
 				mapdata->setMapFlag(mapflag, ((args->flag_val <= 0 || args->flag_val > 2) ? 1 : args->flag_val));
 			} else
@@ -4835,7 +5146,10 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 
 				if (!args->flag_val) { // Signifies if it's a single skill or global damage adjustment
 					if (args->skill_damage.caster == 0) {
-						ShowError("map_setmapflag: Skill damage adjustment without casting type for map %s.\n", mapdata->name);
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowError("map_setmapflag: 케스팅 타입이 없는 %s맵에 대해 스킬 대미지를 조정합니다.\n", mapdata->name);
+						else
+							ShowError("map_setmapflag: Skill damage adjustment without casting type for map %s.\n", mapdata->name);
 						return false;
 					}
 
@@ -4876,7 +5190,10 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
  * map destructor
  *------------------------------------------*/
 void MapServer::finalize(){
-	ShowStatus("Terminating...\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Terminating...\n");
 	channel_config.closing = true;
 
 	//Ladies and babies first.
@@ -4893,16 +5210,25 @@ void MapServer::finalize(){
 	do_clear_npc();
 
 	// remove all objects on maps
-	ShowStatus("Cleaning up %d maps.\n", map_num);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("%d개의 맵을 정리중입니다.\n", map_num);
+	else
+		ShowStatus("Cleaning up %d maps.\n", map_num);
 	for (int i = 0; i < map_num; i++) {
 		struct map_data *mapdata = map_getmapdata(i);
 #ifdef DEBUG
-		ShowStatus("Cleaning up maps [%d/%d]: %s..." CL_CLL "\r", i++, map_num, mapdata->name);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("맵 제거중 [%d/%d]: %s..." CL_CLL "\r", i++, map_num, mapdata->name);
+		else
+			ShowStatus("Cleaning up maps [%d/%d]: %s..." CL_CLL "\r", i++, map_num, mapdata->name);
 #endif
 		map_foreachinmap(cleanup_sub, i, BL_ALL);
 		channel_delete(mapdata->channel,false);
 	}
-	ShowStatus("Cleaned up %d maps." CL_CLL "\n", map_num);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("%개의 맵을 제거했습니다." CL_CLL "\n", map_num);
+	else
+		ShowStatus("Cleaned up %d maps." CL_CLL "\n", map_num);
 
 	id_db->foreach(id_db,cleanup_db_sub);
 	chrif_char_reset_offline();
@@ -4940,7 +5266,10 @@ void MapServer::finalize(){
 	do_final_channel(); //should be called after final guild
 	do_final_vending();
 	do_final_buyingstore();
+	do_final_stall();
 	do_final_path();
+	do_final_rune();
+	do_final_emotes();
 
 	map_db->destroy(map_db, map_db_final);
 
@@ -4974,7 +5303,10 @@ void MapServer::finalize(){
 
 	map_sql_close();
 
-	ShowStatus("Finished.\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("완료.\n");
+	else
+		ShowStatus("Finished.\n");
 }
 
 static int map_abort_sub(map_session_data* sd, va_list ap)
@@ -4992,17 +5324,27 @@ void MapServer::handle_crash(){
 	static int run = 0;
 	//Save all characters and then flush the inter-connection.
 	if (run) {
-		ShowFatalError("Server has crashed while trying to save characters. Character data can't be saved!\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("케릭터를 저장중 서버가 다운되었습니다.(서버 크래쉬) 케릭터 데이터를 저장할 수 없습니다.\n");
+		else
+			ShowFatalError("Server has crashed while trying to save characters. Character data can't be saved!\n");
 		return;
 	}
 	run = 1;
 	if (!chrif_isconnected())
 	{
-		if (pc_db->size(pc_db))
-			ShowFatalError("Server has crashed without a connection to the char-server, %u characters can't be saved!\n", pc_db->size(pc_db));
+		if (pc_db->size(pc_db)) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowFatalError("서버가 케릭터 서버에 연결하지 않고 다운되었습니다.(서버 크래쉬) '%u' 케릭터를 저장할 수 없습니다.\n", pc_db->size(pc_db));
+			else
+				ShowFatalError("Server has crashed without a connection to the char-server, %u characters can't be saved!\n", pc_db->size(pc_db));
+		}
 		return;
 	}
-	ShowError("Server received crash signal! Attempting to save all online characters!\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowError("서버에서 충돌이 감지되었습니다. 모든 접속중인 케릭터를 저장하려고 시도하는 중입니다.\n");
+	else
+		ShowError("Server received crash signal! Attempting to save all online characters!\n");
 	map_foreachpc(map_abort_sub);
 	chrif_flush_fifo();
 }
@@ -5012,20 +5354,38 @@ void MapServer::handle_crash(){
  *------------------------------------------------------*/
 void display_helpscreen(bool do_exit)
 {
-	ShowInfo("Usage: %s [options]\n", SERVER_NAME);
-	ShowInfo("\n");
-	ShowInfo("Options:\n");
-	ShowInfo("  -?, -h [--help]\t\tDisplays this help screen.\n");
-	ShowInfo("  -v [--version]\t\tDisplays the server's version.\n");
-	ShowInfo("  --run-once\t\t\tCloses server after loading (testing).\n");
-	ShowInfo("  --map-config <file>\t\tAlternative map-server configuration.\n");
-	ShowInfo("  --battle-config <file>\tAlternative battle configuration.\n");
-	ShowInfo("  --atcommand-config <file>\tAlternative atcommand configuration.\n");
-	ShowInfo("  --script-config <file>\tAlternative script configuration.\n");
-	ShowInfo("  --msg-config <file>\t\tAlternative message configuration.\n");
-	ShowInfo("  --grf-path <file>\t\tAlternative GRF path configuration.\n");
-	ShowInfo("  --inter-config <file>\t\tAlternative inter-server configuration.\n");
-	ShowInfo("  --log-config <file>\t\tAlternative logging configuration.\n");
+	if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowInfo("사용방법: %s [옵션]\n", SERVER_NAME);
+		ShowInfo("\n");
+		ShowInfo("옵션들:\n");
+		ShowInfo("  -?, -h [--help]\t\t도움말을 봅니다.\n");
+		ShowInfo("  -v [--version]\t\t서버버전을 봅니다.\n");
+		ShowInfo("  --run-once\t\t\t로딩후 서버를 닫습니다. (테스트용).\n");
+		ShowInfo("  --map-config <file>\t\t맵서버 설정을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --battle-config <file>\t배틀(battle)설정을 지정한 파일로 대체합니다..\n");
+		ShowInfo("  --atcommand-config <file>\t명령어(Atcommand) 설정을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --script-config <file>\t스크립트 설정 파일을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --msg-config <file>\t\t메시지 설정을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --grf-path <file>\t\tGRF 경로설정을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --inter-config <file>\t\tinter-server설정을 지정한 파일로 대체합니다.\n");
+		ShowInfo("  --log-config <file>\t\t로그 설정을 지정한 파일로 대체합니다.\n");
+	}
+	else {
+		ShowInfo("Usage: %s [options]\n", SERVER_NAME);
+		ShowInfo("\n");
+		ShowInfo("Options:\n");
+		ShowInfo("  -?, -h [--help]\t\tDisplays this help screen.\n");
+		ShowInfo("  -v [--version]\t\tDisplays the server's version.\n");
+		ShowInfo("  --run-once\t\t\tCloses server after loading (testing).\n");
+		ShowInfo("  --map-config <file>\t\tAlternative map-server configuration.\n");
+		ShowInfo("  --battle-config <file>\tAlternative battle configuration.\n");
+		ShowInfo("  --atcommand-config <file>\tAlternative atcommand configuration.\n");
+		ShowInfo("  --script-config <file>\tAlternative script configuration.\n");
+		ShowInfo("  --msg-config <file>\t\tAlternative message configuration.\n");
+		ShowInfo("  --grf-path <file>\t\tAlternative GRF path configuration.\n");
+		ShowInfo("  --inter-config <file>\t\tAlternative inter-server configuration.\n");
+		ShowInfo("  --log-config <file>\t\tAlternative logging configuration.\n");
+	}
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -5043,7 +5403,7 @@ struct msg_data *map_lang2msgdb(uint8 lang){
 void map_do_init_msg(void){
 	int test=0, i=0, size;
 	const char * listelang[] = {
-		MSG_CONF_NAME_EN,	//default
+		MSG_CONF_NAME_KOR,	//default
 		MSG_CONF_NAME_RUS,
 		MSG_CONF_NAME_SPN,
 		MSG_CONF_NAME_GRM,
@@ -5052,7 +5412,8 @@ void map_do_init_msg(void){
 		MSG_CONF_NAME_IDN,
 		MSG_CONF_NAME_FRN,
 		MSG_CONF_NAME_POR,
-		MSG_CONF_NAME_THA
+		MSG_CONF_NAME_THA,
+		MSG_CONF_NAME_EN
 	};
 
 	map_msg_db = idb_alloc(DB_OPT_BASE);
@@ -5102,9 +5463,15 @@ const char* map_msg_txt(map_session_data *sd, int msg_number){
 		const char *tmp = _msg_txt(msg_number,MAP_MAX_MSG,mdb->msg);
 		if(strcmp(tmp,"??")) //to verify result
 			return tmp;
-		ShowDebug("Message #%d not found for langtype %d.\n",msg_number,lang);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("언어타입(LangType) %d에 대한 메시지 #%d를 찾을 수 없습니다.\n",lang,msg_number);
+		else
+			ShowDebug("Message #%d not found for langtype %d.\n",msg_number,lang);
 	}
-	ShowDebug("Selected langtype %d not loaded, trying fallback...\n",lang);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowDebug("선택한 언어타입 %d이(가) 로드되지 않았습니다. 대체 시도중..\n",lang);
+	else
+		ShowDebug("Selected langtype %d not loaded, trying fallback...\n",lang);
 	if(lang != 0 && (mdb = map_lang2msgdb(0)) != nullptr) //fallback
 		return _msg_txt(msg_number,MAP_MAX_MSG,mdb->msg);
 	return "??";
@@ -5143,7 +5510,10 @@ int mapgenerator_get_options(int argc, char** argv) {
 		}
 	}
 	if (!optionSet) {
-		ShowError("No options passed to the map generator, you must set at least one.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("맵 생성에 전달된 옵션이 없습니다. 하나 이상은 설정해야 합니다.\n");
+		else
+			ShowError("No options passed to the map generator, you must set at least one.\n");
 		exit(1);
 	}
 #endif
@@ -5183,7 +5553,10 @@ void map_data::copyFlags(const map_data& other) {
 
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Shutting down...\n");
 
 	map_session_data* sd;
 	struct s_mapiterator* iter = mapit_getallusers();
@@ -5207,7 +5580,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	safestrncpy(console_log_filepath, "./log/map-msg_log.log", sizeof(console_log_filepath));
 
 	/* Multilanguage */
-	MSG_CONF_NAME_EN = "conf/msg_conf/map_msg.conf"; // English (default)
+	MSG_CONF_NAME_KOR = "conf/msg_conf/map_msg_kor.conf"; // 한국어 (default)
 	MSG_CONF_NAME_RUS = "conf/msg_conf/map_msg_rus.conf";	// Russian
 	MSG_CONF_NAME_SPN = "conf/msg_conf/map_msg_spn.conf";	// Spanish
 	MSG_CONF_NAME_GRM = "conf/msg_conf/map_msg_grm.conf";	// German
@@ -5217,6 +5590,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	MSG_CONF_NAME_FRN = "conf/msg_conf/map_msg_frn.conf";	// French
 	MSG_CONF_NAME_POR = "conf/msg_conf/map_msg_por.conf";	// Brazilian Portuguese
 	MSG_CONF_NAME_THA = "conf/msg_conf/map_msg_tha.conf";	// Thai
+	MSG_CONF_NAME_EN = "conf/msg_conf/map_msg.conf";	// 영어
 	/* Multilanguage */
 
 	// default inter_config
@@ -5231,8 +5605,12 @@ bool MapServer::initialize( int argc, char *argv[] ){
 
 	map_config_read(MAP_CONF_NAME);
 
-	if (save_settings == CHARSAVE_NONE)
-		ShowWarning("Value of 'save_settings' is not set, player's data only will be saved every 'autosave_time' (%d seconds).\n", autosave_interval/1000);
+	if (save_settings == CHARSAVE_NONE) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("'save_settings'값을 설정하지 않으면 플레이어의 데이터가 'autosave_time'(%d초)마다 저장됩니다.\n", autosave_interval/1000);
+		else
+			ShowWarning("Value of 'save_settings' is not set, player's data only will be saved every 'autosave_time' (%d seconds).\n", autosave_interval/1000);
+	}
 
 	// loads npcs
 	map_reloadnpc(false);
@@ -5244,15 +5622,28 @@ bool MapServer::initialize( int argc, char *argv[] ){
 		ip2str(addr_[0], ip_str);
 
 #if !defined(BUILDBOT)
-		ShowWarning( "Not all IP addresses in map_athena.conf configured, autodetecting...\n" );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("map_athena.conf의 모든 IP주소가 설정되지 않아 자동으로 감지중입니다...\n");
+		else	
+			ShowWarning( "Not all IP addresses in map_athena.conf configured, autodetecting...\n" );
 #endif
 
-		if (naddr_ == 0)
-			ShowError("Unable to determine your IP address...\n");
-		else if (naddr_ > 1)
-			ShowNotice("Multiple interfaces detected...\n");
+		if (naddr_ == 0) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("IP 주소를 확인할 수 없습니다...\n");
+			else
+				ShowError("Unable to determine your IP address...\n");
+		} else if (naddr_ > 1) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowNotice("여러개의 주소가 확인되었습니다.\n");
+			else
+				ShowNotice("Multiple interfaces detected...\n");
+		}
 
-		ShowInfo("Defaulting to %s as our IP address\n", ip_str);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("%s을(를) 기본 IP주소로 설정합니다.\n", ip_str);
+		else
+			ShowInfo("Defaulting to %s as our IP address\n", ip_str);
 
 		if (!map_ip_set)
 			clif_setip(ip_str);
@@ -5323,14 +5714,24 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_duel();
 	do_init_vending();
 	do_init_buyingstore();
+	do_init_emotes();
+	do_init_rune();
+	do_init_stall();
 
 	npc_event_do_oninit();	// Init npcs (OnInit)
 
-	if (battle_config.pk_mode)
-		ShowNotice("Server is running on '" CL_WHITE "PK Mode" CL_RESET "'.\n");
+	if (battle_config.pk_mode) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowNotice("서버가 '" CL_WHITE "PK 모드" CL_RESET "'로 실행중입니다.\n");
+		else
+			ShowNotice("Server is running on '" CL_WHITE "PK Mode" CL_RESET "'.\n");
+	}
 
 #ifndef MAP_GENERATOR
-	ShowStatus("Server is '" CL_GREEN "ready" CL_RESET "' and listening on port '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("서버가 '" CL_GREEN "준비" CL_RESET "'되어 있고 '" CL_WHITE "%d" CL_RESET "'번 포트에서 수신을 대기중입니다.\n\n", map_port);
+	else
+		ShowStatus("Server is '" CL_GREEN "ready" CL_RESET "' and listening on port '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
 #else
 	// depending on gen_options, generate the correct things
 	if (gen_options.navi)

@@ -16,12 +16,13 @@
 //= - Variable in use: dmdswrd_Q (Max 45)
 //===== Additional Comments: =================================
 //= 1.0 First version. [L0ne_W0lf]
+// 한글번역 스카이러브
 //============================================================
 
-mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
+mjolnir_02,186,193,4	script	중년아저씨#magum1	57,{
 	if (dmdswrd_Q > 30) {
 		if (dmdswrd_Q == 31) {
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "It's been a while since";
 			mes "someone has come this";
 			mes "way. Not too many people";
@@ -35,14 +36,14 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 			mes "area? You don't have";
 			mes "to work here, do you?";
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "Well, just managing this";
 			mes "summer house gets me";
 			mes "enough income to get by.";
 			mes "Ah, I also craft various";
 			mes "things as sort of a hobby.";
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "Yeap, when I was younger,";
 			mes "I had my own forge in town.";
 			mes "It was a good family business,";
@@ -50,7 +51,7 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 			mes "making wares for town lords";
 			mes "and even the royal family.";
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "But then, the accident";
 			mes "happened, and we had";
 			mes "to close shop. Well, that's";
@@ -58,7 +59,7 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 			mes "one, I gu ess, but otherwise";
 			mes "I've lived a long, good life.";
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "Now what exactly";
 			mes "brings you here?";
 			mes "Are you just exploring";
@@ -71,7 +72,7 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 			mes "this thing. It's called";
 			mes "the Seal of Muriniel.";
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "Oh... Oh my.";
 			mes "Let me see that.";
 			mes "Oh, yes. This is the";
@@ -80,7 +81,7 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 			mes "I guess I'm at your service.";
 			next;
 			next;
-			mes "[Middle-Aged Man]";
+			mes "[중년아저씨]";
 			mes "My name is Walker, and";
 			mes "my brothers and I were the 3";
 			mes "most talented blacksmiths";
@@ -336,7 +337,7 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 		}
 	}
 	else {
-		mes "[Middle-Aged Man]";
+		mes "[중년아저씨]";
 		mes "It's been a while since";
 		mes "someone has come this";
 		mes "way. Not too many people";
@@ -347,9 +348,9 @@ mjolnir_02,186,193,4	script	Middle-Aged Man#magum1	57,{
 	}
 }
 
-payon,248,159,1	script	Old Man#magum1	120,{
+payon,248,159,1	script	노인#magum1	120,{
 	if (dmdswrd_Q == 35) {
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "Wha--? Who are";
 		mes "you? Whaddya want?";
 		mes "Lemme alone so I can";
@@ -362,7 +363,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 		mes "to ask if you can help";
 		mes "me with this pentagram.";
 		next;
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "Huh...? Lemme see...";
 		mes "Oh. This is Walker's";
 		mes "work alright. Y-you really";
@@ -378,7 +379,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 		mes "I went through a lot of";
 		mes "trouble to get a fake.";
 		next;
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "Arrrgh! That's the real";
 		mes "thing! Does this mean";
 		mes "I have to really work on";
@@ -386,7 +387,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 		mes "Damn... I guess I have no";
 		mes "choice but to sober up.";
 		next;
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "Ugh... But I'm gonna";
 		mes "have such a hangover.";
 		mes "Hey! Bring me 20 Yellow";
@@ -398,7 +399,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 	}
 	else if (dmdswrd_Q == 36) {
 		if (countitem(503) > 19) {
-			mes "[Old Man]";
+			mes "[노인]";
 			mes "Oh, thank goodness you've";
 			mes "brought me the potions! Now,";
 			mes "these'll help me cope with the";
@@ -411,7 +412,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 			mes ".........";
 			mes "............";
 			next;
-			mes "[Old Man]";
+			mes "[노인]";
 			mes "Gimme the scroll";
 			mes "with the pentagram.";
 			mes "Let's see, here. Hey,";
@@ -419,14 +420,14 @@ payon,248,159,1	script	Old Man#magum1	120,{
 			mes "on this. Alright, listen.";
 			mes "This is what I need from you...";
 			next;
-			mes "[Old Man]";
+			mes "[노인]";
 			mes "^FF00001 Coal^000000,";
 			mes "^FF00003 Trunks^000000,";
 			mes "^FF00003 Old Hilts^000000,";
 			mes "^FF000050 Orge Teeth^000000, and";
 			mes "^FF00001 Foolishness of the Blind^000000.";
 			next;
-			mes "[Old Man]";
+			mes "[노인]";
 			mes "You have to bring me";
 			mes "those items so that I can";
 			mes "continue forming the doomed";
@@ -436,7 +437,7 @@ payon,248,159,1	script	Old Man#magum1	120,{
 			set dmdswrd_Q,37;
 			close;
 		}
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "Arrrgh! Did you bring";
 		mes "me 20 Yellow Potions?";
 		mes "This hangover is getting";
@@ -562,13 +563,13 @@ payon,248,159,1	script	Old Man#magum1	120,{
 			set dmdswrd_Q,38;
 			close;
 		}
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "What, did you forget";
 		mes "what I need? Grrr, I'll";
 		mes "tell you again, but you";
 		mes "better not forget this time!";
 		next;
-		mes "[Old Man]";
+		mes "[노인]";
 		mes "^FF00001 Coal^000000,";
 		mes "^FF00003 Trunks^000000,";
 		mes "^FF00003 Old Hilts^000000,";
@@ -782,13 +783,11 @@ payon,248,159,1	script	Old Man#magum1	120,{
 		close;
 	}
 	else {
-		mes "[Old Man]";
-		mes "Arrrrrrrrrghhhh~!";
-		mes "My heart freakin' hurts!";
-		mes "Times like these, I sure";
-		mes "could use a Yellow Potion to";
-		mes "help cope with my hangovers.";
-		mes "C'mon, I freakin' need my meds!";
+		mes "[노인]";
+		mes "매일같이!";
+		mes "머리가 너무 아프군~";
+		mes "노르끼리한 색의 포션 한병";
+		mes "마셨으면 좋겠군~ 꺼어억~~";
 		close;
 	}
 }

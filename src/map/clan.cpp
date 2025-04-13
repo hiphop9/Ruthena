@@ -10,6 +10,7 @@
 #include <common/mmo.hpp>
 #include <common/nullpo.hpp>
 #include <common/showmsg.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clif.hpp"
@@ -42,7 +43,10 @@ void clan_load_clandata( int count, struct clan* clans ){
 		clanCopy = (struct clan*)aMalloc( sizeof( struct clan ) );
 
 		if( clanCopy == nullptr ){
-			ShowError("Memory could not be allocated for a clan.\n");
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("클랜에 메모리를 할당 할 수 없습니다.\n");
+			else
+				ShowError("Memory could not be allocated for a clan.\n");
 			break;
 		}
 
@@ -53,7 +57,10 @@ void clan_load_clandata( int count, struct clan* clans ){
 		j++;
 	}
 
-	ShowStatus( "Received '" CL_WHITE "%d" CL_RESET "' clans from char-server.\n", j );
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus( "케릭터 서버로부터 '" CL_WHITE "%d" CL_RESET "'개의 클랜을 받았습니다 .\n", j );
+	else
+		ShowStatus( "Received '" CL_WHITE "%d" CL_RESET "' clans from char-server.\n", j );
 }
 
 struct clan* clan_search( int id ){

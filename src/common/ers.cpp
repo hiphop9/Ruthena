@@ -49,6 +49,7 @@
 #include "malloc.hpp" // CREATE, RECREATE, aMalloc, aFree
 #include "nullpo.hpp"
 #include "showmsg.hpp" // ShowMessage, ShowError, ShowFatalError, CL_BOLD, CL_NORMAL
+#include <config/custom.hpp>
 
 #ifndef DISABLE_ERS
 
@@ -184,7 +185,10 @@ static void *ers_obj_alloc_entry(ERS *self)
 	void *ret;
 
 	if (instance == nullptr) {
-		ShowError("ers_obj_alloc_entry: nullptr object, aborting entry freeing.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("ers_obj_alloc_entry: nullptr object, 입장 금지를 중단합니다.\n");
+		else
+			ShowError("ers_obj_alloc_entry: nullptr object, aborting entry freeing.\n");
 		return nullptr;
 	}
 
@@ -219,10 +223,16 @@ static void ers_obj_free_entry(ERS *self, void *entry)
 	struct ers_list *reuse = (struct ers_list *)((unsigned char *)entry - sizeof(struct ers_list));
 
 	if (instance == nullptr) {
-		ShowError("ers_obj_free_entry: nullptr object, aborting entry freeing.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("ers_obj_free_entry: nullptr object, 입장 금지 중단.\n");
+		else
+			ShowError("ers_obj_free_entry: nullptr object, aborting entry freeing.\n");
 		return;
 	} else if (entry == nullptr) {
-		ShowError("ers_obj_free_entry: nullptr entry, nothing to free.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("ers_obj_free_entry: nullptr entry, 자유롭지 못합니다.\n");
+		else
+			ShowError("ers_obj_free_entry: nullptr entry, nothing to free.\n");
 		return;
 	}
 
@@ -240,7 +250,10 @@ static size_t ers_obj_entry_size(ERS *self)
 	struct ers_instance_t *instance = (struct ers_instance_t *)self;
 
 	if (instance == nullptr) {
-		ShowError("ers_obj_entry_size: nullptr object, aborting entry freeing.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("ers_obj_entry_size: nullptr object, 입장 금지 중단.\n");
+		else
+			ShowError("ers_obj_entry_size: nullptr object, aborting entry freeing.\n");
 		return 0;
 	}
 
@@ -252,14 +265,21 @@ static void ers_obj_destroy(ERS *self)
 	struct ers_instance_t *instance = (struct ers_instance_t *)self;
 
 	if (instance == nullptr) {
-		ShowError("ers_obj_destroy: nullptr object, aborting entry freeing.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("ers_obj_destroy: nullptr object, 입장 금지 중단.\n");
+		else
+			ShowError("ers_obj_destroy: nullptr object, aborting entry freeing.\n");
 		return;
 	}
 
-	if (instance->Count > 0)
-		if (!(instance->Options & ERS_OPT_CLEAR))
-			ShowWarning("Memory leak detected at ERS '%s', %d objects not freed.\n", instance->Name, instance->Count);
-
+	if (instance->Count > 0){
+		if (!(instance->Options & ERS_OPT_CLEAR)){
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("ERS '%s'에서 메모리 누수(Leak)가 감지되었으며 %d개의 오브젝트가 해제되지 않았습니다.\n", instance->Name, instance->Count);
+			else
+				ShowWarning("Memory leak detected at ERS '%s', %d objects not freed.\n", instance->Name, instance->Count);
+		}
+	}
 	if (--instance->Cache->ReferenceCount <= 0)
 		ers_free_cache(instance->Cache, true);
 
@@ -283,7 +303,10 @@ void ers_cache_size(ERS *self, unsigned int new_size) {
 	nullpo_retv(instance);
 
 	if( !(instance->Cache->Options&ERS_OPT_FLEX_CHUNK) ) {
-		ShowWarning("ers_cache_size: '%s' has adjusted its chunk size to '%d', however ERS_OPT_FLEX_CHUNK is missing!\n",instance->Name,new_size);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("ers_cache_size: '%s'에서 청크 크기를 '%d'으(로) 조정했지만 ERS_OPT_FLEX_CHUNK가 누락되었씁니다!\n",instance->Name,new_size);
+		else
+			ShowWarning("ers_cache_size: '%s' has adjusted its chunk size to '%d', however ERS_OPT_FLEX_CHUNK is missing!\n",instance->Name,new_size);
 	}
 
 	instance->Cache->ChunkSize = new_size;
@@ -335,20 +358,35 @@ void ers_report(void) {
 
 	for (cache = CacheList; cache; cache = cache->Next) {
 		cache_c++;
-		ShowMessage(CL_BOLD"[ERS Cache of size '" CL_NORMAL "" CL_WHITE "%u" CL_NORMAL "" CL_BOLD "' report]\n" CL_NORMAL, cache->ObjectSize);
-		ShowMessage("\tinstances          : %u\n", cache->ReferenceCount);
-		ShowMessage("\tblocks in use      : %u/%u\n", cache->UsedObjs, cache->UsedObjs+cache->Free);
-		ShowMessage("\tblocks unused      : %u\n", cache->Free);
-		ShowMessage("\tmemory in use      : %.2f MB\n", cache->UsedObjs == 0 ? 0. : (double)((cache->UsedObjs * cache->ObjectSize)/1024)/1024);
-		ShowMessage("\tmemory allocated   : %.2f MB\n", (cache->Free+cache->UsedObjs) == 0 ? 0. : (double)(((cache->UsedObjs+cache->Free) * cache->ObjectSize)/1024)/1024);
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowMessage(CL_BOLD"[ERS 캐시 크기 '" CL_NORMAL "" CL_WHITE "%u" CL_NORMAL "" CL_BOLD "' 보고]\n" CL_NORMAL, cache->ObjectSize);
+			ShowMessage("\t인스턴스          : %u\n", cache->ReferenceCount);
+			ShowMessage("\t블럭 사용      : %u/%u\n", cache->UsedObjs, cache->UsedObjs+cache->Free);
+			ShowMessage("\t블럭 미사용      : %u\n", cache->Free);
+			ShowMessage("\t메모리 사용      : %.2f MB\n", cache->UsedObjs == 0 ? 0. : (double)((cache->UsedObjs * cache->ObjectSize)/1024)/1024);
+			ShowMessage("\t할당된 메모리   : %.2f MB\n", (cache->Free+cache->UsedObjs) == 0 ? 0. : (double)(((cache->UsedObjs+cache->Free) * cache->ObjectSize)/1024)/1024);
+		} else {
+			ShowMessage(CL_BOLD"[ERS Cache of size '" CL_NORMAL "" CL_WHITE "%u" CL_NORMAL "" CL_BOLD "' report]\n" CL_NORMAL, cache->ObjectSize);
+			ShowMessage("\tinstances          : %u\n", cache->ReferenceCount);
+			ShowMessage("\tblocks in use      : %u/%u\n", cache->UsedObjs, cache->UsedObjs+cache->Free);
+			ShowMessage("\tblocks unused      : %u\n", cache->Free);
+			ShowMessage("\tmemory in use      : %.2f MB\n", cache->UsedObjs == 0 ? 0. : (double)((cache->UsedObjs * cache->ObjectSize)/1024)/1024);
+			ShowMessage("\tmemory allocated   : %.2f MB\n", (cache->Free+cache->UsedObjs) == 0 ? 0. : (double)(((cache->UsedObjs+cache->Free) * cache->ObjectSize)/1024)/1024);
+		}
 		blocks_u += cache->UsedObjs;
 		blocks_a += cache->UsedObjs + cache->Free;
 		memory_b += cache->UsedObjs * cache->ObjectSize;
 		memory_t += (cache->UsedObjs+cache->Free) * cache->ObjectSize;
 	}
-	ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' caches in use\n",cache_c);
-	ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' blocks in use, consuming '" CL_WHITE "%.2f MB" CL_NORMAL "'\n",blocks_u,(double)((memory_b)/1024)/1024);
-	ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' blocks total, consuming '" CL_WHITE "%.2f MB" CL_NORMAL "' \n",blocks_a,(double)((memory_t)/1024)/1024);
+	if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "'개의 사용중인 캐시\n",cache_c);
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "'개의 사용중인 블럭, '" CL_WHITE "%.2f MB" CL_NORMAL "' 사용\n",blocks_u,(double)((memory_b)/1024)/1024);
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "'개의 총 블럭, '" CL_WHITE "%.2f MB" CL_NORMAL "' 사용\n",blocks_a,(double)((memory_t)/1024)/1024);
+	} else {
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' caches in use\n",cache_c);
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' blocks in use, consuming '" CL_WHITE "%.2f MB" CL_NORMAL "'\n",blocks_u,(double)((memory_b)/1024)/1024);
+		ShowInfo("ers_report: '" CL_WHITE "%u" CL_NORMAL "' blocks total, consuming '" CL_WHITE "%.2f MB" CL_NORMAL "' \n",blocks_a,(double)((memory_t)/1024)/1024);
+	}
 }
 
 /**

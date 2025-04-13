@@ -1,0 +1,13 @@
+//고양이손 창고
+
+function	script	F_CatStorage	{
+	mes "[고양이손창고]";
+	mes "고양이손 상단 창고 호출 서비스다냥.";
+	mes "요청한대로 창고를 개방하겠다냥.";
+	close2;
+	if(getstatus(SC_PREMIUM_STORAGEBOOST))
+		openstorage2 8,STOR_MODE_GET|STOR_MODE_PUT;
+	else
+		openstorage2 4,STOR_MODE_GET|STOR_MODE_PUT;
+	return;
+}

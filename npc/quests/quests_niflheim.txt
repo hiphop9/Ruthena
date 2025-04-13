@@ -1,32 +1,7 @@
 //===== rAthena Script ======================================= 
 //= Quest NPCs related to Niflheim
 //===== By: ================================================== 
-//= The rAthena Dev Team
-//===== Current Version: ===================================== 
-//= 1.6
-//===== Compatible With: ===================================== 
-//= rAthena Project; 7.15 +
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Piano Key Ouest
-//= - Escape from Niflheim
-//= - Variables in use: nif_esc, MISC_QUEST (Bit 32)
-//= Message Delivery Quest
-//= - Deliver a message to Erious' departed wife.
-//= - Variables in use: nif_revive, MISC_QUEST (Bit 16384)
-//===== Additional Comments: ================================= 
-//= 1.0 Initial release, moved Book of Devil and Piano quest
-//=     from npc/cities/niflheim.txt [Evera]
-//= 1.1 Optimized Book of Devil quest. used bit-wise var,
-//=     Optimized Piano Quest - now uses 1 variable [Lupus]
-//= 1.2 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
-//= 1.3 Moved the Book of Devil quest to custom folder. [L0ne_W0lf]
-//=     Updated to Aegis 10.3 Standed, added Message Delivery Quest.
-//=     Rescripted Piano Quest. Prior quest progress will be lost.
-//= 1.4 Fixed NPCs using ID 111 when it shoudl have been 139. [L0ne_W0lf]
-//= 1.5 Swapped NPC IDs back from last change (139 back to 111). [L0ne_W0lf]
-//=     Clicking will do nothing, you have to still "touch" the npc. 
-//= 1.6 Added questlog support. [Euphy]
+//한글번역 스카이러브
 //============================================================ 
 
 // Piano Quest :: nif_ryu
@@ -297,100 +272,76 @@ nif_in,188,168,3	script	Witch#nif	792,{
 
 // Message Delivery Quest :: nif_npc_lackee
 //============================================================
-prt_in,161,20,3	script	Erious#nif	92,{
+prt_in,161,20,3	script	에류스#nif	92,{
 	if (MISC_QUEST & 16384) {
-		mes "[Erious]";
+		mes "[에류스]";
 		mes "I wish you safety from harm";
 		mes "in your journeys, adventurer.";
 		close;
 	}
 	if (nif_revive == 0) {
-		mes "[Erious]";
-		mes "*Sob*Sob*";
-		mes "*Cries* Wahhh...!";
-		mes "Elly, how could you";
-		mes "leave me this way...";
+		mes "[에류스]";
+		mes "흑흑흑...*";
+		mes "엉엉엉...!";
+		mes "엘리, 날 남겨두고 먼저 떠나다니...";
 		emotion ET_CRY;
 		next;
-		if (select("Comfort him.:Neglect him.") == 1) {
-			mes "[Erious]";
-			mes "Ah, thank you for your kindness.";
-			mes "*Sob* My wife died while I was on";
-			mes "a trip. I'm so sorry that I";
-			mes "couldn't be with her when";
-			mes "the end came...";
+		if (select("위로한다.:내버려둔다.") == 1) {
+			mes "[에류스]";
+			mes "아, 감사합니다.";
+			mes "흑흑, 여행에서 돌아왔더니 제 아내인";
+			mes "엘리가 죽었다는군요.";
+			mes "마지막 인사를 제대로 못 한게 너무나";
+			mes "가슴 아픕니다.";
 			next;
-			mes "[Erious]";
-			mes "I wish I could talk to my Elly,";
-			mes "although I know it's too late now.";
-			mes "*Cries* But... there is one last";
-			mes "hope that I have. My absolute";
-			mes "final chance...";
+			mes "[에류스]";
+			mes "엘리에게 꼭 전하고 싶은 말이 있는데";
+			mes "이걸 어떻게 해야할까요.";
+			mes "여행하다 들은 말로는 어딘가에";
+			mes "죽은자의 마을이 있다는군요.";
+			mes "거기 가면 혹시 만날수 있을지도";
+			mes "모른다는데,";
+			mes "아이들을 놔두고 갈 수가 없군요.";
 			next;
-			mes "[Erious]";
-			mes "I was told that somewhere";
-			mes "in this world, there exists a town";
-			mes "where the dead reside. I might be";
-			mes "able to meet my wife there, but";
-			mes "I cannot leave my children here";
-			mes "without me. *Cries*";
 			next;
-			if (select("I can deliver your message to her.:I am so sorry to hear that.") == 1) {
-				mes "[Erious]";
-				mes "Oh, can you?";
-				mes "Thank you so much for your";
-				mes "generosity. If you can do";
-				mes "this for me, I would be";
-				mes "greatly indebted to you.";
+			if (select("제가 전해드릴까요?:안 되셨군요.") == 1) {
+				mes "[에류스]";
+				mes "그래주시겠어요";
+				mes "오호, 정말 감사드립니다.";
+				mes "이 은혜 절대 잊지 않겠습니다.";
 				next;
-				mes "[Erious]";
-				mes "You're an adventurer, aren't you?";
-				mes "If your journeys take you to that";
-				mes "town of the dead, and if you";
-				mes "happen to meet her by chance...";
-				next;
-				mes "[Erious]";
-				mes "Please send Elly a message for me,";
-				mes "let her know that what happened";
-				mes "a month ago was all my fault.";
-				mes "Thank you for your help,";
-				mes "and please take care.";
+				mes "[에류스]";
+				mes "혹시나 그녀를 만나게되면 한달전의 그";
+				mes "때는 오해였다고.";
+				mes "정말 미안했다고 전해주세요.";
+				mes "그럼 부탁드리겠습니다.";
 				set nif_revive,1;
 				setquest 11038;
 				close;
 			}
-			mes "[Erious]";
-			mes "*Cries* Is there no way that I";
-			mes "can see her again? If I could";
-			mes "talk to her at least once more,";
-			mes "even if it's the last time,";
-			mes "I would do anything...";
+			mes "[에류스]";
+			mes "하아, 어떻게 방법이 없을까요?";
+			mes "그녀에게 못다한 말들을 전해줄수 있다면,";
+			mes "어떠한 댓가라도 치룰 수 있을텐데...,";
 			close;
 		}
-		mes "[Erious]";
-		mes "*Cries* Eeeeelllllyyyy~~~~!";
-		mes "I never thought that would be";
-		mes "the last time we would see";
-		mes "each other...";
-		mes "*Sob*...";
+		mes "[에류스]";
+		mes "흑흑, 엘리이이이~~~~!";
+		mes "그 때 싸웠던 게 마지막이었다니...";
+		mes "엉엉엉...";
 		close;
 	}
 	else if (nif_revive == 1) {
-		mes "[Erious]";
-		mes "This place I was told about...";
-		mes "The town of the dead...";
-		mes "From what I remember, it was";
-		mes "located near some rest area.";
-		next;
-		mes "[Erious]";
-		mes "All day and night, it's filled";
-		mes "with never ending screams of";
-		mes "agony and despair. I hope that";
-		mes "this will be helpful in your search.";
+		mes "[에류스]";
+		mes "죽은자의 마을에 관한 소문을 들은";
+		mes "곳은 마을에서 비명소리가 끊이지 않는";
+		mes "곳이었어요.";
+		mes "휴양지 근처였던 거 같은데 확실하지 않군요.";
+		mes "그럼 꼭 부탁드리겠습니다.";
 		close;
 	}
 	else if (nif_revive == 5 || nif_revive == 6) {
-		mes "[Erious]";
+		mes "[에류스]";
 		mes "Oh my! You really found the town,";
 		mes "have you? I really appreciate that";
 		mes "you've endured all this hardship";
@@ -399,13 +350,13 @@ prt_in,161,20,3	script	Erious#nif	92,{
 		next;
 		if (select("Yes.:Sorry, I couldn't.") == 1) {
 			if (nif_revive == 6 && countitem(934) > 0) {
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "Are you serious? What did she say?";
 				mes "Did she say she will forgive me?";
 				next;
 				select("Yes. And she gave me...this.");
 				delitem 934,1; //Mementos
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "Ah...In this box were the gifts";
 				mes "I gave her when we started";
 				mes "seeing each other. She had a";
@@ -413,7 +364,7 @@ prt_in,161,20,3	script	Erious#nif	92,{
 				mes "met, so I promised her that I";
 				mes "would cure her illness...";
 				next;
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "That's why I went on that trip...";
 				mes "to find a cure or medicine";
 				mes "for her... But my efforts turned";
@@ -421,7 +372,7 @@ prt_in,161,20,3	script	Erious#nif	92,{
 				mes "...................";
 				mes ".........";
 				next;
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "Anyway, I appreciate your";
 				mes "generousity. I want to pay";
 				mes "you back for all the trouble";
@@ -429,7 +380,7 @@ prt_in,161,20,3	script	Erious#nif	92,{
 				mes "the medicine I found for her";
 				mes "illness during this trip.";
 				next;
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "I hope you will take this medicine";
 				mes "as a token of my gratitute.";
 				next;
@@ -440,13 +391,13 @@ prt_in,161,20,3	script	Erious#nif	92,{
 					getitem 607,2; //Yggdrasilberry
 					getitem 608,2; //Seed_Of_Yggdrasil
 					getitem 610,10; //Leaf_Of_Yggdrasil
-					mes "[Erious]";
+					mes "[에류스]";
 					mes "Thank you for everything.";
 					mes "I wish you luck and safety";
 					mes "in your adventures.";
 					close;
 				}
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "I have something to give you,";
 				mes "but you're carrying too much";
 				mes "stuff for me to give it to";
@@ -455,24 +406,24 @@ prt_in,161,20,3	script	Erious#nif	92,{
 				close;
 			}
 			else if (nif_revive == 6 && countitem(934) < 1) {
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "Hmm...this is odd. I'm sure she would give you something as a token of meeting her. By any chance, is there anything that you've forgetten to bring me?";
 				close;
 			}
-			mes "[Erious]";
+			mes "[에류스]";
 			mes "I guess you misunderstood";
 			mes "something or you're trying";
 			mes "to scam a man in grief.";
 			close;
 		}
 		if (nif_revive == 5) {
-			mes "[Erious]";
+			mes "[에류스]";
 			mes "I see...you have failed to find";
 			mes "her... However, I also understand";
 			mes "that fulfilling my request may";
 			mes "be impossible...";
 			next;
-			mes "[Erious]";
+			mes "[에류스]";
 			mes "You've really gone out of your way";
 			mes "to help me, so I want to give you";
 			mes "something as a token of my";
@@ -483,13 +434,13 @@ prt_in,161,20,3	script	Erious#nif	92,{
 				set nif_revive,0;
 				completequest 11042;
 				getitem 610,10; //Leaf_Of_Yggdrasil
-				mes "[Erious]";
+				mes "[에류스]";
 				mes "Thank you for everything.";
 				mes "I wish you luck and safety";
 				mes "from harm in your journeys.";
 				close;
 			}
-			mes "[Erious]";
+			mes "[에류스]";
 			mes "I have something to give you,";
 			mes "but you're carrying too much";
 			mes "stuff for me to give it to";
@@ -497,7 +448,7 @@ prt_in,161,20,3	script	Erious#nif	92,{
 			mes "store your items somewhere?";
 			close;
 		}
-		mes "[Erious]";
+		mes "[에류스]";
 		mes "I see...";
 		mes "...Wait! Doesn't that belong";
 		mes "to my wife, Elly? Why are you";

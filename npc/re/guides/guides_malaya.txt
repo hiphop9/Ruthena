@@ -13,48 +13,59 @@
 //= 1.1 Navigation system update. [Euphy]
 //============================================================ 
 
-malaya,71,72,4	script	Port Malaya Guide#01::GuideMalaya	579,{
-	mes "[Port Malaya Guide]";
-	mes "Welcome to ^8B4513Port Malaya^000000, the Breathing Village.";
-	mes "Where cultures and legends come to life!";
-	mes "Do you need help navigating the village?";
-	F_Navi("[Port Malaya Guide]");
+malaya,71,72,4	script	포트 말라야 가이드#01::GuideMalaya	579,{
+	mes "[포트 말라야 가이드]";
+	mes "다양한 문화와 전설이 살아";
+	mes "쉼시는 마을 ^8B4513포트 말라야^000000에";
+	mes "오신 걸 환영합니다.";
+	mes "마을 안내를 해 드리고 있으니";
+	mes "무엇이든 물어보세요.";
+	next;
+	mes "[포트 말라야 가이드]";
+	mes "또한 안내받으신 ^B9062F[거점명]을 클릭^000000시엔";
+	mes "^B9062F내비게이션^000000으로 친절히 안내 해";
+	mes "드리겠습니다.";
+	next;
 	while(1) {
 		next;
-		switch(select("[ Kafra Employees ]:[ Inn & Tavern ]:[ Weapon & Armor Shop ]:[ Tool Shop ]:[ Hospital ]:[ Park ]:[ Harbor ]:Remove marks from Mini-Map:Cancel")) {
+		switch(select("[ 카프라 직원 ]:[ 여관 & 주점 ]:[   무기 상점  ]:[   도구 상점  ]:[     병  원     ]:[     공  원     ]:[     항  구     ]:미니 맵 표시 지우기:그만둔다.")) {
 		case 1:
-			callsub L_Mark, "^0000FFKafra Employees^000000",1;
+			mes "[포트 말라야 가이드]";
+			mes "^006400카프라 직원^000000의";
+			mes "위치는 미니맵의 ^0000FF상자모양 아이콘^000000을";
+			mes "클릭하시면 안내 됩니다.";
+			mes "다른 안내가 필요하신가요?";
 			viewpoint 1,71,79,0,0x0A82FF;
 			viewpoint 1,234,204,1,0x0A82FF;
 			break;
 		case 2:
-			callsub L_Mark, F_Navi("Inn & Tavern","malaya,193,215","^006400");
+			callsub L_Mark, F_Navi("여관&주점","malaya,193,215","^006400");
 			viewpoint 1,193,215,2,0xAAFF00;
 			break;
 		case 3:
-			callsub L_Mark, F_Navi("Weapon & Armor Shop","malaya,114,212","^008080");
+			callsub L_Mark, F_Navi("무기상점","malaya,114,212","^008080");
 			viewpoint 1,114,212,3,0x4F543C;
 			break;
 		case 4:
-			callsub L_Mark, F_Navi("Tool Shop","malaya,297,167","^FF1493");
+			callsub L_Mark, F_Navi("도구상점","malaya,297,167","^FF1493");
 			viewpoint 1,297,167,4,0xFF1493;
 			break;
 		case 5:
-			callsub L_Mark, F_Navi("Hospital","malaya,50,75","^8B4513");
+			callsub L_Mark, F_Navi("병원","malaya,50,75","^8B4513");
 			viewpoint 1,50,75,5,0x8B4513;
 			break;
 		case 6:
-			callsub L_Mark, F_Navi("Park","malaya,280,371","^8B4513");
+			callsub L_Mark, F_Navi("공원","malaya,280,371","^8B4513");
 			viewpoint 1,280,371,6,0x8B4513;
 			break;
 		case 7:
-			callsub L_Mark, F_Navi("Harbor","malaya,276,55","^8A2BE2");
+			callsub L_Mark, F_Navi("항구","malaya,276,55","^8A2BE2");
 			viewpoint 1,276,55,7,0x8A2BE2;
 			break;
 		case 8:
-			mes "[Port Malaya Guide]";
-			mes "I'll remove all marks from your mini-map.";
-			mes "Is there anything else I can do for you?";
+			mes "[포트 말라야 가이드]";
+			mes "표시를 지워 드리겠습니다.";
+			mes "다른 도움이 필요하세요?";
 			viewpoint 2,1,1,0,0xFFFFFF;
 			viewpoint 2,1,1,1,0xFFFFFF;
 			viewpoint 2,1,1,2,0xFFFFFF;
@@ -65,19 +76,19 @@ malaya,71,72,4	script	Port Malaya Guide#01::GuideMalaya	579,{
 			viewpoint 2,1,1,7,0xFFFFFF;
 			break;
 		case 9:
-			mes "[Port Malaya Guide]";
-			mes "I hope you enjoy your journey.";
+			mes "[포트 말라야 가이드]";
+			mes "즐거운 여행 되시길 바랍니다.";
 			close;
 		}
 	}
 	end;
 L_Mark:
-	mes "[Port Malaya Guide]";
-	mes "The "+getarg(0)+" "+((getarg(1,0))?"are":"is");
-	mes "marked on your mini-map.";
-	mes "Check your mini-map.";
-	mes "Is there anything else I can do for you?";
+	mes "[포트 말라야 가이드]";
+	mes getarg(0)+"의";
+	mes "위치를 미니 맵에";
+	mes "표시해 드리겠습니다.";
+	mes "다른 안내가 필요하세요?";
 	return;
 }
-malaya,250,83,6	duplicate(GuideMalaya)	Port Malaya Guide#02	579
-malaya,224,204,6	duplicate(GuideMalaya)	Port Malaya Guide#03	579
+malaya,250,83,6	duplicate(GuideMalaya)	포트 말라야 가이드#02	579
+malaya,224,204,6	duplicate(GuideMalaya)	포트 말라야 가이드#03	579

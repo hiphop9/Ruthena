@@ -1,0 +1,1692 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- 2 sidequests from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+
+// Sidequest A - Step 1, 10
+// (unlocked after the final of the sidequest A, quest "꼬뽀의 비밀기지". Starting the main quest is not required)
+// (Starting the episode 20 main quest is not required, the prerequisites are BaseLevel 215 and episode 19 completed)
+icecastle,106,241,5	duplicate(dummy_cloaked_npc)	프리데리케#ep20_1::ep20_icecastle_106_241	4_EP19_FRIEDERIKE
+
+icecastle,109,241,3	script	아윈 배달부#ep20	4_EP19_IWIN,{
+	if (BaseLevel < 215) {
+		mes "[아윈 배달부]";
+		mes "아이구!";
+		mes "죄송해요!";
+		mes "좀 지나갈게요!!!";
+		mes "^ff0000※ 215레벨 이상 수행 가능한 퀘스트입니다.^000000!";
+		cutin "ep19_iwin11.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[아윈 배달부]";
+		mes "아이구!";
+		mes "죄송해요!";
+		mes "좀 지나갈게요!!!";
+		cutin "ep19_iwin11.png",2;
+		close3;
+	}
+	if (ep20_sidequest_1 == 0) {
+		mes "[아윈 배달부]";
+		mes "아이구!";
+		mes "죄송해요!";
+		mes "좀 지나갈게요!!!";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "아!";
+		mes "이게 누구야!";
+		mes "" + strcharinfo(0) + "님이셨네!";
+		mes "짐이 많아서 앞이 안 보이지 뭐예요!";
+		mes "호호호호홋!";
+		next;
+		select( "도와주겠다고 한다." );
+		mes "[아윈 배달부]";
+		mes "아휴~";
+		mes "아니에요!";
+		mes "뭐 이런 일까지 도와 주시려고 그래요!";
+		next;
+		mes "[아윈 배달부]";
+		mes "다른 일도 많이 바쁘실 텐데.";
+		mes "이럴 때라도 쉬셔야지!";
+		next;
+		select( "무거워 보인다." );
+		mes "[아윈 배달부]";
+		mes "제가 천천히 옮기면 돼요~";
+		next;
+		mes "[아윈 배달부]";
+		mes "흠…";
+		mes "정 그러시면 요기 작은 상자 하나만 옮겨주세요.";
+		next;
+		mes "[아윈 배달부]";
+		mes "프리데리케님 방으로 가는 건데.";
+		mes "보클린드님이 보내셨다고 하면 될 거예요.";
+		next;
+		mes "[아윈 배달부]";
+		mes "그럼 잘 부탁드려용~";
+		setquest 11928;
+		ep20_sidequest_1 = 1;
+		close2;
+		cutin "",255;
+		navigateto("icas_in",35,121);
+		end;
+	}
+	if (ep20_sidequest_1 == 1) {
+		mes "[아윈 배달부]";
+		mes "흠…";
+		mes "정 그러시면 요기 작은 상자 하나만 옮겨주세요.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "프리데리케님 방으로 가는 건데.";
+		mes "보클린드님이 보내셨다고 하면 될 거예요.";
+		next;
+		mes "[아윈 배달부]";
+		mes "그럼 잘 부탁드려용~";
+		close2;
+		cutin "",255;
+		navigateto("icas_in",35,121);
+		end;
+	}
+	if (ep20_sidequest_1 == 9) {
+		mes "[아윈 배달부]";
+		mes "안녕하세요.";
+		mes "프리데리케님.";
+		mes "물건은 받으셨어요?";
+		cutin "ep19_iwin11.png",2;
+		cloakoffnpcself( "ep20_icecastle_106_241" );
+		next;
+		mes "[프리데리케]";
+		mes "덕분에 잘 받았어요.";
+		mes "늘 고마워요.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "뭘요.";
+		mes "제 일인걸요.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "아참!";
+		mes "혹시 근처에서 로로휴 못 보셨나요?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "로로휴요?";
+		mes "글쎄요.";
+		mes "못 본 것 같은데.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "어딜 간 거지?";
+		mes "배고플 텐데.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "흐음…";
+		mes "그럼 다른 곳도 좀 찾아볼까요?";
+		mes "얼음성부터 가봐요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "" + strcharinfo(0) + "님이 함께 계시니 안심이긴 하지만 그래도 밖은 위험할 수 있으니 너무 멀리 가지는 마세요.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "네~";
+		cutin "ep19_friederike05.png",2;
+		ep20_sidequest_1 = 10;
+		erasequest 11936;
+		setquest 11937;
+		close2;
+		cloakonnpcself( "ep20_icecastle_106_241" );
+		cutin "",255;
+		navigateto("icas_in",113,38);
+		end;
+	}
+	if (ep20_sidequest_1 == 10) {
+		mes "[아윈 배달부]";
+		mes "로로휴요?";
+		mes "글쎄요.";
+		mes "못 본 것 같은데.";
+		cutin "ep19_iwin11.png",2;
+		cloakoffnpcself( "ep20_icecastle_106_241" );
+		next;
+		mes "[프리데리케]";
+		mes "어딜 간 거지?";
+		mes "배고플 텐데.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "흐음…";
+		mes "그럼 다른 곳도 좀 찾아볼까요?";
+		mes "얼음성부터 가봐요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 배달부]";
+		mes "" + strcharinfo(0) + "님이 함께 계시니 안심이긴 하지만 그래도 밖은 위험할 수 있으니 너무 멀리 가지는 마세요.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "네~";
+		cutin "ep19_friederike05.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_106_241" );
+		cutin "",255;
+		navigateto("icas_in",113,38);
+		end;
+	}
+	mes "[아윈 배달부]";
+	mes "아이구!";
+	mes "죄송해요!";
+	mes "좀 지나갈게요!!!";
+	cutin "ep19_iwin11.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main == 100 && BaseLevel >= 215 && ep20_sidequest_1 == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11936) == 1" );
+	end;
+}
+
+// Sidequest A - Step 2
+icas_in,35,121,0	script	#ep20프	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep20_sidequest_1 == 1) {
+		mes "- 와글와글 -";
+		next;
+		mes "!!!!!!!!!!!!";
+		next;
+		mes "[프리데리케]";
+		mes "어머.";
+		mes "갑자기 왜 그래 얘들아!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "아!";
+		mes "" + strcharinfo(0) + "님 안녕하세요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "요 부끄럼쟁이들 " + strcharinfo(0) + "님을 보고 숨어버린 거구나.";
+		mes "정말 못 말린다니까.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		select( "상자를 전해준다." );
+		mes "[프리데리케]";
+		mes "와!";
+		mes "" + strcharinfo(0) + "님이 직접 가져다주시다니 감사합니다.";
+		mes "보클린드님이 뭘 주셨을까?";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "부스럭부스럭";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "앗!";
+		mes "이건 저번에 부탁한 털양말이네!!";
+		mes "보송보송하고 너무 귀여워!!";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그리고 히나레 차랑…";
+		mes "타타링 앞으로 온 편지랑";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "포링글칩!";
+		mes "새로 나온 맛이야.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "과자야?";
+		mes "맛있겠다!!!";
+		mes "어서 먹어보자!";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "잠깐!";
+		mes "아직 안 돼!";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "에~~~";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "과자는 식사 후에 먹을 거야.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "지금 먹으면 안돼?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "안돼!";
+		mes "밥 먹기 전에 과자를 먹으면 보클린드님한테 혼난다구!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "하지만 프리데리케님도 밥 먹기 전에 과자 먹었잖아.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[타타링]";
+		mes "그래서 마크랑 보클린드님께 엄청 혼났죠?";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "앗…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "프리데리케님, 보클린드님한테 혼났구나.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그… 그걸 말하면 어떡해요!";
+		mes "타타링도 같이 혼났으면서!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[타타링]";
+		mes "전 과자를 먹어서가 아니라 프리데리케가 과자 먹는 걸 안 말려서 혼난 거였죠.";
+		mes "그리고 타타링이 아니라 타마린이라니까요…";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "싸우면 안 돼!";
+		mes "엄마가 친구는 사이좋게 지내야 한다 그랬어.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "그러니까 과자는 밥 먹고 먹자.";
+		mes "싸우지 말고.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[타타링]";
+		mes "요 꼬맹이가…";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "그런데 엄마는 친구랑 사이좋게 지내라고 하면서 협곡에 사는 아윈들 가까이는 가면 안 된다고 그런다?";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		select( "협곡의 아윈?" );
+		mes "[꼬마 아윈]";
+		mes "모험가님도 모르는 게 있구나!";
+		mes "북쪽 협곡에는 아윈들이 많이 살고 있어.";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "엄청 옛날에는 같이 살았는데 지금은 같이 안 산데.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[꼬마 아윈]";
+		mes "같이 살면 좋을 텐데.";
+		mes "얼음성에 살면 따뜻한 집도 있고 맛있는 과자도 먹을 수 있는데.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴는 착한 아이네.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[로로휴]";
+		mes "그… 그런 거 아니다 뭐!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[타타링]";
+		mes "부끄러워하긴.";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[로로휴]";
+		mes "흥!!";
+		mes "둘 다 놀리기만 하고!!!";
+		mes "밥 먹으러 집에 갈 거야!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "앗!";
+		mes "그러보고니 벌써 시간이 그렇게 됐나?";
+		mes "그럼 늦기 전에 다른 꼬뽀들도 어서 돌려보내는 게 좋겠어요.";
+		cutin "ep19_friederike02.png",2;
+		erasequest 11928;
+		setquest 11929;
+		ep20_sidequest_1 = 2;
+		close2;
+		cloakoffnpcself( "ep20_icas_in_32_116" );
+		cloakoffnpcself( "ep20_icas_in_30_120" );
+		cloakoffnpcself( "ep20_icas_in_36_117" );
+		cloakoffnpcself( "ep20_icas_in_28_119" );
+		cutin "",255;
+		navigateto("icas_in",32,116);
+		end;
+	}
+	if (ep20_sidequest_1 == 2 || ep20_sidequest_1 == 3 || ep20_sidequest_1 == 4 || ep20_sidequest_1 == 5) {
+		mes "[프리데리케]";
+		mes "앗!";
+		mes "그러보고니 벌써 시간이 그렇게 됐나?";
+		mes "그럼 늦기 전에 다른 꼬뽀들도 어서 돌려보내는 게 좋겠어요.";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		if (ep20_sidequest_1 < 3)
+			cloakoffnpcself( "ep20_icas_in_32_116" );
+		if (ep20_sidequest_1 < 4)
+			cloakoffnpcself( "ep20_icas_in_30_120" );
+		if (ep20_sidequest_1 < 5)
+			cloakoffnpcself( "ep20_icas_in_36_117" );
+		cloakoffnpcself( "ep20_icas_in_28_119" );
+		cutin "",255;
+		if (ep20_sidequest_1 == 2)
+			navigateto("icas_in",32,116);
+		else if (ep20_sidequest_1 == 3)
+			navigateto("icas_in",30,120);
+		else if (ep20_sidequest_1 == 4)
+			navigateto("icas_in",36,117);
+		else if (ep20_sidequest_1 == 5)
+			navigateto("icas_in",28,119);
+		end;
+	}
+	if (ep20_sidequest_1 == 6) {
+		mes "[프리데리케]";
+		mes "어쩔 수 없네.";
+		mes "제가 집을 아니까 데려다주고 올게요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[타타링]";
+		mes "앗!";
+		mes "나갈 거예요?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "멀지 않은 곳이니 금방 다녀올게요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[타타링]";
+		mes "음…";
+		mes "" + strcharinfo(0) + "님 프리데리케만 혼자 보내긴 불안한데 같이 가 주시겠어요?";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "마을 안에서 정도는 혼자 다닐 수 있다구요!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[타타링]";
+		mes "못 믿는 게 아니라 요즘 좀 안 좋은 소문이 있어서 그래요.";
+		mes "부탁드려요.";
+		cutin "ep19_tamarin01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11928) == 1" );
+	end;
+}
+
+// Sidequest A - Step 3
+icas_in,32,116,3	script(CLOAKED)	꼬뽀#ep20_1::ep20_icas_in_32_116	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 2) {
+		mes "[꼬뽀]";
+		mes "벌써 밥 먹을 시간이에요?";
+		mes "그럼 빨리 집에 가야지.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "늦으면 엄마한테 혼나요.";
+		erasequest 11929;
+		setquest 11930;
+		ep20_sidequest_1 = 3;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",30,120);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11929) == 1" );
+	end;
+}
+
+// Sidequest A - Step 4
+icas_in,30,120,3	script(CLOAKED)	꼬뽀#ep20_2::ep20_icas_in_30_120	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 3) {
+		mes "[꼬뽀]";
+		mes "앗!";
+		mes "집에 가기 싫은데.";
+		mes "여기가 제일 따듯한데.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[타타링]";
+		mes "그러다가 혼난다.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[꼬뽀]";
+		mes "치…";
+		cutin "ep20_cocopo03.png",2;
+		ep20_sidequest_1 = 4;
+		erasequest 11930;
+		setquest 11931;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",36,117);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11930) == 1" );
+	end;
+}
+
+// Sidequest A - Step 5
+icas_in,36,117,3	script(CLOAKED)	꼬뽀#ep20_3::ep20_icas_in_36_117	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 4) {
+		mes "[꼬뽀]";
+		mes "그거 알아?";
+		mes "오늘 우리집 밥은 르간 탕수육이야.";
+		cutin "ep20_cocopo02.png",2;
+		ep20_sidequest_1 = 5;
+		erasequest 11931;
+		setquest 11932;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",28,119);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11931) == 1" );
+	end;
+}
+
+// Sidequest A - Step 6
+icas_in,28,119,3	script(CLOAKED)	꼬뽀#ep20_4::ep20_icas_in_28_119	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 5) {
+		mes "[꼬뽀]";
+		mes "…새근새근…";
+		cutin "ep20_cocopo_baby.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그 애는 카포포예요.";
+		mes "차코코 동생 챙겨야지.";
+		mes "차코코?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "어머 벌써 가버렸나?";
+		mes "어쩔 수 없네.";
+		mes "제가 집을 아니까 데려다주고 올게요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[타타링]";
+		mes "앗!";
+		mes "나갈 거예요?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "멀지 않은 곳이니 금방 다녀올게요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[타타링]";
+		mes "음…";
+		mes "" + strcharinfo(0) + "님 프리데리케만 혼자 보내긴 불안한데 같이 가 주시겠어요?";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "마을 안에서 정도는 혼자 다닐 수 있다구요!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[타타링]";
+		mes "못 믿는 게 아니라 요즘 좀 안 좋은 소문이 있어서 그래요.";
+		mes "부탁드려요.";
+		cutin "ep19_tamarin01.png",2;
+		ep20_sidequest_1 = 6;
+		erasequest 11932;
+		setquest 11933;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icecastle",65,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11932) == 1" );
+	end;
+}
+
+// Sidequest A - Step 7, 9
+icecastle,70,216,3	duplicate(dummy_cloaked_npc)	프리데리케#ep20_2::ep20_icecastle_70_216	4_EP19_FRIEDERIKE
+
+icecastle,65,213,0	script	#ep20프문앞	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep20_sidequest_1 == 6) {
+		mes "[프리데리케]";
+		mes "다들 너무 과보호라니까요!";
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "차코코네 집은 여기서 조금만 아래로 내려가면 있어요.";
+		mes "늦게 돌아오면 타타링이 잔소리하니까 어서 다녀오죠.";
+		cutin "ep19_friederike02.png",2;
+		ep20_sidequest_1 = 7;
+		erasequest 11933;
+		setquest 11934;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",65,159);
+		end;
+	}
+	if (ep20_sidequest_1 == 7) {
+		mes "[프리데리케]";
+		mes "다들 너무 과보호라니까요!";
+		cutin "ep19_friederike04.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[프리데리케]";
+		mes "차코코네 집은 여기서 조금만 아래로 내려가면 있어요.";
+		mes "늦게 돌아오면 타타링이 잔소리하니까 어서 다녀오죠.";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		navigateto("icecastle",65,159);
+		end;
+	}
+	if (ep20_sidequest_1 == 8) {
+		mes "[프리데리케]";
+		mes "여기까지 왔으니 따듯한 방에서 좀 쉬시겠어요?";
+		mes "과자랑 차 정도는 드릴 수 있어요.";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[라라하]";
+		mes "프리데리케님!";
+		mes "프리데리케님!";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "안녕하세요.";
+		mes "무슨 일인가요?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[라라하]";
+		mes "혹시 로로휴 방에 있나요?";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "저도 지금 막 집에 돌아와서…";
+		mes "잠깐만요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "타타링!!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[타타링]";
+		mes "응?";
+		mes "왔어요?";
+		mes "무슨 일이에요?";
+		mes "추운데 안 들어오고.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "혹시 로로휴 왔나요?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[타타링]";
+		mes "아뇨?";
+		mes "아까 밥 먹으러 간다고 돌아간 이후로는 못 봤는데.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[라라하]";
+		mes "이상하네…";
+		mes "그게… 집에도 돌아오지 않았거든요.";
+		mes "밥 먹을 시간이 지났는데.";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[라라하]";
+		mes "얘는 또 어딜 간 거야.";
+		next;
+		mes "[프리데리케]";
+		mes "혹시 산책하다가 만나면 집으로 보낼게요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		select( "산책?" );
+		mes "[프리데리케]";
+		mes "어울려 주실 거죠?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그럼, 동쪽으로 좀 걸어 볼까요?";
+		mes "후훗.";
+		cutin "ep19_friederike05.png",2;
+		ep20_sidequest_1 = 9;
+		erasequest 11935;
+		setquest 11936;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",109,241);
+		end;
+	}
+	if (ep20_sidequest_1 == 9) {
+		mes "[프리데리케]";
+		mes "어울려 주실 거죠?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[프리데리케]";
+		mes "그럼, 동쪽으로 좀 걸어 볼까요?";
+		mes "후훗.";
+		cutin "ep19_friederike05.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",109,241);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11933) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11935) == 1" );
+	end;
+}
+
+// Sidequest A - Step 8
+icecastle,62,160,5	duplicate(dummy_cloaked_npc)	프리데리케#ep20_3::ep20_icecastle_62_160	4_EP19_FRIEDERIKE
+icecastle,63,158,3	duplicate(dummy_cloaked_npc)	차차코#ep20_3::ep20_icecastle_63_158	EP20_NPC_COCOPO
+
+icecastle,65,159,3	script	차차로#ep20	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 7) {
+		mes "[차차로]";
+		mes "프리데리케님, " + strcharinfo(0) + "님 안녕하세요.";
+		mes "산책하시는 거예요?";
+		cutin "ep19_iwin06.png",2;
+		cloakoffnpcself( "ep20_icecastle_62_160" );
+		next;
+		mes "[프리데리케]";
+		mes "그게…";
+		mes "여기…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[차차로]";
+		mes "카포포를 왜 " + strcharinfo(0) + "님이 데리고 있어요?";
+		mes "설마 또 프리데리케님 집에 두고 왔나요?";
+		mes "차코코 이 녀석이 정말!!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[차차로]";
+		mes "차코코!!!";
+		cloakoffnpcself( "ep20_icecastle_63_158" );
+		next;
+		mes "[차코코]";
+		mes "응?";
+		mes "왜?";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[차차로]";
+		mes "왜는!";
+		mes "너 또 프리데리케님 귀찮게 했니?";
+		mes "게다가 카포포도 두고 오고!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[차코코]";
+		mes "앗!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[차차로]";
+		mes "요녀서어어어어어어억!!!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[차차로]";
+		mes "프리데리케님, " + strcharinfo(0) + "님 카포포 데려와 주셔서 너무 감사해요.";
+		next;
+		mes "[차차로]";
+		mes "이런 일이 다시 안 생기도록 차코코한테는 제가 따끔하게 말해둘게요.";
+		mes "죄송해요.";
+		next;
+		mes "[프리데리케]";
+		mes "전 괜찮으니 너무 혼내지 마세요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그럼, 저희는 이만 돌아가 볼게요.";
+		next;
+		mes "[차코코]";
+		mes "프리데리케님 가지 마!!";
+		mes "엄마한테 엄청 혼날 거야!!!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[차차로]";
+		mes "프리데리케님은 바쁘시니까 어서 돌아가셔야 한단다.";
+		mes "어서 집으로 들어가자꾸나.";
+		mes "호호호.";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[차코코]";
+		mes "갸아악!!!!";
+		cutin "ep20_cocopo03.png",2;
+		ep20_sidequest_1 = 8;
+		erasequest 11934;
+		setquest 11935;
+		close2;
+		cloakonnpcself( "ep20_icecastle_62_160" );
+		sleep2 350;
+		cloakonnpcself( "ep20_icecastle_63_158" );
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	if (ep20_sidequest_1 == 8) {
+		mes "[차차로]";
+		mes "프리데리케님은 바쁘시니까 어서 돌아가셔야 한단다.";
+		mes "어서 집으로 들어가자꾸나.";
+		mes "호호호.";
+		cutin "ep19_iwin06.png",2;
+		cloakoffnpcself( "ep20_icecastle_63_158" );
+		next;
+		mes "[차코코]";
+		mes "갸아악!!!!";
+		cutin "ep20_cocopo03.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_63_158" );
+		sleep2 334;
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11934) == 1" );
+	end;
+}
+
+// Sidequest A - Step 9
+// icecastle,65,213,0	script	#ep20프문앞	HIDDEN_WARP_NPC,2,2,{
+
+// Sidequest A - Step 10
+// icecastle,109,241,3	script	아윈 배달부#ep20	4_EP19_IWIN,{
+
+// Sidequest A - Step 11
+icas_in,111,40,5	duplicate(dummy_cloaked_npc)	프리데리케#ep20_4::ep20_icas_in_111_40	4_EP19_FRIEDERIKE
+
+icas_in,113,38,3	script	아윈 경비병#ep20_1	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 10) {
+		mes "[아윈 경비병]";
+		mes "안녕하세요.";
+		mes "프리데리케님.";
+		mes "보클린드님을 만나러 오셨나요?";
+		cutin "ep19_iwin01.png",2;
+		cloakoffnpcself( "ep20_icas_in_111_40" );
+		next;
+		mes "[프리데리케]";
+		mes "그건 아니고 로로휴를 찾고 있어요.";
+		mes "못 보셨어요?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "오늘은 본 적이 없는 것 같은데 요즘 시기가 시기인 만큼 빨리 찾는 게 좋겠네요.";
+		mes "경비대에도 연락해 둘까요?";
+		cutin "ep19_iwin01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "별일 아니면 좋겠는데…";
+		mes "부탁드려요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님 그럼 우린 마을 입구에 가봐요.";
+		mes "입구 쪽 경비대에 전달도 하고… 아무 일 아니어야 할텐데…";
+		ep20_sidequest_1 = 11;
+		erasequest 11937;
+		setquest 11938;
+		close2;
+		cloakonnpcself( "ep20_icas_in_111_40" );
+		sleep2 349;
+		cutin "",255;
+		navigateto("icecastle",24,130);
+		end;
+	}
+	if (ep20_sidequest_1 == 11) {
+		mes "[아윈 경비병]";
+		mes "오늘은 본 적이 없는 것 같은데 요즘 시기가 시기인 만큼 빨리 찾는 게 좋겠네요.";
+		mes "경비대에도 연락해 둘까요?";
+		cutin "ep19_iwin01.png",2;
+		cloakoffnpcself( "ep20_icas_in_111_40" );
+		next;
+		mes "[프리데리케]";
+		mes "별일 아니면 좋겠는데…";
+		mes "부탁드려요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님 그럼 우린 마을 입구에 가봐요.";
+		mes "입구 쪽 경비대에 전달도 하고… 아무 일 아니어야 할텐데…";
+		close2;
+		cloakonnpcself( "ep20_icas_in_111_40" );
+		cutin "",255;
+		navigateto("icecastle",24,130);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11937) == 1" );
+	end;
+}
+
+// Sidequest A - Step 12
+icecastle,26,129,3	duplicate(dummy_cloaked_npc)	프리데리케#ep20_5::ep20_icecastle_26_129	4_EP19_FRIEDERIKE
+
+icecastle,24,130,5	script	아윈 경비병#ep20_2	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 11) {
+		mes "[아윈 경비병]";
+		mes "안녕하세요.";
+		mes "프리데리케님.";
+		mes "여기까지 오시다니 별일이네요?";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );
+		next;
+		mes "[프리데리케]";
+		mes "아 그런 것보다.";
+		mes "로로휴 못보셨어요?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "로로휴라면 입구 쪽에 있을 겁니다.";
+		mes "밖에 나가고 싶어 하길래 안 된다고 했더니 그럼 입구에서 밖을 구경만이라도 하겠다고 해서요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "요 앞에 바로…";
+		next;
+		mes "[프리데리케]";
+		mes "여기 있어요?";
+		mes "휴… 다행이다.";
+		cutin "ep19_friederike03.png",2;
+		ep20_sidequest_1 = 12;
+		erasequest 11938;
+		setquest 11939;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		sleep2 317;
+		cutin "",255;
+		navigateto("icecastle",20,128);
+		end;
+	}
+	if (ep20_sidequest_1 == 12) {
+		mes "[아윈 경비병]";
+		mes "로로휴라면 입구 쪽에 있을 겁니다.";
+		mes "밖에 나가고 싶어 하길래 안 된다고 했더니 그럼 입구에서 밖을 구경만이라도 하겠다고 해서요.";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );
+		next;
+		mes "[아윈 경비병]";
+		mes "요 앞에 바로…";
+		next;
+		mes "[프리데리케]";
+		mes "여기 있어요?";
+		mes "휴… 다행이다.";
+		cutin "ep19_friederike03.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		cutin "",255;
+		navigateto("icecastle",20,128);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11938) == 1" );
+	end;
+}
+
+// Sidequest A - Step 13
+icecastle,22,128,3	duplicate(dummy_cloaked_npc)	프리데리케#ep20_6::ep20_icecastle_22_128	4_EP19_FRIEDERIKE
+
+// Note: strange, but the NPC is not cloaked on official
+icecastle,20,128,3	script	꼬뽀#ep20_솜	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 12) {
+		mes "[프리데리케]";
+		mes "여기 있었구나! 로로휴.";
+		mes "엄마가 걱정하시잖아.";
+		mes "어서 집에…";
+		mes "앗!!!";
+		cloakoffnpcself( "ep20_icecastle_22_128" );
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "이거 로로휴가 이니라 그냥 솜뭉치예요.";
+		next;
+		mes "[아윈 경비병]";
+		mes "아아앗!!!!";
+		mes "그 녀석 설마 솜뭉치를 세워두고 몰래 밖으로 나간 건가!";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "별일 없으면 좋겠지만… 혹시 모르니 찾으러 가보는 게 좋겠습니다.";
+		next;
+		mes "[프리데리케]";
+		mes "저… 저도 갈래요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "밖은 위험하니 찾는 건 경비대에게 맡기세요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "하지만…";
+		mes "다치기라도 했다면 제가 도움이 될 거예요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "으음…";
+		mes "그럼 " + strcharinfo(0) + "님 곁에서 절대 떨어지시면 안 됩니다.";
+		mes "아시겠죠?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "알았어요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[아윈 경비병]";
+		mes "그럼 프리데리케님을 잘 부탁드립니다.";
+		mes "전 경비대원들을 좀 더 불러오겠습니다.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "우린 먼저 나가서 로로휴를 찾아봐요.";
+		mes "아무 일 없어야 할텐데…";
+		cutin "ep19_friederike02.png",2;
+		ep20_sidequest_1 = 13;
+		erasequest 11939;
+		setquest 11940;
+		close2;
+		cloakonnpcself( "ep20_icecastle_22_128" );
+		sleep2 350;
+		cutin "",255;
+		navigateto("jor_back1",310,245);
+		end;
+	}
+	if (ep20_sidequest_1 == 13) {
+		mes "[아윈 경비병]";
+		mes "그럼 프리데리케님을 잘 부탁드립니다.";
+		mes "전 경비대원들을 좀 더 불러오겠습니다.";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );	// strange but official
+		next;
+		mes "[프리데리케]";
+		mes "우린 먼저 나가서 로로휴를 찾아봐요.";
+		mes "아무 일 없어야 할텐데…";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		sleep2 333;
+		cutin "",255;
+		navigateto("jor_back1",310,245);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11939) == 1" );
+	end;
+}
+
+// Sidequest A - Step 14
+jor_back1,310,245,3	script	솜털#ep20_1	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 13) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		ep20_sidequest_1 = 14;
+		erasequest 11940;
+		setquest 11941;
+		close2;
+		navigateto("jor_back1",222,392);
+		end;
+	}
+	if (ep20_sidequest_1 == 14) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		close2;
+		navigateto("jor_back1",222,392);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11940) == 1" );
+	end;
+}
+
+// Sidequest A - Step 15
+jor_back1,222,392,3	script	솜털#ep20_2	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 14) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		next;
+		mes "- 좀 더 북쪽으로 이동해보자. -";
+		ep20_sidequest_1 = 15;
+		erasequest 11941;
+		setquest 11942;
+		close2;
+		navigateto("jor_back2",8,242);
+		end;
+	}
+	if (ep20_sidequest_1 == 15) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		next;
+		mes "- 좀 더 북쪽으로 이동해보자. -";
+		close2;
+		navigateto("jor_back2",8,242);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11941) == 1" );
+	end;
+}
+
+// Sidequest A - Step 16
+jor_back2,8,242,3	script	솜털#ep20_3	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 15) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		next;
+		mes "- 좀 더 북쪽으로 이동해보자. -";
+		ep20_sidequest_1 = 16;
+		erasequest 11942;
+		setquest 11943;
+		close2;
+		navigateto("jor_back3",95,324);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11942) == 1" );
+	end;
+}
+
+// Sidequest A - Step 17
+jor_back3,95,324,3	script	솜털#ep20_4	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 16) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		next;
+		mes "- 좀 더 북쪽으로 이동해보자. -";
+		ep20_sidequest_1 = 17;
+		erasequest 11943;
+		setquest 11944;
+		close2;
+		navigateto("jor_back4",101,265);
+		end;
+	}
+	if (ep20_sidequest_1 == 17) {
+		mes "- 아마도 로로휴의 솜털.";
+		mes "털이 떨어진 위치를 생각하면 로로휴는 북쪽으로 이동한 것 같다. -";
+		next;
+		mes "- 좀 더 북쪽으로 이동해보자. -";
+		close2;
+		navigateto("jor_back4",101,265);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11943) == 1" );
+	end;
+}
+
+// Sidequest A - Step 18 (instance creation)
+// jor_back4,101,265,3	script	꼬뽀#ep20_5	EP20_NPC_COCOPO,{
+
+// Sidequest A - Step 19
+icecastle,69,217,3	duplicate(dummy_cloaked_npc)	로로휴#ep20_e::ep20_icecastle_69_217	EP20_NPC_COCOPO
+
+// (final NPC is part of the daily quests : 'Escargot!', 'Dangerous!', 'I hope they reconcile.(1)', '[230] I wish we could reconcile (2)')
+// icecastle,67,218,5	script	라라하#ep20	4_EP19_IWIN,{
+
+// (End of Sidequest A)
+//---------------------------------
+
+
+
+// Sidequest B - Step 1
+// (unlocked when ep20_main = 24, main quest "성스럽고 성스러운")
+icecastle,46,164,5	script	아윈 병사#20ms60	EP19_NPC_IWIN_SY,{
+	if (BaseLevel < 215) {
+		mes "[아윈 병사]";
+		mes "모험가님! 부탁드릴 일이 있었는데, 나중에 부탁드려야겠습니다. 그럼 수고하십쇼!";
+		next;
+		mes "- ^0000cd215레벨부터 수행 가능한 퀘스트입니다.^000000 -";
+		close;
+	}
+	if (ep20_main < 24) {
+		npctalk "하루하루가 피 말리네, 정말...", "", bc_self;
+		end;
+	}
+	if (ep20_sidequest_2 == 0) {
+		mes "[아윈 병사]";
+		mes "모험가님! 마침 찾고 있었는데요!!";
+		mes "어서 같이 좀 가주시면 좋겠어요.";
+		next;
+		select( "무슨 일입니까?" );
+		mes "[아윈 병사]";
+		mes "호르르가 데려온 르간이 좀 말썽이라, 저희로는 감당이 안됩니다. 이런 인물은 처음입니다.";
+		emotion ET_OHNO;
+		next;
+		mes "[아윈 병사]";
+		mes "다양한 사람을 상대해 본 경험 많은 모험가니 그자를 만나 보면 어떻게 다뤄야 할지 아시겠죠.";
+		mes "도움을 좀 받았으면 합니다.";
+		next;
+		if (select( "지금 가보겠다.", "차후에 시간 날 때 가보겠다." ) == 2) {
+			mes "[아윈 병사]";
+			mes "아, 아... 역시 너무 갑작스러웠지요?";
+			mes "그럼 시간이 날 때 꼭 좀 부탁드릴게요. 좀, 좀 많이 어려워서 그래요.";
+			close;
+		}
+		mes "[아윈 병사]";
+		mes "아, 살았다!!";
+		mes "포로 신분이라 따로 격리해두었는데, 바로 안내 할게요.";
+		ep20_sidequest_2 = 1;
+		setquest 17712;
+		close2;
+		warp "icas_in2",33,114;
+		end;
+	}
+	mes "[아윈 병사]";
+	mes "르간 포로를 만나러 가시는 건가요? 바로 안내 할게요.";
+	close2;
+	warp "icas_in2",33,114;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main >= 24 && ep20_sidequest_2 == 0" );
+	end;
+}
+
+
+icas_in2,33,114,0	script	#20ms60	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep20_sidequest_2 > 0 && ep20_sidequest_2 < 5) {
+		cloakoffnpcself( "ep20_icas_in2_31_116" );
+		cloakoffnpcself( "ep20_icas_in2_37_118" );
+		cloakoffnpcself( "ep20_icas_in2_29_114" );
+		cloakoffnpcself( "ep20_icas_in2_27_118" );
+		cloakoffnpcself( "ep20_icas_in2_37_115" );
+		end;
+	}
+	if (ep20_sidequest_2 == 5 || ep20_sidequest_2 == 6) {
+		cloakoffnpcself( "ep20_icas_in2_31_116" );
+		cloakoffnpcself( "ep20_icas_in2_37_118" );
+		cloakoffnpcself( "ep20_icas_in2_29_114" );
+		cloakoffnpcself( "ep20_icas_in2_27_118" );
+		cloakoffnpcself( "ep20_icas_in2_37_115" );
+		cloakoffnpcself( "ep20_icas_in2_32_120" );
+		end;
+	}
+	end;
+}
+
+icas_in2,37,118,3	script(CLOAKED)	아윈 병사#20ms61::ep20_icas_in2_37_118	4_EP19_IWIN,{
+	npctalk "제가 뭐 그리 잘못했다고 이런 꼴을 당해야 합니까?", "", bc_self;
+	end;
+}
+
+// note: not cloaked
+icas_in2,34,117,3	script	아윈 병사#20ms62::ep20_icas_in2_34_117	4_EP19_IWIN,{ 
+	npctalk "후- 쉽지 않아... 쉽지가 않아...", "", bc_self;
+	end;
+}
+
+icas_in2,29,114,1	script(CLOAKED)	아윈 병사#20ms63::ep20_icas_in2_29_114	4_EP19_IWIN,{
+	npctalk "르간들이 다 이렇게 제정신이 아니라는 걸 알겠죠? 그렇죠?", "ep20_icas_in2_29_114", bc_self;
+	end;
+}
+
+icas_in2,27,118,1	script(CLOAKED)	아윈 병사#20ms64::ep20_icas_in2_27_118	4_EP19_IWIN,{
+	npctalk "정말로 평생 이곳에서 눌러 살 생각은 아니겠지...", "", bc_self;
+	end;
+}
+
+icas_in2,37,115,3	script(CLOAKED)	아윈 병사#20ms65::ep20_icas_in2_37_115	4_EP19_IWIN,{
+	npctalk "이 나이까지 살다 보니 정말 별 걸 다 본다, 별걸 다 봐.", "", bc_self;
+	end;
+}
+
+
+// Sidequest B - Step 2, 5
+// (part of the daily quest 'Taste of hobby')
+// icas_in2,30,121,5	script	나드야간드#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+
+
+// Sidequest B - Step 3
+icas_in2,31,116,1	script(CLOAKED)	호르르#20ms60::ep20_icas_in2_31_116	4_EP19_IWIN,{
+	if (ep20_sidequest_2 == 2) {
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "아 이대로라면 곤란한데...";
+		mes "입 좀 열어서 뭐라도 좀 얻으려고 했더니.";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "내 이빨을 다 털어가려고? 그건 안돼!!";
+		next;
+		mes "[아윈 병사]";
+		mes "이대로라면 정말로 정보도 못 얻고 르간을 굶겨 죽이겠네.";
+		npctalk "굳이... 이런 비협조적인 자에게서 정보를 얻어야 할 필요가 있을까?", "ep20_icas_in2_37_118", bc_self;
+		npctalk "그러네? 그럴 필요가 있을까?", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "뭐? 소중한 나를 살리란 말이야.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "원하는대로 " + getitemname(1001154) + "를 주는 것이 좋겠는데.";
+		next;
+		cutin "",255;
+		mes "[아윈 병사]";
+		mes "그걸 어디서 얻어? 그게 뭔지도 모르는데.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "르간이 요구하는 거니까 이자한테 물어 보면 되지.";
+		mes "그 " + getitemname(1001154) + "라는 거 어디서 얻지?";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "그건, 나도 모르지.";
+		mes "모르는데?";
+		npctalk "아는게 대체 뭐야?", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "모르는 걸 우리더러 가져다 주래?";
+		npctalk "못들은 걸로 하면 안돼?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "사제들이 알아서 갖다 주었는데 내가 어떻게 아나?";
+		next;
+		mes "[아윈 병사]";
+		mes "뭐냐? 이놈 도련님이냐?";
+		npctalk "여긴 철저한 계급사회잖아 일 안해본 티 다 나네.", "ep20_icas_in2_37_118", bc_self;
+		npctalk "아니 그래도 자기 입으로 들어가는 거면 어디서 오는지 정도는 알아야 할 거 아냐.", "ep20_icas_in2_37_115", bc_self;
+		npctalk "설마 밥도 떠먹여줘야 해?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "나에 대한 굉장히 불경스러운 말이 들리는데, 그건 아니야.";
+		next;
+		mes "[아윈 병사]";
+		mes "불경은 무슨 자기가 뭐라도 되는 양?";
+		npctalk "뭐라도 되긴 하지. 화병제조양심불량도련님?", "ep20_icas_in2_34_117", bc_self;
+		next;
+		select( "무슨 문제인데요?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "아, 모험가. 마침 잘 왔네! 한시름 덜었군.";
+		mes "정보를 얻으려고 데려왔던 르간이 원하는 것을 주지 않으면 입을 열지 않겠다며 단식투쟁 중일세.";
+		next;
+		cutin "",255;
+		mes "[아윈 병사]";
+		mes "분명 포로를 데려왔다고 했는데, 이상하게 상전을 모시는 느낌이지?";
+		npctalk "휴- 한시름 덜었어.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "큰일이다, 큰일이야. 내가 르간을 상전으로 모시게 생겼어 쯧쯧 세상이 어떻게 되려고.";
+		npctalk "빨리 뭐라도 해야지 저 꼴을 안 보지.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "내 마지막 말을 들어줄 사람 없어?";
+		mes "여기는 사람을 왜 이렇게 대하지?";
+		next;
+		select( "구체적으로 뭘 요구하나요?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "이자가 " + getitemname(1001154) + "가 아니면 입에 대지 않겠다고 하는 중이야. 그런데 " + getitemname(1001154) + "를 어디서 얻을 수 있는지 아무도 모르니 문제지.";
+		next;
+		cutin "",255;
+		mes "[아윈 병사]";
+		mes "그래. 듣도보도 못한 " + getitemname(1001154) + "란 걸 내놓기 전엔 입도 안 열겠다잖아.";
+		npctalk "모험가도 화가 나지 않을까?", "ep20_icas_in2_34_117", bc_self;
+		next;
+		select( "" + getitemname(1001154) + "라면 제가 압니다." );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 르간들이 제일 좋아하는 기호품이라고.", bc_self;
+		mes "[나드야간드]";
+		mes "어, 맞아. 제일 좋아해.";
+		next;
+		mes "[아윈 병사]";
+		mes "오오! 역시 모르는 것은 아무 것도 없다는 모험가!!";
+		npctalk "믿고 있었다고!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		select( "몇 개나 필요한데요?" );
+		mes "[나드야간드]";
+		mes "10개! ^0000cd" + getitemname(1001154) + " 10개^000000는 먹고싶어!!!";
+		next;
+		mes "[아윈 병사]";
+		mes "하- 이렇게까지 해야 하나...";
+		npctalk "기다렸다는 듯이 말하는 것 봐라.", "ep20_icas_in2_37_118", bc_self;
+		npctalk "상전이네 상전이여.", "ep20_icas_in2_34_117", bc_self;
+		npctalk "포로 팔자가 상팔자여.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "주교인 나에게 마땅히 주어져야 할 것들이다.";
+		npctalk "거, 입만 살아가지고는.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "조심히 다녀오게.";
+		ep20_sidequest_2 = 3;
+		erasequest 17713;
+		setquest 17714;
+		close3;
+	}
+	cutin "ep19_iwin09.png",2;
+	mes "[호르르]";
+	mes "이렇게까지 골치아픈 자인줄 미리 알았다면, 다른 방법을 썼을 거요.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17713) == 1" );
+	end;
+}
+
+
+// Sidequest B - Step 4
+// (npcs are parts of the main quest - Step 23)
+
+// Sidequest B - Step 5
+// icas_in2,30,121,5	script	나드야간드#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+
+
+// Sidequest B - Step 6, 7 (final)
+icas_in2,32,120,3	script(CLOAKED)	레이지#20ms60::ep20_icas_in2_32_120	4_EP19_LAZY,{
+	if (checkweight(1001217,10) == 0) {	// custom
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	if (ep20_sidequest_2 == 5) {
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "어이쿠! 웬 르간이 있어서 누군가 했더니 내가 여기 있었구나?";
+		mes "안녕, 나?";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "너는, 그 인간이로구나.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "덕분에 살았지 뭐야. 너무 고마운데. 이 은혜는 어떻게 갚지?";
+		mes "방법을 모르겠으니 그냥 내 마음만 받아.";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "나도 뭐, 너희 덕분에 고된 일을 하지 않게 되었으니 좋아. 서로 도운 걸로 치자고.";
+		next;
+		mes "[나드야간드]";
+		mes "자, 이제 내 다리를 주물러라.";
+		npctalk "갑자기??", "ep20_icas_in2_29_114", bc_self;
+		npctalk "이렇게 나온다고?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "뭐래. 가서 일이나 해.";
+		npctalk "그래!! 잘한다!", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "나를 이런식으로 대접하기냐? 감히, 주교인 나를?";
+		next;
+		mes "[아윈 병사]";
+		mes "거기서나 주교지, 여기서는 그냥 르간 하나지 뭐.";
+		npctalk "그렇지. 그저 르간 하나.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "너, 그냥 가라. 우리가 거기까지 그냥 배달해줄게.";
+		npctalk "그냥 근처에다 떨궈.", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "나는!! 가지 않을 테다.";
+		next;
+		mes "[아윈 병사]";
+		mes "어이고, 저 화상. 환장하겠네.";
+		npctalk "환장!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "모험가, 지금까지 쭉 이런 분위기였어?";
+		next;
+		select( "네, 이런 분위기였어요." );
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "깃털친구들. 잠깐만 나랑 얘기 좀 하자.";
+		mes "저기 있는 내가 좀 골치인 모양인데.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그걸 말이라고!";
+		npctalk "아주 그냥 상전이야, 상전.", "ep20_icas_in2_31_116", bc_self;
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "여태까지 손에 물 한 방울 묻히지 않고 곱게 자란 주교 르간이니 저런 태도는 어쩔 수 없지.";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "저런 자는 옆에서 고치란다고 고쳐질 인물이 아니야.";
+		mes "왜냐? 날 때부터 그렇게 자랐으니까.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그럼 저 애물단지를 어떻게 감당하라는 건가. 차라리 그냥 보내는 것이 낫겠는데.";
+		npctalk "계속 저걸 참아야 된다는 소리야?", "ep20_icas_in2_29_114", bc_self;
+		npctalk "저런!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "그렇다고 저쪽에 보내는 것도 곤란해. 아직 우리 작전은 끝나지 않은데다, 지금 보내버리면 오히려 이쪽의 정보만 제공하게 되는 수가 있거든.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그럼 어쩌라고.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "부려먹어. 맘껏, 부려 먹으라고.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "손하나 까딱하지 않는 종자를 어떻게 부리란 거요? 말로 우리를 부리는 것 못봤소?";
+		npctalk "모험가가 뱀 소굴까지 가서 딸기를 캐다가 바치기까지 했는데.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "음... 그래. 문제가 뭔지 알겠어. 태도가 문제라는 거지?";
+		mes "그럼 내가 잠깐 이야기 좀 나눠 볼게.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "거기, 나. 나랑 잠시 이야기 좀 할까?";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "지금은 할 일이 없으니, 얼마든지.";
+		next;
+		mes "[레이지]";
+		mes "일은...";
+		next;
+		mes "[나드야간드]";
+		mes "...그치만...";
+		npctalk "무슨 말을 하는 거지?", "ep20_icas_in2_29_114", bc_self;
+		emotion ET_THINK, getnpcid(0,"ep20_icas_in2_30_121");
+		next;
+		mes "[레이지]";
+		mes "생각을...";
+		next;
+		mes "[나드야간드]";
+		mes "아..... 그건 어떻게?";
+		npctalk "되게 궁금하네. 저런다고 설득이 될까?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[레이지]";
+		mes "응... 그래, 맞아.";
+		emotion ET_OK, getnpcid(0,"ep20_icas_in2_32_120");
+		next;
+		mes "[나드야간드]";
+		mes "정말 그래도...";
+		npctalk "뭔가 분위기가 좀 바뀌지 않았어?", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[레이지]";
+		mes "안될 건...";
+		next;
+		mes "[나드야간드]";
+		mes "조언 고맙네.";
+		emotion ET_BEST, getnpcid(0,"ep20_icas_in2_30_121");
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "끝!";
+		npctalk "뭐??!!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "뭐야? 뭐가 끝이란 거요?";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "말 그대로 다 해결했다는 말이지, 뭐겠어~";
+		npctalk "진짜로 끝? 이렇게 짧은 시간에?", "ep20_icas_in2_29_114", bc_self;
+		ep20_sidequest_2 = 6;
+		erasequest 17715;
+		setquest 17716;
+		close3;
+	}
+	if (ep20_sidequest_2 == 6) {
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "문제도 해결했으니 나는 이만 갈게~";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "잠깐!! 잠깐만! 무슨 이야기를 했길래 저치의 얼굴이 저렇게 활짝 피었나?";
+		mes "설마 앞으로도 저렇게 방자한 태도로 우리를 부리는 건 아니겠지?";
+		npctalk "그런 약속을 한 것이야?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "성질 급한 깃털 친구들. 보고만 있으라고. 새로운 나의 모습을.";
+		next;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icas_in2_30_121");
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "저기 있잖아! 나 낚시대 좀 주게! 나중엔 그물 손질하는 법도 좀 알려주고.";
+		next;
+		mes "[나드야간드]";
+		mes "나는 말이야, 요리라는게 아랫것들이나 하는 일인 줄 알았는데 여기 있는 나의 말에 따르면 그것만큼 섬세하고 오묘한 학문이 없다던데, 사실이야?";
+		mes "길이에 맞춰 썰고 정확한 계량으로 완성되는...";
+		next;
+		mes "[나드야간드]";
+		mes "새 삶의 시작을 훌륭한 취미로 가꾸는 것도 나쁘진 않겠지.";
+		mes "너무 기대되는걸. 자, 어디로 가면 되지? 낚시부터 해보고 싶은데.";
+		next;
+		mes "[아윈 병사]";
+		mes "어, 어어... 그건 내가 안내하지. 가세.";
+		npctalk "아니 세상에??", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "아니 대체 무슨 수를 쓴 거요?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "그게 바로 내가 밥 벌어먹고 사는 방법이지.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그 혓바닥 참 신기하네. 여럿이 어르고 달래고 협박을 해도 안되던 걸 그 짧은 시간에.";
+		npctalk "진짜 무슨 소리를 했길래?", "ep20_icas_in2_34_117", bc_self;
+		npctalk "뭐 하는 사람이야?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "그냥, 뭐. 행위를 다른 시각에서 보도록 살짝 조언을 해줬달까...";
+		npctalk "그게 뭐요?", "ep20_icas_in2_31_116", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "원래 노동과 취미는 종이 한 장 차이라 포장하기 나름이지.";
+		mes "그물 손질은 고상한 정신 수양의 방법으로, 낚시는 손맛을 느끼도록, 요리는 손끝에서 탄생하는 마법으로 그렇게.";
+		next;
+		cutin "",255;
+		mes "[아윈 병사]";
+		mes "하이고야... 우리 이 친구하고는 말을 할 때 조심해야겠고만.";
+		mes "멀쩡한 정신을 가지고도 사기를 당하겠어.";
+		npctalk "나 조금 무서워졌어.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "모험가, 매일 내가 좋아하는 " + getitemname(1001154) + "나 좀 캐다 줘.";
+		mes "일을 열심히 하는 사람을 공짜로 부려먹을 수는 없지.";
+		next;
+		select( "그럴게요." );
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "이렇게 내가 오늘도 한 건 해냄.";
+		mes "내가 또 해냄.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "그럼 나는 이만 간다~";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "일이 대충 해결된 것 같으니 우리도 이제 각자 할 일을 하지.";
+		mes "모험가는 내일부터 수고를 해줘야겠소. 고맙소.";
+		ep20_sidequest_2 = 7;
+		erasequest 17716;
+		setquest 17717;
+		getitem 1001217,10;	// Ep20_Cat_Whiskers
+		getexp2 68305979,0;
+		getexp 0,8566027;
+		// note: no reputation
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icas_in2_32_120" );
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17715) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17716) == 1" );
+	end;
+}
+// (End of Sidequest B)
+//---------------------------------

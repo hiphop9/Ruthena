@@ -15,7 +15,7 @@
 
 // PVP Warpers
 //============================================================ 
-pvp_y_room,30,85,4	script	Fight Square Reception#1	105,{ //5,5
+/*pvp_y_room,30,85,4	script	시합장 접수원#1	105,{ //5,5
 	callfunc "F_PVP_FSRS",50,69;
 	end;
 
@@ -24,7 +24,7 @@ OnInit:
 	end;
 }
 
-pvp_y_room,38,85,4	script	Fight Square Reception#2	105,{ //5,5
+pvp_y_room,38,85,4	script	시합장 접수원#2	105,{ //5,5
 	callfunc "F_PVP_FSRS",70,89;
 	end;
 
@@ -33,7 +33,7 @@ OnInit:
 	end;
 }
 
-pvp_y_room,46,85,4	script	Fight Square Reception#3	105,{ //5,5
+pvp_y_room,46,85,4	script	시합장 접수원#3	105,{ //5,5
 	callfunc "F_PVP_FSRS",90,99;
 	end;
 
@@ -42,16 +42,7 @@ OnInit:
 	end;
 }
 
-pvp_y_room,54,85,4	script	Fight Square Reception#8	105,{
-	callfunc "F_PVP_FSRS";
-	end;
-
-OnInit:
-	waitingroom "Free for all",0;
-	end;
-}
-
-pvp_y_room,62,85,4	script	Fight Square Reception#4	105,{
+pvp_y_room,62,85,4	script	시합장 접수원#4	105,{
 	//if (ADVJOB > 0) {
 	if (Upper == 1) {
 		mes "[PVP Fight Square Reception Staff]";
@@ -67,7 +58,7 @@ OnInit:
 	end;
 }
 
-pvp_y_room,70,85,4	script	Fight Square Reception#5	105,{
+pvp_y_room,70,85,4	script	시합장 접수원#5	105,{
 	//if (ADVJOB == 0) {
 	if (Upper != 1) {
 		mes "[PVP Fight Square Reception Staff]";
@@ -82,12 +73,22 @@ OnInit:
 	waitingroom "Trans Jobs Only",0;
 	end;
 }
+*/
 
-pvp_n_room,86,85,4	script	Fight Square Reception#n	105,{
+pvp_y_room,86,85,4	script	시합장 접수원#8	105,{
 	callfunc "F_PVP_FSRS";
 	end;
 
 OnInit:
-	waitingroom "Free for all",0;
+	waitingroom "제한 없음",0;
+	end;
+}
+
+pvp_n_room,86,85,4	script	시합장 접수원#n	105,{
+	callfunc "F_PVP_FSRS";
+	end;
+
+OnInit:
+	waitingroom "제한 없음",0;
 	end;
 }

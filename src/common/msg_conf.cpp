@@ -10,6 +10,7 @@
 #include "malloc.hpp"
 #include "showmsg.hpp"
 #include "strlib.hpp"
+#include <config/custom.hpp>
 
 /*
  * Return the message string of the specified number by [Yor]
@@ -36,7 +37,10 @@ int _msg_config_read(const char* cfgName,int size, char ** msg_table)
 	static int called = 1;
 
 	if ((fp = fopen(cfgName, "r")) == nullptr) {
-		ShowError("Messages file not found: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("메시지 파일 %s을(를) 찾을 수 없습니다.\n", cfgName);
+		else
+			ShowError("Messages file not found: %s\n", cfgName);
 		return -1;
 	}
 
@@ -62,13 +66,20 @@ int _msg_config_read(const char* cfgName,int size, char ** msg_table)
 				safestrncpy(msg_table[msg_number], w2, len);
 				msg_count++;
 			}
-			else
-				ShowWarning("Invalid message ID '%s' at line %d from '%s' file.\n",w1,line_num,cfgName);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("'%s' 파일의 %d줄에 있는 '%s'은(는) 잘못된 메시지 아이디입니다.\n",cfgName,line_num,w1);
+				else
+					ShowWarning("Invalid message ID '%s' at line %d from '%s' file.\n",w1,line_num,cfgName);
+			}
 		}
 	}
 
 	fclose(fp);
-	ShowInfo("Done reading " CL_WHITE "'%d'" CL_RESET " messages in " CL_WHITE "'%s'" CL_RESET ".\n",msg_count,cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("" CL_WHITE "'%d'" CL_RESET "개의 메시지를 " CL_WHITE "'%s'" CL_RESET "에서 읽어왔습니다.\n",msg_count,cfgName);
+	else
+		ShowInfo("Done reading " CL_WHITE "'%d'" CL_RESET " messages in " CL_WHITE "'%s'" CL_RESET ".\n",msg_count,cfgName);
 
 	return 0;
 }
@@ -88,7 +99,7 @@ void _do_final_msg(int size, char ** msg_table){
  */
 int msg_langstr2langtype(char * langtype){
 	int lang=-1;
-	if (!strncmpi(langtype, "eng",2)) lang = 0;
+	if (!strncmpi(langtype, "kor",2)) lang = 0;
 	else if (!strncmpi(langtype, "rus",2)) lang = 1;
 	else if (!strncmpi(langtype, "spn",2)) lang = 2;
 	else if (!strncmpi(langtype, "grm",2)) lang = 3;
@@ -98,6 +109,7 @@ int msg_langstr2langtype(char * langtype){
 	else if (!strncmpi(langtype, "frn",2)) lang = 7;
 	else if (!strncmpi(langtype, "por",2)) lang = 8;
 	else if (!strncmpi(langtype, "tha",2)) lang = 9;
+	else if (!strncmpi(langtype, "eng",2)) lang = 10;
 
 	return lang;
 }
@@ -108,7 +120,7 @@ int msg_langstr2langtype(char * langtype){
  */
 const char* msg_langtype2langstr(int langtype){
 	switch(langtype){
-		case 0: return "English (ENG)";
+		case 0: return "한국어 (KOR)";
 		case 1: return "Russkiy (RUS)"; //transliteration
 		case 2: return "Espanol (SPN)";
 		case 3: return "Deutsch (GRM)";
@@ -118,6 +130,7 @@ const char* msg_langtype2langstr(int langtype){
 		case 7: return "Francais (FRN)";
 		case 8: return "Portugues Brasileiro (POR)";
 		case 9: return "Thai (THA)";
+		case 10: return "English (ENG)";
 		default: return "??";
 	}
 }
@@ -135,7 +148,10 @@ int msg_checklangtype(int lang, bool display){
 	else if(lang < 0 || test > LANG_MAX) return -1; //false range
 	else if (LANG_ENABLE&test) return 1;
 	else if(display) {
-		ShowDebug("Unsupported langtype '%d'.\n",lang);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("'%d'은(는) 지원되지 않는 언어타입입니다.\n",lang);
+		else
+			ShowDebug("Unsupported langtype '%d'.\n",lang);
 	}
 	return -2;
 }

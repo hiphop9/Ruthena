@@ -1,0 +1,24 @@
+From b618ea66c3363024da9b277ba86e1dbf1cb7b9d0 Mon Sep 17 00:00:00 2001
+From: Atemo <capucrath@gmail.com>
+Date: Tue, 9 Nov 2021 00:42:25 +0100
+Subject: [PATCH] Lapine grade
+
+---
+ src/map/item_upgrade.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/map/item_upgrade.cpp b/src/map/item_upgrade.cpp
+index e2c445f1e..07eeb2275 100644
+--- a/src/map/item_upgrade.cpp
++++ b/src/map/item_upgrade.cpp
+@@ -315,6 +315,7 @@ void s_item_upgrade_db::setPlayerInfo(map_session_data * sd, uint16 target_index
+ 	pc_setreg(sd, add_str("@last_lapine_card3"), it->card[2]);
+ 	pc_setreg(sd, add_str("@last_lapine_card4"), it->card[3]);
+ 	pc_setreg(sd, add_str("@last_lapine_bound"), it->bound);
++	pc_setreg(sd, add_str("@last_lapine_grade"), it->enchantgrade);
+ 
+ 	char unique_id[23];
+ 	memset(unique_id, '\0', sizeof(unique_id));
+-- 
+2.25.0.windows.1
+

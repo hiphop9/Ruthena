@@ -26,6 +26,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "char_clif.hpp"
 #include "char_cnslif.hpp"
@@ -128,8 +129,13 @@ void char_set_char_online(int map_id, uint32 char_id, uint32 account_id) {
 
 	if( character != nullptr ){
 		if( character->char_id != -1 && character->server > -1 && character->server != map_id ){
-			ShowNotice("set_char_online: Character %d:%d marked in map server %d, but map server %d claims to have (%d:%d) online!\n",
-				character->account_id, character->char_id, character->server, map_id, account_id, char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("set_char_online: 맵 서버 %d에 캐릭터(%d:%d)을(를) 만들려고 합니다. 하지만 맵 서버 %d(%d:%d)는 온라인 상에 있음을 나타냅니다!\n",
+					character->server,character->account_id, character->char_id,  map_id, account_id, char_id);
+			else
+
+				ShowNotice("set_char_online: Character %d:%d marked in map server %d, but map server %d claims to have (%d:%d) online!\n",
+					character->account_id, character->char_id, character->server, map_id, account_id, char_id);
 			mapif_disconnectplayer(map_server[character->server].fd, character->account_id, character->char_id, 2);
 		}
 
@@ -296,7 +302,7 @@ int char_mmo_char_tosql(uint32 char_id, struct mmo_charstatus* p){
 		(p->rename != cp->rename) || (p->robe != cp->robe) || (p->character_moves != cp->character_moves) ||
 		(p->unban_time != cp->unban_time) || (p->font != cp->font) || (p->uniqueitem_counter != cp->uniqueitem_counter) ||
 		(p->hotkey_rowshift != cp->hotkey_rowshift) || (p->clan_id != cp->clan_id ) || (p->title_id != cp->title_id) ||
-		(p->show_equip != cp->show_equip) || (p->hotkey_rowshift2 != cp->hotkey_rowshift2) ||
+		(p->show_equip != cp->show_equip) || (p->show_costume != cp->show_costume) || (p->hotkey_rowshift2 != cp->hotkey_rowshift2) ||
 		(p->max_ap != cp->max_ap) || (p->ap != cp->ap) || (p->trait_point != cp->trait_point) ||
 		(p->pow != cp->pow) || (p->sta != cp->sta) || (p->wis != cp->wis) ||
 		(p->spl != cp->spl) || (p->con != cp->con) || (p->crt != cp->crt)
@@ -311,7 +317,7 @@ int char_mmo_char_tosql(uint32 char_id, struct mmo_charstatus* p){
 			"`last_map`='%s',`last_x`='%d',`last_y`='%d',`last_instanceid`='%d',"
 			"`save_map`='%s',`save_x`='%d',`save_y`='%d', `rename`='%d',"
 			"`delete_date`='%lu',`robe`='%d',`moves`='%d',`font`='%u',`uniqueitem_counter`='%u',"
-			"`hotkey_rowshift`='%d', `clan_id`='%d', `title_id`='%lu', `show_equip`='%d', `hotkey_rowshift2`='%d',"
+			"`hotkey_rowshift`='%d', `clan_id`='%d', `title_id`='%lu', `show_equip`='%d',  `show_costume`='%d', `hotkey_rowshift2`='%d',"
 			"`max_ap`='%u',`ap`='%u',`trait_point`='%d',"
 			"`pow`='%d',`sta`='%d',`wis`='%d',`spl`='%d',`con`='%d',`crt`='%d'"
 			" WHERE `account_id`='%d' AND `char_id` = '%d'",
@@ -325,7 +331,7 @@ int char_mmo_char_tosql(uint32 char_id, struct mmo_charstatus* p){
 			p->save_point.map, p->save_point.x, p->save_point.y, p->rename,
 			(unsigned long)p->delete_date, // FIXME: platform-dependent size
 			p->robe, p->character_moves, p->font, p->uniqueitem_counter,
-			p->hotkey_rowshift, p->clan_id, p->title_id, p->show_equip, p->hotkey_rowshift2,
+			p->hotkey_rowshift, p->clan_id, p->title_id, p->show_equip,  p->show_costume, p->hotkey_rowshift2,
 			p->max_ap, p->ap, p->trait_point,
 			p->pow, p->sta, p->wis, p->spl, p->con, p->crt,
 			p->account_id, p->char_id) )
@@ -518,8 +524,12 @@ int char_mmo_char_tosql(uint32 char_id, struct mmo_charstatus* p){
 	}
 #endif
 	StringBuf_Destroy(&buf);
-	if (save_status[0]!='\0' && charserv_config.save_log)
-		ShowInfo("Saved char %d - %s:%s.\n", char_id, p->name, save_status);
+	if (save_status[0]!='\0' && charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 저장: %d - %s:%s.\n", char_id, p->name, save_status);
+		else
+			ShowInfo("Saved char %d - %s:%s.\n", char_id, p->name, save_status);
+	}
 
 	if( !errors ){
 		memcpy( cp.get(), p, sizeof( struct mmo_charstatus ) );
@@ -560,7 +570,10 @@ int char_memitemdata_to_sql(const struct item items[], int max, int id, enum sto
 			selectoption = "guild_id";
 			break;
 		default:
-			ShowError("Invalid table name!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("잘못된 테이블 이름입니다.!\n");
+			else
+				ShowError("Invalid table name!\n");
 			return 1;
 	}
 
@@ -738,7 +751,10 @@ int char_memitemdata_to_sql(const struct item items[], int max, int id, enum sto
 		errors++;
 	}
 
-	ShowInfo("Saved %s (%d) data to table %s for %s: %d\n", printname, stor_id, tablename, selectoption, id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s (%d) 데이터를 %s 테이블 %s:%d에 저장했습니다.\n", printname, stor_id, tablename, selectoption, id);
+	else
+		ShowInfo("Saved %s (%d) data to table %s for %s: %d\n", printname, stor_id, tablename, selectoption, id);
 	StringBuf_Destroy(&buf);
 	aFree(flag);
 
@@ -782,7 +798,10 @@ bool char_memitemdata_from_sql(struct s_storage* p, int max, int id, enum storag
 			max2 = inter_guild_storagemax(id);
 			break;
 		default:
-			ShowError("Invalid table name!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("잘못된 테이블 이름입니다.!\n");
+			else
+				ShowError("Invalid table name!\n");
 			return false;
 	}
 
@@ -850,7 +869,10 @@ bool char_memitemdata_from_sql(struct s_storage* p, int max, int id, enum storag
 		memcpy(&storage[i], &item, sizeof(item));
 
 	p->amount = i;
-	ShowInfo("Loaded %s data from table %s for %s: %d (total: %d)\n", printname, tablename, selectoption, id, p->amount);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s: %d에 대한 %s 데이터를 %s 테이블 에서 총 %d개를 불러왔습니다.\n", selectoption, id, printname, tablename, p->amount);
+	else
+		ShowInfo("Loaded %s data from table %s for %s: %d (total: %d)\n", printname, tablename, selectoption, id, p->amount);
 
 	SqlStmt_FreeResult(stmt);
 	SqlStmt_Free(stmt);
@@ -891,13 +913,19 @@ int char_mmo_gender( const struct char_session_data *sd, const struct mmo_charst
 				ARR_FIND( 0, fd_max, i, session[i] && ( sd = (struct char_session_data*)session[i]->session_data ) && sd->account_id == p->account_id );
 
 				if( i >= fd_max ){
-					ShowWarning( "Session was not found for character '%s' (CID: %d, AID: %d), defaulting gender to male...\n", p->name, p->char_id, p->account_id );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning( "'%s' 케릭터에 대한 세션을 찾지 못했습니다. (케릭터 ID: %d, 계정 ID: %d), 성별을 기본값인 남성으로...\n", p->name, p->char_id, p->account_id );
+					else
+						ShowWarning( "Session was not found for character '%s' (CID: %d, AID: %d), defaulting gender to male...\n", p->name, p->char_id, p->account_id );
 					return SEX_MALE;
 				}
 			}
 
 #if PACKETVER >= 20141016
-			ShowWarning( "Found unknown gender '%c' for character '%s' (CID: %d, AID: %d), returning account gender...\n", sex, p->name, p->char_id, p->account_id );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "케릭터 '%s'에 대한 알수 없는 성별 '%c'을(를) 찾았습니다. (케릭터 ID: %d, 계정 ID: %d), 계정 성별로 설정합니다...\n", p->name, sex, p->char_id, p->account_id );
+			else
+				ShowWarning( "Found unknown gender '%c' for character '%s' (CID: %d, AID: %d), returning account gender...\n", sex, p->name, p->char_id, p->account_id );
 #endif
 
 			return sd->sex;
@@ -937,7 +965,7 @@ int char_mmo_chars_fromsql(struct char_session_data* sd, uint8* buf, uint8* coun
 		"`robe`,`moves`,`unban_time`,`font`,`uniqueitem_counter`,`sex`,`hotkey_rowshift`,`title_id`,`show_equip`,"
 		"`hotkey_rowshift2`,"
 		"`max_ap`,`ap`,`trait_point`,`pow`,`sta`,`wis`,`spl`,`con`,`crt`,"
-		"`inventory_slots`,`body_direction`,`disable_call`"
+		"`inventory_slots`,`body_direction`,`disable_call`,`show_costume`"
 		" FROM `%s` WHERE `account_id`='%d' AND `char_num` < '%d'", schema_config.char_db, sd->account_id, MAX_CHARS)
 	||	SQL_ERROR == SqlStmt_Execute(stmt)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 0,  SQLDT_INT,    &p.char_id, 0, nullptr, nullptr)
@@ -998,6 +1026,7 @@ int char_mmo_chars_fromsql(struct char_session_data* sd, uint8* buf, uint8* coun
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 55, SQLDT_UINT16, &p.inventory_slots, 0, nullptr, nullptr)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 56, SQLDT_UINT8,  &p.body_direction, 0, nullptr, nullptr)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 57, SQLDT_UINT16, &p.disable_call, 0, nullptr, nullptr)
+	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 58, SQLDT_UINT16, &p.show_costume, 0, nullptr, nullptr)
 	)
 	{
 		SqlStmt_ShowDebug(stmt);
@@ -1044,7 +1073,12 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 	memset(p, 0, sizeof(struct mmo_charstatus));
 
-	if (charserv_config.save_log) ShowInfo("Char load request (%d)\n", char_id);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%d 케릭터를 불러옵니다.\n", char_id);
+		else
+			ShowInfo("Char load request (%d)\n", char_id);
+	}
 
 	stmt = SqlStmt_Malloc(sql_handle);
 	if( stmt == nullptr )
@@ -1062,7 +1096,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`,`delete_date`,`robe`, `moves`,"
 		"`unban_time`,`font`,`uniqueitem_counter`,`sex`,`hotkey_rowshift`,`clan_id`,`title_id`,`show_equip`,`hotkey_rowshift2`,"
 		"`max_ap`,`ap`,`trait_point`,`pow`,`sta`,`wis`,`spl`,`con`,`crt`,"
-		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`"
+		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`,`show_costume`"
 		" FROM `%s` WHERE `char_id`=? LIMIT 1", schema_config.char_db)
 	||	SQL_ERROR == SqlStmt_BindParam(stmt, 0, SQLDT_INT, &char_id, 0)
 	||	SQL_ERROR == SqlStmt_Execute(stmt)
@@ -1142,6 +1176,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 73, SQLDT_UINT8,  &p->body_direction, 0, nullptr, nullptr)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 74, SQLDT_UINT8,	&p->disable_call, 0, nullptr, nullptr)
 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 75, SQLDT_INT,    &p->last_point_instanceid, 0, nullptr, nullptr)
+	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 76, SQLDT_UINT16, &p->show_costume, 0, nullptr, nullptr)
 	)
 	{
 		SqlStmt_ShowDebug(stmt);
@@ -1150,7 +1185,10 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 	}
 	if( SQL_ERROR == SqlStmt_NextRow(stmt) )
 	{
-		ShowError("Requested non-existant character id: %d!\n", char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("요청한 %d은(는) 존재하지 않는 케릭터 입니다.\n", char_id);
+		else
+			ShowError("Requested non-existant character id: %d!\n", char_id);
 		SqlStmt_Free(stmt);
 		return 0;
 	}
@@ -1200,8 +1238,12 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 			memcpy(&p->skill[i], &tmp_skill, sizeof(tmp_skill));
 			skill_count++;
 		}
-		else
-			ShowWarning("mmo_char_fromsql: ignoring invalid skill (id=%u,lv=%u) of character %s (AID=%d,CID=%d)\n", tmp_skill.id, tmp_skill.lv, p->name, p->account_id, p->char_id);
+		else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("mmo_char_fromsql: 케릭터 %s (AID=%d, CID=%d)의 유효하지 않은 스킬(ID=%u,레벨=%d)을 무시합니다.\n", p->name,p->account_id,p->char_id,tmp_skill.id, tmp_skill.lv);
+			else
+				ShowWarning("mmo_char_fromsql: ignoring invalid skill (id=%u,lv=%u) of character %s (AID=%d,CID=%d)\n", tmp_skill.id, tmp_skill.lv, p->name, p->account_id, p->char_id);
+		}
 	}
 	StringBuf_Printf(&msg_buf, " %d skills", skill_count);
 
@@ -1235,8 +1277,12 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 	{
 		if( hotkey_num >= 0 && hotkey_num < MAX_HOTKEYS_DB )
 			memcpy(&p->hotkeys[hotkey_num], &tmp_hotkey, sizeof(tmp_hotkey));
-		else
-			ShowWarning("mmo_char_fromsql: ignoring invalid hotkey (hotkey=%d,type=%u,id=%u,lv=%u) of character %s (AID=%d,CID=%d)\n", hotkey_num, tmp_hotkey.type, tmp_hotkey.id, tmp_hotkey.lv, p->name, p->account_id, p->char_id);
+		else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("mmo_char_fromsql: 케릭터 %s(AID=%d,CID=%d)의 유효하지 않은 단축키(단축키=%d,타입=%u,id=%u,레벨=%u)을(를) 무시합니다.\n",  p->name, p->account_id, p->char_id,hotkey_num, tmp_hotkey.type, tmp_hotkey.id, tmp_hotkey.lv);
+			else
+				ShowWarning("mmo_char_fromsql: ignoring invalid hotkey (hotkey=%d,type=%u,id=%u,lv=%u) of character %s (AID=%d,CID=%d)\n", hotkey_num, tmp_hotkey.type, tmp_hotkey.id, tmp_hotkey.lv, p->name, p->account_id, p->char_id);
+		}
 	}
 	StringBuf_AppendStr(&msg_buf, " hotkeys");
 #endif
@@ -1246,8 +1292,12 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 	StringBuf_AppendStr(&msg_buf, " mercenary");
 
 
-	if (charserv_config.save_log)
-		ShowInfo("Loaded char (%d - %s): %s\n", char_id, p->name, StringBuf_Value(&msg_buf)); //ok. all data load successfully!
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("불러온 케릭터 (%d - %s): %s\n", char_id, p->name, StringBuf_Value(&msg_buf)); //ok. all data load successfully!
+		else
+			ShowInfo("Loaded char (%d - %s): %s\n", char_id, p->name, StringBuf_Value(&msg_buf)); //ok. all data load successfully!
+	}
 	SqlStmt_Free(stmt);
 
 	std::shared_ptr<struct mmo_charstatus> cp = util::umap_find( char_get_chardb(), char_id );
@@ -1266,7 +1316,10 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 //==========================================================================================================
 int char_mmo_sql_init(void) {
-	ShowStatus("Characters per Account: '%d'.\n", charserv_config.char_config.char_per_account);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("계정 당 케릭터 수 '%d'.\n", charserv_config.char_config.char_per_account);
+	else
+		ShowStatus("Characters per Account: '%d'.\n", charserv_config.char_config.char_per_account);
 
 	//the 'set offline' part is now in check_login_conn ...
 	//if the server connects to loginserver
@@ -1448,7 +1501,10 @@ int char_make_new_char( struct char_session_data* sd, char* name_, int str, int 
 			sex = 'M';
 			break;
 		default:
-			ShowWarning( "Received unsupported gender '%d'...\n", sex );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "'%d'은(는) 지원되지 않는 성별입니다...\n", sex );
+			else
+				ShowWarning( "Received unsupported gender '%d'...\n", sex );
 			return -2; // invalid input
 	}
 
@@ -1519,13 +1575,19 @@ int char_make_new_char( struct char_session_data* sd, char* name_, int str, int 
 	}
 #endif
 
+#if PACKETVER_MAIN_NUM >= 20231220
+	const int body = start_job;
+#else
+	const int body = 0;
+#endif
+
 	//Insert the new char entry to the database
 	if( SQL_ERROR == Sql_Query(sql_handle, "INSERT INTO `%s` (`account_id`, `char_num`, `name`, `class`, `zeny`, `status_point`, `str`, `agi`, `vit`, `int`, `dex`, `luk`, `max_hp`, `hp`,"
-		"`max_sp`, `sp`, `hair`, `hair_color`, `last_map`, `last_x`, `last_y`, `save_map`, `save_x`, `save_y`, `sex`, `last_instanceid`) VALUES ("
-		"'%d', '%d', '%s', '%d', '%d',  '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%u', '%u', '%u', '%u', '%d', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%c', '0')",
+		"`max_sp`, `sp`, `hair`, `hair_color`, `last_map`, `last_x`, `last_y`, `save_map`, `save_x`, `save_y`, `sex`, `last_instanceid`, `body`) VALUES ("
+		"'%d', '%d', '%s', '%d', '%d',  '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%u', '%u', '%u', '%u', '%d', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%c', '0', '%d')",
 		schema_config.char_db, sd->account_id , slot, esc_name, start_job, charserv_config.start_zeny, status_points, str, agi, vit, int_, dex, luk,
 		(40 * (100 + vit)/100) , (40 * (100 + vit)/100 ),  (11 * (100 + int_)/100), (11 * (100 + int_)/100), hair_style, hair_color,
-		tmp_start_point[start_point_idx].map, tmp_start_point[start_point_idx].x, tmp_start_point[start_point_idx].y, tmp_start_point[start_point_idx].map, tmp_start_point[start_point_idx].x, tmp_start_point[start_point_idx].y, sex ) )
+		tmp_start_point[start_point_idx].map, tmp_start_point[start_point_idx].x, tmp_start_point[start_point_idx].y, tmp_start_point[start_point_idx].map, tmp_start_point[start_point_idx].x, tmp_start_point[start_point_idx].y, sex, body ) )
 	{
 		Sql_ShowDebug(sql_handle);
 		return -2; //No, stop the procedure!
@@ -1539,7 +1601,10 @@ int char_make_new_char( struct char_session_data* sd, char* name_, int str, int 
 			Sql_ShowDebug(sql_handle);
 	}
 
-	ShowInfo("Created char: account: %d, char: %d, slot: %d, name: %s\n", sd->account_id, char_id, slot, name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("생성된 케릭터 정보: [ 계정번호: %d, 케릭터번호: %d, 슬롯번호: %d, 이름: %s ]\n", sd->account_id, char_id, slot, name);
+	else
+		ShowInfo("Created char: account: %d, char: %d, slot: %d, name: %s\n", sd->account_id, char_id, slot, name);
 	return char_id;
 }
 
@@ -1575,7 +1640,10 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 
 	// Such a character does not exist in the account
 	if (i == MAX_CHARS) {
-		ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 삭제 중단: %s(계정번호: %u, 케릭터 번호: %u) 케릭터 삭제가 중단되었습니다. (계정이 존재하지 않음)\n", name, sd->account_id, char_id);
+		else
+			ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
 		return CHAR_DELETE_NOTFOUND;
 	}
 
@@ -1586,7 +1654,10 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 
 	if( SQL_SUCCESS != Sql_NextRow(sql_handle) )
 	{
-		ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 삭제 중단: %s(계정번호: %u, 케릭터 번호: %u) 케릭터 삭제가 중단되었습니다.\n", name, sd->account_id, char_id);
+		else
+			ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
 		Sql_FreeResult(sql_handle);
 		return CHAR_DELETE_NOTFOUND;
 	}
@@ -1610,24 +1681,36 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 	if( ( charserv_config.char_config.char_del_level > 0 && base_level >= charserv_config.char_config.char_del_level )
 	 || ( charserv_config.char_config.char_del_level < 0 && base_level <= -charserv_config.char_config.char_del_level )
 	) {
-			ShowInfo("Char deletion aborted: %s, BaseLevel: %i\n", name, base_level);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("케릭터 삭제 중단: %s(베이스 레벨: %i) 케릭터 삭제가 중단되었습니다. (삭제레벨 제한)\n", name, base_level);
+			else
+				ShowInfo("Char deletion aborted: %s, BaseLevel: %i\n", name, base_level);
 			return CHAR_DELETE_BASELEVEL;
 	}
 
 	if (charserv_config.char_config.char_del_restriction&CHAR_DEL_RESTRICT_GUILD && guild_id) // character is in guild
 	{
-		ShowInfo("Char deletion aborted: %s, Guild ID: %i\n", name, guild_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 삭제 중단: %s 케릭터가 길드(길드번호: %i)에 소속되어 있어 삭제 중단되었습니다. \n", name, guild_id);
+		else
+			ShowInfo("Char deletion aborted: %s, Guild ID: %i\n", name, guild_id);
 		return CHAR_DELETE_GUILD;
 	}
 
 	if (charserv_config.char_config.char_del_restriction&CHAR_DEL_RESTRICT_PARTY && party_id) // character is in party
 	{
-		ShowInfo("Char deletion aborted: %s, Party ID: %i\n", name, party_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 삭제 중단: %s 케릭터가 파티(파티번호: %i)에 소속되어 있어 삭제 중단되었습니다.\n", name, party_id);
+		else
+			ShowInfo("Char deletion aborted: %s, Party ID: %i\n", name, party_id);
 		return CHAR_DELETE_PARTY;
 	}
 
 	if( charserv_config.char_config.char_del_delay > 0 && ( !delete_date || delete_date > time(nullptr) ) ){ // not queued or delay not yet passed
-		ShowInfo("Char deletion aborted: %s, Time was not set or has not been reached ye\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 삭제 중단: %s 케릭터 삭제가 중단되었습니다. (삭제 대기시간 미설정 혹은 미존재)\n", name );
+		else
+			ShowInfo("Char deletion aborted: %s, Time was not set or has not been reached ye\n", name );
 		return CHAR_DELETE_TIME;
 	}
 
@@ -2128,10 +2211,16 @@ int char_lan_subnetcheck(uint32 ip){
 	int i;
 	ARR_FIND( 0, subnet_count, i, (subnet[i].char_ip & subnet[i].mask) == (ip & subnet[i].mask) );
 	if( i < subnet_count ) {
-		ShowInfo("Subnet check [%u.%u.%u.%u]: Matches " CL_CYAN "%u.%u.%u.%u/%u.%u.%u.%u" CL_RESET"\n", CONVIP(ip), CONVIP(subnet[i].char_ip & subnet[i].mask), CONVIP(subnet[i].mask));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("서브넷 체크 [%u.%u.%u.%u]: " CL_CYAN "%u.%u.%u.%u/%u.%u.%u.%u" CL_RESET "일치\n", CONVIP(ip), CONVIP(subnet[i].char_ip & subnet[i].mask), CONVIP(subnet[i].mask));
+		else
+			ShowInfo("Subnet check [%u.%u.%u.%u]: Matches " CL_CYAN "%u.%u.%u.%u/%u.%u.%u.%u" CL_RESET"\n", CONVIP(ip), CONVIP(subnet[i].char_ip & subnet[i].mask), CONVIP(subnet[i].mask));
 		return subnet[i].map_ip;
 	} else {
-		ShowInfo("Subnet check [%u.%u.%u.%u]: " CL_CYAN "WAN" CL_RESET "\n", CONVIP(ip));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("서브넷 체크 [%u.%u.%u.%u]: " CL_CYAN "WAN" CL_RESET "\n", CONVIP(ip));
+		else
+			ShowInfo("Subnet check [%u.%u.%u.%u]: " CL_CYAN "WAN" CL_RESET "\n", CONVIP(ip));
 		return 0;
 	}
 }
@@ -2262,7 +2351,10 @@ int char_lan_config_read(const char *lancfgName) {
 	char line[1024], w1[64], w2[64], w3[64], w4[64];
 
 	if((fp = fopen(lancfgName, "r")) == nullptr) {
-		ShowWarning("LAN Support configuration file is not found: %s\n", lancfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("랜 설정 지원파일이 존재하지 않습니다. 파일명: %s\n", lancfgName);
+		else
+			ShowWarning("LAN Support configuration file is not found: %s\n", lancfgName);
 		return 1;
 	}
 
@@ -2273,7 +2365,10 @@ int char_lan_config_read(const char *lancfgName) {
 
 		if(sscanf(line,"%63[^:]: %63[^:]:%63[^:]:%63[^\r\n]", w1, w2, w3, w4) != 4) {
 
-			ShowWarning("Error syntax of configuration file %s in line %d.\n", lancfgName, line_num);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("설정파일(%s)의 %d번째 줄의 구문이 오류입니다.\n", lancfgName, line_num);
+			else
+				ShowWarning("Error syntax of configuration file %s in line %d.\n", lancfgName, line_num);
 			continue;
 		}
 
@@ -2284,7 +2379,10 @@ int char_lan_config_read(const char *lancfgName) {
 
 		if( strcmpi(w1, "subnet") == 0 ){
 			if(subnet_count>=s_subnet) { //We skip instead of break in case we want to add other conf in that file.
-				ShowError("%s: Too many subnets defined, skipping line %d...\n", lancfgName, line_num);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("%s: 너무 많은 서브 네트워크가 정의되었습니다. %d번째 줄이 무시되었습니다...\n", lancfgName, line_num);
+				else
+					ShowError("%s: Too many subnets defined, skipping line %d...\n", lancfgName, line_num);
 				continue;
 			}
 			subnet[subnet_count].mask = str2ip(w2);
@@ -2292,15 +2390,22 @@ int char_lan_config_read(const char *lancfgName) {
 			subnet[subnet_count].map_ip = str2ip(w4);
 			if( (subnet[subnet_count].char_ip & subnet[subnet_count].mask) != (subnet[subnet_count].map_ip & subnet[subnet_count].mask) )
 			{
-				ShowError("%s: Configuration Error: The char server (%s) and map server (%s) belong to different subnetworks!\n", lancfgName, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("%s: 설정 에러: 케릭터서버(%s) 및 맵서버(%s)는 서로 다른 서브 네트워크에 속해 있습니다.\n", lancfgName, w3, w4);
+				else
+					ShowError("%s: Configuration Error: The char server (%s) and map server (%s) belong to different subnetworks!\n", lancfgName, w3, w4);
 				continue;
 			}
 			subnet_count++;
 		}
 	}
 
-	if( subnet_count > 1 ) /* only useful if there is more than 1 */
-		ShowStatus("Read information about %d subnetworks.\n", subnet_count);
+	if( subnet_count > 1 ) { /* only useful if there is more than 1 */
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("%d개의 서브 네트워크의 정보를 읽었습니다.\n", subnet_count);
+		else
+			ShowStatus("Read information about %d subnetworks.\n", subnet_count);
+	}
 
 	fclose(fp);
 	return 0;
@@ -2327,7 +2432,10 @@ bool char_checkdb(void){
 		schema_config.elemental_db, schema_config.skillcooldown_db, schema_config.bonus_script_db,
 		schema_config.clan_table, schema_config.clan_alliance_table, schema_config.mail_attachment_db, schema_config.achievement_table
 	};
-	ShowInfo("Start checking DB integrity\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("DB 무결성 검사 시작\n");
+	else
+		ShowInfo("Start checking DB integrity\n");
 	for (i=0; i<ARRAYLENGTH(sqltable); i++){ //check if they all exist and we can acces them in sql-server
 		if( SQL_ERROR == Sql_Query(sql_handle, "SELECT 1 FROM `%s` LIMIT 1;", sqltable[i]) ){
 			Sql_ShowDebug(sql_handle);
@@ -2344,7 +2452,7 @@ bool char_checkdb(void){
 		"`moves`,`unban_time`,`font`,`sex`,`hotkey_rowshift`,`clan_id`,`last_login`,`title_id`,`show_equip`,"
 		"`hotkey_rowshift2`,"
 		"`max_ap`,`ap`,`trait_point`,`pow`,`sta`,`wis`,`spl`,`con`,`crt`,"
-		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`"
+		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`,`show_costume`"
 		" FROM `%s` LIMIT 1;", schema_config.char_db) ){
 		Sql_ShowDebug(sql_handle);
 		return false;
@@ -2571,7 +2679,10 @@ bool char_checkdb(void){
 		return false;
 	}
 	Sql_FreeResult(sql_handle);
-	ShowInfo("DB integrity check finished with success\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("DB 무결성 검사가 성공으로 끝났습니다.\n");
+	else
+		ShowInfo("DB integrity check finished with success\n");
 	return true;
 }
 
@@ -2580,7 +2691,10 @@ void char_sql_config_read(const char* cfgName) {
 	FILE* fp;
 
 	if ((fp = fopen(cfgName, "r")) == nullptr) {
-		ShowError("File not found: %s\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s 파일이 존재하지 않습니다.\n", cfgName);
+		else
+			ShowError("File not found: %s\n", cfgName);
 		return;
 	}
 
@@ -2674,7 +2788,10 @@ void char_sql_config_read(const char* cfgName) {
 			char_sql_config_read(w2);
 	}
 	fclose(fp);
-	ShowInfo("Done reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s 읽기 완료.\n", cfgName);
+	else
+		ShowInfo("Done reading %s.\n", cfgName);
 }
 
 
@@ -2849,7 +2966,10 @@ void char_config_split_startpoint( char* w1_value, char* w2_value, struct s_poin
 		size_t n = sv_split( lineitem, strlen( lineitem ), 0, ',', fields, fields_length, SV_NOESCAPE_NOTERMINATE, error );
 
 		if( error || ( n + 1 ) < fields_length ){
-			ShowDebug("%s: not enough arguments for %s! Skipping...\n", w1_value, lineitem);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("%s: %s에 대한 인수가 충분하지 않습니다. 건너뛰는중...\n", w1_value, lineitem);
+			else
+				ShowDebug("%s: not enough arguments for %s! Skipping...\n", w1_value, lineitem);
 			lineitem = strtok(nullptr, ":"); //next lineitem
 			continue;
 		}
@@ -2889,7 +3009,10 @@ void char_config_split_startitem(char *w1_value, char *w2_value, struct startite
 		size_t n = sv_split( lineitem, strlen( lineitem ), 0, ',', fields, fields_length, SV_NOESCAPE_NOTERMINATE, error );
 
 		if( error || ( n + 1 ) < fields_length ){
-			ShowDebug("%s: not enough arguments for %s! Skipping...\n", w1_value, lineitem);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("%s: %s에 대한 인수가 충분하지 않습니다. 건너뛰는중...\n", w1_value, lineitem);
+			else
+				ShowDebug("%s: not enough arguments for %s! Skipping...\n", w1_value, lineitem);
 			lineitem = strtok(nullptr, ":"); //next lineitem
 			continue;
 		}
@@ -2911,7 +3034,10 @@ bool char_config_read(const char* cfgName, bool normal){
 	FILE* fp = fopen(cfgName, "r");
 
 	if (fp == nullptr) {
-		ShowError("Configuration file not found: %s.\n", cfgName);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s에 대한 설정파일이 존재하지 않습니다..\n", cfgName);
+		else
+			ShowError("Configuration file not found: %s.\n", cfgName);
 		return false;
 	}
 
@@ -2942,7 +3068,10 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.login_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.login_ip_str, w2, sizeof(charserv_config.login_ip_str));
-					ShowStatus("Login server IP address : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowStatus("로그인 서버 IP주소 : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
+					else
+						ShowStatus("Login server IP address : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "login_port") == 0) {
 				charserv_config.login_port = atoi(w2);
@@ -2951,14 +3080,20 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.char_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.char_ip_str, w2, sizeof(charserv_config.char_ip_str));
-					ShowStatus("Character server IP address : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowStatus("케릭터 서버 IP주소 : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
+					else
+						ShowStatus("Character server IP address : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "bind_ip") == 0) {
 				charserv_config.bind_ip = host2ip(w2);
 				if (charserv_config.bind_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.bind_ip_str, w2, sizeof(charserv_config.bind_ip_str));
-					ShowStatus("Character server binding IP address : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowStatus("케릭터 서버 바인딩 IP주소: %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
+					else
+						ShowStatus("Character server binding IP address : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "char_port") == 0) {
 				charserv_config.char_port = atoi(w2);
@@ -2972,7 +3107,10 @@ bool char_config_read(const char* cfgName, bool normal){
 		} else if(strcmpi(w1,"console_silent")==0){
 			msg_silent = atoi(w2);
 			if( msg_silent ) /* only bother if its actually enabled */
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("조용한(Silent) 콘솔 설정: %d\n", atoi(w2));
+				else
+					ShowInfo("Console Silent Setting: %d\n", atoi(w2));
 		} else if (strcmpi(w1, "console_msg_log") == 0) {
 			console_msg_log = atoi(w2);
 		} else if  (strcmpi(w1, "console_log_filepath") == 0) {
@@ -3051,19 +3189,28 @@ bool char_config_read(const char* cfgName, bool normal){
 		} else if (strcmpi(w1, "fame_list_alchemist") == 0) {
 			fame_list_size_chemist = atoi(w2);
 			if (fame_list_size_chemist > MAX_FAME_LIST) {
-				ShowWarning("Max fame list size is %d (fame_list_alchemist)\n", MAX_FAME_LIST);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("최대 랭킹 목록의 크기는 %d 입니다. (알케미스트 랭킹 목록)\n", MAX_FAME_LIST);
+				else
+					ShowWarning("Max fame list size is %d (fame_list_alchemist)\n", MAX_FAME_LIST);
 				fame_list_size_chemist = MAX_FAME_LIST;
 			}
 		} else if (strcmpi(w1, "fame_list_blacksmith") == 0) {
 			fame_list_size_smith = atoi(w2);
 			if (fame_list_size_smith > MAX_FAME_LIST) {
-				ShowWarning("Max fame list size is %d (fame_list_blacksmith)\n", MAX_FAME_LIST);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("최대 랭킹 목록의 크기는 %d 입니다. (블랙스미스 랭킹 목록)\n", MAX_FAME_LIST);
+				else
+					ShowWarning("Max fame list size is %d (fame_list_blacksmith)\n", MAX_FAME_LIST);
 				fame_list_size_smith = MAX_FAME_LIST;
 			}
 		} else if (strcmpi(w1, "fame_list_taekwon") == 0) {
 			fame_list_size_taekwon = atoi(w2);
 			if (fame_list_size_taekwon > MAX_FAME_LIST) {
-				ShowWarning("Max fame list size is %d (fame_list_taekwon)\n", MAX_FAME_LIST);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("최대 랭킹 목록의 크기는 %d 입니다. (태권소년/소녀 랭킹 목록)\n", MAX_FAME_LIST);
+				else
+					ShowWarning("Max fame list size is %d (fame_list_taekwon)\n", MAX_FAME_LIST);
 				fame_list_size_taekwon = MAX_FAME_LIST;
 			}
 		} else if (strcmpi(w1, "guild_exp_rate") == 0) {
@@ -3083,7 +3230,10 @@ bool char_config_read(const char* cfgName, bool normal){
 			charserv_config.pincode_config.pincode_allow_sequential = config_switch(w2);
 #else
 			if( config_switch(w2) ) {
-				ShowWarning("pincode_enabled requires PACKETVER 20110309 or higher.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("보안코드(PINCODE)를 사용하려면 PACKETVER 20110309 이상이 필요합니다.\n");
+				else
+					ShowWarning("pincode_enabled requires PACKETVER 20110309 or higher.\n");
 			}
 #endif
 		} else if (strcmpi(w1, "char_move_enabled") == 0) {
@@ -3112,7 +3262,10 @@ bool char_config_read(const char* cfgName, bool normal){
 	}
 	fclose(fp);
 
-	ShowInfo("Done reading %s.\n", cfgName);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%s의 설정을 모두 읽었습니다.\n", cfgName);
+	else
+		ShowInfo("Done reading %s.\n", cfgName);
 	return true;
 }
 
@@ -3122,7 +3275,10 @@ bool char_config_read(const char* cfgName, bool normal){
 void char_config_adjust() {
 #if PACKETVER < 20100803
 	if (charserv_config.char_config.char_del_option&CHAR_DEL_BIRTHDATE) {
-		ShowWarning("conf/char_athena.conf:char_del_option birthdate is enabled but it requires PACKETVER 2010-08-03 or newer, defaulting to email...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("conf/char_athena.conf:char_del_option이 생년월일로 설정되어있는데 사용 패킷 버전(PACKETVER)이 2010-08-03 이하입니다. 이메일을 기본값으로 설정합니다 ...\n");
+		else
+			ShowWarning("conf/char_athena.conf:char_del_option birthdate is enabled but it requires PACKETVER 2010-08-03 or newer, defaulting to email...\n");
 		charserv_config.char_config.char_del_option &= ~CHAR_DEL_BIRTHDATE;
 	}
 #endif
@@ -3142,7 +3298,10 @@ void char_do_final_msg(void){
 }
 
 void CharacterServer::finalize(){
-	ShowStatus("Terminating...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Terminating...\n");
 
 	char_set_all_offline(-1);
 	char_set_all_offline_sql();
@@ -3167,12 +3326,18 @@ void CharacterServer::finalize(){
 
 	Sql_Free(sql_handle);
 
-	ShowStatus("Finished.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("완료.\n");
+	else
+		ShowStatus("Finished.\n");
 }
 
 /// Called when a terminate signal is received.
 void CharacterServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("종료중...\n");
+	else
+		ShowStatus("Shutting down...\n");
 	// TODO proper shutdown procedure; wait for acks?, kick all characters, ... [FlavoJS]
 	for( int id = 0; id < ARRAYLENGTH(map_server); ++id )
 		chmapif_server_reset(id);
@@ -3184,7 +3349,7 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 	CHAR_CONF_NAME =   "conf/char_athena.conf";
 	LAN_CONF_NAME =    "conf/subnet_athena.conf";
 	SQL_CONF_NAME =    "conf/inter_athena.conf";
-	MSG_CONF_NAME_EN = "conf/msg_conf/char_msg.conf";
+	MSG_CONF_NAME_KOR = "conf/msg_conf/char_msg.conf";
 	safestrncpy(console_log_filepath, "./log/char-msg_log.log", sizeof(console_log_filepath));
 
 	cli_get_options(argc,argv);
@@ -3195,13 +3360,19 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 	char_lan_config_read(LAN_CONF_NAME);
 	char_set_default_sql();
 	char_sql_config_read(SQL_CONF_NAME);
-	msg_config_read(MSG_CONF_NAME_EN);
+	msg_config_read(MSG_CONF_NAME_KOR);
 
 #if !defined(BUILDBOT)
 	if (strcmp(charserv_config.userid, "s1")==0 && strcmp(charserv_config.passwd, "p1")==0) {
-		ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
-		ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
-		ShowNotice("And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("기본 사용자의 아이디/암호는 s1/p1으로 사용하는것을 권장하지 않습니다.\n");
+			ShowNotice("로그인(login) 테이블의 성별이 S인 사용자의 아이디 및 비밀번호를 적절하게 수정하세요.\n");
+			ShowNotice("또한, conf/char_athena.conf (또는 conf/import/char_conf.txt)에서 아이디/비밀번호도 수정하세요.\n");
+		} else {
+			ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
+			ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
+			ShowNotice("And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)\n");
+		}
 	}
 #endif
 
@@ -3215,10 +3386,17 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 		char ip_str[16];
 		ip2str(addr_[0], ip_str);
 
-		if (naddr_ > 1)
-			ShowStatus("Multiple interfaces detected..  using %s as our IP address\n", ip_str);
-		else
-			ShowStatus("Defaulting to %s as our IP address\n", ip_str);
+		if (naddr_ > 1) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus("여러 인터페이스가 감지 되었습니다. %s를 IP주소로 사용합니다.\n", ip_str);
+			else
+				ShowStatus("Multiple interfaces detected..  using %s as our IP address\n", ip_str);
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus("%s을(를) 기본 IP주소로 할당합니다.\n", ip_str);
+			else
+				ShowStatus("Defaulting to %s as our IP address\n", ip_str);
+		}
 		if (!(charserv_config.login_ip) ) {
 			safestrncpy(charserv_config.login_ip_str, ip_str, sizeof(charserv_config.login_ip_str));
 			charserv_config.login_ip = str2ip(charserv_config.login_ip_str);
@@ -3257,7 +3435,10 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 
 	//check db tables
 	if(charserv_config.char_check_db && char_checkdb() == 0){
-		ShowFatalError("char : A tables is missing in sql-server, please fix it, see (sql-files main.sql for structure) \n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("char : SQL서버에 테이블이 없습니다. SQL파일 main.sql의 구조를 확인하여 추가/수정 하세요. \n");
+		else
+			ShowFatalError("char : A tables is missing in sql-server, please fix it, see (sql-files main.sql for structure) \n");
 		return false;
 	}
 	//Cleaning the tables for nullptr entrys @ startup [Sirius]
@@ -3276,13 +3457,18 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 	set_defaultparse(chclif_parse);
 
 	if( (char_fd = make_listen_bind(charserv_config.bind_ip,charserv_config.char_port)) == -1 ) {
-		ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",charserv_config.char_port);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("포트 '" CL_WHITE "%d" CL_RESET "'에 바인딩 하지 못했습니다.\n",charserv_config.char_port);
+		else
+			ShowFatalError("Failed to bind to port '" CL_WHITE "%d" CL_RESET "'\n",charserv_config.char_port);
 		return false;
 	}
 
 	do_init_chcnslif();
-
-	ShowStatus("The char-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %d).\n\n", charserv_config.char_port);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("케릭터 서버가 " CL_GREEN "준비" CL_RESET "되었습니다. (서버가 포트번호 %d번에서 수신을 대기중입니다.)\n\n", charserv_config.char_port);
+	else
+		ShowStatus("The char-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %d).\n\n", charserv_config.char_port);
 
 	return true;
 }

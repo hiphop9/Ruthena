@@ -1,0 +1,231 @@
+//===== rAthena Script =======================================
+// 에피소드 클리어권 통합 스크립트 (밝히리)
+// 제작: Skylove 
+// 도움: 느낌 , 메탈리카
+//============================================================
+
+prt_cas,373,77,3	script	밝히리#episkip	4_F_VALKYRIE,{
+	mes "[밝히리]";
+	mes "...묘하게 시선이 마주치는 느낌인데...";
+	mes "얘, 너 내가 보이니?";
+	mes "뭐 내가 보인다니 소원이라도 들어줘?";
+	next;
+
+	mes "[밝히리]";
+	mes "마침 장소도 도서관이네.";
+	mes "네 모험기에서 부족한 부분을 내가 임의로 채워줄 수 있는데, 해볼래?";
+	mes "물론 공짜는 아니란다. 나도 먹고 살아야 하지 않겠니?";
+	next;
+
+	mes "^4d4dff밝히리와 거래하여 아직 진행하지 않은 에피소드를 강제로 완료할 수 있습니다.^000000";
+	mes "^ff0000에피소드 진행으로 획득할 수 있는 보상이나 경험치, 업적은 지급하지 않으며 진행 상태만 완료합니다.^000000";
+	next;
+
+	switch(select(
+		"에피소드 13 클리어권 사용",
+		"에피소드 14 클리어권 사용",
+		"에피소드 15 클리어권 사용",
+		"에피소드 16 클리어권 사용",
+		"에피소드 17 클리어권 사용",
+		"에피소드 18 클리어권 사용",
+		"에피소드 19 클리어권 사용",
+		"에피소드 20 클리어권 사용",
+		"취소")) {
+		case 1: callfunc("F_EpDesc", 13); callfunc("F_EpClearSkip", 13); break;
+		case 2: callfunc("F_EpDesc", 14); callfunc("F_EpClearSkip", 14); break;
+		case 3: callfunc("F_EpDesc", 15); callfunc("F_EpClearSkip", 15); break;
+		case 4: callfunc("F_EpDesc", 16); callfunc("F_EpClearSkip", 16); break;
+		case 5:
+			mes "[밝히리]";
+			switch(select("Ep17.1 태동, 일루시온", "Ep17.2 현자의 유산", "다시 생각할게.")) {
+				case 1: callfunc("F_Ep17_UI_AND_CLEAR", 1); break;
+				case 2: callfunc("F_Ep17_UI_AND_CLEAR", 2); break;
+				case 3:
+					mes "[밝히리]";
+					mes "필요할 때 또 와~";
+					close;
+			}
+			break;
+		case 6: callfunc("F_EpDesc", 18); callfunc("F_EpClearSkip", 18); break;
+		case 7: callfunc("F_EpDesc", 19); callfunc("F_EpClearSkip", 19); break;
+		case 8: callfunc("F_EpDesc", 20); callfunc("F_EpClearSkip", 20); break;
+		case 9:
+			mes "[밝히리]";
+			mes "필요할 때 또 와~";
+			close;
+	}
+	close;
+}
+
+//=== 함수: F_EpDesc ========================================
+function	script	F_EpDesc	{
+	.@ep = getarg(0);
+	mes "[밝히리]";
+	mes "^4d4dff에피소드 " + .@ep + "^000000?";
+	switch (.@ep) {
+		case 13: mes "이계와 디카스테스 관련된 이야기구나."; break;
+		case 14: mes "비프로스트와 에클라쥬의 이야기구나."; break;
+		case 15: mes "판타스마고리카와 발굴단 이야기구나."; break;
+		case 16: mes "테라 글로리아를 둘러싼 이야기구나."; break;
+		case 17: mes "일루시온과 바르문트의 이야기구나."; break;
+		case 18: mes "회색늑대 마을과 관련된 이야기구나."; break;
+		case 19: mes "이스가르드의 얼음성과 관련된 이야기구나."; break;
+		case 20: mes "죽지 않는 자와 관련된 이야기구나."; break;
+	}
+	mes "잠깐 살펴볼게.";
+	next;
+	return;
+}
+
+//=== 함수: F_CheckQuestState ===============================
+function	script	F_CheckQuestState	{
+	.@id = getarg(0);
+	.@state = checkquest(.@id, PLAYTIME);
+	if (.@state == 2) return "^4d4dff완료^000000";
+	return "미완료";
+}
+
+//=== 함수: F_EpClearSkip_SetVars ===========================
+function	script	F_EpClearSkip_SetVars	{
+	.@ep = getarg(0);
+	if (.@ep == 15 && terra_gloria_main < 25) terra_gloria_main = 25;
+	if (.@ep == 16 && terra_gloria_main < 26) terra_gloria_main = 26;
+	return;
+}
+
+//=== 함수: F_EpClearSkip ===================================
+function	script	F_EpClearSkip	{
+	.@ep = getarg(0);
+
+	// 최소 레벨 체크
+	setarray .@min_level[13], 95,100,120,130,110,170,200;
+	if (.@min_level[.@ep] && BaseLevel < .@min_level[.@ep]) {
+		mes "[밝히리]";
+		mes "이 에피소드는 최소 베이스 레벨 " + .@min_level[.@ep] + " 이상이어야 합니다.";
+		close;
+	}
+
+	// 변수 선언
+	deletearray .@names$;
+	deletearray .@ids;
+	deletearray .@tickets;
+
+	if (.@ep == 13) {
+		setarray .@names$[0], "이계 진입 관련 퀘스트", "새로운 환경에 적응하는 법", "삼국 연합 조사단의 갈등", "대륙으로의 보고", "단델리온의 의뢰", "새로움을 대하는 자세", "고양이 상단의 신임얻기", "통역기", "메신저", "계속되는 연구", "향수", "엘 디카스테스로!", "도하의 비밀 지령", "프레드의 부탁";
+		setarray .@ids[0], 13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013;
+		setarray .@tickets[0], 1001753, 1000284;
+	} else if (.@ep == 14) {
+		setarray .@names$[0], "Ep14.1 비프로스트", "Ep14.2 에클라쥬", "Ep14.3 결전";
+		setarray .@ids[0], 14000,14001,14002;
+		setarray .@tickets[0], 1001755, 1000285;
+	} else if (.@ep == 15) {
+		setarray .@names$[0], "아트나드 발굴단", "재생되는 기억", "판타스마고리카로!", "흔적", "월간 브리간";
+		setarray .@ids[0], 15000,15001,15002,15003,15004;
+		setarray .@tickets[0], 1001756, 1000286;
+	} else if (.@ep == 16) {
+		setarray .@names$[0], "영웅을 위한 연회", "게오보르그가의 이야기", "위그너가의 이야기", "발터가의 이야기", "뢰겐부르그가의 이야기", "연회 준비를 내가 왜?", "테라 글로리아", "협상과 협잡사이", "앙금";
+		setarray .@ids[0], 7682, 7698, 7703, 7736, 14599, 14602, 14615, 12374, 18219;
+		setarray .@tickets[0], 1001260, 1000282;
+	} else if (.@ep == 18) {
+		setarray .@names$[0], "교국으로", "니르엔의 부탁", "회색의 아이들", "오즈의 미로와 행상인", "오늘도 감사한 일용할 양식", "정수용 성물", "때늦은 이주", "잠이 오지 않아요.", "여기는 그 곳이 아니에요.", "나의 집은 어디인가.", "세상에 나쁜 짐승은 없다.", "회색마을 총관 후보", "회색늑대 숲의 대회의", "양속의 늑대", "신성한 기만";
+		setarray .@ids[0], 18000,18001,18002,18003,18004,18005,18006,18007,18008,18009,18010,18011,18012,18013,18014;
+		setarray .@tickets[0], 1001262, 1000288;
+	} else if (.@ep == 19) {
+		setarray .@names$[0], "북풍을 타고 온 손님", "아윈과 함께하는 순찰", "실험체 210426 조우", "르간의 거처 잠입", "단서찾기", "퇴적되는 의심", "혼란한 뱀의 둥지", "지상에서 지하은신처 찾기", "비공정 파괴작전", "정화의 성녀", "얼어붙은 바다";
+		setarray .@ids[0], 19000,19001,19002,19003,19004,19005,19006,19007,19008,19009,19010;
+		setarray .@tickets[0], 1001263, 1000988;
+	} else if (.@ep == 20) {
+		setarray .@names$[0], "고대 얼음 협곡의 선주민", "냉전과 첩보의 시대", "그 어떤 아윈보다 전문가", "꼬뽀의 비밀기지", "르간들의 은신처 잠입", "미로의 끝이 향하는 곳", "깊은 태고의 바다", "죽지 않는 자";
+		setarray .@ids[0], 20000,20001,20003,20004,20005,20006,20007,20008;
+		setarray .@tickets[0], 1001670, 1001214;
+	} else {
+		mes "에피소드 데이터를 찾을 수 없습니다.";
+		close;
+	}
+
+	mes "[밝히리]";
+	for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
+		mes .@names$[.@i] + " " + callfunc("F_CheckQuestState", .@ids[.@i]);
+	}
+	next;
+
+	switch(select("진행하지 않는다.", "에피소드 클리어를 진행한다.")) {
+		case 1:
+			mes "[밝히리]";
+			mes "필요할 때 또 와~";
+			close;
+		case 2:
+			if (countitem(.@tickets[0]) > 0) delitem(.@tickets[0], 1);
+			else if (countitem(.@tickets[1]) > 0) delitem(.@tickets[1], 1);
+			else {
+				mes "음… 아래 티켓 중 가진 거 없니?";
+				mes "^0000FF^i[" + .@tickets[0] + "] 에피소드 패스권^000000";
+				mes "^0000FF^i[" + .@tickets[1] + "] 에피소드 클리어권^000000";
+				close;
+			}
+
+			callfunc("F_EpClearSkip_SetVars", .@ep);
+			for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
+				if (checkquest(.@ids[.@i], PLAYTIME) != 0) erasequest(.@ids[.@i]);
+				setquest(.@ids[.@i]);
+				completequest(.@ids[.@i]);
+			}
+
+			mes "[밝히리]";
+			mes "이야기 정리는 끝났단다.";
+			mes "자, 이제 새로운 이야기를 시작할 수 있어.";
+			close;
+	}
+}
+
+//=== 함수: F_Ep17_UI_AND_CLEAR =============================
+function	script	F_Ep17_UI_AND_CLEAR	{
+	.@part = getarg(0);
+
+	setarray .@names$[0],
+		"Ep17.1 새로운 작전지", "팩씨의 취업 로드", "레겐쉬름 탈환작전", "오래된 추억", "우물에서 바라보는 하늘", "순수한 악동", "팩씨의 취업로드2",
+		"Ep17.2 저택의 개구멍", "하수관의 낙오자", "네트워크를 찾을 수 없어", "그것이 알고싶다", "해충박멸작전", "대관식 참관", "수상정원", "도서관에서는 조용히", "목욕탕과 이상한 생물과 나";
+	setarray .@ids[0],
+		17000,17001,17002,17003,17004,17005,17006,
+		17100,17101,17102,17103,17104,17105,17106,17107,17108;
+	setarray .@tickets[0], 1000287, 1001261;
+
+	.@start = (.@part == 1) ? 0 : 7;
+	.@end = (.@part == 1) ? 6 : 15;
+
+	mes "[밝히리]";
+	for (.@i = .@start; .@i <= .@end; .@i++) {
+		mes .@names$[.@i] + " " + callfunc("F_CheckQuestState", .@ids[.@i]);
+	}
+	next;
+
+	switch(select("진행하지 않는다.", "에피소드 클리어를 진행한다.")) {
+		case 1:
+			mes "[밝히리]";
+			mes "필요할 때 또 와~";
+			close;
+		case 2:
+			if (countitem(.@tickets[0]) > 0) {
+				delitem(.@tickets[0], 1);
+			} else if (countitem(.@tickets[1]) > 0) {
+				delitem(.@tickets[1], 1);
+			} else {
+				mes "음… 아래 티켓 중 가진 거 없니?";
+				mes "^0000FF^i[" + .@tickets[0] + "] 에피소드 패스권^000000";
+				mes "^0000FF^i[" + .@tickets[1] + "] 에피소드 클리어권^000000";
+				close;
+			}
+
+			// Ep17.1 + 17.2 전체 클리어 처리
+			for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
+				if (checkquest(.@ids[.@i], PLAYTIME) != 0) erasequest(.@ids[.@i]);
+				setquest(.@ids[.@i]);
+				completequest(.@ids[.@i]);
+			}
+
+			mes "[밝히리]";
+			mes "이야기 정리는 끝났단다.";
+			mes "자, 이제 새로운 이야기를 시작할 수 있어.";
+			close;
+	}
+}

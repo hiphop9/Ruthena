@@ -11,6 +11,7 @@
 #include <common/showmsg.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "mob.hpp" // struct mob_data
 #include "pc.hpp" // map_session_data
@@ -382,7 +383,10 @@ int npc_chat_sub(struct block_list* bl, va_list ap)
 				lst = nd->u.scr.label_list;
 				ARR_FIND(0, nd->u.scr.label_list_num, i, strncmp(lst[i].name, e->label, sizeof(lst[i].name)) == 0);
 				if (i == nd->u.scr.label_list_num) {
-					ShowWarning("Unable to find label: %s\n", e->label);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("찾을 수 없는 라벨 %s\n", e->label);
+					else
+						ShowWarning("Unable to find label: %s\n", e->label);
 					return 0;
 				}
 				

@@ -1,206 +1,153 @@
 //===== rAthena Script ======================================= 
-//= Kafra Teleportation Services
+//= 카프라 직원 Services
 //===== Changelogs: ==========================================
-//= 1.0 First Version. [JohnnyPlayy]
-//===== Description: ========================================= 
-// Texts from this script were translated according to KRO
+//번역 및 수정 스카이러브
 //============================================================
 
-function	script	F_KafTeleDoram	{
-	.@menu_choice = getarg(0);
-
+-	script	F_KafTeleDoram	HIDDEN_NPC,{
 	cutin "kafra_do01", 2;
-	mes "[Kafra Employee]";
-	mes "Welcome.";
-	mes "The Kafra services are always on your side.";
-	mes "Please choose your destination.";
+	mes "[카프라 직원]";
+	mes "어서오세냐앙.";
+	mes "카프냐 공간이동 서비스는 언제나";
+	mes "여러분 곁에 있습다냐앙.";
+	mes "소환할 공간이동기를 말씀해";
+	mes "주십시냐앙.";
 	next;
-	switch(.@menu_choice) {
-	case 1: // Alberta
-		switch( select( "Southeast Field of Payon", "Sunken Ship", "Cancel.") ) {
+	switch( select( "룬-미드가츠", "클래스트헤임", "나이트메어", "기타지역", "설명을 듣는다", "그만둔다") ) {
+	case 1:
+		mes "[카프라 직원]";
+		mes "룬-미드가츠...";
+		mes "접수했습니냐앙.";
+		duplicate_dynamic("#ZONDA4");
+		close3;
+	case 2:
+		mes "[카프라 직원]";
+		mes "글래스트헤임..";
+		mes "접수했습니냐앙.";
+		duplicate_dynamic("#ZONDA5");
+		close3;
+	case 3:
+		mes "[카프라 직원]";
+		mes "나이트메어...";
+		mes "접수했습니냐앙.";
+		duplicate_dynamic("#ZONDA6");
+		close3;
+	case 4:
+		mes "[카프라 직원]";
+		mes "기타 지역, 알겠습니냐앙.";
+		mes "접수했습니냐앙.";
+		duplicate_dynamic("#ZONDA7");
+		close3;
+	case 5:
+		mes "[카프라 직원]";
+		mes "목적지를 말씀하시면 해당 지역으로";
+		mes "이동할 수 있는 유료 공간이동기를 ";
+		mes "소환합니냐앙.";
+		mes "나이트메어 지역은 30000zeny 혹은";
+		mes "말랑도 특산 통조림 1500개, 다른";
+		mes "지역은 20000zeny 혹은 말랑도 특산";
+		mes "통조림 1000개입니냐앙.";
+		close3;
+	case 6:
+		mes "[카프라 직원]";
+		mes "저희는 카프냐 서비스는 보다 완벽한";
+		mes "서비스와 엄격한 관리 업무로 고객";
+		mes "여러분이 안심하고 맛있게 이용하실 수";
+		mes "있도록 최선을 다하고 있습니냐앙.";
+		mes "이용해 주셔서 감사합니냐앙.";
+		close3;
+	}
+	end;
+}	
+
+prontera,2,2,4,	script	공간이동기::#ZONDA4	10007 ,{
+	mes "[공간이동기]";
+	mes "룬-미드가츠행 공간이동기 카프냥냥";
+	mes "mk3입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "이즈루드 해저 동굴 1층", "프론테라 미궁 1층", "지하수로 던전 1층", "묘르닐 폐광 1층", "게펜 지하 던전 1층", "게페니아 1층", "오크던전 1층", "모로크 피라미드 1층", "모로크 스핑크스 지하 1층", "페이욘 동굴 1층", "알베르타 침몰선 1층", "거북이섬", "개미지옥 던전 1층", "코모도 서쪽 동굴 카루", "코모도 북쪽 동굴 루안다", "코모도 동쪽 동굴 마오", "그만둔다") ) {
 		case 1:
-			callsub( S_Zone, "Southeast Field of Payon", 250,13 );
-			warp "pay_fild06",199,152;
+			callsub( S_Zone, "이즈루드 해저 동굴 1층", 2000,1000, 0 ); // 텔레포트 값이 확인되지 않았습니다.
+			warp "iz_dun00",0,0;
 			end;
 		case 2:
-			callsub( S_Zone, "Sunken Ship", 50,3 );
-			warp "alb2trea",55,63;
+			callsub( S_Zone, "프론테라 미궁 1층", 2000,1000, 0 );
+			warp "prt_maze01",0,0;
 			end;
 		case 3:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 2: // Aldebaran
-		switch( select( "Aldebaran Border", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Aldebaran Border", 50,3 );
-			warp "yuno_fild01",194,150;
-			end;
-		case 2:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 3: // Einbroch
-		switch( select( "West Field of the Abyss Valley", "North Field of Lighthalzen", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "West Field of the Abyss Valley", 600,30 );
-			warp "ein_fild06",199,152;
-			end;
-		case 2:
-			callsub( S_Zone, "North Field of Lighthalzen", 1400,70 );
-			warp "lhz_fild01",244,130;
-			end;
-		case 3:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 4: // Geffen
-		switch( select( "Geffen Tower Underground Entrance", "North Field of Mount Mjolnir", "Orc Village", "Glast Heim Entrance", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Geffen Tower Underground Entrance", 300,15 );
-			warp "gef_tower",153,46;
-			end;
-		case 2:
-			callsub( S_Zone, "North Field of Mount Mjolnir", 150,8 );
-			warp "mjolnir_02",172,195;
-			end;
-		case 3:
-			callsub( S_Zone, "Orc Village", 100,5 );
-			warp "gef_fild10",150,301;
+			callsub( S_Zone, "지하수로 던전 1층", 2000,1000, 0 ); 
+			warp "prt_sewb1",0,0; 
 			end;
 		case 4:
-			callsub( S_Zone, "Glast Heim Entrance", 6666,444 );
-			warp "gef_fild06",34,270;
+			callsub( S_Zone, "묘르닐 폐광 1층", 2000,1000, 0 );
+			warp "mjo_dun01",0,0; 
 			end;
 		case 5:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 5: // Lighthalzen
-		switch( select( "North Field of Lighthalzen", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "North Field of Lighthalzen", 200,10 );
-			warp "lhz_fild01",244,130;
-			end;
-		case 2:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 6: // Morocc
-		switch( select( "Morocc Ruins Pyramid", "Sograt Desert Sphinx", "Southeast Morocc Field", "Comodo Beaches", "Kingdom of the Dead", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Morocc Ruins Pyramid", 50,3 );
-			warp "moc_ruins",100,140;
-			end;
-		case 2:
-			callsub( S_Zone, "Sograt Desert Sphinx", 50,3 );
-			warp "moc_fild19",132,100;
-			end;
-		case 3:
-			callsub( S_Zone, "Southeast Morocc Field", 100,5 );
-			warp "moc_fild11",267,100;
-			end;
-		case 4:
-			callsub( S_Zone, "Comodo Beaches", 250,13 );
-			warp "cmd_fild02",89,83;
-			end;
-		case 5:
-			callsub( S_Zone, "Kingdom of the Dead", 12121,666 );
-			warp "niflheim",220,141;
+			callsub( S_Zone, "게펜 지하 던전 1층", 2000,1000, 0 );
+			warp "gef_dun00",0,0;
 			end;
 		case 6:
-			callfunc( "F_KafEnd",0,0 );
+			callsub( S_Zone, "게페니아 1층", 2000,1000, 0 ); 
+			warp "gefenia01",0,0;
+			end;
+		case 7:
+			callsub( S_Zone, "오크던전 1층", 2000,1000, 0 );
+			warp "orcsdun01",0,0;
+			end;
+		case 8:
+			callsub( S_Zone, "모로크 피라미드 1층", 2000,1000, 0 );
+			warp "moc_pryd01",0,0;
+			end;
+		case 9:
+			callsub( S_Zone, "모로크 스핑크스 지하 1층", 2000,1000, 0 );
+			warp "in_sphinx1",0,0;
+			end;
+		case 10:
+			callsub( S_Zone, "페이욘 동굴 1층", 2000,1000, 0 );
+			warp "pay_dun00",0,0;
+			end;
+		case 11:
+			callsub( S_Zone, "알베르타 침몰선 1층", 2000,1000, 0 );
+			warp "treasure01",0,0;
+			end;
+		case 12:
+			callsub( S_Zone, "거북이 섬", 2000,1000, 0 );
+			warp "tur_dun01",0,0;
+			end;
+		case 13:
+			callsub( S_Zone, "개미지옥 던전 1층", 2000,1000, 0 );
+			warp "anthell01",0,0;
+			end;
+		case 14:
+			callsub( S_Zone, "코모도 서쪽 동굴 카루", 2000,1000, 0 );
+			warp "beach_dun",0,0;
+			end;
+		case 15:
+			callsub( S_Zone, "코모도 북쪽 동굴 루안다", 2000,1000, 0 );
+			warp "beach_dun2",0,0;
+			end;
+		case 16:
+			callsub( S_Zone, "코모도 동쪽 동굴 마오", 2000,1000, 0 );
+			warp "beach_dun3",0,0;
+			end;
+		case 17:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
 		}
-	case 7: // Payon
-		switch( select( "Archer's Village", "Southeast Payon Field", "Prontera South Field", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Archer's Village", 50,3 );
-			warp "pay_arche",69,130;
-			end;
-		case 2:
-			callsub( S_Zone, "Southeast Payon Field", 100,5 );
-			warp "pay_fild10",203,331;
-			end;
-		case 3:
-			callsub( S_Zone, "Prontera South Field", 150,8 );
-			warp "moc_fild02",109,144;
-			end;
-		case 4:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 8: // Prontera
-		switch( select( "Southwestern Prontera Field", "Prontera North Field", "Byalan Island", "Prontera South Field", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Southwestern Prontera Field", 100,5 );
-			warp "prt_fild07",250,257;
-			end;
-		case 2:
-			callsub( S_Zone, "Prontera North Field", 150,8 );
-			warp "prt_fild01",194,123;
-			end;
-		case 3:
-			callsub( S_Zone, "Byalan Island", 150,8 );
-			warp "izlu2dun",63,129;
-			end;
-		case 4:
-			callsub( S_Zone, "Prontera South Field", 150,8 );
-			warp "moc_fild02",109,144;
-			end;
-		case 5:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 9: // Rachel
-		switch( select( "Southern Ice Cave Field", "Thor Volcano East Field", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Southern Ice Cave Field", 600,30 );
-			warp "ra_fild04",214,220;
-			end;
-		case 2:
-			callsub( S_Zone, "Thor Volcano East Field", 600,30 );
-			warp "ve_fild04",198,174;
-			end;
-		case 3:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 10: // Veins
-		switch( select( "Thor Volcano East Field", "South Veins Field", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "Thor Volcano East Field", 400,20 );
-			warp "ra_fild04",198,174;
-			end;
-		case 2:
-			callsub( S_Zone, "South Veins Field", 200,10 );
-			warp "ve_fild07",85,255;
-			end;
-		case 3:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	case 11: // Yuno
-		switch( select( "West Field of the Abyss Valley", "Phantasmagorika Excavation of the Abyss Valley", "Magma Dungeon Juno Plateau", "West Field of Abyss Lake", "Cancel.") ) {
-		case 1:
-			callsub( S_Zone, "West Field of the Abyss Valley", 400,20 );
-			warp "ein_fild06",199,152;
-			end;
-		case 2:
-			callsub( S_Zone, "Phantasmagorika Excavation of the Abyss Valley", 400,20 );
-			warp "yuno_fild07",225,145;
-			end;
-		case 3:
-			callsub( S_Zone, "Magma Dungeon Juno Plateau", 400,20 );
-			warp "yuno_fild03",201,152;
-			end;
-		case 4:
-			callsub( S_Zone, "West Field of Abyss Lake", 800,40 );
-			warp "hu_fild04",186,78;
-			end;
-		case 5:
-			callfunc( "F_KafEnd",0,0 );
-		}
-	}
 
 S_Zone:
 	.@zeny_req = getarg(1);
 	.@item_req = getarg(2);
-
-	mes "[Kafra Employee]";
-	mes getarg(0) + " is available for ^ff0000" + .@zeny_req + " Zenys^000000 or ^ff0000" + .@item_req + " Malang Sp Can^000000.";
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "zeny^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
 	next;
-	switch( select( .@zeny_req + " Zeny", .@item_req + " Malang Sp Can", "Cancel" ) ) {
+	switch( select( .@zeny_req + "zeny.", " 말랑도 특산통조림"+.@item_req + "개", "그만 둔다." ) ) {
 	case 1:
 		if (Zeny < .@zeny_req)
 			break;
@@ -212,130 +159,387 @@ S_Zone:
 		delitem 12636,.@item_req; // Malang_Sp_Can
 		return;
 	case 3:
-		mes "[Kafra Employee]";
-		mes "Can you tell me about other areas of service?";
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
 		close3;
 	}
-	mes "[Kafra Employee]";
-	mes "Sir! You do not have enough value that we are asking for.";
-	mes "Please check back again.";
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
 	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "룬-미드가츠행");
+		end;
 }
 
-moc_para01,35,23,3	script	Kafra Teleportation#eden	4_F_DRKAFRA01,{
-	cutin "kafra_do01", 2;
-	mes "[Kafra Employee]";
-	mes "Welcome.";
-	mes "The Kafra services are always on your side.";
+prontera,2,2,4,	script	공간이동기::#ZONDA5	10007 ,{
+	mes "[공간이동기]";
+	mes "글래스트헤임행 공간이동기 카프냥냥";
+	mes "라이트입니다.";
+	mes "목적지를 말씀해 주십시오.";
 	next;
-	mes "[Kafra Employee]";
-	mes "To reward adventurer support, the Kafra Corporation in cooperation with the Eden Group provides free services for ^ff0000Beginner Adventurers Below Level 39^000000.";
+	switch( select( "글래스트헤임 성 1층", "글래스트헤임 기사단 1층", "글래스트헤임 지하수로 2층", "글래스트헤임 수도원", "글래스트헤임 지하 감옥 1층", "글래스트헤임 계단 던전", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "글래스트헤임 성 1층", 2000,1000, 0 ); // 텔레포트 값이 확인되지 않았습니다.
+			warp "gl_cas01",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "글래스트헤임 기사단 1층", 2000,1000, 0 );
+			warp "gl_knt01",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "글래스트헤임 지하수로 2층", 2000,1000, 0 ); 
+			warp "gl_sew02",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "글래스트헤임 수도원", 2000,1000, 0 );
+			warp "gl_church",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "글래스트헤임 지하 감옥 1층", 2000,1000, 0 );
+			warp "gl_prison",0,0;
+			end;
+		case 6:
+			callsub( S_Zone, "글래스트헤임 계단 던전", 2000,1000, 0 ); 
+			warp "gl_step",0,0;
+			end;
+		case 7:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "zeny^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
 	next;
-	if (BaseLevel > 40) {
-		mes "[Kafra Employee]";
-		mes "We do not offer free teleportation services for adventurers ^ff0000above level 40^000000.";
-		mes "Search for Kafra Teleportation services in the city.";
+	switch( select( .@zeny_req + "zeny.", " 말랑도 특산통조림"+.@item_req + "개", "그만 둔다." ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
 		close3;
 	}
-	mes "[Kafra Employee]";
-	mes "Please choose your destination.";
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "글래스트헤임행");
+		end;
+}
+
+prontera,2,2,4,	script	공간이동기::#ZONDA6	10007 ,{
+	mes "[공간이동기]";
+	mes "나이트메어행 공간이동기 카프냥냥";
+	mes "SUPER입니다.";
+	mes "목적지를 말씀해 주십시오.";
 	next;
-	switch( select( "Prontera West Field", "Prontera Southwestern Field", "Prontera Lake Field", "Payon Dungeon Entrance", "Southwest Izlude Field", "Cancel.") ) {
+	switch( select( "피라미드 나이트메어(Lv110 추천)", "수도원 묘지(Lv100 추천)", "고성 글래스트헤임 2층 회랑(Lv140 추천)", "뒤틀린 시계탑 2층(Lv150 이상)", "뒤틀린 시계탑 3층(Lv150 이상)", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "피라미드 나이트메어", 3000,1500,110); // 텔레포트 값이 확인되지 않았습니다.
+			warp "moc_prydn1",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "수도원 묘지", 3000,1500,100);
+			warp "gl_chyard_",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "고성 글래스트헤임 2층 회랑", 3000,1500,140); 
+			warp "gl_cas02_",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "뒤틀린 시계탑 2층", 3000,1500,150);
+			warp "c_tower2_",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "뒤틀린 시계탑 3층", 3000,1500,150);
+			warp "c_tower3_",0,0;
+			end;
+		case 6:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	.@lv_req = getarg(3);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@lv_req +"레벨이상 추천 구역^000000이며";
+	mes "^ff0000" + .@zeny_req + "zeny^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
+	next;
+	switch( select( .@zeny_req + "zeny.", " 말랑도 특산통조림"+.@item_req + "개", "그만 둔다." ) ) {
 	case 1:
-		mes "[Kafra Employee]";
-		mes "Prontera Field :";
-		mes "The Prontera West Field is a mountainous field that you can also access the ^ff0000Prontera Sewer^000000.";
-		mes "^ff0000Hornets^000000 live there, so novice adventurers should beware!";
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
+		close3;
+	}
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "나이트메어행");
+		end;
+}
+
+
+prontera,2,2,4,	script	공간이동기::#ZONDA7	10007 ,{
+	mes "[공간이동기]";
+	mes "룬-미드가츠 기타 지역행 공간이동기";
+	mes "카프냥냥 SP입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "니플헤임", "별빛 산호 지대", "루티에 장난감 공장", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "니플헤임", 2000,1000); // 텔레포트 값이 확인되지 않았습니다.
+			warp "niflheim",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "별빛 산호 지대", 2000,1000);
+			warp "mal_dun01",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "루티에 장난감 공장", 2000,1000); 
+			warp "xmas_dun01",0,0; 
+			end;
+		case 4:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "zeny^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
+	next;
+	switch( select( .@zeny_req + "zeny.", " 말랑도 특산통조림"+.@item_req + "개", "그만 둔다." ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
+		close3;
+	}
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "룬-미드가츠 기타");
+		end;
+}
+
+moc_para01,35,23,3	script	카프라 이동 서비스#eden	4_F_DRKAFRA01,{
+	cutin "kafra_do01", 2;
+	mes "[카프라 직원]";
+	mes "어서오세냐앙.";
+	mes "카프냐 이동서비스는 언제나 여러분";
+	mes "곁에 있습다냐앙...";
+	next;
+	if (BaseLevel > 40) {
+		mes "[카프라 직원]";
+		mes "^ff000040레벨 이상의 모험가^000000님께서는 무료 이동";
+		mes "서비스를 제공하지 않습니냐앙.";
+		mes "공산이동기 소환이라면 도와드릴 수";
+		mes "있습니냐앙.";
+		mes "소환할 공간이동기를 말씀해";
+		mes "주십시냐앙.";
 		next;
-		callsub( S_Zone );
+		switch( select( "룬-미드가츠", "클래스트헤임", "나이트메어", "기타지역", "설명을 듣는다", "그만둔다") ) {
+			case 1:
+				mes "[카프라 직원]";
+				mes "룬-미드가츠...";
+				mes "접수했습니냐앙.";
+				duplicate_dynamic("#ZONDA4");
+				close3;
+			case 2:
+				mes "[카프라 직원]";
+				mes "글래스트헤임..";
+				mes "접수했습니냐앙.";
+				duplicate_dynamic("#ZONDA5");
+				close3;
+			case 3:
+				mes "[카프라 직원]";
+				mes "나이트메어...";
+				mes "접수했습니냐앙.";
+				duplicate_dynamic("#ZONDA6");
+				close3;
+			case 4:
+				mes "[카프라 직원]";
+				mes "기타 지역, 알겠습니냐앙.";
+				mes "접수했습니냐앙.";
+				duplicate_dynamic("#ZONDA7");
+				close3;
+			case 5:
+				mes "[카프라 직원]";
+				mes "목적지를 말씀하시면 해당 지역으로";
+				mes "이동할 수 있는 유료 공간이동기를 ";
+				mes "소환합니냐앙.";
+				mes "나이트메어 지역은 30000zeny 혹은";
+				mes "말랑도 특산 통조림 1500개, 다른";
+				mes "지역은 20000zeny 혹은 말랑도 특산";
+				mes "통조림 1000개입니냐앙.";
+				close3;
+			case 6:
+				mes "[카프라 직원]";
+				mes "저희는 카프냐 서비스는 보다 완벽한";
+				mes "서비스와 엄격한 관리 업무로 고객";
+				mes "여러분이 안심하고 맛있게 이용하실 수";
+				mes "있도록 최선을 다하고 있습니냐앙.";
+				mes "이용해 주셔서 감사합니냐앙.";
+				close3;
+			}
+		close;
+	}	
+	mes "[카프라 직원]";
+	mes "저희 (주) 카프냐는 모험가님들의";
+	mes "성원에 보답하기 위해 낙원단과";
+	mes "협업하여 ^FF000039레벨 이하 의 초보 모험가님";
+	mes "한정^000000으로 몇몇 초보자 지역의 이동";
+	mes "서비스를 무상으로 제공해 드리고";
+	mes "있습다냐앙.";
+	next;
+	mes "[카프라 직원]";
+	mes "목적지를 말씀해 주십시냐앙!";
+	next;
+	switch( select( "프론테라 서쪽 필드", "프론테라 서남 필드", "프론테라 서서 필드", "페이온 던전 입구", "이즈루드 서남 필드", "그만 둔다.") ) {
+	case 1:
+		mes "[카프라 직원]";
+		mes "프론테라 필드 :";
+		mes "프론테라 서쪽 필드는 ^ff0000프론테라";
+		mes "지하수로^000000로도 갈 수 있는 고릉고릉한";
+		mes "필드입니냐앙.";
+		mes "하지만^ff0000호넷^000000이 출몰하니 초보모험가는";
+		mes "조심하는게 좋습니냐앙!";
+		next;
+		callsub( S_Zone1 );
 		warp "prt_fild05",276,241;
 		end;
 	case 2:
-		mes "[Kafra Employee]";
-		mes "Prontera Field :";
-		mes "Southwestern Prontera Field is a place where ^ff0000Rockers^000000 live.";
+		mes "[카프라 직원]";
+		mes "프론테라 필드 :";
+		mes "프론테라 남서쪽 필드에는 ^ff0000로커^000000가 출몰하는";
+		mes "매우 신나는 필드입니냐앙!";
 		next;
-		callsub( S_Zone );
+		callsub( S_Zone1 );
 		warp "prt_fild07",250,257;
 		end;
 	case 3:
-		mes "[Kafra Employee]";
-		mes "Prontera Field :";
-		mes "Prontera Lake Field is a place where the ^ff0000Ambernites^000000 live.";
+		mes "[카프라 직원]";
+		mes "프론테라 필드 :";
+		mes "프론테라 서서 필드는 ^ff0000앰버나이트^000000가";
+		mes "출몰하는 스믈스믈한 필드입니냐앙!";
 		next;
-		callsub( S_Zone );
+		callsub( S_Zone1 );
 		warp "prt_fild04",204,109;
 		end;
 	case 4:
-		mes "[Kafra Employee]";
-		mes "Archer's Village :";
-		mes "Payon's Cave is a scary place with lots of ^ff0000Zombies^000000 and ^ff0000Skeletons^000000.";
+		mes "[카프라 직원]";
+		mes "페이욘 궁수마을 :";
+		mes "페이욘 던전은 ^ff0000좀비^000000라던가 ^ff0000스켈레톤^000000";
+		mes "이라던가 하는 이상한 녀석들이 잔뜩";
+		mes "나오는 무서운 곳이랍니냥앙.";
 		next;
-		callsub( S_Zone );
+		callsub( S_Zone1);
 		warp "pay_arche",69,130;
 		end;
 	case 5:
-		mes "[Kafra Employee]";
-		mes "Sograt Desert :";
-		mes "Southwest of Prontera and Southwest of Izlude, this place is full of ^ff0000Mukas^000000 and ^ff0000Peco Pecos^000000.";
+		mes "[카프라 직원]";
+		mes "소그라트 사막 :";
+		mes "프론테라에서 남남쪽 이즈루드에서";
+		mes "서남쪽인 이 필드는 ^ff0000무카^000000라던가";
+		mes "^ff0000페코페코^000000같은 엄청 시끄러운 녀석들이";
+		mes "바글바글 나옵니냐앙.";
 		next;
-		callsub( S_Zone );
+		callsub( S_Zone1 );
 		warp "moc_fild01",232,250;
 		end;
 	case 6:
+		mes "[카프라 직원]";
+		mes "저희 카프냐 서비스는 보다 완벽한";
+		mes "서비스와 엄격한 관리 업무로 고객";
+		mes "여러분이 안심하고 맛있게 이용하실 수";
+		mes "있도록 최선을 다하고 있습니냐앙.";
+		mes "이용해 주셔서 감사합니냐앙.";
 		callfunc( "F_KafEnd",0,0 );
+		close3;
 	}
-S_Zone:
-	switch( select( "I wish to go.", "I want to stay." ) ) {
+
+S_Zone1:
+	switch( select( "이동", "이동하지 않는다." ) ) {
 	case 1:
 		return;
 	case 2:
-		mes "[Kafra Employee]";
-		mes "Want to check out our other services?";
+		mes "[카프라 직원]";
+		mes "그럼 다른 서비스 지역을";
+		mes "알아보시겠습니꺄릉?";
 		close3;
 	}	
+	end;
 }
 
-alberta,33,239,5	script	Kafra Teleportation#alberta	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",1;
-}
-
-aldebaran,136,122,5	script	Kafra Teleportation#aldebaran	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",2;
-}
-
-einbroch,246,205,5	script	Kafra Teleportation#einbroch	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",3;
-}
-
-geffen,115,66,5	script	Kafra Teleportation#geffen	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",4;
-}
-
-lighthalzen,167,103,5	script	Kafra Teleportation#lighthalzen	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",5;
-}
-
-morocc,155,257,6	script	Kafra Teleportation#morocc	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",6;
-}
-
-payon,176,104,5	script	Kafra Teleportation#payon	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",7;
-}
-
-prontera,143,87,5	script	Kafra Teleportation#prontera	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",8;
-}
-
-rachel,116,139,5	script	Kafra Teleportation#rachel	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",9;
-}
-
-veins,196,133,5	script	Kafra Teleportation#veins	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",10;
-}
-
-yuno,143,184,5	script	Kafra Teleportation#yuno	4_F_DRKAFRA01,{
-	callfunc "F_KafTeleDoram",11;
-}
+alberta,33,239,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram1	4_F_DRKAFRA01
+aldebaran,136,122,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram2	4_F_DRKAFRA01
+einbroch,246,205,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram3	4_F_DRKAFRA01
+geffen,115,66,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram4	4_F_DRKAFRA01
+lighthalzen,167,103,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram5	4_F_DRKAFRA01
+morocc,155,257,6	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram6	4_F_DRKAFRA01
+payon,176,104,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram7	4_F_DRKAFRA01
+prontera,143,87,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram8	4_F_DRKAFRA01
+rachel,116,139,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram9	4_F_DRKAFRA01
+veins,196,133,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram10	4_F_DRKAFRA01
+yuno,143,184,5	duplicate(F_KafTeleDoram)	카프라 이동 서비스#F_KafTeleDoram11	4_F_DRKAFRA01

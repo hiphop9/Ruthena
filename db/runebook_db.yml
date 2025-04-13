@@ -1,0 +1,40 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2023 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Rune Book
+###########################################################################
+#
+# Rune Book Settings
+#
+###########################################################################
+# - Id                         Client side LUB index. (RUNEIDTBL in runesystemid.lub)
+#   Name:                      Name of rune book.
+#   Materials:                 Materials needed to activate a rune book
+#     - Material               Name of the item
+#       Amount                 Quantity
+###########################################################################
+
+Header:
+  Type: RUNEBOOK_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/re/runebook_db.yml
+    Mode: Renewal
+  - Path: db/import/runebook_db.yml

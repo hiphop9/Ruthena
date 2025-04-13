@@ -4,33 +4,38 @@
 //= 1.0 Initial version from replays. [Lemongrass]
 //= 1.1 Cash Hair Stylist [Kisuka]
 //= 1.2 Updated Hair Stylist [Lemongrass]
+//= 1.3 Added an NPC to exchange coupons for Good, Evil or Wrath equipment. [Atemo]
 //============================================================
 
-prontera,137,125,4	script	Cash Sales Guide#prontera::cashmall_warper	4_M_HUMAN_02,{
-	mes "[Guide]";
-	mes "Hello~";
-	mes "This guide wants to be the one to take you to a special place.";
-	mes "What kind of place is that?";
+prontera,137,125,4	script	캐쉬 판매 안내인#prontera::cashmall_warper	4_M_HUMAN_02,{
+	mes "[안내인]";
+	mes "안녕하십니까~";
+	mes "저는 여러분을 특별한 장소로";
+	mes "안내해 드리는 안내인입니다.";
+	mes "그곳이 어떤 곳이냐구요?";
 	next;
-	mes "[Guide]";
-	mes "It's a place full of mysterious items to collect and sell.";
-	mes "To buy stuff there you need special money.";
+	mes "[안내인]";
+	mes "그곳에는 신비한 아이템을 가득";
+	mes "모아놓고 파는 곳이지요";
+	mes "다만 그곳에서 물건을 사기";
+	mes "위해서는 특별한 돈이 필요하죠";
 	next;
-	mes "[Guide]";
-	mes "So, are you ready to go there?";
+	mes "[안내인]";
+	mes "그럼 그곳으로 가실 준비가 되셨습니까?";
 	next;
-	if (select( "Yes", "No" ) == 2) {
-		mes "[Guide]";
-		mes "Okay~";
-		mes "But don't get frustrated.";
-		mes "There's always more chances~";
+	if (select( "예", "아니오" ) == 2) {
+		mes "[안내인]";
+		mes "저런~";
+		mes "하지만 좌절하지 마십시오.";
+		mes "기회는 아직 있으니까요~";
 		close;
 	}
-	mes "[Guide]";
-	mes "Yeah~ You're really ready.";
-	mes "Well then, get some good stuff~";
-	mes "Oops, I forgot. When you come out be sure to come back here.";
-	mes "Rember this~";
+	mes "[안내인]";
+	mes "네~ 정말 준비가 철저하시군요.";
+	mes "자 그럼 좋은 물건 구하시기 바랍니다~";
+	mes "아참 이걸 빼먹었군요. 나오실때는";
+	mes "다시 이곳으로 나오게 되니 꼭";
+	mes "기억해두세요~";
 	close2;
 	setarray .@maparray$[0], "prontera", "morocc", "moc_ruins", "geffen", "payon", "lighthalzen", "rachel";
 	.@return = inarray(.@maparray$[0], strcharinfo(3));
@@ -50,24 +55,27 @@ payon,164,157,4	duplicate(cashmall_warper)	Cash Sales Guide#payon	4_M_HUMAN_02
 lighthalzen,206,144,4	duplicate(cashmall_warper)	Cash Sales Guide#lighthalzen	4_M_HUMAN_02
 rachel,128,144,4	duplicate(cashmall_warper)	Cash Sales Guide#rachel	4_M_HUMAN_02
 
-itemmall,21,45,4	script	Exit Guide#cashmall_exit	4_M_HUMAN_02,{
-	mes "[Guide]";
-	mes "Have you had a good time?";
-	mes "Thank you very much for using our item mall.";
-	mes "We will continue to bring you valuable items.";
+itemmall,21,45,4	script	출구 안내인#cashmall_exit	4_M_HUMAN_02,{
+	mes "[안내인]";
+	mes "좋은 시간 되셨습니까?";
+	mes "저희 아이템몰을 이용해주셔서 정말";
+	mes "감사합니다.";
+	mes "앞으로도 좋은 아이템을 가지고";
+	mes "찾아뵙도록 하겠습니다";
 	next;
-	mes "[Guide]";
-	mes "Would you like to return from where you came from?";
+	mes "[안내인]";
+	mes "그럼 오셨던 곳으로 돌아가시겠습니까?";
 	next;
-	if (select( "Yes", "No" ) == 2) {
-		mes "[Guide]";
-		mes "There are still more things to see.";
-		mes "Have a good time.";
+	if (select( "예", "아니오" ) == 2) {
+		mes "[안내인]";
+		mes "아직 더 사실 물건이 있으신거군요.";
+		mes "그럼 좋은 시간 되십시오.";
 		close;
 	}
-	mes "[Guide]";
-	mes "Thank you for coming.";
-	mes "I'll send you back from where you came from.";
+	mes "[안내인]";
+	mes "이용해주셔서 감사합니다.";
+	mes "그럼 오셨던 곳으로 다시";
+	mes "보내드리겠습니다.";
 	close2;
 	switch(cashmall_return) {
 		default:
@@ -105,114 +113,123 @@ itemmall,21,45,4	script	Exit Guide#cashmall_exit	4_M_HUMAN_02,{
 	end;
 }
 
-itemmall,41,53,3	script	Cat Hand Salesman Macaroon#cashmall	4_M_MERCAT1,{
-	mes "[Macaroon]";
-	mes "Welcome!";
-	mes "Today doesn't come every day!";
-	mes "Things to see today~ Voila!";
-	mes "You can only exchange with " + mesitemlink( 1000274 ) + "!";
-	mes "Feel free to choose!";
+itemmall,41,53,3	script	고양이손 판매원 마카롬#cashmall	4_M_MERCAT1,{
+	mes "[마카롬]";
+	mes "어서오십셩!";
+	mes "날이면 날마다 오는 것이 아니에용!";
+	mes "오늘 보실 물건들은~ 짜잔!";
+	mes mesitemlink( 1000274 ) + "으로만";
+	mes "교환하실 수 있답니다!";
+	mes "마음껏 골라보십셩!";
 	next;
-	switch( select( "3-1st Job Group Skill Shadow", "3-2nd Job Group Skill Shadow", "Extended Job Group Skill Shadow", "General Shadow by Occupation", "Shadow Cube", "Smelting, Modification, Useful Items", "Drop Box", "Spellbook" ) ){
+	switch( select( "3-1차 직업군 스킬 쉐도우", "3-2차 직업군 스킬 쉐도우", "확장 직업군 스킬 쉐도우", "직업별 일반 쉐도우", "쉐도우 큐브", "제련,개조,유용한 물품", "뚝딱 상자", "마법서" ) ){
 		case 1:
-			mes "[Macaroon]";
-			mes "^FF00663-1st Job Group Skill Shadow^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF00663-1차 직업군 스킬 쉐도우^000000";
+			mes "말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon01";
 			end;
 
 		case 2:
-			mes "[Macaroon]";
-			mes "^FF00663-2nd Job Group Skill Shadow^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF00663-2차 직업군 스킬 쉐도우^000000";
+			mes "말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon02";
 			end;
 
 		case 3:
-			mes "[Macaroon]";
-			mes "^FF0066Extended Job Group Skill Shadow^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066확장 직업군 스킬 쉐도우^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon03";
 			end;
 
 		case 4:
-			mes "[Macaroon]";
-			mes "^FF0066General Shadow by Occupation^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066직업별 일반 쉐도우^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon04";
 			end;
 
 		case 5:
-			mes "[Macaroon]";
-			mes "^FF0066Shadow Cube^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066쉐도우 큐브^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon05";
 			end;
 
 		case 6:
-			mes "[Macaroon]";
-			mes "^FF0066Smelting, Modification, Useful Items^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066제련,개조,유용한 물품^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon06";
 			end;
 
 		case 7:
-			mes "[Macaroon]";
-			mes "^FF0066Drop Box^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066뚝딱상자들^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon07";
 			end;
 
 		case 8:
-			mes "[Macaroon]";
-			mes "^FF0066Spellbook^000000 you say!";
-			mes "Here they are!";
+			mes "[마카롬]";
+			mes "^FF0066마법서^000000 말씀이시지요!";
+			mes "요런 것들이 있습죠!";
 			close2;
 			callshop "CachuaCoupon08";
 			end;
 	}
 }
 
-itemmall,24,77,4	script	Blacksmith Basta#pr	4_M_DWARF,{
+itemmall,24,77,4	script	대장장이 바스타#pr	4_M_DWARF,{
 	if( !getbattleflag( "feature.refineui" ) ){
 		end;
 	}
 
-	mes "[Blacksmith Basta]";
-	mes "I have taken over the work of Mighty Hammer, Brock and the Shadow Blacksmith. I will be busy from now on.";
+	mes "[대장장이 바스타]";
+	mes "마이트해머, 브로크 그리고 쉐도우";
+	mes "대장장이의 일까지 내가 다 떠맡게";
+	mes "되었네. 앞으로 바빠지겠구먼";
 	close2;
 	refineui();
 	end;
 }
 
-itemmall,27,77,4	script	Mighty Hammer#im	4_M_DWARF,{
-	mes "[Blacksmith Mighty Hammer]";
-	mes "If it is about refining, ask Basta. I am retired.";
+itemmall,27,77,4	script	대장장이 마이티 해머#im	4_M_DWARF,{
+	mes "[대장장이 마이티 해머]";
+	mes "제련이라면 이제 바스타에게 의뢰하게.";
+	mes "난 은퇴했으니까...";
 	close;
 }
 
-itemmall,24,74,5	script	Blacksmith Brock#im	4_M_HUMAN_01,{
-	mes "[Blacksmith Brock]";
-	mes "I am retired now. If it is about refining, make a request to Basta over there.";
+itemmall,24,74,5	script	대장장이 브로크#im	4_M_HUMAN_01,{
+	mes "[대장장이 브로크]";
+	mes "난 이제 은퇴했어. 제련이라면 저기";
+	mes "바스타에게 의뢰를 하도락 해.";
 	close;
 }
 
-itemmall,19,74,5	script	Stylist#cash	91,{
+itemmall,19,74,5	script	스타일리스트#cash	91,{
 	if( getbattleflag( "feature.stylist" ) ){
-		mes "[Jeremy]";
-		mes "Hello cutie~";
-		mes "I would like you to call me Head Stylist Jeremy.";
+		mes "[제레미]";
+		mes "안녕 귀염둥이~";
+		mes "날 수석 스타일리스트 제레미라고";
+		mes "불러줬으면 좋겠군.";
 		next;
-		if( select( "Change style:End conversation" ) == 2 ){
-			mes "[Jeremy]";
-			mes "My shop is always open, so please come back anytime.";
+		if( select( "새롭게 스타일을 변경한다:대화를 마친다" ) == 2 ){
+			mes "[제레미]";
+			mes "항상 내 샵은 열려있으니까 언제라도";
+			mes "다시 방문해줘";
 			close;
 		}
 		close2;
@@ -328,4 +345,293 @@ itemmall,19,74,5	script	Stylist#cash	91,{
 	mes "new hair? Well, I hope";
 	mes "to see you again. Take care!";
 	close;
+}
+
+itemmall,41,55,3	script	고양이손 판매원 뚱카롬#cashmall	4_M_MERCAT1,{
+	mes "[뚱카롬]";
+	mes "어서오세냥!";
+	mes "특별한 쿠폰을 가지고 있다면 원하시는 상품으로 교환해 드린다옹!";
+	mes "교환 가능한 쿠폰들이라옹.";
+	mes "^i(1001583) ^i(1001581) ^i(1001584) ^i(1001588) ^i(1001809) ^i(1001810)";
+	next;
+	switch( select( "선악의 부츠 교환", "선악의 관 교환", "선의 무기 교환", "악의 무기 교환", "진노의 무기 교환", "진노의 관 교환", "취소" ) ) {
+	case 1:
+		mes "[뚱카롬]";
+		mes "선악의 부츠 교환이다옹. 좋은";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_1" );
+		end;
+	case 2:
+		mes "[뚱카롬]";
+		mes "선악의 관 교환이다옹. 멋진";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_2" );
+		end;
+	case 3:
+		mes "[뚱카롬]";
+		mes "선의 무기 교환이다옹. 훌륭한";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_3" );
+		end;
+	case 4:
+		mes "[뚱카롬]";
+		mes "악의 무기 교환이다옹. 탁월한";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_4" );
+		end;
+	case 5:
+		mes "[뚱카롬]";
+		mes "진노의 무기 교환이다옹. 탁월한";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_5" );
+		end;
+	case 6:
+		mes "[뚱카롬]";
+		mes "진노의 관 교환이다옹. 탁월한";
+		mes "선택이야옹~!";
+		close2;
+		callshop( "barter_mall_coupon_6" );
+		end;
+	case 7:
+		mes "[뚱카롬]";
+		mes "찾는 물건이 없냐옹? 다음에";
+		mes "찾아주세옹.";
+		close;
+	}
+}
+
+-	marketshop	Nyarom_Zeny	-1,23100:1000000:99999,23170:1000000:99999,23175:1000000:99999,23289:1000000:99999,23290:1000000:99999,23291:1000000:99999,23308:1000000:99999,23311:1000000:99999,23545:1000000:99999,23547:1000000:99999,23546:500000:99999,9551:1000000:99999,9550:1000000:99999,100009:1000000:99999,100481:1000000:99999,100579:500000:99999,100580:1000000:99999,100710:1000000:99999,100744:30000000:99999,100745:30000000:99999,100823:1000000:99999,102277:1000000:99999,102278:1000000:99999,100488:1000000:99999,100487:1000000:99999,102342:1000000:99999,102343:1000000:99999,102344:1000000:99999,102677:1000000:99999,102676:1000000:99999
+
+itemmall,41,50,3	script	고양이손 판매원 냐롬#cashmall	4_M_MERCAT1,{
+	mes "[냐롬]";
+	mes "어서 오세요, 어서오세요.";
+	mes "고양이손 상점 아이템몰점입니다.";
+	mes "당신에게 필요한 그 아이템, 바로";
+	mes "여기있습니다.";
+	mes "부디 원하시는 물건이 있기를!";
+	next;
+	switch( select( "냥다래 열매로 구하기", "제니(zeny)로 구매하기","[카츄아]마일리지 쿠폰으로 구매하기","위대한 영웅의 용맹과 지혜 교환") ){
+		case 1:
+			mes "[냐롬]";
+			mes "약간의 냥다래 열매로";
+			mes "특별한 아이템을 만나 보세요.";
+			next;
+			mes "^FF0000[경고]^000000";
+			mes "^FF0000낭다래 열매로 아이템을 교환 하는 상점입니다.^000000";
+			mes "^FF0000교환된 아이템은 청약철회대상에 포함되지 않으며, 낭다래 열매로의 재교환 역시 불가능합니다.^000000";
+			next;
+			switch( select( "상점을 연다.", "열지 않는다.")) {
+				case 1:
+					close2;
+					callshop "Nyarom_Nyangvine";
+					end;
+				case 2:
+					close2;
+					break;
+			}
+		end;
+		case 2:
+			mes "[냐롬]";
+			mes "당신을 위한 특별한 아이템들입니다~!";
+			close2;
+			callshop "Nyarom_Zeny";
+		end;
+
+		case 3:
+			mes "[냐롬]";
+			mes mesitemlink( 1000274 ) + "으로 구매할 수 있는 특별한 상품들입니다!";
+			close2;
+			callshop "Nyarom_Coupon";
+		end;
+
+		case 4:
+			mes "[냐롬]";
+			mes "특별한 고객님을 위해 위대한 영웅의";
+			mes "용맹과 지혜를 준비하였습니다.";
+			close2;
+			callshop "Nyarom_Great_Hero";
+		end;
+	}
+
+OnClock0000:
+    if (gettime(DT_DAYOFWEEK) == 1)
+        npcshopupdate "Nyarom_Zeny",23100,0,99999;
+        npcshopupdate "Nyarom_Zeny",23170,0,99999;
+        npcshopupdate "Nyarom_Zeny",23175,0,99999;
+        npcshopupdate "Nyarom_Zeny",23289,0,99999;
+        npcshopupdate "Nyarom_Zeny",23290,0,99999;
+        npcshopupdate "Nyarom_Zeny",23291,0,99999;
+        npcshopupdate "Nyarom_Zeny",23308,0,99999;
+        npcshopupdate "Nyarom_Zeny",23311,0,99999;
+        npcshopupdate "Nyarom_Zeny",23545,0,99999;
+        npcshopupdate "Nyarom_Zeny",23547,0,99999;
+        npcshopupdate "Nyarom_Zeny",23546,0,99999;
+        npcshopupdate "Nyarom_Zeny",9551,0,99999;
+        npcshopupdate "Nyarom_Zeny",9550,0,99999;
+        npcshopupdate "Nyarom_Zeny",100009,0,99999;
+        npcshopupdate "Nyarom_Zeny",100481,0,99999;
+        npcshopupdate "Nyarom_Zeny",100579,0,99999;
+        npcshopupdate "Nyarom_Zeny",100580,0,99999;
+        npcshopupdate "Nyarom_Zeny",100710,0,99999;
+        npcshopupdate "Nyarom_Zeny",100744,0,99999;
+        npcshopupdate "Nyarom_Zeny",100745,0,99999;
+        npcshopupdate "Nyarom_Zeny",100823,0,99999;
+        npcshopupdate "Nyarom_Zeny",102277,0,99999; //로키의 조언(근접물리)
+        npcshopupdate "Nyarom_Zeny",102278,0,99999; //로키의 동전
+        npcshopupdate "Nyarom_Zeny",100488,0,99999; //로키의 조언(마법)
+        npcshopupdate "Nyarom_Zeny",100487,0,99999; //로키의 하얀색 동전
+        npcshopupdate "Nyarom_Zeny",102342,0,99999; //로키의 조언(원거리물리)
+        npcshopupdate "Nyarom_Zeny",102343,0,99999; //로키의 검정색 동전
+        npcshopupdate "Nyarom_Zeny",102344,0,99999; //선풍키 개조 키트EX
+        npcshopupdate "Nyarom_Zeny",102677,0,99999; //로키의 조언(방어)
+        npcshopupdate "Nyarom_Zeny",102676,0,99999; //로키의 황금색 동전
+    end;
+}
+
+itemmall,41,46,3	script	고양이손 선물포장사#cashmall	4_XMAS_CAT4,{
+	mes "[고양이손 선물포장사]";
+	mes "반갑냐~ 포장하고 싶은 ^0000FF제련 보장권^000000";
+	mes "이 있는거냐?";
+	next;
+	switch( select( "무기 보장권 포장의뢰를 맡긴다.", "방어구 보장권 포장의뢰를 맡긴다.", "포장을 해야 하는 이유","손을 흔든다.") ){
+		case 1:
+			close2;
+			callshop "Weapon_Up_Box";
+			end;
+
+		case 2:
+			close2;
+			callshop "Armor_Up_Box";
+			end;
+
+		case 3:
+			mes "[고양이손 선물포장사]";
+			mes "냐? 정말 몰라서 물어보는 거냐?";
+			next;
+			mes "[고양이손 선물포장사]";
+			mes "유행에 뒤떨어진 인간이다냐~ ^0000FF제련";
+			mes "보장권^000000은 다른 모험가들과는 거래가";
+			mes "불가능한 귀한 티켓이다냐~";
+			next;
+			mes "[고양이손 선물포장사]";
+			mes "이 귀한 티켓은 음지에서 남모르게";
+			mes "거래되어 왔다냐~ 고양이손 상단은";
+			mes "바로 그 점에 주목했다냐~";
+			next;
+			mes "[고양이손 선물포장사]";
+			mes "그래서냐~ 수수료로 ^FF0000낭다래 열매^000000 주면";
+			mes "다른 모험가와 정.상.적.인. 거래가";
+			mes "가능하도록 예쁘게 포장해준다냐~";
+		close;
+
+		case 4:
+			mes "[고양이손 선물포장사]";
+			mes "그래 잘 가라냐~";
+		close;
+	end;
+	}
+}
+
+
+itemmall,31,70,2	script	지키#cash	4_M_GENIE,{
+	emotion ET_OK, getnpcid(0, "지키#cash");
+	mes "[지키]";
+	mes "난 열쇠의 요정 지키.";
+	mes "목록의 물건에 특별한 인챈트가 필요하다면, 내 즐거운 마음으로 기꺼이 돕겠네.";
+	next;
+	set .@menu$,"필요 없다.";
+	set .@count,0;
+	for(set .@i,0; .@i<getarraysize(.items); set .@i,.@i+1)
+		if(countitem(.items[.@i])) {
+			set .@menu$, .@menu$ + ":▶ " + getitemname(.items[.@i]);
+			set .displayed_items[.@count],.@i;
+			set .@count,.@count+1;
+		}
+	set .@choice,select(.@menu$);
+	if(.@choice == 1) {
+		emotion ET_HUM, getnpcid(0, "지키#cash");
+		mes "[지키]";
+		mes "그것참 안타까운 일이로군.";
+		close;
+	}
+	set .@choice,.displayed_items[.@choice-2];
+	emotion ET_SHY, getnpcid(0, "지키#cash");
+	mes "[지키]";
+	mes "원하는 결과가 함께하기를..";
+	item_enchant(.enchant_id[.@choice]);
+	close;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunittitle .@npc_id, "열쇠의 요정";
+	setunitdata .@npc_id, UNPC_GROUP_ID, 27;
+	setarray .items[0],460020,490163,470094,19143,19146,19147,//매드바니-LT,영웅의 휘장,영웅의 부츠-LT,포링 풍선,마린 풍선,드롭프스 풍선
+		19148,19149,19150,19151,19152,19153,                  //산타포링 풍선,포포링 풍선,메탈링 풍선,데빌링 풍선,엔젤링 풍선,고스트링 풍선
+		19154,420017,420018,420019,420020,420021,             //아크엔젤링 풍선,세계수의 어린잎(힘),손재주,민첩,행운,체력
+		420022,400190,400234,400217,400236,400231,            //지력,헬름 오브 페이스 II(아크비숍),제네릭,길로틴크로스,카게로우&오보로,미케닉
+		400229,400199,400238,400201,400227,400192,            //민스트럴&원더러,레인저,리벨리온,로얄가드,룬나이트,쉐도우 체이서
+		400219,400240,400242,400244,400181,400179,            //소서러,소울리퍼,성제,
+		400189,400233,400216,400235,400230,400228,
+		400198,400237,400200,400226,400191,400218,
+		400239,400241,400243,400180,400178,400135,
+		400142,400145,400151;
+	setarray .enchant_id[0],15,20,21,22,22,22,22,22,
+		22,22,22,22,22,23,23,23,23,23,23,25,25,25,25,25,
+		25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,
+		25,25,25,25,25,25,25,25,25,25,25,25,25,32,32,32,
+		32;
+	end;
+}
+
+
+itemmall,41,63,3	script	쉐도우 전용 마법서#shad	4_4JOB_PHANTOMBOOK1,{
+	npctalk "쉐도우 장비에 새로운 힘을 부여해요~!", "쉐도우 전용 마법서#shad";
+	item_reform(103309);
+	end;
+}
+
+
+itemmall,35,70,2	script	시키#cash	4_F_GENIE,{
+	emotion ET_SHY, getnpcid(0, "시키#cash");
+	mes "[시키]";
+	mes "반가워요. 나는 열쇠의 여신 시키.";
+	mes "일 때문에 집에 오지 않는 남편이 보고 싶어 찾아왔어요. 내가 도울 일이 있나요?";
+	next;
+	set .@menu$,"필요 없다.";
+	set .@count,0;
+	for(set .@i,0; .@i<1; set .@i,.@i+1)
+		if(countitem(.items[.@i])) {
+			set .@menu$, .@menu$ + ":▷ 타임 갭 웨폰 인챈트";
+			set .@count,.@count+1;
+		}
+	set .@choice,select(.@menu$);
+	if(.@choice == 1) {
+		emotion ET_SURPRISE, getnpcid(0, "시키#cash");
+		mes "[시키]";
+		mes "아쉬운 일이네요.";
+		close;
+	}
+	set .@choice,.displayed_items[.@choice-2];
+	emotion ET_SHY, getnpcid(0, "시키#cash");
+	mes "[시키]";
+	mes "그대가 원하는 결과가 함께하기를..";
+	item_enchant(.enchant_id[.@choice]);
+	close;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunittitle .@npc_id, "열쇠의 여신";
+	setunitdata .@npc_id, UNPC_GROUP_ID, 27;
+	setarray .items[0],530060,640054,800042,620043,580075,
+		570075,550152,500107,510165,550155,
+		630049,550156,540094,28785,550159,
+		560072,540096,28789,700108;
+	setarray .enchant_id[0],150,150,150,150,150,
+		150,150,150,150,150,
+		150,150,150,150,150,
+		150,150,150,150;
+	end;
 }

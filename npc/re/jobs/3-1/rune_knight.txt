@@ -1,81 +1,67 @@
 //===== rAthena Script =======================================
 //= Rune Knight Job Quest
 //===== By: ==================================================
-//= L0ne_W0lf, Muad_Dib
-//===== Current Version: =====================================
-//= 1.6
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= Job change Quest from Knight / Lord Knight -> Rune Knight.
-//===== Additional Comments: =================================
-//= 1.0 First version.
-//= 1.1 Added forgotten Header. [Masao]
-//= 1.2 Added Energy Rune item reward. [Masao]
-//= 1.3 Updated script, optimized. [Euphy]
-//= 1.3a Added 'npcskill' command. [Euphy]
-//= 1.4 Fixed a few bugs. [Euphy]
-//= 1.4a Moved Kafra to main file. [Euphy]
-//= 1.5 Added GM management function. [Euphy]
-//= 1.6 Added VIP features. [Euphy]
+//한글번역 스카이러브
 //============================================================
 
-prt_in,162,24,3	script	Splendid-Looking Knight	470,2,2,{
-	mes "[Rune Knight Manuel]";
+prt_in,162,24,3	script	화려한 차람의 기사	470,{
+	mes "[화려한 차림의 기사]";
 	if (Class == Job_Rune_Knight || Class == Job_Rune_Knight_T || Class == Job_Baby_Rune_Knight) {
 		mes "You are now a member of our select brethren. I can still remember when I first met you.";
 		next;
-		mes "[Rune Knight Manuel]";
+		mes "[화려한 차림의 기사]";
 		mes "Strive to live the way of the sword with honor...";
 		next;
-		mes "[Rune Knight Manuel]";
+		mes "[화려한 차림의 기사]";
 		mes "Cheers to our new future...";
 		close;
 	}
 	if (job_rune_edq == 0) {
-		mes "There are many paths one can take in the world. Most people can see their path but don't really follow it...";
+		mes "세상에는 여러가지 길이 있지... 수";
+		mes "많은 길 중에 자신의 가야할 길을 정확히 찾아 떠나는 사람은 많지 않지만 말이야...";
 		next;
-		mes "[Rune Knight Manuel]";
-		mes "Anyway the drinks here are really good. Would you like to have one?";
+		mes "[화려한 차림의 기사]";
+		mes "그너저나 이 곳의 술 맛은 정말 괜찮군.";
+		mes "어때 자네도 한 잔 하겠나?";
 		next;
-		if(select("Sure, let's have a drink.:I refuse.") == 2) {
-			mes "[Rune Knight Manuel]";
-			mes "Are you sure? You don't know the true elegance of these drinks...";
+		if(select("좋지요, 같이 한 잔 마십시다.:사양 하겠습니다.") == 2) {
+			mes "[화려한 차림의 기사]";
+			mes "그런가?... 자네 풍류를 모르는 군...";
 			close;
 		}
-		mes "[Rune Knight Manuel]";
+		mes "[화려한 차림의 기사]";
 		if (BaseJob == Job_Knight) {
 			mes "You walk the way of sword too don't you? Then we can understand each other. Drinks taste better when it's with a fellow Swordman.";
 			next;
-			mes "[Rune Knight Manuel]";
+			mes "[화려한 차림의 기사]";
 			mes "I'll buy this round.";
 			mes "A toast to friendship~";
 			next;
-			mes "[Rune Knight Manuel]";
+			mes "[화려한 차림의 기사]";
 			if (BaseLevel > 98 && JobLevel > 49) {
 				mes "In my opinion you seem to be ready to start a new way...";
 				next;
-				mes "[Rune Knight Manuel]";
+				mes "[화려한 차림의 기사]";
 				mes "Walking the way of the sword is a perpetual battle. From now on you may have a rough journey ahead of you...";
 				next;
-				mes "[Rune Knight Manuel]";
+				mes "[화려한 차림의 기사]";
 				mes "If you want to walk on your new way and surpass your current limits, I'm willing to help you.";
 				next;
-				mes "[Rune Knight Manuel]";
+				mes "[화려한 차림의 기사]";
 				mes "The true way of a Swordman who learned harmony to break the limit of a sword is a Rune Knight.";
 				next;
-				mes "[Rune Knight Manuel]";
+				mes "[화려한 차림의 기사]";
 				mes "Won't you join our brethren? You look like you're fully qualified to become one of us.";
 				next;
-				mes "[Rune Knight Manuel]";
+				mes "[화려한 차림의 기사]";
 				mes "If you are interested, I'll introduce you to the masters who will guide you to the way of the Rune Knight with my recommendation.";
 				next;
 				switch(select("I am not ready yet.:I'm ready to be a Rune Knight.")) {
 				case 1:
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "Right. Every challenge always needs preparation. Okay, I'll wait for you.";
 					next;
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "Of course, I would only accept you if you are one hundred percent sure of your conviction to become a Rune Knight.";
 					close;
 				case 2:
@@ -85,50 +71,51 @@ prt_in,162,24,3	script	Splendid-Looking Knight	470,2,2,{
 						setquest 3200;
 						next;
 					}
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "You're sure now?";
 					mes "Let me send a dispatch to my comrades that you are willing to join our ranks.";
 					next;
 					set job_rune_edq,1;
 					setquest 3200;
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "You know the place called Glast Heim? There's a Rune Knight waiting for you there, he will guide you to the entrance of Glast Heim Tower.";
 					next;
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "My name is Manuel. I am called the Rune Knight of Brilliance. When you tell him that you are a Rune Knight candidate with my recommendation, he will handle the rest.";
 					next;
-					mes "[Rune Knight Manuel]";
+					mes "[화려한 차림의 기사]";
 					mes "I will wait for the day that you become our comrade as a true Rune Knight.";
 					close;
 				}
 			}
 			mes "If you continually walk the way of the sword, you will eventually feel the limits of your powers. Like myself before...";
 			next;
-			mes "[Rune Knight Manuel]";
+			mes "[화려한 차림의 기사]";
 			mes "When the time comes there will be a way to help you surpass that limit. Until the day that your strength has grown comes, we can at least still have a drink together.";
 			next;
-			mes "[Rune Knight Manuel]";
+			mes "[화려한 차림의 기사]";
 			mes "A toast to the day that your strength can withstand the powers of a Rune Knight!";
 			close;
 		}
-		mes "I believe that the wind of change is not always a good one.";
+		mes "모든 것에 불어오는 변화의 바람이 꼭";
+		mes "모든 것에 좋은 것만은 아닐거라 믿는다네.";
 		next;
-		mes "[Rune Knight Manuel]";
-		mes "Just like the taste of this drink. I wish the taste of this drink is kept here forever.";
+		mes "[화려한 차림의 기사]";
+		mes "바로 이 술 맛처럼 말이지 이 곳의 술 맛은 쭉 영원히 지켜졌으면 하는 바램이야.";
 		close;
 	} else if (job_rune_edq == 1) {
 		mes "The Rune Knight is waiting for you at Glast Heim. He will guide you to the entrance of Glast Heim Tower.";
 		next;
-		mes "[Rune Knight Manuel]";
+		mes "[화려한 차림의 기사]";
 		mes "Tell him that you are a candidate to be a Rune Knight and he will handle the rest.";
 		next;
-		mes "[Rune Knight Manuel]";
+		mes "[화려한 차림의 기사]";
 		mes "I will wait for the day you become our comrade as a true Rune Knight.";
 		close;
 	}
 	mes "Don't you have things to do right now?";
 	next;
-	mes "[Rune Knight Manuel]";
+	mes "[화려한 차림의 기사]";
 	mes "No? Well then never mind.";
 	mes "Don't you love the smell of alcohol?";
 	close;

@@ -15,27 +15,29 @@
 //==================================================
 // ama_dun01 - Tatami Maze
 //==================================================
-ama_dun01,0,0	monster	Miyabi Doll	1404,91,5000
-ama_dun01,0,0	monster	Firelock Soldier	1403,63,5000
-ama_dun01,0,0	monster	Shinobi	1401,2,5000
+ama_dun01,0,0	monster	미야비 인형	1404,91,5000
+ama_dun01,0,0	monster	구식 조총병	1403,63,5000
+ama_dun01,0,0	monster	시노비	1401,2,5000
 
 //==================================================
 // ama_dun02 - Battle Field in the Underground Forest
 //==================================================
-ama_dun02,0,0	monster	Poison Toad	1402,35,5000
-ama_dun02,0,0	monster	Firelock Soldier	1403,20,5000
-ama_dun02,0,0	monster	Horong	1129,10,5000
-ama_dun02,0,0	monster	Miyabi Doll	1404,5,5000
-ama_dun02,0,0	monster	Shinobi	1401,2,5000
-ama_dun02,0,0	monster	The Paper	1375,1,5000
+ama_dun02,0,0	monster	독두꺼비	1402,35,5000
+ama_dun02,0,0	monster	구식 조총병	1403,20,5000
+ama_dun02,0,0	monster	호롱	1129,10,5000
+ama_dun02,0,0	monster	미야비 인형	1404,5,5000
+ama_dun02,0,0	monster	시노비	1401,2,5000
+ama_dun02,0,0	monster	더 페이퍼	1375,1,5000
 
 //==================================================
 // ama_dun03 - Amatsu Underground Shrine
 //==================================================
-ama_dun03,0,0	monster	Shinobi	1401,65,5000
-ama_dun03,0,0	monster	Tengu	1405,65,5000
-ama_dun03,0,0	monster	Firelock Soldier	1403,29,5000
-ama_dun03,0,0	monster	The Paper	1375,23,5000
-ama_dun03,0,0	monster	Mimic	1191,5,5000
-ama_dun03,0,0	monster	Miyabi Doll	1404,1,5000
-ama_dun03,0,0,0,0	boss_monster	Samurai Specter	1492,1,5460000,600000,0
+ama_dun03,0,0	monster	시노비	1401,65,5000
+ama_dun03,0,0	monster	천구	1405,65,5000
+ama_dun03,0,0	monster	구식 조총병	1403,29,5000
+ama_dun03,0,0	monster	더 페이퍼	1375,23,5000
+ama_dun03,0,0	monster	미믹	1191,5,5000
+ama_dun03,0,0	monster	미야비 인형	1404,1,5000
+ama_dun03,0,0,0,0	boss_monster	원령무사	1492,1,5460000,600000,0
+
+

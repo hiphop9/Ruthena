@@ -14,23 +14,23 @@
 //==================================================
 // mjo_dun01 - Mjolnir Dead Pit
 //==================================================
-mjo_dun01,0,0	monster	Tarou	1175,63,5000
-mjo_dun01,0,0	monster	Familiar	1005,31,5000
-mjo_dun01,0,0	monster	Martin	1145,21,5000
+mjo_dun01,0,0	monster	타로우	1175,63,5000
+mjo_dun01,0,0	monster	퍼밀리어	1005,31,5000
+mjo_dun01,0,0	monster	마르틴	1145,21,5000
 
 //==================================================
 // mjo_dun02 - Mjolnir Dead Pit
 //==================================================
-mjo_dun02,0,0	monster	Martin	1145,71,5000
-mjo_dun02,0,0	monster	Giearth	1121,41,5000
-mjo_dun02,0,0	monster	Drainliar	1111,23,5000
-mjo_dun02,0,0	monster	Skeleton Worker	1169,23,5000
+mjo_dun02,0,0	monster	마르틴	1145,71,5000
+mjo_dun02,0,0	monster	가이아스	1121,41,5000
+mjo_dun02,0,0	monster	드레인리어	1111,23,5000
+mjo_dun02,0,0	monster	스켈 워커	1169,23,5000
 
 //==================================================
 // mjo_dun03 - Mjolnir Dead Pit
 //==================================================
-mjo_dun03,0,0	monster	Skeleton Worker	1169,78,5000
-mjo_dun03,0,0	monster	Myst	1151,39,5000
-mjo_dun03,0,0	monster	Giearth	1121,5,5000
-mjo_dun03,0,0	monster	Martin	1145,5,5000
-mjo_dun03,0,0	monster	Cramp	1209,3,5000
+mjo_dun03,0,0	monster	스켈 워커	1169,78,5000
+mjo_dun03,0,0	monster	미스트	1151,39,5000
+mjo_dun03,0,0	monster	가이아스	1121,5,5000
+mjo_dun03,0,0	monster	마르틴	1145,5,5000
+mjo_dun03,0,0	monster	크램프	1209,3,5000

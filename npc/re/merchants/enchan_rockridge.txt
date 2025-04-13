@@ -517,4 +517,4 @@ OnSun0000:	// custom restock, no official info
 	end;
 }
 
-har_in01,34,84,3	shop	Tool Dealer#rockridge00	1_F_03,611:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,610:-1
+har_in01,34,84,3	shop	도구 상인#rockridge00	1_F_03,611:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,610:-1

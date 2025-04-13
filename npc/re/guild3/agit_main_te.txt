@@ -156,14 +156,14 @@ OnAgitBreak:
 			setcastledata .@map$,.@i,0;
 	}
 
-	mapannounce .@map$,"Emperium has been destroyed.",bc_map,"0x00FF00",FW_BOLD,20,0,40;
+	mapannounce .@map$,"제국은 파괴되었습니다.",bc_map,"0x00FF00",FW_BOLD,20,0,40;
 	maprespawnguildid .@map$,.@guild_id,2;// Respawn all but new castle-occupants, don't remove monsters.
 
 	sleep 500;
 	if (agitcheck3())
 		donpcevent strnpcinfo(0) +"::OnEmpSpawn";
 	sleep 7000;
-	announce "The [" + getcastlename(.@map$) + "] castle has been conquered by the [" + getguildName(.@guild_id) + "] guild.",bc_all|bc_woe;
+	announce "[" + getcastlename(.@map$) + "] 성이 [" + getguildName(.@guild_id) + "] 길드에 의해 점령되었습니다.",bc_all|bc_woe;
 	end;
 
 OnGuildBreak:
@@ -174,7 +174,7 @@ OnGuildBreak:
 	disablenpc "Kafra Employee#"+ .@tmp$;
 	setcastledata .@map$,CD_GUILD_ID,0;
 	sleep 7000;
-	announce "Guild Base [" + getcastlename(.@map$) + "] has been abandoned.",bc_all;
+	announce "길드 기지 [" + getcastlename(.@map$) + "] 버려졌다.",bc_all;
 	donpcevent strnpcinfo(0) +"::OnAgitInit3";
 	end;
 
@@ -183,9 +183,9 @@ S_Message:
 	.@guild_id = getcastledata(.@map$,CD_GUILD_ID);
 	
 	if (.@guild_id)
-		announce "The [" + getcastlename(.@map$) + "] castle is occupied by the [" + getguildname(.@guild_id) + "] guild.",bc_all,"0xFF0000",FW_NORMAL,10;
+		announce "The [" + getcastlename(.@map$) + "] 성은 다음 사람이 점령하고 있다. [" + getguildname(.@guild_id) + "] 길드.",bc_all,"0xFF0000",FW_NORMAL,10;
 	else
-		announce "The [" + getcastlename(.@map$) + "] castle is currently unoccupied.", bc_all,"0xFF0000",FW_NORMAL,10;
+		announce "The [" + getcastlename(.@map$) + "] 성은 현재 비어있습니다.", bc_all,"0xFF0000",FW_NORMAL,10;
 	if (compare( .@map$,"te_alde" ))
 		.@string$ = "alde0"+ charat( .@map$,getstrlen(.@map$)-1 );
 	else
@@ -386,8 +386,8 @@ function GuardianData;
 
 	case 4:
 		mes .@npc_name$;
-		mes "Will you summon a Guardian? It'll be a protector to defend us loyally.";
-		mes "Please select a guardian to defend us.";
+		mes "가디언을 소환하시겠습니까? 우리를 충성스럽게 지켜주는 보호자가 될 것입니다.";
+		mes "우리를 지켜줄 수호자를 선택해주세요.";
 		next;
 		GuardianData( .@mob_id, .@x, .@y, .@name$ );
 		for ( .@i = 0; .@i < MAX_GUARDIANS ; .@i++ ) {
@@ -398,11 +398,11 @@ function GuardianData;
 		}
 		.@s = select(.@menu$) -1;
 		mes .@npc_name$;
-		mes "Will you summon the chosen guardian? 10,000 zeny are required to summon a Guardian.";
+		mes "선택받은 수호자를 소환하시겠습니까? 가디언을 소환하려면 10,000제니가 필요합니다.";
 		next;
 		if (select( "Summon","Cancel" ) == 2) {
 			mes .@npc_name$;
-			mes "I did as you ordered. But please remember if you the have money to spare, it'll be better to set it up.";
+			mes "나는 당신이 명령한 대로 했습니다. 하지만 돈이 여유가 있다면 설정하는 것이 더 나을 것이라는 점을 기억하세요.";
 			close;
 		}
 		mes .@npc_name$;
@@ -438,7 +438,7 @@ function GuardianData;
 			if (select( "Fire","Cancel" ) == 2) {
 				mes "[ Hired Kafra Employee ]";
 				mes "I'll work hard for you... Thank you!";
-				close3;
+				close;
 			}
 			mes "[ Hired Kafra Employee ]";
 			mes "Oh, my goodness! This is nonsense!";

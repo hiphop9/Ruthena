@@ -15,6 +15,7 @@
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_mapif.hpp"
@@ -73,7 +74,10 @@ std::shared_ptr<struct clan> inter_clan_fromsql(int clan_id){
 	Sql_FreeResult( sql_handle );
 
 	if( clan->max_member > MAX_CLAN ){
-		ShowWarning("Clan %d:%s specifies higher capacity (%d) than MAX_CLAN (%d)\n", clan_id, clan->name, clan->max_member, MAX_CLAN);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("클랜 %d:%s의 인원(%d)이 MAX_CLAN(%d)보다 많습니다.\n", clan_id, clan->name, clan->max_member, MAX_CLAN);
+		else
+			ShowWarning("Clan %d:%s specifies higher capacity (%d) than MAX_CLAN (%d)\n", clan_id, clan->name, clan->max_member, MAX_CLAN);
 		clan->max_member = MAX_CLAN;
 	}
 
@@ -92,9 +96,12 @@ std::shared_ptr<struct clan> inter_clan_fromsql(int clan_id){
 
 	clan_db[clan->id] = clan;
 
-	if (charserv_config.save_log)
-		ShowInfo("Clan loaded (%d - %s)\n", clan_id, clan->name);
-
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s(%d) 클랜을 로드했습니다.\n", clan->name, clan_id);
+		else
+			ShowInfo("Clan loaded (%d - %s)\n", clan_id, clan->name);
+	}
 	return clan;
 }
 

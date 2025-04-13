@@ -1,0 +1,2067 @@
+1@gl_he	mapflag	partylock
+1@gl_he	mapflag	noteleport
+1@gl_he	mapflag	nosave	SavePoint
+1@gl_he	mapflag	nomemo
+1@gl_he	mapflag	nobranch
+1@gl_he	mapflag	noicewall
+1@gl_he	mapflag	restricted	6
+
+
+glast_01,144,288,3	script	OGH Challange#glastfd	10307,{
+//入场等级设定
+		if (BaseLevel < 170){
+			mes "[OGH Challange]";
+			mes "Insufficient level";
+			close;
+		}
+//入场人数设定		
+		getpartymember getcharid(1);
+		if($@partymembercount>12){
+			mes "[OGH Challange]";
+			mes "Too many teams.";
+			close;
+		}
+		
+		
+		.@charleston_time = checkquest(12493,PLAYTIME);
+		if (.@charleston_time == 2) {
+			mes "^0000ffYou may enter Old Glast Heim challenge mode again�^000000";
+			erasequest 12493;
+			close;
+		} else  if (.@charleston_time == 0 || .@charleston_time == 1) {
+			mes "^ff0000Wait for 24 hours^000000";
+			close;
+		} else {
+			.@party_id = getcharid(1);
+			.@p_name$ = getpartyname(.@party_id);
+			.@md_name$ = "Old Glast Heim CM";
+			if (!.@party_id) {
+				mes "Please form a team.";
+				close;
+			}
+			if (getcharid(0) == getpartyleader(.@party_id,2))
+				set .@menu$, "Generate Old Glast Heim Challenge Mode:Enter Old Glast Heim Challenge Mode:Cancel";
+			else
+				set .@menu$, "Enter Old Glast Heim Challenge Mode:Cancel";
+			switch(select(.@menu$)) {
+				case 1:
+					if(instance_mapname("1@mcd") != "") {
+						mes "- An Instance cannot be oppened repeatedly. -";
+						close;
+					}
+					.@instance = instance_create(.@md_name$);
+					set getinstancevar('party_id,instance_id(IM_PARTY)),getcharid(1);					
+					if (.@instance < 0) {
+							mes "Party Name: "+.@p_name$;
+							mes "Party Leader: "+strcharinfo(0);
+							mes "^0000ff"+.@md_name$+" ^000000- Failed to create an Instance!";
+							close;
+					}
+					mes "^ff0000You may enter Old Glast Heim Challenge Mode again.^000000";
+					close;
+				case 2:		
+						if(!instance_id(IM_PARTY)){
+							mes "Instance Generated";
+							close;
+						}
+						if ( getinstancevar('Win,instance_id(IM_PARTY)) ) {
+							mes "[OGH Challange]";
+							mes "Instance has ended.";
+							close;
+						}
+					switch(instance_enter(.@md_name$)) {
+						case 0:
+							setquest 12493; //state=1
+							end;	
+						case 1:
+							mes "Only registered members can enter "+.@md_name$+".";
+							close;
+						case 2:
+							mes "Duplicate progress "+.@md_name$+" does not exist.";
+							mes "Your party leader has not open the Instance.";
+							close;
+						case 3:
+							mes "Unknown error.";
+							close;
+					}
+				case 3:
+					end;	
+			}
+		}
+
+}
+//======================================================================
+// 地图属性设置
+//======================================================================
+
+//======================================================================
+// 选择挑战难度
+//======================================================================
+1@gl_he,150,41,3	script	Oscar#glhe_mode	4_ED_OSCAR,{
+	cutin "OSCAR01.bmp",2;
+	if(getpartyleader(getcharid(1),2) == getcharid(0))
+	{
+		mes "["+strnpcinfo(1)+"]";
+		mes "There are forces of different time and space polluted here";
+		mes "twisted magic in different dimensions";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Please choose the difficulty you want to challenge carefully";
+		mes "The strength of the monsters that appear will vary depending on the selected stage";
+		mes "The rewards are also different, and the clearing time will also affect the process of the Instance";
+		mes "^888888If the monster clearing time in the left and right areas is similar, the bonus event will be triggered.^000000"; 
+		switch(select(
+			"Cancel.",
+			"Pollution Stage 1.",
+			OGH_Time >= 2 ? "Pollution Stage 2." : "",
+			OGH_Time >= 2 ? "Pollution Stage 3." : "",
+			OGH_Time >= 2 ? "Pollution Stage 4." : "",
+			OGH_Time >= 2 ? "Pollution Stage 5." : "",
+			OGH_Time >= 2 ? "Pollution Stage 6." : "",
+			OGH_Time >= 2 ? "Pollution Stage 7." : "",
+			OGH_Time >= 2 ? "Pollution Stage 8." : "",
+			OGH_Time >= 2 ? "Pollution Stage 9." : "",
+			OGH_Time >= 2 ? "Pollution Stage 10." : "" 
+				))
+		{
+			case 1:	close;
+			default:	
+			debugmes ""+@menu;
+			'mode = @menu-1;
+			debugmes ""+'mode;
+			break;
+		}
+		if('mode >= 5){
+			'Final_mobid = rand(20572,20573); 
+			debugmes "1"+'Final_mobid;
+			}
+		else {
+			'Final_mobid = 20573;
+			debugmes "2"+'Final_mobid;
+			}
+		hideonnpc instance_npcname(strnpcinfo(0));
+		donpcevent instance_npcname("#glhe_mob01")+"::OnStart";
+		.@num = getmapunits(BL_PC,'map$,.@PC_AID[0]);
+		for(.@i=0;.@i<getarraysize(.@PC_AID);.@i++)
+		{
+			if(attachrid(.@PC_AID[.@i]))
+			{
+				switch(.@i%2)
+				{
+					case 0:	warp 'map$, 126, 81;	break;
+					default:	warp 'map$, 173, 101;	break;
+				}
+			}
+		}
+		sleep 3000;
+		mapannounce 'map$,"Oscar: In order to eliminate the pollution magic of this space, we must first purify the contaminated phantom monsters in the space on both sides.",bc_map,0xffff00;
+		sleep 3000;
+		mapannounce 'map$,"Oscar: I'll tell you how many tainted phantoms still need to be cleaned.",bc_map,0xffff00; 
+		end;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Please wait for your leader to choose the difficulty."; 
+	close3;
+	
+OnInstanceInit:
+	'map$ = instance_mapname("1@gl_he");
+	end;
+}
+
+//======================================================================
+// 左右区域刷怪事件
+//======================================================================
+1@gl_he,0,0,0	script	#glhe_mob01	-1,{
+	end;
+
+OnStart:
+	'Challenge_Time = gettimetick(2);
+	
+	// 难度出怪设定
+	switch('mode)
+	{
+		case 1:
+		case 2:
+		case 3:
+			areamonster 'map$,124,20,31,162,"--ja--",20574,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20576,15,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20577,20,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20579,5,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			
+			areamonster 'map$,175,163,265,18,"--ja--",20574,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20576,15,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20577,20,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20579,5,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			break;
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+			areamonster 'map$,124,20,31,162,"--ja--",20574,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20576,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20577,15,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20578,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20580,5,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			
+			areamonster 'map$,175,163,265,18,"--ja--",20574,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20576,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20577,15,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20578,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20580,5,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			break;
+		case 8:
+		case 9:
+		case 10:
+			areamonster 'map$,124,20,31,162,"--ja--",20577,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20580,5,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20583,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20584,10,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			areamonster 'map$,124,20,31,162,"--ja--",20585,15,instance_npcname(strnpcinfo(0))+"::OnLeftArea";
+			
+			areamonster 'map$,175,163,265,18,"--ja--",20577,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20580,5,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20583,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20584,10,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			areamonster 'map$,175,163,265,18,"--ja--",20585,15,instance_npcname(strnpcinfo(0))+"::OnAreaRight";
+			break;
+	}
+	'mob_count[1] = mobcount('map$,instance_npcname(strnpcinfo(0))+"::OnLeftArea");
+	'mob_count[2] = mobcount('map$,instance_npcname(strnpcinfo(0))+"::OnAreaRight");
+	initnpctimer;
+	end;
+
+OnLeftArea:
+	'mob_count[1] --;
+	if('mob_count[1] < 1)
+	{
+		enablenpc instance_npcname("#glhe_warptocenterA");
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnCheckMob";
+		mapannounce 'map$, "Oscar: The phantom on the right has not been purified, and the teleportation point to the area on the right has been opened.",bc_map,0xFFFF00; 
+	}
+	//else if('mob_count[1] == 0 && 'mob_count[2] == 0)
+	//	donpcevent instance_npcname(strnpcinfo(0))+"::OnBonusEvent";
+	end;
+	
+OnAreaRight:
+	'mob_count[2] --;
+	if('mob_count[2] < 1)
+	{
+		enablenpc instance_npcname("#glhe_warptocenterB");
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnCheckMob";
+		mapannounce 'map$, "Oscar: The phantom on the left has not been purified, and the teleportation point to the left area has been opened.",bc_map,0xFFFF00; 
+	}
+	//else if('mob_count[1] == 0 && 'mob_count[2] == 0)
+	//	donpcevent instance_npcname(strnpcinfo(0))+"::OnBonusEvent";
+	end;
+	
+OnTimer13000:
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnCheckMob";
+	initnpctimer;
+	end;
+	
+OnCheckMob:
+	if('mob_count[1] < 1 && 'mob_count[2] < 1)
+	{
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnBonusEvent";
+		//stopnpctimer;
+		//enablenpc instance_npcname("Oscar#disguise");
+		//sleep 3000;
+		//mapannounce 'map$, "Oscar: The phantoms on the left and right sides have been purified, come from the teleportation point just now to the middle. ",bc_map,0xFFFF00;
+		//sleep 3000;
+		//mapannounce 'map$,"Oscar: When you arrive, please move towards 12 o'clock and find me.",bc_map,0xffff00;
+	}
+	else 
+		mapannounce 'map$,('mob_count[1] ? 'mob_count[1] : "[Purification complete]")+" <- Unpurified Monsters-> "+('mob_count[2] ? 'mob_count[2] : "[Purification completed]"),bc_map,0x00ffff; 
+	end;
+	
+// 加分事件: 出现条件为左.右区域怪物剩馀数量同时等于3时触发(单人无法触发)
+OnBonusEvent:
+	stopnpctimer;
+	killmonsterall 'map$;
+	deletearray 'mob_count;
+	'fight = rand(1,10);
+	if('fight < 4) {
+		sleep 3000;
+		mapannounce 'map$, "Oscar: The phantoms on the left and right sides have been cleaned up.",bc_map,0xFFFF00; 
+		sleep 3000;
+		mapannounce 'map$,"Oscar: Now hurry to the 12 o'clock direction of the central road. There is a monster that has been distorted and mutated by magic.",bc_map,0xffff00; 
+		sleep 3000;
+		mapannounce 'map$, "Oscar: Don't worry, I'll clean it up later.",bc_map,0xFFFF00;
+		switch('mode)
+		{
+			case 1:
+			case 2:
+			case 3:
+				.amount = 1;
+				break;
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				.amount = rand(2,4);
+				break;
+			case 10:
+				.amount = 5;
+				break;
+		}
+		areamonster 'map$,146,134,154,123,"--ja--",20575,.amount,instance_npcname(strnpcinfo(0))+"::OnRootDead";	
+		for (.@i = 0; .@i < .amount; .@i++)	
+			'C_CORRUPTION_ROOT = $@mobid[.@i];
+		getunitdata 'C_CORRUPTION_ROOT,.@mob;
+		setunitdata 'C_CORRUPTION_ROOT, UMOB_ATKMIN,.@mob[33] * 'mode;
+		setunitdata 'C_CORRUPTION_ROOT, UMOB_ATKMAX,.@mob[34] * 'mode;
+		enablenpc instance_npcname("#glhe_warptocenterA");
+		enablenpc instance_npcname("#glhe_warptocenterB");
+		enablenpc instance_npcname("Oscar#disguise");
+		initnpctimer instance_npcname("Oscar#disguise");
+		end;
+	} else {
+		sleep 3000;
+		mapannounce 'map$, "Oscar: The phantoms on the left and right sides have been cleaned up.",bc_map,0xFFFF00; 
+		sleep 3000;
+		mapannounce 'map$,"Oscar: Now hurry to the 12 o'clock direction of the central road.",bc_map,0xffff00; 
+		enablenpc instance_npcname("#glhe_warptocenterA");
+		enablenpc instance_npcname("#glhe_warptocenterB");
+		enablenpc instance_npcname("Oscar#disguise");
+		initnpctimer instance_npcname("Oscar#disguise");
+		end;
+	}
+	
+OnRootDead:
+	'Bonus = 1;
+	stopnpctimer instance_npcname("Oscar#disguise");
+	end;
+}
+
+//======================================================================
+// 传送点
+//======================================================================
+1@gl_he,135,81,0	script	#glhe_warptocenterA	45,2,2,{
+	end;
+	
+OnTouch:
+	if('mob_count[1] < 1 && 'mob_count[2] < 1)
+		warp 'map$, 149, 69;
+	else
+		warp 'map$, 173, 101;
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@gl_he,164,101,0	script	#glhe_warptocenterB	45,2,2,{
+	end;
+
+OnTouch:
+	if('mob_count[1] < 1 && 'mob_count[2] < 1)
+		warp 'map$, 149, 69;
+	else
+		warp 'map$, 132, 81;
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+//======================================================================
+// 12点钟方向Oscar(变身事件)
+//======================================================================
+1@gl_he,150,157,4	script	Oscar#disguise	4_ED_OSCAR,{
+	cutin "OSCAR01.bmp",2;
+	if(unitexists('C_CORRUPTION_ROOT))
+	{
+		mes "["+strnpcinfo(1)+"]";
+		mes "Please wait for me a moment, I will immediately purify this phantom of the fallen rhizome.";
+		close;
+	}
+	if(getpartyleader(getcharid(1),2) == getcharid(0) && !('Processing&1))
+	{
+		mes "["+strnpcinfo(1)+"]";
+		mes 'Bonus ? "You have done a great job helping me purify the phantom of the Fallen Glast Heim":"";
+		mes "The central aisle has been blocked.";
+		mes "I need to transform to pass";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "If the king asks...";
+		mes "This is also something I can't do, I can only do it";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "We don't have much time left";
+		mes "Don't forget what we're here for.";
+		next;
+		if(select("Wait.","Transform.") == 1)
+		{
+			mes "["+strnpcinfo(1)+"]";
+			mes "Well...because it was blocked";
+			mes "It needs to be deformed to pass anyway.";
+			close3;
+		} 
+		close2;
+		cutin "",255;
+		donpcevent instance_npcname("Oscar#ACIDUS")+"::OnWalk1";
+		donpcevent instance_npcname("#glhe_EffectWarp")+"::OnEnable";
+		'Processing |= 1;
+		npctalk "Transforming.";
+		progressbar_npc "0x000000",6;
+		disablenpc instance_npcname(strnpcinfo(0));
+		end;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Well...because it was blocked";
+	mes "It needs to be deformed to pass anyway."; 
+	close3;
+	
+OnTimer60000:
+	// 60秒内若无击杀堕落根茎的幻影则不加分
+	if(unitexists('C_CORRUPTION_ROOT))
+	{
+		'Bonus = 0;
+		unitkill 'C_CORRUPTION_ROOT;
+	}
+	end;
+	
+OnInstanceInit:
+	'map$ = instance_mapname("1@gl_he");
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@gl_he,150,157,7	script	Oscar#ACIDUS	1713,{
+	end;
+	
+OnWalk1:
+	sleep 5500;
+	hideonnpc instance_npcname("Oscar#disguise");
+	hideoffnpc instance_npcname(strnpcinfo(0));
+	npctalk "This is who I am...";
+	sleep 2500;
+	npcspeed 150;
+	npcwalkto 150,163;
+	sleep 800;
+	hideonnpc instance_npcname(strnpcinfo(0));
+	movenpc instance_npcname(strnpcinfo(0)),149,170,7;
+	hideoffnpc instance_npcname(strnpcinfo(0));
+	setnpcdisplay(instance_npcname("#glhe_EffectWarp"), 45);
+	sleep 3000;
+	npcwalkto 150,184;
+	sleep 2000;
+	npcwalkto 150,198;
+	sleep 2000;
+	npcwalkto 150,212;
+	sleep 2000;
+	npcwalkto 150,222;
+	sleep 1800;
+	npcwalkto 157,229;
+	sleep 1500;
+	hideonnpc instance_npcname(strnpcinfo(0));
+	disablenpc instance_npcname(strnpcinfo(0));
+	enablenpc instance_npcname("Oscar#glhe_challenge");
+	donpcevent instance_npcname("#glhe_mob02")+"::OnShowup";
+	end;
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Oscar#ACIDUS");
+	end;
+}
+
+1@gl_he,150,163,0	script	#glhe_EffectWarp	139,2,2,{
+	end;
+	
+OnTouch:
+	warp 'map$,150,170;
+	end;
+	
+OnEnable:
+	enablenpc instance_npcname(strnpcinfo(0));
+	specialeffect EF_BOTTOM_BLUE;
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+//======================================================================
+// Oscar招唤事件
+//======================================================================
+1@gl_he,157,230,7	script	Oscar#glhe_challenge	4_ED_OSCAR,{
+	cutin "OSCAR01.bmp",2;
+	if(getpartyleader(getcharid(1),2) == getcharid(0) && !('Processing&2))
+	{
+		mes "["+strnpcinfo(1)+"]";
+		mes "This blurry thing in front of me.";
+		mes "is the contamination source of magic in warped time";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Now I'll repurify it.";
+		mes "if it goes well, it will appear here";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "Please pay special attention.";
+		mes "This source of pollution is very powerful, be vigilant at all times.";
+		next;
+		mes "["+strnpcinfo(1)+"]";
+		mes "If ready, please let me know.";
+		next;
+		if(select("Wait.","Ready.") == 1)
+		{
+			mes "["+strnpcinfo(1)+"]";
+			mes "Well...a powerful source of pollution may cause space-time to collapse";
+			mes "Please get ready.";
+			close3;
+		}
+		close2;
+		cutin "",255;
+		misceffect 55;
+		'Processing |= 2;
+		npctalk "The Phantom of Pollution Level"+'mode+" is about to appear, I need it in the middle magic circle to purify it, please find a way to trap it in the middle area."; 
+		donpcevent instance_npcname(strnpcinfo(0))+"::OnEffect";
+		soundeffectall "md_oscar.wav",0,'map$;
+		progressbar_npc "0x000000",6;
+		end;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "Well...a powerful source of pollution may cause space-time to collapse";
+	mes "Please tell me when the captain and everyone are ready."; 
+	close3;
+	
+OnEffect:
+	specialeffect EF_MAP_MAGICZONE3, AREA, instance_npcname("#glhe_mob02");
+	specialeffect EF_PINKBODY, AREA, instance_npcname("#glhe_mob02");
+	sleep 3000;
+	specialeffect EF_MADNESS_RED, AREA, instance_npcname("#glhe_mob02");
+	sleep 2500;
+	specialeffect EF_MADNESS_BLUE, AREA, instance_npcname("#glhe_mob02");
+	specialeffect EF_GUMGANG6;
+	sleep 1000;
+	hideonnpc instance_npcname(strnpcinfo(0));
+	sleep 1000;
+	mapwarp 'map$, 'map$, 157, 230;
+	donpcevent instance_npcname("#glhe_mob02")+"::OnStart";
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+function	script	PartyCheck	{
+	getpartymember 'party_id,2;
+	.@partymembercount = $@partymembercount;
+	copyarray .@partymemberaid[0],$@partymemberaid[0],.@partymembercount;
+
+	for(.@i=0;.@i<.@partymembercount;.@i++) {
+		if(attachrid(.@partymemberaid[.@i])) {
+			getmapxy(.@playmap$,.@px,@py,BL_PC);
+			if(.@playmap$=='map$){
+				if(Hp<2){
+					detachrid;
+					return 1;
+				}
+			}
+		}
+	}
+	
+	return 0;
+}
+
+1@gl_he,0,0,0	script	#death_detection2	-1,{
+end;
+OnEnable:
+	initnpctimer;
+	end;
+OnTimer1000:
+	if('trap==0){
+		stopnpctimer;
+		end;
+	}
+	set 'checkstats,PartyCheck();
+	if('checkstats==1){
+	setunitdata 'C_FinalBoss,UMOB_MODE,104806037;
+	mapannounce 'map$,"[Oscar]: Please revive the dead team member as soon as possible, otherwise the opponent will be in [invincible state] until the whole team is resurrected",bc_map,"0x00ff99";
+	stopnpctimer;
+	initnpctimer;
+	end;
+	}
+	setunitdata 'C_FinalBoss,UMOB_MODE,103298709;
+	stopnpctimer;
+	initnpctimer;
+	end;
+}
+
+
+1@gl_he,157,239,3	script	#glhe_mob02	139,14,14,{
+	end;
+	
+OnShowup:
+	setnpcdisplay(instance_npcname(strnpcinfo(0)),'Final_mobid);
+OnTouch:
+	specialeffect EF_AMDARAIS_EFFECT, AREA, instance_npcname(strnpcinfo(0));
+	end;
+
+OnStart:
+	'mvpAlive = 1;
+	setnpcdisplay(instance_npcname(strnpcinfo(0)),139);
+	
+	'trap=1;
+	donpcevent instance_npcname("#death_detection2")+"::OnEnable";		
+	
+	monster 'map$,157,239,"--ja--",'Final_mobid,1,instance_npcname(strnpcinfo(0))+"::OnMyMobDead";
+	'C_FinalBoss = $@mobid[0];
+	setunitdata 'C_FinalBoss, UMOB_MAXHP, 450000000+(150000000*'mode);
+	setunitdata 'C_FinalBoss, UMOB_HP, 450000000+(150000000*'mode);
+	if('mode > 2)
+		donpcevent instance_npcname("#glhe_grim_Reaper")+"::OnEnable";
+	if('mode > 8)
+		donpcevent instance_npcname("#glhe_circle")+"::OnEnable";
+	initnpctimer instance_npcname("#glhe_CheckUsers");
+	//debugmes "1";
+	initnpctimer instance_npcname("#gl_he_SpecialSkill");
+	initnpctimer instance_npcname("#gl_he_Heal");
+	initnpctimer instance_npcname(strnpcinfo(0));
+	freeloop(true);
+	do {
+		sleep 100;
+		if(unitexists('C_FinalBoss)) {
+			getunitdata 'C_FinalBoss, .@mob_data;
+			.@x = .@mob_data[UMOB_X];
+			.@y = .@mob_data[UMOB_Y];
+			.@HP = .@mob_data[UMOB_HP];
+			.@MAX_HP = .@mob_data[UMOB_MAXHP];
+			.@FIRST_SUMMON = (.@MAX_HP/10)*9;
+			.@SECOND_SUMMON = (.@MAX_HP/10)*7;
+			.@THIRD_SUMMON = (.@MAX_HP/10)*5;
+			.@FOURTH_SUMMON = (.@MAX_HP/10)*3;	
+			if(.@HP < .@FIRST_SUMMON && 'spawn1 == 1) 
+				donpcevent instance_npcname("#gl_he_thorns")+"::OnEnable";
+			if(.@HP < .@SECOND_SUMMON && 'spawn2 == 1) 
+				donpcevent instance_npcname("#gl_he_khalitz")+"::OnEnable";
+			if(.@HP < .@THIRD_SUMMON && 'spawn3 == 1) 
+				donpcevent instance_npcname("#gl_he_whiteknight")+"::OnEnable";
+			if(.@HP < .@FOURTH_SUMMON && 'spawn4 == 1) 
+				donpcevent instance_npcname("#gl_he_raydricarch")+"::OnEnable";
+			if(.@x > 150 && .@x < 165 && .@y > 232 && .@y < 248)
+				'Second = 0;	// MVP 进入中间区域重新计算秒数
+		}
+	} while('mvpAlive);
+	freeloop(false);
+	end;
+	
+OnMyMobDead:
+	'trap = 0 ;
+	'Finish = 1;
+	'mvpAlive = 0;
+	mapannounce 'map$,getmonsterinfo('Final_mobid,MOB_NAME)+"has been purified",bc_map,0x0FFF8C;
+	stopnpctimer;
+	disablenpc instance_npcname("#glhe_grim_Reaper");
+	donpcevent instance_npcname("#glhe_circle")+"::OnDisable";
+	donpcevent instance_npcname("#gl_he_thorns")+"::OnDisable";
+	donpcevent instance_npcname("#gl_he_khalitz")+"::OnDisable";
+	donpcevent instance_npcname("#gl_he_whiteknight")+"::OnDisable";
+	donpcevent instance_npcname("#gl_he_raydricarch")+"::OnDisable";
+	stopnpctimer instance_npcname("#glhe_CheckUsers");
+	stopnpctimer instance_npcname("#gl_he_SpecialSkill");
+	stopnpctimer instance_npcname("#gl_he_Heal");
+	enablenpc instance_npcname("Treasure Chest#glhe_Box");
+	enablenpc instance_npcname("Oscar#glhe_Reward");
+	'win = 1;
+	end;
+	
+OnTimer7000:
+	if(!unitexists('C_FinalBoss)) end;
+	switch('Final_mobid)
+	{
+		case 20572:	// 希梅尔兹的幻影
+			unittalk 'C_FinalBoss,"Looks like you've played with my toys~";
+			break;
+		case 20573:	// 闇答莱尸的幻影
+			unittalk 'C_FinalBoss,"Are you my new master!!";
+			break;
+	}
+	mapannounce 'map$,"Oscar: The magic of the shadowy phantom will make us lose ourselves in this space, please be careful to deal with it!",bc_map,0xffff00;
+	end;
+	
+// 随机传送地图事件
+OnTimer45000:
+	if(!unitexists('C_FinalBoss)) end;
+	mapannounce 'map$,getmonsterinfo('Final_mobid, MOB_NAME)+" : Spread out!",bc_map,0xFF7575;
+	sleep 1800;
+	.@num = getareaunits(BL_PC,'map$,138,255,177,215,.@PC_AID[0]);
+	.@Stay_AID = .@PC_AID[rand(getarraysize(.@PC_AID))];
+	for(.@i=0;.@i<getarraysize(.@PC_AID);.@i++)
+	{
+		if(.@PC_AID[.@i] == .@Stay_AID) continue;
+		if(attachrid(.@PC_AID[.@i]))
+			warp 'map$, 0, 0;
+	}
+	end;
+	
+OnInstanceInit:
+	specialeffect EF_AMDARAIS_EFFECT, AREA, instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_Stats	-1,{
+	end;
+	
+OnStats:
+	'heal += 50000;
+	if('heal >= 300000)
+		'heal = 300000;
+	'strenght++;
+	if(unitexists('C_FinalBoss))
+	{
+		getunitdata 'C_FinalBoss, .@mob_data;
+		.@ATKMIN = .@mob_data[UMOB_ATKMIN];
+		.@ATKMAX = .@mob_data[UMOB_ATKMAX];
+		setunitdata 'C_FinalBoss, UMOB_ATKMAX,.@ATKMIN * 'strenght;
+		setunitdata 'C_FinalBoss, UMOB_ATKMAX,.@ATKMAX * 'strenght;
+	}
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_Heal	-1,{
+	end;
+	
+OnTimer2000:
+	if(unitexists('C_FinalBoss))
+	{
+		getunitdata 'C_FinalBoss, .@mob_data;
+		.@HP = .@mob_data[2];
+		for (.@e = 1; .@e <= 'mode; .@e++) 
+			.@healing = (300000 * .@e) - 'heal;
+		setunitdata 'C_FinalBoss, UMOB_HP, .@HP + .@healing;
+		initnpctimer;
+	}
+	stopnpctimer;
+	initnpctimer;
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_SpecialSkill	-1,{
+	end;
+	
+OnTimer1000:
+	if(unitexists('C_FinalBoss))
+	{
+		getunitdata 'C_FinalBoss, .@mob_data;
+		.@x = .@mob_data[UMOB_X];
+		.@y = .@mob_data[UMOB_Y];
+		if(rand(1,100) <= 60)
+		{
+			callfunc "unitskilluseid2", 'C_FinalBoss, rand(1,8), 'map$, .@x, .@y;
+			initnpctimer;
+		}
+	}
+	stopnpctimer;
+	initnpctimer;
+	end;
+}
+
+/***************************************
+  - Need to keep the MVP in the middle area
+  - If you leave the dungeon for more than 30 seconds, you will need to re-challenge 
+***************************************/
+1@gl_he,0,0,0	script	#glhe_CheckUsers	-1,{
+	end;
+	
+OnTimer1000:
+	if('Second >= 30)
+	{
+		'Second = 0;
+		//mobremove 'C_FinalBoss;
+		unitkill 'C_FinalBoss;
+		stopnpctimer;
+		switch('Final_mobid)
+		{
+			case 20572:	// Himmelmez
+				mapannounce 'map$,getmonsterinfo('Final_mobid,MOB_NAME)+" : Oops~ I think you should go back and play with my toys~",bc_map,0xFF7575;
+				break;
+			case 20573:	// Amdarais
+				mapannounce 'map$,getmonsterinfo('Final_mobid,MOB_NAME)+" : It seems that you are not qualified to be my new master!",bc_map,0xFF7575;
+				break;
+		}
+		'trap = 0;
+		'mvpAlive = 0;
+		disablenpc instance_npcname("#glhe_grim_Reaper");
+		donpcevent instance_npcname("#glhe_circle")+"::OnDisable";
+		donpcevent instance_npcname("#gl_he_thorns")+"::OnDisable";
+		donpcevent instance_npcname("#gl_he_khalitz")+"::OnDisable";
+		donpcevent instance_npcname("#gl_he_whiteknight")+"::OnDisable";
+		donpcevent instance_npcname("#gl_he_raydricarch")+"::OnDisable";
+		stopnpctimer instance_npcname("#gl_he_SpecialSkill");
+		stopnpctimer instance_npcname("#gl_he_Heal");
+		hideoffnpc instance_npcname("Oscar#glhe_challenge");
+		donpcevent instance_npcname("#glhe_mob02")+"::OnShowup";
+		'Processing ^= 2;
+		
+		end;
+	}
+	else if('Second == 10)
+	{
+		soundeffectall "md_alert.wav",0,'map$;
+		mapannounce 'map$,"Oscar: "+getmonsterinfo('Final_mobid,MOB_NAME)+"She has been away for a certain period of time. If I let her leave for too long, the critical point of this time and space will be broken, and I will not be able to successfully complete the purification.",bc_map,0xFF8000;
+	}
+	else if('Second == 20)
+	{
+		soundeffectall "md_alert.wav",0,'map$;
+		mapannounce 'map$,"Oscar: "+getmonsterinfo('Final_mobid,MOB_NAME)+"She has been away for a certain period of time. If I let her leave for too long, the critical point of this time and space will be broken, and I will not be able to successfully complete the purification.",bc_map,0xFF8000;
+	}
+	// MVP Leave the intermediate zone to start counting seconds (failure for 30-second replicas)
+	'Second ++;
+	initnpctimer;
+	end;
+OnInstanceInit:
+	'spawn1 = 1;
+	'spawn2 = 1;
+	'spawn3 = 1;
+	'spawn4 = 1;
+	end;
+}
+
+/***************************************
+ - Phantom special event of the shadowy corpse (Judgement of the Cross of Thorns)
+***************************************/
+1@gl_he,0,0,0	script	#gl_he_thorns	-1,{
+	end;
+	
+OnEnable:
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnSpawn";
+	'spawn1 = 2;
+	end;
+
+OnSpawn:
+	if(!unitexists('C_FinalBoss)) end;
+	deletearray 'C_THORN;
+	setarray .@c[0],
+	144,224,
+	153,224,
+	162,224,
+	171,224,
+	144,233,
+	153,233,
+	162,233,
+	171,233,
+	144,242,
+	153,242,
+	162,242,
+	171,242,
+	144,251,
+	153,251,
+	162,251,
+	171,251;					
+	for(.@i=0; .@i<getarraysize(.@c); .@i+=2)
+	{
+		monster 'map$, .@c[.@i], .@c[.@i+1],"Tainted Magic Thorns", 20581, 1, instance_npcname(strnpcinfo(0))+"::OnThronDead";
+		'C_THORN[getarraysize('C_THORN)] = $@mobid[0];
+	}
+	
+	sleep 10000;
+	if(!unitexists('C_FinalBoss)) end;
+	for(.@i=0; .@i<getarraysize('C_THORN); .@i++)
+	{
+		if(unitexists('C_THORN[.@i]))
+		{
+			setunitdata 'C_THORN[.@i], UMOB_CLASS, 139;
+			setunitdata 'C_THORN[.@i], UMOB_DMGIMMUNE, 1;
+		}
+	}
+	while(.@times < 12)
+	{
+		for(.@i=0; .@i<getarraysize('C_THORN); .@i++)
+		{
+			if(unitexists('C_THORN[.@i]))
+			{
+				unitskilluseid 'C_THORN[.@i], "NPC_GRANDDARKNESS", 5;
+				donpcevent instance_npcname("#gl_thorns_skill_"+.@i)+"::OnEffect";
+			}
+		}
+		.@times ++;
+		sleep 3000;
+	}
+	deletearray 'C_THORN;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnThronDead"; 
+	'spawn1 = 1;
+	end;
+	
+OnDisable:
+	'spawn1 = 2;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnThronDead";
+	end;
+	
+OnThronDead:
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_khalitz	-1,{
+	end;
+	
+OnEnable:
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnSpawn";
+	'spawn2 = 2;
+	end;
+
+OnSpawn:
+	if(!unitexists('C_FinalBoss)) end;
+	getunitdata 'C_FinalBoss, .@mob_data;
+	monster 'map$, .@mob_data[UMOB_X] + 5, .@mob_data[UMOB_Y],"--ja--", 20576, 1, instance_npcname(strnpcinfo(0))+"::OnKhalitzDead";
+
+	sleep 10000;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnKhalitzDead";
+	'spawn2 = 1;
+	end;
+	
+OnKhalitzDead:
+	end;
+	
+OnDisable:
+	'spawn2 = 2;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnKhalitzDead";
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_whiteknight	-1,{
+	end;
+	
+OnEnable:
+	'spawn3 = 2;
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnSpawn";
+	end;
+
+OnSpawn:
+	if(!unitexists('C_FinalBoss)) end;
+	getunitdata 'C_FinalBoss, .@mob_data;
+	monster 'map$, .@mob_data[UMOB_X], .@mob_data[UMOB_Y] + 5,"--ja--", 20574, 1, instance_npcname(strnpcinfo(0))+"::OnWhiteKnDead";
+
+	sleep 10000;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnWhiteKnDead";
+	'spawn3 = 1;
+	end;
+	
+OnWhiteKnDead:
+	end;
+	
+OnDisable:
+	'spawn3 = 2;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnWhiteKnDead";
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_he_raydricarch	-1,{
+	end;
+	
+OnEnable:
+	'spawn4 = 2;
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnSpawn";
+	end;
+
+OnSpawn:
+	if(!unitexists('C_FinalBoss)) end;
+	getunitdata 'C_FinalBoss, .@mob_data;
+	monster 'map$, .@mob_data[UMOB_X] + 5, .@mob_data[UMOB_Y] + 5,"--ja--", 20577, 1, instance_npcname(strnpcinfo(0))+"::OnRydricDead";
+
+	sleep 10000;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnRydricDead";
+	'spawn4 = 1;
+	end;
+	
+OnRydricDead:
+	end;
+	
+OnDisable:
+	'spawn4 = 2;
+	killmonster 'map$, instance_npcname(strnpcinfo(0))+"::OnRydricDead";
+	end;
+}
+
+1@gl_he,0,0,0	script	#gl_thorns_skill	139,{
+	end;
+OnEffect:
+	while(.@i<6)
+	{
+		.@i++;
+		specialeffect EF_GRANDCROSS2;
+		sleep 300;
+	}
+	end;
+}
+
+1@gl_he,144,224,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_0	139
+1@gl_he,153,224,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_1	139
+1@gl_he,162,224,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_2	139
+1@gl_he,171,224,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_3	139
+1@gl_he,144,233,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_4	139
+1@gl_he,153,233,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_5	139
+1@gl_he,162,233,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_6	139
+1@gl_he,171,233,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_7	139
+1@gl_he,144,242,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_8	139
+1@gl_he,153,242,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_9	139
+1@gl_he,162,242,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_10	139
+1@gl_he,171,242,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_11	139
+1@gl_he,144,251,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_12	139
+1@gl_he,153,251,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_13	139
+1@gl_he,162,251,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_14	139
+1@gl_he,171,251,0	duplicate(#gl_thorns_skill)	#gl_thorns_skill_15	139
+	
+/***************************************
+ - Blue Circle
+***************************************/
+1@gl_he,0,0,0	script	#glhe_circle	HIDDEN_WARP_NPC,2,2,{
+	end;
+	
+OnEnable:
+	if(unitexists('C_FinalBoss))
+	{
+		switch(rand(1,5))
+		{
+			case 1:	movenpc instance_npcname(strnpcinfo(0)),163,236;	break;
+			case 2:	movenpc instance_npcname(strnpcinfo(0)),152,234;	break;
+			case 3:	movenpc instance_npcname(strnpcinfo(0)),158,244;	break;
+			case 4:	movenpc instance_npcname(strnpcinfo(0)),152,242;	break;
+			case 5:	movenpc instance_npcname(strnpcinfo(0)),165,232;	break;
+		}
+		enablenpc instance_npcname(strnpcinfo(0));
+		initnpctimer;
+		freeloop(true);		
+		do {
+			sleep 100;
+			if(unitexists('C_FinalBoss)){
+				getunitdata getnpcid(0), .@NPC;
+				.@xx1 = .@NPC[UNPC_X];
+				.@yy1 = .@NPC[UNPC_Y];
+				getunitdata 'C_FinalBoss, .@mob_data;
+				.@x = .@mob_data[UMOB_X];
+				.@y = .@mob_data[UMOB_Y];
+				if(.@xx1 == .@x - 2 && .@yy1 == .@y - 2 || .@xx1 == .@x + 2 && .@yy1 == .@y + 2 || .@xx1 == .@x && .@yy1 == .@y)
+					'rage = 0;
+				else 
+					'rage = 1;
+			}
+		} while('mvpAlive);
+		freeloop(false);
+	}
+	end;
+	
+OnTimer60000:
+	if('rage == 1)
+		unitskilluseid 'C_FinalBoss,349,10,'C_FinalBoss;
+	else
+		debugmes "rage = "+'rage;
+	disablenpc instance_npcname(strnpcinfo(0));
+	donpcevent instance_npcname(strnpcinfo(0))+"::OnEnable";
+	end;	
+	
+OnDisable:
+	stopnpctimer;	
+	end;
+	
+OnInstanceInit:
+	specialeffect 650,AREA,instance_npcname(strnpcinfo(0));
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+/***************************************
+ - Mirage of Himmelz (Reaper Random Walk)
+***************************************/
+1@gl_he,157,239,0	script	#glhe_grim_Reaper	4_M_DEATH,{
+	end;
+	
+OnEnable:
+	getattachedrid();
+	if(unitexists('C_FinalBoss))
+	{
+		switch(rand(1,4))
+		{
+			case 1:	movenpc instance_npcname(strnpcinfo(0)),144,251;	break;
+			case 2:	movenpc instance_npcname(strnpcinfo(0)),144,224;	break;
+			case 3:	movenpc instance_npcname(strnpcinfo(0)),171,251;	break;
+			case 4:	movenpc instance_npcname(strnpcinfo(0)),171,224;	break;
+		}
+		enablenpc instance_npcname(strnpcinfo(0));
+		npcspeed 500;	
+		freeloop(true);
+		do {
+			sleep 100;
+			if(unitexists('C_FinalBoss)){
+				getunitdata getnpcid(0), .@NPC;
+				.@xx = .@NPC[UNPC_X];
+				.@yy = .@NPC[UNPC_Y];
+				getunitdata 'C_FinalBoss, .@mob_data;
+				.@x = .@mob_data[UMOB_X];
+				.@y = .@mob_data[UMOB_Y];
+				donpcevent instance_npcname(strnpcinfo(0))+"::OnGrimWalk";
+				if(.@xx == .@x - 2 && .@yy == .@y - 2 || .@xx == .@x + 2 && .@yy == .@y + 2 || .@xx == .@x && .@yy == .@y) {
+					specialeffect EF_THUNDERSTORM2, AREA, instance_npcname(strnpcinfo(0));
+					sleep 500;
+					disablenpc instance_npcname(strnpcinfo(0));
+					donpcevent instance_npcname(strnpcinfo(0))+"::OnEnable";
+					donpcevent instance_npcname("#gl_he_Stats")+"::OnStats";
+					mapwarp 'map$, 'map$, 157, 230;
+					end;
+				}
+			}
+		} while('mvpAlive);
+		freeloop(false);
+		initnpctimer;
+	}
+	end;
+	
+OnGrimWalk:
+	freeloop(true);
+	sleep 100;
+	if(unitexists('C_FinalBoss))
+		unitwalkto getnpcid(0),'C_FinalBoss;
+	freeloop(false);
+	end;	
+
+OnTimer6000:
+	specialeffect EF_GANBANTEIN, AREA, instance_npcname(strnpcinfo(0));
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+
+/***************************************
+ - Rewards
+***************************************/
+1@gl_he,158,247,3	script	Oscar#glhe_Reward	4_ED_OSCAR,{
+	cutin "OSCAR01.bmp",2;
+	if(inarray('Instance_reward, getcharid(3)) > -1)
+	{
+		mes "["+strnpcinfo(1)+"]";
+		mes "Are you all ready? If you want to leave, I can help you get out of here";
+		next;
+		if(select("I want to hang around again.","I want to go out.") == 1)
+		{
+			mes "["+strnpcinfo(1)+"]";
+			mes "Please be careful and safe.";
+			close3;
+		}
+		OGH_Time ++;
+		cutin "OSCAR01.bmp",255;
+		warp "glast_01",140,288;
+		end;
+	}
+	mes "["+strnpcinfo(1)+"]";
+	mes "You have successfully completed the "+(OGH_Time+1)+" purification work";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "It's time to destroy this contaminated space.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Faced with this "+'mode+" level difficulty space, you have performed well.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes 'Bonus ? "You have beaten the Phantom of the Corrupted Rhizome in my place, so you get extra bonus points.":"Because I defeated the Phantom of the Corrupted Rhizome, so no extra points...";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "However, you still did a good job.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes getitemname(25864)+" "+(2+'Bonus)+"item";
+	mes "The difficulty of your challenge is level "+'mode+", this is your reward.";
+	OGH_Time ++;
+	getitem 25864, 2+'Bonus;
+	'Instance_reward[getarraysize('Instance_reward)] = getcharid(3);
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes getitemname(25864)+"This space has not been seriously polluted";
+	mes "A very good sign, especially in the process of destroying warped time and space.";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "but this alone is useless";
+	mes "It still needs to be purified in the real world";
+	mes "Come to me after purification and replace with what you need";
+	next;
+	mes "["+strnpcinfo(1)+"]";
+	mes "Then let's leave now.";
+	mes "Come back to me when you're ready."; 
+	close3;
+	
+OnTalk:
+	npctalk "The amount of loot in the chest will be affected by the level of pollution of the space.";
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+/***************************************
+ - Treasure Chest
+***************************************/
+1@gl_he,158,239,3	script	Treasure Chest#glhe_Box	4_TREASURE_BOX,{
+	hideonnpc instance_npcname(strnpcinfo(0));
+	disablenpc instance_npcname(strnpcinfo(0));
+	switch('mode)
+	{
+		case 1:	.@item_25867 = rand(1,15);	.@item_25864 = rand(1,5);	break;
+		case 2:	.@item_25867 = rand(1,20);	.@item_25864 = rand(1,6);	break;
+		case 3:	.@item_25867 = rand(1,25);	.@item_25864 = rand(2,7);	.@item_25865 = rand(1,3);	break;
+		case 4:	.@item_25867 = rand(1,30);	.@item_25864 = rand(2,8);	.@item_25865 = rand(1,4);	break;
+		case 5:	.@item_25867 = rand(2,30);	.@item_25864 = rand(3,9);	.@item_25865 = rand(1,4);	.@item_25866 = rand(1,3);	break;
+		case 6:	.@item_25867 = rand(2,30);	.@item_25864 = rand(3,10);	.@item_25865 = rand(1,5);	.@item_25866 = rand(3,7);	break;
+		case 7:	.@item_25867 = rand(3,30);	.@item_25864 = rand(4,10);	.@item_25865 = rand(2,5);	.@item_25866 = rand(5,11);	break;
+		case 8:	.@item_25867 = rand(3,30);	.@item_25864 = rand(4,10);	.@item_25865 = rand(2,6);	.@item_25866 = rand(8,16);	break;
+		case 9:	.@item_25867 = rand(4,30);	.@item_25864 = rand(5,10);	.@item_25865 = rand(2,6);	.@item_25866 = rand(11,22);	break;
+		case 10:	.@item_25867 = rand(4,30);	.@item_25864 = rand(5,10);	.@item_25865 = rand(2,7);	.@item_25866 = rand(14,28);	break;
+		default:	break;
+	}
+	for(.@i=0; .@i<.@item_25864; .@i++)
+	{
+		getfreecell 'map$, .@x, .@y, 158, 239, 6, 6;
+		makeitem 25864, 1, 'map$, .@x, .@y;
+	}
+	for(.@i=0; .@i<.@item_25865; .@i++)
+	{
+		getfreecell 'map$, .@x, .@y, 158, 239, 6, 6;
+		makeitem 25865, 1, 'map$, .@x, .@y;
+	}
+	for(.@i=0; .@i<.@item_25866; .@i++)
+	{
+		getfreecell 'map$, .@x, .@y, 158, 239, 6, 6;
+		makeitem 25866, 1, 'map$, .@x, .@y;
+	}
+	for(.@i=0; .@i<.@item_25867; .@i++)
+	{
+		getfreecell 'map$, .@x, .@y, 158, 239, 6, 6;
+		makeitem 25867, 1, 'map$, .@x, .@y;
+	}
+	donpcevent instance_npcname("Oscar#glhe_Reward")+"::OnTalk";
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+/***************************************
+ - MVP New skills (the original code is insufficient and the script is temporarily replaced)
+***************************************/
+function	script	unitskilluseid2	{
+	if(!unitexists(getarg(0))) return;
+	.@gid = getarg(0);
+	.@type = getarg(1);
+	.@map$ = getarg(2);
+	.@x = getarg(3);
+	.@y = getarg(4);
+	showscript " !!",getarg(0),AREA;
+	//debugmes ""+.@type;
+	switch(.@type)
+	{
+		// FireWall (X range) 
+		case 1:
+			.@range = 2;
+			while(.@FireWall <= 5)
+			{
+				.@FireWall ++;
+				switch(.@FireWall)
+				{
+					case 1:	break;
+					case 2:	.@x = .@x+1;	.@y = .@y+1;	break;
+					case 3:	.@x = .@x+1;	.@y = .@y-1;	break;
+					case 4:	.@x = .@x-1;	.@y = .@y-1;	break;
+					case 5:	.@x = .@x-1;	.@y = .@y+1;	break;
+					default:	break;
+				}
+				for(.@i = 0; .@i < 12; .@i += .@range)
+				{
+					if ( checkcell(.@map$, .@x+.@i, .@y+.@i, cell_chkpass) )
+					{
+						monster .@map$, .@x+.@i, .@y+.@i, "", 20562, 1;
+						.@unit_id = $@mobid[0];
+						setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+						setunitdata .@unit_id, UMOB_CLASS, 139;
+						unitskillusepos .@unit_id, "MG_FIREWALL", 10, .@x+.@i, .@y+.@i, -1;
+						.@bot[getarraysize(.@bot)] = .@unit_id;
+					}
+					
+					if ( checkcell(.@map$, .@x+.@i, .@y-.@i, cell_chkpass) )
+					{
+						monster .@map$, .@x+.@i, .@y-.@i, "", 20562, 1;
+						.@unit_id = $@mobid[0];
+						setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+						setunitdata .@unit_id, UMOB_CLASS, 139;
+						unitskillusepos .@unit_id, "MG_FIREWALL", 10, .@x+.@i, .@y-.@i, -1;
+						.@bot[getarraysize(.@bot)] = .@unit_id;
+					}
+					
+					if ( checkcell(.@map$, .@x-.@i, .@y-.@i, cell_chkpass) )
+					{
+						monster .@map$, .@x-.@i, .@y-.@i, "", 20562, 1;
+						.@unit_id = $@mobid[0];
+						setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+						setunitdata .@unit_id, UMOB_CLASS, 139;
+						unitskillusepos .@unit_id, "MG_FIREWALL", 10, .@x-.@i, .@y-.@i, -1;
+						.@bot[getarraysize(.@bot)] = .@unit_id;
+					}
+					
+					if ( checkcell(.@map$, .@x-.@i, .@y+.@i, cell_chkpass) )
+					{
+						monster .@map$, .@x-.@i, .@y+.@i, "", 20562, 1;
+						.@unit_id = $@mobid[0];
+						setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+						setunitdata .@unit_id, UMOB_CLASS, 139;
+						unitskillusepos .@unit_id, "MG_FIREWALL", 10, .@x-.@i, .@y+.@i, -1;
+						.@bot[getarraysize(.@bot)] = .@unit_id;
+					}
+				}
+			}
+			break;
+			
+		// GROUNDDRIVE (9x9)
+		case 2:
+			.@range = 5;
+			if ( checkcell(.@map$, .@x-.@range, .@y+.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x-.@range, .@y+.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y+.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y+.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x, .@y+.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x, .@y+.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x+.@range, .@y+.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x+.@range, .@y+.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y+.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y+.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x-.@range, .@y, cell_chkpass) )
+			{
+				monster .@map$, .@x-.@range, .@y, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x, .@y, cell_chkpass) )
+			{
+				monster .@map$, .@x, .@y, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x+.@range, .@y, cell_chkpass) )
+			{
+				monster .@map$, .@x+.@range, .@y, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			if ( checkcell(.@map$, .@x-.@range, .@y-.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x-.@range, .@y-.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y-.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-.@range, .@y-.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x, .@y-.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x, .@y-.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}	
+			if ( checkcell(.@map$, .@x+.@range, .@y-.@range, cell_chkpass) )
+			{
+				monster .@map$, .@x+.@range, .@y-.@range, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y-.@range, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+.@range, .@y-.@range, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			if ( checkcell(.@map$, .@x, .@y+(.@range*2), cell_chkpass) )
+			{
+				monster .@map$, .@x, .@y+(.@range*2), "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+(.@range*2), -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+(.@range*2), -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			if ( checkcell(.@map$, .@x, .@y-(.@range*2), cell_chkpass) )
+			{
+				monster .@map$, .@x, .@y-(.@range*2), "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-(.@range*2), -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-(.@range*2), -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			if ( checkcell(.@map$, .@x-(.@range*2), .@y, cell_chkpass) )
+			{
+				monster .@map$, .@x-(.@range*2), .@y, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-(.@range*2), .@y, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-(.@range*2), .@y, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			if ( checkcell(.@map$, .@x+(.@range*2), .@y, cell_chkpass) )
+			{
+				monster .@map$, .@x+(.@range*2), .@y, "", 20562, 1;
+				.@unit_id = $@mobid[0];
+				setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+(.@range*2), .@y, -5000;
+				unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+(.@range*2), .@y, -5000;
+				.@bot[getarraysize(.@bot)] = .@unit_id;
+			}
+			break;
+			
+		// HEAVENDRIVE (+) 
+		case 3:
+			.@range = 5;
+			for(.@i=1; .@i<9; .@i++)
+			{
+				if ( checkcell(.@map$, .@x, .@y, cell_chkpass) )
+				{
+					monster .@map$, .@x, .@y, "", 20562, 1;
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y, -5000;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x, .@y+(.@range*.@i), cell_chkpass) )
+				{
+					monster .@map$, .@x, .@y+(.@range*.@i), "", 20562, 1;
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+(.@range*.@i), -5000;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y+(.@range*.@i), -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x, .@y-(.@range*.@i), cell_chkpass) )
+				{
+					monster .@map$, .@x, .@y-(.@range*.@i), "", 20562, 1;
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-(.@range*.@i), -5000;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x, .@y-(.@range*.@i), -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x-(.@range*.@i), .@y, cell_chkpass) )
+				{
+					monster .@map$, .@x-(.@range*.@i), .@y, "", 20562, 1;
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-(.@range*.@i), .@y, -5000;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x-(.@range*.@i), .@y, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x+(.@range*.@i), .@y, cell_chkpass) )
+				{
+					monster .@map$, .@x+(.@range*.@i), .@y, "", 20562, 1;
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+(.@range*.@i), .@y, -5000;
+					unitskillusepos .@unit_id, "WZ_HEAVENDRIVE", 10, .@x+(.@range*.@i), .@y, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+			}
+			break;
+			
+		case 4:
+			.@range = 3;
+			for(.@i = 0; .@i < 15; .@i += .@range)
+			{
+				if ( checkcell(.@map$, .@x+.@i, .@y+.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x+.@i, .@y+.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y+.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y+.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x+.@i, .@y-.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x+.@i, .@y-.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y-.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y-.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x-.@i, .@y-.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x-.@i, .@y-.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y-.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y-.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x-.@i, .@y+.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x-.@i, .@y+.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y+.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y+.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				sleep 600;
+			}
+			break;
+			
+		case 5:
+			.@range = 3;
+			for(.@i = 0; .@i < 15; .@i += .@range)
+			{
+				if ( checkcell(.@map$, .@x, .@y+.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x, .@y+.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x, .@y+.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x, .@y+.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x+.@i, .@y, cell_chkpass) )
+				{
+					monster .@map$, .@x+.@i, .@y, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x+.@i, .@y, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x, .@y-.@i, cell_chkpass) )
+				{
+					monster .@map$, .@x, .@y-.@i, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x, .@y-.@i, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x, .@y-.@i, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				if ( checkcell(.@map$, .@x-.@i, .@y, cell_chkpass) )
+				{
+					monster .@map$, .@x-.@i, .@y, "", 20562, 1, "";
+					.@unit_id = $@mobid[0];
+					setunitdata .@unit_id, UMOB_DMGIMMUNE, 1;
+					setunitdata .@unit_id, UMOB_CLASS, 139;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y, -5000;
+					unitskillusepos .@unit_id, "NPC_RAINOFMETEOR", 10, .@x-.@i, .@y, -5000;
+					.@bot[getarraysize(.@bot)] = .@unit_id;
+				}
+				sleep 600;
+			}
+			break;
+		case 6:
+			//Slave	
+			sleep 1000;
+			.@k=0;
+			for(.@i = 0; .@i < 5; .@i++){
+				
+				for(.@j = 0; .@j < 5; .@j++){
+					monster .@map$,.@x-9+.@j*6,.@y+9-.@i*6,"--ja--",3095,1;					
+					.@id[.@k++] = $@mobid[0];
+					
+				}
+			}
+			
+			
+			
+			for(.@i = 0; .@i < getarraysize(.@id);.@i++) {
+				////debugmes "lll";
+				unitskilluseid .@id[.@i], 353, 1;
+			}
+			.@k=0;
+			sleep 500;
+			for(.@i = 0; .@i < 5; .@i++) {
+				
+				for(.@j = 0; .@j < 5; .@j++){
+					if(unitexists(.@id[.@i]) == true)
+						unitskillusepos .@id[.@k++],483,5,.@x-9+.@j*6,.@y+9-.@i*6,-5;
+				}
+			}
+			sleep 3000;
+			for(set .@i,0;.@i < getarraysize(.@id);set .@i,.@i+1) {
+				if(unitexists(.@id[.@i]))
+				//mobremove .@id[.@i];
+					unitkill .@id[.@i];
+			}
+			break;			
+		default:
+			break;	
+	}
+	if(rand(5)==0){
+
+			//咖般塔音	
+			sleep 1000;
+			.@k=0;
+			for(.@i = 0; .@i < 5; .@i++){
+				
+				for(.@j = 0; .@j < 5; .@j++){
+					monster .@map$,.@x-9+.@j*6,.@y+9-.@i*6,"--ja--",3095,1;					
+					.@id[.@k++] = $@mobid[0];
+					
+				}
+			}
+			
+			for(.@i = 0; .@i < getarraysize(.@id);.@i++) {
+				////debugmes "lll";
+				unitskilluseid .@id[.@i], 353, 1;
+			}
+			
+			.@k=0;
+			sleep 500;
+			for(.@i = 0; .@i < 5; .@i++) {
+				
+				for(.@j = 0; .@j < 5; .@j++){
+					if(unitexists(.@id[.@i]) == true)
+						unitskillusepos .@id[.@k++],483,5,.@x-9+.@j*6,.@y+9-.@i*6,-5;
+				}
+			}
+			sleep 3000;
+			for(set .@i,0;.@i < getarraysize(.@id);set .@i,.@i+1) {
+				if(unitexists(.@id[.@i]))
+				//mobremove .@id[.@i];
+					unitkill .@id[.@i];
+			}
+	
+	}
+	
+	if(.@type == 1) sleep 5000;
+	else sleep 3000;
+	for(.@i=0; .@i<getarraysize(.@bot); .@i++)
+		//if(unitexists(.@bot[.@i])) mobRemove .@bot[.@i];
+		if(unitexists(.@bot[.@i])) unitkill .@bot[.@i];
+	return;
+}
+	
+glast_01,137,291,5	script	OSC0005	2_SLOT_MACHINE,{
+	mes "[Circlet Enchanter]";
+	mes "Choose the item";
+	disable_items;
+	
+	for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+	{
+		if( getequipisequiped(.indices[.@i]) )
+		{
+			if(inarray(.item[0],getequipid(.indices[.@i])) > -1) set .@menu$, .@menu$ +""+F_getpositionname(.indices[.@i]) + " - ^3CB371[ " + getequipname(.indices[.@i]) + " ]^000000:";
+			else set .@menu$, .@menu$ +""+F_getpositionname(.indices[.@i]) + " - ^FF0000[ " + getequipname(.indices[.@i]) + " ]^000000:";
+		}
+		else set .@menu$, .@menu$ +""+F_getpositionname(.indices[.@i]) + " - ^A9A9A9[ EMPTY ]^000000:";
+		
+	}
+	set .@part,.indices[ select(.@menu$) ];
+	
+	if(!getequipisequiped(.@part)){ mes "^FF0000* Slot Empty!^000000"; enable_items; close; }	
+	if(inarray(.item[0],getequipid(.@part)) == -1){ mes "^FF0000* Item cannot be enchanted!^000000"; enable_items; close; }
+	
+	set .@item,getequipid(.@part);
+	set .@ref,getequiprefinerycnt(.@part);
+	set .@card0,getequipcardid(.@part,0);
+	set .@card1,getequipcardid(.@part,1);
+	set .@card2,getequipcardid(.@part,2);
+	set .@card3,getequipcardid(.@part,3);
+	
+	for(set .@i,0; .@i<(MAX_ITEM_RDM_OPT); set .@i,.@i+1) {
+		setarray .@arrid[.@i],getequiprandomoption(.@part,.@i,ROA_ID);
+		setarray .@value[.@i],getequiprandomoption(.@part,.@i,ROA_VALUE);
+		setarray .@param[.@i],getequiprandomoption(.@part,.@i,ROA_PARAM);
+	}
+	
+	if(inarray(.slot4[0],.@card0) > -1 || inarray(.slot4[0],.@card1) > -1 || inarray(.slot4[0],.@card2) > -1 || inarray(.slot4[0],.@card3) > -1) set .@reset,1;
+	
+	if(.@reset) {
+		next;
+		mes "[Circlet Enchanter]";
+		mes "What do you want to do?";
+		if(select("Enchant:Reset")==2)
+		{
+			next;
+			mes "[Circlet Enchanter]";
+			mes "You have 2 payment options with different odds!";
+			mes " ";
+			mes "1st 500k of zeny";
+			mes "2nd 2x Silvervine kitten fruit";
+			
+			if(select("Pay with zeny (500k) = ^1E90FF70%^000000:Use the fruit (2x Fruta) = ^228B22100%^000000")==1) set .@opt,1; else set .@opt,2;
+			
+			if(.@opt == 1)
+			{
+				if(Zeny < 500000){ mes "^FF0000* Insufficient Zeny!^000000"; enable_items; close; }
+				set Zeny,Zeny-25000;
+				
+				if(rand(1,100) <= 30)
+				{
+					failedrefitem .@part;
+					clear;
+					mes "^FF0000* You were unlucky, the reset failed and the item was destroyed!^000000";
+					enable_items;
+					close;					
+				}				
+				
+				delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+				getitem3 .@item,1,1,.@ref,0,0,0,0,0,.@arrid,.@value,.@param;
+				mes "Done.";
+				enable_items;
+				close;
+			} else {
+				if(countitem(6417) < 2){ mes "^FF0000* You need 2x "+getitemname(6417)+"!^000000"; close; }
+				
+				delitem 6417,2;
+				delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+				getitem3 .@item,1,1,.@ref,0,0,0,0,0,.@arrid,.@value,.@param;
+				mes "Done.";
+				enable_items;
+				close;				
+			}		
+		}				
+	}
+
+	next;
+	mes "[Circlet Enchanter]";
+	mes "Select the slot!";
+	set .@slot,select("Slot 4:Slot 3:Slot 2");
+	switch(.@slot) {
+		case 1:
+				if(.@card3){ mes "^FF0000* This slot is already enchanted!"; enable_items; close; }
+				
+				mes "The cost to enchant is 10x "+getitemname(25867)+"!";
+				if(countitem(25867) < 10)
+				{ mes "^FF0000* You do not have the required amount!"; enable_items; close; }
+				else if(select("Cancel:Enchant")==1){ enable_items; close; }
+				delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+				
+				set .@card3,.slot4[rand(getarraysize(.slot4)-1)];
+
+				delitem 25867,10;
+				getitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+				equip .@item;
+				break;
+				
+		case 2:
+				if(.@card2){ mes "^FF0000* The slot is already enchanted!"; enable_items; close; }			
+				next;
+				mes "[Circlet Enchanter]";
+				mes " ";
+				mes "Choose the type of enchant!";			
+				if(select("Temporal Fragment:Temporal Gemstone")==1)
+				{
+					clear;
+					mes "[Circlet Enchanter]";
+					mes " ";
+					mes "The cost for this charm is 20x "+getitemname(25867)+"!";
+					
+					if(countitem(25867) < 20){ mes "^FF0000* You need 20x "+getitemname(25867)+"!^000000"; enable_items; close; }
+					else if(select("Cancel:Enchant")==1){ enable_items; close; }
+					delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					
+					set .@card2,.slot3_1[rand(getarraysize(.slot3_1)-1)];
+
+					delitem 25867,20;
+					getitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					equip .@item;
+					mes "Feito.";				
+				}
+				else
+				{				
+					clear;
+					mes "[Circlet Enchanter]";
+					mes " ";
+					mes "The cost for this charm is 2x "+getitemname(25865)+"!";
+					
+					if(countitem(25865) < 2){ mes "^FF0000* You need 2x "+getitemname(25865)+"!^000000"; enable_items; close; }
+					else if(select("Cancel:Enchant")==1){ enable_items; close; }
+					delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					
+					set .@card2,.slot3_2[rand(getarraysize(.slot3_2)-1)];
+
+					delitem 25865,2;
+					getitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					equip .@item;
+					mes "Feito.";
+				}				
+				break;
+				
+		case 3:
+				clear;
+				mes "[Circlet Enchanter]";
+				if(!.@card1)
+				{
+					mes "The cost for this special charm is 2x "+getitemname(25866)+"!";
+				
+					if(countitem(25866) < 2){ mes "^FF0000* You need 2x "+getitemname(25866)+"!^000000"; enable_items; close; }
+					else if(select("Cancel:Enchant")==1){ enable_items; close; }				
+				
+					delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					delitem 25866,2;
+					set .@r,rand(1,7);							
+					set .@card1,(.@r == 1 ? 29061:(.@r == 2 ? 29071:(.@r == 3 ? 29081:(.@r == 4 ? 29091:(.@r == 5 ? 29101:(.@r == 6 ? 29111:(.@r == 7 ? 29706:0)))))));
+					getitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					equip .@item;
+					mes "Done.";
+					break;
+				}
+				
+					 if(inarray(.slot2_1[0],.@card1) > -1) set .@list,1;
+				else if(inarray(.slot2_2[0],.@card1) > -1) set .@list,2;
+				else if(inarray(.slot2_3[0],.@card1) > -1) set .@list,3;
+				else if(inarray(.slot2_4[0],.@card1) > -1) set .@list,4;
+				else if(inarray(.slot2_5[0],.@card1) > -1) set .@list,5;
+				else if(inarray(.slot2_6[0],.@card1) > -1) set .@list,6;
+				else if(inarray(.slot2_7[0],.@card1) > -1) set .@list,7;
+				else set .@list,99;
+				
+				set .@v,inarray((.@list == 1 ? .slot2_1[0]:(.@list == 2 ? .slot2_2[0]:(.@list == 3 ? .slot2_3[0]:(.@list == 4 ? .slot2_4[0]:(.@list == 5 ? .slot2_5[0]:(.@list == 6 ? .slot2_6[0]:(.@list == 7 ? .slot2_7[0]:0))))))),.@card1);
+				set .@custo,(.@v < 1 ? 4:(.@v == 1 ? 6:(.@v == 2 ? 8:(.@v == 3 ? 10:(.@v == 4 ? 12:(.@v == 5 ? 16:(.@v == 6 ? 20:(.@v == 7 ? 28:(.@v == 8 ? 40:0)))))))));
+				
+				if(.@v >= 9){ mes "^FF0000* You reach maximum enchant!^000000"; enable_items; close; }
+							
+				switch(.@list)
+				{
+					case 1: set .@cardx,.slot2_1[(.@v+1)]; break;
+					case 2: set .@cardx,.slot2_2[(.@v+1)]; break;
+					case 3: set .@cardx,.slot2_3[(.@v+1)]; break;
+					case 4: set .@cardx,.slot2_4[(.@v+1)]; break;
+					case 5: set .@cardx,.slot2_5[(.@v+1)]; break;
+					case 6: set .@cardx,.slot2_6[(.@v+1)]; break;
+					case 7: set .@cardx,.slot2_7[(.@v+1)]; break;
+					case 99: clear; mes "^FF0000* Unknown Enchanment!^000000"; enable_items; close;
+				}
+				
+				mes "The cost for the enhancement of special charm is "+.@custo+"x "+getitemname(25866)+"!";
+				
+				if(countitem(25866) < .@custo){ mes "^FF0000* You need "+.@custo+"x "+getitemname(25866)+"!^000000"; enable_items; close; }
+				else if(select("Cancel:Enchant")==1){ enable_items; close; }				
+				if(rand(1,100) <= 50) {
+					if (.@card1 == .slot2_1[0]) { delitem 25866,.@custo; set .@card1,.slot2_1[0]; break; }
+					if (.@card1 == .slot2_2[0]) { delitem 25866,.@custo; set .@card1,.slot2_2[0]; break; }
+					if (.@card1 == .slot2_3[0]) { delitem 25866,.@custo; set .@card1,.slot2_3[0]; break; }
+					if (.@card1 == .slot2_4[0]) { delitem 25866,.@custo; set .@card1,.slot2_4[0]; break; }
+					if (.@card1 == .slot2_5[0]) { delitem 25866,.@custo; set .@card1,.slot2_5[0]; break; }
+					if (.@card1 == .slot2_6[0]) { delitem 25866,.@custo; set .@card1,.slot2_6[0]; break; }
+					if (.@card1 == .slot2_7[0]) { delitem 25866,.@custo; set .@card1,.slot2_7[0]; break; }
+					switch(.@list) {
+						case 1: set .@cardx,.slot2_1[(.@v-1)]; break;
+						case 2: set .@cardx,.slot2_2[(.@v-1)]; break;
+						case 3: set .@cardx,.slot2_3[(.@v-1)]; break;
+						case 4: set .@cardx,.slot2_4[(.@v-1)]; break;
+						case 5: set .@cardx,.slot2_5[(.@v-1)]; break;
+						case 6: set .@cardx,.slot2_6[(.@v-1)]; break;
+						case 7: set .@cardx,.slot2_7[(.@v-1)]; break;
+						case 99: clear; mes "^FF0000* Unknown Enchanment!^000000"; enable_items; close;
+					}
+					delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+					delitem 25866,.@custo;
+					getitem3 .@item,1,1,.@ref,0,.@card0,.@cardx,.@card2,.@card3,.@arrid,.@value,.@param;
+					equip .@item;
+					mes "So sorry the enchant is failed!";
+					close;					
+				}	
+				delitem3 .@item,1,1,.@ref,0,.@card0,.@card1,.@card2,.@card3,.@arrid,.@value,.@param;
+				delitem 25866,.@custo;
+				getitem3 .@item,1,1,.@ref,0,.@card0,.@cardx,.@card2,.@card3,.@arrid,.@value,.@param;
+				equip .@item;
+				mes "Done.";
+				break;
+	}
+	enable_items;
+	close;
+
+OnInit:
+	//Positions
+	setarray .indices[1],EQI_HEAD_TOP,EQI_ARMOR,EQI_HAND_L,EQI_HAND_R,EQI_GARMENT,EQI_SHOES,EQI_ACC_L,EQI_ACC_R,EQI_HEAD_MID,EQI_HEAD_LOW;
+	
+	//ITEM_ID for enchant
+	setarray .item[0],19489,19490,19491,19492,19483,19484,19485,19486,19487,19488,19474,19475,19476,19477,19478,19479,19480,19481,19482;
+	
+	//Enchanment slot 4º
+	setarray .slot4[0],4710,4711,4712,4713,4700,4701,4702,4703,4740,4741,4742,4743,4750,4751,4752,4753;
+	
+	//Enchanment slot 3_1º
+	setarray .slot3_1[0],4710,4711,4712,4713,4700,4701,4702,4703,4740,4741,4742,4743,4750,4751,4752,4753,29672,29673,296734,29675,29676,29677,29678,29679,29680,29681,29682,29683,29684,29685,29686,29687,29688,29689;
+	
+	//Enchanment slot 3_2º
+	setarray .slot3_2[0],29672,29673,296734,29675,29676,29677,29678,29679,29680,29681,29682,29683,29684,29685,29686,29687,29688,29689;
+	
+	//Enchanment slot 2_1º
+	setarray .slot2_1[0],29061,29062,29063,29064,29065,29066,29067,29068,29069,29070;
+	
+	//Enchanment slot 2_2º
+	setarray .slot2_2[0],29071,29072,29073,29074,29075,29076,29077,29078,29079,29080;
+	
+	//Enchanment slot 2_3º
+	setarray .slot2_3[0],29081,29082,29083,29084,29085,29086,29087,29088,29089,29090;
+	
+	//Enchanment slot 2_4º
+	setarray .slot2_4[0],29091,29092,29093,29094,29095,29096,29097,29098,29099,29100;
+	
+	//Enchanment slot 2_5º
+	setarray .slot2_5[0],29101,29102,29103,29104,29105,29106,29107,29108,29109,29110;
+	
+	//Enchanment slot 2_6º
+	setarray .slot2_6[0],29111,29112,29113,29114,29115,29116,29117,29118,29119,29120;
+
+	//Enchanment slot 2_7º
+	setarray .slot2_7[0],29706,29707,29708,29709,29710,29711,29712,29713,29714,29715;
+	
+end;
+
+}
+
+glast_01,141,291,5	script	HUGINN2001	2_VENDING_MACHINE1,{
+	mes "[HUGIN2001]";
+	mes "Available For Services";
+	next;
+	switch(select("Shop","Sealed Conversion Reward")) {
+	case 1:
+		mes "[HUGIN2001]";
+		mes "Here are the list";
+		mes "Temporal Circlet costs ^FF0000* 5 Sealed Temporal Circlets ^000000";
+		mes "Mutated Whiteknight card ^FF0000* 50 Sealed Temporal Spells ^000000";
+		mes "Mutated Khalitzburg card ^FF0000* 70 Sealed Temporal Spells ^000000";
+		close2;
+		callshop "oghc-cir",1;
+		end;
+	case 2:
+		mes "[HUGIN2001]";
+		mes "You may exchange 1 Sealed Temporal Circlet, you can be rewarded with up to 3 conversions:";
+		next;
+		mes "[HUGIN2001]";
+		mes "1 Conversion - 61.16% Chance";
+		mes "2 Conversions - 37.32% Chance";
+		mes "3 Conversions - 1.519% Chance";
+		next;
+		mes "[HUGIN2001]";
+		mes "Proceed?";
+		if(select("- Yes:- No") - 1) close;
+		next;
+		if (!countitem(25864)){
+			mes "[HUGIN2001]";
+			mes "Insufficient Sealed Circlet"; 
+			end;
+		}
+		delitem 25864,1;
+		.@r = rand(10000);
+		if ( .@r <= 7893) {
+			getitem 25867, 4;
+		} else if ( .@r > 7893 || .@r < 9022 ) { 
+			getitem 25867, 8;
+		} else if ( .@r > 9021 || .@r < 9164 ) { 
+			getitem 25867, 12;
+		} else if ( .@r > 9163 || .@r < 9205 ) {
+			getitem 25867, 16;
+		} else if ( .@r > 9204 || .@r < 9792 ) {
+			getitem 25865, 1;
+		} else if ( .@r > 9791 || .@r < 9924 ) {
+			getitem 25865, 2;
+		} else if ( .@r > 9923 || .@r < 9958 ) {
+			getitem 25865, 3;
+		} else if ( .@r > 9957 || .@r < 9965 ) {
+			getitem 25865, 4;
+		} else if ( .@r > 9964 || .@r < 9985 ) {
+			getitem 25866, 1;
+		} else if ( .@r > 9984 || .@r < 9992 ) {
+			getitem 25866, 2;
+		} else if ( .@r > 9992 || .@r <= 10000 ) {
+			getitem 25866, 3;
+		}
+		mes "[HUGIN2001]";
+		mes "Here are your rewards";
+		end;
+	}
+}
+
+glast_01,139,291,5	script	MUNINN2003	2_DROP_MACHINE,{
+	mes "[MUNINN2003]";
+	mes "Available for Services";
+	next;
+	switch(select("Random Weapon","Selectable Weapon")) {
+	case 1:
+		mes "[MUNINN2003]";
+		mes "Required ^FF00002" + getitemname(25865) +" ^000000and ^FF000020" + getitemname(25867) +"^000000.";
+		next;
+		if (countitem(25865) < 2) {
+			mes "[MUNINN2003]";
+			mes "Insufficient ^FF0000" + getitemname(25865) +".";
+			close;
+		}
+		if (countitem(25867) < 20) {
+			mes "[MUNINN2003]";
+			mes "Insufficient ^FF0000" + getitemname(25867) +".";
+			close;
+		}
+		delitem 25865,2;
+		delitem 25867,20;
+		getitem callfunc("F_Rand",1336,18191,21055,28141,32027,32353,1870,2060,13347,18198,26165,26166,26172,26216,28046,28636,28774,28775,28776,32111,32304,32401,32402,32403),1;
+		mes "[MUNINN2003]";
+		mes "Thank you for using this old machine";
+		close;	
+	case 2:
+		mes "[MUNINN2003]";
+		mes "Required ^FF000010" + getitemname(25866) +".^000000";
+		next;
+		mes "[MUNINN2003]";
+		mes "Select the weapons";
+		close2;
+		callshop "oghc-weapon",1;
+		end;
+	}
+}

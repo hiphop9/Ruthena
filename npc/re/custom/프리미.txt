@@ -1,0 +1,208 @@
+//프리미 NPC
+
+
+prontera,0,0,5	script	프리미#premium	4_F_PREMI,{
+	goto OnMainTalk;
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	end;
+
+//OnPCLogoutEvent: //무명님의 소스를 사용할 경우 이 주석을 해제해주세요.
+//	duplicateremove(strnpcinfo(0));
+//	end;
+OnMainTalk:
+
+	mes "[프리미]";
+	mes "안냐앙~ " + strcharinfo(0) + "님";
+	mes "" + strcharinfo(0) + "님 덕분에 프리미는 오늘도 기분 최고야!!";
+	cutin "prm_3.bmp", 2;
+	next;
+	mes "[프리미]";
+	mes "그럼 오늘은 프리미가 어떤 놀라운 마법을 걸어줄까?";
+	cutin "prm_2.bmp", 2;
+	next;
+
+	if(getstatus(SC_SUB_EXPBOOST))     .@menu_main$ += "^8C8C8C경험치 증가(사용중)^000000:";
+	else if(countitem(6909)<4)         .@menu_main$ += "^8C8C8C경험치 증가(재료부족)^000000:";
+	else                               .@menu_main$ += "경험치 증가(1일):";
+
+	if(getstatus(SC_SUB_ITEMBOOST))    .@menu_main$ += "^8C8C8C드롭율 증가(사용중)^000000:";
+	else if(countitem(6909)<2)         .@menu_main$ += "^8C8C8C드롭율 증가(재료부족)^000000:";
+	else                               .@menu_main$ += "드롭율 증가(1일):";
+
+	if(getstatus(SC_SUB_DEADPENALTY))  .@menu_main$ += "^8C8C8C사망 패널티 감소(사용중)^000000:";
+	else if(countitem(6909)<1)         .@menu_main$ += "^8C8C8C사망 패널티 감소(재료부족)^000000:";
+	else                               .@menu_main$ += "사망 패널티 감소(1일):";
+
+	if(getstatus(SC_SUB_EXPBOOST) || getstatus(SC_SUB_ITEMBOOST) || getstatus(SC_SUB_DEADPENALTY))
+					   .@menu_main$ += "^8C8C8C버프 서비스(사용중)^000000:";
+	else if(countitem(6909)<6)         .@menu_main$ += "^8C8C8C모든 서비스 한번에 받기(재료부족)^000000:";
+	else                               .@menu_main$ += "모든 서비스 한번에 받기(1일):";
+	
+	if(countitem(23165)<2)             .@menu_main$ += "^8C8C8C프리미엄 박스 교환(재료부족)^000000:아무 것도 하지 않는다.";
+	else                               .@menu_main$ += "프리미엄 박스 교환:아무 것도 하지 않는다.";
+
+	.@s = select(.@menu_main$);
+	setarray .@buffname$[1], "[경험치 증가]", "[드롭율 증가]", "[사망패널티 감소]", "세가지 ";
+	setarray .@buffname2$[1], "경험치 증가(1일)", "드롭율 증가(1일)", "사망패널티 감소(1일)", "경험치 증가(1일), 드롭율 증가(1일), 사망패널티 감소(1일)";
+	setarray .@count[1], 4, 2, 1, 6;
+	if (.@s == 6) {
+		mes "[프리미]";
+		mes "후아암!";
+		mes "아무 것도 안하기 딱 좋은 날씨야!";
+		cutin "prm_3.bmp", 2;
+		next;
+		mes "[프리미]";
+		mes "프리미, 이런 날엔 느긋하게 냥다래를 먹으면서 고릉고릉 하는게 제일 좋앙! ";
+		cutin "prm_2.bmp", 2;
+		close3;
+	} else if (.@s == 5) {
+		if(countitem(23165)<2) {
+			mes "[프리미]";
+			mes "하나는 프리미니까!";
+			mes "^49b85b[프리미엄 서비스 직원] 아이템이 2개 이상 있어야 프리미엄 박스로 바꿀 수 있어!^000000";
+			mes "프리미는 프리미엄 박스로 바꿀 수 없다궁!";
+			cutin "prm_3.bmp", 2;
+			close3;
+		} else {
+			mes "[프리미]";
+			mes "^49b85b[프리미엄 서비스 직원] 아이템을 프리미엄 박스로 바꿀 수 있어!^000000";
+			mes "^49b85b프리미는 하나만 있으면 되니까!^000000";
+			cutin "prm_2.bmp", 2;
+			next;
+
+			.@menu_sub$ = "";
+			setarray .@boxcount[1], 2, 7, 13;
+			setarray .@itemid[1], 23198, 23199, 23200;
+			setarray .@boxname$[1], "프리미엄우든박스", "프리미엄골든박스", "프리미엄플래티넘박스";
+			for(.@i = 1; .@i <= getarraysize(.@boxcount); .@i++) {
+				if(countitem(23165)<.@boxcount[.@i]) {
+					.@menu_sub$ += "^8C8C8C" + .@boxname$[.@i] + " 교환불가^000000:";
+				} else {
+					.@menu_sub$ += "" + .@boxname$[.@i] + ":";
+				}
+			}
+			.@menu_sub$ += "그만 둔다";
+
+			.@ss = select(.@menu_sub$);
+			if(countitem(23165) < .@boxcount[.@ss]) {
+				mes "[프리미]";
+				mes "하나는 프리미니까!";
+				mes "^49b85b[프리미엄 서비스 직원] 아이템이 " + .@boxcount[.@ss] + "개 이상 있어야 " + .@boxname$[.@ss] + "1개로 바꿀 수 있어!^000000";
+				mes "프리미는 프리미엄 박스로 바꿀 수 없다궁!";
+				cutin "prm_4.bmp", 2;
+				close3;
+			} else {
+				mes "[프리미]";
+				mes "^49b85b" + strcharinfo(0) + "님이 원한다면 지금 당장 [프리미엄 서비스 직원] 아이템 " + (.@boxcount[.@ss]-1) + "개가 " + .@boxname$[.@ss] + "로 바뀌는 마법을 걸어줄게!^000000";
+				cutin "prm_1.bmp", 2;
+				next;
+				if( select( "바꾼다.", "바꾸지 않는다." ) == 2) {
+					mes "[프리미]";
+					mes "^49b85b[프리미엄 서비스 직원] 아이템을 많이 가져오면 더 좋은 상자로 바꿀 수 있어!^000000";
+					mes "사실 프리미는 그런 반짝반짝한 박스보다는 바삭바삭한 골판지 박스가 더 좋지만~";
+					cutin "prm_3.bmp", 2;
+					close3;
+				}
+				mes "[프리미]";
+				mes "프리미의 자리를 위협하는 다른 [프리미엄 서비스 직원]은 귀여운 " + .@boxname$[.@ss] + "가 되어랏!!!!!";
+				mes "냐냥 냐냥! 냐냐냐냥!!!";
+				delitem 23165,.@boxcount[.@ss]-1;
+				getitem .@itemid[.@ss],1;
+				cutin "prm_2.bmp", 2;
+				next;
+				mes "[프리미]";
+				mes "냣호!";
+				mes "자! 여기 귀여운 " + .@boxname$[.@ss] + " 1개!";
+				mes "뭐가 들어있을지 프리미도 꼭 구경 시켜줘야돼!!!";
+				cutin "prm_3.bmp", 2;
+				close3;
+			}
+		}
+	} else {
+		if(.@s == 1 && getstatus(SC_SUB_EXPBOOST) ||
+		   .@s == 2 && getstatus(SC_SUB_ITEMBOOST) ||
+		   .@s == 3 && getstatus(SC_SUB_DEADPENALTY) ||
+		   .@s == 4 && (getstatus(SC_SUB_EXPBOOST) || getstatus(SC_SUB_ITEMBOOST) || getstatus(SC_SUB_DEADPENALTY))) {
+			mes "[프리미]";
+			mes "웅~ " + strcharinfo(0) + "님은 이미 프리미의 마법에 걸려 있는 걸?";
+			mes "^49b85b마법에 걸려있는 동안은 같은 마법을 걸어 줄 수 없어!^000000";
+			cutin "prm_4.bmp", 2;
+			close3;
+		} else if(countitem(6909)<.@count[.@s]) {
+			mes "[프리미]";
+			mes "흐앙~";
+			mes "냥다래가 부족해서 마법을 쓸 수 없어.";
+			mes "^49b85b" + .@buffname$[.@s] + "마법을 쓰려면 냥다래 " + .@count[.@s] + "개정도의 마력이 필요하다궁~^000000";
+			cutin "prm_4.bmp", 2;
+			close3;
+		} else {
+			mes "[프리미]";
+			mes "^49b85b" + ((.@s==4)?"[경험치 증가], [드롭율 증가], [사망패널티 감소]마법을 동시에":"" + .@buffname$[.@s] + "마법을") + " 쓰려면 냥다래 " + .@count[.@s] + "개정도의 마력이 필요한뎅~^000000";
+			mes "" + strcharinfo(0) + "님! 프리미를 위해서 " + strcharinfo(0) + "님의 소중한 냥다래를 줄 수 있어?";
+			cutin "prm_1.bmp", 2;
+			next;
+			mes "^ff0000   ※ 주의사항 ※^000000";
+			mes "^ff0000냥다래열매 " + .@count[.@s] + "개를 지급하여 " + .@buffname2$[.@s] + " 버프를 받을 수 있습니다.^000000";
+			mes "^ff0000지급된 아이템은 청약 철회 대상에서 제외됩니다.^000000";
+			next;
+			if( select( "버프를 받는다.", "그만 둔다." ) == 2) {
+				mes "[프리미]";
+				mes "그래!";
+				mes "냥다래는 너무너무 소중한 걸!";
+				cutin "prm_4.bmp", 2;
+				next;
+				mes "[프리미]";
+				mes "그래도 프리미의 도움이 필요하면 언제든지 불러줘!";
+				mes "프리미는 언제나 " + strcharinfo(0) + "님의 곁에 있으니까~";
+				close3;
+			}
+			mes "[프리미]";
+			mes "후앗!";
+			mes "그럼 실력 발휘 좀 해보실까낭!!!!!";
+			cutin "prm_3.bmp", 2;
+			next;
+			mes "[프리미]";
+			mes "어때 " + strcharinfo(0) + "님!";
+			.@now = gettimetick(2);
+			if(.@s == 1) {
+				mes "뭐든지 할 수 있을 것 같은 느낌이 들지 않아?";
+				mes "냣!!! 이러고 있을 때가 아냐!";
+				mes "어서 사냥하러 가보자!";
+				cutin "prm_2.bmp", 2;
+				#pexp_start =.@now;
+				#pexp_duration = 604800000;
+				sc_start4 SC_SUB_EXPBOOST,#pexp_duration,30,0,0,#pexp_start;
+			} else if(.@s == 2) {
+				mes "아이템이 마구마구 떨어질 것 같은 느낌이 들지 않아?";
+				mes "냣!!! 이러고 있을 때가 아냐!";
+				mes "어서 아이템을 줏으러 가보자!";
+				cutin "prm_2.bmp", 2;
+				#pdrop_start =.@now;
+				#pdrop_duration = 604800000;
+				sc_start4 SC_SUB_ITEMBOOST,#pdrop_duration,30,0,0,#pdrop_start;
+			} else if(.@s == 3) {
+				mes "전투불능이 되어도 아무 것도 잃어버리지 않을 것 같은 느낌이 들지 않아?";
+				mes "흠 그런데 이건 어떻게 확인해본담?";
+				cutin "prm_4.bmp", 2;
+				#ppenalty_start =.@now;
+				#ppenalty_duration = 604800000;
+				sc_start4 SC_SUB_DEADPENALTY,#ppenalty_duration,50,0,0,#ppenalty_start;
+			} else {
+				mes "뭐든지 할 수 있을 것 같은 느낌이 들지 않아?";
+				mes "냣!!! 이러고 있을 때가 아냐!";
+				mes "어서 사냥하러 가보자!";
+				cutin "prm_2.bmp", 2;
+				#pexp_start = #pdrop_start = #ppenalty_start =.@now;
+				#pexp_duration = #pdrop_duration = #ppenalty_duration = 604800000; 
+				sc_start4 SC_SUB_EXPBOOST,#pexp_duration,30,0,0,#pexp_start;
+				sc_start4 SC_SUB_ITEMBOOST,#pdrop_duration,30,0,0,#pdrop_start;
+				sc_start4 SC_SUB_DEADPENALTY,#ppenalty_duration,50,0,0,#ppenalty_start;
+			}
+			delitem 6909,.@count[.@s];
+			close3;
+		}
+	}
+
+
+}

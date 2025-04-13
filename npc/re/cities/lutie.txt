@@ -8,4 +8,4 @@
 
 // Teleport to Lutie
 //============================================================
-aldebaran,168,168,4	duplicate(Mr. Claus)	Mr. Claus#1	718
+aldebaran,168,168,4	duplicate(Mr. Claus)	링크산타#1	718

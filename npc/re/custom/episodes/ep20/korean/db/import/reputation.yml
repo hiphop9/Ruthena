@@ -1,0 +1,8 @@
+
+Header:
+  Type: REPUTATION_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep20/reputation.yml

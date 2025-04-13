@@ -1,0 +1,210 @@
+
+function	script	F_Pontifex_Courage	{
+	.@r = rand(210);
+
+	if (.@r < 10)  { set getarg(0), RDMOPT_VAR_MAXHPAMOUNT; set getarg(1), rand(2,10)*100; }		// MHP + 200 ~ 1000
+	else if (.@r < 20)  { set getarg(0), RDMOPT_VAR_MAXSPAMOUNT; set getarg(1), rand(1,5)*50; }	// MSP + 50 ~ 250
+	else if (.@r < 30)  { set getarg(0), RDMOPT_VAR_ATKPERCENT; set getarg(1), rand(1,5); }		// ATK + 1% ~ 5%
+	else if (.@r < 40)  { set getarg(0), RDMOPT_VAR_ATTPOWER; set getarg(1), rand(10,50); }	// ATK + 10 ~ 50
+	else if (.@r < 50)  { set getarg(0), RDMOPT_VAR_ITEMDEFPOWER; set getarg(1), rand(10,50); }	// DEF + 10 ~ 50
+	else if (.@r < 60)  { set getarg(0), RDMOPT_VAR_AVOIDSUCCESSVALUE; set getarg(1), rand(5,25); }	// FLEE + 5 ~ 25
+	else if (.@r < 70)  { set getarg(0), RDMOPT_VAR_HITSUCCESSVALUE; set getarg(1), rand(5,25); }	// HIT + 5 ~ 25
+	else if (.@r < 80)  { set getarg(0), RDMOPT_RACE_DAMAGE_HUMAN; set getarg(1), rand(3,15); }	// Physical Damage to Demi-Human Monsters + 3% ~ 15%
+	else if (.@r < 90)  { set getarg(0), RDMOPT_RACE_DAMAGE_ANIMAL; set getarg(1), rand(3,15); }	// Physical Damage to Brute Monsters + 3% ~ 15%
+	else if (.@r < 100)  { set getarg(0), RDMOPT_RACE_DAMAGE_DEVIL; set getarg(1), rand(3,15); }	// Physical Damage to Demon Monsters + 3% ~ 15%
+	else if (.@r < 110)  { set getarg(0), RDMOPT_RACE_DAMAGE_DRAGON; set getarg(1), rand(3,15); }	// Physical Damage to Dragon Monsters + 3% ~ 15%
+	else if (.@r < 120)  { set getarg(0), RDMOPT_RACE_DAMAGE_PLANT; set getarg(1), rand(3,15); }	// Physical Damage to Plant Monsters + 3% ~ 15%
+	else if (.@r < 130)  { set getarg(0), RDMOPT_RACE_DAMAGE_NOTHING; set getarg(1), rand(3,15); }	// Physical Damage to Formless Monsters + 3% ~ 15%
+	else if (.@r < 140)  { set getarg(0), RDMOPT_RACE_DAMAGE_ANGEL; set getarg(1), rand(3,15); }	// Physical Damage to Angel Monsters + 3% ~ 15%
+	else if (.@r < 150)  { set getarg(0), RDMOPT_RACE_DAMAGE_UNDEAD; set getarg(1), rand(3,15); }	// Physical Damage to Undead Monsters + 3% ~ 15%
+	else if (.@r < 160)  { set getarg(0), RDMOPT_RACE_DAMAGE_INSECT; set getarg(1), rand(3,15); }	// Physical Damage to Insect Monsters + 3% ~ 15%
+	else if (.@r < 170)  { set getarg(0), RDMOPT_RACE_DAMAGE_FISHS; set getarg(1), rand(3,15); }	// Physical Damage to Fish Monsters + 3% ~ 15%
+	else if (.@r < 180)  { set getarg(0), RDMOPT_RANGE_ATTACK_DAMAGE_TARGET; set getarg(1), rand(2,10); }	// Ranged Physical Damage + 2% ~ 10%
+	else if (.@r < 190)  { set getarg(0), RDMOPT_MELEE_ATTACK_DAMAGE_TARGET; set getarg(1), rand(2,10); }	// Melee Physical Damage + 2% ~ 10%
+	else if (.@r < 200)  { set getarg(0), RDMOPT_DAMAGE_CRI_TARGET; set getarg(1), rand(2,10); }	// Critical Damage + 2% ~ 10%
+	else if (.@r < 210)  { set getarg(0), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(1), rand(1,3); }	// After Cast Delay - 1% ~ 3%
+
+	.@r = rand(140);
+
+	if (.@r < 10)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_FIRE_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Fire Property Monsters + 2% ~ 10%
+	else if (.@r < 20)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_SAINT_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Holy Property Monsters + 2% ~ 10%
+	else if (.@r < 30)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_DARKNESS_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Shadow Property Monsters + 2% ~ 10%
+	else if (.@r < 40)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_POISON_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Poison Property Monsters + 2% ~ 10%
+	else if (.@r < 50)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_NOTHING_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Neutral Property Monsters + 2% ~ 10%
+	else if (.@r < 60)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_TELEKINESIS_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Ghost Property Monsters + 2% ~ 10%
+	else if (.@r < 70)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_UNDEAD_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Undead Property Monsters + 2% ~ 10%
+	else if (.@r < 80)  { set getarg(2), RDMOPT_RANGE_ATTACK_DAMAGE_TARGET; set getarg(3), rand(2,10); }	// Ranged Physical Damage + 2% ~ 10%
+	else if (.@r < 90)  { set getarg(2), RDMOPT_MELEE_ATTACK_DAMAGE_TARGET; set getarg(3), rand(2,10); }	// Melee Physical Damage + 2% ~ 10%
+	else if (.@r < 100)  { set getarg(2), RDMOPT_DAMAGE_CRI_TARGET; set getarg(3), rand(2,10); }	// Critical Damage + 2% ~ 10%
+	else if (.@r < 110)  { set getarg(2), RDMOPT_DAMAGE_SIZE_SMALL_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Small Size Monsters + 2% ~ 10%
+	else if (.@r < 120)  { set getarg(2), RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Medium Size Monsters + 2% ~ 10%
+	else if (.@r < 130)  { set getarg(2), RDMOPT_DAMAGE_SIZE_LARGE_TARGET; set getarg(3), rand(2,10); }	// Physical Damage to Large Size Monsters + 2% ~ 10%
+	else if (.@r < 140)  { set getarg(2), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(3), rand(1,3); }	// After Cast Delay - 1% ~ 3%
+
+	return;
+}
+
+
+function	script	F_Pontifex_Wisdom	{
+	.@r = rand(270);
+
+	if (.@r < 10)  { set getarg(0), RDMOPT_VAR_MAXHPAMOUNT; set getarg(1), rand(2,10)*100; }	// MHP + 200 ~ 1000
+	else if (.@r < 20)  { set getarg(0), RDMOPT_VAR_MAXSPAMOUNT; set getarg(1), rand(1,5)*50; }	// MSP + 50 ~ 250
+	else if (.@r < 30)  { set getarg(0), RDMOPT_VAR_MAGICATKPERCENT; set getarg(1), rand(1,5); }	// MATK + 1% ~ 5%
+	else if (.@r < 40)  { set getarg(0), RDMOPT_VAR_ATTMPOWER; set getarg(1), rand(10,50); }	// MATK + 10 ~ 50
+	else if (.@r < 50)  { set getarg(0), RDMOPT_VAR_ITEMDEFPOWER; set getarg(1), rand(10,50); }	// DEF + 10 ~ 50
+	else if (.@r < 60)  { set getarg(0), RDMOPT_VAR_AVOIDSUCCESSVALUE; set getarg(1), rand(5,25); }	// FLEE + 5 ~ 25
+	else if (.@r < 70)  { set getarg(0), RDMOPT_DEC_SPELL_CAST_TIME; set getarg(1), rand(2,10); }	// Variable Cast Time - 2% ~ 10%
+	else if (.@r < 80)  { set getarg(0), RDMOPT_RACE_MDAMAGE_HUMAN; set getarg(1), rand(3,15); }	// Magical Damage to Demi-Human Monsters + 3% ~ 15%
+	else if (.@r < 90)  { set getarg(0), RDMOPT_RACE_MDAMAGE_ANIMAL; set getarg(1), rand(3,15); }	// Magical Damage to Brute Monsters + 3% ~ 15%
+	else if (.@r < 100)  { set getarg(0), RDMOPT_RACE_MDAMAGE_DEVIL; set getarg(1), rand(3,15); }	// Magical Damage to Demon Monsters + 3% ~ 15%
+	else if (.@r < 110)  { set getarg(0), RDMOPT_RACE_MDAMAGE_DRAGON; set getarg(1), rand(3,15); }	// Magical Damage to Dragon Monsters + 3% ~ 15%
+	else if (.@r < 120)  { set getarg(0), RDMOPT_RACE_MDAMAGE_PLANT; set getarg(1), rand(3,15); }	// Magical Damage to Plant Monsters + 3% ~ 15%
+	else if (.@r < 130)  { set getarg(0), RDMOPT_RACE_MDAMAGE_NOTHING; set getarg(1), rand(3,15); }	// Magical Damage to Formless Monsters + 3% ~ 15%
+	else if (.@r < 140)  { set getarg(0), RDMOPT_RACE_MDAMAGE_ANGEL; set getarg(1), rand(3,15); }	// Magical Damage to Angel Monsters + 3% ~ 15%
+	else if (.@r < 150)  { set getarg(0), RDMOPT_RACE_MDAMAGE_UNDEAD; set getarg(1), rand(3,15); }	// Magical Damage to Undead Monsters + 3% ~ 15%
+	else if (.@r < 160)  { set getarg(0), RDMOPT_RACE_MDAMAGE_INSECT; set getarg(1), rand(3,15); }	// Magical Damage to Insect Monsters + 3% ~ 15%
+	else if (.@r < 170)  { set getarg(0), RDMOPT_RACE_MDAMAGE_FISHS; set getarg(1), rand(3,15); }	// Magical Damage to Fish Monsters + 3% ~ 15%
+	else if (.@r < 180)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_WATER; set getarg(1), rand(2,10); }	// Water Property Magical Damage + 2% ~ 10%
+	else if (.@r < 190)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_WIND; set getarg(1), rand(2,10); }	// Wind Property Magical Damage + 2% ~ 10%
+	else if (.@r < 200)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_GROUND; set getarg(1), rand(2,10); }	// Earth Property Magical Damage + 2% ~ 10%
+	else if (.@r < 210)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_FIRE; set getarg(1), rand(2,10); }	// Fire Property Magical Damage + 2% ~ 10%
+	else if (.@r < 220)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_SAINT; set getarg(1), rand(2,10); }	// Holy Property Magical Damage + 2% ~ 10%
+	else if (.@r < 230)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_DARKNESS; set getarg(1), rand(2,10); }	// Shadow Property Magical Damage + 2% ~ 10%
+	else if (.@r < 240)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_POISON; set getarg(1), rand(2,10); }	// Poison Property Magical Damage + 2% ~ 10%
+	else if (.@r < 250)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_NOTHING; set getarg(1), rand(2,10); }	// Neutral Property Magical Damage + 2% ~ 10%
+	else if (.@r < 260)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_TELEKINESIS; set getarg(1), rand(2,10); }	// Ghost Property Magical Damage + 2% ~ 10%
+	else if (.@r < 270)  { set getarg(0), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(1), rand(1,3); }	// After Cast Delay - 1% ~ 3%
+
+	.@r = rand(140);
+
+	if (.@r < 10)  { set getarg(2), RDMOPT_MDAMAGE_PROPERTY_UNDEAD_TARGET; set getarg(3), rand(2,10); }	// Magical Damage to Undead Property Monsters + 2% ~ 10%
+	else if (.@r < 20)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_WATER; set getarg(3), rand(2,10); }	// Water Property Magical Damage + 2% ~ 10%
+	else if (.@r < 30)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_WIND; set getarg(3), rand(2,10); }	// Wind Property Magical Damage + 2% ~ 10%
+	else if (.@r < 40)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_GROUND; set getarg(3), rand(2,10); }	// Earth Property Magical Damage + 2% ~ 10%
+	else if (.@r < 50)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_FIRE; set getarg(3), rand(2,10); }	// Fire Property Magical Damage + 2% ~ 10%
+	else if (.@r < 60)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_SAINT; set getarg(3), rand(2,10); }	// Holy Property Magical Damage + 2% ~ 10%
+	else if (.@r < 70)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_DARKNESS; set getarg(3), rand(2,10); }	// Shadow Property Magical Damage + 2% ~ 10%
+	else if (.@r < 80)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_POISON; set getarg(3), rand(2,10); }	// Poison Property Magical Damage + 2% ~ 10%
+	else if (.@r < 90)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_NOTHING; set getarg(3), rand(2,10); }	// Neutral Property Magical Damage + 2% ~ 10%
+	else if (.@r < 100)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_TELEKINESIS; set getarg(3), rand(2,10); }	// Ghost Property Magical Damage + 2% ~ 10%
+	else if (.@r < 110)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_SMALL_TARGET; set getarg(3), rand(2,10); }	// Magical Damage to Small Size Monsters + 2% ~ 10%
+	else if (.@r < 120)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_MIDIUM_TARGET; set getarg(3), rand(2,10); }	// Magical Damage to Medium Size Monsters + 2% ~ 10%
+	else if (.@r < 130)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_LARGE_TARGET; set getarg(3), rand(2,10); }	// Magical Damage to Large Size Monsters + 2% ~ 10%
+	else if (.@r < 140)  { set getarg(2), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(3), rand(1,3); }	// After Cast Delay - 1% ~ 3%
+
+	return;
+}
+
+
+function	script	F_Pontifex_Tenacity	{
+	.@r = rand(210);
+
+	if (.@r < 10)  { set getarg(0), RDMOPT_VAR_MAXHPAMOUNT; set getarg(1), rand(1,5)*250; }	// MHP + 250 ~ 1250
+	else if (.@r < 20)  { set getarg(0), RDMOPT_VAR_MAXSPAMOUNT; set getarg(1), rand(1,5)*75; }	// MSP + 75 ~ 375
+	else if (.@r < 30)  { set getarg(0), RDMOPT_VAR_ATKPERCENT; set getarg(1), rand(2,10); }	// ATK + 2% ~ 10%
+	else if (.@r < 40)  { set getarg(0), RDMOPT_VAR_ATTPOWER; set getarg(1), rand(12,60); }	// ATK + 12 ~ 60
+	else if (.@r < 50)  { set getarg(0), RDMOPT_VAR_ITEMDEFPOWER; set getarg(1), rand(12,60); }	// DEF + 12 ~ 60
+	else if (.@r < 60)  { set getarg(0), RDMOPT_VAR_AVOIDSUCCESSVALUE; set getarg(1), rand(6,30); }	// FLEE + 6 ~ 30
+	else if (.@r < 70)  { set getarg(0), RDMOPT_VAR_HITSUCCESSVALUE; set getarg(1), rand(6,30); }	// HIT + 6 ~ 30
+	else if (.@r < 80)  { set getarg(0), RDMOPT_RACE_DAMAGE_HUMAN; set getarg(1), rand(4,20); }	// Physical Damage to Demi-Human Monsters + 4% ~ 20%
+	else if (.@r < 90)  { set getarg(0), RDMOPT_RACE_DAMAGE_ANIMAL; set getarg(1), rand(4,20); }	// Physical Damage to Brute Monsters + 4% ~ 20%
+	else if (.@r < 100)  { set getarg(0), RDMOPT_RACE_DAMAGE_DEVIL; set getarg(1), rand(4,20); }	// Physical Damage to Demon Monsters + 4% ~ 20%
+	else if (.@r < 110)  { set getarg(0), RDMOPT_RACE_DAMAGE_DRAGON; set getarg(1), rand(4,20); }	// Physical Damage to Dragon Monsters + 4% ~ 20%
+	else if (.@r < 120)  { set getarg(0), RDMOPT_RACE_DAMAGE_PLANT; set getarg(1), rand(4,20); }	// Physical Damage to Plant Monsters + 4% ~ 20%
+	else if (.@r < 130)  { set getarg(0), RDMOPT_RACE_DAMAGE_NOTHING; set getarg(1), rand(4,20); }	// Physical Damage to Formless Monsters + 4% ~ 20%
+	else if (.@r < 140)  { set getarg(0), RDMOPT_RACE_DAMAGE_ANGEL; set getarg(1), rand(4,20); }	// Physical Damage to Angel Monsters + 4% ~ 20%
+	else if (.@r < 150)  { set getarg(0), RDMOPT_RACE_DAMAGE_UNDEAD; set getarg(1), rand(4,20); }	// Physical Damage to Undead Monsters + 4% ~ 20%
+	else if (.@r < 160)  { set getarg(0), RDMOPT_RACE_DAMAGE_INSECT; set getarg(1), rand(4,20); }	// Physical Damage to Insect Monsters + 4% ~ 20%
+	else if (.@r < 170)  { set getarg(0), RDMOPT_RACE_DAMAGE_FISHS; set getarg(1), rand(4,20); }	// Physical Damage to Fish Monsters + 4% ~ 20%
+	else if (.@r < 180)  { set getarg(0), RDMOPT_RANGE_ATTACK_DAMAGE_TARGET; set getarg(1), rand(2,10); }	// Ranged Physical Damage + 2% ~ 10%
+	else if (.@r < 190)  { set getarg(0), RDMOPT_MELEE_ATTACK_DAMAGE_TARGET; set getarg(1), rand(2,10); }	// Melee Physical Damage + 2% ~ 10%
+	else if (.@r < 200)  { set getarg(0), RDMOPT_DAMAGE_CRI_TARGET; set getarg(1), rand(2,10); }	// Critical Damage + 2% ~ 10%
+	else if (.@r < 210)  { set getarg(0), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(1), rand(1,5); }	// After Cast Delay - 1% ~ 5%
+
+	.@r = rand(170);
+
+	if (.@r < 10)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_WATER_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Water Property Monsters + 3% ~ 15%
+	else if (.@r < 20)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_WIND_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Wind Property Monsters + 3% ~ 15%
+	else if (.@r < 30)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_GROUND_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Earth Property Monsters + 3% ~ 15%
+	else if (.@r < 40)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_FIRE_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Fire Property Monsters + 3% ~ 15%
+	else if (.@r < 50)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_SAINT_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Holy Property Monsters + 3% ~ 15%
+	else if (.@r < 60)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_DARKNESS_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Shadow Property Monsters + 3% ~ 15%
+	else if (.@r < 70)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_POISON_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Poison Property Monsters + 3% ~ 15%
+	else if (.@r < 80)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_NOTHING_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Neutral Property Monsters + 3% ~ 15%
+	else if (.@r < 90)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_TELEKINESIS_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Ghost Property Monsters + 3% ~ 15%
+	else if (.@r < 100)  { set getarg(2), RDMOPT_DAMAGE_PROPERTY_UNDEAD_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Undead Property Monsters + 3% ~ 15%
+	else if (.@r < 110)  { set getarg(2), RDMOPT_RANGE_ATTACK_DAMAGE_TARGET; set getarg(3), rand(3,15); }	// Ranged Physical Damage + 3% ~ 15%
+	else if (.@r < 120)  { set getarg(2), RDMOPT_MELEE_ATTACK_DAMAGE_TARGET; set getarg(3), rand(3,15); }	// Melee Physical Damage + 3% ~ 15%
+	else if (.@r < 130)  { set getarg(2), RDMOPT_DAMAGE_CRI_TARGET; set getarg(3), rand(3,15); }	// Critical Damage + 3% ~ 15%
+	else if (.@r < 140)  { set getarg(2), RDMOPT_DAMAGE_SIZE_SMALL_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Small Size Monsters + 3% ~ 15%
+	else if (.@r < 150)  { set getarg(2), RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Medium Size Monsters + 3% ~ 15%
+	else if (.@r < 160)  { set getarg(2), RDMOPT_DAMAGE_SIZE_LARGE_TARGET; set getarg(3), rand(3,15); }	// Physical Damage to Large Size Monsters + 3% ~ 15%
+	else if (.@r < 170)  { set getarg(2), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(3), rand(1,5); }	// After Cast Delay - 1% ~ 5%
+
+	return;
+}
+
+function	script	F_Pontifex_Belief	{
+	.@r = rand(270);
+
+	if (.@r < 10)  { set getarg(0), RDMOPT_VAR_MAXHPAMOUNT; set getarg(1), rand(1,5)*250; }			// MHP + 250 ~ 1250
+	else if (.@r < 20)  { set getarg(0), RDMOPT_VAR_MAXSPAMOUNT; set getarg(1), rand(1,5)*75; }		// MSP + 75 ~ 375
+	else if (.@r < 30)  { set getarg(0), RDMOPT_VAR_MAGICATKPERCENT; set getarg(1), rand(2,10); }		// MATK + 2% ~ 10%
+	else if (.@r < 40)  { set getarg(0), RDMOPT_VAR_ATTMPOWER; set getarg(1), rand(12,60); }			// MATK + 12 ~ 60
+	else if (.@r < 50)  { set getarg(0), RDMOPT_VAR_ITEMDEFPOWER; set getarg(1), rand(12,60); }		// DEF + 12 ~ 60
+	else if (.@r < 60)  { set getarg(0), RDMOPT_VAR_AVOIDSUCCESSVALUE; set getarg(1), rand(6,30); }	// FLEE + 6 ~ 30
+	else if (.@r < 70)  { set getarg(0), RDMOPT_DEC_SPELL_CAST_TIME; set getarg(1), rand(3,15); }	// Variable Cast Time - 3% ~ 15%
+	else if (.@r < 80)  { set getarg(0), RDMOPT_RACE_MDAMAGE_HUMAN; set getarg(1), rand(4,20); }	// Magical Damage to Demi-Human Monsters + 4% ~ 20%
+	else if (.@r < 90)  { set getarg(0), RDMOPT_RACE_MDAMAGE_ANIMAL; set getarg(1), rand(4,20); }	// Magical Damage to Brute Monsters + 4% ~ 20%
+	else if (.@r < 100)  { set getarg(0), RDMOPT_RACE_MDAMAGE_DEVIL; set getarg(1), rand(4,20); }	// Magical Damage to Demon Monsters + 4% ~ 20%
+	else if (.@r < 110)  { set getarg(0), RDMOPT_RACE_MDAMAGE_DRAGON; set getarg(1), rand(4,20); }	// Magical Damage to Dragon Monsters + 4% ~ 20%
+	else if (.@r < 120)  { set getarg(0), RDMOPT_RACE_MDAMAGE_PLANT; set getarg(1), rand(4,20); }	// Magical Damage to Plant Monsters + 4% ~ 20%
+	else if (.@r < 130)  { set getarg(0), RDMOPT_RACE_MDAMAGE_NOTHING; set getarg(1), rand(4,20); }	// Magical Damage to Formless Monsters + 4% ~ 20%
+	else if (.@r < 140)  { set getarg(0), RDMOPT_RACE_MDAMAGE_ANGEL; set getarg(1), rand(4,20); }	// Magical Damage to Angel Monsters + 4% ~ 20%
+	else if (.@r < 150)  { set getarg(0), RDMOPT_RACE_MDAMAGE_UNDEAD; set getarg(1), rand(4,20); }	// Magical Damage to Undead Monsters + 4% ~ 20%
+	else if (.@r < 160)  { set getarg(0), RDMOPT_RACE_MDAMAGE_INSECT; set getarg(1), rand(4,20); }	// Magical Damage to Insect Monsters + 4% ~ 20%
+	else if (.@r < 170)  { set getarg(0), RDMOPT_RACE_MDAMAGE_FISHS; set getarg(1), rand(4,20); }	// Magical Damage to Fish Monsters + 4% ~ 20%
+	else if (.@r < 180)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_WATER; set getarg(1), rand(3,15); }	// Water Property Magical Damage + 3% ~ 15%
+	else if (.@r < 190)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_WIND; set getarg(1), rand(3,15); }	// Wind Property Magical Damage + 3% ~ 15%
+	else if (.@r < 200)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_GROUND; set getarg(1), rand(3,15); }	// Earth Property Magical Damage + 3% ~ 15%
+	else if (.@r < 210)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_FIRE; set getarg(1), rand(3,15); }	// Fire Property Magical Damage + 3% ~ 15%
+	else if (.@r < 220)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_SAINT; set getarg(1), rand(3,15); }	// Holy Property Magical Damage + 3% ~ 15%
+	else if (.@r < 230)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_DARKNESS; set getarg(1), rand(3,15); }	// Shadow Property Magical Damage + 3% ~ 15%
+	else if (.@r < 240)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_POISON; set getarg(1), rand(3,15); }	// Poison Property Magical Damage + 3% ~ 15%
+	else if (.@r < 250)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_NOTHING; set getarg(1), rand(3,15); }	// Neutral Property Magical Damage + 3% ~ 15%
+	else if (.@r < 260)  { set getarg(0), RDMOPT_ADDSKILLMDAMAGE_TELEKINESIS; set getarg(1), rand(3,15); }	// Ghost Property Magical Damage + 3% ~ 15%
+	else if (.@r < 270)  { set getarg(0), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(1), rand(1,5); }	// After Cast Delay - 1% ~ 5%
+
+	.@r = rand(170);
+
+	if (.@r < 10)  { set getarg(2), RDMOPT_MDAMAGE_PROPERTY_POISON_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Poison Property Monsters + 3% ~ 15%
+	else if (.@r < 20)  { set getarg(2), RDMOPT_MDAMAGE_PROPERTY_NOTHING_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Neutral Property Monsters + 3% ~ 15%
+	else if (.@r < 30)  { set getarg(2), RDMOPT_MDAMAGE_PROPERTY_TELEKINESIS_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Ghost Property Monsters + 3% ~ 15%
+	else if (.@r < 40)  { set getarg(2), RDMOPT_MDAMAGE_PROPERTY_UNDEAD_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Undead Property Monsters + 3% ~ 15%
+	else if (.@r < 50)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_WATER; set getarg(3), rand(3,15); }	// Water Property Magical Damage + 3% ~ 15%
+	else if (.@r < 60)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_WIND; set getarg(3), rand(3,15); }	// Wind Property Magical Damage + 3% ~ 15%
+	else if (.@r < 70)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_GROUND; set getarg(3), rand(3,15); }	// Earth Property Magical Damage + 3% ~ 15%
+	else if (.@r < 80)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_FIRE; set getarg(3), rand(3,15); }	// Fire Property Magical Damage + 3% ~ 15%
+	else if (.@r < 90)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_SAINT; set getarg(3), rand(3,15); }	// Holy Property Magical Damage + 3% ~ 15%
+	else if (.@r < 100)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_DARKNESS; set getarg(3), rand(3,15); }	// Shadow Property Magical Damage + 3% ~ 15%
+	else if (.@r < 110)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_POISON; set getarg(3), rand(3,15); }	// Poison Property Magical Damage + 3% ~ 15%
+	else if (.@r < 120)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_NOTHING; set getarg(3), rand(3,15); }	// Neutral Property Magical Damage + 3% ~ 15%
+	else if (.@r < 130)  { set getarg(2), RDMOPT_ADDSKILLMDAMAGE_TELEKINESIS; set getarg(3), rand(3,15); }	// Ghost Property Magical Damage + 3% ~ 15%
+	else if (.@r < 140)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_SMALL_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Small Size Monsters + 3% ~ 15%
+	else if (.@r < 150)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_MIDIUM_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Medium Size Monsters + 3% ~ 15%
+	else if (.@r < 160)  { set getarg(2), RDMOPT_MDAMAGE_SIZE_LARGE_TARGET; set getarg(3), rand(3,15); }	// Magical Damage to Large Size Monsters + 3% ~ 15%
+	else if (.@r < 170)  { set getarg(2), RDMOPT_DEC_SPELL_DELAY_TIME; set getarg(3), rand(1,5); }	// After Cast Delay - 1% ~ 5%
+
+	return;
+}
+
+function	script	F_GrayWolf_7_Ticket	{
+	set getarg(0), 7;
+	return;
+}
+
+function	script	F_GrayWolf_9_Ticket	{
+	set getarg(0), 9;
+	return;
+}

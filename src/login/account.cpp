@@ -13,6 +13,7 @@
 #include <common/socket.hpp>
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "login.hpp" // login_config
 
@@ -112,8 +113,12 @@ static bool account_db_sql_init(AccountDB* self) {
 
 	if( SQL_ERROR == Sql_Connect(sql_handle, db->db_username.c_str(), db->db_password.c_str(), db->db_hostname.c_str(), db->db_port, db->db_database.c_str()) )
 	{
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
-			db->db_username.c_str(), db->db_hostname.c_str(), db->db_port, db->db_database.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("uname='%s',passwd='%s',host='%s',port='%d',database='%s'으(로) 연결할 수 없습니다.\n",
+				db->db_username.c_str(), db->db_hostname.c_str(), db->db_port, db->db_database.c_str());
+		else
+			ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+				db->db_username.c_str(), db->db_hostname.c_str(), db->db_port, db->db_database.c_str());
 		Sql_ShowDebug(sql_handle);
 		Sql_Free(db->accounts);
 		db->accounts = nullptr;
@@ -396,7 +401,10 @@ static bool account_db_sql_load_str(AccountDB* self, struct mmo_account* acc, co
 
 	if( Sql_NumRows(sql_handle) > 1 )
 	{// serious problem - duplicit account
-		ShowError("account_db_sql_load_str: multiple accounts found when retrieving data for account '%s'!\n", userid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("account_db_sql_load_str: 계정 '%s'에 대한 데이터를 검색중 여러 계정이 발견되었습니다!\n", userid);
+		else
+			ShowError("account_db_sql_load_str: multiple accounts found when retrieving data for account '%s'!\n", userid);
 		Sql_FreeResult(sql_handle);
 		return false;
 	}
@@ -533,7 +541,10 @@ static bool mmo_auth_fromsql(AccountDB_SQL* db, struct mmo_account* acc, uint32 
 	acc->web_auth_token[0] = '\0';
 
 	if( acc->char_slots > MAX_CHARS ){
-		ShowError( "Account %s (AID=%u) exceeds MAX_CHARS. Capping...\n", acc->userid, acc->account_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "계정 %s (AID=%u)은(는) MAX_CHARS에 도달했습니다. 건너뛰는중...\n", acc->userid, acc->account_id );
+		else
+			ShowError( "Account %s (AID=%u) exceeds MAX_CHARS. Capping...\n", acc->userid, acc->account_id );
 		acc->char_slots = MAX_CHARS;
 	}
 
@@ -650,8 +661,13 @@ static bool mmo_auth_tosql(AccountDB_SQL* db, const struct mmo_account* acc, boo
 				break;
 			}
 
-			ShowWarning( "Your MySQL does not support SHA2 and MD5 - no hashing will be used for login token creation.\n" );
-			ShowWarning( "If you are using an old version of MySQL consider upgrading to a newer release.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0) {
+				ShowWarning( "귀하의 MySQL은 SHA2 및 MD5를 지원하지 않습니다. 로그인 토큰 생성에 해시기법이 사용되지 않습니다.\n" );
+				ShowWarning( "만약 구버전 MySQL을 사용중이라면 새로운 버전으로 업그레이드 하시기 바랍니다.\n" );
+			} else {
+				ShowWarning( "Your MySQL does not support SHA2 and MD5 - no hashing will be used for login token creation.\n" );
+				ShowWarning( "If you are using an old version of MySQL consider upgrading to a newer release.\n" );
+			}
 			query = "UPDATE `%s` SET `web_auth_token` = LEFT( CONCAT( UUID(), RAND() ), %d ), `web_auth_token_enabled` = '1' WHERE `account_id` = '%d'";
 			initialized = true;
 			break;
@@ -671,7 +687,10 @@ static bool mmo_auth_tosql(AccountDB_SQL* db, const struct mmo_account* acc, boo
 
 		if( !success ){
 			if( i == MAX_RETRIES ){
-				ShowError( "Failed to generate a unique web_auth_token with %d retries...\n", i );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "%d번 재시도하여 고유한 web_auth_token을 생성하지 못했습니다...\n", i );
+				else
+					ShowError( "Failed to generate a unique web_auth_token with %d retries...\n", i );
 			}else{
 				Sql_ShowDebug( sql_handle );
 			}
@@ -749,7 +768,10 @@ void mmo_save_global_accreg(AccountDB* self, int fd, uint32 account_id, uint32 c
 						Sql_ShowDebug(sql_handle);
 					break;
 				default:
-					ShowError("mmo_save_global_accreg: unknown type %d\n",RFIFOB(fd, cursor - 1));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("mmo_save_global_accreg: 알수 없는 타입 %d\n",RFIFOB(fd, cursor - 1));
+					else		
+						ShowError("mmo_save_global_accreg: unknown type %d\n",RFIFOB(fd, cursor - 1));
 					return;
 			}
 		}
@@ -922,7 +944,10 @@ TIMER_FUNC(account_disable_webtoken_timer){
 	AccountDB_SQL* db = reinterpret_cast<AccountDB_SQL*>(data);
 
 	if (p == nullptr) {
-		ShowInfo("Web Auth Token for account %d was disabled\n", id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("계정 %d에 대한 Web Auth Token이(가) 비활성화 되어있습니다.\n", id);
+		else		
+			ShowInfo("Web Auth Token for account %d was disabled\n", id);
 		if( SQL_ERROR == Sql_Query( db->accounts, "UPDATE `%s` SET `web_auth_token_enabled` = '0' WHERE `account_id` = '%u'", db->account_db, id ) ){
 			Sql_ShowDebug( db->accounts );
 			return 0;

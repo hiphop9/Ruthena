@@ -17,8 +17,8 @@
 
 // Renewal split [Daegaladh]
 //============================================================
-izlude,172,73,6	duplicate(Scamp)	Scamp#iz	853
-izlude_a,172,73,6	duplicate(Scamp)	Scamp#iz_a	853
-izlude_b,172,73,6	duplicate(Scamp)	Scamp#iz_b	853
-izlude_c,172,73,6	duplicate(Scamp)	Scamp#iz_c	853
-izlude_d,172,73,6	duplicate(Scamp)	Scamp#iz_d	853
+izlude,172,73,6	duplicate(Scamp)	아만#iz	853
+izlude_a,172,73,6	duplicate(Scamp)	아만#iz_a	853
+izlude_b,172,73,6	duplicate(Scamp)	아만#iz_b	853
+izlude_c,172,73,6	duplicate(Scamp)	아만#iz_c	853
+izlude_d,172,73,6	duplicate(Scamp)	아만#iz_d	853

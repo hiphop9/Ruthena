@@ -1,0 +1,129 @@
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 102202
+    AegisName: Ep20_Fatty_Icegangu
+    Name: Chubby Ice Steel Ball    # !todo check english name
+    Type: Usable
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      pet 21965;
+  - Id: 102227
+    AegisName: Glacier_Armor_9Refine
+    Name: Glaceon Armor 9 refine cube    # !todo check english name
+    Type: DelayConsume
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      laphine_upgrade();
+  - Id: 102228
+    AegisName: EP20_DGA_Refine
+    Name: Dim Glaceon Armor Enhancer    # !todo check english name
+    Type: DelayConsume
+    Weight: 200
+    Flags:
+      BuyingStore: true
+      DropEffect: CLIENT
+    Script: |
+      item_reform();
+
+# Price on kRO
+  - Id: 1000707
+    Buy: 2100
+  - Id: 1000811
+    Buy: 2500
+  - Id: 1000822
+    Buy: 2300
+  - Id: 1000823
+    Buy: 2400
+  - Id: 1000824
+    Buy: 2000
+  - Id: 1000825
+    Buy: 2500
+  - Id: 1000826
+    Buy: 2200
+  - Id: 1000829
+    Buy: 2700
+  - Id: 1000830
+    Buy: 2300
+  - Id: 1000831
+    Buy: 2200
+  - Id: 1000832
+    Buy: 2250
+  - Id: 1001081
+    Buy: 3900
+  - Id: 1001085
+    Buy: 3650
+  - Id: 1001226
+    Buy: 2600
+  - Id: 1001227
+    Buy: 3200
+  - Id: 1001228
+    Buy: 3200
+  - Id: 1001229
+    Buy: 3200
+  - Id: 1001230
+    Buy: 3200
+  - Id: 1001231
+    Buy: 4000
+  - Id: 1001232
+    Buy: 3200
+  - Id: 1001233
+    Buy: 3400
+  - Id: 1001234
+    Buy: 3800
+  - Id: 1001238
+    Buy: 3400
+  - Id: 1001239
+    Buy: 2600
+  - Id: 1001243
+    Buy: 3400
+  - Id: 1001244
+    Buy: 2800
+  - Id: 1001245
+    Buy: 3800
+  - Id: 1001247
+    Buy: 2100
+  - Id: 1001248
+    Buy: 1000
+  - Id: 1001237
+    Buy: 15000
+  - Id: 510076
+    Buy: 50000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

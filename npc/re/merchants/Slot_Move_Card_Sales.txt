@@ -12,15 +12,14 @@
 //= 1.0 Special thanks for Balfear and Everade
 //============================================================ 
 
-prt_in,211,173,3	script	Slot Move Card Sales#slo	4_F_01,{
-	mes "[Salesman]";
-	mes "Howdy.";
-	mes "I'm selling " + mesitemlink( 12786 ) + ".";
-	mes "You can ^4d4dffchange the slot position of a character using the card^000000.";
+prt_in,211,173,3	script	슬롯 이동 카드 판매#slo	4_F_01,{
+	mes "[판매원]";
+	mes "안녕하세요.";
+	mes mesitemlink( 12786 ) +"를 판매하고 있습니다.";
+	mes "^4d4dff카드를 사용한 캐릭터의 슬롯 위치를 변경^000000할 수 있습니다.";
 	next;
-	mes "[Salesman]";
-	mes "I sell it in a limited quantity every week, so if you don't see anything,";
-	mes "it means all of the items are sold out, so please come back next time.";
+	mes "[판매원]";
+	mes "매 주 한정 수량으로 판매하고 있으므로, 아무것도 보이지 않는다면 물품이 모두 소진 된 것이니 다음에 다시 와주세요.";
 	close2;
 	callshop "change_slot#slo";
 	end;

@@ -374,6 +374,19 @@ struct s_qi_display {
 	e_questinfo_markcolor color;
 };
 
+struct s_runebook_data {
+	uint16 tagId;
+	uint32 bookId;
+};
+
+struct s_runeset_data {
+	uint16 tagId;
+	uint32 setId;
+	uint8 selected;
+	uint16 upgrade;
+	uint16 failcount;
+};
+
 class map_session_data {
 public:
 	struct block_list bl;
@@ -417,6 +430,7 @@ public:
 		unsigned int buyingstore : 1;
 		unsigned int lesseffect : 1;
 		unsigned int vending : 1;
+		bool stall_ui_open;
 		unsigned int noks : 3; // [Zeph Kill Steal Protection]
 		unsigned int changemap : 1;
 		unsigned int callshop : 1; // flag to indicate that a script used callshop; on a shop
@@ -456,6 +470,7 @@ public:
 		bool roulette_open;
 		t_itemid item_reform;
 		uint64 item_enchant_index;
+		bool runeui_open;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -534,7 +549,14 @@ public:
 		reproduceskill_idx; ///Stores index of copied skill by Reproduce
 	int menuskill_id, menuskill_val, menuskill_val2;
 
+	uint16 stallvending_level;
+	unsigned int stall_expire_time;
+
 	int invincible_timer;
+	//@잡,@말 관련 정의
+	int charkamiset;
+	int charkamiset2;
+
 	t_tick canlog_tick;
 	t_tick canuseitem_tick;	// [Skotlex]
 	t_tick canusecashfood_tick;
@@ -731,8 +753,10 @@ public:
 
 	int vended_id;
 	int vender_id;
+	int stall_id;
 	int vend_num;
 	uint16 vend_skill_lv;
+	uint16 stall_skill_lv;
 	char message[MESSAGE_SIZE];
 	struct s_vending vending[MAX_VENDING];
 
@@ -827,6 +851,18 @@ public:
 	// Battlegrounds queue system [MasterOfMuppets]
 	int bg_id, bg_queue_id;
 	int tid_queue_active; ///< Timer ID associated with players joining an active BG
+
+	std::vector<s_runeset_data> runeSets;
+	std::vector<s_runebook_data> runeBooks;
+
+	struct s_runeactivated_data {
+		uint16 tagID;
+		uint32 runesetid;
+		uint16 upgrade;
+		uint8 bookNumber;
+		bool loaded;
+	} runeactivated_data;
+
 
 #ifdef SECURE_NPCTIMEOUT
 	/**

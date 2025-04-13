@@ -1,32 +1,13 @@
 //===== rAthena Script =======================================
 //= Doomed Swords Quest
 //===== By: ==================================================
-//= kobra_k88; L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.4
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Doomed Swords Quest:
-//= - Quest for Doomed Swords: Grimtooth, Mysteltain, Executioner.
-//=   Although this quest is enabled on iRO, the Mysteltainn
-//=   portion is NOT completable as the item "Young Twig" does
-//=   not drop.
-//= - Variable in use: event_magum (max 6)
-//= - Variable in use: dmdswrd_Q2 (bits 1 - 32)
-//===== Additional Comments: =================================
-//= 1.1 Fixed items count check. For all 3 swords... [Lupus]
-//= 1.3 Fixed exploit [Lupus]
-//= 1.4 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//=     Moved all non-related NPCs to their repsective files.
-//= 1.5 Added missing checkweight. [L0ne_W0lf]
+//한글번역 스카이러브
 //============================================================
 
-prt_in,162,11,2	script	Ghatu#magum	86,{
+prt_in,162,11,2	script	가투#magum	86,{
 	if (event_magum == 0) {
 		if ((dmdswrd_Q2 & 1) || (dmdswrd_Q2 & 2) || (dmdswrd_Q2 & 4) || (dmdswrd_Q2 & 8) || (dmdswrd_Q2 & 16) || (dmdswrd_Q2 & 32)) {
-			mes "[Ghatu]";
+			mes "[가투]";
 			mes "I've heard of a strange";
 			mes "blacksmith who lives in";
 			mes "seclusion deep in the";
@@ -34,15 +15,16 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 			mes "was once famous for his";
 			mes "legendary smithing skill...";
 			next;
-			mes "[Ghatu]";
-			mes "Rumor has it that he's";
-			mes "hiding in the mountains";
-			mes "since too many people want to use his talents for the wrong";
-			mes "purposes. Apparently, there is a godly quality to his weapons...";
+			mes "[가투]";
+			mes "그 사람 지금은 무슨이유에선지 산속에";
+			mes "틀어박혀서 나오지 않고 있다고 해...";
+			mes "솜씨가 꽤 좋았던 탓에 높은사람이나";
+			mes "꽤나 재력있는사람이 여러가지 뭔가";
+			mes "좋지않은 일들을 부탁했었던 모양이야.";
 			set event_magum,1;
 			close;
 		}
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "Remember that blacksmith";
 		mes "I told you about last time? It";
 		mes "seems that his weapons were";
@@ -50,7 +32,7 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 		mes "he would enchant them with ";
 		mes "tremendously powerful magic.";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "However, the man was forced";
 		mes "by the power hungry and the";
 		mes "oppressive to create weapons";
@@ -58,14 +40,14 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 		mes "It's no surprise that he went";
 		mes "into hiding in the end...";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "It's sad, really.";
 		mes "That smith used to be";
 		mes "a pretty easy going guy";
 		mes "until he was forced to work";
 		mes "against his will. Slowly, he became gloomy and intimidating...";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "But I suppose blacksmiths";
 		mes "can never really give up the";
 		mes "hammer. If you can manage to";
@@ -76,7 +58,7 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 
 	}
 	else if (event_magum == 1) {
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "Remember that blacksmith";
 		mes "I told you about last time? It";
 		mes "seems that his weapons were";
@@ -84,7 +66,7 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 		mes "he would enchant them with ";
 		mes "tremendously powerful magic.";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "However, the man was forced";
 		mes "by the power hungry and the";
 		mes "oppressive to create weapons";
@@ -92,14 +74,14 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 		mes "It's no surprise that he went";
 		mes "into hiding in the end...";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "It's sad, really.";
 		mes "That smith used to be";
 		mes "a pretty easy going guy";
 		mes "until he was forced to work";
 		mes "against his will. Slowly, he became gloomy and intimidating...";
 		next;
-		mes "[Ghatu]";
+		mes "[가투]";
 		mes "But I suppose blacksmiths";
 		mes "can never really give up the";
 		mes "hammer. If you can manage to";
@@ -108,28 +90,24 @@ prt_in,162,11,2	script	Ghatu#magum	86,{
 		set event_magum,5;
 		close;
 	}
-	mes "[Ghatu]";
-	mes "That mysterious blacksmith...";
-	mes "I wonder how he made those";
-	mes "enchanted weapons of his.";
-	mes "I've heard that he might have";
-	mes "been dabbling in the dark arts,";
-	mes "but that doesn't seem right...";
+	mes "[가투]";
+	mes "그래 페이욘숲의 그 대장장이라면";
+	mes "마검들을 만들수 있을지도";
+	mes "모르겠지만...";
+	mes "행여나 찾아가려는 생각이 있다면";
+	mes "조심하도록해 그사람 위험한";
+	mes "사람이라는 소리도 있으니깐 말이야.";
 	close;
 }
 
-prontera,197,188,2	script	Veeyop#magum	50,{
+prontera,197,188,2	script	비욥#magum	50,{
 	if (dmdswrd_Q2 & 1) {
-		mes "[Veeyop]";
-		mes "You know, talking";
-		mes "about Mysteltainn and";
-		mes "the death of Baldur just...";
-		mes "It didn't occur to me until";
-		mes "now just how morbid it all";
-		mes "sounds. Yeah, yeah, I know.";
+		mes "[비욥]";
+		mes "발두르라면 우리들이 섬기고 있는 신 오딘의 아들이지 그래서 그런지 난영~";
+		mes "그 미스틸테인이라는 무기가 껄끄러워.";
 		close;
 	}
-	mes "[Veeyop]";
+	mes "[비욥]";
 	mes "Have you heard the";
 	mes "legend of Mysteltainn?";
 	mes "It's a tree, known for being";
@@ -137,7 +115,7 @@ prontera,197,188,2	script	Veeyop#magum	50,{
 	mes "Baldur, god of light. In fact,";
 	mes "just a twig from it killed him.";
 	next;
-	mes "[Veeyop]";
+	mes "[비욥]";
 	mes "Now, I'm not sure if this";
 	mes "is true, but I've heard that";
 	mes "someone actually forged";
@@ -145,7 +123,7 @@ prontera,197,188,2	script	Veeyop#magum	50,{
 	mes "worthy of the name,";
 	mes "''Mysteltainn.''";
 	next;
-	mes "[Veeyop]";
+	mes "[비욥]";
 	mes "There's only one person";
 	mes "in the world who can forge";
 	mes "that Mysteltainn sword. I...";

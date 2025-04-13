@@ -15,88 +15,90 @@
 
 // Main NPC :: job_ko
 //============================================================
-que_ng,75,20,3	script	Artisan Tene#ko	762,{
+que_ng,75,20,3	script	장인 테네#ko	762,{
 	disable_items;
-	mes "[Artisan Tene]";
-	mes "Hello? I'm Artisan Tene, the most respectful blacksmith of them all.";
+	mes "[장인 테네]";
+	mes "안녕, 난 장인 테네, 가장 존경받는 대장장이중 한명이야.";
 	next;
-	mes "[Artisan Tene]";
-	mes "How may I help you?";
+	mes "[장인 테네]";
+	mes "뭘 도와줄까?";
 	next;
-	switch(select("Which blacksmith?:I want to add option.:I want to remove option.")) {
+	switch(select("어떤 대장장이죠?:옵션을 추가하고 싶습니다.:옵션을 지우고 싶습니다.")) {
 	case 1:
-		mes "[Artisan Tene]";
-		mes "Oh! Sorry, I didn't introduce myself.";
+		mes "[장인 테네]";
+		mes "아! 미안, 내 소개를 안했구나.";
 		next;
-		mes "[Artisan Tene]";
-		mes "I can add or remove options from some weapons and armor at a small price.";
+		mes "[장인 테네]";
+		mes "난 약간의 돈을 받고, 어떤 무기나 방어구에 옵션을 추가하거나 지워줄 수 있어.";
 		next;
-		mes "[Artisan Tene]";
-		mes "Oh! Do you want to know the list of weapons and armor I work on?";
+		mes "[장인 테네]";
+		mes "내가 작업하는 무기랑 방어구 리스트를 알려줄까?";
 		next;
-		switch(select("Take a look at the weapon list.:Take a look at the armor list.")) {
+		switch(select("무기 리스트를 알려주세요.:방어구 리스트를 알려주세요.")) {
 		case 1:
-			mes "[Artisan Tene]";
-			mes "Are you interested in the weapon list?";
+			mes "[장인 테네]";
+			mes "무기리스트에 흥미가 있구나?";
 			next;
-			mes "[Artisan Tene]";
-			mes "The weapons I work on are ";
-			mes "^ff0000Raksasa Dagger [1]^000000";
-			mes "^ff0000Mikatsuki[1]^000000";
-			mes "^ff0000Huuma Swirling Petal [2]^000000";
-			mes "^ff0000Huuma Fluttering Snow^000000";
-			mes "^ff0000Huuma Thunderstorm^000000";
+			mes "[장인 테네]";
+			mes "내가 작업하는 무기는";
+			mes "^ff0000나찰검[1]^000000";
+			mes "^ff0000미카츠키[1]^000000";
+			mes "^ff0000풍마수리검 난화[2]^000000";
+			mes "^ff0000풍마수리검 난설^000000";
+			mes "^ff0000풍마수리검 뇌우^000000";
+			mes "란다.";
 			next;
 			break;
 		case 2:
-			mes "[Artisan Tene]";
-			mes "Are you interested in the armor list?";
+			mes "[장인 테네]";
+			mes "방어구 리스트에 흥미가 있구나?";
 			next;
-			mes "[Artisan Tene]";
-			mes "The armor I work on is";
-			mes "^ff0000Wolf Armguard [1]^000000";
-			mes "^ff0000Crescent Armguard [1]^000000";
-			mes "^ff0000Ninja Scale Armor [1]^000000";
-			mes "^ff0000Tenebris Latitantes [1]^000000";
-			mes "^ff0000Special Ninja Suit [1]^000000";
+			mes "[장인 테네]";
+			mes "내가 작업하는 방어구는";
+			mes "^ff0000늑대 문양 팔목 보호대[1]^000000";
+			mes "^ff0000초승달 문양 팔목 보호대[1]^000000";
+			mes "^ff0000닌자 비늘 갑옷[1]^000000";
+			mes "^ff0000무중암영[1]^000000";
+			mes "^ff0000특수 닌자 슈츠[1]^000000";
+			mes "란다.";
 			next;
 			break;
 		}
-		mes "[Artisan Tene]";
-		mes "This is it. I'm still in practice to learn and handle more battlegear.";
+		mes "[장인 테네]";
+		mes "종류가 적은거같다고? 맞아. 나는아직 더 많은 장비를 배우고 다루기위해 연습중이야.";
 		next;
-		mes "[Artisan Tene]";
-		mes "If you'd like, I can add options to your 4th and 3rd Slots at a small cost.";
+		mes "[장인 테네]";
+		mes "아무튼 원한다면 약간의 비용으로 3번째와 4번째 슬롯에 옵션을 추가할 수 있어.";
 		close;
 	case 2:
-		mes "[Artisan Tene]";
-		mes "Oh! You need to add an option.";
-		mes "I use the method of adding options to your 4th and 3rd slots of battlegear equipped.";
+		mes "[장인 테네]";
+		mes "오, 옵션 추가가 필요하구나.";
+		mes "나는 장착중인 장비의 3번째와 4번째 슬롯에 옵션을 추가해주고있어.";
 		next;
-		mes "[Artisan Tene]";
-		mes "Since I use a stable and unique way of adding options, there are no risks of ^ff0000'Reset Refine'^000000 or ^ff0000'Losing Cards'^000000 equipped.";
+		mes "[장인 테네]";
+		mes "내가 이 작업을 할 때는 안정적인 옵션 추가 방법을 사용해서, ^ff0000'제련 초기화'^000000 나 ^ff0000'카드 분실'^000000 위험은 없으니 안심해.";
 		next;
-		mes "[Artisan Tene]";
-		mes "But since the costs of materials are high, I only ask for a ^5565AA small cost^000000 for my services with the exception of the material expenses.";
+		mes "[장인 테네]";
+		mes "하지만, 내가 사용하는 재료의 가격이 좀 비싸다보니 나도 ^5565AA약간의 비용^000000은 청구하고 있어. 어떻게보면 재료비와 내 서비스에 대한 비용인 셈이지.";
 		next;
-		mes "[Artisan Tene]";
-		mes "Ha ha. I must have talked too much. Which class of equipment do you want to add an option to?";
+		mes "[장인 테네]";
+		mes "하하. 내가 너무 말이 많았구나. 아무튼, 어떤 종류의 장비에 옵션을 추가할래?";
 		next;
-		switch(select("Weapon...:Armor...")) {
+		switch(select("무기:방어구")) {
 		case 1:
-			mes "[Artisan Tene]";
-			mes "So you want to add an option to your weapon. That will be ^ff0000100,000 Zeny for a 1 time service.^000000";
+			mes "[장인 테네]";
+			mes "무기에 옵션을 추가하고 싶구나. 무기에는 ^ff00001회에 100,000 제니^000000를 받고있어.";
 			next;
-			mes "[Artisan Tene]";
-			mes "^FF0000Ah! I can add an additional option if you equip a one-handed weapon on your right hand because it is easier for me to work on.^000000";
+			mes "[장인 테네]";
+			mes "^FF0000아! 그리고, 오른손에 한 손 무기를 장착하면 내가 작업하기 더 쉬워져, 한손무기는 오른손에 착용해 줘.^000000";
 			next;
-			mes "[Artisan Tene]";
-			mes "Which weapon do you want to add an option to?";
+			mes "[장인 테네]";
+			mes "어떤 무기에 옵션을 추가할래?";
 			next;
-			switch(select("Later...:Raksasa Dagger [1]:Mikatsuki [1]:Huuma Swirling Petal [2]:Huuma Fluttering Snow:Huuma Thunderstorm")) {
+			switch(select("다음에 할께요..:나찰검[1]:미카츠키[1]:풍마수리검 난화[2]:풍마수리검 난설:풍마수리검 뇌우")) {
 			case 1:
-				mes "[Artisan Tene]";
-				mes "Changed your mind? Very well. Hope to see you later.";
+				mes "[장인 테네]";
+				mes "마음이 바뀌었니? 뭐 괜찮아.";
 				close;
 			case 2:
 				set .@equip_id,13076; //Raksasa_Dagger
@@ -117,16 +119,16 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 			set .@part, EQI_HAND_R;
 			break;
 		case 2:
-			mes "[Artisan Tene]";
-			mes "So you want to add an option to your armor. That will be ^ff0000100,000 Zeny for a 1 time service.^000000";
+			mes "[장인 테네]";
+			mes "방어구에 옵션을 추가하고 싶구나. 방어구에는 ^ff00001회에 100,000 제니^000000를 받고있어.";
 			next;
-			mes "[Artisan Tene]";
-			mes "Which armor do you want to add an option to?";
+			mes "[장인 테네]";
+			mes "어떤 방어구에 옵션을 추가할래?";
 			next;
-			switch(select("Later...:Wolf Armguard [1]:Crescent Armguard [1]:Ninja Scale Armor [1]:Tenebris Latitantes [1]:Special Ninja Suit [1]")) {
+			switch(select("다음에 할께요..:늑대 문양 팔목 보호대[1]:초승달 문양 팔목 보호대[1]:닌자 비늘 갑옷[1]:무중암영[1]:특수 닌자 슈츠[1]")) {
 			case 1:
-				mes "[Artisan Tene]";
-				mes "Changed your mind? Very well. Hope to see you later.";
+				mes "[장인 테네]";
+				mes "마음이 바뀌었니? 뭐 괜찮아.";
 				close;
 			case 2:
 				set .@part, EQI_HAND_L;
@@ -157,19 +159,19 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 		set .@select,1;
 		break;
 	case 3:
-		mes "[Artisan Tene]";
-		mes "You want to remove an option from your item. You didn't like the option?";
+		mes "[장인 테네]";
+		mes "옵션을 삭제하고 싶구나. 옵션이 맘에 안드니?";
 		next;
-		mes "[Artisan Tene]";
-		mes "Sorry but I'm not experienced enough. You've paid me for nothing.";
+		mes "[장인 테네]";
+		mes "미안, 내가 경험이 아직 부족해서. 아무튼 지우는것도 돈을 내야해.";
 		next;
-		mes "[Artisan Tene]";
-		mes "^ff0000Removing an option will be 100,000 Zeny.^000000 Which option from the list of items do you want to remove?";
+		mes "[장인 테네]";
+		mes "^ff0000옵션 삭제에는 100,000 제니를 받고있어.^000000 어떤 아이템의 옵션을 제거할래?";
 		next;
-		switch(select("Later...:Raksasa Dagger [1]:Mikatsuki [1]:Huuma Swirling Petal [2]:Huuma Fluttering Snow:Huuma Thunderstorm:Wolf Armguard [1]:Crescent Armguard [1]:Ninja Scale Armor [1]:Tenebris Latitantes [1]:Special Ninja Suit [1]")) {
+		switch(select("다음에 할께요:나찰검[1]:미카츠키[1]:풍마수리검 난화[2]:풍마수리검 난설:풍마수리검 뇌우:늑대 문양 팔목 보호대[1]:초승달 문양 팔목 보호대[1]:닌자 비늘 갑옷[1]:무중암영[1]:특수 닌자 슈츠[1]")) {
 		case 1:
-			mes "[Artisan Tene]";
-			mes "Removing options is expensive, isn't it? Sorry. I will work harder in developing my skills and bring down costs as well.";
+			mes "[장인 테네]";
+			mes "옵션 지우는 비용이 비싸? 미안. 좀 더 기술을 개발하도록 노력해서 비용을 내려볼께.";
 			close;
 		case 2:
 			set .@part, EQI_HAND_R;
@@ -216,22 +218,22 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 		setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
 		copyarray .@card[0], .@equip_card[0], 4;
 
-		mes "[Artisan Tene]";
-		mes "You want to reset ^44B7BC" + getitemname(.@equip_id) + "^000000?";
+		mes "[장인 테네]";
+		mes "^44B7BC" + getitemname(.@equip_id) + "^000000 아이템의 옵션을 지우고 싶니?";
 		next;
-		mes "[Artisan Tene]";
-		mes "The cost is the same but I do provide a service to remove only the option on the 3rd slot and leave the 4th slot as is. Are you interested?";
+		mes "[장인 테네]";
+		mes "한번 작업을 시작하면, 비용 추가 없이 4번째 슬롯의 옵션도 지울 수 있는데, 어떻게 할래?";
 		next;
-		switch(select("Reset only the 3rd Slot.:Reset all.")) {
+		switch(select("3번 슬롯만 지울께요.:둘 다 지워주세요.")) {
 		case 1:
-			mes "[Artisan Tene]";
-			mes "Very well. I will reset only your 3rd slot.";
+			mes "[장인 테네]";
+			mes "알겠어. 3번 슬롯만 지워줄께.";
 			next;
 			set .@sot03_ck,1;
 			break;
 		case 2:
-			mes "[Artisan Tene]";
-			mes "Very well. I will reset all slots.";
+			mes "[장인 테네]";
+			mes "알겠어. 모든 슬롯의 옵션을 다 지울께.";
 			next;
 			break;
 		}
@@ -239,24 +241,24 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 		break;
 	}
 	if (getequipisequiped(.@part) == 0) {
-		mes "[Artisan Tene]";
-		mes "You will have to equip all items before ^44B7BC" + getitemname(.@equip_id) + "^000000.";
+		mes "[장인 테네]";
+		mes "진행할려면 ^44B7BC" + getitemname(.@equip_id) + "^000000아이템을 착용하고 있어야 해.";
 		close;
 	}
 	if (Zeny < 100000) {  //custom translation
-		mes "[Artisan Tene]";
-		mes "I'm sorry, but you don't have enough Zeny!";
+		mes "[장인 테네]";
+		mes "미안한데, 제니가 부족해!";
 		next;
-		mes "[Artisan Tene]";
-		mes "Our charge is very low, so please bear with me.";
+		mes "[장인 테네]";
+		mes "그래도 우린 저렴한편인데.. 이해해 줘.";
 		close;
 	}
 	if (getequipid(.@part) != .@equip_id) {
-		mes "[Artisan Tene]";
-		mes "I don't think this is the equipment you requested.";
+		mes "[장인 테네]";
+		mes "음? 아까 요청했던 장비가 아닌거같은데?";
 		next;
-		mes "[Artisan Tene]";
-		mes "I cannot work on equipment other than those from my list.";
+		mes "[장인 테네]";
+		mes "난 아직 내 목록에 있는 장비들 말고는 작업할 수가 없어..";
 		close;
 	}
 
@@ -264,15 +266,15 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 	if (.@select == 2) {
 		if (.@sot03_ck) {// reset only 3rd slot
 			if (getiteminfo(.@equip_card[2], ITEMINFO_SUBTYPE) != CARD_ENCHANT) { // Armor Enchant System
-				mes "[Artisan Tene]";
-				mes "The third slot is is not enchanted. Please check again."; //custom translation
+				mes "[장인 테네]";
+				mes "세번째 슬롯에 인챈트가 되어있지 않은데, 한번 더 확인해줄래?"; //custom translation
 				close;
 			}
 			set .@equip_card[2],0;
 		} else {
 			if (getiteminfo(.@equip_card[3], ITEMINFO_SUBTYPE) != CARD_ENCHANT) { // Armor Enchant System
-				mes "[Artisan Tene]";
-				mes "This equipment is is not enchanted. Please check again."; //custom translation
+				mes "[장인 테네]";
+				mes "이 장비는 인챈트가 안되어있는데, 한번 더 확인해주겠어?"; //custom translation
 				close;
 			}
 			set .@equip_card[2],0;
@@ -289,8 +291,8 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 //		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
 		getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
 
-		mes "[Artisan Tene]";
-		mes "Initialization complete.";
+		mes "[장인 테네]";
+		mes "좋아! 완료됐어.";
 		close;
 	}
 
@@ -304,37 +306,37 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 	//custom translations
 	if (getiteminfo(.@equip_card[3], ITEMINFO_SUBTYPE) == CARD_ENCHANT) { // Armor Enchant System
 		if (getiteminfo(.@equip_card[2], ITEMINFO_SUBTYPE) == CARD_ENCHANT) {
-			mes "[Artisan Tene]";
-			mes "This equipment cannot be further enchanted.";
+			mes "[장인 테네]";
+			mes "이 장비는 더이상 인챈트 할 수 없어.";
 			next;
-			mes "[Artisan Tene]";
-			mes "If you are not satisfied with the enchantments, I suggest that you initialize.";
+			mes "[장인 테네]";
+			mes "만약 인챈트된게 만족스럽지 않으면, 이미 인챈트된 옵션을 지우는걸 추천할께.";
 			close;
 		} else {
-			mes "[Artisan Tene]";
-			mes "The fourth slot has already been enchanted. Shall I enchant the third slot as well?";
+			mes "[장인 테네]";
+			mes "네번째 슬롯은 이미 인챈트되어있네. 세번째 슬롯도 인챈트 해줄까?";
 			next;
-			if(select("Do it later:Do it now") == 1) {
-				mes "[Artisan Tene]";
-				mes "Very well. Hope to see you later.";
+			if(select("다음에 할께요:해주세요.") == 1) {
+				mes "[장인 테네]";
+				mes "좋아. 다음에 보자.";
 				close;
 			}
-			mes "[Artisan Tene]";
-			mes "Starting to enchant the third slot.";
+			mes "[장인 테네]";
+			mes "세번째 슬롯 인챈트를 시작할께.";
 			next;
 			set .@ko_type02,2;
 		}
 	} else {
-		mes "[Artisan Tene]";
-		mes "This equipment is not currently enchanted. Shall I enchant the fourth slot?";
+		mes "[장인 테네]";
+		mes "이 장비는 인챈트 된게 하나도 없네. 네번째 슬롯에 인챈트를 해줄까?";
 		next;
-		if(select("Do it later:Do it now") == 1) {
-			mes "[Artisan Tene]";
-			mes "Very well. Hope to see you later.";
+		if(select("다음에 할께요:해주세요") == 1) {
+			mes "[장인 테네]";
+			mes "좋아, 다음에 보자.";
 			close;
 		}
-		mes "[Artisan Tene]";
-		mes "Starting to enchant the fourth slot.";
+		mes "[장인 테네]";
+		mes "네번째 슬롯에 인챈트를 시작할께.";
 		next;
 		set .@ko_type02,1;
 	}
@@ -513,8 +515,8 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 			break;
 		}
 	} else {
-		mes "[Artisan Tene]";
-		mes "An unknown error has occurred. Please contact customer service. *^_^*";
+		mes "[장인 테네]";
+		mes "알 수 없는 오류가 발생하였습니다. GM에게 문의해주세요 *^_^*";
 		close;
 	}
 	if (.@ko_type02 == 1) {
@@ -534,8 +536,8 @@ que_ng,75,20,3	script	Artisan Tene#ko	762,{
 //	GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@equip_card[3]
 	getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@equip_card[3];
 
-	mes "[Artisan Tene]";
+	mes "[장인 테네]";
 	mes "^44B7BC" + getitemname(.@equip_id) + "^000000";
-	mes "The equipment has been enchanted."; //custom translation
+	mes "그 장비는 이미 인챈트가 되어있어."; //custom translation
 	close;
 }

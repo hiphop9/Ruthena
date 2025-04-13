@@ -8,20 +8,21 @@
 //============================================================
 
 // Kiwawa Desert
-rockrdg1,0,0	monster	Buffalo Bandit Sharpsho	3736,20
-rockrdg1,0,0	monster	Buffalo Bandit Duelist	3737,10
-rockrdg1,0,0	monster	Coyote	3739,40
-rockrdg1,0,0	monster	Thief Bug	1051,10
-rockrdg1,0,0	monster	Green Plant	1080,8
-rockrdg1,0,0	monster	Yellow Plant	1081,4
-rockrdg1,0,0	monster	Black Mushroom	1084,8
+rockrdg1,0,0	monster	소적단	3736,20
+rockrdg1,0,0	monster	소적단	3737,10
+rockrdg1,0,0	monster	코요테	3739,40
+rockrdg1,0,0	monster	도둑벌레	1051,10
+rockrdg1,0,0	monster	초록 풀	1080,8
+rockrdg1,0,0	monster	노란 풀	1081,4
+rockrdg1,0,0	monster	검은 버섯	1084,8
 
 // Kiwawa Desert
-rockrdg2,0,0	monster	Buffalo Bandit Duelist	3737,20
-rockrdg2,0,0	monster	Bowie Buffalo Bandit	3738,60
-rockrdg2,0,0	monster	Coyote	3739,10
-rockrdg2,0,0	monster	Green Plant	1080,5
-rockrdg2,0,0	monster	Yellow Plant	1081,4
-rockrdg2,0,0	monster	White Plant	1082,5
-rockrdg2,0,0	monster	Shining Plant	1083,4
-rockrdg2,0,0	monster	Thief Bug	1051,10
+rockrdg2,0,0	monster	소적단	3737,20
+rockrdg2,0,0	monster	소적단	3738,60
+rockrdg2,0,0	monster	코요테	3739,10
+rockrdg2,0,0	monster	초록 풀	1080,5
+rockrdg2,0,0	monster	노란 풀	1081,4
+rockrdg2,0,0	monster	하얀 풀	1082,5
+rockrdg2,0,0	monster	빛나는 풀	1083,4
+rockrdg2,0,0	monster	도둑벌레	1051,10
+

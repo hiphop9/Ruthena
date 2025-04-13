@@ -4,31 +4,31 @@
 //= [Walkthrough Conversion]
 //= NPCs that give hunting quests in exchange for experience.
 //===== Changelog: ===========================================
-//= 1.0 First version. [Capuche]
+//한글번역 스카이러브
 //============================================================
 
 -	marketshop	market_soda	-1,1000374:50000:-1
 
-rachel,142,155,3	script	Carbonated Water Vending Machine#ra	4_VENDING_MACHINE2,{
+rachel,142,155,3	script	초절탄산수  자판기#ra	4_VENDING_MACHINE2,{
 	.@item_name$ = getitemname(1000374);
 
-	mes "[Carbonated Water Vending Machine]";
-	mes "<font color = 2ECCFA>Clean</font> through your <font color = DF0101>cramped</font> stomach with a glass of <i>refreshing</i> <b>" + .@item_name$ + "</b>!";
-	mes "It has an <b>excellent effect</b> on urgency, overeating and indigestion.";
+	mes "[초절탄산수  자판기]";
+	mes "<i>상큼시원한</i> <b>" + .@item_name$ + "</b>한 잔으로 <font color = DF0101>갑갑하던</font> 속을 <font color = 2ECCFA>시원하게</font> 뚫어보세요!";
+	mes "급체, 과식, 소화불량에 <b>탁월한 효과</b>를 보입니다.";
 	next;
-	mes "[Carbonated Water Vending Machine]";
-	mes "<font size = 10, color = DF0101>Caution: There is a report that excessive consumption of the product in a state of accumulated fatigue due to its strong carbonation effect may cause temporary memory loss.</font>";
+	mes "[초절탄산수  자판기]";
+	mes "<font size = 10, color = DF0101>주의: 강력한 탄산 효과로 피로가 누적된 상태에서 과도하게 음용할 경우 일시적 기억상실이 유발된다는 보고가 있습니다.</font>";
 	next;
 	callshop "market_soda";
 	end;
 }
-prontera,170,125,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#prt	4_VENDING_MACHINE2
-alberta,127,59,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#alb	4_VENDING_MACHINE2
-einbroch,249,186,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#ein	4_VENDING_MACHINE2
-geffen,153,70,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#gef	4_VENDING_MACHINE2
-yuno,177,182,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#yu	4_VENDING_MACHINE2
-veins,218,122,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#ve	4_VENDING_MACHINE2
-lighthalzen,173,108,3	duplicate(Carbonated Water Vending Machine#ra)	Carbonated Water Vending Machine#lig	4_VENDING_MACHINE2
+prontera,170,125,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#prt	4_VENDING_MACHINE2
+alberta,127,59,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#alb	4_VENDING_MACHINE2
+einbroch,249,186,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#ein	4_VENDING_MACHINE2
+geffen,153,70,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#gef	4_VENDING_MACHINE2
+yuno,177,182,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#yu	4_VENDING_MACHINE2
+veins,218,122,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#ve	4_VENDING_MACHINE2
+lighthalzen,173,108,3	duplicate(초절탄산수  자판기#ra)	초절탄산수  자판기#lig	4_VENDING_MACHINE2
 
 
 function	script	F_Brilliant_Soda	{
@@ -171,7 +171,7 @@ rachel,142,152,5	script	Assistant Mumuz#ra	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -245,7 +245,7 @@ alberta,124,59,5	script	Assistant Dunea#alb	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -319,7 +319,7 @@ einbroch,246,186,5	script	Assistant Remain#ein	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -393,7 +393,7 @@ geffen,151,68,5	script	Assistant Kihana#gef	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -467,7 +467,7 @@ yuno,177,179,3	script	Assistant Avery#yu	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -541,7 +541,7 @@ veins,215,122,5	script	Assistant Eureka#ve	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -618,68 +618,70 @@ lighthalzen,171,106,5	script	Assistant Staff#lig	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
-prontera,168,125,5	script	Assistant Alonzo#prt	4_M_CRU_HEAD,{
+prontera,168,125,5	script	보조관 알론조#prt	4_M_CRU_HEAD,{
 	.@npc_name$ = "[" + strnpcinfo(1) + "]";
 	.@item_name$ = getitemname(1000374);
 
 	if (isbegin_quest(16547) == 0) {
 		mes .@npc_name$;
-		mes "Would you like to participate in the monster subjugation event hosted by the Juno Monster Society?";
-		mes "We will take you directly to your desired location!";
+		mes "유노 몬스터 학회에서 주최하는 몬스터 토벌행사에 참가하시겠어요?";
+		mes "원하시는 장소로 직접 이동시켜 드립니다!";
 		next;
 		mes .@npc_name$;
-		mes "I'm Alonzo, Assistant Superintendent of the Juno Monster Society.";
-		mes "I'm here to promote the monster subjugation event to you.";
+		mes "저는 유노 몬스터 학회의 보조관 알론조.";
+		mes "여러분께 몬스터 토벌 행사를 홍보하러 나왔습니다.";
 		next;
-		select( "Monster subjugation?", "Juno Monster Society?" );	// note: same text
+		select( "몬스터 토벌?", "유노 몬스터 학회?" );	// note: same text
 		mes .@npc_name$;
-		mes "The Juno Monster Society is literally a conference that researches and studies monsters with Juno as a base.";
-		mes "These days, some local monsters have become overly ferocious or have a large number.";
-		next;
-		mes .@npc_name$;
-		mes "That's why we're dispatching Map Examiners to various places to subdue monsters.";
+		mes "유노 몬스터 학회는 말 그대로 유노를 거점으로 몬스터에 대해 조사하고 연구하는 학회에요.";
+		mes "요즘, 일부 지역 몬스터가 과도하게 흉포해지거나 개체 수가 많아졌어요.";
 		next;
 		mes .@npc_name$;
-		mes "I was tasked with assisting Map Examiners in promoting the Monster Society in the city and managing " + .@item_name$ + " vending machines.";
-		mes "Yes, I can take you to the inspector's place";
+		mes "그래서 각지에 조사관을 파견해 몬스터 토벌 의뢰를 진행하고 있습니다.";
+		next;
+		mes .@npc_name$;
+		mes "저는 조사관들을 보조해 도시에서 몬스터 학회를 봉보하고, " + .@item_name$ + "를 관리하는 역할을 맡았지요.";
+		mes "참, 여러분을 조사관이 있는 장소까지 모셔다드릴 수도 있답니다";
 		setquest 16547;
 		completequest 16547;
 		next;
 	}
 	mes .@npc_name$;
-	mes "This is Alonzo, assistant to the Juno Monster Society!";
-	mes "How can I help you?";
+	mes "유노 몬스터 학회의 보조관 알론조입니다!";
+	mes "제가 무엇을 도와드리면 될까요?";
 	next;
-	if (select( "Guide to the Map Examiner's place.", "Listen to the work of the Juno Monster Association." ) == 2) {
+	if (select( "조사관이 있는곳으로 안내한다.", "유노 몬스터 협회의 일에 대해 듣는다." ) == 2) {
 		mes .@npc_name$;
-		mes "The Juno Monster Society is literally a conference that researches and studies monsters with Juno as a base.";
-		mes "These days, some local monsters have become overly ferocious or have a large number.";
+		mes "유노 몬스터 학회는 말 그대로 유노를 거점으로 몬스터에 대해 조사하고 연국하는학회에요.";
+		mes "요즘, 일부 지역 몬스터가 과도하게 흉포해지거나 개체 수가 많아졌어요.";
 		next;
 		mes .@npc_name$;
-		mes "That's why we're dispatching Map Examiners to various places to subdue monsters.";
+		mes "그래서 각지에 조사관을 파견해 몬스터 토벌 의뢰를 진행하고 있습니다.";
 		next;
 		mes .@npc_name$;
-		mes "I was tasked with assisting Map Examiners in promoting the Monster Society in the city and managing " + .@item_name$ + " vending machines.";
-		mes "Yes, I can take you to the inspector's place";
+		mes "저는 조사관들을 보조해 도시에서 몬스터 학회를 봉보하고, " + .@item_name$ +"를 관리하는 역할을 맡았지요.";
+		mes "참, 여러분을 조사관이 있는 장소까지 모셔다드릴 수도 있답니다";
 		close;
 	}
 	mes .@npc_name$;
-	mes "It's a bit difficult to just send it. I'm tired too.";
-	mes "Can you give me a bottle of " + .@item_name$ + "? That will give me energy.";
+	mes "그냥 보내드리기는 조금 곤란하군요.";
+	mes "저도 힘이 들어서.";
+	mes .@item_name$ + "를 한 병 주시겠어요?";
+	mes "그거라면 기운이 날 것 같네요.";
 	next;
-	if (select( "Give me a bottle of " + .@item_name$ + ".", "I refuse." ) == 2) {
+	if (select( .@item_name$ + "를 한 병 준다.", "거절한다." ) == 2) {
 		mes .@npc_name$;
-		mes "Oh, aren't you going?";
+		mes "아, 가지 않으시나요?";
 		close;
 	}
 	if (countitem(1000374) < 1) {
 		mes .@npc_name$;
-		mes "If you do not have " + .@item_name$ + ", you can purchase it.";
-		mes "Please use the Carbonated Water Vending Machine here.";
+		mes .@item_name$ + "가 없으시다면 구매하시면 되지요.";
+		mes "여기 초절단산수 자판기를 이용해 주세요.";
 		close;
 	}
 	mes .@npc_name$;
@@ -692,7 +694,7 @@ prontera,168,125,5	script	Assistant Alonzo#prt	4_M_CRU_HEAD,{
 	close;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 	end;
 }
 
@@ -827,7 +829,7 @@ ein_fild06,257,351,4	script	Map Examiner Bast#yma	4_F_CHNDRESS1,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5917,PLAYTIME) == 0 || checkquest(5917,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 70 && checkquest(5916,HUNTING) == -1 && checkquest(5917,PLAYTIME) == -1" );
@@ -955,7 +957,7 @@ gef_fild06,209,31,6	script	Map Examiner Gefil#yma	4_M_MIDDLE,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5921,PLAYTIME) == 0 || checkquest(5921,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 71 && checkquest(5920,HUNTING) == -1 && checkquest(5921,PLAYTIME) == -1" );
@@ -1094,7 +1096,7 @@ lhz_fild01,240,107,4	script	Map Examiner Lipiri#yma	4_M_HUBOY,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5919,PLAYTIME) == 0 || checkquest(5919,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 71 && checkquest(5920,HUNTING) == -1 && checkquest(5921,PLAYTIME) == -1" );
@@ -1230,7 +1232,7 @@ mal_dun01,141,126,4	script	Map Examiner Mother One#yma	4_F_TAEKWON,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5927,PLAYTIME) == 0 || checkquest(5927,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5926,HUNTING) == -1 && checkquest(5927,PLAYTIME) == -1" );
@@ -1366,7 +1368,7 @@ hu_fild01,133,157,6	script	Map Examiner Huf#yma	4_MAL_CAPTAIN,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5925,PLAYTIME) == 0 || checkquest(5925,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5924,HUNTING) == -1 && checkquest(5925,PLAYTIME) == -1" );
@@ -1494,7 +1496,7 @@ tur_dun01,159,46,4	script	Map Examiner Tural#yma	4_M_BRZ_MAN1,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5925,PLAYTIME) == 0 || checkquest(5925,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5922,HUNTING) == -1 && checkquest(5923,PLAYTIME) == -1" );
@@ -1636,7 +1638,7 @@ ein_fild03,135,46,5	script	Map Examiner Tailing#tailing	1_M_YOUNGKNIGHT,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 76 && checkquest(3471,HUNTING) == -1" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3471,HUNTING) == 2" );
@@ -1775,7 +1777,7 @@ lhz_fild03,167,344,3	script	Map Examiner Modaka#madaka	4_F_JOB_KNIGHT,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 77 && checkquest(3473,HUNTING) == -1" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3473,HUNTING) == 2" );
@@ -1902,7 +1904,7 @@ tur_dun02,151,256,4	script	Map Examiner Tidun#yma	4_M_NINJA_BLUE,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5929,PLAYTIME) == 0 || checkquest(5929,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(5928,HUNTING) == -1 && checkquest(5929,PLAYTIME) == -1" );
@@ -2031,7 +2033,7 @@ tur_dun03,125,186,6	script	Map Examiner Tsensor#yma	4_M_SIT_NOVICE,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5931,PLAYTIME) == 0 || checkquest(5931,PLAYTIME) == 1) && countitem(1000374) > 2" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(5930,HUNTING) == -1 && checkquest(5931,PLAYTIME) == -1" );
@@ -2170,7 +2172,7 @@ ra_fild12,50,219,1	script	Map Examiner Chakari#chakari	4_F_JOB_ASSASSIN,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	// note: ! displayed when playtime ongoing
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(3475,HUNTING) == -1" );
@@ -2311,7 +2313,7 @@ ice_dun01,161,13,3	script	Map Examiner Dove#dove123	8_F_GIRL,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 85 && checkquest(3483,HUNTING) == -1" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3483,HUNTING) == 2" );
@@ -2454,7 +2456,7 @@ ra_fild08,163,47,5	script	Map Examiner Lucia#rsia	4_F_04,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 85 && checkquest(3479,HUNTING) == -1" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3479,HUNTING) == 2" );
@@ -2604,7 +2606,7 @@ ra_fild04,274,69,5	script	Map Examiner Sukumari#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(8668,HUNTING) == -1 && checkquest(8667,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8667,PLAYTIME) == 2" );
@@ -2750,7 +2752,7 @@ ve_fild07,158,354,3	script	Map Examiner Shevko#chevco	2_M_DYEINGER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(3477,HUNTING) == -1" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3477,HUNTING) == 2" );
@@ -2895,7 +2897,7 @@ ra_fild03,368,183,5	script	Map Examiner Lauren#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(8665,HUNTING) == -1 && checkquest(8664,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8664,PLAYTIME) == 2" );
@@ -3046,7 +3048,7 @@ ra_fild05,48,356,5	script	Map Examiner Valenzela#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 87 && checkquest(8671,HUNTING) == -1 && checkquest(8670,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8670,PLAYTIME) == 2" );
@@ -3198,7 +3200,7 @@ ra_fild01,224,319,5	script	Map Examiner Ciara#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 88 && checkquest(8662,HUNTING) == -1 && checkquest(8661,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8661,PLAYTIME) == 2" );
@@ -3341,7 +3343,7 @@ ve_fild01,354,280,3	script	Map Examiner Yirun Seo#suiroon	4_F_SISTER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 90 && checkquest(3481,HUNTING) == -1 && checkquest(3482,PLAYTIME) == -1" );
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(3482,PLAYTIME) == 2" );
@@ -3521,7 +3523,7 @@ S_Warp:
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 90 && checkquest(8675,HUNTING) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8675) == 2 && checkquest(8677,HUNTING) == -1 && checkquest(8676,PLAYTIME) == -1" );
@@ -3691,7 +3693,7 @@ ra_fild06,292,39,5	script	Map Examiner Kantu#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 93 && checkquest(8672,HUNTING) == -1 && checkquest(8673,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8672) == 2 && checkquest(8674,HUNTING) == -1 && checkquest(8673,PLAYTIME) == -1" );
@@ -3741,7 +3743,7 @@ ve_fild03,348,230,5	script	Map Examiner Dew#85	4_M_MOC_SOLDIER,{
 		specialeffect EF_FLASHER;
 		mes .@npc_name$;
 		mes "It's refreshing!";
-		mes "캬~...";
+		mes "?~...";
 		next;
 		mes .@npc_name$;
 		mes "I am asking adventurers to investigate monster subjugation, how do you feel?";
@@ -3837,7 +3839,7 @@ ve_fild03,348,230,5	script	Map Examiner Dew#85	4_M_MOC_SOLDIER,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Juno Monster Society>";
+	setunittitle getnpcid(0), "<유노 몬스터 학회>";
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 95 && checkquest(8680,HUNTING) == -1 && checkquest(8679,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8679,PLAYTIME) == 2" );

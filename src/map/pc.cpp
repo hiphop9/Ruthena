@@ -28,6 +28,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp" // get_atcommand_level()
@@ -56,6 +57,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp" // pet_unlocktarget()
 #include "quest.hpp"
+#include "rune.hpp"
 #include "skill.hpp" // skill_isCopyable()
 #include "script.hpp" // struct script_reg, struct script_regstr
 #include "searchstore.hpp"  // struct s_search_store_info
@@ -114,12 +116,18 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 	if( !exists ){
 		if( !this->nodeExists( node, "End" ) ){
-			this->invalidWarning( node, "Node \"End\" is missing.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node, "\"End\" 노드가 빠졌습니다.\n" );
+			else 
+				this->invalidWarning( node, "Node \"End\" is missing.\n" );
 			return 0;
 		}
 
 		if( !this->nodeExists( node, "Rewards" ) ){
-			this->invalidWarning( node, "Node \"Rewards\" is missing.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node, "\"Rewards\" 노드가 빠졌습니다.\n" );
+			else
+				this->invalidWarning( node, "Node \"Rewards\" is missing.\n" );
 			return 0;
 		}
 
@@ -140,7 +148,10 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 		// If the period is outdated already, we do not even bother parsing
 		if( end < date_get( DT_YYYYMMDD ) ){
-			this->invalidWarning( node, "Node \"End\" date %u has already passed, skipping.\n", end );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node, "\"End\" 노드의 기간 %u이(가) 이미 지났습니다. 통과됨.\n", end );
+			else
+				this->invalidWarning( node, "Node \"End\" date %u has already passed, skipping.\n", end );
 			return 0;
 		}
 
@@ -164,14 +175,20 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 			// Check if start is inside another period
 			if( period->start <= attendance_period->start && start <= period->end ){
-				this->invalidWarning( node, "Node \"Start\" period %u intersects with period %u-%u, skipping.\n", attendance_period->start, period->start, period->end );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( node, "\"Start\" 노드의 주기 %u이(가) %u-%u 주기와 중복됩니다. 통과됨.\n", attendance_period->start, period->start, period->end );
+				else
+					this->invalidWarning( node, "Node \"Start\" period %u intersects with period %u-%u, skipping.\n", attendance_period->start, period->start, period->end );
 				collision = true;
 				break;
 			}
 
 			// Check if end is inside another period
 			if( period->start <= attendance_period->end && attendance_period->end <= period->end ){
-				this->invalidWarning( node, "Node \"End\" period %u intersects with period %u-%u.\n", attendance_period->start, period->start, period->end );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( node, "\"End\" 노드의 주기 %u이(가) %u-%u 주기와 중복됩니다.\n", attendance_period->start, period->start, period->end );
+				else
+					this->invalidWarning( node, "Node \"End\" period %u intersects with period %u-%u.\n", attendance_period->start, period->start, period->end );
 				collision = true;
 				break;
 			}
@@ -199,7 +216,10 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 			if( !reward_exists ){
 				if( !this->nodeExists( rewardNode, "ItemId" ) ){
-					this->invalidWarning( rewardNode, "Node \"ItemId\" is missing.\n" );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( rewardNode, "\"ItemId\" 노드가 빠졌습니다.\n" );
+					else
+						this->invalidWarning( rewardNode, "Node \"ItemId\" is missing.\n" );
 					return 0;
 				}
 
@@ -214,7 +234,10 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 				}
 
 				if( !item_db.exists( item_id ) ){
-					ShowError( "pc_attendance_load: Unknown item ID %u for day %d.\n", item_id, day + 1 );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "pc_attendance_load: %u은(는) %d일에 대한 알수 없는 아이템 번호입니다.\n", item_id, day + 1 );
+					else
+						ShowError( "pc_attendance_load: Unknown item ID %u for day %d.\n", item_id, day + 1 );
 					continue;
 				}
 
@@ -229,10 +252,16 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 				}
 
 				if( amount == 0 ){
-					ShowWarning( "pc_attendance_load: Invalid reward count %hu for day %d. Defaulting to 1...\n", amount, day + 1 );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning( "pc_attendance_load: %hu은(는) %d일에 대한 잘못된 보상 갯수입니다. 1로 설정합니다 ...\n", amount, day + 1 );
+					else
+						ShowWarning( "pc_attendance_load: Invalid reward count %hu for day %d. Defaulting to 1...\n", amount, day + 1 );
 					amount = 1;
 				}else if( amount > MAX_AMOUNT ){
-					ShowError( "pc_attendance_load: Reward count %hu above maximum %hu for day %d. Defaulting to %hu...\n", amount, MAX_AMOUNT, day + 1, MAX_AMOUNT );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "pc_attendance_load: 보상 갯수 %hu은(는) %d일 동안 최대 갯수 %hu개 보다 많습니다. %hu으(로) 설정합니다...\n", amount, day + 1, MAX_AMOUNT, MAX_AMOUNT );
+					else
+						ShowError( "pc_attendance_load: Reward count %hu above maximum %hu for day %d. Defaulting to %hu...\n", amount, MAX_AMOUNT, day + 1, MAX_AMOUNT );
 					amount = MAX_AMOUNT;
 				}
 
@@ -252,7 +281,10 @@ uint64 AttendanceDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 		for( int day = 0; day < attendance_period->rewards.size(); day++ ){
 			if( attendance_period->rewards.find( day ) == attendance_period->rewards.end() ){
-				ShowError( "pc_attendance_load: Reward for day %d is missing.\n", day + 1 );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "pc_attendance_load: %d일에 대한 보상이 빠져있습니다.\n", day + 1 );
+				else
+					ShowError( "pc_attendance_load: Reward for day %d is missing.\n", day + 1 );
 				missing_day = true;
 				break;
 			}
@@ -313,7 +345,10 @@ uint64 ReputationDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( variable.length() > 32 ){
-			this->invalidWarning( node, "Variable name \"%s\" exceeds maximum length 32.\n", variable.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node, "변수 이름 \"%s\"은(는) 최대 길이 32자를 초과했습니다.\n", variable.c_str() );
+			else
+				this->invalidWarning( node, "Variable name \"%s\" exceeds maximum length 32.\n", variable.c_str() );
 			return 0;
 		}
 
@@ -361,7 +396,10 @@ uint64 ReputationDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		else if (visibility == "Exist")
 			reputation->visibility = s_reputation::e_visibility::EXIST;
 		else {
-			this->invalidWarning(node, "Visibility \"%s\" unknown.\n", visibility.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node, "Visibility \"%s\"은(는) 알 수 없습니다.\n", visibility.c_str());
+			else
+				this->invalidWarning(node, "Visibility \"%s\" unknown.\n", visibility.c_str());
 			return 0;
 		}
 	} else {
@@ -426,12 +464,18 @@ uint64 ReputationGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			try {
 				repute >> repute_id;
 			} catch (std::runtime_error const&) {
-				this->invalidWarning(node, "Value \"%s\" cannot be parsed as int64.\n", repute.val().str);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node, "값 \"%s\"은(는) int64로 구문을 분석 할 수 없습니다.\n", repute.val().str);
+				else
+					this->invalidWarning(node, "Value \"%s\" cannot be parsed as int64.\n", repute.val().str);
 				continue;
 			}
 
 			if (!reputation_db.find(repute_id)) {
-				this->invalidWarning(node, "Reputation id %lld does not exist in reputation_db!\n", repute_id);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node, "평판 ID %lld은(는) reputation_db에 존재하지 않습니다!\n", repute_id);
+				else
+					this->invalidWarning(node, "Reputation id %lld does not exist in reputation_db!\n", repute_id);
 				continue;
 			}
 
@@ -483,9 +527,15 @@ void pc_reputation_generate() {
 
 	auto reputation_file = std::ofstream(filePrefix + "./reputeinfodata.bson", std::ios::binary);
 	if (!reputation_file) {
-		ShowError("Failed to create reputation file.\n");
-		ShowError("Maybe the file directory \"%s\" does not exist?\n", filePrefix.c_str());
-		ShowInfo("Create the directory and rerun map-server-generator\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowError("평판 파일 생성을 실패 했습니다.\n");
+			ShowError("\"%s\" 디렉토리가 존재하지 않는 것 같습니다.\n", filePrefix.c_str());
+			ShowInfo("디렉토리를 만든 후 map-server-generator를 다시 실행하십시오.\n");
+		} else {
+			ShowError("Failed to create reputation file.\n");
+			ShowError("Maybe the file directory \"%s\" does not exist?\n", filePrefix.c_str());
+			ShowInfo("Create the directory and rerun map-server-generator\n");
+		}
 		exit(1);
 	}
 
@@ -509,9 +559,15 @@ void pc_reputation_generate() {
 	bson = nlohmann::json::to_bson(j);
 	auto reputation_group_file = std::ofstream(filePrefix + "./reputegroupdata.bson", std::ios::binary);
 	if (!reputation_group_file) {
-		ShowError("Failed to create reputation group file.\n");
-		ShowError("Maybe the file directory \"%s\" does not exist?\n", filePrefix.c_str());
-		ShowInfo("Create the directory and rerun map-server-generator\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowError("평판 파일 생성을 실패 했습니다.\n");
+			ShowError("\"%s\" 디렉토리가 존재하지 않는 것 같습니다.\n", filePrefix.c_str());
+			ShowInfo("디렉토리를 만든 후 map-server-generator를 다시 실행하십시오.\n");
+		} else {
+			ShowError("Failed to create reputation group file.\n");
+			ShowError("Maybe the file directory \"%s\" does not exist?\n", filePrefix.c_str());
+			ShowInfo("Create the directory and rerun map-server-generator\n");
+		}
 		exit(1);
 	}
 
@@ -533,12 +589,18 @@ uint64 PenaltyDatabase::parseBodyNode(const ryml::NodeRef& node){
 	int64 constant_value;
 
 	if( !script_get_constant( ( "PENALTY_" + type_constant ).c_str(), &constant_value ) ){
-		this->invalidWarning( node["Type"], "Unknown penalty type \"%s\".\n", type_constant.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Type"], "\"%s\"은(는) 알수 없는 패널티 타입입니다.\n", type_constant.c_str() );
+		else
+			this->invalidWarning( node["Type"], "Unknown penalty type \"%s\".\n", type_constant.c_str() );
 		return 0;
 	}
 
 	if( constant_value < PENALTY_NONE || constant_value > PENALTY_MAX ){
-		this->invalidWarning( node["Type"], "Invalid penalty type \"%s\".\n", type_constant.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Type"], "\"%s\"은(는) 잘못된 패널티 타입입니다.\n", type_constant.c_str() );
+		else
+			this->invalidWarning( node["Type"], "Invalid penalty type \"%s\".\n", type_constant.c_str() );
 		return 0;
 	}
 
@@ -569,7 +631,10 @@ uint64 PenaltyDatabase::parseBodyNode(const ryml::NodeRef& node){
 			}
 
 			if( std::abs( difference ) > MAX_LEVEL ){
-				this->invalidWarning( levelNode["Difference"], "Level difference %d is bigger than maximum level %d.\n", difference, MAX_LEVEL );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( levelNode["Difference"], "레벨차이 %d은(는) 최대 레벨 %d 보다 큽니다.\n", difference, MAX_LEVEL );
+				else
+					this->invalidWarning( levelNode["Difference"], "Level difference %d is bigger than maximum level %d.\n", difference, MAX_LEVEL );
 				return 0;
 			}
 
@@ -798,7 +863,10 @@ static TIMER_FUNC(pc_spiritball_timer){
 
 	if( sd->spiritball <= 0 )
 	{
-		ShowError("pc_spiritball_timer: %d spiritball's available. (aid=%d cid=%d tid=%d)\n", sd->spiritball, sd->status.account_id, sd->status.char_id, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_spiritball_timer: %d개의 기구체(spiritball)을 사용할 수 있습니다. (계정ID=%d 케릭터ID=%d tid=%d)\n", sd->spiritball, sd->status.account_id, sd->status.char_id, tid);
+		else
+			ShowError("pc_spiritball_timer: %d spiritball's available. (aid=%d cid=%d tid=%d)\n", sd->spiritball, sd->status.account_id, sd->status.char_id, tid);
 		sd->spiritball = 0;
 		return 0;
 	}
@@ -806,7 +874,10 @@ static TIMER_FUNC(pc_spiritball_timer){
 	ARR_FIND(0, sd->spiritball, i, sd->spirit_timer[i] == tid);
 	if( i == sd->spiritball )
 	{
-		ShowError("pc_spiritball_timer: timer not found (aid=%d cid=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_spiritball_timer: 타이머를 찾을 수 없습니다. (계정ID=%d 케릭터ID=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
+		else
+			ShowError("pc_spiritball_timer: timer not found (aid=%d cid=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
 		return 0;
 	}
 
@@ -1027,7 +1098,10 @@ bool pc_addfame(map_session_data &sd, int count)
 		case MAPID_ALCHEMIST:	ranktype = RANK_ALCHEMIST; break;
 		case MAPID_TAEKWON:		ranktype = RANK_TAEKWON; break;
 		default:
-			ShowWarning( "pc_addfame: Trying to add fame to class '%s'(%d).\n", job_name(sd.status.class_), sd.status.class_ );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "pc_addfame: '%s'(%d) 클래스에 랭킹을 추가하려 합니다..\n", job_name(sd.status.class_), sd.status.class_ );
+			else
+				ShowWarning( "pc_addfame: Trying to add fame to class '%s'(%d).\n", job_name(sd.status.class_), sd.status.class_ );
 			return false;
 	}
 
@@ -1112,7 +1186,10 @@ TIMER_FUNC(pc_inventory_rental_end){
 	if( sd == nullptr )
 		return 0;
 	if( tid != sd->rental_timer ) {
-		ShowError("pc_inventory_rental_end: invalid timer id.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_inventory_rental_end: 타이머 ID가 잘못되었습니다.\n");
+		else
+			ShowError("pc_inventory_rental_end: invalid timer id.\n");
 		return 0;
 	}
 
@@ -1296,8 +1373,13 @@ void pc_makesavestatus(map_session_data *sd) {
 	if(!battle_config.save_clothcolor)
 		sd->status.clothes_color = 0;
 
-	if(!battle_config.save_body_style)
+	if(!battle_config.save_body_style) {
+#if PACKETVER_MAIN_NUM >= 20231220
+		sd->status.body = sd->status.class_;
+#else
 		sd->status.body = 0;
+#endif
+	}
 
 	//Only copy the Cart/Peco/Falcon options, the rest are handled via
 	//status change load/saving. [Skotlex]
@@ -2033,7 +2115,10 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	//Set the map-server used job id. [Skotlex]
 	uint64 class_ = pc_jobid2mapid(sd->status.class_);
 	if (class_ == -1 || !job_db.exists(sd->status.class_)) { //Invalid class?
-		ShowError("pc_authok: Invalid class %d for player %s (%d:%d). Class was changed to novice.\n", sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_authok: 플레이어 %s (%d:%d)에 대한 직업(Class) %d이(가) 잘못되었습니다. 직업(Class)이 노비스로 변경되었습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->status.class_);
+		else
+			ShowError("pc_authok: Invalid class %d for player %s (%d:%d). Class was changed to novice.\n", sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id);
 		sd->status.class_ = JOB_NOVICE;
 		sd->class_ = MAPID_NOVICE;
 	} else
@@ -2159,7 +2244,10 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	//warp player
 	enum e_setpos setpos_result = pc_setpos( sd, mapindex_name2id( sd->status.last_point.map ), sd->status.last_point.x, sd->status.last_point.y, CLR_OUTSIGHT );
 	if( setpos_result != SETPOS_OK ){
-		ShowError( "Last_point_map %s not found (error code %d)\n", sd->status.last_point.map, setpos_result );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError ("Last_point_map (마지막 위치 맵) %s을(를) 찾을 수 없습니다. (에러코드:  %d)\n", sd->status.last_point.map, setpos_result);
+		else
+			ShowError( "Last_point_map %s not found (error code %d)\n", sd->status.last_point.map, setpos_result );
 
 		// try warping to a default map instead (church graveyard)
 		if (pc_setpos(sd, mapindex_name2id(MAP_PRONTERA), 273, 354, CLR_OUTSIGHT) != SETPOS_OK) {
@@ -2176,12 +2264,20 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	sd->die_counter=-1;
 
 	//display login notice
-	ShowInfo("'" CL_WHITE "%s" CL_RESET "' logged in."
-	         " (AID/CID: '" CL_WHITE "%d/%d" CL_RESET "',"
-	         " IP: '" CL_WHITE "%d.%d.%d.%d" CL_RESET "',"
-	         " Group '" CL_WHITE "%d" CL_RESET "').\n",
-	         sd->status.name, sd->status.account_id, sd->status.char_id,
-	         CONVIP(ip), sd->group_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("'" CL_WHITE "%s" CL_RESET "'님께서 로그인 하셨습니다."
+		         " (계정ID/케릭터ID 번호: '" CL_WHITE "%d/%d" CL_RESET "',"
+		         " IP: '" CL_WHITE "%d.%d.%d.%d" CL_RESET "',"
+		         " 그룹 '" CL_WHITE "%d" CL_RESET "').\n",
+		         sd->status.name, sd->status.account_id, sd->status.char_id,
+		         CONVIP(ip), sd->group_id);
+	else
+		ShowInfo("'" CL_WHITE "%s" CL_RESET "' logged in."
+				 " (AID/CID: '" CL_WHITE "%d/%d" CL_RESET "',"
+				 " IP: '" CL_WHITE "%d.%d.%d.%d" CL_RESET "',"
+				 " Group '" CL_WHITE "%d" CL_RESET "').\n",
+				 sd->status.name, sd->status.account_id, sd->status.char_id,
+				 CONVIP(ip), sd->group_id);
 	// Send friends list
 	clif_friendslist_send( *sd );
 
@@ -2239,6 +2335,8 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 		sd->status.job_exp = MAX_LEVEL_JOB_EXP;
 		clif_updatestatus(*sd, SP_JOBEXP);
 	}
+
+	rune_load(sd);
 
 	// Request all registries (auth is considered completed whence they arrive)
 	intif_request_registry(sd,7);
@@ -2408,9 +2506,12 @@ void pc_reg_received(map_session_data *sd)
 
 	map_addiddb(&sd->bl);
 	map_delnickdb(sd->status.char_id, sd->status.name);
-	if (!chrif_auth_finished(sd))
-		ShowError("pc_reg_received: Failed to properly remove player %d:%d from logging db!\n", sd->status.account_id, sd->status.char_id);
-
+	if (!chrif_auth_finished(sd)) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("pc_reg_received: (계정ID번호:%d 케릭터ID번호:%d)인 플레이어를 로깅DB에서 제대로 지우지 못했습니다.\n", sd->status.account_id, sd->status.char_id);
+		else
+			ShowError("pc_reg_received: Failed to properly remove player %d:%d from logging db!\n", sd->status.account_id, sd->status.char_id);
+	}
 	chrif_skillcooldown_request(sd->status.account_id, sd->status.char_id);
 	chrif_bsdata_request(sd->status.char_id);
 #ifdef VIP_ENABLE
@@ -2452,6 +2553,7 @@ void pc_reg_received(map_session_data *sd)
 	}
 
 	channel_autojoin(sd);
+	clif_onlogenable_rune(sd);
 }
 
 static int pc_calc_skillpoint(map_session_data* sd)
@@ -2546,7 +2648,10 @@ void pc_calc_skilltree(map_session_data *sd)
 
 	if( class_ == -1 )
 	{ //Unable to normalize job??
-		ShowError( "pc_calc_skilltree: Unable to normalize job %s(%d) for character %s (%d:%d)\n", job_name( sd->status.class_ ), sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("pc_calc_skilltree: 케릭터 %s(%d:%d)에 대한 직업 %s(%d)을(를) 정상화 할수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, job_name( sd->status.class_ ), sd->status.class_);
+		else
+			ShowError( "pc_calc_skilltree: Unable to normalize job %s(%d) for character %s (%d:%d)\n", job_name( sd->status.class_ ), sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id );
 		return;
 	}
 	uint16 job_id = class_;
@@ -2747,7 +2852,10 @@ static void pc_check_skilltree(map_session_data *sd)
 
 	int c = pc_mapid2jobid( pc_calc_skilltree_normalize_job( sd ), sd->status.sex );
 	if (c == -1) { //Unable to normalize job??
-		ShowError("pc_check_skilltree: Unable to normalize job %d for character %s (%d:%d)\n", sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("pc_check_skilltree: 케릭터 %s(%d:%d)에 대한 직업 %d을(를) 정상화 할 수 없습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->status.class_);
+		else
+			ShowError("pc_check_skilltree: Unable to normalize job %d for character %s (%d:%d)\n", sd->status.class_, sd->status.name, sd->status.account_id, sd->status.char_id);
 		return;
 	}
 	std::shared_ptr<s_skill_tree> tree = skill_tree_db.find(c);
@@ -3032,7 +3140,7 @@ int pc_disguise(map_session_data *sd, int class_)
 }
 
 /// Show error message
-#define PC_BONUS_SHOW_ERROR(type,type2,val) { ShowError("%s: %s: Invalid %s %d.\n",__FUNCTION__,#type,#type2,(val)); break; }
+#define PC_BONUS_SHOW_ERROR(type,type2,val) { if(strcmpi(MessageLang,"KOR") == 0) { ShowError("%s: %s: %s %d이(가) 잘못되었습니다..\n",__FUNCTION__,#type,#type2,(val)); } else { ShowError("%s: %s: Invalid %s %d.\n",__FUNCTION__,#type,#type2,(val)); } break; }
 /// Check for valid Element, break & show error message if invalid Element
 #define PC_BONUS_CHK_ELEMENT(ele,bonus) { if (!CHK_ELEMENT((ele))) { PC_BONUS_SHOW_ERROR((bonus),Element,(ele)); }}
 /// Check for valid Race, break & show error message if invalid Race
@@ -3062,7 +3170,10 @@ int pc_disguise(map_session_data *sd, int class_)
 static void pc_bonus_autospell(std::vector<s_autospell> &spell, uint16 id, uint16 lv, short rate, short battle_flag, t_itemid card_id, uint8 flag)
 {
 	if (spell.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_autospell: Reached max (%d) number of autospells per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_autospell: 케릭터 당 최대 오토스펠 수(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_autospell: Reached max (%d) number of autospells per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3116,7 +3227,10 @@ static void pc_bonus_autospell(std::vector<s_autospell> &spell, uint16 id, uint1
 static void pc_bonus_autospell_onskill(std::vector<s_autospell> &spell, uint16 src_skill, uint16 id, uint16 lv, short rate, t_itemid card_id, uint8 flag)
 {
 	if (spell.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_autospell_onskill: Reached max (%d) number of autospells per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_autospell_onskill: 케릭터당 최대 오토스펠 수 %d에 도달했습니다.!\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_autospell_onskill: Reached max (%d) number of autospells per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3147,7 +3261,10 @@ static void pc_bonus_autospell_onskill(std::vector<s_autospell> &spell, uint16 s
 static void pc_bonus_addeff(std::vector<s_addeffect> &effect, enum sc_type sc, int rate, short arrow_rate, unsigned char flag, unsigned int duration)
 {
 	if (effect.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_addeff: Reached max (%d) number of add effects per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_addeff: 케릭터 당 최대 추가효과(%d개)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_addeff: Reached max (%d) number of add effects per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3193,7 +3310,10 @@ static void pc_bonus_addeff(std::vector<s_addeffect> &effect, enum sc_type sc, i
 static void pc_bonus_addeff_onskill(std::vector<s_addeffectonskill> &effect, enum sc_type sc, int rate, short skill_id, unsigned char target, unsigned int duration)
 {
 	if (effect.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_addeff_onskill: Reached max (%d) number of add effects per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_addeff_onskill: 캐릭터 당 스킬에 추가 된 최대 효과 (%d)에 도달했습니다!\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_addeff_onskill: Reached max (%d) number of add effects per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3231,20 +3351,32 @@ static void pc_bonus_addeff_onskill(std::vector<s_addeffectonskill> &effect, enu
 static void pc_bonus_item_drop(std::vector<s_add_drop> &drop, t_itemid nameid, uint16 group, int class_, short race, int rate)
 {
 	if (!nameid && !group) {
-		ShowWarning("pc_bonus_item_drop: No Item ID nor Item Group ID specified.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_item_drop: 아이템 ID 또는 아이템 그룹 ID가 지정되지 않았습니다.\n");
+		else
+			ShowWarning("pc_bonus_item_drop: No Item ID nor Item Group ID specified.\n");
 		return;
 	}
 	if (nameid && !item_db.exists(nameid)) {
-		ShowWarning("pc_bonus_item_drop: Invalid item id %u\n",nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_item_drop: %u은(는) 잘못된 아이템ID번호입니다.\n",nameid);
+		else
+			ShowWarning("pc_bonus_item_drop: Invalid item id %u\n",nameid);
 		return;
 	}
 	if (group && !itemdb_group.exists(group)) {
-		ShowWarning("pc_bonus_item_drop: Invalid Item Group %hu\n",group);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_item_drop: %hu은(는) 잘못된 아이템 그룹입니다.\n",group);
+		else
+			ShowWarning("pc_bonus_item_drop: Invalid Item Group %hu\n",group);
 		return;
 	}
 
 	if (drop.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_item_drop: Reached max (%d) number of added drops per character! (nameid: %u group: %d class_: %d race: %d rate: %d)\n", MAX_PC_BONUS, nameid, group, class_, race, rate);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_item_drop: 케릭터 당 추가된 드롭수가 최고(%d)에 도달했습니다. (아이템ID:%u 그룹:%d 클래스:%d 종족:%d 배율:%d)\n",MAX_PC_BONUS,nameid,group,class_,race,rate);
+		else
+			ShowWarning("pc_bonus_item_drop: Reached max (%d) number of added drops per character! (nameid: %u group: %d class_: %d race: %d rate: %d)\n", MAX_PC_BONUS, nameid, group, class_, race, rate);
 		return;
 	}
 
@@ -3321,7 +3453,10 @@ bool pc_addautobonus(std::vector<std::shared_ptr<s_autobonus>> &bonus, const cha
 	}
 
 	if (bonus.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_addautobonus: Reached max (%d) number of autobonus per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_addautobonus: 케릭터 당 자동보너스(autobonus) 수가 최대치(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_addautobonus: Reached max (%d) number of autobonus per character!\n", MAX_PC_BONUS);
 		return false;
 	}
 
@@ -3340,9 +3475,12 @@ bool pc_addautobonus(std::vector<std::shared_ptr<s_autobonus>> &bonus, const cha
 
 	std::shared_ptr<s_autobonus> entry = std::make_shared<s_autobonus>();
 
-	if (rate < -10000 || rate > 10000)
-		ShowWarning("pc_addautobonus: Item bonus rate %d exceeds -10000~10000 range, capping.\n", rate);
-
+	if (rate < -10000 || rate > 10000) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_item_drop: 아이템 보너스 비율이 %d을(를) 초과합니다. 범위: -10000~10000 \n", rate);
+		else
+			ShowWarning("pc_addautobonus: Item bonus rate %d exceeds -10000~10000 range, capping.\n", rate);
+	}
 	entry->rate = cap_value(rate, -10000, 10000);
 	entry->duration = dur;
 	entry->active = INVALID_TIMER;
@@ -3456,7 +3594,10 @@ static void pc_bonus_addele(map_session_data* sd, unsigned char ele, short rate,
 	struct weapon_data *wd = (sd->state.lr_flag ? &sd->left_weapon : &sd->right_weapon);
 
 	if (wd->addele2.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_addele: Reached max (%d) number of add element damage bonuses per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_addele: 케릭터당 추가 엘레멘탈 데미지 보너스 최대치(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_addele: Reached max (%d) number of add element damage bonuses per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3499,7 +3640,10 @@ static void pc_bonus_subele(map_session_data* sd, unsigned char ele, short rate,
 	nullpo_retv(sd);
 
 	if (sd->subele2.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_subele: Reached max (%d) number of resist element damage bonuses per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_subele: 케릭터당 저항 엘레멘탈 데미지 보너스가 최대치(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_subele: Reached max (%d) number of resist element damage bonuses per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3540,7 +3684,10 @@ static void pc_bonus_subele(map_session_data* sd, unsigned char ele, short rate,
 static void pc_bonus_subrace(map_session_data* sd, unsigned char race, short rate, short flag)
 {
 	if (sd->subrace3.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_subrace: Reached max (%d) number of resist race damage bonuses per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_subele: 케릭터당 저항 종족 데미지 보너스가 최대치(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_subrace: Reached max (%d) number of resist race damage bonuses per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -3606,7 +3753,10 @@ static void pc_bonus_itembonus(std::vector<s_item_bonus> &bonus, uint16 id, int 
  */
 static void pc_bonus_addvanish(std::vector<s_vanish_bonus> &bonus, int16 rate, int16 per, int flag) {
 	if (bonus.size() == MAX_PC_BONUS) {
-		ShowWarning("pc_bonus_addvanish: Reached max (%d) number of vanish damage bonuses per character!\n", MAX_PC_BONUS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_bonus_addvanish: 케릭터당 베니시 데미지 보너스가 최대치(%d)에 도달했습니다.\n", MAX_PC_BONUS);
+		else
+			ShowWarning("pc_bonus_addvanish: Reached max (%d) number of vanish damage bonuses per character!\n", MAX_PC_BONUS);
 		return;
 	}
 
@@ -4383,13 +4533,22 @@ void pc_bonus(map_session_data *sd,int type,int val)
 			break;
 		default:
 			if (current_equip_combo_pos > 0) {
-				ShowWarning("pc_bonus: unknown bonus type %d %d in a combo with item #%u\n", type, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_bonus: %d타입의 값(val) %d은(는) 아이템 #%u의 콤보에서 알수 없는 보너스타입입니다.\n", type, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+				else
+					ShowWarning("pc_bonus: unknown bonus type %d %d in a combo with item #%u\n", type, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
 			}
 			else if (current_equip_card_id > 0 || current_equip_item_index > 0) {
-				ShowWarning("pc_bonus: unknown bonus type %d %d in item #%u\n", type, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_bonus: %d타입의 값 %d은(는) 아이템(아이템ID번호: #%u)에서 알수 없는 보너스타입니다.\n", type, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+				else
+					ShowWarning("pc_bonus: unknown bonus type %d %d in item #%u\n", type, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
 			}
 			else {
-				ShowWarning("pc_bonus: unknown bonus type %d %d in unknown usage. Report this!\n", type, val);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_bonus: 알수 없는 사용법에 알수 없는 보너스 타입 %d에 값%d입니다.\n", type, val);
+				else
+					ShowWarning("pc_bonus: unknown bonus type %d %d in unknown usage. Report this!\n", type, val);
 			}
 			break;
 	}
@@ -4471,7 +4630,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->reseff.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_RESEFF: Reached max (%d) number of resistance bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_RESEFF: 케릭터당 저항 보너스가 최대치 %d에 도달했습니다.\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_RESEFF: Reached max (%d) number of resistance bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4506,7 +4668,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 			struct weapon_data *wd = (sd->state.lr_flag ? &sd->left_weapon : &sd->right_weapon);
 
 			if (wd->add_dmg.size() == MAX_PC_BONUS) {
-				ShowWarning("pc_bonus2: SP_ADD_DAMAGE_CLASS: Reached max (%d) number of add class damage bonuses per character!\n", MAX_PC_BONUS);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_bonus2: SP_ADD_DAMAGE_CLASS: 캐릭터 당 추가 클래스 데미지 보너스의 최대치(%d)에 도달했습니다!\n", MAX_PC_BONUS);
+				else	
+					ShowWarning("pc_bonus2: SP_ADD_DAMAGE_CLASS: Reached max (%d) number of add class damage bonuses per character!\n", MAX_PC_BONUS);
 				break;
 			}
 
@@ -4517,7 +4682,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->add_mdmg.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_ADD_MAGIC_DAMAGE_CLASS: Reached max (%d) number of add class magic dmg bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_MAGIC_DAMAGE_CLASS: 캐릭터 당 추가 클래스 마법데미지 보너스의 최대치(%d)에 도달했습니다!\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_MAGIC_DAMAGE_CLASS: Reached max (%d) number of add class magic dmg bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4527,7 +4695,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->add_def.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_ADD_DEF_MONSTER: Reached max (%d) number of add class def bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_DEF_MONSTER: 캐릭터 당 추가 클래스 방어 보너스의 최대치(%d)에 도달했습니다!\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_DEF_MONSTER: Reached max (%d) number of add class def bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4537,7 +4708,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->add_mdef.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_ADD_MDEF_MONSTER: Reached max (%d) number of add class mdef bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_MDEF_MONSTER: 캐릭터 당 추가 클래스 마법방어력 보너스의 최대치(%d)에 도달했습니다!\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_MDEF_MONSTER: Reached max (%d) number of add class mdef bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4628,7 +4802,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillatk.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_ATK: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_ATK: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d(+%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_ATK: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4638,7 +4815,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillheal.size() == MAX_PC_BONUS) { // Better mention this so the array length can be updated. [Skotlex]
-			ShowWarning("pc_bonus2: SP_SKILL_HEAL: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_HEAL: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (+%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_HEAL: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 		
@@ -4648,7 +4828,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillheal2.size() == MAX_PC_BONUS) { // Better mention this so the array length can be updated. [Skotlex]
-			ShowWarning("pc_bonus2: SP_SKILL_HEAL2: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_HEAL2: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (+%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_HEAL2: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 		
@@ -4658,7 +4841,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillblown.size() == MAX_PC_BONUS) { //Better mention this so the array length can be updated. [Skotlex]
-			ShowWarning("pc_bonus2: SP_ADD_SKILL_BLOW: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_SKILL_BLOW: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_SKILL_BLOW: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 		
@@ -4719,11 +4905,17 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if( !item_db.exists( type2 ) ){
-			ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE Invalid item with id %d\n", type2);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE ID가 %d인 잘못된 아이템입니다.\n", type2);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE Invalid item with id %d\n", type2);
 			break;
 		}
 		if (sd->itemhealrate.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE: Reached max (%d) number of item heal bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE: 캐릭터 당 최대 아이템 회복 보너스 (%d)에 도달했습니다!\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_ITEM_HEAL_RATE: Reached max (%d) number of item heal bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4733,11 +4925,17 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if (sd->state.lr_flag == 2)
 			break;
 		if (!type2 || !itemdb_group.exists(type2)) {
-			ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: Invalid item group with id %d\n", type2);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: ID가 %d인 잘못된 아이템 그룹입니다.\n", type2);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: Invalid item group with id %d\n", type2);
 			break;
 		}
 		if (sd->itemgrouphealrate.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: Reached max (%d) number of item heal bonuses per character!\n", MAX_PC_BONUS);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: 캐릭터 당 최대 아이템 회복 보너스 (%d)에 도달했습니다!\n", MAX_PC_BONUS);
+			else
+				ShowWarning("pc_bonus2: SP_ADD_ITEMGROUP_HEAL_RATE: Reached max (%d) number of item heal bonuses per character!\n", MAX_PC_BONUS);
 			break;
 		}
 
@@ -4848,7 +5046,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillusesprate.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_USE_SP_RATE: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_USE_SP_RATE: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (+%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_USE_SP_RATE: Reached max (%d) number of skills per character, bonus skill %d (+%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 		
@@ -4858,7 +5059,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skilldelay.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_DELAY: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_DELAY: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_DELAY: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4868,7 +5072,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillcooldown.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_COOLDOWN: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_COOLDOWN: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_COOLDOWN: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4878,7 +5085,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if (sd->state.lr_flag == 2)
 			break;
 		if (sd->skillvarcast.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_VARIABLECAST: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_VARIABLECAST: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_VARIABLECAST: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4889,7 +5099,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillfixcast.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_FIXEDCAST: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_FIXEDCAST: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_FIXEDCAST: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4900,7 +5113,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillcastrate.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_VARCASTRATE: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_VARCASTRATE: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_VARCASTRATE: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4910,7 +5126,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillfixcastrate.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_FIXCASTRATE: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_FIXCASTRATE: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d%%)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_FIXCASTRATE: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4926,7 +5145,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillcastrate.size() == MAX_PC_BONUS) { //Better mention this so the array length can be updated. [Skotlex]
-			ShowWarning("pc_bonus2: %s: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", (type == SP_CASTRATE) ? "SP_CASTRATE" : "SP_VARCASTRATE", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: %s: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d%%)이 손실되었습니다.\n",(type == SP_CASTRATE) ? "SP_CASTRATE" : "SP_VARCASTRATE", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: %s: Reached max (%d) number of skills per character, bonus skill %d (%d%%) lost.\n", (type == SP_CASTRATE) ? "SP_CASTRATE" : "SP_VARCASTRATE", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4937,7 +5159,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		if(sd->state.lr_flag == 2)
 			break;
 		if (sd->skillusesp.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SKILL_USE_SP: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SKILL_USE_SP: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SKILL_USE_SP: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4945,7 +5170,10 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		break;
 	case SP_SUB_SKILL: // bonus2 bSubSkill,sk,n;
 		if (sd->subskill.size() == MAX_PC_BONUS) {
-			ShowWarning("pc_bonus2: SP_SUB_SKILL: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: SP_SUB_SKILL: 캐릭터 당 최대 스킬 (%d)에 도달했으며 보너스 스킬 %d (%d)이 손실되었습니다.\n", MAX_PC_BONUS, type2, val);
+			else
+				ShowWarning("pc_bonus2: SP_SUB_SKILL: Reached max (%d) number of skills per character, bonus skill %d (%d) lost.\n", MAX_PC_BONUS, type2, val);
 			break;
 		}
 
@@ -4995,12 +5223,18 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		}
 
 		if( !item_db.exists( type2 ) ){
-			ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE Invalid item with id %d\n", type2 );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE id가 %d인 잘못된 아이템입니다. \n", type2 );
+			else
+				ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE Invalid item with id %d\n", type2 );
 			break;
 		}
 
 		if( sd->itemsphealrate.size() == MAX_PC_BONUS ){
-			ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE: Reached max (%d) number of item SP heal bonuses per character!\n", MAX_PC_BONUS );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE: 케릭터당 아이템 SP회복 보너스의 수치가 최대(%d)값에 도달했습니다!\n", MAX_PC_BONUS );
+			else
+				ShowWarning( "pc_bonus2: SP_ADD_ITEM_SPHEAL_RATE: Reached max (%d) number of item SP heal bonuses per character!\n", MAX_PC_BONUS );
 			break;
 		}
 
@@ -5012,12 +5246,18 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		}
 
 		if( !type2 || !itemdb_group.exists( type2 ) ){
-			ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: Invalid item group with id %d\n", type2 );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: id가 %d인 잘못된 아이템 그룹입니다.\n", type2 );
+			else
+				ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: Invalid item group with id %d\n", type2 );
 			break;
 		}
 
 		if( sd->itemgroupsphealrate.size() == MAX_PC_BONUS ){
-			ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: Reached max (%d) number of item SP heal bonuses per character!\n", MAX_PC_BONUS );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: 케릭터당 아이템 SP회복 보너스의 수치가 최대(%d)값에 도달했습니다!\n", MAX_PC_BONUS );
+			else
+				ShowWarning( "pc_bonus2: SP_ADD_ITEMGROUP_SPHEAL_RATE: Reached max (%d) number of item SP heal bonuses per character!\n", MAX_PC_BONUS );
 			break;
 		}
 
@@ -5025,13 +5265,22 @@ void pc_bonus2(map_session_data *sd,int type,int type2,int val)
 		break;
 	default:
 		if (current_equip_combo_pos > 0) {
-			ShowWarning("pc_bonus2: unknown bonus type %d %d %d in a combo with item #%u\n", type, type2, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: 타입: %d 타입2: %d 값(val): %d은(는) 아이템 #%d의 콤보에서 알수 없는 보너스 타입입니다.\n", type, type2, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			else
+				ShowWarning("pc_bonus2: unknown bonus type %d %d %d in a combo with item #%u\n", type, type2, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
 		} 
 		else if (current_equip_card_id > 0 || current_equip_item_index > 0) {
-			ShowWarning("pc_bonus2: unknown bonus type %d %d %d in item #%u\n", type, type2, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: 타입: %d 타입2: %d 값(val): %d은(는) 아이템 #%d에서 알수 없는 보너스 타입입니다.\n", type, type2, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			else
+				ShowWarning("pc_bonus2: unknown bonus type %d %d %d in item #%u\n", type, type2, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
 		}
 		else {
-			ShowWarning("pc_bonus2: unknown bonus type %d %d %d in unknown usage. Report this!\n", type, type2, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus2: 타입1(%d), 타입2(%d), 값(%d)은(는) 알수 없는 사용방법에서 알수 없는 보너스 타입입니다.. 보고하세요!\n", type, type2, val);
+			else		
+				ShowWarning("pc_bonus2: unknown bonus type %d %d %d in unknown usage. Report this!\n", type, type2, val);
 		}
 		break;
 	}
@@ -5165,13 +5414,22 @@ void pc_bonus3(map_session_data *sd,int type,int type2,int type3,int val)
 		break;
 	default:
 		if (current_equip_combo_pos > 0) {
-			ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in a combo with item #%u\n", type, type2, type3, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus3: 타입: %d 타입2: %d 타입3: %d 값(val): %d은(는) 아이템 #%u의 콤보에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			else
+				ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in a combo with item #%u\n", type, type2, type3, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
 		}
 		else if (current_equip_card_id > 0 || current_equip_item_index > 0) {
-			ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in item #%u\n", type, type2, type3, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus3: 타입: %d 타입2: %d 타입3: %d 값(val): %d은(는) 아이템 #%d에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			else
+				ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in item #%u\n", type, type2, type3, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
 		}
 		else {
-			ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus3: 타입1(%d) 타입2(%d) 타입3(%d) 값(%d)은(는) 알수 없는 사용방법에서 알수 없는 보너스 타입입니다. 보고하세요.\n", type, type2, type3, val);
+			else
+				ShowWarning("pc_bonus3: unknown bonus type %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, val);
 		}
 		break;
 	}
@@ -5248,13 +5506,22 @@ void pc_bonus4(map_session_data *sd,int type,int type2,int type3,int type4,int v
 
 	default:
 		if (current_equip_combo_pos > 0) {
-			ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in a combo with item #%u\n", type, type2, type3, type4, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus4:타입: %d 타입2: %d 타입3: %d 타입4: %d 값(val): %d은(는) 아이템 #%u의 콤보에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, type4, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			else
+				ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in a combo with item #%u\n", type, type2, type3, type4, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
 		}
 		else if (current_equip_card_id > 0 || current_equip_item_index > 0) {
-			ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in item #%u\n", type, type2, type3, type4, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus4: 타입: %d 타입2: %d 타입3: %d 타입4: %d 값(val): %d은(는) 아이템 #%u에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, type4, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			else
+				ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in item #%u\n", type, type2, type3, type4, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
 		}
 		else {
-			ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, type4, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus4: 타입1:%d 타입2:%d 타입3:%d 타입4:%d 값(val):%d은(는) 알수 없는 사용방법에서 알수 없는 보너스 타입입니다. 보고하세요.\n", type, type2, type3, type4, val);
+			else
+				ShowWarning("pc_bonus4: unknown bonus type %d %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, type4, val);
 		}
 		break;
 	}
@@ -5297,13 +5564,22 @@ void pc_bonus5(map_session_data *sd,int type,int type2,int type3,int type4,int t
 
 	default:
 		if (current_equip_combo_pos > 0) {
-			ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in a combo with item #%u\n", type, type2, type3, type4, type5, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus5: 타입: %d 타입2: %d 타입3: %d 타입4: %d 타입5: %d 값(val): %d은(는) 아이템 #%u의 콤보에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, type4, type5, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
+			else
+				ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in a combo with item #%u\n", type, type2, type3, type4, type5, val, sd->inventory_data[pc_checkequip( sd, current_equip_combo_pos )]->nameid);
 		}
 		else if (current_equip_card_id > 0 || current_equip_item_index > 0) {
-			ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in item #%u\n", type, type2, type3, type4, type5, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus5: 타입: %d 타입2: %d 타입3: %d 타입4: %d 타입5: %d 값(val): %d은(는) 아이템 #%d에서 알수 없는 보너스 타입입니다.\n", type, type2, type3, type4, type5, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
+			else
+				ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in item #%u\n", type, type2, type3, type4, type5, val, current_equip_card_id ? current_equip_card_id : sd->inventory_data[current_equip_item_index]->nameid);
 		}
 		else {
-			ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, type4, type5, val);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_bonus5: 타입1:%d 타입2:%d 타입3:%d 타입4:%d 타입5:%d 값:%d은(는) 알수 없는 사용방법에서 알수 없는 보너스 타입입니다.보고하세요!\n", type, type2, type3, type4, type5, val);
+			else
+				ShowWarning("pc_bonus5: unknown bonus type %d %d %d %d %d %d in unknown usage. Report this!\n", type, type2, type3, type4, type5, val);
 		}
 		break;
 	}
@@ -5321,15 +5597,24 @@ bool pc_skill(map_session_data* sd, uint16 skill_id, int level, enum e_addskill_
 	nullpo_ret(sd);
 
 	if (!skill_id || !(idx = skill_get_index(skill_id))) {
-		ShowError("pc_skill: Skill with id %d does not exist in the skill database\n", skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_skill: 스킬ID %d이(가) 스킬 데이터베이스에 존재하지 않습니다.\n", skill_id);
+		else
+			ShowError("pc_skill: Skill with id %d does not exist in the skill database\n", skill_id);
 		return false;
 	}
 	if (level > MAX_SKILL_LEVEL) {
-		ShowError("pc_skill: Skill level %d too high. Max lv supported is %d\n", level, MAX_SKILL_LEVEL);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_skill: 스킬레벨 %d은(는) 너무 높습니다. 지원되는 최대 레벨은 %d입니다.\n", level, MAX_SKILL_LEVEL);
+		else
+			ShowError("pc_skill: Skill level %d too high. Max lv supported is %d\n", level, MAX_SKILL_LEVEL);
 		return false;
 	}
 	if (type == ADDSKILL_TEMP_ADDLEVEL && sd->status.skill[idx].lv + level > MAX_SKILL_LEVEL) {
-		ShowWarning("pc_skill: Skill level bonus %d too high. Max lv supported is %d. Curr lv is %d. Set to max level.\n", level, MAX_SKILL_LEVEL, sd->status.skill[idx].lv);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_skill: 스킬레벨 보너스 %d은(는) 너무 높습니다. 지원되는 최대 레벨은  %d입니다. 현재 레벨은 %d입니다. 최대레벨로 설정합니다.\n", level, MAX_SKILL_LEVEL, sd->status.skill[idx].lv);
+		else
+			ShowWarning("pc_skill: Skill level bonus %d too high. Max lv supported is %d. Curr lv is %d. Set to max level.\n", level, MAX_SKILL_LEVEL, sd->status.skill[idx].lv);
 		level = MAX_SKILL_LEVEL - sd->status.skill[idx].lv;
 	}
 
@@ -5402,7 +5687,10 @@ bool pc_skill_plagiarism(map_session_data &sd, uint16 skill_id, uint16 skill_lv)
 
 	// Use skill index, avoiding out-of-bound array [Cydh]
 	if (idx == 0) {
-		ShowWarning("pc_skill_plagiarism: invalid skill idx 0 for skill %d.\n", skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_skill_plagiarism: 0은 스킬 %d에 대한 잘못된 스킬 idx입니다.\n", skill_id);
+		else
+			ShowWarning("pc_skill_plagiarism: invalid skill idx 0 for skill %d.\n", skill_id);
 		return false;
 	}
 
@@ -5422,7 +5710,10 @@ bool pc_skill_plagiarism(map_session_data &sd, uint16 skill_id, uint16 skill_lv)
 		pc_setglobalreg(&sd, add_str(SKILL_VAR_REPRODUCE), skill_id);
 		pc_setglobalreg(&sd, add_str(SKILL_VAR_REPRODUCE_LV), skill_lv);
 	} else {
-		ShowWarning("pc_skill_plagiarism: skill %d is not copyable.\n", skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("pc_skill_plagiarism: 스킬 %d을(를) 복사하지 못했습니다.\n", skill_id);
+		else
+			ShowWarning("pc_skill_plagiarism: skill %d is not copyable.\n", skill_id);
 		return false;
 	}
 
@@ -5448,7 +5739,10 @@ bool pc_skill_plagiarism_reset(map_session_data &sd, uint8 type)
 	else if (type == 2)
 		idx = sd.reproduceskill_idx;
 	else {
-		ShowError("pc_skill_plagiarism_reset: Unknown type %d.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_skill_plagiarism_reset: %d은(는) 알 수 없는 타입입니다.\n", type);
+		else
+			ShowError("pc_skill_plagiarism_reset: Unknown type %d.\n", type);
 		return false;
 	}
 
@@ -5683,7 +5977,10 @@ char pc_payzeny(map_session_data *sd, int zeny, enum e_log_pick_type type, uint3
 	zeny = cap_value(zeny,-MAX_ZENY,MAX_ZENY); //prevent command UB
 	if( zeny < 0 )
 	{
-		ShowError("pc_payzeny: Paying negative Zeny (zeny=%d, account_id=%d, char_id=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_payzeny: 마이너스 제니를 지불했습니다. (제니=%d, 계정ID번호=%d, 케릭터ID번호=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
+		else
+			ShowError("pc_payzeny: Paying negative Zeny (zeny=%d, account_id=%d, char_id=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
 		return 1;
 	}
 
@@ -5696,7 +5993,10 @@ char pc_payzeny(map_session_data *sd, int zeny, enum e_log_pick_type type, uint3
 	log_zeny(*sd, type, log_charid, -zeny);
 	if( zeny > 0 && sd->state.showzeny ) {
 		char output[255];
-		sprintf(output, "Removed %dz.", zeny);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			sprintf(output, "%d 제니를 사용했습니다..", zeny);
+		else
+			sprintf(output, "Removed %dz.", zeny);
 		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
 	}
 
@@ -5717,7 +6017,10 @@ char pc_getzeny(map_session_data *sd, int zeny, enum e_log_pick_type type, uint3
 	zeny = cap_value(zeny,-MAX_ZENY,MAX_ZENY); //prevent command UB
 	if( zeny < 0 )
 	{
-		ShowError("pc_getzeny: Obtaining negative Zeny (zeny=%d, account_id=%d, char_id=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_getzeny: 마이너스 제니를 획득하려합니다. (제니=%d, 계정ID번호=%d, 케릭터ID번호=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
+		else
+			ShowError("pc_getzeny: Obtaining negative Zeny (zeny=%d, account_id=%d, char_id=%d).\n", zeny, sd->status.account_id, sd->status.char_id);
 		return 1;
 	}
 
@@ -5730,7 +6033,10 @@ char pc_getzeny(map_session_data *sd, int zeny, enum e_log_pick_type type, uint3
 	log_zeny(*sd, type, log_charid, zeny);
 	if( zeny > 0 && sd->state.showzeny ) {
 		char output[255];
-		sprintf(output, "Gained %dz.", zeny);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			sprintf(output, "%d 제니를 획득했습니다..", zeny);
+		else
+			sprintf(output, "Gained %dz.", zeny);
 		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
 	}
 
@@ -5758,7 +6064,10 @@ int pc_paycash(map_session_data *sd, int price, int points, e_log_pick_type type
 
 	if( sd->cashPoints < cash || sd->kafraPoints < points )
 	{
-		ShowError("pc_paycash: Not enough points (cash=%d, kafra=%d) to cover the price (cash=%d, kafra=%d) (account_id=%d, char_id=%d).\n", sd->cashPoints, sd->kafraPoints, cash, points, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_paycash: 포인트가 부족합니다. (지불 포인트: 캐시=%d, 카프라 포인트=%d) (구매 가격: 캐시=%d, 카프라 포인트=%d) (계정ID번호=%d, 케릭터ID번호=%d).\n", sd->cashPoints, sd->kafraPoints, cash, points, sd->status.account_id, sd->status.char_id);
+		else
+			ShowError("pc_paycash: Not enough points (cash=%d, kafra=%d) to cover the price (cash=%d, kafra=%d) (account_id=%d, char_id=%d).\n", sd->cashPoints, sd->kafraPoints, cash, points, sd->status.account_id, sd->status.char_id);
 		return -1;
 	}
 
@@ -5804,7 +6113,10 @@ int pc_getcash(map_session_data *sd, int cash, int points, e_log_pick_type type)
 	{
 		if( cash > MAX_CASHPOINT-sd->cashPoints )
 		{
-			ShowWarning("pc_getcash: Cash point overflow (cash=%d, have cash=%d, account_id=%d, char_id=%d).\n", cash, sd->cashPoints, sd->status.account_id, sd->status.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_getcash: 캐시포인트가 너무 많습니다. (캐시=%d, 보유캐시=%d, 계정ID번호=%d, 케릭터ID번호=%d).\n", cash, sd->cashPoints, sd->status.account_id, sd->status.char_id);
+			else	
+				ShowWarning("pc_getcash: Cash point overflow (cash=%d, have cash=%d, account_id=%d, char_id=%d).\n", cash, sd->cashPoints, sd->status.account_id, sd->status.char_id);
 			cash = MAX_CASHPOINT-sd->cashPoints;
 		}
 
@@ -5824,7 +6136,10 @@ int pc_getcash(map_session_data *sd, int cash, int points, e_log_pick_type type)
 	{
 		if( points > MAX_KAFRAPOINT-sd->kafraPoints )
 		{
-			ShowWarning("pc_getcash: Kafra point overflow (points=%d, have points=%d, account_id=%d, char_id=%d).\n", points, sd->kafraPoints, sd->status.account_id, sd->status.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("pc_getcash: 카프라포인트가 넘칩니다. (포인트=%d, 보유포인트=%d, 계정ID번호=%d, 케릭터ID번호=%d).\n", points, sd->kafraPoints, sd->status.account_id, sd->status.char_id);
+			else
+				ShowWarning("pc_getcash: Kafra point overflow (points=%d, have points=%d, account_id=%d, char_id=%d).\n", points, sd->kafraPoints, sd->status.account_id, sd->status.char_id);
 			points = MAX_KAFRAPOINT-sd->kafraPoints;
 		}
 
@@ -6381,8 +6696,8 @@ int pc_useitem(map_session_data *sd,int n)
 	//FIXME: Is this really needed here? It'll be checked in unit.cpp after all and this prevents skill items using when silenced [Inkfish]
 	if( id->flag.delay_consume > 0 && ( sd->ud.skilltimer != INVALID_TIMER /*|| !status_check_skilluse(&sd->bl, &sd->bl, ALL_RESURRECTION, 0)*/ ) )
 		return 0;
-
-	if( id->delay.duration > 0 && !pc_has_permission(sd,PC_PERM_ITEM_UNCONDITIONAL) && pc_itemcd_check(sd, id, tick, n))
+	
+	if( (id->delay.checkstatus == true || id->delay.duration > 0) && !pc_has_permission(sd,PC_PERM_ITEM_UNCONDITIONAL) && pc_itemcd_check(sd, id, tick, n)) 
 		return 0;
 
 	/* on restricted maps the item is consumed but the effect is not used */
@@ -6653,10 +6968,17 @@ int pc_show_steal(struct block_list *bl,va_list ap)
 
 	std::shared_ptr<item_data> id = item_db.find(itemid);
 
-	if(id == nullptr)
-		sprintf(output,"%s stole an Unknown Item (id: %u).",sd->status.name, itemid);
-	else
-		sprintf(output,"%s stole %s.",sd->status.name,id->ename.c_str());
+	if(id == nullptr) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			sprintf(output,"%s님께서 알 수 없는 아이템(id: %u)을(를) 스틸했습니다.",sd->status.name, itemid);
+		else
+			sprintf(output,"%s stole an Unknown Item (id: %u).",sd->status.name, itemid);
+	} else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			sprintf(output,"%s님이 %s을(를) 스틸했습니다..",sd->status.name,id->ename.c_str());
+		else
+			sprintf(output,"%s stole %s.",sd->status.name,id->ename.c_str());
+	}
 	clif_displaymessage( ((map_session_data *)bl)->fd, output);
 
 	return 0;
@@ -6690,7 +7012,7 @@ bool pc_steal_item(map_session_data *sd,struct block_list *bl, uint16 skill_lv)
 	md_status= status_get_status_data(bl);
 
 	if (md->master_id || status_has_mode(md_status, MD_STATUSIMMUNE) || util::vector_exists(status_get_race2(&md->bl), RC2_TREASURE) ||
-		map_getmapflag(bl->m, MF_NOMOBLOOT) || // check noloot map flag [Lorky]
+		map_getmapflag(bl->m, MF_NOMOBLOOT) || md->get_bosstype() != BOSSTYPE_MVP && map_getmapflag(bl->m, MF_NOLOOTNORMALMOB) || // check noloot map flag [Lorky]
 		(battle_config.skill_steal_max_tries && //Reached limit of steal attempts. [Lupus]
 			md->state.steal_flag++ >= battle_config.skill_steal_max_tries)
   	) { //Can't steal from
@@ -6809,7 +7131,10 @@ enum e_setpos pc_setpos(map_session_data* sd, unsigned short mapindex, int x, in
 	nullpo_retr(SETPOS_OK,sd);
 
 	if( !mapindex || !mapindex_id2name(mapindex) ) {
-		ShowDebug("pc_setpos: Passed mapindex(%d) is invalid!\n", mapindex);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("pc_setpos: 지나간 맵 인덱스(%d)이(가) 잘못되었습니다.\n", mapindex);
+		else
+			ShowDebug("pc_setpos: Passed mapindex(%d) is invalid!\n", mapindex);
 		return SETPOS_MAPINDEX;
 	}
 
@@ -6952,7 +7277,10 @@ enum e_setpos pc_setpos(map_session_data* sd, unsigned short mapindex, int x, in
 
 	if( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys )
 	{
-		ShowError("pc_setpos: attempt to place player '%s' (%d:%d) on invalid coordinates (%s-%d,%d)\n", sd->status.name, sd->status.account_id, sd->status.char_id, mapindex_id2name(mapindex),x,y);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_setpos: 플레이어 '%s'(%d:%d)을(를) 잘못된 좌표 (%s-%d,%d)에 두려고 합니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id, mapindex_id2name(mapindex),x,y);
+		else
+			ShowError("pc_setpos: attempt to place player '%s' (%d:%d) on invalid coordinates (%s-%d,%d)\n", sd->status.name, sd->status.account_id, sd->status.char_id, mapindex_id2name(mapindex),x,y);
 		x = y = 0; // make it random
 	}
 
@@ -6964,7 +7292,10 @@ enum e_setpos pc_setpos(map_session_data* sd, unsigned short mapindex, int x, in
 			c++;
 			
 			if(c > (mapdata->xs * mapdata->ys)*3){ //force out
-				ShowError("pc_setpos: couldn't found a valid coordinates for player '%s' (%d:%d) on (%s), preventing warp\n", sd->status.name, sd->status.account_id, sd->status.char_id, mapindex_id2name(mapindex));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("pc_setpos: (%s)에 플레이어 '%s' (%d:%d)에 유효한 좌표를 찾을 수 없어 워프가 되지 않았습니다.\n", mapindex_id2name(mapindex), sd->status.name, sd->status.account_id, sd->status.char_id);
+				else	
+					ShowError("pc_setpos: couldn't found a valid coordinates for player '%s' (%d:%d) on (%s), preventing warp\n", sd->status.name, sd->status.account_id, sd->status.char_id, mapindex_id2name(mapindex));
 				return SETPOS_OK; //preventing warp
 				//break; //allow warp anyway
 			}
@@ -7195,7 +7526,10 @@ uint8 pc_checkskill(map_session_data *sd, uint16 skill_id)
 			return 0;
 		}
 #endif
-		ShowError("pc_checkskill: Invalid skill id %d (char_id=%d).\n", skill_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_checkskill: %d은(는) 잘못된 스킬ID번호입니다. (케릭터ID번호=%d).\n", skill_id, sd->status.char_id);
+		else
+			ShowError("pc_checkskill: Invalid skill id %d (char_id=%d).\n", skill_id, sd->status.char_id);
 		return 0;
 	}
 	if (SKILL_CHK_GUILD(skill_id) ) {
@@ -7224,7 +7558,10 @@ e_skill_flag pc_checkskill_flag(map_session_data &sd, uint16 skill_id) {
 			return SKILL_FLAG_NONE;
 		}
 #endif
-		ShowError("pc_checkskill_flag: Invalid skill id %d (char_id=%d).\n", skill_id, sd.status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_checkskill_flag: %d은(는) 잘못된 스킬ID번호입니다. (케릭터ID번호=%d).\n", skill_id, sd.status.char_id);
+		else
+			ShowError("pc_checkskill_flag: Invalid skill id %d (char_id=%d).\n", skill_id, sd.status.char_id);
 		return SKILL_FLAG_NONE;
 	}
 
@@ -8240,6 +8577,13 @@ static void pc_calcexp(map_session_data *sd, t_exp *base_exp, t_exp *job_exp, st
 			(int)(status_get_lv(src) - sd->status.base_level) >= 20)
 			bonus += 15; // pk_mode additional exp if monster >20 levels [Valaris]
 
+		if (sd->sc.getSCE(SC_PREMIUM_EXPBOOST))
+			bonus += sd->sc.getSCE(SC_PREMIUM_EXPBOOST)->val1;
+		if (sd->sc.getSCE(SC_SUB_EXPBOOST))
+			bonus += sd->sc.getSCE(SC_SUB_EXPBOOST)->val1;
+		if (sd->sc.getSCE(SC_KAFRA_EXPBOOST))
+			bonus += sd->sc.getSCE(SC_KAFRA_EXPBOOST)->val1;
+
 		if (src && src->type == BL_MOB && pc_isvip(sd)) { // EXP bonus for VIP player
 			vip_bonus_base = battle_config.vip_base_exp_increase;
 			vip_bonus_job = battle_config.vip_job_exp_increase;
@@ -8990,8 +9334,12 @@ void pc_skillup(map_session_data *sd,uint16 skill_id)
 	nullpo_retv(sd);
 
 	if (!idx) {
-		if (skill_id)
-			ShowError("pc_skillup: Player attempts to level up invalid skill '%d'\n", skill_id);
+		if (skill_id) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pc_skillup: 플레이어가 잘못된 스킬 '%d'의 레벨을 올리려고합니다.\n", skill_id);
+			else
+				ShowError("pc_skillup: Player attempts to level up invalid skill '%d'\n", skill_id);
+		}
 		return;
 	}
 
@@ -9207,8 +9555,12 @@ int pc_resetstate(map_session_data* sd)
 	nullpo_ret(sd);
 
 	if( sd->status.base_level > pc_maxbaselv( sd ) ){
-		ShowError( "pc_resetstate: Capping the Level to %d to reset the stats of %d:%d, the base level (%d) is greater than the max level supported.\n",
-			pc_maxbaselv( sd ), sd->status.account_id, sd->status.char_id, sd->status.base_level );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "pc_resetstate: %d:%d의 스텟을 초기화하기 위해 레벨을 %d으(로) 조정하면 베이스 레벨(%d)이 지원되는 최대 레벨보다 큽니다.\n",
+				sd->status.account_id, sd->status.char_id, pc_maxbaselv( sd ), sd->status.base_level );
+		else
+			ShowError( "pc_resetstate: Capping the Level to %d to reset the stats of %d:%d, the base level (%d) is greater than the max level supported.\n",
+				pc_maxbaselv( sd ), sd->status.account_id, sd->status.char_id, sd->status.base_level );
 		sd->status.base_level = pc_maxbaselv( sd );
 		clif_updatestatus( *sd, SP_BASELEVEL );
 	}
@@ -10237,7 +10589,10 @@ int64 pc_readparam(map_session_data* sd,int64 type)
 		case SP_CRIT_DEF_RATE: val = sd->bonus.crit_def_rate; break;
 		case SP_ADD_ITEM_SPHEAL_RATE: val = sd->bonus.itemsphealrate2; break;
 		default:
-			ShowError("pc_readparam: Attempt to read unknown parameter '%lld'.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pc_readparam: 알수 없는 파라메터 '%lld'을(를) 읽으려합니다.\n", type);
+			else
+				ShowError("pc_readparam: Attempt to read unknown parameter '%lld'.\n", type);
 			return -1;
 	}
 
@@ -10488,7 +10843,10 @@ bool pc_setparam(map_session_data *sd,int64 type,int64 val_tmp)
 		pc_setglobalreg(sd, add_str(COOKMASTERY_VAR), sd->cook_mastery);
 		return true;
 	default:
-		ShowError("pc_setparam: Attempted to set unknown parameter '%lld'.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_setparam: 알수 없는 파라메타 '%lld'을(를) 설정하려합니다.\n", type);
+		else
+			ShowError("pc_setparam: Attempted to set unknown parameter '%lld'.\n", type);
 		return false;
 	}
 	clif_updatestatus(*sd,static_cast<_sp>(type));
@@ -10760,8 +11118,12 @@ bool pc_jobchange(map_session_data *sd,int job, char upper)
 
 	// Reset body style to 0 before changing job to avoid
 	// errors since not every job has a alternate outfit.
+#if PACKETVER_MAIN_NUM >= 20231220
+	sd->status.body = job;
+#else
 	sd->status.body = 0;
-	clif_changelook(&sd->bl,LOOK_BODY2,0);
+#endif
+	clif_changelook(&sd->bl,LOOK_BODY2,sd->status.body);
 
 	sd->status.class_ = job;
 	fame_flag = pc_famerank(sd->status.char_id,sd->class_&MAPID_UPPERMASK);
@@ -11303,7 +11665,10 @@ int64 pc_readregistry(map_session_data *sd, int64 reg)
 	struct script_reg_num *p = nullptr;
 
 	if (!sd->vars_ok) {
-		ShowError("pc_readregistry: Trying to read reg %s before it's been loaded!\n", get_str(script_getvarid(reg)));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_readregistry: 로드되기 전에 reg '%s'을(를) 읽으려고합니다.\n", get_str(script_getvarid(reg)));
+		else
+			ShowError("pc_readregistry: Trying to read reg %s before it's been loaded!\n", get_str(script_getvarid(reg)));
 		//This really shouldn't happen, so it's possible the data was lost somewhere, we should request it again.
 		//intif->request_registry(sd,type==3?4:type);
 		set_eof(sd->fd);
@@ -11326,7 +11691,10 @@ char* pc_readregistry_str(map_session_data *sd, int64 reg)
 	struct script_reg_str *p = nullptr;
 
 	if (!sd->vars_ok) {
-		ShowError("pc_readregistry_str: Trying to read reg %s before it's been loaded!\n", get_str(script_getvarid(reg)));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_readregistry_str: 로드되기 전에 reg %s를 읽으려고합니다!\n", get_str(script_getvarid(reg)));
+		else
+			ShowError("pc_readregistry_str: Trying to read reg %s before it's been loaded!\n", get_str(script_getvarid(reg)));
 		//This really shouldn't happen, so it's possible the data was lost somewhere, we should request it again.
 		//intif->request_registry(sd,type==3?4:type);
 		set_eof(sd->fd);
@@ -11351,7 +11719,10 @@ bool pc_setregistry(map_session_data *sd, int64 reg, int64 val)
 	uint32 index = script_getvaridx(reg);
 
 	if ( !reg_load && !sd->vars_ok ) {
-		ShowError("pc_setregistry : refusing to set %s until vars are received.\n", regname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_setregistry : vars를 받을 때까지 %s 설정을 거부했습니다.\n", regname);
+		else
+			ShowError("pc_setregistry : refusing to set %s until vars are received.\n", regname);
 		return false;
 	}
 
@@ -11405,13 +11776,19 @@ bool pc_setregistry_str(map_session_data *sd, int64 reg, const char *val)
 	size_t vlen = 0;
 
 	if (!reg_load && !sd->vars_ok) {
-		ShowError("pc_setregistry_str : refusing to set %s until vars are received.\n", regname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_setregistry_str : vars를 수신 받을때까지 %s 설정을 거부합니다.\n", regname);
+		else
+			ShowError("pc_setregistry_str : refusing to set %s until vars are received.\n", regname);
 		return false;
 	}
 
 	if ( !script_check_RegistryVariableLength(1, val, &vlen ) )
 	{
-		ShowError("pc_check_RegistryVariableLength: Variable value length is too long (aid: %d, cid: %d): '%s' sz=%zu\n", sd->status.account_id, sd->status.char_id, val, vlen);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_check_RegistryVariableLength: 변수값의 길이가 너무 깁니다. (계정ID번호: %d, 케릭터ID번호: %d): '%s' 길이=%zu\n", sd->status.account_id, sd->status.char_id, val, vlen);
+		else
+			ShowError("pc_check_RegistryVariableLength: Variable value length is too long (aid: %d, cid: %d): '%s' sz=%zu\n", sd->status.account_id, sd->status.char_id, val, vlen);
 		return false;
 	}
 
@@ -11471,7 +11848,10 @@ bool pc_setreg2(map_session_data *sd, const char *reg, int64 val) {
 	nullpo_retr(false, sd);
 
 	if (reg[strlen(reg)-1] == '$') {
-		ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_setreg2: 변수 범위 '%s'이(가) 잘못되었습니다.\n", reg);
+		else
+			ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
 		return false;
 	}
 
@@ -11481,7 +11861,10 @@ bool pc_setreg2(map_session_data *sd, const char *reg, int64 val) {
 		case '.':
 		case '\'':
 		case '$':
-			ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pc_setreg2: 변수 범위 '%s'이(가) 잘못되었습니다.\n", reg);
+			else
+				ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
 			return false;
 		case '@':
 			return pc_setreg(sd, add_str(reg), val);
@@ -11506,7 +11889,10 @@ int64 pc_readreg2(map_session_data *sd, const char *reg) {
 	nullpo_ret(sd);
 
 	if (reg[strlen(reg)-1] == '$') {
-		ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_readreg2: 변수 범위 '%s'이(가) 잘못되었습니다.\n", reg);
+		else
+			ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
 		return 0;
 	}
 
@@ -11514,7 +11900,10 @@ int64 pc_readreg2(map_session_data *sd, const char *reg) {
 		case '.':
 		case '\'':
 		case '$':
-			ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pc_readreg2: 변수 범위 '%s'이(가) 잘못되었습니다.\n", reg);
+			else
+				ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
 			return 0;
 		case '@':
 			return pc_readreg(sd, add_str(reg));
@@ -11544,9 +11933,12 @@ static TIMER_FUNC(pc_eventtimer){
 		sd->eventcount--;
 		npc_event(sd,p,0);
 	}
-	else
-		ShowError("pc_eventtimer: no such event timer\n");
-
+	else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_eventtimer: 이벤트 타이머가 없습니다.\n");
+		else
+			ShowError("pc_eventtimer: no such event timer\n");
+	}
 	if (p) aFree(p);
 	return 0;
 }
@@ -11888,9 +12280,12 @@ bool pc_equipitem(map_session_data *sd,short n,int req_pos,bool equipswitch)
 		return false;
 	pos = pc_equippoint(sd,n); //With a few exceptions, item should go in all specified slots.
 
-	if(battle_config.battle_log && !equipswitch)
-		ShowInfo("equip %u (%d) %x:%x\n",sd->inventory.u.items_inventory[n].nameid,n,id?id->equip:0,req_pos);
-
+	if(battle_config.battle_log && !equipswitch) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("착용 %hu (%d) %x:%x\n",sd->inventory.u.items_inventory[n].nameid,n,id?id->equip:0,req_pos);
+		else
+			ShowInfo("equip %u (%d) %x:%x\n",sd->inventory.u.items_inventory[n].nameid,n,id?id->equip:0,req_pos);
+	}
 	uint8 res = pc_isequip( sd, n );
 
 	if( res != ITEM_EQUIP_ACK_OK ){
@@ -12263,9 +12658,12 @@ bool pc_unequipitem(map_session_data *sd, int n, int flag) {
 		return false;
 	}
 
-	if (battle_config.battle_log)
-		ShowInfo("unequip %d %x:%x\n",n,pc_equippoint(sd,n),pos);
-
+	if (battle_config.battle_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("착용해제 %d %x:%x\n",n,pc_equippoint(sd,n),pos);
+		else
+			ShowInfo("unequip %d %x:%x\n",n,pc_equippoint(sd,n),pos);
+	}
 	for(i = 0; i < EQI_MAX; i++) {
 		if (pos & equip_bitmask[i])
 			sd->equip_index[i] = -1;
@@ -12539,7 +12937,10 @@ void pc_check_available_item(map_session_data *sd, uint8 type)
 			if (!itemdb_available(nameid)) {
 				sprintf(output, msg_txt(sd, 709), nameid); // Item %u has been removed from your inventory.
 				clif_displaymessage(sd->fd, output);
-				ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from inventory (char_id: %d).\n", nameid, sd->inventory.u.items_inventory[i].amount, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("(케릭터ID번호: %d)의 인벤토리에서 유효하지 않거나 사용 중지 된 아이템 (ID: %u, 갯수: %d)을 삭제했습니다.\n", sd->status.char_id, nameid, sd->inventory.u.items_inventory[i].amount);
+				else	
+					ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from inventory (char_id: %d).\n", nameid, sd->inventory.u.items_inventory[i].amount, sd->status.char_id);
 				pc_delitem(sd, i, sd->inventory.u.items_inventory[i].amount, 4, 0, LOG_TYPE_OTHER);
 				continue;
 			}
@@ -12557,7 +12958,10 @@ void pc_check_available_item(map_session_data *sd, uint8 type)
 			if (!itemdb_available(nameid)) {
 				sprintf(output, msg_txt(sd, 710), nameid); // Item %u has been removed from your cart.
 				clif_displaymessage(sd->fd, output);
-				ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from cart (char_id: %d).\n", nameid, sd->cart.u.items_cart[i].amount, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("(케릭터ID번호: %d)의 카트에서 유효하지 않거나 사용 중지 된 아이템 (ID: %u, 갯수: %d)을 삭제했습니다.\n", sd->status.char_id, nameid, sd->cart.u.items_cart[i].amount);
+				else
+					ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from cart (char_id: %d).\n", nameid, sd->cart.u.items_cart[i].amount, sd->status.char_id);
 				pc_cart_delitem(sd, i, sd->cart.u.items_cart[i].amount, 0, LOG_TYPE_OTHER);
 				continue;
 			}
@@ -12575,7 +12979,10 @@ void pc_check_available_item(map_session_data *sd, uint8 type)
 			if (!itemdb_available(nameid)) {
 				sprintf(output, msg_txt(sd, 711), nameid); // Item %u has been removed from your storage.
 				clif_displaymessage(sd->fd, output);
-				ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from storage (char_id: %d).\n", nameid, sd->storage.u.items_storage[i].amount, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("(케릭터ID번호: %d)의 창고에서 유효하지 않거나 사용 중지 된 아이템 (ID: %u, 갯수: %d)을 삭제했습니다.\n", sd->status.char_id, nameid, sd->storage.u.items_storage[i].amount);
+				else
+					ShowWarning("Removed invalid/disabled item (ID: %u, amount: %d) from storage (char_id: %d).\n", nameid, sd->storage.u.items_storage[i].amount, sd->status.char_id);
 				storage_delitem(sd, &sd->storage, i, sd->storage.u.items_storage[i].amount);
 				continue;
 			}
@@ -13046,7 +13453,10 @@ static TIMER_FUNC(pc_spiritcharm_timer){
 		return 1;
 
 	if (sd->spiritcharm <= 0) {
-		ShowError("pc_spiritcharm_timer: %d spiritcharm's available. (aid=%d cid=%d tid=%d)\n", sd->spiritcharm, sd->status.account_id, sd->status.char_id, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_spiritcharm_timer: %d개의 spiritcharm을 사용할 수 있습니다. (계정ID번호=%d 케릭터ID번호=%d tid=%d)\n", sd->spiritcharm, sd->status.account_id, sd->status.char_id, tid);
+		else
+			ShowError("pc_spiritcharm_timer: %d spiritcharm's available. (aid=%d cid=%d tid=%d)\n", sd->spiritcharm, sd->status.account_id, sd->status.char_id, tid);
 		sd->spiritcharm = 0;
 		sd->spiritcharm_type = CHARM_TYPE_NONE;
 		return 0;
@@ -13055,7 +13465,10 @@ static TIMER_FUNC(pc_spiritcharm_timer){
 	ARR_FIND(0, sd->spiritcharm, i, sd->spiritcharm_timer[i] == tid);
 
 	if (i == sd->spiritcharm) {
-		ShowError("pc_spiritcharm_timer: timer not found (aid=%d cid=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_spiritcharm_timer: 타이머를 찾을 수 없습니다. (계정ID번호=%d 케릭터ID번호=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
+		else
+			ShowError("pc_spiritcharm_timer: timer not found (aid=%d cid=%d tid=%d)\n", sd->status.account_id, sd->status.char_id, tid);
 		return 0;
 	}
 
@@ -13240,7 +13653,10 @@ int pc_split_atoui(char* str, unsigned int* val, char sep, int max)
 			val[i] = UINT_MAX;
 			if (!warning) {
 				warning = 1;
-				ShowWarning("pc_readdb (exp.txt): Required exp per level is capped to %u\n", UINT_MAX);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_readdb (exp.txt): 레벨 당 필요한 경험치는 %u로 제한됩니다.\n", UINT_MAX);
+				else
+					ShowWarning("pc_readdb (exp.txt): Required exp per level is capped to %u\n", UINT_MAX);
 			}
 		} else
 			val[i] = (unsigned int)f;
@@ -13283,7 +13699,10 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	std::string job_name_constant = "JOB_" + job_name;
 
 	if (!script_get_constant(job_name_constant.c_str(), &constant) || !pcdb_checkid(constant)) {
-		this->invalidWarning(node["Job"], "Invalid job %s.\n", job_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Job"], "%s은(는) 잘못된 직업입니다.\n", job_name.c_str());
+		else
+			this->invalidWarning(node["Job"], "Invalid job %s.\n", job_name.c_str());
 		return 0;
 	}
 	uint16 job_id = static_cast<uint16>(constant);
@@ -13303,7 +13722,10 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			std::string inheritname_constant = "JOB_" + inheritname;
 
 			if (!script_get_constant(inheritname_constant.c_str(), &constant) || !pcdb_checkid(constant)) {
-				this->invalidWarning(InheritNode[Inheritit.key()], "Invalid job %s.\n", inheritname.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(InheritNode[Inheritit.key()], "%s은(는) 잘못된 직업입니다.\n", inheritname.c_str());
+				else
+					this->invalidWarning(InheritNode[Inheritit.key()], "Invalid job %s.\n", inheritname.c_str());
 				return 0;
 			}
 
@@ -13335,11 +13757,17 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			uint16 skill_id = skill_name2id(skill_name.c_str());
 
 			if (skill_id == 0) {
-				this->invalidWarning(it["Name"], "Invalid skill name \"%s\".\n", skill_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["Name"], "\"%s\"은(는) 잘못된 스킬 이름입니다.\n", skill_name.c_str());
+				else
+					this->invalidWarning(it["Name"], "Invalid skill name \"%s\".\n", skill_name.c_str());
 				return 0;
 			}
 			if (!skill_get_index(skill_id)) {
-				this->invalidWarning(it["Name"], "Unable to load skill %s into job %hu's tree.\n", skill_name.c_str(), job_id);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["Name"], "직업 %hu 트리에 스킬 %s을(를) 로드 할 수 없습니다.\n", job_id, skill_name.c_str());
+				else
+					this->invalidWarning(it["Name"], "Unable to load skill %s into job %hu's tree.\n", skill_name.c_str(), job_id);
 				return 0;
 			}
 
@@ -13359,14 +13787,20 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (max_lv > MAX_SKILL_LEVEL) {
-				this->invalidWarning(it["MaxLevel"], "MaxLevel exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["MaxLevel"], "MaxLevel이 최대 스킬 레벨 %d을(를) 초과하여 건너뜁니다.\n", MAX_SKILL_LEVEL);
+				else
+					this->invalidWarning(it["MaxLevel"], "MaxLevel exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
 				return 0;
 			}
 
 			uint16 skill_lv_max = skill_get_max(skill_id);
 
 			if (max_lv > skill_lv_max) {
-				this->invalidWarning(it["MaxLevel"], "Skill %s's level %hu exceeds the skill's max level %hu. Capping skill level.\n", skill_name.c_str(), max_lv, skill_lv_max);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["MaxLevel"], "스킬 %s의 레벨 %hu이(가) 스킬 최대 레벨 %hu을(를) 초과하여 스킬레벨을 재조정합니다.\n", skill_name.c_str(), max_lv, skill_lv_max);
+				else
+					this->invalidWarning(it["MaxLevel"], "Skill %s's level %hu exceeds the skill's max level %hu. Capping skill level.\n", skill_name.c_str(), max_lv, skill_lv_max);
 				max_lv = skill_lv_max;
 			}
 
@@ -13387,8 +13821,12 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				uint32 baselv_max = job_db.get_maxBaseLv(job_id);
 
 				if (baselv > baselv_max) {
-					this->invalidWarning(it["BaseLevel"], "Skill %hu's base level requirement %hu exceeds job %s's max base level %d. Capping skill base level.\n",
-						skill_id, baselv, job_name.c_str(), baselv_max);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it["BaseLevel"], "스킬 %hu의 베이스 레벨 요구사항 %hu이(가) 직업 %s의 최대 베이스 레벨 %d을(를) 초과하여 스킬 기본레벨이 재조정됩니다.\n",
+							skill_id, baselv, job_name.c_str(), baselv_max);
+					else
+						this->invalidWarning(it["BaseLevel"], "Skill %hu's base level requirement %hu exceeds job %s's max base level %d. Capping skill base level.\n",
+							skill_id, baselv, job_name.c_str(), baselv_max);
 					baselv = baselv_max;
 				}
 				entry->baselv = baselv;
@@ -13406,8 +13844,12 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				uint32 joblv_max = job_db.get_maxJobLv(job_id);
 
 				if (joblv > joblv_max) {
-					this->invalidWarning(it["JobLevel"], "Skill %hu's job level requirement %hu exceeds job %s's max job level %d. Capping skill job level.\n",
-						skill_id, joblv, job_name.c_str(), joblv_max);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it["JobLevel"], "스킬 %hu의 직업 레벨 요구사항 %hu이(가) 직업 %s의 최대 직업 레벨 %d을(를) 초과하여 스킬 직업 레벨이 재조정됩니다.\n",
+							skill_id, joblv, job_name.c_str(), joblv_max);
+					else
+						this->invalidWarning(it["JobLevel"], "Skill %hu's job level requirement %hu exceeds job %s's max job level %d. Capping skill job level.\n",
+							skill_id, joblv, job_name.c_str(), joblv_max);
 					joblv = joblv_max;
 				}
 				entry->joblv = joblv;
@@ -13429,7 +13871,10 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					uint16 skill_id_req = skill_name2id(skill_name_req.c_str());
 
 					if (skill_id_req == 0) {
-						this->invalidWarning(Requiresit["Name"], "Invalid skill name \"%s\".\n", skill_name_req.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(Requiresit["Name"], "\"%s\"은(는) 잘못된 스킬 이름입니다..\n", skill_name_req.c_str());
+						else
+							this->invalidWarning(Requiresit["Name"], "Invalid skill name \"%s\".\n", skill_name_req.c_str());
 						return 0;
 					}
 
@@ -13439,20 +13884,29 @@ uint64 SkillTreeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						return 0;
 
 					if (lv_req > MAX_SKILL_LEVEL) {
-						this->invalidWarning(Requiresit["Level"], "Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(Requiresit["Level"], "Level이 최대 스킬 레벨 %d을(를) 초과하여 건너뜁니다.\n", MAX_SKILL_LEVEL);
+						else
+							this->invalidWarning(Requiresit["Level"], "Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
 						return 0;
 					}
 
 					uint16 lv_req_max = skill_get_max(skill_id_req);
 
 					if (lv_req > lv_req_max) {
-						this->invalidWarning(it["MaxLevel"], "Required skill %s's level %hu exceeds the skill's max level %hu. Capping skill level.\n", skill_name.c_str(), lv_req, lv_req_max);
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(it["MaxLevel"], "필요 스킬 %s의 레벨 %hu이(가) 스킬 최대 레벨 %hu을(를) 초과하여 스킬 레벨이 재조정됩니다.\n", skill_name.c_str(), lv_req, lv_req_max);
+						else
+							this->invalidWarning(it["MaxLevel"], "Required skill %s's level %hu exceeds the skill's max level %hu. Capping skill level.\n", skill_name.c_str(), lv_req, lv_req_max);
 						lv_req = lv_req_max;
 					}
 					
 					if (lv_req == 0) {
 						if (entry->need.erase(skill_id_req) == 0)
-							this->invalidWarning(Requiresit["Name"], "Failed to erase %s, the skill doesn't exist in for job %s, skipping.\n", skill_name_req.c_str(), job_name.c_str());
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning(Requiresit["Name"], "스킬 %s이(가) 직업 %s에 대한 스킬이 존재하지 않아 삭제에 실패 히여 건너뜁니다.\n", skill_name_req.c_str(), job_name.c_str());
+							else
+								this->invalidWarning(Requiresit["Name"], "Failed to erase %s, the skill doesn't exist in for job %s, skipping.\n", skill_name_req.c_str(), job_name.c_str());
 						continue;
 					}
 
@@ -13513,13 +13967,21 @@ void SkillTreeDatabase::loadingFinished() {
 				std::shared_ptr<s_skill_tree_entry> skill = skill_tree->skills[it.first];
 
 				if (skill->baselv > baselv_max) {
-					ShowWarning("SkillTreeDatabase: Skill %s (%hu)'s base level requirement %hu exceeds job %s's max base level %d. Capping skill base level.\n",
-						skill_get_name(skill->skill_id), skill->skill_id, skill->baselv, job_name(data.first), baselv_max);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						ShowWarning("SkillTreeDatabase: 스킬 %s (%hu)의 필요 기본 레벨 %hu이(가) 직업 %s의 최대 기본 레벨 %d을(를) 초과하여 스킬 기본 레벨을 재조정합니다.\n",
+							skill_get_name(skill->skill_id), skill->skill_id, skill->baselv, job_name(data.first), baselv_max);
+					else
+						ShowWarning("SkillTreeDatabase: Skill %s (%hu)'s base level requirement %hu exceeds job %s's max base level %d. Capping skill base level.\n",
+							skill_get_name(skill->skill_id), skill->skill_id, skill->baselv, job_name(data.first), baselv_max);
 					skill->baselv = baselv_max;
 				}
 				if (skill->joblv > joblv_max) {
-					ShowWarning("SkillTreeDatabase: Skill %s (%hu)'s job level requirement %hu exceeds job %s's max job level %d. Capping skill job level.\n",
-						skill_get_name(skill->skill_id), skill->skill_id, skill->joblv, job_name(data.first), joblv_max);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						ShowWarning("SkillTreeDatabase: 스킬 %s (%hu)의 필요 직업 레벨 %hu이(가) 직업 %s의 최대 직업 레벨 %d을(를) 초과하여 스킬 직업 레벨이 재조정됩니다.\n",
+							skill_get_name(skill->skill_id), skill->skill_id, skill->joblv, job_name(data.first), joblv_max);
+					else
+						ShowWarning("SkillTreeDatabase: Skill %s (%hu)'s job level requirement %hu exceeds job %s's max job level %d. Capping skill job level.\n",
+							skill_get_name(skill->skill_id), skill->skill_id, skill->joblv, job_name(data.first), joblv_max);
 					skill->joblv = joblv_max;
 				}
 			}
@@ -13630,7 +14092,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 job_id;
 
 			if (!script_get_constant(job_name_constant.c_str(), &job_id)) {
-				this->invalidWarning(node["Job"], "Job %s does not exist.\n", job_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["Job"], "직업 %s이(가) 존재하지 않습니다.\n", job_name.c_str());
+				else
+					this->invalidWarning(node["Job"], "Job %s does not exist.\n", job_name.c_str());
 				return 0;
 			}
 
@@ -13721,12 +14186,18 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(weapon_constant.c_str(), &constant)) {
-						this->invalidWarning(aspdNode["BaseASPD"], "Unknown weapon type %s specified for %s, skipping.\n", weapon.c_str(), job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(aspdNode["BaseASPD"], "%s에 대한 알 수 없는 무기 타입 %s이(가) 지정되어 건너뜁니다.\n", job_name.c_str(), weapon.c_str());
+						else
+							this->invalidWarning(aspdNode["BaseASPD"], "Unknown weapon type %s specified for %s, skipping.\n", weapon.c_str(), job_name.c_str());
 						continue;
 					}
 
 					if (constant < W_FIST || constant >= max) {
-						this->invalidWarning(aspdNode["BaseASPD"], "Invalid weapon type %s specified for %s, skipping.\n", weapon.c_str(), job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(aspdNode["BaseASPD"], "%s에 대한 잘못된 무기 타입 %s이(가) 지정되어 건너뜁니다.\n", job_name.c_str(), weapon.c_str());
+						else
+							this->invalidWarning(aspdNode["BaseASPD"], "Invalid weapon type %s specified for %s, skipping.\n", weapon.c_str(), job_name.c_str());
 						continue;
 					}
 
@@ -13759,12 +14230,18 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(stat_constant.c_str(), &constant)) {
-						this->invalidWarning(statNode["Bonus"], "Unknown max stat %s specified for %s, skipping.\n", stat.c_str(), job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(statNode["Bonus"], "%s에 대한 알 수 없는 최대 스텟 %s이(가) 지정되어 건너뜁니다.\n", job_name.c_str(), stat.c_str());
+						else
+							this->invalidWarning(statNode["Bonus"], "Unknown max stat %s specified for %s, skipping.\n", stat.c_str(), job_name.c_str());
 						continue;
 					}
 
 					if (constant < PARAM_STR || constant >= PARAM_MAX) {
-						this->invalidWarning(statNode["Bonus"], "Invalid max stat %s specified for %s, skipping.\n", stat.c_str(), job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(statNode["Bonus"], "%s에 대한 잘못된 최대 스텟 %s이(가) 지정되어 건너뜁니다.\n", job_name.c_str(), stat.c_str());
+						else
+							this->invalidWarning(statNode["Bonus"], "Invalid max stat %s specified for %s, skipping.\n", stat.c_str(), job_name.c_str());
 						continue;
 					}
 
@@ -13784,7 +14261,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					return 0;
 
 				if (level == 0 || level > MAX_LEVEL) {
-					this->invalidWarning(node["MaxBaseLevel"], "MaxBaseLevel must be between 1~MAX_LEVEL for %s, capping to MAX_LEVEL.\n", job_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(node["MaxBaseLevel"], "%s에 대한 MaxBaseLevel은 1~MAX_LEVEL 사이여야 합니다. MAX_LEVEL로 재조정됨.\n", job_name.c_str());
+					else
+						this->invalidWarning(node["MaxBaseLevel"], "MaxBaseLevel must be between 1~MAX_LEVEL for %s, capping to MAX_LEVEL.\n", job_name.c_str());
 					level = MAX_LEVEL;
 				}
 
@@ -13805,7 +14285,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(bexpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(bexpNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(bexpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13827,7 +14310,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					return 0;
 
 				if (level == 0 || level > MAX_LEVEL) {
-					this->invalidWarning(node["MaxJobLevel"], "MaxJobLevel must be between 1~MAX_LEVEL for %s, capping to MAX_LEVEL.\n", job_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(node["MaxJobLevel"], "%s에 대한 MaxJobLevel은 1~MAX_LEVEL 사이어야 합니다. MAX_LEVEL로 재조정됨.\n", job_name.c_str());
+					else
+						this->invalidWarning(node["MaxJobLevel"], "MaxJobLevel must be between 1~MAX_LEVEL for %s, capping to MAX_LEVEL.\n", job_name.c_str());
 					level = MAX_LEVEL;
 				}
 
@@ -13848,7 +14334,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(jexpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(jexpNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(jexpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13873,7 +14362,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						return 0;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(levelNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(levelNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(levelNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13902,7 +14394,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(bhpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(bhpNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(bhpNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13928,7 +14423,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(bspNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(bspNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(bspNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13954,7 +14452,10 @@ uint64 JobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (level == 0 || level > MAX_LEVEL) {
-						this->invalidWarning(bapNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(bapNode["Level"], "%s에 대한 Level은 1~MAX_LEVEL 사이어야 합니다.\n", job_name.c_str());
+						else
+							this->invalidWarning(bapNode["Level"], "Level must be between 1~MAX_LEVEL for %s.\n", job_name.c_str());
 						return 0;
 					}
 
@@ -13991,10 +14492,18 @@ void JobDatabase::loadingFinished() {
 		std::shared_ptr<s_job_info> job = jobIt.second;
 		uint16 maxBaseLv = job->max_base_level, maxJobLv = job->max_job_level;
 
-		if (!maxBaseLv)
-			ShowWarning("Class %s (%d) does not have a base exp table.\n", job_name(job_id), job_id);
-		if (!maxJobLv)
-			ShowWarning("Class %s (%d) does not have a job exp table.\n", job_name(job_id), job_id);
+		if (!maxBaseLv) {
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				ShowWarning("클래스 %s(%d)에 대한 베이스 경험치 테이블이 없습니다.\n", job_name(job_id), job_id);
+			else
+				ShowWarning("Class %s (%d) does not have a base exp table.\n", job_name(job_id), job_id);
+		}
+		if (!maxJobLv) {
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				ShowWarning("클래스 %s(%d)에 대한 직업 경험치 테이블이 없습니다.\n", job_name(job_id), job_id);
+			else
+				ShowWarning("Class %s (%d) does not have a job exp table.\n", job_name(job_id), job_id);
+		}
 
 		// Init and checking the empty value of Base HP/SP [Cydh]
 		if (job->base_hp.empty())
@@ -14124,21 +14633,30 @@ static bool pc_readdb_job_noenter_map( char *str[], size_t columns, size_t curre
 		class_ = atoi(str[0]);
 	} else {
 		if (!script_get_constant(str[0], &class_tmp)) {
-			ShowError("pc_readdb_job_noenter_map: Invalid job %s specified.\n", str[0]);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("pc_readdb_job_noenter_map: 잘못된 직업 %s이(가) 지정되었습니다.\n", str[0]);
+			else
+				ShowError("pc_readdb_job_noenter_map: Invalid job %s specified.\n", str[0]);
 			return false;
 		}
 		class_ = static_cast<int>(class_tmp);
 	}
 
 	if (!pcdb_checkid(class_)) {
-		ShowError("pc_readdb_job_noenter_map: Invalid job %d specified.\n", class_);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_readdb_job_noenter_map: 잘못된 직업 %d이(가) 지정되었습니다.\n", str[0]);
+		else
+			ShowError("pc_readdb_job_noenter_map: Invalid job %d specified.\n", class_);
 		return false;
 	}
 
 	std::shared_ptr<s_job_info> job = job_db.find(class_);
 
 	if (job == nullptr) {
-		ShowError("pc_readdb_job_noenter_map: Job %d data not initialized.\n", class_);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_readdb_job_noenter_map: 직업 %d의 데이터가 초기화되지 않았습니다.\n", class_);
+		else
+			ShowError("pc_readdb_job_noenter_map: Job %d data not initialized.\n", class_);
 		return false;
 	}
 
@@ -14159,12 +14677,18 @@ uint64 PlayerStatPointDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	    return 0;
 
 	if (level == 0) {
-		this->invalidWarning(node["Level"], "The minimum level is 1.\n");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Level"], "최소 레벨은 1입니다.\n");
+		else
+			this->invalidWarning(node["Level"], "The minimum level is 1.\n");
 		return 0;
 	}
 
 	if (level > MAX_LEVEL) {
-		this->invalidWarning(node["Level"], "Level %d exceeds maximum BaseLevel %d, skipping.\n", level, MAX_LEVEL);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Level"], "Level %d이(가) 최대 베이스 레벨 %d을(를) 초과하여 건너뜁니다.\n", level, MAX_LEVEL);
+		else
+			this->invalidWarning(node["Level"], "Level %d exceeds maximum BaseLevel %d, skipping.\n", level, MAX_LEVEL);
 		return 0;
 	}
 
@@ -14220,7 +14744,10 @@ void PlayerStatPointDatabase::loadingFinished(){
 
 	if( level_one == nullptr ){
 		if( battle_config.use_statpoint_table ){
-			ShowError( "Missing status points for Level 1\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "레벨1에 대한 스테이터스 포인트가 빠졌습니다.\n" );
+			else
+				ShowError( "Missing status points for Level 1\n" );
 		}
 
 		level_one = std::make_shared<s_statpoint_entry>();
@@ -14232,7 +14759,10 @@ void PlayerStatPointDatabase::loadingFinished(){
 		this->put( 1, level_one );
 	}else if( battle_config.use_statpoint_table ){
 		if( level_one->statpoints != inter_config.start_status_points ){
-			ShowError( "Status points for Level 1 (=%u) do not match inter_athena.conf value (=%u).\n", level_one->statpoints, inter_config.start_status_points );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "레벨 1 (=%u)에 대한 스테이터스 포인트가 inter_athena.conf의 값 (=%u)과 일치하지 않습니다.\n", level_one->statpoints, inter_config.start_status_points );
+			else
+				ShowError( "Status points for Level 1 (=%u) do not match inter_athena.conf value (=%u).\n", level_one->statpoints, inter_config.start_status_points );
 			level_one->statpoints = inter_config.start_status_points;
 		}
 	}else{
@@ -14253,7 +14783,10 @@ void PlayerStatPointDatabase::loadingFinished(){
 
 		if( !battle_config.use_statpoint_table || !exists ){
 			if( battle_config.use_statpoint_table ){
-				ShowError("Missing status points for Level %hu\n", level);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "레벨 %hu에 대한 스테이터스 포인트가 빠졌습니다.\n", level);
+				else
+					ShowError("Missing status points for Level %hu\n", level);
 			}
 
 			if( level <= trait_start_level ){
@@ -14265,7 +14798,10 @@ void PlayerStatPointDatabase::loadingFinished(){
 
 		if( !battle_config.use_traitpoint_table || !exists ){
 			if( battle_config.use_traitpoint_table && level > trait_start_level ){
-				ShowError( "Missing trait points for Level %hu\n", level );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "레벨 %hu에 대한 특성 포인트가 빠졌습니다.\n", level);
+				else
+					ShowError( "Missing trait points for Level %hu\n", level );
 			}
 
 			if( level > trait_start_level ){
@@ -14358,8 +14894,12 @@ int pc_read_motd(void)
 			if( len ) {
 				char * ptr;
 				buf[len] = 0;
-				if( ( ptr = strstr(buf, " :") ) != nullptr && ptr-buf >= NAME_LENGTH ) // crashes newer clients
-					ShowWarning("Found sequence '" CL_WHITE " :" CL_RESET "' on line '" CL_WHITE "%u" CL_RESET "' in '" CL_WHITE "%s" CL_RESET "'. This can cause newer clients to crash.\n", lines, motd_txt);
+				if( ( ptr = strstr(buf, " :") ) != nullptr && ptr-buf >= NAME_LENGTH ) {// crashes newer clients
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("'" CL_WHITE "%s" CL_RESET "'의 '" CL_WHITE "%u" CL_RESET "'줄에 '" CL_WHITE " :" CL_RESET "'이(가) 발견되었습니다. 이로 인해 최신 클라이언트가 중단 될 수 있습니다.\n", motd_txt, lines);
+					else
+						ShowWarning("Found sequence '" CL_WHITE " :" CL_RESET "' on line '" CL_WHITE "%u" CL_RESET "' in '" CL_WHITE "%s" CL_RESET "'. This can cause newer clients to crash.\n", lines, motd_txt);
+				}
 			}
 			else {// empty line
 				buf[0] = ' ';
@@ -14369,11 +14909,17 @@ int pc_read_motd(void)
 			entries++;
 		}
 		fclose(fp);
-		ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", entries, motd_txt);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%u" CL_RESET "'개의 항목을 읽어왔습니다.\n", motd_txt, entries);
+		else
+			ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", entries, motd_txt);
 	}
-	else
-		ShowWarning("File '" CL_WHITE "%s" CL_RESET "' not found.\n", motd_txt);
-
+	else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("파일 '" CL_WHITE "%s" CL_RESET "'을(를) 찾을 수 없습니다.\n", motd_txt);
+		else
+			ShowWarning("File '" CL_WHITE "%s" CL_RESET "' not found.\n", motd_txt);
+	}
 	return 0;
 }
 
@@ -14445,7 +14991,10 @@ uint8 pc_itemcd_add(map_session_data *sd, struct item_data *id, t_tick tick, uns
 		if( !(id->nameid == ITEMID_REINS_OF_MOUNT && sd->sc.option&(OPTION_WUGRIDER|OPTION_RIDING|OPTION_DRAGON|OPTION_MADOGEAR)) )
 			sd->item_delay[i].tick = tick + sd->inventory_data[n]->delay.duration;
 	} else {// should not happen
-		ShowError("pc_itemcd_add: Exceeded item delay array capacity! (nameid=%u, char_id=%d)\n", id->nameid, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_itemcd_add: 아이템 딜레이 배열 양이 초과되었습니다. (아이템ID번호=%u, 케릭터ID번호=%d)\n", id->nameid, sd->status.char_id);
+		else
+			ShowError("pc_itemcd_add: Exceeded item delay array capacity! (nameid=%u, char_id=%d)\n", id->nameid, sd->status.char_id);
 	}
 	//clean up used delays so we can give room for more
 	for(i = 0; i < MAX_ITEMDELAYS; i++) {
@@ -14478,12 +15027,19 @@ uint8 pc_itemcd_check(map_session_data *sd, struct item_data *id, t_tick tick, u
 
 	// Send reply of delay remains
 	if (sc->getSCE(id->delay.sc)) {
-		const struct TimerData *timer = get_timer(sc->getSCE(id->delay.sc)->timer);
-		clif_msg_value(sd, MSI_ITEM_REUSE_LIMIT_SECOND, (int)(timer ? DIFF_TICK(timer->tick, tick) / 1000 : 99));
+		if (id->delay.checkstatus) {
+			char e_msg[CHAT_SIZE_MAX];
+			sprintf(e_msg, msg_txt(sd, 369));
+			clif_messagecolor(&sd->bl, color_table[COLOR_WHITE], e_msg, false, SELF);
+		} else {
+			const struct TimerData *timer = get_timer(sc->getSCE(id->delay.sc)->timer);
+			clif_msg_value(sd, MSI_ITEM_REUSE_LIMIT_SECOND, (int)(timer ? DIFF_TICK(timer->tick, tick) / 1000 : 99));
+		}
 		return 1;
 	}
-
-	sc_start(&sd->bl, &sd->bl, id->delay.sc, 100, id->nameid, id->delay.duration);
+	
+	if (id->delay.checkstatus == false)
+		sc_start(&sd->bl, &sd->bl, id->delay.sc, 100, id->nameid, id->delay.duration);
 	return 0;
 }
 
@@ -14805,8 +15361,12 @@ void pc_bonus_script(map_session_data *sd) {
 
 			if (entry->script)
 				run_script(entry->script, 0, sd->bl.id, 0);
-			else
-				ShowError("pc_bonus_script: The script has been removed somewhere. \"%s\"\n", StringBuf_Value(entry->script_buf));
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("pc_bonus_script: 이 스크립트는 어딘가 제거되었습니다. \"%s\"\n", StringBuf_Value(entry->script_buf));
+				else	
+					ShowError("pc_bonus_script: The script has been removed somewhere. \"%s\"\n", StringBuf_Value(entry->script_buf));
+			}
 		}
 
 		node = next;
@@ -14833,7 +15393,10 @@ struct s_bonus_script_entry *pc_bonus_script_add(map_session_data *sd, const cha
 		return nullptr;
 	
 	if (!(script = parse_script(script_str, "bonus_script", 0, SCRIPT_IGNORE_EXTERNAL_BRACKETS))) {
-		ShowError("pc_bonus_script_add: Failed to parse script '%s' (CID:%d).\n", script_str, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_bonus_script_add: 스크립트 '%s'을(를) 구문 분석하지 못했습니다. (케릭터ID번호:%d).\n", script_str, sd->status.char_id);
+		else
+			ShowError("pc_bonus_script_add: Failed to parse script '%s' (CID:%d).\n", script_str, sd->status.char_id);
 		return nullptr;
 	}
 
@@ -14924,7 +15487,10 @@ TIMER_FUNC(pc_bonus_script_timer){
 
 	sd = map_id2sd(id);
 	if (!sd) {
-		ShowError("pc_bonus_script_timer: Null pointer id: %d tid: %d\n", id, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_bonus_script_timer: Null 포인터ID: %d tid: %d\n", id, tid);
+		else
+			ShowError("pc_bonus_script_timer: Null pointer id: %d tid: %d\n", id, tid);
 		return 0;
 	}
 
@@ -14932,7 +15498,10 @@ TIMER_FUNC(pc_bonus_script_timer){
 		return 0;
 
 	if (!sd->bonus_script.head || entry == nullptr) {
-		ShowError("pc_bonus_script_timer: Invalid entry pointer %p!\n", entry);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_bonus_script_timer: %p은(는) 잘못된 항목 포인터입니다!\n", entry);
+		else
+			ShowError("pc_bonus_script_timer: Invalid entry pointer %p!\n", entry);
 		return 0;
 	}
 
@@ -15135,8 +15704,12 @@ void pc_validate_skill(map_session_data *sd) {
 				memcpy(&sd->status.skill[idx], &tmp_skills[i], sizeof(tmp_skills[i]));
 				count++;
 			}
-			else
-				ShowWarning("pc_validate_skill: Removing invalid skill '%d' from player (AID=%d CID=%d).\n", tmp_skills[i].id, sd->status.account_id, sd->status.char_id);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("pc_validate_skill: 플레이어(계정ID번호=%d 케릭터ID번호=%d)에서 잘못된 스킬 '%d'을(를) 제거중입니다.\n", sd->status.account_id, sd->status.char_id, tmp_skills[i].id);
+				else		
+					ShowWarning("pc_validate_skill: Removing invalid skill '%d' from player (AID=%d CID=%d).\n", tmp_skills[i].id, sd->status.account_id, sd->status.char_id);
+			}
 		}
 	}
 }
@@ -15300,7 +15873,7 @@ void pc_set_costume_view(map_session_data *sd) {
 		sd->status.robe = id->look;
 
 	// Costumes check
-	if (!map_getmapflag(sd->bl.m, MF_NOCOSTUME)) {
+	if (!map_getmapflag(sd->bl.m, MF_NOCOSTUME) && sd->status.show_costume) {
 		if ((i = sd->equip_index[EQI_COSTUME_HEAD_LOW]) != -1 && (id = sd->inventory_data[i])) {
 			if (!(id->equip&(EQP_COSTUME_HEAD_MID|EQP_COSTUME_HEAD_TOP)))
 				sd->status.head_bottom = id->look;
@@ -15756,7 +16329,10 @@ bool pc_macro_read_captcha_db_loadbmp(const std::string &filepath, std::shared_p
 	FILE *fp = fopen(filepath.c_str(), "rb");
 
 	if (fp == nullptr) {
-		ShowError("%s: Failed to open file \"%s\"\n", __func__, filepath.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s: \"%s\" 파일을 열 수 없습니다.\n", __func__, filepath.c_str());
+		else
+			ShowError("%s: Failed to open file \"%s\"\n", __func__, filepath.c_str());
 		return false;
 	}
 
@@ -15764,7 +16340,10 @@ bool pc_macro_read_captcha_db_loadbmp(const std::string &filepath, std::shared_p
 	char bmp_data[CAPTCHA_BMP_SIZE];
 
 	if (fread(bmp_data, CAPTCHA_BMP_SIZE, 1, fp) != 1) {
-		ShowError("%s: Failed to read data from \"%s\"\n", __func__, filepath.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s: \"%s\" 파일에서 데이터를 읽을 수 없습니다.\n", __func__, filepath.c_str());
+		else
+			ShowError("%s: Failed to read data from \"%s\"\n", __func__, filepath.c_str());
 		fclose(fp);
 		return false;
 	}
@@ -15772,7 +16351,10 @@ bool pc_macro_read_captcha_db_loadbmp(const std::string &filepath, std::shared_p
 	fclose(fp);
 
 	if (bmp_data[0] != 'B' || bmp_data[1] != 'M') {
-		ShowError("%s: Invalid BMP file header given at \"%s\"\n", __func__, filepath.c_str());
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s: \"%s\" 파일에 잘못된 BMP 파일 헤더가 지정되었습니다.\n", __func__, filepath.c_str());
+		else
+			ShowError("%s: Invalid BMP file header given at \"%s\"\n", __func__, filepath.c_str());
 		return false;
 	}
 
@@ -15818,7 +16400,10 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 			return 0;
 
 		if (!pc_macro_read_captcha_db_loadbmp(filename, cd)) {
-			this->invalidWarning(node["Filename"], "Failed to parse BMP image, skipping...\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Filename"], "BMP 이미지를 구문 분석 하지 못했습니다. 건너뜀...\n");
+			else
+				this->invalidWarning(node["Filename"], "Failed to parse BMP image, skipping...\n");
 			return 0;
 		}
 	}
@@ -15830,7 +16415,10 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 			return 0;
 
 		if (answer.length() < 4 || answer.length() > CAPTCHA_ANSWER_SIZE) {
-			this->invalidWarning(node["Answer"], "The captcha answer must be between 4~%d characters, skipping...", CAPTCHA_ANSWER_SIZE);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Answer"], "Captcha 답변은 4~%d자 사이어야합니다. 건너뜀...", CAPTCHA_ANSWER_SIZE);
+			else
+				this->invalidWarning(node["Answer"], "The captcha answer must be between 4~%d characters, skipping...", CAPTCHA_ANSWER_SIZE);
 			return 0;
 		}
 

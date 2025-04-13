@@ -20,6 +20,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_logif.hpp"
@@ -289,9 +290,14 @@ int chclif_parse_pincode_change( int fd, struct char_session_data* sd ){
 		if( pincode_allowed(newpin) ){
 			chlogif_pincode_notifyLoginPinUpdate( sd->account_id, newpin );
 			strncpy(sd->pincode, newpin, sizeof(newpin));
-			ShowInfo("Pincode changed for AID: %d\n", sd->account_id);
-			sd->pincode_correct = true;
-
+			if(strcmpi(MessageLang,"KOR") == 0){
+				ShowInfo("보안코드(Pincode)가 변경된 계정: %d\n", sd->account_id);
+				sd->pincode_correct = true;
+			}
+			else{
+				ShowInfo("Pincode changed for AID: %d\n", sd->account_id);
+				sd->pincode_correct = true;
+			}
 			chclif_pincode_sendstate( fd, sd, PINCODE_PASSED );
 		}else{
 			chclif_pincode_sendstate( fd, sd, PINCODE_ILLEGAL );
@@ -368,8 +374,12 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 	offset = 0;
 #endif
 
-	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터(계정 번호: " CL_BOLD "%d" CL_RESET ") 데이터 로드중..\n",sd->account_id);
+		else
+			ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+	}
 
 	j = 24 + offset; // offset
 	WFIFOHEAD(fd,j + MAX_CHARS*MAX_CHAR_BUF);
@@ -391,8 +401,12 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 // Notify client about charselect window data [Ind]
 //----------------------------------------
 void chclif_mmo_send082d(int fd, struct char_session_data* sd) {
-	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+	if (charserv_config.save_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터(계정번호: " CL_BOLD "%d" CL_RESET ") 데이터 로드중...\n",sd->account_id);
+		else
+			ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+	}
 	WFIFOHEAD(fd,29);
 	WFIFOW(fd,0) = 0x82d;
 	WFIFOW(fd,2) = 29;
@@ -592,7 +606,10 @@ bool chclif_delchar_check(struct char_session_data *sd, char *delcode, uint8 fla
 				!stricmp("a@a.com", sd->email) && //it is default email and
 				!strcmp("", delcode) //user sent an empty email
 			))) {
-			ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(E-Mail)" CL_RESET ".\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("" CL_GREEN "(E-Mail)" CL_RESET " " CL_RED "을 이용해 케릭터를 삭제했습니다." CL_RESET ".\n");
+			else
+				ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(E-Mail)" CL_RESET ".\n");
 			return true;
 	}
 	// Birthdate (YYMMDD)
@@ -602,7 +619,10 @@ bool chclif_delchar_check(struct char_session_data *sd, char *delcode, uint8 fla
 			!strcmp("",sd->birthdate) && // it is default birthdate and
 			!strcmp("",delcode) // user sent an empty birthdate
 		))) {
-		ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(Birthdate)" CL_RESET ".\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("" CL_GREEN "생년월일(Birthdate)" CL_RESET " " CL_RED "을 이용해 케릭터를 삭제 했습니다." CL_RESET ".\n");
+		else
+			ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(Birthdate)" CL_RESET ".\n");
 		return true;
 	}
 	return false;
@@ -616,7 +636,10 @@ int chclif_parse_char_delete2_accept(int fd, struct char_session_data* sd) {
 		uint32 char_id;
 		char_id = RFIFOL(fd,2);
 
-		ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%d (%d)" CL_RESET "\n", sd->account_id, char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo(CL_RED "삭제 요청된 케릭터: 케릭터 번호" CL_GREEN "%d (계정번호: %d)" CL_RESET "\n", sd->account_id, char_id);
+		else
+			ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%d (%d)" CL_RESET "\n", sd->account_id, char_id);
 
 		// construct "YY-MM-DD"
 		birthdate[0] = RFIFOB(fd,6);
@@ -743,13 +766,19 @@ int chclif_parse_reqtoconnect(int fd, struct char_session_data* sd,uint32 ipl){
 		int sex = RFIFOB(fd,16);
 		RFIFOSKIP(fd,17);
 
-		ShowInfo("request connect - account_id:%d/login_id1:%d/login_id2:%d\n", account_id, login_id1, login_id2);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("연결 요청된 계정ID:%d/로그인 ID1:%d/로그인 ID2:%d\n", account_id, login_id1, login_id2);
+		else
+			ShowInfo("request connect - account_id:%d/login_id1:%d/login_id2:%d\n", account_id, login_id1, login_id2);
 
 		if (sd) {
 			//Received again auth packet for already authentified account?? Discard it.
 			//TODO: Perhaps log this as a hack attempt?
 			//TODO: and perhaps send back a reply?
-			ShowInfo("Already registered break\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("이미 등록되어있어 등록 진행을 중단합니다.\n");
+			else
+				ShowInfo("Already registered break\n");
 			return 1;
 		}
 
@@ -834,9 +863,14 @@ void chclif_send_map_data( int fd, std::shared_ptr<struct mmo_charstatus> cd, ui
 	memset(WFIFOP(fd, 28), 0, 128); // Unknown
 #endif
 #ifdef DEBUG
-	ShowDebug("Sending the client (%d %d.%d.%d.%d) to map-server with ip %d.%d.%d.%d and port %hu\n",
-			  cd->account_id, CONVIP(ipl), CONVIP((subnet_map_ip) ? subnet_map_ip : map_server[map_server_index].ip),
-			  map_server[map_server_index].port);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("클라이언트(%d %d.%d.%d.%d)을(를) ip %d.%d.%d.%d 및 %hu 포트를 이용하여 맵서버로 전송합니다.\n",
+				  cd->account_id, CONVIP(ipl), CONVIP((subnet_map_ip) ? subnet_map_ip : map_server[map_server_index].ip),
+				  map_server[map_server_index].port);
+	else
+		ShowDebug("Sending the client (%d %d.%d.%d.%d) to map-server with ip %d.%d.%d.%d and port %hu\n",
+				  cd->account_id, CONVIP(ipl), CONVIP((subnet_map_ip) ? subnet_map_ip : map_server[map_server_index].ip),
+				  map_server[map_server_index].port);
 #endif
 	WFIFOSET(fd,size);
 }
@@ -905,7 +939,10 @@ int chclif_parse_select_accessible_map( int fd, struct char_session_data* sd, ui
 		}
 	}
 
-	ShowInfo( "Selected char: (Account %d: %d - %s)\n", sd->account_id, p.slot, char_dat.name );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo( "선택된 케릭터: (계정 %d: %d - %s)\n", sd->account_id, p.slot, char_dat.name );
+	else
+		ShowInfo( "Selected char: (Account %d: %d - %s)\n", sd->account_id, p.slot, char_dat.name );
 
 	// Check if there is really no mapserver for the last point where the player was
 	int32 mapserver = char_search_mapserver( cd->last_point.map, -1, -1 );
@@ -940,7 +977,10 @@ int chclif_parse_select_accessible_map( int fd, struct char_session_data* sd, ui
 	// Send NEW auth packet [Kevin]
 	// FIXME: is this case even possible? [ultramage]
 	if( ( map_fd = map_server[mapserver].fd ) < 1 || session[map_fd] == nullptr ){
-		ShowError( "parse_char: Attempting to write to invalid session %d! Map Server #%d disconnected.\n", map_fd, mapserver );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "parse_char: 잘못된 세션 %d에 쓰는중! 맵 서버 #%d와(과) 연결이 종료되었습니다.\n", map_fd, mapserver );
+		else
+			ShowError( "parse_char: Attempting to write to invalid session %d! Map Server #%d disconnected.\n", map_fd, mapserver );
 		map_server[mapserver] = {};
 		map_server[mapserver].fd = -1;
 		chclif_send_auth_result( fd, 1 ); // Send server closed.
@@ -1064,7 +1104,10 @@ int chclif_parse_charselect(int fd, struct char_session_data* sd,uint32 ipl){
 				schema_config.charlog_db, sd->account_id, slot, esc_name) )
 				Sql_ShowDebug(sql_handle);
 		}
-		ShowInfo("Selected char: (Account %d: %d - %s)\n", sd->account_id, slot, char_dat.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s(계정번호: %d, 슬롯번호: %d)케릭터가 선택되었습니다.\n", char_dat.name, sd->account_id, slot);
+		else
+			ShowInfo("Selected char: (Account %d: %d - %s)\n", sd->account_id, slot, char_dat.name);
 
 		// searching map server
 		i = char_search_mapserver( cd->last_point.map, -1, -1 );
@@ -1082,7 +1125,10 @@ int chclif_parse_charselect(int fd, struct char_session_data* sd,uint32 ipl){
 			//First check that there's actually a map server online.
 			ARR_FIND( 0, ARRAYLENGTH(map_server), j, session_isValid(map_server[j].fd) && !map_server[j].maps.empty() );
 			if (j == ARRAYLENGTH(map_server)) {
-				ShowInfo("Connection Closed. No map servers available.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("활성화된 맵서버가 없어 연결이 종료 되었습니다.\n");
+				else
+					ShowInfo("Connection Closed. No map servers available.\n");
 				chclif_send_auth_result(fd,1); // 01 = Server closed
 				return 1;
 			}
@@ -1099,7 +1145,10 @@ int chclif_parse_charselect(int fd, struct char_session_data* sd,uint32 ipl){
 			}
 
 			if( i < 0 ){
-				ShowInfo( "Connection Closed. No map server available that has a major city, and unable to find map-server for '%s'.\n", cd->last_point.map );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowInfo("연결이 종료됨. 주요 도시를 가진 맵 서버를 사용할 수 없으며,'%s'에 대한 맵 서버를 찾을 수 없습니다.\n", cd->last_point.map);
+				else
+					ShowInfo( "Connection Closed. No map server available that has a major city, and unable to find map-server for '%s'.\n", cd->last_point.map );
 				chclif_send_auth_result(fd,1); // 01 = Server closed
 				return 1;
 			}
@@ -1110,7 +1159,10 @@ int chclif_parse_charselect(int fd, struct char_session_data* sd,uint32 ipl){
 		//FIXME: is this case even possible? [ultramage]
 		if ((map_fd = map_server[i].fd) < 1 || session[map_fd] == nullptr)
 		{
-			ShowError("parse_char: Attempting to write to invalid session %d! Map Server #%d disconnected.\n", map_fd, i);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("케릭터 분석: 잘못된 세션 %d에 쓰려고 합니다. 맵 서버 #%d의 연결이 종료 되었습니다..\n", map_fd, i);
+			else
+				ShowError("parse_char: Attempting to write to invalid session %d! Map Server #%d disconnected.\n", map_fd, i);
 			map_server[i] = {};
 			map_server[i].fd = -1;
 			chclif_send_auth_result(fd,1);  //Send server closed.
@@ -1276,7 +1328,10 @@ int chclif_parse_delchar(int fd,struct char_session_data* sd, int cmd){
 		char email[40];
 		uint32 cid = RFIFOL(fd,2);
 
-		ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%u (%u)" CL_RESET "\n", sd->account_id, cid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo(CL_RED "삭제 요청된 케릭터: 계정번호[" CL_GREEN "%u (케릭터 번호: %u)" CL_RESET "]\n", sd->account_id, cid);
+		else
+			ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%u (%u)" CL_RESET "\n", sd->account_id, cid);
 		memcpy(email, RFIFOP(fd,6), 40);
 		RFIFOSKIP(fd,( cmd == 0x68) ? 46 : 56);
 
@@ -1665,7 +1720,10 @@ int chclif_parse(int fd) {
 				break;
 			// unknown packet received
 			default:
-				ShowError( "chclif_parse: Received unknown packet " CL_WHITE "0x%x" CL_RESET " from ip '" CL_WHITE "%s" CL_RESET "'! Disconnecting!\n", cmd, ip2str( ipl, nullptr ) );
+			if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("케릭터 분석: '" CL_WHITE "%s" CL_RESET "'의 IP로부터 " CL_WHITE "0x%x" CL_RESET "의 알수 없는 패킷이 수신되었습니다. 연결을 종료합니다.\n", cmd, ip2str( ipl, nullptr ) );
+				else
+					ShowError( "chclif_parse: Received unknown packet " CL_WHITE "0x%x" CL_RESET " from ip '" CL_WHITE "%s" CL_RESET "'! Disconnecting!\n", cmd, ip2str( ipl, nullptr ) );
 				set_eof(fd);
 				return 0;
 		}

@@ -1,0 +1,952 @@
+prt_fild01,96,173,6	script	노도르#ev01	567,{
+	if( isbegin_quest(19178) == 2 ) {
+		mes "[노도르]";
+		mes "왕실 사냥 대회는 즐겁게 즐기고 있어?";
+		next;
+		switch( select("아니 이게 무슨 일이래?:예산이 줄어든 이유는 뭐야?:헛소리 좀 해줘.:") ) {
+		case 1:
+			mes "[노도르]";
+			mes "나도 노도르이긴 하지만.. 노도르가 조금 많지? 올해 왕실 사냥 대회 행사를 위임받았는데 나 혼자서는 벅차서 친구들을 불렀어.";
+			next;
+			mes "[노도르]";
+			mes "헛소리도 잘하고 허풍이 심한 친구들이긴 한데 착한 친구들이니 그냥 그러려니 해줘.";
+			close;
+		case 2:
+			mes "[노도르]";
+			mes "그 왕실 사냥 대회가 이 시기쯤 늘어나는 야생 동물을 토벌하기 위해서 시작한 건 알고 있지?";
+			next;
+			mes "[노도르]";
+			mes "나도 왕실 관계자는 아니라 자세한 상황은 모르지만, 나데즈다 씨에게 대충 들은 말에 의하면..";
+			next;
+			mes "[노도르]";
+			mes "내년 왕실 사냥 대회가 대대적으로 개편되면서 올해는 사냥 대회 대신 기사단을 투입해서 늘어난 야생 동물을 토벌하기로 했다는 거 같아.";
+			next;
+			mes "[노도르]";
+			mes "하지만 왕실 가문 중 한 곳이 백성들이 서운해 할 수 있다며, 최소한의 비용을 지원했다고 하더라고.";
+			next;
+			mes "[노도르]";
+			mes "뭐 그 덕에 약소하나마 행사를 진행할 수 있게 되었 달까?";
+			close;
+		case 3:
+			mes "[노도르]";
+			mes "헛~ 소~ 리~";
+			next;
+			mes "[노도르]";
+			mes "저 선생님. 이제 만족하십니까?";
+			close;
+		}
+	}
+	mes "[노도르]";
+	mes "왕실 사냥 대회에 참여하려고 온 모험가 맞지?";
+	next;
+	mes "[노도르]";
+	mes "워워.. 그래 나데즈다 씨나 장하성 씨가 아니고 이 노도르 님이 있다고 당황하지는 말고.";
+	next;
+	if(select("넌 누구지?:왜 여기 있는 거야?:") == 1) {
+		mes "[노도르]";
+		mes "아!? 나를 모르나? 하긴 모를 수도 있지. 아무래도 우리 슈퍼 노비스들은 다른 직업들에 비하면 조금 비주류 직업이니까.";
+		next;
+		mes "[노도르]";
+		mes "난 너무나도 친절하게 슈퍼 노비스 레벨 확장에 도움을 주고 있는 노도르라고 해. 만나서 반가워.";
+		next;
+	}
+	mes "[노도르]";
+	mes "아! 그래 그걸 이야기해 줘야지. 잘 들어 슬픈 이야기니까.";
+	next;
+	mes "[노도르]";
+	mes "나데즈다 지휘관 씨는 올해도 어김없이 다가오는 왕실 사냥 대회를 준비하기 위해 여러 가지 준비를 하고 있었지.";
+	next;
+	mes "[노도르]";
+	mes "그런데! 짜잔! 왕실에서 내년 행사를 더 크게 준비하겠다며, 올해의 예산을 대폭 삭감해 버린 거야.";
+	next;
+	mes "[노도르]";
+	mes "아아... 예산이 줄어든다는 건 슬픈 일이지... 이 세상은 돈이 없으면 할 수 있는 게 굉장히 제한되거든.";
+	next;
+	mes "[노도르]";
+	mes "예산은 줄어들어 버렸지. 하지만 올해 사냥 대회도 하기는 해야지.. 나데즈다 지휘관은 큰 고민에 빠졌어.";
+	next;
+	mes "[노도르]";
+	mes "그때 나데즈다 지휘관 눈에 띈 게 바로 나 노도르 님이지. 슬프지만 우리 노비스들의 인건비는 저렴한 편이거든..";
+	next;
+	mes "[노도르]";
+	mes "뭐 예산이 줄어든 만큼 지금까지처럼 다양한 혜택과 행사들은 없긴 하지만 나름 알차게 준비해버리고 말았지. 아~ 이 능력 많아 죄 많은 인생이여~";
+	next;
+	setquest 19178; // State = 1, Time = 0
+	completequest 19178;
+	mes "[노도르]";
+	mes "나답지 않게 설명이 길었는데 적당히 놀다 가라고!";
+	close;
+OnInit:
+	questinfo( QTYPE_EVENT, QMARK_YELLOW, "isbegin_quest(19178) == 0" );
+	setunittitle( getnpcid(0), "접수 담당" );
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,108,185,3	script	노도르#ev02	111,{
+	if( isbegin_quest(19178) == 0 ) {
+		mes "[노도르]";
+		mes "나도 노도르 이기는 한데 <NAVI>[저쪽]<INFO>prt_fild01,96,173,0,101,0</INFO></NAVI> 접수 담당 노도르에게 사냥 대회 등록을 하고 와주라.";
+		close;
+	}
+	mes "[노도르]";
+	mes "나는 레지아, 트루아 장비 담당 노도르! 장비가 필요하면, <ITEM>[선택의 장미]<INFO>23533</INFO></ITEM>를 가져와 줘.";
+	next;
+	switch(select("레지아 장비를 구매한다.:트루아 장비를 구매한다.:너는 누구지?:")) {
+	case 1:
+		mes "[노도르]";
+		mes "레지아 장비 대령이오~";
+		close2;
+		callshop "Gegia_Hunting_item", 1;
+		break;
+	case 2:
+		mes "[노도르]";
+		mes "트루아 장비 대령이오~";
+		close2;
+		callshop "True_Hunting_item", 1;
+		break;
+	case 3:
+		mes "[노도르]";
+		mes "내가 누군지 물으신다면, 대답해 드리는 게 인지상정!";
+		next;
+		mes "[노도르]";
+		mes "다들 눈치채지 못하겠지만 우리 노도르단은 어디에나 있지. 나로 말할 거 같으면, 97356 번 세계의 노도르라고 할까?";
+		next;
+		mes "[노도르]";
+		mes "물론 내가 만든 장비라면 이것보다 더 뛰어나겠지만, 여기서는 아쉬운 대로 레지아, 트루아 장비 판매를 담당하고 있어.";
+		next;
+		mes "[노도르]";
+		mes "내 세계에서는 나름 대장간 일을 하고 있거든. 나름의 적성에 따른 업무분배라고 할까나? ㅋㅋㅋ";
+		close;
+	}
+	end;
+oninit:
+	setunittitle( getnpcid(0), "장비 교환 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,79;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,85,197,5	script	노도르#ev03	111,{
+	if( isbegin_quest(19178) == 0 ) {
+		mes "[노도르]";
+		mes "나도 노도르 이기는 한데 <NAVI>[저쪽]<INFO>prt_fild01,96,173,0,101,0</INFO></NAVI> 접수 담당 노도르에게 사냥 대회 등록을 하고 와주라.";
+		close;
+	}
+	mes "[노도르]";
+	mes "아침에 얻은 카드 100장은 저녁에는 1장으로 변하기 마련이지.";
+	next;
+	mes "[노도르]";
+	mes "왕실 사냥 대회는 충분히 즐겼나? 동일한 카드를 100장 가져오면 다른 카드로 교환해 주도록 하지.";
+	next;
+	switch(select("카드를 교환한다.:너는 누구지?:")) {
+	case 1:
+		mes "[노도르]";
+		mes "저렴한 가격!! 단돈 30만 제니에 모시고 있습니다.";
+		close2;
+		callshop "Hunting_Card", 1;
+		break;
+	case 2:
+		mes "[노도르]";
+		mes "난 75798번 세계의 노도르라네. 피라미드 앞에 앉아 지나는 사람들에게 문제를 내는 걸 업으로 삼고 있지. 비공식적인 피라미드 지킴이라고나 할까나?";
+		next;
+		mes "[노도르]";
+		mes "저기 1번 세계의 노도르가 도움을 요청해서 도와주기는 한다만.. 여기는 참 이상한 세계야. 노비스도 일해야 먹고사는 세계라니.";
+		next;
+		mes "[노도르]";
+		mes "아.. 집에 가고 싶다.";
+		close;
+	}
+	end;
+oninit:
+	setunittitle( getnpcid(0), "카드 교환 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,137;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,79;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,86,181,5	script	노도르#ev04	111,{
+	if( isbegin_quest(19178) == 0 ) {
+		mes "[노도르]";
+		mes "나도 노도르 이기는 한데 <NAVI>[저쪽]<INFO>prt_fild01,96,173,0,101,0</INFO></NAVI> 접수 담당 노도르에게 사냥 대회 등록을 하고 와주라.";
+		close;
+	}
+	mes "[노도르]";
+	mes "왕실 사냥 대회에서 <ITEM>[선택의 장미]<INFO>23533</INFO></ITEM>를 얻었다면, 보상 상자에서 다양한 상품을 뽑아보는 건 어떤가? 원한다면 내가 쓰고 있는 모자도 저렴하게 판매해 주지.";
+	next;
+	switch(select("상품을 뽑는다. ("+countitem(23533)+"회 가능):모자를 구매한다.:너는 누구지?:")) {
+	case 1:
+		if(countitem(23533) < 1) {
+			mes "[노도르]";
+			mes "상품 뽑기는 뽑기 1회에 <ITEM>[선택의 장미]<INFO>23533</INFO></ITEM> 1개가 필요합니다.";
+			close;
+		}
+		mes "[노도르]";
+		mes "자~ 뭐가 나오나 봅시다~ 손님은 여기 상자에 손을 넣으시고~";
+		next;
+		ReBBoB1:
+		npctalk "노도르: 자~ 나온다~ 나온다~ 상품이 나온다~";
+		getgroupitem(IG_ROYAL_SECRET_BOX);
+		specialeffect 18, AREA;
+		delitem 23533, 1;
+		mes "[노도르]";
+		mes "쓸만한 물건이 나오셨습니까? 상품을 그만 뽑으시겠습니까? 뭐 더 뽑으셔도 되고요.";
+		next;
+		switch(select("계속 뽑는다.:그만 뽑는다.:")) {
+		case 1:
+			if(countitem(23533) < 1) {
+				mes "[노도르]";
+				mes "상품 뽑기는 뽑기 1회에 <ITEM>[선택의 장미]<INFO>23533</INFO></ITEM> 1개가 필요합니다.";
+				close;
+			}
+			goto ReBBoB1;
+		case 2:
+			mes "[노도르]";
+			mes "<ITEM>[선택의 장미]<INFO>23533</INFO></ITEM>를 구하시면 언제든 찾아오십시오.";
+			close;
+		}
+	case 2:
+		mes "[노도르]";
+		mes "저렴한 가격!! 단돈 30만 제니에 모시고 있습니다.";
+		close2;
+		callshop "Moja", 1;
+		break;
+	case 3:
+		mes "[노도르]";
+		mes "나는 77777번 세계의 노도르라네. 77777번 세계의 주민이라는 이유로 보상 뽑기 담당이 되었지.";
+		next;
+		mes "[노도르]";
+		mes "듣자 하니 이 동네는 7이 행운의 숫자라던데? 내 세계는 7보다는 4가 더 행운의 상징으로 여겨지는데 말이야.";
+		next;
+		mes "[노도르]";
+		mes "그래도 담당 업무가 제법 재미있어서 만족하고 있다네.";
+		close;
+	}
+	end;
+oninit:
+	setunittitle( getnpcid(0), "보상 교환 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,1001;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+-	shop	Moja	HIDDEN_NPC,no,400557:300000
+
+prt_fild01,100,192,3	script	노도르#ev05	111,{
+	if( isbegin_quest(19178) == 0 ) {
+		mes "[노도르]";
+		mes "나도 노도르 이기는 한데 <NAVI>[저쪽]<INFO>prt_fild01,96,173,0,101,0</INFO></NAVI> 접수 담당 노도르에게 사냥 대회 등록을 하고 와주라.";
+		close;
+	}
+	mes "[노도르]";
+	mes "나는 레지아, 트루아 장비 담당 노도르! 장비가 필요하면, <ITEM>[선택의 장미]<INFO>23533</INFO></ITEM>를 가져와 줘.";
+	next;
+	switch(select("음식을 구매한다.:너는 누구지?:")) {
+	case 1:
+		mes "[노도르]";
+		mes "꿀맛 보장! 츄라이~ 츄라이~";
+		close2;
+		callshop "Yori", 1;
+		break;
+	case 2:
+		mes "[노도르]";
+		mes "난 83047번 세계에서 온 노도르. 우리 세계는 모두가 다 요리사야. 요리를 해서 경험을 쌓고 그렇게 만든 요리로 대결해서 실력을 겨루는 세계야.";
+		next;
+		mes "[노도르]";
+		mes "여기로 넘어올 때 맺은 상호 조약 때문에 여기서 거창한 요리를 만들어 줄 수는 없지만! 지금 파는 음식도 꽤 맛있어.";
+		next;
+		mes "[노도르]";
+		mes "특히 살 오른 애벌레는 83047번 세계에서 넘어온 내가 강력 추천하는 음식이니 꼭 먹어봐.";
+		close;
+	}
+	end;
+oninit:
+	setunittitle( getnpcid(0), "요리 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,111;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,79;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+-	shop	Yori	HIDDEN_NPC,no,11627:1500,11628:1500
+
+prt_fild01,108,177,3	script	노도르#ev06	111,{
+	if( checkquest(19179,PLAYTIME) == 2 ) { erasequest 19179; }
+	if( isbegin_quest(19178) == 0 ) {
+		mes "[노도르]";
+		mes "나도 노도르 이기는 한데 <NAVI>[저쪽]<INFO>prt_fild01,96,173,0,101,0</INFO></NAVI> 접수 담당 노도르에게 사냥 대회 등록을 하고 와주라.";
+		close;
+	}
+	mes "[노도르]";
+	mes "왕실 사냥 대회 의뢰? 사냥꾼의 증표 교환? 뭐가 필요해?";
+	next;
+	if(checkquest(19179,PLAYTIME) == 0) set .menu$,"[대기] 초절탄산수 3개를 준다.";
+	if(checkquest(19180) == 1) { if(checkquest(19180,HUNTING) == 2 ) set .menu$,"[완료] 왕실 사냥 대회 의뢰를 보고한다."; else set .menu$,"^777777[진행중] 왕실 사냥 대회 의뢰-포링^000000"; }
+	if(checkquest(19181) == 1) { if(checkquest(19181,HUNTING) == 2 ) set .menu$,"[완료] 왕실 사냥 대회 의뢰를 보고한다."; else set .menu$,"^777777[진행중] 왕실 사냥 대회 의뢰-루나틱^000000"; }
+	if(checkquest(19182) == 1) { if(checkquest(19182,HUNTING) == 2 ) set .menu$,"[완료] 왕실 사냥 대회 의뢰를 보고한다."; else set .menu$,"^777777[진행중] 왕실 사냥 대회 의뢰-파브르^000000"; }
+	if(checkquest(19183) == 1) { if(checkquest(19183,HUNTING) == 2 ) set .menu$,"[완료] 왕실 사냥 대회 의뢰를 보고한다."; else set .menu$,"^777777[진행중] 왕실 사냥 대회 의뢰-알픽키^000000"; }
+	if(checkquest(19179,PLAYTIME) != 0 && checkquest(19180) == -1 && checkquest(19181) == -1 && checkquest(19182) == -1 && checkquest(19183) == -1) set .menu$,"왕실 사냥 대회 의뢰를 받는다."; 
+	switch( select( .menu$,"사냥꾼의 증표를 선택의 장미로 교환한다.","너는 누구지?")) {
+	case 1:
+		if( checkquest(19179) == 1) {
+			if(countitem(1000374) < 3) {
+				mes "[노도르]";
+				mes "저 선생님 <ITEM>[초절탄산수]<INFO>1000374</INFO></ITEM>의 최소 단가는 3개입니다만.. 저 잘 아실 만한 분이 왜 이러실까...";
+				close;
+			}
+			//대사 미입수..
+			delitem 1000374,3;
+			erasequest 19179;
+			end;
+		}
+		switch( checkquest(19180,HUNTING) ) {
+		case 1:
+			mes "[노도르]";
+			mes "뭐야 겨우 30마리인데.. 아직이야? 우리 대단한 슈퍼노비스들같이 1000마리 정도는 쓱-싹 할 수 있어야 하는 거 아니야?";
+			close;
+		case 2:
+			mes "[노도르]";
+			mes "OK! 포링 30마리 확실하네! 역시 믿음직해.";
+			next;
+			erasequest 19180;
+			setquest 19179; // State = 1, Time = 66678
+			getitem 23533, 1; // 137 - 
+			mes "[노도르]";
+			mes "고생하셨고 역시 노동은 힘드네 누가 시원한 <ITEM>[초절탄산수]<INFO>1000374</INFO></ITEM> 좀 줬으면 좋겠다. 친구에게 하는 이야기는 아니니까 부담 가지지는 말고.";
+			close;
+		}
+		switch( checkquest(19181,HUNTING) ) {
+		case 1:
+			mes "[노도르]";
+			mes "뭐야 겨우 30마리인데.. 아직이야? 우리 대단한 슈퍼노비스들같이 1000마리 정도는 쓱-싹 할 수 있어야 하는 거 아니야?";
+			close;
+		case 2:
+			mes "[노도르]";
+			mes "OK! 루나틱 30마리 확실하네! 역시 믿음직해.";
+			next;
+			erasequest 19181;
+			setquest 19179; // State = 1, Time = 66678
+			getitem 23533, 1; // 137 - 
+			mes "[노도르]";
+			mes "고생하셨고 역시 노동은 힘드네 누가 시원한 <ITEM>[초절탄산수]<INFO>1000374</INFO></ITEM> 좀 줬으면 좋겠다. 친구에게 하는 이야기는 아니니까 부담 가지지는 말고.";
+			close;
+		}
+		switch( checkquest(19182,HUNTING) ) {
+		case 1:
+			mes "[노도르]";
+			mes "뭐야 겨우 30마리인데.. 아직이야? 우리 대단한 슈퍼노비스들같이 1000마리 정도는 쓱-싹 할 수 있어야 하는 거 아니야?";
+			close;
+		case 2:
+			mes "[노도르]";
+			mes "OK! 파브르 30마리 확실하네! 역시 믿음직해.";
+			next;
+			erasequest 19182;
+			setquest 19179; // State = 1, Time = 66678
+			getitem 23533, 1; // 137 - 
+			mes "[노도르]";
+			mes "고생하셨고 역시 노동은 힘드네 누가 시원한 <ITEM>[초절탄산수]<INFO>1000374</INFO></ITEM> 좀 줬으면 좋겠다. 친구에게 하는 이야기는 아니니까 부담 가지지는 말고.";
+			close;
+		}
+		switch( checkquest(19183,HUNTING) ) {
+		case 1:
+			mes "[노도르]";
+			mes "뭐야 겨우 30마리인데.. 아직이야? 우리 대단한 슈퍼노비스들같이 1000마리 정도는 쓱-싹 할 수 있어야 하는 거 아니야?";
+			close;
+		case 2:
+			mes "[노도르]";
+			mes "OK! 알픽키 30마리 확실하네! 역시 믿음직해.";
+			next;
+			erasequest 19183;
+			setquest 19179; // State = 1, Time = 66678
+			getitem 23533, 1; // 137 - 
+			mes "[노도르]";
+			mes "고생하셨고 역시 노동은 힘드네 누가 시원한 <ITEM>[초절탄산수]<INFO>1000374</INFO></ITEM> 좀 줬으면 좋겠다. 친구에게 하는 이야기는 아니니까 부담 가지지는 말고.";
+			close;
+		}
+		mes "[노도르]";
+		mes "의뢰를 받겠다고? 어디 보자.. 우리 친구는..";
+		next;
+		switch (rand(1,4)) {
+		case 1:
+			mes "[노도르]";
+			setquest 19180; // State = 1, Time = 0
+			mes "포링 30마리를 잡아오면 좋겠네.";
+			break;
+		case 2:
+			mes "[노도르]";
+			setquest 19181; // State = 1, Time = 0
+			mes "루나틱 30마리를 잡아오면 좋겠네.";
+			break;
+		case 3:
+			mes "[노도르]";
+			setquest 19182; // State = 1, Time = 0
+			mes "파브르 30마리를 잡아오면 좋겠네.";
+			break;
+		case 4:
+			mes "[노도르]";
+			setquest 19183; // State = 1, Time = 0
+			mes "알픽키 30마리를 잡아오면 좋겠네.";
+			break;
+		}
+		next;
+		mes "[노도르]";
+		mes "대충 1~4 레벨 노비스도 할 수 있는 건데 이 정도는 할 수 있겠지? 그럼 마치면 보자고~";
+		close;
+	case 2:
+		mes "[노도르]";
+		mes "오 사냥꾼의 증표를 얻었어? 대단한데? 아는지 모르겠지만, 교환 비율은 3:1이라고!";
+		close;
+	case 3:
+		mes "[노도르]";
+		mes "후후후후.. 내가 궁금한가? 난 1번 세계의 노도르 줄여서 일도르라고 하지. 무려 1번 세계의 주민이기에 이번 왕실 사냥 대회에서 가장 중요한 임무를 배정받았지.";
+		next;
+		mes "[노도르]";
+		mes "다양하게 현업에 종사하는 노도르들이지만, 나처럼 이 세계의 노도르같이 슈퍼노비스를 이끄는 것 같은 비슷한 일을 하는 노도르도 어딘가에는 있거든..";
+		next;
+		mes "[노도르]";
+		mes "뭐 그 노도르나 저 노도르나 결국 노도르들이라 장난기가 다들 충만하거든. 뭐 중요한 것은 아니니까.";
+		next;
+		mes "[노도르]";
+		mes "그거보다 이 세계 너무 재미있는 거 같은데? 이런 축제도 하고. 뭐 올해는 예산이 대폭 삭감되어 이렇다는 것 같기는 하지만..";
+		next;
+		mes "[노도르]";
+		mes "내년에는 끝내주게 성대하겠지? 왕실에서 주관하는 거라며? 또 놀러 와야지 뭐. 하하하";
+		close;
+	}
+	end;
+oninit:
+	questinfo( QTYPE_EVENT, QMARK_YELLOW, "isbegin_quest(19178) == 2 && checkquest(19179,PLAYTIME) != 0 && checkquest(19180) == -1 && checkquest(19181) == -1 && checkquest(19182) == -1 && checkquest(19183) == -1 " );
+	questinfo( QTYPE_EVENT, QMARK_NONE, "checkquest(19179,PLAYTIME) == 2" );
+	questinfo( QTYPE_EVENT2, QMARK_YELLOW, "checkquest(19180,HUNTING) == 2");
+	questinfo( QTYPE_EVENT2, QMARK_YELLOW, "checkquest(19181,HUNTING) == 2");
+	questinfo( QTYPE_EVENT2, QMARK_YELLOW, "checkquest(19182,HUNTING) == 2");
+	questinfo( QTYPE_EVENT2, QMARK_YELLOW, "checkquest(19183,HUNTING) == 2");
+	setunittitle( getnpcid(0), "의뢰 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,108,173,4	script	조사관 초백서#evt11	899,{
+	end;
+}
+
+prt_fild01,100,180,0	script	#랜덤노도르	139,10,10,{
+	cloakonnpcself("노도르#ex01");
+	cloakonnpcself("노도르#ex02");
+	cloakonnpcself("노도르#ex03");
+	cloakonnpcself("노도르#ex04");
+	cloakonnpcself("노도르#ex05");
+	cloakonnpcself("노도르#ex06");
+	cloakonnpcself("노도르#ex07");
+	cloakonnpcself("노도르#ex08");
+	cloakonnpcself("노도르#ex09");
+	cloakonnpcself("노도르#ex10");
+	cloakonnpcself("노도르#ex11");
+	cloakonnpcself("노도르#ex12");
+	cloakonnpcself("노도르#ex13");
+	cloakonnpcself("노도르#ex14");
+	cloakonnpcself("노도르#ex15");
+	cloakonnpcself("노도르#ex16");
+	cloakonnpcself("노도르#ex17");
+	cloakonnpcself("노도르#ex18");
+	cloakonnpcself("노도르#ex19");
+	cloakonnpcself("노도르#ex20");
+	cloakonnpcself("노도르#ex21");
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex01"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex02"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex03"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex04"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex05"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex06"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex07"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex08"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex09"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex10"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex11"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex12"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex13"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex14"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex15"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex16"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex17"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex18"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex19"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex20"); }
+	if(rand(4) == 1) { cloakoffnpcself("노도르#ex21"); }
+	end;
+}
+
+prt_fild01,77,200,5	script	노도르#ex01	111,{
+	mes "[노도르]";
+	mes "왕가의 행사에 참여해 주어서 고맙네. 덕분에 그대를 또 만나게 되는군.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "혹시나 해서 하는 말인데, 의외로 왕실에 허가받고 하는 일이니 괜히 왕실 모독죄로 신고는 말아주게.";
+	end;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "니힐인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,74,198,5	script	노도르#ex02	111,{
+	mes "[노도르]";
+	mes "아무튼 즐기도록 하시게. " + strcharinfo(0) + ". 이건 당신과 같은 이들을 위해 준비된 행사이니.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "혹시나 해서 하는 말인데, 의외로 왕실에 허가받고 하는 일이니 괜히 왕실 모독죄로 신고는 말아주게.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "스피카인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,79,197,4	script	노도르#ex03	111,{
+	mes "[노도르]";
+	mes "노도르 가의 스키아입니다. 안녕하세요! 오랜만이에요 모험가님. 사냥대회를 즐기고 계신가요? 저도 즐겁답니다!";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "으으 차마 왕실 성을 댈 수 없었어...";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "스키아인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,72,194,5	script	노도르#ex04	111,{
+	mes "[노도르]";
+	mes "노도르 가의 영애라면 사냥 대회에 나와 뭇 기사님들의 마음을 받아 드려야 한다고 배웠거든요. 그럴 기회가 생겨서 무척 기뻐요!";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "하아.. 밥은 안 주나?";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "아그네스인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,68,193,5	script	노도르#ex05	111,{
+	mes "[노도르]";
+	mes "저야 여전히 스마일 가면으로 세계 평화를 지키고 있지요. 스마일 가면이란 지고 불변의 가치니까요.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "응? 유르겐 님이 이런 말을 하셨었나? 대사 이거 맞나?";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "유르겐인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,67,190,6	script	노도르#ex06	111,{
+	mes "[노도르]";
+	mes "노도르는 하릴없는 백수의 가문. 사냥 대회에 참석하신 분들께 축복은 SP가 부족해서 내려드리지 못하지.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "그런 눈으로 보지 마! 진짜야. SP 20도 안된다고.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "크로네커인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,69,187,0	script	노도르#ex07	111,{
+	mes "[노도르]";
+	mes "사냥하기에 딱 좋은 날씨군요. 올해에도 명예롭게 사냥 대회가 진행되는 것을 기대하고 있습니다.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "대삽니다. 대사! 난 그냥 배고플 뿐이라고요.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "볼프인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,73,187,0	script	노도르#ex08	111,{
+	mes "[노도르]";
+	mes "노도르 가를 대표하여 이번 사냥 대회를 참관하러 왔다기엔 노도르들이 너무 많군.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "야~ 노도르 이거 대사 바꿔야 할거 같은데..";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "포인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,77,187,0	script	노도르#ex09	111,{
+	mes "[노도르]";
+	mes "자네도 사냥 대회에 참가하러 온 모양이군. 평상시에 실력을 갈고 닦아 놔야 큰일이 벌어졌을 때 당황하지 않고 대응이 가능하지.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "엥? 그랬어?";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "프리드리히인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,74,191,6	script	노도르#ex10	111,{
+	mes "[노도르]";
+	mes "굳이 저까지는 참석하지 않아도 된다고 생각하고 있었는데요. 얼마나 보채던지... 참석을 하지 않을 수 없게 되었네요.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "아 집에 가고 싶다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "아이작인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,78,194,5	script	노도르#ex11	111,{
+	mes "[노도르]";
+	mes "영예스러운 행사지만 중간에 다치지 않도록 꼭 조심해 주셨으면 좋겠어요.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "그럼 그럼 안 다치는 게 최고지";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "카트린인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,92,196,3	script	노도르#ex12	111,{
+	mes "[노도르]";
+	mes "영광스러운 행사가 되기를 바랍니다.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "대사라 읽기는 했는데.. 사냥 대회가 영광스러울 수가 있나??";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "마이어인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,95,193,3	script	노도르#ex13	111,{
+	mes "[노도르]";
+	mes "안 그래도 집에만 있는 것이 좀 따분했었는데 잘 되었습니다. 저도 직접 사냥하고 싶지만 이번에는 구경하는 것으로 만족하겠습니다. 그럼 무운을 빕니다.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "방금 한 말은 단순 대사로써 본 노도르의 생각과는 다름을 알려드립니다. 으헤헤 집 최고야! 안 따분해 늘 짜릿해~";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "헬무트인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,82,190,1	script	노도르#ex14	111,{
+	mes "[노도르]";
+	mes "왕실 사냥 대회는 즐겁게 즐기고 계시나요? 복잡한 일상에서 벗어나 재충전되는 느낌이랄까? 앞으로는 종종 이런 시간을 가져야겠어요.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "저 노도르는 항상 재충전되는 삶을 살고 있습니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "캐서린인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,80,185,6	script	노도르#ex15	111,{
+	mes "[노도르]";
+	mes "날씨가 무척 좋군요. 다들 즐거워하시는 듯하고요.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "저기.. 즐거우신 거 맞죠?";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "크룩스인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,88,192,3	script	노도르#ex16	111,{
+	mes "[노도르]";
+	mes "난 너 같은 녀석과 함께 싸울 수 있다면 뭐든 환영이다.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 엘레나 볼코바 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "엘레나인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,90,191,3	script	노도르#ex17	111,{
+	mes "[노도르]";
+	mes "우리 쪽도 다들 의욕에 차서 열심히들 준비하고 있어요. 그 사람들 실망시키면 안 되는데~";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 루키 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "루키인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,92,190,3	script	노도르#ex18	111,{
+	mes "[노도르]";
+	mes "사냥에도 작전이 필요한가?";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 에스트 러브로이 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "에스트인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,83,186,1	script	노도르#ex19	111,{
+	mes "[노도르]";
+	mes ".... ....";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 고니 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "고니인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,90,206,4	script	노도르#ex20	111,{
+	mes "[노도르]";
+	mes "그냥 테스라고 불러주십시오. 제발...";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 필로폰테스 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "필로폰테스인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}
+
+prt_fild01,92,204,4	script	노도르#ex21	111,{
+	mes "[노도르]";
+	mes "여길 마지막으로 왔을 때에는 17명의 추적자들에게 쫓기고 있을 때였지.";
+	next;
+	mes "[노도르]";
+	mes "... ... ...";
+	next;
+	mes "[노도르]";
+	mes "올해 사냥 대회를 기념하여 새로 만든 카드에 이름을 빌려주신 레이지 님이 남겨주신 서명입니다.";
+	close;
+oninit:
+	cloakonnpc();
+	setunittitle( getnpcid(0), "레이지인 척 담당" );
+	setunitdata getnpcid(0),unpc_class,0;
+	setunitdata getnpcid(0),unpc_sex,1;
+	setunitdata getnpcid(0),unpc_hairstyle,27;
+	setunitdata getnpcid(0),UNPC_HAIRCOLOR,6;
+	setunitdata getnpcid(0),unpc_headtop,195;
+	setunitdata getnpcid(0),UNPC_HEADMIDDLE,65;
+	setunitdata getnpcid(0),UNPC_GROUP_ID,16;
+}

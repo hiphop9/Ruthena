@@ -360,135 +360,135 @@ malangdo,184,139,4	script	Storekeeper#mal	560,{
 
 // Malangdo Island :: ma_tomas
 //============================================================
-mal_in02,28,56,5	script	Samuel#mal	495,{
-	mes "[Samuel]";
+mal_in02,28,56,5	script	샤무엘#mal	495,{
+	mes "[샤무엘]";
 	mes "Ah, you mean the ad... well, you mean our village chief?";
 	mes "You'd better not bother him, since he's always busy.";
 	if (ma_tomas == 0)
 		close;
 	next;
-	mes "[Samuel]";
+	mes "[샤무엘]";
 	mes "^0000FFBut it'd be impossible to talk without bothering him anyway......^000000";
 	mes "He is simply always busy.";
 	next;
 	switch(select("Ad...?:Village chief?")) {
 	case 1:
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Ah, there was an admiral of this ship before settling in here~";
 		mes "Shining golden eyes like the sun!!!";
 		mes "Silvery beard fluttering with a rough sea breeze!!!";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Kha~ It was nice!!!!";
 		mes "I was fascinated by that attraction and took the ship, Navi!";
 		mes "This thing is called the romance of a guy. Hoo hoo~";
 		emotion ET_SHY;
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Well... His cuticle seems to have gone bad a bit with his village chief duty, since he settled in Malangdo. But his eyes are still the same.";
 		close;
 	case 2:
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Umm, since it is Malangdo, will it be the Malangdo chief...?!";
 		mes "No, though it will be funny...";
 		mes "Malangdo village... umm... this... this is also not......";
 		mes "Well, this stuff is not that important.";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Although there are many differences between admiral and village chief for sure, it feels like it won't be without Admiral Tomas anyhow.";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "All would think the same, not just me.";
 		mes "He's having a hard time thanks to this.";
 		close;
 	}
 }
 
-mal_in02,22,62,3	script	Tomas#mal	556,{
+mal_in02,22,62,3	script	토마스#mal	556,{
 	if (BaseLevel < 60) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Ummm... Who are you?";
 		mes "Don't you think it's too early to come here?";
 		close;
 	}
 	if (ma_tomas == 0) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Samuel!";
 		mes "Are you coming to an end there?";
 		cutin "ma_tomas02",2;
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Yes, Admiral!";
 		mes "Moved all 3 thousand boxes, including the one I just received, to the storage. The next boxes are expected to be delivered in 5 hours!";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Samuel!";
 		mes "How many times should I tell you to call me Village Chief, not Admiral!";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Sorry! Village Chief!";
 		mes "I will correct myself!";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Hmm, hmm!";
 		mes "Get them sorted out and arrange them over there. Before the next boxes are here you must finish the work there!";
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Sea cucumbers, sea squirts, sea anemones to the right! Seaweed and kelp downstairs, and send anchovies and drums to the gathering place. Let the rest stack assortatively in the corner!";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Yes! Village Chief!";
 		mes "Seaweed, Sea cucumbers, sea squirts, sea anemones to the right! Seaweed and glasses downstairs! Send anchovies and drums to the gathering place! Let the rest stack assortatively in the corner!";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "It it not.";
 		mes "Sea cucumbers, sea squirts, sea anemones to the right. Seaweed and kelp downstairs. Anchovies and drums to the gathering place. Let the rest stack assortatively in the corner.";
 		emotion ET_THINK;
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Yes!!";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Huuu...";
 		mes "It doesn't seem to end.";
 		mes "There are still piles of paperwork to do... I will be in trouble unless I finish them up before the next boxes arrive.";
 		emotion ET_OHNO;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "So, the amount of the next boxes is 1300....";
 		mes "And the next, the 700 boxes downstairs to load up the ship...";
 		next;
 		switch(select("Try to talk to him.:Stop since he seems busy.")) {
 		case 1:
-			mes "[Tomas, Village Chief]";
+			mes "[촌장 토마스]";
 			mes "Hmm, who are you?";
 			mes "You are not familiar. Sorry, but will you come again if it is not that urgent?";
 			cutin "ma_tomas01",2;
 			next;
 			switch(select("It's my first time to Malangdo.:Another cat told me to come over here.:I will come around again later.")) {
 			case 1:
-				mes "[Tomas, Village Chief]";
+				mes "[촌장 토마스]";
 				mes "...So I told you your face was not familiar.";
 				emotion ET_THINK;
 				next;
-				mes "[Tomas, Village Chief]";
+				mes "[촌장 토마스]";
 				mes "Hmm... Sorry, but as I told you before, would you talk to the other cats if it's not that urgent, since I have plenty of work left undone and no time to talk with you.";
 				break;
 			case 2:
-				mes "[Tomas, Village Chief]";
+				mes "[촌장 토마스]";
 				mes "...Anyway all are always good to leave me with the work.";
 				mes "Pitiless ones...";
 				emotion ET_FRET;
 				next;
-				mes "[Tomas, Village Chief]";
+				mes "[촌장 토마스]";
 				mes "Umm... Having said that, would you talk to the other cats if it's not that urgent, since I got plenty of work to do left undone and no time to talk with you?";
 				break;
 			case 3:
-				mes "[Tomas, Village Chief]";
+				mes "[촌장 토마스]";
 				mes "Sorry for that.";
 				mes "Please come back to me again, though I don't know when I could be free.";
 				close2;
@@ -496,13 +496,13 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 				end;
 			}
 			next;
-			mes "[Tomas, Village Chief]";
+			mes "[촌장 토마스]";
 			mes "These days I feel I'm pressed with work, although it's good to trust and rely on me as a village chief...";
 			next;
-			mes "[Tomas, Village Chief]";
+			mes "[촌장 토마스]";
 			mes "It is too much, since they send all visitors to me.";
 			next;
-			mes "[Tomas, Village Chief]";
+			mes "[촌장 토마스]";
 			mes "You're just in time. Go to the ^0000FFregular meeting^000000 being held now.";
 			mes "The meeting place is ^0000FFat the end of the corridor^000000.";
 			set ma_tomas,1;
@@ -511,7 +511,7 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 			cutin "",255;
 			end;
 		case 2:
-			mes "[Tomas, Village Chief]";
+			mes "[촌장 토마스]";
 			mes "Sorry for that.";
 			mes "Please come back to me again though I don't know when I could be free.";
 			close2;
@@ -519,57 +519,57 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 			end;
 		}
 	} else if (ma_tomas == 1) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "So, the next 1000 boxes to move to the upper side...";
 		cutin "ma_tomas02",2;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "400 boxes to give out as supplies....";
 		mes "And also...";
 		next;
-		mes "[Samuel]";
+		mes "[샤무엘]";
 		mes "Admiral!";
 		mes "Sea bass, sea jelly, sea sponge are well arranged on the right!";
 		mes "Seaweed and kiwi downstairs! Anchovies and cod to the gathering place! Let the rest stack assortatively in the corner?";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "....";
 		emotion ET_THINK;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "....";
 		mes ".....";
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "....";
 		mes ".....";
 		mes "......";
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "You!!";
 		mes "How many times did I tell you! Mew~";
 		mes "Huh?!";
 		emotion ET_FRET;
 		cutin "ma_tomas03",2;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Sea cucumbers, sea squirts, sea anemones to the right. Seaweed and kelp downstairs. Anchovies and drums to the gathering place. Let the rest stack assortatively in the corner.";
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Huh?! If you really want to put Sea bass to the right that much, let yourself stand there all day long! Mew~";
-		emotion ET_HUK, getnpcid(0, "Samuel#mal");
+		emotion ET_HUK, getnpcid(0, "샤무엘#mal");
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "I'm busy enough without you. You're getting on my nerves! Mew~";
 		mes "What about getting on the ship over there? Mew!";
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Ooops!!!";
 		mes "!!!!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Hmm, hmm...";
 		mes "Well... what are you still doing here?";
 		mes "Go to the regular meeting being held now at the end of the corridor.";
@@ -580,7 +580,7 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 		cutin "",255;
 		end;
 	} else if (ma_tomas == 2) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Hmm, hmm...";
 		mes "Well... what are you still doing here?";
 		mes "Go to the regular meeting being held now at the end of the corridor.";
@@ -591,7 +591,7 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 		cutin "",255;
 		end;
 	} else if (ma_tomas < 35) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "How is the meeting going on?";
 		mes "It's been a long time since I visited, since I'm busy... Tsk...";
 		emotion ET_PROFUSELY_SWEAT;
@@ -600,18 +600,18 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 		cutin "",255;
 		end;
 	} else if (ma_tomas == 35) {
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Hoh!";
 		mes "There have been such issues!";
 		emotion ET_AHA;
 		cutin "ma_tomas04",2;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "I felt uneasy since I couldn't take care of you, being so busy.";
 		mes "You already got used to Malangdo well enough by yourself.";
 		emotion ET_SMILE;
 		next;
-		mes "[Tomas, Village Chief]";
+		mes "[촌장 토마스]";
 		mes "Then, as village chief and the admiral of the cat association, I'd like you to get along with me as well!";
 		set ma_tomas,100;
 		completequest 11237;
@@ -620,7 +620,7 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 		cutin "",255;
 		end;
 	}
-	mes "[Tomas, Village Chief]";
+	mes "[촌장 토마스]";
 	mes "Ha ha ha!";
 	mes "How are you doing?";
 	mes "Come to me if anything difficult happens.";
@@ -631,300 +631,300 @@ mal_in02,22,62,3	script	Tomas#mal	556,{
 	end;
 }
 
-mal_in02,182,61,3	script	President of Meeting#mal	421,{
+mal_in02,182,61,3	script	집회 의장#mal	421,{
 	if (ma_tomas == 0) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Please be silent, the regular meeting is getting started a moment later~";
 		close;
 	} else if (ma_tomas == 1) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Wow~ wow~ Now we're having an incredible sale... well, no, but a meeting.";
 		mes "Please be silent.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Today's main agenda is as always ^ff99ccStar Candy^000000.";
 		mes "Though I have traveled through numerous areas by now, it's my first time hearing ^0000FFsuch a difficult language to learn^000000.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "What she cannot communicate with at all is becoming a highly growing issue.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Please speak if there's any opinion on the next agenda.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Umm... Yes. Then, please say first, ^6666ccScottfold^000000.";
 		set ma_tomas,2;
 		changequest 11209,11210;
-		emotion ET_WRAP, getnpcid(0, "Scottfold#mal");
+		emotion ET_WRAP, getnpcid(0, "스코폴드#mal");
 		close;
 	} else if (ma_tomas == 2) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Umm... Yes. Please speak first, ^6666ccScottfold^000000.";
-		emotion ET_WRAP, getnpcid(0, "Scottfold#mal");
+		emotion ET_WRAP, getnpcid(0, "스코폴드#mal");
 		close;
 	} else if (ma_tomas == 3) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Please speak, Koon.... next.";
-		emotion ET_WRAP, getnpcid(0, "Koon#mal");
+		emotion ET_WRAP, getnpcid(0, "쿤#mal");
 		close;
 	} else if (ma_tomas == 4) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "There will be a presentation by Dr. Devore on his study continuously.";
-		emotion ET_WRAP, getnpcid(0, "Linguist Devore#mal");
+		emotion ET_WRAP, getnpcid(0, "언어학자 데보레#mal");
 		close;
 	} else if (ma_tomas == 5) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Please speak next, Dr. Mali.";
-		emotion ET_WRAP, getnpcid(0, "Geologist Mali#mal");
+		emotion ET_WRAP, getnpcid(0, "지질학자 말리#mal");
 		close;
 	} else if (ma_tomas == 6) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Brie!! I understand the situation, but please be calm and tell us, since it is a meeting after all.";
 		close;
 	} else if (ma_tomas == 7) {
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Well, let's have a break for a while now.";
 		mes "In time, Samuel brought Seaweed and tuna here.";
 		close;
 	}
-	mes "[President of Meeting]";
+	mes "[집회 의장]";
 	mes "Huew... It gets you so tired to conduct a meeting.";
 	mes "I used to be called a tireless merchant who ranked 1st in sales...";
 	next;
-	mes "[President of Meeting]";
+	mes "[집회 의장]";
 	mes "I feel really sick sometimes when the meeting is prolonged.";
 	emotion ET_CRY;
 	close;
 }
 
-mal_in02,178,66,5	script	Scottfold#mal	422,{
+mal_in02,178,66,5	script	스코폴드#mal	422,{
 	if (ma_tomas == 0) {
-		mes "[Scottfold]";
+		mes "[스코폴드]";
 		mes "Attending the meeting is an important thing to do.";
 		mes "It is absolutely right that all responsible cats should attend.";
 		close;
 	} else if (ma_tomas == 1) {
-		mes "[Scottfold]";
+		mes "[스코폴드]";
 		mes "The meeting is starting soon.";
 		mes "So, shh~~";
 		close;
 	} else if (ma_tomas == 2) {
-		mes "[Scottfold]";
+		mes "[스코폴드]";
 		mes "Yes, honorable president.";
 		mes "As for the communication with Star Candy, we have Biscuit, don't we?";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Of course, though she is always with ^0000FFBiscuit, who speaks the official language a bit^000000, it seems to be difficult to have a conversation in depth.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Besides, Star Candy is in a very important position that our Malangdo's existance depends upon. Many others think it's necessary to talk about our future direction directly.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Then for the next... yes, Koon please speak now.";
 		set ma_tomas,3;
 		changequest 11210,11211;
-		emotion ET_WRAP, getnpcid(0, "Koon#mal");
+		emotion ET_WRAP, getnpcid(0, "쿤#mal");
 		close;
 	}
-	mes "[Scottfold]";
+	mes "[스코폴드]";
 	mes "Let's quietly listen to the other's presentation.";
 	next;
-	mes "[Scottfold]";
+	mes "[스코폴드]";
 	mes "...Though I say so, I also feel like saying something, somehow.";
 	mes "So, I always put my hand up first!";
 	close;
 }
 
-mal_in02,177,58,7	script	Koon#mal	546,{
+mal_in02,177,58,7	script	쿤#mal	546,{
 	if (ma_tomas == 0) {
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "Though I'm busy, I always attend this meeting.";
 		mes "I'd like this to be held at times that don't disturb my work.";
 		close;
 	} else if (ma_tomas == 1) {
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "I expect what comes up today.";
 		close;
 	} else if (ma_tomas == 2) {
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "Scottfold is the one who participates enthusiastically.";
 		mes "They say that he'll be the next president of this meeting.";
 		close;
 	} else if (ma_tomas == 3) {
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "Then, how's the study of Dr. Devore going?";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "The language of Starfish is not undertandable even for the linguist, Dr. Devore...";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "President! As for that matter, I'd like to speak for myself about the study.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Yes. Carry on please.";
 		set ma_tomas,4;
 		changequest 11211,11212;
-		emotion ET_WRAP, getnpcid(0, "Linguist Devore#mal");
+		emotion ET_WRAP, getnpcid(0, "언어학자 데보레#mal");
 		close;
 	}
-	mes "[Koon]";
+	mes "[쿤]";
 	mes "I hope the study of Dr. Devore comes out soon.";
 	mes "I am very interested in the language as well!";
 	close;
 }
 
-mal_in02,174,64,5	script	Linguist Devore#mal	549,{
+mal_in02,174,64,5	script	언어학자 데보레#mal	549,{
 	if (ma_tomas < 4) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Most of our cats are especially talented in language.";
 		mes "This has a great effect on the prosperity of our merchants.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Because... it means you can do business in more areas if you know more foreign languages.";
 		close;
 	} else if (ma_tomas == 4) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Hello everyone.";
 		mes "I am a linguist, Dr. Devore, in charge of the study on the Starfish language.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Let me say the definite conclusion first. Since ^0000FFthe study on the Starfish language^000000 started from the time we settled in Malangdo, there's been no remarkable outcome yet.";
 		emotion ET_PROFUSELY_SWEAT;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Of course it is possible to talk with ^6666ccBiscuit^000000 somehow, but this is not close to the result we expected to solve the situation.";
 		next;
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "Then, how's the study on the book we found last time?";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "This book we assumed to be written in the Starfish language. But when I asked Biscuit, it turns out that it's a textbook to learn the Starfish language...";
 		next;
-		mes "[Koon]";
+		mes "[쿤]";
 		mes "Isn't it very helpful for studying the Starfish language, then?";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I surely thought that, but when I tried the conversation as it teaches, we ended up finding they couldn't understand it at all.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "If you see the words on the first page of this book, there's a sentence seeming like short conversation.";
 		next;
-		mes "[Linguist Devore]";
-		mes "It's like this, for the question, Как си?, it says, Аз съм добре, благодаря. А Вие?";
+		mes "[언어학자 데보레]";
+		mes "It's like this, for the question, ????? ????, it says, ???? ???? ??????, ??????????. ?? ??????";
  		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Though I tried talking to Biscuit like this, there was no feedback.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "After that, as for this book, the existence of the book itself has been studied on the other side.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Ok, we listened well to what Dr. Devore said.";
 		mes "Then, let's wrap up the progress of the language study, and listen to Geologist, Dr. Mali.";
 		set ma_tomas,5;
 		changequest 11212,11213;
-		emotion ET_WRAP, getnpcid(0, "Geologist Mali#mal");
+		emotion ET_WRAP, getnpcid(0, "지질학자 말리#mal");
 		close;
 	} else if (ma_tomas < 18) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Hoo...";
 		mes "The Starfish language is the hardest matter in my studying life.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I should solve the puzzling Starfish language soon.";
 		mes "I'm ashamed to see you all like this as a result.";
 		emotion ET_PROFUSELY_SWEAT;
 		close;
 	} else if (ma_tomas == 18) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Right...";
 		mes "This language world is so beautiful and mysterious.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "There are mysteries like why the same beings use totally different languages, or why very far kinds use similar languages.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I joined this group because I thought that traveling all around the world was much more helpful to study, not just reading a book at a desk.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "But this Starfish is just mysterious.";
 		mes "I cannot understand it at all.";
 		mes "I am rather doubtful to say it's actual 'language'.";
 		emotion ET_PROFUSELY_SWEAT;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I have no clue, though I study it in various ways.";
 		mes "Biscuit got used to our language, rather, and short talk is possible, but we cannot say it is conversation yet.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I feel frustrated and more to study like this, but it should be solved to deal with the other matters.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I don't see what's wrong here!";
 		mes "Myself, who used to be called a master of language!";
 		mes "I've never expected to come across this untouchable stuff!";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Wooaaa wooaaa ahhh!!!!";
 		mes "I don't see what's wrong here!";
 		emotion ET_HUK;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Why are they here and what do they want!";
 		mes "I'd be good enough if I could just know it!";
 		set ma_tomas,19;
 		changequest 11225,11226;
 		close;
 	} else if (ma_tomas == 19) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Wooaaa wooaaa ahhh!!!!";
 		mes "I don't see what's wrong here!";
 		emotion ET_HUK;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Why are they here and what do they want!";
 		mes "I'd be good enough if I could just know it!";
 		close;
 	} else if (ma_tomas == 20) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "What?! What did you say?!";
 		mes "Fluently said!";
 		mes "How come!";
 		emotion ET_HUK;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I can't believe it unless I see it with my own eyes.";
 		mes "It's not right if he spoke only to me like that, isn't it?";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Let's go and hear it together!!";
 		set ma_tomas,21;
 		changequest 11227,11228;
 		close;
 	} else if (ma_tomas < 34) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "The study by this time was just making a totally wrong guess!";
 		mes "But before you're disappointed, I'd rather be happy enough to get the answer.";
 		emotion ET_BEST;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Once we get the answer, it's only a matter of time before understanding the Starfish language.";
 		close;
 	} else if (ma_tomas == 34) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Is it true?!";
 		mes "Did Biscuit say so?!";
 		emotion ET_HUK;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Ah, ah! Thanks to you, "+strcharinfo(0)+"!";
 		mes "I feel so grateful.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I have to meet Biscuit right now and say thank you.";
 		mes "It'd be possible to express my grateful mind, though we cannot understand each other.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Ah, and I really want to tell this happy news to our chief, Tomas.";
 		mes "Please!!";
 		emotion ET_HELP;
@@ -933,13 +933,13 @@ mal_in02,174,64,5	script	Linguist Devore#mal	549,{
 		getitem 6422,30; //Egrade_Coin
 		close;
 	} else if (ma_tomas == 35) {
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Ah, and I really want to tell this happy news to our chief, Tomas.";
 		mes "Please!!";
 		emotion ET_HELP;
 		close;
 	}
-	mes "[Linguist Devore]";
+	mes "[언어학자 데보레]";
 	mes "Ah, ah!!";
 	mes "The study on Starfish is going well.";
 	mes "It could've really been a disaster, if you, "+strcharinfo(0)+", didn't help us.";
@@ -947,27 +947,27 @@ mal_in02,174,64,5	script	Linguist Devore#mal	549,{
 	close;
 }
 
-mal_in02,179,57,1	script	Geologist Mali#mal	559,{
+mal_in02,179,57,1	script	지질학자 말리#mal	559,{
 	if (ma_tomas < 5) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Malangdo is named because the ground here is so soft, mew~";
 		mes "It gets hard when you touch it, mew~";
 		emotion ET_SEXY;
 		close;
 	} else if (ma_tomas == 5) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Mali, mew~";
 		mes "As you all know, there are many places with cracks in the ground, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "It's not that serious or risky a problem yet, mew~";
 		mes "As we cannot predict when Star Candy will move, it's best to repair these first for now, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "But, as always, there is a shortage of labor, mew~";
 		mes "We need many more participants, I think, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "As everyone has their own work to do, I understand that we all must be busy. But I'd like to participate in this repairing, since it's related to our life.";
 		emotion ET_HELP;
 		next;
@@ -977,121 +977,121 @@ mal_in02,179,57,1	script	Geologist Mali#mal	559,{
 		mes "My father was seriously injured from the earthquake some time ago!";
 		emotion ET_HUK, getnpcid(0, "Brie#mal");
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Mr. Brie!! I understand what your situation is, but please clam dowm, since we're having a meeting.";
 		set ma_tomas,6;
 		changequest 11213,11214;
 		emotion ET_WRAP, getnpcid(0, "Brie#mal");
 		close;
 	} else if (ma_tomas < 13) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "You attended to the meeting instead of your father today, Brie.";
 		mes "He's quite unfriendly but devoted to his parents, mew~";
 		emotion ET_SMILE;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Mr. Brie was not a member of our group at first, but he joined in after getting the news that his father, Rican, joined in with the new trade course development, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "But Brie seems to have been shocked when Rican was hurt last time, mew~";
 		mes "I should study more to not let this kind of thing happen again, mew~";
 		close;
 	} else if (ma_tomas == 13) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Malangdo is a really special island, mew~";
 		mes "Literally, it's soft.";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Although I visited so many places following the group, I've never seen ground as soft as Malangdo.";
 		mes "If you press the ground by mistake...";
 		mes "it has magic so that you end up continously doing it over and over.";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Soft and sticky feeling like this...";
 		mes "Haha~ it gets you addicted to it...";
 		emotion ET_SHY;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Oops!!";
 		mes "I was about to be sunk into this softness, mew~!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Though it's got the risk of making you lose your mind, it helped the ship Navi not to break, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "By the way, it doesn't have a special element in it, but is made up of common soil, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Moreover!!";
 		mes "How come it's been ^0000FFcracked with this softness^000000, mew~!";
 		emotion ET_HUK;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "If this ^0000FFcrack goes on, the underground support may collapse^000000, mew...";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "There are many forces in for the repairing of the cracks, it feels like it's not enough, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "So we receive applications for voluntary service, mew~";
 		mes "Though it's voluntary service, it's not free. So, please visit me at any time you want, mew~";
 		next;
 		switch(select("Help repairing.:Finish the talk.")) {
 		case 1:
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "Khhh!!!";
 			mes "What a beatiful young person in this hard world!!!";
 			mes "Whenever I come across a person like you, I feel this life is still good to live, mew~";
 			emotion ET_CRY;
 			next;
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "Please listen to ^6666ccmy assistant, Bob^000000 in detail, mew~";
 			mes "Get out of here and visit the ^6666cca room on your right^000000, mew~";
 			set ma_tomas,14;
 			setquest 11221;
 			close;
 		case 2:
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "Woohoohoo.";
 			mes "I~will~be~waiting~for~you~~";
 			emotion ET_BIGTHROB;
 			close;
 		}
 	} else if (ma_tomas == 14) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Khhh!!!";
 		mes "What a beatiful young person in this hard world!!!";
 		mes "Whenever I come across a person like you, I feel this life is still good to live, mew~";
 		emotion ET_CRY;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Please listen to ^6666ccmy assistant, Bob^000000 in detail, mew~";
 		mes "Get out of here and visit the ^6666cca room on your right^000000, mew~";
 		close;
 	} else if (ma_tomas == 15 || ma_tomas == 16) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Is the repairing of the cracks going well, mew?";
 		mes "Don't overdo yourself, mew~";
 		mes "It'd be bad if your health gets worse, mew~";
 		close;
 	} else if (ma_tomas == 17) {
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Ah! Bob complimented you so much on your great job, mew~";
 		mes "Please help us next time again when you can, mew~";
 		emotion ET_BEST;
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I made this, since the Starfish study was well finished and you didn't need to do such hard work like this!";
 		mes "Sob sob!!!";
-		emotion ET_CRY, getnpcid(0, "Linguist Devore#mal");
+		emotion ET_CRY, getnpcid(0, "언어학자 데보레#mal");
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Ohhh! What are you talking about Dr. Devore, mew~!!!!";
 		mes "I don't think that way at~~all, mew~!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Everyone knows how you, Dr. Devore, are studying hard, mew~!!!";
 		mes "You do your best, so be more confident, mew~!";
 		set ma_tomas,18;
@@ -1102,12 +1102,12 @@ mal_in02,179,57,1	script	Geologist Mali#mal	559,{
 		close;
 	} else if (ma_tomas > 99) {
 		if (checkquest(11240) > -1 || checkquest(11241) > -1) {
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "Please listen to ^6666ccmy assistant, Bob^000000 in detail, mew~.";
 			mes "Get out of here and visit the ^6666cca room on your right^000000, mew~";
 			close;
 		} else if (checkquest(11242) > -1) {
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "Ah! Bob complimented you so much on your great job, mew~";
 			mes "Please help us next time again when you can, mew~";
 			changequest 11242,11243;
@@ -1115,42 +1115,42 @@ mal_in02,179,57,1	script	Geologist Mali#mal	559,{
 			close;
 		} else {
 			if (checkquest(11243,PLAYTIME) == 0 || checkquest(11243,PLAYTIME) == 1) {
-				mes "[Geologist Mali]";
+				mes "[지질학자 말리]";
 				mes "Don't overdo yourself, mew~";
 				mes "It'd be bad if your health gets worse, mew~";
 				close;
 			}
 			if (checkquest(11243,PLAYTIME) == 2)
 				erasequest 11243;
-			mes "[Geologist Mali]";
+			mes "[지질학자 말리]";
 			mes "There is a lot more repairing left to do for today!";
 			mes "It doesn't seem to be an easy thing to solve, mew~";
 			next;
 			switch(select("I will help.:I will stop.")) {
 			case 1:
-				mes "[Geologist Mali]";
+				mes "[지질학자 말리]";
 				mes "Please listen to ^6666ccmy assistant, Bob^000000 in detail, mew~";
 				mes "Get out of here and visit the ^6666cca room on your right^000000, mew~";
 				setquest 11240;
 				close;
 			case 2:
-				mes "[Geologist Mali]";
+				mes "[지질학자 말리]";
 				mes "Then please take a rest, mew~";
 				mes "I will see you next chance then, mew~";
 				close;
 			}
 		}
 	}
-	mes "[Geologist Mali]";
+	mes "[지질학자 말리]";
 	mes "Soft and sticky feeling like this...";
 	mes "Haha~ it gets you addicted to it...";
 	emotion ET_SEXY;
 	close;
 }
 
-mal_in02,140,94,0	script	Bob#mal	553,{
+mal_in02,140,94,0	script	밥#mal	553,{
 	if (ma_tomas < 14) {
-		mes "[Bob]";
+		mes "[밥]";
 		mes "You bow-wow! bow! wow! I mew! mew! mew!";
 		mes "I'm into juice from delicious fish, mew~";
 		emotion ET_DELIGHT;
@@ -1162,38 +1162,38 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 	L_Quest1:
 		set .@i, @mal_bob_q;
 		set @mal_bob_q,0;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "You bow-wow! bow! wow! I mew! mew! mew!";
 		mes "I'm into juice from delicious fish, mew~";
 		emotion ET_DELIGHT;
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Ah ahhh!!!!!!!!!!!";
 		mes "Are you here for voluntary service?!";
 		emotion ET_HUK;
 		next;
 		if (checkweight(1201,1) == 0) {
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Ummm... be lightened with your mind and body when doing voluntary service!";
 			mes "You seem to have too much stuff, so get yourself lightened~";
 			close;
 		}
 		if (MaxWeight - Weight < 1000) {
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Ummm... be lightened with your mind and body when doing voluntary service!";
 			mes "You seem to have a lot of heavy stuff, so get yourself lightened~";
 			close;
 		}
 		switch(select("Yes.:No.")) {
 		case 1:
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Khhh...";
 			mes "Impressed!!!";
 			mes "I am impressed!!!";
 			mes "The impressive mind is dancing in my heart!!!";
 			emotion ET_HUK;
 			next;
-			mes "[Bob]";
+			mes "[밥]";
 			mes "I treated the people like I looked down on them and had a prejudice against human beings!!!";
 			mes "I feel like crying with scales!!!!";
 			mes "Impressed!!!";
@@ -1201,22 +1201,22 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			emotion ET_HUK;
 			next;
 			select("Stop it! Tell me how to repair the cracks.");
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Ah!";
 			next;
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Hooo...";
 			mes "I was so impressed that I was rude to someone I met for the first time.";
 			next;
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Repairing the cracks is rather simple.";
 			mes "Anyone can do it easily with just this ^0000FFFix Kit^000000!";
 			next;
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Fill in the part with this mixture of gray and white clay, and fix the cracks with a stapler.";
 			mes "And I'll skip explaining how to use the other tools, since you know already.";
 			next;
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Ah, right...";
 			mes "^0000ffYou may fall into the gap of the crack, unfortunately, so please watch out.^000000";
 			if (.@i == 1) {
@@ -1227,7 +1227,7 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			getitem 6434,1; //Fix_Kit
 			close;
 		case 2:
-			mes "[Bob]";
+			mes "[밥]";
 			mes "Ah, right...";
 			mes "I see...";
 			mes "Disappointed...";
@@ -1253,38 +1253,38 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			mes " - and try this again. - ";
 			close;
 		}
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Repairing the cracks is rather simple.";
 		mes "Anyone can do it easily with just this ^0000FFFix Kit^000000!";
 		if (countitem(6434) == 0)
 			getitem 6434,1; //Fix_Kit
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Fill in the part with this mixture of gray and white clay, and fix the cracks with a stapler.";
 		mes "And I'll skip explaining how to use the other tools, since you know already.";
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Ah, right...";
 		mes "^0000ffYou may fall into the gap of the crack, unfortunately, so please watch out.^000000";
 		close;
 	} else if (ma_tomas == 16) {
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Khhh~~~~~~~~~~~~~~~~~~~~~~";
 		mes "That was perfect!";
 		emotion ET_BEST;
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "The adhesive filled in just right!!";
 		mes "The perfect stapler job!!";
 		mes "The speechless and marvelous finishing skill!!";
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "Impressed!";
 		mes "Mysterious!";
 		mes "Shocked!";
 		emotion ET_HUK;
 		next;
-		mes "[Bob]";
+		mes "[밥]";
 		mes "You did a great job indeed!!!";
 		mes "I will tell Dr. Mali!";
 		if (countitem(6434) > 0)
@@ -1299,67 +1299,67 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 		} else if (checkquest(11241) > -1)
 			goto L_Quest2;
 	}
-	mes "[Bob]";
+	mes "[밥]";
 	mes "You bow-wow! bow! wow! I mew! mew! mew!";
 	mes "I'm into juice from delicious fish, mew~";
 	emotion ET_DELIGHT;
 	close;
 }
 
--	script	Crack#mal0	-1,{
+-	script	균열::Crack#mal0	-1,{
 	if (.off) end;	// Official script uses a 1-second timer to disable cracks. Added to prevent abuse.
 	if (ma_tomas == 15 || checkquest(11241) > -1) {
 		if (countitem(6434) < 1) {
-			mes "- To repair the crack -";
-			mes "- you need a Fix Kit. -";
+			mes "- 균열을 수리하려면-";
+			mes "- 수정 키트가 필요합니다. -";
 			close;
 		}
 		set .@ma_cr1, rand(1,10);
 		if (.@ma_cr1 < 5) {
-			mes "- Ground is a bit cracked. -";
-			mes "- Used a stapler. -";
+			mes "- 바닥이 조금 갈라졌습니다. -";
+			mes "- 스테이플러를 사용했습니다. -";
 			set .off,1;
 			donpcevent "Crackt"+substr(strnpcinfo(2),3,getstrlen(strnpcinfo(2))-1)+"#mal::OnEnable";
 			close;
 		} else if (.@ma_cr1 == 7) {
-			mes "- With the crack opening -";
-			mes "- at the center, -";
-			mes "- the ground gets soft -";
-			mes "- and you are instantly -";
-			mes "- sucked into the ground. -";
+			mes "- 크랙이 열리면서 -";
+			mes "- 중앙에, -";
+			mes "- 땅이 부드러워진다 -";
+			mes "- 그리고 당신은 즉시 -";
+			mes "- 땅속으로 빨려들어갔습니다. -";
 			close2;
 			warp "mal_dun01",0,0;
 			end;
 		} else {
 			while (1) {
-				switch(select("Repair the gap.:Use the stapler.")) {
+				switch(select("틈을 메우세요.:스테이플러를 사용하세요.")) {
 				case 1:
 					switch(rand(1,3)) {
 					case 1:
-						mes "- Mix the two colors of -";
-						mes "- adhesives and put it on -";
-						mes "- the crack meticulously. -";
+						mes "- 두 가지 색을 섞으세요 -";
+						mes "- 접착제를 바르고 붙이세요 -";
+						mes "- 꼼꼼하게 크랙을 냅니다. -";
 						break;
 					case 2:
-						mes "- Use a plump sea squirt -";
-						mes "- for the cracked gap.-";
+						mes "- 통통한 멍게를 사용하세요 -";
+						mes "- 갈라진 틈을 위해.-";
 						break;
 					case 3:
-						mes "- Use a slithery sea cucumber -";
-						mes "- for the cracked gap.-";
+						mes "- 미끄러운 해삼을 사용하세요 -";
+						mes "- 갈라진 틈을 위해.-";
 						break;
 					}
 					next;
 					break;
 				case 2:
-					mes "- Used the stapler for the crack -";
-					mes "- and fixed it well. -";
+					mes "- 크랙을 위해 스테이플러를 사용했습니다 -";
+					mes "- 잘 고쳤어요. -";
 					next;
-					mes "- It seems the crack -";
-					mes "- is well filled. -";
+					mes "- 균열이 생긴 것 같아요 -";
+					mes "- 잘 채워져 있어요. -";
 					next;
 					if (rand(1,3) == 2) {
-						mes "- Let's get back to report this. -";
+						mes "- 다시 보고하러 갑시다. -";
 						if (ma_tomas == 15) {
 							set ma_tomas,16;
 							changequest 11222,11223;
@@ -1368,8 +1368,8 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 							changequest 11241,11242;
 						}
 					} else {
-						mes "- Let's find -";
-						mes "- the other cracks. -";
+						mes "- 찾아보자 -";
+						mes "- 다른 균열. -";
 					}
 					set .off,1;
 					donpcevent "Crackt"+substr(strnpcinfo(2),3,getstrlen(strnpcinfo(2))-1)+"#mal::OnEnable";
@@ -1378,9 +1378,9 @@ mal_in02,140,94,0	script	Bob#mal	553,{
 			}
 		}
 	}
-	mes "- I can see the crack. -";
-	mes "- It seems there's still -";
-	mes "- not enough supporters yet. -";
+	mes "- 균열이 눈에 띈다. -";
+	mes "- 균열 보수 지원자가 -";
+	mes "- 여전히 부족한 것 같다. -";
 	close;
 OnEnable:
 	enablenpc();
@@ -1390,16 +1390,16 @@ OnDisable:
 	disablenpc();
 	end;
 }
-malangdo,114,157,0	duplicate(Crack#mal0)	Crack#mal1	550
-malangdo,284,237,0	duplicate(Crack#mal0)	Crack#mal2	550
-malangdo,134,150,0	duplicate(Crack#mal0)	Crack#mal3	550
-malangdo,173,199,0	duplicate(Crack#mal0)	Crack#mal4	550
-malangdo,233,197,0	duplicate(Crack#mal0)	Crack#mal5	550
-malangdo,137,239,0	duplicate(Crack#mal0)	Crack#mal6	550
-malangdo,239,157,0	duplicate(Crack#mal0)	Crack#mal7	550
-malangdo,221,155,0	duplicate(Crack#mal0)	Crack#mal8	550
-malangdo,217,109,0	duplicate(Crack#mal0)	Crack#mal9	550
-malangdo,162,183,0	duplicate(Crack#mal0)	Crack#mal10	550
+malangdo,114,157,0	duplicate(Crack#mal0)	균열::Crack#mal1	550
+malangdo,284,237,0	duplicate(Crack#mal0)	균열::Crack#mal2	550
+malangdo,134,150,0	duplicate(Crack#mal0)	균열::Crack#mal3	550
+malangdo,173,199,0	duplicate(Crack#mal0)	균열::Crack#mal4	550
+malangdo,233,197,0	duplicate(Crack#mal0)	균열::Crack#mal5	550
+malangdo,137,239,0	duplicate(Crack#mal0)	균열::Crack#mal6	550
+malangdo,239,157,0	duplicate(Crack#mal0)	균열::Crack#mal7	550
+malangdo,221,155,0	duplicate(Crack#mal0)	균열::Crack#mal8	550
+malangdo,217,109,0	duplicate(Crack#mal0)	균열::Crack#mal9	550
+malangdo,162,183,0	duplicate(Crack#mal0)	균열::Crack#mal10	550
 
 -	script	Crackt0#mal	-1,{
 	end;
@@ -1447,36 +1447,36 @@ mal_in02,181,55,3	script	Brie#mal	545,{
 		mes "we don't understand its purpose or reason at all.";
 		mes "Should we just expect not to find anything?";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "As Dr. Devore said, it's better to wait for the results, since he's still studying...";
 		next;
 		mes "[Brie]";
 		mes "What would you do if Star Candy left, and you had only waited?";
 		mes "Malangdo may go under. I cannot just wait here like this.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "But, Brie, we know there's nothing but waiting.";
 		mes "An enormous crack was made when Star Candy tried to make the support stand last time, as she seemed to be shocked and moved too much.";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Besides, since ^0000FFStar Candy's location plays the role of pillar for this island, it seems the center would go down as you even set up pillars around her^000000, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Due to the nature of this large basement space, if the center were to collapse, we can't expect what comes next. Our researchers therefore think we should treat it as carefully as we can, mew~";
 		next;
 		mes "[Brie]";
 		mes "...";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "We know that Rican's injury may affect the trade of Yggdrasil Berry, so don't worry too much.";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "As for that matter, we're going to plan for it by discussing it with our chief, Tomas.";
 		next;
 		mes "[Brie]";
 		mes "Yes...";
 		next;
-		mes "[President of Meeting]";
+		mes "[집회 의장]";
 		mes "Well, let's have a break for now.";
 		mes "In time, Samuel brought Seaweed and tuna here.";
 		set ma_tomas,7;
@@ -1526,31 +1526,31 @@ mal_in02,181,55,3	script	Brie#mal	545,{
 		mes "Dr. Mali, please let me help to repair the cracks!";
 		mes "You called me more often long ago, but why do you say you can't give me the work now?";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "No, mew~";
 		mes "Brie, you have to help your father, mew~";
 		next;
 		mes "[Brie]";
 		mes "But if this island goes down, all the fuss isn't useful at all!";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "It's the same as the chicken and egg situation, mew~";
 		mes "If we have any problems selling Yggdrasil Berry, we cannot buy the tools to repair the cracks, mew~";
 		next;
 		mes "[Brie]";
 		mes "...";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "So, go back home and help your father, mew~";
 		next;
 		mes "[Brie]";
 		mes "Ok, then I'll come back again if his legs have recovered.";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Good.";
 		mes "I'll wait for you, mew~";
 		next;
-		mes "[Geologist Mali]";
+		mes "[지질학자 말리]";
 		mes "Now as I get him back home, I'm going to find the participants, mew~";
 		mes "Cheers!";
 		set ma_tomas,13;
@@ -1563,29 +1563,29 @@ mal_in02,181,55,3	script	Brie#mal	545,{
 	close;
 }
 
-mal_in01,114,169,5	script	Rican#mal	547,{
+mal_in01,114,169,5	script	리칸#mal	547,{
 	if (ma_tomas < 9) {
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Woo waa hoohoo...";
 		mes "Woowaa ahhh ahh ahh...";
 		mes "I'm impatient... to stay home like this!!";
 		emotion ET_SLEEPY;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "When will my legs recover, when?!";
 		mes "They should be better soon, so that I can work like before...";
 		mes "But I can hardly move.";
 		if (ma_tomas < 8)
 			close;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "All I can do is press the button all day long~";
 		mes "This is not exciting at all~";
 		mes "I'm not willing to do anything more and more~ Doobie dooba~";
 		emotion ET_SLEEPY;
 		next;
 		select("Excuse me. Is this Rican's house?");
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Huh?";
 		mes "Who are you!";
 		mes "I am Rican!";
@@ -1594,131 +1594,131 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 		emotion ET_HUK;
 		next;
 		select("Ask about Yggdrasil Berry.");
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Yggdrasil Berry?";
 		mes "You... you know something!";
 		mes "Umm, hahaha!";
 		mes "Only a few cats know about Yggdrasil Berry!";
 		emotion ET_SPARK;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Well, before I traded them with human beings like you, Yggdrasil Berry was not thought to be a very remarkable fruit.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "It used to be spread out here and there in my old town. It doesn't have a good taste and causes indigestion, mew~";
 		mes "Cats need to eat fishes, naturally.";
 		emotion ET_SEXY;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "But if human beings eat this, it gets you fully recharged.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "At first, I'd never thought it could be sold at all!";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Khhh~";
 		mes "It was just awesome at that time...";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Very long ago...";
 		mes "Our group left the town for a new course to trade.";
 		emotion ET_SHY;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Actually, we dominated the areas around our town, and it was like a challenge to find unexplored areas.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "But discovering the unknown is the romance of a man, isn't it?";
 		emotion ET_COOL;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Well, the beginning was quite nice, anyway.";
 		mes "After a month or two floating on the sea...";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "The sea has enough fishes in it, but it made me bored. I wanted to eat seasoning, like radish with chicken the most.";
 		emotion ET_HUNGRY;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Though we drifted for a very long time, we couldn't land on any island. Rather, we met storms.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "It was my first time seeing such a harsh tornado.";
 		mes "At that time I was out of my mind and thought I would die.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "I don't know the about the other ships, but this ship Navi luckily landed here in this island.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Khhh khhh!";
 		mes "Can you believe it?";
 		mes "^0000FFThat enormous ship just flied, vroom~~ like an airship and was dropped here in the middle of this island!^000000";
 		emotion ET_HUK;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Anyhow, I survived, but most of the goods in the ship were swept and we were left with only Yggdrasil Berry.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Huh? Why did we load them, if we don't eat them?";
 		mes "It... it's the secret...";
 		emotion ET_SWEAT;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Well, it's not important. As we sent reconnaissance groups there, we found out that there's a land where the other kind lives, not like us.";
 		mes "That was the land of you, human beings.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Regardless of the process, we found the new area to trade as we had first intended... we still have a small problem of not knowing how to get back to our howmetown yet...";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "We cats started selling with powerful viability.";
 		mes "But we had only Yggdrasil Berry, right?";
 		mes "We sold it with no high expectations, but could sell like hot cakes.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "As rumors went, it was sold at very high prices among human beings and had a remarkable effect on them.";
 		mes "So we finally settled down to sell Yggdrasil Berry with growing profits.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "But we are selling the dried kind, which is ^0000FFa bit different from what human being originally know, and less effective, and hard to eat raw^000000.";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Since it disappears as we prepare, it's definately the best for our group.";
 		emotion ET_GOODBOY;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "By the way, as I got injured in this important season, it harms my credibility if I don't meet the deadline to deliver the amount ordered!";
 		mes "Trading is credibility!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "For this reason, would you like to help me?";
 		mes "Though my son is helping me, the amount we can prepare is not enough.";
 		next;
 		switch(select("I'll help him.:I won't.")) {
 		case 1:
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Khhh!";
 			mes "I had a good impression of you from the first time!";
 			next;
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Harvesting Yggdrasil Berry is very easy.";
 			mes "You can get it when you just dig the ground, mew~";
 			emotion ET_HUK, playerattached();
 			next;
 			select("?!");
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Huh?";
 			mes "Doesn't it originally come from the ground?";
 			emotion ET_HUK, playerattached();
 			next;
 			select("Doesn't it grow on trees?");
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Well, the Yggdrasil Berry in Midgard could do so.";
 			mes "But ^6666ccwe dig our Yggdrasil Berry here from the ground^000000.";
 			emotion ET_HUK, playerattached();
 			next;
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "You can get it on Malangdo Island easily. Bring me about 30.";
 			mes "Ah! Keep the secret to my son for sure~";
 			mes "Then please^ff99cc!!!^000000 please^ff99cc!!!^000000 please~~~";
@@ -1727,39 +1727,39 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 			changequest 11216,11217;
 			close;
 		case 2:
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Oh? Then it's okay, if you can't help it.";
 			mes "My injured leg feels so bad... -groaning-";
 			close;
 		}
 	} else if (ma_tomas == 9) {
 		if (countitem(6435) < 30) {
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "You can get it on Malangdo Island easily. Bring me about 30.";
 			mes "Ah! Keep the secret to my son for sure~";
 			mes "Then please^ff99cc!!!^000000 please^ff99cc!!!^000000 please~~~";
 			emotion ET_CHUP;
 			close;
 		}
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Oh, oh!!";
 		mes "This fresh smell!!!";
 		mes "Haaa~ How fresh, good job!";
 		mes "You're good at harvesting Yggdrasil Berry?";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Then would you put it in the machine in front of me?";
 		set ma_tomas,10;
 		changequest 11217,11218;
 		close;
 	} else if (ma_tomas == 10) {
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Oh, oh!!";
 		mes "This fresh smell!!!";
 		mes "Haaa~ How fresh, good job!";
 		mes "You're good at harvesting Yggdrasil Berry?";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Then would you put it in the machine in front of me?";
 		close;
 	} else if (ma_tomas == 11) {
@@ -1779,19 +1779,19 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 			mes " - and try this again. - ";
 			close;
 		}
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "Hoo hoo~ I feel at ease thanks to your help.";
 		mes "I had doubted if it was too much suddenly, but it turned out just right!";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "By the way, no news from my son yet, as he said he went to a meeting.";
 		mes "I hope he's not bothering Dr. Mali again...";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "He seems to have visited Dr. Mali more often since my legs got injured.";
 		mes "The study will get longer if he does so...";
 		next;
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "If you see my son, please tell him to get back soon~";
 		mes "And this is for you to buy something delicious with, since you did hard work.";
 		set ma_tomas,12;
@@ -1800,7 +1800,7 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 		setquest 11239;
 		close;
 	} else if (ma_tomas == 12) {
-		mes "[Rican]";
+		mes "[리칸]";
 		mes "He seems to have visited Dr. Mali more often since my legs got injured.";
 		mes "The study will get longer if he does so...";
 		mes "If you see my son, please tell him to get back soon~";
@@ -1808,11 +1808,11 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 	} else if (ma_tomas > 99) {
 		if (checkquest(11238) != -1) {
 			if (countitem(6435) < 30) {
-				mes "[Rican]";
+				mes "[리칸]";
 				mes "You need exactly 30 to get a set!";
 				close;
 			}
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Very reliable!";
 			mes "Don't you want to do your business with Yggdrasil Berry?";
 			delitem 6435,30; //Fresh_Fruit
@@ -1821,21 +1821,21 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 			getitem 6422,5; //Egrade_Coin
 			close;
 		} else if (checkquest(11239,PLAYTIME) == 0 || checkquest(11239,PLAYTIME) == 1) {
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Would you like to take a rest for a while?";
 			mes "It hasn't been a day yet since you last worked~";
 			close;
 		} else {
 			if (checkquest(11239,PLAYTIME) == 2)
 				erasequest 11239;
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Hehe~";
 			mes "You came here to help me again?";
 			mes "You're so faithful!";
 			next;
 			switch(select("I'll help.:I won't.")) {
 			case 1:
-				mes "[Rican]";
+				mes "[리칸]";
 				mes "It's the same task to do as before.";
 				mes "30 Yggdrasil Berry. You can easily find it in Malangdo!!";
 				mes "Ah! Keep the secret to my son for sure~";
@@ -1844,36 +1844,36 @@ mal_in01,114,169,5	script	Rican#mal	547,{
 				setquest 11238;
 				close;
 			case 2:
-				mes "[Rican]";
+				mes "[리칸]";
 				mes "Yeah? Then play around here, since you are visiting~";
 				close;
 			}
 		}
 	}
-	mes "[Rican]";
+	mes "[리칸]";
 	mes "Woo waa hoohoo...";
 	mes "Woowaa ahhh ahh ahh...";
 	mes "I'm impatient... to stay home like this!!";
 	next;
-	mes "[Rican]";
+	mes "[리칸]";
 	mes "All I can do is press the button all day long~";
 	mes "This is not exciting at all~";
 	mes "I'm not willing to do anything more and more~ Doobie dooba~";
 	close;
 }
 
-mal_in01,116,168,0	script	Dry Machine#mal	563,{
+mal_in01,116,168,0	script	건용 기계#mal	563,{
 	if (ma_tomas == 10) {
 		if (countitem(6435) < 30) {
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "You need exactly 30 to get a set!";
 			close;
 		}
 		switch(select("Put the fruits in.:Don't.")) {
 		case 1:
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "I'll press the button by myself!!!";
-			emotion ET_HUK, getnpcid(0, "Rican#mal");
+			emotion ET_HUK, getnpcid(0, "리칸#mal");
 			next;
 			mes "- The machine starts operating -";
 			mes "- when he presses the button. -";
@@ -1882,16 +1882,16 @@ mal_in01,116,168,0	script	Dry Machine#mal	563,{
 			changequest 11218,11219;
 			close;
 		case 2:
-			mes "[Rican]";
+			mes "[리칸]";
 			mes "Ah... you won't put it in?";
 			close;
 		}
 	}
-	mes "- Drrrk Drrrk -";
+	mes "- 드르륵 드르륵 -";
 	close;
 }
 
--	script	Suspicious Sand Pile#0	-1,{
+-	script	수상한 모래더미::Suspicious Sand Pile#0	-1,{
 	if (.off) end;	// Official script uses a 1-second timer to disable sand piles. Added to prevent abuse.
 	if (MaxWeight - Weight < 1000) {
 		mes "Your inventory is too heavy to proceed. Come back after lightening your load.";
@@ -1917,8 +1917,8 @@ mal_in01,116,168,0	script	Dry Machine#mal	563,{
 		donpcevent "Water Sand"+strnpcinfo(2)+"#mal::OnEnable";
 		close;
 	}
-	mes "- Seeems suspicious. -";
-	mes "- But it's just sand... -";
+	mes "- 수상해 보인다. -";
+	mes "- 그 뿐이다.. -";
 	close;
 OnEnable:
 	enablenpc();
@@ -1928,16 +1928,16 @@ OnDisable:
 	disablenpc();
 	end;
 }
-malangdo,221,139,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#1	557
-malangdo,208,174,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#2	557
-malangdo,191,223,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#3	557
-malangdo,150,195,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#4	557
-malangdo,116,196,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#5	557
-malangdo,178,145,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#6	557
-malangdo,142,120,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#7	557
-malangdo,136,122,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#8	557
-malangdo,152,143,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#9	557
-malangdo,242,175,0	duplicate(Suspicious Sand Pile#0)	Suspicious Sand Pile#10	557
+malangdo,221,139,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#1	557
+malangdo,208,174,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#2	557
+malangdo,191,223,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#3	557
+malangdo,150,195,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#4	557
+malangdo,116,196,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#5	557
+malangdo,178,145,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#6	557
+malangdo,142,120,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#7	557
+malangdo,136,122,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#8	557
+malangdo,152,143,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#9	557
+malangdo,242,175,0	duplicate(Suspicious Sand Pile#0)	수상한 모래더미::Suspicious Sand Pile#10	557
 
 -	script	Water Sand0#mal	-1,{
 OnInit:
@@ -1970,37 +1970,37 @@ OnTimer30000:
 -	duplicate(Water Sand0#mal)	Water Sand9#mal	-1
 -	duplicate(Water Sand0#mal)	Water Sand10#mal	-1
 
-mal_dun01,136,120,6	script	Linguist Devore#mald	549,{
+mal_dun01,136,120,6	script	언어학자 데보레#mald	549,{
 	end;
 OnInit:
-	disablenpc "Linguist Devore#mald";
+	disablenpc "언어학자 데보레#mald";
 	end;
 OnEnable:
-	enablenpc "Linguist Devore#mald";
+	enablenpc "언어학자 데보레#mald";
 	initnpctimer;
 	end;
 OnDisable:
 	stopnpctimer;
-	disablenpc "Linguist Devore#mald";
+	disablenpc "언어학자 데보레#mald";
 	end;
 OnTimer100000:
-	donpcevent "Linguist Devore#mald::OnDisable";
+	donpcevent "언어학자 데보레#mald::OnDisable";
 	end;
 }
 
-mal_dun01,136,122,3	script	Biscuit#mal	551,{
+mal_dun01,136,122,3	script	건빵#mal	551,{
 	if (ma_tomas < 20) {
 		mes "- There's something strange. -";
 		mes "- It feels like somehow - ";
 		mes "- you shouldn't make eye contact. -";
 		close;
 	} else if (ma_tomas == 20) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Star Candy sacrifices herself like this, but those fellows are setting the pillars around her for themselves only.";
 		mes "Hewww!!!";
 		emotion ET_ANGER;
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "They talk to her, but ignore me when I talk to her.";
 		mes "I don't like them at all!!!";
 		emotion ET_ANGER;
@@ -2010,66 +2010,66 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		mes "- I think it's better to let Dr. Devore know this soon. -";
 		close;
 	} else if (ma_tomas == 21) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Umm?";
 		mes "What's this?";
 		mes "Do you have anything to tell me?";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Well, that fellow is often the one ignoring my words.";
 		mes "He wavers with words to say and makes me uncomfortable.";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Did you hear? Dr. Devore?";
-		donpcevent "Linguist Devore#mald::OnEnable";
+		donpcevent "언어학자 데보레#mald::OnEnable";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Ummm? What do you mean?";
 		mes "I cannot hear anything.";
-		emotion ET_QUESTION, getnpcid(0, "Linguist Devore#mald");
+		emotion ET_QUESTION, getnpcid(0, "언어학자 데보레#mald");
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Huh? Biscuit said 'Well, that fellow is often the one ignoring my words. He wavers with words to say and makes me uncomfortable.'?";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "What? What are you taling about?";
 		mes "I cannot hear anything.";
-		emotion ET_QUESTION, getnpcid(0, "Linguist Devore#mald");
+		emotion ET_QUESTION, getnpcid(0, "언어학자 데보레#mald");
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Huh?";
 		emotion ET_QUESTION, playerattached();
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Ah?!";
 		mes "Ah?!?!?!?!?!?";
 		mes "Ah!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-		emotion ET_HUK, getnpcid(0, "Linguist Devore#mald");
+		emotion ET_HUK, getnpcid(0, "언어학자 데보레#mald");
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "If... if that's the cause!";
 		mes "We may have totally misunderstood!";
-		emotion ET_HUK, getnpcid(0, "Linguist Devore#mald");
+		emotion ET_HUK, getnpcid(0, "언어학자 데보레#mald");
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Oh my, we couldn't have known, since we live here only with ourselves.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Each living thing has its own area for audibility and vocalization. But we and Biscuit were in slightly different areas!";
-		emotion ET_HUK, getnpcid(0, "Linguist Devore#mald");
+		emotion ET_HUK, getnpcid(0, "언어학자 데보레#mald");
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "In such conditions, we cannot hear any language properly!";
 		mes "This was a matter of sound rather than language...";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Hu~hu... Despite of many years of study, we couldn't discover this reason...";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "It's not the time to do this!";
 		mes "I should change the way of studying right now.";
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "I'll get back to the meeting and report this.";
 		mes "Then please take care of the next things!";
 		next;
@@ -2078,55 +2078,55 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		mes "What should I do...?";
 		emotion ET_THINK, playerattached();
 		next;
-		mes "[Linguist Devore]";
+		mes "[언어학자 데보레]";
 		mes "Hahaha~ You are the kind who can have conversations with Biscuit. Please try to talk with him.";
 		mes "It'll be helpful for my study, no matter what you talk about with him.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Hey... Don't look down on me!";
 		emotion ET_ANGER;
-		donpcevent "Linguist Devore#mald::OnDisable";
+		donpcevent "언어학자 데보레#mald::OnDisable";
 		set ma_tomas,22;
 		completequest 11228;
 		setquest 11229;
 		close;
 	} else if (ma_tomas == 22 || ma_tomas == 23 || ma_tomas == 24) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "...What are you looking at...";
 		next;
 		while(1) {
 			switch(select("Ask about Star Candy.:Ask about Biscuit.:Ask about Malangdo.")) {
 			case 1:
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "Star Candy?";
 				mes "Tsk tsk!";
 				mes "It's no go, the lowly fellows.";
 				emotion ET_ANGER;
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "You shouldn've recognized the previous and mysterious feeling from Star Candy!";
 				mes "She's the one who's really gorgeous.";
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "How gorgeous she is that... umm...";
 				mes "Just gorgeous.";
 				mes "She is so gorgeous... but I don't know how to explaing it...";
 				emotion ET_PROFUSELY_SWEAT;
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "Khummm...";
 				mes "That's why the kinds speaking with sound are irritating.";
 				emotion ET_ANGER;
 				next;
 				select("Speaking with sound?");
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "The kind who got highly evolved like us talk using our minds, not sound.";
 				mes "As you think in your mind, it goes to the others right away, something like this?";
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "In other places, it used to be called ultrasonic waves, or telepathy.";
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "So we haven't needed any more explanation or flowery words...";
 				mes "Woo, it's bothering me so much!";
 				if (ma_tomas == 22)
@@ -2135,17 +2135,17 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 					close;
 				next;
 			case 2:
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "Me?";
 				mes "I'm an assistant to Star Candy, a new star in the Starfish race with multi-faceted talents!";
 				emotion ET_SPARK;
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "Ah, ah...";
 				mes "When I was her assistant at first, I used to be called a genius, handsome assistant, and so on...";
 				mes "I felt like a shining road of light had come up to me...";
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "But if the elderly see this, they'll dry me out in the sun...";
 				mes "It was a life like a flame... Sob sob sob sob";
 				emotion ET_CRY;
@@ -2155,11 +2155,11 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 					close;
 				next;
 			case 3:
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "This island is where the gorgeous Star Candy can take a rest.";
 				mes "The surface is soft and with the high moisture inside, it's the best place for Starfishes.";
 				next;
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "Now, those cats already occupied it as they wanted.";
 				mes "It's a problem because Star Candy is too kind...";
 				if (ma_tomas == 24) {
@@ -2172,13 +2172,13 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			}
 		}
 	} else if (ma_tomas == 25) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Hey, you haven't gone back?";
 		mes "Get some jellies for Star Candy to eat if you have time.";
 		next;
 		switch(select("Okay.:Why me?")) {
 		case 1:
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "You can get the jellies around here.";
 			mes "It's not that difficult, and you should come back before Star Candy's meal time!";
 			mes "About 30 jellies would be okay for a meal.";
@@ -2186,15 +2186,15 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			changequest 11230,11231;
 			close;
 		case 2:
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "Why you?";
 			mes "I'm busy enough to assist her and the cat fellows who can't hear my voice, that's why I should ask you.";
 			next;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "How rude...";
 			emotion ET_ANGER;
 			next;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "You're not my subordinate, so I can't order you by force. But if Star Candy can't have her meal on time, you have to remember that this island will collapse completely.";
 			next;
 			mes "["+strcharinfo(0)+"]";
@@ -2210,12 +2210,12 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		set .@i, @mal_bob_q;
 		set @mal_bob_q,0;
 		if (countitem(12624) < 30) {
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "It's not enough at all~";
 			mes "I need at least 30 Delicious Jelly.";
 			close;
 		}
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "You got them well.";
 		mes "There won't be any problem to prepare her meal.";
 		delitem 12624,30; //Delicious_Jelly
@@ -2228,71 +2228,71 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			getitem 6422,5; //Egrade_Coin
 		}
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Though the jelly looks strange, it tastes good...";
 		mes "Star Candy seems to like it a lot as well.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Have your meal, Star Candy~";
 		mes "Uhhh, why don't you eat it?";
 		mes "You have no appetite?";
 		close;
 	} else if (ma_tomas == 27) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Hooo.. it's natural that you have no appetite...";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "How come precious Star Candy supports the ground in the basement like this, and it's so dry, though it's in a subterranean cave of an island!";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Moreover, the slithery thing is bothering Star Candy.";
 		mes "You cannot avoid the stress.";
 		next;
 		select("Slithery thing?");
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Hmm? What is such a thing like that.";
 		mes "The slithery thing.";
 		mes "With its ugly looks, it bothers Star Candy continuously.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "It tries to come up to the island especially when it's storming like today. I hid here a while. Those cats came and made her bad like this.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Thanks to Star Candy, her skin is...";
 		mes "......";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Woooaaappp!";
 		mes "What's this!!!";
 		mes "Her skin is!!!!";
 		mes "She got an abscess on her skin that used to shine like a jewel!!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "She got in trouble with her dried skin, since she's here!";
 		mes "For our Starfishes, the lack of water means horrible things that lead to death!";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Ah, ah! She's so kind that she sacrifices herself to save such things. Sob sob.";
 		emotion ET_CRY;
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Ah, ah...";
 		mes "I can't leave to take care of her, isn't there anybody to help~";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Isn't there anybody to helpppppp~";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Hey, you there...";
 		mes "Even as I ask like this, will you just ignore me and stand there?";
 		next;
 		select("I'll help.:It's unavoidable, so I'll help.:I'll admit this is my destiny, so I'll and help.:I'll do anything I can for Star Candy.");
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Good attitude!";
 		mes "Hoo hoo~";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Then please find the brush to wash her and get a basket to move water here.";
 		mes "Maybe they're stacked in the storage.";
 		set ma_tomas,28;
@@ -2300,7 +2300,7 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 		close;
 	} else if (ma_tomas == 28) {
 		if (countitem(6433) && countitem(6432)) {
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "Oh!";
 			mes "You brought the tools successfully.";
 			mes "Now you can wash the dry skin in the counter-clockwise direction!";
@@ -2309,30 +2309,30 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			changequest 11233,11234;
 			close;
 		} else if (countitem(6433) && countitem(6431)) {
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "Oh!";
 			mes "You brought the tools successfully.";
 			mes "Now you can fetch sea water from outside.";
 			next;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "There's a spot I remember as first rate, in the east of Malangdo.";
 			mes "It's not right to wash her with the water collected in this cave!";
 			next;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "Be careful not to spill the water, as it's heavy to carry.";
 			close;
 		} else {
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "Ummm... It will be hard if you don't have the proper tools...";
 			mes "Though it doesn't matter for someone small like me.";
 			next;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "For such enormous skin as Star Candy's, it's full of barnacles, oysters, and mussels!!!";
 			emotion ET_HUK;
 			close;
 		}
 	} else if (ma_tomas < 33) {
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Oh!";
 		mes "You brought the tools successfully.";
 		mes "Now you can wash the dry skin in the counter-clockwise direction!";
@@ -2355,28 +2355,28 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			mes " - and try this again. - ";
 			close;
 		}
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Well done!";
 		mes "Now I see that her beautiful face has recovered.";
 		emotion ET_COOL;
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "The skin will go bad if you don't clean it every day.";
 		mes "There's a saying... cleansing your skin is much more important than using makeup.";
 		emotion ET_BEST;
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "You did a good job.";
 		mes "You helped me even though I asked suddenly like this...";
 		mes "To be honest, I thought you'd just leave.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "It's a kind of reward. Say my words to Dr. Dvor... or Devore, whatever the cat's name is.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "There's no need to wait until the study finishes. We can talk through you, and it's better to talk about the current situation...";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "This is not for you... and all of you, either. It's rather for Star Candy to get rest as soon as possible, you know!";
 		emotion ET_HNG;
 		set ma_tomas,34;
@@ -2390,32 +2390,32 @@ mal_dun01,136,122,3	script	Biscuit#mal	551,{
 			set @mal_bob_q,2;
 			goto L_Quest;
 		} else if (checkquest(11245,PLAYTIME) == 0 || checkquest(11245,PLAYTIME) == 1) {
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "I'll call you when I need you, so don't worry!";
 			close;
 		} else {
 			if (checkquest(11245,PLAYTIME) == 2)
 				erasequest 11245;
-			mes "[Biscuit]";
+			mes "[건빵]";
 			mes "It's the time for Star Candy to have a meal.";
 			mes "Get some jellies.";
 			next;
 			switch(select("I'll help.:I'll stop.")) {
 			case 1:
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "You can get the jellies around here.";
 				mes "It's not that difficult, and you should come back before Star Candy's meal time!";
 				mes "About 30 jellies would be ok for a meal.";
 				setquest 11244;
 				close;
 			case 2:
-				mes "[Biscuit]";
+				mes "[건빵]";
 				mes "What, are you talking about you let our Star Candy feel hungry?!";
 				close;
 			}
 		}
 	}
-	mes "[Biscuit]";
+	mes "[건빵]";
 	mes "Star Candy is really good.";
 	mes "She never loses her smile, even though it's so hard to stand...";
 	close;
@@ -2516,10 +2516,10 @@ mal_dun01,133,125,5	script	Star Candy#mal	552,{
 		mes ".....";
 		mes "......";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Rude! How come you talk to precious Star Candy!";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "You look different from the fellows that usually comes...";
 		mes "You also look strange, though.";
 		next;
@@ -2528,48 +2528,48 @@ mal_dun01,133,125,5	script	Star Candy#mal	552,{
 		mes "You can talk!";
 		emotion ET_HUK, playerattached();
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "What?";
 		mes "You've never seen me talking?";
 		mes "What's the matter with you?";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Since I can talk with you, you seem better than those other foolish ones.";
 		mes "Though I learned to speak in their language, they don't understand.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Our precious Star Candy humbly supports them, and they treat her like this.";
 		mes "They don't know how to express thanks!";
-		emotion ET_ANGER, getnpcid(0, "Biscuit#mal");
+		emotion ET_ANGER, getnpcid(0, "건빵#mal");
 		next;
 		select("Support?");
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Anyway!";
 		mes "It's no use to treat them well.";
 		mes "They don't know how hard Star Candy is trying.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "This island used to be hers, but for the short time while she avoided storms and got here, those cats were suddenly dropped on the island.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Since the ground here is so soft, Star Candy was stuck in between, and the situation is now like this.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Actually, she can get out regardless of those bad things, but she supports the ground worrying that someone will get hurt.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Ah, ah...";
 		mes "What a beatiful mind...";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Once she moved a bit when she felt uncomfortable, and saw them in panic. She hasn't moved at all since then. I'm worried if she's not well.";
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "Star Candy sacrifices herself like this, but those fellows are setting the pillars around her for themselves only.";
 		mes "Hewww!!!";
-		emotion ET_ANGER, getnpcid(0, "Biscuit#mal");
+		emotion ET_ANGER, getnpcid(0, "건빵#mal");
 		next;
-		mes "[Biscuit]";
+		mes "[건빵]";
 		mes "They talk to her, but ignore me when I talk to her.";
 		mes "I don't like them at all!!!";
 		next;
@@ -3131,48 +3131,48 @@ malangdo,183,202,3	script	Godoree#ml3	547,{
 	close;
 }
 
-malangdo,203,116,5	script	Suspious Dealer#ml	543,{
-	mes "He appears to be listening intently.";
-	mes "Upon hearing you approach, he pretends to be completely oblivious.";
+malangdo,203,116,5	script	수상한 상인#ml	543,{
+	mes "한참 얘기에 열중하다,";
+	mes "인기척을 듣더니 딴청을 피운다.";
 	next;
-	mes "[Suspious Dealer]";
-	mes "Oh the pain, oh the pain of it all...";
+	mes "[수상한 상인]";
+	mes "어이구 삭신이야...";
 	close;
 }
 
-malangdo,205,116,3	script	Very Suspious Dealer#ml1	543,{
-	mes "On listening to the story for";
-	mes "a while, he pretends to be indifferent once hearing someone's noise.";
+malangdo,205,116,3	script	매우 수상한 상인#ml1	543,{
+	mes "한참 얘기에 열중한다";
+	mes "인기척을 듣더니 딴청을 피운다.";
 	next;
-	mes "[Suspious Dealer]";
-	mes "Could it BE any smoggier today?";
+	mes "[매우 수상한 상인]";
+	mes "날씨가 구려...너무 구려...";
 	close;
 }
 
-malangdo,197,120,5	script	A Foolish Cat#ml	546,{
-	mes "[A Foolish Cat]";
-	mes "If you stay here, you";
-	mes "can hear all they're saying.";
-	mes "Don't know exactly what, but";
-	mes "you do hear everything.";
-	mes "Hehehe...";
+malangdo,197,120,5	script	모자란 고양이#ml	546,{
+	mes "[모자란 고양이]";
+	mes "여기 있으면";
+	mes "뭐라는지 다 들려.";
+	mes "뭔소리지는 모르지만";
+	mes "막 들려.";
+	mes "헤헤헤...";
 	close;
 }
 
 malangdo,196,120,0	script	#ml1	-1,2,2,{
 OnTouch:
 	if (malang_bad_guys == 1 || malang_bad_guys == 2) {
-		mes "You hear a conversation between the Suspious Dealers.";
+		mes "수상한 딜러들의 대화가 들립니다.";
 		next;
-		mes "[Suspious Dealer]";
-		mes "Because unexpected robbery at that moment...";
-		mes "our great work has delayed.";
+		mes "[수상한 상인]";
+		mes "그 순간 예상치 못한 강도 사건이 일어나서...";
+		mes "우리의 위대한 작업이 지연되었습니다.";
 		next;
-		mes "[Very Suspious Dealer]";
-		mes "Do not worry about the thing, I placed it near balloon bag where";
-		mes "Ship Navi is in the north, and I hid it perfectly.";
+		mes "[매우 수상한 상인]";
+		mes "그건 걱정하지 마세요. 풍선가방 근처에 두었어요.";
+		mes "Ship Navi는 북쪽에 있는데 완벽하게 숨겨놨어요.";
 		next;
-		mes "You need to check a place near north of balloon bag in ship Navi.";
+		mes "선박내비에서 벌룬백 북쪽 근처의 장소를 확인해야 합니다.";
 		if (malang_bad_guys == 1) {
 			erasequest 1145;
 			setquest 1146;
@@ -3180,23 +3180,23 @@ OnTouch:
 		}
 		close;
 	} else if (malang_bad_guys > 2 && malang_bad_guys < 8) {
-		mes "You still hear a suspicious conversation.";
+		mes "아직도 수상한 대화가 들리네요.";
 		next;
-		mes "[Suspious Dealer]";
-		mes "But near the balloon bag is still";
-		mes "worrying so much!";
+		mes "[수상한 상인]";
+		mes "하지만 풍선 가방 근처에는 여전히";
+		mes "너무 걱정돼!";
 		next;
-		mes "[Very Suspious Dealer]";
-		mes "Oh how cowardly you are!";
-		mes "I hid it in ship Navi perfectly.";
-		mes "Relax!";
+		mes "[매우 수상한 상인]";
+		mes "오, 정말 겁쟁이네요!";
+		mes "나비선에 완벽하게 숨겨놨어요.";
+		mes "진정하세요!";
 		next;
-		mes "[Suspious Dealer]";
-		mes "The rest of part is in staffs.";
-		mes "We should believe.";
+		mes "[수상한 상인]";
+		mes "나머지 부분은 스탭에 있습니다.";
+		mes "우리는 믿어야 해요.";
 		next;
-		mes "We need to investigate Navi first.";
-		mes "Let's see other guys in ship Navi.";
+		mes "먼저 Navi를 조사해야 합니다.";
+		mes "나비호에 탄 다른 남자들을 만나보자.";
 		if (malang_bad_guys == 3) {
 			erasequest 1147;
 			setquest 1148;
@@ -3204,15 +3204,15 @@ OnTouch:
 		}
 		close;
 	} else if (malang_bad_guys > 7) {
-		mes "You still hear a suspicious conversation.";
+		mes "아직도 수상한 대화가 들리네요.";
 		next;
-		mes "[Suspious Dealer]";
-		mes "Star candy is still healthy,";
-		mes "what happens?";
+		mes "[수상한 상인]";
+		mes "별사탕은 아직 건강해요,";
+		mes "무슨 일이야?";
 		next;
-		mes "[Very Suspious Dealer]";
-		mes "No way...";
-		mes "We should get more bad cans.";
+		mes "[매우 수상한 상인]";
+		mes "말도 안돼...";
+		mes "상태가 안 좋은 캔을 더 사야겠다.";
 		close;
 	}
 	end;
@@ -3221,12 +3221,12 @@ OnTouch:
 malangdo,155,179,0	script	#ml2	-1,2,2,{
 OnTouch:
 	if (malang_bad_guys == 2 || malang_bad_guys == 3) {
-		mes "There's a memo.";
+		mes "메모가 있어요.";
 		next;
-		mes "[Memo]";
-		mes "Here is not what we wanted, huh!";
+		mes "[메모]";
+		mes "우리가 원한건 이게 아닌데, 어!";
 		next;
-		mes "...do listen the conversation of merchant.";
+		mes "...상인의 대화를 들어보세요.";
 		if (malang_bad_guys == 2) {
 			erasequest 1146;
 			setquest 1147;
@@ -3237,29 +3237,29 @@ OnTouch:
 	end;
 }
 
-malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
+malangdo,171,163,3	script	무진장 수상한 상인	543,{
 	if (malang_bad_guys < 4) {
-		mes "[Awfully Suspious Dealer]";
+		mes "[무진장 수상한 상인]";
 		mes "We quit selling them, find another merchant!";
 		close;
 	} else if (malang_bad_guys == 4) {
-		mes "[Awfully Suspious Dealer]";
+		mes "[무진장 수상한 상인]";
 		mes "Bad cans?";
 		mes "Due to lots of work in here";
 		mes "can't have a short time to talk?";
 		next;
 		switch(select("Look suspicious?:I knew all things here!")) {
 		case 1:
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "I have a same boat with you!";
 			close;
 		case 2:
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "...";
 			mes "You searched the lounge of ship Navi?";
 			mes "...";
 			next;
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "It looks wrong place~";
 			mes "Go and do other things~!";
 			next;
@@ -3270,7 +3270,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 			close;
 		}
 	} else if (malang_bad_guys == 5) {
-		mes "[Awfully Suspious Dealer]";
+		mes "[무진장 수상한 상인]";
 		mes "A thought to search Gozangee around ship Navi";
 		mes "is like to ride a skill";
 		mes "with frying pan, it is idiot things.";
@@ -3278,33 +3278,33 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 		close;
 	} else if (malang_bad_guys == 6) {
 		if (countitem(6427) == 0) {
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "You searched the lounge of ship Navi?";
 			mes "But still nothing in hand.";
 			mes "I told you there's nothing.";
 			mes "...";
 			next;
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "...there must be something...";
 			close;
 		}
-		mes "[Awfully Suspious Dealer]";
+		mes "[무진장 수상한 상인]";
 		mes "Oh! That's ^0000FFa sack of bad cans^000000, isn't it?";
 		mes "Where did you get it? Amazing!";
 		next;
 		switch(select("Do not pretend not to know!:Need to show them our general!")) {
 		case 1:
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "It just looks wonderful.";
 			mes "There's nothing more to have?";
 			emotion ET_DELIGHT;
 			close;
 		case 2:
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "Relax!";
 			mes "Let's have smile and fun with only ours.";
 			next;
-			mes "[Awfully Suspious Dealer]";
+			mes "[무진장 수상한 상인]";
 			mes "To be honest, I am a member of raccoon hurray team.";
 			mes "A homeless community of raccoons";
 			mes "became a black market group.";
@@ -3313,26 +3313,26 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 			next;
 			switch(select("Are you the leader?:Let me clear the usage of bad can.:Can it be worked as you want?")) {
 			case 1:
-				mes "[Awfully Suspious Dealer]";
+				mes "[무진장 수상한 상인]";
 				mes "This is thankful misunderstanding,";
 				mes "I am just little staff.";
 				mes "I don't know who the leader is.";
 				close;
 			case 2:
-				mes "[Awfully Suspious Dealer]";
+				mes "[무진장 수상한 상인]";
 				mes "That is...";
 				mes "for food...";
 				mes "Don't ask me more, please!";
 				close;
 			case 3:
-				mes "[Awfully Suspious Dealer]";
+				mes "[무진장 수상한 상인]";
 				mes "You look down out raccoon hurray team?";
 				mes "Look more! To my star candy who stands island";
 				mes "I will make them have stomachache";
 				mes "with lots of bad cans.";
 				mes "Aren't you expecting?";
 				next;
-				mes "[Awfully Suspious Dealer]";
+				mes "[무진장 수상한 상인]";
 				mes "I can't make him eat with my hand,";
 				mes "to creature in shining coral area that is basic food of star candy";
 				mes "I am still feeding them with bad cans.";
@@ -3350,7 +3350,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 			}
 		}
 	} else if (malang_bad_guys == 7) {
-		mes "[Awfully Suspious Dealer]";
+		mes "[무진장 수상한 상인]";
 		mes "Plese forget what I have told you.";
 		mes "Please...";
 		mes "After you got 30 pcs of bad cans";
@@ -3359,7 +3359,7 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 		mes "or report this fact!";
 		close;
 	}
-	mes "[Awfully Suspious Dealer]";
+	mes "[무진장 수상한 상인]";
 	mes "So you reported all things?";
 	mes "...";
 	mes "Now it's time to live a new life";
@@ -3367,8 +3367,8 @@ malangdo,171,163,3	script	Awfully Suspious Dealer	543,{
 	close;
 }
 
-mal_in02,184,72,3	script	Gozangee#ml	547,{
-	mes "[Gozangee]";
+mal_in02,184,72,3	script	고장이#ml	547,{
+	mes "[고장이]";
 	mes "I have too much pain in my stomach...";
 	mes "Should endure myself!";
 	mes "...do bad activity...";
@@ -3394,7 +3394,7 @@ OnTouch:
 		mes "A sack that carrying bad cans.";
 		next;
 		mes "Let's bring this to a guy who";
-		mes "is in Awfully Suspious Dealer in deck.";
+		mes "is in 무진장 수상한 상인 in deck.";
 		erasequest 1149;
 		setquest 1150;
 		set malang_bad_guys,6;
@@ -3404,47 +3404,47 @@ OnTouch:
 		mes "I saw a sack of bad cans.";
 		mes "located on the deck.";
 		mes "Let's bring this to a guy who";
-		mes "is in Awfully Suspious Dealer in deck.";
+		mes "is in 무진장 수상한 상인 in deck.";
 		close;
 	}
 	end;
 }
 
-malangdo,125,147,3	script	Patrol Leader#ml	545,{
+malangdo,125,147,3	script	방범대장#ml	545,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Can't go next step due to having too many items. -";
 		close;
 	}
 	if (malang_bad_guys < 10) {
-		mes "[Patrol Leader]";
+		mes "[방범대장]";
 		mes "Be careful of distribution for";
 		mes "bad cans recently in here";
 		mes "so should be noticed.";
 		close;
 	} else if (malang_bad_guys == 10) {
-		mes "[Patrol Leader]";
+		mes "[방범대장]";
 		mes "So you are going to do bad activity instead of";
 		mes "group of hair tufts lying in bed?";
 		mes "It's gonna be exciting!";
 		mes "So excited...";
 		next;
-		mes "[Patrol Leader]";
+		mes "[방범대장]";
 		mes "Gobonge and his friends";
 		mes "liked to torment ^0000FFRed Eruma^000000 in shining";
 		mes "coral area more than anything.";
 		next;
-		mes "[Patrol Leader]";
+		mes "[방범대장]";
 		mes "Report to me after tormenting 20 ^0000FFRed Eruma^000000";
 		mes "for a while.";
 		mes "I will scold you as Patrol Leader!";
 		next;
 		switch(select("What Patrol Leader do like this?:Cheer up!!")) {
 		case 1:
-			mes "[Patrol Leader]";
+			mes "[방범대장]";
 			mes "This is what my flavor to do this!";
 			close;
 		case 2:
-			mes "[Patrol Leader]";
+			mes "[방범대장]";
 			mes "I will expect various bad activities.";
 			erasequest 1153;
 			setquest 1154;
@@ -3453,23 +3453,23 @@ malangdo,125,147,3	script	Patrol Leader#ml	545,{
 		}
 	} else if (malang_bad_guys == 11) {
 		if (checkquest(1154,HUNTING) == 2) {
-			mes "[Patrol Leader]";
+			mes "[방범대장]";
 			mes "Wow, you did to ^0000FFRed Eruma^000000 so badly!";
 			mes "I am impressed at your work.";
 			next;
-			mes "[Crime Prevention Staff]";
+			mes "[방범대원]";
 			mes "Captain, we have work again, right?";
 			emotion ET_CRY;
-			emotion ET_CRY, getnpcid(0, "Crime Prevention Staff#ml");
+			emotion ET_CRY, getnpcid(0, "방범대원#ml");
 			next;
-			mes "[Patrol Leader]";
+			mes "[방범대장]";
 			mes "Hide your tears and save your tears!";
 			mes "You should cry when having a clue for bad activity";
 			mes "at crime spot!";
 			emotion ET_CRY;
-			emotion ET_CRY, getnpcid(0, "Crime Prevention Staff#ml");
+			emotion ET_CRY, getnpcid(0, "방범대원#ml");
 			next;
-			mes "[Patrol Leader]";
+			mes "[방범대장]";
 			mes "I will scold you once the investigation is over!";
 			mes "Visit Gobonge now.";
 			erasequest 1154;
@@ -3477,35 +3477,35 @@ malangdo,125,147,3	script	Patrol Leader#ml	545,{
 			set malang_bad_guys,12;
 			close;
 		}
-		mes "[Patrol Leader]";
+		mes "[방범대장]";
 		mes "Inside of starry coral area,";
 		mes "report to me after tormenting 20 ^0000FFRed Eruma^000000";
 		mes "for a while.";
 		mes "I will scold you as Patrol Leader!";
 		close;
 	}
-	mes "[Patrol Leader]";
+	mes "[방범대장]";
 	mes "I will scold you once the investigation";
 	mes "is over!";
 	mes "visit Gobonge now.";
 	close;
 }
 
-malangdo,129,146,3	script	Crime Prevention Staff#ml	545,{
+malangdo,129,146,3	script	방범대원#ml	545,{
 	if (malang_bad_guys > 11) {
-		mes "[Crime Prevention Staff]";
+		mes "[방범대원]";
 		mes "A work to do means happy things!";
 		mes "I ask you to do various bad activities!";
 		close;
 	}
-	mes "[Crime Prevention Staff]";
+	mes "[방범대원]";
 	mes "A group of cats that";
 	mes "ate bad cans got";
 	mes "pain in stomache.";
 	mes "They are lying at the north";
 	mes "of place but still rolling with anger.";
 	next;
-	mes "[Crime Prevention Staff]";
+	mes "[방범대원]";
 	mes "Haha... the village is becoming";
 	mes "peaceful and calm, but feels";
 	mes "somewhat empty. This is not";
@@ -3563,7 +3563,7 @@ malangdo,3,1,3	script	Guidance for quest#ml	543,{
 
 // Clean the Ship :: mal_day_qook
 //============================================================
-mal_in02,76,63,7	script	Cleanyang	544,{
+mal_in02,76,63,7	script	클리냥	544,{
 	if (checkweight(1201,1) == 0) {
 		mes "- You have too many items so you can't continue the quest. -";
 		close;
@@ -3571,7 +3571,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 	if (BaseLevel < 60) {
 		mes "Sailor cat is crying sadly.";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Meow neow meoow";
 		mes "What... Meow .. Something... going... Heuheung~";
 		mes "You don't have to know. Meow heuheuheuk... ";
@@ -3587,7 +3587,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		mes "Sailor cat is crying sadly.";
 		emotion ET_CRY;
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Meow meow meoooow~";
 		mes "What is going on... Heu... heuk...";
 		mes "You don't have to know. Heu... heuk...";
@@ -3600,35 +3600,35 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 			mes "I comforted his wounded heart just standing by him.";
 			next;
 			emotion ET_CRY;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "This is unjust... Heuheuk...";
 			mes "The chef... He always gives me scolding.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "I always clean up diligently.";
 			mes "I have no idea where they are from... Heuheuk...";
 			mes "They penetrated into the ingredients...";
 			next;
 			select("They?");
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Yes, they are fast, small, hard and shiny black.";
 			mes "Meow... Also, white and wriggled...";
 			mes "My chef is so clean.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "It's ok. Clean, vermin and";
 			mes "whatever... the unfair thing is";
 			mes "that I really killed vermin as well, meow.";
 			mes "In addition, I clean up diligently.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "By the way, they are coming over and over again.";
 			mes "I don't know where they are from.";
 			next;
 			switch(select("Don't ask anymore.:Asking for the place of vermin came.")) {
 			case 1:
 				emotion ET_CRY;
-				mes "[Cleanyang]";
+				mes "[클리냥]";
 				mes "...what's wrong with your face?";
 				mes "Are you afraid of sending on an errand?";
 				mes "What are you thinking about me... meow, meow...?";
@@ -3638,12 +3638,12 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 				mes "Leave him alone.";
 				close;
 			case 2:
-				mes "[Cleanyang]";
+				mes "[클리냥]";
 				mes "Does someone will go there and check it?";
 				mes "Please, search everywhere of the ship Navi?";
 				mes "I can't live like this! Meow, meow!";
 				next;
-				mes "[Cleanyang]";
+				mes "[클리냥]";
 				mes "There is definitely something I do not know. Meow.";
 				mes "Meow... I'll clean this place up. Please find something instead of me.";
 				set mal_qook,1;
@@ -3657,45 +3657,45 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 	} else if (mal_qook == 1) {
 		if (checkquest(7261) != -1 && checkquest(7262) != -1 && checkquest(7263) != -1) {
 			emotion ET_HUK;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Uh. What is that? Meow.";
 			mes "This is cat's ship biscuit... It might be left for a long time...";
 			mes "No way...!";
 			next;
 			select("Yeah, this is it.");
 			emotion ET_SCRATCH;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "There were infested with insects because sailors hided and left the cat's ship biscuit..";
 			mes "I got a scolding cause of just teeth grinder?";
 			mes "Meow!";
 			next;
 			select("Teeth Grinder?");
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "That is right, meow.";
 			mes "This is stiff-baked bread for preserve easily during sailing, meow.";
 			mes "It is too hard, so if you just bite this, probably your canine will be broken, meow.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "It is baked with just salt and flour for preserve long time that is why it does not have any taste.";
 			mes "More than all..... look at this.";
 			next;
 			mes "Cleanyang breaks cat's ship biscuit with hammer and chisel";
 			mes "and hit on the floor. Then...";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "........can you see something coming out from here?";
 			mes "This is Weevil Bug..........";
 			mes "It is such a castle of insects.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Maybe someone really does not want to eat this.";
 			mes "These insects are left before we are settled on island and change the menu.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "After settled on this island, we did not make cat's ship biscuit due to fresh ingredients.";
 			mes "........";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Please show this to chef and tell him that Cleanyang really cleaned up very well.";
 			mes "Well... I'm still afraid of chef...";
 			mes "...please! Meow!";
@@ -3706,104 +3706,104 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 			erasequest 7260;
 			setquest 7264;
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Ah, that cat's ship biscuit is still fine, so just try to eat.";
 			mes "Do you wonder what is that? It was a great food even though it's not look good...";
 			close;
 		}
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Please search the ship Navi and find the place of origin.";
 		mes "I just believe you.";
 		close;
 	} else if (mal_qook == 2) {
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "If you show cat's ship biscuit to chef and those insects were from there,";
 		mes "my misunderstanding will be resolved.";
 		next;
 		select("Why don't you go by yourself?");
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Um... I still have to clean up...";
 		mes "I'm still scared of my chef, so please.";
 		close;
 	} else if (mal_qook == 3) {
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Chef gets angry.";
 		mes "Just beg for mercy!";
 		close;
 	} else if (mal_qook == 4) {
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Did you say that chef was more upset about cat's ship biscuit?";
 		mes "From now, I don't have to crying?";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "If chef needs something, Just bring it for him~";
 		mes "Is that good for each other?";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "When chef is satisfied and pleased, just come at that time.";
 		mes "I may not able to clean up until that time because I'm nervous. Meow....";
 		close;
 	} else if (mal_qook == 5) {
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Did you finish work what chef wanted?";
 		mes "By the way, why do you make cat's ship biscuit suddenly?";
 		next;
 		select("New menu for you.");
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Meoooow----!!";
 		mes "Keemeoooow!!";
 		mes "Nyahuhuh... Kmeoooow!";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Nooo!!!!!!!!!!!";
 		mes "Without cat's ship biscuit was a heaven. I don't want to go hell again!!!!";
 		mes "Kmeoooow... Kmeoooow... Kmeoooow~";
 		next;
 		switch(select("Tickling under the chin.:Hit the end of nose.:Tap on butt.")) {
 		case 1:
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Meoow... Koleung koleung...";
 			mes "Kyarreung...";
 			mes "Huahhuah... Golgolgol...";
 			next;
 			break;
 		case 2:
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Eung Kya-!";
 			mes "Uh nyanyanyanaynyan!";
 			mes "What the heck are you doing!";
 			next;
 			break;
 		case 3:
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Heu keeyangyang";
 			mes "Heunyang... Euhnyang-!";
 			mes "What are you doing!";
 			next;
 			break;
 		}
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Please stop...";
 		mes "Now, be calm.";
 		mes "I understand that chef's saying and huge plan.";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Hey, human who helped me, you, you!";
 		mes "Could you do me favor.";
 		mes "If the menu will be changed and provide cat's ship biscuit, definitely they appear...";
 		next;
 		select("What?");
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Cat the Cat!";
 		mes "Cats who hide cat's ship biscuit secretly.";
 		mes "No one says that do not want to eat and throw away because they are scare chef.";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Absolutely, they begin to hide cat's ship biscuit...";
 		mes "And it will be infested by insects!";
 		mes "Chef will give a scolding again!";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "So let me see you everyday from provided cat's ship biscuit tomorrow.";
 		mes "You did good job. This is a token of thanks.";
 		set mal_qook,6;
@@ -3814,19 +3814,19 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 	}
 	switch(rand(3)) {
 	case 0:
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Ohohohong...";
 		mes "Euhohohohong...";
 		mes "It's horrible... I got cat's ship biscuit but I don't know when It was made.";
 		mes "It's really hard. I almost lost my teeth.";
 		break;
 	case 1:
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Chef might forget everything that he gave me a scolding cause of insects.";
 		mes "He got a shock by cat's ship biscuit. Is this bigger case than the clean up?";
 		break;
 	case 2:
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "I'm a cleaning cat Cleanyang~";
 		mes "Meow~";
 		mes "Make a scratch others' door of house Meow~";
@@ -3835,28 +3835,28 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		break;
 	}
 	next;
-	mes "[Cleanyang]";
+	mes "[클리냥]";
 	mes "By the way, what is going on?";
 	next;
 	switch(select("It's time to promise~:I'm here to see the result~:Shake your butt~")) {
 	case 1:
 		if (checkquest(7267,PLAYTIME) == 0) {
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Uh? Not yet.";
 			mes "Today's cat's ship biscuit is not provided yet, so I will know that after wait little bit more.";
 			mes "It might be after chef's distribution of cat's ship biscuit.";
 			close;
 		}
 		if (checkquest(7268) != -1) {
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "My service to you today.";
 			mes "Recently, there are 9 spot that hided cat's ship biscuit as well.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Someone think that good angel took them all as I collected and threw away.";
 			mes "He still hide them that place.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "It is so easy because I don't have to search everywhere, but...";
 			mes "Please search the 9 spot where hiding frequently.";
 			close;
@@ -3864,20 +3864,20 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		if (checkquest(7267,PLAYTIME) == 2)
 			completequest 7267;
 		erasequest 7267;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Is there guy who hide cat's ship biscuit today?";
 		mes "Probably there he is?";
 		next;
 		switch(select("Try to search today.:Maybe not today.")) {
 		case 1:
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "My service to you today.";
 			mes "The inside of ship Navi, home and cat tower too. Don't even miss a blade of grass.";
 			mes "Search everywhere.";
 			setquest 7268;
 			close;
 		case 2:
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Do you think so?";
 			mes "If so, It's good thing.";
 			mes "Anyway, It is not infested of insects due to we find them and remove right away.";
@@ -3886,7 +3886,7 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		}
 	case 2:
 		if (checkquest(7268) == -1) {
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Um? Nobody request for collecting cat's ship biscuit today.";
 			mes "By the way, what is the result report?";
 			mes "Are you sick?";
@@ -3894,16 +3894,16 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 		}
 		if (checkquest(7261) != -1 && checkquest(7262) != -1 && checkquest(7263) != -1 && checkquest(7269) != -1 && checkquest(7270) != -1 &&
 		    checkquest(7271) != -1 && checkquest(7272) != -1 && checkquest(7273) != -1 && checkquest(7274) != -1 && checkquest(7275) != -1) {
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Um, the rising cat's ship biscuit spot!";
 			mes "Did you collect all fully?";
 			mes "I guess this is pretty enough.";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Just take all finding cat's ship biscuit.";
 			mes "Taste is not bad and have a resilient too...";
 			next;
-			mes "[Cleanyang]";
+			mes "[클리냥]";
 			mes "Ok today's work is enough. Please come tomorrow!";
 			mes "There will be tomorrow's cat's ship biscuit!";
 			mes "Nya hahahong~";
@@ -3923,24 +3923,24 @@ mal_in02,76,63,7	script	Cleanyang	544,{
 			getitem 12636,10; //Malang_Sp_Can
 			close;
 		}
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Did you find all of them?";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Someone think that good angel took them all as I collected and threw away.";
 		mes "He still hide them that place.";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "It is so easy because I don't have to search everywhere, but";
 		mes "please search the 9 spot where hiding frequently.";
 		close;
 	case 3:
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Meooow-!";
 		mes "What are you doing? Meow!";
 		mes "Goreureureung...";
 		next;
-		mes "[Cleanyang]";
+		mes "[클리냥]";
 		mes "Hmhm.";
 		mes "Hey, don't do that.";
 		mes "...isn't it a crime? Meow.";
@@ -4156,13 +4156,13 @@ malangdo,141,178,0	script	#Darkweed6	844,{
 	close;
 }
 
-malangdo,133,134,0	script	Strange Pile of Sand#7	557,{
+malangdo,133,134,0	script	수상한 모래더미#7	557,{
 	if (checkweight(1201,1) == 0) {
 		mes "- You have too many items so you can't continue the quest. -";
 		close;
 	}
 	if (checkquest(7268) != -1) {
-		set .@quest, (strnpcinfo(0) == "Strange Pile of Sand#7")?7270:7275;
+		set .@quest, (strnpcinfo(0) == "수상한 모래더미#7")?7270:7275;
 		if (checkquest(.@quest) == -1) {
 			mes "The pile of sand is billowed like a grave. Should be something in there.";
 			mes "According to rumors, cats have a habit to bury with sand after stool...";
@@ -4198,7 +4198,7 @@ malangdo,133,134,0	script	Strange Pile of Sand#7	557,{
 	mes "- That's it... -";
 	close;
 }
-malangdo,197,237,0	duplicate(Strange Pile of Sand#7)	Strange Pile of Sand#12	557
+malangdo,197,237,0	duplicate(수상한 모래더미#7)	수상한 모래더미#12	557
 
 malangdo,232,131,0	script	#UnderStairs8	844,{
 	if (checkweight(1201,1) == 0) {
@@ -4330,13 +4330,13 @@ mal_in01,24,72,0	script	#FootholdTower11	844,{
 
 // Help Chef Nyas :: mal_day_qook
 //============================================================
-mal_in02,187,58,3	script	Chef Nyas	548,{
+mal_in02,187,58,3	script	조리장 냐스	548,{
 	if (checkweight(1201,1) == 0) {
 		mes "- You have too many items so you can't continue the quest. -";
 		close;
 	}
 	if (BaseLevel < 60) {
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "What is going on boy?";
 		mes "I don't want to talk to you. Get away from me!";
 		next;
@@ -4345,26 +4345,26 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		close;
 	}
 	if (mal_qook < 2) {
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "I'm a unique chef in entire fleet.";
 		mes "Do you want something from me?";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Even though I have no time to spare, I usually serve a plate of soup gladly, but now!";
 		mes "The ingredient is infested with worms cause of one stupid's carelessness!";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Therefore, when my blaze of anger becomes quiet like a calm sea, come back again!";
 		mes "By the way, where is that stupid!";
 		close;
 	} else if (mal_qook == 2) {
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "I'm a unique chef in entire fleet.";
 		mes "Do you want something from me?";
 		next;
 		switch(select("Show the cat's ship biscuit.:Talk about story of Cleanyang.")) {
 		case 1:
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Hm? is this cat's ship biscuit?";
 			mes "Specially, I can feel the flow of time from this biscuit.";
 			mes "By the way, how can you have this?";
@@ -4374,7 +4374,7 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 			next;
 			break;
 		case 2:
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Why that stupid?";
 			mes "Are you trying to make a thunder storm in the calm sea?!";
 			next;
@@ -4383,29 +4383,29 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 			next;
 			break;
 		}
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "So this is happening because of cat buscuit?";
 		mes "Yes, is this story about that?";
 		next;
 		select("You are quick understand.");
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "..........He is such a jerk!";
 		mes "In addition, What? Find another one in captain's room?!";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Thomas......";
 		mes "He has position that should take the lead to sailors, but he got a wrong?";
 		mes "Ududuk.";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "This cat's ship biscuit was! Always thankful food to help our starvation during a long sailing!";
 		mes "No matter what taste, It always saves us at crossroads of life and death!";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Although the situation is not able to use fire for a month, two month even 1000 days!";
 		mes "This is blessed food to guarantee on open sea!";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "How many chef cats have difficult time to make a cat's ship biscuit!";
 		mes "The military discipline has been relaxed because we settled down on island! Already forget the dangerous situation?!";
 		next;
@@ -4418,28 +4418,28 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		close;
 	} else if (mal_qook == 3) {
 		if (!rand(3)) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "There you are? I made a bad break.";
 			mes "I made a big decision when you are out for me.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "After settled down on Island, depraved mindset cause of plentiful foods.";
 			mes "Therefore, I'll change the menu that cat's ship biscuit is provided for one meal a day!.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "That ingredient is needed to make cat's ship biscuit.";
 			mes "There is no wheat on this island, so I need to get your help.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Anything is possible to grind flour and knead dough.";
 			mes "Please bring that kind of ^4d4dff10 Grain^000000 and ^4d4dff 1 Plain Sauce^000000.";
 			mes "Replace salt with seawater..";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Could we get them easily on land?";
 			mes "I'll get the rest what I need.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "I'll fix their taste that is crazy for canned food.";
 			mes "He approached like a calm sea that has horrible thunder storm";
 			mes "I'll give a pain like a god of sea's anger! Kmeow~~!!";
@@ -4456,11 +4456,11 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		close;
 	} else if (mal_qook == 4) {
 		if (countitem(577) >= 10 && countitem(7454) > 0) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Finally here. Wow, this land is pretty different.";
 			mes "That is enough to process.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "If you are ok, I want to get these food everyday.";
 			mes "If you don't mind, just come back tomorrow.";
 			delitem 577,10; //Grain
@@ -4470,38 +4470,38 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 			setquest 7276;
 			close;
 		}
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "That ingredient is needed to make cat's ship biscuit.";
 		mes "There is no wheat on this island, so I need to get your help.";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Anything is possible to grind flour and knead dough.";
 		mes "Please bring that kind of ^4d4dff10 Grain^000000 and ^4d4dff 1 Plain Sauce^000000.";
 		mes "Replace salt with seawater...";
 		close;
 	}
-	mes "[Chef Nyas]";
+	mes "[조리장 냐스]";
 	mes "There you are.";
 	mes "It's not mealtime... Why are you here?";
 	next;
 	switch(select("What's today's work?:Food Delivery:Just bored...")) {
 	case 1:
 		if (checkquest(7276,PLAYTIME) == 0) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Now, cat's ship biscuit is being baked in this oven.";
 			mes "It's all for your delivery food.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Quiet wave with a little salty and savory smell.";
 			mes "The food of sea is coming to make sailor's heart flutter.";
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "I've got enough ingredients of cat's ship biscuit today.";
 			mes "Let me order next time.";
 			close;
 		}
 		if (mal_food > 0) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Um? You are dull.";
 			mes "You already took my order list?";
 			mes "Just take care of them.";
@@ -4509,42 +4509,42 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		}
 		if (checkquest(7276,PLAYTIME) == 2)
 			completequest 7276;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Here you are.";
 		mes "I need ingredients for cat's ship biscuit now. Fortunately, you are here at the right moment.";
 		if (checkquest(7276) != -1)
 			erasequest 7276;
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Could you bring some ingrediednts for cat's ship biscuit from land?";
 		mes "If you say so, I have one more thing to request...";
 		next;
 		switch(select("I'm busy today.:Sure, what are you need?")) {
 		case 1:
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "That is sad news.";
 			mes "However, it's ok. Cat's ship biscuit is originally prepared food.";
 			mes "Anyway, today's biscuit wll be provided when the second moon is full.";
 			next;
 			switch(select("So teeth grinder?:Worm castle...:Do not throw away?")) {
 			case 1:
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "What do you want to hear from me?!";
 				mes "Kmeow!!";
 				mes "The hardness of cat's ship biscuit is like a noble endurance in the sea!";
 				mes "Do not ignore this!!";
 				close;
 			case 2:
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "Only idiot who does not take care of preserving says like that.";
 				mes "Dry enough and seal it in cool dry place. Tut-tut.";
 				next;
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "Anyway Is that all about protein?";
 				mes "Why don't you eat at night if it's on your mind!";
 				close;
 			case 3:
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "Never throw food!";
 				mes "When you are hit by cat's ship biscuit, you will get bruise or bleeding but";
 				mes "It is not that reason!!!";
@@ -4553,11 +4553,11 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 			}
 		case 2:
 			if (mal_food == 0) {
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "The ingredients of cat's ship biscuit are 10 Grain and 1 Plain Sauce as usual.";
 				mes "And I'd like to study food of human, so bring one of them.";
 				next;
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "My curious food is...";
 				set .@i, rand(1,66);
 
@@ -4569,30 +4569,30 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 				setquest 7280+.@i;
 				mes "Just one dish is enough, so please do it together.";
 				next;
-				mes "[Chef Nyas]";
+				mes "[조리장 냐스]";
 				mes "You have to bring the dish that made from fresh ingredients.";
 				mes "^ff0000I will refuse the instant food.^000000";
 				close;
 			}
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Hey my friend, you have a bad memory.";
 			mes "Did you already take my order list?";
 			close;
 		}
 	case 2:
 		if (mal_food == 0) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Do you remember what I ask to bring?";
 			mes "I have no idea.";
 			close;
 		} else if (mal_food > 66) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "What did I say to bring?";
 			mes "I don't remember?";
 			mes "Did you get something wrong to come here?";
 			close;
 		}
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Is that ingredients of cat's ship biscuit and the food of human?";
 		mes "Let me check what you brought...";
 		next;
@@ -4603,7 +4603,7 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 		set .@food, .@StartID[(.@i-1)/5]+((.@i-1)%5);
 
 		if (countitem(577) >= 10 && countitem(7454) > 0 && countitem(.@food) > 0) {
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Great.";
 			mes "This is that food!";
 			mes "It will be good reference. Well done.";
@@ -4621,22 +4621,22 @@ mal_in02,187,58,3	script	Chef Nyas	548,{
 
 			getexp 50000,80000;
 			next;
-			mes "[Chef Nyas]";
+			mes "[조리장 냐스]";
 			mes "Alright, could you come tomorrow?";
 			mes "When the time to you coming, I'm very excited.";
 			mes "Nyahuh Nyahuh";
 			close;
 		}
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "Yummm...";
 		mes "Did I overestimate your ability?";
 		mes "Double check what is short and bring them properly.";
 		next;
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "There is not different from undiscerning young cat.";
 		close;
 	case 3:
-		mes "[Chef Nyas]";
+		mes "[조리장 냐스]";
 		mes "You are quite bold like a killer whale.";
 		mes "If you don't have any business, don't touch vegetable and go away.";
 		close;
@@ -9642,7 +9642,7 @@ mal_in01,134,221,4	script	KungKung#gamer	422,{
 		case 1: // Attack
 			mes "How would you like to attack?";
 			mes " ";
-			mes "　 Tip !!";
+			mes "?? Tip !!";
 			mes "Choose back: ^FF0000You win if the cat shows the back of its paw.^000000";
 			mes "Choose palm: ^FF0000You win if the cat shows the palm of its paw.^000000";
 			next;
@@ -9688,7 +9688,7 @@ mal_in01,134,221,4	script	KungKung#gamer	422,{
 		case 2: // Defend
 			mes "How would you like to defend?";
 			mes " ";
-			mes "　 Tip !!";
+			mes "?? Tip !!";
 			mes "Choose back: ^FF0000You win if the cat shows the back of its paw.^000000";
 			mes "Choose palm: ^FF0000You win if the cat shows the palm of its paw.^000000";
 			next;

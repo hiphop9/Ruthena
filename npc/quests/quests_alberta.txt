@@ -37,148 +37,134 @@
 
 // Doll Quest
 //============================================================
-alberta,117,135,0	script	Elin	96,{
+alberta,117,135,0	script	꼬마아이	96,{
 	if (checkweight(1201,1) == 0) {
-		mes "[Elin]";
+		mes "[꼬마아이]";
 		mes "^3355FFWait a second! Right now, you're carrying too many items with you. Please come back after putting some of your things into Kafra Storage.^000000";
 		close;
 	}
-	mes "[Elin]";
+	mes "[꼬마아이]";
 	if (Sex == SEX_MALE) {
-		mes "Hello~!";
-		mes "Heh heh, you're a boy, so you probably don't like dolls, right? Well, I like dolls very very much!";
+		mes "안녕 오빠~? 히이... 오빤 남자니까";
+		mes "인형 안 좋아하겠지? 난 인형 아주";
+		mes "많~이 좋은데!";
 	} else {
-		mes "Hi hi~! Oh, oh, do you like dolls? I really really like dolls... Hee Hee~!";
+		mes "언니 안녕~!언니, 언니, 인형 좋아해?";
+		mes "난 있지. 인형이 너무너무 좋아~";
+		mes "에헤헷~!";
 	}
 	next;
-	mes "[Elin]";
-	mes "You know, I really really want a new doll! I hope my daddy will give me one on my birthday...!";
+	mes "[꼬마아이]";
+	mes "있잖아~ 나, 새 인형이 가지고 싶은데~";
+	mes "돌아오는 생일엔 분명히 우리 아빠가";
+	mes "인형을 사다주실꺼야.";
 	next;
-	switch(select("Um, I hope your daddy gives you one too.:How about I give you one now?")) {
+	switch(select("좋겠구나...:내가 인형 하나 줄까?")) {
 	case 1:
-		mes "[Elin]";
-		mes "Yeah, I'm hoping";
-		mes "he gives me a Yoyo";
-		mes "doll. They're so cute!";
+		mes "[꼬마아이]";
+		mes "어떤 인형이 좋을까....음 이번엔";
+		mes "원숭이 요요 인형이 가지고 싶어.";
+		mes "헤헤~ 이뻐. 요요 인형. 이뻐 이뻐.";
 		close;
 	case 2:
 		if (MaxWeight - Weight < 1000) {
-			mes "[Elin]";
+			mes "[꼬마아이]";
 			if (Sex == SEX_MALE) {
-				mes "Maybe you should put some of your stuff away first, you look like you're carrying too much, hee hee~";
+				mes "짐을 좀 먼저 치워두는 게 좋을 것 같은데, 너무 많이 들고 다니는 것 같군요, 히히~";
 			} else {
-				mes "Do you always carry so much with you? Put some of your things away first, okay?";
+				mes "항상 그렇게 많은 것을 가지고 다니나요? 먼저 네 물건 좀 치워봐, 알았어?";
 			}
 			close;
 		}
-		mes "[Elin]";
+		mes "[꼬마아이]";
 		if (Sex == SEX_MALE) {
-			mes "Oh my goodness!";
-			mes "Really? You're";
-			mes "such a sweetie~!";
+			mes "어? 정말정말? 오빠가 나한테 인형";
+			mes "줄꺼야?와아아~ 인형 좋아!";
+			mes "무슨 인형을 줄꺼야? 정말로 주는거지?";
 		} else {
-			mes "Will you really?";
-			mes "You're gonna give";
-			mes "me a doll? Yaaaay~";
+			mes "어? 정말정말? 언니가 나한테 인형";
+			mes "줄꺼야?와아아~ 인형 좋아!";
+			mes "무슨 인형을 줄꺼야? 정말로 주는 거지?";
 		}
 		next;
-		mes "[Elin]";
-		mes "What kind of doll are you going to give me? Are you really gonna give me one?";
-		next;
-		switch(select("Poring Doll:Chonchon Doll:Puppet:Rocker Doll:Spore Doll:Osiris Doll:Baphomet Doll:Raccoon Doll:Yoyo Doll:I'm as adorable as a doll.")) {
+		switch(select("포링인형:촌촌인형:봉제인형:메뚜기인형:스포아인형:오시리스인형:바포메트인형:너구리인형:원숭이인형:내가 인형이야.")) {
 		case 1:
 			if (countitem(741) >= 1) {
 				delitem 741,1; //Poring_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Aww...";
 				mes "I have a lot";
 				mes "of Poring dolls...";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				if (Sex == SEX_MALE) {
 					mes "But since a cute boy is giving it to me, I'll happily take it! Hee hee, soft and fluffy Poring doll~";
 				} else {
 					mes "But since a nice girl is giving it to me, I'll take it! Hee he, soft and fluffy Poring doll~";
 				}
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Ooh, let me give you something as a little thank you. You see, I hid some candy so I can eat it without telling mommy.";
 				next;
 				getitem 529,1; //Candy
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				if (Sex == SEX_MALE) {
 					mes "I don't know if you're too old to like candy, but I guess it's okay.";
 				} else {
 					mes "So, try not to eat too much, okay? Otherwise, you might get in trouble!";
 				}
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Thank you";
 				mes "so much for";
 				mes "the Poring doll!";
 				close;
 			} else {
-				mes "[Elin]";
-				if (Sex == SEX_MALE) {
-					mes "Aww...?";
-					mes "Were you only teasing me?";
-				} else {
-					mes "Aww...";
-					mes "You're not making fun of me are you?";
-				}
-				next;
-				mes "[Elin]";
-				mes "I guess you forgot it somewhere...";
-				close;
+				callsub L_Record;
 			}
 		case 2:
 			if (countitem(742) >= 1) {
 				delitem 742,1; //Chonchon_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Agh--!";
 				mes "A Ch-Ch, Chonchon doll?!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				if (Sex == SEX_MALE) {
 					mes "But since... You're... Such a nice guy... I better take it...!";
 				} else {
 					mes "But since... Since it's a gift... I guess I'll take it...";
 				}
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Mmm~";
 				mes "Let me give you";
 				mes "something in return...";
 				next;
 				getitem 530,1; //Candy_Striper
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "If you eat too much, your teeth will start to rot... at least, that's what Mommy says.";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "And..";
 				mes "Uh...";
 				mes "Thank you";
 				mes "for the doll?";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Chonchon dolls are ugly anyways, but you still lied to me! How can you be so mean?!";
-				next;
-				mes "[Elin]";
-				mes "Waaaaaaaaah~~";
-				close;
+				callsub L_Record;
 			}
 		case 3:
 			if (countitem(740) >= 1) {
 				delitem 740,1; //Stuffed_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Wow...!";
 				mes "It looks like a bunny!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "I really like this Puppet~ Heh hehe! Thank you so much~";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Ooh ooh!";
 				mes "I have something";
 				mes "for you too!";
@@ -186,94 +172,69 @@ alberta,117,135,0	script	Elin	96,{
 				mes "did it... Ah!";
 				next;
 				getitem 530,1; //Candy_Striper
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Here it is! It's some of the candy Santa gave me. Go ahead and try some! Oh, and thank you so much for the doll!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Awww, you were only kidding? W-W-Why are you teasing me like that?";
-				next;
-				mes "[Elin]";
-				mes "^666666*Sniff...*^000000";
-				next;
-				mes "[Elin]";
-				mes "Waaaaaaaaah~~";
-				close;
+				callsub L_Record;
 			}
 		case 4:
 			if (countitem(752) >= 1) {
 				delitem 752,1; //Grasshopper_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Ooh! Rocker Doll!";
 				mes "It's the Rocker that likes singing and dancing! I don't like grasshoppers, but I like this because it's cute~";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hmmm, I should give you something too, huh? Let's see, I have what my grandpa gave me...";
 				next;
 				getitem 532,7; //Banana_Juice
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Here you go! We have a lot of this at home, so I'll give it to you, okay? Oh, and thank you so much for the doll~ I love cute dolls!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Awww...";
-				next;
-				mes "[Elin]";
-				mes "You don't";
-				mes "really have a doll...?";
-				mes "I was so excited about it, too...";
-				close;
+				callsub L_Record;
 			}
 		case 5:
 			if (countitem(743) >= 1) {
 				delitem 743,1; //Spore_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "It's a mushroom?";
 				mes "Ewwwwwwwww, yucky!";
 				mes "Mommy made me eat";
 				mes "mushrooms today, too...";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "But this doll is cute, so I'll take it. But I'm still not gonna eat mushrooms! Heh heh~";
 				next;
 				getitem 538,5; //Well_Baked_Cookie
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hehe~ My mommy made this! It's really yummy. I love cookies, too. So try it, you'll like it! Hee hee!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Thanks for";
 				mes "the doll! I'll";
 				mes "take good care of it!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Eh...?";
-				mes "You don't";
-				mes "have a doll?";
-				next;
-				mes "[Elin]";
-				mes "Awww...";
-				mes "It's not nice";
-				mes "to tease people";
-				mes "like that. ^666666*Sniff, sniff*^000000";
-				close;
+				callsub L_Record;
 			}
 		case 6:
 			if (countitem(751) >= 1) {
 				delitem 751,1; //Osiris_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Ahhhhh!";
 				mes "What is this";
 				mes "thing?! It's so scary!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "I've never seen a doll like this before. Where it's from? Hmm? Since I've never seen this kind of doll before, I'm gonna show it to my daddy, too. Hehe~! He'll be surprised!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Here, since you gave me such a nicely made doll, I better give you something good too.";
 				next;
 				getitem 522,2; //Fruit_Of_Mastela
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "I found it when I secretly went to the forest. I took it because it has pretty colors!";
 				if (Sex == SEX_MALE) {
 					mes "Since there's two, you can share it with your girlfriend. Hee hee~!";
@@ -282,84 +243,76 @@ alberta,117,135,0	script	Elin	96,{
 				}
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Awww...";
-				mes "Why do you have";
-				mes "to make fun of me?";
-				close;
+				callsub L_Record;
 			}
 		case 7:
 			if (countitem(750) >= 1) {
 				delitem 750,1; //Baphomet_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Huh?";
 				mes "It's a little goat...";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "It's so weird. It's cute but it's also scary at the same time. Well, since you gave me a pretty doll, I wanna give you something, too.";
 				next;
 				getitem 525,5; //Panacea
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "My daddy gave me this when I was really sick. I'm not sick anymore so you can use it when you need to. Hehehe~";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hee hee~";
 				mes "Thank you for";
 				mes "the doll. I won't lose it!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "You big liar! Why are you pretending to be nice?!";
-				close;
+				callsub L_Record;
 			}
 		case 8:
 			if (countitem(754) >= 1) {
 				delitem 754,1; //Raccoondog_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hehe, it's a";
 				mes "raccoon doll.";
 				mes "It's very very cute~";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "I don't like";
 				mes "Smokies in real life,";
 				mes "but this doll is nice!";
 				next;
 				getitem 539,3; //Piece_Of_Cake
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Here, let me give you some cake my grandma made. It's really yummy. I don't know if you like sweets or not, but it's really good! Please try some!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hee hee~";
 				mes "Thanks for the doll.";
 				mes "I'm gonna keep it";
 				mes "in my room!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Hey! How come you have to say things like that? Are you making fun of me?!";
-				close;
+				callsub L_Record;
 			}
 		case 9:
 			if (countitem(753) >= 1) {
 				delitem 753,1; //Monkey_Doll
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Woooooooow~!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "A Yoyo doll! It's so pretty! You're really gonna give it to me?! Yay! Thank you so much! I really like it! Hee hee!";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Since you gave";
 				mes "me such a pretty doll,";
 				mes "I wanna give you";
 				mes "something, too!";
 				next;
 				getitem 608,1; //Seed_Of_Yggdrasil
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "My daddy picked it up on his way to another town. It looks like some kind of seed. I tried planting it in front of our house but it won't grow. Do you want to try?";
 				next;
-				mes "[Elin]";
+				mes "[꼬마아이]";
 				mes "Hehe~";
 				mes "Thanks for";
 				mes "the doll. I'll hug";
@@ -367,99 +320,124 @@ alberta,117,135,0	script	Elin	96,{
 				mes "to sleep!";
 				close;
 			} else {
-				mes "[Elin]";
-				mes "Hey...";
-				mes "How come you're making fun of me?!";
-				close;
+				callsub L_Record;
 			}
 		case 10:
-			mes "["+strcharinfo(0)+"]";
-			mes "I'm as adorable as a doll...";
-			next;
-			mes "[Elin]";
-			mes "Whaaaaaaaaaaat...?";
-			next;
-			mes "[Elin]";
-			mes "^3355FFWhat did^000000";
-			mes "^3355FFyou just say?!^000000";
+			mes "[꼬마아이]";
+			mes "흥~ 흥이다~ 어리다고 놀리지 마~?";
+			mes "바~보. 메롱~";
 			close;
 		}
 	}
+
+L_Record:
+	mes "[꼬마아이]";
+	if (Sex == SEX_MALE) {
+		mes "엥... 오빠, 나 놀리는거지? 인형도";
+		mes "없으면서 준다고 놀리는거지?";
+		mes "우에... 후에... 후에에에에에...";
+	} else {
+		mes "엥... 언니, 나 놀리는거지? 인형도";
+		mes "없으면서 준다고 놀리는거지?";
+		mes "우에... 후에... 후에에에에에...";
+	}
+		next;
+		mes "[꼬마아이]";
+		mes "우에에에에엥~ 우에엥~";
+		close;
 }
 
 // 'Boy's Cap' Quest
 //============================================================
-alberta_in,28,145,4	script	Grampa	120,{
-	mes "[Grampa]";
-	mes "*Gasp*...";
-	mes "....*Gasp!*";
-	mes "Oh...";
-	mes "Some may say I've lived a full life on wine, women and song...";
+alberta_in,29,140,4	script	학생모자할아버지	120,{
+	mes "[할아버지]";
+	mes "에고에고 ..";
 	next;
-	mes "[Grampa]";
-	mes "But my soul still burns with youthful vigor! It's just... This old body can't keep up anymore... *Hack! Wheeeeze~*";
+	mes "[할아버지]";
+	mes "돌아보면 참 부질없는 인생이 었어 ..";
+	mes "마음은 아직도 젊을때 그래로인데 ..";
+	mes "요즘은 예전같이 몸이 잘 따르질 .. 않 ..";
+	mes "쿨럭 !! 쿨럭 .. !!";
 	next;
 	if (countitem(1030) > 9) {
 		switch(select("Show him Tiger's Footskin.:Exchange it with Boys Cap.:Cancel")) {
 		case 1:
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "Ohhh~ !!";
 			mes "Is that...?";
 			mes "It is! ";
 			mes "That's Tiger's Footskin!! Even from here I can feel its powers!";
 			next;
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "One glance at it can restore your strength, one sniff and your blood boils with vigorous pleasure...";
 			next;
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "Just one bite...";
 			mes "Will revive my virility!!!! The Tiger's Footskin~!! Ohhhh! Ohh My God !! Please!!! Please give me that... Please...";
 			close;
 		case 2:
 			delitem 1030,10;  //Tiger_Footskin
 			getitem 5016,1; //Boy's_Cap
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "T... Thank you !!";
 			mes "With this I can revive my youthful splendor!! I must eat this thing right away !";
 			next;
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "...";
 			mes "Nope. Still feel OLD.";
 			mes "If anything, I feel even worse. Th-there's this buzzing in my head...";
 			close;
 		case 3:
-			mes "[Grampa]";
+			mes "[할아버지]";
 			mes "He...Hey, kid !! W-Wait !";
 			close;
 		}
 	} 
 	else {
-		switch(select("Talk:Cancel")) {
+		switch(select("대화한다:취소한다")) {
 		case 1:
-			mes "[Grampa]";
-			mes "Listen well...";
-			mes "You've got to take care of yourself as well as your can. Without your health, one cannot enjoy the pleasures of this mortal realm.";
+			mes "[할아버지]";
+			mes "자네도 잘듣게 .. 무엇보다 건강이";
+			mes "최고야 ..";
+			mes "젊을때 몸을 혹사하면 .. 늙어서";
+			mes "고생이지 ..";
 			next;
-			mes "[Grampa]";
-			mes "In order to restore my youth, I tried all sorts of things, mostly by hearsay, but nothing worked. In the end, I spent so much zeny on miracle cures, I ended up broke.";
+			mes "[할아버지]";
+			mes "그때의 그 튼튼한 몸을 찾아보려고";
+			mes "몸에 좋다는 것은 다 먹어봤지만 전혀";
+			mes "약발이 듣질 않아 ..";
+			mes "결국 젊어서 벌어놓은 재산을 다";
+			mes "탕진하고 말았지 ..";
 			next;
-			mes "[Grampa]";
-			mes "I've mostly given up on restoring my youth. But there is one hope left... Eating ^3355FFTiger's Footskin^000000, The King of Invigorators!!";
+			mes "[할아버지]";
+			mes "내 이제 젊음에 미련을 버린지";
+			mes "오래지만 .. 한가지 아쉬운게 있다면..";
+			mes "몸소신 갈구인생 15 년에 보약중에";
+			mes "보약인";
+			mes "^3355FF호랑이의 발바닥^000000 을 못 먹어 본 것";
+			mes "이라네 !!";
 			next;
-			mes "[Grampa]";
-			mes "Haven't you heard?! One glance would restore the color in my white hair, one sniff, even just one touch, and an 80 year-old would have another chance at youth... It's The King of Invigorators !";
+			mes "[할아버지]";
+			mes "들어는 보았는가 ?! 호랑이의 발바닥 ..";
+			mes "보기만 해도 머리가 서고 냄새만 맡아도";
+			mes "눈에 핏줄이 서며 만져만봐도 늦동이를";
+			mes "얻는다는";
+			mes "명약 중에 명약일세 !";
+			mes "이라네 !!";
 			next;
-			mes "[Grampa]";
-			mes "Before I die...";
-			mes "I wish I could eat 10 Tiger's Footskin. Then, I wouldn't have to die!";
-			next;
-			mes "[Grampa]";
-			mes "If someone helped me get them, I would give that person my precious item, ^3355FFBoys Cap^000000 without regret...";
+			mes "[할아버지]";
+			mes "아아 ..  내 죽기전에 고것 10개만";
+			mes "먹어보면 ..";
+			mes "소원이 없으련만..";
+			mes "그것만 .. 먹을 수 있다면 .. 내 유일한";
+			mes "재산인";
+			mes "추억의 ^3355FF학생모^000000 를 서슴없이 줄 것인데 ..";
 			close;
 		case 2:
-			mes "[Grampa]";
-			mes "Cough Cough !!";
-			mes "Tiger ....Tiger's ..... Foot ..... skin .....Cough Cough !!";
+			mes "[할아버지]";
+			mes "쿨럭 쿨럭!! ..";
+			mes "호 ..... 호랑이 ..... 의 발 ..... 바닥 .....";
+			mes "쿨럭 쿨럭 !!";
 			close;
 		}
 	}
@@ -992,115 +970,212 @@ alberta,91,70,4	script	Kinsey#tur	89,{
 	close;
 }
 
-alberta_in,23,104,4	script	Grandpa Turtle#tur	120,{
-	mes "[Grandpa Turtle]";
-	mes "Ooog...";
-	mes "So dizzy...";
+alberta_in,23,104,4	script	거북이영감#tur	120,{
+	mes "[거북할배]";
+	mes "딸꾹 ..";
+	mes "세계 무역의 중심지라는";
+	mes "알베르타라고 하는 곳이";
+	mes "변변찮은 주점도 없어서";
+	mes "내가 이런 곳에서 술을";
+	mes "마셔야 겠어 ?";
 	next;
-	mes "[Grandpa Turtle]";
-	mes "There isn't one decent drinking establishment in all of Alberta! But then again, why did I drink so much? Hmm...";
-	next;
-	switch(select("Tell me about Turtle Island:How can I get there?:Stop talking")) {
+	switch(select("' 거북이 섬 ' 에 대하여:거북이 섬 으로 가는 방법:대화를 그만둔다")) {
 	case 1:
-		mes "[Grandpa Turtle]";
-		mes "Eh...?";
-		mes "Turtle Island?";
+		mes "[거북할배]";
+		mes "평생을 통 털어서";
+		mes "구경조차 해보지 못 할";
+		mes "만큼 엄청난 양의 보물이";
+		mes "슴아있다느니 ..";
+		mes "수명을 비약적으로";
+		mes "늘리 수 있는";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "Well, there's a lot of folklore about that place. Some folk say that there's a mountain of treasure there.";
+		mes "[거북할배]";
+		mes "진귀한  명약이 있다느니 !";
+		mes "수많은 소문을 뒤로한채";
+		mes "실제로 존재하는지 . 그렇지";
+		mes "않은지 조차 확실치 않은";
+		mes "환상의 섬 !";
+		mes "하지만 나는 알고있지";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "Others folk say a potion that can prolong your lifespan can be found somewhere in Turtle Island. But nobody really knows for sure.";
+		mes "[거북할배]";
+		mes "자네가 . 진정한";
+		mes "바다의 사나이이고 . 또";
+		mes "올바른 마음가짐을 가진";
+		mes "트레져헌터 ( 모험가 ) 라면";
+		mes "자네를 위해 정보를";
+		mes "줄 수도 있네만 ..";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "But I'm sure that Turtle Island does exist, and that something wonderful can be found there.";
-		next;
-		mes "[Grandpa Turtle]";
-		mes "But only someone with a good heart that's eager for adventure should be able to go to that kind of place.";
-		next;
-		switch(select("^3333FF*ting!*^000000:Tell me more, old man!")) {
+		switch(select("+ + 빤짝 + +:오오오 ! 정보 ! 정보 ! 헤헤 !")) {
 		case 1:
-			mes "[Grandpa Turtle]";
-			mes "Ha ha ha~!";
+			mes "[거북할배]";
+			mes "헐헐헐 !";
 			if (Sex == SEX_MALE)
-				mes "I like the shine in your eye, my boy! I can see a little bit of myself in those eyes. Yes...";
+				mes "헐헐헐 눈빛이 맘에드는 구만";
 			else
-				mes "No use hiding the glint in your eyes, my dear! It's adventure you wish for, that much I can tell...";
+				mes "헐헐헐 눈빛이 맘에드는구만";
+				mes "좋오오앗 . 써어어 !";
+				mes "지금으로부터 십수년 전";
+				mes "그 때 당시 세계에서 가장";
+				mes "유명했던 모험가 중";
+				mes "한사람 이었던";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "Tell me...";
-			mes "Have you heard of a man named ^3355FFJornadan Niliria^000000? He, and a group of ten other men actually found Turtle Island!";
+			mes "[거북할배]";
+			mes "^3355FF` 조나단 닐리리야 '^000000 와";
+			mes "그 의 이름에 걸맞는";
+			mes "동료 열명은 -";
+			mes "이른바 환상의 섬 이라";
+			mes "불리우는 ` 거북이섬 ' 을 찾는";
+			mes "여행을 떠났었단다 ..";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "^3355FFJornadan Niliria^000000 was a man of strength and conviction. He and his crew gathered every clue they could about Turtle Island.";
+			mes "[거북할배]";
+			mes "이 드넒은 세계 그 어느 곳 에";
+			mes "있는지도 모를 . 환상의 섬 ..";
+			mes "어리숙한건지";
+			mes "패기가 넘치는건지 그들은";
+			mes "밑도 끝도 없이";
+			mes "찾아내기 시작했지만";			
 			next;
-			mes "[Grandpa Turtle]";
-			mes "Even after learning all that they could, much of their voyage relied on their hope and faith that the Turtle Island legend was true...";
+			mes "[거북할배]";
+			mes "좀 처럼 발견하기가 힘들었지";
+			mes "소문에 소문을 더하고";
+			mes "조금씩 조금씩 단서를 모아";
+			mes "거북이 섬으로 한걸음씩";
+			mes "전진했던거야";
+			mes "그 들은 가능했지";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "After a long, arduous journey, their efforts were rewarded, and they landed on Turtle Island!";
+			mes "[거북할배]";
+			mes "다른 동료들이야 어쨌든";
+			mes "리더인 ^3355FF` 조나단 닐리리야 '^000000 가";
+			mes "상당한 실력가였어 !";
+			mes "그 의 일화를 들어보자면";
+			mes "단순한 발차기와 같은";
+			mes "공격으로 레벨 10 의";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "However, it gets more complicated after that. I hear Niliria's crew had great difficulty getting back home for some reason.";
+			mes "[거북할배]";
+			mes "` 베쉬 ' 에 버금가는 힘을";
+			mes "내기도 했고 . 한손으로는";
+			mes "날아오는 화살을";
+			mes "잡아채면서 . 다른 한속으로는";
+			mes "동료에게 `힐 '을 외웠다고";
+			mes "할 정도였다나 뭐라나 -";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "Heh heh...";
-			mes "If you want to learn more, why don't you go to the eastern end of the Alberta port? There's a scholar there that knows more of this story.";
+			mes "[거북할배]";
+			mes "뭐 . 소문이 소문인만큼";
+			mes "믿기 힘든 이야기가 대부분";
+			mes "이지만 . 어찌되었거나";
+			mes "` 거북이섬  ' 을 발견했다고";
+			mes "하는 몇 안되는 모험가 중";
+			mes "한사람 이었다는 데에는";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "He could probably shed more light on the subject of Turtle Island's legend.";
+			mes "[거북할배]";
+			mes "모두들 할말이 없었지 ..";
+			mes "이런저런 고난을 겪기도";
+			mes "하면서 그 들은 결국 도착했어";
+			mes "` ^3355FF거북이 섬^000000 ' 에 !!";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "Ah, one more thing! Look around that scholar and you should find his ^3355FFJournal^000000. I promise that it will be an interesting read.";
+			mes "[거북할배]";
+			mes "하지만 거북이 섬에서";
+			mes "있었던 어떤 사건에 의해";
+			mes "그 들은 그 곳에서";
+			mes "남은 여생을 마쳐야 했다고 해";
+			mes ". . . . . 뭐 정확히는 모르겠어";
+			mes "이 보다 더 자세한";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "Ah...";
-			mes "The fire of youth!";
-			mes "When the winds die, may your dreams fill your sails~ Good luck to you!";
+			mes "[거북할배]";
+			mes "이야기를 듣고 싶다면";
+			mes "이 알베르타 동쪽 항구 끝 쪽";
+			mes "어딘가에서 헤메이고 있을";
+			mes "거북섬 학자에게";
+			mes "말을 건네보오 ..";
+			mes "조금 더 구체적이고";
+			next;
+			mes "[거북할배]";
+			mes "확실한 내용을";
+			mes "알고 있을 터이니 ..";
+			next;
+			mes "[거북할배]";
+			mes "아 참 그리고 . 학자의";
+			mes "주변을 잘 살펴 보면";
+			mes "언제나 지니고 다니는";
+			mes "` ^3355FF일지^000000 ' 가 있어";
+			mes "읽어보면 꽤 흥미로울거야";
+			mes "한번 잘 찾아 보아 -";
 			close;
 		}
-		mes "[Grandpa Turtle]";
-		mes "Grrrr...!";
-		next;
-		mes "[Grandpa Turtle]";
-		mes "I may not know much, but I won't talk to anyone motivated solely by greed. Go home!";
+		mes "[거북할배]";
+		mes "이런 ! 썩은 !";
+		mes "동태눈깔을 한";
+		mes "네 놈 에게는 아무것도";
+		mes "가르쳐 줄 수 없다 !!";
+		mes "돌아가거라 ~";
 		close;
 	case 2:
 		if ((MISC_QUEST & 65536) || TURTLE) {
 			if(MISC_QUEST & 65536) set TURTLE,0; //now clear the var
-			mes "[Grandpa Turtle]";
-			mes "Well...";
-			mes "If you go to eastern side of the Alberta port, you should find an old ferryboatman.";
+			mes "[거북할배]";
+			mes "거북이섬 ?!";
+			mes "알베르타 동쪽항구";
+			mes "어딘가에 . 나이든";
+			mes "통통해 선원 아저씨가";
+			mes "있을 꺼야 ..";
 			next;
-			mes "[Grandpa Turtle]";
-			mes "His name is ^3355FFGotanblue^000000. I believe he may know a way to Turtle Island. Heh heh, good luck~";
+			mes "[거북할배]";
+			mes "이름은 ^3355FF' 고텐부루 '^000000";
+			mes "아마 이것저것 이야기를";
+			mes "해주면서 거북이 섬에";
+			mes "갈 방법을 설명해 줄거야 ..";
+			mes "딸꾹";
+			mes "그럼 . 행운을 -";
 			close;
 		}
-		mes "[Grandpa Turtle]";
-		mes "Turtle Island...?";
+		mes "[거북할배]";
+		mes "찾기도 힘들고";
+		mes "도달하기는 더더욱 힘들고";
+		mes "돌아올 가능성은";
+		mes "아예 희박하다는";
+		mes "거북이 섬에 가고 싶다는 거야 ?";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "My, that place is difficult to find and even more difficult to travel to. You're sure you want to go? I would love to give you some advice, but I feel so dizzy after drinking so much...";
+		mes "[거북할배]";
+		mes "딸꾹 !";
+		mes "헤헤 . 이 할배가";
+		mes "자네에게 뼈가 되고 살이 될";
+		mes "따끔따끔한 충고를";
+		mes "몇심분이고 늘어 놓아주고";
+		mes "싶지만 ..";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "Ho ho ho...";
-		mes "Why don't you talk to a chubby little sailor I know named ^3355FFGotanblue^000000. You can find him loitering on one of the Alberta ports.";
+		mes "[거북할배]";
+		mes "술기운에 정신이 없어서";
+		mes "그만두겠어 . 어차피";
+		mes "아무나 가는 곳 이";
+		mes "아니니까 말이지 ..";
+		mes "알베르타 동쪽항구";
+		mes "어딘가에 . 나이든";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "Tell him that I sent you, and he may tell you more about Turtle Island. He may even know how to get there~";
+		mes "[거북할배]";
+		mes "통통배 선원 아저씨가";
+		mes "있을 거야 ..";
+		mes "이름은 ^3355FF` 고텐부르^000000 '";
+		mes "그 녀석에게";
+		mes "거북할배로부터 이야기를";
 		next;
-		mes "[Grandpa Turtle]";
-		mes "Well, then...";
-		mes "Good luck~";
+		mes "[거북할배]";
+		mes "듣고서 찾아왔다고해";
+		mes "아마 이것저것 이야기를";
+		mes "해주면서 거북이 섬에";
+		mes "갈 방법을 설명해 줄거야 ..";
+		mes "딸꾹";
+		mes "그럼 . 행운을 -";
 		set TURTLE,1;
 		setquest 11029;
 		close;
 	case 3:
-		mes "[Grandpa Turtle]";
-		mes "Oooh...";
-		mes "Even at this age...";
-		mes "I don't understand";
-		mes "how I can drink so much...";
+		mes "[거북할배]";
+		mes "히이익 . . . . .";
+		mes "이거이거";
+		mes "너무 취한 것 같네 그랴";
+		mes "자 . 오늘은 이쯤에서";
+		mes "그만 마셔볼까 ..";
+		mes "딸꾹";
 		close;
 	}
 }
@@ -1326,23 +1401,43 @@ tur_dun01,165,29,4	script	Sailor#tur2	709,{
 	}
 }
 
-alberta_in,18,102,4	script	Letter#tur	111,{
-	mes "[Explorer's Letter]";
-	mes "- O / X / XOVX -";
-	mes "If you find this letter, please don't disregard what you have read.";
+alberta_in,18,102,4	script	편지#tur	111,{
+	mes "[탐험대의 편지]";
+	mes "- XOVX 년 X 월 O 일 -";
+	mes "이 편지가 대륙에 닿으면";
+	mes "우리 거북이 섬 탐험대의";
+	mes "도전은 실패했다고";
+	mes "전해주오 ..";
+	mes "현재 대원의 수는";
 	next;
-	mes "[Explorer's Letter]";
-	mes "Although we have found Turtle Island, it seems our expedition will fail.";
+	mes "[탐험대의 편지]";
+	mes "떠날 때 전체인원의";
+	mes "반 정도의 수로 줄었고";
+	mes "식량은 남은 인원이";
+	mes "열흘을 버틸 수";
+	mes "없을 정도로 바닥나";
+	mes "가고 있소";
 	next;
-	mes "[Explorer's Letter]";
-	mes "Only half of our crew is left, and we only have enough food for ten more days. Our condition is truly grave.";
+	mes "[탐험대의 편지]";
+	mes "- XOVX 년 O 월 V 일 -";
+	mes "편지가 되돌아 왔소";
+	mes "망할 섬에선 편지를";
+	mes "보내도 되돌아 오는 구료";
+	mes "으으 미치겠소 ..";
+	mes "으으으으으";
 	next;
-	mes "[Explorer's Letter]";
-	mes "This damn island must be cursed. There's nothing to eat and we're so close to starving!";
+	mes "[탐험대의 편지]";
+	mes "이 놈의 섬엔 대체 !";
+	mes "먹을 거라곤 쌀한톨없어 !";
+	mes "사람사려 !";
+	mes "사람 !";
+	mes "살 ..";
+	mes "려 .....";
 	next;
-	mes "[Explorer's Letter]";
-	mes "If we don't get help or find Alberta soon...";
-	mes "We'll...";
+	mes "[탐험대의 편지]";
+	mes "- XOVX 년 V 월 X 일 -";
+	mes "^3355FF- 심하게 구겨져 있어 -";
+	mes "- 읽을 수 가 없다 -^000000";
 	close;
 }
 

@@ -1,0 +1,223 @@
+//RWC 기념 액세서리 NPC
+//제작자: 옥음
+
+itemmall,29,64,3	script	골드버그#new10	4_M_OILMAN,{
+	setarray .@rwc[0], 2966, 2967, 2968, 2969;
+	.@pass = 0;
+	for(.@i = 0; .@i < 4; .@i++) {
+		if(getequipid(EQI_ACC_R) == .@rwc[.@i]) {
+			.@pass++;
+			break;
+		}
+	}
+	.@m$ = (.@pass > 0)?"2.RWC 기념 액세서리에 능력치부여:3.효능 취소":"^777777오른쪽 액세서리 장비가 적절하지않습니다^000000";
+	mes "[골드버그]";
+	mes "RWC 기념 액세서리를 입수한 분이라면 제가 아무런 댓가없이 원하는 효능을 부여해 드리고 있습니다..";
+	next;
+	switch( select( "1.관둔다", "" + .@m$ + "" )) {
+		case 1:
+			mes "[골드버그]";
+			mes "그럼 다음에 또...";
+			close;
+		case 2:
+			if(.@pass == 0) {
+				mes "[골드버그]";
+				mes "오른쪽 액세서리 슬롯에 RWC 기념 액세서리를 장착하고 다시 말을 걸어주세요.";
+				close;
+			}
+			if(((getequipid(EQI_ACC_R) == 2967 || getequipid(EQI_ACC_R) == 2969) && getequipcardid(EQI_ACC_R,1) > 0) || getequipcardid(EQI_ACC_R,0) > 0) {
+				mes "[골드버그]";
+				mes "이건... 이미 한계치까지 강화가 되어 있군요. 더 이상은 제가 손 봐 드릴 수가 없습니다";
+				close;
+			}
+			mes "[골드버그]";
+			if(getequipcardid(EQI_ACC_R,2) > 0) {
+				mes "^ff000025% 의 확률로 장비가 파괴될 수 있습니다^000000 그래도 계속 하시겠습니까?";
+				next;
+				if(select("예","그만둔다") == 2) {
+					mes "[골드버그]";
+					mes "그럼 다음에 또...";
+					close;
+				}
+				mes "어느 옵션을 부여하시겠습니까?";
+				next;
+				if(getequipid(EQI_ACC_R) == 2966 || getequipid(EQI_ACC_R) == 2967) {
+					switch( select( "STR", "AGI", "VIT", "INT", "DEX", "LUK", "SP" )) {
+					case 1:
+						.@enchant = callfunc("F_Rand", 4700, 4701, 4702);
+						break;
+					case 2:
+						.@enchant = callfunc("F_Rand", 4730, 4731, 4732);
+						break;
+					case 3:
+						.@enchant = callfunc("F_Rand", 4740, 4741, 4742);
+						break;
+					case 4:
+						.@enchant = callfunc("F_Rand", 4710, 4711, 4712);
+						break;
+					case 5:
+						.@enchant = callfunc("F_Rand", 4720, 4721, 4722);
+						break;
+					case 6:
+						.@enchant = callfunc("F_Rand", 4750, 4751, 4752);
+						break;
+					case 7:
+						.@enchant = callfunc("F_Rand", 4800, 4870, 4871);
+						break;
+					}
+				} else {
+					switch( select( "STR", "AGI", "VIT", "INT", "DEX", "LUK", "MHP", "HP" )) {
+					case 1:
+						.@enchant = callfunc("F_Rand", 4700, 4701, 4702);
+						break;
+					case 2:
+						.@enchant = callfunc("F_Rand", 4730, 4731, 4732);
+						break;
+					case 3:
+						.@enchant = callfunc("F_Rand", 4740, 4741, 4742);
+						break;
+					case 4:
+						.@enchant = callfunc("F_Rand", 4710, 4711, 4712);
+						break;
+					case 5:
+						.@enchant = callfunc("F_Rand", 4720, 4721, 4722);
+						break;
+					case 6:
+						.@enchant = callfunc("F_Rand", 4750, 4751, 4752);
+						break;
+					case 7:
+						.@enchant = callfunc("F_Rand", 4861, 4862, 4867);
+						break;
+					case 8:
+						.@enchant = callfunc("F_Rand", 4795, 4796, 4797);
+						break;
+					}
+				}
+				if(rand(4) < 1) {
+					specialeffect2 EF_REPAIRWEAPON;
+					delequip(EQI_ACC_R);
+					mes "[골드버그]";
+					mes "아아...! 장비가 파괴되었습니다...";
+					close;
+				}
+			} else if(getequipcardid(EQI_ACC_R,3) >= 0) {
+				mes "어느 옵션을 부여하시겠습니까?";
+				next;
+				if(getequipid(EQI_ACC_R) == 2966 || getequipid(EQI_ACC_R) == 2967) {
+					switch( select( "투지", "어택", "MHP", "HP" )) {
+					case 1:
+						.@enchant = callfunc("F_Rand", 4809, 4810, 4811);
+						break;
+					case 2:
+						.@enchant = callfunc("F_Rand", 4766, 4767, 4819);
+						break;
+					case 3:
+						.@enchant = callfunc("F_Rand", 4861, 4862, 4867);
+						break;
+					case 4:
+						.@enchant = callfunc("F_Rand", 4795, 4796, 4797);
+						break;
+					}
+				} else {
+					switch( select( "마력", "마공", "SP" )) {
+					case 1:
+						.@enchant = callfunc("F_Rand", 4813, 4814, 4815);
+						break;
+					case 2:
+						.@enchant = callfunc("F_Rand", 4883, 4896, 4897);
+						break;
+					case 3:
+						.@enchant = callfunc("F_Rand", 4800, 4870, 4871);
+						break;
+					}
+				}
+			}
+			if(getequipcardid(EQI_ACC_R,3) == 0)
+				.@slot = 4;
+			else if(getequipcardid(EQI_ACC_R,2) == 0)
+				.@slot = 3;
+			else if(getequipcardid(EQI_ACC_R,1) == 0)
+				.@slot = 2;
+			else if(getequipcardid(EQI_ACC_R,0) == 0)
+				.@slot = 1;
+			.@card1 = (.@slot == 1)?.@enchant:getequipcardid(EQI_ACC_R,0);
+			.@card2 = (.@slot == 2)?.@enchant:getequipcardid(EQI_ACC_R,1);
+			.@card3 = (.@slot == 3)?.@enchant:getequipcardid(EQI_ACC_R,2);
+			.@card4 = (.@slot == 4)?.@enchant:getequipcardid(EQI_ACC_R,3);
+			specialeffect2 EF_REPAIRWEAPON;
+			.@item = getequipid(EQI_ACC_R);
+			delequip(EQI_ACC_R);
+			getitem2 .@item,1,1,0,0,.@card1,.@card2,.@card3,.@card4;
+			mes "[골드버그]";
+			mes "인챈트를 마쳤습니다. "; //custom dialog
+			close;
+		case 3:
+			mes "[골드버그]";
+			mes "장착된 카드는 건드리지 않은채 부여된 인챈트 효능만 초기화 할 것입니다. 계속 진행 하시겠습니까? ";
+			next;
+			if( select( "그만둔다", "계속 진행한다" ) == 1) {
+				mes "[골드버그]";
+				mes "마음이 바뀌면 언제든 다시 찾아오세요.";
+				close;
+			}
+			if(getequipcardid(EQI_ACC_R,3) == 0) { //custom dialog
+				mes "[골드버그]";
+				mes "이 아이템은 아직 인챈트가 부여되지 않았군요. 초기화가 필요없는 아이템입니다.";
+				close;
+			}
+			if(countitem(6665) < 1) {
+				mes "[골드버그]";
+				mes "죄송하지만 RWC초기화권을 갖고 계시지 않군요, 인벤토리를 다시 한번 확인해 보시겠어요?";
+				close;
+			}
+			specialeffect2 EF_REPAIRWEAPON;
+			.@item = getequipid(EQI_ACC_R);
+			delequip(EQI_ACC_R);
+			delitem 6665,1;
+			getitem .@item,1;
+			mes "[골드버그]";
+			mes "인챈트가 성공적으로 초기화 되었습니다. "; //custom dialog
+			close;
+	}
+}
+
+itemmall,29,61,3	script	천공술사#new10	4_M_BARBER,{
+	.@pass = (getequipid(EQI_ACC_R) == 2966 || getequipid(EQI_ACC_R) == 2968)?1:0;
+	.@m$ = (.@pass > 0)?"2.카드소켓을 뚫어본다.":"^777777오른쪽 액세서리 장비가 적절하지않습니다^000000";
+	mes "[천공술사]";
+	mes "저는 RWC 기념 액세서리에 쓸만한 카드소켓을 뚫어드리고 있습니다. 물론 ^ff0000한번도 효능을 강화하지 않은 순정품^000000만 취급합니다.";
+	next;
+	if(.@pass > 0) {
+		mes "[천공술사]";
+		mes "그리고 카드 소켓을 만드는 작업은 아시다시피 매우 위험한 작업입니다.^ff0000 50% 의 확률로 파괴될 수 있지요^000000 그래도 계속 하시겠습니까?";
+		next;
+	}
+	if( select( "1.관둔다", "" + .@m$ + "" ) == 1) {
+		mes "[천공술사]";
+		mes "그럼 다음에 또...";
+		close;
+	}
+	if(.@pass < 1) {
+		mes "[천공술사]";
+		mes "오른쪽 액세서리 소켓에 RWC 기념 액세서리를 장착하고 다시 말을 걸어주세요.";
+		close;
+	}
+	if(getequipcardid(EQI_ACC_R,3) > 0) {
+		mes "[천공술사]";
+		mes "이건... 이미 강화효능이 부여되어있군요. 순정품이 아니라 취급해 드릴 수 가 없어요.";
+		close;
+	}
+	mes "[천공술사]";
+	specialeffect2 EF_REPAIRWEAPON;
+	if(rand(2) == 1) { //custom dialog
+		mes "이런...! 안타깝게도 소켓 인챈트에 실패하여 장비가 파괴되었습니다...";
+		delequip(EQI_ACC_R);
+		close;
+	} else {
+		.@item = getequipid(EQI_ACC_R);
+		delequip(EQI_ACC_R);
+		getitem .@item + 1,1;
+		mes "성공적으로 소켓 인챈트가 완료되었습니다!";
+		close;
+	}
+}

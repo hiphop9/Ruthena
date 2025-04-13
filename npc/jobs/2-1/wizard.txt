@@ -29,1044 +29,1046 @@
 //= 3.3 Fixed waitingroom bug. [Euphy]
 //============================================================ 
 
-gef_tower,111,37,4	script	Wizard Guildsman	70,{
+gef_tower,111,37,4	script	마법사 길드맨::Wizard Guildsman	70,{
 	if (Upper == 1) {
-		mes "[Catherine]";
-		mes "? Excuse me, I am wondering if we have met before...?";
-		mes "Hey~ you have changed a lot! So, what happened?";
+		mes "[캐서린]";
+		mes "실례합니다. 혹시 우리가 전에 만난 적이 있는지 궁금합니다...?";
+		mes "야~ 많이 변했구나! 그래서 무슨 일이 있었던 거야?";
 		next;
-		mes "[Catherine]";
-		mes "I feel you have become so much powerful, eh?";
-		mes "Congratulations and good luck with your life!";
+		mes "[캐서린]";
+		mes "정말 강력해진 것 같아요, 그렇죠?";
+		mes "축하합니다! 당신의 인생에 행운이 깃들기를 바랍니다!";
 		close;
 	}
 	if (BaseJob != Job_Mage) {
 		if (BaseJob == Job_Wizard) {
-			mes "[Catherine]";
-			mes "Since you're already a Wizard, you don't have any more business with me...?";
-			mes "Now, excuse me.";
+			mes "[캐서린]";
+			mes "당신은 이미 마법사이니까 나랑 더 이상 거래할 생각은 없지...?";
+			mes "이제 죄송합니다.";
 			next;
-			mes "[Catherine]";
+			mes "[캐서린]";
 			if (Sex == SEX_MALE)
-				mes "Well, If you intended to ask me on a date... I appreciate it...hohoho.";
+				mes "글쎄, 데이트 신청을 하려고 했다면... 고맙다...호호호.";
 			else
-				mes "Well, if you fix me up with a cute guy... I'd appreciate it...hohoho!.";
+				mes "그럼 귀여운 남자로 고쳐주시면 감사하겠습니다...호호호!.";
 			close;
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "[Wizard Guildsman]";
-			mes "Oh my goodness, it's a novice~ ain't you the cutest little thing.";
-			mes "By the way honey, this place is for Wizards.";
+			mes "[마법사 길드맨]";
+			mes "맙소사, 초보네요~ 정말 귀엽지 않나요.";
+			mes "그런데 여보, 이곳은 마법사들을 위한 곳이에요.";
 			next;
-			mes "[Wizard Guildsman]";
-			mes "If you are interested in magic,";
-			mes "Go visit the ^0000FFMage^000000 guild.";
+			mes "[마법사 길드맨]";
+			mes "마법에 관심이 있다면,";
+			mes "^0000FFMage^000000 길드를 방문해보세요.";
 		}
 		else {
-			mes "[Wizard Guildsman]";
-			mes "Huh? what brings you to such a high place...?";
-			mes "If you don't have any specific business, please leave immediately.";
-			mes "This place is for Wizards, you know?";
+			mes "[마법사 길드맨]";
+			mes "어? 무슨 일로 이렇게 높은 곳에 올라온 거지...?";
+			mes "특별한 일 없으시면 바로 퇴장해주세요.";
+			mes "여기는 마법사들을 위한 곳인거 아시죠?";
 		}
 		next;
-		mes "[Wizard Guildsman]";
+		mes "[마법사 길드맨]";
 		mes "Ok, then. Farewell.";
 		close;
 	}
 	if (WIZ_Q == 0) {
-		mes "[Wizard Guildsman]";
-		mes "Huh? What are you doing way up here...?";
-		mes "So what brings you here?";
+		mes "[마법사 길드맨]";
+		mes "어? 여기서 뭐 하는 거야...?";
+		mes "그럼 여기까지 무슨 일로 오셨나요?";
 		next;
 		if (select("I want to become a Wizard.:...nothing.") == 1) {
-			mes "[Wizard Guildsman]";
-			mes "I see... Well, of course you want to become a Wizard, otherwise you wouldn't have walked up all those stairs right?";
-			mes "Anyways, I would like to welcome you. I will assist you in becoming a Wizard.";
+			mes "[마법사 길드맨]";
+			mes "그렇군요... 물론 당신은 마법사가 되고 싶죠. 그렇지 않으면 그 계단을 다 오르지 못했겠죠?";
+			mes "어쨌든 환영합니다. 마법사가 될 수 있도록 도와드리겠습니다.";
 			next;
-			mes "[Wizard Guildsman]";
-			mes "My name is Catherine Medici. Just between me and you, I just became a Wizard too!";
-			mes "You can call me Cathy if you want. Hehehehehe~";
+			mes "[마법사 길드맨]";
+			mes "제 이름은 캐서린 메디치입니다. 나와 당신 사이에서, 나도 마법사가 되었습니다!";
+			mes "원하시면 저를 캐시라고 불러주세요. 헤헤헤헤헤~";
 			next;
-			mes "[Catherine]";
-			mes "Many people want to become Wizards, but only the patient and strong ones will eventually accomplish their goals.";
-			mes "In order to become a Wizard, one must undergo difficult quests.";
+			mes "[캐서린]";
+			mes "많은 사람들이 마법사가 되기를 원하지만, 인내심을 갖고 강한 사람만이 결국 그들의 목표를 달성할 수 있습니다.";
+			mes "마법사가 되기 위해서는 어려운 퀘스트를 거쳐야 합니다.";
 			next;
-			mes "[Catherine]";
-			mes "Also only mages who have reached a job level of 40 or higher are qualified for these quests.";
-			mes "Lower level mages aren't experienced enough with magic to become Wizards...";
+			mes "[캐서린]";
+			mes "또한 이 퀘스트는 직업레벨 40 이상을 달성한 마법사들만이 참여할 수 있습니다.";
+			mes "하급 마법사들은 마법사가 되기에는 마법 경험이 부족해요...";
 			next;
-			mes "[Catherine]";
-			mes "Well, I will give you more information when you apply for the job.";
-			mes "So! Do you want to apply now?";
+			mes "[캐서린]";
+			mes "자세한 내용은 지원하실 때 알려드리겠습니다.";
+			mes "그럼 지금 지원하시겠습니까?";
 			next;
-			if (select("Yes, I do.:On second thought, Let me think about it.") == 1) {
+			if (select("예, 그렇습니다. 다시 생각해보니 생각해 보겠습니다.") == 1) {
 				if (JobLevel < 40) {
-					mes "[Catherine]";
-					mes "Hey hey, weren't you listening to me?";
-					mes "I told you that you need to be at least job level 40 to sign up for the quest...";
+					mes "[캐서린]";
+					mes "야야야, 내 말 안 듣고 있었어?";
+					mes "퀘스트를 신청하려면 직업 레벨이 40 이상이어야 한다고 했는데...";
 					next;
-					mes "[Catherine]";
-					mes "No need to hurry, go experience and ponder more about the world of magic.";
-					mes "When I deem you're qualified, I will accept your application.";
+					mes "[캐서린]";
+					mes "서두르지 말고 마법의 세계에 대해 더 많이 경험하고 생각해 보세요.";
+					mes "당신이 자격이 있다고 판단되면 지원서를 수락하겠습니다.";
 					close;
 				}
 				if (SkillPoint) {
-					mes "[Catherine]";
-					mes "Umm... You're well qualified, but you have some unused skill points left.";
-					mes "You'd better learn more skills before applying again.";
+					mes "[캐서린]";
+					mes "음... 자격은 충분하지만 사용하지 않은 스킬 포인트가 남아있습니다.";
+					mes "다시 지원하기 전에 더 많은 기술을 배우는 것이 좋습니다.";
 					close;
 				}
-				mes "[Catherine]";
-				mes "Very well then, I accept your application.";
-				mes "Your name is..." + strcharinfo(0) + ", isn't it? I am not sure if I pronounced it correctly?";
+				mes "[캐서린]";
+				mes "그럼, 신청을 수락하겠습니다.";
+				mes "당신의 이름은..."+ strcharinfo(0) + ",그렇지 않나요? 내가 올바르게 발음했는지 잘 모르겠습니다.";
 				next;
-				mes "[Catherine]";
-				mes "The Wizard job change quest is divided into 3 parts.";
-				mes "1st part, gathering magic items.";
-				mes "2nd part, a written test.";
-				mes "The last part is a practical magic test.";
+				mes "[캐서린]";
+				mes "마법사 전직 퀘스트는 3가지 부분으로 구성되어 있습니다.";
+				mes "1부, 마법 아이템 수집.";
+				mes "2부 필기시험입니다.";
+				mes "마지막 부분은 실전 마술 테스트입니다.";
 				next;
-				mes "[Catherine]";
-				mes "Among one of these tests, we exempt those who are at job level 50.";
-				mes "It is enough to prove to us the effort it will take to become a Wizard if a mage has learned that much already.";
+				mes "[캐서린]";
+				mes "이 중 50레벨이신 분들은 면제를 해드립니다.";
+				mes "마법사가 이미 그만큼 많은 것을 배웠다면 마법사가 되기 위해 필요한 노력을 우리에게 증명하는 것만으로도 충분합니다.";
 				next;
 				if (JobLevel == 50) {
-					mes "[Catherine]";
-					mes "Hmm, come to think of it, you're at job level 50!?";
-					mes "You must have worked very hard. Your going to become a very powerful Wizard, I can feel it in you.";
+					mes "[캐서린]";
+					mes "흠 그러고보니 잡레벨 50이시군요!?";
+					mes "정말 열심히 일하셨나봐요. 당신이 아주 강력한 마법사가 될 거라는 게 느껴지네요.";
 					next;
-					mes "[Catherine]";
-					mes "Ok. You already passed the 1st test then.";
-					mes "Don't get too laid back though, there are still 2 more tests left.";
+					mes "[캐서린]";
+					mes "알겠습니다. 그럼 이미 1차 시험을 통과하셨군요.";
+					mes "너무 긴장하지 마세요. 아직 테스트가 2개 더 남아있습니다.";
 					next;
-					mes "[Catherine]";
-					mes "Go talk to the man in the corner and he will give you the remaining exams.";
-					mes "Be careful. We have lost many Mages due to the difficulty of the exams.";
+					mes "[캐서린]";
+					mes "구석에 있는 사람에게 가서 말을 걸면 그 사람이 남은 시험을 내줄 것이다.";
+					mes "조심하세요. 시험이 어려워서 마법사들이 많이 빠졌어요.";
 					set WIZ_Q,3;
 					setquest 9015;
 					close;
 				}
-				mes "[Catherine]";
-				mes "Then, since I have your application and everything else I need, I'll give you some info about the first test.";
-				mes "You can memorize this or write it down, doesn't matter. But remember it for sure.";
+				mes "[캐서린]";
+				mes "그럼 지원서와 필요한 건 모두 준비했으니 첫 번째 테스트에 대한 정보를 알려드릴게요.";
+				mes "이건 외워도 되고 적어도 상관없습니다. 하지만 꼭 기억하세요.";
 				next;
-				mes "[Catherine]";
-				mes "The first test is collecting magic items.";
-				mes "The important part is that you must gather these items on your own.";
+				mes "[캐서린]";
+				mes "첫 번째 테스트는 마법 아이템 수집입니다.";
+				mes "중요한 점은 이 아이템들을 직접 모아야 한다는 것입니다.";
 				next;
 				set wizard_m1,rand(1,2);
-				mes "[Catherine]";
-				mes "The items you must collect are...";
+				mes "[캐서린]";
+				mes "꼭 수집해야 할 아이템은...";
 				if (rand(2)) {
 					set WIZ_Q,1;
 					setquest 9013;
-					mes "^3355FFRed Gemstone^000000 10 each,";
-					mes "^3355FFBlue Gemstone^000000 10 each,";
-					mes "^3355FFYellow Gemstone^000000 10 each,";
+					mes "^3355FF레드젬스톤^000000 각 10개,";
+					mes "^3355FF블루 젬스톤^000000 각 10개,";
+					mes "^3355FF노란색 보석^000000 10개,";
 				}
 				else {
 					set WIZ_Q,2;
 					setquest 9014;
-					mes "^3355FFCrystal Blue^000000 5 each,";
-					mes "^3355FFGreen Live^000000 5 each,";
-					mes "^3355FFRed Blood^000000 5 each,";
-					mes "^3355FFWind of Verdure^000000 5 each,";
+					mes "^3355FFCrystal Blue^000000 각 5개,";
+					mes "^3355FF그린 라이브^000000 각 5개,";
+					mes "^3355FFRed Blood^000000 각 5개,";
+					mes "^3355FF신록의 바람^000000 각 5개,";
 				}
-				mes "...is it too hard? No, any would be Wizard should be able to at least get these items.";
+				mes "...너무 어렵나요? 아니, 마법사라면 최소한 이 아이템은 얻을 수 있을 텐데요.";
 				next;
-				mes "[Catherine]";
-				mes "Well, good luck.";
-				mes "I'll be happily waiting. ~Hehe.";
+				mes "[캐서린]";
+				mes "행운을 빌어요.";
+				mes "기다리겠습니다. ~헤헤.";
 				close;
 			}
-			mes "[Catherine]";
-			mes "Oh, ok then, take your time.";
-			mes "Since I'll always be here, accepting applications...*sigh*...anyways! ~Hehehehe.";
+			mes "[캐서린]";
+			mes "아, 그럼 천천히 하세요.";
+			mes "항상 여기에서 지원서를 받을 테니까...*한숨*...아무튼! ~헤헤헤헤.";
 			close;
 		}
-		mes "[Wizard Guildsman]";
-		mes "Geez, what a lame person.";
-		mes "You have no business here, hope you don't mind, now off you go!";
+		mes "[마법사 길드맨]";
+		mes "이런, 정말 한심한 사람이구나.";
+		mes "여기서는 할 일이 없습니다. 괜찮으시길 바랍니다. 이제 가세요!";
 		close;
 	}
 	else if (WIZ_Q == 1) {
-		mes "[Catherine]";
-		mes "Let me see, did you get all the items?";
-		mes "Then let's check...";
+		mes "[캐서린]";
+		mes "어디 볼까요? 물건은 다 구하셨나요?";
+		mes "그럼 확인해볼까요...";
 		next;
 		if (countitem(716) > 9 && countitem(717) > 9 && countitem(715) > 9) {
-			mes "[Catherine]";
-			mes "Perfect! You got all the items. I like!~";
-			mes "These items will be put to great use in our guild. ~Hehehee.";
+			mes "[캐서린]";
+			mes "완벽해요! 모든 물건을 다 갖고 계시네요. 맘에 들어요!~";
+			mes "이 아이템들은 우리 길드에서 아주 유용하게 쓰일 것 같아요~헤헤헤.";
 			next;
-			delitem 716,10; //Red_Gemstone
-			delitem 717,10; //Blue_Gemstone
-			delitem 715,10; //Yellow_Gemstone
+			delitem 716,10; //레드_젬스톤
+			delitem 717,10; //블루_젬스톤
+			delitem 715,10; //옐로우_젬스톤
 			set WIZ_Q,3;
 			changequest 9013,9015;
-			mes "[Catherine]";
-			mes "Good for you! You passed the first test.";
-			mes "But there are still two more left, so don't get too relaxed.";
+			mes "[캐서린]";
+			mes "잘했어요! 첫 번째 시험에 합격했어요.";
+			mes "아직 2개 남았으니 너무 긴장하지 마세요.";
 			next;
-			mes "[Catherine]";
-			mes "Go talk to the guy in the corner for the rest of the tests.";
-			mes "It might be a bit hard, so be careful, I wouldn't want you ending up like most of the Mages that come for these exams...poor souls indeed, may they rest in peace. ~Hehehe.";
+			mes "[캐서린]";
+			mes "나머지 테스트를 위해 구석에 있는 사람과 대화를 나눠보세요.";
+			mes "조금 어려울 수도 있으니 조심하세요. 여러분이 시험을 보러 오는 대부분의 마법사들처럼 되지 않기를 바랍니다...가엾은 영혼들이여, 편히 쉬길 바랍니다. ~헤헤헤.";
 			close;
 		}
-		mes "[Catherine]";
-		mes "Hey, what's this? Umm...I don't think you have everything yet!";
+		mes "[캐서린]";
+		mes "야, 이게 뭐야? 음...아직 전부 다 갖추지 못한 것 같아!";
 		next;
-		mes "[Catherine]";
-		mes "It might've been tough coming all the way up here, what with this altitude and all, but go back and collect the items.";
-		mes "Life's short enough as it is, so stop wasting your time and gather the items I told you before.";
+		mes "[캐서린]";
+		mes "이런 고도 때문에 여기까지 오느라 힘들었을 텐데, 돌아가서 아이템들을 모아오세요.";
+		mes "인생은 짧으니 시간 낭비하지 말고 아까 알려드린 아이템들을 모아보세요.";
 		next;
-		mes "[Catherine]";
-		mes "^3355FFRed Gemstone^000000 10 each,";
-		mes "^3355FFBlue Gemstone^000000 10 each,";
-		mes "^3355FFYellow Gemstone^000000 10 each,";
-		mes "Don't forget this time, and bring all the items, ok?...";
+		mes "[캐서린]";
+		mes "^3355FF레드 젬스톤^000000 각 10개,";
+		mes "^3355FF블루 젬스톤^000000 각 10개,";
+		mes "^3355FF옐로우 젬스톤^000000 10개,";
+		mes "이번 시간 잊지 말고 물건들 다 챙겨오세요...";
 		close;
 	}
 	else if (WIZ_Q == 2) {
-		mes "[Catherine]";
-		mes "Did you get all the items?";
-		mes "Let's see... Do you have the right ones?...";
+		mes "[캐서린]";
+		mes "아이템은 다 구하셨나요?";
+		mes "어디... 혹시 맞는거 있나요?...";
 		next;
 		if (countitem(991) > 4 && countitem(993) > 4 && countitem(990) > 4 && countitem(992) > 4) {
-			mes "[Catherine]";
-			mes "Perfect! Good job...I'm satisfied! ~Hehe";
-			mes "Our guild greatly appreciates these items and will use them wisely.";
+			mes "[캐서린]";
+			mes "완벽해요! 수고했어요...만족해요! ~헤헤";
+			mes "저희 길드에서는 이 아이템들을 매우 높이 평가하며 현명하게 사용하겠습니다.";
 			next;
-			delitem 991,5; //Crystal_Blue
-			delitem 993,5; //Yellow_Live
-			delitem 990,5; //Boody_Red
-			delitem 992,5; //Wind_Of_Verdure
+			delitem 991,5; //크리스탈_블루
+			delitem 993,5; //노란색_라이브
+			delitem 990,5; //레드바디
+			delitem 992,5; //신록의 바람
 			set WIZ_Q,3;
 			changequest 9014,9015;
-			mes "[Catherine]";
-			mes "Good. You've passed the first test now.";
-			mes "But you still have two more tests to go, so don't get too laid back, because it only gets harder from here. ~Hehehe";
+			mes "[캐서린]";
+			mes "좋습니다. 이제 첫 번째 테스트를 통과하셨습니다.";
+			mes "아직 시험이 두 개 더 남았으니 너무 서두르지 마세요. 이제부터 더 어려워지니까요. ~헤헤헤";
 			next;
-			mes "[Catherine]";
-			mes "Go talk to that guy in the corner to take the rest of the tests.";
-			mes "It might be a bit hard, so be careful, I wouldn't want you ending up like most of the Mages that come for these exams...poor souls indeed, may they rest in peace. ~Hehehe.";
+			mes "[캐서린]";
+			mes "모퉁이에 있는 아저씨한테 가서 나머지 시험도 쳐보세요.";
+			mes "조금 어려울 수도 있으니 조심하세요. 여러분이 시험을 보러 오는 대부분의 마법사들처럼 되지 않기를 바랍니다...가엾은 영혼들이여, 편히 쉬길 바랍니다. ~헤헤헤.";
 			close;
 		}
-		mes "[Catherine]";
-		mes "Eh, what's this? I don't think you have everything?";
+		mes "[캐서린]";
+		mes "어, 이게 뭐야? 다 가진 건 아닌 것 같은데?";
 		next;
-		mes "[Catherine]";
-		mes "I regret that you had to go through the trouble of coming all the way up here, but go get the right items again.";
-		mes "Stop wasting your time and get the items I initially requested. For goodness sakes...This is the easiest part of the exam.";
+		mes "[캐서린]";
+		mes "여기까지 오시느라 수고를 하신게 아쉽지만, 다시 좋은 아이템을 구하러 가세요.";
+		mes "시간 낭비하지 말고 처음에 요청한 항목을 얻으십시오. 맙소사...이것이 시험에서 가장 쉬운 부분입니다.";
 		next;
-		mes "[Catherine]";
-		mes "^3355FFCrystsal Blue^000000 5 each,";
-		mes "^3355FFGreen Live^000000 5 each,";
-		mes "^3355FFRed Blood^000000 5 each,";
-		mes "^3355FFWind of Verdure^000000 5 each,";
-		mes "Don't forget them this time and gather the correct ones, ok? See you soon...";
+		mes "[캐서린]";
+		mes "^3355FF크리스탈 블루^000000 각 5개,";
+		mes "^3355FF그린 라이브^000000 각 5개,";
+		mes "^3355FF레드바디^000000 각 5개,";
+		mes "^3355FF신록의 바람^000000 각 5개,";
+		mes "이번엔 잊지말고 제대로된것 모아가세요 알겠죠? 곧 만나요...";
 		close;
 	}
 	else if (WIZ_Q == 3) {
-		mes "[Catherine]";
-		mes "What is it? You didn't go talk to the guy in the corner?";
-		mes "You can't become a Wizard by just brining the items I requested, no no, that just wont do...";
+		mes "[캐서린]";
+		mes "뭐야? 구석에 있는 남자한테 가서 얘기 안 했어?";
+		mes "제가 요청한 아이템만 가져오는 것만으로는 마법사가 될 수 없어요, 아니아니, 그건 안 돼요...";
 		next;
-		mes "[Catherine]";
-		mes "You can only prove yourself Wizard material after you take the two remaining tests.";
-		mes "I'll be waiting, so go now.";
+		mes "[캐서린]";
+		mes "남은 두 가지 시험을 치른 후에야 마법사로서의 능력을 증명할 수 있습니다.";
+		mes "기다리실 테니 지금 가세요.";
 		close;
 	}
 	else if (WIZ_Q == 4) {
-		mes "[Catherine]";
-		mes "*sigh*...Poor thing, what a pity.";
-		mes "How can you think of trying to become a Wizard when you can't even answer those simple questions?";
+		mes "[캐서린]";
+		mes "*한숨*...불쌍하다, 안타깝다.";
+		mes "그 간단한 질문에도 대답할 수 없는데 어떻게 마법사가 되겠다는 생각을 할 수 있겠어요?";
 		next;
-		mes "[Catherine]";
-		mes "Let's see... Should I give you some hints as your senior?";
-		mes "But I'm a bit thirsty, so give me 1 Apple Juice, and we got a deal. ~Hehehe";
+		mes "[캐서린]";
+		mes "어디 보자... 선배로서 힌트라도 드릴까?";
+		mes "근데 좀 목이 마르니까 사과주스 1개만 주고 계약하자~헤헤헤";
 		next;
-		switch(select("Give me some hints, please.:I want to try again on my own!")) {
+		switch(select("몇 가지 힌트를 주세요.:직접 다시 시도하고 싶습니다!")) {
 		case 1:
 			if (countitem(531) > 0) {
 				delitem 531,1; //Apple_Juice
-				mes "[Catherine]";
-				mes "Yummers, Apple Juice is the best...";
-				mes "Gulp gulp gulp... Haaaaaah... ~Hehe";
+				mes "[캐서린]";
+				mes "맛있어요 사과주스가 제일 맛있어요...";
+				mes "꿀꿀꿀꿀... 하아아아... ~헤헤";
 				next;
-				mes "[Catherine]";
-				mes "Well then, I'll give you a hint for the second test.";
+				mes "[캐서린]";
+				mes "그럼 2차 테스트에 대한 힌트를 드리겠습니다.";
 				next;
-				mes "[Catherine]";
-				mes "He asks three types of questions.";
-				mes "Questions about Magic, Monsters...";
-				mes "and Magicians...also known as Mages.";
+				mes "[캐서린]";
+				mes "그는 세 가지 유형의 질문을 합니다.";
+				mes "마법, 몬스터에 관한 질문...";
+				mes "그리고 마술사...마법사라고도 알려져 있습니다.";
 				next;
-				mes "[Catherine]";
-				mes "It's up to him to decide which questions to ask.";
-				mes "*sigh*...He'd look much better if he cut his hair and shaved...";
-				mes "He always looks so grungy because he doesn't take care of himself...*sigh*...pity, he could be a regular lady killer. ~tehehehe";
+				mes "[캐서린]";
+				mes "어떤 질문을 할지 결정하는 것은 그 사람에게 달려 있습니다.";
+				mes "*한숨*...머리 자르고 면도하면 훨씬 나아보일텐데...";
+				mes "그 사람은 항상 자기 관리를 안 해서 너무 지저분해 보이는데...*한숨*...안타깝네요. 그냥 여자 킬러일 수도 있겠네요. ~테헤헤헤";
 				next;
-				mes "[Catherine]";
-				mes "Anyways, as for the questions about magic...";
-				mes "They're usually about the spells you've learned.";
+				mes "[캐서린]";
+				mes "아무튼 마법에 관한 질문은...";
+				mes "보통 당신이 배운 주문에 관한 내용이에요.";
 				next;
-				mes "[Catherine]";
-				mes "If it's something you haven't learned or haven't experienced, or anything like that...";
-				mes "I heard there's a nice place you can refer to that's very well organized.";
+				mes "[캐서린]";
+				mes "배운 적도 없고 경험해 본 적도 없는 일이라면...";
+				mes "아주 잘 정리된 좋은 곳이 있어서 참고할 수 있다고 들었습니다.";
 				next;
-				mes "[Catherine]";
-				mes "You just have to cast the spell, you know...the one that looks like a big bold *e* symbol.";
-				mes "The magic words are... iro.ragnarokonline.com ~Or so they say!";
-				mes "Strange spell, don't you think? I don't know how to make it work myself.";
+				mes "[캐서린]";
+				mes "그냥 주문을 걸면 됩니다. 크고 굵은 *e* 기호처럼 보이는 주문이죠.";
+				mes "마법의 단어는... iro.ragnarokonline.com ~아니면 그렇게 말하죠!";
+				mes "이상한 주문이군요. 그렇죠? 저도 어떻게 만드는지 모르겠어요.";
 				next;
-				mes "[Catherine]";
-				mes "And about the monster questions.";
-				mes "Fighting them yourself and learning is the best way to go about that.";
+				mes "[캐서린]";
+				mes "몬스터에 관한 질문도 있어요.";
+				mes "그들과 직접 싸워서 배우는 것이 최선의 방법입니다.";
 				next;
-				mes "[Catherine]";
-				mes "But you know in Prontera, there is a big library.";
-				mes "You can get information about most of the monsters in that library.";
-				mes "Going there and studying a bit more would work too.";
+				mes "[캐서린]";
+				mes "근데 프론테라에는 큰 도서관이 있잖아요.";
+				mes "해당 도서관에 있는 대부분의 몬스터에 대한 정보를 얻을 수 있습니다.";
+				mes "그곳에 가서 공부를 좀 더 하면 좋을 것 같아요.";
 				next;
-				mes "[Catherine]";
-				mes "Last, but not least, questions about Mages.";
-				mes "This is something that most others cannot teach you...";
-				mes "Because you are a Mage.";
+				mes "[캐서린]";
+				mes "마지막으로 마법사에 관한 질문입니다.";
+				mes "이것은 대부분의 사람들이 당신에게 가르칠 수 없는 것입니다...";
+				mes "당신은 마법사이기 때문이죠.";
 				next;
-				mes "[Catherine]";
-				mes "It's hard to know about others when you don't even know about yourself, right?";
-				mes "So if you get one of these questions, think about it carefully then answer.";
+				mes "[캐서린]";
+				mes "나도 모르면서 남도 알기 힘들죠?";
+				mes "그러니까 이런 질문이 나온다면 잘 생각해보시고 답해주세요.";
 			}
 			else {
-				mes "[Catherine]";
-				mes "Like I said, I'll think about it if you give me 1 Apple Juice.";
-				mes "If not... Well, you can think about it on your own. Hey I don't make the rules here i just follow em! Can't argue with this one though. ~tehehehe";
+				mes "[캐서린]";
+				mes "말씀드린 대로 사과주스 1개 주시면 생각해볼께요.";
+				mes "그렇지 않다면... 뭐, 스스로 생각해보셔도 됩니다. 여기서는 규칙을 정하지 않고 그냥 따라가면 됩니다! 그래도 이건 반박할 수 없군요. ~테헤헤헤";
 			}
 			break;
 		case 2:
-			mes "[Catherine]";
-			mes "Yeah, you get the most satisfaction when you solve things on your own.";
-			mes "Go finish the rest of the tests with that spirit!";
+			mes "[캐서린]";
+			mes "네, 스스로 문제를 해결할 때가 가장 만족스럽습니다.";
+			mes "그 정신으로 나머지 테스트도 끝내자!";
 		}
 		next;
-		mes "[Catherine]";
-		mes "Well then, see you soon! *crosses fingers* dont end up like the others before you! May God rest thier souls...huh? Oh nothing! ~Hehehehe";
-		mes "Hurry, he's waiting for you!";
+		mes "[캐서린]";
+		mes "그럼 곧 봐요! *손가락 꼬집어* 앞선 사람들처럼 되지 마세요! 하느님께서 그들의 영혼에 안식을 주시기를...어? 아 아무것도 아닙니다! ~헤헤헤헤";
+		mes "서둘러요, 그가 당신을 기다리고 있어요!";
 		close;
 	}
 	else if (WIZ_Q == 5) {
-		mes "[Catherine]";
-		mes "Tehehehe~ I was listening all along.";
-		mes "Well done in answering all those questions. I want to give something, like a present...";
+		mes "[캐서린]";
+		mes "테헤헤헤~ 계속 듣고 있었어요.";
+		mes "질문에 모두 답해주셔서 수고하셨어요. 선물같은 걸 주고 싶은데요...";
 		next;
-		mes "[Catherine]";
-		mes "You still have one more test to go, right?";
-		mes "Just a bit more and you will be qualified to be a Wizard, so I'll give you the present then. ~Hehe";
+		mes "[캐서린]";
+		mes "아직 시험이 한 번 더 남았죠?";
+		mes "조금만 더 있으면 마법사 자격을 얻을 수 있으니 그때 선물을 드릴게요~헤헤";
 		next;
-		mes "[Catherine]";
-		mes "See ya, well...hopefully!";
-		mes "He's waiting for you!";
+		mes "[캐서린]";
+		mes "또 봐요...그럼요!";
+		mes "그 사람이 당신을 기다리고 있어요!";
 		close;
 	}
 	else if (WIZ_Q == 6) {
-		mes "[Catherine]";
-		mes "Eh, did you leave in the middle of the test?";
-		mes "You...*sigh*...I didn't think you would do such a dishonorable thing.";
+		mes "[캐서린]";
+		mes "어, 시험 중간에 나갔나?";
+		mes "너...*한숨*...네가 그런 불명예스러운 짓을 할 줄은 몰랐어.";
 		next;
-		mes "[Catherine]";
+		mes "[캐서린]";
 		if (Sex == SEX_MALE) {
-			mes "Granted you're a mage, but how could a guy be so weak?!";
-			mes "Well, at least your alive still. Go back and try harder this time. ~tehehehe";
+			mes "당신이 마법사인 것은 맞지만, 남자가 어떻게 그렇게 약할 수 있겠습니까?!";
+			mes "글쎄, 적어도 넌 아직 살아있지. 이번에는 돌아가서 더 열심히 해라. ~테헤헤헤";
 		}
 		else {
-			mes "Don't pretend to be weak just because you're a girl. Look at me! I did it, and so can you. You can't ask for sympathy.";
-			mes "You came all this way to become a Wizard! Now come on, you can do it!!";
+			mes "여자라고 약한 척 하지 마세요. 저를 보세요! 나도 그랬고, 당신도 그럴 수 있어요. 동정을 구하면 안 돼요.";
+			mes "당신은 마법사가 되기 위해 여기까지 왔습니다! 자, 당신도 할 수 있어요!!";
 			next;
-			mes "[Catherine]";
-			mes "I agree that it is difficult, but not to the point of giving up.";
-			mes "You of all people should find the strength and patience to complete this test!";
+			mes "[캐서린]";
+			mes "어렵다는 점에는 동의하지만 포기할 정도는 아닙니다.";
+			mes "이 테스트를 완료할 수 있는 힘과 인내심을 가지세요!";
 		}
 		next;
-		mes "[Catherine]";
-		mes "So, try harder this time...";
-		mes "He's waiting!";
+		mes "[캐서린]";
+		mes "그럼 이번에는 더 열심히 해보세요...";
+		mes "그가 기다리고 있어요!";
 		close;
 	}
 	else if (WIZ_Q == 7) {
 		if (JobLevel < 40) {
 			set WIZ_Q,0;
-			mes "[Catherine]";
-			mes "Hey, what don't you get it?";
-			mes "I said you must be at least job level 40 to change your job, got it?";
+			mes "[캐서린]";
+			mes "야, 뭘 모르겠어?";
+			mes "직업을 바꾸려면 직업 레벨이 40 이상이어야 한다고 했잖아요?";
 			next;
-			mes "[Catherine]";
-			mes "There is nothing to be in hurry, so why don't you take your time for studying?";
-			mes "When the time comes, I will welcome you with open arms.";
+			mes "[캐서린]";
+			mes "서두르실 것도 없으니 천천히 공부하시는 게 어떨까요?";
+			mes "때가 되면 두 팔 벌려 환영하겠습니다.";
 			close;
 		}
 		if (SkillPoint) {
-			mes "[Catherine]";
-			mes "Are you done with all the tests? Oh drats, it seems like you still have some skill points left.";
-			mes "Learn some other skills with your remaining points, and then come talk to me again.";
+			mes "[캐서린]";
+			mes "테스트 다 끝냈어? 아 젠장, 아직 스킬 포인트가 남아있는 것 같군.";
+			mes "남은 포인트로 다른 스킬도 배우고 다시 말 걸어주세요.";
 			close;
 		}
-		mes "[Catherine]";
-		mes "Wooooooooooooow...you finished all the tests?!";
-		mes "Congratulations, congrats, congrats! Wooopiiieeeee! ~Hehehehehehe";
+		mes "[캐서린]";
+		mes "우우우우우우우... 테스트 다 끝냈어?!";
+		mes "축하해요, 축하해요, 축하해요! 우오오오오오오! ~헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤";
 		next;
-		mes "[Catherine]";
-		mes "Well, no need to wait, I congratulate you. I hearby deem you Wizard.";
+		mes "[캐서린]";
+		mes "그럼 기다리지 마세요. 축하드립니다. 듣기로는 당신이 마법사라고 생각합니다.";
 		next;
 		completequest 9018;
 		callfunc "Job_Change",Job_Wizard;
 		callfunc "F_ClearJobVar";		// clears all job variables for the current player
-		mes "[Catherine]";
-		mes "Since you're a Wizard now, act like a Wizard, got it?";
-		mes "Us wizards have to be careful since we possess the ultimate power of magic.";
+		mes "[캐서린]";
+		mes "이제 마법사이니까 마법사처럼 행동하세요, 알죠?";
+		mes "우리 마법사들은 마법의 궁극적인 힘을 가지고 있으니 조심해야 해요.";
 		next;
-		mes "[Catherine]";
-		mes "Don't go about casting spells in town for no reason, or bother others with spells that are in their own battle.";
-		mes "A Wizard's magic is meant for their own battles with monsters.";
+		mes "[캐서린]";
+		mes "마을에서 아무 이유 없이 주문을 외우거나, 전투 중인 주문으로 다른 사람을 괴롭히지 마세요.";
+		mes "마법사의 마법은 몬스터와의 전투를 위한 것입니다.";
 		next;
-		mes "[Catherine]";
-		mes "Go join parties with others and keep training.";
-		mes "And...oh, wait, I prepared a present for you, one sec.";
+		mes "[캐서린]";
+		mes "다른 사람들과 파티에 참여하고 훈련을 계속하세요.";
+		mes "그리고...아 잠깐만요, 선물 준비했어요 잠시만요.";
 		next;
-		mes "[Catherine]";
-		mes "rummage rummage...";
-		mes "shuffle shuffle...";
+		mes "[캐서린]";
+		mes "뒤적뒤적 뒤적뒤적...";
+		mes "셔플 셔플...";
 		next;
 		getitem 505,6; //Blue_Potion
-		mes "[Catherine]";
-		mes "Here you go. I hope you'll make good use of it when you need it. ~tehehe";
-		mes "I gave them to you as a present, so don't go out and sell it. Use it for yourself, ok?";
+		mes "[캐서린]";
+		mes "자요. 필요하실때 잘 활용하시길 바랄게요~테헤헤";
+		mes "선물로 드렸으니 나가서 팔지 마시고 마음껏 쓰세요 알겠죠?";
 		next;
-		mes "[Catherine]";
-		mes "Well, then...*sight*...live a wonderful life as a Wizard, become the strongest out there!";
+		mes "[캐서린]";
+		mes "그럼...*시력*...마법사로서 멋진 삶을 살고, 최강자가 되어보세요!";
 		close;
 	}
 }
 
-gef_tower,102,24,2	script	Gloomy Wizard	735,{
+gef_tower,102,24,2	script	우울한 마법사::Gloomy Wizard	735,{
 	if (BaseJob != Job_Mage) {
 		if (BaseJob == Job_Wizard) {
-			mes "[Raulel]";
-			mes "*Cough* *cough* what do you want?";
-			mes "If you are a person that uses magic, then you need to make sure you are well informed about it.";
+			mes "[라울렐]";
+			mes "*기침* *기침* 무엇을 원하세요?";
+			mes "당신이 마법을 사용하는 사람이라면 그것에 대해 잘 알고 있는지 확인해야 합니다.";
 			next;
-			mes "[Raulel]";
-			mes "Don't live dishonestly, or impolitely, or else one day you'll be caught in a spell you can't control, and BOOM, your dead!";
+			mes "[라울렐]";
+			mes "부정직하거나 무례하게 살지 마세요. 그러지 않으면 어느 날 통제할 수 없는 마법에 걸려 펑, 망할 겁니다!";
 			if (Sex == SEX_MALE) {
-				mes "If you don't want that to happen, then learn how to use spells properly!";
+				mes "그런 일이 벌어지고 싶지 않다면, 마법을 올바르게 사용하는 법을 배우세요!";
 				next;
-				mes "[Raulel]";
-				mes "You may live life crippled if you get obsessed with the love of Greater Magic. ~haha";
+				mes "[라울렐]";
+				mes "대마법의 사랑에 푹 빠지면 인생을 불구로 살 수도 있습니다. ~하하";
 			}
 			else {
-				mes "So learn how to use magic properly, or you would just be better off giving up on using magic.";
+				mes "그러니까 마법을 제대로 쓰는 법을 배우지 않으면 마법을 포기하는 게 나을 것 같아요.";
 				next;
-				mes "[Raulel]";
-				mes "If you don't want that, go hit on a guy or something! ~Hahahaha";
-				mes "If you don't pay attention to yourself, you'll be engulfed by magic one day...";
+				mes "[라울렐]";
+				mes "그거 싫으면 가서 남자라도 때려라! ~하하하하";
+				mes "자신에게 주의를 기울이지 않으면 언젠가는 마법에 휩싸이게 될 겁니다...";
 			}
 			close;
 		}
 		else if (BaseJob == Job_Priest) {
-			mes "[Raulel]";
-			mes "Go away, one who works for the Church!";
-			mes "Magic repels Holy power, jeez...your messing up my aura.";
+			mes "[라울렐]";
+			mes "교회를 위해 일하는 사람은 물러가라!";
+			mes "마법이 신성한 힘을 밀어내네, 이런...네가 내 오라를 망쳐놨어.";
 			next;
-			mes "[Raulel]";
-			mes "And plus, *cough* *cough* my health isn't all that good right now either...";
-			mes "Don't come any closer, just leave!";
+			mes "[라울렐]";
+			mes "그리고 게다가 *기침* *기침* 내 건강도 지금은 그리 좋지 않습니다...";
+			mes "가까이 오지 말고 그냥 가세요!";
 			close;
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "[Raulel]";
-			mes "Why did a little one like you come here?!";
-			mes "Get lost! ~Hahahahaha";
+			mes "[라울렐]";
+			mes "너 같은 어린애가 왜 여기 왔어?!";
+			mes "길을 잃어! ~하하하하하";
 			close2;
 			warp "geffen",120,110;
 			end;
 		}
-		mes "[Raulel]";
-		mes "*sneeze* *cough* Oooowww...my entire body is in pain. I feel like I'm trapped in a tub of ice water!";
+		mes "[라울렐]";
+		mes "*재채기* *기침* 우우우우우우...온몸이 아프다. 얼음물통에 갇힌 기분이야!";
 		next;
-		mes "[Raulel]";
-		mes "What do you want? Jeez...just get lost, won't you?";
+		mes "[라울렐]";
+		mes "무엇을 원하세요? 이런...그냥 길을 잃으시는 거죠, 그렇죠?";
 		close;
 	}
 	if (WIZ_Q == 0) {
-		mes "[Raulel]";
-		mes "*cough* *cough* *sneeze* I don't know who you are and what you do, but I don't have any business with you.";
+		mes "[라울렐]";
+		mes "*기침* *기침* *재채기* 당신이 누구인지, 무엇을 하는지는 모르겠지만, 나는 당신과 아무 상관도 없습니다.";
 		next;
-		mes "[Raulel]";
-		mes "Go away! Get lost!";
+		mes "[라울렐]";
+		mes "저리 가세요! 길을 잃어보세요!";
 		close;
 	}
 	else if (WIZ_Q == 1 || WIZ_Q  == 2) {
-		mes "[Raulel]";
-		mes "Hahahaha~ You're the one that wants to become a Wizard?!";
+		mes "[라울렐]";
+		mes "하하하하~ 마법사가 되고 싶은건 너야?!";
 		next;
-		mes "[Raulel]";
-		mes "*sneeze* If you just lived as you were, all you'd have to do was hunt a little and live the easy life...";
+		mes "[라울렐]";
+		mes "*재채기* 그냥 원래대로 살았다면 사냥도 좀 하고 편하게 살면 됐을 텐데...";
 		next;
-		mes "[Raulel]";
-		mes "*Cough* *cough* Let's see how well you live as a Wizard. ~Hahahahhaha";
+		mes "[라울렐]";
+		mes "*기침* *기침* 마법사로서 얼마나 잘 살고 있는지 볼까. ~하하하하하";
 		close;
 	}
 	else if ((WIZ_Q == 3) || (WIZ_Q == 4)) {
 		if (WIZ_Q == 3) {
-			mes "[Raulel]";
-			mes "*Cough* *cough*...You must've passed the first test.";
-			mes "Ok, I'm the Wizard in charge of your testing from now on. My name is 'Raulel Asparagus'.";
+			mes "[라울렐]";
+			mes "*기침* *기침*...1차 테스트를 통과하셨나보군요.";
+			mes "알겠습니다. 저는 이제부터 여러분의 테스트를 담당할 마법사입니다. 제 이름은 '라울렐 아스파라거스'입니다.";
 			next;
-			mes "[Raulel]";
-			mes "*sneeze* It's not too late yet, wouldn't you rather just go back to town and enjoy the peaceful life?";
+			mes "[라울렐]";
+			mes "*재채* 아직 늦지 않았으니, 그냥 동네로 돌아가서 평화로운 삶을 즐기시는 것이 어떨까요?";
 			next;
-			mes "[Raulel]";
-			mes "Hahahaha~ You don't know how dangerous it is...to deal with Greater Magic.";
+			mes "[라울렐]";
+			mes "하하하하~ 대마법을 다루는게 얼마나 위험한지 모르시네요.";
 			next;
-			if (select("I want to live as a normal Mage.:I would like to continue with the tests.") == 1) {
-				mes "[Raulel]";
-				mes "Hahaha~ *sneeze* Good choice...*cough* *cough*~";
-				mes "Best not to even dream about life as a Wizard. Graa...Greaa...*sneeze* Greater Magic wasn't meant for humans to use!";
+			if (select("평범한 마법사로 살고 싶습니다.:테스트를 계속하고 싶습니다.") == 1) {
+				mes "[라울렐]";
+				mes "하하하~ *재채기* 좋은 선택이야...*기침* *기침*~";
+				mes "마법사로서의 삶은 꿈도 꾸지 않는 게 최선이다. 으아...그레아아...*재채기* 그레이터 매직은 인간이 쓸 수 있는 게 아니었어!";
 				next;
-				mes "[Raulel]";
-				mes "Leave the top of this tower quietly and don't ever look back.";
-				mes "Just live peacefully with the powers that you have right now.";
+				mes "[라울렐]";
+				mes "이 탑 꼭대기에서 조용히 나가서 절대 뒤돌아보지 마세요.";
+				mes "그냥 지금 가지고 있는 힘으로 평화롭게 살아라.";
 				close;
 			}
-			mes "[Raulel]";
-			mes "*sneeze* Hahahaha~ Now there's a foolish one here!";
-			mes "Well then, let's see how good you are. *cough* I want to see this with my own two eyes!";
+			mes "[라울렐]";
+			mes "*재채기* 하하하하~ 지금 여기 바보가 있다!";
+			mes "그럼 얼마나 잘하는지 볼까. *기침* 이건 내 두 눈으로 보고싶다!";
 			next;
-			mes "[Raulel]";
-			mes "*sneeze* Then let's begin the test!";
-			mes "If you don't answer them all correctly, you fail. Hahahahahahahahaha~";
+			mes "[라울렐]";
+			mes "*재채기* 그럼 테스트를 시작하겠습니다!";
+			mes "모두 정답을 맞추지 못하면 탈락입니다. 하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하~";
 			next;
-			mes "[Raulel]";
-			mes "I'll give you 10 questions so give me the right answers.";
-			mes "If you get something wrong, I won't tell you what it is!";
+			mes "[라울렐]";
+			mes "10문제를 드릴테니 정답을 맞춰주세요.";
+			mes "뭔가 문제가 있으면 알려주지 않겠습니다!";
 			if(checkquest(9016) == -1) {
 				changequest 9015,9016;
 			}
 			next;
-			mes "[Raulel]";
-			mes "*Cough* *cough* Then here go the questions!";
+			mes "[라울렐]";
+			mes "*기침* *기침* 그럼 질문 나갑니다!";
 		}
 		else if (WIZ_Q == 4) {
-			mes "[Raulel]";
-			mes "Hahahaha~ Are you that desperate? *sneeze* What a pain in the arse...";
+			mes "[라울렐]";
+			mes "하하하하~ 그렇게 절망적이야? *재채기* 엉덩이가 너무 아파...";
 			next;
-			mes "[Raulel]";
-			mes "Since you don't want to settle for a stable and peaceful life, I'll give you another chance...";
+			mes "[라울렐]";
+			mes "네가 안정되고 평화로운 삶에 안주하고 싶지 않으니 한 번 더 기회를 주겠다...";
 			next;
-			mes "[Raulel]";
-			mes "If you miss one single question, then just give up. You wouldn't have any talent in being a Wizard! ~Hahahahaha";
+			mes "[라울렐]";
+			MES "하나의 단일 질문을 놓치면 포기합니다. 마법사에 재능이 없을 것입니다! ~ 하하하하";
 			next;
-			if (select("Because of you, I want to live as a normal Mage now.:I would like to continue with the tests.") == 1) {
-				mes "[Raulel]";
-				mes "Hahahaha~ Surprising, comming from you, that's a very wise choice...*cough* *cough*";
-				mes "If i were you, i would never, ever dream of becoming a Wizard again. Gre...Greaa...*sneeze* Greater Magic wasn't meant for humans to use.";
+			if (select("당신 덕분에 나는 이제 평범한 마법사로 살고 싶습니다.:테스트를 계속하고 싶습니다.") == 1) {
+				mes "[라울렐]";
+				mes "하하하하~ 신기하네요, 정말 현명한 선택이군요...*기침* *기침*";
+				mes "내가 너라면 다시는 마법사가 되는 꿈은 절대 꾸지 않을 거야. 그레...그레아...*재채기* 그레이터 매직은 인간이 쓸 수 있는 게 아니었어.";
 				next;
-				mes "[Raulel]";
-				mes "Just leave the top of this tower quietly and never look back.";
-				mes "Live peacefully with the powers that you have right now.";
+				mes "[라울렐]";
+				mes "이 탑 꼭대기에서 조용히 떠나 뒤돌아보지 마세요.";
+				mes "지금 가지고 있는 힘으로 평화롭게 살아보세요.";
 				close;
 			}
-			mes "[Raulel]";
-			mes "Hahahahahahaha~ Now there's a foolish one right here!";
-			mes "Well then, let's see just how good you can be! *sneeze* I want to see this with my own two eyes.";
+			mes "[라울렐]";
+			mes "하하하하하하하~ 지금 여기 바보가 있다!";
+			mes "그럼 얼마나 잘하는지 한 번 볼까요! *재채기* 제 두 눈으로 직접 보고 싶어요.";
 			next;
-			mes "[Raulel]";
-			mes "Then let's begin the test!";
+			mes "[라울렐]";
+			mes "그럼 테스트를 시작하겠습니다!";
 		}
 		next;
 		switch(rand(1,3)) {
 		case 1:
-			mes "[Raulel]";
-			mes "1. Which of the following is not necessary to learn Fire Wall?";
+			mes "[라울렐]";
+			mes "1. 다음 중 방화벽 학습에 필요하지 않은 것은 무엇입니까?";
 			next;
-			if (select("Fire Bolt Lv 4:Fire Ball Lv 5:Sight Lv 1:Napalm Beat Lv 4") == 4)
+			if (select("파이어 볼트 Lv 4:파이어 볼 Lv 5:시야 Lv 1:네이팜 비트 Lv 4") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "2. Regaurdless of it's previous attribute, What does the monster's attribute change to when you cast Frost Diver on it?";
+			mes "[라울렐]";
+			mes "2. 이전 속성과 상관없이 프로스트 다이버를 시전하면 몬스터의 속성은 어떻게 바뀌나요?";
 			next;
-			if (select("Water:Earth:Fire:Wind") == 1)
+			if (select("물:땅:불:바람") == 1)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "3. When you completely master Napalm Beat, what is the ratio of the increased MATK using that spell?";
+			mes "[라울렐]";
+			mes "3. 네이팜탄을 완전히 마스터했을 때, 그 마법을 사용하면 MATK가 얼마나 증가하나요?";
 			next;
-			if (select("1.6 times:1.7 times:2 times:20 times") == 2)
+			if (select("1.6번:1.7번:2번:20번") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "4. What item do you need when casting Stone Curse?";
+			mes "[라울렐]";
+			mes "4. 스톤 커스를 시전할 때 필요한 아이템은 무엇인가요?";
 			next;
-			if (select("Red Blood:Blue Gemstone:Yellow Gemstone:Red Gemstone") == 4)
+			if (select("빨간 피:파란 보석:노란 보석:빨간 보석") ==4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "5. Which of the following is not required to master Safety Wall?";
+			mes "[라울렐]";
+			mes "5. 다음 중 안전벽을 마스터하기 위해 요구되는 사항이 아닌 것은 무엇입니까?";
 			next;
-			if (select("Napalm Beat Lv 4:Soul Strike Lv 5:Increase SP Recovery Lv 6:Safety Wall Lv 7") == 3)
+			if (select("네이팜 비트 Lv 4:소울 스트라이크 Lv 5:SP 회복력 증가 Lv 6:안전벽 Lv 7") == 3)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "6. Without the INT bonus, what amount of SP is recovered every 10 seconds when you have learned Increase SP Recovery Lv 7?";
+			mes "[라울렐]";
+			mes "6. SP회복증가 Lv7을 익히면 INT보너스가 없으면 10초마다 SP가 얼마나 회복되나요?";
 			next;
 			if (select("14:21:28:35") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "7. Using Energy Coat, when you have 50% of your SP remaining, how much SP is used when hit, and what percentage is damage reduced by?";
+			mes "[라울렐]";
+			mes "7. 에너지코트를 사용하면 SP가 50% 남았을 때 피격 시 SP는 얼마나 소모되며 데미지는 몇%만큼 감소되나요?";
 			next;
-			if (select("Damage 18% SP1.5%:Damage 18% SP2%:Damage 24% SP1.5%:Damage 24% SP2%") == 2)
+			if (select("데미지 18% SP1.5%:데미지 18% SP2%:데미지 24% SP1.5%:데미지 24% SP2%") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "8. How much SP is consumed and how many times can you avoid attacks when using Safety Wall Lv 6?";
+			mes "[라울렐]";
+			mes "8. 안전벽 Lv6 사용시 SP는 얼마나 소모되며, 공격을 몇 번이나 피할 수 있나요?";
 			next;
-			if (select("SP 40, 6 times:SP 35, 6 times:SP 40, 7 times:SP 35, 7 times") == 3)
+			if (select("SP 40, 6번:SP 35, 6번:SP 40, 7번:SP 35, 7번") == 3)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "9. How much SP is needed when using Lv 10 Thunderstorm?";
+			mes "[라울렐]";
+			mes "9. 썬더스톰 Lv10 사용시 SP는 얼마나 필요한가요?";
 			next;
 			if (select("84:74:64:54") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "10. Which skill is most useful training in the Byalan Dungeon?";
+			mes "[라울렐]";
+			mes "10. 바이알란 던전에서 가장 유용한 스킬은 무엇인가요?";
 			next;
-			if (select("Lightning Bolt:Fire Bolt:Cold Bolt:Sight") == 1)
+			if (select("라이트닝 볼트:파이어 볼트:콜드 볼트:사이트") == 1)
 				set .@wizard_t,.@wizard_t+10;
 			break;
 		case 2:
-			mes "[Raulel]";
-			mes "1. Which monster can you obtain a slotted Guard from?";
+			mes "[라울렐]";
+			mes "1. 슬롯 가드를 얻을 수 있는 몬스터는 무엇인가요?";
 			next;
-			if (select("Thief Bug:PecoPeco:Pupa:Kobold (Hammer)") == 3)
+			if (select("도둑벌레:페코페코:푸파:코볼드(해머)") == 3)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "2. Which of the following is the easiest monster for a low level Mage to hunt?";
+			mes "[라울렐]";
+			mes "2. 다음 중 저레벨 마법사가 사냥하기 가장 쉬운 몬스터는 무엇인가요?";
 			next;
-			if (select("Flora:Giearth:Golem:Myst") == 1)
+			if (select("플로라:기어스:골렘:미스트") == 1)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "3. Which monster will not be affected by Stone Curse?";
+			mes "[라울렐]";
+			mes "3. 돌의 저주에 영향을 받지 않는 몬스터는 무엇인가요?";
 			next;
-			if (select("Elder Willow:Evil Druid:Magnolia:Marc") == 2)
+			if (select("버드나무 장로:사악한 드루이드:목련:마크") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "4. When attacking a Lv 3 water attribute monster with a wind attribute weapon, what is the damage percentage?";
+			mes "[라울렐]";
+			mes "4. 풍속성 무기로 Lv3 수속성 몬스터 공격 시 피해량은 몇%인가요?";
 			next;
 			if (select("125%:150%:175%:200%") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "5. If a Baby Desert Wolf and a Familiar fought, which one would win?";
+			mes "[라울렐]";
+			mes "5. 아기사막늑대와 사역마가 싸우면 누가 이길까요?";
 			next;
 			if (select("Baby Desert Wolf:Familiar:Neither:I don't know") == 1)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "6. Which of the following cannot be a Cute Pet?";
+			mes "[라울렐]";
+			mes "6. 다음 중 귀여운 애완동물이 될 수 없는 것은 무엇입니까?";
 			next;
-			if (select("Poporing:Roda Frog:Smokie:Poison Spore") == 2)
+			if (select("팝포링:로다개구리:스모키:독포자") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "7. Choose the monster that is weak against a fire attribute attack.";
+			mes "[라울렐]";
+			mes "7. 불속성 공격에 약한 몬스터를 선택하세요.";
 			next;
-			if (select("Dagger Goblin:Mace Goblin:Morningstar Goblin:Hammer Goblin") == 4)
+			if (select("대거 고블린:메이스 고블린:모닝스타 고블린:해머 고블린") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "8. Which of the following has the highest defense?";
+			mes "[라울렐]";
+			mes "8. 다음 중 방어력이 가장 높은 것은 무엇입니까?";
 			next;
-			if (select("Horn:Chonchon:Andre:Caramel") == 4)
+			if (select("호른:촌촌:앙드레:카라멜") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "9. Choose the monster that's of a different species.";
+			mes "[라울렐]";
+			mes "9. 다른 종족의 몬스터를 선택하세요.";
 			next;
-			if (select("Poring:Mastering:Ghostring:Spore") == 3)
+			if (select("포링:마스터링:고스트링:포자") == 3)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "10. Which of the following is not an Undead monster?";
+			mes "[라울렐]";
+			mes "10. 다음 중 언데드 몬스터가 아닌 것은 무엇입니까?";
 			next;
-			if (select("Drake:Megalodon:Deviace:Khalitzburg") == 3)
+			if (select("드레이크:메갈로돈:디바이스:칼리츠버그") == 3)
 				set .@wizard_t,.@wizard_t+10;
 			break;
 		case 3:
-			mes "[Raulel]";
-			mes "1. Which stat is the most important for a Mage?";
+			mes "[라울렐]";
+			mes "1. 마법사에게 가장 중요한 능력치는 무엇인가요?";
 			next;
 			if (select("INT:AGI:DEX:VIT") == 1)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "2. Which attribute does not have a 'Bolt' type attack?";
+			mes "[라울렐]";
+			mes "2. '볼트'형 공격이 없는 속성은 무엇인가요?";
 			next;
-			if (select("Water:Earth:Fire:Wind") == 2)
+			if (select("물:땅:불:바람") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "3. Choose the one that does not relate to a Mage.";
+			mes "[라울렐]";
+			mes "3. 마법사와 관련이 없는 것을 선택하세요.";
 			next;
-			if (select("Weak physical strength.:Attacks at a distance.:Good at selling stuff.:Magic Defense is high.") == 3)
+			if (select("약한 체력.:원거리 공격.:물건 판매에 능숙.:마법방어력이 높다.") == 3)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "4. Which town is the home of Mages?";
+			mes "[라울렐]";
+			mes "4. 마법사들의 고향은 어느 마을인가요?";
 			next;
-			if (select("Prontera:Morocc:Alberta:Geffen") == 4)
+			if (select("프론테라:모로크:앨버타:게펜") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "5. Which of the following cards has nothing to do with INT?";
+			mes "[라울렐]";
+			mes "5. 다음 중 INT와 관련이 없는 카드는 무엇인가요?";
 			next;
-			if (select("Andre Egg Card:Soldier Andre Card:Baby Desert Wolf Card:Elder Willow Card") == 2)
+			if (select("안드레 에그 카드:군인 안드레 카드:아기 사막늑대 카드:버드나무 장로 카드") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "6. What is the Mage good at compared to other job classes?";
+			mes "[라울렐]";
+			mes "6. 다른 직업에 비해 마법사의 장점은 무엇인가요?";
 			next;
-			if (select("Exceptional Vocal Ability:Exceptional Acting Ability:Exceptional Dance Skills:Exceptional Magic Skills") == 4)
+			if (select("보컬 능력이 탁월함:연기력이 탁월함:댄스 실력이 탁월함:마술 실력이 탁월함") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "7. What is the INT bonus at Job Lv 40 for a Mage?";
+			mes "[라울렐]";
+			mes "7. 마법사 직업레벨 40에서 지능 보너스는 무엇인가요?";
 			next;
 			if (select("8:7:6:5") == 4)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "8. Which item can a Mage not equip?";
+			mes "[라울렐]";
+			mes "8. 마법사가 장착할 수 없는 아이템은 무엇인가요?";
 			next;
 			if (select("Knife:Boys Cap:Sandle:Eye of Dullahan") == 2)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "9. Which of the following is the catalyst when making the Mage test solution 3?";
+			mes "[라울렐]";
+			mes "9. 다음 중 메이지 시험용액 3을 만들 때 촉매제는 무엇인가요?";
 			next;
-			if (select("Blue Gemstone:Red Gemstone:Yellow Gemstone:Red Blood") == 1)
+			if (select("파란 보석:빨간 보석:노란 보석:빨간 피") == 1)
 				set .@wizard_t,.@wizard_t+10;
-			mes "[Raulel]";
-			mes "10. Which card is irrelevant to magic?";
+			mes "[라울렐]";
+			mes "10. 마법과 관련 없는 카드는 무엇인가요?";
 			next;
-			if (select("Marduk Card:Magnolia Card:Willow Card:Maya Card") == 2)
+			if (select("마르둑 카드:목련 카드:버드나무 카드:마야 카드") == 2)
 				set .@wizard_t,.@wizard_t+10;
 		}
-		mes "[Raulel]";
+		mes "[라울렐]";
 		if (WIZ_Q == 4) {
-			mes "Good job, you finished answered all the questions... Go buy yourself some potions or something if you have the Zeny. Haha...";
+			mes "잘했어요. 모든 질문에 답하셨어요... 제니가 있으면 가서 물약이나 뭐 사오세요. 하하...";
 			next;
-			mes "[Raulel]";
-			mes "Your score is... " + .@wizard_t + "points.....";
+			mes "[라울렐]";
+			mes "당신의 점수는... "+.@wizard_t+"점.....";
 			if (.@wizard_t == 100) {
 				set WIZ_Q,5;
 				changequest 9016,9017;
-				mes "Hahahahahahah~ Well done, you passed the second test.";
-				mes "It wasn't done in one try like mine was, but I'll let you slide...";
+				mes "하하하하하하~ 수고하셨어요, 두 번째 시험에 합격하셨어요.";
+				mes "나처럼 한 번에 된 건 아니지만 그냥 넘어가도록 할게요...";
 				next;
-				mes "[Raulel]";
-				mes "*sneeze* Don't relax just yet, there's still the matter of the third and final test.";
-				mes "I advise you to rest a bit while the final test is prepared. Your gonna need it. Hahahahaha~";
+				mes "[라울렐]";
+				mes "*재채기* 아직 긴장하지 마세요. 아직 세 번째이자 마지막 테스트가 남았습니다.";
+				mes "기말고사 준비하는 동안 좀 쉬시길 권합니다. 꼭 필요할 것 같아요. 하하하하하~";
 				close;
 			}
 			else if (.@wizard_t == 90) {
 				set WIZ_Q,5;
 				changequest 9016,9017;
-				mes "Hahaha~ Since you only missed one problem, you passed the second test.";
-				mes "It wasn't done in one try like mine was, but I'll let you slide...";
+				mes "하하하~ 한 문제만 틀려서 2차 시험에 합격하셨어요.";
+				mes "나처럼 한 번에 된 건 아니지만 그냥 넘어가도록 할게요...";
 				next;
-				mes "[Raulel]";
-				mes "*sneeze* Don't relax just yet, there's still the matter of the third and final test.";
-				mes "I advise you to rest a bit while the final test is prepared. Your gonna need it. Hahahahaha~";
+				mes "[라울렐]";
+				mes "*재채기* 아직 긴장하지 마세요. 아직 세 번째이자 마지막 테스트가 남았습니다.";
+				mes "기말고사 준비하는 동안 좀 쉬시길 권합니다. 꼭 필요할 것 같아요. 하하하하하~";
 				close;
 			}
 			else if (.@wizard_t == 80) {
 				set WIZ_Q,5;
 				changequest 9016,9017;
-				mes "Sheez... You didn't do very well, but you passed the second test.";
-				mes "It wasn't done in one try like mine was, but I'll let you slide...";
+				mes "쯧쯧... 성적은 별로인데 2차 시험에 합격했구나.";
+				mes "나처럼 한 번에 된 건 아니지만 그냥 넘어가도록 할게요...";
 				next;
-				mes "[Raulel]";
-				mes "*sneeze* Don't relax just yet, there's still the matter of the third and final test.";
-				mes "I advise you to rest a bit while the final test is prepared. Your gonna need it. Hahahahaha~";
+				mes "[라울렐]";
+				mes "*재채기* 아직 긴장하지 마세요. 아직 세 번째이자 마지막 테스트가 남았습니다.";
+				mes "기말고사 준비하는 동안 좀 쉬시길 권합니다. 꼭 필요할 것 같아요. 하하하하하~";
 				close;
 			}
 			else {
-				mes "You failed. Go study some more!";
+				mes "실패했어요. 가서 공부 좀 더 하세요!";
 				next;
-				mes "[Raulel]";
-				mes "*cough* *cough* Did you really think you could become a Wizard with such a mediocre level like yours?";
-				mes "Get lost! If you were a Wizard right now, the monsters that I fight, would eat you up in no time!";
+				mes "[라울렐]";
+				mes "*기침* *기침* 정말 당신처럼 평범한 레벨의 마법사가 될 수 있다고 생각하셨나요?";
+				mes "저리 가세요! 당신이 지금 마법사라면, 제가 싸우는 몬스터들이 당신을 금새 잡아먹을 겁니다!";
 				close;
 			}
 		}
-		mes "Hmmm...Good job, you finished answering all the questions, go buy yourself some potions or something, thats IF you have the Zeny. Hahahahahahahah~";
+		mes "흠 ... 잘 했어, 당신은 모든 질문에 대답했고, 자신에게 물약이나 무언가를 사러 가십시오.";
 		next;
-		mes "[Raulel]";
-		mes "Your score is... " + .@wizard_t + " points!";
+		mes "[라울렐]";
+		mes "당신의 점수는... "+.@wizard_t+" 포인트입니다!";
 		if (.@wizard_t == 100) {
 			set WIZ_Q,5;
 			changequest 9016,9017;
-			mes "*cough* *Cough* Well done, you passed the second test.";
+			mes "*기침* *기침* 잘하셨습니다. 2차 시험에 합격하셨습니다.";
 			next;
-			mes "[Raulel]";
-			mes "Hahahaha~ Don't relax just yet, there's still the third test.";
-			mes "*sneeze* I advise you to rest a bit while the final test is prepared...Hahahahah~";
+			mes "[라울렐]";
+			mes "하하하하~ 아직 긴장하지 마세요. 아직 세 번째 테스트가 남았습니다.";
+			mes "*재채기* 기말고사가 준비되는 동안 좀 쉬시길 권합니다...하하하하하~";
 			close;
 		}
 		else if (.@wizard_t == 90) {
 			set WIZ_Q,5;
 			changequest 9016,9017;
-			mes "Hahahaha~ I'll let you slide by since you only missed one problem. You passed the second test.";
+			mes "하하하하~ 한 문제만 틀렸으니 그냥 넘어가도록 할게요. 두 번째 시험에 합격하셨어요.";
 			next;
-			mes "[Raulel]";
-			mes "Hahahaha~ Don't relax just yet, there's still the third test.";
-			mes "*sneeze* I advise you to rest a bit while the final test is prepared...Hahahahah~";
+			mes "[라울렐]";
+			mes "하하하하~ 아직 긴장하지 마세요. 아직 세 번째 테스트가 남았습니다.";
+			mes "*재채기* 기말고사가 준비되는 동안 좀 쉬시길 권합니다...하하하하하~";
 			close;
 		}
 		else {
 			set WIZ_Q,4;
-			mes "You failed. I will let you come back again...after you've learned more relating to the type of questions I've asked you.";
+			mes "당신은 실패했습니다. 제가 질문한 유형의 질문에 대해 더 많이 배운 후에 다시 돌아오도록 하겠습니다.";
 			next;
-			mes "[Raulel]";
-			mes "Tisk...not enough, not enough! Did you really think you could become a Wizard with the little bit of knowledge you have?";
-			mes "Get lost! If you were a Wizard right now, the monsters I deal with would eat you up in no time!";
+			mes "[라울렐]";
+			mes "티스크...부족해요, 부족해요! 정말 당신이 가진 약간의 지식으로 마법사가 될 수 있다고 생각하셨나요?";
+			mes "저리 가세요! 당신이 지금 마법사라면, 제가 상대하는 몬스터들이 당신을 금세 먹어치울 것입니다!";
 			close;
 		}
 	}
 	else if (WIZ_Q == 5) {
-		mes "[Raulel]";
-		mes "Ok, hope you got plenty of rest. Hahahahahah~";
-		mes "Then let's begin the last test.";
+		mes "[라울렐]";
+		mes "알았어, 푹 쉬길 바라. 하하하하하하~";
+		mes "그럼 마지막 테스트를 시작하겠습니다.";
 		next;
-		mes "[Raulel]";
-		mes "Should I explain a little about this final test? It is difficult, I will not hide that from you...";
+		mes "[라울렐]";
+		mes "이번 최종 테스트에 대해 조금 설명할까? 어렵다. 숨기지 않겠다...";
 		next;
-		if (select("No, it's ok, I'm ready.:I would like to listen.") == 1) {
-			mes "[Raulel]";
-			mes "What a rash person. Your the type that rushes into battle without thinking, what in the world are you doing here instead of with the Prontera Chivalry? Heck, go for it! *cough* Not my fault if you end up dying.";
-			mes "Just consider yourself a glass cannon...because the monsters are going to break you into pieces. Hahahahahahahahaha~";
+		if (select("아니요, 괜찮아요. 준비됐어요.:듣고 싶습니다.") == 1) {
+			mes "[라울렐]";
+			mes "참 경솔한 놈이군. 생각도 없이 전투에 뛰어드는 타입, 대체 프론테라 기사단과 함께하지 않고 여기서 뭐하는 거야? 어서 가! *기침* 죽더라도 내 잘못은 아니야. ";
+			mes "그냥 유리대포라고 생각해보세요...몬스터들이 당신을 산산조각 낼 테니까요. 하하하하하하하하하하하하하하하하하하하하하~";
 			next;
 			set WIZ_Q,6;
 			savepoint "geffen",120,107,1,1;
-			mes "[Raulel]";
-			mes "Then, as you wish. I'll send you there right now.";
-			mes "Oh, if you see a white light at the end of a tunnel, that means your pathetic cause you failed! Hahahahahah~";
+			mes "[라울렐]";
+			mes "그럼 마음대로 하세요. 지금 바로 그곳으로 보내드리겠습니다.";
+			mes "아, 터널 끝에서 하얀 빛이 보인다면 그건 당신의 한심한 원인이 실패했다는 뜻이에요! 하하하하하하~";
 			close2;
 			warp "job_wiz",57,154;
 			end;
 		}
-		mes "[Raulel]";
-		mes "What a devoted person. Very well, I'll explain.";
-		mes "No matter how hard this last test may seem, if you do as I say, you can finish it quickly and easily.";
+		mes "[라울렐]";
+		mes "참 헌신적인 분이네요. 그럼 설명하겠습니다.";
+		mes "아무리 어려운 마지막 시험이라도 제가 시키는 대로만 하면 빠르고 쉽게 끝낼 수 있어요.";
 		next;
-		mes "[Raulel]";
-		mes "The final test has a total of 3 parts.";
-		mes "The order is Water Room, Earth Room, Fire Room. In each room, there are monsters of that particular attribute.";
+		mes "[라울렐]";
+		mes "최종 테스트는 총 3부분으로 구성됩니다.";
+		mes "물방, 흙방, 불방 순서입니다. 각 방에는 해당 속성의 몬스터들이 있습니다.";
 		next;
-		mes "[Raulel]";
-		mes "You'll find out what monsters will be there once you go in. If you use attacks with the *sneeze*";
-		mes "right attribute, it shouldn't be too hard. Hahaha~";
+		mes "[라울렐]";
+		mes "들어가면 어떤 몬스터들이 있을지 알게 될 거예요. *재채기*로 공격을 하면";
+		mes "올바른 속성, 별로 어렵지 않을 것 같아요. 하하하~";
 		next;
-		mes "[Raulel]";
-		mes "Once you defeat all the monsters within the given time in any one room...";
-		mes "you'll be moved to the next room.";
+		mes "[라울렐]";
+		mes "한 방에서 주어진 시간 내에 모든 몬스터를 처치하면...";
+		mes "다음 방으로 이동됩니다.";
 		next;
-		mes "[Raulel]";
-		mes "After these three rooms are clear, the testing is over.";
-		mes "You will become a Wizard which is controlled by Greater Magic Powers! Know this...There is no returning to an easy life.";
+		mes "[라울렐]";
+		mes "이 3개의 방을 모두 클리어하면 테스트는 종료됩니다.";
+		mes "당신은 더 큰 마법의 힘에 의해 조종되는 마법사가 될 것입니다! 이것을 알아두세요...안심한 삶으로 돌아갈 수는 없습니다.";
 		next;
-		mes "[Raulel]";
-		mes "Hahaha~ You look frightened. You know, it's not too late to turn back and live an easy life.";
-		mes "If you want, I can send you back to town right now... What do you want to do?";
+		mes "[라울렐]";
+		mes "하하하~ 겁이 많으시군요. 이제라도 돌아가서 편하게 살아도 늦지 않았습니다.";
+		mes "원하신다면 지금 바로 시내로 보내드릴 수 있는데... 뭘 하고 싶으신가요?";
 		next;
-		if (select("Continue testing.:I want to go back because I have butterflies in my stomach.") == 1) {
+		if (select("계속 테스트합니다.:배가 고프기 때문에 돌아가고 싶습니다.") == 1) {
 			set WIZ_Q,6;
 			savepoint "geffen",120,107,1,1;
-			mes "[Raulel]";
-			mes "You are indeed, very determined. Ok! Hahahahahaha~";
-			mes "*Cough* *cough* As you wish, we shall begin the final test!";
+			mes "[라울렐]";
+			mes "정말 결단력이 대단하시네요. 알았어! 하하하하하하~";
+			mes "*기침* *기침* 원하시는 대로 마지막 테스트를 시작하겠습니다!";
 			close2;
 			warp "job_wiz",57,154;
 			end;
 		}
 		set WIZ_Q,6;
-		mes "[Raulel]";
-		mes "Good thinking. This is a better choice for you. Hahahahah~";
-		mes "Go back and live a easy life, Greater Magic is a force that should not be wield by types like yourself.";
+		mes "[라울렐]";
+		mes "좋은 생각이네요. 이게 더 좋은 선택이네요. 하하하하하~";
+		mes "돌아가서 편하게 살아라, 대마법은 너 같은 놈이 휘두르면 안 되는 힘이다.";
 		close2;
 		warp "geffen",120,110;
 		end;
 	}
 	else if (WIZ_Q == 6) {
 		if (WIZ_Q2 == 6) {
-			mes "[Raulel]";
-			mes "Hahahahahaha~ I've never seen anyone so...sooo...*sneeze* tenacious as you.";
-			mes "So you want to try again eh? Even though I've ridiculed you for your failures before??";
+			mes "[라울렐]";
+			mes "하하하하하하~ 사람을 본 적이 없어서...읭...*재채기* 너만큼 끈질기네.";
+			mes "그래서 다시 해보겠다는 거야? 예전에 실패했다고 조롱했는데??";
 			next;
-			mes "[Raulel]";
-			mes "Ok then, here's a proposition. Since you're probably worn out as it is, and I can clearly see the lust for Greater Magic burning in your eyes...";
-			mes "Hahahahaha~ yeah! Go bring me a ^3355FFWorn Out Scroll^000000.";
+			mes "[라울렐]";
+			mes "그럼 제안을 하나 드리죠. 이대로도 지쳤을 텐데, 눈 속에서 대마법에 대한 열망이 불타오르는 게 확연히 보이니까...";
+			mes "하하하하하~ 그래! 가서 ^3355FF낡은 두루마리^000000 가져오너라.";
 			next;
 			set WIZ_Q2,WIZ_Q2+1;
-			mes "[Raulel]";
-			mes "If not, you can take the test again...";
-			mes "Well, I'll send you to take the test for now. Hahahaha~";
+			mes "[라울렐]";
+			mes "그렇지 않으면 다시 시험을 볼 수 있어요...";
+			mes "그럼 일단 시험보러 보내드릴게요. 하하하하~";
 			close2;
 			warp "job_wiz",57,154;
 			end;
 		}
 		else if (WIZ_Q2 > 6) {
-			mes "[Raulel]";
-			mes "Oh! So you're back? Hahahahaha~";
-			mes "*Cough* Cough* Do you want to take the test again? Or did you bring the ^3355FFWorn Out Scroll^000000?";
+			mes "[라울렐]";
+			mes "아! 돌아왔구나? 하하하하하~";
+			mes "*기침* 기침* 시험을 다시 볼 건가요? 아니면 ^3355FF낡은 주문서^000000을 가져오셨나요?";
 			next;
-			if (select("Continue the test.:Worn Out Scroll...") == 1) {
+			if (select("테스트를 계속합니다.:낡은 스크롤...") == 1) {
 				savepoint "geffen",120,107,1,1;
-				mes "[Raulel]";
-				mes "Hahaha~ Ok, at least you have some spirit.";
-				mes "I'll send you in again, try dying once more will yah? Hahahahahahahahaha~";
+				mes "[라울렐]";
+				mes "하하하~ 알았어, 적어도 정신은 좀 차렸구나.";
+				mes "다시 보낼 테니까 한 번 더 죽어 볼까? 하하하하하하하하하~";
 				close2;
 				warp "job_wiz",57,154;
 				end;
 			}
 			if (countitem(618) > 0) {
 				delitem 618,1; //Worn_Out_Scroll
-				mes "[Raulel]";
-				mes "Hahahahahahahaha~ *Cough* *cough* So you ended up bringing one of these eh? Good job...";
-				mes "I think I can continue my research with this...";
+				mes "[라울렐]";
+				mes "하하하하하하하~ *기침* *기침* 결국 이거 하나 가져왔구나 에? 수고했어...";
+				mes "이것으로 연구를 계속할 수 있을 것 같아요...";
 				next;
 				set WIZ_Q2,0;
 				set WIZ_Q,7;
-				mes "[Raulel]";
-				mes "Even though your not Grade A Wizard material, I can tell your serious about wanting the Greater Magic. I'll tell Catherine that you passed. Hahahahahahahahah~";
-				mes "You went through a lot of trouble here, and that is the true purpose for us selecting Wizards. Only those who will devote themselves to the art will ever become Wizards. Good luck to you. Become much Stronger. Hahahahahaha~";
+				mes "[라울렐]";
+				mes "비록 A급 마법사가 아니더라도 대마법을 원하는 마음은 충분히 알 수 있어요.";
+				mes "캐서린에게 합격했다고 전해줄게요. 하하하하하하하하하하하하하하하하하하하하하하하하~";
+				mes "여기서 고생 많으셨고, 그것이 우리가 마법사를 선택한 진짜 목적입니다. 예술에 전념하는 자만이 마법사가 될 수 있습니다.";
+				mes "행운을 빕니다. 더욱 강해지세요. 하하하하하하~";
 				close;
 			}
 		}
-		mes "[Raulel]";
-		mes "*sneeze* What? You want to take the test again?";
-		mes "Geez...you already failed the battle test! Hahahahahahahaha~ So you like magic that much, eh?";
+		mes "[라울렐]";
+		mes "*재채기* 뭐라구요? 시험 또 보려고요?";
+		mes "이런... 벌써 배틀 테스트에 떨어졌구나! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 마법을 그렇게 좋아하는구나?";
 		next;
-		mes "[Raulel]";
-		mes "Since your so weak that you can't finish this final test on your own...you need a separate test to help you out.";
-		mes "*Cough* If you can't pass the battle test, then do a good job with this one. Hahahahahahah~";
+		mes "[라울렐]";
+		mes "너는 너무 약해서 이번 최종 테스트를 혼자서는 끝낼 수 없기 때문에...별도의 테스트가 필요하다.";
+		mes "*기침* 전투 테스트를 통과하지 못했다면 이번 전투를 잘 하세요. 하하하하하하하하하하하하하하하하~";
 		next;
-		mes "[Raulel]";
-		mes "Well, you better answer these problems if you plan on becoming a Wizard. Hahahahahahaha~";
+		mes "[라울렐]";
+		mes "음, 마법사가 될 계획이라면 이 문제에 답하는 것이 좋을 것 같습니다. 하하하하하하하하하하하하하하하하하하하하하~";
 		next;
-		mes "[Raulel]";
-		mes "1. Choose the monster with a different attribute than the others.";
+		mes "[라울렐]";
+		mes "1. 다른 속성과 다른 속성을 가진 몬스터를 선택하세요.";
 		next;
-		if (select("Mantis:Cornutus:Giearth:Caramel") == 2)
+		if (select("사마귀:코르누투스:기어스:캐러멜") == 2)
 			set .@wizard_t,.@wizard_t+20;
-		mes "[Raulel]";
-		mes "2. Choose the monster that is not a looting one.";
+		mes "[라울렐]";
+		mes "2. 약탈 몬스터가 아닌 몬스터를 선택하세요.";
 		next;
-		if (select("Yoyo:Magnolia:Metaller:Zerom") == 4)
+		if (select("요요:목련:메탈러:제로") == 4)
 			set .@wizard_t,.@wizard_t+20;
-		mes "[Raulel]";
-		mes "3. Which of these monsters does not recognize casting?";
+		mes "[라울렐]";
+		mes "3. 이 몬스터 중 캐스팅을 인식하지 못하는 몬스터는 누구인가요?";
 		next;
-		if (select("Marina:Vitata:Scorpion:Giearth") == 1)
+		if (select("마리나:비타타:스콜피온:기어스") == 1)
 			set .@wizard_t,.@wizard_t+20;
-		mes "[Raulel]";
-		mes "4. Choose the spell that would be efficient against a Marine Sphere.";
+		mes "[라울렐]";
+		mes "4. 마린 스피어(Marine Sphere)에 대해 효율적인 주문을 선택하세요.";
 		next;
-		if (select("Cold Bolt:Fire Bolt:Lightning Bolt:Stone Curse") == 3)
+		if (select("콜드 볼트:파이어 볼트:라이트닝 볼트:스톤 저주") == 3)
 			set .@wizard_t,.@wizard_t+20;
-		mes "[Raulel]";
-		mes "5. Choose the monster that can move.";
+		mes "[라울렐]";
+		mes "5. 움직일 수 있는 몬스터를 선택하세요.";
 		next;
-		if (select("Hydra:Madragora:Greatest General:Frilldora") == 4)
+		if (select("히드라:마드라고라:가장 위대한 장군:프릴도라") == 4)
 			set .@wizard_t,.@wizard_t+20;
-		mes "[Raulel]";
-		mes "*pfft* Do it right, so I don't have to ask again.";
+		mes "[라울렐]";
+		mes "*pfft* 제대로 해주세요. 그러면 다시 묻지 않아도 됩니다.";
 		next;
-		mes "[Raulel]";
-		mes "You got " + .@wizard_t + " points.";
+		mes "[라울렐]";
+		mes "당신은 "+ .@wizard_t+" 포인트를 얻었습니다.";
 		if (.@wizard_t == 100) {
-			mes "Hahahahahaha~ *Cough* *cough* If you can answer all these questions correctly, how is it you can't do well in battles??";
+			mes "하하하하하하~ *기침* *기침* 이 질문에 다 맞췄다면 어째서 전투를 잘 못하는 걸까요??";
 			next;
 		}
 		else if (.@wizard_t == 80) {
-			mes "Eh, soso...";
-			mes "I'll let you retake the test.";
+			mes "어, 그럼요...";
+			mes "다시 시험을 보도록 할게요.";
 			next;
 		}
 		else {
-			mes "You failed! Go study some more!";
+			mes "너는 실패했어! 가서 공부 좀 더 해라!";
 			next;
-			mes "[Raulel]";
-			mes "You lack something...*sneez*...like intelligence. That's why you keep on failing. Hahahahahahahaha~";
+			mes "[라울렐]";
+			mes "너는 뭔가...*재채*...지능이 부족하다. 그래서 계속 실패하는구나. 하하하하하하하하~";
 			close;
 		}
-		if (select("Begin the test please.:Can I get another explanation?") == 1) {
-			mes "[Raulel]";
-			mes "Nobody is going to help you become a Wizard. Hahahahahahahaha~";
-			mes "*Cough* *cough* No point in crying after dying...";
+		if (select("테스트를 시작해주세요.:다른 설명을 들을 수 있나요?") == 1) {
+			mes "[라울렐]";
+			mes "당신이 마법사가 되도록 도와줄 사람은 아무도 없어요. 하하하하하하하하~";
+			mes "*기침* *기침* 죽어서 울어도 소용없어...";
 			next;
 			percentheal 100,100;
-			mes "[Raulel]";
-			mes "Then, as you wish. I'll send you to fight.";
-			mes "Oh! If you see some tall pearly gates and hear a booming deep voice from behind it, that means that your a failure when it comes to Magic. Hahahahahahahahaha~";
+			mes "[라울렐]";
+			mes "그럼 마음대로 하세요. 전투에 보내드리겠습니다.";
+			mes "아! 높은 진주문이 보이고 그 뒤에서 쿵쿵하고 굵은 목소리가 들리면 매직에 실패했다는 뜻입니다. 하하하하하하하하하하하하하하하하하하하하하하~";
 			close2;
 			warp "job_wiz",57,154;
 			end;
 		}
-		mes "[Raulel]";
-		mes "*Cough* *cough* Then I shall explain.";
-		mes "The test may be hard, but just do as I tell you and it shouldn't be a problem.";
+		mes "[라울렐]";
+		mes "*기침* *기침* 그럼 설명하겠습니다.";
+		mes "시험이 어려울 수도 있지만, 제가 시키는 대로 하시면 문제될 것 없습니다.";
 		next;
-		mes "[Raulel]";
-		mes "There are 3 parts to this final test.";
-		mes "The order is...*sneez*...the Water Room, Earth Room, and then the Fire Room. Each room has monsters of that attribute in it.";
+		mes "[라울렐]";
+		mes "이번 최종 테스트는 세 부분으로 구성되어 있습니다.";
+		mes "순서는...*재미*...물방, 흙방, 불방 순입니다. 각 방에는 해당 속성의 몬스터가 있습니다.";
 		next;
-		mes "[Raulel]";
-		mes "You'll see what monsters they are when you enter.";
-		mes "If you use the appropriate spells against them, it shouldn't be that difficult. Hahahahahahaha~";
+		mes "[라울렐]";
+		mes "들어가면 어떤 몬스터인지 알 수 있어요.";
+		mes "적절한 마법을 사용한다면 그렇게 어렵지는 않을 것 같아요. 하하하하하하하~";
 		next;
-		mes "[Raulel]";
-		mes "Within the given time, if you defeat all the monsters...";
-		mes "you will be sent to the next room.";
+		mes "[라울렐]";
+		mes "주어진 시간 내에 몬스터를 모두 쓰러뜨리면...";
+		mes "다음 방으로 이동됩니다.";
 		next;
-		mes "[Raulel]";
-		mes "After that, the test is over.";
-		mes "You will then become a Wizard controlled by Greater Magic powers! There is no coming back to the easy life you have known thus far.";
+		mes "[라울렐]";
+		mes "그럼 시험은 끝나요.";
+		mes "그러면 당신은 더 큰 마법의 힘에 의해 조종되는 마법사가 될 것입니다! 이제까지의 편안한 삶으로 돌아갈 수는 없습니다.";
 		next;
-		mes "[Raulel]";
-		mes "Hahahahaha~ You look frightened. It's not too late you know.";
-		mes "*Cough* *cough* You can give up and go back to town! Just forget about the Greater Magic and live a normal life. What do yah say?";
+		mes "[라울렐]";
+		mes "하하하하하~ 겁먹은 것 같군요. 아직 늦지 않았네요.";
+		mes "*기침* *기침* 포기하고 마을로 돌아가도 돼요! 대마법은 잊어버리고 평범하게 살아요. 뭐라고요?";
 		next;
 		if (select("Continue with the test.:I'm too scared, I would like to quit.") == 1) {
 			percentheal 100,100;
-			mes "[Raulel]";
-			mes "This time when you die, don't come back crying. Hahahahahahahahah~ *Cough *cough*";
-			mes "As you wish, let's begin the final test!";
+			mes "[라울렐]";
+			mes "이번에는 죽으면 울면서 돌아오지 마세요. 하하하하하하하하~ *기침*기침*";
+			mes "원하는 대로 최종 테스트를 시작하겠습니다!";
 			close2;
 			warp "job_wiz",57,154;
 			end;
 		}
-		mes "[Raulel]";
-		mes "Comming from you, thats some darn good thinking. That's more a fit for you anyways. Hahahahahahahahaha~";
-		mes "Go back and live a quiet and peaceful life!";
+		mes "[라울렐]";
+		mes "당신에게서 나온 말인데, 정말 좋은 생각이네요. 어쨌든 당신에게는 그게 더 어울리네요. 하하하하하하하하하~";
+		mes "돌아가서 조용하고 평화로운 삶을 살아보세요!";
 		close2;
 		warp "geffen",120,110;
 		end;
 	}
 	else if (WIZ_Q == 7) {
-		mes "[Raulel]";
-		mes "You shouldn't have any more business with me as far as I'm concerned.";
-		mes "But, since your so darned persistent, I'll let you take the test again. Hahahahaha~";
+		mes "[라울렐]";
+		mes "나에 관한 한 당신은 나와 더 이상 거래를 하지 말아야 합니다.";
+		mes "근데 너 너무 끈질기니까 다시 시험 보도록 해줄게. 하하하하하~";
 		next;
-		mes "[Raulel]";
-		mes "Go! Go and become the Wizard you really want to be.";
-		mes "And be careful! Greater Magic will always be after you...";
+		mes "[라울렐]";
+		mes "가라! 가서 네가 정말로 되고 싶은 마법사가 되어라.";
+		mes "그리고 조심하세요! 더 큰 마법이 항상 당신을 쫓을 것입니다...";
 		close;
 	}
 }
 
-job_wiz,50,165,4	script	Arena Assistant	700,{
-	mes "[Arena Assistant]";
-	mes "Welcome to the Wizard Job Change Arena.";
-	mes "If you would like to take the final test, then please enter the waiting room.";
+job_wiz,50,165,4	script	아레나 도우미::Arena Assistant	700,{
+	mes "[아레나 도우미]";
+	mes "마법사 전직장에 오신 것을 환영합니다.";
+	mes "기말고사를 치르시려면 대기실로 들어가주세요.";
 	next;
-	mes "[Arena Assistant]";
-	mes "If someone is already taking the test, please wait.";
-	mes "All testing status will be broadcasted, and will begin as soon as the previous tester has gone through.";
+	mes "[아레나 도우미]";
+	mes "이미 시험을 치르고 계신 분들은 잠시만 기다려주세요.";
+	mes "모든 테스트 상태가 공개되며, 이전 테스터가 완료되면 바로 시작됩니다.";
 	next;
-	mes "[Arena Assistant]";
-	mes "Each person may take approximately 5 to 10 minutes.";
-	mes "If you would like to leave the arena, please log off anytime.";
+	mes "[아레나 도우미]";
+	mes "1인당 약 5~10분 정도 소요됩니다.";
+	mes "경기장을 떠나고 싶으시다면 언제든지 로그아웃해주세요.";
 	close;
 
 OnInit:
@@ -1097,17 +1099,17 @@ OnEnable:
 	enablenpc "Room of Water";
 	if (!checkre(0)) {
 		set .MyMobs,8;
-		monster "job_wiz",129,170,"Obeaune",1044,1,"Room of Water::OnMyMobDead";
+		monster "job_wiz",129,170,"오본느",1044,1,"Room of Water::OnMyMobDead";
 	}
 	else
 		set .MyMobs,7;
-	monster "job_wiz",109,174,"Phen",1158,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",118,174,"Shellfish",1074,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",109,165,"Vadon",1066,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",118,165,"Cornutus",1067,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",101,157,"Marina",1141,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",126,157,"Marin",1242,1,"Room of Water::OnMyMobDead";
-	monster "job_wiz",98,170,"Magnolia",1138,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",109,174,"휀",1158,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",118,174,"조개",1074,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",109,165,"바돈",1066,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",118,165,"커너투스",1067,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",101,157,"마린",1141,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",126,157,"마린",1242,1,"Room of Water::OnMyMobDead";
+	monster "job_wiz",98,170,"백련옥",1138,1,"Room of Water::OnMyMobDead";
 	initnpctimer;
 	end;
 
@@ -1120,46 +1122,46 @@ OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
 		set WIZ_Q2,WIZ_Q2+1;
-		mapannounce "job_wiz",strcharinfo(0)+" has succeeded in eliminating the monsters.",bc_map;
+		mapannounce "job_wiz",strcharinfo(0)+" 몬스터 퇴치에 성공했습니다.",bc_map;
 		donpcevent "Room of Water#Door::OnEnable";
 		stopnpctimer;
 	}
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","Water Room; The job change test will now proceed.",bc_map;
+	mapannounce "job_wiz","워터룸; 이제 전직 테스트가 진행됩니다.",bc_map;
 	end;
 
 OnTimer2000:
-	mapannounce "job_wiz","Time limit is 3 minutes. We will now start the test.",bc_map;
+	mapannounce "job_wiz","제한 시간은 3분입니다. 이제 테스트를 시작하겠습니다.",bc_map;
 	end;
 
 OnTimer3000:
-	mapannounce "job_wiz","Please eliminate all monsters within the time limit.",bc_map;
+	mapannounce "job_wiz","제한시간 내에 모든 몬스터를 제거해주세요.",bc_map;
 	end;
 
 OnTimer33000:
-	mapannounce "job_wiz","2 minutes and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","2분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer63000:
-	mapannounce "job_wiz","2 minutes remaining.",bc_map;
+	mapannounce "job_wiz","2분 남음.",bc_map;
 	end;
 
 OnTimer93000:
-	mapannounce "job_wiz","1 minute and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","1분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer123000:
-	mapannounce "job_wiz","1 minute remaining.",bc_map;
+	mapannounce "job_wiz","1분 남았습니다.",bc_map;
 	end;
 
 OnTimer153000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남았습니다.",bc_map;
 	end;
 
 OnTimer173000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남았습니다.",bc_map;
 	end;
 
 OnTimer183000:
@@ -1172,7 +1174,7 @@ OnTimer184000:
 	end;
 
 OnTimer185000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer186000:
@@ -1191,11 +1193,11 @@ OnEnable:
 	enablenpc "Room of Water#Door";
 	donpcevent "Room of Water::OnDisable";
 	set .MyMobs,5;
-	monster "job_wiz",114,169,"Marine Sphere",1142,1,"Room of Water#Door::OnMyMobDead";
-	monster "job_wiz",112,169,"Hydra",1068,1,"Room of Water#Door::OnMyMobDead";
-	monster "job_wiz",116,169,"Hydra",1068,1,"Room of Water#Door::OnMyMobDead";
-	monster "job_wiz",114,171,"Hydra",1068,1,"Room of Water#Door::OnMyMobDead";
-	monster "job_wiz",114,167,"Hydra",1068,1,"Room of Water#Door::OnMyMobDead";
+	monster "job_wiz",114,169,"마린 스피어",1142,1,"Room of Water#Door::OnMyMobDead";
+	monster "job_wiz",112,169,"히드라",1068,1,"Room of Water#Door::OnMyMobDead";
+	monster "job_wiz",116,169,"히드라",1068,1,"Room of Water#Door::OnMyMobDead";
+	monster "job_wiz",114,171,"히드라",1068,1,"Room of Water#Door::OnMyMobDead";
+	monster "job_wiz",114,167,"히드라",1068,1,"Room of Water#Door::OnMyMobDead";
 	initnpctimer;
 	end;
 
@@ -1207,7 +1209,7 @@ OnDisable:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "job_wiz",strcharinfo(0)+" has succeeded in eliminating the monsters.",bc_map;
+		mapannounce "job_wiz",strcharinfo(0)+" 몬스터 퇴치에 성공했습니다.",bc_map;
 		percentheal 100,100;
 		warp "job_wiz",116,97;
 		donpcevent "Room of Water#Door::OnDisable";
@@ -1217,19 +1219,19 @@ OnMyMobDead:
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","The guard monster has appeared. You have 1 minute.",bc_map;
+	mapannounce "job_wiz","경비 몬스터가 나타났습니다. 1분 남았습니다.",bc_map;
 	end;
 
 OnTimer30000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남음.",bc_map;
 	end;
 
 OnTimer50000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남았습니다.",bc_map;
 	end;
 
 OnTimer60000:
-	mapannounce "job_wiz","Time is up.",bc_map;
+	mapannounce "job_wiz","시간이 다되었다.",bc_map;
 	donpcevent "Room of Water#Door::OnDisable";
 	end;
 
@@ -1238,7 +1240,7 @@ OnTimer61000:
 	end;
 
 OnTimer62000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer63000:
@@ -1276,13 +1278,13 @@ OnEnable:
 	}
 	else
 		set .MyMobs,7;
-	monster "job_wiz",111,102,"Yoyo",1057,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",120,102,"Deniro",1105,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",111,102,"Caramel",1103,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",120,93,"Giearth",1121,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",107,98,"Bigfoot",1060,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",124,98,"Orc Warrior",1023,1,"Room of Earth::OnMyMobDead";
-	monster "job_wiz",104,86,"Vitata",1176,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",111,102,"요요",1057,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",120,102,"데니로",1105,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",111,102,"카라멜",1103,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",120,93,"가이아스",1121,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",107,98,"빅풋",1060,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",124,98,"오크 워리어",1023,1,"Room of Earth::OnMyMobDead";
+	monster "job_wiz",104,86,"비타타",1176,1,"Room of Earth::OnMyMobDead";
 	initnpctimer;
 	end;
 
@@ -1294,50 +1296,50 @@ OnDisable:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "job_wiz",strcharinfo(0) + " has succeeded in eliminating the monsters.",bc_map;
+		mapannounce "job_wiz",strcharinfo(0) + " 몬스터 퇴치에 성공했습니다.",bc_map;
 		donpcevent "Room of Earth#Door::OnEnable";
 		stopnpctimer;
 	}
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","Earth Room; The job change test will now proceed.",bc_map;
+	mapannounce "job_wiz","지구실; 이제 직업 변경 테스트가 진행됩니다.",bc_map;
 	end;
 
 OnTimer2000:
-	mapannounce "job_wiz","The time limit is 3 minutes.",bc_map;
+	mapannounce "job_wiz","제한 시간은 3분입니다.",bc_map;
 	end;
 
 OnTimer3000:
-	mapannounce "job_wiz","Eliminate all monster within the time limit.",bc_map;
+	mapannounce "job_wiz","제한 시간 내에 모든 몬스터를 제거하세요.",bc_map;
 	end;
 
 OnTimer33000:
-	mapannounce "job_wiz","2 minutes and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","2분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer63000:
-	mapannounce "job_wiz","2 minutes remaining.",bc_map;
+	mapannounce "job_wiz","2분 남았습니다.",bc_map;
 	end;
 
 OnTimer93000:
-	mapannounce "job_wiz","1 minute and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","1분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer123000:
-	mapannounce "job_wiz","1 minute remaining.",bc_map;
+	mapannounce "job_wiz","1분 남았습니다.",bc_map;
 	end;
 
 OnTimer153000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남았습니다.",bc_map;
 	end;
 
 OnTimer173000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남았습니다.",bc_map;
 	end;
 
 OnTimer183000:
-	mapannounce "job_wiz","Time is up.",bc_map;
+	mapannounce "job_wiz","시간이 다되었다.",bc_map;
 	donpcevent "Room of Earth::OnDisable";
 	end;
 
@@ -1346,7 +1348,7 @@ OnTimer184000:
 	end;
 
 OnTimer185000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer186000:
@@ -1366,16 +1368,16 @@ OnEnable:
 	donpcevent "Room of Earth::OnDisable";
 	if (!checkre(0)) {
 		set .MyMobs,7;
-		monster "job_wiz",116,97,"Flora",1118,1,"Room of Earth#Door::OnMyMobDead";
+		monster "job_wiz",116,97,"플로라",1118,1,"Room of Earth#Door::OnMyMobDead";
 	}
 	else
 		set .MyMobs,6;
-	monster "job_wiz",114,95,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
-	monster "job_wiz",118,95,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
-	monster "job_wiz",114,99,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
-	monster "job_wiz",118,99,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
-	monster "job_wiz",116,94,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
-	monster "job_wiz",116,100,"Mandragora",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",114,95,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",118,95,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",114,99,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",118,99,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",116,94,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
+	monster "job_wiz",116,100,"만드라고라",1020,1,"Room of Earth#Door::OnMyMobDead";
 	initnpctimer;
 	end;
 
@@ -1387,7 +1389,7 @@ OnDisable:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "job_wiz",strcharinfo(0) + " has succeeded in eliminating the monster.",bc_map;
+		mapannounce "job_wiz",strcharinfo(0) + " 몬스터 제거에 성공했습니다.",bc_map;
 		percentheal 100,100;
 		warp "job_wiz",46,99;
 		donpcevent "Room of Earth#Door::OnDisable";
@@ -1397,19 +1399,19 @@ OnMyMobDead:
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","The guard monster has appeared. You have 1 minute.",bc_map;
+	mapannounce "job_wiz","경비 몬스터가 나타났습니다. 1분 남았습니다.",bc_map;
 	end;
 
 OnTimer30000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남음.",bc_map;
 	end;
 
 OnTimer50000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남음.",bc_map;
 	end;
 
 OnTimer60000:
-	mapannounce "job_wiz","End time.",bc_map;
+	mapannounce "job_wiz","종료 시간.",bc_map;
 	donpcevent "Room of Earth#Door::OnDisable";
 	end;
 
@@ -1418,7 +1420,7 @@ OnTimer61000:
 	end;
 
 OnTimer62000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer63000:
@@ -1434,7 +1436,7 @@ OnInit:
 	end;
 
 OnTouch_:
-	mapannounce "job_wiz",strcharinfo(0) + " has not succeeded.",bc_map;
+	mapannounce "job_wiz",strcharinfo(0) + " 성공하지 못했습니다.",bc_map;
 	warp "geffen",120,110;
 	end;
 }
@@ -1450,17 +1452,17 @@ OnEnable:
 	enablenpc "Room of Fire";
 	if (!checkre(0)) {
 		set .MyMobs,8;
-		monster "job_wiz",58,110,"Zerom",1178,1,"Room of Fire::OnMyMobDead";
-		monster "job_wiz",54,89,"Desert Wolf",1106,1,"Room of Fire::OnMyMobDead";
+		monster "job_wiz",58,110,"제롬",1178,1,"Room of Fire::OnMyMobDead";
+		monster "job_wiz",54,89,"데저트 울프",1106,1,"Room of Fire::OnMyMobDead";
 	}
 	else
 		set .MyMobs,6;
-	monster "job_wiz",33,110,"Goblin",1123,1,"Room of Fire::OnMyMobDead";
-	monster "job_wiz",40,103,"Scorpion",1001,1,"Room of Fire::OnMyMobDead";
-	monster "job_wiz",51,103,"Frilldora",1119,1,"Room of Fire::OnMyMobDead";
-	monster "job_wiz",40,92,"PecoPeco",1019,1,"Room of Fire::OnMyMobDead";
-	monster "job_wiz",51,92,"Elder Willow",1033,1,"Room of Fire::OnMyMobDead";
-	monster "job_wiz",37,89,"Metaller",1058,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",33,110,"고블린",1123,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",40,103,"스콜피온",1001,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",51,103,"프릴도라",1119,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",40,92,"페코페코",1019,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",51,92,"엘더",1033,1,"Room of Fire::OnMyMobDead";
+	monster "job_wiz",37,89,"메틀러",1058,1,"Room of Fire::OnMyMobDead";
 	initnpctimer;
 	end;
 
@@ -1472,50 +1474,50 @@ OnDisable:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "job_wiz",strcharinfo(0) + " has succeeded in eliminating the monsters.",bc_map;
+		mapannounce "job_wiz",strcharinfo(0) + " 몬스터 퇴치에 성공했습니다.",bc_map;
 		donpcevent "Room of Fire#Door::OnEnable";
 		stopnpctimer;
 	}
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","Fire Room; The job change test shall now proceed.",bc_map;
+	mapannounce "job_wiz","소방실; 이제 직업 변경 테스트가 진행됩니다.",bc_map;
 	end;
 
 OnTimer2000:
-	mapannounce "job_wiz","Time limit is 3 minutes. We will now start the test.",bc_map;
+	mapannounce "job_wiz","제한 시간은 3분입니다. 이제 테스트를 시작하겠습니다.",bc_map;
 	end;
 
 OnTimer3000:
-	mapannounce "job_wiz","Please eliminate all monsters within the time limit.",bc_map;
+	mapannounce "job_wiz","제한 시간 내에 모든 몬스터를 처치해 주세요.",bc_map;
 	end;
 
 OnTimer33000:
-	mapannounce "job_wiz","2 minutes and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","2분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer63000:
-	mapannounce "job_wiz","2 minutes remaining.",bc_map;
+	mapannounce "job_wiz","2분 남음.",bc_map;
 	end;
 
 OnTimer93000:
-	mapannounce "job_wiz","1 minute and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","1분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer123000:
-	mapannounce "job_wiz","1 minute remaining.",bc_map;
+	mapannounce "job_wiz","1분 남음.",bc_map;
 	end;
 
 OnTimer153000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남았습니다.",bc_map;
 	end;
 
 OnTimer173000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남았습니다.",bc_map;
 	end;
 
 OnTimer183000:
-	mapannounce "job_wiz","Time is up.",bc_map;
+	mapannounce "job_wiz","시간이 다되었다.",bc_map;
 	donpcevent "Room of Fire::OnDisable";
 	end;
 
@@ -1524,7 +1526,7 @@ OnTimer184000:
 	end;
 
 OnTimer185000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer186000:
@@ -1543,14 +1545,14 @@ OnEnable:
 	enablenpc "Room of Fire#Door";
 	donpcevent "Room of Fire::OnDisable";
 	set .MyMobs,3;
-	monster "job_wiz",44,99,"Greatest General",1277,1,"Room of Fire#Door::OnMyMobDead";
+	monster "job_wiz",44,99,"엘리게이터",1277,1,"Room of Fire#Door::OnMyMobDead";
 	if (checkre(0)) {
-		monster "job_wiz",43,99,"Greatest General",1277,1,"Room of Fire#Door::OnMyMobDead";
-		monster "job_wiz",45,99,"Greatest General",1277,1,"Room of Fire#Door::OnMyMobDead";
+		monster "job_wiz",43,99,"엘리게이터",1277,1,"Room of Fire#Door::OnMyMobDead";
+		monster "job_wiz",45,99,"엘리게이터",1277,1,"Room of Fire#Door::OnMyMobDead";
 	}
 	else {
-		monster "job_wiz",43,99,"Horong",1129,1,"Room of Fire#Door::OnMyMobDead";
-		monster "job_wiz",45,99,"Horong",1129,1,"Room of Fire#Door::OnMyMobDead";
+		monster "job_wiz",43,99,"호롱",1129,1,"Room of Fire#Door::OnMyMobDead";
+		monster "job_wiz",45,99,"호롱",1129,1,"Room of Fire#Door::OnMyMobDead";
 	}
 	initnpctimer;
 	end;
@@ -1563,7 +1565,7 @@ OnDisable:
 OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
-		mapannounce "job_wiz","Congratulations, " + strcharinfo(0) + ". You have passed the job change test.",bc_map;
+		mapannounce "job_wiz","축하해요, " + strcharinfo(0) + ". 전직시험에 합격하셨습니다.",bc_map;
 		set WIZ_Q,7;
 		changequest 9017,9018;
 		donpcevent "Room of Fire#Door::OnDisable";
@@ -1573,27 +1575,27 @@ OnMyMobDead:
 	end;
 
 OnTimer1000:
-	mapannounce "job_wiz","The guard monster has appeared. You have 2 minutes.",bc_map;
+	mapannounce "job_wiz","경비 몬스터가 나타났습니다. 2분 남았습니다.",bc_map;
 	end;
 
 OnTimer30000:
-	mapannounce "job_wiz","1 minute and 30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","1분 30초 남았습니다.",bc_map;
 	end;
 
 OnTimer60000:
-	mapannounce "job_wiz","1 minute remaining.",bc_map;
+	mapannounce "job_wiz","1분 남음.",bc_map;
 	end;
 
 OnTimer90000:
-	mapannounce "job_wiz","30 seconds remaining.",bc_map;
+	mapannounce "job_wiz","30초 남았습니다.",bc_map;
 	end;
 
 OnTimer110000:
-	mapannounce "job_wiz","10 seconds remaining.",bc_map;
+	mapannounce "job_wiz","10초 남음.",bc_map;
 	end;
 
 OnTimer120000:
-	mapannounce "job_wiz","Time is up.",bc_map;
+	mapannounce "job_wiz","시간이 다되었다.",bc_map;
 	donpcevent "Room of Fire#Door::OnDisable";
 	end;
 
@@ -1602,7 +1604,7 @@ OnTimer121000:
 	end;
 
 OnTimer122000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer123000:
@@ -1637,11 +1639,11 @@ OnDisable:
 	end;
 
 OnTimer2000:
-	mapannounce "job_wiz","Please return and complete the rest of the job change processes.",bc_map;
+	mapannounce "job_wiz","돌아가서 나머지 직업 변경 절차를 완료하십시오.",bc_map;
 	end;
 
 OnTimer4000:
-	mapannounce "job_wiz","This is the end of the test. Next candidate, please stand by.",bc_map;
+	mapannounce "job_wiz","이것이 테스트의 끝입니다. 다음후보님은 대기해주세요.",bc_map;
 	end;
 
 OnTimer5000:
@@ -1649,7 +1651,7 @@ OnTimer5000:
 	end;
 
 OnTimer7000:
-	mapannounce "job_wiz","Next candidate, please enter.",bc_map;
+	mapannounce "job_wiz","다음 후보를 입력해 주세요.",bc_map;
 	end;
 
 OnTimer9000:
@@ -1659,161 +1661,161 @@ OnTimer9000:
 	end;
 }
 
-gef_tower,107,36,4	script	White Dog#wiz	81,{
+gef_tower,107,36,4	script	흰 개::White Dog#wiz	81,{
 	if (BaseJob != Job_Mage) {
 		if (BaseJob == Job_Wizard) {
-			mes "[Maria]";
-			mes "Instead of sticking around here, wouldn't it be better to go out and test how strong you've become?";
+			mes "[마리아]";
+			mes "여기서 맴돌기보다는 나가서 얼마나 강해졌는지 시험해 보는 게 낫지 않을까?";
 			next;
-			mes "[Maria]";
-			mes "Don't forget that Wizards grow and improve in power each and every day.";
+			mes "[마리아]";
+			mes "마법사들의 힘은 매일매일 성장하고 발전한다는 사실을 잊지 마세요.";
 			close2;
 			cutin "job_wizard_maria01",255;
 			end;
 		}
 		else if (BaseClass == Job_Novice) {
-			mes "[Dog]";
-			mes "What? Kiddo!";
-			mes "Is a Dog talking so amusing to you?";
+			mes "[개]";
+			mes "뭐라고? 꼬마야!";
+			mes "개 말투가 그렇게 재밌나요?";
 		}
 		else {
 			cutin "job_wizard_maria02",2;
-			mes "[Dog]";
-			mes "Sheesh...Why would a person that can't even cast a spell a single spell come up here?";
-			mes "*Pfft* If you're that bored, do the world a favor and climb to the top of this building via the outside, then proceed to do some acrobatics if you get there.";
+			mes "[개]";
+			mes "쳇... 마법도 하나도 못쓰는 사람이 왜 여기 올라오냐?";
+			mes "*Pfft* 그렇게 심심하다면, 세상에 부탁을 하고 이 건물 꼭대기에 외부로 올라가서 거기에 도착하면 곡예를 좀 해보세요.";
 		}
 		next;
-		mes "[Dog]";
-		mes "*Bark* Get lost!";
-		mes "I don't have time for people like you!";
+		mes "[개]";
+		mes "*짖어* 길을 잃으세요!";
+		mes "너같은 사람이랑 있을 시간은 없어!";
 		close2;
 		cutin "job_wizard_maria02",255;
 		end;
 	}
 	if (WIZ_Q == 0) {
 		cutin "job_wizard_maria01",2;
-		mes "[Dog]";
-		mes "Ah...I know what you're about to say. You want to change jobs to a Wizard, right?";
+		mes "[개]";
+		mes "아...무슨 말씀인지 알겠습니다. 마법사로 전직하고 싶으신가요?";
 		next;
-		mes "[Dog]";
-		mes "Go talk to Catherine. She'll help you.";
+		mes "[개]";
+		mes "가서 캐서린에게 말을 걸어보세요. 그녀가 도와줄 거예요.";
 		next;
-		mes "[Dog]";
-		mes "Also, if you would like to know anything about the job change process, I can explain.";
+		mes "[개]";
+		mes "또한 전직 절차에 대해 알고 싶으신 것이 있으시면 설명해 드릴 수 있습니다.";
 		next;
 		switch(select(".......:A Dog is talking to me...")) {
 		case 1:
-			mes "[Dog]";
-			mes "...*bark*...? What is it?? Why are you looking at me like that?!";
-			mes "Is it your first time seeing a Dog talk?";
+			mes "[개]";
+			mes "...*짖어*...? 뭐야?? 왜 그렇게 쳐다봐?!";
+			mes "개가 말하는 모습은 처음 보시나요?";
 			next;
-			mes "[Dog]";
-			mes "*Bark* It's not common that you see a Dog talking I suppose. bark~";
-			mes "...Yes i suppose it is a rare site...*grrr*...Stop Gawking for goodness sakes!";
+			mes "[개]";
+			mes "*짖음* 개가 말하는 모습을 흔히 볼 수는 없을 것 같아요. 짖어요~";
+			mes "...네, 희귀한 사이트인 것 같아요...*으르렁*...맙소사, 제발 Gawking을 그만 두세요!";
 			next;
-			mes "[Dog]";
-			mes "My name is 'Maria Splodofska'. Just call me 'Maria'.";
-			mes "I'm helping candidates that wish to become Wizards.";
+			mes "[개]";
+			mes "제 이름은 '마리아 스플로도프스카'입니다. 그냥 '마리아'라고 불러주세요.";
+			mes "저는 마법사가 되고 싶은 후보자들을 돕고 있어요.";
 			next;
 			cutin "job_wizard_maria03",2;
-			mes "[Maria]";
-			mes "*Bark* Well, the reason I became a dog is...I was helping my boyfriend in experimenting to prepare for his Final for his Magic Degree. Well, *Grrrr* he accidentally turned me into a dog.";
-			mes "Theoretically, in a couple months the chemicals should wear off and I should be returned to normal. When exactly, I have no idea?";
+			mes "[마리아]";
+			mes "*짖는 소리* 내가 개가 된 이유는... 남자친구의 마법학 학위 마지막 준비 실험을 도와주던 중, *으르렁거리며* 그 사람이 우연히 나를 개로 만들어버렸기 때문이다.";
+			mes "이론적으로 화학물질은 사라지고 몇 달 안에 정상으로 돌아올 것입니다. 정확히 언제가 될지는 잘 모르겠습니다.";
 			next;
 			cutin "job_wizard_maria01",2;
-			mes "[Maria]";
-			mes "Well...it doesn't concern you anyways.";
-			mes "Now, where were we.";
+			mes "[마리아]";
+			mes "글쎄...어차피 너랑은 상관없어.";
+			mes "지금 우리는 어디에 있었나요?";
 			next;
 			break;
 		case 2:
 			cutin "job_wizard_maria02",2;
-			mes "[Dog]";
-			mes "*Bark* *bark* *bark* Don't state the obvious! Alright, I know I'm a dog!";
+			mes "[개]";
+			mes "*짖음* *짖음* *짖음* 뻔한 말은 하지 마세요! 알았어, 난 개라는 걸 알아!";
 			next;
 			cutin "job_wizard_maria01",2;
-			mes "[Dog]";
-			mes "My name is 'Maria Splodofska'. People call me 'Maria'.";
-			mes "I'm helping little ones like you that wish to become Wizards.";
+			mes "[개]";
+			mes "제 이름은 '마리아 스플로도프스카'입니다. 사람들은 저를 '마리아'라고 부릅니다.";
+			mes "나는 당신처럼 마법사가 되고 싶어하는 아이들을 돕고 있어요.";
 			next;
 			cutin "job_wizard_maria03",2;
-			mes "[Dog called 'Maria']";
-			mes "The reason I became a dog is...My boyfriend that was experimenting to prepare for the Magic Degree, accidentally turned me into a dog.";
-			mes "Theoretically, in a couple months, the chemicals should wear off and I should be returned to normal. Exactly when, I have no idea?";
+			mes "['마리아'라는 이름의 개]";
+			mes "내가 개가 된 이유는...마법학위 준비를 실험하던 남자친구가 우연히 나를 개로 만들어버렸기 때문이다.";
+			mes "이론적으로는 몇 달 안에 화학물질이 사라져서 정상으로 돌아가야 합니다. 정확히 언제인지는 모르겠습니다.";
 			next;
 			cutin "job_wizard_maria02",2;
-			mes "[Dog called 'Maria']";
-			mes "I'm not a 'dog' called 'Maria'!! Oi!! Listen to me!!";
+			mes "['마리아'라는 이름의 개]";
+			mes "저는 '마리아'라는 '개'가 아닙니다!! 어이!! 내 말 좀 들어보세요!!";
 			next;
-			mes "[Dog... 'Maria'...]";
-			mes "..........";
+			mes "[개... '마리아'...]";
+			mes "...........";
 			next;
-			mes "[Maria]";
-			mes "...*BARK* *BARK* *BARK*... I'm upset, but whatever!! You seem busy so I'll just drop it.";
+			mes "[마리아]";
+			mes "...*짖음* *짖음* *짖음*... 속상하지만 어쨌든!! 바쁘신 것 같으니 이만 이만 끊겠습니다.";
 			next;
 			break;
 		}
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "Like I said before, to change jobs, talk to Catherine.";
-		mes "She's a new Wizard too.";
+		mes "[마리아]";
+		mes "아까 말했듯이 직업을 바꾸려면 캐서린에게 말을 걸어라.";
+		mes "그녀도 새로운 마법사예요.";
 		next;
-		mes "[Maria]";
-		mes "I can tell you more about the job change process, but I can't hold back a busy person now can I?";
-		mes "What do you think? Should I explain some about whats in store for Mages that wish to become Wizards?";
+		mes "[마리아]";
+		mes "전직 절차에 대해 더 자세히 말씀드릴 수 있지만, 바쁜 사람을 이제 참을 수는 없겠죠?";
+		mes "어떻게 생각하세요? 마법사가 되고 싶어하는 마법사들이 어떤 일을 하게 될지 좀 설명해줄까요?";
 		next;
-		switch(select("Yes, please! I would like that.:No, it's ok.:A talking dog...")) {
+		switch(select("예, 부탁드립니다! 그렇게 해주세요.:아니요, 괜찮아요.:말하는 개...")) {
 		case 1:
 			cutin "job_wizard_maria01",2;
-			mes "[Maria]";
-			mes "OK, I will explain the process for you.";
+			mes "[마리아]";
+			mes "알겠습니다. 과정을 설명해 드리겠습니다.";
 			next;
-			mes "[Maria]";
-			mes "There are three tests in the job change process.";
-			mes "The first test is collecting magic items.";
+			mes "[마리아]";
+			mes "전직 과정에는 세 가지 테스트가 있습니다.";
+			mes "첫 번째 테스트는 마법 아이템 수집입니다.";
 			next;
-			mes "[Maria]";
-			mes "That one begins when you submit an application to Catherine.";
-			mes "She'll either tell you to collect all types of gemstones, or gather stones with attributes.";
+			mes "[마리아]";
+			mes "그 일은 캐서린에게 지원서를 제출하는 순간부터 시작됩니다.";
+			mes "모든 종류의 보석을 모으거나 속성이 있는 돌을 모으라고 할 것입니다.";
 			next;
-			mes "[Maria]";
-			mes "Second test is a magic quiz,";
-			mes "The gloomy Laurel in the corner is in charge of that part.";
+			mes "[마리아]";
+			mes "2차 시험은 마술퀴즈예요,";
+			mes "구석에 있는 우울한 로렐이 그 부분을 담당하고 있어요.";
 			next;
-			mes "[Maria]";
-			mes "There are questions about magic, monsters, and Mages.";
-			mes "Out of the 10 questions, if you don't get them all correct, he doesn't let you pass. In other words, you fail...";
+			mes "[마리아]";
+			mes "마법, 몬스터, 마법사에 관한 질문이 있습니다.";
+			mes "10문제 중 다 맞히지 못하면 합격을 못하게 됩니다. 즉, 불합격입니다...";
 			next;
-			mes "[Maria]";
-			mes "Oddly enough, He is in charge of the 3rd test too.";
-			mes "The third test is eliminating monsters.";
+			mes "[마리아]";
+			mes "이상하게도 3차 시험도 담당하고 계시네요.";
+			mes "세 번째 테스트는 몬스터를 제거하는 것입니다.";
 			next;
-			mes "[Maria]";
-			mes "In each room, there are monsters of certain attributes.";
-			mes "You must attack them with the appropriate spells.";
+			mes "[마리아]";
+			mes "각 방에는 특정 속성의 몬스터들이 있습니다.";
+			mes "적절한 마법으로 공격해야 합니다.";
 			next;
-			mes "[Maria]";
-			mes "Well, that's all that I can say. Go apply now.";
+			mes "[마리아]";
+			mes "글쎄요. 제가 할 수 있는 말은 그게 전부입니다. 지금 신청하러 가세요.";
 			next;
-			mes "[Maria]";
-			mes "It's better to just try it yourself than to listen to my descriptions.";
+			mes "[마리아]";
+			mes "설명을 듣는 것보다 직접 해보는 게 더 나을 것 같아요.";
 			close2;
 			cutin "job_wizard_maria01",255;
 			warp "gef_dun00",116,102;
 			end;
 		case 2:
-			mes "[Maria]";
-			mes "Really? Ok, then go apply and do your best.";
+			mes "[마리아]";
+			mes "정말요? 좋아요, 그럼 가서 지원하고 최선을 다하세요.";
 			close2;
 			cutin "job_wizard_maria01",255;
 			end;
 		case 3:
 			cutin "job_wizard_maria02",2;
-			mes "[Maria]";
-			mes "I'm not a DOG!! HOOOOWWWWWWLLLLLLL~";
+			mes "[마리아]";
+			mes "난 개가 아니야!! 으아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아~";
 			next;
-			mes "[Maria]";
-			mes "Dang it! I hope you FAIL!! Go get lost!!";
+			mes "[마리아]";
+			mes "젠장! 실패하길 바라!! 가서 길을 잃어!!";
 			close2;
 			cutin "job_wizard_maria01",255;
 			warp "gef_dun00",116,102;
@@ -1822,140 +1824,140 @@ gef_tower,107,36,4	script	White Dog#wiz	81,{
 	}
 	else if (WIZ_Q == 1) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "You seem lost...";
-		mes "You've applied, and now you're looking for the items right?";
+		mes "[마리아]";
+		mes "길을 잃은 것 같은데...";
+		mes "신청을 하시고 이제 물건을 찾고 계시죠?";
 		next;
-		mes "[Maria]";
-		mes "But since this is only the first test, don't depend on others.";
-		mes "Complete it yourself. Thats the best way.";
+		mes "[마리아]";
+		mes "하지만 이번은 첫 번째 테스트이므로 남에게 의존하지 마세요.";
+		mes "직접 해보세요. 그게 가장 좋은 방법이에요.";
 		next;
-		mes "[Maria]";
-		mes "From what I've heard, you have to gather gemstones...";
-		mes "I can't help you directly, but I can give you some advice.";
+		mes "[마리아]";
+		mes "보석을 모아야 한다고 하는데...";
+		mes "직접적으로 도움을 드릴 수는 없지만 조언은 드릴 수 있습니다.";
 		next;
-		mes "[Maria]";
-		mes "First, to get Red Gemstones, go to Culverts in Prontera.";
-		mes "You can obtain them from the Thief Bugs and Thief Bug eggs found plentiful there.";
+		mes "[마리아]";
+		mes "먼저 붉은 보석을 얻으려면 프론테라의 암거로 가세요.";
+		mes "도둑벌레 알과 도둑벌레 알에서 얻을 수 있습니다.";
 		next;
-		mes "[Maria]";
-		mes "Yellow Gemstones are easy to find in the desert.";
-		mes "Condors, Picky's, and sometimes monsters like Golem's drop them.";
+		mes "[마리아]";
+		mes "노란색 보석은 사막에서 쉽게 찾을 수 있어요.";
+		mes "콘도르, 피키, 때로는 골렘 같은 몬스터도 드랍합니다.";
 		next;
-		mes "[Maria]";
-		mes "And...*woof* to get Blue Gemstones. Try going to the Byalan Dungeons.";
-		mes "Cornutus, Vadon, and monsters like Mars can drop those Gems.";
+		mes "[마리아]";
+		mes "그리고...*멍* 블루 젬스톤도 얻으세요. 바이알란 던전도 가보세요.";
+		mes "코르누투스나 바돈, 화성과 같은 몬스터들이 보석을 떨어뜨릴 수 있습니다.";
 		next;
-		mes "[Maria]";
-		mes "Of course you can get blue Gemstones at the magic shop here in town...";
-		mes "But, finding them yourself would be much more rewarding and helpful later in the test.";
+		mes "[마리아]";
+		mes "물론 파란색 보석은 여기 마을 마법 상점에서 구할 수 있어요...";
+		mes "하지만 직접 찾아보는 것이 나중에 테스트할 때 훨씬 더 보람 있고 도움이 될 것입니다.";
 		next;
-		mes "[Maria]";
-		mes "Anyways, try your best.";
-		mes "This is the basics of being a Wizard.";
+		mes "[마리아]";
+		mes "어쨌든 최선을 다해 보세요.";
+		mes "마법사의 기본은 이렇습니다.";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;
 	}
 	else if (WIZ_Q == 2) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "You seem lost...";
-		mes "You've applied, and now you're looking for the items right?";
+		mes "[마리아]";
+		mes "길을 잃은 것 같은데...";
+		mes "신청을 하시고 이제 물건을 찾고 계시죠?";
 		next;
-		mes "[Maria]";
-		mes "But since this is only the first test, don't depend on others for help.";
-		mes "Complete it yourself, thats the best way.";
+		mes "[마리아]";
+		mes "이번 테스트는 첫 번째 테스트이므로 남에게 의존하지 마세요.";
+		mes "직접 해보는게 가장 좋은 방법이에요.";
 		next;
-		mes "[Maria]";
-		mes "From what I've heard, you have to gather elemental stones...";
-		mes "I can't help you directly, but I can give you some advice.";
+		mes "[마리아]";
+		mes "내가 듣기론 원소석을 모아야 한다고 하는데...";
+		mes "직접적으로 도움을 드릴 수는 없지만 조언은 드릴 수 있습니다.";
 		next;
-		mes "[Maria]";
-		mes "Well, you can find the Crystal Blue in Byalan Dungeon.";
-		mes "Cornutus, Kukre, Marina, Vadon...these monsters drop them frequently.";
+		mes "[마리아]";
+		mes "크리스탈 블루는 바이알란 던전에서 찾을 수 있어요.";
+		mes "코르누투스, 쿠크레, 마리나, 바돈...이 몬스터들은 자주 드랍합니다.";
 		next;
-		mes "[Maria]";
-		mes "You can get Green Live from insect type monsters.";
-		mes "Try hunting monsters like Horn, Mantis, or Vitata.";
+		mes "[마리아]";
+		mes "곤충형 몬스터에게서 그린라이브를 얻을 수 있습니다.";
+		mes "혼, 맨티스, 비타타 같은 몬스터를 사냥해 보세요.";
 		next;
-		mes "[Maria]";
-		mes "Oh and *woof*, Red Blood. I heard you can get a lot of those from...";
-		mes "Elder Willows, Metallers or Scorpions found in the desert would work well too.";
+		mes "[마리아]";
+		mes "아 그리고 *으윽*, 레드 블러드. 그런 걸 많이 얻을 수 있다고 들었는데...";
+		mes "사막에서 발견되는 버드나무나 메탈러, 전갈도 괜찮을 것 같아요.";
 		next;
-		mes "[Maria]";
-		mes "For Wind of Verdue. Hornet, Stainer, Steel Chonchon.";
-		mes "If you try just a bit, you can get them really easily.";
+		mes "[마리아]";
+		mes "푸른바람을 위하여. 호넷, 스테이너, 강철촌촌.";
+		mes "조금만 노력하면 정말 쉽게 얻을 수 있어요.";
 		next;
-		mes "[Maria]";
-		mes "But anyways, always try your best.";
-		mes "It's the basics of being a Wizard.";
+		mes "[마리아]";
+		mes "그래도 항상 최선을 다하세요.";
+		mes "마법사로서의 기본은 바로 이것입니다.";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;
 	}
 	else if (WIZ_Q == 3) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "Don't be too relieved just after the first test.";
-		mes "Try your best, as you still have two more tests to go.";
+		mes "[마리아]";
+		mes "첫 번째 테스트가 끝났다고 너무 안심하지 마세요.";
+		mes "아직 두 가지 시험이 더 남았으니 최선을 다해 보세요.";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;
 	}
 	else if (WIZ_Q == 4) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
+		mes "[마리아]";
 		mes "ZzzzZzzzZzzz...";
 		next;
 		cutin "job_wizard_maria02",2;
-		mes "[Maria]";
-		mes "*wimper*...Blizadris...you suck...Zzz...";
+		mes "[마리아]";
+		mes "*쯧쯧*...Blizadris...너 정말 짜증나...Zzz...";
 		close2;
 		cutin "job_wizard_maria02",255;
 		end;
 	}
 	else if (WIZ_Q == 5) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "Oh, you're doing well aren't you?";
+		mes "[마리아]";
+		mes "아, 잘 지내지?";
 		next;
-		mes "[Maria]";
-		mes "Well, try your best to the very end.";
-		mes "Laurel is waiting.";
+		mes "[마리아]";
+		mes "자, 끝까지 최선을 다해 보세요.";
+		mes "로렐이 기다리고 있어요.";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;
 	}
 	else if (WIZ_Q == 6) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "*BARK*...you gave up?";
-		mes "*Sigh*...How can you become a Wizard with such a weak heart?";
+		mes "[마리아]";
+		mes "*짖어*...포기하셨나요?";
+		mes "*한숨*...그렇게 약한 마음을 가지고 어떻게 마법사가 될 수 있나요?";
 		next;
-		mes "[Maria]";
-		mes "You know that each room has monsters of the same attribute...";
-		mes "If you're a person that deals with magic, you need to know about the different spells.";
+		mes "[마리아]";
+		mes "방마다 같은 속성의 몬스터들이 있는거 아시죠...";
+		mes "마법을 다루는 사람이라면 다양한 주문에 대해 알아야 합니다.";
 		next;
-		mes "[Maria]";
-		mes "You also need to learn how to counter monsters that use skills.";
-		mes "Your best bet is to kill the monsters that are attacking you first.";
+		mes "[마리아]";
+		mes "스킬을 사용하는 몬스터에 대응하는 방법도 배워야 합니다.";
+		mes "가장 좋은 방법은 당신을 공격하는 몬스터를 먼저 죽이는 것입니다.";
 		next;
-		mes "[Maria]";
-		mes "*Grrr* Anyways, continue the test.";
-		mes "Don't have a weak mind, *woof* and go back! *Bark* *Bark* Right this moment! *BARK*";
+		mes "[마리아]";
+		mes "*으르렁* 어쨌든 테스트를 계속하세요.";
+		mes "약하지 말고 뒤로 돌아가 *짖어*! *짖어* *짖어* 이 순간! *짖어*";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;
 	}
 	else if (WIZ_Q == 7) {
 		cutin "job_wizard_maria01",2;
-		mes "[Maria]";
-		mes "As I thought, I knew you'd be able to do it, I could smell it in yah! *Woof*";
-		mes "Now I can call you Wizard.";
+		mes "[마리아]";
+		mes "내 생각엔 네가 할 수 있을 줄 알았어, 냄새가 났어! *으악*";
+		mes "이제 당신을 마법사라고 부를 수 있겠네요.";
 		next;
-		mes "[Maria]";
-		mes "Congratulations. Always give your best at everything, no matter what.";
+		mes "[마리아]";
+		mes "축하해요. 무슨 일이 있어도 항상 최선을 다하세요.";
 		close2;
 		cutin "job_wizard_maria01",255;
 		end;

@@ -536,6 +536,8 @@
 	export_constant(MF_NORENEWALEXPPENALTY);
 	export_constant(MF_NOPETCAPTURE);
 	export_constant(MF_NOBUYINGSTORE);
+	export_constant(MF_NOLOOTNORMALMOB);
+	export_constant(MF_NO_NPC_SELFDESTRUCTION_ON_ALL);
 	export_constant(MF_NODYNAMICNPC);
 	export_constant(MF_NOBANK);
 
@@ -1915,6 +1917,16 @@
 	export_constant(SC_POWERUP);
 	export_constant(SC_AGIUP);
 	export_constant(SC_PROTECTION);
+
+	//premium buff 
+	export_constant(SC_KAFRA_ITEMBOOST);
+	export_constant(SC_KAFRA_EXPBOOST);
+	export_constant(SC_SUB_ITEMBOOST);
+	export_constant(SC_SUB_EXPBOOST);
+	export_constant(SC_SUB_DEADPENALTY);
+	export_constant(SC_PREMIUM_STORAGEBOOST);
+	export_constant(SC_PREMIUM_ITEMBOOST);
+	export_constant(SC_PREMIUM_EXPBOOST);
 
 	/* status icons */
 	export_deprecated_constant2("SI_BLANK",-1);
@@ -4408,6 +4420,26 @@
 	export_constant(ET_YUT5);
 	export_constant(ET_YUT6);
 	export_constant(ET_YUT7);
+	export_constant(ET_CLICK_ME);
+	export_constant(ET_DAILY_QUEST);
+	export_constant(ET_EVENT);
+	export_constant(ET_JOB_QUEST);
+	export_constant(ET_TRAFFIC_LINE_QUEST);
+	export_constant(ET_CUSTOM_1);
+	export_constant(ET_CUSTOM_2);
+	export_constant(ET_CUSTOM_3);
+	export_constant(ET_CUSTOM_4);
+	export_constant(ET_CUSTOM_5);
+	export_constant(ET_CUSTOM_6);
+	export_constant(ET_CUSTOM_7);
+	export_constant(ET_CUSTOM_8);
+	export_constant(ET_CUSTOM_9);
+	export_constant(ET_CUSTOM_10);
+	export_constant(ET_CUSTOM_11);
+	export_constant(ET_CUSTOM_12);
+	export_constant(ET_CUSTOM_13);
+	export_constant(ET_CUSTOM_14);
+	export_constant(ET_CUSTOM_15);
 
 	/* emoticons deprecated */
 	export_deprecated_constant3("E_GASP", ET_SURPRISE, "ET_SURPRISE");
@@ -4822,6 +4854,7 @@
 	export_constant(UMOB_ATKMAX);
 	export_constant(UMOB_MATKMIN);
 	export_constant(UMOB_MATKMAX);
+	export_constant(UMOB_MATK);
 	export_constant(UMOB_DEF);
 	export_constant(UMOB_MDEF);
 	export_constant(UMOB_HIT);
@@ -4842,6 +4875,7 @@
 	export_constant(UMOB_RES);
 	export_constant(UMOB_MRES);
 	export_constant(UMOB_DAMAGETAKEN);
+	export_constant(UMOB_BODYSIZE);
 
 	/* unit control - homunculus */
 	export_constant(UHOM_SIZE);
@@ -5056,6 +5090,7 @@
 	export_constant(UNPC_BODY2);
 	export_constant(UNPC_DEADSIT);
 	export_constant(UNPC_GROUP_ID);
+	export_constant(UNPC_BODYSIZE);
 
 	export_constant(NAV_NONE);
 	export_constant(NAV_AIRSHIP_ONLY);
@@ -9151,6 +9186,19 @@
 	export_constant_npc(JT_ROZ_MQ_MOCLORD);
 	export_constant_npc(JT_ROZ_MQ_SKULD);
 	export_constant_npc(JT_NEW_NPC_3RD_END);
+
+	export_constant_npc(JT_4JOB_KINGS_NIGHT);
+	export_constant_npc(JT_4JOB_AGONY_NIGHT);
+	export_constant_npc(JT_4JOB_DEVOTION_NIGHT);
+	export_constant_npc(JT_4JOB_ARMED_NIGHT);
+	export_constant_npc(JT_4JOB_DOOMK);
+	export_constant_npc(JT_4JOB_VERKHASEL);
+
+	export_constant_npc(JT_VR_AGNES);
+	
+	export_constant_npc(JT_20TH_CRYSTAL_L);
+	export_constant_npc(JT_20TH_CRYSTAL_M);
+	export_constant_npc(JT_20TH_CRYSTAL_S);
 	#undef export_constant_npc
 
 	/* special effects */
@@ -10591,6 +10639,7 @@
 	export_constant(BL_MER);
 	export_constant(BL_NPC);
 	export_constant(BL_ELEM);
+	export_constant(BL_STALL);
 
 	/* skill damage mapflag types */
 	export_constant(SKILLDMG_PC);
@@ -11297,6 +11346,9 @@
 	export_constant(SCF_REMOVEONUNEQUIPARMOR);
 	export_constant(SCF_REMOVEONHERMODE);
 	export_constant(SCF_REQUIRENOWEAPON);
+
+	//premium buff
+	export_constant(SCF_NOTICKSAVE);
 
 	/* enchantgrades */
 	export_constant(ENCHANTGRADE_NONE);

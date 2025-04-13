@@ -1,0 +1,695 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: QUEST_DB
+  Version: 3
+
+Body:
+  - Id: 5972
+    Title: "독수리 순찰대"
+  - Id: 5973
+    Title: "[대기]아윈과 함께하는 순찰"
+    TimeLimit: 4h
+  - Id: 5974
+    Title: "아윈과 함께하는 순찰(1)"
+  - Id: 5975
+    Title: "아윈과 함께하는 순찰(2)"
+  - Id: 5976
+    Title: "보급관 고리르"
+  - Id: 5977
+    Title: "[대기] 먹이를 주지 마시오"
+    TimeLimit: 4h
+  - Id: 5978
+    Title: "먹이를 주지 마시오(1)"
+  - Id: 5979
+    Title: "먹이를 주지 마시오(2)"
+  - Id: 5980
+    Title: "몰래하는재미"
+  - Id: 5981
+    Title: "[대기]몰래하는재미"
+    TimeLimit: 4h
+  - Id: 5982
+    Title: "몰래하는재미"
+  - Id: 5983
+    Title: "실험체210426 조우"
+  - Id: 5984
+    Title: "르간 변신 스크롤"
+  - Id: 5985
+    Title: "[대기]점심이의 메뉴 선택"
+    TimeLimit: 4h
+  - Id: 5986
+    Title: "점심이의 메뉴 선택"
+  - Id: 5987
+    Title: "점심이의 메뉴 선택"
+  - Id: 5988
+    Title: "점심이의 메뉴 선택"
+  - Id: 5989
+    Title: "점심이의 메뉴 선택"
+  - Id: 5990
+    Title: "점심이의 메뉴 선택"
+  - Id: 5991
+    Title: "점심이의 메뉴 선택"
+  - Id: 5992
+    Title: "점심이의 메뉴 선택"
+  - Id: 5993
+    Title: "점심이의 메뉴 선택"
+  - Id: 5994
+    Title: "점심이의 메뉴 선택"
+  - Id: 5995
+    Title: "점심이의 메뉴 선택"
+  - Id: 8784
+    Title: "모랴라의 낚시 돕기"
+    Targets:
+      - Mob: EP19_SHINING_SEAWEED
+        Count: 20
+  - Id: 8785
+    Title: "모랴라의 낚시 돕기-대기"
+    TimeLimit: 4h
+  - Id: 8786
+    Title: "모랴라의 낚시 돕기"
+    Targets:
+      - Mob: EP19_SHINING_SEAWEED
+        Count: 20
+  - Id: 8787
+    Title: "조랴라와 즐거운 점심 시간"
+  - Id: 8788
+    Title: "조랴라와 즐거운 점심 시간-대기"
+    TimeLimit: 4h
+  - Id: 8789
+    Title: "조랴라와 즐거운 점심 시간"
+  - Id: 8790
+    Title: "사제님, 자비를?"
+  - Id: 8791
+    Title: "사제님, 자비를?-대기"
+    TimeLimit: 4h
+  - Id: 8792
+    Title: "사제님, 자비를??"
+  - Id: 8793
+    Title: "궁금한 것"
+  - Id: 8794
+    Title: "나이 많은 뱀"
+  - Id: 8795
+    Title: "교리와 설법"
+  - Id: 8796
+    Title: "처음 보는 애네"
+    Targets:
+      - Mob: EP19_RGAN_A
+        Count: 20
+  - Id: 8797
+    Title: "일을 시키는 르간-대기"
+    TimeLimit: 4h
+  - Id: 8798
+    Title: "일을 시키는 르간"
+    Targets:
+      - Mob: EP19_RGAN_A
+        Count: 20
+  - Id: 8799
+    Title: "부화장의 르간 (1)"
+  - Id: 8800
+    Title: "부화장의 르간 (2)"
+  - Id: 8801
+    Title: "부화장의 르간 (3)"
+  - Id: 8802
+    Title: "부화장의 르간 1명째"
+  - Id: 8803
+    Title: "부화장의 르간 2명째"
+  - Id: 8804
+    Title: "부화장의 르간 3명째"
+  - Id: 11794
+    Title: "정화의 성녀"
+  - Id: 11795
+    Title: "정화의 성녀"
+  - Id: 11796
+    Title: "정화의 성녀"
+  - Id: 11797
+    Title: "정화의 성녀"
+  - Id: 11798
+    Title: "정화의 성녀"
+  - Id: 11799
+    Title: "정화의 성녀"
+  - Id: 11800
+    Title: "정화의 성녀"
+  - Id: 11801
+    Title: "정화의 성녀"
+  - Id: 11802
+    Title: "정화의 성녀"
+  - Id: 11803
+    Title: "정화의 성녀"
+  - Id: 11804
+    Title: "정화의 성녀"
+  - Id: 11805
+    Title: "정화의 성녀"
+  - Id: 11806
+    Title: "정화의 성녀"
+  - Id: 11807
+    Title: "정화의 성녀"
+  - Id: 11808
+    Title: "정화의 성녀"
+  - Id: 11809
+    Title: "정화의 성녀"
+  - Id: 11810
+    Title: "정화의 성녀"
+  - Id: 11811
+    Title: "정화의 성녀"
+  - Id: 11812
+    Title: "프리데리케의 하루"
+  - Id: 11813
+    Title: "프리데리케의 하루"
+    Targets:
+      - Mob: EP19_RGAN_A
+        Count: 10
+      - Mob: EP19_RGAN_B
+        Count: 10
+    Drops:
+      - Mob: EP19_RGAN_A
+        Item: Ep19_Rgan_Core
+        Rate: 5000
+      - Mob: EP19_RGAN_B
+        Item: Ep19_Rgan_Core
+        Rate: 5000
+  - Id: 11814
+    Title: "프리데리케의 하루-대기"
+    TimeLimit: 4h
+  - Id: 11815
+    Title: "얼어붙은 바다"
+  - Id: 11816
+    Title: "얼어붙은 바다"
+  - Id: 11817
+    Title: "얼어붙은 바다"
+  - Id: 11818
+    Title: "얼어붙은 바다"
+  - Id: 11819
+    Title: "얼어붙은 바다"
+  - Id: 11820
+    Title: "얼어붙은 바다"
+  - Id: 11821
+    Title: "얼어붙은 바다"
+  - Id: 11822
+    Title: "얼어붙은 바다"
+    Targets:
+      - Id: 1
+        Count: 10
+        Location: jor_back2
+        MapMobTargets:
+          EP19_UNFROST_FLOWER: true
+          EP19_ICE_GANGU: true
+          EP19_ICE_STRAW: true
+          EP19_LIMACINA: true
+    Drops:
+      - Mob: EP19_UNFROST_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ICE_GANGU
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ICE_STRAW
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_LIMACINA
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11823
+    Title: "얼어붙은 바다"
+  - Id: 11824
+    Title: "얼어붙은 바다"
+  - Id: 11825
+    Title: "얼어붙은 바다"
+    Targets:
+      - Id: 1
+        Count: 5
+        Location: jor_ab01
+        MapMobTargets:
+          EP19_WASTED_RGAN_A: true
+          EP19_CAVE_CALMARING: true
+          EP19_CAVE_FLOWER: true
+          EP19_HALLUCIGENIA_BABY: true
+          EP19_RE_RGAN_E: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_A
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_CALMARING
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA_BABY
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_RE_RGAN_E
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11826
+    Title: "얼어붙은 바다"
+    Targets:
+      - Id: 1
+        Count: 5
+        Location: jor_ab01
+        MapMobTargets:
+          EP19_WASTED_RGAN_A: true
+          EP19_CAVE_CALMARING: true
+          EP19_CAVE_FLOWER: true
+          EP19_HALLUCIGENIA_BABY: true
+          EP19_RE_RGAN_E: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_A
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_CALMARING
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA_BABY
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_RE_RGAN_E
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11827
+    Title: "얼어붙은 바다"
+    Targets:
+      - Id: 1
+        Count: 5
+        Location: jor_ab01
+        MapMobTargets:
+          EP19_WASTED_RGAN_A: true
+          EP19_CAVE_CALMARING: true
+          EP19_CAVE_FLOWER: true
+          EP19_HALLUCIGENIA_BABY: true
+          EP19_RE_RGAN_E: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_A
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_CALMARING
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA_BABY
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_RE_RGAN_E
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11828
+    Title: "얼어붙은 바다"
+    Targets:
+      - Id: 1
+        Count: 10
+        Location: jor_ab02
+        MapMobTargets:
+          EP19_WASTED_RGAN_C: true
+          EP19_HALLUCIGENIA: true
+          EP19_ONE_EYE_DOLLOCARIS: true
+          EP19_DOLLOCARIS: true
+          EP19_ET_RGAN_D: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_C
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ONE_EYE_DOLLOCARIS
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_DOLLOCARIS
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ET_RGAN_D
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11829
+    Title: "얼어붙은 바다"
+  - Id: 11830
+    Title: "버려진 구덩이"
+  - Id: 11831
+    Title: "버려질만한 장소"
+    Targets:
+      - Id: 1
+        Count: 40
+        Location: jor_ab01
+        MapMobTargets:
+          EP19_WASTED_RGAN_A: true
+          EP19_CAVE_CALMARING: true
+          EP19_CAVE_FLOWER: true
+          EP19_HALLUCIGENIA_BABY: true
+          EP19_RE_RGAN_E: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_A
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_CALMARING
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_CAVE_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA_BABY
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_RE_RGAN_E
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11832
+    Title: "버려질 만한 장소(1)-대기"
+    TimeLimit: 4h
+  - Id: 11833
+    Title: "버려질만한 장소"
+    Targets:
+      - Id: 1
+        Count: 40
+        Location: jor_ab02
+        MapMobTargets:
+          EP19_WASTED_RGAN_C: true
+          EP19_HALLUCIGENIA: true
+          EP19_ONE_EYE_DOLLOCARIS: true
+          EP19_DOLLOCARIS: true
+          EP19_ET_RGAN_D: true
+    Drops:
+      - Mob: EP19_WASTED_RGAN_C
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_HALLUCIGENIA
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ONE_EYE_DOLLOCARIS
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_DOLLOCARIS
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ET_RGAN_D
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11834
+    Title: "버려질 만한 장소(2)-대기"
+    TimeLimit: 4h
+  - Id: 11835
+    Title: "파고 또 파고"
+  - Id: 11836
+    Title: "파고 또 파고"
+  - Id: 11837
+    Title: "파고 또 파고"
+  - Id: 11838
+    Title: "파고 또 파고"
+  - Id: 11839
+    Title: "파고 또 파고"
+  - Id: 11840
+    Title: "파고 또 파고"
+  - Id: 11841
+    Title: "파고 또 파고"
+  - Id: 11842
+    Title: "파고 또 파고"
+  - Id: 11843
+    Title: "파고 또 파고"
+  - Id: 11844
+    Title: "파고 또 파고"
+  - Id: 11845
+    Title: "파고 또 파고"
+  - Id: 11846
+    Title: "파고 또 파고"
+  - Id: 11847
+    Title: "파고 또 파고"
+  - Id: 11848
+    Title: "파고 또 파고"
+  - Id: 11849
+    Title: "파고 또 파고"
+  - Id: 11850
+    Title: "파고 또 파고-대기"
+    TimeLimit: 4h
+  - Id: 11851
+    Title: "냉장고가 필요한가?"
+  - Id: 11852
+    Title: "냉장고가 필요한가?"
+    Targets:
+      - Id: 1
+        Count: 20
+        Location: jor_back2
+        MapMobTargets:
+          EP19_UNFROST_FLOWER: true
+          EP19_ICE_GANGU: true
+          EP19_ICE_STRAW: true
+          EP19_LIMACINA: true
+    Drops:
+      - Mob: EP19_UNFROST_FLOWER
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ICE_GANGU
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_ICE_STRAW
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+      - Mob: EP19_LIMACINA
+        Item: Ep19_Ice_Meat
+        Rate: 5000
+  - Id: 11853
+    Title: "냉장고가 필요한가?-대기"
+    TimeLimit: 4h
+  - Id: 11854
+    Title: "바삭바삭한 도구"
+  - Id: 11855
+    Title: "바삭바삭한 도구"
+  - Id: 11856
+    Title: "바삭바삭한 도구"
+  - Id: 11857
+    Title: "바삭바삭한 도구"
+  - Id: 11858
+    Title: "바삭바삭한 도구"
+  - Id: 11859
+    Title: "바삭바삭한 도구-대기"
+    TimeLimit: 4h
+  - Id: 12560
+    Title: "대기: 비공정 무력화"
+    TimeLimit: 4h
+  - Id: 12561
+    Title: "코어 무력화"
+    Targets:
+      - Mob: EP19_MD_AQUILA
+        Count: 1
+  - Id: 16636
+    Title: "단서 찾기-융케아의 연구실"
+  - Id: 16637
+    Title: "단서 찾기-바곳의 연구실"
+  - Id: 16638
+    Title: "단서 찾기-르간 경비병"
+  - Id: 16639
+    Title: "융케아의 연구실"
+  - Id: 16640
+    Title: "융케아의 연구실"
+  - Id: 16641
+    Title: "바곳의 연구실"
+  - Id: 16642
+    Title: "바곳의 연구실"
+  - Id: 16643
+    Title: "르간 경비병"
+  - Id: 16644
+    Title: "르간 경비병"
+  - Id: 16645
+    Title: "단서 공유"
+  - Id: 16646
+    Title: "소리없이 스며드는"
+  - Id: 16647
+    Title: "소리없이 스며드는"
+  - Id: 16648
+    Title: "소리없이 스며드는"
+  - Id: 16649
+    Title: "소리없이 스며드는"
+  - Id: 16650
+    Title: "소리없이 스며드는"
+  - Id: 16651
+    Title: "소리없이 스며드는"
+  - Id: 16652
+    Title: "소리없이 스며드는"
+  - Id: 16653
+    Title: "퇴적되는 의심"
+  - Id: 16654
+    Title: "퇴적되는 의심"
+  - Id: 16655
+    Title: "간발의 차이"
+  - Id: 16656
+    Title: "간발의 차이"
+  - Id: 16657
+    Title: "간발의 차이"
+  - Id: 16658
+    Title: "간발의 차이"
+  - Id: 16659
+    Title: "간발의 차이"
+  - Id: 16660
+    Title: "간발의 차이"
+    Targets:
+      - Mob: EP19_MD_JUNCEA
+        Count: 1
+  - Id: 16661
+    Title: "간발의 차이"
+  - Id: 16662
+    Title: "시뮬레이션 전투"
+    Targets:
+      - Mob: EP19_MD_JUNCEA_S
+        Count: 1
+  - Id: 16663
+    Title: "시뮬레이션 전투-대기"
+    TimeLimit: 4h
+  - Id: 17619
+    Title: "레이지의 계책"
+  - Id: 17620
+    Title: "뱀의 둥지 잠입"
+  - Id: 17621
+    Title: "뱀의 둥지 잠입"
+  - Id: 17622
+    Title: "뱀의 둥지 잠입"
+  - Id: 17623
+    Title: "뱀의 둥지 잠입"
+  - Id: 17624
+    Title: "뱀의 둥지 잠입"
+  - Id: 17625
+    Title: "뱀의 둥지 잠입"
+  - Id: 17626
+    Title: "뱀의 둥지 잠입"
+  - Id: 17627
+    Title: "뱀의 둥지 잠입"
+  - Id: 17628
+    Title: "뱀의 둥지 잠입"
+  - Id: 17629
+    Title: "뱀의 둥지 잠입"
+  - Id: 17630
+    Title: "뱀의 둥지 잠입"
+  - Id: 17631
+    Title: "뱀의 둥지 잠입"
+  - Id: 17632
+    Title: "잠입 작전 중간 보고"
+  - Id: 17633
+    Title: "잠입 작전 중간 보고"
+  - Id: 17634
+    Title: "잠입 작전 중간 보고"
+  - Id: 17635
+    Title: "잠입 작전 중간 보고"
+  - Id: 17636
+    Title: "잠입 작전 중간 보고"
+  - Id: 17637
+    Title: "비공정 파괴 작전"
+  - Id: 17638
+    Title: "취약점 조사"
+  - Id: 17639
+    Title: "정찰 보고 동행"
+  - Id: 17640
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17641
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17642
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17643
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17644
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17645
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17646
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17647
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17648
+    Title: "혼란한 뱀의 둥지"
+  - Id: 17649
+    Title: "사라져버린 자들"
+  - Id: 17650
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17651
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17652
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17653
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17654
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17655
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17656
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17657
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17658
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17659
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17660
+    Title: "지상에서 지하은신처 찾기"
+  - Id: 17661
+    Title: "대기: 지상에서 지하은신처 찾기"
+    TimeLimit: 4h
+  - Id: 17662
+    Title: "대기: 지상에서 지하은신처 찾기"
+    TimeLimit: 4h
+  - Id: 18119
+    Title: "북풍을 타고 온 손님 1"
+  - Id: 18120
+    Title: "북풍을 타고 온 손님 2"
+  - Id: 18121
+    Title: "수호자의 상자와 초대장 1"
+  - Id: 18122
+    Title: "수호자의 상자와 초대장 2"
+  - Id: 18123
+    Title: "수호자의 상자와 초대장 3"
+  - Id: 18124
+    Title: "수호자의 상자와 초대장 5"
+  - Id: 18125
+    Title: "얼음성으로"
+  - Id: 18126
+    Title: "얼음성의 만남"
+  - Id: 18127
+    Title: "아윈 정찰대를 만나자."
+  - Id: 18128
+    Title: "보클린드를 만나자."
+  - Id: 18129
+    Title: "수호자의 상자와 초대장 4"
+  - Id: 18130
+    Title: "벨군드의 연구재료 조달"
+  - Id: 18131
+    Title: "벨군드의 연구재료 조달-대기"
+    TimeLimit: 4h
+  - Id: 18132
+    Title: "사람이 필요해요."
+  - Id: 18133
+    Title: "레온의 이야기"
+  - Id: 18134
+    Title: "조난자 수색-얼어붙은 빙하"
+  - Id: 18135
+    Title: "조난자 수색-얼어붙은 평원"
+  - Id: 18136
+    Title: "조난자 구출 완료"
+  - Id: 18137
+    Title: "조난자 수색-대기"
+    TimeLimit: 4h
+  - Id: 18138
+    Title: "특별한 생존 방식"
+    Targets:
+      - Mob: EP19_RGAN_A
+        Count: 10
+      - Mob: EP19_RGAN_B
+        Count: 10
+  - Id: 18139
+    Title: "우리들의 소중한 양식"
+  - Id: 18140
+    Title: "우리들의 소중한 양식-대기"
+    TimeLimit: 4h
+  - Id: 18141
+    Title: "기품어린 취미생활"
+  - Id: 18142
+    Title: "기품어린 취미생활-대기"
+    TimeLimit: 4h
+  - Id: 18143
+    Title: "안전한 노동을 위해"
+    Targets:
+      - Mob: EP19_LIMACINA
+        Count: 20
+      - Mob: EP19_CALMARING
+        Count: 20
+  - Id: 18144
+    Title: "안전한 노동을 위해-대기"
+    TimeLimit: 4h

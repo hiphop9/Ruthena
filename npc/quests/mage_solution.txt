@@ -11,21 +11,23 @@
 //= Traders for Morocc Solution and Payon Solution, used in
 //= the Sage skill quests and the Pre-Renewal Mage job quest.
 //===== Additional Comments: ================================= 
-//= 1.0 Split from Pre-Renewal Mage job quest. [Zopokx]
+//한글번역 스카이러브
 //============================================================ 
 
-pay_arche,122,100,0	script	Dollshoi	88,{
-	mes "[Mage Guildsman]";
-	mes "You want a Solution? Hmm, give me 50 Zeny and at least 1 Empty Test Tube.";
+pay_arche,122,100,0	script	아르바이트 직원#ab01	88,{
+	mes "[마법 길드원]";
+	mes "수용액이 필요한거야? 50 제니에 빈";
+	mes "시험관 1 개 이상이 필요해.";
 	next;
-	if (select("Alright, Deal.:Nah, forget it.") == 1) {
-		mes "[Mage Guildsman]";
+	if (select("수용액을 산다.:그만둔다.") == 1) {
+		mes "[마법 길드원]";
 		if (Zeny < 50) {
-			mes "Hey! You don't have enough money to cover my 50 Zeny charge.";
+			mes "50 제니라니깐.";
 			close;
 		}
 		if (countitem(1092) == 0) {
-			mes "You can't carry solutions without a bottle! Bring me an Empty Test Tube.";
+			mes "수용액을 어떻게 담아가려고 하는거야?";
+			mes "빈 시험관을 가져와.";
 			close;
 		}
 		delitem 1092,1; //Empty_Cylinder
@@ -35,18 +37,20 @@ pay_arche,122,100,0	script	Dollshoi	88,{
 	close;
 }
 
-moc_ruins,91,150,0	script	Ponka-Hontas	93,{
-	mes "[Mage Guildsman]";
-	mes "Would you like a Solution? Then please give me 50 Zeny and at least 1 Empty Test Tube.";
+moc_ruins,91,150,0	script	아르바이트 직원#ab02	93,{
+	mes "[마법 길드원]";
+	mes "수용액이 필요한거야? 50 제니에 빈";
+	mes "시험관 1 개 이상이 필요해.";
 	next;
-	if (select("Alright, Deal.:Nah, forget it.") == 1) {
-		mes "[Mage Guildsman]";
+	if (select("수용액을 산다.:그만둔다.") == 1) {
+		mes "[마법 길드원]";
 		if (Zeny < 50) {
-			mes "I'm sorry, but you don't have enough money to cover the 50 Zeny fee.";
+			mes "50 제니라니깐.";
 			close;
 		}
 		if (countitem(1092) == 0) {
-			mes "You can't carry liquids without using a bottle. Bring an Empty Test Tube the next time you see me.";
+			mes "수용액을 어떻게 담아가려고 하는거야?";
+			mes "빈 시험관을 가져와.";
 			close;
 		}
 		delitem 1092,1; //Empty_Cylinder

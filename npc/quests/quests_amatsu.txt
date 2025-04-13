@@ -1,24 +1,7 @@
 //===== rAthena Script ======================================= 
 //= Quest NPCs related to Amatsu
 //===== By: ================================================== 
-//= rAthena Dev Team & MasterOfMuppets
-//===== Current Version: ===================================== 
-//= 1.5
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Momotaro Event
-//= Sushi Quest
-//= Dungeon Quest
-//===== Additional Comments: ================================= 
-//= 1.3 Rescripted to Aegis 10.3 Standards. [L0ne_W0lf]
-//= 1.4 Added missing checkweight. [L0ne_W0lf]
-//= 1.4a Fixed typo in condition check [Gepard]
-//= 1.5 Added questlog support. [Euphy]
-//============================================================ 
-
-// Momotaro Event :: japan_momo_q
+//한글번역 스카이러브
 //============================================================ 
 amatsu,223,236,3	script	Publisher#ama	763,{
 	if (checkweight(1201,1) == 0) {
@@ -374,7 +357,7 @@ OnStartArena:
 	donpcevent "Am Mut#ama::OnReset";
 	donpcevent "Dokebi#ez::OnReset";
 	donpcevent "Dokebi#hd::OnReset";
-	enablenpc "Grandma#ama1";
+	enablenpc "할머니#ama1";
 	enablenpc "Grandpa#ama";
 	warpwaitingpc "ama_test",50,83;
 	donpcevent "Timer#ama::OnEnable";
@@ -411,11 +394,11 @@ OnInit:
 	end;
 }
 
-ama_test,50,93,4	script	Grandma#ama1	761,10,10,{
+ama_test,50,93,4	script	할머니#ama1	761,10,10,{
 	end;
 
 OnInit:
-	disablenpc "Grandma#ama1";
+	disablenpc "할머니#ama1";
 	end;
 
 OnTouch_:
@@ -457,12 +440,12 @@ OnTouch_:
 	set event_momo,1;
 	if (countitem(9010) > 0 || countitem(9005) > 0 || countitem(9016) > 0) {
 		disablenpc "Grandpa#ama";
-		disablenpc "Grandma#ama1";
+		disablenpc "할머니#ama1";
 		donpcevent "Dokebi#ez::OnEnable";
 	}
 	else {
 		disablenpc "Grandpa#ama";
-		disablenpc "Grandma#ama1";
+		disablenpc "할머니#ama1";
 		donpcevent "Dokebi#hd::OnEnable";
 	}
 	end;
@@ -791,22 +774,22 @@ OnTouch_:
 
 // Sushi Quest :: japan_sushi
 //============================================================ 
-ama_in01,162,17,1	script	Sushi Master#ama	765,{
+ama_in01,162,17,1	script	초밥 명인#ama	765,{
 	if (MaxWeight - Weight < 5000) {
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Hey. You look really heavy.";
 		mes "Don't you have trouble walking?";
 		mes "I'm sorry, but there is no space";
 		mes "to put down your stuff in my shop.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Put some of your stuff away somewhere.";
 		mes "Why are you carrying so much...?";
 		mes "Huhuhu...";
 		close;
 	}
 	else if (ama_sushi == 4) {
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Training to slice raw fish";
 		mes "daily will make you a master sushi chef.";
 		mes "So don't waste your time in here, and learn what you are good at.";
@@ -815,12 +798,12 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	}
 	else if (fish_r == 1) {
 		if (countitem(529) > 9) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Oh! I really appreciate it.";
 			mes "Right on time!";
 			mes "I really need them to make a dessert.";
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Thanks. It's nothing, but";
 			mes "I will give you my shop's special cuisine, Fish Slice, in return.";
 			next;
@@ -828,18 +811,18 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			erasequest 10036;
 			delitem 529,10; //Candy
 			getitem 544,15; //Fish_Slice
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Here's 15 fish slices.";
 			mes "Please enjoy this food with your friends.";
 			mes "And come back whenever you miss the flavor of Amatsu cuisine.";
 			close;
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "10 ^0000FFCandy^000000";
 		mes "You didn't forget it, right?";
 		mes "Bring me these supplies, please.";
@@ -847,12 +830,12 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	}
 	else if (fish_r == 2) {
 		if (countitem(964) > 9) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Oh! I really appreciate it.";
 			mes "Right on time!";
 			mes "I need them to make a sauce.";
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Thanks. It is nothing, but";
 			mes "I will give you two sets of Sushi in return.";
 			next;
@@ -860,18 +843,18 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			erasequest 10037;
 			delitem 964,10; //Crap_Shell
 			getitem 551,20; //Shusi
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Share it with your friends";
 			mes "and family members.";
 			mes "Please come again.";
 			close;
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "10 ^0000FFCrab Shells^000000...";
 		mes "You didn't forget it, right?";
 		mes "Bring me these supplies, please.";
@@ -879,12 +862,12 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	}
 	else if (fish_r == 3) {
 		if (countitem(961) > 9) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Oh! I really appreciate it.";
 			mes "Right on time!";
 			mes "I was preparing appetizers...";
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Thanks. It is nothing but";
 			mes "I will give you several sets of Sushi in return.";
 			next;
@@ -892,18 +875,18 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			erasequest 10038;
 			delitem 961,10; //Conch
 			getitem 551,30; //Shusi
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "These are for three people,";
 			mes "so share them with your friends.";
 			mes "Come back again if you feel like helping out some more.";
 			close;
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "10 ^0000FFConches^000000";
 		mes "You didn't forget it, right?";
 		mes "Bring me these supplies, please.";
@@ -911,12 +894,12 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	}
 	else if (fish_r == 4) {
 		if (countitem(1023) > 9) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Oh! I really appreciate it.";
 			mes "Right on time!";
 			mes "I was decorating a platter.";
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Thanks. It is nothing but";
 			mes "I will give you a large amount of food in return.";
 			next;
@@ -925,18 +908,18 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			delitem 1023,10; //Fish_Tail
 			getitem 544,20; //Fish_Slice
 			getitem 551,30; //Shusi
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "You can feed your guild";
 			mes "with this food.";
 			mes "Come back with a friend.";
 			close;
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "10 ^0000FFFish Tails^000000";
 		mes "You didn't forget it, right?";
 		mes "Bring me these supplies, please.";
@@ -944,12 +927,12 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	}
 	else if (fish_r == 5) {
 		if (countitem(736) > 0) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Oh! I really appreciate it.";
 			mes "Right on time!";
 			mes "I didn't have a white platter.";
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Thanks. It is nothing but";
 			mes "I will give you two sets of Sushi in return.";
 			next;
@@ -957,18 +940,18 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			set fish_r,0;
 			erasequest 10040;
 			getitem 551,20; //Shusi
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Share it with your friends";
 			mes "and family members.";
 			mes "Please come again.";
 			close;
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "I need a white platter:";
 		mes "1 ^0000FFChina^000000";
 		mes "You didn't forget it, right?";
@@ -978,37 +961,37 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 	else if (fish_r == 6) {
 		if (countitem(950) > 99) {
 			if (ama_sushi == 2) {
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "..............................";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "You are a really kind person.";
 				mes "You have brought everything";
 				mes "that I've asked you...";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "You are not the first foreigner";
 				mes "I have encountered. Amatsu is getting more and more tourists.";
 				mes "I just wanted to test you.";
 				mes " ";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Your job was just errands but";
 				mes "I wanted to know...";
 				mes "how you devote yourself,";
 				mes "how serious you are about completing your job and not giving up.";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "I was thinking,";
 				mes "'If there is a person like that,";
 				mes "I would give that person everything about cooking that I have mastered";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "And.....";
 				mes "You...";
 				mes "You are the one.";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "I'm old now. No one knows how long I can hold this knife. You have been chosen to inherit my culinary art...";
 				mes " ";
 				next;
@@ -1016,62 +999,62 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 				set ama_sushi,4;
 				completequest 10041;
 				getitem 1144,1; //Sasimi
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Here, take my knife.";
 				mes "From now on, make fine cuisine with that knife.";
 				mes "...Learn how to slice a fish.";
 				mes " ";
 				mes " ";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "From now on, I will no longer ask you favors and give you fish slices in return....";
 				mes "Practice your skill with that knife and teach mainlanders the pleasure of fine cuisine...";
 				close;
 			}
 			else {
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Wow...these are real hearts of";
 				mes "mermaid. The legends saying";
 				mes "that these could be found in another continent were true...";
 				mes " ";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Gathering all these must have been hard...Well, then.";
 				mes "Today, I will use all of my";
 				mes "ingredients to make a special cuisine for you!";
 				next;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Give me a moment...";
 				mes "I shall show you my ^0000FFtrue culinary skill^000000.";
 				next;
 				delitem 950,20; //Heart_Of_Mermaid
 				getitem 551,20; //Shusi
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Try these first.";
 				mes "Made from the freshest ingredients.";
 				next;
 				delitem 950,20; //Heart_Of_Mermaid
 				getitem 544,20; //Fish_Slice
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Try these too.";
 				mes "My shop's fish slices are the best of the best!";
 				next;
 				delitem 950,20; //Heart_Of_Mermaid
 				getitem 551,20; //Shusi
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Have some more. Don't say no...!";
 				mes "Isn't it good? Huh? Isn't it good?";
 				next;
 				delitem 950,20; //Heart_Of_Mermaid
 				getitem 544,20; //Fish_Slice
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Haha~! Not done yet!";
 				mes "It's okay, have some more!";
 				next;
 				delitem 950,20; //Heart_Of_Mermaid
 				getitem 544,10; //Fish_Slice
 				getitem 551,10; //Shusi
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Take the leftovers.";
 				mes "You look stuffed...";
 				mes "Share the rest with your friends and family.";
@@ -1079,125 +1062,130 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 				set ama_sushi,ama_sushi+1;
 				set fish_r,0;
 				erasequest 10041;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Thanks a lot for today! Haha!";
 				mes "Come back again when you feel like helping. Take care...!!!";
 				close;
 			}
 		}
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "Oh man, you didn't prepare";
 		mes "what I asked for...";
 		mes "Do not forget what I asked.";
 		next;
-		mes "[Magumagu]";
+		mes "[마구마구]";
 		mes "100 ^0000FFHearts of Mermaid^000000, okay?";
 		mes "You didn't forget it, right?";
 		mes "Bring me the supplies, please.";
 		close;
 	}
-	mes "[Magumagu]";
-	mes "Holy cow~";
-	mes "This is a problem.....";
-	mes "There are so many customers, but I can't get all the ingredients that I need...";
+	mes "[마구마구]";
+	mes "히야~ 이거 이거 큰일인데.....";
+	mes "손님은 매일 끊임없이 모이는데,";
+	mes "부족해지는 재료는 구할 방법이";
+	mes "전혀 없구먼... 오늘도 분명히";
+	mes "돌려보내게 될 손님이 계시겠지?";
 	next;
-	mes "[Magumagu]";
-	mes "This is horrible...";
-	mes "Some of my customers will not get";
-	mes "the chance to eat fine Amatsu cuisine...";
-	mes " ";
+	mes "[마구마구]";
+	mes "어이쿠, 손님인가? 어서오시게.";
+	mes "언제나 그렇듯, 우리 집의 회는";
+	mes "신선함을 제일로 생각한다네.";
+	mes "무슨 일로 오셨는가...?";
 	next;
-	mes "[Magumagu]";
-	mes "Well, well. Are you a customer?";
-	mes "Welcome. As always, my shop";
-	mes "highly values the freshness of";
-	mes "fish slices. What brings you down here...?";
-	next;
-	switch(select("I would like to buy Sushi:I would like to buy fish slice:Do you need assistance?:Keep up the good work")) {
+	switch(select("초밥을 사려고 합니다.:회를 사려고 합니다.:제가 도와드릴까요?:수고하세요.")) {
 	case 1:
-		mes "[Magumagu]";
-		mes "Alright...! How many?";
-		mes "A set of Sushi is 700z. If you";
-		mes "want just 1 Sushi. It is 74z.";
-		mes "If you want more, tell me.";
+		mes "[마구마구]";
+		mes "좋지... 얼마나 사려나?";
+		mes "정식은 700z라네, 물론 한족각만";
+		mes "먹어보고 싶다면 74z만 내게나.";
+		mes "맛을 보고 괜찮으면 더 말하게.";
 		next;
-		switch(select("700z A set!:74z A piece!:I will try it later")) {
+		switch(select("700z 정식으로!!:74z 한 조각만!:나중에 먹어볼께요.")) {
 		case 1:
 			if (Zeny < 700) {
-				mes "[Magumagu]";
-				mes "Oh man, you don't have enough money.";
-				mes "If you want to eat delicious fish slices, you better bring more money.";
+				mes "[마구마구]";
+				mes "이런, 자네 돈이 조금 부족한데?";
+				mes "맛있는 초밥을 먹고 싶다면, 돈을";
+				mes "더 준비해오는게 좋을꺼야?";
 				close;
 			}
 			set Zeny, Zeny-700;
 			getitem 551,10; //Shusi
-			mes "[Magumagu]";
-			mes "There you go. If you like the taste, please order some more.";
+			mes "[마구마구]";
+			mes "여기있다네, 한번 먹어보고 맛이";
+			mes "괜찮다면 더 주문하게나.";
 			close;
 		case 2:
 			if (Zeny < 74) {
-				mes "[Magumagu]";
-				mes "Oh man, you don't have enough money.";
-				mes "If you want to eat delicious Sushi,";
-				mes "you better bring more money.";
+				mes "[마구마구]";
+				mes "이런, 자네 돈이 조금 부족한데?";
+				mes "맛있는 초밥을 먹고 싶다면, 돈을";
+				mes "더 준비해오는게 좋을꺼야?";
 				close;
 			}
 			set Zeny, Zeny-74;
 			getitem 551,1; //Shusi
-			mes "[Magumagu]";
-			mes "There you go. If you like the taste, please order some more.";
+			mes "[마구마구]";
+			mes "여기있다네, 한번 먹어보고 맛이";
+			mes "괜찮다면 더 주문하게나.";
 			close;
 		case 3:
-			mes "[Magumagu]";
-			mes "Up to you. My Sushi is";
-			mes "the best of the best! The taste";
-			mes "and freshness are the best in the";
-			mes "world. If you have time, try my Sushi.";
+			mes "[마구마구]";
+			mes "좋도록 하게. 나의 초밥 맛은";
+			mes "천하일품! 맛과 신선함을 어느";
+			mes "누구도 따라하지 못한다네.";
+			mes "언젠가 괜찮으면 한번쯤 초밥을";
+			mes "즐겨보도록 하게나.";
 			close;
 		}
 	case 2:
-		mes "[Magumagu]";
-		mes "Alright...! How many?";
-		mes "A set of fish slices is 350z.";
-		mes "1 fish slice is 37z.";
-		mes "If you want more, tell me.";
+		mes "[마구마구]";
+		mes "좋지... 얼마나 사려나?";
+		mes "정식은 350z라네. 물론 한조각만";
+		mes "먹고 싶다면 37z만 내게나.";
+		mes "맛을 보고 괜찮다면 더 말하게.";
 		next;
-		switch(select("350z A set!:37z A piece!:I will try it later")) {
+		switch(select("350z 정식으로!!:37z 한조각만!:나중에 먹어볼께요.")) {
 		case 1:
 			if (Zeny < 350) {
-				mes "[Magumagu]";
-				mes "Oh man, you don't have enough money.";
-				mes "If you want to eat delicious fish slices, you better bring more money.";
+				mes "[마구마구]";
+				mes "이런, 자네 돈이 조금 부족한데?";
+				mes "맛있는 회가 먹고 깊다면, 돈을";
+				mes "더 준비해오는게 좋을꺼야.";
 				close;
 			}
 			set Zeny, Zeny-350;
 			getitem 544,10; //Fish_Slice
-			mes "[Magumagu]";
-			mes "There you go. If you like the taste, please order some more.";
+			mes "[마구마구]";
+			mes "여기있다네, 한번 먹어보고 맛이";
+			mes "괜찮다면 더 주문하게나.";
 			close;
 		case 2:
 			if (Zeny < 37) {
-				mes "[Magumagu]";
-				mes "Oh man, you don't have enough money.";
-				mes "If you want to eat delicious fish slice, you better bring more money.";
+				mes "[마구마구]";
+				mes "이런, 자네 돈이 조금 부족한데?";
+				mes "맛있는 회가 먹고 깊다면, 돈을";
+				mes "더 준비해오는게 좋을꺼야.";
 				close;
 			}
 			set Zeny, Zeny-37;
 			getitem 544,1; //Fish_Slice
-			mes "[Magumagu]";
-			mes "There you go. If you like the taste, please order some more.";
+			mes "[마구마구]";
+			mes "여기있다네, 한번 먹어보고 맛이";
+			mes "괜찮다면 더 주문하게나.";
 			close;
 		case 3:
-			mes "[Magumagu]";
-			mes "Up to you. My fish slice is";
-			mes "the best of the best! The taste";
-			mes "and freshness are the best in the";
-			mes "world. If you have time, try my fish slices.";
+			mes "[마구마구]";
+			mes "좋도록 하게. 내가 만드는 회는";
+			mes "천하일품! 맛과 신선함을 어느";
+			mes "누구도 따라하지  못한다네.";
+			mes "언젠가 괜찮으면 한번쯤 회를";
+			mes "즐겨보도록 하게나.";
 			close;
 		}
 	case 3:
 		if (BaseJob == Job_Novice) {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Haha~ YOU are the one who needs";
 			mes "assistance! Help others";
 			mes "when you can take care of yourself.";
@@ -1205,7 +1193,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			close;
 		}
 		else {
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Some help would be great~!!";
 			mes "I was worried because we always";
 			mes "run out of ingredients...";
@@ -1216,7 +1204,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			if (.@fish_m1 == 1 || .@fish_m1 == 2) {
 				set fish_r,1;
 				setquest 10036;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "I need some candies to make";
 				mes "a dessert for the customers.";
 				mes "Bring me ^0000FF10 Candy^000000.";
@@ -1226,7 +1214,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			else if (.@fish_m1 == 3 || .@fish_m1 == 4) {
 				set fish_r,2;
 				setquest 10037;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "I need some crab shells to make";
 				mes "a sauce for my cuisine...";
 				mes "If you bring me ^0000FF10 Crab Shells^000000,";
@@ -1236,7 +1224,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			else if (.@fish_m1 == 5 || .@fish_m1 == 6) {
 				set fish_r,3;
 				setquest 10038;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "I have used all of my conches.";
 				mes "I need it to make an appetizer...";
 				mes "Please bring me ^0000FF10 Conches^000000.";
@@ -1246,7 +1234,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			else if (.@fish_m1 == 7 || .@fish_m1 == 8) {
 				set fish_r,4;
 				setquest 10039;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "Decorative fish tails are out of";
 				mes "stock. This is urgent...";
 				mes "Please bring me ^0000FF10 fish tails^000000.";
@@ -1256,7 +1244,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 			else if (.@fish_m1 == 9) {
 				set fish_r,5;
 				setquest 10040;
-				mes "[Magumagu]";
+				mes "[마구마구]";
 				mes "We are missing a platter to serve";
 				mes "fish slices to customers.";
 				mes "This is horrible...";
@@ -1267,13 +1255,13 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 				if (rand(1,10) == 1) {
 					set fish_r,6;
 					setquest 10041;
-					mes "[Magumagu]";
+					mes "[마구마구]";
 					mes "Don't ask me why...";
 					mes "But, I need something special...";
 					mes "^0000FF100 Hearts of Mermaid^000000.....";
 					mes "I know that it sounds impossible, but it is really important to me...";
 					next;
-					mes "[Magumagu]";
+					mes "[마구마구]";
 					mes "Don't ask any questions";
 					mes "about my request...";
 					mes "Just keep what I want in mind.";
@@ -1281,7 +1269,7 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 				else {
 					set fish_r,5;
 					setquest 10040;
-					mes "[Magumagu]";
+					mes "[마구마구]";
 					mes "We are missing a platter to serve";
 					mes "fish slices to customers.";
 					mes "This is horrible...";
@@ -1289,98 +1277,100 @@ ama_in01,162,17,1	script	Sushi Master#ama	765,{
 				}
 			}
 			next;
-			mes "[Magumagu]";
+			mes "[마구마구]";
 			mes "Well, good luck to you...";
 			mes "I will be waiting for you.";
 			mes "Don't forget what I asked...";
 			close;
 		}
 	case 4:
-		mes "[Magumagu]";
-		mes "Haha, you won't forget the flavor of my fish slice once you've";
-		mes "tasted it. If you have time, try my fish slices.";
-		mes " ";
+		mes "[마구마구]";
+		mes "허허, 자네도 생선회 맛을 한번";
+		mes "알게되면 잊지 못할거라네.";
+		mes "언젠가 괜찮으면 한번쯤 회를";
+		mes "맛보도록 하게나.";
 		close;
 	}
 }
 
 // Dungeon Quest :: japan_mono
 //============================================================ 
-amatsu,112,164,4	script	Gate Soldier#ama1	767,{
-	mes "[Gate Soldier]";
-	mes "This is the great palace,";
-	mes "Toukoujyo.";
-	mes "Locals are prohibited";
-	mes "from entering...";
+amatsu,112,164,4	script	문지기 병사#ama1	767,{
+	mes "[문지기 병사]";
+	mes "이 곳은 아마쯔의 최고의 성,";
+	mes "토우코우죠(東湖城)입니다.";
+	mes "원래는 일반인의 출입을 금하고";
+	mes "있습니다만...";
 	next;
-	mes "[Gate Soldier]";
-	mes "Your attire looks unfamiliar.";
-	mes "Are you from another continent?";
-	mes "The lord has granted entrance to";
-	mes "tourists, so you can go in.";
-	mes " ";
+	mes "[문지기 병사]";
+	mes "복장을 보아하니, 다른 대륙에서";
+	mes "오신 분인긋 하군요. 성주님께서";
+	mes "허가하셨으니, 들어가셔도 괜찮";
+	mes "습니다.";
 	close;
 }
 	
-amatsu,119,164,4	script	Gate Soldier#ama2	767,{
-	mes "[Gate Soldier]";
-	mes "Are you from Midgard?";
-	mes "Welcome to Amatsu.";
-	mes "Visit our lord in Chun-Su-Gak";
-	mes "when you go in.";
-	mes " ";
+amatsu,119,164,4	script	문지기 병사#ama2	767,{
+	mes "[문지기 병사]";
+	mes "룬 미드가츠에서 오신 분인가요?";
+	mes "아마쯔에 오신 것을 환영합니다.";
+	mes "성에 들어가시게 되면 천수각에";
+	mes "계신 저희 성주님을 꼭 만나뵙고";
+	mes "가세요.";
 	next;
-	mes "[Gate Soldier]";
-	mes "He is really kind.";
-	mes "He invested in various fields for";
-	mes "Amatsu, and intercontinental trade was his idea.";
+	mes "[문지기 병사]";
+	mes "정말 좋으신 분이랍니다. 마을을";
+	mes "위해서 여러가지 투자도 하시고,";
+	mes "다른 대륙과 교역도 그분께서 다";
+	mes "주관하신 일들이지요.";
 	close;
 }
 	
-ama_in02,207,40,6	script	Gate Soldier#ama3	767,{
-	mes "[Gate Soldier]";
-	mes "Welcome. The lord of the palace";
-	mes "has specially allowed guests";
-	mes "from other continents.";
+ama_in02,207,40,6	script	문지기 병사#ama3	767,{
+	mes "[문지기 병사]";
+	mes "어서오세요. 성주님께서 대륙의";
+	mes "손님분들을 위해 특별히 출입을";
+	mes "허가하셨습니다.";
 	next;
-	mes "[Gate Soldier]";
-	mes "Look around and take your time.";
-	mes "Please enjoy your stay.";
+	mes "[문지기 병사]";
+	mes "둘러보시고, 편하게 지내시다가";
+	mes "천천히 돌아가시길 바랍니다.";
 	close;
 }
 	
-ama_in02,207,49,6	script	Gate Soldier#ama4	767,{
-	mes "[Gate Soldier]";
-	mes "The lord is really nice guy.";
-	mes "Who would know that our town was";
-	mes "once a small village?";
+ama_in02,207,49,6	script	문지기 병사#ama4	767,{
+	mes "[문지기 병사]";
+	mes "성주님은 정말 좋으신 분이지요.";
+	mes "작은 촌락이였던 이 마을이 이렇";
+	mes "게 발전할 줄 누가 알았겠어요?";
 	next;
-	mes "[Gate Soldier]";
-	mes "I thank him for hiring me.";
-	mes "These days, he seems to have";
-	mes "troubles on his mind.";
-	mes "Lately, he's been looking pretty gloomy.";
-	mes " ";
+	mes "[문지기 병사]";
+	mes "쓸모없는 저같은 녀석도, 이렇게";
+	mes "거두어쥬셔서정말 감사하지요.";
+	mes "그런데 요즘에는 뭔가 고민이 좀";
+	mes "있으신지, 표정이 예전같지 않으";
+	mes "시더라구요?";
 	close;
 }
 	
-amatsu,164,174,4	script	Gate Soldier#ama5	767,{
-	mes "[Gate Soldier]";
+amatsu,164,174,4	script	문지기 병사#ama5	767,{
+	mes "[문지기 병사]";
 	if (event_amatsu == 0) {
-		mes "You can't enter here.";
-		mes "The mother of our lord is resting in here. She needs her rest.";
+		mes "여기는 들어가시면 안됩니다.";
+		mes "성주님의 어머님께서 요양중이신";
+		mes "장소입니다.";
 		next;
 		set event_amatsu,1;
 		setquest 8131;
-		mes "[Gate Soldier]";
-		mes "She has been sick for months.";
-		mes "That is why she is staying in here.";
-		mes "It's a pretty fearsome sickness...";
+		mes "[문지기 병사]";
+		mes "크게 얘기할 것이 못되지만...";
+		mes "몇달째 계속 편찮으셔서 여기에";
+		mes "계속 기거하고 계시지요.";
 	}
 	else if (event_amatsu == 1) {
-		mes "She should regain her health...";
-		mes "But still, my lord is worrying so much.";
-		mes " ";
+		mes "어서 빨리 건강을 회복하셔야만";
+		mes "할텐데... 성주님도 걱정이 이만";
+		mes "저만이 아니거든요. ";
 	}
 	else if (event_amatsu == 5) {
 		mes "Augh! I was suprised by that loud sound.";
@@ -1394,36 +1384,37 @@ amatsu,164,174,4	script	Gate Soldier#ama5	767,{
 		mes " ";
 	}
 	else {
-		mes "If you are sent by my lord,";
-		mes "it is okay to enter...";
-		mes "But you wouldn't be able to cure";
-		mes "her. Many others tried and failed.";
+		mes "혹시 성주님께서 보내신 분이면,";
+		mes "들어가셔도 괜찮습니다만...";
+		mes "못고치실껍니다. 수많은 분들이";
+		mes "시도했지만, 전부 실패하셨지요.";
 	}
 	close;
 }
 	
-amatsu,171,174,4	script	Gate Soldier#ama6	767,{
-	mes "[Gate Soldier]";
+amatsu,171,174,4	script	문지기 병사#ama6	767,{
+	mes "[문지기 병사]";
 	if (event_amatsu == 0) {
-		mes "You can't enter here.";
-		mes "The mother of our lord is resting in here.";
-		mes " ";
+		mes "여기는 들어가시면 안됩니다.";
+		mes "성주님의 어머님께서 요양중이신";
+		mes "장소입니다.";
 		next;
-		setquest 8131;
 		set event_amatsu,1;
-		mes "[Gate Soldier]";
-		mes "She has been sick for months.";
-		mes "That is why she is staying in here.";
-		mes "...";
+		setquest 8131;
+		mes "[문지기 병사]";
+		mes "크게 얘기할 것이 못되지만...";
+		mes "몇달째 계속 편찮으셔서 여기에";
+		mes "계속 기거하고 계시지요.";
 	}
 	else if (event_amatsu == 1) {
-		mes "Please, be quiet.";
-		mes "The mother of the lord is staying in here. She needs to relax.";
+		mes "성주님의 어머님께서 계시니 좀";
+		mes "조용히 해주세요. 저희도 매일";
+		mes "보기가 안스러울 정도니까요.";
 		next;
-		mes "[Gate Soldier]";
-		mes "Why is this happening";
-		mes "to my kind lord...";
-		mes "How can it be? *Sob*...";
+		mes "[문지기 병사]";
+		mes "인품좋으신 우리 성주님께 왜";
+		mes "이런 일이  생긴건지... 도대체";
+		mes "알 수 없단 말이죠. 흐흑...";
 	}
 	else if (event_amatsu == 5) {
 		mes "Eh? Something was flying";
@@ -1436,41 +1427,45 @@ amatsu,171,174,4	script	Gate Soldier#ama6	767,{
 		mes "Now, it is okay... *sob*.";
 	}
 	else {
-		mes "Oh...man. People from the other";
-		mes "continents are all doctors!";
-		mes "How many doctors have come to visit?! I can't even count anymore!";
+		mes "이런, 다른 대륙분들은 전부 다";
+		mes "의사 선생님인가보군요. 벌써";
+		mes "몇분이나 방분하시는건지.....";
+		mes "셀 수도 없을 정도군요.";
 	}
 	close;
 }
 	
-ama_in02,187,57,2	script	Soldier#ama1	767,{
-	mes "[Ichiro]";
-	mes "Welcome.";
-	mes "Our lord prepared guest rooms";
-	mes "for travelers like you.";
+ama_in02,187,57,2	script	병사#ama1	767,{
+	mes "[이치로]";
+	mes "어서오세요. 저희 성주님께서";
+	mes "손님분들이 편히 쉬실 수 있도록";
+	mes "자리를 마련해두었습니다.";
 	next;
-	mes "[Ichiro]";
-	mes "If you are having any problems,";
-	mes "tell me. I would appreciate it if you talk to our lord of the";
-	mes "palace. This is all provided by him.";
+	mes "[이치로]";
+	mes "불편하신 점이 있으시면 언제든";
+	mes "말씀해주세요. 인사는 저희 성주";
+	mes "님께 해주시면 감사하겠습니다.";
+	mes "모든 것은 성주님께서 준비해주";
+	mes "신 것들이니까요.";
 	close;
 }
 	
-ama_in02,170,62,4	script	Soldier#ama2	767,{
-	mes "[Jiro]";
-	mes "I'm Jiro, the administrator";
-	mes "of this Palace. What can I do for you?";
+ama_in02,170,62,4	script	병사#ama2	767,{
+	mes "[지로]";
+	mes "저는 이 성에서 여러 행정업무를";
+	mes "담당하고 있는 지로라고 합니다.";
+	mes "무엇을 도와드릴까요?";
 	next;
-	switch(select("Issue me a Transit Permit:I want to live in Amatsu:Nothing")) {
+	switch(select("통행증을 발급해주세요.:여기서 살고 싶습니다.:아무 일도 아닙니다.")) {
 	case 1:
 		if (event_amatsu == 6) {
 			if (countitem(7160) > 0) {
-				mes "[Jiro]";
+				mes "[지로]";
 				mes "You already have one...";
 				mes "You don't need to have two of them.";
 				close;
 			}
-			mes "[Jiro]";
+			mes "[지로]";
 			mes "Did you lose your Transit Permit?";
 			mes "You need to pay 10,000 zeny as a tax";
 			mes "to issue another Transit Permit.";
@@ -1478,224 +1473,235 @@ ama_in02,170,62,4	script	Soldier#ama2	767,{
 			if (select("Issue one:Talk to you later") == 1) {
 				set Zeny, Zeny-10000;
 				getitem 7160,1; //Lord's_Passable_Ticket
-				mes "[Jiro]";
+				mes "[지로]";
 				mes "There you go.";
 				mes "Don't lose it this time.";
 				close;
 			}
-			mes "[Jiro]";
+			mes "[지로]";
 			mes "Okay, then...";
 			mes "Talk to me when you need help.";
 			close;
 		}
-		mes "[Gate Soldier]";
-		mes "The lord announced that";
-		mes "he grants guests from Midgard the right to go anywhere.";
-		mes "You don't need me to issue you a Transit Permit.";
+		mes "[문지기 병사]";
+		mes "성주님께서 대륙의 손님들께는";
+		mes "자유롭게 다니셔도 괜찮다고 하";
+		mes "셨습니다. 통행증을 발급받으실";
+		mes "필요는 없겠지요.";
 		close;
 	case 2:
-		mes "[Jiro]";
-		mes "That is impossible. You're free to";
-		mes "go anywhere in Amatsu, but my lord doesn't want to concern himself with immigration.";
-		mes "Instead of that, you can stay here as long as you want.";
+		mes "[지로]";
+		mes "곤란한데요. 자유롭게 다니시는";
+		mes "것은 괜찮지만, 성주님께서 이민";
+		mes "까지는 고려하시지 않으셨네요.";
+		mes "대신, 원하시는 만큼 머무르다가";
+		mes "돌아가셔도 좋습니다.";
 		close;
 	case 3:
-		mes "[Jiro]";
-		mes "Well then...";
-		mes "Talk to me when you need help.";
+		mes "[지로]";
+		mes "그럼 이만...";
+		mes "용무가 있으시면 말씁하세요.";
 		close;
 	}
 }
 	
-ama_in02,37,157,4	script	Soldier#ama3	767,{
-	mes "[Saburo]";
-	mes "This is the training ground for improving our battle skills.";
-	mes "Please look around...";
+ama_in02,37,157,4	script	병사#ama3	767,{
+	mes "[사부로]";
+	mes "이 곳은 저희 병사들이 대련으로";
+	mes "실력을 연마하는 장소입니다.";
+	mes "천천히 둘러보시길...";
 	next;
-	mes "[Saburo]";
-	mes "By the way, recently I've felt";
-	mes "like the soldiers have changed";
-	mes "lately. How do I say it...";
-	mes "Their faces are gloomy and";
-	mes "some of them are no longer around.";
-	mes "Have they gone to Midgard??";
+	mes "[사부로]";
+	mes "그나저나 요즘은 이상한 느낌이";
+	mes "듭니다. 병사들이 예전같지 않은";
+	mes "느낌이거든요. 뭐랄까, 표정들도";
+	mes "어둡고, 가끔 안보이는 녀석도";
+	mes "있고... 다른 대륙으로 건너갔을";
+	mes "지도 모르겠지만요.";
 	next;
-	mes "[Saburo]";
-	mes "In this job, I encounter";
-	mes "many strangers. But downstairs,";
-	mes "there's a guest from a distant land who seems suspicious...";
-	mes "I told my guards to watch him...";
+	mes "[사부로]";
+	mes "수상한 사람도 빈번하게 만나곤";
+	mes "합니다. 아래층에는 먼 곳에서";
+	mes "왔다는 손님도 계시지만, 행동이";
+	mes "수상해서, 제 병사들을 시켜서";
+	mes "감시하고 있습니다만...";
 	next;
-	mes "[Saburo]";
-	mes "Of course, my lord precisely knows everything that's going on.";
-	mes "Haha, don't take what I said seriously~";
-	mes "See ya...";
+	mes "[사부로]";
+	mes "물론 성주님께서 다 생각이 있으";
+	mes "셔서 하시는 일이겠지만서두요..";
+	mes "하하, 왠지 정신없이 말했네요.";
+	mes "그럼 이만...";
 	close;
 }
 	
-ama_in02,32,51,6	script	Soldier#ama4	767,{
-	mes "[Shiro]";
-	mes "*Cough, Cough* What...";
-	mes "Don't talk to me...";
-	mes "*Cough, Cough*... Oh, my freakin' neck.";
+ama_in02,32,51,6	script	병사#ama4	767,{
+	mes "[시로]";
+	mes "콜록, 콜록, 뭡니까... 신경쓰지";
+	mes "말고 다른데나 구경하십쇼...";
+	mes "콜록, 콜록... 어이쿠. 목이야.";
 	next;
-	mes "[Shiro]";
-	mes "That quack's cold medicine";
-	mes "is useless! I should never have trusted people from Midgard!";
-	mes "*Cough, Cough*...";
+	mes "[시로]";
+	mes "돌팔이 의사놈이  감기약이라고";
+	mes "만들어준게 전혀 소용이 없잖아!";
+	mes "콜록, 콜록...";
 	next;
-	mes "[Shiro]";
-	mes "I don't know why but...";
-	mes "I'm getting worse and worse...";
-	mes "What kind of cold is this?";
-	mes "*Cough*... *Cough*...";
+	mes "[시로]";
+	mes "어찌된게 몸이 점점 나빠져가...";
+	mes "몸에 힘도 안들어가고... 도대체";
+	mes "감기가 이렇게 지독할 수 있나?";
+	mes "콜록... 콜록...";
 	close;
 }
 	
-ama_in02,40,167,3	script	Soldier#ama5	767,{
-	mes "[Goro]";
-	mes "*Psst*... Please, be quiet.";
-	mes "I will tell you a story, okay?";
-	mes " ";
+ama_in02,40,167,3	script	병사#ama5	767,{
+	mes "[고로]";
+	mes "쉿... 손님, 조용히 하십쇼.";
+	mes "대신에 제게 이야기를 한가지만";
+	mes "해드릴테니까요...";
 	next;
-	mes "[Goro]";
-	mes "There is a rumor in Amatsu.";
-	mes "The lord of this palace isn't";
-	mes "real... *Psst*, Quiet!";
-	mes "Don't panic and listen to me.";
+	mes "[고로]";
+	mes "아마쯔에는 나쁜 소문이 있었요.";
+	mes "사실 이 마을 성주님은, 진짜가";
+	mes "아니라는 소문이죠... 쉿, 조용!";
+	mes "놀라지 말고 끝까지 들어줘요.";
 	next;
-	mes "[Goro]";
-	mes "There is a real lord behind";
-	mes "the kind lord and he is scheming";
-	mes "something. He is controlling";
-	mes "our town in some hidden place.";
-	mes "...Our kind lord is just a figurehead~!";
+	mes "[고로]";
+	mes "지금의 마음 좋은 성주님의 뒤에";
+	mes "진짜 성주가 있어서, 이런 저런";
+	mes "음모를 꾸미고 있는거죠. 지금의";
+	mes "성주님을 허수아비로 세워두고";
+	mes "어딘가에 숨어서 마을의 모둔걸";
+	mes "조종하는게 분명해요.";
 	next;
-	mes "[Goro]";
-	mes "It's for real! Trust me~";
-	mes "I saw him. The lord who was";
-	mes "laughing at the town on the";
-	mes "TenguGak!!";
-	mes "Just don't tell anyone that I've told you this, okay?";
+	mes "[고로]";
+	mes "믿기지 않는 표정인데, 정말이라";
+	mes "니까요! 전 봤어요. 천수각에서";
+	mes "마을을 내려다보며 웃고 있었던";
+	mes "또 다른 얼굴의 성주를!!";
+	mes "하지만 제가 이런 얘기했다는 건";
+	mes "비밀이예요. 아셨죠?";
 	close;
 }
 	
-ama_in02,32,167,5	script	Soldier#ama6	767,{
-	mes "[Rokuro]";
-	mes "He always talks nonsense.";
-	mes "He says that our lord";
-	mes "is not real, but a fake.";
-	mes "It's not even funny.";
+ama_in02,32,167,5	script	병사#ama6	767,{
+	mes "[로쿠로]";
+	mes "저 녀석은 맨날 이상한 얘기만";
+	mes "한다니까요. 우리 성주님이 뭐";
+	mes "진짜가 아니고 가짜라나?";
+	mes "웃기지도 않는다니까요.";
 	next;
-	mes "[Rokuro]";
-	mes "However, it is true that";
-	mes "recently, weird things are";
-	mes "happening. There were no";
-	mes "prohibited places before...";
+	mes "[로쿠로]";
+	mes "뭐 그런데, 확실히 요즘 들어서";
+	mes "이상한 일들이 일어나고 있는건";
+	mes "맞는 말입니다. 이 성 내부에서";
+	mes "출입이 금지된 지역도 생기고...";
 	next;
-	mes "[Rokuro]";
-	mes "I hear strange sounds sometimes.";
-	mes "The mother of the lord has been";
-	mes "visited by doctors several times.";
-	mes "I guess her health hasn't";
-	mes "improve after their visits...";
+	mes "[로쿠로]";
+	mes "가끔 무서운 소리가 들려오기도";
+	mes "하고 말이죠. 성주님의 어머님도";
+	mes "어딘가 아프신지, 소문난 의원들";
+	mes "이 수차례나 방문하는걸 봤지요.";
+	mes "그런데 영 신통치 않은건지...";
 	close;
 }
 	
-ama_in02,42,34,2	script	Soldier#ama7	767,{
-	mes "[Shichiro]";
-	mes "Have a good time.";
-	mes "My lord prepared some";
-	mes "guest rooms.";
+ama_in02,42,34,2	script	병사#ama7	767,{
+	mes "[시치로]";
+	mes "편히 쉬었다 가시길, 성주님께서";
+	mes "손님 여러분들을 위해서 빈 방을";
+	mes "몇군데 준비해두셨습니다.";
 	next;
-	mes "[Shichiro]";
-	mes "If you have any problems,";
-	mes "please call me. Also, try not to disturb the other guests.";
-	mes " ";
+	mes "[시치로]";
+	mes "무언가 문제가 있으신 경우에는";
+	mes "언제라도 불러주시길 바랍니다.";
+	mes "또한, 다른 손님들에게 실례가";
+	mes "되는 행동은 삼가해주시길...";
 	next;
-	mes "[Shichiro]";
-	mes "Have a good day.";
+	mes "[시치로]";
+	mes "그럼, 편안한 하루 보내십시오.";
 	close;
 }
 	
-ama_in02,203,156,4	script	Soldier#ama8	767,{
-	mes "[Hachiro]";
-	mes "My lord is inside.";
-	mes "If you'd like to greet him, feel free to enter.";
+ama_in02,203,156,4	script	병사#ama8	767,{
+	mes "[하치로]";
+	mes "성주님께서는 안쪽에 계십니다.";
+	mes "인사를 드리고 싶으시면, 조용히";
+	mes "들어가셔서 말씀하세요.";
 	next;
-	mes "[Hachiro]";
-	mes "Don't be rude in front of him.";
-	mes "He is somehow not feeling well.";
-	mes "Usually, he greets people from";
-	mes "other continents gladly, but...";
-	mes "What could have happened to him...?";
+	mes "[하치로]";
+	mes "지금 성주님의 심기가 조금 불편";
+	mes "하신듯하니, 무례한 언동은 절대";
+	mes "삼가하셔야만 합니다. 평소라면";
+	mes "외지인들을 반갑게 대하시지만";
+	mes "오늘은 왠일인지.....";
 	close;
 }
 	
-ama_in02,195,156,4	script	Soldier#ama9	767,{
-	mes "[Kyuro]";
-	mes "This is not good.";
-	mes "My lord is really kind, but";
-	mes "recently he is not doing well...";
+ama_in02,195,156,4	script	병사#ama9	767,{
+	mes "[큐로]";
+	mes "큰일이죠, 뭔가 성주님께서 하시";
+	mes "는 일들이 잘 안풀리시나봐요.";
+	mes "평소에는 참 선량하신 분인데...";
 	next;
-	mes "[Kyuro]";
-	mes "I've heard about the rumors";
-	mes "but I trust him. He made";
-	mes "Amatsu into a great town.";
-	mes "That is why I'm following";
-	mes "him as a soldier.";
+	mes "[큐로]";
+	mes "이상한 소문도 돌고 있지만 저는";
+	mes "성주님을 믿어요. 우리 마을을";
+	mes "이렇게 멋진 곳으로 만들어주신";
+	mes "분이니까요. 그래서 저도 병사로";
+	mes "성주님을 따르고 있지요.";
 	close;
 }
 	
-ama_in02,115,177,7	script	Soldier#ama10	767,{
-	mes "[Jyuro]";
-	mes "What are you doing in here?";
-	mes "There is nothing interesting here.";
+ama_in02,115,177,7	script	병사#ama10	767,{
+	mes "[쥬로]";
+	mes "이 곳에는 무슨 일이십니까?";
+	mes "여기는 볼만한게 없으실텐데요.";
 	next;
-	if (select("That is true:Open the gate") == 1) {
-		mes "[Jyuro]";
-		mes "There are much better things to enjoy in town. Have a good time...";
+	if (select("정말 그렇군요.:문을 열어주시오.") == 1) {
+		mes "[쥬로]";
+		mes "마을에는 볼거리가 더 많지요.";
+		mes "좋은 시간 보내시길...";
 		close;
 	}
 	if (event_amatsu == 6) {
 		if (countitem(7160) > 0) {
-			mes "[Jyuro]";
+			mes "[쥬로]";
 			mes "You have the ticket...";
 			mes "Do you want me to send you now, or do you need a little instruction?";
 			next;
 			if (select("I will go in:Instruction, please") == 1) {
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "I will open the gate.";
 				mes "Take care of yourself...";
 			}
 			else {
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "The area beyond this gate is";
 				mes "protected by some kind of magic.";
 				mes "You may get killed by someone";
 				mes "or get lost.";
 				mes " ";
 				next;
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "I can't tell you much.";
 				mes "I didn't go far inside and";
 				mes "and just took a quick look.";
 				mes " ";
 				mes " ";
 				next;
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "First.....";
 				mes "'Do not trust what you are";
 				mes "seeing.' I don't know what";
 				mes "it means, but I guess you shouldn't believe everything before your eyes.";
 				next;
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "Second.....";
 				mes "'There are certain rules in";
 				mes "magic.' Everything has a";
 				mes "reason to exist. Magic is not an exception. You can probably find the answer...";
 				next;
-				mes "[Jyuro]";
+				mes "[쥬로]";
 				mes "Well, I will open this gate.";
 				mes "Take care of yourself...";
 			}
@@ -1703,163 +1709,174 @@ ama_in02,115,177,7	script	Soldier#ama10	767,{
 			warp "ama_dun01",229,10;
 			end;
 		}
-		mes "[Jyuro]";
+		mes "[쥬로]";
 		mes "I'm sorry.";
 		mes "You need a Transit Permit to go in.";
 		mes "Please, go back.";
 		close;
 	}
-	mes "[Jyuro]";
-	mes "What gate are you talking about?";
-	mes "A gate? On the top floor of the building??? Surely, you must been be mistaken.";
+	mes "[쥬로]";
+	mes "무슨 문을 말씀하시는건지요.";
+	mes "이런 다락방에 문같은게 있을 리";
+	mes "없잖습니까. 뭔가 잘못 찾아오셔나";
+	mes "봅니다.";
 	emotion ET_SWEAT;
 	next;
 	if (countitem(7160) > 0) {
 		if (select("Show him the ticket:Cancel") == 1) {
-			mes "[Jyuro]";
+			mes "[쥬로]";
 			mes "What? That pass is...?";
 			mes "That Transit Permit is from";
 			mes "the lord but I guess it has";
 			mes "been issued to the wrong person.";
 			next;
 			delitem 7160,1; //Lord's_Passable_Ticket
-			mes "[Jyuro]";
+			mes "[쥬로]";
 			mes "I will keep this ticket because";
 			mes "it was issued without permission.";
 			mes "This is a warning.";
 			mes "Be careful.";
 			close;
 		}
-		mes "[Jyuro]";
+		mes "[쥬로]";
 		mes "There are more things to enjoy in town. Have a good time...";
 		close;
 	}
-	mes "[Jyuro]";
-	mes "There are more things to enjoy in town. Have yourself a good time...";
+	mes "[쥬로]";
+	mes "마을에는 볼걸리가 더 많지요.";
+	mes "좋은 시간 보내시길...";
 	close;
 }
 	
-ama_dun01,229,7,0	script	Soldier#ama11	767,{
-	mes "[Jyuro]";
+ama_dun01,229,7,0	script	병사#ama11	767,{
+	mes "[쥬로]";
 	mes "Do you want to go back?";
 	next;
 	if (select("Yes, I do:I will stay here") == 1) {
-		mes "[Jyuro]";
+		mes "[쥬로]";
 		mes "Take care of yourself.";
 		close2;
 		warp "ama_in02",119,181;
 		end;
 	}
-	mes "[Jyuro]";
+	mes "[쥬로]";
 	mes "Take care...";
 	close;
 }
 	
-ama_in02,200,176,4	script	Lord of Palace#ama	768,{
+ama_in02,200,176,4	script	성주#ama	768,{
 	if (event_amatsu == 0) {
-		mes "[Ishida Yoshinaga]";
-		mes "What! A foreigner...? *Phew*";
-		mes "I'm sorry, but I'm not in";
-		mes "the mood to meet new people!";
+		mes "[이시다 요시나가]";
+		mes "뭔가? 외지인인가...? 후, 미안";
+		mes "하지만 오늘은 외지인을 만날";
+		mes "만한 기분이 아니라네!";
 		next;
-		mes "[Ishida Yoshinaga]";
-		mes "Get out! I'm not interested";
-		mes "in who you are.";
-		mes "I'm not feeling well!";
+		mes "[이시다 요시나가]";
+		mes "나가주게나! 자네가 어떤 사람인";
+		mes "지는 관계없다네. 지금 본인은";
+		mes "상당히 심기가 불편하단 말일세!";
 		close;
 	}
 	else if (event_amatsu == 1) {
-		mes "[Ishida Yoshinaga]";
-		mes "What! A foreigner? What brings";
-		mes "you here? If it is not urgent,";
-		mes "come to me another time...!";
+		mes "[이시다 요시나가]";
+		mes "뭔가! 외지인인가? 무슨 일로 날";
+		mes "찾아온건가. 급한 일이 아니라면";
+		mes "다음번에 다시 찾아오가나...!";
 		next;
-		switch(select("I heard about your mother...:Your last name is nice:Who are you?")) {
+		switch(select("어머님께서 많이 편찮으시다고 해서...:성이 참 멋지군요:당신은 누구십니까?")) {
 		case 1:
-			mes "[Ishida Yoshinaga]";
-			mes "Oh...So you know about her disease?";
-			mes "I've heard that, in foreign lands,";
-			mes "the body of medical knowledge can";
-			mes "be quite amazing.";
+			mes "[이시다 요시나가]";
+			mes "오호... 혹시 질병에 대해서 잘";
+			mes "아는 자인가? 그렇지, 외지인의";
+			mes "지식이라면 어느 정도 믿을 수";
+			mes "있겠지... 그렇겠지...";
 			next;
-			mes "[Ishida Yoshinaga]";
-			mes "Welcome. As you know, I'm the";
-			mes "lord of Toukoujyo,";
-			mes "Ishida Yoshinaga. Nice to";
-			mes "meet you.";
+			mes "[이시다 요시나가]";
+			mes "어서 오시게나. 알다시피 내가";
+			mes "이 토우코우죠의 성주,";
+			mes "이시다 요시나가라네. 만나서 참";
+			mes "반갑네.";
 			next;
-			mes "[Ishida Yoshinaga]";
-			mes "Let's get to the point.";
-			mes "My mother is not doing well recently. I know you are here because of that.";
-			mes "Can you cure her disease?";
+			mes "[이시다 요시나가]";
+			mes "거두절미하고, 내 어머니께서 좀";
+			mes "건강이 안좋으시다네, 물론  그것";
+			mes "때문에 찾아왔겠지. 내 어머님의";
+			mes "병을 좀 낫게 해줄 수 있겠나?";
 			next;
-			mes "[Ishida Yoshinaga]";
-			mes "Until now, many famous doctors";
-			mes "have visited her, but they";
-			mes "all failed to cure her disease";
-			mes "and made it worse...";
-			mes "They disappointed me.";
+			mes "[이시다 요시나가]";
+			mes "지금까지 수많은 명의로 소문난";
+			mes "자들이 방문해왔지만, 모두 다";
+			mes "치료는 커녕 더 악화만 시키다가";
+			mes "돌아갔단 말일세... 그래서 계속";
+			mes "실망만 하고 있었단 말이지.";
 			next;
-			mes "[Ishida Yoshinaga]";
-			mes "You, who hail from Midgard,";
-			mes "may be able to cure my mother's disease. I will reward you well if you succeed...";
+			mes "[이시다 요시나가]";
+			mes "외지인인 자네라면 내 어머님의";
+			mes "병을 치료할 수 있을지도 몰라.";
+			mes "사례는 두둑히 챙겨줄테니...";
 			next;
 			set event_amatsu,2;
 			if (isbegin_quest(8131) == 1)
 				changequest 8131,8132;
 			else
 				setquest 8132;
-			mes "[Ishida Yoshinaga]";
-			mes "I beg you...Please.";
-			mes "My mother is living in a house outside of the palace.";
-			mes "Come to me when you finish your treatment.";
+			mes "[이시다 요시나가]";
+			mes "그럼 부탁 좀 하겠네. 어머님은";
+			mes "성밖의 저택에 기거하고 계시네.";
+			mes "치료에 성공하게 되면 다시금 날";
+			mes "찾아오게나.";
 			close;
 		case 2:
-			mes "[Ishida Yoshinaga]";
-			mes "Nice!? So What?!";
-			mes "Read my name until you get";
-			mes "tired of it! Darn it!";
+			mes "[이시다 요시나가]";
+			mes "그래! 멋지다네! 그래서 어쩌란";
+			mes "얘기인가! 싫을 정도로 실컷 보";
+			mes "다가 돌아가던지 하게! 젠장!";
 			next;
-			mes "[Ishida Yoshinaga]";
-			mes "Joking, even in this critical situation... *Phew*...";
-			mes "Please have a good time in Amatsu.";
-			mes "...Whatever!";
+			mes "[이시다 요시나가]";
+			mes "이런 급학한 시기에... 후우...";
+			mes "편하게 쉬다가 가던지 말던지";
+			mes "마음대로 하게나!";
 			close;
 		case 3:
-			mes "[Ishida Yoshinaga]";
-			mes "...me? Don't you know? Huh?";
-			mes "I'm the lord of this palace.";
-			mes "If you don't know, talk to";
-			mes "the soldiers outside!";
+			mes "[이시다 요시나가]";
+			mes "...본인 말인가? 모르겠나? 하?";
+			mes "내가 바로 이 성의 주인이다.";
+			mes "모르겠으면 밖의 병사놈들에게";
+			mes "한번 물어보세나!";
+			next;
+			mes "[이시다 요시나가]";
+			mes "이런 급학한 시기에... 후우...";
+			mes "편하게 쉬다가 가던지 말던지";
+			mes "마음대로 하게나!";
 			close;
 		}
 	}
 	else if (event_amatsu == 5) {
 		if (countitem(1022) > 0) {
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "I've heard the great news!";
 			mes "My mother seems to have gotten better. What was her disease?";
 			next;
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "A fox? Is that so? Oh...";
 			mes "It wasn't a disease...!!";
 			mes "Why didn't I notice?!";
 			next;
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "Darn fox. To run away and";
 			mes "take revenge on me in such a";
 			mes "way...Well, then. There's no chance of revenge now... Hahaha!";
 			next;
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "Hmm, Mmm. Hmm...";
 			next;
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "Anyway, thank you for helping me.";
 			mes "Mother will be okay now...";
 			mes "I want to reward you...";
 			mes "But what would be nice...?";
 			next;
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "Alright, I will give you";
 			mes "a Transit Permit.";
 			mes "You can go anywhere";
@@ -1869,23 +1886,23 @@ ama_in02,200,176,4	script	Lord of Palace#ama	768,{
 			completequest 8135;
 			delitem 1022,1; //Fox_Tail
 			getitem 7160,1; //Lord's_Passable_Ticket
-			mes "[Ishida Yoshinaga]";
+			mes "[이시다 요시나가]";
 			mes "This isn't a big reward but";
 			mes "someday it will be useful for you.";
 			mes "Ask my soldier, 'Jyuro' about the details.";
 			close;
 		}
-		mes "[Ishida Yoshinaga]";
+		mes "[이시다 요시나가]";
 		mes "Hmm, I heard that my mother";
 		mes "got better...but";
 		mes "How can I know if you cured";
 		mes "her or not?";
 		next;
-		mes "[Ishida Yoshinaga]";
+		mes "[이시다 요시나가]";
 		mes "Is there any evidence to prove";
 		mes "that you cured her?";
 		next;
-		mes "[Ishida Yoshinaga]";
+		mes "[이시다 요시나가]";
 		mes "Show me the evidence to prove";
 		mes "your treatment. I've been";
 		mes "meeting so many foreigners.";
@@ -1894,31 +1911,33 @@ ama_in02,200,176,4	script	Lord of Palace#ama	768,{
 		close;
 	}
 	else if (event_amatsu == 6) {
-		mes "[Ishida Yoshinaga]";
+		mes "[이시다 요시나가]";
 		mes "*Chuckle* Have a good time";
 		mes "in Amatsu.....";
 		mes "Foreigners are always welcome.";
 		close;
 	}
-	mes "[Ishida Yoshinaga]";
-	mes "How is my mom's status?";
-	mes "If you find the name of the disease, please tell me.";
-	mes "I was worrying about";
-	mes "her all night.";
+	mes "[이시다 요시나가]";
+	mes "내 엄머님의 치료는 어떻게 되어";
+	mes "가오 있나? 혹시 병명이라도 알";
+	mes "수 있다면 내게 바로 알려주게.";
+	mes "크으... 걱정스러워서 매일 밤";
+	mes "잠도 제대로 못자고 있다네.";
 	next;
-	mes "[Ishida Yoshinaga]";
-	mes "Because you carry with you";
-	mes "knowledge from Midgard,";
-	mes "I have faith in your ability.";
+	mes "[이시다 요시나가]";
+	mes "자네는 다른 대륙의 사람이니까,";
+	mes "알 수 있을거라네... 지금으로서";
+	mes "는 자네밖에 믿을 사람이 없지.";
 	close;
 }
 	
-ama_in01,22,111,0	script	Grandma#ama2	761,{
+ama_in01,22,111,0	script	할머니#ama2	761,{
 	if (event_amatsu == 4) {
 		mes "[....]";
-		mes "^FF6060Yelp, Yelp, a foolish human";
-		mes "again! What are you going to do";
-		mes "to get rid of me!?^000000";
+		mes "^FF6060캐캥, 캐캥, 어리석은 인간이 또^000000";
+		mes "캐캥, 캐캥, 누구냐! 이간이냐!?";
+		mes "뭐하러 들어왔어! 썩 물러가지";
+		mes "않고... 캐캥! 캐캥!";
 		next;
 		mes "[....]";
 		mes "^FF6060You look like you learned";
@@ -2043,44 +2062,44 @@ ama_in01,22,111,0	script	Grandma#ama2	761,{
 		close;
 	}
 	mes "[....]";
-	mes "^FF6060Yelp, Yelp, Another foolish human!";
-	mes "Yelp, Yelp, Who! Human!?";
-	mes "What are you doing!";
-	mes "Shoo... Yelp! Yelp!^000000";
+	mes "^FF6060캐캥, 캐캥, 어리석은 인간이 또^000000";
+	mes "캐캥, 캐캥, 누구냐! 이간이냐!?";
+	mes "뭐하러 들어왔어! 썩 물러가지";
+	mes "않고... 캐캥! 캐캥!";
 	next;
 	mes "[....]";
-	mes "^FF6060I will be in here until";
-	mes "the Ishida family line dies out!";
-	mes "Don't disturb me! Yelp!^000000";
+	mes "^FF6060이몸은 이시다 가문이 끝나는 그^000000";
+	mes "날까지 여기에서 살 예정이다!";
+	mes "방해하지 말고 나가라! 캐캥!";
 	close2;
 	warp "amatsu",167,197;
 	end;
 }
 	
-amatsu,189,166,5	script	Kouji#ama	764,{
-	mes "[Kouji]";
-	mes "Ralralrah Ralralrah Ralralrahralralrah~";
-	mes "Ralralrah Ralralrah Ralralrahralralrah~";
+amatsu,189,166,5	script	코우지#ama	764,{
+	mes "[코우지]";
+	mes "랄랄라 랄랄라 랄랄라랄랄라~";
+	mes "랄랄라 랄랄라 랄랄라랄랄라~";
 	next;
-	mes "[Kouji]";
+	mes "[코우지]";
 	if (event_amatsu == 1) {
-		mes "When you're sick, rice cakes are no good~";
-		mes "Family is the best help, as it should~";
-		mes "When medicine doesn't help, that's when you'll see~";
-		mes "That Mommy's love is best for me~";
+		mes "많이 아픈 사람에게는 밥도 떡도";
+		mes "소용없지, 가장 좋은 것은 가족.";
+		mes "뜨거운 열도 차가운 손발도";
+		mes "어머니의 정성에 녹아내리지.";
 	}
 	else if (event_amatsu == 2) {
 		set event_amatsu,3;
-		mes "Priest, Priest~";
-		mes "A fox is following me!";
-		mes "It's funny and a little absurd,";
-		mes "But I'll need noodles with fried bean curd!";
+		mes "스님, 스님, 여우가 따라오네요.";
+		mes "여우가 좋아한는걸 들고 있구나.";
+		mes "유부우동은 내가 제일 좋아해.,";
+		mes "하루에 세번도 먹을 수 있어.";
 	}
 	else if (event_amatsu == 3) {
-		mes "Priest, priest~";
-		mes "A fox is following me!";
-		mes "If he doesn't leave when I scream and shout!";
-		mes "The North Shrine Priest should help me out~";
+		mes "스님, 스님, 여우가 따라오네요.";
+		mes "소리를 크게 질러 쫓아보거라.";
+		mes "목소리가 작아서 도망가지 않아.";
+		mes "북쪽의 신사까지 따라와버렸네.";
 		if (isbegin_quest(8132) == 1)
 			changequest 8132,8133;
 	}
@@ -2090,7 +2109,7 @@ amatsu,189,166,5	script	Kouji#ama	764,{
 		mes "If shouts alone don't make Fox scared,";
 		mes "I might need help from Tiger and Bear~!";
 		next;
-		mes "[Kouji]";
+		mes "[코우지]";
 		mes "Anything else I need in this fight???";
 		mes "Maybe some water from an Acolyte~!";
 	}
@@ -2101,15 +2120,15 @@ amatsu,189,166,5	script	Kouji#ama	764,{
 		mes "the rest of this...song???";
 	}
 	else {
-		mes "Blue roof under the blue sky";
-		mes "Blue wall on the blue lake";
-		mes "Blue wishes in the blue minds";
-		mes "Blue Blue Everything is Blue";
+		mes "파란 하는ㄹ에 결려있는 파란 지붕";
+		mes "파란 호수에 비치는 파란 성벽";
+		mes "파란 마음에 담긴 파란 소원";
+		mes "파란색 파란색 모두가 파란색";
 	}
 	next;
-	mes "[Kouji]";
-	mes "Ralralrah Ralralrah Ralralrahralralrah~";
-	mes "Ralralrah Ralralrah Ralralrahralralrah~";
+	mes "[코우지]";
+	mes "랄랄라 랄랄라 랄랄라랄랄라~";
+	mes "랄랄라 랄랄라 랄랄라랄랄라~";
 	close;
 }
 	

@@ -12,4 +12,41 @@
 //= 1.0 First version.
 //============================================================ 
 
-izlude,206,55,3	duplicate(Airship_Staff_izlude)	Airship Staff#izlude	90
+-	script	::Airship_Staff_izlude	-1,{
+	mes "[공항 직원]";
+	mes "안녕하세요. 저희 항공은 항상";
+	mes "고객님의 편안한 여행을 위해 최선을";
+	mes "다하고 있습니다. 무엇을";
+	mes "도와드릴까요?";
+	next;
+	if (select("유노/라헬 행 비공정에 탑승한다.:취소.") == 1) {
+		mes "[공항 직원]";
+		mes "비공정의 이용 요금은 1200제니입니다.";
+		mes "비공정 무료이용권을 갖고 계시면";
+		mes "무료로 들어가실 수 있습니다.";
+		mes "비공정에 탑승하시겠습니까?";
+		next;
+		if (select("예:아니오") == 1) {
+			if (countitem(7311) > 0) {
+				delitem 7311,1; //Free_Flying_Ship_Ticket
+				warp "airplane_01",244,58;
+				end;
+			}
+			if (Zeny >= 1200) {
+				set Zeny, Zeny - 1200;
+				warp "airplane_01",244,58;
+				end;
+			}
+			mes "[공항 직원]";
+			mes "1200제니를 지불해야만 들어가실 수";
+			mes "있습니다. 돈이 모자라신 것 같네요.";
+			close;
+		}
+	}
+	mes "[공항 직원]";
+	mes "다음에 또 이용해주세요.";
+	mes "감사합니다.";
+	close;
+}
+
+izlude,206,55,3	duplicate(Airship_Staff_izlude)	공항 직원#izlude	90

@@ -3816,7 +3816,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "wouldn't come here to pray...";
 				mes "Well, I hope you enjoy your";
 				mes "time here, adventurer.";
-				close3;
+				goto L_End;
 			}
 			mes "[Priestess Nemma]";
 			mes "Oh! I'm glad to see that";
@@ -3869,7 +3869,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "all your journeys. May the";
 				mes "grace of the goddess always";
 				mes "support us in all that we do~";
-				close3;
+				goto L_End;
 			}
 			mes "[Priestess Nemma]";
 			mes "Great! How much would you";
@@ -3898,7 +3898,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "protecting you, wherever you go~";
 				break;
 			}
-			close3;
+			goto L_End;
 		}
 		else {
 			cutin "ra_nemma03",2;
@@ -3939,7 +3939,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 					mes "protecting you, wherever you go~";
 					break;
 				}
-				close3;
+				goto L_End;
 			case 2:
 				mes "[Priestess Nemma]";
 				mes "Oh! If you'd like some";
@@ -3968,7 +3968,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "Oh, how sweet of you~";
 				break;
 			}
-			close3;
+			goto L_End;
 		}
 	}
 	else {
@@ -3976,7 +3976,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			cutin "ra_nemma01",2;
 			mes "[Priestess Nemma]";
 			mes "Welcome to our temple!";
-			close3;
+			goto L_End;
 		}
 		if (ra_tem_q < 1) {
 			mes "[Priestess Nemma]";
@@ -4009,7 +4009,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "to go inside. ^333333*Sob*^000000 P-Panno!";
 			mes "Panno, I neeeed heeeeelp~!";
 			set ra_tem_q,1;
-			close3;
+			goto L_End;
 		}
 		else if ((ra_tem_q >= 1) && (ra_tem_q < 10)) {
 			mes "[Priestess Nemma]";
@@ -4024,7 +4024,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "Panno would know";
 			mes "what to do... I think.";
 			mes "Ooh, Panno, help me!";
-			close3;
+			goto L_End;
 		}
 		else if (ra_tem_q == 10) {
 			cutin "ra_nemma04",2;
@@ -4050,7 +4050,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "I'm outside. What if";
 			mes "the gate locks up again?";
 			mes "Oooh, what should I do?!";
-			close3;
+			goto L_End;
 		}
 		else if (ra_tem_q == 11) {
 			emotion ET_DELIGHT;
@@ -4062,7 +4062,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "longer asking for donations,";
 			mes "but you can still redeem your";
 			mes "Lottery Tickets inside, okay?";
-			close3;
+			goto L_End;
 		}
 		else if (ra_tem_q == 12) {
 			mes "[Priestess Nemma]";
@@ -4089,7 +4089,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "like, ^FF000020 of them^000000! Thank";
 			mes "you thank you thank you!";
 			set ra_tem_q,13;
-			close3;
+			goto L_End;
 		}
 		else if (ra_tem_q == 13) {
 			mes "[Priestess Nemma]";
@@ -4124,7 +4124,7 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 					mes "to play! Hm, maybe";
 					mes "our pope would like";
 					mes "to see these too?";
-					close3;
+					goto L_End;
 				}
 				cutin "ra_nemma02",2;
 				mes "[Priestess Nemma]";
@@ -4143,16 +4143,20 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "have much to pay you";
 				mes "back with, anyway~";
 			}
-			close3;
+			goto L_End;
 		}
 		else {
 			cutin "ra_nemma01",2;
 			mes "[Priestess Nemma]";
 			mes "Welcome to our temple!";
 		}
-		close3;
+		goto L_End;
 	}
-	close3;
+
+L_End:
+	close2;
+	cutin "",255;
+	end;
 
 S_Donate:
 	.@num = getarg(0);
@@ -6325,7 +6329,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "everything I know.";
 			mes "Remember to keep";
 			mes "quiet about what I said.";
-			close3;
+			goto L_End;
 		}
 	}
 	else if (ra_tem_q < 2) {
@@ -6354,7 +6358,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "time, so please visit";
 			mes "me at your leisure.";
 			mes "Go with Freya.";
-			close3;
+			goto L_End;
 
 		case 2:
 			cutin "ra_fano01",2;
@@ -6393,14 +6397,14 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "side of the hallway. However,";
 			mes "you can only enter if you've";
 			mes "been permitted beforehand.";
-			close3;
+			goto L_End;
 
 		case 3:
 			mes "[Priestess Panno]";
 			mes "......................";
 			mes "No chit-chat";
 			mes "inside the temple.";
-			close3;
+			goto L_End;
 		}
 	}
 	else if (ra_tem_q == 10) {
@@ -6435,7 +6439,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "time, so please visit";
 			mes "me at your leisure.";
 			mes "Go with Freya.";
-			close3;
+			goto L_End;
 
 		case 2:
 			cutin "ra_fano01",2;
@@ -6474,7 +6478,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "side of the hallway. However,";
 			mes "you can only enter if you've";
 			mes "been permitted beforehand.";
-			close3;
+			goto L_End;
 
 		case 3:
 			cutin "ra_fano02",2;
@@ -6521,7 +6525,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 			mes "[Priestess Panno]";
 			mes ".........";
 			set ra_tem_q,11;
-			close3;
+			goto L_End;
 		}
 	}
 	else if (ra_tem_q == 11) {
@@ -6656,7 +6660,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 		mes "Excuse me now, I need";
 		mes "to get back to work.";
 		set ra_tem_q,12;
-		close3;
+		goto L_End;
 	}
 	cutin "ra_fano02",2;
 	mes "[Priestess Panno]";
@@ -6664,7 +6668,7 @@ ra_temin,170,46,3	script	Panno#rachel	920,{
 	mes "Behave yourself, and";
 	mes "respect those who have";
 	mes "come here just to worship.";
-	close3;
+	goto L_End;
 
 L_Lottery:
 	if(checkweight(607,1) == 0){
@@ -6676,7 +6680,7 @@ L_Lottery:
 		mes "something large, unwieldy";
 		mes "and heavy? Put your junk";
 		mes "away in Storage first.";
-		close3;
+		goto L_End;
 	}
 	mes "[Priestess Panno]";
 	mes "Here we go";
@@ -6712,7 +6716,7 @@ L_Lottery:
 		else if (.@bonus_donate > 5 && .@bonus_donate < 11) getitem 518,1;	//Honey 5%
 		else if (.@bonus_donate > 0 && .@bonus_donate < 6) getitem 526,1;	//Royal Jelly 5%
 		else getitem 547,1; //Condensed White Potion 39%
-		close3;
+		goto L_End;
 	}
 	mes "[Priestess Panno]";
 	mes "You...";
@@ -6732,7 +6736,7 @@ L_Lottery:
 	cutin "ra_fano03",2;
 	mes "[Priestess Panno]";
 	mes "May Freya be with you.";
-	close3;
+	goto L_End;
 
 L_End:
 	close2;

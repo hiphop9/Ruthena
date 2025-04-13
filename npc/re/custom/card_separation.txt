@@ -1,0 +1,356 @@
+//===== rAthena Script ======================================= 
+//= Card Separation System
+//===== By: ================================================== 
+//= Muad_Dib
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Separates cards from equipment.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Euphy]
+//= 1.1 Added "리처드" NPC. [Euphy]
+//= 1.2 Second Version : Jeremy Removed. No destruction. [eppc0330]
+//= 번역 및 최신화 [옥음]
+//============================================================ 
+
+-	script	::CardSeparation_mal	-1,{
+	disable_items;
+	if (MaxWeight - Weight < 10000) {
+		mes "가진 물건이 너무 무거워 더이상의 진행이 힘들 것 같다. 무게를 줄인 후 다시 도전해보자.";
+		close;
+	}
+	set .@n$, "[리처드]";
+	setarray .@equip_name$[0], "왼손", "오른손", "갑옷", "신발", "걸칠것", "투구상단", "액세서리", "액세서리", "투구중단";
+	setarray .@equip_slot[0],   EQI_HAND_L, EQI_HAND_R, EQI_ARMOR, EQI_SHOES, EQI_GARMENT, EQI_HEAD_TOP, EQI_ACC_R, EQI_ACC_L, EQI_HEAD_MID;
+	
+	if(Header_Richard == 0) {
+		mes .@n$;
+		mes "지금까지 방어구의 카드분리 일을 맡았던 제레미는 여행을 떠나 버렸어요!! 그래서 이젠 제레미가 하던 일까지 제가 도맡아서 해 드리게 되었어요.";
+		mes "^ff0000게다가!! 드디어 투구중단의 카드도 분리할 수 있게 되었답니다!!!^000000";
+		set Header_Richard,1;
+		next;
+	}
+	mes .@n$;
+	mes "기본적인 수수료는 10만 제니, 소켓분리 작업 성공율을 높일 수 있는 특수 아이템을 사용하는 룰은 동일하지요. 특수 아이템 사용시에는 별도의 제니를 받지 않을겁니다.";
+	next;
+	mes .@n$;
+	mes "어떤 형태로 소켓 분리를 시도하셔도";
+	mes "장비나 카드가 파괴되진 않을겁니다.";
+	mes "다만 성공률의 차이가 달라질 뿐이죠.";
+	next;
+
+	for(.@i = 0; .@i < getarraysize(.@equip_slot); .@i++) {
+		if (getequipisequiped(.@equip_slot[.@i])) {
+			set .@menu$, .@menu$+getequipname(.@equip_slot[.@i])+":";
+		} else {
+			set .@menu$, .@menu$+"^8C8C8C"+.@equip_name$[.@i]+" (없음)^000000:";
+		}
+	}
+
+	set .@i, select("다음에 하겠소:"+.@menu$);
+	switch(.@i) {
+	case 1:
+		mes .@n$;
+		mes "언제든 작업이 필요하시면 찾아와주세요.";
+		close;
+	default:
+		set .@equip_num, .@equip_slot[.@i-2];
+		if (!getequipisequiped(.@equip_num)) {
+			mes .@n$;
+			mes "그 부위엔 아무것도 없는데요?";
+			close;
+		}
+		break;
+	}
+
+	setarray .@check_equip_card[0], getequipcardid(.@equip_num,0), getequipcardid(.@equip_num,1), getequipcardid(.@equip_num,2), getequipcardid(.@equip_num,3);
+	setarray .@equip_card[0], .@check_equip_card[0], .@check_equip_card[1], .@check_equip_card[2], .@check_equip_card[3];
+	setarray .@check_equip_OptID[0], getequiprandomoption(.@equip_num,0,ROA_ID), getequiprandomoption(.@equip_num,1,ROA_ID), getequiprandomoption(.@equip_num,2,ROA_ID), getequiprandomoption(.@equip_num,3,ROA_ID), getequiprandomoption(.@equip_num,4,ROA_ID);
+	setarray .@check_equip_OptVal[0], getequiprandomoption(.@equip_num,0,ROA_VALUE) ,getequiprandomoption(.@equip_num,1,ROA_VALUE) ,getequiprandomoption(.@equip_num,2,ROA_VALUE) ,getequiprandomoption(.@equip_num,3,ROA_VALUE) ,getequiprandomoption(.@equip_num,4,ROA_VALUE);
+	setarray .@check_equip_OptParam[0], getequiprandomoption(.@equip_num,0,ROA_PARAM) ,getequiprandomoption(.@equip_num,1,ROA_PARAM) ,getequiprandomoption(.@equip_num,2,ROA_PARAM) ,getequiprandomoption(.@equip_num,3,ROA_PARAM) ,getequiprandomoption(.@equip_num,4,ROA_PARAM);
+	setarray .@equip_OptID[0], .@check_equip_OptID[0], .@check_equip_OptID[1], .@check_equip_OptID[2], .@check_equip_OptID[3], .@check_equip_OptID[4];
+	setarray .@equip_OptVal[0], .@check_equip_OptVal[0], .@check_equip_OptVal[1], .@check_equip_OptVal[2], .@check_equip_OptVal[3], .@check_equip_OptVal[4];
+	setarray .@equip_OptParam[0], .@check_equip_OptParam[0], .@check_equip_OptParam[1], .@check_equip_OptParam[2], .@check_equip_OptParam[3], .@check_equip_OptParam[4];
+	set .@mvp_list$,
+		"|4408|4128|4456|4168|4142"+  //Gloom_Under_Night_Card, Golden_Bug_Card, Nidhogg_Shadow_Card, Dark_Lord_Card, Doppelganger_Card
+		"|4134|4137|4386|4407|4357"+  //Dracula_Card, Drake_Card, Detale_Card, Randgris_Card, B_Seyren_Card
+		"|4146|4132|4147|4372|4145"+  //Maya_Card, Mistress_Card, Baphomet_Card, Bacsojin_Card, Berzebub_Card
+		"|4374|4352|4367|4236|4425"+  //Apocalips_H_Card, B_Ygnizem_Card, B_Shecil_Card, Amon_Ra_Card, Atroce_Card
+		"|4359|4123|4144|4135|4143"+  //B_Eremes_Card, Eddga_Card, Osiris_Card, Orc_Load_Card, Orc_Hero_Card
+		"|4263|4131|4430|4276|4419"+  //Incant_Samurai_Card, Moonlight_Flower_Card, Ifrit_Card, Lord_Of_Death_Card, Ktullanux_Card
+		"|4403|4399|4376|4441|4302"+  //Kiel_Card, Thanatos_Card, Lady_Tanee_Card, Fallen_Bishop_Card, Tao_Gunka_Card
+		"|4305|4148|4318|4121|4365"+  //Turtle_General_Card, Pharaoh_Card, Knight_Windstorm_Card, Phreeoni_Card, B_Katrinn_Card
+		"|4363|4324|4361|4330|4342"+  //B_Magaleta_Card, Garm_Card, B_Harword_Card, Dark_Snake_Lord_Card, Rsx_0806_Card
+		"|4578|4556|4559|4528|4529"+  //탈락자퓨리엘_카드, 펜릴_카드, 마신_모로크_카드, 돌연변이_실러캔스_카드, 포악한_실러캔스_카드
+		"|27164|27279|";  //페이스_웜_퀸_카드, 본_디타르데우르스_카드
+
+	mes "[리처드]";
+	mes "몇번째 소켓의 카드를 분리하고";
+	mes "싶으십니까? 가장 왼쪽의 소켓부터";
+	mes "순서대로 1.2.3.4 소켓으로 분류됩니다.";
+	next;
+	set .@menu$,"";
+	for ( .@i = 0; .@i < MAX_SLOTS; .@i++ ) {
+		if (.@equip_card[.@i] && callfunc("F_IsCharm",.@equip_card[.@i]) == false) // 갑옷 Enchant System
+			.@menu$ = .@menu$ + "소켓 " + (.@i+1) + " - " + getitemname(.@equip_card[.@i])+":";
+		else {
+			.@menu$ = .@menu$ + "^777777소켓 " + (.@i+1) + " - 카드 없음^000000:";
+		}
+	}
+	set .@i, select("작업을 중단합니다:"+.@menu$);
+	switch(.@i) {
+	case 1:
+		mes .@n$;
+		mes "언제든 작업이 필요하시면 찾아와주세요.";
+		close;
+	default:
+		set .@slot, .@i-2;
+		if (.@equip_card[.@slot] == 0 || callfunc("F_IsCharm",.@equip_card[.@slot]) == true) {
+			mes .@n$;
+			mes "이 소켓은 카드가 장착되지 않았어요.";
+			mes "다시 확인해보시는게 어떨까요?";
+			close;
+		}
+		break;
+	}
+	if (compare(.@mvp_list$,"|"+.@equip_card[.@slot]+"|"))
+		set .@boss_chk,1;
+	
+	set .@equip_id, getequipid(.@equip_num);
+	set .@equip_refine, getequiprefinerycnt(.@equip_num);
+	set .@equip_grade, getenchantgrade(.@equip_num);
+	set .@card, .@equip_card[.@slot];
+	set .@check_equip_card[.@slot],0;
+	set .@equip_id, getequipid(.@equip_num);
+
+	if (.@boss_chk == 0) {
+		mes .@n$;
+		mes "그럼 작업 수수료를 선택해 주세요.";
+		next;
+		set .@menu$,
+			"다음 기회에...:"+
+			((Zeny >= 100000)?"10만z 사용(특수 아이템 사용없음):":"^8C8C8C10만z 사용(모자람)^000000:")+
+			((countitem(25239))?"신형고급윤활제:":"^8C8C8C신형고급윤활제 (없음)^000000:")+
+			((countitem(25238))?"신형일반윤활제":"^8C8C8C신형일반윤활제 (없음)^000000");
+		switch(select(.@menu$)) {
+		case 1:
+			mes .@n$;
+			mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+		case 2:
+			if (Zeny < 100000) {
+				mes .@n$;
+				mes "수수료로 사용할 제니가 부족한 것 같군요. 수수료를 마련하신뒤 다시 방문해주세요.";
+				close;
+			}
+			mes .@n$;
+			mes "제니를 이용한 기본 분리작업의 성공률은 2%입니다. 실패하더라도 장비나 카드가 파괴되진 않을거예요.";
+			next;
+			if(select("다음 기회에...:진행한다") == 1) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+				close;
+			}
+			goto ZEN;
+			break;
+		case 3:
+			if (countitem(25239) == 0) {
+				mes .@n$;
+				mes "신형고급윤활제를 보유하고 있지 않은 것 같군요.";
+				close;
+			}
+			mes .@n$;
+			mes "신형고급윤활제를 이용한 분리작업의 성공률은 20%입니다. 실패하더라도 장비나 카드가 파괴되진 않을거예요.";
+			next;
+			if(select("다음 기회에...:진행한다") == 1) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+				close;
+			}
+			goto Advanced;
+			break;
+		case 4:
+			if (countitem(25238) == 0) {
+				mes .@n$;
+				mes "신형고급윤활제를 보유하고 있지 않은 것 같군요.";
+				close;
+			}
+			mes .@n$;
+			mes "신형일반윤활제를 이용한 분리작업의 성공률은 10%입니다. 실패하더라도 장비나 카드가 파괴되진 않을거예요.";
+			next;
+			if(select("다음 기회에...:진행한다") == 1) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+				close;
+			}
+			goto Normal;
+			break;
+		}
+	} else if (.@boss_chk == 1) {
+		mes .@n$;
+		mes "이 장비엔 귀중한 MVP 카드가 장착되어 있군요. 이 카드는  일반적인 윤활제로 분리할 수 없답니다. 혹시 아주 강력한 ^0000ff실릿 퐁^000000을 가져온다면 가능할 것 같아요.";
+		next;
+		switch(select("다음 기회에...:실릿 퐁을 가지고 있다.")) {
+		case 1:
+			mes .@n$;
+			mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+		case 2:
+			if (countitem(6443) == 0) {
+				mes .@n$;
+				mes "실릿 퐁을 보유하고 있지 않은 것 같군요.";
+				close;
+			}
+			break;
+		}
+		mes .@n$;
+		if (.@Jeremy) {
+			mes "Except cards, ^ff0000all enchanted effects will disappear.^000000 If you agree to this, please choose the work type:";
+			set .@menu$,"Alright, let's do it!";
+		} else {
+			mes "그럼 진행할까요?";
+			set .@menu$,"물론, 빨리 분리해 주세요!";
+		}
+		next;
+		switch(select("다음 기회에...:"+.@menu$)) {
+		case 1:
+			mes .@n$;
+			mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+		case 2:
+			goto Sillit;
+			break;
+		}
+	}
+
+ZEN:
+	// anti-hack
+	if (callfunc("F_IsEquipCardHack", .@equip_num, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+
+	set .@next,50;
+	set .@by,1;
+	set Zeny, Zeny - 100000;
+	
+	if(.@by == 1) {
+		if (rand(1,.@next) < 2) {
+			specialeffect2 EF_MAXPOWER;		
+			delequip .@equip_num;
+			getitem .@card,1;
+			getitem4 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_grade,.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//if(.@equip_OptID[0] > 0||.@equip_OptID[1] > 0||.@equip_OptID[2] > 0||.@equip_OptID[3] > 0||.@equip_OptID[4] > 0)
+			//	getitem3 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//else
+			//	getitem2 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3];
+			goto Finish;
+		} else {
+			specialeffect2 155;
+			mes .@n$;
+			mes "분리에 실패했으나 장비와 카드에 손상없음. 입은 상태 그대로 보존해드렸습니다.";
+			mes "^ff0000다시 도전 하시겠습니까?^000000";
+			next;
+			if(select("재도전!!!!:그만둔다") == 2) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+			}
+		goto ZEN;
+		}
+	} 
+
+Advanced:
+	// anti-hack
+	if (callfunc("F_IsEquipCardHack", .@equip_num, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+
+	set .@next,5;
+	set .@by,2;
+	delitem 25239,1; //High_RankLubricant
+
+	if(.@by == 2) {
+		if (rand(1,.@next) < 2) {
+			specialeffect2 EF_MAXPOWER;		
+			delequip .@equip_num;
+			getitem .@card,1;
+			getitem4 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_grade,.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//if(.@equip_OptID[0] > 0||.@equip_OptID[1] > 0||.@equip_OptID[2] > 0||.@equip_OptID[3] > 0||.@equip_OptID[4] > 0)
+			//	getitem3 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//else
+			//	getitem2 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3];
+			goto Finish;
+		} else {
+			specialeffect2 155;
+			mes .@n$;
+			mes "분리에 실패했으나 장비와 카드에 손상없음. 입은 상태 그대로 보존해드렸습니다.";
+			mes "^ff0000다시 도전 하시겠습니까?^000000";
+			next;
+			if(select("재도전!!!!:그만둔다") == 2) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+			}
+		goto Advanced;
+		}
+	}
+
+Normal:
+	// anti-hack
+	if (callfunc("F_IsEquipCardHack", .@equip_num, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+
+	set .@next,10;
+	set .@by,3;
+	delitem 25238,1; //General_Lubricant
+	
+	if(.@by == 3) {
+		if (rand(1,.@next) < 2) {
+			specialeffect2 EF_MAXPOWER;		
+			delequip .@equip_num;
+			getitem .@card,1;
+			getitem4 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_grade,.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//if(.@equip_OptID[0] > 0||.@equip_OptID[1] > 0||.@equip_OptID[2] > 0||.@equip_OptID[3] > 0||.@equip_OptID[4] > 0)
+			//	getitem3 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+			//else
+			//	getitem2 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3];
+			goto Finish;
+		} else {
+			specialeffect2 155;
+			mes .@n$;
+			mes "분리에 실패했으나 장비와 카드에 손상없음. 입은 상태 그대로 보존해드렸습니다.";
+			mes "^ff0000다시 도전 하시겠습니까?^000000";
+			next;
+			if(select("재도전!!!!:그만둔다") == 2) {
+				mes .@n$;
+				mes "언제든 작업이 필요하시면 찾아와주세요.";
+			close;
+			}
+		goto Normal;
+		}
+	}
+
+Sillit:
+	// anti-hack
+	if (callfunc("F_IsEquipCardHack", .@equip_num, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+		close;
+
+	delitem 6443,1; //Sillit_Pong_Bottle
+
+	specialeffect2 EF_MAXPOWER;		
+	delequip .@equip_num;
+	getitem .@card,1;
+	//if(.@equip_OptID[0] > 0||.@equip_OptID[1] > 0||.@equip_OptID[2] > 0||.@equip_OptID[3] > 0||.@equip_OptID[4] > 0)
+		getitem4 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3],.@equip_grade,.@equip_OptID,.@equip_OptVal,.@equip_OptParam;
+	//else
+	//	getitem2 .@equip_id,1,1,.@equip_refine,0,.@check_equip_card[0],.@check_equip_card[1],.@check_equip_card[2],.@check_equip_card[3];
+	goto Finish;
+
+Finish:	
+	mes .@n$;
+	mes "카드가 성공적으로 분리되었어요!!!";
+	close;
+}
+
+malangdo,220,160,6	duplicate(CardSeparation_mal)	리처드#pa0829	559	// Weapons :: soc_weapon

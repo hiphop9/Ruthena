@@ -626,215 +626,215 @@ Body:
   - Name: CachuaCoupon06
     Items:
       - Index: 0
-        Item: Thanos_Refine_Hammer
+        Item: Thanos_Refine_Hammer # Í∞úÏ°∞?êú ????Ö∏?ä§ ?†ú?†® ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 20
       - Index: 1
-        Item: Thanos_Upgrade_Box
+        Item: Thanos_Upgrade_Box # ????Ö∏?ä§ ?óÖÍ∑∏Î†à?ù¥?ìú ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 30
       - Index: 2
-        Item: Hero_Weapon_Up_Box_1
+        Item: Adulter_Weapon_Up_Box # ?ïÑ?ëò?ÖåÎ•? Î¨¥Í∏∞ Í∞úÏ°∞ ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 100
       - Index: 3
-        Item: Hero_Weapon_Up_Box_2
+        Item: Hero_Weapon_Up_S_Box # ?òÅ?õÖ?ùò Î¨¥Í∏∞ Í∞úÏ°∞ ?Ñ†?Éù ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 100
       - Index: 4
-        Item: Hero_Weapon_Up_Box_3
+        Item: Hero_Weapon_Hammer_S # Í∞úÏ°∞?êú ?òÅ?õÖ?ùò Î¨¥Í∏∞ ?†ú?†®ÎßùÏπò S
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 100
+            Amount: 50
       - Index: 5
-        Item: Hero_Weapon_Up_Box_4
+        Item: Hero_Weapon_S_Box_1 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê I 
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 100
+            Amount: 10
       - Index: 6
-        Item: Hero_Weapon_Up_Box_5
+        Item: Hero_Weapon_S_Box_2 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê II 
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 100
+            Amount: 10
       - Index: 7
-        Item: Hero_Weapon_Up_Box_6
+        Item: Hero_Weapon_S_Box_3 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê III
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 100
+            Amount: 10
       - Index: 8
-        Item: Adulter_Weapon_Up_Box
+        Item: Hero_Weapon_S_Box_4 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê IV
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 100
+            Amount: 10
       - Index: 9
-        Item: Hero_Weapon_Hammer_1
+        Item: Hero_Weapon_S_Box_5 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê V
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 50
+            Amount: 10
       - Index: 10
-        Item: Hero_Weapon_Hammer_2
+        Item: Hero_Weapon_S_Box_6 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê VI
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 50
+            Amount: 10
       - Index: 11
-        Item: Hero_Weapon_Hammer_3
+        Item: Hero_Weapon_S_Box_7 # Í≥†Î?? ?òÅ?õÖ?ùò Î¨¥Íµ¨ ?Ñ†?Éù?ÉÅ?ûê VII
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 50
+            Amount: 10
       - Index: 12
-        Item: Hero_Weapon_Hammer_4
+        Item: Hero_Up_Cube_11 # +11 Í≥†Î?? ?òÅ?õÖÎ¨¥Íµ¨ Í∞úÎ∞© ?ÅêÎ∏?
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 50
+            Amount: 25
       - Index: 13
-        Item: Hero_Weapon_Hammer_5
+        Item: OS_Helm_Hammer # OS ?óÖÍ∑∏Î†à?ù¥?ìú ?à¨Íµ? ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
       - Index: 14
-        Item: Hero_Weapon_Hammer_6
+        Item: OS_Weapon_Hammer # OS ?óÖÍ∑∏Î†à?ù¥?ìú ?à¨Íµ? ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
-      # - Index: 15
-        # Item: OS_Helm_Hammer
-        # RequiredItems:
-          # - Index: 0
-            # Item: Cachua_Coupon
-            # Amount: 50
-      # - Index: 16
-        # Item: OS_Weapon_Hammer
-        # RequiredItems:
-          # - Index: 0
-            # Item: Cachua_Coupon
-            # Amount: 50
+      - Index: 15
+        Item: Poenitentia_Hammer # ?éò?ãà?Öê?ã∞?ïÑ Î¨¥Í∏∞ ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 16
+        Item: Barmund_Hammer # Î∞îÎ•¥Î¨∏Ìä∏ Î∞©Ïñ¥Íµ? ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
       - Index: 17
-        Item: Poenitentia_Hammer
+        Item: Special_Hat_Hammer # ?äπÎ≥ÑÌïú Î™®Ïûê?ö© ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
       - Index: 18
-        Item: Barmund_Hammer
+        Item: Vivatus_Weapon_Hammer # ÎπÑÎ∞î?à¨?ä§ Î¨¥Í∏∞ ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
       - Index: 19
-        Item: Special_Hat_Hammer
+        Item: Helm_Of_Faith_Hammer # ?ó¨Î¶? ?ò§Î∏? ?éò?ù¥?ä§ ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
       - Index: 20
-        Item: Vivatus_Weapon_Hammer
+        Item: Clock_Tower_W_Hammer # ?ãúÍ≥ÑÌÉë Ïß??ïòÏ∏? ?û•Îπ? ?†ú?†®ÎßùÏπò
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
+      - Index: 20
+        Item: aegis_102216 # 11?†ú?†® ?Ñ†?Éù ?ÅêÎ∏?
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 75
       - Index: 21
-        Item: Bio_Helm_Refine_Cube
+        Item: aegis_102215 # 12?†ú?†® ?Ñ†?Éù ?ÅêÎ∏?
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 75
       - Index: 22
-        Item: Circlet_Refine_Cube
+        Item: Blacksmith_Bless_Box_3 # ????û•?û•?ù¥?ùò Ï∂ïÎ≥µ 3Í∞? ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 75
+            Amount: 20
       - Index: 23
-        Item: Bio_Weapon_Refine_Cube
+        Item: Shadow_Hammer_Box_3 # ???Í∑∏Î†å?ùò ?âê?èÑ?ö∞ ?†ú?†®ÎßùÏπò 3Í∞? ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
-            Amount: 75
+            Amount: 20
       - Index: 24
-        Item: Auto_Armor_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 25
-        Item: Old_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 26
-        Item: Geffen_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 27
-        Item: Temporal_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 28
-        Item: OS_Weapon_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 29
-        Item: Racecap_Refine_Cube
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 75
-      - Index: 30
-        Item: Blacksmith_Bless_Box_3
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 20
-      - Index: 31
-        Item: Shadow_Hammer_Box_3
-        RequiredItems:
-          - Index: 0
-            Item: Cachua_Coupon
-            Amount: 20
-      - Index: 32
-        Item: Sillit_Pong_Box
+        Item: Sillit_Pong_Box # ?ã§Î¶? ?êÅ ?ÉÅ?ûê
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 200
-      - Index: 33
-        Item: Shadow_Exchange_Ticket
+      - Index: 25
+        Item: Shadow_Exchange_Ticket # ?âê?èÑ?ö∞ ÍµêÌôò ?ã∞Ïº?
         RequiredItems:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 50
-      # - Index: 34
-        # Item: aegis_101399
-        # RequiredItems:
-          # - Index: 0
-            # Item: Cachua_Coupon
-            # Amount: 100
+      - Index: 26
+        Item: Enchant_Ticket_3 # ?ù∏Ï±àÌä∏ ?ã∞Ïº? Î¥âÌà¨
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 100
+      - Index: 27
+        Item: FateSin_Boots_Hammer # ?Ñ†?ïÖ?ùò Î∂?Ï∏? ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 28
+        Item: Isgard_Crown_Hammer # ?ù¥?ä§Í∞?Î•¥Îìú ?Å¨?ùº?ö¥ ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 29
+        Item: GoodnEvil_Helm_Hammer # ?Ñ†?ïÖ?ùò Í¥? ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 30
+        Item: Justice_Weapon_Hammer # ?Ñ†?ùò Î¨¥Í∏∞ ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 31
+        Item: Injustice_Weapon_Hammer # ?ïÖ?ùò Î¨¥Í∏∞ ?†ú?†®ÎßùÏπò
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 50
+      - Index: 32
+        Item: S_Enchant_Essence_Box_3 # ?âê?èÑ?ö∞ ?óê?Ñº?ä§ 3Í∞? ?ÉÅ?ûê
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 20
+      - Index: 33
+        Item: Brown_Dia_Box # Í≥®Îì† ?ã§?ù¥?ïÑÎ™¨Îìú 15Í∞? ?ÉÅ?ûê
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 10
   - Name: CachuaCoupon07
     Items:
       - Index: 0
@@ -1037,3 +1037,875 @@ Body:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 10
+  - Name: Nyarom_Nyangvine
+    Items:
+      - Index: 0
+        Item: Gunslinger_Enchant
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 1
+        Item: Fan_Upgrade_Kit
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 2
+        Item: Suit_Upgrade_Kit
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 3
+        Item: Candy_Bag_Scroll_Melee
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 4
+        Item: Candy_Bag_Scroll_Range
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 5
+        Item: Candy_Bag_Scroll_Magic
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 6
+        Item: Booster_Amplifier
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 7
+        Item: Magical_Cat_Hand
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 8
+        Item: Silver_Statue
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 9
+        Item: Gold_Statue
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 10
+        Item: Cursed_Blood
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 1
+      - Index: 11
+        Item: Time_Unseal_Key
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 12
+        Item: Gemstone_Of_Time
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 13
+        Item: Joy_Of_Victory
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 14
+        Item: Overclocker
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 15
+        Item: PendantStoneForWork
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 1
+      - Index: 16
+        Item: Dark_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 17
+        Item: EXP_Overclocker
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 18
+        Item: Hero_LT_Refine_Melee
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 30
+      - Index: 19
+        Item: Hero_LT_Refine_Magic
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 30
+      - Index: 20
+        Item: Lens_Craft_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 21
+        Item: Loki_Advice
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 22
+        Item: Loki_Coin
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 23
+        Item: Loki_Advice_2
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 24
+        Item: Loki_Coin_2
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 25
+        Item: Loki_Advice_3 # Î°úÌÇ§?ùò Ï°∞Ïñ∏(?õêÍ±∞Î¶¨Î¨ºÎ¶¨)
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 26
+        Item: Loki_Coin_3 # Î°úÌÇ§?ùò Í≤??†ï?Éâ ?èô?†Ñ
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 27
+        Item: Fan_Upgrade_Kit_EX # ?Ñ†?íç?Ç§ Í∞úÏ°∞ ?Ç§?ä∏EX
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 28
+        Item: Loki_Advice_4 # Î°úÌÇ§?ùò Ï°∞Ïñ∏(Î∞©Ïñ¥)
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+      - Index: 29
+        Item: Loki_Coin_4 # Î°úÌÇ§?ùò ?ô©Í∏àÏÉâ ?èô?†Ñ
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 2
+  - Name: Nyarom_Great_Hero
+    Items:
+      - Index: 0
+        Item: Great_Hero_Bravery
+        RequiredItems:
+          - Index: 0
+            Item: Ancient_Hero_Bravery
+            Amount: 2
+      - Index: 1
+        Item: Great_Hero_Wisdom
+        RequiredItems:
+          - Index: 0
+            Item: Ancient_Hero_Wisdom
+            Amount: 2
+  - Name: Weapon_Up_Box
+    Items:
+      - Index: 0
+        Item: Weapon_7Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Weapon_7Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 10
+      - Index: 1
+        Item: Weapon_9Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Weapon_9Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 30
+      - Index: 2
+        Item: Weapon_11Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Weapon_11Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 40
+  - Name: Armor_Up_Box
+    Items:
+      - Index: 0
+        Item: Armor_7Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Armor_7Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 10
+      - Index: 1
+        Item: Armor_9Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Armor_9Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 30
+      - Index: 2
+        Item: Armor_11Up_Box
+        RequiredItems:
+          - Index: 0
+            Item: Guarantee_Armor_11Up
+            Amount: 1
+          - Index: 1
+            Item: Nyangvine_Fruit
+            Amount: 40
+  - Name: GoodEvilBoots_Coupon
+    Items:
+      - Index: 0
+        Item: FateSin_Boots_CD
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 1
+        Item: FateSin_Boots_IQ
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 2
+        Item: FateSin_Boots_SOA
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 3
+        Item: FateSin_Boots_DK
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 4
+        Item: FateSin_Boots_SH
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 5
+        Item: FateSin_Boots_EM
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 6
+        Item: FateSin_Boots_WH
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 7
+        Item: FateSin_Boots_SKE
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 8
+        Item: FateSin_Boots_MT
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 9
+        Item: FateSin_Boots_SHC
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 10
+        Item: FateSin_Boots_SS
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 11
+        Item: FateSin_Boots_ABC
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 12
+        Item: FateSin_Boots_TR
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 13
+        Item: FateSin_Boots_HN
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 14
+        Item: FateSin_Boots_IG
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 15
+        Item: FateSin_Boots_AG
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+      - Index: 16
+        Item: FateSin_Boots_NW
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_FateSinBoots
+            Amount: 1
+  - Name: GoodnEvilHelm_Coupon
+    Items:
+      - Index: 0
+        Item: GoodnEvil_Circlet_DK
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 1
+        Item: GoodnEvil_Circlet_IG
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 2
+        Item: GoodnEvil_Circlet_AG
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 3
+        Item: GoodnEvil_Circlet_EM
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 4
+        Item: GoodnEvil_Circlet_CD
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 5
+        Item: GoodnEvil_Circlet_IQ
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 6
+        Item: GoodnEvil_Circlet_MT
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 7
+        Item: GoodnEvil_Circlet_BO
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 8
+        Item: GoodnEvil_Circlet_SHC
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 9
+        Item: GoodnEvil_Circlet_ABC
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 10
+        Item: GoodnEvil_Circlet_WH
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 11
+        Item: GoodnEvil_Circlet_TR
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 12
+        Item: GoodnEvil_Circlet_SS
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 13
+        Item: GoodnEvil_Circlet_SKE
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 14
+        Item: GoodnEvil_Circlet_SOA
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 15
+        Item: GoodnEvil_Circlet_HN
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 16
+        Item: GoodnEvil_Circlet_SH
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 17
+        Item: GoodnEvil_Circlet_NW
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 18
+        Item: GoodnEvil_Circlet_NW2
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 19
+        Item: GoodnEvil_Circlet_NW3
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 20
+        Item: GoodnEvil_Circlet_NW4
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+      - Index: 21
+        Item: GoodnEvil_Circlet_NW5
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_GoodnEvil_Helm
+            Amount: 1
+  - Name: JusticeWeapon_Coupon
+    Items:
+      - Index: 0
+        Item: Punish_Hall
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 1
+        Item: Saint_Bringer
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 2
+        Item: Humma_Brilliance
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 3
+        Item: Luppiter_Spear
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 4
+        Item: Holy_Raise_Spear
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 5
+        Item: Lightforce_Foxtail_Wand
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 6
+        Item: Shining_Light_Katar
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 7
+        Item: Angel_Wing_Bow
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 8
+        Item: Guardian_Saber
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 9
+        Item: Holy_Light_Dagger
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 10
+        Item: Light_Power_Harp
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 11
+        Item: Light_Power_Spark
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 12
+        Item: Lighting_Splatter
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 13
+        Item: Justice_Bomber
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 14
+        Item: Last_Dawn
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 15
+        Item: Devil_Hunter
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 16
+        Item: Road_Of_Glory
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 17
+        Item: Victory_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 18
+        Item: Divine_Buster
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 19
+        Item: Orign_Of_Life
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 20
+        Item: Destiny_Staff
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 21
+        Item: Blessed_Bible
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+      - Index: 22
+        Item: Soul_Liberator
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Justice_Weapon
+            Amount: 1
+  - Name: InjusticeWeapon_Coupon
+    Items:
+      - Index: 0
+        Item: Demonic_Claw
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 1
+        Item: Sealed_Bible
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 2
+        Item: Darkness_Tablet
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 3
+        Item: Devil_Wing_Staff
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 4
+        Item: Doom_Bible
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 5
+        Item: Soul_Harvest
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 6
+        Item: The_Reaper
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 7
+        Item: Underworld_Knife
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 8
+        Item: Devil_Cursed_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 9
+        Item: Dark_Angel_Ray_Bow
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 10
+        Item: Crime_Violine
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 11
+        Item: Crime_Whip
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 12
+        Item: RG_5649
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 13
+        Item: Devil_L_Launcher
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 14
+        Item: Screaming_Rifle
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 15
+        Item: Devils_Bullet
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 16
+        Item: Outlaw_Cursed_Shotgun
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 17
+        Item: Blood_Rapier
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 18
+        Item: Destruction_Axe
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 19
+        Item: Devil_Claw
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 20
+        Item: Execution_Great_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 21
+        Item: Devil_Guardian_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+      - Index: 22
+        Item: Darkness_Foxtail_Model
+        RequiredItems:
+          - Index: 0
+            Item: Coupon_Injustice_Weapon
+            Amount: 1
+  - Name: balheele
+    Items:
+      - Index: 0
+        Item: EpisodClear13
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 1
+        Item: EpisodClear14
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 30
+      - Index: 2
+        Item: EpisodClear15
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 3
+        Item: EpisodClear16
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 200
+      - Index: 4
+        Item: EpisodClear17
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 5
+        Item: EpisodClear18
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 6
+        Item: EpisodClear19
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 7
+        Item: EpisodClear20
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+  - Name: balheele_20
+    Items:
+      - Index: 0
+        Item: EpisodClear13
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 1
+        Item: EpisodClear14
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 2
+        Item: EpisodClear15
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 3
+        Item: EpisodClear16
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 4
+        Item: EpisodClear17
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 5
+        Item: EpisodClear18
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 6
+        Item: EpisodClear19
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 7
+        Item: EpisodClear20
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25

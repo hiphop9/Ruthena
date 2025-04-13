@@ -16,44 +16,46 @@
 //==================================================
 // ra_san01 - Holy Ground
 //==================================================
-ra_san01,0,0	monster	Vanberk	1771,82,5000
-ra_san01,0,0	monster	Isilla	1772,36,5000
-ra_san01,0,0	monster	Gremlin	1632,10,5000
-ra_san01,0,0	monster	Beholder	1633,6,5000
-ra_san01,0,0	monster	Hodremlin	1773,6,5000
+ra_san01,0,0	monster	판베르크	1771,82,5000
+ra_san01,0,0	monster	이실라	1772,36,5000
+ra_san01,0,0	monster	그렘린	1632,10,5000
+ra_san01,0,0	monster	비홀더	1633,6,5000
+ra_san01,0,0	monster	호드렘린	1773,6,5000
 
 //==================================================
 // ra_san02 - Holy Ground 
 //==================================================
-ra_san02,0,0	monster	Isilla	1772,110,5000
-ra_san02,0,0	monster	Vanberk	1771,38,5000
-ra_san02,0,0	monster	Gremlin	1632,12,5000
-ra_san02,0,0	monster	Beholder	1633,12,5000
-ra_san02,0,0	monster	Hodremlin	1773,3,5000
-ra_san02,0,0	monster	Seeker	1774,2,5000
+ra_san02,0,0	monster	이실라	1772,110,5000
+ra_san02,0,0	monster	판베르크	1771,38,5000
+ra_san02,0,0	monster	그렘린	1632,12,5000
+ra_san02,0,0	monster	비홀더	1633,12,5000
+ra_san02,0,0	monster	호드렘린	1773,3,5000
+ra_san02,0,0	monster	시커	1774,2,5000
 
 //==================================================
 // ra_san03 - Holy Ground
 //==================================================
-ra_san03,0,0	monster	Hodremlin	1773,86,5000
-ra_san03,0,0	monster	Seeker	1774,57,5000
-ra_san03,0,0	monster	Gremlin	1632,7,5000
-ra_san03,0,0	monster	Beholder	1633,7,5000
+ra_san03,0,0	monster	호드렘린	1773,86,5000
+ra_san03,0,0	monster	시커	1774,57,5000
+ra_san03,0,0	monster	그렘린	1632,7,5000
+ra_san03,0,0	monster	비홀더	1633,7,5000
 
 //==================================================
 // ra_san04 - Holy Ground
 //==================================================
-ra_san04,0,0	monster	Echio	1770,62,5000
-ra_san04,0,0	monster	Agav	1769,20,5000
-ra_san04,0,0	monster	Seeker	1774,10,5000
-ra_san04,0,0	monster	Hodremlin	1773,10,5000
+ra_san04,0,0	monster	에키오	1770,62,5000
+ra_san04,0,0	monster	아가브	1769,20,5000
+ra_san04,0,0	monster	시커	1774,10,5000
+ra_san04,0,0	monster	호드렘린	1773,10,5000
 
 //==================================================
 // ra_san05 - Holy Ground
 //==================================================
-ra_san05,0,0	monster	Agav	1769,84,5000
-ra_san05,0,0	monster	Echio	1770,31,5000
-ra_san05,0,0	monster	Seeker	1774,21,5000
-ra_san05,0,0	monster	Hodremlin	1773,21,5000
-ra_san05,0,0	monster	Isilla	1772,10,5000
-ra_san05,0,0,0,0	boss_monster	Gloom Under Night	1768,1,18000000,600000,0
+ra_san05,0,0	monster	아가브	1769,84,5000
+ra_san05,0,0	monster	에키오	1770,31,5000
+ra_san05,0,0	monster	시커	1774,21,5000
+ra_san05,0,0	monster	호드렘린	1773,21,5000
+ra_san05,0,0	monster	이실라	1772,10,5000
+ra_san05,0,0,0,0	boss_monster	그룸 언더 나이트	1768,1,18000000,600000,0
+
+

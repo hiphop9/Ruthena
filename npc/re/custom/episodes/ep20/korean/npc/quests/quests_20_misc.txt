@@ -1,0 +1,566 @@
+// ÀÎÄÚµùÀ» EUC-KR·Î À¯ÁöÇÏ±â À§ÇÑ ÇÑ±¹¾î ¹®Àå.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Misc NPCs from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Misc NPCs on icecastle
+//-----------------------
+
+icecastle,134,108,0	script	#20ms61	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	cloakoffnpcself( "ep20_icecastle_134_108" );
+	end;
+}
+
+icecastle,134,108,3	script	³ªµå¾ß°£µå#20ms61::ep20_icecastle_134_108	4_EP19_RGAN_SR2,{
+	npctalk "³¬½Ã¶ó´Â °Í... ¸í»ó¿¡ µµ¿òÀÌ µÇ´Â Ãë¹Ì´õ±º.", "", bc_self;
+	end;
+}
+
+icecastle,106,130,3	script	²¿²¿»Ç#ex01	EP20_NPC_COCOPO,{
+	npctalk "•?", "", bc_self;
+	end;
+}
+
+icecastle,102,126,4	script	²¿²¿»Ç#ex02	EP20_NPC_COCOPO,{
+	npctalk "•?", "", bc_self;
+	end;
+}
+
+icecastle,98,123,3	script	²¿²¿»Ç#ex03	EP20_NPC_COCOPO,{
+	npctalk "»È»È»È!", "", bc_self;
+	end;
+}
+
+icecastle,96,120,6	script	²¿²¿»Ç#ex04	EP20_NPC_COCOPO,3,0,{
+	npctalk "•?", "", bc_self;
+	end;
+}
+
+icecastle,98,115,4	script	²¿²¿»Ç#ex05	EP20_NPC_COCOPO,{
+	npctalk "»È»È»È!", "", bc_self;
+	end;
+}
+
+icecastle,99,115,3	script	²¿²¿»Ç#ex06	EP20_NPC_COCOPO,{
+	npctalk "»©¾×!", "", bc_self;
+	end;
+}
+
+icecastle,69,107,0	script	#20ms62	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	cloakoffnpcself( "ep20_icecastle_69_107" );
+	end;
+}
+
+icecastle,69,107,5	script(CLOAKED)	³ªµå¾ß°£µå#20ms62::ep20_icecastle_69_107	4_EP19_RGAN_SR2,{
+	npctalk "ÀÌ ¹°°í±â¸¦ ¼ÕÁúÇÏ´Â °Í, ±²ÀåÈ÷ ½Ç¿ëÀûÀÎ Ãë¹Ì¶ó°í »ı°¢ÇÏÁö ¾Ê³ª?", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+// Misc NPCs on icas_in
+//---------------------
+
+// icas_in,142,201,3	script	¶Ç¸£¸£#ep20iwin01	EP19_NPC_IWIN,7,2,{
+icas_in,142,201,3	script	¶Ç¸£¸£#ep20iwin01	EP19_NPC_IWIN,{
+	cutin "ep19_iwin03.png",2;
+	mes "[¶Ç¸£¸£]";
+	mes "¿¹Àü¿¡ ¸»¾ß. ¹Ù¸£¹®Æ® ´ÔÀÌ ÀÚÁÖ ³î·¯¿À¼Ì°Åµç?";
+	mes "±×¶§ ¸¸µé¾îµĞ ÀÎ°£ Àü¿ë ¼÷¼Ò¶û ½Ä´çÀÌ ÀÖ¾î.";
+	next;
+	mes "[¶Ç¸£¸£]";
+	mes "½Ä´çÀº ¿ŞÂÊ, ¼÷¼Ò´Â ¿À¸¥ÂÊ.";
+	mes "¾Ë°Ú¾î?";
+	close;
+
+// OnTouch:
+	// todo (unknown effect)
+	// end;
+}
+
+// (Restaurant)
+icas_in,242,45,3	script	²¿»Ç#¾óÁı01	EP20_NPC_COCOPO,{
+	npctalk "»Ø.", "", bc_self;
+	end;
+}
+
+icas_in,243,45,5	script	²¿»Ç#¾óÁı02	EP20_NPC_COCOPO,{
+	npctalk "»Ø»Ø.", "", bc_self;
+	end;
+}
+
+icas_in,241,44,5	script	²¿»Ç#¾óÁı03	EP20_NPC_COCOPO,{
+	npctalk "²ó²ó.", "", bc_self;
+	end;
+}
+
+icas_in,242,42,3	script	²¿»Ç#¾óÁı04	EP20_NPC_COCOPO,{
+	npctalk "…Ÿ.", "", bc_self;
+	end;
+}
+
+icas_in,243,42,1	script	²¿»Ç#¾óÁı05	EP20_NPC_COCOPO,{
+	npctalk "»Øºä. »Øºä.", "", bc_self;
+	end;
+}
+
+icas_in,244,43,7	script	²¿»Ç#¾óÁı06	EP20_NPC_COCOPO,{
+	npctalk "??", "", bc_self;
+	end;
+}
+
+icas_in,244,44,5	script	²¿»Ç#¾óÁı07	EP20_NPC_COCOPO,{
+	npctalk "»È»È.", "", bc_self;
+	end;
+}
+
+icas_in,253,49,5	script	²¿»Ç#¾óÁı08	EP20_NPC_COCOPO,{
+	npctalk "»Ø¿ì¿ì.", "", bc_self;
+	end;
+}
+
+icas_in,241,58,3	script	²¿»Ç#¾óÁı09	EP20_NPC_COCOPO,{
+	npctalk "»Ø.", "", bc_self;
+	end;
+}
+
+icas_in,240,58,5	script	²¿»Ç#¾óÁı10	EP20_NPC_COCOPO,{
+	npctalk "²ó²ó.", "", bc_self;
+	end;
+}
+
+icas_in,252,58,1	script	²¿»Ç#¾óÁı11	EP20_NPC_COCOPO,{
+	npctalk "»È!", "", bc_self;
+	end;
+}
+
+icas_in,252,49,5	script	²¿»Ç#¾óÁı12	EP20_NPC_COCOPO,{
+	npctalk "»Ø!", "", bc_self;
+	end;
+}
+
+icas_in,240,49,7	script	²¿»Ç#¾óÁı13	EP20_NPC_COCOPO,{
+	npctalk "»È»È. »È.", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+// Misc NPCs on jor_back5 and jor_back6
+//-------------------------------------
+
+jor_back5,245,38,3	script	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1	4_EP20_DEVICE_RED,{
+	mes "[¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°]";
+	mes "¸¶·ÂÀÌ ´À²¸Áö´Â ¹¦ÇÑ ¹°°ÇÀÌ ¼³Ä¡µÇ¾î ÀÖ´Ù.";
+	close;
+}
+jor_back5,365,187,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#2	4_EP20_DEVICE_BLUE
+jor_back5,203,256,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#3	4_EP20_DEVICE_RED
+jor_back5,230,349,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#4	4_EP20_DEVICE_RED
+jor_back5,94,281,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#5	4_EP20_DEVICE_BLUE
+jor_back5,71,204,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#6	4_EP20_DEVICE_BLACK
+jor_back5,170,362,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#7	4_EP20_DEVICE_BLACK
+jor_back6,190,201,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#8	4_EP20_DEVICE_BLACK
+jor_back6,310,304,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#9	4_EP20_DEVICE_BLUE
+jor_back6,214,80,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#10	4_EP20_DEVICE_BLUE
+jor_back6,45,38,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#11	4_EP20_DEVICE_RED
+jor_back6,51,47,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#12	4_EP20_DEVICE_BLACK
+jor_back6,122,180,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#13	4_EP20_DEVICE_RED
+jor_back6,330,22,3	duplicate(¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#1)	¸¶·ÂÀÌ ´À²¸Áö´Â ¼³Ä¡¹°#14	4_EP20_DEVICE_BLUE
+//-----------------------
+
+
+
+// Misc NPCs on jor_sanct
+//-----------------------
+
+// note: no text
+jor_sanct,183,131,3	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms4	4_EP20_DEVICE_BLUE
+jor_sanct,184,130,5	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms5	4_EP20_DEVICE_BLUE
+jor_sanct,183,130,7	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms6	4_EP20_DEVICE_BLACK
+jor_sanct,29,127,3	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms1	4_EP20_DEVICE_BLACK
+jor_sanct,28,125,5	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms2	4_EP20_DEVICE_BLUE
+jor_sanct,27,123,7	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms3	4_EP20_DEVICE_BLACK
+jor_sanct,201,115,3	duplicate(dummy_npc)	¸¶·Â È¸¼ö ÀåÄ¡#20ms7	4_EP20_DEVICE_BLACK
+
+jor_sanct,145,247,7	script	Á¶ÀÌ½Ã°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿ä¸£¹®°£µå´ÔÀÇ ±â¿îÀÌ ´À²¸Áö´Â °Í °°³×.", "", bc_self;
+	end;
+}
+
+jor_sanct,147,245,1	script	È£°×·¹°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¶ó½º°£µå´ÔÀ» ¿À´ÃÀº ºÉ ¼ö ÀÖÀ»±î?", "", bc_self;
+	end;
+}
+
+jor_sanct,91,195,5	script	¹«µ·Å×°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¼º¼Ò¿¡ ¹ßÀ» µéÀÏ ¼ö ÀÖ´Ü »ı°¢Á¶Â÷ ÇØº» ÀûÀÌ ¾ø´Âµ¥...", "", bc_self;
+	end;
+}
+
+jor_sanct,72,169,3	script	¿ì¸®¾ß°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "³»°¡ ÀÌ·¸°Ô ÀÏÀ» ÇÒ ÁÙ ¾Ë¾ÒÀ¸¸é, ±×·¸°Ô Á¦ÀÏ ¸ÕÀú ¿ÀÁö ¾Ê¾ÒÀ»ÅÙµ¥!", "", bc_self;
+	end;
+}
+
+jor_sanct,69,170,5	script	¹Ù·Î¸ğ°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "ÀÌ°Å º¸¿©? ³» ¼ÕÀÌ, ³» ¼ÕÀÌ...!", "", bc_self;
+	end;
+}
+
+jor_sanct,185,99,5	script	»ç¸£ÀÜ°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿Ö ¿ì¸®¸¦ ºÒ·¯ ³õ°í ÀÏÀ» ½ÃÅ°´Â °ÇÁö...", "", bc_self;
+	end;
+}
+
+jor_sanct,243,177,3	script	Ä«¸Ş¸£°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "ÀÌ°Íµµ ´Ù ¿ä¸£¹®°£µå²²¼­ ÁÖ½Å °í³­ÀÌ¶ó »ı°¢ÇÏ¸é °ßµô¸¸ ÇÏÁö¸¸...", "", bc_self;
+	end;
+}
+
+jor_sanct,52,125,3	script	ÈÄ±â¿¡°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Á» ½¬ÀÚ...", "", bc_self;
+	end;
+}
+
+jor_sanct,91,153,7	script	ÁÖ¸£¸£°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿©±ä, º¼ ¶§¸¶´Ù °¨µ¿ÀÌ¾ß. ÀÌ°÷¿¡ »À¸¦ ¹¯°í ½Í¾î.", "", bc_self;
+	end;
+}
+
+jor_sanct,236,140,3	script	Á¦°¡µå°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿ì¸®¸¦ ÀÌ°÷¿¡ ºÒ·¯ÁÖ½Ã´Ù´Ï...! ³»°¡ ÀÌ°÷¿¡ ÀÖ¾îµµ µÇ´Â °É±î?", "", bc_self;
+	end;
+}
+
+jor_sanct,118,264,5	script	Å×¸£¸Á°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "º¼ ¼ö·Ï ¼º½º·¯¿î °÷ÀÌ¾ß. ¶ó½º°£µå´Ô...", "", bc_self;
+	end;
+}
+
+jor_sanct,125,201,5	script	»ç»ç¿ä°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¸ğµÎ ¿ì¸® ¼ÕÀ¸·Î ÇØ¾ß ÇÏÁö¸¸, ³ª»ÚÁø ¾Ê¾Æ.", "", bc_self;
+	end;
+}
+
+jor_sanct,234,155,3	script	¹ß¶ó·¹°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¾ğÁ¨°¡ ¿À½Ç ±× ºĞÀ» À§ÇØ ¿­½ÉÈ÷ ÀÏÇÏÀÚ!", "", bc_self;
+	end;
+}
+
+jor_sanct,98,137,3	script	¿À¿¡¸®°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "´õ·¯¿î ÀÎ°£µé ¶§¹®¿¡ ¿ì¸®°¡ ÀÌ °í»ıÀ» ÇÏ°í ÀÖÁö¸¸, ¿©±â´Â ³Ê¹« ÁÁ¾Æ.", "", bc_self;
+	end;
+}
+
+jor_sanct,138,75,5	script	ÇÇ¿À½Ã°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Ã³À½¿£ ÁÁ¾ÒÁö¸¸, Á¶±İ ´ä´äÇÑµ¥. ³ª°¡µµ µÇ³ª.", "", bc_self;
+	end;
+}
+
+jor_sanct,146,210,7	script	¿¡½Ã¿À°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿ì¸®´Â ¼±ÅÃ ¹Ş¾Ò¾î! ¼±ÅÃ ¹Ş¾Ò´Ù°í!!", "", bc_self;
+	end;
+}
+
+jor_sanct,137,110,1	script	¸¶ÀÌ¿ä°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "´Ù°¡¿Ã ±× ³¯À» »ı°¢ÇÏ¸é ¼³·¹±âµµ ÇÏÁö¸¸ ±×°Ô ´ëÃ¼ ¾ğÁ¦ÀÏÁö »ı°¢ÇÏ¸é Á¶±İ ´ä´äÇØ.", "", bc_self;
+	end;
+}
+
+jor_sanct,139,163,5	script	¿ìÆ÷½Ã°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "ÀÌ°÷¿¡ ¿ÂÁö ½Ã°£ÀÌ ²Ï Èê·¶´Âµ¥µµ ¾ÆÁ÷µµ ¹Ï±âÁö°¡ ¾Ê¾Æ, ³»°¡, ³»°¡ ÀÌ°÷¿¡...!", "", bc_self;
+	end;
+}
+
+jor_sanct,143,146,5	script	¶÷½º´©°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¼±ÅÃ ¹ŞÀº ÀÚ¸¸ÀÌ ÀÌ°÷¿¡ ¹ßÀ» µéÀÏ ¼ö ÀÖ´Ù´õ´Ï, »ı°¢º¸´Ù ¸¹±º...?", "", bc_self;
+	end;
+}
+
+jor_sanct,80,88,5	script	°£ÃÊ±ä°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "ÀÌ°÷¿¡ ¿Ã ¼ö ÀÖ´Ù´Â °Í ÀÚÃ¼°¡ ¿µ±¤½º·¯¿î ÀÏÀÌ ¾Æ´Ñ°¡!", "", bc_self;
+	end;
+}
+
+jor_sanct,143,56,5	script	ÆÄÅ©¿À°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¹Ù±ùÀº ÀÌÁ¦ ÀáÀáÇÑ°¡?", "", bc_self;
+	end;
+}
+
+jor_sanct,109,73,1	script	ÆÄ´ÏÆÄ°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "´ëÃ¼ ¶ó½º°£µå´ÔÀº ±× ÀÎ°£³ğÀ» ¿Ö ºÁÁÖ½Ã´Â °ÅÁö? ¹» ÇÏ½Ã´Â °Å¾ß?", "", bc_self;
+	end;
+}
+
+jor_sanct,128,203,3	script	³×Å×¿À°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¹ìµş±â ³²´Â °Å ÀÖ´Â »ç¶÷??", "", bc_self;
+	end;
+}
+
+jor_sanct,178,205,1	script	»ç¶óºñ°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "±×ºĞÀº ¾ğÁ¦ ¿À½Ç±î! ¶ó½º°£µå´ÔÀÇ ¾ó±¼ÀÌ¶óµµ ºÉ ¼ö ÀÖÀ¸¸é...!", "", bc_self;
+	end;
+}
+
+jor_sanct,184,97,1	script	¿¡¸Ó¸®°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "´õ·¯¿î ÀÎ°£µéÀÌ È°°³¸¦ ÃÄ´ë¼­ ÀÌ »ç´ŞÀÌ ³­ °Å ¾Æ´Ï¾ß?", "", bc_self;
+	end;
+}
+
+jor_sanct,152,226,3	script	¹Ì¾Æ¼Ò°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿Ö... ÁÖ±³µé¸¸ ¼±ÅÃÀ» ¹Ş¾ÒÀ»±î?", "", bc_self;
+	end;
+}
+
+jor_sanct,80,103,5	script	·ç³Ê¸®°£µå#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¹ÛÀ¸·Î ÀÚÀ¯·Ó°Ô ´Ù´Ò ¼ö°¡ ¾ø¾î¼­ ´ä´äÇÑµ¥ ³ªµµ Àú »õ º¯½ÅÀ» Áö¿øÇØº¼±î...", "", bc_self;
+	end;
+}
+
+jor_sanct,94,105,1	script	¼Ò¸£º£°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿ì¸® ¾ğÁ¦ ³ª°¥ ¼ö ÀÖ¾î?", "", bc_self;
+	end;
+}
+
+jor_sanct,98,135,3	script	Á¦ÀÌ¾Æ°£µå#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "³ª´Â Á» ºÒ¾ÈÇØ. ¾ğÁ¦ ¹¹°¡ ¶Ç ¹Ù²ğÁö ¸ğ¸£Àİ¾Æ. ³Êµµ, À÷µµ º¯½ÅÇÑ °Å¸é ¾î¶±ÇØ?", "", bc_self;
+	end;
+}
+
+jor_sanct,168,242,1	script	Å©Äí¿À°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¿ä¸£¹®°£µå´ÔÀÌ ÇÔ²² ÇÏ½Å´Ù! ¿ä¸£¹®°£µå´ÔÀÇ Ãàº¹À»!!", "", bc_self;
+	end;
+}
+
+jor_sanct,31,127,3	script	ÇÏÆ®ÇåÅÍ#20ms	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	if (rand(2))
+		npctalk "ÇÏ¾Æ- ¹Ù°÷´ÔÀ» µû¶ó¿Ã ¶§±îÁö¸¸ ÇØµµ ÀÌ·² ÁÙÀº ¸ô¶úÁö...", "", bc_self;
+	else
+		npctalk "ÀÍ¼÷Áö ¾Ê´Ù°í ¿ì¸®ÇÑÅ× ´Ù ¹Ì·ç±â¸¸ ÇÏÀİ¾Æ. ±×·¸°Ô ´Ù °¡¸£ÃÆ´Âµ¥.", "", bc_self;
+	end;
+}
+
+jor_sanct,30,123,1	script	ÇÏÆ®ÇåÅÍ#20ms1	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	if (rand(2))
+		npctalk "»¡¸® ÇØ¹ö¸®°í Á» ½¬ÀÚ.", "", bc_self;
+	else
+		npctalk "¾îÂ¿ ¼ö ¾øÁö, ¿ì¸®°¡ ´õ Àß ´Ù·ç±â´Â ÇÏ´Ï±î.", "", bc_self;
+	end;
+}
+
+jor_sanct,202,114,5	script	ÇÏÆ®ÇåÅÍ#20ms2	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "ÀÏÀÌ, ÀÏÀÌ ¼¼ ¹è°¡ µÆ¾î...", "", bc_self;
+	end;
+}
+
+jor_sanct,210,171,3	script	ÇÏÆ®ÇåÅÍ#20ms3	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¾îµğ, ¾îµğ ½¯µ¥ Á» ¾ø³ª...!", "", bc_self;
+	end;
+}
+
+jor_sanct,53,255,3	script	È÷¿À¸®°£µå#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "¼º¼Ò¿¡ ¿Â °Í±îÁö´Â ÁÁ¾Æ. ±×·±µ¥ ³»°¡ ÀÌ·¸°Ô±îÁö ÀÏÀ» ÇÒ °Å¶ó°ï ¾Æ¹«µµ ¾ê±âÇØÁÖÁö ¾Ê¾ÒÀİ¾Æ.", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+
+
+// Exchange npc
+icas_in,170,65,5	script	»ß»ß¸µ#ep20reward	4_EP19_IWIN,{
+	if (get_reputation_points( REPU_EP20 ) < 1000) {
+		cutin "ep19_iwin02.png",2;
+		mes "[»ß»ß¸µ]";
+		mes "ÀÌ¹ø¿¡ »õ·Î¿î ¼ÒÀç¸¦ ¼Õ¿¡ ³Ö¾úÁö ¹¹¾ß?";
+		mes "º§±ºµå ´Ô²²¼­ ¸ğÇè°¡µé¿¡°Ô µµ¿òÀÌ µÉ ¸¸ÇÑ °ÍÀº ¹¹µç ´Ù Áö¿øÇÏ¶ó°í ÇÏ¼Ì°Åµç.";
+		next;
+		mes "[»ß»ß¸µ]";
+		mes "¸ğÇè°¡¿¡°Ô µµ¿òÀÌ µÉ ¸¸ÇÑ °ÍµéÀ» ¿­½ÉÈ÷ ¿¬±¸ ÁßÀÌ´Ï±î ¸»ÀÌ¾ß. ±â´ëÇØµµ ÁÁ¾Æ.";
+		close3;
+	}
+	cutin "ep19_iwin02.png",2;
+	mes "[»ß»ß¸µ]";
+	mes "ÀÌ¹ø¿¡ »õ·Î¿î ¼ÒÀç¸¦ ¼Õ¿¡ ³Ö¾úÁö ¹¹¾ß?";
+	mes "º§±ºµå ´Ô²²¼­ ¸ğÇè°¡µé¿¡°Ô µµ¿òÀÌ µÉ ¸¸ÇÑ °ÍÀº ¹¹µç ´Ù Áö¿øÇÏ¶ó°í ÇÏ¼Ì°Åµç.";
+	next;
+	mes "[»ß»ß¸µ]";
+	mes "º§±ºµå ´Ô°ú ¸¹Àº ¿¬±¸ ³¡¿¡ ´Ù¾çÇÑ Áö¿ø ¹æ¹ıÀ» Ã£¾Æ³Â´Ü´Ù.";
+	mes "ÀÌ Áß¿¡ ÇÊ¿äÇÑ °Å ÀÖ´Ï?";
+	next;
+	switch( select( "" + getitemname(1001217) + " ±³È¯", "±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ ±³È¯", "±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸/µõ ±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ ÀÎÃ¦Æ®", "¼ø¼öÇÑ ¸¶·Â/µõ ±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ °­È­ ÀåÄ¡ ±³È¯" ) ) {
+	case 1:
+		mes "[»ß»ß¸µ]";
+		if (PACKETVER >= 20230302)	// (official)
+			mes "" + getitemname(1001217) + "! ^i[1001217] ¾ÆÁÖ ¸ÚÁø ¹°°ÇÀÌ¾ß.";
+		else	// (workaround)
+			mes "" + getitemname(1001217) + "! " + mesitemlink(1001217) + " ¾ÆÁÖ ¸ÚÁø ¹°°ÇÀÌ¾ß.";
+		mes "ÀÌ ¼ö¿°À» °¡Áö°í ÀÖ´Ù´Â °Ç Èò °í¾çÀÌ¸¦ ¸¸³µ´Ù´Â ÀÇ¹Ì°ÚÁö?";
+		mes "³»°¡ ¾µ¸¸ÇÑ °Íµé·Î ±³È¯ÇØ ÁÙ°Ô.";
+		next;
+		switch( select( "Èò °í¾çÀÌ µ¿¸Í »óÁ¡ ¿­±â", "ÀÇ¹®ÀÇ º¸°üÇÔ ¿­±â" ) ) {
+		case 1:
+			if (get_reputation_points( REPU_EP20 ) < 2000) {
+				mes "[»ß»ß¸µ]";
+				mes "ÀüµµÀ¯¸ÁÇÑ Áı»ç°¡ ¿ä±â ÀÖ³×?";
+				mes "ÁÁ¾Æ! ³»°¡ ¾ÆÁÖ ±Í¿©¿î ³à¼®À» º¸¿©ÁÙ°Ô!";
+				close2;
+				cutin "",255;
+				callshop( "barter_ep20_shop_1_A" );
+				end;
+			}
+			mes "[»ß»ß¸µ]";
+			mes "¼ºÁö ¼öÈ£ÀÚ¿¡ ¾î¿ï¸± ±Í¿±°í ¸ÚÁö°í À¯¿ëÇÑ ¹°°ÇÀ» ±¸ÇØ³ù¾î!";
+			close2;
+			cutin "",255;
+			callshop( "barter_ep20_shop_1_B" );
+			end;
+		case 2:
+			mes "[»ß»ß¸µ]";
+			mes "ÀÇ¹®ÀÇ º¸°üÇÔÀº »ç½Ç ¹¹°¡ ³ª¿ÃÁö ³ªµµ ¸ğ¸£´Âµ¥¿¡?";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "^i[1001217] 70°³¸¦ »ç¿ëÇÒ °Å¾ß.";
+			else	// (workaround)
+				mes "" + mesitemlink(1001217) + " 70°³¸¦ »ç¿ëÇÒ °Å¾ß.";
+			while(1) {
+				next;
+				if (select( "¿¬´Ù!", "°í¹Î Á» ÇÒ°Ô." ) == 2) {
+					mes "[»ß»ß¸µ]";
+					mes "ÁÁ¾Æ ÁÁ¾Æ. ´Ù¸¥°Ô ÇÊ¿äÇÏ¸é ¾ğÁ¦µç Ã£¾Æ¿Í~";
+					close3;
+				}
+				if (checkweight(1201,1) == 0) {	// custom
+					mes "¼ÒÁöÇÏ°í °è½Å ¾ÆÀÌÅÛÀÇ ¼ö·®ÀÌ ¸¹¾Æ ´ëÈ­¸¦ ÁøÇà ÇÒ ¼ö ¾ø½À´Ï´Ù.";
+					mes "¾ÆÀÌÅÛÀ» Á¤¸®ÇÑ µÚ ´Ù½Ã ½ÃµµÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.";
+					close;
+				}
+				if (countitem(1001217) < 70) {
+					mes "[»ß»ß¸µ]";
+					mes "¾ÆÀÌÄí? " + getitemname(1001217) + "ÀÌ ¸ğÀÚ¶ó³×?";
+					if (PACKETVER >= 20230302)	// (official)
+						mes "ÇÊ¿äÇÑ°Ç ¹¹? ^i[1001217] 70°³¾ß~!";
+					else	// (workaround)
+						mes "ÇÊ¿äÇÑ°Ç ¹¹? " + mesitemlink(1001217) + " 70°³¾ß~!";
+					close3;
+				}
+				delitem 1001217,70;	// Ep20_Cat_Whiskers
+				// note: unknown list, but it is similar to this group. No new box has been added in the episode patch, which is usually used as dummy for consumeitem.
+				getgroupitem(IG_D_GW_EXTRACTOR);
+				mes "[»ß»ß¸µ]";
+				mes "¹¹°¡ ³ª¿Ã±î¿ä? ±âµµÇÕ½Ã´Ù. ³Ä¿Ë~!";
+				specialeffect2 EF_SPHERE;
+				next;
+				mes "[»ß»ß¸µ]";
+				mes "ÀÇ¹®ÀÇ º¸°üÇÔÀ» ´õ ¿­¾îº¼·¡?";
+			}
+			end;
+		}
+		end;
+	case 2:
+		mes "[»ß»ß¸µ]";
+		mes "¸ğÇè°¡ÇÑÅ× Ç×»ó ½Å¼¼Áö°í ÀÖ³×.";
+		mes "ÀÌ ¹æ¾î±¸µéÀÌ µµ¿òÀÌ µÇ¸é ÁÁ°Ú´Ù¾Æ~";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep20_glacier_eq" );
+		end;
+	case 3:
+		mes "[»ß»ß¸µ]";
+		mes "º§±ºµå ´ÔÀÇ ¿¬±¸ ¼º°ú°¡ µåµğ¾î °á½ÇÀ» ¸Î¾úÁö ¹¹¾ß?";
+		mes "±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸³ª µõ ±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸¸¦ ÀÎÃ¦Æ® ÇÒ ¼ö ÀÖ¾î.";
+		next;
+		switch( select( "±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ ÀÎÃ¦Æ®", "µõ ±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ ÀÎÃ¦Æ®" ) ) {
+		case 1:
+			mes "[»ß»ß¸µ]";
+			mes "±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ Áß¿¡ ÀÎÃ¦Æ® ÇÏ°íÀÚ ÇÏ´Â Àåºñ¸¦ °ñ¶óºÁ¾Æ.";
+			mes "°¡´ÉÇÑ ÀåºñµéÀº ÀÌÁ¤µµ¾ß.";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "^i[450264] ^i[450265] ^i[450266] ^i[450267] ^i[470196] ^i[450268] ^i[460040] ^i[490328] ^i[490330] ^i[490327] ^i[490329]";
+			else	// (workaround)
+				mes "" + mesitemlink(450264) + " " + mesitemlink(450265) + " " + mesitemlink(450266) + " " + mesitemlink(450267) + " " + mesitemlink(470196) + " " + mesitemlink(450268) + " " + mesitemlink(460040) + " " + mesitemlink(490328) + " " + mesitemlink(490330) + " " + mesitemlink(490327) + " " + mesitemlink(490329) + "";
+			next;
+			.@s = select( "±Û·¹ÀÌ½Ã¾Æ ¾Æ¸Ó/·Îºê", "±Û·¹ÀÌ½Ã¾Æ ¸ÁÅä/¸ÓÇÃ·¯", "±Û·¹ÀÌ½Ã¾Æ ºÎÃ÷/½´Áî", "±Û·¹ÀÌ½Ã¾Æ °¡µå", "±Û·¹ÀÌ½Ã¾Æ Ææ´øÆ®/³×Å¬¸®½º", "±Û·¹ÀÌ½Ã¾Æ ¸µ/ÀÌ¾î¸µ" ) - 1;
+			.@id = 89 + .@s;
+			mes "[»ß»ß¸µ]";
+			mes "Çà¿îÀ» ºô¾îÁÙ°Ô¿¡~";
+			close2;
+			cutin "",255;
+			item_enchant(.@id);
+			end;
+		case 2:
+			mes "[»ß»ß¸µ]";
+			mes "µõ ±Û·¹ÀÌ½Ã¾Æ ¹æ¾î±¸ Áß¿¡ ÀÎÃ¦Æ® ÇÏ°íÀÚ ÇÏ´Â Àåºñ¸¦ °ñ¶óºÁ¾Æ.";
+			mes "°¡´ÉÇÑ ÀåºñµéÀº ÀÌÁ¤µµ¾ß.";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "^i[450270] ^i[450271] ^i[480283] ^i[480284] ^i[470197] ^i[470198]";
+			else	// (workaround)
+				mes "" + mesitemlink(450270) + " " + mesitemlink(450271) + " " + mesitemlink(480283) + " " + mesitemlink(480284) + " " + mesitemlink(470197) + " " + mesitemlink(470198) + "";
+			next;
+			.@s = select( "µõ ±Û·¹ÀÌ½Ã¾Æ ¾Æ¸Ó/·Îºê", "µõ ±Û·¹ÀÌ½Ã¾Æ ¸ÁÅä/¸ÓÇÃ·¯", "µõ ±Û·¹ÀÌ½Ã¾Æ ºÎÃ÷/½´Áî" ) - 1;
+			.@id = 95 + .@s;
+			mes "[»ß»ß¸µ]";
+			mes "Çà¿îÀ» ºô¾îÁÙ°Ô¿¡~";
+			close2;
+			cutin "",255;
+			item_enchant(.@id);
+			end;
+		}
+		end;
+	case 4:
+		mes "[»ß»ß¸µ]";
+		mes "¸ğÇè°¡¸¦ Áö¿øÇÏ±â À§ÇØ ¿¬±¸¿¡ ÇÊ¿äÇÑ Àç·á ±³È¯°ú.. ¸ğÇè°¡¿¡°Ô µµ¿òÀÌ µÇ´Â °ÍµéÀÇ »óÈ£ ±³È¯ÀÌ¾ß.";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep20_shop_2" );
+		end;
+	}
+	end;
+}

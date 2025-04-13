@@ -60,4 +60,14 @@ Footer:
   - Path: npc/re/merchants/barters/enchan_illusion_dungeons.yml
   - Path: npc/re/merchants/barters/quests_exp_175.yml
   - Path: npc/re/merchants/barters/mysterious_cookie_shop.yml
-  - Path: npc/re/merchants/barters/quests_18_1.yml
+  - Path: npc/re/merchants/barters/mega.yml
+  - Path: npc/re/merchants/barters/Gegia.yml
+  - Path: npc/re/merchants/barters/eden market.yml
+  - Path: npc/re/merchants/barters/edens.yml
+  - Path: npc/re/merchants/barters/kafra.yml
+  - Path: npc/re/merchants/barters/pet.yml
+  - Path: npc/re/merchants/barters/Runstone.yml
+  - Path: npc/re/merchants/barters/Cat_Paw.yml
+  - Path: npc/re/merchants/barters/OGH Challange.yml
+  - Path: npc/re/custom/episodes/ep19/korean/npc/merchants/barters.yml
+  - Path: npc/re/custom/episodes/ep20/korean/npc/merchants/barters.yml

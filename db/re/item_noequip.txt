@@ -142,6 +142,7 @@
 //----------------------------------------------------------------------------
 // CANNOT be consumed/equipped in WoE:TE Castles (16)
 //----------------------------------------------------------------------------
+
 // Krieger Gear
 1187,16		// Krieger_Twohand_Sword1
 1281,16		// Krieger_Katar1
@@ -391,3 +392,4 @@
 20703,16367	// TE_Woe_Manteau
 20704,16367	// TE_Woe_Magic_Manteau
 21006,16367	// TE_Woe_Two_Hand_Sword
+25138,16367

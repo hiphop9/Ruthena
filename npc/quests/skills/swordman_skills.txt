@@ -20,7 +20,7 @@
 -	script	::KnightDeThomas	98,4,4,{
 	if ((BaseClass == Job_Swordman) && (JobLevel >= 35 || (BaseJob == Job_Knight || BaseJob == Job_Crusader))) {
 		if (getskilllv("SM_MOVINGRECOVERY") == 1) {
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Oh, it's you?";
 			mes "Long time no see!";
 			mes "You seem healthier than before.";
@@ -28,46 +28,46 @@
 			mes "Take care! See you again!";
 			close;
 		} else if (countitem(713) >= 200 && countitem(1058) >= 1) {
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Welcome back...";
 			mes "Are you ready to learn Body Movin'?";
 			next;
 			switch (select("Yes.:No, I'm not ready yet.")) {
 			case 1:
-				mes "[De Thomas]";
+				mes "[디토마소]";
 				mes "Let's see.....";
 				next;
-				mes "[De Thomas]";
+				mes "[디토마소]";
 				mes "Ok! I shall now teach you...";
 				mes "...The Body Movin' skill!";
 				next;
 				delitem 713,200; //Empty_Bottle
 				delitem 1058,1; //Wing_Of_Moth
 				skill "SM_MOVINGRECOVERY",1,SKILL_PERM;
-				mes "[De Thomas]";
+				mes "[디토마소]";
 				mes "There you go!";
 				mes "Try it yourself.";
 				mes "But don't overdo it.";
 				next;
-				mes "[De Thomas]";
+				mes "[디토마소]";
 				mes "Oh yeah, I won't be needing your";
 				mes "armor so you can keep it.";
 				mes "Good luck now!";
 				close;
 			case 2:
-				mes "[De Thomas]";
+				mes "[디토마소]";
 				mes "Is that so?";
 				mes "Then come when you are prepared.";
 				close;
 			}
 		} else {
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Hmmm... He's a swordsman...";
 			mes "You know that I am De Thomas Carlos, right?";
 			mes "Knight of Prontera's 3rd Calvary.";
 			mes "De Thomas Carlos!";
 			next;
-			mes "[De Thomas]";
+			mes "[디토마소]";
 
 			// bug: official script always states that job level is too low
 			//mes "Wait a second, your Job level isn't above ^00880035^000000!";
@@ -76,28 +76,28 @@
 			// custom: old dialog
 			mes "You do not have all the items I asked for.";
 			next;
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Remember, I need ^008800200 empty bottles^000000, your armor, and a ^008800Moth Wing^000000. Come back when you have it all.";
 			close;
 		}
 	} else {
-		mes "[De Thomas]";
-		mes "My name is De Thomas Carlos.";
-		mes "Knight of Prontera's 3rd Calvary.";
-		mes "I have a certain duty these days.";
-		mes "Ehem! Need I say more.";
+		mes "[디토마소]";
+		mes "내 이름은 디토마소 까를로스.";
+		mes "프론테라 제3기사단 소속의 기사지.";
+		mes "요즘은 모종의 임무를 띄고 활약 중이라네.";
+		mes "에헴! 이 이상은 말할 필요 없겠지.";
 		close;
 	}
 	end;
 
 OnTouch:
 	if ((BaseClass == Job_Swordman) && (JobLevel >= 35 || (BaseJob == Job_Knight || BaseJob == Job_Crusader))) {
-		mes "[De Thomas]";
+		mes "[디토마소]";
 		mes "Oh, no! You must have been hurt! Are you ok?";
 		mes "You must have fought hard to get such serious injuries..";
 		mes "Being a swordsman must come with a lot of responsibility and sacrifice.";
 		next;
-		mes "[De Thomas]";
+		mes "[디토마소]";
 		if (Sex == SEX_MALE)
 			mes "For these swordsmen and knights, there is a wonderful skill.";
 		else
@@ -107,7 +107,7 @@ OnTouch:
 		mes "that allows you to regain strength(HP)";
 		mes "while you are moving!";
 		next;
-		mes "[De Thomas]";
+		mes "[디토마소]";
 		mes "It is currently under development";
 		mes "so it may not recover that much,";
 		mes "but it will help a little.";
@@ -115,13 +115,13 @@ OnTouch:
 		next;
 		switch (select("What a nice skill! I want to learn it!:No, thank you.")) {
 		case 1:
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Very well. I will tell you what you need to learn this skill.";
 			mes "First, your job level must be higher than ^00880035^000000.";
 			mes "You will also need ^008800200 empty bottles^000000.";
 			mes "Why? Because it is proof that you fought fiercely to have used that many potions.";
 			next;
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Also, the armor you used in battle.";
 			mes "This is also proof of an experienced fighter.";
 			mes "For the armor... your armor is perfect!";
@@ -129,19 +129,19 @@ OnTouch:
 			mes "Last but not least... bring me one ^008800Moth Wing^000000.";
 			next;
 			select("Eh? You need that, too?");
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Not really.. I don't really NEED it.";
 			mes "It's just that my niece has gotten a bug hunting as a holiday task during the summer vacation.";
 			mes "Of course! It would be much easier for me to get it myself.";
 			mes "but I must work here all the time so I don't exactly have the time to go out and get it.";
 			next;
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "Don't you think it is pitiful that I have to stay in once place everyday, not being able to go outside?";
 			mes "Please, find me one...*sniffsniff*";
 			mes "If you don't...";
 			close;
 		case 2:
-			mes "[De Thomas]";
+			mes "[디토마소]";
 			mes "...";
 			close;
 		}

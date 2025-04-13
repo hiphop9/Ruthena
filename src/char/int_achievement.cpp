@@ -14,6 +14,7 @@
 #include <common/socket.hpp>
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -81,7 +82,10 @@ struct achievement *mapif_achievements_fromsql(uint32 char_id, int *count)
 	SqlStmt_Free(stmt);
 	StringBuf_Destroy(&buf);
 
-	ShowInfo("achievement load complete from DB - id: %d (total: %d)\n", char_id, *count);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("DB에서 업적 불러오기를 완료했습니다. [케릭터 번호: %d (총: %d개)]\n", char_id, *count);
+	else
+		ShowInfo("achievement load complete from DB - id: %d (total: %d)\n", char_id, *count);
 
 	return achievelog;
 }

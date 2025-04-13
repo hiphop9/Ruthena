@@ -1,0 +1,6517 @@
+//===== rAthena Script =======================================
+//= Direction of Prayer
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Daily quest NPCs for Episode 18.1
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+//-------------------------------------------------------------------
+// Quest: Investigation of Oz Labyrinth. Step 1 + 13 (final). (NPC part of the main quest).
+// wolfvill,143,113,5	script	이므릴#ep18_wv	4_EP18_IMRIL,{
+
+// Quest: Investigation of Oz Labyrinth. Step 2.
+oz_dun01,27,184,5	script	#ep18_sb1	4_POINT_RED,{
+	switch( isbegin_quest(11725) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "후… 더워!";
+		mes "예전엔 서늘한 동굴이었는데…";
+		mes "지금은 가만히 있어도 땀이 줄줄 흐를 것 같아.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "너무 오래 있으면 현기증이 날 것 같으니 어서 둘러보자.";
+		mes "일단 이 길은 ^e5555e외길^000000이니까 쭉 걸어가면 돼.";
+		completequest 11725;
+		setquest 11726;
+		cutin "",255;
+		navigateto("oz_dun01",68,284);
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11725) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 3.
+oz_dun01,68,284,5	script	상자#ep18_sb1	4_WOODBOX,{
+	switch( isbegin_quest(11726) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "누군가가 짐을 두고 갔네.";
+		mes "몬스터와 마주치거나 너무 지쳐서 물건을 옮기기 힘들면 이렇게 짐을 숨겨두고 움직이기도 해.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "물건을 옮기는 것도 중요하지만 목숨은 하나뿐이니까.";
+		mes "여긴 입구에서 가까우니 물건을 회수하기도 편하지.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "그럼 이 짐은 나중에 회수하도록 하고 이동하자.";
+		changequest 11726,11727;
+		cutin "",255;
+		navigateto("oz_dun01",65,189);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11726) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 4.
+oz_dun01,65,189,5	script	가파른 길#ep18_sb1	4_POINT_RED,{
+	switch( isbegin_quest(11727) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "여긴 길이 험하니까 조심해.";
+		mes "자칫하다간 미끄러져서 발목뼈가 무사하지 못할 거야.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "여기서 ^e5555e아래쪽^000000으로 쭉 내려가보자.";
+		changequest 11727,11728;
+		cutin "",255;
+		navigateto("oz_dun01",111,96);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11727) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 5.
+oz_dun01,111,96,5	script	증기가 나오는 구멍#ep18	4_POINT_RED,{
+	switch( isbegin_quest(11728) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "후앗!";
+		mes "뜨거워!";
+		mes "갈라진 틈에서 증기가 새어 나오고 있네.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "다행히 바닥은 아직 괜찮은 것 같지만 증기가 올라온다는 건 땅 속 깊은 곳이 뜨거워졌다는 증거니까 여기도 얼마 못 가 용암이 새어 나올지도 몰라.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "주로 다니는 길 근처까지 이렇게 뜨거워지기 시작 했다니 정말 큰일이네…";
+		next;
+		cutin "",255;
+		mes "[???]";
+		mes "<FONT SIZE = 16><B>이므릴!!</FONT></B>";
+		changequest 11728,11729;
+		navigateto("oz_dun01",100,92);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11728) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 6 + 7 + 8.
+oz_dun01,100,92,3	script	???#ep18_sb1	4_EP18_GW_MIDDLE02,{
+	switch( isbegin_quest(11729) ) {
+	case 0:
+		break;
+	case 1:
+		mes "[이므릴]";
+		mes "괜찮아요? 폴스씨?";
+		cutin "ep18_imril_02.png",2;
+		next;
+		cutin "",255;
+		mes "[폴스]";
+		mes "하하…";
+		mes "몬스터에게 도망치다가 뜨거운 증기를 맞아 버렸어.";
+		mes "늘 다니던 길이라 방심했네.";
+		next;
+		mes "[폴스]";
+		mes "짐도 어디에 흘렸는지 잘 모르겠어.";
+		mes "다치기만하고 짐도 잃어버리다니 비참하네…";
+		next;
+		mes "[이므릴]";
+		mes "짐보다 목숨이 더 중요하니까 그런 말 하지 마세요.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		cutin "",255;
+		mes "[폴스]";
+		mes "그래.";
+		mes "고맙다.";
+		next;
+		mes "[이므릴]";
+		mes "여기 물약을 가져온 게 있으니 이걸 마시고 마을로 먼저 돌아가세요.";
+		mes "짐은 나중에 찾으면 돼요.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		cutin "",255;
+		mes "[폴스]";
+		mes "아냐 넣어둬!";
+		mes "마을의 ^e5555e귀중한 물자^000000를 이렇게 낭비할 순 없지.";
+		next;
+		mes "[폴스]";
+		mes "잠깐 쉬다가 마을로 돌아가서 연고 바르면 돼.";
+		next;
+		mes "[폴스]";
+		mes "그래도 회복하다가 몬스터에게 맞고 싶지는 않으니 ^e5555e근처에 있는 몬스터라도 좀 정리^000000해주지 않을래?";
+		changequest 11729,11730;
+		close;
+	}
+	switch( checkquest(11730,HUNTING) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[폴스]";
+		mes "잠깐 쉬다가 마을로 돌아가서 연고 바르면 돼.";
+		next;
+		mes "[폴스]";
+		mes "그래도 회복하다가 몬스터에게 맞고 싶지는 않으니 ^e5555e근처에 있는 몬스터라도 좀 정리^000000해주지 않을래?";
+		close;
+	case 2:
+		mes "[폴스]";
+		mes "휴~";
+		mes "고마워!";
+		mes "이제 좀 움직일 만 해졌네.";
+		next;
+		mes "[폴스]";
+		mes "그럼 난 이제 슬슬 마을로 돌아 갈게.";
+		mes "미로 조사도 좋지만 몸 조심하고.";
+		next;
+		mes "[이므릴]";
+		mes "알았어요.";
+		mes "폴스씨도 조심해요.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "흠…";
+		mes "역시 몬스터 뿐만 아니라 증기가 이곳저곳에서 솟아나오는 것도 큰 문제네.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "행상인들이 더 아래쪽까지 내려갈 일은 잘 없지만 몬스터에게 쫓기다 보면 길을 잘못 들기도 하니까…";
+		next;
+		mes "[이므릴]";
+		mes "일단 ^e5555e조금 더 내려가^000000보자.";
+		changequest 11730,11731;
+		cutin "",255;
+		navigateto("oz_dun01",134,56);
+		close;
+	}
+	if (isbegin_quest(11731) == 1) {
+		mes "[이므릴]";
+		mes "흠…";
+		mes "역시 몬스터 뿐만 아니라 증기가 이곳저곳에서 솟아나오는 것도 큰 문제네.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "행상인들이 더 아래쪽까지 내려갈 일은 잘 없지만 몬스터에게 쫓기다 보면 길을 잘못 들기도 하니까…";
+		next;
+		mes "[이므릴]";
+		mes "일단 ^e5555e조금 더 내려가^000000보자.";
+		cutin "",255;
+		navigateto("oz_dun01",134,56);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11729) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(11730,HUNTING) == 2" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 9.
+oz_dun01,134,56,5	script	상자#ep18_sb2	4_WOODBOX,{
+	if (isbegin_quest(11731) == 1) {
+		mes "[이므릴]";
+		mes "여기도 짐이 있네…";
+		mes "폴스씨가 잃어버린 짐인가?";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "일단 위치만 기억해두고 회수는 나중에 해야지.";
+		mes "아직 ^e5555e아래쪽^000000을 더 확인해봐야 하니까.";
+		mes "이쪽으로…";
+		changequest 11731,11732;
+		cutin "",255;
+		navigateto("oz_dun01",110,37);
+		close;
+	}
+	mes "- 상자가 방치되어 있다. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11731) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 10.
+oz_dun01,110,37,5	script	#ep18_sb2	4_POINT_RED,{
+	switch( isbegin_quest(11732) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "으으…";
+		mes "벌써부터 열기가 장난 아니네.";
+		mes "이 아래쪽은 더 위험하니까 정말 조심해야해.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "사실 모험가님처럼 강한 사람이 아니고서야 여기까지 왔다면 죽은 목숨이나 다름 없다고 봐야지.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "나도 모험가님이랑 같이 왔으니 내려가보는 거야.";
+		changequest 11732,11733;
+		cutin "ep18_imril_01.png",2;
+		navigateto("oz_dun02",152,276);
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11732) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 11.
+oz_dun02,152,276,5	script	#ep18_sb3	4_POINT_RED,{
+	switch( isbegin_quest(11733) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "길을 조금 더 내려온 것뿐인데 ^e5555e몬스터 형태도 조금 달라^000000진 것 같아.";
+		mes "이정도라면 모험가님에게도 좀 위험할 수 있겠는데?";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "여긴 너무 위험하니까 근처만 조금 더 둘러보고 마을로 돌아가자.";
+		changequest 11733,11734;
+		cutin "",255;
+		navigateto("oz_dun02",143,231);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11733) == 1" );
+	end;
+}
+
+// Quest: Investigation of Oz Labyrinth. Step 12.
+oz_dun02,143,231,3	script	노인#ep18_sb1	4_EP18_GW_OLD01,{
+	if (isbegin_quest(11734) == 1) {
+		mes "[이므릴]";
+		mes "<FONT SIZE = 14><B>영감님!!!!</FONT></B>";
+		mes "무사 하셨군요!!!";
+		cutin "ep18_imril_03.png",2;
+		next;
+		cutin "",255;
+		mes "[영감님]";
+		mes "아니.";
+		mes "이게 누구야.";
+		mes "이므릴아니냐.";
+		mes "이런 위험한 데는 왜 왔어!";
+		next;
+		mes "[이므릴]";
+		mes "아니 영감님 이야말로 왜 여기 계신 거예요.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		cutin "",255;
+		mes "[미로지기 영감님]";
+		mes "미로지기가 미로에 있지 그럼 어디 있겠어.";
+		next;
+		mes "[이므릴]";
+		mes "하지만 여긴 몬스터들도 너무 위험하고…";
+		cutin "ep18_imril_01.png",2;
+		next;
+		cutin "",255;
+		mes "[미로지기 영감님]";
+		mes "뭐 여기에만 있는 건 아니니 걱정하지 말거라.";
+		mes "요즘 몬스터놈들이 너무 소란스러워서 위험에 빠진 사람이 있는 건 아닌가 하고 내려와본 것뿐이다.";
+		next;
+		mes "[미로지기 영감님]";
+		mes "용암이 여기까지 올라왔다고 ^e5555e수아드^000000에게 전해주고 이보다 아래쪽은 이미 바닥이 많이 녹아서 더 위험해 졌으니 내려가지 말거라.";
+		next;
+		mes "[미로지기 영감님]";
+		mes "옆에 있는 모험가 양반이면 모를까 너한텐 너무 위험해.";
+		next;
+		mes "[이므릴]";
+		mes "알았어요.";
+		mes "영감님도 몸 조심하시고.";
+		mes "어서 마을로 돌아오세요.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		cutin "",255;
+		mes "[미로지기 영감님]";
+		mes "어허~";
+		mes "미로지기가 미로에 없으면 누가 미로를 관리해!";
+		next;
+		mes "[이므릴]";
+		mes "아무튼 고집도…";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "영감님 말씀대로 더 아래로 내려가는 건 내가 못 버틸 것 같으니 ^e5555e마을로^000000 돌아가자.";
+		mes "지금도 피부가 익어버릴 것 같아.";
+		changequest 11734,11735;
+		cutin "",255;
+		navigateto("wolfvill",143,113);
+		close;
+	}
+	if (isbegin_quest(11735) == 1) {
+		mes "[미로지기 영감님]";
+		mes "어허~";
+		mes "미로지기가 미로에 없으면 누가 미로를 관리해!";
+		next;
+		mes "[이므릴]";
+		mes "아무튼 고집도…";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "영감님 말씀대로 더 아래로 내려가는 건 내가 못 버틸 것 같으니 ^e5555e마을로^000000 돌아가자.";
+		mes "지금도 피부가 익어버릴 것 같아.";
+		cutin "",255;
+		navigateto("wolfvill",143,113);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11734) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Training Grey Wolves. Step 1 + 4 (final).
+wolfvill,121,119,3	duplicate(dummy_npc)	멍멍이#wms01	EP18_GREY_GOAT
+wolfvill,120,117,1	duplicate(dummy_npc)	아이샤#wms01	4_F_SHABBY
+wolfvill,124,116,3	duplicate(dummy_npc)	양양이#wms01	4_LAM
+wolfvill,121,113,1	duplicate(dummy_npc)	큰꼬꼬#wms01	4_PECOPECO
+wolfvill,117,113,7	duplicate(dummy_npc)	작은꼬꼬#wms01	4_HEN
+wolfvill,123,110,5	duplicate(dummy_npc)	손님#wms01	4_HEN
+wolfvill,125,111,3	duplicate(dummy_npc)	귀여워#wms01	4_HEN
+
+wolfvill,117,119,5	script	스카니아#wms01	4_EP18_GW_MAN02,5,5,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(17510) ) {
+	case 0:
+		mes "[스카니아]";
+		mes "멍멍아, 너도 이젠 외국어를 배워야지...";
+		npctalk "야항?", "멍멍이#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "어머어머, 얘 숨쉬는 것 좀 봐. 들숨날숨 천재네 천재!!";
+		next;
+		cloakoffnpc "마람#wms01", getcharid(0);
+		mes "[마람]";
+		mes "안녕! 스카니아!";
+		next;
+		mes "[스카니아]";
+		mes "마람? 언제 왔어? 생각보다 일찍 왔네?";
+		next;
+		mes "[마람]";
+		mes "모험가님이 도와주셔서 이번엔 좀 빠르게 왔지.";
+		npctalk "인사해. 힘세고 강한 모험가님이셔.", "마람#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "이번에 넘어온 사람이야?";
+		next;
+		mes "[마람]";
+		mes "그건 아이냐. 이쪽 사람이 아니거든. 아예 다른 곳 출신. 이번에 물건 구매를 도와주신 김에 여기까지 운반해주신 거야.";
+		npctalk "정말 힘세고 강한 모험가더라고.", "마람#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "흐음... 모험가...? 그럼, 외지인이네? 신원은 확실해? 여기 있는 걸 모두 다 털어 가면? 아니면 저쪽에 말이라도 흘리면? 그것도 아니면 저 이주민들처럼 우리 땅을 차지하면?";
+		next;
+		mes "[마람]";
+		mes "아니, 얘가!! 사람을 앞에 두고 못하는 말이 없네! 그럴 분 아니거든? 어딜 봐서 그런 불한당들과 비교하는 거야?";
+		next;
+		setnpcdisplay( "복실이#wms01", 21324 );	// EP18_GREY_WOLF_BABY
+		mes "[스카니아]";
+		mes "그럴 사람이 얼굴에 써붙이고 다니니? 도둑일지 군식구일지 그건 두고 봐야 알 일이지!";
+		mes "아이샤가 늑대 새끼 같은 걸 주워 오더니, 마람 너는 사람을 주워오는구나?";
+		npctalk "줍다니! 말조심 하라니까!", "마람#wms01", bc_self;
+		next;
+		select( "저 그런 사람 아닌데요?" );
+		mes "[마람]";
+		mes "아, 물론 얘 입에서 나오는 것이 진심은 아니고요, 말이 그렇다고요. 말이.";
+		mes "그나저나 늑대 새끼? 웬 늑대 새끼?";
+		next;
+		mes "[스카니아]";
+		mes "어어! 아이샤가 얼마 전에 숲에서 새끼 회색늑대를 주워왔어! 도로 갖다 두라고 해도 듣지를 않아!";
+		next;
+		mes "[스카니아]";
+		mes "그게 어쨌는지 알아? 벌써부터 우리 양한테 덤빈다구! 지금도 그모양인데 좀 더 크면 어떻게 되겠어? 우리 양들을 해치겠지!";
+		mes "그러니까 네가 가서 한 번 말해 봐! 내가 하는 말은 듣지를 않아!";
+		next;
+		mes "[마람]";
+		mes "어어? 그거 참 좋은 제안이다. 아주 발전적인 대화가 되겠는걸. 하지만 어쩌지? 나는 갖고 온 짐을 정리해야 하는데.";
+		npctalk "뭐야, 그 어색한 말투는?", "스카니아#wms01", bc_self;
+		next;
+		mes "[마람]";
+		mes "아아, 그렇지! 모험가님! 모험가님이 한 번 가보시겠어요? 이곳도 둘러볼 겸, 사람들한테 눈도장도 찍을겸.";
+		mes "어차피 한동안 여기서 지내야 하잖아요? 여기 사람들 다 저처럼 친절하고 다정하니까 박대하지는 않을 거예요.";
+		next;
+		mes "[마람]";
+		mes "그치, 스카니아?";
+		next;
+		mes "[스카니아]";
+		mes "......";
+		npctalk "그렇게 노려볼 건 또 뭐람.", "마람#wms01", bc_self;
+		next;
+		mes "[마람]";
+		mes "가서 아이샤가 주워온 것이 진짜 새끼 늑대인지 아니면 그냥 늑대처럼 보이는 강아지인지 확인만 하시면 돼요.";
+		npctalk "확인 안해도 늑대라니까! 내가 다 봤다구!", "스카니아#wms01", bc_self;
+		next;
+		select( "확인을 한 다음엔요?" );
+		mes "[마람]";
+		mes "어... 글쎄? 거기까진 생각을 안해봤는데요? 그렇지만 진짜 새끼 늑대라면 곤란하지 않겠어요? 강아지도 곤란한 마당에.";
+		npctalk "어디 곤란하기만 하겠어?", "스카니아#wms01", bc_self;
+		next;
+		mes "[마람]";
+		mes "이제 막 도착한 모험가님을 위해 설명을 하자면요, 여기는 땅이 이래서 키울 수 있는 짐승이 많지 않거든요.";
+		next;
+		mes "[마람]";
+		mes "스카니아가 돌보는 산양이나 닭들이 거의 전부예요. 이런 곳에서 적응할 수 있는 소나 돼지는 거의 없으니까. 그래서 가축이 정말 귀해요.";
+		next;
+		mes "[스카니아]";
+		mes "그런데 만약 아이샤가 데리고 있는 것이 새끼늑대라면?";
+		next;
+		mes "[마람]";
+		mes "그 어미가 새끼를 찾으러 와요!";
+		next;
+		mes "[스카니아]";
+		mes "어미가 찾으러 오지 않아도?";
+		next;
+		mes "[마람]";
+		mes "새끼가 자라서 가축을 해치게 돼요!";
+		next;
+		emotion ET_SWEAT, playerattached();
+		mes "[스카니아]";
+		mes "들었죠?";
+		next;
+		select( "어디로 가면 되죠?" );
+		mes "[마람]";
+		mes "아이샤가 어디서 살았지? 아! 이 <NAVI>[윗쪽]<INFO>wolfvill,99,178,0,101,0</INFO></NAVI>에 가면 아이샤의 집이 있어요.";
+		next;
+		emotion ET_SWEAT, playerattached();
+		mes "[스카니아]";
+		mes "하지만 말해도 소용 없을 걸요? 설득한다면, 당신에 대한 내 생각도 바꾸죠.";
+		npctalk "스카니아, 모험가님은 네 생각으로 가치가 평가되는 분이 아니셔.", "마람#wms01", bc_self;
+		npctalk "누가 뭐래? 잘해줄 거라고.", "스카니아#wms01", bc_self;
+		next;
+		mes "[마람]";
+		mes "모험가님, 그럼 다녀오세요! 나도 이만 갈게!";
+		setquest 17510;
+		cloakonnpc "마람#wms01", getcharid(0);
+		close;
+	case 1:
+		mes "[스카니아]";
+		mes "<NAVI>[아이샤]<INFO>wolfvill,99,178,0,101,0</INFO></NAVI>에게 백날 말해도 소용 없을 걸요? 설득한다면, 당신에 대한 내 생각도 바꾸죠.";
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(17512) ) {
+	case 0:
+		mes "[스카니아]";
+		mes "<NAVI>[아이샤]<INFO>wolfvill,99,178,0,101,0</INFO></NAVI>에게 백날 말해도 소용 없을 걸요? 설득한다면, 당신에 대한 내 생각도 바꾸죠.";
+		close;
+	case 1:
+		mes "[스카니아]";
+		mes "멍멍아. 오늘의 산책은 이제 그만. 내가 너무 힘들다.";
+		next;
+		mes "[멍멍이]";
+		mes "야아아아앙---";
+		next;
+		mes "[스카니아]";
+		mes "너 혼자 보낼 수는 없어. 그 위험한 곳에 어떻게 널 혼자 보내. 물론 너 혼자서도 산책을 잘 할 수 있다는 걸 알지만, 내가 불안해서 그래.";
+		next;
+		setnpcdisplay( "복실이#wms01", 21324 );	// EP18_GREY_WOLF_BABY
+		cloakoffnpc "아이샤#wms01", getcharid(0);
+		cloakoffnpc "복실이#wms01", getcharid(0);
+		npctalk "스카니아!", "아이샤#wms01", bc_self;
+		mes "[스카니아]";
+		mes "아이샤? 여기엔 왜 왔어? 늑대는 돌려 보내고 왔나?";
+		next;
+		npctalk "왈!!", "복실이#wms01", bc_self;
+		mes "[스카니아]";
+		mes "아니잖아? 늑대를... 데리고 왔어? 양 앞에? 제정신이니?";
+		next;
+		mes "[스카니아]";
+		mes "대체 늑대를 왜 키우려고 그래? 개가 필요해? 그럼 개를 키우면 되잖아.";
+		mes "아니다. 그냥 내가 개가 될게. 네 집도 난장판으로 만들고, 가끔 물어 뜯기도 하고.";
+		next;
+		mes "[아이샤]";
+		mes "스카니아, 네 희망사항은 잘 들었어. 그래서 나한테 사람까지 보냈어? 모험가님이 무슨 청부업자야?";
+		next;
+		mes "[아이샤]";
+		mes "그렇게 애썼지만, 어쩌니? 이 사람은 이미 내 편으로 돌아섰는데! 하하하! 어서 절망에 절은 얼굴을 보여주시지!!";
+		next;
+		mes "[스카니아]";
+		mes "뭐? 모험가님? 날 배신한 거에요? 어떻게 그럴 수 있어요? 초면에 배신이라니 너무한 거 아니에요? 이럴 줄 알았어. 역시 외지인은 믿을 수가 없어.";
+		next;
+		mes "[아이샤]";
+		mes "스카니아, 얼음 동굴에 가본적 있어? 거기의 얼은 물보다도 더 차가운게 네 혈관속 흐르는 피일걸? 이 냉혈한아!";
+		npctalk "뭐? 그게 물이 얼은 거였어?", "스카니아#wms01", bc_self;
+		npctalk "아니야...?", "아이샤#wms01", bc_self;
+		next;
+		mes "[아이샤]";
+		mes "이 작고 연약한 복실이를 저 험한 곳으로 어떻게 돌려 보내라고 그러니. 어미까지 죽어서 혼자서는 못 사는데.";
+		next;
+		mes "[스카니아]";
+		mes "어미를... 잃었어?";
+		next;
+		mes "[아이샤]";
+		mes "내가 그랬잖아. 100번 얘기 했잖아. 또 안 들었지? 믿고 싶은대로 믿는 거지?";
+		next;
+		mes "[아이샤]";
+		mes "너는 어떨지 몰라도 나는 이 작고 연약한 어린 늑대를 사지로 절대 돌려보내지 못해.";
+		next;
+		setnpcdisplay( "복실이#wms01", 21324 );	// EP18_GREY_WOLF_BABY
+		mes "[스카니아]";
+		mes "그렇지만 그 늑대가 크면 우리 양들은...";
+		next;
+		mes "[아이샤]";
+		mes "그건 걱정하지 마. 모험가님?";
+		next;
+		select( "아, 제가 얘기 해야 돼요?" );
+		mes "[아이샤]";
+		mes "제가 얘기하면 안 들을 거니까요. 내가 얘기할땐 안 듣고 꼭 남이 얘기 해야 믿는다니까.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "이 새끼 늑대는 훈련만 하면 괜찮을 거예요. 어릴 때부터 다른 친구들이랑 같이 크면 해치지 않고 오히려 양을 지켜줄 거고요.";
+		next;
+		mes "[아이샤]";
+		mes "들었지? 어디 반박해 보시지? 자, 똑똑한 천재 복실아! 앉아! 손!";
+		emotion ET_WRAP, getnpcid(0,"아이샤#wms01");
+		npctalk "왈!!", "복실이#wms01", bc_self;
+		emotion ET_ROCK, getnpcid(0,"복실이#wms01");
+		npctalk "잘했어!!! 우리 똑똑이 복실이!", "아이샤#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "진짜네. 그렇지만... 그렇지만 그게 언제까지 갈지 모르고... 정말로 야생성을 누를 수 있을지도 모르고...";
+		next;
+		mes "[스카니아]";
+		mes "무엇보다도 네가 그렇게 끈기있게 훈련을 시킬 것 같지도 않아.";
+		npctalk "뭐야? 날 뭘로 보고! 야, 너 따라 나와.", "아이샤#wms01", bc_self;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "불안하면 제가 도울게요. 완벽하게 훈련될 수 있도록. 유대감을 키울 수 있도록 양친구랑 산책도 돕고요.";
+		next;
+		mes "[스카니아]";
+		mes "그렇지만...";
+		next;
+		mes "[아이샤]";
+		mes "너 맨날 멍멍이가 혼자 산책하는거 쫓아다니기 힘들다고 했었잖아. 좋은 거 아니야?";
+		npctalk "양치기 주제에 풀 먹이는 걸 귀찮아 해.", "아이샤#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "정말로... 나 대신? 그, 그럴까...? 우리 멍멍이 잘 돌봐줄 수 있어요? 저 밖엔 위험한 몬스터도 많은데.";
+		next;
+		mes "[아이샤]";
+		mes "모험가님 손에 있는 굳은 살이 안보여? 마람이 데리고 온 사람이라며? 그럼 믿을만한 사람이겠지. 우리 복실이도 몇 분만에 훈련시킨 베테랑이라구!";
+		npctalk "못하는 것이 없으셔!", "아이샤#wms01", bc_self;
+		next;
+		mes "[스카니아]";
+		mes "아, 그럼... 이렇게까지 나오는데 어쩔 수 없지. 그, 그럼 부탁할까? 헤헤헤.";
+		next;
+		mes "[아이샤]";
+		mes "너, 마치 이 순간만을 기다려온 사람처럼 너무 좋아한다. 너무 냉큼 받아 먹는 거 아니니?";
+		next;
+		mes "[스카니아]";
+		mes "아니이~ 네가 너무~ 간절하게~ 부탁하잖아!! 그러니까 나는 어쩔 수 없이...";
+		next;
+		mes "[아이샤]";
+		mes "하여간... 나는 마을 사람들한테 복실이에 대해서 얘기 해야겠어. 우리 복실이는 안전하다구! 가자, 복실아!";
+		npctalk "왈!", "복실이#wms01", bc_self;
+		next;
+		cloakonnpc "아이샤#wms01", getcharid(0);
+		cloakonnpc "복실이#wms01", getcharid(0);
+		mes "[스카니아]";
+		mes "어... 갑자기 양치기 대행이 생겨버렸네...? 고마워요. 할 일이 많았는데. 나는 뭘 해주지?";
+		next;
+		mes "[스카니아]";
+		mes "아, 그렇지! 외지인들은 이런거 많이들 좋아하던데. 모험가님도 좋아해요? 안 좋아하더라도 좋아하는 사람한테 필요한 것으로 바꿀 수 있으니까 가져가요.";
+		next;
+		mes "[스카니아]";
+		mes "그럼, 산책 때 봐요.";
+		mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+		mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		completequest 17512;
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,10;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		setnpcdisplay( "복실이#wms01", 21324 );	// EP18_GREY_WOLF_BABY
+		close;
+	case 2:
+		break;
+	}
+
+	// daily
+	switch( checkquest(17516,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[스카니아]";
+		mes "Please wait the end of the quest delay.";
+		close;
+	case 2:
+		erasequest 17516;
+		break;
+	}
+	if (isbegin_quest(17515) == 1) {
+		mes "[스카니아]";
+		mes "모험가님, 고생 많이 하셨어요. 우리 멍멍이도 만족해하는 것 같아요. 이녀석, 좋은 식사 시간을 보냈나 본데? 그럼 내일도 또 부탁드려요!";
+		erasequest 17515;
+		setquest 17516;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		close;
+	}
+	if (isbegin_quest(17514) == 1) {
+		mes "[스카니아]";
+		mes "멍멍이가 좋아하는 장소가 몇 군데 있는데 안내해줄 거예요. 근처에 위험한 몬스터만 처리해주시면 돼요.";
+		next;
+		mes "[스카니아]";
+		mes "애쉬링이 곧잘 달려들어서 골치 아픈데.. 주변 애쉬링을 처리해주세요. 하루에 보통 20마리씩 잡게 되더라구요. 그럼 부탁드려요.";
+		close;
+	}
+	switch( isbegin_quest(17513) ) {
+	case 0:
+		mes "[스카니아]";
+		mes "모험가님, 산책 시간에 맞춰서 왔네요. 그런데 아이샤는 안왔네...";
+		next;
+		setnpcdisplay( "복실이#wms01", 21324 );	// EP18_GREY_WOLF_BABY
+		cloakoffnpc "아이샤#wms01", getcharid(0);
+		cloakoffnpc "복실이#wms01", getcharid(0);
+		mes "[아이샤]";
+		mes "짠! 우리 왔어!";
+		next;
+		mes "[복실이]";
+		mes "왈!!";
+		next;
+		mes "[스카니아]";
+		mes "그럼 산책을 부탁드립니다. 정말.. 제가 안 가도 되나요? 믿고 맡겨도 되는 거겠죠?";
+		next;
+		if (select( "그럼요.", "오늘은 좀 바쁜데요." ) == 2)
+			end;
+		mes "[아이샤]";
+		mes "불안하면 따라 가든가.";
+		next;
+		mes "[스카니아]";
+		mes "아, 아냐. 그럼, 잘 부탁드립니다. 멍멍아. 잘 다녀와. 불안하거나 맘에 안들면 얘기하고 집에 와. 알았지?";
+		next;
+		mes "[멍멍이]";
+		mes "야하아아아앙---";
+		next;
+		mes "[스카니아]";
+		mes "멍멍이가 좋아하는 장소가 몇 군데 있는데 안내해줄 거예요. 근처에 위험한 몬스터만 처리해주시면 돼요.";
+		next;
+		mes "[스카니아]";
+		mes "애쉬링이 곧잘 달려들어서 골치 아픈데.. 주변 애쉬링을 처리해주세요. 하루에 보통 20마리씩 잡게 되더라구요. 그럼 부탁드려요.";
+		setquest 17513;
+		close2;
+		cloakonnpc "아이샤#wms01", getcharid(0);
+		cloakonnpc "복실이#wms01", getcharid(0);
+		navigateto("gw_fild01",138,106);
+		end;
+	case 1:
+		mes "[스카니아]";
+		mes "멍멍이가 좋아하는 장소가 몇 군데 있는데 안내해줄 거예요. 근처에 위험한 몬스터만 처리해주시면 돼요.";
+		next;
+		mes "[스카니아]";
+		mes "애쉬링이 곧잘 달려들어서 골치 아픈데.. 주변 애쉬링을 처리해주세요. 하루에 보통 20마리씩 잡게 되더라구요. 그럼 부탁드려요.";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnTouch_:
+	if (isbegin_quest(17510) == 0)
+		npctalk "멍멍아, 산책을 가고 싶어도 조금만 참아 봐.", "스카니아#wms01", bc_self;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17510) == 0 && isbegin_quest(11724) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17512) == 1" );
+	
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17512) == 2 && isbegin_quest(17513) == 0 && isbegin_quest(17514) == 0 && (checkquest(17516,PLAYTIME) == -1 || checkquest(17516,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17512) == 2 && isbegin_quest(17515) == 1" );
+	end;
+}
+
+wolfvill,120,121,3	duplicate(dummy_cloaked_npc)	마람#wms01	4_EP18_MARAM
+wolfvill,119,117,1	duplicate(dummy_cloaked_npc)	복실이#wms01	EP18_GREY_WOLF_BABY
+
+// Quest: Training Grey Wolves. Step 2.
+wolfvill,99,178,5	script	아이샤#wms02	4_F_SHABBY,{
+	switch( isbegin_quest(17510) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[아이샤]";
+		mes "복실아~ 언니랑 천년만년 살자. 널 해치러 오는 사람이 있으면 언니가 직접 오즈 미로에 묻어줄테니까. 우리 복실이는 아무 걱정 말고~ 언니만 믿고 행복하게 살자.";
+		next;
+		mes "[복실이]";
+		mes "으르르---";
+		emotion ET_FRET, getnpcid(0,"복실이#wms02");
+		next;
+		mes "[아이샤]";
+		mes "아니, 복실아. 진정 좀 하구. 아이참. 아직도 낯설어 하면 어떡해. 아니, 내가 너한테 뭐라고 하는 건 아니구... 우리 좀 더 친하게 지내자구.";
+		next;
+		mes "[복실이]";
+		mes "으르르르--- 왕!!";
+		next;
+		mes "[아이샤]";
+		mes "알았어, 알았어. 혼자 있을 시간이 필요하구나. 사실 나도 그래. 어차피 세상은 모두 혼자야. 그러니까 우리 각자 잘 살면서 같이 살자.";
+		next;
+		mes "[복실이]";
+		mes "으르르르르르---";
+		next;
+		mes "[아이샤]";
+		mes "왜? 내가 뭘했다구...... 아? 누구시죠? 처음 보는 사람인데.";
+		npctalk "우리 복실이, 낯선 사람 왔다고 경계한 거예요? 아이구 잘했어요~", "아이샤#wms02", bc_self;
+		npctalk "으르르--", "복실이#wms02", bc_self;
+		next;
+		select( "이 늑대가 그 새끼늑대군요?" );
+		mes "[아이샤]";
+		mes "우리 복실이한테 가까이 다가가지 마. 손 내려 놔. 뒤 돌아서 사라져.";
+		next;
+		select( "저 나쁜 사람이 아니고..." );
+		mes "[아이샤]";
+		mes "나쁜 사람이 나쁜 사람이라고 하지는 않지. 누구든 내 복실이를 버리라고 말하는 사람은 악당이야. 그리고 나는 악당에게 자비가 없어.";
+		next;
+		select( "여기 온지 얼마나 됐죠?" );
+		mes "[아이샤]";
+		mes "그건 개인정보라 알려줄 수가 없는데. 왜 묻나?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "아니, 이 새끼 늑대요. 아직 훈련이 안된 것 같은데.";
+		next;
+		mes "[아이샤]";
+		mes "... 아니, 그건. 이제 보름쯤 되었지. 아직 아가인데 훈련할 수 있을 리가 없지. ";
+		next;
+		select( "사실 제가 온 것은..." );
+		mes "[아이샤]";
+		mes "뭐? 그럴 줄 알았어! 우리 복실이한테서 당장 10보 이상 떨어져. 다가 오지 마.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "데려가려는 것이 아니라, 살펴 보러 온 것인데... 무리에서 떨어졌다면 다시 돌려 보내기도 해야 하고요. 어미 늑대가 찾으러 올지도 모르니까 대비도 해야 하고요.";
+		next;
+		mes "[아이샤]";
+		mes "무리에서 떨어진 것이 아니야. 죽어있던 어미 늑대 옆에서 죽어가던 걸 데리고 온 거란 말이야.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "저런. 어미랑 떨어져서 낯선 곳에서 살게 돼서 불안한가 보네요.";
+		next;
+		mes "[아이샤]";
+		mes "정말 데려가려고 온 거 아니야? 그럼 왜 왔어?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "정말 새끼 늑대인지 확인 후에 설득하러 오긴 했는데...";
+		next;
+		mes "[아이샤]";
+		mes "그럴 줄 알았어! 스카니아가 보낸 거지? 아니, 왜 남의 반려 동물에 감놔라 배놔라 하고 있어? 우리 복실이는 위험하지 않으니까 돌아 가. 더 볼 것도 없어.";
+		next;
+		select( "조심해서 나쁠 건 없으니까요." );
+		mes "[아이샤]";
+		mes "정말 그렇게 생각해? 정말 우리 복실이가 잠재적 위협 요소가 될 거라고 생각해? 이렇게 작고 귀여운데...?";
+		npctalk "으르르--", "복실이#wms02", bc_self;
+		npctalk "아, 복실이 칭찬 싫어해? 알았어, 알았어.", "아이샤#wms02", bc_self;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "평소라면 그렇게 생각했겠지만... 어미가 없다면 적어도 늑대들이 이곳에 올 이유는 없겠네요.";
+		next;
+		mes "[아이샤]";
+		mes "내말이 그거라니까! 하지만 멍청한 스카니아는 그걸 몰라! 이렇게 생판 모르는 남도 내 마음을 이렇게 잘 알아 주는데!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "게다가 어미 없는 이 새끼 늑대는 혼자서는 살아남을 수 없겠네요.";
+		next;
+		mes "[아이샤]";
+		mes "그렇다니까! 그 냉혈한은 머리까지 얼음이 되어버렸다니까.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그렇지만 복실이가 마을에서 같이 살려면 훈련이 필요해요. 남을 해치지 않고, 어울려 지내는 법을 배워야 돼요.";
+		next;
+		mes "[아이샤]";
+		mes "아직 이렇게 어린데...?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "어릴 때 해야죠. 어릴 때부터 훈련을 하면 마을 사람들이 우려하는 일도 일어나지 않을 거에요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "단호한 어투, 즉각적인 반응, 칭찬만 충분히 잘해줘도 잘 이해할 거에요. 늑대들은 똑똑하니까요. 복실이가 제일 좋아하는 것이 뭐죠?";
+		next;
+		mes "[아이샤]";
+		mes "음... 고기? 그치만 지금은 없는 걸. 모험가는 갖고 있어?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "앗...! 간식으로 줄 고기가 없네, 고기가... 고기를 가지고 와야겠다.";
+		completequest 17510;
+		setquest 17511;
+		close;
+	case 2:
+		mes "[아이샤]";
+		mes "고기로 훈련을 어떻게 시킨다고 그러는 거야? 하나만 있으면 돼?";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17510) == 1" );
+	end;
+}
+
+// Quest: Training Grey Wolves. Step 3.
+wolfvill,100,177,1	script	복실이#wms02	EP18_GREY_WOLF_BABY,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	switch( isbegin_quest(17511) ) {
+	case 0:
+		end;
+	case 1:
+		if (countitem(517) < 1) {	// Meat
+			emotion ET_QUESTION;
+			npctalk "멍?", "복실이#wms02", bc_self;
+			mes "[아이샤]";
+			mes "고기가 한 덩어리 필요하다고 하지 않았었나? 아닌가?";
+			close;
+		}
+		disable_items;
+		.@player_name$ = strcharinfo(0);
+		mes "[" + .@player_name$ + "]";
+		mes "안녕~ 나는 " + .@player_name$ + ". 복실이 맞죠? 반가워. 낯선 곳에 오니까 불안하지? 내가 네 맘 다 알지, 다 알아.";
+		next;
+		emotion ET_FRET, getnpcid(0,"복실이#wms02");
+		mes "[복실이]";
+		mes "으르르르릉---";
+		npctalk "괜찮은 건가? 심기가 불편해 보이는데.", "아이샤#wms02", bc_self;
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "하지만 괜찮아요. 다 괜찮아. 이곳에는 우리 복실이를 해칠 사람은 없으니까. 안심해요.";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "이제 우리 다 같이 사는 거예요. 따뜻한 보금자리와 맛있는 밥 먹으면서요.";
+		mes "그러려면 우리 몇 가지 규칙을 정해야 돼. 괜찮지?";
+		next;
+		emotion ET_QUESTION, getnpcid(0,"복실이#wms02");
+		mes "[복실이]";
+		mes "왈?";
+		next;
+		mes "[아이샤]";
+		mes "꼭 어린애한테 말하는 것 같네.";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "자, 봐. 고기야. 복실이 고기 좋아해? 구운 것? 날 것? 아니면 삶은 것? 구운 건 안 먹어 봤어? 괜찮아. 앞으로 먹을 기회는 많으니까.";
+		next;
+		emotion ET_THROB, getnpcid(0,"복실이#wms02");
+		mes "[복실이]";
+		mes "왈!";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "우리 잘 해보자.";
+		mes "복실이, 앉아!";
+		mes "기다려!";
+		mes "잘했어요. 자, 고기야.";
+		emotion ET_THROB, getnpcid(0,"복실이#wms02");
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "보셨죠? 이렇게 지시에 잘 따르면 칭찬을 많이 해주세요.";
+		next;
+		mes "[아이샤]";
+		mes "엄머, 엄머. 우리 애 진짜 천재 아니야?";
+		mes "우리 복실이 잘했어요!!!!";
+		emotion ET_GOODBOY, getnpcid(0,"복실이#wms02");
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "계속해서 익숙해질 때까지 해야 돼요. 반복 훈련은 중요하거든요. 지금처럼만 하면 돼요.";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "복실아, 앉아.";
+		mes "손.";
+		mes "기다려. 자, 이제 직접 해봐요.";
+		next;
+		mes "[아이샤]";
+		mes "복실이, 앉아!";
+		mes "손!";
+		mes "오와, 정말 신기해.";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "이런 개과 동물들은 훈련하기 나름이에요. 이곳을 안심할 수 있는 집이라 느끼게 하고, 유대감을 잘 쌓으면 잘 지낼 수 있어요.";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "그리고 다른 친구들과도 인사하고 어릴 때부터 함께 지내면 큰 문제 없이 잘 지낼 겁니다.";
+		next;
+		mes "[아이샤]";
+		mes "그런 것을 사람들이 알아줄까?";
+		next;
+		mes "[" + .@player_name$ + "]";
+		mes "지금 한 것들을 보여주면 되죠. 복실이도 이 마을의 구성원으로서 살 준비가 되어 있다는 것을 말이에요.";
+		mes "<NAVI>[스카니아]<INFO>wolfvill,117,119,0,101,0</INFO></NAVI>씨에게 가요. 가서 우리 멋지고 늠름한 복실이를 보여줘요.";
+		delitem 517,1;	// Meat
+		completequest 17511;
+		setquest 17512;
+		getitem 1000405,10;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17511) == 1 && countitem(517) > 0" );	// Meat
+	end;
+}
+//-------------------------------------------------------------------
+
+// Quest: Training Grey Wolves. Daily.
+gw_fild01,138,106,5	script	풀#wms01	4_POINT_YELLOW,5,5,{
+	if (isbegin_quest(17513) == 1) {
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "야하하항?", "", bc_self;
+		sleep2 2000;
+		setnpcdisplay( "복실이#wms03", 21324 );	// EP18_GREY_WOLF_BABY
+		erasequest 17513;
+		setquest 17514;
+		unittalk getcharid(3), "벌써 와있었네. 여기가 좋아? 아.. 여긴 풀이 없구나. 다른 곳을 찾아 보자. 원하는 곳 있어?", bc_self;
+		sleep2 1500;
+		npctalk "야하아아앙!", "", bc_self;
+		sleep2 1500;
+		setpcblock PCBLOCK_NPC, false;
+		cloakonnpc "멍멍이#wms02", getcharid(0);
+		cloakonnpc "복실이#wms03", getcharid(0);
+		setnpcdisplay( "복실이#wms03", CLEAR_NPC );
+		unittalk getcharid(3), "벌써갔네. 애쉬링이나 잡자!!", bc_self;
+		end;
+	}
+	if (checkquest(17514,HUNTING) == 2) {
+		setpcblock PCBLOCK_NPC, true;
+		setnpcdisplay( "복실이#wms03", 21324 );	// EP18_GREY_WOLF_BABY
+		cloakoffnpc "멍멍이#wms02", getcharid(0);
+		cloakoffnpc "복실이#wms03", getcharid(0);
+		erasequest 17514;
+		setquest 17515;
+		unittalk getcharid(3), "배불리 먹었니?", bc_self;
+		sleep2 1000;
+		npctalk "야하아아앙!", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "복실이가 멍멍이를 잘 지켜줬어?", bc_self;
+		sleep2 1000;
+		npctalk "왈!!!", "복실이#wms03", bc_self;
+		sleep2 1500;
+		unittalk getcharid(3), "잘했어. 이제 집에 가자!!!", bc_self;
+		cloakonnpc "멍멍이#wms02", getcharid(0);
+		cloakonnpc "복실이#wms03", getcharid(0);
+		setnpcdisplay( "복실이#wms03", CLEAR_NPC );
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	end;
+OnTouch:
+	if (isbegin_quest(17513) == 1 || checkquest(17514,HUNTING) == 2) {
+		cloakoffnpc "멍멍이#wms02", getcharid(0);
+		cloakoffnpc "복실이#wms03", getcharid(0);
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17513) == 1 || checkquest(17514,HUNTING) == 2" );
+	end;
+}
+
+gw_fild01,160,104,0	script	맛있는 풀#wms11	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (isbegin_quest(17513) == 1 || checkquest(17514,HUNTING) == 2) {
+		cloakoffnpc "멍멍이#wms02", getcharid(0);
+		cloakoffnpc "복실이#wms03", getcharid(0);
+	}
+	end;
+}
+gw_fild01,26,101,0	duplicate(맛있는 풀#wms11)	#wms01	HIDDEN_WARP_NPC,3,3
+
+gw_fild01,138,106,3	script	멍멍이#wms02	EP18_GREY_GOAT,{
+	if (isbegin_quest(17513) == 1) {
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "야하하항?", "", bc_self;
+		sleep2 2000;
+		setnpcdisplay( "복실이#wms03", 21324 );	// EP18_GREY_WOLF_BABY
+		erasequest 17513;
+		setquest 17514;
+		unittalk getcharid(3), "벌써 와있었네. 여기가 좋아? 아.. 여긴 풀이 없구나. 다른 곳을 찾아 보자. 원하는 곳 있어?", bc_self;
+		sleep2 1500;
+		npctalk "야하아아앙!", "", bc_self;
+		sleep2 1500;
+		setpcblock PCBLOCK_NPC, false;
+		cloakonnpc "멍멍이#wms02", getcharid(0);
+		cloakonnpc "복실이#wms03", getcharid(0);
+		setnpcdisplay( "복실이#wms03", CLEAR_NPC );
+		unittalk getcharid(3), "벌써갔네. 애쉬링이나 잡자!!", bc_self;
+		end;
+	}
+	if (checkquest(17514,HUNTING) == 2) {
+		setpcblock PCBLOCK_NPC, true;
+		setnpcdisplay( "복실이#wms03", 21324 );	// EP18_GREY_WOLF_BABY
+		cloakoffnpc "멍멍이#wms02", getcharid(0);
+		cloakoffnpc "복실이#wms03", getcharid(0);
+		erasequest 17514;
+		setquest 17515;
+		unittalk getcharid(3), "배불리 먹었니?", bc_self;
+		sleep2 1000;
+		npctalk "야하아아앙!", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "복실이가 멍멍이를 잘 지켜줬어?", bc_self;
+		sleep2 1000;
+		npctalk "왈!!!", "복실이#wms03", bc_self;
+		sleep2 1500;
+		unittalk getcharid(3), "잘했어. 이제 집에 가자!!!", bc_self;
+		cloakonnpc "멍멍이#wms02", getcharid(0);
+		cloakonnpc "복실이#wms03", getcharid(0);
+		setnpcdisplay( "복실이#wms03", CLEAR_NPC );
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	end;
+}
+
+gw_fild01,137,104,7	duplicate(dummy_npc)	복실이#wms03	CLEAR_NPC
+//-------------------------------------------------------------------
+
+
+
+//-------------------------------------------------------------------
+// Quest: Ahab's Request. Step 1 + 8 (final).
+wolfvill,85,111,3	script	즐란#ep18	4_M_RACHMAN1,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(16560) ) {
+	case 0:
+		mes "[즐란]";
+		mes "으, 오늘도 마을 회의에서 이상한 얘기만 늘어놓다 갔어, 그 아저씨.";
+		next;
+		mes "[레드셀]";
+		mes "그 아저씨? 아, 이름을 말할 수 없는 그 아저씨?";
+		next;
+		mes "[즐란]";
+		mes "말할 수 없긴 뭐 말할 수 없어.";
+		mes "라헬에서 뭐 높으신 분이었다는데 그게 회색늑대 숲에서 무슨 힘이 있다고.";
+		next;
+		mes "[즐란]";
+		mes "아합인지 대합인지 하는 그 아저씨 말야!";
+		mes "만날 라헬에서는 그렇게 하지 않는데~ 거 잘못했구만~";
+		next;
+		mes "[즐란]";
+		mes "그럴 거면 라헬에 남아있지 왜 구차하게 여기까지 들어왔대?";
+		mes "나 정말, 이해가 안 가!";
+		next;
+		mes "[카야르]";
+		mes "아직도 자기가 라헬에 있는 줄 아나보지.";
+		mes "바람 들어오는 천막에서 자면서도 아직 꿈에서 못 깬 건가?";
+		next;
+		mes "[즐란]";
+		mes "꿈을 꿀거면 혼자서 꾸든지.";
+		mes "왜 남한테까지 민폐람?";
+		next;
+		mes "[레드셀]";
+		mes "……당신 뭔데 우리 얘길 엿듣고 있는 거야?";
+		mes "대합 아저씨의 끄나풀이냐!";
+		next;
+		mes "[카야르]";
+		mes "끄나풀 같은 걸 키울 정도로 똑똑한 위인도 아니잖아.";
+		mes "그래서, 누구세요? 남의 뒷담화를 엿듣다니. 민망하게스리.";
+		next;
+		select( "그냥 지나가던 여행자인데." );
+		mes "[즐란]";
+		mes "거짓말쟁이. 이 회색늑대 숲에 지나가던 여행자가 어디 있어?";
+		mes "어떻게든 우리랑 관련있는 사람이지.";
+		next;
+		mes "[레드셀]";
+		mes "말하지 않겠다면 힘으로 듣는 수밖에 없겠네~";
+		mes "정말 거짓말만 늘어놓을 거야?";
+		next;
+		mes "[카야르]";
+		mes "진정해, 레드셀. 즐란 말마따나 지나가던 여행자일리는 없지만. 우리가 모르지만 여기 있어도 이상하지 않을 만한 존재는 있잖아?";
+		next;
+		mes "[즐란]";
+		mes "그게 누군데?";
+		setquest 16560;
+		close;
+	case 1:
+		mes "[즐란]";
+		mes "아합 씨도 좀 사람 말을 듣기 시작하니까… 아주 나쁜 사람만은 아닌 것 같아.";
+		mes "그래, 이게 바로 어른들의 교류 방식이지.";
+		next;
+		mes "[즐란]";
+		mes "서로 귀 막고 소리만 꽥꽥 지르다가 결국 쫓아내니 마니 하게 되지 않아서 다행이야.";
+		mes "당신 덕분이야. 고마워.";
+		close;
+	case 2:
+		break;
+	}
+	if (isbegin_quest(16566) == 1) {
+		mes "[즐란]";
+		mes "다녀온 거야? 대합 씨가 뭐래?";
+		mes "뭐? 이제 다른 사람들 말을 잘 듣겠다고 했다고?";
+		next;
+		mes "[즐란]";
+		mes "역시 지금까지는 안 듣고 있던 거였군.";
+		next;
+		mes "[카야르]";
+		mes "흡… 놀리지 마, 즐란.";
+		mes "이제 제대로 하기로 한게 중요한 거잖아.";
+		next;
+		mes "[레드셀]";
+		mes "그래, 그래.";
+		mes "대… 아니, 아합 씨가 웬일이래?";
+		mes "네가 얘길 잘 해준 거겠지, 높은 사람 또는 오지랖 넓은 사람.";
+		next;
+		mes "[레드셀]";
+		mes "고마워. 덕분에 여기서 사람을 내보내는 일도 없어졌고.";
+		mes "그러겠다고 말은 했어도 영 불편했었단 말이야.";
+		next;
+		mes "[카야르]";
+		mes "마을회의를 대표… 하지는 못하는 회의 참석자지만 우리가 작은 성의를 보일게.";
+		mes "너 같은 사람이 있어서 다행이다.";
+		completequest 16566;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		mes " ";
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		close;
+	}
+	mes "[즐란]";
+	mes "이 숲의 규칙을 지킬 생각이 없으면 나가줬으면 해.";
+	mes "당신도 마찬가지야. 규칙은 지키기 위해 있는 거라고.";
+	next;
+	mes "[즐란]";
+	mes "예의도 마찬가지야. 예의와 규칙이 없는 곳이 사회야? 야만이지.";
+	mes "난 야생 상태에 있고 싶지 않다고!";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16560) == 0 && isbegin_quest(11724) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16566) == 1" );
+	end;
+}
+
+// Quest: Ahab's Request. Step 2.
+wolfvill,83,109,5	script	카야르#ep18	4W_M_03,{
+	switch( isbegin_quest(16560) ) {
+	case 0:
+		mes "[카야르]";
+		mes "아, 골치아파. 골치아픈 문제가 있다구.";
+		next;
+		mes "[카야르]";
+		mes "인간관계 문제라 모르는 사람이랑 얘기하긴 싫어….";
+		close;
+	case 1:
+		mes "[카야르]";
+		mes "높은 분들의 손님이라면 말이 되지 않겠어?";
+		mes "우리가 여기 지도자들의 일까지 시시콜콜 알 수는 없으니까.";
+		next;
+		mes "[즐란]";
+		mes "당신, 그게 사실이야?";
+		mes "……뭐, 우리한테 비밀인 거라면 안 알려주려나.";
+		next;
+		mes "[레드셀]";
+		mes "진짜로 높은 사람이면 우리 말좀 들어봐.";
+		mes "높은 사람 아니야? 그래도 뭔가 중요한 사람인 거겠지. 좀 들어봐.";
+		next;
+		mes "[레드셀]";
+		mes "저 대합……, 아니, 그건 우리끼리 부르는 별명이고.";
+		mes "아합이라는 아저씨 좀 어떻게 해줄 수 있을까?";
+		next;
+		mes "[즐란]";
+		mes "진짜 골치아픈 아저씨거든, 저 사람!";
+		mes "마을 회의마다 끼어들어서 헛소리를 하는데 아주 죽겠어.";
+		next;
+		mes "[즐란]";
+		mes "남의 말은 듣지도 않고 자기 할 말만 늘어놓는데, 그게 또 들어서 쓸모있는 말도 아냐.";
+		mes "그런 걸 자기가 연장자니까 윗사람이라고 들으라고 우기는데 아주 머리가 다 아프다니까.";
+		next;
+		mes "[즐란]";
+		mes "듣기로는 이주민들에게 부역해서 떵떵거리고 살던 위인이라는데.";
+		mes "그때 하던 가락으로 원주민들에게 이래라저래라 할 수 있다고 생각하면 오산인데 말이야.";
+		next;
+		mes "[카야르]";
+		mes "그냥 쫓아내 버릴 수 있다면 그러고 싶어.";
+		mes "우리 의견을 모아서 강력하게 주장하면 될지도 모르고.";
+		next;
+		mes "[레드셀]";
+		mes "야야, 아무리 그래도 그건 아니지.";
+		mes "여긴 더 갈 곳 없는 사람들이 모인 곳이란 말이야.";
+		next;
+		mes "[레드셀]";
+		mes "여기서 내쫓아버리면 그 아저씨는 갈 데도 없을 거라고.";
+		next;
+		mes "[즐란]";
+		mes "그렇다고 우리가 언제까지 저 진상을 받아줘야 해?";
+		mes "나도 여기 아니면 갈 데 없으니까 지금부터 막 멋대로 굴어도 되나?";
+		next;
+		mes "[카야르]";
+		mes "너까지 그러면 진상이 둘이 되잖아. 버틸 수 없어…….";
+		next;
+		mes "[레드셀]";
+		mes "그래, 거기 높은 사람! 아직까지 듣고 있는 걸 보니 우리 일에 관심이 많은가봐?";
+		mes "높은 사람 아니라도 상관없어. 오지랖 넓은 사람!";
+		completequest 16560;
+		setquest 16561;
+		close;
+	case 2:
+		break;
+	}
+	mes "[카야르]";
+	mes "우리 마을에서는 높은 사람만 마을 운영 회의에 참가하지는 않는다고.";
+	mes "물론 결정 자체는 높은 사람들이 하지만 말이야….";
+	next;
+	mes "[카야르]";
+	mes "그러니까, 회의에 참가한다고 해서 거들먹거리는 사람은 없어.";
+	mes "그 대합 아저씨 빼고는 말이야.";
+	next;
+	mes "[카야르]";
+	mes "그런 태도 안 좋아, 정말 안 좋아….";
+	mes "길어질수록 더 나쁜 영향만 미칠 거야.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16560) == 1" );
+	end;
+}
+
+// Quest: Ahab's Request. Step 3.
+wolfvill,87,109,3	script	레드셀#ep18	4_M_DESERT,{
+	if (isbegin_quest(16562) == 1) {
+		mes "[레드셀]";
+		mes "저 아합 아저씨 사람 좀 만들어 주라.";
+		mes "사람이 사람처럼 생겨야 사람인가, 사람답게 행동해야 사람이지….";
+		next;
+		mes "[레드셀]";
+		mes "지나친 비방 아니냐고? ……뭐, 조금은 인정해.";
+		mes "하지만 같이 일해보고 나면 당신도 알 수 있을거야.";
+		close;
+	}
+	if (isbegin_quest(16561) == 1) {
+		mes "[레드셀]";
+		mes "지금까지 얘기 들었지?";
+		mes "우리의 이 고통을 해결해줄 수 있는 건 당신 뿐이야.";
+		next;
+		mes "[즐란]";
+		mes "진짜 답 없으니까, 어떻게 안된다면 의견을 모아서 마을 퇴출을 건의할 거야.";
+		next;
+		mes "[레드셀]";
+		mes "거참, 그건 나중으로 좀 미뤄 두고……";
+		mes "하지만 역시 마지막 해결책은 그게 되겠지.";
+		next;
+		mes "[카야르]";
+		mes "우리만 골치아파하는 게 아니니까 발의하면 먹힐걸.";
+		mes "지금 마을회의 참석하는 사람들은 다 곤란해한다고.";
+		next;
+		mes "[레드셀]";
+		mes "하지만! 그건 마지막에 하자니까.";
+		mes "마지막이 오기 전에 좀 도와줘. 형씨.";
+		next;
+		mes "[카야르]";
+		mes "우린 저 아저씨랑 말이 안 통해.";
+		mes "가서 이야기 좀 해봐 주지 않을래?";
+		next;
+		mes "[레드셀]";
+		mes "어, 우와. 그거 좋겠다. 얘기 좀 해보고 왜 저러는지, 안 저럴 수는 없는지 좀 알아다 줘.";
+		mes "진짜 완전 평생의 부탁이다.";
+		next;
+		mes "[즐란]";
+		mes "얘 평생의 부탁으로 해. 난 아껴뒀다 애인 생기면 그때 쓸거라고.";
+		next;
+		mes "[레드셀]";
+		mes "그래, 그건 아무래도 좋아. 난 연애 안 할 거니까.";
+		mes "그러니 내 평생 소원이야. 저 아합 아저씨 좀 사람 만들어 주라.";
+		next;
+		mes "[카야르]";
+		mes "어쩐지 슬쩍 소원이 커지고 있는 것 같은데.";
+		mes "아무튼 잘 부탁해. <NAVI>[아합 씨]<INFO>wolfvill,127,155,0,101,0</INFO></NAVI>랑 가서 이야기좀 해봐.";
+		changequest 16561,16562;
+		close;
+	}
+	mes "[레드셀]";
+	mes "말귀 못 알아듣는 사람! 멍청한 사람! 한 말 또 하게 만드는 사람! 일에 감정 드러내는 사람!";
+	next;
+	mes "[레드셀]";
+	mes "잘못한 거 숨기고 있다가 돌이킬 수 없을 때 슬그머니 내놓는 사람! 자기 일에 책임 못 지는 사람!";
+	next;
+	mes "[레드셀]";
+	mes "딱 질색이야!";
+	next;
+	mes "[레드셀]";
+	mes "왜 이렇게 싫어하는 사람이 많냐고?";
+	mes "아냐, 내가 싫어하는 사람… 딱 한 사람이라고!";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16561) == 1" );
+	end;
+}
+
+// Quest: Ahab's Request. Step 4 + 6 + 7.
+wolfvill,127,155,3	script	아합#ep18	4_M_MIDDLE1,{
+	if (isbegin_quest(16566) == 1) {
+		mes "[아합]";
+		mes "나, 나도 애쓰고 있다고.";
+		mes "그러니까 쫓아내지 말아줘.";
+		next;
+		mes "[아합]";
+		mes "난 여기서 쫓겨나면 갈 데가 없단 말이야.";
+		mes "그래서 나도 나름대로 잘 해보려고 했던 건데. 모두가 싫어하다니.";
+		navigateto("wolfvill",85,111);
+		close;
+	}
+	if (isbegin_quest(16565) == 1) {
+		mes "[아합]";
+		mes "쩝쩝, 그래 어디 아합 씨 예의에 대한 이야기 해봐.";
+		mes "애먼 소리를 늘어놓는다면 용서하지 않을 거야!";
+		next;
+		select( "사람들이 아합 씨 싫어하는 거 알아요?" );
+		mes "[아합]";
+		mes "아… 알아! 그게 뭐 어때서!";
+		mes "내 잘못이야? 젊은 것들이 늙은이라고 따돌리는 거지!";
+		next;
+		select( "그런 문제가 아니에요.", "아합 씨 문제예요." );
+		mes "[아합]";
+		mes "내가 무슨 문제가 있다는 거야!";
+		mes "나는 문제 없어!";
+		next;
+		select( "여기서 내보낼 생각까지 한다고요." );
+		mes "[아합]";
+		mes "뭐, 뭐라고? 그건 안돼!";
+		mes "나는 여기 말곤 갈 데가 없단 말이야.";
+		next;
+		mes "[아합]";
+		mes "라헬에서… 다 잘 되고 있었는데…";
+		mes "원주민 중엔 나만큼 성공한 사람이 없다는 게 자랑이었는데.";
+		next;
+		mes "[아합]";
+		mes "그런데 이주민 사장한테 실수로 밉보이는 바람에…";
+		mes "재산 다 털리고 쫓겨나 갈 곳이 없어 여기로 왔다고.";
+		next;
+		mes "[아합]";
+		mes "이, 이봐. 내가 어떻게 하면 여기서 쫓겨나지 않을 수 있을까?";
+		next;
+		mes "[아합]";
+		mes "사실은 알고 있다고. 여기서 내가 아무 힘도 없다는 것을.";
+		mes "응? 이제 권력도 없고 돈도 없는데. 어떡하지?";
+		next;
+		select( "권력과 돈은 필요없어요.", "사람들을 예의바르게 대하세요." );
+		mes "[아합]";
+		mes "끄으응, 나는 최선을 다하고 있단 말이야.";
+		mes "젊은이들한테 조언도 해주고, 마을 회의에도 꼬박꼬박 나가서 내 의견도 말하고.";
+		next;
+		mes "[아합]";
+		mes "내 노력이 잘못됐단 말이야?";
+		next;
+		select( "윗사람이라고 생각하시면 안돼요." );
+		mes "[아합]";
+		mes "하지만, 내가 어른인데! 어른이 어른 대접 받기를 바라는 게 잘못이야?";
+		next;
+		select( "그러면 쫓겨나시든가…." );
+		mes "[아합]";
+		mes "끄응, 끄으으응… 뭘 어떻게 하면 되는데!";
+		next;
+		select( "일단 소리지르지 마시고.", "상황을 모르는 조언은 잔소리예요.", "남의 말에 귀를 기울이세요.", "이곳에 대해 배우려고 해보세요." );
+		mes "[아합]";
+		mes "아… 알았어. 알았으니까. 날 쫓아내지 말라고 해.";
+		mes "이것 봐, 일단 자네 말을 귀기울여 들었잖아. 소리도 안 지르지?";
+		next;
+		mes "[아합]";
+		mes "자네 조언을 듣도록 하겠어.";
+		mes "그러니까… 여기서까지 날 쫓아내면 안돼.";
+		next;
+		mes "[아합]";
+		mes "나는… 그냥 젊은 사람들이랑 친하게 잘 지내고 싶었을 뿐인데…";
+		mes "그게 그렇게 기분 상할 일이었나. 좀 씁쓸하구만….";
+		next;
+		mes "[아합]";
+		mes "아무튼, 날 곧바로 내보내지 않고 이야기를 하러 와줘서 고맙군그래.";
+		mes "이제 어떻게든 잘 해보겠다고 <NAVI>[다른 사람들]<INFO>wolfvill,85,111,0,101,0</INFO></NAVI>에게도 전해줘….";
+		changequest 16565,16566;
+		navigateto("wolfvill",85,111);
+		close;
+	}
+	if (isbegin_quest(16564) == 1) {
+		mes "[아합]";
+		mes "오, 오이거트 소스를 사 왔나? 어디 보자. ";
+		mes "맞게 사왔군.";
+		next;
+		mes "[아합]";
+		mes "그럼 어디 식사를 해볼까?";
+		mes "그동안 이 물 설은 곳에서 제대로 식사도 못 해서 영 배가 고프단 말이지.";
+		next;
+		select( "그 전에 이야기 좀……" );
+		mes "[아합]";
+		mes "에에에이, 요 예의도 모르는 젊은 것!";
+		mes "어르신이 식사를 하신다는데, 끝날 때까지 공손히 기다려야지!";
+		next;
+		mes "[아합]";
+		mes "라헬에서는 너 같은 녀석이 있었으면 전부 못 배웠다고 손가락질을 했어!";
+		next;
+		select( "아합 씨 예의에 대한 이야기입니다." );
+		mes "[아합]";
+		mes "아합 씨? 아합 씨이이? 아니, 지금 심부름 좀 했다고 유세 떠는 거야!";
+		mes "심부름 두 번 했다가는 어, 아주 어깨동무하고 친구 먹겠네!";
+		next;
+		mes "[아합]";
+		mes "그래, 어디 그 귀한 말씀 들어나 보자!";
+		mes "……먹으면서 들을 거야!";
+		changequest 16564,16565;
+		close;
+	}
+	if (isbegin_quest(16563) == 1) {
+		mes "[아합]";
+		mes "빨리 안 먹으면 상하니까 <NAVI>[머노마트]<INFO>rachel,135,64,0,101,0</INFO></NAVI>에서 딱 한 병만 사오게.";
+		mes "신선한 걸 먹어야 맛이 있단 말이지.";
+		close2;
+		navigateto("rachel",135,64);
+		end;
+	}
+	if (isbegin_quest(16562) == 1) {
+		mes "[아합]";
+		mes "여, 뭔가. 못 보던 사람이군. 여기 주민이지?";
+		mes "허허허. 원래 윗사람은 아랫사람을 전부 기억하기 힘든 거야. 자네가 이해하게.";
+		next;
+		mes "[아합]";
+		mes "그렇지, 온 김에 자네 내 심부름 좀 하게.";
+		mes "어려운 건 아니야. 바보라도 할 수 있는 간단한 일이지.";
+		next;
+		mes "[아합]";
+		mes "나같은 사람이 그런 걸 하기엔 사람마다 가용시간의 가치라는 게 다르거든.";
+		mes "물론 내가 비싸지. 하하하!";
+		next;
+		switch( select( "심부름 해 드리겠습니다.", "저 그런거 하러 온 사람 아닙니다." ) ) {
+		case 1:
+			mes "[아합]";
+			mes "아이고, 고분~고분해서 좋다.";
+			mes "그래. 젊은 사람이 좀 고분고분한 맛이 있어야지.";
+			next;
+			mes "[아합]";
+			mes "다름이 아니라, 내가 식사에 꼭 곁들여 먹어야 하는 맛있는 소스가 있거든.";
+			mes "그게 없으면 식사를 해도 영 먹은 것 같지 않단 말이지…….";
+			next;
+			mes "[아합]";
+			mes "그러니까, 라헬에 가서 소스를 좀 사오게.";
+			mes "머노마트에 가서 오이거트 소스라고 하면 알아들을 거야.";
+			next;
+			mes "[아합]";
+			mes "빨리 안 먹으면 상하니까 <NAVI>[머노마트]<INFO>rachel,135,64,0,101,0</INFO></NAVI>에서 딱 한 병만 사오게.";
+			mes "신선한 걸 먹어야 맛이 있단 말이지.";
+			changequest 16562,16563;
+			close2;
+			navigateto("rachel",135,64);
+			end;
+		case 2:
+			end;
+		}
+	}
+	mes "[아합]";
+	mes "회의에서는 초한 귀기여 으려고 애쓰고 있다.";
+	mes "그랬더니 청년들 눈빛도 부드러워지더군...";
+	next;
+	mes "[아합]";
+	mes "날이한 게 아니라 태도를 이한 거라는 점을 조금 할 것 같기도 하고, 세상이 바꾸고 있구만. 바꾸지 않는 은이는 데가 없어.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16562) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16564) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16565) == 1" );
+	end;
+}
+
+// Quest: Ahab's Request. Step 5.
+rachel,135,64,3	script	가게 주인#ep18	4_M_RACHMAN2,{
+	if (isbegin_quest(16563) == 1) {
+		mes "[가게 주인]";
+		mes "어서오세요, 식료품점 머노마트입니다.";
+		mes "어떤 재료를 찾으시나요?";
+		next;
+		if (select( "오비러거 소스", "오비거트 소스", "오이거트 소스", "오이거요 소스" ) != 3) {
+			mes "[가게 주인]";
+			mes "으음? 그런 소스는 없는데.";
+			mes "아예 이름을 들어본 적이 없는 소스인데요?";
+			close;
+		}
+		mes "[가게 주인]";
+		mes "아~ 오이거트 소스! 어디 보자…… 여기 있네.";
+		mes "이 소스에는 오이랑 요거트가 들어가서 아주 시원하고 빵에 올려 먹으면 맛있지요.";
+		next;
+		mes "[가게 주인]";
+		mes "몇 개나 드릴까? 한 개? 여기 있습니다.";
+		mes "서늘한 곳에 보관하시고 밀봉을 뜯은 다음에는 빨리 드세요.";
+		changequest 16563,16564;
+		close;
+	}
+	mes "[가게 주인]";
+	mes "어서오세요. 식료품점 머노마트입니다. 라헬 최고의 식료품점입죠. 네.";
+	next;
+	mes "[가게 주인]";
+	mes "웬만한 식당에서는 다 저희 재료 쓴다니까요.";
+	mes "가져가서 간편하게 데우고 익히고 튀기기만 하시면 출한 요리가 뚝딱!";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16563) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Collecting Folklore. Step 1 + 5 (final).
+wolfvill,61,170,5	script	민속학자 구드라#ep18	4_F_SHABBY,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(16554) ) {
+	case 0:
+		if ((isbegin_quest(16551)+isbegin_quest(16552)+isbegin_quest(16553)) == 0) {
+			select( "학자님, 뭘 하고 계세요?" );
+			mes "[민속학자 구드라]";
+			mes "오, 오오.";
+			mes "……제가 학자로 보이십니까?";
+			next;
+			select( "학자님이 아니세요?" );
+			mes "[민속학자 구드라]";
+			mes "아뇨! 저 학자 맞습니다. 학자입니다.";
+			mes "외부에서 오신 분이 곧바로 저를 학자로 봐 주시다니, 기뻐서 말입니다.";
+			next;
+			mes "[민속학자 구드라]";
+			mes "흠, 흠. 뭘 하고 있느냐 물으셨습니까.";
+			mes "저는 채록한 이야기를 정리하고 있습니다. ";
+			next;
+			mes "[민속학자 구드라]";
+			mes "우리들에게 전해 내려오는 신화와 구전동화를 모으는 일입니다.";
+			mes "원주민들의 소중한 문화적 재산을 지키는 일이기도 합니다.";
+			next;
+			mes "[민속학자 구드라]";
+			mes "이 이야기들이 소실되지 않고 후대에 전달될 수 있도록, 묶어서 책으로 펴낼 것입니다.";
+			next;
+			mes "[민속학자 구드라]";
+			mes "흥미롭게 들어 주시는 듯합니다만.";
+			mes "……이 일에 관심이 있으십니까?";
+			next;
+			switch( select( "관심있다.", "관심없다." ) ) {
+			case 1:
+				mes "[민속학자 구드라]";
+				mes "관심이 있으시다는 건 도와줄 의향이 있으시다는 의미입니까?";
+				mes "일손은 언제나 필요합니다. 도와주시면 기쁘겠습니다.";
+				next;
+				mes "[민속학자 구드라]";
+				mes "글은 쓰실 줄 아십니까? 좋습니다.";
+				mes "마을 주민들에게서 이야기를 채록해 와 주십시오.";
+				next;
+				mes "[민속학자 구드라]";
+				mes "마을 어린이와 청년 한 명, 할머님 한 분께 이야기를 듣기로 약속을 해 두었습니다.";
+				next;
+				mes "[민속학자 구드라]";
+				mes "긴 이야기라 하루에 다 들을 수는 없을 거라고 하니, 조금 긴 호흡으로 도와주셔야 합니다.";
+				mes "여기, 채록용 수첩을 드리겠습니다.";
+				next;
+				mes "[민속학자 구드라]";
+				mes "어린이의 이름은 디나르입니다. 청년은 아미라라고 하는 여성입니다.";
+				mes "그 다음은 샤니나 할머니께 가서 이야기를 듣고 적어 오시면 됩니다.";
+				setquest 16551;
+				setquest 16552;
+				setquest 16553;
+				getitem 1000408,1;	// Ep18_Recording_Note
+				close;
+			case 2:
+				end;
+			}
+			end;
+		}
+		if (countitem(1000408) < 1) {
+			getitem 1000408,1;	// Ep18_Recording_Note
+		}
+		mes "[민속학자 구드라]";
+		mes "마을 어린이와 청년 한 명, 할머님 한 분께 이야기를 듣기로 약속을 해 두었습니다.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "긴 이야기라 하루에 다 들을 수는 없을 거라고 하니, 조금 긴 호흡으로 도와주셔야 합니다.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "어린이의 이름은 디나르입니다. 청년은 아미라라고 하는 여성입니다.";
+		mes "그 다음은 샤니나 할머니께 가서 이야기를 듣고 적어 오시면 됩니다.";
+		close;
+	case 1:
+		mes "[민속학자 구드라]";
+		mes "디나르와 아미라, 샤니나 할머니께 이야기를 채록해 오셨습니까?";
+		mes "어떤 이야기일지 두근거립니다. 어서 수첩을 보여주십시오.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "으흠, 흠…… 이건 지금 아이들에게 들려줄 수는 없는 동화입니다.";
+		mes "지금 기준으로는 받아들일 수 없는 차별적인 고정관념이 녹아 있습니다.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "아, 오해 마십시오. 어린이들에게 들려줄 수 없을 뿐, 저에게는 훌륭한 자료입니다.";
+		mes "이건 어느 분께 들은 이야기입니까?";
+		next;
+		mes "[민속학자 구드라]";
+		mes "샤니나 할머니께서 들려 주신 이야기란 말씀이십니까.";
+		mes "할머니께서 어릴 때 들으며 자라신 이야기라…….";
+		next;
+		mes "[민속학자 구드라]";
+		mes "이건 제가 잘 읽고, 정리하도록 하겠습니다.";
+		mes "앞으로도 샤니나 할머니께 이야기를 받아 와 주십시오.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "내일 다시 오셔서 이 이야기의 다음 부분을 받아적어 주시면 좋겠습니다.";
+		mes "잘 부탁드립니다. 이건 오늘 일해 주신 수당입니다.";
+		delitem 1000408,1;	// Ep18_Recording_Note
+		completequest 16554;
+		setquest 16559;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		mes " ";
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		close;
+	case 2:
+		break;
+	}
+	switch( checkquest(16559,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[민속학자 구드라]";
+		mes "생각 같아서야 오늘 안에 모든 이야기를 다 듣고 싶지만..... 그래서는 모험가님도 사람들도 지치시겠습니다.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "남은 하룻동안 푹 쉬시고, 새벽이 지난 뒤에 다시 와 주십시오.";
+		mes "저는 그동안 모아 주신 이야기를 정리하고 분석하겠습니다.";
+		close;
+	case 2:
+		erasequest 16559;
+		break;
+	}
+	switch( isbegin_quest(16558) ) {
+	case 0:
+		if ((isbegin_quest(16555)+isbegin_quest(16556)+isbegin_quest(16557)) == 0) {
+			mes "[민속학자 구드라]";
+			mes "지난 번은 감사했습니다.";
+			mes "오늘도 이야기 녹취를 부탁드리겠습니다.";
+			next;
+			mes "[민속학자 구드라]";
+			mes "디나르와 아미라, 샤니나 할머니께 가서 이야기를 듣고 적어 주십시오.";
+			mes "여기 채록 수첩을 드리겠습니다.";
+			next;
+			if (select( "다녀오겠다.", "지금은 어렵다." ) == 2)
+				end;
+			mes "[민속학자 구드라]";
+			mes "언제나 기꺼이 일을 맡아 주셔서 감사합니다.";
+			mes "이 은혜는 좋은 이야기책을 만듦으로 갚도록 하겠습니다.";
+			next;
+			mes "[민속학자 구드라]";
+			mes "아, 물론 오늘 치 일당도 챙겨드릴 겁니다.";
+			mes "그것도 중요하시지 않습니까. 저도 알고 있습니다.";
+			setquest 16555;
+			setquest 16556;
+			setquest 16557;
+			getitem 1000408,1;	// Ep18_Recording_Note
+			close;
+		}
+		if (countitem(1000408) < 1) {
+			getitem 1000408,1;	// Ep18_Recording_Note
+		}
+		break;
+	case 1:
+		if (countitem(1000408) < 1) {
+			getitem 1000408,1;	// Ep18_Recording_Note
+		}
+		mes "[민속학자 구드라]";
+		mes "디나르와 아미라, 샤니나 할머니께 이야기를 채록해 오셨습니까?";
+		mes "어떤 이야기일지 두근거립니다. 어서 수첩을 보여주십시오.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "으흠, 흠…… 이건 지금 아이들에게 들려줄 수는 없는 동화입니다.";
+		mes "지금 기준으로는 받아들일 수 없는 차별적인 고정관념이 녹아 있습니다.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "하지만 그런 점까지 합해서 모두 연구 자료입니다.";
+		mes "과거의 시대상이 동화에 녹아있다는 점, 참 재미있지 않습니까?";
+		next;
+		mes "[민속학자 구드라]";
+		mes "이건 제가 잘 읽고, 정리하도록 하겠습니다.";
+		mes "앞으로도 샤니나 할머니께 이야기를 받아 와 주십시오.";
+		next;
+		mes "[민속학자 구드라]";
+		mes "내일 다시 오셔서 이 이야기의 다음 부분을 받아적어 주시면 좋겠습니다.";
+		mes "잘 부탁드립니다. 이건 오늘 일해 주신 수당입니다.";
+		delitem 1000408,1;	// Ep18_Recording_Note
+		erasequest 16555;
+		erasequest 16556;
+		erasequest 16557;
+		erasequest 16558;
+		setquest 16559;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close;
+	case 2:	// shouldn't happen
+		break;
+	}
+	mes "[민속학자 구드라]";
+	mes "마을 어린이와 청년 한 명, 할머님 한 분께 이야기를 듣기로 약속을 해 두었습니다.";
+	next;
+	mes "[민속학자 구드라]";
+	mes "긴 이야기라 하루에 다 들을 수는 없을 거라고 하니, 조금 긴 호흡으로 도와주셔야 합니다.";
+	next;
+	mes "[민속학자 구드라]";
+	mes "어린이의 이름은 디나르입니다. 청년은 아미라라고 하는 여성입니다.";
+	mes "그 다음은 샤니나 할머니께 가서 이야기를 듣고 적어 오시면 됩니다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 2 && isbegin_quest(16554) == 0 && isbegin_quest(16551) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16554) == 1" );
+
+	// note: QTYPE_DAILYQUEST to take the quest, QTYPE_QUEST otherwise
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(16554) == 2 && isbegin_quest(16558) == 0 && isbegin_quest(16555) == 0 && (checkquest(16559,PLAYTIME) == -1 || checkquest(16559,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16554) == 2 && isbegin_quest(16558) == 1" );
+	end;
+}
+
+// Quest: Collecting Folklore. Step 2.
+wolfvill,106,224,3	script	디나르#ep18	4_F_DST_CHILD,{
+	if (isbegin_quest(16551) == 1) {
+		mes "[디나르]";
+		mes "제 이야기를 들으러 오셨다구요?";
+		mes "아, 제가 맞아요. 구드라 아줌마랑 약속했어요!";
+		next;
+		mes "[디나르]";
+		mes "흠, 흠. 한 번만 얘기해 드릴 거니까 잘 적어 주세요.";
+		mes "이건 제가 진짜로 겪은 일이에요.";
+		next;
+		select( "구전되는 이야기가 아니고?" );
+		mes "[디나르]";
+		mes "구전이 뭐예요? 아무튼, 집중해서 들어주세요!";
+		mes "옛날, 제가 아직 어릴 때 일이에요.";
+		next;
+		select( "지금도 어린데……" );
+		mes "[디나르]";
+		mes "어허, 자꾸 말 끊으신다!";
+		mes "회색늑대 숲에서 만난 회색늑대 중에, 우두머리로 보이는 늑대가 있었어요……. ";
+		completequest 16551;
+		if (isbegin_quest(16552) == 2 && isbegin_quest(16553) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16554;
+		}
+		close;
+	}
+	if (isbegin_quest(16555) == 1) {
+		mes "[디나르]";
+		mes "오늘도 제 이야기를 들으러 오셨군요!";
+		mes "구드라 아줌마가 나중에 책으로 만들어 준다고 했어요.";
+		next;
+		mes "[디나르]";
+		mes "음……, 저번에 어디까지 얘기했지요?";
+		mes "사파이어 눈동자를 가진 용이 보랏빛 요정과 만나는 장면이었지요?";
+		next;
+		mes "[디나르]";
+		mes "보랏빛 요정은 사실 요정들 중 가장 뛰어난 한 명이었는데, 이걸 어떻게 증명했냐면…….";
+		completequest 16555;
+		if (isbegin_quest(16557) == 2 && isbegin_quest(16556) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16558;
+		}
+		close;
+	}
+	mes "[디나르]";
+	mes "재미있는 이야기 읽는 거 너무 좋아요.";
+	mes "읽고 다음 이야기를 상상하는 건 더 좋고요!";
+	next;
+	mes "[디나르]";
+	mes "주인공들은, 내 마음속에서 살아 움직여요.";
+	mes "나는 그 주인공들을 그냥 연극 보듯이 구경하고만 있으면 돼요.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16551) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16555) == 1" );
+	end;
+}
+
+// Quest: Collecting Folklore. Step 3.
+wolfvill,180,204,3	script	아미라#ep18	4_F_DESERT,{
+	if (isbegin_quest(16552) == 1) {
+		mes "[아미라]";
+		mes "구드라 언니에게 부탁을 받고 온 사람이 당신이야?";
+		mes "언니가 이상한 부탁을 했지. 알고 있는 옛날…… 이야기를 들려 달라고.";
+		next;
+		mes "[아미라]";
+		mes "아무튼 나는 우리가 회색늑대 숲에 오기 전에 돌아가신 할아버지께 들은 이야기를 말해 주기로 약속했어.";
+		next;
+		mes "[아미라]";
+		mes "들어줄 준비 됐어? 자, 천천히 이야기해 줄게.";
+		mes "세상에는 우리가 아는 것보다 훨씬 많은 신들이 계신데…….";
+		completequest 16552;
+		if (isbegin_quest(16551) == 2 && isbegin_quest(16553) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16554;
+		}
+		close;
+	}
+	if (isbegin_quest(16556) == 1) {
+		mes "[아미라]";
+		mes "오늘도 구드라 언니 심부름 왔구나.";
+		mes "이런 이야기를 어디에 쓰려고 모으는 걸까?";
+		next;
+		mes "[아미라]";
+		mes "아무튼 다음 이야기를 들려 줄게.";
+		mes "이것도 우리 할아버지가 해 주신 이야기인데, 어떤 신들은 아직도…….";
+		next;
+		mes "[아미라]";
+		mes "……그래서, 음, 이름이 뭐였더라. 잘 기억이 안 나는데, 아무튼 중요한 건 말이야…….";
+		completequest 16556;
+		if (isbegin_quest(1655) == 2 && isbegin_quest(16557) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16558;
+		}
+		close;
+	}
+	mes "[아미라]";
+	mes "할아버지가 그러셨어. 우리의 신들을 잊지 않는 건 중요하다고.";
+	mes "그래서 이 많은 이야기를 나에게 들려주시는 거라고.";
+	next;
+	mes "[아미라]";
+	mes "그렇게 많은 이야기를 들었는데 지금은 까먹은 이야기도 있어…….";
+	mes "구드라 언니가 책으로 만들어 주면, 이제 잊지 않을 거야.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16552) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16556) == 1" );
+	end;
+}
+
+// Quest: Collecting Folklore. Step 4.
+wolfvill,154,184,5	script	샤니나#ep18	4_F_DST_GRAND,{
+	if (isbegin_quest(16553) == 1) {
+		mes "[샤니나]";
+		mes "아, 구드라의 심부름이니? 옛날 이야기를 들으러 왔댔지?";
+		mes "이야기 해줄게. 아주 오래된 이야기, 우리 할머니가 내게 해주시던 이야기라 취향은 아닐지도 모르지만.";
+		next;
+		mes "[샤니나]";
+		mes "폐가 되지 않느냐고? 걱정 마렴. 소일거리가 돼서 즐겁구나.";
+		next;
+		mes "[샤니나]";
+		mes "그럼, 옛날에 아주 오래된 옛날에. 한 대장장이가 살고 있었습니다…….";
+		completequest 16553;
+		if (isbegin_quest(16551) == 2 && isbegin_quest(16552) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16554;
+		}
+		close;
+	}
+	if (isbegin_quest(16557) == 1) {
+		mes "[샤니나]";
+		mes "오늘도 구드라의 심부름을 왔구나. 부지런하기도 하지.";
+		mes "내가 해주는 이야기가 괜찮다고 하던?";
+		next;
+		mes "[샤니나]";
+		mes "구드라에게 도움이 된다면 기쁘네.";
+		mes "어디까지 이야기했더라? 오늘은 새 이야기를 해줄 차례던가?";
+		next;
+		mes "[샤니나]";
+		mes "아, 저번 이야기가 아직 끝이 안 났던가. 기억이 가물가물해서.";
+		mes "대장장이가 하늘에서 내려온 부엉이를 타고 하늘로 올라가는 데까지 들었다고?";
+		next;
+		mes "[샤니나]";
+		mes "참, 기억력이 좋기도 하지.";
+		mes "그럼 다음 부분을 이야기해 주마. 가엾은 천녀는 그만…….";
+		completequest 16557;
+		if (isbegin_quest(16555) == 2 && isbegin_quest(16556) == 2) {
+			npctalk "세 사람의 이야기를 모두 적었다. 구드라에게 돌아가자.", "", bc_self;
+			setquest 16558;
+		}
+		close;
+	}
+	mes "[샤니나]";
+	mes "할머니는 이제 사는 데 별로 재미있는 게 없는데, 어린 아이들에게 옛날 이야기를 해주는 건 재밌구나.";
+	next;
+	mes "[샤니나]";
+	mes "와서 들어주는 아이가 있어서 아주 고마워. 복 받을 게야.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16553) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16557) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Purifying Water. Step 1 + 4 (final).
+wolfvill,103,230,3	script	부단#ep18	4_M_RACHMAN1,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8693) ) {
+	case 0:
+		if (isbegin_quest(8691) == 1 || isbegin_quest(8692) == 1) {
+			mes "[부단]";
+			mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+			mes "적당히 몇 마디 하고 사 오면 돼.";
+			mes "부탁할게.";
+			close;
+		}
+		// isbegin_quest(8691) == 0
+		mes "[부단]";
+		mes "듣자하니 우리 일을 이것저것 참견하며...";
+		mes "쉽게 할 방법을 가르쳐 준다던데.";
+		mes "나도 좀 도와줄 수 있을까?";
+		next;
+		mes "[부단]";
+		mes "알다시피 우리는 쉽게 라헬까지 들어갈 수 없어.";
+		mes "그러니까 이건 정말 모험가, 당신이 도와줬으면 하는 일이야.";
+		next;
+		mes "[부단]";
+		mes "라헬의 세스룸니르 신전에서만 만드는 물건을 좀 사다줬으면 하거든.";
+		mes "보다시피 이 근방은 화산재로, 라헬 근방은 모래 때문에 깨끗한 물을 쉽게 구할 수가 없어.";
+		next;
+		mes "[부단]";
+		mes "그래서 개발된 것이 정수용 성물인데...";
+		mes "이게 말야, 정말로 뭔가 알 수 없는 마법적 처리를 통해 물 속의 더러운 것들을 흡수해.";
+		mes "온갖 잡다한 마력까지도.";
+		next;
+		mes "[부단]";
+		mes "이 숲의 수상한 마력이 깃들어 있는 유황온천수까지도 식수로 바꿀 수 있어.";
+		mes "하지만 마법이 오래가지 않아서... 필요할 때 사와야 하지.";
+		next;
+		mes "[부단]";
+		mes "무슨 말인지 알겠지.";
+		mes "도움을 요청할 수 있을까?";
+		mes "어차피 우리가 간들... 우리에게 팔지도 않아.";
+		next;
+		mes "[부단]";
+		mes "라헬에 들른 상단주인 척 슬쩍 1개 사와서, 저기 있는 물통에 넣어 줘.";
+		mes "그럼 완전히 정화된 깨끗한 물을 얻을 수 있을 거야.";
+		mes "그걸 내게 가져다 주면 돼.";
+		next;
+		switch( select( "어려울 것 없지", "어렵겠는데" ) ) {
+		case 1:
+			mes "[부단]";
+			mes "구구절절 말이 길었는데 짧은 대답 고마워.";
+			next;
+			setquest 8691;
+			mes "[부단]";
+			mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+			mes "적당히 몇 마디 하고 사 오면 돼.";
+			mes "부탁할게.";
+			close;
+		case 2:
+			end;
+		}
+	case 1:
+		if (countitem(1000411) < 1) {
+			mes "[부단]";
+			mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+			mes "적당히 몇 마디 하고 사 오면 돼.";
+			mes "부탁할게.";
+			close;
+		}
+		delitem 1000411,1;	// Ep18_Purified_Bucket
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		completequest 8693;
+		setquest 8694;
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		next;
+		mes "[부단]";
+		mes "식수 확보를 도와 줘서 고마워. 그럼 이걸 끓여서 식사 준비를 해야겠다.";
+		mes "혹시 내일도 여기 머무르고, 시간이 있다면 라헬까지 다녀오는 길을 또 부탁해도 될까?";
+		next;
+		select( "그러지", "내일은 바쁠 것 같아서" );
+		mes "[부단]";
+		mes "대답이 빠른데?";
+		mes "먼 길을 보내서 미안해. 하지만 애들에게는 안전한 걸 먹이고 싶거든. 고마워.";
+		close;
+	case 2:
+		break;
+	}
+
+	// daily
+	switch( checkquest(8694,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[부단]";
+		mes "간만에 식수가 좀 풍족해.";
+		close;
+	case 2:
+		erasequest 8694;
+		break;
+	}
+	if (isbegin_quest(8695) == 1 || isbegin_quest(8696) == 1) {
+		mes "[부단]";
+		mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+		mes "적당히 몇 마디 하고 사 오면 돼.";
+		mes "부탁할게.";
+		close;
+	}
+	if (isbegin_quest(8697) == 1) {
+		if (countitem(1000411) < 1) {
+			mes "[부단]";
+			mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+			mes "적당히 몇 마디 하고 사 오면 돼.";
+			mes "부탁할게.";
+			close;
+		}
+		delitem 1000411,1;	// Ep18_Purified_Bucket
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		// erasequest 8695;
+		// erasequest 8696;
+		erasequest 8697;
+		setquest 8694;
+		getexp 18252408,2000000;
+		mes "[부단]";
+		mes "식수 확보를 도와 줘서 고마워. 그럼 이걸 끓여서 식사 준비를 해야겠다.";
+		mes "혹시 내일도 여기 머무르고, 시간이 있다면 라헬까지 다녀오는 길을 또 부탁해도 될까?";
+		next;
+		select( "그러지", "내일은 바쁠 것 같아서" );
+		mes "[부단]";
+		mes "대답이 빠른데?";
+		mes "먼 길을 보내서 미안해. 하지만 애들에게는 안전한 걸 먹이고 싶거든. 고마워.";
+		close;
+	}
+	mes "[부단]";
+	mes "모험가, 또 왔구나.";
+	mes "혹시 라헬까지 다녀올 여유가 있어?";
+	next;
+	mes "[부단]";
+	mes "라헬에 들른 상단주인 척 슬쩍 1개 사와서, 저기 있는 물통에 넣어 줘.";
+	mes "그럼 완전히 정화된 깨끗한 물을 얻을 수 있을 거야.";
+	mes "그걸 내게 가져다 주면 돼.";
+	next;
+	if (select( "어려울 것 없지", "어렵겠는데" ) == 2)
+		end;
+	mes "[부단]";
+	mes "구구절절 말이 길었는데 짧은 대답 고마워.";
+	next;
+	setquest 8695;
+	mes "[부단]";
+	mes "신전 앞에 가면 아마 그 날 선행을 위해 신도가 나와 있을 거야.";
+	mes "적당히 몇 마디 하고 사 오면 돼.";
+	mes "부탁할게.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8691) == 0 && isbegin_quest(8692) == 0 && isbegin_quest(8693) == 0 && isbegin_quest(11724) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8693) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8693) == 2 && (checkquest(8694,PLAYTIME) == -1 || checkquest(8694,PLAYTIME) == 2) && isbegin_quest(8695) == 0 && isbegin_quest(8696) == 0 && isbegin_quest(8697) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8697) == 1" );
+	end;
+}
+
+// Quest: Purifying Water. Step 2.
+rachel,103,141,5	script	성물 판매원#ep18	4_M_DESERT,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (isbegin_quest(8691) == 1 || isbegin_quest(8692) == 1 && countitem(1000410) < 1) {
+		mes "[성물 판매원]";
+		mes "오늘치의 정수용 성물입니다~";
+		mes "다 팔리기 전에 빨리 오세요~";
+		next;
+		mes "[성물 판매원]";
+		mes "으응?";
+		mes "무슨 일이시죠? 외지인?";
+		next;
+		select( "상단 이동에 필요해서" );
+		mes "[성물 판매원]";
+		mes "아아~ 소문 듣고 오셨구나~";
+		mes "간단히 설명할게요~";
+		mes "대량의 오염된 물을 한번에 정화해 주는 축성된 정화용 성물인데요~";
+		mes "이게 말이죠~";
+		next;
+		mes "[성물 판매원]";
+		mes "신전에서 만드는 건데~";
+		mes "이제는 수로 정비가 잘 되어서 그렇게 수요가 많지는 않지만~";
+		mes "소량은 만들고 있어요~";
+		mes "재료도 그렇고 까다로워서~";
+		next;
+		mes "[성물 판매원]";
+		mes "며칠 내로 써야 해서 대량구매도 안 되고~";
+		mes "하지만~ 한번 쓸 때 정화할 수 있는 물은 꽤 많으니까~";
+		next;
+		mes "[성물 판매원]";
+		mes "목적지까지 가는 도중에 물이 다 떨어졌을 때 적당한 수분 보급처가 있다면~";
+		mes "물을 들고 가는 것보다 나을 수도 있죠~";
+		next;
+		mes "[성물 판매원]";
+		mes "하지만 한 번 끓여 드셔야 돼요~";
+		mes "냄새가 난다는 분들이 계셔서~";
+		next;
+		mes "[성물 판매원]";
+		mes "550제니입니다~";
+		next;
+		switch( select( "구매한다", "구매하지 않는다" ) ) {
+		case 1:
+			if (Zeny < 550) {
+				mes "[성물 판매원]";
+				mes "You don't have enough Zeny.";
+				close;
+			}
+			Zeny -= 550;
+			if (isbegin_quest(8691) == 1) {
+				erasequest 8691;
+				setquest 8692;
+			}
+			getitem 1000410,1;	// Ep18_Water_Filter
+			mes "[성물 판매원]";
+			mes "물건은 여기 있습니다~";
+			mes "프레이야 여신님의 가호가 있기를~";
+			close2;
+			navigateto("wolfvill",104,234);
+			end;
+		case 2:
+			end;
+		}
+	}
+	if (isbegin_quest(8695) == 1 || isbegin_quest(8696) == 1 && countitem(1000410) < 1) {
+		mes "[성물 판매원]";
+		mes "오늘치의 정수용 성물입니다~";
+		mes "다 팔리기 전에 빨리 오세요~";
+		next;
+		mes "[성물 판매원]";
+		mes "아아, 지난번에 상단 때문에 다녀가신 분이죠?";
+		mes "생각보다 빨리 다시 오셨네요. 장사가 잘 되시나 봐요~";
+		next;
+		switch( select( "성물을 산다", "설명을 듣는다", "취소" ) ) {
+		case 1:
+			break;
+		case 2:
+			end;
+		case 3:
+			end;
+		}
+		mes "[성물 판매원]";
+		mes "550제니입니다~";
+		next;
+		if (select( "구매한다", "구매하지 않는다" ) == 2)
+			end;
+		if (Zeny < 550) {
+			mes "[성물 판매원]";
+			mes "You don't have enough Zeny.";
+			close;
+		}
+		Zeny -= 550;
+		if (isbegin_quest(8695) == 1) {
+			erasequest 8695;
+			setquest 8696;
+		}
+		getitem 1000410,1;	// Ep18_Water_Filter
+		mes "[성물 판매원]";
+		mes "물건은 여기 있습니다~";
+		mes "프레이야 여신님의 가호가 있기를~";
+		close;
+	}
+	mes "[성물 판매원]";
+	mes "오늘 판매분은 다 떨어졌어요~";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8691) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8695) == 1" );
+	end;
+}
+
+// Quest: Purifying Water. Step 3.
+wolfvill,104,235,0	script	식수용 물통#ep1801	CLEAR_NPC,{
+	if (isbegin_quest(8692) == 1 || isbegin_quest(8696) == 1) {
+		if (countitem(1000410) > 0) {
+			if (checkweight(1000411,1) == 0) {
+				mes "- Wait a minute !! -";
+				mes "- Currently you're carrying -";
+				mes "- too many items with you. -";
+				mes "- Please try again -";
+				mes "- after you loose some weight. -";
+				close;
+			}
+			specialeffect EF_BLUECASTING;
+			specialeffect EF_STOPEFFECT;
+			specialeffect EF_HEALSP;
+			specialeffect EF_SMOKE;
+			delitem 1000410,1;	// Ep18_Water_Filter
+			getitem 1000411,1;	// Ep18_Purified_Bucket
+			if (isbegin_quest(8692) == 1)
+				changequest 8692,8693;
+			else
+				changequest 8696,8697;
+			mes "비교적 깨끗한 물이라고 생각했는데, 성물을 넣자 밝은 빛을 내며 어쩐지 성스러운 느낌이 감돈다.";
+			mes "빛이 가라앉자 척 봐도 물이 깨끗해 보인다.";
+			next;
+			mes "양동이에 덜어서 부단에게 가져가야겠다.";
+			close;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8692) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8696) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Transporting Goods. Step 1 + 3.
+wolfvill,53,234,0	script	#ep18_wp01	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (ep18_1_main < 36)
+		end;
+	cloakoffnpc "하자르#ep18_1", getcharid(0);
+	cloakoffnpc "카밀#ep18_1", getcharid(0);
+	cloakoffnpc "수송용수레#ep18_1", getcharid(0);
+	end;
+}
+
+wolfvill,50,234,6	script	하자르#ep18_1	4_EP18_HAZAR,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(12532) ) {
+	case 0:
+		mes "^0000ff나이든 노인이 젊은 청년을 야단치고있다^000000";
+		next;
+		npctalk "내가 오늘 상행을 떠나야 한다는 말을 했더냐 안했더냐?", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "하셨습니다.", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "그런데 이 수레의 꼴은 뭣인고? 수레바퀴에 금이 가있구나 혹시 네놈이 새 바퀴로 갈아끼웠는데 내 눈이 늙어 보지 못하는것이냐?", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "죄송합니다! 새 바퀴를 급히 찾아봤지만 여분이...", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "상행에 나갈 품목에 가죽이 30포 있어야 하는데. 이 역시 내 눈에 보이지 않는구나. 이것도 내 눈이 문제인 것이냐.", "하자르#ep18_1", bc_self;
+		next;
+		emotion ET_HUK, getnpcid(0,"카밀#ep18_1");
+		npctalk "헉!", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "수레를 끌 우마는 또 어디로 갔는고? 내가 이제 늙어 은퇴해야 할 모양이구나. 수레앞에 아무것도 보이질 않으니.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "죄송합니다 곧 도착할겁니다!!", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "호위무사로 쓸 이는 모집했느냐? 어찌 아무도 보이지 않느냐 설마하니 네놈 혼자 이 수레를 다 이끌 셈이더냐", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "그게... 스승님, 상행 결정이 난 이후로 모집을 해봤지만 아무도 자원하지 않았습니다.", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "상행을 나갈 생각이 없구나 카밀... 무슨 생각을 하고 있는것이냐.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "......", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "상행준비가 소홀한 점에  대해선 나중에 내가 엄중히 따져 물을것이나 일단은 현실적인 이야기부터 하자꾸나.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "거래일자는 이미 잡혔고 상행 수레는 출발해야 한다. 수레바퀴와 모자란 상행품목에 대한 해결을 봐야 할 터인데. 어찌 해결 할 셈이냐 ", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "이... 일단 저는 가죽수량을 맞추는 작업을 하겠습니다! 우마는 사람을 보내뒀으니 곧 준비 될겁니다", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "수레의 바퀴는 어쩔것이냐. 당장 몇 걸음도 못가서 무너지게 생겼구나.", "하자르#ep18_1", bc_self;
+		next;
+		select( "끼어든다", "무시한다" );
+		npctalk "음? 아까부터 신경쓰이게 왔다갔다 하더니 우리에게 무슨 볼 일이라도 있소? 우린 저 수레바퀴때문에 골치가 아픈참이오 방해하지 말고...", "하자르#ep18_1", bc_self;
+		next;
+		select( "수리 방법을 설명한다" );
+		npctalk "이거. 질긴 끈으로 바퀴를 보강하면 어떻게든 굴러 가겠는데요?", "", bc_self;
+		next;
+		npctalk "아니 이사람. 수레바퀴가 무슨 나무 의자 같은것도 아니고... 아니. 가능할 수도 있나?", "하자르#ep18_1", bc_self;
+		next;
+		select( "시도라도 해보는게 좋지 않습니까?", "역시 무리다" );
+		npctalk "모험가님. 이 상행은 제가 책임지고 있습니다. 만약 모험가님이 수레바퀴만 해결해주신다면 저희 일족의 비전으로 모험가님에게 적절한 경험치를 지급해드릴겁니다", "카밀#ep18_1", bc_self;
+		next;
+		if (select( "거래 성립!", "역시 안되겠는걸" ) == 2)
+			end;
+		npctalk "감사합니다. 바로 여기 이 수레를 좀 봐주시겠습니까?", "카밀#ep18_1", bc_self;
+		specialeffect 1090, AREA, "수송용수레#ep18_1";
+		next;
+		npctalk "이 수레의 바퀴를 상행에 사용해도 될만큼 보강해주시면 감사하겠습니다. 전 상행에 사용될 가죽을 다시 확인하러 가야해서 잠시 자리를 비우겠습니다.", "카밀#ep18_1", bc_self;
+		setquest 12532;
+		emotion ET_HUK, getnpcid(0,"카밀#ep18_1");
+		cloakonnpc "카밀#ep18_1", getcharid(0);
+		close;
+	case 1:
+		end;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(12533) ) {
+	case 0:
+		mes "^0000ff하자르가 우호적인 눈빛으로 쳐다본다^000000";
+		next;
+		progressbar_npc "FFFF00",2;
+		npctalk "호오... 그대는 꽤 신기한 재주를 가지고 있구려.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "그나저나 카밀 이녀석은 아직도 정리가 끝나지 않은겐가", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "어르신 상행에 필요한 물목을 모두 확인했습니다. 이제 수레만 확인하고 출발하면...", "카밀#ep18_1", bc_self;
+		next;
+		npctalk "수레의 바퀴는 여기 모험가양반이 처리해주셨다. 감사 인사를 드리도록 해라.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "아 정말 고맙습니다 모험가님. 상행에서 복귀하면 꼭 한번 찾아뵙도록 하지요. 이름을 알려주시겠습니까?", "카밀#ep18_1", bc_self;
+		next;
+		select( "제 이름은 " + strcharinfo(0) + " 입니다." );
+		select( "갈 길이 멀테니 일단 출발 하시죠." );
+		npctalk "맞는 말씀입니다. 일단 저는 상행을 떠나야겠군요. 복귀후에 꼭 인사 드리겠습니다 " + strcharinfo(0) + " 님. 그럼 다녀오겠습니다 어르신", "카밀#ep18_1", bc_self;
+		next;
+		cloakonnpc "카밀#ep18_1", getcharid(0);
+		cloakonnpc "수송용수레#ep18_1", getcharid(0);
+		npctalk "내 부족한 후인을 도와주셔서 정말 감사를 드리오. 총명한데 생각이 너무 많은 아이라 본의아니게 부끄러운 모습을 보였구려.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "저녀석이 과연 무사히 상행을 잘 마치고 올지 장담을 못하겠소. 내 몸이 조금만 상태가 좋았다면 상행을 이끌었을텐데.", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "" + strcharinfo(0) + " 씨라고 불러도 되겠소? 혹시 여유가 되신다면 이 늙은이의 부탁하나만 더 들어주실 수 있겠소?", "하자르#ep18_1", bc_self;
+		next;
+		select( "말씀하시죠" );
+		npctalk "저 카밀 녀석은 상행을 지휘하는건 처음이라 여러가지로 맘이 놓이지 않는구려. 몬스터의 습격을 잘 피할지도 의문이고. ", "하자르#ep18_1", bc_self;
+		next;
+		npctalk "그래서 말인데, 녀석을 적당히 쫓아가면서 뒤에서 좀 봐주실 수 있겠소? 큰 사례는 못하겠지만 부탁드리오.", "하자르#ep18_1", bc_self;
+		next;
+		if (select( "받아들인다", "거부한다" ) == 2)
+			end;
+		npctalk "고맙소. 정말 고맙소" + strcharinfo(0) + " 씨", "하자르#ep18_1", bc_self;
+		setquest 12533;
+		close;
+	case 1:
+	case 2:
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8692) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12532) == 0 && isbegin_quest(11724) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12533) == 0 && isbegin_quest(12532) == 2" );
+	end;
+}
+
+// Quest: Transporting Goods. Step 2.
+wolfvill,53,234,4	script	수송용수레#ep18_1	4_EP18_WAGON,{
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(12532) == 1) {
+		mes "^0000ff멀쩡해 보이지만 낡은 수레바퀴가 보인다.^000000";
+		next;
+		if (select( "보수작업을 시도한다", "그만둔다" ) == 2)
+			end;
+		progressbar_npc "FFFF00",2;
+		if (countitem(7197) < 1) {
+			mes "수레바퀴를 보강할만한 <ITEM>[재료]<INFO>7197</INFO></ITEM> 가 없습니다.";
+			close;
+		}
+		// note: Tough_Vines not deleted on fail
+		.@r = rand(1,5);
+		if (.@r == 1) {
+			specialeffect EF_REFINEOK;
+			mes "^0000ff수리 성공!^000000";
+			delitem 7197,1;	// Tough_Vines
+			removespecialeffect 1090;
+			completequest 12532;
+			close;
+		}
+		specialeffect EF_REFINEFAIL;
+		mes "^0000ff아직 제대로 보강이 되지 않은 것 같다. 재료는 사라지지 않았으니 계속 시도해보자^000000";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12532) == 1" );
+	end;
+}
+
+wolfvill,56,234,4	script	카밀#ep18_1	4_EP18_KAMIL,{
+	mes "^0000ff하자르에게 혼나느라 정신이 없어보인다^000000";
+	close;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Quest: Transporting Goods. Step 4.
+gw_fild01,115,130,0	script	#ep18_wp02	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(12533) == 1)
+		cloakoffnpc "수송용수레#ep18_2", getcharid(0);
+	end;
+}
+
+gw_fild01,115,130,4	script	수송용수레#ep18_2	4_EP18_WAGON,{
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(12533) == 1) {
+		mes "^0000ff카밀이 이끌고 떠난 수레가 분명하다. 사방에 흩어진 화물의 상태를 보아 좋지 않은 일이 생긴것이 분명하다. 카밀을 찾아봐야겠다^000000";
+		completequest 12533;
+		setquest 12534;
+		close;
+	}
+	mes "^0000ff화물은 이미 대부분 분실된 듯하다.^000000";
+	close;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12533) == 1" );
+	end;
+}
+
+// Quest: Transporting Goods. Step 5.
+gw_fild01,202,102,0	script	#ep18_wp03	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(12534) == 1) {
+		cloakoffnpc "#ep18_2_mon", getcharid(0);
+		cloakoffnpc "카밀#ep18_2", getcharid(0);
+		end;
+	}
+	if (isbegin_quest(12534) == 2 && isbegin_quest(12535) == 0) {
+		cloakoffnpc "카밀#ep18_2", getcharid(0);
+		end;
+	}
+	end;
+}
+
+gw_fild01,205,102,4	script	#ep18_2_mon	EP18_GREY_WOLF,{
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(12534) != 1)
+		end;
+	.@wolf_hp = 1000;
+	.@camille_hp = 1000;
+
+	mes "^0000ff상황이 그리 좋아보이지 않는다^000000";
+	next;
+	npctalk "으르르르...", "#ep18_2_mon", bc_self;
+	next;
+	npctalk "제길", "카밀#ep18_2", bc_self;
+	next;
+	mes "^0000ff쓰러질것 같다. 어딜 공격해야할지 시선도 두지못해 눈알만 사정없이 굴리고있다. 아마 1초도 버티지 못하고 살살 녹는 늑대밥이 되고 말 것이다^000000";
+	while(1) {
+		next;
+		switch( select( "카밀에게 전투 조언을 한다", "직접 늑대를 처리한다", "모른척 지나간다" ) ) {
+		case 1:
+			mes "^0000ff카밀에게 늑대의 어디를 공격하라고 할 것인가?^000000";
+			playbgm "182";
+			while(1) {
+				mes "늑대의 생명력 - ^ff0000" + .@wolf_hp + "^000000";
+				mes "카밀의 생명력 - ^0000ff" + .@camille_hp + "^000000";
+				next;
+				switch( select( "소심한 공격(확률높음)", "적당한 공격(확률보통)", "큰 공격(확률낮음)", "회심의 일격(확률희박)", "일단 도망치게 한다" ) ) {
+				case 1:
+					.@wolf_chance = 65;	// 65% chance the wolf is being hit / 35% camille
+					.@wolf_damage = rand(25,50);
+					.@camille_damage = rand(45,93);
+					break;
+				case 2:
+					.@wolf_chance = 42;
+					.@wolf_damage = rand(32,58);
+					.@camille_damage = rand(37,72);
+					break;
+				case 3:
+					.@wolf_chance = 30;
+					.@wolf_damage = rand(45,70);
+					.@camille_damage = rand(34,53);
+					break;
+				case 4:
+					.@wolf_chance = 25;
+					.@wolf_damage = rand(66,80);
+					.@camille_damage = rand(26,50);
+					break;
+				case 5:
+					mes "분하지만 지금 상태론 승산이 없다. 정비하고 다시 시도해보자";
+					close;
+				}
+				if (.@wolf_chance > rand(100)) {
+					.@wolf_hp = .@wolf_hp - .@wolf_damage;
+					npctalk "-" + .@wolf_damage, "#ep18_2_mon", bc_self;
+					npctalk " ", "카밀#ep18_2", bc_self;
+					specialeffect EF_ACIDDEMON, SELF, "#ep18_2_mon";
+					specialeffect EF_HFLIMOON3, SELF, "#ep18_2_mon";
+				}
+				else {
+					.@camille_hp = .@camille_hp - .@camille_damage;
+					npctalk " ", "#ep18_2_mon", bc_self;
+					npctalk "-" + .@camille_damage, "카밀#ep18_2", bc_self;
+					specialeffect EF_ACIDDEMON, SELF, "카밀#ep18_2";
+					specialeffect EF_HFLIMOON3, SELF, "카밀#ep18_2";
+				}
+				if (.@wolf_hp < 1) {
+					mes "^0000ff회색늑대를 물리쳤다.^000000";
+					completequest 12534;
+					cloakonnpc "#ep18_2_mon", getcharid(0);
+					playbgm "183";
+					close;
+				}
+			}
+			break;
+		case 2:
+			mes "^0000ff아니야 이참에 카밀이 스스로 성장하게 옆에서 보조만 하는게 맞을지도....^000000";
+			continue;
+		case 3:
+			mes "^0000ff나중에 다시와서 카밀의 무덤이나 만들어주자.^000000";
+			close;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12534) == 1" );
+	end;
+}
+
+// Quest: Transporting Goods. Step 6.
+gw_fild01,201,102,6	script	카밀#ep18_2	4_EP18_KAMIL,{
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(12534) == 2 && isbegin_quest(12535) == 0) {
+		mes "^0000ff카밀의 몸이 전투후의 흥분으로 가늘게 떨리고 있다.^000000";
+		npctalk "헉...헉... ", "카밀#ep18_2", bc_self;
+		next;
+		select( "꽤 좋은 몸놀림이었다", "형편 없었다. 앞으로 칼은 잡지마라" );
+		npctalk "아닙니다 " + strcharinfo(0) + "님의 지시가 아니었다면 전 꼼짝없이 당했을겁니다.", "카밀#ep18_2", bc_self;
+		next;
+		select( "왜 수레를 버리고 여기까지 왔지?" );
+		npctalk "교역품을 물고 사방으로 흩어지는 놈들을 쫓다보니 그렇게 되었습니다. 다 회수하진 못했지만 그래도 일부는 건졌군요.", "카밀#ep18_2", bc_self;
+		next;
+		npctalk "일단 상행용 수레를 다시 마을로 옮겨야겠습니다. 남은 짐이라도 챙겨들고 죄를 청해야죠.", "카밀#ep18_2", bc_self;
+		next;
+		select( "그냥 사고 아닌가? 죄를 청할정도는..." );
+		npctalk "마을의 몇 개월치 생계를 책임질 식량과 생필품으로 교환할 교역품들이었습니다. 아마 죄가 가볍진 않을겁니다.", "카밀#ep18_2", bc_self;
+		next;
+		select( "교역 책임자에게 너무 가혹하군" );
+		npctalk "애초에 스승님이 말렸지만 상행을 인솔해보고싶다고 고집을 피운게 접니다. 억지로 떠맡은 것도 아니니 제 책임이죠.", "카밀#ep18_2", bc_self;
+		next;
+		npctalk "제가 만약 이곳에서 사망했거나 도망쳤다면 스승님이 책임을 지셔야 할터. 그것은 절대 안될 일입니다.", "카밀#ep18_2", bc_self;
+		next;
+		if (select( "그래 네 일이니 알아서 해라.", "이대로 도망치는건 어때?" ) == 2)
+			end;
+		npctalk "다시한번 도움에 감사드립니다. 전 이제 행렬을 수습해서 다시 복귀해야겠군요. 운명이 인도한다면 다시 만나뵙길...", "카밀#ep18_2", bc_self;
+		setquest 12535;
+		navigateto("wolfvill",79,211);
+		cloakonnpc "카밀#ep18_2", getcharid(0);
+		close;
+	}
+	mes "^0000ff이야기를 제대로 듣지 못하는 상태인 것 같다^000000";
+	close;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12534) == 2 && isbegin_quest(12535) == 0" );
+	end;
+}
+
+wolfvill,76,210,0	script	#ep18_wp03_	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch_:
+	if (isbegin_quest(12531) == 1 || isbegin_quest(12535) == 1) {
+		cloakoffnpc "하자르#ep18_3", getcharid(0);
+		cloakoffnpc "카밀#ep18_3", getcharid(0);
+		cloakoffnpc "입회인#ep18_31", getcharid(0);
+		cloakoffnpc "입회인#ep18_32", getcharid(0);
+		cloakoffnpc "입회인#ep18_33", getcharid(0);
+	}
+	end;
+}
+
+// Quest: Transporting Goods. Step 7 + 12 (final).
+wolfvill,75,214,4	script	하자르#ep18_3	4_EP18_HAZAR,{
+	if (ep18_1_main < 36)
+		end;
+	if (!checkweight(1000405,20)) {
+		mes "^ff0000보유한 물건의 나 무게가 너무 많은 것 같습니다. 한번 토리를 정리해 주세요.^000000";
+		close;
+	}
+	if (isbegin_quest(12535) == 1) {
+		mes "^0000ff늑대마을의 총관과 상단주들의 회의가 열리고 있다.^000000";
+		next;
+		npctalk "모두에게 미안하게 되었구려. 내가 부족하여 제자를 제대로 거두지 못하였소.", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "하자르 그대의 문제가 아니지. 어디까지나 상행을 무리하게 욕심낸 카밀의 문제일 터.", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "아니 제자에게 억지로 상행 경험을 하라고 등을 떠민건 나였소.", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "그게 정말이더냐 카밀? 네 스승님이 억지로 등을 떠민게 맞느냐는 말이다.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "모든 분들께 정말 죄송합니다. 그리고 스승님이 저의 등을 떠민게 아니라 제가 고집을 부렸습니다.", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "내 이럴줄 알았다.어쩐지 하자르가 갑작스레 몸이 불편하다고 할때부터 뭔가 이상했어.", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "카밀 네 이녀석! 지금 무얼 하는것이냐!", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "스승님에게 고집을 부리고. 거기에 제대로 일을 완수하지도 못했습니다. 모든건 저의 잘못입니다.", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "크흠... 흠", "입회인#ep18_31", bc_self;
+		npctalk "에잉~", "입회인#ep18_32", bc_self;
+		npctalk "쯧쯧.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "뭐 전후 사정은 대충 알게된 것 같고. 그럼 이제 사후 처리에 대해 논해야겠지요?", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "이보게들! 어찌 이렇게 급하게 결정을 내리려 하는가!", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "사실 우리도 카밀을 어릴때부터 지켜봐온 입장 아닌가. 사정은 봐주고싶지만.", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "사정이야 그렇지만, 상단은 상단의 규율이 있잖습니까.", "입회인#ep18_33", bc_self;
+		next;
+		emotion ET_HUK, getnpcid(0,"입회인#ep18_31");
+		npctalk "이사람! 상단 규율대로라면 목을 내놔야해! 함부로 떠들 일이 아니야!", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "아니 그건 그렇습니다만... 하아, 이걸 어떻게 해야하나.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "규율에 따르겠습니다. 제가 자초한 일이니 그게 맞는것 같습니다.", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "어허! 카밀 네 이놈! 네놈이 발언할 만한 상황이 아니다!", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "진정들 하시게. 상단의 규율 이야기가 나와서 말인데. 카밀의 처분 근거를 일단 따져보세나.", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "겨울용 예산마련을 위한 피복/가죽류 800kg 분량의 망실. 그리고 망실에 따른 식자재 구입 불발입니다.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "으음... 지금이라도 상단의 수색대를 꾸려서 짐을 찾으면 되지 않나?", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "그렇긴 합니다만. 상단이 상황을 해결하게되면 카밀의 실책은 공식적으로 처분대상이 됩니다.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "그래 지금 마을주민들이나 상단의 실무자들은 아직 이 사실을 몰라. 수색을 보내는 순간 카밀의 죄는 확정이다.", "입회인#ep18_32", bc_self;
+		next;
+		select( "다른 조언을 해본다" );
+		npctalk "상단 외부인이 비공식적으로 화물을 되찾아 반납하면 어떻게 처리됩니까?", "", bc_self;
+		next;
+		npctalk "아니, 그대는 " + strcharinfo(0) + "씨 아니신가.", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "아, 그거 좋은 의견이군요. 외부인이 아무도 모르게 해결해준다면야 이 사건 자체가 없었던 일이 되버립니다.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "상단의 규율은 없는 일을 처벌할 수 없지.", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "" + strcharinfo(0) + "씨. 혹시 그 말은... 우리 상단을 대신해서 분실물을 찾아 주겠다는 말로 받아들여도 되겠는가?", "하자르#ep18_3", bc_self;
+		next;
+		if (select( "제가 한번 해 보겠습니다.", "무슨 농담을 하십니까." ) == 2)
+			end;
+		npctalk "고맙습니다 " + strcharinfo(0) + "님. 제가 앞장서서 길잡이를 하겠습니다.", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "아니 그건 안된다. 이 사건은 없던 사건이 되어야 해. 카밀 네가 나서선 안돼.", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "" + strcharinfo(0) + "님이라 하셨소? 우리 저 못난 카밀녀석을 위해 나서 주신다니 제가 대신 감사인사 드리겠소.", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "저도 감사인사 드리리다. 저 녀석이 좀 어수룩한 면은 있어도 이런 일로 목숨을 잃어선 안되는 인재거든.", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "뭐라 말씀드리기 힘들 정도로 감사하외다. 뭐 하느냐 카밀 대략적인 위치라도 알려 드리거라.", "하자르#ep18_3", bc_self;
+		next;
+		emotion ET_HUK, getnpcid(0,"입회인#ep18_31");
+		sleep2 400;
+		npctalk "네! 알겠습니다.", "카밀#ep18_3", bc_self;
+		next;
+		mes "^ff0000카밀로부터 강탈당한 화물들이 어디로 향했는지에 대해 대략적인 정보를 입수했다^000000";
+		completequest 12535;
+		setquest 12536;
+		setquest 12537;
+		setquest 12538;
+		setquest 12539;
+		next;
+		npctalk "그럼 " + strcharinfo(0) + "씨에게 모든걸 걸겠소", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "음 이 회의 자체는 없었던 회의요. 우리 빠르게 해산합시다", "입회인#ep18_31", bc_self;
+		next;
+		emotion ET_HUK, getnpcid(0,"입회인#ep18_31");
+		npctalk "그러시죠. 저도 일이 바빠서.", "입회인#ep18_33", bc_self;
+		next;
+		cloakonnpc "하자르#ep18_3", getcharid(0);
+		cloakonnpc "카밀#ep18_3", getcharid(0);
+		cloakonnpc "입회인#ep18_31", getcharid(0);
+		cloakonnpc "입회인#ep18_32", getcharid(0);
+		cloakonnpc "입회인#ep18_33", getcharid(0);
+		close;
+	}
+	if (isbegin_quest(12531) == 1) {
+		mes "^0000ff늑대마을의 총관과 상단주들의 회의가 열리고 있다.^000000";
+		next;
+		npctalk "분실 화물을 보이는대로 수거해왔습니다. 수량 확인을 한번 해보시죠.", "", bc_self;
+		next;
+		npctalk "오오. 이렇게나 빨리?", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "자네에게 벌써 두번이나 신세를 지는 것 같구먼. 아니 카밀의 전투에서도 신세를 졌으니 3번인가?", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "면목이 없군요. 정말... 감사드립니다.", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "어디보자 가죽 500, 피복 가공 280. 음... 피복이 약간 모자라긴한데...", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "그 정도면 일반적인 불량 손실품 정도 수준입니다. ", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "그렇지 충분히 허용범위 안일세. 이정도면 휴... 회의 안건을 다시 잡아도 될 것 같으이", "입회인#ep18_31", bc_self;
+		next;
+		select( "어떤 내용으로 바뀝니까?" );
+		npctalk "원래의 안건은 교역품 망실에 대한 회의였지만. 이제 상단 출발 지연 안건으로 바뀐겁니다. 그렇지 않습니까 총관님?", "입회인#ep18_33", bc_self;
+		next;
+		npctalk "어...흠흠. 그렇지. 원래 일정보다 이틀 늦게 출발하게 되었군", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "스승님... 그건", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "얌전히 있거라 카밀. 자 그럼 빨리 결론을 내지. 상행이 지연되는 것에 대한 처벌은 어떻게되던가?", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "3개월 이내의 근신처분입니다. 상단 말단 행정관 일을 처리하며 반성하는겁니다", "입회인#ep18_33", bc_self;
+		next;
+		emotion ET_CRY, getnpcid(0,"입회인#ep18_31");
+		npctalk "난 이견없네", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "저 역시 이견 없소이다.", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "그렇다는구나 카밀. 목 떨어질 일은 면했구나.", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "감사합니다 스승님. 상단주님들께도 감사드립니다", "카밀#ep18_3", bc_self;
+		next;
+		npctalk "어흠흠, 뭣하느냐. 상행이 지연되었으니 어서 가서 다시 출발할 준비를 하거라.", "입회인#ep18_31", bc_self;
+		next;
+		npctalk "그렇지 오늘부터 벌을 받아야 하루라도 빨리 끝나니까.", "입회인#ep18_32", bc_self;
+		next;
+		npctalk "그럼 중요 안건도 끝났으니 우리는 이제 이만 마칩시다. " + strcharinfo(0) + "씨에겐 다시 한번 감사 인사 드리오.", "하자르#ep18_3", bc_self;
+		next;
+		npctalk "정말 감사합니다 " + strcharinfo(0) + "님. 제 생명의 은인이십니다. 여기 약소하지만 저의 감사의 표시입니다.", "카밀#ep18_3", bc_self;
+		emotion ET_CRY, getnpcid(0,"입회인#ep18_31");
+		completequest 12531;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		close2;
+		cloakonnpc "하자르#ep18_3", getcharid(0);
+		cloakonnpc "카밀#ep18_3", getcharid(0);
+		cloakonnpc "입회인#ep18_31", getcharid(0);
+		cloakonnpc "입회인#ep18_32", getcharid(0);
+		cloakonnpc "입회인#ep18_33", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12535) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12531) == 1" );
+	end;
+}
+
+wolfvill,79,213,3	duplicate(dummy_cloaked_npc)	카밀#ep18_3	4_EP18_KAMIL
+
+wolfvill,77,207,8	script	입회인#ep18_33	4_M_RACHMAN1,{
+	mes "[입회인]";
+	mes "흠흠, 사적인 이야기는 나중에 나누도록 하지.";
+	close;
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	end;
+}
+
+wolfvill,74,208,8	script	입회인#ep18_32	4_M_MIDDLE1,{
+	mes "[입회인]";
+	mes "잡담할 시간은 없으이";
+	close;
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	end;
+}
+
+wolfvill,72,209,8	script	입회인#ep18_31	4_M_MIDDLE,{
+	mes "[입회인]";
+	mes "상단 회의중엔 잡담은 금지일세.";
+	close;
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	end;
+}
+
+// Quest: Transporting Goods. Step 8 + 9 + 10 + 11.
+gw_fild01,242,325,4	script	#ep18_12536	4_POINT_RED,5,5,{
+	if (isnpccloaked(strnpcinfo(0)) == true)
+		end;
+	.@quest_id = atoi( replacestr(strnpcinfo(2), "ep18_", "") );
+	.@state = isbegin_quest(.@quest_id);
+	if (.@state == 1) {
+		specialeffect EF_BIG_PORTAL, SELF; // 561
+		progressbar_npc "FFFF00",2;
+		completequest .@quest_id;
+		removespecialeffect 561;
+		specialeffect EF_ICECRASH, SELF; // 135
+
+		if (isbegin_quest(12536) == 2 && isbegin_quest(12537) == 2 && isbegin_quest(12538) == 2 && isbegin_quest(12539) == 2)
+			setquest 12531;
+		cloakonnpc strnpcinfo(0), getcharid(0);
+	}
+	end;
+
+OnTouch:
+	end;
+
+OnInit:
+	.@quest_id = atoi( replacestr(strnpcinfo(2), "ep18_", "") );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+gw_fild01,89,211,4	duplicate(#ep18_12536)	#ep18_12537	4_POINT_RED,5,5
+gw_fild01,347,194,4	duplicate(#ep18_12536)	#ep18_12538	4_POINT_RED,5,5
+gw_fild01,230,52,4	duplicate(#ep18_12536)	#ep18_12539	4_POINT_RED,5,5
+
+gw_fild01,242,325,0	script	#wp12536	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	.@quest_id = atoi( replacestr(strnpcinfo(2), "wp", "") );
+	if (isbegin_quest(.@quest_id) == 1)
+		cloakoffnpc "#ep18_" + .@quest_id, getcharid(0);
+	end;
+}
+gw_fild01,89,211,0	duplicate(#wp12536)	#wp12537	HIDDEN_WARP_NPC,5,5
+gw_fild01,347,194,0	duplicate(#wp12536)	#wp12538	HIDDEN_WARP_NPC,5,5
+gw_fild01,230,52,0	duplicate(#wp12536)	#wp12539	HIDDEN_WARP_NPC,5,5
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Clinic Construction. Step 1 + 3 + 4 + 5 (final).
+wolfvill,171,253,5	script	에제키엘#hms01	4_M_RACHMAN2,5,5,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(17507) ) {
+	case 0:
+		if (isbegin_quest(17506) == 1) {
+			if (countitem(999) < 3) {
+				mes "[에제키엘]";
+				mes "웬만한 물건은 이곳에서 구할 수 있지만, 강철만은 그렇지 않거든요. 들여 오기도 힘들고, 강철을 제조하기 위해서는 시설도 많이 필요해서요. 조금만 부탁드릴게요. 3개 정도만...";
+				close;
+			}
+			mes "[에제키엘]";
+			mes "강철!! 강철 언제 오나! ...는 왔습니다. 오셨군요, 모험가님. 무겁죠? 이리 주세요. 귀한 분이신데 1초라도 더 들고 있게 할 수는 없죠. 감사합니다. 수고 많으셨습니다.";
+			next;
+			mes "[에제키엘]";
+			mes "이 진료소가 완공되면 주춧돌에 모험가님의 이름을 새겨 훗날에 태어나는 신생아들에게까지 모험가님의 이름을 널리 알리도록 하겠습니다.";
+			next;
+			emotion ET_SWEAT, playerattached();
+			mes "[에제키엘]";
+			mes "세월이 흘러 건물은 사라질지라도 모험가님의 뜻은 영원히 남을 거예요.";
+			next;
+			select( "아니, 그럴 필요까지는..." );
+			mes "[에제키엘]";
+			mes "이 강철로 이제 강철 같은 진료소를 짓겠습니다. 비바람이 불어도 끄덕없겠죠.";
+			next;
+			cloakoffnpc "노인#hms01", getcharid(0);
+			cloakoffnpc "노인#hms02", getcharid(0);
+			cloakoffnpc "노인#hms03", getcharid(0);
+			mes "[노인]";
+			mes "아니, 지금 뭐 하는 거요?";
+			npctalk "알아듣도록 설명했지 않았나?", "노인#hms03", bc_self;
+			next;
+			mes "[노인]";
+			mes "기어이 진료소를 짓겠다고 하는 거야? 지금?";
+			next;
+			select( "어르신들 흥분을 가라앉히시고..." );
+			mes "[노인]";
+			mes "우리가 무슨 언제 흥분을 했다고? 우리는 아주 얼음처럼 냉철한 이성으로 대화를 하고 있는 거야, 지금!";
+			npctalk "우린 이런데 쓸 기력도 없다고!", "노인#hms02", bc_self;
+			next;
+			mes "[에제키엘]";
+			mes "대체 왜들 이러시는 거예요? 지금 새로 이주해 온 사람들이라고 텃세 부리는 거예요?";
+			next;
+			mes "[노인]";
+			mes "어머, 우리 그런 사람들 아닌데.";
+			npctalk "뭐? 터엇세?", "노인#hms03", bc_self;
+			next;
+			mes "[에제키엘]";
+			mes "그럼 왜 이렇게까지 반대를 하시나요?";
+			next;
+			mes "[노인]";
+			mes "자네가 바라는 편안한 삶이 바로 함정이라고. 외지의 것, 편안한 것. 그런 것들이 우리를 망칠 거야.";
+			next;
+			mes "[에제키엘]";
+			mes "안락한 주거 공간, 번듯한 학교, 깨끗한 진료소. 우리가 그걸 못 누릴 것은 뭡니까? 우리가 차별을 피해 왔지 편의를 피해 온 것은 아니잖습니까.";
+			next;
+			mes "[에제키엘]";
+			mes "어차피 이곳에서 사는거, 좀 더 좋은 시설을 가지는게 뭐가 나쁩니까?";
+			next;
+			mes "[노인]";
+			mes "아니 글쎄, 이주민 놈들이 바라는게 그거라니까?";
+			npctalk "그렇지!", "노인#hms01", bc_self;
+			next;
+			mes "[노인]";
+			mes "안락함에 몸을 길들여서 불편한 생활은 참을 수 없게 만드는거. 자신들이 제공하는 최소한의 삶 속에서 만족하면서 살라고.";
+			mes "너희들이 반발하면 이마저 빼앗아 갈 거라고 하잖아.";
+			next;
+			mes "[노인]";
+			mes "우리가 언제까지 여기서 살 것 같아? 우리 땅을 다시 되찾을 생각은 안하고!";
+			npctalk "내말이!", "노인#hms03", bc_self;
+			next;
+			mes "[노인]";
+			mes "지금 있는 것으로도 충분한데 뭣이 더 필요해?";
+			next;
+			mes "[에제키엘]";
+			mes "제가 선망에 빠져서 이러는 건 아니잖아요. 지금 이게 이주민 식이라 가져오는 것이 아니라고요. 시대가 흘러 발전한 기술이자 시설인데 그걸 이해를 못하시네요!";
+			next;
+			cloakoffnpc "마람#hms01", getcharid(0);
+			cloakoffnpc "마을 사람#hms01", getcharid(0);
+			cloakoffnpc "부상자#hms01", getcharid(0);
+			mes "[요엘]";
+			mes "아이고 나 죽네. 죽어...";
+			npctalk "저 멀리서 누가 손짓하는데...", "부상자#hms01", bc_self;
+			next;
+			mes "[마람]";
+			mes "에제키엘!!! 큰일이야!";
+			next;
+			mes "[에제키엘]";
+			mes "마람? 왜? 무슨 일이야?";
+			next;
+			mes "[요엘]";
+			mes "내가 죽으면... 내가 모아 놓았던 내 재산은...! 나랑 같이 태워 줘. 어떻게 모았는데! 억울해! 마람, 네가 잘 감시해! 돌 하나라도 못 빼돌리게!";
+			emotion ET_CRY, getnpcid(0,"부상자#hms01");
+			next;
+			mes "[마람]";
+			mes "아니, 너 안 죽어. 불길한 소리 하지 마.";
+			next;
+			mes "[노인]";
+			mes "요엘이 왜 이러니?";
+			next;
+			mes "[마람]";
+			mes "짐을 옮기다가, 사고가 있었어요. 얼른 처치를 해야 할 것 같은데. 가능하겠어, 에제키엘?";
+			next;
+			mes "[노인]";
+			mes "아이고 저런, 어째? 한쪽 다리를 아예 못쓰게 됐네.";
+			next;
+			mes "[노인]";
+			mes "어디 좀 봄세. 흠...";
+			next;
+			mes "[노인]";
+			mes "얼른 내 집으로 옮기지. 다리는 못 쓰겠지만 이렇게 된 거 약이라도 발라서 썩지않게 해야지.";
+			npctalk "뭐라고요? 내 다리가 썩어??", "부상자#hms01", bc_self;
+			npctalk "고약가지고 되겠어요?", "마람#hms01", bc_self;
+			next;
+			mes "[요엘]";
+			mes "나, 나, 백양나무 어르신처럼 다리 잘라야 돼요? 그건 안되는데..! 이번에 큰맘 먹고 새로 산 작업 부츠가...!";
+			next;
+			mes "[노인]";
+			mes "지금 부츠가 문제야?";
+			next;
+			mes "[요엘]";
+			mes "... 그렇대, 마람. 나 부탁이 있는데, 왼쪽 다리는 없지만 오른쪽 다리가 성한 사람을 찾아줄래? 그 사람에게 내 오른쪽 부츠를 팔아야겠어.";
+			mes "어르신, 최대한 매끈하게 부탁드립니다.";
+			npctalk "사이즈는 상관 없어.", "부상자#hms01", bc_self;
+			next;
+			mes "[에제키엘]";
+			mes "다리 안 잘라요. 내가 치료 할 수 있어.";
+			next;
+			mes "[노인]";
+			mes "뭐? 다리가 저모양이 됐는데?";
+			next;
+			mes "[노인]";
+			mes "저런 다리를 어떻게 고친다고...! 어서 잘라내고 약을 발라야 감염이라도 막지! 괜히 붙잡아서 시간만 끌지 말고...!";
+			next;
+			mes "[에제키엘]";
+			mes "할 수 있으니까 할 수 있다고 말하는 거예요. 다들 비켜주세요.";
+			next;
+			mes "[마람]";
+			mes "어르신들 일단 믿어보세요. 에제키엘이 어르신들 눈엔 덜떨어져 보일지는 몰라도 실력은 제법 좋답니다?";
+			npctalk "내가 괜히 공을 들여서 데려온 것이 아니라구요.", "마람#hms01", bc_self;
+			next;
+			mes "[노인]";
+			mes "아니, 시간이...!";
+			next;
+			specialeffect EF_HEALSP, AREA, "부상자#hms01";
+			mes "[에제키엘]";
+			mes "아... 설비만 제대로 됐었어도... 더 빠르게 할 수 있는데... 어쩔 수 없지.";
+			next;
+			specialeffect EF_REPAIRWEAPON, AREA, "부상자#hms01";
+			mes "[요엘]";
+			mes "끄아아악!!! 나 죽는다!!!";
+			npctalk "저런!!!", "노인#hms01", bc_self;
+			npctalk "저러다 사람 잡는 거 아니야?", "노인#hms02", bc_self;
+			npctalk "말려야지 이 사람들아!!!!", "노인#hms03", bc_self;
+			delitem 999,3;	// Steel
+			changequest 17506,17507;
+			close;
+		}
+		if (isbegin_quest(17505) == 1) {
+			mes "[에제키엘]";
+			mes "모험가님, 어떻게 됐어요? 저 공사 시작해도 되나요?";
+			next;
+			select( "말씀은 드렸는데..." );
+			mes "[에제키엘]";
+			mes "아, 역시 그렇죠? 그래도 되도록 다른 곳에 영향을 주지 않게 이런 외곽에 짓는 건데 그것도 안되나 봐요.";
+			next;
+			mes "[에제키엘]";
+			mes "그래도 포기할 수는 없죠. 다시 와서 얘기 하신다니 그 전에 뜻이 맞는 사람들을 모아서 설득 준비를 해야겠어요.";
+			next;
+			mes "[에제키엘]";
+			mes "그분들 말씀대로 해볼까 생각도 했었는데, 역시 안되겠어요. 다른 건 몰라도 이건 꼭 필요한 일이에요.";
+			next;
+			mes "[에제키엘]";
+			mes "그래서 말인데요 모험가님, 부탁이 있어요.";
+			next;
+			select( "무슨 일인가요?" );
+			mes "[에제키엘]";
+			mes "웬만한 물건은 이곳에서 구할 수 있지만, 강철만은 그렇지 않거든요. 들여 오기도 힘들고, 강철을 제조하기 위해서는 시설도 많이 필요해서요. 조금만 부탁드릴게요. 3개 정도만...";
+			next;
+			select( "가져다 드리죠." );
+			mes "[에제키엘]";
+			mes "흔쾌히 수락해주셔서 감사합니다. 제 일에 공감해주시고 도와주시기까지... 그럼 저는 공사 준비를 하고 있을게요.";
+			changequest 17505,17506;
+			close3;
+		}
+		if (isbegin_quest(17504) == 1) {
+			mes "[에제키엘]";
+			mes "<NAVI>[어르신]<INFO>wolfvill,176,111,0,101,0</INFO></NAVI>들을 설득해주세요. 꼭 필요한 시설이니까요.";
+			close;
+		}
+		mes "[에제키엘]";
+		mes "에제키엘, 너는 무슨 부귀영화를 누리자고 이곳에 왔니. 어쩌자고 일을 저질렀어!";
+		next;
+		mes "[에제키엘]";
+		mes "아냐. 그래도 이곳에서 나로 사는 것이 진짜로 삶을 사는 것이지. 나는 그곳에서 영원한 이방인이잖아?";
+		next;
+		cloakoffnpc "마람#hms01", getcharid(0);
+		select( "저 분은...?" );
+		mes "[마람]";
+		mes "쉿- 잠시만요. 뭐라고 하는지 들어 봐요. 재미있는 말을 하는 거 같은데.";
+		next;
+		mes "[에제키엘]";
+		mes "아니 그런데, 여기서도 마찬가지로 외지인 취급이잖아? 여기나 거기나 마찬가지 아니야? 그럼 좀 더 편한 쪽이 좋지 않나?";
+		mes "그냥 포기하고 돌아갈까.";
+		next;
+		mes "[에제키엘]";
+		mes "아냐, 그래도 처음에 목표했던 것이 있잖아. 역시 나의 뿌리를 찾아서...";
+		next;
+		mes "[마람]";
+		mes "에제키엘! 잘 있었어? 뭘 그렇게 혼자 중얼거려?";
+		next;
+		mes "[에제키엘]";
+		mes "마람? 마람?? 잘됐다. 있잖아. 내 말 좀 들어 봐. 바빠? 바빠도 좀 들어 봐. 내가 이런 얘기를 누구한테 하겠어? 아직 친한 사람도 없는데. 그러니까 좀 들어 봐.";
+		npctalk "알았어, 알았어. 들을테니까 진정해.", "마람#hms01", bc_self;
+		next;
+		mes "[에제키엘]";
+		mes "내가 여기에 진료소를 지을 거라고 했었잖아. 여기에 왔는데 변변한 진료소 하나 없다고, 그래서 짓겠다고 내가 그랬잖아.";
+		next;
+		mes "[마람]";
+		mes "그랬지. 그래서 그 안에 채워 넣을 것도 이번에 많이 구해 왔어.";
+		npctalk "그래? 그건 이따가 볼게. 일단 얘기부터 들어 봐.", "에제키엘#hms01", bc_self;
+		next;
+		mes "[에제키엘]";
+		mes "그랬는데 삽을 뜨자마자 여기 어르신들이 말리잖아. 지금까지 그랬던 것처럼 자연과 더불어 살아야 한다면서 나를 무슨 환경 파괴범으로 보잖아. 내가 그럴 사람이야?";
+		next;
+		mes "[에제키엘]";
+		mes "그냥 좀 더 위생적이고 좀 더 현대식으로 진료소를 짓는게, 그렇게 자연과 환경을 파괴하는 행동이야? 유사시엔 더 빠르게 대응할 수도 있는데?";
+		next;
+		mes "[마람]";
+		mes "아니지. 넌 절대 그럴 사람이 아니지. 다른 사람 다 그래도 너만은 절대 아니지.";
+		next;
+		mes "[에제키엘]";
+		mes "그렇지? 그런데 나를 그렇게 몰아가서... 내가 정말 쓰레기인가? 하는 생각에 지금 아무것도 못하고 있어.";
+		next;
+		mes "[마람]";
+		mes "그런 거라면 수아드에게 얘기해 봐. 너무하네. 다 같이 잘 살자고 하는 일인데. 진료소가 자연을 거스르는 것도 아니고. 참나.";
+		next;
+		mes "[에제키엘]";
+		mes "그게... 수아드에게 말은 해봤는데... 어쩔 수가 없다면서 자기도 마음대로 할 수가 없대.";
+		next;
+		mes "[에제키엘]";
+		mes "진료소가 필요하긴 하지만, 이곳에서 오래 사신 어르신들 의견이 그러면 무작정 밀어 부칠 수는 없으니 잘 설득하는 수 밖에 없다고 하더라.";
+		next;
+		mes "[마람]";
+		mes "듣고 보니 그도 그렇네. 어쨌든 어르신들의 의견을 무시할 수는 없는 거니까. 그렇다고 수아드가 의견을 무시하면서까지 마음대로 휘두르는 성격도 아니고.";
+		next;
+		mes "[에제키엘]";
+		mes "그래서 말인데... 나... 다시 라헬로 돌아가는건... 어떻게 생각해?";
+		next;
+		mes "[마람]";
+		mes "뭐? 여기까지 왔는데 다시 돌아가려고?";
+		next;
+		mes "[에제키엘]";
+		mes "아니, 돌아가겠다고 마음 먹은 건 아니고... 사람이 그렇잖아. 더 나은 삶을 살고 싶어서 왔는데 여기나 거기나 마찬가지면 더 편한데 있고 싶지 않겠냐고...";
+		next;
+		mes "[에제키엘]";
+		mes "그러니까 내 말은... 고민중이라는 거지. 내가 언제 딱 잘라서 돌아가겠다고 했어? 마음대로 듣지 말아 줄래?";
+		next;
+		mes "[마람]";
+		mes "흠... 그렇지만 진료소는 내가 생각해도 꼭 필요한데. 설득을 어떻게 잘 해 보면...";
+		next;
+		mes "[마람]";
+		mes "그렇지! 모험가님이 좀 도와줄 수 있을 것 같은데? 있지, 이 모험가님이 말을 굉장히 잘하신단다? 얼굴만 봐도 믿음이 가게 생기지 않았니? 딱 어른들이 좋아할만한 상이라니까.";
+		next;
+		mes "[마람]";
+		mes "마음씨도 좋아서 우리를 도와 물자 구입부터 이송까지 도와주셨어.";
+		next;
+		mes "[에제키엘]";
+		mes "좋은 분이네. 좋은 분이야. 그렇긴 한데...";
+		next;
+		mes "[에제키엘]";
+		mes "...정말 저런 인물이 어른들의 호감을 산다고? 굉장히... 그... 완고하신 분들이던데.";
+		npctalk "똥고집이라는 말을 잘도 포장하네.", "마람#hms01", bc_self;
+		next;
+		mes "[마람]";
+		mes "밑져야 본전이지. 설득을 못해도 잔소리를 한 바가지 더 듣는 것 밖에 더 있어? 그것도 저 모험가님이 대신 들을 건데?";
+		npctalk "앗, 그건 좀 좋은데?", "에제키엘#hms01", bc_self;
+		next;
+		mes "[에제키엘]";
+		mes "그럼... 부탁 좀 해볼까?";
+		mes "모험가님, 부탁 좀 드릴게요. 이곳에는 최신식의 진료소가 꼭 필요해요. 라헬만큼의 규모는 아니어도 말이에요.";
+		next;
+		mes "[에제키엘]";
+		mes "지금의 이곳에서는 다치거나 병이 들면 고래로부터 내려온 민간요법에 의지하는 수밖에는 없거든요.";
+		npctalk "아, 나 그거 뭔지 알아! 상처에 정체불명의 고약을 바르던데!", "마람#hms01", bc_self;
+		next;
+		mes "[에제키엘]";
+		mes "라헬에서 조금씩 들여 오는 약이나 의료도구가 있긴 하지만 턱도 없이 부족하거든요. 그걸 쓸 적당한 환경도 안되고.";
+		next;
+		mes "[에제키엘]";
+		mes "하지만, 저로서는 반대하시는 분들을 설득할 방법이 전혀 없네요. 그러니 <NAVI>[어르신]<INFO>wolfvill,176,111,0,101,0</INFO></NAVI>들 프리패스상이라는 모험가님께 부탁드릴게요.";
+		next;
+		mes "[마람]";
+		mes "꼭 좀 부탁드려요. 그동안 저도 다른 사람들을 만나볼게요.";
+		setquest 17504;
+		cloakonnpc "마람#hms01", getcharid(0);
+		navigateto("wolfvill",176,111);
+		close;
+	case 1:
+		specialeffect EF_PHARMACY_OK, AREA, "부상자#hms01";
+		specialeffect EF_HEALSP, AREA, "부상자#hms01";
+		mes "[에제키엘]";
+		mes "어때요? 한동안 무리는 하지 말고 좋은 거 먹고, 좋은 생각하면서 푹 쉬면 걷거나 가벼운 달리기 정도는 할 수 있을 거예요.";
+		next;
+		mes "[요엘]";
+		mes "나 살았어?? 산 거야?? 내 다리 무사해??";
+		next;
+		mes "[마람]";
+		mes "어, 그렇다고 하니까 정말 그런 거겠지?";
+		next;
+		mes "[요엘]";
+		mes "정말 고마워요!! 내 부츠를 지켜줬어요! 이름이 뭐예요? 내가 앞으로 잘 해줄게요. 당신은 나의 은인이에요. 요엘은 은인을 잊지 않아요. 평생.";
+		next;
+		mes "[노인]";
+		mes "그, 어떻게 못쓰게 된 다리를 살린 거요?";
+		next;
+		mes "[에제키엘]";
+		mes "제가 배운게 그거니까요. 진료소만 제대로 갖춰져 있었으면 더 완벽하게 처치해서 회복을 앞당길 수 있었을 텐데요.";
+		next;
+		mes "[노인]";
+		mes "호... 요즘엔 다들 그렇게 한대요?";
+		next;
+		mes "[에제키엘]";
+		mes "그렇죠. 이정도로는 다리를 못쓰게 되지 않아요. 적절히 조치만 한다면요.";
+		next;
+		mes "[노인]";
+		mes "그걸 진료소만 있으면 더 빨리, 적절하게 할 수 있단 말이지요?";
+		next;
+		mes "[에제키엘]";
+		mes "네...? 그렇죠...?";
+		next;
+		mes "[노인]";
+		mes "흠... 요즘엔 그렇단 말이지요? 거기 모험가, 정말 그래요?";
+		next;
+		select( "요즘은 다 그래요." );
+		mes "[에제키엘]";
+		mes "말씀 드렸잖아요. 이주민의 기술이 아니라 발전한 시대의 기술과 시설이라고요.";
+		next;
+		mes "[노인]";
+		mes "가만, 저거 무작정 반대만 할 일은 아닌 것 같은데.";
+		npctalk "쓸모가 많아 보여.", "노인#hms01", bc_self;
+		next;
+		mes "[노인]";
+		mes "그렇지? 내 생각도 그래. 사람 살리는 일이잖아. 우리 방식대로라면 죽을 것을 살릴 수도 있는 거잖아.";
+		npctalk "백양나무집도 이렇게 했더라면...", "노인#hms02", bc_self;
+		next;
+		mes "[노인]";
+		mes "흠... 진료소 그거, 짓는다면 얼마나 걸리겠어요?";
+		next;
+		mes "[에제키엘]";
+		mes "네...? 그거야, 인력과 자본에 달려있죠.";
+		next;
+		mes "[노인]";
+		mes "우리가 최대한 지원을 해줄게. 한 번 지어 봐요.";
+		npctalk "내가 자재라도 나를게.", "노인#hms03", bc_self;
+		next;
+		mes "[노인]";
+		mes "대신 이곳의 생활 방식과 어울리게, 이곳의 분위기에 맞춰야 해요.";
+		npctalk "여기 나이 먹은 사람들은 너무 새로운 것엔 적응하기 힘들어하니까.", "노인#hms02", bc_self;
+		next;
+		mes "[에제키엘]";
+		mes "그거야... 알겠습니다.";
+		next;
+		mes "[마람]";
+		mes "이야, 어르신들 생각 잘하셨습니다. 이건 정말 꼭 필요한 거죠. 내가 다 감사하네요.";
+		next;
+		mes "[노인]";
+		mes "또 여기에 뭐 필요한 거 없을까?";
+		next;
+		mes "[노인]";
+		mes "뭐? 진료소 말고 더 받아들이겠다고?";
+		next;
+		mes "[노인]";
+		mes "저걸 보면서 느낀 거 없수? 세월이 흐르면 흐르는 방식에 맞춰 살아야지. 언제까지 고집을 부릴 수는 없는 거잖아.";
+		next;
+		mes "[노인]";
+		mes "하긴, 우리가 다시 우리 터전을 되찾는다고 해도 지금 방식대로는 살지 않을 거란 말이지. 우리도 이미 아주 옛날 방식과는 다르게 살고 있고.";
+		next;
+		mes "[노인]";
+		mes "이봐요, 청년. 또 중요하거나 필요한 것이 있으면 말해 줘요. 우리도 생각을 좀 해볼 테니까.";
+		next;
+		mes "[에제키엘]";
+		mes "그럴게요. 진료소는 어르신들 말씀대로 최대한 이곳과 맞춰서 지을게요.";
+		next;
+		mes "[노인]";
+		mes "그래요. 우리가 언제까지 이곳에서 살지는 않을 거라는 거 알고 있죠?";
+		next;
+		mes "[에제키엘]";
+		mes "그럼요! 제 생각도 그래요.";
+		next;
+		mes "[노인]";
+		mes "그럼, 우리는 이만 가보겠수. 오늘 고생 많았어요.";
+		next;
+		cloakonnpc "노인#hms01", getcharid(0);
+		cloakonnpc "노인#hms02", getcharid(0);
+		cloakonnpc "노인#hms03", getcharid(0);
+		mes "[마람]";
+		mes "살펴가십쇼!!!";
+		mes "후아- 정말 다행이다. 그치?";
+		next;
+		mes "[에제키엘]";
+		mes "그거야.. 그렇지? 근데 너무 갑작스러워서 당황스럽네??";
+		next;
+		mes "[마람]";
+		mes "어르신들도 직접 눈으로 보니까 생각이 달라진 거지. 좋게 생각해. 자, 그럼 이제 짓던 걸 마저 지어야지?";
+		next;
+		mes "[에제키엘]";
+		mes "그래. 그치만 그 전에 우선 이곳과 어울리게 설계를 바꿔야 할 것 같아. ";
+		next;
+		mes "[마람]";
+		mes "모험가님이 도움을 주실 거야. 그렇죠?";
+		next;
+		select( "그야... 그렇죠..." );
+		mes "[마람]";
+		mes "필요한 설비나 도구가 있으면 미리 얘기해. 다음 번에 맞춰서 가져올 테니까.";
+		mes "요엘, 우리도 얼른 가서 좀 쉬자.";
+		next;
+		mes "[요엘]";
+		mes "잘있어요, 나의 은인. 가까운 시일내에 또 올게요!";
+		emotion ET_THROB, getnpcid(0,"부상자#hms01");
+		next;
+		cloakonnpc "마람#hms01", getcharid(0);
+		cloakonnpc "마을 사람#hms01", getcharid(0);
+		cloakonnpc "부상자#hms01", getcharid(0);
+		mes "[에제키엘]";
+		mes "모험가님, 도움 정말 감사했습니다. 이거 제가 여기 정착하면서 받은 건데 나는 뭐 필요도 없고... 모험가님께 드릴게요. 앞으로도 잘 부탁드린다는 의미로.";
+		next;
+		mes "[에제키엘]";
+		mes "그럼, 다음에 또 뵈어요. 어쩌면 부탁을 드릴 수도 있으니 종종 들러주세요!";
+		completequest 17507;
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		close;
+	case 2:
+		break;
+	}
+	// daily
+	switch( checkquest(17509,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[에제키엘]";
+		mes "어휴, 힘들어. 모험가님 여긴 어쩐일이세요. 아까 가져다 주신 것으로 한창 공사 중인데... 여기 계시면 위험하니까 새벽이 지난 후에 다시 오세요.";
+		close;
+	case 2:
+		erasequest 17509;
+		break;
+	}
+	switch( isbegin_quest(17508) ) {
+	case 0:
+		mes "[에제키엘]";
+		mes "모험가님, 안녕하세요.";
+		next;
+		select("공사는 잘 되고 있나요?");
+		mes "[에제키엘]";
+		mes "물론이죠. 그렇지만 여전히 몇몇 물자는 부족해요. 강철이나 베리 딴딴 결정 같은 것들이요.";
+		next;
+		mes "[에제키엘]";
+		mes "이곳에서는 결정을 많이 쓰더라고요. 아주 단단해서 여기저기 사용하기 좋아요.";
+		next;
+		if (select( "구해다 드리죠.", "구해다 드리고 싶지만..." ) == 2)
+			end;
+		mes "[에제키엘]";
+		mes "와, 정말 감사합니다!";
+		next;
+		mes "[에제키엘]";
+		mes "강철은 1개, 베리 딴딴 결정은 10개만 부탁드려요. 베리 딴딴 결정은 회색늑대에게서 얻을 수 있어요.";
+		mes "기다릴게요!";
+		setquest 17508;
+		close;
+	case 1:
+		if (countitem(999) < 1 || countitem(1000406) < 10) {
+			mes "[에제키엘]";
+			mes "강철은 1개, 베리 딴딴 결정은 10개만 부탁드려요. 베리 딴딴 결정은 회색늑대에게서 얻을 수 있어요.";
+			mes "기다릴게요!";
+			close;
+		}
+		mes "[에제키엘]";
+		mes "모험가님, 고생 많으셨어요. 늘 감사하게 생각해요. 오늘은 이만 쉬시고 새벽 시간이 지나면 다시 뵐게요!";
+		delitem 999,1;	// Steel
+		delitem 1000406,10;	// Ep18_Very_Ddan_Crystal
+		erasequest 17508;
+		setquest 17509;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close;
+	case 2:	// impossible
+		end;
+	}
+	end;
+
+OnTouch:
+	if (isbegin_quest(17504) == 0 && isbegin_quest(17505) == 0 && isbegin_quest(17506) == 0 && isbegin_quest(17507) == 0)
+		npctalk "너는 무슨 부귀영화를 누리자고 이곳에 왔니. 어쩌자고 일을 저질렀어.", "에제키엘#hms01", bc_self;
+	else if (isbegin_quest(17507) == 1) {
+		cloakoffnpc "노인#hms01", getcharid(0);
+		cloakoffnpc "노인#hms02", getcharid(0);
+		cloakoffnpc "노인#hms03", getcharid(0);
+		cloakoffnpc "마람#hms01", getcharid(0);
+		cloakoffnpc "마을 사람#hms01", getcharid(0);
+		cloakoffnpc "부상자#hms01", getcharid(0);
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 2 && isbegin_quest(17504) == 0 && isbegin_quest(17505) == 0 && isbegin_quest(17506) == 0 && isbegin_quest(17507) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17505) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17506) == 1 && countitem(999) >= 2" );	// Steel
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17507) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17507) == 2 && isbegin_quest(17508) == 0 && (checkquest(17509,PLAYTIME) == -1 || checkquest(17509,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17508) == 1 && countitem(999) > 0 && countitem(1000406) > 9" );
+	end;
+}
+
+wolfvill,174,252,3	duplicate(dummy_cloaked_npc)	마람#hms01	4_EP18_MARAM
+wolfvill,175,249,1	duplicate(dummy_cloaked_npc)	노인#hms01	4_EP18_GW_OLD01
+wolfvill,173,247,1	duplicate(dummy_cloaked_npc)	노인#hms02	4_EP18_GW_OLD02
+wolfvill,170,248,7	duplicate(dummy_cloaked_npc)	노인#hms03	4_EP18_GW_MIDDLE01
+wolfvill,170,251,5	duplicate(dummy_cloaked_npc)	마을 사람#hms01	4_M_RACHMAN1
+wolfvill,172,250,1	duplicate(dummy_cloaked_npc)	부상자#hms01	4_M_DIEMAN
+
+// Quest: Clinic Construction. Step 2.
+wolfvill,174,111,5	script	노인#hms05	4_EP18_GW_OLD02,{
+	mes "[노인]";
+	mes "살면서 어려운 일이 있으면 말해요.";
+	close;
+}
+
+wolfvill,178,110,3	script	노인#hms06	4_EP18_GW_MIDDLE01,{
+	mes "[노인]";
+	mes "궁금한 거 있어요?";
+	close;
+}
+
+wolfvill,176,111,3	script	노인#hms04	4_EP18_GW_OLD01,{
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(17504) == 1) {
+		mes "[노인]";
+		mes "이번에 들어 온 사람들도 적응을 잘 해야 할 텐데.";
+		next;
+		mes "[노인]";
+		mes "우리가 한 번 더 들여다 봐야지.";
+		next;
+		mes "[노인]";
+		mes "너무 자주 찾아가면 싫어해요. 우리 때랑 같은 줄 아나?";
+		next;
+		mes "[노인]";
+		mes "이제 앞으로 여기서 살고자 하면 맞춰야지. 이곳의 규칙을 따라야 모두 조화롭게 사는 거야. 암.";
+		next;
+		mes "[노인]";
+		mes "우리 때랑 같든 같지 않든 한 번이라도 말을 더 나누면 적응하기 쉬운 건 맞지 뭘. 상냥한 이웃을 마다할 사람이 어디 있어?";
+		npctalk "내 동년배들 다 그렇게 적응했다.", "노인#hms05", bc_self;
+		next;
+		select( "저..." );
+		mes "[노인]";
+		mes "누구신지? 못보던 얼굴인데?";
+		npctalk "이번에 새로 온 사람인가?", "노인#hms05", bc_self;
+		npctalk "그렇지? 내가 기억 못하는 거 아니지?", "노인#hms06", bc_self;
+		next;
+		mes "[노인]";
+		mes "아, 그새 또 왔구만? 저번에 온지 얼마 안되지 않았나? 이제 자주 올 수 있는 거야?";
+		next;
+		mes "[노인]";
+		mes "잘왔어요, 잘왔어. 어려운 거 있으면 꼭 물어 보고.";
+		next;
+		mes "[노인]";
+		mes "여기 사람들 다 그런거 귀찮아 하지 않으니까 부담 없이 물어 봐.";
+		next;
+		select( "진료소 문제로 왔는데요..." );
+		mes "[노인]";
+		mes "뭐어? 진료소오? 설마 짓네마네 했던 그 진료소는 아니겠지?";
+		npctalk "맞겠지. 그거 말고 뭐 있겠어.", "노인#hms05", bc_self;
+		next;
+		mes "[노인]";
+		mes "그때 다 알아 듣게 잘 얘기 했던 것 같은데. 진료소는 지을 필요도 없고, 짓지도 말라고.";
+		next;
+		mes "[노인]";
+		mes "치료는 지금 하는 것만으로도 충분하고 지금처럼 이미 있는 곳에서 하면 되는데. 뭣하러 새 건물을, 그것도 이주민식으로 짓는대?";
+		next;
+		mes "[노인]";
+		mes "그런거 없이도 다들 이렇게 잘 살지 않나?";
+		next;
+		select( "의료 시설은 중요하니까요." );
+		mes "[노인]";
+		mes "아니, 뭐? 그럼 우리가 중요하게 생각하지 않아서 이런다는 거야? 우리가 부족해?";
+		npctalk "우리가 아무 이유 없이 심술을 부리는 것은 아니야.", "노인#hms06", bc_self;
+		next;
+		mes "[노인]";
+		mes "그런게 좋은 거 우리도 알지. 편하고 얼마나 좋아. 하지만 익숙해지면 안되니까 그런 거야.";
+		next;
+		mes "[노인]";
+		mes "이주민들의 삶에 우리가 익숙해지면 결국 우리가 거기에 젖어 들어서 나중에는 그 편리함이 없이는 살 수 없게 되는 거야.";
+		npctalk "그게 우리 땅을 차지하고 있는 놈들이 바라는 거지.", "노인#hms05", bc_self;
+		next;
+		mes "[노인]";
+		mes "암. 지금 있는 걸로도 충분한데 기대면 안되지. 그거야말로 지는 거라고.";
+		next;
+		select( "하지만 필요한 시설인데요." );
+		mes "[노인]";
+		mes "글쎄, 지금까지로도 부족하지 않았는데. 만약 그것이 부족했다면 우리가 이곳에서 이렇게 오랜 기간 동안 살아남지 못했겠지.";
+		next;
+		mes "[노인]";
+		mes "하여간 그런줄 알어. 좋게 얘기 했는데도 이해를 못하네.";
+		next;
+		mes "[노인]";
+		mes "당신도 이제부터 여기서 살려면 저쪽에서의 삶은 하루 빨리 모두 잊는게 좋을 거에요.";
+		next;
+		mes "[노인]";
+		mes "이곳에서의 삶에 빨리 적응할수록 잘들 살더라고.";
+		next;
+		select( "저는... 이곳 사람이 아니라..." );
+		mes "[노인]";
+		mes "뭐이? 심지어 이곳 사람도 아니야? 외지 사람이 무슨 자격으로 이렇게 참견을 해싸?";
+		next;
+		mes "[노인]";
+		mes "진정하고. 그럴 수 있지. 애들한테 도움을 주신 분이니 화내지 말고.";
+		next;
+		mes "[노인]";
+		mes "진료소 건은 나중에 우리가 <NAVI>[그 이]<INFO>wolfvill,171,253,0,101,0</INFO></NAVI>한테 가서 한 번 더 얘기할 테니, 외지인은 이 일에서 빠지는게 좋겠어요.";
+		erasequest 17504;
+		setquest 17505;
+		navigateto("wolfvill",171,253);
+		close;
+	}
+	mes "[노인]";
+	mes "새로 온 사람들한테 가봐야겠어.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17504) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Checking Traps for Food. Step 1 + 3 (final).
+wolfvill,197,170,5	script	라라마#ep18	4_M_DESERT,{
+	if (rand(2))
+		mes "칼을 가느라 여념이 없어 불러도 대답이 돌아오지 않는다.";
+	else {
+		mes "[라라마]";
+		mes "아~ 지금은 바빠요. 다음에 얘기해요.";
+	}
+	close;
+}
+
+wolfvill,202,166,3	script	에루인#ep18	4_F_SHABBY,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8688) ) {
+	case 0:
+		mes "[에루인]";
+		mes "...모험가가 한 명 왔다고 하더니.";
+		mes "여기저기 기웃대는 게, 할 일을 찾는가?";
+		next;
+		if (select( "네", "아니오" ) == 2)
+			end;
+		mes "[에루인]";
+		mes "나는 저 쪽의 라라마와 그 가족과 함께 가축 및 야생동물 관찰을 담당하고 있다.";
+		mes "칼을 비롯한 날붙이를 정비하는 것도 내 일이지.";
+		npctalk "에루인 할머니를 잘 부탁해~!", "라라마#ep18", bc_self;
+		next;
+		mes "[에루인]";
+		mes "...쯔쯔.";
+		npctalk "헤헷.", "라라마#ep18", bc_self;
+		next;
+		mes "[에루인]";
+		mes "외부인에게 맡길 만한 일이라면, 오늘 아침에 설치한 덫을 확인하는 것 정도로군.";
+		mes "할 수 있겠나?";
+		next;
+		select( "그 정도야 어려울 것 없죠" );
+		mes "[에루인]";
+		mes "대답이 빨라서 좋은 걸.";
+		mes "...";
+		next;
+		setquest 8688;
+		mes "[에루인]";
+		mes "<NAVI>[회색늑대의 숲]<INFO>gw_fild01,25,101,0,101,0</INFO></NAVI> 여기저기를 살펴보면 덫이 여러 개 놓여 있을 거다.";
+		mes "뭔가 걸려 있다면 5개 정도 모아 오게.";
+		mes "남은 미끼는 내버려두면 다시 뭔가 걸릴 테니 시간을 두고 보면 될 것이야.";
+		next;
+		mes "[에루인]";
+		mes "수고해 주게.";
+		close;
+	case 1:
+		.@trap01 = countitem(1000412);
+		.@trap02 = countitem(1000413);
+		.@trap03 = countitem(1000414);
+		if ((.@trap01 + .@trap02 + .@trap03) < 5) {
+			mes "[에루인]";
+			mes "<NAVI>[회색늑대의 숲]<INFO>gw_fild01,25,101,0,101,0</INFO></NAVI>에서 덫에 걸린 것들을 5개 정도 모아 오면 좋겠네.";
+			close;
+		}
+		if (.@trap01 > 0)
+			delitem 1000412, .@trap01;
+		if (.@trap02 > 0)
+			delitem 1000413, .@trap02;
+		if (.@trap03 > 0)
+			delitem 1000414, .@trap03;
+
+		completequest 8688;
+		setquest 8689;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		next;
+		mes "[에루인]";
+		mes "...좋아. 수고했네.";
+		mes "내일도 여기서 얼쩡대고 있을 만큼 한가하다면 또 부탁해도 되겠나?";
+		next;
+		if (select( "그럼요", "내일은 바쁠 것 같아서" ) == 2)
+			end;
+		mes "[에루인]";
+		mes "그거 잘됐군.";
+		mes "도움은 거절하지 않는다. 고맙네.";
+		close;
+	case 2:
+		break;
+	}
+
+	// daily
+	switch( checkquest(8689,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[에루인]";
+		mes "오늘은 돌아가서 쉬게.";
+		close;
+	case 2:
+		erasequest 8689;
+		break;
+	}
+	switch( isbegin_quest(8690) ) {
+	case 0:
+		mes "[에루인]";
+		mes "왔는가. 또 기웃거리는 걸 보니 한가한 모양이군.";
+		next;
+		switch( select( "덫을 조사하러 간다", "잡담한다", "그만둔다" ) ) {
+		case 1:
+			break;
+		case 2:
+			end;
+		case 3:
+			end;
+		}
+		mes "[에루인]";
+		mes "일손을 거들어준다면 나야 다른 할 일이 많으니 고맙지.";
+		mes "<NAVI>[회색늑대의 숲]<INFO>gw_fild01,25,101,0,101,0</INFO></NAVI> 여기저기를 살펴보면 덫이 여러 개 놓여 있을 거다.";
+		mes "무언가 걸려 있는 것이 있다면 5개만 회수해 오게.";
+		next;
+		if (select( "수락한다", "거절한다" ) == 2)
+			end;
+		setquest 8690;
+		mes "[에루인]";
+		mes "남은 미끼는 내버려두면 다시 뭔가 걸릴 테니 시간을 두고 보면 될 것이야.";
+		mes "수고해 주게.";
+		close;
+	case 1:
+		.@trap01 = countitem(1000412);
+		.@trap02 = countitem(1000413);
+		.@trap03 = countitem(1000414);
+		if ((.@trap01 + .@trap02 + .@trap03) < 5) {
+			mes "[에루인]";
+			mes "<NAVI>[회색늑대의 숲]<INFO>gw_fild01,25,101,0,101,0</INFO></NAVI>에서 덫에 걸린 것들을 5개 정도 모아 오면 좋겠네.";
+			close;
+		}
+		if (.@trap01 > 0)
+			delitem 1000412, .@trap01;
+		if (.@trap02 > 0)
+			delitem 1000413, .@trap02;
+		if (.@trap03 > 0)
+			delitem 1000414, .@trap03;
+
+		erasequest 8690;
+		setquest 8689;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		mes "[에루인]";
+		mes "...좋아. 수고했네.";
+		mes "내일도 여기서 얼쩡대고 있을 만큼 한가하다면 또 부탁해도 되겠나?";
+		next;
+		if (select( "그럼요", "내일은 바쁠 것 같아서" ) == 2)
+			end;
+		mes "[에루인]";
+		mes "그거 잘됐군.";
+		mes "도움은 거절하지 않는다. 고맙네.";
+		close;
+	case 2:	// impossible
+		end;
+	}
+	end;
+
+OnInit:
+	// note: the questinfo on official is never removed except by PLAYTIME == 1
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 2 && isbegin_quest(8688) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8688) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8688) == 2 && isbegin_quest(8690) == 0 && (checkquest(8689,PLAYTIME) == -1 || checkquest(8689,PLAYTIME) == 2)" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8690) == 1" );
+	
+	// questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 2 && isbegin_quest(8688) == 0" );
+	// questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8688) == 1 && (countitem(1000412)+countitem(1000413)+countitem(1000414)) > 4" );
+	// questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8688) == 2 && isbegin_quest(8690) == 0 && (checkquest(8689,PLAYTIME) == -1 || checkquest(8689,PLAYTIME) == 2)" );
+	// questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8690) == 1 && (countitem(1000412)+countitem(1000413)+countitem(1000414)) > 4" );
+	end;
+}
+
+// Quest: Checking Traps for Food. Step 2.
+gw_fild01,24,122,0	script	설치한 덫#01	CLEAR_NPC,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(8688) == 1 || isbegin_quest(8690) == 1) {
+		.@amount = countitem(1000412) + countitem(1000413) + countitem(1000414);
+		if (.@amount >= 5) {
+			mes "오늘 덫에 걸린 것들은 충분히 회수했다.";
+			mes "<NAVI>[에루인]<INFO>wolfvill,202,166,0,101,0</INFO></NAVI>에게 가져다 주자.";
+			close;
+		}
+		specialeffect2 EF_STEAL;
+		progressbar "FFFF00",10;
+		.@r = rand(1,5);
+		if (.@r == 1)
+			getitem 1000412,1;	// Ep18_Trapped01
+		else if (.@r == 2)
+			getitem 1000413,1;	// Ep18_Trapped02
+		else if (.@r == 3)
+			getitem 1000414,1;	// Ep18_Trapped03
+		else
+			mes "아무것도 얻지 못했다...";
+		disablenpc strnpcinfo(0);
+		initnpctimer;
+		end;
+	}
+	end;
+OnTimer60000:
+	enablenpc strnpcinfo(0);
+	stopnpctimer;
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(8688) == 1" );
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(8690) == 1" );
+	end;
+}
+gw_fild01,93,113,0	duplicate(설치한 덫#01)	설치한 덫#02	CLEAR_NPC
+gw_fild01,106,126,0	duplicate(설치한 덫#01)	설치한 덫#03	CLEAR_NPC
+gw_fild01,213,130,0	duplicate(설치한 덫#01)	설치한 덫#04	CLEAR_NPC
+gw_fild01,267,156,0	duplicate(설치한 덫#01)	설치한 덫#05	CLEAR_NPC
+gw_fild01,229,205,0	duplicate(설치한 덫#01)	설치한 덫#06	CLEAR_NPC
+gw_fild01,192,210,0	duplicate(설치한 덫#01)	설치한 덫#07	CLEAR_NPC
+gw_fild01,153,212,0	duplicate(설치한 덫#01)	설치한 덫#08	CLEAR_NPC
+gw_fild01,121,245,0	duplicate(설치한 덫#01)	설치한 덫#09	CLEAR_NPC
+gw_fild01,86,327,0	duplicate(설치한 덫#01)	설치한 덫#10	CLEAR_NPC
+gw_fild01,126,356,0	duplicate(설치한 덫#01)	설치한 덫#11	CLEAR_NPC
+gw_fild01,175,339,0	duplicate(설치한 덫#01)	설치한 덫#12	CLEAR_NPC
+gw_fild01,192,361,0	duplicate(설치한 덫#01)	설치한 덫#13	CLEAR_NPC
+gw_fild01,232,319,0	duplicate(설치한 덫#01)	설치한 덫#14	CLEAR_NPC
+gw_fild01,257,297,0	duplicate(설치한 덫#01)	설치한 덫#15	CLEAR_NPC
+gw_fild01,249,245,0	duplicate(설치한 덫#01)	설치한 덫#16	CLEAR_NPC
+gw_fild01,303,276,0	duplicate(설치한 덫#01)	설치한 덫#17	CLEAR_NPC
+gw_fild01,325,254,0	duplicate(설치한 덫#01)	설치한 덫#18	CLEAR_NPC
+gw_fild01,335,241,0	duplicate(설치한 덫#01)	설치한 덫#19	CLEAR_NPC
+gw_fild01,308,318,0	duplicate(설치한 덫#01)	설치한 덫#20	CLEAR_NPC
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Firewind Kites. Step 1 + 2 + 3 (final).
+wolfvill,147,97,5	script	아히르#ep18	4_M_DST_CHILD,3,3,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	if (isbegin_quest(16548) != 2) {
+		switch( checkquest(16548,HUNTING) ) {
+		case -1:
+			mes "[아히르]";
+			mes "하아암…… 어라? 못 보던 사람. 회색늑대 마을의 새 식구예요?";
+			mes "으하아암…….";
+			next;
+			select( "밤에 잠을 잘 못잤어?" );
+			mes "[아히르]";
+			mes "네, 한 숨도 못 잤어요.";
+			mes "하아암…… 회색늑대의 숲에서는 자려고 누우면 별별 소리가 다 들리거든요.";
+			next;
+			mes "[아히르]";
+			mes "플벌레 소리, 어른들 이야기 소리, 짐승 소리…….";
+			mes "가장 잠을 방해하는 건 온갖 몬스터가 우는 소리예요.";
+			next;
+			mes "[아히르]";
+			mes "후암…… 그 중에서도 " + strmobinfo(1,21306) + "가 우는 소리가 가장 무서워요.";
+			mes "언제 불씨를 물고 와 마을을 온통 태워버리지 않을까 어른들까지도 걱정하시거든요.";
+			next;
+			mes "[아히르]";
+			mes "입에 불씨를 문 채 억눌린 목소리로 우는 모습은 정말 무서워요…….";
+			mes "으으, 생각만 했는데도 몸이 떨리네요.";
+			next;
+			select( "나, 모험가인데 내가 사냥해 줄까?" );
+			mes "[아히르]";
+			mes "와! 모험가님이셨어요?";
+			mes "그렇다면 꼭 부탁드릴게요!";
+			next;
+			mes "[아히르]";
+			mes "" + strmobinfo(1,21306) + "를 서른 마리만 잡아 주시지 않겠어요?";
+			mes "한 무리 정도 사냥하면, " + strmobinfo(1,21306) + "들도 오늘 밤 정도는 숨죽이고 있을 지도 몰라요.";
+			next;
+			switch( select( "맡겨만 줘!", "아차, 지금은 곤란해." ) ) {
+			case 1:
+				mes "[아히르]";
+				mes "와아, 감사합니다. 모험가님!";
+				mes "" + strmobinfo(1,21306) + " 30마리에요. 꼭 부탁드릴게요.";
+				next;
+				mes "[아히르]";
+				mes "다 사냥하고 돌아오셔서 말씀해 주시면, 작은 보상이나마 준비해 드릴게요!";
+				setquest 16548;
+				close;
+			case 2:
+				end;
+			}
+		case 0:
+		case 1:
+			mes "[아히르]";
+			mes "감사합니다. 모험가님! " + strmobinfo(1,21306) + " 30마리에요. 꼭 부탁드릴게요.";
+			close;
+		case 2:
+			mes "[아히르]";
+			mes "감사합니다! " + strmobinfo(1,21306) + "가 우는 소리가 확실히 줄어들었어요!";
+			mes "오늘 밤은 편히 잠들 수 있겠어요.";
+			next;
+			mes "[아히르]";
+			mes "끄응, 아마 오래 가지는 않겠지만요.";
+			mes "내일이 되면 다시 늘어날 텐데, 새벽이 지나고 또 오셔서 " + strmobinfo(1,21306) + "를 잡아주시면 좋겠어요.";
+			next;
+			mes "[아히르]";
+			mes "이건 오늘 밤 편히 잠들게 해 주신 데 대한 감사의 표시예요.";
+			mes "작은 마음이나마 받아주세요, 모험가님.";
+			completequest 16548;
+			setquest 16550;
+			getitem 1000405,20;	// Ep18_Amethyst_Fragment
+			getexp 7769124,3000000;
+			mes " ";
+			mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+			ep18_1_reputation_exp += 100;
+			if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+				ep18_1_main = 37;
+				setquest 18082;
+				mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+				mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+			}
+			close;
+		}
+	}
+	switch( checkquest(16550,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[아히르]";
+		mes "아직은 " + strmobinfo(1,21306) + "가 몸을 사리고 있는 모양이에요.";
+		mes "지금 자극한다면, 오히려 악에 받쳐서 더 시끄럽게 굴지도 모르겠어요.";
+		next;
+		mes "[아히르]";
+		mes "새벽이 지나고 또 와서 " + strmobinfo(1,21306) + "를 잡아주시겠어요?";
+		mes "꼭 좀 부탁드릴게요, 모험가님.";
+		close;
+	case 2:
+		erasequest 16550;
+		break;
+	}
+	switch( checkquest(16549,HUNTING) ) {
+	case -1:
+		mes "[아히르]";
+		mes "하아암, 오늘도 너무 졸립네요.";
+		mes "모험가님, " + strmobinfo(1,21306) + "를 30마리만 잡아 주지 않으시겠어요?";
+		next;
+		mes "[아히르]";
+		mes "한 무리 사냥한다면, " + strmobinfo(1,21306) + "들도 오늘 밤 정도는 숨죽이고 있을 거예요.";
+		next;
+		switch( select( "잡아 준다.", "잡아주지 않는다." ) ) {
+		case 1:
+			mes "[아히르]";
+			mes "와아, 감사합니다. 모험가님!";
+			mes "" + strmobinfo(1,21306) + " 30마리에요. 꼭 부탁드릴게요.";
+			next;
+			mes "[아히르]";
+			mes "다 사냥하고 돌아오셔서 말씀해 주시면, 작은 보상이나마 준비해 드릴게요!";
+			setquest 16549;
+			close;
+		case 2:
+			end;
+		}
+		end;
+	case 0:
+	case 1:
+		mes "[아히르]";
+		mes "감사합니다. 모험가님! " + strmobinfo(1,21306) + " 30마리에요. 꼭 부탁드릴게요.";
+		close;
+	case 2:
+		mes "[아히르]";
+		mes "감사합니다! " + strmobinfo(1,21306) + "가 우는 소리가 확실히 줄어들었어요!";
+		mes "오늘 밤은 편히 잠들 수 있겠어요.";
+		next;
+		mes "[아히르]";
+		mes "끄응, 아마 오래 가지는 않겠지만요.";
+		mes "내일이 되면 다시 늘어날 텐데, 새벽이 지나고 또 오셔서 " + strmobinfo(1,21306) + "를 잡아주시면 좋겠어요.";
+		next;
+		mes "[아히르]";
+		mes "이건 오늘 밤 편히 잠들게 해 주신 데 대한 감사의 표시예요.";
+		mes "작은 마음이나마 받아주세요, 모험가님.";
+		erasequest 16549;
+		setquest 16550;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 10318080,3000000;
+		close;
+	}
+	end;
+
+OnTouch_:
+	npctalk "아히르: 졸려…… 너무 피곤해.", "", bc_self;
+	end;
+
+OnInit:
+	// first completion
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(16548,HUNTING) == -1 && isbegin_quest(11724) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(16548,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(16548) == 2 && checkquest(16549,HUNTING) == -1 && (checkquest(16550,PLAYTIME) == -1 || checkquest(16550,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(16549,HUNTING) == 2" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Childhood Friends. Step 1.
+wolfvill,182,82,5	script	알베르#ep18	4_M_RACHMAN1,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8718) ) {
+	case 0:
+		mes "[알베르]";
+		mes "혹시 다시 라헬로 돌아갈 생각이 있다면 내 부탁을 하나만 들어 주지 않겠어?";
+		next;
+		mes "[알베르]";
+		mes "단도직입적으로 말하자면... 라헬의 호텔에서 종업원으로 일하던 내 친구가 있는데.";
+		mes "여기에 아직 오지 않은 걸 보면 아마 아직 거기서 일하고 있을 거야.";
+		next;
+		mes "[알베르]";
+		mes "나와 그 친구... 호림은 어릴 때부터 옆집에 살았어.";
+		mes "라헬에 살았었지. 그런데, 아무래도 버틸 수가 없어져서...";
+		next;
+		mes "[알베르]";
+		mes "걔네 가족과 우리 가족은 라헬을 뜨기로 했어.";
+		mes "하지만 호림만은 라헬에 남겠다고 했지.";
+		mes "더이상 지체할 수가 없어져서, 우리는 그 애를 남겨두고 여기로 옮겼어.";
+		next;
+		mes "[알베르]";
+		mes "라헬은 큰 도시지만 지금 그 애는 혼자야.";
+		mes "...";
+		mes "혹시 괜찮다면 어떻게 살고 있는지 한 번 들러 봐 줄 수 있을까.";
+		next;
+		switch( select( "그러지", "당분간은 갈 일이 없어" ) ) {
+		case 1:
+			mes "[알베르]";
+			mes "고맙다.";
+			mes "그냥... 들러 봐 주기만 해. 나한테 보고할 필요도 없어.";
+			setquest 8718;
+			navigateto("ra_in01",388,59);
+			close;
+		case 2:
+			end;
+		}
+		end;
+	case 1:
+		mes "[알베르]";
+		mes "나한테 보고할 필요는 없어.";
+		mes "호림이 잘 지내고 있는 것만 확인해 주면 돼.";
+		close;
+	case 2:
+		mes "[알베르]";
+		mes "그 애를 만났냐고?";
+		mes "응.";
+		mes "...그래.";
+		mes "떠날 때 못 했던 말도 모두 다 했어.";
+		mes "이제 내겐 남은 미련은 없어.";
+		next;
+		mes "[알베르]";
+		mes "회색빛 숲이 빛나는 것같은 기분이야.";
+		mes "그럴 리가 없는데.";
+		mes "모두 모험가, 당신 덕분이야.";
+		mes "고마워.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8718) == 0 && isbegin_quest(11724) == 2" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 2.
+ra_in01,386,44,0	script	#ep18w01_	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (isbegin_quest(8718) == 1) {
+		cloakoffnpc "종업원#ep1800", getcharid(0);
+		cloakoffnpc "종업원#ep1801", getcharid(0);
+	}
+	end;
+}	
+
+ra_in01,388,59,5	script	종업원#ep1800	4_M_RACHMAN2,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8718) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[종업원]";
+		mes "...!";
+		mes "모험가님, 화산재 냄새가 나시는군요.";
+		mes "토르 화산... 아니야.";
+		next;
+		mes "종업원은 잠시 주변을 둘러보고는 낮은 소리로 말했다.";
+		next;
+		mes "[종업원]";
+		mes "혹시 회색늑대의 숲으로 가는 길을...";
+		next;
+		switch( select( "아는데", "모르는데" ) ) {
+		case 1:
+			mes "[종업원]";
+			mes "...저를 그 곳으로 안내해 주실 수 있을까요.";
+			mes "정말... 정말 그 곳에 가고 싶습니다.";
+			next;
+			mes "[종업원]";
+			mes "위험한 길인 것도 알고요. 저는 모험가가 아니니까요...";
+			mes "하지만 저는 정말 거기에 닿을 방법이 없어요.";
+			next;
+			mes "[종업원]";
+			mes "친구와 가족이 떠난다고 해서 저는 좀 더 버티며 있어 보자고 했지만...";
+			mes "제가 방해라도 할 거라고 생각했는지 모두 어느날 밤 야반도주하듯이 떠나버렸어요.";
+			mes "그러고는 당연히 소식이 끊겨서...";
+			next;
+			mes "[종업원]";
+			mes "저를 그 곳에 데려다 주세요.";
+			mes "제게는 이제 아무도 없어요.";
+			next;
+			select( "뭔가 잘 안 됐어?" );
+			mes "아직 자기소개도 마치지 않은 그는 쓴웃음을 지었다.";
+			next;
+			mes "[종업원]";
+			mes "그러게요, 정말 처음 보는 사람에게 저도 무슨 이야기를 하는 건지.";
+			mes "저는 호림이라고 해요.";
+			mes "모험가님은...";
+			mes "" + strcharinfo(0) + "님이라고요?";
+			next;
+			mes "[호림]";
+			mes "그럼... " + strcharinfo(0) + "님.";
+			mes "일단 거기에 다녀오셨다는 건, 지금 <B>우리</B>가 처해 있는 상황을 아신다는 이야기죠.";
+			next;
+			mes "[호림]";
+			mes "가족들이 떠날 때까지만 해도 지금보다는 나았어요.";
+			mes "보기와는 지금이나 그때나 다르지 않지만...";
+			next;
+			mes "[호림]";
+			mes "지금은... 겉보기에는 괜찮아요. 여러 정책도 있고. 하지만 안에서는 곪을 대로 곪아서...";
+			mes "길에 나가면 웃음소리조차 듣기 힘들어요. 또 누가 나를, 우리를 욕하는 것만 같고.";
+			mes "이제 버틸 수가...";
+			next;
+			select( "한 번 시작한 거..." );
+			mes "[" + strcharinfo(0) + "]";
+			mes "한 번 시작한 거, 두 번이나 세 번이나 똑같지.";
+			next;
+			mes "[호림]";
+			mes "...감사합니다. 정말 감사합니다...";
+			next;
+			mes "호림은 감사의 말을 겨우 짜내고 안도의 한숨을 쉬었다.";
+			next;
+			npctalk "종업원: 네~", "종업원#ep1801", bc_self;
+			mes "[호림]";
+			mes "...죄송합니다. 지금 좀 바쁜 일이 생겨서 가 봐야 할 것 같아요.";
+			next;
+			mes "[호림]";
+			mes "이따가, 라헬 서문 밖에서 뵈어요.";
+			completequest 8718;
+			setquest 8698;
+			cloakonnpc "종업원#ep1800", getcharid(0);
+			cloakonnpc "종업원#ep1801", getcharid(0);
+			close;
+		case 2:
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8718) == 1" );
+	end;
+}
+
+ra_in01,388,63,5	duplicate(dummy_cloaked_npc)	종업원#ep1801	4_M_03
+
+// Quest: Childhood Friends. Step 3.
+ra_fild11,355,226,0	script	#ep18w02__	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(8698) == 1)
+		cloakoffnpc "호림#ep1810", getcharid(0);
+	end;
+}
+
+ra_fild11,350,236,0	script	#horim01	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(8698) == 1)
+		cloakoffnpc "호림#ep1810", getcharid(0);
+	end;
+}
+
+ra_fild11,350,236,3	script	호림#ep1810	4_M_RACHMAN2,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8698) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[호림]";
+		mes "...아, 모험가님.";
+		mes "사실 저는 여기 이상으로 도시에서 멀리 떨어져 본 적이 없어요.";
+		next;
+		mes "[호림]";
+		mes "그렇다면 제 고향은 어디일까요?";
+		mes "라헬이 맞는 걸까요?";
+		next;
+		mes "[호림]";
+		mes "지금까지 어디에 있어도 마음이 편한 적이 없었다면...";
+		mes "역시 라헬을 떠나는 게 맞는 걸까요...?";
+		next;
+		mes "[호림]";
+		mes "...말이 길었군요.";
+		mes "여기서 어느 방향이죠?";
+		mes "가시는 길대로 따라가겠습니다.";
+		navigateto("ra_fild10",375,293);
+		changequest 8698,8699;
+		cloakonnpc "호림#ep1810", getcharid(0);
+		next;
+		mes "다시 회색늑대의 숲으로 향하자.";
+		navigateto("ra_fild10",375,293);
+		close;
+	case 2:
+		end;
+	}
+	end;
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8698) == 1" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 4.
+ra_fild10,375,293,0	script	#horim02	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (isbegin_quest(8699) == 1)
+		cloakoffnpc "호림#ep1811", getcharid(0);
+	end;
+}
+
+ra_fild10,379,282,0	script	#horim03	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (isbegin_quest(8699) == 1)
+		cloakoffnpc "호림#ep1811", getcharid(0);
+	end;
+}
+
+ra_fild10,375,293,5	script	호림#ep1811	4_M_RACHMAN2,5,5,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8699) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[호림]";
+		mes "모험가님, 잠시만요.";
+		mes "여긴 어디쯤인가요?";
+		next;
+		mes "[호림]";
+		mes "뒤를 돌아보았는데 라헬이... 성벽이 너무나 멀리 보였어요.";
+		mes "얼마나 더 가야 하나요?";
+		next;
+		mes "[호림]";
+		mes "...";
+		mes "이게 반도 못 온 거라고요?";
+		next;
+		mes "[호림]";
+		mes "갈 길은 험한가요?";
+		mes "가족들은 잘 지낼까요?";
+		next;
+		mes "[호림]";
+		mes "친구들은 잘 지낼까요?";
+		mes "제가 가도 괜찮을까요?";
+		navigateto("oz_dun01",285,170);
+		changequest 8699,8700;
+		cloakonnpc "호림#ep1811", getcharid(0);
+		next;
+		mes "다시 회색늑대의 숲으로 향하자.";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnTouch:
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8699) == 1" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 5.
+oz_dun01,285,169,0	script	#ep18w04	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(8700) == 1)
+		cloakoffnpc "호림#ep1812", getcharid(0);
+	end;
+}
+
+oz_dun01,285,170,5	script	호림#ep1812	4_M_RACHMAN2,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8700) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[호림]";
+		mes "이런 풍경은 처음 봐요.";
+		next;
+		mes "[호림]";
+		mes "모험가님은 항상 이런 것을 보고 다니셨겠군요.";
+		next;
+		mes "[호림]";
+		mes "그 곳은 어떤 풍경인가요?";
+		mes "소문으로 듣기에는 그렇게 살기가 편하지는 않다고 했는데.";
+		next;
+		mes "[호림]";
+		mes "그래도...";
+		next;
+		mes "[호림]";
+		mes "이 길은 좋네요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "이 길이?";
+		next;
+		mes "[호림]";
+		mes "몬스터가 많아 혼자서는 못 오겠지만...";
+		mes "모험가님은 너무 많이 다니셔서 이제 신기하지 않나요?";
+		next;
+		mes "[호림]";
+		mes "괜찮아요, 잡일은 자신있으니까요.";
+		mes "이래봬도 힘쓰는 일이 직업이었으니까.";
+		next;
+		mes "[호림]";
+		mes "갑시다.";
+		navigateto("gw_fild01",272,342);
+		changequest 8700,8701;
+		cloakonnpc "호림#ep1812", getcharid(0);
+		next;
+		mes "다시 회색늑대의 숲으로 향하자.";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8700) == 1" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 6.
+gw_fild01,272,342,0	script	#horim04	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (isbegin_quest(8701) == 1) {
+		cloakoffnpc "호림#ep1813", getcharid(0);
+		navigateto("ra_fild11",358,229);
+	}
+	end;
+}
+gw_fild01,275,338,0	duplicate(#horim04)	#ep18w04_	HIDDEN_WARP_NPC,4,4
+
+gw_fild01,272,342,5	script	호림#ep1813	4_M_RACHMAN2,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8701) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[호림]";
+		mes "화산재 냄새가 바뀌었어요.";
+		next;
+		mes "[호림]";
+		mes "모험가님과 처음 만났을 때 제가 했던 말 기억나시나요?";
+		mes "토르 화산과 화산재 냄새가 다르다고.";
+		next;
+		mes "[호림]";
+		mes "그건... 제가 밖에 나와 본 적은 없지만 가끔씩 제 일터에 오는 손님들에게 그런 냄새가 났어요.";
+		mes "분명 무슨 무기를... 숨긴 사람들이 토르 화산에서 오더군요.";
+		next;
+		mes "[호림]";
+		mes "무기를 숨긴 건 어떻게 알았냐고요?";
+		mes "어차피 그들 눈에 우리 종업원은 안 보이거든요.";
+		next;
+		mes "[호림]";
+		mes "가끔 식사 자리에서 정말로 우리가 안 보이는 것처럼 무슨 기밀 같은 걸 떠들기도 하는데.";
+		mes "안 들으려고 해도 한두 마디야 들리죠.";
+		next;
+		mes "[호림]";
+		mes "물론 정말 중요한 이야기야 그런 자리에서 하지 않겠지만요.";
+		next;
+		mes "[호림]";
+		mes "그런데 그 화산재 냄새가 미묘하게 다른 사람들이 있지요.";
+		mes "저와 같은... 사람들.";
+		next;
+		mes "[호림]";
+		mes "저도 그 냄새가 나게 될까요?";
+		mes "...";
+		next;
+		mes "[호림]";
+		mes "...가시죠.";
+		navigateto("gw_fild01",36,99);
+		changequest 8701,8702;
+		cloakonnpc "호림#ep1813", getcharid(0);
+		next;
+		mes "다시 회색늑대 마을로 향하자.";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8701) == 1" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 7.
+gw_fild01,36,99,0	script	#horimF	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(8702) == 1) {
+		cloakoffnpc "호림#ep1814", getcharid(0);
+		navigateto("ra_fild11",358,229);
+	}
+	end;
+}
+
+gw_fild01,36,99,5	script	호림#ep1814	4_M_RACHMAN2,{
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8702) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[호림]";
+		mes "여기서 조금만 쉬었다 가요...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "여기서?";
+		next;
+		mes "[호림]";
+		mes "마침 통나무도 있고...";
+		next;
+		mes "[문지기]";
+		mes "안녕?";
+		next;
+		mes "[호림]";
+		mes "안녕하세요...";
+		next;
+		mes "[호림]";
+		mes "거기서 사는 건 힘들어 보이던가요?";
+		next;
+		select( "너무 그렇게 고민하지 않아도" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "너무 그렇게 고민하지 않아도 될 것 같은데.";
+		next;
+		mes "[호림]";
+		mes "그러게요.";
+		mes "이미 저는...";
+		mes "라헬을 떠나버렸는데.";
+		next;
+		mes "[호림]";
+		mes "...";
+		next;
+		select( "떠나는 이유" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "친구도 가족도 모두 가 버려서 따라가는 거라고 했잖아?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그런데 왜 또 고민할 필요가 있어?";
+		next;
+		mes "[호림]";
+		mes "모험가님은...";
+		mes "그렇군요. 모험가님은 꼭 돌아가야만 하는 곳이 있나요?";
+		mes "일단 제가 일하던 곳에 오던 손님들 중 많은 모험가는 그렇지 않았어요.";
+		next;
+		mes "[호림]";
+		mes "하지만 저는 돌아갈 곳이 필요해요.";
+		mes "모두에게 잘 자라고 말하고 불을 끄고 자러 들어갈 곳이.";
+		next;
+		mes "[호림]";
+		mes "외로워서가 아니라...";
+		mes "...";
+		next;
+		mes "호림은 뭔가 말하려다 삼켰다.";
+		next;
+		mes "[호림]";
+		mes "그런 종류의 사람도 있지요.";
+		next;
+		mes "[호림]";
+		mes "...가시죠.";
+		next;
+		mes "[문지기]";
+		mes "마을로 오는 사람이야?";
+		next;
+		mes "[호림]";
+		mes "?";
+		next;
+		mes "[문지기]";
+		mes "사정은 들었어. 이 사람이 데리고 온 사람이면 믿을 수 있겠지. 들어가 봐.";
+		next;
+		mes "[호림]";
+		mes "네?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "여기가 입구야.";
+		mes "들어가지.";
+		changequest 8702,8703;
+		close2;
+		warp "wolfvill",270,26;
+		end;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8702) == 1" );
+	end;
+}
+
+// Quest: Childhood Friends. Step 8 (final).
+wolfvill,271,26,0	script	#horimG	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch_:
+	if (isbegin_quest(8703) == 1)
+		cloakoffnpc "호림#ep1815", getcharid(0);
+	end;
+}
+
+wolfvill,266,26,5	script	호림#ep1815	4_M_RACHMAN2,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 36)
+		end;
+	switch( isbegin_quest(8703) ) {
+	case 0:
+		end;
+	case 1:
+		mes "[" + strcharinfo(0) + "]";
+		mes "여기야.";
+		next;
+		mes "[호림]";
+		mes "...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "실망했어?";
+		next;
+		mes "[호림]";
+		mes "아뇨.";
+		next;
+		mes "[호림]";
+		mes "...가족을 찾아볼게요.";
+		mes "여기 어딘가에는 있겠죠?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "널 버린 게 아니니까 반가워할 거야.";
+		mes "네 말대로 힘쓰는 일도 잘 하니까 환영할 걸.";
+		next;
+		mes "[호림]";
+		mes "후후...";
+		next;
+		mes "[호림]";
+		mes "고마워요.";
+		next;
+		mes "[호림]";
+		mes "정말 고마워요!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "이제 그럼 난 가도 돼?";
+		next;
+		mes "[호림]";
+		mes "네.";
+		mes "오늘 저녁은... 오랜만에 모두에게 잘 자라고 말할 수 있겠네요.";
+		next;
+		mes "[호림]";
+		mes "모험가님의 앞으로의 여정에 축복이 있기를...";
+		completequest 8703;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		next;
+		close2;
+		cloakonnpc "호림#ep1815", getcharid(0);
+		end;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8703) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Helping the Children. Step 1.
+rachel,38,44,3	script	사마리암#ep18	4_M_CHILD1,{
+	if (isbegin_quest(16581) == 0) {
+		mes "[사마리암]";
+		mes "나이만, 나 목말라. 물좀 떠다 줄래? 여기서 너네 집이 제일 가깝잖아.";
+		next;
+		mes "[카르]";
+		mes "집에 먹을 것 있어? 없으면 말린 과일 좀 사다 주라.";
+		mes "나이만, 너 착하잖아.";
+		next;
+		mes "[나이만]";
+		mes "먹을 것… 없는데.";
+		mes "난 돈도 없어….";
+		next;
+		mes "[러크시]";
+		mes "에이, 먹을 것도 없는 집이 어딨어?";
+		mes "우리 주기 싫어서 그러는 거지.";
+		next;
+		mes "[사마리암]";
+		mes "실망이다, 나이만.";
+		mes "너 착한 애인 줄 알았는데.";
+		next;
+		mes "[나이만]";
+		mes "아, 아냐!";
+		mes "물은 있으니까 가서 물 떠올게.";
+		next;
+		mes "[사마리암]";
+		mes "됐어. 물 아까울 텐데. 우리 줄 게 어딨어?";
+		mes "물도 돈 주고 사는 건데 너희 집에 돈 없다며.";
+		setquest 16581;
+		close;
+	}
+	mes "[사마리암]";
+	mes "아, 노는데 배고프고 목말라.";
+	mes "어디 시원한 데 앉아서 얼음 넣은 차랑 말린 과일 먹었으면 좋겠다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16581) == 0" );
+	end;
+}
+
+// Quest: Helping the Children. Step 2.
+rachel,37,42,7	script	카르#ep18	4_M_RACHMAN1,{
+	if (isbegin_quest(16581) == 1) {
+		mes "[카르]";
+		mes "돈이 없긴 왜 없어? 너네 아빠 러크시네 포목점에서 일하잖아.";
+		mes "러크시네 엄마가 너네 아빠한테 돈을 안 준단 소리야?";
+		next;
+		mes "[러크시]";
+		mes "우리 엄마는 너네 아빠한테 돈을 주는데, 너는 우리한테 말린 과일 하나 사주기 싫다 이거지?";
+		next;
+		mes "[사마리암]";
+		mes "야아, 됐어 그만해. 불쌍하잖아~ 돈 없다는데 그만하자.";
+		next;
+		mes "[나이만]";
+		mes "아냐!!! 안 불쌍해….";
+		mes "안 불쌍하다고…!!";
+		next;
+		mes "[사마리암]";
+		mes "어, 미안해~ 농담인데.";
+		mes "왜 정색해서 화를 내고 그래. 무섭게….";
+		next;
+		mes "[사마리암]";
+		mes "원주민들이 좀 다혈질이라고 듣긴 했는데 그래도 일일이 화를 내는 건 좀… 그렇다?";
+		mes "그렇지 않아?";
+		next;
+		mes "[카르]";
+		mes "그러게. 화가 나도 참을 줄 알아야 같이 놀 수도 있지.";
+		mes "너같은 애랑 놀아주는 우리한테 감사해.";
+		completequest 16581;
+		setquest 16582;
+		close;
+	}
+	mes "[카르]";
+	mes "달콤한 차에 얼음 잔뜩 넣어서 마시고 싶다.";
+	mes "그러고 나면 노는 것도 더 재밌을 것 같은데!";
+	next;
+	mes "[카르]";
+	mes "지금은 너무 덥고 목말라요.";
+	mes "그렇다고 집에 가기는 싫지만.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16581) == 1" );
+	end;
+}
+
+// Quest: Helping the Children. Step 3.
+rachel,40,45,3	script	러크시#ep18	4_M_DST_CHILD,{
+	if (isbegin_quest(16582) == 1) {
+		mes "[러크시]";
+		mes "맞아, 우리한테 감사해!";
+		next;
+		select( "못 봐주겠네.", "그만 좀 괴롭혀." );
+		mes "[러크시]";
+		mes "음? 그쪽은 누군데 우리 노는데 끼어드세요?";
+		mes "여기 사람 아닌 것 같은데… 왜 참견이신지?";
+		next;
+		select( "그게 노는 거야?", "놀긴, 괴롭히는 거지." );
+		mes "[사마리암]";
+		mes "나이만이 우리랑 좀 다른 건 어쩔 수 없는 일이에요~";
+		mes "얘는 여기 원주민이고, 우리들은 다 이주민인걸요.";
+		next;
+		mes "[사마리암]";
+		mes "원주민이 이주민보다 좀 이것저것 모자란 건 누구나 다 알잖아요?";
+		mes "그래도 우리가 이렇게 같이 놀아 주는데.";
+		next;
+		mes "[나이만]";
+		mes "아냐! 누가 그래. 원주민이랑 이주민이랑 다른 게 뭐가 있다고!";
+		next;
+		mes "[카르]";
+		mes "또 소리 지른다.";
+		mes "원주민들이 더 다혈질이라는 걸 네가 증명하고 있네.";
+		next;
+		select( "화낼 수밖에 없게 굴잖아.", "그런 식으로 말하면 당연히 화나지." );
+		mes "[사마리암]";
+		mes "하지만 사실인데요?";
+		mes "나이만네 아빠가 러크시네 포목점에서 일하는데, 러크시네 엄마가 항상 그런단 말이에요.";
+		next;
+		mes "[사마리암]";
+		mes "원주민들은 가르쳐주는 것도 늦게 배우고 다혈질이라고요.";
+		mes "그런 원주민을 취업시켜 주고 월급을 주는 아줌마가 대단한 거라고요.";
+		erasequest 16582;
+		setquest 16583;
+		close;
+	}
+	mes "[러크시]";
+	mes "우리 집 가면 시원한 차랑 간식 있는데!";
+	mes "하지만 너무 멀어…… 여기서 나이만네 집이 제일 가깝지 않나?";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16582) == 1" );
+	end;
+}
+
+// Quest: Helping the Children. Step 4 (final).
+rachel,36,45,5	script	나이만#ep18	4_F_DST_CHILD,{
+	if (isbegin_quest(16583) == 1) {
+		if (checkweight(1000405,10) == 0) {
+			mes "- Wait a minute !! -";
+			mes "- Currently you're carrying -";
+			mes "- too many items with you. -";
+			mes "- Please try again -";
+			mes "- after you loose some weight. -";
+			close;
+		}
+		mes "[나이만]";
+		mes "…….";
+		next;
+		select("너는 왜 얘들이랑 어울리니?");
+		mes "[나이만]";
+		mes "네, 네?";
+		next;
+		select("이런 취급을 왜 당하냐고.");
+		mes "[나이만]";
+		mes "그야…… 친구니까요.";
+		mes "얘들 아니면 저랑 놀아주는 애들도 없고.";
+		next;
+		mes "[사마리암]";
+		mes "거봐요. 나이만도 좋아서 우리랑 노는 거란 말이에요.";
+		mes "우리가 진짜로 쟬 괴롭혔으면 그냥 저희랑 안 놀았겠죠.";
+		next;
+		mes "[러크시]";
+		mes "이방인이 참견쟁이라는 건 이미 들어서 알고 있지만…….";
+		mes "잘 모르는 일에까지 참견하지 마세요.";
+		next;
+		mes "[나이만]";
+		mes "나…… 집 가서 물 떠올게.";
+		mes "그리고…… 괜히 성질내서 미안.";
+		next;
+		cloakonnpc "나이만#ep18", getcharid(0);
+		mes "[사마리암]";
+		mes "뭐, 같이 놀다 보면 그럴 수도 있지, 안그래?";
+		mes "너무 신경쓰지 마.";
+		next;
+		cloakonnpc "사마리암#ep18", getcharid(0);
+		mes "[러크시]";
+		mes "우리 이제 딴 데 가서 놀자.";
+		mes "참견쟁이 이방인은 여기 두고 말이야.";
+		next;
+		cloakonnpc "러크시#ep18", getcharid(0);
+		mes "[카르]";
+		mes "그래, 그러자.";
+		mes "잘 있어요, 이방인 모험가님!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "……뭔가 인생 경험치가 쌓인 기분이 든다.";
+		mes "썩 좋은 기분은 아니지만…….";
+		cloakonnpc "카르#ep18", getcharid(0);
+		erasequest 16583;
+		getitem 1000405,10;	// Ep18_Amethyst_Fragment
+		close;
+	}
+	mes "[나이만]";
+	mes "덥다…… 집에 가고 싶어.";
+	mes "그치만 다들 더 놀고 싶어하니까…….";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16583) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Price of Labor. Step 1 + 3 (final).
+rachel,181,51,3	script	아모디핀#ep18	4_M_MIDDLE,{
+	if (checkweight(1000405,10) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (isbegin_quest(16584) == 0) {
+		mes "[아모디핀]";
+		mes "오늘도 월급을 못 주신다니. 벌써 석 달째 밀렸다고…….";
+		mes "생각 같아서야 이런 가게 당장 그만두고 싶지만 그랬다간 밀린 월급을 받을 길도 없겠지.";
+		next;
+		mes "[아모디핀]";
+		mes "게다가 그렇게 뛰쳐나갔다는 소문이 퍼지면 나 같은 원주민은 다른 가게에서도 일하지 못할 거야.";
+		mes "아아, 어떡하면 좋담…….";
+		next;
+		mes "[아모디핀]";
+		mes "어라, 제 이야기를 듣고 계셨나요?";
+		mes "옷차림을 보니 모험가님이시로군요. 좋겠네요. 자유롭게 모험하는 생활…….";
+		next;
+		mes "[아모디핀]";
+		mes "저, 염치 불고하고 모험가님께 부탁이 있습니다만.";
+		mes "저희 사장님이 제 말은 들은 체 만 체 하시지만 유명한 모험가님 말씀이라면 들어주실 것 같아서요.";
+		next;
+		mes "[아모디핀]";
+		mes "저희 사장님 가게에 가셔서 월급 지급을 좀 독촉해 주시면 안되겠습니까?";
+		mes "이대로는 당장 내일 먹을 끼니도 살 수가 없어요.";
+		next;
+		if (select( "도와주겠다.", "왜 그래야 하냐." ) == 2)
+			end;
+		mes "[아모디핀]";
+		mes "감사합니다, 감사합니다!";
+		mes "저희 사장님 가게는 <NAVI>[이쪽]<INFO>rachel,136,95,0,101,0</INFO></NAVI>이에요.";
+		setquest 16584;
+		close;
+	}
+	if (isbegin_quest(16585) == 1) {
+		mes "[아모디핀]";
+		mes "오셨나요. 뭔가 좋은 소식이 있을까요?";
+		next;
+		select("나눈 이야기를 들려준다");
+		mes "[아모디핀]";
+		mes "내일 밀린 월급을 지급한다고요! 아이고, 덕분입니다. 정말 감사드려요.";
+		mes "이제 먹을 것도 사고 애들 옷도 사입힐 수 있어요.";
+		next;
+		mes "[아모디핀]";
+		mes "내일 가면 잔소리는 좀 듣겠지만 사실 그래도 월급이 나온 게 더 반갑네요.";
+		mes "잔소리 듣는 거야, 뭐 하루이틀 일도 아니고.";
+		next;
+		mes "[아모디핀]";
+		mes "화나지 않냐고요? 그야 화나죠.";
+		mes "하지만 화가 난다고 어떻게 하겠어요. 원주민으로 태어난 게 잘못이지.";
+		next;
+		mes "[아모디핀]";
+		mes "어디 도망쳐서 살 수도 없고.";
+		mes "베인스 쪽에 도망친 원주민들이 지내는 마을이 있다는 소문도 들었지만 그런게 진짜로 있겠어요.";
+		next;
+		mes "[아모디핀]";
+		mes "그런데서 살 용기도 없고 말이에요. 아이고, 말이 너무 많았네.";
+		mes "바쁘신데 붙잡고 있어서 죄송합니다. 정말 감사드려요!";
+		completequest 16585;
+		getitem 1000405,10;	// Ep18_Amethyst_Fragment
+		close;
+	}
+	mes "[아모디핀]";
+	mes "하루하루 끼니 걱정, 아이들 걱정……, 걱정이 잘 날이 없어요.";
+	mes "왜 나는 원주민으로 태어나 가지고 안 해도 될 고생을 하나.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16584) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16585) == 1" );
+	end;
+}
+
+// Quest: Price of Labor. Step 2.
+rachel,136,95,3	script	다힐#ep18	4_M_RACHMAN2,{
+	if (isbegin_quest(16584) == 1) {
+		mes "[다힐]";
+		mes "어서오세요, 다힐 상회입니다.";
+		mes "처음 뵙는 분이군요. 옷차림을 보아하니 모험가!";
+		next;
+		mes "[다힐]";
+		mes "저는 모험가 분들을 아주 좋아한답니다!";
+		mes "저도 한때는 모험가를 꿈꿨었거든요. 그러다 무릎에 화살을 맞는 바람에 지금은 도시에 눌러붙어 있지만요.";
+		next;
+		mes "[다힐]";
+		mes "괜찮으시다면 물건 좀 보시면서 모험 이야기좀 해 주세요.";
+		next;
+		select("나는 다른 이야기를 하러 왔다.");
+		mes "[다힐]";
+		mes "다른 이야기라니요?";
+		mes "으음, 아모디핀의 월급 말입니까? 아모디핀이 부탁하던가요?";
+		next;
+		mes "[다힐]";
+		mes "으흠, 아모디핀도 물론 알고 있겠지만 가게 사정이 좋지가 않습니다.";
+		mes "다음 달에 한꺼번에 준다고 그렇게 얘길 했는데 제가 좋아하는 모험가님을 이용하다니.";
+		next;
+		mes "[다힐]";
+		mes "역시 비겁하게 남의 뒤에 숨는 면이 원주민답다고 해야 할까요.";
+		mes "지금까지 일을 잘하는 것 같아서 고용했는데, 역시 원주민을 고용하는 건 다시 생각해야 하나.";
+		next;
+		select("그게 무슨 말인지?");
+		mes "[다힐]";
+		mes "아, 모험가님은 신경쓰실 것 없습니다. 이건 원주민들의 오래된 의식 문제 같은 거니까요.";
+		mes "나약하고 남의 뒤에 숨기를 좋아하지요.";
+		next;
+		select( "그래도 월급 체불은 잘못됐다", "그건 차별이 아닌가" );
+		mes "[다힐]";
+		mes "누가 몰라서 그럽니까. 알아도 돈이 없으니까 그렇지.";
+		mes "뭐, 아모디핀에게 가는 월급이 제일 늦기는 했어요. 근데 그건 어쩔 수 없지요.";
+		next;
+		mes "[다힐]";
+		mes "원주민 차별 같은 게 아닙니다.";
+		mes "그냥 가장 늦게 들어온 직원이라 순서가 그렇게 돌아간 거라구요.";
+		next;
+		mes "[다힐]";
+		mes "에이, 왜 모험가님이랑 이런 이야기만 해야 하는지 모르겠군요.";
+		mes "아모디핀에게는 월급 내일 넣어줄 테니, 이런 수작 그만하라고 전해주십시오.";
+		next;
+		mes "[다힐]";
+		mes "이번 일로 꾸짖지는 않을 테니 <NAVI>[아모디핀]<INFO>rachel,181,51,0,101,0</INFO></NAVI>에게는 제대로 출근해서 일하라고 해주세요.";
+		mes "저는 원주민 차별자 같은 건 아니지만, 원주민들은 책임감이 없으니까 혼내면 그만둬버릴지도 모른다고요.";
+		completequest 16584;
+		setquest 16585;
+		close;
+	}
+	mes "[다힐]";
+	mes "지금은 상회를 운영하고 있지만 저는 모험가 분들을 아주 좋아한답니다!";
+	mes "저도 한때는 모험가를 꿈꿨었거든요. 그러다 무릎에 화살을 맞는 바람에 도시에 눌러붙어 있지만요.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16584) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Quest: Gather Opinions in Rachel. Step 1 + 2 (final).
+rachel,155,236,3	script	주녹#atm	4_M_TRAINEE,{
+	if (checkweight(1000405,10) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	switch( checkquest(3504,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[주녹]";
+		mes "오늘은 충분한 정보를 얻었습니다. 내일도 도움이 가능하시면 다시 찾아와주세요.";
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(3503) ) {
+	case 0:
+		mes "[주녹]";
+		mes "안녕하세요, 신관 주녹이라고 합니다.";
+		next;
+		mes "[주녹]";
+		mes "이 마을은 언제부턴가 원주민들, 그리고 이주민들로 두 파가 나뉘어서 대립을 형성하고 있는 상태에요.";
+		next;
+		mes "[주녹]";
+		mes "두 파의 갈등을 해소하고자 하는 노력은 계속되고 있지만 뚜렷한 성과는 나오질 않고 있습니다.";
+		next;
+		mes "[주녹]";
+		mes "그렇기 때문에 직접 그들 개개인에게 접근하여 어떠한 문제가 있는 것인지 알아보았으면 하는데요.";
+		next;
+		mes "[주녹]";
+		mes "모험가님이 저 대신 그들과 대화를 좀 하고 와주실 수 있을까요? 제가 자리를 비우기는 어려워서요.";
+		next;
+		if (select( "한다.", "다음에 한다." ) == 2)
+			end;
+		setquest 3503;
+
+		setarray .@quest_id[0],3493,3494,3495,3496,3497,3498,3499,3500,3501,3502;
+		.@size = getarraysize(.@quest_id);
+
+		for ( .@i = 0; .@i < 6; ++.@i ) {
+			.@r = rand(.@size);
+			setquest .@quest_id[.@r];
+			deletearray .@quest_id[.@r],1;
+			.@size--;
+		}
+		mes "[주녹]";
+		mes "지정해드린 원주민 3명, 그리고 이주민 3명과 대화를 마치고 와 주시면 되겠습니다.";
+		next;
+		mes "[주녹]";
+		mes "대화할 사람들의 목록은 퀘스트 창 또는 미니맵을 참고 부탁드리겠습니다.";
+		close;
+	case 1:
+		break;
+	case 2:
+		end;
+	}
+	switch( isbegin_quest(3505) ) {
+	case 0:
+		mes "[주녹]";
+		mes "지정해드린 원주민 3명, 그리고 이주민 3명과 대화를 마치고 와 주시면 되겠습니다.";
+		next;
+		mes "[주녹]";
+		mes "대화할 사람들의 목록은 퀘스트 창 또는 미니맵을 참고 부탁드리겠습니다.";
+		close;
+	case 1:
+		switch( checkquest(3504,PLAYTIME) ) {
+		case -1:	// first time
+			mes "[주녹]";
+			mes "역시 그런가요...";
+			next;
+			mes "[주녹]";
+			mes "아직은 서로 간의 앙금이 많이 남아 있는 것으로 보여지네요.";
+			next;
+			mes "[주녹]";
+			mes "제가 예상했던 것보다 더 좋지 않은데 흠... 이를 어지해야 할지.";
+			next;
+			getitem 1000405,10;	// Ep18_Amethyst_Fragment
+			getexp 7769124,3000000;	// dummy value
+			break;
+		case 0:
+		case 1:
+			mes "[주녹]";
+			mes "오늘은 충분한 정보를 얻었습니다. 내일도 도움이 가능하시면 다시 찾아와주세요.";
+			close;
+		case 2:
+			mes "[주녹]";
+			mes "음, 그렇군요. 상황이 점점 나아지는 것이 보이고 있는 것 같네요.";
+			next;
+			mes "[주녹]";
+			mes "그동안 힘쓴 보람이 있는 것 같습니다.";
+			next;
+			mes "[주녹]";
+			mes "앞으로가 더 중요하겠죠.";
+			next;
+			getitem 1000405,3;	// Ep18_Amethyst_Fragment
+			getexp 18252408,2000000;
+			break;
+		}
+		for ( .@i = 3493; .@i < 3506; ++.@i ) {
+			if (isbegin_quest(.@i) > 0)
+				erasequest .@i;
+		}
+		setquest 3504;
+		mes "[주녹]";
+		mes "좋은 참고가 되었습니다.";
+		next;
+		mes "[주녹]";
+		mes "도와주셔서 감사합니다. 내일도 도움이 가능하시면 다시 찾아와주세요.";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(3503) == 0 && (checkquest(3504,PLAYTIME) == -1 || checkquest(3504,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3505) == 1" );
+	end;
+}
+
+rachel,69,234,3	script	자라드#atm1	4_M_CHILD1,2,2,{
+	if (isbegin_quest(3493) == 1) {
+		mes "[자라드]";
+		mes "안녕하세요.";
+		next;
+		mes "[자라드]";
+		mes "원주민인 제 입장에서는 여태껏 우리들에게 어떤 대우가 주어지든지 있는 그래도 받아들이겠다는 입장이었습니다.";
+		next;
+		mes "[자라드]";
+		mes "스스로의 노력에 의해 주변을 바꾸는 것이 불가능하다면, 변화를 포기하고 순응하는 삶을 살아라.";
+		next;
+		mes "[자라드]";
+		mes "짧지 않은 세월을 살아오면서 느낀 것이었거든요, 그로 인해 다소 방관적인 태도가 생기긴 했지만...";
+		next;
+		mes "[자라드]";
+		mes "그런데 이제는 무엇인가 진짜로 변화의 조짐이 보이는 것 같습니다.";
+		next;
+		mes "[자라드]";
+		mes "우리들을 위한 제도적 장치들이 마련된다고 하는데, 한 번 믿어보려구요.";
+		next;
+		completequest 3493;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;	// setquest here to prevent bug
+		mes "[자라드]";
+		mes "그럼 좋은 하루 되세요.";
+		next;
+		mes " - 자라드와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			// setquest 3505;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3493) == 1" );
+	end;
+}
+
+rachel,100,72,3	script	로히#atm2	4_F_SHABBY,2,2,{
+	if (isbegin_quest(3494) == 1) {
+		mes "[로히]";
+		mes "안녕하세요, 그 동안 잘 지내셨나요?";
+		next;
+		mes "[로히]";
+		mes "지나님이 드디어 수긍하셨습니다.";
+		next;
+		mes "[로히]";
+		mes "드디어 지나님으로부터 제대로 된 급여를 받을 수 있게 되었어요.";
+		next;
+		mes "[로히]";
+		mes "저 혼자만의 힘으로는 해내기 어려운 일이었거든요, 마람님을 비롯한 신관님들께 정말로 감사하고 있어요.";
+		next;
+		mes "[로히]";
+		mes "저와 비슷한 입장에 처했던 다른 분들에게도 개선점이 있었다고 하니 정말 잘 된 일이에요.";
+		next;
+		mes "[로히]";
+		mes "이제 좀 마음 편하게 잘 수 있게 되었네요, 모험가님에게도 감사의 말씀을 드립니다.";
+		next;
+		completequest 3494;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[로히]";
+		mes "그럼 오늘 하루도 평안하시길 바랍니다.";
+		next;
+		mes " - 로히와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3494) == 1" );
+	end;
+}
+
+rachel,258,207,3	script	저진#atm3	4_F_RACHOLD,2,2,{
+	if (isbegin_quest(3495) == 1) {
+		mes "[저진]";
+		mes "안녕, 잘 지내고 계신가?";
+		next;
+		mes "[저진]";
+		mes "신관들의 대처가 조금만 늦었더라면 건물을 매각하게 되었을 거야.";
+		next;
+		mes "[저진]";
+		mes "원주민과 이주민들의 사업에 있어서 동등한 권한을 가지도록 조치했다는 것 아니겠나.";
+		next;
+		mes "[저진]";
+		mes "이주민들이 그것을 받아들이다니... 놀랍기도 하고 감사하기도 하군.";
+		next;
+		mes "[저진]";
+		mes "여하튼 내 사업에 박차를 가할 타이밍이 바로 찾아온 것 같아.";
+		next;
+		mes "[저진]";
+		mes "자네도 나를 응원해 줬으면 좋겠네.";
+		next;
+		completequest 3495;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[저진]";
+		mes "그럼 좋은 하루 되렴.";
+		next;
+		mes " - 저진과의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3495) == 1" );
+	end;
+}
+
+rachel,159,173,3	script	스쿠아인#atm4	4_M_LGTPOOR,2,2,{
+	if (isbegin_quest(3496) == 1) {
+		mes "[스쿠아인]";
+		mes "안녕하세요~~";
+		next;
+		mes "[스쿠아인]";
+		mes "정말 감사하게도 저에게 일자리가 주어졌습니다.";
+		next;
+		mes "[스쿠아인]";
+		mes "이제 더 이상 타인에게 의지하는 삶을 살지 않아도 되는 거예요!";
+		next;
+		mes "[스쿠아인]";
+		mes "돈을 받게 된다면 우선 입고 있는 옷부터 바꾸고 싶네요.";
+		next;
+		mes "[스쿠아인]";
+		mes "그동안 많은 분들의 도움이 있었어요...";
+		next;
+		mes "[스쿠아인]";
+		mes "이제는 저도 남을 도울 수 있는 사람이 되도록 하겠습니다.";
+		next;
+		completequest 3496;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[스쿠아인]";
+		mes "그럼 조심히 들어가세요.";
+		next;
+		mes " - 스쿠아인과의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3496) == 1" );
+	end;
+}
+
+rachel,190,30,5	script	세나도#atm5	4_F_MONK,2,2,{
+	if (isbegin_quest(3497) == 1) {
+		mes "[세나도]";
+		mes "안녕하세요, 세나도입니다.";
+		next;
+		mes "[세나도]";
+		mes "얼마 전에 강력한 도전자가 나타나서 결판을 짓고 왔습니다.";
+		next;
+		mes "[세나도]";
+		mes "그 도전자는 이주민 출신의 무투가여서 꽤 화제가 되는 대련이었죠.";
+		next;
+		mes "[세나도]";
+		mes "원주민을 대표하여 절대 질 수 없다!! 정도의 각오는 아니었지만...";
+		next;
+		mes "[세나도]";
+		mes "변화된 정책에 따라 대관료를 조절할 수 있게 되었다는 것이 저에겐 더 중요한 일이었어요.";
+		next;
+		mes "[세나도]";
+		mes "아, 그리고 대련은 저의 승리로 마무리되었습니다.";
+		next;
+		mes "[세나도]";
+		mes "당신에게도 범상치 않은 무공이 느껴지는데... 언제 한 번 저와 한 번 대련해보시는 것도 좋겠군요.";
+		next;
+		completequest 3497;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[세나도]";
+		mes "그럼 다음에 또 뵙도록 하지요.";
+		next;
+		mes " - 세나도와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3497) == 1" );
+	end;
+}
+
+rachel,210,52,5	script	제이퍼#atm6	1_ETC_01,2,2,{
+	if (isbegin_quest(3498) == 1) {
+		mes "[제이퍼]";
+		mes "안녕하신가, 상인 제이퍼라고 한다.";
+		next;
+		mes "[제이퍼]";
+		mes "내가 가진 물품들 중에는 독점으로 보유하고 있는 종류가 꽤 되거든.";
+		next;
+		mes "[제이퍼]";
+		mes "그것으로 인해 경쟁이 어려운 원주민 상인들이 힘들어했던 것은 사실이야.";
+		next;
+		mes "[제이퍼]";
+		mes "그래서 특정 물건을 한 상인이 모두 매입하지 못하게 하는 제도가 생겼다네.";
+		next;
+		mes "[제이퍼]";
+		mes "게다가 내가 고용한 원주민 인력들에 대한 임금까지 올려주는 방향으로 진행해야 할 것 같아.";
+		next;
+		mes "[제이퍼]";
+		mes "당장은 큰 손해인 것이 사실이지만 상권 자체는 더욱 활발해질 테니 이왕 이렇게 되었으니 길게 봐야겠어.";
+		next;
+		mes "[제이퍼]";
+		mes "그동안 내가 너무 고집만 부렸던 것 같아서 조금 마음에 걸리는구만.";
+		next;
+		completequest 3498;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[제이퍼]";
+		mes "그럼 다음에 또 보도록 하지.";
+		next;
+		mes " - 제이퍼와의 대화를 마쳤다. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3498) == 1" );
+	end;
+}
+
+rachel,40,73,7	script	시로안#atm7	1_F_02,2,2,{
+	if (isbegin_quest(3499) == 1) {
+		mes "[시로안]";
+		mes "안녕하세요, 제이퍼님의 제자 시로안입니다.";
+		next;
+		mes "[시로안]";
+		mes "혹시 원주민들로부터 물벼락을 맞은 사람에 대한 이야기를 들으신 적이 있나요?";
+		next;
+		mes "[시로안]";
+		mes "네, 그 사람이 바로 저에요...";
+		next;
+		mes "[시로안]";
+		mes "제이퍼님과 담판을 지을 문제인데 말입니다.";
+		next;
+		mes "[시로안]";
+		mes "속이 꽉 막힌 제이퍼님에게는 섣불리 접근하기가 불편하니 만만한 저에게 그랬던 것이겠죠...";
+		next;
+		mes "[시로안]";
+		mes "그런데 이제는 어느 정도 서로의 이해관계가 맞아떨어진 상황이어서 안심하고 돌아다닐 수 있을 것 같아요.";
+		next;
+		mes "[시로안]";
+		mes "잘 되었습니다.";
+		next;
+		completequest 3499;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[시로안]";
+		mes "그럼 평안한 하루 되시길 바랍니다.";
+		next;
+		mes " - 시로안과의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3499) == 1" );
+	end;
+}
+
+rachel,88,151,3	script	이시라#atm8	1_F_03,2,2,{
+	if (isbegin_quest(3500) == 1) {
+		mes "[이시라]";
+		mes "안녕하세요, 잘 지내고 계십니까?";
+		next;
+		mes "[이시라]";
+		mes "신관님들의 개입으로 인해 마을의 분위기는 조금씩 변해가는 중이에요.";
+		next;
+		mes "[이시라]";
+		mes "입장을 바꿔 생각하면 충분히 부당한 대우를 받았다고 느낄 수 있는 부분이었거든요.";
+		next;
+		mes "[이시라]";
+		mes "얼마 전에 있었던 연설에서 그들이 분노하기에는 충분한 이유가 있었다고 생각합니다.";
+		next;
+		mes "[이시라]";
+		mes "하지만 너무 과했던 것도 사실이에요. 적어도 폭력은 쓰지 말아야죠!";
+		next;
+		mes "[이시라]";
+		mes "여하튼 원주민들과 이주민들의 사이가 조금씩 나아졌으면 하는 바람입니다.";
+		next;
+		completequest 3500;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[이시라]";
+		mes "그럼 평안한 하루 보내십시요.";
+		next;
+		mes " - 이시라와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3500) == 1" );
+	end;
+}
+
+rachel,240,182,5	script	지나#atm9	1_F_04,2,2,{
+	if (isbegin_quest(3501) == 1) {
+		mes "[지나]";
+		mes "안녕하세요, 잘 지내고 계시죠?";
+		next;
+		mes "[지나]";
+		mes "저는 그다지 잘 지내지 못했답니다.";
+		next;
+		mes "[지나]";
+		mes "건물 추가 매입으로 사업을 확장시킬 수 있었는데 실패로 끝이 났거든요.";
+		next;
+		mes "[지나]";
+		mes "하지만 지금 생각해보니 건물 추가 매입에 성공했다고 해도 문제는 발생했을 거예요.";
+		next;
+		mes "[지나]";
+		mes "그래서 그냥 지금 이 상태를 받아들이기로 했습니다.";
+		next;
+		mes "[지나]";
+		mes "부정적인 생각은 그만하고 긍정적인 마음가짐이 필요하다고 생각되는 요즘입니다.";
+		next;
+		completequest 3501;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[지나]";
+		mes "그럼 좋은 하루 되시길 바랍니다.";
+		next;
+		mes " - 지나와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3501) == 1" );
+	end;
+}
+
+rachel,212,52,3	script	하리#atm10	1_F_MERCHANT_02,2,2,{
+	if (isbegin_quest(3502) == 1) {
+		mes "[하리]";
+		mes "안녕하세요, 제이퍼의 부인 하리입니다.";
+		next;
+		mes "[하리]";
+		mes "그이의 불같은 성질 때문에 간혹 사고가 터지면 뒷수습은 제가 하고 다닌답니다. 저를 참 힘들게 하는 사람이에요.";
+		next;
+		mes "[하리]";
+		mes "원주민들에 대한 임금 인상에 대해서도 타협이 되지 않아 많이 고생했답니다.";
+		next;
+		mes "[하리]";
+		mes "사실, 저도 급여는 더 올려줄 필요가 없다고 생각하고 있었지만 남편과 그들이 싸우는 것이 더 싫었거든요.";
+		next;
+		mes "[하리]";
+		mes "여하튼 어느 정도 절충이 된 것 같아 다행이에요.";
+		next;
+		mes "[하리]";
+		mes "이젠 좀 조용히 지냈으면 좋겠습니다.";
+		next;
+		completequest 3502;
+		for ( .@i = 3493; .@i <= 3502; ++.@i )
+			.@total += isbegin_quest(.@i);
+		if (.@total == 12)
+			setquest 3505;
+		mes "[하리]";
+		mes "그럼 이만 들어가보세요~";
+		next;
+		mes " - 하리와의 대화를 마쳤다. - ";
+		next;
+		mes " - 다음 대화 상대를 찾도록 하자. - ";
+		if (.@total == 12) {
+			next;
+			mes " - 6명과의 대화를 모두 마쳤다. 주녹에게 돌아가도록 하자. -";
+		}
+		close;
+	}
+	end;
+
+OnTouch_:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(3502) == 1" );
+	end;
+}
+//-------------------------------------------------------------------
+
+
+
+//-------------------------------------------------------------------
+// Quest: Picking Half Flowers. Step 1.
+rachel,169,79,0	script	#연출용워프	WARPNPC,{
+	end;
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5932) == 0" );
+	end;
+}
+
+rachel,170,80,6	duplicate(dummy_cloaked_npc)	탐욕스러운 남자#E18_1	4_M_RASWORD
+rachel,172,80,4	duplicate(dummy_cloaked_npc)	학대 받는 아이#E18_2	4_M_DST_CHILD
+rachel,175,80,4	duplicate(dummy_cloaked_npc)	학대 받는 아이#E18_3	4_M_DST_CHILD
+	
+rachel,176,80,0	script	#회숲꽃스타트	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	switch( isbegin_quest(5932) ) {
+	case 0:
+		cloakoffnpc "#연출용워프", getcharid(0);	// weird but official
+		cloakoffnpc "탐욕스러운 남자#E18_1", getcharid(0);
+		cloakoffnpc "학대 받는 아이#E18_2", getcharid(0);
+
+		mes "- 탐욕스러워 보이는 한 남성이";
+		mes "- 아이에게 폭언을 퍼붓고 있다.";
+		next;
+		if (select( "무슨 일인지 이야기를 들어본다.", "무시한다." ) == 2)
+			end;
+		emotion ET_FRET, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 오갈 때 없는 원주민 꼬마를 먹여주고 재워줬더니 보답이 고작 이거냐?", "탐욕스러운 남자#E18_1", bc_self;
+		emotion ET_SURPRISE, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ??", bc_self;
+		next;
+		emotion ET_ANGER, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 하?! 웃기지도 않네. 감히 손님의 지갑에 손을 대?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		emotion ET_FRET, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 에잉- 원주민이랑은 상종도 하지 말라는 주변의 조언을 듣는 거였는데.", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 내가 잠시 정신이 나갔었지. 이번엔 봐줄 테니 당장 내 눈 앞에서 사라져.", "탐욕스러운 남자#E18_1", bc_self;
+		sleep2 300;
+		specialeffect EF_HIT1, AREA, "학대 받는 아이#E18_2";
+		npctalk "아이: 아악!", "학대 받는 아이#E18_2", bc_self;
+		emotion ET_PROFUSELY_SWAT, getnpcid(0,"학대 받는 아이#E18_2");
+		cloakonnpc "학대 받는 아이#E18_2", getcharid(0);
+		cloakoffnpc "학대 받는 아이#E18_3", getcharid(0);
+		next;
+		emotion ET_STARE, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 조용히 하지 못해? 동네 시끄럽게 소리지르고 난리야?!", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		emotion ET_CRY, getnpcid(0,"학대 받는 아이#E18_3");
+		sleep2 300;
+		npctalk "아이: 제가 안 그랬어요. 저는 손님 지갑은 본적 없어요.", "학대 받는 아이#E18_3", bc_self;
+		next;
+		npctalk "남자: 이.. 이..", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 이 꼬맹이가 싹싹 빌지는 못할망정 어디서 꼬박꼬박 말대답이야?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 마지막으로 인정을 베풀어 좋게 대충 넘기려고 했더니 이제 거짓말까지 해?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		emotion ET_BLABLA, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 너 같은 건방진 꼬맹이는 필요 없어! 당장 해고야!", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		cloakonnpc "학대 받는 아이#E18_3", getcharid(0);
+		sleep2 300;
+		cloakoffnpc "학대 받는 아이#E18_2", getcharid(0);
+		emotion ET_CRY, getnpcid(0,"학대 받는 아이#E18_2");
+		npctalk "아이: 사장님 잘못했어요.", "학대 받는 아이#E18_2", bc_self;
+		next;
+		npctalk "아이: 제발 해고만은.. 아버지 약값을 벌어야 해요.", "학대 받는 아이#E18_2", bc_self;
+		next;
+		emotion ET_FRET, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: ?! 뭐 약값?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 그건 네 녀석 사정이지. 내가 그런 사정까지 봐 줘야해?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "아이: 사장님 그럼 지금껏 일한 돈이라도..", "학대 받는 아이#E18_2", bc_self;
+		next;
+		emotion ET_QUESTION, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 뭐? 일한 돈?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 허 내가 오래 살았나? 별 헛소릴 다 듣네, 도둑질하다 걸린 주제에 뻔뻔하게 돈을 달라고 해?", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		emotion ET_QUESTION, getnpcid(0,"탐욕스러운 남자#E18_1");
+		sleep2 300;
+		npctalk "남자: 훔쳐간 지갑에 대한 보상금을 청구해도 시원찮은데, 뭐? 돈? 웃기고 앉았군.", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		emotion ET_CRY, getnpcid(0,"학대 받는 아이#E18_2");
+		sleep2 300;
+		specialeffect EF_HIT1, AREA, "학대 받는 아이#E18_2";
+		npctalk "아이: 아악!", "학대 받는 아이#E18_2", bc_self;
+		cloakonnpc "학대 받는 아이#E18_2", getcharid(0);
+		cloakoffnpc "학대 받는 아이#E18_4", getcharid(0);
+		next;
+		npctalk "남자: 아이씨! 시끄럽다니까!", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		npctalk "남자: 꼬맹이 너 또 이 근처에 알짱거리다가 내 눈에 띄면 각오하는게 좋을 거야.", "탐욕스러운 남자#E18_1", bc_self;
+		next;
+		setquest 5932;
+		emotion ET_FRET, getnpcid(0,"탐욕스러운 남자#E18_1");
+		npctalk "남자: 에이 재수가 없으려니까.", "탐욕스러운 남자#E18_1", bc_self;
+		cloakonnpc "#연출용워프", getcharid(0);
+		cloakonnpc "탐욕스러운 남자#E18_1", getcharid(0);
+		close;
+	case 1:
+		cloakonnpc "#연출용워프", getcharid(0);
+		cloakonnpc "탐욕스러운 남자#E18_1", getcharid(0);
+		cloakoffnpc "학대 받는 아이#E18_4", getcharid(0);
+		end;
+	case 2:
+		end;
+	}
+}
+
+rachel,180,80,4	script	학대 받는 아이#E18_4	4_M_DST_CHILD,{
+	if (isbegin_quest(5932) == 1) {
+		mes "[아이]";
+		mes "에이.. 재수없어, 아주 만만한 게 원주민이지.";
+		next;
+		mes "[아이]";
+		mes "아.. 돈을 좀 자유분방하게 주긴 했지만, 자유분방하게 자르지 않아서 꽤 마음에 들었는데, 오래간다 싶었다.";
+		next;
+		select("괜찮니?");
+		mes "[아이]";
+		mes "아저씬 뭐야?";
+		next;
+		mes "[아이]";
+		mes "아저씨 외지인 같은데, 어설픈 동정이라면 그만둬요. 이 정도 대우는 원주민들에게는 흔한 일이니까.";
+		next;
+		mes "[아이]";
+		mes "그럼 아저씨는 가시던 길 계속 가시고. 만나서 반갑지도 않았지만, 또 만나지도 말자고~";
+		next;
+		emotion ET_STARE_ABOUT, getnpcid(0,"학대 받는 아이#E18_4");
+		mes "[아이]";
+		mes "하.. 걸린 줄 알았네.";
+		next;
+		emotion ET_KIK, getnpcid(0,"학대 받는 아이#E18_4");
+		mes "[아이]";
+		mes "사장도 멍청하긴 내가 훔친 건 손님 지갑이 아닌데.";
+		next;
+		mes "[아이]";
+		mes "아! 근데 손님 지갑은 또 누가 훔쳤지? 그거도 내가 훔쳤어야 덜 억울한데.";
+		next;
+		mes "[아이]";
+		mes "보자~ 얼마나 들었나.";
+		next;
+		emotion ET_MONEY, getnpcid(0,"학대 받는 아이#E18_4");
+		mes "[아이]";
+		mes "하나. 둘.. 석삼, 너구리, 오징어, 육개장, 칠뜨기, 팔푼이, 구렁이, 십자 도라이버";
+		next;
+		mes "[아이]";
+		mes "어이구, 짭짤하네. 짭짤해.";
+		next;
+		emotion ET_THINK, getnpcid(0,"학대 받는 아이#E18_4");
+		sleep2 3000;
+		emotion ET_SWEAT, getnpcid(0,"학대 받는 아이#E18_4");
+		mes "[아이]";
+		mes "하하? 아저씨.. 아직 안 가셨소? 돈 세는 거 다 보셨겠지? 사장에게 꼰지를 거요?";
+		next;
+		select("안 이를 테니 돌려주는 게 어때?");
+		mes "[아이]";
+		mes "하.. 이 아저씨! 또 사람 좋은 소리 하고 있네, 아까 못 봤어?";
+		next;
+		mes "[아이]";
+		mes "난 몇 달 동안 뼈빠지게 일한 월급도 제대로 못 받았다니까?";
+		next;
+		mes "[아이]";
+		mes "못해도 사장 지갑 정도는 챙겨줘야 밀린 월급에 소소한 위로비라도 충족된다고.";
+		next;
+		mes "[아이]";
+		mes "아, 몰라몰라! 꼰지르려면 꼰지르라고. 이제 아버지도 혼자 거동 정도는 하실 만큼 많이 건강해지셨고.";
+		next;
+		mes "[아이]";
+		mes "사업자금도 대충 다 모여서 슬슬 뜨려던 참이었으니까.";
+		next;
+		select("무슨 사업? 불법적인 거 아니야?");
+		mes "[아이]";
+		mes "허허.. 이 아저씨! 큰일 낼 아저씨네. ";
+		next;
+		mes "[아이]";
+		mes "어디 남의 사업 아이디어를 맨입으로 날름 가로채려고?";
+		next;
+		mes "[아이]";
+		mes "뭐 나 혼자 하기도 벅찬 일이기도 하고, 품성이 나쁜 어른은 아닌 거 같으니 특별히 끼워 줄게.";
+		next;
+		mes "[아이]";
+		mes "내가 사업을 하려고 봐둔 자리의 약도를 줄 테니까. 정말 내 사업에 관심이 있으면, 날 찾아오도록 해.";
+		next;
+		completequest 5932;
+		setquest 5933;
+		mes "[아이]";
+		mes "아! 그리고 내 이름은 메자이야. 또 보자고.";
+		close2;
+		cloakonnpc "학대 받는 아이#E18_4", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5932) == 1" );
+	end;
+}
+
+// Quest: Picking Half Flowers. Step 2.
+rachel,70,135,4	script	메자이#E18_5	4_M_DST_CHILD,{
+	if (checkweight(1000405,10) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (isbegin_quest(5933) == 1) {
+		mes "[메자이]";
+		mes "세상에 이 아저씨 정말 왔네. 왔다는 건 내 사업에 관심이 있다는 거지?";
+		next;
+		mes "[메자이]";
+		mes "흠.. 어쩔까..";
+		next;
+		mes "[메자이]";
+		mes "에이 숨기는 것도 적성에 안 맞고 그냥 솔직하게 말할게.";
+		next;
+		mes "[메자이]";
+		mes "내 사업계획을 듣겠다고 온 사람이 몇 있었는데 듣자마자 다들 그냥 가더라고.";
+		next;
+		if (select( "대체 뭐길래 그래?", "관심 없는데?" ) == 2)
+			end;
+		mes "[메자이]";
+		mes "훗! 듣고 놀라지 마시길, 난 이 사막에서 꽃을 팔 거야.";
+		next;
+		emotion ET_QUESTION, playerattached();
+		sleep2 3000;
+		emotion ET_THINK, playerattached();
+		mes "[메자이]";
+		mes "왜? 뭐? 이거 봐, 이거. 외지인 들은 이래서 안된다니까. 사막에 꽃이 얼마나 귀한 지 알아?";
+		next;
+		mes "[메자이]";
+		mes "아저씨 라헬에서 꽃집 봤어?";
+		next;
+		emotion ET_OK, playerattached();
+		mes "[메자이]";
+		mes "뭐, 물론 보기야 봤겠지, 라헬에 꽃집이 없는 건 아니니까?";
+		next;
+		mes "[메자이]";
+		mes "살아있는 꽃이 아닌 전부 조화만 파는 꽃집도 꽃집이라고 부를 수 있다면 말이지.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그런데, 꽃을 어디서 구하게?";
+		next;
+		mes "[메자이]";
+		mes "그렇지 바로 그게 문제야. 아저씨 꽤 날카롭구나? 마음에 들어.";
+		next;
+		mes "[메자이]";
+		mes "이 근방에서 싱싱한 꽃을 구할 수 없는 건 아니야. 드물긴 하지만, 구할 방법이 있긴 해.";
+		next;
+		mes "[메자이]";
+		mes "하프 플라워라고 알아? 아마 외지인은 잘 모를 거야. 여기 원주민들이나 알라나?";
+		next;
+		mes "[메자이]";
+		mes "회색 늑대 숲에서만 피는 아름답고 신비로운 꽃인데, 아빠가 엄마한테 프러포즈할 때 꺾어서 프러포즈 했다고 해.";
+		next;
+		mes "[메자이]";
+		mes "그리고 엄마가 돌아가신 이후로 아빠는 술만 드시면, 하프 플라워 채집 방법에 대해 설명해 주셨지.";
+		next;
+		mes "[메자이]";
+		mes "하프 플라워가 피어 있는 장소가 나무 아래 면 어쩌고.. 돌 아래 면 어쩌고.. 풀 옆이면 어쩌고..";
+		next;
+		mes "[메자이]";
+		mes "꽃 주변의 습도를 고려해서 칼질 방향을 10도, 20도, 30도 각도로 해야하고..";
+		next;
+		emotion ET_THINK, getnpcid(0,"메자이#E18_5");
+		mes "[메자이]";
+		mes "아.. 잠깐 흥분했어. 아빠가 이 이야기를 해주실 때마다 스트레스 였거든..";
+		next;
+		mes "[메자이]";
+		mes "뭐 결국 그걸로 사업을 하게 되었으니, 다 피가 되고 살이 되는 잔소리였지만..";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그래서 내가 도울 일이 뭔데?";
+		next;
+		mes "[메자이]";
+		mes "지금 구상중인 사업이 안정적으로 돌아가려면, 하프 플라워 물량을 충분하게 유지하는 것이 중요하다고 생각해.";
+		next;
+		mes "[메자이]";
+		mes "그래서 난 다수의 모험가와 계약을 할 계획이야. 물론 아저씨도 그 다수의 모험가 중 하나가 되겠지?";
+		next;
+		mes "[메자이]";
+		mes "아저씬 회색 늑대 숲에 가서 하프 플라워를 채집해 오는 일을 하게 될 거야.";
+		next;
+		mes "[메자이]";
+		mes "물론 이 사업이 안정적이 되었을 때 추가로 하려는 사업이 있기는 한데, 그 이야기는 진짜 안정이 된 후에 하자고.";
+		next;
+		mes "[메자이]";
+		mes "어때 아저씨 나랑 같이 일 해볼래?";
+		next;
+		if (select( "그러자.", "지금은 좀 곤란한데." ) == 2)
+			end;
+		mes "[메자이]";
+		mes "좋습니다. 저는 사장과 직원 간에는 상호존중이 중요하다고 생각합니다. 제가 왜 이런 말을 하는지는 짐작하실 거로 생각합니다.";
+		next;
+		mes "[메자이]";
+		mes "이제 같이 일을 하게 되었으니, 이제부터는 저를 메자이 사장님이라고 불러주세요. 저도 아저씨를 아니 직원분을 존중하도록 하겠습니다.";
+		next;
+		mes "[메자이]";
+		mes "제가 함부로 대하는 일은 없을 거예요. 그런 거 이제 지긋지긋해서..";
+		next;
+		mes "[메자이]";
+		mes "우선은 가장 중요한 업무인 하프 플라워 채집 방법에 대해 교육하는게 좋겠네요.";
+		next;
+		erasequest 5933;
+		setquest 5934;
+		mes "[메자이]";
+		mes "준비가 되면 말을 걸어주세요.";
+		close;
+	}
+	if (isbegin_quest(5934) == 1) {
+		mes "[메자이]";
+		mes "하프플라워 채집 교육을 시작할까 하는데 준비되셨나요?";
+		next;
+		if (select( "사장님 시작하시죠.", "잠시만요." ) == 2)
+			end;
+		mes "[메자이]";
+		mes "흠흠 하프 플라워 채집교육에 오신 것을 환영합니다.";
+		next;
+		mes "[메자이]";
+		mes "하프 플라워 채집은 크게 네 단계로 구분되는데요. 우선 처음에는 줄기를 잘라줍니다.";
+		next;
+		mes "[메자이]";
+		mes "그리고 두번째로 잘라낸 줄기에서 잎사귀를 제거해주고..";
+		next;
+		mes "[메자이]";
+		mes "세번째로 줄기 끝을 담가 둘 작은 통에 물과 비법 가루를 넣고 잘 섞습니다.";
+		next;
+		mes "[메자이]";
+		mes "마지막 네번째로 작은 통에 줄기 끝을 넣고 꽃이 상하지 않도록 잘 포장하면 끝입니다.";
+		next;
+		mes "[메자이]";
+		mes "뭐 단순하게 방식만 놓고 보면 어렵지는 않으시죠?";
+		next;
+		mes "[메자이]";
+		mes "심화 과정으로 하프 플라워가 피어있는 장소에 따라 줄기를 자르는 각도, 제거하는 잎사귀의 수, 통에 담는 물과 비법 가루의 양 등이 달라지긴 합니다만..";
+		next;
+		mes "[메자이]";
+		mes "걱정하지 마세요. 절대 잊어버리시지 않도록 일을 받으실 때 자세하게 적어 드릴 거에요.";
+		next;
+		mes "[메자이]";
+		mes "옆에 연습용으로 만든 하프 플라워가 보이시죠?";
+		next;
+		mes "[메자이]";
+		mes "제가 창업하면서 이 연습용 하프 플라워를 만드는데 가진 돈의 절반은 투자한 거 같아요.";
+		next;
+		mes "[메자이]";
+		mes "뭐 그만큼 직원들을 교육하기에 편해져서 후회하진 않아요. 그럼 실전처럼 연습해볼까요?";
+		next;
+		erasequest 5934;
+		setquest 5935;
+		mes "[메자이]";
+		mes "뭐가 좋을까? 나무 아래 하프 플라워가 피었다고 가정을 하고 연습용으로 연습해볼게요.";
+		close;
+	}
+	if (isbegin_quest(5935) == 1) {
+		mes "[메자이]";
+		mes "저 말고 제 옆에 있는 연습용 하프 플라워에 주목해주세요.";
+		close;
+	}
+	if (isbegin_quest(5936) == 1) {
+		// if (rentalcountitem(1000407) < 1)
+		mes "[메자이]";
+		mes "수고하셨습니다. 앞으로 하실 하프 플라워 채집은 방금 같은 방식으로 진행됩니다.";
+		next;
+		mes "[메자이]";
+		mes "채집한 꽃을 저에게 배송해주시면 되는 일이기는 한데.";
+		next;
+		mes "[메p이]";
+		mes "직원분께서는 저와는 다르게 여러 다른 일들을 동시에 진행하시는 분이시니..";
+		next;
+		mes "[메자이]";
+		mes "일을 보시다가 하프 플라워가 시들기 전에 제게 가져다 주시면 감사하겠습니다.";
+		next;
+		mes "[메자이]";
+		mes "아! 한가지 팁을 드리자면, 제가 알려드린 방법과 동일하게 채집을 하실 수록 꽃이 유지되는 시간이 더 길어집니다.";
+		next;
+		select("일은 언제부터 시작할까요?");
+		mes "[메자이]";
+		mes "오늘은 저도 가게 오픈 준비다 뭐다 바쁘니 내일부터 시작하시는 게 어떨까요?";
+		next;
+		select("그래요. 내일 봐요.");
+		mes "[메자이]";
+		mes "아차차 이걸 드려야지.";
+		next;
+		mes "[메자이]";
+		mes "제가 나름 이일 저일 많이 해봤는데 일은 일대로 시키면서 교육기간이라는 핑계로 이것 떼고 저것 떼고 하는게 그렇게 꼴사나울 수 없더라구요.";
+		next;
+		if (rentalcountitem(1000407) > 0)
+			delitem 1000407,1;	// Ep18_Half_Flower
+		completequest 5936;
+		setquest 5937;
+		getitem 1000405,10;	// Ep18_Amethyst_Fragment
+		getexp 7769124,3000000;	// dummy value
+		mes "[메자이]";
+		mes "지금 드리는 건 오늘 교육에 대한 보상이에요. 푹 쉬시고 내일 봐요.";
+		close;
+	}
+	mes "[메자이]";
+	mes "오셨나요? 조은한다. 아직";
+	mes "라 오픈하지 앉았어요. 첫날이다 보니 이것저것 준비할게 맞네요.";
+	next;
+	mes "[메자이]";
+	mes "지 않게 오픈할 테니 그 봐요.";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5933) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5934) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5936) == 1" );
+	end;
+}
+
+// Quest: Picking Half Flowers. Step 3 (final).
+rachel,72,133,4	script	하프 플라워#E18_6	4_EP18_HALFFLOWER,{
+	if (checkweight(1000407,1) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (isbegin_quest(5935) == 1) {
+		setarray .@good_answer[0],2,2,2,3;
+		.@time = 86400;
+		mes "연습용 하프 플라워이다.";
+		next;
+		npctalk "메자이: 자 나무 아래에 하프 플라워가 피었다고 가정하고 시작해볼게요.", "메자이#E18_5", bc_self;
+		next;
+		npctalk "메자이: 우선 하프 플라워의 줄기를 잘라볼까요?", "메자이#E18_5", bc_self;
+		next;
+		if (select( "10 °로 자른다.", "20 °로 자른다.", "30 °로 자른다.", "40 °로 자른다." ) != .@good_answer[0])
+			.@time /= 2;
+		progressbar "FFFF00",1;
+		npctalk "메자이: 잘하셨어요. 처음에는 줄기를 자르는 거에요.", "메자이#E18_5", bc_self;
+		next;
+		npctalk "메자이: 다음은 잎사귀를 제거 할게요. 남길만큼만 남기고 나머지는 제거해주세요.", "메자이#E18_5", bc_self;
+		next;
+		if (select( "2 장을 남긴다.", "4 장을 남긴다.", "6 장을 남긴다.", "8 장을 남긴다." ) != .@good_answer[1])
+			.@time /= 2;
+		progressbar "FFFF00",1;
+		npctalk "메자이: 잘하셨어요. 다음은 줄기 끝을 담글 병을 준비할 거예요.", "메자이#E18_5", bc_self;
+		next;
+		npctalk "메자이: 우선 작은 병에 물을 담아주세요.", "메자이#E18_5", bc_self;
+		next;
+		if (select( "20 ml를 담는다.", "30 ml를 담는다.", "40 ml를 담는다.", "50 ml를 담는다." ) != .@good_answer[2])
+			.@time /= 2;
+		progressbar "FFFF00",1;
+		npctalk "메자이: 물에 이제 제가 만든 비법 가루를 넣고 섞어 줄 거에요.", "메자이#E18_5", bc_self;
+		next;
+		npctalk "메자이: 적당량 섞어주세요.", "메자이#E18_5", bc_self;
+		next;
+		if (select( "2 g을 넣는다.", "4 g을 넣는다.", "6 g을 넣는다.", "8 g을 넣는다." ) != .@good_answer[3])
+			.@time /= 2;
+		npctalk "메자이: 자 이제 마지막으로", "메자이#E18_5", bc_self;
+		next;
+		npctalk "메자이: 자른 줄기 끝을 방금 물과 비법 가루를 섞은 통에 넣고 포장만 하면!", "메자이#E18_5", bc_self;
+		next;
+		progressbar "FFFF00",1;
+		// note: the timer decreases according to the answer but no idea of the ratio
+		rentitem 1000407,.@time;	// Ep18_Half_Flower
+		erasequest 5935;
+		setquest 5936;
+		cloakonnpc "하프 플라워#E18_6", getcharid(0);
+		npctalk "메자이: 완성! 그럼 방금 채집한 하프 플라워를 저에게 가져다주시겠어요?", "메자이#E18_5", bc_self;
+		close;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5935) == 1" );
+	end;
+}
+
+// daily quest
+rachel,70,135,4	script	메자이#E18_7	4_M_DST_CHILD,{
+	if (checkweight(1000405,3) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	setpcblock PCBLOCK_NPC, true;
+	if (checkquest(5937,PLAYTIME) != 2)
+		npctalk "메자이: 안녕하세요. 오늘도 힘내 봅시다.", "", bc_self;
+	else {
+		npctalk "메자이: 아 오셨어요? 오늘도 힘차게 시작해볼까요?", "", bc_self;
+		sleep2 1000;
+		npctalk "메자이: 안녕하세요. 오늘은 토요일인데 좀 느긋한 마음으로 일해보는 건 어떨까요?", "", bc_self;
+	}
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+	switch( select( "지금은 바빠서..", "하프 플라워 채집", "하프 플라워 배송" ) ) {
+	case 1:
+		npctalk "메자이: 바쁘신 일이라도 있으신가 봐요? 편하실 때 찾아주세요.", "", bc_self;
+		end;
+	case 2:
+		for ( .@id = 5938; .@id < 5942; .@id++ ) {
+			if (isbegin_quest(.@id) == 1) {
+				.@quest_id = .@id;
+				break;
+			}
+		}
+		if (.@quest_id == 0)
+			.@quest_id = rand(5938,5941);
+
+		switch( isbegin_quest(.@quest_id) ) {
+		case 0:
+			npctalk "메자이: 하프 플라워를 채집하러 가시려고요?", "", bc_self;
+			if (select( "채집해오겠다.", "오늘은 건너뛸래요." ) == 2) {
+				end;
+			}
+			switch( checkquest(5937,PLAYTIME) ) {
+			case -1:
+				break;
+			case 0:
+			case 1:
+				npctalk "메자이: 앗! 그러시겠어요?", "", bc_self;
+				sleep2 1000;
+				npctalk "메자이: 아직 오늘이 지나지 않았으니 혹시 오늘 하실 일이 일찍 끝나면, 플라워룸의 일도 도와주세요.", "", bc_self;
+				end;
+			case 2:
+				break;
+			}
+			setquest .@quest_id;
+			npctalk "메자이: 오늘은 평지에 핀 하프플라워를 주의해서 봐주세요.", "", bc_self;
+			sleep2 1000;
+			npctalk "메자이: 그럼! 오늘도 파이팅! 힘내서 싱싱한 하프 플라워를 가져와주세요.", "", bc_self;
+			end;
+		case 1:
+			if (rentalcountitem(1000407) < 1) {
+				npctalk "메자이: 오늘은 평지에 핀 하프플라워를 주의해서 봐주세요.", "", bc_self;
+				sleep2 1000;
+				npctalk "메자이: 그럼! 오늘도 파이팅! 힘내서 싱싱한 하프 플라워를 가져와주세요.", "", bc_self;
+				end;
+			}
+			delitem 1000407,1;	// Ep18_Half_Flower
+			erasequest .@quest_id;
+			if (checkquest(5937,PLAYTIME) == 2)
+				erasequest 5937;
+			setquest 5937;
+			getitem 1000405,3;	// Ep18_Amethyst_Fragment
+			getexp 18252408,2000000;
+			npctalk "메자이: 오늘도 고생하셨습니다. 뒤는 제게 맡겨주세요.", "", bc_self;
+			end;
+		case 2:
+			end;	// impossible
+		}
+		end;
+	case 3:
+		npctalk "메자이: 아직 생각만 하고있는 서비스에요. 사업이 조금 안정되면 시작하지 않을까요?", "", bc_self;
+		sleep2 1000;
+		npctalk "메자이: 그때가 되면 잘 부탁드립니다.", "", bc_self;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5936) == 2 && isbegin_quest(5938) == 0 && isbegin_quest(5939) == 0 && isbegin_quest(5940) == 0 && isbegin_quest(5941) == 0 && checkquest(5937,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5936) == 2 && rentalcountitem(1000407) > 0" );
+	end;
+}
+
+gw_fild01,325,376,1	script	하프 플라워#EP18_R01	4_EP18_HALFFLOWER,7,7,{
+	if (checkweight(1000407,1) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	for ( .@id = 5938; .@id < 5942; .@id++ ) {
+		if (isbegin_quest(.@id) == 1) {
+			.@quest_id = .@id;
+			break;
+		}
+	}
+	if (.@quest_id == 0) {
+		unittalk getcharid(3), "하프 플라워가 피어있다.", bc_self;
+		end;
+	}
+	// player interacts with the npc according to the quest ID
+	// 5938 requires EP18_R (flower near a Rock)
+	// 5939 requires EP18_L (?)
+	// 5940 requires EP18_T (Tree)
+	// 5941 requires EP18_W (Water)
+	switch( .@quest_id ) {
+	case 5938:
+		.@string$ = "EP18_R";
+		setarray .@good_answer[0],4,1,4,1;
+		break;
+	case 5939:
+		.@string$ = "EP18_L";
+		setarray .@good_answer[0],3,2,3,2;
+		break;
+	case 5940:
+		.@string$ = "EP18_T";
+		setarray .@good_answer[0],2,2,2,3;
+		break;
+	case 5941:
+		.@string$ = "EP18_W";
+		setarray .@good_answer[0],1,4,1,4;
+		break;
+	}
+	if (compare(strnpcinfo(2), .@string$) == false) {
+		cloakonnpc strnpcinfo(0), getcharid(0);
+		end;
+	}
+	if (rentalcountitem(1000407) > 0) {
+		mes "- 하프 플라워는 더";
+		mes "- 필요하지 않다. 시들기 전에";
+		mes "- 메자이에게 가져다주자.";
+		close;
+	}
+	.@time = 86400;
+	mes "- 하프 플라워가 피어있다. 메자이가";
+	mes "- 전해준 채집 도구에서 필요한";
+	mes "- 재료를 찾아 채집하도록 하자.";
+	next;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 각도를 어떻게 해서 줄기를 잘라야 하지?", bc_self;
+	next;
+	if (select( "10 °로 자른다.", "20 °로 자른다.", "30 °로 자른다.", "40 °로 자른다." ) != .@good_answer[0])
+		.@time /= 2;
+	progressbar "FFFF00",1;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 잎사귀는 몇 장이나 남길까?", bc_self;
+	next;
+	if (select( "2 장을 남긴다.", "4 장을 남긴다.", "6 장을 남긴다.", "8 장을 남긴다." ) != .@good_answer[1])
+		.@time /= 2;
+	progressbar "FFFF00",1;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 작은 병에 몇 ml 나 물을 담을까?", bc_self;
+	next;
+	if (select( "20 ml를 담는다.", "30 ml를 담는다.", "40 ml를 담는다.", "50 ml를 담는다." ) != .@good_answer[2])
+		.@time /= 2;
+	progressbar "FFFF00",1;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 비법 가루는 몇 g을 넣어야 하지?", bc_self;
+	next;
+	if (select( "2 g을 넣는다.", "4 g을 넣는다.", "6 g을 넣는다.", "8 g을 넣는다." ) != .@good_answer[3])
+		.@time /= 2;
+	progressbar "FFFF00",1;
+	cloakonnpc strnpcinfo(0), getcharid(0);
+	// note: the timer decreases according to the answer but no idea of the ratio
+	rentitem 1000407, .@time;	// Ep18_Half_Flower
+	mes "- 하프 플라워를 채집했으니";
+	mes "- 시들기 전에 메자이에게 가져다주자.";
+	close;
+
+OnTouch:
+	for ( .@id = 5938; .@id < 5942; .@id++ ) {
+		if (isbegin_quest(.@id) == 1) {
+			.@quest_id = .@id;
+			break;
+		}
+	}
+	if (.@quest_id == 0)
+		end;
+	setarray .@string$[5938], "EP18_R", "EP18_L", "EP18_T", "EP18_W";
+	if (compare(strnpcinfo(2), .@string$[.@quest_id]) == false) {
+		cloakonnpc strnpcinfo(0), getcharid(0);
+		end;
+	}
+	end;
+}
+gw_fild01,280,106,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_R02	4_EP18_HALFFLOWER,7,7
+gw_fild01,382,271,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_R03	4_EP18_HALFFLOWER,7,7
+gw_fild02,291,248,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_R04	4_EP18_HALFFLOWER,7,7
+gw_fild02,119,93,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_R05	4_EP18_HALFFLOWER,7,7
+gw_fild02,287,321,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_R06	4_EP18_HALFFLOWER,7,7
+
+gw_fild01,297,310,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L01	4_EP18_HALFFLOWER,7,7
+gw_fild01,219,211,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L02	4_EP18_HALFFLOWER,7,7
+gw_fild01,316,150,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L03	4_EP18_HALFFLOWER,7,7
+gw_fild02,104,338,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L04	4_EP18_HALFFLOWER,7,7
+gw_fild02,207,101,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L05	4_EP18_HALFFLOWER,7,7
+gw_fild02,268,262,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L06	4_EP18_HALFFLOWER,7,7
+gw_fild02,144,94,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L07	4_EP18_HALFFLOWER,7,7
+wolfvill,212,86,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L08	4_EP18_HALFFLOWER,7,7
+wolfvill,143,43,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L09	4_EP18_HALFFLOWER,7,7
+wolfvill,58,113,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_L10	4_EP18_HALFFLOWER,7,7
+
+gw_fild01,157,92,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T01	4_EP18_HALFFLOWER,7,7
+gw_fild01,189,183,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T02	4_EP18_HALFFLOWER,7,7
+gw_fild01,202,358,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T03	4_EP18_HALFFLOWER,7,7
+gw_fild01,279,64,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T04	4_EP18_HALFFLOWER,7,7
+gw_fild01,159,206,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T05	4_EP18_HALFFLOWER,7,7
+gw_fild02,125,367,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T06	4_EP18_HALFFLOWER,7,7
+gw_fild02,114,355,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T07	4_EP18_HALFFLOWER,7,7
+gw_fild02,248,288,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T08	4_EP18_HALFFLOWER,7,7
+wolfvill,258,226,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T09	4_EP18_HALFFLOWER,7,7
+wolfvill,130,203,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_T10	4_EP18_HALFFLOWER,7,7
+
+gw_fild01,48,83,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W01	4_EP18_HALFFLOWER,7,7
+wolfvill,88,57,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W02	4_EP18_HALFFLOWER,7,7
+wolfvill,65,95,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W03	4_EP18_HALFFLOWER,7,7
+wolfvill,78,222,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W04	4_EP18_HALFFLOWER,7,7
+wolfvill,193,238,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W05	4_EP18_HALFFLOWER,7,7
+wolfvill,208,245,1	duplicate(하프 플라워#EP18_R01)	하프 플라워#EP18_W06	4_EP18_HALFFLOWER,7,7
+//-------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Others daily
+gw_fild01,32,101,3	script	캠퍼#to_wolfvill	4_M_SITDOWN,{
+	if (ep18_1_main < 31)
+		end;
+	if (checkweight(1000405,3) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (checkquest(18086,HUNTING) == 2) {
+		mes "[문지기]";
+		mes "오, 주변이 평화롭다 했더니 내 부탁을 들어줬구나.";
+		mes "고마워.";
+		mes "자 내가 가진걸 탈탈 털어 줄게.";
+		erasequest 18086;
+		setquest 18087;
+		ep18_1_reputation_exp += 30;
+		if (ep18_1_reputation_exp >= 5000)
+			.@bonus = 1;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {
+			ep18_1_main = 37;
+			setquest 18082;
+			mes "^4d4dff회색늑대 마을 사람들이 당신을 마을의 일원으로 받아들였습니다.^000000";
+			mes "^4d4dff대회의에 참석할 수 있는 자격이 생겼습니다.^000000";
+		}
+		getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+		getexp 9956480,2000000;
+		next;
+	}
+	mes "[문지기]";
+	mes "마을로 들어갈 거야?";
+	next;
+	switch( select( "회색늑대 마을로", "가지 않는다.", "정체가 뭐야?", "회색늑대 숲을 더 안전하게" ) ) {
+	case 1:
+		mes "[문기지]";
+		mes "좋아. 이쪽 나무사이로 잘 들어가야 해.";
+		mes "따라와.";
+		close2;
+		warp "wolfvill",270,26;
+		end;
+	case 2:
+		end;
+	case 3:
+		end;
+	case 4:
+		switch( checkquest(18087,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[문지기]";
+			mes "음…. 당분간 괜찮을거야.";
+			mes "어느정도 위협이 됐으니까 쟤네들도 생각이 있다면 덤벼들지 않겠지.";
+			close;
+		case 2:
+			erasequest 18087;
+			break;
+		}
+		switch( checkquest(18086,HUNTING) ) {
+		case -1:
+			mes "[문지기]";
+			mes "보다시피 난 여기에서 입구를 지키고 있잖아?";
+			mes "가끔은 피곤한데도 몬스터들이 여기까지 와서 날 괴롭힌단 말야.";
+			next;
+			mes "[문지기]";
+			mes "종류 불문하고 이 근처 숲에서 몬스터 서른마리만 해치워줄래?";
+			mes "내가 색이 예뻐서 주워놓은 자수정 조각이 있는데, 그거 줄게.";
+			next;
+			switch( select( "의뢰 수락", "의뢰 거절" ) ) {
+			case 1:
+				mes "[문지기]";
+				mes "고마워!";
+				mes "이제 나도 긴장을 좀 풀고 쉴 수 있겠어!";
+				mes "그럼 부탁할게.";
+				setquest 18086;
+				close;
+			case 2:
+				end;
+			}
+		case 0:
+		case 1:
+			mes "[문지기]";
+			mes "종류 불문하고 이 근처 숲에서 몬스터 서른마리만 해치워줄래?";
+			mes "내가 색이 예뻐서 주워놓은 자수정 조각이 있는데, 그거 줄게.";
+			close;
+		case 2:
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	// note: click me icon appears after talking to MARAM. Daily quest icon appears later on
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep18_1_main == 35" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep18_1_main > 35 && checkquest(18086,HUNTING) == -1 && (checkquest(18087,PLAYTIME) == -1 || checkquest(18087,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(18086,HUNTING) == 2" );
+	end;
+}
+//-------------------------------------------------------------------

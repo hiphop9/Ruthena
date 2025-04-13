@@ -13,6 +13,7 @@
 #include <common/socket.hpp>
 #include <common/sql.hpp>
 #include <common/strlib.hpp> // StringBuf
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -255,7 +256,10 @@ bool mapif_parse_SaveGuildStorage(int fd)
 
 	if( sizeof(struct s_storage) != len - 12 )
 	{
-		ShowError("inter storage: data size error %" PRIuPTR " != %d\n", sizeof(struct s_storage), len - 12);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("inter storage: 데이터 크기 오류 (창고 크기: %" PRIuPTR " != 길이: %d)\n", sizeof(struct s_storage), len - 12);
+		else
+			ShowError("inter storage: data size error %" PRIuPTR " != %d\n", sizeof(struct s_storage), len - 12);
 	}
 	else
 	{
@@ -378,7 +382,10 @@ bool mapif_parse_itembound_retrieve(int fd)
 		memcpy(&items[count++], &item, sizeof(struct item));
 	Sql_FreeResult(sql_handle);
 
-	ShowInfo("Found '" CL_WHITE "%d" CL_RESET "' guild bound item(s) from CID = " CL_WHITE "%d" CL_RESET ", AID = %d, Guild ID = " CL_WHITE "%d" CL_RESET ".\n", count, char_id, account_id, guild_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("'" CL_WHITE "%d" CL_RESET "'개의 길드 바운드 아이템이 (CID = " CL_WHITE "%d" CL_RESET", AID = %d, Guild ID = " CL_WHITE "%d" CL_RESET ")에 의해서 발견 되었습니다.\n", count, char_id, account_id, guild_id);
+	else
+		ShowInfo("Found '" CL_WHITE "%d" CL_RESET "' guild bound item(s) from CID = " CL_WHITE "%d" CL_RESET ", AID = %d, Guild ID = " CL_WHITE "%d" CL_RESET ".\n", count, char_id, account_id, guild_id);
 	if (!count) { //No items found - No need to continue
 		StringBuf_Destroy(&buf);
 		SqlStmt_Free(stmt);
@@ -528,7 +535,10 @@ bool mapif_parse_StorageLoad(int fd) {
 		case TABLE_INVENTORY: res = inventory_fromsql(cid, &stor); break;
 		case TABLE_STORAGE:
 			if( !interServerDb.exists( stor_id ) ){
-				ShowError( "Invalid storage with id %d\n", stor_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("창고ID %d은(는) 잘못된 창고입니다.\n", stor_id);
+				else
+					ShowError( "Invalid storage with id %d\n", stor_id );
 				return false;
 			}
 
@@ -568,7 +578,10 @@ bool mapif_parse_StorageSave(int fd) {
 		case TABLE_INVENTORY:	inventory_tosql(cid, &stor); break;
 		case TABLE_STORAGE:
 			if( !interServerDb.exists( stor.stor_id ) ){
-				ShowError( "Invalid storage with id %d\n", stor.stor_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("창고 ID %d은(는) 잘못된 창고 입니다.\n", stor.stor_id);
+				else
+					ShowError( "Invalid storage with id %d\n", stor.stor_id );
 				return false;
 			}
 

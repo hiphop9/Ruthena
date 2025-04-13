@@ -18,6 +18,7 @@
 #include <common/malloc.hpp>
 #include <common/showmsg.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 #include "map.hpp"
 #include "mob.hpp"
 #include "navi.hpp"
@@ -92,7 +93,10 @@ static int heap_update_node(struct node_heap *heap, struct path_node *node)
 	int i;
 	ARR_FIND(0, BHEAP_LENGTH(*heap), i, BHEAP_DATA(*heap)[i] == node);
 	if (i == BHEAP_LENGTH(*heap)) {
-		ShowError("heap_update_node: node not found\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("heap_update_node: 노드를 찾을 수 없습니다.\n");
+		else
+			ShowError("heap_update_node: node not found\n");
 		return 1;
 	}
 	BHEAP_UPDATE(*heap, i, NODE_MINTOPCMP);
@@ -376,7 +380,10 @@ void write_warp(std::ostream& os, const struct navi_link &nl) {
 
 void write_npc(std::ostream &os, const struct npc_data *nd) {
 	if (nd == nullptr) {
-		ShowError("Unable to find NPC ID for NPC '%s'. Skipping...\n", nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("'%s' NPC에 대한 NPC ID를 찾지 못했습니다.. 건너뜀...\n", nd->exname);
+		else
+			ShowError("Unable to find NPC ID for NPC '%s'. Skipping...\n", nd->exname);
 		return;
 	}
 
@@ -568,7 +575,10 @@ void write_npc_distances() {
 		dist_npc_file << "\t},\n";
 	}
 
-	ShowStatus("Generated NPC Distances for %d maps\n", map_num);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("%d개의 맵에 대한 NPC 거리가 생성되었습니다.\n", map_num);
+	else
+		ShowStatus("Generated NPC Distances for %d maps\n", map_num);
 
 	write_footer(dist_npc_file);
 }
@@ -625,7 +635,10 @@ void write_map_distances() {
 		}
 		dist_map_file << "\t},\n";
 	}
-	ShowStatus("Generated Map Distances for %d maps\n", map_num);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("%d개의 맵에 대한 NPC 거리가 생성되었습니다.\n", map_num);
+	else
+		ShowStatus("Generated Map Distances for %d maps\n", map_num);
 	write_footer(dist_map_file);
 }
 
@@ -639,15 +652,24 @@ void navi_create_lists() {
 
 	write_object_lists();
 	auto currenttime = std::chrono::system_clock::now();
-	ShowInfo("Object lists took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("오브젝트 목록을 받는데 %u밀리초(ms) 걸렸습니다.\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	else
+		ShowInfo("Object lists took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
 	starttime = std::chrono::system_clock::now();
 	write_npc_distances();
 	currenttime = std::chrono::system_clock::now();
-	ShowInfo("NPC Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("NPC Distances(거리)을(를) 받는데 %u밀리초(ms) 걸렸습니다.\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	else
+		ShowInfo("NPC Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
 	starttime = std::chrono::system_clock::now();
 	write_map_distances();
 	currenttime = std::chrono::system_clock::now();
-	ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("Link Distances(거리)을(를) 받는데 %u밀리초(ms) 걸렸습니다.\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+	else
+		ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
 
 	BHEAP_CLEAR(g_open_set);
 }

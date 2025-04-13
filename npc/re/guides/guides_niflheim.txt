@@ -15,56 +15,57 @@
 //= 1.2 Navigation system update. [Euphy]
 //============================================================ 
 
-niflheim,201,187,3	script	Niflheim Guide#01nif	849,{
-	mes "[Niflheim Guide]";
-	mes "Welcome to.. ^8B4513Niflheim^000000...";
-	mes "the Realm of the Dead...";
-	mes "Do you need help navigating the realm...?";
+niflheim,201,187,3	script	니플헤임 가이드#01nif	849,{
+	mes "[니플헤임 가이드]";
+	mes "^8B4513니플헤임^000000안내를...." ;
+	mes "해...드리고.. 있습니다..";
+	mes "무엇이든... 물어보세요..";
 	if (F_Navi() == 0) {
 		next;
-		mes "[Niflheim Guide]";
-		mes "When you click on the.. ^B9062F[location name]^000000... you'll receive the most advanced ^B9062FNavigation^000000 services...!";
+		mes "[니플헤임 가이드]";
+		mes "^B9062F[거점명]을 클릭^000000 시 ^B9062F내비게이션^000000 안내";
+		mes "서비스...도 실시하고 있...습니다.";
 	}
 	while (1) {
 		next;
-		switch(select("[ Tool Shop ]:[ Pub ]:[ Weapon Shop ]:[ Witch's Castle ]:Remove Marks from Mini-Map:Cancel")) {
+		switch(select("[        도 구 점        ]:[          주 점          ]:[        무 기 점        ]:[      마 녀 의 성      ]:미니 맵 표시 지우기:그만둔다.")) {
 		case 1:
-			callsub L_Mark, F_Navi("Tool Shop","niflheim,218,196","^0000FF");
+			callsub L_Mark, F_Navi("도구점","niflheim,218,196","^0000FF");
 			viewpoint 1,218,196,0,0x0A82FF;
 			break;
 		case 2:
-			callsub L_Mark, F_Navi("Pub","niflheim,189,208","^006400");
+			callsub L_Mark, F_Navi("주점","niflheim,189,208","^006400");
 			viewpoint 1,189,208,1,0xAAFF00;
 			break;
 		case 3:
-			callsub L_Mark, F_Navi("Weapon Shop","niflheim,218,170","^800080");
+			callsub L_Mark, F_Navi("무기점","niflheim,218,170","^800080");
 			viewpoint 1,218,170,2,0xDA70D6;
 			break;
 		case 4:
-			callsub L_Mark, F_Navi("Witch's Castle","niflheim,255,195","^FF1493");
+			callsub L_Mark, F_Navi("마녀의성","niflheim,255,195","^FF1493");
 			viewpoint 1,255,195,3,0xFF1493;
 			break;
 		case 5:
-			mes "[Niflheim Guide]";
-			mes "Sure, I'll remove all marks from your mini-map...";
-			mes "Is there anything else I can do for you...?";
+			mes "[니플헤임 가이드]";
+			mes "표시를.. 지워.. 드리겠습니다..";
+			mes "다른 도움이... 필요하신가요..";
 			viewpoint 2,1,1,0,0xFFFFFF;
 			viewpoint 2,1,1,1,0xFFFFFF;
 			viewpoint 2,1,1,2,0xFFFFFF;
 			viewpoint 2,1,1,3,0xFFFFFF;
 			break;
 		case 6:
-			mes "[Niflheim Guide]";
-			mes "......Bye~!..";
+			mes "[니플헤임 가이드]";
+			mes "......안녕...히..";
 			close;
 		}
 	}
 	end;
 L_Mark:
-	mes "[Niflheim Guide]";
-	mes "Let me mark the location of the";
-	mes getarg(0)+"^000000...";
-	mes "on your mini-map.";
-	mes "Would you like to check any other locations?";
+	mes "[니플헤임 가이드]";
+	mes getarg(0)+"의..";
+	mes "위치를..미니.. 맵에";
+	mes "표시해... 드리겠습니다.";
+	mes "다른.. 안내가.. 필요하신가요?";
 	return;
 }

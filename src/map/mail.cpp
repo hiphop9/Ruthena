@@ -8,6 +8,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "atcommand.hpp"
 #include "battle.hpp"
@@ -438,7 +439,10 @@ bool mail_invalid_operation(map_session_data *sd)
 #if PACKETVER < 20150513
 	if( !map_getmapflag(sd->bl.m, MF_TOWN) && !pc_can_use_command(sd, "mail", COMMAND_ATCOMMAND) )
 	{
-		ShowWarning("clif_parse_Mail: char '%s' trying to do invalid mail operations.\n", sd->status.name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("clif_parse_Mail: 케릭터 '%s'이(가) 잘못된 메일 작업을 하려고합니다.\n", sd->status.name);
+		else
+			ShowWarning("clif_parse_Mail: char '%s' trying to do invalid mail operations.\n", sd->status.name);
 		return true;
 	}
 #else

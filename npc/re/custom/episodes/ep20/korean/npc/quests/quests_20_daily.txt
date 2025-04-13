@@ -1,0 +1,4914 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: ========================================= 
+//= [Walkthrough Conversion]
+//--- Daily quests from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+
+// Daily quest [item gathering] - "Example of silent answer"
+// Also pre-re quest 1 for Main quest - Step 27
+// (ep20_main = 27 unlocks the daily quest, quest "도움을 가장한 뒤치다꺼리")
+jor_sanct,257,115,3	script	파모슈간드#1	4_EP19_RGAN_SR2,{ 
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26 && isbegin_quest(8843) < 2) {
+		if (isbegin_quest(8843) == 0) {
+			mes "[파모슈간드]";
+			mes "토론하겠느냐?";
+			next;
+			select( "깜짝이야", "네" );	// note: the selection doesn't change the text
+			mes "[파모슈간드]";
+			mes "처음 보는 애구나.";
+			mes "하긴, 지금까지 늘 라스간드 님을 받들어 모셨다 보니 좀 더 낮은 곳에서 일하는 이들의 얼굴을 모르는 것도...";
+			next;
+			mes "[파모슈간드]";
+			mes "...당연한 일이겠구나!";
+			mes "하하, 이런 데서 나의 충성심을 느끼다니.";
+			mes "이 비좁은 성스러운 뿌리에서 또 깨달음을 얻는구나.";
+			next;
+			mes "[파모슈간드]";
+			mes "그래, 나와 토론을 하자꾸나.";
+			mes "하필 이 쪽의 도리리로간드는 묵언수행 중이라 토론을 할 수가 없다.";
+			next;
+			mes "파모슈간드 뒤에 있는 상급 르간은 슬쩍 이 쪽을 바라봤다가 다시 시선을 돌렸다.";
+			next;
+			mes "[파모슈간드]";
+			mes "묵언수행이라고 알고 있느냐?";
+			mes "말을 하지 않는 것 자체가 깨달음을 위한 수행이 되는 것으로...";
+			next;
+			mes "[파모슈간드]";
+			mes "그리하여 언젠가부터 이 도리리로간드는 나의 시중을 들면서도 묵언수행을 하는 중이지.";
+			mes "침묵으로 뜻을 얻겠다 하니 이 어찌 환영할 만한 일이 아니겠느냐.";
+			next;
+			mes "[파모슈간드]";
+			mes "그의 뜻을 존중하여 수행을 계속하게 두었으나 나는 라스간드 님의 가르침에 대해 이야기할 상대가 없어 조금 아쉽구나.";
+			next;
+			mes "시선이 느껴진다.";
+			mes "도리리로간드가 이 쪽을 보고 있다.";
+			next;
+			mes "고개를 절레절레 흔들었다.";
+			mes "인간과 같은 뜻일까?";
+			next;
+			mes "[파모슈간드]";
+			mes "하찮은 것아, 너는 요르문간드 교단에 대해 얼마나 아느냐?";
+			next;
+			mes "[파모슈간드]";
+			mes "물론 여기까지 왔으니 너도 꽤나 충성을 인정받았을 것이고 우리의 역사에 대해 공부를 했을 것이야.";
+			mes "그 중 제일 중요한 것은 역시 우리는 다른 종족들과 달리 모두가 라스간드 님의 후예라는 것이겠지.";
+			next;
+			mes "[파모슈간드]";
+			mes "늙어서 죽는다는 것이 어떤 일인가 생각만 해도 끔찍하지 않은가?";
+			mes "라스간드 님은 그것이 없는 세상을 꿈꾸신 게 아닐까?";
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (직접 물어보면 되잖아!)", bc_self;
+			next;
+			select( "그렇군요" );
+			setquest 8843;
+			mes "[파모슈간드]";
+			mes "라스간드 님이 여기까지 어떻게 오셨는데, 홀시비간드나 인간, 심지어 사레크간드까지 자기가 라스간드 님을 여기 모셔왔다고 하질 않나...";
+			mes "피곤해서 짜증이 날 지경이다.";
+			next;
+			mes "[파모슈간드]";
+			mes "이 파모슈간드, 언제든지 라스간드 님의 설법과 교리 탐구를 들을 시간을 비워 두고 있는데...";
+			mes "교리를 들으러 오는 상급 르간 하나 없으니, 에잉!";
+			next;
+			select( "제가 시간이 있습니다" );
+			mes "[파모슈간드]";
+			mes "으응? 뭐라고?";
+			mes "내 설법을 들으러 왔다고?";
+			next;
+			mes "[파모슈간드]";
+			mes "허허, 참.";
+			mes "허허, 그것 참.";
+			next;
+			emotion ET_BLABLA;
+			mes "파모슈간드는 혼자 감탄하며 제자리에서 빙글빙글 돌기 시작했다.";
+			mes "기분이 좋아진 모양이다.";
+			next;
+			mes "[도리리로간드]";
+			mes "...";
+			emotion ET_THINK, getnpcid(0,"ep20_jor_sanct_258_117");
+			next;
+			mes "문득 시선이 느껴져 상급 르간을 다시 바라보자, 르간임에도 그 눈빛이 매우 이해가 갔다.";
+			mes "불쌍하다는 눈빛이다.";
+			next;
+			emotion ET_SURPRISE;
+			mes "[파모슈간드]";
+			mes "아!";
+			mes "그래, 너는 혹시 전투가 가능한 정찰병인 것이냐?";
+			next;
+			mes "[파모슈간드]";
+			mes "그렇다면 바쁜 이 몸을 위해";
+			mes "" + mesitemlink(1001244) + "을 좀 구해다 주지 않겠느냐?";
+			mes "20개 정도면 충분할 것 같구나.";
+			mes "얼른 다녀오너라!";
+			next;
+			mes "[파모슈간드]";
+			mes "거부권은 네게 없느니라!";
+			mes "에헴.";
+			emotion ET_OHNO, getnpcid(0,"ep20_jor_sanct_258_117");
+			close;
+		}
+		if (countitem(1001244) < 20) {
+			mes "[파모슈간드]";
+			mes "" + mesitemlink(1001244) + "을 그러고보니 누군가한테 20개쯤 가져오라 명했는데, 누구였던고...";
+			close;
+		}
+		mes "[파모슈간드]";
+		mes "무슨 일이냐, 하찮은 것아.";
+		mes "...응?";
+		mes "이것은...";
+		mes "" + mesitemlink(1001244) + "!";
+		next;
+		mes "[파모슈간드]";
+		mes "그러고보니 이런 걸 누군가에게 부탁하긴 했었지.";
+		mes "그게 너였구나.";
+		mes "어디 보자...";
+		mes "너는 요르문간드 교단에 대해 얼마나 아느냐?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "부탁하신 것, 갖고 왔...";
+		next;
+		mes "[파모슈간드]";
+		mes "그게 중요한 게 아니다.";
+		mes "나는 지금 설법이 하고 싶구나.";
+		emotion ET_THINK, getnpcid(0,"ep20_jor_sanct_258_117");
+		next;
+		mes "파모슈간드의 뒤에서 도리리로간드가 시선을 보내고 있다.";
+		close;
+	}
+
+	// daily
+	switch( checkquest(8844,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[파모슈간드]";
+		mes "오늘은 정말 즐거웠다.";
+		mes "내일 또 토론하는 게 어떠하냐?";
+		close;
+	case 2:
+		erasequest 8844;
+		break;
+	}
+	switch( isbegin_quest(8845) ) {
+	case 0:
+		mes "[파모슈간드]";
+		mes "...하찮은 것은 그대로 있구나.";
+		next;
+		mes "[도리리로간드]";
+		mes ".........";
+		next;
+		mes "[파모슈간드]";
+		mes "흐음?";
+		mes "도리리로간드, 무슨 일이냐?";
+		next;
+		mes "도리리로간드가 파모슈간드를 빤히 쳐다보자 파모슈간드는 어떻게 된 일인지 알아들은 것 같다.";
+		next;
+		mes "[파모슈간드]";
+		mes "아쉽게도 지금 도리리로간드가 매우 바쁜 것 같으니 그를 도와주어라.";
+		mes "" + mesitemlink(1001244) + " 20개를 가져오면 된다.";
+		mes "토론이야 지나가는 다른 상급 르간과도 할 수 있으니.";
+		next;
+		if (select( "도리리로간드를 도와준다", "잽싸게 달아난다" ) == 2) {
+			mes "[도리리로간드]";
+			mes "......";
+			close;
+		}
+		mes "정말로 이치를 깨달은 쪽은 도리리로간드일지도 모른다.";
+		setquest 8845;
+		close;
+	case 1:
+		if (countitem(1001244) < 20) {
+			mes "[파모슈간드]";
+			mes "" + mesitemlink(1001244) + "... 20개가 되지 않는 것 같구나?";
+			mes "아니면 나와 지금 교리 토론을 하고 싶어서 돌아온 것이냐?";
+			next;
+			mes "입을 꾹 다물고 미소를 지었다.";
+			next;
+			mes "[파모슈간드]";
+			mes "음... 지금은 아니라고?";
+			mes "알았다.";
+			next;
+			mes "도리리로간드가 웃는 소리가 들린 것 같지만 아무 것도 들리지 않았다.";
+			close;
+		}
+		mes "[파모슈간드]";
+		mes "벌써 왔느냐? 그럼 나와 교리 토론을...";
+		next;
+		mes "도리리로간드가 얼른 손을 내밀어 부탁한 물건을 채어갔다.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "다음에 또 봐요!";
+		next;
+		mes "[파모슈간드]";
+		mes "어, 야! 하찮은 것아!";
+		delitem 1001244,20;
+		erasequest 8845;
+		setquest 8844;
+		getexp 15415360,10790760;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8843) == 0" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8844,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8843) == 2 && checkquest(8844,PLAYTIME) == -1 && isbegin_quest(8845) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8845) == 1 && countitem(1001244) >= 20" );
+	end;
+}
+
+jor_sanct,258,117,5	script	도리리로간드#1::ep20_jor_sanct_258_117	4_EP19_RGAN_R1,{
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep20_main < 25) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26 && isbegin_quest(8843) == 1) {
+		if (countitem(1001244) < 20) {
+			mes "[도리리로간드]";
+			mes "...";
+			close;
+		}
+		mes "도리리로간드에게 좀 도와달라는 시선을 보냈다.";
+		next;
+		mes "[도리리로간드]";
+		mes "...";
+		next;
+		mes "도리리로간드는 눈을 감고 고개를 절레절레 저었다.";
+		mes "이것은 인간과 똑같은 뜻인 것 같다.";
+		next;
+		select( "어떻게 좀 도와줘" );
+		mes "도와달라는 시선을 간절하게 보냈다.";
+		next;
+		mes "[도리리로간드]";
+		mes "......";
+		next;
+		select( "그러지 말고 좀" );
+		mes "도와달라는 시선을 애절하게 보냈다.";
+		next;
+		mes "[도리리로간드]";
+		mes ".........";
+		next;
+		select( "도리리로간드님" );
+		mes "도와달라는 시선을 절절하게 보냈다.";
+		next;
+		mes "[도리리로간드]";
+		mes "............";
+		next;
+		mes "도리리로간드는 말없이 이어지는 간청에 눈을 슬며시 떴다.";
+		next;
+		select( "도리리로간드님!" );
+		mes "소리내어 부르지 않았으나 무슨 말을 하려고 했는지 도리리로간드는 모두 이해한 것 같았다.";
+		mes "파모슈간드 덕에 정말로 도를 깨우친 느낌이다.";
+		next;
+		mes "도리리로간드는 시선을 파모슈간드에게 돌렸다.";
+		mes "그러자, 마치 이름이라도 불린 것처럼 파모슈간드가 대답했다.";
+		next;
+		mes "[파모슈간드]";
+		mes "왜 그러느냐, 도리리로간드.";
+		next;
+		mes "[도리리로간드]";
+		mes "......";
+		next;
+		mes "도리리로간드는 시선을 조금 다른 곳으로 돌렸다가, 다시 파모슈간드를 바라보았다.";
+		emotion ET_THINK;
+		next;
+		mes "[파모슈간드]";
+		mes "그렇다면 어쩔 수 없지.";
+		next;
+		mes "파모슈간드는 사람...";
+		mes "아니, 르간이 바뀐 듯 인자한 얼굴이 되어 이 쪽을 바라보며 말했다.";
+		next;
+		mes "[파모슈간드]";
+		mes "하찮은 것아, 나는 슬슬 낮잠을 잘 시간이다.";
+		mes "이 깃털은 잘 쓰겠다.";
+		mes "휴식은 소중하다. 교리도 소중하지만, 너 자신의 평안함도 아끼거라.";
+		delitem 1001244,20;
+		completequest 8843;
+		if (isbegin_quest(17701) == 1) {
+			erasequest 17701;
+			setquest 8839;
+		}
+		if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+			ep20_main = 27;
+			erasequest 8839;
+			setquest 8840;
+		}
+		setquest 8844;
+		getexp 23123040,10790760;
+		next;
+		mes "도리리로간드를 돌아보자, 그는 눈을 감고 고개를 끄덕였다.";
+		close;
+	}
+	mes "도리리로간드는 인기척을 느끼자 이 쪽을 바라보고 미소지었다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8843) == 1 && countitem(1001244) >= 20" );
+	end;
+}
+//-------------------
+
+
+
+// Daily quest
+// Also pre-re quest 4 for Main quest - Step 27
+// (ep20_main = 27 unlocks the daily quest, quest "도움을 가장한 뒤치다꺼리")
+jor_sanct,264,160,5	script	눔카사이가간드#1::ep20_jor_sanct_264_160	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[눔카사이가간드]";
+		mes "할 일... 할 일이 없으면...";
+		mes "불안해요...";
+		close;
+	}
+	mes "[눔카사이가간드]";
+	mes "휴우...";
+	mes "일을 하니 만족스럽다요.";
+	close;
+}
+
+jor_sanct,266,155,7	script	온내체라멜간드#1::ep20_jor_sanct_266_155	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[온내체라멜간드]";
+		mes "일...";
+		mes "일거리를 주세요...";
+		close;
+	}
+	mes "[온내체라멜간드]";
+	mes "휴우...";
+	mes "일을 하니 만족스럽다요.";
+	close;
+}
+
+jor_sanct,268,160,3	script	작르다구미간드#1::ep20_jor_sanct_268_160	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[작르다구미간드]";
+		mes "일...";
+		mes "일거리를 주세요...";
+		close;
+	}
+	mes "[작르다구미간드]";
+	mes "휴우...";
+	mes "일을 하니 만족스럽다요.";
+	close;
+}
+
+jor_sanct,267,161,5	script	클제이나모간드#1::ep20_jor_sanct_267_161	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[클제이나모간드]";
+		mes "일...";
+		mes "클제이나모간드 주세요...";
+		close;
+	}
+	mes "[클제이나모간드]";
+	mes "휴우...";
+	mes "일을 하니 만족스럽다요.";
+	close;
+}
+
+jor_sanct,271,156,3	script	날시오라미간드#1	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep20_main < 26) {
+		mes "지금은 다른 일에 신경을 쓰고 있을 때가 아니다.";
+		close;
+	}
+	if (ep20_main == 26) {
+		if (isbegin_quest(8846) == 0) {
+			mes "둘러서서 뭔가 안절부절 못 하고 있는 중급 르간들이 있다.";
+			next;
+			if (select( "말을 건다", "모른 척한다" ) == 2) {
+				mes "지금은 다른 할 일이 많다.";
+				close;
+			}
+			mes "[" + strcharinfo(0) + "]";
+			mes "뭐 하고 있어?";
+			next;
+			mes "[날시오라미간드]";
+			mes "!";
+			mes "사제님이다!";
+			npctalk "눔카사이가간드 : 사제님!", "ep20_jor_sanct_264_160", bc_self;
+			npctalk "온내체라멜간드 : 사제님이 오셨다!", "ep20_jor_sanct_266_155", bc_self;
+			npctalk "작르다구미간드 : 사제님!", "ep20_jor_sanct_268_160", bc_self;
+			next;
+			mes "[날시오라미간드]";
+			mes "할 일을... 주세요.";
+			mes "우리... 일 해야 하는데.";
+			mes "할 일이 없어요.";
+			npctalk "온내체라멜간드 : 불안해요...", "ep20_jor_sanct_266_155", bc_self;
+			next;
+			select( "직접 할 일을 찾으면?" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "할 일을 찾아서 하면 되지 않아?";
+			mes "청소라든가...";
+			next;
+			mes "[날시오라미간드]";
+			mes "그것 우리 권한 밖의 일이에요, 사제님.";
+			npctalk "눔카사이가간드 : 시키지 않은 일 하면... 혼난다요.", "ep20_jor_sanct_264_160", bc_self;
+			next;
+			if (select( "중급 르간의 할 일", "다음에 찾아 줄게" ) == 2) {
+				mes "지금은 내 할 일부터 마무리해야 한다.";
+				close;
+			}
+			mes "중급 르간에게 시킬 만한 일은 무엇일까?";
+			next;
+			switch( select( "청소", "부화장 돌보기", "신경질 부리는 최상급 르간 달래기" ) ) {
+			case 1:
+				mes "삭막한 실내를 둘러보았다. 원래 르간의 둥지도 그다지 생활감이 있지는 않았지만, 여기는 정말 그저 동굴이다.";
+				break;
+			case 2:
+				mes "이 곳에는 부화장이 있는 듯하지는 않았다. 역시 라스간드는 부하를 더 필요로 하지 않는 것일까?";
+				break;
+			case 3:
+				mes "그러고보니 최상급 르간에게는 시중을 드는 부하가 붙어 있는 걸 본 것 같다. 각자 알아서 하고 있겠지.";
+				break;
+			}
+			next;
+			select( "물어본다" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "여기에 오기 전에는 뭘 했었지?";
+			mes "한 명씩 말해 봐.";
+			next;
+			mes "[날시오라미간드]";
+			mes "청소요.";
+			npctalk "날시오라미간드 : 그런데 여기는 그렇게 더럽거나... 실험 쓰레기가 나오거나 하지 않는다요.", "", bc_self;
+			next;
+			mes "[눔카사이가간드]";
+			mes "부화장 돌보기요.";
+			next;
+			mes "[클제이나모간드]";
+			mes "여기 와선 에리리간드님 시중을 들기로 했는데 꼬리를 물려서 사레크간드님이 여기로 보냈다요.";
+			mes "더이상 다가오면 잡아먹겠다고 했다요.";
+			next;
+			mes "[작르다구미간드]";
+			mes "청소요.";
+			next;
+			mes "[온내체라멜간드]";
+			mes "창고 관리요.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "...";
+			next;
+			if (select( "시킬 일을 찾으러 다녀봐야겠다", "다음에 찾아 줄게" ) == 2) {
+				mes "지금은 내 할 일부터 마무리해야 한다.";
+				close;
+			}
+			mes "[" + strcharinfo(0) + "]";
+			mes "할 일을 찾아 줄 테니까...";
+			mes "일단 기다려.";
+			npctalk "날시오라미간드 : 네, 사제님!", "", bc_self;
+			npctalk "눔카사이가간드 : 넵, 사제님!", "ep20_jor_sanct_264_160", bc_self;
+			npctalk "온내체라멜간드 : 네넵, 사제님!", "ep20_jor_sanct_266_155", bc_self;
+			npctalk "작르다구미간드 : 네! 사제님!", "ep20_jor_sanct_268_160", bc_self;
+			npctalk "클제이나모간드 : 알겠어요, 사제님!", "ep20_jor_sanct_267_161", bc_self;
+			setquest 8846;
+			next;
+			mes "^0000FF일이 하고 싶어 안절부절 못하는 중급 르간들의 처우를 개선해 주기로 했습니다.^000000";
+			mes "^0000FF성스러운 뿌리, 뱀신의 뿌리에서 단순업무가 필요한 곳을 찾아 그들을 부릅시다.^000000";
+			close;
+		}
+		mes "[날시오라미간드]";
+		mes "아직... 잡일이 없나요...?";
+		next;
+		mes "이 르간들을 도와 준다고 해서 우리에게 피해가 올 일은 없어 보인다.";
+		mes "적당히 할 일을 찾아 주자.";
+		close;
+	}
+	// daily
+	switch( checkquest(8852,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[날시오라미간드]";
+		mes "오늘은 열심히 일했어요...";
+		mes "내일도 열심히 일할게요...";
+		close;
+	case 2:
+		erasequest 8852;
+		break;
+	}
+	mes "오늘도 마찬가지로 둘러서서 뭔가 안절부절 못 하고 있는 중급 르간들이 있다.";
+	next;
+	if (select( "말을 건다", "모른 척한다" ) == 2) {
+		mes "지금은 내가 바쁘다.";
+		close;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "뭐 하고 있어?";
+	next;
+	mes "[날시오라미간드]";
+	mes "!";
+	mes "사제님이다!";
+	npctalk "눔카사이가간드 : 사제님!", "ep20_jor_sanct_264_160", bc_self;
+	npctalk "온내체라멜간드 : 사제님이 오셨다!", "ep20_jor_sanct_266_155", bc_self;
+	npctalk "작르다구미간드 : 사제님!", "ep20_jor_sanct_268_160", bc_self;
+	next;
+	mes "[날시오라미간드]";
+	mes "할 일을... 주세요.";
+	mes "우리... 일 해야 하는데.";
+	mes "할 일이 없어요.";
+	npctalk "온내체라멜간드 : 불안해요...", "ep20_jor_sanct_266_155", bc_self;
+	next;
+	if (select( "시킬 일을 찾으러 다녀봐야겠다", "다음에 찾아 줄게" ) == 2) {
+		mes "지금은 내 할 일부터 마무리해야 한다.";
+		close;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "할 일을 찾아 줄 테니까...";
+	mes "일단 기다려.";
+	npctalk "날시오라미간드 : 네, 사제님!", "", bc_self;
+	npctalk "눔카사이가간드 : 넵, 사제님!", "ep20_jor_sanct_264_160", bc_self;
+	npctalk "온내체라멜간드 : 네넵, 사제님!", "ep20_jor_sanct_266_155", bc_self;
+	npctalk "작르다구미간드 : 네! 사제님!", "ep20_jor_sanct_268_160", bc_self;
+	npctalk "클제이나모간드 : 알겠어요, 사제님!", "ep20_jor_sanct_267_161", bc_self;
+	if (isbegin_quest(8853) == 0)
+		setquest 8853;
+	next;
+	mes "^0000FF일이 하고 싶어 안절부절 못하는 중급 르간들의 처우를 개선해 주기로 했습니다.^000000";
+	mes "^0000FF성스러운 뿌리, 뱀신의 뿌리에서 단순업무가 필요한 곳을 찾아 그들을 부릅시다.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8846) == 0" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main > 26 && checkquest(8852,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main > 26 && checkquest(8852,PLAYTIME) == -1 && isbegin_quest(8853) == 0" );
+	end;
+}
+
+
+jor_sanct,48,159,3	script	물웅덩이#1-1	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "무슨 용도인지는 잘 모르겠지만 그럭저럭 깨끗하게 청소된 탑이다.";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8847) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "이 상태로 중급 르간을 부르면 안 된다.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "관리가 안 되고 있는 물웅덩이다.";
+			next;
+		}
+		else {	// daily
+			mes "완전히 깨끗해질 리는 없지만 청소할 필요는 있는 물웅덩이다.";
+			next;
+		}
+		mes "날시오라미간드를 부를까?";
+		next;
+		if (select( "부른다", "더 시킬 일이 있을지도" ) == 2) {
+			mes "날시오라미간드를 만족시키기에는 사소한 일일지도 모른다.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_sanct_46_157" );
+		mes "[날시오라미간드]";
+		mes "사제님! 일을 주셨어!";
+		mes "감사해요!";
+		mes "깨끗하게 할게요!";
+		next;
+		mes "...좋은 일을 한 것 같은 뿌듯한 기분이 든다.";
+		setquest 8847;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "다른 중급 르간들의 일도 마저 찾아 줘야겠다.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "중급 르간들의 일을 모두 찾아 주었다.";
+		close;
+	}
+	mes "썩지 않는 고인 물은 마치 세상과 격리된 것 같다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8847) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8847) == 0" );
+	end;
+}
+
+jor_sanct,46,157,3	script(CLOAKED)	날시오라미간드#2::ep20_jor_sanct_46_157	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	mes "[날시오라미간드]";
+	mes "휴... 얼마 안 남았다...";
+	close;
+}
+
+
+jor_sanct,95,152,3	script	탑#1-2	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "무슨 용도인지는 잘 모르겠지만 그럭저럭 깨끗하게 청소된 탑이다.";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8848) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "이 상태로 중급 르간을 부르면 안 된다.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "적당히 먼지투성이인 탑이다.";
+			next;
+		}
+		else {	// daily
+			mes "그럭저럭 깨끗하게 청소된 탑이다.";
+			next;
+			mes "그럭저럭 깨끗하게 청소된 탑이긴 하지만...";
+		}
+		mes "눔카사이가간드를 부를까?";
+		next;
+		if (select( "부른다", "더 시킬 일이 있을지도" ) == 2) {
+			mes "눔카사이가간드를 만족시키기에는 사소한 일일지도 모른다.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_sanct_90_153" );
+		mes "[눔카사이가간드]";
+		mes "사제님! 일을 주셨어!";
+		mes "감사해요!";
+		next;
+		mes "...좋은 일을 한 것 같은 뿌듯한 기분이 든다.";
+		setquest 8848;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "다른 중급 르간들의 일도 마저 찾아 줘야겠다.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "중급 르간들의 일을 모두 찾아 주었다.";
+		close;
+	}
+	mes "무슨 용도인지는 잘 모르겠지만 그럭저럭 깨끗하게 청소된 탑이다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8848) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8848) == 0" );
+	end;
+}
+
+jor_sanct,90,153,3	script(CLOAKED)	눔카사이가간드#2::ep20_jor_sanct_90_153	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	mes "[눔카사이가간드]";
+	mes "후, 후...";
+	close;
+}
+
+
+jor_safty2,195,355,3	script	쓰레기장#1-3	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "뒤죽박죽으로 내팽개쳐진 온갖 물건들이, 그저 이것을 갖다 쌓은 이들이 정리를 포기했다는 증명을 하고 있다...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8849) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "이 상태로 중급 르간을 부르면 안 된다.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "적당히 엉망진창인 쓰레기장이다.";
+			next;
+		}
+		else {	// daily
+			mes "조금 정리되긴 했지만 그래 봤자 쓰레기장이다.";
+			next;
+		}
+		mes "온내체라멜간드를 부를까?";
+		next;
+		if (select( "부른다", "더 시킬 일이 있을지도" ) == 2) {
+			mes "온내체라멜간드를 만족시키기에는 사소한 일일지도 모른다.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_191_358" );
+		mes "[온내체라멜간드]";
+		mes "사제님! 일을 주셨어!";
+		mes "감사해요!";
+		next;
+		mes "...좋은 일을 한 것 같은 뿌듯한 기분이 든다.";
+		setquest 8849;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "다른 중급 르간들의 일도 마저 찾아 줘야겠다.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "중급 르간들의 일을 모두 찾아 주었다.";
+		close;
+	}
+	mes "조금 정리되긴 했지만 그래 봤자 쓰레기장이다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8849) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8849) == 0" );
+	end;
+}
+
+jor_safty2,191,358,5	script(CLOAKED)	온내체라멜간드#2::ep20_jor_safty2_191_358	EP19_RGAN_D,{
+	mes "[온내체라멜간드]";
+	mes "영차, 영차...";
+	close;
+}
+
+
+jor_safty2,303,349,3	script	산더미같은 잡동사니#1-4	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "뒤죽박죽으로 내팽개쳐진 온갖 물건들이, 그저 이것을 갖다 쌓은 이들이 정리를 포기했다는 증명을 하고 있다...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8850) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "이 상태로 중급 르간을 부르면 안 된다.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "잡동사니가 산더미처럼 쌓여 있다.";
+			next;
+		}
+		else {	// daily
+			mes "잡동사니가 산더미처럼 쌓여 있다.";
+			next;
+		}
+		mes "작르다구미간드를 부를까?";
+		next;
+		if (select( "부른다", "더 시킬 일이 있을지도" ) == 2) {
+			mes "작르다구미간드를 만족시키기에는 사소한 일일지도 모른다.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_306_349" );
+		mes "[작르다구미간드]";
+		mes "사제님! 일을 주셨어!";
+		mes "감사해요!";
+		next;
+		mes "...좋은 일을 한 것 같은 뿌듯한 기분이 든다.";
+		setquest 8850;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "다른 중급 르간들의 일도 마저 찾아 줘야겠다.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "중급 르간들의 일을 모두 찾아 주었다.";
+		close;
+	}
+	mes "지금은 쓰지 않는 잡동사니를 모아 둔 공간인 모양이다.";
+	mes "여전히 쓸 만한 것은 없다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8850) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8850) == 0" );
+	end;
+}
+
+jor_safty2,306,349,3	script(CLOAKED)	작르다구미간드#2::ep20_jor_safty2_306_349	EP19_RGAN_D,{
+	mes "[작르다구미간드]";
+	mes "영차, 영차...";
+	close;
+}
+
+
+jor_safty2,318,254,3	script	창고#1-5	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "뒤죽박죽으로 내팽개쳐진 온갖 물건들이, 그저 이것을 갖다 쌓은 이들이 정리를 포기했다는 증명을 하고 있다...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8851) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "이 상태로 중급 르간을 부르면 안 된다.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "쓸만한 물건을 하나도 찾을 수 없는 창고다.";
+			next;
+		}
+		else {	// daily
+			mes "쓸만한 물건이라고는 없는 창고다.";
+			next;
+		}
+		mes "클제이나모간드를 부를까?";
+		next;
+		if (select( "부른다", "더 시킬 일이 있을지도" ) == 2) {
+			mes "클제이나모간드를 만족시키기에는 사소한 일일지도 모른다.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_314_254" );
+		mes "[클제이나모간드]";
+		mes "사제님! 일을 주셨어!";
+		mes "감사해요!";
+		next;
+		mes "...좋은 일을 한 것 같은 뿌듯한 기분이 든다.";
+		setquest 8851;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "다른 중급 르간들의 일도 마저 찾아 줘야겠다.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "중급 르간들의 일을 모두 찾아 주었다.";
+		close;
+	}
+	mes "뒤죽박죽으로 내팽개쳐진 온갖 물건들이, 그저 이것을 갖다 쌓은 이들이 정리를 포기했다는 증명을 하고 있다...";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8851) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8851) == 0" );
+	end;
+}
+
+jor_safty2,314,254,5	script(CLOAKED)	클제이나모간드#2::ep20_jor_safty2_314_254	EP19_RGAN_D,{
+	mes "[클제이나모간드]";
+	mes "영차, 영차...";
+	close;
+}
+
+
+
+// Daily quest 17710: "Where the maze ends"
+// Part of Main quest - Step 29, 30
+// (unlocked when ep20_main = 36, main quest "은신처 잠입 보고")
+jor_sanct,22,283,5	script	감독관#20ms30	4_EP19_RGAN_SR1,5,5,{
+	if (checkweight(1001217,10) == 0) {
+		mes "소지하고 계신 아이템의 수량이 많아 대화를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 28) {
+		mes "[감독관]";
+		mes "언제쯤 오시려나... 오늘은 한 번 봐주시려나.";
+		mes "그러면 좋겠는데. 어떻게 라스간드님의 시선을 끌지?";
+		close;
+	}
+	if (ep20_main == 28) {
+		mes "[감독관]";
+		mes "웬놈이냐!!";
+		mes "왜 처음 보는 사제가 이곳에 있는 거냐!";
+		npctalk "인간? 인간이냐?", "", bc_self;
+		next;
+		emotion ET_THINK, playerattached();
+		select( "아, 저, 사레크간드님이..." );
+		mes "[감독관]";
+		mes "사레크간드? 무슨 소리야?";
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_283";
+		cloakoffnpcself( "ep20_jor_sanct_26_283" );
+		mes "[사레크간드]";
+		mes "나다. 웬 소란이지?";
+		next;
+		mes "[감독관]";
+		mes "사레크간드. 이 사제가 네 이름을 들먹이던데.";
+		next;
+		mes "[사레크간드]";
+		mes "그렇지, 그래. 내가 데려왔다.";
+		npctalk "사실이야?", "", bc_self;
+		next;
+		mes "[감독관]";
+		mes "그래, 너로구나! 내 감이 말하고 있다.";
+		mes "맞지? 어서 맞다고 해. 아니어도 맞게 만들테다.";
+		next;
+		select( "뭘 말입니까?" );
+		mes "[감독관]";
+		mes "청소 인력으로 말이다! 맞지, 사레크간드?";
+		next;
+		mes "[사레크간드]";
+		mes "행동거지를 조심하는 것이 좋겠군. 라스간드님께서 오가시다 네 그런 모습을 보면 쫓겨날 터.";
+		npctalk "전반적으로 예절교육을 한 번 하는 것이 좋겠어.", "ep20_jor_sanct_26_283", bc_self;
+		next;
+		mes "[감독관]";
+		mes "그럴리가. 누구보다도 청소를 열심히 하는 나를, 내쫓을실 리가 없지.";
+		mes "너만 해도 말은 그렇게 하면서 나를 가만 두잖아?";
+		next;
+		mes "[감독관]";
+		mes "그나저나 왜 사제를 데려왔지?";
+		mes "게다가 처음 보는 자인데? 안에 주교가 하나도 없나?";
+		npctalk "그럴리가? 내가 본 잉여인력만 해도 꽤 되는데?", "", bc_self;
+		next;
+		mes "[사레크간드]";
+		mes "새로 온 인력이다. 라스간드님이 오시는 길은 깨끗하고 잡음이 없어야 할 터.";
+		next;
+		mes "[감독관]";
+		mes "맞아, 안그래도 손이 부족했는데 잘됐네.";
+		mes "이건 정말 고맙군.";
+		next;
+		mes "[감독관]";
+		mes "그나저나 이 사제는 믿을만한 자겠지? 이전에 인간들이 분탕질을 쳤다고 들었는데.";
+		next;
+		mes "[사레크간드]";
+		mes "주술사가 감시하고 있는 뿌리를 통과해왔다면 적어도 인간은 아니란 뜻이지.";
+		mes "이 자들은 나드야간드가 데리고 왔다.";
+		next;
+		mes "[감독관]";
+		mes "이 자'들'? 하나가 아니군? 잘됐어. 몽땅 다 이쪽으로 보내라고. 다 알뜰하게 써먹어주지.";
+		npctalk "오늘 들은 소리 중 제일 기쁜 소리야.", "", bc_self;
+		emotion ET_SMILE;
+		next;
+		mes "[사레크간드]";
+		mes "말을 좀 품위있게-";
+		next;
+		mes "[감독관]";
+		mes "아아, 됐어. 무사히 인력을 인계했으니 너는 이제 네 볼일 보러 가라고.";
+		mes "바쁘다 바빠를 입에 달고 살잖아?";
+		next;
+		mes "[사레크간드]";
+		mes "흠- 그럼, 믿고 맡기겠네.";
+		mes "라스간드님의 심기를 거슬리지 않도록 해야 할 것이야. 지금 모시러 가는 길이니 되도록 빠르게 처리 해.";
+		next;
+		mes "[감독관]";
+		mes "아, 그거야 콱 믿고 맡기라고. 내가 언제 허투루 하는 것 봤어? 내 몸을 갈아서라도 할 테니 어서 가.";
+		next;
+		select( "제가 동행하겠습니다!" );
+		mes "[사레크간드]";
+		mes "너는 여기서 해야 할 일이 있지 않느냐.";
+		mes "내가 눈여겨보고 있다는 것을 명심하도록.";
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_283";
+		cloakonnpcself( "ep20_jor_sanct_26_283" );
+		mes "[감독관]";
+		mes "그래, 이제 둘만 남았군. 사제는 이 봉사가 처음일테니 내 자세히 알려주지.";
+		next;
+		mes "[감독관]";
+		mes "저 기분나쁘게 나풀거리는 기생충. 저걸 잡으면 돼.";
+		next;
+		select( "기생충이요?" );
+		mes "[감독관]";
+		mes "자세히 봐도 언뜻 봐도 기분 나쁘게 생겼지?";
+		mes "아주 오래전부터 ^0000cd요르문간드 가디언^000000이라고 불리는 녀석들인데, 누가 붙인 이름인지는 모르겠고.";
+		emotion ET_FRET;
+		next;
+		mes "[감독관]";
+		mes "저게 어딜 봐서 가디언이냐, 기생충이지.";
+		mes "처음 이름 붙인 자는 이후로 작명 권한을 빼앗겼어야 하는데...";
+		mes "사제의 눈에도 그렇게 보이지 않나?";
+		npctalk "기생충이 딱이지.", "", bc_self;
+		next;
+		select( "그렇습니다요." );
+		mes "[감독관]";
+		mes "그렇지? 그저 이곳에서 양분을 빨아먹고 사는 기생충이지.";
+		next;
+		mes "[감독관]";
+		mes "참! 이러고 있을 시간이 없다.";
+		mes "곧 이 앞을 ^0000cd라스간드님께서 지나가실^000000 터이니 미리 저것들을 정리해야 한다.";
+		mes "돌아오시는 길이 편안하도록 만드는 것이 우리의 임무이지.";
+		next;
+		select( "어디서 돌아오시는 건가요?" );
+		mes "[감독관]";
+		mes "그건 우리가 알아야 할 사항은 아니잖나?";
+		npctalk "우리는 청소만 열심히 하면 된다.", "", bc_self;
+		next;
+		mes "[감독관]";
+		mes "최근에 인간을 데리고 자주 오가시는데, 일이 잘 풀리지 않으시는지 심기가 많이 불편하시다.";
+		mes "그러니 우리는 그 분께서 이곳을 지나실 때 거슬리는 것이 하나 없이 청소만 하면 될 뿐이야.";
+		next;
+		mes "[감독관]";
+		mes "그러니 이 근처에 돌아다니는 ^0000cd요르문간드 가디언 3마리^000000 정도만 치워라. 보아하니 그 정도면 되겠다.";
+		ep20_main = 29;
+		erasequest 17702;
+		setquest 17703;
+		close;
+	}
+	if (ep20_main == 29) {
+		switch( checkquest(17703,HUNTING) ) {
+		case -1:
+			end;
+		case 0:
+		case 1:
+			mes "[감독관]";
+			mes "다 해치웠나?";
+			next;
+			mes "[감독관]";
+			mes "어우, 깜짝이야! 아니잖나! 저기, 저기에 버젓이 돌아다니고 있는데!";
+			mes "어서 가서 ^0000cd요르문간드 가디언 3마리^000000만 해치워!";
+			close;
+		case 2:
+			mes "[감독관]";
+			mes "다 해치웠나?";
+			next;
+			select( "네, 처리하고 왔습니다." );
+			mes "[" + strcharinfo(0) + "]";
+			mes "그런데 저것은 왜 저희를 공격합니까? ^0000cd이곳에 뭔가 중요한 거^000000라도 있습니까?";
+			mes "접근하는 자들을 모두 공격하는 것 같았습니다.";
+			next;
+			mes "[감독관]";
+			mes "아~ 그 이유?";
+			mes "그건 나도 모른다.";
+			npctalk "누군들 알까.", "", bc_self;
+			emotion ET_SWEAT, playerattached();
+			next;
+			mes "[감독관]";
+			mes "이곳에 발을 들이는 자 모두를 공격하는 아주 멍청한 녀석이기 때문 아닐까?";
+			mes "저것들의 생각같은 걸 알고 싶지도 않고.";
+			next;
+			mes "[감독관]";
+			mes "아마도, 라스간드님이 처음 눈을 뜨신 성소와 가까워 마력이 풍부한 곳이니 몰려든 거겠지.";
+			next;
+			mes "[감독관]";
+			mes "이름처럼 ^0000cd뭔가를 지키는 것^000000인지도 모르지만, 이곳은 이미 우리 르간들의 영역인 것을.";
+			mes "없애도 없애도 계속해서 나타나서 아주 골칫거리들이야.";
+			next;
+			specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_282";
+			specialeffect EF_HIT1, AREA, "ep20_jor_sanct_25_280";
+			cloakoffnpcself( "ep20_jor_sanct_26_282" );
+			cloakoffnpcself( "ep20_jor_sanct_25_280" );
+			mes "[감독관]";
+			mes "웬놈들이냐!";
+			next;
+			mes "[레하르]";
+			mes "어... 사레카간드님이 이곳의 청소를 도우라고 하셨습니다...?";
+			next;
+			mes "[감독관]";
+			mes "사레크간드가? 새로운 일손? 그럼 너희들이 그 '들'이구나?";
+			mes "듣던 중 반가운 소리네. 새로 온 사제들이 많네? 웬일이지?";
+			emotion ET_DELIGHT;
+			next;
+			mes "[미리암]";
+			mes "청소를 하면 되나요?";
+			next;
+			mes "[감독관]";
+			mes "그래. 이 근방은 여기 이 사제가 다 해두긴 했는데, 저쪽에선 영 소식이 없네.";
+			mes "주교들에게 맡겨 놓았더니, 신참보다 못한 고참이라니.";
+			npctalk "이 말은 비밀이다?", "", bc_self;
+			next;
+			mes "[감독관]";
+			mes "너희는 흩어져 청소중인 다른 이들을 도와라.";
+			mes "라스간드님께서 오시기 전까지는 아직 좀 여유가 있으니.";
+			next;
+			mes "[감독관]";
+			mes "오늘은 좀 오래 걸리시는 모양이야. 때가 임박해오니 하실 일이 많으신 모양이지.";
+			mes "덕분에 잘됐지. 청소할 시간을 벌고.";
+			mes "거기 자네.";
+			next;
+			select( "네, 저요?" );
+			mes "[감독관]";
+			mes "그래. 앞으로 구석구석 이곳 청소를 하려면 지리를 익혀야 할 테니 이 사제들을 노역장으로 데리고 가.";
+			mes "네가 앞으로 이 사제들을 통솔하는 대장이 되는 거야.";
+			npctalk "어때? 대장으로 승격된 기분이?", "", bc_self;
+			next;
+			mes "[감독관]";
+			mes "열심히 해. 영광스러운 그 날이 오면 네 자리도 하나쯤은 마련해둘지도 모를 일이니.";
+			mes "그럼 수고!";
+			next;
+			mes "[레하르]";
+			mes "<FONT SIZE = 10>저희, 어디로 가면 되죠?</FONT>";
+			next;
+			select( "라스간드의 오른팔이..." );
+			mes "[미리암]";
+			mes "<FONT SIZE = 10>그자가 라스간드를 맞이하러 간다고요? 그럼 그 자의 흔적을 찾아 뒤쫓아야겠군요.</FONT>";
+			npctalk "빨리 가요!", "ep20_jor_sanct_26_282", bc_self;
+			ep20_main = 30;
+			erasequest 17703;
+			setquest 17704;
+			getitem 1001217,10;	// Ep20_Cat_Whiskers
+			getexp2 136611959,0;
+			getexp 0,22271670;
+			add_reputation_points( REPU_EP20, 60 );
+			close2;
+			cloakonnpcself( "ep20_jor_sanct_26_282" );
+			cloakonnpcself( "ep20_jor_sanct_25_280" );
+			end;
+		}
+		end;
+	}
+	if (ep20_main < 35) {
+		mes "[감독관]";
+		mes "라스간드님의 심기를 거스르지 않게 말끔히 치워야 할 것이야!";
+		close;
+	}
+	switch( checkquest(17711,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[감독관]";
+		mes "아니, 왜 벌써 왔어?";
+		mes "지금은 청소를 하지 않아도 돼.";
+		next;
+		mes "[감독관]";
+		mes "가서 다른 주교들이나 돕지.";
+		mes "아, 그렇다고 청소를 잊으면 안돼. 새벽이 지난 후에 다시 오는 거야.";
+		close;
+	case 2:
+		erasequest 17711;
+		break;
+	}
+	switch( checkquest(17710,HUNTING) ) {
+	case -1:
+		mes "[감독관]";
+		mes "설마 도망...";
+		next;
+		select( "안녕하십니까." );
+		mes "[감독관]";
+		mes "너로구나. 때맞춰 잘 왔네.";
+		mes "일전에 저 너머에 인간 하나가 침투해서 난리가 난 모양이야.";
+		next;
+		mes "[감독관]";
+		mes "요즘 라스간드님의 심기가 편치 않다는 소리가 들리더군.";
+		next;
+		mes "[감독관]";
+		mes "그래서 더욱이 열심히 청소를 해야 돼.";
+		next;
+		mes "[감독관]";
+		mes "이전처럼 폐쇄하면 좋을텐데. 그건 명하시지 않으니...";
+		mes "라스간드님께선 다 생각이 있으시겠지.";
+		next;
+		mes "[감독관]";
+		mes "이번에도 저 기생충들, ^0000cd요르문간드 가디언을 색깔별로 각각 10마리씩^000000 치워라.";
+		mes "저것들 안 보고 살면 소원이 없겠네.";
+		next;
+		if (select( "얼른 다녀오겠습니다요.", "오늘은 쉬고 싶어서요." ) == 2) {
+			mes "[감독관]";
+			mes "뭐? 쉰다고?";
+			mes "흠... 그래, 뭐. 그래도 말 없이 오지 않는 것보단 낫지. 오늘은 푹 쉬고 다음에 다시 와.";
+			close;
+		}
+		mes "[감독관]";
+		mes "그래. 어서 다녀와.";
+		setquest 17710;
+		close;
+	case 0:
+	case 1:
+		mes "[감독관]";
+		mes "청소는 아직인가?";
+		mes "고된 거야?";
+		next;
+		mes "[감독관]";
+		mes "수련한다는 마음가짐으로 열심히 해.";
+		mes "부활의 때가 임박하면 아무리 사제라도 그분을 위해 일할 수 있지 않겠어?";
+		next;
+		mes "[감독관]";
+		mes "게다가 ^0000cd요르문간드 가디언 20마리^000000면 많지도 않으니까.";
+		mes "곧 라스간드님이 오실테니 서둘러.";
+		close;
+	case 2:
+		mes "[감독관]";
+		mes "이번에도 상처 하나 없이 돌아왔네.";
+		next;
+		mes "[감독관]";
+		mes "사제가 열심히 봉사한 덕분에 아주 깨끗해졌어.";
+		mes "내 속이 저 밑에서부터 뻥!!! 뚫리는 기분이야.";
+		next;
+		mes "[감독관]";
+		mes "자, 그럼 오늘은 이만 쉬고, 시간 되면 또 찾아와.";
+		mes "부활의 때가 임박하면 내가 사제 너를 기억하마. 가는 길에 이것도 좀 버리고.";
+		erasequest 17710;
+		setquest 17711;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 16589920,11586300;
+		// note: no reputation
+		close;
+	}
+	end;
+
+OnTouch:
+	if (ep20_main == 28)
+		npctalk "너냐? 너야?", "", bc_self;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17702) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(17703,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17711,PLAYTIME) == 2 && ep20_main >= 36" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17709) == 2 && checkquest(17710,HUNTING) == -1 && checkquest(17711,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(17710,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quest "Uprooting Ragan"
+// Part of the Main quest - Step 41
+// (daily quest unlocked after the final of the main quest : "죽지 않는 자")
+jor_twice,235,111,3	script	꼬로로#e20pn03	4_EP19_IWIN,{
+	if (ep20_main < 40)
+		end;	// note: no text
+	if (ep20_main == 40) {
+		cutin "ep19_iwin03.png",2;
+		mes "[꼬로로]";
+		mes "다른 분들은 먼저 출발하셨어요. 오른쪽 길을 따라서 걸어가보죠!";
+		ep20_main = 41;
+		erasequest 23103;
+		setquest 23104;
+		close3;
+	}
+	if (ep20_main < 46) {
+		cutin "ep19_iwin03.png",2;
+		mes "[꼬로로]";
+		mes "여기서 할 일은 다 마치신 거예요? 이제 얼음성으로 돌아가시나요?";
+		next;
+		if (select( "돌아간다.", "안 간다." ) == 2) {
+			cutin "ep19_iwin03.png",2;
+			mes "[꼬로로]";
+			mes "아아아아아, 심심하다, 심심해....";
+			close3;
+		}
+		mes "[꼬로로]";
+		mes "깃털 꽉 잡으세요, 바닷물이 아주 차가우니까 조심하시고요!";
+		close2;
+		cutin "",255;
+		warp "icecastle",141,208;
+		end;
+	}
+	cutin "ep19_iwin03.png",2;
+	mes "[꼬로로]";
+	mes "" + strcharinfo(0) + "님! 오늘도 바빠 보이시네요. 레온 님이 부탁하셔서 제가 특.별.히. 당분간은 이곳에서 이동을 도와드리기로 했어요. 유빙지대로 가시겠어요?";
+	next;
+	switch( select( "르간 혼내줄까?", "얼음성으로 간다.", "그냥 말 걸어봤다." ) ) {
+	case 1:
+		if (checkweight(1001217,3) == 0) {
+			mes "소지하고 계신 아이템의 수량이 많아 대화를 진행할 수 없습니다.";
+			mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+			close3;
+		}
+		switch( checkquest(23110,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[꼬로로]";
+			mes "르간이요? 지금이요?";
+			mes "나서서 해주신다면 거절하지 않는다고 하고 싶지만....";
+			next;
+			mes "[꼬로로]";
+			mes "르간들도 눈치가 있어서, 한 번에 너무 많이 잡아버리면 숨어버리는 탓에 귀찮아지더라고요.";
+			mes "오늘은 충분해요. 내일 다시 와주세요!";
+			close3;
+		case 2:
+			erasequest 23110;
+			break;
+		}
+		switch( checkquest(23111,HUNTING) ) {
+		case -1:
+			mes "[꼬로로]";
+			mes "모험가님, 드디어 르간을 잡아주시는 거군요! 제가 여기 멋지게 서 있긴 했지만 사실 얼마나 무서웠다고요.";
+			mes "더도 말고 덜도 말고 ^4d4dff" + getmonsterinfo("EP20_JORGAN_WARLOCK", MOB_NAME) + " 15마리^000000, 잡아주시는 거죠?";
+			next;
+			if (select( "수락한다", "거절한다" ) == 2) {
+				mes "[꼬로로]";
+				mes "....정말로요?";
+				mes "먼저 도와준다고 해놓고! 왜 아윈 기대하게 만들어요? 잔인한 사람...";
+				close3;
+			}
+			mes "[꼬로로]";
+			mes "휴, 믿고 있었다고요. 몸 조심히 다녀오세요! 그래야 내일도 도와주시죠!";
+			setquest 23111;
+			close3;
+		case 0:
+		case 1:
+			mes "[꼬로로]";
+			mes "처음에는 단순무식한 방법이라고 생각했는데 이거 제법 효과가 있더라고요?";
+			next;
+			mes "[꼬로로]";
+			mes "그러니까 지치지 말고 오래오래 도와주세요. ^4d4dff" + getmonsterinfo("EP20_JORGAN_WARLOCK", MOB_NAME) + " 15마리^000000예요!";
+			close3;
+		case 2:
+			mes "[꼬로로]";
+			mes "오! 돌아오셨군요. 여기서만 봐도 르간들이 많이 줄어들었고...";
+			next;
+			mes "[꼬로로]";
+			mes "네? 보기만 해서 어떻게 아냐고요? 헤헹. 제가 여기 하루이틀 서 있나요? 척 보면 척이지.";
+			next;
+			mes "[꼬로로]";
+			mes "모험가님도 몇 번 더 와보시면 차이가 느껴지실 거예요. 그런 의미에서 내일도 한 번 더?";
+			erasequest 23111;
+			setquest 23110;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 13548720,9484110;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		end;
+	case 2:
+		mes "[꼬로로]";
+		mes "깃털 꽉 잡으세요, 미끄러지면 저도 몰라요!";
+		close2;
+		cutin "",255;
+		warp "icecastle",141,208;
+		end;
+	case 3:
+		cutin "ep19_iwin05.png",2;
+		mes "[꼬로로]";
+		mes "혹시 한가하신가요? 시간 남으시면 절 위해 간식을 좀 갖다 주셔도 좋아요~";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 됐거든!", bc_self;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(23103) == 1" );
+
+	// daily quest
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && checkquest(23110,PLAYTIME) == -1 && checkquest(23111,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && checkquest(23110,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(23111,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quest: Collect soft delicacies
+// (instance Nest of Twigs - ep20_main = 44 - unlock the quest, main quest "빙산 넘고 빙해 넘어")
+icas_in,243,66,5	script	또료료#ep20in	4_EP19_IWIN,{
+	if (checkweight(1001217,3) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep20_main < 44) {
+		mes "[또료료]";
+		mes "인간, 털도 없는데 고생이 많아.";
+		mes "조금 더 믿음직스러워지면 뭔가 좀 부탁하고 싶군.";
+		close;
+	}
+	if (isbegin_quest(8855) < 2) {
+		switch( checkquest(8855,HUNTING) ) {
+		case -1:
+			mes "[또료료]";
+			mes "반갑네, 인간.";
+			mes "나로 말할 것 같으면...";
+			next;
+			mes "[호랴라]";
+			mes "우리 사촌!";
+			npctalk "호랴라 : 아빠의 동생의 아들이야!", "ep19_icas_in_235_57", bc_self;
+			next;
+			mes "[조랴라]";
+			mes "...우리 사촌이라네.";
+			next;
+			mes "[또료료]";
+			mes "...음.";
+			mes "이번에 어린이집에 배속된 또료료다.";
+			npctalk "조랴라 : 식당. 식당.", "ep19_icas_in_241_66", bc_self;
+			next;
+			mes "[또료료]";
+			mes "...식당 주방에 배속된 또료료다.";
+			npctalk "호랴라 : 꺄르륵!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 꺄르륵!", "ep19_icas_in_232_59", bc_self;
+			next;
+			mes "[또료료]";
+			mes "바깥 순찰을 도는데 아무래도 적성이 맞지 않더군...";
+			mes "그래서 잘 하는 걸 하러 왔지.";
+			mes "이래봬도 애들 재우는 것에 매우 재능이 있어.";
+			next;
+			mes "[또료료]";
+			mes "그런데... 딴 이야기지만 조랴라에게 듣자 하니 인간, 자네가 이것저것 우리와 서로 물물교환을 해 주는 것이 많다는 것 아닌가.";
+			next;
+			mes "[또료료]";
+			mes "나도 여기 배속된 이상 애들을 꼬드기는 데 딱 좋은 물건들을 좀 부탁하고 싶군.";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			next;
+			mes "[또료료]";
+			mes "난 이미 적성이 맞지 않아 순찰에서 제외된 몸...";
+			mes "나보다 훨씬 강한 인간, 우리를 좀 도와줄 수 있겠는가?";
+			next;
+			if (select( "대신 사냥을 나선다", "위로한다" ) == 2) {
+				mes "[또료료]";
+				mes "늘 있는 일이긴 하지만...";
+				mes "그래. 늘 있는 일이지...";
+				npctalk "조랴라 : 거기 멀뚱히 서 있지 말고 내 일 좀 도와 줘!", "ep19_icas_in_241_66", bc_self;
+				npctalk "또료료 : 아이쿠, 간다, 가! 잠깐만!", "", bc_self;
+				close;
+			}
+			mes "[또료료]";
+			mes "고맙네, 인간!";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			setquest 8855;
+			close;
+		case 0:
+		case 1:
+			mes "[또료료]";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			close;
+		case 2:
+			if (countitem(1001233) < 10 || countitem(1001232) < 10) {
+				mes "[또료료]";
+				mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+				mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+				mes "" + mesitemlink(1001233) + " 10개와";
+				mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+				close;
+			}
+			mes "[또료료]";
+			mes "고맙다, 인간!";
+			npctalk "호랴라 : 고맙다, 인간!", "ep19_icas_in_235_57", bc_self;
+			npctalk "고맙다, 인간!", "ep19_icas_in_232_59", bc_self;
+			npctalk "조랴라 : 도와줘서 고맙네, 인간!", "ep19_icas_in_241_66", bc_self;
+			delitem 1001232,10;
+			delitem 1001233,10;
+			completequest 8855;
+			setquest 8856;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			getexp 31264560,21832001;
+			add_reputation_points( REPU_EP20, 5 );
+			next;
+			mes "[또료료]";
+			mes "...";
+			mes "원래 이런 분위기인가, 여긴?";
+			emotion ET_CRY;
+			next;
+			mes "[또료료]";
+			mes "아, 이건 어제쯤 다른 인간이 맛을 보더니 기겁을 하더군.";
+			mes "인간과는 안 맞을지도 몰라. 함부로 시도하지 말게.";
+			mes "그럼 내일 또 부탁하겠다.";
+			close;
+		}
+		end;
+	}
+	switch( checkquest(8856,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[또료료]";
+		mes "애들 재우는 거라면 내가 제일 잘 하긴 해.";
+		mes "이제야 적성에 맞는 일을 찾았군.";
+		close;
+	case 2:
+		erasequest 8856;
+		break;
+	}
+	.@hunting_8857 = checkquest(8857,HUNTING);
+	.@hunting_8858 = checkquest(8858,HUNTING);
+
+	if (.@hunting_8857 == -1 && .@hunting_8858 == -1) {
+		mes "[또료료]";
+		mes "하아, 하아...";
+		mes "인간, 반갑다...";
+		next;
+		select( "또료료도 바쁘구나" );
+		mes "[또료료]";
+		mes "으음, 익숙해졌다.";
+		mes "...체력적으로 힘든 건 익히 알고 있었지만.";
+		next;
+		mes "[또료료]";
+		mes "혹시 말랑말랑 형광 세포를 또 부탁해도 되겠나?";
+		next;
+		if (BaseLevel < 230)
+			.@menu$[0] = "수락한다.";
+		else {
+			.@menu$[1] = "짭짤한 맛과 달달한 맛[215]";
+			.@menu$[2] = "짭짤하고 달달하고 신맛[230]";
+		}
+		switch( select( .@menu$[0], .@menu$[1], .@menu$[2], "바빠서 이만" ) ) {
+		case 1:
+			mes "[또료료]";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			npctalk "호랴라 : 인간 다녀올 때까지 놀아줘!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 나도!", "ep19_icas_in_232_59", bc_self;
+			setquest 8857;
+			close;
+		case 2:
+			mes "[또료료]";
+			mes "고맙네, 인간!";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			npctalk "호랴라 : 인간 다녀올 때까지 놀아줘!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 나도!", "ep19_icas_in_232_59", bc_self;
+			setquest 8857;
+			close;
+		case 3:
+			mes "[또료료]";
+			mes "고맙네, 인간!";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_MELIBE_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개,";
+			mes "" + mesitemlink(1001231) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			npctalk "호랴라 : 인간 다녀올 때까지 놀아줘!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 나도!", "ep19_icas_in_232_59", bc_self;
+			setquest 8858;
+			close;
+		case 4:
+			mes "[또료료]";
+			mes "그게 있으면 육아가 조금 더 쉽겠지만... 별 수 없지!";
+			npctalk "호랴라 : 별 수 없지!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 별 수 없지!", "ep19_icas_in_232_59", bc_self;
+			close2;
+			emotion ET_CRY;
+			end;
+		}
+		end;
+	}
+	switch( .@hunting_8857 ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[또료료]";
+		mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+		mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+		mes "" + mesitemlink(1001233) + " 10개와";
+		mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+		close;
+	case 2:
+		if (countitem(1001233) < 10 || countitem(1001232) < 10) {
+			mes "[또료료]";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			close;
+		}
+		mes "[또료료]";
+		mes "고맙다, 인간!";
+		npctalk "호랴라 : 고맙다, 인간!", "ep19_icas_in_235_57", bc_self;
+		npctalk "고맙다, 인간!", "ep19_icas_in_232_59", bc_self;
+		npctalk "조랴라 : 도와줘서 고맙네, 인간!", "ep19_icas_in_241_66", bc_self;
+		delitem 1001232,10;
+		delitem 1001233,10;
+		erasequest 8857;
+		setquest 8856;
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		getexp 31264560,21832000;
+		add_reputation_points( REPU_EP20, 5 );
+		next;
+		mes "[또료료]";
+		mes "...";
+		mes "허허허...";
+		emotion ET_CRY;
+		next;
+		mes "[또료료]";
+		mes "걱정 말게. 새 직장과는 익숙해졌다.";
+		mes "원래도 사촌들과 교류가 없었던 것은 아니지만 하루종일 같이 있으니 싱숭생숭하군.";
+		mes "그럼 내일 또 부탁하겠다.";
+		close;
+	}
+	switch( .@hunting_8858 ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[또료료]";
+		mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_MELIBE_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+		mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+		mes "" + mesitemlink(1001233) + " 10개와";
+		mes "" + mesitemlink(1001232) + " 10개,";
+		mes "" + mesitemlink(1001231) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+		close;
+	case 2:
+		if (countitem(1001233) < 10 || countitem(1001232) < 10 || countitem(1001231) < 10) {
+			mes "[또료료]";
+			mes "" + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " 20마리, " + getmonsterinfo("EP20_MELIBE_ICESLUG", MOB_NAME) + " 20마리를 사냥해 주게.";
+			mes "그리고 그것들을 사냥하다 보면 얻을 수 있는";
+			mes "" + mesitemlink(1001233) + " 10개와";
+			mes "" + mesitemlink(1001232) + " 10개,";
+			mes "" + mesitemlink(1001231) + " 10개 정도가 있으면 오늘은 어떻게든 될 것 같아.";
+			close;
+		}
+		mes "[또료료]";
+		mes "고맙다, 인간!";
+		npctalk "호랴라 : 고맙다, 인간!", "ep19_icas_in_235_57", bc_self;
+		npctalk "토라룽 : 고맙다, 인간!", "", bc_self;
+		npctalk "조랴라 : 도와줘서 고맙네, 인간!", "ep19_icas_in_232_59", bc_self;
+		delitem 1001231,10;
+		delitem 1001232,10;
+		delitem 1001233,10;
+		erasequest 8858;
+		setquest 8856;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 56052602,39183640;
+		add_reputation_points( REPU_EP20, 5 );
+		next;
+		mes "[또료료]";
+		mes "...";
+		mes "허허허...";
+		emotion ET_CRY, getnpcid(0,"또료료#ep20in");
+		next;
+		mes "[또료료]";
+		mes "걱정 말게. 새 직장과는 익숙해졌다.";
+		mes "원래도 사촌들과 교류가 없었던 것은 아니지만 하루종일 같이 있으니 싱숭생숭하군.";
+		mes "그럼 내일 또 부탁하겠다.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep20_main >= 44 && isbegin_quest(8855) == 0" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8855,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8857,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8858,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10 && countitem(1001231) >= 10" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8856,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(8855) == 2 && checkquest(8856,PLAYTIME) == -1 && checkquest(8857,HUNTING) == -1 && checkquest(8858,HUNTING) == -1" );
+	end;
+}
+//-----------------
+
+
+
+// Daily quests A & B : 'Spy search' and 'Intelligence information collection'
+// (unlocked when ep20_main >= 12, main quest "그 어떤 아윈 보다 전문가")
+icas_in,104,60,2	script(CLOAKED)	보급관 고리르#ep20iw::ep20_icas_in_104_60	EP19_NPC_IWIN_SR,{
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "보급관 고리르: 고로리야~ 작업 좀 하게 나와봐라~ 안에 있는 거 다 안다.", "", bc_self;
+	sleep2 1500;
+	npctalk "보급관 고리르: 도망가는 소리가 들리는군. 네놈이 뛰어봤자 강구지.", "", bc_self;
+	sleep2 1500;
+	cloakonnpcself( "ep20_icas_in_104_60" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,99,57,6	script(CLOAKED)	순찰대장 호로료#ep20iw::ep20_icas_in_99_57	EP19_NPC_IWIN_SR,{
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "순찰대장 호로료: 흠흠.. 잘들 하고 있나 슬쩍 와봤네. 이젠 가야겠군.", "ep20_icas_in_99_57", bc_self;
+	sleep2 1500;
+	cloakonnpcself( "ep20_icas_in_99_57" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,100,62,4	script	오리료 조병#ep20iw	EP19_NPC_IWIN_SR,{
+	if (checkweight(1001217,4) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	if (ep19_main < 100) {
+		mes "[오리료 조병]";
+		mes "미안한데 바쁘니 다른데 가서 놀지 않겠나?";
+		close;
+	}
+	if (ep20_main < 12) {
+		mes "[오리료 조병]";
+		mes "최근 성 내에 소문이 자자한 모험가인가?";
+		next;
+		mes "[오리료 조병]";
+		mes "실력은 있어 보이는 군. 그래도 너무 나대지는 않는 게 좋을 거야.";
+		next;
+		mes "[오리료 조병]";
+		mes "다른 아윈과는 다르게 난 모험가 란 족속들을 의심하고 있으니 말이야.";
+		close;
+	}
+	if (isbegin_quest(19161) < 2) {
+		if (isbegin_quest(19158) == 1) {	// Step 1 of 4
+			mes "[오리료 조병]";
+			mes "최근 성 내에 소문이 자자한 모험가인가?";
+			next;
+			mes "[오리료 조병]";
+			mes "실력은 있어 보이는 군. 그래도 너무 나대지는 않는 게 좋을 거야.";
+			next;
+			mes "[오리료 조병]";
+			mes "다른 아윈과는 다르게 난 모험가 란 족속들을 의심하고 있으니 말이야.";
+			next;
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			sleep2 500;
+			emotion ET_HUK;
+			npctalk "오리료: 조병! 오리료!!", "", bc_self;
+			mes "[오리료 조병]";
+			mes "보급관님 오셨습니까? 마침 여기 모험가도 도착한 참입니다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "모험가라고? 오?! 이게 누군가? " + strcharinfo(0) + " 요원 아닌가? 너무 오랜만에 보는 것 같군.";
+			next;
+			mes "[오리료 조병]";
+			mes "요.. 요원이요? 요원이셨습니까? 미쳐 몰라 뵙고 실례가 많았습니다.";
+			next;
+			mes "<B>말은 저렇게 하고 있지만, 왜 미리 말하지 않았냐며 억울한듯한 표정을 하고있다.</B>";
+			next;
+			mes "[보급관 고리르]";
+			mes "그래그래 요즘 하는 일은 잘되고? 뭐 원체 유명해져서 소식은 틈틈이 듣고 있다네.";
+			next;
+			cloakoffnpcself( "ep20_icas_in_99_57" );
+			sleep2 500;
+			npctalk "호로료: 흠.. 흠..", "ep20_icas_in_99_57", bc_self;
+			sleep2 1000;
+			npctalk "오리료: 조병! 오리료!", "", bc_self;
+			mes "[오리료 조병]";
+			mes "대장님 오셨습니까?";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "오는 길에 듣자 하니 요원 어쩌고 그러던데..";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "보급관 자네 아직도 아무나 붙잡고 요원 타령하는 건가? 내가 그러지 말라고 했던 것 같은데?";
+			next;
+			npctalk "고리르: 주병! 고리르!", "ep20_icas_in_104_60", bc_self;
+			mes "[보급관 고리르]";
+			mes "아.. 아닙니다. 대장님..";
+			next;
+			mes "[보급관 고리르]";
+			mes "여기 이 친구는 저랑 두어 번 작전에 투입된 적도 있는 실력 있는 진짜배기 요원입니다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "아닌가? 이 보게 자네도 뭐라 말 좀 해보게.";
+			next;
+			mes "<B>보급관 고니르는 어서 대답하라는 듯 날 빤히 쳐다보고 있다. 이 상황? 어딘지 모르게 익숙하다.</B>";
+			next;
+			switch( select( "하하 대장님 이래 보여도 요원입니다.", "여기 보급관님께 신세를 많이 지고 있습니다.", "그래서 다음 임무는 뭡니까?", "아니 선택지 상태가?" ) ) {
+			case 1:
+				emotion ET_STARE, getnpcid(0,"ep20_icas_in_104_60");
+				break;
+			case 2:
+				emotion ET_SURPRISE, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[순찰대장 호로료]";
+				mes "오! 이 앞 뒷말 다 잘라먹는 성격! 요원이 확실하군.";
+				break;
+			case 3:
+				emotion ET_QUESTION, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[순찰대장 호로료]";
+				mes "신세를 졌다고? 신세야 모두가 지고 있지.";
+				break;
+			case 4:
+				emotion ET_OK, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[순찰대장 호로료]";
+				mes "그래 내가 봐도 요원이라 생각하기 쉽지 않긴 하군.";
+				break;
+			}
+			next;
+			mes "[순찰대장 호로료]";
+			mes "뭐! 좋다. 실제 요원인지 아닌지가 뭐가 중요하겠나?";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "인력 부족에 허덕이고 있는 마당에 자네 정도면 신분도 확실한 편이니 작전에 믿고 투입해도 큰 문제는 없겠지.";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "고리르 보급관 제 때에 적절한 인재 추천이었네.";
+			next;
+			npctalk "고리르: 주병! 고리르!", "ep20_icas_in_104_60", bc_self;
+			mes "[보급관 고리르]";
+			mes "감사합니다. 대장님.";
+			next;
+			erasequest 19158;
+			setquest 19159;
+			mes "[순찰대장 호로료]";
+			mes "오리료 조병 그럼 작전 브리핑 진행하도록 하지.";
+			close;
+		}
+		if (isbegin_quest(19159) == 1) {	// Step 2 of 4
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			cloakoffnpcself( "ep20_icas_in_99_57" );
+			mes "[오리료 조병]";
+			mes "브리핑 시작하겠습니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "아시겠지만, 지지부진하던 르간과의 전쟁에서 저희가 큰 성과를 보게 되었습니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "저희 순찰대 분석팀에서 성과가 발생한 이유를 분석해 본 결과!";
+			next;
+			mes "[오리료 조병]";
+			mes "외부 모험가들이 구해 온 르간 변신 스크롤로 쉽게 잠입을 할 수 있던 것이 중요하게 작용하였다는 분석이 나왔습니다.";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "그래 그 무렵부터 순찰대에서도 변신스크롤을 사용한 순찰이 도입되었지.";
+			next;
+			mes "[오리료 조병]";
+			mes "네 그렇습니다. 실제로 성과도 있었고 너무 위험지역까지 들어가는 감이 있긴 하지만, 방법도 나쁘지 않았다는 분석입니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "저희가 새로운 방식을 도입하여 성과를 냈듯이 르간도 아윈 변신 스크롤 이란 것을 개발하여, 저희 쪽으로 역으로 침투하기 시작했습니다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "아니 그럼 성 내에 르간이 침투해 있을지도 모른다는 거 아닌가?";
+			next;
+			mes "[오리료 조병]";
+			mes "그렇습니다. 문제가 바로 그 부분입니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "모습이 저희와 확연하게 다른 모험가는 문제가 없겠지만..";
+			next;
+			mes "[오리료 조병]";
+			mes "얼음의 성에 아윈 변신 스크롤을 사용해 잠입한 르간을 구분할 방법이 현재로는 전혀 없습니다.";
+			next;
+			mes "[순찰대장 호로료]";
+			mes "그렇다. 이 문제를 해결하기 위해 고리르 보급관과 모험가를 모시게 되었다.";
+			next;
+			select( "네?! 제가요?" );
+			erasequest 19159;
+			setquest 19160;
+			mes "[순찰대장 호로료]";
+			mes "작은 것이라도 좋다. 아이디어가 있다면, 여기 오리료 조병에게 말하도록. 그럼 믿고 맡기도록 하지.";
+			close2;
+			cloakonnpcself( "ep20_icas_in_99_57" );
+			end;
+		}
+		if (isbegin_quest(19160) == 1) {	// Step 3 of 4
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			cloakonnpcself( "ep20_icas_in_99_57" );
+			mes "[오리료 조병]";
+			mes "요원님! 무슨 좋은 아이디어라도 있으십니까?";
+			next;
+			mes "<B>아무래도 내가 낄 회의가 아닌 것 같다. 양해를 구하고 빠져나가야겠다.</B>";
+			next;
+			select( "미안한데 내가 낄.." );
+			mes "[보급관 고리르]";
+			mes "" + strcharinfo(0) + " 요원 말하는 도중에 미안하네만, 내게 좋은 생각이 있네. 아마 자네도 들으면 납득할 수 있을 거야.";
+			next;
+			mes "[보급관 고리르]";
+			mes "바로 암구호를 만드는 거네. 외형으로 알아볼 수 없다면, 우리만 아는 체계를 만들면 그만 아닌가?";
+			next;
+			select( "의외로 납득이 가는 말을 하시는군요?" );
+			mes "[보급관 고리르]";
+			mes "역시 요원이라면, 그렇게 말할 줄 알았네. 자 그럼 정리해 볼까? 우리가 해야 할 일은 크게 두 가지 같군.";
+			next;
+			mes "[보급관 고리르]";
+			mes "첫 번째 매일 변경된 암구호를 르간 구역으로 파견해있는 대원에게 전달을 한다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "두 번째 얼음의 성 내부의 거수아윈에게 암구호를 물어보고 답변하지 못 하면 잡아들인다.";
+			next;
+			select( "그런 거 같군요." );
+			mes "[오리료 조병]";
+			mes "그런 거 같습니다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "좋아! 그럼 업무를 나누도록 하지. 우선 매일 암구호를 변경하는 작업은 오리료 조병이 수고하도록 하게.";
+			next;
+			mes "[보급관 고리르]";
+			mes "다양하게 준비해서 되도록 겹치지 않게 해야 할거야.";
+			next;
+			mes "[오리료 조병]";
+			mes "네! 알겠습니다.";
+			next;
+			mes "[보급관 고리르]";
+			mes "파견 대원에게 찾아가서 바뀐 암구호를 대고 회수한 정보를 가져오는 업무는 " + strcharinfo(0) + " 요원이 맡아주면 좋겠군.";
+			next;
+			mes "[보급관 고리르]";
+			mes "아무래도 우리 아윈보단 움직이는 게 자유로울 테니 말이야.";
+			next;
+			select( "어차피 또", "이상한 선택지를", "제시할 테니 흔쾌히", "하겠다고 한다." );	// note: the selection doesn't change the text
+			emotion ET_QUESTION, playerattached();
+			mes "[보급관 고리르]";
+			mes "마지막으로 얼음의 성 내 거수아윈을 잡아들이는 문제인데. 이것도 " + strcharinfo(0) + " 요원이 맡아주면 좋겠군.";
+			next;
+			mes "[보급관 고리르]";
+			mes "아무래도 조금 산만한 아윈들보다는 숙련된 요원이 관찰력이 더 뛰어날 테니 말이야.";
+			next;
+			select( "잠깐! 그보다 보급관은 뭘 하지?" );
+			mes "[보급관 고리르]";
+			mes "나? 난 보급 업무를 해야지. 주병씩이나 되어서 실무에서 뛸 수야 있나? 여기 오리료 조병같이 자라나는 신입 간부에게 맡겨둬야지.";
+			next;
+			mes "[보급관 고리르]";
+			mes "그럼 둘이 잘 해내리라 믿고 난 내 일을 하러 가겠네.";
+			next;
+			cloakonnpcself( "ep20_icas_in_104_60" );
+			sleep2 500;
+			emotion ET_STARE_ABOUT;
+			sleep2 1000;
+			emotion ET_SMILE;
+			mes "[오리료 조병]";
+			mes "하하하.. 직급에 맞는 훌륭한 짬 처리 실력이군요. 본받아야겠습니다. 시간 괜찮으시면, 이야기를 더 나누실 수 있으십니까?";
+			next;
+			mes "[오리료 조병]";
+			mes "거창한 것은 아니고 이미 95%는 다 정해진 걸 브리핑했던 건데.. 왜 저리 처음 듣는 것처럼 말들을 하시는지..";
+			next;
+			erasequest 19160;
+			setquest 19161;
+			mes "[오리료 조병]";
+			mes "저도 직급이 높아지면, 금붕어처럼 깜빡깜빡하게 되는 걸까요? 아무튼 잠시 이야기 좀 나누시죠.";
+			close;
+		}
+		if (isbegin_quest(19161) == 1) {	// Step 4 of 4
+			mes "[오리료 조병]";
+			mes "본격적으로 담당하실 업무에 대해 설명해 드리겠습니다. 어떤 업무부터 설명해드릴까요?";
+			while(1) {
+				next;
+				switch( select( "변경되는 암구호를 아는 방법은?", "암구호와 정보회수", "숨어든 스파이 수색", "충분하다." ) ) {
+				case 1:
+					mes "[오리료 조병]";
+					mes "숙련된 요원이라고 하시니 잘 아시겠지만, 암구호는 규정상 구두로만 전달이 가능하기 때문에 저에게 오시면, 변경된 암구호를 알려드리겠습니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "아 그리고 암구호 변경은 매일 04시입니다. 시간을 잘 지키셔서 변경된 암구호를 가지고 작전에 나가는 일이 없으셨으면 합니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "잊어버리셨다고 해도 걱정하지 마십시오. 언제든 오시면 다시 알려드리겠습니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "더 궁금한 내용이 있으십니까?";
+					break;
+				case 2:
+					mes "[오리료 조병]";
+					mes "파견 나간 대원들이 회수한 정보를 다시 가져오는 것도 매우 중요합니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "제가 지정해 드린 장소로 가셔서 저희 대원과 접선하신 다음 그 대원이 회수한 정보를 회수해 가져오시는 업무입니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "물론 암구호를 활용해 저희 대원인지 꼭 확인하셔야 합니다. 숙련된 요원이시니 잘 해내실 것이라 믿습니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "더 궁금한 내용이 있으십니까?";
+					break;
+				case 3:
+					mes "[오리료 조병]";
+					mes "아윈 변신 스크롤로 얼음의 성에 침투한 르간이 언제 어디서 나름의 정보를 회수하고 있을지는 아무도 모릅니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "얼음의 성을 배회하시다가 조금이라도 수상쩍은 거수아윈이 보이시면, 암구호로 확인 부탁드리겠습니다.";
+					next;
+					mes "[오리료 조병]";
+					mes "더 궁금한 내용이 있으십니까?";
+					break;
+				case 4:
+					completequest 19161;
+					mes "[오리료 조병]";
+					mes "임무에 투입될 준비를 마치시면, 언제든 찾아주십시오. 암구호를 알려드리겠습니다.";
+					close;
+				}
+			}
+			end;
+		}
+		// (shouldn't happen)
+		end;
+	}
+
+	.@playtime_19162 = checkquest(19162,PLAYTIME);
+	.@playtime_19163 = checkquest(19163,PLAYTIME);
+	.@playtime_19165 = checkquest(19165,PLAYTIME);
+
+	if (.@playtime_19163 == 2) {
+		erasequest 19163;
+		.@playtime_19163 = -1;
+	}
+	if (.@playtime_19165 == 2) {
+		erasequest 19165;
+		.@playtime_19165 = -1;
+	}
+
+	// menu 1
+	switch( .@playtime_19162 ) {
+	case -1:
+		.@menu$[0] = "오늘의 암구호는?";
+		break;
+	case 0:
+	case 1:
+		.@menu$[0] = "오늘의 암구호를 다시 알려줘!";
+		break;
+	case 2:
+		.@menu$[0] = "변경된 암구호를 알려줘!";
+		break;
+	}
+
+	// menu 2
+	if (.@playtime_19163 == 0 || .@playtime_19163 == 1)
+		.@menu$[1] = "붙잡힌 스파이에 대해 물어본다.";
+	if (isbegin_quest(19164) == 0)
+		.@menu$[1] = "스파이에 대한 정보를 물어본다.";
+	else
+		.@menu$[1] = "스파이 수색에 대한 보상을 받는다.";
+
+	// menu 3
+	if (.@playtime_19165 == 0 || .@playtime_19165 == 1)
+		.@menu$[3] = "가져온 정보에 대해 알려줄 수는 없어?";
+	else if (isbegin_quest(19167) == 1)	// failed
+		.@menu$[2] = "[실패] 첩보 정보 회수";
+	else if (isbegin_quest(19166) == 1)	// success
+		.@menu$[2] = "[성공] 첩보 정보 회수";
+	else if (isbegin_quest(19177) > 0 || isbegin_quest(19169) > 0)	// progress
+		.@menu$[2] = "[진행] 첩보 정보 회수";
+	else	// daily
+		.@menu$[2] = "[일일] 첩보 정보 회수";
+
+	switch( select( .@menu$[0], .@menu$[1], .@menu$[2], .@menu$[3], "잡담을 한다." ) ) {
+	case 1:
+		switch( .@playtime_19162 ) {
+		case -1:
+			mes "[오리료 조병]";
+			mes "알겠습니다. 오늘의 암구호를 알려드리겠습니다. 아시겠지만 유출 방지를 위해 어디 적어두지 마시고 꼭 외워 두시기 바랍니다.";
+			next;
+			setquest 19162;
+			break;
+		case 0:
+		case 1:
+			mes "[오리료 조병]";
+			mes "암구호를 잊어버리셨군요. 다시 알려드리겠습니다.";
+			next;
+			break;
+		case 2:
+			erasequest 19162;
+			mes "[오리료 조병]";
+			mes "네 암구호가 변경되었습니다. 알려드리겠습니다.";
+			next;
+			setquest 19162;
+			break;
+		}
+		mes "[오리료 조병]";
+		mes "오늘의 암구호는 문어에 ^FF0000" + $@ep20_spy_password$ + "^000000 답어에 ^0000FF" + $@ep20_spy_answer$ + "^000000입니다. 이 암구호는 매일 04시에 초기화되니 참고 바랍니다.";
+		close;
+	case 2:
+		switch( .@playtime_19163 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[오리료 조병]";
+			mes "붙잡힌 스파이는 지금 정보과에서 심문 중이라는 것 같습니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "정보과에서도 자세한 내용은 기밀이라고 알려주지는 않습니다만 그럭저럭 조도적(鳥道的)인 방식을 지켜 심문 중이라고 하니 크게 걱정은 안 하셔도 될 것 같습니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "뭐 걔들이 알아서 하지 않겠습니까? 막말로 여기서 잡아다 줬으면 저의 할 일은 다 한거 아닙니까?";
+			next;
+			mes "[오리료 조병]";
+			mes "아 죄송합니다. 요즘 일이 많아져서 저도 모르게 울컥해서 그만...";
+			close;
+		case 2:
+			break;
+		}
+		if (.@playtime_19162 == 2) {	// password changed
+			npctalk "오리료 조병: 제가 오늘의 암구호를 알려드렸던가요? 뭐 알아서 하시겠지만..", "", bc_self;
+			mes "[오리료 조병]";
+			mes "저희도 스파이에 대한 정보는 딱히 없습니다. 스파이가 스파이라고 깃털 위에 써 붙이고 다니지는 않지 않습니까?";
+			next;
+			mes "[오리료 조병]";
+			mes "그저 평범한 아윈이라면 가지 않을 장소, 왜 저러지 싶은 아윈을 요원 님의 훈련되어 뛰어난 눈썰미로 잡아 주시기를 기대할 뿐입니다.";
+			close;
+		}
+		switch( isbegin_quest(19164) ) {
+		case 0:
+			mes "[오리료 조병]";
+			mes "저희도 스파이에 대한 정보는 딱히 없습니다. 스파이가 스파이라고 깃털 위에 써 붙이고 다니지는 않지 않습니까?";
+			next;
+			mes "[오리료 조병]";
+			mes "그저 평범한 아윈이라면 가지 않을 장소, 왜 저러지 싶은 아윈을 요원 님의 훈련되어 뛰어난 눈썰미로 잡아 주시기를 기대할 뿐입니다.";
+			close;
+		case 1:
+			mes "[오리료 조병]";
+			mes "아! 요원님께서 얼음의 성 내 스파이 수색에 큰 성과를 거두셨다고 들었습니다.";
+			next;
+			erasequest 19164;
+			setquest 19163;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			mes "[오리료 조병]";
+			mes "위에서 책정된 보상입니다. 저야 요원님이 고생하시는 걸 알지만.. 어쩌겠습니까? 이거 이상은 저도 드리지 못하는걸..";
+			close;
+		case 2:
+			end;
+		}
+		end;
+	case 3:
+		// notes:
+		// - playtime 1 is in menu 4
+		// - player can take the quest even if the password changed
+		if (isbegin_quest(19166) == 1) {	// success
+			mes "[오리료 조병]";
+			mes "손에 든 것이 가져오신 정보입니까? 흠.. 이 날인과 봉인.. 확실한 것 같습니다.";
+			next;
+			erasequest 19166;
+			setquest 19165;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			mes "[오리료 조병]";
+			mes "책정된 보상입니다. 저야 요원님이 고생하시는 걸 알지만.. 어쩌겠습니까? 이거 이상은 저도 드리지 못하는걸..";
+			close;
+		}
+		if (isbegin_quest(19167) == 1) {	// failed
+			mes "[오리료 조병]";
+			mes "네?! 정보를 가져오는데 실패하셨다고요? 설마 숙련된 요원이란 분이 암구호를 잊어버리고 그러시지는 않으셨겠죠?";
+			next;
+			mes "[오리료 조병]";
+			mes "피치 못할 사고가 있었을 거라고 생각하겠습니다. 그래서 어쩌시겠습니까? 다른 회수 임무라도 지급해 드릴깝쑈?";
+			next;
+			if (select( "재 지급을 원한다.", "오늘은 하지 않겠다." ) == 2) {
+				erasequest 19167;
+				mes "[오리료 조병]";
+				mes "그러시죠. 요원님도 실수하실 수 있죠.";
+				next;
+				mes "<B>저 작은 부리가 부들거리는 것이 비꼬는 것이 확실하다.</B>";
+				close;
+			}
+			erasequest 19167;
+
+			.@quest_id = rand(19168,19177);
+			setquest .@quest_id;
+			mes "[오리료 조병]";
+			mes "원하시는 새 임무입니다. 이번에는 잘 좀 하십시다. 암구호 잃어버리셨으면 다시 알려달라고 하시고요.";
+			next;
+			mes "<B>저 작은 부리가 부들거리는 것이 비꼬는 것이 확실하다.</B>";
+			close2;
+			open_quest_ui(.@quest_id);
+			end;
+		}
+		// Give the quest
+		if (F_queststatus(HAVEQUEST,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177) == 0) {
+			mes "[오리료 조병]";
+			mes "파견 대원과의 접선 장소는 지금 드린 용지에 적어 두었습니다.";
+			next;
+			mes "[오리료 조병]";
+			mes "해당 위치에 가면 대원이 먼저 접촉해 올 테니 암구호로 확인 후 주는 정보를 받아 오시면 됩니다.";
+			next;
+			.@quest_id = rand(19168,19177);
+			setquest .@quest_id;
+			mes "[오리료 조병]";
+			mes "암구호를 잊어버리셨다면 꼭 재확인 후에 임무에 나가주세요.";
+			close2;
+			open_quest_ui(.@quest_id);
+			end;
+		}
+		mes "[오리료 조병]";
+		mes "드린 용지에 적혀있는 장소로 가시면, 우리 대원이 먼저 접촉해 올 겁니다. 암구호 확인 후 정보를 받아 오시면 됩니다.";
+		next;
+		mes "[오리료 조병]";
+		mes "그리고 혹시나 해서 말씀드리는 건데, 암구호를 잊어버리셨다면 꼭 재확인 후에 임무에 나가주세요.";
+		close;
+	case 4:	// (playtime 1)
+		mes "[오리료 조병]";
+		mes "파견 대원들이 현지에서 먹은 음식, 잠자리의 불편함에 대한 토로, 르간으로 변신한 후 불편했던 점, 친구에게 보내는 편지 등등 너무도 다양하고 쓸모 없는 정보를 보내오는 바람에..";
+		next;
+		mes "[오리료 조병]";
+		mes "정보과에서 분석에 난항을 겪고 있다고 합니다. 하.. 파견 대원들은 파견의 이유를 뭐라고 생각하는 건지..";
+		next;
+		select( "웃고 있는 거 같은데?" );
+		mes "[오리료 조병]";
+		mes "에이 아닙니다. 저는 이 일로 정보과가 바빠졌다고 기뻐하고 그런 속 좁은 아윈이 아닙니다. 믿어주세요.";
+		close;
+	case 5:
+		emotion ET_CRY;
+		mes "[오리료 조병]";
+		mes "지금 잡담할 정신이 있으십니까? 지금 저만 바쁜 겁니까? 예?";
+		close;
+	}
+	end;
+
+S_Data:
+	// Succinct list
+	setarray .@data$[0],
+		"드릴러",	"족발",
+		"페코",	"족발",
+		"투칸",	"탕수육",
+		"세비지",	"팝콘",
+		"나가",	"칵테일",
+		"미밍",	"피자",
+		"채찍녀",	"곱창",
+		"클락",	"딸기",
+		"솔리더",	"육개장",
+		"재규어",	"카레",
+		"크리미",	"알밥",
+		"크램프",	"땅콩",
+		"프리저",	"유린기",
+		"미스트",	"육회",
+		"울프",	"곱창",
+		"비타타",	"샤브",
+		"시노비",	"짜장면",
+		"불뱀",	"육개장",
+		"크라벤",	"아몬드",
+		"퍼씰",	"돈까스",
+		"재규어",	"단감",
+		"채찍녀",	"가츠동",
+		"도마뱀",	"칵테일",
+		"드릴러",	"피자",
+		"드릴러",	"부대국",
+		"페코",	"짜장면",
+		"초록뱀",	"딸기",
+		"하티",	"군만두",
+		"농구",	"햄버거",
+		"세비지",	"돈까스",
+		"농구",	"딸기",
+		"베나투",	"담배",
+		"초록뱀",	"토마토",
+		"스모키",	"돈까스",
+		"스모키",	"오징어",
+		"콘도르",	"치킨",
+		"퍼씰",	"갈비",
+		"초록뱀",	"보쌈",
+		"해달",	"랍스타",
+		"스모키",	"군만두";
+
+	.@size = getarraysize(.@data$) / 2;
+	.@r = rand(.@size) * 2;
+	$@ep20_spy_password$ = .@data$[.@r];
+	$@ep20_spy_answer$ = .@data$[.@r+1];
+	return;
+
+OnHour04:
+	callsub( S_Data );
+	end;
+
+OnInit:
+	callsub( S_Data );
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "ep20_main >= 12 && isbegin_quest(19161) < 2" );
+
+	questinfo( QTYPE_CLICKME, QMARK_NONE, "isbegin_quest(19161) == 2 && (checkquest(19162,PLAYTIME) == -1 || checkquest(19162,PLAYTIME) == 2)" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19164) == 1" );	// Quest 1
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19166) == 1" );	// Quest 2 success
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19167) == 1" );	// Quest 2 failed
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(19163,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(19165,PLAYTIME) == 2" );
+
+	// note: no questinfo for checkquest(19163,PLAYTIME) == -1
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(19161) == 2 && checkquest(19165,PLAYTIME) == -1 && F_queststatus(HAVEQUEST,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177) == 0" );
+	end;
+}
+
+
+// Daily quest A : 'Intelligence information collection'
+jor_nest,171,84,4	script	접선 장소#Q19168::ep20_jor_nest_171_84	4_POINT_BLUE,5,5,{
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+
+	if (isbegin_quest(.@num) == 0) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (기척은 느껴지지 않는다.)", bc_self;
+		end;
+	}
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (오리료가 알려준 장소에서 기척이 느껴진다.)", bc_self;
+	mes "[누군가]";
+	mes "정지! 아윈 진영에서 나왔나? ^000000 미밍^000000 ";
+	next;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (답어를 답하자.)", bc_self;
+	input .@string$;
+	if (.@string$ != $@ep20_spy_answer$ || checkquest(19162,PLAYTIME) == -1 || checkquest(19162,PLAYTIME) == 2) {
+		mes "[누군가]";
+		mes "칫! 들켰나?!";
+		erasequest .@num;
+		setquest 19167;
+		cloakonnpcself();
+		next;
+		mes "(누군가 다급하게 떠났다. 오리료에게 결과를 보고하자.)";
+		close;
+	}
+	mes "[누군가]";
+	mes "그동안 획득한 정보다. 르간에게 들키기 전에 어서 가지고 가!";
+	next;
+	erasequest .@num;
+	setquest 19166;
+	cloakonnpcself();
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (누군가 정보가 적힌 종이를 주고 다급하게 떠났다. 오리료에게 결과를 보고하자.)", bc_self;
+	end;
+
+OnTouch:
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+	if (isbegin_quest(.@num) == 1) {
+		emotion ET_BLABLA;
+		end;
+	}
+	cloakonnpcself();
+	end;
+
+OnInit:
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(" + .@num + ") == 1" );
+	end;
+}
+jor_back5,296,149,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19169	4_POINT_BLUE,5,5
+jor_twice,76,100,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19170	4_POINT_BLUE,5,5
+jor_maze,253,267,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19171	4_POINT_BLUE,5,5
+jor_root1,39,93,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19172	4_POINT_BLUE,5,5
+jor_root2,19,44,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19173	4_POINT_BLUE,5,5
+jor_twig,192,211,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19174	4_POINT_BLUE,5,5
+jor_sanct,120,86,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19175	4_POINT_BLUE,5,5
+jor_root3,347,147,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19176	4_POINT_BLUE,5,5
+jor_back6,353,260,4	duplicate(ep20_jor_nest_171_84)	접선 장소#Q19177	4_POINT_BLUE,5,5
+
+
+// Daily quest B : 'Spy search'
+icecastle,1,1,4	script	ep20_spy_search_control	-1,{
+	end;
+OnInit:
+	initnpctimer;
+	callsub( S_Chosen );
+	end;
+OnTimer60000:
+	initnpctimer;
+	callsub( S_Chosen );
+	end;
+
+// Choose a random NPC as a spy
+// Maybe the same NPC can be chosen in a row, but I haven't encountered this scenario
+S_Chosen:
+	setarray .@id[0],1,2,3,4,5,6,7,8,9,10;
+	.@size = 10;
+
+	// Remove the previous id, if exists
+	if ($@ep20_spy_search_id > 0) {
+		deletearray .@id[$@ep20_spy_search_id-1],1;
+		.@size--;
+	}
+	$@ep20_spy_search_id = .@id[ rand(.@size) ] + 1;
+	end;
+}
+
+icecastle,207,240,4	script(CLOAKED)	상병 모루랑#SSQ01::ep20_icecastle_207_240	EP19_NPC_IWIN_SG,{
+	end;
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icecastle,204,238,2	script	수상한 아윈#SSQ01	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 1) {	// is not the spy
+			npctalk "수상한 아윈: 암구어? 답어가 " + $@ep20_spy_answer$ + "던가?", "", bc_self;
+			sleep2 2000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 500;
+			emotion ET_SMILE;
+			sleep2 500;
+			npctalk "수상한 아윈: 허허 요즘은 이런 것도 하네. 고생하슈.", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "수상한 아윈: 다.. 답어? 그게 뭔데?! 난 그런 거 모른다고", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_207_240" );
+		sleep2 500;
+		npctalk "상병 모루랑: 소란 신고 받고 왔습니다.", "ep20_icecastle_207_240", bc_self;
+		sleep2 500;
+		npctalk "수상한 아윈: 으엑! 순찰대? 도..도망가야..", "", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		emotion ET_FRET, getnpcid(0,"ep20_icecastle_207_240");
+		sleep2 500;
+		npctalk "상병 모루랑: 이 녀석 스파이냐? 거기서!", "ep20_icecastle_207_240", bc_self;
+		cloakonnpcself( "ep20_icecastle_207_240" );
+		sleep2 1000;
+		emotion ET_QUESTION, playerattached();
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		setquest 19164;
+		sleep2 1500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_ANGER;
+	sleep2 500;
+	npctalk "수상한 아윈: " + .@string$ + "? 맞아? 내가 아는 암구어랑 다른데? 네가 스파이 아니야?", "", bc_self;
+	sleep2 1000;
+	cloakoffnpcself( "ep20_icecastle_207_240" );
+	sleep2 500;
+	npctalk "상병 모루랑: 소란 신고 받고 왔습니다.", "ep20_icecastle_207_240", bc_self;
+	sleep2 500;
+	npctalk "수상한 아윈: 아이구 마침 잘 왔네. 여기 이 자가 아무래도 스파이 같아. 이상한 문어를 대더라니까?", "", bc_self;
+	sleep2 1500;
+	emotion ET_HUM, getnpcid(0,"ep20_icecastle_207_240");
+	sleep2 500;
+	npctalk "상병 모루랑: 앗! 모험가님? 그리고 선배님 아니십니까? 여기까지 무슨 일이십니까?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 오! 후배 날 알아? 뭐야 여기 이 자는 아는 자야?", "", bc_self;
+	sleep2 1000;
+	emotion ET_SCRATCH, getnpcid(0,"ep20_icecastle_207_240");
+	sleep2 500;
+	npctalk "상병 모루랑: 저희 쪽 일을 돕고 계십니다. 암구호는... 잊어 버리셨나?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 저런.. 똑똑한 종족은 아닌 것 같구만.. 에이 모르겠다. 보급관님께 안부나 전해줘.", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루랑: 그냥 가십니까?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 조방위 훈련 한다고 해서 왔는데. 기분이 영 별로네. 뭐 다음에 해도 되겠지.", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루랑: 선배님 살펴 가십시오.", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP;
+	npctalk "수상한 아윈: 수고~", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "상병 모루랑: 모험가님 그럼 저도 가보겠습니다. 잊어버리신 암구호는 오리료 조병 님께 가서 다시 들으시고요.", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	npctalk "상병 모루랑: 고생하십시오", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_207_240" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 1)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_FRET;
+	end;
+}
+
+icecastle,240,187,4	duplicate(ep20_icecastle_207_240)	이병 로루르#SSQ02::ep20_icecastle_240_187	EP19_NPC_IWIN_SY
+
+icecastle,238,185,2	script	수상한 아윈#SSQ02	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1000;
+
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 2) {	// is not the spy
+			npctalk "수상한 아윈: 암구어? 아! 아까 작업반장 포씨가 알려줬던 그 괴상한 단어 말하는 거구먼, " + $@ep20_spy_answer$ + "?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			emotion ET_SCRATCH;
+			sleep2 500;
+			npctalk "수상한 아윈: 모험가 씨가 고생이 많구먼, 아 참 마을 물건들은 조심해서 써줘 고치기 귀찮으니까. 일 보드라고.", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OTL;
+		sleep2 500;
+		npctalk "수상한 아윈: 큭.. 여기까지 얼마나 힘들게 왔는데 여기서 들키다니..", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_240_187" );
+		sleep2 1000;
+		npctalk "이병 로루르: 소란 신고 받고 왔습니다.", "ep20_icecastle_240_187", bc_self;
+		sleep2 1000;
+		npctalk "수상한 아윈: 순순히 잡히겠다. 포로로써 거칠게 대하지 말아 달라.", "", bc_self;
+		sleep2 1500;
+		emotion ET_CONFUSE, getnpcid(0,"ep20_icecastle_240_187");
+		sleep2 500;
+		npctalk "이병 로루르: 앗! 모험가님 한건 하셨군요.", "ep20_icecastle_240_187", bc_self;
+		sleep2 1000;
+		emotion ET_BEST, getnpcid(0,"ep20_icecastle_240_187");
+		sleep2 500;
+		npctalk "이병 로루르: 그럼 스파이 인계 받겠습니다. 고생하셨습니다. 모험가님.", "ep20_icecastle_240_187", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ???", bc_self;
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_240_187" );
+		cloakonnpcself();
+		setquest 19164;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_HUK;
+	sleep2 500;
+	npctalk "수상한 아윈: 으이? " + .@string$ + "? 그거 맞어? 작업반장 포씨가 알려준 거랑 다른디? 그 뭐여 스패이여?", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_240_187" );
+	sleep2 500;
+	npctalk "이병 로루르: 소란 신고 받고 왔습니다.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	emotion ET_COOL;
+	sleep2 500;
+	npctalk "수상한 아윈: 어이쿠 순찰대 아우들 아녀. 거 대장님은 잘 계시지? 어!? 여기 그 뭐여 스패이! 그려 스패이같어.", "", bc_self;
+	sleep2 1000;
+	emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_240_187");
+	npctalk "이병 로루르: 스패이? 아 스파이요? 이분이? 아이고 이분이 착각하셨나 보네요. 저희 일을 돕고 계신 모험가 님이십니다.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 잉? 스패이가 아녀? 스패이도 아닌데 왜 그랬대?", "", bc_self;
+	sleep2 1500;
+	npctalk "이병 로루르: 아시다시피 단어가 워낙 이상하잖아요. 잊어버리셨나 보죠.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	emotion ET_SCRATCH;
+	sleep2 500;
+	npctalk "수상한 아윈: 저런.. 좀 모지래 보이는디 일 같은 거 맡겨도 되는가 모르겠네. 아차! 내 정신 좀 봐 가봐야 쓰것네.", "", bc_self;
+	sleep2 1000;
+	npctalk "이병 로루르: 바쁘신가요?", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 아이고 말도 말어. 날 좀 따셔졌다고 접디 추울 때 얼음으로 때워둔 게 다 난리여.", "", bc_self;
+	sleep2 1500;
+	npctalk "이병 로루르: 살펴 가세요.", "ep20_icecastle_240_187", bc_self;
+	npctalk "수상한 아윈: 오이~ 순찰대 아우도 수고하고", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "이병 로루르: 모험가님 저도 가보겠습니다. 잊어버리신 암구호는 오리료 조병 님이 다시 알려주시니 가서 들으시고요.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_240_187");
+	npctalk "이병 로루르: 전 갑니다~", "ep20_icecastle_240_187", bc_self;
+	cloakonnpcself( "ep20_icecastle_240_187" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 2)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SWEAT;
+	end;
+}
+
+
+icecastle,129,184,6	duplicate(ep20_icecastle_207_240)	일병 호리류#SSQ03::ep20_icecastle_129_184	EP19_NPC_IWIN_SB
+
+icecastle,132,182,6	script	수상한 아윈#SSQ03	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 3) {	// is not the spy
+			npctalk "수상한 아윈: 엉? 암구어? 딸꾹.. 그.. 그 뭐냐.. 그래 육개장 이거! 이거.. 맞지?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 어휴.. 더 취하기 전에 들어가야겠어. 부리 돌아갈라.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OHNO;
+		sleep2 500;
+		npctalk "수상한 아윈: 칫! 이제야 이 털 뭉치에 조금 익숙해 지는 것 같았는데 연극도 이젠 끝인가?", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_129_184" );
+		sleep2 500;
+		npctalk "일병 호리류: 소란 신고 받고 왔습니다만, 이미 상황은 해결된 것 같군요.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		npctalk "수상한 아윈: 포로가 된 나를 데려갈 인솔조가 네놈인가? 나를 포로로써 예우해달라는 요청을 하고 싶군.", "", bc_self;
+		sleep2 1500;
+		emotion ET_FRET, getnpcid(0,"ep20_icecastle_129_184");
+		npctalk "일병 호리류: 언제 봤다고 이놈 저놈 타령이야. 내가 예우해 주는 것도 아니고 따라오기나 해.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		npctalk "일병 호리류: 모험가님 그럼 인솔해 가겠습니다. 수고하셨습니다.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_129_184" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_SPIT;
+	sleep2 500;
+	emotion ET_PROFUSELY_SWEAT, playerattached();
+	npctalk "수상한 아윈: 으잉? " + .@string$ + "? 그거 아닌데? 지금 내가 취했다고 무시하는 거야? 어!", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_129_184" );
+	sleep2 500;
+	npctalk "일병 호리류: 소란 신고 받.. 고 이거 다 아는 얼굴들 이네..", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_ANGER;
+	sleep2 500;
+	npctalk "수상한 아윈: 뭐야?! 또 너야? 여기 순찰대가 너만 있냐? 왜 매번 너야? 어?!", "", bc_self;
+	sleep2 1000;
+	npctalk "일병 호리류: 그러게나 말입니다. 나도 지겹네 지겨워. 그나저나 모험가 씨 여기서 취객이랑 뭐 하십니까?", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 뭐야? 아는 녀석이야? 저.. 저거 스파이야! 스파이! 이상한 문어를 댄다니까? 나 말고 저 녀석을 잡아가.", "", bc_self;
+	sleep2 1500;
+	npctalk "일병 호리류: 스파이는 무슨 대충 봐도 아저씨가 더 수상해 보이는 구만, 그러니까 누가 거하게 자시고 이런 곳에서 배회하래? ", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_SPIT;
+	sleep2 500;
+	npctalk "수상한 아윈: 아니이.. 아이고 답답하네.. @.@ 딸꾹..", "", bc_self;
+	sleep2 1000;
+	npctalk "일병 호리류: 자.. 자.. 집에 갑시다. 이거 봐 얼마나 자주 만났으면, 내가 아저씨 집을 다 기억하네.", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_SLEEPY;
+	sleep2 500;
+	npctalk "수상한 아윈: 아흐.. 졸리다.. z.Z.z..zZ", "", bc_self;
+	sleep2 1000;
+	npctalk "일병 호리류: 으아악! 아저씨 잠들지 마 이런 데서 잠들면 부리 돌아간다고!", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_KEK, getnpcid(0,"ep20_icecastle_129_184");
+	sleep2 500;
+	npctalk "일병 호리류: 으어억.. 저 갑니다. 잊어버리신 암구호는 오리료 조병 님께 가서 다시 듣던지 말던지.", "ep20_icecastle_129_184", bc_self;
+	sleep2 1000;
+	npctalk "일병 호리류: 으아악! 아저씨 일어나! 어?!", "ep20_icecastle_129_184", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_129_184" );
+	cloakonnpcself();
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 3)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SPIT;
+	end;
+}
+
+
+icecastle,62,73,6	duplicate(ep20_icecastle_207_240)	일병 쏘루르#SSQ04::ep20_icecastle_62_73	EP19_NPC_IWIN_SB
+
+icecastle,66,71,8	script	수상한 아윈#SSQ04	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 4) {	// is not the spy
+			npctalk "수상한 아윈: ●●●? ●●● 알밥●●?", "", bc_self;
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (작은 목소리였지만, 어째서 인지 답어 만큼은 명확하게 들렸다.)", bc_self;
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: ●●● ●●. ●● ●●!", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OTL;
+		sleep2 500;
+		npctalk "수상한 아윈: 아.. 답어라니.. 진짜 너무하네.", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_62_73" );
+		sleep2 500;
+		npctalk "일병 쏘루르: 소란 신고 받고 왔습니다.", "ep20_icecastle_62_73", bc_self;
+		sleep2 1500;
+		npctalk "수상한 아윈: 아 진짜. 경비는 왜이리 빨리 와. 저 차가운 바다를 뚫고 이제서야 침투했는데..", "", bc_self;
+		sleep2 1500;
+		emotion ET_GO, getnpcid(0,"ep20_icecastle_62_73");
+		npctalk "수상한 아윈: 왜!!!!!!!!!!!!!!", "", bc_self;
+		npctalk "일병 쏘루르: 됐고, 딱 보니 침투한 르간 같으신데 가십시다. 모험가님 협조 감사드립니다. 야 가자!", "ep20_icecastle_62_73", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_62_73" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+
+	emotion ET_QUESTION;
+	sleep2 500;
+	npctalk "수상한 아윈: " + .@string$ + "? ●●●? ●●? ● ●●●●?", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_62_73" );
+	sleep2 500;
+	npctalk "일병 쏘루르: 소란 신고 받고 왔습니다.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: ●? ●● ●●●? ●●●●●●? ●●●●●?", "", bc_self;
+	sleep2 1500;
+	npctalk "일병 쏘루르: 어?! 뽀루료 상병 아버님 아니세요? 모험가님도 계시네? 아 대충 무슨 상황인지 알겠네요.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: ●● ● ●●●● ●●●● ●●●! ●●● ●●●?", "", bc_self;
+	sleep2 1500;
+	npctalk "일병 쏘루르: 에이 아버님 아닙니다. 저희 쪽 일을 돕고 계세요. 암구호는 뭐! 잊어버릴 수도 있죠. 저희도 가끔 그러자 나요.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: ●●● ●●●●. ●● ●● ●●● ●●● ●●● ●●●!", "", bc_self;
+	sleep2 1500;
+	npctalk "일병 쏘루르: 하하하 모험가님이 못 알아 듣고 계신 것 같으니 제가 잘 전해드릴게요.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: ●● ● ●● ●●! ●● ●●●● ● ●● ●● ●● ●●● ●●●●.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "일병 쏘루르: 아버님 살펴가세요.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1000;
+	npctalk "일병 쏘루르: 모험가님 그럼 저도 가보겠습니다. 잊어버리신 암구호는 오리료 조병 님께 가서 다시 들으시고요.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_62_73");
+	sleep2 500;
+	npctalk "일병 쏘루르: 고생하세요.", "ep20_icecastle_62_73", bc_self;
+	cloakonnpcself( "ep20_icecastle_62_73" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 4)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_THINK;
+	end;
+}
+
+
+icecastle,61,221,2	duplicate(ep20_icecastle_207_240)	이병 토라리#SSQ05::ep20_icecastle_61_221	EP19_NPC_IWIN_SY
+
+icecastle,58,223,8	script	수상한 아윈#SSQ05	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 5) {	// is not the spy
+			npctalk "수상한 아윈: 피자입니다.", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 혹시나 해서 말씀드리는 건데 저 도둑 아닙니다. 여관 안에 쌓여있는 창아앙고 요금을 회수하려는 것뿐이라고요.", "", bc_self;
+			sleep2 1500;
+			emotion ET_WRAP;
+			npctalk "수상한 아윈: 회수했으니 저는 이만!", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "수상한 아윈: 아.. 들켜버렸네. 창 속으로 돈이 버려져 있길래 주워서 활동자금으로 쓰려고 했는데..", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_61_221" );
+		sleep2 1000;
+		npctalk "이병 토라리: 소란 신고 받고 왔습니다.", "ep20_icecastle_61_221", bc_self;
+		sleep2 1000;
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "수상한 아윈: 아.. 여기 치안도 좋구나? 이런 고급 정보를 넘기지 못하는 게 좀 아쉽긴 하네..", "", bc_self;
+		sleep2 1000;
+		npctalk "이병 토라리: 역시 모험가 님이시군요. 그럼 이 스파이 인계받겠습니다.", "ep20_icecastle_61_221", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_61_221" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_PANIC;
+	npctalk "수상한 아윈: 어?! " + .@string$ + "? 문어가 그게 아닌데? 이봐요. 오늘 문어 그거 아닌데요. 혹시..? 스.. 스.. 스파이다!!!! 스파이야!!", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_61_221" );
+	sleep2 500;
+	npctalk "이병 토라리: 소란 신고 받고 왔습니다.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 와.. 독수리 순찰대 분들 진짜 빠르시네. 여기요! 여기! 스파이에요. 스파이!!", "", bc_self;
+	sleep2 1500;
+	emotion ET_X, getnpcid(0,"ep20_icecastle_61_221");
+	sleep2 500;
+	npctalk "이병 토라리: 아까비~ 정답은 저희 일을 돕는 모험가 님이셨습니다.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 아 뭐야.. 그런데 왜 문어를 틀리죠?", "", bc_self;
+	sleep2 1500;
+	npctalk "이병 토라리: 그러게요. 왜 틀리셨을까요? 이상하고 괴상하긴 하지만, 짧은 단어인데..", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 뭐 그럴 수도 있죠. 어쨌든 스파이는 아니라니 다행이네요. 소리소문 없이 쓱-싹-꽥! 당하는 줄 알았다고요.", "", bc_self;
+	sleep2 1500;
+	emotion ET_OK, getnpcid(0,"ep20_icecastle_61_221");
+	sleep2 500;
+	npctalk "이병 토라리: 모험가님도 저희도 열심히 색출 중입니다. 뭐 종종 이런 일이 일어나긴 하지만요.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 고생하시네. 아튼 전 일도 다봤고 가보겠습니다. 수고들하세요.", "", bc_self;
+	sleep2 1500;
+	npctalk "이병 토라리: 옙! 살펴가십시오.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 수고들 하세요.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "이병 토라리: 모험가님 잊어버리신 암구호는 오리료 조병 님께 가서 다시 들으시고요. 그럼 저도 가보겠습니다.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "이병 토라리: 고생하세요.", "ep20_icecastle_61_221", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_61_221" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 5)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_AHA;
+	end;
+}
+
+
+icecastle,52,207,0	duplicate(ep20_icecastle_207_240)	일병 포라랑#SSQ06::ep20_icecastle_52_207	EP19_NPC_IWIN_SB
+
+icecastle,54,209,0	script	수상한 아윈#SSQ06	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 6) {	// is not the spy
+			npctalk "수상한 아윈: 피자! 이거 맞지? 스파이 아니니까. 조용히 해. 중요한걸 관찰하고 있으니까.", "", bc_self;
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 앗! 들켰다. 도망이다.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (뭐였지?)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_HNG;
+		npctalk "수상한 아윈: 으흠.. 허술한 아윈녀석들이 아니라 모험가가 수색하는 건가? 방심했군.", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_52_207" );
+		sleep2 500;
+		npctalk "일병 포라랑: 안녕하십니까? 창문에 이상한 그림자가 보인다는 신고 받고 왔습니다.", "ep20_icecastle_52_207", bc_self;
+		sleep2 1500;
+		npctalk "수상한 아윈: 칫! 병사인가? 도망도 힘들어졌군. 반항하지 않겠다. 그저 사도적(蛇道的)으로 대해달라.", "", bc_self;
+		sleep2 1500;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icecastle_52_207");
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		npctalk "일병 포라랑: 와..? 다른 일로 왔는데?! 스파이를 잡아가? 대박..", "ep20_icecastle_52_207", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1000;
+		npctalk "일병 포라랑: 모험가님 감사합니다. 스파이 아저씨 갑시다. 정보과에서 조도적(鳥道的)으로 대해줄 거에요.", "ep20_icecastle_52_207", bc_self;
+		npctalk "수상한 아윈: 응? 조도적(鳥道的)? 그게 뭔 소리야?", "", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_52_207" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_STARE;
+	sleep2 500;
+	npctalk "수상한 아윈: " + .@string$ + "? " + .@string$ + "?? " + .@string$ + "???", "", bc_self;
+	sleep2 1000;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (그렇지 않아도 작은 아윈의 눈이 더욱 더 작아지며, 날 의심스런 눈으로 보고있다.)", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (살짝 굳어있던 작은 날개가 움직인 듯한 느낌이 든다.. 잠시 후..)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_52_207" );
+	sleep2 500;
+	emotion ET_FRET, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 500;
+	npctalk "일병 포라랑: 신고 받고 왔.. 아니 아저씨 또 아저씨가 신고했어요? 왜요? 이번에는 또 뭔데?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: (스파이야. 스파이.. 암구호도 틀리고 아무튼 스파이야.)", "", bc_self;
+	sleep2 1500;
+	npctalk "일병 포라랑: 저기요~ 모험가님? 제가 아는 분 같은데, 혹시 스파이십니까?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	emotion ET_THINK, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ... ... ... ...", bc_self;
+	sleep2 1000;
+	npctalk "일병 포라랑: 그쵸? 아니죠? 그건 그렇고 아저씨 여기 건물에 접근금지 당하지 않았어요? 왜 또 여기 계신대?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	emotion ET_HUM;
+	sleep2 500;
+	npctalk "수상한 아윈: 어.. 그.. 그래 암구호 좀 잊어먹고 그럴 수 있지. 모험가라고 다 잘하겠나?", "", bc_self;
+	sleep2 1000;
+	emotion ET_FRET, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 2000;
+	npctalk "일병 포라랑: 아니 아저씨 말 돌리지 마시고요. 왜 또 여기 계시냐고요.", "ep20_icecastle_52_207", bc_self;
+	emotion ET_KEK;
+	npctalk "수상한 아윈: 그래 말 나왔으니 속 시원히 이야기해보자. 분명 꽁꽁 언 노란 머리 인간이 이 집으로 들어가는 걸 봤다니까?", "", bc_self;
+	npctalk "일병 포라랑: 그래서요?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 뭐가 그래서요? 야! 내가 창문으로 슬쩍슬쩍 보는데 노란 머리 인간은 없고 아윈 둘과 프리데구르르인가? 하는 사람만 있다니까!", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 분명 그 노란 머리 인간은 어딘가 납치 당했거나 그 뭐냐 스파이! 스파이가 분명해!", "", bc_self;
+	sleep2 1500;
+	emotion ET_OHNO, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 500;
+	npctalk "일병 포라랑: 어.. 일단 알겠습니다. 일단 거주지 접근 금지 명령 어기셨고요. 남 집은 왜 훔쳐봅니까? 일단 가시죠.", "ep20_icecastle_52_207", bc_self;
+	sleep2 1000;
+	npctalk "일병 포라랑: 후.. 모험가님은 오리료 조병님께 가셔서 변경된 암구호를 다시 들으시고요 전 이만 가보겠습니다.", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	npctalk "일병 포라랑: 아저씨 갑시다.", "ep20_icecastle_52_207", bc_self;
+	sleep2 500;
+	npctalk "수상한 아윈: 힝..", "", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_52_207" );
+	sleep2 500;
+	cloakonnpcself();
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 6)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_PANIC;
+	end;
+}
+
+
+icecastle,99,243,2	duplicate(ep20_icecastle_207_240)	상병 뽀루료#SSQ07::ep20_icecastle_99_243	EP19_NPC_IWIN_SG
+
+icecastle,96,245,2	script	수상한 아윈#SSQ07	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 7) {	// is not the spy
+			npctalk "수상한 아윈: 답어가.. !! 아 생각났다!  피자 맞지요?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 세상에 살짝 으슥한 장소에 있어서 관리를 안 할 거라고 생각했는데 여기도 순찰을 나오는구나. 역시 여기서 살아야 하나?", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (이해 못 할 말을 하며, 사라졌다.)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OHNO;
+		sleep2 500;
+		npctalk "수상한 아윈: 하.. 일부러 으슥한 곳에 잠입해 있었는데.. 이게 걸리네..", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_99_243" );
+		sleep2 1000;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		npctalk "상병 뽀루료: (≥▽≤)/ .. .. ...~", "ep20_icecastle_99_243", bc_self;
+		sleep2 1500;
+		emotion ET_QUESTION;
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		npctalk "수상한 아윈: ?", "", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1000;
+		npctalk "수상한 아윈: 뭐라고 하는지 모르겠지만 오긴 왔네? 반항하지 않을 테니 잡아가라.", "", bc_self;
+		sleep2 1500;
+		emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 수상한데? 왜 이렇게 순순히 잡히지?", bc_self;
+		npctalk "상병 뽀루료: ?", "ep20_icecastle_99_243", bc_self;
+		sleep2 1500;
+		emotion ET_SWEAT;
+		npctalk "수상한 아윈: 잡히면 빠르게 항복하여 아윈 녀석들의 식량을 축내라는 명령을 받았다. 앗차! 이걸 말하면 안 됐는데..", "", bc_self;
+		sleep2 1500;
+		npctalk "수상한 아윈: 부디 사도적(蛇道的)으로 대해만 주길..", "", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		npctalk "상병 뽀루료: (-_-a);; ...(...). .... ...(...).. ......", "ep20_icecastle_99_243", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		npctalk "상병 뽀루료: .... ........ .. .......", "ep20_icecastle_99_243", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_99_243" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "수상한 아윈: " + .@string$ + "? 라고 한 거 맞죠?", "", bc_self;
+	sleep2 1500;
+	emotion ET_STARE_ABOUT;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (수상한 아윈은 긴장한 표정으로 노려보았다.)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_99_243" );
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "상병 뽀루료: (≥▽≤)/ .. .. ...~", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 잉? 뭐라고 하는 거야? 쓸데없이 즐거워 보이지 마!", "", bc_self;
+	sleep2 1000;
+	emotion ET_CRY, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "상병 뽀루료: ...... (ㅠ_ㅠ)ㆀ ", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	emotion ET_ANGER;
+	npctalk "수상한 아윈: 이씨 뭐라고 하는지 진짜 모르겠네.", "", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 쓸데없이 침울해하지도 말고! 아! 몰라 난 나대로 말할 테니까 알아들었으면 맞장구나 치라고!", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "상병 뽀루료: (*'▼'*)b ●~", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 난 여기 빈 집을 보러 왔는데. 여기 모험가가 암구호를 물어보더라고..", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 근데 오늘 암구호가 아니야! 그때 알았지 이거 스파이구나!", "", bc_self;
+	sleep2 1000;
+	emotion ET_X, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "상병 뽀루료: X(≥▽≤)X ....!", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 뭐야? 아니라는 거야? 어후- 그럼 다행이고..", "", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 순찰대 친구 내가 혹시나 해서 물어보는데 내가 여기 집을 살까 하거든.. 혹시 이 근방에 개발 소식같은 거 좀 없나?", "", bc_self;
+	sleep2 1500;
+	emotion ET_HUM, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "상병 뽀루료: (*'▽'*)", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 딱 봐도 모르는 눈치 구만.. 됐네.. 뭐 그래도 출동 시간을 보니 안전한 곳 같긴 하네.", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "수상한 아윈: 난 그만 가보겠네. 거 모험가 분도 다음부터 조심하게.", "", bc_self;
+	npctalk "상병 뽀루료: ('_')(._ .)('_')(._ .)", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	cloakonnpcself();
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "상병 뽀루료: (*'▼'*)b ....! ●●●! .... ... .... .....", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "상병 뽀루료: (￣▽￣)~.. ..", "ep20_icecastle_99_243", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_99_243" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 7)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SPARK;
+	end;
+}
+
+
+icecastle,130,269,6	duplicate(ep20_icecastle_207_240)	이병 또라롱#SSQ08::ep20_icecastle_130_269	EP19_NPC_IWIN_SY
+
+icecastle,134,268,4	script	수상한 아윈#SSQ08	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 8) {	// is not the spy
+			npctalk "수상한 아윈: 답어는 육개장. 그리고 쉿! 조용히 하게. 이 절벽에 남은 흔적을 조사하고 있으니..", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			emotion ET_ANGER;
+			sleep2 500;
+			npctalk "수상한 아윈: 에잇- 거 조용히 하래두!", "", bc_self;
+			cloakonnpcself();
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (화를 내며 가버렸다.)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "수상한 아윈: 그거 알아? 이 절벽에는 전설이 있대. 그런데 아무도 그 전설을 몰라.", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 수상하군.. 내가 암구호를 물어보지 않았나?", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_130_269" );
+		sleep2 500;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "이병 또라롱: 짜잔~ 이병 또라룽님 신고 받고 등장~", "ep20_icecastle_130_269", bc_self;
+		sleep2 1000;
+		emotion ET_STARE_ABOUT, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "수상한 아윈: 크악! 준비는 완벽 했는데! 뜬금없이 암구호라니!", "", bc_self;
+		sleep2 1000;
+		emotion ET_AHA, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "이병 또라롱: 시도는 좋았는데.. 우리도 바보는 아니거든. 당연히 확인 제계를 바꿨지.", "ep20_icecastle_130_269", bc_self;
+		sleep2 1000;
+		npctalk "이병 또라롱: 하하 모험가님 오늘도 저희 대신 불철주야 고생이 많으십니다", "ep20_icecastle_130_269", bc_self;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 저희 대신?", bc_self;
+		sleep2 1000;
+		npctalk "이병 또라롱: 아이-참! 서운하게 왜 그러실까? 모험가님이 도와주셔서 감사하다는 거죠.", "ep20_icecastle_130_269", bc_self;
+		sleep2 1500;
+		npctalk "이병 또라롱: 아무튼! 스파이 인계 받아가겠습니다.", "ep20_icecastle_130_269", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_130_269" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "수상한 아윈: " + .@string$ + ".. " + .@string$ + "라.. 흠.. 자네도 슬슬 뭔가 틀렸다는 생각이 들지 않나?", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 어디서 이상한 단어를 문어랍시고 들고 왔군 뭐 그럴 수 있지.", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 본디대로라면 경비대에 신고하고 경비대가 와서 확인 작업을 거친 후에..", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 자네를 잡아가든 나를 잡아가든 해야하는 복잡한 과정을 거치겠지만.. 그러지 않겠네.", "", bc_self;
+	sleep2 1500;
+	emotion ET_THANKS, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 감사합니다.", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 고맙기는 내가 자네의 얼굴을 알고 있을 뿐이라네. 나도 아무에게나 이러지는 않아!", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 그동안 얼음의 성에서 고생하는 걸 여러 번 지켜보았지. 아 그건 그렇고 자네 전설같은 거 좋아하나?", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 내가 최근에 연구중인 전설인데 말이야. 여기 얼음 절벽을 보면 무언가 긁고 지나간 흔적이 보인단 말이지.", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 그리고 밖을 나가보면 얼음 사이사이에 비늘 모양의 무늬도 있고..", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 정체불명의 발자국도 찍혀있지.. 이 모든 것들을 종합해 본 결과! 전설의 도마뱀 같은 것이 분명해!", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 츄릅.. 맛있겠군. 배가 고파졌어. 난 밥 먹으러 가겠네 수고하게.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ??????????", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 8)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_STARE_ABOUT;
+	end;
+}
+
+
+icecastle,152,244,8	duplicate(ep20_icecastle_207_240)	상병 모루류#SSQ09::ep20_icecastle_152_244	EP19_NPC_IWIN_SG
+
+icecastle,154,247,6	script	수상한 아윈#SSQ09	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 9) {	// is not the spy
+			npctalk "수상한 아윈: 암구호의 답어는 피자입니다! 수고 많으십니다 모험가님!", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 와 저분이 소문이 자자한 그 모험가 님이시구나. 애들한테 만났다고 자랑해야지~", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (아윈의 탈을 쓴 르간은 당황한 듯 읍 조린다.)", bc_self;
+		sleep2 1500;
+		npctalk "수상한 아윈: 오.. 오징어?", "", bc_self;
+		sleep2 1000;
+		emotion ET_X, playerattached();
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 땡! 너 스파이지?", bc_self;
+		sleep2 1000;
+		npctalk "수상한 아윈: 크윽.. 이렇게 맹해 보이는 모험가에게 들키다니 치욕스럽군.", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_152_244" );
+		sleep2 500;
+		emotion ET_SEXY, getnpcid(0,"ep20_icecastle_152_244");
+		npctalk "상병 모루류: 신고받고 왔.. 와.. 스파이다.. 딱 보면 스파이네.", "ep20_icecastle_152_244", bc_self;
+		sleep2 1500;
+		npctalk "상병 모루류: 변신한 거 까진 좋은데 골라도 하필 저 얼굴을 골랐을까.. 불쌍하네.. 자- 갑시다. 정보과로~", "ep20_icecastle_152_244", bc_self;
+		sleep2 1000;
+		emotion ET_ANGER;
+		sleep2 500;
+		npctalk "수상한 아윈: 아니 이 얼굴이 어때서?!", "", bc_self;
+		sleep2 1000;
+		npctalk "상병 모루류: 우리 대장님 얼굴이다. 마! 여기까지 오는데 용케도 눈에 안 띄었네 보이면 바로 체포인데.. 쯧쯧", "ep20_icecastle_152_244", bc_self;
+		sleep2 1000;
+		emotion ET_GO, getnpcid(0,"ep20_icecastle_152_244");
+		sleep2 500;
+		npctalk "상병 모루류: 모험가님 고생하셨습니다. 가자..", "ep20_icecastle_152_244", bc_self;
+		npctalk "수상한 아윈: 이런.. ", "", bc_self;
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_152_244" );
+		cloakonnpcself();
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_PANIC;
+	sleep2 500;
+	npctalk "수상한 아윈: " + .@string$ + "라고요? 어.. 어? 어?! 그러면 안 되는데..", "", bc_self;
+	sleep2 1000;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어려 보이는 아윈은 당황한 듯 날개를 파닥댔다.)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_152_244" );
+	sleep2 500;
+	emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_152_244");
+	sleep2 500;
+	npctalk "상병 모루류: 신고 받고 왔ㅅ.. 얼래? 혹시 저번 기수 순찰대 훈련병 아니세요? 여기서 뭐하세요?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 어?! 모루류 교관님이시네. 여기 이 모험가가 암구호를 틀려서 신고했습니다!", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 오! 훈련받은 보람이 있군요. 모험가가 암구호를 틀렸다라! 얼래? 맞죠? 저희 도와주시는?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	emotion ET_SHY, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 하하.. 예.. 뭐.. 제가 암구호를 틀렸나 보군요.", bc_self;
+	sleep2 1000;
+	npctalk "상병 모루류: 하하하 이거 제가 귀찮게 정신을 어디다 두고 다니시는 건지는 모르겠지만..", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 뭐 그럴 수도 있죠. 어찌 모든 생명체가 다 완벽하겠습니까?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 암구호는 오리료 조병 님께 가서 다시 들으시고요. 보자! 훈련병님?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA;
+	sleep2 500;
+	npctalk "수상한 아윈: 네! 모루류 교관님!", "", bc_self;
+	sleep2 1000;
+	npctalk "상병 모루류: 일단 신고해 주셔서 감사드리고요. 다행스럽게도 저희 쪽 일을 도와주시는 모험가님이십니다.", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 휴- 다행이네요. 얼마나 무서웠다고요.", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 그런데 여기는 무슨 일로 오셨나요? 아직 순찰대 확정 발표는 안 난 걸로 아는데..", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 느낌이 꼭 합격할 것 같아서 이왕이면 엎어지면 부리 닿을 거리에 집을 마련하고 싶어서요. 집 보러 나왔습니다.", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 아.. 그러시군요. 뭐 이렇게 만난 김에 막사에서 차라도 한잔하고 가시죠?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 어?! 그래도 되나요?", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 모루류: 가시죠. 그럼 모험가님 주의해 주시고. 수고하십시오.", "ep20_icecastle_152_244", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_152_244" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 9)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_DELIGHT;
+	end;
+}
+
+
+icecastle,225,136,6	duplicate(ep20_icecastle_207_240)	상병 뽀루료#SSQ10::ep20_icecastle_225_136	EP19_NPC_IWIN_SG
+
+icecastle,228,134,8	script	수상한 아윈#SSQ10	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (어딘지 수상해 보이는 아윈이다. 혹시 아윈 변신 스크롤로 잠입한 르간은 아닌지 확인해 봐야 할까?)", bc_self;
+	setpcblock PCBLOCK_NPC, true;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (앗! 사라져버렸다. 잘못 본 건가?)", bc_self;
+		end;
+	}
+	if (select( "암구호를 확인한다.", "확인하지 않는다." ) == 2) {
+		npctalk "수상한 아윈: 응?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 실례합니다. 아윈 선생님 암구호 확인 좀 하겠습니다.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? 답어를 말해주시겠습니까?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 10) {	// is not the spy
+			npctalk "수상한 아윈: 답어가 육개장 였지요?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 네 맞습니다. 확인되었습니다. 실례했습니다.", bc_self;
+			sleep2 1500;
+			npctalk "수상한 아윈: 아 중고거래 게시판 보고 나오신 분인 줄 알았는데.. 또 허위매물이었나 보네요. 가볼게요.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "수상한 아윈: 거 보안이 중요해도 그렇지 민망하게 이런걸 시키고 그러나?", "", bc_self;
+		sleep2 1000;
+		emotion ET_SHY;
+		sleep2 500;
+		npctalk "수상한 아윈: 캐럿~ 캐럿! 캐럿~ 캐럿!", "", bc_self;
+		sleep2 2000;
+		emotion ET_PROFUSELY_SWEAT;
+		sleep2 500;
+		npctalk "수상한 아윈: 이거 아니야? 어.. 그러니까 나 지금 들킨 거지?", "", bc_self;
+		sleep2 1000;
+		emotion ET_THINK;
+		emotion ET_THINK, playerattached();
+		npctalk "수상한 아윈: ... ... ...", "", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ... ... ...", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_225_136" );
+		sleep2 1000;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		npctalk "상병 뽀루료: (≥▽≤)/ .. .. ...~", "ep20_icecastle_225_136", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		npctalk "상병 뽀루료: (⊙_⊙)? . ... ...?", "ep20_icecastle_225_136", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 잠입한 르간 스파이를 찾아냈습니다. 지금 서로 민망하니 빨리 데려가시죠.", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		emotion ET_THINK;
+		npctalk "상병 뽀루료: (-_-a)? .. ...... ........ .....", "ep20_icecastle_225_136", bc_self;
+		npctalk "수상한 아윈: ... ... ...", "", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_225_136" );
+		setquest 19164;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (얼음의 성으로 숨어든 스파이 수색에 성과가 있었다. 오리료에게 보고하자.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "수상한 아윈: ? 아.. 진짜 중고거래하기 힘드네. 이제는 스파이까지? 이봐요~ 순찰대!", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_225_136" );
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: (⊙▽⊙).. ... ... ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 어?! 혹시 뽀루료? 맞네! 아이스 강구 기어가는 소리보다 작은 목소린 거 보니 확실하네. 나야 나!", "", bc_self;
+	sleep2 1500;
+	npctalk "상병 뽀루료: (θ_θ?) .. ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 그래! 뾰루료 맞네. 아버지는 잘 계시지? 아직 물고기 잡으시나?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: (⊙_⊙) ..! . ... ... .. .. ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 내가 너희 아버지한테 얻어먹은 게 좀 많아 야지. 그나저나 너 순찰대 됐구나.", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 거기 들어가기 어렵다고 들었는데 너 성공했구나?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: (*'ω'*) ... .. .! .... . .. ..? .. .. .... ... .. ..?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 아 맞다! 너무 반가워서 깜빡할 뻔 했네. 어? 아는 분이야?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: ('▽') .. ... ... .... ...", "ep20_icecastle_225_136", bc_self;
+	npctalk "수상한 아윈: 그랬구나..", "", bc_self;
+	sleep2 1000;
+	npctalk "수상한 아윈: 이봐요. 거 조심 좀 합시다. 거 왜 문어를 틀려서 선량한 아윈 헷갈리게..", "", bc_self;
+	sleep2 1500;
+	npctalk "수상한 아윈: 이거 참 중고거래하러 나와서 이게 무슨 일이람. 뽀루료 다음에 또 보자!", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: (≥▽≤)/ ..~", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "상병 뽀루료: (-_-a);; ..... ...... .. .. ....", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_225_136" );
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (흠.. 뭐라고 한 걸까? 모르겠다.)", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 10)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SMILE;
+	end;
+}
+
+// End of the daily quests A & B : 'Spy search' and 'Intelligence information collection'
+//-------------------------
+
+
+
+// Daily quests "Voglinde's Extermination Operation 1" and "Voglinde's Extermination Operation 2"
+// Part of the Main quest - Step 62 (final)
+// (unlocked after the final of the main quest : "죽지 않는 자")
+icas_in2,253,118,3	script	보클린드#ep20_end03	4_EP19_VOGLINDE,{
+	if (checkweight(1001217,30) == 0) {
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	if (ep20_main < 61)
+		end;
+	if (ep20_main == 61) {
+		cutin "ep19_voglinde01.png",0;
+		mes "[보클린드]";
+		mes "보다시피 바곳은 제대로 구속을 했단다.";
+		mes "그런데 아가.. 도대체 무슨 일이 있었던게야...?";
+		next;
+		select( "오염된 이미르의 심장 조각을 보여준다." );
+		mes "[보클린드]";
+		mes "이건?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "형태가 조금 바뀐 것 같지만 이미르의 심장 조각이군요.";
+		mes "세스룸니르에서 보관하던 것입니다.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "마람과 저는 이미르의 심장 조각을 되찾으러 여기까지 왔었습니다.";
+		mes "바곳이 탈취한 것이죠.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그걸 네가 왜 가지고 있어요?";
+		mes "설마, 라스간드가 힘을 모두 흡수하지 못 한 겁니까?";
+		next;
+		select( "그렇게됐네?" );
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "그럴리가 없는데...";
+		mes "바곳의 계산은 완벽했거든.";
+		mes "이봐요, 너희들. 그거 거짓말이지요?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "거짓말 한다면 이미르의 심장 조각이 어떻게 여기 있겠어?";
+		mes "네 계략은 무너졌어. 이제 인정 해.";
+		next;
+		cutin "ep19_leizi01.png",1;
+		mes "[레이지]";
+		mes "그래! 이제 그만 인정하고 나랑 고국으로 돌아가자.";
+		mes "이 추운 땅에서 많이 고생했지?";
+		mes "고국으로 돌아가면 네 친구들도 만나고 얼마나 좋아~!";
+		next;
+		mes "[레이지]";
+		mes "비공정이 준비됐단다~!";
+		mes "아주 좋아 죽겠지?";
+		mes "가서 철창 생활 좀 해보자고.";
+		next;
+		cutin "ep18_bagot_02.png",0;
+		mes "[바곳]";
+		mes "라스간드는 어떻게 됐어?";
+		mes "왜 말이 없지요?";
+		next;
+		mes "[바곳]";
+		mes "와... 너희들 지금 바곳 무시하니?";
+		next;
+		cloakoffnpcself( "ep20_icas_in2_245_115" );
+		sleep2 500;
+		cloakoffnpcself( "ep20_icas_in2_246_112" );
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "모두들 여기 계셨군요.";
+		mes "라헬과 슈발츠발드에서 오신 분들은 이제 어떻게 하실 거죠?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "레이지 님은 바곳을 연행하고, 저와 마람은 이미르의 심장 조각을 가지고 가기로 했습니다.";
+		mes "무슨 문제라도 있을까요?";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[오렐리]";
+		mes "으음? 아니 그쪽으론 아무 문제 없어.";
+		mes "그럼 이제 우리쪽 일만 남았네?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "너희들! 이 바곳의 말이 안 들려?";
+		mes "라스간드는 어떻게 됐냐고 묻잖아!!!!!";
+		next;
+		select( "죽었어." );
+		cutin "ep19_voglinde01.png",0;
+		mes "[보클린드]";
+		mes "그럼 저주도 풀렸어?";
+		mes "요르문간드 교단의 지긋지긋한 관계는 드디어 끝난 거니?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "사실 죽지 않았어요.";
+		mes "라스간드는 이미르의 심장 조각의 힘 일부와 융합 중이에요.";
+		mes "냐르의 힘으로 일시적으로 봉인한 상태고요.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "하하! 하하하하!!! 그렇지! 이 바곳이 실패할 리 없지요!";
+		mes "너희들 앞으로 고생 좀 하겠네요?";
+		next;
+		mes "[바곳]";
+		mes "라스간드가 완벽하게 이미르의 심장 조각의 힘과 이스가르드에서 모은 마력을 흡수하면 신이 될 거에요!";
+		next;
+		mes "[바곳]";
+		mes "이딴 거지같은 결계가 무너지는 것도 한순간일테지요!";
+		mes "나 바곳은 신을 만들었다고요!!!";
+		mes "악!";
+		specialeffect EF_BLUELINE, AREA, "ep20_icas_in2_247_122";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "죄송합니다. 너무 나대길래 그만.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[오렐리]";
+		mes "아니 아니. 잘 했어.";
+		mes "하지만 큰 사건 중 두 가지나 해결했네.";
+		mes "하지만 이미르의 심장 조각이 오염된 것 같으니... 세스룸니르 깊은 곳에서 정화하도록 해.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "알겠습니다.";
+		mes "저희가 더 도울 일이 있을까요?";
+		next;
+		cutin "ep19_leizi01.png",1;
+		mes "[레이지]";
+		mes "뭐 평소처럼 들락거리면서 할 일을 찾아서 하면 되지 않겠어?";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[보클린드]";
+		mes "맞는 말이야.";
+		mes "냐르 님이 잡아 둔 라스간드만 처리하면 오랜 저주도 해결되는 거겠지.";
+		mes "부디 그리되어야 할 텐데...";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "냐르 님을 도와 봉인을 점검할때 확인했는데";
+		mes "라스간드가 완벽하게 융합하기 전에 공격해서 방해한 게 잘 통한 모양입니다.";
+		next;
+		mes "[레온]";
+		mes "냐르 님이 봉인을 유지하는 동안, 모험가가 지속적으로 라스간드의 마력 융합을 방해한다면 승산이 있어 보였습니다.";
+		next;
+		cutin "ep19_aurelie01.png",0;
+		mes "[오렐리]";
+		mes "아마도 한 번에 그를 해치울 순 없을거야.";
+		mes "앞으로 길고 지루한 싸움이 될 수도 있어.";
+		mes "어쩌면 불가능할 지도 모르지. 그래도 해야 해.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "앞으로도 당신의 활약이 필요해요.";
+		mes "냐르 님은 언제든 작은 가지의 둥지로 찾아와 도전해 달라고 하셨습니다.";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[보클린드]";
+		mes "...좋아. 아가의 힘이 그 극악한 놈에게 통한다니 나는 그 사이에 남은 르간들 뿌리를 뽑아 주겠어.";
+		mes "앞으로도 잘 부탁하네.";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[레이지]";
+		mes "그럼 우린 이 범죄자와 보물을 원래 자리에 돌려놓으러 가볼까?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그럼 다녀오겠습니다!";
+		ep20_main = 100;
+		completequest 18233;
+		delitem 1001254,1;	// Ep20_Ymir_Heart
+		getitem 1001217,30;	// Ep20_Cat_Whiskers
+		getexp2 136611959,0;
+		getexp 0,22271670;
+		add_reputation_points( REPU_EP20, 70 );
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "저와 오렐리는 냐르 님의 마력이 끊기지 않도록 돕도록 하지요.";
+		mes "긴 싸움이 될 것 같지만... 그래도 끝이 보이는 느낌이네요.";
+		next;
+		cutin "ep19_aurelie01.png",0;
+		mes "[오렐리]";
+		mes "그래. 그거야.";
+		mes "우리가 긴 시간 잠들어 있었던 건 오늘을 위해서였나 봐~";
+		mes "모두 네 덕분이야. 그럼 이만 가볼게!";
+		next;
+		cutin "ep19_voglinde01.png",1;
+		mes "[보클린드]";
+		mes "우리의 희망이 되어줘서 고맙구나.";
+		mes "그보다 르간 놈들의 뿌리를 뽑아버리기로 했잖니?";
+		mes "나중에 같이 사냥이라도 가자꾸나.";
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icas_in2_246_119" );
+		cloakonnpcself( "ep20_icas_in2_251_121" );
+		cloakonnpcself( "ep20_icas_in2_247_122" );
+		cloakonnpcself( "ep20_icas_in2_245_115" );
+		cloakonnpcself( "ep20_icas_in2_246_112" );
+		cloakonnpcself( "ep20_icas_in2_252_113" );
+		end;
+	}
+	// daily quests
+	.@playtime_18237 = checkquest(18237,PLAYTIME);
+	.@playtime_18239 = checkquest(18239,PLAYTIME);
+
+	.@hunting_18236 = checkquest(18236,HUNTING);
+	.@hunting_18238 = checkquest(18238,HUNTING);
+
+	if (.@playtime_18237 == 2) {
+		erasequest 18237;
+		.@playtime_18237 = -1;
+	}
+	if (.@playtime_18239 == 2) {
+		erasequest 18239;
+		.@playtime_18239 = -1;
+	}
+
+	if (.@hunting_18236 == 2 || .@hunting_18238 == 2) {
+		if (.@hunting_18236 == 2) {
+			cutin "ep19_voglinde01.png",1;
+			mes "[보클린드]";
+			mes "뱀신의 뿌리 1층 동태는 어땠니?";
+			mes "르간들은 여전한가보구나.";
+			mes "정말 고생이 많아. 배는 안 고프니?";
+			erasequest 18236;
+			setquest 18237;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				.@bonus = 1;
+			getitem 1001217,3+.@bonus;	// Ep20_Cat_Whiskers
+			getexp 42122763,29428540;
+			add_reputation_points( REPU_EP20, 5 );
+			next;	// note: dialog continue when the next hunting quest is not completed
+		}
+		if (.@hunting_18238 == 2) {
+			mes "[보클린드]";
+			mes "아가가 이렇게 열심히 애를 쓰는데도 르간들은 여전한게지...";
+			mes "고생이 많았다. 이제 좀 푹 쉬려무나.";
+			erasequest 18238;
+			setquest 18239;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				.@bonus = 1;
+			getitem 1001217,3+.@bonus;	// Ep20_Cat_Whiskers
+			getexp 44065063,30788140;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+	}
+
+	cutin "ep19_voglinde01.png",1;
+	mes "[보클린드]";
+	mes "내가 남은 르간 놈들의 뿌리를 뽑아버리자고 했던 말 기억하니?";
+	mes "괜찮다면 네가 온 김에 실행해 볼까 하는게 어떠니?";
+	next;
+	switch( select( "뱀신의 뿌리 1층을 털죠!", "뱀신의 뿌리 2층을 털죠!", "다음에 같이 해요!" ) ) {
+	case 1:
+		switch( .@playtime_18237 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[보클린드]";
+			mes "휴식이 필요하지 않겠니?";
+			mes "나머지는 내가 처리할테니 넌 좀 쉬도록 하렴.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( checkquest(18236,HUNTING) ) {
+		case -1:
+			mes "[보클린드]";
+			mes "좋아. 어차피 라스간드는 갇혀있어. 그 동안 뱀신의 뿌리를 아주 깨끗하게 밀어버리자고.";
+			mes "아가에겐 뱀신의 뿌리 1층을 맡기마!";
+			mes "맘껏 날뛰고 오렴.";
+			setquest 18236;
+			close3;
+		case 0:
+		case 1:
+			mes "[보클린드]";
+			mes "뱀신의 뿌리 1층이 어딘지는 알지?";
+			mes "최상급 르간들이 주축인 장소니 반드시 처치해야한다.";
+			mes "그걸 잊지마렴.";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		switch( .@playtime_18239 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[보클린드]";
+			mes "휴식이 필요하지 않겠니?";
+			mes "나머지는 내가 처리할테니 넌 좀 쉬도록 하렴.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( checkquest(18238,HUNTING) ) {
+		case -1:
+			mes "[보클린드]";
+			mes "좋아. 어차피 라스간드는 갇혀있어. 그 동안 뱀신의 뿌리를 아주 깨끗하게 밀어버리자고.";
+			mes "아가에겐 뱀신의 뿌리 2층을 맡기마!";
+			mes "맘껏 날뛰고 오렴.";
+			setquest 18238;
+			close3;
+		case 0:
+		case 1:
+			mes "[보클린드]";
+			mes "뱀신의 뿌리 2층이 어딘지는 알지?";
+			mes "최상급 르간들이 주축인 장소니 반드시 처치해야한다.";
+			mes "그걸 잊지마렴.";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 3:
+		mes "[보클린드]";
+		mes "정말이지 든든하구나.";
+		mes "끝은 머지않았고 멋진 동료와 함께라니 얼마나 듬직한지.";
+		mes "그럼 오늘은 쉬고 다음에 볼까?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18233) == 1" );
+
+	// daily quests
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(18236,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(18238,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18233) == 2 && checkquest(18236,HUNTING) == -1 && checkquest(18237,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18233) == 2 && checkquest(18238,HUNTING) == -1 && checkquest(18239,PLAYTIME) == -1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18237,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18239,PLAYTIME) == 2" );
+	end;
+}
+
+
+
+// Daily quest : 'Taste of hobby'
+// Part of the Sidequest B - Step 2, 5
+// (unlocked when ep20_main = 24 and after the end of the sidequest B, main quest "성스럽고 성스러운")
+icas_in2,30,121,5	script	나드야간드#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+	if (checkweight(1001217,3) == 0) {
+		mes "소지하고 계신 아이템의 수량이 많아 대화를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	if (ep20_sidequest_2 == 0)
+		end;
+	if (ep20_sidequest_2 == 1) {
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "말하라고.";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "으으응... 배고파서 말할 기운도 없는데.";
+		npctalk "이렇게... 죽는 건가...", "", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "이거 먹어. 먹으라니까? 누가 보면 밥도 안 주는줄 알겠네?";
+		next;
+		mes "[나드야간드]";
+		mes "이런건... 너네나 먹어 새 모이 같은 걸.";
+		next;
+		mes "[아윈 병사]";
+		mes "저, 저, 저!! 입!! 입, 입, 입!!!";
+		npctalk "나 말리지 마. 가만 안둬!", "ep20_icas_in2_37_118", bc_self;
+		emotion ET_OHNO, getnpcid(0,"ep20_icas_in2_37_118");
+		next;
+		mes "[아윈 병사]";
+		mes "이것도 싫다 저것도 싫다 해달라는 거 다 해줬는데, 이깟 밥 한그릇 까탈부리며 안 먹는 이유가 뭐야?";
+		npctalk "새 모이라잖아!! 무슨 말을 더 들어 줘?", "ep20_icas_in2_34_117", bc_self;
+		emotion ET_FRET, getnpcid(0,"ep20_icas_in2_34_117");
+		next;
+		mes "[아윈 병사]";
+		mes "뭐가 불만이야? 네 비위 맞춰주느라 우리가 오늘 단체로 화병이 걸리게 생겼어!";
+		npctalk "더 이상 들어줄 필요가 있어?", "ep20_icas_in2_29_114", bc_self;
+		npctalk "열불 나서 이 얼음의 성이 다 녹을 지경이지!", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "앗... 어지러워... 눈 앞이 핑글핑글 도네.";
+		npctalk "아, 나도 눈 앞에 핑글핑글 도네, 돌아.", "ep20_icas_in2_37_115", bc_self;
+		emotion ET_CONFUSE;
+		emotion ET_CONFUSE, getnpcid(0,"ep20_icas_in2_37_115");
+		next;
+		mes "[나드야간드]";
+		mes "있잖아 내 마지막 말 좀 들어 줄래?";
+		mes "어쩌면 이게 마지막이 될 수도 있으니...";
+		next;
+		mes "[아윈 병사]";
+		mes "아니 왜 갑자기 이렇게 아련해져?? 르간들은 다 이래?";
+		npctalk "왜 이렇게 하는 말들이 다 극적이야?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "주는 건 다 거부했지?";
+		mes "저자가 뭘 원한다고 했지?";
+		next;
+		cutin "",255;
+		mes "[아윈 병사]";
+		mes "" + getitemname(1001154) + "인지 먼지 그런걸 달라잖아.";
+		npctalk "그게 뭔데?", "ep20_icas_in2_31_116", bc_self;
+		npctalk "뭔줄 알면 벌써 줬겠지", "ep20_icas_in2_37_115", bc_self;
+		npctalk "맞아. 우리 그렇게 나쁜 사람들 아니라고.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		if (PACKETVER >= 20230302) {	// (official)
+			mes "^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]";
+			mes "^i[1001154]" + getitemname(1001154) + "... " + getitemname(1001154) + "...^e[27]                          ^i[1001154]";
+			mes "^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]";
+		}
+		else {	// (workaround)
+			mes "" + mesitemlink(1001154) + "";
+			mes "" + mesitemlink(1001154) + "" + getitemname(1001154) + "... " + getitemname(1001154) + "... " + mesitemlink(1001154) + "";
+			mes "" + mesitemlink(1001154) + "";
+		}
+		next;
+		mes "[아윈 병사]";
+		mes "아니 잡혀왔으면 주는 대로 먹을 것이지 왜 이렇게 가리는 게 많아?";
+		npctalk "나도 아직 오늘 간식을 못 먹었는데!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "스스로 명을 재촉하는 거지 뭐. 저런 것들은 일주일 정도 굶으면 다 잘 먹게 되어있어.";
+		npctalk "그거 맨날 우리 할머니가 하던 소리다.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "그건 좀... 아직 아무 것도 못 들었는데, 굶겨 죽일셈이야?";
+		npctalk "맞아. 좀 그렇다.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "누가 굶겨 죽인댔나? 굶기랬지. 죽지 않을만큼만!";
+		npctalk "그럼... 괜찮을지도...?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "어휴, 이대로는 내가 먼저 화병으로 죽겠네, 죽겠어.";
+		npctalk "그 옆자리에 나. 나 있다.", "ep20_icas_in2_27_118", bc_self;
+		emotion ET_OHNO, getnpcid(0,"ep20_icas_in2_37_115");
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "이대로라면 정말 곤란한데...";
+		npctalk "어쩐다...", "ep20_icas_in2_31_116", bc_self;
+		ep20_sidequest_2 = 2;
+		erasequest 17712;
+		setquest 17713;
+		close3;
+	}
+	if (ep20_sidequest_2 == 2) {
+		mes "[나드야간드]";
+		mes "지금은 아무 말도 듣고싶지 않은데.";
+		close;
+	}
+	if (ep20_sidequest_2 == 3) {
+		mes "[나드야간드]";
+		mes "이곳 생활도 나쁘지 않아... 정말로 나쁘지 않아.";
+		close;
+	}
+	if (ep20_sidequest_2 == 4) {
+		mes "[나드야간드]";
+		mes "아... 나 이제 기력이 다 해가나 봐. 이젠...";
+		npctalk "하이고오~ 이 사람 답답한 것 좀 봐라, 화상아 왜 그러고 사니, 왜 그러고 살아.", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "아직 덜 굶은 것 아니야? 배고프면 뭐든 다 먹게 되어있는데.";
+		mes "시장이 반찬이란 말이지.";
+		npctalk "음... 그럼 더 굶기면 될까?", "ep20_icas_in2_27_118", bc_self;
+		npctalk "역시 그건 좀...", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "그건 안돼! 소중한 나를 굶기다니! 굶으면 죽어! 내가 죽으면 다들...!";
+		mes "아니다. 됐다. 휴- 말할 기운도 없다. 다 나가. 혼자 있고 싶으니.";
+		npctalk "방금 들었어? 자기 입으로 소중한 나래...", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "우리는 네 부하가 아니야. 네 말을 들어줄 필요가 없지.";
+		mes "우리가 인도적인 대화를 할 때 따라주는 것이 좋을 거야.";
+		npctalk "그것이 바로 포로니까.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "",255;
+		select( "여기 " + getitemname(1001154) + " 갖고 왔어요." );
+		mes "[나드야간드]";
+		mes "" + getitemname(1001154) + "!!!";
+		npctalk "저저저, 고상 떨면서 먹는 것 좀 봐라.", "ep20_icas_in2_34_117", bc_self;
+		npctalk "눈이 뒤집혀서 입에 마구 쑤셔 넣을 줄 알았는데.", "ep20_icas_in2_29_114", bc_self;
+		npctalk "그러게 내 말했잖아, 아직 덜 굶은 거라고.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "휴- 이제 살겠네.";
+		npctalk "혈색 달라진 것 봐.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "네 그 까탈스러운 성격을 다 맞춰줬으니 이제 우리한테도 맞춰줘야지.";
+		mes "살겠지? 이제 알고 있는 건 다 털어 놔. 세상에 공짜 밥은 없으니까.";
+		npctalk "와- 진짜 악당처럼 말한다.", "ep20_icas_in2_34_117", bc_self;
+		npctalk "오... 멋있다.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "에- 그렇지만 뭘 원하는지 모르겠는 걸.";
+		mes "아! 최근에 라스간드님이 인간이랑 무얼 하고 있어.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그건, 이미 알고 있어. 어디서 무슨 일을 하고 있는데?";
+		npctalk "오늘도 저녁을 먹었다 같은 소리 하고 있네.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "그건 나도 모르지. 아! 그리고 인간들이 마력 회수 장치로 마력을 흡수하고 있어!";
+		next;
+		mes "[아윈 병사]";
+		mes "그것도 알고 있어. 그걸 요르문간드의 부활에 쓸 예정이라지?";
+		npctalk "옆집 꼬맹이도 다 아는 사실을.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "뭐?? 그런 거였어? 몰랐네...";
+		npctalk "세상에 비밀은 없는 거야?", "", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "다른 얘기 없어? 목적이라든가 예상일이라든가";
+		npctalk "하다못해 약점이라든가.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "그런거 몰라.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "최상급 르간이라며? 뭐 이렇게 쓸모가 없어?";
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "있잖아. 최근에 나 너무 힘들었거든. 때가 임박했다고 주교들인 우리만 불러 모으더니 거기서 일을 하라잖아.";
+		mes "나는 그런 일을 해본적도 없고, 할 생각도 없었는데 일을 하라고..";
+		next;
+		mes "[아윈 병사]";
+		mes "아니 뭔 이런 도련님이 다 있어.";
+		npctalk "사람이면 응당 자기 몫을 다 해야지.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "그런데 여기 오니까 너무 좋다. 너무 편하고 좋아. 앞으로 이곳에서 살고 싶어.";
+		npctalk "환장!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "시중 받으면서 살고 싶다고? 어림도 없지!";
+		npctalk "나도 받은 적 없는 것을!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "그럼 내가 탈출해서 이곳을 다 말해버린다??";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "그건 쫌 곤란한데.";
+		mes "작전이 종료되면 돌려보낼 생각이었지만, 지금은 곤란해.";
+		npctalk "좀 치사한 스타일인가?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[나드야간드]";
+		mes "나 있지, 먹고 싶은게 또 생각났는데...";
+		next;
+		mes "[아윈 병사]";
+		mes "더 이상은 안돼! 사람이 염치가 있어야지.";
+		npctalk "너 그냥 가, 가라고! 가!!", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "하우웅- 밥 먹었더니 졸리네. 잠 좀 자야겠으니 불 좀 꺼.";
+		mes "낮잠은 1시간 이상 자면 속이 좋지 않으니 꼭 시간 맞춰 깨워. 그리고 일어나면 식사를 바로 해야겠어.";
+		npctalk "아아악!! 내 속!!!", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[아윈 병사]";
+		mes "그러지말고, 돌아가. 네 가족과 친구들을 생각해.";
+		npctalk "그래. 하다못해 어제 먹다 남긴 과자라도!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[나드야간드]";
+		mes "우리는 난생인데 무슨 가족?? 그리고 난 친구가 없다.";
+		npctalk "환장!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_icas_in2_32_120";
+		cloakoffnpcself( "ep20_icas_in2_32_120" );
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "모험가~ 여기서 뭐해? 한참 찾았네.";
+		npctalk "모험가~ 여기서 뭐해? 한참 찾았네.", "ep20_icas_in2_32_120", bc_self;
+		if (countitem(1001154) > 0)	// debug
+			delitem 1001154, countitem(1001154);	// Ep20_Jor_Berry
+		ep20_sidequest_2 = 5;
+		erasequest 17720;
+		setquest 17715;
+		close3;
+	}
+	if (ep20_sidequest_2 == 5 || ep20_sidequest_2 == 6) {
+		mes "[나드야간드]";
+		mes "저 자는...?";
+		close;
+	}
+
+	switch( checkquest(17717,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[나드야간드]";
+		mes "휴- 무슨 일이야. 나 조금 피곤한데.";
+		mes "오늘은 요리를 했다고. 이만 물러가.";
+		close;
+	case 2:
+		erasequest 17717;
+		break;
+	}
+	if (isbegin_quest(17721) == 1) {
+		// note: countitem not required
+		mes "[나드야간드]";
+		mes "" + getitemname(1001154) + "! 내가 요즘 이거 기다리는 낙으로 살아. 고맙네.";
+		next;
+		mes "[나드야간드]";
+		mes "그럼 오늘도 힘내서 나가볼까!";
+		if (countitem(1001154) > 0)	// debug
+			delitem 1001154, countitem(1001154);	// Ep20_Jor_Berry
+		erasequest 17721;
+		setquest 17717;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)	// note: no reputation given, but extra item given
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp2 34152989,0;
+		getexp 0,4283012;
+		// note: give no reputation
+		close;
+	}
+	mes "[나드야간드]";
+	mes "오, 왔구나. 간밤엔 잘 지냈느냐?";
+	next;
+	mes "[나드야간드]";
+	mes "" + getitemname(1001154) + "를, 그래. 아직 가져오지 않았어. 응...";
+	mes "내가 그것을 먹고 또 기운을 내서 둘러볼 테니 구해오련.";
+	next;
+	if (select( "가져올게요.", "오늘은 참아 봐." ) == 2) {
+		mes "[나드야간드]";
+		mes "뭐?? 오늘은 그냥 참으라고??";
+		mes "내가 이 일은 정식으로 항의하겠다!";
+		close;
+	}
+	mes "[나드야간드]";
+	mes "그래, 좋아. ^0000cd" + getitemname(1001154) + " 10개^000000이다. 매일 최소한 그만큼은 먹어야 하니까.";
+	if (isbegin_quest(17718) == 0)
+		setquest 17718;
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17712) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17720) == 1" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "ep20_sidequest_2 == 7 && checkquest(17717,PLAYTIME) == -1 && F_queststatus(HAVEQUEST,17718,17721) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(17717,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17721) == 1" );
+	end;
+}
+
+// (part of the main quest - Step 23)
+jor_root2,43,63,5	script	굳은 자리#20ms00::ep20_jor_root2_43_63	4_POINT_RED,{
+	if (ep20_main == 23 || ep20_sidequest_2 == 4 || isbegin_quest(17721) == 1) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 더 이상 " + getitemname(1001154) + "를 캘 필요는 없다. 돌아가서 보고하자.", bc_self;
+		end;
+	}
+	if (ep20_main == 22)
+		callsub( S_Start, 17698,17719, 3 );
+	if (ep20_sidequest_2 == 3)
+		callsub( S_Start, 17714,17720, 10 );
+	if (isbegin_quest(17718) == 1)	// daily
+		callsub( S_Start, 17718,17721, 10 );
+	end;
+
+S_Start:
+	initnpctimer;
+	if (rand(100) > 50)
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 여기엔 " + getitemname(1001154) + "가 없는 것 같다.", bc_self;
+	else {
+		if (checkweight(1001154,1) == 0) {
+			mes "소지하고 계신 아이템의 수량이 많아 대화를 진행 할 수 없습니다.";
+			mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "" + getitemname(1001154) + " 하나를 얻었다!";
+		getitem 1001154,1;	// Ep20_Jor_Berry
+		if (countitem(1001154) >= getarg(2)) {
+			mes "더 이상 " + getitemname(1001154) + "를 캘 필요는 없다. 돌아가서 보고하자.";
+			if (ep20_main == 22)
+				ep20_main = 23;
+			else if (ep20_sidequest_2 == 3)
+				ep20_sidequest_2 = 4;
+			erasequest getarg(0);
+			setquest getarg(1);
+		}
+		close2;
+	}
+	disablenpc();
+	end;
+
+OnTimer60000:	// 1 min delay
+	enablenpc();
+	stopnpctimer;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17698) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17714) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17718) == 1" );
+	end;
+}
+jor_root2,90,50,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms01	4_POINT_RED
+jor_root2,235,258,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms02	4_POINT_RED
+jor_root2,77,191,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms03	4_POINT_RED
+jor_root2,118,104,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms04	4_POINT_RED
+jor_root2,143,79,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms05	4_POINT_RED
+jor_root2,234,95,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms06	4_POINT_RED
+jor_root2,114,149,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms07	4_POINT_RED
+jor_root2,53,167,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms08	4_POINT_RED
+jor_root2,211,225,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms09	4_POINT_RED
+jor_root2,217,115,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms10	4_POINT_RED
+jor_root2,171,114,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms11	4_POINT_RED
+jor_root2,76,92,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms12	4_POINT_RED
+jor_root2,45,257,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms13	4_POINT_RED
+jor_root2,83,234,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms14	4_POINT_RED
+jor_root2,147,189,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms15	4_POINT_RED
+jor_root2,122,204,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms16	4_POINT_RED
+jor_root2,48,111,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms17	4_POINT_RED
+jor_root2,211,196,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms18	4_POINT_RED
+jor_root2,170,178,5	duplicate(ep20_jor_root2_43_63)	굳은 자리#20ms19	4_POINT_RED
+//-----------------------------
+
+
+
+// Daily quest 18234: "Irwin's Irwin Worries"
+// (unlocked after the final of the main quest : "죽지 않는 자")
+icecastle,75,126,3	script	치치링#ep20	EP19_NPC_IWIN_SY,{
+	if (ep20_main < 100) {
+		mes "[치치링]";
+		mes "엄청 추운 날에 뜨거운 물을 뿌리면 어떻게 되는지 아니?";
+		mes "푸홧 하고 수증기로 증발하다 얼어서 눈이 된다아...?";
+		close;
+	}
+	mes "[치치링]";
+	mes "있잖아, 성스러운 뿌리라던가, 갈 일 있으면 나한테 말 해.";
+	mes "보클린드 님이 요즘 그 쪽으로 자주 다니녀서 내가 도와드리고 있거든.";
+	next;
+	if (select( "성스러운 뿌리에 가고 싶어.", "아윈의 아윈 걱정" ) == 1) {
+		mes "[치치링]";
+		mes "좋아~";
+		mes "도착 지점은 성스러운 뿌리 구석일 거야아.";
+		mes "돌아올 땐 알아서 돌아와~";
+		mes "그럼 간다. 슝~";
+		close2;
+		warp "jor_sanct",59,74;
+		end;
+	}
+	if (checkweight(1001217,3) == 0) {
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	if (BaseLevel < 230) {
+		mes "[치치링]";
+		mes "요즘 고대 얼음 협곡을 조사하는 거 같던데에...";
+		mes "내가 좀 걱정되는 게 있어어.";
+		next;
+		mes "[치치링]";
+		mes "하지만 내 걱정보다 모험가 사람 네가 더 걱정이네.";
+		mes "이 험난한 세상, 잘 이겨내길 바랄게.";
+		next;
+		mes "^4d4dff230레벨 이상 수행 가능한 퀘스트가 있습니다.^000000";
+		close;
+	}
+	switch( checkquest(18235,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[치치링]";
+		mes "고대 아이스윈드들도 한시름 놓았을 거야.";
+		mes "다음에도 도와주면 좋겠어어.";
+		close;
+	case 2:
+		erasequest 18235;
+		break;
+	}
+	switch( checkquest(18234,HUNTING) ) {
+	case -1:
+		mes "[치치링]";
+		mes "모험가~";
+		mes "지금이야. 고대 얼음 협곡을 위협하는 깊은 뿌리 동굴 공략의 시간이야아~!";
+		next;
+		mes "[치치링]";
+		mes "고대 아이스윈드의 안전을 위해서 깊은 뿌리 동굴의 못된 녀석들을 좀 혼내주면 좋겠는데";
+		mes "시간있으면 해주지 않을래?";
+		next;
+		if (select( "좋아.", "싫어." ) == 2) {
+			mes "[치치링]";
+			mes "아, 그럼 레하르한테 부탁해야겠다.";
+			mes "바쁠텐데 말 걸어서 미안했어어.";
+			close;
+		}
+		mes "[치치링]";
+		mes "좋아. 그럼 깊은 뿌리 동굴에 위험한 녀석들을 해치워줘!";
+		mes "그럼 근처에 사는 고대 아이스윈드들은 안전해질거야.";
+		setquest 18234;
+		close;
+	case 0:
+	case 1:
+		mes "[치치링]";
+		mes "깊은 뿌리 동굴이 어디냐고?";
+		mes "고대 얼음 협곡 서부에 있어.";
+		mes "고대 아이스윈드들이 걱정되긴 하지만 걔네들도 사나우니까 조심해.";
+		close;
+	case 2:
+		mes "[치치링]";
+		mes "와~ 수고했어!";
+		mes "이걸로 고대 얼음 협곡은 더 안전해졌어!";
+		mes "너 정말 대단하다! 다음에도 또 도와줄 거지?";
+		erasequest 18234;
+		setquest 18235;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 61068800,42626903;
+		add_reputation_points( REPU_EP20, 5 );
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && BaseLevel >= 230 && checkquest(18235,PLAYTIME) == -1 && checkquest(18234,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18235,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(18234,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quests : 'Escargot!', 'Dangerous!', 'I hope they reconcile.(1)', '[230] I wish we could reconcile (2)'
+// (part of the sidequest A - Step 19)
+// (unlocked after the final of the sidequest A, quest "꼬뽀의 비밀기지". Starting the main quest is not required)
+icecastle,67,218,5	script	라라하#ep20	4_EP19_IWIN,{
+	if (checkweight(1001217,10) == 0) {
+		mes "- 여기서 잠깐 !! -";
+		mes "- 가지고 계신 아이템이 너무 많아 -";
+		mes "- 퀘스트를 진행할 수 없습니다. -";
+		mes "- 몸을 가볍게 하시고 -";
+		mes "- 다시 시도해주세요. -";
+		close;
+	}
+	if (ep20_sidequest_1 < 19)
+		end;
+	if (ep20_sidequest_1 == 19) {
+		mes "[라라하]";
+		mes "로로휴!!!";
+		mes "대체 어딜 갔었던 거니!";
+		mes "얼마나 걱정한 줄 알아?!";
+		cutin "ep19_iwin04.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		cloakoffnpcself( "ep20_icecastle_69_217" );
+		next;
+		mes "[라라하]";
+		mes "" + strcharinfo(0) + "님 프리데리케님 로로휴를 찾아주셔서 감사합니다.";
+		next;
+		mes "[로로휴]";
+		mes "…";
+		mes "미안해요.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[라라하]";
+		mes "얘가 너답지 않게 왜 이렇게 풀이 죽었어…";
+		mes "무슨 일 있었니?";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "로로휴가 피곤할 것 같으니 일단 좀 쉬게 해줘요.";
+		mes "자세한 이야기는 나중에…";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[라라하]";
+		mes "그렇네요.";
+		mes "로로휴 어서 들어가자.";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[로로휴]";
+		mes "으…응…";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그럼 우리도 쉬러 갈까요?";
+		mes "뭔가 엄청 피곤해 졌어요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님도 쉬고 싶을땐 언제든 제 방에 놀러 오세요.";
+		mes "얼음성에서 제일 따듯하고 과자가 많은 곳이니까요.";
+		cutin "ep19_friederike03.png",2;
+		ep20_sidequest_1 = 20;
+		completequest 11947;
+		getitem 1001217,10;	// Ep20_Cat_Whiskers
+		getexp2 68305979,11135835;
+		add_reputation_points( REPU_EP20, 10 );
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cloakonnpcself( "ep20_icecastle_69_217" );
+		cutin "",255;
+		end;
+	}
+	mes "[라라하]";
+	mes "안녕하세요. " + strcharinfo(0) + "님.";
+	mes "오늘도 꽤 쌀쌀하죠?";
+	cutin "ep19_iwin04.png",2;
+	next;
+	mes "[라라하]";
+	mes "프리데리케님께 대략적인 이야기는 들었어요.";
+	next;
+	mes "[라라하]";
+	mes "고대 아이스 윈드들과는 애매한 관계긴 하지만 그래도 어린 꼬뽀들은 안전하게 자랐으면 하니까요.";
+	next;
+	mes "[라라하]";
+	mes "도울 수 있는 일이 있다면 돕고 싶어요.";
+	next;
+	switch( select( "에스카르고!", "위험하다고!", "화해하면 좋겠다.(1)", "[230]화해하면 좋겠다.(2)", "잡담" ) ) {
+	case 1:
+		switch( checkquest(11950,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[라라하]";
+			mes "음… 오늘은 일단 쉬시고 내일 다시 가봐요.";
+			close3;
+		case 2:
+			erasequest 11950;
+			break;
+		}
+		switch( isbegin_quest(11948) ) {
+		case 0:
+			mes "[라라하]";
+			mes "아직도 그 달팽이 소굴에 가는 아이들이 많은 것 같아요.";
+			mes "밥이 걸려있으니 구덩이를 막아버릴 수도 없고 위험한 몬스터라도 처리 해주는 게 저희가 해줄 수 있는 최선이겠죠?";
+			next;
+			mes "[라라하]";
+			mes "전에 끈적이는 바다(MD)에 나왔다던 " + getmonsterinfo("MD_EP20_FALLENANGEL", MOB_NAME) + "라던가 그런 위협적인 녀석들 말이에요.";
+			setquest 11948;
+			close2;
+			cutin "",255;
+			navigateto("jor_back4",101,265);
+			end;
+		case 1:
+			break;
+		case 2:
+			if (checkquest(11949,HUNTING) < 2)
+				break;
+			mes "[라라하]";
+			mes "어머!";
+			mes "끈적이는 바다에서 무슨 일이라도 있었나요?";
+			mes "음… 오늘은 일단 쉬시고 내일 다시 가봐요.";
+			erasequest 11948;
+			erasequest 11949;
+			setquest 11950;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[라라하]";
+		mes "아직도 그 달팽이 소굴에 가는 아이들이 많은 것 같아요.";
+		mes "밥이 걸려있으니 구덩이를 막아버릴 수도 없고 위험한 몬스터라도 처리 해주는 게 저희가 해줄 수 있는 최선이겠죠?";
+		next;
+		mes "[라라하]";
+		mes "전에 끈적이는 바다(MD)에 나왔다던 " + getmonsterinfo("MD_EP20_FALLENANGEL", MOB_NAME) + "라던가 그런 위협적인 녀석들 말이에요.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back4",101,265);
+		end;
+	case 2:
+		switch( checkquest(11952,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[라라하]";
+			mes "이제 오늘은 쉬시고 내일 다시 가봐요.";
+			close3;
+		case 2:
+			erasequest 11952;
+			break;
+		}
+		.@state = checkquest(11951,HUNTING);
+		if (.@state == 2) {
+			mes "[라라하]";
+			mes "어머!";
+			mes "애들은 무사히 집에 돌아 갔겠죠?";
+			mes "이제 오늘은 쉬시고 내일 다시 가봐요.";
+			erasequest 11951;
+			setquest 11952;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283012;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[라라하]";
+		mes "몬스터도 몬스터지만 끈적이는 바다(MD)에서 길을 잃고 헤메는 " + getmonsterinfo("EP20_NPC_COCOPO", MOB_NAME) + "들이 많은 것 같아요.";
+		mes "조금 놀란 상태일 수 있으니 진정시켜서 돌려 보내는 게 좋겠어요.";
+		next;
+		mes "[라라하]";
+		mes "전부다 돌려보내긴 힘들어도 일단 10명 정도부터 시작해 볼까요?";
+		if (isbegin_quest(11951) == 0)
+			setquest 11951;
+		close2;
+		cutin "",255;
+		navigateto("jor_back4",101,265);
+		end;
+	case 3:
+		switch( checkquest(11954,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[라라하]";
+			mes "이제 오늘은 쉬시고 내일 다시 상태를 볼까요?";
+			close3;
+		case 2:
+			erasequest 11954;
+			break;
+		}
+		.@state = checkquest(11953,HUNTING);
+		if (.@state == 2) {
+			mes "[라라하]";
+			mes "어때요?";
+			mes "효과가 좀 있으면 좋겠는데.";
+			mes "이제 오늘은 쉬시고 내일 다시 상태를 볼까요?";
+			erasequest 11953;
+			setquest 11954;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 7707680,5395380;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[라라하]";
+		mes "아이들도 아이들이지만 역시 동족외엔 다 공격하고 보는 난폭한 녀석들이 문제인 것 같아요.";
+		mes "조금 혼내주면 얌전해 지려나…";
+		next;
+		mes "[라라하]";
+		mes "고대 얼음 협곡 동부에서 " + getmonsterinfo("EP20_ICEWIND1", MOB_NAME) + "를 10명정도 혼내주고 돌아와 주세요.";
+		mes "가끔은 강경한 수단도 필요한 법이니까요.";
+		if (.@state == -1)
+			setquest 11953;
+		close2;
+		cutin "",255;
+		navigateto("jor_back5",263,49);
+		end;
+	case 4:
+		if (BaseLevel < 230) {
+			mes "[라라하]";
+			mes "음... 여기 사는 녀석들은 너무 난폭해서 조금 더 강해지면 가는 게 좋겠어요.";
+			mes "^ff0000※ 230레벨 이상 수행 가능한 퀘스트입니다.^000000!";
+			close3;
+		}
+		switch( checkquest(11956,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[라라하]";
+			mes "이제 오늘은 쉬시고 내일 다시 상태를 볼까요?";
+			close3;
+		case 2:
+			erasequest 11956;
+			break;
+		}
+		.@state = checkquest(11955,HUNTING);
+		if (.@state == 2) {
+			mes "[라라하]";
+			mes "어때요?";
+			mes "효과가 좀 있으면 좋겠는데.";
+			mes "이제 오늘은 쉬시고 내일 다시 상태를 볼까요?";
+			erasequest 11955;
+			setquest 11956;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 12093820,8461460;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[라라하]";
+		mes "아이들도 아이들이지만 역시 동족외엔 다 공격하고 보는 난폭한 녀석들이 문제인 것 같아요.";
+		mes "조금 혼내주면 얌전해 지려나…";
+		next;
+		mes "[라라하]";
+		mes "고대 얼음 협곡 서부에서 " + getmonsterinfo("EP20_ICEWIND2", MOB_NAME) + "를 10명정도 혼내주고 돌아와 주세요.";
+		mes "가끔은 강경한 수단도 필요한 법이니까요.";
+		if (.@state == -1)
+			setquest 11955;
+		close2;
+		cutin "",255;
+		navigateto("jor_back6",324,156);
+		end;
+	case 5:
+		mes "[라라하]";
+		mes "요즘 왠지 로로휴가 말을 잘 듣는 것 같아요.";
+		mes "왜지?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11947) == 1" );
+
+	// daily quests
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11951,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11953,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11955,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11948) == 0 && isbegin_quest(11949) == 0 && checkquest(11950,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11951) == 0 && checkquest(11952,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11953) == 0 && checkquest(11954,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && BaseLevel >= 230 && isbegin_quest(11955) == 0 && checkquest(11956,PLAYTIME) == -1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11950,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11952,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11954,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11956,PLAYTIME) == 2" );
+	end;
+}
+//-----------------------

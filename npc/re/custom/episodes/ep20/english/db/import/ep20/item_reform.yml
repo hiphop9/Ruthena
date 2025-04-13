@@ -1,0 +1,98 @@
+
+Header:
+  Type: ITEM_REFORM_DB
+  Version: 1
+
+Body:
+  - Item: EP20_DGA_Refine
+    BaseItems:
+      - BaseItem: D_Glacier_Armor
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Armor
+        ChangeRefine: 1
+      - BaseItem: D_Glacier_Robe
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Robe
+        ChangeRefine: 1
+      - BaseItem: D_Glacier_Manteau
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Manteau
+        ChangeRefine: 1
+      - BaseItem: D_Glacier_Muffler
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Muffler
+        ChangeRefine: 1
+      - BaseItem: D_Glacier_Boots
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Boots
+        ChangeRefine: 1
+      - BaseItem: D_Glacier_Shoes
+        MinimumRefine: 9
+        MaximumRefine: 11
+        CardsAllowed: false
+        Materials:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 40
+          - Material: EP19_D_P_Crystal
+            Amount: 10
+          - Material: EP19_N_P_Crystal
+            Amount: 10
+          - Material: EP20_D_P_Crystal
+            Amount: 10
+        ResultItem: D_Glacier_Shoes
+        ChangeRefine: 1

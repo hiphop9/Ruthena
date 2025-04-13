@@ -1,0 +1,1525 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Issgard Land of Snow Flowers
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Misc NPCs for Episode 19
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// jor_tail
+//-------------------------------------
+
+jor_tail,221,57,3	script	아윈 병사#ep19iwin01	EP19_NPC_IWIN_SY,{
+	if (ep19_main == 8) {
+		cutin "ep19_iwin11.png",2;
+		mes "[아윈 병사]";
+		mes "얼음성꺼정 좀 길이 복잡허긴 혀.";
+		mes "요 표식을 붙여줄텡게 따라 가.";
+		close3;
+	}
+	cutin "ep19_iwin11.png",2;
+	mes "[아윈 병사]";
+	mes "여긴 걱정하덜 말고 가도 되야.";
+	mes "이 비공정은 우덜이 지키본께.";
+	close3;
+}
+
+jor_tail,223,54,3	script	아윈 병사#ep19iwin02	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[아윈 병사]";
+	mes "깃털이 한 개도 없어서 우짜노.";
+	mes "많이 춥제?";
+	close3;
+}
+
+jor_tail,239,40,5	script	고리리#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[고리리]";
+	mes "근무중 이상 없습니다!";
+	close;
+}
+
+jor_tail,291,91,5	script	하무르#e19c00	4_EP19_IWIN,{
+	npctalk "이곳이 바다의 끝이겠지?", "", bc_self;
+	end;
+}
+
+jor_tail,285,94,5	script	도라로#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[도라로]";
+	mes "근무중... 음? 못 보던 인간이군.";
+	mes "감기 안 걸리게 조심하게.";
+	mes "깃털도 하나 없고... 쯔쯔.";
+	close;
+}
+
+jor_tail,216,79,3	script	라흐호#e19c00	4_EP19_IWIN,{
+	npctalk "공들여 눈을 치우면 어떻게 되는지 아나? 또 눈이 내린다고! 와하하하하하하!!!", "", bc_self;
+	end;
+}
+
+jor_tail,209,72,5	script	경비#e19c02	EP19_NPC_IWIN_SG,{
+	npctalk "경계중! 이상 무! 이스가르드에 오신 것을 환영합니다!", "", bc_self;
+	end;
+}
+
+jor_tail,168,86,3	script	고르르#e19c00	4_EP19_IWIN,{
+	npctalk "눈 속에 파묻힌 사람 처음 보오? 내가 개발한 깃털 관리제의 방수, 방한 테스트 중이라오.", "", bc_self;
+	end;
+}
+
+jor_tail,153,76,3	script	노도르#e19c00	4_EP19_IWIN,{
+	npctalk "이 바구니를 언제 다 채우나", "", bc_self;
+	end;
+}
+
+jor_tail,150,81,5	script	바자롱#e19c00	4_EP19_IWIN,{
+	npctalk "거, 다 쉬었으면 일 좀 하지?", "", bc_self;
+	end;
+}
+
+jor_tail,181,158,5	script	호흐호#e19c00	4_EP19_IWIN,{
+	npctalk "저 위에 발자국 보여? 신성한 발자국이야. 여기저기에 찍혀 있으니 잘 찾아 보라구.", "", bc_self;
+	end;
+}
+
+jor_tail,216,269,5	script	하랴랴#e19c00	4_EP19_IWIN,{
+	npctalk "길이 좁으니까 조심히 다니슈. 무너지면 구조하는데 오래 걸리거든. ... 믿는 건 아니지?", "", bc_self;
+	end;
+}
+
+jor_tail,250,273,7	script	조로롱#e19c00	4_EP19_IWIN,{
+	npctalk "얼음의 성 뒷쪽에 얼음 조각이 하나 있는데 그중 하나가 꼭 이렇게 생긴걸 머리에 달고 있더라고. 희한해.", "", bc_self;
+	end;
+}
+
+jor_tail,56,196,3	script	뽀랴료#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[뽀랴료]";
+	mes "쉿... 조용히 해.";
+	mes "낚시를 방해하지 마라.";
+	mes "다른 낚시터로 가 봐.";
+	close;
+}
+
+
+// jor_back1
+//-------------------------------------
+
+jor_back1,376,247,5	script	보리라#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[보리라]";
+	mes "근무중 이상 없습니다아아.";
+	close;
+}
+
+jor_back1,81,266,5	script	꼬루로#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[꼬루로]";
+	mes "근무중 이상 없습니다아아. 푸헷취이!";
+	close;
+}
+
+jor_back1,95,256,5	script	또로로#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[또로로]";
+	mes "인간, 그 얼음 결정 위에는 올라가지 마라.";
+	mes "가라앉는다. 조심해야 해.";
+	close;
+}
+
+
+// jor_nest
+//-------------------------------------
+
+function	script	F_ep19_checkTransform	{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {	// custom text (copy from another npc)
+		mes "[" + getarg(0) + "]";
+		mes "인간?! 별게 다 오는군.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	return;
+}
+
+jor_nest,24,251,0	script	#whl_warp	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	removespecialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	specialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	end;
+}
+jor_nest,21,258,1	duplicate(dummy_npc)	#whl_effect	CLEAR_NPC
+
+jor_nest,108,79,0	script	#e19ms100	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_108_79");
+		end;
+	}
+	end;
+}
+jor_nest,108,79,5	script	르간 사제#e19ms100::ep19_jor_nest_108_79	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "나만 잘되게 해주세요... 나만...", "", bc_self;
+	end;
+}
+
+jor_nest,29,251,5	script	경비 르간#e19ms91	4_EP19_RGAN_R1,5,5,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself();
+		cloakonnpcself("ep19_jor_nest_23_247");
+		end;
+	}
+	end;
+}
+jor_nest,23,247,5	script	경비 르간#e19ms92::ep19_jor_nest_23_247	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+
+jor_nest,37,257,0	script	#e19ms92	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_35_270");
+		cloakonnpcself("ep19_jor_nest_41_270");
+		end;
+	}
+	end;
+}
+jor_nest,35,270,5	script	경비 르간#e19ms94::ep19_jor_nest_35_270	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+jor_nest,41,270,3	script	경비 르간#e19ms93::ep19_jor_nest_41_270	4_EP19_RGAN_SR1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[경비 르간]";
+		mes "인간?! 별게 다 오는군.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	npctalk "......", "", bc_self;
+	end;
+}
+
+
+jor_nest,115,212,0	script	#e19ms101	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_115_212");
+		end;
+	}
+	end;
+}
+jor_nest,115,212,3	script	르간 사제#e19ms101::ep19_jor_nest_115_212	4_EP19_RGAN_R1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[르간 사제]";
+		mes "인간은 여기에 오면 안돼. 어서 나가.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 33) {
+		npctalk "오늘 태어난 아이니? 어디 가는 길이니?", "", bc_self;
+		end;
+	}
+	npctalk "걷는거는 이제 익숙해졌니?", "", bc_self;
+	end;
+}
+
+jor_nest,109,184,0	script	#e19ms107	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_109_184");
+		end;
+	}
+	end;
+}
+jor_nest,109,184,5	script	하트헌터#e19ms107::ep19_jor_nest_109_184	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "여기서 얼쩡거리지 마. 네가 올 곳이 아니야.", "", bc_self;
+		end;
+	}
+	npctalk "또 너냐?", "", bc_self;
+	end;
+}
+
+jor_nest,80,150,0	script	#e19ms108	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_80_180");
+		end;
+	}
+	end;
+}
+jor_nest,80,150,1	script	하트헌터#e19ms108::ep19_jor_nest_80_180	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "여기에 뭐라고 적혀있는지 알아? 뒤돌아서 가던 길 가세요. 라고 적혀있어.", "", bc_self;
+		end;
+	}
+	npctalk "네가 볼일이 있는 곳은 이곳이 아닐 텐데?", "", bc_self;
+	end;
+}
+
+jor_nest,24,169,0	script	#e19ms109	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_24_169");
+		end;
+	}
+	end;
+}
+jor_nest,24,169,5	script	하트헌터#e19ms109::ep19_jor_nest_24_169	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "어, 관계자야? 아니잖아. 그럼 여기 오면 안돼.", "", bc_self;
+		end;
+	}
+	npctalk "여길 드나든다 해도 가급적 이곳엔 오지 말아.", "", bc_self;
+	end;
+}
+
+jor_nest,186,173,0	script	#e19ms103	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_186_173");
+		end;
+	}
+	end;
+}
+jor_nest,186,173,3	script	르간 사제#e19ms102::ep19_jor_nest_186_173	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "팜말님의 외침 : 삼 루키 비기너 익스퍼트 어드벤스드 쉐도우 삽니다 귓", "", bc_self;
+	end;
+}
+
+jor_nest,219,38,0	script	#e19ms106	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_219_38");
+		end;
+	}
+	end;
+}
+jor_nest,219,38,5	script	르간 사제#e19ms104::ep19_jor_nest_219_38	4_EP19_RGAN_R3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[르간 사제]";
+		mes "하급 구역에 있어야 할 인간이 왜 여기에 왔어??";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		npctalk "어어? 못보던...? 아, 새로 태어난??", "", bc_self;
+		end;
+	}
+	npctalk "괴롭히는 사람이 있으면 다 나한테 얘기 해. 알았지?", "", bc_self;
+	end;
+}
+
+jor_nest,76,22,0	script	#e19ms102	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_76_22");
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "어~ 네가 새로 태어났다던 아이로구나?", "ep19_jor_nest_76_22", bc_self;
+	sleep2 1000;
+	npctalk "그래, 진로는 정했고?", "ep19_jor_nest_73_17", bc_self;
+	sleep2 1500;
+	npctalk "아니, 오늘 태어난 애한테 못하는 말이 없어! 요즘엔 그런 말 하면 안된다고.", "ep19_jor_nest_76_22", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+}
+jor_nest,76,22,3	script	르간 주교#e19ms100::ep19_jor_nest_76_22	4_EP19_RGAN_SR1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "모르는 것이 있으면 언제든 물어보고, 알았지?", "", bc_self;
+		end;
+	}
+	npctalk "간식 좀 줄까?", "", bc_self;
+	end;
+}
+jor_nest,73,17,7	script	르간 주교#e19ms101::ep19_jor_nest_73_17	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "우리는 언제나 아이들을 환영한단다.", "", bc_self;
+		end;
+	}
+	npctalk "배 안고프니?", "", bc_self;
+	end;
+}
+
+jor_nest,123,132,0	script	#e19ms105	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	end;
+}
+jor_nest,123,132,5	script	르간 사제#e19ms103::ep19_jor_nest_123_132	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "네가 새로 태어난 아이구나? 어서 커서 나랑 같이 일하면 좋겠네.", "", bc_self;
+		end;
+	}
+	npctalk "이곳에 적응은 좀 했니?", "", bc_self;
+	end;
+}
+
+jor_nest,179,144,0	script	#e19ms104	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_179_144");
+		end;
+	}
+	end;
+}
+jor_nest,179,144,3	script	르간 주교#e19ms102::ep19_jor_nest_179_144	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "못보던 아인데? 아, 아닌가?? 미안, 얼굴을 잘 못외워서.", "", bc_self;
+		end;
+	}
+	npctalk "새로 태어난 아이구나! 잘 지내고 있어?", "", bc_self;
+	end;
+}
+
+jor_nest,224,207,3	script	하트헌터#e19ms100	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "나도 중심처에 들어가고 싶은데. 여기서 시설이나 지키라니.", "", bc_self;
+	end;
+}
+
+jor_nest,231,186,5	script	하트헌터#e19ms102	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "내가 여기서 이거나 지키고 있어야겠어?", "", bc_self;
+	end;
+}
+
+jor_nest,190,203,5	script	하트헌터#e19ms106	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "이거 아주 중요한 시설인데 너 때문에 고장나면 어떻게 될까? 그니까 오지 마쇼!", "", bc_self;
+		end;
+	}
+	npctalk "이게 그렇게 중요한가? 르간은 다 들어갔는데 왜 우리만...?", "", bc_self;
+	end;
+}
+
+jor_nest,253,75,7	script	미라라시미간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[미라라시미간드]";
+	mes "...";
+	mes "쿨.";
+	mes "오늘 일 열심히 했다. 잠시 쉰다...";
+	mes "요르문간드님도 용서해 주실 거다.";
+	mes "쿨쿨...";
+	next;
+	mes "르간이 아니라도 알 정도로 지친 얼굴로 벽에 기대 자고 있다.";
+	close;
+}
+
+jor_nest,152,108,5	script	비라니말간드#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		mes "[비라니말간드]";
+		mes "오늘도 열심히 라스간드 님을 위해 일했어. 후후.";
+		close;
+	}
+	mes "[비라니말간드]";
+	mes "무슨 일이니? 날 찾는 게 아니면 쉬게 내버려 둬.";
+	close;
+}
+
+
+jor_nest,23,91,1	script	얼나구스다간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[얼나구스다간드]";
+	mes "...";
+	mes "한다. 일.";
+	mes "열심히. 속죄.";
+	close;
+}
+
+jor_nest,24,97,3	script	한디마리간드#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[한디마리간드]";
+	mes "귀에 쏙쏙 들어오는 친절한 설법이라니까.";
+	close;
+}
+
+jor_nest,272,196,5	script	미레디야밀간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[미레디야밀간드]";
+	mes "일한다. 나는 훌륭한 일꾼이다.";
+	close;
+}
+
+jor_nest,243,223,3	script	라크루스간드#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[라크루스간드]";
+	mes "농땡이 좀 치면 어때. 다 신이 안배하신 거.";
+	next;
+	mes "[라크루스간드]";
+	mes "근데 정말 구분 힘들긴 해.";
+	close;
+}
+
+jor_nest,241,223,5	script	둥기둥기간드#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[둥기둥기간드]";
+	mes "농땡이를 치는 애들이 있는 것 같은데 구분 안 가.";
+	close;
+}
+
+jor_nest,261,233,3	script	이가는을간드#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		mes "[이가는을간드]";
+		mes "처음 보는 사제님?";
+		mes "앞으로 신의 은총 아래 함께 하기를.";
+		close;
+	}
+	mes "[이가는을간드]";
+	mes "라스간드 님의 뜻을 우리가 어떻게 알까.";
+	close;
+}
+
+jor_nest,278,219,5	script	와유날고슬간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[와유날고슬간드]";
+	mes "일한다. 나는 멋진 일꾼이다.";
+	mes "멋지면 뭐가 좋은지 모르겠지만 그렇다.";
+	close;
+}
+
+jor_nest,272,257,7	script	하누코리마간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[하누코리마간드]";
+	mes "일한다. 나는 굉장한 일꾼이다.";
+	close;
+}
+
+jor_nest,251,279,7	script	캐스비라미간드#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[캐스비라미간드]";
+	mes "일한다. 어딜 가도 일머리 있다는 소리 듣는다.";
+	close;
+}
+
+jor_nest,231,253,5	script	하트헌터#e19ms101	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "애송이, 한발짝 떨어져라.", "", bc_self;
+		end;
+	}
+	npctalk "여기서 이거나 지키라니, 조금 무서운데.", "", bc_self;
+	end;
+}
+
+jor_nest,232,161,3	script	하트헌터#e19ms103	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "왜? 볼일 있어?", "", bc_self;
+		end;
+	}
+	npctalk "오기는 누가 온다고 이걸 지키고 있으래?", "", bc_self;
+	end;
+}
+
+jor_nest,217,144,5	script	하트헌터#e19ms104	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "아~ 여기 오면 안돼~ 못들었어?", "", bc_self;
+		end;
+	}
+	npctalk "교대 해주겠지...? 여기 남아있기 싫은데.", "", bc_self;
+	end;
+}
+
+jor_nest,239,143,3	script	하트헌터#e19ms105	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "가까이 오면 좋은 꼴 못 본다?", "", bc_self;
+		end;
+	}
+	npctalk "휴- 중심처보단 차라리 여기가 나아... 낫겠지?", "", bc_self;
+	end;
+}
+
+jor_nest,273,23,3	script	샤랴라라라#ep19iwin07	EP19_RGAN_D,{
+	if (ep19_main < 21) {
+		mes "[샤랴라라라간드]";
+		mes "일이 쏟아진다... 샤라라라라라라~";
+		close;
+	}
+	mes "[샤랴라]";
+	mes "얘! 나야, 샤랴라";
+	mes "혹시 얼음성으로 돌아갈거니?";
+	mes "같이 갈래?";
+	next;
+	switch( select( "아직 할 일이 있어.", "얼음성으로 돌아가자!" ) ) {
+	case 1:
+		mes "[샤랴라]";
+		mes "내가 얼음성에서 엄청 빠른 아윈이거든?";
+		mes "빙판에서 넘어지지 않게 도와줄테니까 빨리 가자!";
+		close;
+	case 2:
+		mes "[샤랴라]";
+		mes "내가 얼음성에서 엄청 빠른 아윈이거든?";
+		mes "빙판에서 넘어지지 않게 도와줄테니까 빨리 가자!";
+		close2;
+		warp "icecastle",55,120;
+		if (ep19_main == 44)
+			navigateto("icas_in",245,197);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+
+// icecastle
+//------------------------------------------------
+
+icecastle,101,216,5	script	고류로#ep19in	4_EP19_IWIN,{
+	mes "[고류로]";
+	mes "으응? 이름이 비슷한 친구가 많다고?";
+	mes "전혀 다른데?";
+	mes "너희들이 못 알아들을 뿐이지.";
+	close;
+}
+
+icecastle,103,216,3	script	고루로#ep19in	4_EP19_IWIN,{
+	mes "말없이 털고르기를 하고 있다.";
+	close;
+}
+
+icecastle,99,119,3	script	고햐르#e19c00	4_EP19_IWIN,{
+	npctalk "까꿍!", "", bc_self;
+	end;
+}
+
+icecastle,130,136,5	script	소로료#ep19in	EP19_NPC_IWIN_SN,{
+	mes "[소로료]";
+	mes "가까이 다가오지 마라, 인간.";
+	mes "나는 지금 얼음 위에서도 미끄러지지 않을 창술 연습 중이다.";
+	mes "다칠 수 있어.";
+	close;
+}
+
+icecastle,129,121,3	script	호라룡#1	4_EP19_IWIN,{
+	mes "아윈 어린이들이 바다 속을 눈을 반짝이며 들여다보고 있다.";
+	mes "물고기를 구경하고 있는 것 같다.";
+	close;
+}
+
+icecastle,131,121,3	script	도랴룽#ep19in	4_EP19_IWIN,{
+	mes "아윈 어린이들이 바다 속을 눈을 반짝이며 들여다보고 있다.";
+	mes "물고기를 구경하고 있는 것 같다.";
+	close;
+}
+
+icecastle,62,229,6	script	오라랑#icecastle	EP19_NPC_IWIN,{
+	npctalk "" + strnpcinfo(1) + ": 어?! 외부인이다!!", "", bc_self;
+	mes "[깃털민박 오라랑]";
+	mes "어서 오세요. 깃털 민박입니다.";
+	mes "외부인에게는 제니라는 걸 받으라고 했으니까? 휴식에는 5,000z!!";
+	next;
+	switch( select( "저장한다.", "쉬고간다 - 5000z", "그만둔다" ) ) {
+	case 1:
+		emotion ET_HNG;
+		mes "[깃털민박 오라랑]";
+		mes "얼음의 성이 내 집이다. 생각하고 편히쉬어랑~";
+		savepoint "icas_in",87,114,1,1;
+		close;
+	case 2:
+		if (Zeny < 5000) {
+			emotion ET_FRET;
+			mes "[깃털민박 오라랑]";
+			mes "손님 돈도 없이 이러시면 곤란합니다.";
+			close;
+		}
+		mes "[깃털민박 오라랑]";
+		mes "따듯하게 푹자랑~";
+		close2;
+		Zeny -= 5000;
+		warp "icas_in",87,114;
+		end;
+	case 3:
+		emotion ET_HNG;
+		mes "[깃털민박 오라랑]";
+		mes "흥~ 싫음 말아랑!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<깃털 민박>" );
+	end;
+}
+
+icecastle,118,270,3	script	호메르#e19c00	4_EP19_IWIN,{
+	npctalk "그거 알아? 이 폭포에는 전설이 있대. 그런데 아무도 그 전설을 몰라.", "", bc_self;
+	end;
+}
+
+icecastle,172,153,3	script	노리리#ep19in	4_EP19_IWIN,{
+	mes "매우 먼 곳을 아련한 눈길로 바라보고 있다.";
+	mes "딱히 무슨 사정은...";
+	mes "없어 보인다.";
+	close;
+}
+
+icecastle,25,113,4	script	공고#iwp_1::ep19_icecastle_25_113	4_BOARD3,{
+	mes "[공고]";
+	mes "「독수리 순찰대」에서 순찰을 함께할 책임감 있는 모험가를 모집합니다.";
+	next;
+	mes "[자격요건]";
+	mes "르간 제외 신체 건강하고 의사소통가능한 모든 종족";
+	next;
+	mes "[가입 문의]";
+	mes "<독수리 순찰대>";
+	mes "<NAVI>[순찰대장 마샤 지지 해피 레브 이브<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "<NAVI>앨리스 로이드 브로드-마인디드<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "<NAVI>테스 보어텍스]<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "많은 지원 바랍니다.";
+	close;
+}
+icecastle,178,229,4	duplicate(ep19_icecastle_25_113)	공고#iwp_2	4_BOARD3
+
+icecastle,43,104,5	script	초루룡#1::ep19_260	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[초루룡]";
+	mes "인간은 어른이지?";
+	mes "어른은 진짜 순찰대를 해. 우리 하는 일에 기웃거리지 말고.";
+	close;
+OnTalk:
+	npctalk "조로로 : 둘!", "ep19_257";
+	sleep 500;
+	npctalk "노로루 : 둘!", "ep19_258";
+	sleep 500;
+	npctalk "도랴로 : 셋!", "ep19_259";
+	sleep 500;
+	npctalk "초루룡 : 넷!", "ep19_260";
+	end;
+}
+
+icecastle,45,102,5	script	도랴로#1::ep19_259	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[도랴로]";
+	mes "인간은 어른이지?";
+	mes "어른은 진짜 순찰대를 해. 우리 훈련을 방해하지 말고.";
+	close;
+OnTalk:
+	npctalk "조로로 : 너희들에게 실망했다!", "ep19_257";
+	sleep 500;
+	npctalk "노로루 : 실명했다!", "ep19_258";
+	sleep 500;
+	npctalk "도랴로 : 어명이다!", "ep19_259";
+	sleep 500;
+	npctalk "초루룡 : 발명이다!", "ep19_260";
+	end;
+}
+
+icecastle,47,100,5	script	노로루#1::ep19_258	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[노로루]";
+	mes "인간은 어른이지?";
+	mes "어른은 진짜 순찰대를 해. 우리는 이 마당 담당이야.";
+	close;
+OnTalk:
+	npctalk "조로로 : 발!", "ep19_257";
+	sleep 500;
+	npctalk "노로루 : 밑!", "ep19_258";
+	sleep 500;
+	npctalk "도랴로 : 조!", "ep19_259";
+	sleep 500;
+	npctalk "초루룡 : 심!", "ep19_260";
+	end;
+}
+
+icecastle,49,98,5	script	조로로#1::ep19_257	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[조로로]";
+	mes "인간은 어른이지?";
+	mes "어른은 진짜 순찰대를 할 수 있으니 우리 순찰대놀이에 끼워줄 수 없어.";
+	close;
+OnTalk:
+	npctalk "조로로 : 머리 위 조심!", "ep19_257";
+	sleep 500;
+	npctalk "노로루 : 머리 위 조심!", "ep19_258";
+	sleep 500;
+	npctalk "도랴로 : 머리 위 조심!", "ep19_259";
+	sleep 500;
+	npctalk "초루룡 : 조심!", "ep19_260";
+	end;
+}
+
+icecastle,73,101,7	script	쪼라룽#ep19in::ep19_262	4_EP19_IWIN,{
+	mes "모로료의 솜씨를 눈을 반짝이며 지켜보고 있다.";
+	npctalk "모로료 : 쪼라룽 너 좀만 더 크면 가르쳐 줄게.", "ep19_261", bc_self;
+	npctalk "쪼라룽 : 응!", "ep19_262", bc_self;
+	close;
+}
+
+icecastle,77,106,3	script	모로료#ep19in::ep19_261	4_EP19_IWIN,{
+	mes "[모로료]";
+	mes "신선하지 않은 생선은 말이야, 손질하기에 달렸지.";
+	mes "선조 대대로 내려오는 기법이 있어.";
+	mes "가르쳐 줄까?";
+	next;
+	if (select( "응", "아니" ) == 2) {
+		mes "[모로료]";
+		mes "거 아쉽게 됐군.";
+		close;
+	}
+	mes "[모로료]";
+	mes "좋아. 자, 일단 아가미를 부리로...";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...";
+	next;
+	mes "[모로료]";
+	mes "...";
+	next;
+	mes "[모로료]";
+	mes "인간은 부리가 없군.";
+	mes "간과했어.";
+	close;
+}
+
+icecastle,89,94,3	script	오리르#ep19in::ep19_266	4_EP19_IWIN,{
+	mes "[오리르]";
+	mes "인간, 어른이면 술 마셔도 돼.";
+	mes "물은 밖에서 못 마셔. 실내에서 얼음 녹여서 마셔.";
+	close;
+}
+
+icecastle,85,95,5	script	토리로#ep19in	4_EP19_IWIN,{
+	mes "[토리로]";
+	mes "난 안 줄 거야!";
+	mes "인간도 먹고 싶으면 저기서 얼음 갈아 와.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "뭔데?";
+	next;
+	mes "[토리로]";
+	mes "스노우 슬러시!";
+	mes "부리로 얼음을 갈아서 깔라마링 다진 걸 뿌리면...";
+	mes "되는데...";
+	next;
+	mes "[토리로]";
+	mes "인간은 부리가 없네.";
+	mes "불편하겠다.";
+	npctalk "포라라 : 저런... 부리가 없다니...", "ep19_264", bc_self;
+	npctalk "오리르 : 저런...", "ep19_266", bc_self;
+	npctalk "노로룡 : 딸꾹.", "ep19_263", bc_self;
+	close;
+}
+
+icecastle,86,100,5	script	포라라#ep19in::ep19_264	4_EP19_IWIN,{
+	mes "[포라라]";
+	mes "인간, 술은 잘 마시나?";
+	mes "이걸 마시면 따뜻해져.";
+	mes "미역 줄기로 담근 건데 먹을 만해.";
+	next;
+	mes "매우 강한 알콜 냄새가 깊은 바다의 향취와 섞여 조화롭다.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...사양할게.";
+	next;
+	mes "[포라라]";
+	mes "이 미역도 건져서 따로 먹어도 맛있는데.";
+	mes "아쉽게 됐군.";
+	close;
+}
+
+icecastle,90,100,3	script	노로룡#ep19in::ep19_263	4_EP19_IWIN,{
+	mes "[노로룡]";
+	mes "인간도 한 잔 할 텐가?";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "뭔데?";
+	next;
+	mes "[노로룡]";
+	mes "아드카라네. 몸이 후끈해져.";
+	next;
+	mes "매우 강한 알콜 냄새가 난다.";
+	mes "털에 가려 보이지 않는 아윈의 얼굴이 붉게 물들어 있을 것 같은 느낌이다.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "사양할게.";
+	next;
+	mes "[노로룡]";
+	mes "맛있는데.";
+	close;
+}
+
+icecastle,82,111,3	script	샤샤샤#e19c00	4_EP19_IWIN,{
+	npctalk "그거 알아요? 이 창을 뽑는 자는 천하를 얻는대요. 우리 삼촌이 그랬어요.", "", bc_self;
+	end;
+}
+
+icecastle,84,129,3	script	반지르#e19c00	4_EP19_IWIN,{
+	npctalk "예쁘죠? 내가 봐도 너무 예뻐서 다들 구경하라고 가지고 나온 거야.", "", bc_self;
+	end;
+}
+
+icecastle,55,124,3	script	샤랴라#ep19iwin06	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 21) {
+		cutin "ep19_iwin04.png",2;
+		mes "[샤랴라]";
+		mes "빙판 조심하렴?";
+		mes "엄청 미끄럽단다~?";
+		close3;
+	}
+	cutin "ep19_iwin04.png",2;
+	mes "[샤랴라]";
+	mes "요즘 르간의 둥지에 잠입하면서 일 한다고 고생이 많네.";
+	mes "오늘도 잠입하러 가니?";
+	mes "빙판길이라 걷기 힘들텐데 좀 도와줄까?";
+	next;
+	switch( select( "뱀의 둥지로 보내줄래?", "괜찮아 괜찮아." ) ) {
+	case 1:
+		mes "[샤랴라]";
+		mes "지난번에 르간으로 변신하고 막 갔었잖아?";
+		mes "되게 재밌더라. 그때 길을 잘 기억해놨거든.";
+		mes "바로 둥지 입구에 날려줄테니 잽싸게 들어가. 알았지?";
+		close2;
+		cutin "",255;
+		warp "jor_nest",275,19;
+		end;
+	case 2:
+		mes "[샤랴라]";
+		mes "혹시라도 가다가 넘어질 것 같으면 말하렴.";
+		mes "내가 얼음성 신속배달 아윈이란다.";
+		mes "인간 하나 날려보내는 건 일도 아니지.";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+icecastle,59,123,6	script	꼬라료#icecastle	EP19_NPC_IWIN,{
+	mes "[꼬라료]";
+	mes "여기도 눈, 저기는 얼음 사방팔방";
+	mes "눈과 얼음만 가득한 얼음의 성에";
+	mes "온걸 환영한다 외지인!";
+	mes "이 ^B47096실키 웰-발랜스드 토마스 조이^000000님이";
+	mes "성 안내 담당이니 궁금한 걸 물어보도록.";
+	next;
+	mes "[꼬라료]";
+	mes "궁금한 ^B9062F[거점명]을 클릭^000000 시 ^B9062F내비게이션^000000으로 친절히 안내해주겠다.";
+	while(1) {
+		next;
+		switch( select( "[     얼 음 의 성    ]", "[     병         영    ]", "[  벨군드  연구실  ]", "[     식         당    ]", "[     민         박    ]", "미니 맵 표시 지우기", "그만둔다." ) ) {
+		case 1:
+			mes "[꼬라료]";
+			mes "<NAVI>[얼음의 성]<INFO>icecastle,213,174,0,101,0</INFO></NAVI>";
+			mes "↑이걸 누르면 안내를 해주겠다. 가려는 곳이 어디인지 궁금할 수도 있으니 미니맵에도 표시해 주지!";
+			mes "다른 곳 안내도 필요한가?";
+			viewpoint 0,213,174,1,0x0A82FF;
+			break;
+		case 2:
+			mes "[꼬라료]";
+			mes "<NAVI>[병영]<INFO>icecastle,186,222,0,101,0</INFO></NAVI>";
+			mes "↑이걸 누르면 안내를 해주겠다. 가려는 곳이 어디인지 궁금할 수도 있으니 미니맵에도 표시해 주지!";
+			mes "다른 곳 안내도 필요한가?";
+			viewpoint 1,186,222,1,0xAAFF00;
+			break;
+		case 3:
+			mes "[꼬라료]";
+			mes "<NAVI>[벨군드 연구실]<INFO>icas_in,167,61,0,101,0</INFO></NAVI>";
+			mes "↑이걸 누르면 안내를 해주겠다. 벨군드 님의 연구실에는 마람이란 자가 모험가에게 필요한 여러가지를 판매하고 있다고 하더군.";
+			mes "다른 곳 안내도 필요한가?";
+			viewpoint 2,186,222,1,0x008080;
+			break;
+		case 4:
+			mes "[꼬라료]";
+			mes "<NAVI>[식당]<INFO>icecastle,124,171,0,101,0</INFO></NAVI>";
+			mes "↑이걸 누르면 안내를 해주겠다. 식당에서는 일하는 아윈을 위한 탁아소도 같이 운영하고 있지. 애들이 귀엽다고 데려가고 그러면 안대!!";
+			mes "다른 곳 안내도 필요한가?";
+			viewpoint 3,124,171,1,0xFF1493;
+			break;
+		case 5:
+			mes "[꼬라료]";
+			mes "<NAVI>[민박]<INFO>icecastle,64,224,0,101,0</INFO></NAVI>";
+			mes "↑이걸 누르면 안내를 해주겠다. 참! 하룻밤 묵으려면 지붕 위의 집 주인에게 숙박이 가능한지 물어봐.";
+			mes "다른 곳 안내도 필요한가?";
+			viewpoint 4,64,224,1,0x8B4513;
+			break;
+		case 6:
+			mes "[꼬라료]";
+			mes "표시를 지웠당!";
+			mes "다른 도움이 필요한가?";
+			viewpoint 0,1,1,2,0xFFFFFF;
+			viewpoint 1,1,1,2,0xFFFFFF;
+			viewpoint 2,1,1,2,0xFFFFFF;
+			viewpoint 3,1,1,2,0xFFFFFF;
+			viewpoint 4,1,1,2,0xFFFFFF;
+			break;
+		case 7:
+			mes "[꼬라료]";
+			mes "외지인들은 털이 적어 추울 텐데 괜히 이곳저곳 돌아다니다 감기 걸리지 말고 따듯한 건물 안에 있어.";
+			close;
+		}
+	}
+	end;
+OnInit:
+	setunittitle( getnpcid(0), "<얼음의 성 가이드>" );
+	end;
+}
+
+icecastle,35,224,7	script	보라라#ep19in	EP19_NPC_IWIN_SB,{
+	if (ep19_main < 11) {
+		mes "[보라라]";
+		mes "근무중 이상 없습니... 엣취.";
+		close;
+	}
+	mes "[보라라]";
+	mes "근무중 이상 없습니다아아.";
+	close;
+}
+
+icecastle,71,255,5	script	아야르#e19c00	4_EP19_IWIN,{
+	npctalk "어어- 멈춰!!! 지워지지 않게 조심해. 신성한 발자국이니까.", "", bc_self;
+	end;
+}
+
+icecastle,103,227,5	script	쪼리루#ep19in	4_EP19_IWIN,{
+	mes "[쪼리루]";
+	mes "저녁엔 뭘 먹는다...";
+	close;
+}
+
+icecastle,105,227,3	script	또루라#ep19in	4_EP19_IWIN,{
+	mes "[또루라]";
+	mes "어제 먹은 거 말고 다른 거 먹고 싶다...";
+	close;
+}
+
+icecastle,149,216,3	script	보리리#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[보리리]";
+	mes "근무중 이상 없습니다아아.";
+	close;
+}
+
+icecastle,118,245,5	script	갸르르#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "가만 있어 봐. 내가 오늘 여기 고기 다 잡아 버릴라니까.", "", bc_self;
+	end;
+}
+
+icecastle,190,217,3	script	아윈 병사#ep19iwin03	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[아윈 병사]";
+	mes "병영에 뭐 볼일 있니?";
+	mes "병영 왼쪽 방은 순찰대고 벨군드 님은 오른쪽 방이야.";
+	mes "마람이라는 인간이 장사도 하고 있더라.";
+	mes "신기한 거 많더라고.";
+	close3;
+}
+
+icecastle,180,206,3	script	아윈 병사#ep19iwin04	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin09.png",2;
+	mes "[아윈 병사]";
+	mes "아니이... 여기가 아무리 연무장이라고 해도오...";
+	mes "눈 치우는 거 이거 의미 있나? 있나?";
+	next;
+	cutin "ep19_iwin10.png",2;
+	mes "[아윈 병사]";
+	mes "아... 쌓이기 전에 치워서 그나마 이정도라고?";
+	mes "그건 그렇지.";
+	mes "아니이..그래도...";
+	close3;
+}
+
+icecastle,248,211,1	script	도루리#ep19in	4_EP19_IWIN,{
+	mes "[도루리]";
+	mes "이 작품은 동물의 이름이 적혀 있지 않아.";
+	mes "우리 선조는 이렇게 생겼었다는 뜻일까?";
+	close;
+}
+
+icecastle,261,179,7	script	고류류#ep19in	4_EP19_IWIN,{
+	mes "[고류류]";
+	mes "후...";
+	next;
+	mes "[고류류]";
+	mes "아무 일 없이 평온한 날이, 얼마나 고마운지 몰라.";
+	mes "그럴 때는 저 차가운 바다조차 따뜻해 보이지.";
+	close;
+}
+
+icecastle,241,146,7	script	초라리#ep19in	4_EP19_IWIN,{
+	mes "[초라리]";
+	mes "이 근처에는 이렇게 생긴 생물이 없어.";
+	mes "조상님이 보신 진짜는 이것과 똑같이 생겼을까?";
+	close;
+}
+
+icecastle,195,170,3	script	경비#e19c00	EP19_NPC_IWIN_SG,{
+	npctalk "경계중.", "", bc_self;
+	end;
+}
+
+icecastle,209,156,3	script	경비#e19c01	EP19_NPC_IWIN_SG,{
+	npctalk "이상 무.", "", bc_self;
+	end;
+}
+
+icecastle,241,115,5	script	보라랴#ep19in	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 11) {
+		mes "[보라랴]";
+		mes "근무중 이상 없습니다아아.";
+		close;
+	}
+	mes "[보라랴]";
+	mes "근무중 이상 없습니다아아. 푸헷취이!";
+	close;
+}
+
+icecastle,170,142,3	script	초리롱#ep19in	4_EP19_IWIN,{
+	mes "[초리롱]";
+	mes "가끔씩 깃털에 눌린 자국이 있는 친구들이 있는데 꼭 무슨 다른 동물이 바람 피하다 간 것 같단 말야.";
+	next;
+	mes "[초리롱]";
+	mes "그런데 그런 크기의 우리를 두려워하지 않는 동물은 본 적이 없거든?";
+	mes "소문으로 듣던 고양이나 개가 어디 있나?";
+	close;
+}
+
+icecastle,133,165,5	script	하르르#e19c00	4_EP19_IWIN,{
+	npctalk "예쁘지? 내가 공들여 모은 거야.", "", bc_self;
+	end;
+}
+
+icecastle,116,147,5	script	수냐리#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "저 위족에 있는 폭포에서 낚시하는 바보 봤어? 물고기는 여기에 다 있는데.", "", bc_self;
+	end;
+}
+
+
+// icas_in
+//-------------------------------------
+
+icas_in,235,65,7	script	장독#2	HIDDEN_NPC,{
+	npctalk "조랴라 : 인간, 그것은 천년 비법의 깔라마링 젓갈인데 인간은 먹을 수 없더군. 참으로 아쉬워.", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,237,66,7	script	장독#1	HIDDEN_NPC,{
+	npctalk "조랴라 : 그것은 천년동안 이어져 내려온 씨간장이네. 함부로 건드리지 말게.", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,251,60,3	script	호라리#ep19in	4_EP19_IWIN,{
+	mes "[호라리]";
+	mes "엄마는 순찰 잘 돌고 계실까?";
+	close;
+}
+
+icas_in,245,53,5	script	쪼로리#ep19in	4_EP19_IWIN,{
+	mes "[쪼로리]";
+	mes "오늘은 뭘 하고 놀지?";
+	mes "조랴라 털고르기를 할까?";
+	close;
+}
+
+icas_in,119,62,3	script	벨군드 연구실	4_BULLETIN_BOARD2,{
+	npctalk "벨군드 연구실", "", bc_self;
+	end;
+}
+
+icas_in,95,57,6	script	독수리 순찰대#iwp1	4_BULLETIN_BOARD2,{
+	npctalk "[독수리 순찰대]", "", bc_self;
+	end;
+}
+
+icas_in,95,62,6	script	독수리 순찰대#iwp2	4_BULLETIN_BOARD2,{
+	npctalk "[독수리 순찰대]", "", bc_self;
+	end;
+}
+
+icas_in,42,53,8	script	신병 뽀로롱#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "Z.....z....z...", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 깊게 잠들었군. 피곤했나?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,51,53,8	script	신병 호루룽#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	npctalk "z Z z Z z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 자는 것 같다.", bc_self;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,33,68,4	script	???? 고로리#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zzzz..ZZ..zzz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 자는 건가?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,42,68,4	script	이병 토라리#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zz zZz zz zZz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 깊게 잠들었군. 피곤했나?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+icas_in,51,68,4	script	이병 또라롱#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "...z ....Z ...Z ...z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 깊게 잠들었군. 피곤했나?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+	end;
+}
+
+// Exchange npc - Snow Flower Magic Stone
+icas_in,175,63,3	script	호요요#ep19trader	4_EP19_IWIN,{
+	if (ep19_main < 11) {
+		cutin "ep19_iwin02.png",2;
+		mes "[호요요]";
+		mes "이번에 얼음성에 왔다는 모험가가 당신이군효.";
+		mes "이 몸의 본디 이름은 호요요 호요요 호요요(로열 시그니쳐 베르가못).";
+		next;
+		select( "호요요? 호요?" );
+		mes "[호요요]";
+		mes "그래요. 멋진 이름을 지어봤자 인간들 귀에는 호요요로 들리는 모양이군효.";
+		mes "편하게 호요요라 부르세효.";
+		close3;
+	}
+	cutin "ep19_iwin02.png",2;
+	mes "[호요요]";
+	mes "벨군드 님과 함께 요르문간드 님의 마력을 연구 중이랍니다.";
+	mes "벨군드 님께서 마석 원석을 필요로 하실 때가 있는데 모험가님도 필요하면 제가 해드리지효.";
+	next;
+	switch( select( "각종 설화 마석 교환", "설화의 꽃잎 교환", "원래 이름이 호요요야?" ) ) {
+	case 1:
+		mes "[호요요]";
+		mes "설화 마석 원석을 설화 마석으로, 설화 마석을 빛나는 설화 마석으로 교환해 드리죠.";
+		mes "어디에 쓰냐고요? 벨군드 님이 그걸로 뭔가 좋은걸 만들어주겠지효?";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep19_snow_stone" );
+		end;
+	case 2:
+		if (get_reputation_points(3) < 1000) {
+			mes "[호요요]";
+			mes "흐응? 설화의 꽃잎으로 뭔가를 하고 싶은 건가효?";
+			mes "벨군드 님이 최근에 뭔가를 많이 연구를 하고 계시긴 하지효.";
+			next;
+			mes "[호요요]";
+			mes "당신이 얼음성을 위해 조금 더 노력을 해 준다면 좋은 결과가 나오지 않을까효?";
+			mes "호요요요요요~ 호요요요요요요~";
+			close3;
+		}
+		mes "[호요요]";
+		mes "이리 와요 인간 친구~";
+		mes "뭐가 필요한가효?";
+		close2;
+		cutin "",255;
+		if (get_reputation_points(3) == 1000)
+			callshop( "barter_ep19_repu_1" );
+		else
+			callshop( "barter_ep19_repu_2" );
+		end;
+	case 3:
+		mes "[호요요]";
+		mes "이 몸의 본디 이름은 호요요 호요요 호요요(로열 시그니쳐 베르가못).";
+		next;
+		select( "호요요? 호요?" );
+		mes "[호요요]";
+		mes "그래요. 멋진 이름을 지어봤자 인간들 귀에는 호요요로 들리는 모양이군요.";
+		mes "편하게 호요요라 부르세요.";
+		close3;
+	}
+}
+
+-	shop	ep19_basic_supply	-1,611:-1,602:-1,601:-1,23280:-1,23288:-1,645:-1,656:-1,657:-1,501:-1,502:-1,503:-1,504:-1,506:-1,610:-1,713:-1,717:-1,1771:-1
+-	shop	ep19_glacier_melee	-1,600027:150000,630018:150000,500049:150000,500050:150000,530025:150000,620017:150000,520017:150000,590038:150000,590039:150000,510061:150000,510062:150000,700052:150000,560032:150000,540049:150000,610037:150000,570029:150000,580030:150000
+-	shop	ep19_glacier_range	-1,550069:150000,640033:150000,550070:150000,650025:150000,800014:150000,810010:150000,820008:150000,830013:150000,840009:150000
+
+icas_in,180,61,5	script	마람#ep19trader	4_EP18_MARAM,{
+	if (ep19_main < 11) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "여기서 제가 할 일은 하나군요.";
+		mes "여러분께서 사용할 물자를 공수하는 것이요.";
+		mes "아무래도 대륙의 물건들이 편하지 않겠어요?";
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "뭐 필요한 거 있나요?";
+	mes "모험가 분들이 평소에 잘 사용하는 물건을 공수해 왔답니다.";
+	next;
+	switch( select( "도구와 잡화를 본다.", "방어구를 본다.", "무기를 본다.", "소지품을 처분한다.", "이게 무슨 일이야?" ) ) {
+	case 1:
+		mes "[마람]";
+		mes "수량은 넉넉하게 준비해왔으니 필요한 만큼 보세요.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 1 );
+		end;
+	case 2:
+		mes "[마람]";
+		mes "벨군드 님이 제작하신 방어구들이에요.";
+		mes "설화의 마력으로 만든 거라, 설화의 꽃잎과 바꿔드리고 있습니다.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_snow_armor" );	// barter
+		end;
+	case 3:
+		mes "[마람]";
+		mes "제가 기본 재료를 공수하고 벨군드님이 완성한 무기들입니다.";
+		mes "아무래도 기본재료는 들기에 소량의 제니를 받아야겠어요.";
+		next;
+		switch( select( "근접무기와 활을 본다.", "수리검, 총, 지팡이를 본다." ) ) {
+		case 1:
+			mes "[마람]";
+			mes "무기들 성능이 제법 좋답니다.";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_melee", 1 );
+			end;
+		case 2:
+			mes "[마람]";
+			mes "무기들 성능이 제법 좋답니다.";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_range", 1 );
+			end;
+		}
+		end;
+	case 4:
+		mes "[마람]";
+		mes "불필요한 물건이 있으면 제가 대신 매입해 드릴게요.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 2 );
+		end;
+	case 5:
+		mes "[마람]";
+		mes "이 곳에서 제가 할 수 있는 일이 뭔지 생각해 봤는데....";
+		mes "아무래도 전 물류 조달 관련일만 해왔단 말이죠.";
+		next;
+		mes "[마람]";
+		mes "여기는 기존 물자가 부족한 곳이니 생강님과 상의해서 정기적으로 비공적으로 물자 배송을 하기로 했어요.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "겸사 겸사 벨군드 님도 도와드리고 상점도 열어봤지요.";
+		mes "아무래도 유통거리가 있다보니 기본 제니는 받고 있지만요.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "필요한 물자가 부족하지 않도록 늘 채워놓을테니 걱정 말고 하고 싶은 일 하세요!";
+		close3;
+	}
+}
+
+icas_in,142,201,3	script	또르르#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin03.png",2;
+	mes "[또르르]";
+	mes "예전에 말야. 바르문트 님이 자주 놀러오셨거든?";
+	mes "그때 만들어둔 인간 전용 숙소랑 식당이 있어.";
+	next;
+	mes "[또르르]";
+	mes "식당은 왼쪽, 숙소는 오른쪽.";
+	mes "알겠어?";
+	close3;
+}
+
+icas_in,109,242,5	script	규루르#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin04.png",2;
+	mes "[규루르]";
+	mes "요즘 인간들 많이 와서 좋아.";
+	mes "너희들 오기 전에는 시간이 흘러가는지도 몰랐다니까.";
+	mes "레온 님이랑 오렐리 님은 거의 주무시고 계셨고...";
+	next;
+	select( "잠만 잤다고?" );
+	mes "[규루르]";
+	mes "그래도 귀신같이 무슨 일이 생기면 일어나셔.";
+	mes "꿈에서 다 보신대.";
+	mes "신기하지?";
+	close3;
+}
+
+icas_in,251,46,7	script	쏘라랑#ep19in::ep19_227	4_EP19_IWIN,{
+	mes "[쏘라랑]";
+	mes "난 나중에 커서 순찰대가 될 거야!";
+	mes "순찰대 모자? 난 노란색이 좋아. 빨간색은 촌스러워.";
+	npctalk "코리리 : 맞아. 빨간색이 촌스러운 건 맞아.", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,252,50,5	script	코리리#ep19in::ep19_226	4_EP19_IWIN,{
+	mes "[코리리]";
+	mes "난 나중에 커서 순찰대가 될 거야!";
+	mes "순찰대 모자 말야, 난 녹색이 좋아. 녹색 쓸래.";
+	npctalk "쏘라랑 : 노란색이 더 멋있다!", "ep19_227", bc_self;
+	npctalk "코리리 : 녹색이 더 멋있어!", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,248,47,3	script	소리리#ep19in	4_EP19_IWIN,{
+	mes "[소리리]";
+	mes "잠시만 기다리거라, 밥 먹고 놀아 줄...";
+	mes "아니, 어린아이가 아니군. 시간이 있다면 우리 애들과 좀 놀아 주면 어떻겠나?";
+	mes "밖에서 온 인간의 이야기라면 분명 좋아할 거야.";
+	close;
+}
+
+icas_in,241,49,3	script	쪼로루#ep19in	4_EP19_IWIN,{
+	mes "[쪼로루]";
+	mes "밥 먹고 나니까 졸려...";
+	close;
+}
+
+icas_in,236,45,5	script	고랴르#ep19in	4_EP19_IWIN,{
+	mes "[고랴르]";
+	mes "미역 조금 더 먹고 싶다.";
+	close;
+}
+
+icas_in,234,49,3	script	후루루#ep19in	4_EP19_IWIN,{
+	mes "식사하느라 정신이 없다.";
+	close;
+}
+
+icas_in,251,59,7	script	또리라#ep19in	4_EP19_IWIN,{
+	mes "[또리라]";
+	mes "나도 아빠처럼 훌륭한 어른이 될 거야.";
+	close;
+}
+
+icas_in,244,63,1	script	쪼로로#ep19in	4_EP19_IWIN,{
+	mes "[쪼로로]";
+	mes "나는 커서~";
+	mes "조랴라를 도와줄게!";
+	npctalk "조랴라 : 지금도 도와줘도 되는데...", "ep19_219", bc_self;
+	close;
+}
+
+// Storage
+icas_in,81,121,4	script	차아앙고#창고	HIDDEN_NPC,{
+	.@total_storage = 1;	// by default rAthena just open the basic storage (but 3 on kRO)
+
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 차아앙고?", bc_self;
+	mes "이상한 이름을 가진 꽝꽝 언 항아리이다. 쌓여있는 잔돈과 민박 주인의 쪽지가 붙어있다.";
+	mes "창고는^389DD4 500 제니^000000당. 옆에 놔 두면 나중에 가져간당~";
+	mes "깃털 민박 오라랑";
+	next;
+	for ( .@i = 0; .@i < .@total_storage; .@i++ )
+		.@menu$ += (.@i+1) + "번 창고" + ":";
+	.@s = select( .@menu$ ) - 2;
+
+	if (Zeny < 500) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 잔돈이 없어 이용은 못하겠군.", bc_self;
+		end;
+	}
+	Zeny -= 500;
+	if (.@s == -1)	// basic storage
+		openstorage;
+	else	// "premium" storage starting from index 0
+		openstorage2 .@s, STOR_MODE_GET|STOR_MODE_PUT;	// note: opened before close button
+	end;
+}
+
+
+/*
+// unknown npcs (hidden)
+icas_in,42,57,6	duplicate(dummy_npc)	신병 뽀로롱#m_iw	EP19_NPC_IWIN_SN
+icas_in,42,65,6	duplicate(dummy_npc)	이병 토라리#m_iw	EP19_NPC_IWIN_SY
+icas_in,49,65,6	duplicate(dummy_npc)	이병 또라롱#m_iw	EP19_NPC_IWIN_SY
+icas_in,52,57,6	duplicate(dummy_npc)	신병 호루룽#m_iw	EP19_NPC_IWIN_SN
+icas_in,56,60,2	duplicate(dummy_npc)	신입간부 오리료#c_iw	EP19_NPC_IWIN_SR
+icecastle,123,173,4	duplicate(dummy_npc)	조랴라의 정찬#식당	HIDDEN_NPC
+icecastle,177,221,4	duplicate(dummy_npc)	병영#좌	HIDDEN_NPC
+icecastle,194,221,4	duplicate(dummy_npc)	병영#우	HIDDEN_NPC
+icecastle,199,148,4	duplicate(dummy_npc)	얼음의 성#좌	HIDDEN_NPC
+icecastle,213,148,4	duplicate(dummy_npc)	얼음의 성#우	HIDDEN_NPC
+icecastle,243,147,7	duplicate(dummy_npc)	얼음 조각상#1	HIDDEN_NPC
+icecastle,244,213,7	duplicate(dummy_npc)	얼음 조각상#2	HIDDEN_NPC
+*/

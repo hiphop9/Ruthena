@@ -28,77 +28,88 @@
 
 // Cautious Village & Daily Quests :: hi_malaya
 //============================================================
-malaya,266,76,3	script	Rodel the Guard#malaya	570,4,4,{
+malaya,266,76,3	script	경비대원 로델#malaya	570,4,4,{
 	if (MaxWeight - Weight < 1000 || checkweight(1201,1) == 0) {
-		mes "Cannot proceed with the quest. You are carrying too many items. -";
+		mes "퀘스트를 진행할 수 없습니다. 물건을 너무 많이 들고 계시네요. -";
 		close;
 	}
 	if (malaya_hi == 0) {
-		mes "[Rodel the Guard]";
-		mes "Traveling at such confusing times?";
-		mes "Villagers have been feeling more threatened by evil spirits recently.";
-		mes "Villagers are scared and trembling with fear.";
+		mes "[경비대원 로델]";
+		mes "이런 어수선한 시기에 여행인가?";
+		mes "최근 마을내에 사악한 영혼들의 위협이";
+		mes "늘었다네.";
+		mes "주민들은 지금 공포와 두려움에";
+		mes "떨고있지.";
 		next;
-		mes "[Rodel the Guard]";
-		mes "So... the citizens of Port Malaya will feel uncomfortable around you even though there are no hard feelings toward you.";
-		mes "Inns and stops may be closed to outsiders.";
+		mes "[경비대원 로델]";
+		mes "그래서.. 자네한테 악의는 없지만 포트";
+		mes "말라야의 주민들은 자네를 꺼려할걸세.";
+		mes "여관도, 상점도 외부인에게 장사를";
+		mes "하지 않을지도 몰라.";
 		next;
-		mes "[Rodel the Guard]";
-		mes "There is no definite solution to this, but you might want to meet Phong in Mumbaki first.";
-		mes "If the village leader gives his confirmation, other people might be less worried.";
+		mes "[경비대원 로델]";
+		mes "딱히 방법이 있는건 아니네만 일단";
+		mes "뭄바키 퐁을 만나보게.";
+		mes "우리 마을의 영도자가 인정한다면 마을";
+		mes "사람들도 안심하겠지.";
 		next;
-		mes "[Rodel the Guard]";
-		mes "I will mark on the map the location of Phong in Mumbaki.";
-		mes "I welcome your visit though the times are harsh.";
+		mes "[경비대원 로델]";
+		mes "우선 뭄바키 퐁이 계신 곳을 지도에";
+		mes "표시 해주겠네.";
+		mes "이런 시기지만 방문해 준 것은";
+		mes "환영하지.";
 		viewpoint 1, 185, 358, 0, 0x0A82FF;
 		set malaya_hi, 1;
 		setquest 7350;
 		close;
 	} else if (malaya_hi == 1) {
-		mes "[Rodel the Guard]";
-		mes "Meet with Phong in Mumbaki first.";
-		mes "If you are proven to have a pure soul, other villagers will not avoid you.";
-		mes "If you are not sure of the location, I will mark it on your map.";
+		mes "[경비대원 로델]";
+		mes "우선 뭄바키 퐁을 만나보게.";
+		mes "자네가 선한 영혼의 소유자라고 인정";
+		mes "받으면 마을 사람들도 꺼려하지";
+		mes "않을거야.";
+		mes "위치를 모르겠다면 지도에 표시를";
+		mes "해주겠네.";
 		viewpoint 1, 185, 358, 0, 0x0A82FF;
 		close;
 	} else if (malaya_hi >= 20) {
 		if (BaseLevel < 100) {
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "How is the life here?";
 			mes "People aren't so bad are they?";
 			mes "If you were a little more skillful, there might be a job for you. Right now, you are little bit below the standard.";
 			next;
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "If you become stronger,";
 			mes "I was thinking of giving you the extermination mission that's being carried out in the city. What a shame. ";
 			close;
 		}
 		.@playtime = checkquest(7405, PLAYTIME);
 		if (.@playtime == 0) {
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "Whew, thanks to you, I have one less thing to worry about.";
 			mes "I will lose less of my things.";
 			mes "Job well done.";
 			next;
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "You can come back if you want.";
 			mes "You understand what I mean right?";
 			close;
 		} else if (.@playtime == 2) {
 			erasequest 7405;
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "Oh, about Jejeling that you hunted down before.";
 			mes "People traveling in and out of Baryo are happy about it.";
 			mes "If it's not much too much trouble, I'd like to ask for your help one more time.";
 			next;
-			mes "[Rodel the Guard]";
+			mes "[경비대원 로델]";
 			mes "You don't have to do it now, just whenever you are comfortable.";
 			mes "Come and find me when you decide.";
 			close;
 		} else {
 			.@hunting = checkquest(7404, HUNTING);
 			if (.@hunting == -1) {
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				switch(rand(1, 6)) {
 				case 1:
 					mes "Recently, there have been a few that gained recognition for their bravery among the villagers." + $malayaNames$[0] + ", " + $malayaNames$[3] + ", " + $malayaNames$[5] + "... Isn't that amazing?";
@@ -121,38 +132,38 @@ malaya,266,76,3	script	Rodel the Guard#malaya	570,4,4,{
 				}
 				mes "Oh yes, there is a job for you if you are not too busy. Are you interested?";
 				next;
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "We are going to organize an extensive Jejeling hunt this time.";
 				mes "Peddlers going in and out of Baryo are always complaining about Jejelings.";
 				next;
 				if (select("Join the Jejeling hunt.:Refuse.") == 2) {
-					mes "[Rodel the Guard]";
+					mes "[경비대원 로델]";
 					mes "Is that so? I'm sorry to hear that.";
 					mes "Things would be so much simpler if we had a person like you around.";
 					close;
 				}
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "You just have to hunt 20 jejelings each.";
 				mes "It would be a simple task for you.";
 				setquest 7404;
 				close;
 			} else if (.@hunting == 0) {
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "You have to get rid of 20 Jejelings.";
 				mes "20 should be enough to give those Jejelings a good scare.";
 				close;
 			} else if (.@hunting == 1) {
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "Oh, the hunt is over, but you haven't killed all the Jejelings.";
 				mes "Come again if you want another try.";
 				erasequest 7404;
 				close;
 			} else {
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "Oh, I have confirmed you got rid of 20 Jejelings.";
 				mes "Here, this is a reward for people who participated in the Jejeling hunt.";
 				next;
-				mes "[Rodel the Guard]";
+				mes "[경비대원 로델]";
 				mes "I think there will be more Jejeling hunts in the future. Please join us again next time.";
 				if (!VIP_SCRIPT || vip_status(VIP_STATUS_ACTIVE))
 					getitem 6497, 2; // Lesser_Agimat
@@ -168,7 +179,7 @@ malaya,266,76,3	script	Rodel the Guard#malaya	570,4,4,{
 			}
 		}
 	} else {
-		mes "[Rodel the Guard]";
+		mes "[경비대원 로델]";
 		mes "Please understand even if people look at you warily.";
 		mes "The ghost have been haunting the people around here.";
 		close;
@@ -1171,34 +1182,34 @@ malaya,181,353,5	script	Old Man Nardo#malaya	574,{
 	end;
 }
 
-malaya,224,267,3	script	Romel#malaya	573,{
+malaya,224,267,3	script	로멜#malaya	573,{
 	if (malaya_hi < 10) {
-		mes "[Romel]";
+		mes "[로멜]";
 		mes ".........";
 		mes " ";
 		mes "(He evades your gaze and ignores you.)";
 		close;
 	} else if (malaya_hi == 10) {
 		if (checkquest(7357) == 2) {
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "....So cold-hearted.";
 			mes "And here we are, always trembling in anxiety...";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Not even allowed the peace of mind...";
 			close;
 		} else {
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Ahh....";
 			mes "... You..";
 			mes "I'm sorry I ignored you.";
 			mes "But... you must be the one they're talking about...";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Are you the one who fends off the ghosts?";
 			mes "If it's okay with you, can I have one of your belongings or some hair?";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "I want to carry it... Like a charm of sort.";
 			next;
 			mes "-The troubled villagers desire your belongings because you fend off the ghosts. -";
@@ -1218,11 +1229,11 @@ malaya,224,267,3	script	Romel#malaya	573,{
 		close;
 	} else if (malaya_hi == 12) {
 		if (checkquest(7364) != -1) {
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Frankly speaking, it's for the peace of mind.";
 			mes "With it, I could face them with more boldness.";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "I mean, I'm relying on such items,";
 			mes "but I am braver with them.";
 			close;
@@ -1231,16 +1242,16 @@ malaya,224,267,3	script	Romel#malaya	573,{
 			mes "^4d4dffPrepare and give Blue Gemstone and Holy Water. ^000000";
 			close;
 		}
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "...What is it?";
 		next;
 		select ("Hand him the prepared items");
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "Oh... Thank you.";
 		mes "I can feel your spirit.";
 		mes "This will keep me safe.";
 		next;
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "Hey... Could you give some for my daughter as well?";
 		next;
 		mes "- Gave Romel the prepared Holy Water and Blue Gemstone.-";
@@ -1256,12 +1267,12 @@ malaya,224,267,3	script	Romel#malaya	573,{
 		}
 		close;
 	} else if (malaya_hi == 13) {
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "The Holy Artifact is in good hands.";
 		mes "Same with my daughter.";
 		close;
 	} else {
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "Hello there.";
 		switch(rand(1, 6)) {
 		case 1:
@@ -1285,12 +1296,12 @@ malaya,224,267,3	script	Romel#malaya	573,{
 		}
 		next;
 		if (select("Give Spiritual Protection:How are things?") == 2) {
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "I am at peace these days.";
 			close;
 		}
 		if ((checkquest(7374) == -1) || (checkquest(7373) == -1)) {
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "A new Spiritual Protection?";
 			mes "The one you gave me before still works fine.";
 			mes "I'm okay for now.";
@@ -1300,7 +1311,7 @@ malaya,224,267,3	script	Romel#malaya	573,{
 			mes "^4d4dffThere are no Spiritual Protections to give to Romel.^000000";
 			close;
 		}
-		mes "[Romel]";
+		mes "[로멜]";
 		mes "A new Spiritual Protection.";
 		mes "I was thinking this one had worn out... Thanks for coming.";
 		mes "This Spiritual Protection will also protect us.";
@@ -1327,16 +1338,16 @@ malaya,224,267,3	script	Romel#malaya	573,{
 	end;
 }
 
-malaya,223,267,5	script	Talah#malaya	941,{
+malaya,223,267,5	script	탈라#malaya	941,{
 	if (malaya_hi < 10) {
-		mes "[Talah]";
+		mes "[탈라]";
 		mes "..........gasp!";
 		mes " ";
 		mes "(When your eyes met with hers, she ran and hid behind her father.)";
 		close;
 	} else if (malaya_hi == 10) {
 		if (checkquest(7356) == 2) {
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "Talah might be taken away tonight.";
 			mes "Scary kids might come to Talah.";
 			next;
@@ -1344,15 +1355,15 @@ malaya,223,267,5	script	Talah#malaya	941,{
 			mes "Better do something before they take a button from you...";
 			close;
 		} else {
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "....I..umm... that.....";
 			mes ".........oh... Daddy....";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Hey, could you give my daughter a button or some hair of yours?";
 			mes "She has trouble sleeping at night .......";
 			next;
-			mes "[Romel]";
+			mes "[로멜]";
 			mes "Wouldn't she be able to sleep well if she had something from you as a lucky charm?";
 			next;
 			mes "- The troubled villagers desire your belongings because you fend off the ghosts. -";
@@ -1371,7 +1382,7 @@ malaya,223,267,5	script	Talah#malaya	941,{
 		close;
 	} else if (malaya_hi == 12) {
 		if (checkquest(7363) != -1) {
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "I dont know for sure";
 			mes "but I get a warm feel from them.";
 			mes "Daddy's braver now and that makes Talah stronger too.";
@@ -1381,12 +1392,12 @@ malaya,223,267,5	script	Talah#malaya	941,{
 			mes "^4d4dffPrepare and give Blue Gemstone and Holy Water. ^000000";
 			close;
 		}
-		mes "[Talah]";
+		mes "[탈라]";
 		mes ".... Can I say hello?";
 		mes "Hello... there...";
 		next;
 		select("Give the prepared items.");
-		mes "[Talah]";
+		mes "[탈라]";
 		mes "Pretty blue stones...!";
 		mes "Oooooh~ They're beautiful!";
 		mes "Is this stone going to keep Talah safe?";
@@ -1404,16 +1415,16 @@ malaya,223,267,5	script	Talah#malaya	941,{
 		}
 		close;
 	} else if (malaya_hi == 13) {
-		mes "[Talah]";
+		mes "[탈라]";
 		mes "Daddy told me to hold on to the Holy Artifact really tight.";
 		mes "So it keeps away bad ghosts...";
 		close;
 	} else {
-		mes "[Talah]";
+		mes "[탈라]";
 		mes "Hello...";
 		next;
 		if (select("Give Spiritual Protection.:Hi there?") == 2) {
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "...Hey...Thank you.";
 			mes "You're keeping us safe aren't you?";
 			close;
@@ -1423,7 +1434,7 @@ malaya,223,267,5	script	Talah#malaya	941,{
 				mes "^4d4dffThere is no Spiritual Protection to give to Talah.^000000";
 				close;
 			}
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "Is this a new Spiritual Protection?";
 			mes "Thank you.";
 			mes "Talah can sleep well now with the Spiritual Protection.";
@@ -1448,7 +1459,7 @@ malaya,223,267,5	script	Talah#malaya	941,{
 			}
 			close;
 		} else {
-			mes "[Talah]";
+			mes "[탈라]";
 			mes "Umm...";
 			mes "The one you gave before still keeps Talah safe.";
 			mes "I'm okay.";
@@ -1531,35 +1542,36 @@ ma_fild01,174,238,0	duplicate(Black Bamboo#malaya)	Black Bamboo#malaya03	844,4,4
 ma_fild01,180,273,0	duplicate(Black Bamboo#malaya)	Black Bamboo#malaya04	844,4,4
 ma_fild01,179,145,0	duplicate(Black Bamboo#malaya)	Black Bamboo#malaya05	844,4,4
 
-malaya,295,171,3	script	Collection Dealer Woeon	582,{
+malaya,295,171,3	script	수집품 상인 워언	582,{
 	if (MaxWeight - Weight < 1000 || checkweight(1201,1) == 0) {
-		mes "- Cannot proceed with the quest. You are carrying too many items. -";
+		mes "- 퀘스트를 진행할 수 없습니다. 당신은 너무 많은 물건을 들고 있습니다. -";
 		close;
 	}
 	if (malaya_hi < 10) {
-		mes "[Woeon]";
-		mes "Urghh... Urgh... I got a headache...";
-		mes "My headache must have been brought to me by you from out of town!";
-		mes "Go away. Shoo, leave!";
+		mes "[워언]";
+		mes "으... 으.. 머리가 아파..";
+		mes "내 두통은 분명 자네가 외지에서";
+		mes "가져온 것일테지?!";
+		mes "저리가. 훠이 저리가!";
 		close;
 	} else if (malaya_hi == 10) {
 		if (checkquest(7355) == 2) {
-			mes "[Woeon]";
+			mes "[워언]";
 			mes "Now, look here my friend...";
 			mes "This can all be solved by giving me a button.";
 			mes "It doesn't look so expensive either.";
 			close;
 		} else {
-			mes "[Woeon]";
+			mes "[워언]";
 			mes "Aha! You're the one they're all talking about!";
 			mes "I was kinda rude right? Forget about it!";
 			mes "Yes, do forget...";
 			next;
-			mes "[Woeon]";
+			mes "[워언]";
 			mes "If you're in dire need, I could get you a job around here you know..";
 			mes ".... Could you give me some of your things?";
 			next;
-			mes "[Woeon]";
+			mes "[워언]";
 			mes "I heard the rumors about you shooing away the ghosts!";
 			mes "Can't you see my shaking hands from fear of them ghosts?";
 			mes "I'll feel much better if you could just give me a button off your sleeve...";
@@ -1576,19 +1588,19 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 			close;
 		}
 	} else if (malaya_hi == 11) {
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Sigh... Life is so tough these days.";
 		mes "Why did ghosts come along to bother me so.";
 		mes "I wish I had a lucky charm or something...";
 		next;
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Why won't you give me one of your belongings so I could keep as a charm?";
 		mes "Come on, one sock could save a man's life, you know.";
 		mes "Cold hearted son of a...";
 		close;
 	} else if (malaya_hi == 12) {
 		if (checkquest(7362) != -1) {
-			mes "[Woeon]";
+			mes "[워언]";
 			mes "Hmm. Look at my hands.";
 			mes "Less shaky, eh?";
 			mes "Isn't that so?";
@@ -1598,21 +1610,21 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 			mes "^4d4dffPrepare and give Blue Gemstone and Holy Water. ^000000";
 			close;
 		}
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Humph! What do you want?";
 		next;
 		select ("Give the prepared items.");
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Oh dear... Forget about the thing back there.";
 		mes "You see, I was haunted by another ghost after you left...";
 		mes "No hard feelings..";
 		next;
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Is this the source of your spirit?";
 		mes "It feels kinda cool!";
 		mes "Perhaps this will fend off some of them...";
 		next;
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Anyway, thanks a lot.";
 		mes "I'll call for you first when a job opens up for you.";
 		next;
@@ -1629,13 +1641,13 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 		}
 		close;
 	} else if (malaya_hi == 13) {
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Now... Let's get back to business.";
 		mes "Thanks to you, I don't see any of those darn ghosts.";
 		mes "Ha ha ha ha ha";
 		close;
 	} else {
-		mes "[Woeon]";
+		mes "[워언]";
 		mes "Oh, hi there!";
 		next;
 		if (select("Give Spiritual Protection.:The Dealer and his Collection") == 1) {
@@ -1644,7 +1656,7 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 					mes "^4d4dffThere is no Spiritual Protection to give to Woeon.^000000";
 					close;
 				}
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "Phew~ A new Spiritual Protection?";
 				mes "Is it an officially made protective charm? Imelda does some fine work.";
 				mes "I'm thankful to you as well, of course.";
@@ -1668,7 +1680,7 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 				}
 				close;
 			} else {
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "Spiritual Protection?";
 				mes "Mine still works fine.";
 				mes "Very effective indeed.";
@@ -1676,36 +1688,36 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 			}
 		} else {
 			if (BaseLevel < 100) {
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "Yes, I collect various by-products from monsters.";
 				mes "In fact, I'm collecting Jejellopys here...";
 				next;
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "It's too much for you.";
 				mes "Things can get pretty ugly around here, you see.";
 				mes "I'll let you have at it once you're stronger, my friend!";
 				close;
 			}
 			if ((checkquest(7392, PLAYTIME) == 0) || (checkquest(7392, PLAYTIME) == 1)) {
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "Oh, the Jejellopy collecting?";
 				mes "I have enough for today.";
 				mes "Come back again tomorrow.";
 				close;
 			} else if (checkquest(7392, PLAYTIME) == 2) {
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "Oh, yes yes.";
 				mes "You're going to collect Jejellopy today as well?";
 				mes "I know it's a difficult job... But you do it so well.";
 				erasequest 7392;
 				next;
 				if (select("I'm too busy today.:Leave it to me!") == 1) {
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "Is that so? So it is then.";
 					mes "Come stop by when you need some work.";
 					close;
 				}
-				mes "[Woeon]";
+				mes "[워언]";
 				mes "As usual, bring me 30 Jejellopys, please.";
 				mes "You can get them from the Jejelings.";
 				setquest 7391;
@@ -1713,17 +1725,17 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 			} else {
 				if ((checkquest(7391) == 0) || (checkquest(7391) == 1)) {
 					if (countitem(6498) < 30) {
-						mes "[Woeon]";
+						mes "[워언]";
 						mes "Hmm? I don't think you have enough.";
 						mes "I asked you for 30 Jejellopys. Business is business I'm afraid.";
 						close;
 					}
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "Oh, you have the requested numbers?";
 					mes "I'll take them from here.";
 					mes "You have no need for them, right?";
 					next;
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "So I have all the Jejellopys...";
 					mes "Come back again!";
 					delitem 6498, countitem(6498); //Jejellopy
@@ -1739,25 +1751,25 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 						$malayaNames$[1] = strcharinfo(0);
 					close;
 				} else {
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "As you can see, I'm a Collection Dealer.";
 					mes "I trade all kinds of monster or animal by-products.";
 					next;
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "They're used as materials for manufactured goods.";
 					mes "Of course, the most preferred in Port Malaya is from the monster Jejeling..";
 					next;
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "Jejellopy can be acquired from the Jejeling.";
 					mes "Can you get me 30 Jejellopys?";
 					next;
 					if (select("Yeah, sure.:Nope.") == 2) {
-						mes "[Woeon]";
+						mes "[워언]";
 						mes "Is that so. Such a shame.";
 						mes "Come back when you need some work.";
 						close;
 					}
-					mes "[Woeon]";
+					mes "[워언]";
 					mes "Good, I trust you can do it.";
 					mes "Remember, 30 Jejellopys.";
 					setquest 7391;
@@ -1769,40 +1781,40 @@ malaya,295,171,3	script	Collection Dealer Woeon	582,{
 	end;
 }
 
-malaya,119,217,3	script	Blacksmith Pandoi	538,{
+malaya,119,217,3	script	견습 대장장이 판도이	538,{
 	if (MaxWeight - Weight < 1000 || checkweight(1201,1) == 0) {
-		mes "- Cannot proceed with the quest. You are carrying too many items. -";
+		mes "- 퀘스트를 진행할 수 없습니다. 당신은 너무 많은 물건을 들고 있습니다. -";
 		close;
 	}
 	if (malaya_hi < 10) {
-		mes "[Pandoi]";
-		mes "...Gasp!";
-		mes "Go... Go away!";
+		mes "[판도이]";
+		mes "...히이익";
+		mes "저.. 저리가!";
 		close;
 	} else if (malaya_hi == 10) {
 		if (checkquest(7354) == 2) {
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Please..";
 			mes "Couldn't you help a guy out here, just for the sake of it?";
 			mes "Do you really think ignoring me is the best option?!";
 			next;
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Now look here.";
 			mes "Please give me just a peek..";
 			mes "It's just a button...";
 			close;
 		} else {
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Hello there!";
 			mes "I've heard of your prestige.";
 			mes "I was wondering if I could receive something to prove that I've met you in person...";
 			next;
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Oh... You're surprised because I'm suddenly so nice to you.";
 			mes "I heard the news you fought off the ghosts.";
 			mes "That's brilliant!";
 			next;
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "With an item of your spirit, it would scare away the ghosts, wouldn't it?";
 			mes "Please, be generous, I beg you...";
 			next;
@@ -1818,19 +1830,19 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 			close;
 		}
 	} else if (malaya_hi == 11) {
-		mes "[Pandoi]";
+		mes "[판도이]";
 		mes "Phew... Life is so tough these days.";
 		mes "Why did ghosts come along to bother me so.";
 		mes "I wish I had a lucky charm or something...";
 		next;
-		mes "[Pandoi]";
+		mes "[판도이]";
 		mes "Please...";
 		mes "Couldn't you help a guy out here, just for the sake of it?";
 		mes "Do you really think ignoring me is the best option?!";
 		close;
 	} else if (malaya_hi == 12) {
 		if (checkquest(7361) != -1) {
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Now that I have confidence, the only thing left for me to do is charge to the hospital or field for material!";
 			mes "Bu... But, I'm too scared...";
 			close;
@@ -1839,12 +1851,12 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 			mes "^4d4dffPrepare and give Blue Gemstone and Holy Water. ^000000";
 			close;
 		}
-		mes "[Pandoi]";
+		mes "[판도이]";
 		mes "Wh, what, you've finally decided to help me?!";
 		mes "You're going to give Pandoi a gift of peace?!";
 		next;
 		select ("Give the prepared items.");
-		mes "[Pandoi]";
+		mes "[판도이]";
 		mes "Great! I knew you'd come back!";
 		mes "Yes... Now that I have some of your spirit, I can rest well at night.";
 		next;
@@ -1861,12 +1873,12 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 		}
 		close;
 	} else if (malaya_hi == 13) {
-		mes "[Pandoi]";
+		mes "[판도이]";
 		mes "Sil... Silver. I need silver, please.";
 		mes "I thought I could get the silver once the ghosts are gone, but I can't...";
 		close;
 	} else {
-		mes "[Pandoi]";
+		mes "[판도이]";
 		switch(rand(1, 6)) {
 		case 1:
 			mes "You know. " + $malayaNames$[1] + ". You are my hero for becoming stronger. I look up to you!";
@@ -1891,7 +1903,7 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 		switch (select("Give Spiritual Protection.:Silver Blade.:Silver Cross")) {
 		case 1:
 			if ((checkquest(7374) == -1) || (checkquest(7370) == -1)) {
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "I appreciate you taking care of the expiration dates of my Spiritual Protection.";
 				mes "I think mine's good for now. ";
 				mes "When it wear's out, I'll ask you for another one!";
@@ -1901,7 +1913,7 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 				mes "^4d4dffThere is no Spiritual Protection to give to Pandoi.^000000";
 				close;
 			}
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Good. A new Spiritual Protection.";
 			mes "It's always good to know that you won't see those black things again!";
 			next;
@@ -1925,12 +1937,12 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 			close;
 		case 2:
 			if (BaseLevel < 100) {
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "Hmm... To make a Silver Blade, you need silver.";
 				mes "I could melt Silver Bracelets to get silver.";
 				mes "Silver Bracelets can be acquired at the hospital.";
 				next;
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "However, I don't think you can make it right now. I'm sorry, it's just too much for you!";
 				mes "If you go in there like that... You'll never make it out alive!";
 				close;
@@ -1938,26 +1950,26 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 			.@hunting = checkquest(7393, HUNTING);
 			if (.@hunting == 2) {
 				if (countitem(6508) < 10) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Where are the Silver Bracelets?";
 					mes "I know you're invincible...";
 					mes "But I must have a Silver Bracelet to make a Silver Blade.";
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "10 Silver Bracelets!";
 					mes "Regardless of how many of them you hinder, I need 10 Silver Bracelets!!";
 					mes "Now it is in your hands!";
 					close;
 				}
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "Respect, all the way!";
 				mes "You fought them off and brought the Silver Bracelets as well.";
 				next;
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "From this day on, I shall try to smelt a new silver weapon..!!";
 				mes "I will pound and beat at them until I am left with a fine silver blade in my hands...!!";
 				next;
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "It's not much, but here's something for the troubles you went through to get the Silver Bracelets.";
 				mes "If I fail... I'll ask of you the task again!";
 				delitem 6508, 10; //Silver_Bracelet
@@ -1972,90 +1984,90 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 					$malayaNames$[1] = strcharinfo(0);
 				close;
 			} else if (.@hunting == 0 || .@hunting == 1) {
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "The village hospital holds the most hideous things inside.";
 				mes "I'm not sure what exactly... Whatever's in there, I'm not willing to go near it...";
 				next;
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "Please get rid of those rumored monsters and get those Silver Bracelets.";
 				mes "You're the only one I can trust!";
 				close;
 			} else {
 				.@playtime = checkquest(7394, PLAYTIME);
 				if (.@playtime == 0 || .@playtime == 1) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "I still have some silver to smelt.";
 					mes "I'll request more if I fail again.";
 					close;
 				} else if (.@playtime == 2) {
 					erasequest 7394;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Oh... what am I to do?";
 					mes "I've wasted the precious materials you brought back for me...";
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Maybe I'm not supposed to be a blacksmith!";
 					mes "I'm good with crafting silver, though!";
 					next;
 					if (select("I'll get you the materials. Cheer up.:Give up. It's a lot easier when you do.") == 2) {
-						mes "[Pandoi]";
+						mes "[판도이]";
 						mes "... You're right...";
 						mes "I'll never be able to make a Silver Blade...";
 						mes "Give up... I thought you'd cheer me up.. I'm a little disappointed in you.";
 						close;
 					}
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "I knew I could count on you!";
 					mes "I knew I could count on you!";
 					mes "10 Silver Bracelets, please.";
 					setquest 7393;
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Pandoi will always smile at you~";
 					mes "*Grin*";
 					close;
 				} else {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Silver Blade!";
 					mes "It's great. Wonderful! The holy blade to carve all evil with one stroke...!";
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "I want to be a noted blacksmith by making a Silver Blade.";
 					mes "However, I cannot get the materials.";
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "I heard that they wore silver bracelets as recognition at the hospital.";
 					mes "But when I got there, it was not the hospital that I used to know.";
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Could you slay the horrible creepers and get me the Silver Bracelets?";
 					next;
 					if (select("Indeed!:No. Way.") == 2) {
-						mes "[Pandoi]";
+						mes "[판도이]";
 						mes "... You're right...";
 						mes "I'll never make a Silver Blade...";
 						mes "Such plain expression of disgust. You know what? I hate the idea now.";
 						close;
 					}
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "I knew it!";
 					mes "Teach those things at the hospital some manners...";
 					mes "And bring back 10 Silver Bracelets, please.";
 					setquest 7393;
 					next;
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Pandoi will always smile at you~";
 					mes "*Grin*";
 					close;
 				}
 			}
 		case 3:
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "You need Silver Crosses?";
 			mes "Pandoi will make them for you!";
 			mes "Still, I cannot create something out of the blue, so I'll be needing some silver.";
 			next;
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "I could make one Silver Cross for ^4d4dff2 Silver Bracelets^000000 the monsters hold there...";
 			mes "If you have Silver Bracelets, I could make Silver Crosses with them.";
 			next;
@@ -2065,48 +2077,48 @@ malaya,119,217,3	script	Blacksmith Pandoi	538,{
 			case 2:
 				if (!.@amount) set .@amount,6;
 				if (countitem(6508) < (.@amount * 2)) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "You need at least " + (.@amount * 2) + " Silver Bracelets to make " + .@amount + " Silver " + ((.@amount == 1) ? "Cross" : "Crosses") + ".";
 					close;
 				}
 				set .@time,5;
 				break;
 			case 3:
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "How many Silver Crosses do you need?";
 				mes "I can make up to 50 at a time.";
 				next;
 				input .@amount;
 				if (.@amount == 0) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "Don't need Silver Crosses?";
 					mes "Well, I can take a rest then. Ha ha ha ha~";
 					close;
 				} else if (.@amount > 50) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "A maximum of 50 at a time!";
 					close;
 				}
 				if (countitem(6508) < (2 * .@amount)) {
-					mes "[Pandoi]";
+					mes "[판도이]";
 					mes "To make " + .@amount + " Silver " + ((.@amount == 1) ? "Cross" : "Crosses") + ", I need at least " + (2 * .@amount) + " Silver Bracelets.";
 					close;
 				}
 				set .@time,15;
 				break;
 			case 4:
-				mes "[Pandoi]";
+				mes "[판도이]";
 				mes "I'll be here if you need me!";
 				close;
 			}
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "It'll take just a second.";
 			mes "Pandoi can do it in a jiffy!";
 			close2;
 			progressbar "0xffff00", .@time;
 			delitem 6508, .@amount * 2; //Silver_Bracelet
 			getitem 6502, .@amount; // Silver_Cross
-			mes "[Pandoi]";
+			mes "[판도이]";
 			mes "Look at this!";
 			mes "Very nice indeed.";
 			mes "I should've been a craftsman, not a blacksmith!";
@@ -2625,13 +2637,13 @@ OnTouch:
 		delitem 6506, 1; // Memorial_Boquet
 		erasequest 7398;
 		setquest 7399;
-		close3;
+		close;
 	} else if (malaya_diwata == 5) {
 		cutin "malaya_diwata02", 2;
 		mes "[Diwata]";
 		mes "I promise I'll be a good little girl if those hillbillies leave me alone.";
 		mes "If they bother me again, however, I won't be.";
-		close3;
+		close;
 	} else {
 		if (checkquest(7402) == -1) {
 			if (checkquest(7403) == -1) {
@@ -2650,7 +2662,7 @@ OnTouch:
 					mes "The flowers you bring makes me calm down.";
 					mes "....";
 					mes ".. It's not because I miss people or I like the flowers. Don't take it the wrong way.";
-					close3;
+					close;
 				}
 				cutin "malaya_diwata01", 2;
 				mes "[Diwata]";
@@ -2658,7 +2670,7 @@ OnTouch:
 				mes "What? Oh, it's you.";
 				mes "Those hillbillies came back again!";
 				mes "I'm going to kill them!";
-				close3;
+				close;
 			}
 			cutin "malaya_diwata02", 2;
 			mes "[Diwata]";
@@ -2669,7 +2681,7 @@ OnTouch:
 			mes "The flowers you bring makes me calm down.";
 			mes "....";
 			mes ".. It's not because I miss people or I like the flowers. Don't take it the wrong way.";
-			close3;
+			close;
 		}
 		cutin "malaya_diwata01", 2;
 		mes "[Diwata]";
@@ -2718,7 +2730,7 @@ OnTouch:
 		delitem 6506, 1; // Memorial_Boquet
 		setquest 7403;
 		erasequest 7402;
-		close3;
+		close;
 	}
 	cutin "", 255;
 	end;
@@ -3841,7 +3853,7 @@ ma_fild01,158,243,6	script	Tribe Blacksmith#malaya	582,{
 
 // Secret in the Woods :: malaya_buwaya
 //============================================================
-malaya,305,281,3	script	Guard#buwaya	570,7,7,{
+malaya,305,281,3	script	경비대원#buwaya	570,7,7,{
 	if (malaya_hi < 10) {
 		mes "- From the wary looks on the guard's face, it is obvious he is at alert at the sight of you. He won't intimidate you but seems he won't even deal with you either. -";
 		next;
@@ -3901,9 +3913,9 @@ OnTouch:
 	}
 	end;
 }
-malaya,276,288,5	script	Port Malaya Villager::buwaya_A	582,{
+malaya,276,288,5	script	포트 말라야 주민::buwaya_A	582,{
 	if (malaya_hi < 20) {
-		mes "- Look at you warily while whispering to each other. -";
+		mes "- 당신을 무척 경계하며 자기들끼리 수군거리고 있다. -";
 		close;
 	} else if (malaya_buwaya == 1) {
 		emotion ET_SURPRISE, getnpcid(0, "buwaya_A");
@@ -4001,8 +4013,8 @@ malaya,276,288,5	script	Port Malaya Villager::buwaya_A	582,{
 		close;
 	}
 }
-malaya,278,288,3	duplicate(buwaya_A)	Port Malaya Villager::buwaya_B	583
-malaya,276,286,7	duplicate(buwaya_A)	Port Malaya Villager::buwaya_C	582
+malaya,278,288,3	duplicate(buwaya_A)	포트 말라야 주민::buwaya_B	583
+malaya,276,286,7	duplicate(buwaya_A)	포트 말라야 주민::buwaya_C	582
 
 ma_in01,47,101,3	script	Totoy#buwaya	577,7,7,{
 	if ((malaya_hi < 20) || (malaya_buwaya < 2)) {
@@ -4314,90 +4326,90 @@ ma_in01,44,105,3	script	Drawer#buwaya	844,{
 	end;
 }
 
-malaya,290,152,5	script	Master of Hunting#buwaya	578,{
+malaya,290,152,5	script	사냥의 달인#buwaya	578,{
 	if ((malaya_hi < 20) || (malaya_buwaya < 5)) {
-		mes "[Master of Hunting]";
-		mes "Oh! Ho! Ho!";
-		mes "I am the Master of Hunting! I'm not afraid of anything with just one exception! I'm afraid of outsiders...";
+		mes "[사냥의 달인]";
+		mes "오호! 호! 홋!";
+		mes "나는 사냥의 달인! 용맹한 나는 무서운게 없지만 딱하나! 외부인만은 무서워, 우.........";
 		close;
 	}
 	if (malaya_buwaya == 5) {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Yo! Ho! Ho!";
 		mes "I went all the way to Rune-Midgarts Kingdom to defeat the Angry Minorous.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "And I succeeded in killing Muka, the one with the voice of a demon that disturbs the peace of the world.";
 		mes "Wow! He was really tough. I'm starting to sweat just thinking of him.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Yo! You look like you have a few battle stories yourself. Have you ever seen a Minorous? Ha ha ha!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "So you came here to learn all about my excellent hunting skills? Or to ask me to publish an essay on Master of Hunting? Ho!";
 		next;
 		if (select("About Totoys monster:Interrupt.") == 2) {
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Oh? Hey! Where are you going?!";
 			close;
 		}
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "You say someone saw the monster?";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "There are many monsters in and out of Port Malaya. What is so special about this one?";
 		next;
 		select("About a monster with two heads");
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Ho! A monster with two heads, you say? Are you kidding? Where on earth is there a monster with two heads?!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "The kid must have been scared by a Condor or something.";
 		mes "There's a saying that someone surprised to see a Permeter, will also be surprised to see a peach tree. Ha ha!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "You shouldn't lie to an adult. I understand you want the Master of Huntings attention. Ha ha!";
 		next;
 		if (select("I will prove it.:Suspicious of Totoy.") == 2) {
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Kids tell stories for their own reasons. I'm sure Totoy is the same.";
 			set malaya_buwaya,6;
 			close;
 		}
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Oh! Really? Bring proof if you really think the kid is telling the truth.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Every living thing leaves some kind of trace behind. You also leave behind traces and scents wherever you go. Especially in private places, I mean. He he!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Try collecting 10 Animal Samples from where the kid saw the monster. I will look for traces of that monster from the samples.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes (Sex == SEX_MALE) ? "It won't be pleasant but any brave man could easily do it, don't you agree?" : "I don't want the hands of a pretty girl to smell bad but I could care less with someone like you. Ha ha!";
 		set malaya_buwaya,7;
 		erasequest 2273;
 		setquest 2274;
 		close;
 	} else if (malaya_buwaya == 6) {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Oh, you're back!";
 		next;
 		if (select("Let's see if we have a monster in it!:I don't think there is a monster.") == 2) {
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "It was a kid's joke. Ha ha.";
 			close;
 		}
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Oh! Really? Bring proof if you really think the kid is telling the truth.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Every living thing leaves some kind of trace behind. You also leave behind traces and scents wherever you go. Especially in private places, I mean. He he!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Try collecting 10 Animal Samples from where the kid saw the monster. I will look for traces of that monster from the samples.";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes (Sex == SEX_MALE) ? "It won't be pleasant but any brave man could easily do it, don't you agree?" : "I don't want the hands of a pretty girl to smell bad but I could care less with someone like you. Ha ha!";
 		set malaya_buwaya,7;
 		erasequest 2273;
@@ -4405,11 +4417,11 @@ malaya,290,152,5	script	Master of Hunting#buwaya	578,{
 		close;
 	} else if (malaya_buwaya == 7) {
 		if (countitem(6519) < 10) {
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Bring me back samples if you want to prove there is a monster with two heads.";
 			close;
 		}
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Argh! That's so foul.";
 		mes "You've really brought back the samples.";
 		mes "Ho! Leave it there and come back after washing your hands. Even god won't smile down at you with that stench.";
@@ -4419,7 +4431,7 @@ malaya,290,152,5	script	Master of Hunting#buwaya	578,{
 		setquest 2275;
 		close;
 	} else if (malaya_buwaya == 8) {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Ho! Shall I?";
 		next;
 		mes "- Rummaging, fumbling. -";
@@ -4431,28 +4443,28 @@ malaya,290,152,5	script	Master of Hunting#buwaya	578,{
 		mes "- Wriggling, wiggling. -";
 		mes "- Sway, swag. -";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Ho! This is!!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Wow! Ho! Ho! Ho! Awesome!!!!!!";
 		next;
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "You! Come here and feel this!";
 		set malaya_buwaya,9;
 		enablenpc "#buwaya_soil";
 		close;
 	} else if (malaya_buwaya == 9) {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Don't just stand there. Touch the sample!";
 		enablenpc "#buwaya_soil";
 		close;
 	} else if (malaya_buwaya == 10) {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Hurry and tell the Guard Leader that Buwaya is active again. Hurry! You'll find the Guard Leader at the north of the village.";
 		close;
 	} else {
-		mes "[Master of Hunting]";
+		mes "[사냥의 달인]";
 		mes "Snooze...";
 		close;
 	}
@@ -4473,7 +4485,7 @@ malaya,291,152,3	script	#buwaya_soil	557,{
 			mes "[" + strcharinfo(0) + "]";
 			mes "I don't see anything.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "It can't be! Look closer!";
 		} else {
 			mes "- Felt something pointy with the end of your fingers. -";
@@ -4482,35 +4494,35 @@ malaya,291,152,3	script	#buwaya_soil	557,{
 			mes "Ouch!";
 			mes "What is this?";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Ho! This is huge! And so dense that it can easily scratch steel!";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "This is ^3131FFBuwaya^000000's tooth!";
 			mes "How could this be!";
 			next;
 			select("Buwaya?");
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Ah! Yes! Stop holding it up. It stinks. Go wash your hands.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Hmm. The monster the kid saw must be Buwaya. No doubt about it.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "I've heard that the wife of the neighbor of my grandfather's uncle on my mom's side was also killed by Buwaya.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "They say no living thing is left after Buwaya passes by.";
 			mes "Totoy is one lucky kid. Wow!";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Buwaya was inactive for a long time. Wonder if it was hibernating? Hmm.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Now that I know that a monster like that is out there, I should be cautious, too.";
 			mes "Must tell the villagers not to go too deep into the woods.";
 			next;
-			mes "[Master of Hunting]";
+			mes "[사냥의 달인]";
 			mes "Please go and tell the Guard Leader that Buwaya is active again.";
 			mes "I will contact other hunters in the meantime and think of a plan to kill Buwaya.";
 			set malaya_buwaya,10;
@@ -4570,7 +4582,7 @@ ma_fild02,205,85,3	duplicate(Unknown Trace#buwaya)	Unknown Trace#buwaya_5	557
 ma_fild02,300,98,3	duplicate(Unknown Trace#buwaya)	Unknown Trace#buwaya_6	557
 ma_fild02,100,275,3	duplicate(Unknown Trace#buwaya)	Unknown Trace#buwaya_7	557
 
-malaya,290,340,3	script	Guard Leader#buwaya	571,{
+malaya,290,340,3	script	경비대장#buwaya	571,{
 	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
 		mes "- Wait!! -";
 		mes "- You have too many items on you. -";
@@ -4580,14 +4592,14 @@ malaya,290,340,3	script	Guard Leader#buwaya	571,{
 		close;
 	}
 	if (malaya_hi < 20) {
-		mes "- Look at you warily while whispering to each other. -";
+		mes "- 당신을 무척 경계하며  노려보고 있다. -";
 		close;
 	}
 	if (malaya_buwaya < 10) {
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "We are busy as hell because of Bangungots servants attacking the hospital.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "We are doing our best in securing the safety of our village so please enjoy your stay in Port Malaya.";
 		next;
 	}
@@ -4595,56 +4607,56 @@ malaya,290,340,3	script	Guard Leader#buwaya	571,{
 		if (select("Tell him about Buwaya.:Done with conversation.") == 2) {
 			close;
 		}
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "Buwaya? The merciless creature is back?";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "That's bad news. We are already short-handed by assigning everyone to fight off Bangungot.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "And villagers need to go to the woods to collect fruits and vegetables.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "Hmm... will you be able to help Port Malaya?";
 		next;
 		if (select("Leave it to me!:I'm pretty busy myself.") == 2) {
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Really? That's no good. All the lives of the villagers will be at stake if we don't do something. How can a youth like you be so heartless. Are all outsiders like you? Hmph! Can't trust young people these days. Hmph.";
 			close;
 		}
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "I knew I could count on you.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "Good. I will trust you.";
 		mes "I need to know where Buwaya will likely appear in order to secure villagers living area.";
 		mes "Guess Buwayas nest will be the best bet.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "^3131FFShoot a smoke bomb^000000 once you reach the area.";
 		mes "Then we will run to where the smoke bomb was shot.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "Then take care and good luck.";
 		set malaya_buwaya,11;
 		erasequest 2276;
 		setquest 2277;
 	} else if (malaya_buwaya == 11) {
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "^3131FFShoot a smoke bomb^000000 once you reach the area.";
 		mes "Then we will run to where the smoke bomb was shot.";
 	} else if ((malaya_buwaya == 12) || (malaya_buwaya == 13)) {
 		mes "[" + strcharinfo(0) + "]";
 		mes "Let's first bring Ed to Totoy.";
 	} else if (malaya_buwaya == 14) {
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "The Guard Leader gave you the location of Buwaya's cave.";
 		mes "This can't be happening.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "I'm way out of men to assign to the Buwaya situation but well have to do something with what we got.";
 		next;
-		mes "[Guard Leader]";
+		mes "[경비대장]";
 		mes "Here, this is a symbol of our gratitude.";
 		mes "If you would like to help with Buwaya again, please look for me.";
 		mes "Hope you have a great journey.";
@@ -4654,55 +4666,55 @@ malaya,290,340,3	script	Guard Leader#buwaya	571,{
 	} else {
 		set .@hunting, checkquest(2281,HUNTING);
 		if (.@hunting == -1) {
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Hear Buwaya appeared from the depth of the Forest.";
 			mes "As everyone knows, all our manpower is dispatched to handle Bangungots servants attacking the hospital recently.";
 			next;
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "That is why we have no choice but to ask an outsider to help eliminate Buwaya.";
 			mes "They say Buwaya is a very strong and ugly monster with two heads.";
 			mes "Will you help us defeat Buwaya?";
 			next;
 			if (select("Of course.:Nope.") == 2) {
-				mes "[Guard Leader]";
+				mes "[경비대장]";
 				mes "Buwaya is known to be a very dangerous monster.";
 				mes "There is no shame in rejecting this request.";
 				close;
 			}
 			if (BaseLevel < 130) {
-				mes "[Guard Leader]";
+				mes "[경비대장]";
 				mes "This mission will be a dangerous one.";
 				mes "If you want to help get rid of Buwaya, you must be prepared.";
 				mes "Come back once you reach LV 130.";
 				close;
 			}
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "According to the legend, Buwaya kidnaps people and puts them in the sack on its back and then eats them later.";
 			next;
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Keep this in mind and be cautious at all times.";
 			mes "I recommend asking trustful colleagues for help.";
 			setquest 2281;
 		} else if (.@hunting == 0 || .@hunting == 1) {
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "How is it going with the Buwaya situation?";
 			next;
 			if (select("I give up.:Still fighting.") == 2) {
-				mes "[Guard Leader]";
+				mes "[경비대장]";
 				mes "Keep this in mind and be cautious at all times.";
 				mes "I recommend asking trustful colleagues for help.";
 				close;
 			}
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Buwaya is known to be a very dangerous monster.";
 			mes "There is no shame in rejecting this request.";
 			erasequest 2281;
 		} else if (.@hunting == 2) {
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Can't believe you really got rid of Buwaya!";
 			mes "You aren't just any ordinary youth, aren't you? People of Port Malaya can now sleep at night.";
 			next;
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "Good work.";
 			erasequest 2281;
 			if (!VIP_SCRIPT || vip_status(VIP_STATUS_ACTIVE))
@@ -4711,7 +4723,7 @@ malaya,290,340,3	script	Guard Leader#buwaya	571,{
 				getitem 6497,5; //Lesser_Agimat
 			getexp 0,600000;
 		} else {
-			mes "[Guard Leader]";
+			mes "[경비대장]";
 			mes "I will not stand down until all of Port Malaya, including Baryo Mahiwaga, is safe from Buwaya. Promise to take care of yourself.";
 			erasequest 2281;
 		}
@@ -4778,13 +4790,13 @@ ma_fild02,312,259,3	script	Dog#buwaya	81,{
 		mes "- You take the smoke bomb out of your inventory and shoot towards the sky. -";
 		next;
 		mes "^FF0000- Shoook-^000000";
-		enablenpc "Guard#buwayacave";
+		enablenpc "경비대원#buwayacave";
 		specialeffect2 EF_MVP;
 		next;
 		mes "[Guard]";
 		mes "Job well done!";
 		mes "So Buwaya lives in remote place like this. I will make sure this information goes to the Guard Leader!";
-		disablenpc "Guard#buwayacave";
+		disablenpc "경비대원#buwayacave";
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "Should I return Ed to Totoy first and then go see the Guard Leader?";
@@ -4807,61 +4819,62 @@ OnInit:
 	end;
 }
 
-ma_fild02,308,262,3	script	Guard#buwayacave	570,{
+ma_fild02,308,262,3	script	경비대원#buwayacave	570,{
 	end;
 OnInit:
-	disablenpc "Guard#buwayacave";
+	disablenpc "경비대원#buwayacave";
 	end;
 }
 
 // Bakonawa Extermination :: malaya_bakonawa
 //============================================================
-malaya,280,331,4	script	Singing Man#bako1	578,{
+malaya,280,331,4	script	노래하는 남자#bako1	578,{
 	if (malaya_bakona1 < 5) {
-		mes "[Singing Man]";
-		mes "Story of dragon that lives at a lake~";
-		mes "Story of an old lady";
-		mes "that became a dragon long ago~";
+		mes "[노래하는 남자]";
+		mes "호수에 사는 용의 이야기~";
+		mes "아득한 옛날 용이 되어버린";
+		mes "어느 노파의 이야기~";
 		next;
-		mes "[Singing Man]";
-		mes "Waiting for the son that left for a foreign land,";
-		mes "my son will return";
-		mes "when that moon sets for the 90th time";
+		mes "[노래하는 남자]";
+		mes "객지로 떠난 아들을 기다리며,";
+		mes "저 달이 아흔 번 지고 나면";
+		mes "내 아들이 돌아온다오~";
 		next;
-		mes "[Singing Man]";
-		mes "The moon sets for the 89th,";
-		mes "The moon sets for the 90th,";
-		mes "The moon sets for the 191st...";
+		mes "[노래하는 남자]";
+		mes "달이여든 아홉 번,";
+		mes "달이 아흔 번,";
+		mes "달이 백 아흔 한 번...";
 		next;
-		mes "[Singing Man]";
-		mes "That moon has taken my son away~";
-		mes "That horrible thing";
-		mes "has swallowed my son,";
-		mes "and I will punish that moon~";
+		mes "[노래하는 남자]";
+		mes "저 달이 내 아들을 빼앗았다오~";
+		mes "저 흉한 것이 내 아들을";
+		mes "집어 삼켰으니,";
+		mes "내가 저 달을 벌하려오~";
 		next;
-		mes "[Singing Man]";
-		mes "The day the furious moon hides itself from sight,";
-		mes "the whole world will be flooded with rain";
-		mes "with all the villages and people facing death under water~";
+		mes "[노래하는 남자]";
+		mes "달이 노여워 모습을 감춘 날";
+		mes "온 천지에 폭우가 몰아치고";
+		mes "마을과 사람이 물 아래서 죽음을";
+		mes "맞았네~";
 		next;
-		mes "[Singing Man]";
-		mes "The old lady's curse made the moon furious~";
-		mes "Get rid of the old lady to calm the moon~";
-		mes "If only the old lady wasn't here, If only the old lady wasn't here...";
+		mes "[노래하는 남자]";
+		mes "노파의 저주로 달이  노했네~";
+		mes "노파를 쫓아내서 달이 달래야 하겠네~";
+		mes "노파만 없으면, 노파만 없으면...";
 		next;
-		mes "[Singing Man]";
-		mes "I hear rumors~";
-		mes "The old lady threw herself into the lake~";
-		mes "the old lady, now turned into a dragon, will swallow the moon";
-		mes "and soon swallow the village too~";
+		mes "[노래하는 남자]";
+		mes "소문이 들린다오~";
+		mes "노파가 호수에 몸을 던졌다오";
+		mes "용이 된 노파가 달을 삼키고,";
+		mes "머지 않아 마을을 삼킬 거라오~";
 		close;
 	} else {
-		mes "[Singing Man]";
+		mes "[노래하는 남자]";
 		mes "You say the legend is all a lie?";
 		mes "You mean my ancestors are all liars";
 		mes "and swindlers?";
 		next;
-		mes "[Singing Man]";
+		mes "[노래하는 남자]";
 		mes "This village is built on an old legend";
 		mes "and history.";
 		mes "They are not the kind of people that will be shaken by";
@@ -4870,42 +4883,43 @@ malaya,280,331,4	script	Singing Man#bako1	578,{
 	}
 }
 
-malaya,275,333,5	script	Singing Woman#bako1	579,{
+malaya,275,333,5	script	노래하는 여자#bako1	579,{
 	if (malaya_bakona1 < 5) {
-		mes "[Singing Woman]";
-		mes "Bakonawa that live at a lake,";
-		mes "story of an old lady that became a dragon.";
+		mes "[노래하는 여자]";
+		mes "호수에 사는 버코너워,";
+		mes "용이 된 노파의 이야기.";
 		next;
-		mes "[Singing Woman]";
-		mes "The son that was suppose to return after the moon sets for the 90th time";
-		mes "never did come back even after the moon had set for a few hundred times~";
-		mes "The moon has swallowed the old lady's son~";
+		mes "[노래하는 여자]";
+		mes "달이 아흔 번 지면 돌아 온다던 아들은";
+		mes "달이 수백 번을 져도 영영 오지";
+		mes "않았다오~";
+		mes "달이 노파의 아들을 집어 삼켰다오~";
 		next;
-		mes "[Singing Woman]";
-		mes "The moon, the moon, you shall receive the old lady's curse~";
-		mes "The whole village was immersed in death";
-		mes "with rain and floods sent by the furious moon~";
+		mes "[노래하는 여자]";
+		mes "달아, 달아, 노파의 저주를 받으렴~";
+		mes "분노한 달이 뿌리는 비와 홍수로";
+		mes "온 마을이 죽음에 잠겼다오~";
 		next;
-		mes "[Singing Woman]";
-		mes "The moon, the moon, be still and be calm,";
-		mes "for the old lady is gone and she is no more~";
-		mes "The old lady has drowned in the lake~";
-		mes "She will transform into Bakonawa and come back...";
+		mes "[노래하는 여자]";
+		mes "달아, 달아, 노파를 내쫓았으니,";
+		mes "분노를 거두어라~";
+		mes "노파가 호수에 빠져 죽었단다~";
+		mes "버코너워가 되어 너를 삼키고,";
 		next;
-		mes "[Singing Woman]";
-		mes "...to swallow you and";
-		mes "punish the village soon~";
-		mes "The day the moon dies";
-		mes "is the day the village dies too~";
+		mes "[노래하는 여자]";
+		mes "마을을 벌하러 이제 곧";
+		mes "찾아 올 거란다~";
+		mes "달이 죽는 날이 오면";
+		mes "마을도 함께 죽는단다~";
 		close;
 	} else {
-		mes "[Singing Woman]";
+		mes "[노래하는 여자]";
 		mes "The legends are all a lie?";
 		mes "Why do you say such nonsense?";
 		mes "Is there nothing";
 		mes "that is important for you to protect?";
 		next;
-		mes "[Singing Woman]";
+		mes "[노래하는 여자]";
 		mes "Poor Bakonawa...";
 		mes "I would be happy";
 		mes "if she took a big bite out of someone like you!";
@@ -4913,19 +4927,19 @@ malaya,275,333,5	script	Singing Woman#bako1	579,{
 	}
 }
 
-malaya,290,329,4	script	Frightened Boy#bako1	577,{
+malaya,290,329,4	script	겁에 질린 소년#bako1	577,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona1 < 5) {
-		mes "[Frightened Boy]";
+		mes "[겁에 질린 소년]";
 		mes "The vicious monster Bakonawa will soon come";
 		mes "to swallow the moon and take vengeance upon the village.";
 		mes "I'm scared, please help...";
 		close;
 	} else {
-		mes "[Frightened Boy]";
+		mes "[겁에 질린 소년]";
 		mes "The legend of Bakonawa is all a lie?";
 		mes "So that means Bakonawa doesn't exist?";
 		mes "I'm going to play with my friends at the lake later.";
@@ -4934,41 +4948,41 @@ malaya,290,329,4	script	Frightened Boy#bako1	577,{
 	}
 }
 
-malaya,264,338,4	script	Frightened Maiden#bako1	576,{
+malaya,264,338,4	script	겁에 질린 처자#bako1	576,{
 	if (malaya_hi < 20) {
-		mes "- She seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona1 < 5) {
-		mes "[Frightened Maiden]";
+		mes "[겁에 질린 처자]";
 		mes "It is said that Bakonawa hates loud noises.";
 		mes "Pound the pot if you want to live!";
 		next;
 		switch(select("Hates loud noises?:What is Bakonawa?")) {
 		case 1:
-			mes "[Frightened Maiden]";
+			mes "[겁에 질린 처자]";
 			mes "You already heard that the old lady";
 			mes "died and became Bakonawa, right?";
 			next;
-			mes "[Frightened Maiden]";
+			mes "[겁에 질린 처자]";
 			mes "The legend has it that";
 			mes "the old lady had very keen hearing";
 			mes "because she was always focusing on";
 			mes "the returning of her traveling son.";
 			next;
-			mes "[Frightened Maiden]";
+			mes "[겁에 질린 처자]";
 			mes "So naturally, Bakonawa also";
 			mes "has very keen hearing.";
 			mes "The reason why everyone is banging";
 			mes "pots and pans is because of this.";
 			close;
 		case 2:
-			mes "[Frightened Maiden]";
+			mes "[겁에 질린 처자]";
 			mes "It is a terrible monster that lives at a lake.";
 			mes "We are all trembling with fear";
 			mes "because we don't know when it might attack the village.";
 			next;
-			mes "[Frightened Maiden]";
+			mes "[겁에 질린 처자]";
 			mes "Some say that it is more obsessed with swallowing the moon";
 			mes "than attacking the village.";
 			mes "if that's the case, I wish it would just swallow the moon";
@@ -4976,7 +4990,7 @@ malaya,264,338,4	script	Frightened Maiden#bako1	576,{
 			close;
 		}
 	} else {
-		mes "[Frightened Maiden]";
+		mes "[겁에 질린 처자]";
 		mes "The villagers hate you now.";
 		mes "You've been saying that legend of Bakonawa";
 		mes "is a lie and they are saying you are more of a monster";
@@ -4985,30 +4999,30 @@ malaya,264,338,4	script	Frightened Maiden#bako1	576,{
 	}
 }
 
-malaya,272,339,5	script	Old Fortune Teller#bako1	575,{
+malaya,272,339,5	script	늙은 점술사#bako1	575,{
 	if (malaya_hi < 20) {
-		mes "- Old Fortune Teller seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona1 < 5) {
-		mes "[Old Fortune Teller]";
+		mes "[늙은 점술사]";
 		mes "You must not hate Bakonawa.";
 		mes "The hate against it is only feeding its rage";
 		mes "to grow bigger.";
 		next;
-		mes "[Old Fortune Teller]";
+		mes "[늙은 점술사]";
 		mes "To calm the dead lady's anger,";
 		mes "we annually hold a ceremony and prepare food.";
 		mes "But there seems to be no way to calm the";
 		mes "ever growing anger of the old lady.";
 		next;
-		mes "[Old Fortune Teller]";
+		mes "[늙은 점술사]";
 		mes "The day is nearing. I can sense it.";
 		mes "Bakonawa will soon swallow the moon";
 		mes "and come to punish the village.";
 		close;
 	} else {
-		mes "[Old Fortune Teller]";
+		mes "[늙은 점술사]";
 		mes "How can you say the legend is a lie!";
 		mes "Because of you, the fury of Bakonawa";
 		mes "grew even larger!";
@@ -5018,29 +5032,29 @@ malaya,272,339,5	script	Old Fortune Teller#bako1	575,{
 	}
 }
 
-malaya,285,332,4	script	Old Legend Teller#bako1	574,{
+malaya,285,332,4	script	전설에 밝은 노인#bako1	574,{
 	if (checkweight(1301,3) == 0) {
-		mes "You cannot start the conversation. You are carrying too many items. -";
+		mes "대화를 시작할 수 없습니다. 당신은 너무 많은 물건을 들고 있습니다. -";
 		close;
 	}
 	if (BaseLevel < 120) {
-		mes "[Old Legend Teller]";
-		mes "There is something that needs to be done";
-		mes "but you look too fragile";
-		mes "to give me a hand.";
+		mes "[전설에 밝은 노인]";
+		mes "부탁할 일이 있는데";
+		mes "자네는 날 돕기에는 너무";
+		mes "부실해 보이는군.";
 		next;
-		mes "[Old Legend Teller]";
-		mes "Come back when";
-		mes "your strength grows strong enough";
-		mes "to match Incubus.";
+		mes "[전설에 밝은 노인]";
+		mes "인큐버스와 어깨를 나란히 할 만큼";
+		mes "충분히 강해진 뒤에";
+		mes "다시 찾아와 주게.";
 		close;
 	}
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona1 == 0) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "The old lady has come back";
 		mes "to life as Bakonawa.";
 		mes "Soon she will come to take vengeance on the village.";
@@ -5049,13 +5063,13 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 		next;
 		switch(select("Calm Bakonawa?:Further destruction?")) {
 		case 1:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "The old lady faced an unjust death";
 			mes "because of villagers' selfishness.";
 			mes "She was a caring mother who loved her";
 			mes "son dearly.";
 			next;
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "If we track the whereabouts of her son and hold a ritual";
 			mes "with her son's belongings,";
 			mes "her restless soul will be calmed";
@@ -5067,19 +5081,19 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 			mes "[Villagers]";
 			mes "You cannot stop the monster that way!";
 			next;
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "Of course, it will not be easy to track down the whereabouts of a person";
 			mes "who has been gone for a hundred years.";
 			mes "...";
 			next;
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "Still, don't you think";
 			mes "it is worth a try?";
 			mes "Please help us and save us from our misery.";
 			next;
 			switch(select("It is no use.:I'll help.")) {
 			case 1:
-				mes "[Old Legend Teller]";
+				mes "[전설에 밝은 노인]";
 				mes "Yes, you are also right.";
 				mes "You are up against not a human,";
 				mes "but a monster.";
@@ -5087,18 +5101,18 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 				mes "good heart.";
 				close;
 			case 2:
-				mes "[Old Legend Teller]";
+				mes "[전설에 밝은 노인]";
 				mes "Will you do it?";
 				mes "According to the legend,";
 				mes "the old lady's son was limping";
 				mes "and was a traveling merchant that sold wooden dolls.";
 				next;
-				mes "[Old Legend Teller]";
+				mes "[전설에 밝은 노인]";
 				mes "There is a ^FF0000Slate Piece^000000 he left.";
 				mes "But the piece is small and damaged,";
 				mes "its hard to identify it.";
 				next;
-				mes "[Old Legend Teller]";
+				mes "[전설에 밝은 노인]";
 				mes "First, bring it to me.";
 				mes "Down along this path";
 				mes "you will meet my granddaughter near the port.";
@@ -5108,26 +5122,26 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 				close;
 			}
 		case 2:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "The grudge against the people of";
 			mes "Bakonawa- I mean, the dead old lady.";
 			mes "The moon and this village...";
 			mes "She will try to destroy it.";
 			next;
 			select("Take vengeance? After all these years?");
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "For some time, she has";
 			mes "blamed the moon and";
 			mes "resented the villagers.";
 			mes "The feeling grew larger as the time passed.";
 			next;
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "Why do you think she became such a monster?";
 			mes "What do you think went through her head";
 			mes "for years and years?";
 			mes "Anger and vengeance.";
 			next;
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "Unforgettable grudge";
 			mes "that she was abandoned.";
 			mes "against the moon and the village.";
@@ -5135,19 +5149,19 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 			close;
 		}
 	} else if (malaya_bakona1 == 1) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "Please bring the ^FF0000Slate Piece^000000.";
 		mes "Down along this path";
 		mes "you will meet my granddaughter near the port.";
 		mes "Get the Slate Piece from there.";
 		close;
 	} else if (malaya_bakona1 == 2) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "Good, you have the Slate Piece.";
 		mes "Hold on to it and don't lose it.";
 		mes "It will be of helpful in tracking down the legend.";
 		next;
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "I heard there is a man that lives by himself";
 		mes "at the end of northwestern part of Forest Field.";
 		mes "I heard someone saw a wooden doll there.";
@@ -5157,11 +5171,11 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 		next;
 		switch(select("Go there yourself!:Your explanation is too vague.:On my way!")) {
 		case 1:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "You twisted youth!";
 			close;
 		case 2:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "You have a point, but";
 			mes "this is the best I can do for now.";
 			mes "The place is at the end of northwestern part of the forest.";
@@ -5169,7 +5183,7 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 			mes "you will see a person.";
 			break;
 		case 3:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "You have a good heart young man!";
 			mes "The place is at the end of northwestern part of the forest.";
 			mes "After you pass the bridge and travel west,";
@@ -5182,34 +5196,34 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 		set malaya_bakona1,3;
 		close;
 	} else if (malaya_bakona1 == 3) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "The place is at the end of northwestern part of the forest.";
 		mes "After you pass the bridge and travel west,";
 		mes "you will see a person.";
 		mes "Good luck to you... for our sake...";
 		close;
 	} else if (malaya_bakona1 < 6) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "The track of the old lady's son";
 		mes "is connected all the way to";
 		mes "Baryo Mahiwaga?";
 		mes "There is a chance he wasn't a merchant...";
 		mes "I'm really curious about who he was...";
 		next;
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "Why did you come back here";
 		mes "instead of going straight to";
 		mes "Baryo Mahiwaga?";
 		close;
 	} else if (malaya_bakona1 == 6) {
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "Is that really true?";
 		mes "Bakonawa turning into an old lady";
 		mes "and fabricating the legend...";
 		mes "It seems all the villagers up until now";
 		mes "have been manipulated by that terrible monster.";
 		next;
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "There is no reason to hesitate then.";
 		mes "You must go into Bakonawa's lair";
 		mes "before it attacks first.";
@@ -5217,13 +5231,13 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 		next;
 		switch(select("Well...:Of course!")) {
 		case 1:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "The atmosphere was really good";
 			mes "but suddenly it's all ruined.";
 			mes "I didn't expect you to be so shy...";
 			close;
 		case 2:
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "I will speak to";
 			mes "the village chief for you";
 			mes "so that you can enter the Bakonawa Lake.";
@@ -5240,14 +5254,14 @@ malaya,285,332,4	script	Old Legend Teller#bako1	574,{
 		close;
 	} else if (malaya_bakona1 == 7) {
 		if (malaya_bakona2 < 15) {
-			mes "[Old Legend Teller]";
+			mes "[전설에 밝은 노인]";
 			mes "If you don't mind,";
 			mes "could you lend a hand to the Village Chief?";
 			mes "Nobody cares for each other anymore";
 			mes "because of Bakonawa...";
 			next;
 		}
-		mes "[Old Legend Teller]";
+		mes "[전설에 밝은 노인]";
 		mes "The legend that";
 		mes "we believed for a hundred years,";
 		mes "all lies....";
@@ -5552,20 +5566,20 @@ L_Record:
 	return;
 }
 
-malaya,304,100,4	script	Old Man's Granddaughter	576,{
+malaya,304,100,4	script	노인의 손녀	576,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona1 == 0) {
-		mes "[Old Man's Granddaughter]";
+		mes "[노인의 손녀]";
 		mes "Grandpa believes";
 		mes "Bakonawa can";
 		mes "turn good.";
 		mes "Do you think it's possible?";
 		close;
 	} else if (malaya_bakona1 == 1) {
-		mes "[Old Man's Granddaughter]";
+		mes "[노인의 손녀]";
 		mes "^FF0000Slate Piece^000000?";
 		mes "Why would you need something";
 		mes "that is barely recognizable?";
@@ -5579,7 +5593,7 @@ malaya,304,100,4	script	Old Man's Granddaughter	576,{
 		set malaya_bakona1,2;
 		close;
 	} else if (malaya_bakona1 == 2) {
-		mes "[Old Man's Granddaughter]";
+		mes "[노인의 손녀]";
 		mes "Please take this Slate Piece";
 		mes "and deliver it to my grandpa.";
 		next;
@@ -5588,19 +5602,19 @@ malaya,304,100,4	script	Old Man's Granddaughter	576,{
 		mes "now that I have the Slate Piece.";
 		close;
 	} else {
-		mes "[Old Man's Granddaughter]";
+		mes "[노인의 손녀]";
 		mes "Because of Bakonawa,";
 		mes "the village is always unpeaceful.";
 		close;
 	}
 }
 
-malaya,286,269,4	script	Angry Man#bako2	578,{
+malaya,286,269,4	script	격분한 남자#bako2	578,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
-	mes "[Angry Man]";
+	mes "[격분한 남자]";
 	mes "Calm Bakonawa?";
 	mes "Do you know how many people have been";
 	mes "sacrificed by Bakonawa?";
@@ -5608,12 +5622,12 @@ malaya,286,269,4	script	Angry Man#bako2	578,{
 	close;
 }
 
-malaya,276,269,5	script	Calm Woman#bako2	579,{
+malaya,276,269,5	script	침착한 여자#bako2	579,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
-	mes "[Calm Little Girl]";
+	mes "[침착한 여자]";
 	mes "It is too dangerous to fight against";
 	mes "Bakonawa. There is a chance";
 	mes "it will get more angry and put children and";
@@ -5621,63 +5635,63 @@ malaya,276,269,5	script	Calm Woman#bako2	579,{
 	close;
 }
 
-malaya,276,262,4	script	Angry Boy#bako2	577,{
+malaya,276,262,4	script	격분한 소년#bako2	577,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
-	mes "[Angry Boy]";
+	mes "[격분한 소년]";
 	mes "I lost my father and my friend";
 	mes "to that Bakonawa.";
 	mes "I will surely revenge them!";
 	close;
 }
 
-malaya,283,265,4	script	Village Chief#bako2	580,{
+malaya,283,265,4	script	촌장#bako2	580,{
 	if (checkweight(1301,3) == 0) {
-		mes "You cannot start the conversation. You are carrying too many items. -";
+		mes "대화를 시작할 수 없습니다. 물건을 너무 많이 들고 계시네요. -";
 		close;
 	}
 	if (BaseLevel < 120) {
-		mes "[Village Chief]";
-		mes "I'm desperate for a helping hand";
-		mes "but you look";
-		mes "too weak and fragile.";
+		mes "[촌장]";
+		mes "도움이 절실한 상황이지만";
+		mes "당신은 너무";
+		mes "부실해 보이는군요.";
 		next;
-		mes "[Village Chief]";
-		mes "Please come back when";
-		mes "you grow strong enough";
-		mes "to match Incubus.";
+		mes "[촌장]";
+		mes "인큐버스와 어깨를 나란히 할 만큼";
+		mes "충분히 강해진 뒤에";
+		mes "다시 찾아와 주십시오.";
 		close;
 	}
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 == 0) {
 		if (malaya_bakona1 <= 5) {
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "I'm don't know what's the right decision.";
 			mes "To fight against Bakonawa,";
 			mes "or calm it by offering it a sacrificial gift.";
 		} else {
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "The legend was all a lie?";
 			mes "It seems all the villagers up until now";
 			mes "were manipulated by that vile monster.";
 			next;
-			mes "[Village Chief]";
+			mes "[촌장]";
 		}
 		mes "Recently, there have been more people that have";
 		mes "been harmed by Bakonawa.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "There are some missing villagers";
 		mes "but I can't find out if";
 		mes "they are simply missing or if they have been";
 		mes "killed by Bakonawa.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "I heard that the belongings of the missing people";
 		mes "are being found at Baryo Mahiwaga Field.";
 		mes "Please go there to find ^0000FFLost Belongings^000000";
@@ -5685,19 +5699,19 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		mes "the missing people";
 		mes "in whatever amount they want.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "^0000FFLost Belongings^000000";
 		mes "are said to be carried by";
 		mes "^FF0000Tiyanak^000000 that roams Baryo Mahiwaga.";
 		next;
 		switch(select("Do it yourself.:I'm on my way.")) {
 		case 1:
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "You give me a lot to think about.";
 			mes "Leave the village at once.";
 			close;
 		case 2:
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "Let's start then. First,";
 			mes "retrieve two ^FF0000Lost Belongings^000000 from Tiyanak";
 			mes "and take them to ^0000FFMissing Person's Father^000000";
@@ -5707,32 +5721,32 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			close;
 		}
 	} else if (malaya_bakona2 == 1) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "From Tiyanak that roams Baryo Mahiwaga Field,";
 		mes "retrieve two ^FF0000Lost Belongings^000000";
 		mes "and deliver them to ^0000FFMissing Person's Father^000000";
 		mes "for me.";
 		close;
 	} else if (malaya_bakona2 == 2) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "Retrieve Seven ^FF0000Lost Belongings^000000 from Tiyanak";
 		mes "and deliver them to ^0000FFMissing Person's Friend^000000";
 		mes "for me.";
 		close;
 	} else if (malaya_bakona2 == 3) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "Retrieve three ^FF0000Lost Belongings^000000 from Tiyanak";
 		mes "and deliver them to ^0000FFMissing Person's Son^000000";
 		mes "for me.";
 		close;
 	} else if (malaya_bakona2 == 4) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "Retrieve five ^FF0000Lost Belongings^000000 from Tiyanak";
 		mes "and deliver them to ^0000FFMissing Person's Mother^000000";
 		mes "for me.";
 		close;
 	} else if (malaya_bakona2 == 5) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "So it's clear that all the missing people";
 		mes "have been killed by Bakonawa.";
 		next;
@@ -5740,11 +5754,11 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		mes "Kill Bakonawa!";
 		mes "Let's get rid of the monster ourselves!";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "It seems we would no longer be able to";
 		mes "hold rituals to calm Bakonawa.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "Young Fortune Teller is looking for your help";
 		mes "saying that the energy of the moon seems strange.";
 		erasequest 1184;
@@ -5756,30 +5770,30 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			getitem 12700,5; //Insideout_Shirt
 		close;
 	} else if (malaya_bakona2 == 6) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "Young Fortune Teller is looking for your help";
 		mes "saying that the energy of the moon seems strange.";
 		close;
 	} else if (malaya_bakona2 == 7) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "I know that terrible things happened";
 		mes "long time ago when the moon disappeared.";
 		mes "I hope the moon recovers its strength";
 		mes "with your devoted effort.";
 		close;
 	} else if (malaya_bakona2 == 8) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "I will tell the";
 		mes "Young Fortune Teller to help you.";
 		mes "But before that, there is";
 		mes "something you must do immediately.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "We never know when Bakonawa will attack";
 		mes "the village so we must set traps near the village";
 		mes "entrance and near the cave.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "I would be grateful if you help us.";
 		mes "I have dispatched workers";
 		mes "near where traps will be set up,";
@@ -5787,16 +5801,16 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		next;
 		switch(select("Sounds like too much work.:Sure thing.")) {
 		case 1:
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "This operation means life and death to us";
 			mes "yet you refuse it easily as if";
 			mes "it was some kind of a chore...";
 			next;
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "What a hero!";
 			close;
 		case 2:
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "The first trap will be set up at";
 			mes "Baryo Mahiwaga Field";
 			mes "near the village entrance. ^0000FFGruffy Worker^000000";
@@ -5807,14 +5821,14 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			close;
 		}
 	} else if (malaya_bakona2 == 9) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "The first trap will be set up at";
 		mes "Baryo Mahiwaga Field";
 		mes "near the village entrance. ^0000FFGruffy Worker^000000";
 		mes "will be waiting for you. He will be very helpful.";
 		close;
 	} else if (malaya_bakona2 == 10) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "The second trap will be set up";
 		mes "near a place where it connects from";
 		mes "Baryo Mahiwaga Field to Bakonawa Lake.";
@@ -5822,33 +5836,33 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		mes "will be waiting for you. He will be very helpful.";
 		close;
 	} else if (malaya_bakona2 == 11) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "The third trap will be set up";
 		mes "near Bakonawa Lake Entrance.";
 		mes "^0000FFCowardly Worker^000000";
 		mes "will be waiting for you. He will be very helpful.";
 		close;
 	} else if (malaya_bakona2 == 12) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "The fourth trap will be set up";
 		mes "near the entrance of Bakonawa Lake as well.";
 		mes "^0000FFGloomy Worker^000000 will be waiting for you.";
 		mes "He will be very helpful.";
 		close;
 	} else if (malaya_bakona2 == 13) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "The fifth trap will be set up";
 		mes "near the entrance of Bakonawa Lake too.";
 		mes "^0000FFSentimental Worker^000000";
 		mes "will be waiting for you. He will be very helpful.";
 		close;
 	} else if (malaya_bakona2 == 14) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "It looks like the traps are all set up.";
 		mes "We just finished our village meeting on";
 		mes "what to do about Bakonawa.";
 		next;
-		mes "[Village Chief]";
+		mes "[촌장]";
 		mes "We have concluded that";
 		mes "we will fight against Bakonawa.";
 		mes "Please help us by";
@@ -5862,13 +5876,13 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			getitem 6497,5; //Lesser_Agimat
 		close;
 	} else if (malaya_bakona2 == 15) {
-		mes "[Village Chief]";
+		mes "[촌장]";
 		if (malaya_bakona1 < 7) {
 			mes "Would you visit ^0000FFOld Legend Teller^000000";
 			mes "when you have a chance?";
 			mes "I think you would be able to help him.";
 			next;
-			mes "[Village Chief]";
+			mes "[촌장]";
 			mes "Thank you.";
 		}
 		mes "Please think of the countless victims";
@@ -5878,13 +5892,13 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 	}
 }
 
-malaya,269,267,5	script	Missing Person's Father	582,{
+malaya,269,267,5	script	실종자의 아버지	582,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 == 0) {
-		mes "[Missing Person's Father]";
+		mes "[실종자의 아버지]";
 		mes "Please find our";
 		mes "child.";
 		mes "Bakonawa would have not harmed our child.";
@@ -5892,13 +5906,13 @@ malaya,269,267,5	script	Missing Person's Father	582,{
 		close;
 	} else if (malaya_bakona2 == 1) {
 		if (countitem(6520) < 2) {
-			mes "[Missing Person's Father]";
+			mes "[실종자의 아버지]";
 			mes "You are looking for two of his ^FF0000Lost Belongings^000000?";
 			mes "Are you confident that";
 			mes "he already died?";
 			close;
 		}
-		mes "[Missing Person's Father]";
+		mes "[실종자의 아버지]";
 		mes "This... is our child's ^FF0000Lost Belongings^000000";
 		mes "for sure.";
 		mes "The monster got to him after all....";
@@ -5914,7 +5928,7 @@ malaya,269,267,5	script	Missing Person's Father	582,{
 		set malaya_bakona2,2;
 		close;
 	} else if (malaya_bakona2 == 2) {
-		mes "[Missing Person's Father]";
+		mes "[실종자의 아버지]";
 		mes "My baby... my poor baby...";
 		next;
 		mes "The man is unable to continue as he tries to hold back his tears.";
@@ -5923,37 +5937,37 @@ malaya,269,267,5	script	Missing Person's Father	582,{
 		mes "and deliver them to ^0000FFMissing Person's Friend^000000.";
 		close;
 	} else {
-		mes "[Missing Person's Father]";
+		mes "[실종자의 아버지]";
 		mes "My baby... my poor baby...";
 		close;
 	}
 }
 
-malaya,265,274,5	script	Missing Person's Friend	577,{
+malaya,265,274,5	script	실종자의 친구	577,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 < 2) {
-		mes "[Missing Person's Friend]";
+		mes "[실종자의 친구]";
 		mes "Please find";
 		mes "my friend.";
 		mes "We were playing ball together";
 		mes "and suddenly my friend disappeared.";
 		next;
-		mes "[Missing Person's Friend]";
+		mes "[실종자의 친구]";
 		mes "I'm sure he is alive and well";
 		mes "somewhere.";
 		close;
 	} else if (malaya_bakona2 == 2) {
 		if (countitem(6520) < 7) {
-			mes "[Missing Person's Friend]";
+			mes "[실종자의 친구]";
 			mes "You are looking for seven ^FF0000Lost Belongings^000000";
 			mes "of my friend?";
 			mes "My friend is not dead!";
 			close;
 		}
-		mes "[Missing Person's Friend]";
+		mes "[실종자의 친구]";
 		mes "These are marbles and toys I gave him...";
 		mes "These are clearly ^FF0000Lost Belongings^000000";
 		mes "of my friend... Where is my friend?";
@@ -5965,7 +5979,7 @@ malaya,265,274,5	script	Missing Person's Friend	577,{
 		set malaya_bakona2,3;
 		close;
 	} else {
-		mes "[Missing Person's Friend]";
+		mes "[실종자의 친구]";
 		mes "Bring back my friend!";
 		mes "Bring back my friend now!";
 		mes "My friend is alive,";
@@ -5984,26 +5998,26 @@ L_Quest:
 	return;
 }
 
-malaya,270,278,4	script	Missing Person's Son	578,{
+malaya,270,278,4	script	실종자의 아들	578,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 < 3) {
-		mes "[Missing Person's Son]";
+		mes "[실종자의 아들]";
 		mes "Bakonawa has hurt my father?";
 		mes "I can't believe this.";
 		mes "Please find my father!";
 		close;
 	} else if (malaya_bakona2 == 3) {
 		if (countitem(6520) < 3) {
-			mes "[Missing Person's Son]";
+			mes "[실종자의 아들]";
 			mes "You are looking for three ^FF0000Lost Belongings^000000";
 			mes "of my father? Why lost belongings and not my father?";
 			mes "No, that can't be it. He is alive somewhere!";
 			close;
 		}
-		mes "[Missing Person's Son]";
+		mes "[실종자의 아들]";
 		mes "These are clearly his clothes and shoes...";
 		mes "These are ^FF0000Lost Belongings^000000 of my father.";
 		mes "Oh dear lord... father!";
@@ -6014,7 +6028,7 @@ malaya,270,278,4	script	Missing Person's Son	578,{
 		set malaya_bakona2,4;
 		close;
 	} else {
-		mes "[Missing Person's Son]";
+		mes "[실종자의 아들]";
 		mes "Why did such a thing happen....";
 		if (malaya_bakona2 == 4)
 			callsub L_Quest;
@@ -6030,31 +6044,31 @@ L_Quest:
 	return;
 }
 
-malaya,265,284,4	script	Missing Person's Mother	579,{
+malaya,265,284,4	script	실종자의 어머니	579,{
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 < 4) {
-		mes "[Missing Person's Mother]";
+		mes "[실종자의 어머니]";
 		mes "Please find my child.";
 		mes "I sent her out to do a chore";
 		mes "and she still isn't back.";
 		close;
 	} else if (malaya_bakona2 == 4) {
 		if (countitem(6520) < 5) {
-			mes "[Missing Person's Mother]";
+			mes "[실종자의 어머니]";
 			mes "You are looking for five ^FF0000Lost Belongings^000000 of my child?";
 			mes "What does this mean?";
 			mes "Are you saying my child is dead?";
 			close;
 		}
-		mes "[Missing Person's Mother]";
+		mes "[실종자의 어머니]";
 		mes "This is my child's hair comb.";
 		mes "Why do you have five ^FF0000Lost Belongings^000000 of my child?";
 		mes "Why...? She's... dead?";
 		next;
-		mes "[Missing Person's Mother]";
+		mes "[실종자의 어머니]";
 		mes "No wait... I think I hear her voice.";
 		mes "She's going to be home soon. I should go home now.";
 		mes "I should prepare a dinner for her. She must be starving.";
@@ -6069,7 +6083,7 @@ malaya,265,284,4	script	Missing Person's Mother	579,{
 		set malaya_bakona2,5;
 		close;
 	} else {
-		mes "[Missing Person's Mother]";
+		mes "[실종자의 어머니]";
 		mes "Ha ha ha... I can hear my child's voice,";
 		mes "just listen closely.";
 		mes "Can't you hear her calling her mother?";
@@ -6090,7 +6104,7 @@ malaya,289,364,4	script	Young Fortune Teller	583,{
 		close;
 	}
 	if (malaya_hi < 20) {
-		mes "- He seems cautious of you. -";
+		mes "- 당신을 경계하고 있다. -";
 		close;
 	}
 	if (malaya_bakona2 < 6) {
@@ -7987,80 +8001,81 @@ OnTimer30000:
 -	duplicate(Tent#ma)	Tent9#ma	-1
 -	duplicate(Tent#ma)	Tent10#ma	-1
 
-malaya,114,183,3	script	Bent Old Lady#ma	575,{
+malaya,114,183,3	script	꼬부랑 할머니#ma	575,{
 	if (malaya_bang == 16) {
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am, excuse me, but can I ask you a question?";
+		mes "저 할머니 실레지만 뭣 좀 물어봐도";
+		mes "될까요?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
-		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am?";
-		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am?";
+		mes "저 할머니?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
-		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am!!!!!!!!!";
-		next;
-		mes "[Bent Old Lady]";
-		mes "Who? What?";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but can I ask you something?";
+		mes "할머니?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "What? I can't hear you.";
-		mes "Speak up!";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍홍 홍홍홍.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "할머니!!!!!!!!!";
+		next;
+		mes "[꼬부랑 할머니]";
+		mes "응?누구야?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "저 실례지만 질문할게 좀 있은데요.";
+		next;
+		mes "[꼬부랑 할머니]";
+		mes "응?뭐라고 안 들려.";
+		mes "크게 말해!";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "I! Have! Something! To! Ask! You!";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Oh~Yes dear~";
 		mes "I'll tell you everything I know, dear~";
 		next;
 		mes "["+strcharinfo(0)+"]";
 		mes "Do you know anything about the hospital?";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Hospital?";
 		mes "........";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Hospital?!?!?!?";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "That hospital is cursed!";
 		mes "Something wicked is living there!";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "The thing took away my poor little girl.";
 		next;
 		switch(select("Ask about the hospital.:Ask about her daughter.")) {
 		case 1:
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "Everybody was happy to hear about the hospital being built.";
 			next;
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "We no longer had to go to other towns for medical care.";
 			next;
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "But the one they built didn't work out so well.";
 			mes "It couldn't cure people.";
 			mes "I knew this would happen when they chopped down the old tree to build it.";
 			next;
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "But the administrator wouldn't listen.";
 			mes "Far from curing people, they started to die.";
 			mes "So did my daughter...";
@@ -8068,55 +8083,55 @@ malaya,114,183,3	script	Bent Old Lady#ma	575,{
 			changequest 11297,11298;
 			close;
 		case 2:
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "She suffered from nothing life threatening.";
 			mes "It was...";
 			mes "Just a cold......";
 			next;
-			mes "[Bent Old Lady]";
+			mes "[꼬부랑 할머니]";
 			mes "The wicked thing.... My daughter...";
 			mes "There's something in that hospital.";
 			close;
 		}
 	} else if (malaya_bang == 17) {
 		select("Show her the stick.");
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "What?";
 		mes "Arghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
 		emotion ET_HUK;
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Arghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
 		emotion ET_HUK;
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Arghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
 		emotion ET_HUK;
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Arghhhhhhhhhh!!!!!!!!!!!";
 		emotion ET_HUK;
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "What have you done!";
 		mes "That... That was a talisman to stop the wicked thing!";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "If you pull them up, it will go after people again!";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "I saw it!";
 		mes "I saw it when they closed the hospital saying that everybody had died.";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "But they all knew.";
 		mes "The patients weren't all dead.";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Taken alive...";
 		mes "By the thing that took my daughter...";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Oh dear.";
 		next;
 		mes "Nurse Las may be in danger, standing alone in front of the hospital.";
@@ -8129,49 +8144,50 @@ malaya,114,183,3	script	Bent Old Lady#ma	575,{
 		mes "If I don't return quickly...";
 		close;
 	} else if (malaya_bang == 32) {
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Yes? The talisman?";
 		mes "I asked the shaman up north of the village to make them,";
 		next;
-		mes "[Bent Old Lady]";
+		mes "[꼬부랑 할머니]";
 		mes "Not famous, but a talented shaman.";
 		set malaya_bang,33;
 		changequest 11304,11305;
 		close;
 	} else {
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am, excuse me, but can I ask you a question?";
+		mes "저 할머니 실레지만 뭣 좀 물어봐도";
+		mes "될까요?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
-		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am?";
-		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am?";
+		mes "저 할머니?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "Ho ho ho ho~~";
-		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Ma'am!!!!!!!!!";
-		next;
-		mes "[Bent Old Lady]";
-		mes "Who? What?";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍홍.";
 		next;
 		mes "["+strcharinfo(0)+"]";
-		mes "Excuse me, but can I ask you something?";
+		mes "할머니?";
 		next;
-		mes "[Bent Old Lady]";
-		mes "What? I can't hear you.";
-		mes "Speak up!";
+		mes "[꼬부랑 할머니]";
+		mes "오홍홍홍홍 홍홍홍.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "할머니!!!!!!!!!";
+		next;
+		mes "[꼬부랑 할머니]";
+		mes "응?누구야?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "저 실례지만 질문할게 좀 있은데요.";
+		next;
+		mes "[꼬부랑 할머니]";
+		mes "응?뭐라고 안 들려.";
+		mes "크게 말해!";
 		close;
 	}
 }

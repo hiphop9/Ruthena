@@ -1,0 +1,18 @@
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 1100006
+    AegisName: Ep19_Dry_Icegangu
+  - Id: 101637
+    AegisName: EP19_DGW_Refine
+    Name: Dim Glacier Reinforcement Device    # !todo check english name
+    Type: DelayConsume
+    Weight: 200
+    Flags:
+      BuyingStore: true
+      DropEffect: CLIENT
+    Script: |
+      item_reform();

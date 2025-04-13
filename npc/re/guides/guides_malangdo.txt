@@ -4,35 +4,37 @@
 //= 1.0 First Version. [JohnnyPlayy]
 //============================================================
 
-malangdo,218,101,3	script	Malangdo Guide#Malangdo	4_CAT_SAILOR3,{
-	mes "[Malangdo Guide]";
-	mes "Nice to meet you, welcome to ^8C4210Malangdo^000000. The island of cat paw!";
-	mes "Need some guidance?";
-	F_Navi("[Malangdo Guide]");
+malangdo,218,101,3	script	말랑도 안내요원#Malangdo	4_CAT_SAILOR3,{
+	mes "[말랑도 안내요원]";
+	mes "반갑습니다. 고양이 상단의";
+	mes "^8C4210말랑도^000000에";
+	mes "오신 것을 환영합니다.";
+	mes "안내가 필요하신가요?";
+	F_Navi("[말랑도 안내요원]");
 	while(1) {
 		next;
-		switch(select("[ Major Facilities ]:[ Trader & Assistant ]:Clear Mini-Map:Cancel")) {
+		switch(select("[ 주요 시설 ]:[ 상인 & 도우미 ]:미니 맵 표시 지우기:대화를 종료한다")) {
 		case 1:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Cat Gamers Director ]:[ Special Vending Machine ]:[ Coin Exchanger ]:[ Starry Coral ]:Previous Menu")) {
+				switch(select("[ 냥이 게이머즈 본부 ]:[ 특산물 자판기 ]:[ 코인환전기 ]:[ 별빛 산호 지대 ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					callsub L_Mark, F_Navi("Cat Gamers Director","malangdo,119,137","FF0000");
+					callsub L_Mark, F_Navi("냥이케이머즈본부","malangdo,119,137","FF0000");
 					viewpoint 1,119,137,0,0xFF0000;
 					next;
 					break;
 				case 2:
-					callsub L_Mark, F_Navi("Special Vending Machine","malangdo,216,165","FF4500");
+					callsub L_Mark, F_Navi("특산물 자판기","malangdo,216,165","FF4500");
 					viewpoint 1,216,165,1,0xFF4500;
 					next;
 					break;
 				case 3:
-					callsub L_Mark, F_Navi("Coin Exchanger","malangdo,216,165","DAA520");
+					callsub L_Mark, F_Navi("코인환전기","malangdo,216,165","DAA520");
 					viewpoint 1,216,165,2,0xDAA520;
 					next;
 					break;
 				case 4:
-					callsub L_Mark, F_Navi("Starry Coral","malangdo,73,238","7B68EE");
+					callsub L_Mark, F_Navi("별빛 산호 지대","malangdo,73,238","7B68EE");
 					next;
 					viewpoint 1,73,238,3,0x7B68EE;
 					break;
@@ -45,54 +47,54 @@ malangdo,218,101,3	script	Malangdo Guide#Malangdo	4_CAT_SAILOR3,{
 		case 2:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Chief Thomas ]:[ Stinky Merchant ]:[ Wandering Merchant ]:[ Inn Owner ]:[ Storekeeper ]:[ Tool Dealer ]:[ Portali ]:[ Clink ]:[ Holink ]:[ Roving Merchant ]:Previous Menu")) {
+				switch(select("[ 촌장 토마스 ]:[ 구리구리상인 ]:[ 떠돌이 상인 ]:[ 여관 주인 ]:[ 창고지기 ]:[ 도구상 ]:[ 포타리 ]:[ 제레미 ]:[ 마요마요 ]:[ 방랑 상인 ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					callsub L_Mark, F_Navi("Chief Thomas","malangdo,164,163","0A9696");
+					callsub L_Mark, F_Navi("촌장님","malangdo,164,163","0A9696");
 					viewpoint 1,164,163,4,0x0A9696;
 					next;
 					break;
 				case 2:
-					callsub L_Mark, F_Navi("Stinky Merchant","malangdo,173,145","4B0082");
+					callsub L_Mark, F_Navi("구리구리상인","malangdo,173,145","4B0082");
 					viewpoint 1,173,145,5,0x4B0082;
 					next;
 					break;
 				case 3:
-					callsub L_Mark, F_Navi("Wandering Merchant","malangdo,162,145","FF4500");
+					callsub L_Mark, F_Navi("떠돌이상인","malangdo,162,145","FF4500");
 					viewpoint 1,162,145,6,0x7B68EE;
 					next;
 					break;
 				case 4:
-					callsub L_Mark, F_Navi("Inn Owner","malangdo,147,120","FF6A00");
+					callsub L_Mark, F_Navi("여관주인","malangdo,147,120","FF6A00");
 					viewpoint 1,147,120,7,FF6A00;
 					next;
 					break;
 				case 5:
-					callsub L_Mark, F_Navi("Storekeeper","malangdo,184,138","7F3300");
+					callsub L_Mark, F_Navi("창고지기","malangdo,184,138","7F3300");
 					viewpoint 1,184,138,8,0x7F3300;
 					next;
 					break;
 				case 6:
-					callsub L_Mark, F_Navi("Tool Dealer","malangdo,232,160","7B68EE");
+					callsub L_Mark, F_Navi("도구상인","malangdo,232,160","7B68EE");
 					viewpoint 1,232,160,9,0x7B68EE;
 					next;
 					break;
 				case 7:
-					callsub L_Mark, F_Navi("Portali","malangdo,190,167","FF4500");
+					callsub L_Mark, F_Navi("포타리","malangdo,190,167","FF4500");
 					viewpoint 1,190,167,10,0x7B68EE;
 					next;
 					break;
 				case 8:
-					callsub L_Mark, F_Navi("Clink","malangdo,225,174","0A9696");
+					callsub L_Mark, F_Navi("제레미","malangdo,225,174","0A9696");
 					viewpoint 1,225,174,11,0x0A9696;
 					next;
 					break;
 				case 9:
-					callsub L_Mark, F_Navi("Holink","malangdo,221,176","DA70D6");
+					callsub L_Mark, F_Navi("마요마요","malangdo,221,176","DA70D6");
 					viewpoint 1,221,176,12,0xDA70D6;
 					next;
 					break;
 				case 10:
-					callsub L_Mark, F_Navi("Roving Merchant","malangdo,150,132","3131FF");
+					callsub L_Mark, F_Navi("방랑 상인","malangdo,150,132","3131FF");
 					viewpoint 1,150,132,13,0x3131FF;
 					next;
 					break;
@@ -103,9 +105,9 @@ malangdo,218,101,3	script	Malangdo Guide#Malangdo	4_CAT_SAILOR3,{
 			}
 			break;
 		case 3:
-			mes "[Malangdo Guide]";
-			mes "I will remove all marks from your Mini-Map.";
-			mes "Need more help?";
+			mes "[말랑도 안내요원]";
+			mes "미니맵의 모든 표시를 제거해 드리겠습니다.";
+			mes "도움이 더 필요하세요?";
 			viewpoint 2,1,1,0,0xFFFFFF;
 			viewpoint 2,1,1,1,0xFFFFFF;
 			viewpoint 2,1,1,2,0xFFFFFF;
@@ -122,14 +124,16 @@ malangdo,218,101,3	script	Malangdo Guide#Malangdo	4_CAT_SAILOR3,{
 			viewpoint 2,1,1,13,0xFFFFFF;
 			break;
 		case 4:
-			mes "[Malangdo Guide]";
-			mes "I wish you a pleasant trip.";
+			mes "[말랑도 안내요원]";
+			mes "즐거운 여행 되시기 바랍니다.";
 			close;
 		}
 	}
 L_Mark:
-	mes "[Malangdo Guide]";
-	mes "I will show you the location of the " + getarg(0);
-	mes "Do you need other information?";
+	mes "[말랑도 안내요원]";
+	mes ""+ getarg(0) +"의";
+	mes "위치를 미니 맵에";
+	mes "표시해 드리겠습니다.";
+	mes "다른 안내가 필요하신가요?";
 	return;
 }

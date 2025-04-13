@@ -1,0 +1,3043 @@
+Header:
+  Type: RUNE_DB
+  Version: 1
+Body:
+- Id: 17
+  Name: EPISODE17
+  Set:
+  - Id: 1260000
+    Name: Rt_Ep17_Doubt
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Melee
+    - Slot: 1
+      Name: Rp_Ep17_Range
+    - Slot: 4
+      Name: Rp_Ep17_Magic
+    - Slot: 5
+      Name: Rp_Ep17_Razor
+    Activation:
+    - Material: EP17_1_EVT02
+      Amount: 75
+    - Material: EP17_1_EVT39
+      Amount: 35
+    - Material: EP17_1_EVT01
+      Amount: 5
+    - Material: Imperfect_Rune
+      Amount: 150
+    - Material: Perfect_Rune
+      Amount: 1
+    Scripts:
+    - Amount: 2
+      Script: ".@val = (getupgrade_rune() / 3) * 2;\nif(.@val >0){\n  bonus bBaseAtk,.@val;\n\
+        \  bonus bMatk,.@val;\n}\n"
+    - Amount: 4
+      Script: 'bonus2 bAddSize,Size_All,1;
+
+        bonus bBaseAtk,10;
+
+        bonus bMatk,10;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: EP17_1_EVT01
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 5
+      - Material: EP17_1_EVT39
+        Amount: 7
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: EP17_1_EVT01
+        Amount: 2
+      - Material: EP17_1_EVT02
+        Amount: 6
+      - Material: EP17_1_EVT39
+        Amount: 8
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: EP17_1_EVT01
+        Amount: 4
+      - Material: EP17_1_EVT02
+        Amount: 8
+      - Material: EP17_1_EVT39
+        Amount: 10
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: EP17_1_EVT01
+        Amount: 6
+      - Material: EP17_1_EVT02
+        Amount: 10
+      - Material: EP17_1_EVT39
+        Amount: 12
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 7
+      - Material: EP17_1_EVT02
+        Amount: 12
+      - Material: EP17_1_EVT39
+        Amount: 14
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 8
+      - Material: EP17_1_EVT02
+        Amount: 14
+      - Material: EP17_1_EVT39
+        Amount: 16
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 9
+      - Material: EP17_1_EVT02
+        Amount: 16
+      - Material: EP17_1_EVT39
+        Amount: 18
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 10
+      - Material: EP17_1_EVT02
+        Amount: 18
+      - Material: EP17_1_EVT39
+        Amount: 20
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 11
+      - Material: EP17_1_EVT02
+        Amount: 20
+      - Material: EP17_1_EVT39
+        Amount: 22
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 12
+      - Material: EP17_1_EVT02
+        Amount: 23
+      - Material: EP17_1_EVT39
+        Amount: 25
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 13
+      - Material: EP17_1_EVT02
+        Amount: 26
+      - Material: EP17_1_EVT39
+        Amount: 28
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 14
+      - Material: EP17_1_EVT02
+        Amount: 29
+      - Material: EP17_1_EVT39
+        Amount: 31
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: EP17_1_EVT01
+        Amount: 15
+      - Material: EP17_1_EVT02
+        Amount: 30
+      - Material: EP17_1_EVT39
+        Amount: 31
+  - Id: 1260001
+    Name: Rt_Ep17_Auto
+    Books:
+    - Slot: 2
+      Name: Rp_Ep17_Autoa
+    - Slot: 3
+      Name: Rp_Ep17_Autob
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1350
+    - Material: Imperfect_Rune
+      Amount: 100
+    - Material: Perfect_Rune
+      Amount: 1
+    Scripts:
+    - Amount: 2
+      Script: "bonus bDef,100;\nbonus bMdef,25;\n.@val = getupgrade_rune() / 3;\n\
+        if(.@val >0){\n  bonus bMaxHPrate,.@val;\n}\n"
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: EP17_1_EVT01
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 5
+      - Material: EP17_1_EVT39
+        Amount: 7
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: EP17_1_EVT01
+        Amount: 2
+      - Material: EP17_1_EVT02
+        Amount: 6
+      - Material: EP17_1_EVT39
+        Amount: 8
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: EP17_1_EVT01
+        Amount: 4
+      - Material: EP17_1_EVT02
+        Amount: 8
+      - Material: EP17_1_EVT39
+        Amount: 10
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: EP17_1_EVT01
+        Amount: 6
+      - Material: EP17_1_EVT02
+        Amount: 10
+      - Material: EP17_1_EVT39
+        Amount: 12
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 7
+      - Material: EP17_1_EVT02
+        Amount: 12
+      - Material: EP17_1_EVT39
+        Amount: 14
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 8
+      - Material: EP17_1_EVT02
+        Amount: 14
+      - Material: EP17_1_EVT39
+        Amount: 16
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 9
+      - Material: EP17_1_EVT02
+        Amount: 16
+      - Material: EP17_1_EVT39
+        Amount: 18
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 10
+      - Material: EP17_1_EVT02
+        Amount: 18
+      - Material: EP17_1_EVT39
+        Amount: 20
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 11
+      - Material: EP17_1_EVT02
+        Amount: 20
+      - Material: EP17_1_EVT39
+        Amount: 22
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 12
+      - Material: EP17_1_EVT02
+        Amount: 23
+      - Material: EP17_1_EVT39
+        Amount: 25
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 13
+      - Material: EP17_1_EVT02
+        Amount: 26
+      - Material: EP17_1_EVT39
+        Amount: 28
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 14
+      - Material: EP17_1_EVT02
+        Amount: 29
+      - Material: EP17_1_EVT39
+        Amount: 31
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: EP17_1_EVT01
+        Amount: 15
+      - Material: EP17_1_EVT02
+        Amount: 30
+      - Material: EP17_1_EVT39
+        Amount: 31
+  - Id: 1260002
+    Name: Rt_Ep17_Secret
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Bellare
+    - Slot: 1
+      Name: Rp_Ep17_Sanare
+    - Slot: 3
+      Name: Rp_Ep17_Bestia
+    Activation:
+    - Material: EP17_1_EVT02
+      Amount: 65
+    - Material: EP17_1_EVT39
+      Amount: 30
+    - Material: EP17_1_EVT01
+      Amount: 5
+    - Material: Imperfect_Rune
+      Amount: 125
+    - Material: Perfect_Rune
+      Amount: 2
+    Scripts:
+    - Amount: 2
+      Script: "bonus bMatkRate,2;\nbonus bAtkRate,2;\n.@val = (getupgrade_rune() /\
+        \ 3) * 2;\nif(.@val >0){\n  bonus2 bSubEle,Ele_Poison,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus bDelayrate,-4;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: EP17_1_EVT01
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 5
+      - Material: EP17_1_EVT39
+        Amount: 7
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: EP17_1_EVT01
+        Amount: 2
+      - Material: EP17_1_EVT02
+        Amount: 6
+      - Material: EP17_1_EVT39
+        Amount: 8
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: EP17_1_EVT01
+        Amount: 4
+      - Material: EP17_1_EVT02
+        Amount: 8
+      - Material: EP17_1_EVT39
+        Amount: 10
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: EP17_1_EVT01
+        Amount: 6
+      - Material: EP17_1_EVT02
+        Amount: 10
+      - Material: EP17_1_EVT39
+        Amount: 12
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 7
+      - Material: EP17_1_EVT02
+        Amount: 12
+      - Material: EP17_1_EVT39
+        Amount: 14
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 8
+      - Material: EP17_1_EVT02
+        Amount: 14
+      - Material: EP17_1_EVT39
+        Amount: 16
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 9
+      - Material: EP17_1_EVT02
+        Amount: 16
+      - Material: EP17_1_EVT39
+        Amount: 18
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 10
+      - Material: EP17_1_EVT02
+        Amount: 18
+      - Material: EP17_1_EVT39
+        Amount: 20
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 11
+      - Material: EP17_1_EVT02
+        Amount: 20
+      - Material: EP17_1_EVT39
+        Amount: 22
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 12
+      - Material: EP17_1_EVT02
+        Amount: 23
+      - Material: EP17_1_EVT39
+        Amount: 25
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 13
+      - Material: EP17_1_EVT02
+        Amount: 26
+      - Material: EP17_1_EVT39
+        Amount: 28
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 14
+      - Material: EP17_1_EVT02
+        Amount: 29
+      - Material: EP17_1_EVT39
+        Amount: 31
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: EP17_1_EVT01
+        Amount: 15
+      - Material: EP17_1_EVT02
+        Amount: 30
+      - Material: EP17_1_EVT39
+        Amount: 31
+  - Id: 1260003
+    Name: Rt_Ep17_Mutant
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Plaga
+    - Slot: 1
+      Name: Rp_Ep17_Dolor
+    - Slot: 4
+      Name: Rp_Ep17_Venenum
+    Activation:
+    - Material: EP17_1_EVT02
+      Amount: 80
+    - Material: EP17_1_EVT39
+      Amount: 35
+    - Material: EP17_1_EVT01
+      Amount: 15
+    - Material: Imperfect_Rune
+      Amount: 150
+    - Material: Perfect_Rune
+      Amount: 2
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 5;\nif(.@val >0){\n  bonus bVariableCastrate,.@val*-1;\n\
+        }\n"
+    - Amount: 3
+      Script: 'bonus2 bAddEle,Ele_Neutral,3;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: EP17_1_EVT01
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 5
+      - Material: EP17_1_EVT39
+        Amount: 7
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: EP17_1_EVT01
+        Amount: 2
+      - Material: EP17_1_EVT02
+        Amount: 6
+      - Material: EP17_1_EVT39
+        Amount: 8
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: EP17_1_EVT01
+        Amount: 4
+      - Material: EP17_1_EVT02
+        Amount: 8
+      - Material: EP17_1_EVT39
+        Amount: 10
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: EP17_1_EVT01
+        Amount: 6
+      - Material: EP17_1_EVT02
+        Amount: 10
+      - Material: EP17_1_EVT39
+        Amount: 12
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 7
+      - Material: EP17_1_EVT02
+        Amount: 12
+      - Material: EP17_1_EVT39
+        Amount: 14
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 8
+      - Material: EP17_1_EVT02
+        Amount: 14
+      - Material: EP17_1_EVT39
+        Amount: 16
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 9
+      - Material: EP17_1_EVT02
+        Amount: 16
+      - Material: EP17_1_EVT39
+        Amount: 18
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 10
+      - Material: EP17_1_EVT02
+        Amount: 18
+      - Material: EP17_1_EVT39
+        Amount: 20
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 11
+      - Material: EP17_1_EVT02
+        Amount: 20
+      - Material: EP17_1_EVT39
+        Amount: 22
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 12
+      - Material: EP17_1_EVT02
+        Amount: 23
+      - Material: EP17_1_EVT39
+        Amount: 25
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 13
+      - Material: EP17_1_EVT02
+        Amount: 26
+      - Material: EP17_1_EVT39
+        Amount: 28
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 14
+      - Material: EP17_1_EVT02
+        Amount: 29
+      - Material: EP17_1_EVT39
+        Amount: 31
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: EP17_1_EVT01
+        Amount: 15
+      - Material: EP17_1_EVT02
+        Amount: 30
+      - Material: EP17_1_EVT39
+        Amount: 31
+  - Id: 1260004
+    Name: Rt_Ep17_Miguel
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Iron
+    - Slot: 3
+      Name: Rp_Ep17_Sweety
+    - Slot: 4
+      Name: Rp_Ep17_Tiger
+    Activation:
+    - Material: EP17_1_EVT02
+      Amount: 100
+    - Material: EP17_1_EVT39
+      Amount: 50
+    - Material: EP17_1_EVT01
+      Amount: 10
+    - Material: Imperfect_Rune
+      Amount: 250
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: "bonus bCritAtkRate,3;\n.@val = (getupgrade_rune() / 5) * 2;\nif(.@val\
+        \ >0){\n  bonus bCritAtkRate,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus bCritAtkRate,8;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: EP17_1_EVT01
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 5
+      - Material: EP17_1_EVT39
+        Amount: 7
+    - Grade: 1
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: EP17_1_EVT01
+        Amount: 2
+      - Material: EP17_1_EVT02
+        Amount: 6
+      - Material: EP17_1_EVT39
+        Amount: 8
+    - Grade: 2
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 3
+      Chance: 7000
+      ChancePerFail: 2500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: EP17_1_EVT01
+        Amount: 4
+      - Material: EP17_1_EVT02
+        Amount: 8
+      - Material: EP17_1_EVT39
+        Amount: 10
+    - Grade: 4
+      Chance: 7000
+      ChancePerFail: 2500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: EP17_1_EVT01
+        Amount: 3
+      - Material: EP17_1_EVT02
+        Amount: 7
+      - Material: EP17_1_EVT39
+        Amount: 9
+    - Grade: 5
+      Chance: 6000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: EP17_1_EVT01
+        Amount: 6
+      - Material: EP17_1_EVT02
+        Amount: 10
+      - Material: EP17_1_EVT39
+        Amount: 12
+    - Grade: 6
+      Chance: 5000
+      ChancePerFail: 1500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 7
+      - Material: EP17_1_EVT02
+        Amount: 12
+      - Material: EP17_1_EVT39
+        Amount: 14
+    - Grade: 7
+      Chance: 4000
+      ChancePerFail: 1000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 8
+      - Material: EP17_1_EVT02
+        Amount: 14
+      - Material: EP17_1_EVT39
+        Amount: 16
+    - Grade: 8
+      Chance: 3000
+      ChancePerFail: 900
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 9
+      - Material: EP17_1_EVT02
+        Amount: 16
+      - Material: EP17_1_EVT39
+        Amount: 18
+    - Grade: 9
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 10
+      - Material: EP17_1_EVT02
+        Amount: 18
+      - Material: EP17_1_EVT39
+        Amount: 20
+    - Grade: 10
+      Chance: 1000
+      ChancePerFail: 600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 11
+      - Material: EP17_1_EVT02
+        Amount: 20
+      - Material: EP17_1_EVT39
+        Amount: 22
+    - Grade: 11
+      Chance: 500
+      ChancePerFail: 500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 12
+      - Material: EP17_1_EVT02
+        Amount: 23
+      - Material: EP17_1_EVT39
+        Amount: 25
+    - Grade: 12
+      Chance: 500
+      ChancePerFail: 300
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 13
+      - Material: EP17_1_EVT02
+        Amount: 26
+      - Material: EP17_1_EVT39
+        Amount: 28
+    - Grade: 13
+      Chance: 250
+      ChancePerFail: 100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: EP17_1_EVT01
+        Amount: 14
+      - Material: EP17_1_EVT02
+        Amount: 29
+      - Material: EP17_1_EVT39
+        Amount: 31
+    - Grade: 14
+      Chance: 50
+      ChancePerFail: 20
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: EP17_1_EVT01
+        Amount: 15
+      - Material: EP17_1_EVT02
+        Amount: 30
+      - Material: EP17_1_EVT39
+        Amount: 31
+  - Id: 1260005
+    Name: Rt_Ep17_Overload
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Redpepper
+    - Slot: 3
+      Name: Rp_Ep17_Addict
+    - Slot: 4
+      Name: Rp_Ep17_Caution
+    - Slot: 5
+      Name: Rp_Ep17_Withdraw
+    Activation:
+    - Material: BarMealTicket
+      Amount: 850
+    - Material: Magical_Igni_Stone
+      Amount: 3
+    - Material: Imperfect_Rune
+      Amount: 150
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: "bonus bMatk,15;\n.@val = (getupgrade_rune() / 3) * 3;\nif(.@val >0){\n\
+        \  bonus bMatk,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus2 bMagicAddRace,RC_ALL,1;
+
+        '
+    - Amount: 4
+      Script: 'bonus2 bMagicAddRace,RC_ALL,4;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260006
+    Name: Rt_Ep17_Bath
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Fish
+    - Slot: 3
+      Name: Rp_Ep17_Bath
+    - Slot: 4
+      Name: Rp_Ep17_Sewage
+    Activation:
+    - Material: BarMealTicket
+      Amount: 850
+    - Material: Magical_Igni_Stone
+      Amount: 5
+    - Material: Imperfect_Rune
+      Amount: 175
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 5;\nif(.@val >0){\n  bonus2 bAddRace,RC_Fish,.@val;\n\
+        \  bonus2 bAddRace,RC_Brute,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus2 bAddRace,RC_Brute,2;
+
+        bonus2 bAddRace,RC_Fish,2;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260007
+    Name: Rt_Ep17_Garden
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Papila
+    - Slot: 1
+      Name: Rp_Ep17_Machine
+    - Slot: 2
+      Name: Rp_Ep17_Tree
+    - Slot: 3
+      Name: Rp_Ep17_Aries
+    - Slot: 4
+      Name: Rp_Ep17_Book
+    - Slot: 5
+      Name: Rp_Ep17_Garden
+    Activation:
+    - Material: BarMealTicket
+      Amount: 850
+    - Material: Magical_Igni_Stone
+      Amount: 5
+    - Material: Imperfect_Rune
+      Amount: 175
+    - Material: Perfect_Rune
+      Amount: 2
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 5;\nif(.@val >0){\n  bonus2 bAddRace,RC_Fish,.@val;\n\
+        \  bonus2 bAddRace,RC_Insect,.@val;\n}\n"
+    - Amount: 4
+      Script: 'bonus2 bAddRace,RC_Fish,2;
+
+        bonus2 bAddRace,RC_Insect,2;
+
+        '
+    - Amount: 6
+      Script: 'bonus2 bSubEle,Ele_All,3;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260008
+    Name: Rt_Ep17_Green
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Aries
+    - Slot: 1
+      Name: Rp_Ep17_Machine
+    - Slot: 2
+      Name: Rp_Ep17_Allergy
+    - Slot: 3
+      Name: Rp_Ep17_Pitaya
+    - Slot: 5
+      Name: Rp_Ep17_Cat
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1250
+    - Material: Magical_Igni_Stone
+      Amount: 5
+    - Material: Imperfect_Rune
+      Amount: 175
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 5;\nif(.@val >0){\n  bonus2 bAddEle,Ele_Ghost,2;\n\
+        \  bonus2 bMagicAtkEle,Ele_Ghost,2;\n  bonus2 bAddRace,RC_DemiHuman,.@val;\n\
+        \  bonus2 bAddRace,RC_Player_Human,.@val;\n  bonus2 bMagicAddRace,RC_DemiHuman,.@val;\n\
+        \  bonus2 bMagicAddRace,RC_Player_Human,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus2 bAddEle,Ele_Ghost,2;
+
+        bonus2 bMagicAtkEle,Ele_Ghost,2;
+
+        bonus2 bAddRace,RC_DemiHuman,2;
+
+        bonus2 bAddRace,RC_Player_Human,2;
+
+        bonus2 bMagicAddRace,RC_DemiHuman,2;
+
+        bonus2 bMagicAddRace,RC_Player_Human,2;
+
+        '
+    - Amount: 5
+      Script: 'bonus bAtkRate,7;
+
+        bonus bMatkRate,7;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260009
+    Name: Rt_Ep17_Malfun
+    Books:
+    - Slot: 1
+      Name: Rp_Ep17_Sweety
+    - Slot: 2
+      Name: Rp_Ep17_Machine
+    - Slot: 4
+      Name: Rp_Ep17_Garden
+    - Slot: 5
+      Name: Rp_Ep17_Bath
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1500
+    - Material: Magical_Igni_Stone
+      Amount: 7
+    - Material: Imperfect_Rune
+      Amount: 200
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 3;\nif(.@val >0){\n  bonus2 bAddSize,Size_Large,.@val;\n\
+        }\n"
+    - Amount: 3
+      Script: 'bonus bLongAtkRate,2;
+
+        '
+    - Amount: 4
+      Script: 'bonus bLongAtkRate,5;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260010
+    Name: Rt_Ep17_Wing
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Aries
+    - Slot: 1
+      Name: Rp_Ep17_Papila
+    - Slot: 2
+      Name: Rp_Ep17_Tree
+    - Slot: 3
+      Name: Rp_Ep17_Sanare
+    - Slot: 5
+      Name: Rp_Ep17_Book
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1500
+    - Material: Magical_Igni_Stone
+      Amount: 7
+    - Material: Imperfect_Rune
+      Amount: 200
+    - Material: Perfect_Rune
+      Amount: 3
+    Scripts:
+    - Amount: 2
+      Script: ".@upgrade = getupgrade_rune();\n.@val = (.@upgrade / 3) * 3;\n.@val2\
+        \ = .@upgrade / 5);\nif(.@val >0){\n  bonus bBaseAtk,.@val;\n  bonus bMatk,.@val;\n\
+        }\nif(.@val2 >0){\n  bonus bMaxHPrate,.@val2;\n  bonus bMaxSPrate,.@val2;\n\
+        }\n"
+    - Amount: 4
+      Script: 'bonus bMaxHPrate,1;
+
+        bonus bMaxSPrate,1;
+
+        bonus bBaseAtk,15;
+
+        bonus bMatk,15;
+
+        '
+    - Amount: 5
+      Script: 'bonus bMaxHPrate,3;
+
+        bonus bMaxSPrate,3;
+
+        bonus bBaseAtk,45;
+
+        bonus bMatk,45;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260011
+    Name: Rt_Ep17_Harmful
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Bellare
+    - Slot: 1
+      Name: Rp_Ep17_Addict
+    - Slot: 2
+      Name: Rp_Ep17_Plaga
+    - Slot: 4
+      Name: Rp_Ep17_Dolor
+    - Slot: 5
+      Name: Rp_Ep17_Withdraw
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1350
+    - Material: Magical_Igni_Stone
+      Amount: 10
+    - Material: Imperfect_Rune
+      Amount: 300
+    - Material: Perfect_Rune
+      Amount: 5
+    - Material: EP17_1_EVT02
+      Amount: 150
+    - Material: EP17_1_EVT39
+      Amount: 100
+    - Material: EP17_1_EVT01
+      Amount: 30
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 5;\nif(.@val >0){\n  bonus bAtkRate,.@val;\n\
+        \  bonus bMatkRate,.@val;\n}\n"
+    - Amount: 4
+      Script: 'bonus2 bAddEle,Ele_Dark,3;
+
+        '
+    - Amount: 5
+      Script: 'bonus2 bHPDrainRate,20,2;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 10000
+      ChancePerFail: 4000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 9000
+      ChancePerFail: 3600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 8000
+      ChancePerFail: 3200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 7000
+      ChancePerFail: 2800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 6000
+      ChancePerFail: 2400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 5000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 4000
+      ChancePerFail: 1600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 3000
+      ChancePerFail: 1200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 1000
+      ChancePerFail: 400
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 500
+      ChancePerFail: 200
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 100
+      ChancePerFail: 40
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+  - Id: 1260012
+    Name: Rt_Ep17_Boss
+    Books:
+    - Slot: 0
+      Name: Rp_Ep17_Iron
+    - Slot: 1
+      Name: Rp_Ep17_Tiger
+    - Slot: 2
+      Name: Rp_Ep17_Bestia
+    - Slot: 3
+      Name: Rp_Ep17_Redpepper
+    - Slot: 4
+      Name: Rp_Ep17_Sweety
+    - Slot: 5
+      Name: Rp_Ep17_Cat
+    Activation:
+    - Material: BarMealTicket
+      Amount: 1550
+    - Material: Magical_Igni_Stone
+      Amount: 10
+    - Material: Imperfect_Rune
+      Amount: 350
+    - Material: Perfect_Rune
+      Amount: 5
+    - Material: EP17_1_EVT02
+      Amount: 175
+    - Material: EP17_1_EVT39
+      Amount: 125
+    - Material: EP17_1_EVT01
+      Amount: 45
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 3;\nif(.@val >0){\n  bonus2 bAddRace,RC_DemiHuman,.@val;\n\
+        \  bonus2 bAddRace,RC_Player_Human,.@val;\n  bonus2 bMagicAddRace,RC_DemiHuman,.@val;\n\
+        \  bonus2 bMagicAddRace,RC_Player_Human,.@val;\n}\n"
+    - Amount: 4
+      Script: 'bonus2 bAddRace,RC_DemiHuman,2;
+
+        '
+    - Amount: 6
+      Script: 'bonus2 bSPDrainRate,10,1;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 25
+      - Material: BarMealTicket
+        Amount: 10
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 1
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 28
+      - Material: BarMealTicket
+        Amount: 11
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 2
+      Chance: 8000
+      ChancePerFail: 3000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 31
+      - Material: BarMealTicket
+        Amount: 12
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 3
+      Chance: 7000
+      ChancePerFail: 2500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 34
+      - Material: BarMealTicket
+        Amount: 13
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 4
+      Chance: 7000
+      ChancePerFail: 2500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 37
+      - Material: BarMealTicket
+        Amount: 14
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 5
+      Chance: 6000
+      ChancePerFail: 2000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 40
+      - Material: BarMealTicket
+        Amount: 15
+      - Material: Magical_Igni_Stone
+        Amount: 1
+    - Grade: 6
+      Chance: 5000
+      ChancePerFail: 1500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 44
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 17
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 7
+      Chance: 4000
+      ChancePerFail: 1000
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 48
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 19
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 8
+      Chance: 3000
+      ChancePerFail: 900
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 52
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 21
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 9
+      Chance: 2000
+      ChancePerFail: 800
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 56
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 23
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 10
+      Chance: 1000
+      ChancePerFail: 600
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 60
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 25
+      - Material: Magical_Igni_Stone
+        Amount: 2
+    - Grade: 11
+      Chance: 500
+      ChancePerFail: 500
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 65
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 28
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 12
+      Chance: 500
+      ChancePerFail: 300
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 70
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 31
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 13
+      Chance: 250
+      ChancePerFail: 100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 2
+      - Material: BarMealTicket
+        Amount: 34
+      - Material: Magical_Igni_Stone
+        Amount: 3
+    - Grade: 14
+      Chance: 50
+      ChancePerFail: 20
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 75
+      - Material: Perfect_Rune
+        Amount: 3
+      - Material: BarMealTicket
+        Amount: 35
+      - Material: Magical_Igni_Stone
+        Amount: 3
+- Id: 500
+  Name: EVT
+  Set:
+  - Id: 1260013
+    Name: Rt_21th_Event
+    Books:
+    - Slot: 0
+      Name: Rp_21th_Poring
+    - Slot: 1
+      Name: Rp_21th_Lunatic
+    - Slot: 2
+      Name: Rp_21th_Fabre
+    - Slot: 5
+      Name: Rp_21th_Food
+    Activation:
+    - Material: Imperfect_Rune
+      Amount: 21
+    Scripts:
+    - Amount: 2
+      Script: ".@val = getupgrade_rune() / 3;\nif(.@val > 0){\n  bonus bBaseAtk,.@val;\n\
+        \  bonus bMatk,.@val;\n}\n"
+    - Amount: 3
+      Script: 'bonus2 bAddItemHealRate,1100011,100;
+
+        bonus2 bAddItemHealRate,1100010,100;
+
+        '
+    - Amount: 4
+      Script: 'bonus bBaseAtk,10;
+
+        bonus bMatk,10;
+
+        '
+    Upgrades:
+    - Grade: 0
+      Chance: 100000
+      ChancePerFail: 1
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 2
+      - Material: Clover
+        Amount: 5
+      - Material: Jellopy
+        Amount: 5
+      - Material: Feather
+        Amount: 5
+      - Material: Tree_Of_Archer_2
+        Amount: 1
+    - Grade: 1
+      Chance: 100000
+      ChancePerFail: 1
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 2
+      - Material: Clover
+        Amount: 5
+      - Material: Jellopy
+        Amount: 5
+      - Material: Feather
+        Amount: 5
+      - Material: Tree_Of_Archer_2
+        Amount: 1
+    - Grade: 2
+      Chance: 100000
+      ChancePerFail: 1
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 2
+      - Material: Clover
+        Amount: 5
+      - Material: Jellopy
+        Amount: 5
+      - Material: Feather
+        Amount: 5
+      - Material: Tree_Of_Archer_2
+        Amount: 1
+    - Grade: 3
+      Chance: 90000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 3
+      - Material: Clover
+        Amount: 6
+      - Material: Jellopy
+        Amount: 6
+      - Material: Feather
+        Amount: 6
+      - Material: Tree_Of_Archer_2
+        Amount: 2
+    - Grade: 4
+      Chance: 90000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 3
+      - Material: Clover
+        Amount: 6
+      - Material: Jellopy
+        Amount: 6
+      - Material: Feather
+        Amount: 6
+      - Material: Tree_Of_Archer_2
+        Amount: 2
+    - Grade: 5
+      Chance: 90000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 3
+      - Material: Clover
+        Amount: 6
+      - Material: Jellopy
+        Amount: 6
+      - Material: Feather
+        Amount: 6
+      - Material: Tree_Of_Archer_2
+        Amount: 2
+    - Grade: 6
+      Chance: 80000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 4
+      - Material: Clover
+        Amount: 7
+      - Material: Jellopy
+        Amount: 7
+      - Material: Feather
+        Amount: 7
+      - Material: Tree_Of_Archer_2
+        Amount: 3
+    - Grade: 7
+      Chance: 80000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 4
+      - Material: Clover
+        Amount: 7
+      - Material: Jellopy
+        Amount: 7
+      - Material: Feather
+        Amount: 7
+      - Material: Tree_Of_Archer_2
+        Amount: 3
+    - Grade: 8
+      Chance: 80000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 4
+      - Material: Clover
+        Amount: 7
+      - Material: Jellopy
+        Amount: 7
+      - Material: Feather
+        Amount: 7
+      - Material: Tree_Of_Archer_2
+        Amount: 3
+    - Grade: 9
+      Chance: 70000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 5
+      - Material: Clover
+        Amount: 8
+      - Material: Jellopy
+        Amount: 8
+      - Material: Feather
+        Amount: 8
+      - Material: Tree_Of_Archer_2
+        Amount: 4
+    - Grade: 10
+      Chance: 70000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 5
+      - Material: Clover
+        Amount: 8
+      - Material: Jellopy
+        Amount: 8
+      - Material: Feather
+        Amount: 8
+      - Material: Tree_Of_Archer_2
+        Amount: 4
+    - Grade: 11
+      Chance: 70000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 5
+      - Material: Clover
+        Amount: 8
+      - Material: Jellopy
+        Amount: 8
+      - Material: Feather
+        Amount: 8
+      - Material: Tree_Of_Archer_2
+        Amount: 4
+    - Grade: 12
+      Chance: 60000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 5
+      - Material: Clover
+        Amount: 9
+      - Material: Jellopy
+        Amount: 9
+      - Material: Feather
+        Amount: 9
+      - Material: Tree_Of_Archer_2
+        Amount: 5
+    - Grade: 13
+      Chance: 60000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Imperfect_Rune
+        Amount: 5
+      - Material: Clover
+        Amount: 9
+      - Material: Jellopy
+        Amount: 9
+      - Material: Feather
+        Amount: 9
+      - Material: Tree_Of_Archer_2
+        Amount: 5
+    - Grade: 14
+      Chance: 50000
+      ChancePerFail: 2100
+      Materials:
+      - Material: Perfect_Rune
+        Amount: 1
+      - Material: Clover
+        Amount: 10
+      - Material: Jellopy
+        Amount: 10
+      - Material: Feather
+        Amount: 10
+      - Material: Tree_Of_Archer_2
+        Amount: 5

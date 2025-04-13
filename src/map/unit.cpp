@@ -15,6 +15,7 @@
 #include <common/socket.hpp>
 #include <common/timer.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -292,7 +293,10 @@ TIMER_FUNC(unit_step_timer){
 		return 0;
 
 	if(ud->steptimer != tid) {
-		ShowError("unit_step_timer mismatch %d != %d\n",ud->steptimer,tid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("unit_step_timer 일치하지 않음 %d != %d\n",ud->steptimer,tid);
+		else
+			ShowError("unit_step_timer mismatch %d != %d\n",ud->steptimer,tid);
 		return 0;
 	}
 
@@ -392,7 +396,10 @@ static TIMER_FUNC(unit_walktoxy_timer)
 		return 0;
 
 	if(ud->walktimer != tid) {
-		ShowError("unit_walk_timer mismatch %d != %d\n",ud->walktimer,tid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("unit_walk_timer %d != %d 일치하지 않음\n",ud->walktimer,tid);
+		else
+			ShowError("unit_walk_timer mismatch %d != %d\n",ud->walktimer,tid);
 		return 0;
 	}
 
@@ -1362,15 +1369,24 @@ int unit_warp(struct block_list *bl,short m,short x,short y,clr_type type)
 
 	if (x < 0 || y < 0) { // Random map position.
 		if (!map_search_freecell(nullptr, m, &x, &y, -1, -1, 1)) {
-			ShowWarning("unit_warp failed. Unit Id:%d/Type:%d, target position map %d (%s) at [%d,%d]\n", bl->id, bl->type, m, map[m].name, x, y);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("unit_warp 실패했습니다. 유닛 Id:%d/타입:%d, 대상 위치 맵 %s(%d)는 [%d,%d]입니다. \n", bl->id, bl->type,  map[m].name,m, x, y);
+			else
+				ShowWarning("unit_warp failed. Unit Id:%d/Type:%d, target position map %d (%s) at [%d,%d]\n", bl->id, bl->type, m, map[m].name, x, y);
 			return 2;
 
 		}
 	} else if ( bl->type != BL_NPC && map_getcell(m,x,y,CELL_CHKNOREACH)) { // Invalid target cell
-		ShowWarning("unit_warp: Specified non-walkable target cell: %d (%s) at [%d,%d]\n", m, map[m].name, x,y);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("unit_warp: 지정된 이동 불가능 대상 셀: 맵 %d (%s)의 좌표 [%d,%d]\n", m, map[m].name, x,y);
+		else
+			ShowWarning("unit_warp: Specified non-walkable target cell: %d (%s) at [%d,%d]\n", m, map[m].name, x,y);
 
 		if (!map_search_freecell(nullptr, m, &x, &y, 4, 4, 1)) { // Can't find a nearby cell
-			ShowWarning("unit_warp failed. Unit Id:%d/Type:%d, target position map %d (%s) at [%d,%d]\n", bl->id, bl->type, m, map[m].name, x, y);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("unit_warp 실패 했습니다. 유닛 Id:%d/타입:%d, 대상 위치 맵 %s(%d)는 [%d,%d]입니다.\n", bl->id, bl->type, map[m].name, m, x, y);
+			else
+				ShowWarning("unit_warp failed. Unit Id:%d/Type:%d, target position map %d (%s) at [%d,%d]\n", bl->id, bl->type, m, map[m].name, x, y);
 			return 2;
 		}
 	}
@@ -3294,15 +3310,24 @@ int unit_remove_map_(struct block_list *bl, clr_type clrtype, const char* file, 
 					sd->debug_func = "";
 				}
 
-				ShowDebug("unit_remove_map: unexpected state when removing player AID/CID:%d/%d"
-					" (active=%d connect_new=%d rewarp=%d changemap=%d debug_remove_map=%d)"
-					" from map=%s (users=%d)."
-					" Previous call from %s:%d(%s), current call from %s:%d(%s)."
-					" Please report this!!!\n",
-					sd->status.account_id, sd->status.char_id,
-					sd->state.active, sd->state.connect_new, sd->state.rewarp, sd->state.changemap, sd->state.debug_remove_map,
-					map[bl->m].name, map[bl->m].users,
-					sd->debug_file, sd->debug_line, sd->debug_func, file, line, func);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("unit_remove_map: 맵=%s (유저=%d)에서 계정ID/케릭터ID:%d/%d 제거중 예기치 않은 상태가 발생됐습니다."
+						" (엑티브=%d 새로운 연결=%d 재워프=%d 맵변경=%d 제거맵 디버그=%d)"
+						" %s:%d(%s)의 이전 호출, %s:%d(%s)의 현재 호출."
+						" 이것을 보고하세요!!!\n",
+						map[bl->m].name, map[bl->m].users,sd->status.account_id, sd->status.char_id,
+						sd->state.active, sd->state.connect_new, sd->state.rewarp, sd->state.changemap, sd->state.debug_remove_map,
+						sd->debug_file, sd->debug_line, sd->debug_func, file, line, func);
+				else
+					ShowDebug("unit_remove_map: unexpected state when removing player AID/CID:%d/%d"
+						" (active=%d connect_new=%d rewarp=%d changemap=%d debug_remove_map=%d)"
+						" from map=%s (users=%d)."
+						" Previous call from %s:%d(%s), current call from %s:%d(%s)."
+						" Please report this!!!\n",
+						sd->status.account_id, sd->status.char_id,
+						sd->state.active, sd->state.connect_new, sd->state.rewarp, sd->state.changemap, sd->state.debug_remove_map,
+						map[bl->m].name, map[bl->m].users,
+						sd->debug_file, sd->debug_line, sd->debug_func, file, line, func);
 			}
 			else if (--map[bl->m].users == 0 && battle_config.dynamic_mobs)
 				map_removemobs(bl->m);
@@ -3823,7 +3848,10 @@ static TIMER_FUNC(unit_shadowscar_timer) {
  */
 void unit_addshadowscar(unit_data &ud, int interval) {
 	if (ud.shadow_scar_timer.size() >= MAX_SHADOW_SCAR) {
-		ShowWarning("unit_addshadowscar: Unit %s (%d) has reached the maximum amount of Shadow Scars (%d).\n", status_get_name(ud.bl), ud.bl->id, MAX_SHADOW_SCAR);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("unit_addshadowscar: 유닛 %s (%d)이(가) Shadow Scars (%d)의 최대치에 도달했습니다.\n", status_get_name(ud.bl), ud.bl->id, MAX_SHADOW_SCAR);
+		else
+			ShowWarning("unit_addshadowscar: Unit %s (%d) has reached the maximum amount of Shadow Scars (%d).\n", status_get_name(ud.bl), ud.bl->id, MAX_SHADOW_SCAR);
 		return;
 	}
 

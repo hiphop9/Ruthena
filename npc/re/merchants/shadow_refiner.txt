@@ -12,16 +12,16 @@
 //============================================================
 -	script	::ShadowBlacksmith	-1,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Shadow Blacksmith]";
-		mes "Now Basta is in charge of refinement for shadow items.";
-		mes "If you'd like to refine a shadow item, please visit him.";
+		mes "[쉐도우 대장장이]";
+		mes "이제 바스타는 섀도우 아이템의 세련을 담당합니다.";
+		mes "섀도우 아이템을 다듬고 싶다면 방문해 보세요.";
 		close;
 	}
 
 	.@zeny_cost = 200000; // Zeny cost is 200,000 according to official script [Secret]
 	disable_items;
-	mes "[Shadow Blacksmith]";
-	mes "Do you want to refine a shadow item? Pick yer poison!";
+	mes "[쉐도우 대장장이]";
+	mes "그림자 아이템을 개선하시겠습니까? 독을 선택하세요!";
 	next;
 	setarray .@indices[1], EQI_SHADOW_ARMOR, EQI_SHADOW_WEAPON, EQI_SHADOW_SHIELD, EQI_SHADOW_SHOES, EQI_SHADOW_ACC_R, EQI_SHADOW_ACC_L;
 	.@indlen = getarraysize(.@indices) - 1;
@@ -30,26 +30,26 @@
 	.@menu$ = .@menu$ + "Refine info";
 	.@choice = select(.@menu$);
 	if (.@choice == .@indlen + 1) { // Refine info
-		mes "[Shadow Blacksmith]";
-		mes "When a shadow item is refined, it gains extra bonuses very much like normal items.";
+		mes "[쉐도우 대장장이]";
+		mes "그림자 아이템을 정제하면 일반 아이템과 마찬가지로 추가 보너스를 얻을 수 있습니다.";
 		next;
-		mes "[Shadow Blacksmith]";
-		mes "Weapon: ATK, MATK + 1 increase for each +1 refine success.";
-		mes "Etc: HP + 10 increase for each +1 refine success.";
+		mes "[쉐도우 대장장이]";
+		mes "무기 : 제련 1당 ATK, MATK 1씩 증가합니다.";
+		mes "기타: 제련 성공 1당 HP 10 증가.";
 		next;
-		mes "[Shadow Blacksmith]";
-		mes "All types of Oridecon and Elunium can be used to refine shadow items. Each attempt will also cost 20,000 zeny.";
+		mes "[쉐도우 대장장이]";
+		mes "모든 유형의 오리데오콘 및 에르늄을 사용하여 그림자 아이템을 다듬을 수 있습니다. 각 시도에는 20,000제니의 비용이 듭니다.";
 		next;
-		mes "[Shadow Blacksmith]";
-		mes "HD ores can be used for gear that is at least refine level +7 and will prevent breaking as long as you stay talking to me.";
+		mes "[쉐도우 대장장이]";
+		mes "HD 광석은 제련 레벨 7 이상인 장비에 사용할 수 있으며, 나와 대화를 계속하는 한 파손을 방지할 수 있습니다.";
 		close;
 	}
 
 	.@part = .@indices[.@choice];
 
 	if (!getequipisequiped(.@part)) {
-		mes "[Shadow Blacksmith]";
-		mes "There's nothing here!";
+		mes "[쉐도우 대장장이]";
+		mes "여기에는 아무것도 없습니다!";
 		close;
 	}
 	.@equip_id = getequipid(.@part);
@@ -57,9 +57,9 @@
 
 	while(1) {
 		.@equip_refine = getequiprefinerycnt(.@part);
-		mes "[Shadow Blacksmith]";
-		mes "I require " + callfunc("F_InsertComma", .@zeny_cost) + " zeny as a fee for EACH refine attempt.";
-		mes "Choose your Ore and start refining.";
+		mes "[쉐도우 대장장이]";
+		mes "각 개선 시도에 대한 수수료로 " + callfunc("F_InsertComma", .@zeny_cost) + " zeny가 필요합니다.";
+		mes "광석을 선택하고 정제를 시작하세요.";
 		next;
 
 		.@material[0] = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_MATERIAL_ID);
@@ -90,54 +90,54 @@
 			break;
 		case 3:// HD
 			if (.@equip_refine < 7) {
-				mes "[Shadow Blacksmith]";
-				mes "HD Ore can only used for +7 or higher refine level items.";
+				mes "[쉐도우 대장장이]";
+				mes "HD 광석은 7제련 이상 아이템에만 사용할 수 있습니다.";
 				close;
 			}
 			.@hoihoi = 1;
 			.@choose = .@material[2];
 			break;
 		case 4:
-			mes "[Shadow Blacksmith]";
-			mes "You've cancelled refining.";
+			mes "[쉐도우 대장장이]";
+			mes "정제를 취소하셨습니다..";
 			close;
 		}
 		if (!countitem(.@choose)) {
-			mes "[Shadow Blacksmith]";
-			mes "You do not have enough "+ getitemname(.@choose) +".";
+			mes "[쉐도우 대장장이]";
+			mes "당신은 충분하지 않습니다 "+ getitemname(.@choose) +".";
 			close;
 		}
 		if (Zeny < .@zeny_cost) {
-			mes "[Shadow Blacksmith]";
-			mes "You do not have enough zeny.";
+			mes "[쉐도우 대장장이]";
+			mes "제니가 부족합니다.";
 			close;
 		}
 		if (.@equip_refine > 9) {
-			mes "[Shadow Blacksmith]";
-			mes "Shadow Equipment can be refined to the maximum of 10...";
+			mes "[쉐도우 대장장이]";
+			mes "그림자 장비는 최대 10개까지 제련할 수 있습니다...";
 			close;
 		}
 		if (!getequipisenableref(.@part)) {
-			mes "[Shadow Blacksmith]";
-			mes "This item cannot be refined.";
+			mes "[쉐도우 대장장이]";
+			mes "이 아이템은 재련이 불가능합니다.";
 			close;
 		}
 		if (getequippercentrefinery(.@part) < 100) {
-			mes "[Shadow Blacksmith]";
-			mes "The safety refine level for Shadow Equipment is +4.";
+			mes "[쉐도우 대장장이]";
+			mes "그림자 장비의 안전 제련도는 4입니다.";
 			if (!.@hoihoi)
-				mes "Shadow equipment may be destroyed in subsequent refinements. Want to get started?";
+				mes "섀도우 장비는 이후 개선 시 파괴될 수 있습니다. 시작하시겠습니까?";
 			else
-				mes "The next refinement, if it fails, will degrade the refinement. Do you want to refine?";
+				mes "다음 정제가 실패하면 정제 수준이 저하됩니다. 개선하시겠습니까?";
 			next;
 			if (select("Proceed","Cancel") == 2) {
-				mes "[Shadow Blacksmith]";
-				mes "Heh, I knew it!";
+				mes "[쉐도우 대장장이]";
+				mes "흥, 그럴 줄 알았어!";
 				close;
 			}
 		}
-		mes "[Shadow Blacksmith]";
-		mes "Well then.. here goes nothing!";
+		mes "[쉐도우 대장장이]";
+		mes "그럼.. 아무것도 안 되네요!";
 		next;
 		delitem .@choose,1;
 		Zeny -= .@zeny_cost;
@@ -148,21 +148,21 @@
 
 		if (getequippercentrefinery(.@part, .@is_enriched) > rand(100)) {
 			successrefitem .@part;
-			mes "[Shadow Blacksmith]";
-			mes "It worked! It worked!";
+			mes "[쉐도우 대장장이]";
+			mes "효과가 있었어요! 성공했어요!";
 			next;
 		} else {
 			if (.@hoihoi)
 				downrefitem .@part;
 			else
 				failedrefitem .@part;
-			mes "[Shadow Blacksmith]";
+			mes "[쉐도우 대장장이]";
 			mes "Oh Odin No!";
 			close;
 		}
 	}
 }
 
-//moc_paraup,45,185,5	duplicate(ShadowBlacksmith)	Shadow Blacksmith#eden1	4_F_JOB_BLACKSMITH // Commented out until it's added to the map index
-//prt_in,61,54,3	duplicate(ShadowBlacksmith)	Shadow Blacksmith#itemmall	4_F_JOB_BLACKSMITH
-itemmall,31,76,3	duplicate(ShadowBlacksmith)	Shadow Blacksmith#itemmall	4_F_JOB_BLACKSMITH
+//moc_paraup,45,185,5	duplicate(ShadowBlacksmith)	쉐도우 대장장이#eden1	4_F_JOB_BLACKSMITH // Commented out until it's added to the map index
+//prt_in,61,54,3	duplicate(ShadowBlacksmith)	쉐도우 대장장이#itemmall	4_F_JOB_BLACKSMITH
+itemmall,31,76,3	duplicate(ShadowBlacksmith)	쉐도우 대장장이#itemmall	4_F_JOB_BLACKSMITH

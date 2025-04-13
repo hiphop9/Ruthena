@@ -11,137 +11,131 @@
 
 // Dragon Breeder :: dragon
 //============================================================
-job3_rune01,88,62,5	script	Dragon Breeder	105,{
-	mes "[Dragon Breeder]";
+job3_rune01,88,62,5	script	용 조련사	105,{
+	mes "[용 키우는 사람]";
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
-		mes "Welcome. Would you like to rent a Dragon?";
+		mes "환영합니다. 용을 대여하시겠습니까?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("예:아니요")) {
 		case 1:
 			//if (!getskilllv("RK_DRAGONTRAINING")) {
 			if (!getskilllv("KN_RIDING")) {
-				mes "[Dragon Breeder]";
-				mes "Please learn how to ride a Dragon first.";
+				mes "[용 키우는 사람]";
+				mes "먼저 용을 타는 법을 배우셔야 합니다.";
 				close;
 			}
 			else if (checkdragon()) {
-				mes "[Dragon Breeder]";
-				mes "You already have a Dragon.";
+				mes "[용 키우는 사람]";
+				mes "이미 용을 소유하고 계십니다.";
 				close;
 			}
 			else if (ismounting()) {
-				mes "[Dragon Breeder]";
-				mes "Please remove your cash mount.";
+				mes "[용 키우는 사람]";
+				mes "캐시 마운트를 해제해주세요.";
 				close;
 			}
 			setdragon;
 			close;
 		case 2:
-			mes "[Dragon Breeder]";
-			mes "I see. Then have a great day.";
+			mes "[용 키우는 사람]";
+			mes "알겠습니다. 즐거운 시간 되세요.";
 			close;
 		}
 	}
-	mes "What are you doing here?";
-	mes "Only Rune Knights can rent a Dragon.";
+	mes "여기서 무슨 일을 하시나요?";
+	mes "용을 대여할 수 있는 것은 룬 나이트뿐입니다.";
 	close;
 }
 
-// Dragon/Gryphon Master :: dragon
 //============================================================
-prontera,130,213,5	script	Riding Creature Master	105,{
-	mes "[Riding Creature Master]";
+prontera,130,213,5	script	거수 관리병::Riding Creature Master	105,{
+	mes "[거수 관리병]";
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_RUNE_KNIGHT) {
-		mes "Welcome. Would you like to rent a Dragon?";
+		mes "환영합니다. 용을 대여하시겠습니까?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("예:아니오")) {
 		case 1:
-			//if (!getskilllv("RK_DRAGONTRAINING")) {
 			if (!getskilllv("KN_RIDING")) {
-				mes "[Riding Creature Master]";
-				mes "Please learn how to ride a Dragon first.";
+				mes "[거수 관리병]";
+				mes "먼저 용을 타는 법을 배우셔야 합니다.";
 				close;
 			}
 			else if (checkdragon()) {
-				mes "[Riding Creature Master]";
-				mes "You already have a Dragon.";
+				mes "[거수 관리병]";
+				mes "이미 용을 소유하고 계십니다.";
 				close;
 			}
 			else if (ismounting()) {
-				mes "[Riding Creature Master]";
-				mes "Please remove your cash mount.";
+				mes "[거수 관리병]";
+				mes "캐시 마운트를 해제해주세요.";
 				close;
 			}
 			setdragon;
 			close;
 		case 2:
-			mes "[Riding Creature Master]";
-			mes "I see. Then have a great day.";
+			mes "[거수 관리병]";
+			mes "알겠습니다. 즐거운 시간 되세요.";
 			close;
 		}
 	}
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_ROYAL_GUARD) {
-		mes "Welcome. Would you like to rent a Gryphon?";
+		mes "환영합니다. 그리핀을 대여하시겠습니까?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("예:아니오")) {
 		case 1:
 			if (!getskilllv("KN_RIDING")) {
-				mes "[Riding Creature Master]";
-				mes "Please learn how to ride a Gryphon first.";
+				mes "[거수 관리병]";
+				mes "먼저 그리핀을 타는 법을 배우셔야 합니다.";
 				close;
 			}
 			else if (checkriding()) {
-				mes "[Riding Creature Master]";
-				mes "You already have a Gryphon.";
+				mes "[거수 관리병]";
+				mes "이미 그리핀을 소유하고 계십니다.";
 				close;
 			}
 			else if (ismounting()) {
-				mes "[Riding Creature Master]";
-				mes "Please remove your cash mount.";
+				mes "[거수 관리병]";
+				mes "캐시 마운트를 해제해주세요.";
 				close;
 			}
 			setriding;
 			close;
 		case 2:
-			mes "[Riding Creature Master]";
-			mes "I see. Then have a great day.";
+			mes "[거수 관리병]";
+			mes "알겠습니다. 즐거운 시간 되세요.";
 			close;
 		}
 	}
-	mes "I'm here to provide Rune Knights and Royal Guards with riding creatures.";
+	mes "룬 나이트와 로얄 가드에게 탈것을 제공하기 위해 여기에 있습니다.";
 	close;
 }
-geffen,100,55,3	duplicate(Riding Creature Master)	Riding Creature Master#2	105
-payon,166,102,5	duplicate(Riding Creature Master)	Riding Creature Master#3	105
-aldebaran,133,109,5	duplicate(Riding Creature Master)	Riding Creature Master#4	105
-yuno,171,187,3	duplicate(Riding Creature Master)	Riding Creature Master#5	105
-rachel,106,130,5	duplicate(Riding Creature Master)	Riding Creature Master#6	105
+geffen,100,55,3	duplicate(Riding Creature Master)	탈것 마스터#2	105
+payon,166,102,5	duplicate(Riding Creature Master)	탈것 마스터#3	105
+aldebaran,133,109,5	duplicate(Riding Creature Master)	탈것 마스터#4	105
+yuno,171,187,3	duplicate(Riding Creature Master)	탈것 마스터#5	105
+rachel,106,130,5	duplicate(Riding Creature Master)	탈것 마스터#6	105
 
 // Peco removing NPC :: dragon
 //============================================================
-prontera,125,208,5	script	Peco Peco Remover	105,{
-	mes "[Soldier]";
-	mes "If you're unable to dismount from a Peco Peco";
-	mes "for some unknown reason,";
-	mes "please feel free to use my services.";
+prontera,125,208,5	script	페코페코 제거병	105,{
+	mes "[병사]";
+	mes "만약 알 수 없는 이유로 페코페코에서 내리지 못하신다면,";
+	mes "제 서비스를 이용하시길 바랍니다.";
 	if (checkriding()) {
 		next;
-		mes "[Soldier]";
-		mes "You're riding a Peco Peco.";
-		mes "Would you like to dismount?";
+		mes "[병사]";
+		mes "페코페코를 타고 계십니다.";
+		mes "내리시겠습니까?";
 		next;
-		switch(select("Yes:No")) {
+		switch(select("예:아니오")) {
 		case 1:
 			setriding 0;
-			mes "[Soldier]";
-			mes "Say, how does it feel to";
-			mes "step on the ground on your own";
-			mes "feet again?";
+			mes "[병사]";
+			mes "말이야, 혼자서 땅에 발을 디디는 것은 어떤 느낌이에요?";
 			close;
 		case 2:
-			mes "[Soldier]";
-			mes "I see. Please feel free to ask me";
-			mes "if you change your mind.";
+			mes "[병사]";
+			mes "알겠습니다. 마음이 바뀌면 언제든지 물어봐주세요.";
 			close;
 		}
 	}
@@ -151,124 +145,120 @@ prontera,125,208,5	script	Peco Peco Remover	105,{
 // Mado Gear Renter :: madogear
 //============================================================
 -	script	::mgm	-1,{
-	mes "[Mado Gear Armorer]";
+	mes "[마도 기어 제작자]";
 	if ((eaclass()&EAJ_THIRDMASK)==EAJ_MECHANIC) {
-		mes "Welcome, Mechanic.";
-		mes "Would you like to rent a Pushcart or";
-		mes "ride a Mado Gear?";
+		mes "환영합니다, 메카닉.";
+		mes "푸시카트를 대여하시거나";
+		mes "마도 기어를 타시겠습니까?";
 		next;
-		switch(select("Rent a Pushcart:Ride a Mado Gear:Buy Emergency Mado Gear:Upgrade Cooling Device:Cancel")) {
+		switch(select("푸시카트 대여:마도 기어 탑승:비상 마도 기어 구매:냉각 장치 업그레이드:취소")) {
 		case 1:
 			if (checkcart()) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you already";
-				mes "have a Pushcart.";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 이미 푸시카트를 가지고 있습니다.";
 				close;
 			}
 			setcart;
-			mes "[Mado Gear Armorer]";
-			mes "There you go!";
+			mes "[마도 기어 제작자]";
+			mes "여기 있습니다!";
 			close;
 		case 2:
 			if (checkmadogear()) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you're already";
-				mes "riding a Mado Gear.";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 이미 마도 기어를 타고 있습니다.";
 				close;
 			}
 			else if (!getskilllv("NC_MADOLICENCE")) {
-				mes "[Mado Gear Armorer]";
-				mes "Please learn the skill to get the Mado Gear License first.";
+				mes "[마도 기어 제작자]";
+				mes "먼저 마도 기어 라이선스 획득 스킬을 배우십시오.";
 				close;
 			}
 			else if(ismounting()) {
-				mes "[Mado Gear Armorer]";
-				mes "Please remove your cash mount.";
+				mes "[마도 기어 제작자]";
+				mes "캐시 마운트를 제거해주세요.";
 				close;
 			}
 			setmadogear;
-			mes "[Mado Gear Armorer]";
-			mes "Have fun, and please come again!";
+			mes "[마도 기어 제작자]";
+			mes "즐겁게 사용하세요, 언제든 다시 오세요!";
 			close;
 		case 3:
-			mes "[Mado Gear Armorer]";
-			mes "Emergency Mado Gear is really useful for emergency situations and it is sold at 1,000,000 Zeny.";
+			mes "[마도 기어 제작자]";
+			mes "비상 마도 기어는 긴급 상황에 매우 유용하며 1,000,000 제니에 판매됩니다.";
 			next;
-			if (select("Purchase:Cancel") == 2) {
-				mes "[Mado Gear Armorer]";
-				mes "I see. Please feel free to ask me";
-				mes "if you change your mind.";
+			if (select("구매:취소") == 2) {
+				mes "[마도 기어 제작자]";
+				mes "알겠습니다. 마음이 바뀌면 언제든지 물어봐주세요.";
 				close;
 			}
 			if (countitem(23277) > 0) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you already have an Emergency Mado Gear.";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 이미 비상 마도 기어를 가지고 있습니다.";
 				close;
 			}
 			if (Zeny < 1000000) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you don't have enough Zeny to purchase the Emergency Mado Gear.";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 비상 마도 기어를 구매하기에는 충분한 제니가 없습니다.";
 				close;
 			}
 			Zeny -= 1000000;
 			getitem 23277,1; //Mado_Box
-			mes "[Mado Gear Armorer]";
-			mes "There you go!";
+			mes "[마도 기어 제작자]";
+			mes "여기 있습니다!";
 			close;
 		case 4:
-			mes "[Mado Gear Armorer]";
-			mes "Which device do you want to upgrade?";
+			mes "[마도 기어 제작자]";
+			mes "어떤 장치를 업그레이드하시겠습니까?";
 			next;
-			if (select("Cooling Device:High Quality Cooler") == 1) {
-				mes "[Mado Gear Armorer]";
-				mes "Upgrading Cooling Device to High Quality Cooler needs 1 Cooling Device and 2,000,000 Zeny.";
+			if (select("냉각 장치:고급 냉각 장치") == 1) {
+				mes "[마도 기어 제작자]";
+				mes "냉각 장치를 고급 냉각 장치로 업그레이드하려면 냉각 장치 1개와 2,000,000 제니가 필요합니다.";
 				next;
 				.@itemid = 2804;
 				.@cost = 2000000;
 			} else {
-				mes "[Mado Gear Armorer]";
-				mes "Upgrading High Quality Cooler to Special Cooler needs 1 High Quality Cooler and 4,000,000 Zeny.";
+				mes "[마도 기어 제작자]";
+				mes "고급 냉각 장치를 스페셜 쿨러로 업그레이드하려면 고급 냉각 장치 1개와 4,000,000 제니가 필요합니다.";
 				next;
 				.@itemid = 2809;
 				.@cost = 4000000;
 			}
-			if (select("Upgrade:Cancel") == 2) {
-				mes "[Mado Gear Armorer]";
-				mes "I see. Please feel free to ask me";
-				mes "if you change your mind.";
+			if (select("업그레이드:취소") == 2) {
+				mes "[마도 기어 제작자]";
+				mes "알겠습니다. 마음이 바뀌면 언제든지 물어봐주세요.";
 				close;
 			}
 			if (!countitem(.@itemid)) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you don't have the " + getitemname(.@itemid) + ".";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 " + getitemname(.@itemid) + "을(를) 가지고 있지 않습니다.";
 				close;
 			}
 			if (Zeny < .@cost) {
-				mes "[Mado Gear Armorer]";
-				mes "I'm sorry, but you don't have enough Zeny to upgrade the device.";
+				mes "[마도 기어 제작자]";
+				mes "죄송하지만 장치를 업그레이드하기에 충분한 제니가 없습니다.";
 				close;
 			}
 			Zeny -= .@cost;
 			delitem .@itemid,1;
 			getitem (.@itemid == 2804 ? 2809 : 2810),1; //High_Quality_Cooler,Special_Cooler
-			mes "[Mado Gear Armorer]";
-			mes "Here you are! Your very own " + getitemname(.@itemid) + ".";
+			mes "[마도 기어 제작자]";
+			mes "여기 있습니다! 여러분의 " + getitemname(.@itemid) + "입니다.";
 			close;
 		case 5:
 			close;
 		}
 	}
-	mes "How may I help you?";
-	mes "Mado Gears are only available for Mechanics.";
+	mes "무엇을 도와드릴까요?";
+	mes "마도 기어는 메카닉에게만 사용 가능합니다.";
 	close;
 }
-prontera,163,178,3	duplicate(mgm)	Mado Gear Armorer#prt	105
-geffen,103,55,5	duplicate(mgm)	Mado Gear Armorer#gef	105
-payon,166,106,5	duplicate(mgm)	Mado Gear Armorer#pay	105
-aldebaran,133,112,5	duplicate(mgm)	Mado Gear Armorer#alde	105
-yuno,167,187,3	duplicate(mgm)	Mado Gear Armorer#yuno	105
-rachel,106,134,5	duplicate(mgm)	Mado Gear Armorer#ra	105
-dicastes01,187,207,3	duplicate(mgm)	Mado Gear Armorer#dic	105
-manuk,273,212,5	duplicate(mgm)	Mado Gear Armorer#man	105
-splendide,180,174,5	duplicate(mgm)	Mado Gear Armorer#spl	105
-mid_camp,242,243,3	duplicate(mgm)	Mado Gear Armorer#mid	105
+prontera,163,178,3	duplicate(mgm)	마도기어 병기병#prt	105
+geffen,103,55,5	duplicate(mgm)	마도기어 병기병#gef	105
+payon,166,106,5	duplicate(mgm)	마도기어 병기병#pay	105
+aldebaran,133,112,5	duplicate(mgm)	마도기어 병기병#alde	105
+yuno,167,187,3	duplicate(mgm)	마도기어 병기병#yuno	105
+rachel,106,134,5	duplicate(mgm)	마도기어 병기병#ra	105
+dicastes01,187,207,3	duplicate(mgm)	마도기어 병기병#dic	105
+manuk,273,212,5	duplicate(mgm)	마도기어 병기병#man	105
+splendide,180,174,5	duplicate(mgm)	마도기어 병기병#spl	105
+mid_camp,242,243,3	duplicate(mgm)	마도기어 병기병#mid	105

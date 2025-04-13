@@ -22,7 +22,7 @@
 //= 2.0 Removed unused "name" variable. [L0ne_W0lf]
 //============================================================ 
 
-alberta,43,244,0	script	Tourist#thai	99,{
+alberta,43,244,0	script	咯青按#thai	99,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Wait a moment! -";
 		mes "- Currently you're carrying -";
@@ -36,87 +36,87 @@ alberta,43,244,0	script	Tourist#thai	99,{
 		case 1:
 			set .@th_rand,rand(1,100);
 			if (.@th_rand > 6 && .@th_rand < 20) {
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "You're that meanie...";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Aren't you...?";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...........";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Alright, alright, but you don't have to be mean.";
 				set thai_head,2;
 				close;
 			}
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "...........";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I didn't think you were that";
 			mes "mean. Scram, I ain't in the mood";
 			mes "to talk to you.";
 			close;
 		case 2:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "..........";
 			next;
 			switch(select("So do you have business in Lutie?:You don't want to go to Lutie for a tour.:What made you come over here?")) {
 			case 1:
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Yes.";
 				mes "Well, actually...";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I wanted to give my girlfriend";
 				mes "some well baked cookies.";
 				mes "Sadly, in my hometown of";
 				mes "Morocc, we don't have fancy";
 				mes "foods like that.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I've been asking all these";
 				mes "merchants about it, and I was";
 				mes "told that I could only get them";
 				mes "in Lutie...that's my story.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Now I'm running out of money and";
 				mes "food...I can't stay here much longer...";
 				next;
 				if (select("Do you want me to help you?:Well, good luck with everything.") == 1) {
 					set thai_head,3;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Thank god! Thank you so much.";
 					mes "I knew you would help me~!";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Umm...";
 					mes "Before we talk about that help...";
 					mes "Er, hmmmm...";
 					mes "Well, you know I'm pretty";
 					mes "much starving to death now...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Could you please get me some Meat?";
 					mes "I know I'm asking you too much,";
 					mes "but I'm pretty much penniless";
@@ -125,49 +125,49 @@ alberta,43,244,0	script	Tourist#thai	99,{
 					close;
 				}
 				set thai_head,1;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes ".........";
 				mes "How could you be so cold";
 				mes "hearted after hearing my story?";
 				mes "...You're pretty mean!";
 				close;
 			case 2:
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...Oh really? Hmm...people said I";
 				mes "could only get the well baked";
 				mes "cookie in Lutie.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I wanted to give my girlfriend";
 				mes "some well baked cookies.";
 				mes "Sadly, in my hometown of";
 				mes "Morocc, we don't have fancy";
 				mes "foods like that.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I've been asking all these";
 				mes "merchants about it, and I was";
 				mes "told that I could only get them";
 				mes "in Lutie...that's my story.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Now I'm running out of money and";
 				mes "food...I can't stay here much longer...";
 				next;
 				if (select("Do you want me to help you?:Well, good luck with everything.") == 1) {
 					set thai_head,3;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Thank god! Thank you so much.";
 					mes "I knew you would help me~!";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Umm...";
 					mes "Before we talk about that help...";
 					mes "Er, hmmmm...";
 					mes "Well, you know I'm pretty";
 					mes "much starving to death now...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Could you please get me some Meat?";
 					mes "I know I'm asking you too much,";
 					mes "but I'm pretty much penniless";
@@ -176,19 +176,19 @@ alberta,43,244,0	script	Tourist#thai	99,{
 					close;
 				}
 				set thai_head,1;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes ".........";
 				mes "How could you be so cold";
 				mes "hearted after hearing my story?";
 				mes "...You're pretty mean!";
 				close;
 			case 3:
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I was told that I could only find";
 				mes "the entrance to Lutie in";
 				mes "Al De Baran...";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "So I came here after searching";
 				mes "for Al De Baran...almost";
 				mes "killing myself when I passed the desert...*Sob*";
@@ -196,33 +196,33 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			}
 		case 3:
 			if (countitem(517) == 0) {
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I see...I can understand that you";
 				mes "can't help me. It's alright...";
 				mes "It's not like I have the right";
 				mes "to demand anything of you...";
 				mes "But...";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "*Sob*...so... hungry...";
 				close;
 			}
 			set .@th_rand,rand(1,100);
 			if (.@th_rand > 0 && .@th_rand < 10) {
 				if (countitem(517) == 10) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Ah...thanks! Thank you so much!";
 					delitem 517,10; //Meat
 					next;
 				}
 				else if (countitem(517) < 10) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "I appreciate that you're";
 					mes "helping me out of the";
 					mes "goodness of your heart,";
 					mes "but...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "What are you...";
 					mes "Cheap?! You can feed";
 					mes "a starving man more";
@@ -231,11 +231,11 @@ alberta,43,244,0	script	Tourist#thai	99,{
 					close;
 				}
 				else if (countitem(517) > 10) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "I appreciate you bringing";
 					mes "all this for me but...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Geez, you want I should";
 					mes "choke myself to death?";
 					mes "I can't eat all of this!";
@@ -245,19 +245,19 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			}
 			else if (.@th_rand > 11 && .@th_rand < 80) {
 				if (countitem(517) == 20) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Ah...thanks! Thank you so much!";
 					delitem 517,20; //Meat
 					next;
 				}
 				else if (countitem(517) < 20) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "I appreciate that you're";
 					mes "helping me out of the";
 					mes "goodness of your heart,";
 					mes "but...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "What are you...";
 					mes "Cheap?! You can feed";
 					mes "a starving man more";
@@ -266,11 +266,11 @@ alberta,43,244,0	script	Tourist#thai	99,{
 					close;
 				}
 				else if (countitem(517) > 20) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "I appreciate you bringing";
 					mes "all this for me but...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Geez, you want I should";
 					mes "choke myself to death?";
 					mes "I can't eat all of this!";
@@ -280,19 +280,19 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			}
 			else {
 				if (countitem(517) == 40) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Ah...thanks! Thank you so much!";
 					delitem 517,40; //Meat
 					next;
 				}
 				else if (countitem(517) < 40) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "I appreciate that you're";
 					mes "helping me out of the";
 					mes "goodness of your heart,";
 					mes "but...";
 					next;
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "What are you...";
 					mes "Cheap?! You can feed";
 					mes "a starving man more";
@@ -301,7 +301,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 					close;
 				}
 				else if (countitem(517) > 40) {
-					mes "[Tourist]";
+					mes "[咯青按]";
 					mes "Geez, you want I should";
 					mes "choke myself to death?";
 					mes "I can't eat all of this!";
@@ -319,37 +319,37 @@ alberta,43,244,0	script	Tourist#thai	99,{
 				delitem 538,countitem(538); //Well_Baked_Cookie
 			}
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "*Phew*...thanks.";
 			mes "At long last...";
 			mes "I feel stuffed.";
 			mes "...Oh. Right.";
 			mes "My girlfriend.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Er...about the well-baked";
 			mes "cookie I told you about? Um... I";
 			mes "know I'm being rude and selfish";
 			mes "...But I don't think I can find";
 			mes "it on my own.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "So, could you bring me ^0000FF20 Well-baked Cookies^000000?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Although I shouldn't be asking for";
 			mes "any more favors, and you'd have";
 			mes "to go through all this trouble...";
 			mes "while I'd be safe over here...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I really want to make my";
 			mes "girlfriend happy. Everything";
 			mes "would be worth it for";
 			mes "that smile on her face...";
 			mes "I just can't pass this chance up!";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Haven't you been in love...?";
 			mes "Surely you understand the";
 			mes "sway that this woman has";
@@ -357,7 +357,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "selling jewels...anything";
 			mes "other than this.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I'm begging you, since you're";
 			mes "stronger and less delicate";
 			mes "than me, please bring me";
@@ -366,33 +366,33 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			close;
 		case 4:
 			if (countitem(538) > 19) {
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Ah~!! Thank you so much!!";
 				mes "There really are many good";
 				mes "people like you in this world.";
 				next;
 				set thai_head,5;
 				delitem 538,20; //Well_Baked_Cookie
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "I appreciate what you've done for";
 				mes "me...now I can see her smile with";
 				mes "happiness.";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "Hmm, there is still one problem";
 				mes "left for me though...How do I";
 				mes "get back home to Morocc??";
 				mes "Well, if it can make my girl";
 				mes "happy...";
 				next;
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "...I'll get around to it.";
 				mes "Sooner or later. Man,";
 				mes "that desert's really big,";
 				mes "you know?";
 				close;
 			}
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I see...I can understand that you";
 			mes "can't help me. It's alright...";
 			mes "It's not like I have the right";
@@ -400,10 +400,10 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "But...";
 			close;
 		case 5:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Thank you so much!";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hmm...I wanna pay you back...";
 			mes "And you're an adventurer...";
 			mes "But I don't got any like...";
@@ -411,7 +411,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "cards you guys are";
 			mes "always playing with...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hmmm...";
 			mes "....I got it!";
 			mes "Sooner or later, you";
@@ -419,7 +419,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "of wise man or...";
 			mes "...something, right?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Visit my pal ^649664Jacob^000000 in";
 			mes "Morocc. Tell him that I";
 			mes "introduced you. He knows";
@@ -427,35 +427,35 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "Though, he isn't one";
 			mes "himself...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Ah, sorry, I haven't even told";
 			mes "you my name. My name is...";
 			mes "^0000FFPandger Mayer^000000.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "So yeah, tell my pal Jacob";
 			mes "that Pandger Mayer introduced you.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "So...you tell 'em:";
 			mes "^0000FFPandger Mayer introduced you^000000";
 			mes "Exactly like that~";
 			mes "^0000FFPandger Mayer introduced you^000000";
 			mes "^FF0000Don't forget it~^000000";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Sorry I can't pay you back with";
 			mes "more than this, though. Kinda";
 			mes "stinks, huh?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Here, take this as an extra";
 			mes "token of my gratitute.";
 			mes "This doohickey has been";
 			mes "pretty handy in sticky";
 			mes "situations...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hopefully, it'll be useful.";
 			if (MaxWeight - Weight < 500) {
 				mes "Umm...it seems you're carrying too much stuff with you.";
@@ -465,7 +465,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			set thai_head,6;
 			getitem 1205,1; //Cutter_
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Heh...once gain, thanks for";
 			mes "the help. Take care, guy.";
 			close;
@@ -474,27 +474,27 @@ alberta,43,244,0	script	Tourist#thai	99,{
 	else if (thai_head > 5) {
 		switch(rand(1,3)) {
 		case 1:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hey, thanks a bunch for your";
 			mes "help. Anyways...now I remember";
 			mes "I gotta go back through the";
 			mes "desert again...*Sigh*";
 			mes "Yeah, I better get back...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "...no matter how hard it is.";
 			mes "But...yeah. It's gonna be pretty";
 			mes "hard. Crossing the desert...";
 			mes "alone. By myself...crud.";
 			close;
 		case 2:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hey, thanks a bunch for your";
 			mes "help....I ain't sure if I";
 			mes "can make it back to Morocc";
 			mes "in one piece...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "But I better go back";
 			mes "to my girlfriend. That's";
 			mes "the point of me coming";
@@ -502,7 +502,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "anyway.";
 			close;
 		case 3:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hey, thanks a bunch for your";
 			mes "help. Man...Morocc is a long";
 			mes "way off, isn't it? Aw nuts...";
@@ -510,14 +510,14 @@ alberta,43,244,0	script	Tourist#thai	99,{
 			mes "enough to come here because";
 			mes "of my girlfriend...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I'm crazy enough to walk all";
 			mes "way back to Morocc...";
 			mes "...";
 			mes "...unless...";
 			mes "You'll gimme a piggy-back ride?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "...kidding. I'm not that";
 			mes "big of a jerk, I guess.";
 			mes "Try not to look so";
@@ -527,76 +527,69 @@ alberta,43,244,0	script	Tourist#thai	99,{
 	}
 	else {
 		if (JobLevel < 36) {
-			mes "[Tourist]";
-			mes "Where am I...?";
-			mes "...Who am I?";
+			mes "[咯青按]";
+			mes "咯扁绰 绢叼?抄 穿备?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes ".........";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes ".....";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes ".........";
 			next;
-			mes "[Tourist]";
-			mes "Mahahahahahaha!!";
+			mes "[咯青按]";
+			mes "林快快快款 某局局局举!!";
 			next;
-			mes "[Tourist]";
-			mes "*Drools*...I love chocolate!";
+			mes "[咯青按]";
+			mes "览倾! 律部房 亮酒!";
 			next;
-			mes "[Tourist]";
-			mes "Wait...";
-			mes "I have a girlfriend...";
-			mes "and...and...";
-			mes "cookies...?";
-			mes "I feel sooo lost...";
-			next;
-			mes "^3355FFWe don't talk to crazy people~^000000";
+			mes "- 赣府啊 距埃 捞惑茄 荤恩苞绰 -";
+			mes "- 捞具扁 窍瘤 臼绰霸 惑氓捞促. -";
 			close;
 		}
-		mes "[Tourist]";
+		mes "[咯青按]";
 		mes "Where am I?";
 		mes "*Sob*...I guess I got lost...";
 		mes "Hey, where is this!?";
 		next;
 		switch(select("Ignore him.:This is Alberta.:This is Al De Baran.")) {
 		case 1:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "..........";
 			close;
 		case 2:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Ah...I see. So this is";
 			mes "Alberta...crud. I'm";
 			mes "supposed to go to ^0000FFLutie^000000...";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hey, thanks for letting me know.";
 			mes "Now at least I know where I am.";
 			mes "Geez...they got boats here";
 			mes "that go everywhere, yeah?";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Oh right, everywhere...but Lutie.";
 			mes "Man, this stinks.";
 			close2;
 			set thai_head,2;
 			end;
 		case 3:
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Oh...oh right!";
 			mes "Yeah, Al De Baran...";
 			mes "Guess I'm not lost";
 			mes "after all.";
 			next;
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "I was told that I can see a ^FF0000Clock Tower^000000 in Al De Baran.";
 			mes "Can you tell me where I can find the ^FF0000Clock Tower^000000?";
 			next;
 			if (select("It's in the center of the town.:Eh, I think I gave you the wrong town name.") == 1) {
-				mes "[Tourist]";
+				mes "[咯青按]";
 				mes "..............";
 				mes "You know, I'm beginning";
 				mes "to feel like...";
@@ -605,7 +598,7 @@ alberta,43,244,0	script	Tourist#thai	99,{
 				set thai_head,1;
 				close;
 			}
-			mes "[Tourist]";
+			mes "[咯青按]";
 			mes "Hah~!...I knew it! Well, it's";
 			mes "pretty hard to admit when";
 			mes "you do something wrong.";

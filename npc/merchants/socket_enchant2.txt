@@ -15,73 +15,73 @@
 //= 1.1a Added 'disable_items' command. [Euphy]
 //============================================================ 
 
--	script	Leablem#dummy::SocketEnchant2	-1,{
+-	script	레아블렘#dummy::SocketEnchant2	-1,{
 	if (checkweight(1201,1) == 0)
 	{
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
-	mes "[Leablem]";
-	mes "Good day. My name is Leablem,";
-	mes "and I'm a technician that specializes in";
-	mes "adding slots to weapons and armors.";
-	mes "It can be very hard sometimes, but I like";
-	mes "what I do, and take pride in it.";
+	mes "[레아블렘]";
+	mes "좋은 하루 되세요. 제 이름은 리블럼입니다.";
+	mes "저는 전문 기술자입니다";
+	mes "무기와 방어구에 슬롯을 추가합니다.";
+	mes "가끔 힘들 때도 있지만 좋아요";
+	mes "내가 하는 일에 자부심을 가져라.";
 	next;
-	mes "[Leablem]";
-	mes "I've learned most of the things from my brother, Seyablem,";
-	mes "but I think I still have a lot to learn.";
-	mes "So please understand my slotting services are limited,";
-	mes "unlike my brother Seyablem.";
+	mes "[레아블렘]";
+	mes "나는 내 동생 세이블럼에게서 대부분의 것을 배웠어요.";
+	mes "하지만 아직 배울게 많은 것 같아요.";
+	mes "제 슬롯 서비스는 제한되어 있으니 양해해 주시기 바랍니다.";
+	mes "내 동생 Seyablem과는 다릅니다.";
 	next;
-	mes "[Leablem]";
-	mes "My brother wasn't so happy to teach me";
-	mes "his skills because he was worried that his skills";
-	mes "wouldn't be unique anymore. He did, however, his best";
-	mes "to teach me.";
+	mes "[레아블렘]";
+	mes "내 동생은 나를 가르치는 것을 그다지 좋아하지 않았습니다";
+	mes "그의 실력이 걱정되었기 때문이에요.";
+	mes "더 이상 독특하지 않을 것입니다. 하지만 그는 최선을 다했습니다";
+	mes "나를 가르치려고.";
 	next;
-	mes "[Leablem]";
-	mes "Thanks to him, I've learned lots of things.";
-	mes "I'm not very confident";
-	mes "in trying many different things,";
-	mes "but I'll do what";
-	mes "I can do for now.";
+	mes "[레아블렘]";
+	mes "덕분에 많은걸 배웠습니다.";
+	mes "자신감이 별로 없어요";
+	mes "다양한 일을 시도하다";
+	mes "하지만 난 뭘 할 거야";
+	mes "지금은 할 수 있어요.";
 	next;
-	mes "[Leablem]";
-	mes "In fact, there's one thing";
-	mes "that my brother doesn't want me to do.";
-	mes "I don't want to upset him, so...let's just skip that part.";
-	mes "I'll say no more about it!";
+	mes "[레아블렘]";
+	mes "사실 한가지가 있어요";
+	mes "내 동생이 내가 그러는 걸 원하지 않거든요.";
+	mes "그 사람을 화나게 하고 싶지 않으니...그 부분은 그냥 넘어가자.";
+	mes "더 이상 말하지 않겠습니다!";
 	next;
-	mes "[Leablem]";
-	mes "Anyways, do you have any equipment";
-	mes "which you'd like to add to the slots?";
-	mes "My service charge, the materials,";
-	mes "and the success chance all depend on";
-	mes "the specific item I'm working on.";
+	mes "[레아블렘]";
+	mes "그나저나 장비는 있나요?";
+	mes "슬롯에 어떤 것을 추가하고 싶으신가요?";
+	mes "나의 서비스 요금, 자료,";
+	mes "성공 가능성은 모두 다음에 달려 있습니다";
+	mes "내가 작업하고 있는 특정 항목입니다.";
 	next;
-	switch(select("Weapon:Armor:About that thing you skipped:More information:Quit"))
+	switch(select("무기:방어구:건너뛴 것에 대해:추가 정보:종료"))
 	{
 		case 1:
-			mes "[Leablem]";
-			mes "Weapon, you said? Sure, no problem.";
-			mes "Weapons are divided into 4 different class";
-			mes "depending on the work difficulty.";
-			mes "C class is the easiest one, and S class is the hardest one.";
-			mes "Which class would you like to try?";
+			mes "[레아블렘]";
+			mes "무기라고 했죠? 물론이죠, 문제없어요.";
+			mes "무기는 4가지 클래스로 분류됩니다";
+			mes "작업 난이도에 따라 다릅니다.";
+			mes "C클래스가 가장 쉽고, S클래스가 가장 어렵습니다.";
+			mes "어떤 수업을 듣고 싶나요?";
 			next;
 			switch(select("C:B:A:S"))
 			{
 				case 1:
-					mes "[Leablem]";
-					mes "C class, I see.";
-					mes "So, what kind of weapon do you have?";
+					mes "[레아블렘]";
+					mes "C급이군요.";
+					mes "그럼 어떤 무기를 갖고 계시나요?";
 					next;
-					switch(select("Book of Mother Earth:Book of Billows:Book of Gust of Wind:Book of the Blazing Sun"))
+					switch(select("대지의 책:파도의 책:돌풍의 책:타오르는 태양의 책"))
 					{
 						case 1: callfunc "Func_Socket2",1554,1569,40,66,200,1010,10;
 						case 2: callfunc "Func_Socket2",1553,1568,40,66,200,1010,10;
@@ -89,22 +89,22 @@
 						case 4: callfunc "Func_Socket2",1555,1570,40,66,200,1010,10;
 					}
 				case 2:
-					mes "[Leablem]";
-					mes "You have chosen average B class.";
-					mes "So, what kind of weapon do you have?";
+					mes "[레아블렘]";
+					mes "평균 B급을 선택하셨습니다.";
+					mes "그럼 어떤 무기를 갖고 계시나요?";
 					next;
-					switch(select("Orcish Axe:Scimiter:Spike"))
+					switch(select("오키쉬 도끼:시미터:스파이크"))
 					{
 						case 1: callfunc "Func_Socket2",1304,1309,40,66,200,984,1;
 						case 2: callfunc "Func_Socket2",1113,1114,40,66,200,984,1;
 						case 3: callfunc "Func_Socket2",1523,1538,40,61,300,984,1;
 					}
 				case 3:
-					mes "[Leablem]";
-					mes "A class? You seem to want little too much. But, no problem.";
-					mes "So, what kind of weapon do you have?";
+					mes "[레아블렘]";
+					mes "수업? 당신은 너무 많은 것을 원하는 것 같지만 문제 없습니다.";
+					mes "그럼 어떤 무기를 갖고 계시나요?";
 					next;
-					switch(select("Dragon Killer:Katar of Quaking:Katar of Raging Blaze:Katar of Frozen Icicle:Katar of Piercing Wind:Golden Mace:Oriental Lute:Queen's Whip:Spectral Spear:Gae Bolg:Schweizersabel"))
+					switch(select("드래곤 킬러:전율의 카타르:격노하는 불꽃의 카타르:얼어붙은 고드름의 카타르:꿰뚫는 바람의 카타르:황금 철퇴:동방의 류트:여왕의 채찍:영혼의 창:게 볼그:슈바이처사벨"))
 					{
 						case 1:  callfunc "Func_Socket2",13001,13030,40,61,500,984,2;
 						case 2:  callfunc "Func_Socket2", 1257, 1276,40,66,500,984,2;
@@ -119,11 +119,11 @@
 						case 11: callfunc "Func_Socket2", 1167, 1178,40,61,500,984,2;
 					}
 				case 4:
-					mes "[Leablem]";
-					mes "Huh, S Class?! Oh my god, are you serious?*Tremble*";
-					mes "So...which S class weapon would you like to make a slot?!";
+					mes "[레아블렘]";
+					mes "어, S급?! 맙소사, 진심이야?*떨림*";
+					mes "그럼...어떤 S급 무기에 슬롯을 만드시겠어요?!";
 					next;
-					switch(select("Zephyrus:Mailbreaker:Dragon Slayer:Swordbreaker:Assasin Dagger:Grand Cross:Executioner"))
+					switch(select("제피로스:메일브레이커:드래곤 슬레이어:소드브레이커:어새신 대거:그랜드 크로스:집행자"))
 					{
 						case 1: callfunc "Func_Socket2",1468, 1481,40,51,1000,984,5,999,10;
 						case 2: callfunc "Func_Socket2",1225,13032,40,51,1000,984,5,999,10;
@@ -135,21 +135,21 @@
 					}
 			}
 		case 2:
-			mes "[Leablem]";
-			mes "Armor, you said? Sure, no problem.";
-			mes "Armors are divided into 4 different class";
-			mes "depending on the work difficulty.";
-			mes "C class is the easiest one, and S class is the hardest one.";
-			mes "Which class would you like to try?";
+			mes "[레아블렘]";
+			mes "갑옷이라고 했죠? 물론이죠, 문제 없어요.";
+			mes "방어구는 4가지 클래스로 분류됩니다";
+			mes "작업 난이도에 따라 다릅니다.";
+			mes "C클래스가 가장 쉽고, S클래스가 가장 어렵습니다.";
+			mes "어떤 수업을 듣고 싶나요?";
 			next;
 			switch(select("C:B:A:S"))
 			{
 				case 1:
-					mes "[Leablem]";
-					mes "C class, I see.";
-					mes "So, what kind of armor do you have?";
+					mes "[레아블렘]";
+					mes "C급이군요.";
+					mes "그럼 어떤 갑옷을 갖고 계시나요?";
 					next;
-					switch(select("Sunflower:Ph.D Hat:Big Ribbon:Boys Cap"))
+					switch(select("해바라기:박사 모자:큰 리본:소년 모자"))
 					{
 						case 1: callfunc "Func_Socket2",2253,5351,40,66,100,999,3;
 						case 2: callfunc "Func_Socket2",5012,5347,40,66,100,999,3;
@@ -157,30 +157,30 @@
 						case 4: callfunc "Func_Socket2",5016,5349,40,66,100,999,5;
 					}
 				case 2:
-					mes "[Leablem]";
-					mes "You have chosen average B class.";
-					mes "So, what kind of armor do you have?";
+					mes "[레아블렘]";
+					mes "평균 B급을 선택하셨습니다.";
+					mes "그럼 어떤 갑옷을 갖고 계시나요?";
 					next;
-					switch(select("Skull Ring:High Heels"))
+					switch(select("해골반지:하이힐"))
 					{
 						case 1: callfunc "Func_Socket2",2609,2715,40,61,300,999,5;
 						case 2: callfunc "Func_Socket2",2409,2432,40,61,300,999,5;
 					}
 				case 3:
-					mes "[Leablem]";
-					mes "A class? You seem to want little too much. But, no problem.";
-					mes "So, what kind of armor do you have?";
+					mes "[레아블렘]";
+					mes "수업? 당신은 너무 많은 것을 원하는 것 같지만 문제 없습니다.";
+					mes "그럼 어떤 갑옷을 갖고 계시나요?";
 					next;
-					switch(select("Pirate Bandana:Black Leather Boots"))
+					switch(select("해적 반다나:검은 가죽 부츠"))
 					{
 						case 1: callfunc "Func_Socket2",2287,5350,50,61,500,985,1; // 50,61 - it's not a typo
 						case 2: callfunc "Func_Socket2",2425,2434,40,51,500,985,1;
 						//case 3: callfunc "Func_Socket2",15053,15056,x,x,x,x,x;	// Special Ninja Suit (Needs more info)
 					}
 				case 4:
-					mes "[Leablem]";
-					mes "Huh, S Class?! Oh my god, are you serious?*Tremble*";
-					mes "So...which S class armor would you like to make a slot?!";
+					mes "[레아블렘]";
+					mes "어, S급?! 맙소사, 진심이야?*떨림*";
+					mes "그럼... 어떤 S급 방어구에 슬롯을 만드시겠어요?!";
 					next;
 					switch(select("Mage Coat:Holy Robe:Sacred Mission:Undershirt:Pantie"))
 					{
@@ -192,197 +192,197 @@
 					}
 			}
 		case 3:
-			mes "[Leablem]";
-			mes "Oh, it's nothing special, but he thinks";
-			mes "it's not something for humans to mess with. ";
-			mes "I don't want to upset my brother,";
-			mes "so I'd better forget about it.";
+			mes "[레아블렘]";
+			mes "아, 특별한 건 아니지만 그 사람은 그렇게 생각하는 것 같아요";
+			mes "인간이 함부로 할 수 있는 일이 아닙니다.";
+			mes "나는 내 동생을 화나게 하고 싶지 않아요,";
+			mes "그럼 잊어버리는 게 좋을 것 같아요.";
 			next;
-			mes "[Leablem]";
-			mes "...That service itself has a very high success chance,";
-			mes "but requires a lot of materials and a high-rate service charge.";
-			mes "I highly doubt that anyone would actually want to use";
-			mes "the service, even if I did open it.";
+			mes "[레아블렘]";
+			mes "...그 서비스 자체는 매우 높은 성공 확률을 가지고 있습니다.";
+			mes "하지만 재료가 많이 필요하고 서비스 비용도 많이 듭니다.";
+			mes "누군가가 실제로 사용하고 싶어할지 의심스럽습니다";
+			mes "서비스를 열었더라도 말이죠.";
 			next;
-			mes "[Leablem]";
-			mes "...Ummm...";
+			mes "[레아블렘]";
+			mes "...음...";
 			next;
-			mes "[Leablem]";
+			mes "[레아블렘]";
 			mes ".............";
 			next;
-			mes "[Leablem]";
+			mes "[레아블렘]";
 			mes ".............";
 			next;
-			mes "[Leablem]";
-			mes "You seem interested in using that service.";
-			mes "If you want, I can at least tell you about it.";
-			mes "But you must promise to keep this a secret.";
-			mes "If my brother finds out what I'm about to tell you,";
-			mes "he's gonna give me a beating!";
+			mes "[레아블렘]";
+			mes "당신은 그 서비스를 이용하는데 관심이 있는 것 같습니다.";
+			mes "원하신다면 최소한 말씀드릴 수는 있어요.";
+			mes "하지만 이 일은 비밀로 하겠다고 약속해야 해요.";
+			mes "내 동생이 내가 말하려는 걸 알게 된다면,";
+			mes "그 사람이 날 때릴 거야!";
 			next;
-			mes "[Leablem]";
-			mes "This special service has a 90% success chance,";
-			mes "but requires 2 Gold and 2 hundred million zeny:";
-			mes "I can add slots to the Hat of the Sun God.";
+			mes "[레아블렘]";
+			mes "이 특별한 서비스의 성공확률은 90%입니다.";
+			mes "그러나 2 골드와 2억 제니가 필요합니다:";
+			mes "태양신의 모자에 슬롯을 추가할 수 있습니다.";
 			next;
-			mes "[Leablem]";
-			mes "My brother said that, even since ancient times, it's forbidden to modify that hat.";
-			mes "But I believe humans are too curious not to";
-			mes "experiment, especially when it's forbidden.";
-			mes "I just don't want my brother to yell at me. That's all.";
+			mes "[레아블렘]";
+			mes "내 동생이 옛날부터 그 모자를 개조하는 것은 금지되어 있다고 하더군요.";
+			mes "하지만 인간은 호기심이 너무 많아서 그러지 않을 수 있는 것 같아요";
+			mes "특히 금지된 경우에는 실험해 보세요.";
+			mes "나는 단지 내 동생이 나에게 소리 지르는 걸 원하지 않을 뿐이야. 그게 다야.";
 			next;
-			switch(select("Use the Service","Quit"))
+			switch(select("서비스 이용","종료"))
 			{
 				case 1:
-					mes "[Leablem]";
+					mes "[레아블렘]";
 					mes ".................";
 					next;
-					mes "[Leablem]";
+					mes "[레아블렘]";
 					mes ".................";
 					next;
-					mes "[Leablem]";
-					mes "...Wh... What? No!";
-					mes "Giving me that dirty look";
-					mes "won't make me do it!";
-					mes "No, I said no! No is no! No!";
+					mes "[레아블렘]";
+					mes "...뭐... 뭐라고? 안돼!";
+					mes "저런 더러운 표정을 짓고 있군요";
+					mes "내가 그렇게 하도록 강요하진 않을 거야!";
+					mes "안돼요, 안 된다고 했어요! 안 돼요! 안 돼요!";
 					next;
-					mes "[Leablem]";
-					mes "No, I won't! No!";
+					mes "[레아블렘]";
+					mes "아니요, 안 그럴게요! 안 돼요!";
 					next;
-					mes "[Leablem]";
-					mes "I can't do it...";
+					mes "[레아블렘]";
+					mes "난 할 수 없어...";
 					next;
-					mes "[Leablem]";
-					mes "I can't do... It...";
+					mes "[레아블렘]";
+					mes "할 수 없어... 그건...";
 					next;
-					mes "[Leablem]";
+					mes "[레아블렘]";
 					mes ".................";
 					next;
-					mes "[Leablem]";
-					mes "Umm...";
+					mes "[레아블렘]";
+					mes "음...";
 					next;
-					mes "[Leablem]";
-					mes "You're so persistent. Okay, I'll make you an exception.";
-					mes "Just don't tell anyone,";
-					mes "especially my brother. Do you promise?";
+					mes "[레아블렘]";
+					mes "당신은 너무 끈질기네요. 알겠습니다. 당신은 예외로 할게요.";
+					mes "아무한테도 말하지 마세요,";
+					mes "특히 내 동생. 약속해요?";
 					next;
-					mes "[Leablem]";
-					mes "Okay then, please bring me";
-					mes "^FF00002 Gold, 2 hundred million zeny -- the service charge --,";
-					mes "^FF0000and a Hat of the Sun God.";
-					mes "^FF0000You know your chance of success is 90% with this, don't you?^000000";
-					mes "We don't have time to waste,";
-					mes "so let's get down to business right away.";
+					mes "[레아블렘]";
+					mes "그럼 데려오세요";
+					mes "^FF00002 골드, 2억 제니 --서비스 요금 --,";
+					mes "^FF0000그리고 태양신의 모자.";
+					mes "^FF0000이거 성공확률 90%인거 아시죠?^000000";
+					mes "낭비할 시간이 없어요,";
+					mes "그럼 바로 본론으로 들어가죠.";
 					next;
 					if ((Zeny > 199999999) && (countitem(969) > 1) && (countitem(5022) > 0))
 					{
-						mes "[Leablem]";
-						mes "Shall we start now?";
-						mes "Pray to your gods for good luck.";
+						mes "[레아블렘]";
+						mes "이제 시작해볼까?";
+						mes "신들에게 행운을 빌어주세요.";
 						next;
 						set .@a, rand(1,100);
 						if ((.@a > 4) && (.@a < 95))
 						{
 							specialeffect EF_LORD;
-							mes "[Leablem]";
-							mes "Excellent! Wow, I guess the 90% success chance is true!";
-							mes "Look, the slot was added in the perfect place.";
-							mes "Congratulations.";
+							mes "[레아블렘]";
+							mes "훌륭해요! 와, 성공확률이 90% 맞나봐요!";
+							mes "봐요, 딱 맞는 위치에 슬롯이 추가됐네요.";
+							mes "축하해요.";
 							delitem 5022,1; //Helm_Of_Sun
 							delitem 969,2; //Gold
 							set Zeny, Zeny - 200000000;
 							getitem 5353,1; //Helm_Of_Sun_
 							next;
-							mes "[Leablem]";
-							mes "This is the first and last time I will do this for you.";
-							mes "Don't ever tell anyone";
-							mes "about this. Okay?";
+							mes "[레아블렘]";
+							mes "이런 일은 처음이자 마지막입니다.";
+							mes "아무에게도 말하지 마세요";
+							mes "이것에 대해서요. 알았죠?";
 							close;
 						}
 						else
 						{
 							specialeffect EF_SUI_EXPLOSION;
-							mes "[Leablem]";
-							mes "Wah! Oh my god, we failed!";
-							mes "My god, I guess we had the worst kind of luck...";
-							mes "What should we do? ...This is why";
-							mes "I didn't want to do in the first place!";
+							mes "[레아블렘]";
+							mes "와! 맙소사, 우리는 실패했어요!";
+							mes "맙소사, 우리에겐 최악의 행운이 있었던 것 같아요...";
+							mes "우리는 어떻게 해야 할까요? ...이것이 바로 이유입니다";
+							mes "원래는 하고 싶지 않았어!";
 							delitem 5022,1; //Helm_Of_Sun
 							delitem 969,2; //Gold
 							set Zeny, Zeny - 200000000;
 							next;
-							mes "[Leablem]";
-							mes "No, don't ever ask me to do such a risky thing again!";
-							mes "Bah~";
+							mes "[레아블렘]";
+							mes "아니, 다시는 나한테 그런 위험한 짓을 하라고 하지 마세요!";
+							mes "바~";
 							close;
 						}
 					}
 					else
 					{
-						mes "[Leablem]";
-						mes "Umm...";
+						mes "[레아블렘]";
+						mes "음...";
 						next;
-						mes "[Leablem]";
-						mes "You don't have enough materials.";
-						mes "Man, why did you even ask me to try?";
-						mes "I'm not going to do this again for you,";
-						mes "even if you bring enough materials. Bah~";
+						mes "[레아블렘]";
+						mes "재료가 부족해요.";
+						mes "야, 왜 나한테 해보라고 한 거야?";
+						mes "다시는 이런 일을 하지 않겠습니다.";
+						mes "재료를 충분히 가져오더라도. 으악~";
 						close;
 					}
 				case 2:
-					mes "[Leablem]";
-					mes "Don't ever tell anyone";
-					mes "about what I told you. Okay?";
+					mes "[레아블렘]";
+					mes "아무에게도 말하지 마세요";
+					mes "내가 말한 것에 대해. 알았지?";
 					close;
 			}
 		case 4:
-			mes "[Leablem]";
-			mes "Do you want to know more information?";
-			mes "Well, I don't think there's something";
-			mes "that you specifically need to know.";
-			mes "But I can at least give you a tip.";
+			mes "[레아블렘]";
+			mes "더 많은 정보를 알고 싶으세요?";
+			mes "아무것도 없는 것 같아요";
+			mes "당신이 구체적으로 알아야 할 사항입니다.";
+			mes "하지만 적어도 팁은 드릴 수 있어요.";
 			next;
-			mes "[Leablem]";
-			mes "The slot technicians in each town";
-			mes "provide different slotting success chances";
-			mes "depending on your equipment's upgrade level.";
-			mes "I don't know if that's true,";
-			mes "but I can see the difference in each town.";
+			mes "[레아블렘]";
+			mes "각 마을의 슬롯 기술자들";
+			mes "다양한 슬롯팅 성공 기회를 제공합니다";
+			mes "장비의 업그레이드 레벨에 따라 다릅니다.";
+			mes "그게 사실인지는 모르겠어요,";
+			mes "하지만 마을마다 차이가 있는 것 같아요.";
 			next;
-			mes "[Leablem]";
-			mes "For instance, a slot technician in one town";
-			mes "provides a higher success chance to";
-			mes "equipment items at higher upgrade levels,";
-			mes "while a technician in another town has higher";
-			mes "success at lower upgrade levels.";
+			mes "[레아블렘]";
+			mes "예를 들어, 한 마을의 슬롯 기술자";
+			mes "더 높은 성공 확률을 제공합니다.";
+			mes "더 높은 업그레이드 수준의 장비 아이템";
+			mes "다른 도시의 기술자는 더 높은 수준을 갖고 있지만";
+			mes "낮은 업그레이드 수준에서는 성공했습니다.";
 			next;
-			mes "[Leablem]";
-			mes "When you fail to add a slot, the equipment";
-			mes "will become broken and disappear.";
-			mes "I try my best to succeed, but";
-			mes "slotting is complicated work.";
+			mes "[레아블렘]";
+			mes "슬롯 추가 실패시 장비";
+			mes "깨져서 사라질 것이다.";
+			mes "나는 성공하려고 최선을 다하지만";
+			mes "슬로팅은 복잡한 작업입니다.";
 			next;
-			mes "[Leablem]";
-			mes "Oh, there's an important thing that you need to be careful about.";
-			mes "^FF0000Try not to carry two identical equipment items";
-			mes "^FF0000with you when you add slots.";
-			mes "^FF0000Otherwise, slots may be added to one of the randomly chosen items,";
-			mes "^FF0000and in the worst case, you may lose an item that is more valuable to you.^000000";
+			mes "[레아블렘]";
+			mes "아, 중요한 주의사항이 있어요.";
+			mes "^FF0000동일한 장비를 두 개 들고 다니지 마세요";
+			mes "슬롯 추가시에는 ^FF0000함께 해주세요.";
+			mes "^FF0000그렇지 않으면 무작위로 선택된 아이템 중 하나에 슬롯이 추가될 수 있습니다,";
+			mes "^FF0000그리고 최악의 경우에는 더 소중한 물건을 잃어버릴 수도 있습니다.^000000";
 			next;
-			mes "[Leablem]";
-			mes "I hope this information will be helpful to you.";
-			mes "Thanks.";
+			mes "[레아블렘]";
+			mes "이 정보가 귀하에게 도움이 되기를 바랍니다.";
+			mes "고맙습니다.";
 			close;
 		case 5:
-			mes "[Leablem]";
-			mes "Alright, then.";
+			mes "[레아블렘]";
+			mes "그럼요.";
 			close;
 	}
 }
 
-payon,236,199,3	duplicate(SocketEnchant2)	Leablem#pay	86
-lighthalzen,96,137,3	duplicate(SocketEnchant2)	Leablem#lhz	86
-prt_in,22,60,6	duplicate(SocketEnchant2)	Leablem#prt	86
+payon,236,199,3	duplicate(SocketEnchant2)	레아블렘#pay	86
+lighthalzen,96,137,3	duplicate(SocketEnchant2)	레아블렘#lhz	86
+prt_in,22,60,6	duplicate(SocketEnchant2)	레아블렘#prt	86
 
 function	script	Func_Socket2	{
 	.@item_id = getarg(0);
@@ -391,45 +391,45 @@ function	script	Func_Socket2	{
 	setarray .@req_amount[0], getarg(6), getarg(8,0);
 
 	disable_items;
-	mes "[Leablem]";
+	mes "[레아블렘]";
 	if (.@item_req[1] != 0 && .@req_amount[1] != 0)
 	{
-		mes getitemname(.@item_id) +"... Okay, then you need to bring me";
-		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 zeny as service charge,";
-		mes "^FF0000"+ .@req_amount[0] +"ea "+ getitemname(.@item_req[0]) +" and "+ .@req_amount[1] +"ea "+ getitemname(.@item_req[1]) +".";
-		mes "^FF0000Of course, you need a "+ getitemname(.@item_id) +".^000000";
+		mes getitemname(.@item_id) +"... 알았어, 그럼 날 데려와야 해";
+		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 서비스 요금으로 zeny를 지불하세요.";
+		mes "^FF0000"+ .@req_amount[0] +"ea "+ getitemname(.@item_req[0]) +" 그리고 "+ .@req_amount[1] +"ea "+ getitemname(.@item_req[1]) +".";
+		mes "^FF0000Of 물론, 당신은"+ getitemname(.@item_id) +".^000000";
 	}
 	else
 	{
-		mes getitemname(.@item_id) +"? Okay, then you need to bring me";
-		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req/1000 +",000") : .@zeny_req) +",000 zeny as service charge and "+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +" as the requirement.";
-		mes "^FF0000Of course, don't forget to bring me a "+ getitemname(.@item_id) +".";
-		mes "^FF0000You should have all items.^000000";
+		mes getitemname(.@item_id) +"? 알았어, 그럼 나한테 데려와야지";
+		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req/1000 +",000") : .@zeny_req) +",000 서비스 요금으로 zeny와"+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +" 요구 사항입니다.";
+		mes "^FF0000물론이죠, 나한테 가져오는 것 잊지 마세요"+ getitemname(.@item_id) +".";
+		mes "^FF0000모든 항목이 있어야 합니다.^000000";
 	}
 	next;
-	mes "[Leablem]";
-	mes "Did you already bring all of them?";
-	mes "For your information, if you fail to create a slot,";
-	mes "you will lose all the item requirement as well as the target "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +".";
-	mes "Also remember, if the "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
-	mes "you will lose them even if you succeed in creating a slot.";
+	mes "[레아블렘]";
+	mes "벌써 다 가져왔어?";
+	mes "참고로 슬롯 생성에 실패하신 경우,";
+	mes "당신은 모든 아이템 요구 사항과 목표를 잃게 될 것입니다 "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +".";
+	mes "또한 다음과 같은 경우에도 기억하세요. "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +" 업그레이드되어 카드가 삽입되었습니다.,";
+	mes "슬롯 생성에 성공하더라도 잃어버리게 됩니다.";
 	next;
-	switch(select("Ask for slot creation.:Try next time."))
+	switch(select("슬롯 생성을 요청하세요.:다음에 시도하세요."))
 	{
 		case 1:
 			if ((Zeny >= .@zeny_req*1000) && countitem(.@item_req[0]) >= .@req_amount[0] && countitem(getarg(7,512)) >= .@req_amount[1] && countitem(.@item_id) > 0)// if there's no .@req_amount[0] and .@req_amount[1] provided, check itemcount against 0 (we still need a valid item ID though)
 			{
-				mes "[Leablem]";
-				mes "Alright then, let the work begin!";
-				mes "You'd better pray for a successful result.";
+				mes "[레아블렘]";
+				mes "자, 그럼 작업을 시작하겠습니다!";
+				mes "성공적인 결과를 위해 기도하는 것이 좋겠습니다.";
 				next;
 				set .@a, rand(1,100);
 				if ((.@a > getarg(2)) && (.@a < getarg(3)))
 				{
 					specialeffect EF_LORD;
-					mes "[Leablem]";
-					mes "Great, it seems to be successful.";
-					mes "It looks pretty well done. Congratulations!";
+					mes "[레아블렘]";
+					mes "좋아요, 성공한 것 같아요.";
+					mes "정말 잘 된 것 같아요. 축하드려요!";
 					delitem .@item_id,1;
 					delitem .@item_req[0],.@req_amount[0];
 					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
@@ -437,40 +437,40 @@ function	script	Func_Socket2	{
 					Zeny = Zeny - .@zeny_req *1000;
 					getitem getarg(1),1;
 					next;
-					mes "[Leablem]";
-					mes "See you again, buddy!";
+					mes "[레아블렘]";
+					mes "또 만나요 ??친구!";
 					close;
 				}
 				else
 				{
 					specialeffect EF_SUI_EXPLOSION;
-					mes "[Leablem]";
-					mes "Wah! ...I am so sorry, it failed.";
-					mes "However, I am completely innocent.";
-					mes "This is your luck, and it is destined by god, okay?";
-					mes "Don't be so disappointed,";
-					mes "and try next time.";
+					mes "[레아블렘]";
+					mes "와! ...정말 미안해요, 실패했어요.";
+					mes "그러나 나는 전혀 결백합니다.";
+					mes "이건 네 행운이고 신이 정한 거야, 알았지?";
+					mes "너무 실망하지 마세요,";
+					mes "다음에 시도해 보세요.";
 					delitem .@item_id,1;
 					delitem .@item_req[0],.@req_amount[0];
 					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
 						delitem .@item_req[1],.@req_amount[1];
 					Zeny = Zeny - .@zeny_req *1000;
 					next;
-					mes "[Leablem]";
-					mes "See you again, buddy!";
+					mes "[레아블렘]";
+					mes "또 만나요 ??친구!";
 					close;
 				}
 			}
 			else
 			{
-				mes "[Leablem]";
-				mes "Are you stupid or what? You didn't bring all of the required items!";
-				mes "Go bring them quick!";
+				mes "[레아블렘]";
+				mes "바보야, 뭐야? 필수품을 다 안 가져왔어!";
+				mes "빨리 데려오세요!";
 				close;
 			}
 		case 2:
-			mes "[Leablem]";
-			mes "See you next time.";
+			mes "[레아블렘]";
+			mes "다음에 또 만나요.";
 			close;
 	}
 }

@@ -8,19 +8,19 @@
 //= 1.1 Fixed NPC names. [zackdreaver]
 //============================================================
 
-dali02,43,129,5	script	Unpleasant Royal Guard#	4_M_SAKRAYROYAL,{
+dali02,43,129,5	script	흙빛의 로열가드#	4_M_SAKRAYROYAL,{
 	if (BaseLevel < 120) {
-		mes "[Unpleasant Royal Guard]";
-		mes "Although I need help with a task, you are not strong enough to assist me, noob~!";
+		mes "[흙빛의 로열가드]";
+		mes "일을 하는데 도움이 필요한데 넌 나를 도와줄 만큼 강하지 않구나, 멍청아~!";
 		next;
-		mes "[Unpleasant Royal Guard]";
-		mes "Come back later when you have done some training and are at least level 120!";
+		mes "[흙빛의 로열가드]";
+		mes "나중에 수련을 마치고 레벨 120 이상이 되면 다시 오세요!";
 		close;
 	}
 	.@party_id = getcharid(1);
 	if (is_party_leader() == false || .@party_id < 1) {
-		mes "[Unpleasant Royal Guard]";
-		mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
+		mes "[흙빛의 로열가드]";
+		mes "비밀통로를 파티장에게만 열어드릴 수 있습니다. 파티장에게 말을 걸어주세요.";
 		close;
 	}
 	switch( checkquest(1261,PLAYTIME) ) {
@@ -28,58 +28,51 @@ dali02,43,129,5	script	Unpleasant Royal Guard#	4_M_SAKRAYROYAL,{
 		break;
 	case 0:
 	case 1:
-		mes "[Unpleasant Royal Guard]";
-		mes "Have you found the princess yet?! Is she safe?";
+		mes "[흙빛의 로열가드]";
+		mes "어떻게 되었습니까? 그녀는 무사한가요?";
 		close;
 	case 2:
-		mes "[Unpleasant Royal Guard]";
-		mes "The monsters around the secret passage have disappeared. Now is our chance to save the princess!";
+		mes "[흙빛의 로열가드]";
+		mes "비밀통로 주변의 몬스터들이 사라졌습니다. 이제 공주님을 구할 기회입니다!";
 		erasequest 1261;// Cursed Swordman
 		close;
 	}
-	mes "[Unpleasant Royal Guard]";
-	mes "I need help, even from the likes of you.";
+	mes "[흙빛의 로열가드]";
+	mes "도와주십시오.";
+	mes "제가 지키던 왕궁이 몬스터의 침략을 받았습니다.";
 	next;
-	mes "[Unpleasant Royal Guard]";
-	mes "In the middle of battle the princess disappeared while I was guarding the palace.";
+	mes "[흙빛의 로열가드]";
+	mes "정신없이 싸우던 중에 티아라 공주님이 사라졌습니다.";
+	mes "제발 그녀를 찾아주십시오.";
+	mes "여기 성으로 통하는 비밀 통로가 있습니다.";
 	next;
-	mes "[Unpleasant Royal Guard]";
-	mes "You run ahead and I will catch up. We must save her.";
+	mes "[흙빛의 로열가드]";
+	mes "곧 뒤따라 갈 테니 어서 서둘러 주십시오!";
 	next;
-	if (select( "I will help.", "This is not a good time." ) == 2) {
-		mes "[Unpleasant Royal Guard]";
-		mes "Even now all the royal guards are fighting and dying from the monsters.";
-		next;
-		mes "[Unpleasant Royal Guard]";
-		mes "We must, no matter how much fear grips our hearts, save the princess!";
+	if (select( "돕겠습니다.:지금은 곤란하군요." ) == 2) {
+		mes "[흙빛의 로열가드]";
+		mes "그렇군요.";
 		close;
 	}
 	instance_create("Ghost Palace");
-	mes "[Unpleasant Royal Guard]";
-	mes "Thank you..";
-	mes "I will open the secret passage to the ^0000ffGhost Palace^000000.";
-	mes "Please be ready!";
+	mes "[흙빛의 로열가드]";
+	mes "고맙습니다..";
+	mes "비밀통로를 열겠습니다.";
 	close;
 }
 
-dali02,40,134,5	script	Interdimensional Device#dk	PORTAL,{
+dali02,40,134,5	script	차원 이동기#dk	PORTAL,{
 	if (BaseLevel < 120) {
-		mes "[Unpleasant Royal Guard]";
-		mes "Althought I need help with a task, you are not strong enough to assist me, noob~!";
-		next;
-		mes "[Unpleasant Royal Guard]";
-		mes "Come back later when you have done some training and are at least level 120!";
+		mes "[흙빛의 로열가드]";
+		mes "120 레벨 정도의 힘이 필요합니다!";
 		close;
 	}
-	mes "[Unpleasant Royal Guard]";
-	mes "I can see the secret passage into the palace. Are you ready to save the princess?!";
+	mes "[흙빛의 로열가드]";
+	mes "공주님을 구하실 준비가 되셨습니까?";
 	next;
-	if (select( "Enter", "Stop" ) == 2) {
-		mes "[Unpleasant Royal Guard]";
-		mes "Even now all the royal guards are fighting and dying from the monsters.";
-		next;
-		mes "[Unpleasant Royal Guard]";
-		mes "We must, no matter how much fear grips our hearts, save the princess!";
+	if (select( "준비됐다.", "아직.." ) == 2) {
+		mes "[흙빛의 로열가드]";
+		mes "그렇군요.";
 		close;
 	}
 	switch( checkquest(1261,PLAYTIME) ) {
@@ -87,37 +80,34 @@ dali02,40,134,5	script	Interdimensional Device#dk	PORTAL,{
 		break;
 	case 0:
 	case 1:
-		mes "[Unpleasant Royal Guard]";
-		mes "The monsters that attacked the palace are wandering around the secret entrance. It would be very bad if they spotted us... Please wait.";
-		next;
-		mes "When the time limit for the entrance is up";
-		mes "let's try to re-enter.";
+		mes "[흙빛의 로열가드]";
+		mes "아직 기다리셔야 할 것 같습니다.";
 		close;
 	case 2:
-		mes "^0000ffThe time limit for entering to the Curse of the Swordsman is finished. Please try to talk to the Unpleasent Royal Guard again..^000000";
+		mes "^0000ff검객의 저주 입장 제한시간이 끝났습니다. 다시 불만족한 왕실근위병과 대화를 시도해보세요..^000000";
 		erasequest 1261;// Cursed Swordman
 		close;
 	}
 	.@party_id = getcharid(1);
 	if (is_party_leader() == false || .@party_id < 1) {
-		mes "[Unpleasant Royal Guard]";
-		mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
+		mes "[흙빛의 로열가드]";
+		mes "파티를 가입하고 와주세요.";
 		close;
 	}
 
 	.@md_name$ = "Ghost Palace";
 	switch( instance_enter(.@md_name$) ) {
 	case IE_OTHER:
-		mes "An unknown error occurred.";
+		mes "알 수 없는 오류가 발생했습니다.";
 		close;
 	case IE_NOINSTANCE:
-		mes "^ff0000Inside the devices you see a dark hole. If you wish to enter you must to talk to the Unpleasent Royal Guard first.^000000";
+		mes "^ff0000흙빛의 로열가드를 먼저 만나고 오십시오.^000000";
 		close;
 	case IE_NOMEMBER:
-		mes "Only registered members can enter the " + .@md_name$ + " instance.";
+		mes "등록된 회원만 "+ .@md_name$ +" 인스턴스에 입장할 수 있습니다.";
 		close;
 	case IE_OK:
-		mapannounce "dali", "" + strcharinfo(0) + " of the party, " + getpartyname(.@party_id) + ", is entering the Ghost Palace.", bc_map, 0x00ff99;
+		mapannounce "파티 "+ getpartyname(.@party_id) +"의 dali", ""+ strcharinfo(0) +"가 유령 궁전에 입장하고 있습니다.", bc_map, 0x00ff99;
 		// warp "1@spa",42,196;
 		setquest 1261;// Cursed Swordman
 		end;
@@ -125,26 +115,26 @@ dali02,40,134,5	script	Interdimensional Device#dk	PORTAL,{
 }
 
 // 1st floor
-1@spa,41,204,5	script	King#dk	4_M_RUSKING,{
-	mes "[King]";
-	mes "You are hereby appointed as the personal guard to Princess Tiara. I trust your loyalty above all else.";
-	npctalk "King: You are hereby appointed as the personal guard to Princess Tiara. I trust your loyalty above all else.";
+1@spa,41,204,5	script	국왕#dk	4_M_RUSKING,{
+	mes "[국왕]";
+	mes "너를 티아라 공주의 직속 로열가드로 임명하겠다. 너의 뛰어난 검술과 충섬심을 믿는다. 공주를 잘 보필해다오.";
+	npctalk "국왕: 너를 티아라 공주의 직속 로열가드로 임명하겠다. 너의 뛰어난 검술과 충섬심을 믿는다. 공주를 잘 보필해다오.";
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "I will protect the princess with my life.";
-	npctalk "Lurid Royal Guard: I will protect the princess with my life.", instance_npcname("Lurid Royal Guard#dk");
+	mes "[흙빛의 로열가드]";
+	mes "목숨을 바쳐서라도 공주님을 지키겠습니다.";
+	npctalk "흙빛의 로열가드: 목숨을 바쳐서라도 공주님을 지키겠습니다.", instance_npcname("흙빛의 로열가드#dk");
 	next;
-	mes "[King]";
-	mes "The marriage arrangements are going as planned. The prince is here to meet with the princess.";
-	npctalk "King: The marriage arrangements are going as planned. The prince is here to meet with the princess.";
+	mes "[국왕]";
+	mes "다행히 이웃나라 왕자와 혼담이 잘 성사될 모양이다. 곧 공주를 보러 온다고 하니, 서둘러 준비 시키도록 하거라.";
+	npctalk "국왕: 다행히 이웃나라 왕자와 혼담이 잘 성사될 모양이다. 곧 공주를 보러 온다고 하니, 서둘러 준비 시키도록 하거라.";
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "...Yes, Your Majesty.";
-	npctalk "Lurid Royal Guard: ...Yes, Your Majesty.", instance_npcname("Lurid Royal Guard#dk");
+	mes "[흙빛의 로열가드]";
+	mes "...알겠습니다, 폐하.";
+	npctalk "흙빛의 로열가드: ...알겠습니다, 폐하.", instance_npcname("흙빛의 로열가드#dk");
 	next;
-	mes "[King]";
-	mes "My gods, there are monsters in the castle! Get rid of them now!";
-	npctalk "King: My gods, there are monsters in the castle! Get rid of them now!";
+	mes "[국왕]";
+	mes "아니, 성 안에 어째서 몬스터들이! 어서 저들을 물리치거라, 어서!";
+	npctalk "국왕: 아니, 성 안에 어째서 몬스터들이! 어서 저들을 물리치거라, 어서!";
 	close2;
 	donpcevent instance_npcname("#gp_control_1") + "::OnStart";
 	end;
@@ -166,64 +156,64 @@ OnInstanceInit:
 	disablenpc instance_npcname("#gp_control_1");
 
 	// second floor
-	disablenpc instance_npcname("Lurid Royal Guard#dk1");
-	disablenpc instance_npcname("Princess Tiara#dk");
+	disablenpc instance_npcname("흙빛의 로열가드#dk1");
+	disablenpc instance_npcname("티아라 공주#dk");
 	disablenpc instance_npcname("#gp_control_2");
 
 	// 3rd floor
-	disablenpc instance_npcname("King#dk1");
-	disablenpc instance_npcname("Lurid Royal Guard#dk2");
-	disablenpc instance_npcname("Captain of the Guard#dk");
-	disablenpc instance_npcname("Soldier#dk1");
-	disablenpc instance_npcname("Soldier#dk2");
-	disablenpc instance_npcname("Soldier#dk3");
-	disablenpc instance_npcname("Lurid Royal Guard#dk3");
-	disablenpc instance_npcname("Magic Sword Tartanos#dk1");
+	disablenpc instance_npcname("국왕#dk1");
+	disablenpc instance_npcname("흙빛의 로열가드#dk2");
+	disablenpc instance_npcname("병사장#dk");
+	disablenpc instance_npcname("병사#dk1");
+	disablenpc instance_npcname("병사#dk2");
+	disablenpc instance_npcname("병사#dk3");
+	disablenpc instance_npcname("흙빛의 로열가드#dk3");
+	disablenpc instance_npcname("마검 타르타노스#dk1");
 	disablenpc instance_npcname("#gp_control_3");
 
 	// 4th floor
 	disablenpc instance_npcname("#gp_control_4");
 	disablenpc instance_npcname("#gp_control_5");
-	disablenpc instance_npcname("Magic Sword Tartanos#dk2");
-	disablenpc instance_npcname("Visiting Prince#dk");
-	disablenpc instance_npcname("Lurid Royal Guard#dk4");
-	disablenpc instance_npcname("King's Corpse#dk");
-	disablenpc instance_npcname("Captain's Corpse#dk");
-	disablenpc instance_npcname("Soldier's Corpse#dk");
-	disablenpc instance_npcname("Soldier's Corpse#dk1");
-	disablenpc instance_npcname("Soldier's Corpse#dk2");
-	disablenpc instance_npcname("Soldier's Corpse#dk3");
-	disablenpc instance_npcname("Soldier's Corpse#dk4");
+	disablenpc instance_npcname("마검 타르타노스#dk2");
+	disablenpc instance_npcname("이웃나라 왕자#dk");
+	disablenpc instance_npcname("흙빛의 로열가드#dk4");
+	disablenpc instance_npcname("국왕의 시체#dk");
+	disablenpc instance_npcname("병사장의 시체dk");
+	disablenpc instance_npcname("병사의 시체#dk");
+	disablenpc instance_npcname("병사의 시체#dk1");
+	disablenpc instance_npcname("병사의 시체#dk2");
+	disablenpc instance_npcname("병사의 시체#dk3");
+	disablenpc instance_npcname("병사의 시체#dk4");
 
 	// 5th floor
 	disablenpc instance_npcname("#gp_control_6");
-	disablenpc instance_npcname("Princess Tiara#dk1");
-	disablenpc instance_npcname("Lurid Royal Guard#dk5");
-	disablenpc instance_npcname("King#dk11");
-	disablenpc instance_npcname("Sakray#dk");
-	disablenpc instance_npcname("Magic Sword Tartanos#dk3");
+	disablenpc instance_npcname("티아라 공주#dk1");
+	disablenpc instance_npcname("흙빛의 로열가드#dk5");
+	disablenpc instance_npcname("국왕#dk11");
+	disablenpc instance_npcname("사크라이#dk");
+	disablenpc instance_npcname("마검 타르타노스#dk3");
 	disablenpc instance_npcname("#tb");
 	disablenpc instance_npcname("#sv");
 	disablenpc instance_npcname("#tv");
 	end;
 }
 
-1@spa,42,201,1	script	Lurid Royal Guard#dk	4_M_SAKRAYROYAL,{ end; }
+1@spa,42,201,1	script	흙빛의 로열가드#dk	4_M_SAKRAYROYAL,{ end; }
 
 1@spa,1,1,1	script	#gp_control_1	HIDDEN_WARP_NPC,{
 	end;
 OnStart:
 	enablenpc instance_npcname("#gp_control_1");
-	disablenpc instance_npcname("King#dk");
-	disablenpc instance_npcname("Lurid Royal Guard#dk");
+	disablenpc instance_npcname("국왕#dk");
+	disablenpc instance_npcname("흙빛의 로열가드#dk");
 	initnpctimer;
 	end;
 OnTimer2000:
 	.@label$ = instance_npcname("#gp_control_1") + "::OnMyMobDead1";
-	monster 'map_spa$,50,194,"Cursed Soldier",2948,1, .@label$;		// CURSED_SOLDIER
-	monster 'map_spa$,34,208,"Cursed Soldier",2948,1, .@label$;		// CURSED_SOLDIER
-	monster 'map_spa$,32,194,"Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
-	monster 'map_spa$,52,209,"Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,50,194,"저주받은 병사",2948,1, .@label$;		// CURSED_SOLDIER
+	monster 'map_spa$,34,208,"저주받은 병사",2948,1, .@label$;		// CURSED_SOLDIER
+	monster 'map_spa$,32,194,"저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,52,209,"저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
 	stopnpctimer;
 	end;
 OnMyMobDead1:
@@ -234,8 +224,8 @@ OnMyMobDead1:
 	end;
 OnSpawn1:
 	.@label$ = instance_npcname("#gp_control_1") + "::OnMyMobDead2";
-	monster 'map_spa$,37,182,"Cursed Soldier",2948,1, .@label$;		// CURSED_SOLDIER
-	monster 'map_spa$,46,182,"Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,37,182,"저주받은 병사",2948,1, .@label$;		// CURSED_SOLDIER
+	monster 'map_spa$,46,182,"저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
 	end;
 OnMyMobDead2:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_1") + "::OnMyMobDead2") < 1) {
@@ -246,73 +236,73 @@ OnMyMobDead2:
 	end;
 OnSpawn2:
 	.@label$ = instance_npcname("#gp_control_1") + "::OnMyMobDead3";
-	monster 'map_spa$,30,200,"Cursed Soldier",2948,1, .@label$;		// CURSED_SOLDIER
-	monster 'map_spa$,51,200,"Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
-	monster 'map_spa$,53,199,"Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,30,200,"저주받은 병사",2948,1, .@label$;		// CURSED_SOLDIER
+	monster 'map_spa$,51,200,"저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,53,199,"저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
 	end;
 OnMyMobDead3:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_1") + "::OnMyMobDead3") < 1) {
-		mapannounce 'map_spa$, "The passage on the 2nd floor in the palace of ghost is open .", bc_map,0xFFFF00;
+		mapannounce 'map_spa$, "망령의 왕국 2층 통로가 개방되었습니다.", bc_map,0xFFFF00;
 		enablenpc instance_npcname("The second floor of Palace");
-		enablenpc instance_npcname("Lurid Royal Guard#dk1");
-		enablenpc instance_npcname("Princess Tiara#dk");
+		enablenpc instance_npcname("흙빛의 로열가드#dk1");
+		enablenpc instance_npcname("티아라 공주#dk");
 	}
 	end;
 }
 
 // 2nd floor
-1@spa,132,122,7	script	Lurid Royal Guard#dk1	4_M_SAKRAYROYAL,{
-	.@tiara$ = instance_npcname("Princess Tiara#dk");
+1@spa,132,122,7	script	흙빛의 로열가드#dk1	4_M_SAKRAYROYAL,{
+	.@tiara$ = instance_npcname("티아라 공주#dk");
 	cutin "npc-tiara.bmp",3;
-	mes "[Lurid Royal Guard]";
-	mes "Your Highness, the King has invited a prince from a neighboring country to be your betrothed. Be ready to meet him...";
-	npctalk "Lurid Royal Guard: Your Highness, the King has invited a prince from a neighboring country to be your betrothed. Be ready to meet him...";
+	mes "[흙빛의 로열가드]";
+	mes "공주님, 왕께서 혼담을 위해 이웃나라 왕자를 초청했습니다. 만나 뵐 준비를 하십시오.";
+	npctalk "흙빛의 로열가드: 공주님, 왕께서 혼담을 위해 이웃나라 왕자를 초청했습니다. 만나 뵐 준비를 하십시오.";
 	next;
-	mes "[Princess Tiara]";
-	mes "If...If a marriage is arranged what should I do?";
-	npctalk "Princess Tiara: If...If a marriage is arranged what should I do?", .@tiara$;
+	mes "[티아라 공주]";
+	mes "혼담이... 만약 혼담이 성사 된다면... 어떻게 되는 거죠?";
+	npctalk "티아라 공주: 혼담이... 만약 혼담이 성사 된다면... 어떻게 되는 거죠?", .@tiara$;
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "The only thing I can do is protect you from physical harm.";
-	npctalk "Lurid Royal Guard: The only thing I can do is protect you from physical harm.";
+	mes "[흙빛의 로열가드]";
+	mes "제가 할 수 있는 건... 공주님을 지켜드리는 것뿐입니다.";
+	npctalk "흙빛의 로열가드: 제가 할 수 있는 건... 공주님을 지켜드리는 것뿐입니다.";
 	next;
-	mes "[Princess Tiara]";
-	mes "Then, what can I do?";
-	npctalk "Princess Tiara: Then, what can I do?", .@tiara$;
+	mes "[티아라 공주]";
+	mes "그럼 내가 할 수 있는 건 뭐죠?";
+	npctalk "티아라 공주: 그럼 내가 할 수 있는 건 뭐죠?", .@tiara$;
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "You must decide that for yourself Your Highness...";
-	npctalk "Lurid Royal Guard: You must decide that for yourself Your Highness...";
+	mes "[흙빛의 로열가드]";
+	mes "...이웃나라의 좋은 왕비님이 되어주십시오. 폐하를 위해, 저를 위해...";
+	npctalk "흙빛의 로열가드: ...이웃나라의 좋은 왕비님이 되어주십시오. 폐하를 위해, 저를 위해...";
 	next;
-	mes "[Princess Tiara]";
-	mes "Would it be easier for you if I were married and sent off to another country?";
-	npctalk "Princess Tiara: Would it be easier for you if I were married and sent off to another country?", .@tiara$;
+	mes "[티아라 공주]";
+	mes "내가 다른 낯선 곳에서 다른 사람과 혼인하는 것이, 정말 당신을 위하는 건가요?";
+	npctalk "티아라 공주: 내가 다른 낯선 곳에서 다른 사람과 혼인하는 것이, 정말 당신을 위하는 건가요?", .@tiara$;
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "I will always stand by you and protect you forever.";
-	npctalk "Lurid Royal Guard: I will always stand by you and protect you forever.";
+	mes "[흙빛의 로열가드]";
+	mes "저는 늘 공주님 곁에 있을 겁니다. 언제까지고 지켜드리겠습니다. 제 곁에서 편히 쉬십시오.";
+	npctalk "흙빛의 로열가드: 저는 늘 공주님 곁에 있을 겁니다. 언제까지고 지켜드리겠습니다. 제 곁에서 편히 쉬십시오.";
 	cutin "npc-tiara.bmp",255;
 	next;
-	mes "[Princess Tiara]";
-	mes "Monsters have gotten inside the castle? Please, protect me!";
-	npctalk "Princess Tiara: Monsters have gotten inside the castle? Please, protect me!", .@tiara$;
+	mes "[티아라 공주]";
+	mes "저건...어째서 이곳에 몬스터들이?";
+	npctalk "티아라 공주: 저건...어째서 이곳에 몬스터들이?", .@tiara$;
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "Stay behind me. Let's go!";
-	npctalk "Lurid Royal Guard: Stay behind me. Let's go!";
+	mes "[흙빛의 로열가드]";
+	mes "뒤로 물러서십시오, 간다!";
+	npctalk "흙빛의 로열가드: 뒤로 물러서십시오, 간다!";
 	close2;
 	donpcevent instance_npcname("#gp_control_2") + "::OnStart";
 	end;
 }
 
-1@spa,135,125,3	duplicate(Lurid Royal Guard#dk)	Princess Tiara#dk	4_F_MAYSEL
+1@spa,135,125,3	duplicate(흙빛의 로열가드#dk)	티아라 공주#dk	4_F_MAYSEL
 
 1@spa,1,1,1	script	#gp_control_2	HIDDEN_WARP_NPC,{
 	end;
 OnStart:
 	enablenpc instance_npcname("#gp_control_2");
-	disablenpc instance_npcname("Lurid Royal Guard#dk1");
-	disablenpc instance_npcname("Princess Tiara#dk");
+	disablenpc instance_npcname("흙빛의 로열가드#dk1");
+	disablenpc instance_npcname("티아라 공주#dk");
 	disablenpc instance_npcname("The second floor of Palace");
 
 	killmonster 'map_spa$, instance_npcname("#gp_control_1") + "::OnMyMobDead1";
@@ -323,119 +313,119 @@ OnStart:
 	end;
 OnTimer2000:
 	.@label$ = instance_npcname("#gp_control_2") + "::OnMyMobDead1";
-	monster 'map_spa$,135,116,"Broken Promise",2950,1, .@label$;	// BROKEN_MIND
-	monster 'map_spa$,110,120,"Broken Promise",2950,1, .@label$;	// BROKEN_MIND
-	monster 'map_spa$,122,112,"Floating Sorrow",2951,1, .@label$;	// FLOATING_WORD
-	monster 'map_spa$,121,129,"Unfulfilled Love",2952,1, .@label$;	// LIKE_LOVE
+	monster 'map_spa$,135,116,"바치지 못한 마음",2950,1, .@label$;	// BROKEN_MIND
+	monster 'map_spa$,110,120,"바치지 못한 마음",2950,1, .@label$;	// BROKEN_MIND
+	monster 'map_spa$,122,112,"떠도는 한탄",2951,1, .@label$;	// FLOATING_WORD
+	monster 'map_spa$,121,129,"사랑이라 부르는 것",2952,1, .@label$;	// LIKE_LOVE
 	stopnpctimer;
 	end;
 OnMyMobDead1:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_2") + "::OnMyMobDead1") < 1) {
 		sleep 2000;
 		.@label$ = instance_npcname("#gp_control_2") + "::OnMyMobDead2";
-		monster 'map_spa$,120,103,"Broken Promise",2950,1, .@label$;	// BROKEN_MIND
-		monster 'map_spa$,115,137,"Floating Sorrow",2951,1, .@label$;	// FLOATING_WORD
-		monster 'map_spa$,103,130,"Unfulfilled Love",2952,1, .@label$;	// LIKE_LOVE
+		monster 'map_spa$,120,103,"바치지 못한 마음",2950,1, .@label$;	// BROKEN_MIND
+		monster 'map_spa$,115,137,"떠도는 한탄",2951,1, .@label$;	// FLOATING_WORD
+		monster 'map_spa$,103,130,"사랑이라 부르는 것",2952,1, .@label$;	// LIKE_LOVE
 	}
 	end;
 OnMyMobDead2:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_2") + "::OnMyMobDead2") < 1) {
 		sleep 2000;
 		.@label$ = instance_npcname("#gp_control_2") + "::OnMyMobDead3";
-		monster 'map_spa$,98,119,"Floating Sorrow",2951,1, .@label$;	// FLOATING_WORD
-		monster 'map_spa$,98,120,"Floating Sorrow",2951,1, .@label$;	// FLOATING_WORD
-		monster 'map_spa$,103,109,"Unfulfilled Love",2952,1, .@label$;	// LIKE_LOVE
+		monster 'map_spa$,98,119,"떠도는 한탄",2951,1, .@label$;	// FLOATING_WORD
+		monster 'map_spa$,98,120,"떠도는 한탄",2951,1, .@label$;	// FLOATING_WORD
+		monster 'map_spa$,103,109,"사랑이라 부르는 것",2952,1, .@label$;	// LIKE_LOVE
 	}
 	end;
 OnMyMobDead3:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_2") + "::OnMyMobDead3") < 1) {
-		mapannounce 'map_spa$, "The passage on the 3rd floor of the palace is open.", bc_map,0xFFFF00;
+		mapannounce 'map_spa$, "망령의 왕국 3층 통로가 개방되었습니다.", bc_map,0xFFFF00;
 		enablenpc instance_npcname("3rd floor in the palace");
-		enablenpc instance_npcname("King#dk1");
-		enablenpc instance_npcname("Lurid Royal Guard#dk2");
-		enablenpc instance_npcname("Captain of the Guard#dk");
-		enablenpc instance_npcname("Soldier#dk1");
-		enablenpc instance_npcname("Soldier#dk2");
-		enablenpc instance_npcname("Soldier#dk3");
+		enablenpc instance_npcname("국왕#dk1");
+		enablenpc instance_npcname("흙빛의 로열가드#dk2");
+		enablenpc instance_npcname("병사장#dk");
+		enablenpc instance_npcname("병사#dk1");
+		enablenpc instance_npcname("병사#dk2");
+		enablenpc instance_npcname("병사#dk3");
 		disablenpc instance_npcname("#gp_control_2");
 	}
 	end;
 }
 
 // 3rd floor
-1@spa,32,54,1	script	King#dk1	4_M_RUSKING,{
-	mes "[King]";
-	mes "It was you who brought the monsters here! You want to get rid of me and have the princess for yourself?";
-	npctalk "King: It was you who brought the monsters here! You want to get rid of me and have the princess for yourself?";
+1@spa,32,54,1	script	국왕#dk1	4_M_RUSKING,{
+	mes "[국왕]";
+	mes "이곳에 몬스터를 불러들인 것이 바로 너로구나, 나를 없애고 공주를 차지하려 했던 것이냐?";
+	npctalk "국왕: 이곳에 몬스터를 불러들인 것이 바로 너로구나, 나를 없애고 공주를 차지하려 했던 것이냐?";
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "It is a trap Your Majesty! You must trust me!";
-	npctalk "Lurid Royal Guard: It is a trap Your Majesty! You must trust me!", instance_npcname("Lurid Royal Guard#dk2");
+	mes "[흙빛의 로열가드]";
+	mes "모함입니다, 폐하. 저를 믿으셔야 합니다!";
+	npctalk "흙빛의 로열가드: 모함입니다, 폐하. 저를 믿으셔야 합니다!", instance_npcname("흙빛의 로열가드#dk2");
 	next;
-	mes "[King]";
-	mes "Shut up! You've betrayed me! I trusted you... you must pay for your disgrace.";
-	npctalk "King: Shut up! You've betrayed me! I trusted you... you must pay for your disgrace.";
+	mes "[국왕]";
+	mes "닥치거라! 그토록 믿었던 나를 배신하다니... 대가를 치르게 해주겠다.";
+	npctalk "국왕: 닥치거라! 그토록 믿었던 나를 배신하다니... 대가를 치르게 해주겠다.";
 	next;
-	mes "[King]";
-	mes "You will suffer for the rest of your life.";
-	npctalk "King: You will suffer for the rest of your life.";
+	mes "[국왕]";
+	mes "빛도 소리도 없는 이곳에서 목숨을 짊어지고 평생 고통을 느끼거라.";
+	npctalk "국왕: 빛도 소리도 없는 이곳에서 목숨을 짊어지고 평생 고통을 느끼거라.";
 	close2;
 	disablenpc instance_npcname("3rd floor in the palace");
-	disablenpc instance_npcname("King#dk1");
-	disablenpc instance_npcname("Captain of the Guard#dk");
-	disablenpc instance_npcname("Soldier#dk1");
-	disablenpc instance_npcname("Soldier#dk2");
-	disablenpc instance_npcname("Soldier#dk3");
-	disablenpc instance_npcname("Lurid Royal Guard#dk2");
-	donpcevent instance_npcname("Magic Sword Tartanos#dk1") + "::OnStart";
+	disablenpc instance_npcname("국왕#dk1");
+	disablenpc instance_npcname("병사장#dk");
+	disablenpc instance_npcname("병사#dk1");
+	disablenpc instance_npcname("병사#dk2");
+	disablenpc instance_npcname("병사#dk3");
+	disablenpc instance_npcname("흙빛의 로열가드#dk2");
+	donpcevent instance_npcname("마검 타르타노스#dk1") + "::OnStart";
 	end;
 }
 
-1@spa,35,56,5	script	Magic Sword Tartanos#dk1	4_TRACE,{
+1@spa,35,56,5	script	마검 타르타노스#dk1	4_TRACE,{
 	end;
 OnStart:
-	enablenpc instance_npcname("Magic Sword Tartanos#dk1");
-	enablenpc instance_npcname("Lurid Royal Guard#dk3");
+	enablenpc instance_npcname("마검 타르타노스#dk1");
+	enablenpc instance_npcname("흙빛의 로열가드#dk3");
 	initnpctimer;
 	end;
 OnTimer5000:
-	npctalk "Ominous Voice: Oh, faithful royal guard, you are trapped.";
+	npctalk "불길한 목소리: 충성스런 로열가드여, 모함에 빠졌구나.";
 	end;
 OnTimer8000:
-	npctalk "Ominous Voice: The conspiracy in the palace has your princess in grave danger...";
+	npctalk "불길한 목소리: 왕궁을 뒤덮는 음모가 너의 공주마저 위태롭게 하는구나, 쿠쿠쿠...";
 	end;
 OnTimer12000:
-	npctalk "Lurid Royal Guard: Who are you? Show yourself!", instance_npcname("Lurid Royal Guard#dk3");
+	npctalk "흙빛의 로열가드: 누구냐! 모습을 보여라!", instance_npcname("흙빛의 로열가드#dk3");
 	end;
 OnTimer15000:
-	npctalk "Ominous Voice: Ah... so you do you hear me?";
+	npctalk "불길한 목소리: 오... 내 목소리가 들리는건가?";
 	end;
 OnTimer20000:
-	npctalk "Lurid Royal Guard: ...?", instance_npcname("Lurid Royal Guard#dk3");
+	npctalk "흙빛의 로열가드: ...?", instance_npcname("흙빛의 로열가드#dk3");
 	end;
 OnTimer23000:
-	npctalk "Ominous Voice: I can give you unlimited power. If you make a pact with me.";
+	npctalk "불길한 목소리: 나와 계약을 하지 않겠는가? 나의 영혼으로 나는 자유를 얻고, 너는 무한한 힘을 얻을 것이다.";
 	end;
 OnTimer28000:
-	npctalk "Lurid Royal Guard: I..I...", instance_npcname("Lurid Royal Guard#dk3");
+	npctalk "흙빛의 로열가드: 나는...나는...", instance_npcname("흙빛의 로열가드#dk3");
 	end;
 OnTimer33000:
-	npctalk "Magic Sword Tartanos: Kukuku... What do you want boy?";
+	npctalk "마검 타르타노스: 쿠쿠쿠...어떤가, 소년이여.";
 	end;
 OnTimer34000:
 	stopnpctimer;
-	disablenpc instance_npcname("Magic Sword Tartanos#dk1");
-	disablenpc instance_npcname("Lurid Royal Guard#dk3");
+	disablenpc instance_npcname("마검 타르타노스#dk1");
+	disablenpc instance_npcname("흙빛의 로열가드#dk3");
 	donpcevent instance_npcname("#gp_control_3") + "::OnStart";
 	end;
 }
 
-1@spa,28,52,7	duplicate(Lurid Royal Guard#dk)	Captain of the Guard#dk	4_M_KY_KNT
-1@spa,25,53,7	duplicate(Lurid Royal Guard#dk)	Soldier#dk1	4_M_CRU_SOLD
-1@spa,34,53,1	duplicate(Lurid Royal Guard#dk)	Soldier#dk2	4_M_CRU_SOLD
-1@spa,30,52,7	duplicate(Lurid Royal Guard#dk)	Soldier#dk3	4_M_KY_SOLD
-1@spa,30,58,5	duplicate(Lurid Royal Guard#dk)	Lurid Royal Guard#dk2	4_M_SAKRAY_TIED
-1@spa,31,57,5	duplicate(Lurid Royal Guard#dk)	Lurid Royal Guard#dk3	4_M_SAKRAY_TIED
+1@spa,28,52,7	duplicate(흙빛의 로열가드#dk)	병사장#dk	4_M_KY_KNT
+1@spa,25,53,7	duplicate(흙빛의 로열가드#dk)	병사#dk1	4_M_CRU_SOLD
+1@spa,34,53,1	duplicate(흙빛의 로열가드#dk)	병사#dk2	4_M_CRU_SOLD
+1@spa,30,52,7	duplicate(흙빛의 로열가드#dk)	병사#dk3	4_M_KY_SOLD
+1@spa,30,58,5	duplicate(흙빛의 로열가드#dk)	흙빛의 로열가드#dk2	4_M_SAKRAY_TIED
+1@spa,31,57,5	duplicate(흙빛의 로열가드#dk)	흙빛의 로열가드#dk3	4_M_SAKRAY_TIED
 
 1@spa,1,1,1	script	#gp_control_3	HIDDEN_WARP_NPC,{
 	end;
@@ -445,11 +435,11 @@ OnStart:
 	end;
 OnTimer2000:
 	.@label$ = instance_npcname("#gp_control_3") + "::OnMyMobDead1";
-	monster 'map_spa$,31,57, "Regretful Memory",2953,1, .@label$; 	// CURSED_MEMORY
-	monster 'map_spa$,59,24, "Regretful Memory",2953,1, .@label$; 	// CURSED_MEMORY
-	monster 'map_spa$,23,40, "Wasted Friendship",2955,1, .@label$; 	// OLD_FRIENDSHIP
-	monster 'map_spa$,54,45, "Tarnished Oath",2954,1, .@label$; 	// COLORLESS_VOW
-	monster 'map_spa$,26,20, "Tarnished Oath",2954,1, .@label$; 	// COLORLESS_VOW
+	monster 'map_spa$,31,57, "원망스런 기억",2953,1, .@label$; 	// CURSED_MEMORY
+	monster 'map_spa$,59,24, "원망스런 기억",2953,1, .@label$; 	// CURSED_MEMORY
+	monster 'map_spa$,23,40, "오래된 우정",2955,1, .@label$; 	// OLD_FRIENDSHIP
+	monster 'map_spa$,54,45, "빛 바랜 맹세",2954,1, .@label$; 	// COLORLESS_VOW
+	monster 'map_spa$,26,20, "빛 바랜 맹세",2954,1, .@label$; 	// COLORLESS_VOW
 	stopnpctimer;
 	end;
 OnMyMobDead1:
@@ -458,9 +448,9 @@ OnMyMobDead1:
 	end;
 OnSpawn1:
 	.@label$ = instance_npcname("#gp_control_3") + "::OnMyMobDead2";
-	monster 'map_spa$,30,52, "Tarnished Oath",2954,1, .@label$; 	// COLORLESS_VOW
-	monster 'map_spa$,58,58, "Wasted Friendship",2955,1, .@label$; 	// OLD_FRIENDSHIP
-	monster 'map_spa$,54,24, "Regretful Memory",2953,1, .@label$; 	// CURSED_MEMORY
+	monster 'map_spa$,30,52, "빛 바랜 맹세",2954,1, .@label$; 	// COLORLESS_VOW
+	monster 'map_spa$,58,58, "오래된 우정",2955,1, .@label$; 	// OLD_FRIENDSHIP
+	monster 'map_spa$,54,24, "원망스런 기억",2953,1, .@label$; 	// CURSED_MEMORY
 	end;
 OnMyMobDead2:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_3") + "::OnMyMobDead2") < (1 + 'bool_double_spawn)) {
@@ -469,7 +459,7 @@ OnMyMobDead2:
 	}
 	end;
 OnAnnounce:
-	mapannounce 'map_spa$, "The passage on the 4th floor of the palace is open.", bc_map,0xFFFF00;
+	mapannounce 'map_spa$, "망령의 왕국 4층 통로가 개방되었습니다.", bc_map,0xFFFF00;
 	enablenpc instance_npcname("4th floor in the palace");
 	deltimer instance_npcname("#gp_control_3") + "::OnSpawn2";	// stop double spawn if timer is running
 	addtimer 2000, instance_npcname("#gp_control_3") + "::OnSpawn2";
@@ -478,72 +468,72 @@ OnSpawn2:
 	donpcevent instance_npcname("#gp_control_4") + "::OnStart";
 	// 35 mobs
 	.@label$ = instance_npcname("#gp_control_3") + "::OnMyMobDead3";
-	monster 'map_spa$,67,46, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,62,48, "Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,57,46, "Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,51,48, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "Faithful royal guard...";
-	monster 'map_spa$,56,55, "Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,62,56, "Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,66,58, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You put your princess in grave danger...";
-	monster 'map_spa$,66,64, "Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Faithful royal guard...";
-	monster 'map_spa$,62,65, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,57,67, "Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,49,66, "Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,44,66, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,45,20, "Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,38,20, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,32,20, "Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,51,22, "Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,26,34,"Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,21,37,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Faithful royal guard...";
-	monster 'map_spa$,18,39,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,21,45,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,23,49,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,25,54,"Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,29,54,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "You put your princess in grave danger...";
-	monster 'map_spa$,56,39,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,61,36,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Faithful royal guard...";
-	monster 'map_spa$,66,38,"Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away quickly!";
-	monster 'map_spa$,42,54,"Wasted Friendship",2955,1, .@label$;	// OLD_FRIENDSHIP
-	unittalk $@mobid[0], "Run away!";
-	monster 'map_spa$,35,54,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,43,60,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "Faithful royal guard...";
-	monster 'map_spa$,30,25,"Tarnished Oath",2954,1, .@label$;		// COLORLESS_VOW
-	unittalk $@mobid[0], "You put your princess in grave danger...";
-	monster 'map_spa$,30,31,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	unittalk $@mobid[0], "You are trapped...";
-	monster 'map_spa$,65,64, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	monster 'map_spa$,65,67, "Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	monster 'map_spa$,18,43,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
-	monster 'map_spa$,21,43,"Regretful Memory",2953,1, .@label$;	// CURSED_MEMORY
+	monster 'map_spa$,67,46, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,62,48, "빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,57,46, "오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,51,48, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "불쌍한 로열 가드여...";
+	monster 'map_spa$,56,55, "빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,62,56, "오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,66,58, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "너가 공주를 위험에 빠뜨렸구나...";
+	monster 'map_spa$,66,64, "빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "불쌍한 로열 가드여...";
+	monster 'map_spa$,62,65, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,57,67, "빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,49,66, "오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,44,66, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,45,20, "빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,38,20, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,32,20, "오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,51,22, "오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,26,34,"오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,21,37,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "불쌍한 로열 가드여...";
+	monster 'map_spa$,18,39,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,21,45,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,23,49,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,25,54,"오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,29,54,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "너가 공주를 위험에 빠뜨렸구나...";
+	monster 'map_spa$,56,39,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,61,36,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "불쌍한 로열 가드여...";
+	monster 'map_spa$,66,38,"오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가 어서!";
+	monster 'map_spa$,42,54,"오래된 우정",2955,1, .@label$;	// OLD_FRIENDSHIP
+	unittalk $@mobid[0], "도망가!";
+	monster 'map_spa$,35,54,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,43,60,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "불쌍한 로열 가드여...";
+	monster 'map_spa$,30,25,"빛 바랜 맹세",2954,1, .@label$;		// COLORLESS_VOW
+	unittalk $@mobid[0], "너가 공주를 위험에 빠뜨렸구나...";
+	monster 'map_spa$,30,31,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	unittalk $@mobid[0], "이건 함정이야...";
+	monster 'map_spa$,65,64, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	monster 'map_spa$,65,67, "원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	monster 'map_spa$,18,43,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
+	monster 'map_spa$,21,43,"원망스런 기억",2953,1, .@label$;	// CURSED_MEMORY
 	end;
 OnMyMobDead3:
 	end;
@@ -555,11 +545,11 @@ OnMyMobDead3:
 OnStart:
 	enablenpc instance_npcname("#gp_control_4");
 	.@label$ = instance_npcname("#gp_control_4") + "::OnMyMobDead1";
-	monster 'map_spa$,215,194, "Sweet Slaughter",2956,1, .@label$;		// SWEET_SLAUGHTER
-	monster 'map_spa$,194,178, "Sweet Slaughter",2956,1, .@label$;		// SWEET_SLAUGHTER
-	monster 'map_spa$,191,211, "Sweet Slaughter",2956,1, .@label$;		// SWEET_SLAUGHTER
-	monster 'map_spa$,185,203, "Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
-	monster 'map_spa$,209,218, "Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,215,194, "달콤한 살육",2956,1, .@label$;		// SWEET_SLAUGHTER
+	monster 'map_spa$,194,178, "달콤한 살육",2956,1, .@label$;		// SWEET_SLAUGHTER
+	monster 'map_spa$,191,211, "달콤한 살육",2956,1, .@label$;		// SWEET_SLAUGHTER
+	monster 'map_spa$,185,203, "저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,209,218, "저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
 	end;
 OnMyMobDead1:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_4") + "::OnMyMobDead1") < (1 + 'bool_double_spawn)) {
@@ -569,89 +559,89 @@ OnMyMobDead1:
 	end;
 OnSpawn1:
 	.@label$ = instance_npcname("#gp_control_4") + "::OnMyMobDead2";
-	monster 'map_spa$,189,192, "Cursed Gatekeeper",2949,1, .@label$;	// CURSED_SENTINEL
-	monster 'map_spa$,211,209, "Sweet Slaughter",2956,1, .@label$;		// SWEET_SLAUGHTER
+	monster 'map_spa$,189,192, "저주받은 문지기",2949,1, .@label$;	// CURSED_SENTINEL
+	monster 'map_spa$,211,209, "달콤한 살육",2956,1, .@label$;		// SWEET_SLAUGHTER
 	end;
 OnMyMobDead2:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_4") + "::OnMyMobDead2") < 1) {
-		enablenpc instance_npcname("Magic Sword Tartanos#dk2");
-		enablenpc instance_npcname("Visiting Prince#dk");
-		enablenpc instance_npcname("Lurid Royal Guard#dk4");
-		enablenpc instance_npcname("King's Corpse#dk");
-		enablenpc instance_npcname("Captain's Corpse#dk");
-		enablenpc instance_npcname("Soldier's Corpse#dk");
-		enablenpc instance_npcname("Soldier's Corpse#dk1");
-		enablenpc instance_npcname("Soldier's Corpse#dk2");
-		enablenpc instance_npcname("Soldier's Corpse#dk3");
-		enablenpc instance_npcname("Soldier's Corpse#dk4");
+		enablenpc instance_npcname("마검 타르타노스#dk2");
+		enablenpc instance_npcname("이웃나라 왕자#dk");
+		enablenpc instance_npcname("흙빛의 로열가드#dk4");
+		enablenpc instance_npcname("국왕의 시체#dk");
+		enablenpc instance_npcname("병사장의 시체dk");
+		enablenpc instance_npcname("병사의 시체#dk");
+		enablenpc instance_npcname("병사의 시체#dk1");
+		enablenpc instance_npcname("병사의 시체#dk2");
+		enablenpc instance_npcname("병사의 시체#dk3");
+		enablenpc instance_npcname("병사의 시체#dk4");
 	}
 	end;
 }
 
-1@spa,199,214,1	script	Lurid Royal Guard#dk4	4_M_SAKRAYROYAL,{
-	.@prince$ = instance_npcname("Visiting Prince#dk");
-	mes "[Lurid Royal Guard]";
-	mes "Where is Princess Tiara?";
-	npctalk "Lurid Royal Guard: Where is Princess Tiara?";
+1@spa,199,214,1	script	흙빛의 로열가드#dk4	4_M_SAKRAYROYAL,{
+	.@prince$ = instance_npcname("이웃나라 왕자#dk");
+	mes "[흙빛의 로열가드]";
+	mes "티아라 공주는 어디에 있나!";
+	npctalk "흙빛의 로열가드: 티아라 공주는 어디에 있나!";
 	next;
-	mes "[Visiting Prince]";
-	mes "You are too late... but you brought what I was looking for. Thanks for your help.";
-	npctalk "Visiting Prince: You are too late... but you brought what I was looking for. Thanks for your help.", .@prince$;
+	mes "[이웃나라 왕자]";
+	mes "자네, 너무 늦은 것 같은데? 마침 내가 찾고 있던 것을 가져왔군 그래. 덕분에 수고를 덜게 됐어.";
+	npctalk "이웃나라 왕자: 자네, 너무 늦은 것 같은데? 마침 내가 찾고 있던 것을 가져왔군 그래. 덕분에 수고를 덜게 됐어.", .@prince$;
 	next;
-	mes "[Visiting Prince]";
-	mes "Cursed Magic Sword Tartanos! Are you ready to have a new master?";
-	npctalk "Visiting Prince: Cursed Magic Sword Tartanos! Are you ready to have a new master?", .@prince$;
+	mes "[이웃나라 왕자]";
+	mes "저주받은 마검 타르타노스여, 새 주인을 맞을 준비가 되었느냐?";
+	npctalk "이웃나라 왕자: 저주받은 마검 타르타노스여, 새 주인을 맞을 준비가 되었느냐?", .@prince$;
 	next;
 	cutin "tartanos.bmp",3;
-	mes "[Magic Sword Tartanos]";
-	mes "How dare you!";
-	npctalk "Magic Sword Tartanos: How dare you!", instance_npcname("Magic Sword Tartanos#dk2");
+	mes "[마검 타르타노스]";
+	mes "네놈 따위가 감히 나를 넘보려 하느냐!";
+	npctalk "마검 타르타노스: 네놈 따위가 감히 나를 넘보려 하느냐!", instance_npcname("마검 타르타노스#dk2");
 	next;
-	mes "[Visiting Prince]";
-	mes "aah, aah !!!";
-	npctalk "Visiting Prince: Aah, aah!!!", .@prince$;
+	mes "[이웃나라 왕자]";
+	mes "크아아아악!";
+	npctalk "이웃나라 왕자: 크아아아악!", .@prince$;
 	donpcevent instance_npcname("#gp_control_5") + "::OnStart";
 	close2;
 	cutin "",255;
 	end;
 }
-1@spa,201,214,1	duplicate(Lurid Royal Guard#dk)	Magic Sword Tartanos#dk2	CLEAR_NPC
-1@spa,197,218,5	duplicate(Lurid Royal Guard#dk)	Visiting Prince#dk	4_M_KNIGHT_SILVER
-1@spa,194,214,5	duplicate(Lurid Royal Guard#dk)	King's Corpse#dk	4_M_TRISTAN
-1@spa,211,194,3	duplicate(Lurid Royal Guard#dk)	Captain's Corpse#dk	4_M_LIEMAN
-1@spa,201,198,1	duplicate(Lurid Royal Guard#dk)	Soldier's Corpse#dk	4_M_DIEMAN
-1@spa,197,190,1	duplicate(Lurid Royal Guard#dk)	Soldier's Corpse#dk1	4_M_DIEMAN
-1@spa,191,207,7	duplicate(Lurid Royal Guard#dk)	Soldier's Corpse#dk2	4_M_DIEMAN
-1@spa,206,209,7	duplicate(Lurid Royal Guard#dk)	Soldier's Corpse#dk3	4_M_DIEMAN
-1@spa,189,195,1	duplicate(Lurid Royal Guard#dk)	Soldier's Corpse#dk4	4_M_DIEMAN
+1@spa,201,214,1	duplicate(흙빛의 로열가드#dk)	마검 타르타노스#dk2	CLEAR_NPC
+1@spa,197,218,5	duplicate(흙빛의 로열가드#dk)	이웃나라 왕자#dk	4_M_KNIGHT_SILVER
+1@spa,194,214,5	duplicate(흙빛의 로열가드#dk)	국왕의 시체#dk	4_M_TRISTAN
+1@spa,211,194,3	duplicate(흙빛의 로열가드#dk)	병사장의 시체dk	4_M_LIEMAN
+1@spa,201,198,1	duplicate(흙빛의 로열가드#dk)	병사의 시체#dk	4_M_DIEMAN
+1@spa,197,190,1	duplicate(흙빛의 로열가드#dk)	병사의 시체#dk1	4_M_DIEMAN
+1@spa,191,207,7	duplicate(흙빛의 로열가드#dk)	병사의 시체#dk2	4_M_DIEMAN
+1@spa,206,209,7	duplicate(흙빛의 로열가드#dk)	병사의 시체#dk3	4_M_DIEMAN
+1@spa,189,195,1	duplicate(흙빛의 로열가드#dk)	병사의 시체#dk4	4_M_DIEMAN
 
 1@spa,1,1,1	script	#gp_control_5	HIDDEN_WARP_NPC,{
 	end;
 OnStart:
 	enablenpc instance_npcname("#gp_control_5");
-	disablenpc instance_npcname("Magic Sword Tartanos#dk2");
-	disablenpc instance_npcname("Visiting Prince#dk");
-	disablenpc instance_npcname("Lurid Royal Guard#dk4");
-	disablenpc instance_npcname("King's Corpse#dk");
-	disablenpc instance_npcname("Captain's Corpse#dk");
-	disablenpc instance_npcname("Soldier's Corpse#dk");
-	disablenpc instance_npcname("Soldier's Corpse#dk1");
-	disablenpc instance_npcname("Soldier's Corpse#dk2");
-	disablenpc instance_npcname("Soldier's Corpse#dk3");
-	disablenpc instance_npcname("Soldier's Corpse#dk4");
+	disablenpc instance_npcname("마검 타르타노스#dk2");
+	disablenpc instance_npcname("이웃나라 왕자#dk");
+	disablenpc instance_npcname("흙빛의 로열가드#dk4");
+	disablenpc instance_npcname("국왕의 시체#dk");
+	disablenpc instance_npcname("병사장의 시체dk");
+	disablenpc instance_npcname("병사의 시체#dk");
+	disablenpc instance_npcname("병사의 시체#dk1");
+	disablenpc instance_npcname("병사의 시체#dk2");
+	disablenpc instance_npcname("병사의 시체#dk3");
+	disablenpc instance_npcname("병사의 시체#dk4");
 	sleep 1000;
 	.@label$ = instance_npcname("#gp_control_5") + "::OnMyMobDead";
-	monster 'map_spa$,198,218, "Torturous Redeemer",2959,1, .@label$;	// TORTUROUS_REDEEMER
-	monster 'map_spa$,198,182, "Sweet Slaughter",2956,1, .@label$;		// SWEET_SLAUGHTER
+	monster 'map_spa$,198,218, "일그러진 구원자",2959,1, .@label$;	// TORTUROUS_REDEEMER
+	monster 'map_spa$,198,182, "달콤한 살육",2956,1, .@label$;		// SWEET_SLAUGHTER
 	end;
 OnMyMobDead:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_5") + "::OnMyMobDead") < 1) {
 		deltimer instance_npcname("#gp_control_4") + "::OnSpawn1";	// stop double spawn if timer is running
-		mapannounce 'map_spa$, "The passage on the 5th floor of the palace is open.", bc_map,0xFFFF00;
+		mapannounce 'map_spa$, "망령의 왕국 5층 통로가 개방되었습니다.", bc_map,0xFFFF00;
 		disablenpc instance_npcname("4th floor in the palace");
 		enablenpc instance_npcname("5th floor of Palace");
-		enablenpc instance_npcname("Princess Tiara#dk1");
-		enablenpc instance_npcname("Lurid Royal Guard#dk5");
+		enablenpc instance_npcname("티아라 공주#dk1");
+		enablenpc instance_npcname("흙빛의 로열가드#dk5");
 
 		killmonster 'map_spa$, instance_npcname("#gp_control_3") + "::OnMyMobDead2";
 		killmonster 'map_spa$, instance_npcname("#gp_control_3") + "::OnMyMobDead3";
@@ -661,51 +651,51 @@ OnMyMobDead:
 }
 
 // 5th floor
-1@spa,216,43,3	script	Princess Tiara#dk1	4_F_MAYSEL,{
-	.@guard$ = instance_npcname("Lurid Royal Guard#dk5");
-	mes "[Princess Tiara]";
-	mes "You kept your promise.";
-	npctalk "Princess Tiara: You kept your promise.";
+1@spa,216,43,3	script	티아라 공주#dk1	4_F_MAYSEL,{
+	.@guard$ = instance_npcname("흙빛의 로열가드#dk5");
+	mes "[티아라 공주]";
+	mes "약속을......지켜주셨군요.";
+	npctalk "티아라 공주: 약속을......지켜주셨군요.";
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "princess!";
-	npctalk "Lurid Royal Guard: Princess!", .@guard$;
+	mes "[흙빛의 로열가드]";
+	mes "공주!";
+	npctalk "흙빛의 로열가드: 공주!", .@guard$;
 	next;
 	cutin "npc-tiara.bmp",3;
-	mes "[Princess Tiara]";
-	mes "Thank you... now I can rest beside you...";
-	npctalk "Princess Tiara: Thank you... now I can rest beside you...";
+	mes "[티아라 공주]";
+	mes "고마워요, 당신 곁에서... 이제 편히... 쉴 수 있어요....";
+	npctalk "티아라 공주: 고마워요, 당신 곁에서... 이제 편히... 쉴 수 있어요....";
 	next;
-	mes "[Lurid Royal Guard]";
-	mes "No..No!!!!!";
-	npctalk "Lurid Royal Guard: No..No!!!!!", .@guard$;
+	mes "[흙빛의 로열가드]";
+	mes "안돼... 안돼!";
+	npctalk "흙빛의 로열가드: 안돼... 안돼!", .@guard$;
 	next;
-	mes "[The voice of Princess Tiara]";
-	mes "I want to be with you forever in peace...forever...";
-	npctalk "Princess Tiara: I want to be with you forever in peace...forever...";
+	mes "[티아라 공주]";
+	mes "우리가 행복할 수 있는 곳에서, 영원히 함께 하기로 해요.";
+	npctalk "티아라 공주: 우리가 행복할 수 있는 곳에서, 영원히 함께 하기로 해요.";
 	next;
 	cutin "b-tiara.BMP",3;
-	mes "[Lurid Royal Guard]";
-	mes "no.....Ahh ahh ahh!!!!~!";
-	npctalk "Lurid Royal Guard: no.....Ahh ahh ahh!!!!~!", .@guard$;
+	mes "[흙빛의 로열가드]";
+	mes "으아아아악~!";
+	npctalk "흙빛의 로열가드: 으아아아악~!", .@guard$;
 	next;
-	mes "[The voice of Princess Tiara]";
-	mes "I love you...";
-	npctalk "Princess Tiara: I love you...";
+	mes "[티아라 공주]";
+	mes "사랑해요...!";
+	npctalk "티아라 공주: 사랑해요...!";
 	cutin "",255;
 	close2;
 	donpcevent instance_npcname("#gp_control_6") + "::OnStart";
 	end;
 }
 
-1@spa,213,42,7	duplicate(Lurid Royal Guard#dk)	Lurid Royal Guard#dk5	4_M_SAKRAYROYAL
+1@spa,213,42,7	duplicate(흙빛의 로열가드#dk)	흙빛의 로열가드#dk5	4_M_SAKRAYROYAL
 
 1@spa,1,1,1	script	#gp_control_6	HIDDEN_WARP_NPC,{
 	end;
 OnStart:
 	enablenpc instance_npcname("#gp_control_6");
-	disablenpc instance_npcname("Princess Tiara#dk1");
-	disablenpc instance_npcname("Lurid Royal Guard#dk5");
+	disablenpc instance_npcname("티아라 공주#dk1");
+	disablenpc instance_npcname("흙빛의 로열가드#dk5");
 
 	killmonster 'map_spa$, instance_npcname("#gp_control_4") + "::OnMyMobDead1";
 	killmonster 'map_spa$, instance_npcname("#gp_control_4") + "::OnMyMobDead2";
@@ -715,52 +705,52 @@ OnStart:
 	disablenpc instance_npcname("5th floor of Palace");
 	sleep 2000;
 	.@label$ = instance_npcname("#gp_control_6") + "::OnMyMobDead1";
-	monster 'map_spa$,217,52, "Forgotten Name" ,2957,1, .@label$;	// FORGOTTEN_NAME
-	unittalk $@mobid[0], "Wake up! look at us... We are monsters?";
-	monster 'map_spa$,190,21, "Tarnished Oath" ,2954,1, .@label$;	// COLORLESS_VOW
-	unittalk $@mobid[0], "Sakray killed the King and tried to kill us!";
-	monster 'map_spa$,198,49, "Tarnished Oath" ,2954,1, .@label$;	// COLORLESS_VOW
-	unittalk $@mobid[0], "What is this..??";
-	monster 'map_spa$,212,28, "Fatal Days" ,2958,1, .@label$;		// FATAL_DAYS
-	unittalk $@mobid[0], "Sakray killed a princess!";
+	monster 'map_spa$,217,52, "잊혀진 이름" ,2957,1, .@label$;	// FORGOTTEN_NAME
+	unittalk $@mobid[0], "이봐! 우리가 괴물로 보이나?";
+	monster 'map_spa$,190,21, "빛 바랜 맹세" ,2954,1, .@label$;	// COLORLESS_VOW
+	unittalk $@mobid[0], "사크라이가 왕과 우리를 죽이려 한다!";
+	monster 'map_spa$,198,49, "빛 바랜 맹세" ,2954,1, .@label$;	// COLORLESS_VOW
+	unittalk $@mobid[0], "이게 뭐지...?";
+	monster 'map_spa$,212,28, "돌이킬 수 없는 날" ,2958,1, .@label$;		// FATAL_DAYS
+	unittalk $@mobid[0], "사크라이가 공주님을 죽였다!";
 	end;
 OnMyMobDead1:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_6") + "::OnMyMobDead1") < 1) {
 		sleep 2000;
 		.@label$ = instance_npcname("#gp_control_6") + "::OnMyMobDead2";
-		monster 'map_spa$,217,43, "Forgotten Name" ,2957,1, .@label$;	// FORGOTTEN_NAME
-		unittalk $@mobid[0], "Wake up! look at us... We are monsters?";
-		monster 'map_spa$,193,24, "Forgotten Name" ,2957,1, .@label$;	// FORGOTTEN_NAME
+		monster 'map_spa$,217,43, "잊혀진 이름" ,2957,1, .@label$;	// FORGOTTEN_NAME
+		unittalk $@mobid[0], "이봐! 우리가 괴물로 보이나?";
+		monster 'map_spa$,193,24, "잊혀진 이름" ,2957,1, .@label$;	// FORGOTTEN_NAME
 		unittalk $@mobid[0], "Sakray..?? why.....Sakray!";
-		monster 'map_spa$,216,59, "Tarnished Oath" ,2954,1, .@label$;	// COLORLESS_VOW
-		unittalk $@mobid[0], "Sakray killed the King and tried to kill us!";
-		monster 'map_spa$,197,57, "Fatal Days" ,2958,1, .@label$;		// FATAL_DAYS
-		unittalk $@mobid[0], "Sakray killed a princess!";
+		monster 'map_spa$,216,59, "빛 바랜 맹세" ,2954,1, .@label$;	// COLORLESS_VOW
+		unittalk $@mobid[0], "사크라이가 왕과 우리를 죽이려 한다!";
+		monster 'map_spa$,197,57, "돌이킬 수 없는 날" ,2958,1, .@label$;		// FATAL_DAYS
+		unittalk $@mobid[0], "사크라이가 공주님을 죽였다!";
 	}
 	end;
 OnMyMobDead2:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_6") + "::OnMyMobDead2") < 1) {
 		sleep 2000;
 		.@label$ = instance_npcname("#gp_control_6") + "::OnMyMobDead3";
-		monster 'map_spa$,193,39, "Forgotten Name" ,2957,1, .@label$;	// FORGOTTEN_NAME
-		unittalk $@mobid[0], "Wake up! look at us... We are monsters?";
-		monster 'map_spa$,212,34, "Forgotten Name" ,2957,1, .@label$;	// FORGOTTEN_NAME
+		monster 'map_spa$,193,39, "잊혀진 이름" ,2957,1, .@label$;	// FORGOTTEN_NAME
+		unittalk $@mobid[0], "이봐! 우리가 괴물로 보이나?";
+		monster 'map_spa$,212,34, "잊혀진 이름" ,2957,1, .@label$;	// FORGOTTEN_NAME
 		unittalk $@mobid[0], "Sakray..?? why.....Sakray!";
-		monster 'map_spa$,201,64, "Tarnished Oath" ,2954,1, .@label$;	// COLORLESS_VOW
-		unittalk $@mobid[0], "Sakray killed the King and tried to kill us!";
-		monster 'map_spa$,175,44, "Fatal Days" ,2958,1, .@label$;		// FATAL_DAYS
-		unittalk $@mobid[0], "Sakray killed a princess!";
+		monster 'map_spa$,201,64, "빛 바랜 맹세" ,2954,1, .@label$;	// COLORLESS_VOW
+		unittalk $@mobid[0], "사크라이가 왕과 우리를 죽이려 한다!";
+		monster 'map_spa$,175,44, "돌이킬 수 없는 날" ,2958,1, .@label$;		// FATAL_DAYS
+		unittalk $@mobid[0], "사크라이가 공주님을 죽였다!";
 	}
 	end;
 OnMyMobDead3:
 	if (mobcount('map_spa$, instance_npcname("#gp_control_6") + "::OnMyMobDead3") < 1) {
 		sleep 2000;
-		monster 'map_spa$,200,45, "Torturous Redeemer" ,2961,1, instance_npcname("#gp_control_6") + "::OnMyMobDead4";	// E_TORTUROUS_REDEEMER
-		unittalk $@mobid[0], "Magic Sword Tartanos! I will destroy you if I can't have you... Oh no! How could this be?";
+		monster 'map_spa$,200,45, "일그러진 구원자" ,2961,1, instance_npcname("#gp_control_6") + "::OnMyMobDead4";	// E_TORTUROUS_REDEEMER
+		unittalk $@mobid[0], "마검 타르타노스! 내가 가질 수 없다면 널 파괴해버리고 말테다!!";
 		sleep 5000;
 		killmonster 'map_spa$, instance_npcname("#gp_control_6") + "::OnMyMobDead4";
-		enablenpc instance_npcname("Sakray#dk");
-		enablenpc instance_npcname("Magic Sword Tartanos#dk3");
+		enablenpc instance_npcname("사크라이#dk");
+		enablenpc instance_npcname("마검 타르타노스#dk3");
 		disablenpc instance_npcname("#gp_control_6");
 	}
 	end;
@@ -768,68 +758,68 @@ OnMyMobDead4:
 	end;
 }
 
-1@spa,196,44,5	script	Sakray#dk	4_M_SAKRAY,{
-	mes "[Lurid Royal Guard]";
-	mes "Are you satisfied..? Magic Sword Tartanos?";
-	npctalk "Lurid Royal Guard: Are you satisfied..? Magic Sword Tartanos?";
+1@spa,196,44,5	script	사크라이#dk	4_M_SAKRAY,{
+	mes "[흙빛의 로열가드]";
+	mes "만족했는가, 마검 타르타노스여.";
+	npctalk "흙빛의 로열가드: 만족했는가, 마검 타르타노스여.";
 	next;
-	mes "[Magic Sword Tartanos]";
-	mes "I need more blood..Sakray, offer me his blood.";
-	npctalk "Magic Sword Tartanos: I need more blood..Sakray, offer me his blood.", instance_npcname("Magic Sword Tartanos#dk3");
+	mes "[마검 타르타노스]";
+	mes "아직 피가 더 필요하다. 사크라이, 내게 저 자의 피를 바쳐라.";
+	npctalk "마검 타르타노스: 아직 피가 더 필요하다. 사크라이, 내게 저 자의 피를 바쳐라.", instance_npcname("마검 타르타노스#dk3");
 	next;
-	mes "[Sakray]";
-	mes "Okay, that is good. A traveller. Did you see?";
-	npctalk "Sakray: Okay, that is good. A traveller. Did you see?";
-	next;
-	mes "[" + strcharinfo(0) + "]";
-	mes "Sakray, what do you want? Sympathy? Or is it a trap?";
-	unittalk getcharid(3), "" + strcharinfo(0) + " : Sakray, what do you want? Sympathy? Or is it a trap?";
-	next;
-	mes "[Sakray]";
-	mes "No... I do not need to make any effort to catch a novice.";
-	npctalk "Sakray: No... I do not need to make any effort to catch a novice.";
+	mes "[사크라이]";
+	mes "그래, 그것도 좋겠지. 여행자여, 잘 보았는가?";
+	npctalk "사크라이: 그래, 그것도 좋겠지. 여행자여, 잘 보았는가?";
 	next;
 	mes "[" + strcharinfo(0) + "]";
-	mes "If so... then why...?";
-	unittalk getcharid(3), "" + strcharinfo(0) + " : If so... then why...?";
+	mes "의도가 뭐냐, 사크라이. 동정을 바라는 건가, 아니면 날 잡기 위한 함정?";
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 의도가 뭐냐, 사크라이. 동정을 바라는 건가, 아니면 날 잡기 위한 함정?";
+	next;
+	mes "[사크라이]";
+	mes "둘 다 아니다. 너 같은 풋내기를 잡으려고, 이런 공을 들일 필요는 없지.";
+	npctalk "사크라이: 둘 다 아니다. 너 같은 풋내기를 잡으려고, 이런 공을 들일 필요는 없지.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "그렇다면 대체 무엇 때문에...";
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 그렇다면 대체 무엇 때문에...";
 	next;
 	cutin "cry-b.bmp",2;
-	mes "[Sakray]";
-	mes "I wanted to get rid of a piece of humanity inside of me through you.";
-	npctalk "Sakray: I wanted to get rid of a piece of humanity inside of me through you.";
+	mes "[사크라이]";
+	mes "내 안에 남은 부스러기 같은 인간성을, 너를 통해 없애려 한 것이다.";
+	npctalk "사크라이: 내 안에 남은 부스러기 같은 인간성을, 너를 통해 없애려 한 것이다.";
 	next;
-	mes "[Sakray]";
-	mes "I am quite satisfied with the result.";
-	npctalk "Sakray: I am quite satisfied with the result.";
+	mes "[사크라이]";
+	mes "결과는 꽤나 만족스럽군.";
+	npctalk "사크라이: 결과는 꽤나 만족스럽군.";
 	next;
-	mes "[Magic Sword Tartanos]";
-	mes "Sakray, offer the blood to me now!";
-	npctalk "Magic Sword Tartanos: Sakray, offer the blood to me now!", instance_npcname("Magic Sword Tartanos#dk3");
+	mes "[마검 타르타노스]";
+	mes "사크라이, 어서 저 자의 피를 바쳐라, 어서!";
+	npctalk "마검 타르타노스: 사크라이, 어서 저 자의 피를 바쳐라, 어서!", instance_npcname("마검 타르타노스#dk3");
 	next;
-	mes "[Sakray]";
-	mes "If you were me, what would you do?";
-	npctalk "Sakray: If you were me, what would you do?";
+	mes "[사크라이]";
+	mes "여행자여, 네가 나였다면 넌 과연 어떻게 했을까?";
+	npctalk "사크라이: 여행자여, 네가 나였다면 넌 과연 어떻게 했을까?";
 	next;
-	mes "[Sakray]";
-	mes "Can you set yourself free from this curse?";
-	npctalk "Sakray: Can you set yourself free from this curse?";
+	mes "[사크라이]";
+	mes "이 저주로부터 넌, 자유로울 수 있었을까?";
+	npctalk "사크라이: 이 저주로부터 넌, 자유로울 수 있었을까?";
 	next;
 	mes "[" + strcharinfo(0) + "]";
 	mes "...";
 	unittalk getcharid(3), "" + strcharinfo(0) + " : ...";
 	next;
-	mes "[Sakray]";
-	mes "Heh heh... I will keep watching you until the day comes when you are old enough.";
-	npctalk "Sakray: Heh heh... I will keep watching you until the day comes when you are old enough.";
+	mes "[사크라이]";
+	mes "쿠후후...너를 지켜보겠다. 네가 충분히 성장하는 날,";
+	npctalk "사크라이: 쿠후후...너를 지켜보겠다. 네가 충분히 성장하는 날,";
 	next;
-	mes "[Sakray]";
-	mes "I am willing to hunt you later for Tartanos.";
-	npctalk "Sakray: I am willing to hunt you later for Tartanos.";
+	mes "[사크라이]";
+	mes "기꺼이 너를 찾아 타르타노스에게 만족스런 식사를 대접할 것이다.";
+	npctalk "사크라이: 기꺼이 너를 찾아 타르타노스에게 만족스런 식사를 대접할 것이다.";
 	cutin "",255;
 	next;
-	mes "[Sakray]";
-	mes "Farewell then.";
-	npctalk "Sakray: Farewell then.";
+	mes "[사크라이]";
+	mes "그때까지 잠시 안녕이다.";
+	npctalk "사크라이: 그때까지 잠시 안녕이다.";
 	close2;
 	donpcevent instance_npcname("#tb") + "::OnStart";
 	end;
@@ -838,73 +828,72 @@ OnMyMobDead4:
 1@spa,196,46,1	script	#tb	CLEAR_NPC,{
 	end;
 OnStart:
-	disablenpc instance_npcname("Sakray#dk");
-	disablenpc instance_npcname("Magic Sword Tartanos#dk3");
+	disablenpc instance_npcname("사크라이#dk");
+	disablenpc instance_npcname("마검 타르타노스#dk3");
 	enablenpc instance_npcname("#tb");
 	enablenpc instance_npcname("#sv");
 	enablenpc instance_npcname("#tv");
 	initnpctimer;
 	end;
 OnTimer3000:
-	npctalk "Voice of Princess Tiara : What can I do for you?";
+	npctalk "티아라 공주 목소리: 당신을 위해...내가 할 수 있는 건 뭐죠?";
 	end;
 OnTimer8000:
-	npctalk "Voice of Sakray : I will always stand by you. Please rest beside me.", instance_npcname("#sv");
+	npctalk "사크라이 목소리: 저는 늘 공주님 곁에 있을 것입니다. 제 곁에서 편히 쉬십시오.", instance_npcname("#sv");
 	end;
 OnTimer13000:
-	npctalk "Magic Sword Tartanos: Sakray, do not forget the covenant of blood between us.", instance_npcname("#tv");
+	npctalk "마검 타르타노스: 잊지마라, 사크라이. 우리의 피의 계약을.", instance_npcname("#tv");
 	end;
 OnTimer17000:
-	npctalk "Magic Sword Tartanos: Your soul is mine until you find the blood that satisfies me...", instance_npcname("#tv");
+	npctalk "마검 타르타노스: 날 만족시킬 피를 찾을 때까지 너의 영혼은 내 것이다. 크흐흐흐흐...", instance_npcname("#tv");
 	end;
 OnTimer22000:
-	npctalk "Voice of Sakray : Rest in the shadow with me.", instance_npcname("#sv");
+	npctalk "사크라이 목소리: 나의 그림자 안에서 편히 쉬거라.", instance_npcname("#sv");
 	end;
 OnTimer25000:
-	npctalk "Voice of Sakray : In the dark forever...", instance_npcname("#sv");
+	npctalk "사크라이 목소리: 영원한 어둠 속으로...", instance_npcname("#sv");
 	end;
 OnTimer28500:
 	disablenpc instance_npcname("#tb");
 	disablenpc instance_npcname("#sv");
 	disablenpc instance_npcname("#tv");
-	mapannounce 'map_spa$, "It is time to leave the Ghost Palace.", bc_map,0xFFFF00;
+	mapannounce 'map_spa$, "망령의 왕국을 떠날 시간입니다. 출구가 개방되었습니다.", bc_map,0xFFFF00;
 	enablenpc instance_npcname("Way out of Palace");
-	enablenpc instance_npcname("King#dk11");
+	//enablenpc instance_npcname("국왕#dk11");
 	end;
 }
 
-1@spa,195,41,1	duplicate(Lurid Royal Guard#dk)	Magic Sword Tartanos#dk3	CLEAR_NPC
-1@spa,198,43,1	duplicate(Lurid Royal Guard#dk)	#sv	CLEAR_NPC
-1@spa,196,41,1	duplicate(Lurid Royal Guard#dk)	#tv	CLEAR_NPC
+1@spa,195,41,1	duplicate(흙빛의 로열가드#dk)	마검 타르타노스#dk3	CLEAR_NPC
+1@spa,198,43,1	duplicate(흙빛의 로열가드#dk)	#sv	CLEAR_NPC
+1@spa,196,41,1	duplicate(흙빛의 로열가드#dk)	#tv	CLEAR_NPC
 
-1@spa,204,29,1	script	King#dk11	4_M_RUSKING,{
+1@spa,204,29,1	script	국왕#dk11	4_M_RUSKING,{
 	disable_items;
-	mes "[King]";
-	mes "Hey there, are you alive?";
-	mes "I did not expect to meet someone who is still alive.";
+	mes "[국왕]";
+	mes "저기, 살아있어요?";
+	mes "살아있는 사람을 만날 줄은 몰랐습니다.";
 	next;
-	.@item_name_req$ = getitemname(6672);// Gray_Shard
-	mes "[King]";
-	mes "Do you possibly have the ^006400" + .@item_name_req$ + "^000000?";
-	mes "Can you give it to me?";
-	mes "The memories of the faithful royal guard";
-	mes "and the memories of everyone he loved";
-	mes "are contained inside of these shards.";
+	mes "[국왕]";
+	mes "혹시 ^006400회색 샤드^000000 갖고 계시나요?";
+	mes "나한테 줄래?";
+	mes "충실한 왕실 근위병의 추억";
+	mes "그리고 그가 사랑했던 모든 사람의 추억";
+	mes "이 샤드 안에 포함되어 있습니다.";
 	next;
-	mes "[King]";
-	mes "Will you give the ^006400" + .@item_name_req$ + "^000000 to me?";
-	mes "The guilt is eating my soul.";
-	mes "My soul is trapped inside the Ghost Palace.";
+	mes "[국왕]";
+	mes "^006400회색조각^000000을 나한테 주실래요?";
+	mes "죄책감이 내 영혼을 잠식하고 있어요.";
+	mes "내 영혼은 유령궁에 갇혀있습니다.";
 	next;
-	mes "[King]";
-	mes "I am collecting Sakray's abandoned memories from these shards.";
+	mes "[국왕]";
+	mes "나는 이 조각들에서 사크라이의 버려진 기억을 모으고 있습니다.";
 	next;
-	mes "[King]";
-	mes "If you give any ^006400" + .@item_name_req$ + "^000000s to me, I can make equipment for you.";
+	mes "[국왕]";
+	mes "^006400회색 파편^000000개를 저에게 주시면 장비를 만들어 드리겠습니다.";
 	next;
-	mes "[King]";
-	mes "The cursed knight...";
-	mes "Please help me save the soul of Sakray.";
+	mes "[국왕]";
+	mes "저주받은 기사...";
+	mes "사크라이의 영혼을 구할 수 있게 도와주세요.";
 	next;
 	setarray .@item_name$[0],
 		"Thanos Sword", "Thanos Broadsword", "Thanos Spear", "Thanos Two-Handed Spear", "Thanos Staff",
@@ -920,48 +909,48 @@ OnTimer28500:
 	while(true) {
 		.@s = select(.@menu$) - 1;
 		if (.@s == 20) {
-			mes "[King]";
-			mes "Someday, Sakray will";
-			mes "get out of this curse for sure.";
-			mes "I believe";
-			mes "^006400" + .@item_name_req$ + "^000000s are the only method";
-			mes "to save him....";
+			mes "[국왕]";
+			mes "언젠가는 Sakray가 그렇게 할 것입니다";
+			mes "확실히 이 저주에서 벗어나세요.";
+			mes "나는 믿는다";
+			mes "^006400Gray Shard^000000s가 유일한 방법입니다";
+			mes "그를 구하기 위해....";
 			close;
 		}
 		.@cost = ( .@s > 13 ? 100 : 200 );
-		mes "[King]";
-		mes "To make a ^FF0000" + .@item_name$[.@s] + "^000000";
-		mes "I need " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+		mes "[국왕]";
+		mes "^FF0000을 만들려면"+ .@item_name$[.@s] +"^000000";
+		mes "나는 "+ .@cost +" ^006400회색 조각^000000이 필요합니다.";
 		next;
-		if (select( "Cancel", "Hand over " + .@cost + " " + .@item_name_req$ + "." ) == 1) {
-			mes "[King]";
-			mes "Someday, Sakray will";
-			mes "get out of this curse for sure.";
+		if (select( "취소", "인도"+ .@cost +" 회색 샤드." ) == 1) {
+			mes "[국왕]";
+			mes "언젠가는 Sakray가 그렇게 할 것입니다";
+			mes "확실히 이 저주에서 벗어나세요.";
 			next;
 			continue;
 		}
 		if (countitem(6672) < .@cost) {
-			mes "[King]";
-			mes "You do not have enough ^006400" + .@item_name_req$ + "^000000";
-			mes "to make a ^FF0000" + .@item_name$[.@s] + "^000000.";
-			mes "I need " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+			mes "[국왕]";
+			mes "^006400회색 샤드^000000이 부족합니다";
+			mes "^FF0000을 만들려면"+ .@item_name$[.@s] +"^000000.";
+			mes "나는 "+ .@cost +" ^006400회색 조각^000000이 필요합니다.";
 			next;
 			continue;
 		}
-		mes "[King]";
-		mes "I will make a ^FF0000" + .@item_name$[.@s] + "^000000";
-		mes "with " + .@cost + " ^006400" + .@item_name_req$ + "^000000.";
+		mes "[국왕]";
+		mes "^FF0000"+ .@item_name$[.@s] +"^000000을 만들겠습니다.";
+		mes ""+ .@cost +" ^006400회색 샤드^000000.";
 		next;
-		mes "You see a light through the folded hands of the king and it gradually takes on a shape.";
+		mes "왕의 포개진 손 사이로 빛이 보이고 점차 형태를 갖추게 됩니다.";
 		next;
-		mes "[King]";
-		mes "All right, it is done.";
-		mes "Take this ^FF0000" + .@item_name$[.@s] + "^000000";
-		mes "to confront Sakray and Tartanos.";
+		mes "[국왕]";
+		mes "자, 다 됐어요.";
+		mes "이것을 가져가세요 ^FF0000"+ .@item_name$[.@s] +"^000000";
+		mes "사크라이와 타르타노스와 대결하기 위해.";
 		next;
-		mes "[King]";
-		mes "The power requires a sacrifice.";
-		mes "Please be careful...";
+		mes "[국왕]";
+		mes "권력에는 희생이 필요하다.";
+		mes "조심하세요...";
 		delitem 6672,.@cost;// Gray Shard
 		getitem .@items_list[.@s],1;
 		close;
@@ -971,9 +960,7 @@ OnTimer28500:
 1@spa,210,28,0	script	Way out of Palace	WARPNPC,2,2,{
 	end;
 OnTouch_:
-	mes "It is time to leave the Ghost Palace.";
-	mes "Everything is now complete";
-	mes "and will vanish..";
+	mes "망령의 왕궁을 떠날 시간입니다. 모든 것을 완료했고, 모든 것이 소멸할 것입니다.";
 	close2;
 	if (isbegin_quest(1263) == 2)
 		getitem 6672,1;// Gray Shard

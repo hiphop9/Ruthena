@@ -1,0 +1,58 @@
+
+Header:
+  Type: INSTANCE_DB
+  Version: 1
+
+Body:
+  - Id: 100
+    Name: The Maze of Oz
+    Enter:
+      Map: 1@oz
+      X: 284
+      Y: 167
+
+  - Id: 101
+    Name: Thor Gunsu Base
+    Enter:
+      Map: 1@tcamp
+      X: 103
+      Y: 237
+
+  - Id: 102
+    Name: A Gathering Place of Wolves
+    Enter:
+      Map: 1@nyr
+      X: 194
+      Y: 30
+    AdditionalMaps:
+      2@nyr: true
+
+  - Id: 103
+    Name: Sanctuary Purification
+    Enter:
+      Map: 1@nyr
+      X: 194
+      Y: 30
+    AdditionalMaps:
+      2@nyr: true
+
+  - Id: 104
+    Name: Villa of High Priest
+    Enter:
+      Map: 1@adv
+      X: 123
+      Y: 17
+
+  - Id: 105
+    Name: Villa of Deception
+    Enter:
+      Map: 1@advs
+      X: 111
+      Y: 19
+
+  - Id: 106
+    Name: Villa of Deception Advanced
+    Enter:
+      Map: 1@advs
+      X: 111
+      Y: 19

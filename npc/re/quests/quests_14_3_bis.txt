@@ -1,12 +1,7 @@
 //===== rAthena Script =======================================
 //= Flame Basin Quests
 //===== Description: =========================================
-//= [Official Conversion]
-//= Quests NPCs from Flame Basin
-//===== Changelogs: ==========================================
-//= 1.0 First version. Thanks to Dia from https://www.divine-pride.net/ ! [Capuche]
-//= 1.1 Added Dimensional Travel Quest. [Capuche]
-//= 1.2 Added Flaming Basin and Doom Prayers quests. [Capuche]
+//한글번역 스카이러브
 //============================================================
 
 moro_vol,94,110,5	script	Guardian Nidhogg#143nyd01	4_F_NYDHOG,{
@@ -2177,65 +2172,65 @@ morocc,138,238,4	script	Piled Rags#ep14bs	4_M_DIEMAN,{
 			mes "I'm glad I didn't die on the street. The world is still a beautiful place.";
 			mes "I'm moved.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "My name is ^0000FFTamarin^000000.";
 			mes "I'm an adventurer, and no, this isn't my preferred attire.";
 			next;
 			select("Introduce yourself.");
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "" + strcharinfo(0) + ", huh? That's a good name.";
 			next;
 		}
 		if (ep14_3_newerabs <= 3) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Ah,";
 			mes "I'd better do something before people start asking if I'm homeless.";
 			cutin "ep143_tadir.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Do you know a place where I can wash myself?";
 			next;
 			if (select( "Tell him the place.", "Say you don't know." ) == 2) {
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "Water is scarce in the desert, huh?";
 				ep14_3_newerabs = 3;
 				close3;
 			}
 		}
 		if (ep14_3_newerabs <= 4) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Ah,";
 			mes "do you mean the ^0000FFoasis near the northwestern sphinx^000000?";
 			cutin "ep143_tadir.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I've been in Morocc, but this is my first time inside the village.";
 			mes "I remember hearing that the place holds special water.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I feel excited to wash myself with the special water!";
 			mes "I'm going to the oasis now. Could you wait for me?";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "It'll take a while before I feel strong again, but at least I can walk on my own.";
 			mes "Hah hah hah!";
 			next;
 			if (select( "Watch him.", "Accompany him." ) == 1) {
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "(Braces himself and inhales.)";
 				mes "Wait, wait.";
 				mes "I can stand up on my own.";
 				next;
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "Wait, wait!";
 				ep14_3_newerabs = 4;
 				close3;
 			}
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "How kind of you!";
 			mes "The world is still an okay place to live.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Then, let's go to the ^0000FFoasis near the northwestern sphinx^000000.";
 			changequest 11350,11351;
 			ep14_3_newerabs = 5;
@@ -2243,12 +2238,12 @@ morocc,138,238,4	script	Piled Rags#ep14bs	4_M_DIEMAN,{
 		}
 	}
 	if (ep14_3_newerabs == 5) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "How kind of you!";
 		mes "The world is still an okay place to live.";
 		cutin "ep143_tadir.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Then, let's go to the ^0000FFoasis near the northwestern sphinx^000000.";
 		close3;
 	}
@@ -2260,167 +2255,167 @@ OnInit:
 	end;
 }
 
-moc_ruins,106,140,4	script	Tamarin#ep14bs_ru	4_M_TAMARIN,{
+moc_ruins,106,140,4	script	타마린#ep14bs_ru	4_M_TAMARIN,{
 	if (ep14_3_newerabs == 5 || ep14_3_newerabs == 6) {
 		if (ep14_3_newerabs == 5) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Pah!";
 			mes "This feels great!";
 			cutin "ep143_tasmi.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "The water feels too warm for my liking, but beggars can't be choosers.";
 			cutin "ep143_tasta.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "You saved me from starvation, and took me to this great place. I must have been a great person in the past life";
 			mes "to deserve such kindness.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I want to repay you, fellow adventurer.";
 			mes "I lost all my belongings when I fell into that strange hole and got separated from my party,";
 			cutin "ep143_tasta.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "but at least I can tell you an ^0000FFinteresting story^000000.";
 			cutin "ep143_tasmi.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "It's about the strange place I've been to.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
 			if (select( "Not interested.", "I'm listening." ) == 1) {
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "All right, then.";
 				mes "I thought you were serious about adventuring.";
 				cutin "ep143_tahuk.bmp",2;
 				next;
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "Then";
 				mes "do you want your Monster's Feed back?";
 				cutin "ep143_tasta.bmp",2;
 				next;
-				mes "[Tamarin]";
+				mes "[타마린]";
 				mes "*Retch*";
 				cutin "ep143_taang.bmp",2;
 				close3;
 			}
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I knew you'd be interested!";
 			mes "Nothing piques adventurers' interest like the story of a strange place, right?";
 			cutin "ep143_tasmi.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Ahem.";
 			mes "The story begins with my journey to the ^0000FFOther World^000000, the latest hot spot for adventurers.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Adventurer Tamarin and his party went on a journey to the land of the unknown, Other World.";
 			cutin "ep143_tasmi.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Their journey was perilous, but they bravely moved forward.";
 			cutin "ep143_taang.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Oh,";
 			mes "why am I speaking in the third-person perspective?";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "My original inspiration was Bard, but then I became a Hunter because my friends thought that suited me better.";
 			cutin "ep143_tasmi.bmp",2;
 			next;
 			select("Ask him to be more straightforward.");
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Yes.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "A while ago, my friends and I decided to explore the Other World together.";
 			cutin "ep143_tasta.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Since it'd be our first visit to the Other World, we wanted to go to a more popular spot, but one of us wouldn't have it--he was so excited that he started acting out of control.";
 			cutin "ep143_taang.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "When I came back to my senses, I was alone in a strange place.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "The ^0000FFland was burning with perpetual flames^000000 that weren't too hot to touch, and ^0000FFstrange-looking plants and insects^000000 were crawling all over the place.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "At first I yelled for help and moved around hoping to find others, but all to no avail.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "After a few days of having nothing to eat, I started to eat anything I saw off the ground, and I had the worst diarrhea ever.";
 			cutin "ep143_taang.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I didn't know how many days had passed before I saw a group of some entities that I thought were men at a glance.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "But ^0000FFthey looked too strange to pass as human^000000.";
 			mes "I couldn't talk to them, so I just jumped into the Crack that they came through.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "My knees gave way and I rolled on my side. When I looked around, I was back at the ^0000FFDimensional Crack^000000 where my friends and I first arrived.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I came out through the ^0000FFMorocc Dimensional Teleporter^000000 and used every ounce of my energy to get to Morocc.";
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Sigh...";
 			mes "I wonder if my friends are safe.";
 			cutin "ep143_tasta.bmp",2;
 			next;
 		}
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I should seek them out,";
 		mes "but first I want to go back to that strange place when I get my full strength back. Not many people have a chance to see such a special place, you know.";
 		cutin "ep143_tasmi.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Fortunately for me, with the ^0000FFMorocc restoration work^000000 underway, I shouldn't have a problem making money through some part-time jobs.";
 		next;
 		if (select( "Tell him have safe travel.", "Tell him you want to tag along." ) == 1) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I will.";
 			mes "Thank you for saving me.";
 			cutin "ep143_tahuk.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "This is the beauty of adventuring:";
 			mes "making new friends!";
 			cutin "ep143_tasmi.bmp",2;
 			next;
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "I'll be in Morocc for a while, making some money and getting ready for another adventure. I hope I can see you again before I leave.";
 			ep14_3_newerabs = 6;
 			close3;
 		}
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "!!";
 		cutin "ep143_tahuk.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Do you mean it?";
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "By the gods I'm a lucky bastard!";
 		mes "*Sob*";
 		cutin "ep143_taang.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Then meet me at the ^0000FFDimensional Crack^000000. I need to replenish myself first.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "It may take a while for me to get everything packed, so get your other business done in the meantime.";
 		erasequest 11351;// Dimensional Travel
 		setquest 11352;// Dimensional Travel
@@ -2428,42 +2423,42 @@ moc_ruins,106,140,4	script	Tamarin#ep14bs_ru	4_M_TAMARIN,{
 		close3;
 	}
 	if (ep14_3_newerabs == 7) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Then meet me at the ^0000FFDimensional Crack^000000. I need to replenish myself first.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "It may take a while for me to get everything packed, so get your other business done in the meantime.";
 		close3;
 	}
-	mes "[Tamarin]";
-	mes "Pah!";
-	mes "This feels great!";
+	mes "[타마린]";
+	mes "푸하!";
+	mes "시원하다!";
 	cutin "ep143_tasmi.bmp",2;
 	close3;
 }
 
-dali,112,69,4	script	Tamarin#ep14bs_cha	4_M_TAMARIN,{
+dali,112,69,4	script	타마린#ep14bs_cha	4_M_TAMARIN,{
 	if (ep14_3_newerabs == 7) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "" + strcharinfo(0) + ", over here!";
 		mes "You're early.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "(Glancing around surreptitiously)";
 		mes "I hope no one's watching us.";
 		cutin "ep143_tahuk.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I've hidden the opening to that place: I didn't want anyone to get there before me.";
 		cutin "ep143_tasmi.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "At that time, I was too distracted to remember where the opening was, but I think it's definitely ^0000FFsomewhere on the 2nd floor^000000.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Meet me in front of the ^0000FFHidden Crack^000000. Make sure no one follows you there.";
 		mes "I've ^0000FFcovered the opening with dirt^000000. I hope no one dug it open.";
 		erasequest 11352;// Dimensional Travel
@@ -2472,20 +2467,20 @@ dali,112,69,4	script	Tamarin#ep14bs_cha	4_M_TAMARIN,{
 		close3;
 	}
 	if (ep14_3_newerabs == 8) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I've hidden the opening to that place: I didn't want anyone to get there before me.";
 		cutin "ep143_tasmi.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "At that time, I was too distracted to remember where the opening was, but I think it's definitely ^0000FFsomewhere on the 2nd floor^000000.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Meet me in front of the ^0000FFHidden Crack^000000. Make sure no one follows you there.";
 		mes "I've ^0000FFcovered the opening with dirt^000000. I hope no one dug it open.";
 		close3;
 	}
-	mes "[Tamarin]";
+	mes "[타마린]";
 	mes "Hm, my mark had better stay where I left it.";
 	cutin "ep143_tahuk.bmp",2;
 	close3;
@@ -2499,18 +2494,18 @@ dali02,90,62,0	script	Sand Mound#ep14bs	4_SOIL,{
 	if (ep14_3_newerabs == 8) {
 		mes "- A mound of sand stands awkwardly, looking out of place. -";
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Whew!";
 		mes "I'm glad you've found me.";
 		cutin "ep143_tasmi.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Let me clear the dirt...";
 		mes "Be mindful of the opening. It's quite narrow.";
 		cutin "ep143_tasta.bmp",2;
 		next;
 		if (select( "Enter.", "Quit." ) == 2) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Aren't you going in?";
 			cutin "ep143_tahuk.bmp",2;
 			close3;
@@ -2551,23 +2546,23 @@ moro_vol,137,136,0	script	Sand Mound#ep14bs_	4_SOIL,{
 	end;
 }
 
-moro_vol,132,140,4	script	Tamarin#ep14bs_ju	4_M_TAMARIN,{
+moro_vol,132,140,4	script	타마린#ep14bs_ju	4_M_TAMARIN,{
 	if (ep14_3_newerabs == 9) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Whoa!";
 		mes "I didn't expect to see so many people.";
 		cutin "ep143_tahuk.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I'm disappointed that I'm not the first one to discover the place, and am glad that I'm not alone in this dismal place.";
 		cutin "ep143_taang.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I see more of those entities that look sort of like men.";
 		mes "This place might be much more than I thought it was!";
 		cutin "ep143_tasmi.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Look!";
 		mes "Walking trees!";
 		mes "Grrr-!";
@@ -2582,7 +2577,7 @@ moro_vol,132,140,4	script	Tamarin#ep14bs_ju	4_M_TAMARIN,{
 		close;
 	}
 	if (ep14_3_newerabs == 15) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Look!";
 		mes "Walking trees!";
 		mes "Grrr-!";
@@ -2595,18 +2590,18 @@ moro_vol,132,140,4	script	Tamarin#ep14bs_ju	4_M_TAMARIN,{
 		close;
 	}
 	if (ep14_3_newerabs == 16) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "They might kick us out if they know we sneaked in.";
 		mes "Let's do what they ask for now, yeah?";
 		cutin "ep143_taang.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs == 17 || ep14_3_newerabs == 18) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Collecting the plant specimens doesn't sound too difficult. We can split them between us.";
 		cutin "ep143_tasta.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "^0000FFWhen you collect 25 Sonia stems, meet me by the big rock in the center of this place^000000.";
 		if (ep14_3_newerabs == 17) {
 			erasequest 11356;// Specimen Collection
@@ -2617,40 +2612,40 @@ moro_vol,132,140,4	script	Tamarin#ep14bs_ju	4_M_TAMARIN,{
 	}
 	if (ep14_3_newerabs == 19) {
 		if (countitem(6690) < 25) {// YummyStem
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "Ooh! (Wincing)";
 			mes "You don't have enough stems.";
 			mes "Get more and take them to Barget.";
 			cutin "ep143_tahuk.bmp",2;
 			close3;
 		}
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Let's report to Barget first.";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs == 21 || ep14_3_newerabs == 22) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Come on,";
 		mes "hurry over to ^0000FFInstructor Rugen^000000!";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs == 23) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Thank the gods, who knew that thing I ate out of hunger would save me?";
 		mes "Let's report to Barget.";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs == 24) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Arrgh!";
 		mes "" + strcharinfo(0) + " Get in the cave before everyone else explores it!";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
-	mes "[Tamarin]";
+	mes "[타마린]";
 	mes "Ugh...";
 	mes "I was the first to come to this place!";
 	cutin "ep143_taang.bmp",2;
@@ -2761,7 +2756,7 @@ moro_vol,142,131,5	script	Barget Tiblack#ep14bs	4_M_ALCHE_D,{
 		mes "Try not to stray too far away from the base. It's too dangerous out there.";
 		mes "Come back safely.";
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Hm...";
 		mes "" + strcharinfo(0) + ", wait!";
 		cutin "ep143_tahuk.bmp",2;
@@ -2885,9 +2880,9 @@ moro_vol,142,131,5	script	Barget Tiblack#ep14bs	4_M_ALCHE_D,{
 	close;
 }
 
-moro_vol,198,179,4	script	Tamarin#ep14bs_st	4_M_TAMARIN,{
+moro_vol,198,179,4	script	타마린#ep14bs_st	4_M_TAMARIN,{
 	if (ep14_3_newerabs < 18) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Hm...";
 		mes "We don't have time for this!";
 		cutin "ep143_taang.bmp",2;
@@ -2895,28 +2890,28 @@ moro_vol,198,179,4	script	Tamarin#ep14bs_st	4_M_TAMARIN,{
 	}
 	if (ep14_3_newerabs == 18) {
 		if (countitem(6690) < 25 || checkquest(11357,HUNTING) != 2) {
-			mes "[Tamarin]";
+			mes "[타마린]";
 			mes "^0000FFWhen you collect 25 Sonia stems, meet me here^000000.";
 			cutin "ep143_tasta.bmp",2;
 			close3;
 		}
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I don't remember this rock was so big.";
 		mes "Or seeing these strange things around it.";
 		mes "I also smell ^0000FFsmoke^000000.";
 		cutin "ep143_tahuk.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Again,";
 		mes "I don't remember seeing ^0000FFso many strange animals and plants^000000 either.";
 		mes "These are Sonias, right? They weren't so many before.";
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "If they were, I wouldn't have had to starve.";
 		mes "Sonias were the most delicious and least toxic among all the plants I tried.";
 		cutin "ep143_taang.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "" + strcharinfo(0) + ", do you want to taste it?";
 		mes "I brought a few stems for memories' sake.";
 		cutin "ep143_tasmi.bmp",2;
@@ -2925,12 +2920,12 @@ moro_vol,198,179,4	script	Tamarin#ep14bs_st	4_M_TAMARIN,{
 		mes "- Taste of Sonia -";
 		mes "Its thick, tongue-warming sap fills your mouth with delicious aroma.";
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "What do you think?";
 		mes "Delicious, huh?";
 		cutin "ep143_tahuk.bmp",2;
 		next;
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I've got only a few left. Let's take turns to gather some more.";
 		cutin "ep143_tasmi.bmp",2;
 		erasequest 11357;// Specimen Collection
@@ -2939,37 +2934,37 @@ moro_vol,198,179,4	script	Tamarin#ep14bs_st	4_M_TAMARIN,{
 		close3;
 	}
 	if (ep14_3_newerabs == 19) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "I've got only a few left. Let's take turns to gather some more.";
 		cutin "ep143_tasmi.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs < 23) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Come on,";
 		mes "hurry over to ^0000FFInstructor Rugen^000000!";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
 	if (ep14_3_newerabs == 23) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Thank the gods, who knew that thing I ate out of hunger would save me?";
 		mes "Let's report to Barget.";
 		cutin "ep143_tahuk.bmp",2;
 		close3;
 	}
-	mes "[Tamarin]";
+	mes "[타마린]";
 	mes "Arrgh!";
 	mes "" + strcharinfo(0) + " get in there before everyone else explores it!";
 	cutin "ep143_tahuk.bmp",2;
 	next;
 	if (select( "Enter.", "Quit." ) == 2) {
-		mes "[Tamarin]";
+		mes "[타마린]";
 		mes "Ah...";
 		cutin "ep143_taang.bmp",2;
 		close3;
 	}
-	mes "[Tamarin]";
+	mes "[타마린]";
 	mes "The floor is dark. Watch your step!";
 	close2;
 	warp "moro_cav",40,50;

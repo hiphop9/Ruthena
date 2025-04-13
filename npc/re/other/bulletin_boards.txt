@@ -15,20 +15,20 @@
 
 /*
 -	script	::BulletinBoard_iz	-1,{
-	mes "[Izlude: The Satellite City]";
-	mes "Welcome to Izlude, the satellite of Prontera. Izlude was built to support Prontera's defense and to accomodate its burgeoning population.";
+	mes "[이즈루드: 위성 도시]";
+	mes "프론테라의 위성 도시인 이즈루드에 오신 것을 환영합니다. 이즐 루데는 프론 테라의 방어를 지원하고 급증하는 인구를 수용하기 위해 지어졌습니다.";
 	next;
-	mes "[Izlude: The Satellite City]";
-	mes "The main buildings here are to accomodate the growth of the Cryptura Academy.";
+	mes "[이즈루드: 위성 도시]";
+	mes "이곳의 주요 건물은 크립 투라 아카데미의 성장을 수용하기위한 것입니다.";
 	next;
-	mes "[Izlude: The Satellite City]";
-	mes "Points of interest include the Swordman Association building which allows adventurers to change their job to Swordman, and the Battle Area that is East of Izlude.";
+	mes "[이즈루드: 위성 도시]";
+	mes "모험가가 소드맨으로 전직할 수 있는 소드맨 협회 건물과 이즈루드 동쪽의 전투 지역이 주요 건물입니다.";
 	next;
-	mes "[Izlude: The Satellite City]";
-	mes "At the docks, you may take a ship and travel to ^003399Alberta^000000 or ^660000Byalan Island^000000.";
+	mes "[이즈루드: 위성도시]";
+	mes "부두에서 배를 타고 ^003399알베르타^000000 또는 ^660000비얄란섬^000000으로 이동할 수 있습니다.";
 	next;
-	mes "[Izlude: The Satellite City]";
-	mes "From Izlude, ^3355FFProntera^000000 is located to the Northwest, and ^006600Payon^000000 is located to the South. Enjoy your travels in the Rune-Midgarts Kingdom.";
+	mes "[이즈루드: 위성 도시]";
+	mes "이즈루드에서 북서쪽은 ^3355FF프론테라^000000, 남쪽은 ^006600페이욘^000000입니다. 룬-미드가르츠 왕국에서 즐거운 여행 되세요.";
 	close;
 }
 izlude,25,103,0	duplicate(BulletinBoard_iz)	Bulletin Board#5	837

@@ -17,131 +17,131 @@
 
 // Main NPC :: resetskill_novice
 //============================================================
-izlude,127,175,3	script	Hypnotist#novice	124,{
-	mes "[Hypnotist]";
-	mes "Greetings, adventurer.";
-	mes "I'm a member of the Hypnotist";
-	mes "Academy sent here to Izlude";
-	mes "to provide Skill Reset services";
-	mes "to certain First Class characters for a really good price: free!";
+izlude,127,175,3	script	최면술사::Hypnotist#novice	124,{
+	mes "[최면술사]";
+	mes "안녕하세요, 모험가님.";
+	mes "저는 최면술사의 회원입니다";
+	mes "아카데미가 이곳 Izlude로 보내졌습니다";
+	mes "스킬 재설정 서비스를 제공하기 위해";
+	mes "특정 퍼스트 클래스 캐릭터에게 정말 좋은 가격으로 제공됩니다: 무료입니다!";
 	next;
-	mes "[Hypnotist]";
-	mes "Although I offer unlimited";
-	mes "stat/skill resets for now, I have";
-	mes "two conditions that must be";
-	mes "fulfilled. First, you must be";
-	mes "lower than ^FF0000Base Level 50^000000.";
+	mes "[최면술사]";
+	mes "무제한으로 제공하지만";
+	mes "지금은 능력치/스킬을 재설정했습니다.";
+	mes "반드시 있어야 하는 두 가지 조건";
+	mes "완성되었습니다. 먼저, 성취되어야 합니다";
+	mes "^FF0000베이스 레벨 50^000000보다 낮습니다.";
 	next;
-	mes "[Hypnotist]";
-	mes "Second, you must be a";
-	mes "^FF0000Swordman, Acolyte, Mage,";
-	mes "Thief, Archer, Merchant,";
-	mes "Taekwon Boy, or Taekwon Girl,";
-	mes "Gunslinger and Ninja^000000";
-	mes "Job character to qualify.";
-	mes "Now, do you have any questions?";
+	mes "[최면술사]";
+	mes "둘째, 당신은 a가 되어야 합니다";
+	mes "^FF0000검사, 복사, 마법사,";
+	mes "도둑, 궁수, 상인,";
+	mes "태권 소년, 또는 태권 소녀,";
+	mes "총잡이와 닌자^000000";
+	mes "자격을 갖춘 직업 캐릭터입니다.";
+	mes "이제 질문이 있으신가요?";
 	next;
-	switch(select("^FF0000Stat/Skill Reset?:Reset stats:Reset skills^000000:Cancel")) {
+	switch(select("^FF0000스텟/스킬 재설정?:스텟 재설정:스킬 재설정^000000:취소")) {
 	case 1:
-		mes "[Hypnotist]";
-		mes "Stat/Skill Resets allow adventuers";
-		mes "to redistribute their Skill";
-		mes "Points if they are unhappy";
-		mes "with their current skills.";
+		mes "[최면술사]";
+		mes "스텟/스킬 재설정은 모험가를 허용합니다";
+		mes "스킬을 재분배하기 위해";
+		mes "불만족하면 점수를 줍니다";
+		mes "현재 기술로.";
 		next;
-		mes "[Hypnotist]";
-		mes "Before proceeding with";
-		mes "a Stat/Skill Reset, you must";
-		mes "reduce all of the weight";
-		mes "of all carried items on your";
-		mes "character to 0. You can put";
-		mes "extra items in Kafra Storage.";
+		mes "[최면술사]";
+		mes "계속하기 전에";
+		mes "스텟/스킬을 재설정해야 합니다";
+		mes "무게를 모두 줄여라";
+		mes "당신이 소지하고 있는 모든 물품 중";
+		mes "문자를 0으로 입력할 수 있습니다.";
+		mes "카프라 저장소에 추가 아이템이 있습니다.";
 		next;
-		mes "[Hypnotist]";
-		mes "Ah, it's also important";
-		mes "to remove your ^FF0000Pushcart^000000";
-		mes "if you have one equipped.";
-		mes "Otherwise, hypnosis won't";
-		mes "work, or will backfire...";
+		mes "[최면술사]";
+		mes "아, 그것도 중요해요";
+		mes "^FF0000푸쉬카트^000000을 제거하려면";
+		mes "장비를 갖추고 있다면.";
+		mes "그렇지 않으면 최면술은 되지 않습니다";
+		mes "일하지 않으면 역효과를 낳을 것이다...";
 		close;
 	case 2:
 		set .@str$,"Stat";
 	case 3:
 		if (.@str$ == "")
 			set .@str$,"Skill";
-		mes "[Hypnotist]";
-		mes "Are you sure that you";
-		mes "want to proceed with";
-		mes "my ^FF0000"+.@str$+" Reset^000000 service?";
+		mes "[최면술사]";
+		mes "정말인가요?";
+		mes "계속하고 싶어요";
+		mes "나의 ^FF0000"+.@str$+" ^000000 서비스를 재설정하시겠습니까?";
 		next;
 		if(select("Yes:Cancel") == 1)
 			break;
 	case 4:
-		mes "[Hypnotist]";
-		mes "Thank you, and good";
-		mes "luck on your adventures.";
-		mes "Please travel in safety~";
+		mes "[최면술사]";
+		mes "고마워요, 좋아요";
+		mes "당신의 모험에 행운을 빕니다.";
+		mes "안전하게 여행하세요~";
 		close;
 	}
 	if ((Class >= Job_Swordman && Class <= Job_Thief) || Class == Job_Taekwon || Class == Job_Gunslinger || Class == Job_Ninja) {
 		if (checkcart()) {
-			mes "[Hypnotist]";
-			mes "Oh! Please remove your";
-			mes "Pushcart before proceeding";
-			mes "with the "+.@str$+" Reset service.";
-			mes "Thanks for cooperating~";
+			mes "[최면술사]";
+			mes "아! 삭제해주세요";
+			mes "계속하기 전에 카트를 끌고 가세요";
+			mes ""+.@str$+" 재설정 서비스를 사용합니다.";
+			mes "협조해주셔서 감사합니다~";
 			close;
 		}
 		if (Weight != 0) {
-			mes "[Hypnotist]";
-			mes "If you're here for my "+.@str$;
-			mes "Reset service, please";
-			mes "remember that you can't";
-			mes "reset your "+.@str$+"s until the";
-			mes "^FF0000weight of your carried items in";
-			mes "your Inventory is reduced to 0^000000.";
+			mes "[최면술사]";
+			mes "나를 위해 여기 오셨다면"+.@str$;
+			mes "서비스를 초기화해주세요";
+			mes "당신은 할 수 없다는 것을 기억하세요";
+			mes "다음이 될 때까지 "+.@str$+"을 재설정하세요";
+			mes "^FF0000당신이 가지고 있는 물건의 무게";
+			mes "당신의 인벤토리가 0^000000으로 줄었습니다.";
 			next;
-			mes "[Hypnotist]";
-			mes "Why don't you place your";
-			mes "things into the Kafra Storage";
-			mes "for now? That way, you can";
-			mes "safely keep all of your goods.";
+			mes "[최면술사]";
+			mes "당신의 자리를 마련하는 게 어때요?";
+			mes "카프라 저장소에 있는 것들";
+			mes "지금은요? 그렇게 하면 할 수 있어요";
+			mes "모든 물건을 안전하게 보관하세요.";
 			close;
 		}
 		if (BaseLevel >= 50 && (Class == Job_Taekwon || Class == Job_Gunslinger || Class == Job_Ninja)) {
-			mes "[Hypnotist]";
-			mes "I'm sorry, but characters";
-			mes "with Base Levels higher";
-			mes "than 50 are ineligible for the";
-			mes .@str$+" Reset service I provide.";
+			mes "[최면술사]";
+			mes "죄송합니다만 캐릭터입니다";
+			mes "기본 레벨이 더 높음";
+			mes "50명 이상이면 자격이 없습니다";
+			mes .@str$+"재설정 서비스를 제공합니다.";
 			close;
 		}
-		mes "[Hypnotist]";
-		mes "Thank you for using";
-		mes "my "+.@str$+" Redistribution";
-		mes "services. Oh, and best";
-		mes "of luck to you on your";
-		mes "travels, adventurer.";
+		mes "[최면술사]";
+		mes "이용해주셔서 감사합니다";
+		mes "나의 "+.@str$+" 재배포";
+		mes "서비스. 아, 최고예요";
+		mes "당신에게 행운이 있기를";
+		mes "여행, 모험가.";
 		if (.@str$ == "Stat")
 			resetstatus;
 		else
 			resetskill;
 		close;
 	} else {
-		mes "[Hypnotist]";
-		mes "I'm sorry, but your";
-		mes "Job Class doesn't qualify";
-		mes "for the "+.@str$+" Reset service";
-		mes "that I provide. I can only";
-		mes "offer "+.@str$+" Resets to the";
-		mes "following Jobs...";
+		mes "[최면술사]";
+		mes "죄송하지만 당신";
+		mes "직업이 자격을 갖추지 못했습니다";
+		mes ""+.@str$+" 재설정 서비스용";
+		mes "내가 제공하는 것. 나는 오직 할 수만 있다";
+		mes "다음 "+.@str$+" 으로 재설정 권장합니다.";
+		mes "작업 팔로우 중...";
 		next;
-		mes "[Hypnotist]";
-		mes "^FF0000Swordman, Acolyte,";
-		mes "Mage, Thief, Archer,";
-		mes "Merchant, Taekwon";
-		mes "Boy, Taekwon Girl,";
-		mes "Gunslinder and Ninja^000000.";
+		mes "[최면술사]";
+		mes "^FF0000소드맨, 수행사제,";
+		mes "마법사, 도둑, 궁수,";
+		mes "상인, 태권";
+		mes "소년, 태권소녀,";
+		mes "건슬린더와 닌자^000000.";
 		close;
 	}
 }

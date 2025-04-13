@@ -16,69 +16,60 @@
 //= 1.6 Cleaning. [Euphy]
 //============================================================ 
 
-alberta,26,229,0	script	Kafra Employee#bunny	83,{
+alberta,26,229,0	script	카프라 직원#bunny	83,{
 	if (BUNYBND == 1) {
-		mes "[Kafra Employee]";
-		mes "Hello there~!";
-		mes "How'd you like to";
-		mes "participate in Kafra";
-		mes "Corporation's special";
-		mes "^529DFFBunny Band Event^000000?";
+		mes "[카프라 직원]";
+		mes "^529DFF고객과 함께하는 ^CC0033토끼머리띠 ^529DFF제작대행 페스티발!!^000000";
 		next;
-		switch(select("Sure, I brought the items.:Event Information:Cancel")) {
+		switch(select("이벤트에 참여한다.:이벤트 안내.:그만둔다.")) {
 		case 1:
-			mes "[Kafra Employee]";
-			mes "Alrighty~";
-			mes "Let me check to";
-			mes "see if you brought";
-			mes "all the items...";
+			mes "[카프라 직원]";
+			mes "지금부터 고객님께서 가져오신";
+			mes "아이템을 확인해 보겠습니다.";
 			next;
 			setarray .@Items[0],949,100,706,1,722,1,2213,1;
 			for(set .@i,0; .@i<8; set .@i,.@i+2)
 				if (countitem(.@Items[.@i]) < .@Items[.@i+1]) {
-					mes "[Kafra Employee]";
-					mes "Ooh, I'm sorry";
-					mes "but you need to";
-					mes "bring at least";
-					mes callfunc("F_InsertPlural",.@Items[.@i+1],getitemname(.@Items[.@i]))+".";
+					mes "[카프라 직원]";
+					mes "고객님."+callfunc("F_InsertPlural",.@Items[.@i+1],getitemname(.@Items[.@i]));
+					mes "필요합니다.";
+					mes 
 					close;
 				}
-			mes "[Kafra Employee]";
-			mes "Great, I see that";
-			mes "you've gathered";
-			mes "everything I need to";
-			mes "make the Bunny Band.";
-			mes "Please wait a moment";
-			mes "while I put it together...";
+			mes "[카프라 직원]";
+			mes "좋아요, 알겠습니다";
+			mes "모았어";
+			mes "내가 필요한 모든 것";
+			mes "토끼머리띠를 만들어요.";
+			mes "잠깐만 기다려주세요";
+			mes "내가 정리하는 동안...";
 			next;
 			for(set .@i,0; .@i<8; set .@i,.@i+2)
 				if (countitem(.@Items[.@i]) < .@Items[.@i+1]) {
-					mes "[Kafra Employee]";
-					mes "Hm? I'm sorry,";
-					mes "but I actually can't";
-					mes "make this right now. You";
-					mes "need "+callfunc("F_InsertPlural",.@Items[.@i+1],getitemname(.@Items[.@i]));
-					mes "in order for me to put this";
-					mes "Bunny Band together...";
+					mes "[카프라 직원]";
+					mes "음? 미안해요,";
+					mes "하지만 실제로는 할 수 없어요";
+					mes "지금 당장 만들어 보세요. 당신";
+					mes "필요"+callfunc("F_InsertPlural",.@Items[.@i+1],getitemname(.@Items[.@i]));
+					mes "내가 이것을 넣기 위해서";
+					mes "토끼머리띠 함께...";
 					close;
 				}
 			delitem 949,100; //Feather
 			delitem 706,1; //Four_Leaf_Clover
 			delitem 722,1; //Scarlet_Jewel
 			delitem 2213,1; //Cat_Hairband
-			mes "[Kafra Employee]";
-			mes "Ah, here you go~";
-			mes "The perfect Bunny Band!";
-			mes "Well, I hope you enjoy it.";
+			mes "[카프라 직원]";
+			mes "아, 여기요~";
+			mes "완벽한 토끼머리띠!";
+			mes "즐거운 시간 되시기 바랍니다.";
 			getitem 2214,1; //Bunny_Band
 			set BUNYBND,0;
 			next;
-			mes "[Kafra Employee]";
-			mes "Thank you for";
-			mes "participating in this";
-			mes "special event and your";
-			mes "continued patronage";
-			mes "of the Kafra Services~";
+			mes "[카프라 직원]";
+			mes "특별한 이벤트에 참여해주셔서 감사드리며,";
+			mes "앞으로도 카프라 서비스를 애용해";
+			mes "주셔서 감사합니다~";
 			close;
 		case 2:
 			goto L_Info;
@@ -86,31 +77,18 @@ alberta,26,229,0	script	Kafra Employee#bunny	83,{
 			close;
 		}
 	}
-	mes "[Kafra Employee]";
-	mes "Hi there~! Would you like";
-	mes "to join our special ^529DFFBunny";
-	mes "Band Event^000000 hosted by the Kafra";
-	mes "Corporation and sponsored by";
-	mes "the Alberta Merchant Guild?";
+	mes "[카프라 직원]";
+	mes "^529DFF카프라 고객만족 사은대잔치!";
+	mes "^CC0033토끼머리띠 ^529DFF제작대행 페스티발!!^000000";
 	next;
-	switch(select("Join the Event:Event Information:Cancel")) {
+	switch(select("이벤트에 참여한다.:이벤트 안내.:그만둔다.")) {
 	case 1:
 		set BUNYBND,1;
-		mes "[Kafra Employee]";
-		mes "Great! Thanks for";
-		mes "participating! If you";
-		mes "haven't already heard,";
-		mes "you need to collect these";
-		mes "items if you want me put a";
-		mes "Bunny Band together for you...";
-		next;
-		mes "[Kafra Employee]";
-		mes "100 Feathers,";
-		mes "1 Four-Leaf Clover,";
-		mes "1 Kitty Band and";
-		mes "1 Pearl. That's it!";
-		mes "Good luck and I'll be";
-		mes "waiting for you here~";
+		mes "[카프라 직원]";
+		mes "이벤트에 참여해 주셔서 감사합니다!";
+		mes "토끼머리띠 제작에 필요한 아이템을";
+		mes "모두 모아 이 곳으로 다시 오시기";
+		mes "바랍니다!";
 		close;
 	case 2:
 		break;
@@ -118,28 +96,33 @@ alberta,26,229,0	script	Kafra Employee#bunny	83,{
 		close;
 	}
 L_Info:
-	mes "[Kafra Employee]";
-	mes "To thank our valued";
-	mes "customers, Kafra Corporation";
-	mes "has prepared a special event";
-	mes "where Kafra Employee will assemble";
-	mes "Bunny Bands for adventurers";
-	mes "who bring the required items.";
+	mes "[카프라 직원]";
+	mes "저희 카프라 물류창고에서는";
+	mes "고객여러분들의 성원에 보답코자 작은";
+	mes "행사를 준비하였습니다.";
 	next;
-	mes "[Kafra Employee]";
-	mes "For this special,";
-	mes "one of a kind item,";
-	mes "bring 100 Feathers,";
-	mes "1 Four-Leaf Clover,";
-	mes "1 Kitty Band and";
-	mes "1 Pearl.";
+	mes "[카프라 직원]";
+	mes "이름하여 ^529DFF고객과 함께하는^000000 ^CC0033토끼머리띠^000000";
+	mes "^529DFF제작 대행 페스티발!!^000000";
+	mes "고객과 카프라가 함께 국보급";
+	mes "레어아이템 ^CC0033토끼머리띠^000000를 제작하는";
+	mes "행사입니다.";
 	next;
-	mes "[Kafra Employee]";
-	mes "When you're ready,";
-	mes "come back and bring";
-	mes "those items to me.";
-	mes "(Sponsored by the";
-	mes "Alberta Merchant Guild).";
+	mes "[카프라 직원]";
+	mes "이 행사는, 먼저 고객님께서";
+	mes "토끼머리띠 제작에 사용되는";
+	mes "아이템들을 구해오시면 저희 카프라";
+	mes "직원이 꼼꼼한 수작업으로";
+	mes "현장에서 제작해 드리는 방식으로";
+	mes "진행됩니다.";
+	mes "토끼머리띠 제작에 사용될 아이템은";
+	mes "다음과 같습니다.";
+	next;
+	mes "[카프라 직원]";
+	mes "부드러운 털 -  100개.";
+	mes "네잎 클러버 - 1개.";
+	mes "진주  - 1개.";
+	mes "고양이머리띠 - 1개.";
 	close;
 }
 

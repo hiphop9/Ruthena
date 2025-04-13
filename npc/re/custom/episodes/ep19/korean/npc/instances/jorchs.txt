@@ -1,0 +1,1866 @@
+// ÀÎÄÚµùÀ» EUC-KR·Î À¯ÁöÇÏ±â À§ÇÑ ÇÑ±¹¾î ¹®Àå.
+//===== rAthena Script =======================================
+//= Instance from Main quest.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Instance of episode 19.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 70
+jor_que,32,37,5	script	·¹ÇÏ¸£#i19ms21::ep19_jor_que_32_37	EP19_RGAN_D,5,5,{
+	if (ep19_main == 59) {
+		mes "[·¹ÇÏ¸£]";
+		mes "¶§¸¶Ä§ Àß ¿À¼Ì³×¿ä!!!";
+		next;
+		select( "¹«½¼ ÀÏÀÌ¶óµµ?" );
+		cloakoffnpcself( "ep19_jor_que_36_35" );
+		npctalk "¿©±â¿¡ ÀÖ¾ú±º.", "ep19_jor_que_36_35", bc_self;
+		mes "[·¹ÀÌÁö]";
+		mes "¿©±â »óÈ²ÀÌ Á¦¹ý °í¾àÇÏ°Ô µÆ¾î.";
+		next;
+		mes "[¸£°£]";
+		mes "ÇØÄ¡Áö.. ¸»¾Æ¿ä.. ºÎÅ¹ÀÔ´Ï´Ù...";
+		next;
+		mes "[·¹ÀÌÁö]";
+		mes "ºÃÁö?";
+		next;
+		select( "¿Ö ÀÌ·¯ÁÒ? ÀÔ±¸´Â ¿Ö ¸·Çû¾î¿ä?" );
+		mes "[¿À·¼¸®]";
+		mes "»ó±Þ ÀÌ»óÀÇ ¸£°£µéÀº ¸ðµÎ »ó±Þ ±¸¿ªÀ¸·Î ÀÌµ¿Çß´Ù°í ÇÏÁö ¾Ê¾Ò³ª?";
+		next;
+		mes "[·¹ÀÌÁö]";
+		mes "±×·¯°Ô³ª ¸»ÀÔ´Ï´Ù? ³ªµµ ±×·¸°Ô µé¾úÁö¿ä.";
+		mes "±×·¡¼­ ³ªµµ ±× ¸ðÀÓ¿¡ ³¢·Á°í ÀÌµ¿ÁßÀÌ¾ú´Âµ¥ ¸»ÀÔ´Ï´Ù. ÀÌ°Ô °¡·Î¸·°í ÀÖÁö ¹¼´Ï±î.";
+		next;
+		mes "[·¹ÇÏ¸£]";
+		mes "±×°Ô ¸»ÀÌÁÒ. ÀÌ ¸£°£µéÀÌ »ó±Þ ±¸¿ª¿¡¼­ »ó±Þ ¸£°£µéÀÌ ±ÞÇÏ°Ô ÀÌµ¿ÇÑ µÞÁ¤¸®¸¦ ÇÏ°í ÀÖ¾ú´Âµ¥¿ä, °©ÀÚ±â ¾îµð¼±°¡ »ó±Þ ¸£°£µéÀÌ ´ýº­µé¾ú´Ù³ª ºÁ¿ä.";
+		next;
+		mes "[¿À·¼¸®]";
+		mes "¹¹? °©ÀÚ±â?";
+		next;
+		mes "[·¹ÇÏ¸£]";
+		mes "¾ê±æ µé¾î º¸¸é Æò¼ÒÀÇ »ó±Þ ¸£°£ °°Áö°¡ ¾Ê¾Ò´Ù°í ÇØ¿ä.";
+		next;
+		select( "¾îµð¼­ ¸¹ÀÌ µé¾î º» ¾ê±â³×¿ä" );
+		npctalk "±×·¸Áö?", "ep19_jor_que_34_38", bc_self;
+		mes "[·¹ÇÏ¸£]";
+		mes "±×·¡¼­ »ó±Þ ¸£°£µéÀÌ ¿À°¡Áö ¸øÇÏ°Ô ÃâÀÔ±¸¸¦ ¸·Àº °Å·¡¿ä.";
+		next;
+		mes "[¿À·¼¸®]";
+		mes "±×·³, ¹Ù°÷ÀÌ¶û ¶ó½º°£µå, ÀÏ´ÜÀÇ »ó±Þ ¸£°£µéÀº ´Ù Àú³Ê¸Ó¿¡ ÀÖ´Â °Ç°¡?";
+		next;
+		mes "[·¹ÇÏ¸£]";
+		mes "ÀÏ´ÜÀº ±×·± °Í °°¾Æ¿ä. ¿ì¼±Àº ÀÌ°É ¶Õ°í µé¾î °¡¾ß ¹¹¶óµµ ÇÒ ¼ö ÀÖÀ» °Å °°¾Æ¿ä.";
+		next;
+		select( "¹» ÇÏ·Á´Â °É±î¿ä?" );
+		mes "[·¹ÀÌÁö]";
+		mes "¾Æ¸¶µµ, ¾î¸° Á¶Ä«´Ô ¾Õ¿¡¼­´Â ¸»ÇÏÁö ¸øÇÏ´Â ±×·±°Å?";
+		next;
+		mes "[¿À·¼¸®]";
+		mes "ÀÌ°É Àß È°¿ëÇÏ¸é... ÇÑ ±ºµ¥ ¸ô¾Æ³Ö°í ÇÑ²¨¹ø¿¡ Ã³¸®ÇÒ ¼öµµ ÀÖ°Ú±º.";
+		next;
+		cloakoffnpcself( "ep19_jor_que_37_36" );
+		mes "[È£¸£¸£]";
+		mes "±×·¡¼­ ³»°¡ Áö¿øµµ ºÒ·¶Áö.";
+		next;
+		cloakoffnpcself( "ep19_jor_que_40_34" );
+		cloakoffnpcself( "ep19_jor_que_35_34" );
+		sleep2 500;
+		npctalk "»óÈ²Àº ¾î¶²°¡?", "ep19_jor_que_40_34", bc_self;
+		npctalk "¹ú½á ½ÃÀÛµÈ °Ç ¾Æ´Ï°ÚÁö?", "ep19_jor_que_35_34", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep19_jor_que_34_32" );
+		sleep2 500;
+		npctalk "´Ê¾ú³ª¿ä?", "ep19_jor_que_34_32", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep19_jor_que_38_33" );
+		cloakoffnpcself( "ep19_jor_que_37_31" );
+		sleep2 500;
+		npctalk "¼±¹ß´ë! µµÂøÇß½À´Ï´Ù!", "ep19_jor_que_38_33", bc_self;
+		npctalk "¼±¹ß´ë! µµÂøÇß½À´Ï´Ù!", "ep19_jor_que_37_31", bc_self;
+		mes "[·¹ÀÌÁö]";
+		mes "ÀÚÀÚ, ÁÙ ¼­¼¼¿ä. °£·«È÷ ¿ä¾àÇÕ´Ï´Ù.";
+		next;
+		mes "[·¹ÀÌÁö]";
+		mes "¶ó½º°£µå¿Í ¹Ù°÷, ±×¸®°í »ó±Þ ÀÌ»óÀÇ ¸£°£µéÀº ¶ó½º°£µåÀÇ ¸íÀ¸·Î Àú ³Ê¸Ó¿¡ ¸ð¿© ÀÖ´Ù°í ÇÕ´Ï´Ù.";
+		mes "¿©±â±îÁø ´Ùµé ÀÌÇØÇÏ¼ÌÁÒ?";
+		next;
+		mes "[·¹ÀÌÁö]";
+		mes "±×·±µ¥ ¸»ÀÔ´Ï´Ù. ÀÌ º® ³Ê¸Ó¿¡´Â »ó±Þ ¸£°£µéÀÇ °ÅÁÖ °ø°£ÀÌ ÀÖ°Åµç¿ä.";
+		next;
+		mes "[·¹ÀÌÁö]";
+		mes "±×·±µ¥ ÀÏ·ç½Ã¿ÂÀº »ó±Þ ÀÌ»óÀÇ ¸£°£µé¿¡°Ô ¾Æ¸¶µµ ½ÅÃ¼ °³Á¶·Î ÃßÃøµÇ´Â ¹«¾ð°¡¸¦ ÇÑ µÚ Ç®¾î ³ù´Ù´Â °Ì´Ï´Ù.";
+		next;
+		mes "[º¸Å¬¸°µå]";
+		mes "ÆøÁÖ »óÅÂÀÌ°ÚÁö¸¸, ÄÁÆ®·ÑÀÌ ¼¼¹ÐÇÏÁö´Â ¾ÊÀ» ÅÍ.";
+		mes "¾îÂîµÆµç Àú ³Ê¸Ó¿¡ ÀÖ´Â ¸£°£À» Ã³Ä¡ÇØ¾ß ¶ó½º°£µå¸¦ ¸¸³¯ ¼ö ÀÖ´Ù´Â °ÅÁö?";
+		next;
+		mes "[È£¸£¸£]";
+		mes "ÀÔ±¸¸¦ ÀÛ°Ô Çã¹°°í Á¶¸¦ Â¥¼­ ¼øÂ÷ÀûÀ¸·Î ÁøÀÔÇÏÁö. ¿ì¸® ¾ÆÀ©µéÀÌ ¾ÕÀå ¼­°Ú³×.";
+		next;
+		mes "[·¹ÇÏ¸£]";
+		mes "ÁØºñ µÇ¼Ì³ª¿ä? ÀÚ, Áö±Ý µé¾î°¡¼¼¿ä.";
+		npctalk "¾È¿¡¼­ º¸µµ·Ï ÇÏÁö.", "ep19_jor_que_37_36", bc_self;
+		next;
+		cloakonnpcself( "ep19_jor_que_37_36" );
+		sleep2 500;
+		cloakonnpcself( "ep19_jor_que_38_33" );
+		cloakonnpcself( "ep19_jor_que_37_31" );
+		mes "[¿À·¼¸®]";
+		mes "ÀÌ¹ø¿£ ³» Â÷·Ê¾ß. ·¹¿Â, °¡ÀÚ.";
+		next;
+		cloakonnpcself( "ep19_jor_que_35_34" );
+		cloakonnpcself( "ep19_jor_que_36_35" );
+		mes "[º¸Å¬¸°µå]";
+		mes "·¹ÇÏ¸£, ³Ê´Â ¿©±â ³²¾Æ¼­ »óÈ²À» º¸¸ç ´ë±âÇÏ´Â °ÍÀÌ ÁÁ°Ú´Ù. ¹Ì¸®¾Ï, °¥±î?";
+		next;
+		npctalk "°ÆÁ¤ ¸¶½Ê¼î. Á¦°¡ °°ÀÌ ´ë±âÇÒÅ×´Ï±î.", "ep19_jor_que_34_38", bc_self;
+		sleep2 500;
+		cloakonnpcself( "ep19_jor_que_40_34" );
+		cloakonnpcself( "ep19_jor_que_34_32" );
+		mes "[·¹ÀÌÁö]";
+		mes "ÀÚ, ÀÌÁ¦ ¸ðÇè°¡ Â÷·Ê¾ß. ÁØºñÇÏ°í ÀÖ¾î.";
+		erasequest 17647;
+		setquest 17648;
+		ep19_main = 60;
+		close;
+	}
+	if (ep19_main == 60) {
+		.@md_name$ = "È¥¶õÇÑ ¹ìÀÇ µÕÁö";
+		mes "[·¹ÇÏ¸£]";
+		mes "ÁØºñ µÇ¼Ì³ª¿ä? ÁØºñ µÇ¼ÌÀ¸¸é ¾È¿¡ ÁøÀÔÇÑ »ç¶÷ÀÌ ÀÌµ¿Çß´ÂÁö È®ÀÎÇÏ´Â ½ÅÈ£¸¦ º¸³»°Ú½À´Ï´Ù.";
+		next;
+		switch( select( "³×, ½ÅÈ£¸¦ º¸³»¼¼¿ä.", "µé¾î°¥°Ô¿ä.", "ÁØºñ°¡ ÇÊ¿äÇØ¿ä." ) ) {
+		case 1:
+			mes "[·¹ÇÏ¸£]";
+			mes "ÀÌµ¿ ½ÅÈ£°¡ ¿À¸é °ð ÀÔ±¸¸¦ ¿­¾îµå¸±°Ô¿ä. Àá½Ã¸¸ ±â´Ù·ÁÁÖ¼¼¿ä.";
+			instance_create(.@md_name$);
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "An unknown error occurred.";
+				close;
+			case IE_NOINSTANCE:
+				mes "[·¹ÇÏ¸£]";
+				mes "¾ÆÁ÷ ÁØºñ°¡ ´ú ³¡³ª¼Ì¾î¿ä? ±â´Ù¸±°Ô¿ä.";
+				close;
+			case IE_NOMEMBER:
+				mes "[·¹ÇÏ¸£]";
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close;
+			case IE_OK:
+				mes "[·¹ÇÏ¸£]";
+				mes "¸¶Ä§ ÁøÀÔ °¡´ÉÇÏ´Ù°í ½ÅÈ£°¡ ¿Ô¾î¿ä! ÁøÀÔÇÏ½Ã¸é µÇ°Ú¾î¿ä!";
+				mapannounce "jor_que", "ÀÛÀü 3Á¶ " + strcharinfo(0) + "´Ô°ú ±× ÀÏÇà " + getpartyname( getcharid(1) ) + "¸ðµÎ È¥¶õÇÑ ¹ìÀÇ µÕÁö¿¡ ÁøÀÔÇÕ´Ï´Ù.", bc_map, 0xFF99;
+				// warp "1@jorchs",272,20;
+				end;
+			}
+			end;
+		case 3:
+			mes "[·¹ÇÏ¸£]";
+			mes "ÁØºñ¸¦ ¸¶Ä¡¼ÌÀ¸¸é ½ÅÈ£¸¦ º¸³»´Þ¶ó°í ¸»¾¸ÇØÁÖ¼¼¿ä. ÀÚÄ©ÇÏ¸é ¾È¿¡¼­ ÀÛÀüÀÌ ²¿ÀÏ ¼öµµ ÀÖÀ¸´Ï±î¿ä.";
+			close;
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17647) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17648) == 1" );
+	cloakonnpc();
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_main	-1,{
+	end;
+OnInstanceInit:
+	'map_jorchs$ = instance_mapname("1@jorchs");
+
+	'event = 0;
+
+	'area_1[0] = 'area_1[1] = 0;
+	'special_area_1[0] = 'special_area_1[1] = 0;
+	'area_2[0] = 'area_2[1] = 0;
+	'special_area_2[0] = 'special_area_2[1] = 0;
+	'count_area_3_2 = 0;
+	'area_4[0] = 'area_4[1] = 'area_4[2] = 0;
+	'area_5[0] = 'area_5[1] = 'area_5[2] = 0;
+	'ep19_jorchs_area_5_2[0] = 'ep19_jorchs_area_5_2[1] = 'ep19_jorchs_area_5_2[2] = 0;
+
+	// Special mobs area 1
+	disablenpc instance_npcname("ep19_1jorchs_249_79_A");
+	disablenpc instance_npcname("ep19_1jorchs_114_20_A");
+	disablenpc instance_npcname("ep19_1jorchs_249_79_B");
+	disablenpc instance_npcname("ep19_1jorchs_114_20_B");
+
+	// Special mobs area 2
+	disablenpc instance_npcname("ep19_1jorchs_23_57_A");
+	disablenpc instance_npcname("ep19_1jorchs_21_97_A");
+	disablenpc instance_npcname("ep19_1jorchs_23_57_B");
+	disablenpc instance_npcname("ep19_1jorchs_21_97_B");
+
+	// Final area 1
+	disablenpc instance_npcname("ep19_1jorchs_140_57");
+	disablenpc instance_npcname("ep19_1jorchs_142_58");
+	disablenpc instance_npcname("ep19_1jorchs_143_56");
+	disablenpc instance_npcname("ep19_1jorchs_143_60");
+	disablenpc instance_npcname("ep19_1jorchs_145_56");
+	disablenpc instance_npcname("ep19_1jorchs_145_59");
+	disablenpc instance_npcname("ep19_1jorchs_146_58");
+
+	setcell 'map_jorchs$,139,59,139,59,cell_walkable,0;
+	setcell 'map_jorchs$,138,58,138,58,cell_walkable,0;
+	setcell 'map_jorchs$,137,57,137,57,cell_walkable,0;
+
+	// Final area 2
+	disablenpc instance_npcname("ep19_1jorchs_112_119");
+	disablenpc instance_npcname("ep19_1jorchs_112_116");
+	disablenpc instance_npcname("ep19_1jorchs_118_127");
+	disablenpc instance_npcname("ep19_1jorchs_122_126");
+	disablenpc instance_npcname("ep19_1jorchs_124_124");
+
+	setcell 'map_jorchs$,120,129,120,129,cell_walkable,0;
+	setcell 'map_jorchs$,121,128,121,128,cell_walkable,0;
+	setcell 'map_jorchs$,122,127,122,127,cell_walkable,0;
+	setcell 'map_jorchs$,123,127,123,127,cell_walkable,0;
+	setcell 'map_jorchs$,124,126,124,126,cell_walkable,0;
+	setcell 'map_jorchs$,125,125,125,125,cell_walkable,0;
+	setcell 'map_jorchs$,126,125,126,125,cell_walkable,0;
+
+	// Area 3
+	disablenpc instance_npcname("ep19_1jorchs_249_170");
+	disablenpc instance_npcname("ep19_1jorchs_251_171");
+	disablenpc instance_npcname("#e19p01");
+	disablenpc instance_npcname("ep19_1jorchs_219_148");
+
+	setcell 'map_jorchs$,242,174,242,174,cell_walkable,0;
+	setcell 'map_jorchs$,244,176,244,176,cell_walkable,0;
+	setcell 'map_jorchs$,247,176,247,176,cell_walkable,0;
+	setcell 'map_jorchs$,248,176,248,176,cell_walkable,0;
+	setcell 'map_jorchs$,243,175,243,175,cell_walkable,0;
+	setcell 'map_jorchs$,245,176,245,176,cell_walkable,0;
+	setcell 'map_jorchs$,246,176,246,176,cell_walkable,0;
+	setcell 'map_jorchs$,249,177,249,177,cell_walkable,0;
+
+	// Area 4
+	disablenpc instance_npcname("ep19_1jorchs_191_203");
+	disablenpc instance_npcname("ep19_1jorchs_226_244");
+	disablenpc instance_npcname("ep19_1jorchs_151_179");
+	disablenpc instance_npcname("ep19_1jorchs_192_206");
+
+	setcell 'map_jorchs$,140,183,140,183,cell_walkable,0;
+	setcell 'map_jorchs$,140,182,140,182,cell_walkable,0;
+	setcell 'map_jorchs$,139,181,139,181,cell_walkable,0;
+	setcell 'map_jorchs$,139,180,139,180,cell_walkable,0;
+	setcell 'map_jorchs$,138,179,138,179,cell_walkable,0;
+	setcell 'map_jorchs$,138,178,138,178,cell_walkable,0;
+
+	// Area 5
+	disablenpc instance_npcname("#e19p03");
+	disablenpc instance_npcname("ep19_1jorchs_39_251");
+	disablenpc instance_npcname("ep19_1jorchs_37_274");
+	disablenpc instance_npcname("#19m60");
+
+	setcell 'map_jorchs$,34,255,43,255,cell_walkable,0;
+	end;
+}
+
+// Area 1
+
+// Main Quest: Step 71
+1@jorchs,261,34,3	script	¿À·¼¸®#19m00	4_EP19_AURELIE,5,5,{
+	end;
+OnTouch:
+	if ('event != 0)
+		end;
+	'event = 1;	// note: player can move
+	npctalk "¿©±â¼± ±»ÀÌ ¸£°£ Çà¼¼¸¦ ÇÒ ÀÌÀ¯µµ ¾ø°ÚÁö.";
+	sleep 1000;
+	npctalk "ÀÏ´Ü ¼±ÁøÀÔÇÑ ¾ÆÀ© ºÎ´ë°¡ ÁÖº¯ÀÇ ¸£°£µéÀº Á¤¸®Çß¼Ò.", instance_npcname("ep19_1jorchs_258_32");
+	sleep 1500;
+	npctalk "ÀÌÁ¦ ´õ ¾ÈÂÊÀ¸·Î ÁøÀÔÇÏ¸é¼­ Á¤¸®¸¦ ÇØ¾ß°ÚÁö.", instance_npcname("ep19_1jorchs_257_35");
+	sleep 3000;
+	npctalk "¸ñÇ¥´Â ¶ó½º°£µå¿Í ¹Ù°÷ È®º¸ ¹× ÀÌ¹Ì¸£ÀÇ ½ÉÀå È®º¸´Ù.";
+	sleep 3000;
+	npctalk "´Ü¼û¿¡ µé¾î°¡ Åð·Î¸¦ Â÷´ÜÇØ¾ß ÇÏ¿À. ¼Óµµ°¡ °ü°ÇÀÌÁö.", instance_npcname("ep19_1jorchs_258_32");
+	sleep 3000;
+	npctalk "ÃâÀÔ±¸°¡ ÇÏ³ª»ÓÀÌ¶óÁö¸¸, ¿ì¸®°¡ ¸ð¸£´Â ÃâÀÔ±¸°¡ ÀÖÀ»Áö ¸ð¸£´Ï »ô»ôÀÌ »ìÆìºÁ¾ß°ÚÁö.";
+	sleep 3000;
+	npctalk "±×µéÀÇ ÇàÀûÀ» Ã£À¸·Á¸é ¸£°£µéºÎÅÍ Ä¡¿ö¾ß?", instance_npcname("ep19_1jorchs_258_32");
+	sleep 3000;
+	npctalk "¼±ÁøÀÔÇÑ ºÎ´ëÀÇ ÀÌ¾ß±â¿¡ µû¸£¸é º¸Åë ¸£°£µé°ú ´Ù¸£´Ù°í ÇÏ´Ï ´ëºñ¸¦ ´Ü´ÜÈ÷ ÇØ¾ß ÇÒ °ÍÀÌ¿À.", instance_npcname("ep19_1jorchs_258_32");
+	sleep 3000;
+	npctalk "Á¶½ÉÇØ, »ó´ë´Â ¸¶·ÂÀ» ÀÌ¿ëÇÑ ÁÖ¼ú¿¡ ´ÉÇÑ ¸£°£µéÀÌ´Ù.";
+	sleep 3000;
+	npctalk "´Ùµé ¹«¿îÀ» ºñ¿À!", instance_npcname("ep19_1jorchs_258_32");
+	sleep 500;
+	disablenpc();
+	disablenpc instance_npcname("ep19_1jorchs_260_35");
+	disablenpc instance_npcname("ep19_1jorchs_256_34");
+	disablenpc instance_npcname("ep19_1jorchs_257_35");
+	disablenpc instance_npcname("ep19_1jorchs_258_32");
+	disablenpc instance_npcname("ep19_1jorchs_256_31");
+	disablenpc instance_npcname("ep19_1jorchs_259_31");
+	donpcevent instance_npcname("ep19_jorchs_area_1") + "::OnStart";
+	end;
+}
+1@jorchs,256,31,7	duplicate(dummy_npc)	¾ÆÀ©#19m00::ep19_1jorchs_256_31	EP19_NPC_IWIN_SG
+1@jorchs,256,34,5	duplicate(dummy_npc)	¹Ì¸®¾Ï#19m00::ep19_1jorchs_256_34	4_EP18_MIRIAM
+1@jorchs,257,35,5	duplicate(dummy_npc)	º¸Å¬¸°µå#19m00::ep19_1jorchs_257_35	4_EP19_VOGLINDE
+1@jorchs,258,32,7	duplicate(dummy_npc)	È£¸£¸£#19m00::ep19_1jorchs_258_32	EP19_NPC_IWIN_SR
+1@jorchs,259,31,7	duplicate(dummy_npc)	¾ÆÀ©#19m01::ep19_1jorchs_259_31	EP19_NPC_IWIN_SG
+1@jorchs,260,35,3	duplicate(dummy_npc)	·¹¿Â#19m00::ep19_1jorchs_260_35	4_EP19_LEON
+
+
+// Main Quest: Step 72
+1@jorchs,249,79,7	script	°Ì¸ÔÀº ¸£°£#19m00::ep19_1jorchs_249_79_A	EP19_RE_RGAN_E,5,5,{
+	end;
+OnTouch:
+	// note: no need to kill the monsters in the area to trigger the event
+	// note: player can move while the npc is talking
+	disablenpc();
+	donpcevent instance_npcname("ep19_1jorchs_249_79_B") + "::OnEvent";
+	end;
+}
+
+1@jorchs,249,79,7	script	°Ì¸ÔÀº ¸£°£#19m50::ep19_1jorchs_249_79_B	EP19_RE_RGAN_E,{
+	end;
+OnEvent:
+	enablenpc();
+	npctalk "¹«¼­¿ö... ¸öÀÌ ¿Ö ÀÌ·¯Áö?";
+	sleep 1500;
+	npctalk "Àú°Ç... ÀÎ°£??? ÀÌ°Ô ´Ù ³×³ð ÁþÀÌ³Ä?? ³ªÇÑÅ× ¹«½¼ÁþÀ» ÇÑ °Å¾ß?!";
+	sleep 200;
+	npctalk "´õ·¯¿î ÀÎ°£ ÁÖÁ¦¿¡! ¾î¼­ ³¯ ¿ø·¡´ë·Î...! ¾Æ...!!";
+	sleep 500;
+	specialeffect EF_FOOD02;
+	sleep 500;
+	disablenpc();
+	monster 'map_jorchs$,249,79,"°Ì¸ÔÀº ¸£°£",21534,1, instance_npcname("ep19_jorchs_area_1") + "::OnSpecialMob1";	// EP19_MD_RGAN_E
+	end;
+}
+
+
+// Main Quest: Step 73
+1@jorchs,114,20,3	script	°Ì¸ÔÀº ¸£°£#19m01::ep19_1jorchs_114_20_A	EP19_RE_RGAN_E,5,5,{
+	end;
+OnTouch:
+	disablenpc();
+	donpcevent instance_npcname("ep19_1jorchs_114_20_B") + "::OnEvent";
+	end;
+}
+
+1@jorchs,114,20,3	script	°Ì¸ÔÀº ¸£°£#19m51::ep19_1jorchs_114_20_B	EP19_RE_RGAN_E,{
+	end;
+OnEvent:
+	enablenpc();
+	npctalk "³ª, ³ªµµ Àú·¸°Ô µÇ´Â °Ç ¾Æ´Ï?..?";
+	sleep 2000;
+	npctalk "³ª ÂøÇÏ°Ô »ì¾Ò´Âµ¥, ±× ÀÎ°£µéÀº ´ëÃ¼ ³ªÇÑÅ× ¹«½¼ ÁþÀ»...";
+	sleep 2000;
+	npctalk "¾Æ... Ãß¿ö....";
+	sleep 2500;
+	npctalk "...?! ÀÎ°£? ÀÎ°£?? ³¯ ÀÌ·¸°Ô ¸¸µç ÀÎ°£???";
+	sleep 500;
+	specialeffect EF_FOOD02;
+	disablenpc();
+	monster 'map_jorchs$,114,20,"°Ì¸ÔÀº ¸£°£",21534,1, instance_npcname("ep19_jorchs_area_1") + "::OnSpecialMob2";	// EP19_MD_RGAN_E
+	end;
+}
+
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_1	-1,{
+	end;
+OnStart:
+	enablenpc instance_npcname("ep19_1jorchs_249_79_A");	// trigger spawn special mobs
+	enablenpc instance_npcname("ep19_1jorchs_114_20_A");
+
+	.@event$ = instance_npcname("ep19_jorchs_area_1") + "::OnNormalMob";
+	monster 'map_jorchs$,237,61,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,221,37,"³ª´µ¾îÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,242,66,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,204,38,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,181,48,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,135,29,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,124,26,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	end;
+
+OnNormalMob:
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_1") + "::OnNormalMob" ) > 0)
+		end;
+	mapannounce 'map_jorchs$, "Àá±ñ, ´Ùµé ÀÌ¸®·Î. »óÈ² Á¤¸®¸¦ Á» ÇØ¾ß°Ú¾î.", bc_map, 0xFFCC;
+	'area_1[0] = 1;
+	donpcevent instance_npcname("ep19_jorchs_area_1") + "::OnAreaClear";
+	end;
+
+OnSpecialMob1: callsub( S_Check, 0 );
+OnSpecialMob2: callsub( S_Check, 1 );
+S_Check:
+	.@current_area = getarg(0);
+	.@other_area = !.@current_area;
+
+	'special_area_1[.@current_area] = 1;
+	if ('special_area_1[.@other_area] == 1) {	// the 2 mobs special are dead
+		'special_area_1[0] = 'special_area_1[1] = 2;	// just to make sure
+		'area_1[1] = 1;
+		mapannounce 'map_jorchs$, "¼ö»öÀ» Á» ´õ »ô»ôÀÌ ÇÏ´Â °ÍÀÌ ÁÁ°Ú¾î.", bc_map, 0xFFCC;
+		donpcevent instance_npcname("ep19_jorchs_area_1") + "::OnAreaClear";
+		end;
+	}
+	end;
+
+OnAreaClear:	// check if area clear
+	if ('area_1[0] == 0 || 'area_1[1] == 0)
+		end;
+	if ('event != 1)
+		end;
+	'area_1[0] = 'area_1[1] = 0;	// just to make sure
+	'event = 2;
+
+	// dialog final step area 1
+	disablenpc instance_npcname("ep19_1jorchs_140_58");
+	disablenpc instance_npcname("ep19_1jorchs_140_56");
+
+	enablenpc instance_npcname("ep19_1jorchs_140_57");
+	enablenpc instance_npcname("ep19_1jorchs_142_58");
+	enablenpc instance_npcname("ep19_1jorchs_143_56");
+	enablenpc instance_npcname("ep19_1jorchs_143_60");
+	enablenpc instance_npcname("ep19_1jorchs_145_56");
+	enablenpc instance_npcname("ep19_1jorchs_145_59");
+	enablenpc instance_npcname("ep19_1jorchs_146_58");
+	end;
+}
+
+
+// Main Quest: Step 74
+1@jorchs,140,58,5	script	¾ÆÀ©#19m13::ep19_1jorchs_140_58	EP19_NPC_IWIN_SB,5,5,{
+	end;
+OnTouch:
+	if ('event < 2) {
+		npctalk "ÀÌ ³Ê¸Ó´Â ¾ÆÁ÷ ¼ö»ö´ë°¡ ÆÄ°ßµÇÁö ¾ÊÀº °÷ÀÔ´Ï´Ù.", instance_npcname("ep19_1jorchs_140_56");
+		sleep 1500;
+		npctalk "Á¤º¸¸¦ ¸ð¾Æ ÀÌ°÷¿¡¼­ Áý°áÇÑ µÚ ÁøÀÔÇÒ ¿¹Á¤ÀÌ¿À´Ï ÀÌ ±Ù¹æÀÇ ¼ö»ö¿¡ Àü³äÇÏ½Ê½Ã¿À.";
+		end;
+	}
+	end;
+}
+1@jorchs,140,56,5	duplicate(dummy_npc)	¾ÆÀ©#19m12::ep19_1jorchs_140_56	EP19_NPC_IWIN_SB
+
+
+1@jorchs,142,58,5	script	È£¸£¸£#19m10::ep19_1jorchs_142_58	EP19_NPC_IWIN_SR,5,5,{
+	end;
+OnTouch:
+	if ('event != 2)
+		end;
+	'event = 3;
+	npctalk "´ëÃ¼ ¾î¶»°Ô µÈ ¸£°£ÀÎÁö!! »ì¸é¼­ ÀÌ·± ¸£°£Àº Ã³À½ º¸¿À!", instance_npcname("ep19_1jorchs_142_58");
+	sleep 2500;
+	npctalk "Áß±Þ ¸£°£µé °°±äÇÑµ¥ ÇüÅÂ¸¦ ¾Ë¾Æ º¼ ¼ö ¾ø¾î¼­ È®½ÅÇÒ ¼ö ¾ø³×¿ä.", instance_npcname("ep19_1jorchs_146_58");
+	sleep 2000;
+	npctalk "Áß±Þ ¸£°£ÀÌ ¿Ö ÀÌ·¸°Ô »ý°Ü? ÃÖÃÖ»ó±Þ ¸£°£ ¾Æ´Ï¾ß?", instance_npcname("ep19_1jorchs_145_59");
+	sleep 2500;
+	npctalk "ÀÏ·ç½Ã¿ÂµéÀÌ ÁÖ·Î Çß´ø°Ô °³Á¶´Ï±î, ±×°Í°ú °ü·ÃÀÌ ÀÖÀ» °Í °°¾Æ¿ä.", instance_npcname("ep19_1jorchs_145_56");
+	sleep 2000;
+	npctalk "°³Á¶´Â Á» ´õ ÁÁ°Ô ¸¸µå´Â °Å ¾Æ´Ï¿À? Àú°Ç ¾Æ¹«¸® ºÁµµ...", instance_npcname("ep19_1jorchs_142_58");
+	sleep 2500;
+	npctalk "ÈÖ¸»¸° °Å°Å³ª ÀÌ·¸°Ô ¾²°í ¹ö¸®´Â °Å°ÚÁÒ.", instance_npcname("ep19_1jorchs_146_58");
+	sleep 2000;
+	npctalk "½É»óÄ¡ ¾ÊÀ¸´Ï ÀÏ´Ü ´õ µé¾î°¡ ºÁ¿ä.", instance_npcname("ep19_1jorchs_143_56");
+	sleep 3000;
+	npctalk "ÀÌ°÷Àº º¹ÀâÇÏ´Ï Èð¾îÁ®¼­ ¼ö»öÇÏ´Â °ÍÀÌ ÁÁ°Ú¼Ò.", instance_npcname("ep19_1jorchs_142_58");
+	sleep 3000;
+	npctalk "¶ó½º°£µå°¡ ¸ð¾Ò´Ù´ø ¸£°£Àº ¾Æ¸¶µµ ¶ó½º°£µåÀÇ °ÅÃ³¿¡ ÀÖÀ» È®·üÀÌ ³ô¾Æ¿ä.", instance_npcname("ep19_1jorchs_145_56");
+	sleep 3000;
+	npctalk "¹Ù°÷ ¶ÇÇÑ ¿¬±¸ÇÏ´ø °ÍÀÌ ÀÖÀ¸´Ï ÀÏ·ç½Ã¿ÂÀÇ °ÅÃ³³ª ¿¬±¸½Çµµ È®ÀÎÇØºÁ¾ß°Ú±º.", instance_npcname("ep19_1jorchs_142_58");
+	sleep 2500;
+	npctalk "ÇÏÇÊ Á¦ÀÏ ¾ÈÂÊÀÌ³×.", instance_npcname("ep19_1jorchs_146_58");
+	sleep 2500;
+	npctalk "´ëÃ¼ ¹» ÇÏ·Á´Â °ÅÁö?", instance_npcname("ep19_1jorchs_145_59");
+	setcell 'map_jorchs$,139,59,139,59,cell_walkable,1;
+	setcell 'map_jorchs$,138,58,138,58,cell_walkable,1;
+	setcell 'map_jorchs$,137,57,137,57,cell_walkable,1;
+	disablenpc instance_npcname("ep19_1jorchs_140_57");
+	disablenpc instance_npcname("ep19_1jorchs_142_58");
+	disablenpc instance_npcname("ep19_1jorchs_143_56");
+	disablenpc instance_npcname("ep19_1jorchs_143_60");
+	disablenpc instance_npcname("ep19_1jorchs_145_56");
+	disablenpc instance_npcname("ep19_1jorchs_145_59");
+	disablenpc instance_npcname("ep19_1jorchs_146_58");
+	donpcevent instance_npcname("ep19_jorchs_area_2_A") + "::OnStart";	// mob spawn
+	end;
+}
+1@jorchs,143,60,5	duplicate(ep19_1jorchs_142_58)	¾ÆÀ©#19m11::ep19_1jorchs_143_60	EP19_NPC_IWIN_SG,5,5
+
+1@jorchs,140,57,5	duplicate(dummy_npc)	¾ÆÀ©#19m10::ep19_1jorchs_140_57	EP19_NPC_IWIN_SG
+1@jorchs,143,56,1	duplicate(dummy_npc)	º¸Å¬¸°µå#19m10::ep19_1jorchs_143_56	4_EP19_VOGLINDE
+1@jorchs,145,56,1	duplicate(dummy_npc)	¹Ì¸®¾Ï#19m10::ep19_1jorchs_145_56	4_EP18_MIRIAM
+1@jorchs,145,59,3	duplicate(dummy_npc)	¿À·¼¸®#19m10::ep19_1jorchs_145_59	4_EP19_AURELIE
+1@jorchs,146,58,3	duplicate(dummy_npc)	·¹¿Â#19m10::ep19_1jorchs_146_58	4_EP19_LEON
+
+
+
+
+// Area 2
+1@jorchs,1,1,3	script	ep19_jorchs_area_2_A	-1,{
+	end;
+OnStart:
+	enablenpc instance_npcname("ep19_1jorchs_23_57_A");	// to spawn special mobs
+	enablenpc instance_npcname("ep19_1jorchs_21_97_A");
+
+	.@event$ = instance_npcname("ep19_jorchs_area_2_A") + "::OnNormalMob";
+	monster 'map_jorchs$,96,64,"±«·Î¿öÇÏ´Â ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,75,23,"ºñÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,51,45,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,39,76,"ºÒÆíÇÑ ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,31,59,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,26,90,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,119,80,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,118,103,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	end;
+
+OnNormalMob:
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_2_A") + "::OnNormalMob" ) > 0)
+		end;
+	mapannounce 'map_jorchs$, "À¸¾Ñ!!! ÀÌ°Ô ¹¹¾ß!!!", bc_map, 0xFFCC;
+	'area_2[0] = 1;
+	donpcevent instance_npcname("ep19_jorchs_area_2_A") + "::OnAreaClear";
+	end;
+
+OnSpecialMob1: callsub( S_Check, 0 );
+OnSpecialMob2: callsub( S_Check, 1 );
+S_Check:
+	.@current_area = getarg(0);
+	.@other_area = !.@current_area;
+
+	'special_area_2[.@current_area] = 1;
+	if ('special_area_2[.@other_area] == 1) {
+		'special_area_2[0] = 'special_area_2[1] = 0;
+		'area_2[1] = 1;
+		mapannounce 'map_jorchs$, "¼ö»ö ±¸¿ª¿¡ ¸£°£ÀÌ ³²¾ÆÀÖÀ¸´Ï ºü¸£°Ô Á¤¸®ÇÏ´Â°Ô ÁÁ°Ú¾î.", bc_map, 0xFFCC;
+		donpcevent instance_npcname("ep19_jorchs_area_2_A") + "::OnAreaClear";
+		end;
+	}
+	end;
+
+OnAreaClear:	// check if area clear
+	if ('area_2[0] == 0 || 'area_2[1] == 0)
+		end;
+	if ('event != 3)
+		end;
+	'area_2[0] = 'area_2[1] = 0;
+	'event = 4;
+
+	enablenpc instance_npcname("ep19_1jorchs_112_119");
+	enablenpc instance_npcname("ep19_1jorchs_112_116");
+	end;
+}
+
+
+// Main Quest: Step 75
+1@jorchs,23,57,5	script	¹ßÀÌ ¹­ÀÎ ¸£°£#19m10::ep19_1jorchs_23_57_A	EP19_RE_RGAN_E,5,5,{
+	end;
+OnTouch:
+	disablenpc();
+	donpcevent instance_npcname("ep19_1jorchs_23_57_B") + "::OnEvent";
+	end;
+}
+
+1@jorchs,23,57,5	script	¹ßÀÌ ¹­ÀÎ ¸£°£#19m60::ep19_1jorchs_23_57_B	EP19_RE_RGAN_E,{
+	end;
+OnEvent:
+	enablenpc();
+	npctalk "´Ùµé ¾îµð °£ °Å¾ß... ¾ËÀ» ÁöÅ°°í ÀÖÀ¸¶ó´õ´Ï, ÀÌ´ë·Î ³ª°¥ ¼öµµ ¾ø°í...";
+	sleep 2000;
+	npctalk "ÀÎ°£? ÀÎ°£Àº ÀÌ°÷¿¡ ¿À¸é ¾ÈµÅ! ¾î¼­ °¡!";
+	sleep 1500;
+	npctalk "À¿!! ¸öÀÌ...! ¿µ¾çÁ¦¶ó´õ´Ï...? ¾Æ´Ï¾ú³ª? ?...!!";
+	sleep 1000;
+	specialeffect EF_FOOD02;
+	disablenpc();
+	monster 'map_jorchs$,23,57,"¹ßÀÌ ¹­ÀÎ ¸£°£",21534,1, instance_npcname("ep19_jorchs_area_2_A") + "::OnSpecialMob1";	// EP19_MD_RGAN_E
+	end;
+}
+
+
+// Main Quest: Step 76
+1@jorchs,21,97,5	script	¹ßÀÌ ¹­ÀÎ ¸£°£#19m11::ep19_1jorchs_21_97_A	EP19_RE_RGAN_E,5,5,{
+	end;
+OnTouch:
+	disablenpc();
+	donpcevent instance_npcname("ep19_1jorchs_21_97_B") + "::OnEvent";
+	end;
+}
+
+1@jorchs,21,97,5	script	¹ßÀÌ ¹­ÀÎ ¸£°£#19m61::ep19_1jorchs_21_97_B	EP19_RE_RGAN_E,5,5,{
+	end;
+OnEvent:
+	enablenpc();
+	npctalk "¾ó¸¥ Áß½ÉÃ³·Î °¡¾ß ÇÏ´Âµ¥ ¾î¶»°Ô ¶Õ°í Áö³ª°¡Áö? ¾Æ±îºÎÅÍ ºÒ¾ÈÇÏ°Ô ÀÌ»óÇÑ ¼Ò¸®µµ ³ª°í...";
+	sleep 1500;
+	npctalk "¾ðÁ¦ º¯½ÅÇÏ´Â °Å¾ß. º¯½ÅÀÌ µÇ¾î¾ß ¶Õ°í °¡Áö.";
+	sleep 2000;
+	specialeffect EF_FOOD02;
+	npctalk "¿À¿À! µåµð¾î!!! ³ªµµ ÁÖ±³±ÞÀÌ µÉ ±âÈ¸°¡...!!! ?!!!";
+	disablenpc();
+	monster 'map_jorchs$,21,97,"¹ßÀÌ ¹­ÀÎ ¸£°£",21534,1, instance_npcname("ep19_jorchs_area_2_A") + "::OnSpecialMob2";	// EP19_MD_RGAN_E
+	end;
+}
+
+
+// Main Quest: Step 77
+1@jorchs,120,127,3	duplicate(dummy_npc)	¹¶°³Áø ¸£°£#19m21::ep19_1jorchs_120_127	EP19_MD_RGAN_D
+1@jorchs,120,129,1	duplicate(dummy_npc)	µÚÆ²¸° ¸£°£#19m20::ep19_1jorchs_120_129	EP19_MD_RGAN_D
+1@jorchs,122,127,3	duplicate(dummy_npc)	¿ïºÎÂ¢´Â ¸£°£#19m22::ep19_1jorchs_122_127	EP19_MD_RGAN_D
+1@jorchs,124,126,3	duplicate(dummy_npc)	°íÅë½º·¯¿î ¸£°£#19m24::ep19_1jorchs_124_126	EP19_MD_RGAN_D
+1@jorchs,125,125,3	duplicate(dummy_npc)	ÇÕÃÄÁø ¸£°£#19m25::ep19_1jorchs_125_125	EP19_MD_RGAN_D
+1@jorchs,126,125,3	duplicate(dummy_npc)	µÚÆ²¸° ¸£°£#19m26::ep19_1jorchs_126_125	EP19_MD_RGAN_D
+1@jorchs,123,127,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m23::ep19_1jorchs_123_127	EP19_MD_RGAN_E
+
+1@jorchs,118,127,7	duplicate(dummy_npc)	È£¸£¸£#19m21::ep19_1jorchs_118_127	EP19_NPC_IWIN_SR
+1@jorchs,122,126,7	duplicate(dummy_npc)	¾ÆÀ©#19m22::ep19_1jorchs_122_126	EP19_NPC_IWIN_SG
+1@jorchs,124,124,7	duplicate(dummy_npc)	¾ÆÀ©#19m23::ep19_1jorchs_124_124	EP19_NPC_IWIN_SG
+
+1@jorchs,114,119,3	script	¾ÆÀ©#19m21::ep19_1jorchs_114_119	EP19_NPC_IWIN_SG,3,3,{
+	end;
+OnTouch:
+	if ('event < 4) {
+		npctalk "¿À¼Ì½¿±î! ÀÌ ¸£°£µé, ¶ÕÀ» ¼öµµ ¾ø°í °ø°Ýµµ ¾Ê°í ÀÌ»óÇÏÁö ¸»ÀÔ´Ï´Ù. ¹æ¹ýÀ» Ã£°í ÀÖÀ» Å×´Ï ¼ö»ö¿¡ Àü³äÇÏ½Ê¼î!";
+		end;
+	}
+	end;
+}
+1@jorchs,112,116,7	duplicate(dummy_npc)	¾ÆÀ©#19m20::ep19_1jorchs_112_116	EP19_NPC_IWIN_SG
+
+1@jorchs,119,123,3	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m20::ep19_1jorchs_119_123	EP19_MD_HEARTHUNTER_AT
+1@jorchs,116,124,3	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m21::ep19_1jorchs_116_124	EP19_MD_HEARTHUNTER_AT
+1@jorchs,123,124,3	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m22::ep19_1jorchs_123_124	EP19_MD_HEARTHUNTER_AT
+
+1@jorchs,112,119,5	script	È£¸£¸£#19m20::ep19_1jorchs_112_119	EP19_NPC_IWIN_SR,5,5,{
+	end;
+OnTouch:
+	if ('event == 4) {
+		'event = 5;
+		// note: player can walk
+		.@hunter_1$ = instance_npcname("ep19_1jorchs_119_123");
+
+		npctalk "ÀÌ´ë·Î °è¼Ó ÁøÀÔÇÏ¸é µÇ°Ú¼Ò!";
+		sleep 2000;
+		npctalk "Àá½Ã!! ¾Õ¿¡ ¸£°£µéÀÌ ¹«´õ±â·Î ÀÖ½À´Ï´Ù!", instance_npcname("ep19_1jorchs_112_116");
+		sleep 2000;
+		npctalk "¶ÕÀ¸¸é µÇÁö!";
+		sleep 1000;
+		disablenpc();
+		sleep 500;
+		disablenpc instance_npcname("ep19_1jorchs_112_116");
+		disablenpc instance_npcname("ep19_1jorchs_114_119");
+		sleep 1000;
+		enablenpc instance_npcname("ep19_1jorchs_118_127");
+		enablenpc instance_npcname("ep19_1jorchs_122_126");
+		enablenpc instance_npcname("ep19_1jorchs_124_124");
+		sleep 1000;
+		specialeffect EF_HYOUSYOURAKU, AREA, instance_npcname("ep19_1jorchs_118_127");
+		sleep 500;
+		specialeffect EF_HYOUSYOURAKU, AREA, instance_npcname("ep19_1jorchs_122_126");
+		specialeffect EF_HYOUSYOURAKU, AREA, instance_npcname("ep19_1jorchs_124_124");
+		specialeffect EF_HFLIMOON3, AREA, instance_npcname("ep19_1jorchs_118_127");
+		specialeffect EF_HFLIMOON3, AREA, instance_npcname("ep19_1jorchs_122_126");
+		specialeffect EF_HFLIMOON3, AREA, instance_npcname("ep19_1jorchs_124_124");
+		specialeffect EF_M03, AREA, instance_npcname("ep19_1jorchs_118_127");
+		specialeffect EF_M03, AREA, instance_npcname("ep19_1jorchs_122_126");
+		specialeffect EF_M03, AREA, instance_npcname("ep19_1jorchs_124_124");
+		npctalk "?!!!", instance_npcname("ep19_1jorchs_118_127");
+		sleep 1000;
+		disablenpc instance_npcname("ep19_1jorchs_118_127");
+		disablenpc instance_npcname("ep19_1jorchs_122_126");
+		disablenpc instance_npcname("ep19_1jorchs_124_124");
+		sleep 1000;
+		enablenpc();
+		sleep 500;
+		enablenpc instance_npcname("ep19_1jorchs_112_116");
+		enablenpc instance_npcname("ep19_1jorchs_114_119");
+		npctalk "¾ÈµÇ°Ú¾î! ¼ö°¡ ³Ê¹« ¸¹¾Æ!!! Àú°É ¾î¶»°Ô ¶Õ°í Áö³ª°£´Ù?";
+		sleep 1500;
+		npctalk "±×·±µ¥ ¹º°¡ Á» ÀÌ»óÇÏÁö ¾Ê½À´Ï±î?", instance_npcname("ep19_1jorchs_112_116");
+		sleep 2500;
+		npctalk "¾Æ±îºÎÅÍ ÁöÄÑºÃ´Âµ¥ ¿ì¸®¸¦ °ø°ÝÇÏÁö¸¦ ¾Ê½À´Ï´Ù!", instance_npcname("ep19_1jorchs_114_119");
+		sleep 2000;
+		enablenpc .@hunter_1$;
+		sleep 500;
+		npctalk "¿©±â¸¸ ÄÑ¸é µÇ´Â, ¹¹¾ß? ´Ùµé ¹ú½á ¿ÍÀÖÀÝ¾Æ?", .@hunter_1$;
+		sleep 1500;
+		npctalk "ÀÌ¹Ì ´Ê¾ú³ª? ¹¹, »ó°ü¾ø°ÚÁö.", .@hunter_1$;
+		sleep 2500;
+		npctalk "Àú°Ç ¶Ç ¹¹¾ß? ±× ÀÏ·ç½Ã¿Âµé ¼öÇÏ¶ó´ø ÇÏÆ®ÇåÅÍÀÎ°¡? ";
+		sleep 2000;
+		npctalk "¿©±â´Â 5Â÷ ¹æ¾î¼±, Áö¿ø ¹Ù¶õ´Ù.", .@hunter_1$;
+		sleep 2500;
+		npctalk "Ä§ÀÔÀÚµéÀÌ ÀÖ´Ù. Àå¾Ö¹°ÀÌ ÀÖ¾î ¹æ¾î¼± È®ÀåÀÌ ¾î·Æ´Ù. ´Ù½Ã ¸»ÇÑ´Ù. Áö¿ø ¹Ù¶õ´Ù.", .@hunter_1$;
+		sleep 2500;
+		npctalk "Áö¿øÀ» ºÒ·¶¾î!!";
+		sleep 2000;
+		enablenpc instance_npcname("ep19_1jorchs_116_124");
+		enablenpc instance_npcname("ep19_1jorchs_123_124");
+		npctalk "Àå¾Ö¹°ÀÌ ¹¹¾ß?", instance_npcname("ep19_1jorchs_123_124");
+		sleep 2000;
+		npctalk "º¸´Ù½ÃÇÇ ¸ðÇè°¡ ÀÏÇàÀÌ ¹ú½á ¿©±â±îÁö ¿Ô¾î.", .@hunter_1$;
+		sleep 2500;
+		npctalk "¹¹¾ß? ÀÌ ¸£°£µé ÁøÂ¥·Î ¹¶ÃÄÀÖÀÝ¾Æ? ¹Ù°÷´ÔÀÌ ¸»ÇÑ´ë·Î.", instance_npcname("ep19_1jorchs_116_124");
+		sleep 2000;
+		npctalk "±×·¯°Ô. ÀÏ ÀßÇÏ°í Æ°Æ°ÇÑ ¸£°£µéÀÌ ¾Ë¾Æ¼­ ÀÔ±¸¸¦ ¸·¾Ò´õ¶ó°í!", .@hunter_1$;
+		sleep 2500;
+		npctalk "±×³ªÀú³ª ¹¹ ÀÌ·¸°Ô ¸¹ÀÌ ¸ô·Á¿Ô¾î? Àú°É Ã³Ä¡ÇÏ¸é µÅ?", instance_npcname("ep19_1jorchs_123_124");
+		sleep 2000;
+		npctalk "¸ô·Á ¿À±â Àü¿¡ ÀåÄ¡ °¡µ¿ÇÏ°í ¸·À¸·Á°í Çß´Âµ¥, ±×·¸°Ô µÆ´Ù.", .@hunter_1$;
+		sleep 2500;
+		npctalk "ÀÌ·¸°Ô µÈ °Å ³Ê´Â ±â±â Á¶ÀÛÀ» ÇØ, ¿©±ä ¿ì¸®°¡ ¸ÃÀ»°Ô.", .@hunter_1$;
+		npctalk "±×·¯Áö.", instance_npcname("ep19_1jorchs_123_124");
+		sleep 2000;
+		disablenpc instance_npcname("ep19_1jorchs_123_124");
+		npctalk "¾î¾î?! °¥¶óÁø´Ù? ¸ðÇè°¡! ¿ì¸®´Â ÀúÂÊÀ» ¸ÃÀ»Å×´Ï ÀÌ ÀÚµéÀ» ¸Ã¾Æ ÁÖ½Ã¿À!";
+		sleep 500;
+		disablenpc();
+		disablenpc instance_npcname("ep19_1jorchs_112_116");
+		disablenpc instance_npcname("ep19_1jorchs_114_119");
+		disablenpc .@hunter_1$;
+		disablenpc instance_npcname("ep19_1jorchs_116_124");
+		cloakonnpc instance_npcname("ep19_1jorchs_120_127");
+		cloakonnpc instance_npcname("ep19_1jorchs_124_126");
+		.@event$ = instance_npcname("ep19_jorchs_area_2_B") + "::OnMobFinal1";
+		monster 'map_jorchs$,119,123,"°³Á¶µÈ ÇÏÆ®ÇåÅÍ",21536,1, .@event$;	// EP19_MD_HEARTHUNTER_AT
+		monster 'map_jorchs$,123,124,"°³Á¶µÈ ÇÏÆ®ÇåÅÍ",21536,1, .@event$;	// EP19_MD_HEARTHUNTER_AT
+		monster 'map_jorchs$,120,126,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+		monster 'map_jorchs$,124,125,"°íÅë½º·¯¿î ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+		end;
+	}
+	if ('event == 7) {
+		'event = 8;
+		npctalk "ÈÄ- ÀúÂÊÀº ¸ðµÎ Ã³¸®Çß¼Ò. ±×·±µ¥, °÷°÷¿¡ ¾Ë ¼ö ¾ø´Â ÀåÄ¡°¡ ¸¹¾Ò¼Ò.", instance_npcname("ep19_1jorchs_112_119");
+		sleep 2000;
+		npctalk "ÇÏÆ®ÇåÅÍ°¡ ±×°É Á¶ÀÛÇÏ·Á´ø °É Àâ¾Ò´Âµ¥ ´ëÃ¼ ¹» ÇÏ·Á´ø °ÇÁö?", instance_npcname("ep19_1jorchs_112_119");
+		sleep 2500;
+		npctalk "ÇÏÆ®ÇåÅÍ´Â ¾î¶»°Ô Àú ¸£°£ ¹«´õ±â »çÀÌ·Î Áö³ª¿Ã ¼ö ÀÖ¾ú´ø °É±î¿ä?", instance_npcname("ep19_1jorchs_112_116");
+		sleep 2500;
+		npctalk "¾Æ¸¶µµ ÇÏÆ®ÇåÅÍ¿¡°Ô´Â ¸£°£µéÀ» ÇÇÇÏ°Å³ª Á¶Á¾ÇÒ ¼ö ÀÖ´Â ¹º°¡°¡ ÀÖ°ÚÁö.", instance_npcname("ep19_1jorchs_112_119");
+		sleep 2000;
+		npctalk "±×·¡¼­ ÇÏÆ®ÇåÅÍ¸¦ Ã³¸®ÇÏ´Ï ¸£°£µéÀÇ º®ÀÌ ÇØÃ¼µÈ °ÍÀÌ±º¿ä!", instance_npcname("ep19_1jorchs_114_119");
+		sleep 2500;
+		npctalk "½±Áö ¾Ê°Ú¾î. ¸ðÇè°¡, ¿ì¸®´Â ´Ù¸¥ ÀÌµé¿¡°Ô ÀÌ ³»¿ëÀ» °øÀ¯ÇÏ°Ú¼Ò. ¸ÕÀú °¡½Ã¿À.", instance_npcname("ep19_1jorchs_112_119");
+		sleep 500;
+		disablenpc instance_npcname("ep19_1jorchs_112_119");
+		disablenpc instance_npcname("ep19_1jorchs_112_116");
+		disablenpc instance_npcname("ep19_1jorchs_114_119");
+
+		setcell 'map_jorchs$,120,129,120,129,cell_walkable,1;
+		setcell 'map_jorchs$,121,128,121,128,cell_walkable,1;
+		setcell 'map_jorchs$,122,127,122,127,cell_walkable,1;
+		setcell 'map_jorchs$,123,127,123,127,cell_walkable,1;
+		setcell 'map_jorchs$,124,126,124,126,cell_walkable,1;
+		setcell 'map_jorchs$,125,125,125,125,cell_walkable,1;
+		setcell 'map_jorchs$,126,125,126,125,cell_walkable,1;
+
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_120_129");
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_120_127");
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_122_127");
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_123_127");
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_124_126");
+		specialeffect EF_WIND, AREA, instance_npcname("ep19_1jorchs_125_125");
+
+		donpcevent instance_npcname("ep19_jorchs_area_3_1") + "::OnStart";	// mob spawn area 3
+		end;
+	}
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_2_B	-1,{
+	end;
+OnMobFinal1:
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_2_B") + "::OnMobFinal1" ) > 0)
+		end;
+	if ('event != 5)
+		end;
+	'event = 6;
+	mapannounce 'map_jorchs$, "- ÀÌ´ë·Î ³¡³¯ ÁÙ ¾Ë¾Æ? ¿ì¸®°¡ ¾Æ¹« ÁØºñµµ ¾ÈÇÑ °Ç ¾Æ´ÏÁö!", bc_map, 0xFFCC;
+	sleep 2000;
+	cloakonnpc instance_npcname("ep19_1jorchs_120_129");	// to display effect on rAthena (officially disabled)
+	cloakonnpc instance_npcname("ep19_1jorchs_122_127");
+	cloakonnpc instance_npcname("ep19_1jorchs_125_125");
+	disablenpc instance_npcname("ep19_1jorchs_126_125");
+	cloakonnpc instance_npcname("ep19_1jorchs_123_127");
+
+	.@event$ = instance_npcname("ep19_jorchs_area_2_B") + "::OnMobFinal2";
+	monster 'map_jorchs$,120,128,"¿ïºÎÂ¢´Â ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,122,126,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,125,124,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,126,124,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,123,126,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	end;
+
+OnMobFinal2:
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_2_B") + "::OnMobFinal2" ) > 0)
+		end;
+	if ('event != 6)
+		end;
+	'event = 7;
+	enablenpc instance_npcname("ep19_1jorchs_112_119");
+	enablenpc instance_npcname("ep19_1jorchs_112_116");
+	enablenpc instance_npcname("ep19_1jorchs_114_119");
+	end;
+
+}
+
+
+// Area 3
+1@jorchs,1,1,3	script	ep19_jorchs_area_3_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep19_jorchs_area_3_1") + "::OnNormalMob";
+	monster 'map_jorchs$,142,144,"¿ïºÎÂ¢´Â ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,159,151,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,180,139,"°íÅë½º·¯¿î ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,200,131,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,216,135,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,226,141,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,236,151,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	end;
+
+OnNormalMob:
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_3_1") + "::OnNormalMob" ) > 0)
+		end;
+	if ('event != 8)
+		end;
+	'event = 9;
+	mapannounce 'map_jorchs$, "¿©±â¿¡ ¸ð¿© ÀÖ¾ú±¸³ª?", bc_map, 0xFFCC;
+	enablenpc instance_npcname("ep19_1jorchs_249_170");
+	enablenpc instance_npcname("ep19_1jorchs_251_171");
+	end;
+}
+
+// Wall of monsters
+1@jorchs,242,174,3	duplicate(dummy_npc)	µÚÆ²¸° ¸£°£#19m37::ep19_1jorchs_242_174	EP19_MD_RGAN_D
+1@jorchs,244,176,3	duplicate(dummy_npc)	¹¶°³Áø ¸£°£#19m35::ep19_1jorchs_244_176	EP19_MD_RGAN_D
+1@jorchs,247,176,3	duplicate(dummy_npc)	ÇÕÃÄÁø ¸£°£#19m32::ep19_1jorchs_247_176	EP19_MD_RGAN_D
+1@jorchs,248,176,3	duplicate(dummy_npc)	µÚÆ²¸° ¸£°£#19m31::ep19_1jorchs_248_176	EP19_MD_RGAN_D
+
+1@jorchs,243,175,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m36::ep19_1jorchs_243_175	EP19_MD_RGAN_E
+1@jorchs,245,176,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m34::ep19_1jorchs_245_176	EP19_MD_RGAN_E
+1@jorchs,246,176,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m33::ep19_1jorchs_246_176	EP19_MD_RGAN_E,5,5
+1@jorchs,249,177,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m30::ep19_1jorchs_249_177	EP19_MD_RGAN_E
+
+
+// Area 3 - Step 2
+
+// Main Quest: Step 78
+1@jorchs,248,173,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m30::ep19_1jorchs_248_173	EP19_MD_HEARTHUNTER_AT
+1@jorchs,246,173,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m31::ep19_1jorchs_246_173	EP19_MD_HEARTHUNTER_AT
+1@jorchs,243,173,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m32::ep19_1jorchs_243_173	EP19_MD_HEARTHUNTER_AT
+
+1@jorchs,249,170,1	duplicate(dummy_instance_disabled_npc)	¹Ì¸®¾Ï#19m30::ep19_1jorchs_249_170	4_EP18_MIRIAM
+
+1@jorchs,251,171,1	script	º¸Å¬¸°µå#19m30::ep19_1jorchs_251_171	4_EP19_VOGLINDE,5,5,{
+	end;
+OnTouch:
+	if ('event != 9)
+		end;
+	'event = 10;
+	npctalk "¸ðÇè°¡´Ô! ¹«»çÇÏ¼Ì±º¿ä.", instance_npcname("ep19_1jorchs_249_170");
+	sleep 2000;
+	npctalk "Àú ¾Õ¿¡ ÀÖ´Â ¸£°£µéÀÌ ÇÏÆ®ÇåÅÍÀÇ Á¦¾î·Î ¿òÁ÷ÀÎ´Ù´Â °ÅÁö?", instance_npcname("ep19_1jorchs_251_171");
+	// missing 1 npctalk
+	sleep 1500;
+	npctalk "±×·± ¾ç½ÉÀÌ ÀÖ´Ù¸é ¾ÖÃÊ¿¡ ÇÏÆ®ÇåÅÍ¸¦ ¸¸µé¾î³»Áöµµ ¾Ê¾Ò°ÚÁö.", instance_npcname("ep19_1jorchs_251_171");
+	sleep 2000;
+	enablenpc instance_npcname("ep19_1jorchs_248_173");
+	enablenpc instance_npcname("ep19_1jorchs_246_173");
+	enablenpc instance_npcname("ep19_1jorchs_243_173");
+	npctalk "¿ì¸® ¾ê±â¸¦ ÇÏ´Â °Å¾ß? °ÆÁ¤¸¶. ¿ì¸®´Â ¿øÇØ¼­ ÀÌ·¸°Ô µÈ °Å´Ï±î.", instance_npcname("ep19_1jorchs_248_173");
+	sleep 2500;
+	npctalk "¿©±â ÀÌ »ó±Þ ¸£°£µéµµ ±×·¸°í.", instance_npcname("ep19_1jorchs_246_173");
+	sleep 1500;
+	npctalk "ÃÖ»ó±ÞÀÌ µÉ ±âÈ¸¶ó°í ÇÏ´Ï±î ³Êµµ³ªµµ ÁÙÀ» ¼­´õ¶ó°í.", instance_npcname("ep19_1jorchs_243_173");
+	sleep 2500;
+	npctalk "Àú Áß±Þ ¸£°£µéÀº, ¾î¶»°Ô µÈ °ÅÁö?", instance_npcname("ep19_1jorchs_251_171");
+	sleep 1500;
+	npctalk "À½... Àú Áß±ÞµéÀº ¾îÂ¿ ¼ö ¾ø¾úÁö.", instance_npcname("ep19_1jorchs_248_173");
+	sleep 2000;
+	npctalk "À§ÇèÇÑ Àå¼Ò¿¡ °ø±³·Î¿î ½Ã°£´ë¿¡ ¿ì¿¬È÷ ÀÖ´ø °ÍÀÌ Àß¸øÀÌ¶ó¸é Àß¸øÀÌ¶ö±î...?", instance_npcname("ep19_1jorchs_243_173");
+	sleep 2000;
+	npctalk "¸ðµÎ ¾îµô °£ °ÅÁö? ¸ð¿©¼­ ¹» ÇÏ·Á´Â °Ç°¡?", instance_npcname("ep19_1jorchs_249_170");
+	sleep 2000;
+	npctalk "±×°É ¿ì¸®°¡ ¿Ö ¾Ë·ÁÁà. ³ª ±×·¸°Ô Ä£ÀýÇÑ »ç¶÷ ¾Æ´Ï¾ß.", instance_npcname("ep19_1jorchs_243_173");
+	sleep 2000;
+	npctalk "±×·¸´Ù¸é ´õÀÌ»ó Çê¼Ò¸® ¸»°í ºñÄÑ¶ó.", instance_npcname("ep19_1jorchs_249_170");
+	sleep 2500;
+	npctalk "¾Æ·ç³ªÆçÃ÷ÀÇ »ç¶÷µéÀº ´Ù Àú·¸°Ô Á÷¼³ÀûÀÎ°¡ ºÁ.", instance_npcname("ep19_1jorchs_246_173");
+	npctalk "¼ø¼øÈ÷ Áö³ª°¡°Ô ÇÒ ¼ö ¾øÁö¿ä. ÀÌÂÊµµ ¸í·ÉÀ» ¹ÞÀº ¸öÀÌ¶ó.", instance_npcname("ep19_1jorchs_248_173");
+	sleep 2500;
+	npctalk "³ÊÈñ¸¦ ¸·´Â °Í ¸»ÀÌ¾ß. ±×·¡¼­ ÁØºñÇÑ °ÍÀÌ ÀÖ´Âµ¥... ¾î...", instance_npcname("ep19_1jorchs_243_173");
+	sleep 2500;
+	npctalk "Áö±Ý, ½Ã°£À» ²ô´Â °Ç°¡?", instance_npcname("ep19_1jorchs_251_171");
+	sleep 2000;
+	npctalk "¾î¶»°Ô ¾Ë¾ÒÁö? Á¶±Ý ´õ ÀÖ¾î¾ß ÇÏÁö¸¸ ¸ð¸£°Ú´Ù! ¿¡ÀÕ!!!", instance_npcname("ep19_1jorchs_248_173");
+	sleep 1500;
+	specialeffect EF_SCREEN_QUAKE, AREA, instance_npcname("ep19_1jorchs_243_173");
+	npctalk "ÀÌ·² ¶§ ÀÌ°É ¾²¶ó°í ÇÏ¼Ì°Åµç. Àú ¾Õ¿¡¼­´Â ¸ø ¾´ ¸ð¾çÀÌÁö¸¸?", instance_npcname("ep19_1jorchs_248_173");
+	mapannounce 'map_jorchs$, "ÁÖÀÔ ÀåÄ¡°¡ °¡µ¿µÇ¾ú½À´Ï´Ù.", bc_map, 0xFFCC;
+	sleep 2500;
+	npctalk "»ó±Þ ¾ËÀ» °³Á¶µÈ »ó±Þ ¸£°£À¸·Î ¼ø½Ä°£¿¡ ÅÂ¾î³ª°Ô ÇÑ´ë.", instance_npcname("ep19_1jorchs_243_173");
+	specialeffect EF_CLOUD4, AREA, instance_npcname("ep19_1jorchs_243_173");
+	sleep 1500;
+	npctalk "¾öÃ»³ª°Ô ¸¹Àº ¸£°£°ú ¸¸³ª°Ô µÉ°É?", instance_npcname("ep19_1jorchs_246_173");
+	sleep 2500;
+	npctalk "¸¶·Â °ø±Þ¸¸ °è¼ÓµÈ´Ù¸é °è¼ÓÇØ¼­ ³ª¿Ã °Å¾ß.", instance_npcname("ep19_1jorchs_243_173");
+	sleep 2000;
+	npctalk "±× ¸»Àº, °ø±ÞÀ» ²÷À¸¸é µÈ´Ù´Â ¸»·Î µé¸®´Âµ¥? »ý°¢º¸´Ù Ä£ÀýÇÏ±º.", instance_npcname("ep19_1jorchs_251_171");
+	emotion ET_HUK, getnpcid(0,"ep19_1jorchs_248_173");
+	emotion ET_HUK, getnpcid(0,"ep19_1jorchs_246_173");
+	emotion ET_HUK, getnpcid(0,"ep19_1jorchs_243_173");
+	sleep 2500;
+	npctalk "±×, ±×·¸°Ô ½±°Ô Ã£À» ¼ö ¾øÀ»°É? °Ô´Ù°¡ Áö¿øµµ ºÒ·¶Áö!!", instance_npcname("ep19_1jorchs_246_173");
+	sleep 1500;
+	npctalk "¿ì¸®´Â ´ÙÀ½ ¸ñÇ¥¸¦ ÇâÇØ!", instance_npcname("ep19_1jorchs_248_173");
+	sleep 2000;
+	disablenpc instance_npcname("ep19_1jorchs_248_173");
+	disablenpc instance_npcname("ep19_1jorchs_246_173");
+	disablenpc instance_npcname("ep19_1jorchs_243_173");
+	npctalk "¸ðÇè°¡, ¿ì¸®°¡ ÃßÀûÇÒÅ×´Ï ¸£°£À» ÇØÄ¡¿ì°í ÀåÄ¡¸¦...!", instance_npcname("ep19_1jorchs_251_171");
+	sleep 2000;
+	disablenpc instance_npcname("ep19_1jorchs_251_171");
+	disablenpc instance_npcname("ep19_1jorchs_249_170");
+	enablenpc instance_npcname("#e19p01");
+	'event = 11;
+	end;
+}
+
+1@jorchs,243,166,0	script	#e19p01	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch:
+	if ('event == 11) {
+		'event = 12;
+		donpcevent instance_npcname("ep19_jorchs_area_3_2") + "::OnStart";	// spawn mobs
+		end;
+	}
+	if ('event == 12 || 'event == 13 || 'event == 14) {
+		viewpoint 1,219,148,1,0xFF3355;
+		end;
+	}
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_3_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep19_jorchs_area_3_2") + "::OnNormalMob";
+
+	disablenpc instance_npcname("ep19_1jorchs_249_177");
+	disablenpc instance_npcname("ep19_1jorchs_242_174");
+	monster 'map_jorchs$,250,177,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,243,174,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	sleep 3000;
+	disablenpc instance_npcname("ep19_1jorchs_248_176");
+	disablenpc instance_npcname("ep19_1jorchs_244_176");
+	monster 'map_jorchs$,249,176,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,245,176,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	sleep 3000;
+	disablenpc instance_npcname("ep19_1jorchs_247_176");
+	disablenpc instance_npcname("ep19_1jorchs_245_176");
+	monster 'map_jorchs$,248,176,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,246,176,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 3000;
+	disablenpc instance_npcname("ep19_1jorchs_243_175");
+	disablenpc instance_npcname("ep19_1jorchs_246_176");
+	monster 'map_jorchs$,244,175,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,247,176,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	if ('event == 12)
+		'event = 13;
+	end;
+
+OnNormalMob:
+	'count_area_3_2++;
+	if ('count_area_3_2 < 8)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_3_2") + "::OnNormalMob" ) > 0)
+		end;
+	if ('event != 13)
+		end;
+	'event = 14;
+	mapannounce 'map_jorchs$, "»ó±Þ ¸£°£ÀÇ ¾Ë¿¡ È¥ÇÕ ¸¶·ÂÀ» ÁÖÀÔÇÕ´Ï´Ù.", bc_map, 0xFFCC;
+	enablenpc instance_npcname("ep19_1jorchs_219_148");
+
+	donpcevent instance_npcname("#e19c01") + "::OnStart";	// spawn temporary mobs
+	end;
+}
+
+// Main Quest: Step 79
+1@jorchs,219,148,5	script	ÁÖÀÔ ÀåÄ¡#19m30::ep19_1jorchs_219_148	4_ENERGY_BLUE,3,3,{
+	if ('event != 14)
+		end;
+	'event = 15;
+	disablenpc();
+	viewpoint 2,219,148,1,0xFF3355;
+	npctalk "ÁÖÀÔ ÀåÄ¡ ÇØÁ¦";
+	donpcevent instance_npcname("ep19_jorchs_area_3_3") + "::OnStart";
+	donpcevent instance_npcname("#e19c01") + "::OnStop";	// stop spawn temporary mobs
+	initnpctimer;
+	end;
+OnTimer10000:
+	stopnpctimer;
+	donpcevent instance_npcname("#e19c01") + "::OnKill";
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_3_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep19_jorchs_area_3_3") + "::OnNormalMob";
+
+	monster 'map_jorchs$,224,151,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "ÀåÄ¡´Â °¡µ¿µÆ´Âµ¥ °³Á¶µÇ¾î ÅÂ¾î³­ °Ç ÇÑ ¸¶¸® »ÓÀÌ³×?";
+	monster 'map_jorchs$,225,141,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "ÀåÄ¡¸¦ ²°¾î? ²ô¸é ±Ý¹æ ½Ãµé¾î Á×´Â´Ù°í Çß´Âµ¥!!!";
+	monster 'map_jorchs$,217,141,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "¹¹¾ß? ´Ùµé ¾îµð°¬¾î? ºÒ·¯ ³õ°í ´Ùµé ¸ÕÀú °£°Å¾ß?";
+	end;
+OnNormalMob:
+	if ('event != 15)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_3_3") + "::OnNormalMob" ) > 0)
+		end;
+	'event = 16;
+	mapannounce 'map_jorchs$, "ÁÖÀÔ ÀåÄ¡°¡ Ãß°¡·Î °¡µ¿µË´Ï´Ù.", bc_map, 0xFFCC;
+
+	setcell 'map_jorchs$,242,174,242,174,cell_walkable,1;
+	setcell 'map_jorchs$,244,176,244,176,cell_walkable,1;
+	setcell 'map_jorchs$,247,176,247,176,cell_walkable,1;
+	setcell 'map_jorchs$,248,176,248,176,cell_walkable,1;
+	setcell 'map_jorchs$,243,175,243,175,cell_walkable,1;
+	setcell 'map_jorchs$,245,176,245,176,cell_walkable,1;
+	setcell 'map_jorchs$,246,176,246,176,cell_walkable,1;
+	setcell 'map_jorchs$,249,177,249,177,cell_walkable,1;
+
+	donpcevent instance_npcname("ep19_jorchs_area_4_1") + "::OnStart";	// spawn mobs next area
+	end;
+}
+
+1@jorchs,230,160,0	script	#e19c01	HIDDEN_WARP_NPC,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer30000:
+	specialeffect EF_AGIUP;
+	specialeffect EF_GUARD2;
+
+	getmapxy .@map$,.@x,.@y, BL_NPC;
+	monster 'map_jorchs$,.@x,.@y,"ºÒ¾ÈÁ¤ÇÑ °³Á¶ ¸£°£","EP19_MD_RGAN_E",1, instance_npcname( strnpcinfo(0) ) + "::OnTemporaryMob";
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTemporaryMob:
+	end;
+OnKill:
+	stopnpctimer;
+	killmonster 'map_jorchs$, instance_npcname( strnpcinfo(0) ) + "::OnTemporaryMob";
+	end;
+}
+
+
+// Area 4
+1@jorchs,244,176,0	script	#e19p04	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch:
+	if ('event == 16) {
+		viewpoint 2,219,148,1,0xFF3355;
+		if ('area_4[1] == 0)
+			viewpoint 1,226,244,1,0xFF3355;
+		if ('area_4[0] == 0)
+			viewpoint 1,191,203,2,0xFF3355;
+		end;
+	}
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_4_1	-1,{
+	end;
+OnStart:
+	enablenpc instance_npcname("ep19_1jorchs_191_203");
+	enablenpc instance_npcname("ep19_1jorchs_226_244");
+
+	.@event$ = instance_npcname("ep19_jorchs_area_4_1") + "::OnNormalMob";
+
+	monster 'map_jorchs$,270,198,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,228,211,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,210,204,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,194,200,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,173,179,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,245,235,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,273,254,"¿ïºÎÂ¢´Â ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,247,278,"ÇÕÃÄÁø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,224,273,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,238,258,"ºÒ¾ÈÁ¤ÇÑ °³Á¶ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,198,272,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+
+	donpcevent instance_npcname("#e19c02") + "::OnStart";	// spawn temporary mobs
+	donpcevent instance_npcname("#e19c03") + "::OnStart";
+	end;
+OnNormalMob:
+	if ('event != 16)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_4_1") + "::OnNormalMob" ) > 0)
+		end;
+	if ('area_4[2] != 0)
+		end;
+	'area_4[2] = 2;
+	mapannounce 'map_jorchs$, "¾Æ, ¼±»ý´Ôµé ÀÌ°Å ³õ°í ¸»¾¸ÇÏ¼¼¿ä.", bc_map, 0xFFCC;
+	donpcevent instance_npcname("ep19_jorchs_area_4_1") + "::OnCheck";	// check if we should trigger the next step
+	end;
+OnSpecialMob:
+	if ('event != 16)
+		end;
+	if ('area_4[0] == 1 && 'area_4[1] == 1) {
+		'area_4[0] = 'area_4[1] = 2;
+		mapannounce 'map_jorchs$, "ÀúÂÊ¿¡ ¸£°£ÀÌ ¾ÆÁ÷ ³²¾ÆÀÖ¾î!", bc_map, 0xFFCC;
+		donpcevent instance_npcname("ep19_jorchs_area_4_1") + "::OnCheck";	// check if we should trigger the next step
+		end;
+	}
+	end;
+OnCheck:
+	if ('area_4[0] == 2 && 'area_4[1] == 2 && 'area_4[2] == 2) {
+		'event = 17;
+		enablenpc instance_npcname("ep19_1jorchs_149_178");
+		enablenpc instance_npcname("ep19_1jorchs_149_179");
+		enablenpc instance_npcname("ep19_1jorchs_150_177");
+		enablenpc instance_npcname("ep19_1jorchs_150_180");
+		enablenpc instance_npcname("ep19_1jorchs_151_179");
+		end;
+	}
+	end;
+}
+
+1@jorchs,198,205,0	duplicate(#e19c01)	#e19c03	HIDDEN_WARP_NPC
+
+// Main Quest: Step 80
+1@jorchs,191,203,7	script	ÁÖÀÔ ÀåÄ¡#19m32::ep19_1jorchs_191_203	4_ENERGY_BLUE,{
+	if ('event != 16)
+		end;
+	if ('area_4[0] != 0)
+		end;
+	'area_4[0] = 1;
+	viewpoint 2,191,203,2,0xFF3355;
+	npctalk "ÁÖÀÔ ÀåÄ¡ ÇØÁ¦";
+	disablenpc();
+	donpcevent instance_npcname("#e19c03") + "::OnStop";	// stop spawn temporary mobs
+	donpcevent instance_npcname("ep19_jorchs_area_4_1") + "::OnSpecialMob";	// announce if the 2 temporary spots are disabled
+	initnpctimer;
+	end;
+OnTimer10000:	// the temporary mobs are killed after ~10s
+	stopnpctimer;
+	donpcevent instance_npcname("#e19c03") + "::OnKill";
+	end;
+}
+
+
+1@jorchs,239,255,0	duplicate(#e19c01)	#e19c02	HIDDEN_WARP_NPC
+
+// Main Quest: Step 81
+1@jorchs,226,244,7	script	ÁÖÀÔ ÀåÄ¡#19m31::ep19_1jorchs_226_244	4_ENERGY_BLUE,{
+	if ('event != 16)
+		end;
+	if ('area_4[1] != 0)
+		end;
+	'area_4[1] = 1;
+	viewpoint 2,226,244,1,0xFF3355;
+	npctalk "ÁÖÀÔ ÀåÄ¡ ÇØÁ¦";
+	disablenpc();
+	donpcevent instance_npcname("#e19c03") + "::OnStop";	// stop spawn temporary mobs
+	donpcevent instance_npcname("ep19_jorchs_area_4_1") + "::OnSpecialMob";	// announce if the 2 temporary spots are disabled
+	initnpctimer;
+	end;
+OnTimer10000:	// the temporary mobs are killed after ~10s
+	stopnpctimer;
+	donpcevent instance_npcname("#e19c02") + "::OnKill";
+	end;
+}
+
+
+// Wall of monsters
+1@jorchs,139,181,3	script	°³Á¶µÈ »ó±Þ ¸£°£#19m42::ep19_1jorchs_139_181	EP19_MD_RGAN_E,5,5,{
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ¸£°£ÀÇ º®Àº ¾ÆÁ÷ Áö³ª°¥ ¼ö ¾ø³ª º¸³×. ¼ö»öÀ» ¸¶Àú ÇØ¾ß°Ú´Ù.";
+	end;
+}
+1@jorchs,138,178,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m45::ep19_1jorchs_138_178	EP19_MD_RGAN_E
+1@jorchs,138,179,3	duplicate(dummy_npc)	µÚÆ²¸° ¸£°£#19m44::ep19_1jorchs_138_179	EP19_MD_RGAN_D
+1@jorchs,139,180,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m43::ep19_1jorchs_139_180	EP19_MD_RGAN_E
+1@jorchs,140,182,3	duplicate(dummy_npc)	¹¶°³Áø ¸£°£#19m41::ep19_1jorchs_140_182	EP19_MD_RGAN_D
+1@jorchs,140,183,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m40::ep19_1jorchs_140_183	EP19_MD_RGAN_E
+
+
+1@jorchs,149,178,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m41::ep19_1jorchs_149_178	EP19_MD_HEARTHUNTER_AT
+1@jorchs,149,179,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m40::ep19_1jorchs_149_179	EP19_MD_HEARTHUNTER_AT
+1@jorchs,150,180,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m42::ep19_1jorchs_150_180	EP19_MD_HEARTHUNTER_AT
+1@jorchs,150,177,1	duplicate(dummy_instance_disabled_npc)	·¹¿Â#19m40::ep19_1jorchs_150_177	4_EP19_LEON,3,3
+
+// Main Quest: Step 82, 84
+1@jorchs,151,179,1	script	¿À·¼¸®#19m40::ep19_1jorchs_151_179	4_EP19_AURELIE,5,5,{
+	if ('event == 17) {
+		'event = 18;
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_149_179");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_149_178");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_150_180");
+		npctalk "³Ê³×´Â ¹¹°¡ ¹®Á¦¾ß? µèÀÚÇÏ´Ï ³¥µ¥ ¸ø³¥µ¥ ¾È°¡¸®°í ¹®Á¦¸¦ ÀÏÀ¸Å²´Ù¸ç?", instance_npcname("ep19_1jorchs_151_179");
+		sleep 3000;
+		npctalk "³»°¡ ¹¹¶ó ÇÏ´Â °Ç ¾Æ´Ï°í, ÀÌÇØ°¡ ¾ÈµÅ¼­ ±×·¡.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 1500;
+		npctalk "¸ðÇè°¡, ¿Ô¾î? ¿ì¸®°¡...", instance_npcname("ep19_1jorchs_150_177");
+		mapannounce 'map_jorchs$, "ÁÖÀÔ ÀåÄ¡°¡ °¡µ¿µË´Ï´Ù.", bc_map, 0xFFCC;
+		sleep 3000;
+		npctalk "ÀÌÀÚ´Â ¿ì¸®°¡ Àâ¾ÆµÑ Å×´Ï, ÀåÄ¡ºÎÅÍ Ã£¾Æ¼­ ²ô°í ¿À´Â °ÍÀÌ ÁÁ°Ú¾î.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 2000;
+		npctalk "Á» Àü¿¡ ¹» Á¶ÀÛÇÏ´õ´Ï Àç°¡µ¿ Çß´Ù°í ÇÏ°Åµç?", instance_npcname("ep19_1jorchs_150_177");
+		sleep 2000;
+		npctalk "ÀÌ°Å ³õ°í ¾ê±â ÇØ¿ä, ¼±»ý´Ôµé.", instance_npcname("ep19_1jorchs_149_179");
+		sleep 2000;
+		npctalk "ÀÌ°Å ´ëÃ¼ ¹º°¡¿ä, ¿Ö ¿òÁ÷ÀÏ ¼ö ¾øÁö?", instance_npcname("ep19_1jorchs_149_178");
+		sleep 2000;
+		npctalk "³»°¡ Á» ´ë´ÜÇØ¼­ ±×·±´Ü´Ù.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 2000;
+		npctalk "ÀÚ, ¿ì¸®´Â ÀÌÁ¦ ÇÏ´ø ¾ê±â¸¦ ¸¶Àú ÇØº¸½Ç±î?", instance_npcname("ep19_1jorchs_150_177");
+		sleep 3000;
+		npctalk "¿©±â´Â ¿ì¸®¿¡°Ô ¸Ã°ÜµÖ.", instance_npcname("ep19_1jorchs_151_179");
+		npctalk "¸ðÇè°¡, ±×³É °¡Áö ¸»°í ÀÌºÐµéÀ» ¼³µæÇØÁà!", instance_npcname("ep19_1jorchs_150_180");
+		'event = 19;
+		enablenpc instance_npcname("ep19_1jorchs_192_206");
+		enablenpc instance_npcname("#e19p02");
+		donpcevent instance_npcname("#e19c04") + "::OnStart";	// spawn temporary mobs
+		end;
+	}
+	if ('event == 19) {
+		npctalk "¿©±â´Â ¿ì¸®¿¡°Ô ¸Ã°ÜµÎ°í ÀåÄ¡³ª ²ô°í ¿Í.", instance_npcname("ep19_1jorchs_151_179");
+		end;
+	}
+	if ('event == 21) {
+		'event = 22;
+		npctalk "¿Ô±º. ÀÌÀÚµéÀº Àû´çÈ÷ Æ÷ÀåÇßÀ¸´Ï ¾Õ¼¼¿ö¼­ °¡¸é µÅ.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 1500;
+		npctalk "»ó±Þ ÀÌ»óÀÇ ¸£°£µéÀ» ¸ðµÎ ¶ó½º°£µåÀÇ °ÅÃ³·Î ºÒ·¯ µé¿´´Ù°í ÀÌÀÚµéÀÌ ºÒ´õ¶ó.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 3000;
+		npctalk "±×... ÀúÈñ°¡ ¸»Çß´Ù°í´Â ÇÏÁö ¸»¾ÆÁÖ½Ê¼î. ºÎÅ¹ÀÔ´Ï´Ù.", instance_npcname("ep19_1jorchs_149_179");
+		sleep 2000;
+		npctalk "ÃâÀÔ±¸µµ ÇÏ³ª »ÓÀÌ¶ó°í ÇÏ´øµ¥. ¹ÏÀ» ¼ö´Â ¾øÁö¸¸?", instance_npcname("ep19_1jorchs_150_177");
+		npctalk "ÀúÈñ´Â Áø½Ç¸¸À» ¸»Çß½À´Ï´Ù. ¹Ï¾îÁÖ½Ê¼î.", instance_npcname("ep19_1jorchs_149_178");
+		sleep 2000;
+		npctalk "¾îÂîµÆµç ¶ó½º°£µå¿Í ¹Ù°÷ÀÌ ÀÌ·ç°íÀÚ ÇÏ´Â °ÍÀÌ ¹Ù·Î ÄÚ¾Õ¿¡ ÀÖ´Ù´Â °Í¸¸Àº È®½ÇÇØ.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 2000;
+		npctalk "¼­µÑ·¯¾ß°Ú¾î.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 1500;
+		npctalk "¼±»ý´Ôµé, ÀúÈñ´Â, ÀúÈñ´Â »©ÁÖ¼¼¿ä. ¾Ë°í ÀÖ´Â °É ´Ù ¸»¾¸µå·ÈÀÝ½À´Ï±î.", instance_npcname("ep19_1jorchs_150_180");
+		sleep 1500;
+		npctalk "±×°Å¶ûÀº º°°³...", instance_npcname("ep19_1jorchs_150_177");
+		emotion ET_SURPRISE, getnpcid(0,"ep19_1jorchs_150_177");
+		specialeffect EF_SCREEN_QUAKE, AREA, instance_npcname("ep19_1jorchs_150_177");
+		mapannounce 'map_jorchs$, "¸¶·Â ÁõÆø ÀåÄ¡ Àü·Â °¡µ¿.", bc_map, 0xFFCC;
+		sleep 2000;
+		npctalk "¾î? ¸¶·ÂÀÇ Èå¸§ÀÌ Á» ÀÌ»óÇÑµ¥?", instance_npcname("ep19_1jorchs_150_177");
+		sleep 2000;
+		npctalk "±×·¯³×. ÀÌ°Ç ¾Ö¼ÛÀÌµéÀÌ Ã³¸®ÇÒ ¼ö ¾øÀ» °Í °°³×.", instance_npcname("ep19_1jorchs_151_179");
+		sleep 2000;
+		npctalk "¸ðÇè°¡, ¿©±ä ¸ðÇè°¡ÇÑÅ× ¸Ã°Üµµ µÇ°ÚÁö?", instance_npcname("ep19_1jorchs_150_177");
+		sleep 3000;
+		npctalk "¾ó¸¥ Ã³¸®ÇÏ°í ¿À´Â °ÍÀÌ ÁÁ? ½É»óÄ¡°¡ ¾Ê¾Æ. ¸ÕÀú °¡º»´Ù.", instance_npcname("ep19_1jorchs_150_177");
+		sleep 2000;
+		npctalk "ÇÏ! Âü! ¿ì¸®°¡ ±×·¸°Ô ¸¸¸¸ÇØ º¸¿©?", instance_npcname("ep19_1jorchs_149_179");
+		disablenpc instance_npcname("ep19_1jorchs_151_179");
+		disablenpc instance_npcname("ep19_1jorchs_150_177");
+		sleep 2000;
+		npctalk "¹«¼­¿î Çü´ÔµéÀÌ »ç¶óÁø´Ù¸é, ¿ì¸®µµ ÇÒ ¸¸ ÇÏÁö!", instance_npcname("ep19_1jorchs_149_178");
+		sleep 2000;
+		npctalk "Àú ÀÔºÎÅÍ ¹­¾î ³õ´Â °ÍÀÌ ÁÁ°Ú³×. ±×·³, ºÎÅ¹ÇÒ°Ô.", instance_npcname("ep19_1jorchs_151_179");
+		donpcevent instance_npcname("ep19_jorchs_area_4_3") + "::OnStart";	// spawn mobs
+		end;
+	}
+	end;
+}
+
+
+1@jorchs,156,177,0	script	#e19p02	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch:
+	if ('event == 19) {
+		viewpoint 1,192,206,3,0xFF3355;
+		end;
+	}
+	end;
+}
+
+1@jorchs,199,197,0	duplicate(#e19c01)	#e19c04	HIDDEN_WARP_NPC
+
+// Main Quest: Step 83
+1@jorchs,192,206,5	script	ÁÖÀÔ ÀåÄ¡#19m40::ep19_1jorchs_192_206	4_ENERGY_BLUE,3,3,{
+	if ('event == 19) {
+		'event = 20;
+		viewpoint 2,192,206,3,0xFF3355;
+		npctalk "ÀåÄ¡ ÇØÁ¦";
+		disablenpc();
+		donpcevent instance_npcname("#e19c04") + "::OnKill";	// stop spawn and kill temporary mobs
+		mapannounce 'map_jorchs$, "ÀåÄ¡¸¦ ²°À¸¸é ÀÌÂÊÀ¸·Î ¿À·Å.", bc_map, 0xFFCC;
+		donpcevent instance_npcname("ep19_jorchs_area_4_2") + "::OnStart";
+		end;
+	}
+	end;
+OnTouch:	// unknown effect
+	end;
+}
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_4_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep19_jorchs_area_4_2") + "::OnNormalMob";
+
+	monster 'map_jorchs$,191,199,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "Àú°Å ¾È ²¨Áö°Ô ÁöÅ°¶ó°í Çß´Âµ¥";
+	monster 'map_jorchs$,199,197,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "°Å±â¼­ ¼Õ ¶¼´Â °ÍÀÌ ÁÁÀ»°É?";
+	monster 'map_jorchs$,202,207,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	unittalk $@mobid[0], "Å«ÀÏ³¯ »ç¶÷ÀÌ³×.";
+	end;
+OnNormalMob:
+	if ('event != 20)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_4_2") + "::OnNormalMob" ) > 0)
+		end;
+	'event = 21;
+	end;
+}
+
+// Main Quest: Step 84
+// 1@jorchs,151,179,1	script	¿À·¼¸®#19m40::ep19_1jorchs_151_179	4_EP19_AURELIE,5,5,{
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_4_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep19_jorchs_area_4_3") + "::OnNormalMob";
+	'ep19_jorchs_area_4_3 = 0;
+
+	disablenpc instance_npcname("ep19_1jorchs_140_182");
+	disablenpc instance_npcname("ep19_1jorchs_149_178");
+	monster 'map_jorchs$,141,182,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,149,178,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	sleep 3000;
+	disablenpc instance_npcname("ep19_1jorchs_140_183");
+	disablenpc instance_npcname("ep19_1jorchs_138_179");
+	monster 'map_jorchs$,141,183,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,139,179,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	sleep 3000;
+	disablenpc instance_npcname("ep19_1jorchs_139_181");
+	disablenpc instance_npcname("ep19_1jorchs_139_180");
+	monster 'map_jorchs$,140,181,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,140,180,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 1000;
+	disablenpc instance_npcname("ep19_1jorchs_150_180");
+	disablenpc instance_npcname("ep19_1jorchs_149_179");
+	monster 'map_jorchs$,150,180,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	monster 'map_jorchs$,149,179,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	sleep 1000;
+	disablenpc instance_npcname("ep19_1jorchs_138_178");
+	monster 'map_jorchs$,139,178,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	end;
+OnNormalMob:
+	if ('event != 22)
+		end;
+	'ep19_jorchs_area_4_3++;
+	if ('ep19_jorchs_area_4_3 < 9)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_4_3") + "::OnNormalMob" ) > 0)
+		end;
+	'event = 23;
+	mapannounce 'map_jorchs$, "ÀÏ·ç½Ã¿Â ±¸¿ªÀÌ ½É»óÄ¡°¡ ¾Ê¾Æ. ´©°¡ Á»...!", bc_map, 0xFFCC;
+	enablenpc instance_npcname("#e19p03");
+	setcell 'map_jorchs$,140,183,140,183,cell_walkable,1;
+	setcell 'map_jorchs$,140,182,140,182,cell_walkable,1;
+	setcell 'map_jorchs$,139,181,139,181,cell_walkable,1;
+	setcell 'map_jorchs$,139,180,139,180,cell_walkable,1;
+	setcell 'map_jorchs$,138,179,138,179,cell_walkable,1;
+	setcell 'map_jorchs$,138,178,138,178,cell_walkable,1;
+
+	donpcevent instance_npcname("ep19_jorchs_area_5_1") + "::OnStart";	// spawn mobs next area
+	end;
+}
+
+
+// Area 5
+1@jorchs,137,181,0	script	#e19p03	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch:
+	if ('event == 23) {
+		if ('area_5[1] == 0)
+			viewpoint 1,20,195,4,0xFF3355;
+		if ('area_5[0] == 0)
+			viewpoint 1,24,142,5,0xFF3355;
+		end;
+	}
+	end;
+}
+
+
+// Main Quest: Step 85
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_5_1	-1,{
+	end;
+OnStart:
+	enablenpc instance_npcname("ep19_1jorchs_24_142");
+
+	.@event$ = instance_npcname("ep19_jorchs_area_5_1") + "::OnNormalMob";
+
+	monster 'map_jorchs$,121,190,"¹¶°³Áø ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,103,215,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,82,221,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,86,165,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,79,154,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,45,153,"µÚÆ²¸° ¸£°£","EP19_MD_RGAN_D",1, .@event$;
+	monster 'map_jorchs$,32,135,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,18,133,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,25,172,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,24,188,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+
+	donpcevent instance_npcname("#e19c06") + "::OnStart";	// spawn temporary mobs
+	donpcevent instance_npcname("#e19c05") + "::OnStart";
+	end;
+OnNormalMob:
+	if ('event != 23)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_5_1") + "::OnNormalMob" ) > 0)
+		end;
+	if ('area_5[2] != 0)
+		end;
+	'area_5[2] = 1;
+	donpcevent instance_npcname("ep19_jorchs_area_5_1") + "::OnCheck";
+	end;
+OnCheck:
+	if ('event == 23 && 'area_5[0] == 1 && 'area_5[1] == 1 && 'area_5[2] == 1) {
+		'event = 24;
+		mapannounce 'map_jorchs$, "´©°¡ Á¦ÀÏ ¸ÕÀú µµÂøÇÒ±î?", bc_map, 0xFFCC;
+		enablenpc instance_npcname("ep19_1jorchs_39_251");
+		enablenpc instance_npcname("ep19_1jorchs_41_253");
+		enablenpc instance_npcname("ep19_1jorchs_36_251");
+	}
+	end;
+}
+
+// Area 5 - South
+1@jorchs,17,133,0	duplicate(#e19c01)	#e19c06	HIDDEN_WARP_NPC
+
+1@jorchs,24,142,7	script	¿¬±¸ ÀåÄ¡#19m41::ep19_1jorchs_24_142	4_ENERGY_BLUE,{
+	if ('event == 23 && 'area_5[0] == 0) {
+		'area_5[0] = 1;
+		disablenpc();
+		viewpoint 2,24,142,5,0xFF3355;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ÀÌ°Å... Áß¿äÇÑ °Ç°¡? Àß ¸ð¸£°Ú³×. ¾µ¸¸ÇÑ °Ç ´Ù °¡Áö°í °¬°ÚÁö?";
+		.@event$ = instance_npcname("ep19_1jorchs_24_142") + "::OnNormalMob";
+		monster 'map_jorchs$,20,136,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+		unittalk $@mobid[0], "¸£°£ Çà¼¼¸¦ Çß´Ù´õ´Ï Ãß¾ï¿¡ Á¥À¸·¯ ¿Â °Å¾ß?";
+		monster 'map_jorchs$,30,139,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+		unittalk $@mobid[0], "°Å±â¿£ ¼Õ ´ëÁö ¸»¶ó°í Çß¾î!";
+		initnpctimer;
+		end;
+	}
+	end;
+OnNormalMob:
+	end;
+OnTimer10000:	// the hunters and the temporary mobs are killed after 10s
+	stopnpctimer;
+	donpcevent instance_npcname("#e19c06") + "::OnKill";
+	killmonster 'map_jorchs$, instance_npcname("ep19_1jorchs_24_142") + "::OnNormalMob";
+	donpcevent instance_npcname("ep19_jorchs_area_5_1") + "::OnCheck";
+	end;
+}
+
+1@jorchs,16,135,3	script	¿¬±¸½ÇÀÇ ÈçÀû#19m40	4_ENERGY_BLUE,{
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ³²Àº °ÍÀº °ÅÀÇ ¾ø´Ù.";
+	end;
+}
+
+
+// Area 5 - Middle
+1@jorchs,17,188,0	duplicate(#e19c01)	#e19c05	HIDDEN_WARP_NPC
+
+1@jorchs,20,195,7	script	¿¬±¸ ÀåÄ¡#19m40::ep19_1jorchs_20_195	4_ENERGY_BLUE,{
+	if ('event == 23 && 'area_5[1] == 0) {
+		'area_5[1] = 1;
+		disablenpc();
+		viewpoint 2,20,195,4,0xFF3355;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ÀÌ¹Ì¸£ÀÇ ½ÉÀå... ´ç¿¬È÷ ¾ø°í... ¿¬±¸ÀÚ·áµµ ¾µ¸¸ÇÑ°Ô ¾Èº¸ÀÌ³×.";
+		mapannounce 'map_jorchs$, "¾ÆÁ÷ Ã³¸®ÇØ¾ß ÇÒ ¸£°£ÀÌ »ê´õ¹Ì¾ß!", bc_map, 0xFFCC;
+		.@event$ = instance_npcname("ep19_1jorchs_20_195") + "::OnNormalMob";
+		monster 'map_jorchs$,26,194,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+		unittalk $@mobid[0], "ÁøÂ¥·Î ÀÚ·á Ã£À¸·¯ ¿Ô³×?";
+		monster 'map_jorchs$,26,188,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+		unittalk $@mobid[0], "¼Õ µé¾î!!";
+		monster 'map_jorchs$,19,185,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+		unittalk $@mobid[0], "³×°¡ º¸¸é ¾Ë¾Æ?";
+		initnpctimer;
+		end;
+	}
+	end;
+OnNormalMob:
+	end;
+OnTimer20000:	// the hunters and the temporary mobs are killed after 20s
+	stopnpctimer;
+	donpcevent instance_npcname("#e19c05") + "::OnKill";
+	killmonster 'map_jorchs$, instance_npcname("ep19_1jorchs_20_195") + "::OnNormalMob";
+	donpcevent instance_npcname("ep19_jorchs_area_5_1") + "::OnCheck";
+	end;
+}
+
+
+// Area 5 - North
+
+// Wall
+1@jorchs,34,255,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m50::ep19_1jorchs_34_255	EP19_MD_RGAN_E
+1@jorchs,35,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m51::ep19_1jorchs_35_255	EP19_MD_RGAN_E
+1@jorchs,36,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m52::ep19_1jorchs_36_255	EP19_MD_RGAN_E
+1@jorchs,37,255,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m53::ep19_1jorchs_37_255	EP19_MD_RGAN_E
+1@jorchs,38,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m54::ep19_1jorchs_38_255	EP19_MD_RGAN_E,5,5
+1@jorchs,39,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m55::ep19_1jorchs_39_255	EP19_MD_RGAN_E
+1@jorchs,40,255,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m56::ep19_1jorchs_40_255	EP19_MD_RGAN_E
+1@jorchs,41,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m57::ep19_1jorchs_41_255	EP19_MD_RGAN_E
+1@jorchs,42,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m58::ep19_1jorchs_42_255	EP19_MD_RGAN_E
+1@jorchs,43,255,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m59::ep19_1jorchs_43_255	EP19_MD_RGAN_E
+1@jorchs,35,256,5	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m61::ep19_1jorchs_35_256	EP19_MD_RGAN_E
+1@jorchs,37,256,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m63::ep19_1jorchs_37_256	EP19_MD_RGAN_E
+
+1@jorchs,38,256,5	script	°³Á¶µÈ »ó±Þ ¸£°£#19m64::ep19_1jorchs_38_256	EP19_MD_RGAN_E,5,5,{
+	if ('event < 24) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ¸£°£ÀÇ º®ÀÌ´Ù. ¼ö»öÀ» ¸ÕÀú ¸¶Ä¡°í ´Ù½Ã ¿Í¾ß°Ú´Ù.";
+		end;
+	}
+	end;
+}
+1@jorchs,39,256,3	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m65::ep19_1jorchs_39_256	EP19_MD_RGAN_E
+1@jorchs,41,256,1	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m67::ep19_1jorchs_41_256	EP19_MD_RGAN_E
+1@jorchs,42,256,5	duplicate(dummy_npc)	°³Á¶µÈ »ó±Þ ¸£°£#19m68::ep19_1jorchs_42_256	EP19_MD_RGAN_E
+
+
+1@jorchs,39,251,5	script	ÇÏÆ®ÇåÅÍ#19m50::ep19_1jorchs_39_251	EP19_MD_HEARTHUNTER_AT,5,5,{
+	end;
+OnTouch:
+	if ('event == 24) {
+		'event = 25;
+		npctalk "Àú°Ô ´©±¸¾ß?", instance_npcname("ep19_1jorchs_39_251");
+		sleep 1500;
+		npctalk "¸ðÇè°¡?", instance_npcname("ep19_1jorchs_41_253");
+		sleep 2000;
+		npctalk "¸ðÇè°¡°¡ Á¦ÀÏ ¸ÕÀú µµÂøÇß³×?", instance_npcname("ep19_1jorchs_36_251");
+		sleep 1500;
+		npctalk "´©°¡ ¸ÕÀú ÀÌ ¾Õ±îÁö µµÂøÇÏ³ª Çß´õ´Ï.", instance_npcname("ep19_1jorchs_41_253");
+		npctalk "³»°¡ ÀÌ°å³×.", instance_npcname("ep19_1jorchs_39_251");
+		sleep 2000;
+		enablenpc instance_npcname("ep19_1jorchs_37_252");
+		npctalk "¿Â °ÍÀº ¸ðÇè°¡ »ÓÀÌ¾ß?", instance_npcname("ep19_1jorchs_37_252");
+		sleep 2000;
+		npctalk "¿¹. ´Ù¸¥ÀÚµéÀº ¸¶·Â ÆøÁÖ ¸£°£À» »ó´ëÇÏ´Â °Í °°½À´Ï´Ù.", instance_npcname("ep19_1jorchs_39_251");
+		sleep 2000;
+		npctalk "±×·¡? ¾È ±×·¡µµ ÀÌ ¹Ù°÷ÀÌ ¸ðÇè°¡¸¦ Á» ¸¸³ª°í ½Í¾ú´Âµ¥ ¸»ÀÌÁÒ?", instance_npcname("ep19_1jorchs_37_252");
+		sleep 3000;
+		npctalk "ÀÏÀü¿£ ±ôÂïÇÑ ¼ö·Î ¹Ù°÷À» Àßµµ ¼Ó¿´°Ú´Ù?!", instance_npcname("ep19_1jorchs_37_252");
+		sleep 3000;
+		npctalk "±×·¡¼­ ³»°¡ ÁØºñÇÑ ¼±¹°ÀÌ ÀÖ¾ú´Âµ¥. ÀÌ°Í ¸»ÀÌ¾ß.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 3000;
+		npctalk "¾Æ¹«·¡µµ ´Ù¸¥ »ç¶÷µéÀÌ ¸¸³­ ¸ð¾çÀÎ°¡ º¸³×¿ä. ±æÀÌ ¾ù°¥·È¾î.", instance_npcname("ep19_1jorchs_37_252");
+		enablenpc instance_npcname("ep19_1jorchs_31_249");
+		enablenpc instance_npcname("ep19_1jorchs_47_237");
+		enablenpc instance_npcname("ep19_1jorchs_47_249");
+		enablenpc instance_npcname("ep19_1jorchs_31_237");
+		enablenpc instance_npcname("ep19_1jorchs_27_243");
+		enablenpc instance_npcname("ep19_1jorchs_50_243");
+		enablenpc instance_npcname("ep19_1jorchs_39_235");
+		npctalk "±×¾î¾î---", instance_npcname("ep19_1jorchs_31_249");
+		npctalk "±×·è--- ±¸¸£¸¤---", instance_npcname("ep19_1jorchs_47_237");
+		npctalk "¸¶... ·Á... ¤¡..", instance_npcname("ep19_1jorchs_47_249");
+		npctalk ".........", instance_npcname("ep19_1jorchs_31_237");
+		npctalk "±×¸¶... ¾Æ.. .¾È...", instance_npcname("ep19_1jorchs_27_243");
+		npctalk "¾î¾î¾î¾î--- ¾î---", instance_npcname("ep19_1jorchs_50_243");
+		npctalk "³ª... µµ...", instance_npcname("ep19_1jorchs_39_235");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_31_249");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_47_237");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_47_249");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_31_237");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_27_243");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_50_243");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_39_235");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_31_249");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_47_237");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_47_249");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_31_237");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_27_243");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_50_243");
+		specialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_39_235");
+		sleep 2500;
+		npctalk "ÇÏÁö¸¸ »ó°ü ¾ø¾î. Á÷Á¢ ÁÙ ¼ö ÀÖ¾î¼­ ¹Ù°÷Àº ±â»Ú³×.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 3000;
+		npctalk "¹Ù°÷ÀÌ ¹» ÇÒ °ÇÁö ±Ã±ÝÇß°ÚÁö? ±Ã±ÝÇßÀ¸´Ï±î À¶ÄÉ¾Æ¸¦ ±×·¸°Ô Ãæµ¿ÁúÇß°ÚÁö.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 2500;
+		npctalk "ÇÏÁö¸¸ ¹Ù°÷Àº ±×·± ¾èÀº ¼ö¿£ ³Ñ¾î°¡Áö ¾Ê¾Æ¿ä.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 3000;
+		npctalk "¿Ö³ÄÇÏ¸é ¹Ù°÷ÀÌ Á÷Á¢ ¾Ë·ÁÁÙ °Å´Ï±î. ±×·¯·Á°í ÇÊ¿ä ¾ø´Â ºÎ½º·¯±â¸¦ »Ñ·Á¼­ µû¶ó ¿À°Ô ÇßÁÒ.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 1500;
+		npctalk "¹Ù°÷ÀÌ »õ·Î ¸¸µé ¼¼»ó¿¡¼­ ³¯ÆÄ¸®°¡ °è¼Ó ºÙÀ» °Å¶ó »ý°¢ÇÏ´Ï Á¶±Ý °Å½½·Á¼­ ¸»ÀÌ¿¡¿ä.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 2500;
+		npctalk "¸¶Ä§ ¶ó½º°£µåµµ ÀÚ±â¸¦ ±â¸¸ÇÑ ÀÎ°£µé¿¡°Ô Å©°Ô ºÐ³ëÇÏ°í ÀÖ°í ¸»ÀÌ¾ß?", instance_npcname("ep19_1jorchs_37_252");
+		sleep 2500;
+		npctalk "ÀÚ, ¹Ù°÷ÀÌ ÁÖ´Â ¼±¹°ÀÌ´Ï±î ÀÌ°Å ¹Þ°í ¿©±â¼­ ÀÌ¸¸ ÅðÀåÇØÁÖ¾î¾ß°Ú¾î¿ä.", instance_npcname("ep19_1jorchs_37_252");
+		sleep 500;
+		disablenpc instance_npcname("ep19_1jorchs_37_252");
+		donpcevent instance_npcname("ep19_jorchs_area_5_2") + "::OnWave1";
+		end;
+	}
+	end;
+}
+1@jorchs,41,253,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m52::ep19_1jorchs_41_253	EP19_MD_HEARTHUNTER_AT
+1@jorchs,36,251,5	duplicate(dummy_instance_disabled_npc)	ÇÏÆ®ÇåÅÍ#19m51::ep19_1jorchs_36_251	EP19_MD_HEARTHUNTER_AT
+
+1@jorchs,37,252,5	duplicate(dummy_instance_disabled_npc)	¹Ù°÷#19m50::ep19_1jorchs_37_252	4_EP18_BAGOT
+
+1@jorchs,31,249,5	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m50::ep19_1jorchs_31_249	EP19_MD_RGAN_ES
+1@jorchs,47,237,1	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m51::ep19_1jorchs_47_237	EP19_MD_RGAN_ES
+1@jorchs,47,249,3	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m52::ep19_1jorchs_47_249	EP19_MD_RGAN_ES
+1@jorchs,31,237,7	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m53::ep19_1jorchs_31_237	EP19_MD_RGAN_ES
+1@jorchs,27,243,5	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m54::ep19_1jorchs_27_243	EP19_MD_RGAN_ES
+1@jorchs,50,243,3	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m55::ep19_1jorchs_50_243	EP19_MD_RGAN_ES
+1@jorchs,39,235,1	duplicate(dummy_instance_disabled_npc)	±¤Æ÷ÇÑ ¸£°£#19m56::ep19_1jorchs_39_235	EP19_MD_RGAN_ES
+
+
+1@jorchs,1,1,3	script	ep19_jorchs_area_5_2	-1,{
+	end;
+OnWave1:
+	.@event$ = instance_npcname("ep19_jorchs_area_5_2") + "::OnWave2";
+
+	mapannounce 'map_jorchs$, "¸¶·Â ÁÖÀÔ ÁØºñ. 1´Ü°è ¸¶·Â ÁÖÀÔÀÌ ½ÃÀÛµË´Ï´Ù.", bc_map, 0xFFCC;
+	disablenpc instance_npcname("ep19_1jorchs_35_255");
+	disablenpc instance_npcname("ep19_1jorchs_42_255");
+	monster 'map_jorchs$,35,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,42,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_37_255");
+	disablenpc instance_npcname("ep19_1jorchs_40_255");
+	monster 'map_jorchs$,37,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,40,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_31_249");
+	disablenpc instance_npcname("ep19_1jorchs_47_237");
+	monster 'map_jorchs$,31,249,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	monster 'map_jorchs$,47,237,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_31_249");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_47_237");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_31_249");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_47_237");
+	end;
+OnWave2:
+	if ('event != 25)
+		end;
+	'ep19_jorchs_area_5_2[0]++;
+	if ('ep19_jorchs_area_5_2[0] < 6)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_5_2") + "::OnWave2" ) > 0)
+		end;
+	.@event$ = instance_npcname("ep19_jorchs_area_5_2") + "::OnWave3";
+
+	mapannounce 'map_jorchs$, "¸¶·Â ÁÖÀÔ ÁØºñ. 2´Ü°è ¸¶·Â ÁÖÀÔÀÌ ½ÃÀÛµË´Ï´Ù.", bc_map, 0xFFCC;
+	sleep 6000;
+	disablenpc instance_npcname("ep19_1jorchs_34_255");
+	disablenpc instance_npcname("ep19_1jorchs_43_255");
+	monster 'map_jorchs$,34,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,43,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_38_255");
+	disablenpc instance_npcname("ep19_1jorchs_39_255");
+	monster 'map_jorchs$,38,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,39,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_36_255");
+	disablenpc instance_npcname("ep19_1jorchs_41_255");
+	monster 'map_jorchs$,36,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,41,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_47_249");
+	disablenpc instance_npcname("ep19_1jorchs_31_237");
+	monster 'map_jorchs$,47,249,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	monster 'map_jorchs$,31,237,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_47_249");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_31_237");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_47_249");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_31_237");
+	end;
+OnWave3:
+	if ('event != 25)
+		end;
+	'ep19_jorchs_area_5_2[1]++;
+	if ('ep19_jorchs_area_5_2[1] < 8)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_5_2") + "::OnWave3" ) > 0)
+		end;
+	.@event$ = instance_npcname("ep19_jorchs_area_5_2") + "::OnWave4";
+
+	mapannounce 'map_jorchs$, "¸¶·Â ÁÖÀÔ ÁØºñ. 3´Ü°è ¸¶·Â ÁÖÀÔÀÌ ½ÃÀÛµË´Ï´Ù.", bc_map, 0xFFCC;
+	sleep 6000;
+	disablenpc instance_npcname("ep19_1jorchs_35_256");
+	disablenpc instance_npcname("ep19_1jorchs_39_256");
+	monster 'map_jorchs$,35,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,39,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_37_256");
+	disablenpc instance_npcname("ep19_1jorchs_41_256");
+	monster 'map_jorchs$,37,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,41,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_38_256");
+	disablenpc instance_npcname("ep19_1jorchs_42_256");
+	monster 'map_jorchs$,38,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	monster 'map_jorchs$,42,254,"°³Á¶µÈ »ó±Þ ¸£°£","EP19_MD_RGAN_E",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_39_251");
+	disablenpc instance_npcname("ep19_1jorchs_41_253");
+	disablenpc instance_npcname("ep19_1jorchs_36_251");
+	monster 'map_jorchs$,39,250,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	monster 'map_jorchs$,36,250,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	monster 'map_jorchs$,41,252,"ÇÏÆ®ÇåÅÍ","EP19_MD_HEARTHUNTER_AT",1, .@event$;
+	sleep 4000;
+	disablenpc instance_npcname("ep19_1jorchs_27_243");
+	disablenpc instance_npcname("ep19_1jorchs_50_243");
+	disablenpc instance_npcname("ep19_1jorchs_39_235");
+	monster 'map_jorchs$,27,243,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	monster 'map_jorchs$,50,243,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	monster 'map_jorchs$,39,235,"±¤Æ÷ÇÑ ¸£°£","EP19_MD_RGAN_ES",1, .@event$;
+	// Note: only the 5th take 10% dmg
+	unitskilluseid $@mobid[0], 771, 9;	// NPC_RELIEVE_ON
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_27_243");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_50_243");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep19_1jorchs_39_235");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_27_243");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_50_243");
+	removespecialeffect EF_GLASSWALL3, AREA, instance_npcname("ep19_1jorchs_39_235");
+	end;
+OnWave4:
+	if ('event != 25)
+		end;
+	'ep19_jorchs_area_5_2[2]++;
+	if ('ep19_jorchs_area_5_2[2] < 12)
+		end;
+	if (mobcount( 'map_jorchs$, instance_npcname("ep19_jorchs_area_5_2") + "::OnWave4" ) > 0)
+		end;
+	'event = 26;
+	mapannounce 'map_jorchs$, "Àú±â°¡ ¶ó½º°£µåÀÇ °ÅÃ³ÀÎ°¡?", bc_map, 0xFFCC;
+	enablenpc instance_npcname("ep19_1jorchs_37_274");
+	setcell 'map_jorchs$,34,255,43,255,cell_walkable,1;
+	end;
+}
+
+
+1@jorchs,21,254,5	duplicate(dummy_instance_disabled_npc)	¾ÆÀ©#19m60::ep19_1jorchs_21_254	EP19_NPC_IWIN_SG
+1@jorchs,35,271,7	duplicate(dummy_instance_disabled_npc)	¹Ì¸®¾Ï#19m60::ep19_1jorchs_35_271	4_EP18_MIRIAM
+1@jorchs,36,272,7	duplicate(dummy_instance_disabled_npc)	º¸Å¬¸°µå#19m60::ep19_1jorchs_36_272	4_EP19_VOGLINDE
+1@jorchs,38,272,1	duplicate(dummy_instance_disabled_npc)	¿À·¼¸®#19m60::ep19_1jorchs_38_272	4_EP19_AURELIE
+1@jorchs,39,271,1	duplicate(dummy_instance_disabled_npc)	·¹¿Â#19m60::ep19_1jorchs_39_271	4_EP19_LEON
+1@jorchs,40,274,1	duplicate(dummy_instance_disabled_npc)	È£¸£¸£#19m60::ep19_1jorchs_40_274	EP19_NPC_IWIN_SR
+
+
+
+1@jorchs,37,274,5	script	Áß½ÉÃ³ ¹®#19m61::ep19_1jorchs_37_274	4_ENERGY_BLUE,3,3,{
+	if ('event == 26) {
+		'event = 27;
+		enablenpc instance_npcname("ep19_1jorchs_38_272");
+		sleep 500;
+		enablenpc instance_npcname("ep19_1jorchs_39_271");
+		npctalk "¸ðÇè°¡, ¹«»çÇß±¸³ª.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 1000;
+		npctalk "°©ÀÚ±â ¸¶·ÂÀÌ ÆøÁÖÇÑ »ó±Þ ¸£°£ÀÌ ´ýº­µé¾î¼­ ¹ßÀÌ ¹­¿© ÀÖ¾ú¾î¿ä.", instance_npcname("ep19_1jorchs_39_271");
+		sleep 2000;
+		enablenpc instance_npcname("ep19_1jorchs_40_274");
+		npctalk "³»~ Âü. ¿î¼ö°¡ ´õ·´°Ôµµ »ç³³´õ¶ó´Ï! ¹¹ Àú·± °ÍµéÀÌ ´Ù ÀÖ¾î?", instance_npcname("ep19_1jorchs_40_274");
+		sleep 1000;
+		enablenpc instance_npcname("ep19_1jorchs_36_272");
+		sleep 500;
+		enablenpc instance_npcname("ep19_1jorchs_35_271");
+		npctalk "º¸¾ÆÇÏ´Ï ´Ùµé ±×°É ¸¸³­ ¸ð¾çÀÌ·Î±º.", instance_npcname("ep19_1jorchs_36_272");
+		sleep 1000;
+		npctalk "¼öÈ®Àº Á» ÀÖ¾ú³ª¿ä?", instance_npcname("ep19_1jorchs_35_271");
+		sleep 2000;
+		npctalk "ÀÌ º¹ÀâÇÑ °÷À» ÇÓµíÀÌ µÚÁ®ºÁµµ ÈçÀûµµ Ã£À» ¼ö°¡ ¾ø¾ú¼Ò.", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2000;
+		npctalk "ÀÏ·ç½Ã¿ÂÀÇ ¿¬±¸µµ ¸ðµÎ Á¤¸®µÇ¾î ÀÖ¾ú°í ÀÌÁ¦ ³²Àº °÷Àº ÀÌ°÷»ÓÀÌ¾ß.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 2500;
+		npctalk "ÇÏÆ®ÇåÅÍ¸¦ ºÙÀâ¾Æ ¹°¾î ºÁµµ ¸ðµÎµé Áß½ÉÃ³·Î ÀÌµ¿Çß´Ù´øµ¥.", instance_npcname("ep19_1jorchs_36_272");
+		sleep 1500;
+		npctalk "ºñ°øÁ¤À¸·Î Å»ÃâÇÑ ÀÚµµ ¾ø¾î¿ä. ÇÒ ¼öµµ ¾ø¾ú°ÚÁö¸¸.", instance_npcname("ep19_1jorchs_35_271");
+		sleep 2000;
+		npctalk "¾Æ¹«·¡µµ ³²Àº ÀÌ°÷ÀÌ Áß½ÉÃ³ °°ÁÒ?", instance_npcname("ep19_1jorchs_39_271");
+		sleep 2000;
+		npctalk "±×·³ ÀÌ ¹®À» ¿­¸é ÀÏ·ç½Ã¿Â°ú ¶ó½º°£µå ¸ðµÎ Àâ¾ÆµéÀÏ ¼ö ÀÖ°Ú±º?", instance_npcname("ep19_1jorchs_40_274");
+		sleep 1500;
+		npctalk "»ó±Þ ¸£°£µéÀÌ »ì´ø °÷À» ¸ðµÎ ¹ö¸®°í ¾Æ¹«³ª ÃâÀÔÇÒ ¼ö ¾ø´Ù´ø °÷À¸·Î ¸ðµÎ ÀÌµ¿Çß´Ù?", instance_npcname("ep19_1jorchs_38_272");
+		sleep 2000;
+		npctalk "¿ÖÁö?", instance_npcname("ep19_1jorchs_39_271");
+		sleep 1500;
+		npctalk "ÀÏ´Ü ¿­°í º¸ÀÚ°í. Á÷Á¢ ¹°¾îº¸¸é µÇ°ÚÁö.", instance_npcname("ep19_1jorchs_40_274");
+		sleep 1000;
+		specialeffect EF_SCREEN_QUAKE, AREA, instance_npcname("ep19_1jorchs_37_274");
+		sleep 500;
+		npctalk "³Ê¹« ±»°Ô Àá°å´Âµ¥?", instance_npcname("ep19_1jorchs_39_271");
+		sleep 2000;
+		npctalk "°Å ºñ½ÇÀÌµé¸¸ ¸ðÀÎ °Å ¾Æ´ÏÀÝ¼Ò? °¡Áø°Å ´Ù ²¨³»ºÁ.", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2500;
+		specialeffect EF_M03, AREA, instance_npcname("ep19_1jorchs_37_274");
+		sleep 500;
+		specialeffect EF_NPC_EARTHQUAKE, AREA, instance_npcname("ep19_1jorchs_37_274");
+		sleep 500;
+		specialeffect EF_HYOUSYOURAKU, AREA, instance_npcname("ep19_1jorchs_37_274");
+		specialeffect EF_DESPERADO, AREA, instance_npcname("ep19_1jorchs_37_274");
+		specialeffect EF_SPREADATTACK, AREA, instance_npcname("ep19_1jorchs_37_274");
+		specialeffect EF_DRAGONFEAR, AREA, instance_npcname("ep19_1jorchs_37_274");
+		sleep 1000;
+		npctalk "´ëÃ¼ ¹®¿¡ ¹«½¼ ÁþÀ» ÇÑ °Å¾ß? ¿­¾î! ¿­¶ó°í!!! ¾È¿¡ ÀÖ´Â °Å ´Ù ¾Ë¾Æ!!", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2000;
+		npctalk "ÇÏÆ®ÇåÅÍ¿¡°Ô¼­ ÀÔ¼öÇÑ Å°·Îµµ ¿­ ¼ö°¡ ¾ø¾ú¾î.", instance_npcname("ep19_1jorchs_36_272");
+		sleep 1500;
+		npctalk "¸¶·ÂÀ» ÁÖÀÔÇØµµ ¸¶Âù°¡Áö¾ß.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 1500;
+		npctalk "±×¾ß¸»·Î ³­°øºÒ¶ôÀÇ ¿ä»õ·Î±º?", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2000;
+		npctalk "±×·³ ÀÌ°÷¿¡ °¨½Ã¸¦ ¼¼¿ì°í ¿À´ÃÀº ÀÌÂë¿¡¼­ ¹°·¯³ª¾ß°Ú±º¿ä.", instance_npcname("ep19_1jorchs_36_272");
+		sleep 2000;
+		npctalk "¸£°£ÀÇ ¼Ò±¼Àº ¾îÂ¼°Ú¼Ò? ºÒÅÂ¿ï±î?", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2000;
+		npctalk "À½, ¿©±ä ±×³É µÎ´Â °ÍÀÌ ÁÁ°Ú¾î.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 2500;
+		npctalk "¿ì¸®°¡ Æ÷±âÇÏ°í ¶°³µ´Ù°í ¹Ïµµ·Ï?", instance_npcname("ep19_1jorchs_39_271");
+		sleep 2000;
+		npctalk "±×·¡. ±×·³ ¹æ½ÉÇÑ ¾î´À ¼ø°£ ¹®À» ¿­°í ³ª¿Ã ¼öµµ ÀÖ°ÚÁö.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 1500;
+		npctalk "º°·Î ¸¶À½¿¡ µéÁø ¾ÊÁö¸¸ º° ´Ù¸¥ ¼ö°¡ ¾øÀ¸´Ï ÀÌ°÷ÀÇ °¨½Ã¸¦ °­È­ÇØ¾ß°Ú¼Ò.", instance_npcname("ep19_1jorchs_40_274");
+		sleep 2000;
+		npctalk "ÀÌ¸¸ °¡Áö. Àú ¹Ø¿¡ ¿öÇÁÆ÷Å»À» ¿­¾îÁÙ Å×´Ï µ¹¾Æ°¥ ¶© ÆíÇÏ°Ô °¡ÀÚ.", instance_npcname("ep19_1jorchs_38_272");
+		sleep 500;
+		enablenpc instance_npcname("#19m60");
+		specialeffect EF_ELECTRIC4, AREA, instance_npcname("#19m60");
+		specialeffect EF_YELLOWFLY3, AREA, instance_npcname("#19m60");
+		end;
+	}
+	end;
+}
+
+1@jorchs,36,257,0	script	#19m60	WARPNPC,2,2,{
+	if ('event == 27 && ep19_main == 60) {
+		erasequest 17648;
+		setquest 17649;
+		ep19_main = 61;
+	}
+	warp "jor_back3",67,316;
+	end;
+}

@@ -1,0 +1,121 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2023 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Rune Decomposition
+###########################################################################
+#
+# Rune Decomposition Settings
+#
+###########################################################################
+# - Id                         Client side LUB index. (itemDecomType_tbl in itemDecom.lub)
+#   Materials:                 Rune provided when an item is decomposed
+#     - Material               Name of the item
+#       Amountmin              Min amount provided
+#       Amountmax              Max amount provided
+#       Chance                 Chance of having the item
+###########################################################################
+
+Header:
+  Type: RUNE_DECOMPO_DB
+  Version: 1
+
+Body:
+  - Id: 1
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 1
+        Amountmax: 3
+        Chance: 100000
+  - Id: 2
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 33
+        Amountmax: 99
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 1
+        Amountmax: 1
+        Chance: 25000
+  - Id: 3
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 8
+        Amountmax: 12
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 1
+        Amountmax: 1
+        Chance: 1000
+  - Id: 4
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 250
+        Amountmax: 375
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 3
+        Amountmax: 5
+        Chance: 100000
+  - Id: 5
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 1
+        Amountmax: 2
+        Chance: 100000
+  - Id: 6
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 33
+        Amountmax: 66
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 1
+        Amountmax: 1
+        Chance: 5000
+  - Id: 11
+    Materials:
+      - Material: Perfect_Rune
+        Amountmin: 1
+        Amountmax: 1
+        Chance: 100000
+  - Id: 12
+    Materials:
+      - Material: Perfect_Rune
+        Amountmin: 30
+        Amountmax: 30
+        Chance: 100000
+  - Id: 13
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 6
+        Amountmax: 10
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 1
+        Amountmax: 1
+        Chance: 25000
+  - Id: 14
+    Materials:
+      - Material: Imperfect_Rune
+        Amountmin: 200
+        Amountmax: 330
+        Chance: 100000
+      - Material: Perfect_Rune
+        Amountmin: 7
+        Amountmax: 30
+        Chance: 100000

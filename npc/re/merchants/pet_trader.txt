@@ -7,20 +7,20 @@
 //= 1.0 First version [Latiosu]
 //============================================================
 
-prontera,210,209,5	script	Pet Trader#1	4_M_JPNOJI,{
+prontera,210,209,5	script	펫 트레이더::Pet Trader#1	4_M_JPNOJI,{
 	disable_items;
-	mes "[Pet Trader]";
-	mes "Making a living through business ain't easy.";
-	mes "I get real bad motion sickness, yet today I got caught up in a storm on my way here.";
+	mes "[펫 트레이더]";
+	mes "펫 교환 쿠폰을 가져 오시면";
+	mes "해당 펫으로 교환 해드립니다.";
 	next;
-	mes "[Pet Trader]";
-	mes "It was such a horrible experience. Thanks to that, I don't feel so good. Ughh...";
+	mes "[펫 트레이더]";
+	mes "정말 끔찍한 경험이었어. 덕분에 기분이 별로 좋지 않아. 윽...";
 	next;
-	mes "[Pet Trader]";
-	mes "Anyway, did you come here looking for a Cute Pet?";
-	mes "You've brought a ticket with you, right?";
+	mes "[펫 트레이더]";
+	mes "그나저나 귀여운 펫 찾으러 오셨나요?";
+	mes "티켓을 가지고 오셨죠?";
 	next;
-	switch (select("Examine your tickets:Cancel")) {
+	switch (select("교환한다:취소")) {
 	case 1:
 		setarray .@tickets,
 			6116, //Succu_Pet_Coupon
@@ -130,40 +130,41 @@ prontera,210,209,5	script	Pet Trader#1	4_M_JPNOJI,{
 		}
 
 		if (.@count == 0) {
-			mes "[Pet Trader]";
-			mes "I don't think you've got the stuff I want.";
+			mes "[펫 트레이더]";
+			mes "티켓 확인후에 말씀해주세요.";
 			close;
 		}
 
-		mes "[Pet Trader]";
-		mes "Which ticket do you want to exchange?";
+		mes "[펫 트레이더]";
+		mes "어떤 티켓을 교환하시겠습니까?";
 		next;
 		.@index = .@ticketIndices[select(.@menu$) - 1];
 
-		mes "[Pet Trader]";
-		mes "Great!";
+		mes "[펫 트레이더]";
+		mes "좋습니다!";
 		mes "^0000FF"+ getitemname(.@eggs[.@index]) +"^000000";
-		mes "Are you sure you want this pet?";
+		mes "이 펫을 정말로 원하시나요?";
 		next;
 		if (select("Yes:No") == 2) close;
 		if (!checkweight(.@eggs[.@index], 1)) {
-			mes "You're carrying too much stuff!";
-			mes "Come back when you've made some space.";
+			mes "짐이 너무 많으신거 같은데요?";
+			mes "인벤토리를 비워주신 후 시도해 주세요.";
 			close;
 		}
 
-		mes "[Pet Trader]";
-		mes "Here's your pet~";
+		mes "[펫 트레이더]";
+		mes "여기 있습니다~";
+		mes "많이 이뻐해주세요!";
 		delitem .@tickets[.@index], 1;
 		getitem .@eggs[.@index], 1;
 		close;
 	case 2:
-		mes "[Pet Trader]";
-		mes "So you want hear about the land across the sea, but I ain't feeling so well today.";
+		mes "[펫 트레이더]";
+		mes "확인 후 다시 말씀해주세요~";
 		close;
 	}
 	end;
 }
 
 // Duplicate NPCs
-alberta,179,141,5	duplicate(Pet Trader#1)	Pet Trader#2	4_M_JPNOJI
+alberta,179,141,5	duplicate(Pet Trader#1)	펫 트레이더#2	4_M_JPNOJI

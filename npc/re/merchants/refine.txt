@@ -22,10 +22,10 @@
 
 // +11 and above Refiners
 //============================================================
-prt_in,90,72,5	script	Vestri#prt	4_M_DWARF,{
+prt_in,90,72,5	script	베스트리::Vestri#prt	4_M_DWARF,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[Vestri]";
-		mes "I'm the most skillful blacksmith!";
+		mes "[베스트리]";
+		mes "나는 최고의 대장장이다!";
 		close2;
 		refineui();
 		end;
@@ -53,13 +53,13 @@ function	script	refinenew	{
 	.@npc_name$ = getarg(0);
 	disable_items;
 	mes "["+ .@npc_name$ +"]";
-	mes "I am the best Armsmith ever!";
-	mes "I don't refine normal, boring items.";
-	mes "I only refine items that are Level 10 or higher.";
+	mes "나는 최고의 Armsmith입니다!";
+	mes "저는 평범하고 지루한 아이템은 개조하지 않아요.";
+	mes "10레벨 이상의 아이템만 제련하고 있습니다.";
 	next;
 	mes "["+ .@npc_name$ +"]";
-	mes "Anyway, you may use my services if your item is Level 10 or higher.";
-	mes "What do you want me to refine?";
+	mes "어차피, 아이템 레벨이 10 이상이면 서비스를 이용하실 수 있습니다.";
+	mes "무엇을 다듬고 싶나요?";
 	next;
 
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
@@ -72,36 +72,36 @@ function	script	refinenew	{
 	}
 	if (.@equipped == 0) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I don't think I can refine any items you have...";
+		mes "당신이 가지고 있는 어떤 아이템도 개선할 수 없을 것 같아요...";
 		close;
 	}
 	.@part = .@indices[ select(.@menu$) ];
 
 	if (!getequipisequiped(.@part)) { //custom check
 		mes "["+ .@npc_name$ +"]";
-		mes "You're not wearing";
-		mes "anything there that";
-		mes "I can refine.";
+		mes "당신은 옷을 입지 않았습니다";
+		mes "그거 뭐든지";
+		mes "수정할 수 있어요.";
 		emotion ET_FRET;
 		close;
 	}
 	if (!getequipisenableref(.@part)) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I don't think I can";
-		mes "refine this item at all...";
+		mes "난 할 수 없을 것 같아";
+		mes "이 항목을 전혀 개선하지 마세요...";
 		close;
 	}
 	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
 	if (.@refinerycnt < 10) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I said I don't work with items that are lower than Level 10.";
+		mes "10레벨 이하의 아이템은 작업하지 않는다고 했는데요.";
 		close;
 	}
 	if (.@refinerycnt >= 20) { //custom check
 		mes "["+ .@npc_name$ +"]";
-		mes "I can't refine this";
-		mes "any more. This is as";
-		mes "refined as it gets!";
+		mes "이건 개선할 수가 없어요";
+		mes "더 이상. 이건";
+		mes "최선을 다해!";
 		close;
 	}
 	.@refineitemid = getequipid(.@part); // save id of the item
@@ -123,42 +123,42 @@ function	script	refinenew	{
 	}
 
 	mes "["+ .@npc_name$ +"]";
-	mes "Hmm " + .@article$ + " " + .@type$ + ", is that ok?";
-	mes "If you want to refine this " + .@type$ + ",";
-	mes "I will need 1 ^003366" + getitemname(.@material) + "^000000 and " + callfunc("F_InsertComma",.@price) + " zeny.";
-	mes "Are you sure you want to continue?";
+	mes "흠 " + .@article$ + " " + .@type$ + ", 그 확인은?";
+	mes "이것을 다듬고 싶다면 " + .@type$ + ",";
+	mes "1^003366이 필요합니다." + getitemname(.@material) + "^000000 그리고 " + callfunc("F_InsertComma",.@price) + " zeny.";
+	mes "너 정말 계속하고 싶니?";
 	next;
 	if (select("Yes:No") == 2) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Hm... if you mind... never mind...";
+		mes "흠... 괜찮다면... 신경쓰지 마세요...";
 		close;
 	}
 	if (getarg(1) != 1) {
 		if (getequippercentrefinery(.@part) < 100) {
 			mes "["+ .@npc_name$ +"]";
-			mes "This "+.@type$+" already has been refined several times.";
-			mes "It could be destroyed if I try again.";
-			mes "It won't break for sure, but there is has a small chance.";
+			mes "이것 "+.@type$+" 이미 여러번 다듬어져.";
+			mes "다시 시도하면 파괴될 수 있습니다.";
+			mes "확실히 깨지지는 않겠지만 가능성은 조금 있습니다.";
 			next;
 			mes "["+ .@npc_name$ +"]";
-			mes "You could be ^FF0000lowering the upgrade level^000000 of the "+.@type$+",";
-			mes "or if it breaks, you will lose ^FF0000any cards^000000 or special properties added to it.";
+			mes "당신은 ^FF0000업그레이드 레벨을 낮출 수 있습니다^000000"+.@type$+",";
+			mes "또는 깨지면 ^FF0000모든 카드^000000 또는 추가된 특수 속성을 잃게 됩니다.";
 			next;
 			mes "["+ .@npc_name$ +"]";
-			mes "Do you still want me to refine it?";
-			mes "I think I have given you enough warning.";
+			mes "아직도 제가 다듬기를 원하시나요?";
+			mes "충분히 경고한 것 같습니다.";
 			next;
-			if(select("Yes.:No.") == 2) {
+			if(select("예 아니오.") == 2) {
 				mes "["+ .@npc_name$ +"]";
-				mes "Well, no challenge is one way to go...";
-				mes "No risk... that could be wise.";
+				mes "글쎄, 도전에는 한 가지 방법만 있는 게 아니지...";
+				mes "위험은 없어요... 그게 현명할 수도 있어요.";
 				close;
 			}
 		}
 		if (countitem(.@material) < 1 || Zeny < .@price) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Hm. You don't seem to have enough money or "+getitemname(.@material)+".";
-			mes "Please come back when you have them.";
+			mes "흠. 돈이 부족한 것 같던데."+getitemname(.@material)+".";
+			mes "갖고 나면 다시 오세요.";
 			close;
 		}
 		Zeny = Zeny - .@price;
@@ -169,61 +169,61 @@ function	script	refinenew	{
 		    callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
 			mes "["+ .@npc_name$ +"]";
 			emotion ET_FRET;
-			mes "Wait a second...";
-			mes "Do you think I'm stupid?!";
-			mes "You switched the item while I wasn't looking! Get out of here!";
+			mes "잠깐만요...";
+			mes "내가 바보라고 생각해요?!";
+			mes "내가 보지 않는 동안 아이템을 바꾸셨네요! 여기서 나가세요!";
 			close;
 		}
 
 		if (getequippercentrefinery(.@part) > rand(100)) {
-			mes "Clang! Clang! Clang! Clang!";
+			mes "꽝! 꽝! 꽝! 꽝! 꽝!";
 			successrefitem .@part;
 			next;
 			emotion ET_BEST;
 			mes "["+ .@npc_name$ +"]";
-			mes "Good! Succes!!!";
-			mes "I am the best Armsmith.";
+			mes "좋아요! 성공했어요!!!";
+			mes "나는 최고의 대장장이이다.";
 			close;
 		} else {
 			if (rand(100) < 80) {
 				mes "["+ .@npc_name$ +"]";
-				mes "Clang! Clang! Clang! Clang!";
+				mes "그 소리! 그 소리! 그 소리! 그 소리!";
 				downrefitem .@part,3; // Failed refine attempts decrease the item's refine level by 3
 				next;
 				emotion (!rand(5))?ET_MONEY:ET_HUK;
 				mes "["+ .@npc_name$ +"]";
-				mes "Ahhh!!!";
+				mes "아아아!!!";
 				next;
 				mes "["+ .@npc_name$ +"]";
-				mes "Oh my god!";
-				mes "The upgrade level has dropped...";
+				mes "맙소사!";
+				mes "업그레이드 레벨이 떨어졌어요...";
 			} else {
 				mes "["+ .@npc_name$ +"]";
-				mes "Clang! Clang! Clang!";
+				mes "꽝! 꽝! 꽝! 꽝!";
 				failedrefitem .@part;
 				next;
 				emotion (!rand(5))?ET_MONEY:ET_HUK;
 				mes "["+ .@npc_name$ +"]";
-				mes "Hmmm!";
+				mes "흠!";
 				next;
 				mes "["+ .@npc_name$ +"]";
-				mes "Oh my! I've failed to refine stuff...";
-				mes "I didn't mean it!";
+				mes "어머! 다듬는데 실패했어요...";
+				mes "그런 뜻이 아니었어요!";
 			}
-			mes "I could have made a mistake even though I am the best Armsmith ever.";
-			mes "It just wasn't meant to be.";
+			mes "내가 최고의 제련사임에도 불구하고 실수를 할 수도 있었습니다.";
+			mes "그냥 그럴 의도는 아니었어요.";
 			next;
 			mes "["+ .@npc_name$ +"]";
-			mes "I will do a better job next time! Don't worry!";
+			mes "다음에는 더 잘할께요! 괜찮아요!";
 			close;
 		}
 	}
 // New +11 and above Refining Functions ========================
 	if (.@refinerycnt < .@safe) {
 		mes "["+ .@npc_name$ +"]";
-		mes "I can refine this to the safe limit or a desired number of times. It's your choice.";
+		mes "이를 안전 한도 또는 원하는 횟수로 세분화할 수 있습니다. 그것은 당신의 선택입니다.";
 		next;
-		.@menu2 = select("To the safe limit, please.","I'll decide how many times.","I've changed my mind...");
+		.@menu2 = select("안전한 한도까지 부탁드립니다.","몇번인지는 제가 정하겠습니다.","마음이 바뀌었어요...");
 	} else
 		.@menu2 = 2;
 	switch(.@menu2){
@@ -232,45 +232,45 @@ function	script	refinenew	{
 		break;
 	case 2:
 		mes "["+ .@npc_name$ +"]";
-		mes "How many times would you like me to refine your item?";
+		mes "귀하의 아이템을 몇 번이나 수정하시겠습니까?";
 		next;
 		input .@refinecnt;
 		.@refinecheck = .@refinecnt + .@refinerycnt;
 		if (.@refinecnt < 1 || .@refinecheck > 20) {
 			mes "["+ .@npc_name$ +"]";
-			mes "I can't refine this item that many times.";
+			mes "이 아이템은 그렇게 여러 번 정제할 수 없습니다.";
 			close;
 		}
 		if (.@refinecheck > .@safe) {
 			.@refinecheck = .@refinecheck - .@safe;
 			mes "["+ .@npc_name$ +"]";
-			mes "This will try to refine the equipment " + .@refinecheck + " times past the safe limit. Your equipment may be destroyed... is that ok?";
+			mes "이것은 장비를 개선하려고 노력할 것입니다 " + .@refinecheck + "안전 한도를 초과한 횟수입니다. 장비가 파손될 수 있으니...괜찮나요?";
 			next;
-			if(select("Yes...","No...") == 2){
+			if(select("예...","아니요...") == 2){
 				mes "["+ .@npc_name$ +"]";
-				mes "You said so... So be it.";
+				mes "그렇게 말했잖아요...그렇게 하세요.";
 				close;
 			}
 		}
 		break;
 	case 3:
 		mes "["+ .@npc_name$ +"]";
-		mes "You said so... So be it.";
+		mes "그렇게 말했잖아요...그렇게 하세요.";
 		close;
 	}
 	.@fullprice = .@price * .@refinecnt;
 	mes "["+ .@npc_name$ +"]";
-	mes "That will cost you " + .@refinecnt + " " + getitemname(.@material) + " and " + .@fullprice + " Zeny. Is that ok?";
+	mes "그러면 비용이 들게 됩니다" + .@refinecnt + " " + getitemname(.@material) + " 그리고" + .@fullprice + " 제니. 그 확인은?";
 	next;
 	if(select("Yes:No...") == 2){
 		mes "["+ .@npc_name$ +"]";
-		mes "You said so... So be it.";
+		mes "그렇게 말했잖아요... 그렇게 하세요.";
 		close;
 	}
 	if (countitem(.@material) < .@refinecnt || Zeny < .@fullprice) {
 		mes "["+ .@npc_name$ +"]";
-		mes "Hm. You don't seem to have enough money or "+getitemname(.@material)+".";
-		mes "Please come back when you have them.";
+		mes "흠. 돈이 부족한 것 같거나 "+getitemname(.@material)+".";
+		mes "가지고 계시면 다시 오세요.";
 		close;
 	}
 	Zeny = Zeny - .@fullprice;
@@ -278,7 +278,7 @@ function	script	refinenew	{
 	while(.@refinecnt){
 		if (getequipisequiped(.@part) == 0) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Look here... you don't have any items on...";
+			mes "여기 보세요... 아이템이 하나도 없어요...";
 			close;
 		}
 		// anti-hack
@@ -288,77 +288,77 @@ function	script	refinenew	{
 
 		if (getequipid(.@part) != .@refineitemid || (.@menu2 == 1 && getequippercentrefinery(.@part) < 100)) {
 			mes "["+ .@npc_name$ +"]";
-			mes "Clang... No, but did you imagine I could be so stupid?!";
-			mes "You changed it...";
-			mes "Get out before I stun you with my Hammer!!";
+			mes "삑삑... 아니, 그런데 내가 이렇게 멍청할 수 있을 거라고 상상이나 했어?!";
+			mes "바꾸셨군요...";
+			mes "내가 망치로 널 기절시키기 전에 나가!!";
 			close;
 		}
 		if (getequippercentrefinery(.@part) > rand(100)) {
-			mes "Clang! Clang! Clang! Clang!";
+			mes "꽝! 꽝! 꽝! 꽝! 꽝!";
 			successrefitem .@part;
 			.@refinecnt = .@refinecnt - 1;
 			next;
 		} else {
 			if (rand(100) < 80) {
 				mes "["+ .@npc_name$ +"]";
-				mes "Clang! Clang! Clang! Clang!";
+				mes "꽝! 꽝! 꽝! 꽝! 꽝!";
 				downrefitem .@part,3; // Failed refine attempts decrease the item's refine level by 3
 				next;
 				emotion (!rand(5))?ET_MONEY:ET_HUK;
 				mes "["+ .@npc_name$ +"]";
-				mes "Ahhh!!!";
+				mes "아아아!!!";
 				next;
 				mes "["+ .@npc_name$ +"]";
-				mes "Oh my god!";
-				mes "The upgrade level has dropped...";
+				mes "맙소사!";
+				mes "업그레이드 레벨이 떨어졌어요...";
 			} else {
 				mes "["+ .@npc_name$ +"]";
-				mes "Clang! Clang! Clang!";
+				mes "꽝! 꽝! 꽝! 꽝!";
 				failedrefitem .@part;
 				next;
 				emotion (!rand(5))?ET_MONEY:ET_HUK;
 				mes "["+ .@npc_name$ +"]";
-				mes "Hmmm!";
+				mes "흠!";
 				next;
 				mes "["+ .@npc_name$ +"]";
-				mes "Oh my! I've failed to refine stuff...";
-				mes "I didn't mean it!";
+				mes "어머! 다듬는데 실패했어요...";
+				mes "그런 뜻이 아니었어요!";
 			}
-			mes "I could have made a mistake even though I am the best Armsmith ever.";
-			mes "It just wasn't meant to be.";
+			mes "내가 최고의 Armsmith임에도 불구하고 실수를 할 수도 있었습니다.";
+			mes "그냥 그럴 의도는 아니었어요.";
 			next;
 			mes "["+ .@npc_name$ +"]";
-			mes "I will do a better job next time! Don't worry!";
+			mes "다음에는 더 잘할께요! 걱정하지 마세요!";
 			close;
 		}
 		.@refinerycnt = getequiprefinerycnt(.@part);
 	}
 	emotion ET_BEST;
 	mes "["+ .@npc_name$ +"]";
-	mes "Good! Succes!!!";
-	mes "I am the best Blacksmith.";
+	mes "좋아요! 성공했어요!!!";
+	mes "나는 최고의 대장장이이다.";
 	close;
 }
 
 // Ori/Elu to Carnium/Bradium Refiners
 //============================================================
--	script	Austri#ref	-1,{
+-	script	오스트리아::Austri#ref	-1,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a minute !! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please try again -";
-		mes "- after you lose some weight. -";
+		mes "- 잠깐만요 !! -";
+		mes "- 현재 당신은 -";
+		mes "- 아이템이 너무 많아요. -";
+		mes "- 다시 시도해 주세요 -";
+		mes "- 살을 좀 뺀 후. -";
 		close;
 	}
-	mes "[Austri]";
-	mes "If you bring me 3";
-	mes "Oridecon or Elunium";
-	mes "I can exchange them for";
-	mes "Bradium or Carnium.";
-	mes "Just give me 50,000z.";
+	mes "[오스트리아]";
+	mes "3개 가져오시면";
+	mes "오리데콘 또는 엘루니움";
+	mes "교환할 수 있어요";
+	mes "브라듐 또는 카르늄.";
+	mes "50,000z만 주세요.";
 	next;
-	switch(select("Oridecon to Bradium.:Elunium to Carnium.:Purified Bradium to Carnium.:No thanks.")) {
+	switch(select("오리데콘에서 브라듐으로.:엘루늄에서 카르늄으로.:정제된 브라듐에서 카르늄으로.:안 돼요.")) {
 	case 1:
 		setarray .@i[0],984,3,6224;  //Oridecon -> Bradium
 		break;
@@ -369,90 +369,90 @@ function	script	refinenew	{
 		setarray .@i[0],6090,1,6223; //Purified_Bradium -> Carnium
 		break;
 	case 4:
-		mes "[Austri]";
-		mes "Hmm...";
+		mes "[오스트리아]";
+		mes "흠...";
 		close;
 	}
 	if (countitem(.@i[0]) >= .@i[1] && Zeny >= 50000) {
 		delitem .@i[0],.@i[1];
 		Zeny = Zeny - 50000;
 		getitem .@i[2],1;
-		mes "[Austri]";
+		mes "[오스트리아]";
 		if (.@i[0] == 6090) {
-			mes "Refining with Refined Bradium";
-			mes "can be a little expensive.";
-			mes "I can exchange it for some Carnium.";
+			mes "정제된 브라듐으로 정제하기";
+			mes "조금 비쌀 수 있어요.";
+			mes "카늄으로 교환할 수 있어요.";
 		} else
-			mes "Ok! Here's your "+getitemname(.@i[2])+".";
-		mes "Take it and use it well.";
+			mes "알겠습니다! 여기 당신의 "+getitemname(.@i[2])+".";
+		mes "가져가서 잘 사용하세요.";
 		close;
 	}
-	mes "[Austri]";
-	mes "You better not be trying";
-	mes "to cheat me because you";
-	mes "don't have enough money";
-	mes "or "+getitemname(.@i[0])+".";
+	mes "[오스트리아]";
+	mes "노력하지 않는 게 좋을 것 같아요";
+	mes "당신 때문에 나를 속이려고요";
+	mes "돈이 부족해요";
+	mes "또는 "+getitemname(.@i[0])+".";
 	close;
 }
-prt_in,85,71,5	duplicate(Austri#ref)	Austri#prt	826
-payon_in01,14,125,5	duplicate(Austri#ref)	Austri#pay	826
-morocc_in,60,38,5	duplicate(Austri#ref)	Austri#moc	826
+prt_in,85,71,5	duplicate(Austri#ref)	오스트리아::Austri#prt	826
+payon_in01,14,125,5	duplicate(Austri#ref)	오스트리아::Austri#pay	826
+morocc_in,60,38,5	duplicate(Austri#ref)	오스트리아::Austri#moc	826
 
 // Malangdo Refiner
 //============================================================
-malangdo,224,172,6	script	Clink#mal_normal	544,{
+malangdo,224,172,6	script	쨍그랑::Clink#mal_normal	544,{
 	disable_items;
-	mes "[Clink]";
-	mes "My cool dad Holink said I have the world's greatest refine hammer!!";
-	mes "Meow Meow~";
-	mes "Who do you think I am?";
-	mes "Yes!!! You!! You want to refine?";
+	mes "[쨍그랑]";
+	mes "멋진 울 아빠 홀라당!!";
+	mes "뭔가 더 큰 일을 하러";
+	mes "수련을 떠난다 하셨다냥?";
+	mes "그래!!! 너!! 제련하게?";
 	next;
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
 	for(.@i = 1; .@i<=10; set .@i,.@i+1)
 		.@menu$ = .@menu$ + ( getequipisequiped(.@indices[.@i]) ? getequipname(.@indices[.@i]) : F_getpositionname(.@indices[.@i]) +"-[Empty]" ) +":";
 	.@part = .@indices[ select(.@menu$) ];
 	if (!getequipisequiped(.@part)) {
-		mes "[Clink]";
+		mes "[쨍그랑]";
 		switch(.@part) {
 		case EQI_HEAD_TOP:
-			mes "Dad said. There's no cure for stupidity...";
+			mes "아빠가 그러셨어요. 어리석음에는 치료법이 없어요...";
 			break;
 		case EQI_ARMOR:
-			mes "There's nothing to see here!!";
+			mes "여기엔 볼게 하나도 없어!!";
 			break;
 		case EQI_HAND_L:
-			mes "What an arrogant left hand this is!";
+			mes "이건 정말 오만한 왼손이군요!";
 			break;
 		case EQI_HAND_R:
-			mes "What an arrogant right hand this is!";
+			mes "이건 정말 오만한 오른손이군요!";
 			break;
 		case EQI_GARMENT:
-			mes "Get that dirty thing off my face!!";
+			mes "그 더러운 것을 내 얼굴에서 치워주세요!!";
 			break;
 		case EQI_SHOES:
-			mes "Kyaong~! Do not provoke me.";
+			mes "캬옹~! 자극하지 마세요.";
 			break;
 		case EQI_ACC_L:
 		case EQI_ACC_R:
-			mes "Where is the accessory?";
+			mes "액세서리는 어디에 있나요?";
 			break;
 		case EQI_HEAD_MID:
 		case EQI_HEAD_LOW:
-			mes "Are you talking about the other head part?";
+			mes "머리 부분을 말씀하시는 건가요?";
 			break;
 		}
 		close;
 	}
 	if (!getequipisenableref(.@part)) {
-		mes "[Clink]";
-		mes "This can't be refined!!";
+		mes "[쨍그랑]";
+		mes "이건 정제할 수 없어!!";
 		close;
 	}
 	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
 	if (.@refinerycnt >= 10) {
-		mes "[Clink]";
-		mes "Perfect refining. Did I do this for you?";
+		mes "[쨍그랑]";
+		mes "완벽하게 다듬어졌네요. 제가 당신을 위해 이 일을 한건가요?";
 		close;
 	}
 	
@@ -461,12 +461,12 @@ malangdo,224,172,6	script	Clink#mal_normal	544,{
 	.@price = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_ZENY_COST);
 	.@material = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_MATERIAL_ID);
 	.@itemtype = getiteminfo( .@refineitemid, ITEMINFO_TYPE );
-	mes "[Clink]";
+	mes "[쨍그랑]";
 	if( .@itemtype == IT_ARMOR ){
 		switch( getequiparmorlv( .@part ) ){
 			case 1: // Armor
 				.@type$ = "armor";
-				mes "Hmm, an armor refine? Someone like you?";
+				mes "흠, 방어구 개선? 너 같은 사람?";
 				break;
 			default:
 				// TODO:
@@ -476,20 +476,20 @@ malangdo,224,172,6	script	Clink#mal_normal	544,{
 		switch( getequipweaponlv( .@part ) ){
 			case 1: // Level 1 Weapon
 				.@type$ = "weapon";
-				mes "A level 1 weapon?";
-				mes "Urr... Annoying... Okay, let's try...";
+				mes "레벨 1 무기요?";
+				mes "어... 짜증나... 자, 한번 해보자...";
 				break;
 			case 2: // Level 2 Weapon
 				.@type$ = "weapon";
-				mes "A level 2 weapon?";
+				mes "레벨 2 무기요?";
 				break;
 			case 3: // Level 3 Weapon
 				.@type$ = "weapon";
-				mes "Woot!! A level 3 weapon? Impressive~";
+				mes "우와!! 3레벨 무기라니? 대단하네요~";
 				break;
 			case 4: // Level 4 Weapon
 				.@type$ = "weapon";
-				mes "Wow!... A level 4 weapon~!!";
+				mes "와!...4레벨 무기다~!!";
 				break;
 			default:
 				// TODO:
@@ -499,37 +499,37 @@ malangdo,224,172,6	script	Clink#mal_normal	544,{
 		// TODO:
 		close;
 	}
-	mes "You need ^ff9999"+getitemname(.@material)+"^000000 and ^ff9999"+.@price+"^000000 Zeny. Do you have them?";
+	mes "^ff9999가 필요해요"+getitemname(.@material)+"^000000 그리고 ^ff9999"+.@price+"^000000 Zeny. 가지고 있나요?";
 	next;
-	if(select("Yes, I do!!:Forget about it!!") == 2) {
-		mes "[Clink]";
-		mes "I knew it!!";
-		mes "I knew you were not worth trying my magical refining hammer for.";
+	if(select("네, 그렇습니다!!:잊으세요!!") == 2) {
+		mes "[쨍그랑]";
+		mes "알고 있었어요!!";
+		mes "내 마법의 제련 망치를 당신에게 시험할 가치가 없다는 걸 알았습니다.";
 		close;
 	}
 	if (getequippercentrefinery(.@part) < 100) {
-		mes "[Clink]";
-		mes "Wow!!";
-		mes "This "+.@type$+" has been refined quite a bit, huh?";
-		mes "You do know that this might break, right?";
+		mes "[쨍그랑]";
+		mes "와!!";
+		mes "이것 "+.@type$+" 꽤 다듬어졌죠?";
+		mes "이거 깨질 수도 있다는 거 아시죠?";
 		next;
-		mes "[Clink]";
-		mes "If you break the "+.@type$+", you can never use it again.";
-		mes "Cards and enchant effects...";
-		mes "the ^ff0000whole thing will disappear^000000.";
-		mes "You still up for this~?";
+		mes "[쨍그랑]";
+		mes "당신이 "+.@type$+", 다시는 사용할 수 없습니다.";
+		mes "카드와 마법부여 효과...";
+		mes "^ff0000모든 것이 사라질 것입니다^000000.";
+		mes "아직도 하고 계시나요~?";
 		next;
-		if(select("Yes, I am!!:Forget about it!!") == 2) {
-			mes "[Clink]";
-			mes "I knew it!!";
-			mes "You can't even take this big step. Don't think about refining...";
+		if(select("예, 저는!!:잊어버리세요!!") == 2) {
+			mes "[쨍그랑]";
+			mes "알고 있었어요!!";
+			mes "이렇게 큰 발걸음도 못 딛어요. 다듬을 생각도 하지 마세요...";
 			close;
 		}
 	}
 	if (countitem(.@material) == 0 || Zeny < .@price) {
-		mes "[Clink]";
-		mes "Hey you!! Didn't I tell you";
-		mes "that you need ^ff9999"+getitemname(.@material)+"^000000 and ^ff9999"+.@price+"^000000 Zeny??!!";
+		mes "[쨍그랑]";
+		mes "안녕하세요!! 제가 말하지 않았나요";
+		mes "^ff9999가 필요해요"+getitemname(.@material)+"^000000 그리고 ^ff9999"+.@price+"^000000 Zeny??!!";
 		close;
 	}
 	delitem .@material,1;
@@ -538,18 +538,18 @@ malangdo,224,172,6	script	Clink#mal_normal	544,{
 	// anti-hack
 	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
 		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
-		mes "[Clink]";
+		mes "[쨍그랑]";
 		emotion ET_FRET;
-		mes "Wait a second...";
-		mes "Do you think I'm stupid?!";
-		mes "You switched the item while I wasn't looking! Get out of here!";
+		mes "잠깐만요...";
+		mes "내가 바보라고 생각해요?!";
+		mes "내가 보지 않는 동안 아이템을 바꾸셨네요! 여기서 나가세요!";
 		close;
 	}
 
 	if (getequippercentrefinery(.@part) <= rand(100)) {
 		failedrefitem .@part;
-		mes "[Clink]";
-		mes "Cry Hammer!! Cry!!!";
+		mes "[쨍그랑]";
+		mes "해머 울어!! 울어!!!";
 		next;
 		switch(rand(1,5)) {
 			case 1: emotion ET_CRY; break;
@@ -558,29 +558,29 @@ malangdo,224,172,6	script	Clink#mal_normal	544,{
 			case 4: emotion ET_SCRATCH; break;
 			case 5: emotion ET_BIGTHROB; break;
 		}
-		mes "[Clink]";
-		mes "Huh?! I failed?!";
+		mes "[땡그랑 소리]";
+		mes "어?! 내가 실패했어?!";
 		next;
-		mes "[Clink]";
-		mes "Arrgg~ It's all~ Broken...? What a pity~";
+		mes "[땡그랑 소리]";
+		mes "아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아~";
 		next;
-		mes "[Clink]";
-		mes "Hey...!! Get me another one.";
-		mes "This is not possible.";
-		mes "How can my hammer fail from refining?";
+		mes "[땡그랑 소리]";
+		mes "여기요...!! 하나 더 가져다 줘.";
+		mes "이건 불가능 해.";
+		mes "내 망치가 제련으로 인해 어떻게 실패할 수 있나요?";
 		close;
 	}
 	successrefitem .@part;
-	mes "[Clink]";
-	mes "Cry Hammer!! Cry!!!";
+	mes "[쨍그랑]";
+	mes "해머 울어!! 울어!!!";
 	next;
 	emotion ET_CHUP;
-	mes "[Clink]";
-	mes "Ok!! Perfect!!";
-	mes "There's nothing I can't refine";
-	mes "with this special hammer.";
-	mes "You can praise me!!";
-	mes "What a day!!";
+	mes "[쨍그랑]";
+	mes "좋아!! 완벽해!!";
+	mes "고칠 수 없는 건 없어";
+	mes "이 특별한 망치로.";
+	mes "나를 칭찬해도 돼요!!";
+	mes "정말 좋은 하루네요!!";
 	close;
 }
 
@@ -642,52 +642,49 @@ OnInit:
 -	marketshop	market_refine_ein_in01	-1,1010:-1:999999,1011:-1:999999
 -	marketshop	market_refine_lhz_in02	-1,1010:-1:999999,1011:-1:999999
 
-prt_in,63,69,3	script	Dietrich#ns_prt	4_M_02,{
+prt_in,63,69,3	script	디트리히::Dietrich#ns_prt	4_M_02,{
 	mes "[" + strnpcinfo(1) + "]";
-	mes "We sell and exchange various ores used in smelting.";
+	mes "제련에 사용되는 각종 광석을 판매 및 교환하고 있습니다.";
 	next;
-	switch( select( "View basic smelting ores", "View advanced smelting ores", "View Ether smelting ores", "Cancel" ) ) {
+	switch( select( "기본 제련 광석 보기", "고급 제련 광석 보기", "에테르 제련 광석 보기", "취소" ) ) {
 	case 1:
 		mes "[" + strnpcinfo(1) + "]";
-		mes "Phracon and Emveretarcon are available for use in smelting low-level weapons.";
+		mes "프라콘과 엠베레타르콘은 저급 무기를 제련하는 데 사용할 수 있습니다.";
 		close2;
 		callshop "market_refine_" + strnpcinfo(4);
 		end;
 	case 2:
 		mes "[" + strnpcinfo(1) + "]";
-		mes "We are purifying Elunium Stone or Oridecon Stone, or exchanging them with Bradium or Carnium.";
+		mes "엘루니움석이나 오리데콘석을 정화하거나, 브라디움이나 카르늄으로 교환하고 있습니다.";
 		close2;
 		callshop "barter_refine_1";
 		end;
 	case 3:
 		mes "[" + strnpcinfo(1) + "]";
-		mes "We add Etel Dust to existing smelting ores and replace them with Ether-bearing smelting ores.";
+		mes "우리는 기존 제련 광석에 Etel Dust를 추가하고 이를 에테르 함유 제련 광석으로 대체합니다.";
 		close2;
 		callshop "barter_refine_2";
 		end;
 	case 4:
 		mes "[" + strnpcinfo(1) + "]";
-		mes "If you lack the materials used for smelting, come anytime.";
+		mes "제련에 필요한 재료가 부족하시면 언제든지 오세요.";
 		close;
 	}
 	end;
 
-OnInit:
-	setunittitle getnpcid(0), "<Responsible for smelting products>";
-	end;
 }
-payon,137,178,5	duplicate(Dietrich#ns_prt)	Hakhim#2	4_M_ORIENT01
-morocc_in,72,32,3	duplicate(Dietrich#ns_prt)	Abdula#2	4W_M_03
-alberta_in,21,63,5	duplicate(Dietrich#ns_prt)	Xenophon#ns_albe	4_M_02
-yuno_in01,164,27,4	duplicate(Dietrich#ns_prt)	Delight#2	4_M_ORIENT01
-ein_in01,18,82,5	duplicate(Dietrich#ns_prt)	Matestein#2	4_M_02
-lhz_in02,281,24,5	duplicate(Dietrich#ns_prt)	Fruel#2	4_M_02
+payon,137,178,5	duplicate(Dietrich#ns_prt)	학힘::Hakhim#2	4_M_ORIENT01
+morocc_in,72,32,3	duplicate(Dietrich#ns_prt)	압둘라::Abdula#2	4W_M_03
+alberta_in,21,63,5	duplicate(Dietrich#ns_prt)	크세노폰::Xenophon#ns_albe	4_M_02
+yuno_in01,164,27,4	duplicate(Dietrich#ns_prt)	기쁨::Delight#2	4_M_ORIENT01
+ein_in01,18,82,5	duplicate(Dietrich#ns_prt)	마테스테인::Matestein#2	4_M_02
+lhz_in02,281,24,5	duplicate(Dietrich#ns_prt)	Fruel::Fruel#2	4_M_02
 
 // Shadowdecon/Zelunium exchange npcs
-prt_in,64,57,3	script	Pauline	4_M_02,{
+prt_in,64,57,3	script	폴린::Pauline	4_M_02,{
 	mes "[" + strnpcinfo(1) + "]";
-	mes "Do you have " + mesitemlink( 25728 ) + " or " + mesitemlink( 25730 ) + "?";
-	mes "We will exchange them for refined products for use as smelting goods.";
+	mes "당신은 가지고 있습니까?" + mesitemlink( 25728 ) + " 또는 " + mesitemlink( 25730 ) + "?";
+	mes "제련소로 사용할 수 있는 정제된 제품으로 교환해 드리겠습니다.";
 	close2;
 	callshop "barter_refine_3";
 	end;

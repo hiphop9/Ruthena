@@ -10,6 +10,7 @@
 #include <common/socket.hpp> //wfifo session
 #include <common/strlib.hpp> //safeprint
 #include <common/timer.hpp> //difftick
+#include <config/custom.hpp>
 
 #include "account.hpp"
 #include "login.hpp"
@@ -51,7 +52,10 @@ int logchrif_sendallwos(int sfd, uint8* buf, size_t len) {
  */
 TIMER_FUNC(logchrif_sync_ip_addresses){
 	uint8 buf[2];
-	ShowInfo("IP Sync in progress...\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("IP 동기화 진행중..\n");
+	else
+		ShowInfo("IP Sync in progress...\n");
 	WBUFW(buf,0) = 0x2735;
 	logchrif_sendallwos(-1, buf, 2);
 	return 0;
@@ -107,7 +111,10 @@ int logchrif_parse_reqauth(int fd, int id,char* ip){
 			// each auth entry can only be used once
 			login_remove_auth_node( account_id );
 		}else{// authentication not found
-			ShowStatus("Char-server '%s': authentication of the account %d REFUSED (ip: %s).\n", ch_server[id].name, account_id, ip);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("케릭터 서버 '%s': 계정(%d)의 인증이 거부되었습니다. (ip: %s).\n", ch_server[id].name, account_id, ip);
+			else			
+				ShowStatus("Char-server '%s': authentication of the account %d REFUSED (ip: %s).\n", ch_server[id].name, account_id, ip);
 			WFIFOHEAD(fd,21);
 			WFIFOW(fd,0) = 0x2713;
 			WFIFOL(fd,2) = account_id;
@@ -137,7 +144,10 @@ int logchrif_parse_ackusercount(int fd, int id){
 		RFIFOSKIP(fd,6);
 		// how many users on world? (update)
 		if( ch_server[id].users != users ){
-			ShowStatus("set users %s : %d\n", ch_server[id].name, users);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("%s 서버의 사용자 수 : %d명\n", ch_server[id].name, users);
+			else
+				ShowStatus("set users %s : %d\n", ch_server[id].name, users);
 			ch_server[id].users = users;
 		}
 	}
@@ -239,8 +249,12 @@ int logchrif_parse_reqaccdata(int fd, int id, char *ip){
 	else {
 		uint32 aid = RFIFOL(fd,2);
 		RFIFOSKIP(fd,6);
-		if( logchrif_send_accdata(fd,aid) < 0 )
-			ShowNotice("Char-server '%s': account %d NOT found (ip: %s).\n", ch_server[id].name, aid, ip);
+		if( logchrif_send_accdata(fd,aid) < 0 ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 계정(%d)을(를) 찾을 수 없습니다. (ip: %s).\n", ch_server[id].name, aid, ip);
+			else
+				ShowNotice("Char-server '%s': account %d NOT found (ip: %s).\n", ch_server[id].name, aid, ip);
+		}
 	}
 	return 1;
 }
@@ -292,7 +306,10 @@ int logchrif_parse_reqchangemail(int fd, int id, char* ip){
 			ShowNotice("Char-server '%s': Attempt to modify an e-mail on an account (@email GM command), but actual e-mail is incorrect (account: %d (%s), actual e-mail: %s, proposed e-mail: %s, ip: %s).\n", ch_server[id].name, account_id, acc.userid, acc.email, actual_email, ip);
 		else{
 			safestrncpy(acc.email, new_email, 40);
-			ShowNotice("Char-server '%s': Modify an e-mail on an account (@email GM command) (account: %d (%s), new e-mail: %s, ip: %s).\n", ch_server[id].name, account_id, acc.userid, new_email, ip);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 계정의 이메일주소가 수정되었습니다. (운영자 명령어 @이메일) (계정ID: %d (%s), 새로운 이메일주소: %s, ip: %s).\n", ch_server[id].name, account_id, acc.userid, new_email, ip);
+			else
+				ShowNotice("Char-server '%s': Modify an e-mail on an account (@email GM command) (account: %d (%s), new e-mail: %s, ip: %s).\n", ch_server[id].name, account_id, acc.userid, new_email, ip);
 			// Save
 			accounts->save(accounts, &acc, false);
 		}
@@ -320,12 +337,21 @@ int logchrif_parse_requpdaccstate(int fd, int id, char* ip){
 
 		RFIFOSKIP(fd,10);
 
-		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowNotice("Char-server '%s': Error of Status change (account: %d not found, suggested status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
-		else if( acc.state == state )
-			ShowNotice("Char-server '%s':  Error of Status change - actual status is already the good status (account: %d, status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
-		else{
-			ShowNotice("Char-server '%s': Status change (account: %d, new status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
+		if( !accounts->load_num(accounts, &acc, account_id) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 상태 변경 오류 (계정ID: %d을(를) 찾을 수 없습니다. 상태 %d을(를) 제안했습니다. ip: %s).\n", ch_server[id].name, account_id, state, ip);
+			else
+				ShowNotice("Char-server '%s': Error of Status change (account: %d not found, suggested status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
+		} else if( acc.state == state ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s':  상태 변경 오류 - 이미 설정된 상태 입니다. (계정ID: %d, 상태 %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
+			else
+				ShowNotice("Char-server '%s':  Error of Status change - actual status is already the good status (account: %d, status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 상태가 변경되었습니다. (계정ID: %d, 새로운 상태 %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
+			else
+				ShowNotice("Char-server '%s': Status change (account: %d, new status %d, ip: %s).\n", ch_server[id].name, account_id, state, ip);
 
 			acc.state = state;
 			// Save
@@ -364,24 +390,36 @@ int logchrif_parse_reqbanacc(int fd, int id, char* ip){
 		int timediff = RFIFOL(fd,6);
 		RFIFOSKIP(fd,10);
 
-		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowNotice("Char-server '%s': Error of ban request (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else{
+		if( !accounts->load_num(accounts, &acc, account_id) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 요청된 밴(추방) 처리에 오류발생 (계정ID: %d을(를) 찾을 수 없습니다. ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': Error of ban request (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
+		}else{
 			time_t timestamp;
 			if (acc.unban_time == 0 || acc.unban_time < time(nullptr))
 				timestamp = time(nullptr); // new ban
 			else
 				timestamp = acc.unban_time; // add to existing ban
 			timestamp += timediff;
-			if (timestamp == -1)
-				ShowNotice("Char-server '%s': Error of ban request (account: %d, invalid date, ip: %s).\n", ch_server[id].name, account_id, ip);
-			else if( timestamp <= time(nullptr) || timestamp == 0 )
-				ShowNotice("Char-server '%s': Error of ban request (account: %d, new date unbans the account, ip: %s).\n", ch_server[id].name, account_id, ip);
-			else{
+			if (timestamp == -1) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowNotice("케릭터 서버 '%s': 요청된 벤(추방)처리 오류발생 (계정ID: %d, 잘못된 날짜, ip: %s).\n", ch_server[id].name, account_id, ip);
+				else
+					ShowNotice("Char-server '%s': Error of ban request (account: %d, invalid date, ip: %s).\n", ch_server[id].name, account_id, ip);
+			} else if( timestamp <= time(NULL) || timestamp == 0 ) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowNotice("케릭터 서버 '%s': 요청된 벤(추방) 오류발생 (계정ID: %d, 새 날짜로 계정을 변경, ip: %s).\n", ch_server[id].name, account_id, ip);
+				else
+					ShowNotice("Char-server '%s': Error of ban request (account: %d, new date unbans the account, ip: %s).\n", ch_server[id].name, account_id, ip);
+			} else{
 				uint8 buf[11];
 				char tmpstr[24];
 				timestamp2string(tmpstr, sizeof(tmpstr), timestamp, login_config.date_format);
-				ShowNotice("Char-server '%s': Ban request (account: %d, new final date of banishment: %s, ip: %s).\n", ch_server[id].name, account_id, tmpstr, ip);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowNotice("케릭터 서버 '%s': 요정된 밴 (계정ID: %d, 새로운 밴의 최종 날짜: %s, ip: %s).\n", ch_server[id].name, account_id, tmpstr, ip);
+				else
+					ShowNotice("Char-server '%s': Ban request (account: %d, new final date of banishment: %s, ip: %s).\n", ch_server[id].name, account_id, tmpstr, ip);
 
 				acc.unban_time = timestamp;
 
@@ -416,15 +454,24 @@ int logchrif_parse_reqchgsex(int fd, int id, char* ip){
 		uint32 account_id = RFIFOL(fd,2);
 		RFIFOSKIP(fd,6);
 
-		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowNotice("Char-server '%s': Error of sex change (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else if( acc.sex == 'S' )
-			ShowNotice("Char-server '%s': Error of sex change - account to change is a Server account (account: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else{
+		if( !accounts->load_num(accounts, &acc, account_id) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 성별 변경 오류 (계정ID: %d을(를) 찾을 수 없습니다. ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': Error of sex change (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
+		} else if( acc.sex == 'S' ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 성별 변경 오류 - 변경할 계정이 서버의 계정입니다. (계정ID: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': Error of sex change - account to change is a Server account (account: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
+		} else{
 			unsigned char buf[7];
 			char sex = ( acc.sex == 'M' ) ? 'F' : 'M'; //Change gender
 
-			ShowNotice("Char-server '%s': Sex change (account: %d, new sex %c, ip: %s).\n", ch_server[id].name, account_id, sex, ip);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 성별이 변경되었습니다. (계정ID: %d, 새로운 성별 %c, ip: %s).\n", ch_server[id].name, account_id, sex, ip);
+			else
+				ShowNotice("Char-server '%s': Sex change (account: %d, new sex %c, ip: %s).\n", ch_server[id].name, account_id, sex, ip);
 
 			acc.sex = sex;
 			// Save
@@ -455,9 +502,12 @@ int logchrif_parse_upd_global_accreg(int fd, int id, char* ip){
 		AccountDB* accounts = login_get_accounts_db();
 		uint32 account_id = RFIFOL(fd,4);
 
-		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowStatus("Char-server '%s': receiving (from the char-server) of account_reg2 (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else
+		if( !accounts->load_num(accounts, &acc, account_id) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("케릭터 서버 '%s': 케릭터 서버로부터 account_reg2을(를) 수신중 (계정ID: %d을(를) 찾을 수 없습니다. ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowStatus("Char-server '%s': receiving (from the char-server) of account_reg2 (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
+		} else
 			mmo_save_global_accreg(accounts,fd,account_id,RFIFOL(fd, 8));
 		RFIFOSKIP(fd,RFIFOW(fd,2));
 	}
@@ -481,12 +531,21 @@ int logchrif_parse_requnbanacc(int fd, int id, char* ip){
 		uint32 account_id = RFIFOL(fd,2);
 		RFIFOSKIP(fd,6);
 
-		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowNotice("Char-server '%s': Error of UnBan request (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else if( acc.unban_time == 0 )
-			ShowNotice("Char-server '%s': Error of UnBan request (account: %d, no change for unban date, ip: %s).\n", ch_server[id].name, account_id, ip);
-		else{
-			ShowNotice("Char-server '%s': UnBan request (account: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
+		if( !accounts->load_num(accounts, &acc, account_id) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 밴 해제 요청 에러 (계정ID: %d을(를) 찾을 수 없습니다. ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': Error of UnBan request (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
+		} else if( acc.unban_time == 0 ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 밴 해제 요청 에러 (계정ID: %d, 밴 해제에 대한 날짜변경이 없음, ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': Error of UnBan request (account: %d, no change for unban date, ip: %s).\n", ch_server[id].name, account_id, ip);
+		}else{
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s': 밴 해제 요청 (계정ID: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
+			else
+				ShowNotice("Char-server '%s': UnBan request (account: %d, ip: %s).\n", ch_server[id].name, account_id, ip);
 			acc.unban_time = 0;
 			accounts->save(accounts, &acc, false);
 		}
@@ -576,7 +635,10 @@ int logchrif_parse_updcharip(int fd, int id){
 	if( RFIFOREST(fd) < 6 )
 		return 0;
 	ch_server[id].ip = ntohl(RFIFOL(fd,2));
-	ShowInfo("Updated IP of Server #%d to %d.%d.%d.%d.\n",id, CONVIP(ch_server[id].ip));
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("서버 #%d의 IP주소를 %d.%d.%d.%d으(로) 업데이트 했습니다.\n",id, CONVIP(ch_server[id].ip));
+	else
+		ShowInfo("Updated IP of Server #%d to %d.%d.%d.%d.\n",id, CONVIP(ch_server[id].ip));
 	RFIFOSKIP(fd,6);
 	return 1;
 }
@@ -588,7 +650,10 @@ int logchrif_parse_updcharip(int fd, int id){
  * @return 1 success
  */
 int logchrif_parse_setalloffline(int fd, int id){
-	ShowInfo("Setting accounts from char-server %d offline.\n", id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("케릭터 서버 %d이(가) 계정을 오프라인으로 설정했습니다.\n", id);
+	else	
+		ShowInfo("Setting accounts from char-server %d offline.\n", id);
 	login_online_db_setoffline( id );
 	RFIFOSKIP(fd,2);
 	return 1;
@@ -775,7 +840,10 @@ int logchrif_parse(int fd){
 
 	ARR_FIND( 0, ARRAYLENGTH(ch_server), cid, ch_server[cid].fd == fd );
 	if( cid == ARRAYLENGTH(ch_server) ){// not a char server
-		ShowDebug("logchrif_parse: Disconnecting invalid session #%d (is not a char-server)\n", fd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("logchrif_parse: 잘못된 세션 #%d의 연결을 끊습니다. (케릭터 서버가 아닙니다.)\n", fd);
+		else
+			ShowDebug("logchrif_parse: Disconnecting invalid session #%d (is not a char-server)\n", fd);
 		set_eof(fd);
 		do_close(fd);
 		return 0;
@@ -818,7 +886,10 @@ int logchrif_parse(int fd){
 #endif
 			case 0x2742: next = logchrif_parse_reqvipdata(fd); break; //Vip sys
 			default:
-				ShowError("logchrif_parse: Unknown packet 0x%x from a char-server! Disconnecting!\n", command);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("logchrif_parse: 케릭터 서버로부터 알수 없는 패킷 0x%x 발생! 연결을 종료중!\n", command);
+				else		
+					ShowError("logchrif_parse: Unknown packet 0x%x from a char-server! Disconnecting!\n", command);
 				set_eof(fd);
 				return 0;
 		} // switch
@@ -869,7 +940,10 @@ void logchrif_server_reset(int id) {
  * @param id: id of char-serv (should be >0, FIXME)
  */
 void logchrif_on_disconnect(int id) {
-	ShowStatus("Char-server '%s' has disconnected.\n", ch_server[id].name);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("케릭터 서버 '%s'의 연결이 해제되었습니다.\n", ch_server[id].name);
+	else	
+		ShowStatus("Char-server '%s' has disconnected.\n", ch_server[id].name);
 	logchrif_server_reset(id);
 }
 

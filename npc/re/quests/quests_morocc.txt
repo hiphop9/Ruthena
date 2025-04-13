@@ -1,27 +1,16 @@
 //===== rAthena Script =======================================
 //= Morocc Quest NPCs
 //===== By: ==================================================
-//= Euphy
-//===== Current Version: =====================================
-//= 1.1
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Quest NPCs related to Morocc.
-//===== Additional Comments: =================================
-//= 1.0 First Version.
-//= 1.0a Gathered remaining dialogues. [Euphy]
-//= 1.1 Added new warpers for Satan Morocc maps. [Euphy]
+//한글번역 스카이러브
 //============================================================
 
 // Stop Post Quest
 // ============================================================
-morocc,152,167,4	duplicate(William)	William#moc	89
+morocc,152,167,4	duplicate(William)	스테어#moc	89
 
 // Binoculars Quest
 // ============================================================
-morocc,169,168,4	duplicate(Alchemist)	Alchemist#moc	64
+morocc,169,168,4	duplicate(Alchemist)	연금술사#moc	64
 
 // Resurrection of Satan Morocc
 // ============================================================
@@ -57,7 +46,7 @@ moc_fild16,124,381,4	duplicate(Continental Guard#man)	Continental Guard#man7	852
 moc_fild16,333,380,4	duplicate(Continental Guard#man)	Continental Guard#man8	852
 moc_fild01,84,19,1	duplicate(Continental Guard#man)	Continental Guard#man9	852
 
-morocc,176,101,3	duplicate(Continental Official)	Continental Official#mor	754
+morocc,176,101,3	duplicate(Continental Official)	컨티넨탈 가드 사무관#mor	754
 
 // Pyramids Nightmare Mode :: nightmare_pry
 //============================================================

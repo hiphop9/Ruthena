@@ -1,98 +1,98 @@
-//===== rAthena Script ======================================= 
-//= Izlude Guides
-//===== By: ================================================== 
+//===== rAthena 스크립트 =======================================
+//= Izlude 가이드
+//===== 게시자: ========================================= =========
 //= L0ne_W0lf
-//===== Current Version: ===================================== 
+//===== 현재 버전: ======================================
 //= 1.4
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Guides for the city of Izlude.
-//===== Additional Comments: ================================= 
-//= 1.0 First version, Renewal guide.
-//= 1.1 Updated to match the new Izlude Map. [Masao]
-//= 1.2 Added Renewal Izlude viewpoint coordinates.
-//= 1.3 Navigation system update. [Euphy]
-//=     Optimized.
-//= 1.4 Added Izlude duplicates. [Euphy]
-//============================================================ 
+//===== 호환 가능: =====================================
+//= rAthena 프로젝트
+//===== 설명: =========================================
+//= [공식 변환]
+//= Izlude 도시에 대한 가이드입니다.
+//===== 추가 의견: ==================================
+//= 1.0 첫 번째 버전, 리뉴얼 안내입니다.
+//= 1.1 새로운 Izlude 지도와 일치하도록 업데이트되었습니다. [마사오]
+//= 1.2 Renewal Izlude viewpoint 좌표가 추가되었습니다.
+//= 1.3 내비게이션 시스템 업데이트. [유피]
+//= 최적화되었습니다.
+//= 1.4 Izlude 중복 항목을 추가했습니다. [유피]
+//================================================ ============
 
 -	script	::GuideIzlude	-1,{
 	cutin "prt_soldier",2;
-	mes "[Izlude Guide]";
-	mes "Welcome to ^8B4513Izlude^000000,";
-	mes "Prontera's satellite town.";
-	mes "Do you need help navigating the town?";
-	F_Navi("[Izlude Guide]");
+	mes "[이즈루드 가이드]";
+	mes "^8B4513이즈루드^000000에 오신 것을 환영합니다,";
+	mes "프론테라의 위성도시.";
+	mes "마을을 돌아다니는 데 도움이 필요하세요?";
+	F_Navi("[이즈루드 가이드]");
 	next;
 	set .@map$, strnpcinfo(4);
 	while (1) {
-		switch(select("[ Main Facilities ]:[ Merchants & Helpers ]:Remove Marks from Mini-Map:Cancel")) {
+		switch(select("[ 주요 시설 ]:[ 상인 및 도우미 ]:미니맵에서 표시 제거:대화를 종료한다.")) {
 		case 1:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Cryptura Academy ]:[ Marina ]:[ International Airship ]:[ Arena ]:[ Kit Shop ]:[ Swordsman Guild ]:[ Enchant Association ]:[ Forge ]:Previous Menu")) {
+				switch(select("[ 크립투라 아카데미 ]:[ 마리나 ]:[ 국제 비행선 ]:[ 아레나 ]:[ 키트 상점 ]:[ 검사 길드 ]:[ 마법부여 협회 ]:[ 대장간 ]:이전 메뉴")) {
 				case 1:
-					mes "[Izlude Guide]";
-					mes "Novice adventurers should go to "+F_Navi("Cryptura Academy","iz_ac01,100,39")+" to receive more information and training!";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes "초보 모험가라면 "+F_Navi("크립투라 아카데미","iz_ac01,100,39")+"로 가서 더 많은 정보와 훈련을 받으세요!";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,128,260,0,0xD2691E;
 					next;
 					break;
 				case 2:
-					mes "[Izlude Guide]";
-					mes "You can use the "+F_Navi("Marina",.@map$+",197,205","^B9062F");
-					mes "to go to ^8B4513Alberta^000000 or ^8B4513Byalan Island^000000.";
-					mes "Beware of ^8B4513Izlude Dungeon^000000";
-					mes "on Byalan Island since it is";
-					mes "filled with dreadful monsters.";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes F_Navi("마리나",.@map$+",197,205","^B9062F")+"사용할 수 있습니다.";
+					mes "^8B4513알바르타^000000 또는 ^8B4513바이알란 섬^000000으로 가려면.";
+					mes "^8B4513이즈루드 던전^000000을 조심하세요";
+					mes "바이알란 섬에 있기 때문에";
+					mes "무서운 괴물들로 가득 차 있습니다.";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,197,205,1,0xFF0000;
 					next;
 					break;
 				case 3:
-					mes "[Izlude Guide]";
-					mes "The "+F_Navi("International Airship",.@map$+",202,75","^0000FF");
-					mes "goes to ^8B4513Juno^000000 and ^8B4513Rachel^000000.";
-					mes "Let me mark its location";
-					mes "on your mini-map.";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes F_Navi("국제 비행선",.@map$+",202,75","^0000FF");
+					mes "^8B4513Juno^000000과 ^8B4513레이첼^000000으로 이동합니다.";
+					mes "위치를 표시하겠습니다";
+					mes "미니맵에.";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,210,73,2,0x0A82FF;
 					next;
 					break;
 				case 4:
-					mes "[Izlude Guide]";
-					mes "The "+F_Navi("Arena",.@map$+",213,161","^FF5400");
-					mes "is a perfect place to";
-					mes "test your combat capabilities.";
-					mes "Let me mark its location";
-					mes "on your mini-map.";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes "그 곳은"+F_Navi("아레나",.@map$+",213,161","^FF5400");
+					mes "완벽한 장소입니다";
+					mes "당신의 전투 능력을 시험해 보세요.";
+					mes "위치를 표시하겠습니다";
+					mes "미니맵에.";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,213,161,3,0xFF5400;
 					next;
 					break;
 				case 5:
-					callsub L_Mark, F_Navi("Kit Shop",.@map$+",110,182","^006400");
+					callsub L_Mark, F_Navi("키트 상점",.@map$+",110,182","^006400");
 					viewpoint 1,108,179,4,0xAAFF00;
 					next;
 					break;
 				case 6:
-					mes "[Izlude Guide]";
-					mes "The "+F_Navi("Swordsman Guild",.@map$+",51,172")+" is where you can ^800080change your job to Swordsman.^000000";
-					mes "Let me mark its location";
-					mes "on your mini-map.";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes F_Navi("검사 길드",.@map$+",51,172")+"에서는 ^800080검사로 전직할 수 있습니다.^000000";
+					mes "위치를 표시하겠습니다";
+					mes "미니맵에.";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,52,172,5,0xDA70D6;
 					next;
 					break;
 				case 7:
-					callsub L_Mark, F_Navi("Enchant Association",.@map$+",97,125","^B9062F");
+					callsub L_Mark, F_Navi("마법부여 협회",.@map$+",97,125","^B9062F");
 					viewpoint 1,97,125,6,0xDA70D6;
 					next;
 					break;
 				case 8:
-					callsub L_Mark, F_Navi("Forge",.@map$+",153,126");
+					callsub L_Mark, F_Navi("대장간",.@map$+",153,126");
 					viewpoint 1,153,126,7,0xAAFF00;
 					next;
 					break;
@@ -105,44 +105,44 @@
 		case 2:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Eden Teleport Officer ]:[ Kafra Employee ]:[ Hypnotist ]:[ Newlywed Helper ]:[ Mercenary Guildsman ]:[ Pet Groomer ]:Previous Menu")) {
+				switch(select("[ 에덴 순간이동 장교 ]:[ 카프라 직원 ]:[ 최면술사 ]:[ 신혼 도우미 ]:[ 용병 길드맨 ]:[ 애완동물 미용사 ]:이전 메뉴")) {
 				case 1:
-					mes "[Izlude Guide]";
-					mes "The "+F_Navi("Eden Teleport Officer",.@map$+",131,148","^0000FF");
-					mes "is currently staying inside";
-					mes "the Swordsman Guild building.";
-					mes "Let me mark his location on your mini-map.";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes F_Navi("에덴 순간이동 장교",.@map$+",131,148","^0000FF");
+					mes "현재는 집 안에 있습니다";
+					mes "검사 길드 건물.";
+					mes "당신의 미니맵에 그 사람의 위치를 표시하겠습니다.";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,131,148,8,0x0A82FF;
 					next;
 					break;
 				case 2:
-					callsub L_Mark, F_Navi("Kafra Employee",.@map$+",128,148","^FF5400"),1;
+					callsub L_Mark, F_Navi("카프라 직원",.@map$+",128,148","^FF5400"),1;
 					viewpoint 1,128,148,9,0xFF5400;
 					next;
 					break;
 				case 3:
-					callsub L_Mark, F_Navi("Hypnotist",.@map$+",127,175"),1;
+					callsub L_Mark, F_Navi("최면술사",.@map$+",127,175"),1;
 					viewpoint 1,127,175,10,0x006400;
 					next;
 					break;
 				case 4:
-					mes "[Izlude Guide]";
-					mes "If you'd like to go on a honeymoon to";
-					mes "^8B4513Jawaii^000000, the paradise of newlyweds,";
-					mes "please speak to the ";
-					mes F_Navi("Newlywed Helper",.@map$+",180,224","^B9062F")+".";
-					mes "Would you like to check any other locations?";
+					mes "[이즈루드 가이드]";
+					mes "신혼여행을 가고 싶다면";
+					mes "^8B4513자와이^000000 신혼부부의 천국,";
+					mes "그에게 말해주세요 ";
+					mes F_Navi("신혼도우미",.@map$+",180,224","^B9062F")+".";
+					mes "다른 곳도 확인하고 싶으신가요?";
 					viewpoint 1,180,224,11,0xFF0000;
 					next;
 					break;
 				case 5:
-					callsub L_Mark, F_Navi("Mercenary Guildsman",.@map$+",47,170","^0000FF");
+					callsub L_Mark, F_Navi("용병 길드원",.@map$+",47,170","^0000FF");
 					viewpoint 1,47,170,12,0xDA70D6;
 					next;
 					break;
 				case 6:
-					callsub L_Mark, F_Navi("Pet Groomer","izlude_in,72,98"),1;
+					callsub L_Mark, F_Navi("애완동물 미용사","izlude_in,72,98"),1;
 					viewpoint 1,108,179,13,0x006400;
 					next;
 					break;
@@ -153,9 +153,9 @@
 			}
 			break;
 		case 3:
-			mes "[Izlude Guide]";
-			mes "Sure, I'll remove all marks from your mini-map.";
-			mes "Is there anything else I can do for you?";
+			mes "[이즈루드 가이드]";
+			mes "물론이죠, 미니맵에 있는 모든 표시를 제거하겠습니다.";
+			mes "제가 더 도와드릴 수 있는 건 없나요?";
 			viewpoint 2,1,1,0,0xFFFF00;
 			viewpoint 2,1,1,1,0x000000;
 			viewpoint 2,1,1,2,0xFF0000;
@@ -173,37 +173,37 @@
 			next;
 			break;
 		case 4:
-			mes "[Izlude Guide]";
-			mes "Enjoy your stay.";
-			mes "Bye~!";
+			mes "[이즈루드 가이드]";
+			mes "즐거운 시간 보내세요.";
+			mes "안녕~!";
 			close2;
 			cutin "prt_soldier",255;
 			end;
 		}
 	}
-	end;
+		end;
 L_Mark:
-	mes "[Izlude Guide]";
+	mes "[이즈루드 가이드]";
 	if (getarg(1,0)) {
-		mes "Let me mark the location of the";
+		mes "위치를 표시하겠습니다";
 		mes getarg(0);
 	} else
-		mes "Let me mark the location of the "+getarg(0);
-	mes "on your mini-map.";
-	mes "Would you like to check any other locations?";
-	return;
+		mes "위치"+getarg(0)+"을 표시하겠습니다.";
+		mes "미니맵에서.";
+		mes "다른 곳도 확인하고 싶으신가요?";
+		return;
 }
 
-izlude,129,175,4	duplicate(GuideIzlude)	Guide#01izlude	105
-izlude_a,129,175,4	duplicate(GuideIzlude)	Guide#01izlude_a	105
-izlude_b,129,175,4	duplicate(GuideIzlude)	Guide#01izlude_b	105
-izlude_c,129,175,4	duplicate(GuideIzlude)	Guide#01izlude_c	105
-izlude_d,129,175,4	duplicate(GuideIzlude)	Guide#01izlude_d	105
+izlude,129,175,4	duplicate(GuideIzlude)	가이드#01izlude	105
+izlude_a,129,175,4	duplicate(GuideIzlude)	가이드#01izlude_a	105
+izlude_b,129,175,4	duplicate(GuideIzlude)	가이드#01izlude_b	105
+izlude_c,129,175,4	duplicate(GuideIzlude)	가이드#01izlude_c	105
+izlude_d,129,175,4	duplicate(GuideIzlude)	가이드#01izlude_d	105
 
-izlude,133,113,4	duplicate(GuideIzlude)	Guide#02izlude	105
-izlude_a,133,113,4	duplicate(GuideIzlude)	Guide#02izlude_a	105
-izlude_b,133,113,4	duplicate(GuideIzlude)	Guide#02izlude_b	105
-izlude_c,133,113,4	duplicate(GuideIzlude)	Guide#02izlude_c	105
-izlude_d,133,113,4	duplicate(GuideIzlude)	Guide#02izlude_d	105
+izlude,133,113,4	duplicate(GuideIzlude)	가이드#02izlude	105
+izlude_a,133,113,4	duplicate(GuideIzlude)	가이드#02izlude_a	105
+izlude_b,133,113,4	duplicate(GuideIzlude)	가이드#02izlude_b	105
+izlude_c,133,113,4	duplicate(GuideIzlude)	가이드#02izlude_c	105
+izlude_d,133,113,4	duplicate(GuideIzlude)	가이드#02izlude_d	105
 
 //izlude,120,206,4	duplicate(GuideIzlude)	Guide#03izlude	105

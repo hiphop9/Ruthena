@@ -1,74 +1,30 @@
-//===== rAthena Script =======================================
-//= War of Emperium Guild Template File
-//===== By: ==================================================
-//= L0ne_W0lf
-//===== Current Version: =====================================
-//= 2.0
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= ----------------------------------------------------------
-//= - THIS FILE IS REQUIRED FOR GUILD CASTLES TO FUNCTION.
-//= ----------------------------------------------------------
-//= - Enables AGIT Manager inside Guild Strongholds.
-//=   Visible Name required: Agit
-//=   Manages the various functions used in and out of WoE.
-//=
-//= - Enables Stewards inside Guild Strongholds which let's
-//=   the guild master invest in Defense and Economy, and
-//=   to summon guardians, a Kafra, and enter master's room.
-//=
-//= - Guardian Spawning Template
-//=   Visible Name required: Guardian
-//=   Spawn guardians when guild castle data is recieved.
-//=
-//= - Enables Kafra Services inside Guild Strongholds.
-//=   Visible Name required: Kafra Employee
-//=   Storage, Guild Storage, Teleport Service, Cart rental.
-//=
-//= - Treasure Chest spawning.
-//=   Chests will NOT be saved anymore in the event of crashes.
-//=   Treasures will NOT spawn on a location that already has
-//=   treasure chest spawned.
-//===== Additional Comments: =================================
-//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
-//= 1.1 Daily investement will now be reset. [L0ne_W0lf]
-//=     Template will no longer try to spawn chests.
-//= 1.2 Fixed Eco Invest option charging twice. [L0ne_W0lf]
-//= 1.3 Fixed a loading flag emblem for Payon 1. [L0ne_W0lf]
-//=     Fixed two typos regarding Guild Steward name.
-//= 1.4 Fixed a typo in defense investment. [L0ne_W0lf]
-//= 1.5 Fixed spawn point of the emperium in Payon 1. [L0ne_W0lf]
-//=     Double-investing doubles the price now.
-//= 1.6 Corrected Zeny check when summoning guardians. [L0ne_W0lf]
-//=     Corrected cost for investing, thanks to Ai4rei.
-//=     Second invest is now quadruple the value of the first
-//=     Investing now happens at the turn of the day.
-//= 1.6a Corrected conditions in the new investing blocks. [L0ne_W0lf]
-//= 1.6b Moved where investments are added to eco/def. [L0ne_W0lf]
-//= 1.7 Updated Agitbreak announcements, added bc_woe [L0ne_W0lf]
-//=     and added extended anouncement format for mapannounce.
-//= 1.8 Fixed a possible exploit in guild castle investment. [Brian]
-//= 1.9 Partially rewrote Script. [Masao]
-//= 1.9a Fixed incorrect setcastledata parameter. [Euphy]
-//= 2.0 Fixed an issue where Castle Manager couldn't be fired. [Joseph]
-//============================================================
+//------------------------------------------------------------------------------
+// Empelium Forums - http://em-24.com
+// SRO - http://www.sro.kr
+// SuperNovice Korea - http://www.supernovice.co.kr
+//------------------------------------------------------------------------------
+// rAthena Project
+// Last Attempt Version: v7606 (02-15-2023)
+//------------------------------------------------------------------------------
+// 제작: L0ne_W0lf
+// 수정: Joseph (v2.0)
+// 한글화: Parodius(NPIKA)
+//------------------------------------------------------------------------------
 
-// WoE : Main Functions
+// 공성전 메인 스크립트
 //============================================================
 -	script	Gld_Agit_Manager::Gld_Agit_Manager	-1,{
 	end;
 
-// War of Emperium has started.
+// 공성전 시작
 OnAgitStart:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
 	MapRespawnGuildID strnpcinfo(2),GetCastleData(strnpcinfo(2),CD_GUILD_ID),6;
 	GvgOn strnpcinfo(2);
 
-// Spawn (fall through), or respawn the Emperium once it has been broken.
+// 엠펠리움 스폰 or 엠펠리움 파괴시 리스폰
 OnStartArena:
-	// OnAgitStart will fall through and spawn the Emperium.
+	// 공성전 시작 시 OnAgitStart(공성시작) 에 따라 엠펠리움 스폰
 	if (strnpcinfo(2) == "aldeg_cas01") { setarray .@emproom[0],216,23; }
 	else if (strnpcinfo(2) == "aldeg_cas02") { setarray .@emproom[0],213,23; }
 	else if (strnpcinfo(2) == "aldeg_cas03") { setarray .@emproom[0],205,31; }
@@ -98,190 +54,190 @@ OnStartArena:
 	}
 	end;
 
-// The Emperium has been broken.
+// 엠펠리움 파괴
 OnAgitBreak:
 	set .@GID,getcharid(2);
-	// Show and log error if an unguilded player breaks the Emperium. (Should NEVER happen)
+	// 길드가 없는사람이 없앴는지 체크(마지막 타격이 아닌, 준 피해량에 따른 1st 인식(콘프설정)일 경우 대책방안
 	if (.@GID <= 0) {
-		set .@notice$,"Character "+strcharinfo(0)+" ("+getcharid(0)+") broke the Emperium in Castle: "+strnpcinfo(2)+" while guildless. No data will be saved and Emperium respawned.";
+		set .@notice$,"길드가 없는 "+strcharinfo(0)+" ("+getcharid(0)+") 플레이어가 "+strnpcinfo(2)+" 아지트의 엠펠리움을 파괴하여 재소환 합니다.";
  		logmes .@notice$; debugmes .@notice$;
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 		end;
 	}
-	// Adjust Economy Invest Level for Castle
+	// 성주 변경시 기존 상업도 감소
 	set .@Economy,GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY) - 5;
 	if (.@Economy < 0) set .@Economy, 0;
 	SetCastleData strnpcinfo(2), CD_CURRENT_ECONOMY, .@Economy;
-	// Adjust Defense Invest Level for Castle
+	// 성주 변경시 기존 방어도 감소
 	set .@Defence,GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE) - 5;
 	if (.@Defence < 0) set .@Defence, 0;
 	SetCastleData strnpcinfo(2), CD_CURRENT_DEFENSE, .@Defence;
 
-	// Set new Castle Occupant
+	// 새로운 점령자 이벤트시작
 	SetCastleData strnpcinfo(2),CD_GUILD_ID, .@GID;
 
-	// Announce that the Emperium is destroyed, and respawn all but new castle-occupants.
-	mapannounce strnpcinfo(2),"The emperium has been destroyed.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
+	// 엠펠리움 파괴 방송 이후 길드원 제외 모든 사람 맵에서 추방
+	mapannounce strnpcinfo(2),"엠펠리움이 파괴되었습니다.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
 	MapRespawnGuildID strnpcinfo(2),.@GID,6;
 
-	// Refresh castle data, disable Kafra and reset Invest information.
+	// 성의정보 재 로드, 아지트의 투자도 및 카프라 고용 해제
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
-	disablenpc "Kafra Staff#"+strnpcinfo(2);
+	disablenpc "카프라 직원#"+strnpcinfo(2);
 	for( set .@i, CD_INVESTED_ECONOMY; .@i <= CD_ENABLED_KAFRA; set .@i, .@i+1 ) {
 		SetCastleData strnpcinfo(2), .@i, 0;
 	}
-	// Erase Guardian Database information if the new owners do not have Guardian Research.
+	// 새로운 아지트 소유길드가 가디언 리서치 스킬이 없을경우 가디언을 지워버림
 	if( getgdskilllv(.@GID,10002) == 0 ) {
 		for( set .@i, CD_ENABLED_GUARDIAN00; .@i < CD_MAX; set .@i, .@i+1 ) {
 			SetCastleData strnpcinfo(2), .@i, 0;
 		}
 	}
-	// Respawn the Emperium, and display new owners.
-	sleep 500; // Slow down script execution slightly.
+	// 새로운 엠펠리움 리스폰이벤트 시작 및 새로운 점령자 알림 방송
+	sleep 500; // 스크립트 실행속도 약간 늦춤.
 	if( agitcheck() )
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 	sleep 7000;
-	announce "The [" + getcastlename(strnpcinfo(2)) + "] castle has been conquered by the [" + getguildName(.@GID) + "] guild.",bc_all|bc_woe;
+	announce "[" + getcastlename(strnpcinfo(2)) + "] 아지트를 [" + getguildName(.@GID) + "] 길드가 차지 했습니다.",bc_all|bc_woe;
 	end;
 
-// War of Emperium has ended.
+// 공성전 종료
 OnAgitEnd:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
 	GvgOff strnpcinfo(2);
-	// If the castle has no owner at the end of WoE, do not kill Emperium.
+	// 성주가 없을경우 엠펠리움이 죽지 않음
 	if (GetCastleData(strnpcinfo(2),CD_GUILD_ID)) {
 		KillMonster strnpcinfo(2),"Agit#"+strnpcinfo(2)+"::OnAgitBreak";
 	}
 	end;
 
-// Occupying Guild has been disbanded.
+// 점령길드가 길드해체시
 OnGuildBreak:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
-	// Kill guardians, disable the Kafra, and set owner to 0.
+	// 모든 가디언 제거 및 카프라 고용상태 되돌린 후, 아지트 소유자를 지워버림(0으로 처리)
 	killmonster strnpcinfo(2),"Guardian#"+strnpcinfo(2)+"::OnGuardianDied";
 	disablenpc "Kafra Staff#"+strnpcinfo(2);
 	SetCastleData strnpcinfo(2),CD_GUILD_ID,0;
-	// Wait before refreshing guild information.
+	// 길드정보 새로고침 전 대기
 	sleep 7000;
-	Announce "Guild Base [" + GetCastleName(strnpcinfo(2)) + "] has been abandoned.",0;
+	Announce "[" + GetCastleName(strnpcinfo(2)) + "] 아지트는 비어있습니다.",0;
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
 	end;
 
 OnAgitInit:
 OnRecvCastle:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
-	// Spawn Monsters if the castle is empty.
+	// 아지트 주인이 없을 때 몹 소환 이벤트 시작
 	set .@GID, GetCastleData(strnpcinfo(2),CD_GUILD_ID);
 	if (.@GID == 0) {
 		killmonsterall strnpcinfo(2);
 		if (compare(strnpcinfo(2),"aldeg")) {
-			// Normal Spawns
-			monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
-			monster strnpcinfo(2),0,0,"Khalitzburg",1132,4;
-			monster strnpcinfo(2),0,0,"Abysmal Knight",1219,2;
-			monster strnpcinfo(2),0,0,"Executioner",1205,1;
-			monster strnpcinfo(2),0,0,"Penomena",1216,10;
-			monster strnpcinfo(2),0,0,"Alarm",1193,18;
-			monster strnpcinfo(2),0,0,"Clock",1269,9;
-			monster strnpcinfo(2),0,0,"Raydric Archer",1276,7;
-			monster strnpcinfo(2),0,0,"Wanderer",1208,3;
-			monster strnpcinfo(2),0,0,"Alice",1275,1;
-			monster strnpcinfo(2),0,0,"Bloody Knight",1268,1;
-			monster strnpcinfo(2),0,0,"Dark Lord",1272,1;
-			// Set Emperium room spawn coordinates and spawn monsters.
+			// 랜덤 좌표 몬스터 생성
+			monster strnpcinfo(2),0,0,"이블 드루이드",1117,10;
+			monster strnpcinfo(2),0,0,"칼리츠버그",1132,4;
+			monster strnpcinfo(2),0,0,"심연의 기사",1219,2;
+			monster strnpcinfo(2),0,0,"액서큐서너",1205,1;
+			monster strnpcinfo(2),0,0,"페노메나",1216,10;
+			monster strnpcinfo(2),0,0,"알람",1193,18;
+			monster strnpcinfo(2),0,0,"클락",1269,9;
+			monster strnpcinfo(2),0,0,"레이드릭 아쳐",1276,7;
+			monster strnpcinfo(2),0,0,"배회하는 자",1208,3;
+			monster strnpcinfo(2),0,0,"엘리스",1275,1;
+			monster strnpcinfo(2),0,0,"피빛의 기사",1268,1;
+			monster strnpcinfo(2),0,0,"다크 로드",1272,1;
+			// 엠펠리움방에 몬스터 생성
 			if (strnpcinfo(2) == "aldeg_cas01") { setarray .@emproom[0],216,23; }
 			else if (strnpcinfo(2) == "aldeg_cas02") { setarray .@emproom[0],213,23; }
 			else if (strnpcinfo(2) == "aldeg_cas03") { setarray .@emproom[0],205,31; }
 			else if (strnpcinfo(2) == "aldeg_cas04") { setarray .@emproom[0],36,217; }
 			else if (strnpcinfo(2) == "aldeg_cas05") { setarray .@emproom[0],27,101; }
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Dark Lord",1272,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Tower Keeper",1270,4;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Bloody Knight",1268,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Abysmal Knight",1219,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Raydric Archer",1276,5;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"다크 로드",1272,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"시계탑 관리자",1270,4;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"피빛의 기사",1268,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"심연의 기사",1219,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"레이드릭 아쳐",1276,5;
 		}
 		else if (compare(strnpcinfo(2),"gefg")) {
-			// Normal Spawns
-			monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
-			monster strnpcinfo(2),0,0,"Wind Ghost",1263,11;
-			monster strnpcinfo(2),0,0,"Bathory",1102,10;
-			monster strnpcinfo(2),0,0,"Jakk",1130,10;
-			monster strnpcinfo(2),0,0,"Marduk",1140,20;
-			monster strnpcinfo(2),0,0,"Raydric",1163,9;
-			monster strnpcinfo(2),0,0,"Alice",1275,1;
-			monster strnpcinfo(2),0,0,"Abysmal Knight",1219,1;
-			monster strnpcinfo(2),0,0,"Moonlight Flower",1150,1;
-			monster strnpcinfo(2),0,0,"Phreeoni",1159,1;
-			// Set Emperium room spawn coordinates and spawn monsters.
+			// 랜덤 좌표 몬스터 생성
+			monster strnpcinfo(2),0,0,"이블 드루이드",1117,10;
+			monster strnpcinfo(2),0,0,"윈드 고스트",1263,11;
+			monster strnpcinfo(2),0,0,"바소리",1102,10;
+			monster strnpcinfo(2),0,0,"잭",1130,10;
+			monster strnpcinfo(2),0,0,"마르두크",1140,20;
+			monster strnpcinfo(2),0,0,"레이드릭",1163,9;
+			monster strnpcinfo(2),0,0,"엘리스",1275,1;
+			monster strnpcinfo(2),0,0,"심연의 기사",1219,1;
+			monster strnpcinfo(2),0,0,"월야화",1150,1;
+			monster strnpcinfo(2),0,0,"프리오니",1159,1;
+			// 엠펠리움방에 몬스터 생성
 			if (strnpcinfo(2) == "gefg_cas01") { setarray .@emproom[0],197,181; }
 			else if (strnpcinfo(2) == "gefg_cas02") { setarray .@emproom[0],176,178; }
 			else if (strnpcinfo(2) == "gefg_cas03") { setarray .@emproom[0],244,166; }
 			else if (strnpcinfo(2) == "gefg_cas04") { setarray .@emproom[0],174,177; }
 			else if (strnpcinfo(2) == "gefg_cas05") { setarray .@emproom[0],194,184; }
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Mysteltainn",1203,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Orc Hero",1087,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"High Orc",1213,10;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Orc Archer",1189,10;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"미스틸테인",1203,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"오크 히어로",1087,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"하이 오크",1213,10;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"오크 아쳐",1189,10;
 		}
 		else if (compare(strnpcinfo(2),"payg")) {
-			// Normal Spawns
-			monster strnpcinfo(2),0,0,"Greatest General",1277,9;
-			monster strnpcinfo(2),0,0,"Wanderer",1208,10;
-			monster strnpcinfo(2),0,0,"Mutant Dragonoid",1262,5;
-			monster strnpcinfo(2),0,0,"Bathory",1102,5;
-			monster strnpcinfo(2),0,0,"Moonlight Flower",1150,1;
-			monster strnpcinfo(2),0,0,"Eddga",1115,1;
-			monster strnpcinfo(2),0,0,"Horong",1129,11;
-			monster strnpcinfo(2),0,0,"Raydric Archer",1276,5;
-			monster strnpcinfo(2),0,0,"Kobold Archer",1282,4;
-			monster strnpcinfo(2),0,0,"Gargoyle",1253,5;
-			// Set Emperium room spawn coordinates and spawn monsters.
+			// 랜덤 좌표 몬스터 생성
+			monster strnpcinfo(2),0,0,"천하대장군",1277,9;
+			monster strnpcinfo(2),0,0,"배회하는 자",1208,10;
+			monster strnpcinfo(2),0,0,"뮤턴트 드래고노이드",1262,5;
+			monster strnpcinfo(2),0,0,"바소리",1102,5;
+			monster strnpcinfo(2),0,0,"월야화",1150,1;
+			monster strnpcinfo(2),0,0,"에드가",1115,1;
+			monster strnpcinfo(2),0,0,"호롱",1129,11;
+			monster strnpcinfo(2),0,0,"레이드릭 아쳐",1276,5;
+			monster strnpcinfo(2),0,0,"코볼트 아쳐",1282,4;
+			monster strnpcinfo(2),0,0,"가고일",1253,5;
+			// 엠펠리움방에 몬스터 생성
 			if (strnpcinfo(2) == "payg_cas01") { setarray .@emproom[0],139,139; }
 			else if (strnpcinfo(2) == "payg_cas02") { setarray .@emproom[0],38,25; }
 			else if (strnpcinfo(2) == "payg_cas03") { setarray .@emproom[0],269,265; }
 			else if (strnpcinfo(2) == "payg_cas04") { setarray .@emproom[0],270,28; }
 			else if (strnpcinfo(2) == "payg_cas05") { setarray .@emproom[0],30,30; }
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Moonlight Flower",1150,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Eddga",1115,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Wanderer",1208,6;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Raydric Archer",1276,5;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"월야화",1150,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"에드가",1115,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"배회하는 자",1208,6;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"레이드릭 아쳐",1276,5;
 		}
 		else if (compare(strnpcinfo(2),"prtg")) {
-			// Normal Spawns
-			monster strnpcinfo(2),0,0,"Raydric",1163,1;
-			monster strnpcinfo(2),0,0,"Khalitzburg",1132,10;
-			monster strnpcinfo(2),0,0,"Abysmal Knight",1219,5;
-			monster strnpcinfo(2),0,0,"Bloody Knight",1268,5;
-			monster strnpcinfo(2),0,0,"Stormy Knight",1251,1;
-			monster strnpcinfo(2),0,0,"Hatii",1252,1;
-			monster strnpcinfo(2),0,0,"Raydric Archer",1276,5;
-			monster strnpcinfo(2),0,0,"Gryphon",1259,2;
-			monster strnpcinfo(2),0,0,"Chimera",1283,3;
-			monster strnpcinfo(2),0,0,"Alice",1275,1;
-			monster strnpcinfo(2),0,0,"Zealotus",1200,1;
-			// Set Emperium room spawn coordinates and spawn monsters.
+			// 랜덤 좌표 몬스터 생성
+			monster strnpcinfo(2),0,0,"레이드릭",1163,1;
+			monster strnpcinfo(2),0,0,"칼리츠버그",1132,10;
+			monster strnpcinfo(2),0,0,"심연의 기사",1219,5;
+			monster strnpcinfo(2),0,0,"피빛의 기사",1268,5;
+			monster strnpcinfo(2),0,0,"폭풍의 기사",1251,1;
+			monster strnpcinfo(2),0,0,"하티",1252,1;
+			monster strnpcinfo(2),0,0,"레이드릭 아쳐",1276,5;
+			monster strnpcinfo(2),0,0,"그리폰",1259,2;
+			monster strnpcinfo(2),0,0,"키메라",1283,3;
+			monster strnpcinfo(2),0,0,"엘리스",1275,1;
+			monster strnpcinfo(2),0,0,"지르타스",1200,1;
+			// 엠펠리움방에 몬스터 생성
 			if (strnpcinfo(2) == "prtg_cas01") { setarray .@emproom[0],197,197; }
 			else if (strnpcinfo(2) == "prtg_cas02") { setarray .@emproom[0],157,174; }
 			else if (strnpcinfo(2) == "prtg_cas03") { setarray .@emproom[0],16,220; }
 			else if (strnpcinfo(2) == "prtg_cas04") { setarray .@emproom[0],291,14; }
 			else if (strnpcinfo(2) == "prtg_cas05") { setarray .@emproom[0],266,266; }
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Guardian Knight",1268,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Guardian Master",1251,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Hatii",1252,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Guardian Knight",1219,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Raydric Archer",1276,5;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"피빛의 기사",1268,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"폭풍의 기사",1251,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"하티",1252,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"심연의 기사",1219,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"레이드릭 아쳐",1276,5;
 		}
-		// Add custom Guild Castles here.
+		// 커스텀 아지트는 이곳에 추가
 		else {
 			end;
 		}
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
-		// Disable Kafra Staff...
-		disablenpc "Kafra Staff#"+strnpcinfo(2);
+		// 카프라 서비스 해제
+		disablenpc "카프라 직원#"+strnpcinfo(2);
 		end;
 	}
 	else {
-		// Otherwise place the guild emblem on flags.
+		// 길드 깃발에 아지트 길드 엠블렘 활성화
 		if (strnpcinfo(2) == "aldeg_cas01") { donpcevent "::OnRecvCastleA01"; }
 		else if (strnpcinfo(2) == "aldeg_cas02") { donpcevent "::OnRecvCastleA02"; }
 		else if (strnpcinfo(2) == "aldeg_cas03") { donpcevent "::OnRecvCastleA03"; }
@@ -302,85 +258,81 @@ OnRecvCastle:
 		else if (strnpcinfo(2) == "prtg_cas03") { donpcevent "::OnRecvCastlePt03"; }
 		else if (strnpcinfo(2) == "prtg_cas04") { donpcevent "::OnRecvCastlePt04"; }
 		else if (strnpcinfo(2) == "prtg_cas05") { donpcevent "::OnRecvCastlePt05"; }
-		// Add custom Guild Castles here.
+		// 커스텀 아지트는 이곳에 추가
 		else {
 			end;
 		}
-		// And load purchased Guardian in castles.
+		// 가디언 설치시
 		donpcevent "Guardian#"+strnpcinfo(2)+"::OnSpawnGuardians";
-		// And display Kafra if purchased.
-		if (GetCastleData(strnpcinfo(2),CD_ENABLED_KAFRA) < 1) disablenpc "Kafra Staff#"+strnpcinfo(2);
+		// 카프라 직원 고용해제시
+		if (GetCastleData(strnpcinfo(2),CD_ENABLED_KAFRA) < 1) disablenpc "카프라 직원#"+strnpcinfo(2);
 	}
 	end;
 }
 
-// WoE : Guild Kafras
+// 카프라 직원
 //============================================================
 -	script	Kafra Staff#woe::guildkafra	-1,{
 
 	set .@GID,GetCastleData(strnpcinfo(2),CD_GUILD_ID);
 
 	if (compare(strnpcinfo(2),"aldeg")) {
-		setarray .@destination$[0],"Al De Baran","aldebaran";
+		setarray .@destination$[0],"알데바란","aldebaran";
 		setarray .@coordinates[0],132,103;
 	}
 	else if (compare(strnpcinfo(2),"gefg")) {
-		setarray .@destination$[0],"Geffen","geffen";
+		setarray .@destination$[0],"게펜","geffen";
 		setarray .@coordinates[0],120,39;
 	}
 	else if (compare(strnpcinfo(2),"payg")) {
-		setarray .@destination$[0],"Payon","payon";
+		setarray .@destination$[0],"페이욘","payon";
 		setarray .@coordinates[0],70,100;
 	}
 	else if (compare(strnpcinfo(2),"prtg")) {
-		setarray .@destination$[0],"Prontera","prontera";
+		setarray .@destination$[0],"프론테라","prontera";
 		setarray .@coordinates[0],278,211;
 	}
-	// Add custom Guild Castles here.
+	// 커스텀 아지트는 이곳에 추가
 	else {
 		end;
 	}
 
 	cutin "kafra_01",2;
 	if (getcharid(2) == .@GID) {
-		mes "[Kafra Employee]";
-		mes "Welcome. ^ff0000" + GetGuildName(.@GID) + "^000000 Member.";
-		mes "The Kafra Corporation will stay with you wherever you go.";
+		mes "[ 카프라 직원 ]";
+		mes "어서오십시오.";
+		mes "^ff0000"+getguildname(.@GID)+"^000000 길드원 여러분.";
+		mes "카프라 서비스는 언제나";
+		mes "여러분 곁에 있습니다.";
 		next;
-		switch (select("Use Storage:Use Teleport Service:Rent a Pushcart:Cancel")) {
+		switch (select("창고 이용:이동 서비스:카트 대여 서비스:취소")) {
 		case 1:
 			if(!callfunc("F_CanOpenStorage")){
-				mes "[Kafra Employee]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "[ 카프라 직원 ]";
+				mes "죄송합니다.";
+				mes "기본기능 6레벨이 필요합니다.";
 				close2;
 				cutin "",255;
 				end;
 			}
-			mes "[Kafra Employee]";
-			mes "Here, let me open";
-			mes "your Storage for you.";
-			mes "Thank you for using";
-			mes "the Kafra Service.";
+			mes "[ 카프라 직원 ]";
+			mes "창고를 오픈하겠습니다.";
+			mes "이용해주셔서 감사합니다.";
 			close2;
 			cutin "",255;
 			openstorage;
 			end;
 		case 2:
-			mes "[Kafra Employee]";
-			mes "Please choose";
-			mes "your destination.";
+			mes "[ 카프라 직원 ]";
+			mes "목적지를 선택해 주십시오.";
 			next;
-			switch (select(.@destination$+" -> 200z:Cancel")) {
+			switch (select(.@destination$+" -> 200제니:취소")) {
 			case 1:
 				if (Zeny < 200) {
-					mes "[Kafra Employee]";
-					mes "I'm sorry, but you don't have";
-					mes "enough zeny for the Teleport";
-					mes "Service. The fee to teleport";
-					mes "to "+.@destination$+" is 200 zeny.";
+					mes "[ 카프라 직원 ]";
+					mes "죄송합니다.";
+					mes "당신은 충분한 제니를 가지고 있지 않습니다.";
+					mes "목적지 "+.@destination$+" 요금은 200제니 입니다.";
 					close2;
 					cutin "",255;
 					end;
@@ -397,41 +349,35 @@ OnRecvCastle:
 			}
 		case 3:
 			if (BaseClass != Job_Merchant) {
-				mes "[Kafra Employee]";
-				mes "I'm sorry, but the";
-				mes "Pushcart rental service";
-				mes "is only available to Merchants,";
-				mes "Blacksmiths, Master Smiths,";
-				mes "Alchemists, Biochemists,";
-				mes "Mechanics and Geneticists.";
+				mes "[ 카프라 직원 ]";
+				mes "죄송합니다.";
+				mes "푸쉬카트 렌탈 서비스는,";
+				mes "상인계열만 이용 할 수 있습니다.";
 				close2;
 				cutin "",255;
 				end;
 			}
 			if (checkcart()) {
-				mes "[Kafra Employee]";
-				mes "You already have";
-				mes "a Pushcart equipped.";
-				mes "Unfortunately, we can't";
-				mes "rent more than one to";
-				mes "each customer at a time.";
+				mes "[ 카프라 직원 ]";
+				mes "이미 푸쉬카트를 장착중 입니다.";
+				mes "두개 이상의 카트 렌탈 서비스는";
+				mes "이용 하실 수 없습니다.";
 				close2;
 				cutin "",255;
 				end;
 			}
-			mes "[Kafra Employee]";
-			mes "The Pushcart rental";
-			mes "fee is 800 zeny. Would";
-			mes "you like to rent a Pushcart?";
+			mes "[ 카프라 직원 ]";
+			mes "푸쉬카트 렌탈 비용은";
+			mes "800제니 입니다.";
+			mes "푸쉬카트를 렌탈 하시겠습니까?";
 			next;
-			switch (select("Rent a Pushcart.:Cancel")) {
+			switch (select("푸쉬카트 렌탈:취소")) {
 			case 1:
 				if (Zeny < 800) {
-					mes "[Kafra Employee]";
-					mes "I'm sorry, but you";
-					mes "don't have enough";
-					mes "zeny to pay the Pushcart";
-					mes "rental fee of 800 zeny.";
+					mes "[ 카프라 직원 ]";
+					mes "죄송합니다.";
+					mes "갖고 계신 제니가 모자랍니다.";
+					mes "렌탈 비용은 800제니 입니다.";
 					close2;
 					cutin "",255;
 					end;
@@ -448,34 +394,38 @@ OnRecvCastle:
 				end;
 			}
 		case 4:
-			mes "[Kafra Employee]";
-			mes "We, here at Kafra Corporation,";
-			mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+			mes "[ 카프라 직원 ]";
+			mes "카프라 서비스는 언제나";
+			mes "여러분 곁에 있습니다.";
+			mes "언제든 이용해 주십시오.";
 			close2;
 			cutin "",255;
 			end;
 		}
 	}
-	mes "[Kafra Employee]";
-	mes "I am instructed to only offer my services to the ^ff0000"+GetGuildName(.@GID)+"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
+	mes "[ 카프라 직원 ]";
+	mes "본 카프라서비스는 ^0000FF"+GetGuildName(.@GID)+"^000000 조합원 전용 서비스입니다.";
+	mes "다른 카프라서비스를 이용해주십시오.";
+	mes "불편을 드려 죄송합니다.";
 	close2;
 	cutin "",255;
 	end;
 }
 
-// WoE : Castle Managers
+// 집사
 //============================================================
 -	script	Castle Manager#cm::cm	-1,{
 
 	set .@GID,GetCastleData(strnpcinfo(2),CD_GUILD_ID);
 
-	// .@guardiantype = Defines the types of guardians per castle basis.
-	// 1 - Soldier Guardian, 2 - Archer Guardian, 3 - Knight Guardian
-	// .@guardianposx = Define the x spawn point for each uardian.
-	// [0] = 1st guardian's x spawn point.
-	// .@guardianposy = Define the y spawn point for each guardian.
-	// [0] = 1st guardian's y spawn point.
-	// .@masterroom = Defines the coordinates of the Treasure Room.
+	// .@guardiantype = 가디언 타입
+	// 1 - 솔져 가디언, 2 - 아쳐 가디언, 3 - 마스터 가디언
+	// .@guardianposx = 가디언 스폰 좌표 x 정의
+	// [0] = 첫번째 가디언 스폰 좌표 x 정의
+	// .@guardianposy = 가디언 스폰 좌표 y 정의
+	// [0] = 첫번째 가디언 스폰 좌표 y 정의
+	// .@masterroom = 마스터방 좌표 정의
+	// 알데바란 (루이나) 아지트
 	if (strnpcinfo(2) == "aldeg_cas01") { 
 		setarray .@guardiantype[0],1,2,2,2,2,3,3,3;
 		setarray .@guardianposx[0],17,39,38,45,21,218,213,73;
@@ -506,7 +456,7 @@ OnRecvCastle:
 		setarray .@guardianposy[0],202,79,192,74,221,78,73,112;
 		setarray .@masterroom[0],64,8;
 	}
-	// Geffen (Britoniah) Castles
+	// 게펜 (브리토리아) 아지트
 	else if (strnpcinfo(2) == "gefg_cas01") {
 		setarray .@guardiantype[0],1,1,1,2,2,3,3,3;
 		setarray .@guardianposx[0],67,184,62,36,50,50,189,200;
@@ -537,7 +487,7 @@ OnRecvCastle:
 		setarray .@guardianposy[0],149,163,142,47,50,17,35,166;
 		setarray .@masterroom[0],149,106;
 	}
-	// Payon (Baulder) Castles
+	// 페이욘 (청림 호수) 아지트
 	else if (strnpcinfo(2) == "payg_cas01") {
 		setarray .@guardiantype[0],2,2,2,2,2,2,2,3;
 		setarray .@guardianposx[0],229,225,222,99,65,36,51,138;
@@ -568,7 +518,7 @@ OnRecvCastle:
 		setarray .@guardianposy[0],279,260,234,279,37,21,22,36;
 		setarray .@masterroom[0],153,137;
 	}
-	// Prontera (Valkyrie Realms) Castles
+	// 프론테라 (발키리 렐름) 아지트
 	else if (strnpcinfo(2) == "prtg_cas01") {
 		setarray .@guardiantype[0],1,1,1,2,2,3,3,3;
 		setarray .@guardianposx[0],182,182,153,59,50,184,196,107;
@@ -599,41 +549,44 @@ OnRecvCastle:
 		setarray .@guardianposy[0],262,280,250,63,63,253,253,248;
 		setarray .@masterroom[0],281,176;
 	}
-	// Add custom Guild Castles here.
+	// 커스텀 아지트는 이곳에 추가
 	else {
 		end;
 	}
 
 	if (.@GID == 0) {
-		mes "["+strnpcinfo(1)+"]";
-		mes "I have been waiting for a master to fulfill my destiny.";
-		mes "Brave soul... fate will guide you towards your future...";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "난 나의 주인이신 마스터를 기다리는 중입니다.";
+		mes "용기있는 모험가여!";
+		mes "그대의 운명을 따르시오!";
 		close;
 	}
 	if (is_guild_leader(.@GID) == false) {
-		mes "["+strnpcinfo(1)+"]";
-		mes "No matter how much you pester me, I'll still follow my master ^ff0000"+GetGuildMaster(.@GID)+"^000000. Where are the Guardians?! Send these ruffians away right now!";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "너희들이 아무리 협박해도 나는 나의 ";
+		mes "마스터이신 ^ff0000"+GetGuildMaster(.@GID)+"^000000 만을 따를 것이다!";
+		mes "가디언들은 어디있느냐! 어서 이 무례한 자들을 내치거라!";
 		close;
 	}
-	mes "["+strnpcinfo(1)+"]";
-	mes "Welcome. My honorable master, ^ff0000"+strcharinfo(0)+"^000000...";
-	mes "Your humble servent, "+strnpcinfo(1)+", is here to serve you.";
+	mes "[ "+strnpcinfo(1)+" ]";
+	mes "어서오십시오.";
+	mes "나의 주인이신 ^ff0000"+strcharinfo(0)+"^000000 이시어..";
+	mes "오직 당신만을 섬깁니다.";
 	next;
-	switch (select("Castle briefing:Invest in commercial growth:Invest in Castle Defenses:Summon Guardian:Hire / Fire a Kafra Employee:Go into Master's room")) {
+	switch (select("아지트 상황 보고:상업 발전도 투자:아지트 방어도 투자:가디언 설치:카프라 직원 고용/해고:마스터방 입장")) {
 	case 1:
-		mes "["+strnpcinfo(1)+"]";
-		mes "I will report the Castle briefing, Master.";
-		mes " ";
-		mes "^0000ffNow, the commercial growth level is "+GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY)+".";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "아지트의 상황을 말씀드리겠습니다.";
+		mes "^0000ff현재 상업도는 "+GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY)+" Point 입니다.^000000";
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)) {
-			mes " You invested "+GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)+" times in past 1 day.";
+			mes "^0000ff- 이번에 "+GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)+" Point를 투자했습니다.^000000";
 		}
-		mes " Now, the Castle Defense level is "+GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE)+".^000000";
+		mes "현재 방어도는 "+GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE)+" Point 입니다.^000000";
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)) {
-			mes " ^0000ff- You invested "+GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)+" times in past 1 day.^000000";
+			mes "^0000ff- 이번에 "+GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)+" Point를 투자했습니다.^000000";
 		}
-		mes " ";
-		mes "That's all I have to report, Master.";
+		mes "　";
+		mes "이상 보고를 마칩니다. 마스터.";
 		close;
 	case 2:
 		set .@Economy,GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY);
@@ -657,48 +610,51 @@ OnRecvCastle:
 		else if ((.@Economy >= 86) && (.@Economy <= 90)) { set .@eco_invest,770000; }
 		else if ((.@Economy >= 91) && (.@Economy <= 95)) { set .@eco_invest,860000; }
 		else if ((.@Economy >= 96) && (.@Economy <= 100)) { set .@eco_invest,955000; }
-		//Quadruple the cost of investing if you've already invested once.
+		// 이미 한번 투자 한 경우, 두번째 투자시 투자 비용 4배 증가
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)) {
 			set .@eco_invest,.@eco_invest*4;
 		}
-		mes "["+strnpcinfo(1)+"]";
-		mes "If you invest in commercial growth, the quantity of goods made by the guild will increase. Therfore, if you consider our future, investments will be a necessity.";
-		mes " ";
-		mes "Initially, you are able to invest just once but if you pay more money, you will be able to invest twice.";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "상업 발전도에 투자하시게 되면, 보다 좋은 물건을 얻을 수 있습니다.";
+		mes "따라서 미래를 생각해보면, 상업 발전도의 투자가 요구됩니다.";
+		mes "마스터께서는 최대 두번 투자를 하실 수 있습니다.";
 		if (.@Economy >= 100) {
-			mes " ";
-			mes "^ff0000The commercial growth level of our Castle is at it's highest, 100%. No more investments are needed. Just as I have expected from a great economist like you, Master.^000000";
+			mes "　";
+			mes "이 성의 상업 발전도는 이미 최고치인　";
+			mes "^ff0000100 Point^000000 입니다.";
+			mes "따라서 더이상 상업 발전도에 투자할 필요가 없습니다.";
 			close;
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY) >= 2) {
-			mes " ";
-			mes "^ff0000You have already invested twice today. You cannot invest any more.^000000 I expect riches of the guild to grow at a high rate.";
+			mes "　";
+			mes "^ff0000마스터께서는 이번에 할 수 있는 투자를 다하셨습니다. ^000000";
+			mes "우리 길드가 성공하길 기대합니다.";
 			close;
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY) == 0) {
-			mes " ";
-			mes "The current investment amount required is ^ff0000"+.@eco_invest+"^000000 zeny. Will you invest?";
+			mes "　";
+			mes "투자 비용은 ^ff0000"+.@eco_invest+" 제니^000000 입니다. 투자하시겠습니까?";
 		}
 		else {
-			mes " ";
-			mes "You've invested once today... if you wish to invest once more, ^ff0000"+.@eco_invest+"^000000 more zeny will be needed.";
+			mes "　";
+			mes "마스터께서는 이미 한번 투자하셨습니다만... 한번 더 투자하실 수 있으며, ^ff0000"+.@eco_invest+" 제니^000000 가 소모됩니다.";
 		}
 		next;
-		switch (select("Invest in commercial growth:Cancel")) {
+		switch (select("상업 발전도 투자:취소")) {
 		case 1:
 			if (Zeny < .@eco_invest) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "I'm sorry but there is not enough zeny to invest. You will have to try again when you have the funds, Master.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "마스터께서는 투자하기에 충분한 제니를 가지고 있지 않습니다.";
 				close;
 			}
 			set Zeny, Zeny - .@eco_invest;
 			SetCastleData strnpcinfo(2),CD_INVESTED_ECONOMY,GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)+1;
 			mes "[ "+strnpcinfo(1)+"]";
-			mes "We finished the investment safely. I expect that our growth level will be increased by tomorrow.";
+			mes "무사히 투자를 마쳤습니다. 내일까지 우리의 상업 발전도 수준이 높아질 것으로 기대합니다.";
 			close;
 		case 2:
-			mes "["+strnpcinfo(1)+"]";
-			mes "I'll do as you bid, my master... There is no hurry. We will do our best.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "당신이 시키는 대로 하겠습니다, 나의 마스터 시어. 서두를 필요는 없습니다.";
 			close;
 		}
 	case 3:
@@ -723,207 +679,225 @@ OnRecvCastle:
 		else if ((.@Defence >= 86) && (.@Defence <= 90)) { set .@def_invest,1540000; }
 		else if ((.@Defence >= 91) && (.@Defence <= 95)) { set .@def_invest,1720000; }
 		else if ((.@Defence >= 96) && (.@Defence <= 100)) { set .@def_invest,1910000; }
-		//Quadruple the cost of investing if you've already invested once.
+		// 이미 한번 투자 한 경우, 두번째 투자시 투자 비용 4배 증가
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)) {
 			set .@def_invest,.@def_invest*4;
 		}
-		mes "["+strnpcinfo(1)+"]";
-		mes "If you raise Castle Defenses, the durability of Guardians and the Emperium will increase. Therefore, if you consider our coming battles, some investment in this area will be required.";
-		mes " ";
-		mes "Originally you can invest just once but if you pay more money, you can invest twice.";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "아지트 방어도에 투자하게 되면, 가디언과 엠펠리움의 내구력이 증가됩니다.";
+		mes "따라서 미래에 있을 전투를 고려해보면, 이에 대한 투자가 요구됩니다.";
+		mes "마스터께서는 공성전중 최대 두번 투자를 하실 수 있습니다.";
 		if (.@Defence >= 100) {
-			mes " ";
-			mes "^ff0000But the Castle Defense level of our Castle is at it's highest, 100%. No more investments are needed. Just as I have expected from a great strategist like you, Master.^000000";
+			mes "　";
+			mes "이 성의 방어도는 이미 최고치인　";
+			mes "^ff0000100 Point^000000 입니다.";
+			mes "따라서 더이상 방어도에 투자할 필요가 없습니다.";
 			close;
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE) >= 2) {
-			mes " ";
-			mes "^ff0000You have already invested twice today. You cannot invest any more.^000000 I expect the Defenses of the guild to grow at a high rate.";
+			mes "　";
+			mes "^ff0000마스터께서는 이번에 할 수 있는 투자를 다하셨습니다. ^000000";
+			mes "우리 길드가 성공하길 기대합니다.";
 			close;
 		}
 		if (GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE) == 0) {
-			mes " ";
-			mes "The current investment amount required is ^ff0000"+.@def_invest+"^000000 zeny. Will you invest?";
+			mes "　";
+			mes "투자 비용은 ^ff0000"+.@def_invest+" 제니^000000 입니다. 투자하시겠습니까?";
 		}
 		else {
-			mes " ";
-			mes "You've invested once today... if you wish to invest once more, ^ff0000"+.@def_invest+"^000000 more zeny will be needed.";
+			mes "　";
+			mes "마스터께서는 이미 한번 투자하셨습니다만... 한번 더 투자하실 수 있으며, ^ff0000"+.@def_invest+" 제니^000000 가 소요됩니다.";
 		}
 		next;
-		switch (select("Invest in Castle Defenses.:Cancel")) {
+		switch (select("아지트 방어도 투자:취소")) {
 		case 1:
 			if (Zeny < .@def_invest) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "I'm sorry but there is not enough zeny to invest. You will have to try again when you have the funds, Master.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "마스터께서는 투자하기에 충분한 제니를 가지고 있지 않습니다.";
 				close;
 			}
 			set Zeny, Zeny - .@def_invest;
 			SetCastleData strnpcinfo(2),CD_INVESTED_DEFENSE,GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE)+1;
 			mes "[ "+strnpcinfo(1)+"]";
-			mes "We finished the investment safely. I expect that our Castle Defense level will be increased by tomorrow.";
+			mes "무사히 투자를 마쳤습니다. 내일까지 우리의 아지트 방어도가 높아질 것으로 기대합니다.";
 			close;
 		case 2:
-			mes "["+strnpcinfo(1)+"]";
-			mes "I'll do as you bid, my master... There is no hurry. We will do our best.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "당신이 시키는 대로 하겠습니다, 나의 마스터 시어. 서두를 필요는 없습니다.";
 			close;
 		}
 	case 4:
-		mes "["+strnpcinfo(1)+"]";
-		mes "Will you summon a Guardian? It'll be a protector to defend us loyally.";
-		mes "Please select a guardian to defend us.";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "가디언을 설치 하시겠습니까?";
+		mes "가디언은 우리의 아지트를 맹목적으로 지켜주는 수호자가 될 것 입니다.";
+		mes "설치할 가디언을 선택하여 주십시오.";
 		next;
 		for( set .@i, 0; .@i <= 7 ; set .@i, .@i+1 ) {
-			if (.@guardiantype[.@i] == 1) { set .@type$,"Guardian Soldier"; }
-			else if (.@guardiantype[.@i] == 2) { set .@type$,"Guardian Archer"; }
-			else { set .@type$,"Guardian Knight"; }
+			if (.@guardiantype[.@i] == 1) { set .@type$,"솔져 가디언"; }
+			else if (.@guardiantype[.@i] == 2) { set .@type$,"아쳐 가디언"; }
+			else { set .@type$,"마스터 가디언"; }
 			if (guardianinfo(strnpcinfo(2),.@i,0)) {
-				setarray .@gname$[.@i], .@type$ + " - Implemented (" + guardianinfo(strnpcinfo(2),.@i,2) + "/" + guardianinfo(strnpcinfo(2),.@i,1) + ")";
+				setarray .@gname$[.@i], .@type$ + " - 설치됨 (" + guardianinfo(strnpcinfo(2),.@i,2) + "/" + guardianinfo(strnpcinfo(2),.@i,1) + ")";
 			}
 			else {
-				setarray .@gname$[.@i], .@type$ + " - Not Implemented";
+				setarray .@gname$[.@i], .@type$ + " - 설치안됨";
 			}
 		}
 		set .@menu$,.@gname$[0]+":"+.@gname$[1]+":"+.@gname$[2]+":"+.@gname$[3]+":"+.@gname$[4]+":"+.@gname$[5]+":"+.@gname$[6]+":"+.@gname$[7];
 		set .@GDnum,select(.@menu$)+9;
-		mes "["+strnpcinfo(1)+"]";
-		mes "Will you summon the chosen guardian? 10,000 zeny are required to summon a Guardian.";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "선택하신 가디언을 설치하시겠습니까?";
+		mes "설치비용 10,000제니가 필요합니다.";
 		next;
-		switch (select("Summon:Cancel")) {
+		switch (select("가디언 설치:취소")) {
 		case 1:
 			if (getgdskilllv(.@GID,10002) == 0) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "Master, we have not the resources to Summon the Guardian. If you want to accumulate them, you have to learn the Guild skill. We failed to summon the Guardian.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "가디언 설치를 위해서는 길드스킬 ^ff0000'가디언 리서치'^000000가 필요합니다.";
+				mes "가디언 설치를 취소합니다.";
 				close;
 			}
 			if (GetCastleData(strnpcinfo(2),.@GDnum) == 1) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "Master, you already have summoned that Guardian. We cannot summon another.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "선택하신 가디언은 이미 설치되어 있습니다.";
+				mes "가디언 설치를 취소합니다.";
 				close;
 			}
 			if (Zeny < 10000) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "Well... I'm sorry but we don't have funds to summon the Guardian. We failed to summon the Guardian.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "음.. 죄송하지만, 가디언을 설치 할 비용이 부족합니다. 가디언 설치를 취소합니다.";
 				close;
 			}
 			set Zeny, Zeny - 10000;
-			SetCastleData strnpcinfo(2),.@GDnum,1; // mark as 'installed'
+			SetCastleData strnpcinfo(2),.@GDnum,1; // 설치 후 '설치됨' 으로 표시
 			set .@UseGID,.@GDnum - 10;
 			if (.@guardiantype[.@UseGID] == 1) { set .@type,1287; }
 			else if (.@guardiantype[.@UseGID] == 2) { set .@type,1285; }
 			else { set .@type,1286; }
 			guardian strnpcinfo(2),.@guardianposx[.@UseGID],.@guardianposy[.@UseGID],strmobinfo(2,.@type),.@type,"Guardian#"+strnpcinfo(2)+"::OnGuardianDied",.@UseGID;
-			mes "["+strnpcinfo(1)+"]";
-			mes "We completed the summoning of the Guardian. Our defenses are now increased with it in place.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "분부하신 가디언 설치를 무사히 마쳤습니다.";
+			mes "가디언이 파괴될경우 재설치를 할 수 있습니다.";
 			close;
 		case 2:
-			mes "["+strnpcinfo(1)+"]";
-			mes "I did as you ordered. But please remember if you the have money to spare, it'll be better to set it up.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "저는 당신이 시킨대로 했습니다만, 여유 자금이 있다면 가디언을 설치하는 것이 더 낫다는 것을 기억해주십시오.";
 			close;
 		}
 	case 5:
 		if (GetCastleData(strnpcinfo(2),CD_ENABLED_KAFRA) == 1) {
-			mes "["+strnpcinfo(1)+"]";
-			mes "We are currently hiring a Kafra Employee... Do you want to fire the Kafra Employee?";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "카프라 직원들을 해고 하신다구요?";
+			mes "진심이십니까 마스터..?";
 			next;
-			switch (select("Fire:Cancel")) {
+			switch (select("해고:취소")) {
 			case 1:
 				cutin "kafra_01",2;
-				mes "[ Hired Kafra Employee ]";
-				mes "I worked so hard... How can you do that, Master?... Please... Please reconsider... Check it again, Master... Please...";
+				mes "[ 고용된 카프라 직원 ]";
+				mes "정말 열심히 일했는데...";
+				mes "어떻게 그럴 수 있나요 마스터?";
+				mes "제발 다시한번만 생각 해주세요...";
 				next;
-				switch (select("Fire:Cancel")) {
+				switch (select("해고:취소")) {
 				case 1:
-					mes "[ Hired Kafra Employee ]";
-					mes "Oh, my goodness! This is nonsense!";
+					mes "[ 고용된 카프라 직원 ]";
+					mes "정말 열심히 일했는데...!";
+					mes "말도 안 돼..!";
 					next;
 					cutin "",255;
 					break;
 				case 2:
-					mes "[ Hired Kafra Employee ]";
-					mes "I'll work hard for you... Thank you!";
+					mes "[ 고용된 카프라 직원 ]";
+					mes "감사합니다!";
+					mes "더욱 열심히 일하겠습니다!";
 					close;
 				}
 				break;
 			case 2:
-				mes "["+strnpcinfo(1)+"]";
-				mes "She worked hard in my opinion. It was a good decision to keep her.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "잘생각 하셨습니다. 마스터.";
+				mes "카프라 직원 해고를 철회하였습니다.";
 				close;
 			}
-			disablenpc "Kafra Staff#"+strnpcinfo(2);
+			disablenpc "카프라 직원#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),CD_ENABLED_KAFRA,0;
-			mes "["+strnpcinfo(1)+"]";
+			mes "[ "+strnpcinfo(1)+" ]";
 			mes "....";
-			mes "I have discharged the Kafra Employee... But... are you unsatisfied with something?";
+			mes "카프라 직원을 해고 하였습니다.";
+			mes "무언가 불만이 있으신가요..?";
 			close;
 		}
-		mes "["+strnpcinfo(1)+"]";
-		mes "Will you contact the kafra Main Office and Hire a Employee for our Castle?";
-		mes "^ff0000 10,000 zeny is required for their services. ";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "카프라 본사와의 계약을 하여, 아지트내에 카프라 직원을 고용하시겠습니까?";
+		mes "고용을 위해선,^ff0000 10,000제니^000000 가 필요합니다.";
 		next;
-		switch (select("Hire.:Cancel")) {
+		switch (select("카프라 직원 고용:취소")) {
 		case 1:
 			if (getgdskilllv(.@GID,10001) == 0) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "Master, we can't hire a Kafra Employee because we don't have a contract with the Kafra Main Office. If you want to obtain a contract with the Kafra Main Office, you will need to learn the Guild skill first.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "카프라 직원 고용을 위해서는 길드스킬 ^FF0000'카프라와의 계약'^000000이 필요합니다.";
+				mes "카프라 직원 고용이 취소되었습니다.";
 				close;
 			}
 			if (Zeny < 10000) {
-				mes "["+strnpcinfo(1)+"]";
-				mes "Well... I'm sorry but we don't have enough funds to hire a Kafra Employee.";
+				mes "[ "+strnpcinfo(1)+" ]";
+				mes "음.. 죄송합니다만, 카프라 직원을 고용 할 자금이 부족합니다.";
 				close;
 			}
 			set Zeny, Zeny - 10000;
-			enablenpc "Kafra Staff#"+strnpcinfo(2);
+			enablenpc "카프라 직원#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),CD_ENABLED_KAFRA,1;
-			mes "["+strnpcinfo(1)+"]";
-			mes "We obtained a contract with the kafra Main Office, and hired a Kafra Employee.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "카프라 직원들이 아지트내에 고용되었습니다.";
 			next;
 			cutin "kafra_01",2;
-			mes "[ Hired Kafra Employee ]";
-			mes "How do you do? I was dispatched from the Main Office.";
-			mes "I'll do my best to not tarnish the reputation of the Guild.";
+			mes "[ 고용된 카프라 직원 ]";
+			mes "안녕하세요?";
+			mes "본사에서 파견된 카프라 직원 입니다.";
+			mes "길드의 명성을 더럽히지 않도록 최선을 다하겠습니다!";
 			next;
 			cutin "",255;
-			mes "["+strnpcinfo(1)+"]";
-			mes "The Contract terms of the hired Kafra Employee are for 1 month and after this term, you will need to pay an additional fee.";
-			mes "It will be useful for our members.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "조합원들은 이제 카프라 직원의 서비스를 이용 할 수 있습니다.";
 			close;
 		case 2:
-			mes "["+strnpcinfo(1)+"]";
-			mes "I did as you ordered, but some of our members will be unhappy. It will be better to hire a Kafra Employee quickly.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "저는 당신이 시킨대로 했지만, 우리 조합원들은 불만이 있을것입니다.";
+			mes "빠르게 카프라 직원들을 고용하는것이 좋을것 같군요.";
 			close;
 		}
 	case 6:
-		mes "["+strnpcinfo(1)+"]";
-		mes "Do you want to visit the room where our valuables are stored?";
-		mes "That room is restricted to you... you are the only one with access to it.";
+		mes "[ "+strnpcinfo(1)+" ]";
+		mes "우리 귀중품이 보관되어있는 방을 방문하고 싶으신가요?";
+		mes "그 방은 당신만 출입 할 수 있습니다.";
 		next;
-		switch (select("Go into Master's room.:Cancel")) {
+		switch (select("마스터방에 들어간다.:취소")) {
 		case 1:
-			mes "["+strnpcinfo(1)+"]";
-			mes "I'll show you the secret path. Follow me...please.";
-			mes "When you want to return here, please press the secret switch.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "안내해 드리겠습니다. 이쪽으로 따라오십시오.";
+			mes "돌아오고 싶을 때는 비밀 스위치를 누르십시오.";
 			close2;
 			warp strnpcinfo(2),.@masterroom[0],.@masterroom[1];
 			end;
 		case 2:
-			mes "["+strnpcinfo(1)+"]";
-			mes "Goods are produced once a day... if you don't remove them in time, they will not be produced anymore.";
-			mes "Therefore, it will be better if you check up on them from time to time.";
+			mes "[ "+strnpcinfo(1)+" ]";
+			mes "귀중품은 하루에 한 번씩 생산 됩니다. 제 때 챙기지 않으면 더 이상 생산되지 않을 것입니다.";
+			mes "따라서, 마스터께서 다음날이 되면 귀중품을 확인해 보는것이 좋을 것 입니다.";
 			close;
 		}
 	}
 }
 
-// WoE : Guild Dungeon Entrances
+// 길드던전 입장 레버
 //============================================================
 -	script	Lever#gd::gdlever	-1,{
 
 	set .@GID,GetCastleData(strnpcinfo(2),CD_GUILD_ID);
 
 	if (.@GID == 0) {
-		mes "[Ringing Voice]";
-		mes "'Those who overcome an ordeal shows a great deal of bravery... and will find their way to another ordeal.'";
+		mes "[ 울리는 목소리 ]";
+		mes "오직 용기있는 전사만이";
+		mes "시험을 받으리...";
 		close;
 	}
 
@@ -959,44 +933,45 @@ OnRecvCastle:
 		else if (compare(strnpcinfo(2),"cas04")) setarray .@coordinates[0],268,203;
 		else if (compare(strnpcinfo(2),"cas05")) setarray .@coordinates[0],199,28;
 	}
-	// Add custom Guild Castles here.
+	// 커스텀 성은 이곳에 추가
 	else {
 		end;
 	}
 
-	mes "[Ringing Voice]";
-	mes "'Only the truly brave can take the test.'";
+	mes "[ 울리는 목소리 ]";
+	mes "오직 용기있는 전사만이";
+	mes "시험을 받으리...";
 	next;
 	mes " ";
-	mes "There's a small lever. Will you pull it?";
+	mes "작은 레버가 있습니다. 당기시겠습니까?";
 	next;
-	if(select("Pull.:Don't pull.") == 1) {
+	if(select("당긴다.:당기지 않는다.") == 1) {
 		if (getcharid(2) == .@GID) {
 			close2;
 			warp .@destination$,.@coordinates[0],.@coordinates[1];
 			end;
 		}
 		mes " ";
-		mes "Nothing happened.";
+		mes "반응이 없습니다.";
 		close;
 	}
 	close;
 }
 
-// Guardian Spawner Template
+// 가디언 소환
 //============================================================
 -	script	Gld_Guard_Template::Gld_Guard_Template	-1,{
-// Spawn Guardians in castles
-// When adding new castles, ensure that the coordinates coincide
-// with the coordinates defined in the Guild Steward template.
+// 아지트에 가디언 스폰
+// 새로운 성을 추가 할 때, 좌표가 일치하는지 체크해야 함
+// 길드 집사 템플릿에 정의된 좌표를 사용 함
 OnSpawnGuardians:
-	// Define the types of guardians on a per castle basis.
-	// 1 - Soldier Guardian; 2 - Archer Guardian; 3 - Knight Guardian
-	// Define the x spawn point for each uardian.
-	// [0] = 1st guardian's x spawn point.
-	// Define the y spawn point for each uardian.
-	// [0] = 1st guardian's y spawn point.
-	// Aldebaran (Luina) Castles
+	// .@guardiantype = 가디언 타입
+	// 1 - 솔져 가디언, 2 - 아쳐 가디언, 3 - 마스터 가디언
+	// .@guardianposx = 가디언 스폰 좌표 x 정의
+	// [0] = 첫번째 가디언 스폰 좌표 x 정의
+	// .@guardianposy = 가디언 스폰 좌표 y 정의
+	// [0] = 첫번째 가디언 스폰 좌표 y 정의
+	// 알데바란 (루이나) 아지트
 	if (strnpcinfo(2) == "aldeg_cas01") { 
 		setarray .@guardiantype[0],1,2,2,2,2,3,3,3;
 		setarray .@guardianposx[0],17,39,38,45,21,218,213,73;
@@ -1022,7 +997,7 @@ OnSpawnGuardians:
 		setarray .@guardianposx[0],51,188,157,157,27,145,156,41;
 		setarray .@guardianposy[0],202,79,192,74,221,78,73,112;
 	}
-	// Geffen (Britoniah) Castles
+	// 게펜 (브리토리아) 아지트
 	else if (strnpcinfo(2) == "gefg_cas01") {
 		setarray .@guardiantype[0],1,1,1,2,2,3,3,3;
 		setarray .@guardianposx[0],67,184,62,36,50,50,189,200;
@@ -1048,7 +1023,7 @@ OnSpawnGuardians:
 		setarray .@guardianposx[0],45,71,72,66,177,66,177,193;
 		setarray .@guardianposy[0],149,163,142,47,50,17,35,166;
 	}
-	// Payon (Baulder) Castles
+	// 페이욘 (청림호수) 아지트
 	else if (strnpcinfo(2) == "payg_cas01") {
 		setarray .@guardiantype[0],2,2,2,2,2,2,2,3;
 		setarray .@guardianposx[0],229,225,222,99,65,36,51,138;
@@ -1074,7 +1049,7 @@ OnSpawnGuardians:
 		setarray .@guardianposx[0],19,33,266,266,263,263,250,36;
 		setarray .@guardianposy[0],279,260,234,279,37,21,22,36;
 	}
-	// Prontera (Valkyrie Realms) Castles
+	// 프론테라 (발키리렐름) 아지트
 	else if (strnpcinfo(2) == "prtg_cas01") {
 		setarray .@guardiantype[0],1,1,1,2,2,3,3,3;
 		setarray .@guardianposx[0],182,182,153,59,50,184,196,107;
@@ -1100,13 +1075,13 @@ OnSpawnGuardians:
 		setarray .@guardianposx[0],266,287,245,236,251,278,32,44;
 		setarray .@guardianposy[0],262,280,250,63,63,253,253,248;
 	}
-	// Add custom Guild Castles here.
+	// 커스텀 아지트는 여기에 추가
 	else {
 		end;
 	}
 
-	// Kill all existing guardians before spawning new ones.
-	// This should prevent duplicating Guardians when char Server disconnects.
+	// 새로운 아지트 주인 변경시 기존 가디언 삭제
+	// 캐릭 서버가 끊기며, 이중 가디언 생성을 방지하기 위함
 	killmonster strnpcinfo(2),strnpcinfo(0)+"::OnGuardianDied";
 
 	for( set .@i, 0; .@i <= 7 ; set .@i, .@i+1 ) {
@@ -1121,27 +1096,29 @@ OnSpawnGuardians:
 	end;
 
 OnGuardianDied:
+	// rathena상에는 없지만, kro에는 방송 출력 됨
+	MapAnnounce strnpcinfo(2),"가디언이 파괴 되었습니다.",17;
 	end;
 }
 
-// Treasure Room Spawn Template
+// 길드 보물상자 리스폰
 //============================================================
 -	script	Gld_Trea_Spawn::Gld_Trea_Spawn	-1,{
 	end;
 
 OnClock0001:
-	// Do nothing if this script is the template.
+	// 이 스크립트가 단일 템플릿인 경우 작동 방지
 	if (strnpcinfo(1) == "Gld_Trea_Spawn") end;
-	
+
 	set .@GID, GetCastleData(strnpcinfo(2),CD_GUILD_ID);
-	
-	// If there is no owner, do nothing.
+
+	// 아지트 주인이 없을경우 작동 방지
 	if (!.@GID) end;
 
-	// Is there Economy in this castle?
+	// 아지트의 상업 발전도에 따른 보물상자 증가
 	set .@Treasure,GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY)/5+4;
 
-	// Set information
+	// 보물상자 좌표 정의 (db상의 보물상자 몬스터 이름 한글로 설정 안되어있을 경우, 영문으로 출력됨)
 	if (strnpcinfo(2) == "aldeg_cas01") { 
 		set .@treasurebox,1324;
 		setarray .@treasurex[0],115,122,115,122,116,117,118,119,120,121,121,121,121,121,121,120,119,118,117,116,116,116,116,116;
@@ -1242,13 +1219,13 @@ OnClock0001:
 		setarray .@treasurex[0],275,276,276,275,273,274,275,276,277,278,278,278,278,278,278,277,276,275,274,273,273,273,273,273;
 		setarray .@treasurey[0],178,178,177,177,180,180,180,180,180,180,179,178,177,176,175,175,175,175,175,175,176,177,178,179;
 	}
-	// Add custom Guild Castles here.
+	// 커스텀 성은 이곳에 추가
 	else {
 		end;
 	}
 
-	// Apply investment to Eco. and Def. Only happens if there were investments made.
-	// Permanent Development can only happen once per day.
+	// 상업 발전도와 방어도에 투자를 적용 함. (투자가 이루어진 경우에만)
+	// 길드스킬 영구적인 발전은 50% 라도, 한번만 수행 됨
 	if (GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY)) {
 		set .@Economy,GetCastleData(strnpcinfo(2),CD_CURRENT_ECONOMY);
 		SetCastleData strnpcinfo(2),CD_CURRENT_ECONOMY,.@Economy + GetCastleData(strnpcinfo(2),CD_INVESTED_ECONOMY) + (rand(2) && getgdskilllv(.@GID,10014));
@@ -1259,16 +1236,16 @@ OnClock0001:
 		SetCastleData strnpcinfo(2),CD_CURRENT_DEFENSE,.@Defence + GetCastleData(strnpcinfo(2),CD_INVESTED_DEFENSE);
 		if (GetCastleData(strnpcinfo(2),CD_CURRENT_DEFENSE) > 100) SetCastleData strnpcinfo(2),CD_CURRENT_DEFENSE,100;
 	}
-	// Reset daily investment limits.
+	// 2회 투자횟수 초기화
 	setcastledata strnpcinfo(2),CD_INVESTED_ECONOMY,0;
 	setcastledata strnpcinfo(2),CD_INVESTED_DEFENSE,0;
 
-	// Spawn boxes in proper order.
+	// 상업도 투자에 따른 정해진 좌표 순서대로 추가 보물상자 생성
 	for (set .@i,0; .@i < .@Treasure ; set .@i,.@i+1) {
-		// set treasure box ID
+		// 보물상자 몬스터 ID 설정
 		set .@boxid, .@treasurebox + (.@i+2) % 2;
 		set .@box,1 << .@i;
-		// Spawn or do not spawn chests if one already exists.
+		// 보물상자가 이미 스폰중인 경우 상자를 생성하지 않음
 		if ((getd("$@"+strnpcinfo(2)+"_treasure") & .@box) == 0) {
 			monster strnpcinfo(2),.@treasurex[.@i],.@treasurey[.@i],"Treasure Chest",.@boxid,1,"Treasure#"+strnpcinfo(2)+"::OnTreasureDied"+.@i;
 			setd "$@"+strnpcinfo(2)+"_treasure",getd("$@"+strnpcinfo(2)+"_treasure") | .@box;
@@ -1276,7 +1253,7 @@ OnClock0001:
 	}
 	end;
 
-// Individual "You killed a chest" events to ensure proper spawning at the change of day.
+// 길드 마스터가 보물상자를 없애지 않을경우 다음날 재스폰 방지를 위한 설정
 OnTreasureDied0:
 	setd "$@"+strnpcinfo(2)+"_treasure",getd("$@"+strnpcinfo(2)+"_treasure") & ~1;
 	end;

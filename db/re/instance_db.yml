@@ -576,3 +576,9 @@ Body:
       Map: 1@jorlab
       X: 57
       Y: 45
+  - Id: 79
+    Name: Old Glast Heim CM
+    Enter:
+      Map: 1@gl_he
+      X: 150
+      Y: 28

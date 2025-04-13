@@ -1,0 +1,713 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Barter Database
+###########################################################################
+#
+# Barter Settings
+#
+###########################################################################
+#  - Name               NPC name.
+#    Map                Map name. (Default: not on a map)
+#    X                  Map x coordinate. (Default: 0)
+#    Y                  Map y coordinate. (Default: 0)
+#    Direction          Direction the NPC is looking. (Default: North)
+#    Sprite             Sprite name of the NPC. (Default: FakeNpc)
+#    Items:             List of sold items.
+#      - Index          Index of the item inside the shop. (0-...)
+#                       Maximum index depends on client.
+#        Item           Aegis name of the item.
+#        Stock          Amount of item in stock. 0 means unlimited. (Default: 0)
+#        Zeny           Cost of them item in Zeny. (Default: 0)
+#        RequiredItems: List of required items (Optional)
+#          - Index      Index of the required item. (0-4)
+#            Item       Aegis name of required item.
+#            Amount     Amount of required item. (Default: 1)
+#            Refine     Refine level of required item. (Default: 0)
+###########################################################################
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Body:
+###########################################################################
+##= mega Booster 
+###########################################################################
+  - Name: mega00
+    Items:
+      - Index: 0
+        Item: Booster_Hat_Box  # 부스터 의상 투구 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 50
+      - Index: 1
+        Item: Booster_Back_Box  # 부스터 의상 걸칠것 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 50
+      - Index: 2
+        Item: Metal_W_Box  # 메탈 무기상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 3
+        Item: Booster_W_Ticket #부스터 웨폰 교환권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 4
+        Item: Booster_W_Up_3  #부스터 웨폰 업그레이드 패키지
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 5
+        Item: Boost_C_Enchant_1  # 부스터 의상 인챈트권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 6
+        Item: Boost_C_Enchant_2  # 부스터 의상 프리미엄 인챈트권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 20
+      - Index: 7
+        Item: Memento_Box  #기념품 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 150
+      - Index: 8
+        Item: P_Memento_Box  #프리미엄 기념품 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 300
+  - Name: mega01
+    Items:
+      - Index: 0
+        Item: Metal_W_Box  # 메탈 무기상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin  # 부스터 코인
+            Amount: 5
+      - Index: 1
+        Item: Booster_W_Ticket #부스터 웨폰 교환권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 2
+        Item: Booster_W_Up_3  #부스터 웨폰 업그레이드 패키지
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 3
+        Item: Boost_C_Enchant_1 # 부스터 의상 인챈트권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 4
+        Item: Memento_Box  #기념품 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 150
+      - Index: 5
+        Item: P_Memento_Box  #프리미엄 기념품 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 300
+  - Name: mega02
+    Items:
+      - Index: 0
+        Item: S_Ignition_Cube  # 이그니션 쉐도우 큐브
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 1
+        Item: S_W_Breath_Cube  # 콜드 브레스 쉐도우 큐브
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 2
+        Item: S_F_Breath_Cube  # 파이어 브레스 쉐도우 큐브
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+  - Name: mega03
+    Items:
+      - Index: 0
+        Item: Special_Coin_Pack  # 특별한 재화 주머니
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 1
+      - Index: 1
+        Item: K_Secret_Key  #카츄아의 비밀열쇠
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 1
+      - Index: 2
+        Item: Blacksmith_Bless_Box_3  #대장장이의 축복 3개 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 7
+      - Index: 3
+        Item: Shadow_Hammer_Box_3  # 홀그렌의 쉐도우 제련망치 3개 상자
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 7
+      - Index: 4
+        Item: C_Cons_Of_Light_Dark_  # 의상 빛과 어둠의 마스터(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 20
+  - Name: mega04  # 검사 계열
+    Items:
+      - Index: 0
+        Item: IW_B_T_Sword  # 이그니션 웨이브 부스터 투핸드 소드
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: HB_B_T_Spear  # 헌드레드 브레스 부스터 스피어
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: BC_B_Spear  # 배니싱 캐논 부스터 스피어
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: PG_B_Sword # 프레셔 제네시스 부스터 소드
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega05  # 상인 계열
+    Items:
+      - Index: 0
+        Item: PT_B_Axe  # 파워 토네이도 부스터 액스
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: AK_B_Mace  # 암즈 너클 부스터 메이스
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: AC_B_Club  # 애시드 캐논 부스터 클럽
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: HS_T_Sword  # 헬즈 토네이도 부스터 소드
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega06  # 도둑 계열
+    Items:
+      - Index: 0
+        Item: RC_B_Katar  # 롤링 크로스 부스터 카타르
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: CA_B_Katar  # 카운터 어절트 부스터 카타르
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: TB_B_Bow  # 트라이앵글 봄 부스터 보우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: MF_B_Dagger  # 매직 페이탈 부스터 대거
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega07  # 마법사 계열
+    Items:
+      - Index: 0
+        Item: CS_B_Staff  # 크림즌 스트레인 부스터 스태프
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: CJ_B_Staff  # 체인 잭 부스터 스태프
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: SB_B_Book  # 스펠 볼트 부스터 북
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: ES_B_Stick # 엘레멘탈 스펠 부스터 스틱
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega08  # 복사 계열
+    Items:
+      - Index: 0
+        Item: AN_B_Wand  # 아도누스 부스터 완드
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: DD_B_Mace  # 듀플덱스 부스터 메이스
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: PS_B_Knuckle # 폭기신탄 부스터 너클
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: CP_B_Knuckle  # 천라포 부스터 너클
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega09 # 궁수 계열
+    Items:
+      - Index: 0
+        Item: AS_B_Bow  # 애로우 부스터 보우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: SB_B_Bow  # 샤프볼트 부스터 보우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: RS_B_Violin  # 레인스톰 부스터 바이올린
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: RS_B_Whip  # 레인스톰 부스터 휩
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 4
+        Item: MV_B_Violin  # 메탈릭 바이브레이션 부스터 바이올린
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 5
+        Item: MV_B_Whip  # 메탈릭 바이브레이션 부스터 휩
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega10  # 권성/소울링커 계열
+    Items:
+      - Index: 0
+        Item: ML_B_Book  # 문 스타라이트 부스터 북
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: SS_B_Book  # 선샤인 부스터 북
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: ES_B_Staff  # 에스 부스터 스태프
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: EC_B_Staff # 이블커스 부스터 스태프
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega11  # 소환사/닌자 계열
+    Items:
+      - Index: 0
+        Item: FCH_B_Huuma  # 풍창화 부스터 풍마수리검
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: SN_B_Huuma  # 십자 난화 부스터 풍마수리검
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: SP_B_Fox  # 루나틱 픽키 부스터 강아지 풀
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: GB_B_Fox  # 개박하 부스터 강아지풀 모형
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega12  # 노비스/거너 계열
+    Items:
+      - Index: 0
+        Item: DF_B_Revolver  # 데스페라도 파이어 부스터 리볼버
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: FR_B_Gatling  # 파이어 라운드 부스터 개틀링건
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: SN_B_Wand  # 슈퍼 노비스 부스터 완드
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: SN_B_Dagger  # 슈퍼 노비스 부스터 대거
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega13  # 쉐도우 장비
+    Items:
+      - Index: 0
+        Item: S_Booster_Armor  # 부스터 아머 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 1
+        Item: S_Booster_Shield  # 부스터 쉴드 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 2
+        Item: S_Booster_Shoes  # 부스터 슈즈 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 3
+        Item: S_Booster_Earing  # 부스터 이어링 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 4
+        Item: S_Booster_Pandent  # 부스터 펜던트 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 5
+        Item: S_RK_B_Weapon # 룬나이트 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 6
+        Item: S_LG_B_Weapon  # 로얄가드 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 7
+        Item: S_NC_B_Weapon  # 미케닉 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 8
+        Item: S_GN_B_Weapon  # 제네릭 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 9
+        Item: S_GC_B_Weapon # 길로틴크로스 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 10
+        Item: S_SC_B_Weapon  # 쉐도우체이서 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 11
+        Item: S_WL_B_Weapon  # 워록 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 12
+        Item: S_SO_B_Weapon  # 소서러 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 13
+        Item: S_AB_B_Weapon  # 아크비숍 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 14
+        Item: S_SR_B_Weapon  # 수라 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 15
+        Item: S_RA_B_Weapon  # 레인저 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 16
+        Item: S_WM_B_Weapon  # 민스트럴&원더러 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 17
+        Item: S_SU_Weapon  # 서머너 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 18
+        Item: S_SJ_Weapon # 성제 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 19
+        Item: S_KO_Weapon  # 카게로우&오보로 부스터 웨폰 쉐도우
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+  - Name: mega14  # ^일루시온 교환 상인^
+    Items:
+      - Index: 0
+        Item: E_Illusion_Armor_A  # 일루시온 아머 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 1
+        Item: E_Illusion_Armor_B  # 일루시온 아머 B타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 2
+        Item: E_Illusion_Engine_A # 일루시온 엔진윙 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 3
+        Item: E_Illusion_Engine_B  # 일루시온 엔진윙 B타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 4
+        Item: E_Illusion_Leg_A  # 일루시온 레그 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 5
+        Item: E_Illusion_Leg_B # 일루시온 레그 B타입(귀속) 
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 6
+        Item: E_Illusion_B_R  # 일루시온 부스터R(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 7
+        Item: E_Illusion_B_L  # 일루시온 부스터L(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 8
+        Item: E_Illusion_BC_R  # 일루시온 배틀칩R(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 9
+        Item: E_Illusion_BC_L # 일루시온 배틀칩L(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 10
+        Item: EP17_1_A_Ticket  # 일루시온 장비 교환권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 11
+        Item: E_ILL_Up  # 일루시온(귀속) 업그레이드 패키지
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+  - Name: mega15  # ^오토매틱 교환 상인^
+    Items:
+      - Index: 0
+        Item: E_Auto_Armor_A  # 오토매틱 아머 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 1
+        Item: E_Auto_Armor_B  # 오토매틱 아머 B타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 2
+        Item: E_Auto_Engine_A # 오토매틱 엔진윙 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 3
+        Item: E_Auto_Engine_B  # 오토매틱 엔진윙 B타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 4
+        Item: E_Auto_Leg_A  # 오토매틱 레그 A타입(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 5
+        Item: E_Auto_Leg_B # 오토매틱 레그 B타입(귀속) 
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 6
+        Item: E_Auto_B_R  # 오토매틱 부스터R(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 7
+        Item: E_Auto_B_L  # 오토매틱 부스터L(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 8
+        Item: E_Auto_BC_R  # 오토매틱 배틀칩R(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 9
+        Item: E_Auto_BC_L # 오토매틱 배틀칩L(귀속)
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 10
+        Item: EP17_2_A_Ticket  # 오토매틱 장비 교환권
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 11
+        Item: E_Auto_Up  # 오토매틱(귀속) 업그레이드 패키지
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5

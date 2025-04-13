@@ -43,7 +43,7 @@ Header:
 Body:
   - Look: Hair_Color
     Options:
-      - Index: -1
+      - Index: 0
         Value: 0
         CostsHuman:
             Price: 0
@@ -139,28 +139,28 @@ Body:
         Value: 7
         CostsHuman:
             Price: 100000
-        CostDoram:
+        CostsDoram:
             RequiredItem: J_Shop_Coupon2
             RequiredItemBox: J_Shop_Coupon2
       - Index: 8
         Value: 8
         CostsHuman:
             Price: 100000
-        CostDoram:
+        CostsDoram:
             RequiredItem: J_Shop_Coupon2
             RequiredItemBox: J_Shop_Coupon2
       - Index: 9
         Value: 9
         CostsHuman:
             Price: 100000
-        CostDoram:
+        CostsDoram:
             RequiredItem: J_Shop_Coupon2
             RequiredItemBox: J_Shop_Coupon2
       - Index: 10
         Value: 10
         CostsHuman:
             Price: 100000
-        CostDoram:
+        CostsDoram:
             RequiredItem: J_Shop_Coupon2
             RequiredItemBox: J_Shop_Coupon2
       - Index: 11
@@ -330,9 +330,15 @@ Body:
         CostsHuman:
             RequiredItem: Clothing_Dye_Coupon
             RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
       - Index: 5
         Value: 5
         CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
             RequiredItem: Clothing_Dye_Coupon
             RequiredItemBox: CCloth_Dye_Coupon_Box
       - Index: 6
@@ -340,9 +346,15 @@ Body:
         CostsHuman:
             RequiredItem: Clothing_Dye_Coupon
             RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
       - Index: 7
         Value: 7
         CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
             RequiredItem: Clothing_Dye_Coupon
             RequiredItemBox: CCloth_Dye_Coupon_Box
   - Look: Head_Top
@@ -420,10 +432,526 @@ Body:
   - Look: Body2
     Options:
       - Index: 1
-        Value: 0
+        Value: 4252
+        CostsHuman:
+            Price: 0
+      - Index: 2
+        Value: 4060
         CostsHuman:
             RequiredItem: Costume_Ticket
-      - Index: 2
-        Value: 1
+      - Index: 3
+        Value: 4332
         CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 4
+        Value: 4253
+        CostsHuman:
+            Price: 0
+      - Index: 5
+        Value: 4064
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 6
+        Value: 4333
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 7
+        Value: 4254
+        CostsHuman:
+            Price: 0
+      - Index: 8
+        Value: 4065
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 9
+        Value: 4334
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 10
+        Value: 4255
+        CostsHuman:
+            Price: 0
+      - Index: 11
+        Value: 4061
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 12
+        Value: 4335
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 13
+        Value: 4256
+        CostsHuman:
+            Price: 0
+      - Index: 14
+        Value: 4063
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 15
+        Value: 4336
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 16
+        Value: 4257
+        CostsHuman:
+            Price: 0
+      - Index: 17
+        Value: 4062
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 18
+        Value: 4337
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 19
+        Value: 4258
+        CostsHuman:
+            Price: 0
+      - Index: 20
+        Value: 4073
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 21
+        Value: 4338
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 22
+        Value: 4259
+        CostsHuman:
+            Price: 0
+      - Index: 23
+        Value: 4078
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 24
+        Value: 4339
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 25
+        Value: 4260
+        CostsHuman:
+            Price: 0
+      - Index: 26
+        Value: 4079
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 27
+        Value: 4340
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 28
+        Value: 4261
+        CostsHuman:
+            Price: 0
+      - Index: 29
+        Value: 4074
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 30
+        Value: 4341
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 31
+        Value: 4262
+        CostsHuman:
+            Price: 0
+      - Index: 32
+        Value: 4077
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 33
+        Value: 4342
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 34
+        Value: 4263
+        CostsHuman:
+            Price: 0
+      - Index: 35
+        Value: 4075
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 36
+        Value: 4343
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 37
+        Value: 4264
+        CostsHuman:
+            Price: 0
+      - Index: 38
+        Value: 4076
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 39
+        Value: 4344
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 40
+        Value: 4060
+        CostsHuman:
+            Price: 0
+      - Index: 41
+        Value: 4332
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 42
+        Value: 4054
+        CostsHuman:
+            Price: 0
+      - Index: 43
+        Value: 4332
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 44
+        Value: 4096
+        CostsHuman:
+            Price: 0
+      - Index: 45
+        Value: 4332
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 46
+        Value: 4064
+        CostsHuman:
+            Price: 0
+      - Index: 47
+        Value: 4333
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 48
+        Value: 4058
+        CostsHuman:
+            Price: 0
+      - Index: 49
+        Value: 4333
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 50
+        Value: 4100
+        CostsHuman:
+            Price: 0
+      - Index: 51
+        Value: 4333
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 52
+        Value: 4065
+        CostsHuman:
+            Price: 0
+      - Index: 53
+        Value: 4334
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 54
+        Value: 4059
+        CostsHuman:
+            Price: 0
+      - Index: 55
+        Value: 4334
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 56
+        Value: 4101
+        CostsHuman:
+            Price: 0
+      - Index: 57
+        Value: 4334
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 58
+        Value: 4061
+        CostsHuman:
+            Price: 0
+      - Index: 59
+        Value: 4335
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 60
+        Value: 4055
+        CostsHuman:
+            Price: 0
+      - Index: 61
+        Value: 4335
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 62
+        Value: 4097
+        CostsHuman:
+            Price: 0
+      - Index: 63
+        Value: 4335
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 64
+        Value: 4063
+        CostsHuman:
+            Price: 0
+      - Index: 65
+        Value: 4336
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 66
+        Value: 4057
+        CostsHuman:
+            Price: 0
+      - Index: 67
+        Value: 4336
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 68
+        Value: 4099
+        CostsHuman:
+            Price: 0
+      - Index: 69
+        Value: 4336
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 70
+        Value: 4062
+        CostsHuman:
+            Price: 0
+      - Index: 71
+        Value: 4337
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 72
+        Value: 4056
+        CostsHuman:
+            Price: 0
+      - Index: 73
+        Value: 4337
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 74
+        Value: 4098
+        CostsHuman:
+            Price: 0
+      - Index: 75
+        Value: 4337
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 76
+        Value: 4073
+        CostsHuman:
+            Price: 0
+      - Index: 77
+        Value: 4338
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 78
+        Value: 4066
+        CostsHuman:
+            Price: 0
+      - Index: 79
+        Value: 4338
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 80
+        Value: 4102
+        CostsHuman:
+            Price: 0
+      - Index: 81
+        Value: 4338
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 82
+        Value: 4078
+        CostsHuman:
+            Price: 0
+      - Index: 83
+        Value: 4339
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 84
+        Value: 4071
+        CostsHuman:
+            Price: 0
+      - Index: 85
+        Value: 4339
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 86
+        Value: 4107
+        CostsHuman:
+            Price: 0
+      - Index: 87
+        Value: 4339
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 88
+        Value: 4079
+        CostsHuman:
+            Price: 0
+      - Index: 89
+        Value: 4340
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 90
+        Value: 4072
+        CostsHuman:
+            Price: 0
+      - Index: 91
+        Value: 4340
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 92
+        Value: 4108
+        CostsHuman:
+            Price: 0
+      - Index: 93
+        Value: 4340
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 94
+        Value: 4074
+        CostsHuman:
+            Price: 0
+      - Index: 95
+        Value: 4341
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 96
+        Value: 4067
+        CostsHuman:
+            Price: 0
+      - Index: 97
+        Value: 4341
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 98
+        Value: 4103
+        CostsHuman:
+            Price: 0
+      - Index: 99
+        Value: 4341
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 100
+        Value: 4077
+        CostsHuman:
+            Price: 0
+      - Index: 101
+        Value: 4342
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 102
+        Value: 4070
+        CostsHuman:
+            Price: 0
+      - Index: 103
+        Value: 4342
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 104
+        Value: 4106
+        CostsHuman:
+            Price: 0
+      - Index: 105
+        Value: 4342
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 106
+        Value: 4075
+        CostsHuman:
+            Price: 0
+      - Index: 107
+        Value: 4343
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 108
+        Value: 4068
+        CostsHuman:
+            Price: 0
+      - Index: 109
+        Value: 4343
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 110
+        Value: 4104
+        CostsHuman:
+            Price: 0
+      - Index: 111
+        Value: 4343
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 112
+        Value: 4076
+        CostsHuman:
+            Price: 0
+      - Index: 113
+        Value: 4344
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 114
+        Value: 4069
+        CostsHuman:
+            Price: 0
+      - Index: 115
+        Value: 4344
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 116
+        Value: 4105
+        CostsHuman:
+            Price: 0
+      - Index: 117
+        Value: 4344
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 118
+        Value: 4302
+        CostsHuman:
+            Price: 0
+      - Index: 119
+        Value: 4239
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 120
+        Value: 4303
+        CostsHuman:
+            Price: 0
+      - Index: 121
+        Value: 4240
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 122
+        Value: 4304
+        CostsHuman:
+            Price: 0
+      - Index: 123
+        Value: 4211
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 124
+        Value: 4305
+        CostsHuman:
+            Price: 0
+      - Index: 125
+        Value: 4212
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 126
+        Value: 4306
+        CostsHuman:
+            Price: 0
+      - Index: 127
+        Value: 4215
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 128
+        Value: 4307
+        CostsHuman:
+            Price: 0
+      - Index: 129
+        Value: 4190
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 130
+        Value: 4308
+        CostsDoram:
+            Price: 0
+      - Index: 131
+        Value: 4218
+        CostsDoram:
             RequiredItem: Costume_Ticket

@@ -1,0 +1,98 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 19 NPCs.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Related to new content.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+icas_in,192,57,3	script	소각용 화로#ep19	4_POINT_RED,{
+	mes "뜨거운 열기가 느껴지는 화로가 있다.";
+	mes "쓸모 없는 딤 글레이시아 무기가 있다면 넣어서 녹여버리자.";
+	close2;
+	laphine_synthesis("Dim Glacier Extractor");
+	end;
+}
+
+icas_in,188,60,3	script	포르르#ep19	4_EP19_IWIN,{
+	cutin "ep19_iwin11.png",2;
+	mes "[포르르]";
+	mes "최근 버려진 구덩이 등지에서 무기들이 발견되고 있는 거 아시오?";
+	mes "심상찮은 마력이 깃든 물건이라 딤 글레이시아라고 부르고 있소.";
+	next;
+	mes "[포르르]";
+	mes "벨군드 님과 연구를 좀 해봤는데 변질된 요르문간드의 마력이 깃들어 있음을 밝혀냈소.";
+	mes "혹여 딤 글레이시아를 가지고 있다면 마력을 조정해 무기의 성능을 올려보지.";
+	next;
+	mes "[포르르]";
+	mes "다소 까다로운 정제용 재료가 필요하긴 한데, 부족한 건 적당히 재료를 서로 교환하는 게 어떻소?";
+	next;
+	switch( select( "재료를 교환한다.", "딤 글레이시아의 잠재력을 깨운다.", "불필요한 무기는 어떻게 하죠?", "그렇군요." ) ) {
+	case 1:
+		mes "[포르르]";
+		mes "마람 님이 가져온 자수정 조각이 이런저런 저장용기 만드는데 도움이 되었소.";
+		mes "이곳에선 구할 수 없는 물건이니 종종 요구할지도 모르겠소.";
+		close2;
+		cutin "",255;
+		callshop "barter_ep19_new_content";
+		end;
+	case 2:
+		mes "[포르르]";
+		mes "좋은 결과 있기를 바라오.";
+		close2;
+		cutin "",255;
+		item_enchant(47);
+		end;
+	case 3:
+		mes "[포르르]";
+		mes "아래쪽에 있는 화로가 보이오?";
+		mes "연구를 다 한 쓸모 없는 것들을 소각하는 용도로 만들어 두었소.";
+		next;
+		mes "[포르르]";
+		mes "버릴 거라면 그 소각로를 사용하시오.";
+		mes "딤 글레이시아는 마력을 가지고 있기 때문에 녹이면 뭐가 나와도 나오긴 할 거요.";
+		close3;
+	case 4:
+		mes "[포르르]";
+		mes "한동안 머물며 벨군드 님의 일을 도울 것이오.";
+		mes "언제든 편히 찾아오시오.";
+		close3;
+	}
+}
+
+// Storage
+icas_in,169,70,3	script	수납장#ep19	4_POINT_BLUE,{
+	.@total_storage = 1;	// by default rAthena just open the basic storage (but 3 on kRO)
+
+	cutin "ep19_iwin02.png",2;
+	mes "[호요요]";
+	mes "수납장 쓰려고효?";
+	mes "효효효~ 대륙에서 쓰던 동전을 넣어봐효.";
+	mes "호오... 500zeny 정도 넣어보겠어효?";
+	next;
+	cutin "",255;
+	for ( .@i = 0; .@i < .@total_storage; .@i++ )
+		.@menu$ += (.@i+1) + "번 창고" + ":";
+	.@menu$ += "그만 둔다.";
+	.@s = select( .@menu$ ) - 2;
+
+	if (.@s == (.@total_storage - 1)) {
+		mes "다음에 사용하기로 했다.";
+		close;
+	}
+
+	if (Zeny < 500) {
+		mes "수납장을 사용하려면 500zeny를 투입해야 하는 것 같다.";
+		close3;
+	}
+	mes "동전을 투입하자 덜컥 소리와 함께 수납장이 열렸다.";
+	close2;
+	Zeny -= 500;
+	if (.@s == -1)	// basic storage
+		openstorage;
+	else	// "premium" storage starting from index 0
+		openstorage2 .@s, STOR_MODE_GET|STOR_MODE_PUT;	// note: opened before close button
+	end;
+}

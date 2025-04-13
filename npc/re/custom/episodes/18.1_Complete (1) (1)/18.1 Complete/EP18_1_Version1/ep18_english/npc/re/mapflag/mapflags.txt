@@ -1,0 +1,99 @@
+//===== rAthena Script =======================================
+//= Mapflags from episode 18.1
+//===== Description: =========================================
+//= The file include several mapflags.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+oz_dun01	mapflag	nomemo
+
+oz_dun02	mapflag	nomemo
+
+wolfvill	mapflag	nobranch
+wolfvill	mapflag	nowarp
+wolfvill	mapflag	nowarpto
+wolfvill	mapflag	restricted	7
+
+gw_fild01	mapflag	nomemo
+
+gw_fild02	mapflag	nomemo
+
+que_thr	mapflag	nomemo
+que_thr	mapflag	nobranch
+que_thr	mapflag	nowarp
+que_thr	mapflag	nowarpto
+que_thr	mapflag	noteleport
+que_thr	mapflag	monster_noteleport
+que_thr	mapflag	noicewall
+
+// Oz Labyrinth
+1@oz	mapflag	nomemo
+1@oz	mapflag	nosave	SavePoint
+1@oz	mapflag	nobranch
+1@oz	mapflag	nowarp
+1@oz	mapflag	nowarpto
+1@oz	mapflag	noteleport
+1@oz	mapflag	monster_noteleport
+1@oz	mapflag	noicewall
+1@oz	mapflag	partylock
+1@oz	mapflag	restricted	6
+
+// Thor Gunsu Base
+1@tcamp	mapflag	nomemo
+1@tcamp	mapflag	nosave	SavePoint
+1@tcamp	mapflag	nobranch
+1@tcamp	mapflag	nowarp
+1@tcamp	mapflag	nowarpto
+1@tcamp	mapflag	noteleport
+1@tcamp	mapflag	monster_noteleport
+1@tcamp	mapflag	noicewall
+1@tcamp	mapflag	partylock
+1@tcamp	mapflag	restricted	6
+
+// A Gathering Place of Wolves (and Sanctuary Purification)
+1@nyr	mapflag	nomemo
+1@nyr	mapflag	nosave	SavePoint
+1@nyr	mapflag	nobranch
+1@nyr	mapflag	nowarp
+1@nyr	mapflag	nowarpto
+1@nyr	mapflag	noteleport
+1@nyr	mapflag	monster_noteleport
+1@nyr	mapflag	noicewall
+1@nyr	mapflag	partylock
+1@nyr	mapflag	restricted	6
+
+2@nyr	mapflag	nomemo
+2@nyr	mapflag	nosave	SavePoint
+2@nyr	mapflag	nobranch
+2@nyr	mapflag	nowarp
+2@nyr	mapflag	nowarpto
+2@nyr	mapflag	noteleport
+2@nyr	mapflag	monster_noteleport
+2@nyr	mapflag	noicewall
+2@nyr	mapflag	partylock
+2@nyr	mapflag	restricted	6
+
+// Villa of High Priest
+1@adv	mapflag	nomemo
+1@adv	mapflag	nosave	SavePoint
+1@adv	mapflag	nobranch
+1@adv	mapflag	nowarp
+1@adv	mapflag	nowarpto
+1@adv	mapflag	noteleport
+1@adv	mapflag	monster_noteleport
+1@adv	mapflag	noicewall
+1@adv	mapflag	partylock
+1@adv	mapflag	restricted	6
+
+// Villa of Deception
+1@advs	mapflag	nomemo
+1@advs	mapflag	nosave	SavePoint
+1@advs	mapflag	nobranch
+1@advs	mapflag	nowarp
+1@advs	mapflag	nowarpto
+1@advs	mapflag	noteleport
+1@advs	mapflag	monster_noteleport
+1@advs	mapflag	noicewall
+1@advs	mapflag	partylock
+1@advs	mapflag	restricted	6

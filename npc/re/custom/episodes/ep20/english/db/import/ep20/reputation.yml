@@ -1,0 +1,12 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: REPUTATION_DB
+  Version: 1
+
+Body:
+  - Id: 4
+    Name: "하얀 고양이 동맹"   # White cat alliance
+    Variable: RepPointsWhiteCatAlliance
+    Minimum: -3000
+    Maximum: 3000

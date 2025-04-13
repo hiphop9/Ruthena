@@ -13,6 +13,7 @@
 #include "showmsg.hpp"
 #include "strlib.hpp"
 #include "utils.hpp"
+#include <config/custom.hpp>
 
 //----------------------------
 //	file entry table struct
@@ -401,7 +402,12 @@ void* grfio_reads(const char* fname, size_t* size)
 			size_t declen = ftell(in);
 			fseek(in,0,SEEK_SET);
 			buf2 = (unsigned char *)aMalloc(declen+1);  // +1 for resnametable zero-termination
-			if(fread(buf2, 1, declen, in) != declen) ShowError("An error occured in fread grfio_reads, fname=%s \n",fname);
+			if(fread(buf2, 1, declen, in) != declen) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("fread 중 grfio_reads에서 오류가 발생했습니다. fname=%s \n",fname);
+				else
+					ShowError("An error occured in fread grfio_reads, fname=%s \n",fname);
+			}
 			fclose(in);
 
 			if( size )
@@ -410,7 +416,10 @@ void* grfio_reads(const char* fname, size_t* size)
 			if (entry != nullptr && entry->gentry < 0) {
 				entry->gentry = -entry->gentry;	// local file checked
 			} else {
-				ShowError("grfio_reads: %s not found (local file: %s)\n", fname, lfname);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("grfio_reads: %s 파일을 찾을 수 없습니다. (local file: %s)\n", fname, lfname);
+				else
+					ShowError("grfio_reads: %s not found (local file: %s)\n", fname, lfname);
 				return nullptr;
 			}
 		}
@@ -423,7 +432,12 @@ void* grfio_reads(const char* fname, size_t* size)
 			size_t fsize = entry->srclen_aligned;
 			unsigned char *buf = (unsigned char *)aMalloc(fsize);
 			fseek(in, entry->srcpos, 0);
-			if(fread(buf, 1, fsize, in) != fsize) ShowError("An error occured in fread in grfio_reads, grfname=%s\n",grfname);
+			if(fread(buf, 1, fsize, in) != fsize) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("fread중 grfio_reads에서 오류가 발생했습니다. grfname=%s\n",grfname);
+				else
+					ShowError("An error occured in fread in grfio_reads, grfname=%s\n",grfname);
+			}
 			fclose(in);
 
 			buf2 = (unsigned char *)aMalloc(entry->declen+1);  // +1 for resnametable zero-termination
@@ -448,7 +462,10 @@ void* grfio_reads(const char* fname, size_t* size)
 
 			aFree(buf);
 		} else {
-			ShowError("grfio_reads: %s not found (GRF file: %s)\n", fname, grfname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("grfio_reads: %s 파일을 찾을 수 없습니다. (GRF file: %s)\n", fname, grfname);
+			else
+				ShowError("grfio_reads: %s not found (GRF file: %s)\n", fname, grfname);
 			return nullptr;
 		}
 	}
@@ -465,7 +482,10 @@ int32 grfio_read_rsw_water_level( const char* fname ){
 	}
 
 	if( strncmp( (char*)rsw, "GRSW", strlen( "GRSW" ) ) ){
-		ShowError( "grfio_read_rsw_water_level: Invalid RSW signature in file %s\n", fname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "grfio_read_rsw_water_level: %s 파일의 RSW 서명이 잘못되었습니다.\n", fname );
+		else
+			ShowError( "grfio_read_rsw_water_level: Invalid RSW signature in file %s\n", fname );
 		aFree( rsw );
 		return RSW_NO_WATER;
 	}
@@ -473,7 +493,10 @@ int32 grfio_read_rsw_water_level( const char* fname ){
 	uint16 version = ( rsw[4] << 8 ) | rsw[5];
 
 	if( version < 0x104 || version > 0x205 ){
-		ShowError( "grfio_read_rsw_water_level: Unsupported RSW version 0x%04x in file %s\n", version, fname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "grfio_read_rsw_water_level: RSW 버전 0x%04x인 파일 %s은(는) 지원하지 않습니다.\n", version, fname );
+		else
+			ShowError( "grfio_read_rsw_water_level: Unsupported RSW version 0x%04x in file %s\n", version, fname );
 		aFree( rsw );
 		return RSW_NO_WATER;
 	}
@@ -535,18 +558,32 @@ static int grfio_entryread(const char* grfname, int gentry)
 	if( fp == nullptr ) {
 		ShowWarning("GRF data file not found: '%s'\n",grfname);
 		return 1;	// 1:not found error
-	} else
-		ShowInfo("GRF data file found: '%s'\n",grfname);
+	} else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("'%s'인 GRF 데이터 파일을 찾았습니다.\n",grfname);
+		else
+			ShowInfo("GRF data file found: '%s'\n",grfname);
+	}
 
 	fseek(fp,0,SEEK_END);
 	grf_size = ftell(fp);
 	fseek(fp,0,SEEK_SET);
 
-	if(fread(grf_header,1,0x2e,fp) != 0x2e) { ShowError("Couldn't read all grf_header element of %s \n", grfname); }
+	if(fread(grf_header,1,0x2e,fp) != 0x2e) { 
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s의 모든 grf_header 요소를 읽을 수 없습니다.\n", grfname);
+		else
+			ShowError("Couldn't read all grf_header element of %s \n", grfname); 
+	}
 	if( strcmp((const char*)grf_header,"Master of Magic") != 0 || fseek(fp,getlong(grf_header+0x1e),SEEK_CUR) != 0 ) {
 		fclose(fp);
-		ShowError("GRF %s read error\n", grfname);
-		ShowError("GRF possibly over 2GB in size.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowError("GRF %s 읽기 에러!!\n", grfname);
+			ShowError("GRF의 크기가 2GB 이상일 가능성이 있습니다.\n");
+		} else {
+			ShowError("GRF %s read error\n", grfname);
+			ShowError("GRF possibly over 2GB in size.\n");
+		}
 		return 2;	// 2:file format error
 	}
 
@@ -555,7 +592,12 @@ static int grfio_entryread(const char* grfname, int gentry)
 	if( grf_version == 0x01 ) {// ****** Grf version 01xx ******
 		size_t list_size = grf_size - ftell(fp);
 		grf_filelist = (unsigned char *) aMalloc(list_size);
-		if(fread(grf_filelist,1,list_size,fp) != list_size) { ShowError("Couldn't read all grf_filelist element of %s \n", grfname); }
+		if(fread(grf_filelist,1,list_size,fp) != list_size) { 
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%s의 모든 grf_filelist 요소를 읽을 수 없습니다.\n", grfname);
+			else
+				ShowError("Couldn't read all grf_filelist element of %s \n", grfname); 
+		}
 		fclose(fp);
 
 		entrys = getlong(grf_header+0x26) - getlong(grf_header+0x22) - 7;
@@ -571,7 +613,10 @@ static int grfio_entryread(const char* grfname, int gentry)
 				int srclen = getlong(grf_filelist+ofs2+0) - getlong(grf_filelist+ofs2+8) - 715;
 
 				if( strlen(fname) > sizeof(aentry.fn) - 1 ) {
-					ShowFatalError("GRF file name %s is too long\n", fname);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowFatalError("GRF 파일 이름 %s은(는) 너무 깁니다.\n", fname);
+					else
+						ShowFatalError("GRF file name %s is too long\n", fname);
 					aFree(grf_filelist);
 					exit(EXIT_FAILURE);
 				}
@@ -602,19 +647,32 @@ static int grfio_entryread(const char* grfname, int gentry)
 		unsigned char *rBuf;
 		uLongf rSize, eSize;
 
-		if(fread(eheader,1,8,fp) != 8) ShowError("An error occured in fread while reading eheader buffer\n");
+		if(fread(eheader,1,8,fp) != 8) { 
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("eheader 버퍼를 읽는 동안 fread에서 오류가 발생했습니다.\n");
+			else
+				ShowError("An error occured in fread while reading eheader buffer\n");
+		}
 		rSize = getlong(eheader);	// Read Size
 		eSize = getlong(eheader+4);	// Extend Size
 
 		if( (long)rSize > grf_size-ftell(fp) ) {
 			fclose(fp);
-			ShowError("Illegal data format: GRF compress entry size\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("fread에서 오류가 발생했습니다. \n");
+			else
+				ShowError("Illegal data format: GRF compress entry size\n");
 			return 4;
 		}
 
 		rBuf = (unsigned char *)aMalloc(rSize);	// Get a Read Size
 		grf_filelist = (unsigned char *)aMalloc(eSize);	// Get a Extend Size
-		if(fread(rBuf,1,rSize,fp) != rSize) ShowError("An error occured in fread \n");
+		if(fread(rBuf,1,rSize,fp) != rSize) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("fread에서 오류가 발생했습니다. \n");
+			else
+				ShowError("An error occured in fread \n");
+		}
 		fclose(fp);
 		decode_zip(grf_filelist, &eSize, rBuf, rSize);	// Decode function
 		aFree(rBuf);
@@ -630,7 +688,10 @@ static int grfio_entryread(const char* grfname, int gentry)
 			int type = grf_filelist[ofs2+12];
 
 			if( strlen(fname) > sizeof(aentry.fn)-1 ) {
-				ShowFatalError("GRF file name %s is too long\n", fname);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowFatalError("GRF 파일 이름 %s은(는) 너무 깁니다.\n", fname);
+				else
+					ShowFatalError("GRF file name %s is too long\n", fname);
 				aFree(grf_filelist);
 				exit(EXIT_FAILURE);
 			}
@@ -657,7 +718,10 @@ static int grfio_entryread(const char* grfname, int gentry)
 		aFree(grf_filelist);
 	} else {// ****** Grf Other version ******
 		fclose(fp);
-		ShowError("GRF version %04x not supported\n",getlong(grf_header+0x2a));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("GRF 버전 %04x은(는) 지원하지 않습니다.\n",getlong(grf_header+0x2a));
+		else
+			ShowError("GRF version %04x not supported\n",getlong(grf_header+0x2a));
 		return 4;
 	}
 
@@ -732,7 +796,10 @@ static void grfio_resourcecheck(void)
 		}
 
 		fclose(fp);
-		ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", i, "resnametable.txt");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%d" CL_RESET "'개의 항목을 '" CL_WHITE "%s" CL_RESET "'에서 읽어왔습니다.\n", i, "resnametable.txt");
+		else
+			ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", i, "resnametable.txt");
 		return;	// we're done here!
 	}
 
@@ -755,7 +822,10 @@ static void grfio_resourcecheck(void)
 		}
 
 		aFree(buf);
-		ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", i, "data\\resnametable.txt");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%d" CL_RESET "'개의 항목을 '" CL_WHITE "%s" CL_RESET "'에서 읽어왔습니다.\n", i, "data\\resnametable.txt");
+		else
+			ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", i, "data\\resnametable.txt");
 		return;
 	}
 }
@@ -840,12 +910,18 @@ void grfio_init(const char* fname)
 		}
 
 		fclose(data_conf);
-		ShowStatus("Done reading '" CL_WHITE "%s" CL_RESET "'.\n", fname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'을(를) 읽어왔습니다.\n", fname);
+		else
+			ShowStatus("Done reading '" CL_WHITE "%s" CL_RESET "'.\n", fname);
 	}
 
-	if( grf_num == 0 )
-		ShowInfo("No GRF loaded, using default data directory\n");
-
+	if( grf_num == 0 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("로드된 GRF가 없습니다. 기본 데이터 디렉토리를 사용하세요.\n");
+		else
+			ShowInfo("No GRF loaded, using default data directory\n");
+	}
 	// Unneccessary area release of filelist
 	filelist_compact();
 

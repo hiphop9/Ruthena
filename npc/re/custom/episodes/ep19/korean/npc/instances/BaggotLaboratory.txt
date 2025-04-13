@@ -1,0 +1,490 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= 2 Instances:
+// - Baggot Laboratory
+// - Simulation Battle
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Instance of episode 19 (same map).
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Baggot Laboratory
+// ------------------------------
+
+// Main Quest: Step 58
+jor_dun03,57,63,3	script	융케아#ep19re2::ep19_jor_dun03_57_63	4_EP19_JUNCEA,{
+	if (ep19_main == 49) {	// Step 58
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "아, 단둘이 얘기하고 싶어. 세네키오간드. 괜찮을까?";
+		next;
+		cutin "",255;
+		mes "- ^0000ff1인 파티를 맺어 융케아의 이야기를 듣자.^000000 -";
+		erasequest 16659;
+		setquest 16660;
+		ep19_main = 50;
+		close;
+	}
+	if (ep19_main == 50) {
+		if (is_party_leader() == false) {
+			mes "[융케아]";
+			mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
+			close;
+		}
+		.@md_name$ = "바곳의 연구실";
+		switch( select( "바곳의 연구실 입장 준비", "바곳의 연구실 입장" ) ) {
+		case 1:
+			if (is_party_leader() == false) {
+				mes "[융케아]";
+				mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
+				close;
+			}
+			mes "- ^0000ff입장 준비가 시작되었습니다. 준비를 마친 뒤 바곳의 연구실 입장 버튼을 눌러 입장하십시오.^000000 -";
+			instance_create(.@md_name$);
+			close;
+		case 2:
+			if (is_party_leader() == false) {
+				mes "[융케아]";
+				mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
+				close;
+			}
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "An unknown error occurred.";
+				close;
+			case IE_NOINSTANCE:
+				mes "- ^0000ff메모리얼 던전이 생성되지 않았습니다. 다시 확인해 주십시오.^000000 -";
+				close;
+			case IE_NOMEMBER:
+				mes "[융케아]";
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close;
+			case IE_OK:
+				// warp "1@jorlab",57,45;
+				end;
+			}
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16659) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16660) == 1" );
+	end;
+}
+
+
+1@jorlab,1,1,0	script	#jorlab_main	-1,{
+	end;
+OnInstanceInit:
+	'map_jorlab$ = instance_mapname("1@jorlab");
+	'event = 0;
+	.@md_name$ = "바곳의 연구실";
+
+	disablenpc instance_npcname("ep19_jorlab_58_67_B");
+
+	if (instance_live_info(ILI_NAME) == .@md_name$)	// Baggot Laboratory
+		disablenpc instance_npcname("ep19_jorlab_58_67_C");
+	else {	// Simulation
+		disablenpc instance_npcname("#jorlab_hw1");
+		disablenpc instance_npcname("ep19_jorlab_58_67_A");
+	}
+	end;
+}
+
+1@jorlab,58,45,0	script	#jorlab_hw1	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	disablenpc();
+	if (ep19_main == 50) {
+		if ('event != 0)
+			end;
+		if (is_party_leader() == false)
+			end;
+		enablenpc instance_npcname("ep19_jorlab_58_67_A");
+		end;
+	}
+	end;
+}
+
+// Main Quest: Step 59
+1@jorlab,58,67,3	script	융케아#ep19re3::ep19_jorlab_58_67_A	4_EP19_JUNCEA,{
+	if (ep19_main != 50)
+		end;
+	if (is_party_leader() == false)
+		end;
+	.@npc_name$ = instance_npcname("ep19_jorlab_58_67_A");
+	if ('event == 0) {
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "아, 왔네. 세네키오간드. 잘 왔어.";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "둘만 하고 싶다는 이야기는 뭔가요?";
+		mes "저도 융케아님 인간에게 궁금한 게 있기는 했는데.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "아, 그럴 것 같았어.";
+		mes "하지만 내 말 먼저 들어.";
+		next;
+		mes "[융케아]";
+		mes "고생이 참 많네, 너도.";
+		mes "어울리지 않는 노릇 하느라 힘들겠어.";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "무슨 말이에요? 왜 그래요? 좀 이상해요. 융케아님 인간. 무서워.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "뭐가 무섭다는 거야? 지금까지 친한 척 잘 했잖아. 왜 또 갑자기 겁먹은 척 굴어?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "친한 척하지 않았어요. 나는 융케아님 인간이랑 진짜로 친해지고 싶어서.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "후후, 그래서 열심히 내게 바곳의 험담을 하셨다? 좋은 방법이네, 좋은 방법이야.";
+		mes "같은 대상을 욕하는 것만큼 빨리 친해지는 방법이 또 없지.";
+		next;
+		mes "[융케아]";
+		mes "그런데, 상대를 잘못 골랐어. 멍청하게도.";
+		next;
+		mes "[융케아]";
+		mes "위대한… 바곳 님이, 그런 얄팍한… 수작에… 넘어갈 것 같아?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "위대한 바곳 님이요?";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "그래…, 이미 네 속내는… 다 읽고 계시다고…….";
+		next;
+		mes "[융케아]";
+		mes "네 놈이 이 융케아를… 이용하려고 하는 것 역시… 알고 계셔.";
+		next;
+		mes "[융케아]";
+		mes "그래서 나는…….";
+		next;
+		mes "[융케아]";
+		mes "나는… 나는 누구지? 여긴……";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(융케아가 이상해…, 역시 바곳이 뭔가 한 건가?)";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "뛰어 봤자… 너희들은 이미 바곳 님의 손바닥 안이야.";
+		next;
+		cutin "ep19_juncea00.png",1;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[융케아]";
+		mes "여기서… 처리해 주지…!";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(…누군가에게 도움을 요청할 시간은 없어! 혼자서 어떻게든 해야 해!)";
+		if ('event == 0)
+			'event = 1;
+		close;
+	}
+	if ('event == 1) {
+		cutin "ep19_juncea04.png",2;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		mes "[융케아]";
+		mes "아아… 아아아아악!";
+		next;
+		cutin "ep19_juncea00.png",1;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[융케아]";
+		mes "모든 것은… 바곳 님의… 뜻…!";
+		next;
+		cutin "ep19_juncea04.png",2;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		mes "[융케아]";
+		mes "아아아아악!";
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		next;
+		cutin "ep19_juncea00.png",1;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[융케아]";
+		mes "그 뜻대로… 응징하겠어!";
+		close2;
+		if ('event != 1)
+			end;
+		'event = 2;
+		cutin "",255;
+		disablenpc();
+		donpcevent instance_npcname("jorlab_boss") + "::OnStart";
+		end;
+	}
+	end;
+}
+
+1@jorlab,1,1,0	script	jorlab_boss	-1,{
+	end;
+OnStart:
+	sleep 500;
+	monster 'map_jorlab$,58,67,"--ja--",21532,1, instance_npcname("jorlab_boss") + "::OnMobDead";	// EP19_MD_JUNCEA
+	end;
+OnMobDead:
+	if ('event != 2)
+		end;
+	'event = 3;
+	enablenpc instance_npcname("ep19_jorlab_58_67_B");
+	end;
+}
+
+
+// Main Quest: Step 60
+1@jorlab,58,67,3	script	융케아#ep19re4::ep19_jorlab_58_67_B	4_EP19_JUNCEA_D,{
+	if (ep19_main != 50) {
+		warp "icecastle",27,123;
+		end;
+	}
+	if ('event != 3)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(겨우 제압했다. 융케아는 정신을 잃었어…)";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(바곳… 융케아에게 무슨 짓을 한 거지? 완전히 몬스터화 되어버렸잖아?)";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(계획대로라면 설득해서 데리고 나갔어야 하지만, 이런 상태로라도 데리고 나가야겠지.)";
+	mapannounce 'map_jorlab$, "바곳 : 이런, 융케아를 그릇으로 삼아서는 역시 역부족이었던 걸까요.", bc_map, 0xFFFF;
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(융케아에게도 미리 계획한 대로 르간 변신 스크롤을 써서…)";
+	mapannounce 'map_jorlab$, "바곳 : 이번에는 바곳의 예상이 틀렸네요.", bc_map, 0xFFFF;
+	next;
+	setnpcdisplay( instance_npcname("ep19_jorlab_58_67_B"), 4_EP19_RGAN_R1 );
+	mes "[" + strcharinfo(0) + "]";
+	mes "(일단, 얼른 마을로 데리고 돌아가자.)";
+	mapannounce 'map_jorlab$, "바곳 : 그나저나, 저런 스크롤이 있었다니… 바곳을 속이고 있다는 건 알았지만, 저런 것의 존재는 재미있네요.", bc_map, 0xFFFF;
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(무슨 소리가 들린 것 같은데… 잘못 들은 거겠지?)";
+	mapannounce 'map_jorlab$, "바곳 : 후훗.", bc_map, 0xFFFF;
+	erasequest 16660;
+	setquest 16661;
+	ep19_main = 51;
+	close2;
+	warp "icecastle",27,123;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "checkquest(16660,HUNTING) == 2" );
+	end;
+}
+
+
+
+
+
+// Simulation Battle
+// ------------------------------
+
+jor_nest,66,260,3	script	아로롱#ep19re2::ep19_jor_nest_66_260	4_EP19_IWIN,{
+	if (ep19_main < 100)
+		end;
+	if (checkweight("Ep19_Snow_Flower",1) == 0) {
+		mes "[아로롱]";
+		mes " - 가방이 가득 찼습니다. 소지 무게와 소지 물품 수량 확인 뒤 다시 말을 걸어 주세요. -";
+		close;
+	}
+	switch( checkquest(16663,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[아로롱]";
+		mes "오늘 도전은 끝났긔.";
+		mes "내일 다시 오면 들여보내준다긔.";
+		next;
+		mes "[아로롱]";
+		mes "알았지?";
+		mes "푹 쉬긔, 내일 다시 오라긔.";
+		close;
+	case 2:
+		erasequest 16663;
+		break;
+	}
+	if (checkquest(16662,HUNTING) == 2) {
+		mes "[아로롱]";
+		mes "무사회 시뮬레이션 융케마와의";
+		mes "싸움에서 이기고 왔긔?";
+		next;
+		mes "[아로롱]";
+		mes "아이, 대답 안 해줘도 된다긔.";
+		mes "여기서 다 보고 있었다긔.";
+		next;
+		mes "[아로롱]";
+		mes "잘 했다긔.";
+		mes "훌륭하게 이기고 돌아왔다긔.";
+		next;
+		mes "[아로롱]";
+		mes "데이터가 쌍여서, 우리 쪽 연구자들도";
+		mes "종아할거긔.";
+		mes "그럼, 약속한 보상을 받아주긔.";
+		next;
+		mes "[아로롱]";
+		mes "푹 쉬긔, 내일 다시 오라긔.";
+		mes "내일 다시 도전하라긔.";
+		close2;
+		erasequest 16662;
+		setquest 16663;
+		getitem "Snow_F_Ore",1;
+		end;
+	}
+	// Note: Player can re-enter / re-create an instance until the boss is defeated
+	cutin "ep19_iwin01.png",2;
+	mes "[아로롱]";
+	mes "융케아와의 전투, 짜릿하지 않았긔?";
+	mes "다시 싸워보고 싶다는 생각, 들지 않긔?";
+	next;
+	cutin "",255;
+	if (select( "든다.", "들지 않는다." ) == 2) {
+		cutin "ep19_iwin01.png",2;
+		mes "[아로롱]";
+		mes "그렇긔?";
+		mes "시시하긔.";
+		close3;
+	}
+	cutin "ep19_iwin01.png",2;
+	mes "[아로롱]";
+	mes "그런 모험가를 위해 준비했긔.";
+	mes "시뮬레이션 데이터 융케아와의 짜릿한 모의 전투.";
+	next;
+	mes "[아로롱]";
+	mes "얼음성에서 준비한 거니까 안전하다긔.";
+	mes "" + getmonsterinfo("EP19_MD_JUNCEA_S", MOB_NAME) + "를 쓰러트리는 건 하루에 한 번.";
+	next;
+	mes "[아로롱]";
+	mes "하지만 쓰러트릴 때까지는 몇 번이고 도전할 수 있긔.";
+	mes "도전해 보겠긔?";
+	next;
+	.@md_name$ = "바곳의 연구실 ";	// note: custom extra space to make the name unique
+	if (is_party_leader() == true)
+		.@menu$ = "바곳의 연구실 입장 준비";
+
+	cutin "",255;
+	switch( select( .@menu$, "바곳의 연구실 입장", "도전하지 않는다." ) ) {
+	case 1:
+		mes "- ^0000ff입장 준비가 시작되었습니다. 준비를 마친 뒤 바곳의 연구실 입장 버튼을 눌러 입장하십시오.^000000 -";
+		instance_create(.@md_name$);
+		close;
+	case 2:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "An unknown error occurred.";
+			close;
+		case IE_NOINSTANCE:
+			mes "- ^0000ff메모리얼 던전이 생성되지 않았습니다. 다시 확인해 주십시오.^000000 -";
+			close;
+		case IE_NOMEMBER:
+			mes "[융케아]";
+			mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+			close;
+		case IE_OK:
+			if (isbegin_quest(16662) == 0)
+				setquest 16662;
+			// warp "1@jorlab",57,45;
+			end;
+		}
+		end;
+	case 3:
+		cutin "ep19_iwin01.png",2;
+		mes "[아로롱]";
+		mes "흥, 재미없는 모험가라긔.";
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 100 && checkquest(16662,HUNTING) != 2 && checkquest(16663,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(16663,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(16662,HUNTING) == 2" );
+	end;
+}
+
+1@jorlab,58,67,3	script	소환 장치#ep19re1::ep19_jorlab_58_67_C	PORTAL,{
+	if ('event == 2) {
+		mes "[소환 장치]";
+		mes "전투 완료, 데이터를 저장합니다.";
+		mes "연구실에서 나가시려면 예 버튼을";
+		mes "눌러주세요.";
+		next;
+		if (select( "예", "아니오" ) == 2) {
+			mes "[소환 장치]";
+			mes "종료합니다.";
+			close;
+		}
+		mes "[소환 장치]";
+		mes "3, 2, 1. 이동 준비 완료.";
+		close2;
+		warp "jor_nest",63,257;
+		end;
+	}
+	if (is_party_leader() == false || 'event != 0) {
+		mes "[소환 장치]";
+		mes "- 다른 파티원과 대화중입니다. 잠시 함께 이야기를 들어 주세요. -";
+		mes "- 오류로 대화가 종료된 경우, 대화 시작 5분 후 대화할 수 있는 상태로 전환됩니다. -";
+		close;
+	}
+	mes "[소환 장치]";
+	mes "시뮬레이션 전투를 시작합니다.";
+	mes "준비가 완료되셨다면, 예 버튼을 눌러주세요.";
+	next;
+	mes "[소환 장치]";
+	mes "준비가 완료되셨습니까?";
+	next;
+	if (select( "예", "아니오" ) == 2) {
+		mes "[소환 장치]";
+		mes "종료합니다.";
+		close;
+	}
+	mes "[소환 장치]";
+	mes "" + getmonsterinfo("EP19_MD_JUNCEA_S", MOB_NAME) + "를 소환합니다.";
+	mes "3, 2, 1. 소환 준비 완료.";
+	close2;
+	if ('event == 0) {
+		'event = 1;
+		disablenpc();
+		donpcevent instance_npcname("ep19_simulation_battle") + "::OnStart";
+	}
+	end;
+}
+
+1@jorlab,1,1,0	script	ep19_simulation_battle	-1,{
+	end;
+OnStart:
+	monster 'map_jorlab$,58,67,"--ja--","EP19_MD_JUNCEA_S",1, instance_npcname("ep19_simulation_battle") + "::OnBossDead";
+	end;
+OnBossDead:
+	if ('event != 1)
+		end;
+	'event = 2;
+	enablenpc instance_npcname("ep19_jorlab_58_67_C");
+	end;
+}

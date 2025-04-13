@@ -1,90 +1,91 @@
 //===== rAthena Script =======================================
 //= Ayothaya Town
 //===== By: ==================================================
-//= MasterOfMuppets
-//===== Current Version: =====================================
-//= 1.9
-//===== Compatible With: =====================================
-//= rAthena Project
-//===== Description: =========================================
-//= [Official Conversion]
-//= Ayothaya Town Script
-//===== Additional Comments: =================================
-//= 1.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
-//= 1.7 Fixed character's anme bugs [Lupus]
-//= 1.8 Moved Alberta NPC to pre-re/re paths. [Euphy]
-//= 1.9 Updated Renewal warp coordinates.
+//한글번역 스카이러브
 //============================================================
-
 // Ayothaya Transportation
 //============================================================
 -	script	::Aibakthing_ayothaya	-1,{
-	mes "[Aibakthing]";
-	mes "Hoo! Hah! Hoo! Hah!";
-	mes "Let me take you away to";
-	mes "a distant spiritual place,";
-	mes "a land of exotic mystery,";
-	mes "my hometown Ayothaya!";
+	mes "[아이박팅]";
+	mes "흠! 하! 음! 하 ! 성스러움과";
+	mes "신비로움이 가득한 나의 고향,";
+	mes "아요타야를 소개해주지!";
 	next;
-	switch(select("About Ayothaya.:Go to Ayothaya.:Cancel.")) {
+	switch(select("아요타야에 대해서...:야요타야로 간다.:취소한다.")) {
 	case 1:
-		mes "[Aibakthing]";
-		mes "We Ayothayans are a pious people who value peace and sincerity. We endeavor to lead simple, yet noble, lives in harmony with nature.";
+		mes "[아이박팅]";
+		mes "우리들은 깊은 신앙심을 가진";
+		mes "평화롭고 성실한 사람들이다.";
+		mes "화려하지만 경박하지 않고";
+		mes "온화롭지만 무력하지 않지.";
 		next;
-		mes "[Aibakthing]";
-		mes "Our traditional cuisine is world famous. It's no surprise when we serve dishes like Tom Yum Goong, made of Shrimp, Lemon and Chillies, which has a tantalizing aroma and flavor beyond imagining.";
+		mes "[아이박팅]";
+		mes "특히 음식이  맛있다. 레몬과";
+		mes "새우, 칠리로 만들어내는 고유의";
+		mes "음식 '똠양꿍'은 비교할 수 없는";
+		mes "맛과 향기를 가지고 있지.";
+		mes "꼭 찾아서 한번 맛보길 바란다.";
 		next;
-		mes "[Aibakthing]";
-		mes "For those who crave adventure, there is an age old story about the Sa-mhing Tiger, an evil creature that haunts our temple ruins.";
+		mes "[아이박팅]";
+		mes "그리고, 무시무시한 이야기도";
+		mes "전해내려오고 잇다. 사람을 잡아";
+		mes "먹고 사는 '스밍 타이거'라는";
+		mes "괴물이 숨어사는 유적도 있다.";
 		next;
-		mes "[Aibakthing]";
-		mes "Hoo! Hahh! Hoo! Hahh!";
-		mes "No man alive can resist the";
-		mes "call of this beautiful land.";
-		mes "Midgardians are";
-		mes "always welcome!";
+		mes "[아이박팅]";
+		mes "흠! 하! 흠! 하! 그 누구도";
+		mes "이런 매력적인 곳에 안가볼 수";
+		mes "없지!! 그대도 원한다면 언제든";
+		mes "나에게 부탁만 하도록 하라!";
 		close;
 	case 2:
-		mes "[Aibakthing]";
-		mes "Ah, you must pay 10,000 Zeny";
-		mes "if you wish to visit Ayothaya.";
-		mes "If you're ready, we can leave";
-		mes "right now~";
+		mes "[아이박팅]";
+		mes "아름다운 나의 고향, 아요타야에";
+		mes "가기 위해서는 10,000제니가";
+		mes "필요하다. 흠! 하! 흠! 하!";
 		next;
-		if (select("I'm ready, let's go!:No.") == 1) {
+		mes "[아이박팅]";
+		mes "그럼, 출발해도 괜찮은거겠지?";
+		next;
+		if (select("출발!:취소.") == 1) {
 			if (Zeny > 9999) {
-				mes "[Aibakthing]";
-				mes "Hoo! Hah! Hoo! Hah!";
-				mes "Let us be off! Back to my";
-				mes "beautiful Ayothaya!";
+				mes "[아이박팅]";
+				mes "흠! 하! 흠! 하!";
+				mes "아름다운 나의 고향이여...";
+				mes "조금만 기다려다오!!";
 				close2;
 				set Zeny, Zeny-10000;
 				warp "ayothaya",149,71;
 				end;
 			}
-			mes "[Aibakthing]";
-			mes "I am sorry, but you do not have the 10,000 Zeny to travel to Ayothaya. Such a price is nothing compared to the experiences that await you!";
+			mes "[아이박팅]";
+			mes "말했을터! 10,000 제니가 없다면";
+			mes "아름다운 나의 고향은 꿈에서도";
+			mes "그리기 힘들 것이다.";
+			mes "대신 나의 멋진 발차기를 보게";
+			mes "될 것이다!!";
 			close;
 		}
 	case 3:
-		mes "[Aibakthing]";
-		mes "Have you ever dreamed";
-		mes "of a beautiful place filled";
-		mes "with spiritual serenity? You";
-		mes "must have been dreaming";
-		mes "of Ayothaya, my friend.";
+		mes "[아이박팅]";
+		mes "모두 원하는 평화롭고 아름다운";
+		mes "곳이 있다면, 그것은 내 고향...";
+		mes "아요타야뿐이리라.";
 		close;
 	}
 }
 
-ayothaya,152,68,1	script	Aibakthing#ayo2	843,{
-	mes "[Aibakthing]";
-	mes "Hoo! Hah! Hmm! Hah!";
-	mes "So, how did you like Ayothaya? Did you get a chance to try Tom Yum Goong? When you're ready, I shall take you back home.";
+ayothaya,152,68,1	script	아이박팅#ayo2	843,{
+	mes "[아이박팅]";
+	mes "흠! 하! 흠! 하! 좋은 구경도";
+	mes "많이 하고, 똠양꿍도 듬뿍먹고";
+	mes "온거겠지? 어때, 돌아가볼까?";
 	next;
-	if (select("Go back to Alberta.:Cancel.") == 1) {
-		mes "[Aibakthing]";
-		mes "You will be welcome to come back whenever you please. I hope that we will see each other again sometime soon. Thank you~";
+	if (select("알베르타로 돌아간다:취소한다.") == 1) {
+		mes "[아이박팅]";
+		mes "언제 다시 찾아와도 우리는 여기";
+		mes "남아있을거다. 인연이 있다면";
+		mes "다시 행복한 모습으로 만날 수 있기를... 흠! 하!";
 		close2;
 		if (checkre(0))
 			warp "alberta",235,45;
@@ -92,201 +93,173 @@ ayothaya,152,68,1	script	Aibakthing#ayo2	843,{
 			warp "alberta",238,22;
 		end;
 	}
-	mes "[Aibakthing]";
-	mes "Ah yes. I understand that it is difficult to take leave of such a beautiful place. Do not worry";
-	mes "and take your time.";
+	mes "[아이박팅]";
+	mes "그렇지, 이 아름다운 내 고향,";
+	mes "아요타야는... 떠나기 힘든 곳.";
+	mes "외지인이라고 하더라도  그렇다.";
+	mes "천천히구경하다 가도록 해.";
 	close;
 }
 
 // Generic Ayothaya NPCs
 //============================================================
-ayothaya,189,120,3	script	Young Man#Thang	843,{
-	mes "[Thang]";
-	mes "There's an ancient,";
-	mes "dreadful building in";
-	mes "Ayothaya that no one";
-	mes "here dares approach...";
+ayothaya,189,120,3	script	청년#Thang	843,{
+	mes "[쌩]";
+	mes "저희 마을엔 고대건물이라고";
+	mes "사람들이 가기 꺼려하는 장소가";
+	mes "있어요.";
 	next;
-	mes "[Thang]";
-	mes "In the past, a few curious people went inside, despite the horror stories, and never returned. What on earth could be going on inside of that place?";
+	mes "[쌩]";
+	mes "간혹 모험심이 강한 분들이";
+	mes "만류에도 불구하고 들어갔지만,";
+	mes "아직까지 들어가서 나온 분들이";
+	mes "없는 무서운 장소에요.";
+	mes "거긴 뭐가나올까요...";
 	next;
-	mes "[Thang]";
-	mes "However, if you want to prove your courage to others, confronting the danger inside might be a worthy challenge for an adventurer...";
-	mes "I think.";
+	mes "[쌩]";
+	mes "그래도 자기의 능력을 보여주고";
+	mes "싶을 땐 위험하더라도 도전해";
+	mes "보는 것도 썩 나쁘지는 않다고";
+	mes "생각해요.";
 	close;
 }
 
-ayothaya,171,152,5	script	Girl#Lalitha	838,{
+ayothaya,171,152,5	script	소녀#Lalitha	838,{
 	set .@sit,rand(1,5);
 	if (.@sit > 0 && .@sit < 3) {
-		mes "[Lalitha]";
-		mes "Hello!";
-		mes "I don't think";
-		mes "we've met before.";
+		mes "[랄리따]";
+		mes "처음 뵙는 분이시네요 ?";
+		mes "그렇다면~ 외지에서 오셨다는";
+		mes "거겠지요?";
+		mes "전 이 마을에서 모르는 사람이";
+		mes "없거든요~";
 		next;
-		mes "[Lalitha]";
-		mes "You must be";
-		mes "from Midgard.";
-		mes "After all, I know every single person living in this village.";
-		mes "Heh heh~";
+		mes "[랄리따]";
+		mes "흐음.. 어디에서 오셨을까~";
+		mes "저기요~ 다른 나라의 아가씨들은";
+		mes "평소에 어떤 복자을 하고 있어요~?";
+		mes "또 어떤 장신구를 하고 있을까...";
 		next;
-		mes "[Lalitha]";
-		mes "Hmm...";
-		mes "May I ask about the land you";
-		mes "come from? I'm curious about";
-		mes "a lot of things in the outside world.";
-		next;
-		mes "[Lalitha]";
-		mes "You know, like the dresses and jewelry that ladies wear in other countries, whether or not the men are good looking, what kind of songs you have, what kind of girls that guys over there like...";
-		emotion ET_QUESTION;
-		next;
-		mes "[" +strcharinfo(0)+ "]";
-		mes ".........";
-		next;
-		mes "[Lalitha]";
-		mes "..........";
-		emotion ET_SWEAT;
-		next;
-		mes "[Lalitha]";
-		mes "Okay~!";
-		mes "Take care and";
-		mes "enjoy your travels!";
+		mes "[랄리따]";
+		mes "그쪽 남자들은 잘 생겼을려나~";
+		mes "유행하는 노래는 뭐에요~?";
+		mes "어떤 여자가 인기가 많아요~?";
+		mes "흐음... 궁금한데....";
 		close;
 	}
 	else if (.@sit > 2 && .@sit < 6) {
-		mes "[Lalitha]";
-		mes "When you go East from this";
-		mes "village, you will arrive at the ruins of an old shrine. It is now";
-		mes "a nest full of fearsome monsters.";
+		mes "[랄리따]";
+		mes "마을에서 오른쪽으로 쭉가시면";
+		mes "버려진 신전이 하나 있어요.";
+		mes "지금은 몬스터들이 우글우글 거리는";
+		mes "무시무시한 곳이지요.";
 		next;
-		mes "[Lalitha]";
-		mes "If you plan to venture through these ruins, you better prepare";
-		mes "as much as you can!";
+		mes "[랄리따]";
+		mes "혹시라도 모험삼아 '가봐야지'하고";
+		mes "생각한다면 만반의 준비를 하고";
+		mes "가는게 신상에 좋을 거에요.";
 		next;
-		mes "[Lalitha]";
-		mes "Ah...";
-		mes "I wonder where";
-		mes "my Black Knight is~";
+		mes "[랄리따]";
+		mes "요즘 시대에도 정의의 용사님은";
+		mes "계신걸까~아아~";
 		emotion ET_THROB;
-		next;
-		mes "["+strcharinfo(0)+"]";
-		mes "Don't you mean...";
-		mes "Knight in shining armor";
-		mes "riding a white horse?";
-		next;
-		mes "[Lalitha]";
-		mes "Hmm...?";
-		mes "Oh, well...";
-		mes "I'll take them both!";
-		mes "Hee hee~!";
 		close;
 	}
-	mes "[Lalitha]";
-	mes "Mmm...?";
-	mes "What's up?";
+	mes "[랄리따]";
+	mes "음...?";
+	mes "무슨 일이야?";
 	close;
 }
 
-ayothaya,143,102,5	script	Old Man#ayothaya	842,{
-	mes "[Villager]";
-	mes "Ummm.";
-	mes "Hmmmmm...";
-	mes "Ummmmm...?";
+ayothaya,143,102,5	script	노인#ayothaya	842,{
+	mes "[마을 주민]";
+	mes "아흠 아흠...";
+	mes "음?";
+	mes "외지인이로구랴.";
+	mes "홀홀홀.. 어디가냐고?";
+	mes "저어기 낚시터에 간다네.";
 	next;
-	mes "[Villager]";
-	mes "You must be";
-	mes "an outsider.";
-	mes "Yes. Yes, indeed.";
+	mes "[마을 주민]";
+	mes "그... 뭐라더라아";
+	mes "저 낚시터에서 낚인 물고기";
+	mes "아 거기서 반지가 나왔대!";
+	mes "그뿐만 아니여";
+	mes "이것 저것 많이 나온다 하던데";
 	next;
-	mes "[Villager]";
-	mes "Did you just ask";
-	mes "where am I going?";
-	mes "Why, to the Fishing Spot";
-	mes "just ahead. That's what";
-	mes "we old men do: fish.";
+	mes "[마을 주민]";
+	mes "심심풀이 낚시에서";
+	mes "일확천금을 꿈꿀수도 있다니..";
+	mes "..홀.. 홀..";
 	next;
-	mes "[Villager]";
-	mes "Hmmm...";
-	mes "Would you like to hear";
-	mes "something interesting? I've heard that someone found a ring inside";
-	mes "a fish he caught in the";
-	mes "Fishing Spot.";
+	mes "[마을 주민]";
+	mes "그런데, 여기는 수산시장이 아닌가";
+	mes "이런 쯧쯧";
+	mes "반대로 와버렸구만.";
+	mes "온김에 좀 노닐어 볼까. 어허~";
 	next;
-	mes "[Villager]";
-	mes "Supposedly, there are lots of stories about people finding valuables inside of the fish they've been catching there.";
-	next;
-	mes "[Villager]";
-	mes "If you're lucky enough,";
-	mes "you might even become";
-	mes "a millionaire.";
-	mes "Heh heh heh~";
-	next;
-	mes "[Villager]";
-	mes "...!?";
-	mes "Ah, I came into the fish market! ^666666*Sigh*^000000 It seems I went the wrong way. The Fishing Spot is on the opposite side of this village.";
-	next;
-	mes "[Villager]";
-	mes "Since I'm here, it wouldn't be";
-	mes "a bad idea to look around. All of the seafood in this market is fresh and tasty. You'll regret it if you don't try some of this seafood";
-	mes "at least once.";
+	mes "[마을 주민]";
+	mes "아. 자네 여기 수산물은";
+	mes "모두 싱싱하니";
+	mes "꼭 한번 맛보고 가시게나.";
+	mes " 홀홀..";
 	close;
 }
 
-ayothaya,197,189,5	script	Young Man#1ayothaya	841,{
-	mes "[Kwan]";
-	mes "Phew, isn't it";
-	mes "soooo hot today?";
+ayothaya,197,189,5	script	소년#1ayothaya	841,{
+	mes "[콴]";
+	mes "휴, 덥지요?";
+	mes "당신도 외지에서 온 사람이군요? 최근";
+	mes "마을에 여행객들이 늘어가는거 같아요.";
 	next;
-	mes "[Kwan]";
-	mes "You must be";
-	mes "from Midgard, huh?";
-	mes "I've seen a lot of tourists";
-	mes "coming from there recently.";
+	mes "[콴]";
+	mes "그리고보니, 여행하실때 주의하세요.";
+	mes "마을밖으로 나가면 숲속에 큰 신전이";
+	mes "있는데...";
+	mes "거긴 굉장히 위험해서 저 같은 사람은";
+	mes "들어가지도 못해요.";
 	next;
-	mes "[Kwan]";
-	mes "You'd better be really careful if you travel outside of the village. Whatever you do, don't go into";
-	mes "the ruins of an old shrine";
-	mes "in the forest.";
+	mes "[콴]";
+	mes "그러고보니, 뭔가 부적같은걸 몸에";
+	mes "지니면 들어갈 수도 있다는이야길";
+	mes "들은거 같은데..";
 	next;
-	mes "[Kwan]";
-	mes "That place is far too";
-	mes "dangerous to visit. Still, I hear that if you had some kind of amulet, you could go there with";
-	mes "a little less worry...";
-	next;
-	mes "[Kwan]";
-	mes "Well, anyway, it's still a really good idea to stay away from that place. I hope you enjoy visiting Ayothaya, and that you keep safe~";
+	mes "[콴]";
+	mes "잘 모르겠네요. 저는.";
+	mes "너무 위험한 곳으로는 다니지 말고";
+	mes "즐겁게 지내다 가세요.";
 	close;
 }
 
-ayothaya,214,142,5	script	Young Man#5ayothaya	843,{
-	mes "[Detzi]";
-	mes "In Ayothaya, we have our own traditional martial arts. We, the young men of the village, practice our traditional martial arts in order to become strong.";
+ayothaya,214,142,5	script	청년#5ayothaya	843,{
+	mes "[데치]";
+	mes "우리 아오타야 청년들은 강해지기 위해";
+	mes "전통 무예를 열심히 연마하고 있지요.";
 	next;
-	mes "[Detzi]";
-	mes "Why don't you learn our martial arts? I guarantee that it will help you greatly in your travels.";
+	mes "[데치]";
+	mes "당신도 강해지기 위해서 아오타야";
+	mes "전통무예를 배워보아요.";
+	mes "틀림없이 도움이 될 겁니다.";
 	close;
 }
 
-ayothaya,241,264,5	script	Young Man#5ayothaya2	843,{
-	mes "[Eik]";
-	mes "Hey...";
-	mes "You look pretty strong";
-	mes "You wanna challenge";
-	mes "me to a match?";
+ayothaya,241,264,5	script	청년#5ayothaya2	843,{
+	mes "[에익]";
+	mes "당신... 강해보이는 데 저랑 한판";
+	mes "붙어볼래요?";
 	next;
-	if (select("Sure!:Nah~") == 1) {
-		mes "[Eik]";
-		mes "Ow ow ow!";
-		mes "I was just";
-		mes "kidding, man!";
-		next;
-		mes "[Eik]";
-		mes "I'm not so rude as to pick fights with strangers for no reason!";
+	if (select("붙는다:그만둔다") == 1) {
+		mes "[에익]";
+		mes "그냥 농담으로 한 말인데 정말";
+		mes "붙으려고 하다니...";
+		mes "타지인에게 함부로 싸움 걸 정도로";
+		mes "예의없지는 않아요.";
 		emotion ET_KEK;
 		close;
 	}
-	mes "[Eik]";
-	mes "Real power is developed after having thousands of matches with other people. So, don't be afraid of fighting, okay?";
+	mes "[에익]";
+	mes "지전한 강함은 대력으로 다져지는";
+	mes "것이지요.";
+	mes "수련하는 걸 두려워해서는 안 되요.";
 	emotion ET_HNG;
 	close;
 }

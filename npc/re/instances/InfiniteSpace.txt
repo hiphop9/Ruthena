@@ -10,66 +10,67 @@
 //= 1.3 Cleanup and sanity checks [Everade]
 //============================================================
 
-cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
-	mes "^FF0000Please note that, any abnormal monster handling inside the instance such as taming is not considered normal and may hinder the instance progress.^000000"; 
+cmd_fild07,58,278,3	script	무모한 탐험가#pa0829_01	4_F_GON,{
+	mes "^FF0000모든 부정행위를 할 경우 인던을 진행할 수 없습니다.^000000"; 
 	next;
 	if (BaseLevel < 100) {
-		mes "[ Reckless Explorer ]";
-		mes "Will you come back to me after getting a little bit stronger? How about getting to level 100 first?";
+		mes "[ 무모한 탐험가 ]";
+		mes "좀더 강해지고 오시는게 어떠신지요? 100레벨 이상만 가능합니다.";
 		close;
 	}
 	if (isbegin_quest(12364) != 2) {
-		mes "[ Reckless Explorer ]";
-		mes "Ah, no, I didn't meant to go inside. I didn't meant to violate any laws.";
+		mes "[ 무모한 탐험가 ]";
+		mes "아, 아니, 들어갈 생각이 아니었어요. 나는 위법할 의도가 없었습니다!";
 		next;
-		select("What are you talking about?");
-		mes "[ Reckless Explorer ]";
-		mes "Ha?";
+		select("무슨 소리를 하시는건가요?");
+		mes "[ 무모한 탐험가 ]";
+		mes "하?";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Hmm, are you one of the Royal Palace's suppression squad?";
+		mes "[ 무모한 탐험가 ]";
+		mes "흠 왕국 소속의 사람 아닙니까?";
 		next;
-		select("I'm an ordinary adventurer.");
-		mes "[ Reckless Explorer ]";
-		mes "Phew~ That's a relief.";
-		mes "I've never soon you before, so I thought you are one of the suppression squad of the palace.";
+		select("저는 그저 모험가 입니다.");
+		mes "[ 무모한 탐험가 ]";
+		mes "휴~ 다행입니다.";
+		mes "저는 왕국 소속의 사람인줄 알았습니다.";
 		next;
-		if (select("What if I am one of the suppression squad?:What's the matter?") == 1) {
-			mes "[ Reckless Explorer ]";
-			mes "I'm just an ordinary woman who's out for a walk. And this is the end of my walk, and I'm going to...";
+		if (select("만약 제가 소속인 이라면?:무슨 일 이시죠?") == 1) {
+			mes "[ 무모한 탐험가 ]";
+			mes "저는 그저 평범한 탐험가 일뿐...";
 			close;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "Have you heard about the Paros Lighthouse collapse?";
+		mes "[ 무모한 탐험가 ]";
+		mes "혹시 이유적에 대해 들어보셨습니까?";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "^777700(She moved close to me)^000000";
-		mes "The Paros Lighthouse here collapsed for some unknown reason some time ago, and there's a lot of stuff underneath it.";
+		mes "[ 무모한 탐험가 ]";
+		mes "^777700(그녀는 나에게 가까이 다가왔다)^000000";
+		mes "여기 파로스 등대는 얼마 전 알 수 없는 이유로 무너졌고 그 밑에는 많은 것들이 남아있습니다.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Some of the restoration workers and guards that were sent to the palace went missing. Rumors has it that monsters are crawling down there.";
+		mes "[ 무모한 탐험가 ]";
+		mes "궁에 파견된 복원인력과 경비병 중 일부가 실종됐다. 거기에는 몬스터들이 기어다니고 있다는 소문이 있다.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Because its depth is seemingly endless, the people here became afraid of this place and started calling it Infinite Space.";
+		mes "[ 무모한 탐험가 ]";
+		mes "그 깊이가 끝이 없을 것 같아서 이곳 사람들은 이곳을 두려워하여 무한공간이라 부르기 시작했다.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "I know some people who sneaked in and made a fortune. That's why I'm going to give it a try, are you interested?";
+		mes "[ 무모한 탐험가 ]";
+		mes "이곳은 정체불명의 몬스터들이 서식 하는 곳 입니다.";
+		mes "도전해 보시겠습니까?";
 		next;
-		if (select("I'm not interested.:Yes.") == 1) {
-			mes "[ Reckless Explorer ]";
-			mes "That's unfortunate. Come back whenever you change your mind. I'll welcome you anytime.";
+		if (select("관심 없습니다.:네.") == 1) {
+			mes "[ 무모한 탐험가 ]";
+			mes "마음이 바뀌면 언제든지 오세요.";
 			close;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "All right, Just one thing, I'm inexperienced and a novice adventurer. So I'll help you explore down there by guiding you from somewhere safe.";
+		mes "[ 무모한 탐험가 ]";
+		mes "좋습니다. 다만 저는 초보 탐험가이기 떄문에 안전한 곳 까진 안내해 드리겠습니다.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "I'm an adventure tour, and you can explore it yourself. Aren't we compatible with each other? Then, let's get started when you're ready.";
+		mes "[ 무모한 탐험가 ]";
+		mes "그럼 준비가 되면 시작하겠습니다.";
 		setquest 12364;
 		completequest 12364;
 	} else {
-		mes "[ Reckless Explorer ]";
-		mes "Are you going in there again this time?";
+		mes "[ 무모한 탐험가 ]";
+		mes "이번에도 다시 들어 가시겠습니까?";
 		switch (checkquest(12365,PLAYTIME)) {
 			case -1:
 				break;
@@ -77,8 +78,8 @@ cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
 			case 0:
 			case 1:
 				next;
-				mes "[ Reckless Explorer ]";
-				mes "Oh, your whole body is shouting that it's tired. You can't go down there like this.";
+				mes "[ 무모한 탐험가 ]";
+				mes "피곤하신거 같군요 아직은 안됩니다.";
 				close;
 
 			case 2:
@@ -90,27 +91,27 @@ cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
 	.@md_name$ = "Infinite Space";
 	.@party_id = getcharid(1);
 	if (!.@party_id) {
-		mes "[ Reckless Explorer ]";
-		mes "It's impossible alone. Would you like to organize a party at least one person or join another party and come back?";
+		mes "[ 무모한 탐험가 ]";
+		mes "혼자서는 불가능합니다. 1인 이상 파티를 구성하시거나 다른 파티에 참가하고 다시 와주시겠습니까?";
 		close;
 	}
-	if (select("Prepare to enter Infinite Space:Cancel") == 2)
+	if (select("무한의 공간에 들어갈 준비를 한다.:취소") == 2)
 		close;
-	mes "[ Reckless Explorer ]";
-	mes "Once the passage opens, take a breath for a while and talk to me again.";
+	mes "[ 무모한 탐험가 ]";
+	mes "출입구가 열리면 잠시 숨을 고르고 다시 저에게 말을 걸어주세요.";
 	if (instance_create(.@md_name$) == -3)
-		dispbottom "The reservation of the instance '" + .@md_name$ + "' has failed due to an active instance.";
+		dispbottom "활성 던전으로 인해 '" + .@md_name$ + "' 던전 예약이 실패했습니다.";
 	close;
 }
 
-cmd_fild07,54,280,5	script	Temporary Entrance#pa0829_01	PORTAL,{
+cmd_fild07,54,280,5	script	임시 출입구#pa0829_01	PORTAL,{
 	switch (checkquest(12365,PLAYTIME)) {
 		case -1:
 			break;
 
 		case 0:
 		case 1:
-			mes "The passage is not yet activated.";
+			mes "아직 활성화되지 않았습니다.";
 			close;
 
 		case 2:
@@ -127,7 +128,7 @@ cmd_fild07,54,280,5	script	Temporary Entrance#pa0829_01	PORTAL,{
 			end;
 
 		default:
-			mes "The passage is not yet activated.";
+			mes "아직 활성화되지 않았습니다.";
 			close;
 	}
 }
@@ -556,14 +557,14 @@ OnMobKill:
 			enablenpc instance_npcname("#w" + 'floor + "_t");
 
 		if ('floor == 50) {
-			mapannounce 'map$,"Reckless Explorer : It seems there are no other way from here. It's dangerous, so you'd better return outside.",0xFFFF00;
+			mapannounce 'map$,"무모한 탐험가 : 더이상의 길이 없어보이네요. 위험하니 바깥으로 나가는게 좋겠어요.",0xFFFF00;
 			enablenpc instance_npcname("#w50_ppl");
 		}
 		if ('floor < 50) {
 			if (('floor%10) == 0)
-				mapannounce 'map$,"Reckless Explorer : This area is safe. Use the passage to go to the next area.",0xFFFF00;
+				mapannounce 'map$,"무모한 탐험가 : 이 구역은 안전해요. 통로를 통해 다음 구역으로 이동하세요.",0xFFFF00;
 			else
-				mapannounce 'map$,"Reckless Explorer : This area is safe. Go through the passage to the next area.",0xFFFF00;
+				mapannounce 'map$,"무모한 탐험가 : 이 구역은 안전해요. 통로를 통해 다음 구역으로 이동하세요.",0xFFFF00;
 			// Enable warp portal to next floor
 			enablenpc instance_npcname("#w" + 'floor);
 			'floor += 1;
@@ -575,38 +576,38 @@ OnPoringKill:
 
 1@infi,42,8,1	script	#w0_0	4_F_GON,{
 	if (is_party_leader() && !'mode && 'sanity == 0) {
-		mes "[ Reckless Explorer ]";
-		mes "I have went in and out of this place many times and figured out a way to provoke the monsters in here. You can get more rewards if you're going to deal with heated ones.";
+		mes "[ 무모한 탐험가 ]";
+		mes "이곳을 여러번 드나들면서 몬스터들을 자극하는 방법을 알아냈어요. 잔뜩 열이오른 녀석들을 상대하면 좀 더 많은 보상을 얻을 수 있죠.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "What do you think? Would you like to try something challenging?";
+		mes "[ 무모한 탐험가 ]";
+		mes "어때요? 한번 어려운 도전을 해보실 생각이 있으신가요?";
 		next;
-		if (select("I want to proceed normally:I want to proceed with something difficult") == 1 && 'sanity == 0) {
+		if (select("평범하게 진행하고싶다.:어려운 난이도로 진행하고싶다.") == 1 && 'sanity == 0) {
 			'mode = 1;
 			'poring_chance = 1;
 		} else {
 			'mode = 2;
 			'poring_chance = 2;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "Good. Shall we go now?";
+		mes "[ 무모한 탐험가 ]";
+		mes "좋아요 이제 슬슬 가볼까요?";
 		close2;
 		if ('sanity == 0) {
 			'sanity = 1;
 			disablenpc instance_npcname(strnpcinfo(0));
 			hideoffnpc instance_npcname("#w0");
-			npctalk "Reckless Explorer : Woah~ It's very neat for a sunken place, don't you think?",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 이야~ 함몰된 곳 치곤 굉장히 깔끔한데요?",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : I would believe it to be an ancient site, not a lighthouse. It's so well organized...",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 등대가 아니라 고대 유적지라고 해도 믿겠어요. 이렇게 잘 정돈되어있다니...",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : Oh, did you hear something?",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 아, 근데 무슨 소리 안들려요?",instance_npcname("#w0");
 			donpcevent instance_npcname("#inf_space_mobs") + "::OnSummon";
 			sleep 3000;
-			npctalk "Reckless Explorer : Oh, that must be the monsters haunting this place.",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 이런, 저게 이곳에 출몰한다던 그 몬스터인가보군요.",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : They look no different from the ones we saw outside, but I can feel a very strong energy.",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 생김새는 우리가 밖에서 보던 녀석들과 다를게 없어보이는데 굉장히 강한 기운이 느껴지네요.",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : Hm~ It looks dangerous, so I'll go back up. I'll give you directions from above.",instance_npcname("#w0");
+			npctalk "무모한 탐험가 : 에~ 그럼 위험해 보이니까 저는 다시 올라갈게요. 길 안내는 위에서 해드리도록 하죠.",instance_npcname("#w0");
 			disablenpc instance_npcname("#w0");
 		}
 	}
@@ -618,11 +619,11 @@ OnPoringKill:
 }
 
 1@infi,366,392,4	script	#w50_ppl	4_F_GON,{
-	mes "[ Reckless Explorer ]";
-	mes "I'll keep a separate record of this expedition. If you've been lucky, you might have gotten a decent reward from your expedition.";
+	mes "[ 무모한 탐험가 ]";
+	mes "이번 탐험의 내용은 따로 기록해 두겠어요. 운이 좋다면 탐험의 공로를 인정받아 적절한 보상이 있을지도 모르니까요.";
 	next;
-	mes "[ Reckless Explorer ]";
-	mes "So, shall we get out of here?";
+	mes "[ 무모한 탐험가 ]";
+	mes "그럼 이제 나가보도록 할까요?";
 	close2;
 	warp "cmd_fild07",53,270;
 	end;

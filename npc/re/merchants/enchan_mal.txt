@@ -19,40 +19,43 @@
 
 // Enchanter NPC :: mal_yong
 //============================================================
-malangdo,213,167,4	script	Mayomayo#mal	555,{
+malangdo,213,167,4	script	마요마요#mal	555,{
 	disable_items;
 	if (checkweight(1201,1) == 0) {
-		mes "You have too many kinds of objects. Let's try to continue after reducing those objects.";
+		mes "개체 종류가 너무 많습니다. 개체를 줄인 후 계속 진행해 보겠습니다.";
 		close;
 	}
 	if (MaxWeight - Weight < 10000) {
-		mes "Can't continue because you have too many heavy objects. Let's try to continue after reducing the weight.";
+		mes "무거운 물건이 너무 많아서 계속할 수 없습니다. 무게를 줄인 후 계속 해보자.";
 		close;
 	}
-	mes "[Mayomayo]";
-	mes "Wow welcome. It is new Mayomayo refinement store~ I enchant some luxury weapons including level 4 weapons.";
+	mes "[마요마요]";
+	mes "어서오세요. 새롭게 단장한 마요마요";
+	mes "강화점입니다. 대부분의 4레벨 무기를";
+	mes "포함한 일부 고급 무기들에 각종";
+	mes "인챈트를 해 드리고 있죠.";
 	next;
-	switch( select( "Any store policy changes?", "Enchant High Ranked Weapon", "Initialize Enchant (Need Silvervine Fruit)" ) ) {
+	switch( select( "영업방침이 바꿘건가?", "고급무기에 능력치부여", "강화능력치 초기화(개다래 또는 냥달래 열매 필요)" ) ) {
 	case 1:
-		mes "[Mayomayo]";
-		mes "When I enchant weapons, the slotted cards or refined level are dissipated sometimes. I hated it. However, one day I found how to do it without any extinction.";
+		mes "[마요마요]";
+		mes "무기에 인챈트를 하면 슬롯에 있는 카드나 제련도가 가끔 사라지는 경우가 있어요. 너무 싫었어요. 그런데 어느 날 멸절 없이 하는 방법을 발견했어요.";
 		next;
-		mes "[Mayomayo]";
-		mes "Have you ever seen a building of person of reinforcement capacity association?";
+		mes "[마요마요]";
+		mes "역량강화협회 건물을 보신 적이 있나요?";
 		next;
-		if (select( "I've seen it before.", "I haven't seen it before." ) == 2) {
-			mes "[Mayomayo]";
-			mes "That builiding is located to the southeast of where I am. Why don't you go on a field trip there?";
+		if (select( "이전에 본 적이 있습니다.", "이전에 본 적이 없습니다.") == 2) {
+			mes "[마요마요]";
+			mes "저 건물은 제가 있는 곳에서 남동쪽에 있어요. 그곳으로 견학을 가보시는 건 어때요?";
 			close;
 		}
-		mes "[Mayomayo]";
-		mes "If you go to the place, there is someone who enchants the Archangel Wing. At that time that was amazing, because that was impossible ability by my own skill.";
+		mes "[마요마요]";
+		mes "그곳에 가면 대천사날개에 마법을 걸고 있는 사람이 있다. 당시에는 정말 대단했다. 내 스킬로는 불가능한 능력이었기 때문이다.";
 		next;
-		mes "[Mayomayo]";
-		mes "Every night I became his butler and did odd jobs. That is how I learned to enchant.";
+		mes "[마요마요]";
+		mes "나는 매일 밤 그의 집사가 되어 이상한 일을 했습니다. 그것이 바로 마법을 배우는 방법이었습니다.";
 		next;
-		mes "[Mayomayo]";
-		mes "Several rules are changed. Well, you better have experience.";
+		mes "[마요마요]";
+		mes "몇 가지 규칙이 변경되었습니다. 경험을 쌓는 것이 좋습니다.";
 		close;
 	case 2:
 		@mal_enchant_select = 1;
@@ -63,8 +66,8 @@ malangdo,213,167,4	script	Mayomayo#mal	555,{
 	}
 
 	if (!getequipisequiped(EQI_HAND_R)) {
-		mes "[Mayomayo]";
-		mes "Did you take off your equipment?";
+		mes "[마요마요]";
+		mes "장비는 벗으셨나요?";
 		@mal_enchant_select = 0;
 		close;
 	}
@@ -333,11 +336,11 @@ malangdo,213,167,4	script	Mayomayo#mal	555,{
 		// }
 		break;
 	}
-	mes "[Mayomayo]";
+	mes "[마요마요]";
 	if (@mal_enchant_select == 1)
-		mes "This is not a suitable equipment for the enchant. Don't forget we only take care of high class weapons, including level 4 weapons~";
+		mes "인챈트에 적합한 장비는 아닙니다. 저희는 4레벨 무기를 포함한 고급무기만 취급한다는 사실을 잊지 마세요~";
 	else
-		mes "This equipment can not be initialized. Don't forget we only handle some luxury weapons, including level 4 weapons~";
+		mes "이 장비는 초기화할 수 없습니다. 저희는 4레벨 무기를 포함한 일부 고급 무기만 취급한다는 점 잊지 마세요~";
 	@mal_equip_id = 0;
 	@mal_enchant_select = 0;
 	close;
@@ -352,8 +355,8 @@ L_Socket:
 	@mal_enchant_select = 0;
 
 	if (.@select == 1) {
-		mes "[Mayomayo]";
-		mes "^0000ff" + .@equip_name$ + "^000000! Do you want to enchant this equipment? How will you pay for this?";
+		mes "[마요마요]";
+		mes "^0000ff"+ .@equip_name$ +"^000000! 이 장비에 마법을 부여하시겠습니까? 비용은 어떻게 지불하시겠습니까?";
 		next;
 
 		.@enccost = getarg(0);
@@ -373,12 +376,12 @@ L_Socket:
 		}
 		.@coin_select = select(.@menu$) - 2;
 		if (.@coin_select == -1) {
-			mes "[Mayomayo]";
-			mes "Come back again if you change your mind.";
+			mes "[마요마요]";
+			mes "마음이 바뀌면 다시 오세요.";
 			close;
 		} else if (.@count[.@coin_select] < .@total[.@coin_select]) {
-			mes "[Mayomayo]";
-			mes "You don't have enough coins. Do you want to check again?";
+			mes "[마요마요]";
+			mes "코인이 부족합니다. 다시 확인하시겠습니까?";
 			close;
 		}
 		switch(.@coin_select) {
@@ -396,13 +399,13 @@ L_Socket:
 			break;
 		case 4:	// Agrade_Coin
 		case 5:	// Anger_Seagod
-			mes "[Mayomayo]";
-			mes "When you use the " + getitemname(.@coin[.@coin_select]) + ", you can choose the enchant type.";
+			mes "[마요마요]";
+			mes ""+ getitemname(.@coin[.@coin_select]) +" 사용시 인챈트 종류를 선택할 수 있습니다.";
 			next;
-			switch( select( "Stop", "Short Range Type", "Long Range Type", "Caster Type") ) {
+			switch( select( "정지", "단거리형", "장거리형", "캐스터형") ) {
 			case 1:
-				mes "[Mayomayo]";
-				mes "Ok. If you change your mind, let me know.";
+				mes "[마요마요]";
+				mes "알겠습니다. 마음이 바뀌면 알려주세요.";
 				close;
 			case 2:
 				.@enchant_type = ((.@coin_select == 4) ? 4 : 1);
@@ -423,16 +426,16 @@ L_Socket:
 			.@socket = 3;
 			.@str$ = "2nd";
 		} else {
-			mes "[Mayomayo]";
-			mes "This equipment is at the end of enchant. Please initialize the enchant and you will be able to enchant it again, or bring another weapon.";
+			mes "[마요마요]";
+			mes "이 장비는 인챈트가 끝난 상태입니다. 인챈트를 초기화 하시면 다시 인챈트를 하시거나, 다른 무기를 가져오실 수 있습니다.";
 			close;
 		}
-		mes "[Mayomayo]";
-		mes "I'm trying for the " + .@str$ + " enchant. ^ff0000It will not touch previous refinement and cards. Also, the equipment will not be destroyed.^000000 Can I continue?";
+		mes "[마요마요]";
+		mes ""+ .@str$ +" 인챈트를 시도 중입니다. ^ff0000이전 재련과 카드에는 영향을 주지 않습니다. 그리고 장비도 파괴되지 않습니다.^000000 계속해도 될까요?";
 		next;
-		if (select( "I'll come back later.", "Please, continue." ) == 1) {
-			mes "[Mayomayo]";
-			mes "Ok. If you change your mind, come back again.";
+		if (select( "나중에 다시 올게요.", "계속해주세요." ) == 1) {
+			mes "[마요마요]";
+			mes "알겠습니다. 마음이 바뀌면 다시 오세요.";
 			close;
 		}
 		switch(.@enchant_type) {
@@ -597,8 +600,8 @@ L_Socket:
 			else .@enchant = 9;
 			break;
 		default:
-			mes "[Mayomayo]";
-			mes "There is something wrong. Please try again.";
+			mes "[마요마요]";
+			mes "뭔가 문제가 있습니다. 다시 시도해주세요.";
 			close;
 		}
 
@@ -612,25 +615,25 @@ L_Socket:
 		else if (.@equip_card[1] == 0 && .@enclimit < 2) .@equip_card[1] = .@enchant;
 		else if (.@equip_card[0] == 0 && .@enclimit < 1) .@equip_card[0] = .@enchant;
 		else {
-			mes "[Mayomayo]";
-			mes "This equipment is at the end of enchant. I provide enchant for two times maximum.";
+			mes "[마요마요]";
+			mes "이 장비는 인챈트가 끝난 상태입니다. 인챈트는 최대 2배까지 가능합니다.";
 			next;
-			mes "[Mayomayo]";
-			mes "Surely I don't enchant at card socket, therefore weapons that have 3 slots can be enchanted only 1 time. Don't forget this~";
+			mes "[마요마요]";
+			mes "물론 저는 카드 소켓에 인챈트를 하지 않기 때문에 슬롯이 3개 있는 무기는 1번만 인챈트할 수 있습니다. 잊지 마세요~";
 			close;
 		}
 		if (.@enchant == 9) {	//  Should never happen.
 			specialeffect2 EF_SUI_EXPLOSION;
-			mes "[Mayomayo]";
-			mes "Oh my god!";
-			mes "This equipment is destroyed because it could not endure powerful ability. I'm so sorry.";
+			mes "[마요마요]";
+			mes "맙소사!";
+			mes "이 장비는 강력한 능력을 견디지 못해 파괴되었습니다. 정말 죄송합니다.";
 			delitem .@coin[.@coin_select],.@total[.@coin_select];
 			delequip EQI_HAND_R;
 			close;
 		}
 		specialeffect2 EF_REPAIRWEAPON;
-		mes "[Mayomayo]";
-		mes "I have enchanted ^990000slot " + .@socket + "^000000 of this equipment.";
+		mes "[마요마요]";
+		mes "이 장비의 ^990000slot "+ .@socket +"^000000에 마법을 부여했습니다.";
 		delitem .@coin[.@coin_select], .@total[.@coin_select];
 		delequip EQI_HAND_R;
 
@@ -639,32 +642,32 @@ L_Socket:
 
 		close;
 	} else if (.@select == 2) {
-		mes "[Mayomayo]";
-		mes "I will only initialize the enchant effect without touching previous refined level and cards.";
+		mes "[마요마요]";
+		mes "기존 정제된 레벨과 카드를 건드리지 않고 인챈트 효과만 초기화하겠습니다.";
 		next;
-		if (select( "Stop", "Continue" ) == 1) {
-			mes "[Mayomayo]";
-			mes "If you change your mind, come back anytime.";
+		if (select( "그만해", "계속해" ) == 1) {
+			mes "[마요마요]";
+			mes "마음이 바뀌면 언제든지 다시 오세요.";
 			close;
 		}
 		if (countitem(6417) == 0) {
-			mes "[Mayomayo]";
-			mes "I'm sorry. You don't have Silvervine Fruit. Please check your inventory again?";
+			mes "[마요마요]";
+			mes "죄송합니다. 억새 열매가 없습니다. 인벤토리를 다시 확인해 주시겠습니까?";
 			close;
 		}
 		if (!getequipisequiped(EQI_HAND_R)) {
-			mes "[Mayomayo]";
-			mes "Did you take off the equipment?";
+			mes "[마요마요]";
+			mes "장비는 벗었어요?";
 			close;
 		}
 		if (.@equip_card[3] == 0) {
-			mes "[Mayomayo]";
-			mes "This equipment has nothing to initialize. Please check again.";
+			mes "[마요마요]";
+			mes "본 장비는 초기화할 내용이 없습니다. 다시 확인해주세요.";
 			close;
 		}
 		specialeffect2 EF_REPAIRWEAPON;
-		mes "[Mayomayo]";
-		mes "Initialize the enchant effect from the equipment.";
+		mes "[마요마요]";
+		mes "장비의 인챈트 효과를 초기화합니다.";
 		delitem 6417,1;	// Silvervine
 
 		// anti-hack

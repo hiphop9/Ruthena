@@ -1,0 +1,9 @@
+
+Header:
+  Type: LAPHINE_UPGRADE_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/import/ep20/laphine_upgrade.yml
+

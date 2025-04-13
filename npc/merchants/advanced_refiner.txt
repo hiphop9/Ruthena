@@ -18,13 +18,13 @@
 //= 1.7 Removed re-roll behavior. [Secret]
 //============================================================
 
-payon,157,146,6	script	Suhnbi#cash	85,{
+payon,157,146,6	script	선비::Suhnbi#cash	85,{
 	disable_items;
-	mes "[Suhnbi]";
-	mes "I am the Armsmith";
-	mes "I can refine all kinds of weapons,";
-	mes "armor and equipment, so let me";
-	mes "know what you want to refine.";
+	mes "[선비]";
+	mes "나는 대장장이입니다";
+	mes "나는 모든 종류의 무기를 제련할 수 있어요,";
+	mes "방어구와 장비를 알려주세요";
+	mes "무엇을 개선하고 싶은지 알아보세요.";
 	next;
 
 	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
@@ -36,8 +36,8 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 		set .@menu$, .@menu$ + ":";
 	}
 	if (.@equipped == 0) {
-		mes "[Suhnbi]";
-		mes "I don't think I can refine any items you have...";
+		mes "[선비]";
+		mes "당신이 가지고 있는 어떤 아이템도 개선할 수 없을 것 같아요...";
 		close;
 	}
 	set .@part, .@indices[ select(.@menu$) ];
@@ -45,13 +45,13 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 	if (!getequipisequiped(.@part)) //custom check
 		close;
 	if (!getequipisenableref(.@part)) {
-		mes "[Suhnbi]";
-		mes "Go find another Blacksmith. You can't refine this thing.";
+		mes "[선비]";
+		mes "가서 다른 대장장이를 찾아보세요. 이건 개선할 수 없습니다.";
 		close;
 	}
 	if (getequiprefinerycnt(.@part) >= 10) {
-		mes "[Suhnbi]";
-		mes "Hmm... someone perfected this already. I don't think I can work on it further.";
+		mes "[선비]";
+		mes "흠... 이미 누군가가 완성한 부분인데 더 이상 작업할 수 없을 것 같아요.";
 		close;
 	}
 
@@ -65,28 +65,28 @@ payon,157,146,6	script	Suhnbi#cash	85,{
 	// Determines chance of failure and verifies that you want to continue.
 	callsub S_RefineValidate,.@itemtype,.@material,.@price,.@part,.@refineitemid,.@refinerycnt;
 
-	mes "[Suhnbi]";
-	mes "Clang! Clang! Clang!";
+	mes "[선비]";
+	mes "꽝! 꽝! 꽝! 꽝!";
 	if (getequippercentrefinery(.@part, true) > rand(100)) {
 		successrefitem .@part;
 		next;
 		emotion ET_BEST;
-		mes "[Suhnbi]";
-		mes "There you go! It's done.";
-		mes "It's been a while since I've made such a fine "+((.@itemtype == IT_WEAPON)?"weapon":"armor")+". You must be happy because it has become stronger!";
+		mes "[선비]";
+		mes "자, 됐어요! 끝났어요.";
+		mes "이렇게 잘 만든 건 오랜만이야. "+((.@itemtype == IT_WEAPON)?"weapon":"armor")+". 강해졌으니 기뻐하겠지!";
 		close;
 	}
 	failedrefitem .@part;
 	next;
 	emotion (!rand(5))?ET_MONEY:ET_HUK;
-	mes "[Suhnbi]";
-	mes "Uuuuuuuuuummmmmph!!!";
+	mes "[선비]";
+	mes "우우우우우우우우우우우우우우우!!!";
 	next;
-	mes "[Suhnbi]";
+	mes "[선비]";
 	mes "...";
 	mes ".....";
-	mes ".......Huhuhuhuhu~";
-	mes "........It was your choice and my ability, no regret.";
+	mes ".......후후후후후~";
+	mes "........당신의 선택이었고 나의 능력이었으며 후회는 없습니다.";
 	close;
 
 S_RefineValidate:
@@ -138,49 +138,49 @@ S_RefineValidate:
 		close;
 	}
 
-	mes "[Suhnbi]";
+	mes "[선비]";
 	if (.@itemtype == IT_WEAPON)
-		mes "You want to refine a level "+ .@equip_lv +" weapon?";
-	mes "To refine that, you'll need to have one ^ff9999"+ getitemname(.@item_req) +"^000000 and "+ .@price +" zeny.";
-	mes "Would you like to continue?";
+		mes "레벨을 세분화하고 싶습니다. "+ .@equip_lv +" 무기?";
+	mes "이를 개선하려면 다음이 필요합니다.^ff9999"+ getitemname(.@item_req) +"^000000 그리고"+ .@price +" 제니.";
+	mes "계속하시겠습니까?";
 	next;
-	if(select("Yes:No") == 1) {
+	if(select("예 아니오") == 1) {
 		if (getequippercentrefinery(.@part) < 100) {
 			if (.@itemtype == IT_WEAPON) {
-				mes "[Suhnbi]";
-				mes "Wow!!";
-				mes "This weapon probably";
-				mes "looks like it's been refined...";
-				mes "many times...";
-				mes "It may break if";
-				mes "you refine it again.";
+				mes "[선비]";
+				mes "와!!";
+				mes "이 무기는 아마";
+				mes "세련된 것 같네요...";
+				mes "여러번...";
+				mes "깨질 수도 있어요";
+				mes "다시 다듬으시네요.";
 				next;
-				mes "And if it breaks,";
-				mes "you can't use it anymore!";
-				mes "All the cards in it and the properties ^ff0000will be lost^000000!";
-				mes "^ff0000Besides, the equipment will break!^000000";
-				mes "Are you sure you still want to continue?";
+				mes "그리고 깨지면,";
+				mes "더 이상 사용할 수 없어요!";
+				mes "그 안에 있는 모든 카드와 속성 ^ff0000^000000이 손실됩니다!";
+				mes "^ff0000게다가 장비가 망가질 수도 있어요!^000000";
+				mes "정말 계속하시겠습니까?";
 				next;
-				if(select("Yes:No") == 2) {
-					mes "[Suhnbi]";
-					mes "Good.";
-					mes "Because if the weapon breaks from unreasonable refining, then I get a bad mood, too.";
+				if(select("예 아니오") == 2) {
+					mes "[선비]";
+					mes "좋아요.";
+					mes "무리한 제련으로 무기가 망가지면 나도 기분이 나빠지니까.";
 					close;
 				}
 			} else {
-				mes "[Suhnbi]";
-				mes "Giggle. Giggle. Oh, you have guts, daring to refine this.";
-				mes "You know it's pretty risky, don't you?";
+				mes "[선비]";
+				mes "낄낄낄. 낄낄거림. 아, 용기가 있어 이걸 다듬으려는구나.";
+				mes "이건 꽤 위험한 일인거 아시죠?";
 				next;
-				mes "If your defensive equipment is broken, you'll never be able to use it again.";
-				mes "Even your cards and your modifications will ^ff0000completely disappear^000000.";
+				mes "방어장비가 파손되면 다시는 사용할 수 없습니다.";
+				mes "당신의 카드와 수정사항도 ^ff0000완전히 사라집니다^000000.";
 				//mes "Everything will disappear. As in... GONE!";
-				mes "Do you really wish to continue?";
+				mes "정말 계속하시겠습니까?";
 				next;
-				if(select("Yes:No") == 2) {
-					mes "[Suhnbi]";
-					mes "What nonsense. You waste my precious time.";
-					mes "Get lost, punk.";
+				if(select("예 아니오") == 2) {
+					mes "[선비]";
+					mes "말도 안 되는 소리야. 넌 내 소중한 시간을 낭비하고 있어.";
+					mes "길을 잃어라, 새끼야.";
 					close;
 				}
 			}
@@ -192,22 +192,22 @@ S_RefineValidate:
 			// anti-hack
 			if (callfunc("F_IsEquipIDHack", .@part, getarg(4)) ||
 				callfunc("F_IsEquipRefineHack", .@part, getarg(5)) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3])) {
-				mes "[Holink]";
+				mes "[홀링크]";
 				emotion ET_FRET;
-				mes "Wait a second...";
-				mes "Do you think I'm stupid?!";
-				mes "You switched the item while I wasn't looking! Get out of here!";
+				mes "잠깐만요...";
+				mes "내가 바보라고 생각해요?!";
+				mes "내가 보지 않는 동안 아이템을 바꾸셨네요! 여기서 나가세요!";
 				close;
 			}
 
 			return;
 		}
-		mes "[Suhnbi]";
-		mes "Are these all you have?";
-		mes "I'm very sorry, but I can't do anything without all the materials. Besides, I deserve some payments for my work, don't I?";
+		mes "[선비]";
+		mes "이게 다예요?";
+		mes "죄송하지만 재료가 없으면 아무것도 할 수 없어요. 게다가 작업에 대한 대가를 받을 자격도 있지 않나요?";
 		close;
 	}
-	mes "[Suhnbi]";
-	mes "I can't help it even if you're not happy about it...";
+	mes "[선비]";
+	mes "네가 마음에 들지 않아도 어쩔 수가 없어...";
 	close;
 }

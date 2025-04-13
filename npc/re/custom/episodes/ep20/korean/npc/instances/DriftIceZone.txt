@@ -1,0 +1,1361 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Drift Ice Zone from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 33, 34
+// jor_maze,140,68,0	script	#20ms43	HIDDEN_WARP_NPC,5,5,{
+jor_maze,140,68,0	script	#20ms43_drift_zone	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep20_main == 32 || ep20_main == 33) {
+		cloakoffnpcself( "ep20_jor_maze_140_72" );
+		end;
+	}
+	end;
+}
+
+jor_maze,140,72,3	script(CLOAKED)	일렁이는 벽#20ms40::ep20_jor_maze_140_72	GATE_SKYBLUE,{
+	if (ep20_main == 32) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "길이 너무 복잡해지는데... 돌아갈 순 있을까?";
+		mes "이건...?";
+		next;
+		mes "바닥을 살펴보니 누군가 지나간 흔적이 있다.";
+		next;
+		select( "주변을 살펴본다.", "바닥을 조사해본다." );
+		mes "[" + strcharinfo(0) + "]";
+		mes "벽이... 일렁거리네? ^0000cd공간 인식을 흐리게 하는 장치^000000인 것 같은데. 이런 것을 만들만한 인물은 바곳 뿐이지... 이 너머에 있는 걸까?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "장치를 만져볼까...";
+		ep20_main = 33;
+		erasequest 17706;
+		setquest 17707;
+		close;
+	}
+	if (ep20_main == 33) {
+		// Todo: transform required?
+		if (getcharid(1) < 1) {
+			mes "[은신 장치]";
+			mes "파티에 가입하시거나 1인 이상의 파티를 결성하고 다시 이용해주십시오.";
+			close;
+		}
+		// note: multiple players allowed to enter
+		.@md_name$ = "유빙 지대";
+
+		if (is_party_leader() == true)
+			.@menu$ = "장치를 해제한다.";
+
+		switch( select( .@menu$, "안으로 들어간다.", "취소" ) ) {
+		case 1:
+			mes "[은신 장치]";
+			mes "사용자 확인 되었습니다. 이동하십시오.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[은신 장치]";
+				mes "사용자 확인 및 장치 해제를 하지 않았습니다. 먼저 사용자 확인 후 해제해주십시오.";
+				close;
+			case IE_OK:
+				mes "[은신 장치]";
+				mes "사용자 확인 완료되었습니다. 이동 가능합니다.";
+				mapannounce "jor_maze", "사용자 " + strcharinfo(0) + " 및 " + getpartyname(getcharid(1)) + "모두 " + .@md_name$ + "에 진입합니다.", bc_map, 0xFF99;
+				// warp "1@twsd",318,76;
+				close;
+			}
+			end;
+		case 3:
+			mes "[" + strcharinfo(0) + "]";
+			mes "조금 더 살펴보는 것이 좋을 것 같다.";
+			close;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17706) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17707) == 1" );
+	end;
+}
+
+
+
+
+1@twsd,318,77,0	script	#20msn00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 0) {
+		navigateto("1@twsd",314,94);
+		end;
+	}
+	end;
+
+OnInstanceInit:
+	'step = 0;
+	'map_twsd$ = instance_mapname("1@twsd");
+	end;
+}
+
+
+// Step 1
+1@twsd,311,93,3	duplicate(dummy_npc)	르간 주교#20msd01::ep20_1twsd_311_93	4_EP19_RGAN_SR3
+1@twsd,309,96,5	duplicate(dummy_npc)	르간 주교#20msd02::ep20_1twsd_309_96	4_EP19_RGAN_SR1
+1@twsd,317,98,3	duplicate(dummy_disabled_npc)	하트헌터#20msd00::ep20_1twsd_317_98	EP20_MD_HEARTHUNTER1
+1@twsd,319,95,3	duplicate(dummy_disabled_npc)	하트헌터#20msd01::ep20_1twsd_319_95	EP20_MD_HEARTHUNTER1
+
+1@twsd,314,94,5	script	르간 주교#20msd00	4_EP19_RGAN_SR2,5,5,{
+	if (is_party_leader() == false)
+		end;
+	if ('step == 0) {
+		mes "[르간 주교]";
+		mes "아유, 어디서 이렇게 자꾸자꾸 나오는 건지!";
+		npctalk "아유, 어디서 이렇게 자꾸자꾸 나오는 건지!";
+		npctalk "빨리 빨리 치워!", instance_npcname("ep20_1twsd_311_93");
+		next;
+		select( "청소 인력 필요하십니까?" );
+		mes "[르간 주교]";
+		mes "웬 사제냐? 처음 보는 얼굴인데?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 청소 인력 필요하십니까?";
+		npctalk "웬 사제냐? 처음 보는 얼굴인데?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "이번에 원정에서 돌아왔습니다. 사레크간드님이 보내셨어요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 이번에 원정에서 돌아왔습니다. 사레크간드님이 보내셨어요.";
+		next;
+		mes "[르간 주교]";
+		mes "그럼 청소하러 온 거냐? 하지만 지정된 구역이 있을 텐데. 돌아가.";
+		npctalk "청소하러 온 거냐? 하지만 지정된 구역이 있을 텐데. 돌아가.";
+		next;
+		select( "사레크간드님이 이곳 청소도..." );
+		mes "[르간 주교]";
+		mes "뭐? 아까 지나가면서 그런 말은 없었는데?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 사레크간드님이 이곳 청소도 맡기셨는데요.";
+		npctalk "뭐? 아까 지나가면서 그런 말은 없었는데?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "그러게? 처음 듣는 얘긴데?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[르간 주교]";
+		mes "일단 알았으니까 돌아가. 사정은 나중에 알아봐도 되니까.";
+		npctalk "일단 알았으니까 돌아가. 사정은 나중에 알아봐도 되니까.";
+		next;
+		mes "[르간 주교]";
+		mes "이곳엔 허가받지 않은 자들은 발을 들여선 안돼.";
+		npctalk "이곳엔 허가받지 않은 자들은 발을 들여선 안돼.", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "사실 길을 잃었습니다요. 너무 복잡해서 길 찾는 게 여간...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 사실 길을 잃었습니다요. 너무 복잡해서 길 찾는 게 여간...";
+		next;
+		mes "[르간 주교]";
+		mes "온 길로 쭉 돌아 나가면 된다.";
+		npctalk "온 길로 쭉 돌아 나가면 된다.", instance_npcname("ep20_1twsd_309_96");
+		npctalk "간단하잖아?", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "도움을 드리다 같이 돌아가면 안되겠습니까요. 혼자 다니기 좀 무서운데...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 도움을 드리다 같이 돌아가면 안되겠습니까요. 혼자 다니기 좀 무서운데...";
+		next;
+		enablenpc instance_npcname("ep20_1twsd_317_98");
+		enablenpc instance_npcname("ep20_1twsd_319_95");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_317_98");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_319_95");
+		mes "[하트헌터]";
+		mes "무슨 소란들입니까?";
+		npctalk "무슨 소란들입니까?", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[르간 주교]";
+		mes "인간. 잘 왔다. 여기 이 사제녀석이 초행길에 길을 잃었다는군. 데려다주고 와라.";
+		npctalk "여기 이 사제녀석이 초행길에 길을 잃었다는군. 데려다주고 와라.";
+		next;
+		mes "[하트헌터]";
+		mes "흠... 그걸, 굳이, 지금요?";
+		npctalk "흠... 그걸, 굳이, 지금요?", instance_npcname("ep20_1twsd_317_98");
+		npctalk "귀찮...", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[르간 주교]";
+		mes "그렇다. 그걸. 굳이. 지금.";
+		npctalk "그렇다. 그걸. 굳이. 지금.";
+		npctalk "당연한 것을 되묻는 거냐?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "건방진 것을 보니 아직 덜 혼난 모양이야. 내 이 일은 인간에게 말하겠다.", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "인간? 더러운 인간이 이곳에 무슨 일입니까?";
+		mes "인간에게 협박당하는 겁니까?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 인간? 이곳에 무슨 일입니까? 인간에게 협박당하는 겁니까?";
+		next;
+		mes "[르간 주교]";
+		mes "아니, 이놈이? 어딜 봐서 우리가 협박을 당해?";
+		npctalk "아니, 이놈이? 어딜 봐서 우리가 협박을 당해?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "주교님들 협박을 당하고 있다면 꼬리를 흔들어주세요. 제가 구해드리겠습니다.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 협박을 당하고 있다면 꼬리를 흔들어주세요. 제가 구해드리겠습니다.";
+		next;
+		mes "[르간 주교]";
+		mes "저, 저! 알고 보니 네놈이 정신이 나간 사제였구나!";
+		npctalk "저, 저! 알고 보니 네놈이 정신이 나간 사제였구나!", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[르간 주교]";
+		mes "그분이 곧 오실텐데 빨리 돌아가. 원. 요즘 사제들은...";
+		npctalk "그분이 곧 오실텐데 빨리 돌아가. 원. 요즘 사제들은...", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[르간 주교]";
+		mes "사레크간드가 데려왔다고 했지? 제대로 교육시키라고 해야겠어.";
+		npctalk "사레크간드에게 제대로 교육시키라고 해야겠어.";
+		next;
+		mes "[하트헌터]";
+		mes "저거 좀 수상한데 그냥 해치우죠. 굳이 이 시기에 이 장소에 얼쩡거리는 모르는 사제라니.";
+		npctalk "저거 좀 수상한데 그냥 해치우죠.", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[하트헌터]";
+		mes "분탕질 쳤던 인간이 변신한 걸 수도 있겠네.";
+		npctalk "분탕질 쳤던 인간이 변신한 걸 수도 있겠네.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[르간 주교]";
+		mes "그런가???!!! 그렇지만 확신을 할 수는 없잖아? 주술사를 부를까?";
+		npctalk "그런가???!!! 그렇지만 확신을 할 수는 없잖아? 주술사를 부를까?", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[하트헌터]";
+		mes "그럼 시간이 걸리니 일단 해치우고 확인하죠.";
+		npctalk "그럼 시간이 걸리니 일단 해치우고 확인하죠.", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[르간 주교]";
+		mes "좋네. 그 편이 훨씬 빠르고 깔끔하겠네.";
+		npctalk "좋네. 그 편이 훨씬 빠르고 깔끔하겠네.";
+		next;
+		mes "[르간 주교]";
+		mes "그렇지만 사레크간드가 보장한 일손이라는데. 만약 정말 그게 사실이라면...";
+		npctalk "그렇지만 사레크간드가 보장한 일손이라는데...", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[하트헌터]";
+		mes "그걸 어떻게 믿습니까. 사레크간드님은 지금 이 자리에 없는 걸.";
+		npctalk "그걸 어떻게 믿습니까. 사레크간드님은 지금 이 자리에 없는 걸.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[하트헌터]";
+		mes "흠, 사제 하나쯤 치워도 누가 신경이나 쓰겠습니까. 그냥 없애요. 곧 라스간드님이 오실텐데.";
+		npctalk "사제 하나쯤 치워도 누가 신경이나 쓰겠습니까. 곧 라스간드님이 오실텐데. 시간 괜찮아요?", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[하트헌터]";
+		mes "꺼려진다면, 저희가 하지요. 주술사나 불러오십시오. 제압중이던 가디언도 풀어주시고요.";
+		npctalk "꺼려진다면, 저희가 하지요. 주술사나 불러오십시오. 제압중이던 가디언도 풀어주시고요.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[르간 주교]";
+		mes "그럼... 믿는다!";
+		npctalk "그럼... 믿는다!";
+		npctalk "아무리 봐도 귀찮아서 해치운다는 것 같은데?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "우리가 상관할 바는 아니지. 어서 가자.", instance_npcname("ep20_1twsd_309_96");
+		close2;
+		if ('step == 0) {
+			'step = 1;
+			donpcevent instance_npcname("ep20_1twsd_307_95") + "::OnStart";
+			disablenpc instance_npcname("ep20_1twsd_317_98");
+			disablenpc instance_npcname("ep20_1twsd_319_95");
+			sleep 1000;
+			disablenpc();
+			disablenpc instance_npcname("ep20_1twsd_311_93");
+			disablenpc instance_npcname("ep20_1twsd_309_96");
+			end;
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	if ('step == 0) {
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_307_95");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_308_94");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_306_93");
+		npctalk "거기 누구냐!!";
+		end;
+	}
+	end;
+}
+
+1@twsd,307,95,5	script	요르문간드 가디언#ms00::ep20_1twsd_307_95	EP20_JORMUNGUARD1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep20_1twsd_307_95") + "::OnMobDead";
+	monster 'map_twsd$,317,98,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,319,95,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("ep20_1twsd_307_95") + "::OnMobDead") > 0)
+		end;
+	disablenpc instance_npcname("ep20_1twsd_307_95");
+	disablenpc instance_npcname("ep20_1twsd_308_94");
+	disablenpc instance_npcname("ep20_1twsd_306_93");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_307_95");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_308_94");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_306_93");
+	donpcevent instance_npcname("twsd_mobs_1") + "::OnStart";
+	end;
+}
+1@twsd,308,94,5	duplicate(dummy_npc)	요르문간드 가디언#ms01::ep20_1twsd_308_94	EP20_JORMUNGUARD2
+1@twsd,306,93,5	duplicate(dummy_npc)	요르문간드 가디언#ms02::ep20_1twsd_306_93	EP20_JORMUNGUARD1
+
+1@twsd,1,1,5	script	twsd_mobs_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_1") + "::OnMobDead";
+	monster 'map_twsd$,307,95,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	monster 'map_twsd$,308,94,"--ja--","MD_EP20_JOR_G_Y",1, .@event$;
+	monster 'map_twsd$,306,93,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_1") + "::OnMobDead") > 0)
+		end;
+	if ('step == 1)
+		'step = 2;
+	enablenpc instance_npcname("ep20_1twsd_319_100");
+	enablenpc instance_npcname("ep20_1twsd_312_100");
+	npctalk "좀 시끄러운...", instance_npcname("ep20_1twsd_319_100");
+	end;
+}
+
+
+// Step 2
+1@twsd,312,100,5	duplicate(dummy_disabled_npc)	르간 주술사#20msd01::ep20_1twsd_312_100	EP20_JORGAN_WARLOCK
+
+1@twsd,319,100,3	script(DISABLED)	르간 주술사#20msd00::ep20_1twsd_319_100	EP20_JORGAN_WARLOCK,{
+	if ('step == 2) {
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "무슨 소란이지?";
+		sleep2 1500;
+		npctalk "주교가 급하게 불러서 왔더니, 여기 있던 인간들은 다 어디 갔지?", instance_npcname("ep20_1twsd_312_100");
+		sleep2 1500;
+		npctalk "의심스러운 사제가 나타났다던데! 네놈이냐?";
+		sleep2 1500;
+		npctalk "가만? 저거 좀 이상한데? 인간일 수도 있다. 확인해 봐야곘?", instance_npcname("ep20_1twsd_312_100");
+		sleep2 1500;
+		specialeffect2 EF_4WAYBODY;
+		specialeffect2 EF_ELECTRIC;
+		specialeffect2 EF_BLUECASTING;
+		sleep2 1500;
+		sc_end SC_MONSTER_TRANSFORM;
+		npctalk "인간!!! 어떻게 여기까지 왔지?";
+		sleep2 1000;
+		npctalk "일단 사로잡는다!", instance_npcname("ep20_1twsd_312_100");
+		setpcblock PCBLOCK_NPC, false;
+		if ('step == 2) {
+			'step = 3;
+			disablenpc();
+			disablenpc instance_npcname("ep20_1twsd_312_100");
+			donpcevent instance_npcname("twsd_mobs_2") + "::OnStart";
+			end;
+		}
+		end;
+	}
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_2") + "::OnMobDead";
+	monster 'map_twsd$,319,100,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,312,100,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_2") + "::OnMobDead") > 0)
+		end;
+	if ('step == 3)
+		'step = 4;
+	mapannounce 'map_twsd$, "조금만... 마력... 높...", bc_map, 0xFFCC;
+	enablenpc instance_npcname("#20msn01");
+	enablenpc instance_npcname("#20w00");
+	end;
+}
+
+
+// Step 3
+1@twsd,311,101,0	script(DISABLED)	#20msn01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",294,115);
+	end;
+}
+
+1@twsd,294,115,0	script(DISABLED)	#20w00	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('step >= 4) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 이쪽에서 소리가 들렸는데?";
+		warp 'map_twsd$,261,119;
+		end;
+	}
+	end;
+}
+
+1@twsd,260,119,0	script	#20msd00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 4) {
+		'step = 5;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 이쪽인가?";
+		navigateto("1@twsd",262,146);
+		donpcevent instance_npcname("twsd_mobs_3") + "::OnStart";
+		end;
+	}
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_3") + "::OnMobDead";
+	monster 'map_twsd$,258,131,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,251,117,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,268,145,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,257,149,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_3") + "::OnMobDead") > 0)
+		end;
+	if ('step == 5)
+		'step = 6;
+	mapannounce 'map_twsd$, "반동이... ?...", bc_map, 0xFFCC;
+	enablenpc instance_npcname("#20w10");
+	enablenpc instance_npcname("#20msn02");
+	enablenpc instance_npcname("#20msn03");
+	enablenpc instance_npcname("ep20_1twsd_161_198");
+	enablenpc instance_npcname("ep20_1twsd_164_197");
+	enablenpc instance_npcname("ep20_1twsd_160_196");
+	enablenpc instance_npcname("ep20_1twsd_166_193");
+	enablenpc instance_npcname("ep20_1twsd_168_197");
+	enablenpc instance_npcname("ep20_1twsd_166_200");
+	enablenpc instance_npcname("ep20_1twsd_163_190");
+	end;
+}
+
+1@twsd,262,146,0	script(DISABLED)	#20msn02	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",220,154);
+	end;
+}
+
+1@twsd,220,154,0	warp2(DISABLED)	#20w10	2,2,1@twsd,196,208
+
+1@twsd,196,209,0	script(DISABLED)	#20msn03	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",163,190);
+	end;
+}
+
+
+// Step 4
+1@twsd,161,198,5	duplicate(dummy_disabled_npc)	르간 주술사#20msd10::ep20_1twsd_161_198	EP20_JORGAN_WARLOCK
+1@twsd,160,196,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#ms11::ep20_1twsd_160_196	EP20_JORMUNGUARD2
+1@twsd,166,193,3	duplicate(dummy_disabled_npc)	르간 주교#20msd11::ep20_1twsd_166_193	4_EP19_RGAN_SR1
+1@twsd,168,197,3	duplicate(dummy_disabled_npc)	르간 주교#20msd12::ep20_1twsd_168_197	4_EP19_RGAN_SR3
+1@twsd,166,200,5	duplicate(dummy_disabled_npc)	르간 주술사#20msd11::ep20_1twsd_166_200	EP20_JORGAN_WARLOCK
+	
+1@twsd,163,190,5	script(DISABLED)	르간 주교#20msd10::ep20_1twsd_163_190	4_EP19_RGAN_SR2,5,5,{
+	if ('step == 6) {
+		mes "[르간 주교]";
+		mes "맑은 눈을 한 미치광이 사제는 어떻게 됐지? 왜 알아보러 간 주술사는 소식도 없어.";
+		npctalk "미치광이 사제는 어떻게 됐지? 왜 알아보러 간 주술사는 소식도 없어.", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[르간 주술사]";
+		mes "성소에 인도하고 오나 보지. 도움이 필...";
+		npctalk "성소에 인도하고 오나 보지. 도움이 필...", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[르간 주교]";
+		mes "저거, 인간 아니야?";
+		npctalk "저거, 인간 아니야?", instance_npcname("ep20_1twsd_166_193");
+		next;
+		mes "[르간 주교]";
+		mes "지금 상황에서 나타난 인간이라면... 그, 그럼 그 미치광이 사제가 변신한 인간이었어?";
+		npctalk "그, 그럼 그 미치광이 사제가 변신한 인간이었어?", instance_npcname("ep20_1twsd_161_198");
+		npctalk "갔던 놈들은 다 당한 거야? 미치겠네. 내가 미치겠어!", instance_npcname("ep20_1twsd_168_197");
+		next;
+		mes "[르간 주교]";
+		mes "^0000cd라스간드님이 곧 오신다!!^000000 조용히 처리하자!!";
+		npctalk "라스간드님이 곧 오신다!! 조용히 처리하자!!", instance_npcname("ep20_1twsd_166_193");
+		next;
+		select( "라스간드? 그자가 이곳에 있는 것이 맞군?" );
+		mes "[르간 주교]";
+		mes "모르고 여기까지 왔어...?!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 라스간드? 그자가 이곳에 있는 것이 맞군?";
+		npctalk "모르고 여기까지 왔어...?!", instance_npcname("ep20_1twsd_168_197");
+		next;
+		mes "[르간 주교]";
+		mes "진정해. 보아하니 저쪽은 아직 제대로 모른다. 입 조심하고 조용히 해치우자!";
+		npctalk "보아하니 저쪽은 아직 제대로 모른다. 입 조심하고 조용히 해치우자!", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[르간 주교]";
+		mes "^0000cd그 건방진 인간이^000000 신신당부를 하고 갔는데, 이러다간 우리 체면이!";
+		npctalk "그 건방진 인간이 신신당부를 하고 갔는데, 이러다간 우리 체면이!", instance_npcname("ep20_1twsd_166_193");
+		npctalk "그러고보니 그 건방진 인간도 미치광이었지. 인간은 다 미치광이인가??", instance_npcname("ep20_1twsd_168_197");
+		next;
+		select( "아! 바곳도 이곳에 있나?" );
+		emotion ET_FRET, getnpcid(0, instance_npcname("ep20_1twsd_161_198"));
+		mes "[르간 주교]";
+		mes "... 전부 이 시간 이후로 입을 열지 마. ^0000cd라스간드님의 신성한 의식을^000000 방해해선 안된다. 조용히...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 아! 바곳도 이곳에 있나?";
+		npctalk "전부 입을 열지 마. 라스간드님의 신성한 의식을 방해해선 안된다. 조용히...", instance_npcname("ep20_1twsd_161_198");
+		next;
+		select( "둘이서 뭔가를 하고 있다고? 저 뒤쪽인가?" );
+		emotion ET_FRET, getnpcid(0, instance_npcname("ep20_1twsd_166_193"));
+		next;
+		mes "[르간 주교]";
+		mes "환장하겠네! 중요한 정보를 우리 스스로 불고 있잖아!!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 둘이서 뭔가를 하고 있다고? 저 뒤쪽인가?";
+		npctalk "환장하겠네! 중요한 정보를 우리 스스로 불고 있잖아!!", instance_npcname("ep20_1twsd_166_193");
+		next;
+		mes "[르간 주교]";
+		mes "에잇! 선수필승이다!";
+		npctalk "에잇! 선수필승이다!", instance_npcname("ep20_1twsd_168_197");
+		npctalk "이렇게 된 이상 영원히 입을 다물게 하는 수밖에 없지!!", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[르간 주술사]";
+		mes "잠깐. 이번엔 우리가 나서겠다. 가디언이나 잘 붙잡고 다른 곳에 상황을 알려라.";
+		npctalk "이번엔 우리가 나서겠다. 가디언이나 잘 붙잡고 다른 곳에 상황을 알려라.", instance_npcname("ep20_1twsd_166_200");
+		next;
+		mes "[르간 주교]";
+		mes "그, 그러지!";
+		npctalk "그, 그러지!", instance_npcname("ep20_1twsd_161_198");
+		close2;
+		if ('step == 6) {
+			'step = 7;
+			disablenpc instance_npcname("ep20_1twsd_161_198");
+			disablenpc instance_npcname("ep20_1twsd_166_200");
+			donpcevent instance_npcname("ep20_1twsd_164_197") + "::OnStart";
+			npctalk "우리도 합류해야 하나?", instance_npcname("ep20_1twsd_161_198");
+			npctalk "기다려보랬으니까 안되겠으면 가디언을 풀자!", instance_npcname("ep20_1twsd_166_193");
+			sleep 1000;
+			disablenpc instance_npcname("ep20_1twsd_168_197");
+			end;
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	if ('step == 6) {
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_164_197");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_160_196");
+		npctalk "좋지 않아...", instance_npcname("ep20_1twsd_161_198");
+		end;
+	}
+	end;
+}
+
+1@twsd,164,197,3	script(DISABLED)	요르문간드 가디언#ms10::ep20_1twsd_164_197	EP20_JORMUNGUARD1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep20_1twsd_164_197") + "::OnMobDead";
+	monster 'map_twsd$,161,198,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,166,200,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("ep20_1twsd_164_197") + "::OnMobDead") > 0)
+		end;
+	npctalk "안되겠다! 일단 몸을 피하자!", instance_npcname("ep20_1twsd_161_198");
+	npctalk "가랏! 기생충!!!", instance_npcname("ep20_1twsd_166_193");
+	
+	disablenpc instance_npcname("ep20_1twsd_164_197");
+	disablenpc instance_npcname("ep20_1twsd_160_196");
+	disablenpc instance_npcname("ep20_1twsd_161_198");
+	disablenpc instance_npcname("ep20_1twsd_166_193");
+	disablenpc instance_npcname("ep20_1twsd_163_190");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_164_197");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_160_196");
+	donpcevent instance_npcname("twsd_mobs_4") + "::OnStart";
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_4	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_4") + "::OnMobDead";
+	monster 'map_twsd$,164,197,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	monster 'map_twsd$,160,196,"--ja--","MD_EP20_JOR_G_Y",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_4") + "::OnMobDead") > 0)
+		end;
+	if ('step == 7)
+		'step = 8;
+	enablenpc instance_npcname("#20msn04");
+	mapannounce 'map_twsd$, "단번에 끝내...", bc_map, 0xFFCC;
+	donpcevent instance_npcname("twsd_mobs_4") + "::OnStart2";
+	end;
+
+OnStart2:
+	.@event$ = instance_npcname("twsd_mobs_4") + "::OnMobDead2";
+	monster 'map_twsd$,149,214,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,151,235,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead2:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_4") + "::OnMobDead2") > 0)
+		end;
+	if ('step == 8)
+		'step = 9;
+	enablenpc instance_npcname("ep20_1twsd_162_245");
+	specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_162_245");
+	mapannounce 'map_twsd$, "모험가님! 모험가님~ 어디 계시지...?", bc_map, 0xFFCC;
+	end;
+}
+
+
+// Step 5
+1@twsd,165,197,0	script(DISABLED)	#20msn04	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",162,245);
+	end;
+}
+
+1@twsd,162,245,3	script(DISABLED)	레하르#20msd10::ep20_1twsd_162_245	4_EP19_LEHAR,5,5,{
+	if ('step == 9) {
+		cutin "ep19_lehar01.png",0;
+		mes "[레하르]";
+		mes "여기 계셨군요! 휴- 겨우 찾았네.";
+		npctalk "모험가님!!! 휴- 겨우 찾았네.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		select( "레하르님? 어떻게?" );
+		cutin "ep19_lehar02.png",0;
+		mes "[레하르]";
+		mes "레이지씨가 지금까지 모은 정보를 한 번 정리하고 얼음의 성에서 한 번 의견을 나누는 것이 좋다고 해서요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 레하르님? 어떻게?";
+		npctalk "얼음의 성에서 한 번 의견을 나누는 것이 좋다고 해서요.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[레하르]";
+		mes "레이지씨랑 미리암씨는 먼저 가셨고, 제가 모험가님을 찾아서 같이 가려고 왔는데, 무슨 길이...";
+		npctalk "레이지씨랑 미리암씨는 먼저 가셨고, 제가 모험가님을 찾아서 같이 가려고 왔어요.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[레하르]";
+		mes "한 번 재정비하고 다시 오는 것이 좋겠다고 해서요.";
+		npctalk "한 번 재정비하고 다시 오는 것이 좋겠다고 해서요.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "아직 그곳의 정보를 찾지 못했는데요.";
+		mes "그리고 아마도 이곳이 라스간드와 바곳이 말한 그곳인 것 같아요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 아마도 이곳이 라스간드와 바곳이 말한 그곳인 것 같아요.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[레하르]";
+		mes "앞에 있던 장치 같은 건 모험가님이 해제하신 거예요? 무슨 용도, 네?";
+		npctalk "앞에 있던 장치 같은 건 모험가님이 해제하신 거예요? 무슨 용도, 네?", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그러니 이 앞만 잠깐 살펴보고 가죠. 좀 전에 거대한 마력이 느껴졌거든요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 그러니 이 앞만 잠깐 살펴보고 가죠. 좀 전에 거대한 마력이 느껴졌거든요.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[레하르]";
+		mes "이 앞에서요? 좋아요! 갈래길이 많으니 흩어져서 찾아보는 것이 좋겠어요.";
+		npctalk "이 앞에서요? 좋아요! 갈래길이 많으니 흩어져서 찾아보는 것이 좋겠어요.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		mes "[레하르]";
+		mes "시간이 지나도 별 단서가 없으면 이곳에서 다시 만나서 얼음의 성으로 돌아가서 재정비 후 다 같이 와요.";
+		npctalk "시간이 지나도 별 단서가 없으면 이곳에서 다시 만나서 얼음의 성으로 돌아간 뒤 다 같이 와요.", instance_npcname("ep20_1twsd_162_245");
+		close2;
+		cutin "",255;
+		if ('step == 9) {
+			'step = 10;
+			disablenpc();
+			navigateto("1@twsd",164,260);
+			enablenpc instance_npcname("#20w11");
+			enablenpc instance_npcname("#20msd10");
+			end;
+		}
+		end;
+	}
+	end;
+OnTouch:
+	npctalk "모험가님!!! ";
+	end;
+}
+
+1@twsd,164,260,0	warp2(DISABLED)	#20w11	2,2,1@twsd,154,299
+
+
+1@twsd,154,300,0	script(DISABLED)	#20msd10	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 10) {
+		'step = 11;
+		donpcevent instance_npcname("twsd_mobs_5") + "::OnStart";
+	}
+	navigateto("1@twsd",48,326);
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_5	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_5") + "::OnMobDead";
+	monster 'map_twsd$,148,310,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,113,326,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,85,336,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_5") + "::OnMobDead") > 0)
+		end;
+	if ('step == 11)
+		'step = 12;
+	mapannounce 'map_twsd$, "다시 한 번 해보죠.", bc_map, 0xFFCC;
+	enablenpc instance_npcname("ep20_1twsd_48_326");
+	enablenpc instance_npcname("ep20_1twsd_46_328");
+	enablenpc instance_npcname("ep20_1twsd_43_326");
+	enablenpc instance_npcname("ep20_1twsd_49_330");
+	enablenpc instance_npcname("ep20_1twsd_55_333");
+	enablenpc instance_npcname("ep20_1twsd_62_334");
+	enablenpc instance_npcname("ep20_1twsd_45_322");
+	enablenpc instance_npcname("ep20_1twsd_54_321");
+	enablenpc instance_npcname("ep20_1twsd_50_323");
+	enablenpc instance_npcname("ep20_1twsd_53_330");
+	enablenpc instance_npcname("ep20_1twsd_57_323");
+	end;
+}
+
+
+// Step 6
+1@twsd,50,323,1	duplicate(dummy_disabled_npc)	르간 주교#20msd20::ep20_1twsd_50_323	4_EP19_RGAN_SR1
+1@twsd,53,330,3	duplicate(dummy_disabled_npc)	르간 주교#20msd21::ep20_1twsd_53_330	4_EP19_RGAN_SR2
+1@twsd,57,323,1	duplicate(dummy_disabled_npc)	르간 주교#20msd22::ep20_1twsd_57_323	4_EP19_RGAN_SR3
+1@twsd,49,330,5	duplicate(dummy_disabled_npc)	하트헌터#20msd20::ep20_1twsd_49_330	EP20_MD_HEARTHUNTER1
+1@twsd,55,333,5	duplicate(dummy_disabled_npc)	하트헌터#20msd21::ep20_1twsd_55_333	EP20_MD_HEARTHUNTER1
+1@twsd,62,334,5	duplicate(dummy_disabled_npc)	하트헌터#20msd22::ep20_1twsd_62_334	EP20_MD_HEARTHUNTER1
+1@twsd,45,322,3	duplicate(dummy_disabled_npc)	하트헌터#20msd23::ep20_1twsd_45_322	EP20_MD_HEARTHUNTER1,5,0
+1@twsd,54,321,5	duplicate(dummy_disabled_npc)	하트헌터#20msd24::ep20_1twsd_54_321	EP20_MD_HEARTHUNTER1
+1@twsd,51,327,5	duplicate(dummy_disabled_npc)	르간 주술사#20msd20::ep20_1twsd_51_327	MD_EP20_JOR_WARLOCK
+1@twsd,56,332,3	duplicate(dummy_disabled_npc)	르간 주술사#20msd21::ep20_1twsd_56_332	EP20_JORGAN_WARLOCK
+1@twsd,61,324,1	duplicate(dummy_disabled_npc)	르간 주술사#20msd22::ep20_1twsd_61_324	EP20_JORGAN_WARLOCK
+
+1@twsd,53,327,3	script(DISABLED)	하얀 고양이#20ms20::ep20_1twsd_53_327	4_EP20_NYAR,{
+	npctalk "왜애?";
+	end;
+OnMove:
+	npcspeed 200;
+	unitwalk getnpcid(0),57,317;
+	end;
+}
+
+1@twsd,43,326,5	script(DISABLED)	라스간드#20msd20::ep20_1twsd_43_326	4_EP20_LASGAND,{
+	npctalk "......";
+	end;
+}
+
+1@twsd,48,326,5	script(DISABLED)	사레크간드#20msd20::ep20_1twsd_48_326	4_EP19_RGAN_SR1,5,5,{
+	if ('step == 12) {
+		mes "[사레크간드]";
+		mes "인간!!! 어째서 아직도 성과를 내지 못하는 것이지? 제대로 하고 있는 것 맞나?";
+		npctalk "인간!!! 어째서 아직도 성과를 내지 못하는 것이지? 제대로 하고 있는 것 맞나?";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그 발언, 라스간드님 앞에서 괜찮은 건가요?";
+		npctalk "그 발언, 라스간드님 앞에서 괜찮은 건가요?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "네가 호언장담하지 않았나! 저 방어막만 뚫으면 될 거라고!";
+		npctalk "네가 호언장담하지 않았나! 저 방어막만 뚫으면 될 거라고!";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "그래서 라스간드님하고 열심히 하고 있잖아? 뭐가 불만인 거지요?";
+		npctalk "그래서 라스간드님하고 열심히 하고 있잖아? 뭐가 불만인 거지요?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		select( "다들 여기에 있었네! 그럼 여기가..." );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 다들 여기에 있었네! 그럼 여기가...";
+		mes "[사레크간드]";
+		mes "인간?!! 인간이 어째서 이곳에? 어째서 인간이 이곳까지 오도록 아무도 제지하지 못했는가!";
+		npctalk "인간?!! 인간이 어째서 이곳에? 어째서 인간이 이곳까지 오도록 아무도 제지하지 못했는가!";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "말해 줘야 하나. 인간, 강해. 다 처리하고 왔겠지요? 그 정도는 뇌가 없어도 조금만 생각해도 알 수 있는 걸.";
+		npctalk "인간, 강해. 다 처리하고 왔겠지요? 그 정도는 뇌가 없어도 조금만 생각해도 알 수 있는 걸.", instance_npcname("ep20_1twsd_46_328");
+		npctalk "닥쳐라!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "^0000cd과연 문을 열어 두면^000000 다시 돌아올 거라는 라스간드님의 말이 맞았네요.";
+		npctalk "과연 문을 열어 두면 다시 돌아올 거라는 라스간드님의 말이 맞았네요.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "역시 일부러 열어둔 거였어? 왜?" );
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "필요가 있으니까. 이곳에서 볼 줄은 몰랐지만?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 역시 일부러 열어둔 거였어? 왜?";
+		npctalk "필요가 있으니까. 이곳에서 볼 줄은 몰랐지만?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "뒤의 그건 너희가 말한 '그 곳'인가?" );
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "그걸 어떻게 알지?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 뒤의 그건... 너희가 말한 '그 곳'인가?";
+		npctalk "그걸 어떻게 알지?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[바곳]";
+		mes "지금 스스로 답을 알려준 거 알아? 대화를 엿들었겠지. 바곳은 그런 버릇 좋아하지 않아요.";
+		npctalk "대화를 엿들었겠지. 바곳은 그런 버릇 좋아하지 않아요.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[라스간드]";
+		mes "저 자는, 그 모험가로군.";
+		npctalk "저 자는, 그 모험가로군.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "라, 라스간드님. 제가, 제 선에서 어떻게든...!";
+		npctalk "라, 라스간드님. 제가, 제 선에서 어떻게든...!";
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[라스간드]";
+		mes "하지만 ^0000cd'그 힘'^000000이 느껴지지 않는군.";
+		npctalk "하지만 '그 힘'이 느껴지지 않는군.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "다른 일행의 힘일 거라고 했죠? 저 인간은 검사를 했을 때 특별한 기운 같은 건 없었다니까요. 그냥 평범하게 아주 강할 뿐이었지.";
+		mes "검사하지 않은 다른 쪽이 아마도 그 힘을 갖고 있겠죠.";
+		npctalk "검사하지 않은 다른 쪽이 아마도 그 힘을 갖고 있겠죠.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "그 힘?" );
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그래요. ^0000cd탈출할 때 썼던 그 힘^000000 말이야. 그래서 말인데, 어딨죠? 그 보라색 머리.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 그 힘?";
+		npctalk "탈출할 때 썼던 그 힘 말이야. 그래서 말인데, 어딨죠? 그 보라 머리.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "음, 아니다. 저 인간도 아주 훌륭한 마력원이니 일단 사로 잡는게 좋겠어. 잡아 놓으면 저쪽에서도 저 자를 구하러 그 인간도 올 테니까요.";
+		mes "힘은 많을수록 좋으니까. 하트헌터, 움직여요.";
+		npctalk "저 인간도 아주 훌륭한 마력원이니 일단 사로 잡는게 좋겠어. 하트헌터, 움직여요.", instance_npcname("ep20_1twsd_46_328");
+		close2;
+		cutin "",255;
+		if ('step == 12) {
+			'step = 13;
+			donpcevent instance_npcname("twsd_mobs_6") + "::OnStart";
+			disablenpc instance_npcname("ep20_1twsd_49_330");
+			disablenpc instance_npcname("ep20_1twsd_55_333");
+			disablenpc instance_npcname("ep20_1twsd_62_334");
+			disablenpc instance_npcname("ep20_1twsd_45_322");
+			disablenpc instance_npcname("ep20_1twsd_54_321");
+			end;
+		}
+		end;
+	}
+	if ('step == 13) {
+		mes "[사레크간드]";
+		mes "큿- 시원찮은 놈들! 역시 인간 녀석들... 마음에 들지 않아.";
+		close;
+	}
+	if ('step == 14) {
+		mes "[사레크간드]";
+		mes "큿, 생각보다 강한...! 지, 지금 제가...!";
+		npctalk "큿, 생각보다 강한...! 지, 지금 제가...!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[라스간드]";
+		mes "그만. 과연 강해. 하지만 역시 그 자는 아니야. 힘을 숨긴 것인가 했는데.";
+		npctalk "그만. 과연 강해. 하지만 역시 그 자는 아니야. 힘을 숨긴 것인가 했는데.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "그렇다고. 바곳이 말했는데. 이제 사로 잡으면. 동료가 찾으러 오고 우리는 그걸 또 잡고.";
+		npctalk "그렇다고. 바곳이 말했는데. 이제 사로 잡으면. 동료가 찾으러 오고 우리는 그걸 또 잡고.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		enablenpc instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "모험가님!!";
+		mes "여기에 다 모여 있었네요? 저건 그 과학자, 맞죠? 그 옆은 자칭 오른팔.";
+		npctalk "여기에 다 모여 있었네요? 저건 그 과학자, 맞죠? 그 옆은 자칭 오른팔.", instance_npcname("ep20_1twsd_58_327");
+		npctalk "자칭이라니! 무례하군!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "그리고 그 뒤엔... 혹시 저 사람이...?";
+		npctalk "그리고 그 뒤엔... 혹시 저 사람이...?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		select( "라스간드예요." );
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "실물은 처음이에요!! 실존 인물이었다니! 이야기 속 인물이 실제로 나타난 것 같은 느낌까지 들어요!";
+		mes "생각보다 멀쩡해 보이기도 하고?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 라스간드예요.";
+		npctalk "실존 인물이었다니! 이야기 속 인물이 실제로 나타난 것 같은 느낌까지 들어요!", instance_npcname("ep20_1twsd_58_327");
+		npctalk "그 입 다물라!!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "어, 역시. 모험가를 잡아뒀더니 구하러 왔네. 빨라요. 그런데 혼자 왔어?";
+		npctalk "역시. 모험가를 잡아뒀더니 구하러 왔네. 빨라요. 그런데 혼자 왔어?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[라스간드]";
+		mes "저 자가 네가 말한 그 자인가?";
+		mes "하지만 저 자도 아니다. ^0000cd강하긴 하지만 그 힘은 아니^000000야.";
+		npctalk "저 자가 네가 말한 그 자인가? 하지만 저 자, 강하긴 하지만 그 힘을 지니진 않았어.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep20_lasgand04.png",0;
+		mes "[라스간드]";
+		mes "마주하면 정체를 알 수 있을 거라 생각했거늘.";
+		mes "하지만 ^0000cd저 자 또한 익숙한 힘^000000이 느껴진다. 오래된... 그렇군.";
+		npctalk "하지만 저 자 또한 익숙한 힘이 느껴진다. 오래된... 그렇군.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "그 힘? 지금 저 사람 무슨 소리를 하는 거예요?";
+		npctalk "그 힘? 지금 저 사람 무슨 소리를 하는 거예요?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "멍청한 너희가 잡혔을 때 무사히 빠져나가게 한 힘 말이에요.";
+		npctalk "멍청한 너희가 잡혔을 때 무사히 빠져나가게 한 힘 말이에요.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "멍청한 우리를 놓친 쪽은 뭐라고 불러요?";
+		npctalk "멍청한 우리를 놓친 쪽은 그럼 뭐라고 불러요?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_02.png",1;
+		mes "[바곳]";
+		mes "너희 정말 몰라요?? 이상한데? 그 힘의 궤적은 분명 저 멍청이들을 도왔는데?";
+		mes "음... 아, 혹시 장치 같은 거? 그럴 머리가 저쪽에... 아! 도와줬군? 융케아가.";
+		npctalk "그 힘은 분명 저 멍청이들을 도왔는데? 아, 혹시 장치 같은 거? 아! 도와줬군? 융케아가.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "무슨 소리람? 융케아씨는 진작에 대륙으로 이송됐는데요? 범죄자를 계속 데리고 있을 이유가 없잖아요.";
+		npctalk "융케아씨는 진작에 대륙으로 이송됐는데요? 범죄자를 계속 데리고 있을 이유가 없잖아요.", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "그럼 역시 조력자가 있지요? 순순히 말해 봐요. 이 바곳이 잘 이용해 줄게요.";
+		mes "조력자, 어떻게 부르죠?";
+		npctalk "그럼 역시 조력자가 있지요? 순순히 말해 봐요. 조력자, 어떻게 부르죠?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "무슨 말인지 진짜 모르겠는데요. 모험가님은 아시겠어요?";
+		npctalk "무슨 말인지 진짜 모르겠는데요. 모험가님은 아시겠어요?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		select( "글쎄요." );
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "그래요. 괜찮아요. 역시 쉽게 입을 열 거라 생각하지도 않았어요. 순순히 잡히기나 해요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 글쎄요.";
+		npctalk "역시 쉽게 입을 열 거라 생각하지도 않았어요. 순순히 잡히기나 해요.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "주술사들이여!";
+		npctalk "주술사들이여!", instance_npcname("ep20_1twsd_48_326");
+		sleep2 500;
+		enablenpc instance_npcname("ep20_1twsd_51_327");
+		enablenpc instance_npcname("ep20_1twsd_56_332");
+		enablenpc instance_npcname("ep20_1twsd_61_324");
+		npctalk "저 사특한 인간을 처리해라!", instance_npcname("ep20_1twsd_48_326");
+		close2;
+		if ('step == 14) {
+			'step = 15;
+			donpcevent instance_npcname("twsd_mobs_6") + "::OnStart2";
+			disablenpc instance_npcname("ep20_1twsd_51_327");
+			disablenpc instance_npcname("ep20_1twsd_56_332");
+			disablenpc instance_npcname("ep20_1twsd_61_324");
+			end;
+		}
+		end;
+	}
+	if ('step == 16) {
+		mes "[사레크간드]";
+		mes "역시 인간 따위 들이는 것이 아닌데. 내가 좀 더 강하게 말씀 드렸어야 했는데!";
+		close;
+	}
+	end;
+
+OnTouch:
+	npctalk "뭔가 불길한 예감이...";
+	end;
+}
+
+
+1@twsd,1,1,5	script	twsd_mobs_6	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_6") + "::OnMobDead";
+	monster 'map_twsd$,49,330,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,55,333,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,62,334,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,45,322,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,54,321,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_6") + "::OnMobDead") > 0)
+		end;
+	if ('step == 13)
+		'step = 14;
+	npctalk "이럴, 이럴 수가!", instance_npcname("ep20_1twsd_48_326");
+	end;
+
+OnStart2:
+	.@event$ = instance_npcname("twsd_mobs_6") + "::OnMobDead2";
+	monster 'map_twsd$,51,327,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,56,332,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,61,324,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead2:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_6") + "::OnMobDead2") > 0)
+		end;
+	if ('step == 15)
+		'step = 16;
+	npctalk "호...", instance_npcname("ep20_1twsd_46_328");
+	end;
+}
+
+
+// Step 7
+1@twsd,46,328,5	script(DISABLED)	바곳#20msd20::ep20_1twsd_46_328	4_EP18_BAGOT,{
+	if ('step < 16) {
+		cutin "ep18_bagot_01.png",2;
+		mes "[바곳]";
+		mes "어떻게 이곳까지 온 거죠?";
+		close3;
+	}
+	if ('step == 16) {
+		cutin "ep18_bagot_03.png",1;
+		mes "[바곳]";
+		mes "그간, 더 세졌군요? 이 바곳, 더 흥미가 생기네요.";
+		npctalk "그간, 더 세졌군요? 이 바곳, 더 흥미가 생기네요.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "그걸 이제 깨달았어요?!";
+		mes "우리 모험가님 진짜 강한데!!";
+		npctalk "우리 모험가님 진짜 강한데!!", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "더 탐나네. 애초에 최초 실험 대상 설정을 잘못했을 수도?";
+		npctalk "더 탐나네. 애초에 최초 실험 대상 설정을 잘못했을 수도?";
+		next;
+		select( "어쩔까요?" );
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "이왕 마주쳤는데 저희끼리 처리할까요? 저희 세지 않나요?";
+		mes "아, 그렇지만 안전하게 다 같이 오는 것도 좋을 것 같은데... 어차피 목적은 달성했으니까요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 어쩔까요?";
+		npctalk "이왕 마주쳤는데 저희끼리 처리할까요? 저희 세지 않나요?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		mes "[레하르]";
+		mes "여기가 거기죠? '그 곳' 말이에요. 이대로 빠지고 다 함께 조사하는 것이 좋을까요?";
+		npctalk "이대로 빠지고 다 함께 조사하는 것이 좋을까요?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "그걸 지금 바곳 듣는 데서 크게 얘기하는 건 무슨 자신감인지?";
+		npctalk "그걸 지금 바곳 듣는 데서 크게 얘기하는 건 무슨 자신감인지?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "우리는 강하니까요!";
+		npctalk "우리는 강하니까요!", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_02.png",1;
+		mes "[바곳]";
+		mes "어차피 사로잡을 거니까 강한 건 좋아. 그치만 이 장소에 다시 오겠다는 건 조금 곤란한데.";
+		npctalk "사로잡을 거니까 강한 건 좋아. 그치만 이 장소에 다시 오겠다는 건 조금 곤란한데.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[바곳]";
+		mes "라스간드님? 힘 좀 써 주시죠?";
+		npctalk "라스간드님? 힘 좀 써 주시죠?";
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[라스간드]";
+		mes "성가시군.";
+		npctalk "성가시군.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "아앗! 라스간드님, 제가, 제가 하겠...!";
+		npctalk "아앗! 라스간드님, 제가, 제가 하겠...!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		specialeffect EF_TETRACASTING, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_BOTTOM_ANI;
+		specialeffect EF_BOTTOM_ANI, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "어, 저 기운은... 좀 센데요...? 저희. 괜찮겠죠?";
+		npctalk "어, 저 기운은... 좀 센데요...? 저희. 괜찮겠죠?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[바곳]";
+		mes "다 좋은데 상하면 안되는데요. 훌륭한 재료니까요.";
+		npctalk "다 좋은데 상하면 안되는데요. 훌륭한 재료니까요.";
+		next;
+		specialeffect EF_PORTAL4, AREA, instance_npcname("ep20_1twsd_43_326");
+		sleep2 500;
+		specialeffect EF_ASURABODY, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_SHOCKWAVE2;
+		specialeffect EF_SHOCKWAVE2, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "어, 모험가님 저희 괜찮을까... 요? 괜찮겠죠?";
+		npctalk "어, 모험가님 저희 괜찮을까... 요? 괜찮겠죠?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "오오, 역시 라스간드님...! 하지만 저런 더러운 인간들에게 쓰시기엔 너무나 고귀...";
+		npctalk "오오, 역시 라스간드님...! 하지만 저런 더러운 인간들에게 쓰시기엔 너무나 고귀...", instance_npcname("ep20_1twsd_48_326");
+		next;
+		enablenpc instance_npcname("ep20_1twsd_53_327");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_327");
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "왜액-";
+		npctalk "왜액-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		mes "[사레크간드]";
+		mes "^0000cd고양이^000000?! 웬 고양이?";
+		npctalk "고양이?! 웬 고양이?", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep18_bagot_01.png",0;
+		mes "[바곳]";
+		mes "뭐야, 저 고양이는?";
+		mes "난데없는 등장인데.";
+		npctalk "뭐야, 저 고양이는? 난데없는 등장인데.";
+		npctalk "저 고양이는...!", instance_npcname("ep20_1twsd_58_327");
+		emotion ET_SURPRISE, getnpcid(0, instance_npcname("ep20_1twsd_43_326"));
+		next;
+		cutin "ep18_bagot_01.png",0;
+		mes "[바곳]";
+		mes "...?! 저건... 그러고 보니...";
+		npctalk "...?! 저건... 그러고 보니...";
+		next;
+		cutin "ep20_lasgand02.png",0;
+		mes "[라스간드]";
+		mes "저것이다. 저걸 붙잡아라.";
+		npctalk "저것이다. 저걸 붙잡아라.", instance_npcname("ep20_1twsd_43_326");
+		npctalk "넷!!!", instance_npcname("ep20_1twsd_48_326");
+		npctalk "옛!!!", instance_npcname("ep20_1twsd_50_323");
+		npctalk "옛!!!", instance_npcname("ep20_1twsd_53_330");
+		npctalk "옛!!!", instance_npcname("ep20_1twsd_57_323");
+		next;
+		specialeffect EF_DOUBLEGUMGANG2, AREA, instance_npcname("ep20_1twsd_43_326");
+		sleep2 500;
+		specialeffect EF_DARKCASTING, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_GI_EXPLOSION, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_SPR_MASH;
+		specialeffect EF_SPR_MASH, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "",255;
+		mes "[사레크간드]";
+		mes "다들 포위하거라!!! 라스간드님을 돕거라!!!";
+		npctalk "다들 포위하거라!!! 라스간드님을 돕거라!!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		specialeffect EF_ITEM_LIGHT, AREA, instance_npcname("ep20_1twsd_53_327");
+		sleep2 500;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_327");
+		cutin "ep20_nyar03.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아아악!!";
+		npctalk "냐아아악!!", instance_npcname("ep20_1twsd_53_327");
+		next;
+		removespecialeffect EF_SHOCKWAVE2, AREA, instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		removespecialeffect EF_SPR_MASH, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep18_bagot_01.png",0;
+		mes "[바곳]";
+		mes "어...? 이건 뭐...";
+		npctalk "어...? 이건 뭐...";
+		emotion ET_SURPRISE, getnpcid(0, instance_npcname("ep20_1twsd_43_326"));
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_48_326");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_46_328");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_50_323");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_53_330");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_57_323");
+		next;
+		mes "[바곳]";
+		mes "설마!! 우리 이...---!!";
+		npctalk "설마!! 우리 이...---!!";
+		close2;
+		cutin "",255;
+		if ('step == 16)
+			'step = 17;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_48_326");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_46_328");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_50_323");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_330");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_57_323");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_48_326");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_46_328");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_43_326");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_50_323");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_53_330");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_57_323");
+		disablenpc instance_npcname("ep20_1twsd_48_326");
+		disablenpc instance_npcname("ep20_1twsd_46_328");
+		disablenpc instance_npcname("ep20_1twsd_43_326");
+		disablenpc instance_npcname("ep20_1twsd_50_323");
+		disablenpc instance_npcname("ep20_1twsd_53_330");
+		disablenpc instance_npcname("ep20_1twsd_57_323");
+		end;
+	}
+	end;
+}
+
+
+// Step 8
+1@twsd,58,327,3	script(DISABLED)	레하르#20msd20::ep20_1twsd_58_327	4_EP19_LEHAR,{
+	if ('step == 16) {
+		cutin "ep19_lehar01.png",1;
+		mes "[레하르]";
+		mes "우리가 다 이길 수 있어요. 그렇죠?";
+		close3;
+	}
+	if ('step == 17) {
+		mes "[레하르]";
+		mes "사라... 졌네요?";
+		mes "저, 야옹아?";
+		npctalk "사라... 졌네요? 저, 야옹아?";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[하얀 고양이]";
+		mes "......";
+		npctalk "......", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "....고양이님?";
+		npctalk "....고양이님?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아아-";
+		npctalk "냐아아-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "고양이님, 이번에도 저희를 도와 주신 건가요?";
+		npctalk "고양이님, 이번에도 저희를 도와 주신 건가요?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아앍-";
+		npctalk "냐아앍-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "역시, 그렇군요! 감사합니다.";
+		npctalk "역시, 그렇군요! 감사합니다.";
+		next;
+		emotion ET_QUESTION, playerattached();
+		select( "알아들었어요??" );
+		cutin "ep19_lehar06.png",2;
+		mes "[레하르]";
+		mes "아뇨, 그냥 그럴 것 같아서요.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 알아들었어요??";
+		npctalk "아뇨, 그냥 그럴 것 같아서요.";
+		next;
+		emotion ET_SWEAT, playerattached();
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "그자들은 어디로 보냈나요?";
+		npctalk "그자들은 어디로 보냈나요?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[하얀 고양이]";
+		mes "왜애?";
+		npctalk "왜애?", instance_npcname("ep20_1twsd_53_327");
+		next;
+		select( "뭐라고 하나요?" );
+		cutin "ep19_lehar03.png",2;
+		mes "[레하르]";
+		mes "역시 무슨 소리인지 모르겠어요.";
+		mes "그치만 이 고양이, 님을 데리고 가면 누군가 알지도 몰라요!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 뭐라고 하나요?";
+		npctalk "이 고양이, 님을 데리고 가면 누군가 알지도 몰라요!";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "고양이님, 저희랑 같이 가실래요? 사례를 하고 싶은데.";
+		npctalk "고양이님, 저희랑 같이 가실래요? 사례를 하고 싶은데.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아?!";
+		npctalk "냐아?!", instance_npcname("ep20_1twsd_53_327");
+		next;
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		emotion ET_SURPRISE;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "아, 별로 마음에 안- 어, 어?";
+		mes "어디, 어디로?? 이대로 우리도, 이대로??";
+		npctalk "어디, 어디로?? 이대로 우리도, 이대로??";
+		next;
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_58_327");
+		disablenpc instance_npcname("ep20_1twsd_58_327");
+		if ('step == 17)
+			'step = 18;
+		cutin "ep20_nyar05.png",1;
+		mes "[하얀 고양이]";
+		mes "냐아아아--- -- --- - -";
+		npctalk "냐아아아--- -- --- - -", instance_npcname("ep20_1twsd_53_327");
+		next;
+		select( "레하르님? 레하르님을 어디로...?" );
+		cutin "ep20_nyar04.png",1;
+		mes "[하얀 고양이]";
+		mes "오옭---";
+		npctalk "오옭---", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "",255;
+		mes "- 하얀 고양이는 한참이나 눈을 바라보더니 천천히 걷기 시작했다. -";
+		mes "- 따라오라는 뜻 같다. -";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 하얀 고양이는 따라오라는 듯 앞장서기 시작했다.";
+		specialeffect EF_HIT1, AREA, instance_npcname("#20w21");
+		enablenpc instance_npcname("#20w21");
+		close2;
+		donpcevent instance_npcname("ep20_1twsd_53_327") + "::OnMove";
+		end;
+	}
+	end;
+}
+
+
+1@twsd,56,315,0	script(DISABLED)	#20w21	WARPNPC,2,2,{
+	if ('step < 18)
+		end;
+	if (ep20_main == 33) {
+		ep20_main = 34;
+		erasequest 17707;
+		setquest 17708;
+	}
+	warp "jor_back1",363,222;
+	end;
+}

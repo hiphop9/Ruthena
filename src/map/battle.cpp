@@ -16,6 +16,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "atcommand.hpp"
 #include "battleground.hpp"
@@ -462,7 +463,10 @@ int64 battle_attr_fix(struct block_list *src, struct block_list *target, int64 d
 		atk_elem = rnd()%ELE_ALL;
 
 	if (!CHK_ELEMENT(def_type) || !CHK_ELEMENT_LEVEL(def_lv)) {
-		ShowError("battle_attr_fix: unknown attribute type: atk=%d def_type=%d def_lv=%d\n",atk_elem,def_type,def_lv);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("battle_attr_fix: 알수없는 속성 유형: 공격력(ATK)=%d 방어타입(DEF_TYPE)=%d 방어레벨(DEF_LV)=%d\n",atk_elem,def_type,def_lv);
+		else
+			ShowError("battle_attr_fix: unknown attribute type: atk=%d def_type=%d def_lv=%d\n",atk_elem,def_type,def_lv);
 		return damage;
 	}
 
@@ -4256,8 +4260,12 @@ static void battle_calc_skill_base_damage(struct Damage* wd, struct block_list *
 					wd->equipAtk /= wd->miscflag;
 					wd->masteryAtk /= wd->miscflag;
 #endif
-				} else
-					ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+				} else {
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("'%s'(%d)이 0명의 적을 대상으로 했습니다. 0회피당 나누기를 했습니다.\n", skill_get_name(skill_id), skill_id);
+					else
+						ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+				}
 			}
 
 			//Add any bonuses that modify the base atk (pre-skills)
@@ -7908,8 +7916,12 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 				if (nk[NK_SPLASHSPLIT]) { // Divide MATK in case of multiple targets skill
 					if (mflag>0)
 						ad.damage /= mflag;
-					else
-						ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+					else {
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowError("'%s'(%d)이 0명의 적을 대상으로 했습니다. 0회피당 나누기를 했습니다.\n", skill_get_name(skill_id), skill_id);
+						else
+							ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+					}
 				}
 
 				switch(skill_id) {
@@ -9248,8 +9260,12 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 	if (nk[NK_SPLASHSPLIT]) { // Divide ATK among targets
 		if(mflag > 0)
 			md.damage /= mflag;
-		else
-			ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+		else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%d:%s에게 0의 적이 대상으로 지정되었습니다. 0으로 나누기 방지!\n", skill_id, skill_get_name(skill_id));
+			else
+				ShowError("0 enemies targeted by %d:%s, divide per 0 avoided!\n", skill_id, skill_get_name(skill_id));
+		}
 	}
 
 	if (!nk[NK_IGNOREFLEE]) {
@@ -9416,7 +9432,10 @@ struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct bl
 		case BF_MAGIC:  d = battle_calc_magic_attack(bl,target,skill_id,skill_lv,flag);  break;
 		case BF_MISC:   d = battle_calc_misc_attack(bl,target,skill_id,skill_lv,flag);   break;
 		default:
-			ShowError("battle_calc_attack: unknown attack type! %d (skill_id=%d, skill_lv=%d)\n", attack_type, skill_id, skill_lv);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("battle_calc_attack: 알수 없는 공격타입! %d (skill_id=%d, skill_lv=%d)\n", attack_type, skill_id, skill_lv);
+			else
+				ShowError("battle_calc_attack: unknown attack type! %d (skill_id=%d, skill_lv=%d)\n", attack_type, skill_id, skill_lv);
 			memset(&d,0,sizeof(d));
 			break;
 		}
@@ -11546,7 +11565,10 @@ int battle_set_value(const char* w1, const char* w2)
 		return 0; // not found
 
 	if (val < battle_data[i].min || val > battle_data[i].max) {
-		ShowWarning("Value for setting '%s': %s is invalid (min:%i max:%i)! Defaulting to %i...\n", w1, w2, battle_data[i].min, battle_data[i].max, battle_data[i].defval);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("'%s'의 설정값: %s은(는) 잘못되었습니다. (최소:%i 최대:%i)! %i으(로) 기본값 설정중...\n", w1, w2, battle_data[i].min, battle_data[i].max, battle_data[i].defval);
+		else
+			ShowWarning("Value for setting '%s': %s is invalid (min:%i max:%i)! Defaulting to %i...\n", w1, w2, battle_data[i].min, battle_data[i].max, battle_data[i].defval);
 		val = battle_data[i].defval;
 	}
 
@@ -11619,63 +11641,95 @@ void battle_adjust_conf()
 
 #if PACKETVER < 20100427
 	if (battle_config.feature_buying_store) {
-		ShowWarning("conf/battle/feature.conf:buying_store is enabled but it requires PACKETVER 2010-04-27 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("conf/battle/feature.conf:buying_store가 활성화되어 있지만 PACKETVER 2010-04-27 이상이 필요합니다. 사용 중지 중 ...\n");
+		else
+			ShowWarning("conf/battle/feature.conf:buying_store is enabled but it requires PACKETVER 2010-04-27 or newer, disabling...\n");
 		battle_config.feature_buying_store = 0;
 	}
 #endif
 
 #if PACKETVER < 20100803
 	if (battle_config.feature_search_stores) {
-		ShowWarning("conf/battle/feature.conf:search_stores is enabled but it requires PACKETVER 2010-08-03 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("conf/battle/feature.conf:search_stores가 활성화 되어있지만 PACKETVER 2010-08-03 이상이 필요합니다. 사용중지중...\n");
+		else
+			ShowWarning("conf/battle/feature.conf:search_stores is enabled but it requires PACKETVER 2010-08-03 or newer, disabling...\n");
 		battle_config.feature_search_stores = 0;
 	}
 #endif
 
 #if PACKETVER < 20120101
 	if (battle_config.feature_bgqueue) {
-		ShowWarning("conf/battle/feature.conf:bgqueue is enabled but it requires PACKETVER 2012-01-01 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("conf/battle/feature.conf:bgqueue이(가) 활성화 되어있지만 PACKETVER 2012-01-01 이상이 필요합니다. 사용중지중...\n");
+		else
+			ShowWarning("conf/battle/feature.conf:bgqueue is enabled but it requires PACKETVER 2012-01-01 or newer, disabling...\n");
 		battle_config.feature_bgqueue = 0;
 	}
 #endif
 
 #if PACKETVER > 20120000 && PACKETVER < 20130515 /* Exact date (when it started) not known */
 	if (battle_config.feature_auction) {
-		ShowWarning("conf/battle/feature.conf:feature.auction is enabled but it is not stable on PACKETVER " EXPAND_AND_QUOTE(PACKETVER) ", disabling...\n");
-		ShowWarning("conf/battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("conf/battle/feature.conf:경매(옥션)이 활성화 되었지만 PACKETVER " EXPAND_AND_QUOTE(PACKETVER) "에서 안정적이지 않습니다. 사용중지중...\n");
+			ShowWarning("conf/battle/feature.conf:feature.auction 값을 '2'로 변경하면 이 경고가 중지되고 사용 가능하게 유지됩니다.\n");
+		} else {
+			ShowWarning("conf/battle/feature.conf:feature.auction is enabled but it is not stable on PACKETVER " EXPAND_AND_QUOTE(PACKETVER) ", disabling...\n");
+			ShowWarning("conf/battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
+		}
 		battle_config.feature_auction = 0;
 	}
 #elif PACKETVER >= 20141112
 	if (battle_config.feature_auction) {
-		ShowWarning("conf/battle/feature.conf:feature.auction is enabled but it is not available for clients from 2014-11-12 on, disabling...\n");
-		ShowWarning("conf/battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("conf/battle/feature.conf:feature.auction은 사용 설정되어 있지만 2014-11-12의 클라이언트는 사용할 수 없습니다., 사용중지중...\n");
+			ShowWarning("conf/battle/feature.conf:feature.auction 값을 '2'로 변경하면 이 경고가 중지되고 사용 가능하게 유지됩니다.\n");
+		}
+		else {
+			ShowWarning("conf/battle/feature.conf:feature.auction is enabled but it is not available for clients from 2014-11-12 on, disabling...\n");
+			ShowWarning("conf/battle/feature.conf:feature.auction change value to '2' to silence this warning and maintain it enabled\n");
+		}
 		battle_config.feature_auction = 0;
 	}
 #endif
 
 #if PACKETVER < 20130724
 	if (battle_config.feature_banking) {
-		ShowWarning("conf/battle/feature.conf banking is enabled but it requires PACKETVER 2013-07-24 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 뱅킹을 사용하도록 설정했지만 PACKETVER 2013-07-24 이상이 필요합니다. 사용중지중...\n");
+		else
+			ShowWarning("conf/battle/feature.conf banking is enabled but it requires PACKETVER 2013-07-24 or newer, disabling...\n");
 		battle_config.feature_banking = 0;
 	}
 #endif
 
 #if PACKETVER < 20131223
 	if (battle_config.mvp_exp_reward_message) {
-		ShowWarning("conf/battle/client.conf MVP EXP reward message is enabled but it requires PACKETVER 2013-12-23 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/client.conf MVP 경험치 보상 메시지를 사용하도록 설정했지만 PACKETVER 2013-12-23 이상이 필요합니다. 사용중지중...\n");
+		else
+			ShowWarning("conf/battle/client.conf MVP EXP reward message is enabled but it requires PACKETVER 2013-12-23 or newer, disabling...\n");
 		battle_config.mvp_exp_reward_message = 0;
 	}
 #endif
 
 #if PACKETVER < 20141022
 	if (battle_config.feature_roulette) {
-		ShowWarning("conf/battle/feature.conf roulette is enabled but it requires PACKETVER 2014-10-22 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 룰렛이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2014-10-22 이상 필요합니다. 사용중지중...\n");
+		else
+			ShowWarning("conf/battle/feature.conf roulette is enabled but it requires PACKETVER 2014-10-22 or newer, disabling...\n");
 		battle_config.feature_roulette = 0;
 	}
 #endif
 
 #if PACKETVER < 20150513
 	if (battle_config.feature_achievement) {
-		ShowWarning("conf/battle/feature.conf achievement is enabled but it requires PACKETVER 2015-05-13 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 달성과제가 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2015-05-13 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf achievement is enabled but it requires PACKETVER 2015-05-13 or newer, disabling...\n");
 		battle_config.feature_achievement = 0;
 	}
 #endif
@@ -11689,74 +11743,108 @@ void battle_adjust_conf()
 
 #if PACKETVER < 20151104
 	if( battle_config.feature_stylist ){
-		ShowWarning("conf/battle/feature.conf stylist is enabled but it requires PACKETVER 2015-11-04 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 스타일리스트가 활성화 되었으나 이 기능을 사용하려면 패킷버전(PACKETVER) 2015-11-04 이상이 필요합니다., 기능 사용을 중지중...\n");
+		else
+			ShowWarning("conf/battle/feature.conf stylist is enabled but it requires PACKETVER 2015-11-04 or newer, disabling...\n");
 		battle_config.feature_stylist = 0;
 	}
 #endif
 
 #if PACKETVER < 20141008
 	if (battle_config.feature_petevolution) {
-		ShowWarning("conf/battle/feature.conf petevolution is enabled but it requires PACKETVER 2014-10-08 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 펫 진화 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2014-10-08 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf petevolution is enabled but it requires PACKETVER 2014-10-08 or newer, disabling...\n");
 		battle_config.feature_petevolution = 0;
 	}
 	if (battle_config.feature_pet_autofeed) {
-		ShowWarning("conf/battle/feature.conf pet auto feed is enabled but it requires PACKETVER 2014-10-08 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 펫 자동 식사 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2014-10-08 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf pet auto feed is enabled but it requires PACKETVER 2014-10-08 or newer, disabling...\n");
 		battle_config.feature_pet_autofeed = 0;
 	}
 #endif
 
 #if PACKETVER < 20161012
 	if (battle_config.feature_refineui) {
-		ShowWarning("conf/battle/feature.conf refine UI is enabled but it requires PACKETVER 2016-10-12 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 제련UI를 사용하도록 설정되어있지만 패킷 버전이 PACKETVER 2016-10-12 버전이하를 사용중입니다. 비활성화됨...\n");
+		else
+			ShowWarning("conf/battle/feature.conf refine UI is enabled but it requires PACKETVER 2016-10-12 or newer, disabling...\n");
 		battle_config.feature_refineui = 0;
 	}
 #endif
 
 #if PACKETVER < 20170208
 	if (battle_config.feature_equipswitch) {
-		ShowWarning("conf/battle/feature.conf equip switch is enabled but it requires PACKETVER 2017-02-08 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 장비 스위칭 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2017-02-08 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf equip switch is enabled but it requires PACKETVER 2017-02-08 or newer, disabling...\n");
 		battle_config.feature_equipswitch = 0;
 	}
 #endif
 
 #if PACKETVER < 20170920
 	if( battle_config.feature_homunculus_autofeed ){
-		ShowWarning("conf/battle/feature.conf homunculus autofeeding is enabled but it requires PACKETVER 2017-09-20 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 호문클루스 자동식사 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2017-09-20 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf homunculus autofeeding is enabled but it requires PACKETVER 2017-09-20 or newer, disabling...\n");
 		battle_config.feature_homunculus_autofeed = 0;
 	}
 #endif
 
 #if PACKETVER < 20180307
 	if( battle_config.feature_attendance ){
-		ShowWarning("conf/battle/feature.conf attendance system is enabled but it requires PACKETVER 2018-03-07 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 출석 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2018-03-07 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf attendance system is enabled but it requires PACKETVER 2018-03-07 or newer, disabling...\n");
 		battle_config.feature_attendance = 0;
 	}
 #endif
 
 #if PACKETVER < 20180321
 	if( battle_config.feature_privateairship ){
-		ShowWarning("conf/battle/feature.conf private airship system is enabled but it requires PACKETVER 2018-03-21 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 개인 비공정 시스템이 사용가능하도록 설정되어있습니다. 하지만 이 기능을 사용하려면 패킷버전(PACKETVER)이 2018-03-21 이상 필요합니다. 기능 사용을 중지중..\n");
+		else
+			ShowWarning("conf/battle/feature.conf private airship system is enabled but it requires PACKETVER 2018-03-21 or newer, disabling...\n");
 		battle_config.feature_privateairship = 0;
 	}
 #endif
 
 #if !( PACKETVER_MAIN_NUM >= 20190116 || PACKETVER_RE_NUM >= 20190116 || PACKETVER_ZERO_NUM >= 20181226 )
 	if( battle_config.feature_barter ){
-		ShowWarning("conf/battle/feature.conf barter shop system is enabled but it requires PACKETVER 2019-01-16 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 물물교환 상점 시스템이 활성화 되었지만 패킷버전이 2019-01-16 이하이기 때문에 비활성화합니다...\n");
+		else
+			ShowWarning("conf/battle/feature.conf barter shop system is enabled but it requires PACKETVER 2019-01-16 or newer, disabling...\n");
 		battle_config.feature_barter = 0;
 	}
 #endif
 
 #if !( PACKETVER_MAIN_NUM >= 20191120 || PACKETVER_RE_NUM >= 20191106 || PACKETVER_ZERO_NUM >= 20191127 )
 	if( battle_config.feature_barter_extended ){
-		ShowWarning("conf/battle/feature.conf extended barter shop system is enabled but it requires PACKETVER 2019-11-06 or newer, disabling...\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("conf/battle/feature.conf 확장 물물교환 상점 시스템이 활성화 되었지만 패킷 버전이 2019-11-06 이하이기 때문에 비활성화합니다...\n");
+		else
+			ShowWarning("conf/battle/feature.conf extended barter shop system is enabled but it requires PACKETVER 2019-11-06 or newer, disabling...\n");
 		battle_config.feature_barter_extended = 0;
 	}
 #endif
 
 #ifndef CELL_NOSTACK
-	if (battle_config.custom_cell_stack_limit != 1)
-		ShowWarning("Battle setting 'custom_cell_stack_limit' takes no effect as this server was compiled without Cell Stack Limit support.\n");
+	if (battle_config.custom_cell_stack_limit != 1) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("이 서버가 셀 스택 제한없이 컴파일되었으므로 'custom_cell_stack_limit'배틀 설정이 적용되지 않습니다.\n");
+		else
+			ShowWarning("Battle setting 'custom_cell_stack_limit' takes no effect as this server was compiled without Cell Stack Limit support.\n");
+}
 #endif
 
 #ifdef MAP_GENERATOR
@@ -11809,7 +11897,10 @@ int battle_config_read(const char* cfgName)
 					*symbol != atcommand_symbol)
 					charcommand_symbol = *symbol;
 			}else if( battle_set_value(w1, w2) == 0 )
-				ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("'%s' 파일에 알수 없는 설정 %s이(가) 있습니다.\n", cfgName, w1);
+				else
+					ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
 		}
 
 		fclose(fp);

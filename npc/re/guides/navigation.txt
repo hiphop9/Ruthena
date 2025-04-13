@@ -29,7 +29,9 @@ function	script	F_Navi	{
 		if (!.@disabled) {
 			next;
 			mes getarg(0);
-			mes "When you click on the ^B9062F[location name]^000000, you'll receive the most advanced ^B9062FNavigation^000000 services!";
+			mes "안내받으신 ^B9062F[거점명]을 클릭^000000시";
+			mes "^B9062F내비게이션^000000으로 친절히 안내 해";
+			mes "드리겠습니다.";
 		}
 		return;
 	default: // Display navigation link, if enabled; else set text color, if available.

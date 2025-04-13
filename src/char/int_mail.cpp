@@ -13,6 +13,7 @@
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_mapif.hpp"
@@ -73,7 +74,10 @@ int mail_fromsql(uint32 char_id, struct mail_data* md)
 			md->unread++;
 	}
 
-	ShowInfo("mail load complete from DB - id: %d (total: %d)\n", char_id, md->amount);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("%d님의 메일이 DB에서 정상적으로 로드가 완료되었습니다. (총 메일 갯수: %d개)\n", char_id, md->amount);
+	else
+		ShowInfo("mail load complete from DB - id: %d (total: %d)\n", char_id, md->amount);
 	return 1;
 }
 

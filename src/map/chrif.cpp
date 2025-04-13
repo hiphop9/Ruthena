@@ -14,6 +14,7 @@
 #include <common/socket.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clan.hpp"
@@ -30,6 +31,7 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "pet.hpp"
+#include "rune.hpp"
 #include "script.hpp" // script_config
 #include "storage.hpp"
 
@@ -229,9 +231,16 @@ void chrif_setpasswd(char *pwd) {
 void chrif_checkdefaultlogin(void) {
 #if !defined(BUILDBOT)
 	if( strcmp( userid, "s1" ) == 0 && strcmp( passwd, "p1" ) == 0 ){
-		ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
-		ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
-		ShowNotice("and then edit your user/password in conf/map_athena.conf (or conf/import/map_conf.txt)\n");
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("기본 사용자ID 및 비밀번호 s1/p1 값의 사용은 권장되지 않습니다.\n");
+			ShowNotice("'로그인' 테이블을 편집하여 적절한 'inter-server'의 성별이 'S'인 유저ID와 비밀번호를 만드십시오.\n");
+			ShowNotice("conf/map_athena.conf(또는, conf/import/map_conf.txt)에서 사용자ID/비밀번호를 편집하십시오.\n");
+		}
+		else {
+			ShowWarning("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
+			ShowNotice("Please edit your 'login' table to create a proper inter-server user/password (gender 'S')\n");
+			ShowNotice("and then edit your user/password in conf/map_athena.conf (or conf/import/map_conf.txt)\n");
+		}
 	}
 #endif
 }
@@ -241,14 +250,20 @@ int chrif_setip(const char* ip) {
 	char ip_str[16];
 
 	if ( !( char_ip = host2ip(ip) ) ) {
-		ShowWarning("Failed to Resolve Char Server Address! (%s)\n", ip);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("케릭터 서버의 주소를 해결하지 못했습니다. (%s)\n", ip);
+		else
+			ShowWarning("Failed to Resolve Char Server Address! (%s)\n", ip);
 
 		return 0;
 	}
 
 	safestrncpy(char_ip_str, ip, sizeof(char_ip_str));
 
-	ShowInfo("Char Server IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(char_ip, ip_str));
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("케릭터 서버 IP주소 : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(char_ip, ip_str));
+	else	
+		ShowInfo("Char Server IP Address : '" CL_WHITE "%s" CL_RESET "' -> '" CL_WHITE "%s" CL_RESET "'.\n", ip, ip2str(char_ip, ip_str));
 
 	return 1;
 }
@@ -286,8 +301,12 @@ int chrif_save(map_session_data *sd, int flag) {
 			chrif_save_scdata(sd);
 			chrif_skillcooldown_save(sd);
 		}
-		if ( !(flag&CSAVE_AUTOTRADE) && !chrif_auth_logout(sd, (flag&CSAVE_QUIT) ? ST_LOGOUT : ST_MAPCHANGE) )
-			ShowError("chrif_save: Failed to set up player %d:%d for proper quitting!\n", sd->status.account_id, sd->status.char_id);
+		if ( !(flag&CSAVE_AUTOTRADE) && !chrif_auth_logout(sd, (flag&CSAVE_QUIT) ? ST_LOGOUT : ST_MAPCHANGE) ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("chrif_save: 적절한 종료를 위해 플레이어 '%d (%d)'를 설정하지 못했습니다!\n", sd->status.account_id, sd->status.char_id);
+			else
+				ShowError("chrif_save: Failed to set up player %d:%d for proper quitting!\n", sd->status.account_id, sd->status.char_id);
+		}
 	}
 
 	chrif_check(-1); //Character is saved on reconnect.
@@ -340,7 +359,9 @@ int chrif_save(map_session_data *sd, int flag) {
 	if (sd->achievement_data.save)
 		intif_achievement_save(sd);
 
-	return 0;
+	rune_save(sd);
+
+ 	return 0;
 }
 
 // connects to char-server (plaintext)
@@ -350,7 +371,10 @@ int chrif_save(map_session_data *sd, int flag) {
  * @return 0:request sent
  */
 int chrif_connect(int fd) {
-	ShowStatus("Logging in to char server...\n", char_fd);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("케릭터 서버에 로그인중...\n", char_fd);
+	else
+		ShowStatus("Logging in to char server...\n", char_fd);
 	WFIFOHEAD(fd,60);
 	WFIFOW(fd,0) = 0x2af8;
 	memcpy(WFIFOP(fd,2), userid, NAME_LENGTH);
@@ -365,7 +389,10 @@ int chrif_connect(int fd) {
 
 // sends maps to char-server
 int chrif_sendmap(int fd) {
-	ShowStatus("Sending maps to char server...\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("케릭터 서버로 맵 전송중...\n");
+	else
+		ShowStatus("Sending maps to char server...\n");
 
 	// Sending normal maps, not instances
 	WFIFOHEAD( fd, 4 + instance_start * MAP_NAME_LENGTH_EXT );
@@ -388,9 +415,12 @@ int chrif_recvmap(int fd) {
 		map_setipport( mapindex_name2id( RFIFOCP( fd, i ) ), ip, port );
 	}
 
-	if (battle_config.etc_log)
-		ShowStatus("Received maps from %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
-
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("%d.%d.%d.%d:%d에서 맵을 받았습니다. (%d개의 맵)\n", CONVIP(ip), port, j);
+		else
+			ShowStatus("Received maps from %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+	}
 	other_mapserver_count++;
 
 	return 0;
@@ -408,9 +438,12 @@ int chrif_removemap(int fd) {
 
 	other_mapserver_count--;
 
-	if(battle_config.etc_log)
-		ShowStatus("remove map of server %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
-
+	if(battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowStatus("%d.%d.%d.%d:%d 서버의 맵을 제거합니다. (%d개의 맵)\n", CONVIP(ip), port, j);
+		else
+			ShowStatus("remove map of server %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+	}
 	return 0;
 }
 
@@ -459,7 +492,10 @@ int chrif_changemapserverack(uint32 account_id, int login_id1, int login_id2, ui
 		return -1;
 
 	if ( !login_id1 ) {
-		ShowError("map server change failed.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("맵서버 변경에 실패 했습니다.\n");
+		else
+			ShowError("map server change failed.\n");
 		clif_authfail_fd(node->fd, 0);
 		chrif_char_offline(node->sd);
 	} else
@@ -481,11 +517,17 @@ int chrif_changemapserverack(uint32 account_id, int login_id1, int login_id2, ui
  */
 int chrif_connectack(int fd) {
 	if (RFIFOB(fd,2)) {
-		ShowFatalError("Connection to char-server failed %d, please check conf/import/map_conf userid and passwd.\n", RFIFOB(fd,2));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("케릭터 서버 연결에 %d번 실패 했습니다. conf/import/map_conf에서 사용자ID와 비밀번호를 체크하세요.\n", RFIFOB(fd,2));
+		else
+			ShowFatalError("Connection to char-server failed %d, please check conf/import/map_conf userid and passwd.\n", RFIFOB(fd,2));
 		exit(EXIT_FAILURE);
 	}
 
-	ShowStatus("Successfully logged on to Char Server (Connection: '" CL_WHITE "%d" CL_RESET "').\n",fd);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("케릭터 서버에 성공적으로 로그인 했습니다. (연결: '" CL_WHITE "%d" CL_RESET "').\n",fd);
+	else
+		ShowStatus("Successfully logged on to Char Server (Connection: '" CL_WHITE "%d" CL_RESET "').\n",fd);
 	chrif_state = 1;
 	chrif_connected = 1;
 
@@ -539,7 +581,10 @@ static int chrif_reconnect(DBKey key, DBData *data, va_list ap) {
 
 /// Called when all the connection steps are completed.
 void chrif_on_ready(void) {
-	ShowStatus("Map Server is now online.\n");
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("맵 서버는 온라인입니다.\n");
+	else
+		ShowStatus("Map Server is now online.\n");
 
 	chrif_state = 2;
 
@@ -574,7 +619,10 @@ int chrif_sendmapack(int fd) {
 	uint16 offs = 5;
 
 	if (RFIFOB(fd,4)) {
-		ShowFatalError("chrif : send map list to char server failed %d\n", RFIFOB(fd,2));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("chrif : 맵 목록을 케릭터 서버에 전송하는데 %d번 실패 했습니다.\n", RFIFOB(fd,2));
+		else
+			ShowFatalError("chrif : send map list to char server failed %d\n", RFIFOB(fd,2));
 		exit(EXIT_FAILURE);
 	}
 
@@ -584,7 +632,10 @@ int chrif_sendmapack(int fd) {
 	// Server name
 	safestrncpy( charserver_name, RFIFOCP( fd, offs + NAME_LENGTH ), NAME_LENGTH );
 
-	ShowStatus( "Map-server connected to char-server '" CL_WHITE "%s" CL_RESET "' (whispername: %s).\n", charserver_name, wisp_server_name );
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("케릭터 서버 '" CL_WHITE "%s" CL_RESET "'에 맵서버가 연결되었습니다. (귓속말 이름: %s) \n", charserver_name,wisp_server_name);
+	else
+		ShowStatus( "Map-server connected to char-server '" CL_WHITE "%s" CL_RESET "' (whispername: %s).\n", charserver_name, wisp_server_name );
 
 	chrif_on_ready();
 
@@ -658,7 +709,10 @@ void chrif_authok(int fd) {
 
 	//Check if both servers agree on the struct's size
 	if( RFIFOW(fd,2) - 25 != sizeof(struct mmo_charstatus) ) {
-		ShowError("chrif_authok: Data size mismatch! %d != %" PRIuPTR "\n", RFIFOW(fd,2) - 25, sizeof(struct mmo_charstatus));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_authok: 데이터 사이즈가 일치하지 않습니다. %d != %" PRIuPTR "\n", RFIFOW(fd,2) - 25, sizeof(struct mmo_charstatus));
+		else
+			ShowError("chrif_authok: Data size mismatch! %d != %" PRIuPTR "\n", RFIFOW(fd,2) - 25, sizeof(struct mmo_charstatus));
 		return;
 	}
 
@@ -753,7 +807,10 @@ int auth_db_cleanup_sub(DBKey key, DBData *data, va_list ap) {
 				break;
 			default:
 				//Clear data. any connected players should have timed out by now.
-				ShowInfo("auth_db: Node (state %s) timed out for %d:%d\n", states[node->state], node->account_id, node->char_id);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowInfo("auth_db: 노드 (상태 %s)가 계정ID번호 %d(케릭터ID번호: %d)에 대한 시간이 초과되었습니다.\n", states[node->state], node->account_id, node->char_id);
+				else	
+					ShowInfo("auth_db: Node (state %s) timed out for %d:%d\n", states[node->state], node->account_id, node->char_id);
 				chrif_char_offline_nsd(node->account_id, node->char_id);
 				chrif_auth_delete(node->account_id, node->char_id, node->state);
 				break;
@@ -814,9 +871,12 @@ int chrif_searchcharid(uint32 char_id) {
  *------------------------------------------*/
 int chrif_changeemail(int id, const char *actual_email, const char *new_email) {
 
-	if (battle_config.etc_log)
-		ShowInfo("chrif_changeemail: account: %d, actual_email: '%s', new_email: '%s'.\n", id, actual_email, new_email);
-
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("chrif_changeemail: 계정ID번호: %d, 기존 이메일주소: '%s', 새로운 이메일주소: '%s'.\n", id, actual_email, new_email);
+		else
+			ShowInfo("chrif_changeemail: account: %d, actual_email: '%s', new_email: '%s'.\n", id, actual_email, new_email);
+	}
 	chrif_check(-1);
 
 	WFIFOHEAD(char_fd,86);
@@ -907,7 +967,10 @@ static void chrif_ack_login_req(int aid, const char* player_name, uint16 type, u
 	sd = map_id2sd(aid);
 
 	if( aid < 0 || sd == nullptr ) {
-		ShowError("chrif_ack_login_req failed - player not online.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_ack_login_req 실패 했습니다 - 플레이어가 접속중이지 않습니다.\n");
+		else
+			ShowError("chrif_ack_login_req failed - player not online.\n");
 		return;
 	}
 
@@ -953,9 +1016,12 @@ int chrif_changedsex(int fd) {
 	acc = RFIFOL(fd,2);
 	sex = RFIFOL(fd,6);
 
-	if ( battle_config.etc_log )
-		ShowNotice("chrif_changedsex %d.\n", acc);
-
+	if ( battle_config.etc_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowNotice("%d의 계정 성별을 변경했습니다.\n", acc);
+		else
+			ShowNotice("chrif_changedsex %d.\n", acc);
+	}
 	sd = map_id2sd(acc);
 	if ( sd ) { //Normally there should not be a char logged on right now!
 		if ( sd->status.sex == sex )
@@ -1089,9 +1155,12 @@ int chrif_ban(int fd) {
 	id = RFIFOL(fd,2);
 	res = RFIFOB(fd,6); // 0: change of statut, 1: ban, 2 charban
 
-	if ( battle_config.etc_log )
-		ShowNotice("chrif_ban %d.type = %s \n", id, res==1?"account":"char");
-
+	if ( battle_config.etc_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowNotice("chrif_ban %d.타입 = %s \n", id, res==1?"계정":"케릭터");
+		else
+			ShowNotice("chrif_ban %d.type = %s \n", id, res==1?"account":"char");
+	}
 	if(res==2)  sd = map_charid2sd(id);
 	else sd = map_id2sd(id);
 
@@ -1242,7 +1311,10 @@ int chrif_recvfamelist(int fd) {
 
 	total += num;
 
-	ShowInfo("Received Fame List of '" CL_WHITE "%d" CL_RESET "' characters.\n", total);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo("'" CL_WHITE "%d" CL_RESET "'명의 랭킹목록을 전달 받았습니다.\n", total);
+	else
+		ShowInfo("Received Fame List of '" CL_WHITE "%d" CL_RESET "' characters.\n", total);
 
 	return 0;
 }
@@ -1370,12 +1442,18 @@ int chrif_load_scdata(int fd) {
 	sd = map_id2sd(aid);
 
 	if ( !sd ) {
-		ShowError("chrif_load_scdata: Player of AID %d not found!\n", aid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_load_scdata: 계정ID번호가 %d인 플레이어를 찾을 수 없습니다.\n", aid);
+		else
+			ShowError("chrif_load_scdata: Player of AID %d not found!\n", aid);
 		return -1;
 	}
 
 	if ( sd->status.char_id != cid ) {
-		ShowError("chrif_load_scdata: Receiving data for account %d, char id does not matches (%d != %d)!\n", aid, sd->status.char_id, cid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_load_scdata: 계정(%d)의 데이터를 수신 중 케릭터ID가 일치하지 않습니다. (%d != %d)!\n", aid, sd->status.char_id, cid);
+		else
+			ShowError("chrif_load_scdata: Receiving data for account %d, char id does not matches (%d != %d)!\n", aid, sd->status.char_id, cid);
 		return -1;
 	}
 
@@ -1403,11 +1481,17 @@ int chrif_skillcooldown_load(int fd) {
 
 	sd = map_id2sd(aid);
 	if (!sd) {
-		ShowError("chrif_skillcooldown_load: Player of AID %d not found!\n", aid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_skillcooldown_load: 계정ID번호가 %d인 플레이어를 찾을 수 없습니다.\n", aid);
+		else
+			ShowError("chrif_skillcooldown_load: Player of AID %d not found!\n", aid);
 		return -1;
 	}
 	if (sd->status.char_id != cid) {
-		ShowError("chrif_skillcooldown_load: Receiving data for account %d, char id does not matches (%d != %d)!\n", aid, sd->status.char_id, cid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_skillcooldown_load: 계정(%d)의 데이터를 수신중 케릭터 ID가 일치하지 않습니다. (%d != %d)!\n", aid, sd->status.char_id, cid);
+		else
+			ShowError("chrif_skillcooldown_load: Receiving data for account %d, char id does not matches (%d != %d)!\n", aid, sd->status.char_id, cid);
 		return -1;
 	}
 	count = RFIFOW(fd, 12); //sc_count
@@ -1489,8 +1573,12 @@ int chrif_char_online(map_session_data *sd) {
 
 /// Called when the connection to Char Server is disconnected.
 void chrif_on_disconnect(void) {
-	if( chrif_connected != 1 )
-		ShowWarning("Connection to Char Server lost.\n\n");
+	if( chrif_connected != 1 ) {
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("케릭터 서버에 대한 연결이 끊어졌습니다.\n\n");
+		else	
+			ShowWarning("Connection to Char Server lost.\n\n");
+	}
 	chrif_connected = 0;
 
 	other_mapserver_count = 0; //Reset counter. We receive ALL maps from all map-servers on reconnect.
@@ -1565,7 +1653,10 @@ void chrif_parse_ack_vipActive(int fd) {
 			// Increase storage size for VIP.
 			sd->storage.max_amount = battle_config.vip_storage_increase + MIN_STORAGE;
 			if (sd->storage.max_amount > MAX_STORAGE) {
-				ShowError("intif_parse_ack_vipActive: Storage size for player %s (%d:%d) is larger than MAX_STORAGE. Storage size has been set to MAX_STORAGE.\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("intif_parse_ack_vipActive: 플레이어 %s (%d:%d)의 창고 크기가 MAX_STORAGE보다 큽니다. 창고 크기가 MAX_STORAGE로 설정되었습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+				else		
+					ShowError("intif_parse_ack_vipActive: Storage size for player %s (%d:%d) is larger than MAX_STORAGE. Storage size has been set to MAX_STORAGE.\n", sd->status.name, sd->status.account_id, sd->status.char_id);
 				sd->storage.max_amount = MAX_STORAGE;
 			}
 		} else if (sd->vip.enabled) {
@@ -1654,8 +1745,12 @@ int chrif_bsdata_save(map_session_data *sd, bool quit) {
 			i++;
 		}
 
-		if (i != sd->bonus_script.count && sd->bonus_script.count > MAX_PC_BONUS_SCRIPT)
-			ShowWarning("Only allowed to save %d (mmo.hpp::MAX_PC_BONUS_SCRIPT) bonus script each player.\n", MAX_PC_BONUS_SCRIPT);
+		if (i != sd->bonus_script.count && sd->bonus_script.count > MAX_PC_BONUS_SCRIPT) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("각 플레이어마다 %d (mmo.hpp::MAX_PC_BONUS_SCRIPT)의 보너스 스크립트만 저장할 수 있습니다.\n", MAX_PC_BONUS_SCRIPT);
+			else
+				ShowWarning("Only allowed to save %d (mmo.hpp::MAX_PC_BONUS_SCRIPT) bonus script each player.\n", MAX_PC_BONUS_SCRIPT);
+		}
 	}
 
 	WFIFOB(char_fd, 8) = i;
@@ -1680,7 +1775,10 @@ int chrif_bsdata_received(int fd) {
 	sd = map_charid2sd(cid);
 
 	if (!sd) {
-		ShowError("chrif_bsdata_received: Player with CID %d not found!\n",cid);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chrif_bsdata_received: 케릭터ID번호가 %d인 플레이어를 찾을 수 없습니다.\n",cid);
+		else
+			ShowError("chrif_bsdata_received: Player with CID %d not found!\n",cid);
 		return -1;
 	}
 
@@ -1716,7 +1814,10 @@ int chrif_parse(int fd) {
 
 	// only process data from the char-server
 	if ( fd != char_fd ) {
-		ShowDebug("chrif_parse: Disconnecting invalid session #%d (is not the char-server)\n", fd);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("chrif_parse: 잘못된 세션 #%d의 연결을 끊는중입니다. (케릭터 서버가 아닙니다.)\n", fd);
+		else
+			ShowDebug("chrif_parse: Disconnecting invalid session #%d (is not the char-server)\n", fd);
 		do_close(fd);
 		return 0;
 	}
@@ -1744,7 +1845,10 @@ int chrif_parse(int fd) {
 			if (r == 1) continue;	// Treated in intif
 			if (r == 2) return 0;	// Didn't have enough data (len==-1)
 
-			ShowWarning("chrif_parse: session #%d, intif_parse failed (unrecognized command 0x%.4x).\n", fd, cmd);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("chrif_parse: 세션 #%d, intif_parse 실패했습니다. (인식할 수 없는 명령어: 0x%.4x).\n", fd, cmd);
+			else
+				ShowWarning("chrif_parse: session #%d, intif_parse failed (unrecognized command 0x%.4x).\n", fd, cmd);
 			set_eof(fd);
 			return 0;
 		}
@@ -1787,7 +1891,10 @@ int chrif_parse(int fd) {
 			case 0x2b2b: chrif_parse_ack_vipActive(fd); break;
 			case 0x2b2f: chrif_bsdata_received(fd); break;
 			default:
-				ShowError("chrif_parse : unknown packet (session #%d): 0x%x. Disconnecting.\n", fd, cmd);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("chrif_parse : 알수 없는 패킷 (세션 #%d): 0x%x. 연결을 종료하는중..\n", fd, cmd);
+				else	
+					ShowError("chrif_parse : unknown packet (session #%d): 0x%x. Disconnecting.\n", fd, cmd);
 				set_eof(fd);
 				return 0;
 		}
@@ -1850,7 +1957,10 @@ static TIMER_FUNC(check_connect_char_server){
 	static int displayed = 0;
 	if ( char_fd <= 0 || session[char_fd] == nullptr ) {
 		if ( !displayed ) {
-			ShowStatus("Attempting to connect to Char Server. Please wait.\n");
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus("케릭터 서버에 연결을 시도중입니다. 잠시만 기다려주세요.\n");
+			else
+				ShowStatus("Attempting to connect to Char Server. Please wait.\n");
 			displayed = 1;
 		}
 
@@ -1933,19 +2043,30 @@ void do_final_chrif(void) {
  *------------------------------------------*/
 void do_init_chrif(void) {
 	if(sizeof(struct mmo_charstatus) > 0xFFFF){
-		ShowError("mmo_charstatus size = %" PRIuPTR " is too big to be transmitted. (must be below 0xFFFF)\n",
-			sizeof(struct mmo_charstatus));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mmo_charstatus 크기 = %" PRIuPTR "가 너무 커서 전송할 수 없습니다. (0xFFFF 미만이어야 합니다.)\n",
+				sizeof(struct mmo_charstatus));
+		else
+			ShowError("mmo_charstatus size = %" PRIuPTR " is too big to be transmitted. (must be below 0xFFFF)\n",
+				sizeof(struct mmo_charstatus));
 		exit(EXIT_FAILURE);
 	}
 
 	if (sizeof(struct s_storage) > 0xFFFF) {
-		ShowError("s_storage size = %" PRIuPTR " is too big to be transmitted. (must be below 0xFFFF)\n", sizeof(struct s_storage));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("s_storage 크기 = %" PRIuPTR "가 너무 커서 전송할 수 없습니다. (0xFFFF 미만이어야 합니다.)\n", sizeof(struct s_storage));
+		else
+			ShowError("s_storage size = %" PRIuPTR " is too big to be transmitted. (must be below 0xFFFF)\n", sizeof(struct s_storage));
 		exit(EXIT_FAILURE);
 	}
 
 	if((sizeof(struct bonus_script_data) * MAX_PC_BONUS_SCRIPT) > 0xFFFF){
-		ShowError("bonus_script_data size = %d is too big, please reduce MAX_PC_BONUS_SCRIPT (%d) size. (must be below 0xFFFF).\n",
-			(sizeof(struct bonus_script_data) * MAX_PC_BONUS_SCRIPT), MAX_PC_BONUS_SCRIPT);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("bonus_script_data 크기 = %d가 너무 큽니다. MAX_PC_BONUS_SCRIPT (%d) 크기를 줄이십시오. (0xFFFF 미만이어야 합니다.).\n",
+				(sizeof(struct bonus_script_data) * MAX_PC_BONUS_SCRIPT), MAX_PC_BONUS_SCRIPT);
+		else
+			ShowError("bonus_script_data size = %d is too big, please reduce MAX_PC_BONUS_SCRIPT (%d) size. (must be below 0xFFFF).\n",
+				(sizeof(struct bonus_script_data) * MAX_PC_BONUS_SCRIPT), MAX_PC_BONUS_SCRIPT);
 		exit(EXIT_FAILURE);
 	}
 

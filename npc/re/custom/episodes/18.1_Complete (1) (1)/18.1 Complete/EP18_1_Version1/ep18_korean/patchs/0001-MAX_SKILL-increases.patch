@@ -1,0 +1,25 @@
+From 8654d917cebf9e63d36aa6318c6ae77000980697 Mon Sep 17 00:00:00 2001
+From: Atemo <capucrath@gmail.com>
+Date: Fri, 28 Jan 2022 20:25:34 +0100
+Subject: [PATCH] MAX_SKILL increases
+
+---
+ src/common/mmo.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/common/mmo.hpp b/src/common/mmo.hpp
+index 5a2414dc2..39edbeaa1 100644
+--- a/src/common/mmo.hpp
++++ b/src/common/mmo.hpp
+@@ -83,7 +83,7 @@ typedef uint32 t_itemid;
+ #define MAX_BANK_ZENY SINT32_MAX ///Max zeny in Bank
+ #define MAX_FAME 1000000000 ///Max fame points
+ #define MAX_CART 100 ///Maximum item in cart
+-#define MAX_SKILL 1454 ///Maximum skill can be hold by Player, Homunculus, & Mercenary (skill list) AND skill_db limit
++#define MAX_SKILL 1471 ///Maximum skill can be hold by Player, Homunculus, & Mercenary (skill list) AND skill_db limit
+ #define DEFAULT_WALK_SPEED 150 ///Default walk speed
+ #define MIN_WALK_SPEED 20 ///Min walk speed
+ #define MAX_WALK_SPEED 1000 ///Max walk speed
+-- 
+2.25.0.windows.1
+

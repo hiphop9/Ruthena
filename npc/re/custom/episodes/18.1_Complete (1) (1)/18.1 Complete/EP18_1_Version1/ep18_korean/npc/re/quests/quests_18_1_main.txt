@@ -1,0 +1,5772 @@
+//===== rAthena Script =======================================
+//= Direction of Prayer
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Main quest NPCs for Episode 18.1
+//
+// Notes:
+// - The last value of ep18_1_main is 57
+// - The reputation system script side is currently custom.
+//   The character variable ep18_1_reputation_exp hold the reputation points.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 1.
+ba_in01,26,266,3	script	스마트 엘리#ep18ely01	4_EP17_TABLET,{   
+	if (checkweight(1201,1) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+
+	if (isbegin_quest(18018) == 1) {// you need to add your ep 17.2 final dialogs here
+		end;
+	}
+	if (isbegin_quest(18018) == 2) {
+		if (ep18_1_main == 0 && BaseLevel >= 170) {
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "정기 신호는 아직 수신되지 않았습니다.";
+			mes "주인님의 컬렉션 3호의 행방도 동시 추적 중입니다.";
+			next;
+			mes "[엘리]";
+			mes "걱정하지 마세요.";
+			mes "시간은 우리편입니다.";
+			next;
+			mes "[엘리]";
+			mes "정보는 저와 알파가 제대로 분석할테니 손님께서는 버려진 잔당들을 청소해 주시면... 아!";
+			next;
+			mes "[엘리]";
+			mes "잠시만 어디 가지 말고 계세요.";
+			mes "곧 끝납니다.";
+			mes "시간은 우리편이랬죠?";
+			next;
+			// note: progressbar_npc must be after "next" otherwise the client may crash
+			progressbar_npc "FFFF00",4;
+			mes "[엘리]";
+			mes "잠시만요...";
+			mes "...";
+			mes "...";
+			next;
+			mes "[엘리]";
+			mes "암호 해독만 되면 금방이지요.";
+			mes "제일 오래 걸렸던 게 끝나니 순식간이군요.";
+			next;
+			mes "[엘리]";
+			mes "^0000FF라헬^000000에 무언가 있습니다.";
+			mes "물론 라헬이라는 곳은 말로만 들었고 저는 가 본 적이 없지만요.";
+			mes "그 곳의 '협력자'는 아직 그들의 수뇌가 이동한 것을 모르는 듯합니다.";
+			next;
+			mes "[엘리]";
+			mes "비록 주인님의 컬렉션 3호가 어디 있는지는 아직 알 수 없어서, 여기서 계속 들어오는 정보를 주시해야 합니다만...";
+			mes "어쩌지요?";
+			next;
+			select( "뭐를?" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "뭘 어떻게 해?";
+			next;
+			mes "[엘리]";
+			mes "협력자의 위치는 대강 확보했습니다. 보고된 내용에 따르면 '다음 지시를 기다리고 있다'고 했으니,";
+			mes "그렇다면 다음 지시가 떨어지기 전에 빠른 시일 내로 그 쪽을 일망타진...";
+			cloakoffnpc "루키#ep181_rk01", getcharid(0);
+			cloakoffnpc "에스트#ep181_est01", getcharid(0);
+			npctalk "루키: 불렀어요?", "루키#ep181_rk01", bc_self;
+			npctalk "에스트: 생각보다 빨리 끝났군.", "에스트#ep181_est01", bc_self;
+			next;
+			cutin "ep162_est01.bmp",1;
+			mes "[에스트]";
+			mes "좋아, 그럼 라헬로...";
+			next;
+			cutin "16loo_01.bmp",0;
+			mes "[루키]";
+			mes "라헬... 누가 가지요?";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "의견 충돌입니까?";
+			next;
+			cutin "16loo_03.bmp",0;
+			mes "[루키]";
+			mes "그런 건 아니고...";
+			mes "우리가 모두 가면 좀 곤란할 것 같아요.";
+			next;
+			cutin "ep162_est01.bmp",1;
+			mes "[에스트]";
+			mes "아아... 그렇군.";
+			mes "그래. '리벨리온'이 움직이면 외교 문제가 될 수도 있다.";
+			next;
+			cutin "16loo_03.bmp",0;
+			mes "[루키]";
+			mes "그래요. 라헬이라면 더더욱.";
+			mes "저택과 기업 사이의 문제도 아직 전부 해결되지 않았고...";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "그렇군요.";
+			next;
+			mes "[엘리]";
+			mes "그렇다면...";
+			next;
+			select( "왜들 나를 보는 거야?" );
+			cutin "",255;
+			mes "[" + strcharinfo(0) + "]";
+			mes "뭘 어떻게 해??";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "가시죠. 라헬로.";
+			npctalk "루키: 지명이군요.", "루키#ep181_rk01", bc_self;
+			npctalk "에스트: 지명이군.", "에스트#ep181_est01", bc_self;
+			next;
+			mes "[엘리]";
+			mes "다른 손님들은 소속이 있잖아?";
+			mes "관할로 인해 분쟁이 생기면 곤란합니다.";
+			mes "얼마나 걸릴지 모르는 일이므로 동행에는 어울리지 않습니다.";
+			next;
+			cutin "ep162_est01.bmp",1;
+			mes "[에스트]";
+			mes "그건 꼭 직접 가겠다는 말처럼 들리는데.";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "그렇습니다.";
+			mes "잠시만 기다려 주십시오.";
+			next;
+			progressbar_npc "00CCFF",7;
+			mes "[엘리]";
+			mes "...";
+			next;
+			mes "[엘리]";
+			mes "허가가 났습니다.";
+			npctalk "회의 종료했습니다.", "", bc_self;
+			next;
+			mes "[엘리]";
+			mes "목적은 방해가 아니라 지원입니다.";
+			mes "부담가지 않게 따라가겠습니다.";
+			mes "이것을 드리지요.";
+			next;
+			cutin "",255;
+			mes "엘리가 건넨 것은 엘리와 쏙 빼닮은 모양의 어딘가 늘어진 느낌의 인형이다.";
+			mes "꼭 엘리가 아닐 수도 있지만.";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "원거리 데이터 송수신이 가능한 장비를, 저희도 가지고 있습니다.";
+			mes "저희 자체가 그런 존재니까요.";
+			next;
+			mes "[엘리]";
+			mes "하지만 지금은 사정이 조금 다르니, 간이 베타를 드리겠습니다.";
+			npctalk "꼭 데리고 다니세요.", "", bc_self;
+			next;
+			cutin "16loo_02.bmp",0;
+			mes "[루키]";
+			mes "어... 미니 엘리?";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "좋군요. 그 이름 채용하겠어요.";
+			mes "본체인 저의 자원을 이용해서 분신처럼 시각, 청각 등의 정보를 수집하고 통신도 가능합니다.";
+			next;
+			mes "[엘리]";
+			mes "개별 코어가 없으므로 얻은 정보를 제가 갱신하지 않으면 베타 사이에 공유되지 않고,";
+			mes "통신이 끊어지면 그냥 인형입니다만.";
+			next;
+			cutin "16loo_01.bmp",0;
+			mes "[루키]";
+			mes "그럼 우리 지원이 필요해도 불러요.";
+			mes "엘리와 마찬가지로 인력을 제외하고는 아낌없이 지원할 테니까.";
+			next;
+			cutin "ep172_beta.bmp",2;
+			mes "[엘리]";
+			mes "그렇게 되겠습니다.";
+			mes "부디 몸조심해서 다녀오십시오.";
+			npctalk "같이 가긴 하는데 이렇게 인사를 하니 묘하군요.", "", bc_self;
+			next;
+			mes "[엘리]";
+			mes "신호가 발신된 거의 정확한 좌표는...";
+			mes "<NAVI>[여기]<INFO>rachel,182,176,0,101,0</INFO></NAVI>쯤입니다.";
+			ep18_1_main = 1;
+			setquest 8681;
+			getitem 400127,1;	// Ep18_Mini_Elly
+			close3;
+		}
+		if (ep18_1_main == 1) {
+			mes "[엘리]";
+			mes "라헬까지 부디 무사하시길.";
+			close;
+
+		}
+		cutin "ep172_beta",2;
+		mes "[Ellie]";
+		mes "No intermittent signal has been received yet.";
+		mes "The whereabouts of the master's collection 3 are also being tracked at the same time.";
+		next;
+		mes "[Ellie]";
+		mes "Don't worry.";
+		mes "Time is on our side.";
+		next;
+		mes "[Ellie]";
+		mes "Me and Alpha will analyze the information properly, so I'd like you to clean up the intruders' remnant.";
+		close3;
+	}
+	cutin "ep172_beta.bmp", 2;
+	mes "[Ellie]";
+	mes "Hello, guest.";
+	mes "I'm responsible for the airship hangar's information.";
+	mes "Please call me Ellie.";
+	close3;
+
+OnInit:
+	// The current npc replaces the npc from ep17.2
+	// disablenpc "스마트 엘리#ep172_ely01";
+
+	// check for episode 17.2 completion
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8681) == 0 && isbegin_quest(18018) == 2 && BaseLevel >= 170" );
+
+	// questinfo for ep17.2
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep17_2_main == 31 && isbegin_quest(18018) == 1" );
+	end;
+}
+
+ba_in01,22,262,6	script	에스트#ep181_est01	4_F_ESTLOVELOY,{ 
+	if (ep18_1_main == 1) {
+		mes "[에스트]";
+		mes "몸조심하라고.";
+		close;
+	}
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+
+ba_in01,24,262,7	script	루키#ep181_rk01	4_M_ROOKIE,3,0,{
+	if (ep18_1_main == 1) {
+		cutin "16loo_03.bmp",0;
+		mes "[루키]";
+		mes "아쉽지만 어쩔 수 없네요.";
+		mes "저희도 기업 쪽 일도 수습해야 하고 하니, 놀고만 있을 수는 없죠.";
+		mes "모두 해결된 뒤에 다시 만나요.";
+		close3;
+	}
+	end;
+OnTouch:
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+
+// Main Quest: Step 2.
+rachel,182,176,3	script	마스크를 쓴 사람	4_F_MASK,5,5,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		mes "누군가가 큰 목소리로 연설을 하고 있다.";
+		next;
+		mes "[미니 엘리]";
+		mes "가방에서 꺼내줘요. 머리 위에 올려주세요.";
+		npctalk "미니 엘리: 가방에서 꺼내줘요. 머리 위에 올려주세요.", "", bc_self;
+		close;
+	}
+	.@char_id = getcharid(0);
+	if (ep18_1_main == 1) {
+		mes "누군가가 큰 목소리로 연설을 하고 있다.";
+		next;
+		mes "[미니 엘리]";
+		mes "대강 현지 좌표에 도착했다는 신호를 받았습니다.";
+		mes "이 위치가 제가 불러드린 곳이 맞습니까?";
+		next;
+		switch( select( "맞아", "아니" ) ) {
+		case 1:
+			break;
+		case 2:
+			end;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "맞아. 여기 어디쯤인데.";
+		next;
+		mes "[미니 엘리]";
+		mes "손님이 보시기에 뭔가 수상한 것이 있습니까?";
+		mes "저는 침입자도 손님도 아닌 사람은 처음 보는데, 그 중에도 저 복면을 쓴 사람들이 수상한 건 저도 알겠습니다.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그 사람들은 여기 주민이고...";
+		next;
+		mes "[미니 엘리]";
+		mes "그렇습니까? 신기한 복장이군요.";
+		mes "기억해 두겠습니다.";
+		next;
+		mes "[연설가]";
+		mes "...아닙니다.";
+		mes "이웃과 평화롭게 지내라든가, 그런 안온한 이야기가 아닙니다.";
+		mes "우리에게 필요한 건 조금 더 나은 미래입니다.";
+		npctalk "연설가: 지금 나서서 해결하지 않으면 우리 아루나펠츠의 미래는 흐트러져 버릴 것입니다!", "", bc_self;
+		cloakoffnpc "관중#ep18c01", .@char_id;
+		cloakoffnpc "관중#ep18c04", .@char_id;
+		npctalk "뭐야?", "관중#ep18c01", bc_self;
+		next;
+		mes "[연설가]";
+		mes "이것을 반목이 아니면 뭐라고 할 수 있겠습니까?";
+		mes "누가 봐도 나라가 분열될 징조인데 이렇게 무시하고 넘어갈 수 있습니까?";
+		cloakoffnpc "관중#ep18c05", .@char_id;
+		next;
+		mes "[연설가]";
+		mes "대체 왜 이런 일이 벌어졌을까요?";
+		mes "왜 상대방을 존중하지 못합니까?";
+		mes "각자 생각이 있을 수 있다고 봅니다만, 저는 이렇게 말하고 싶습니다.";
+		cloakoffnpc "관중#ep18c02", .@char_id;
+		npctalk "누구지?", "관중#ep18c02", bc_self;
+		next;
+		mes "[연설가]";
+		mes "출생 혈통에 자신의 모든 가치를 위탁하고 폭력을 행사하는 것이 이 나라 국민의 한 사람으로서 어떤 의미가 있습니까?";
+		mes "자신에게 어떤 의미가 있습니까?";
+		cloakoffnpc "초조한 신관#e18a", .@char_id;
+		cloakoffnpc "관중#ep18c03", .@char_id;
+		npctalk "누구야?", "관중#ep18c01", bc_self;
+		npctalk "끌어내라!", "관중#ep18c02", bc_self;
+		npctalk "한 번도 본 적 없는데 대체 누구야?", "관중#ep18c03", bc_self;
+		next;
+		mes "[연설가]";
+		mes "이런 이야기에 화를 내는 것 자체가 이상하다는 생각이 안 드십니까?";
+		npctalk "옳소!", "관중#ep18c04", bc_self;
+		npctalk "야 너 뭐야, 원주민이지!", "관중#ep18c02", bc_self;
+		npctalk "그걸 구분할 필요가 있는 게 이상하지 않냐?", "관중#ep18c03", bc_self;
+		next;
+		mes "[연설가]";
+		mes "저는 여러분이 싸우는 것을 바라지 않습니다.";
+		mes "모두가 함께 하지 않는 한은, 우리에게 미래는 없습니다.";
+		npctalk "넌 또 뭐야!", "관중#ep18c02", bc_self;
+		npctalk "이 사람 답이 없네.", "관중#ep18c04", bc_self;
+		next;
+		mes "연설가는 청중이 웅성대는 것은 신경도 쓰지 않고 계속 말을 이어나갔다.";
+		next;
+		mes "[미니 엘리]";
+		mes "신기하군요. 마스크를 쓴 사람이 꽤 많습니다. 저희처럼 모두가 똑같은 얼굴을 해도 서로를 구분할 수 있는 모양입니다.";
+		npctalk "야, 말은 좋지 지금 사람이 계속 다치고 병원에 실려가고 하는데 말만 해서 그게 되겠어?", "관중#ep18c02", bc_self;
+		npctalk "그게 누구 탓인데?", "관중#ep18c05", bc_self;
+		next;
+		mes "[미니 엘리]";
+		mes "저 사람은 왜 옳은 말을 하는 사람을 방해하죠?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그게 옳지 않다고 믿으니까.";
+		npctalk "요전에도 봐, 패싸움 난 거 그냥 싸움판인가 했더니 이주민만 타겟이었던 거도 있잖아?", "관중#ep18c02", bc_self;
+		npctalk "그건 그 전에 원주민 애들이 맞고 돌아와서 그랬다던데?", "관중#ep18c05", bc_self;
+		next;
+		mes "[미니 엘리]";
+		mes "소란이 커지는군요.";
+		mes "다들 서로 자기만 옳다고 우기며 남이 하는 이야기는 들을 생각이 없는 듯한데요.";
+		npctalk "처음부터 사람에게 폭력을 쓰는 게 잘못된 거잖아!", "관중#ep18c05", bc_self;
+		npctalk "맞을 짓을 했겠지.", "관중#ep18c02", bc_self;
+		npctalk "맞을 짓이란 말 정말 듣기 싫네. 대체 맞을 짓이 뭔데?", "관중#ep18c04", bc_self;
+		next;
+		mes "[미니 엘리]";
+		mes "아까보다 소리가 점점 커지고 있습니다.";
+		npctalk "피해자에게 가해 이유가 있다고 말하는 것부터 잘못되었다고!", "관중#ep18c05", bc_self;
+		next;
+		mes "[초조해 보이는 신관]";
+		mes "어쩌지... 말려야 하나?";
+		npctalk "큰일인데...", "초조한 신관#e18a", bc_self;
+		completequest 8681;
+		setquest 8682;
+		ep18_1_main = 2;
+		close;
+	}
+
+	if (ep18_1_main >= 2 && ep18_1_main <= 4) {
+		mes "연설은 멈출 줄을 모른다.";
+		mes "주변 분위기는 험악하다.";
+		npctalk "미니 엘리: 저기 뭔가 이 자리와 어울리지 않는 사람이 있군요.", "", bc_self;
+		
+		if (ep18_1_main == 2 || ep18_1_main == 3) {
+			cloakoffnpc "관중#ep18c01", .@char_id;
+			cloakoffnpc "관중#ep18c04", .@char_id;
+			cloakoffnpc "관중#ep18c05", .@char_id;
+			cloakoffnpc "관중#ep18c02", .@char_id;
+			cloakoffnpc "초조한 신관#e18a", .@char_id;
+			cloakoffnpc "관중#ep18c03", .@char_id;
+			if (ep18_1_main == 3)
+				cloakoffnpc "관중#ep18c06", .@char_id;
+		}
+		else {
+			cloakoffnpc "소녀#ep18c07", .@char_id;
+			cloakoffnpc "치안대원 갈라#ep18c08", .@char_id;
+			cloakoffnpc "치안대원 이즈#ep18c09", .@char_id;
+		}
+		close;
+	}
+	end;
+
+OnTouch:
+	.@char_id = getcharid(0);
+	if (ep18_1_main == 2 || ep18_1_main == 3) {
+		cloakoffnpc "관중#ep18c01", .@char_id;
+		cloakoffnpc "관중#ep18c04", .@char_id;
+		cloakoffnpc "관중#ep18c05", .@char_id;
+		cloakoffnpc "관중#ep18c02", .@char_id;
+		cloakoffnpc "초조한 신관#e18a", .@char_id;
+		cloakoffnpc "관중#ep18c03", .@char_id;
+		if (ep18_1_main == 3)
+			cloakoffnpc "관중#ep18c06", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 4) {
+		cloakoffnpc "소녀#ep18c07", .@char_id;
+		cloakoffnpc "치안대원 갈라#ep18c08", .@char_id;
+		cloakoffnpc "치안대원 이즈#ep18c09", .@char_id;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8681) == 1" );
+	end;
+}
+
+rachel,179,175,7	duplicate(dummy_cloaked_npc)	관중#ep18c01	4_F_MASK
+rachel,177,178,5	duplicate(dummy_cloaked_npc)	관중#ep18c02	4_M_RACHMAN1
+rachel,179,171,7	duplicate(dummy_cloaked_npc)	관중#ep18c03	4_M_RACHMAN2
+rachel,181,170,0	duplicate(dummy_cloaked_npc)	관중#ep18c04	4_M_MIDDLE
+rachel,186,173,1	duplicate(dummy_cloaked_npc)	관중#ep18c05	4_F_MASK
+rachel,184,171,1	duplicate(dummy_cloaked_npc)	관중#ep18c06	4_F_MASK
+rachel,187,170,3	duplicate(dummy_cloaked_npc)	소녀#ep18c07	4_F_DST_CHILD
+rachel,187,173,3	duplicate(dummy_cloaked_npc)	치안대원 갈라#ep18c08	4_M_RASWORD
+rachel,187,174,3	duplicate(dummy_cloaked_npc)	치안대원 이즈#ep18c09	4_M_RASWORD
+
+// Main Quest: Step 3.
+rachel,183,170,3	script	초조한 신관#e18a	4_M_TRAINEE,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	.@char_id = getcharid(0);
+	if (ep18_1_main == 2) {
+		cloakoffnpc "관중#ep18c06", .@char_id;
+		mes "[초조한 신관]";
+		mes "...?";
+		mes "아, 제 말이 들리셨나요? 죄송합니다.";
+		next;
+		mes "[초조한 신관]";
+		mes "그... 저기. 아무래도 요즘 이런 소요사태가 많아서요.";
+		next;
+		mes "[초조한 신관]";
+		mes "그러니까... 모험가님은 라헬에 처음 오셨는지요?";
+		npctalk "그걸 내가 어떻게 알아? 웃기는 놈 다 보겠네.", "관중#ep18c02", bc_self;
+		npctalk "뭐? 이 자식이 듣자듣자 하니 못하는 말이 없네?", "관중#ep18c04", bc_self;
+		next;
+		select( "아니" );
+		mes "[초조한 신관]";
+		mes "음...";
+		mes "아루나펠츠에 대해 어느 정도 아시는지는 모르겠지만...";
+		mes "혹시 주민간의... 출신 분쟁에 대해 알고 계시는지...";
+		next;
+		select( "들은 바 있다" );
+		mes "[초조한 신관]";
+		mes "그렇군요. 부끄럽게도... 이런 상황이 고질적으로 이어지고 있습니다.";
+		mes "최근에는 이런 식으로 가두연설을 하는 사람도 있는 모양인데...";
+		next;
+		mes "[초조한 신관]";
+		mes "저렇게 방해를 하는 사람이 종종 나타나요.";
+		mes "그런데 말리고 싶어도, 제가 직접 나서기에는 보시다시피...";
+		npctalk "대체 왜 저러고 싸우는 거야?", "관중#ep18c01", bc_self;
+		npctalk "싸움은 무식한 것들만 한다더니.", "관중#ep18c03", bc_self;
+		next;
+		mes "[초조한 신관]";
+		mes "...지배층인 이주민 편을 드는 걸로 보일까 봐 쉽게 나서질 못하고 있어요.";
+		mes "하지만 그렇다고 보고도 못 본 척할 수는 없고...";
+		next;
+		mes "[초조한 신관]";
+		mes "이번에도 본 적 없는 사람이 나타나 하는 연설이 신경쓰여 구경하다 보니 어느새...";
+		npctalk "뭐가 어째?", "관중#ep18c02", bc_self;
+		npctalk "딱 맞나 보네?", "관중#ep18c03", bc_self;
+		next;
+		mes "[초조한 신관]";
+		mes "...";
+		npctalk "이 자식이?", "관중#ep18c02", bc_self;
+		npctalk "어허 주먹 나온다 주먹 나온다. 때리기만 해봐.", "관중#ep18c03", bc_self;
+		next;
+		mes "[초조한 신관]";
+		mes "큰일이네...";
+		mes "모험가님, 혹시...";
+		next;
+		select( "말려달라고?" );
+		mes "[초조한 신관]";
+		mes "...프레이야의 가호가 있기를.";
+		changequest 8682,8683;
+		ep18_1_main = 3;
+		close;
+	}
+	if (ep18_1_main == 3) {
+		mes "어떻게 할까?";
+		next;
+		select( "거기 아저씨 좀 조용히 해 봐요", "거기 아저씨 대체 뭔데 이래라저래라야", "거기 배 나온 아저씨!" );
+		mes "[배 나온 관중]";
+		mes "누굴더러 아저씨래?";
+		npctalk "이건 또 뭐야?", "관중#ep18c02", bc_self;
+		npctalk "아이고...", "", bc_self;
+		next;
+		select( "뭐긴 뭐야, 모험가다" );
+		mes "[배 나온 관중]";
+		mes "허? 누구 젊은 시절에 모험가 한 번 안 해본 사람 있나?";
+		mes "어디까지 가봤어? 나는 저기 토르 화산 꼭대기까지 올라갔다 온 사람이야.";
+		mes "연약한 원주민들하곤 다르다고.";
+		npctalk "얼척없네, 그거 관광상품이겠지.", "관중#ep18c03", bc_self;
+		npctalk "저런 거 자랑하는 애들 꼭 있더라.", "관중#ep18c05", bc_self;
+		next;
+		select( "나는 세스룸니르 신전에서" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "나아는 세스룸니르 신전에서어...";
+		next;
+		cloakoffnpc "소녀#ep18c07", .@char_id;
+		cloakoffnpc "치안대원 갈라#ep18c08", .@char_id;
+		cloakoffnpc "치안대원 이즈#ep18c09", .@char_id;
+		mes "[소녀]";
+		mes "치안대 어르신! 저깁니다!";
+		next;
+		mes "[배 나온 관중]";
+		mes "얼씨구, 저건 또 누가 부른 거야?";
+		npctalk "아휴, 귀찮게 되기 전에 튀자.", "관중#ep18c04", bc_self;
+		npctalk "다시 얼굴 볼 일 없길 빈다.", "관중#ep18c05", bc_self;
+		npctalk "집에나 가야겠다...", "관중#ep18c06", bc_self;
+		cloakonnpc "관중#ep18c01", .@char_id;
+		cloakonnpc "관중#ep18c02", .@char_id;
+		cloakonnpc "관중#ep18c03", .@char_id;
+		cloakonnpc "관중#ep18c04", .@char_id;
+		cloakonnpc "관중#ep18c05", .@char_id;
+		cloakonnpc "관중#ep18c06", .@char_id;
+		npctalk "미니 엘리: 이런 걸 두고 썰물같이 쓸려내려간다고 합니까?", "", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "싸움이 났다길래 와 봤더니...";
+		mes "모험가?";
+		next;
+		mes "[초조한 신관]";
+		mes "아, 아닙니다! 여기 있는 모험가 선생님은 저를 도와주시려고...";
+		mes "아아, 저는 신관 주녹입니다. 이번에 세스룸니르로 귀환했습니다.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "" + strcharinfo(0) + ".";
+		mes "모험가다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "수고하십니다.";
+		mes "요즘 하도 분위기가 흉흉해서...";
+		next;
+		select( "대체 무슨 일이?" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "대체 무슨 일이 있길래요?";
+		mes "저런 분탕질이 벌어지고 있다니...";
+		next;
+		mes "치안대원과 신관은 잠시 생각하더니 주변을 둘러보고, 시선을 교환하고 고개를 끄덕였다.";
+		next;
+		mes "[주녹]";
+		mes "모험가님, 아까 세스룸니르 신전에서, 뭐라고 하셨죠?";
+		mes "마침 저도 신전에 볼 일도 있고 하니 잠시 그쪽에서 이야기하셔도 될 것 같습니다.";
+		mes "신전 앞에서 계속 말씀하시죠.";
+		changequest 8683,8684;
+		ep18_1_main = 4;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		navigateto("ra_temple",72,54);
+		close;
+	}
+	if (ep18_1_main == 4) {
+		mes "[주녹]";
+		mes "금방 따라가겠습니다.";
+		mes "<NAVI>[신전 앞]<INFO>ra_temple,72,54,0,101,0</INFO></NAVI>에서 뵈어요.";
+		close;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8682) == 1 || isbegin_quest(8683) == 1" );
+	end;
+}
+
+
+ra_temple,118,30,0	script	#ep18w01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep18_1_main == 4) {
+		.@char_id = getcharid(0);
+		cloakoffnpc "초조한 신관#e18b", .@char_id;
+		cloakoffnpc "치안대원 갈라#ep18c10", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 5 || ep18_1_main == 6) {
+		.@char_id = getcharid(0);
+		cloakoffnpc "초조한 신관#e18c", .@char_id;
+		cloakoffnpc "치안대원 갈라#ep18c12", .@char_id;
+		cloakoffnpc "치안대원 이즈#ep18c13", .@char_id;
+		cloakoffnpc "치안대원 칼소트#c14", .@char_id;
+		cloakoffnpc "하트헌터#ep18c15", .@char_id;
+		cloakoffnpc "하트헌터#ep18c16", .@char_id;
+		end;
+	}
+	end;
+}
+
+ra_temple,72,54,0	duplicate(#ep18w01)	#ep18wj1	HIDDEN_WARP_NPC,4,4
+ra_temple,39,143,0	duplicate(#ep18w01)	#ep18w02	HIDDEN_WARP_NPC,3,3
+ra_temple,20,134,0	duplicate(#ep18w01)	#ep18w02_1	HIDDEN_WARP_NPC,3,3
+ra_temple,30,142,0	duplicate(#ep18w01)	#ep18w02_1_	HIDDEN_WARP_NPC,3,3
+
+// Main Quest: Step 4.
+ra_temple,72,54,5	script	초조한 신관#e18b	4_M_TRAINEE,{
+	if (ep18_1_main == 4) {
+		if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+			mes "[미니 엘리]";
+			mes "가방에서 꺼내줘요. 머리 위에 올려주세요.";
+			npctalk "미니 엘리: 가방에서 꺼내줘요. 머리 위에 올려주세요.", "", bc_self;
+			close;
+		}
+		mes "[미니 엘리]";
+		mes "손님, 잠시만요.";
+		npctalk "미니 엘리: 궁금한 것이 있습니다.", "", bc_self;
+		next;
+		if (select( "엘리, 무슨 일이야?", "단서 때문에?" ) == 2) {
+			mes "[미니 엘리]";
+			mes "그것도 그것이지만 말입니다.";
+			next;
+		}
+		.@char_id = getcharid(0);
+		mes "[미니 엘리]";
+		mes "손님은 예전에 이 곳에 왔던 적이 있지요?";
+		npctalk "주녹: 모험가님?", "", bc_self;
+		next;
+		select( "그래" );
+		mes "[미니 엘리]";
+		mes "여기까지 오는 동안 이상한 시선을 느꼈습니다. 손님도 느꼈을 텐데...";
+		mes "원래 그런 시선을 가진 사람들이 많이 사는 동네입니까?";
+		next;
+		select( "그렇지 않았어" );
+		mes "[미니 엘리]";
+		mes "그들이 '침입자'들과 관련이 있을까요?";
+		next;
+		select( "그럴지도 몰라" );
+		mes "[미니 엘리]";
+		mes "손님을 알아본 것 같습니까?";
+		npctalk "주녹: ?", "", bc_self;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그렇진 않아.";
+		next;
+		mes "[주녹]";
+		mes "모험가님, 뭘 그렇게 골똘히 생각하세요?";
+		next;
+		select( "아무것도 아닙니다" );
+		mes "[주녹]";
+		mes "어쨌든... 여기라면 조금 조용하게 이야기할 수 있겠군요.";
+		next;
+		mes "[주녹]";
+		mes "저도 라헬로 돌아온 지 얼마 되지 않아서 잘은 모르겠습니다만...";
+		mes "예전에 비해 꽤나 분위기가 흉흉해졌어요.";
+		next;
+		mes "[주녹]";
+		mes "원주민과 이주민 사이의 갈등이 커져 있습니다.";
+		mes "평소보다 좀 더... 밖에서 대놓고 그것을 조장하는 듯이 말하는 사람들이 있고요.";
+		next;
+		mes "[주녹]";
+		mes "다른 이유로 싸웠을만한 일들도 치안대에게 붙들리면 모두 네가 원주민이네 이주민이네... 하고 그 핑계를 대는 자들도 있습니다.";
+		next;
+		mes "[주녹]";
+		mes "이것을 해결하려고 노력은 하고 있습니다만...";
+		next;
+		mes "[치안대원 갈라]";
+		mes "최근 세스룸니르 신전에 정체모를 자들이 침입을 시도하고 있습니다.";
+		npctalk "치안대원: 침입 자체가 목적인 것치고는 약하고 일사불란합니다.", "치안대원 갈라#ep18c10", bc_self;
+		npctalk "미니 엘리: 침입?", "", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "수도 라헬에서 제일 안전한 신전에 계속 침입 시도를 하는 것 자체가 매우 이상한 일이기도 하지만...";
+		npctalk "미니 엘리: 손님이 듣기에도 수상하지 않습니까?", "", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "그 자들을 상대하느라 지금 신전은 경계 강화 태세입니다. 그래서 요즘 시민들의 분쟁에 제 시간에 대응하지 못하는 부분도 있습니다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "언제까지 이어질지도 모르고, 어디에서 그렇게 갑자기 튀어나오는지도 알 수 없어 섣불리 전면대응을 할 수도 없고...";
+		mes "그렇다고 치안대를 배수로 늘리기도 애매하고.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "정말 곤란한 일입니다...음?";
+		cloakoffnpc "신입 치안대원#ep18c11", .@char_id;
+		npctalk "신입 치안대원: 신전 서쪽에 침입자입니다!", "신입 치안대원#ep18c11", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "대낮부터 또 쳐들어오다니! 가자!";
+		mes "모험가님도 같이 가시죠!";
+		next;
+		select( "날 뭘 믿고?" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "내가 누군지 알고?";
+		mes "침입자 일당이면 어떡해?";
+		next;
+		mes "[치안대원 갈라]";
+		mes "저는 신전을 꽤나 오래 지켜왔습니다.";
+		mes "누군지도 모르는 사람에게 이런 이야기를 늘어놓았겠습니까?";
+		npctalk "주녹: 아는 사이셨어요?", "", bc_self;
+		npctalk "치안대원 갈라: 일방적으로요.", "치안대원 갈라#ep18c10", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "빨리 가시죠!";
+		changequest 8684,8685;
+		ep18_1_main = 5;
+		navigateto("ra_temple",30,142);
+		cloakonnpc "초조한 신관#e18b", .@char_id;
+		cloakonnpc "치안대원 갈라#ep18c10", .@char_id;
+		cloakonnpc "신입 치안대원#ep18c11", .@char_id;
+
+		cloakoffnpc "초조한 신관#e18c", .@char_id;
+		cloakoffnpc "치안대원 갈라#ep18c12", .@char_id;
+		cloakoffnpc "치안대원 이즈#ep18c13", .@char_id;
+		cloakoffnpc "치안대원 칼소트#c14", .@char_id;
+		cloakoffnpc "하트헌터#ep18c15", .@char_id;
+		cloakoffnpc "하트헌터#ep18c16", .@char_id;
+		close;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8684) == 1" );
+	end;
+}
+
+ra_temple,75,54,3	duplicate(dummy_cloaked_npc)	치안대원 갈라#ep18c10	4_M_RASWORD
+ra_temple,78,56,3	duplicate(dummy_cloaked_npc)	신입 치안대원#ep18c11	4_M_RASWORD
+
+// Main Quest: Step 5.
+ra_temple,30,142,1	script	초조한 신관#e18c	4_M_TRAINEE,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	.@char_id = getcharid(0);
+	if (ep18_1_main == 5) {
+		mes "[미니 엘리]";
+		mes "본 기억이 있는 행색이네?";
+		next;
+		mes "[미니 엘리]";
+		mes "생각보다 빨리 찾았군요.";
+		next;
+		select( "아직 저택의 상황을 모르나본데" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "저택에 파견되었던 놈들하고 다른 팀일 수도...";
+		next;
+		mes "[치안대원 이즈]";
+		mes "너희는 포위됐다! 순순히 투항해라!";
+		next;
+		mes "[하트헌터]";
+		mes "흥, 이런 정도를 두고 포위라고 하다니. 소문대로군.";
+		next;
+		mes "[치안대원 이즈]";
+		mes "뭐야? 그러는 네놈들은 지금까지 총 14번이나 실패하고 도망쳤잖아!";
+		next;
+		mes "[치안대원 칼소트]";
+		mes "15번입니다.";
+		npctalk "켁.", "하트헌터#ep18c15", bc_self;
+		next;
+		mes "[하트헌터]";
+		mes "그건 정찰보낸 우리 신입들이었다!";
+		mes "이제 너희의 모든 순찰 루트를 파악했다. 각오해라.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "바꿔야겠군.";
+		next;
+		mes "[하트헌터]";
+		mes "...";
+		next;
+		mes "[치안대원들]";
+		mes "...";
+		next;
+		mes "[하트헌터]";
+		mes "이번으로 끝이라니까! 별동대가 이미 신전에...";
+		next;
+		cloakoffnpc "치안대원 차이브#c17", .@char_id;
+		mes "[치안대원 차이브]";
+		mes "별동대라면 이것들인가?";
+		cloakoffnpc "하트헌터#ep18c18", .@char_id;
+		cloakoffnpc "하트헌터#ep18c19", .@char_id;
+		npctalk "으으...", "하트헌터#ep18c19", bc_self;
+		npctalk "젠장..", "하트헌터#ep18c18", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "끝난 것 같은데.";
+		next;
+		mes "[하트헌터]";
+		mes "...다음엔 꼭 성공할 것이다!";
+		cloakonnpc "하트헌터#ep18c15", .@char_id;
+		cloakonnpc "하트헌터#ep18c16", .@char_id;
+		changequest 8685,8686;
+		ep18_1_main = 6;
+		next;
+		mes "[치안대원 갈라]";
+		mes "...";
+		mes "이상한 일이지요. 이상할 정도로 허술하게, 눈에 띄게, 몇 번이고 쳐들어오더니 이제는 저런 거짓말이 뻔한 연극까지 합니다.";
+		mes "미끼를 두는 것조차 수상할 지경입니다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "대체 어디서 파견한 놈들인지...";
+		next;
+		select( "사실 지금 라헬에 온 것은" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "저들과 관련있는 자들을 찾으러 왔는데...";
+		next;
+		mes "[주녹]";
+		mes "이런. 인연이 있으셨습니까?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그렇다기보다...";
+		next;
+		mes "사정 설명을 전부 할 수는 없고 하여, 저들의 목적이 침입은 맞다고 설명했다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "흐음...";
+		mes "니르엔 님은 만나 보셨습니까?";
+		mes "간만에 들르셨으니 아직 인사를 하지 않으셨겠지요.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "강요는... 아닙니다만.";
+		mes "어차피 보고가 들어가야 합니다. 한 번 찾아뵈시는 게 어떻겠습니까?";
+		npctalk "치안대원 갈라: 일단 저 자들은 구금해. 정말 신입일 거다.", "치안대원 갈라#ep18c12", bc_self;
+		npctalk "치안대원 차이브: 알겠습니다.", "치안대원 차이브#c17", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "자세한 것은... 거기서 말씀하시지요.";
+		changequest 8686,8687;
+		ep18_1_main = 7;
+		getitem 1000405,30;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		navigateto("ra_temin",173,40);
+		cloakonnpc "초조한 신관#e18c", .@char_id;
+		cloakonnpc "치안대원 갈라#ep18c12", .@char_id;
+		cloakonnpc "치안대원 이즈#ep18c13", .@char_id;
+		cloakonnpc "치안대원 칼소트#c14", .@char_id;
+		cloakonnpc "치안대원 차이브#c17", .@char_id;
+		cloakonnpc "하트헌터#ep18c18", .@char_id;
+		cloakonnpc "하트헌터#ep18c19", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 6) {
+		mes "[치안대원 갈라]";
+		mes "...";
+		mes "이상한 일이지요. 이상할 정도로 허술하게, 눈에 띄게, 몇 번이고 쳐들어오더니 이제는 저런 거짓말이 뻔한 연극까지 합니다.";
+		mes "미끼를 두는 것조차 수상할 지경입니다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "대체 어디서 파견한 놈들인지...";
+		next;
+		select( "사실 지금 라헬에 온 것은" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "저들과 관련있는 자들을 찾으러 왔는데...";
+		next;
+		mes "[주녹]";
+		mes "이런. 인연이 있으셨습니까?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그렇다기보다...";
+		next;
+		mes "사정 설명을 전부 할 수는 없고 하여, 저들의 목적이 침입은 맞다고 설명했다.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "흐음...";
+		mes "니르엔 님은 만나 보셨습니까?";
+		mes "간만에 들르셨으니 아직 인사를 하지 않으셨겠지요.";
+		next;
+		mes "[치안대원 갈라]";
+		mes "강요는... 아닙니다만.";
+		mes "어차피 보고가 들어가야 합니다. 한 번 찾아뵈시는 게 어떻겠습니까?";
+		npctalk "치안대원 갈라: 일단 저 자들은 구금해. 정말 신입일 거다.", "치안대원 갈라#ep18c12", bc_self;
+		npctalk "치안대원 차이브: 알겠습니다.", "치안대원 차이브#c17", bc_self;
+		next;
+		mes "[치안대원 갈라]";
+		mes "자세한 것은... 거기서 말씀하시지요.";
+		changequest 8686,8687;
+		ep18_1_main = 7;
+		getitem 1000405,30;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		navigateto("ra_temin",173,40);
+		cloakonnpc "하트헌터#ep18c15", .@char_id;
+		cloakonnpc "하트헌터#ep18c16", .@char_id;
+		cloakonnpc "초조한 신관#e18c", .@char_id;
+		cloakonnpc "치안대원 갈라#ep18c12", .@char_id;
+		cloakonnpc "치안대원 이즈#ep18c13", .@char_id;
+		cloakonnpc "치안대원 칼소트#c14", .@char_id;
+		cloakonnpc "치안대원 차이브#c17", .@char_id;
+		cloakonnpc "하트헌터#ep18c18", .@char_id;
+		cloakonnpc "하트헌터#ep18c19", .@char_id;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8685) == 1 || isbegin_quest(8686) == 1" );
+	end;
+}
+
+ra_temple,25,147,5	duplicate(dummy_cloaked_npc)	치안대원 갈라#ep18c12	4_M_RASWORD
+ra_temple,29,143,1	duplicate(dummy_cloaked_npc)	치안대원 이즈#ep18c13	4_M_RASWORD
+ra_temple,26,145,7	duplicate(dummy_cloaked_npc)	치안대원 칼소트#c14	4_M_RASWORD
+ra_temple,31,147,4	duplicate(dummy_cloaked_npc)	하트헌터#ep18c15	G_EP17_2_HEART_HUNTER
+ra_temple,29,146,4	duplicate(dummy_cloaked_npc)	하트헌터#ep18c16	G_EP17_2_HEART_HUNTER
+
+ra_temple,35,141,1	duplicate(dummy_cloaked_npc)	치안대원 차이브#c17	4_M_RASWORD
+ra_temple,36,140,4	duplicate(dummy_cloaked_npc)	하트헌터#ep18c18	G_EP17_2_HEART_HUNTER
+ra_temple,37,140,4	duplicate(dummy_cloaked_npc)	하트헌터#ep18c19	G_EP17_2_HEART_HUNTER
+
+// Main Quest: Step 6.
+ra_temin,173,40,3	script	치안대원 덴트#ep18	4_M_RASWORD,{
+	if (ep18_1_main == 7) {
+		mes "[치안대원 덴트]";
+		mes "<FONT SIZE = 16><B>잠깐!!</FONT></B>";
+		mes "<FONT SIZE = 14>이봐!</FONT>";
+		mes "줄 서있는 거 안보여?";
+		mes "^e5555e니르엔^000000님을 뵈러 온 거라면 순서를 지키라구!";
+		npctalk "잠깐!! 이봐!", "치안대원 덴트#ep18", bc_self;
+		next;
+		mes "[엘리]";
+		mes "정말 사람들이 많네요.";
+		mes "하지만 빨리 니르엔님을 만나지 않으면 곤란한데요.";
+		cutin "ep172_beta.bmp",2;
+		next;
+		select( "급한 용무라고 말한다." );
+		cutin "",255;
+		mes "[치안대원 덴트]";
+		mes "<FONT SIZE = 16><B>뭐?</FONT></B>";
+		mes "<FONT SIZE = 14>나도 완전 급하거든?</FONT>";
+		npctalk "뭐?", "치안대원 덴트#ep18", bc_self;
+		next;
+		mes "[치안대원 덴트]";
+		mes "<FONT SIZE = 14><B>아오~</FONT></B>";
+		mes "오늘만 해도 싸움 말리러 출동한 게 대체 몇 번인 줄 알아?!";
+		mes "사람들이 시도 때도 없이 싸워 대니 이쪽도 정신이 하나도 없다고!";
+		npctalk "어휴~ 다들 그만 좀 싸웠으면…", "치안대원 덴트#ep18", bc_self;
+		next;
+		mes "[치안대원 덴트]";
+		mes "심지어 싸움을 말리려고 해도 말을 들은 척도 안해!";
+		mes "전부터 ^e5555e이주민^000000이니 ^e5555e원주민^000000이니 하면서 싸워 댔지만 요즘은 정말 장난 아니야!";
+		next;
+		mes "[치안대원 덴트]";
+		mes "뭐라고 말만하면 원주민 ^e5555e차별^000000한다고 소리부터 지른다니까……";
+		mes "진짜 생각만해도 머리가 지끈거린다.";
+		npctalk "진짜 생각만해도 머리가 지끈거린다.", "치안대원 덴트#ep18", bc_self;
+		next;
+		mes "[치안대원 덴트]";
+		mes "넌 요즘 어떠냐? 닐?";
+		completequest 8687;
+		setquest 11696;
+		ep18_1_main = 8;
+		close;
+	}
+	mes "[치안대원 덴트]";
+	mes "어휴~";
+	mes "다들 그만 좀 싸웠으면…";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11696) == 0 && isbegin_quest(8687) == 1" );
+	end;
+}
+
+// Main Quest: Step 7. and 10.
+ra_temin,174,38,3	script	치안대원 닐#ep18	4_DST_SOLDIER,{
+	if (ep18_1_main == 8) {
+		mes "[치안대원 닐]";
+		mes "<FONT SIZE = 14><B>야 말도 마!</FONT></B>";
+		mes "그래도 넌 나보다 나아.";
+		mes "너도 알다시피 내가 원주민 출신이잖아.";
+		npctalk "야 말도 마!", "", bc_self;
+		next;
+		mes "[치안대원 닐]";
+		mes "난 말도 시작하기전에 원주민이라고 다른 치안대원 불러오라는 소리부터 한다니까.";
+		npctalk "차별 장난아냐!", "", bc_self;
+		next;
+		mes "[치안대원 닐]";
+		mes "원주민 출신 주제에 감히~ 내가 누군지 아느냐~ 라는 소리 듣는 것도 이젠 지겹다 지겨워.";
+		mes "치안대를 뭐라고 생각하는 거야!";
+		next;
+		mes "[치안대원 닐]";
+		mes "솔직히 말해서 요즘 진짜 이상해.";
+		mes "예전엔 이런 문제를 일으키지 않던 사람들까지 싸움에 끼어들기 시작해서 사소한 싸움도 큰 싸움으로 번져버린다니까.";
+		next;
+		mes "[치안대원 닐]";
+		mes "맞아!";
+		mes "최근들어서 여기저기서 난리도 아니더라.";
+		mes "그러고보니 어제 신전에도 왔었는데";
+		mes "거기 신관님 어제 날 부른 사람이지?";
+		mes "요즘 신전은 좀 어때?";
+		changequest 11696,11697;
+		ep18_1_main = 9;
+		close;
+	}
+	if (ep18_1_main == 11 || ep18_1_main == 12) {
+		mes "[니르엔 대신관]";
+		mes "닐 혹시 오늘 ^e5555e마람^000000을 보지 못했나요?";
+		cloakoffnpc "니르엔#ep18_in1", getcharid(0);
+		cutin "ra_gwoman.bmp",2;
+		next;
+		cutin "",255;
+		mes "[치안대원 닐]";
+		mes "마람이요?";
+		mes "아까 신전으로 오는 길에 ^e5555e광장 쪽^000000에서 본 것 같기는 한데…";
+		next;
+		mes "[치안대원 닐]";
+		mes "아직 광장에 있는지는 모르겠지만 ^e5555e광장에 있는 사람들에게 물어보면^000000 마람이 어디로 갔는지 알 수 있지 않을까요?";
+		next;
+		mes "[니르엔 대신관]";
+		mes "흠… 그렇군요.";
+		mes "" + strcharinfo(0) + " 아까 부탁드린 일은 ^e5555e제 아들인 마람이 도와 드릴 겁니다.^000000";
+		mes "누구보다 이 일에 대해서 잘 알고있는 아이니까요.";
+		npctalk "아까 부탁드린 일은 제 아들인 마람이 도와 드릴 겁니다.", "니르엔#ep18_in1", bc_self;
+		cutin "ra_gwoman.bmp",2;
+		next;
+		mes "[니르엔 대신관]";
+		mes "제가 직접 소개를 해드리면 좋겠지만 보시다시피 지금은 자리를 뜰 수 없네요.";
+		mes "^e5555e광장 근처^000000에서 사람들에게 물어보면 찾을 수 있을 거에요.";
+		if (ep18_1_main == 11) {
+			changequest 11699,11700;
+			ep18_1_main = 12;
+		}
+		close2;
+		navigateto("rachel",137,135);
+		cloakonnpc "니르엔#ep18_in1", getcharid(0);
+		cutin "",255;
+		end;
+	}
+	mes "[치안대원 닐]";
+	mes "으으…";
+	mes "니르엔님은 어딜 가신 거지…";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11696) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11699) == 1" );
+	end;
+}
+
+// Main Quest: Step 8.
+ra_temin,172,36,7	script	프레이야 사제#ep18	4_F_MASK1,{
+	if (ep18_1_main == 9) {
+		mes "[프레이야 사제]";
+		mes "저희는 신도분들의 진실된 믿음과 마음의 평안을 위해 늘 기도 드리고 있습니다.";
+		next;
+		mes "[치안대원 닐]";
+		mes "에이 그런 틀에 박힌 인사말 말고~";
+		mes "내가 봤는데 뭘~";
+		mes "게다가 아무 일도 아니라면 신관이 이런데 줄 서 있을 리 없잖아.";
+		next;
+		mes "[치안대원 닐]";
+		mes "요즘 사람들 상황이 어떤지 알아야 치안대도 대응을 좀 준비할 수 있지 않겠어?";
+		mes "특히 신전 쪽으로 오는 사람들 상황은 우리도 잘 모르니까 말이야.";
+		npctalk "신전 쪽으로 오는 사람들 상황은 우리도 잘 모르니까 말이야.", "치안대원 닐#ep18", bc_self;
+		next;
+		mes "[치안대원 덴트]";
+		mes "정보 좀 주라~";
+		npctalk "정보 좀 주라~", "치안대원 덴트#ep18", bc_self;
+		next;
+		mes "[프레이야 사제]";
+		mes "신전은 프레이야님을 위해 기도하는 곳입니다.";
+		mes "정숙한 마음으로…";
+		next;
+		mes "[치안대원 닐]";
+		mes "내가 어제 봤는데 말야.";
+		mes "<FONT SIZE = 14>서로 머리채를 잡고 싸우는 사람들 사이에 여기 이 신관님이 복면이 반쯤 벗겨진 상태로…</FONT>";
+		next;
+		mes "[프레이야 사제]";
+		mes "<FONT SIZE = 16><B>악!!!</FONT></B>";
+		mes "<FONT SIZE = 14><B>잠깐만요!</FONT></B>";
+		mes "<FONT SIZE = 14><B>거기까지!!!</FONT></B>";
+		npctalk "악!!! 잠깐만요!", "", bc_self;
+		next;
+		mes "[프레이야 사제]";
+		mes "<FONT SIZE = 10>크흡…</FONT>";
+		next;
+		mes "[프레이야 사제]";
+		mes "사실…";
+		next;
+		mes "[프레이야 사제]";
+		mes "요즘 신전에도 문제를 일으키는 사람들이 부쩍 많아진 건 사실입니다.";
+		next;
+		mes "[프레이야 사제]";
+		mes "대부분 공식적으로 이의를 제기할 수 있는 내용이 아니고 개인적인 불만을 화풀이 하는 사람들이라 신전입구에서 난동을 부리거나 소리를 지르는 정도지만요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "잠깐…";
+		mes "지금 그 이야기 자세히 들을 수 있을까요?";
+		cloakoffnpc "니르엔#ep18_in1", getcharid(0);
+		npctalk "지금 그 이야기 자세히 들을 수 있을까요?", "니르엔#ep18_in1", bc_self;
+		cutin "ra_gwoman.bmp",2;
+		next;
+		cutin "",255;
+		mes "[프레이야 사제]";
+		mes "니르엔님!!!!";
+		npctalk "니르엔님!!!!", "", bc_self;
+		next;
+		mes "[프레이야 사제]";
+		mes "아 그게…";
+		mes "개인적인 불만을 가진 분들이 신전에 와서 소리를 지르는 정도의 일은 전부터 자주 있던 일이고 잘 달래서 돌려보내고 있습니다만,";
+		next;
+		mes "[프레이야 사제]";
+		mes "최근에는 신전에 오신 분들끼리 몸싸움까지 일으키는 일이 많아져서…";
+		next;
+		mes "[니르엔 대신관]";
+		mes "신성한 신전에서 몸싸움이라니…";
+		mes "그 분들의 불만을 대화로 해결할 방법은 없었나요?";
+		npctalk "세상에…", "니르엔#ep18_in1", bc_self;
+		cutin "ra_gwoman.bmp",2;
+		next;
+		cutin "",255;
+		mes "[프레이야 사제]";
+		mes "의견을 조율하려고 해도 이단이라고 부르면서 무시하는 거 아니냐며 난동을 부리는 분이 있는가 하면 언제까지 이단놈들을 가만히 둘 거냐고 하시는 분들도 있어 저희들로서는 해결이 쉽지 않은 상황입니다.";
+		next;
+		mes "[프레이야 사제]";
+		mes "하지만 저런 불만들이다 보니 니르엔님께 직접 항의는 못하고 신전에 화풀이를 하는 것 같습니다.";
+		mes "그들도 니르엔님이 화합을 얼마나 중요하게 생각하고 계신지 알고 있으니까요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "하아…";
+		mes "이단…";
+		mes "차별을 없애고자 한 노력들이 그들의 마음에는 닿지 않았나 보네요.";
+		cutin "ra_gwoman.bmp",2;
+		npctalk "하아…", "니르엔#ep18_in1", bc_self;
+		next;
+		mes "[니르엔 대신관]";
+		mes "게다가 신전에서 까지 싸움을 일으키다니 쉽게 넘어갈 문제는 아니에요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "어느 정도의 의견 충돌은 저도 들은 것이 있습니다만…… 함께 지내며 서로를 알아가고 이해한다면 자연스럽게 해결될 거라고 생각한 제가 틀렸던 걸지도 모르겠어요.";
+		next;
+		cutin "",255;
+		mes "[프레이야 사제]";
+		mes "강경파는 물러 났어도 그들을 지지하던 사람들의 마음까지 한번에 바뀌지는 않으니까요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "슬프지만 맞는 말이에요.";
+		mes "스스로 치유되기를 기다린 시간은 상처가 곪아 터지길 방치한 결과가 되어버렸어요.";
+		mes "이젠 화해를 위한 대화조차 쉽지 않겠네요…";
+		cutin "ra_gwoman.bmp",2;
+		next;
+		mes "[니르엔 대신관]";
+		mes "<FONT SIZE = 10>뭔가 계기가 필요할 텐데……</FONT>";
+		next;
+		cutin "",255;
+		mes "[치안대원 덴트]";
+		mes "니르엔님.";
+		mes "계기라면 여기 이 모험가님 어때요?";
+		mes "완전 외부인이니까.";
+		mes "뭐…… 대화 시작도 못하지는 않지 않을까?";
+		next;
+		mes "[치안대원 덴트]";
+		mes "어차피 니르엔님께 할말이 있어서 찾아왔다구 하더라구요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "어머…!";
+		mes "" + strcharinfo(0) + "님!!!";
+		mes "정신이 없어서 " + strcharinfo(0) + "님이 계신 것도 눈치채지못했네요.";
+		npctalk "어머…!", "니르엔#ep18_in1", bc_self;
+		cutin "ra_gwoman.bmp",2;
+		next;
+		mes "[니르엔 대신관]";
+		mes "보시다시피 지금 ^e5555e라헬 내부 문제^000000로 눈코뜰새 없이 바쁜 상황이라 죄송합니다.";
+		mes "그런데 저에게 하실 말씀이라는 건……";
+		next;
+		select( "침입자에 대해." );
+		mes "[니르엔 대신관]";
+		mes "아……";
+		mes "<FONT SIZE = 10>잠깐 그 이야기는 여기서 하기엔 조금 곤란하네요.</FONT>";
+		mes "이쪽으로 따라오시죠.";
+		changequest 11697,11698;
+		ep18_1_main = 10;
+		close2;
+		cloakonnpc "니르엔#ep18_in1", getcharid(0);
+		cutin "",255;
+		navigateto("ra_temin",213,87);
+		end;
+	}
+	mes "[프레이야 사제]";
+	mes "저희는 신도분들의 진실된 믿음과 마음의 평안을 위해 늘 기도 드리고 있습니다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11697) == 1" );
+	end;
+}
+
+ra_temin,170,38,5	duplicate(dummy_cloaked_npc)	니르엔#ep18_in1	4_F_MADAME
+ra_temin,171,42,5	duplicate(dummy_npc)	라헬주민#ep18_in1	4_F_SHABBY
+ra_temin,173,43,3	duplicate(dummy_npc)	라헬주민#ep18_in2	4_M_RACHMAN2
+ra_temin,175,36,0	duplicate(dummy_npc)	라헬주민#ep18_in3	4_F_DESERT
+ra_temin,170,35,1	duplicate(dummy_npc)	라헬주민#ep18_in4	4_M_DST_GRAND
+ra_temin,174,34,3	duplicate(dummy_npc)	라헬주민#ep18_in5	4_M_MIDDLE
+ra_temin,177,33,5	duplicate(dummy_npc)	라헬주민#ep18_in6	4_M_CHILD1
+ra_temin,173,32,0	duplicate(dummy_npc)	라헬주민#ep18_in7	4_F_MASK
+
+// Main Quest: Step 9.
+ra_temin,213,87,3	script	니르엔#ep18_in2	4_F_MADAME,{
+	if (ep18_1_main == 10) {
+		mes "[니르엔 대신관]";
+		mes "여기라면 듣는 사람이 없을 것 같군요.";
+		mes "^e5555e특히 민감한 사안^000000이다보니,";
+		mes "이런 곳으로 모시게 되어 죄송합니다.";
+		cutin "ra_gwoman.bmp",2;
+		next;
+		select( "침입자의 정체에 대해 설명한다." );
+		mes "[니르엔 대신관]";
+		mes "<FONT SIZE = 14>그럴 수가!!!</FONT>";
+		mes "^e5555e하트헌터^000000들이 ^e5555e이미르의 심장 조각^000000을 노리고 있다면 이쪽도 손 놓고 있을 수는 없어요!";
+		next;
+		mes "[니르엔 대신관]";
+		mes "그렇게 쉽게 침입해올 줄이야……";
+		mes "지금 당장 ^e5555e심장 보관실 쪽의 경비를 강화^000000하고 ^e5555e리벨리온에게도 적극적으로 협력^000000해 드리겠습니다.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "하지만 아무리 심장 보관실 쪽의 경비를 강화한다고 해도 최근 주민들 사이의 어수선해진 분위기 때문에 침입자들이 날뛰기에 더없이 좋은 상황인 건 사실이에요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "저는 일단 경비강화 작업에 집중할 테니 " + strcharinfo(0) + "님께는 ^e5555e주민들을 중재하는 일을 부탁^000000드려도 될까요?";
+		next;
+		mes "[니르엔 대신관]";
+		mes "아니…";
+		mes "중재가 아니라 그들의 이야기를 듣고 전해 주시는 것만으로도 충분해요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "많은 사람들이 행복할 수 있을 것이라 생각했던 결정을 하면서 그 선택을 지지하지 않은 사람들의 마음을 제대로 헤아리지 못했어요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "하루아침에 모두가 사이 좋길 바라는 건 아니에요.";
+		mes "그저……";
+		mes "무엇이 불만인지……";
+		mes "어디서부터 잘못 된 것인지 알 수 있다면 다시 시작할 수 있을 거라고 믿고 있어요.";
+		next;
+		mes "[니르엔 대신관]";
+		mes "지금은 누구의 말도 들을 것 같지 않지만 덴트의 말처럼 외부인인 " + strcharinfo(0) + "님이라면 이야기를 해줄지도 몰라요..";
+		next;
+		mes "[엘리]";
+		mes "사람들의 관계란 건 복잡하네요.";
+		cutin "ep172_beta.bmp",2;
+		next;
+		mes "[니르엔 대신관]";
+		mes "하하…… 그렇죠";
+		mes "그럼 일단 다시 신전 입구로 돌아갈까요?";
+		mes "^e5555e치안대^000000분들에게 물어볼 것도 있고…";
+		cutin "ra_gwoman.bmp",2;
+		changequest 11698,11699;
+		ep18_1_main = 11;
+		close2;
+		cutin "",255;
+		navigateto("ra_temin",174,38);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11698) == 1" );
+	end;
+}
+
+// Main Quest: Step 11.
+rachel,137,135,7	script	마을사람#ep18_라헬1	4_M_MIDDLE,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 12) {
+		select( "마람을 봤는지 묻는다." );
+		mes "[마을사람]";
+		mes "뭐?";
+		mes "몰라!";
+		mes "그런 녀석이 어디 있는지 내가 알게 뭐야.";
+		npctalk "뭐? 몰라!", "마을사람#ep18_라헬1", bc_self;
+		next;
+		mes "[마을사람]";
+		mes "그러고보니 당신!";
+		mes "이 근처에서 못보던 얼굴인데……";
+		next;
+		mes "[마을사람]";
+		mes "그 녀석은 왜 찾는 거야?";
+		mes "뭔가 이상한 꿍꿍이라도 있는 거 아냐?";
+		next;
+		mes "[엘리]";
+		mes "불친절한 사람이네요.";
+		mes "마람님이 있는 곳을 알려줄 것 같지 않으니 다른 사람에게 물어봐요.";
+		cutin "ep172_beta.bmp",2;
+		changequest 11700,11701;
+		ep18_1_main = 13;
+		close2;
+		cutin "",255;
+		navigateto("rachel",105,134);
+		end;
+	}
+	if (ep18_1_main == 13) {
+		mes "[엘리]";
+		mes "불친절한 사람이네요.";
+		mes "마람님이 있는 곳을 알려줄 것 같지 않으니 다른 사람에게 물어봐요.";
+		cutin "ep172_beta.bmp",2;
+		close2;
+		cutin "",255;
+		navigateto("rachel",105,134);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11700) == 1" );
+	end;
+}
+
+// Main Quest: Step 12.
+rachel,105,134,3	script	마을사람#ep18_라헬2	4_M_RACHMAN1,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 13) {
+		select( "마람을 봤는지 묻는다." );
+		mes "[마을사람]";
+		mes "…";
+		next;
+		mes "[마을사람]";
+		mes "잘 모르겠는데요?";
+		next;
+		mes "[마을사람]";
+		mes "그런데 누구시죠?";
+		mes "왜 마람을 찾으시죠?";
+		next;
+		mes "[마을사람]";
+		mes "마람이랑 어떻게 아는 사이에요?";
+		npctalk "수상한데?", "마을사람#ep18_라헬2", bc_self;
+		next;
+		mes "[엘리]";
+		mes "이 사람도 마람님이 있는 곳을 알려줄 것 같지 않네요.";
+		mes "또 다른 사람에게 물어봐요.";
+		changequest 11701,11702;
+		ep18_1_main = 14;
+		close2;
+		navigateto("rachel",69,117);
+		end;
+	}
+	if (ep18_1_main == 14) {
+		mes "[엘리]";
+		mes "이 사람도 마람님이 있는 곳을 알려줄 것 같지 않네요.";
+		mes "또 다른 사람에게 물어봐요.";
+		close2;
+		navigateto("rachel",69,117);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11701) == 1" );
+	end;
+}
+
+// Main Quest: Step 13.
+rachel,69,117,7	script	마을사람#ep18_라헬3	4_F_SHABBY,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 14) {
+		select( "마람을 봤는지 묻는다." );
+		mes "[마을사람]";
+		mes "마람님이라면 근처에서 약속이 있다고 하신 것 같은데.";
+		mes "이 앞을 지나갔으니 ^e5555e위로 올라가면^000000 만날 수 있을지도 몰라요.";
+		changequest 11702,11703;
+		ep18_1_main = 15;
+		close2;
+		navigateto("rachel",70,147);
+		end;
+	}
+	if (ep18_1_main == 15) {
+		mes "[마을사람]";
+		mes "마람님이라면 근처에서 약속이 있다고 하신 것 같은데.";
+		mes "이 앞을 지나갔으니 ^e5555e위로 올라가면^000000 만날 수 있을지도 몰라요.";
+		close2;
+		navigateto("rachel",70,147);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11702) == 1" );
+	end;
+}
+
+rachel,66,135,0	script	#플라워룸본점	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	// Picking Half Flowers quest
+	if (isbegin_quest(5936) == 2)
+		cloakoffnpc "메자이#E18_7", getcharid(0);
+	else if (isbegin_quest(5933) == 1 || isbegin_quest(5934) == 1 || isbegin_quest(5935) == 1 || isbegin_quest(5936) == 1) {
+		cloakoffnpc "메자이#E18_5", getcharid(0);
+		cloakoffnpc "하프 플라워#E18_6", getcharid(0);
+	}
+	// main quest
+	if (ep18_1_main == 16) {
+		cloakoffnpc "미리암#ep18_라헬", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 19 || ep18_1_main == 20) {
+		cloakoffnpc "미리암#ep18_상인2", getcharid(0);
+		cloakoffnpc "마람#ep18_상인2", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 21 || ep18_1_main == 22 || ep18_1_main == 26) {
+		cloakoffnpc "상인#ep18_라헬3", getcharid(0);
+		if (ep18_1_main == 22)
+			cloakoffnpc "미리암#ep18_상인3", getcharid(0);
+		end;
+	}
+	end;
+}
+rachel,112,136,0	duplicate(#플라워룸본점)	니르엔 대신관	HIDDEN_WARP_NPC,5,5
+rachel,115,125,0	duplicate(#플라워룸본점)	전직알림이#ra01	HIDDEN_WARP_NPC,3,3
+
+// Main Quest: Step 14. and 24.
+rachel,70,147,3	script	마람#ep18_라헬	4_EP18_MARAM,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 15) {
+		mes "[마람]";
+		mes "안녕하세요.";
+		mes "처음 뵙는 분인 것 같은데 라헬은 처음 이신가요?";
+		mes "여행자님께 프레이야님의 축복이 깃들길.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		select( "니르엔의 말을 전한다." );
+		mes "[마람]";
+		mes "아!";
+		mes "어머니가 맡기신 일이라면 당연히 제가 할 수 있는 최선을 다해 도와야죠!!!";
+		npctalk "맡겨만 주세요.", "마람#ep18_라헬", bc_self;
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[엘리]";
+		mes "하지만 우리는 여기 상황을 잘 모르는데 어떻게 사람들을 중재할 수 있을까요?";
+		cutin "ep172_beta.bmp",2;
+		next;
+		mes "[마람]";
+		mes "제 입장에서 본다면……";
+		mes "사람들을 중재하기 전에 원주민들과 우리 ^e5555e회색의 아이들^000000이 처한 상황에 대해서 알아주셨으면 해요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		select( "회색의 아이란?" );
+		mes "[마람]";
+		mes "라헬은……";
+		mes "지금은 아름다운 신전을 가진 도시지만 꽤 예전엔 ^e5555e원주민들이 살아가던 황무지^000000였데요.";
+		next;
+		mes "[마람]";
+		mes "그런데 어느 날 갑자기 찾아온 ^e5555e프레이야의 신도^000000들이 원주민들을 밀어내고 신전을 지어버린 거죠.";
+		next;
+		mes "[마람]";
+		mes "신전을 따라 이주해온 사람들과 어울려 살아가려고 하는 사람들도 있었지만 ^e5555e많은 사람들이 견디지못하고 이 곳을 떠나^000000거나…… ^e5555e좋지 못한 일을 당한 사람들^000000도 있었다고 하네요.";
+		next;
+		mes "[마람]";
+		mes "그런 일들이 그저 과거의 일이라면 좋을 텐데…… ^e5555e지금까지 계속^000000 되고있어요.";
+		mes "그 결과로 ^e5555e갈 곳을 잃은 어린아이들^000000이 생겼고 저도 그중 하나인 거죠.";
+		next;
+		mes "[마람]";
+		mes "그걸 안타깝게 생각한 어머니가 저를 입양하셨고 고위 신관이 되신 후부터는 그 아이들을 ^e5555e부유한 이주민들의 집에 입양^000000 시키는데 앞장서셨어요.";
+		next;
+		mes "[마람]";
+		mes "그걸 탐탁치 못하게 여기는 사람들이 우리들을 ^e5555e회색의 아이들^000000이라 부르며 ^e5555e차별^000000했지만 어머니는 우리들이 이주민과 원주민 사이를 이어주는 다리가 되길 바라셨어요.";
+		npctalk "대체 왜들 그러는지…", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14>어디에도 제대로 섞이지 못한 이질적인 존재</FONT> 밖에 되지 못했는데 말이에요.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "이런 이야기는 ^e5555e사람들에게 직접^000000 들어보는게 더 좋을 것 같긴 한데……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "제가 지금 ^e5555e친구와 중요한 약속^000000이 있어서 친구를 만나 사정을 설명할 시간을 주시겠어요?";
+		next;
+		mes "[마람]";
+		mes "만나기로 한 시간이……";
+		next;
+		mes "[???]";
+		mes "이미 5분 지났거든?";
+		cutin "ep18_miriam_03.png",2;
+		cloakoffnpc "미리암#ep18_라헬", getcharid(0);
+		npctalk "이미 5분 지났거든?", "미리암#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14>^e5555e미리암!^000000</FONT>";
+		mes "언제부터 있었던 거야?";
+		cutin "ep18_maram_01.png",2;
+		npctalk "깜짝이야!", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[미리암]";
+		mes "그보다……";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "아!";
+		mes "" + strcharinfo(0) + " 이쪽은 제 ^e5555e친구 미리암^000000이에요.";
+		mes "미리암 이분들은 " + strcharinfo(0) + "과…… 엘리님?";
+		mes "어머니의 부탁을 받고 날 찾아오셨데.";
+		cutin "ep18_maram_01.png",2;
+		changequest 11703,11704;
+		ep18_1_main = 16;
+		close2;
+		cutin "",255;
+		navigateto("rachel",62,144);
+		end;
+	}
+	if (ep18_1_main == 16) {
+		mes "[마람]";
+		mes "아!";
+		mes "" + strcharinfo(0) + " 이쪽은 제 ^e5555e친구 미리암^000000이에요.";
+		mes "미리암 이분들은 " + strcharinfo(0) + "과…… 엘리님?";
+		mes "어머니의 부탁을 받고 날 찾아오셨데.";
+		cutin "ep18_maram_01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("rachel",62,144);
+		end;
+	}
+	if (ep18_1_main == 25) {
+		mes "[마람]";
+		mes "아!";
+		mes "" + strcharinfo(0) + " 오셨군요.";
+		mes "조금 부족하지만 필요한 인원을 어느 정도 모았어요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "미리암이 돌아오면…… 앗!";
+		npctalk "앗!", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[타마린]";
+		mes "엇!";
+		mes "니르엔님의 아드님!";
+		cloakoffnpc "타마린#ep18_마람", getcharid(0);
+		cutin "ep18_tamarin_04.png",2;
+		npctalk "엇!", "타마린#ep18_마람", bc_self;
+		next;
+		mes "[마람]";
+		mes "아 저번에 어머니를 찾아오신 분들이군요.";
+		mes "타마린님, 마크님, 마기님 이셨죠?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 14>마람.</FONT>";
+		cloakoffnpc "미리암#ep18_라헬", getcharid(0);
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "미리암 돌아왔구나?";
+		mes "옷은 찾았어?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "대충 가져오긴 했는데……";
+		mes "이 정도면 충분할까?";
+		cutin "ep18_miriam_01.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14>하하하하하!</FONT>";
+		mes "그 옷 설마……";
+		mes "아주 좋아!";
+		cutin "ep18_maram_02.png",2;
+		npctalk "하하하하하!", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "그럼 필요한 인원들이 다 모였고 옷도 준비 됐으니 일에 대해서 설명 할게요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "우리는 ^e5555e미리암이 가져온 옷을 입고 이국의 상단으로 가장^000000해서 물건을 옮길 거에요.";
+		mes "목적지는 아직은 알려드릴 수 없으니 절 따라오시기만 하면 돼요.";
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + "은 아까 ^e5555e물건을 산 가게^000000에 가서 이제 곧 출발한다고 알려주세요.";
+		mes "다른 분들은 저와 함께 옷을 갈아 입고 마을 입구로 먼저 가있죠.";
+		changequest 11713,11714;
+		ep18_1_main = 26;
+		close2;
+		cloakoffnpc "상인#ep18_라헬3", getcharid(0);
+		cloakonnpc "미리암#ep18_라헬", getcharid(0);
+		cloakonnpc "타마린#ep18_마람", getcharid(0);
+		cutin "",255;
+		navigateto("rachel",137,85);
+		end;
+	}
+	if (ep18_1_main == 26) {
+		mes "[마람]";
+		mes "그럼 필요한 인원들이 다 모였고 옷도 준비 됐으니 일에 대해서 설명 할게요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "우리는 ^e5555e미리암이 가져온 옷을 입고 이국의 상단으로 가장^000000해서 물건을 옮길 거에요.";
+		mes "목적지는 아직은 알려드릴 수 없으니 절 따라오시기만 하면 돼요.";
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + "은 아까 ^e5555e물건을 산 가게^000000에 가서 이제 곧 출발한다고 알려주세요.";
+		mes "다른 분들은 저와 함께 옷을 갈아 입고 마을 입구로 먼저 가있죠.";
+		close2;
+		cloakoffnpc "상인#ep18_라헬3", getcharid(0);
+		cloakonnpc "미리암#ep18_라헬", getcharid(0);
+		cloakonnpc "타마린#ep18_마람", getcharid(0);
+		cutin "",255;
+		navigateto("rachel",137,85);
+		end;
+	}
+	mes "[마람]";
+	mes "미리암은 언제 오려나~";
+	cutin "ep18_maram_01.png",2;
+	close3;
+
+OnInit:
+	// note: on official the questinfo from this npc disappears when the quest 11703 is given by the previous npc, this is most likely a bug - or it's illogical
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11703) == 1" );
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11713) == 1" );
+	end;
+}
+
+// Main Quest: Step 15.
+rachel,62,144,5	script	미리암#ep18_라헬	4_EP18_MIRIAM,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 16) {
+		select( "인사를 한다." );
+		mes "[미리암]";
+		mes "안녕하십니까?";
+		mes "반갑습니다.";
+		mes "" + strcharinfo(0) + ".";
+		mes "마람의 친구인 미리암이라고 합니다.";
+		cutin "ep18_miriam_01.png",2;
+		next;
+		mes "[마람]";
+		mes "그래서 말인데 미리암.";
+		mes "어머니가 " + strcharinfo(0) + "을 도와주라고 하셔서 이번에 같이 못 갈 것 같거든.";
+		mes "너 혼자 갈 수 있겠어?";
+		cutin "ep18_maram_01.png",2;
+		npctalk "미안해.", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[미리암]";
+		mes "니르엔님이 시킨 일이라면 어쩔 수 없지.";
+		mes "하지만 물건이 없으니 출발도 못해.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "물건 없는데?", "미리암#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "뭐?";
+		mes "못 샀어?";
+		cutin "ep18_maram_03.png",2;
+		npctalk "뭐?", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[미리암]";
+		mes "자 여기 수표.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "돌려줄게.", "미리암#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "으아……";
+		mes "물건 사면서 뭔가 실수하거나 그런 건 아니지?";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "내가……?";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "날 뭘로 보고!", "미리암#ep18_라헬", bc_self;
+		next;
+		mes "[마람]";
+		mes "너 잘하다가 가끔 욱할 때가 있으니까……";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 16><B>아니거든?</FONT></B>";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "하아……";
+		mes "정말 큰일이네……";
+		cutin "ep18_maram_03.png",2;
+		npctalk "망했다!", "마람#ep18_라헬", bc_self;
+		next;
+		mes "[미리암]";
+		mes "저번에 그 상인들에게 살 수 있지 않아?";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "음……";
+		mes "그분들 이랑 거래하려면 ^e5555e내가 직접^000000 가야 할 텐데……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + " 죄송하지만 잠깐 물건 사는 것만 하고 출발해도 괜찮을까요?";
+		mes "주문만 하면 되니까 금방 끝날 거에요.";
+		npctalk "조금만 기다려 주세요.", "마람#ep18_라헬", bc_self;
+		changequest 11704,11705;
+		ep18_1_main = 17;
+		close2;
+		cutin "",255;
+		navigateto("rachel",87,122);
+		cloakonnpc "미리암#ep18_라헬", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11704) == 1" );
+	end;
+}
+
+rachel,68,146,5	duplicate(dummy_cloaked_npc)	타마린#ep18_마람	4_EP18_TAMARIN
+
+// Main Quest: Step 16.
+rachel,87,122,7	script	상인#ep18_라헬1	4_F_DST_GRAND,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 17) {
+		mes "[마람]";
+		mes "안녕하세요.";
+		mes "스린 사장님.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 스린]";
+		mes "<FONT SIZE = 16><B>뭐 하러 왔어!</FONT></B>";
+		mes "<FONT SIZE = 14><B>네 녀석들에게 팔 물건은 없으니 돌아가!</FONT></B>";
+		next;
+		mes "[마람]";
+		mes "그렇게 말하지 마시고.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 스린]";
+		mes "<FONT SIZE = 16><B>니르엔님을 봐서 강제로 쫓아내지 않는 줄 알아!</FONT></B>";
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 14>그만해.</FONT>";
+		mes "돌아가자.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "<B>죄송했습니다.</B>";
+		mes "스린 사장님.";
+		next;
+		mes "[마람]";
+		mes "하지만 미리암……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 14><B>가자고!</FONT></B>";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "자신만만하게 말했는데 처음부터 부끄러운 꼴을 보이고 말았네요.";
+		mes "그럼 ^e5555e다른 가게^000000로 가볼까요?";
+		cutin "ep18_maram_02.png",2;
+		changequest 11705,11706;
+		ep18_1_main = 18;
+		close2;
+		cutin "",255;
+		navigateto("rachel",107,102);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11705) == 1" );
+	end;
+}
+
+// Main Quest: Step 17.
+rachel,107,102,7	script	상인#ep18_라헬2	4_M_DESERT,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 18) {
+		mes "[마람]";
+		mes "안녕하세요.";
+		mes "산나트아저씨.";
+		mes "아주머니도 잘 계시죠?";
+		cutin "ep18_maram_02.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "아……";
+		mes "그래……";
+		mes "무슨 일이냐?";
+		mes "마람.";
+		next;
+		mes "[상인 산나트]";
+		mes "…";
+		next;
+		mes "[마람]";
+		mes "여기 적혀있는 물건들을 좀 사려고 하는데요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "아…… 음……";
+		mes "미안하지만 지금 재고가 많지 않아서 말이다.";
+		next;
+		mes "[마람]";
+		mes "그럼 목록을 한번 보시고 재고가 있는 물건들만이라도 괜찮아요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "음……";
+		mes "미안하지만 여기 있는 물건들은 재고가 부족한 것들이라서……";
+		next;
+		mes "[마람]";
+		mes "그럼 좀 부족해도 괜찮아요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "미안하구나……";
+		next;
+		mes "[마람]";
+		mes "그럼 빵이랑 고기는……";
+		cutin "ep18_maram_03.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "아……";
+		mes "<FONT SIZE = 10>그것도 이미 예약이……</FONT>";
+		next;
+		mes "[마람]";
+		mes "…";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[마람]";
+		mes "네…… 죄송해요.";
+		mes "그럼 다음에……";
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "<FONT SIZE = 10>그래……</FONT>";
+		changequest 11706,11707;
+		ep18_1_main = 19;
+		close2;
+		cloakoffnpc "미리암#ep18_상인2", getcharid(0);
+		cloakoffnpc "마람#ep18_상인2", getcharid(0);
+		navigateto("rachel",117,104);
+		end;
+	}
+	if (ep18_1_main == 19 || ep18_1_main == 20) {
+		mes "[상인 산나트]";
+		mes "미안하구나……";
+		next;
+		mes "[마람]";
+		mes "그럼 빵이랑 고기는……";
+		cutin "ep18_maram_03.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "아……";
+		mes "<FONT SIZE = 10>그것도 이미 예약이……</FONT>";
+		next;
+		mes "[마람]";
+		mes "…";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[마람]";
+		mes "네…… 죄송해요.";
+		mes "그럼 다음에……";
+		next;
+		cutin "",255;
+		mes "[상인 산나트]";
+		mes "<FONT SIZE = 10>그래……</FONT>";
+		close2;
+		cloakoffnpc "미리암#ep18_상인2", getcharid(0);
+		cloakoffnpc "마람#ep18_상인2", getcharid(0);
+		navigateto("rachel",117,104);
+		end;
+	}
+	if (ep18_1_main == 21) {
+		cloakoffnpc "상인#ep18_라헬3", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 22) {
+		cloakoffnpc "미리암#ep18_상인3", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11706) == 1" );
+	end;
+}
+
+// Main Quest: Step 18.
+rachel,117,104,5	script	미리암#ep18_상인2	4_EP18_MIRIAM,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 19) {
+		mes "[미리암]";
+		mes "하아아아……";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "이게 뭐야!", "미리암#ep18_상인2", bc_self;
+		next;
+		mes "[마람]";
+		mes "…";
+		cutin "ep18_maram_03.png",2;
+		npctalk "진정해 미리암.", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[미리암]";
+		mes "부끄러운 행동을 고백하기 이전에 앞서 사과 드리겠습니다.";
+		mes "죄송합니다.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "???";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "예의에 어긋난 것은 알지만 사실 아까 " + strcharinfo(0) + "이 마람과 나누던 대화를 조금 엿듣고 말았습니다.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "니르엔님과 " + strcharinfo(0) + "이 지금 ^e5555e라헬 주민들간의 마찰^000000이 어느 정도라고 생각하고 계신지는 알 수 없습니다만 지금 보신 것으로 확실해지셨을 거라 생각합니다.";
+		next;
+		mes "[미리암]";
+		mes "^e5555e회색의 아이들^000000에게 팔 물건따위 없다고 말하고 있다는 걸……";
+		next;
+		mes "[마람]";
+		mes "미리암 그렇게까지는……";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 14>마람 이게 현실이야.</FONT>";
+		mes "<FONT SIZE = 14>너도 잘 알고 있잖아.</FONT>";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "이게 현실이야.", "미리암#ep18_상인2", bc_self;
+		next;
+		mes "[마람]";
+		mes "미리암……";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "…";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 10>그래 네 말이 맞아.</FONT>";
+		mes "스린 사장님도 산나트 아저씨도 ^e5555e얼마전까지는 물건을 팔아주던 분들^000000이었지만……";
+		mes "이젠 그분들 마저 물건을 팔지 않으려고 하시니까.";
+		cutin "ep18_maram_01.png",2;
+		npctalk "네 말이 맞아.", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[미리암]";
+		mes "…";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>그래!!!</FONT></B>";
+		mes "<FONT SIZE = 16><B>맞아!!!</FONT></B>";
+		mes "<FONT SIZE = 14><B>차라리 인정해버리면 속이 편하겠어!!!</FONT></B>";
+		cutin "ep18_maram_02.png",2;
+		npctalk "에라!", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[마람]";
+		mes "어차피 이렇게 된 거 계속 끙끙대는 것 보다는 물건을 어떻게 살 수 있을지나 생각하자!";
+		changequest 11707,11708;
+		ep18_1_main = 20;
+		close2;
+		cutin "",255;
+		navigateto("rachel",119,103);
+		end;
+	}
+	if (ep18_1_main == 20) {
+		mes "[미리암]";
+		mes "…";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>그래!!!</FONT></B>";
+		mes "<FONT SIZE = 16><B>맞아!!!</FONT></B>";
+		mes "<FONT SIZE = 14><B>차라리 인정해버리면 속이 편하겠어!!!</FONT></B>";
+		cutin "ep18_maram_02.png",2;
+		npctalk "에라!", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[마람]";
+		mes "어차피 이렇게 된 거 계속 끙끙대는 것 보다는 물건을 어떻게 살 수 있을지나 생각하자!";
+		close2;
+		cutin "",255;
+		navigateto("rachel",119,103);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11707) == 1" );
+	end;
+}
+
+// Main Quest: Step 19.
+rachel,119,103,3	script	마람#ep18_상인2	4_EP18_MARAM,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 20) {
+		mes "[마람]";
+		mes "그나저나 정말 큰일이네.";
+		mes "빨리 물건을 어떻게든 구하지 않으면.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "고생은 좀 하겠지만 다른 도시에 가서 사는게 나으려나~";
+		mes "하지만 라헬 상황도 그렇고 <FONT SIZE = 10>어머니가 시키신 일도 있는데</FONT> 다른 도시까지 가긴 곤란한데……";
+		next;
+		mes "[마람]";
+		mes "이럴 때 ^e5555e타국의 무역상단^000000이라도 지나가주면 좋을 텐데.";
+		mes "<FONT SIZE = 10>타국의……</FONT>";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>!!!</FONT></B>";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>앗!!!!</FONT></B>";
+		mes "<FONT SIZE = 16><B>그거다!!!!</FONT></B>";
+		mes "<FONT SIZE = 14><B>" + strcharinfo(0) + "!!!!</FONT></B>";
+		npctalk "앗!!!! 그거다!!!!", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14>부탁이 있어요!</FONT>";
+		mes "^e5555e어머니께는 비밀로 제가 물건 사는 걸 도와^000000주시면 안될까요?";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "^e5555e외부인^000000인 " + strcharinfo(0) + "과 함께라면 물건을 살 수 있을지도 몰라요!";
+		next;
+		select( "물건을 사야하는 이유" );
+		mes "[마람]";
+		mes "아~";
+		mes "그건……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "언제까지 숨길 생각이야.";
+		mes "이유도 모른 채 그런 부탁을 들으면 거절하는게 당연하잖아.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "그래.";
+		mes "알았어.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + ",";
+		mes "사실 미리암과 저는 ^e5555e다른 지역으로 떠나 힘들게 살고 있는 원주민들을 돕고^000000 있어요.";
+		mes "^e5555e살아가는데 필요한 물자를 조달^000000하는 것도 그 일중에 하나예요.";
+		next;
+		mes "[마람]";
+		mes "^e5555e차별과 박해^000000라고 말하지만 사실 ^e5555e강경파나 광신도들을 피해 도망^000000친 거나 다름 없어요.";
+		mes "그런 ^e5555e도망자^000000들이 살아남을 수 있는 방법은 ^e5555e숨는 것^000000뿐이었죠.";
+		next;
+		mes "[마람]";
+		mes "숨어서 살아간다는 게…… 우리의 도움 없이도 충분히……<FONT SIZE = 10>아니 충분하지 않더라도</FONT> 어떻게든 살아갈 수 있는 상태라면 좋았겠지만 그렇지 못하거든요.";
+		cutin "ep18_maram_03.png",2;
+		npctalk "충분하지 않더라도 어떻게든 살아갈 수 있는 상태라면 좋았겠지만…", "마람#ep18_상인2", bc_self;
+		next;
+		mes "[미리암]";
+		mes "저도 부탁드립니다.";
+		mes "<FONT SIZE = 14>굶주림에 지친 아이들이 저와 같은 길을 걷게 되는 것을……</FONT> <FONT SIZE = 10>저와 같은 고통을</FONT> 겪게 되는 것만은 막고 싶습니다.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "그 아이들이 저와 같은 고통을 겪게 되는 것만은 막고 싶습니다.", "미리암#ep18_상인2", bc_self;
+		next;
+		switch( select( "돕는다.", "돕지 않는다.", "니르엔에게 이른다." ) ) {
+		case 1:
+			mes "[마람]";
+			mes "<FONT SIZE = 14><B>감사합니다!</FONT></B>";
+			mes "<FONT SIZE = 14><B>그럼 지금 당장 가보죠!</FONT></B>";
+			mes "아까 갔던 상점에 다시 가는 건 좀 이상하니까 ^e5555e광장 건너편에 있는 상점^000000이 좋겠어요.";
+			npctalk "감사합니다!", "마람#ep18_상인2", bc_self;
+			npctalk "감사합니다!", "미리암#ep18_상인2", bc_self;
+			cutin "ep18_maram_02.png",2;
+			changequest 11708,11709;
+			ep18_1_main = 21;
+			cloakoffnpc "상인#ep18_라헬3", getcharid(0);
+			close2;
+			cutin "",255;
+			cloakonnpc "미리암#ep18_상인2", getcharid(0);
+			cloakonnpc "마람#ep18_상인2", getcharid(0);
+			navigateto("rachel",137,85);
+			end;
+		case 2:
+		case 3:
+			close3;
+		}
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11708) == 1" );
+	end;
+}
+
+// Main Quest: Step 20. and 25.
+rachel,137,85,5	script	상인#ep18_라헬3	4_M_MIDDLE1,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 21) {
+		mes "[마람]";
+		mes "안녕하세요~";
+		mes "렌시아 사장님~";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 렌시아]";
+		mes "뭐야.";
+		mes "너에겐 안……";
+		next;
+		mes "[마람]";
+		mes "제가 아니라 <FONT SIZE = 14><B>여기 있는 이 상인님</FONT></B>이 사실 거에요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 렌시아]";
+		mes "흐음……";
+		mes "<FONT SIZE = 10>상인으로 보이진 않는데?</FONT>";
+		next;
+		mes "[마람]";
+		mes "이분은 마롤에서 ^e5555e작은 상단을 운영하고 계신 " + strcharinfo(0) + "^000000 이에요.";
+		mes "이곳저곳을 돌아다니면서 무역을 하고 계시다 보니 위험한 지역도 자주 지나게 되니까 무장을 하고 계신 거에요~";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 렌시아]";
+		mes "마롤이라니 들어본 것도 같고……";
+		next;
+		mes "[마람]";
+		mes "길에서 <FONT SIZE = 14>몬스터</FONT>라도 만나면 큰일이잖아요~";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 렌시아]";
+		mes "<FONT SIZE = 10>그건 그렇죠.</FONT>";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>자!</FONT></B>";
+		mes "<FONT SIZE = 14><B>여기 물품 목록이에요!</FONT></B>";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[상인 렌시아]";
+		mes "이 많은 양을 혼자 와서 구매하신다고요?";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 16><B>당-연-히-</FONT></B> 다른 상단분들은 다른 곳에서 대기중이시죠.";
+		mes "<FONT SIZE = 14><B>그렇죠?</FONT></B>";
+		cutin "ep18_maram_02.png",2;
+		next;
+		cutin "",255;
+		switch( select( "술집에 있다고 한다.", "여관에 있다고 한다.", "신전에 있다고 한다." ) ) {
+		case 1:
+			mes "[상인 렌시아]";
+			mes "흐음 요즘 외부인들이 간혹 보인단 얘길 듣긴 했지만……";
+			next;
+			mes "[상인 렌시아]";
+			mes "아무튼 짐차를 따로 가지고 오지 않으신 것 같으니 ^e5555e이 마을을 떠날 시간을 알려주시면 마을 입구 쪽으로 배달^000000해 드릴게요.";
+			next;
+			mes "[마람]";
+			mes "그렇게까지 안해 주셔도……";
+			cutin "ep18_maram_01.png",2;
+			next;
+			cutin "",255;
+			mes "[상인 렌시아]";
+			mes "응?";
+			mes "왜?";
+			next;
+			mes "[마람]";
+			mes "아직 출발할 시간도 정해지지 않았고……";
+			cutin "ep18_maram_01.png",2;
+			next;
+			cutin "",255;
+			mes "[상인 렌시아]";
+			mes "미리 준비해 둘 테니까 시간이 정해지면 알려주세요.";
+			mes "이렇게나 많이 사 주시는데 이정도 <FONT SIZE = 14><B>서비스</FONT></B>는 해야지~!";
+			next;
+			mes "[마람]";
+			mes "…";
+			cutin "ep18_maram_01.png",2;
+			next;
+			mes "[미리암]";
+			mes "배달까지 해주신다니 감사합니다.";
+			mes "출발할 시간이 결정되면 알려드릴게요.";
+			mes "그럼 출발할 때 뵐게요.";
+			cutin "ep18_miriam_03.png",2;
+			next;
+			cutin "",255;
+			mes "[상인 렌시아]";
+			mes "구매해 주셔서 감사합니다.";
+			mes "" + strcharinfo(0) + ".";
+			next;
+			mes "[미리암]";
+			mes "우린 잠깐 ^e5555e이쪽에서 얘기 좀^000000 하죠.";
+			cutin "ep18_miriam_03.png",2;
+			changequest 11709,11710;
+			ep18_1_main = 22;
+			close2;
+			cutin "",255;
+			cloakoffnpc "미리암#ep18_상인3", getcharid(0);
+			navigateto("rachel",120,79);
+			end;
+		case 2:
+			close3;
+		case 3:
+			close3;
+		}
+	}
+	if (ep18_1_main == 22) {
+		mes "[미리암]";
+		mes "우린 잠깐 ^e5555e이쪽에서 얘기 좀^000000 하죠.";
+		cutin "ep18_miriam_03.png",2;
+		close2;
+		cutin "",255;
+		cloakoffnpc "미리암#ep18_상인3", getcharid(0);
+		navigateto("rachel",120,79);
+		end;
+	}
+	if (ep18_1_main == 26 || ep18_1_main == 27) {
+		mes "[상인 렌시아]";
+		mes "아!";
+		mes "아까 그 상인님 이군요.";
+		mes "뭐 잊은 거라도 있나요?";
+		next;
+		select( "출발 준비가 끝났다." );
+		mes "[상인 렌시아]";
+		mes "그래요?";
+		mes "그럼 직원에게 연락해 둘 테니 ^e5555e마을 서쪽 입구^000000에서 물건을 받으시면 돼요.";
+		if (ep18_1_main == 26) {
+			changequest 11714,11715;
+			ep18_1_main = 27;
+		}
+		close2;
+		navigateto("rachel",41,132);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11709) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11714) == 1" );
+	end;
+}
+
+// Main Quest: Step 21.
+rachel,120,79,5	script	미리암#ep18_상인3	4_EP18_MIRIAM,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 22) {
+		mes "[미리암]";
+		mes "너랑 대화를 하면서도 네 쪽은 쳐다보지도 않는군……";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "뭐……";
+		mes "어쩔 수 없지.";
+		mes "" + strcharinfo(0) + " 덕분에 물건을 무사히 산 것만으로도 다행이라고 생각하자.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "완전히 우리 손에 넘어오기 전까지는 방심해선 안돼.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "하긴 렌시아씨도 우리가 같이 있어서 그런지 조금 의심하고 있는 것 같아.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "물건을 팔고 싶지 않은 사람.";
+		mes "그리고 그 사람과 함께 온 전투 복장의 상인.";
+		mes "보이지 않는 다른 상단원들.";
+		mes "물건을 배달해 준다고 해도 주저하는 모습……";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 14>수상한 게 당연하잖아?</FONT>";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14><B>하하?!</FONT></B>";
+		mes "<FONT SIZE = 14>뭐 실제로 전부 거짓말이니까~</FONT>";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "<FONT SIZE = 16><B>웃을 때냐!!!!</FONT></B>";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "미안 미안~";
+		mes "아무튼 서비스라고는 해도 출발 직전에 배달해 준다고 하는 것 보면 ^e5555e상단을 직접 확인^000000이라도 하고 싶은 것 같은데.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "물건을 무사히 받으려면 출발할 때 ^e5555e진짜 상인처럼 보일 수 있게 꾸며^000000 두는 게 좋겠어요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "우리 ^e5555e셋만 가서는 그 자리에서 바로 물건을 빼앗겨^000000 버리는 미래 밖에 보이지 않거든요.";
+		next;
+		mes "[마람]";
+		mes "그럼 일단 ^e5555e상단으로 위장할 사람들^000000이 필요할 텐데……";
+		next;
+		mes "[마람]";
+		mes "이 일이 다른 상인들 귀에 들어가는 것도 위험하니.";
+		mes "전 ^e5555e외부에서 온 모험가들을 호위용병으로 고용^000000해 볼게요.";
+		mes "미리암, 넌 상단이 입을만한 옷을 좀 찾아와 줄래?";
+		next;
+		mes "[미리암]";
+		mes "알았어.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + "은……";
+		mes "<FONT SIZE = 14>음……</FONT>";
+		mes "<FONT SIZE = 16>으음……</FONT>";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "여기 앞의 가게에서 잠깐 쉬고 계시겠어요?";
+		mes "^e5555e음식^000000을 주문해 둘 테니 식사를 마치시면 ^e5555e처음 만난 나무 아래^000000로 와주세요.";
+		next;
+		mes "[마람]";
+		mes "혹시 ^e5555e아는 분이라도 만나면 용병이야기도 살짝 권유^000000해주시면 감사하구요~";
+		next;
+		mes "[엘리]";
+		mes "뭔가 우리가 할 일이 계속 바뀌고 있네요.";
+		cutin "ep172_beta.bmp",2;
+		changequest 11710,11711;
+		ep18_1_main = 23;
+		close2;
+		cutin "",255;
+		cloakonnpc "미리암#ep18_상인3", getcharid(0);
+		navigateto("rachel",108,73);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11710) == 1" );
+	end;
+}
+
+// Main Quest: Step 22.
+rachel,108,74,3	script	만두#ep18_라헬	4_POINT_RED,{
+	if (getequipid(EQI_HEAD_TOP) != 400127)	// Ep18_Mini_Elly
+		end;
+	if (ep18_1_main == 23) {
+		select( "마람이 주문해둔 음식을 먹는다." );
+		mes "[타마린]";
+		mes "<FONT SIZE = 16><B>앗?</FONT></B>";
+		mes "" + strcharinfo(0) + "!!";
+		mes "안녕하세요!";
+		cloakoffnpc "타마린#ep18_라헬만두", getcharid(0);
+		cutin "ep18_tamarin_04.png",2;
+		npctalk "반가워요!", "타마린#ep18_라헬만두", bc_self;
+		next;
+		mes "[타마린]";
+		mes "이런데서 만나다니 우연이네요!";
+		cutin "ep18_tamarin_02.png",2;
+		npctalk "또 만났네요!", "타마린#ep18_라헬만두", bc_self;
+		next;
+		mes "[타마린]";
+		mes "여기 정말 맛있죠?";
+		mes "예전에 라헬에 왔을 때 먹어보고 너무 맛있어서 올 때마다 이 가게는 꼭 들른다니까요.";
+		next;
+		mes "[타마린]";
+		mes "<FONT SIZE = 14>사장님 여기 만두 하나 주세요!!!</FONT>";
+		cutin "ep18_tamarin_01.png",2;
+		next;
+		select( "무엇을 하고 있는지?" );
+		mes "[타마린]";
+		mes "만두를 먹고 있죠?";
+		mes "<FONT SIZE = 14><B>아!</FONT></B>";
+		mes "<FONT SIZE = 14>라헬에 온 거요?</FONT>";
+		next;
+		mes "[타마린]";
+		mes "뭐…… 자세히는 말씀드릴 수 없지만, ^e5555e부탁받은 일이 있어서 니르엔님을 만났더니 급하게 경비대에 인력이 필요하게 됐다고 듀랑 알프씨를 데려가^000000셨거든요.";
+		next;
+		mes "[타마린]";
+		mes "그래서 두 사람도 기다릴 겸 라헬에서 잠깐 쉬고 있는 중이에요.";
+		mes "너무 오래기다려야 할 것 같으면 먼저 다음지역으로 넘어가 있을까 하고 생각하고 있긴 하지만……";
+		npctalk "알아서 따라오겠죠.", "타마린#ep18_라헬만두", bc_self;
+		next;
+		select( "상단 변장을 의뢰한다." );
+		next;
+		mes "[타마린]";
+		mes "<FONT SIZE = 14><B>오!</FONT></B>";
+		mes "그거 좋은데요?";
+		mes "그럼 ^e5555e마크씨랑 마기씨^000000도 찾아서 같이 가요.";
+		mes "아마 ^e5555e광장 근처에서 쇼핑^000000하고 있을 거에요.";
+		cutin "ep18_tamarin_02.png",2;
+		changequest 11711,11712;
+		ep18_1_main = 24;
+		close2;
+		cutin "",255;
+		cloakonnpc "타마린#ep18_라헬만두", getcharid(0);
+		navigateto("rachel",122,120);
+		end;
+	}
+	if (ep18_1_main == 24) {
+		select( "마람이 주문해둔 음식을 먹는다." );
+		mes "[타마린]";
+		mes "만두를 다 먹으면 ^e5555e마크씨랑 마기씨^000000도 찾아서 같이 가요.";
+		mes "아마 ^e5555e광장 근처에서 쇼핑^000000하고 있을 거에요.";
+		cloakoffnpc "타마린#ep18_라헬만두", getcharid(0);
+		cutin "ep18_tamarin_02.png",2;
+		// erasequest 11711;	// commented as it shouldn't happen
+		cutin "",255;
+		cloakonnpc "타마린#ep18_라헬만두", getcharid(0);
+		navigateto("rachel",122,120);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11711) == 1" );
+	end;
+}
+
+rachel,105,73,5	duplicate(dummy_cloaked_npc)	타마린#ep18_라헬만두	4_EP18_TAMARIN
+
+// Main Quest: Step 23.
+rachel,122,120,3	script	마크#ep18_라헬	4_EP18_MARK,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 24) {
+		mes "[마크]";
+		mes "안녕하세요.";
+		mes "" + strcharinfo(0) + ".";
+		cutin "ep18_mark_01.png",2;
+		next;
+		mes "[마기]";
+		mes "아……안녕하세요……";
+		cutin "4job_maggi_04.PNG",2;
+		next;
+		mes "[타마린]";
+		mes "마크씨, 마기씨 볼일은 끝났어요?";
+		mes "" + strcharinfo(0) + "이 일을 소개해 주셨거든요?";
+		mes "지금부터 의뢰인을 만나러 갈 건데 같이 가요.";
+		cutin "ep18_tamarin_01.png",2;
+		next;
+		mes "[마크]";
+		mes "아……";
+		mes "알프씨가 부탁한 책은 찾았어요.";
+		mes "듀가 부탁한 과자는 못 찾았지만.";
+		cutin "ep18_mark_02.png",2;
+		next;
+		mes "[타마린]";
+		mes "그럼 출발해도 되겠네요.";
+		mes "약속장소로 가요.";
+		cutin "ep18_tamarin_02.png",2;
+		if (ep18_1_main == 24) {
+			changequest 11712,11713;
+			ep18_1_main = 25;
+		}
+		close2;
+		cutin "",255;
+		navigateto("rachel",70,147);
+		end;
+	}
+	if (ep18_1_main == 25) {
+		mes "[마크]";
+		mes "아……";
+		mes "알프씨가 부탁한 책은 찾았어요.";
+		mes "듀가 부탁한 과자는 못 찾았지만.";
+		cutin "ep18_mark_02.png",2;
+		next;
+		mes "[타마린]";
+		mes "그럼 출발해도 되겠네요.";
+		mes "약속장소로 가요.";
+		cutin "ep18_tamarin_02.png",2;
+		close2;
+		cutin "",255;
+		navigateto("rachel",70,147);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11712) == 1" );
+	end;
+}
+
+rachel,121,120,5	script	마기#ep18_라헬	4_4JOB_MAGGI,{
+	mes "[마기]";
+	mes "아……안녕하세요……";
+	cutin "4job_maggi_04.PNG",2;
+	close3;
+}
+
+// Main Quest: Step 26.
+rachel,41,132,3	script	상자#ep18_조달품4	4_WOODBOX,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 27) {
+		mes "[상인 렌시아]";
+		mes "그럼 주문한 물건이 맞는지 확인해 보시고……";
+		next;
+		select( "수표를 건네준다." );
+		mes "[상인 렌시아]";
+		mes "아휴~";
+		mes "금액도 딱 맞네요!";
+		mes "감사합니다!";
+		mes "다음에 또 이용해 주세요~!";
+		next;
+		mes "[마람]";
+		mes "" + strcharinfo(0) + " 출발하기 전에 ^e5555e문 밖에서 길을 한번 확인^000000하죠.";
+		cutin "ep18_maram_01.png",2;
+		changequest 11715,11716;
+		ep18_1_main = 28;
+		close2;
+		cutin "",255;
+		navigateto("ra_fild11",354,235);
+		end;
+	}
+	if (ep18_1_main == 28) {
+		mes "[마람]";
+		mes "" + strcharinfo(0) + " 출발하기 전에 ^e5555e문 밖에서 길을 한번 확인^000000하죠.";
+		cutin "ep18_maram_01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("ra_fild11",354,235);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11715) == 1" );
+	end;
+}
+
+rachel,42,133,3	duplicate(dummy_npc)	상자#ep18_조달품1	4_WOODBOX
+rachel,40,133,3	duplicate(dummy_npc)	상자#ep18_조달품2	4_WOODBOX
+rachel,39,132,3	duplicate(dummy_npc)	상자#ep18_조달품3	4_WOODBOX
+
+// Main Quest: Step 27.
+ra_fild11,354,235,3	script	상인#ep18_라헬	4_EP18_MERCHANT,{
+	if (ep18_1_main == 28 || ep18_1_main == 29) {
+		mes "[변장한 마람]";
+		mes "" + strcharinfo(0) + " 지금부터 미리암, 타마린님 일행과 함께 ^e5555e서쪽에 있는 오즈협곡^000000으로 이동해 주세요.";
+		cutin "ep18_merchant.png",2;
+		next;
+		mes "[변장한 마람]";
+		mes "일이 일이다 보니 이 사람들을 전부 데려갈 순 없을 것 같아서 돌려보내고 뒤따라 갈게요.";
+		next;
+		mes "[변장한 마람]";
+		mes "우리 ^e5555e목적지를 들키지 않으려면^000000 다른 장소로 이동해서 사람들을 돌려보내는 게 좋을 것 같아요.";
+		if (ep18_1_main == 28) {
+			changequest 11716,11717;
+			ep18_1_main = 29;
+		}
+		close2;
+		cutin "",255;
+		navigateto("ra_fild10",179,176);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11716) == 1" );
+	end;
+}
+
+// Main Quest: Step 28. (entrance npc is a part of the instance Maze of Oz)
+// Main Quest: Step 29. (1@oz solo instance)
+
+// Main Quest: Step 30.
+gw_fild01,276,339,3	duplicate(dummy_cloaked_npc)	마람#ep18_오즈출구	4_EP18_MARAM
+
+gw_fild01,273,339,3	script	#ep18_오즈 출구앞	4_POINT_RED,1,1,{
+// trigger OnClick + OnTouch, so OnTouch commented
+	// end;
+// OnTouch:
+	if (ep18_1_main == 31 || ep18_1_main == 32) {
+		mes "[마람]";
+		mes "<FONT SIZE = 14><B>휴!</FONT></B>";
+		mes "드디어 나왔다!";
+		cloakoffnpc "마람#ep18_오즈출구", getcharid(0);
+		cutin "ep18_maram_01.png",2;
+		npctalk "너무 지쳤어…", "마람#ep18_오즈출구", bc_self;
+		next;
+		mes "[마람]";
+		mes "여기서 ^e5555e서쪽^000000으로 조금 더 가면 ^e5555e마을 입구^000000가 있어요.";
+		next;
+		select( "마을?" );
+		mes "[마람]";
+		mes "마을이라기 보다는 라헬에서 도망친 사람들이 숨어살고 있는 ^e5555e은신처^000000라고 할 수 있죠.";
+		next;
+		mes "[마람]";
+		mes "제가 말하는 것 보다 직접 보시는 게 좋을 거예요.";
+		if (ep18_1_main == 31) {
+			completequest 11720;
+			setquest 11721;
+			ep18_1_main = 32;
+		}
+		close2;
+		cutin "",255;
+		cloakonnpc "마람#ep18_오즈출구", getcharid(0);
+		navigateto("gw_fild01",35,102);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11720) == 1" );
+	end;
+}
+
+// Main Quest: Step 31. + 33.
+gw_fild01,39,100,5	duplicate(dummy_npc)	이국의 상인#ep18_gw2	4_EP18_MERCHANT
+gw_fild01,34,96,3	duplicate(dummy_npc)	이국의 상인#ep18_gw3	4_EP18_MERCHANT
+
+gw_fild01,35,102,5	script	마람#ep18_gw	4_EP18_MARAM,{
+	if (ep18_1_main == 32) {
+		mes "[캠퍼]";
+		mes "흐아아아~~~";
+		mes "가끔 이렇게 캠핑하는 것도 나쁘지 않은걸~~~";
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14><B>나야! 나!</FONT></B>";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[캠퍼]";
+		mes "나라니?";
+		mes "우리 아는 사이던가?";
+		next;
+		mes "[마람]";
+		mes "무슨 소릴 하는 거야?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "^e5555e외부인^000000을 데려오면 이런 반응인 건가?";
+		cloakoffnpc "미리암#ep18_gw", getcharid(0);
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "아……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "그럼 난 먼저 가볼 게.";
+		cloakoffnpc "이므릴#ep18_gw", getcharid(0);
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14><B>앗!! 이므릴 잠깐만!!!!</FONT></B>";
+		cutin "ep18_maram_01.png",2;
+		changequest 11721,11722;
+		ep18_1_main = 33;
+		close3;
+	}
+	if (ep18_1_main == 33) {
+		mes "[마람]";
+		mes "아……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "그럼 난 먼저 가볼 게.";
+		cloakoffnpc "이므릴#ep18_gw", getcharid(0);
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[마람]";
+		mes "<FONT SIZE = 14><B>앗!! 이므릴 잠깐만!!!!</FONT></B>";
+		cutin "ep18_maram_01.png",2;
+		close3;
+	}
+	if (ep18_1_main == 34) {
+		mes "[마람]";
+		mes "수아드가 늦네……";
+		mes "정말 안 오면 어떡하지?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "라헬로 돌아가야지.";
+		mes "이미 신뢰가 깨져버린 거라면 ^e5555e다시는 마을로 들어가지 못할지도^000000 몰라.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[마람]";
+		mes "하지만 이대로라면 마을 사람들은 계속 힘들어지기만 할거라고.";
+		mes "필요하다면 외부인의 도움이라도……";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[미리암]";
+		mes "넌 이해 못해.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "넌 우리와 같으면서도 다르니까.", "미리암#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "…";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[마람]";
+		mes "나도…… 이해하고 싶어…… 너희들을……";
+		npctalk "미안해…", "마람#ep18_gw", bc_self;
+		next;
+		mes "[미리암]";
+		mes "…";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "그런 말을 하다니 나야말로 미안해.", "미리암#ep18_gw", bc_self;
+		next;
+		mes "[수아드]";
+		mes "그런 놈이 아무런 상의도 없이 외부인을 데리고 오다니.";
+		mes "그간의 정을 생각해서 마지막 변명이라도 들어주러 온걸 감사하게 생각해라.";
+		cutin "ep18_suad_03.png",2;
+		cloakoffnpc "수아드#ep18_gw", getcharid(0);
+		next;
+		mes "[마람]";
+		mes "수아드!";
+		mes "말도 없이 외부인을 마을 입구까지 데려온 건 내가 경솔했어!";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "하지만 이분들은 어머니가 중요한 일을 맡길 정도로 믿을 만한 분들이야!";
+		mes "네가 걱정하는 일은 일어나지 않을 거야!";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[수아드]";
+		mes "니르엔님이 일을 맡길 정도의 신용인가?";
+		mes "니르엔님에게 신용을 받고 있다는 것이 무슨 상관이지?";
+		cutin "ep18_suad_03.png",2;
+		npctalk "아무 의미 없군!", "수아드#ep18_gw", bc_self;
+		next;
+		mes "[수아드]";
+		mes "<FONT SIZE = 14>니르엔님은 네가 이곳으로 물자를 전달하고 있다는 것도 모르실 텐데.</FONT>";
+		next;
+		mes "[마람]";
+		mes "그건……";
+		cutin "ep18_maram_01.png",2;
+		npctalk "그건 그렇지만…", "마람#ep18_gw", bc_self;
+		next;
+		mes "[미리암]";
+		mes "수아드 비꼬는 건 그만둬.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "말을 해도 꼭!", "미리암#ep18_gw", bc_self;
+		next;
+		mes "[수아드]";
+		mes "비꼬는게 아냐.";
+		mes "사실을 말했을 뿐…";
+		cutin "ep18_suad_03.png",2;
+		next;
+		mes "[미리암]";
+		mes "사실이라면 ^e5555e라헬에선 더이상 우리에게 물건을 팔아주는 사람이 없다는 것과 이대로는 모두 함께 굶어 죽어버릴 거^000000라는 거지.";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "그렇게 되고 싶은 건 아니잖아?", "미리암#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "베인스나 다른 마을에서도 물건은 살 수 있지만 ^e5555e오즈의 미로를 통과할 수 있는 사람도 점점 줄어^000000들고 있잖아.";
+		cutin "ep18_maram_01.png",2;
+		npctalk "이므릴도 위험했고.", "마람#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "아직은 ^e5555e전투 실력^000000이 있으면 몬스터들을 해치우면서라도 지나갈 수 있지만 나중에는 전투 실력 문제가 아니라 ^e5555e미로 전체가 용암에 잠겨^000000버릴지도 몰라.";
+		next;
+		mes "[마람]";
+		mes "그때가 돼서는 도움을 줄 사람들이 여기까지 오지도 못하게 될 거야.";
+		npctalk "그때는 늦어!", "마람#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "그리고 ^e5555e어머니가 부탁^000000하신 ^e5555e원주민과 이주민간의 중재^000000가 이루어지기만 한다면 다시 오즈의 협곡 위를 다리로 건널 수 있을 거야!";
+		next;
+		mes "[수아드]";
+		mes "중재? 니르엔님은 또 꿈같은 생각을 하고 계시군.";
+		mes "^e5555e회색의 아이들^000000이 생겨날 때도 그랬지.";
+		cutin "ep18_suad_03.png",2;
+		npctalk "니르엔님은 또 꿈같은 생각을 하고 계시군.", "수아드#ep18_gw", bc_self;
+		next;
+		mes "[미리암]";
+		mes "하지만 덕분에 배고프지 않을 수 있었고 지금 마을 아이들이 굶지 않게 도울 수 있어.";
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[수아드]";
+		mes "좋아.";
+		mes "그럼 기회는 주도록 하지.";
+		mes "니르엔님이 우리에게 기회를 주셨던 것처럼.";
+		cutin "ep18_suad_03.png",2;
+		npctalk "난 그 기회를 버리고 도망쳤지만…", "수아드#ep18_gw", bc_self;
+		next;
+		mes "[미리암]";
+		mes "뭐?";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "이렇게 쉽게 허락해 주는 거야?", "미리암#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "진짜?!";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "진심이야?";
+		cutin "ep18_miriam_03.png",2;
+		npctalk "사실 별 기대 안 했는데!", "마람#ep18_gw", bc_self;
+		next;
+		mes "[수아드]";
+		mes "뭐냐,";
+		mes "그 반응은.";
+		cutin "ep18_suad_03.png",2;
+		npctalk "그럼 돌아가!!", "수아드#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "아냐~ 아냐~";
+		mes "고마워~";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "그럼 수아드가 마음이 바뀌기 전에 어서 ^e5555e마을로^000000 들어가요!";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "자세한 이야기는 들어가서 하도록 하죠.";
+		ep18_1_main = 35;
+		changequest 11723,11724;
+		close2;
+		cutin "",255;
+		cloakonnpc "미리암#ep18_gw", getcharid(0);
+		cloakonnpc "수아드#ep18_gw", getcharid(0);
+		warp "wolfvill",152,113;
+		end;
+	}
+	mes "[마람]";
+	mes "후~";
+	mes "모닥불이라도 피워볼까.";
+	cutin "ep18_maram_01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11721) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11723) == 1" );
+	end;
+}
+
+gw_fild01,36,103,5	duplicate(dummy_cloaked_npc)	미리암#ep18_gw	4_EP18_MIRIAM
+gw_fild01,41,103,5	duplicate(dummy_cloaked_npc)	수아드#ep18_gw	4_EP18_SUAD
+
+// Main Quest: Step 32.
+gw_fild01,37,105,5	script	이므릴#ep18_gw	4_EP18_IMRIL,{
+	if (ep18_1_main == 33) {
+		mes "[이므릴]";
+		mes "왜.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[마람]";
+		mes "혼자만 가지 말고 우리 좀 도와줘.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "외부인을 들이지 않는 건 ^e5555e우리 규칙^000000이잖아.";
+		mes "도와달라고 해도 해줄 수 있는게 없는데.";
+		cutin "ep18_imril_02.png",2;
+		npctalk "내가 무슨 힘이 있겠냐.", "이므릴#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "음……";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[마람]";
+		mes "그럼 마을에 가서 ^e5555e수아드^000000를 좀 불러주면 안될까?";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "외부인을 데려온 것 때문인지 나도 마을에 들여 보내줄 것 같지 않아.";
+		cutin "ep18_maram_01.png",2;
+		npctalk "살려줘…", "마람#ep18_gw", bc_self;
+		next;
+		mes "[이므릴]";
+		mes "^e5555e수아드^000000는 그런 거에 민감 하니까.";
+		mes "미리 말해 두지 그랬냐.";
+		cutin "ep18_imril_02.png",2;
+		npctalk "엄청 화낼 텐데.", "이므릴#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "이번엔 일이 꼬여서 미리 말할 틈이 없었어.";
+		mes "지금 ^e5555e라헬 상황^000000은 너도 대충 알잖아.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "그래서 나도 ^e5555e베인스^000000까지 가서 물건을 사온 거긴 하지만.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "아까 도와준 은혜가 있으니 ^e5555e수아드^000000에게 물어는 볼게.";
+		mes "하지만 큰 기대는 하지마.";
+		cutin "ep18_imril_03.png",2;
+		next;
+		mes "[마람]";
+		mes "알았어.";
+		cutin "ep18_maram_01.png",2;
+		npctalk "고마워.", "마람#ep18_gw", bc_self;
+		next;
+		mes "[마람]";
+		mes "야채상인모험가_C735님 마을에 들어가려면 ^e5555e수아드를 만나 설득^000000을 해야할 것 같아요.";
+		mes "만나 줄지는 모르겠지만……";
+		next;
+		mes "[마람]";
+		mes "일단 ^e5555e수아드^000000가 올 때까지 기다려보죠";
+		completequest 11722;
+		setquest 11723;
+		ep18_1_main = 34;
+		close2;
+		cloakonnpc "이므릴#ep18_gw", getcharid(0);
+		cutin "",255;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11722) == 1" );
+	end;
+}
+
+// Main Quest: Step 34.
+// Quest: Investigation of Oz Labyrinth. Step 1 + 13 (final).
+wolfvill,143,114,5	duplicate(dummy_cloaked_npc)	마람#ep18_wv	4_EP18_MARAM
+wolfvill,145,114,5	duplicate(dummy_cloaked_npc)	미리암#ep18_wv	4_EP18_MIRIAM
+
+wolfvill,143,113,5	script	이므릴#ep18_wv	4_EP18_IMRIL,{
+	if (checkweight(1000405,20) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main < 35)
+		end;
+	if (ep18_1_main == 35) {
+		mes "[이므릴]";
+		mes "<FONT SIZE = 14>이야!</FONT>";
+		mes "정말 들어 왔잖아?";
+		cutin "ep18_imril_03.png",2;
+		next;
+		mes "[이므릴]";
+		mes "말을 전달하긴 했지만.";
+		mes "그 ^e5555e수아드^000000가 외부인이 마을에 들어오는 걸 허락할 줄이야!";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "그만큼 마을 상황이 좋지 못하다는 거겠지.";
+		cloakoffnpc "미리암#ep18_wv", getcharid(0);
+		cloakoffnpc "마람#ep18_wv", getcharid(0);
+		cutin "ep18_miriam_03.png",2;
+		next;
+		mes "[엘리]";
+		mes "이런 환경이라면 자급자족을 하는 것도 무리네요.";
+		mes "나무도 돌처럼 딱딱해요.";
+		mes "아니 나무가 아니라 돌인 걸까요?";
+		cutin "ep172_beta.bmp",2;
+		next;
+		mes "[마람]";
+		mes "외부의 도움도 조금 받을 수 있게 된다면 지금보다는 상황이 좋아질 거라고 생각해요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "그렇게 된다면 좋지.";
+		mes "수아드도 말은 안했지만 꽤 고민하고 있었을 거야.";
+		cutin "ep18_imril_01.png",2;
+		npctalk "책임감이 강한 녀석이니까.", "이므릴#ep18_wv", bc_self;
+		next;
+		mes "[마람]";
+		mes "그리고 역시 야채상인모험가_C735님이 물건 구입을 도와주신 게 효과가 있었나 봐요!";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[마람]";
+		mes "^e5555e물자 조달 할 때만 출입을 허가^000000할거라고 말은 하지만 야채상인모험가_C735님이 ^e5555e믿을 만한 사람^000000이라는 걸 알게 되면 좀 더 마음이 풀릴 거예요.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "그럼 일단 ^e5555e마을 사람들이랑 대화^000000를 해보는 것부터 시작할까요?";
+		next;
+		mes "[마람]";
+		mes "^e5555e사람들의 이야기^000000를 듣고 친해지면 ^e5555e어머니가 맡기신 일의 실마리^000000가 보일지도 몰라요.";
+		// note: unlocks side quests
+		completequest 11724;
+		ep18_1_main = 36;
+		getitem 1000405,50;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		cutin "",255;
+		cloakonnpc "미리암#ep18_wv", getcharid(0);
+		cloakonnpc "마람#ep18_wv", getcharid(0);
+		end;
+	}
+
+	// Quest before the daily quests
+	switch( isbegin_quest(11735) ) {
+	case 0:
+		switch( isbegin_quest(11725) ) {
+		case 0:
+			mes "[이므릴]";
+			mes "덕분에 무사히 ^e5555e오즈의 미로^000000를 지나올 수 있었어.";
+			mes "고마워.";
+			cutin "ep18_imril_03.png",2;
+			next;
+			mes "[이므릴]";
+			mes "예전엔 조심하기만 한다면 혼자 다니는 것도 큰 문제는 없었는데 요즘은 혼자 다니는게 점점 더 힘들어 지고 있거든.";
+			cutin "ep18_imril_02.png",2;
+			next;
+			mes "[이므릴]";
+			mes "지금 우리 마을 사정으로는 매번 호위를 데리고 다닐 수도 없고 게다가 여럿이 뭉쳐 다니는 건 눈에 띄어 버리니까 위험하단 말이지.";
+			cutin "ep18_imril_01.png",2;
+			next;
+			mes "[이므릴]";
+			mes "오즈의 미로 깊은 곳을 조사해 볼 수 있다면 좋을 텐데.";
+			mes "<FONT SIZE = 14>용암의 진행상태라던가…</FONT>";
+			mes "<FONT SIZE = 16><B>몬스터의 분포라던가…</FONT></B>";
+			cutin "ep18_imril_02.png",2;
+			next;
+			mes "[이므릴]";
+			mes "흠…";
+			mes "모험가님 강하니까 한가할 때 ^e5555e오즈의 미로에 함께^000000 가주지 않겠어?";
+			mes "염치없는 부탁인지는 몰라도 모험가님 정도의 강한 사람을 만날 기회는 흔치 않으니까.";
+			next;
+			switch( select( "지금 출발!", "나중에…" ) ) {
+			case 1:
+				mes "[이므릴]";
+				mes "와!";
+				mes "정말?";
+				mes "이렇게 선뜻 부탁을 들어 주다니 감동인 걸?";
+				cutin "ep18_imril_03.png",2;
+				next;
+				mes "[이므릴]";
+				mes "그럼 일단 ^e5555e오즈의 미로 입구^000000에서 만나자!";
+				mes "가는 길은 기억하고 있지?";
+				cutin "ep18_imril_02.png",2;
+				setquest 11725;
+				navigateto("oz_dun01",27,184);
+				close3;
+			case 2:
+				close3;
+			}
+			end;
+		case 1:
+			cutin "ep18_imril_02.png",2;
+			mes "[이므릴]";
+			mes "짐을 옮기던 용암 처리를 하던";
+			mes "몬스터들이 걸림돌이야.";
+			mes "확 없애버릴 방법이 있다면 좋을 텐데.";
+			navigateto("oz_dun01",27,184);
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 1:
+		mes "[이므릴]";
+		mes "아으…";
+		mes "피부가 따끔따끔해.";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[수아드]";
+		mes "그러게 그런 복장으로 미로 깊은 곳까지 들어가는 멍청이가 어딨어.";
+		mes "그대로 구워지지 않은 걸 다행으로 알아!";
+		cutin "ep18_suad_03.png",2;
+		next;
+		mes "[이므릴]";
+		mes "하여튼 말을 해도!";
+		cutin "ep18_imril_02.png",2;
+		next;
+		mes "[이므릴]";
+		mes "아무튼 ^e5555e오즈의 미로 상황이 점점 더 안좋아^000000지고 있어.";
+		mes "^e5555e용암 지역도 점점 올라오고^000000 있고.";
+		cutin "ep18_imril_01.png",2;
+		next;
+		mes "[이므릴]";
+		mes "이대로라면 오즈의 미로를 지나다닐 수 있는 것도 얼마 남지 않았을 거야.";
+		next;
+		mes "[수아드]";
+		mes "확실히 그 정도까지 용암이 확산 됐다면 하루 빨리 대책이 필요하겠군.";
+		cutin "ep18_suad_03.png",2;
+		next;
+		mes "[수아드]";
+		mes "일단은…";
+		mes "작업할 사람들을 보내려면 오즈의 미로에 있는 몬스터 수를 줄여 둘 필요가 있겠어.";
+		next;
+		cutin "",255;
+		completequest 11735;
+		getitem 1000405,20;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		mes "^4d4dff당신에 대한 우호적인 평가가 발생합니다.^000000";
+		ep18_1_reputation_exp += 100;
+		if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {// Custom implementation: reputation 1000 on wolfvill => player can continue the main quest
+			ep18_1_main = 37;
+			setquest 18082;
+		}
+		close;
+	case 2:
+		break;
+	}
+
+	mes "[이므릴]";
+	mes "짐을 옮기던 용암 처리를 하던 몬스터들이 걸림돌이야.";
+	mes "확 없애버릴 방법이 있다면 좋을 텐데.";
+	cutin "ep18_imril_01.png",2;
+	next;
+	mes "[이므릴]";
+	mes "어때 모험가님?";
+	mes "^e5555e몬스터 토벌^000000에 관심 있어?";
+	cutin "ep18_imril_02.png",2;
+	next;
+
+	.@menu$[0] = "오즈의 미로 1층[170]";
+	if (checkquest(11737,PLAYTIME) == 0 || checkquest(11737,PLAYTIME) == 1)
+		.@menu$[0] = "^8C8C8C" + .@menu$[0] + "(대기중)^000000";
+	else if (checkquest(11736,HUNTING) == 0 || checkquest(11736,HUNTING) == 1)
+		.@menu$[0] = "^8C8C8C" + .@menu$[0] + "(수행중)^000000";
+
+	.@menu$[1] = "오즈의 미로 2층[200]";
+	if (checkquest(11739,PLAYTIME) == 0 || checkquest(11739,PLAYTIME) == 1)
+		.@menu$[1] = "^8C8C8C" + .@menu$[1] + "(대기중)^000000";
+	else if (checkquest(11738,HUNTING) == 0 || checkquest(11738,HUNTING) == 1)
+		.@menu$[1] = "^8C8C8C" + .@menu$[1] + "(수행중)^000000";
+
+	switch( select( .@menu$[0], .@menu$[1], "그만 둔다." ) ) {
+	case 1:
+		switch( checkquest(11737,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[이므릴]";
+			mes "오늘은 수고했어. 고마워.";
+			mes "내일도 도와줄 거지?.";
+			cutin "ep18_imril_04.png",2;
+			close3;
+		case 2:
+			erasequest 11737;
+			break;
+		}
+		switch( checkquest(11736,HUNTING) ) {
+		case -1:
+			mes "[이므릴]";
+			mes "^e5555e오즈의 미로 1층에서 " + strmobinfo(1,21295) + "를 20마리^000000 정도 처치해줘.";
+			mes "몬스터 수가 조금만 줄어들어도 미로를 통과하는 행상인들에겐 큰 도움이 되니까.";
+			cutin "ep18_imril_03.png",2;
+			next;
+			if (select( "수락 한다.", "그만 둔다." ) == 2)
+				close3;
+			mes "[이므릴]";
+			mes "그럼 조심해서 다녀와~";
+			setquest 11736;
+			close3;
+		case 0:
+		case 1:
+			mes "[이므릴]";
+			mes "^e5555e오즈의 미로 1층에서 " + strmobinfo(1,21295) + "를 20마리^000000 정도 처치해줘.";
+			mes "몬스터 수가 조금만 줄어들어도 미로를 통과하는 행상인들에겐 큰 도움이 되니까.";
+			cutin "ep18_imril_03.png",2;
+			close3;
+		case 2:
+			mes "[이므릴]";
+			mes "벌써 끝났어?";
+			mes "역시 믿음직하다니까!";
+			cutin "ep18_imril_04.png",2;
+			erasequest 11736;
+			setquest 11737;
+			ep18_1_reputation_exp += 30;
+			if (ep18_1_reputation_exp >= 5000)
+				.@bonus = 1;
+			if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {// Custom implementation: reputation 1000 on wolfvill => player can continue the main quest
+				ep18_1_main = 37;
+				setquest 18082;
+			}
+			getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+			getexp 4364880,3000000;
+			close3;
+		}
+	case 2:
+		switch( checkquest(11739,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[이므릴]";
+			mes "오늘은 수고했어. 고마워.";
+			mes "내일도 도와줄 거지?.";
+			cutin "ep18_imril_04.png",2;
+			close3;
+		case 2:
+			erasequest 11739;
+			break;
+		}
+		switch( checkquest(11738,HUNTING) ) {
+		case -1:
+			mes "[이므릴]";
+			mes "^e5555e오즈의 미로 2층에서 " + strmobinfo(1,21298) + "를 20마리^000000 정도 처치해줘.";
+			mes "몬스터 수가 조금만 줄어들어도 미로를 통과하는 행상인들에겐 큰 도움이 되니까.";
+			cutin "ep18_imril_03.png",2;
+			next;
+			if (select( "수락 한다.", "그만 둔다." ) == 2)
+				close3;
+			mes "[이므릴]";
+			mes "그럼 조심해서 다녀와~";
+			setquest 11738;
+			close3;
+		case 0:
+		case 1:
+			mes "[이므릴]";
+			mes "^e5555e오즈의 미로 2층에서 " + strmobinfo(1,21298) + "를 20마리^000000 정도 처치해줘.";
+			mes "몬스터 수가 조금만 줄어들어도 미로를 통과하는 행상인들에겐 큰 도움이 되니까.";
+			cutin "ep18_imril_03.png",2;
+			close3;
+		case 2:
+			mes "[이므릴]";
+			mes "벌써 끝났어?";
+			mes "역시 믿음직하다니까!";
+			cutin "ep18_imril_04.png",2;
+			erasequest 11738;
+			setquest 11739;
+			ep18_1_reputation_exp += 30;
+			if (ep18_1_reputation_exp >= 5000)
+				.@bonus = 1;
+			if (ep18_1_reputation_exp >= 1000 && ep18_1_main == 36) {// Custom implementation: reputation 1000 on wolfvill => player can continue the main quest
+				ep18_1_main = 37;
+				setquest 18082;
+			}
+			getitem 1000405,3+.@bonus;	// Ep18_Amethyst_Fragment
+			getexp 11588320,3000000;
+			close3;
+		}
+		end;
+	case 3:
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11724) == 2 && isbegin_quest(11725) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11735) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11735) == 2 && checkquest(11736,HUNTING) == -1 && (checkquest(11737,PLAYTIME) == -1 || checkquest(11737,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11735) == 2 && checkquest(11736,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11735) == 2 && checkquest(11738,HUNTING) == -1 && (checkquest(11739,PLAYTIME) == -1 || checkquest(11739,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(11735) == 2 && checkquest(11738,HUNTING) == 2" );
+	end;
+}
+
+// Main Quest: Step 35.
+wolfvill,180,179,3	script	마을 소년#구별	4_M_DST_CHILD,{
+	if (ep18_1_main == 37) {
+		mes "[마을 소년]";
+		mes "대회의가 곧 시작해요.";
+		mes "작은 규모로 자주 여는 회의가 아니라, 믿을 만한 사람들이 전부 참여하는 대회의예요!";
+		next;
+		mes "[마을 소년]";
+		mes "<NAVI>[저 쪽]<INFO>wolfvill,144,151,0,101,0</INFO></NAVI>으로 가시면 돼요. 모험가님 자리도 있어요.";
+		mes "그야 당연히 이제 모험가님도 믿을 만한 사람이시니까요.";
+		completequest 18082;
+		setquest 16567;
+		ep18_1_main = 38;
+		close;
+	}
+	mes "[소년]";
+	mes "우리 마을에서는 회의가 자주 열려요. 모두들 그 자리에서 의견을 모으거든요.";
+	mes "하지만 대회의는 달라요! 진짜 중요한 자리에요!";
+	next;
+	mes "[소년]";
+	mes "당연히 아무나 참가할 수는 없죠.";
+	mes "믿을 수 있는 마을의 친구들만 참가하는 거라고 했어요.";
+	next;
+	mes "[소년]";
+	mes "모험가님도 참가할 수 있는 행사냐고요?";
+	mes "그건 모험가님 하시기에 달렸죠!";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(18082) == 1" );
+	end;
+}
+
+wolfvill,146,148,0	script	#대회의1	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	.@char_id = getcharid(0);
+	if (ep18_1_main == 38 || ep18_1_main == 39 || ep18_1_main == 40) {
+		cloakoffnpc "과격파 청년#과격파2", .@char_id;
+		cloakoffnpc "수아드#1", .@char_id;
+		cloakoffnpc "미리암#1", .@char_id;
+		cloakoffnpc "마람#1", .@char_id;
+		cloakoffnpc "열혈 청년#과격파1", .@char_id;
+		cloakoffnpc "과격파 젊은이#과격파2", .@char_id;
+		cloakoffnpc "호쾌한 청년#과격파3", .@char_id;
+		cloakoffnpc "다혈질 청년#과격파4", .@char_id;
+		cloakoffnpc "화난 청년#과격파5", .@char_id;
+		cloakoffnpc "토박이 노인#노인층1", .@char_id;
+		cloakoffnpc "당황한 장년#노인층2", .@char_id;
+		cloakoffnpc "소심한 장년#노인층3", .@char_id;
+		cloakoffnpc "소심한 노인#노인층4", .@char_id;
+		cloakoffnpc "열혈 장년#무기소지자1", .@char_id;
+		cloakoffnpc "소심한 청년#중립파1", .@char_id;
+		cloakoffnpc "과묵한 청년#중립파2", .@char_id;
+		cloakoffnpc "중립파 청년#중립파3", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 41) {
+		cloakoffnpc "마람#1", .@char_id;
+		cloakoffnpc "수아드#1", .@char_id;
+		cloakoffnpc "미리암#1", .@char_id;
+		cloakoffnpc "과격파 청년#과격파2", .@char_id;
+		cloakoffnpc "호쾌한 청년#과격파3", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 42) {
+		cloakoffnpc "수아드#1", .@char_id;
+		cloakoffnpc "과격파 청년#과격파2", .@char_id;
+		cloakoffnpc "호쾌한 청년#과격파3", .@char_id;
+		end;
+	}
+	if (ep18_1_main == 47) {
+		cloakoffnpc "수아드#sms01", getcharid(0);
+		npctalk ".......", "수아드#sms01", bc_self;
+		end;
+	}
+	if (ep18_1_main == 49) {
+		cloakoffnpc "수아드#sms02", getcharid(0);
+		cloakoffnpc "마람#sms02", getcharid(0);
+		cloakoffnpc "미리암#sms02", getcharid(0);
+		cloakoffnpc "라마쿠스#sms01", getcharid(0);
+		cloakoffnpc "쿤#sms01", getcharid(0);
+		cloakoffnpc "요피#sms01", getcharid(0);
+		end;
+	}
+	end;
+}
+
+wolfvill,147,148,3	script	과격파 젊은이#과격파2	4_DST_SOLDIER,{
+	npctalk "싸우자! 싸워야 합니다!", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,145,144,7	script	호쾌한 청년#과격파3	4_EP18_GW_MAN02,{
+	npctalk "크하하하! 싸우면 당연히 이겨야지!", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,148,144,1	script	다혈질 청년#과격파4	4_EP18_GW_WOMAN01,{
+	npctalk "다 때려부수자! 호우! 호우!", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,143,148,5	script	화난 청년#과격파5	4_EP18_GW_MAN02,{
+	npctalk "전부 매운 맛을 보여줘야 해!", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Main Quest: Step 36 + 41.
+wolfvill,144,151,5	script	수아드#1	4_EP18_SUAD,{
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		mes "[미니 엘리]";
+		mes "가방에서 꺼내줘요. 머리 위에 올려주세요.";
+		close;
+	}
+	if (ep18_1_main < 38)
+		end;
+	if (ep18_1_main == 38) {
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "조금 늦었군. 아니, 탓하는 건 아니야.";
+		mes "이쪽으로 와. 곧 회의가 시작한다.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "결국 이 자리에 초대되다니, 모험가님도 참 대단해요.";
+		mes "뭐, 우리도 그렇게 해 주시기를 바랐지만요.";
+		next;
+		cutin "ep18_miriam_02.png",2;
+		mes "[미리암]";
+		mes "……쓸데없는 소리. 모험가님, 마람 말에 너무 신경쓰지 마십시오.";
+		mes "중요한 자리야. 마람, 평소처럼 굴지 말라고.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		emotion ET_HUK, getnpcid(0,"마람#1");
+		mes "[마람]";
+		mes "아니, 미리암! 그렇게 말하면 내가 평소에 잘못했다는 것 같잖아.";
+		mes "앗, 알았어, 알았어. 집중할게.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "늦었다고는 해도 수아드가 유난인 거고, 사실 아직 회의가 시작하려면 시간이 남았어요.";
+		mes "모험가님, 사람들의 의견을 미리 들어보고 오시는 건 어떨까요?";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "분명 회의에 참여하는 데 도움이 될 거라고 생각하는데…….";
+		mes "이야기를 들어 보시면서, 모험가님의 입장도 정리해 보시면요.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "그래. 그것도 나쁘지 않군.";
+		mes "충분히 이야기를 들어보았다면 말해줘. 회의를 시작하도록 하겠다.";
+		erasequest 16567;
+		setquest 16568;
+		setquest 16569;
+		setquest 16570;
+		setquest 16571;
+		ep18_1_main = 39;
+		close2;
+		cutin "",255;
+		emotion ET_THINK;
+		emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+		end;
+	}
+	if (ep18_1_main == 40) {
+		.@char_id = getcharid(0);
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "다 들어보고 왔나. 이쪽도 준비가 끝났다.";
+		mes "잠시 후에 회의를 시작하도록 하지.";
+		next;
+		mes "[수아드]";
+		mes "모든 사람이 자리에 모였다.";
+		mes "이제 대회의를 시작하도록 하겠다.";
+		npctalk "수아드 : 모든 사람이 자리에 모였다. 이제 대회의를 시작하도록 하겠다.", "수아드#1", bc_self;
+		next;
+		mes "[수아드]";
+		mes "오늘 우리는 앞으로의 대응 방안에 대해 이야기하려고 한다.";
+		mes "회색늑대 마을의 현재 위치는 그다지 좋지 못하다.";
+		next;
+		cutin "ep18_suad_03.png",2;
+		mes "[수아드]";
+		mes "오늘도 수많은 사람들이 오즈의 협곡을 건너 마을로 찾아오고 있다.";
+		mes "이에 비해 식량과 생필품 등의 수급은 턱없이 부족하다.";
+		next;
+		mes "[수아드]";
+		mes "우리는 이제 나아갈 방향에 대해 정해야 한다.";
+		mes "하고 싶은 말이 있는 사람은 자유롭게 발언해 주었으면 한다.";
+		next;
+		cutin "",255;
+		emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+		mes "[열혈 청년]";
+		mes "라헬의 이주민들에게 매운 맛을 보여줍시다.";
+		mes "그들의 신전을 부숴 버려야 합니다!";
+		npctalk "옳소! 옳소!", "과격파 젊은이#과격파2", bc_self;
+		npctalk "다 부숴 버려야 합니다!", "다혈질 청년#과격파4", bc_self;
+		next;
+		mes "[미니 엘리]";
+		mes "아까 이야기를 들으면서도 느꼈지만, 저 자들은 유독 거칠군요.";
+		mes "표현이 거친 것인지 원래 거친 자들인지는 지금까지 주어진 정보로 파악하기는 어렵지만요.";
+		next;
+		mes "[토박이 노인]";
+		mes "하지만 우리는 지금까지 평화롭게 잘 지내오지 않았나.";
+		mes "갑자기 신전을 부수자니 그게 무슨 자다가 봉창 두들기는 소리야!";
+		npctalk "할 말이 있고 못할 말이 있지!", "소심한 노인#노인층4", bc_self;
+		next;
+		mes "[열혈 청년]";
+		mes "언제까지 이런 손바닥만한 땅덩어리에 구겨져 숨어 있어야 합니까?";
+		mes "수아드 씨도 사람에 비해 물자도 토지도 부족하다고 하지 않았습니까?";
+		next;
+		emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+		mes "[열혈 청년]";
+		mes "원래 라헬의 땅은 우리 원주민들의 것이었습니다.";
+		mes "이제는 돌려받을 때가 됐습니다!";
+		npctalk "부수고 빼앗아와야 합니다!", "다혈질 청년#과격파4", bc_self;
+		npctalk "맞아, 우리는 이제 싸워야 해! 전쟁이다!", "다혈질 청년#과격파4", bc_self;
+		next;
+		mes "[토박이 노인]";
+		mes "말이 쉽지, 준비도 없이 뭘 어쩌겠다는 건가!";
+		mes "게다가 한 번 피를 흘리면 돌이킬 수 없다는 것도 몰라?";
+		npctalk "싸워 보지도 않은 새파란 것들이 전쟁 운운이야!", "소심한 장년#노인층3", bc_self;
+		next;
+		mes "[과격파 젊은이]";
+		mes "지금까지 우리가 피를 안 흘렸나요?";
+		mes "저들은 안 흘렸을지도 모르지요.";
+		next;
+		mes "[과격파 젊은이]";
+		mes "하지만 멸시받는 원주민들, 폭력에 노출되고 제대로 임금조차 받지 못한 수많은 세월들.";
+		mes "그들이 흘린 것이 피와 눈물이 아니면 무엇이란 말이에요?";
+		npctalk "우리에게 남은 방법은 전쟁 뿐이다!", "과격파 청년#과격파2", bc_self;
+		npctalk "반대하는 사람도 다 똑같은 핍박자들이다!", "화난 청년#과격파5", bc_self;
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "어어, 좀 과열되는 것 같은데.";
+		mes "수아드, 좀 진정시켜야 하는 거 아니야?";
+		next;
+		cutin "ep18_suad_03.png",2;
+		emotion ET_THINK;
+		mes "[수아드]";
+		mes "……조금만 더 지켜보도록 하자.";
+		next;
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "조금 이상합니다.";
+		mes "반대하는 사람들마저 적으로 몰아가는 화법이군요.";
+		next;
+		mes "[과격파 젊은이]";
+		mes "우리는 참을만큼 참았다!";
+		mes "여신에게만 정신 팔린 자들에게 우리의 분노를 보여주자!";
+		npctalk "우리의 분노를 보여주자!", "과격파 젊은이#과격파2", bc_self;
+		next;
+		mes "[당황한 장년]";
+		mes "저, 저 겁대가리 없는 어린 것들 같으니라고.";
+		mes "까딱 잘못하면 다 죽는다 아니가! 왜 그런 위험을 무릅써야 하나!";
+		next;
+		mes "[열혈 청년]";
+		mes "흥, 여기 숨어든 이유가 그 알량한 목숨 부지하기 위해서밖에 없는 자들은 모르겠지요.";
+		mes "우리는 이미 목숨을 걸고 피로 피를 씻을 각오를 했다고요!";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "했어? 난 아직인데……. 피는 찬물로 씻어야 잘 닦인다고.";
+		next;
+		cutin "ep18_miriam_03.png",2;
+		mes "[미리암]";
+		mes "농담할 때가 아니잖아, 마람.";
+		mes "그리고 수아드, 정말 정리하지 않으면 이대로 숲 주민들의 의견이 완전히 갈라서고 말겠어.";
+		next;
+		mes "[미리암]";
+		mes "내키지 않더라도, 지금쯤 정리가 필요할 것 같아.";
+		next;
+		cutin "ep18_suad_03.png",2;
+		emotion ET_THINK;
+		mes "[수아드]";
+		mes "……그만, 여기는 우리들끼리 얼굴을 붉히려고 만든 자리가 아니다.";
+		mes "의견을 모으고 앞으로 나아가기 위한 자리야.";
+		npctalk "수아드 : 그만, 여기는 우리들끼리 얼굴을 붉히려고 만든 자리가 아니다.", "수아드#1", bc_self;
+		next;
+		cutin "",255;
+		emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+		mes "[열혈 청년]";
+		mes "그러니까 앞으로 나아가 다 부수자는 것 아닙니까!";
+		mes "설마 수아드 씨도 저런 패배주의자들의 편입니까?";
+		next;
+		mes "[당황한 장년]";
+		mes "마 보시소. 저런 새파란 애들이 뭣도 모르고 떠들어대는 데 휘둘리는 것은 아니겠지요!";
+		next;
+		cutin "ep18_suad_02.png",2;
+		mes "[수아드]";
+		mes "나를 떠보고 싶은 건가?";
+		mes "누구 한 편을 들어줄 거라고 믿었다면 지금까지 여러분을 오해하게 한 모양이군.";
+		next;
+		cutin "ep18_suad_03.png",2;
+		mes "[수아드]";
+		mes "나는 두 쪽 모두의 입장과 근거를 듣겠어.";
+		mes "언제까지 여기에만 머무를 수는 없다는 의견, 준비 없이 나섰다가는 패가 망신할 거라는 의견. 둘 다 틀리지 않아.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "그러니 우리끼리 편을 가를 생각 말고 서로를 설득하도록.";
+		mes "자신들의 의견을 어떻게, 왜 실현해야 하는지 말하라는 뜻이다.";
+		npctalk "…….", "당황한 장년#노인층2", bc_self;
+		npctalk "…….", "과격파 젊은이#과격파2", bc_self;
+		next;
+		cutin "",255;
+		mes "[열혈 청년]";
+		mes "우리는 이미 스스로 무장할 능력을 갖추고 있습니다.";
+		mes "준비가 안 되었다는 지적은 무의미하다는 이야깁니다.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		emotion ET_QUESTION, getnpcid(0,"마람#1");
+		mes "[마람]";
+		mes "어라? 내가 모르는 무기 구매 루트가 있다는 얘긴가?";
+		mes "그건 또 처음 듣는 소린데…….";
+		next;
+		cutin "",255;
+		mes "[열혈 청년]";
+		mes "게다가 언제까지 준비할 겁니까!";
+		mes "우리가 늙고 죽을 때까지? 우리 다음 세대가 완전히 포기를 배울 때까지?";
+		next;
+		mes "[토박이 노인]";
+		mes "하지만 무력 충돌은 위험해. 실패하면 걷잡을 수 없을 거야.";
+		mes "반란은 안돼. 우리가 힘을 보탤 수 있는 건 시위까지일세.";
+		npctalk "시위까지는 우리도 찬성이야.", "소심한 노인#노인층4", bc_self;
+		npctalk "전쟁은 반대지만 시위라면야…….", "소심한 청년#중립파1", bc_self;
+		next;
+		mes "[소심 장년]";
+		mes "그래. 우리도 완전히 반동분자로 몰리고 싶지는 않아!";
+		mes "그런 낙인이 찍히면 여기서 사는 것도 힘들어질 거라고.";
+		next;
+		mes "[소심 장년]";
+		mes "그냥 우리가 이만큼 불만이 있다는 걸 보여주고 싶어.";
+		mes "다 부숴버리겠다든지 그런 건 반대야.";
+		npctalk "그래요. 되도록 조용하게.", "중립파 청년#중립파3", bc_self;
+		next;
+		mes "[소심 청년]";
+		mes "……모두가 힘을 합칠 수 있다면 저희도 시위에 찬성합니다.";
+		mes "우리의 의견을 보여줍시다.";
+		next;
+		mes "[열혈 청년]";
+		mes "시위를 하더라도 그저 말로만 할 뿐인 비폭력 시위는 아무 효과도 없습니다!";
+		mes "최소한 신전을 점령하고 항의해야 합니다.";
+		next;
+		mes "[열혈 장년]";
+		mes "그건 그래. 그냥 큰 소리로 말한다고 들은 척이나 하겠어?";
+		mes "그놈들이 제일 중요하게 여기는 걸 뺏겨 봐야 우리 말에 귀를 기울이겠지.";
+		next;
+		mes "[미니 엘리]";
+		mes "평화로운 방법으로 의견이 모인다 싶더니, 다시 폭력적인 방향으로 틀어졌군요…….";
+		next;
+		cutin "ep18_suad_01.png",2;
+		emotion ET_SURPRISE;
+		mes "[수아드]";
+		mes "그만, 어느 정도 의견이 모였나.";
+		mes "시위를 진행하되 신전을 점거하고 우리의 뜻을 알리자는 의견에 찬성하나?";
+		next;
+		cutin "",255;
+		mes "[열혈 청년]";
+		mes "완전히 맘에 들지는 않지만…… 거기가 협의 지점인 거군요.";
+		next;
+		mes "[토박이 노인]";
+		mes "여전히 위험해 보이지만 그래도 우리 뜻을 알리기는 해야겠지.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "그러면 자세한 진행을 논의하기 위해서 추가 회의를 진행하겠다.";
+		mes "이 회의는 비밀 회의여야 한다는 것을 이해하겠지?";
+		npctalk "수아드 : 대회의는 여기서 마치도록 하겠다.", "수아드#1", bc_self;
+		next;
+		mes "[수아드]";
+		mes "모험가, 그리고 마람과 미리암. 그리고 몇 명을 제외하고는 일단 해산하도록 한다.";
+		mes "자세한 작전은 작전 수립이 끝난 뒤에 알리도록 하겠다.";
+		next;
+		cutin "",255;
+		mes "[과격파 젊은이]";
+		mes "무력 시위를 통해 뭔가 보여주자!";
+		mes "아자, 아자!";
+		next;
+		mes "[당황한 장년]";
+		mes "우리가 맞는 판단을 한 길까.";
+		mes "아덜이 하자는 대로 끌리간기 아니가.";
+		cloakonnpc "열혈 청년#과격파1", .@char_id;
+		cloakonnpc "과묵한 청년#중립파2", .@char_id;
+		cloakonnpc "소심한 장년#노인층3", .@char_id;
+		cloakonnpc "화난 청년#과격파5", .@char_id;
+		next;
+		mes "[중립파 청년]";
+		mes "정말 우리가 할 수 있을까?";
+		mes "그렇지만 대회의에서 결정된 이상 최대한 협조해야겠지.";
+		cloakonnpc "토박이 노인#노인층1", .@char_id;
+		cloakonnpc "당황한 장년#노인층2", .@char_id;
+		cloakonnpc "다혈질 청년#과격파4", .@char_id;
+		cloakonnpc "소심한 청년#중립파1", .@char_id;
+		next;
+		cutin "ep18_miriam_03.png",2;
+		cloakonnpc "열혈 장년#무기소지자1", .@char_id;
+		cloakonnpc "과격파 젊은이#과격파2", .@char_id;
+		cloakonnpc "중립파 청년#중립파3", .@char_id;
+		cloakonnpc "소심한 노인#노인층4", .@char_id;
+		mes "[미리암]";
+		mes "음, 모험가님. 잠시 할 이야기가 있으니 이쪽으로 와 주시겠습니까?";
+		mes "수아드, 마람. 너희도 회의 전에 잠시만 시간을 내 주길 부탁한다.";
+		changequest 16572,16573;
+		// erasequest 16567;
+		ep18_1_main = 41;
+		close3;
+	}
+	if (ep18_1_main == 41) {
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "충분히 이야기를 들어보았다면 말해줘. 회의를 시작하도록 하겠다.";
+		close3;
+	}
+	cutin "ep18_suad_01.png",2;
+	mes "[수아드]";
+	mes "충분히 이야기를 들어보았다면 말해줘. 회의를 시작하도록 하겠다.";
+	close3;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16567) == 1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16572) == 1" );
+	end;
+}
+
+// Main Quest: Step 37.
+wolfvill,145,146,5	script	열혈 청년#과격파1	4_EP18_GW_MAN01,{
+	if (ep18_1_main < 38)
+		end;
+	if (ep18_1_main == 39) {
+		if (isbegin_quest(16568) == 1) {
+			mes "[열혈 청년]";
+			mes "프레이야의 신전 따위는 전부 다 부숴버려야 합니다!";
+			mes "이 땅의 주인이 누구인지 보여줍시다!";
+			next;
+			mes "[열혈 청년]";
+			mes "호우! 호우! 호우! 호우!";
+			mes "우리는 강해져야 합니다! 무장해야 합니다!";
+			next;
+			mes "[열혈 청년들]";
+			mes "호우! 호우! 이기자! 싸우자!";
+			npctalk "이기자! 싸우자!", "과격파 젊은이#과격파2", bc_self;
+			npctalk "이기자! 싸우자!", "과격파 청년#과격파2", bc_self;
+			npctalk "이기자! 싸우자!", "호쾌한 청년#과격파3", bc_self;
+			npctalk "이기자! 싸우자!", "다혈질 청년#과격파4", bc_self;
+			npctalk "이기자! 싸우자!", "화난 청년#과격파5", bc_self;
+			next;
+			emotion ET_QUESTION, getnpcid(0,"마람#1");
+			mes "[열혈 청년]";
+			mes "그것은 우리 스스로를 지키고, 설 곳을 찾기 위해서입니다!";
+			mes "지금 당장 우리가 해야 할 일입니다!";
+			completequest 16568;
+			if (isbegin_quest(16569) == 2 && isbegin_quest(16570) == 2 && isbegin_quest(16571) == 2) {
+				setquest 16572;
+				ep18_1_main = 40;
+			}
+			close2;
+			emotion ET_ANGER;
+			end;
+		}
+	}
+	mes "[열혈 청년]";
+	mes "이 땅의 주인이 누구인지 보여줍시다!";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16568) == 1" );
+	end;
+}
+
+// Main Quest: Step 38.
+wolfvill,139,148,5	script	토박이 노인#노인층1	4_EP18_GW_OLD01,{
+	if (ep18_1_main < 38)
+		end;
+	if (ep18_1_main == 39) {
+		if (isbegin_quest(16569) == 1) {
+			mes "[토박이 노인]";
+			mes "나는 태어나서 한 번도 이 마을을 벗어난 적이 없어.";
+			mes "이 마을에서 태어나고, 자라고, 늙었지.";
+			next;
+			mes "[토박이 노인]";
+			mes "지금까지 그렇게 살았어도 아무런 문제가 없었다는 뜻이야…….";
+			mes "그런데 지금 와서 꼭 과격한 방법을 써야 할까?";
+			next;
+			mes "[토박이 노인]";
+			mes "젊은이들이 머리에 피가 쏠려서 괜한 짓을 하는 게 아닐까?";
+			mes "너무 일을 크게 벌였다가 사달이 나면 어떡하나.";
+			next;
+			mes "[토박이 노인]";
+			mes "아니, 젊은이들 생각에 아예 반대하는 건 아니야.";
+			mes "하지만 그냥 너무 극단적인 일은 하지 말자는 거지.";
+			completequest 16569;
+			npctalk "이 정도면 충분히 이야기를 들어본 것 같다. 수아드에게 돌아가자.", "", bc_self;
+			if (isbegin_quest(16568) == 2 && isbegin_quest(16570) == 2 && isbegin_quest(16571) == 2) {
+				setquest 16572;
+				ep18_1_main = 40;
+			}
+			close2;
+			emotion ET_THINK, getnpcid(0,"수아드#1");
+			emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+			sleep2 500;
+			npctalk "저건 좀 아닌 것 같은데, 쯧쯧.", "소심한 장년#노인층3", bc_self;
+			sleep2 2000;
+			emotion ET_QUESTION, getnpcid(0,"마람#1");
+			sleep2 1500;
+			npctalk "저건 좀 아닌 것 같은데, 쯧쯧.", "소심한 장년#노인층3", bc_self;
+			sleep2 1000;
+			npctalk "저건 좀 아닌 것 같은데, 쯧쯧.", "소심한 장년#노인층3", bc_self;
+			sleep2 1000;
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16569) == 1" );
+	end;
+}
+
+// Main Quest: Step 39.
+wolfvill,150,147,1	script	열혈 장년#무기소지자1	4_M_MIDDLE,{
+	if (ep18_1_main < 38)
+		end;
+	if (ep18_1_main == 39) {
+		if (isbegin_quest(16570) == 1) {
+			mes "[열혈 장년]";
+			mes "어이쿠, 이거 모험가님 아니신가!";
+			mes "대회의 전이라 긴장했지? 여기 술 한잔 쭉 들이키게.";
+			next;
+			select( "사양하겠습니다.", "어디 그럼, 꿀꺽!" );
+			mes "[열혈 장년]";
+			mes "에이, 그 수아드의 사람 답구먼. 깐깐하기는.";
+			mes "그렇게까지 딱딱하게 굴 것 없잖아?";
+			next;
+			mes "[열혈 장년]";
+			mes "딱딱한 자리라고 너무 긴장하지 마. 그냥 편하게 할 말 하면 되는 거야.";
+			mes "기왕이면 모험가가 우리 의견을 지지해 주면 더 좋고!";
+			next;
+			mes "[열혈 장년]";
+			mes "우리 의견이 뭐냐고? 그야 당연히 전쟁이지.";
+			mes "이 무기 좀 봐. 우리는 이미 무장할 준비도 다 돼 있단 말이지!";
+			next;
+			mes "[열혈 장년]";
+			mes "나머지는 라헬에 가서 여신이고 뭐고 싹 쓸어버리면 된다고.";
+			mes "지금까지 우리가 얼마나 참고 살았는지 보여주는 거지!";
+			completequest 16570;
+			if (isbegin_quest(16568) == 2 && isbegin_quest(16569) == 2 && isbegin_quest(16571) == 2) {
+				setquest 16572;
+				ep18_1_main = 40;
+			}
+			close2;
+			npctalk "다 때려부수자! 호우! 호우!", "다혈질 청년#과격파4", bc_self;
+			end;
+		}
+	}
+	mes "[열혈 장년]";
+	mes "대회의야, 대회의. 큰 행사라고!";
+	mes "그러니까 한 잔 해야지! 마셔 마셔!";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16570) == 1" );
+	end;
+}
+
+// Main Quest: Step 40.
+wolfvill,152,145,1	script	소심한 청년#중립파1	4_M_RACHMAN1,{
+	if (ep18_1_main < 39)
+		end;
+	if (ep18_1_main == 39) {
+		if (isbegin_quest(16571) == 1) {
+			mes "[소심한 청년]";
+			mes "어, 우리 의견이요?";
+			mes "저희는 아직 젊은데, 그런 거 막 말해도 되나.";
+			next;
+			emotion ET_SURPRISE, getnpcid(0,"수아드#1");
+			mes "[소심한 청년]";
+			mes "하긴, 저기 엄청 소리지르는 놈들도 젊긴 하죠.";
+			mes "쟤들은 뭘 믿고 싸우자고 난린지 모르겠어요…….";
+			next;
+			mes "[소심한 청년]";
+			mes "진짜 우리가 라헬 이주민들을 다 때려 부술 수 있다고 생각하는 건 아니겠죠.";
+			mes "머릿수만 해도 이렇게 차이나는데.";
+			next;
+			emotion ET_THINK, getnpcid(0,"수아드#1");
+			mes "[소심한 청년]";
+			mes "우리가 막 특공대 훈련 같은 걸 한 것도 아니잖아요?";
+			mes "근데도 누가 시작했는지, 갑자기 저런 애들이 확 늘어났는데 그냥 불안할 뿐이에요.";
+			completequest 16571;
+			if (isbegin_quest(16568) == 2 && isbegin_quest(16569) == 2 && isbegin_quest(16570) == 2) {
+				setquest 16572;
+				ep18_1_main = 40;
+			}
+			close2;
+			emotion ET_ANGER, getnpcid(0,"열혈 청년#과격파1");
+			sleep2 500;
+			npctalk "…….", "과묵한 청년#중립파2", bc_self;
+			end;
+		}
+	}
+	mes "[소심한 청년]";
+	mes "저희는 아직 젊은데, 의견 같은 거 막 큰 소리로 말해도 되나.";
+	mes "대회의라고는 하지만, 역시 어른들이 목소리가 크지 않겠어요?";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16571) == 1" );
+	end;
+}
+
+wolfvill,149,152,3	script	마람#1	4_EP18_MARAM,{
+	if (ep18_1_main == 40) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "쉿! 이제 곧 대회의가 시작될 거예요.";
+		mes "제가 떠들면 미리암이랑 수아드에게 혼난다고요?";
+		next;
+		emotion ET_SURPRISE, getnpcid(0,"수아드#1");
+		mes "[마람]";
+		mes "그러니 모험가님도 함께 수아드의 이야기를 들어 주세요.";
+		mes "물론 다른 사람들의 이야기도요.";
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "후후후, 결국 이 자리까지 오게 되시다니.";
+	mes "제 안목을 믿었지만 생각보다도 더 대단하시잖아요, 모험가님?";
+	next;
+	mes "[마람]";
+	mes "모쪼록 회의에서도 활약해 주시기를 바랄게요.";
+	mes "수아드는 좀 완고한 면이 있거든요. 그걸 좀 말랑말랑하게 해 줄 사람이 필요한데~";
+	next;
+	cutin "ep18_maram_02.png",2;
+	mes "[마람]";
+	mes "저는 모험가님께 기대하고 있거든요.";
+	mes "여전히 제 안목을 믿고 있고 말이지요.";
+	close3;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Main Quest: Step 42.
+wolfvill,148,153,3	script	미리암#1	4_EP18_MIRIAM,{
+	if (checkweight(1000405,40) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main == 41) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "무슨 일이야? 시위 준비를 하려면 썩 골치아플 것 같은데.";
+		mes "아아, 정말이지 일을 사서 하는 남자라니까, 나는.";
+		next;
+		cutin "ep18_miriam_01.png",2;
+		mes "[미리암]";
+		mes "농담 아니야. 저기, 저 사람들. 이상하지 않아? 아까 무장할 수 있다고 떠들던 녀석들.";
+		mes "무장 상태를 잘 봐. 사냥용이 아니야.";
+		next;
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "저도 분석해 보았습니다. 해당 무기들은 대인살상무기, 즉 전쟁용으로 분류됩니다.";
+		mes "저걸로 사냥을 해봤자 사냥감이 너덜너덜해져서 못쓰게 될 뿐입니다.";
+		next;
+		cutin "ep18_suad_03.png",2;
+		mes "[수아드]";
+		mes "어떻게 된 거지?";
+		mes "저런 무장을 쉽게 구할 수는 없을 텐데.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "오…… 저런 건 그냥 시중에 유통되지 않는다고 나 마람이 단언할 수 있어.";
+		mes "어디서 튀어나온 걸까.";
+		next;
+		cutin "ep18_miriam_01.png",2;
+		mes "[미리암]";
+		mes "짐작 가는 곳이 없지는 않지만 확실하지 않아.";
+		mes "그래서 말인데 저 자들을 캐내서 출처를 알아낼 수 있을까?";
+		next;
+		cutin "ep18_suad_03.png",2;
+		mes "[수아드]";
+		mes "그렇군. 어차피 시위를 위해서라면 어느 정도의 무장은 필요해.";
+		mes "거래를 위해서라고 밑밥을 던지면 어떨까?";
+		next;
+		cutin "ep18_suad_02.png",2;
+		mes "[수아드]";
+		mes "그리고 실제로 거래해서 무장하는 일도, 나는 반대하지 않아.";
+		mes "우리가 지금까지 억압을 받은 것은 힘이 없어서였으니까.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "어이, 지도자님. 기껏 투쟁에서 시위로 일을 축소시켜 놨는데 전쟁 무기에 혹하면 어떡해.";
+		mes "출처만 알아보자, 출처만.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "여기에서는 수아드가 직접 나서는 건 모양이 안 좋아.";
+		mes "나와 모험가님, 미리암이 조사에 나서는 건 어떨까?";
+		next;
+		cutin "ep18_miriam_01.png",2;
+		mes "[미리암]";
+		mes "나는 저 사람들을 직접 파보는 것 말고, 다른 쪽으로 조사해보고 싶은 게 있어.";
+		mes "그러니 직접 접촉하는 건 너와 모험가님에게 부탁할게, 마람.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "좋아. 그러면 일하러 가볼까요, 모험가님?";
+		mes "어디까지나 거래를 원하는 척 하면서 접근해 봐요.";
+		mes "이 마람이 있으니 어렵지 않을 거예요.";
+		changequest 16573,16574;
+		ep18_1_main = 42;
+		getitem 1000405,40;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		cutin "",255;
+		cloakonnpc "미리암#1", getcharid(0);
+		cloakonnpc "마람#1", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16573) == 1" );
+	end;
+}
+
+// Main Quest: Step 43.
+wolfvill,143,145,7	script	과격파 청년#과격파2	4_M_RASWORD,{
+	if (ep18_1_main == 42) {
+		cloakonnpc "수아드#1", getcharid(0);
+		cloakoffnpc "마람#1_1", getcharid(0);
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "어어, 안녕하세요.";
+		mes "잠시 여쭤보고 싶은 게 있는데. 괜찮을까요?";
+		next;
+		cutin "",255;
+		mes "[과격파 청년]";
+		mes "무슨 일? 딱히 할 말 없는데.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "아니, 무장이 엄청 멋져서.";
+		mes "웬만한 데선 못 구할 것 같은데, 어디서 구했어요?";
+		next;
+		cutin "",255;
+		mes "[과격파 청년]";
+		mes "이거? 누가 엄청 싸게 팔길래 샀지!";
+		mes "몸도 지킬 겸, 남들 보여줄 겸…… 이런 무장을 하고 있으면 누가 덤비겠어?";
+		next;
+		mes "[호쾌한 청년]";
+		mes "맞아, 맞아! 이 정도 무장은 해줘야 시위에서도 안전하겠지!";
+		mes "신전에서 겁을 먹고 알아서 머리를 숙이지 않겠어?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "누가 팔아준 건지, 이쪽에도 정보 좀 줄 수 있을까요?";
+		next;
+		cutin "",255;
+		mes "[과격파 청년]";
+		mes "어…… 맨 입으론 안되지. 우리도 나름 애써서 얻은 구매로인데.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "하지만 엄청 싸게 팔았다고 그쪽에서 먼저 말했잖아요?";
+		mes "재고 처분이거나 할텐데. 그렇다면 그걸 우리가 아는 쪽이 좋을까나, 신전에서 아는 쪽이 좋을까나~";
+		next;
+		cutin "",255;
+		mes "[호쾌한 청년]";
+		mes "하, 하긴. 그렇게 싸게 파는 무기가 여신병 걸린 놈들 손에 들어가기라도 하면 안되겠지?";
+		mes "그냥 말해 주자. 어차피 시위하러 가려면 무장해야 하고.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "잘 생각했어요. 역시 현명하다니까?";
+		next;
+		cutin "",255;
+		mes "[과격파 청년]";
+		mes "알았어…… 그렇지만 그냥은 못 만날 거야.";
+		mes "일단 라헬로 가서 수염쟁이 잭을 만나.";
+		next;
+		npctalk "마람 : 수염쟁이 잭?", "마람#1_1", bc_self;
+		mes "[과격파 청년]";
+		mes "냄새나는 민들레를 사러 왔다고 하면 그쪽에서 안내해 줄거야.";
+		mes "나름 보안이라는 걸 지킬 줄 안단 말이지. 나도 바보는 아니라고.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "누가 바보래요? 지금까지 현명하다고밖에 말 안했는데.";
+		mes "좋은 정보 고마워요!";
+		next;
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "라헬로 돌아가는 거군요. 목적 좌표를 재설정해 보겠습니다.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "자, 그럼 모험가님. 역시 핵심을 찾으려면 좀 빙빙 돌아가야 할 것 같네요.";
+		mes "함께 <NAVI>[라헬]<INFO>rachel,75,44,0,101,0</INFO></NAVI>로 가 봅시다!";
+		changequest 16574,16575;
+		ep18_1_main = 43;
+		cutin "",255;
+		cloakonnpc "과격파 청년#과격파2", getcharid(0);
+		cloakonnpc "호쾌한 청년#과격파3", getcharid(0);
+		cloakonnpc "마람#1_1", getcharid(0);
+		close;
+	}
+	mes "[과격파 청년]";
+	mes "이 정도 무장은 해줘야 안전하지 않겠어?";
+	mes "여신병 걸린 라헬 놈들도 겁을 먹고 알아서 머리를 숙이겠지!";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16574) == 1" );
+	end;
+}
+
+wolfvill,148,145,3	duplicate(dummy_cloaked_npc)	마람#1_1	4_EP18_MARAM
+
+wolfvill,140,150,5	script	당황한 장년#노인층2	4_EP18_GW_MIDDLE01,{
+	npctalk "아니, 저 젊은이들 왜 저러나?", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,138,145,7	script	소심한 장년#노인층3	4_EP18_GW_MIDDLE02,{
+	npctalk "저건 좀 아닌 것 같은데, 쯧쯧.", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,141,146,7	script	소심한 노인#노인층4	4_M_DST_GRAND,{
+	npctalk "우리 의견도 들어주면 좋겠구만……", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,154,146,1	script	과묵한 청년#중립파2	4_EP18_GW_MAN02,{
+	npctalk "…….", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+wolfvill,151,150,1	script	중립파 청년#중립파3	4_EP18_GW_MAN01,{
+	npctalk "저는 아무 의견에도 찬성 안 해요. 다들 너무 순수해.", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Main Quest: Step 44.
+rachel,72,42,3	duplicate(dummy_cloaked_npc)	마람#1_2	4_EP18_MARAM
+
+rachel,75,44,3	script	수염쟁이 잭#무기상_라헬	4_M_MIDDLE1,{
+	if (ep18_1_main == 43) {
+		cloakoffnpc "마람#1_2", getcharid(0);
+		mes "[미니 엘리]";
+		mes "도착했습니다. '수염쟁이 잭' 업종은 철물점입니다.";
+		next;
+		mes "[수염쟁이 잭]";
+		mes "어서 오십쇼. 뭘 찾으러 오셨수?";
+		next;
+		mes "[수염쟁이 잭]";
+		mes "식칼이랑 냄비라면 라헬에 우리 가게만한 데가 없지.";
+		mes "천천히 둘러보쇼.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "어, 우리는 좀 다른 걸 찾으러 왔는데요.";
+		mes "모험가님, 그게 뭐였죠?";
+		next;
+		cutin "",255;
+		switch( select( "냄새나는 양말", "냄새나는 민들레", "향긋한 양말", "향긋한 민들레" ) ) {
+		case 1:
+			mes "[미니 엘리]";
+			mes "으음, 그거 아니었던 것 같은데요.";
+			next;
+			mes "[수염쟁이 잭]";
+			mes "아니 그런 더러운 걸 우리 가게에서 왜 찾아?";
+			close2;
+			cloakonnpc "마람#1_2", getcharid(0);
+			end;
+		case 2:
+			mes "[수염쟁이 잭]";
+			mes "허어, 거 제대로 찾아왔구만 그래.";
+			mes "냄새나는 민들레가 피어있는 곳을 들으러 오셨다?";
+			next;
+			mes "[수염쟁이 잭]";
+			mes "베인스로 가 보쇼. 거기 가면 만날 수 있을 테니까.";
+			mes "베인스 마을 구석에 남들은 잘 모르는 무기상이 있소.";
+			next;
+			mes "[수염쟁이 잭]";
+			mes "누구 소개로 왔냐고 하면 당연히 잭의 소개라고 하면 되오.";
+			mes "아마 금방 치고 빠지려고 잠깐 장사하는 걸거야. 너무 늦으면 상대 안 해줄 거요.";
+			next;
+			mes "[수염쟁이 잭]";
+			mes "뭐, <NAVI>[무기상]<INFO>veins,293,282,0,101,0</INFO></NAVI>까지 연결해 준 이후론 내 소관은 아니지만.";
+			mes "그럼 잘 해 보시오.";
+			changequest 16575,16576;
+			ep18_1_main = 44;
+			cloakonnpc "마람#1_2", getcharid(0);
+			navigateto("veins",293,282);
+			close;
+		case 3:
+			mes "[미니 엘리]";
+			mes "으음, 그거 아니었던 것 같은데요.";
+			next;
+			mes "[수염쟁이 잭]";
+			mes "아니 우리 가게는 세탁소가 아니고 철물점인데.";
+			close2;
+			cloakonnpc "마람#1_2", getcharid(0);
+			end;
+		case 4:
+			end;
+		}
+	}
+	if (ep18_1_main == 44) {
+		mes "[수염쟁이 잭]";
+		mes "뭐, <NAVI>[무기상]<INFO>veins,293,282,0,101,0</INFO></NAVI>까지 연결해 준 이후론 내 소관은 아니지만.";
+		mes "그럼 잘 해 보시오.";
+		cloakonnpc "마람#1_2", getcharid(0);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16575) == 1" );
+	end;
+}
+
+// Main Quest: Step 45.
+veins,289,281,7	duplicate(dummy_cloaked_npc)	마람#1_3	4_EP18_MARAM
+
+veins,293,282,3	script	단데론#무기상_베인스	4_M_DESERT,{
+	if (ep18_1_main == 44) {
+		cloakoffnpc "마람#1_3", getcharid(0);
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "안녕하세요~";
+		mes "장사 하시나요?";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "안 하는데.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "그러지 마시고. 잭이 여기 민들레가 피어 있다고 소개해 줘서 왔는데요.";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "누가 민들레야, 누가!";
+		mes "어떤 놈이 그런 이상한 암호를 만든 거야!";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "아하, 성함이…… 그래서 민들레였군요.";
+		mes "보안이 어쩌구 한 것 치고는 단순한걸요.";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "아무튼, 무슨 일이야!";
+		mes "무기 사러 왔으면 썩 필요한 것 불고 가져가기나 해.";
+		next;
+		select( "무기 좀 사러 왔다기보다는……." );
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "그렇죠? 모험가님 말이 맞아요.";
+		mes "무기 한두 개 사러 왔다기보다는 좀 더 대량 구매, 랄까요?";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "대량 구매? 얼마나 사시려고.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "음, 대충 이 정도?";
+		mes "이 가게에서 다 수용 가능해요?";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "꿀꺽, 그, 그 정도씩이나? 전쟁 하냐?";
+		mes "조, 조금만 시간을 준다면 가능할 것 같은데.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "어쩌나. 우리 시간이 없거든요.";
+		mes "최대한 빨리 구할 수 있으면 좋겠는데.";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "일정을 불러 봐. 최대한 맞춰 볼 테니까.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그것도 좋지만 아예 공급처랑 저희를 연결해 주시면 어때요?";
+		mes "중개 수수료는 섭섭지 않게 챙겨 드릴 테니까.";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "야! 누가 장사하면서 밑천을 까보이냐!";
+		mes "됐어, 돌아가, 돌아가!";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[마람]";
+		mes "에이, 누가 그러래요? 이미 다 알고 왔어요. 이거 이렇게 초특가로 파는 건 반짝 장사죠?";
+		mes "어차피 오래 거래할 사이 아니잖아요. ";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그러니까 그쪽 정보만 살짝 달라는 거예요.";
+		mes "급한 우리도 좋고, 중개료 떼 가는 아저씨도 좋고. 일석이조 아닌가요?";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "끄응…… 좋다. 대신 절대 유출해선 안돼.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그런 당연한 말씀을.";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "토르 화산이다. 안쪽으로 깊이 들어가면 비밀 기지가 있는데 거기에서 나온 무기야.";
+		mes "어차피 거기 재고 끝나면 거래 끊길 사이라 알려주는 거야.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그렇게 말씀하시는 걸 보니 금방 끊길 것 같은가 보네요?";
+		next;
+		cutin "",255;
+		mes "[단데론]";
+		mes "이 자식, 더 떠보려고 하지 말고 나머지는 직접 알아봐.";
+		mes "원하는 거 얻었으면 수수료 내고 가라.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "토르 화산의 비밀 기지…… 이거 수상한 냄새가 팍팍 나는데요.";
+		mes "여기가 아무래도 우리의 종착점일 것 같지요?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "민들레 씨가 알려준 대로 <NAVI>[토르 화산]<INFO>thor_v01,169,169,0,101,0</INFO></NAVI>에서 뵈어요. 준비 제대로 하고 오세요!";
+		mes "군수기지로 바로 들어가시지 마시고, 거기서 3시 방향으로 오시면 제가 기다리고 있을게요.";
+		changequest 16576,16577;
+		ep18_1_main = 45;
+		cutin "",255;
+		cloakonnpc "마람#1_3", getcharid(0);
+		navigateto("que_thr",133,53);
+		close;
+	}
+	if (ep18_1_main == 45) {
+		mes "[마람]";
+		mes "민들레 씨가 알려준 대로 <NAVI>[토르 화산]<INFO>thor_v01,169,169,0,101,0</INFO></NAVI>에서 뵈어요. 준비 제대로 하고 오세요!";
+		mes "군수기지로 바로 들어가시지 마시고, 거기서 3시 방향으로 오시면 제가 기다리고 있을게요.";
+		cloakonnpc "마람#1_3", getcharid(0);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16576) == 1" );
+	end;
+}
+
+// Main Quest: Step 46.
+thor_v01,169,169,3	script	마람#군수기지-비밀통로	4_EP18_MARAM,{
+	if (ep18_1_main == 45 || ep18_1_main == 46) {
+		mes "[마람]";
+		mes "여기예요, 여기! 절 따라오세요!";
+		mes "조금 돌아가지만 감시를 피할 수 있는 <NAVI>[지름길]<INFO>que_thr,133,53,0,101,0</INFO></NAVI>이에요.";
+		close2;
+		warp "que_thr",181,53;
+		end;
+	}
+	end;
+}
+
+// Main Quest: Step 47. (entrance npc is a part of the instance Thor Gunsu Base)
+// Main Quest: Step 48-50 inside the instance 1@tcamp.
+
+// Main Quest: Step 51.
+wolfvill,140,112,0	duplicate(#대회의1)	#sms01	HIDDEN_WARP_NPC,5,5
+
+wolfvill,142,109,1	duplicate(dummy_cloaked_npc)	미리암#sms01	4_EP18_MIRIAM
+wolfvill,143,110,1	duplicate(dummy_cloaked_npc)	마람#sms01	4_EP18_MARAM
+
+wolfvill,140,112,5	script	수아드#sms01	4_EP18_SUAD,{
+	if (ep18_1_main == 47) {
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "모험가? 어째서 벌써 돌아왔지? 미리암과 함께 무기의 출처를 조사하러 가지 않았나?";
+		next;
+		select( "알아왔지만 출처는..." );
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "그뿐만이 아니에요. 폐기되어야 할 무기와 탄약들이 안정성이 담보되지 않은 상태에서 흘러들어 온 게 더 큰 문제입니다.";
+		mes "분석 결과 묵은 화약과 관리되지 않은 무기들의 위험도는 약 9.72%예요.";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "예상은 했지만 생각보다 더 좋지 않네. 출처에 대해서만 걱정했더니. 무기의 안정성까지 장담할 수 없겠어. 오래된 무기라...";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "무장은 필요하긴 하지만, 문제될만한 출처를 가진 것들은 사용할 수 없는데. 저쪽에서 유출되는 무기를 추적해서 문제를 삼는다면, 좋지 못한 상황까지 갈 수도 있겠지.";
+		next;
+		mes "[수아드]";
+		mes "하지만 안정적인 공급처를 찾아내서 거래를 트는 것도 시간이 오래 걸릴 테니 신중하게 결정해야겠어.";
+		next;
+		mes "[수아드]";
+		mes "일단은 무기를 모두 회수하고 차후의 일은 마람과 미리암이 돌아오는대로 의논을 하도록 하지.";
+		mes "미리암과 마람은 함께 돌아오지 않았나?";
+		next;
+		select( "무기 밀매를 알리러..." );
+		mes "[수아드]";
+		mes "그래. 할 수 있는 일이 대기 뿐이군.";
+		next;
+		cloakoffnpc "미리암#sms01", getcharid(0);
+		cloakoffnpc "마람#sms01", getcharid(0);
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "수아드!!! 수아드, 수아드!!! 큰일났어! 큰일, 큰일이야!!! 수아드! 들어 봐, 내 말 좀 들어 보라구, 수아드!!!";
+		next;
+		cutin "ep18_suad_04.png",0;
+		mes "[수아드]";
+		mes "마람, 미리암. 무슨 일이야?";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "이대로라면 우리 다~~ 죽는다!!";
+		next;
+		cutin "ep18_suad_04.png",0;
+		mes "[수아드]";
+		mes "...뭐? 좀 자세히 얘기해. 왜?";
+		next;
+		cutin "ep18_miriam_03.png",1;
+		mes "[미리암]";
+		mes "내가 설명할게. 마람, 너는 저기 앉아서 흥분 좀 가라앉혀.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그럴래? 나 놀라가지고... 내가 좀 새가슴이잖아.";
+		npctalk "네가...?", "미리암#sms01", bc_self;
+		npctalk "몰랐어? 몰랐구나.", "마람#sms01", bc_self;
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "전에 무장했던 사람들, 기억 나?";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "토르 화산의 무기들이었다며? 그건 모험가에게서 들었어. 결국 라헬쪽에서 알게 됐나?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "그게 아니라, 그 무리가 이주민쪽의 상단을 습격했다는 소식을 들었어. 그 상단이 가지고 있던 물건을 모두 가지고 왔다고 하던데.";
+		next;
+		cutin "ep18_suad_04.png",0;
+		mes "[수아드]";
+		mes "뭐? 언제?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "얼마 되지 않았지만 라헬쪽이 그 사실을 이미 알고 있다고 해.";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "이런... 대체 왜...?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "아직 끝나지 않았어. 그쪽은 우리가 무장을 하고 습격을 했으니 반란군이라고 주장하고 있다나 봐. 강경 대응해야 한다는 목소리가 힘을 얻고 있다고.";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "이런. 최악이군. 저쪽이 먼저 공격을 해온다면... 아니, 아니지. 일단 그 녀석들을 먼저 만나 봐야겠어.";
+		next;
+		cutin "ep18_miriam_03.png",1;
+		mes "[미리암]";
+		mes "어떻게 하려고?";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "돌발 행동으로 우리의 입지를 불리하게 만든 책임을 물어야지. 규모를 파악하고 대응책을 마련해야 돼.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "같이 가. 나, <NAVI>[어디에]<INFO>wolfvill,131,257,0,101,0</INFO></NAVI>있는지 알아! 모험가님도 같이 가요. 제3자인 증인이 필요한 일이 생길 것 같은 느낌이 들어요!";
+		completequest 16580;
+		setquest 17517;
+		ep18_1_main = 48;
+		close2;
+		cutin "",255;
+		cloakonnpc "마람#sms01", getcharid(0);
+		cloakonnpc "미리암#sms01", getcharid(0);
+		cloakonnpc "수아드#sms01", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(16580) == 1" );
+	end;
+}
+
+// Main Quest: Step 52.
+wolfvill,132,256,1	duplicate(dummy_npc)	약탈품#sms01	4_WOODBOX
+wolfvill,131,258,1	duplicate(dummy_npc)	약탈품#sms02	4_WOODBOX
+wolfvill,132,258,1	duplicate(dummy_npc)	약탈품#sms03	4_WOODBOX
+
+wolfvill,131,257,1	script	약탈품#sms04	4_WOODBOX,{
+	if (ep18_1_main == 48) {
+		setpcblock PCBLOCK_NPC, true;
+		cloakoffnpc "수아드#sms02", getcharid(0);
+		cloakoffnpc "마람#sms02", getcharid(0);
+		cloakoffnpc "미리암#sms02", getcharid(0);
+		npctalk "이게 약탈품인가?", "수아드#sms02", bc_self;
+		sleep2 1000;
+		npctalk "하... 진짜 있네, 약탈한 물건들.", "마람#sms02", bc_self;
+		npctalk "하...", "미리암#sms02", bc_self;
+		sleep2 2000;
+		cloakoffnpc "라마쿠스#sms01", getcharid(0);
+		cloakoffnpc "쿤#sms01", getcharid(0);
+		cloakoffnpc "요피#sms01", getcharid(0);
+		npctalk "누가 남의 물건에 함부로 손을 대?", "라마쿠스#sms01", bc_self;
+		npctalk "도둑선생님이 나타나셨어?", "쿤#sms01", bc_self;
+		npctalk "간도 크네. 남의 물건을!!", "요피#sms01", bc_self;
+		sleep2 2000;
+		emotion ET_QUESTION, getnpcid(0,"라마쿠스#sms01");
+		setpcblock PCBLOCK_NPC, false;
+		mes "[라마쿠스]";
+		mes "어? 수아드! 미리암이랑 마람도 왔네.";
+		next;
+		mes "[쿤]";
+		mes "다들 무슨 일이야? 무기에 대해서라면 전에 말한게 다야.";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "그거 말고 말해야 할 것이 더 있을 텐데?";
+		next;
+		cutin "",255;
+		mes "[요피]";
+		mes "야~ 무섭다~ 갑자기 왜 그래? 낯선 사람까지 끌어들이고 말이야. 겁 줄 일이라도 있어?";
+		npctalk "저 사람은 누군데?", "쿤#sms01", bc_self;
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "무우서업다아? 난 너네가 더 무서워! 어떻게 상단을 습격할 수가 있어?";
+		next;
+		cutin "",255;
+		mes "[라마쿠스]";
+		mes "아, 그거? 칭찬은 안해줘도 돼.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "치잉차~안?";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "우린, 무고한 상단을 습격한 이유를 들으러 왔어.";
+		next;
+		cutin "",255;
+		mes "[쿤]";
+		mes "뭐야? 지금 별 것도 아닌 걸 가지고 지금 이렇게 몰려 온 거야?";
+		next;
+		cutin "ep18_suad_02.png",1;
+		mes "[수아드]";
+		mes "별 것도 아닌 일? 지금 너희가 한 일 때문에 우리가 반란군으로 몰리고 있다고. 우리를 공격할 빌미를 줬다고!";
+		next;
+		cutin "",255;
+		mes "[요피]";
+		mes "그쪽에서 공격해오면 반격하면 되지 뭐가 걱정이야? 우리도 이젠 무기가 있잖아?";
+		npctalk "뭐가 문제야?", "쿤#sms01", bc_self;
+		npctalk "말은 쉽네?", "마람#sms02", bc_self;
+		next;
+		mes "[요피]";
+		mes "우리가 누구를 털었는지 알아? 알면 우리한테 고맙다고 할걸? 무고한 상단이 아니거든?";
+		npctalk "지금 우리한테 이러는 것도 미안해 할 거라고.", "라마쿠스#sms01", bc_self;
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "무고를 떠나서 상단을 습격해서 터는 걸 뭐라고 하는지 알아? 강도라고 해.";
+		next;
+		cutin "",255;
+		mes "[쿤]";
+		mes "아니 진짜 너무하네. 강도라니. 우리가 턴 건, 아마드 상단이었다고.";
+		next;
+		emotion ET_SURPRISE, getnpcid(0,"수아드#sms02");
+		emotion ET_HUK, getnpcid(0,"미리암#sms02");
+		emotion ET_HUK, getnpcid(0,"마람#sms02");
+		emotion ET_QUESTION, playerattached();
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "아마드라면...";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "수아드네 아니야?";
+		npctalk "어... 거기, 거기였구나.", "마람#sms02", bc_self;
+		next;
+		cutin "",255;
+		mes "[쿤]";
+		mes "그래! 우리들을 버러지 취급을 하고, 자기 양아들마저도 무시했던 거기 말이야!";
+		next;
+		mes "[라마쿠스]";
+		mes "우리 같은 사람들을 쪽쪽 빨아 먹던 거기!";
+		npctalk "모기인줄...?", "요피#sms01", bc_self;
+		next;
+		mes "[요피]";
+		mes "우리가 수아드의 복수를 하고 필요한 물자를 구했으니 잘된 거 아니야?";
+		npctalk "필요한 것도 많다고!", "라마쿠스#sms01", bc_self;
+		next;
+		mes "[쿤]";
+		mes "맞아!! 너, 네 부친 때문에 엄청 고생했잖아. 여기로 온 것도 다 네 부친 때문이라며.";
+		next;
+		mes "[쿤]";
+		mes "단지 네가 원주민이기 때문에 잘난 아들인거 인정하지도 않고 학대했었잖아. 아니, 아들이라고도 인정도 안했겠지.";
+		next;
+		mes "[요피]";
+		mes "여기서 수아드의 고생담을 모르는 사람??";
+		npctalk "없네, 없어. 잘 생각해 보라구. 우리는 네 복수를 대신한 거야.", "쿤#sms01", bc_self;
+		next;
+		mes "[라마쿠스]";
+		mes "늘 마음 속으로 상상만 했었지? 네가 그런 취급을 받을 필요가 없는데. 양아버지한테 복수하고 싶다고.";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "뭐라고 말 좀 해봐, 수아드.";
+		next;
+		cutin "ep18_suad_03.png",1;
+		mes "[수아드]";
+		mes "... 하아... 일단 알겠어... 그... 다음에는 이런 일이 없도록 주의해. 너희들이 무슨 생각으로 그런 줄은 알겠는데, 우리가 더 큰 위험에 빠질 수 있으니까...";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "수아드? 그걸로 끝이야?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "내가 이런 쪽은 잘 모르지만 말이야. 내 짧은 식견으론 얘네들 앞으로도 계속 이럴 텐데 무장이라도 거둬야 하는 거 아닐까?";
+		next;
+		cutin "ep18_suad_03.png",1;
+		mes "[수아드]";
+		mes "마을에 물자가 부족한 것은 사실이니까. 점점 더 거래가 힘들어지는 건 사실이고.";
+		next;
+		mes "[수아드]";
+		mes "그리고 무장은... 전에도 얘기했듯이 무장은 필요해. 이미 취득한 것들은 그냥 두고 새로운 입수처를 구해야겠지. 안 그래도 그것 때문에 너희와 의논을 하려고 했어.";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "수아드? 말해 봐. 지금 이 처분에 네 사감은 없어? 전혀 없다고 말할 수 있어?";
+		next;
+		cutin "ep18_suad_03.png",1;
+		mes "[수아드]";
+		mes "잠깐, 잠깐만. 생각을 정리할 시간이 필요해.";
+		changequest 17517,17518;
+		ep18_1_main = 49;
+		close3;
+	}
+	if (ep18_1_main == 49) {
+		cloakoffnpc "수아드#sms02", getcharid(0);
+		cloakoffnpc "마람#sms02", getcharid(0);
+		cloakoffnpc "미리암#sms02", getcharid(0);
+		cloakoffnpc "라마쿠스#sms01", getcharid(0);
+		cloakoffnpc "쿤#sms01", getcharid(0);
+		cloakoffnpc "요피#sms01", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17517) == 1" );
+	end;
+}
+
+// Main Quest: Step 53.
+wolfvill,131,252,3	script	라마쿠스#sms01	EP18_ARMED_VILLAGER01,{
+	if (checkweight(1000405,30) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (ep18_1_main == 49) {
+		mes "[쿤]";
+		mes "아니! 근데~ 가만 생각해 봤는데 말이야. 우리가 뭘 잘못했어? 왜 못하게 하는 거야?";
+		npctalk "나도 그걸 모르겠네? 우리가 도운 거 아닌가?", "요피#sms01", bc_self;
+		next;
+		mes "[라마쿠스]";
+		mes "우리가 혼자만 먹겠다는 것도 아니고, 다 잘 살자고 하는 일인데.";
+		next;
+		mes "[요피]";
+		mes "그렇지? 내 생각도 그래. 우리가 더 열심히 적극적으로 하면 아마도 마음을 돌릴걸?";
+		next;
+		select( "저걸 저대로 둬도 될까요..?" );
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "안되죠. 당연히. 앞일 생각 안하고 하고 싶은 대로 하면 그게 애지, 어른이야?";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "수아드. 얘기 좀 해.";
+		next;
+		cutin "",255;
+		cloakoffnpc "주민#sms01", getcharid(0);
+		cloakoffnpc "주민#sms02", getcharid(0);
+		cloakoffnpc "주민#sms03", getcharid(0);
+		mes "[주민]";
+		mes "다들 여기에 있었네. 상단 습격했다며? 뭐 좀 건졌어?";
+		next;
+		mes "[주민]";
+		mes "잘했어. 아주 그냥 혼쭐을 내 줘야지. 우리가 뭐, 힘이 없지 악이 없냐. 지금까지 가만히 있었더니 얕보면서 더 무시하는 거라고.";
+		npctalk "우리도 꿈틀할 수 있다는 걸 보여줘야지.", "주민#sms02", bc_self;
+		next;
+		mes "[요피]";
+		mes "그런데~ 이제 수아드가 하지 말라던데~";
+		next;
+		mes "[주민]";
+		mes "왜애? 왜 하지 말라는 거야? ";
+		next;
+		mes "[쿤]";
+		mes "글쎄, 우리 행동이 우리를 더 위험에 빠뜨린다는데, 무슨 소리를 하는지 나는 머리가 나빠서 통 모르겠네~";
+		next;
+		mes "[라마쿠스]";
+		mes "우리가 상단을 털었다고 라헬에서 우리를 역도로 몬다나~ 우리를 공격할 거래.";
+		npctalk "우리가 무슨 역도라고!", "주민#sms01", bc_self;
+		npctalk "우리를 공격해??", "주민#sms03", bc_self;
+		npctalk "이게 사실이야?", "주민#sms02", bc_self;
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "그래. 입장이 굉장히 불리하게 됐어. 아직까지는 큰 움직임은 없지만 여론이 좋지 않아.";
+		next;
+		cutin "",255;
+		mes "[라마쿠스]";
+		mes "이럴 때일수록 우리 목소리를 내야 하는 것 아닐까?";
+		npctalk "우리도 사람인데. 그쪽과 똑같은.", "주민#sms02", bc_self;
+		npctalk "이제 무장도 갖췄는데.", "쿤#sms01", bc_self;
+		next;
+		mes "[주민]";
+		mes "본때를 보여주자!!! 우리 목소리를 내자!!";
+		npctalk "그래!! 그러자!!!", "주민#sms02", bc_self;
+		npctalk "우리도 이제 말할 때가 됐지!", "주민#sms01", bc_self;
+		npctalk "그렇지? 우리도 그럴 때야!", "라마쿠스#sms01", bc_self;
+		npctalk "언제까지 이러고 살 거야?", "쿤#sms01", bc_self;
+		npctalk "그렇지!!!", "요피#sms01", bc_self;
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "잠깐만 진정해.";
+		next;
+		cutin "",255;
+		mes "[주민]";
+		mes "수아드! 우리 언제까지 이러고 살아야 돼? 내가 억울해 죽겠어!";
+		npctalk "우리가 왜 도망자처럼 숨어 살아야 해?", "주민#sms03", bc_self;
+		npctalk "언제까지 이렇게 살 수 없잖아.", "주민#sms01", bc_self;
+		next;
+		mes "[쿤]";
+		mes "수아드, 너는 너무 신중해. 우리라도 가서 할 거야. 상단 습격한 애들처럼. 별 일 없잖아.";
+		next;
+		mes "[주민]";
+		mes "마침 여기 모험가님도 계셨네. 어떻게 생각해요? 여기저기 다니면서 많이 봤을 거 아니에요?";
+		next;
+		select( "저..." );
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "분위기가 점점...";
+		next;
+		select( "이상하게 돌아가는 것 같은데요." );
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "사람들이 수아드의 통제를 벗어나고 있는데, 이대로라면.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "쾅! 아악! 사람살려! 되는 거지 뭐.";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "그래. 하자. 시위. 언제까지 기다릴 수 없는 것도 사실이니.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "뭐? 이렇게? 당장? 준비도 없이?";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "아예 준비를 하지 않았던 건 아니잖아. 라헬로 조금씩 이동해서 숨어 있다가 때가 되면 신전에서 합류하면 돼.";
+		next;
+		cutin "",255;
+		mes "[라마쿠스]";
+		mes "시간은 오늘 해질녘이 좋겠어. 경비를 교대하느라 경계가 느슨해질 거야.";
+		next;
+		mes "[주민]";
+		mes "좋아!!! 사람들을 모을게!!";
+		next;
+		cloakonnpc "주민#sms01", getcharid(0);
+		cloakonnpc "주민#sms02", getcharid(0);
+		cloakonnpc "주민#sms03", getcharid(0);
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "마람, 너는 여기 남아서 만일의 사태에 대비해.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "알았어.";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "그리고, 너희들은 그 무기들을 다 놓고 가.";
+		next;
+		cutin "",255;
+		mes "[요피]";
+		mes "아, 왜!! 우리도 몸을 지켜야지!!";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "우리는 무력 충돌을 일으키러 가는 것이 아니니까. 만에 하나 무기를 소지한 채로 불미스러운 일이라도 일어나면 우리는 정말 반란군으로 몰리게 돼.";
+		next;
+		cutin "",255;
+		mes "[쿤]";
+		mes "에이, 알았어! 하여간 수아드는 걱정이 많다니까.";
+		next;
+		mes "[라마쿠스]";
+		mes "일어나지도 않을 일을 왜 미리 걱정해?";
+		next;
+		cutin "ep18_suad_01.png",1;
+		mes "[수아드]";
+		mes "그럼, 결정됐으니 서두르자. 라헬의 <NAVI>[신전 앞]<INFO>rachel,169,245,0,101,0</INFO></NAVI>으로 모여.";
+		changequest 17518,17519;
+		ep18_1_main = 50;
+		getitem 1000405,30;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		cutin "",255;
+		cloakonnpc "수아드#sms02", getcharid(0);
+		cloakonnpc "마람#sms02", getcharid(0);
+		cloakonnpc "미리암#sms02", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 50) {
+		mes "[라마쿠스]";
+		mes "뭐해? 우리 라헬의 <NAVI>[신전 앞]<INFO>rachel,169,245,0,101,0</INFO></NAVI>으로 가기로 했잖아.";
+		close2;
+		cloakonnpc "라마쿠스#sms01", getcharid(0);
+		cloakonnpc "쿤#sms01", getcharid(0);
+		cloakonnpc "요피#sms01", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17518) == 1" );
+	end;
+}
+
+wolfvill,129,256,3	duplicate(dummy_cloaked_npc)	쿤#sms01	EP18_ARMED_VILLAGER02
+wolfvill,126,255,5	duplicate(dummy_cloaked_npc)	요피#sms01	EP18_ARMED_VILLAGER03
+
+wolfvill,129,251,1	duplicate(dummy_cloaked_npc)	주민#sms01	4_M_RACHMAN1
+wolfvill,129,248,7	duplicate(dummy_cloaked_npc)	주민#sms02	4_M_MIDDLE1
+wolfvill,132,250,1	duplicate(dummy_cloaked_npc)	주민#sms03	4_EP18_GW_MAN01
+
+wolfvill,126,252,7	duplicate(dummy_cloaked_npc)	수아드#sms02	4_EP18_SUAD
+wolfvill,124,253,5	duplicate(dummy_cloaked_npc)	미리암#sms02	4_EP18_MIRIAM
+wolfvill,127,250,7	duplicate(dummy_cloaked_npc)	마람#sms02	4_EP18_MARAM
+
+// Main Quest: Step 54. (entrance npc is a part of the instance A Gathering Place of Wolves)
+// Main Quest: Step 55-58 instance 1@nyr.
+
+// Main Quest: Step 59.
+rachel,118,197,1	duplicate(dummy_cloaked_npc)	미리암#sms04	4_EP18_MIRIAM
+rachel,119,199,3	duplicate(dummy_cloaked_npc)	수아드#sms04	4_EP18_SUAD
+
+rachel,115,198,5	script	제드#sms01	4_M_RACHOLD1,{
+	cutin "ra_gman2.bmp",0;
+	mes "[제드]";
+	mes "이제부터 아주 바빠질 것 같다오.";
+	close3;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+rachel,116,200,5	script	니르엔#sms01	4_F_MADAME,{
+	if (checkweight(1000405,60) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (getequipid(EQI_HEAD_TOP) != 400127) {	// Ep18_Mini_Elly
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 미니 엘리는 어디로 갔지?", bc_self;
+		end;
+	}
+	if (ep18_1_main == 52) {
+		setpcblock PCBLOCK_NPC, true;
+		cloakoffnpc "제드#sms01", getcharid(0);
+		npctalk "부상자의 수는 대충 파악은 끝났습니다.", "제드#sms01", bc_self;
+		sleep2 800;
+		cloakoffnpc "수아드#sms04", getcharid(0);
+		cloakoffnpc "미리암#sms04", getcharid(0);
+		npctalk "이쪽도 전부 안전처로 옮겼어요.", "미리암#sms04", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "피해가.. 너무 크군요.";
+		next;
+		cutin "ep18_suad_03.png",2;
+		mes "[수아드]";
+		mes "게다가 유혈사태가 일어났으니 순식간에 원주민의 폭동으로 소문이 번지겠지. 이미 상단 습격 사건으로 좋지도 않은 마당에.";
+		next;
+		cutin "ra_gman2.bmp",0;
+		mes "[제드]";
+		mes "여론은 걱정하지 말게. 우리가 수습하도록 하지.";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "최근에 벌어진 일들이 다 계략에 의한 것이었다니.";
+		next;
+		cutin "ra_gman2.bmp",0;
+		mes "[제드]";
+		mes "신전 내의 불온한 움직임을 좀 더 면밀히 살펴보지 못한 우리의 불찰이지.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "자책은 나중에 하는 것으로 하고 일단 양쪽 모두 사태를 수습해야 할 것 같은데.";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "유스 아말 대신관이 연루된 것은 확실한가요?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "실각 후에 시들어있던 제 양부가 갑자기 활기를 되찾아 의욕적이 된 시기가 있었어요. 그때부터 아루나펠츠의 원주민과 이주민 사이의 갈등이 하나둘씩 불거져 나왔고요.";
+		next;
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "저택에서 하트헌터들이 탈출했던 시기와 얼추 들어맞는군요.";
+		next;
+		cutin "ra_gman2.bmp",0;
+		mes "[제드]";
+		mes "그럼 역시 그 둘이 결탁한 것이 확실하겠군.";
+		next;
+		select( "목격까지 했으니까요." );
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "한가지 미심쩍은건, 유스 아말 대신관이 이미르의 심장 조각의 가치를 모르지 않을 거란 거예요. 단지 조직 내에 침투해서 갈등을 일으키는 것만으로 쉽게 내주진 않았을테고요..";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "무언가 더 받기로 하고 건네준 것인가?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "확실하지는 않지만 양부는... 아니, 직접 가서 확인해 봐야겠어요.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "어디로 갈 건데? 짐작 가는 곳이라도 있어?";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "라헬 외곽에 여름용 별장이 하나 있어. 최근 그곳에 요양차 자주 찾으셨는데 아마도 그 미치광이 과학자들과 결탁해 뭔가 일을 꾸민다면 그곳이겠지.";
+		next;
+		cutin "",255;
+		mes "[미니 엘리]";
+		mes "추적이 필요하겠군요.";
+		next;
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "심장 조각을 훔쳐 달아난 사람을 추적하는 건 미리암, 네게 맡기마. 모험가님도 동행해 주셨으면 해요.";
+		next;
+		select( "알겠습니다." );
+		cutin "ra_gman2.bmp",0;
+		mes "[제드]";
+		mes "우리는 이곳에서 부상자들을 수습하고 남아 있을지 모르는 잔당들을 색출하겠네. 여론에도 신경을 써야 하고.";
+		next;
+		cutin "ep18_suad_01.png",2;
+		mes "[수아드]";
+		mes "우리도 숲으로 돌아가서 뒷수습을 해야겠어.";
+		mes "미리암, 모험가. 그럼 추적을 부탁한다.";
+		next;
+		cutin "ep18_miriam_01.png",1;
+		mes "[미리암]";
+		mes "가요, 모험가님. 별장으로 가기 전에 동행할 사람이 있으니 <NAVI>[오즈의 미로]<INFO>oz_dun01,223,116,0,101,0</INFO></NAVI>에서 만나요.";
+		completequest 17521;
+		setquest 17525;
+		ep18_1_main = 53;
+		getitem 1000405,60;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		close2;
+		cutin "",255;
+		cloakonnpc "미리암#sms04", getcharid(0);
+		cloakonnpc "수아드#sms04", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 53) {
+		cutin "ra_gwoman.bmp",0;
+		mes "[니르엔]";
+		mes "미리암과 <NAVI>[오즈의 미로]<INFO>oz_dun01,223,116,0,101,0</INFO></NAVI>에서 만나기로 하지 않으셨나요.";
+		close3;
+	}
+	mes "[미리암]";
+	mes "요즘 이곳의 상황이 그렇게 좋지는 않아요.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17521) == 1" );
+	end;
+}
+
+// Main Quest: Step 60.
+oz_dun01,223,116,3	script	약속지점#c12_evt01	4_POINT_BLUE,5,5,{
+	if (ep18_1_main == 53) {
+		if (isnpccloaked("마람#c12_01") == true) {
+			mes "약속 장소에 도착했다.";
+			mes "다른 일행은 아직 도착하지 않은 것 같다.";
+			mes "기다려보자.";
+			close2;
+			setpcblock PCBLOCK_NPC, true;
+			emotion ET_THINK, playerattached();
+			sleep2 2000;
+			emotion ET_SLEEPY, playerattached();
+			cloakoffnpc "마람#c12_01", getcharid(0);
+			npctalk "앗! 아직 있다 있어!", "마람#c12_01", bc_self;
+			sleep2 500;
+			cloakoffnpc "수아드#c12_01", getcharid(0);
+			npctalk "늦지 않았나?", "수아드#c12_01", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		select( "미리암을 기다리고 있었는데?" );
+		mes "[마람]";
+		mes "어머니께 양해를 구하고 잠깐 나왔어요.";
+		mes "아직 시위를 수습하던 중이라 곧 돌아가야 하지만 ….";
+		mes "미리암은 어디 있죠?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[수아드]";
+		mes "저기 오는군.";
+		cutin "ep18_suad_01.png",0;
+		next;
+		cloakoffnpc "미리암#c12_01", getcharid(0);
+		cloakoffnpc "아이라#c12_01", getcharid(0);
+		mes "[미리암]";
+		mes "늦어서 죄송합니다. 사람을 좀 찾느라 시간이 걸렸습니다.";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		mes "[미리암]";
+		mes "이쪽은 아이라.";
+		mes "종종 아버지의 시중을 드는 아이인데, 별장에 들어가려면 도움을 받아야해서요.";
+		next;
+		cutin "",255;
+		npctalk "안녕하세요.", "아이라#c12_01", bc_self;
+		next;
+		mes "[마람]";
+		mes "뭐야, 아이라가 여긴 왜 왔어?";
+		mes "이번 일과 관련이 있는 거야?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		cutin "",255;
+		mes "[아이라]";
+		mes "오랜만이에요. 마람 오라버니.";
+		mes "이참에 미리암 언니에게 신세 진 것도 갚을 겸 왔답니다.";
+		next;
+		mes "[아이라]";
+		mes "별장에 볼 일이 있으시다면서요?";
+		mes "아말 님의 휠체어를 밀다보면 온갖 곳을 다 오가거든요.";
+		next;
+		mes "[아이라]";
+		mes "마침 제가 받아둔 사용인용 열쇠가 있네요.";
+		mes "최근에도 아말 님을 모시고 다녀오느라 아직 반납하지 않고 가지고 있어요.";
+		next;
+		mes "[아이라]";
+		mes "그리고 그 별장 말인데요.";
+		mes "가끔 수행사제한테 빌려주잖아요.";
+		mes "이번에도 그랬단 말이죠.";
+		mes "그런데 좀 이상해요.";
+		next;
+		mes "[수아드]";
+		mes "이상하다니?";
+		mes "구체적으로 말해주면 좋겠군.";
+		cutin "ep18_suad_04.png",0;
+		next;
+		cutin "",255;
+		mes "[아이라]";
+		mes "수행사제라는 분들이 잠시 머문다고 하셨는데, 아무래도 수행사제는 거짓말 같고….";
+		next;
+		mes "[아이라]";
+		mes "아말 님께서 또 비밀 집단을 운용하는 것 같더라고요.";
+		mes "저번에도 전쟁하겠다고 그러셨다가 신전에서 밀려나셨잖아요?";
+		next;
+		mes "[아이라]";
+		mes "아직 포기 못하신 것 같은데.";
+		mes "이번엔 저번보다 더 위험해 보이는 사람들이 별장에 머물고 있어요.";
+		next;
+		mes "[아이라]";
+		mes "누구든 좋으니까 좀 말려주면 좋겠어요.";
+		mes "라헬 분위기도 안 좋잖아요.";
+		mes "만약 전쟁이라도 난다면 화살받이로 서는건 우리 원주민들이 되겠죠.";
+		next;
+		mes "[미리암]";
+		mes "음 …. 아니 전쟁은 아닐거야.";
+		mes "안심해도 괜찮아.";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		cutin "",255;
+		mes "[아이라]";
+		mes "언니! 어떻게 이렇게 태평하세요?";
+		mes "제가 별장 관리 하면서 얼마나 무서웠는지 아세요?!";
+		mes "거기 특히 정신머리 이상한 여자가 ….";
+		next;
+		mes "[마람]";
+		mes "하하하 ….";
+		mes "알았어. 진정해, 아이라.";
+		mes "지금부터 그걸 알아보려고 모인 거니까.";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[미리암]";
+		mes "그런 이유로, 과격한 손님이 머물고 있다는 별장으로 들어가 볼 예정입니다.";
+		mes "아무래도 신전에서 마주친 자들이 그 손님들 같으니까요.";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		mes "[수아드]";
+		mes "무슨 말인지는 잘 알겠다.";
+		mes "솔직한 심정으로는 같이 가고 싶군.";
+		mes "하지만 아직 수습해야 할 일이 남았어.";
+		cutin "ep18_suad_01.png",0;
+		next;
+		mes "[마람]";
+		mes "그래. 급하게 양해를 구하고 잠깐 자리를 비운 거야.";
+		mes "시위의 수습도 마저 해야하고, 조정 작업도 필요해.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "미안하지만 나랑 수아드는 함께하지 못하겠다.";
+		mes "이해해 줄 수 있지?";
+		next;
+		mes "[미리암]";
+		mes "당연하지.";
+		mes "사람들 간의 일은 너희들이 해결하는 게 더 맞을 거다.";
+		mes "늑대마을 사람들을 부탁해.";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		mes "[미리암]";
+		mes "그럼 " + strcharinfo(0) + "님, 함께 별장을 정찰해주시겠습니까?";
+		next;
+		select( "맡겨 둬." );
+		mes "[수아드]";
+		mes "이해해주니 고맙군.";
+		mes "너희들이 별장으로 무사히 진입하게 되면 아이라는 우리가 데리고 가겠다.";
+		cutin "ep18_suad_01.png",0;
+		next;
+		mes "[미리암]";
+		mes "고마워.";
+		mes "그럼, 아이라. 우릴 별장으로 보내주겠니?";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		cutin "",255;
+		mes "[아이라]";
+		mes "그럼요.";
+		mes "준비가 끝나면 말을 걸어 주세요.";
+		mes "바로 보내드릴테니까요.";
+		completequest 17525;
+		setquest 18083;
+		ep18_1_main = 54;
+		close;
+	}
+	if (ep18_1_main == 54) {
+		npctalk "준비 다 되셨나요?", "아이라#c12_01", bc_self;
+		cloakoffnpc "미리암#c12_01", getcharid(0);
+		cloakoffnpc "아이라#c12_01", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 55) {
+		cloakoffnpc "마람#c12_01", getcharid(0);
+		end;
+	}
+	end;
+
+OnTouch:
+	if (ep18_1_main == 54) {
+		npctalk "준비 다 되셨나요?", "아이라#c12_01", bc_self;
+		cloakoffnpc "미리암#c12_01", getcharid(0);
+		cloakoffnpc "아이라#c12_01", getcharid(0);
+		end;
+	}
+	if (ep18_1_main == 55) {
+		cloakoffnpc "마람#c12_01", getcharid(0);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(17525) == 1" );
+	end;
+}
+
+oz_dun01,223,120,5	script	수아드#c12_01	4_EP18_SUAD,{
+	mes "[수아드]";
+	mes "성가신 일을 떠맡겨서 미안하군.";
+	mes "하지만 회색늑대 마을의 일원들은 날 기다리고 있을 테지.";
+	cutin "ep18_suad_01.png",0;
+	next;
+	mes "[수아드]";
+	mes "미리암을 부탁한다.";
+	close3;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+oz_dun01,220,118,5	script	미리암#c12_01	4_EP18_MIRIAM,{
+	mes "[미리암]";
+	mes "별장에는 저와 모험가님만 들어갑니다.";
+	mes "수아드와 마람은 시위의 수습을 위해 다시 돌아갈 겁니다.";
+	cutin "ep18_miriam_01.png",0;
+	next;
+	mes "[미리암]";
+	mes "별장은 이 협곡 아래에 있다고 합니다.";
+	mes "아이라가 별도의 출입열쇠를 가지고 있다고 하니, 준비가 되면 아이라에게 말을 걸어주세요.";
+	close3;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Main Quest: Step 61. (entrance npc is a part of the instance Villa of High Priest)
+// Main Quest: Step 62-66 inside the instance.
+
+// Main Quest: Step 67.
+oz_dun01,225,119,3	script	마람#c12_01	4_EP18_MARAM,{
+	if (ep18_1_main == 55) {
+		mes "[마람]";
+		mes "앗 나오셨다.";
+		mes "소요사태는 어느정도 정리가 되어서 와봤어요.";
+		mes "미리암과 유스 신관님은 신전으로 갔습니다.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[마람]";
+		mes "유스 님이 좀 날뛰는 바람에 수아드가 연행하듯 꿰차고 가버렸어요.";
+		mes "자세한 이야기는 신전에서 하자고 하더군요.";
+		next;
+		mes "[마람]";
+		mes "바로 가시겠어요?";
+		next;
+		switch( select( "부탁할게요.", "알아서 갈게요." ) ) {
+		case 1:
+			mes "[마람]";
+			mes "그럼 이쪽으로 같이 가시죠. 하하..";
+			close2;
+			cutin "",255;
+			warp "ra_temin",169,26;
+			end;
+		case 2:
+			close3;
+		}
+		end;
+	}
+	mes "[마람]";
+	mes "이번 일이, 하트 헌터와 일루시온이라는 자들이 조작한 것이라곤 해도 언젠가는 터질 일이긴 했어요.";
+	cutin "ep18_maram_01.png",2;
+	next;
+	mes "[마람]";
+	mes "모두가 함께 잘 살자는 게 왜 이렇게 힘든 것인지 모르겠네요.";
+	cutin "ep18_maram_03.png",2;
+	next;
+	mes "[마람]";
+	mes "이런 고민은 남은 저희들 몫이죠.";
+	mes "모험가님은 미리암과 함께 별장을 조사해 주세요.";
+	mes "아말 님께서 도대체 무슨 생각을 하고 계시는 건지 모르겠네요.";
+	cutin "ep18_maram_01.png",2;
+	close3;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(18084) == 1" );
+	end;
+}
+
+// Main Quest: Step 68.
+ra_temin,256,130,1	script	신전 기사#c12_02	4_M_RASWORD,3,3,{
+	if (ep18_1_main == 55 || ep18_1_main == 56)
+		end;
+	mes "[신전 기사]";
+	mes "성역 세스룸니르입니다.";
+	mes "일반 예배당은 이쪽이 아니니 돌아가십시오.";
+	close;
+OnTouch:
+	if (ep18_1_main == 55 || ep18_1_main == 56) {
+		npctalk "기다리고 있었습니다. 안으로 드십시오.", "신전 기사#c12_02", bc_self;
+		cloakoffnpc "수아드#c12last", getcharid(0);
+		cloakoffnpc "미리암#c12_02", getcharid(0);
+		cloakoffnpc "니르엔#c12last", getcharid(0);
+		cloakoffnpc "마람#c12last", getcharid(0);
+		end;
+	}
+	npctalk "관계자 외 출입금지입니다.", "신전 기사#c12_02", bc_self;
+	warp "ra_temin",255,138;
+	end;
+}
+
+ra_temin,254,117,5	script	미리암#c12_02	4_EP18_MIRIAM,{
+	if (getequipid(EQI_HEAD_TOP) == 400127 && countitem(400127) == 1) {	// player must unequip the item
+		mes "늘어진 엘리를 소지하고 있어야합니다.";
+		close;
+	}
+	if (ep18_1_main == 55) {
+		mes "[미리암]";
+		mes "오시는 동안 자세한 이야기를 들어보았습니다만 ….";
+		mes "아무래도 이미르의 심장 조각으로 프레이야 님의 강림이 실제 목표였던 것 같습니다.";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "원주민과 이주민 사이에 불을 붙인 것도 신전과 사람들의 눈을 돌리기 위함이었고요.";
+		mes "하아...";
+		next;
+		mes "[미리암]";
+		mes "그 일로 얼마나 많은 사람들이 가슴 아파 하고, 힘들어 했는데 ….";
+		next;
+		mes "[미리암]";
+		mes "신이요? 신이 다 뭘까요?";
+		mes "제 아버지는 도대체 뭘 바라고 그런 그릇된 기도를 올린 걸까요?";
+		next;
+		mes "[미리암]";
+		mes "….";
+		mes "자세한 이야기는 더 추궁을 해봐야 알겠지만";
+		mes "맹목적인 믿음에 정말 환멸이 드는군요.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "정말 너희들에게 면목이 없구나.";
+		mes "유스 그 자가 그럴줄은 정말 상상도 못했단다.";
+		next;
+		mes "[니르엔]";
+		mes "일전에 그 자가 강경파의 수장이었다는 것을 기억하니?";
+		mes "하지만 전쟁을 할 수는 없었지.";
+		mes "그 일로 일선에 물러난 그가 뒤에서 이런 것을 꾸미고 있을 줄이야.";
+		next;
+		mes "[니르엔]";
+		mes "우리는 신의 종이자 신의 뜻을 섬기는 자들이지.";
+		mes "우리는 언제나 프레이야님이 다시 목소리를 들려주길 바라며 기다리는 자들이고.";
+		next;
+		mes "[니르엔]";
+		mes "하지만 그렇다고 해서 감히 신을 지상으로 불러올 생각을 해선 안 돼.";
+		mes "그건 신의 뜻이 아니잖니.";
+		next;
+		mes "[니르엔]";
+		mes "유스 그 자는 금기를 어긴 거야.";
+		mes "감히 인간이 신의 종이라 자처하는 이가 신을 불러 자신의 권력으로 삼으려 했어.";
+		next;
+		mes "[니르엔]";
+		mes "그것만으로도 용서받지 못할진데 그걸위해 신도들과 무고한 자들을 고통에 빠트렸어.";
+		mes "잃어버린 이미르의 심장 조각은 어떻게 해야할지 ….";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "어머니.";
+		mes "이미르의 심장 조각은 다시 찾아올 수 있을 거에요.";
+		mes "너무 심려치마세요.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "맞습니다.";
+		mes "저도 이미르의 심장 조각을 되찾아올게요.";
+		next;
+		mes "이야기가 길어지고 있다.";
+		mes "언제쯤 껴도 되는 걸까 ….";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "….";
+		mes "왔으면 왔다고 기척을 내라.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "이런, 모험가님이 오신 줄도 모르고 이야기를 나누고 있었군요.";
+		mes "조사하신다는 것은 어찌 되었습니까?";
+		mes "유스의 별장에서 발견한 그 불경한 것의 잔재 말입니다.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "바곳이라고 했던가요?";
+		mes "저희가 별장에서 본 것은 바곳이 만들어낸 키메라라고….";
+		close2;
+		cutin "",255;
+		unittalk getcharid(3), "" + strcharinfo(0) + " 엘리: 그건 제가 설명드리죠.", bc_self;
+		cloakoffnpc "엘리의 형상#c12_02", getcharid(0);
+		specialeffect EF_BLUELIGHTBODY, AREA, "엘리의 형상#c12_02";
+		changequest 18084,18085;
+		ep18_1_main = 56;
+		end;
+	}
+	if (ep18_1_main == 56) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "바곳이라고 했던가요?";
+		mes "저희가 별장에서 본 것은 바곳이 만들어낸 키메라라고….";
+		close2;
+		cutin "",255;
+		unittalk getcharid(3), "" + strcharinfo(0) + " 엘리: 그건 제가 설명드리죠.", bc_self;
+		cloakoffnpc "엘리의 형상#c12_02", getcharid(0);
+		specialeffect EF_BLUELIGHTBODY, AREA, "엘리의 형상#c12_02";
+		end;
+	}
+	if (ep18_1_main == 57) {
+		npctalk "아버지께서 더 큰 죄를 짓기 전에 막아야했어요.", "미리암#c12_02", bc_self;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(18084) == 1" );
+	cloakonnpc();
+	end;
+}
+
+// Main Quest: Step 69.
+ra_temin,258,117,3	script	엘리의 형상#c12_02	4_EP17_TABLET,{
+	disable_items;
+	if (checkweight(1201,2) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (getequipid(EQI_HEAD_TOP) == 400127 && countitem(400127) == 1 || countitem(400127) == 0) {
+		mes "늘어진 엘리를 소지하고 있어야합니다.";
+		close;
+	}
+	if (ep18_1_main == 56) {
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "여러분들이 함께 들어야 할 이야기인 것 같아서 제 본래 모습을 투영했습니다.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "오…. 가끔 어딘가에서 종알거리는 소리가 들린다했더니 여기 계셨군요?";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "침착한 모습이 보기 좋군요. 과연 모험가님의 일행이라 할 수 있겠습니다.";
+		mes "거두절미하고 본론으로 들어가죠. 이 모습은 유지 시간이 짧아서요.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "실로 놀랍지만 그래주세요. 저는 프레이야님의 현신이라는 것의 정체부터 알아야겠습니다.";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "좋아요. 빠르게 설명할게요.";
+		mes "별장에서 채취한 잔해는 기본적으로 호문쿨루스의 근원이 되는 엠브리오의 구조와 동일했어요.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "엠브리오?";
+		mes "그 뭐지? 연금술 같은 건가요?";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "이 분야에 대해 좀 아십니까?";
+		mes "엠브리오는 인공생명체인 호문쿨루스의 배아형태라고 보시면 됩니다.";
+		next;
+		mes "[엘리]";
+		mes "인공생명체는 아름답죠. 키워내는 술사에 따라 백가지 만가지 모습을 가질 수도 있고.";
+		next;
+		mes "[엘리]";
+		mes "바곳은 엠브리오를 기반으로 교황님의 모습을 본 따 키워낸 다음에 키메라로 개조했습니다.";
+		mes "별장에서 본 것이 그 개조 키메라에요.";
+		next;
+		select( "일루시온이니까." );
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "그 일루시온이라는 것에 대해 더 자세히 알 수 있나?";
+		next;
+		mes "일루시온에 대해 대략적인 것을 알려줬다.";
+		next;
+		cutin "ep18_suad_02.png",0;
+		mes "[수아드]";
+		mes "결국, 그 일루시온이 이미르의 심장 조각을 가지기 위해 부린 술수에 우리가 놀아난 것이군?";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "요약하자면 그렇죠.";
+		mes "이해가 빠르시다니 뇌가 우수한 인재시군요.";
+		next;
+		cutin "ep18_suad_03.png",0;
+		mes "[수아드]";
+		mes "유스 님이 일루시온의 손아귀에 놀아나서 여신을 부르려다가 자멸했다는 건 잘 이해했다.";
+		mes "그럼 그 일루시온? 바곳이라는 자와 심장은 어디로 간 거지?";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "무엇보다 나는 …. 고작 신의 뜻이니 뭐니 하면서 결국 개인의 권력을 위한 계략에 우리들이 고통받았다는 사실을 참을 수가 없군.";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "수아드.";
+		mes "나도 그래. 우리 모두가 다 그럴 거야.";
+		mes "무엇보다 나는 가장 가까운 곳에 있었으면서 눈치채지 못했다는 사실이 제일 ….";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "어머니. 저흰 앞으로 어떻게 하면 좋죠?";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "의회를 구성하세요.";
+		mes "이 엘리가 지켜보기론 이 나라는 소통이 부재합니다.";
+		mes "원주민과 이주민이 서로 이야기를 하지 않는데 원하는 걸 어떻게 알죠?";
+		next;
+		mes "[엘리]";
+		mes "원주민들에게 지위와 권력을 주세요. 법적으로 보장하세요.";
+		mes "어렵지만 쉬운 일입니다. 당신들이 보장하기만 하면 되는 일이죠.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "그렇군요. 신의 말만 기다리고 강요할 것이 아니라 사람들의 이야기를 들을 줄도 알아야 한다는 것이군요.";
+		mes "그런 근본적인 ….";
+		next;
+		cutin "ep18_maram_03.png",2;
+		mes "[마람]";
+		mes "하지만 기본 기득권 층이 가만있지 않을텐데요.";
+		mes "오히려 지금보다 더한 저항과 소요가 발생할 수 있어요.";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "하, 그렇다고 계속 이대로 있을 수도 없는 노릇 아닌가?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "맞아. 개혁은 필요해.";
+		mes "언제까지나 벽에다 대고 소리치고 숲에 몸을 감출 수는 없잖아.";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "인간들. 걱정하지 마세요.";
+		mes "시간은 언제나 우리 편입니다.";
+		mes "당신의 역할은 권력의 추를 맞추기 위해 반대쪽에 힘을 싣는 것. 단지 그것뿐이니까요.";
+		next;
+		mes "[엘리]";
+		mes "나머지는 시간과 인간의 적응력이 해결합니다.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "이거 외지의 손님에게서 큰 가르침을 받는군요.";
+		mes "알겠습니다. 이 건에 대해서는 정식 안건으로 올려 진행할 수 있도록 하지요.";
+		next;
+		mes "[니르엔]";
+		mes "아마도 제드 대신관이라면 큰 도움이 되어줄 것 같군요.";
+		mes "너희들은 원주민들의 대표를 정해오렴.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "수아드가 있습니다. 신관님.";
+		mes "그리고 저와 마람이 있습니다. 이 날을 위해 저희들이 존재하는 게 아닌가요?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "회색의 아이들이 제대로 일을 할 차례네.";
+		mes "어머니께서 절 입양하신 건, 오늘을 위한 일이었나 보네요.";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "이쪽은 걱정하지 말고 제대로 된 판만 마련해 주시길.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "고맙구나. 잘 커주었어….";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "좋아요. 이 나라 사정은 사실 제 알 바 아니지만 잘 해결 된 것 같군요.";
+		mes "이제 일루시온 이야기로 돌아가겠습니다.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그래. 바곳은 이미르의 심장 조각을 가지고 어디론가 가버렸다는 거죠?";
+		mes "그리고 모험가님은 심장을 찾아 떠나시겠군요.";
+		next;
+		select( "바곳의 행방을 알아야 한다." );
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "바곳은 아무래도 북부대륙으로 향한 것 같습니다.";
+		mes "언젠가 요르문간드에 대한 이야기를 아버지와 나눈 적이 있다는군요.";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "북부?";
+		mes "결계 너머 요르문간드가 봉인된 지역 말씀이십니까?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "정말인가요? 요르문간드가 봉인되어있다니. 바곳이 흥미를 가질만하군요.";
+		mes "바곳은 신(神)을 부활시키는 것에 흥미를 가지고 있었다고 합니다.";
+		next;
+		mes "[미리암]";
+		mes "처음엔 이미르의 심장 조각을 빼돌리기 위해 거짓된 신의 강림을 약속한 것 같은데 ….";
+		mes "그 자가 손에 넣은 이미르의 심장으로 무슨일을 할지는 아무도 모르는거죠.";
+		next;
+		mes "[미리암]";
+		mes "다만, 이미 바곳의 동료가 북부 대륙으로 이동한 상태인가 봐요.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "요르문간드가 실존해?";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "요르문간드 교단은 실재했단다.";
+		mes "교단과의 싸움에서 승기를 잡은 것이 룬-미드가츠 왕국의 시초가 된 영웅들이다.";
+		next;
+		mes "[니르엔]";
+		mes "당시 그들은 오딘의 이름으로, 우리는 프레이야님의 이름으로 싸웠지.";
+		mes "인간을 위한 뜻을 펼친건 분명 프레이야님이셨다.";
+		next;
+		mes "[니르엔]";
+		mes "하지만 교단과의 싸움에서 승리한 영웅의 가문은 오딘의 이름으로 나라를 세웠지.";
+		mes "그로인해 요르문간드가 승리의 영웅이자 초대 왕에게 저주를 걸었다는 이야기도 있어.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "처음 듣는 이야긴데요?";
+		mes "저주 …?";
+		next;
+		select( "저주는 중요하지 않다." );
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "그래. 지금 왕가의 저주 이야기는 중요하지 않지.";
+		mes "중요한 건 요르문간드 교단이 실재했다는 것입니다.";
+		next;
+		mes "[니르엔]";
+		mes "북부대륙이라 불리는 곳에 봉인되어 있다는 요르문간드가 실존하다는 이야기도 되지요.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "바곳이 정말로 신을 부활시키고자 한다면, 다음엔 요르문간드를 노리겠군요.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "그것만은 막아야 해.";
+		mes "천년에 걸친 신마전쟁보다 더 큰 대륙의 어둠이 요르문간드였다.";
+		mes "바곳이라는 자를 추적해서 막아야 해.";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "북부는 봉인된 땅. 결계가 있어서 쉽게 넘지 못합니다.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리엄]";
+		mes "결계가 있어서 넘을 수 없다고요?";
+		mes "그럼 결계를 넘어가기 위해 이미르의 심장 조각을 사용했을까요?";
+		next;
+		mes "[미리암]";
+		mes "그 자를 추적하려면 북부를 가로막고 있는 결계를 넘을 방법을 찾아야 하는군요.";
+		mes "시간이 걸리겠어요.";
+		next;
+		cutin "ep172_beta.png",2;
+		mes "[엘리]";
+		mes "그건 제가 하겠습니다.";
+		mes "저택에 돌아가 결계를 넘을 수 있는 방안을 찾아보죠.";
+		next;
+		mes "[엘리]";
+		mes "그리고 자랑은 아니지만 주인님의 비공정을 이용했다면 그깟 결계쯤 어떻게든 넘지 않았겠어요?";
+		mes "비공정을 이용했다면 흔적을 추적할 수 있을겁니다.";
+		next;
+		mes "[엘리]";
+		mes "비공정 관리자 본체로 돌아가야겠군요. 이 껍데기는 기념품으로 모험가님께 드리겠습니다.";
+		mes "저택에서 다시 뵙기를.";
+		ep18_1_main = 57;
+		completequest 18085;
+		delitem 400127,1;	// Ep18_Mini_Elly
+		getitem 400128,1;	// Costume Dropping Elly
+		getitem 1000405,180;	// Ep18_Amethyst_Fragment
+		getexp 18252408,2000000;
+		next;
+		cloakonnpc "엘리의 형상#c12_02", getcharid(0);
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "정보가 더 모이기 전에는 할 수 있는게 없군요.";
+		mes "전 아버지와 좀 더 대화를 해보겠습니다.";
+		mes "도와주셔서 감사했습니다.";
+		next;
+		cutin "ep18_suad_01.png",0;
+		mes "[수아드]";
+		mes "그럼 난 회색늑대 숲으로 돌아가겠어.";
+		mes "니르엔 님. 의회가 구성될 때 다시 불러주십시오. 그전까지 준비를 해보겠습니다.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "그럼 전 미리암이랑 유스 어르신 이야기를 같이 좀 들어볼까요?";
+		mes "이미르의 심장 조각을 찾는데 도움이 되고 싶으니까요.";
+		next;
+		cutin "ra_gwoman.bmp",2;
+		mes "[니르엔]";
+		mes "그럼 난 이만 제드 대신관을 만나러 가봐야겠구나.";
+		mes "모험가님. 이번에도 신세를 졌군요.";
+		next;
+		mes "[니르엔]";
+		mes "기도는 언제나 신을 향해";
+		mes "기원하는 자를 보듬을 수 있도록 올리는 것인데 ….";
+		mes "유스 그 자는 무엇을 향해 기도를 올린 걸까요.";
+		next;
+		mes "[니르엔]";
+		mes "그 기도의 끝에는 나락뿐이거늘.";
+		mes "….";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(18085) == 1" );
+	cloakonnpc();
+	end;
+}
+
+ra_temin,254,114,7	script	수아드#c12last	4_EP18_SUAD,{
+	npctalk "회색늑대 숲을 도와줘서 고맙다.", "수아드#c12last", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+ra_temin,258,114,3	script	니르엔#c12last	4_F_RACHOLD,{
+	npctalk "엘리라는 분의 말씀대로 시간이 우리를 도와주겠죠. 이번에는 신이 아니라 시간이….", "니르엔#c12last", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+ra_temin,259,111,1	script	마람#c12last	4_EP18_MARAM,{
+	npctalk "만약 심장을 찾으러 갈때 저도 동행할 수 있으면 좋겠어요.", "마람#c12last", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}

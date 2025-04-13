@@ -1,0 +1,40 @@
+//===== rAthena Script =======================================
+//= Monster spawn from episode 18.1
+//===== Description: =========================================
+//= The file include several new monster spawn locations.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+gw_fild01	monster	Ashhopper	21302,50
+gw_fild01	monster	Ashring	21303,70
+gw_fild01	monster	Grey Wolf	21304,35
+
+gw_fild02	monster	Ashring	21303,15
+gw_fild02	monster	Bushring	21305,60
+gw_fild02	monster	Phantom Wolf	21307,25
+gw_fild02	monster	Grey Wolf	21304,35
+gw_fild02	monster	Firewind Kite	21306,35
+
+oz_dun01	monster	Rake Hand	21296,70
+oz_dun01	monster	Ash Toad	21295,65
+oz_dun01	monster	Spark	21297,10
+
+oz_dun02	monster	Spark	21297,25
+oz_dun02	monster	Volcaring	21299,35
+oz_dun02	monster	Lava Toad	21300,25
+oz_dun02	monster	Hot Molar	21298,60
+oz_dun02	boss_monster	Burning Fang	21301,1,21600000,600000,0
+
+ra_fild10	monster	Drosera	1781,5
+ra_fild10	monster	Magmaring	1836,5
+ra_fild10	monster	Grey Baby Wolf	21324,50
+ra_fild10	monster	Grey Goat	21323,60
+ra_fild10	monster	Rake Hand	21296,5
+
+ra_fild11	monster	Red Plant	1078,5
+ra_fild11	monster	Yellow Plant	1081,15
+ra_fild11	monster	Drosera	1781,10
+ra_fild11	monster	Grey Baby Wolf	21324,50
+ra_fild11	monster	Grey Goat	21323,70
+ra_fild11	monster	Rake Hand	21296,5

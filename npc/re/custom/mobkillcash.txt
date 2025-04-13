@@ -1,0 +1,41 @@
+prontera,1,1,1	script	cashmob	-1,{
+    end;
+    OnNPCKillEvent:
+        set @moblv, getmonsterinfo(killedrid, MOB_LV);
+        set @playerlv, getcharid(1); // "BaseLevel" 대신에 1을 사용
+        // 몹의 레벨 차이에 따라 확률을 다르게 지정합니다.
+        if (@playerlv - @moblv >= -10 && @playerlv - @moblv <= 20){
+            set @randNum, rand(100000); // 0부터 99999까지의 난수를 생성
+            if (@moblv > 100){
+                if (@randNum < 3000) goto getgold; // 0.05%
+                if (@randNum < 4000) goto getsilver; // 1.05%
+                if (@randNum < 5000) goto getcooper; // 3.05%
+            } else if (@moblv > 50){
+                if (@randNum < 3500) goto getgold; // 0.07%
+                if (@randNum < 4500) goto getsilver; // 0.77%
+                if (@randNum < 6000) goto getcooper; // 2.22%
+            } else {
+                if (@randNum < 4000) goto getgold; // 0.09%
+                if (@randNum < 4500) goto getsilver; // 1.09%
+                if (@randNum < 6500) goto getcooper; // 3.09%
+            }
+        }
+
+        // 몹의 레벨 차이가 -5보다 작거나 +5보다 큰 경우 보상 없음
+        end;
+
+    getgold:
+        set #CASHPOINTS, #CASHPOINTS + 2;
+        dispbottom "2 캐쉬를 획득했습니다";
+        end;
+ 
+    getsilver:
+        set #CASHPOINTS, #CASHPOINTS + 4;
+        dispbottom "4 캐쉬를 획득했습니다";
+        end;
+ 
+    getcooper:
+        set #CASHPOINTS, #CASHPOINTS + 6;
+        dispbottom "6 캐쉬를 획득했습니다";
+        end;
+}

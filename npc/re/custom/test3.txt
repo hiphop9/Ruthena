@@ -1,0 +1,186 @@
+payon,150,218,4	script	힐러소녀	4_F_06,{
+    cutin "kafra_07",2;
+    mes "[힐러소녀]";
+    mes "안녕하세요, 모험가님!";
+    mes "어떤 효과를 원하시는지 말씀해 주세요.";
+    mes "다양한 버프를 준비해 두었습니다.";
+    mes "선택하시면 자세한 설명을 드리겠습니다.";
+    next;
+
+    setarray @options$,
+    "기본 회복", "블레싱", "민첩성 증가", "집중력 향상",
+    "안젤루스", "마니피캇", "아숨푸티오", "글로리아",
+    "힘 음식", "민첩 음식", "체력 음식", "지능 음식",
+    "인내 음식", "행운 음식", "모든 버프", "닫기";
+
+    setarray @prices, 10000, 10000, 10000, 10000,
+    10000, 10000, 10000, 10000,
+    10000, 10000, 10000, 10000,
+    10000, 10000, 140000;
+
+    while (1) {
+        set @select, select(
+        sprintf("%s (%d Zeny)", @options$[0], @prices[0]),
+        sprintf("%s (%d Zeny)", @options$[1], @prices[1]),
+        sprintf("%s (%d Zeny)", @options$[2], @prices[2]),
+        sprintf("%s (%d Zeny)", @options$[3], @prices[3]),
+        sprintf("%s (%d Zeny)", @options$[4], @prices[4]),
+        sprintf("%s (%d Zeny)", @options$[5], @prices[5]),
+        sprintf("%s (%d Zeny)", @options$[6], @prices[6]),
+        sprintf("%s (%d Zeny)", @options$[7], @prices[7]),
+        sprintf("%s (%d Zeny)", @options$[8], @prices[8]),
+        sprintf("%s (%d Zeny)", @options$[9], @prices[9]),
+        sprintf("%s (%d Zeny)", @options$[10], @prices[10]),
+        sprintf("%s (%d Zeny)", @options$[11], @prices[11]),
+        sprintf("%s (%d Zeny)", @options$[12], @prices[12]),
+        sprintf("%s (%d Zeny)", @options$[13], @prices[13]),
+        sprintf("%s (%d Zeny)", @options$[14], @prices[14]),
+        @options$[15]
+        );
+
+        if (@select == 16) {
+            mes "[힐러소녀]";
+            mes "헉! 이게 무슨 일이죠?";
+            mes "정말로 종료를 원하시나요?";
+            mes "부디 나중에 다시 방문해 주세요!";
+            mes "작업을 취소하였습니다.";
+            mes "다음에 뵙겠습니다!";
+            mes "행운을 빕니다, 모험가님!";
+            cutin "",255;
+            close;
+        }
+
+        set @cost, @prices[@select - 1];
+        if (Zeny < @cost) {
+            set @shortfall, @cost - Zeny; 
+            mes "[힐러소녀]";
+            mes "^ff0000아, 안돼요! 현재 제니가 부족해요!^000000";
+            mes sprintf("^ff0000현재 %d Zeny^000000^ff0000가 부족합니다. 다시 확인해 주세요!^000000", @shortfall);
+            mes "^ff0000제 주머니를 좀 더 두드려봐야겠어요!^000000";
+            cutin "",255;
+            close; 
+        }
+        set Zeny, Zeny - @cost;
+
+        switch (@select - 1) {
+            case 0: // 기본 회복
+                percentheal 100,100;
+                skilleffect 28,9999;
+                mes "기본 회복 효과를 적용했습니다.";
+                break;
+
+            case 1: // 블레싱
+                sc_start 30,900000,10;
+                skilleffect 34,0;
+                mes "블레싱 효과를 적용했습니다.";
+                break;
+
+            case 2: // 민첩성 증가
+                sc_start 32,900000,10;
+                skilleffect 29,0;
+                mes "민첩성 증가 효과를 적용했습니다.";
+                break;
+
+            case 3: // 집중력 향상
+                sc_start SC_CONCENTRATE,900000,10;
+                specialeffect2 153,0;
+                mes "집중력 향상 효과를 적용했습니다.";
+                break;
+
+            case 4: // 안젤루스
+                sc_start SC_ANGELUS,900000,5;
+                specialeffect2 41,0;
+                mes "안젤루스 효과를 적용했습니다.";
+                break;
+
+            case 5: // 마니피캇
+                sc_start SC_MAGNIFICAT,900000,5;
+                specialeffect2 76,0;
+                mes "마니피캇 효과를 적용했습니다.";
+                break;
+
+            case 6: // 아숨푸티오
+                sc_start SC_ASSUMPTIO,300000,5;
+                specialeffect2 375,0;
+                mes "아숨푸티오 효과를 적용했습니다.";
+                break;
+
+            case 7: // 글로리아
+                sc_start SC_GLORIA,300000,5;
+                specialeffect2 75,0;
+                mes "글로리아 효과를 적용했습니다.";
+                break;
+
+            case 8: // 힘 음식
+                sc_start SC_STRFOOD,900000,10;
+                specialeffect2 593,1;
+                mes "힘 음식 효과를 적용했습니다.";
+                break;
+
+            case 9: // 민첩 음식
+                sc_start SC_AGIFOOD,900000,10;
+                specialeffect2 596,0;
+                mes "민첩 음식 효과를 적용했습니다.";
+                break;
+
+            case 10: // 체력 음식
+                sc_start SC_VITFOOD,900000,10;
+                specialeffect2 595,0;
+                mes "체력 음식 효과를 적용했습니다.";
+                break;
+
+            case 11: // 지능 음식
+                sc_start SC_INTFOOD,900000,10;
+                specialeffect2 594,0;
+                mes "지능 음식 효과를 적용했습니다.";
+                break;
+
+            case 12: // 인내 음식
+                sc_start SC_DEXFOOD,900000,10;
+                specialeffect2 597,0;
+                mes "인내 음식 효과를 적용했습니다.";
+                break;
+
+            case 13: // 행운 음식
+                sc_start SC_LUKFOOD,900000,10;
+                specialeffect2 598,0;
+                mes "행운 음식 효과를 적용했습니다.";
+                break;
+
+            case 14: // 모든 버프
+                percentheal 100,100;
+                sc_start 30,900000,10; 
+                sc_start 32,900000,10; 
+                sc_start SC_STRFOOD,900000,10; 
+                sc_start SC_AGIFOOD,900000,10; 
+                sc_start SC_VITFOOD,900000,10; 
+                sc_start SC_INTFOOD,900000,10; 
+                sc_start SC_DEXFOOD,900000,10; 
+                sc_start SC_LUKFOOD,900000,10; 
+                sc_start SC_CONCENTRATE,900000,10;
+                sc_start SC_ANGELUS,900000,5;
+                sc_start SC_MAGNIFICAT,900000,5;
+                sc_start SC_ASSUMPTIO,300000,5;
+                sc_start SC_GLORIA,300000,5;
+                skilleffect 28,9999;
+                skilleffect 34,0;
+                skilleffect 29,0;
+                specialeffect2 593,0;
+                specialeffect2 594,0;
+                specialeffect2 595,0;
+                specialeffect2 596,0;
+                specialeffect2 597,0;
+                specialeffect2 598,0;
+                specialeffect2 153,0;
+                specialeffect2 41,0;
+                specialeffect2 76,0;
+                specialeffect2 375,0;
+                specialeffect2 75,0;
+                mes "모든 버프 효과를 적용했습니다. 힐은 서비스예요!";
+                break;
+        }
+        cutin "",255;
+        close;
+    }
+    end;
+}

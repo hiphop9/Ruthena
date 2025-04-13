@@ -1,0 +1,4796 @@
+//===== 낙원단 퀘스트 =======================================
+// 만든이: 루나틱
+// 레벨: 120-140
+//============================================================
+
+moc_para01,42,38,3	script	120~140 의뢰게시판#Board120-140	4_BOARD3,{
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "- 의뢰를 받기 위해서는 -";
+		mes "- ^4d4dff'낙원단의 증표'^000000가 있어야 합니다. -";
+		close;
+	}
+	if(BaseLevel < 120) goto NotLevelSee;
+	callsub QuestSettings;
+	callsub DelWaitQuest;
+
+	switch(select("개별 의뢰 보기:완료 의뢰 일괄 보고:의뢰 한꺼번에 받기")) {
+
+	case 1:
+		B_Menu1:
+		callsub QuestWaitSet;
+		switch(select("오딘신전[120]:어비스 호수[120]:타나토스 타워[120]:미드가르드 연합 주둔지[120-140]:무명섬[120]:라헬 신전[120]:생체 던전[130-140]:차원의 균열[130]:기타[120-130]:그만둔다")) {
+
+		case 1:
+			switch(select(.QLv1_1$+"무전 치는 놈부터"+.QLv1_1c$+.QLv1_2$+":악마 정화"+.QLv1_2c$+.QLv1_3$+":현혹되기 전에"+.QLv1_3c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q1_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q1_1_No) == 1 && checkquest(.Q1_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[무전 치는 놈부터]";
+				mes "휘겔 나루터 앞 모르반드의 의뢰";
+				mes "수행위치: 휘겔 오딘 신전";
+				mes "대상: 스코글 20 처치";
+				mes "보상: Exp "+.Q1_1_Exp+", Jexp "+.Q1_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q1_1_Exp / 100)*$EdenQuestPer)+.Q1_1_Exp;
+					.QEJExp = ((.Q1_1_Jexp / 100)*$EdenQuestPer)+.Q1_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q1_1_No,HUNTING) == 2) {
+					erasequest .Q1_1_No;
+					setquest .Q1_1_No2;
+					getexp .Q1_1_Exp,.Q1_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q1_1_Item,.Q1_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 나루터 앞 모르반드의 의뢰";
+					mes "^0404fb<무전 치는 놈부터>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q1_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q1_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q1_2_No) == 1 && checkquest(.Q1_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[악마 정화]";
+				mes "휘겔 나루터 앞 모르반드의 의뢰";
+				mes "수행위치: 휘겔 오딘 신전";
+				mes "대상: 프루스 20 처치";
+				mes "보상: Exp "+.Q1_2_Exp+", Jexp "+.Q1_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q1_2_Exp / 100)*$EdenQuestPer)+.Q1_2_Exp;
+					.QEJExp = ((.Q1_2_Jexp / 100)*$EdenQuestPer)+.Q1_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(isbegin_quest(.Q1_2_No) == 1 && checkquest(.Q1_2_No,HUNTING) == 2) {
+					erasequest .Q1_2_No;
+					setquest .Q1_2_No2;
+					getexp .Q1_2_Exp,.Q1_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q1_2_Item,.Q1_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 나루터 앞 모르반드의 의뢰";
+					mes "^0404fb<악마 정화>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q1_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q1_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q1_3_No) == 1 && countitem(7096) < 10) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[현혹되기 전에]";
+				mes "휘겔 나루터 앞 모르반드의 의뢰";
+				mes "수행위치: 휘겔 오딘 신전";
+				mes "내용: 스케골트 갈색 5, 파랑 5 처치";
+				mes "보상: Exp "+.Q1_3_Exp+", Jexp "+.Q1_3_Jexp+",";
+				mes "낙원단 코인 2개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q1_3_Exp / 100)*$EdenQuestPer)+.Q1_3_Exp;
+					.QEJExp = ((.Q1_3_Jexp / 100)*$EdenQuestPer)+.Q1_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(isbegin_quest(.Q1_3_No) == 1 && checkquest(.Q1_3_No,HUNTING) == 2) {
+					erasequest .Q1_3_No;
+					setquest .Q1_3_No2;
+					getexp .Q1_3_Exp,.Q1_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q1_3_Item,.Q1_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 나루터 앞 모르반드의 의뢰";
+					mes "^0404fb<현혹되기 전에>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q1_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			
+			case 4:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 2:
+			switch(select(.QLv2_1$+"호수의 용"+.QLv2_1c$+.QLv2_2$+":호수의 비룡"+.QLv2_2c$+.QLv2_3$+":호수의 삼두룡"+.QLv2_3c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q2_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q2_1_No) == 1 && checkquest(.Q2_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[호수의 용]";
+				mes "휘겔 노점 앞 나하단의 의뢰";
+				mes "수행위치: 어비스 호수";
+				mes "대상: 페리스 빨강 30, 녹색 30 처치";
+				mes "보상: Exp "+.Q2_1_Exp+", Jexp "+.Q2_1_Jexp+",";
+				mes "낙원단 코인 2개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q2_1_Exp / 100)*$EdenQuestPer)+.Q2_1_Exp;
+					.QEJExp = ((.Q2_1_Jexp / 100)*$EdenQuestPer)+.Q2_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q2_1_No,HUNTING) == 2) {
+					erasequest .Q2_1_No;
+					setquest .Q2_1_No2;
+					getexp .Q2_1_Exp,.Q2_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q2_1_Item,.Q2_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 노점 앞 나하단의 의뢰";
+					mes "^0404fb<호수의 용>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q2_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q2_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q2_2_No) == 1 && checkquest(.Q2_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[호수의 비룡]";
+				mes "휘겔 노점 앞 나하단의 의뢰";
+				mes "수행위치: 어비스 호수";
+				mes "대상: 어시더스 노랑 30, 파랑 30 처치";
+				mes "보상: Exp "+.Q2_2_Exp+", Jexp "+.Q2_2_Jexp+",";
+				mes "낙원단 코인 2개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q2_2_Exp / 100)*$EdenQuestPer)+.Q2_2_Exp;
+					.QEJExp = ((.Q2_2_Jexp / 100)*$EdenQuestPer)+.Q2_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q2_2_No,HUNTING) == 2) {
+					erasequest .Q2_2_No;
+					setquest .Q2_2_No2;
+					getexp .Q2_2_Exp,.Q2_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q2_2_Item,.Q2_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 노점 앞 나하단의 의뢰";
+					mes "^0404fb<호수의 비룡>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q2_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q2_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q2_3_No) == 1 && checkquest(.Q2_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[호수의 삼두룡]";
+				mes "휘겔 노점 앞 나하단의 의뢰";
+				mes "수행위치: 어비스 호수";
+				mes "대상: 하이드로랜서 1 처치";
+				mes "보상: Exp "+.Q2_3_Exp+", Jexp "+.Q2_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q2_3_Exp / 100)*$EdenQuestPer)+.Q2_3_Exp;
+					.QEJExp = ((.Q2_3_Jexp / 100)*$EdenQuestPer)+.Q2_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q2_3_No,HUNTING) == 2) {
+					erasequest .Q2_3_No;
+					setquest .Q2_3_No2;
+					getexp .Q2_3_Exp,.Q2_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q2_3_Item,.Q2_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "휘겔 노점 앞 나하단의 의뢰";
+					mes "^0404fb<호수의 삼두룡>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q2_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+
+		case 3:
+			switch(select(.QLv3_1$+"감시와 처벌"+.QLv3_1c$+.QLv3_2$+":달콤한 독"+.QLv3_2c$+.QLv3_3$+":죽음으로 안식을"+.QLv3_3c$+.QLv3_4$+":통제의 씨앗"+.QLv3_4c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q3_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q3_1_No) == 1 && checkquest(.Q3_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[감시와 처벌]";
+				mes "타나토스 타워 1층 내부 타트의 의뢰";
+				mes "수행위치: 타나토스 타워";
+				mes "대상: 신벌의 대행자 30 처치";
+				mes "보상: Exp "+.Q3_1_Exp+", Jexp "+.Q3_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q3_1_Exp / 100)*$EdenQuestPer)+.Q3_1_Exp;
+					.QEJExp = ((.Q3_1_Jexp / 100)*$EdenQuestPer)+.Q3_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q3_1_No,HUNTING) == 2) {
+					erasequest .Q3_1_No;
+					setquest .Q3_1_No2;
+					getexp .Q3_1_Exp,.Q3_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q3_1_Item,.Q3_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "타나토스 타워 1층 내부 타트의 의뢰";
+					mes "^0404fb<감시와 처벌>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q3_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q3_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q3_2_No) == 1 && checkquest(.Q3_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[달콤한 독]";
+				mes "타나토스 타워 1층 내부 타트의 의뢰";
+				mes "수행위치: 타나토스 타워";
+				mes "대상: 위로하는 자 30 처치";
+				mes "보상: Exp "+.Q3_2_Exp+", Jexp "+.Q3_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q3_2_Exp / 100)*$EdenQuestPer)+.Q3_2_Exp;
+					.QEJExp = ((.Q3_2_Jexp / 100)*$EdenQuestPer)+.Q3_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q3_2_No,HUNTING) == 2) {
+					erasequest .Q3_2_No;
+					setquest .Q3_2_No2;
+					getexp .Q3_2_Exp,.Q3_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q3_2_Item,.Q3_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "타나토스 타워 1층 내부 타트의 의뢰";
+					mes "^0404fb<달콤한 독>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q3_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q3_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q3_3_No) == 1 && checkquest(.Q3_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[죽음으로 안식을]";
+				mes "타나토스 타워 1층 내부 타트의 의뢰";
+				mes "수행위치: 타나토스 타워";
+				mes "대상: 안식을 주는 자 30 처치";
+				mes "보상: Exp "+.Q3_3_Exp+", Jexp "+.Q3_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q3_3_Exp / 100)*$EdenQuestPer)+.Q3_3_Exp;
+					.QEJExp = ((.Q3_3_Jexp / 100)*$EdenQuestPer)+.Q3_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q3_3_No,HUNTING) == 2) {
+					erasequest .Q3_3_No;
+					setquest .Q3_3_No2;
+					getexp .Q3_3_Exp,.Q3_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q3_3_Item,.Q3_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "타나토스 타워 1층 내부 타트의 의뢰";
+					mes "^0404fb<죽음으로 안식을>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q3_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				if(isbegin_quest(.Q3_4_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q3_4_No) == 1 && checkquest(.Q3_4_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[통제의 씨앗]";
+				mes "타나토스 타워 1층 내부 타트의 의뢰";
+				mes "수행위치: 타나토스 타워";
+				mes "대상: 감시하는 자 30 처치";
+				mes "보상: Exp "+.Q3_4_Exp+", Jexp "+.Q3_4_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q3_4_Exp / 100)*$EdenQuestPer)+.Q3_4_Exp;
+					.QEJExp = ((.Q3_4_Jexp / 100)*$EdenQuestPer)+.Q3_4_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q3_4_No,HUNTING) == 2) {
+					erasequest .Q3_4_No;
+					setquest .Q3_4_No2;
+					getexp .Q3_4_Exp,.Q3_4_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q3_4_Item,.Q3_4_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "타나토스 타워 1층 내부 타트의 의뢰";
+					mes "^0404fb<통제의 씨앗>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q3_4_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 5:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 4:
+			switch(select(.QLv4_1$+"독을 품은 벌레"+.QLv4_1c$+.QLv4_2$+":무능한 게으름뱅이"+.QLv4_2c$+.QLv4_3$+":겉모습은 껍데기"+.QLv4_3c$+.QLv4_4$+":외뿔을 똑"+.QLv4_4c$+.QLv4_5$+":쌍뿔을 뚝"+.QLv4_5c$+.QLv4_6$+":사슴뿔을 오도독"+.QLv4_6c$+.QLv4_7$+":갈퀴뿔을 우두둑"+.QLv4_7c$+.QLv4_8$+":모로크의 괴롭힘"+.QLv4_8c$+.QLv4_9$+":모로크의 농간"+.QLv4_9c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q4_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_1_No) == 1 && checkquest(.Q4_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[독을 품은 벌레]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 카미달 산기슭";
+				mes "대상: 센티페데 20 처치";
+				mes "보상: Exp "+.Q4_1_Exp+", Jexp "+.Q4_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_1_Exp / 100)*$EdenQuestPer)+.Q4_1_Exp;
+					.QEJExp = ((.Q4_1_Jexp / 100)*$EdenQuestPer)+.Q4_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_1_No,HUNTING) == 2) {
+					erasequest .Q4_1_No;
+					setquest .Q4_1_No2;
+					getexp .Q4_1_Exp,.Q4_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_1_Item,.Q4_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<독을 품은 벌레>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q4_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_2_No) == 1 && checkquest(.Q4_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[무능한 게으름뱅이]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 카미달 산기슭";
+				mes "대상: 따따초 20 처치,";
+				mes "보상: Exp "+.Q4_2_Exp+", Jexp "+.Q4_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_2_Exp / 100)*$EdenQuestPer)+.Q4_2_Exp;
+					.QEJExp = ((.Q4_2_Jexp / 100)*$EdenQuestPer)+.Q4_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_2_No,HUNTING) == 2) {
+					erasequest .Q4_2_No;
+					setquest .Q4_2_No2;
+					getexp .Q4_2_Exp,.Q4_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_2_Item,.Q4_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<무능한 게으름뱅이>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q4_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_3_No) == 1 && checkquest(.Q4_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[겉모습은 껍데기]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 카미달 산기슭";
+				mes "대상: 돌로메데스 30 처치";
+				mes "보상: Exp "+.Q4_3_Exp+", Jexp "+.Q4_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_3_Exp / 100)*$EdenQuestPer)+.Q4_3_Exp;
+					.QEJExp = ((.Q4_3_Jexp / 100)*$EdenQuestPer)+.Q4_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_3_No,HUNTING) == 2) {
+					erasequest .Q4_3_No;
+					setquest .Q4_3_No2;
+					getexp .Q4_3_Exp,.Q4_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_3_Item,.Q4_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<겉모습은 껍데기>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				if(isbegin_quest(.Q4_4_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_4_No) == 1 && countitem(.Q4_4_No) < 20) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[외뿔을 똑]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 스카라바 홀";
+				mes "대상: 외뿔 스카라바 30 처치";
+				mes "보상: Exp "+.Q4_4_Exp+", Jexp "+.Q4_4_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_4_Exp / 100)*$EdenQuestPer)+.Q4_4_Exp;
+					.QEJExp = ((.Q4_4_Jexp / 100)*$EdenQuestPer)+.Q4_4_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_4_No,HUNTING) == 2) {
+					erasequest .Q4_4_No;
+					setquest .Q4_4_No2;
+					getexp .Q4_4_Exp,.Q4_4_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_4_Item,.Q4_4_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<외뿔을 똑>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_4_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 5:
+				if(isbegin_quest(.Q4_5_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_5_No) == 1 && checkquest(.Q4_5_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[쌍뿔을 뚝]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 스카라바 홀";
+				mes "대상: 쌍뿔 스카라바 30 처치";
+				mes "보상: Exp "+.Q4_5_Exp+", Jexp "+.Q4_5_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_5_Exp / 100)*$EdenQuestPer)+.Q4_5_Exp;
+					.QEJExp = ((.Q4_5_Jexp / 100)*$EdenQuestPer)+.Q4_5_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_5_No,HUNTING) == 2) {
+					erasequest .Q4_5_No;
+					setquest .Q4_5_No2;
+					getexp .Q4_5_Exp,.Q4_5_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_5_Item,.Q4_5_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<스카라바 홀>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_5_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 6:
+				if(isbegin_quest(.Q4_6_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_6_No) == 1 && checkquest(.Q4_6_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[사슴뿔을 오도독]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 스카라바 홀";
+				mes "대상: 사슴뿔 스카라바 30 처치";
+				mes "보상: Exp "+.Q4_6_Exp+", Jexp "+.Q4_6_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_6_Exp / 100)*$EdenQuestPer)+.Q4_6_Exp;
+					.QEJExp = ((.Q4_6_Jexp / 100)*$EdenQuestPer)+.Q4_6_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_6_No,HUNTING) == 2) {
+					erasequest .Q4_6_No;
+					setquest .Q4_6_No2;
+					getexp .Q4_6_Exp,.Q4_6_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_6_Item,.Q4_6_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<사슴뿔을 오도독>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_6_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 7:
+				if(isbegin_quest(.Q4_7_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_7_No) == 1 && countitem(7561) < 20) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[갈퀴뿔을 우두둑]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 스카라바 홀";
+				mes "대상: 갈퀴뿔 스카라바 30 처치";
+				mes "보상: Exp "+.Q4_7_Exp+", Jexp "+.Q4_7_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_7_Exp / 100)*$EdenQuestPer)+.Q4_7_Exp;
+					.QEJExp = ((.Q4_7_Jexp / 100)*$EdenQuestPer)+.Q4_7_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(isbegin_quest(.Q4_7_No) == 1 && checkquest(.Q4_7_No,HUNTING) == 2) {
+					erasequest .Q4_7_No;
+					setquest .Q4_7_No2;
+					getexp .Q4_7_Exp,.Q4_7_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_7_Item,.Q4_7_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<갈퀴뿔을 우두둑>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_7_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 8:
+				if(isbegin_quest(.Q4_8_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_8_No) == 1 && checkquest(.Q4_8_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[모로크의 괴롭힘]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 화염 분지";
+				mes "대상: 화염 콘도르 15, 프릴도라 15 처치";
+				mes "보상: Exp "+.Q4_8_Exp+", Jexp "+.Q4_18Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_8_Exp / 100)*$EdenQuestPer)+.Q4_8_Exp;
+					.QEJExp = ((.Q4_8_Jexp / 100)*$EdenQuestPer)+.Q4_8_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_8_No,HUNTING) == 2) {
+					erasequest .Q4_8_No;
+					setquest .Q4_8_No2;
+					getexp .Q4_8_Exp,.Q4_8_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_8_Item,.Q4_8_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<모로크의 괴롭힘>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_8_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 9:
+				if(isbegin_quest(.Q4_9_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q4_9_No) == 1 && checkquest(.Q4_9_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[모로크의 농간]";
+				mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+				mes "수행위치: 화염 분지";
+				mes "대상: 화염 샌드맨 15, 고렘 15 처치";
+				mes "보상: Exp "+.Q4_9_Exp+", Jexp "+.Q4_9_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q4_9_Exp / 100)*$EdenQuestPer)+.Q4_9_Exp;
+					.QEJExp = ((.Q4_9_Jexp / 100)*$EdenQuestPer)+.Q4_9_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q4_9_No,HUNTING) == 2) {
+					erasequest .Q4_9_No;
+					setquest .Q4_9_No2;
+					getexp .Q4_9_Exp,.Q4_9_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q4_9_Item,.Q4_9_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "미드가르드 연합 주둔지 시어도어의 의뢰";
+					mes "^0404fb<모로크의 농간>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q4_9_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 10:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 5:
+			switch(select(.QLv5_1$+"무명섬 정화"+.QLv5_1c$+.QLv5_2$+":울고 울고 또 울고"+.QLv5_2c$+.QLv5_3$+":죽은 마리오네트의 주인"+.QLv5_3c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q5_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q5_1_No) == 1 && checkquest(.Q5_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[무명섬 정화]";
+				mes "무명섬 나루터 로테르트의 의뢰";
+				mes "수행위치: 무명섬 수도원";
+				mes "대상: 누더기좀비 30, 좀비 슬러터 30 처치";
+				mes "보상: Exp "+.Q5_1_Exp+", Jexp "+.Q5_1_Jexp+",";
+				mes "낙원단 코인 2개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q5_1_Exp / 100)*$EdenQuestPer)+.Q5_1_Exp;
+					.QEJExp = ((.Q5_1_Jexp / 100)*$EdenQuestPer)+.Q5_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q5_1_No,HUNTING) == 2) {
+					erasequest .Q5_1_No;
+					setquest .Q5_1_No2;
+					getexp .Q5_1_Exp,.Q5_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q5_1_Item,.Q5_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "무명섬 나루터 로테르트의 의뢰";
+					mes "^0404fb<무명섬 정화>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q5_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q5_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q5_2_No) == 1 && checkquest(.Q5_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[울고 울고 또 울고]";
+				mes "무명섬 나루터 로테르트의 의뢰";
+				mes "수행위치: 무명섬 수도원";
+				mes "대상: 밴시 30 처치";
+				mes "보상: Exp "+.Q5_2_Exp+", Jexp "+.Q5_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q5_2_Exp / 100)*$EdenQuestPer)+.Q5_2_Exp;
+					.QEJExp = ((.Q5_2_Jexp / 100)*$EdenQuestPer)+.Q5_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q5_2_No,HUNTING) == 2) {
+					erasequest .Q5_2_No;
+					setquest .Q5_2_No2;
+					getexp .Q5_2_Exp,.Q5_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q5_2_Item,.Q5_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "무명섬 나루터 로테르트의 의뢰";
+					mes "^0404fb<울고 울고 또 울고>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q5_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q5_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q5_3_No) == 1 && checkquest(.Q5_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[죽은 마리오네트의 주인]";
+				mes "무명섬 나루터 로테르트의 의뢰";
+				mes "수행위치: 무명섬 수도원";
+				mes "대상: 네크로맨서 20 처치";
+				mes "보상: Exp "+.Q5_3_Exp+", Jexp "+.Q5_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q5_3_Exp / 100)*$EdenQuestPer)+.Q5_3_Exp;
+					.QEJExp = ((.Q5_3_Jexp / 100)*$EdenQuestPer)+.Q5_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q5_3_No,HUNTING) == 2) {
+					erasequest .Q5_3_No;
+					setquest .Q5_3_No2;
+					getexp .Q5_3_Exp,.Q5_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q5_3_Item,.Q5_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "무명섬 나루터 로테르트의 의뢰";
+					mes "^0404fb<죽은 마리오네트의 주인>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q5_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+
+			case 4:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 6:
+			switch(select(.QLv6_1$+"신전 성역 서쪽 구역 정화"+.QLv6_1c$+.QLv6_2$+":신전 성역 동쪽 구역 정화"+.QLv6_2c$+.QLv6_3$+":신전 성역 남쪽 구역 정화"+.QLv6_3c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q6_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q6_1_No) == 1 && checkquest(.Q6_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[신전 성역 서쪽 구역 정화]";
+				mes "라헬 신관 테베니오의 의뢰";
+				mes "수행위치: 신전 성역 서쪽구역";
+				mes "대상: 판베르크 20, 이실라 20 처치";
+				mes "보상: Exp "+.Q6_1_Exp+", Jexp "+.Q6_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q6_1_Exp / 100)*$EdenQuestPer)+.Q6_1_Exp;
+					.QEJExp = ((.Q6_1_Jexp / 100)*$EdenQuestPer)+.Q6_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q6_1_No,HUNTING) == 2) {
+					erasequest .Q6_1_No;
+					setquest .Q6_1_No2;
+					getexp .Q6_1_Exp,.Q6_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q6_1_Item,.Q6_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "라헬 신관 테베니오의 의뢰";
+					mes "^0404fb<신전 성역 서쪽 구역 정화>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q6_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q6_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q6_2_No) == 1 && checkquest(.Q6_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[신전 성역 동쪽 구역 정화]";
+				mes "라헬 신관 테베니오의 의뢰";
+				mes "수행위치: 신전 성역 동쪽구역";
+				mes "대상: 호드렘린 30 처치";
+				mes "보상: Exp "+.Q6_2_Exp+", Jexp "+.Q6_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q6_2_Exp / 100)*$EdenQuestPer)+.Q6_2_Exp;
+					.QEJExp = ((.Q6_2_Jexp / 100)*$EdenQuestPer)+.Q6_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q6_2_No,HUNTING) == 2) {
+					erasequest .Q6_2_No;
+					setquest .Q6_2_No2;
+					getexp .Q6_2_Exp,.Q6_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q6_2_Item,.Q6_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "라헬 신관 테베니오의 의뢰";
+					mes "^0404fb<신전 성역 동쪽 구역 정화>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q6_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q6_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q6_3_No) == 1 && checkquest(.Q6_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[신전 성역 남쪽 구역 정화]";
+				mes "라헬 신관 테베니오의 의뢰";
+				mes "수행위치: 신전 성역 남쪽구역";
+				mes "대상: 아가브 20, 에키오 20 처치";
+				mes "보상: Exp "+.Q6_3_Exp+", Jexp "+.Q6_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q6_3_Exp / 100)*$EdenQuestPer)+.Q6_3_Exp;
+					.QEJExp = ((.Q6_3_Jexp / 100)*$EdenQuestPer)+.Q6_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q6_3_No,HUNTING) == 2) {
+					erasequest .Q6_3_No;
+					setquest .Q6_3_No2;
+					getexp .Q6_3_Exp,.Q6_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q6_3_Item,.Q6_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "라헬 신관 테베니오의 의뢰";
+					mes "^0404fb<신관 성역 남쪽 구역 정화>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q6_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 7:
+			switch(select(.QLv7_1$+"이그니젬 세니아"+.QLv7_1c$+.QLv7_2$+":아르마이어 딘제"+.QLv7_2c$+.QLv7_3$+":휘케바인 트리스"+.QLv7_3c$+.QLv7_4$+":키바크 이카루스"+.QLv7_4c$+.QLv7_5$+":이렌드 에베시"+.QLv7_5c$+.QLv7_6$+":라우렐 뷘더"+.QLv7_6c$+.QLv7_7$+":셰실 디먼"+.QLv7_7c$+.QLv7_8$+":카트린느 케이론"+.QLv7_8c$+.QLv7_9$+":마가레타 소린"+.QLv7_9c$+.QLv7_10$+":세이렌 윈저"+.QLv7_10c$+.QLv7_11$+":에레메스 가일"+.QLv7_11c$+.QLv7_12$+":하워드 알트아이젠"+.QLv7_12c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q7_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_1_No) == 1 && checkquest(.Q7_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[이그니젬 세니아]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 이그니젬 세니아 30 처치";
+				mes "보상: Exp "+.Q7_1_Exp+", Jexp "+.Q7_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_1_Exp / 100)*$EdenQuestPer)+.Q7_1_Exp;
+					.QEJExp = ((.Q7_1_Jexp / 100)*$EdenQuestPer)+.Q7_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_1_No,HUNTING) == 2) {
+					erasequest .Q7_1_No;
+					setquest .Q7_1_No2;
+					getexp .Q7_1_Exp,.Q7_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_1_Item,.Q7_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<이그니젬 세니아>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q7_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_2_No) == 1 && checkquest(.Q7_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[아르마이어 딘제]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 아르마이어 딘제 30 처치";
+				mes "보상: Exp "+.Q7_2_Exp+", Jexp "+.Q7_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_2_Exp / 100)*$EdenQuestPer)+.Q7_2_Exp;
+					.QEJExp = ((.Q7_2_Jexp / 100)*$EdenQuestPer)+.Q7_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_2_No,HUNTING) == 2) {
+					erasequest .Q7_2_No;
+					setquest .Q7_2_No2;
+					getexp .Q7_2_Exp,.Q7_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_2_Item,.Q7_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<아르마이어 딘제>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q7_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_3_No) == 1 && checkquest(.Q7_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[휘케바인 트리스]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 휘케바인 트리스 30 처치";
+				mes "보상: Exp "+.Q7_3_Exp+", Jexp "+.Q7_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_3_Exp / 100)*$EdenQuestPer)+.Q7_3_Exp;
+					.QEJExp = ((.Q7_3_Jexp / 100)*$EdenQuestPer)+.Q7_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_3_No,HUNTING) == 2) {
+					erasequest .Q7_3_No;
+					setquest .Q7_3_No2;
+					getexp .Q7_3_Exp,.Q7_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_3_Item,.Q7_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<휘케바인 트리스>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				if(isbegin_quest(.Q7_4_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_4_No) == 1 && checkquest(.Q7_4_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[카바크 이카루스]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 카바크 이카루스 30 처치";
+				mes "보상: Exp "+.Q7_4_Exp+", Jexp "+.Q7_4_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_4_Exp / 100)*$EdenQuestPer)+.Q7_4_Exp;
+					.QEJExp = ((.Q7_4_Jexp / 100)*$EdenQuestPer)+.Q7_4_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_4_No,HUNTING) == 2) {
+					erasequest .Q7_4_No;
+					setquest .Q7_4_No2;
+					getexp .Q7_4_Exp,.Q7_4_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_4_Item,.Q7_4_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<카바크 이카루스>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_4_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 5:
+				if(isbegin_quest(.Q7_5_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_5_No) == 1 && checkquest(.Q7_5_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[이랜드 에베시]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 이랜드 에베시 30 처치";
+				mes "보상: Exp "+.Q7_5_Exp+", Jexp "+.Q7_5_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_5_Exp / 100)*$EdenQuestPer)+.Q7_5_Exp;
+					.QEJExp = ((.Q7_5_Jexp / 100)*$EdenQuestPer)+.Q7_5_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_5_No,HUNTING) == 2) {
+					erasequest .Q7_5_No;
+					setquest .Q7_5_No2;
+					getexp .Q7_5_Exp,.Q7_5_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_5_Item,.Q7_5_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<이랜드 에베시>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_5_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 6:
+				if(isbegin_quest(.Q7_6_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_6_No) == 1 && checkquest(.Q7_6_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[라우렐 뷘더]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 라우렐 뷘더 30 처치";
+				mes "보상: Exp "+.Q7_6_Exp+", Jexp "+.Q7_6_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_6_Exp / 100)*$EdenQuestPer)+.Q7_6_Exp;
+					.QEJExp = ((.Q7_6_Jexp / 100)*$EdenQuestPer)+.Q7_6_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_6_No,HUNTING) == 2) {
+					erasequest .Q7_6_No;
+					setquest .Q7_6_No2;
+					getexp .Q7_6_Exp,.Q7_6_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_6_Item,.Q7_6_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<라우렐 뷘더>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_6_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 7:
+				if(isbegin_quest(.Q7_7_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_7_No) == 1 && checkquest(.Q7_7_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[셰실 디먼]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 셰실 디먼 2 처치";
+				mes "보상: Exp "+.Q7_7_Exp+", Jexp "+.Q7_7_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_7_Exp / 100)*$EdenQuestPer)+.Q7_7_Exp;
+					.QEJExp = ((.Q7_7_Jexp / 100)*$EdenQuestPer)+.Q7_7_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_7_No,HUNTING) == 2) {
+					erasequest .Q7_7_No;
+					setquest .Q7_7_No2;
+					getexp .Q7_7_Exp,.Q7_7_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_7_Item,.Q7_7_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<셰실 디먼>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_7_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 8:
+				if(isbegin_quest(.Q7_8_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_8_No) == 1 && checkquest(.Q7_8_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[카트린느 케이론]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 카트린느 케이론 2 처치";
+				mes "보상: Exp "+.Q7_8_Exp+", Jexp "+.Q7_8_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_8_Exp / 100)*$EdenQuestPer)+.Q7_8_Exp;
+					.QEJExp = ((.Q7_8_Jexp / 100)*$EdenQuestPer)+.Q7_8_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_8_No,HUNTING) == 2) {
+					erasequest .Q7_8_No;
+					setquest .Q7_8_No2;
+					getexp .Q7_8_Exp,.Q7_8_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_8_Item,.Q7_8_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<라우렐 뷘더>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_8_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 9:
+				if(isbegin_quest(.Q7_9_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_9_No) == 1 && checkquest(.Q7_9_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[마가레타 소린]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 마가레타 소린 2 처치";
+				mes "보상: Exp "+.Q7_9_Exp+", Jexp "+.Q7_9_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_9_Exp / 100)*$EdenQuestPer)+.Q7_9_Exp;
+					.QEJExp = ((.Q7_9_Jexp / 100)*$EdenQuestPer)+.Q7_9_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_9_No,HUNTING) == 2) {
+					erasequest .Q7_9_No;
+					setquest .Q7_9_No2;
+					getexp .Q7_9_Exp,.Q7_9_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_9_Item,.Q7_9_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<마가레타 소린>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_9_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 10:
+				if(isbegin_quest(.Q7_10_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_10_No) == 1 && checkquest(.Q7_10_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[세이렌 윈저]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 세이렌 윈저 2 처치";
+				mes "보상: Exp "+.Q7_10_Exp+", Jexp "+.Q7_10_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_10_Exp / 100)*$EdenQuestPer)+.Q7_10_Exp;
+					.QEJExp = ((.Q7_10_Jexp / 100)*$EdenQuestPer)+.Q7_10_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_10_No,HUNTING) == 2) {
+					erasequest .Q7_10_No;
+					setquest .Q7_10_No2;
+					getexp .Q7_10_Exp,.Q7_10_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_10_Item,.Q7_10_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<세이렌 윈저>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_10_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 11:
+				if(isbegin_quest(.Q7_11_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_11_No) == 1 && checkquest(.Q7_11_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[에레메스 가일]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 에레메스 가일 2 처치";
+				mes "보상: Exp "+.Q7_11_Exp+", Jexp "+.Q7_11_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_11_Exp / 100)*$EdenQuestPer)+.Q7_11_Exp;
+					.QEJExp = ((.Q7_11_Jexp / 100)*$EdenQuestPer)+.Q7_11_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_11_No,HUNTING) == 2) {
+					erasequest .Q7_11_No;
+					setquest .Q7_11_No2;
+					getexp .Q7_11_Exp,.Q7_11_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_11_Item,.Q7_11_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<에레메스 가일>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_11_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 12:
+				if(isbegin_quest(.Q7_12_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q7_12_No) == 1 && checkquest(.Q7_12_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 140) goto LevelLow;
+				mes "[하워드 알트아이젠]";
+				mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+				mes "수행위치: 생체 던전";
+				mes "대상: 하워드 알트아이젠 2 처치";
+				mes "보상: Exp "+.Q7_12_Exp+", Jexp "+.Q7_12_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q7_12_Exp / 100)*$EdenQuestPer)+.Q7_12_Exp;
+					.QEJExp = ((.Q7_12_Jexp / 100)*$EdenQuestPer)+.Q7_12_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q7_12_No,HUNTING) == 2) {
+					erasequest .Q7_12_No;
+					setquest .Q7_12_No2;
+					getexp .Q7_12_Exp,.Q7_12_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q7_12_Item,.Q7_12_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<하워드 알트아이젠>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q7_12_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 13:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 8:
+			switch(select(.QLv8_1$+"천사의 형상"+.QLv8_1c$+.QLv8_2$+":안식의 축복"+.QLv8_2c$+.QLv8_3$+":예속의 기쁨"+.QLv8_3c$+.QLv8_4$+":순수의 구현"+.QLv8_4c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q8_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q8_1_No) == 1 && checkquest(.Q8_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[천사의 협상]";
+				mes "모로크 라르탈의 의뢰";
+				mes "수행위치: 차원의 균열";
+				mes "대상: 발키리형 모로크의 현신 30 처치";
+				mes "보상: Exp "+.Q8_1_Exp+", Jexp "+.Q8_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q8_1_Exp / 100)*$EdenQuestPer)+.Q8_1_Exp;
+					.QEJExp = ((.Q8_1_Jexp / 100)*$EdenQuestPer)+.Q8_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q8_1_No,HUNTING) == 2) {
+					erasequest .Q8_1_No;
+					setquest .Q8_1_No2;
+					getexp .Q8_1_Exp,.Q8_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q8_1_Item,.Q8_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "리히타르젠 빈민가 익명의 모험가의 의뢰";
+					mes "^0404fb<천사의 형상>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q8_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q8_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q8_2_No) == 1 && checkquest(.Q8_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[안식의 축복]";
+				mes "모로크 라르탈의 의뢰";
+				mes "수행위치: 차원의 균열";
+				mes "대상: 진흙형 모로크의 현신 30 처치";
+				mes "보상: Exp "+.Q8_2_Exp+", Jexp "+.Q8_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q8_2_Exp / 100)*$EdenQuestPer)+.Q8_2_Exp;
+					.QEJExp = ((.Q8_2_Jexp / 100)*$EdenQuestPer)+.Q8_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q8_2_No,HUNTING) == 2) {
+					erasequest .Q8_2_No;
+					setquest .Q8_2_No2;
+					getexp .Q8_2_Exp,.Q8_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q8_2_Item,.Q8_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "모로크 라르탈의 의뢰";
+					mes "^0404fb<안식의 축복>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q8_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q8_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q8_3_No) == 1 && checkquest(.Q8_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[예속의 기쁨]";
+				mes "모로크 라르탈의 의뢰";
+				mes "수행위치: 차원의 균열";
+				mes "대상: 엑소시스트형 모로크의 현신 30 처치";
+				mes "보상: Exp "+.Q8_3_Exp+", Jexp "+.Q8_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q8_3_Exp / 100)*$EdenQuestPer)+.Q8_3_Exp;
+					.QEJExp = ((.Q8_3_Jexp / 100)*$EdenQuestPer)+.Q8_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q8_3_No,HUNTING) == 2) {
+					erasequest .Q8_3_No;
+					setquest .Q8_3_No2;
+					getexp .Q8_3_Exp,.Q8_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q8_3_Item,.Q8_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "모로크 라르탈의 의뢰";
+					mes "^0404fb<예속의 기쁨>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q8_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				if(isbegin_quest(.Q8_4_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q8_4_No) == 1 && checkquest(.Q8_4_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[순수의 구현]";
+				mes "모로크 라르탈의 의뢰";
+				mes "수행위치: 차원의 균열";
+				mes "대상: 유령형 모로크의 현신 30 처치";
+				mes "보상: Exp "+.Q8_4_Exp+", Jexp "+.Q8_4_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q8_4_Exp / 100)*$EdenQuestPer)+.Q8_4_Exp;
+					.QEJExp = ((.Q8_4_Jexp / 100)*$EdenQuestPer)+.Q8_4_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q8_4_No,HUNTING) == 2) {
+					erasequest .Q8_4_No;
+					setquest .Q8_4_No2;
+					getexp .Q8_4_Exp,.Q8_4_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q8_4_Item,.Q8_4_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "모로크 라르탈의 의뢰";
+					mes "^0404fb<순수의 구현>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q8_4_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 5:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 9:
+			switch(select(.QLv9_1$+"몽마 연구"+.QLv9_1c$+.QLv9_2$+":복슬복슬한 꼬마"+.QLv9_2c$+.QLv9_3$+":작은 장난꾸러기"+.QLv9_3c$+":그만둔다")) {
+			
+			case 1:
+				if(isbegin_quest(.Q9_1_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q9_1_No) == 1 && checkquest(.Q9_1_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 120) goto LevelLow;
+				mes "[몽마 연구]";
+				mes "게펜 연금술사 밍민의 의뢰";
+				mes "수행위치: 게페니아";
+				mes "대상: 인큐버스 5, 서큐버스 5 처치";
+				mes "보상: Exp "+.Q9_1_Exp+", Jexp "+.Q9_1_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q9_1_Exp / 100)*$EdenQuestPer)+.Q9_1_Exp;
+					.QEJExp = ((.Q9_1_Jexp / 100)*$EdenQuestPer)+.Q9_1_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q9_1_No,HUNTING) == 2) {
+					erasequest .Q9_1_No;
+					setquest .Q9_1_No2;
+					getexp .Q9_1_Exp,.Q9_1_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q9_1_Item,.Q9_1_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "게펜 연금술사 밍민의 의뢰";
+					mes "^0404fb<몽마 연구>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q9_1_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 2:
+				if(isbegin_quest(.Q9_2_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q9_2_No) == 1 && checkquest(.Q9_2_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[북슬북슬한 꼬마]";
+				mes "모라 마을 뉘뉘의 의뢰";
+				mes "수행위치: 비프로스트 주변";
+				mes "대상: 미밍 20 처치";
+				mes "보상: Exp "+.Q9_2_Exp+", Jexp "+.Q9_2_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q9_2_Exp / 100)*$EdenQuestPer)+.Q9_2_Exp;
+					.QEJExp = ((.Q9_2_Jexp / 100)*$EdenQuestPer)+.Q9_2_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q9_2_No,HUNTING) == 2) {
+					erasequest .Q9_2_No;
+					setquest .Q9_2_No2;
+					getexp .Q9_2_Exp,.Q9_2_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q9_2_Item,.Q9_2_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "모라 마을 뉘뉘의 의뢰";
+					mes "^0404fb<북슬북슬한 꼬마>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q9_2_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 3:
+				if(isbegin_quest(.Q9_3_No2) == 1) {
+					mes "이미 수행한 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+				if(isbegin_quest(.Q9_3_No) == 1 && checkquest(.Q9_3_No,HUNTING) != 2) {
+					mes "현재 수행 중인 의뢰입니다.";
+					next;
+					goto B_Menu1;
+				}
+
+				if(BaseLevel < 130) goto LevelLow;
+				mes "[작은 장난꾸러기]";
+				mes "모라 마을 뉘뉘의 의뢰";
+				mes "수행위치: 비프로스트 주변";
+				mes "대상: 꼬마 파툼 20 처치";
+				mes "보상: Exp "+.Q9_3_Exp+", Jexp "+.Q9_3_Jexp+",";
+				mes "낙원단 코인 1개";
+				if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+					
+					.QEExp = ((.Q9_3_Exp / 100)*$EdenQuestPer)+.Q9_3_Exp;
+					.QEJExp = ((.Q9_3_Jexp / 100)*$EdenQuestPer)+.Q9_3_Jexp;
+
+					mes "^7882ff보상("+$EdenQuestPer+"%): Exp "+.QEExp+", Jexp "+.QEJExp+"^000000";
+				}
+				else {
+					.QEExp = 0;
+					.QEJExp = 0;
+				}
+				next;
+				if(checkquest(.Q9_3_No,HUNTING) == 2) {
+					erasequest .Q9_3_No;
+					setquest .Q9_3_No2;
+					getexp .Q9_3_Exp,.Q9_3_Jexp;
+					getexp .QEExp,.QEJExp;
+					getitem .Q9_3_Item,.Q9_3_ItemAmount;
+					goto B_Menu1;
+				}
+				switch(select("수락 한다.:다른것을 본다")) {
+
+				case 1:
+
+					mes "모라 마을 뉘뉘의 의뢰";
+					mes "^0404fb<작은 장난꾸러기>^000000 퀘스트를";
+					mes "수락하였습니다.";
+					setquest .Q9_3_No;
+					next;
+					goto B_Menu1;
+					
+				case 2:
+					goto B_Menu1;
+					end;
+					
+				}
+			case 4:
+				mes "그만 둔다.";
+				next;
+				goto B_Menu1;
+				end;
+			}
+		case 10:
+			mes "그만 둔다.";
+			close;
+		}
+	case 2:
+		callsub RequestCalc;
+		close;
+	case 3:
+		switch(select("수행가능한 모든 의뢰:120 레벨 의뢰:130 레벨 의뢰:140 레벨 의뢰")) {
+		
+		case 1:
+			callsub ALLRequest;
+			close;
+		case 2:
+			callsub Request120;
+			close;
+		case 3:
+			callsub Request130;
+			close;
+		case 4:
+			callsub Request140;
+			close;
+
+		}
+	}
+
+//================================================
+// 퀘스트 변수 설정
+//================================================
+QuestSettings:
+
+.Q1_1_Title$ = "무전 치는 놈부터";
+.Q1_1_No = 21584; //퀘스트 시작번호
+.Q1_1_No2 = 21583; //퀘스트 대기번호
+.Q1_1_Exp = 600000;
+.Q1_1_Jexp = 600000;
+.Q1_1_Item = 25223;
+.Q1_1_ItemAmount = 1;
+
+.Q1_2_Title$ = "악마 정화";
+.Q1_2_No = 21587; //퀘스트 시작번호
+.Q1_2_No2 = 21586; //퀘스트 대기번호
+.Q1_2_Exp = 600000;
+.Q1_2_Jexp = 600000;
+.Q1_2_Item = 25223;
+.Q1_2_ItemAmount = 1;
+
+.Q1_3_Title$ = "현혹되기 전에";
+.Q1_3_No = 21590; //퀘스트 시작번호
+.Q1_3_No2 = 21589; //퀘스트 대기번호
+.Q1_3_Exp = 600000;
+.Q1_3_Jexp = 600000;
+.Q1_3_Item = 25223;
+.Q1_3_ItemAmount = 2;
+
+.Q2_1_Title$ = "호수의 용";
+.Q2_1_No = 21642; //퀘스트 시작번호
+.Q2_1_No2 = 21641; //퀘스트 대기번호
+.Q2_1_Exp = 500000;
+.Q2_1_Jexp = 500000;
+.Q2_1_Item = 25223;
+.Q2_1_ItemAmount = 2;
+
+.Q2_2_Title$ = "호수의 비룡";
+.Q2_2_No = 21645; //퀘스트 시작번호
+.Q2_2_No2 = 21644; //퀘스트 대기번호
+.Q2_2_Exp = 500000;
+.Q2_2_Jexp = 500000;
+.Q2_2_Item = 25223;
+.Q2_2_ItemAmount = 2;
+
+.Q2_3_Title$ = "호수의 삼두룡";
+.Q2_3_No = 21648; //퀘스트 시작번호
+.Q2_3_No2 = 21647; //퀘스트 대기번호
+.Q2_3_Exp = 500000;
+.Q2_3_Jexp = 500000;
+.Q2_3_Item = 25223;
+.Q2_3_ItemAmount = 1;
+
+.Q3_1_Title$ = "감시와 처벌";
+.Q3_1_No = 21671; //퀘스트 시작번호
+.Q3_1_No2 = 21670; //퀘스트 대기번호
+.Q3_1_Exp = 600000;
+.Q3_1_Jexp = 600000;
+.Q3_1_Item = 25223;
+.Q3_1_ItemAmount = 1;
+
+.Q3_2_Title$ = "달콤한 독";
+.Q3_2_No = 21674; //퀘스트 시작번호
+.Q3_2_No2 = 21673; //퀘스트 대기번호
+.Q3_2_Exp = 600000;
+.Q3_2_Jexp = 600000;
+.Q3_2_Item = 25223;
+.Q3_2_ItemAmount = 1;
+
+.Q3_3_Title$ = "죽음으로 안식을";
+.Q3_3_No = 21677; //퀘스트 시작번호
+.Q3_3_No2 = 21676; //퀘스트 대기번호
+.Q3_3_Exp = 600000;
+.Q3_3_Jexp = 600000;
+.Q3_3_Item = 25223;
+.Q3_3_ItemAmount = 1;
+
+.Q3_4_Title$ = "통제의 씨앗";
+.Q3_4_No = 21680; //퀘스트 시작번호
+.Q3_4_No2 = 21679; //퀘스트 대기번호
+.Q3_4_Exp = 600000;
+.Q3_4_Jexp = 600000;
+.Q3_4_Item = 25223;
+.Q3_4_ItemAmount = 1;
+
+.Q4_1_Title$ = "독을 품은 벌레";
+.Q4_1_No = 21742; //퀘스트 시작번호
+.Q4_1_No2 = 21741; //퀘스트 대기번호
+.Q4_1_Exp = 600000;
+.Q4_1_Jexp = 600000;
+.Q4_1_Item = 25223;
+.Q4_1_ItemAmount = 1;
+
+.Q4_2_Title$ = "무능한 게으름뱅이";
+.Q4_2_No = 21745; //퀘스트 시작번호
+.Q4_2_No2 = 21744; //퀘스트 대기번호
+.Q4_2_Exp = 600000;
+.Q4_2_Jexp = 600000;
+.Q4_2_Item = 25223;
+.Q4_2_ItemAmount = 1;
+
+.Q4_3_Title$ = "겉모습은 껍데기";
+.Q4_3_No = 21748; //퀘스트 시작번호
+.Q4_3_No2 = 21747; //퀘스트 대기번호
+.Q4_3_Exp = 800000;
+.Q4_3_Jexp = 800000;
+.Q4_3_Item = 25223;
+.Q4_3_ItemAmount = 1;
+
+.Q4_4_Title$ = "외뿔을 똑";
+.Q4_4_No = 21751; //퀘스트 시작번호
+.Q4_4_No2 = 21750; //퀘스트 대기번호
+.Q4_4_Exp = 800000;
+.Q4_4_Jexp = 800000;
+.Q4_4_Item = 25223;
+.Q4_4_ItemAmount = 1;
+
+.Q4_5_Title$ = "쌍뿔을 뚝";
+.Q4_5_No = 21754; //퀘스트 시작번호
+.Q4_5_No2 = 21753; //퀘스트 대기번호
+.Q4_5_Exp = 800000;
+.Q4_5_Jexp = 800000;
+.Q4_5_Item = 25223;
+.Q4_5_ItemAmount = 1;
+
+.Q4_6_Title$ = "사슴뿔을 오도독";
+.Q4_6_No = 21757; //퀘스트 시작번호
+.Q4_6_No2 = 21756; //퀘스트 대기번호
+.Q4_6_Exp = 800000;
+.Q4_6_Jexp = 800000;
+.Q4_6_Item = 25223;
+.Q4_6_ItemAmount = 1;
+
+.Q4_7_Title$ = "갈퀴뿔을 우두둑";
+.Q4_7_No = 21760; //퀘스트 시작번호
+.Q4_7_No2 = 21759; //퀘스트 대기번호
+.Q4_7_Exp = 800000;
+.Q4_7_Jexp = 800000;
+.Q4_7_Item = 25223;
+.Q4_7_ItemAmount = 1;
+
+.Q4_8_Title$ = "모로크의 괴롭힘";
+.Q4_8_No = 21763; //퀘스트 시작번호
+.Q4_8_No2 = 21762; //퀘스트 대기번호
+.Q4_8_Exp = 1000000;
+.Q4_8_Jexp = 1000000;
+.Q4_8_Item = 25223;
+.Q4_8_ItemAmount = 1;
+
+.Q4_9_Title$ = "모로크의 농간";
+.Q4_9_No = 21766; //퀘스트 시작번호
+.Q4_9_No2 = 21765; //퀘스트 대기번호
+.Q4_9_Exp = 1000000;
+.Q4_9_Jexp = 1000000;
+.Q4_9_Item = 25223;
+.Q4_9_ItemAmount = 1;
+
+.Q5_1_Title$ = "무명섬 정화";
+.Q5_1_No = 21363; //퀘스트 시작번호
+.Q5_1_No2 = 21364; //퀘스트 대기번호
+.Q5_1_Exp = 1000000;
+.Q5_1_Jexp = 600000;
+.Q5_1_Item = 25223;
+.Q5_1_ItemAmount = 2;
+
+.Q5_2_Title$ = "울고 울고 또 울고";
+.Q5_2_No = 21365; //퀘스트 시작번호
+.Q5_2_No2 = 21366; //퀘스트 대기번호
+.Q5_2_Exp = 500000;
+.Q5_2_Jexp = 300000;
+.Q5_2_Item = 25223;
+.Q5_2_ItemAmount = 1;
+
+.Q5_3_Title$ = "죽은 마리오네트의 주인";
+.Q5_3_No = 21367; //퀘스트 시작번호
+.Q5_3_No2 = 21368; //퀘스트 대기번호
+.Q5_3_Exp = 600000;
+.Q5_3_Jexp = 500000;
+.Q5_3_Item = 25223;
+.Q5_3_ItemAmount = 1;
+
+.Q6_1_Title$ = "신전 성역 서쪽 구역 정화";
+.Q6_1_No = 21369; //퀘스트 시작번호
+.Q6_1_No2 = 21370; //퀘스트 대기번호
+.Q6_1_Exp = 500000;
+.Q6_1_Jexp = 500000;
+.Q6_1_Item = 25223;
+.Q6_1_ItemAmount = 1;
+
+.Q6_2_Title$ = "신전 성역 동쪽 구역 정화";
+.Q6_2_No = 21371; //퀘스트 시작번호
+.Q6_2_No2 = 21372; //퀘스트 대기번호
+.Q6_2_Exp = 500000;
+.Q6_2_Jexp = 500000;
+.Q6_2_Item = 25223;
+.Q6_2_ItemAmount = 1;
+
+.Q6_3_Title$ = "신전 성역 남쪽 구역 정화";
+.Q6_3_No = 21373; //퀘스트 시작번호
+.Q6_3_No2 = 21374; //퀘스트 대기번호
+.Q6_3_Exp = 500000;
+.Q6_3_Jexp = 500000;
+.Q6_3_Item = 25223;
+.Q6_3_ItemAmount = 1;
+
+.Q7_1_Title$ = "이그니젬 세니아";
+.Q7_1_No = 21594; //퀘스트 시작번호
+.Q7_1_No2 = 21593; //퀘스트 대기번호
+.Q7_1_Exp = 850000;
+.Q7_1_Jexp = 850000;
+.Q7_1_Item = 25223;
+.Q7_1_ItemAmount = 1;
+
+.Q7_2_Title$ = "아르마이어 딘제";
+.Q7_2_No = 21597; //퀘스트 시작번호
+.Q7_2_No2 = 21596; //퀘스트 대기번호
+.Q7_2_Exp = 850000;
+.Q7_2_Jexp = 850000;
+.Q7_2_Item = 25223;
+.Q7_2_ItemAmount = 1;
+
+.Q7_3_Title$ = "휘케바인 트리스";
+.Q7_3_No = 21600; //퀘스트 시작번호
+.Q7_3_No2 = 21599; //퀘스트 대기번호
+.Q7_3_Exp = 850000;
+.Q7_3_Jexp = 850000;
+.Q7_3_Item = 25223;
+.Q7_3_ItemAmount = 1;
+
+.Q7_4_Title$ = "카바그 이카루스";
+.Q7_4_No = 21603; //퀘스트 시작번호
+.Q7_4_No2 = 21602; //퀘스트 대기번호
+.Q7_4_Exp = 850000;
+.Q7_4_Jexp = 850000;
+.Q7_4_Item = 25223;
+.Q7_4_ItemAmount = 1;
+
+.Q7_5_Title$ = "이랜드 에베시";
+.Q7_5_No = 21606; //퀘스트 시작번호
+.Q7_5_No2 = 21605; //퀘스트 대기번호
+.Q7_5_Exp = 850000;
+.Q7_5_Jexp = 850000;
+.Q7_5_Item = 25223;
+.Q7_5_ItemAmount = 1;
+
+.Q7_6_Title$ = "라우렐 뷘더";
+.Q7_6_No = 21609; //퀘스트 시작번호
+.Q7_6_No2 = 21608; //퀘스트 대기번호
+.Q7_6_Exp = 850000;
+.Q7_6_Jexp = 850000;
+.Q7_6_Item = 25223;
+.Q7_6_ItemAmount = 1;
+
+.Q7_7_Title$ = "셰실 디먼";
+.Q7_7_No = 21612; //퀘스트 시작번호
+.Q7_7_No2 = 21611; //퀘스트 대기번호
+.Q7_7_Exp = 1000000;
+.Q7_7_Jexp = 1000000;
+.Q7_7_Item = 25223;
+.Q7_7_ItemAmount = 1;
+
+.Q7_8_Title$ = "카트린느 케이론";
+.Q7_8_No = 21615; //퀘스트 시작번호
+.Q7_8_No2 = 21614; //퀘스트 대기번호
+.Q7_8_Exp = 1000000;
+.Q7_8_Jexp = 1000000;
+.Q7_8_Item = 25223;
+.Q7_8_ItemAmount = 1;
+
+.Q7_9_Title$ = "마가레타 소린";
+.Q7_9_No = 21619; //퀘스트 시작번호
+.Q7_9_No2 = 21618; //퀘스트 대기번호
+.Q7_9_Exp = 1000000;
+.Q7_9_Jexp = 1000000;
+.Q7_9_Item = 25223;
+.Q7_9_ItemAmount = 1;
+
+.Q7_10_Title$ = "세이렌 윈저";
+.Q7_10_No = 21621; //퀘스트 시작번호
+.Q7_10_No2 = 21620; //퀘스트 대기번호
+.Q7_10_Exp = 100000;
+.Q7_10_Jexp = 100000;
+.Q7_10_Item = 25223;
+.Q7_10_ItemAmount = 1;
+
+.Q7_11_Title$ = "에레메스 가일";
+.Q7_11_No = 21624; //퀘스트 시작번호
+.Q7_11_No2 = 21623; //퀘스트 대기번호
+.Q7_11_Exp = 1000000;
+.Q7_11_Jexp = 1000000;
+.Q7_11_Item = 25223;
+.Q7_11_ItemAmount = 1;
+
+.Q7_12_Title$ = "하워드 알트아이젠";
+.Q7_12_No = 21627; //퀘스트 시작번호
+.Q7_12_No2 = 21626; //퀘스트 대기번호
+.Q7_12_Exp = 1000000;
+.Q7_12_Jexp = 1000000;
+.Q7_12_Item = 25223;
+.Q7_12_ItemAmount = 1;
+
+.Q8_1_Title$ = "천사의 형상";
+.Q8_1_No = 21776; //퀘스트 시작번호
+.Q8_1_No2 = 21775; //퀘스트 대기번호
+.Q8_1_Exp = 800000;
+.Q8_1_Jexp = 800000;
+.Q8_1_Item = 25223;
+.Q8_1_ItemAmount = 1;
+
+.Q8_2_Title$ = "안식의 축복";
+.Q8_2_No = 21779; //퀘스트 시작번호
+.Q8_2_No2 = 21778; //퀘스트 대기번호
+.Q8_2_Exp = 800000;
+.Q8_2_Jexp = 800000;
+.Q8_2_Item = 25223;
+.Q8_2_ItemAmount = 1;
+
+.Q8_3_Title$ = "예속의 기쁨";
+.Q8_3_No = 21782; //퀘스트 시작번호
+.Q8_3_No2 = 21781; //퀘스트 대기번호
+.Q8_3_Exp = 800000;
+.Q8_3_Jexp = 800000;
+.Q8_3_Item = 25223;
+.Q8_3_ItemAmount = 1;
+
+.Q8_4_Title$ = "순수의 구현";
+.Q8_4_No = 21785; //퀘스트 시작번호
+.Q8_4_No2 = 21784; //퀘스트 대기번호
+.Q8_4_Exp = 800000;
+.Q8_4_Jexp = 800000;
+.Q8_4_Item = 25223;
+.Q8_4_ItemAmount = 1;
+
+.Q9_1_Title$ = "몽마 연구";
+.Q9_1_No = 21393; //퀘스트 시작번호
+.Q9_1_No2 = 21394; //퀘스트 대기번호
+.Q9_1_Exp = 400000;
+.Q9_1_Jexp = 400000;
+.Q9_1_Item = 25223;
+.Q9_1_ItemAmount = 1;
+
+.Q9_2_Title$ = "북슬북슬한 꼬마";
+.Q9_2_No = 21769; //퀘스트 시작번호
+.Q9_2_No2 = 21768; //퀘스트 대기번호
+.Q9_2_Exp = 850000;
+.Q9_2_Jexp = 850000;
+.Q9_2_Item = 25223;
+.Q9_2_ItemAmount = 1;
+
+.Q9_3_Title$ = "작은 장난꾸러기";
+.Q9_3_No = 21772; //퀘스트 시작번호
+.Q9_3_No2 = 21771; //퀘스트 대기번호
+.Q9_3_Exp = 850000;
+.Q9_3_Jexp = 850000;
+.Q9_3_Item = 25223;
+.Q9_3_ItemAmount = 1;
+
+return;
+
+//===========================
+// 수행가능한 모든 의뢰
+//===========================
+ALLRequest:
+	mes "[의뢰를 받는 중입니다.]";
+
+	if(isbegin_quest(.Q1_1_No) < 1 && !isbegin_quest(.Q1_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_1_No;
+		mes "의뢰 무전 치는 놈부터[120] 수락";
+	}
+	if(isbegin_quest(.Q1_2_No) < 1 && !isbegin_quest(.Q1_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_2_No;
+		mes "의뢰 악마 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q1_3_No) < 1 && !isbegin_quest(.Q1_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_3_No;
+		mes "의뢰 현혹되기 전에[120] 수락";
+	}
+	if(isbegin_quest(.Q2_1_No) < 1 && !isbegin_quest(.Q2_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_1_No;
+		mes "의뢰 호수의 용[120] 수락";
+	}
+	if(isbegin_quest(.Q2_2_No) < 1 && !isbegin_quest(.Q2_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_2_No;
+		mes "의뢰 호수의 비룡[120] 수락";
+	}
+	if(isbegin_quest(.Q2_3_No) < 1 && !isbegin_quest(.Q2_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_3_No;
+		mes "의뢰 호수의 삼두룡[120] 수락";
+	}
+	if(isbegin_quest(.Q3_1_No) < 1 && !isbegin_quest(.Q3_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_1_No;
+		mes "의뢰 감시와 처벌[120] 수락";
+	}
+	if(isbegin_quest(.Q3_2_No) < 1 && !isbegin_quest(.Q3_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_2_No;
+		mes "의뢰 달콤한 독[120] 수락";
+	}
+	if(isbegin_quest(.Q3_3_No) < 1 && !isbegin_quest(.Q3_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_3_No;
+		mes "의뢰 죽음으로 안식을[120] 수락";
+	}
+	if(isbegin_quest(.Q3_4_No) < 1 && !isbegin_quest(.Q3_4_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_4_No;
+		mes "의뢰 통제의 씨앗[120] 수락";
+	}
+	if(isbegin_quest(.Q4_1_No) < 1 && !isbegin_quest(.Q4_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q4_1_No;
+		mes "의뢰 독을 품은 벌레[120] 수락";
+	}
+	if(isbegin_quest(.Q4_2_No) < 1 && !isbegin_quest(.Q4_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q4_2_No;
+		mes "의뢰 무능한 게으름뱅이[120] 수락";
+	}
+	if(isbegin_quest(.Q4_3_No) < 1 && !isbegin_quest(.Q4_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_3_No;
+		mes "의뢰 겉모습은 껍데기[130] 수락";
+	}
+	if(isbegin_quest(.Q4_4_No) < 1 && !isbegin_quest(.Q4_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_4_No;
+		mes "의뢰 외뿔을 똑[130] 수락";
+	}
+	if(isbegin_quest(.Q4_5_No) < 1 && !isbegin_quest(.Q4_5_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_5_No;
+		mes "의뢰 쌍뿔을 뚝[130] 수락";
+	}
+	if(isbegin_quest(.Q4_6_No) < 1 && !isbegin_quest(.Q4_6_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_6_No;
+		mes "의뢰 사슴뿔을 오도독[130] 수락";
+	}
+	if(isbegin_quest(.Q4_7_No) < 1  && !isbegin_quest(.Q4_7_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_7_No;
+		mes "의뢰 갈퀴뿔을 우두둑[130] 수락";
+	}
+	if(isbegin_quest(.Q4_8_No) < 1 && !isbegin_quest(.Q4_8_No2) && BaseLevel >= 140) {
+
+		setquest .Q4_8_No;
+		mes "의뢰 모로크의 괴롭힘[140] 수락";
+	}
+	if(isbegin_quest(.Q4_9_No) < 1 && !isbegin_quest(.Q4_9_No2) && BaseLevel >= 140) {
+
+		setquest .Q4_9_No;
+		mes "의뢰 모로크의 농간[140] 수락";
+	}
+	if(isbegin_quest(.Q5_1_No) < 1 && !isbegin_quest(.Q5_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_1_No;
+		mes "의뢰 무명섬 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q5_2_No) < 1 && !isbegin_quest(.Q5_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_2_No;
+		mes "의뢰 울고 울고 또 울고[120] 수락";
+	}
+	if(isbegin_quest(.Q5_3_No) < 1 && !isbegin_quest(.Q5_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_3_No;
+		mes "의뢰 죽은 마리오네트의 주인[120] 수락";
+	}
+	if(isbegin_quest(.Q6_1_No) < 1 && !isbegin_quest(.Q6_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_1_No;
+		mes "의뢰 신전 성역 서쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q6_2_No) < 1 && !isbegin_quest(.Q6_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_2_No;
+		mes "의뢰 신전 성역 동쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q6_3_No) < 1 && !isbegin_quest(.Q6_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_3_No;
+		mes "의뢰 신전 성역 남쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q7_1_No) < 1 && !isbegin_quest(.Q7_1_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_1_No;
+		mes "의뢰 이그니젬 세니아[130] 수락";
+	}
+	if(isbegin_quest(.Q7_2_No) < 1 && !isbegin_quest(.Q7_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_2_No;
+		mes "의뢰 아르마이어 딘제[130] 수락";
+	}
+	if(isbegin_quest(.Q7_3_No) < 1 && !isbegin_quest(.Q7_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_3_No;
+		mes "의뢰 휘케바인 트리스[130] 수락";
+	}
+	if(isbegin_quest(.Q7_4_No) < 1 && !isbegin_quest(.Q7_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_4_No;
+		mes "의뢰 카바크 이카루스[130] 수락";
+	}
+	if(isbegin_quest(.Q7_5_No) < 1 && !isbegin_quest(.Q7_5_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_5_No;
+		mes "의뢰 이랜드 에베시[130] 수락";
+	}
+	if(isbegin_quest(.Q7_6_No) < 1 && !isbegin_quest(.Q7_6_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_6_No;
+		mes "의뢰 라우렐 뷘더[130] 수락";
+	}
+	if(isbegin_quest(.Q7_7_No) < 1 && !isbegin_quest(.Q7_7_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_7_No;
+		mes "의뢰 셰실 디먼[140] 수락";
+	}
+	if(isbegin_quest(.Q7_8_No) < 1 && !isbegin_quest(.Q7_8_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_8_No;
+		mes "의뢰 카트린느 케이론[140] 수락";
+	}
+	if(isbegin_quest(.Q7_9_No) < 1 && !isbegin_quest(.Q7_9_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_9_No;
+		mes "의뢰 마가레타 소린[140] 수락";
+	}
+	if(isbegin_quest(.Q7_10_No) < 1 && !isbegin_quest(.Q7_10_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_10_No;
+		mes "의뢰 세이렌 윈저[140] 수락";
+	}
+	if(isbegin_quest(.Q7_11_No) < 1 && !isbegin_quest(.Q7_11_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_11_No;
+		mes "의뢰 에레메스 가일[140] 수락";
+	}
+	if(isbegin_quest(.Q7_12_No) < 1 && !isbegin_quest(.Q7_12_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_12_No;
+		mes "의뢰 하워드 알트아이젠[140] 수락";
+	}
+	if(isbegin_quest(.Q8_1_No) < 1 && !isbegin_quest(.Q8_1_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_1_No;
+		mes "의뢰 천사의 협상[130] 수락";
+	}
+	if(isbegin_quest(.Q8_2_No) < 1 && !isbegin_quest(.Q8_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_2_No;
+		mes "의뢰 안식의 축복[130] 수락";
+	}
+	if(isbegin_quest(.Q8_3_No) < 1 && !isbegin_quest(.Q8_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_3_No;
+		mes "의뢰 예속의 기쁨[130] 수락";
+	}
+	if(isbegin_quest(.Q8_4_No) < 1 && !isbegin_quest(.Q8_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_4_No;
+		mes "의뢰 순수의 구현[130] 수락";
+	}
+	if(isbegin_quest(.Q9_1_No) < 1 && !isbegin_quest(.Q9_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q9_1_No;
+		mes "의뢰 몽마 연구[120] 수락";
+	}
+	if(isbegin_quest(.Q9_2_No) < 1 && !isbegin_quest(.Q9_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q9_2_No;
+		mes "의뢰 북슬북슬한 꼬마[130] 수락";
+	}
+	if(isbegin_quest(.Q9_3_No) < 1 && !isbegin_quest(.Q9_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q9_3_No;
+		mes "의뢰 작은 장난꾸러기[130] 수락";
+	}
+	mes "수행 가능한 모든 의뢰를";
+	mes "받았습니다.";
+	close;
+//===========================
+// 120 레벨 의뢰
+//===========================
+Request120:
+	mes "[의뢰를 받는 중입니다.]";
+
+	if(isbegin_quest(.Q1_1_No) < 1 && !isbegin_quest(.Q1_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_1_No;
+		mes "의뢰 무전 치는 놈부터[120] 수락";
+	}
+	if(isbegin_quest(.Q1_2_No) < 1 && !isbegin_quest(.Q1_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_2_No;
+		mes "의뢰 악마 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q1_3_No) < 1 && !isbegin_quest(.Q1_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q1_3_No;
+		mes "의뢰 현혹되기 전에[120] 수락";
+	}
+	if(isbegin_quest(.Q2_1_No) < 1 && !isbegin_quest(.Q2_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_1_No;
+		mes "의뢰 호수의 용[120] 수락";
+	}
+	if(isbegin_quest(.Q2_2_No) < 1 && !isbegin_quest(.Q2_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_2_No;
+		mes "의뢰 호수의 비룡[120] 수락";
+	}
+	if(isbegin_quest(.Q2_3_No) < 1 && !isbegin_quest(.Q2_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q2_3_No;
+		mes "의뢰 호수의 삼두룡[120] 수락";
+	}
+	if(isbegin_quest(.Q3_1_No) < 1 && !isbegin_quest(.Q3_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_1_No;
+		mes "의뢰 감시와 처벌[120] 수락";
+	}
+	if(isbegin_quest(.Q3_2_No) < 1 && !isbegin_quest(.Q3_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_2_No;
+		mes "의뢰 달콤한 독[120] 수락";
+	}
+	if(isbegin_quest(.Q3_3_No) < 1 && !isbegin_quest(.Q3_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_3_No;
+		mes "의뢰 죽음으로 안식을[120] 수락";
+	}
+	if(isbegin_quest(.Q3_4_No) < 1 && !isbegin_quest(.Q3_4_No2) && BaseLevel >= 120) {
+
+		setquest .Q3_4_No;
+		mes "의뢰 통제의 씨앗[120] 수락";
+	}
+	if(isbegin_quest(.Q4_1_No) < 1 && !isbegin_quest(.Q4_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q4_1_No;
+		mes "의뢰 독을 품은 벌레[120] 수락";
+	}
+	if(isbegin_quest(.Q4_2_No) < 1 && !isbegin_quest(.Q4_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q4_2_No;
+		mes "의뢰 무능한 게으름뱅이[120] 수락";
+	}
+	if(isbegin_quest(.Q5_1_No) < 1 && !isbegin_quest(.Q5_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_1_No;
+		mes "의뢰 무명섬 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q5_2_No) < 1 && !isbegin_quest(.Q5_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_2_No;
+		mes "의뢰 울고 울고 또 울고[120] 수락";
+	}
+	if(isbegin_quest(.Q5_3_No) < 1 && !isbegin_quest(.Q5_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q5_3_No;
+		mes "의뢰 죽은 마리오네트의 주인[120] 수락";
+	}
+	if(isbegin_quest(.Q6_1_No) < 1 && !isbegin_quest(.Q6_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_1_No;
+		mes "의뢰 신전 성역 서쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q6_2_No) < 1 && !isbegin_quest(.Q6_2_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_2_No;
+		mes "의뢰 신전 성역 동쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q6_3_No) < 1 && !isbegin_quest(.Q6_3_No2) && BaseLevel >= 120) {
+
+		setquest .Q6_3_No;
+		mes "의뢰 신전 성역 남쪽 구역 정화[120] 수락";
+	}
+	if(isbegin_quest(.Q9_1_No) < 1 && !isbegin_quest(.Q9_1_No2) && BaseLevel >= 120) {
+
+		setquest .Q9_1_No;
+		mes "의뢰 몽마 연구[120] 수락";
+	}
+	mes "수행 가능한 120 레벨 모든 의뢰를";
+	mes "받았습니다.";
+	close;
+//===========================
+// 130 레벨 의뢰
+//===========================
+Request130:
+	mes "[의뢰를 받는 중입니다.]";
+	if(isbegin_quest(.Q4_4_No) < 1 && !isbegin_quest(.Q4_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_4_No;
+		mes "의뢰 외뿔을 똑[130] 수락";
+	}
+	if(isbegin_quest(.Q4_5_No) < 1 && !isbegin_quest(.Q4_5_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_5_No;
+		mes "의뢰 쌍뿔을 뚝[130] 수락";
+	}
+	if(isbegin_quest(.Q4_6_No) < 1 && !isbegin_quest(.Q4_6_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_6_No;
+		mes "의뢰 사슴뿔을 오도독[130] 수락";
+	}
+	if(isbegin_quest(.Q4_7_No) < 1  && !isbegin_quest(.Q4_7_No2) && BaseLevel >= 130) {
+
+		setquest .Q4_7_No;
+		mes "의뢰 갈퀴뿔을 우두둑[130] 수락";
+	}
+	if(isbegin_quest(.Q7_1_No) < 1 && !isbegin_quest(.Q7_1_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_1_No;
+		mes "의뢰 이그니젬 세니아[130] 수락";
+	}
+	if(isbegin_quest(.Q7_2_No) < 1 && !isbegin_quest(.Q7_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_2_No;
+		mes "의뢰 아르마이어 딘제[130] 수락";
+	}
+	if(isbegin_quest(.Q7_3_No) < 1 && !isbegin_quest(.Q7_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_3_No;
+		mes "의뢰 휘케바인 트리스[130] 수락";
+	}
+	if(isbegin_quest(.Q7_4_No) < 1 && !isbegin_quest(.Q7_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_4_No;
+		mes "의뢰 카바크 이카루스[130] 수락";
+	}
+	if(isbegin_quest(.Q7_5_No) < 1 && !isbegin_quest(.Q7_5_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_5_No;
+		mes "의뢰 이랜드 에베시[130] 수락";
+	}
+	if(isbegin_quest(.Q7_6_No) < 1 && !isbegin_quest(.Q7_6_No2) && BaseLevel >= 130) {
+
+		setquest .Q7_6_No;
+		mes "의뢰 라우렐 뷘더[130] 수락";
+	}
+	if(isbegin_quest(.Q8_1_No) < 1 && !isbegin_quest(.Q8_1_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_1_No;
+		mes "의뢰 천사의 협상[130] 수락";
+	}
+	if(isbegin_quest(.Q8_2_No) < 1 && !isbegin_quest(.Q8_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_2_No;
+		mes "의뢰 안식의 축복[130] 수락";
+	}
+	if(isbegin_quest(.Q8_3_No) < 1 && !isbegin_quest(.Q8_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_3_No;
+		mes "의뢰 예속의 기쁨[130] 수락";
+	}
+	if(isbegin_quest(.Q8_4_No) < 1 && !isbegin_quest(.Q8_4_No2) && BaseLevel >= 130) {
+
+		setquest .Q8_4_No;
+		mes "의뢰 순수의 구현[130] 수락";
+	}
+	if(isbegin_quest(.Q9_2_No) < 1 && !isbegin_quest(.Q9_2_No2) && BaseLevel >= 130) {
+
+		setquest .Q9_2_No;
+		mes "의뢰 북슬북슬한 꼬마[130] 수락";
+	}
+	if(isbegin_quest(.Q9_3_No) < 1 && !isbegin_quest(.Q9_3_No2) && BaseLevel >= 130) {
+
+		setquest .Q9_3_No;
+		mes "의뢰 작은 장난꾸러기[130] 수락";
+	}
+	mes "수행 가능한 130 레벨 모든 의뢰를";
+	mes "받았습니다.";
+	close;
+
+//===========================
+// 140 레벨 의뢰
+//===========================
+Request140:
+	mes "[의뢰를 받는 중입니다.]";
+	if(isbegin_quest(.Q4_8_No) < 1 && !isbegin_quest(.Q4_8_No2) && BaseLevel >= 140) {
+
+		setquest .Q4_8_No;
+		mes "의뢰 모로크의 괴롭힘[140] 수락";
+	}
+	if(isbegin_quest(.Q4_9_No) < 1 && !isbegin_quest(.Q4_9_No2) && BaseLevel >= 140) {
+
+		setquest .Q4_9_No;
+		mes "의뢰 모로크의 농간[140] 수락";
+	}
+	if(isbegin_quest(.Q7_7_No) < 1 && !isbegin_quest(.Q7_7_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_7_No;
+		mes "의뢰 셰실 디먼[140] 수락";
+	}
+	if(isbegin_quest(.Q7_8_No) < 1 && !isbegin_quest(.Q7_8_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_8_No;
+		mes "의뢰 카트린느 케이론[140] 수락";
+	}
+	if(isbegin_quest(.Q7_9_No) < 1 && !isbegin_quest(.Q7_9_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_9_No;
+		mes "의뢰 마가레타 소린[140] 수락";
+	}
+	if(isbegin_quest(.Q7_10_No) < 1 && !isbegin_quest(.Q7_10_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_10_No;
+		mes "의뢰 세이렌 윈저[140] 수락";
+	}
+	if(isbegin_quest(.Q7_11_No) < 1 && !isbegin_quest(.Q7_11_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_11_No;
+		mes "의뢰 에레메스 가일[140] 수락";
+	}
+	if(isbegin_quest(.Q7_12_No) < 1 && !isbegin_quest(.Q7_12_No2) && BaseLevel >= 140) {
+
+		setquest .Q7_12_No;
+		mes "의뢰 하워드 알트아이젠[140] 수락";
+	}
+	mes "수행 가능한 140 레벨 모든 의뢰를";
+	mes "받았습니다.";
+	close;
+
+// 의뢰 정산
+RequestCalc:
+	set .RQ,0;
+
+	mes "[의뢰를 정산 중입니다.]";
+	if(checkquest(.Q1_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q1_1_Exp / 100)*$EdenQuestPer)+.Q1_1_Exp;
+			.QEJExp = ((.Q1_1_Jexp / 100)*$EdenQuestPer)+.Q1_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q1_1_No;
+		setquest .Q1_1_No2;
+		getexp .Q1_1_Exp,.Q1_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q1_1_Item,.Q1_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<무전 치는 놈부터> 완료하였습니다.";
+	}
+	if(checkquest(.Q1_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q1_2_Exp / 100)*$EdenQuestPer)+.Q1_2_Exp;
+			.QEJExp = ((.Q1_2_Jexp / 100)*$EdenQuestPer)+.Q1_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q1_2_No;
+		setquest .Q1_2_No2;
+		getexp .Q1_2_Exp,.Q1_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q1_2_Item,.Q1_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<악마 정화> 완료하였습니다.";
+	}
+	if(isbegin_quest(.Q1_3_No) == 1 && checkquest(.Q1_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q1_3_Exp / 100)*$EdenQuestPer)+.Q1_3_Exp;
+			.QEJExp = ((.Q1_3_Jexp / 100)*$EdenQuestPer)+.Q1_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q1_3_No;
+		setquest .Q1_3_No2;
+		getexp .Q1_3_Exp,.Q1_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q1_3_Item,.Q1_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<현혹되기 전에> 완료하였습니다.";
+	}
+	if(checkquest(.Q2_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q2_1_Exp / 100)*$EdenQuestPer)+.Q2_1_Exp;
+			.QEJExp = ((.Q2_1_Jexp / 100)*$EdenQuestPer)+.Q2_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q2_1_No;
+		setquest .Q2_1_No2;
+		getexp .Q2_1_Exp,.Q2_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q2_1_Item,.Q2_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<호수의 용> 완료하였습니다.";
+	}
+	if(checkquest(.Q2_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q2_2_Exp / 100)*$EdenQuestPer)+.Q2_2_Exp;
+			.QEJExp = ((.Q2_2_Jexp / 100)*$EdenQuestPer)+.Q2_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q2_2_No;
+		setquest .Q2_2_No2;
+		getexp .Q2_2_Exp,.Q2_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q2_2_Item,.Q2_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<호수의 비룡> 완료하였습니다.";
+	}
+	if(checkquest(.Q2_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q2_3_Exp / 100)*$EdenQuestPer)+.Q2_3_Exp;
+			.QEJExp = ((.Q2_3_Jexp / 100)*$EdenQuestPer)+.Q2_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q2_3_No;
+		setquest .Q2_3_No2;
+		getexp .Q2_3_Exp,.Q2_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q2_3_Item,.Q2_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<호수의 삼두룡> 완료하였습니다.";
+	}
+	if(checkquest(.Q3_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q3_1_Exp / 100)*$EdenQuestPer)+.Q3_1_Exp;
+			.QEJExp = ((.Q3_1_Jexp / 100)*$EdenQuestPer)+.Q3_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q3_1_No;
+		setquest .Q3_1_No2;
+		getexp .Q3_1_Exp,.Q3_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q3_1_Item,.Q3_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<감시와 처벌> 완료하였습니다.";
+	}
+	if(checkquest(.Q3_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q3_2_Exp / 100)*$EdenQuestPer)+.Q3_2_Exp;
+			.QEJExp = ((.Q3_2_Jexp / 100)*$EdenQuestPer)+.Q3_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q3_2_No;
+		setquest .Q3_2_No2;
+		getexp .Q3_2_Exp,.Q3_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q3_2_Item,.Q3_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<달콤한 독> 완료하였습니다.";
+	}
+	if(checkquest(.Q3_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q3_3_Exp / 100)*$EdenQuestPer)+.Q3_3_Exp;
+			.QEJExp = ((.Q3_3_Jexp / 100)*$EdenQuestPer)+.Q3_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q3_3_No;
+		setquest .Q3_3_No2;
+		getexp .Q3_3_Exp,.Q3_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q3_3_Item,.Q3_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<죽음으로 안식을> 완료하였습니다.";
+	}
+	if(checkquest(.Q3_4_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q3_4_Exp / 100)*$EdenQuestPer)+.Q3_4_Exp;
+			.QEJExp = ((.Q3_4_Jexp / 100)*$EdenQuestPer)+.Q3_4_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q3_4_No;
+		setquest .Q3_4_No2;
+		getexp .Q3_4_Exp,.Q3_4_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q3_4_Item,.Q3_4_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<통제의 씨앗> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_1_Exp / 100)*$EdenQuestPer)+.Q4_1_Exp;
+			.QEJExp = ((.Q4_1_Jexp / 100)*$EdenQuestPer)+.Q4_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_1_No;
+		setquest .Q4_1_No2;
+		getexp .Q4_1_Exp,.Q4_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_1_Item,.Q4_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<독을 품은 벌레> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_2_Exp / 100)*$EdenQuestPer)+.Q4_2_Exp;
+			.QEJExp = ((.Q4_2_Jexp / 100)*$EdenQuestPer)+.Q4_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_2_No;
+		setquest .Q4_2_No2;
+		getexp .Q4_2_Exp,.Q4_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_2_Item,.Q4_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<무능한 게으름뱅이> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_3_Exp / 100)*$EdenQuestPer)+.Q4_3_Exp;
+			.QEJExp = ((.Q4_3_Jexp / 100)*$EdenQuestPer)+.Q4_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_3_No;
+		setquest .Q4_3_No2;
+		getexp .Q4_3_Exp,.Q4_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_3_Item,.Q4_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<겉모습은 껍데기> 완료하였습니다.";
+	}
+	if(isbegin_quest(.Q4_4_No) == 1 && checkquest(.Q4_4_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_4_Exp / 100)*$EdenQuestPer)+.Q4_4_Exp;
+			.QEJExp = ((.Q4_4_Jexp / 100)*$EdenQuestPer)+.Q4_4_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_4_No;
+		setquest .Q4_4_No2;
+		getexp .Q4_4_Exp,.Q4_4_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_4_Item,.Q4_4_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<외뿔을 똑> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_5_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_5_Exp / 100)*$EdenQuestPer)+.Q4_5_Exp;
+			.QEJExp = ((.Q4_5_Jexp / 100)*$EdenQuestPer)+.Q4_5_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_5_No;
+		setquest .Q4_5_No2;
+		getexp .Q4_5_Exp,.Q4_5_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_5_Item,.Q4_5_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<쌍뿔을 뚝> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_6_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_6_Exp / 100)*$EdenQuestPer)+.Q4_6_Exp;
+			.QEJExp = ((.Q4_6_Jexp / 100)*$EdenQuestPer)+.Q4_6_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_6_No;
+		setquest .Q4_6_No2;
+		getexp .Q4_6_Exp,.Q4_6_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_6_Item,.Q4_6_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<사슴뿔을 오도독> 완료하였습니다.";
+	}
+	if(isbegin_quest(.Q4_7_No) == 1 && checkquest(.Q4_7_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_7_Exp / 100)*$EdenQuestPer)+.Q4_7_Exp;
+			.QEJExp = ((.Q4_7_Jexp / 100)*$EdenQuestPer)+.Q4_7_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_7_No;
+		setquest .Q4_7_No2;
+		getexp .Q4_7_Exp,.Q4_7_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_7_Item,.Q4_7_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<갈퀴뿔을 우두둑> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_8_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_8_Exp / 100)*$EdenQuestPer)+.Q4_8_Exp;
+			.QEJExp = ((.Q4_8_Jexp / 100)*$EdenQuestPer)+.Q4_8_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_8_No;
+		setquest .Q4_8_No2;
+		getexp .Q4_8_Exp,.Q4_8_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_8_Item,.Q4_8_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<모로코의 괴롭힘> 완료하였습니다.";
+	}
+	if(checkquest(.Q4_9_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q4_9_Exp / 100)*$EdenQuestPer)+.Q4_9_Exp;
+			.QEJExp = ((.Q4_9_Jexp / 100)*$EdenQuestPer)+.Q4_9_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q4_9_No;
+		setquest .Q4_9_No2;
+		getexp .Q4_9_Exp,.Q4_9_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q4_9_Item,.Q4_9_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<모로코의 농간> 완료하였습니다.";
+	}
+	if(checkquest(.Q5_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q5_1_Exp / 100)*$EdenQuestPer)+.Q5_1_Exp;
+			.QEJExp = ((.Q5_1_Jexp / 100)*$EdenQuestPer)+.Q5_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q5_1_No;
+		setquest .Q5_1_No2;
+		getexp .Q5_1_Exp,.Q5_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q5_1_Item,.Q5_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<무명섬 정화> 완료하였습니다.";
+	}
+	if(checkquest(.Q5_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q5_2_Exp / 100)*$EdenQuestPer)+.Q5_2_Exp;
+			.QEJExp = ((.Q5_2_Jexp / 100)*$EdenQuestPer)+.Q5_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q5_2_No;
+		setquest .Q5_2_No2;
+		getexp .Q5_2_Exp,.Q5_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q5_2_Item,.Q5_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<울고 울고 또 울고> 완료하였습니다.";
+	}
+	if(checkquest(.Q5_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q5_3_Exp / 100)*$EdenQuestPer)+.Q5_3_Exp;
+			.QEJExp = ((.Q5_3_Jexp / 100)*$EdenQuestPer)+.Q5_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q5_3_No;
+		setquest .Q5_3_No2;
+		getexp .Q5_3_Exp,.Q5_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q5_3_Item,.Q5_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<죽은 마리오네트의 주인> 완료하였습니다.";
+	}
+	if(checkquest(.Q6_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q6_1_Exp / 100)*$EdenQuestPer)+.Q6_1_Exp;
+			.QEJExp = ((.Q6_1_Jexp / 100)*$EdenQuestPer)+.Q6_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q6_1_No;
+		setquest .Q6_1_No2;
+		getexp .Q6_1_Exp,.Q6_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q6_1_Item,.Q6_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<신전 성역 서쪽 구역 정화> 완료하였습니다.";
+	}
+	if(checkquest(.Q6_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q6_2_Exp / 100)*$EdenQuestPer)+.Q6_2_Exp;
+			.QEJExp = ((.Q6_2_Jexp / 100)*$EdenQuestPer)+.Q6_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q6_2_No;
+		setquest .Q6_2_No2;
+		getexp .Q6_2_Exp,.Q6_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q6_2_Item,.Q6_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<신전 성역 동쪽 구역 정화> 완료하였습니다.";
+	}
+	if(checkquest(.Q6_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q6_3_Exp / 100)*$EdenQuestPer)+.Q6_3_Exp;
+			.QEJExp = ((.Q6_3_Jexp / 100)*$EdenQuestPer)+.Q6_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q6_3_No;
+		setquest .Q6_3_No2;
+		getexp .Q6_3_Exp,.Q6_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q6_3_Item,.Q6_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<신전 성역 남쪽 구역 정화> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_1_Exp / 100)*$EdenQuestPer)+.Q7_1_Exp;
+			.QEJExp = ((.Q7_1_Jexp / 100)*$EdenQuestPer)+.Q7_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_1_No;
+		setquest .Q7_1_No2;
+		getexp .Q7_1_Exp,.Q7_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_1_Item,.Q7_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<이그니젬 세니아> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_2_Exp / 100)*$EdenQuestPer)+.Q7_2_Exp;
+			.QEJExp = ((.Q7_2_Jexp / 100)*$EdenQuestPer)+.Q7_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_2_No;
+		setquest .Q7_2_No2;
+		getexp .Q7_2_Exp,.Q7_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_2_Item,.Q7_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<아르마이어 딘제> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_3_Exp / 100)*$EdenQuestPer)+.Q7_3_Exp;
+			.QEJExp = ((.Q7_3_Jexp / 100)*$EdenQuestPer)+.Q7_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_3_No;
+		setquest .Q7_3_No2;
+		getexp .Q7_3_Exp,.Q7_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_3_Item,.Q7_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<휘케바인 트리스> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_4_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_4_Exp / 100)*$EdenQuestPer)+.Q7_4_Exp;
+			.QEJExp = ((.Q7_4_Jexp / 100)*$EdenQuestPer)+.Q7_4_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_4_No;
+		setquest .Q7_4_No2;
+		getexp .Q7_4_Exp,.Q7_4_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_4_Item,.Q7_4_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<카바크 이카루스> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_5_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_5_Exp / 100)*$EdenQuestPer)+.Q7_5_Exp;
+			.QEJExp = ((.Q7_5_Jexp / 100)*$EdenQuestPer)+.Q7_5_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_5_No;
+		setquest .Q7_5_No2;
+		getexp .Q7_5_Exp,.Q7_5_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_5_Item,.Q7_5_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<이랜드 에베시> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_6_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_6_Exp / 100)*$EdenQuestPer)+.Q7_6_Exp;
+			.QEJExp = ((.Q7_6_Jexp / 100)*$EdenQuestPer)+.Q7_6_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_6_No;
+		setquest .Q7_6_No2;
+		getexp .Q7_6_Exp,.Q7_6_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_6_Item,.Q7_6_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<라우렐 뷘더> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_7_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_7_Exp / 100)*$EdenQuestPer)+.Q7_7_Exp;
+			.QEJExp = ((.Q7_7_Jexp / 100)*$EdenQuestPer)+.Q7_7_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_7_No;
+		setquest .Q7_7_No2;
+		getexp .Q7_7_Exp,.Q7_7_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_7_Item,.Q7_7_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<셰실 디먼> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_8_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_8_Exp / 100)*$EdenQuestPer)+.Q7_8_Exp;
+			.QEJExp = ((.Q7_8_Jexp / 100)*$EdenQuestPer)+.Q7_8_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_8_No;
+		setquest .Q7_8_No2;
+		getexp .Q7_8_Exp,.Q7_8_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_8_Item,.Q7_8_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<카트린느 케이론> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_9_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_9_Exp / 100)*$EdenQuestPer)+.Q7_9_Exp;
+			.QEJExp = ((.Q7_9_Jexp / 100)*$EdenQuestPer)+.Q7_9_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_9_No;
+		setquest .Q7_9_No2;
+		getexp .Q7_9_Exp,.Q7_9_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_9_Item,.Q7_9_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<마가레타 소린> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_10_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_10_Exp / 100)*$EdenQuestPer)+.Q7_10_Exp;
+			.QEJExp = ((.Q7_10_Jexp / 100)*$EdenQuestPer)+.Q7_10_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_10_No;
+		setquest .Q7_10_No2;
+		getexp .Q7_10_Exp,.Q7_10_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_10_Item,.Q7_10_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<세이렌 윈저> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_11_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_11_Exp / 100)*$EdenQuestPer)+.Q7_11_Exp;
+			.QEJExp = ((.Q7_11_Jexp / 100)*$EdenQuestPer)+.Q7_11_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_11_No;
+		setquest .Q7_11_No2;
+		getexp .Q7_11_Exp,.Q7_11_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_11_Item,.Q7_11_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<에레메스 가일> 완료하였습니다.";
+	}
+	if(checkquest(.Q7_12_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q7_12_Exp / 100)*$EdenQuestPer)+.Q7_12_Exp;
+			.QEJExp = ((.Q7_12_Jexp / 100)*$EdenQuestPer)+.Q7_12_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q7_12_No;
+		setquest .Q7_12_No2;
+		getexp .Q7_12_Exp,.Q7_12_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q7_12_Item,.Q7_12_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<하워드 알트아이젠> 완료하였습니다.";
+	}
+	if(checkquest(.Q8_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q8_1_Exp / 100)*$EdenQuestPer)+.Q8_1_Exp;
+			.QEJExp = ((.Q8_1_Jexp / 100)*$EdenQuestPer)+.Q8_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q8_1_No;
+		setquest .Q8_1_No2;
+		getexp .Q8_1_Exp,.Q8_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q8_1_Item,.Q8_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<천사의 협상> 완료하였습니다.";
+	}
+	if(checkquest(.Q8_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q8_2_Exp / 100)*$EdenQuestPer)+.Q8_2_Exp;
+			.QEJExp = ((.Q8_2_Jexp / 100)*$EdenQuestPer)+.Q8_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q8_2_No;
+		setquest .Q8_2_No2;
+		getexp .Q8_2_Exp,.Q8_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q8_2_Item,.Q8_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<안식의 축복> 완료하였습니다.";
+	}
+	if(checkquest(.Q8_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q8_3_Exp / 100)*$EdenQuestPer)+.Q8_3_Exp;
+			.QEJExp = ((.Q8_3_Jexp / 100)*$EdenQuestPer)+.Q8_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q8_3_No;
+		setquest .Q8_3_No2;
+		getexp .Q8_3_Exp,.Q8_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q8_3_Item,.Q8_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<예속의 기쁨> 완료하였습니다.";
+	}
+	if(checkquest(.Q8_4_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q8_4_Exp / 100)*$EdenQuestPer)+.Q8_4_Exp;
+			.QEJExp = ((.Q8_4_Jexp / 100)*$EdenQuestPer)+.Q8_4_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q8_4_No;
+		setquest .Q8_4_No2;
+		getexp .Q8_4_Exp,.Q8_4_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q8_4_Item,.Q8_4_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<순수의 구현> 완료하였습니다.";
+	}
+	if(checkquest(.Q9_1_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q9_1_Exp / 100)*$EdenQuestPer)+.Q9_1_Exp;
+			.QEJExp = ((.Q9_1_Jexp / 100)*$EdenQuestPer)+.Q9_1_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q9_1_No;
+		setquest .Q9_1_No2;
+		getexp .Q9_1_Exp,.Q9_1_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q9_1_Item,.Q9_1_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<몽마 연구> 완료하였습니다.";
+	}
+	if(checkquest(.Q9_2_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q9_2_Exp / 100)*$EdenQuestPer)+.Q9_2_Exp;
+			.QEJExp = ((.Q9_2_Jexp / 100)*$EdenQuestPer)+.Q9_2_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q9_2_No;
+		setquest .Q9_2_No2;
+		getexp .Q9_2_Exp,.Q9_2_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q9_2_Item,.Q9_2_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<북슬북슬한 꼬마> 완료하였습니다.";
+	}
+	if(checkquest(.Q9_3_No,HUNTING) == 2) {
+		if($EdenQuestEvent == 1 && $EdenQuestPer > 1) {
+			
+			.QEExp = ((.Q9_3_Exp / 100)*$EdenQuestPer)+.Q9_3_Exp;
+			.QEJExp = ((.Q9_3_Jexp / 100)*$EdenQuestPer)+.Q9_3_Jexp;
+		}
+		else {
+			.QEExp = 0;
+			.QEJExp = 0;
+		}
+		erasequest .Q9_3_No;
+		setquest .Q9_3_No2;
+		getexp .Q9_3_Exp,.Q9_3_Jexp;
+		getexp .QEExp,.QEJExp;
+		getitem .Q9_3_Item,.Q9_3_ItemAmount;
+		set .RQ,.RQ+1;
+		mes "<작은 장난꾸러기> 완료하였습니다.";
+	}
+	mes "총 "+.RQ+"건의 완료된 의뢰를 정산했습니다.";
+	return;
+
+// 레벨 부족 메세지
+NotLevelSee:
+	mes "레벨이 부족하여 해당 게시판을 사용할";
+	mes "수 없습니다.";
+	close;
+LevelLow:
+	mes "레벨이 부족하여 해당 의뢰를 진행할";
+	mes "수 없습니다.";
+	next;
+	goto B_Menu1;
+
+
+// 대기시간이 지난 퀘스트 제거
+DelWaitQuest:
+
+	if(checkquest(.Q1_1_No2,PLAYTIME) == 2) erasequest .Q1_1_No2;
+	if(checkquest(.Q1_2_No2,PLAYTIME) == 2) erasequest .Q1_2_No2;
+	if(checkquest(.Q1_3_No2,PLAYTIME) == 2) erasequest .Q1_3_No2;
+	if(checkquest(.Q2_1_No2,PLAYTIME) == 2) erasequest .Q2_1_No2;
+	if(checkquest(.Q2_2_No2,PLAYTIME) == 2) erasequest .Q2_2_No2;
+	if(checkquest(.Q2_3_No2,PLAYTIME) == 2) erasequest .Q2_3_No2;
+	if(checkquest(.Q3_1_No2,PLAYTIME) == 2) erasequest .Q3_1_No2;
+	if(checkquest(.Q3_2_No2,PLAYTIME) == 2) erasequest .Q3_2_No2;
+	if(checkquest(.Q3_3_No2,PLAYTIME) == 2) erasequest .Q3_3_No2;
+	if(checkquest(.Q3_4_No2,PLAYTIME) == 2) erasequest .Q3_4_No2;
+	if(checkquest(.Q4_1_No2,PLAYTIME) == 2) erasequest .Q4_1_No2;
+	if(checkquest(.Q4_2_No2,PLAYTIME) == 2) erasequest .Q4_2_No2;
+	if(checkquest(.Q4_3_No2,PLAYTIME) == 2) erasequest .Q4_3_No2;
+	if(checkquest(.Q4_4_No2,PLAYTIME) == 2) erasequest .Q4_4_No2;
+	if(checkquest(.Q4_5_No2,PLAYTIME) == 2) erasequest .Q4_5_No2;
+	if(checkquest(.Q4_6_No2,PLAYTIME) == 2) erasequest .Q4_6_No2;
+	if(checkquest(.Q4_7_No2,PLAYTIME) == 2) erasequest .Q4_7_No2;
+	if(checkquest(.Q4_8_No2,PLAYTIME) == 2) erasequest .Q4_8_No2;
+	if(checkquest(.Q4_9_No2,PLAYTIME) == 2) erasequest .Q4_9_No2;
+	if(checkquest(.Q5_1_No2,PLAYTIME) == 2) erasequest .Q5_1_No2;
+	if(checkquest(.Q5_2_No2,PLAYTIME) == 2) erasequest .Q5_2_No2;
+	if(checkquest(.Q5_3_No2,PLAYTIME) == 2) erasequest .Q5_3_No2;
+	if(checkquest(.Q6_1_No2,PLAYTIME) == 2) erasequest .Q6_1_No2;
+	if(checkquest(.Q6_2_No2,PLAYTIME) == 2) erasequest .Q6_2_No2;
+	if(checkquest(.Q6_3_No2,PLAYTIME) == 2) erasequest .Q6_3_No2;
+	if(checkquest(.Q7_1_No2,PLAYTIME) == 2) erasequest .Q7_1_No2;
+	if(checkquest(.Q7_2_No2,PLAYTIME) == 2) erasequest .Q7_2_No2;
+	if(checkquest(.Q7_3_No2,PLAYTIME) == 2) erasequest .Q7_3_No2;
+	if(checkquest(.Q7_4_No2,PLAYTIME) == 2) erasequest .Q7_4_No2;
+	if(checkquest(.Q7_5_No2,PLAYTIME) == 2) erasequest .Q7_5_No2;
+	if(checkquest(.Q7_6_No2,PLAYTIME) == 2) erasequest .Q7_6_No2;
+	if(checkquest(.Q7_7_No2,PLAYTIME) == 2) erasequest .Q7_7_No2;
+	if(checkquest(.Q7_8_No2,PLAYTIME) == 2) erasequest .Q7_8_No2;
+	if(checkquest(.Q7_9_No2,PLAYTIME) == 2) erasequest .Q7_9_No2;
+	if(checkquest(.Q7_10_No2,PLAYTIME) == 2) erasequest .Q7_10_No2;
+	if(checkquest(.Q7_11_No2,PLAYTIME) == 2) erasequest .Q7_11_No2;
+	if(checkquest(.Q7_12_No2,PLAYTIME) == 2) erasequest .Q7_12_No2;
+	if(checkquest(.Q8_1_No2,PLAYTIME) == 2) erasequest .Q8_1_No2;
+	if(checkquest(.Q8_2_No2,PLAYTIME) == 2) erasequest .Q8_2_No2;
+	if(checkquest(.Q8_3_No2,PLAYTIME) == 2) erasequest .Q8_3_No2;
+	if(checkquest(.Q8_4_No2,PLAYTIME) == 2) erasequest .Q8_4_No2;
+	if(checkquest(.Q9_1_No2,PLAYTIME) == 2) erasequest .Q9_1_No2;
+	if(checkquest(.Q9_2_No2,PLAYTIME) == 2) erasequest .Q9_2_No2;
+	if(checkquest(.Q9_3_No2,PLAYTIME) == 2) erasequest .Q9_3_No2;
+
+	return;
+
+QuestWaitSet:
+	//====== 첫번째 퀘스트 관련 ============
+
+	if(isbegin_quest(.Q1_1_No) == 1 && checkquest(.Q1_1_No,HUNTING) != 2) {
+		set .QLv1_1$,"^A3A3A3";
+		set .QLv1_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q1_1_No2) == 1) {
+		set .QLv1_1$,"^A3A3A3";
+		set .QLv1_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv1_1$,"";
+		set .QLv1_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q1_2_No) == 1 && checkquest(.Q1_2_No,HUNTING) != 2) {
+		set .QLv1_2$,"^A3A3A3";
+		set .QLv1_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q1_2_No2) == 1) {
+		set .QLv1_2$,"^A3A3A3";
+		set .QLv1_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv1_2$,"";
+		set .QLv1_2c$,"[120]";
+	}
+	if(isbegin_quest(.Q1_3_No) == 1 && checkquest(.Q1_3_No,HUNTING) != 2) {
+		set .QLv1_3$,"^A3A3A3";
+		set .QLv1_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q1_3_No2) == 1) {
+		set .QLv1_3$,"^A3A3A3";
+		set .QLv1_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv1_3$,"";
+		set .QLv1_3c$,"[120]";
+	}
+
+
+	// ============ 두번째 퀘스트 ==============
+
+	if(isbegin_quest(.Q2_1_No) == 1 && checkquest(.Q2_1_No,HUNTING) != 2) {
+		set .QLv2_1$,"^A3A3A3";
+		set .QLv2_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q2_1_No2) == 1) {
+		set .QLv2_1$,"^A3A3A3";
+		set .QLv2_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv2_1$,"";
+		set .QLv2_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q2_2_No) == 1 && checkquest(.Q2_2_No,HUNTING) != 2) {
+		set .QLv2_2$,"^A3A3A3";
+		set .QLv2_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q2_2_No2) == 1) {
+		set .QLv2_2$,"^A3A3A3";
+		set .QLv2_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv2_2$,"";
+		set .QLv2_2c$,"[120]";
+	}
+	if(isbegin_quest(.Q2_3_No) == 1 && checkquest(.Q2_3_No,HUNTING) != 2) {
+		set .QLv2_3$,"^A3A3A3";
+		set .QLv2_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q2_3_No2) == 1) {
+		set .QLv2_3$,"^A3A3A3";
+		set .QLv2_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv2_3$,"";
+		set .QLv2_3c$,"[120]";
+	}
+
+	// ============ 세번째 퀘스트 ==============
+
+	if(isbegin_quest(.Q3_1_No) == 1 && checkquest(.Q3_1_No,HUNTING) != 2) {
+		set .QLv3_1$,"^A3A3A3";
+		set .QLv3_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q3_1_No2) == 1) {
+		set .QLv3_1$,"^A3A3A3";
+		set .QLv3_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv3_1$,"";
+		set .QLv3_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q3_2_No) == 1 && checkquest(.Q3_2_No,HUNTING) != 2) {
+		set .QLv3_2$,"^A3A3A3";
+		set .QLv3_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q3_2_No2) == 1) {
+		set .QLv3_2$,"^A3A3A3";
+		set .QLv3_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv3_2$,"";
+		set .QLv3_2c$,"[120]";
+	}
+	if(isbegin_quest(.Q3_3_No) == 1 && checkquest(.Q3_3_No,HUNTING) != 2) {
+		set .QLv3_3$,"^A3A3A3";
+		set .QLv3_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q3_3_No2) == 1) {
+		set .QLv3_3$,"^A3A3A3";
+		set .QLv3_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv3_3$,"";
+		set .QLv3_3c$,"[120]";
+	}
+	if(isbegin_quest(.Q3_4_No) == 1 && checkquest(.Q3_4_No,HUNTING) != 2) {
+		set .QLv3_4$,"^A3A3A3";
+		set .QLv3_4c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q3_4_No2) == 1) {
+		set .QLv3_4$,"^A3A3A3";
+		set .QLv3_4c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv3_4$,"";
+		set .QLv3_4c$,"[120]";
+	}
+
+	// ============ 네번째 퀘스트 =============
+
+	if(isbegin_quest(.Q4_1_No) == 1 && checkquest(.Q4_1_No,HUNTING) != 2) {
+		set .QLv4_1$,"^A3A3A3";
+		set .QLv4_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_1_No2) == 1) {
+		set .QLv4_1$,"^A3A3A3";
+		set .QLv4_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_1$,"";
+		set .QLv4_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q4_2_No) == 1 && checkquest(.Q4_2_No,HUNTING) != 2) {
+		set .QLv4_2$,"^A3A3A3";
+		set .QLv4_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_2_No2) == 1) {
+		set .QLv4_2$,"^A3A3A3";
+		set .QLv4_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_2$,"";
+		set .QLv4_2c$,"[120]";
+	}
+	if(isbegin_quest(.Q4_3_No) == 1 && checkquest(.Q4_3_No,HUNTING) != 2) {
+		set .QLv4_3$,"^A3A3A3";
+		set .QLv4_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_3_No2) == 1) {
+		set .QLv4_3$,"^A3A3A3";
+		set .QLv4_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_3$,"";
+		set .QLv4_3c$,"[130]";
+	}
+	if(isbegin_quest(.Q4_4_No) == 1 && checkquest(.Q4_4_No,HUNTING) != 2) {
+		set .QLv4_4$,"^A3A3A3";
+		set .QLv4_4c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_4_No2) == 1) {
+		set .QLv4_4$,"^A3A3A3";
+		set .QLv4_4c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_4$,"";
+		set .QLv4_4c$,"[130]";
+	}
+	if(isbegin_quest(.Q4_5_No) == 1 && checkquest(.Q4_5_No,HUNTING) != 2) {
+		set .QLv4_5$,"^A3A3A3";
+		set .QLv4_5c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_5_No2) == 1) {
+		set .QLv4_5$,"^A3A3A3";
+		set .QLv4_5c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_5$,"";
+		set .QLv4_5c$,"[130]";
+	}
+	if(isbegin_quest(.Q4_6_No) == 1 && checkquest(.Q4_6_No,HUNTING) != 2) {
+		set .QLv4_6$,"^A3A3A3";
+		set .QLv4_6c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_6_No2) == 1) {
+		set .QLv4_6$,"^A3A3A3";
+		set .QLv4_6c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_6$,"";
+		set .QLv4_6c$,"[130]";
+	}
+	if(isbegin_quest(.Q4_7_No) == 1 && checkquest(.Q4_7_No,HUNTING) != 2) {
+		set .QLv4_7$,"^A3A3A3";
+		set .QLv4_7c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_7_No2) == 1) {
+		set .QLv4_7$,"^A3A3A3";
+		set .QLv4_7c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_7$,"";
+		set .QLv4_7c$,"[130]";
+	}
+	if(isbegin_quest(.Q4_8_No) == 1 && checkquest(.Q4_8_No,HUNTING) != 2) {
+		set .QLv4_8$,"^A3A3A3";
+		set .QLv4_8c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_8_No2) == 1) {
+		set .QLv4_8$,"^A3A3A3";
+		set .QLv4_8c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_8$,"";
+		set .QLv4_8c$,"[140]";
+	}
+	if(isbegin_quest(.Q4_9_No) == 1 && checkquest(.Q4_9_No,HUNTING) != 2) {
+		set .QLv4_9$,"^A3A3A3";
+		set .QLv4_9c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q4_9_No2) == 1) {
+		set .QLv4_9$,"^A3A3A3";
+		set .QLv4_9c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv4_9$,"";
+		set .QLv4_9c$,"[140]";
+	}
+	// ============ 다섯번째 퀘스트 ===============
+
+	if(isbegin_quest(.Q5_1_No) == 1 && checkquest(.Q5_1_No,HUNTING) != 2) {
+		set .QLv5_1$,"^A3A3A3";
+		set .QLv5_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q5_1_No2) == 1) {
+		set .QLv5_1$,"^A3A3A3";
+		set .QLv5_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv5_1$,"";
+		set .QLv5_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q5_2_No) == 1 && checkquest(.Q5_2_No,HUNTING) != 2) {
+		set .QLv5_2$,"^A3A3A3";
+		set .QLv5_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q5_2_No2) == 1) {
+		set .QLv5_2$,"^A3A3A3";
+		set .QLv5_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv5_2$,"";
+		set .QLv5_2c$,"[120]";
+	}
+	if(isbegin_quest(.Q5_3_No) == 1 && checkquest(.Q5_3_No,HUNTING) != 2) {
+		set .QLv5_3$,"^A3A3A3";
+		set .QLv5_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q5_3_No2) == 1) {
+		set .QLv5_3$,"^A3A3A3";
+		set .QLv5_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv5_3$,"";
+		set .QLv5_3c$,"[120]";
+	}
+
+	// ============ 여섯번째 퀘스트 ===============
+
+	if(isbegin_quest(.Q6_1_No) == 1 && checkquest(.Q6_1_No,HUNTING) != 2) {
+		set .QLv6_1$,"^A3A3A3";
+		set .QLv6_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q6_1_No2) == 1) {
+		set .QLv6_1$,"^A3A3A3";
+		set .QLv6_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv6_1$,"";
+		set .QLv6_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q6_2_No) == 1 && checkquest(.Q6_2_No,HUNTING) != 2) {
+		set .QLv6_2$,"^A3A3A3";
+		set .QLv6_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q6_2_No2) == 1) {
+		set .QLv6_2$,"^A3A3A3";
+		set .QLv6_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv6_2$,"";
+		set .QLv6_6c$,"[120]";
+	}
+	if(isbegin_quest(.Q6_3_No) == 1 && checkquest(.Q6_3_No,HUNTING) != 2) {
+		set .QLv6_3$,"^A3A3A3";
+		set .QLv6_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q6_3_No2) == 1) {
+		set .QLv6_3$,"^A3A3A3";
+		set .QLv6_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv6_3$,"";
+		set .QLv6_3c$,"[120]";
+	}
+	
+	// ========== 일곱번째 퀘스트 ===============
+	if(isbegin_quest(.Q7_1_No) == 1 && checkquest(.Q7_1_No,HUNTING) != 2) {
+		set .QLv7_1$,"^A3A3A3";
+		set .QLv7_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_1_No2) == 1) {
+		set .QLv7_1$,"^A3A3A3";
+		set .QLv7_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_1$,"";
+		set .QLv7_1c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_2_No) == 1 && checkquest(.Q7_2_No,HUNTING) != 2) {
+		set .QLv7_2$,"^A3A3A3";
+		set .QLv7_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_2_No2) == 1) {
+		set .QLv7_2$,"^A3A3A3";
+		set .QLv7_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_2$,"";
+		set .QLv7_2c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_3_No) == 1 && checkquest(.Q7_3_No,HUNTING) != 2) {
+		set .QLv7_3$,"^A3A3A3";
+		set .QLv7_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_3_No2) == 1) {
+		set .QLv7_3$,"^A3A3A3";
+		set .QLv7_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_3$,"";
+		set .QLv7_3c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_4_No) == 1 && checkquest(.Q7_4_No,HUNTING) != 2) {
+		set .QLv7_4$,"^A3A3A3";
+		set .QLv7_4c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_4_No2) == 1) {
+		set .QLv7_4$,"^A3A3A3";
+		set .QLv7_4c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_4$,"";
+		set .QLv7_4c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_5_No) == 1 && checkquest(.Q7_5_No,HUNTING) != 2) {
+		set .QLv7_5$,"^A3A3A3";
+		set .QLv7_5c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_5_No2) == 1) {
+		set .QLv7_5$,"^A3A3A3";
+		set .QLv7_5c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_5$,"";
+		set .QLv7_5c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_6_No) == 1 && checkquest(.Q7_6_No,HUNTING) != 2) {
+		set .QLv7_6$,"^A3A3A3";
+		set .QLv7_6c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_6_No2) == 1) {
+		set .QLv7_6$,"^A3A3A3";
+		set .QLv7_6c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_6$,"";
+		set .QLv7_6c$,"[130]";
+	}
+	if(isbegin_quest(.Q7_7_No) == 1 && checkquest(.Q7_7_No,HUNTING) != 2) {
+		set .QLv7_7$,"^A3A3A3";
+		set .QLv7_7c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_7_No2) == 1) {
+		set .QLv7_7$,"^A3A3A3";
+		set .QLv7_7c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_7$,"";
+		set .QLv7_7c$,"[140]";
+	}
+	if(isbegin_quest(.Q7_8_No) == 1 && checkquest(.Q7_8_No,HUNTING) != 2) {
+		set .QLv7_8$,"^A3A3A3";
+		set .QLv7_8c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_8_No2) == 1) {
+		set .QLv7_8$,"^A3A3A3";
+		set .QLv7_8c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_8$,"";
+		set .QLv7_8c$,"[140]";
+	}
+	if(isbegin_quest(.Q7_9_No) == 1 && checkquest(.Q7_9_No,HUNTING) != 2) {
+		set .QLv7_9$,"^A3A3A3";
+		set .QLv7_9c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_9_No2) == 1) {
+		set .QLv7_9$,"^A3A3A3";
+		set .QLv7_9c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_9$,"";
+		set .QLv7_9c$,"[140]";
+	}
+	if(isbegin_quest(.Q7_10_No) == 1 && checkquest(.Q7_10_No,HUNTING) != 2) {
+		set .QLv7_10$,"^A3A3A3";
+		set .QLv7_10c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_10_No2) == 1) {
+		set .QLv7_10$,"^A3A3A3";
+		set .QLv7_10c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_10$,"";
+		set .QLv7_10c$,"[140]";
+	}
+	if(isbegin_quest(.Q7_11_No) == 1 && checkquest(.Q7_11_No,HUNTING) != 2) {
+		set .QLv7_11$,"^A3A3A3";
+		set .QLv7_11c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_11_No2) == 1) {
+		set .QLv7_11$,"^A3A3A3";
+		set .QLv7_11c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_11$,"";
+		set .QLv7_11c$,"[140]";
+	}
+	if(isbegin_quest(.Q7_12_No) == 1 && checkquest(.Q7_12_No,HUNTING) != 2) {
+		set .QLv7_12$,"^A3A3A3";
+		set .QLv7_12c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q7_12_No2) == 1) {
+		set .QLv7_12$,"^A3A3A3";
+		set .QLv7_12c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv7_12$,"";
+		set .QLv7_12c$,"[140]";
+	}
+
+	// ========== 여덟번째 퀘스트 ===============
+	if(isbegin_quest(.Q8_1_No) == 1 && checkquest(.Q8_1_No,HUNTING) != 2) {
+		set .QLv8_1$,"^A3A3A3";
+		set .QLv8_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q8_1_No2) == 1) {
+		set .QLv8_1$,"^A3A3A3";
+		set .QLv8_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv8_1$,"";
+		set .QLv8_1c$,"[130]";
+	}
+	if(isbegin_quest(.Q8_2_No) == 1 && checkquest(.Q8_2_No,HUNTING) != 2) {
+		set .QLv8_2$,"^A3A3A3";
+		set .QLv8_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q8_2_No2) == 1) {
+		set .QLv8_2$,"^A3A3A3";
+		set .QLv8_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv8_2$,"";
+		set .QLv8_2c$,"[130]";
+	}
+	if(isbegin_quest(.Q8_3_No) == 1 && checkquest(.Q8_3_No,HUNTING) != 2) {
+		set .QLv8_3$,"^A3A3A3";
+		set .QLv8_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q8_3_No2) == 1) {
+		set .QLv8_3$,"^A3A3A3";
+		set .QLv8_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv8_3$,"";
+		set .QLv8_3c$,"[130]";
+	}
+	if(isbegin_quest(.Q8_4_No) == 1 && checkquest(.Q8_4_No,HUNTING) != 2) {
+		set .QLv8_4$,"^A3A3A3";
+		set .QLv8_4c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q8_4_No2) == 1) {
+		set .QLv8_4$,"^A3A3A3";
+		set .QLv8_4c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv8_4$,"";
+		set .QLv8_4c$,"[130]";
+	}
+
+	// ========== 아홉번째 퀘스트 ==============
+	if(isbegin_quest(.Q9_1_No) == 1 && checkquest(.Q9_1_No,HUNTING) != 2) {
+		set .QLv9_1$,"^A3A3A3";
+		set .QLv9_1c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q9_1_No2) == 1) {
+		set .QLv9_1$,"^A3A3A3";
+		set .QLv9_1c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv9_1$,"";
+		set .QLv9_1c$,"[120]";
+	}
+	if(isbegin_quest(.Q9_2_No) == 1 && checkquest(.Q9_2_No,HUNTING) != 2) {
+		set .QLv9_2$,"^A3A3A3";
+		set .QLv9_2c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q9_2_No2) == 1) {
+		set .QLv9_2$,"^A3A3A3";
+		set .QLv9_2c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv9_2$,"";
+		set .QLv9_2c$,"[130]";
+	}
+	if(isbegin_quest(.Q9_3_No) == 1 && checkquest(.Q9_3_No,HUNTING) != 2) {
+		set .QLv9_3$,"^A3A3A3";
+		set .QLv9_3c$,"(수행중)^000000";
+	}
+	else if(isbegin_quest(.Q9_3_No2) == 1) {
+		set .QLv9_3$,"^A3A3A3";
+		set .QLv9_3c$,"(대기중)^000000";
+	}
+	else {
+		set .QLv9_3$,"";
+		set .QLv9_3c$,"[130]";
+	}
+
+	return;
+}

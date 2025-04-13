@@ -17,7 +17,8 @@
 //==================================================
 // lou_fild01 - Luoyang Field
 //==================================================
-lou_fild01,0,0	monster	Mi Gao	1516,60,5000
-lou_fild01,0,0	monster	Mantis	1139,28,5000
-lou_fild01,0,0	monster	Geographer	1368,28,5000
-lou_fild01,0,0	monster	Yellow Plant	1081,10,10000
+lou_fild01,0,0	monster	식양	1516,60,5000
+lou_fild01,0,0	monster	맨티스	1139,28,5000
+lou_fild01,0,0	monster	지오그래퍼	1368,28,5000
+lou_fild01,0,0	monster	노란 풀	1081,10,10000
+

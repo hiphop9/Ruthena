@@ -1,0 +1,93 @@
+Episode 20
+-------------------------------
+
+Main Story Quest:
+	- 62 steps
+	- Instances part of the main quest:
+		Canyon Exploration
+		Drift Ice Zone
+		Nest Of Twigs
+		Separate Sanctuary
+2 Side Quests:
+	Copo's Secret Base
+		- 20 steps
+		- unlock 4 daily quests including the daily instance Sticky Sea
+	A new home
+		- 7 steps
+		- unlock 1 daily quest
+16 Daily Quests (including daily instances)
+	3 on map jor_sanct
+		Example of silent answer
+			Rewards: Exp + items
+		Fakes Feigning Help
+			Rewards: Exp
+		Where the maze ends
+			Rewards: Exp
+	1 on jor_twice
+		Uprooting Ragan
+			Rewards: Exp + items + reputation
+	11 on icecastle town/in
+		Collect soft delicacies
+			Rewards: Exp + items
+		Spy search
+			Rewards: Exp + items + reputation
+		Intelligence information collection
+			Rewards: Exp + items + reputation
+		Voglinde's Extermination Operation 1
+			Rewards: Exp + items + reputation
+		Voglinde's Extermination Operation 2
+			Rewards: Exp + items + reputation
+		Taste of hobby
+			Rewards: Exp + items + reputation
+		Iwin's Iwin Worries
+			Rewards: Exp + items + reputation
+		Escargot!
+			Rewards: Exp + items + reputation
+		Dangerous!
+			Rewards: Exp + items + reputation
+		I hope they reconcile.(1)
+			Rewards: Exp + items + reputation
+		I wish we could reconcile (2)
+			Rewards: Exp + items + reputation
+	1 on jor_twig (daily instance)
+		Neutralize the Immortal
+			Rewards: Exp + items + reputation
+Daily instances
+	Sticky Sea
+	Immortal
+Monsters Fields / Dungeons spawn
+Monsters database and monsters skills (some parts are obviously customs)
+Item Exchange (Glacier equipments and upgrades)
+Enchantments (Glacier equipments)
+Reputation
+
+
+Notes:
+- By default the folder should be in npc/re/custom/episodes/ which allow to load all the files by adding the path npc/re/custom/episodes/ep20/scripts_main.conf in npc/re/scripts_main.conf
+  (+ the path pc/re/custom/episodes/ep20/barters.yml should be added to npc/barters.yml)
+- Like in the previous episode, the reputation has 3 levels.
+-- level 0 : npc not accessible
+-- level 1 : unlock the basic shop (glacier equipment), enchants etc..
+-- level 2 : unlock the costumes and glacier refine box shops
+-- level 3 : additional reward from daily quests (+1 Ep20_Cat_Whiskers)
+- 13 daily quests give Ep20_Cat_Whiskers (the 'money' of this episode) for a total of 13 * 3 = 39 items per day. When the reputation is level 3 : 13 * 4 = 52 items.
+- 11 daily quests give +5 reputation points per complexion. Immortal instance give +20 points.
+
+Patch EP20 contains:
+	* The script command specialeffect3 used in the instance 'Immortal'
+	* The parameter UMOB_MATK for the script command 'setunitdata', used in the instance 'Immortal'
+	  Some parts are from https://github.com/rathena/rathena/pull/3968
+	* The parameter UMOB_BODYSIZE for the script command 'setunitdata', used in the instance 'Immortal'
+	  Some parts are https://github.com/rathena/rathena/pull/7828
+
+
+
+
+
+
+
+
+
+
+
+

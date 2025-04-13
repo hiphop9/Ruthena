@@ -16,9 +16,10 @@
 //==================================================
 // mosk_fild02 - Okrestnosti of Moscovia
 //==================================================
-mosk_fild02,0,0	monster	Side Winder	1037,56,5000
-mosk_fild02,0,0	monster	Argiope	1099,42,5000
-mosk_fild02,0,0	monster	Mantis	1139,14,5000
-mosk_fild02,0,0	monster	Geographer	1368,7,5000
-mosk_fild02,0,0	monster	Yellow Plant	1081,5,10000
-mosk_fild02,0,0	monster	White Plant	1082,5,10000
+mosk_fild02,0,0	monster	사이드 와인더	1037,56,5000
+mosk_fild02,0,0	monster	아르지오프	1099,42,5000
+mosk_fild02,0,0	monster	맨티스	1139,14,5000
+mosk_fild02,0,0	monster	지오그래퍼	1368,7,5000
+mosk_fild02,0,0	monster	노란 풀	1081,5,10000
+mosk_fild02,0,0	monster	하얀 풀	1082,5,10000
+

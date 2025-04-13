@@ -1,0 +1,29 @@
+-	script	autospeed	-1,{
+OnInit:
+	setarray .map_list$[0],"prontera","payon"; // Map lists
+	.map_size = getarraysize(.map_list$);
+	for( .@i = 0; .@i < .map_size; .@i++ ) {
+		.@map$ = .map_list$[.@i];
+		setmapflag .@map$,mf_loadevent;
+	}
+	end;
+
+OnPCLoadMapEvent:
+	for( .@i = 0; .@i < .map_size; .@i++ ) {
+		if( strcharinfo(3) == .map_list$[.@i] ) {
+			atcommand "@speed 1";
+			@speed = 1;
+		}
+	}
+	end;
+
+OnPCStatCalcEvent:
+	if( !@speed )end;
+	for( .@i = 0; .@i < .map_size; .@i++ ) {
+		if( strcharinfo(3) == .map_list$[.@i] )
+			end; // don't remove speed
+	}
+	atcommand "@speed 150"; // Put normal speed here
+	@speed = 0;
+	end;
+}

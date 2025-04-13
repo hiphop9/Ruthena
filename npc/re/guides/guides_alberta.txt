@@ -14,71 +14,67 @@
 //= 1.1 Navigation system update. [Euphy]
 //============================================================ 
 
-alberta,23,238,4	script	Guide#01alberta::AlbertaGuide	105,{
+alberta,23,238,4	script	안내요원#01alberta::AlbertaGuide	105,{
 	cutin "prt_soldier",2;
-	mes "[Alberta Guide]";
-	mes "Welcome to ^8B4513Alberta^000000,";
-	mes "the Port City.";
-	mes "Do you need help navigating the city?";
-	F_Navi("[Alberta Guide]");
+	mes "[알베르타 안내요원]";
+	mes "항구도시 ^8B4513알베르타^000000에 오신 것을";
+	mes "환영합니다.";
+	mes "안내가 필요하신가요?";
 	next;
-	set .@str$,"Would you like to check any other locations?";
+	set .@str$,"다른 안내가 필요하신가요?";
 	while (1) {
-		switch(select("[ Main Facilities ]:[ Merchants & Helpers ]:[ Destination Ports ]:Remove Marks from Mini-Map:Cancel")) {
+		switch(select("[     주요 시설    ]:[  상인 & 도우미 ]:[ 출항 장소 안내 ]:미니맵 표시 지우기:대화를 종료한다.")) {
 		case 1:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Tool Shop ]:[ Forge ]:[ Weapon & Armor Shop ]:[ Inn ]:[ Beauty Salon ]:[ Merchant Guild ]:Previous Menu")) {
+				switch(select("[        도 구 점        ]:[        대 장 간        ]:[ 무기,  방어구 상점 ]:[          여 관          ]:[        미 용 실        ]:[       상인 협회       ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					mes "[Alberta Guide]";
-					mes "Let me mark the location of the";
-					mes "the "+F_Navi("Tool Shop","alberta,98,154","^0000FF");
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("도구점","alberta,98,154","^0000FF")+"의 위치를 미니 맵에";
+					mes "표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,98,154,0,0x0A82FF;
 					next;
 					break;
 				case 2:
-					mes "[Alberta Guide]";
-					mes "The "+F_Navi("Forge","alberta,35,41","^B9062F")+" is currently";
-					mes "located inside the Merchant Guild building.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("대장간","alberta,35,41","^B9062F")+"은 현재";
+					mes "상인 협회와 같은 건물을";
+					mes "사용 중입니다.";
 					mes .@str$;
 					viewpoint 1,35,41,1,0xFF0000;
 					next;
 					break;
 				case 3:
-					mes "[Alberta Guide]";
-					mes "Let me mark the location of the";
-					mes "the "+F_Navi("Weapon & Armor Shop","alberta,117,37","^FF5400");
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("무기및방어구상점","alberta,117,37","^FF5400")+"의";
+					mes "위치를 미니 맵에";
+					mes "표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,117,37,2,0xFFB400;
 					next;
 					break;
 				case 4:
-					mes "[Alberta Guide]";
-					mes "Let me mark the location of the";
-					mes "the "+F_Navi("Inn","alberta,65,233","^006400");
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("여관","alberta,65,233","^006400")+"의 위치를 미니 맵에";
+					mes "표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,65,233,3,0xAAFF00;
 					next;
 					break;
 				case 5:
-					mes "[Alberta Guide]";
-					mes "Let me mark the location of the";
-					mes "the "+F_Navi("Beauty Salon","alberta,48,145","^7F3300");
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("미용실","alberta,48,145","^7F3300")+"의 위치를 미니 맵에";
+					mes "표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,48,145,4,0xD2691E;
 					next;
 					break;
 				case 6:
-					mes "[Alberta Guide]";
-					mes "The "+F_Navi("Merchant Guild","alberta,33,41")+" is where";
-					mes "you can change your job to ^800080Merchant^000000.";
-					mes "Let me mark its location";
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("상인협회","alberta,33,41")+"을 위해";
+					mes "많은 분들이 찾는 곳입니다.";
+					mes "위치를 미니 맵에 표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,33,41,5,0xDA70D6;
 					next;
@@ -92,49 +88,53 @@ alberta,23,238,4	script	Guide#01alberta::AlbertaGuide	105,{
 		case 2:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Eden Teleport Officer ]:[ Kafra Employee ]:[ Cool Event Employee ]:[ Bullet Merchant ]:[ Cooking Ingredient Merchant ]:Previous Menu")) {
+				switch(select("[  낙원단 공간이동사  ]:[      카프라  직원      ]:[   존다 기획사 사원   ]:[        총알 상인        ]:[     요리 재료 상인    ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					mes "[Alberta Guide]";
-					mes "^B9062FEden Teleport Officers^000000 are located in "+F_Navi("south Alberta","alberta,121,68");
-					mes "and inside the "+F_Navi("Merchant Guild","alberta,33,41")+" building.";
-					mes "Let me mark their locations on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes "^B9062F낙원단 공각이동사^000000는 "+F_Navi("도시남쪽","alberta,121,68")+"과";
+					mes F_Navi("상인협회건물","alberta,33,41")+"안에서";
+					mes "찾으실 수 있습니다.";
+					mes "미니 맵에 표시해 드리겠습니다.";
 					mes .@str$;
 					viewpoint 1,33,41,6,0xFF0000;
 					viewpoint 1,121,68,7,0xFF0000;
 					next;
 					break;
 				case 2:
-					mes "[Alberta Guide]";
-					mes "Let me mark the location of the";
-					mes "^0000FFKafra Employees^000000";
-					mes "on your mini-map.";
+					mes "[알베르타 안내요원]";
+					mes "^006400카프라 직원^000000의";
+					mes "위치는 미니맵의 ^0000FF상자모양 아이콘^000000을";
+					mes "클릭하시면 안내 됩니다.";
 					mes .@str$;
 					viewpoint 1,33,41,8,0x0A82FF;
 					viewpoint 1,113,60,9,0x0A82FF;
 					next;
 					break;
 				case 3:
-					mes "[Alberta Guide]";
-					mes "When you win event items,";
-					mes "you can claim them through the "+F_Navi("Cool Event Employee","alberta,148,57","^FF5400")+".";
+					mes "[알베르타 안내요원]";
+					mes "이벤트 상품 등을 받으실 때";
+					mes F_Navi("존다기획사원","alberta,148,57","^FF5400")+"을";
+					mes "찾아가시면 됩니다.";
 					mes .@str$;
 					viewpoint 1,148,57,10,0xFFB400;
 					next;
 					break;
 				case 4:
-					mes "[Alberta Guide]";
-					mes "The ^7F3300Bullet Merchants^000000 for ^7F3300Gunslingers^000000";
-					mes "are located";
-					mes "near the "+F_Navi("center of the city","alberta,117,158")+".";
+					mes "[알베르타 안내요원]";
+					mes "^7F3300건슬링거^000000 직업 등을 위한";
+					mes F_Navi("총알 상인","alberta,117,158")+"은";
+					mes "도시 중앙 근처에 있습니다.";
 					mes .@str$;
 					viewpoint 1,117,158,11,0xD2691E;
 					next;
 					break;
 				case 5:
-					mes "[Alberta Guide]";
-					mes "The "+F_Navi("Chef Assistant","alberta,167,135","^006400")+" in Alberta";
-					mes "has many regular customers,";
-					mes "especially for his ^006400Delicious Fishes^000000.";
+					mes "[알베르타 안내요원]";
+					mes "알베르타의 "+F_Navi("요리재료상인","alberta,167,135","^006400")+"에게는";
+					mes "단골 손님들이 많습니다.";
+					mes "^006400맛 좋은 물고기^000000라는 것이";
+					mes "모험가 분들에게";
+					mes "인기가 많다고 합니다.";
 					mes .@str$;
 					viewpoint 1,167,135,12,0xAAFF00;
 					next;
@@ -148,27 +148,33 @@ alberta,23,238,4	script	Guide#01alberta::AlbertaGuide	105,{
 		case 3:
 			set .@loop,1;
 			while (.@loop) {
-				switch(select("[ Port - Northern Dock ]:[ Port - Central Dock ]:[ Port - Southern Dock ]:Previous Menu")) {
+				switch(select("[ 항구 - 북쪽 선착장  ]:[ 항구 - 중앙 선착장  ]:[ 항구 - 남쪽 선착장  ]:이전 메뉴로 돌아간다.")) {
 				case 1:
-					mes "[Alberta Guide]";
-					mes "You can use the "+F_Navi("Northern Dock","alberta,192,196");
-					mes "to go to ^0000FFPort Malaya^000000 or ^0000FFDewata^000000.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("북쪽선착장","alberta,192,196")+"을 통해";
+					mes "^0000FF포트 말라야, 데와타^000000 항구로";
+					mes "가실 수 있습니다.";
 					mes .@str$;
 					viewpoint 1,192,196,13,0xFF0000;
 					next;
 					break;
 				case 2:
-					mes "[Alberta Guide]";
-					mes "You can use the "+F_Navi("Central Dock","alberta,192,151");
-					mes "to go to the ^B9062FSunken Ship^000000 or ^B9062FIzlude Marina^000000.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("중앙선착장","alberta,192,151")+"을 통해";
+					mes "^0000FF난파선, 말랑도";
+					mes "이즈루드^000000 항구로";
+					mes "가실 수 있습니다.";
 					mes .@str$;
 					viewpoint 1,192,151,14,0xFF0000;
 					next;
 					break;
 				case 3:
-					mes "[Alberta Guide]";
-					mes "You can use the "+F_Navi("Southern Dock","alberta,245,86");
-					mes "to go to ^0000FFTurtle Island^000000, ^0000FFBrasilis^000000, ^0000FFAmatsu^000000, ^0000FFKunlun^000000, ^0000FFMoscovia^000000, ^0000FFLuoyang^000000, or ^0000FFAyothaya^000000.";
+					mes "[알베르타 안내요원]";
+					mes F_Navi("남쪽선착장","alberta,245,86")+"을 통해";
+					mes "^0000FF거북이섬, 브라질리스, 아마쯔";
+					mes "쿤룬, 모스코비아, 용지성";
+					mes "아오타야^000000 항구로";
+					mes "가실 수 있습니다.";
 					mes .@str$;
 					viewpoint 1,245,86,15,0xFF0000;
 					next;
@@ -180,9 +186,9 @@ alberta,23,238,4	script	Guide#01alberta::AlbertaGuide	105,{
 			}
 			break;
 		case 4:
-			mes "[Alberta Guide]";
-			mes "Sure, I'll remove all marks from your mini-map.";
-			mes "Is there anything else I can do for you?";
+			mes "[알베르타 안내요원]";
+			mes "표시를 지워 드리겠습니다.";
+			mes "다른 도움이 필요하신가요?";
 			viewpoint 2,1,1,0,0xFFFF00;
 			viewpoint 2,1,1,1,0x000000;
 			viewpoint 2,1,1,2,0xFF0000;
@@ -202,13 +208,13 @@ alberta,23,238,4	script	Guide#01alberta::AlbertaGuide	105,{
 			next;
 			break;
 		case 5:
-			mes "[Alberta Guide]";
-			mes "Enjoy your stay.";
+			mes "[알베르타 안내요원]";
+			mes "즐거운 여행 되시길 바랍니다.";
 			close2;
 			cutin "prt_soldier",255;
 			end;
 		}
 	}
 }
-alberta,120,60,3	duplicate(AlbertaGuide)	Guide#02alberta	105
-alberta,184,143,4	duplicate(AlbertaGuide)	Guide#03alberta	105
+alberta,120,60,3	duplicate(AlbertaGuide)	안내요원#02alberta	105
+alberta,184,143,4	duplicate(AlbertaGuide)	안내요원#03alberta	105

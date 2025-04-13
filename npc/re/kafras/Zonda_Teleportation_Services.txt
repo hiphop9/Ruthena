@@ -1,65 +1,118 @@
 //===== rAthena Script ======================================= 
-//= Zonda Teleportation Services
-//===== Changelogs: ==========================================
-//= 1.0 First Version. [JohnnyPlayy]
-//===== Description: ========================================= 
-// Texts from this script were translated according to KRO
+//= 존다 기획사 직원 Services
+//번역 및 수정 스카이러브
 //============================================================
 
 -	script	ZondaTeleportationServices	HIDDEN_NPC,{
 	cutin "zonda_do01", 2;
-	mes "[Zonda Employee]";
-	mes "Welcome.";
-	mes "Our team is always working to exceed your expectations regarding quality of service.";
-	mes "Please choose your destination.";
+	mes "[존다 직원]";
+	mes "어서오냐.";
+	mes "존다 이동 서비스는 언제나 환영하냐.";
+	mes "소환할 공각이동기를 말하냐.";
 	next;
-	switch( select( "North Bifrost", "Eclage", "Splendide", "Midgard Expedition Camp", "Manuk", "Outskirts of Kamidal Mountain", "Cancel.") ) {
+	switch( select( "슈발츠발드", "아루나펠츠", "애쉬-바쿰", "기타지역", "설명을 듣는다", "그만둔다") ) {
 	case 1:
-		callsub( S_Zone, "North Bifrost", 17000,850, 7213 ); // Teleport value not confirmed
-		warp "bif_fild02",160,230; // Unverified Coordinates
-		end;
+		mes "[존다 직원]";
+		mes "슈발츠발트...";
+		mes "접수했다냐.";
+		duplicate_dynamic("#ZONDA");
+		close3;
 	case 2:
-		callsub( S_Zone, "Eclage", 17000,850, 11311 );
-		warp "eclage",111,39;
-		end;
+		mes "[존다 직원]";
+		mes "아루나펠츠...";
+		mes "접수했다냐.";
+		duplicate_dynamic("#ZONDA1");
+		close3;
 	case 3:
-		callsub( S_Zone, "Splendide", 17000,850, 10078 );
-		warp "splendide",171,115;
-		end;
+		mes "[존다 직원]";
+		mes "애쉬-바쿰...";
+		mes "접수했다냐.";
+		duplicate_dynamic("#ZONDA2");
+		close3;
 	case 4:
-		callsub( S_Zone, "Midgard Expedition Camp", 19000,950, 10078 );
-		warp "mid_camp",210,288;
-		end;
+		mes "[존다 직원]";
+		mes "기타 지역...";
+		mes "접수했다냐.";
+		duplicate_dynamic("#ZONDA3");
+		close3;
 	case 5:
-		callsub( S_Zone, "Manuk", 22000,1100, 10078 );
-		warp "manuk",263,177;
-		end;
+		mes "[존다 직원]";
+		mes "목적지를 말하면 해당 지역으로 이동할";
+		mes "수 있는 유료 공간이동기를 소환해 줄";
+		mes "거냐냐.";
+		mes "애쉬-바쿰은 300000zeny 혹은 말랑도";
+		mes "특산 통조림 1500개, 다른 지역은";
+		mes "20000zeny 혹은 말랑도 특산 통조림";
+		mes "1000개냐냐.";
+		close3;
 	case 6:
-		callsub( S_Zone, "Outskirts of Kamidal Mountain", 24000,1200, 7184 );
-		warp "dic_fild01",188,187;
-		end;
-	case 7:
-		mes "[Zonda Employee]";
-		mes "We are always striving to ensure the best services for our customers.";
-		mes "Thank you for using our services.";
+		mes "[존다 직원]";
+		mes "저희는 존다 서비스는 보다 완벽한";
+		mes "서비스와 엄격한 관리 업무로 고객";
+		mes "여러분이 안심하고 맛있게 이용하실 수";
+		mes "있도록 최선을 다하고 있냐.";
+		mes "이용해 쥬셔서 감사냐.";
 		close3;
 	}
+	end;
+}
+
+prontera,2,2,3,	script	공간이동기::#ZONDA	10007 ,{
+	mes "[공간이동기]";
+	mes "슈발츠발드행 공간이동기";
+	mes "존냥냥-100입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "휘겔 오딘신전 서쪽", "휘겔 어비스 호수 지하 동굴 1층", "유페로스 페허 외부", "기계인형 공장 1층", "타나토스타워 하층부 박물관 입구", "유노 노그로드 1층", "아인벤흐 광산 1층", "생체실험 연구소 지하 1층", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "휘겔 오딘신전 서쪽", 2000,1000, 0 ); // 텔레포트 값이 확인되지 않았습니다.
+			warp "odin_tem01",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "휘겔 어비스 호수 지하 동굴 1층", 2000,1000, 0 );
+			warp "abyss_01",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "유페로스 페허 외부", 2000,1000, 0 ); 
+			warp "juperos_01",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "기계인형 공장 1층", 2000,1000, 0 );
+			warp "kh_dun01",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "타나토스타워 하층부 박물관 입구", 2000,1000, 0 );
+			warp "tha_t01",0,0;
+			end;
+		case 6:
+			callsub( S_Zone, "유노 노그로드 1층", 2000,1000, 0 ); 
+			warp "mag_dun01",0,0;
+			end;
+		case 7:
+			callsub( S_Zone, "아인벤흐 광산 1층", 2000,1000, 0 );
+			warp "ein_dun01",0,0;
+			end;
+		case 8:
+			callsub( S_Zone, "생체실험 연구소 지하 1층", 2000,1000, 0 );
+			warp "lhz_dun01",0,0;
+			end;
+		case 9:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
 
 S_Zone:
 	.@zeny_req = getarg(1);
 	.@item_req = getarg(2);
-	.@quest_req = getarg(3);
-	
-	if (isbegin_quest(.@quest_req) == 0) {
-		mes "[Zonda Employee]";
-		//mes getarg(0);
-		mes "You must complete the access mission to teleport to " + getarg(0) + " before using our Teleportation services.";
-		close3;
-	}
-	mes "[Zonda Employee]";
-	mes getarg(0) + " is available for ^ff0000" + .@zeny_req + " Zenys^000000 or ^ff0000" + .@item_req + " Malang Sp Can^000000.";
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF" + getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "제니^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
 	next;
-	switch( select( .@zeny_req + " Zeny", .@item_req + " Malang Sp Can", "Cancel" ) ) {
+	switch( select(.@zeny_req +"Zeny.","말랑도 특산통조림"+.@item_req + "개","그만 둔다." ) ) {
 	case 1:
 		if (Zeny < .@zeny_req)
 			break;
@@ -71,24 +124,260 @@ S_Zone:
 		delitem 12636,.@item_req; // Malang_Sp_Can
 		return;
 	case 3:
-		mes "[Zonda Employee]";
-		mes "Can you tell me about other areas of service?";
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
 		close3;
 	}
-	mes "[Zonda Employee]";
-	mes "Sir! You do not have enough value that we are asking for.";
-	mes "Please check back again.";
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
 	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "슈발츠발드행");
+		end;
 }
 
-alberta,35,239,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#alberta	4_M_DRZONDA01
-aldebaran,138,122,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#aldebaran	4_M_DRZONDA01
-einbroch,248,205,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#einbroch	4_M_DRZONDA01
-geffen,117,66,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#geffen	4_M_DRZONDA01
-lighthalzen,169,103,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#lighthalzen	4_M_DRZONDA01
-morocc,157,257,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#morocc	4_M_DRZONDA01
-payon,178,104,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#payon	4_M_DRZONDA01
-prontera,145,87,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#prontera	4_M_DRZONDA01
-rachel,118,139,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#rachel	4_M_DRZONDA01
-veins,198,133,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#veins	4_M_DRZONDA01
-yuno,145,184,3	duplicate(ZondaTeleportationServices)	Zonda Teleportation#yuno	4_M_DRZONDA01
+prontera,3,1,3,	script	공간이동기::#ZONDA1	10007 ,{
+	mes "[공간이동기]";
+	mes "아루나펠츠행 공간이동기";
+	mes "존냥냥-86000입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "라헬 얼음 동굴 1층", "라헬 신전 성역 1층 북쪽 구역", "토르 화산 던전 1층", "이름 없는 섬 수도원 1층", "오즈의 미로 1층", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "라헬 얼음 동굴 1층", 2000,1000,0); // 텔레포트 값이 확인되지 않았습니다.
+			warp "ice_dun01",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "라헬 신전 성역 1층 북쪽 구역", 2000,1000,0);
+			warp "ra_san01",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "토르 화산 던전 1층", 2000,1000,0); 
+			warp "thor_v01",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "이름 없는 섬 수도원 1층", 2000,1000,0);
+			warp "abbey01",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "오즈의 미로 1층", 2000,1000,0);
+			warp "oz_dun01",0,0;
+			end;
+		case 6:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "제니^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
+	next;
+	switch( select( .@zeny_req + "Zeny.","말랑도 특산통조림"+.@item_req + "개","그만 둔다." ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
+		close3;
+	}
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "아루나펠츠행");
+		end;
+}
+prontera,3,2,3,	script	공간이동기::#ZONDA2	10007 ,{
+	mes "[공간이동기]";
+	mes "애쉬-바쿰행 공간이동기";
+	mes "존냥냥-FX입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "카미달 터널", "비프로스트 탑 1층", "비프로스트 북부", "에클라쥬", "스플랑디드", "미드가르드 연합 주둔지", "마누크", "카미달 산기슭", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "카미달 터널", 3000,1500,0); // 텔레포트 값이 확인되지 않았습니다.
+			warp "dic_dun01",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "비프로스트 탑 1층", 3000,1500,0);
+			warp "ecl_tdun01",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "비프로스트 북부", 3000,1500, 7213 ); 
+			warp "bif_fild02",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "에클라쥬", 3000,1500, 7213 );
+			warp "eclage",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "스플랑디드", 3000,1500, 7213 );
+			warp "splendide",0,0;
+			end;
+		case 6:
+			callsub( S_Zone, "미드가르드 연합 주둔지", 3000,1500, 7213 ); 
+			warp "mid_camp",0,0;
+			end;
+		case 7:
+			callsub( S_Zone, "마누크", 3000,1500, 7213 );
+			warp "manuk",0,0;
+			end;
+		case 8:
+			callsub( S_Zone, "카미달 산기슭", 3000,1500, 7213 );
+			warp "dic_fild01",0,0;
+			end;
+		case 9:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "제니^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
+	next;
+	switch( select( .@zeny_req + "Zeny.","말랑도 특산통조림"+.@item_req + "개","그만 둔다." ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
+		close3;
+	}
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "애쉬-바쿰행");
+		end;
+}
+prontera,1,4,3,	script	공간이동기::#ZONDA3	10007 ,{
+	mes "[공간이동기]";
+	mes "산머너... 바다건너... 어디든지 가는";
+	mes "공간이동기 존냥냥-Ⅱ입니다.";
+	mes "목적지를 말씀해 주십시오.";
+	next;
+	switch( select( "아마쯔 다다미 미궁", "용지성 왕릉 내부", "쿤룬 서왕모신전", "아요타야 고대신전 미궁", "모스코비아 숲", "브라질리스 폭포 안의 동굴 입구", "포트말라야 벙웅곳 병원 1층", "데와타 이스타나 동굴", "그만둔다") ) {
+		case 1:
+			callsub( S_Zone, "아마쯔 다다미 미궁", 2000,1000,0); // 텔레포트 값이 확인되지 않았습니다.
+			warp "ama_dun01",0,0;
+			end;
+		case 2:
+			callsub( S_Zone, "용지성 왕릉 내부", 2000,1000,0);
+			warp "lou_dun02",0,0;
+			end;
+		case 3:
+			callsub( S_Zone, "쿤룬 서왕모신전", 2000,1000,0); 
+			warp "gon_dun01",0,0; 
+			end;
+		case 4:
+			callsub( S_Zone, "아요타야 고대신전 미궁", 2000,1000,0);
+			warp "ayo_dun01",0,0; 
+			end;
+		case 5:
+			callsub( S_Zone, "모스코비아 숲", 2000,1000,0);
+			warp "mosk_dun01",0,0;
+			end;
+		case 6:
+			callsub( S_Zone, "브라질리스 폭포 안의 동굴 입구", 2000,1000,0); 
+			warp "bra_dun01",0,0;
+			end;
+		case 7:
+			callsub( S_Zone, "포트말라야 벙웅곳 병원 1층", 2000,1000,0);
+			warp "ma_dun01",0,0;
+			end;
+		case 8:
+			callsub( S_Zone, "데와타 이스타나 동굴", 2000,1000,0);
+			warp "dew_dun02",0,0;
+			end;
+		case 9:
+			mes "[공간이동기]";
+			mes "다음에 또 이용해 주십시오.";
+			close3;
+		}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+	mes "[공간이동기]";
+	mes "지정하신 목적지는";
+	mes "^0000FF"+ getarg(0) + "^000000입니다";
+	mes "^ff0000" + .@zeny_req + "제니^000000 또는";
+	mes "^ff0000말랑도 특산 통조림" + .@item_req + "개^000000로";
+	mes "이용하실 수 있습니다.";
+	next;
+	switch( select( .@zeny_req + "Zeny.","말랑도 특산통조림"+.@item_req + "개","그만 둔다." ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[공간이동사]";
+		mes "다음에 또 이용해 주십시오.";
+		close3;
+	}
+	mes "[공간이동사]";
+	mes "지불하실 금액이 부족합니다.";
+	mes "다시 확인해 주십시오.";
+	close3;
+OnInit:
+        setunitdata (getnpcid(0), UNPC_GROUP_ID,0);
+		setunittitle(getnpcid(0), "룬-미드가츠 기타");
+		end;
+}
+
+alberta,35,239,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel1	4_M_DRZONDA01
+aldebaran,138,122,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel2	4_M_DRZONDA01
+einbroch,248,205,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel3	4_M_DRZONDA01
+geffen,117,66,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel4	4_M_DRZONDA01
+lighthalzen,169,103,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel5	4_M_DRZONDA01
+morocc,157,257,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel6	4_M_DRZONDA01
+payon,178,104,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel7	4_M_DRZONDA01
+prontera,145,87,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel8	4_M_DRZONDA01
+rachel,118,139,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel9	4_M_DRZONDA01
+veins,198,133,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel10	4_M_DRZONDA01
+yuno,145,184,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel11	4_M_DRZONDA01
+moc_para01,35,21,3	duplicate(ZondaTeleportationServices)	존다 기획사 직원#ZondaTel12	4_M_DRZONDA01

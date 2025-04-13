@@ -11,6 +11,7 @@
 #include <common/nullpo.hpp>
 #include <common/showmsg.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp" // msg_txt()
@@ -401,12 +402,18 @@ int chat_createnpcchat(struct npc_data* nd, const char* title, int limit, bool p
 	nullpo_ret(nd);
 
 	if( nd->chat_id ) {
-		ShowError("chat_createnpcchat: npc '%s' already has a chatroom, cannot create new one!\n", nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chat_createnpcchat: NPC '%s'는 이미 채팅방이 있습니다. 새로운 채팅방을 만들 수 없습니다.\n", nd->exname);
+		else
+			ShowError("chat_createnpcchat: npc '%s' already has a chatroom, cannot create new one!\n", nd->exname);
 		return 0;
 	}
 
 	if( zeny > MAX_ZENY || maxLvl > MAX_LEVEL ) {
-		ShowError("chat_createnpcchat: npc '%s' has a required lvl or amount of zeny over the max limit!\n", nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("chat_createnpcchat: NPC '%s'는 최대치를 초과하는 레벨 또는 제니가 필수입니다.\n", nd->exname);
+		else
+			ShowError("chat_createnpcchat: npc '%s' has a required lvl or amount of zeny over the max limit!\n", nd->exname);
 		return 0;
 	}
 

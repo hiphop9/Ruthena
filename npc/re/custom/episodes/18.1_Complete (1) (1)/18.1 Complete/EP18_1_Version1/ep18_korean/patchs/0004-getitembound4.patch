@@ -1,0 +1,150 @@
+From e1bf3c98598379c015326d2e89a763f4490aa8bc Mon Sep 17 00:00:00 2001
+From: Atemo <capucrath@gmail.com>
+Date: Mon, 15 Nov 2021 20:08:02 +0100
+Subject: [PATCH 4/6] getitembound4
+
+---
+ src/custom/script.inc     | 119 ++++++++++++++++++++++++++++++++++++++
+ src/custom/script_def.inc |   2 +
+ 2 files changed, 121 insertions(+)
+
+diff --git a/src/custom/script.inc b/src/custom/script.inc
+index 839b990cb..75a287e4f 100644
+--- a/src/custom/script.inc
++++ b/src/custom/script.inc
+@@ -17,3 +17,122 @@
+ //	script_pushint(st,1);
+ //	return 0;
+ //}
++
++/*==========================================
++ * getitembound4 <item id>,<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,<enchantgrade>,<bound type>,<RandomIDArray>,<RandomValueArray>,<RandomParamArray>{,<account ID>};
++ * getitembound4 "<item name>",<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,<bound type>,<enchantgrade>,<RandomIDArray>,<RandomValueArray>,<RandomParamArray>{,<account ID>};
++ * Type:
++ *	0 - No bound
++ *	1 - Account Bound
++ *	2 - Guild Bound
++ *	3 - Party Bound
++ *	4 - Character Bound
++ *------------------------------------------*/
++BUILDIN_FUNC(getitembound4)
++{
++	TBL_PC *sd;
++
++	if (!script_mapid2sd(16, sd))
++		return SCRIPT_CMD_SUCCESS;
++
++	t_itemid nameid;
++	std::shared_ptr<item_data> item_data = nullptr;
++
++	if (script_isstring(st, 2)) {
++		const char *name = script_getstr(st, 2);
++
++		item_data = item_db.searchname( name );
++
++		if (item_data == nullptr ){
++			ShowError("script_getitembound4: Nonexistant item %s requested (by conv_str).\n", name);
++			return SCRIPT_CMD_FAILURE;
++		}
++		nameid = item_data->nameid;
++	} else {
++		nameid = script_getnum(st, 2);
++
++		item_data = item_db.find( nameid );
++
++		if (item_data == nullptr ){
++			ShowError("script_getitembound4: Nonexistant item %u requested (by conv_num).\n", nameid);
++			return SCRIPT_CMD_FAILURE;
++		}
++	}
++
++	unsigned short amount;
++	int iden, ref, attr;
++	t_itemid c1, c2, c3, c4;
++
++	amount = script_getnum(st,3);
++	iden = script_getnum(st,4);
++	ref = script_getnum(st,5);
++	attr = script_getnum(st,6);
++	c1 = script_getnum(st,7);
++	c2 = script_getnum(st,8);
++	c3 = script_getnum(st,9);
++	c4 = script_getnum(st,10);
++	char bound = script_getnum(st,11);
++	uint8 enchantgrade = script_getnum(st,12);
++
++	if (bound < BOUND_NONE || bound >= BOUND_MAX) {
++		ShowError("script_getitembound4: Not a correct bound type! Type=%d\n", bound);
++		return SCRIPT_CMD_FAILURE;
++	}
++
++	struct item item_tmp;
++
++	if (item_data) {
++		int get_count = 0, i;
++		memset(&item_tmp,0,sizeof(item_tmp));
++		if (item_data->type == IT_WEAPON || item_data->type == IT_ARMOR || item_data->type == IT_SHADOWGEAR) {
++			if(ref > MAX_REFINE)
++				ref = MAX_REFINE;
++		}
++		else if (item_data->type == IT_PETEGG) {
++			iden = 1;
++			ref = 0;
++		}
++		else {
++			iden = 1;
++			ref = attr = 0;
++		}
++
++		item_tmp.nameid = nameid;
++		item_tmp.identify = iden;
++		item_tmp.refine = ref;
++		item_tmp.attribute = attr;
++		item_tmp.card[0] = c1;
++		item_tmp.card[1] = c2;
++		item_tmp.card[2] = c3;
++		item_tmp.card[3] = c4;
++		item_tmp.bound = bound;
++		item_tmp.enchantgrade = enchantgrade;
++
++		int res = script_getitem_randomoption(st, sd, &item_tmp, "getitembound4", 13);
++		if (res == SCRIPT_CMD_FAILURE)
++			return SCRIPT_CMD_FAILURE;
++
++		//Check if it's stackable.
++		if (!itemdb_isstackable2( item_data.get() ) ){
++			get_count = 1;
++		}else{
++			get_count = amount;
++		}
++
++		for (i = 0; i < amount; i += get_count)
++		{
++			// if not pet egg
++			if (!pet_create_egg(sd, nameid))
++			{
++				unsigned char flag = 0;
++				if ((flag = pc_additem(sd, &item_tmp, get_count, LOG_TYPE_SCRIPT)))
++				{
++					clif_additem(sd, 0, 0, flag);
++					if (pc_candrop(sd,&item_tmp) )
++						map_addflooritem(&item_tmp,get_count,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
++				}
++			}
++		}
++	}
++	return SCRIPT_CMD_SUCCESS;
++}
+diff --git a/src/custom/script_def.inc b/src/custom/script_def.inc
+index 886399273..3635cce4c 100644
+--- a/src/custom/script_def.inc
++++ b/src/custom/script_def.inc
+@@ -9,3 +9,5 @@
+  **/
+ 
+ //BUILDIN_DEF(example,""),
++
++BUILDIN_DEF(getitembound4,"viiiiiiiiiirrr?"),
+-- 
+2.25.0.windows.1
+

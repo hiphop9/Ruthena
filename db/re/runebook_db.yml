@@ -1,0 +1,577 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2023 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Rune Book
+###########################################################################
+#
+# Rune Book Settings
+#
+###########################################################################
+# - Id                         Client side LUB index. (RUNEIDTBL in runesystemid.lub)
+#   Name:                      Name of rune book.
+#   Materials:                 Materials needed to activate a rune book
+#     - Material               Name of the item
+#       Amount                 Quantity
+###########################################################################
+
+Header:
+  Type: RUNEBOOK_DB
+  Version: 1
+
+Body:
+  - Id: 1263000
+    Name: Rp_Ep17_Melee
+    Materials:
+      - Material: R_Boost_Lance_OS
+        Amount: 1
+      - Material: R_Blasti_OS
+        Amount: 1
+      - Material: R_Beam_Claymore_OS
+        Amount: 1
+      - Material: R_Cannon_Rapier_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263001
+    Name: Rp_Ep17_Range
+    Materials:
+      - Material: R_AC_B44_OS
+        Amount: 1
+      - Material: R_Virtual_Bow_OS
+        Amount: 1
+      - Material: R_HR_S55_OS
+        Amount: 1
+      - Material: R_MH_P89_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263002
+    Name: Rp_Ep17_Magic
+    Materials:
+      - Material: R_Saphir_Hall_OS
+        Amount: 1
+      - Material: R_ElectricFox_OS
+        Amount: 1
+      - Material: R_Rutilus_Stick_OS
+        Amount: 1
+      - Material: R_Circuit_Board_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263003
+    Name: Rp_Ep17_Razor
+    Materials:
+      - Material: R_Kuroiro_OS
+        Amount: 1
+      - Material: R_Meuchler_OS
+        Amount: 1
+      - Material: R_Burning_Knuckle_OS
+        Amount: 1
+      - Material: R_Ultio_Spes_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263004
+    Name: Rp_Ep17_Autoa
+    Materials:
+      - Material: R_Auto_BC_R
+        Amount: 1
+      - Material: R_Auto_B_R
+        Amount: 1
+      - Material: R_Auto_Armor_A
+        Amount: 1
+      - Material: R_Auto_Engine_A
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 250
+  - Id: 1263005
+    Name: Rp_Ep17_Autob
+    Materials:
+      - Material: R_Auto_BC_L
+        Amount: 1
+      - Material: R_Auto_B_L
+        Amount: 1
+      - Material: R_Auto_Armor_B
+        Amount: 1
+      - Material: R_Auto_Engine_B
+        Amount: 1
+      - Material: R_Auto_Leg_B
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 250
+  - Id: 1263006
+    Name: Rp_Ep17_Bellare
+    Materials:
+      - Material: Bellare_Card
+        Amount: 5
+      - Material: High_Bellare_Card
+        Amount: 5
+      - Material: Heart_Hunter_Seal
+        Amount: 30
+      - Material: Explosive_Powder
+        Amount: 150
+      - Material: EP17_1_EVT39
+        Amount: 25
+      - Material: EP17_1_EVT02
+        Amount: 50
+  - Id: 1263007
+    Name: Rp_Ep17_Sanare
+    Materials:
+      - Material: Sanare_Card
+        Amount: 5
+      - Material: High_Sanare_Card
+        Amount: 5
+      - Material: Heart_Hunter_Seal
+        Amount: 50
+      - Material: Explosive_Powder
+        Amount: 100
+      - Material: EP17_1_EVT39
+        Amount: 30
+      - Material: EP17_1_EVT02
+        Amount: 60
+  - Id: 1263008
+    Name: Rp_Ep17_Plaga
+    Materials:
+      - Material: Plaga_Card
+        Amount: 5
+      - Material: Mutant_Plaga_Card
+        Amount: 5
+      - Material: Solid_Shell
+        Amount: 250
+      - Material: Dragon's_Skin
+        Amount: 200
+      - Material: Fluorescent_Liquid
+        Amount: 300
+      - Material: EP17_1_EVT39
+        Amount: 30
+      - Material: EP17_1_EVT02
+        Amount: 60
+  - Id: 1263009
+    Name: Rp_Ep17_Bestia
+    Materials:
+      - Material: R48_85_Bestia_Card
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 100
+      - Material: EP17_1_EVT39
+        Amount: 50
+      - Material: Piece_Of_Bone_Armor
+        Amount: 350
+  - Id: 1263010
+    Name: Rp_Ep17_Venenum
+    Materials:
+      - Material: Venenum_Card
+        Amount: 5
+      - Material: Mt_Venenum_Card
+        Amount: 5
+      - Material: Sticky_Mucus
+        Amount: 250
+      - Material: Sticky_Poison
+        Amount: 175
+      - Material: Fluorescent_Liquid
+        Amount: 125
+      - Material: EP17_1_EVT39
+        Amount: 25
+      - Material: EP17_1_EVT02
+        Amount: 50
+  - Id: 1263011
+    Name: Rp_Ep17_Dolor
+    Materials:
+      - Material: Dolor_Card
+        Amount: 5
+      - Material: Mt_Dolor_Card
+        Amount: 5
+      - Material: Caput_Card
+        Amount: 5
+      - Material: Tough_Scalelike_Stem
+        Amount: 225
+      - Material: Sticky_Poison
+        Amount: 175
+      - Material: Bloody_Rune
+        Amount: 150
+      - Material: EP17_1_EVT39
+        Amount: 25
+      - Material: EP17_1_EVT02
+        Amount: 50
+  - Id: 1263012
+    Name: Rp_Ep17_Iron
+    Materials:
+      - Material: E_EA1L_Card
+        Amount: 5
+      - Material: E_EA2S_Card
+        Amount: 5
+      - Material: EL_A17T_Card
+        Amount: 1
+      - Material: Screw
+        Amount: 300
+      - Material: Distorted_Iron_Plate
+        Amount: 250
+      - Material: Burnt_Parts
+        Amount: 125
+      - Material: EP17_1_EVT39
+        Amount: 50
+      - Material: EP17_1_EVT02
+        Amount: 100
+  - Id: 1263013
+    Name: Rp_Ep17_Redpepper
+    Materials:
+      - Material: Redpepper_Card
+        Amount: 1
+      - Material: Assistant_Card
+        Amount: 5
+      - Material: Assistant_H_Card
+        Amount: 3
+      - Material: R_Ep172_1h_Book2
+        Amount: 1
+      - Material: R_Ep172_1h_Book
+        Amount: 1
+      - Material: Sturdy_Iron_Piece
+        Amount: 350
+      - Material: BarMealTicket
+        Amount: 1250
+  - Id: 1263014
+    Name: Rp_Ep17_Addict
+    Materials:
+      - Material: Plaga3_Card
+        Amount: 5
+      - Material: Sanare3_Card
+        Amount: 5
+      - Material: R_Ep172_1h_Shotgun
+        Amount: 1
+      - Material: R_Ep172_1h_Hammer
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 850
+  - Id: 1263015
+    Name: Rp_Ep17_Caution
+    Materials:
+      - Material: Plasma_R_Card
+        Amount: 5
+      - Material: Plasma_R2_Card
+        Amount: 5
+      - Material: R_Ep172_1h_Inst
+        Amount: 1
+      - Material: R_Ep172_1h_Whip
+        Amount: 1
+      - Material: Yellow_Gemstone
+        Amount: 175
+      - Material: Red_Gemstone
+        Amount: 175
+      - Material: BarMealTicket
+        Amount: 850
+  - Id: 1263016
+    Name: Rp_Ep17_Withdraw
+    Materials:
+      - Material: Dolor3_Card
+        Amount: 5
+      - Material: Plasma_Y_Card
+        Amount: 5
+      - Material: R_Ep172_1h_Foxtail
+        Amount: 1
+      - Material: R_Ep172_Bh_Staff
+        Amount: 1
+      - Material: Yellow_Gemstone
+        Amount: 175
+      - Material: BarMealTicket
+        Amount: 850
+  - Id: 1263017
+    Name: Rp_Ep17_Bath
+    Materials:
+      - Material: Beta_Baths_A_Card
+        Amount: 5
+      - Material: Beta_Cleaner_Card
+        Amount: 5
+      - Material: Bath_Mermaid_Card
+        Amount: 3
+      - Material: R_Ep172_1h_Axe
+        Amount: 1
+      - Material: R_Ep172_Bh_Huuma
+        Amount: 1
+      - Material: R_Ep172_1h_Sword2
+        Amount: 1
+      - Material: Delicious_Fish
+        Amount: 250
+      - Material: BarMealTicket
+        Amount: 950
+  - Id: 1263018
+    Name: Rp_Ep17_Papila
+    Materials:
+      - Material: Papila_Ruba_H_Card
+        Amount: 3
+      - Material: Papila_Cae_H_Card
+        Amount: 3
+      - Material: Papila_H_Card
+        Amount: 3
+      - Material: R_Ep172_Bh_Huuma
+        Amount: 1
+      - Material: R_Ep172_Bh_Spear
+        Amount: 1
+      - Material: R_Ep172_1h_Spear
+        Amount: 1
+      - Material: Withered_Flower
+        Amount: 550
+      - Material: BarMealTicket
+        Amount: 950
+  - Id: 1263019
+    Name: Rp_Ep17_Book
+    Materials:
+      - Material: Bookworm_Card
+        Amount: 5
+      - Material: Roaming_Splbook_Card
+        Amount: 5
+      - Material: R_Ep172_1h_Book
+        Amount: 1
+      - Material: R_Ep172_1h_Book2
+        Amount: 1
+      - Material: Long_Limb
+        Amount: 150
+      - Material: Old_Magic_Book
+        Amount: 75
+      - Material: BarMealTicket
+        Amount: 900
+  - Id: 1263020
+    Name: Rp_Ep17_Garden
+    Materials:
+      - Material: B_Scissore_Ng_H_Card
+        Amount: 3
+      - Material: Beta_Scissore_Ng_Card
+        Amount: 5
+      - Material: R_Ep172_Bh_Katar
+        Amount: 1
+      - Material: R_Ep172_Bh_knuck
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 850
+  - Id: 1263021
+    Name: Rp_Ep17_Sewage
+    Materials:
+      - Material: Bellare3_Card
+        Amount: 3
+      - Material: Venenum3_Card
+        Amount: 5
+      - Material: EP17_2_Cramp_Card
+        Amount: 5
+      - Material: Waterfall_Card
+        Amount: 5
+      - Material: R_Ep172_1h_Rifle
+        Amount: 1
+      - Material: R_Ep172_1h_Wand
+        Amount: 1
+      - Material: R_Ep172_1h_Dagger
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 1050
+  - Id: 1263022
+    Name: Rp_Ep17_Allergy
+    Materials:
+      - Material: Alnoldi_Ex_Card
+        Amount: 3
+      - Material: Alnoldi_Ex_H_Card
+        Amount: 1
+      - Material: Dry_Rafflesia_Card
+        Amount: 3
+      - Material: Dry_Rafflesia_H_Card
+        Amount: 1
+      - Material: Elder_Branch
+        Amount: 200
+      - Material: R_Ep172_1h_Foxtail
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 950
+  - Id: 1263023
+    Name: Rp_Ep17_Fish
+    Materials:
+      - Material: EP17_2_Phen_Card
+        Amount: 3
+      - Material: EP17_2_Sword_Fish_Card
+        Amount: 3
+      - Material: EP17_2_Piranha_Card
+        Amount: 3
+      - Material: EP17_2_Marc_Card
+        Amount: 3
+      - Material: R_Ep172_Bh_Bow2
+        Amount: 1
+      - Material: R_Ep172_1h_Grenade
+        Amount: 1
+      - Material: R_Ep172_Bh_Bow
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 1050
+  - Id: 1263024
+    Name: Rp_Ep17_Pitaya
+    Materials:
+      - Material: Pitaya_R_Card
+        Amount: 3
+      - Material: Pitaya_Y_Card
+        Amount: 3
+      - Material: Pitaya_B_Card
+        Amount: 3
+      - Material: Pitaya_V_Card
+        Amount: 3
+      - Material: Pitaya_G_Card
+        Amount: 3
+      - Material: R_Ep172_1h_Dagger2
+        Amount: 1
+      - Material: R_Ep172_1h_Gatling
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 1050
+  - Id: 1263025
+    Name: Rp_Ep17_Tree
+    Materials:
+      - Material: Silva_Papilia_Card
+        Amount: 1
+      - Material: Gran_Papilia_Card
+        Amount: 1
+      - Material: Verporte_H_Card
+        Amount: 3
+      - Material: Verporta_Card
+        Amount: 3
+      - Material: Solid_Twig
+        Amount: 125
+      - Material: Illusion_Flower
+        Amount: 100
+      - Material: BarMealTicket
+        Amount: 950
+  - Id: 1263026
+    Name: Rp_Ep17_Aries
+    Materials:
+      - Material: Aries_Card
+        Amount: 3
+      - Material: Aries_H_Card
+        Amount: 3
+      - Material: R_Ep172_Bh_Bow3
+        Amount: 1
+      - Material: Fancy_Fairy_Wing
+        Amount: 100
+      - Material: Illusion_Flower
+        Amount: 95
+      - Material: BarMealTicket
+        Amount: 850
+  - Id: 1263027
+    Name: Rp_Ep17_Machine
+    Materials:
+      - Material: Beta_Guards_Ng_Card
+        Amount: 3
+      - Material: O_Cleaner_Ng_Card
+        Amount: 3
+      - Material: Burnt_Parts
+        Amount: 450
+      - Material: Mystery_Piece
+        Amount: 350
+      - Material: BarMealTicket
+        Amount: 950
+  - Id: 1263028
+    Name: Rp_Ep17_Sweety
+    Materials:
+      - Material: Sweety_Card
+        Amount: 1
+      - Material: R_Ep172_1h_Sword
+        Amount: 1
+      - Material: R_Ep172_Bh_Sword
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 2000
+  - Id: 1263029
+    Name: Rp_Ep17_Cat
+    Materials:
+      - Material: Pitaya_Boss_Card
+        Amount: 1
+      - Material: R_Ep172_1h_Rifle
+        Amount: 1
+      - Material: R_Ep172_1h_Shotgun
+        Amount: 1
+      - Material: R_Ep172_1h_Gatling
+        Amount: 1
+      - Material: R_Ep172_1h_Grenade
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 2000
+  - Id: 1263030
+    Name: Rp_Ep17_Tiger
+    Materials:
+      - Material: Miguel_Card
+        Amount: 1
+      - Material: EP17_1_EVT01
+        Amount: 50
+      - Material: EP17_1_EVT39
+        Amount: 150
+      - Material: EP17_1_EVT02
+        Amount: 150
+      - Material: Milk
+        Amount: 50
+      - Material: Sweet_Potato
+        Amount: 50
+  - Id: 1263031
+    Name: Rp_21th_Poring
+    Materials:
+      - Material: Jellopy
+        Amount: 100
+      - Material: Sticky_Mucus
+        Amount: 35
+      - Material: Apple
+        Amount: 5
+      - Material: Unripe_Apple
+        Amount: 3
+      - Material: Poring_Card
+        Amount: 3
+  - Id: 1263032
+    Name: Rp_21th_Lunatic
+    Materials:
+      - Material: Clover
+        Amount: 100
+      - Material: Feather
+        Amount: 35
+      - Material: Carrot
+        Amount: 5
+      - Material: Rainbow_Carrot
+        Amount: 3
+      - Material: Lunatic_Card
+        Amount: 3
+  - Id: 1263033
+    Name: Rp_21th_Fabre
+    Materials:
+      - Material: Fluff
+        Amount: 100
+      - Material: Feather
+        Amount: 35
+      - Material: Clover
+        Amount: 5
+      - Material: Green_Herb
+        Amount: 3
+      - Material: Fabre_Card
+        Amount: 3
+  - Id: 1263034
+    Name: Rp_21th_Food
+    Materials:
+      - Material: South_Pork_Ricebowl
+        Amount: 5
+      - Material: Poring_Kombucha
+        Amount: 5
+      - Material: Monster_Bread
+        Amount: 5
+      - Material: Monster_Bread_
+        Amount: 5

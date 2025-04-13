@@ -11,6 +11,7 @@
 #include <common/socket.hpp>
 #include <common/sql.hpp>
 #include <common/strlib.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "inter.hpp"
@@ -77,8 +78,12 @@ bool mapif_elemental_load(int ele_id, uint32 char_id, struct s_elemental *ele) {
 	Sql_GetData(sql_handle, 13, &data, nullptr); ele->hit = atoi(data);
 	Sql_GetData(sql_handle, 14, &data, nullptr); ele->life_time = strtoll( data, nullptr, 10 );
 	Sql_FreeResult(sql_handle);
-	if( charserv_config.save_log )
-		ShowInfo("Elemental loaded (ID: %d / Class: %d / CID: %d).\n", ele->elemental_id, ele->class_, ele->char_id);
+	if( charserv_config.save_log ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("¿ä¼Ò(¿¤¸®¸àÅ»)°¡ ·ÎµåµÇ¾ú½À´Ï´Ù. (ID: %d / Class: %d / CID: %d).\n", ele->elemental_id, ele->class_, ele->char_id);
+		else
+			ShowInfo("Elemental loaded (ID: %d / Class: %d / CID: %d).\n", ele->elemental_id, ele->class_, ele->char_id);
+	}
 
 	return true;
 }

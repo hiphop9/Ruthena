@@ -18,17 +18,17 @@
 
 // Malangdo
 //============================================================
-malangdo,220,167,5	script	Coin Exchanger CX-1	564,{
+malangdo,220,167,5	script	코인환전기CX-1	564,{
 	if (checkweight(1201,1) == 0) {
-		mes "You have too many kinds of objects. Let's try to continue after reducing those objects.";
+		mes "개체 종류가 너무 많습니다. 개체를 줄인 후 계속 진행해 보겠습니다.";
 		close;
 	}
 	if (MaxWeight - Weight < 10000) {
-		mes "Can't continue because you have too many heavy objects. Let's try to continue after reducing the weight.";
+		mes "무거운 물건이 너무 많아서 계속할 수 없습니다. 무게를 줄인 후 계속 해보자.";
 		close;
 	}
-	mes "[Coin Exchanger CX-1]";
-	mes "Welcome to CX-1. If you have coins, you can exchange them to high or low grade coins.";
+	mes "[코인환전기CX-1]";
+	mes "CX-1에 오신 것을 환영합니다. 코인을 보유하고 계시다면 높은 등급, 낮은 등급의 코인으로 교환하실 수 있습니다.";
 	next;
 	setarray .@coins[1],
 		6417, //Silvervine
@@ -42,13 +42,13 @@ malangdo,220,167,5	script	Coin Exchanger CX-1	564,{
 		if (countitem(.@coins[.@i]))
 			.@menu$ = .@menu$ + getitemname(.@coins[.@i]) + ":";
 		else
-			.@menu$ = .@menu$ + "^aaaaaa"+getitemname(.@coins[.@i])+" (None)^000000:";
+			.@menu$ = .@menu$ + "^aaaaaa"+getitemname(.@coins[.@i])+" (없음)^000000:";
 	}
 	.@i = select(.@menu$);
 	switch(.@i) {
 	case 1:
-		mes "[Coin Exchanger CX-1]";
-		mes "Thank you for coming.";
+		mes "[코인환전기CX-1]";
+		mes "와주셔서 감사합니다.";
 		close;
 	default:
 		.@coin = .@coins[.@i-1];
@@ -56,17 +56,17 @@ malangdo,220,167,5	script	Coin Exchanger CX-1	564,{
 		break;
 	}
 	if (countitem(.@coin) == 0) {
-		mes "[Coin Exchanger CX-1]";
-		mes "You chose a coin that you don't have.";
-		mes "Thank you for coming.";
+		mes "[코인환전기CX-1]";
+		mes "보유하지 않은 코인을 선택하셨습니다.";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
-	mes "[Coin Exchanger CX-1]";
-	mes "----Rate of exchange----";
-	mes "Higher exchange - 30 to 10";
-	mes "Lower exchange - 10 to 30";
-	mes "------------------------";
-	mes "^ff3333When you exchange, we charge a fee according to the current market price.^000000";
+	mes "[코인환전기CX-1]";
+	mes "----교환율----";
+	mes "더 높은 환율 - 30에서 10";
+	mes "낮은 교환 - 10 ~ 30";
+	mes "------------";
+	mes "^ff3333교환시에는 현재 시세에 따라 수수료를 부과합니다.^000000";
 	next;
 	setarray .@exchange_name$[0],"higher","lower";
 	setarray .@exchange_rate[0],30,10;
@@ -84,42 +84,42 @@ malangdo,220,167,5	script	Coin Exchanger CX-1	564,{
 	}
 	.@i = select(.@menu$)-2;
 	if (.@i == -1) {
-		mes "[Coin Exchanger CX-1]";
-		mes "Thank you for coming.";
+		mes "[코인환전기CX-1]";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
 	if (.@exchange_id[.@i] == 0) {
-		mes "[Coin Exchanger CX-1]";
-		mes "This coin is not available to exchange to "+.@exchange_name$[.@i]+" coin.";
-		mes "Thank you for coming.";
+		mes "[코인환전기CX-1]";
+		mes "이 코인은 "+ .@exchange_name$[.@i] +" 코인으로 교환할 수 없습니다.";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
 	if (countitem(.@coin) < .@exchange_rate[.@i]) {
-		mes "[Coin Exchanger CX-1]";
-		mes "You don't have enough coins to exchange to "+.@exchange_name$[.@i]+" coin.";
-		mes "Thank you for coming.";
+		mes "[코인환전기CX-1]";
+		mes ""+ .@exchange_name$[.@i] +" 코인으로 교환할 코인이 부족합니다.";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
 	.@exchange_total = .@exchange_rate[(!.@i)] - .@exchange_loss[(!.@i)];
 	delitem .@coin, .@exchange_rate[.@i];
 	getitem .@exchange_id[.@i], .@exchange_total;
-	mes "[Coin Exchanger CX-1]";
-	mes "^003399"+.@exchange_rate[.@i]+"^000000 unit(s) of ^003399 "+getitemname(.@coin)+"^000000 taken.";
-	mes "I exchanged them for ^003399"+.@exchange_name$[.@i]+" coins^000000, after deducting ^003399"+.@exchange_loss[(!.@i)]+"^000000 unit(s), ^003399"+.@exchange_total+"^000000 unit(s) remaining.";
+	mes "[코인환전기CX-1]";
+	mes "^003399"+ .@exchange_rate[.@i] +"^000000 단위 ^003399 "+ getitemname(.@coin) +"^000000 가져옴.";
+	mes "^003399"+ .@exchange_name$[.@i] +" 코인^000000으로 교환했어요, ^003399를 빼고"+ .@exchange_loss[(!.@i)] +"^000000 단위, ^003399"+ .@exchange_total +"^000000개 남았습니다.";
 	close;
 }
 
-malangdo,218,165,5	script	Special Vending Machine	562,{
+malangdo,218,165,5	script	특산물자판기CX-82	562,{
 	if (checkweight(1201,1) == 0) {
-		mes "You have too many kinds of objects. Let's try to continue after reducing those objects.";
+		mes "개체 종류가 너무 많습니다. 개체를 줄인 후 계속 진행해 보겠습니다.";
 		close;
 	}
 	if (MaxWeight - Weight < 10000) {
-		mes "Can't continue because you have too many heavy objects. Let's try to continue after reducing the weight.";
+		mes "무거운 물건이 너무 많아서 계속할 수 없습니다. 무게를 줄인 후 계속 해보자.";
 		close;
 	}
-	mes "[Special Vending Machine]";
-	mes "Welcome to CX-82. You have a Silvervine Fruit, so you can purchase the Malangdo Specialty that has special ability.";
+	mes "[특산물자판기CX-82]";
+	mes "CX-82에 오신 것을 환영합니다. 억새열매를 보유하고 있어 특별한 능력을 지닌 말랑도 특산품을 구매할 수 있습니다.";
 	next;
 	callsub L_AddItem, //DisplayName,ItemID,Cost
 		"Seagod's Protection [23 hours]",16740,4,
@@ -137,22 +137,22 @@ L_AddItem:
 		.@menu$ = .@menu$ + getarg(.@i)+":";
 	.@i = select(.@menu$)-2;
 	if (.@i == -1) {
-		mes "[Special Vending Machine]";
-		mes "Seagod's Protection is an item used for entering the Culvert memorial dungeon during a certain period.";
+		mes "[특산물자판기CX-82]";
+		mes "시고드의 가호는 일정 기간 동안 컬버트 기념던전 입장 시 사용되는 아이템입니다.";
 		next;
-		mes "[Special Vending Machine]";
-		mes "Octopus Hunting Stick is an item used for entering the Culvert memorial dungeon during a certain period.";
+		mes "[특산물자판기CX-82]";
+		mes "문어사냥봉은 일정 기간 동안 컬버트 기념던전 입장 시 사용되는 아이템입니다.";
 		next;
-		mes "[Special Vending Machine]";
-		mes "Premium and Ordinary Lubricant are items used for separation of equipment and cards. If you visit the specialist Jeremy with either item, he will explain more details of the effects.";
+		mes "[특산물자판기CX-82]";
+		mes "프리미엄 윤활유와 일반 윤활유는 장비와 카드를 분리하는 데 사용되는 아이템입니다. 두 아이템 중 하나를 가지고 전문 제레미를 방문하시면 자세한 효과에 대해 설명을 해드릴 것입니다.";
 		next;
-		mes "[Special Vending Machine]";
-		mes "Sillit Pong is special item that separates sockets with MVP cards. Unable to separate MVP card by Premium and Ordinary Lubricant.";
+		mes "[특산물자판기CX-82]";
+		mes "실릿퐁은 MVP 카드와 소켓을 분리하는 특수 아이템입니다. MVP 카드를 프리미엄 윤활유와 일반 윤활유로 분리할 수 없습니다.";
 		close;
 	}
 	.@cost = getarg(.@i*3+2);
-	mes "[Special Vending Machine]";
-	mes "You choose ^005500"+getarg(.@i*3)+"^000000. For purchasing, you need ^005500"+.@cost+"^000000 unit(s) of Silvervine Fruit.";
+	mes "[특산물자판기CX-82]";
+	mes "^005500을 선택하셨습니다"+ getarg(.@i*3) +"^000000. 구매하려면 ^005500"+ .@cost +"^000000 개은덩굴 열매가 필요합니다.";
 	next;
 	if (countitem(6417) < .@cost)
 		.@ven_menu$ = "^999999Silvervine Fruit (missing "+(.@cost - countitem(6417))+")^000000";
@@ -160,84 +160,88 @@ L_AddItem:
 		.@ven_menu$ = "Purchase - Silvervine Fruit (have "+countitem(6417)+")";
 	switch(select("Stop:"+.@ven_menu$)) {
 	case 1:
-		mes "[Special Vending Machine]";
-		mes "Thank you for coming.";
+		mes "[특산물자판기CX-82]";
+		mes "와주셔서 감사합니다.";
 		close;
 	case 2:
 		if (countitem(6417) < .@cost) {
-			mes "[Special Vending Machine]";
-			mes "Not enough Silvervine Fruit.";
-			mes "Closing the transaction.";
-			mes "Thank you for coming.";
+			mes "[특산물자판기CX-82]";
+			mes "은덩굴 열매가 부족해요.";
+			mes "거래를 종료합니다.";
+			mes "와주셔서 감사합니다.";
 			close;
 		}
-		mes "[Special Vending Machine]";
-		mes "The transaction is completed. Thank you for coming.";
+		mes "[특산물자판기CX-82]";
+		mes "거래가 완료되었습니다. 와주셔서 감사합니다.";
 		delitem 6417,.@cost; //Silvervine
 		getitem getarg(.@i*3+1),1;
 		close;
 	}
 }
 
-malangdo,236,179,5	script	Dark Merchant K	554,{
+malangdo,236,179,5	script	어둠의 환전상	554,{
 	if (checkweight(1201,1) == 0) {
-		mes "It seems you have too much in your inventory. Let's try again after getting rid of some of your belongings.";
+		mes "인벤토리가 너무 많은 것 같습니다. 소지품을 좀 정리한 후 다시 시도해보세요.";
 		close;
 	}
 	if (MaxWeight - Weight < 1000) {
-		mes "Your inventory is too heavy now. Please come back after getting rid of some of your belongings.";
+		mes "지금은 인벤토리가 너무 무거워요. 소지품을 좀 정리하고 오세요.";
 		close;
 	}
-	mes "[Merchant K]";
-	mes "Thank you for the trade.";
-	mes "We exchange ^ff000010 C Grade Coin^000000 to ^3333ff1 Mora Coin^000000. Shall we begin then?";
+	mes "[환전상 K]";
+	mes "거래 감사합니다.";
+	mes "^ff000010 C코인 10개^000000당 ^3333ff모라마을의 주화1개^000000로";
+	mes "교환해 드리고 있습니다. 그럼 거래를";
+	mes "시작해볼까요?";
 	next;
 	setarray .@coin_amount[0],10,100,500,1000;
 	while(1) {
 		.@menu$ = "";
 		for(.@i = 0; .@i<getarraysize(.@coin_amount); .@i++) {
 			if (countitem(6420) >= .@coin_amount[.@i])
-				.@menu$ = .@menu$ + "Exchange "+(.@coin_amount[.@i]/10)+" Mora Coin:";
+				.@menu$ = .@menu$ + ""+(.@coin_amount[.@i]/10)+" 개로 교환:";
 			else
-				.@menu$ = .@menu$ + "^aaaaaaExchange "+(.@coin_amount[.@i]/10)+" Mora Coin (Not Enough)^000000:";
+				.@menu$ = .@menu$ + "^aaaaaa"+(.@coin_amount[.@i]/10)+" 개로 교환(수량부족)^000000:";
 		}
 		.@i = select(.@menu$+"Quit")-1;
 		if (.@i == getarraysize(.@coin_amount)) {
-			mes "[Merchant K]";
-			mes "Let's exchange some other time.";
+			mes "[환전상 K]";
+			mes "다음에 또 교환하자.";
 			close;
 		}
 		if (countitem(6420) < .@coin_amount[.@i]) {
-			mes "[Merchant K]";
-			mes "You need ^ff0000"+.@coin_amount[.@i]+"^000000 C Grade Coin to perform the exchange. But you don't seem to have enough now.";
+			mes "[환전상 K]";
+			mes "C코인 ^ff0000"+ .@coin_amount[.@i] +"^000000개를 가지고 오셔야 거래를 하실";
+			mes "수 있습니다. 지금은 수량이 모자란 것";
+			mes "같군요";
 			close;
 		}
 		delitem 6420,.@coin_amount[.@i]; //Cgrade_Coin
 		getitem 6380,.@coin_amount[.@i]/10; //Mora_Coin
-		mes "[Merchant K]";
-		mes "C Grade Coin ^003399"+.@coin_amount[.@i]+"^000000 well received."; //FIXME: Dialogue.
-		mes "Exchanged to ^003399"+(.@coin_amount[.@i]/10)+"^000000 Mora Coin.";
+		mes "[환전상 K]";
+		mes "C코인 ^003399"+ .@coin_amount[.@i] +"^000000 받았습니다."; //FIXME: Dialogue.
+		mes "^003399 모란코인"+ (.@coin_amount[.@i]/10) +"^000000개로 교환했습니다.";
 		next;
-		mes "[Merchant K]";
-		mes "Would you like to continue?";
+		mes "[환전상 K]";
+		mes "계속하시겠습니까?";
 		next;
 	}
 }
 
-malangdo,233,180,3	script	Dark MachineTX100	564,{
+malangdo,233,180,3	script	어둠의환전기TX100	564,{
 	if (checkweight(1201,1) == 0) {
-		mes "It seems you have too much in your inventory. Let's try again after getting rid of some of your belongings.";
+		mes "인벤토리가 너무 많은 것 같습니다. 소지품을 좀 정리한 후 다시 시도해보세요.";
 		close;
 	}
 	if (MaxWeight - Weight < 1000) {
-		mes "Your inventory is too heavy now. Please come back after getting rid of some of your belongings.";
+		mes "지금은 인벤토리가 너무 무거워요. 소지품을 좀 정리하고 오세요.";
 		close;
 	}
-	mes "[Dark Machine TX100]";
-	mes "Thank you for visiting TX100. You can exchange coins into higher or lower level coins.";
+	mes "[어둠의환전기TX100]";
+	mes "TX100을 방문해 주셔서 감사합니다. 코인을 더 높거나 낮은 레벨의 코인으로 교환할 수 있습니다.";
 	next;
-	mes "[Dark Machine TX100]";
-	mes "For a lower level coin exchange you can do 500 as a 1 time maximum, and for higher level coin exchange you can do 99 as a 1 time maximum.";
+	mes "[어둠의환전기TX100]";
+	mes "낮은 레벨의 코인 교환은 500개에 최대 1회 가능하며, 높은 레벨의 코인 교환은 최대 1회 99개까지 가능합니다.";
 	next;
 	setarray .@coins[1],
 		6417, //Silvervine
@@ -249,14 +253,14 @@ malangdo,233,180,3	script	Dark MachineTX100	564,{
 	.@menu$ = "Quit:";
 	for(.@i = 1; .@i<=6; .@i++) {
 		if (countitem(.@coins[.@i]))
-			.@menu$ = .@menu$ + getitemname(.@coins[.@i])+" (have "+countitem(.@coins[.@i])+"):";
+			.@menu$ = .@menu$ + getitemname(.@coins[.@i])+" ("+countitem(.@coins[.@i])+"개):";
 		else
-			.@menu$ = .@menu$ + "^aaaaaa"+getitemname(.@coins[.@i])+" (None)^000000:";
+			.@menu$ = .@menu$ + "^aaaaaa"+getitemname(.@coins[.@i])+" (없음)^000000:";
 	}
 	.@i = select(.@menu$)-1;
 	if (.@i == 0) {
-		mes "[Dark Machine TX100]";
-		mes "Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
 	.@coin = .@coins[.@i];
@@ -264,64 +268,64 @@ malangdo,233,180,3	script	Dark MachineTX100	564,{
 	setarray .@exchange_id[0],.@coins[.@i-1],.@coins[.@i+1];
 	if (.@exchange_id[0] == .@coins[1]) .@exchange_id[0] = 0; // Cannot exchange for Silvervine.
 	if (.@i > getarraysize(.@coins)) {
-		mes "[Dark Machine TX100]";
-		mes "You've chosen abnormal menu.";
-		mes "Aborting process. Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes "비정상적인 메뉴를 선택하셨습니다.";
+		mes "중단중입니다. 와주셔서 감사합니다.";
 		close;
 	}
 	if (countitem(.@coin) == 0) {
-		mes "[Dark Machine TX100]";
-		mes "You chose a coin that you don't have.";
-		mes "Aborting process. Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes "보유하지 않은 코인을 선택하셨습니다.";
+		mes "중단중입니다. 와주셔서 감사합니다.";
 		close;
 	}
-	mes "[Dark Machine TX100]";
-	mes "----Exchange Rate----";
-	mes "Higher Coin - 3 to 1";
-	mes "Lower Coin - 1 to 3";
-	mes "---------------------";
-	mes "^ff3333We take a small vendor fee from your exchanged coins.^000000";
+	mes "[어둠의환전기TX100]";
+	mes "----환율----";
+	mes "더 높은 코인 - 3 대 1";
+	mes "하위 코인 - 1 ~ 3";
+	mes "---------";
+	mes "^ff3333교환해주신 코인에서 소액의 판매수수료를 받습니다.^000000";
 	next;
 	.@menu$ = "Quit:";
 	if (.@exchange_id[0] == 0)
-		.@menu$ = .@menu$ + "^ff3333Cannot exchange to higher level coin^000000:";
+		.@menu$ = .@menu$ + "^ff3333더 높은 레벨의 코인으로 교환할 수 없습니다^000000:";
 	else {
 		if (countitem(.@coin) >= 99)
-			.@menu$ = .@menu$ + "Exchange 99 "+getitemname(.@coin)+" into higher level coin:";
+			.@menu$ = .@menu$ + "99 "+ getitemname(.@coin) +"을 더 높은 레벨의 코인으로 교환하세요:";
 		else
-			.@menu$ = .@menu$ + "^aaaaaaExchange to higher level coin (Not enough)^000000:";
+			.@menu$ = .@menu$ + "^aaaaaa더 높은 레벨의 코인으로 교환 (부족)^000000:";
 	}
 	if (.@exchange_id[1] == 0)
-		.@menu$ = .@menu$ + "^ff3333Cannot exchange to lower level coin^000000:";
+		.@menu$ = .@menu$ + "^ff3333낮은 레벨의 코인으로 교환할 수 없습니다^000000:";
 	else {
 		if (countitem(.@coin) > 500)
-			.@menu$ = .@menu$ + "Exchange 500 "+getitemname(.@coin)+" into lower level coin:";
+			.@menu$ = .@menu$ + "500 "+ getitemname(.@coin) +"을 하위 코인으로 교환하세요.:";
 		else if (countitem(.@coin))
-			.@menu$ = .@menu$ + "Exchange "+countitem(.@coin)+" "+getitemname(.@coin)+" into lower level coin:";
+			.@menu$ = .@menu$ + ""+ countitem(.@coin) +" "+ getitemname(.@coin) +"을 하위 레벨 코인으로 교환합니다:";
 		else
-			.@menu$ = .@menu$ + "^aaaaaaExchange to lower level coin (Not enough)^000000:";
+			.@menu$ = .@menu$ + "^aaaaaa낮은 레벨의 코인으로 교환 (부족)^000000:";
 	}
 	.@i = select(.@menu$)-2;
 	if (.@i == -1) {
-		mes "[Dark Machine TX100]";
-		mes "Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes "와주셔서 감사합니다.";
 		close;
 	}
 	if (.@exchange_id[.@i] == 0) {
-		mes "[Dark Machine TX100]";
-		mes "This coin cannot be exchanged to a "+.@exchange_name$[.@i]+" level coin.";
-		mes "Aborting process. Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes "이 코인은 "+ .@exchange_name$[.@i] +"레벨 코인으로 교환할 수 없습니다.";
+		mes "중단중입니다. 와주셔서 감사합니다.";
 		close;
 	}
 	if ((.@i == 0 && countitem(.@coin) < 100) || (.@i == 1 && countitem(.@coin) == 0)) {
-		mes "[Dark Machine TX100]";
-		mes "You have not enough coins for a "+.@exchange_name$[.@i]+" level coin exchange.";
-		mes "Aborting process. Thank you for coming.";
+		mes "[어둠의환전기TX100]";
+		mes ""+ .@exchange_name$[.@i] +"레벨 코인 교환을 위한 코인이 부족합니다.";
+		mes "중단중입니다. 와주셔서 감사합니다.";
 		close;
 	}
 	if (countitem(.@exchange_id[.@i]) > 28000) {
-		mes "[Dark Machine TX100]";
-		mes "You have too many "+.@exchange_name$[.@i]+" level coins already. Please come back with less coins.";
+		mes "[어둠의환전기TX100]";
+		mes "이미 "+ .@exchange_name$[.@i] +"레벨 코인이 너무 많습니다. 더 적은 코인을 가지고 오시기 바랍니다.";
 		close;
 	}
 	switch(.@i) {
@@ -339,13 +343,13 @@ malangdo,233,180,3	script	Dark MachineTX100	564,{
 	.@fee = rand(1,3);
 	delitem .@coin, .@payment_amount;
 	getitem .@exchange_id[.@i], .@reward_amount - .@fee;
-	mes "[Dark Machine TX100]";
-	mes "Received ^003399"+getitemname(.@coin)+"^000000 for ^003399"+.@payment_amount+"^000000 unit(s).";
-	mes "We have exchanged your coin to ^003399"+(.@reward_amount-.@fee)+"^000000 unit(s) of ^003399"+.@coin_text$+" Level Coin^000000, deducted ^003399"+.@fee+"^000000 unit(s) as exchanging fee.";
+	mes "[어둠의환전기TX100]";
+	mes "^003399"+ getitemname(.@coin) +"^000000 for ^003399"+ .@pay_amount +"^000000 단위를 받았습니다.";
+	mes "귀하의 코인을 ^003399"+ (.@reward_amount-.@fee) +"^000000 단위 of ^003399"+ .@coin_text$ +" 레벨 코인^000000, 차감된 ^003399"+ .@fee +"^000000 단위로 교환해 드렸습니다. 교환 수수료로 사용됩니다.";
 	close;
 }
 
-malangdo,175,145,4	script	Can Agency Guard	549,{
+malangdo,175,145,4	script	통조림 관리국 요원	549,{
 	if (checkweight(1201,1) == 0) {
 		mes "You seem to have too many items. Give it a try after sorting out the item kinds.";
 		close;
@@ -354,41 +358,41 @@ malangdo,175,145,4	script	Can Agency Guard	549,{
 		mes "You're not likely to be able to go on due to the heavy items you've got. Give it a try after lightening the weight.";
 		close;
 	}
-	mes "[Can Agency Guard]";
+	mes "[통조림 관리국 요원]";
 	mes "Hey, you there... Have you seen any ^0000ffMalangdo Cat Can^000000s around here?";
 	next;
 	switch(select("Why are you asking?:Oh, you mean these?")) {
 	case 1:
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "Umm.";
 		mes "We at the Can Agency recently got some suspicious intelligence about them...";
 		next;
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "There were faulty products in bulk on the can production line for Malangdo specialty. These products, to be discarded, seem to have fallen into a retail dealer's hands.";
 		next;
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "Actually they were hard to distinguish from normal products. But it obviously says ^0000ffMalangdo Cat Can^000000 outside.";
 		next;
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "As faulty products are moving around on the market, we've been collecting them as is our duty. Have you ever seen anyone who has things like what I'm describing?";
 		next;
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "If you find anyone selling these products, please come and tell me.";
 		close;
 	case 2:
 		if (countitem(12633) == 0) {
-			mes "[Can Agency Guard]";
+			mes "[통조림 관리국 요원]";
 			mes "Umm? I cannot see the ^0000ffMalangdo Cat Can^000000 from you. Don't forget to bring it to me if you've found out...";
 			close;
 		}
 		break;
 	}
-	mes "[Can Agency Guard]";
+	mes "[통조림 관리국 요원]";
 	mes "The Malangdo Cat Can is a faulty product. Let me exchange it to 3 E Grade Coins. How about that?";
 	next;
 	switch(select("I won't exchange:^0000ff1^000000 Can -> ^0000ff3^000000 E Grade Coin:^0000ff10^000000 Can -> ^0000ff30^000000 E Grade Coin:^0000ff100^000000 Can -> ^0000ff300^000000 E Grade Coin:Exchange all I've got")) {
 	case 1:
-		mes "[Can Agency Guard]";
+		mes "[통조림 관리국 요원]";
 		mes "Umm, I'm not here forever, so come to me if you'd like to exchange while I still am.";
 		close;
 	case 2:
@@ -410,20 +414,53 @@ malangdo,175,145,4	script	Can Agency Guard	549,{
 	}
 	if (countitem(12633) < .@check) {
 		if (.@check == 1) {
-			mes "[Can Agency Guard]";
+			mes "[통조림 관리국 요원]";
 			mes "Umm? I cannot see the ^0000ffMalangdo Cat Can^000000 from you. Don't forget to bring it to me if you've found out...";
 			close;
 		} else {
-			mes "[Can Agency Guard]";
+			mes "[통조림 관리국 요원]";
 			mes "Umm? I don't think you have enough to exchange... Come to me again when the amount is exactly decided.";
 			close;
 		}
 	}
 	delitem 12633,.@count; //Malang_Cat_Can
 	getitem 6422,.@count*3; //Egrade_Coin
-	mes "[Can Agency Guard]";
+	mes "[통조림 관리국 요원]";
 	mes "Exchanged "+.@count+" Malangdo Cat Can to "+(.@count*3)+" E Class Coin. Check it out.";
 	close;
+}
+
+malangdo,235,186,3	script	새롱이	4_ASTER,{
+	if (checkweight(1201,1) == 0) {
+		mes "인벤토리가 너무 많은 것 같습니다. 소지품을 좀 정리한 후 다시 시도해보세요.";
+		close;
+	}
+	if (MaxWeight - Weight < 1000) {
+		mes "지금은 인벤토리가 너무 무거워요. 소지품을 좀 정리하고 오세요.";
+		close;
+	}
+}
+
+malangdo,234,187,3	script	왕국소속자판기	2_SLOT_MACHINE,{
+	if (checkweight(1201,1) == 0) {
+		mes "인벤토리가 너무 많은 것 같습니다. 소지품을 좀 정리한 후 다시 시도해보세요.";
+		close;
+	}
+	if (MaxWeight - Weight < 1000) {
+		mes "지금은 인벤토리가 너무 무거워요. 소지품을 좀 정리하고 오세요.";
+		close;
+	}
+}
+
+malangdo,232,189,3	script	윤활제교환기TX140	2_VENDING_MACHINE1,{
+	if (checkweight(1201,1) == 0) {
+		mes "인벤토리가 너무 많은 것 같습니다. 소지품을 좀 정리한 후 다시 시도해보세요.";
+		close;
+	}
+	if (MaxWeight - Weight < 1000) {
+		mes "지금은 인벤토리가 너무 무거워요. 소지품을 좀 정리하고 오세요.";
+		close;
+	}
 }
 
 function	script	F_mal_coin	{

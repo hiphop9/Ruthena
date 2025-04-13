@@ -21,6 +21,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -50,6 +51,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "storage.hpp"
 #include "trade.hpp"
@@ -129,7 +131,10 @@ uint64 AtcommandAliasDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	AtCommandInfo* commandinfo = get_atcommandinfo_byname( command.c_str() );
 
 	if( commandinfo == nullptr ){
-		this->invalidWarning( node["Command"], "Command %s does not exist.\n", command.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Command"], "%s 명령어는 존재하지 않습니다.\n", command.c_str() );
+		else
+			this->invalidWarning( node["Command"], "Command %s does not exist.\n", command.c_str() );
 		return 0;
 	}
 
@@ -155,7 +160,10 @@ uint64 AtcommandAliasDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		const auto& aliasesNode = node["Aliases"];
 
 		if( !aliasesNode.is_seq() ){
-			this->invalidWarning( aliasesNode, "Aliases should be a sequence.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( aliasesNode, "별칭은 시퀀스여야 합니다.\n" );
+			else
+				this->invalidWarning( aliasesNode, "Aliases should be a sequence.\n" );
 			return 0;
 		}
 
@@ -1889,10 +1897,12 @@ ACMD_FUNC(bodystyle)
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
 
+#if PACKETVER_MAIN_NUM < 20231220
 	if ( (sd->class_ & JOBL_FOURTH) || !(sd->class_ & JOBL_THIRD) || (sd->class_ & MAPID_THIRDMASK) == MAPID_SUPER_NOVICE_E || (sd->class_ & MAPID_THIRDMASK) == MAPID_STAR_EMPEROR || (sd->class_ & MAPID_THIRDMASK) == MAPID_SOUL_REAPER) {
 		clif_displaymessage(fd, msg_txt(sd,740));	// This job has no alternate body styles.
 		return -1;
 	}
+#endif
 
 	if (!message || !*message || sscanf(message, "%d", &body_style) < 1) {
 		sprintf(atcmd_output, msg_txt(sd,739), MIN_BODY_STYLE, MAX_BODY_STYLE);		// Please enter a body style (usage: @bodystyle <body ID: %d-%d>).
@@ -2271,9 +2281,12 @@ ACMD_FUNC(monster)
 	else
 		size = SZ_SMALL;
 
-	if (battle_config.etc_log)
-		ShowInfo("%s monster='%s' name='%s' id=%d count=%d (%d,%d)\n", command, monster, name, mob_id, number, sd->bl.x, sd->bl.y);
-
+	if (battle_config.etc_log) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%s 몬스터='%s' 이름='%s' id=%d 갯수=%d (%d,%d)\n", command, monster, name, mob_id, number, sd->bl.x, sd->bl.y);
+		else
+			ShowInfo("%s monster='%s' name='%s' id=%d count=%d (%d,%d)\n", command, monster, name, mob_id, number, sd->bl.x, sd->bl.y);
+	}
 	count = 0;
 	range = (int)sqrt((float)number) +2; // calculation of an odd number (+ 4 area around)
 	for (i = 0; i < number; i++) {
@@ -5061,7 +5074,10 @@ ACMD_FUNC(loadnpc)
 
 	npc_read_event_script();
 
-	ShowStatus( "NPC file '" CL_WHITE "%s" CL_RESET "' was loaded.\n", message );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus( "엔피씨 파일 '" CL_WHITE "%s을(를)" CL_RESET "' 불러왔습니다.\n", message );
+	else
+		ShowStatus( "NPC file '" CL_WHITE "%s" CL_RESET "' was loaded.\n", message );
 	npc_event_doall_path( script_config.init_event_name, message );
 
 	clif_displaymessage(fd, msg_txt(sd,262)); // Script loaded.
@@ -5109,7 +5125,10 @@ ACMD_FUNC(reloadnpcfile) {
 
 	npc_read_event_script();
 
-	ShowStatus( "NPC file '" CL_WHITE "%s" CL_RESET "' was reloaded.\n", message );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus( "엔피씨 파일 '" CL_WHITE "%s을(를)" CL_RESET "' 다시 불러왔습니다.\n", message );
+	else
+		ShowStatus( "NPC file '" CL_WHITE "%s" CL_RESET "' was reloaded.\n", message );
 	npc_event_doall_path( script_config.init_event_name, message );
 
 	clif_displaymessage(fd, msg_txt(sd,262)); // Script loaded.
@@ -5933,7 +5952,10 @@ ACMD_FUNC(dropall)
 			std::shared_ptr<item_data> id = item_db.find(sd->inventory.u.items_inventory[i].nameid);
 
 			if( id == nullptr ) {
-				ShowDebug("Non-existant item %d on dropall list (account_id: %d, char_id: %d)\n", sd->inventory.u.items_inventory[i].nameid, sd->status.account_id, sd->status.char_id);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("전부드롭 목록에 아이템 '%d'이 존재하지 않습니다. (계정ID: %d, 케릭터ID: %d)\n", sd->inventory.u.items_inventory[i].nameid, sd->status.account_id, sd->status.char_id);
+				else	
+					ShowDebug("Non-existant item %d on dropall list (account_id: %d, char_id: %d)\n", sd->inventory.u.items_inventory[i].nameid, sd->status.account_id, sd->status.char_id);
 				continue;
 			}
 			if( !pc_candrop(sd,&sd->inventory.u.items_inventory[i]) )
@@ -6785,7 +6807,10 @@ ACMD_FUNC(autolootitem)
 				item_data = item_db.find( sd->state.autolootid[i] );
 
 				if( item_data == nullptr ){
-					ShowDebug("Non-existant item %d on autolootitem list (account_id: %d, char_id: %d)", sd->state.autolootid[i], sd->status.account_id, sd->status.char_id);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowDebug("오토루팅 목록에 아이템 %d이 존재하지 않습니다. (계정ID: %d, 케릭터ID: %d)", sd->state.autolootid[i], sd->status.account_id, sd->status.char_id);
+					else
+						ShowDebug("Non-existant item %d on autolootitem list (account_id: %d, char_id: %d)", sd->state.autolootid[i], sd->status.account_id, sd->status.char_id);
 					continue;
 				}
 
@@ -10982,6 +11007,16 @@ ACMD_FUNC(setcard)
 	return 0;
 }
 
+ACMD_FUNC(reloadrunedb)
+{
+	nullpo_retr(-1, sd);
+
+	rune_db_reload();
+	clif_displaymessage(fd, "Rune system has been reloaded");
+
+	return 0;
+}
+
 #include <custom/atcommand.inc>
 
 /**
@@ -11311,13 +11346,17 @@ void atcommand_basecommands(void) {
 		ACMD_DEFR(enchantgradeui, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEFR(roulette, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEF(setcard),
+		ACMD_DEF(reloadrunedb),
 	};
 	AtCommandInfo* atcommand;
 	int i;
 
 	for( i = 0; i < ARRAYLENGTH(atcommand_base); i++ ) {
 		if(atcommand_exists(atcommand_base[i].command)) { // Should not happen if atcommand_base[] array is OK
-			ShowDebug("atcommand_basecommands: duplicate ACMD_DEF for '%s'.\n", atcommand_base[i].command);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("atcommand_basecommands: '%s'의 ACMD_DEF가 중복입니다.\n", atcommand_base[i].command);
+			else
+				ShowDebug("atcommand_basecommands: duplicate ACMD_DEF for '%s'.\n", atcommand_base[i].command);
 			continue;
 		}
 		CREATE(atcommand, AtCommandInfo, 1);

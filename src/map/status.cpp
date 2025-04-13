@@ -18,6 +18,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "battleground.hpp"
@@ -34,7 +35,9 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "pet.hpp"
+#include "rune.hpp"
 #include "script.hpp"
+#include "stall.hpp"
 
 using namespace rathena;
 
@@ -128,7 +131,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	int64 constant;
 
 	if( !script_get_constant( group_name_constant.c_str(), &constant ) ){
-		this->invalidWarning(node["Group"], "Unknown refine group %s, skipping.\n", group_name.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Group"], "%s은(는) 알 수 없는 제련 그룹이라 건너뜁니다.\n", group_name.c_str() );
+		else
+			this->invalidWarning(node["Group"], "Unknown refine group %s, skipping.\n", group_name.c_str() );
 		return 0;
 	}
 
@@ -168,7 +174,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( refine_level == 0 || refine_level > MAX_REFINE ){
-						this->invalidWarning( refineLevelNode["Level"], "Refine level %hu is invalid, skipping.\n", refine_level );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( refineLevelNode["Level"], "Refine level %hu은(는) 잘못되어 건너뜁니다.\n", refine_level );
+						else
+							this->invalidWarning( refineLevelNode["Level"], "Refine level %hu is invalid, skipping.\n", refine_level );
 						return 0;
 					}
 
@@ -219,7 +228,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( amount > MAX_AMOUNT ){
-							this->invalidWarning( refineLevelNode["BlacksmithBlessingAmount"], "Blacksmith Blessing amount %hu too high, capping to MAX_AMOUNT.\n", amount );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( refineLevelNode["BlacksmithBlessingAmount"], "Blacksmith Blessing amount %hu은(는) 너무 많아 MAX_AMOUNT으(로) 재설정됩니다.\n", amount );
+							else
+								this->invalidWarning( refineLevelNode["BlacksmithBlessingAmount"], "Blacksmith Blessing amount %hu too high, capping to MAX_AMOUNT.\n", amount );
 							amount = MAX_AMOUNT;
 						}
 
@@ -268,12 +280,18 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 							std::string cost_name_constant = "REFINE_COST_" + cost_name;
 
 							if( !script_get_constant( cost_name_constant.c_str(), &constant ) ){
-								this->invalidWarning( chanceNode["Type"], "Unknown refine cost type %s, skipping.\n", cost_name.c_str() );
+								if(strcmpi(MessageLang_Yml,"KOR") == 0)
+									this->invalidWarning( chanceNode["Type"], "%s은(는) 알 수 없는 Refine Cost이므로 건너뜁니다.\n", cost_name.c_str() );
+								else
+									this->invalidWarning( chanceNode["Type"], "Unknown refine cost type %s, skipping.\n", cost_name.c_str() );
 								return 0;
 							}
 
 							if( constant >= REFINE_COST_MAX ){
-								this->invalidWarning( chanceNode["Type"], "Refine cost type %s is unsupported, skipping.\n", cost_name.c_str() );
+								if(strcmpi(MessageLang_Yml,"KOR") == 0)
+									this->invalidWarning( chanceNode["Type"], "Refine cost 타입 %s은(는) 지원되지 않아 건너뜁니다.\n", cost_name.c_str() );
+								else
+									this->invalidWarning( chanceNode["Type"], "Refine cost type %s is unsupported, skipping.\n", cost_name.c_str() );
 								return 0;
 							}
 
@@ -309,7 +327,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 								}
 
 								if( price > MAX_ZENY ){
-									this->invalidWarning( chanceNode["Price"], "Price is above MAX_ZENY, capping...\n" );
+									if(strcmpi(MessageLang_Yml,"KOR") == 0)
+										this->invalidWarning( chanceNode["Price"], "구매가가 MAX_ZENY보다 많습니다. 재설정됨...\n" );
+									else
+										this->invalidWarning( chanceNode["Price"], "Price is above MAX_ZENY, capping...\n" );
 									price = MAX_ZENY;
 								}
 
@@ -330,7 +351,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 								std::shared_ptr<item_data> id = item_db.search_aegisname( item_name.c_str() );
 
 								if( id == nullptr ){
-									this->invalidWarning( chanceNode["Material"], "Unknown refine material %s, skipping.\n", item_name.c_str() );
+									if(strcmpi(MessageLang_Yml,"KOR") == 0)
+										this->invalidWarning( chanceNode["Material"], "%s은(는) 알 수 없는 제련 재료이므로 건너뜁니다.\n", item_name.c_str() );
+									else
+										this->invalidWarning( chanceNode["Material"], "Unknown refine material %s, skipping.\n", item_name.c_str() );
 									return 0;
 								}
 
@@ -363,7 +387,10 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 								}
 
 								if( downgrade_amount > MAX_REFINE ){
-									this->invalidWarning( chanceNode["DowngradeAmount"], "Downgrade amount %hu is invalid, skipping.\n", downgrade_amount );
+									if(strcmpi(MessageLang_Yml,"KOR") == 0)
+										this->invalidWarning( chanceNode["DowngradeAmount"], "Downgrade amount %hu이(가) 잚못되어 건너뜁니다.\n", downgrade_amount );
+									else
+										this->invalidWarning( chanceNode["DowngradeAmount"], "Downgrade amount %hu is invalid, skipping.\n", downgrade_amount );
 									return 0;
 								}
 
@@ -495,12 +522,18 @@ uint64 SizeFixDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	int64 constant;
 
 	if (!script_get_constant(weapon_name_constant.c_str(), &constant)) {
-		this->invalidWarning(node["Weapon"], "Size Fix unknown weapon %s, skipping.\n", weapon_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Weapon"], "%s은(는) Size Fix의 알수 없는 무기입니다. 통과됨.\n", weapon_name.c_str());
+		else
+			this->invalidWarning(node["Weapon"], "Size Fix unknown weapon %s, skipping.\n", weapon_name.c_str());
 		return 0;
 	}
 
 	if (constant < W_FIST || constant > W_2HSTAFF) {
-		this->invalidWarning(node["Weapon"], "Size Fix weapon %s is an invalid weapon, skipping.\n", weapon_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Weapon"], "Size Fix의 무기 %s은(는) 잘못된 무기입니다. 통과됨.\n", weapon_name.c_str());
+		else
+			this->invalidWarning(node["Weapon"], "Size Fix weapon %s is an invalid weapon, skipping.\n", weapon_name.c_str());
 		return 0;
 	}
 
@@ -518,7 +551,10 @@ uint64 SizeFixDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (small > 100) {
-			this->invalidWarning(node["Small"], "Small Size Fix %d for %s is out of bounds, defaulting to 100.\n", small, weapon_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Small"], "Small의 Size Fix %d은(는) %s에 대한 범위를 벗어났습니다. 기본값은 100입니다.\n", small, weapon_name.c_str());
+			else
+				this->invalidWarning(node["Small"], "Small Size Fix %d for %s is out of bounds, defaulting to 100.\n", small, weapon_name.c_str());
 			small = 100;
 		}
 
@@ -535,7 +571,10 @@ uint64 SizeFixDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (medium > 100) {
-			this->invalidWarning(node["Medium"], "Medium Size Fix %d for %s is out of bounds, defaulting to 100.\n", medium, weapon_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Medium"], "Medium의 Size Fix %d은(는) %s에 대한 범위를 벗어났습니다. 기본값은 100입니다.\n", medium, weapon_name.c_str());
+			else
+				this->invalidWarning(node["Medium"], "Medium Size Fix %d for %s is out of bounds, defaulting to 100.\n", medium, weapon_name.c_str());
 			medium = 100;
 		}
 
@@ -552,7 +591,10 @@ uint64 SizeFixDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (large > 100) {
-			this->invalidWarning(node["Large"], "Large Size Fix %d for %s is out of bounds, defaulting to 100.\n", large, weapon_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Large"], "Large의 Size Fix %d은(는) %s에 대한 범위를 벗어났습니다. 기본값은 100입니다.\n", large, weapon_name.c_str());
+			else
+				this->invalidWarning(node["Large"], "Large Size Fix %d for %s is out of bounds, defaulting to 100.\n", large, weapon_name.c_str());
 			large = 100;
 		}
 
@@ -588,7 +630,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	int64 constant_value;
 
 	if( !script_get_constant( ( "IT_" + itemtype_constant ).c_str(), &constant_value ) ){
-		this->invalidWarning( node["Type"], "Unknown item type \"%s\".\n", itemtype_constant.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Type"], "\"%s\"은(는) 알 수 없는 아이템 타입입니다.\n", itemtype_constant.c_str() );
+		else
+			this->invalidWarning( node["Type"], "Unknown item type \"%s\".\n", itemtype_constant.c_str() );
 		return 0;
 	}
 
@@ -600,7 +645,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	}else if( itemtype == IT_ARMOR ){
 		itemtype_maxlevel = MAX_ARMOR_LEVEL;
 	}else{
-		this->invalidWarning( node["Type"], "Item type \"%s\" is not supported.\n", itemtype_constant.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Type"], "아이템 타입 \"%s\"은(는) 지원되지 않습니다.\n", itemtype_constant.c_str() );
+		else
+			this->invalidWarning( node["Type"], "Item type \"%s\" is not supported.\n", itemtype_constant.c_str() );
 		return 0;
 	}
 
@@ -624,7 +672,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( level == 0 || level > itemtype_maxlevel ){
-			this->invalidWarning( levelNode["Level"], "Level %hu is invalid for item type %s[1~%hu].\n", level, itemtype_constant.c_str(), itemtype_maxlevel );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( levelNode["Level"], "레벨 %hu은(는) 아이템 타입 %s[1~%hu]에 대한 잘못된 레벨입니다.\n", level, itemtype_constant.c_str(), itemtype_maxlevel );
+			else
+				this->invalidWarning( levelNode["Level"], "Level %hu is invalid for item type %s[1~%hu].\n", level, itemtype_constant.c_str(), itemtype_maxlevel );
 			return 0;
 		}
 
@@ -638,12 +689,18 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if( !script_get_constant( ( "ENCHANTGRADE_" + gradeConstant ).c_str(), &constant_value ) ){
-				this->invalidWarning( node["Grade"], "Unknown grade \"%s\".\n", gradeConstant.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( node["Grade"], "\"%s\"은(는) 알 수 없는 Grade입니다.\n", gradeConstant.c_str() );
+				else
+					this->invalidWarning( node["Grade"], "Unknown grade \"%s\".\n", gradeConstant.c_str() );
 				return 0;
 			}
 
 			if( constant_value >= MAX_ENCHANTGRADE ){
-				this->invalidWarning( gradeNode["Grade"], "Grade %" PRId64 " is too high. Maximum: %hu.\n", constant_value, MAX_ENCHANTGRADE - 1 );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( gradeNode["Grade"], "Grade %" PRId64 "은(는) 너무 큽니다. 최대: %hu.\n", constant_value, MAX_ENCHANTGRADE - 1 );
+				else
+					this->invalidWarning( gradeNode["Grade"], "Grade %" PRId64 " is too high. Maximum: %hu.\n", constant_value, MAX_ENCHANTGRADE - 1 );
 				return 0;
 			}
 
@@ -673,7 +730,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( refine > MAX_REFINE ){
-						this->invalidWarning( chanceNode["Refine"], "Refine %hu is too high. Maximum: %hu.\n", refine, MAX_REFINE );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( chanceNode["Refine"], "Refine %hu은(는) 너무 큽니다. 최대: %hu.\n", refine, MAX_REFINE );
+						else
+							this->invalidWarning( chanceNode["Refine"], "Refine %hu is too high. Maximum: %hu.\n", refine, MAX_REFINE );
 						return 0;
 					}
 
@@ -753,7 +813,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					std::shared_ptr<item_data> id = item_db.search_aegisname( itemName.c_str() );
 
 					if( id == nullptr ){
-						this->invalidWarning( catalystNode["Item"], "Unknown item \"%s\".\n", itemName.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( catalystNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", itemName.c_str() );
+						else
+							this->invalidWarning( catalystNode["Item"], "Unknown item \"%s\".\n", itemName.c_str() );
 						return 0;
 					}
 
@@ -838,7 +901,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( amount > MAX_AMOUNT ){
-							this->invalidWarning( optionNode["Amount"], "Amount %hu is too high, capping to %hu...\n", amount, MAX_AMOUNT );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( optionNode["Amount"], "Amount %hu은(는) 너무 큽니다. %hu으(로) 조정됩니다...\n", amount, MAX_AMOUNT );
+							else
+								this->invalidWarning( optionNode["Amount"], "Amount %hu is too high, capping to %hu...\n", amount, MAX_AMOUNT );
 							amount = MAX_AMOUNT;
 						}
 
@@ -846,7 +912,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 							if( grade->options.erase( optionIndex ) > 0 ){
 								continue;
 							}else{
-								this->invalidWarning( optionNode["Amount"], "Trying to remove invalid option %hu...\n", optionIndex );
+								if(strcmpi(MessageLang_Yml,"KOR") == 0)
+									this->invalidWarning( optionNode["Amount"], "잘못된 삭제 옵션 %hu으(로) 시도하고 있습니다...\n", optionIndex );
+								else
+									this->invalidWarning( optionNode["Amount"], "Trying to remove invalid option %hu...\n", optionIndex );
 								return 0;
 							}
 						}
@@ -868,7 +937,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						std::shared_ptr<item_data> id = item_db.search_aegisname( itemName.c_str() );
 
 						if( id == nullptr ){
-							this->invalidWarning( optionNode["Item"], "Unknown item \"%s\".\n", itemName.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( optionNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", itemName.c_str() );
+							else
+								this->invalidWarning( optionNode["Item"], "Unknown item \"%s\".\n", itemName.c_str() );
 							return 0;
 						}
 
@@ -915,7 +987,10 @@ uint64 EnchantgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( downgrade_amount > MAX_REFINE ){
-							this->invalidWarning( optionNode["DowngradeAmount"], "Downgrade amount %hu is invalid, skipping.\n", downgrade_amount );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( optionNode["DowngradeAmount"], "DowngradeAmount %hu은(는) 잘못됐습니다. 건너뜀..\n", downgrade_amount );
+							else
+								this->invalidWarning( optionNode["DowngradeAmount"], "Downgrade amount %hu is invalid, skipping.\n", downgrade_amount );
 							return 0;
 						}
 
@@ -2822,9 +2897,12 @@ int status_calc_mob_(struct mob_data* md, uint8 opt)
 		struct map_data *mapdata = map_getmapdata(md->bl.m);
 		std::shared_ptr<guild_castle> gc = castle_db.mapname2gc(mapdata->name);
 
-		if (gc == nullptr)
-			ShowError("status_calc_mob: No castle set at map %s\n", mapdata->name);
-		else if(gc->castle_id < 24 || md->mob_id == MOBID_EMPERIUM) {
+		if (gc == nullptr) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("status_calc_mob: %s은(는) 성으로 설정되지 않은 맵입니다.\n", mapdata->name);
+			else
+				ShowError("status_calc_mob: No castle set at map %s\n", mapdata->name);
+		} else if(gc->castle_id < 24 || md->mob_id == MOBID_EMPERIUM) {
 #ifdef RENEWAL
 			status->max_hp += 50 * (gc->defense / 5);
 #else
@@ -4080,6 +4158,9 @@ int status_calc_pc_sub(map_session_data* sd, uint8 opt)
 	}
 
 	pc_bonus_script(sd);
+
+	if(sd->runeactivated_data.tagID)
+		rune_active_bonus(sd);
 
 	if( sd->pd ) { // Pet Bonus
 		struct pet_data *pd = sd->pd;
@@ -5757,6 +5838,10 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
 			status->watk2 = status_calc_watk(bl, sc, b_status->watk2);
 		}
 		else status->watk = status_calc_watk(bl, sc, b_status->watk);
+
+		// Monsters still use these in renewal so they are necessary
+		status->rhw.atk = status_calc_watk(bl, sc, b_status->rhw.atk);
+		status->rhw.atk2 = status_calc_watk(bl, sc, b_status->rhw.atk2);
 #endif
 	}
 
@@ -5916,6 +6001,10 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
 	* if(flag[SCB_RANGE])
 	**/
 
+	if (flag[SCB_RANGE]) {
+		status->rhw.range = b_status->rhw.range;
+	}
+
 	if(flag[SCB_MAXHP]) {
 		if( bl->type&BL_PC ) {
 			status->max_hp = status_calc_maxhpsp_pc(sd,status->vit,true);
@@ -5967,6 +6056,8 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
 		 * MATK = (sMATK + wMATK + eMATK) * Multiplicative Modifiers
 		 **/
 		int lv = status_get_lv(bl);
+		// We are using status instead of base_status to include INT changes, but base MATK isn't yet in status so copy it.
+		status->rhw.matk = b_status->rhw.matk;
 		status->matk_min = status_base_matk_min(bl, status, lv);
 		status->matk_max = status_base_matk_max(bl, status, lv);
 
@@ -9228,6 +9319,7 @@ struct view_data* status_get_viewdata(struct block_list *bl)
 		case BL_HOM: return ((TBL_HOM*)bl)->vd;
 		case BL_MER: return ((TBL_MER*)bl)->vd;
 		case BL_ELEM: return ((TBL_ELEM*)bl)->vd;
+		case BL_STALL: return &((TBL_STALL*)bl)->vd;
 	}
 	return nullptr;
 }
@@ -9288,6 +9380,7 @@ void status_set_viewdata(struct block_list *bl, int class_)
 				sd->vd.head_top = sd->status.head_top;
 				sd->vd.head_mid = sd->status.head_mid;
 				sd->vd.head_bottom = sd->status.head_bottom;
+				sd->vd.robe = sd->status.robe;
 				sd->vd.hair_style = cap_value(sd->status.hair, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
 				sd->vd.hair_color = cap_value(sd->status.hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
 				sd->vd.cloth_color = cap_value(sd->status.clothes_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
@@ -9310,8 +9403,12 @@ void status_set_viewdata(struct block_list *bl, int class_)
  					sd->vd.body_style = 0;
 			} else if (vd)
 				memcpy(&sd->vd, vd, sizeof(struct view_data));
-			else
-				ShowError("status_set_viewdata (PC): No view data for class %d\n", class_);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (PC): %d 직업(Class)의 뷰 데이터가 없습니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (PC): No view data for class %d\n", class_);
+			}
 		}
 	break;
 	case BL_MOB:
@@ -9327,8 +9424,12 @@ void status_set_viewdata(struct block_list *bl, int class_)
 				md->vd->class_ = class_;
 				md->vd->hair_style = cap_value(md->vd->hair_style, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
 				md->vd->hair_color = cap_value(md->vd->hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
-			}else
-				ShowError("status_set_viewdata (MOB): No view data for class %d\n", class_);
+			}else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (MOB): %d 직업(Class)의 뷰 데이터가 없습니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (MOB): No view data for class %d\n", class_);
+			}
 		}
 	break;
 	case BL_PET:
@@ -9344,8 +9445,12 @@ void status_set_viewdata(struct block_list *bl, int class_)
 							pd->vd.head_bottom = pd->pet.equip;
 					}
 				}
-			} else
-				ShowError("status_set_viewdata (PET): No view data for class %d\n", class_);
+			} else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (PET): %d 직업(Class)의 뷰 데이터가 없습니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (PET): No view data for class %d\n", class_);
+			}
 		}
 	break;
 	case BL_NPC:
@@ -9358,7 +9463,10 @@ void status_set_viewdata(struct block_list *bl, int class_)
 				nd->vd.class_ = class_;
 				nd->vd.hair_style = cap_value(nd->vd.hair_style, MIN_HAIR_STYLE, MAX_HAIR_STYLE);
 			} else {
-				ShowError("status_set_viewdata (NPC): Invalid view data %d\n", class_);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (NPC): %d은(는) 잘못된 View 데이터입니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (NPC): Invalid view data %d\n", class_);
 				if (bl->m >= 0)
 					ShowDebug("Source (NPC): %s at %s (%d,%d)\n", nd->name, map_mapid2mapname(bl->m), bl->x, bl->y);
 				else
@@ -9382,8 +9490,12 @@ void status_set_viewdata(struct block_list *bl, int class_)
 			s_mercenary_data *md = (s_mercenary_data*)bl;
 			if (vd)
 				md->vd = vd;
-			else
-				ShowError("status_set_viewdata (MERCENARY): No view data for class %d\n", class_);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (MERCENARY): %d 직업(Class)의 뷰 데이터가 없습니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (MERCENARY): No view data for class %d\n", class_);
+			}
 		}
 		break;
 	case BL_ELEM:
@@ -9391,8 +9503,12 @@ void status_set_viewdata(struct block_list *bl, int class_)
 			s_elemental_data *ed = (s_elemental_data*)bl;
 			if (vd)
 				ed->vd = vd;
-			else
-				ShowError("status_set_viewdata (ELEMENTAL): No view data for class %d\n", class_);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("status_set_viewdata (ELEMENTAL): %d 직업(Class)의 뷰 데이터가 없습니다.\n", class_);
+				else
+					ShowError("status_set_viewdata (ELEMENTAL): No view data for class %d\n", class_);
+			}
 		}
 		break;
 	}
@@ -9413,6 +9529,7 @@ status_change *status_get_sc(struct block_list *bl)
 		case BL_HOM: return &((TBL_HOM*)bl)->sc;
 		case BL_MER: return &((TBL_MER*)bl)->sc;
 		case BL_ELEM: return &((TBL_ELEM*)bl)->sc;
+		case BL_STALL: return &((TBL_STALL*)bl)->sc;
 	}
 	return nullptr;
 }
@@ -9999,7 +10116,10 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 	status = status_get_status_data(bl);
 
 	if( !scdb ) {
-		ShowError("status_change_start: Invalid status change (%d)!\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("status_change_start: 상태 변경이 잘못되었습니다. (%d)!\n", type);
+		else
+			ShowError("status_change_start: Invalid status change (%d)!\n", type);
 		return 0;
 	}
 
@@ -10407,7 +10527,10 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 						target_class = sd->class_;
 						break;
 					default:
-						ShowError( "Unknown skill id %d for SC_SPIRIT.\n", val2 );
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowError( "%d은(는) SC_SPIRIT에 대한 알 수 없는 스킬 id입니다.\n", val2 );
+						else
+							ShowError( "Unknown skill id %d for SC_SPIRIT.\n", val2 );
 						return 0;
 				}
 
@@ -12782,7 +12905,10 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		default:
 			if (calc_flag.none() && scdb->skill_id == 0 && scdb->icon == EFST_BLANK && scdb->opt1 == OPT1_NONE && scdb->opt2 == OPT2_NONE && scdb->state.none() && scdb->flag.none() && scdb->endonstart.empty() && scdb->endreturn.empty() && scdb->fail.empty() && scdb->endonend.empty()) {
 				// Status change with no calc, no icon, and no skill associated...?
-				ShowWarning("status_change_start: Status %s (%d) is bare. Add the NoWarning flag to suppress this message.\n", script_get_constant_str("SC_", type), type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("status_change_start: Status %s (%d)은(는) 비어있습니다. 이 메시지를 표시하지 않으려면 NoWarning 플래그를 추가하세요.\n", script_get_constant_str("SC_", type), type);
+				else
+					ShowWarning("status_change_start: Status %s (%d) is bare. Add the NoWarning flag to suppress this message.\n", script_get_constant_str("SC_", type), type);
 				return 0;
 			}
 	} else // Special considerations when loading SC data.
@@ -12799,7 +12925,9 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 				clif_changelook(bl,LOOK_WEAPON,0);
 				clif_changelook(bl,LOOK_SHIELD,0);
 				clif_changelook(bl,LOOK_CLOTHES_COLOR,vd->cloth_color);
+#if PACKETVER_MAIN_NUM < 20231220
 				clif_changelook(bl,LOOK_BODY2,0);
+#endif
 				break;
 			case SC_STONE:
 			case SC_STONEWAIT:
@@ -12844,7 +12972,10 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		}
 
 	if (sd && current_equip_combo_pos > 0 && tick == INFINITE_TICK) {
-		ShowWarning("sc_start: Item combo of item #%u contains an INFINITE_TICK duration. Skipping bonus.\n", sd->inventory_data[pc_checkequip(sd, current_equip_combo_pos)]->nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("sc_start: 아이템 #%u의 아이템 콤보에 INFINITE_TICK 지속시간이 들어있어 보너스를 건너뜁니다..\n", sd->inventory_data[pc_checkequip(sd, current_equip_combo_pos)]->nameid);
+		else
+			ShowWarning("sc_start: Item combo of item #%u contains an INFINITE_TICK duration. Skipping bonus.\n", sd->inventory_data[pc_checkequip(sd, current_equip_combo_pos)]->nameid);
 		return 0;
 	}
 
@@ -12951,6 +13082,18 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		}
 		calc_flag.reset(SCB_BODY);
 	}*/
+
+	t_tick totaltick; 
+
+	if(duration > INT_MAX)
+		totaltick = static_cast<int64>(duration);
+	else
+		totaltick = tick;
+
+	if (scdb->flag[SCF_NOTICKSAVE]) {
+		int64 past = (static_cast<int64>(val4) - time(NULL)) * 1000;
+		tick = i64max(0, totaltick + past);
+	}
 
 	if (!(flag&SCSTART_NOICON) && !(flag&SCSTART_LOADED && scdb->flag[SCF_DISPLAYPC] || scdb->flag[SCF_DISPLAYNPC])) {
 		int status_icon = scdb->icon;
@@ -13884,24 +14027,36 @@ TIMER_FUNC(status_change_timer){
 
 	bl = map_id2bl(id);
 	if(!bl) {
-		ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR "\n", id, data);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("status_change_timer: Null 포인터 id: %d data: %" PRIdPTR "\n", id, data);
+		else
+			ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR "\n", id, data);
 		return 0;
 	}
 
 	status_change * const sc = status_get_sc(bl);
 	struct status_data * const status = status_get_status_data(bl);
 	if(!sc) {
-		ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR " bl-type: %d\n", id, data, bl->type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("status_change_timer: Null 포인터 id: %d data: %" PRIdPTR "bl-type: %d\n", id, data, bl->type);
+		else
+			ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR " bl-type: %d\n", id, data, bl->type);
 		return 0;
 	}
 	
 	struct status_change_entry * const sce = sc->getSCE(type);
 	if(!sce) {
-		ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR " bl-type: %d\n", id, data, bl->type);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("status_change_timer: 널(Null) 포인터 ID: %d data: %" PRIdPTR " bl-type: %d\n", id, data, bl->type);
+		else
+			ShowDebug("status_change_timer: Null pointer id: %d data: %" PRIdPTR " bl-type: %d\n", id, data, bl->type);
 		return 0;
 	}
 	if( sce->timer != tid ) {
-		ShowError("status_change_timer: Mismatch for type %d: %d != %d (bl id %d)\n",type,tid,sce->timer, bl->id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("status_change_timer: 타입 %d에 대한 불일치: %d != %d (bl id %d)\n",type,tid,sce->timer, bl->id);
+		else	
+			ShowError("status_change_timer: Mismatch for type %d: %d != %d (bl id %d)\n",type,tid,sce->timer, bl->id);
 		return 0;
 	}
 
@@ -15479,7 +15634,10 @@ static bool status_readdb_status_disabled( char **str, size_t columns, size_t cu
 	}
 
 	if (type <= SC_NONE || type >= SC_MAX) {
-		ShowError("status_readdb_status_disabled: Invalid SC with type %s.\n", str[0]);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("status_readdb_status_disabled: %s 타입의 SC가 잘못되었습니다.\n", str[0]);
+		else
+			ShowError("status_readdb_status_disabled: Invalid SC with type %s.\n", str[0]);
 		return false;
 	}
 
@@ -15503,7 +15661,10 @@ uint64 AttributeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (!CHK_ELEMENT_LEVEL(level)) {
-		this->invalidWarning(node["Level"], "Invalid element level %hu.\n", level);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning(node["Level"], "%hu은(는) 잘못된 Element 레벨입니다.\n", level);
+		else
+			this->invalidWarning(node["Level"], "Invalid element level %hu.\n", level);
 		return 0;
 	}
 
@@ -15523,11 +15684,17 @@ uint64 AttributeDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (val < -100) {
-				this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h is out of range %d~%d. Setting to -100.\n", itdef.first.c_str(), val, -100, 200);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h은(는) 범위 %d~%d을(를) 벗어났습니다. -100으로 설정합니다.\n", itdef.first.c_str(), val, -100, 200);
+				else
+					this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h is out of range %d~%d. Setting to -100.\n", itdef.first.c_str(), val, -100, 200);
 				val = -100;
 			}
 			else if (val > 200) {
-				this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h is out of range %d~%d. Setting to 200.\n", itdef.first.c_str(), val, -100, 200);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h은(는) 범위 %d~%d을(를) 벗어났습니다. 200으로 설정합니다.\n", itdef.first.c_str(), val, -100, 200);
+				else
+					this->invalidWarning(eleNode[c4::to_csubstr(itdef.first)], "%s %h is out of range %d~%d. Setting to 200.\n", itdef.first.c_str(), val, -100, 200);
 				val = 200;
 			}
 
@@ -15572,12 +15739,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	int64 constant;
 
 	if (!script_get_constant(status_constant.c_str(), &constant)) {
-		this->invalidWarning(node["Status"], "Invalid Status %s.\n", status_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Status"], "%s은(는) 잘못된 상태입니다.\n", status_name.c_str());
+		else
+			this->invalidWarning(node["Status"], "Invalid Status %s.\n", status_name.c_str());
 		return 0;
 	}
 
 	if (!this->validateStatus(static_cast<sc_type>(constant))) {
-		this->invalidWarning(node["Status"], "Status %s is out of bounds.\n", status_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Status"], "Status %s은(는) 범위를 벗어났습니다.\n", status_name.c_str());
+		else
+			this->invalidWarning(node["Status"], "Status %s is out of bounds.\n", status_name.c_str());
 		return 0;
 	}
 
@@ -15599,12 +15772,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(icon_name.c_str(), &constant)) {
-			this->invalidWarning(node["Icon"], "Icon %s is invalid, defaulting to EFST_BLANK.\n", icon_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Icon"], "%s은(는) 잘못된 아이콘입니다. EFST_BLANK으로 설정합니다.\n", icon_name.c_str());
+			else
+				this->invalidWarning(node["Icon"], "Icon %s is invalid, defaulting to EFST_BLANK.\n", icon_name.c_str());
 			constant = EFST_BLANK;
 		}
 		
 		if (constant < EFST_BLANK || constant >= EFST_MAX) {
-			this->invalidWarning(node["Icon"], "Icon %s is out of bounds, defaulting to EFST_BLANK.\n", icon_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Icon"], "아이콘 %s은(는) 범위를 벗어났으므로 EFST_BLANK으로 설정합니다.\n", icon_name.c_str());
+			else
+				this->invalidWarning(node["Icon"], "Icon %s is out of bounds, defaulting to EFST_BLANK.\n", icon_name.c_str());
 			constant = EFST_BLANK;
 		}
 
@@ -15622,9 +15801,12 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		uint16 skill_id = skill_name2id(skill_name.c_str());
 
-		if (skill_id == 0)
-			this->invalidWarning(node["DurationLookup"], "DurationLookup skill %s is invalid, defaulting to none.\n", skill_name.c_str());
-
+		if (skill_id == 0) {
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["DurationLookup"], "DurationLookup %s은(는) 잘못된 스킬입니다. none로 설정합니다.\n", skill_name.c_str());
+			else
+				this->invalidWarning(node["DurationLookup"], "DurationLookup skill %s is invalid, defaulting to none.\n", skill_name.c_str());
+		}
 		status->skill_id = skill_id;
 	} else {
 		if (!exists)
@@ -15642,12 +15824,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(state_constant.c_str(), &constant)) {
-				this->invalidWarning(stateNode, "State %s is invalid.\n", state.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(stateNode, "%s은(는) 잘못된 State입니다.\n", state.c_str());
+				else
+					this->invalidWarning(stateNode, "State %s is invalid.\n", state.c_str());
 				return 0;
 			}
 
 			if (constant < SCS_NONE || constant >= SCS_MAX) {
-				this->invalidWarning(stateNode, "State %s is out of bounds.\n", state.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(stateNode, "State %s은(는) 범위를 벗어났습니다.\n", state.c_str());
+				else
+					this->invalidWarning(stateNode, "State %s is out of bounds.\n", state.c_str());
 				return 0;
 			}
 
@@ -15693,12 +15881,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				continue;
 
 			if (!script_get_constant(flag_constant.c_str(), &constant)) {
-				this->invalidWarning(flagNode, "CalcFlag %s is invalid.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(flagNode, "CalcFlag %s은(는) 잘못되었습니다.\n", flag.c_str());
+				else
+					this->invalidWarning(flagNode, "CalcFlag %s is invalid.\n", flag.c_str());
 				return 0;
 			}
 
 			if (constant < SCB_NONE || constant >= SCB_MAX) {
-				this->invalidWarning(flagNode, "CalcFlag %s is out of bounds.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(flagNode, "CalcFlag %s은(는) 범위를 벗어났습니다.\n", flag.c_str());
+				else
+					this->invalidWarning(flagNode, "CalcFlag %s is out of bounds.\n", flag.c_str());
 				return 0;
 			}
 
@@ -15727,12 +15921,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(opt_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Opt1"], "Opt1 %s is invalid.\n", opt.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Opt1"], "%s은(는) 잘못된 Opt1입니다.\n", opt.c_str());
+			else
+				this->invalidWarning(node["Opt1"], "Opt1 %s is invalid.\n", opt.c_str());
 			return 0;
 		}
 
 		if (constant < OPT1_NONE || constant >= OPT1_MAX) {
-			this->invalidWarning(node["Opt1"], "Opt2 %s is out of bounds.\n", opt.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Opt1"], "Opt1 %s은(는) 범위를 벗어났습니다.\n", opt.c_str());
+			else
+				this->invalidWarning(node["Opt1"], "Opt2 %s is out of bounds.\n", opt.c_str());
 			return 0;
 		}
 
@@ -15753,12 +15953,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(opt_constant.c_str(), &constant)) {
-				this->invalidWarning(optNode, "Opt2 %s is invalid.\n", opt.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optNode, "Opt2 %s은(는) 잘못되었습니다.\n", opt.c_str());
+				else
+					this->invalidWarning(optNode, "Opt2 %s is invalid.\n", opt.c_str());
 				return 0;
 			}
 
 			if (constant < OPT2_NONE || constant >= OPT2_MAX) {
-				this->invalidWarning(optNode, "Opt2 %s is out of bounds.\n", opt.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optNode, "Opt2 %s은(는) 범위를 벗어났습니다.\n", opt.c_str());
+				else
+					this->invalidWarning(optNode, "Opt2 %s is out of bounds.\n", opt.c_str());
 				return 0;
 			}
 
@@ -15788,12 +15994,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(opt_constant.c_str(), &constant)) {
-				this->invalidWarning(optNode, "Opt3 %s is invalid.\n", opt.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optNode, "Opt3 %s은(는) 잘못되었습니다.\n", opt.c_str());
+				else
+					this->invalidWarning(optNode, "Opt3 %s is invalid.\n", opt.c_str());
 				return 0;
 			}
 
 			if (constant < OPT3_NORMAL || constant >= OPT3_MAX) {
-				this->invalidWarning(optNode, "Opt3 %s is out of bounds.\n", opt.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optNode, "Opt3 %s은(는) 범위를 벗어났습니다.\n", opt.c_str());
+				else
+					this->invalidWarning(optNode, "Opt3 %s is out of bounds.\n", opt.c_str());
 				return 0;
 			}
 
@@ -15823,12 +16035,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(option_constant.c_str(), &constant)) {
-				this->invalidWarning(optionNode, "Option %s is invalid.\n", option.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optionNode, "Option %s은(는) 잘못되었습니다.\n", option.c_str());
+				else
+					this->invalidWarning(optionNode, "Option %s is invalid.\n", option.c_str());
 				return 0;
 			}
 
 			if (constant < OPTION_NOTHING || constant >= OPTION_MAX) {
-				this->invalidWarning(optionNode, "Option %s is out of bounds.\n", option.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(optionNode, "Option %s은(는) 범위를 벗어났습니다.\n", option.c_str());
+				else
+					this->invalidWarning(optionNode, "Option %s is out of bounds.\n", option.c_str());
 				return 0;
 			}
 
@@ -15858,12 +16076,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(flag_constant.c_str(), &constant)) {
-				this->invalidWarning(flagNode, "Flag %s is invalid.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(flagNode, "Flag %s은(는) 잘못되었습니다.\n", flag.c_str());
+				else
+					this->invalidWarning(flagNode, "Flag %s is invalid.\n", flag.c_str());
 				return 0;
 			}
 
 			if (constant < SCF_NONE || constant >= SCF_MAX) {
-				this->invalidWarning(flagNode, "Flag %s is out of bounds.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(flagNode, "Flag %s은(는) 범위를 벗어났습니다.\n", flag.c_str());
+				else
+					this->invalidWarning(flagNode, "Flag %s is out of bounds.\n", flag.c_str());
 				return 0;
 			}
 
@@ -15917,12 +16141,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(fail_constant.c_str(), &constant)) {
-				this->invalidWarning(failNode, "Fail status %s is invalid.\n", fail.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(failNode, "Fail status %s은(는) 잘못되었습니다.\n", fail.c_str());
+				else
+					this->invalidWarning(failNode, "Fail status %s is invalid.\n", fail.c_str());
 				return 0;
 			}
 
 			if (!this->validateStatus(static_cast<sc_type>(constant))) {
-				this->invalidWarning(failNode, "Fail status %s is out of bounds.\n", fail.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(failNode, "Fail status %s은(는) 범위를 벗어났습니다.\n", fail.c_str());
+				else
+					this->invalidWarning(failNode, "Fail status %s is out of bounds.\n", fail.c_str());
 				return 0;
 			}
 
@@ -15949,12 +16179,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(end_constant.c_str(), &constant)) {
-				this->invalidWarning(endNode, "EndOnStart status %s is invalid.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndOnStart status %s은(는) 잘못되었습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndOnStart status %s is invalid.\n", end.c_str());
 				return 0;
 			}
 
 			if (!this->validateStatus(static_cast<sc_type>(constant))) {
-				this->invalidWarning(endNode, "EndOnStart status %s is out of bounds.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndOnStart status %s은(는) 범위를 벗어났습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndOnStart status %s is out of bounds.\n", end.c_str());
 				return 0;
 			}
 
@@ -15981,12 +16217,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(end_constant.c_str(), &constant)) {
-				this->invalidWarning(endNode, "EndReturn status %s is invalid.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndReturn status %s은(는) 잘못되었습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndReturn status %s is invalid.\n", end.c_str());
 				return 0;
 			}
 
 			if (!this->validateStatus(static_cast<sc_type>(constant))) {
-				this->invalidWarning(endNode, "EndReturn status %s is out of bounds.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndReturn status %s은(는) 범위를 벗어났습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndReturn status %s is out of bounds.\n", end.c_str());
 				return 0;
 			}
 
@@ -16013,12 +16255,18 @@ uint64 StatusDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(end_constant.c_str(), &constant)) {
-				this->invalidWarning(endNode, "EndOnEnd status %s is invalid.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndOnEnd status %s은(는) 잘못되었습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndOnEnd status %s is invalid.\n", end.c_str());
 				return 0;
 			}
 
 			if (!this->validateStatus(static_cast<sc_type>(constant))) {
-				this->invalidWarning(endNode, "EndOnEnd status %s is out of bounds.\n", end.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(endNode, "EndOnEnd status %s은(는) 범위를 벗어났습니다.\n", end.c_str());
+				else
+					this->invalidWarning(endNode, "EndOnEnd status %s is out of bounds.\n", end.c_str());
 				return 0;
 			}
 

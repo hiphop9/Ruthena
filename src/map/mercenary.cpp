@@ -17,6 +17,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "clif.hpp"
 #include "intif.hpp"
@@ -59,7 +60,10 @@ bool mercenary_create(map_session_data *sd, uint16 class_, unsigned int lifetime
 	std::shared_ptr<s_mercenary_db> db = mercenary_db.find(class_);
 
 	if (db == nullptr) {
-		ShowError("mercenary_create: Unknown mercenary class %d.\n", class_);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("mercenary_create: %d은(는) 알 수 없는 용병 클래스입니다.\n", class_);
+		else
+			ShowError("mercenary_create: Unknown mercenary class %d.\n", class_);
 		return false;
 	}
 
@@ -495,7 +499,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\"의 길이가 최대 글자수 %d자를 초과해서 재설정되었습니다...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -509,7 +516,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Name"], "Name \"%s\"의 길이가 최대 글자수 %d자를 초과해서 재설정되었습니다...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -523,7 +533,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (level > MAX_LEVEL) {
-			this->invalidWarning(node["Level"], "Level %d exceeds MAX_LEVEL, capping to %d.\n", level, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Level"], "Level %d이(가) MAX_LEVEL을 초과하여 %d으(로) 재설정되었습니다.\n", level, MAX_LEVEL);
+			else
+				this->invalidWarning(node["Level"], "Level %d exceeds MAX_LEVEL, capping to %d.\n", level, MAX_LEVEL);
 			level = MAX_LEVEL;
 		}
 
@@ -588,7 +601,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["Defense"], "Invalid defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Defense"], "%d은(는) 잘못된 방어력(Defense)이므로 재설정됩니다.\n", def);
+			else
+				this->invalidWarning(node["Defense"], "Invalid defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -605,7 +621,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["MagicDefense"], "Invalid magic defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["MagicDefense"], "%d은(는) 잘못된 마법 방어력(Magic defense)이므로 재설정 되었습니다.\n", def);
+			else
+				this->invalidWarning(node["MagicDefense"], "Invalid magic defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -733,12 +752,18 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(size_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Size"], "Unknown mercenary size %s, defaulting to Small.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Size"], "%s은(는) 알 수 없는 용병 크기이므로 Small로 설정됩니다.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Unknown mercenary size %s, defaulting to Small.\n", size.c_str());
 			constant = SZ_SMALL;
 		}
 
 		if (constant < SZ_SMALL || constant > SZ_BIG) {
-			this->invalidWarning(node["Size"], "Invalid mercenary size %s, defaulting to Small.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Size"], "%s은(는) 잘못된 용병 크기이므로 Small로 설정됩니다.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Invalid mercenary size %s, defaulting to Small.\n", size.c_str());
 			constant = SZ_SMALL;
 		}
 
@@ -758,12 +783,18 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(race_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Race"], "Unknown mercenary race %s, defaulting to Formless.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Race"], "%s은(는) 알 수 없는 용병 종족이므로 Formless로 설정됩니다.\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Unknown mercenary race %s, defaulting to Formless.\n", race.c_str());
 			constant = RC_FORMLESS;
 		}
 
 		if (!CHK_RACE(constant)) {
-			this->invalidWarning(node["Race"], "Invalid mercenary race %s, defaulting to Formless.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Race"], "%s은(는) 잘못된 용병 종족이므로 Formless로 설정됩니다.\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Invalid mercenary race %s, defaulting to Formless.\n", race.c_str());
 			constant = RC_FORMLESS;
 		}
 
@@ -783,12 +814,18 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(ele_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Element"], "Unknown mercenary element %s, defaulting to Neutral.\n", ele.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Element"], "%s은(는) 알 수 없는 용병 Element이므로 Neutral로 설정됩니다.\n", ele.c_str());
+			else
+				this->invalidWarning(node["Element"], "Unknown mercenary element %s, defaulting to Neutral.\n", ele.c_str());
 			constant = ELE_NEUTRAL;
 		}
 
 		if (!CHK_ELEMENT(constant)) {
-			this->invalidWarning(node["Element"], "Invalid mercenary element %s, defaulting to Neutral.\n", ele.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["Element"], "%s은(는) 잘못된 용병 Element이므로 Neutral로 설정됩니다.\n", ele.c_str());
+			else
+				this->invalidWarning(node["Element"], "Invalid mercenary element %s, defaulting to Neutral.\n", ele.c_str());
 			constant = ELE_NEUTRAL;
 		}
 
@@ -805,7 +842,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (!CHK_ELEMENT_LEVEL(level)) {
-			this->invalidWarning(node["ElementLevel"], "Invalid mercenary element level %hu, defaulting to 1.\n", level);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["ElementLevel"], "%hu은(는) 잘못된 용병 속성레벨(ElementLevel)이므로 1로 설정됩니다.\n", level);
+			else
+				this->invalidWarning(node["ElementLevel"], "Invalid mercenary element level %hu, defaulting to 1.\n", level);
 			level = 1;
 		}
 
@@ -822,7 +862,10 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (speed < MIN_WALK_SPEED || speed > MAX_WALK_SPEED) {
-			this->invalidWarning(node["WalkSpeed"], "Invalid mercenary walk speed %hu, capping...\n", speed);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning(node["WalkSpeed"], "%hu은(는) 잘못된 용병 WalkSpeed이므로 재설정됩니다...\n", speed);
+			else
+				this->invalidWarning(node["WalkSpeed"], "Invalid mercenary walk speed %hu, capping...\n", speed);
 			speed = cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
 		}
 
@@ -882,12 +925,18 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			uint16 skill_id = skill_name2id(skill_name.c_str());
 
 			if (skill_id == 0) {
-				this->invalidWarning(skill["Name"], "Invalid skill %s, skipping.\n", skill_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(skill["Name"], "%s은(는) 잘못된 스킬이므로 건너뜁니다.\n", skill_name.c_str());
+				else
+					this->invalidWarning(skill["Name"], "Invalid skill %s, skipping.\n", skill_name.c_str());
 				return 0;
 			}
 
 			if (!SKILL_CHK_MERC(skill_id)) {
-				this->invalidWarning(skill["Name"], "Skill %s (%u) is out of the mercenary skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, MC_SKILLBASE, MC_SKILLBASE + MAX_MERCSKILL - 1);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(skill["Name"], "%s (%u)은(는) 용병 스킬 범위 [%u-%u]를 벗어난 스킬입니다, 건너뜀.\n", skill_name.c_str(), skill_id, MC_SKILLBASE, MC_SKILLBASE + MAX_MERCSKILL - 1);
+				else
+					this->invalidWarning(skill["Name"], "Skill %s (%u) is out of the mercenary skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, MC_SKILLBASE, MC_SKILLBASE + MAX_MERCSKILL - 1);
 				return 0;
 			}
 
@@ -897,8 +946,12 @@ uint64 MercenaryDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (level == 0) {
-				if (mercenary->skill.erase(skill_id) == 0)
-					this->invalidWarning(skill["Name"], "Failed to remove %s, the skill doesn't exist for mercenary %hu.\n", skill_name.c_str(), id);
+				if (mercenary->skill.erase(skill_id) == 0) {
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(skill["Name"], "%s을(를) 삭제하는데 실패 했습니다. 용병 %hu에 대한 존재하지 않는 스킬입니다..\n", skill_name.c_str(), id);
+					else
+						this->invalidWarning(skill["Name"], "Failed to remove %s, the skill doesn't exist for mercenary %hu.\n", skill_name.c_str(), id);
+				}
 				continue;
 			}
 

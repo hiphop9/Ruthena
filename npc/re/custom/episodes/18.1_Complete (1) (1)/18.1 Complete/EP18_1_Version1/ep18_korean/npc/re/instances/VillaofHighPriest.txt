@@ -1,0 +1,1169 @@
+//===== rAthena Script =======================================
+//= Instance: Villa of High Priest.
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Part of the episode 18.1 main quest.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main Quest: Step 61.
+oz_dun01,219,117,5	script	아이라#c12_01	4_M_BRZ_JACI,{
+	if (ep18_1_main == 54) {
+		// .@md_name$ = "대신관의 별장";
+		.@md_name$ = "Villa of High Priest";
+
+		mes "[아이라]";
+		mes "별장 입구요? 열쇠가 입구에요.";
+		mes "일종의 이동마법? 같은게 걸려있어요.";
+		mes "준비가 다 되셨다면 별장으로 안내할까요?";
+		next;
+		mes "[아이라]";
+		mes "그리고…. 안에서 무슨 일이 일어날지 모르니까요.";
+		mes "동료분이 계시다면 함께 하시길 권해드려요.";
+		next;
+		switch( select( "'대신관의 별장'을 신청한다.", "'대신관의 별장'에 입장한다." ) ) {
+		case 1:
+			if (getcharid(1) == 0 || is_party_leader() == false) {
+				mes "^4d4dff메모리얼로 진행되는 이벤트입니다.";
+				mes "메모리얼 던전 신청은 파티리더로 해야합니다.^000000";
+				close;
+			}
+			mes "[아이라]";
+			mes "그럼 모시겠습니다.";
+			if (instance_create(.@md_name$) < 0) {
+				mes "Party: " + getpartyname(getcharid(1)) + "";
+				mes "Leader: " + strcharinfo(0) + "";
+				mes "^0000ff" + .@md_name$ + " ^000000- Unknown error";
+				close;
+			}
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "[아이라]";
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+				mes "[아이라]";
+				mes "^ff0000Your party leader has not yet created the dungeon.^000000";
+				close;
+			case IE_NOMEMBER:
+				mes "[아이라]";
+				mes "^ff0000Only a member of the party can enter the Memorial Dungeon.^000000";
+				close;
+			case IE_OK:
+				mapannounce "oz_dun01", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering " + .@md_name$ + ".",bc_map,"0x00ff99",FW_NORMAL,12;
+				// warp "1@adv",123,17;
+				end;
+			}
+		}
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// warps
+1@adv,63,142,0	warp	#left_room_in	1,1,1@adv,56,142
+1@adv,60,142,0	warp	#left_room_out	1,1,1@adv,66,142
+1@adv,185,142,0	warp	#right_room_in	1,1,1@adv,190,142
+1@adv,187,142,0	warp	#right_room_out	1,1,1@adv,182,142
+1@adv,173,142,0	warp	#center_room_in	1,1,1@adv,167,142
+1@adv,171,142,0	warp	#center_room_out	1,1,1@adv,177,142
+1@adv,123,309,0	warp	#boss_in	1,1,1@adv,123,321
+1@adv,123,312,0	warp	#boss_out	1,1,oz_dun01,220,112
+
+
+1@adv,122,20,5	script	아이라#aira01	4_M_BRZ_JACI,{
+	npctalk "제 걱정은 마세요. 문 근처에 있다가 위험하면 바로 나갈 거니까요.";
+	end;
+
+OnInstanceInit:
+	'adv_step = 0;
+	'Knight_left = 0;
+	'Knight_righ = 0;
+	'flower_num = rand(1,5);
+
+	'map_adv$ = instance_mapname("1@adv");
+
+	disablenpc instance_npcname("미리암#miriam02");
+	disablenpc instance_npcname("별장의 하트헌터#rh03");
+	disablenpc instance_npcname("별장의 하트헌터#rh04");
+	disablenpc instance_npcname("별장의 하트헌터#rh05");
+	disablenpc instance_npcname("별장의 하트헌터#rh06");
+	disablenpc instance_npcname("별장의 하트헌터#rh07");
+
+	disablenpc instance_npcname("#left_room_in");
+	disablenpc instance_npcname("#left_room_out");
+	disablenpc instance_npcname("#right_room_in");
+	disablenpc instance_npcname("#right_room_out");
+	disablenpc instance_npcname("#center_room_in");
+	disablenpc instance_npcname("#center_room_out");
+	disablenpc instance_npcname("#boss_in");
+	disablenpc instance_npcname("#boss_out");
+
+	disablenpc instance_npcname("은색 열쇠#key01");
+	disablenpc instance_npcname("금색 열쇠#key02");
+
+	disablenpc instance_npcname("미리암#miriam03");
+	disablenpc instance_npcname("저택 고용인#ex21");
+	disablenpc instance_npcname("저택 고용인#ex22");
+	disablenpc instance_npcname("저택 고용인#ex23");
+
+	disablenpc instance_npcname("#flower01");
+	disablenpc instance_npcname("#flower02");
+	disablenpc instance_npcname("#flower03");
+	disablenpc instance_npcname("#flower04");
+	disablenpc instance_npcname("#flower05");
+
+	// middle boss
+	disablenpc instance_npcname("슐랑#shulang01");
+
+	// boss room 1
+	disablenpc instance_npcname("신관 유스#jus01");
+	disablenpc instance_npcname("일루시온 바곳#bagot01");
+	disablenpc instance_npcname("미리암#miriam04");
+	cloakonnpc instance_npcname("여신의 형상#demigod");
+	cloakonnpc instance_npcname("슐랑#shulang02");
+
+	// Boss room out
+	disablenpc instance_npcname("미리암#miriam05");
+	disablenpc instance_npcname("신관 유스#jus02");
+	end;
+}
+
+1@adv,125,23,3	script	미리암#miriam01	EP18_NPC_MIRIAM,{
+	if (is_party_leader() == false) {
+		mes "[미리암]";
+		mes "모두 모였습니까?";
+		close;
+	}
+	if (ep18_1_main != 54)
+		end;
+	if ('adv_step == 0) {
+		'adv_step = 1;
+		// note: player can move and talk to other npc
+		.@npc$ = instance_npcname("아이라#aira01");
+
+		sleep 2500;
+		npctalk "아이라: 여기에요. 1층에는 사용인들만 다니니 괜찮을 거에요.", .@npc$;
+		sleep 2500;
+		npctalk "미리암: 2층은?";
+		sleep 2500;
+		npctalk "아이라: 수행사제분들이 머물고 있죠. 정말로 수행사제인지는 모르겠지만요.", .@npc$;
+		sleep 2500;
+		npctalk "아이라: 난폭하기도 하고, 무기도 가진 것 같고.", .@npc$;
+		sleep 2500;
+		npctalk "미리암: 알았어. 안내 고마워. 안쪽 수색은 우리들이 할게.";
+		sleep 2500;
+		npctalk "아이라: 제 걱정은 하지 마세요. 조심하세요, 두 분.", .@npc$;
+		sleep 2500;
+		npctalk "미리암: 그럼 우리는 천천히 올라가보도록 하죠.";
+		sleep 2500;
+		npctalk "아이라: 2층 연회장 열쇠를 찾아보셔요. 그 너머에 뭔가가 있을 거에요!", .@npc$;
+		'adv_step = 2;
+		end;
+	}
+	if ('adv_step == 2) {
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "다른 고용인이 있는지 살펴보고 2층으로 올라가면 될 것 같습니다.";
+		npctalk "미리암: 다른 고용인이 있는지 살펴보고 2층으로 올라가면 될 것 같습니다.";
+		next;
+		mes "[미리암]";
+		mes "중암 계단 너머로 날카로운 기척이 느껴져요. 아마도 신전에서 싸웠던 하트헌터겠지요.";
+		npctalk "미리암: 사나운 기척이 느껴집니다. 아마도 신전에서 싸웠던 하트헌터겠지요.";
+		next;
+		mes "[미리암]";
+		mes "아무래도 사라졌다는 이미르의 심장 조각이 신경쓰입니다. 분란 조장은 신전만으로도 충분하니까요.";
+		npctalk "미리암: 아무래도 사라졌다는 이미르의 심장 조각이 신경쓰입니다. 분란 조장은 신전만으로도 충분하니까요.";
+		next;
+		mes "[미리암]";
+		mes "아버지가 또 다른 계획을 가지고 잘못된 길을 가려한다면 막아야겠죠.";
+		npctalk "미리암: 아버지가 또 다른 계획을 가지고 잘못된 길을 가려한다면 막아야겠죠.";
+		next;
+		mes "[미리암]";
+		mes "우선 남은 고용인들에게서 정보를 얻어볼까요?";
+		npctalk "미리암: 우선 남은 고용인들에게서 정보를 얻어볼까요?";
+		next;
+		mes "[미리암]";
+		mes "제가 저 남자 고용인에게 가보겠습니다. 모험가님은 다른 고용인을 찾아봐주세요.";
+		npctalk "미리암: 제가 저 남자 고용인에게 가보겠습니다. 모험가님은 다른 고용인을 찾아봐주세요.";
+		close2;
+		cutin "",255;
+		npctalk "그럼 저는 저쪽 고용인에게 가보겠습니다.";
+		if ('adv_step == 2) {
+			'adv_step = 3;
+			npcwalkto 136,46;
+		}
+		end;
+	}
+	if ('adv_step == 3) {
+		npctalk "미리암: 다른 고용인을 찾아보십시오.";
+		end;
+	}
+	if ('adv_step == 4) {
+		'adv_step = 5;
+
+		.@extra01$ = instance_npcname("별장 고용인#extra01");
+		.@extra02$ = instance_npcname("별장 고용인#extra02");
+		.@rh01$ = instance_npcname("별장의 하트헌터#rh01");
+		.@rh02$ = instance_npcname("별장의 하트헌터#rh02");
+
+		npctalk "미리암: 역시 신관으로 위장한 하트헌터겠지요?";
+		sleep 2000;
+		emotion ET_SURPRISE, getnpcid(0,"미리암#miriam01");
+		emotion ET_SURPRISE, getnpcid(0,"별장 고용인#extra02");
+		mapannounce 'map_adv$, "누군가의 외침: 어이쿠야! 왜 이러세요! 살려주세요!", bc_map, 0xFF99;
+		sleep 1000;
+		npctalk "미리암: 지금 비명소리가! 무슨 일이 일어나는 거지?";
+		sleep 1000;
+		mapannounce 'map_adv$, "꺄아아악-!", bc_map, 0xFF99;
+		sleep 1000;
+		npctalk "미리암: 아이라!!";
+		sleep 2500;
+		npctalk "미리암: 무슨 일이 생겼나 봅니다. 아이라에게 가보겠습니다.";
+		sleep 2500;
+		npctalk "한스: 아가씨! 저도 데리고 가주세요!", .@extra02$;
+		sleep 2500;
+		npctalk "미리암: 그럼 제가 아이라와 다른 분들도 안전한지 보고 오겠습니다.";
+		sleep 2500;
+		npctalk "미리암: 모험가님은 먼저 진입하십시오. 한스 씨, 같이 가시죠.";
+		sleep 2500;
+		disablenpc .@extra01$;
+		disablenpc .@extra02$;
+		disablenpc instance_npcname("미리암#miriam01");
+		enablenpc .@rh01$;
+		enablenpc .@rh02$;
+		sleep 1000;
+		npctalk "어이, 우리 구면이지?", .@rh01$;
+		npctalk "늑대마을에선 동료라고 속아줘서 고마웠어. 친구.", .@rh02$;
+		sleep 2500;
+		disablenpc .@rh01$;
+		disablenpc .@rh02$;
+		donpcevent instance_npcname("adv_extra_02") + "::OnStart";
+		'adv_step = 6;
+		end;
+	}
+}
+
+1@adv,133,43,6	duplicate(dummy_disabled_instance_npc)	별장의 하트헌터#rh01	EP18_MD_HEARTHUNTER_R
+1@adv,135,41,7	duplicate(dummy_disabled_instance_npc)	별장의 하트헌터#rh02	EP18_MD_HEARTHUNTER_R
+
+1@adv,100,24,4	script	별장 고용인#extra01	4_F_SHABBY,{
+	if ('adv_step == 3) {
+		mes "[별장 고용인]";
+		mes "처음 뵙는 분이신데, 누구시죠?";
+		mes "어르신 손님인가요?";
+		next;
+		select("아말 님은 어디 계시죠?");
+		mes "[별장 고용인]";
+		mes "예배당에 계시지 않을까요?";
+		mes "항상 이 곳에 오시면 예배당부터 찾으셨으니까 ….";
+		next;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 별장에 예배당이 있어요?";
+		mes "[별장 고용인]";
+		mes "예. 아무래도 신실한 분이시라 저택 안쪽에 예배당을 만들어두셨더라고요.";
+		next;
+		select("다른 사람들은?");
+		mes "[별장 고용인]";
+		mes "대부분 갑자기 해고되었습니다.";
+		mes "저도 조금 전에 나가라는 소리를 들었는데 이게 일을 그만두라는 것인지 ….";
+		next;
+		mes "[별장 고용인]";
+		mes "분위기가 너무 사나워서 물어보지도 못했네요.";
+		mes "예배당은 중앙 계단으로 올라가셔서 연회장을 지나면 가실 수 있어요.";
+		mes "그럼 볼일 보셔요.";
+		'adv_step = 4;
+		close;
+	}
+	mes "[별장 고용인]";
+	mes "아말 님은 예배당을 가셨어요.";
+	mes "중앙 계단으로 올라가서 연회장을 지나면 예배당이 나와요.";
+	close;
+}
+
+1@adv,138,49,3	script	별장 고용인#extra02	4_M_MIDDLE,{
+	if ('adv_step < 4) {
+		mes "미리암이 조사하기로 한 인물이다. 다른 사람을 더 찾아보자.";
+		close;
+	}
+	npctalk "한스: 별장 분위기가 심상치 않아요. 수행 사제 분들이 전부 무장을 하고 계셨어요.";
+	end;
+}
+
+1@adv,1,1,5	script	adv_extra_02	-1,{
+	end;
+OnStart:
+	.@label$ = instance_npcname("adv_extra_02") + "::OnMobDead";
+	monster 'map_adv$,133,43,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,135,41,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	end;
+OnMobDead:
+	if ('adv_step != 6)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_extra_02") + "::OnMobDead") < 1) {
+		'adv_step = 7;
+		enablenpc instance_npcname("아이라#aira02");
+		enablenpc instance_npcname("안나#anna01");
+		enablenpc instance_npcname("한스#hans01");
+		enablenpc instance_npcname("미리암#miriam02");
+	}
+	end;
+}
+
+1@adv,124,17,7	script	미리암#miriam02	EP18_NPC_MIRIAM,{
+	if ('adv_step < 10) {
+		if (is_party_leader() == false || 'adv_step != 7) {
+			npctalk "미리암: 여긴 제게 맡기고 2층의 하트헌터를 처리해 주세요.";
+			end;
+		}
+		setpcblock PCBLOCK_NPC, true;
+
+		'adv_step = 8;
+		.@miriam$ = instance_npcname("미리암#miriam02");
+		.@label$ = .@miriam$ + "::OnMobDead";
+
+		enablenpc instance_npcname("별장의 하트헌터#rh03");
+		enablenpc instance_npcname("별장의 하트헌터#rh04");
+		enablenpc instance_npcname("별장의 하트헌터#rh05");
+		enablenpc instance_npcname("별장의 하트헌터#rh06");
+		enablenpc instance_npcname("별장의 하트헌터#rh07");
+
+		npctalk "하... 분명히 다 비우라고 하지 않았어? 쥐새끼들이 왜 아직도 있지?", instance_npcname("별장의 하트헌터#rh05");
+		sleep2 2500;
+		npctalk "미리암: 모험가님, 이쪽은 제가 알아서 하겠습니다.";
+		sleep2 2500;
+		npctalk "미리암: 모험가님은 로비를 돌파해 주십시오. 나눠서 처리하죠.";
+		sleep2 2000;
+		npctalk "그렇게 둘 순 없지. 계단 막아!", instance_npcname("별장의 하트헌터#rh05");
+		unitwalk getnpcid(0,instance_npcname("별장의 하트헌터#rh03")), 124,40, .@miriam$ + "::OnMove1";
+		unitwalk getnpcid(0,instance_npcname("별장의 하트헌터#rh07")), 124,41, .@miriam$ + "::OnMove2";
+		sleep2 3000;
+		npctalk "미리암: 모험가님! 저들을 막아주세요! 여긴 제가 처리하고 모두 피신시킵니다!";
+		setpcblock PCBLOCK_NPC, false;
+		'adv_step = 9;
+
+		monster 'map_adv$,125,42,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,121,42,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,126,43,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,121,43,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+
+		monster 'map_adv$,123,63,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,124,63,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,122,65,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+
+		monster 'map_adv$,102,64,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,102,64,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+
+		monster 'map_adv$,144,65,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,146,66,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		monster 'map_adv$,146,63,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+		end;
+	}
+	if (is_party_leader() == false)
+		end;
+	if ('adv_step == 10)	// npc is walking
+		end;
+	if ('adv_step == 11) {
+		'adv_step = 12;
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "미리암: 문이 잠겨있군요. 나눠서 찾아볼까요?";
+		sleep2 2500;
+		npctalk "미리암: 제가 오른쪽 복도로 가보겠습니다. 모험가님은 왼쪽을 수색해 주세요.";
+		setpcblock PCBLOCK_NPC, false;
+		sleep 2500;
+		unitwalk getnpcid(0), 131,97, instance_npcname("미리암#miriam02") + "::OnRight";
+		donpcevent instance_npcname("adv_key_left") + "::OnStart";
+		end;
+	}
+	end;
+
+OnMove1:
+	disablenpc instance_npcname("별장의 하트헌터#rh03");
+	end;
+OnMove2:
+	disablenpc instance_npcname("별장의 하트헌터#rh07");
+	end;
+OnMiddle1:
+	unitwalk getnpcid(0), 124,77, instance_npcname("미리암#miriam02") + "::OnMiddle2";
+	end;
+OnMiddle2:
+	unitwalk getnpcid(0), 124,97, instance_npcname("미리암#miriam02") + "::OnMiddle3";
+	end;
+OnMiddle3:
+	'adv_step = 11;
+	end;
+OnRight:
+	disablenpc instance_npcname("미리암#miriam02");
+	enablenpc instance_npcname("미리암#miriam03");
+	end;
+OnMobDead:
+	if ('adv_step != 9)
+		end;
+	if (mobcount('map_adv$, instance_npcname("미리암#miriam02") + "::OnMobDead") < 1) {
+		'adv_step = 10;
+		disablenpc instance_npcname("별장의 하트헌터#rh04");
+		disablenpc instance_npcname("별장의 하트헌터#rh05");
+		disablenpc instance_npcname("별장의 하트헌터#rh06");
+		disablenpc instance_npcname("아이라#aira02");
+		disablenpc instance_npcname("안나#anna01");
+		disablenpc instance_npcname("한스#hans01");
+		unitwalk getnpcid(0), 124,47, instance_npcname("미리암#miriam02") + "::OnMiddle1";
+	}
+	end;
+}
+
+1@adv,119,19,5	script	별장의 하트헌터#rh04	EP18_MD_HEARTHUNTER_R,{
+	npctalk "용기가 가상하군!";
+	end;
+}
+1@adv,124,21,3	script	별장의 하트헌터#rh05	EP18_MD_HEARTHUNTER_R,{
+	npctalk "혼자 감당하겠다고?";
+	end;
+}
+1@adv,130,18,3	script	별장의 하트헌터#rh06	EP18_MD_HEARTHUNTER_R,{
+	npctalk "도망칠 수 없다!";
+	end;
+}
+
+1@adv,114,14,5	duplicate(dummy_npc)	별장의 하트헌터#rh03	EP18_MD_HEARTHUNTER_R,3,5
+1@adv,133,14,3	duplicate(dummy_npc)	별장의 하트헌터#rh07	EP18_MD_HEARTHUNTER_R,2,5
+
+1@adv,122,14,7	duplicate(dummy_disabled_instance_npc)	아이라#aira02	4_M_BRZ_JACI
+1@adv,124,14,6	duplicate(dummy_disabled_instance_npc)	안나#anna01	4_F_SHABBY
+1@adv,126,14,1	duplicate(dummy_disabled_instance_npc)	한스#hans01	4_M_MIDDLE
+
+
+1@adv,1,1,5	script	adv_key_left	-1,{
+	end;
+OnStart:
+	.@label$ = instance_npcname("adv_key_left") + "::OnMobDead";
+	monster 'map_adv$,69,117,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,65,118,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,65,118,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,68,140,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,68,140,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,69,141,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+
+	monster 'map_adv$,66,159,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,68,160,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,68,160,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,65,182,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,67,182,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	end;
+OnMobDead:
+	if ('adv_step != 12)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_key_left") + "::OnMobDead") < 1) {
+		'adv_step = 13;
+		enablenpc instance_npcname("은색 열쇠#key01");
+	}
+	end;
+}
+
+1@adv,67,182,3	script	은색 열쇠#key01	4_POINT_WHITE,{
+	if ('adv_step != 13)
+		end;
+	progressbar "4D4DFF",2;
+	if ('adv_step != 13)
+		end;
+	'adv_step = 14;
+	disablenpc instance_npcname("은색 열쇠#key01");
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 작은 은색 열쇠를 찾았다.";
+	end;
+}
+
+1@adv,63,142,0	script	잠긴 문#key01	4_POINT_WHITE,{
+	if ('adv_step < 14) {
+		mes "굳게 잠긴 문.";
+		mes "은색 열쇠 구멍이 있다.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 은색 열쇠가 필요해.";
+		close;
+	}
+	progressbar "4D4DFF",2;
+	if ('adv_step != 14)
+		end;
+	'adv_step = 15;
+	disablenpc instance_npcname("잠긴 문#key01");
+	enablenpc instance_npcname("#left_room_in");
+	enablenpc instance_npcname("#left_room_out");
+	donpcevent instance_npcname("adv_get_key02") + "::OnStart";
+	end;
+}
+
+1@adv,1,1,5	script	adv_get_key02	-1,{
+	end;
+OnStart:
+	.@label$ = instance_npcname("adv_get_key02") + "::OnMobDead";
+	monster 'map_adv$,40,142,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,40,141,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,39,143,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	end;
+OnMobDead:
+	if ('adv_step != 15)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_get_key02") + "::OnMobDead") < 1) {
+		'adv_step = 16;
+		enablenpc instance_npcname("금색 열쇠#key02");
+	}
+	end;
+}
+
+1@adv,29,157,3	script	금색 열쇠#key02	4_POINT_WHITE,{
+	if ('adv_step != 16)
+		end;
+	progressbar "4D4DFF",2;
+	if ('adv_step != 16)
+		end;
+	'adv_step = 17;
+	disablenpc instance_npcname("금색 열쇠#key02");
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 작은 금색 열쇠를 찾았다.";
+	end;
+}
+
+
+
+
+1@adv,182,144,4	script	미리암#miriam03	EP18_NPC_MIRIAM,{
+	if ('adv_step < 17)
+		end;
+	if ('adv_step == 17) {
+		mes "[미리암]";
+		mes "열쇠를 찾아오셨군요.";
+		mes "안쪽에 저택의 고용인 몇 명이 갇혀있는 모양입니다.";
+		mes "제가 망을 보고 있을테니 들어가보세요.";
+		cutin "ep18_miriam_01.png",0;
+		close2;
+		cutin "",255;
+		if ('adv_step == 17) {
+			'adv_step = 18;
+			enablenpc instance_npcname("#right_room_in");
+			enablenpc instance_npcname("#right_room_out");
+			enablenpc instance_npcname("저택 고용인#ex21");
+			enablenpc instance_npcname("저택 고용인#ex22");
+			enablenpc instance_npcname("저택 고용인#ex23");
+		}
+		end;
+	}
+	if ('adv_step == 18) {
+		npctalk "미리암: 입구는 제가 지킬테니 방 안쪽을 수색해 주세요.";
+		end;
+	}
+	if ('adv_step == 19) {
+		mes "[미리암]";
+		mes "이대로 두면 이 분들 모두 입막음을 당하겠군요.";
+		mes "하트 헌터들이 더 몰려오기 전에 저 분들을 대피시켜야 합니다.";
+		cutin "ep18_miriam_01.png",0;
+		next;
+		npctalk "미리암: 안에 계신 분들. 제가 호위하겠습니다. 나가시죠.";
+		mes "[미리암]";
+		mes "그럼 예배당 조사는 모험가님께 맡기겠습니다.";
+		mes "저 분들은 제가 모시고 대피 시킬게요.";
+		mes "부탁드립니다.";
+		npctalk "미리암: 안에 계신 분들. 제가 호위하겠습니다. 나가시죠.";
+		close2;
+		cutin "",255;
+		disablenpc instance_npcname("미리암#miriam03");
+		end;
+	}
+	end;
+}
+
+1@adv,202,145,3	script	저택 고용인#ex21	4_F_SHABBY,{
+	npctalk "저택 고용인: 여기서 나가게 해주세요..";
+	end;
+}
+
+1@adv,204,143,3	script	저택 고용인#ex22	4_M_RACHMAN2,{
+	if ('adv_step == 18) {
+		mes "[저택 고용인]";
+		mes "증거인멸이라니. 살인멸구라니!";
+		mes "갑자기 해고 당해서 항의하러 왔다가 예배당 좀 훔쳐본 게 그리 큰 잘못인가요?";
+		next;
+		mes "[저택 고용인]";
+		mes "당신! 우리 구해주러 온 거지요?";
+		mes "밖에서 들린 목소리, 미리암 아가씨 맞지요?";
+		next;
+		mes "[저택 고용인]";
+		mes "예배당을 조사해요! 굉장히 수상하니까!";
+		mes "뭐? 연회장 문이 닫혔어?";
+		next;
+		mes "[저택 고용인]";
+		mes "여기 쪽문 열쇠요.";
+		mes "이 방 나가서 바로 앞에 보이는 문을 열 수 있지요.";
+		mes "평소에 음식을 나르던 문이라 예비 열쇠를 가지고 있지요.";
+		next;
+		npctalk "저택 고용인: 여기서 나가게 해주세요..", instance_npcname("저택 고용인#ex21");
+		mes "[저택 고용인]";
+		mes "그리고 살려주세요.";
+		mes "우린 아무런 죄가 없어요.";
+		next;
+		mes "^4d4dff예비 열쇠^000000를 얻었다.";
+		if ('adv_step == 18)
+			'adv_step = 19;
+		close;
+	}
+	npctalk "저택 고용인: 예비 열쇠로 문을 열 수 있어요.";
+	end;
+}
+
+1@adv,210,140,6	script	저택 고용인#ex23	4_M_RACHMAN1,{
+	npctalk "저택 고용인: 설마 우리 다 죽는 건가요?";
+	end;
+}
+
+1@adv,173,142,0	script	잠긴 문#key03	4_POINT_YELLOW,{
+	if ('adv_step < 19) {
+		mes "굳게 잠긴 문.";
+		mes "작은 열쇠 구멍이 있다.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 열쇠가 필요해.";
+		close;
+	}
+	progressbar "4D4DFF",2;
+	if ('adv_step != 19)
+		end;
+	'adv_step = 20;
+	disablenpc instance_npcname("잠긴 문#key03");
+	enablenpc instance_npcname("#center_room_in");
+	enablenpc instance_npcname("#center_room_out");
+	donpcevent instance_npcname("adv_center") + "::OnStart";
+	end;
+}
+
+1@adv,1,1,5	script	adv_center	-1,{
+	end;
+OnStart:
+	.@label$ = instance_npcname("adv_center") + "::OnMobDead";
+	monster 'map_adv$,156,133,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,156,132,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,155,132,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,156,154,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,155,156,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,124,124,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,123,124,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,122,126,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,126,182,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,122,182,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,126,183,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	end;
+OnMobDead:
+	if ('adv_step != 20)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_center") + "::OnMobDead") < 1) {
+		'adv_step = 21;
+	}
+	end;
+}
+
+1@adv,124,210,0	script	화려한 문#door01	4_POINT_WHITE,{
+	if ('adv_step < 20)
+		end;
+	if ('adv_step < 22) {
+		mes "문이 열리지 맞는다. 강한 마력이 분출 각고 있는 느침이다.";
+		close;
+	}
+	warp 'map_adv$,124,217;
+	end;
+}
+
+// custom coordinates
+1@adv,124,213,0	warp	#garden_out	1,1,1@adv,124,206
+
+1@adv,115,208,0	script	화려한 기사#Knight_left	4_POINT_WHITE,{
+	if ('adv_step < 20)
+		end;
+	specialeffect EF_BLUELINE;
+	specialeffect EF_SPELLBREAKER, AREA, instance_npcname("화려한 문#door01");
+	if ('adv_step != 21)
+		end;
+	if ('Knight_left == 1)
+		npctalk "화려한 기사의 마력은 이미 사라졌다.";
+	else {
+		'Knight_left = 1;
+		if ('Knight_left == 1 && 'Knight_righ == 1) {
+			'adv_step = 22;
+			enablenpc instance_npcname("#flower01");
+			enablenpc instance_npcname("#flower02");
+			enablenpc instance_npcname("#flower03");
+			enablenpc instance_npcname("#flower04");
+			enablenpc instance_npcname("#flower05");
+		}
+	}
+	end;
+}
+
+1@adv,131,208,0	script	화려한 기사#Knight_righ	4_POINT_WHITE,{
+	if ('adv_step < 20)
+		end;
+	specialeffect EF_BLUELINE;
+	specialeffect EF_SPELLBREAKER, AREA, instance_npcname("화려한 문#door01");
+	if ('adv_step != 21)
+		end;
+	if ('Knight_righ == 1)
+		npctalk "화려한 기사의 마력은 이미 사라졌다.";
+	else {
+		'Knight_righ = 1;
+		if ('Knight_left == 1 && 'Knight_righ == 1) {
+			'adv_step = 22;
+			enablenpc instance_npcname("#flower01");
+			enablenpc instance_npcname("#flower02");
+			enablenpc instance_npcname("#flower03");
+			enablenpc instance_npcname("#flower04");
+			enablenpc instance_npcname("#flower05");
+		}
+	}
+	end;
+}
+
+
+// Garden
+1@adv,159,221,3	script	#flower01	4_POINT_WHITE,{
+	if ('adv_step < 22)
+		end;
+	mes "꽃 모양의 장치가 있다.";
+	next;
+	if (select( "조작 한다.", "그만 둔다." ) == 1) {
+		progressbar "4D4DFF",5;
+		.@num = atoi( replacestr( strnpcinfo(2), "flower0", "" ) );
+		if ('flower_num == .@num) {
+			if ('adv_step != 22)
+				end;
+			'adv_step = 23;
+			specialeffect EF_BLUELINE;
+			specialeffect EF_SCREEN_QUAKE;
+			disablenpc instance_npcname( strnpcinfo(0) );
+			enablenpc instance_npcname("슐랑#shulang01");
+			end;
+		}
+		mes "아무런 일도 일어나지 않았다.";
+		close;
+	}
+	end;
+}
+
+1@adv,153,255,3	duplicate(#flower01)	#flower02	4_POINT_WHITE
+1@adv,129,238,3	duplicate(#flower01)	#flower05	4_POINT_WHITE
+1@adv,89,225,3	duplicate(#flower01)	#flower03	4_POINT_WHITE
+1@adv,88,244,3	duplicate(#flower01)	#flower04	4_POINT_WHITE
+
+1@adv,124,267,3	script	우아한 문#door02	4_POINT_WHITE,{
+	if ('adv_step < 22)
+		end;
+	if ('adv_step == 22) {
+		mes "우아한 연 주역이 새겨진 분이 있다. 할 수 없는 마력이 느껴진다.";
+		close;
+	}
+	// (23 or more)
+	warp 'map_adv$,124,274;
+	end;
+}
+
+// Middle boss
+1@adv,124,301,3	script	슐랑#shulang01	4_EP18_SHULANG,{
+	if ('adv_step != 23)
+		end;
+	if (is_party_leader() == false) {
+		mes "[슐랑]";
+		mes "모험가…. 혼자 오지 않았군?";
+		mes "너희들의 대장은 누구지?";
+		close;
+	}
+	cutin "ep18_shulang.png",2;
+	mes "[슐랑]";
+	mes "여기까지 오다니, 보통이 아니로군.";
+	mes "놓치기 아까운 인재야.";
+	mes "우리와 손 잡는 게 어떤가?";
+	cutin "ep18_shulang.png",2;
+	next;
+	select( "미친 소리 작작 좀", "내게 무슨 이득이 있지?" );
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 내게 무슨 이득이 있지?";
+	mes "[슐랑]";
+	mes "모험가들은 항상 강함을 추구하지.";
+	mes "네가 원하는 강함, 우리가 줄 수 있다.";
+	next;
+	select("왜 내게 그런 제안을 하나?");
+	mes "[슐랑]";
+	mes "고지식한 녀석보다 말이 잘 통할 거 같거든.";
+	next;
+	select("고지식한 녀석이라면 아스 말인가?");
+	mes "[슐랑]";
+	mes "그런 이름이었지. 고리타분한 성격만 고치면 더 강해질 수 있는 인재.";
+	mes "안타깝지만 기회는 떠났고.";
+	next;
+	mes "[슐랑]";
+	mes "보아하니 너도 쉽게 넘어올 것 같진 않군.";
+	mes "어쩔 수 없지.";
+	close2;
+	cutin "",255;
+	if ('adv_step != 23)
+		end;
+	'adv_step = 24;
+	npctalk "슐랑: 더이상 진입할 수 없다.";
+	sleep 2500;
+	npctalk "슐랑: 대업을 위해 너희는 여기에서 죽어줘야겠다.";
+	sleep 2500;
+	disablenpc instance_npcname("슐랑#shulang01");
+	donpcevent instance_npcname("adv_middle_boss") + "::OnStart";
+	end;
+}
+
+1@adv,1,1,5	script	adv_middle_boss	-1,{
+	end;
+OnStart:
+	if ('adv_step != 24)
+		end;
+	.@label$ = instance_npcname("adv_middle_boss") + "::OnMobDead";
+	monster 'map_adv$,124,301,"변절자 슐랑",21314,1, .@label$;	// EP18_MD_SCHULANG
+	monster 'map_adv$,120,303,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	monster 'map_adv$,127,303,"별장의 하트헌터",21312,1, .@label$;	// EP18_MD_HEARTHUNTER_R
+	end;
+OnMobDead:
+	if ('adv_step != 24)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_middle_boss") + "::OnMobDead") < 1) {
+		'adv_step = 25;
+		enablenpc instance_npcname("#boss_in");
+		enablenpc instance_npcname("신관 유스#jus01");
+		enablenpc instance_npcname("일루시온 바곳#bagot01");
+	}
+	end;
+}
+
+
+
+
+
+
+
+1@adv,123,355,5	duplicate(dummy_npc)	미리암#miriam04	EP18_NPC_MIRIAM
+1@adv,124,357,3	duplicate(dummy_npc)	여신의 형상#demigod	4_EP18_DEMIFREYA
+1@adv,122,351,3	duplicate(dummy_npc)	슐랑#shulang02	4_EP18_SHULANG
+
+// Boss room 1
+1@adv,127,356,3	script	일루시온 바곳#bagot01	4_EP18_BAGOT,{
+	npctalk "재밌네.";
+	end;
+}
+
+1@adv,121,355,5	script	신관 유스#jus01	4_M_RACHOLD,{
+	if ('adv_step != 25)
+		end;
+	if (is_party_leader() == false) {
+		mes "[유스]";
+		mes "내게 손대지마라! 불경한 것!";
+		npctalk "유스: 내게 손대지마라! 불경한 것!", instance_npcname("신관 유스#jus01");
+		close;
+	}
+	.@bagot01$ = instance_npcname("일루시온 바곳#bagot01");
+	.@demigod$ = instance_npcname("여신의 형상#demigod");
+	.@shulang02$ = instance_npcname("슐랑#shulang02");
+	.@miriam04$ = instance_npcname("미리암#miriam04");
+
+	mes "[유스]";
+	mes "가증스러운 이교도가 기어코 여기까지 왔구나.";
+	mes "하지만 상관없다.";
+	mes "너희는 곧 지고한 신성 앞에 무릎 꿇게 될 것이다.";
+	npctalk "유스:가증스러운 이교도가 기어코 여기까지 왔구나. 하지만 너희는 곧 지고한 신성 앞에 무릎 꿇게 될 것이다.";
+	next;
+	mes "[유스]";
+	mes "오만한 오딘의 종자들에게 기적을 보여주지.";
+	mes "바곳, 의식을 계속 진행하게.";
+	npctalk "유스:오만한 오딘의 종자들에게 기적을 보여주지. 바곳, 의식을 계속 진행하게.";
+	next;
+	mes "[유스]";
+	mes "저들이 친히 프레이야 님의 기적을 목도하고 증인이 되어주겠지.";
+	mes "신의 발 아래 엎드려 신의 종으로 다시 태어나라!";
+	npctalk "유스:저들이 친히 프레이야 님의 기적을 목도하고 증인이 되어주겠지. 신의 발 아래 엎드려 신의 종으로 다시 태어나라!";
+	next;
+	cutin "ep18_bagot_01.png",2;
+	mes "[바곳]";
+	mes "어우…. 영감. 하여간 말투 하고는.";
+	mes "그래도 약속한 게 있으니 내가 지켜주는 겁니다. 아시겠어요?";
+	npctalk "바곳:어우…. 영감. 하여간 말투 하고는. 그래도 약속한 게 있으니 내가 지켜주는 겁니다. 아시겠어요?", .@bagot01$;
+	next;
+	cutin "ep18_bagot_03.png",2;
+	mes "[바곳]";
+	mes "일단, 거기 모험가?";
+	mes "내 작품 감상 좀 하시겠어요?";
+	mes "아름답게 빚은 도자기를 가마에서 꺼낼때의 기분을 너도 같이 느껴봐요.";
+	npctalk "바곳:거기 모험가? 내 작품 감상 좀 하시겠어요? 아름답게 빚은 도자기를 가마에서 꺼낼때의 기분을 너도 같이 느껴봐요.", .@bagot01$;
+	close2;
+
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "바곳: 바곳은 실험 결과를 바로 확인할 수 있어서 아주 기분이 좋죠~", .@bagot01$;
+	specialeffect EF_DQ9_CHARGE3, AREA, .@demigod$;
+	sleep2 500;
+	specialeffect EF_SCREEN_QUAKE, AREA, .@demigod$;
+	sleep2 1000;
+	specialeffect EF_BEGINSPELL_YB, AREA, .@demigod$;
+	// enablenpc .@demigod$;
+	cloakoffnpc .@demigod$;	// cloakoffnpc to display effect on rAthena
+	setpcblock PCBLOCK_NPC, false;
+
+	cutin "ep18_bagot_02.png",2;
+	mes "[바곳]";
+	mes "짜잔~ 생체공학과 마도의 정수가 바로 여기!";
+	mes "신의 모습으로 강림하죠~!";
+	npctalk "바곳:짜잔~ 생체공학과 마도의 정수가 바로 여기! 신의 모습으로 강림하죠~!", .@bagot01$;
+	next;
+	mes "[바곳]";
+	mes "신이 강림할 그릇 정도는 이 바곳에겐 일도 아니랍니다~!";
+	npctalk "바곳:신이 강림할 그릇 정도는 이 바곳에겐 일도 아니랍니다~!", .@bagot01$;
+	next;
+	cutin "ep18_demifreya.png",1;
+	mes "[신이라 불린 존재]";
+	mes " ….";
+	npctalk "신이라 불린 존재:….", .@demigod$;
+	next;
+	mes "[유스]";
+	mes "오.. .오오...! 프레이야시여 …! 정녕 저의 신이옵니까!";
+	npctalk "유스:오.. .오오...! 프레이야시여 …! 정녕 저의 신이옵니까!";
+	next;
+	mes "^4d4dff신이라 불린 것은 마치 교황이 성장한 모습처럼 보였다.^000000";
+	mes "^4d4dff여신 프레이야가 현세에 강림하기 위한 그릇. 그 본질적인 용도.^000000";
+	next;
+	select("설마 교황을?!");
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 설마 교황을?!";
+	cutin "ep18_bagot_02.png",2;
+	mes "[바곳]";
+	mes "무슨 그런 무서운 소리를?";
+	mes "바곳이 아무리 못되먹었다지만 교황을 손댈 정도로 간이 크진 않거든!";
+	npctalk "바곳:무슨 그런 무서운 소리를? 바곳이 아무리 못되먹었다지만 교황을 손댈 정도로 간이 크진 않거든!", .@bagot01$;
+	next;
+	cutin "ep18_bagot_03.png",2;
+	mes "[바곳]";
+	mes "내 역작에 무슨 실례되는 말이에요?!";
+	mes "신이 강림할 그릇마저 빚어내는 내 실력이 무서워?!";
+	npctalk "바곳:내 역작에 무슨 실례되는 말이에요?! 신이 강림할 그릇마저 빚어내는 내 실력이 무서워?!", .@bagot01$;
+	next;
+	cutin "",255;
+	mes "[유스]";
+	mes "오.. .오오...! 프레이야시여 …! 정녕 저의 신이옵니까!";
+	npctalk "유스:오.. .오오...! 프레이야시여 …! 정녕 저의 신이옵니까!";
+	next;
+	cutin "ep18_bagot_02.png",2;
+	mes "[바곳]";
+	mes "내 말 안 듣네. 그럼 뭐 아니겠어? 아~! 그래 기적. 기적을 보여주면 되겠죠~?";
+	npctalk "바곳:또 내 말 안 듣네. 그럼 뭐 아니겠어? 아~! 그래 기적. 기적을 보여주면 되겠죠~?", .@bagot01$;
+	next;
+	cutin "ep18_demifreya.png",1;
+	mes "[신이라 불린 존재]";
+	mes " ….";
+	npctalk "신이라 불린 존재:….", .@demigod$;
+	next;
+	mes "[신이라 불린 존재]";
+	mes "….";
+	npctalk "신이라 불린 존재:….", .@demigod$;
+	sleep2 500;
+	mes "…허…";
+	npctalk "신이라 불린 존재:…허…", .@demigod$;
+	sleep2 1000;
+	mes "…한…";
+	npctalk "신이라 불린 존재:…한…", .@demigod$;
+	sleep2 1000;
+	mes "…다…";
+	npctalk "신이라 불린 존재:…다…", .@demigod$;
+	close2;
+	cutin "",255;
+
+	setpcblock PCBLOCK_NPC, true;
+	sleep2 1500;
+	specialeffect EF_DQ9_CHARGE3, AREA, .@shulang02$;
+	sleep2 1000;
+	specialeffect EF_BEGINSPELL_YB, AREA, .@shulang02$;
+	cloakoffnpc .@shulang02$;
+	sleep2 2500;
+	npctalk "바곳: 뭐야? 얘 살려낸 거야? 신관님 보셨죠? 바곳이 뭐랬어. 된다고 했잖아요.", .@bagot01$;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+
+	cutin "ep18_bagot_03.png",2;
+	mes "[바곳]";
+	mes "여기 그 증거가 있네. 기적~☆";
+	mes "신관 영감. 약속대로 당신의 신을 불러줬으니 ^4d4dff심장^000000은 내가 가지고 갈게.";
+	npctalk "바곳:여기 그 증거가 있네. 기적~☆ 신관 영감. 약속대로 당신의 신을 불러줬으니 심장은 내가 가지고 갈게.", .@bagot01$;
+	next;
+	mes "[바곳]";
+	mes "부디 만수무강 하시길 바라~";
+	npctalk "바곳:부디 만수무강 하시길 바라~", .@bagot01$;
+	next;
+	cutin "",255;
+	mes "[유스]";
+	mes "미천한 종이 신의 기적을 목도하였나이다!";
+	npctalk "유스: 미천한 종이 신의 기적을 목도하였나이다!";
+	next;
+	cutin "ep18_bagot_01.png",2;
+	mes "[바곳]";
+	mes "사람 말 안 듣는구나?";
+	mes "슐랑은 좀 아깝긴 하지만, 역할이 여기까지인 거지.";
+	npctalk "바곳:사람 말 안 듣는구나? 슐랑은 좀 아깝긴 하지만, 역할이 여기까지인 거지.", .@bagot01$;
+	next;
+	cutin "ep18_bagot_03.png",2;
+	mes "[바곳]";
+	mes "그 동안 ^4d4dff강한 맛^000000에 살게 해줬으니 약속은 지킨거다.";
+	mes "난 갈게요~. 그럼 모험가? 안녕~!";
+	npctalk "바곳:그 동안 '강한 맛'에 살게 해줬으니 약속은 지킨거다. 그럼 모험가? 안녕~!", .@bagot01$;
+	close2;
+	cutin "",255;
+
+	setpcblock PCBLOCK_NPC, true;
+	disablenpc .@bagot01$;
+	npctalk "유스: 오오... 프레이야시여! 저 간악한 것에게 천벌을 내려주소서!";
+	sleep2 2000;
+	npctalk "신이라 불린 존재: 끼기긱 키키킥 끼기긱", .@demigod$;
+	sleep2 2000;
+	npctalk "유스: …? 나의 신이여. 미천한 종은 성언을 들을 준비가 되었나이다….";
+	sleep2 2000;
+	npctalk "신이라 불린 존재: 끼기기기 아아아아아!!!!", .@demigod$;
+	sleep2 2500;
+	npctalk "유스: … 신성이 느껴지지 않아 …? 어째서 …?";
+	sleep2 2500;
+	specialeffect EF_BEGINSPELL5, AREA, .@demigod$;
+	sleep2 1000;
+	enablenpc .@miriam04$;
+	specialeffect EF_GUARD, AREA, .@miriam04$;
+	sleep2 1000;
+	npctalk "유스: 신께서 어찌 나를 공격하시지?";
+	sleep2 2000;
+	npctalk "미리암: 이럴때가 아니에요. 피하셔야 합니다! 저건 신이 아니에요!", .@miriam04$;
+	sleep2 2500;
+	npctalk "신이라 불린 존재: 키키킥 키키킥 ….", .@demigod$;
+	sleep2 2500;
+	npctalk "유스: 그럴리가 없다! 미리암, 비켜라!";
+	sleep2 2500;
+	npctalk "미리암: 방금 죽을뻔 하셨습니다. 똑바로 보세요. 저것의 어디가 신입니까?", .@miriam04$;
+	sleep2 1000;
+	npctalk "미리암: 안정이 필요하신 것 같네요. 아버지.", .@miriam04$;
+	sleep2 2000;
+	npctalk "유스: 이럴 수는 없다! 놔라 미리암!";
+	sleep2 1500;
+	npctalk "신이라 불린 존재: 끼긱...? 끼기기 꺄하하하하하하하!!!", .@demigod$;
+	sleep2 1000;
+	specialeffect EF_BEGINSPELL5, AREA, .@demigod$;
+	sleep2 700;
+	specialeffect EF_BEGINSPELL_YB, AREA, .@demigod$;
+	npctalk "미리암: 무슨 짓이야!!!!", .@miriam04$;
+	sleep2 800;
+	disablenpc instance_npcname("신관 유스#jus01");
+	disablenpc .@miriam04$;
+	sleep2 800;
+	npctalk "신이라 불린 존재: 꺄르륵!!!", .@demigod$;
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+
+	specialeffect EF_BEGINSPELL_YB, AREA, .@demigod$;
+	mapannounce 'map_adv$, "예배당이 봉쇄되었습니다.", bc_map, 0x4D4DFF;
+	disablenpc .@demigod$;
+	disablenpc .@shulang02$;
+	donpcevent instance_npcname("adv_demigod_boss") + "::OnStart";
+	end;
+}
+
+
+1@adv,1,1,5	script	adv_demigod_boss	-1,{
+	end;
+OnStart:
+	if ('adv_step != 25)
+		end;
+	'adv_step = 26;
+	.@label$ = instance_npcname("adv_demigod_boss") + "::OnMobDead";
+	monster 'map_adv$,122,351,"되살려진 슐랑",21314,1, .@label$;	// EP18_MD_SCHULANG
+	monster 'map_adv$,124,356,"거짓된 신",21315,1, .@label$;	// EP18_MD_DEMI_FREYJA
+	// unitskillusepos $@mobid[0],"NPC_CANE_OF_EVIL_EYE",3,123,349;
+	// unitskillusepos $@mobid[0],"NPC_CANE_OF_EVIL_EYE",3,133,338;
+	// unitskillusepos $@mobid[0],"NPC_CANE_OF_EVIL_EYE",3,113,338;
+	// unitskillusepos $@mobid[0],"NPC_CANE_OF_EVIL_EYE",3,123,330;
+	end;
+OnMobDead:
+	if ('adv_step != 26)
+		end;
+	if (mobcount('map_adv$, instance_npcname("adv_demigod_boss") + "::OnMobDead") < 1) {
+		'adv_step = 27;
+		mapannounce 'map_adv$, "유스의 외침: 신이시여--!!!", bc_map, 0xFF0000;
+		enablenpc instance_npcname("#boss_out");
+		enablenpc instance_npcname("미리암#miriam05");
+		enablenpc instance_npcname("신관 유스#jus02");
+	}
+	end;
+}
+
+
+// Boss room out
+1@adv,121,321,6	script	미리암#miriam05	EP18_NPC_MIRIAM,{
+	if ('adv_step < 27)
+		end;
+	if ('adv_step == 27) {
+		mes "[미리암]";
+		mes "그 녀석이 무슨 수를 쓴 거죠? 갑자기 밖으로 튕겨나가버렸어요.";
+		mes "무사하십니까?";
+		cutin "ep18_miriam_03.png",0;
+		next;
+		cutin "",255;
+		mes "[유스]";
+		mes "신을 어찌한 것이냐!!!!!!!!!!";
+		mes "그리할 수 없다!";
+		mes "내가 이 날을 기다리며 무슨 짓을 해왔는데 …!";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "그걸 아직도 신이라 믿습니까?";
+		mes "설마 저것을 말합니까?";
+		next;
+		select("엠브리오가 떨어졌어.");
+		mes "[미리암]";
+		mes "과연….";
+		mes "교황 성하의 성장한 모습과 비슷했지만 ….";
+		mes "엠브리오가 떨어진 것을 보면 바곳이라는 자가 만들어낸 무언가겠지요.";
+		next;
+		select("분석은 이쪽에서 할게.");
+		cutin "",255;
+		mes "[유스]";
+		mes "미리암! 저 자를 잡아라!";
+		mes "신벌을 받아야 할 자다!";
+		mes "신성을 모독한 자다!";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "그럴리가요.";
+		mes "모험가님은 우리를 도와주기 위해 여기 계신 겁니다.";
+		next;
+		mes "[미리암]";
+		mes "신전에서도 그러더니.";
+		mes "그들이 기어코 아버지의 눈도 멀게 한 모양이군요.";
+		next;
+		cutin "",255;
+		mes "[유스]";
+		mes "너는 지금 내가 그들의 속임수에 넘어갔다 말하려는 게냐!";
+		next;
+		cutin "ep18_miriam_03.png",0;
+		mes "[미리암]";
+		mes "일단 이 곳에서 나가시죠.";
+		mes "자세한 건 그 엠브리오를 조사한 다음에 이야기 해도 됩니다.";
+		next;
+		mes "[미리암]";
+		mes "모험가님, 조사가 끝난 다음에 성체의 정체가 밝혀지면 알려주세요.";
+		mes "아버지는 제가 모시겠습니다.";
+		if (ep18_1_main == 54) {
+			ep18_1_main = 55;
+			changequest 18083,18084;
+		}
+		if ('adv_step == 27) {
+			'adv_step = 28;
+			enablenpc instance_npcname("#boss_out");
+		}
+		close3;
+	}
+	cutin "ep18_miriam_01.png",0;
+	mes "[미리암]";
+	mes "아버님은 제가 모실테니 여기에서 나가도록 하죠.";
+	close3;
+}
+
+1@adv,119,320,6	script	신관 유스#jus02	4_M_RACHOLD,{
+	npctalk "유스: … 이럴 …. 이럴 수는 없다 ….";
+	end;
+}

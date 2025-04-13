@@ -1,0 +1,388 @@
+
+Header:
+  Type: QUEST_DB
+  Version: 2
+
+Body:
+  - Id: 3493
+    Title: "자라드와의 대화"
+  - Id: 3494
+    Title: "로히와의 대화"
+  - Id: 3495
+    Title: "저진과의 대화"
+  - Id: 3496
+    Title: "스쿠아인과의 대화"
+  - Id: 3497
+    Title: "세나도와의 대화"
+  - Id: 3498
+    Title: "제이퍼와의 대화"
+  - Id: 3499
+    Title: "시로안과의 대화"
+  - Id: 3500
+    Title: "이시라와의 대화"
+  - Id: 3501
+    Title: "지나와의 대화"
+  - Id: 3502
+    Title: "하리와의 대화"
+  - Id: 3503
+    Title: "분위기 살피기"
+  - Id: 3504
+    Title: "분위기 살피기 - 대기"
+    TimeLimit: 4h
+  - Id: 3505
+    Title: "주녹에게 보고"
+  - Id: 5932
+    Title: "학대 받는 아이"
+  - Id: 5933
+    Title: "사업계획 발표회"
+  - Id: 5934
+    Title: "채집 교육(1)"
+  - Id: 5935
+    Title: "채집 교육(2)"
+  - Id: 5936
+    Title: "채집 교육(3)"
+  - Id: 5937
+    Title: "[대기]플라워룸의 업무"
+    TimeLimit: 4h
+  - Id: 5938
+    Title: "하프플라워 채집"
+  - Id: 5939
+    Title: "하프플라워 채집"
+  - Id: 5940
+    Title: "하프플라워 채집"
+  - Id: 5941
+    Title: "하프플라워 채집"
+  - Id: 8681
+    Title: "교국으로 (1)"
+  - Id: 8682
+    Title: "교국으로 (2)"
+  - Id: 8683
+    Title: "싸움을 말려주세요"
+  - Id: 8684
+    Title: "일단락은 되었는데"
+  - Id: 8685
+    Title: "신전에서 감지된 수상한 움직임"
+  - Id: 8686
+    Title: "신전의 침입자"
+  - Id: 8687
+    Title: "쳐부쉈는데?"
+  - Id: 8688
+    Title: "오늘도 감사한 일용할 양식"
+  - Id: 8689
+    Title: "오늘의 일용할 양식 - 대기"
+    TimeLimit: 4h
+  - Id: 8690
+    Title: "오늘도 감사한 일용할 양식"
+  - Id: 8691
+    Title: "정수용 성물 (1)"
+  - Id: 8692
+    Title: "정수용 성물 (2)"
+  - Id: 8693
+    Title: "정수용 성물 (3)"
+  - Id: 8694
+    Title: "깨끗한 물 조달 - 대기"
+    TimeLimit: 4h
+  - Id: 8695
+    Title: "깨끗한 물 조달 (1)"
+  - Id: 8696
+    Title: "깨끗한 물 조달 (2)"
+  - Id: 8697
+    Title: "깨끗한 물 조달 (3)"
+  - Id: 8698
+    Title: "때늦은 이주"
+  - Id: 8699
+    Title: "도시를 나가는 첫 발"
+  - Id: 8700
+    Title: "반도 못 왔는데"
+  - Id: 8701
+    Title: "처음 보는 풍경"
+  - Id: 8702
+    Title: "화산재 냄새"
+  - Id: 8703
+    Title: "쉬엄쉬엄 가는 길"
+  - Id: 8718
+    Title: "친구의 안부"
+  - Id: 11696
+    Title: "니르엔의 부탁"
+  - Id: 11697
+    Title: "니르엔의 부탁"
+  - Id: 11698
+    Title: "니르엔의 부탁"
+  - Id: 11699
+    Title: "니르엔의 부탁"
+  - Id: 11700
+    Title: "니르엔의 부탁"
+  - Id: 11701
+    Title: "니르엔의 부탁"
+  - Id: 11702
+    Title: "니르엔의 부탁"
+  - Id: 11703
+    Title: "니르엔의 부탁"
+  - Id: 11704
+    Title: "니르엔의 부탁"
+  - Id: 11705
+    Title: "회색의 아이들"
+  - Id: 11706
+    Title: "회색의 아이들"
+  - Id: 11707
+    Title: "회색의 아이들"
+  - Id: 11708
+    Title: "회색의 아이들"
+  - Id: 11709
+    Title: "회색의 아이들"
+  - Id: 11710
+    Title: "회색의 아이들"
+  - Id: 11711
+    Title: "회색의 아이들"
+  - Id: 11712
+    Title: "회색의 아이들"
+  - Id: 11713
+    Title: "회색의 아이들"
+  - Id: 11714
+    Title: "회색의 아이들"
+  - Id: 11715
+    Title: "회색의 아이들"
+  - Id: 11716
+    Title: "회색의 아이들"
+  - Id: 11717
+    Title: "회색의 아이들"
+  - Id: 11718
+    Title: "회색의 아이들"
+  - Id: 11719
+    Title: "회색의 아이들"
+  - Id: 11720
+    Title: "회색의 아이들"
+  - Id: 11721
+    Title: "회색의 아이들"
+  - Id: 11722
+    Title: "회색의 아이들"
+  - Id: 11723
+    Title: "회색의 아이들"
+  - Id: 11724
+    Title: "회색의 아이들"
+  - Id: 11725
+    Title: "오즈의 미로와 행상인"
+  - Id: 11726
+    Title: "오즈의 미로와 행상인"
+  - Id: 11727
+    Title: "오즈의 미로와 행상인"
+  - Id: 11728
+    Title: "오즈의 미로와 행상인"
+  - Id: 11729
+    Title: "오즈의 미로와 행상인"
+  - Id: 11730
+    Title: "오즈의 미로와 행상인"
+    Targets:
+      - Id: 1
+        Location: oz_dun01
+        Count: 10
+  - Id: 11731
+    Title: "오즈의 미로와 행상인"
+  - Id: 11732
+    Title: "오즈의 미로와 행상인"
+  - Id: 11733
+    Title: "오즈의 미로와 행상인"
+  - Id: 11734
+    Title: "오즈의 미로와 행상인"
+  - Id: 11735
+    Title: "오즈의 미로와 행상인"
+  - Id: 11736
+    Title: "오즈의 미로 1층 (170lv)"
+    Targets:
+      - Mob: EP18_ASH_TOAD
+        Count: 20
+  - Id: 11737
+    Title: "오즈의 미로 1층-대기"
+    TimeLimit: 4h
+  - Id: 11738
+    Title: "오즈의 미로 2층 (200lv)"
+    Targets:
+      - Mob: EP18_HOT_MOLAR
+        Count: 20
+  - Id: 11739
+    Title: "오즈의 미로 2층-대기"
+    TimeLimit: 4h
+  - Id: 12520
+    Title: "기만의 별장"
+  - Id: 12521
+    Title: "기만의 별장 상급"
+  - Id: 12522
+    Title: "대기: 헌집 증후군"
+    TimeLimit: 4h
+  - Id: 12531
+    Title: "미래의 총관후보"
+  - Id: 12532
+    Title: "상단의 고난"
+  - Id: 12533
+    Title: "숨은 조력자"
+  - Id: 12534
+    Title: "실종된 카밀"
+  - Id: 12535
+    Title: "총관의 결정"
+  - Id: 12536
+    Title: "흩어진 짐 (북쪽)"
+  - Id: 12537
+    Title: "흩어진 짐 (서쪽)"
+  - Id: 12538
+    Title: "흩어진 짐 (동쪽)"
+  - Id: 12539
+    Title: "흩어진 짐 (남쪽)"
+  - Id: 16548
+    Title: "잠이 오지 않아요"
+    Targets:
+      - Mob: EP18_FIREWIND_KITE
+        Count: 30
+  - Id: 16549
+    Title: "잠이 오지 않아요"
+    Targets:
+      - Mob: EP18_FIREWIND_KITE
+        Count: 30
+  - Id: 16550
+    Title: "잠이 오지 않아요-대기"
+    TimeLimit: 4h
+  - Id: 16551
+    Title: "디나르의 이야기"
+  - Id: 16552
+    Title: "아미라의 이야기"
+  - Id: 16553
+    Title: "샤니나 할머니의 이야기"
+  - Id: 16554
+    Title: "이야기를 모아 주세요"
+  - Id: 16555
+    Title: "디나르의 이야기"
+  - Id: 16556
+    Title: "아미라의 이야기"
+  - Id: 16557
+    Title: "샤니나 할머니의 이야기"
+  - Id: 16558
+    Title: "이야기를 모아 주세요"
+  - Id: 16559
+    Title: "이야기를 모아 주세요-대기"
+    TimeLimit: 4h
+  - Id: 16560
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16561
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16562
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16563
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16564
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16565
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16566
+    Title: "여기는 그곳이 아니에요"
+  - Id: 16567
+    Title: "회색늑대 숲의 대회의"
+  - Id: 16568
+    Title: "각자의 의견"
+  - Id: 16569
+    Title: "각자의 의견"
+  - Id: 16570
+    Title: "각자의 의견"
+  - Id: 16571
+    Title: "각자의 의견"
+  - Id: 16572
+    Title: "회색늑대 숲의 대회의"
+  - Id: 16573
+    Title: "무기의 출처"
+  - Id: 16574
+    Title: "무기의 출처"
+  - Id: 16575
+    Title: "무기의 출처"
+  - Id: 16576
+    Title: "무기의 출처"
+  - Id: 16577
+    Title: "무기의 출처"
+  - Id: 16578
+    Title: "무기의 출처"
+  - Id: 16579
+    Title: "무기의 출처"
+  - Id: 16580
+    Title: "무기의 출처"
+  - Id: 16581
+    Title: "어린이들도 알고 있다"
+  - Id: 16582
+    Title: "어린이들도 알고 있다"
+  - Id: 16583
+    Title: "어린이들도 알고 있다"
+  - Id: 16584
+    Title: "노동의 대가"
+  - Id: 16585
+    Title: "노동의 대가"
+  - Id: 17504
+    Title: "나의 집은 어디인가"
+  - Id: 17505
+    Title: "나의 집은 어디인가"
+  - Id: 17506
+    Title: "나의 집은 어디인가"
+  - Id: 17507
+    Title: "나의 집은 어디인가"
+  - Id: 17508
+    Title: "물자 부족"
+    Drops:
+      - Mob: EP18_GREY_WOLF
+        Item: Ep18_Very_Ddan_Crystal
+        Rate: 5000
+  - Id: 17509
+    Title: "대기: 물자 부족"
+    TimeLimit: 4h
+  - Id: 17510
+    Title: "세상에 나쁜 짐승은 없다"
+  - Id: 17511
+    Title: "세상에 나쁜 짐승은 없다"
+  - Id: 17512
+    Title: "세상에 나쁜 짐승은 없다"
+  - Id: 17513
+    Title: "뜻밖의 양치기"
+  - Id: 17514
+    Title: "뜻밖의 양치기"
+    Targets:
+      - Mob: EP18_ASHRING
+        Count: 20
+  - Id: 17515
+    Title: "뜻밖의 양치기"
+  - Id: 17516
+    Title: "대기: 뜻밖의 양치기"
+    TimeLimit: 4h
+  - Id: 17517
+    Title: "반란군"
+  - Id: 17518
+    Title: "반란군"
+  - Id: 17519
+    Title: "반란군"
+  - Id: 17520
+    Title: "양 속의 늑대"
+  - Id: 17521
+    Title: "대화가 필요할 때"
+  - Id: 17522
+    Title: "변절자 청소"
+  - Id: 17523
+    Title: "성소 정화"
+  - Id: 17524
+    Title: "변절자 청소"
+  - Id: 17525
+    Title: "대화가 필요할 때"
+  - Id: 17526
+    Title: "성소 정화"
+  - Id: 17527
+    Title: "대기: 소탕 작전"
+    TimeLimit: 4h
+  - Id: 18082
+    Title: "대회의 참석 자격"
+  - Id: 18083
+    Title: "대신관의 별장 조사"
+  - Id: 18084
+    Title: "진상 조사"
+  - Id: 18085
+    Title: "기도의 방향"
+  - Id: 18086
+    Title: "회색늑대 숲을 더 안전하게"
+    Targets:
+      - Id: 1
+        Location: gw_fild01
+        Count: 30
+  - Id: 18087
+    Title: "회색늑대 숲을 더 안전하게-대기"
+    TimeLimit: 4h

@@ -1,0 +1,37 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: INSTANCE_DB
+  Version: 2
+
+Body:
+  - Id: 200
+    Name: "Bagot Laboratory"
+    Enter:
+      Map: 1@jorlab
+      X: 57
+      Y: 45
+  - Id: 201
+    Name: "Confused Snake's Nest"
+    Enter:
+      Map: 1@jorchs
+      X: 272
+      Y: 20
+  - Id: 202
+    Name: "Iwin Patrol"
+    Enter:
+      Map: 1@iwp
+      X: 380
+      Y: 229
+  - Id: 203
+    Name: "Airship Destruction"
+    Enter:
+      Map: 1@whl
+      X: 32
+      Y: 53
+  - Id: 204
+    Name: "Simulation Battle"
+    Enter:
+      Map: 1@jorlab
+      X: 57
+      Y: 45

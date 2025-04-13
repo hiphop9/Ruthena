@@ -1,28 +1,7 @@
 //===== rAthena Script ======================================= 
 //= BattleGround System - Common NPCs
 //===== By: ================================================== 
-//= ????, L0ne_W0lf
-//===== Current Version: ===================================== 
-//= 1.5
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= Battleground NPCs:
-//= - Generals and Aides
-//= - Battleground Warper
-//= - Kafra and Repairman.
-//= - GM Management NPC
-//= - Badge Exchanger (Tierra and Flavius)
-//===== Additional Comments: ================================= 
-//= 1.0 First Version.
-//= 1.1 Updated several NPCs to Official.
-//= 1.2 Updated Repairman NPC
-//= 1.3 Optimized "Erundek" NPC. [Euphy]
-//= 1.4 Added GM management function. [Euphy]
-//= 1.5 Added VIP features and created a reward function. [Euphy]
-//============================================================
-
+//한글번역 스카이러브
 // Generals
 //============================================================
 bat_room,161,158,3	script	Gen. Guillaume's Aide#01	419,{ end; }
@@ -236,19 +215,25 @@ bat_room,148,150,5	script	Teleporter#Battlefield	124,{
 	end;
 }
 
--	script	Maroll Battle Recruiter::BatRecruit	728,{
-	mes "[Maroll Battle Recruiter]";
-	mes "Good day, adventurer.";
-	mes "I'm a knight from a far country called Maroll Kingdom.";
+-	script	마롤 전장 모병관::BatRecruit	728,{
+	mes "[마롤 전장 모병관]";
+	mes "안녕하십니까 모험가시여.";
+	mes "저는 저 멀리 먼 마롤왕국 출신의";
+	mes "기사입니다.";
 	next;
-	mes "[Maroll Battle Recruiter]";
-	mes "The two princes of the kingdom are now battling for the throne of Maroll, and are in need of experienced soldiers like you.";
-	mes "How would you like to lend your power to one of the princes in the Maroll Kingdom?";
+	mes "[마롤 전장 모병관]";
+	mes "두명의 왕자가 마롤의 왕위계승건으로";
+	mes "전투의 장을 벌이게 되어, 당신과 같은";
+	mes "경험 많은 모험가를 상대로 용병을";
+	mes "모집하고 있습니다.";
+	mes "한 번 당신의 그 힘을 우리 마롤에";
+	mes "빌려주시지 않겠습니까?";
 	next;
-	switch(select("Join:Don't Join")) {
+	switch(select("전장에 참여한다.:참여하지 않는다.")) {
 	case 1:
-		mes "[Maroll Battle Recruiter]";
-		mes "May the war god bless you.";
+		mes "[마롤 전장 모병관]";
+		mes "전투와 용기의 신의 가호가 언제나";
+		mes "당신과 함께하기를.";
 		close2;
 		getmapxy(.@mapname$,.@x,.@y,BL_NPC);
 		if (.@mapname$ == "prontera")
@@ -272,20 +257,21 @@ bat_room,148,150,5	script	Teleporter#Battlefield	124,{
 		warp "bat_room",154,150;
 		break;
 	case 2:
-		mes "[Maroll Battle Recruiter]";
-		mes "I'll always be stationed here for more soldiers. Feel free to come back whenever you're interested.";
+		mes "[마롤 전장 모병관]";
+		mes "저는 항상 이 곳에서 대기하고 있으니,";
+		mes "관심이 생긴다면 다시 찾아와 주십시오.";
 		close;
 	}
 	end;
 }
 
-prontera,123,83,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit1	728
-moc_ruins,75,162,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit2	728
-aldebaran,146,109,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit3	728
-geffen,109,66,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit4	728
-payon,189,105,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit5	728
-lighthalzen,153,86,5	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit6	728
-rachel,149,138,3	duplicate(BatRecruit)	Maroll Battle Recruiter::BatRecruit7	728
+prontera,123,83,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit1	728
+moc_ruins,75,162,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit2	728
+aldebaran,146,109,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit3	728
+geffen,109,66,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit4	728
+payon,189,105,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit5	728
+lighthalzen,153,86,5	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit6	728
+rachel,149,138,3	duplicate(BatRecruit)	마롤 전장 모병관::BatRecruit7	728
 
 // Additional warps
 // Empty

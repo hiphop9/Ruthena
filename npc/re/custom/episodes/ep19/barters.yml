@@ -1,0 +1,9 @@
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Footer:
+  Imports:
+  # - Path: npc/re/custom/ep19/korean/npc/merchants/barters.yml
+  - Path: npc/re/custom/ep19/english/npc/merchants/barters.yml

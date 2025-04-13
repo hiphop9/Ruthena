@@ -15,6 +15,7 @@
 #include <common/strlib.hpp> //safeprint
 #include <common/timer.hpp> //difftick
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "account.hpp"
 #include "ipban.hpp" //ipban_check
@@ -59,11 +60,17 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	}
 
 	if( login_config.group_id_to_connect >= 0 && sd->group_id != login_config.group_id_to_connect ) {
-		ShowStatus("Connection refused: the required group id for connection is %d (account: %s, group: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("연결 거부됨: 연결에 필요한 그룹 ID는 %d입니다. (계정명: %s, 그룹번호: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
+		else
+			ShowStatus("Connection refused: the required group id for connection is %d (account: %s, group: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	} else if( login_config.min_group_id_to_connect >= 0 && login_config.group_id_to_connect == -1 && sd->group_id < login_config.min_group_id_to_connect ) {
-		ShowStatus("Connection refused: the minimum group id required for connection is %d (account: %s, group: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("연결 거부됨: %d의 연결을 위해 최소 그룹ID가 필요합니다. (계정명: %s, 그룹번호: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
+		else
+			ShowStatus("Connection refused: the minimum group id required for connection is %d (account: %s, group: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	}
@@ -75,7 +82,10 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 
 	if( server_num == 0 )
 	{// if no char-server, don't send void list of servers, just disconnect the player with proper message
-		ShowStatus("Connection refused: there is no char-server online (account: %s).\n", sd->userid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("연결 거부됨: 케릭터 서버가 온라인이 아닙니다. (계정명: %s).\n", sd->userid);
+		else
+			ShowStatus("Connection refused: there is no char-server online (account: %s).\n", sd->userid);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	}
@@ -88,7 +98,10 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 			if( data->char_server > -1 )
 			{// Request char servers to kick this account out. [Skotlex]
 				uint8 buf[6];
-				ShowNotice("User '%s' is already online - Rejected.\n", sd->userid);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowNotice("사용자 '%s'님은 이미 온라인 상태입니다. - 거부되었습니다.\n", sd->userid);
+				else			
+					ShowNotice("User '%s' is already online - Rejected.\n", sd->userid);
 				WBUFW(buf,0) = 0x2734;
 				WBUFL(buf,2) = sd->account_id;
 				logchrif_sendallwos(-1, buf, 6);
@@ -109,7 +122,10 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	}
 
 	login_log(ip, sd->userid, 100, "login ok");
-	ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("%s 계정이 연결 되었습니다.\n", sd->userid);
+	else
+		ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
 
 	PACKET_AC_ACCEPT_LOGIN* p = reinterpret_cast<PACKET_AC_ACCEPT_LOGIN*>( packet_buffer );
 
@@ -145,6 +161,13 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 #endif
 
 #ifdef DEBUG
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug(
+			"클라이언트 (%d %d.%d.%d.%d)을(를) IP %d.%d.%d.%d 및 포트 "
+			"%hu을 이용하여 케릭터 서버 %s으(로) 전송합니다.\n",
+			sd->account_id, CONVIP(ip), 
+			CONVIP((subnet_char_ip) ? subnet_char_ip : ch_server[i].ip), ch_server[i].port,ch_server[i].name);
+	else
 		ShowDebug(
 			"Sending the client (%d %d.%d.%d.%d) to char-server %s with ip %d.%d.%d.%d and port "
 			"%hu\n",
@@ -272,8 +295,10 @@ static bool logclif_parse_reqauth_raw( int fd, login_session_data& sd ){
 
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
-
-	ShowStatus( "Request for connection of %s (ip: %s)\n", sd.userid, ip );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus( "%s의 연결 요청 (IP 주소: %s)\n", sd.userid, ip );
+	else 
+		ShowStatus("Request for connection of %s (ip: %s)\n", sd.userid, ip);
 	safestrncpy( sd.passwd, p->password, PASSWD_LENGTH );
 
 	if( login_config.use_md5_passwds ){
@@ -338,7 +363,11 @@ static bool logclif_parse_reqauth_sso( int fd, login_session_data& sd ){
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
 
-	ShowStatus( "Request for connection (SSO mode) of %s (ip: %s)\n", sd.userid, ip );
+	if (strcasecmp(MessageLang, "KOR") == 0) {
+	    ShowStatus("SSO 모드로 %s의 연결 요청 (IP 주소: %s)\n", sd.userid, ip);
+	} else {
+	    ShowStatus("Request for connection (SSO mode) of %s (ip: %s)\n", sd.userid, ip);
+	}
 	// Shinryo: For the time being, just use token as password.
 	safestrncpy( sd.passwd, p->token, token_length + 1 );
 
@@ -418,7 +447,10 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 		new_ = RFIFOW(fd,84);
 		RFIFOSKIP(fd,86);
 
-		ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("케릭터 서버 '%s' @ %u.%u.%u.%u:%u의 연결 요청 (계정명: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
+		else	
+			ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
 		sprintf(message, "charserver - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 		login_log(session[fd]->client_addr, sd->userid, 100, message);
 
@@ -429,7 +461,10 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 			sd->account_id < ARRAYLENGTH(ch_server) &&
 			!session_isValid(ch_server[sd->account_id].fd) )
 		{
-			ShowStatus("Connection of the char-server '%s' accepted.\n", server_name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("케릭터 서버 '%s'의 연결요청이 승인되었습니다.\n", server_name);
+			else	
+				ShowStatus("Connection of the char-server '%s' accepted.\n", server_name);
 			safestrncpy(ch_server[sd->account_id].name, server_name, sizeof(ch_server[sd->account_id].name));
 			ch_server[sd->account_id].fd = fd;
 			ch_server[sd->account_id].ip = server_ip;
@@ -450,7 +485,10 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 		}
 		else
 		{
-			ShowNotice("Connection of the char-server '%s' REFUSED.\n", server_name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("케릭터 서버 '%s'에 대한 연결이 거부되었습니다.\n", server_name);
+			else
+				ShowNotice("Connection of the char-server '%s' REFUSED.\n", server_name);
 			WFIFOHEAD(fd,3);
 			WFIFOW(fd,0) = 0x2711;
 			WFIFOB(fd,2) = 3;
@@ -512,7 +550,10 @@ int logclif_parse(int fd) {
 
 	if( session[fd]->flag.eof )
 	{
-		ShowInfo("Closed connection from '" CL_WHITE "%s" CL_RESET "'.\n", ip);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("'" CL_WHITE "%s" CL_RESET "'으(로)부터의 연결이 종료되었습니다.\n", ip);
+		else
+			ShowInfo("Closed connection from '" CL_WHITE "%s" CL_RESET "'.\n", ip);
 		do_close(fd);
 		return 0;
 	}
@@ -521,7 +562,10 @@ int logclif_parse(int fd) {
 		// Perform ip-ban check
 		if( login_config.ipban && ipban_check(ipl) )
 		{
-			ShowStatus("Connection refused: IP isn't authorised (deny/allow, ip: %s).\n", ip);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus("연결 거부됨: IP가 허가되지 않았습니다. (거부/허용, ip: %s).\n", ip);
+			else
+				ShowStatus("Connection refused: IP isn't authorised (deny/allow, ip: %s).\n", ip);
 			login_log(ipl, "unknown", -3, "ip banned");
 
 			logclif_auth_failed( fd, 3 ); // 3 = Rejected from Server

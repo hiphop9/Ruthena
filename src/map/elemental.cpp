@@ -16,6 +16,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "clif.hpp"
@@ -44,7 +45,10 @@ int elemental_create(map_session_data *sd, int class_, unsigned int lifetime) {
 
 	std::shared_ptr<s_elemental_db> db = elemental_db.find(class_);
 	if (db == nullptr) {
-		ShowError("elemental_create: Unknown elemental class %d.\n", class_);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("elemental_create: %d은(는) 알 수 없는 엘리멘탈 클래스입니다..\n", class_);
+		else
+			ShowError("elemental_create: Unknown elemental class %d.\n", class_);
 		return 0;
 	}
 
@@ -676,7 +680,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if( !( ( id >= ELEMENTALID_AGNI_S && id <= ELEMENTALID_TERA_L ) || ( id >= ELEMENTALID_DILUVIO && id <= ELEMENTALID_SERPENS ) ) ) {
-		this->invalidWarning( node["Id"], "Invalid Id %d (valid ranges: %d-%d and %d-%d).\n", id, ELEMENTALID_AGNI_S, ELEMENTALID_TERA_L, ELEMENTALID_DILUVIO, ELEMENTALID_SERPENS );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning( node["Id"], "%d은(는) 잘못된 id입니다. (유효한 범위: %d-%d 그리고 %d-%d).\n", id, ELEMENTALID_AGNI_S, ELEMENTALID_TERA_L, ELEMENTALID_DILUVIO, ELEMENTALID_SERPENS );
+		else
+			this->invalidWarning( node["Id"], "Invalid Id %d (valid ranges: %d-%d and %d-%d).\n", id, ELEMENTALID_AGNI_S, ELEMENTALID_TERA_L, ELEMENTALID_DILUVIO, ELEMENTALID_SERPENS );
 		return 0;
 	}
 
@@ -699,7 +706,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\"은(는) 최대 문자열 크기 %d자를 초과합니다. 재설정됨...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -714,7 +724,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 
 		if (name.size() > NAME_LENGTH) {
-			this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Name"], "Name \"%s\"은(는) 최대 가능 문자열 %d자를 초과합니다. 재설정됨...\n", name.c_str(), NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), NAME_LENGTH - 1);
 		}
 
 		name.resize(NAME_LENGTH);
@@ -728,7 +741,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (level > MAX_LEVEL) {
-			this->invalidWarning(node["Level"], "Level %d exceeds MAX_LEVEL, capping to %d.\n", level, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Level"], "Level %d은(는) MAX_LEVEL을 초과합니다. %d으(로) 재설정됨.\n", level, MAX_LEVEL);
+			else
+				this->invalidWarning(node["Level"], "Level %d exceeds MAX_LEVEL, capping to %d.\n", level, MAX_LEVEL);
 			level = MAX_LEVEL;
 		}
 
@@ -801,7 +817,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["Defense"], "Invalid defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Defense"], "%d은(는) 잘못된 디펜스입니다. 재설정됨...\n", def);
+			else
+				this->invalidWarning(node["Defense"], "Invalid defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -818,7 +837,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def < DEFTYPE_MIN || def > DEFTYPE_MAX) {
-			this->invalidWarning(node["MagicDefense"], "Invalid magic defense %d, capping...\n", def);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["MagicDefense"], "%d은(는) 잘못된 마법 디펜스입니다. 재설정됨...\n", def);
+			else
+				this->invalidWarning(node["MagicDefense"], "Invalid magic defense %d, capping...\n", def);
 			def = cap_value(def, DEFTYPE_MIN, DEFTYPE_MAX);
 		}
 
@@ -946,7 +968,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(size_constant.c_str(), &constant) || constant < SZ_SMALL || constant > SZ_BIG) {
-			this->invalidWarning(node["Size"], "Invalid size %s, defaulting to Small.\n", size.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Size"], "%s은(는) 잘못된 Size 입니다. 기본값인 Small로 설정합니다.\n", size.c_str());
+			else
+				this->invalidWarning(node["Size"], "Invalid size %s, defaulting to Small.\n", size.c_str());
 			constant = SZ_SMALL;
 		}
 
@@ -963,7 +988,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(race_constant.c_str(), &constant) || !CHK_RACE(constant)) {
-			this->invalidWarning(node["Race"], "Invalid race %s, defaulting to Formless.\n", race.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Race"], "%s은(는) 잘못된 Race입니다. Formless를 기본값으로 합니다..\n", race.c_str());
+			else
+				this->invalidWarning(node["Race"], "Invalid race %s, defaulting to Formless.\n", race.c_str());
 			constant = RC_FORMLESS;
 		}
 
@@ -983,7 +1011,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(ele_constant.c_str(), &constant) || !CHK_ELEMENT(constant)) {
-			this->invalidWarning(node["Element"], "Invalid element %s, defaulting to Neutral.\n", ele.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Element"], "%s은(는) 잘못된 엘레멘트입니다. Neutral을 기본값으로 합니다..\n", ele.c_str());
+			else
+				this->invalidWarning(node["Element"], "Invalid element %s, defaulting to Neutral.\n", ele.c_str());
 			constant = ELE_NEUTRAL;
 		}
 
@@ -997,7 +1028,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (!CHK_ELEMENT_LEVEL(level)) {
-			this->invalidWarning(node["ElementLevel"], "Invalid element level %hu, defaulting to 1.\n", level);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["ElementLevel"], "%hu은(는) 잘못된 ElementLevel입니다. 1을 기본값으로 설정합니다.\n", level);
+			else
+				this->invalidWarning(node["ElementLevel"], "Invalid element level %hu, defaulting to 1.\n", level);
 			level = 1;
 		}
 
@@ -1011,7 +1045,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (speed < MIN_WALK_SPEED || speed > MAX_WALK_SPEED) {
-			this->invalidWarning(node["WalkSpeed"], "Invalid walk speed %hu, capping...\n", speed);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["WalkSpeed"], "%hu은(는) 잘못된 WalkSpeed입니다. 재설정됨...\n", speed);
+			else
+				this->invalidWarning(node["WalkSpeed"], "Invalid walk speed %hu, capping...\n", speed);
 			speed = cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
 		}
 
@@ -1070,7 +1107,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(mode_constant.c_str(), &constant) || constant < EL_SKILLMODE_PASSIVE || constant > EL_SKILLMODE_AGGRESSIVE) {
-				this->invalidWarning(node["Mode"], "Invalid mode %s, skipping.\n", mode_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(node["Mode"], "%s은(는) 잘못된 Mode입니다. 건너뜀.\n", mode_name.c_str());
+				else
+					this->invalidWarning(node["Mode"], "Invalid mode %s, skipping.\n", mode_name.c_str());
 				continue;
 			}
 
@@ -1091,12 +1131,18 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			uint16 skill_id = skill_name2id(skill_name.c_str());
 
 			if (skill_id == 0) {
-				this->invalidWarning(SkillNode["Skill"], "Skipping invalid skill %s for mode %s.\n", skill_name.c_str(), mode_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(SkillNode["Skill"], "%s은(는) Mode %s에 대한 잘못된 스킬이므로 건너뜁니다..\n", skill_name.c_str(), mode_name.c_str());
+				else
+					this->invalidWarning(SkillNode["Skill"], "Skipping invalid skill %s for mode %s.\n", skill_name.c_str(), mode_name.c_str());
 				return 0;
 			}
 
 			if (!SKILL_CHK_ELEM(skill_id)) {
-				this->invalidWarning(SkillNode["Skill"], "Skill %s (%u) is out of the skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, EL_SKILLBASE, EL_SKILLBASE + MAX_ELEMENTALSKILL - 1);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(SkillNode["Skill"], "%s (%u)은(는) 스킬 범위[%u-%u]을(를) 벗어났으므로 건너뜁니다.\n", skill_name.c_str(), skill_id, EL_SKILLBASE, EL_SKILLBASE + MAX_ELEMENTALSKILL - 1);
+				else
+					this->invalidWarning(SkillNode["Skill"], "Skill %s (%u) is out of the skill range [%u-%u], skipping.\n", skill_name.c_str(), skill_id, EL_SKILLBASE, EL_SKILLBASE + MAX_ELEMENTALSKILL - 1);
 				return 0;
 			}
 
@@ -1109,7 +1155,10 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					return 0;
 
 				if (level > skill_get_max(skill_id)) {
-					this->invalidWarning(SkillNode["Level"], "Skill %s's level %hu exceeds max level %hu.\n", skill_name.c_str(), level, skill_get_max(skill_id));
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(SkillNode["Level"], "%s 스킬의 레벨 %hu은(는) 최대 레벨 %hu을 초과합니다.\n", skill_name.c_str(), level, skill_get_max(skill_id));
+					else
+						this->invalidWarning(SkillNode["Level"], "Skill %s's level %hu exceeds max level %hu.\n", skill_name.c_str(), level, skill_get_max(skill_id));
 					return 0;
 				}
 

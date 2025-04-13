@@ -18,6 +18,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "chat.hpp"
@@ -82,7 +83,10 @@ int npc_get_new_npc_id(void) {
 				return npc_id++;// available
 		}
 		// full loop, nothing available
-		ShowFatalError("npc_get_new_npc_id: All ids are taken. Exiting...");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowFatalError("npc_get_new_npc_id: 모든 ID가 사용중입니다. 종료중...");
+		else
+			ShowFatalError("npc_get_new_npc_id: All ids are taken. Exiting...");
 		exit(1);
 	}
 }
@@ -143,7 +147,10 @@ bool StylistDatabase::parseCostNode( std::shared_ptr<s_stylist_entry> entry, boo
 		}
 
 		if( price > MAX_ZENY ){
-			this->invalidWarning( node["Price"], "stylist_parseCostNode: Price %u is too high, capping to MAX_ZENY...\n", price );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Price"], "stylist_parseCostNode: 가격 %u은(는) 너무 비싸서 MAX_ZENY로 재설정합니다...\n", price );
+			else
+				this->invalidWarning( node["Price"], "stylist_parseCostNode: Price %u is too high, capping to MAX_ZENY...\n", price );
 			price = MAX_ZENY;
 		}
 
@@ -164,7 +171,10 @@ bool StylistDatabase::parseCostNode( std::shared_ptr<s_stylist_entry> entry, boo
 		std::shared_ptr<item_data> id = item_db.search_aegisname( item.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["RequiredItem"], "stylist_parseCostNode: Unknown item \"%s\"...\n", item.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["RequiredItem"], "stylist_parseCostNode: \"%s\"은(는) 알 수 없는 아이템입니다...\n", item.c_str() );
+			else
+				this->invalidWarning( node["RequiredItem"], "stylist_parseCostNode: Unknown item \"%s\"...\n", item.c_str() );
 			return false;
 		}
 
@@ -185,7 +195,10 @@ bool StylistDatabase::parseCostNode( std::shared_ptr<s_stylist_entry> entry, boo
 		std::shared_ptr<item_data> id = item_db.search_aegisname( item.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["RequiredItemBox"], "stylist_parseCostNode: Unknown item \"%s\"...\n", item.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["RequiredItemBox"], "stylist_parseCostNode: \"%s\"은(는) 알 수 없는 아이템입니다...\n", item.c_str() );
+			else
+				this->invalidWarning( node["RequiredItemBox"], "stylist_parseCostNode: Unknown item \"%s\"...\n", item.c_str() );
 			return false;
 		}
 
@@ -221,7 +234,10 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	int64 constant;
 
 	if( !script_get_constant( ( "LOOK_" + look_str ).c_str(), &constant ) ){
-		this->invalidWarning( node["Look"], "stylist_parseBodyNode: Invalid look %s.\n", look_str.c_str() );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node["Look"], "stylist_parseBodyNode: %s은(는) 잘못된 Look입니다..\n", look_str.c_str() );
+		else
+			this->invalidWarning( node["Look"], "stylist_parseBodyNode: Invalid look %s.\n", look_str.c_str() );
 		return 0;
 	}
 
@@ -235,7 +251,10 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		case LOOK_BODY2:
 			break;
 		default:
-			this->invalidWarning( node["Look"], "stylist_parseBodyNode: Unsupported look value \"%s\"...\n", look_str.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Look"], "stylist_parseBodyNode: \"%s\"은(는) 지원하지 않는 Look값입니다...\n", look_str.c_str() );
+			else
+				this->invalidWarning( node["Look"], "stylist_parseBodyNode: Unsupported look value \"%s\"...\n", look_str.c_str() );
 			return 0;
 	}
 
@@ -255,8 +274,11 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			return 0;
 		}
 
-		if( index == 0 ){
-			this->invalidWarning( optionNode["Index"], "stylist_parseBodyNode: Unsupported index value \"%hd\"...\n", index );
+		if( index < 0 ){
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( optionNode["Index"], "stylist_parseBodyNode: \"%hd\"은(는) 지원되지 않는 index 값입니다...\n", index );
+			else
+				this->invalidWarning( optionNode["Index"], "stylist_parseBodyNode: Unsupported index value \"%hd\"...\n", index );
 			return 0;
 		}
 
@@ -289,7 +311,10 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						std::shared_ptr<item_data> id = item_db.search_aegisname( item.c_str() );
 
 						if( id == nullptr ){
-							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: Unknown item \"%s\"...\n", item.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%s\"은(는) 알 수 없는 아이템입니다...\n", item.c_str() );
+							else
+								this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: Unknown item \"%s\"...\n", item.c_str() );
 							return 0;
 						}
 
@@ -301,10 +326,16 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( value < MIN_HAIR_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair style \"%u\" is too low...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 작은 헤어스타일 값입니다..\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair style \"%u\" is too low...\n", value );
 						return 0;
 					}else if( value > MAX_HAIR_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair style \"%u\" is too high...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 높은 헤어스타일 값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair style \"%u\" is too high...\n", value );
 						return 0;
 					}
 					break;
@@ -314,10 +345,16 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( value < MIN_HAIR_COLOR ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair color \"%u\" is too low...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 적은 헤어컬러 값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair color \"%u\" is too low...\n", value );
 						return 0;
 					}else if( value > MAX_HAIR_COLOR ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair color \"%u\" is too high...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 높은 헤어컬러 값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: hair color \"%u\" is too high...\n", value );
 						return 0;
 					}
 					break;
@@ -327,10 +364,16 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( value < MIN_CLOTH_COLOR ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: cloth color \"%u\" is too low...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 적은 옷색상 값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: cloth color \"%u\" is too low...\n", value );
 						return 0;
 					}else if( value > MAX_CLOTH_COLOR ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: cloth color \"%u\" is too high...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 높은 옷색상 값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: cloth color \"%u\" is too high...\n", value );
 						return 0;
 					}
 					break;
@@ -340,10 +383,16 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( value < MIN_BODY_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too low...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 적은 바디 스타일값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too low...\n", value );
 						return 0;
 					}else if( value > MAX_BODY_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too high...\n", value );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: \"%u\"은(는) 너무 높은 바디 스타일값입니다...\n", value );
+						else
+							this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too high...\n", value );
 						return 0;
 					}
 					break;
@@ -418,7 +467,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		uint16 index = mapindex_name2idx( map.c_str(), nullptr );
 
 		if( index == 0 ){
-			this->invalidWarning( node["Map"], "barter_parseBodyNode: Unknown mapname %s, skipping.\n", map.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Map"], "barter_parseBodyNode: %s은(는) 알 수 없는 맵이름이므로 건너뜁니다.\n", map.c_str());
+			else
+				this->invalidWarning( node["Map"], "barter_parseBodyNode: Unknown mapname %s, skipping.\n", map.c_str());
 			return 0;
 		}
 
@@ -448,10 +500,16 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( mapdata == nullptr ){
-			this->invalidWarning( node["X"], "barter_parseBodyNode: Barter NPC is not on a map. Ignoring X coordinate...\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["X"], "barter_parseBodyNode: 물물교환 NPC가 맵에 없습니다. X좌표는 무시됩니다...\n" );
+			else
+				this->invalidWarning( node["X"], "barter_parseBodyNode: Barter NPC is not on a map. Ignoring X coordinate...\n" );
 			x = 0;
 		}else if( x >= mapdata->xs ){
-			this->invalidWarning( node["X"], "barter_parseBodyNode: X coordinate %hu is out of bound %hu...\n", x, mapdata->xs );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["X"], "barter_parseBodyNode: X 좌표 %hu이(가) 경계 %hu을(를) 벗어났습니다...\n", x, mapdata->xs );
+			else
+				this->invalidWarning( node["X"], "barter_parseBodyNode: X coordinate %hu is out of bound %hu...\n", x, mapdata->xs );
 			return 0;
 		}
 
@@ -470,10 +528,16 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( mapdata == nullptr ){
-			this->invalidWarning( node["Y"], "barter_parseBodyNode: Barter NPC is not on a map. Ignoring Y coordinate...\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Y"], "barter_parseBodyNode: 물물교환 NPC가 맵에 없습니다. Y좌표는 무시됩니다....\n" );
+			else
+				this->invalidWarning( node["Y"], "barter_parseBodyNode: Barter NPC is not on a map. Ignoring Y coordinate...\n" );
 			y = 0;
 		}else if( y >= mapdata->ys ){
-			this->invalidWarning( node["Y"], "barter_parseBodyNode: Y coordinate %hu is out of bound %hu...\n", y, mapdata->ys );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Y"], "barter_parseBodyNode: Y 좌표 %hu은(는) 경계 %hu을(를) 벗어났습니다...\n", y, mapdata->ys );
+			else
+				this->invalidWarning( node["Y"], "barter_parseBodyNode: Y coordinate %hu is out of bound %hu...\n", y, mapdata->ys );
 			return 0;
 		}
 
@@ -494,12 +558,18 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		int64 constant;
 
 		if( !script_get_constant( ( "DIR_" + direction_name ).c_str(), &constant ) ){
-			this->invalidWarning( node["Direction"], "barter_parseBodyNode: Unknown direction %s, skipping.\n", direction_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Direction"], "barter_parseBodyNode: %s은(는) 알 수 없는 방향이므로 건너뜁니다..\n", direction_name.c_str() );
+			else
+				this->invalidWarning( node["Direction"], "barter_parseBodyNode: Unknown direction %s, skipping.\n", direction_name.c_str() );
 			return 0;
 		}
 
 		if( constant < DIR_NORTH || constant >= DIR_MAX ){
-			this->invalidWarning( node["Direction"], "barter_parseBodyNode: Invalid direction %s, defaulting to North.\n", direction_name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Direction"], "barter_parseBodyNode: %s은(는) 잘못된 방향이므로 North로 설정합니다.\n", direction_name.c_str() );
+			else
+				this->invalidWarning( node["Direction"], "barter_parseBodyNode: Invalid direction %s, defaulting to North.\n", direction_name.c_str() );
 			constant = DIR_NORTH;
 		}
 
@@ -520,12 +590,18 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		int64 constant;
 
 		if( !script_get_constant( sprite_name.c_str(), &constant ) ){
-			this->invalidWarning( node["Sprite"], "barter_parseBodyNode: Unknown sprite name %s, skipping.\n", sprite_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Sprite"], "barter_parseBodyNode: %s은(는) 알 수 없는 스프라이트 이름이므로 건너뜁니다..\n", sprite_name.c_str());
+			else
+				this->invalidWarning( node["Sprite"], "barter_parseBodyNode: Unknown sprite name %s, skipping.\n", sprite_name.c_str());
 			return 0;
 		}
 
 		if( constant != JT_FAKENPC && !npcdb_checkid( constant ) ){
-			this->invalidWarning( node["Sprite"], "barter_parseBodyNode: Invalid sprite name %s, skipping.\n", sprite_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Sprite"], "barter_parseBodyNode: %s은(는) 잘못된 스프라이트 이름이므로 건너뜁니다.\n", sprite_name.c_str());
+			else
+				this->invalidWarning( node["Sprite"], "barter_parseBodyNode: Invalid sprite name %s, skipping.\n", sprite_name.c_str());
 			return 0;
 		}
 
@@ -566,7 +642,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				std::shared_ptr<item_data> id = item_db.search_aegisname( aegis_name.c_str() );
 
 				if( id == nullptr ){
-					this->invalidWarning( itemNode["Item"], "barter_parseBodyNode: Unknown item %s.\n", aegis_name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning( itemNode["Item"], "barter_parseBodyNode: %s은(는) 알 수 없는 아이템입니다..\n", aegis_name.c_str() );
+					else
+						this->invalidWarning( itemNode["Item"], "barter_parseBodyNode: Unknown item %s.\n", aegis_name.c_str() );
 					return 0;
 				}
 
@@ -597,7 +676,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( zeny > MAX_ZENY ){
-					this->invalidWarning( itemNode["Zeny"], "barter_parseBodyNode: Zeny price %u is above MAX_ZENY (%u), capping...\n", zeny, MAX_ZENY );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning( itemNode["Zeny"], "barter_parseBodyNode: 제니 가격 %u이(가) MAX_ZENY (%u)을(를) 초과하여 재설정됩니다...\n", zeny, MAX_ZENY );
+					else
+						this->invalidWarning( itemNode["Zeny"], "barter_parseBodyNode: Zeny price %u is above MAX_ZENY (%u), capping...\n", zeny, MAX_ZENY );
 					zeny = MAX_ZENY;
 				}
 
@@ -617,7 +699,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( item->requirements.size() >= MAX_BARTER_REQUIREMENTS ){
-						this->invalidWarning( requiredItemNode["Index"], "barter_parseBodyNode: Failed at Index %hu. Too many requirements, Barters support up to %d.\n", requirement_index, MAX_BARTER_REQUIREMENTS );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( requiredItemNode["Index"], "barter_parseBodyNode: Index %hu은(는) 경계를 벗어났습니다. 물물교환은 최대 %d개까지 필요조건 지원합니다.\n", requirement_index, MAX_BARTER_REQUIREMENTS );
+						else
+							this->invalidWarning( requiredItemNode["Index"], "barter_parseBodyNode: Failed at Index %hu. Too many requirements, Barters support up to %d.\n", requirement_index, MAX_BARTER_REQUIREMENTS );
 						return 0;
 					}
 
@@ -643,7 +728,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						std::shared_ptr<item_data> data = item_db.search_aegisname( aegis_name.c_str() );
 
 						if( data == nullptr ){
-							this->invalidWarning( requiredItemNode["Item"], "barter_parseBodyNode: Unknown required item %s.\n", aegis_name.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning( requiredItemNode["Item"], "barter_parseBodyNode: %s은(는) 알 수 없는 필요 아이템입니다.\n", aegis_name.c_str() );
+							else
+								this->invalidWarning( requiredItemNode["Item"], "barter_parseBodyNode: Unknown required item %s.\n", aegis_name.c_str() );
 							return 0;
 						}
 
@@ -658,7 +746,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( amount > MAX_AMOUNT ){
-							this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: Amount %hu is too high, capping to %hu...\n", amount, MAX_AMOUNT );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: 갯수 %hu은(는) 너무 많아 %hu개로 조정됩니다...\n", amount, MAX_AMOUNT );
+							else
+								this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: Amount %hu is too high, capping to %hu...\n", amount, MAX_AMOUNT );
 							amount = MAX_AMOUNT;
 						}
 
@@ -673,7 +764,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						std::shared_ptr<item_data> data = item_db.find( requirement->nameid );
 
 						if( data->flag.no_refine ){
-							this->invalidWarning( requiredItemNode["Refine"], "barter_parseBodyNode: Item %s is not refineable.\n", data->name.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning( requiredItemNode["Refine"], "barter_parseBodyNode: %s은(는) 제련되지 않은 아이템입니다.\n", data->name.c_str() );
+							else
+								this->invalidWarning( requiredItemNode["Refine"], "barter_parseBodyNode: Item %s is not refineable.\n", data->name.c_str() );
 							return 0;
 						}
 
@@ -684,7 +778,10 @@ uint64 BarterDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( refine > MAX_REFINE ){
-							this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: Refine %hd is too high, capping to %d.\n", refine, MAX_REFINE );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+								this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: %hd은(는) 너무 높은 제련도이므로 %d으(로) 조정됩니다.\n", refine, MAX_REFINE );
+							else
+								this->invalidWarning( requiredItemNode["Amount"], "barter_parseBodyNode: Refine %hd is too high, capping to %d.\n", refine, MAX_REFINE );
 							refine = MAX_REFINE;
 						}
 
@@ -718,6 +815,9 @@ void BarterDatabase::loadingFinished(){
 	for( const auto& pair : *this ){
 		if( !battle_config.feature_barter && !battle_config.feature_barter_extended ){
 #ifndef BUILDBOT
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			ShowError( "물물교환 시스템이 활성화되지 않았습니다.\n" );
+		else
 			ShowError( "Barter system is not enabled.\n" );
 #endif
 			return;
@@ -763,7 +863,10 @@ void BarterDatabase::loadingFinished(){
 
 		if( extended && !battle_config.feature_barter_extended ){
 #ifndef BUILDBOT
-			ShowError( "Barter %s uses extended mechanics but this is not enabled.\n", barter->name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				ShowError( "물물교환 %s은(는) 확장 기술을 사용하지만 활성화되지 않았습니다.\n", barter->name.c_str() );
+			else
+				ShowError( "Barter %s uses extended mechanics but this is not enabled.\n", barter->name.c_str() );
 #endif
 			continue;
 		}
@@ -1005,7 +1108,10 @@ bool npc_enable_target(npc_data& nd, uint32 char_id, e_npcv_status flag)
 		map_session_data *sd = map_charid2sd(char_id);
 	
 		if (!sd) {
-			ShowError("npc_enable: Attempted to %s a NPC '%s' on an invalid target %d.\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", nd.name, char_id);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				ShowError("npc_enable: 잘못된 대상 %d에서 NPC '%s'을(를) %s 했습니다.\n", char_id, nd.name, (flag & NPCVIEW_VISIBLE) ? "표시 하려고" : "숨기려고");
+			else
+				ShowError("npc_enable: Attempted to %s a NPC '%s' on an invalid target %d.\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", nd.name, char_id);
 			return false;
 		}
 
@@ -1161,7 +1267,10 @@ int npc_event_dequeue(map_session_data* sd,bool free_script_stack)
 
 	if (!pc_addeventtimer(sd,100,sd->eventqueue[0]))
 	{	//Failed to dequeue, couldn't set a timer.
-		ShowWarning("npc_event_dequeue: event timer is full !\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_event_dequeue: 이벤트 타이머가 꽉찼습니다!\n");
+		else
+			ShowWarning("npc_event_dequeue: event timer is full !\n");
 		return 0;
 	}
 	//Event dequeued successfully, shift other elements.
@@ -1187,7 +1296,10 @@ static int npc_event_export(struct npc_data *nd, int i)
 
 			for (j = 0; j < NPCE_MAX; j++) {
 				if (strcmpi(npc_get_script_event_name(j), lname) == 0) {
-					ShowWarning("npc_event_export: attempting to duplicate a script event in an instance (%s::%s), ignoring\n", nd->name, lname);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_event_export: 인스턴스 (%s :: %s)에서 스크립트 이벤트를 복제하려고합니다. 무시중..\n", nd->name, lname);
+					else			
+						ShowWarning("npc_event_export: attempting to duplicate a script event in an instance (%s::%s), ignoring\n", nd->name, lname);
 					return 0;
 				}
 			}
@@ -1196,7 +1308,10 @@ static int npc_event_export(struct npc_data *nd, int i)
 		// NPC:<name> the prefix uses 4 characters
 		if( !strncasecmp( lname, script_config.onwhisper_event_name, NAME_LENGTH ) && strlen(nd->exname) > ( NAME_LENGTH - 4 ) ){
 			// The client only allows that many character so that NPC could not be whispered by unmodified clients
-			ShowWarning( "Whisper event in npc '" CL_WHITE "%s" CL_RESET "' was ignored, because it's name is too long.\n", nd->exname );
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning( "이름이 너무 길기 때문에 NPC '" CL_WHITE "%s" CL_RESET "'의 귓속말 이벤트가 무시되었습니다.\n", nd->exname );
+			else
+				ShowWarning( "Whisper event in npc '" CL_WHITE "%s" CL_RESET "' was ignored, because it's name is too long.\n", nd->exname );
 			return 0;
 		}
 
@@ -1292,7 +1407,10 @@ int npc_event_doall(const char* name)
 
 // runs the specified event(global only) and reports call count
 void npc_event_runall( const char* eventname ){
-	ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", eventname, npc_event_doall( eventname ) );
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus( "이벤트 '" CL_WHITE "%s" CL_RESET "'이(가) '" CL_WHITE "%d" CL_RESET "'개의 NPC에서 실행되었습니다.\n", eventname, npc_event_doall( eventname ) );
+	else
+		ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", eventname, npc_event_doall( eventname ) );
 }
 
 // runs the specified event, with a RID attached (global only)
@@ -1321,7 +1439,10 @@ int npc_event_doall_path( const char* event_name, const char* path ){
 		}
 	}
 
-	ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", event_name, count );
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus( "이벤트 '" CL_WHITE "%s" CL_RESET "'이(가) '" CL_WHITE "%d" CL_RESET "'개의 NPC에서 실행되었습니다.\n", event_name, count );
+	else
+		ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", event_name, count );
 
 	mapit_free(iter);
 	return count;
@@ -1444,13 +1565,19 @@ TIMER_FUNC(npc_timerevent){
 
 	if( nd == nullptr )
 	{
-		ShowError("npc_timerevent: NPC not found??\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_timerevent: NPC를 찾을 수 없습니다.\n");
+		else
+			ShowError("npc_timerevent: NPC not found??\n");
 		return 0;
 	}
 
 	if( ted->rid && !(sd = map_id2sd(ted->rid)) )
 	{
-		ShowError("npc_timerevent: Attached player not found.\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_timerevent: 연결된(Attached) 플레이어를 찾을 수 없습니다.\n");
+		else
+			ShowError("npc_timerevent: Attached player not found.\n");
 		ers_free(timer_event_ers, ted);
 		return 0;
 	}
@@ -1518,7 +1645,10 @@ int npc_timerevent_start(struct npc_data* nd, int rid)
 
 	if( nd->u.scr.rid > 0 && !(sd = map_id2sd(nd->u.scr.rid)) )
 	{ // Failed to attach timer to this player.
-		ShowError("npc_timerevent_start: Attached player not found!\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_timerevent_start: 연결된(Attached) 플레이어를 찾을 수 없습니다.\n");
+		else
+			ShowError("npc_timerevent_start: Attached player not found!\n");
 		return 1;
 	}
 
@@ -1571,7 +1701,10 @@ int npc_timerevent_stop(struct npc_data* nd)
 
 	if( nd->u.scr.rid && !(sd = map_id2sd(nd->u.scr.rid)) )
 	{
-		ShowError("npc_timerevent_stop: Attached player not found!\n");
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_timerevent_stop: 연결된(Attached) 플레이어를 찾을 수 없습니다.\n");
+		else
+			ShowError("npc_timerevent_stop: Attached player not found!\n");
 		return 1;
 	}
 
@@ -1633,7 +1766,10 @@ void npc_timerevent_quit(map_session_data* sd)
 		ev = (struct event_data*)strdb_get(ev_db, buf);
 		if( ev && ev->nd != nd )
 		{
-			ShowWarning("npc_timerevent_quit: Unable to execute \"%s\", two NPCs have the same event name [%s]!\n",script_config.timer_quit_event_name,buf);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_timerevent_quit: \"%s\"을(를) 실행할 수 없습니다. 두 개의 NPC가 같은 이벤트 이름[%s]을(를) 가지고 있습니다. \n",script_config.timer_quit_event_name,buf);
+			else
+				ShowWarning("npc_timerevent_quit: Unable to execute \"%s\", two NPCs have the same event name [%s]!\n",script_config.timer_quit_event_name,buf);
 			ev = nullptr;
 		}
 		if( ev )
@@ -1721,7 +1857,10 @@ int npc_event_sub(map_session_data* sd, struct event_data* ev, const char* event
 			return 0;
 		}
 
-		ShowWarning("npc_event: player's event queue is full, can't add event '%s' !\n", eventname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_event: 플레이어의 이벤트 대기열이 가득차서 이벤트 '%s'을(를) 추가 할 수 없습니다.\n", eventname);
+		else
+			ShowWarning("npc_event: player's event queue is full, can't add event '%s' !\n", eventname);
 		return 1;
 	}
 	if( ev->nd->is_invisible )
@@ -1766,8 +1905,12 @@ int npc_event(map_session_data* sd, const char* eventname, int ontouch)
 
 	if( ev == nullptr || (nd = ev->nd) == nullptr )
 	{
-		if( !ontouch )
-			ShowError("npc_event: event not found [%s]\n", eventname);
+		if( !ontouch ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("NPC 이벤트: [%s]의 이벤트를 찾을 수 없습니다.\n", eventname);
+			else
+				ShowError("npc_event: event not found [%s]\n", eventname);
+		}
 		return ontouch;
 	}
 
@@ -1898,7 +2041,10 @@ int npc_touch_areanpc(map_session_data* sd, int16 m, int16 x, int16 y, struct np
 		if (!pc_job_can_entermap((enum e_job)sd->status.class_, map_mapindex2mapid(nd->u.warp.mapindex), pc_get_group_level(sd)))
 			break;
 		if (sd->count_rewarp > 10) {
-			ShowWarning("Prevented infinite warp loop for player (%d:%d). Please fix NPC: '%s', path: '%s'\n", sd->status.account_id, sd->status.char_id, nd->exname, nd->path);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("플레이어 (%d:%d)의 무한 워프를 방지합니다. 수정해야할 NPC: '%s', 경로: '%s'\n", sd->status.account_id, sd->status.char_id, nd->exname, nd->path);
+			else
+				ShowWarning("Prevented infinite warp loop for player (%d:%d). Please fix NPC: '%s', path: '%s'\n", sd->status.account_id, sd->status.char_id, nd->exname, nd->path);
 			sd->count_rewarp = 0;
 			break;
 		}
@@ -1952,7 +2098,10 @@ int npc_touch_area_allnpc(map_session_data* sd, int16 m, int16 x, int16 y)
 	}
 
 	if (f == 1) {
-		ShowError("npc_touch_area_allnpc : stray NPC cell/NPC not found in the block on coordinates '%s',%d,%d\n", mapdata->name, x, y);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_touch_area_allnpc : '%s' 맵의 %d,%d 좌표에서 NPC를 찾지 못했습니다. 셀에서 벗어난 NPC 같습니다.\n", mapdata->name, x, y);
+		else
+			ShowError("npc_touch_area_allnpc : stray NPC cell/NPC not found in the block on coordinates '%s',%d,%d\n", mapdata->name, x, y);
 		return 1;
 	}
 	return 0;
@@ -2269,15 +2418,23 @@ bool npc_scriptcont(map_session_data* sd, int id, bool closing){
 	if( id != sd->npc_id ){
 		TBL_NPC* nd_sd = (TBL_NPC*)map_id2bl(sd->npc_id);
 
-		ShowDebug("npc_scriptcont: %s (sd->npc_id=%d) is not %s (id=%d).\n",
-			nd_sd?(char*)nd_sd->name:"'Unknown NPC'", (int)sd->npc_id,
-			nd?(char*)nd->name:"'Unknown NPC'", (int)id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("npc_scriptcont: %s (sd->npc_id=%d)은(는) %s (id=%d)이(가) 아닙니다.\n",
+				nd_sd?(char*)nd_sd->name:"'알수 없는 NPC'", (int)sd->npc_id,
+				nd?(char*)nd->name:"'알수 없는 NPC'", (int)id);
+		else 
+			ShowDebug("npc_scriptcont: %s (sd->npc_id=%d) is not %s (id=%d).\n",
+				nd_sd?(char*)nd_sd->name:"'Unknown NPC'", (int)sd->npc_id,
+				nd?(char*)nd->name:"'Unknown NPC'", (int)id);
 		return true;
 	}
 
 	if(id != fake_nd->bl.id) { // Not item script
 		if ((npc_checknear(sd, target)) == nullptr) {
-			ShowWarning("npc_scriptcont: failed npc_checknear test.\n");
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_scriptcont: npc_checknear 테스트를 실패 했습니다.\n");
+			else
+				ShowWarning("npc_scriptcont: failed npc_checknear test.\n");
 			return true;
 		}
 	}
@@ -2314,7 +2471,10 @@ bool npc_scriptcont(map_session_data* sd, int id, bool closing){
 				break;
 			default:
 				sd->st->state = END;
-				ShowError( "npc_scriptcont: unexpected state '%d' for closing call. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError( "npc_scriptcont: '%d'은(는) 닫기 호출에 예기치 못한 상태입니다. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
+				else
+					ShowError( "npc_scriptcont: unexpected state '%d' for closing call. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
 				break;
 		}
 	}else{
@@ -2332,7 +2492,10 @@ bool npc_scriptcont(map_session_data* sd, int id, bool closing){
 				break;
 			default:
 				sd->st->state = END;
-				ShowError( "npc_scriptcont: unexpected state '%d' for continue call. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError( "npc_scriptcont: '%d'은(는) continue 호출에 예기치 못한 상태입니다. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
+				else
+					ShowError( "npc_scriptcont: unexpected state '%d' for continue call. (AID: %u CID: %u)\n", sd->st->state, sd->status.account_id, sd->status.char_id );
 				break;
 		}
 	}
@@ -2360,7 +2523,10 @@ int npc_buysellsel(map_session_data* sd, int id, int type)
 		return 1;
 
 	if (nd->subtype != NPCTYPE_SHOP) {
-		ShowError("no such shop npc : %d\n",id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("%d라는 상점NPC는 없습니다.\n",id);
+		else
+			ShowError("no such shop npc : %d\n",id);
 		if (sd->npc_id == id)
 			sd->npc_id=0;
 		return 1;
@@ -2409,7 +2575,10 @@ static enum e_CASHSHOP_ACK npc_cashshop_process_payment(struct npc_data *nd, int
 				int delete_amount = price, i;
 
 				if (!id) { // Item Data is checked at script parsing but in case of item_db reload, check again.
-					ShowWarning("Failed to find sellitem %u for itemshop NPC '%s' (%s, %d, %d)!\n", nd->u.shop.itemshop_nameid, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("아이템샵 NPC '%s'에서 판매아이템 %u을(를) 찾는데 실패 했습니다. (맵: %s x좌표:%d  y좌표: %d)\n", nd->exname, nd->u.shop.itemshop_nameid, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
+					else				
+						ShowWarning("Failed to find sellitem %u for itemshop NPC '%s' (%s, %d, %d)!\n", nd->u.shop.itemshop_nameid, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
 					return ERROR_TYPE_PURCHASE_FAIL;
 				}
 				if (cost[1] < points || cost[0] < (price - points)) {
@@ -2436,13 +2605,19 @@ static enum e_CASHSHOP_ACK npc_cashshop_process_payment(struct npc_data *nd, int
 						amount = delete_amount;
 
 					if (pc_delitem(sd, i, amount, 0, 0, LOG_TYPE_NPC)) {
-						ShowWarning("Failed to delete item %u from '%s' at itemshop NPC '%s' (%s, %d, %d)!\n", nd->u.shop.itemshop_nameid, sd->status.name, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowWarning("'%s'에 의하여 아이템샵 NPC '%s'에게 아이템 %u을(를) 삭제하는데 실패 했습니다. (맵: %s x좌표: %d y좌표: %d)\n", sd->status.name, nd->exname,nd->u.shop.itemshop_nameid, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
+						else
+							ShowWarning("Failed to delete item %u from '%s' at itemshop NPC '%s' (%s, %d, %d)!\n", nd->u.shop.itemshop_nameid, sd->status.name, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y);
 						return ERROR_TYPE_PURCHASE_FAIL;
 					}
 					delete_amount -= amount;
 				}
 				if (delete_amount > 0) {
-					ShowError("Item %u is not enough as payment at itemshop NPC '%s' (%s, %d, %d, AID=%d, CID=%d)!\n", nd->u.shop.itemshop_nameid, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.account_id, sd->status.char_id);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowError("아이템 %u은(는) 아이템샵 NPC '%s'의 결제로는 충분하지 않습니다. (%s, %d, %d, AID=%d, CID=%d)!\n", nd->u.shop.itemshop_nameid, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.account_id, sd->status.char_id);
+					else
+						ShowError("Item %u is not enough as payment at itemshop NPC '%s' (%s, %d, %d, AID=%d, CID=%d)!\n", nd->u.shop.itemshop_nameid, nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.account_id, sd->status.char_id);
 					return ERROR_TYPE_PURCHASE_FAIL;
 				}
 			}
@@ -2513,7 +2688,10 @@ int npc_cashshop_buylist( map_session_data *sd, int points, std::vector<s_npc_bu
 
 		if( !itemdb_isstackable2(id.get()) && amount > 1 )
 		{
-			ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n", sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("플레이어 %s (%d:%d)님이 중첩이 불가능한 아이템 %u을(를) %d개를 구매 하려고하는 16진수 패킷전송을 시도했습니다!\n", sd->status.name, sd->status.account_id, sd->status.char_id, nameid, amount);
+			else
+				ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n", sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
 			amount = item_list[i].qty = 1;
 		}
 
@@ -2672,8 +2850,12 @@ int npc_cashshop_buy(map_session_data *sd, t_itemid nameid, int amount, int poin
 
 	if(!itemdb_isstackable2(id.get()) && amount > 1)
 	{
-		ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n",
-			sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("플레이어 %s (%d:%d)님이 중첩 할 수 없는 아이템 %u을(를) %d개 구입하려고하는 16진수 패킷전송을 시도했습니다.\n",
+				sd->status.name, sd->status.account_id, sd->status.char_id, nameid, amount);
+		else
+			ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n",
+				sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
 		amount = 1;
 	}
 
@@ -2693,9 +2875,15 @@ int npc_cashshop_buy(map_session_data *sd, t_itemid nameid, int amount, int poin
 
 	if( (double)nd->u.shop.shop_item[i].value * amount > INT_MAX )
 	{
-		ShowWarning("npc_cashshop_buy: Item '%s' (%u) price overflow attempt!\n", id->name.c_str(), nameid);
-		ShowDebug("(NPC:'%s' (%s,%d,%d), player:'%s' (%d/%d), value:%d, amount:%d)\n",
-					nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.name, sd->status.account_id, sd->status.char_id, nd->u.shop.shop_item[i].value, amount);
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("npc_cashshop_buy: 아이템 '%s'(%u)의 가격이 과합니다.\n", id->name.c_str(), nameid);
+			ShowDebug("(NPC:'%s' (%s,%d,%d), 플레이어:'%s' (%d/%d), 값:%d, 갯수:%d)\n",
+						nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.name, sd->status.account_id, sd->status.char_id, nd->u.shop.shop_item[i].value, amount);
+		} else {
+			ShowWarning("npc_cashshop_buy: Item '%s' (%u) price overflow attempt!\n", id->name.c_str(), nameid);
+			ShowDebug("(NPC:'%s' (%s,%d,%d), player:'%s' (%d/%d), value:%d, amount:%d)\n",
+						nd->exname, map_mapid2mapname(nd->bl.m), nd->bl.x, nd->bl.y, sd->status.name, sd->status.account_id, sd->status.char_id, nd->u.shop.shop_item[i].value, amount);
+		}
 		return ERROR_TYPE_ITEM_ID;
 	}
 
@@ -2817,8 +3005,12 @@ e_purchase_result npc_buylist( map_session_data* sd, std::vector<s_npc_buy_list>
 			return e_purchase_result::PURCHASE_FAIL_COUNT; // item no longer in itemdb
 
 		if( !itemdb_isstackable2(id.get()) && amount > 1 ) { //Exploit? You can't buy more than 1 of equipment types o.O
-			ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n",
-				sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("플레이어 %s (%d:%d)이(가) 중첩되지 않는 아이템 %u을(를) %d개를 구입하려는 16진수 패킷전송을 시도했습니다.\n",
+					sd->status.name, sd->status.account_id, sd->status.char_id, nameid, amount);
+			else
+				ShowWarning("Player %s (%d:%d) sent a hexed packet trying to buy %d of nonstackable item %u!\n",
+					sd->status.name, sd->status.account_id, sd->status.char_id, amount, nameid);
 			amount = item_list[i].qty = 1;
 		}
 
@@ -3577,7 +3769,10 @@ int npc_addsrcfile(const char* name, bool loadscript)
 
 	//Check if this is not a file
 	if(check_filepath(name)!=2){
-		ShowError("npc_addsrcfile: Can't find source file \"%s\"\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_addsrcfile: 소스파일 \"%s\"을(를) 찾을 수 없습니다.\n", name );
+		else
+			ShowError("npc_addsrcfile: Can't find source file \"%s\"\n", name );
 		return 0;
 	}
 
@@ -3618,14 +3813,24 @@ void npc_loadsrcfiles() {
 	}
 	int npc_total = npc_warp + npc_shop + npc_script;
 
-	ShowInfo ("Done loading '" CL_WHITE "%d" CL_RESET "' NPCs:" CL_CLL "\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Warps\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Shops\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Scripts\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Spawn sets\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Cached\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Not Cached\n",
-		npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowInfo ("불러온 '" CL_WHITE "%d" CL_RESET "'개의 NPC:" CL_CLL "\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 워프\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 상점\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 스크립트\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 스폰설정\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 몬스터가 캐시됨 \n"
+			"\t-'" CL_WHITE "%d" CL_RESET "'개의 몬스터가 캐시되지 않음\n",
+			npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
+	else
+		ShowInfo ("Done loading '" CL_WHITE "%d" CL_RESET "' NPCs:" CL_CLL "\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Warps\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Shops\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Scripts\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Spawn sets\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Cached\n"
+			"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Not Cached\n",
+			npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
 }
 
 /// Parses and sets the name and exname of a npc.
@@ -3641,27 +3846,41 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 	if( p ) { // <Display name>::<Unique name>
 		size_t len = p-name;
 		if( len > NPC_NAME_LENGTH ) {
-			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsename: 파일 '%s'의 '%d'줄에 있는 표시되는 이름 '%s'이(가) 너무 깁니다.(길이=%u)  %u자로 자릅니다.\n", filepath, strline(buffer,start-buffer), name, (unsigned int)len, NPC_NAME_LENGTH);
+			else
+				ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 			safestrncpy(nd->name, name, sizeof(nd->name));
 		} else {
 			memcpy(nd->name, name, len);
 			memset(nd->name+len, 0, sizeof(nd->name)-len);
 		}
 		len = strlen(p+2);
-		if( len > NPC_NAME_LENGTH )
-			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsename: 파일 '%s'의 '%d'줄에 있는 유니크 이름 '%s'이(가) 너무 깁니다.(길이=%u)  %u자로 자릅니다.\n", filepath, strline(buffer,start-buffer), name, (unsigned int)len, NPC_NAME_LENGTH);
+			else
+				ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+		}
 		safestrncpy(nd->exname, p+2, sizeof(nd->exname));
 	} else {// <Display name>
 		size_t len = strlen(name);
-		if( len > NPC_NAME_LENGTH )
-			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+		if( len > NPC_NAME_LENGTH ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsename: 파일 '%s'의 '%d'줄에 있는 이름 '%s'이(가) 너무 깁니다.(길이=%u)  %u자로 자릅니다.\n", filepath, strline(buffer,start-buffer), name, (unsigned int)len, NPC_NAME_LENGTH);
+			else
+				ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+		}
 		safestrncpy(nd->name, name, sizeof(nd->name));
 		safestrncpy(nd->exname, name, sizeof(nd->exname));
 	}
 
 	if( *nd->exname == '\0' || strstr(nd->exname,"::") != nullptr ) {// invalid
 		snprintf(newname, ARRAYLENGTH(newname), "0_%d_%d_%d", nd->bl.m, nd->bl.x, nd->bl.y);
-		ShowWarning("npc_parsename: Invalid unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parsename: '%s' 파일의 '%d'줄에 잘못된 유니크 이름이 있습니다. '%s'의 이름을 '%s'으(로) 변경합니다.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+		else
+			ShowWarning("npc_parsename: Invalid unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
 		safestrncpy(nd->exname, newname, sizeof(nd->exname));
 	}
 
@@ -3678,9 +3897,15 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 		strcpy(this_mapname, (nd->bl.m==-1?"(not on a map)":mapindex_id2name(map_getmapdata(nd->bl.m)->index)));
 		strcpy(other_mapname, (dnd->bl.m==-1?"(not on a map)":mapindex_id2name(map_getmapdata(dnd->bl.m)->index)));
 
-		ShowWarning("npc_parsename: Duplicate unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
-		ShowDebug("this npc:\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n", nd->name, nd->exname, this_mapname, nd->bl.x, nd->bl.y);
-		ShowDebug("other npc in '%s' :\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n",dnd->path, dnd->name, dnd->exname, other_mapname, dnd->bl.x, dnd->bl.y);
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning("npc_parsename: '%s' 파일의 '%d'줄에 중복되는 고유이름(유니크이름)이 있습니다. '%s'의 이름을 '%s'으(로) 변경합니다.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+			ShowDebug("이 NPC:\n   보여지는 이름 '%s'\n   고유이름(유니크이름) '%s'\n   맵=%s, x=%d, y=%d\n", nd->name, nd->exname, this_mapname, nd->bl.x, nd->bl.y);
+			ShowDebug("'%s'의 다른 NPC :\n   보여지는 이름 '%s'\n   고유이름(유니크이름) '%s'\n   맵=%s, x=%d, y=%d\n",dnd->path, dnd->name, dnd->exname, other_mapname, dnd->bl.x, dnd->bl.y);
+		} else {
+			ShowWarning("npc_parsename: Duplicate unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+			ShowDebug("this npc:\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n", nd->name, nd->exname, this_mapname, nd->bl.x, nd->bl.y);
+			ShowDebug("other npc in '%s' :\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n",dnd->path, dnd->name, dnd->exname, other_mapname, dnd->bl.x, dnd->bl.y);
+		}
 		safestrncpy(nd->exname, newname, sizeof(nd->exname));
 	}
 
@@ -3740,7 +3965,10 @@ int npc_parseview(const char* w4, const char* start, const char* buffer, const c
 			if (mob != nullptr)
 				val = static_cast<int>(mob->id);
 			else {
-				ShowWarning("npc_parseview: Invalid NPC constant '%s' specified in file '%s', line'%d'. Defaulting to INVISIBLE. \n", viewid, filepath, strline(buffer,start-buffer));
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("npc_parseview: 파일 '%s'의 %d줄에 지정된 NPC 상수 '%s'이(가) 잘못되었습니다. INVISIBLE을 기본값으로 지정합니다. \n", filepath, strline(buffer,start-buffer), viewid);
+				else	
+					ShowWarning("npc_parseview: Invalid NPC constant '%s' specified in file '%s', line'%d'. Defaulting to INVISIBLE. \n", viewid, filepath, strline(buffer,start-buffer));
 				val = JT_INVISIBLE;
 			}
 		} else
@@ -3865,7 +4093,10 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 	// w1=<from map name>,<fromX>,<fromY>,<facing>
 	// w4=<spanx>,<spany>,<to map name>,<toX>,<toY>
 	if( sscanf(w1, "%15[^,],%6hd,%6hd", mapname, &x, &y) != 3 || sscanf(w4, "%6hd,%6hd,%15[^,],%6hd,%6hd", &xs, &ys, to_mapname, &to_x, &to_y) != 5 ) {
-		ShowError("npc_parse_warp: Invalid warp definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_warp: '%s' 파일의 '%d'줄에 잘못된 워프가 정의되어있습니다.\n * 워프1=%s\n * 워프2=%s\n * 워프3=%s\n * 워프4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_warp: Invalid warp definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
 
@@ -3873,14 +4104,20 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 	unsigned short i = mapindex_name2id(to_mapname);
 
 	if( i == 0 ) {
-		ShowError("npc_parse_warp: Unknown destination map in file '%s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), to_mapname, w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_warp: '%s' 파일의 '%d'줄에 알수 없는 도착지 맵 %s이(가) 있습니다.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), to_mapname, w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_warp: Unknown destination map in file '%s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), to_mapname, w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parse_warp: '%s' 파일의 '%d'줄에 좌표 %d/%d은(는) %s(%dx%d)맵의 범위를 벗어났습니다.\n",filepath,strline(buffer,start-buffer), x, y, mapdata->name, mapdata->xs, mapdata->ys);
+		else
+			ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
 	}
 
 	struct npc_data *nd = npc_create_npc(m, x, y);
@@ -3929,9 +4166,12 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 		int shift = (is_type_warp2 ? 6 : 5);
 
 		// state name
-		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
-		else {
+		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name)) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parse_warp: 잘못된 NPC 상태가 '%s' 파일의 '%d'줄에서 발견되었습니다. Visible 상태로 설정합니다. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			else
+				ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+		} else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
 				nd->state = NPCVIEW_CLOAKON;
@@ -3939,8 +4179,12 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 				nd->state = NPCVIEW_HIDEON;
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
-			else
-				ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("npc_parse_warp: 잘못된 NPC 상태가 '%s' 파일의 '%d'줄에서 발견되었습니다. visible 상태로 설정합니다. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+				else
+					ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			}
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
@@ -3987,7 +4231,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4
 		||	strchr(w4, ',') == nullptr )
 		{
-			ShowError("npc_parse_shop: Invalid shop definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 상점 정의가 있습니다.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parse_shop: Invalid shop definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 			return strchr(start,'\n');// skip and continue
 		}
 
@@ -3997,7 +4244,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 좌표 %d/%d이(가) %s(%dx%d) 맵의 범위를 벗어났습니다.\n",filepath,strline(buffer,start-buffer), x, y, mapdata->name, mapdata->xs, mapdata->ys);
+		else
+			ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
 	}
 
 	if( !strcasecmp(w2,"cashshop") )
@@ -4017,11 +4267,17 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 	switch(type) {
 		case NPCTYPE_ITEMSHOP: {
 			if (sscanf(p,",%u:%11d,",&nameid,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 원가가 정의되어있습니다. 나머지 줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				else	
+					ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 				return strchr(start,'\n'); // skip and continue
 			}
 			if (!item_db.exists(nameid)) {
-				ShowWarning("npc_parse_shop: Invalid item ID cost in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 ID(id '%u')의 비용이 지정되었습니다.\n", filepath, strline(buffer,start-buffer), nameid);
+				else
+					ShowWarning("npc_parse_shop: Invalid item ID cost in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid);
 				return strchr(start,'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
@@ -4029,19 +4285,28 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		}
 		case NPCTYPE_POINTSHOP: {
 			if (sscanf(p, ",%31[^,:]:%11d,",point_str,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 비용이 정의되어있습니다. 나머지 줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				else
+					ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 				return strchr(start,'\n'); // skip and continue
 			}
 			switch(point_str[0]) {
 				case '$':
 				case '.':
 				case '\'':
-					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 가격 변수타입이 있습니다.(영구적인 케릭터 또는 계정 기반이어야합니다.) 나머지줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+					else
+						ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 					return strchr(start,'\n'); // skip and continue
 					break;
 			}
 			if (point_str[strlen(point_str) - 1] == '$') {
-				ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 변수타입(정수(integer)여야 합니다.)이 지정되었습니다. 나머지 줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+				else
+					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 				return strchr(start,'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
@@ -4049,7 +4314,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		}
 		case NPCTYPE_MARKETSHOP:
 #if PACKETVER < 20131223
-			ShowError("npc_parse_shop: (MARKETSHOP) Feature is disabled, need client 20131223 or newer. Ignoring file '%s', line '%d\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parse_shop: (MARKETSHOP)이 비활성화 되었습니다. 클라이언트 20131223 이상이 필요합니다. 파일 '%s'의 '%d'줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parse_shop: (MARKETSHOP) Feature is disabled, need client 20131223 or newer. Ignoring file '%s', line '%d\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
 			return strchr(start, '\n'); // skip and continue
 #else
 			is_discount = 0;
@@ -4064,7 +4332,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 				}else if( !strcasecmp( point_str, "no" ) ){
 					is_discount = 0;
 				}else{
-					ShowError( "npc_parse_shop: unknown discount setting %s\n", point_str );
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowError( "npc_parse_shop: %s은(는) 알 수 없는 할인 설정입니다.\n", point_str );
+					else
+						ShowError( "npc_parse_shop: unknown discount setting %s\n", point_str );
 					return strchr( start, '\n' ); // skip and continue
 				}
 
@@ -4087,14 +4358,20 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 			case NPCTYPE_MARKETSHOP:
 #if PACKETVER >= 20131223
 				if (sscanf(p, ",%u:%11d:%11d", &nameid2, &value, &qty) != 3) {
-					ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowError("npc_parse_shop: (MARKETSHOP) '%s' 파일의 '%d'줄에 잘못된 아이템 정의가 있습니다. 나머지 줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					else
+						ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
 					skip = true;
 				}
 #endif
 				break;
 			default:
 				if (sscanf(p, ",%u:%11d", &nameid2, &value) != 2) {
-					ShowError("npc_parse_shop: Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowError("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 아이템 정의가 있습니다. 나머지 줄은 무시중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					else
+						ShowError("npc_parse_shop: Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
 					skip = true;
 				}
 				break;
@@ -4106,7 +4383,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		std::shared_ptr<item_data> id = item_db.find(nameid2);
 
 		if( id == nullptr ) {
-			ShowWarning("npc_parse_shop: Invalid sell item in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid2);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 잘못된 판매 아이템(ID: '%u')이 있습니다.\n", filepath, strline(buffer,start-buffer), nameid2);
+			else
+				ShowWarning("npc_parse_shop: Invalid sell item in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid2);
 			p = strchr(p+1,',');
 			continue;
 		}
@@ -4115,16 +4395,28 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 			else value = 0; // Cashshop doesn't have a "buy price" in the item_db
 		}
 		if (value == 0 && (type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP)) { // NPC selling items for free!
-			ShowWarning("npc_parse_shop: Item %s [%u] is being sold for FREE in file '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, filepath, strline(buffer,start-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 %s [%u]의 아이템이 무료로 판매하도록 설정되어있습니다.\n",
+						filepath, strline(buffer,start-buffer),id->name.c_str(), nameid2);
+			else
+				ShowWarning("npc_parse_shop: Item %s [%u] is being sold for FREE in file '%s', line '%d'.\n",
+						id->name.c_str(), nameid2, filepath, strline(buffer,start-buffer));
 		}
 		if( ( type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP ) && value*0.75 < id->value_sell*1.24 ) { // Exploit possible: you can buy and sell back with profit
-			ShowWarning("npc_parse_shop: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) at file '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), filepath, strline(buffer,start-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 '%s'[%hu] 아이템의 디스카운트된 구매가격이(%d->%d) 오버챠지된 판매가격(%d->%d) 보다 적습니다.\n", 
+					filepath, strline(buffer,start-buffer),id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24));
+			else
+				ShowWarning("npc_parse_shop: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) at file '%s', line '%d'.\n",
+					id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), filepath, strline(buffer,start-buffer));
 		}
 		if (type == NPCTYPE_MARKETSHOP && qty < -1) {
-			ShowWarning("npc_parse_shop: Item %s [%u] is stocked with invalid value %hd, changed to unlimited (-1). File '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, qty, filepath, strline(buffer,start-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에 '%s'[%u] 아이템에 잘못된 값 '%hd'이(가) 지정되어있습니다. 제한 없음(-1)으로 변경합니다.\n",
+					filepath, strline(buffer,start-buffer),id->name.c_str(), nameid2,qty);
+			else
+				ShowWarning("npc_parse_shop: Item %s [%u] is stocked with invalid value %hd, changed to unlimited (-1). File '%s', line '%d'.\n",
+					id->name.c_str(), nameid2, qty, filepath, strline(buffer,start-buffer));
 			qty = -1;
 		}
 		//for logs filters, atcommands and iteminfo script command
@@ -4158,7 +4450,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		p = strchr(p+1,',');
 	}
 	if( nd->u.shop.count == 0 ) {
-		ShowWarning("npc_parse_shop: Ignoring empty shop in file '%s', line '%d'.\n", filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parse_shop: '%s' 파일의 '%d'줄에있는 비어있는 상점을 무시중입니다...\n", filepath, strline(buffer,start-buffer));
+		else
+			ShowWarning("npc_parse_shop: Ignoring empty shop in file '%s', line '%d'.\n", filepath, strline(buffer,start-buffer));
 		nd->~npc_data();
 		aFree(nd);
 		return strchr(start,'\n');// continue
@@ -4256,7 +4551,10 @@ int npc_convertlabel_db(DBKey key, DBData *data, va_list ap)
 	// here we check if the label fit into the buffer
 	if( len > NAME_LENGTH )
 	{
-		ShowError("npc_parse_script: label name longer than %d chars! '%s'\n (%s)", NAME_LENGTH, lname, filepath);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_script: 라벨 이름이 '%d'자보다 깁니다. '%s'\n (%s)", NAME_LENGTH, lname, filepath);
+		else
+			ShowError("npc_parse_script: label name longer than %d chars! '%s'\n (%s)", NAME_LENGTH, lname, filepath);
 		return 0;
 	}
 
@@ -4288,7 +4586,10 @@ static const char* npc_skip_script(const char* start, const char* buffer, const 
 	p = strchr(start,'{');
 	if( p == nullptr )
 	{
-		ShowError("npc_skip_script: Missing left curly in file '%s', line'%d'.", filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_skip_script: '%s' 파일의 '%d'줄에 왼쪽 중괄호 '{'가 빠져있습니다.", filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_skip_script: Missing left curly in file '%s', line'%d'.", filepath, strline(buffer,start-buffer));
 		return nullptr;// can't continue
 	}
 
@@ -4324,7 +4625,10 @@ static const char* npc_skip_script(const char* start, const char* buffer, const 
 		}
 		else if( *p == '\0' )
 		{// end of buffer
-			ShowError("Missing %d right curlys at file '%s', line '%d'.\n", curly_count, filepath, strline(buffer,p-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("'%s' 파일의 '%d'줄에 '%d'개의 오른쪽 중괄호 '}'가 빠져있습니다.\n", filepath, strline(buffer,p-buffer), curly_count);
+			else
+				ShowError("Missing %d right curlys at file '%s', line '%d'.\n", curly_count, filepath, strline(buffer,p-buffer));
 			return nullptr;// can't continue
 		}
 	}
@@ -4370,7 +4674,10 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4 )
 		{
-			ShowError("npc_parse_script: Invalid placement format for a script in file '%s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parse_script: '%s'파일의 '%d'줄에 스크립트에 대한 배치 형식이 잘못되어있습니다. 파일의 나머지를 건너뛰는중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parse_script: Invalid placement format for a script in file '%s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 			return nullptr;// unknown format, don't continue
 		}
 		m = map_mapname2mapid(mapname);
@@ -4380,7 +4687,10 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 	end = strchr(start,'\n');
 	if( strstr(w4,",{") == nullptr || script_start == nullptr || (end != nullptr && script_start > end) )
 	{
-		ShowError("npc_parse_script: Missing left curly ',{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_script: '%s' 파일의 '%d'줄에 왼쪽 중괄호 ',{'가 빠졌습니다. 파일의 나머지를 건너뜁니다..\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_script: Missing left curly ',{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return nullptr;// can't continue
 	}
 	++script_start;
@@ -4453,9 +4763,12 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 		int shift = 7;
 
 		// state name
-		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
-		else {
+		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name)) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_script: 잘못된 NPC 상태가 '%s' 파일의 '%d'줄에서 발견되었습니다. visible 상태로 설정합니다. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			else
+				ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+		} else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
 				nd->state = NPCVIEW_CLOAKON;
@@ -4463,8 +4776,12 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 				nd->state = NPCVIEW_HIDEON;
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
-			else
-				ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("npc_parse_script: 잘못된 NPC 상태가 '%s' 파일의 '%d'줄에서 발견되었습니다. visible 상태로 설정합니다. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+				else
+					ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			}
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
@@ -4474,8 +4791,12 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 	// Loop through labels to export them as necessary
 	for (i = 0; i < nd->u.scr.label_list_num; i++) {
 		if (npc_event_export(nd, i)) {
-			ShowWarning("npc_parse_script : duplicate event %s::%s (%s)\n",
-			             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_script : %s::%s은(는) 중복 이벤트입니다. (파일: %s)\n",
+				             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			else
+				ShowWarning("npc_parse_script : duplicate event %s::%s (%s)\n",
+							 nd->exname, nd->u.scr.label_list[i].name, filepath);
 		}
 		npc_timerevent_export(nd, i);
 	}
@@ -4510,14 +4831,20 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	// get the npc being duplicated
 	if( w2[length-1] != ')' || length <= 11 || length-11 >= sizeof(srcname) )
 	{// does not match 'duplicate(%127s)', name is empty or too long
-		ShowError("npc_parse_script: bad duplicate name in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), w2);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_parse_script: '%s' 파일의 '%d'줄에 잘못된 복제이름(duplicate name) '%s'이(가) 있습니다. \n", filepath, strline(buffer,start-buffer), w2);
+		else
+			ShowError("npc_parse_script: bad duplicate name in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), w2);
 		return end;// next line, try to continue
 	}
 	safestrncpy(srcname, w2+10, length-10);
 
 	dnd = npc_name2id(srcname);
 	if( dnd == nullptr) {
-		ShowError("npc_parse_script: original npc not found for duplicate in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), srcname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_parse_script: '%s' 파일의 '%d'줄에 복제를 위한 대상 NPC '%s'을(를) 찾을 수 없습니다.\n", filepath, strline(buffer,start-buffer), srcname);
+		else
+			ShowError("npc_parse_script: original npc not found for duplicate in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), srcname);
 		return end;// next line, try to continue
 	}
 	src_id = dnd->src_id ? dnd->src_id : dnd->bl.id;
@@ -4531,7 +4858,10 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 		char mapname[MAP_NAME_LENGTH_EXT];
 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4 ) { // <map name>,<x>,<y>,<facing>
-			ShowError("npc_parse_duplicate: Invalid placement format for duplicate in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("npc_parse_duplicate: '%s'파일의 '%d'줄에 복제(duplicate)를 위한 배치형식이 잘못되었습니다. 줄 건너뛰는중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parse_duplicate: Invalid placement format for duplicate in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 			return end;// next line, try to continue
 		}
 		m = map_mapname2mapid(mapname);
@@ -4540,13 +4870,19 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowError("npc_parse_duplicate: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_parse_duplicate: '%s' 파일의 '%d'줄에 지정된 좌표(%d/%d)가 맵 '%s'(%dx%d)의 범위를 벗어났습니다.\n",filepath,strline(buffer,start-buffer), x, y, mapdata->name, mapdata->xs, mapdata->ys);
+		else
+			ShowError("npc_parse_duplicate: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
 	}
 
 	if( type == NPCTYPE_WARP && sscanf(w4, "%6hd,%6hd", &xs, &ys) == 2 );// <spanx>,<spany>
 	else if( type == NPCTYPE_SCRIPT && sscanf(w4, "%*[^,],%6hd,%6hd", &xs, &ys) == 2);// <sprite id>,<triggerX>,<triggerY>
 	else if( type == NPCTYPE_WARP ) {
-		ShowError("npc_parse_duplicate: Invalid span format for duplicate warp in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_parse_duplicate: '%s' 파일의 '%d'줄에 복제(duplicate)워프에 대한 잘못된 좌표범위 형식이 있습니다. 줄을 건너뜁니다...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_duplicate: Invalid span format for duplicate warp in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return end;// next line, try to continue
 	}
 
@@ -4633,8 +4969,12 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	// Loop through labels to export them as necessary
 	for (i = 0; i < nd->u.scr.label_list_num; i++) {
 		if (npc_event_export(nd, i)) {
-			ShowWarning("npc_parse_duplicate : duplicate event %s::%s (%s)\n",
-			             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_parse_duplicate : %s::%s (%s)은(는) 중복된 이벤트 입니다.\n",
+				             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			else
+				ShowWarning("npc_parse_duplicate : duplicate event %s::%s (%s)\n",
+							 nd->exname, nd->u.scr.label_list[i].name, filepath);
 		}
 		npc_timerevent_export(nd, i);
 	}
@@ -4656,7 +4996,10 @@ int npc_duplicate4instance(struct npc_data *snd, int16 m) {
 
 	snprintf(newname, ARRAYLENGTH(newname), "dup_%d_%d", mapdata->instance_id, snd->bl.id);
 	if( npc_name2id(newname) != nullptr ) { // Name already in use
-		ShowError("npc_duplicate4instance: the npcname (%s) is already in use while trying to duplicate npc %s in instance %d.\n", newname, snd->exname, mapdata->instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_duplicate4instance: 인스턴스 %d에서 NPC '%s'을(를) 복제하려고 하는 이름(%s)이(가) 이미 존재합니다.\n", mapdata->instance_id, snd->exname, newname);
+		else
+			ShowError("npc_duplicate4instance: the npcname (%s) is already in use while trying to duplicate npc %s in instance %d.\n", newname, snd->exname, mapdata->instance_id);
 		return 1;
 	}
 
@@ -4678,7 +5021,10 @@ int npc_duplicate4instance(struct npc_data *snd, int16 m) {
 			imap = map_mapname2mapid(map_getmapdata(dm)->name);
 
 		if( imap == -1 ) {
-			ShowError("npc_duplicate4instance: warp (%s) leading to instanced map (%s), but instance map is not attached to current instance.\n", map_mapid2mapname(dm), snd->exname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("npc_duplicate4instance: 인스턴스화된 맵 (%s)으로 연결되는 워프(%s)가 있지만 인스턴스 맵은 현재 인스턴스에 연결되어 있지 않습니다.\n", snd->exname, map_mapid2mapname(dm));
+			else
+				ShowError("npc_duplicate4instance: warp (%s) leading to instanced map (%s), but instance map is not attached to current instance.\n", map_mapid2mapname(dm), snd->exname);
 			return 1;
 		}
 
@@ -4805,12 +5151,18 @@ static int npc_market_checkall_sub(DBKey key, DBData *data, va_list ap) {
 
 	nd = npc_name2id(market->exname);
 	if (!nd) {
-		ShowInfo("npc_market_checkall_sub: NPC '%s' not found, removing...\n", market->exname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("npc_market_checkall_sub: NPC '%s'을(를) 찾을 수 없습니다. 제거중...\n", market->exname);
+		else
+			ShowInfo("npc_market_checkall_sub: NPC '%s' not found, removing...\n", market->exname);
 		npc_market_clearfromsql(market->exname);
 		return 1;
 	}
 	else if (nd->subtype != NPCTYPE_MARKETSHOP || !nd->u.shop.shop_item || !nd->u.shop.count ) {
-		ShowError("npc_market_checkall_sub: NPC '%s' is not proper for market, removing...\n", nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npc_market_checkall_sub: NPC '%s'은(는) 상점에 적합하지 않습니다. 제거중...\n", nd->exname);
+		else
+			ShowError("npc_market_checkall_sub: NPC '%s' is not proper for market, removing...\n", nd->exname);
 		npc_market_clearfromsql(nd->exname);
 		return 1;
 	}
@@ -4823,7 +5175,10 @@ static int npc_market_checkall_sub(DBKey key, DBData *data, va_list ap) {
 		uint16 j;
 
 		if (!item_db.exists(list->nameid)) {
-			ShowError("npc_market_checkall_sub: NPC '%s' sells invalid item '%u', deleting...\n", nd->exname, list->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("npc_market_checkall_sub: NPC '%s'이(가) 잘못된 아이템 '%u'을(를) 판매합니다. 삭제중...\n", nd->exname, list->nameid);
+			else
+				ShowError("npc_market_checkall_sub: NPC '%s' sells invalid item '%u', deleting...\n", nd->exname, list->nameid);
 			npc_market_delfromsql(nd->exname, list->nameid);
 			continue;
 		}
@@ -4850,7 +5205,10 @@ static int npc_market_checkall_sub(DBKey key, DBData *data, va_list ap) {
 			npc_market_tosql(nd->exname, &nd->u.shop.shop_item[j]);
 		}
 		else { // Removing "out-of-date" entry
-			ShowError("npc_market_checkall_sub: NPC '%s' does not sell item %u (qty %d), deleting...\n", nd->exname, list->nameid, list->qty);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("npc_market_checkall_sub: NPC '%s'은(는) 아이템 %u(%d개)를 판매하지 않습니다. 삭제중...\n", nd->exname, list->nameid, list->qty);
+			else
+				ShowError("npc_market_checkall_sub: NPC '%s' does not sell item %u (qty %d), deleting...\n", nd->exname, list->nameid, list->qty);
 			npc_market_delfromsql(nd->exname, list->nameid);
 		}
 	}
@@ -4881,9 +5239,15 @@ static void npc_market_checkall(void) {
 	if (!db_size(NPCMarketDB))
 		return;
 	else {
-		ShowInfo("Checking '" CL_WHITE "%d" CL_RESET "' NPC Markets...\n", db_size(NPCMarketDB));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("'" CL_WHITE "%d" CL_RESET "'개의 상점 NPC 체크중...\n", db_size(NPCMarketDB));
+		else
+			ShowInfo("Checking '" CL_WHITE "%d" CL_RESET "' NPC Markets...\n", db_size(NPCMarketDB));
 		NPCMarketDB->foreach(NPCMarketDB, npc_market_checkall_sub);
-		ShowStatus("Done checking '" CL_WHITE "%d" CL_RESET "' NPC Markets.\n", db_size(NPCMarketDB));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%d" CL_RESET "'개의 상점 NPC 체크를 완료했습니다.\n", db_size(NPCMarketDB));
+		else
+			ShowStatus("Done checking '" CL_WHITE "%d" CL_RESET "' NPC Markets.\n", db_size(NPCMarketDB));
 		NPCMarketDB->clear(NPCMarketDB, npc_market_free);
 	}
 }
@@ -4921,13 +5285,20 @@ static void npc_market_fromsql(void) {
 		std::shared_ptr<item_data> id = item_db.find(list.nameid);
 
 		if (id == nullptr) {
-			ShowWarning("npc_market_fromsql: Invalid sell item in table '%s' (id '%u').\n", market_table, list.nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_market_fromsql: 테이블 '%s'에 잘못된 판매 아이템이 있습니다 (id '%u').\n", market_table, list.nameid);
+			else
+				ShowWarning("npc_market_fromsql: Invalid sell item in table '%s' (id '%u').\n", market_table, list.nameid);
 			continue;
 		}
 
 		if (list.value * 0.75 < id->value_sell * 1.24) { // Exploit possible: you can buy and sell back with profit
-			ShowWarning("npc_market_fromsql: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) in table '%s'. Assigning to current sell value.\n",
-						id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("npc_market_fromsql: 아이템 %s [%u]은(는) 할인 구매가격 (%d->%d)이(가) 오버챠지 판매 금액 (%d->%d)보다 낮습니다. (테이블: '%s') 현재 판매가격으로 조정됩니다.\n",
+							id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
+			else
+				ShowWarning("npc_market_fromsql: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) in table '%s'. Assigning to current sell value.\n",
+							id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
 			list.value = id->value_sell;
 		}
 
@@ -4937,7 +5308,10 @@ static void npc_market_fromsql(void) {
 	}
 	Sql_FreeResult(mmysql_handle);
 
-	ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' entries for '" CL_WHITE "%d" CL_RESET "' NPC Markets from '" CL_WHITE "%s" CL_RESET "' table.\n", count, db_size(NPCMarketDB), market_table);
+	if(strcmpi(MessageLang,"KOR") == 0) 
+		ShowStatus("'" CL_WHITE "%s" CL_RESET "' 테이블에서 '" CL_WHITE "%d" CL_RESET "'개의 NPC상점에 '%d'개의 항목을 읽어왔습니다.\n", market_table, db_size(NPCMarketDB), count);
+	else
+		ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' entries for '" CL_WHITE "%d" CL_RESET "' NPC Markets from '" CL_WHITE "%s" CL_RESET "' table.\n", count, db_size(NPCMarketDB), market_table);
 }
 #endif
 
@@ -5074,7 +5448,10 @@ int npc_do_atcmd_event(map_session_data* sd, const char* command, const char* me
 	nullpo_ret(sd);
 
 	if( ev == nullptr || (nd = ev->nd) == nullptr ) {
-		ShowError("npc_event: event not found [%s]\n", eventname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_event: [%s]의 이벤트를 찾을 수 없습니다.\n", eventname);
+		else
+			ShowError("npc_event: event not found [%s]\n", eventname);
 		return 0;
 	}
 
@@ -5086,7 +5463,10 @@ int npc_do_atcmd_event(map_session_data* sd, const char* command, const char* me
 			return 0;
 		}
 
-		ShowWarning("npc_event: player's event queue is full, can't add event '%s' !\n", eventname);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_event: 플레이어의 이벤트 대기열이 꽉찼습니다. 이벤트 '%s'을(를) 추가하지 못했습니다.\n", eventname);
+		else
+			ShowWarning("npc_event: player's event queue is full, can't add event '%s' !\n", eventname);
 		return 1;
 	}
 
@@ -5138,7 +5518,10 @@ static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, co
 	script_start = strstr(start,"\t{");
 	end = strchr(start,'\n');
 	if (*w4 != '{' || script_start == nullptr || (end != nullptr && script_start > end)) {
-		ShowError("npc_parse_function: Missing left curly '%%TAB%%{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_function: '%s' 파일의 '%d'줄에 왼쪽 중괄호('%%TAB%%{')가 없습니다. 나머지 파일은 건너뜁니다..\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_function: Missing left curly '%%TAB%%{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return nullptr;// can't continue
 	}
 	++script_start;
@@ -5155,7 +5538,10 @@ static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, co
 	if (func_db->put(func_db, db_str2key(w3), db_ptr2data(script), &old_data)) {
 		struct script_code *oldscript = (struct script_code*)db_data2ptr(&old_data);
 
-		ShowInfo("npc_parse_function: Overwriting user function [%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowInfo("npc_parse_function: 사용자 함수 [%s]을(를) 덮어씁니다. (%s:%d줄)\n", w3, filepath, strline(buffer,start-buffer));
+		else
+			ShowInfo("npc_parse_function: Overwriting user function [%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
 		script_free_code( oldscript );
 	}
 
@@ -5207,12 +5593,18 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	||	sscanf(w3, "%23[^,],%11d", mobname, &mob_lv) < 1
 	||	( w4count = sscanf(w4, "%23[^,],%11d,%11u,%11u,%77[^,],%11d,%11d[^\t\r\n]", sprite, &num, &delay, &mob.delay2, mob.eventname, &size, &ai) ) < 2 )
 	{
-		ShowError("npc_parse_mob: Invalid mob definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: '%s'파일의 '%d'줄에 잘못된 몬스터 정의가 있습니다.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_mob: Invalid mob definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
 	if( mapindex_name2id(mapname) == 0 )
 	{
-		ShowError("npc_parse_mob: Unknown map '%s' in file '%s', line '%d'.\n", mapname, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: '%s' 파일의 '%d'줄에 알수 없는 맵 '%s'이 있습니다.\n", filepath, strline(buffer,start-buffer), mapname);
+		else
+			ShowError("npc_parse_mob: Unknown map '%s' in file '%s', line '%d'.\n", mapname, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 	m =  map_mapname2mapid(mapname);
@@ -5224,7 +5616,10 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 
 	if( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys )
 	{
-		ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 범위를 벗어난 스폰 좌표: %s (%d,%d), 맵 크기는 (%d,%d)입니다 - %s %s (파일 '%s', 줄 '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 
@@ -5237,43 +5632,64 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(sprite);
 
 		if (mob == nullptr) {
-			ShowError("npc_parse_mob: Unknown mob name %s (file '%s', line '%d').\n", sprite, filepath, strline(buffer,start-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parse_mob: %s은(는) 알 수 없는 몬스터 이름입니다. (파일: '%s', 줄: '%d').\n", sprite, filepath, strline(buffer,start-buffer));
+			else
+				ShowError("npc_parse_mob: Unknown mob name %s (file '%s', line '%d').\n", sprite, filepath, strline(buffer,start-buffer));
 			return strchr(start,'\n');// skip and continue
 		}
 		mob_id = mob->id;
 	}
 	else if (mobdb_checkid(mob_id) == 0) {	// check monster ID if exists!
-		ShowError("npc_parse_mob: Unknown mob ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: %d은(는) 알수 없는 몬스터ID입니다. (파일: '%s', 줄: '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_parse_mob: Unknown mob ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 
 	if( num < 1 || num > 1000 )
 	{
-		ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%s', line '%d').\n", num, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: %d은(는) 잘못된 몬스터 수 입니다. [1,1000]의 범위 안에 있어야 합니다. (파일: '%s', 줄: '%d').\n", num, filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%s', line '%d').\n", num, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 
 	if (w4count > 2 && delay != 5000 && delay < battle_config.mob_respawn_time) {
-		ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parse_mob: %u은)는) 몬스터 ID %d에 대한 잘못된 딜레이입니다. (파일: '%s', 줄: '%d'), 기본 5초로 설정합니다.\n", delay, mob_id, filepath, strline(buffer, start - buffer));
+		else
+			ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, filepath, strline(buffer, start - buffer));
 		mob.delay1 = 5000;
 	} else
 		mob.delay1 = delay;
 
 	if( mob.state.size > SZ_BIG && size != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%s', line '%d').\n", mob.state.size, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 몬스터ID '%d'의 크기 '%d'은(는) 잘못되었습니다. (파일: '%s', 줄: '%d').\n", mob_id, mob.state.size, filepath, strline(buffer, start - buffer));
+		else
+			ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%s', line '%d').\n", mob.state.size, mob_id, filepath, strline(buffer, start - buffer));
 		return strchr(start, '\n');
 	}
 
 	if( (mob.state.ai < AI_NONE || mob.state.ai >= AI_MAX) && ai != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%s', line '%d').\n", mob.state.ai, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 몬스터ID '%d'에 대한 잘못된 AI %d이(가) 지정되었습니다. (파일: '%s', 줄: '%d').\n", mob_id, mob.state.ai, filepath, strline(buffer, start - buffer));
+		else
+			ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%s', line '%d').\n", mob.state.ai, mob_id, filepath, strline(buffer, start - buffer));
 		return strchr(start, '\n');
 	}
 
 	if( (mob_lv == 0 || mob_lv > MAX_LEVEL) && mob_lv != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%s', line '%d').\n", mob_lv, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 몬스터ID '%d'에 대한 잘못된 레벨 '%d'이(가) 지정되었습니다. (파일: '%s', 줄: '%d').\n", mob_id, mob_lv, filepath, strline(buffer, start - buffer));
+		else
+			ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%s', line '%d').\n", mob_lv, mob_id, filepath, strline(buffer, start - buffer));
 		return strchr(start, '\n');
 	}
 
@@ -5292,7 +5708,11 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		mob.state.ai = static_cast<enum mob_ai>(ai);
 
 	if (mob.xs < 0) {
-		ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang, "KOR") == 0) {
+			ShowWarning("npc_parse_mob: 몹 ID %d에 대한 x-스팬 %hd가 음수입니다 (파일 '%s', 줄 '%d'). 맵 전체로 기본 설정합니다.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		} else {
+			ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		}
 		mob.xs = 0;
 	}
 	else if (mob.xs == 0 && mob.x > 0) {
@@ -5302,7 +5722,11 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	}
 
 	if (mob.ys < 0) {
-		ShowWarning("npc_parse_mob: Negative y-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.ys, mob_id, filepath, strline(buffer, start - buffer));
+		if(strcmpi(MessageLang, "KOR") == 0) {
+			ShowWarning("npc_parse_mob: 몹 ID %d에 대한 x-스팬 %hd가 음수입니다 (파일 '%s', 줄 '%d'). 맵 전체로 기본 설정합니다.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		} else {
+			ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		}
 		mob.ys = 0;
 	}
 	else if (mob.ys == 0 && mob.y > 0) {
@@ -5331,7 +5755,10 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	}
 
 	if(mob.delay1>0xfffffff || mob.delay2>0xfffffff) {
-		ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%s', line '%d').\n", mob.delay1, mob.delay2, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 잘못된 스폰 딜레이: %u %u (파일: '%s', 줄: '%d').\n", mob.delay1, mob.delay2, filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%s', line '%d').\n", mob.delay1, mob.delay2, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 
@@ -5346,7 +5773,10 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	//Verify dataset.
 	if( !mob_parse_dataset(&mob) )
 	{
-		ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mob: 몬스터 ID %d에 대한 데이터세트가 잘못되었습니다. (파일: '%s', 줄: '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
+		else
+			ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
 		return strchr(start,'\n');// skip and continue
 	}
 
@@ -5396,12 +5826,18 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	// w1=<mapname>
 	if (sscanf(w1, "%15[^,]", mapname) != 1) {
-		ShowError("npc_parse_mapflag: Invalid mapflag definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parse_mapflag: '%s' 파일의 '%d'줄에 맵플레그 정의가 잘못되었습니다.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		else
+			ShowError("npc_parse_mapflag: Invalid mapflag definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
 	m = map_mapname2mapid(mapname);
 	if (m < 0) {
-		ShowWarning("npc_parse_mapflag: Unknown map '%s' in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", mapname, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowWarning("npc_parse_mapflag: '%s' 파일의 '%d'줄에 알수 없는 맵 '%s'이(가) 있습니다. \n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), mapname, w1, w2, w3, w4);
+		else
+			ShowWarning("npc_parse_mapflag: Unknown map '%s' in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", mapname, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 		return strchr(start,'\n');// skip and continue
 	}
 
@@ -5412,7 +5848,10 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	switch( mapflag ){
 		case MF_INVALID:
-			ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%s', line '%d').\n", w3, filepath, strline(buffer,start-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parse_mapflag: '%s'은(는) 인식할 수 없는 맵플레그 입니다. (파일: '%s', 줄: '%d').\n", w3, filepath, strline(buffer,start-buffer));
+			else
+				ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%s', line '%d').\n", w3, filepath, strline(buffer,start-buffer));
 			break;
 		case MF_NOSAVE: {
 			char savemap[MAP_NAME_LENGTH_EXT];
@@ -5425,7 +5864,10 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 			} else if (state && sscanf(w4, "%15[^,],%6hd,%6hd", savemap, &args.nosave.x, &args.nosave.y) == 3) {
 				args.nosave.map = mapindex_name2id(savemap);
 				if (!args.nosave.map) {
-					ShowWarning("npc_parse_mapflag: Specified save point map '%s' for mapflag 'nosave' not found (file '%s', line '%d'), using 'SavePoint'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", savemap, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_parse_mapflag: 맵플래그 'nosave'에 대한 지정된 세이브포인트(저장지점) 맵 '%s'을(를) 찾을 수 없습니다. (파일: '%s', 줄: '%d'), 'SavePoint'를 사용하세요.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", savemap, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+					else		
+						ShowWarning("npc_parse_mapflag: Specified save point map '%s' for mapflag 'nosave' not found (file '%s', line '%d'), using 'SavePoint'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", savemap, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
 					args.nosave.x = -1;
 					args.nosave.y = -1;
 				}
@@ -5444,7 +5886,10 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 					args.nightmaredrop.drop_id = -1;
 				else if (!item_db.exists((args.nightmaredrop.drop_id = strtol(drop_arg1, nullptr, 10)))) {
 					args.nightmaredrop.drop_id = 0;
-					ShowWarning("npc_parse_mapflag: Invalid item ID '%d' supplied for mapflag 'pvp_nightmaredrop' (file '%s', line '%d'), removing.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", args.nightmaredrop.drop_id, filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_parse_mapflag: 맵플레그 'pvp_nightmaredrop'에 대해 잘못된 아이템 번호 '%d'이(가) 제공되었습니다. (파일: '%s', 줄: '%d'), 제거중.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", args.nightmaredrop.drop_id, filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					else
+						ShowWarning("npc_parse_mapflag: Invalid item ID '%d' supplied for mapflag 'pvp_nightmaredrop' (file '%s', line '%d'), removing.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", args.nightmaredrop.drop_id, filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
 					break;
 				}
 				if (!strcmpi(drop_arg2, "inventory"))
@@ -5491,8 +5936,12 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 				if (sscanf(w4, "%11d", &args.flag_val) == 1)
 					map_setmapflag_sub(m, MF_RESTRICTED, true, &args);
-				else // Could not be read, no value defined; don't remove as other restrictions may be set on the map
-					ShowWarning("npc_parse_mapflag: Zone value not set for the restricted mapflag! Skipped flag from %s (file '%s', line '%d').\n", map_mapid2mapname(m), filepath, strline(buffer,start-buffer));
+				else { // Could not be read, no value defined; don't remove as other restrictions may be set on the map
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_parse_mapflag: 제한된 맵플래그에 대한 영역(Zone)값이 설정되지 않았습니다. %s에서 건너뛴 플래그 (파일: '%s', 줄: '%d').\n", map_mapid2mapname(m), filepath, strline(buffer,start-buffer));
+					else
+						ShowWarning("npc_parse_mapflag: Zone value not set for the restricted mapflag! Skipped flag from %s (file '%s', line '%d').\n", map_mapid2mapname(m), filepath, strline(buffer,start-buffer));
+				}
 			} else
 				map_setmapflag(m, MF_RESTRICTED, false);
 			break;
@@ -5525,7 +5974,10 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 						int64 val_tmp;
 
 						if (!script_get_constant(caster_constant, &val_tmp)) {
-							ShowError( "npc_parse_mapflag: Unknown constant '%s'. Skipping (file '%s', line '%d').\n", caster_constant, filepath, strline(buffer, start - buffer) );
+							if(strcmpi(MessageLang,"KOR") == 0) 
+								ShowError( "npc_parse_mapflag: '%s'은(는) 알수 없는 상수입니다. 통과중. (파일: '%s', 줄: '%d').\n", caster_constant, filepath, strline(buffer, start - buffer) );
+							else
+								ShowError( "npc_parse_mapflag: Unknown constant '%s'. Skipping (file '%s', line '%d').\n", caster_constant, filepath, strline(buffer, start - buffer) );
 							break;
 						}
 
@@ -5542,9 +5994,12 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 					if (strcmp(skill_name, "all") == 0) // Adjust damage for all skills
 						map_setmapflag_sub(m, MF_SKILL_DAMAGE, true, &args);
-					else if (skill_name2id(skill_name) <= 0)
-						ShowWarning("npc_parse_mapflag: Invalid skill name '%s' for Skill Damage mapflag. Skipping (file '%s', line '%d').\n", skill_name, filepath, strline(buffer, start - buffer));
-					else { // Adjusted damage for specified skill
+					else if (skill_name2id(skill_name) <= 0) {
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowWarning("npc_parse_mapflag: 스킬대미지 플래그에 대한 '%s'은(는) 잘못된 스킬이름입니다. 건너뛰는중.. (파일: '%s', 줄: '%d')\n", skill_name, filepath, strline(buffer,start-buffer));
+						else
+							ShowWarning("npc_parse_mapflag: Invalid skill name '%s' for Skill Damage mapflag. Skipping (file '%s', line '%d').\n", skill_name, filepath, strline(buffer, start - buffer));
+					} else { // Adjusted damage for specified skill
 						args.flag_val = 1;
 						map_setmapflag_sub(m, MF_SKILL_DAMAGE, true, &args);
 						map_skill_damage_add(map_getmapdata(m), skill_name2id(skill_name), &args);
@@ -5565,9 +6020,12 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 				if (sscanf(w4, "%30[^,],%5hu[^\n]", skill_name, &args.skill_duration.per) == 2) {
 					args.skill_duration.skill_id = skill_name2id(skill_name);
 
-					if (!args.skill_duration.skill_id)
-						ShowError("npc_parse_mapflag: skill_duration: Invalid skill name '%s' for Skill Duration mapflag. Skipping (file '%s', line '%d')\n", skill_name, filepath, strline(buffer, start - buffer));
-					else {
+					if (!args.skill_duration.skill_id) {
+						if(strcmpi(MessageLang,"KOR") == 0) 
+							ShowError("npc_parse_mapflag: skill_duration: 스킬 지속시간 맵플래그에 대한 '%s'은(는) 잘못된 스킬 이름입니다. 통과중 (파일: '%s', 줄: '%d')\n", skill_name, filepath, strline(buffer, start - buffer));
+						else
+							ShowError("npc_parse_mapflag: skill_duration: Invalid skill name '%s' for Skill Duration mapflag. Skipping (file '%s', line '%d')\n", skill_name, filepath, strline(buffer, start - buffer));
+					} else {
 						args.skill_duration.per = cap_value(args.skill_duration.per, 0, UINT16_MAX);
 						map_setmapflag_sub(m, MF_SKILL_DURATION, true, &args);
 					}
@@ -5594,14 +6052,20 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 int npc_parsesrcfile(const char* filepath)
 {
 	if (check_filepath(filepath) != 2) { //this is not a file 
-		ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%s'.\n", filepath);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowDebug("npc_parsesrcfile: 경로에 파일이 포함되지 않은 것 같습니다. '%s'파일은 건너뜁니다..\n", filepath);
+		else
+			ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%s'.\n", filepath);
 		return 0;
 	} 
             
 	// read whole file to buffer
 	FILE* fp = fopen(filepath, "rb");
 	if (fp == nullptr) {
-		ShowError("npc_parsesrcfile: File not found '%s'.\n", filepath);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parsesrcfile: '%s' 파일을 찾을 수 없습니다.\n", filepath);
+		else
+			ShowError("npc_parsesrcfile: File not found '%s'.\n", filepath);
 		return 0;
 	}
 	fseek(fp, 0, SEEK_END);
@@ -5611,7 +6075,10 @@ int npc_parsesrcfile(const char* filepath)
 	len = fread(buffer, 1, len, fp);
 	buffer[len] = '\0';
 	if (ferror(fp)) {
-		ShowError("npc_parsesrcfile: Failed to read file '%s' - %s\n", filepath, strerror(errno));
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parsesrcfile:  '%s' 파일을 읽는데 실패 했습니다. 에러내용: %s\n", filepath, strerror(errno));
+		else
+			ShowError("npc_parsesrcfile: Failed to read file '%s' - %s\n", filepath, strerror(errno));
 		aFree(buffer);
 		fclose(fp);
 		return 0;
@@ -5624,7 +6091,10 @@ int npc_parsesrcfile(const char* filepath)
 		// - It's unlikely that the user wants to use UTF-8 data here, since we don't really support it, nor does the client by default.
 		// - If the user really wants to use UTF-8 (instead of latin1, EUC-KR, SJIS, etc), then they can still do it <without BOM>.
 		// More info at http://unicode.org/faq/utf_bom.html#bom5 and http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8
-		ShowError("npc_parsesrcfile: Detected unsupported UTF-8 BOM in file '%s'. Stopping (please consider using another character set).\n", filepath);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_parsesrcfile: 파일 '%s'에서 지원되지 않는 인코딩 타입 'UTF-8 BOM'을 감지했습니다. 중지중.. (다른 인코딩 타입으로 변경하세요.)\n", filepath);
+		else
+			ShowError("npc_parsesrcfile: Detected unsupported UTF-8 BOM in file '%s'. Stopping (please consider using another character set).\n", filepath);
 		aFree(buffer);
 		return 0;
 	}
@@ -5641,39 +6111,55 @@ int npc_parsesrcfile(const char* filepath)
 		size_t count = sv_parse( p, len + buffer - p, 0, '\t', pos, ARRAYLENGTH( pos ), SV_TERMINATE_LF|SV_TERMINATE_CRLF, error );
 
 		if( error ){
-			ShowError("npc_parsesrcfile: Parse error in file '%s', line '%d'. Stopping...\n", filepath, strline(buffer,p-buffer));
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parsesrcfile: '%s' 파일의 '%d'줄에 구문이 오류입니다. 중지중...\n", filepath, strline(buffer,p-buffer));
+			else
+				ShowError("npc_parsesrcfile: Parse error in file '%s', line '%d'. Stopping...\n", filepath, strline(buffer,p-buffer));
 			break;
 		}
 
 		char w1[2048], w2[2048], w3[2048], w4[2048];
 
 		// fill w1
-		if( pos[3]-pos[2] > ARRAYLENGTH(w1)-1 )
-			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[3]-pos[2], filepath, strline(buffer,p-buffer));
-
+		if( pos[3]-pos[2] > ARRAYLENGTH(w1)-1 ){
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsesrcfile: w1이 잘렸습니다. '%s' 파일의 '%d'줄에 너무 많은 데이터 '%d'가 있습니다.\n", filepath, strline(buffer,p-buffer), pos[3]-pos[2]);
+			else
+				ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[3]-pos[2], filepath, strline(buffer,p-buffer));
+		}
 		size_t index = std::min( pos[3] - pos[2], ARRAYLENGTH( w1 ) - 1 );
 		memcpy( w1, p + pos[2], index * sizeof( char ) );
 		w1[index] = '\0';
 
 		// fill w2
-		if( pos[5]-pos[4] > ARRAYLENGTH(w2)-1 )
-			ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[5]-pos[4], filepath, strline(buffer,p-buffer));
-
+		if( pos[5]-pos[4] > ARRAYLENGTH(w2)-1 ){
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsesrcfile: w2이 잘렸습니다. '%s' 파일의 '%d'줄에 너무 많은 데이터 '%d'가 있습니다.\n", filepath, strline(buffer,p-buffer), pos[5]-pos[4]);
+			else
+				ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[5]-pos[4], filepath, strline(buffer,p-buffer));
+		}
 		index = std::min( pos[5] - pos[4], ARRAYLENGTH( w2 ) - 1 );
 		memcpy( w2, p + pos[4], index * sizeof( char ) );
 		w2[index] = '\0';
 
 		// fill w3
-		if( pos[7]-pos[6] > ARRAYLENGTH(w3)-1 )
-			ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[7]-pos[6], filepath, strline(buffer,p-buffer));
-
+		if( pos[7]-pos[6] > ARRAYLENGTH(w3)-1 ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsesrcfile: w3이 잘렸습니다. '%s' 파일의 '%d'줄에 너무 많은 데이터 '%d'가 있습니다.\n", filepath, strline(buffer,p-buffer), pos[7]-pos[6]);
+			else
+				ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[7]-pos[6], filepath, strline(buffer,p-buffer));
+		}
 		index = std::min( pos[7] - pos[6], ARRAYLENGTH( w3 ) - 1 );
 		memcpy( w3, p + pos[6], index * sizeof( char ) );
 		w3[index] = '\0';
 
 		// fill w4 (to end of line)
-		if( pos[1]-pos[8] > ARRAYLENGTH(w4)-1 )
-			ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[1]-pos[8], filepath, strline(buffer,p-buffer));
+		if( pos[1]-pos[8] > ARRAYLENGTH(w4)-1 ) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowWarning("npc_parsesrcfile: w4이 잘렸습니다. '%s' 파일의 '%d'줄에 너무 많은 데이터 '%d'가 있습니다.\n", filepath, strline(buffer,p-buffer), pos[1]-pos[8]);
+			else
+				ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[1]-pos[8], filepath, strline(buffer,p-buffer));
+		}
 		if (pos[8] != -1) {
 			index = std::min( pos[1] - pos[8], ARRAYLENGTH( w4 ) - 1 );
 			memcpy( w4, p + pos[8], index * sizeof( char ) );
@@ -5683,7 +6169,10 @@ int npc_parsesrcfile(const char* filepath)
 			w4[0] = '\0';
 
 		if (count < 3) {// Unknown syntax
-			ShowError("npc_parsesrcfile: Unknown syntax in file '%s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parsesrcfile: '%s' 파일의 '%d'줄에 알수 없는 구문이 있습니다. 중지중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parsesrcfile: Unknown syntax in file '%s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
 			break;
 		}
 
@@ -5699,7 +6188,10 @@ int npc_parsesrcfile(const char* filepath)
 			int count2 = sscanf(w1,"%15[^,],%6hd,%6hd[^,]",mapname,&x,&y);
 
 			if (count2 < 1) {
-				ShowError("npc_parsesrcfile: Invalid script definition in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("npc_parsesrcfile: '%s' 파일의 '%d'줄에 스크립트 정의가 잘못되었습니다. 줄을 건너뛰는중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+				else
+					ShowError("npc_parsesrcfile: Invalid script definition in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
 				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5711,7 +6203,10 @@ int npc_parsesrcfile(const char* filepath)
 			}
 
 			if (!mapindex_name2id(mapname)) {// Incorrect map, we must skip the script info...
-				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%s', line '%d'. Skipping line...\n", mapname, filepath, strline(buffer,p-buffer));
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("npc_parsesrcfile: '%s'파일의 '%d'줄에 알수 없는 맵 '%s'가 있습니다. 줄을 건너뒤는중...\n", filepath, strline(buffer,p-buffer), mapname);
+				else
+					ShowError("npc_parsesrcfile: Unknown map '%s' in file '%s', line '%d'. Skipping line...\n", mapname, filepath, strline(buffer,p-buffer));
 				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5728,7 +6223,10 @@ int npc_parsesrcfile(const char* filepath)
 			map_data *mapdata = map_getmapdata(m);
 
 			if (x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys) {
-				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%s', line '%d'. Skipping line...\n", x, y, mapname, filepath, strline(buffer,p-buffer));
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowError("npc_parsesrcfile: '%s'파일의 '%d'줄에 '%s' 맵에 대한 알수 없는 좌표('%d', '%d')가 있습니다. 줄을 건너뛰는중...\n", filepath, strline(buffer,p-buffer), mapname, x, y);
+				else
+					ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%s', line '%d'. Skipping line...\n", x, y, mapname, filepath, strline(buffer,p-buffer));
 				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5746,7 +6244,10 @@ int npc_parsesrcfile(const char* filepath)
 				if (strcasecmp(w2,"script") == 0)
 					p = npc_parse_function(w1, w2, w3, w4, p, buffer, filepath);
 				else {
-					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowError("npc_parsesrcfile: 구문을 분석 할 수 없습니다. '%s' 파일의 '%d'줄에 TAB이 추가되었거나 누락된것 같습니다. 건너뜀...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+					else
+						ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
 					p = strchr(p,'\n');// skip and continue
 				}
 			}
@@ -5760,7 +6261,10 @@ int npc_parsesrcfile(const char* filepath)
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
 			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer, filepath);
 		else {
-			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowError("npc_parsesrcfile: 파싱(구문분석)을 할 수 없습니다. '%s' 파일의 '%d'줄에 TAB이 없거나 누락되었을 수 있습니다. 줄을 건너뛰는중...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			else
+				ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
 			p = strchr(p,'\n');// skip and continue
 		}
 	}
@@ -5896,7 +6400,10 @@ struct npc_data* npc_duplicate_npc_for_player( struct npc_data& nd, map_session_
 	int16 new_x, new_y;
 
 	if( !map_search_freecell( &sd.bl, 0, &new_x, &new_y, battle_config.feature_dynamicnpc_rangex, battle_config.feature_dynamicnpc_rangey, 0 ) ){
-		ShowError( "npc_duplicate_npc_for_player: Unable to find a free cell to duplicate NPC \"%s\" for player \"%s\"(AID: %u, CID: %u)\n", nd.exname, sd.status.name, sd.status.account_id, sd.status.char_id );
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError( "npc_duplicate_npc_for_player: 플레이어 \"%s\"에 대해 복제 할 수 있는 NPC \"%s\"의 사용 가능한 셀을 찾을 수 없습니다.(AID: %u, CID: %u)\n",  sd.status.name,nd.exname, sd.status.account_id, sd.status.char_id );
+		else
+			ShowError( "npc_duplicate_npc_for_player: Unable to find a free cell to duplicate NPC \"%s\" for player \"%s\"(AID: %u, CID: %u)\n", nd.exname, sd.status.name, sd.status.account_id, sd.status.char_id );
 		return nullptr;
 	}
 
@@ -5942,7 +6449,10 @@ const char *npc_get_script_event_name(int npce_index)
 	case NPCE_KILLNPC:
 		return script_config.kill_mob_event_name;
 	default:
-		ShowError("npc_get_script_event_name: npce_index is outside the array limits: %d (max: %d).\n", npce_index, NPCE_MAX);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("npc_get_script_event_name: npce_index의 배열값 %d은(는) 배열제한값을 넘어섰습니다. (최대: %d).\n", npce_index, NPCE_MAX);
+		else
+			ShowError("npc_get_script_event_name: npce_index is outside the array limits: %d (max: %d).\n", npce_index, NPCE_MAX);
 		return nullptr;
 	}
 }
@@ -5982,8 +6492,12 @@ void npc_read_event_script(void)
 
 	if (battle_config.etc_log) {
 		//Print summary.
-		for (i = 0; i < NPCE_MAX; i++)
-			ShowInfo("%" PRIuPTR " '%s' events.\n", script_event[static_cast<enum npce_event>(i)].size(), npc_get_script_event_name(i));
+		for (i = 0; i < NPCE_MAX; i++) {
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowInfo("%" PRIuPTR " '%s' 이벤트.\n", script_event[static_cast<enum npce_event>(i)].size(), npc_get_script_event_name(i));
+			else
+				ShowInfo("%" PRIuPTR " '%s' events.\n", script_event[static_cast<enum npce_event>(i)].size(), npc_get_script_event_name(i));
+		}
 	}
 }
 
@@ -6053,7 +6567,10 @@ int npc_reload(void) {
 				}
 
 				if( mapdata->npc_num > 0 ){
-					ShowWarning( "npc_reload: %d npcs weren't removed at map %s!\n", mapdata->npc_num, mapdata->name );
+					if(strcmpi(MessageLang,"KOR") == 0) 
+						ShowWarning("npc_reload: %d개의 NPC가 맵 %s에서 제거되지 않았습니다!\n", mapdata->npc_num, mapdata->name);
+					else
+						ShowWarning( "npc_reload: %d npcs weren't removed at map %s!\n", mapdata->npc_num, mapdata->name );
 				}
 			}
 		}
@@ -6160,18 +6677,32 @@ static void npc_debug_warps_sub(struct npc_data* nd)
 	struct map_data *mapdata_nd = map_getmapdata(nd->bl.m);
 
 	if (map_getcell(m, nd->u.warp.x, nd->u.warp.y, CELL_CHKNPC)) {
-		ShowWarning("Warp %s at %s(%d,%d) warps directly on top of an area npc at %s(%d,%d)\n",
-			nd->name,
-			mapdata_nd->name, nd->bl.x, nd->bl.y,
-			mapdata->name, nd->u.warp.x, nd->u.warp.y
-			);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("%s(%d,%d)의 워프 '%s'이(가) %s(%d,%d)의 NPC 영역 바로 위에 있습니다.\n",
+				mapdata_nd->name, nd->bl.x, nd->bl.y,
+				nd->name,
+				mapdata->name, nd->u.warp.x, nd->u.warp.y
+				);
+		else
+			ShowWarning("Warp %s at %s(%d,%d) warps directly on top of an area npc at %s(%d,%d)\n",
+				nd->name,
+				mapdata_nd->name, nd->bl.x, nd->bl.y,
+				mapdata->name, nd->u.warp.x, nd->u.warp.y
+				);
 	}
 	if (map_getcell(m, nd->u.warp.x, nd->u.warp.y, CELL_CHKNOPASS)) {
-		ShowWarning("Warp %s at %s(%d,%d) warps to a non-walkable tile at %s(%d,%d)\n",
-			nd->name,
-			mapdata_nd->name, nd->bl.x, nd->bl.y,
-			mapdata->name, nd->u.warp.x, nd->u.warp.y
-			);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("%s(%d,%d)의 워프 '%s'는 %s(%d,%d)의 걸을수 없는 곳으로 워프하게 됩니다.\n",
+				mapdata_nd->name, nd->bl.x, nd->bl.y,
+				nd->name,
+				mapdata->name, nd->u.warp.x, nd->u.warp.y
+				);
+		else
+			ShowWarning("Warp %s at %s(%d,%d) warps to a non-walkable tile at %s(%d,%d)\n",
+				nd->name,
+				mapdata_nd->name, nd->bl.x, nd->bl.y,
+				mapdata->name, nd->u.warp.x, nd->u.warp.y
+				);
 	}
 }
 

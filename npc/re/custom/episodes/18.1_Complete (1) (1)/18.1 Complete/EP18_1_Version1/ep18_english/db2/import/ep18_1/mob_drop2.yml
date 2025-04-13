@@ -1,0 +1,416 @@
+###########################################################################
+# - Id                      Monster ID.
+#   Drops2:                 List of possible drops. There is no limit. The items are not displayed by the @-commands.
+#                           The items can't be Stolen.
+#     - Item                Aegis Item name.
+#       Rate                Drop rate of Item. (Range: 1-10000, Default: 1)
+#       RandomOptionGroup   Random Option Group applied to Item on drop. (Default: None)
+###########################################################################
+
+Header:
+  Type: MOB_DROP2_DB
+  Version: 1
+
+Body:
+  - Id: 21316    # EP18_MD_SCHULANG_R
+    Drops2:
+      - Item: Adulter_F_T_Sword    # 600017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Cakram    # 610020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Katar    # 610021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lance    # 630012
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_T_Staff    # 640019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rod    # 640020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Humma    # 650008
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Humma    # 650009
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Bow    # 700030
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ballista    # 700031
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_A_Bow    # 700032
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Revolver    # 800003
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rifle    # 810002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Shotgun    # 820002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Gatling    # 830003
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Launcher    # 840002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Sword    # 500025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lapier    # 500026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Dagger    # 510032
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Axe    # 520008
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Spear    # 530013
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_M_Book    # 540019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_P_Book    # 540020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Bible    # 540021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Moon_B    # 540022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Star_B    # 540023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Wand    # 550024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_S_Stick    # 550025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_D_Wand    # 550026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_Wand    # 550027
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_model    # 550028
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Knuckle    # 560018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Claw    # 560019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Violin    # 570017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Harp    # 570018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Rope    # 580017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ribbon    # 580018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Mace    # 590021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Hall    # 590022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+
+  - Id: 21317    # EP18_MD_DEMI_FREYJA_R
+    Drops2:
+      - Item: Adulter_F_T_Sword    # 600017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Cakram    # 610020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Katar    # 610021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lance    # 630012
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_T_Staff    # 640019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rod    # 640020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Humma    # 650008
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Humma    # 650009
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Bow    # 700030
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ballista    # 700031
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_A_Bow    # 700032
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Revolver    # 800003
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Rifle    # 810002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Shotgun    # 820002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Gatling    # 830003
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Launcher    # 840002
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Sword    # 500025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Lapier    # 500026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Dagger    # 510032
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Axe    # 520008
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_G_Spear    # 530013
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_M_Book    # 540019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_P_Book    # 540020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Bible    # 540021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Moon_B    # 540022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Star_B    # 540023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Wand    # 550024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_S_Stick    # 550025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_D_Wand    # 550026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_Wand    # 550027
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_F_model    # 550028
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Knuckle    # 560018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Claw    # 560019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Violin    # 570017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Harp    # 570018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_C_Rope    # 580017
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Ribbon    # 580018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Mace    # 590021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+      - Item: Adulter_F_Hall    # 590022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Courage_Wisdom
+
+  - Id: 21360    # EP18_MD_SCHULANG_L
+    Drops2:
+      - Item: Vivatus_F_T_Sword    # 600018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Cakram    # 610022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Katar    # 610023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lance    # 630013
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_T_Staff    # 640021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Rod    # 640022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Bow    # 700033
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ballista    # 700034
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_A_Bow    # 700035
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Sword    # 500027
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lapier    # 500028
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Dagger    # 510033
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Axe    # 520009
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Spear    # 530014
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_M_Book    # 540024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_P_Book    # 540025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Bible    # 540026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Wand    # 550029
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Knuckle    # 560020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Claw    # 560021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Violin    # 570019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Harp    # 570020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Rope    # 580019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ribbon    # 580020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Mace    # 590023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Hall    # 590024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+
+  - Id: 21361    # EP18_MD_DEMI_FREYJA_L
+    Drops2:
+      - Item: Vivatus_F_T_Sword    # 600018
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Cakram    # 610022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Katar    # 610023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lance    # 630013
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_T_Staff    # 640021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Rod    # 640022
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Bow    # 700033
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ballista    # 700034
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_A_Bow    # 700035
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Sword    # 500027
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Lapier    # 500028
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Dagger    # 510033
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Axe    # 520009
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_G_Spear    # 530014
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_M_Book    # 540024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_P_Book    # 540025
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Bible    # 540026
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Wand    # 550029
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Knuckle    # 560020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Claw    # 560021
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Violin    # 570019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Harp    # 570020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_C_Rope    # 580019
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Ribbon    # 580020
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Mace    # 590023
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+      - Item: Vivatus_F_Hall    # 590024
+        Rate: 500
+        RandomOptionGroup: Pontifex_Tenacity_Belief
+ 

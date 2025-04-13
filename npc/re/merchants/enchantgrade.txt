@@ -1,125 +1,153 @@
 //===== rAthena Script ======================================= 
 //= Enchant Grade
 //===== Changelogs: ==========================================
-//= 1.0 First Version. [JohnnyPlayy]
-//= 1.1 Fixed small issues. [Lemongrass]
-//= 1.2 Added translation. [Asheraf]
-//= 1.3 Added paramarket NPC and warps. [Balfear]
-//= 1.4 Translated paramarket NPC. [Lemongrass]
+//ÇÑ±Û¹ø¿ª ½ºÄ«ÀÌ·¯ºê
 //============================================================
 
-grademk,34,184,4	script	Sratos#sratos	4_JP_GARM_H,{
-	mes "[Sratos]";
-	mes "Hello, dear customer who walked in, let's hope for a miracle today.";
-	mes "How can I help you?";
+grademk,34,184,4	script	½º¶óÅä½º#sratos	4_JP_GARM_H,{
+	mes "[½º¶óÅä½º]";
+	mes "¿©, ¿À´Ãµµ ±âÀûÀ» ¹Ù¶ó°í °ÉÀ½ÇØ ÁÖ½Å";
+	mes "»ç¶ûÇÏ´Â °í°´´Ô";
+	mes "¹«¾ùÀ» µµ¿ÍÁÙ±î?";
 	next;
-	switch( select( "Enhance the equipment's grade.", "Exchange Etel items", "What is Grade Enhancement?" ) ){
+	switch( select( "ÀåºñÀÇ µî±ŞÀ» °­È­ÇÑ´Ù.", "¿¡Å×¸£ º¸¼®±³È¯", "µî±Ş °­È­¶õ?" ) ){
 		case 1:
-			mes "[Sratos]";
-			mes "Our customer. You want to enhance the grade of equipment.";
-			mes "It is not easy to move the magical power of jewels.";
+			mes "[½º¶óÅä½º]";
+			mes "¿ì¸® °í°´´Ô. ÀåºñÀÇ µî±ŞÀ» °­È­ÇÏ°í";
+			mes "½ÍÀ¸½Ã±¸³ª~.";
+			mes "º¸¼®ÀÇ ¸¶·ÂÀ» ¿Å±â´ÂÀÛ¾÷Àº ½±Áö";
+			mes "¾Ê¾Æ.";
 			next;
-			mes "[Sratos]";
-			mes "Magical power can explode on the spot.";
-			mes "Then the weapon that will inherit the magical power also explodes!";
+			mes "[½º¶óÅä½º]";
+			mes "±× ÀÚ¸®¿¡¼­ ¸¶·ÂÀÌ Æã-! ÇÏ°í Æø¹ßÇÒ";
+			mes "¼ö ÀÖ°Åµç.";
+			mes "±×·¯¸é, ¸¶·ÂÀ» ÀÌ¾î¹ŞÀ» ¹«±¸µµ °°ÀÌ";
+			mes "Æã-! ÇÏ´Â °Å¾ß.";
 			next;
-			switch( select( "I'll still do it!", "I'll think about it." ) ){
+			switch( select( "±×·¡µµ ÇÑ´Ù!", "°í¹Î Á» ÇØº¼°Ô." ) ){
 				case 1:
-					mes "[Sratos]";
-					mes "I wish good luck to our courageous customers!";
+					mes "[½º¶óÅä½º]";
+					mes "¿ë±âÀÖ´Â ¿ì¸® °í°´´Ô²² Çà¿îÀÌ";
+					mes "ÇÔ²²ÇÏ±â¸¦!";
 					close2;
 					enchantgradeui();
 					end;
 				case 2:
-					mes "[Sratos]";
-					mes "Whenever you have the courage to challenge, please come back.";
+					mes "[½º¶óÅä½º]";
+					mes "¾ğÁ¦µç µµÀüÇÒ ¿ë±â°¡ »ı±â¸é ´Ù½Ã";
+					mes "Ã£¾Æ¿Í~";
 					close;
 			}
 		case 2:
-			mes "[Sratos]";
-			mes "These are jewels used to enhance grades.";
-			mes "Etel Dust, the jewels that will be the base, and if you give me a small fee I'll exchange it for Etel jewels.";
+			mes "[½º¶óÅä½º]";
+			mes "µî±Ş °­È­¿¡ »ç¿ëµÇ´Â º¸¼®µéÀÌ¾ß.";
+			mes "¿¡ÅÚ µ¥½ºÆ®¿Í º£ÀÌ½º°¡ µÉ º¸¼®,";
+			mes "¾à°£ÀÇ ¼ö¼ö·á¸¦ ÁØ´Ù¸é ¿¡Å×¸£";
+			mes "º¸¼®À¸·Î ±³È¯ÇØ ÁÙ°Ô.";
 			close2;
 			callshop "EnchantGradeExchange";
 			end;
 
 		case 3:
-			mes "[Sratos]";
-			mes "Occasionally, unstable jewels with a lot of pure magical power are found.";
-			mes "We call these etheric gems, right?";
+			mes "[½º¶óÅä½º]";
+			mes "°£È¤ ¼øµµ ³ôÀº ¸¶·ÂÀ» ÀÜ¶à Ç°Àº";
+			mes "ºÒ¾ÈÁ¤ÇÑ º¸¼®·ù°¡ ¹ß°ßµÉ ¶§°¡ ÀÖ¾î.";
+			mes "¿ì¸®´Â ÀÌ°É ¿¡Å×¸£ º¸¼®ÀÌ¶ó°í";
+			mes "ºÎ¸£°Åµç?";
 			next;
-			mes "[Sratos]";
-			mes "You can transfer the magical power of the etheric gem to other weapons, but of course there is some risk.";
-			mes "It's delicate, so if you aren't careful, pop! It will explode.";
+			mes "[½º¶óÅä½º]";
+			mes "¿¡Å×¸£ º¸¼®ÀÌ °¡Áø ¸¶·ÂÀ» °í½º¶õÈ÷";
+			mes "´Ù¸¥ ¹«±¸·Î ÀüÀÌ½ÃÅ³ ¼ö ÀÖ´Âµ¥, ¹°·Ğ";
+			mes "¾à°£ÀÇ À§ÇèºÎ´ãÀÌÀÖÁö.";
+			mes "¼¶¼¼ÇØ¼­ ÀÚ¯ÇÏ¸é Æã-! ÇÏ°í";
+			mes "ÅÍÁ®¹ö¸®°Åµç.";
 			next;
-			mes "[Sratos]";
-			mes "Anyway, if you use this etheric gem, you can enhance the weapon you are using.";
-			mes "Performance gets better. We call this grade enhancement.";
+			mes "[½º¶óÅä½º]";
+			mes "¾îÂ·µç ÀÌ ¿¡Å×¸£ º¸¼®À» ÀÌ¿ëÇÏ¸é";
+			mes "»ç¿ëÇÏ´Â ¹«±¸¿¡ ¸¶·ÂÀ» ºÎ¿©ÇÒ ¼ö";
+			mes "ÀÖ¾î.";
+			mes "¼º´ÉÀÌ ´õ ÁÁ¾ÆÁöÁö. ¿ì¸®´Â ÀÌ°É";
+			mes "µî±Ş°­È­¶ó°í ÇØ!";
 			next;
-			mes "[Sratos]";
-			mes "You too, wouldn't you be happy if the weapons you love grow one step further?";
-			mes "We are the people who assist it. It's a bit risky, though. ahahaha.";
+			mes "[½º¶óÅä½º]";
+			mes "°í°´´Ôµµ, °í°´´ÔÀÌ »ç¶ûÇÏ´Â ¹«±âµéÀÌ";
+			mes "ÇÑ´Ü°è ´õ ¼ºÁ¤ÇÑ´Ù¸é ±â»ÚÀİ¾Æ?";
+			mes "¿ì¸° ±×°É µµ¿ÍÁÖ´Â »ç¶÷µéÀÌ¾ß. ¾ß°£";
+			mes "À§ÇèÇÏ±ä ÇÏÁö¸¸ ¸»ÀÌ¾ß. ¾ÆÇÏÇÏÇÏ.";
 			close;
 	}
 
 OnInit:
-	setunittitle(getnpcid(0), "<Grade Enhancer>");
+	setunittitle(getnpcid(0), "<µî±Ş°­È­»ç>");
 	end;
 }
 
-paramk,34,184,4	script	Suribell#suribell	4_F_FRUIT,{
-	mes "[Suribell]";
-	mes "May good luck always be with you!";
-	mes "Welcome to Paramarket's Grade Enhancement Center~";
+paramk,34,184,4	script	½´¸®º§#suribell	4_F_FRUIT,{
+	mes "[½´¸®º§]";
+	mes "¾ğÁ¦³ª Çà¿îÀÌ ÇÔ²²ÇÏ±æ!";
+	mes "ÆÄ¶ó¸¶ÄÏ µî±Ş°­È­¼Ò¿¡ Àß ¿À¼Ì½À´Ï´Ù~";
 	next;
-	switch( select( "Enhance the equipment's grade.", "Exchange Etel items", "What is Grade Enhancement?" )) {
+	switch( select( "ÀåºñÀÇ µî±ŞÀ» °­È­ÇÑ´Ù.", "¿¡Å×¸£ º¸¼® ±³È¯", "µî±Ş °­È­¶õ?" )) {
 		case 1:
-			mes "[Suribell]";
-			mes "Do you want to unlock the potential of your favorite equipment?";
-			mes "Explosions may also occur in the process of dealing with magical powers.";
+			mes "[½´¸®º§]";
+			mes "¾Æ³¢´Â ÀåºñÀÇ ÀáÀç·ÂÀ» ±ú¿ì°í ½ÍÀº";
+			mes "°ÅÁÒ?";
+			mes "¸¶·ÂÀ» ´Ù·ç´Â °úÁ¤¿¡¼­ Æø¹ßÀÌ ÀÏ¾î³¯";
+			mes "¼öµµ ÀÖ½À´Ï´Ù.";
 			next;
-			mes "[Suribell]";
-			mes "Still, if you're trying to enhance your grade... !";
-			mes "I, Suribell, will do my best!";
+			mes "[½´¸®º§]";
+			mes "±×·¡µµ  µî±Ş°­È­¿¡ µµÀüÇÏ½Å´Ù¸é...!";
+			mes "ÀÌ ½´¸®º§, ¿µÈ¥±îÁö °¥¾Æ³Ö¾î ¿­½ÉÈ÷";
+			mes "ÇÏ°Ú½À´Ï´Ù!";
 			next;
-			switch( select( "I'll still do it!", "I'll think about it." ) ){
+			switch( select( "±×·¡µµ ÇÑ´Ù!", "°í¹Î Á» ÇØº¼°Ô." ) ){
 				case 1:
-					mes "[Suribell]";
-					mes "Let's hold hands and have faith! Try clenching your teeth!";
+					mes "[½´¸®º§]";
+					mes "¿ì¸® ¾ç¼Õ Àâ°í, ¹ÏÀ½À» °¡Áö°í! ÀÌ";
+					mes "¾Ç¹°°í ÇØ ºÁ¿ä!";
 					close2;
 					enchantgradeui();
 					end;
 				case 2:
-					mes "[Suribell]";
-					mes "Okay! Let's drink a glass of cold water!";
+					mes "[½´¸®º§]";
+					mes "±×·¡¿ä! ³Ã¼ö ÇÑ ÀÜ ¸¶½Ã°í ÇÕ½Ã´Ù!";
 					close;
 			}
 		case 2:
-			mes "[Suribell]";
-			mes "You need etheric gems to enhance grades!";
-			mes "If you combine Etel Dust and jewels to make it, it is fine! An Etel jewel for adventurers is complete!";
-			mes "Would you like to combine jewels and Etel Dust?";
+			mes "[½´¸®º§]";
+			mes "µî±Ş °­È­¿¡´Â ¿¡Å×¸£ º¸¼®ÀÌ ÇÊ¿äÇÏÁÒ!";
+			mes "¿¡ÅÚ ´õ½ºÆ®¿Í º¸¼®À» Á¶ÇÕÇØ¼­";
+			mes "¸¸µé¸é, Â§! ¸ğÇè°¡´ÔÀ» À§ÇÑ ¿¡Å×¸£";
+			mes "º¸¼®ÀÌ ¿Ï¼º!";
+			mes "º¸¼®°ú ¿¡ÅÚ ´õ½ºÆ®Á¶ÇÕÀ» ÇÏ½Ã°Ú¾î¿ä?";
 			close2;
 			callshop "EnchantGradeExchange";
 			end;
 		case 3:
-			mes "[Suribell]";
-			mes "Occasionally, unstable jewels with a lot of pure magical power are found.";
-			mes "I decided to call such gems etheric gems.";
-			mes "Who? I am Suribell!";
+			mes "[½´¸®º§]";
+			mes "°£È¤ ¼øµµ ³ôÀº ¸¶·ÂÀ» ÀÜ¶à Ç°Àº";
+			mes "ºÒ¾ÈÁ¤ÇÑ º¸¼®·ù°¡ ¹ß°ßµÉ ¶§°¡";
+			mes "ÀÖ½À´Ï´Ù.";
+			mes "±×·± º¸¼®µéÀ» ÅëÄª ¿¡Å×¸£ º¸¼®ÀÌ¶ó°í";
+			mes "ºÎ¸£±â·Î Çß¾î¿ä.";
+			mes "´©°¡? ¹Ù·Î ÀÌ ½´¸®º§ÀÌ!";
 			next;
-			mes "[Suribell]";
-			mes "The magical power of etheric gems sometimes awakens the hidden potential of equipment.";
-			mes "We call it grade enhancement because it goes up one tier!";
+			mes "[½´¸®º§]";
+			mes "¿¡Å×¸£ º¸¼®ÀÇ ¸¶·ÂÀº ÀåºñÀÇ ¼û°ÜÁø";
+			mes "ÀáÀç´É·ÂÀ» ±ú¿ï¶§°¡ ÀÖ½À´Ï´Ù.";
+			mes "¿ì¸®´Â ±×°É ÇÑ´Ü°è µî±ŞÀÌ ¿Ã¶ó°£´Ù°í";
+			mes "ÇØ¼­ µî±Ş°­È­¶ó°í ºÎ¸£Áö¿ä!";
 			next;
-			mes "[Suribell]";
-			mes "The adventurer may have a potential that is unknown to him.";
-			mes "There is a risk that it can be destroyed if done wrong, but try it with faith!";
+			mes "[½´¸®º§]";
+			mes "¸ğÇè°¡´ÔÀÇ ¹«±¸µµ ¸ğ¸£´Â ÀáÀç´É·ÂÀ»";
+			mes "°¡Áö°í ÀÖÀ»Áö ¸ğ¸¨´Ï´Ù.";
+			mes "Àß¸øÇÏ¸é ¼Ò¸êÇÒ ¼ö ÀÖ´Â À§ÇèÀÌ ÀÖ±ä";
+			mes "ÇÏÁö¸¸ ¹ÏÀ½À» °¡Áö°í µµÀüÇØ º¸½Ê½Ã¿À.";
 			close;
 	}
 
 OnInit:
-	setunittitle(getnpcid(0), "<Grade Enhancer>");
+	setunittitle(getnpcid(0), "<µî±Ş°­È­»ç>");
 	end;
 }
 

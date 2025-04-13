@@ -12,6 +12,7 @@
 #include <common/socket.hpp>  // RBUF*
 #include <common/strlib.hpp>  // safestrncpy
 #include <common/timer.hpp>  // gettick
+#include <config/custom.hpp>
 
 #include "atcommand.hpp"  // msg_txt
 #include "battle.hpp"  // battle_config.*
@@ -92,7 +93,10 @@ int8 buyingstore_setup(map_session_data* sd, unsigned char slots){
 
 	if( slots > MAX_BUYINGSTORE_SLOTS )
 	{
-		ShowWarning("buyingstore_setup: Requested %d slots, but server supports only %d slots.\n", (int)slots, MAX_BUYINGSTORE_SLOTS);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buyingstore_setup: 요청 된 %d개의 슬롯이 있지만 서버는 %d개의 슬롯만을 지원합니다.\n", (int)slots, MAX_BUYINGSTORE_SLOTS);
+		else
+			ShowWarning("buyingstore_setup: Requested %d slots, but server supports only %d slots.\n", (int)slots, MAX_BUYINGSTORE_SLOTS);
 		slots = MAX_BUYINGSTORE_SLOTS;
 	}
 
@@ -197,7 +201,10 @@ int8 buyingstore_create( map_session_data* sd, int zenylimit, unsigned char resu
 
 			// duplicate
 			if( listidx != i ){
-				ShowWarning( "buyingstore_create: Found duplicate item on buying list (nameid=%u, amount=%hu, account_id=%d, char_id=%d).\n", item->itemId, item->amount, sd->status.account_id, sd->status.char_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buyingstore_create: 구매 목록에 중복 아이템이 있습니다. (아이템ID번호=%hu, 갯수=%hu, 계정ID번호=%d, 케릭터ID번호=%d).\n", item->itemId, item->amount, sd->status.account_id, sd->status.char_id);
+				else
+					ShowWarning( "buyingstore_create: Found duplicate item on buying list (nameid=%u, amount=%hu, account_id=%d, char_id=%d).\n", item->itemId, item->amount, sd->status.account_id, sd->status.char_id );
 				break;
 			}
 		}
@@ -376,7 +383,10 @@ void buyingstore_trade( map_session_data* sd, uint32 account_id, unsigned int bu
 		for( int k = 0; k < i; k++ ){
 			// duplicate
 			if( itemlist[k].index == item->index && k != i ){
-				ShowWarning( "buyingstore_trade: Found duplicate item on selling list (prevnameid=%u, prevamount=%hu, nameid=%u, amount=%hu, account_id=%d, char_id=%d).\n", itemlist[k].itemId, itemlist[k].amount, item->itemId, item->amount, sd->status.account_id, sd->status.char_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "buyingstore_trade: 판매목록중에 중복 아이템이 있습니다. (이전 아이템ID번호=%u, 이전갯수=%hu, 아이템ID번호=%u, 갯수=%hu, 계정ID번호=%d, 케릭터ID번호=%d).\n", itemlist[k].itemId, itemlist[k].amount, item->itemId, item->amount, sd->status.account_id, sd->status.char_id );
+				else 
+					ShowWarning( "buyingstore_trade: Found duplicate item on selling list (prevnameid=%u, prevamount=%hu, nameid=%u, amount=%hu, account_id=%d, char_id=%d).\n", itemlist[k].itemId, itemlist[k].amount, item->itemId, item->amount, sd->status.account_id, sd->status.char_id );
 				clif_buyingstore_trade_failed_seller( sd, BUYINGSTORE_TRADE_SELLER_FAILED, item->itemId );
 				return;
 			}
@@ -637,8 +647,12 @@ void buyingstore_reopen( map_session_data* sd ){
 			// Immediate save
 			chrif_save(sd, CSAVE_AUTOTRADE);
 
-			ShowInfo("Buyingstore loaded for '" CL_WHITE "%s" CL_RESET "' with '" CL_WHITE "%d" CL_RESET "' items at " CL_WHITE "%s (%d,%d)" CL_RESET "\n",
-				sd->status.name, at->count, mapindex_id2name(sd->mapindex), sd->bl.x, sd->bl.y);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("" CL_WHITE "%s (%d,%d)" CL_RESET "에  '" CL_WHITE "%d" CL_RESET "'개의 아이템이 있는 '" CL_WHITE "%s" CL_RESET "'에 대한 구매상점(Buyingstore)가 로드되었습니다.\n",
+					mapindex_id2name(sd->mapindex), sd->bl.x, sd->bl.y, at->count,sd->status.name);
+			else
+				ShowInfo("Buyingstore loaded for '" CL_WHITE "%s" CL_RESET "' with '" CL_WHITE "%d" CL_RESET "' items at " CL_WHITE "%s (%d,%d)" CL_RESET "\n",
+					sd->status.name, at->count, mapindex_id2name(sd->mapindex), sd->bl.x, sd->bl.y);
 		}
 		aFree(data);
 	}
@@ -650,7 +664,10 @@ void buyingstore_reopen( map_session_data* sd ){
 	}
 
 	if (fail != 0) {
-		ShowError("buyingstore_reopen: (Error:%d) Load failed for autotrader '" CL_WHITE "%s" CL_RESET "' (CID=%/AID=%d)\n", fail, sd->status.name, sd->status.char_id, sd->status.account_id);
+		if(strcmpi(MessageLang,"KOR") == 0) 
+			ShowError("buyingstore_reopen: (에러:%d) 자동거래자 '" CL_WHITE "%s" CL_RESET "' (CID=%/AID=%d)에 대한 로드가 실패 했습니다.\n", fail, sd->status.name, sd->status.char_id, sd->status.account_id);
+		else
+			ShowError("buyingstore_reopen: (Error:%d) Load failed for autotrader '" CL_WHITE "%s" CL_RESET "' (CID=%/AID=%d)\n", fail, sd->status.name, sd->status.char_id, sd->status.account_id);
 		map_quit(sd);
 	}
 }
@@ -755,7 +772,10 @@ void do_init_buyingstore_autotrade( void ) {
 			}
 			dbi_destroy(iter);
 
-			ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' buyingstore autotraders with '" CL_WHITE "%d" CL_RESET "' items.\n", db_size(buyingstore_autotrader_db), items);
+			if(strcmpi(MessageLang,"KOR") == 0) 
+				ShowStatus("'" CL_WHITE "%d" CL_RESET "'개의 아이템과 '" CL_WHITE "%d" CL_RESET "'개의 자동거래자 구매상점의 로드를 완료했습니다.\n", items, db_size(buyingstore_autotrader_db));
+			else
+				ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' buyingstore autotraders with '" CL_WHITE "%d" CL_RESET "' items.\n", db_size(buyingstore_autotrader_db), items);
 		}
 	}
 

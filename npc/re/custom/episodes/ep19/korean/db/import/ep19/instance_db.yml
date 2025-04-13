@@ -1,0 +1,37 @@
+# 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+
+Header:
+  Type: INSTANCE_DB
+  Version: 2
+
+Body:
+  - Id: 200
+    Name: "바곳의 연구실"  # Baggot Laboratory (main quest)
+    Enter:
+      Map: 1@jorlab
+      X: 57
+      Y: 45
+  - Id: 201
+    Name: "혼란한 뱀의 둥지"  # Confused Snake's Nest (main quest)
+    Enter:
+      Map: 1@jorchs
+      X: 272
+      Y: 20
+  - Id: 202
+    Name: "아윈과 함께하는 순찰"  # Iwin Patrol
+    Enter:
+      Map: 1@iwp
+      X: 380
+      Y: 229
+  - Id: 203
+    Name: "비공정 파괴작전"  # Airship Destruction
+    Enter:
+      Map: 1@whl
+      X: 32
+      Y: 53
+  - Id: 204
+    Name: "바곳의 연구실 "  # Simulation Battle (extra space to make the name unique)
+    Enter:
+      Map: 1@jorlab
+      X: 57
+      Y: 45

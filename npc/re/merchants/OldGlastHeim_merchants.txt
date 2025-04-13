@@ -9,30 +9,30 @@
 
 // Merchant
 //============================================================
-glast_01,210,273,5	script	Hugin's Butler#pa0829	1_F_04,{
+glast_01,210,273,5	script	후긴의 집사#pa0829	1_F_04,{
 	disable_items;
 	if (MaxWeight - Weight < 1000) {
-		mes "Your bag is too heavy. Reduce some weight and come back.";
+		mes "가방이 너무 무거우신것 같아요. 무게를 줄이고 다시 와주세요.";
 		close;
 	}
-	mes "[Hugin's Butler]";
-	mes "Bring Temporal Crystal items for various Temporal boots items. Pick something you want.";
+	mes "[후긴의 집사]";
+	mes "저는 시간의 결정을 가져오시면, 다양한 시간의 부츠 아이템으로 바꿔드려요. 원하시는걸 선택해주세요.";
 	next;
-	switch( select( "Cancel", "Buy Temporal Boots (Need 1 Temporal Crystal)", "Upgrade Temporal Boots (Need 5 Temporal Crystals)", "Upgrade Modified Boots (Need 5 Temporal Crystals)" ) ) {
+	switch( select( "취소", "시간의 부츠 구입(시간의 결정 1개 소모)", "시간의 부츠 업그레이드(시간의 결정 5개 소모)", "변형된 부츠로 업그레이드 (시간의 결정 5개 소모)" ) ) {
 	case 1:
-		mes "[Hugin's Butler]";
-		mes "Come back whenever you want.";
+		mes "[후긴의 집사]";
+		mes "필요하면 언제든 다시오세요.";
 		close;
 	case 2:
 		if (countitem(6607) > 0) {
-			mes "[Hugin's Butler]";
-			mes "Take these Temporal Boots. We can upgrade your Temporal Boots with 5 Temporal Crystals.";
+			mes "[후긴의 집사]";
+			mes "여기 시간의 부츠입니다. 시간의 결정을 5개 모아오시면, 부츠를 업그레이드도 해드리고 있어요.";
 			delitem 6607,1;// Temporal_Crystal
 			getitem 2499,1;// Temporal_Boots
 			close;
 		}
-		mes "[Hugin's Butler]";
-		mes "You need more Temporal Crystals. Come back when you get some more Temporal Crystals during your travel through Old Glast Heim.";
+		mes "[후긴의 집사]";
+		mes "시간의 결정이 부족해요. 올드 글레스트헤임을 여행하면서 시간의 결정을 모으면 다시와주세요.";
 		close;
 	case 3:
 		setarray .@equip_type[0],
@@ -54,41 +54,41 @@ glast_01,210,273,5	script	Hugin's Butler#pa0829	1_F_04,{
 		break;
 	}
 	if (!getequipisequiped(EQI_SHOES)) {
-		mes "[Hugin's Butler]";
-		mes "Only the item you are wearing can be upgraded.";
-		mes "Wear the ^0000FFTemporal Boots^000000 you want to upgrade, and then talk to me once again.";
+		mes "[후긴의 집사]";
+		mes "착용하고 있는 장비에 한해서만 업그레이드가 가능해요.";
+		mes "^0000FF시간의 부츠^000000 업그레이드를 원하신다면 착용 후 다시 와주시길 바래요.";
 		close;
 	}
 	if (getequipid(EQI_SHOES) != 2499) {
-		mes "[Hugin's Butler]";
-		mes "You are not wearing the Temporal Boots. Talk to me once you're wearing them.";
+		mes "[후긴의 집사]";
+		mes "시간의 부츠를 착용하고 있지 않으세요. 착용 후 다시 말을 걸어주세요.";
 		close;
 	}
 	if (countitem(6607) < 5) {
-		mes "[Hugin's Butler]";
-		mes "Not enough Temporal Crystals. You need 5 Temporal Crystals to upgrade your item.";
+		mes "[후긴의 집사]";
+		mes "시간의 결정이 부족하네요. 시간의 부츠를 업그레이드 하기위해선 5개의 시간의 결정이 필요합니다.";
 		close;
 	}
-	mes "[Hugin's Butler]";
-	mes "You can trade ^0000FF1 Temporal Boots and 5 Temporal Crystals^000000 for 1 of the following items. ^FF0000Previous refine rate will not be retained with these new ones^000000.";
+	mes "[후긴의 집사]";
+	mes "^0000FF시간의 부츠 1개 와 시간의 결정 5개^000000를 사용하여 아래 아이템으로 업그레이드가 가능합니다. ^FF0000업그레이드를 하면 제련도는 초기화가 되니 주의해주세요.^000000.";
 	next;
-	.@s = select( "Cancel", "Str Boots", "Int Boots", "Agi Boots", "Vit Boots", "Dex Boots", "Luk Boots" ) - 2;
+	.@s = select( "취소", "힘 부츠", "지력 부츠", "민첩 부츠", "체력 부츠", "손재주 부츠", "행운 부츠" ) - 2;
 	if (.@s == -1) {
-		mes "[Hugin's Butler]";
-		mes "Come back anytime you want.";
+		mes "[후긴의 집사]";
+		mes "필요하면 언제든 다시오세요.";
 		close;
 	}
-	setarray .@type$[0], "Strength", "Intelligence", "Agility", "Vitality", "Dexterity", "Lucky";
-	mes "[Hugin's Butler]";
-	mes "Are you sure about buying Temporal ^FF0000" + .@type$[.@s] + "^000000 Boots? There's no refunds.";
+	setarray .@type$[0], "힘", "지력", "민첩", "체력", "손재주", "행운";
+	mes "[후긴의 집사]";
+	mes "선택하신게 시간의 ^FF0000" + .@type$[.@s] + "^000000 부츠가 맞으신가요? 환불은 안돼요.";
 	next;
-	if (select( "Think again", "Yes, I am sure." ) == 1) {
-		mes "[Hugin's Butler]";
-		mes "Ok, come back again when you are sure.";
+	if (select( "다시 생각한다.", "네, 맞아요." ) == 1) {
+		mes "[후긴의 집사]";
+		mes "네, 그럼 다음에 다시 와주세요.";
 		close;
 	}
-	mes "[Hugin's Butler]";
-	mes "The boots have been upgraded as you want.";
+	mes "[후긴의 집사]";
+	mes "원하는 부츠로 업그레이드가 완료되었습니다..";
 	if (getequipid(EQI_SHOES) == 2499) {
 		delequip EQI_SHOES;
 		delitem 6607,5;// Temporal_Crystal
@@ -99,53 +99,53 @@ glast_01,210,273,5	script	Hugin's Butler#pa0829	1_F_04,{
 
 // Enchant and Socket NPC
 //============================================================
-glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
+glast_01,212,273,4	script	후긴의 마법장인#pa0829	1_F_01,{
 	disable_items;
 	if (MaxWeight - Weight < 1000) {
-		mes "Your bag is too heavy. Reduce some weight and come back.";
+		mes "가방이 너무 무거우신것 같아요. 무게를 줄이고 다시 와주세요.";
 		close;
 	}
-	mes "[Hugin's Magician]";
-	mes "So you came to enchant the Temporal Boots. Be aware that Boots with sockets cannot be enchanted, and this upgrade is only possible for the boots you are wearing.";
+	mes "[후긴의 마법장인]";
+	mes "시간의 부츠에 인챈트를 하러 오셧나요? 부츠에는 소켓이 있으면 안되고, 착용중이어야 해드릴 수 있어요.";
 	next;
-	if (select( "How does the enchanting work?", "Give effect to my Temporal Boots" ) == 1) {
-		mes "[Hugin's Magician]";
-		mes "You can keep obtain ^0000FFCoagulated Spell^000000 through your travel times.";
+	if (select( "인챈트는 어떻게 하나요?", "시간의 부츠에 효과를 부여해주세요." ) == 1) {
+		mes "[후긴의 마법장인]";
+		mes "여행을 하시다보면 ^0000FF응고된 마력^000000 아이템을 얻으실 수 있을텐데요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "I can enchant your Temporal Boots items depands on the amount of that item. ^0000FFNot normal type boots^000000. Only possible for those 6 expanded version boots.";
+		mes "[후긴의 마법장인]";
+		mes "저는 그 응고된 마력 양에따라 시간의 부츠에 인챈트를 부여할 수 있어요ㅗ. ^0000FF일반적인 시간의 부츠는 안돼요.^000000. 옵션을 확장한 6가지 종류의 부츠에만 인챈트가 가능합니다.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "But, once you put a socket into the item, you cannot enchant it. Make sure to remember that.";
+		mes "[후긴의 마법장인]";
+		mes "그리고, 부츠에 한번 소켓을 뚫어버리면, 인챈트를 할 수 없어요. 꼭 기억해주세요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "I don't give out effect randomly. You can pick which effect you want for the item.";
+		mes "[후긴의 마법장인]";
+		mes "그리고 다행히 인챈트 옵션은 랜덤이 아니에요. 원하는 항목을 선택하실 수 있답니다.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "Of course it is for 4th slot only. You can have small effect at the start, and then the effect gets stronger.";
+		mes "[후긴의 마법장인]";
+		mes "아, 물론 그건 4번째 슬롯만이지만요.. 아무튼 처음 인챈트를 하면 효과가 작지만, 점점 인챈트를 할 수록 효과가 높아져요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "To get to the final option upgrade, it will require way more Coagulated Spell items. Don't forget that.";
+		mes "[후긴의 마법장인]";
+		mes "인챈트 옵션을 최대로 업그레이드 할 때는 처음 인챈트 할 때에 비해 더 많은 응고된 마력이 필요하답니다. 명심하세요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "Once the 4th slot completes the best option, you get to have a random bonus effect to the 3rd slot. With.. certain payment~";
+		mes "[후긴의 마법장인]";
+		mes "4번째 슬롯은 원하는 옵션으로 선택이 가능하지만, 세번째 슬롯에는 랜덤으로 보너스 효과를 얻으실 수 있어요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "Also, you don't lose the item even if the enchant fails, we also guarantee keeping card and refine rate. But we can't initialize enchanting.";
+		mes "[후긴의 마법장인]";
+		mes "그리고 실패해도, 아이템을 잃거나 카드, 제련 같은건 다 유지되지만, 인챈트를 초기화하는건 불가능해요.";
 		next;
-		mes "[Hugin's Magician]";
-		mes "Phew...";
-		mes "Anyways, that's all for basic enchant information. Now you should see for yourself.";
+		mes "[후긴의 마법장인]";
+		mes "휴...";
+		mes "어쨋든 기본적인 정보는 다 알려드린 것 같네요. 나머진 직접 해보시면 알게될거에요.";
 		close;
 	}
 	if (!getequipisequiped(EQI_SHOES)) {
-		mes "[Hugin's Magician]";
-		mes "Are you wearing the item?";
+		mes "[후긴의 마법장인]";
+		mes "아이템을 착용하고 계신가요?";
 		close;
 	}
 	.@equip_id = getequipid(EQI_SHOES);
 
-	setarray .@enchant_1[0],4808,4832,4814,4741,4869,4752;// Fighting_Spirit4	Expert_Archer1	Spell2	Vitality2	DelayafterAttack1Lv	Luck3
+	setarray .@enchant_1[0],4808,4832,4814,4741,4869,4752;// 투지4	명궁1	마력2	VIT2	공격후딜레이1Lv	LUK3
 	setarray .@enchant_2[0],4820,4833,4813,4742,4872,4753;// Fighting_Spirit5	Expert_Archer2	Spell3	Vitality3	DelayafterAttack2Lv	Luck4
 	setarray .@enchant_3[0],4821,4834,4812,4861,4873,4754;// Fighting_Spirit6	Expert_Archer3	Spell4	MHP1		DelayafterAttack3Lv	Luck5
 	setarray .@enchant_4[0],4822,4835,4826,4862,4881,4755;// Fighting_Spirit7	Expert_Archer4	Spell5	MHP2		DelayafterAttack4Lv	Luck6
@@ -175,20 +175,20 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 		.@equip_refine = getequiprefinerycnt(EQI_SHOES);
 
 		if (.@card[2] > 0) {
-			mes "[Hugin's Magician]";
-			mes "These boots have already passed the enchanting limit. We can't enchant them any more.";
+			mes "[후긴의 마법장인]";
+			mes "이미 그 아이템은 최대로 인챈트가 된 것 같아요. 저희가 어떻게 더 인챈트 할 수는 없겠어요.";
 			close;
 		}
 		if (.@card[3] == 0) {// 4th slot 1st try enchanting
 			.@cost = .@enchant_cost[0];
-			mes "[Hugin's Magician]";
-			mes "Want to enchant ^0000FF" + .@equip_name$ + "^000000?";
-			mes "For the 1st enchanting, you need ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
+			mes "[후긴의 마법장인]";
+			mes "인챈트를 원하는 장비가 ^0000FF" + .@equip_name$ + "^000000 가 맞나요?";
+			mes "인챈트에는 응고된 마력이 ^0000FF" + .@cost + "^000000 1개 필요해요.";
 			next;
-			.@s = select( "Quit", "Fighting Spirit", "Archery", "Spell", "Vitality", "Attack Speed", "Lucky" ) - 2;
+			.@s = select( "나간다", "투지", "명궁", "마력", "VIT", "공격후딜레이", "LUK" ) - 2;
 			if (.@s == -1) {
-				mes "[Hugin's Magician]";
-				mes "Ok, come back when you are ready.";
+				mes "[후긴의 마법장인]";
+				mes "네, 준비가 되면 언제든 다시와주세요.";
 				close;
 			}
 			.@card[3] = .@enchant_1[.@s];
@@ -202,34 +202,34 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 					break;
 			}
 			if (.@enchant_num == 5) {
-				mes "[Hugin's Magician]";
-				mes "Something wrong happened.";
+				mes "[후긴의 마법장인]";
+				mes "뭔가 잘못되었어요.";
 				close;
 			}
 			.@cost = .@enchant_cost[.@enchant_num];
 
-			mes "[Hugin's Magician]";
+			mes "[후긴의 마법장인]";
 			if (.@enchant_num == 4) {
 				.@card[2] = callfunc("F_Rand",4875,4876,4877,4878,4879,4880);// Bear's_Power, Runaway_Magic, Speed_Of_Light, Muscle_Fool, Hawkeye, Lucky_Day
-				.@string$ = "^990000Bonus effect ^000000 upgrade.";
-				mes "4th slot is already upgraded to the final option. Would you like a random bonus effect for the 3rd slot? You need ^0000ff" + .@cost + "^000000 Coagulated Spell items.";
+				.@string$ = "^990000보너스 효과^000000 가 적용되었어요.";
+				mes "4번째 슬롯은 이미 최대로 인챈트가 완료되었어요. 3번째 슬롯에 랜덤한 효과를 부여하시겠어요? 응고된 마력이 ^0000ff" + .@cost + "^000000 개가 필요해요.";
 			}
 			else {
 				.@number = .@enchant_num + 1;
 				.@card[3] = getd( ".@enchant_" + (.@enchant_num+1) + "[" + .@enchant_type + "]" );
-				.@string$ = "enchant number ^630000" + .@number + "^000000.";
-				mes "Enchanting ^0000FF" + .@equip_name$ + "^000000's 4th slot as ^0000FF" + .@number + "^000000 level effect. Requires ^0000FF" + .@cost + "^000000 Coagulated Spell items.";
+				.@string$ = "인챈트 횟수 : ^630000" + .@number + "^000000.";
+				mes "^0000FF" + .@equip_name$ + "장비의 ^000000 4번째 슬롯에 ^0000FF" + .@number + "^000000 레벨 효과를 인챈트 하기위해선, 응고된 마력이 ^0000FF" + .@cost + " 개 ^000000 필요해요.";
 			}
 			next;
-			if (select("Quit","Effect Upgrade!") == 1) {
-				mes "[Hugin's Magician]";
-				mes "Ok, come back when you are ready.";
+			if (select("나간다","효과 업그레이드!") == 1) {
+				mes "[후긴의 마법장인]";
+				mes "네, 준비가 되면 언제든 와주세요.";
 				close;
 			}
 		}
 		if (countitem(6608) < .@cost) {
-			mes "[Hugin's Magician]";
-			mes "Hmm, you are missing " + (.@cost - countitem(6608)) + " Coagulated Spell items. Go get more, and then we can talk about more enchants.";
+			mes "[후긴의 마법장인]";
+			mes "음, 응고된 마력이" + (.@cost - countitem(6608)) + " 개 부족하세요. 가서 아이템을 더 모아오세요.";
 			close;
 		}
 		specialeffect2 EF_REPAIRWEAPON;
@@ -240,41 +240,41 @@ glast_01,212,273,4	script	Hugin's Magician#pa0829	1_F_01,{
 			close;
 
 		delequip EQI_SHOES;
-		mes "[Hugin's Magician]";
-		mes "Trying for " + .@string$;
+		mes "[후긴의 마법장인]";
+		mes " " + .@string$;
 		getitem2 .@equip_id,1,1,.@equip_refine,0,0,0,.@card[2],.@card[3];
 		close;
 	default:
-		mes "[Hugin's Magician]";
-		mes "This is not the right item for this enchant.";
-		mes "Remember, only those 6 types of Temporal Boots are available for enchanting.";
+		mes "[후긴의 마법장인]";
+		mes "이 아이템은 인챈트 할 수 없어요.";
+		mes "저는 6가지 능력치로 확장된 시간의 부츠에만 인챈트가 가능하답니다.";
 		close;
 	}
 }
 
-glast_01,210,270,0	script	Hugin's Craftsman#pa0829	4_F_JOB_BLACKSMITH,{
+glast_01,210,270,0	script	후긴의 세공장인#pa0829	4_F_JOB_BLACKSMITH,{
 	disable_items;
 	if (MaxWeight - Weight < 1000) {
-		mes "Your bag is too heavy. Reduce some weight and come back.";
+		mes "가방이 너무 무거우신것 같아요. 무게를 줄이고 다시 와주세요.";
 		close;
 	}
-	mes "[Hugin's Craftsman]";
-	mes "That Magician always says that enchanting Temporal Boots is the best. But, I think quite different.";
+	mes "[후긴의 세공장인]";
+	mes "저 마법장인은 시간의 부츠에 인챈트를 하는게 최고라고 말하지만, 제 생각은 좀 달라요.";
 	next;
-	mes "[Hugin's Craftsman]";
-	mes "I think putting a slot into the item would be the best. Even with some risk of failing.";
+	mes "[후긴의 세공장인]";
+	mes "저는 아이템에 슬롯이 있는게 최고라고 생각해요. 비록 실패의 위험이 있긴 하지만요.";
 	next;
-	mes "[Hugin's Craftsman]";
-	mes "Bring me ^0000FF5 Temporal Crystals^000000, and I will try to put a slot into your advanced Temporal Boots. But, it's possible to ^FF0000fail and break the item^000000. Is that ok?";
+	mes "[후긴의 세공장인]";
+	mes "저한테 ^0000FF시간의 결정 5개^000000를 가져오시면, 시간의 부츠에 슬롯을 뚫어볼께요. 하지만, 무조건 성공하는건 아니고 ^FF0000실패해서 아이템이 부서질 확률도 있어요^000000. 이해하셧죠?";
 	next;
-	if (select( "Cancel", "Take the risk and try to add a slot" ) == 1) {
-		mes "[Hugin's Craftsman]";
-		mes "Ok, come back anytime you want.";
+	if (select( "취소한다.", "위험부담이 있지만 슬롯을 추가한다." ) == 1) {
+		mes "[후긴의 세공장인]";
+		mes "네, 원하시면 언제든 와주세요.";
 		close;
 	}
 	if (!getequipisequiped(EQI_SHOES)) {
-		mes "[Hugin's Craftsman]";
-		mes "Are you sure you are wearing the item?";
+		mes "[후긴의 세공장인]";
+		mes "아이템을 착용하고 계신가요?";
 		close;
 	}
 	.@equip_id = getequipid(EQI_SHOES);
@@ -293,47 +293,47 @@ glast_01,210,270,0	script	Hugin's Craftsman#pa0829	4_F_JOB_BLACKSMITH,{
 	case 22111:	callsub( S_Slot,22117 );	// Modified_DEX_Boots
 	case 22112:	callsub( S_Slot,22118 );	// Modified_LUK_Boots
 	default:
-		mes "[Hugin's Craftsman]";
-		mes "This is not it! We need ^0000FFAdvanced Temporal Boots^000000 items! The item ^0000FFwith a stat effect and without a slot^000000!";
+		mes "[후긴의 세공장인]";
+		mes "이건 안돼요. 저는 ^0000FF업그레이드된 시간의 부츠^000000 만 작업할 수 있어요! 아무론 효과나 슬롯이 없는것만요!";
 		close;
 	}
 
 S_Slot:
 	.@equip_id = getequipid(EQI_SHOES);
-	mes "[Hugin's Craftsman]";
-	mes "And ^FF0000all enchant or refine rates will be lost if you fail this.^000000";
-	mes "Still want to risk it?";
+	mes "[후긴의 세공장인]";
+	mes "^FF0000실패하면 인챈트나 제련도는 다 없어지게 돼요.^000000";
+	mes "계속 하실건가요?";
 	next;
-	if (select( "Cancel", "I am ok with it!" ) == 1) {
-		mes "[Hugin's Craftsman]";
-		mes "Ok, come back anytime you want.";
+	if (select( "취소한다.", "계속한다." ) == 1) {
+		mes "[후긴의 세공장인]";
+		mes "네, 원하시면 언제든 와주세요.";
 		close;
 	}
-	mes "[Hugin's Craftsman]";
-	mes "Once again, ^FF0000That Magician won't enchant any item with a slot.^000000";
-	mes "Still want to proceed?";
+	mes "[후긴의 세공장인]";
+	mes "한번 더, ^FF0000마법장인은 슬롯이 뚫린 아이템에는 인챈트를 하지않아요.^000000";
+	mes "그래도 진행하실껀가요?";
 	next;
-	if (select( "Cancel", "I understand. Try to slot it." ) == 1) {
-		mes "[Hugin's Craftsman]";
-		mes "Ok, come back anytime you want.";
+	if (select( "취소한다", "이해했습니다. 슬롯을 뚫어주세요." ) == 1) {
+		mes "[후긴의 세공장인]";
+		mes "네, 원하시면 언제든 와주세요.";
 		close;
 	}
 	if (countitem(6607) < 5) {
-		mes "[Hugin's Craftsman]";
-		mes "You must bring ^0000FF5 Temporal Crystal items^000000. Nothing is free you know...";
+		mes "[후긴의 세공장인]";
+		mes "^0000FF시간의 결정 5개^000000가 필요해요. 공짜로는 불가능하답니다...";
 		close;
 	}
 	delitem 6607,5;// Temporal_Crystal
 	if (getequipid(EQI_SHOES) == .@equip_id) {
 		delequip EQI_SHOES;
 		if (rand(1,100) < 50) {
-			mes "[Hugin's Craftsman]";
-			mes "Arrggg, we failed. Better luck next time.";
+			mes "[후긴의 세공장인]";
+			mes "으아아악! 실패해버렸어요... 다음엔 운이 좋길 바랄께요...";
 			specialeffect2 EF_PHARMACY_FAIL;
 			close;
 		}
-		mes "[Hugin's Craftsman]";
-		mes "Successful! Here you go.";
+		mes "[후긴의 세공장인]";
+		mes "성공했어요. 여기 있습니다.";
 		specialeffect2 EF_MAXPOWER;
 		getitem getarg(0),1;
 	}
@@ -341,14 +341,14 @@ S_Slot:
 }
 
 // Temporal shoes slotted - npc enchant
-glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
+glast_01,184,283,4	script	어둠의 마법장인#pa082	1_F_01,{
 	disable_items;
 	if ((MaxWeight - Weight) < 1000) {
-		mes "Your bag is too heavy. Reduce some weight and come back.";
+		mes "가방이 너무 무거우신것 같아요. 무게를 줄이고 다시 와주세요.";
 		close;
 	}
 	if (checkweight(1201,1) == 0) {
-		mes "You seem to be carrying too many items. Put some items in storage and come back again.";
+		mes "인벤토리에 아이템이 너무 많으신것 같네요. 인벤토리를 비우고 다시 와주세요.";
 		close;
 	}
 	// requirements
@@ -356,24 +356,24 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	.@polluted_id = 6755;// Polluted_Spell
 	.@cost_zeny = 100000;
 
-	mes "[Dark magic master]";
-	mes "I deal with the Temporal Boots with socket only.";
+	mes "[어둠의 마법장인]";
+	mes "나는 소켓이 있는 시간의 부츠 아이템만 취급한다네..";
 	next;
-	if (select( "How does the enchanting work?", "Give effect to my Temporal Boots" ) == 1) {
-		mes "[Dark magic master]";
-		mes "You should ask Hugin's magic master all the basic things. I want deeper conversation about enchating work.";
+	if (select( "인챈트는 어떻게 하나요?", "시간의 부츠에 인챈트를 인챈트를 한다." ) == 1) {
+		mes "[어둠의 마법장인]";
+		mes "기본적인 것들은 후긴의 마법장인놈에게 물어보게나. 나는 더 깊은 인챈트를 다룬다네.";
 		next;
-		mes "[Dark magic master]";
-		mes "I need 4 items. ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + ", " + getitemname(.@polluted_id) + ", " + getitemname(.@coagulated_id) + ", Temporal Boots(Socket) Series^000000. If you don't have any of these, I cannot help you.";
+		mes "[어둠의 마법장인]";
+		mes "그러기 위해선 4가지 재료가 필요하지.^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + ", " + getitemname(.@polluted_id) + ", " + getitemname(.@coagulated_id) + ", 시간의 부츠(소켓) 시리즈^000000. 이게 없다면 난 도와줄 수 없다네.";
 		next;
-		mes "[Dark magic master]";
-		mes "It's my small hobby.. To enchant Socketed Temporal Boots using polluted and coagulated spell.";
+		mes "[어둠의 마법장인]";
+		mes "내 작은 취미랄까... 크큭.. 아무튼 응고된 마력을 사용하여 소켓이 있는 시간의 부츠에 인챈트를 한다네.";
 		next;
-		mes "[Dark magic master]";
-		mes "Of course, you must cope with bigger risk of destruction whenever you'd like to enchant again and again.";
+		mes "[어둠의 마법장인]";
+		mes "물론 인챈트를 반복할 때 마다 파괴될 위험성도 더 커지지.";
 		next;
-		mes "[Dark magic master]";
-		mes "The enchant order is same as Hugin's magic master's enchantment. Please refer to his explanation.";
+		mes "[어둠의 마법장인]";
+		mes "인챈트에 대한 다른 내용은 후긴의 마법장인놈이 하는것과 똑같네. 나머진 그녀석의 설명을 듣고오게나.";
 		close;
 	}
 	.@equip_id = getequipid(EQI_SHOES);
@@ -393,12 +393,12 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	case 22118:	// Modified_Luk_Boots_
 		break;
 	case -1:
-		mes "[Dark magic master]";
-		mes "Are you wearing the item?";
+		mes "[어둠의 마법장인]";
+		mes "아이템을 착용하고 있지 않은것 같은데?";
 		close;
 	default:
-		mes "[Dark magic master]";
-		mes "This is not the right item for this enchant. Remember, only those 6 types of Temporal Boots with socket are available for hidden enchanting..";
+		mes "[어둠의 마법장인]";
+		mes "이건 내가 작업할 수 있는 물건이 아닌것 같군. 기억하게나, 난 오직 슬롯이 있는 6가지 종류의 시간의 부츠에만 인챈트를 해준다는 것을..";
 		close;
 	}
 	// enchants ID
@@ -411,7 +411,7 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	setarray .@en_amount_coag[0],3,10,20,40,50;
 	setarray .@en_amount_polluted[0],1,2,4,7,10;
 
-	// (custom) chances of success (official value unknown)
+	// (커스텀 설정) 성공 확률. (본서버 성공확률 모름)
 	setarray .@chances[0],100,70,70,70,70;
 
 	// data of item equipped
@@ -425,26 +425,26 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	.@equip_refine = getequiprefinerycnt(EQI_SHOES);
 
 	if (.@card[2] > 0) {
-		mes "[Dark magic master]";
-		mes "These boots have already passed the enchanting limit. We can't enchant them any more.";
+		mes "[어둠의 마법장인]";
+		mes "그 부츠는 이미 한계까지 인챈트가 되었군. 더 이상은 할 수 없네.";
 		close;
 	}
 	if (.@card[3] == 0) {// 4th slot 1st try enchanting
 		.@amount_coag = .@en_amount_coag[0];
 		.@amount_poll = .@en_amount_polluted[0];
 
-		mes "[Dark magic master]";
-		mes "Want to enchant ^0000ff" + .@equip_name$ + " (Socket)^000000? For the 1st enchanting, you need ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000.";
-		mes "It has some risk of failing..";
+		mes "[어둠의 마법장인]";
+		mes "인챈트 하려는 아이템이 ^0000ff" + .@equip_name$ + " (소켓)^000000가 맞는가? 첫 인챈트에는 ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " 제니 가 필요하다네^000000.";
+		mes "그리고 실패할 위험도 있지.";
 		next;
-		.@s = select( "Quit", "Fighting Spirit", "Archery", "Spell", "Vitality", "Attack Speed", "Lucky" ) - 2;
+		.@s = select( "나간다", "투지", "명궁", "마력", "VIT", "공격후딜레이", "LUK" ) - 2;
 		if (.@s == -1) {
-			mes "[Dark magic master]";
-			mes "Ok, come back when you are ready.";
+			mes "[어둠의 마법장인]";
+			mes "알겠네, 준비가 되면 다시 오도록..";
 			close;
 		}
 		.@card[3] = .@enchant_1[.@s];
-		.@string$ = "enchant number ^6300001^000000.";
+		.@string$ = "인챈트 횟수 : ^6300001^000000.";
 		.@num = 0;
 	}
 	else {
@@ -455,45 +455,45 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 				break;
 		}
 		if (.@num == 5) {
-			mes "[Dark magic master]";
-			mes "Something wrong happened.";
+			mes "[어둠의 마법장인]";
+			mes "뭔가 문제가 생겻군.";
 			close;
 		}
 		.@amount_coag = .@en_amount_coag[.@num];
 		.@amount_poll = .@en_amount_polluted[.@num];
 
-		mes "[Dark magic master]";
+		mes "[어둠의 마법장인]";
 		if (.@num == 4) {
 			.@card[2] = callfunc("F_Rand",4875,4876,4877,4878,4879,4880);// Bear's_Power, Runaway_Magic, Speed_Of_Light, Muscle_Fool, Hawkeye, Lucky_Day
-			.@string$ = "^990000 Bonus effect ^000000 upgrade.";
-			mes "Would you like a random bonus effect for the 3rd slot? You need ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. But it has high risk of failing..";
+			.@string$ = "^990000 추가 효과 ^000000 업그레이드";
+			mes "3번째 슬롯에 추가 효과를 부여하겠는가? ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " 제니^000000가 필요하다네. 그리고 실패할 확률도 꽤나 높지.";
 		}
 		else {
 			.@level = .@num + 1;
 			.@card[3] = getd( ".@enchant_" + (.@num+1) + "[" + .@type + "]" );
 			.@string$ = "enchant number ^990000" + .@level + "^000000.";
-			mes "Enchanting ^0000ff" + .@equip_name$ + " (Socket)^000000's 4th slot as ^0000ff" + .@level + "^000000 level effect. Requires ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " z^000000. It has some risk of failing..";
+			mes "인챈트 하려는 장비가 ^0000ff" + .@equip_name$ + " (소켓)^000000의 4번째 슬롯 ^0000ff" + .@level + "^000000 레벨 효과군. ^0000ff" + .@amount_poll + " " + getitemname(.@polluted_id) + ", " + .@amount_coag + " " + getitemname(.@coagulated_id) + ", and " + callfunc("F_InsertComma",.@cost_zeny) + " z^000000 가 필요하다네. 또한 실패할 확률도 있지..";
 		}
 		next;
-		if (select( "Quit", "Effect Upgrade!" ) == 1) {
-			mes "[Dark magic master]";
-			mes "Ok, come back when you are ready.";
+		if (select( "나간다", "효과 업그레이드!" ) == 1) {
+			mes "[어둠의 마법장인]";
+			mes "알겠네, 준비가 되면 다시 오도록..";
 			close;
 		}
 	}
 	if (countitem(.@coagulated_id) < .@amount_coag) {
-		mes "[Dark magic master]";
-		mes "Hmm, you are missing " + (.@amount_coag - countitem(.@coagulated_id)) + " " + getitemname(.@coagulated_id) + " items. Go get more, and then we can talk about more enchants.";
+		mes "[어둠의 마법장인]";
+		mes "흠, 너는 " + (.@amount_coag - countitem(.@coagulated_id)) + " " + getitemname(.@coagulated_id) + " 아이템이 부족하군. 아이템을 모아서 다시 오게.";
 		close;
 	}
 	if (countitem(.@polluted_id) < .@amount_poll) {
-		mes "[Dark magic master]";
-		mes "Hmm, you are missing " + (.@amount_poll - countitem(.@polluted_id)) + " " + getitemname(.@polluted_id) + " items. Go get more, and then we can talk about more enchants.";
+		mes "[어둠의 마법장인]";
+		mes "흠, 너는 " + (.@amount_poll - countitem(.@polluted_id)) + " " + getitemname(.@polluted_id) + " 아이템이 부족하군. 아이템을 모아서 다시 오게.";
 		close;
 	}
 	if (Zeny < .@cost_zeny) {
-		mes "[Dark magic master]";
-		mes "You must bring ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + " zeny^000000. Nothing is free you know...";
+		mes "[어둠의 마법장인]";
+		mes "너는 ^0000ff" + callfunc("F_InsertComma",.@cost_zeny) + " 제니^000000가 부족한 것 같군. 세상에 공짜는 없다네...";
 		close;
 	}
 	delitem .@coagulated_id, .@amount_coag;
@@ -507,26 +507,26 @@ glast_01,184,283,4	script	Dark magic master#pa082	1_F_01,{
 	delequip EQI_SHOES;
 	if (.@chances[.@num] < rand(1,100)) {
 		specialeffect2 EF_LORD;
-		mes "[Dark magic master]";
-		mes "Arrggg, we failed. Better luck next time.";
+		mes "[어둠의 마법장인]";
+		mes "으어어억! 실패했군.. 다음엔 운이 좋길 바라네..";
 		close;
 	}
 	specialeffect2 EF_REPAIRWEAPON;
-	mes "[Hugin's Magician]";
-	mes "Trying for " + .@string$;
+	mes "[후긴의 마법장인]";
+	mes "실행된 " + .@string$;
 	getitem2 .@equip_id,1,1,.@equip_refine,0,0,0,.@card[2],.@card[3];
 	close;
 }
 
 // Items exchange for card
-glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
+glast_01,216,292,5	script	초상화 수집가#0002	4_M_OILMAN,{
 	disable_items;
 	if ((MaxWeight - Weight) < 1000) {
-		mes "Your bag is too heavy. Reduce some weight and come back.";
+		mes "가방이 너무 무거우신것 같아요. 무게를 줄이고 다시 와주세요.";
 		close;
 	}
 	if (checkweight(1201,1) == 0) {
-		mes "You seem to be carrying too many items. Put some items in storage and come back again.";
+		mes "인벤토리에 아이템이 너무 많습니다. 인벤토리를 비우고 와주세요.";
 		close;
 	}
 	.@coagulated_id = 6608;		// Coagulated_Spell
@@ -534,16 +534,16 @@ glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
 	.@white_card = 4608;		// White_Knightage_Card
 	.@khalitzburg_card = 4609;	// Khaliz_Knightage_Card
 
-	mes "[Portrait collector]";
-	mes "I have been collecting portraits for an year already. Now it's time to show people my collection.";
+	mes "[초상화 수집가]";
+	mes "전 일년동안 초상화를 수집해왔답니다. 이제 수집한걸 보여주려구요.";
 	next;
-	mes "[Portrait collector]";
-	mes "Hey, do you have a lot of " + getitemname(.@polluted_id) + " or " + getitemname(.@coagulated_id) + "? If so, why don't you trade a nice portrait that I have?";
+	mes "[초상화 수집가]";
+	mes "혹시 " + getitemname(.@polluted_id) + " or " + getitemname(.@coagulated_id) + "를 갖고있으세요? 있다면, 제 물건과 교환하지 않으실래요?";
 	next;
-	switch( select( "Cancel", "Exchange for " + getitemname(.@white_card), "Exchange for " + getitemname(.@khalitzburg_card) ) ) {
+	switch( select( "취소한다", getitemname(.@white_card) + "와 교환한다.", getitemname(.@khalitzburg_card) + "와 교환한다." ) ) {
 	case 1:
-		mes "[Portrait collector]";
-		mes "Well, OK. Come back when you are ready.";
+		mes "[초상화 수집가]";
+		mes "알겠습니다, 준비가 되면 다시 와주세요.";
 		close;
 	case 2:
 		.@reward_id = .@white_card;
@@ -556,17 +556,17 @@ glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
 		.@amount_polluted = 100;
 		break;
 	}
-	mes "[Portrait collector]";
-	mes "What would you like in exchange for the " + getitemname(.@reward_id) + "?";
+	mes "[초상화 수집가]";
+	mes "정말 " + getitemname(.@reward_id) + "와 교환하실건가요?";
 	next;
 	if (countitem(.@coagulated_id) < .@amount_coag)
 		.@color$[0] = "^666666";
 	if (countitem(.@polluted_id) < .@amount_polluted)
 		.@color$[1] = "^666666";
-	switch( select( "Cancel", sprintf("%s%s %s^000000", .@color$[0], callfunc("F_InsertComma",.@amount_coag), getitemname(.@coagulated_id)), sprintf("%s%s %s^000000", .@color$[1], callfunc("F_InsertComma",.@amount_polluted), getitemname(.@polluted_id)) ) ) {
+	switch( select( "취소한다", sprintf("%s%s %s^000000", .@color$[0], callfunc("F_InsertComma",.@amount_coag), getitemname(.@coagulated_id)), sprintf("%s%s %s^000000", .@color$[1], callfunc("F_InsertComma",.@amount_polluted), getitemname(.@polluted_id)) ) ) {
 	case 1:
-		mes "[Portrait collector]";
-		mes "Well, OK. Come back when you are ready.";
+		mes "[초상화 수집가]";
+		mes "알겠습니다, 준비가 되면 다시 와주세요.";
 		close;
 	case 2:
 		.@id = .@coagulated_id;
@@ -578,20 +578,20 @@ glast_01,216,292,5	script	Portrait collector#0002	4_M_OILMAN,{
 		break;
 	}
 	if (countitem(.@id) < .@amount) {
-		mes "[Portrait collector]";
-		mes "Hmm, you don't have enough Spell now. Go get more.";
+		mes "[초상화 수집가]";
+		mes "흠, 마력이 충분하지 않으시네요.";
 		close;
 	}
-	mes "[Portrait collector]";
-	mes "Are you sure that you won't regret it?";
+	mes "[초상화 수집가]";
+	mes "후회하지 않으실꺼죠?";
 	next;
-	if (select( "Cancel", "Sure" ) == 1) {
-		mes "[Portrait collector]";
-		mes "Well, OK. Come back when you are ready.";
+	if (select( "취소한다", "진행한다." ) == 1) {
+		mes "[초상화 수집가]";
+		mes "알겠습니다. 준비가 되면 다시 와주세요.";
 		close;
 	}
-	mes "[Portrait collector]";
-	mes "Cool, let's make a deal.";
+	mes "[초상화 수집가]";
+	mes "좋습니다. 거래하시죠.";
 	delitem .@id, .@amount;
 	getitem .@reward_id,1;
 	close;

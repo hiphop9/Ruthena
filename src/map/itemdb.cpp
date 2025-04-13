@@ -17,6 +17,7 @@
 #include <common/strlib.hpp>
 #include <common/utils.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp" // struct battle_config
 #include "cashshop.hpp"
@@ -71,13 +72,19 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.length() > ITEM_NAME_LENGTH) {
-			this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), ITEM_NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\"의 길이가 최대 길이 %d자를 초과하여 재설정합니다..\n", name.c_str(), ITEM_NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["AegisName"], "AegisName \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), ITEM_NAME_LENGTH - 1);
 		}
 
 		std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 		if (id != nullptr && id->nameid != nameid) {
-			this->invalidWarning(node["AegisName"], "Found duplicate item Aegis name for %s, skipping.\n", name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["AegisName"], "%s에 대한 중복된 아이템 Aegis 이름이 발견되어 건너뜁니다.\n", name.c_str());
+			else
+				this->invalidWarning(node["AegisName"], "Found duplicate item Aegis name for %s, skipping.\n", name.c_str());
 			return 0;
 		}
 
@@ -108,7 +115,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (name.length() > ITEM_NAME_LENGTH) {
-			this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), ITEM_NAME_LENGTH - 1);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Name"], "Name \"%s\"의 길이가 최대 길이 %d자를 초과해서 재설정됩니다...\n", name.c_str(), ITEM_NAME_LENGTH - 1);
+			else
+				this->invalidWarning(node["Name"], "Name \"%s\" exceeds maximum of %d characters, capping...\n", name.c_str(), ITEM_NAME_LENGTH - 1);
 		}
 
 		if( exists ){
@@ -141,7 +151,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(type_constant.c_str(), &constant) || constant < IT_HEALING || constant >= IT_MAX) {
-			this->invalidWarning(node["Type"], "Invalid item type %s, defaulting to IT_ETC.\n", type.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Type"], "%s은(는) 잘못된 아이템 타입입니다. IT_ETC를 기본값으로.\n", type.c_str());
+			else
+				this->invalidWarning(node["Type"], "Invalid item type %s, defaulting to IT_ETC.\n", type.c_str());
 			constant = IT_ETC;
 		}
 
@@ -162,7 +175,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(type_constant.c_str(), &constant) || constant < W_FIST || constant >= MAX_WEAPON_TYPE) {
-				this->invalidWarning(node["SubType"], "Invalid weapon type %s, defaulting to W_FIST.\n", type.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(node["SubType"], "%s은(는) 잘못된 무기 타입입니다. 기본값인 W_FIST으로 조정.\n", type.c_str());
+				else
+					this->invalidWarning(node["SubType"], "Invalid weapon type %s, defaulting to W_FIST.\n", type.c_str());
 				item->subtype = W_FIST;
 			}
 
@@ -172,7 +188,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(type_constant.c_str(), &constant) || constant <= AMMO_NONE || constant >= MAX_AMMO_TYPE) {
-				this->invalidWarning(node["SubType"], "Invalid ammo type %s, defaulting to AMMO_NONE.\n", type.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(node["SubType"], "%s은(는) 잘못된 탄약(Ammo) 타입입니다. 기본값인 AMMO_NONE으로..\n", type.c_str());
+				else
+					this->invalidWarning(node["SubType"], "Invalid ammo type %s, defaulting to AMMO_NONE.\n", type.c_str());
 				item->subtype = AMMO_NONE;
 			}
 
@@ -182,18 +201,39 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(type_constant.c_str(), &constant) || constant < CARD_NORMAL || constant >= MAX_CARD_TYPE) {
-				this->invalidWarning(node["SubType"], "Invalid card type %s, defaulting to CARD_NORMAL.\n", type.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(node["SubType"], "%s은(는) 잘못된 카드 타입입니다. 기본값인 CARD_NORMAL로 설정.\n", type.c_str());
+				else
+					this->invalidWarning(node["SubType"], "Invalid card type %s, defaulting to CARD_NORMAL.\n", type.c_str());
 				item->subtype = CARD_NORMAL;
 			}
 
 			item->subtype = static_cast<e_card_type>(constant);
 		} else {
-			this->invalidWarning(node["SubType"], "Item sub type is not supported for this item type.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["SubType"], "이 아이템 타입에는 아이템 서브 타입이 지원되지 않습니다.\n");
+			else
+				this->invalidWarning(node["SubType"], "Item sub type is not supported for this item type.\n");
 			return 0;
 		}
 	} else {
 		if (!exists)
 			item->subtype = 0;
+	}
+
+	if (this->nodeExists(node, "Decomposition")) {
+		const auto& decompositionNode = node["Decomposition"];
+
+		for (const auto& decit : decompositionNode) {
+			std::string typeName;
+			c4::from_chars(decit.key(), &typeName);
+
+			uint16 typeNum;
+			if (!this->asUInt16(decompositionNode, typeName, typeNum))
+				return 0;
+
+			item->decompoRune[typeName] = typeNum;
+		}
 	}
 
 	bool has_buy = false, has_sell = false;
@@ -205,7 +245,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if( buy > MAX_ZENY ){
-			this->invalidWarning( node["Buy"], "Buying price exceeds MAX_ZENY. Capping...\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning( node["Buy"], "구매가격이 MAX_ZENY를 초과합니다. 재조정합니다...\n" );
+			else
+				this->invalidWarning( node["Buy"], "Buying price exceeds MAX_ZENY. Capping...\n" );
 			buy = MAX_ZENY;
 		}
 
@@ -224,7 +267,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if( sell > MAX_ZENY ){
-			this->invalidWarning( node["Sell"], "Sell price exceeds MAX_ZENY. Capping...\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning( node["Sell"], "판매가격이 MAX_ZENY를 초과합니다. 조정합니다...\n" );
+			else
+				this->invalidWarning( node["Sell"], "Sell price exceeds MAX_ZENY. Capping...\n" );
 			sell = MAX_ZENY;
 		}
 
@@ -283,7 +329,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (def > DEFTYPE_MAX) {
-			this->invalidWarning(node["Defense"], "Item defense %d exceeds DEFTYPE_MAX (%d), capping to DEFTYPE_MAX.\n", def, DEFTYPE_MAX);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Defense"], "아이템 방어력 %d은(는) DEFTYPE_MAX (%d)에 도달했습니다. DEFTYPE_MAX으로 조정중.\n", def, DEFTYPE_MAX);
+			else
+				this->invalidWarning(node["Defense"], "Item defense %d exceeds DEFTYPE_MAX (%d), capping to DEFTYPE_MAX.\n", def, DEFTYPE_MAX);
 			def = DEFTYPE_MAX;
 		}
 
@@ -300,7 +349,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (range > AREA_SIZE) {
-			this->invalidWarning(node["Range"], "Item attack range %d exceeds AREA_SIZE (%d), capping to AREA_SIZE.\n", range, AREA_SIZE);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Range"], "아이템 공격 범위 %d은(는) AREA_SIZE (%d)에 도달했습니다. AREA_SIZE로 조정중.\n", range, AREA_SIZE);
+			else
+				this->invalidWarning(node["Range"], "Item attack range %d exceeds AREA_SIZE (%d), capping to AREA_SIZE.\n", range, AREA_SIZE);
 			range = AREA_SIZE;
 		}
 
@@ -317,7 +369,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (slots > MAX_SLOTS) {
-			this->invalidWarning(node["Slots"], "Item slots %d exceeds MAX_SLOTS (%d), capping to MAX_SLOTS.\n", slots, MAX_SLOTS);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Slots"], "아이템 슬롯 %d은(는) MAX_SLOTS (%d)에 도달했습니다. MAX_SLOTS으로 조정됨.\n", slots, MAX_SLOTS);
+			else
+				this->invalidWarning(node["Slots"], "Item slots %d exceeds MAX_SLOTS (%d), capping to MAX_SLOTS.\n", slots, MAX_SLOTS);
 			slots = MAX_SLOTS;
 		}
 
@@ -353,7 +408,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(jobName_constant.c_str(), &constant)) {
-				this->invalidWarning(jobNode[jobit.key()], "Invalid item job %s, defaulting to All.\n", jobName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(jobNode[jobit.key()], "%s은(는) 잘못된 아이템 직업입니다. 기본값인 All로 조정.\n", jobName.c_str());
+				else
+					this->invalidWarning(jobNode[jobit.key()], "Invalid item job %s, defaulting to All.\n", jobName.c_str());
 				itemdb_jobid2mapid(item->class_base, MAPID_ALL, true);
 				break;
 			}
@@ -400,7 +458,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(className_constant.c_str(), &constant)) {
-				this->invalidWarning(classNode[classit.key()], "Invalid class upper %s, defaulting to All.\n", className.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(classNode[classit.key()], "%s은(는) 잘못된 클래스입니다. 기본값인 All로 조정.\n", className.c_str());
+				else
+					this->invalidWarning(classNode[classit.key()], "Invalid class upper %s, defaulting to All.\n", className.c_str());
 				item->class_upper |= ITEMJ_ALL;
 				break;
 			}
@@ -430,7 +491,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(gender_constant.c_str(), &constant) || constant < SEX_FEMALE || constant > SEX_BOTH) {
-			this->invalidWarning(node["Gender"], "Invalid item gender %s, defaulting to SEX_BOTH.\n", gender.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Gender"], "%s은(는) 잘못된 아이템 성별입니다. 기본값인 SEX_BOTH으로 조정.\n", gender.c_str());
+			else
+				this->invalidWarning(node["Gender"], "Invalid item gender %s, defaulting to SEX_BOTH.\n", gender.c_str());
 			constant = SEX_BOTH;
 		}
 
@@ -454,7 +518,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(equipName_constant.c_str(), &constant)) {
-				this->invalidWarning(locationNode[locit.key()], "Invalid equip location %s, defaulting to IT_ETC.\n", equipName.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(locationNode[locit.key()], "%s은(는) 잘못된 장착 위치입니다. 기본값인 IT_ETC으로 조정.\n", equipName.c_str());
+				else
+					this->invalidWarning(locationNode[locit.key()], "Invalid equip location %s, defaulting to IT_ETC.\n", equipName.c_str());
 				item->type = IT_ETC;
 				break;
 			}
@@ -466,7 +533,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 			if (active) {
 				if (constant & EQP_SHADOW_GEAR && item->type != IT_SHADOWGEAR) {
-					this->invalidWarning(node, "Invalid item equip location %s as it's not a Shadow Gear item type, defaulting to IT_ETC.\n", equipName.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+						this->invalidWarning(node, "%s은(는) 섀도우 기어 아이템 타입이 아니므로 잘못된 아이템 장착 위치입니다. 기본값인 IT_ETC으로 조정.\n", equipName.c_str());
+					else
+						this->invalidWarning(node, "Invalid item equip location %s as it's not a Shadow Gear item type, defaulting to IT_ETC.\n", equipName.c_str());
 					item->type = IT_ETC;
 				}
 
@@ -477,7 +547,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	} else {
 		if (!exists) {
 			if (itemdb_isequip2(item.get())) {
-				this->invalidWarning(node, "Invalid item equip location as it has no equip location, defaulting to IT_ETC.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(node, "장착 위치가 없으므로 잘못된 아이템 장착 위치입니다. 기본값인 IT_ETC으로 조정.\n");
+				else
+					this->invalidWarning(node, "Invalid item equip location as it has no equip location, defaulting to IT_ETC.\n");
 				item->type = IT_ETC;
 			} else
 				item->equip = 0;
@@ -491,12 +564,18 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (lv > MAX_WEAPON_LEVEL) {
-			this->invalidWarning(node["WeaponLevel"], "Invalid weapon level %d, defaulting to 0.\n", lv);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["WeaponLevel"], "%d은(는) 잘못된 무기 레벨입니다. 기본값인 0으로 조정.\n", lv);
+			else
+				this->invalidWarning(node["WeaponLevel"], "Invalid weapon level %d, defaulting to 0.\n", lv);
 			lv = 0;
 		}
 
 		if (item->type != IT_WEAPON) {
-			this->invalidWarning(node["WeaponLevel"], "Item type is not a weapon, defaulting to 0.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["WeaponLevel"], "아이템 타입은 무기가 아닙니다. 기본값인 0으로 조정.\n");
+			else
+				this->invalidWarning(node["WeaponLevel"], "Item type is not a weapon, defaulting to 0.\n");
 			lv = 0;
 		}
 
@@ -514,12 +593,18 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if( level > MAX_ARMOR_LEVEL ){
-			this->invalidWarning( node["ArmorLevel"], "Invalid armor level %d, defaulting to 0.\n", level );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning( node["ArmorLevel"], "%d은(는) 잘못된 ArmorLevel입니다. 기본값인 0으로 조정.\n", level );
+			else
+				this->invalidWarning( node["ArmorLevel"], "Invalid armor level %d, defaulting to 0.\n", level );
 			level = 0;
 		}
 
 		if( item->type != IT_ARMOR ){
-			this->invalidWarning( node["ArmorLevel"], "Item type is not an armor, defaulting to 0.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning( node["ArmorLevel"], "Armor에 대한 아이템 타입이 아닙니다. 기본값인 0으로 조정.\n" );
+			else
+				this->invalidWarning( node["ArmorLevel"], "Item type is not an armor, defaulting to 0.\n" );
 			level = 0;
 		}
 
@@ -537,7 +622,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (lv > MAX_LEVEL) {
-			this->invalidWarning(node["EquipLevelMin"], "Minimum equip level %d exceeds MAX_LEVEL (%d), capping to MAX_LEVEL.\n", lv, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["EquipLevelMin"], "최소 장착 레벨 %d이(가) MAX_LEVEL (%d)에 도달했습니다. MAX_LEVEL으(로) 조정.\n", lv, MAX_LEVEL);
+			else
+				this->invalidWarning(node["EquipLevelMin"], "Minimum equip level %d exceeds MAX_LEVEL (%d), capping to MAX_LEVEL.\n", lv, MAX_LEVEL);
 			lv = MAX_LEVEL;
 		}
 
@@ -554,12 +642,18 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (lv < item->elv) {
-			this->invalidWarning(node["EquipLevelMax"], "Maximum equip level %d is less than minimum equip level %d, capping to minimum equip level.\n", lv, item->elv);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["EquipLevelMax"], "최대 장착 레벨 %d이(가) 최소 장착 레벨 %d보다 낮습니다. 최소 장착 레벨로 조정.\n", lv, item->elv);
+			else
+				this->invalidWarning(node["EquipLevelMax"], "Maximum equip level %d is less than minimum equip level %d, capping to minimum equip level.\n", lv, item->elv);
 			lv = item->elv;
 		}
 
 		if (lv > MAX_LEVEL) {
-			this->invalidWarning(node["EquipLevelMax"], "Maximum equip level %d exceeds MAX_LEVEL (%d), capping to MAX_LEVEL.\n", lv, MAX_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["EquipLevelMax"], "최대 장착 레벨 %d이(가) MAX_LEVEL (%d)에 도달했습니다. MAX_LEVEL으로 조정.\n", lv, MAX_LEVEL);
+			else
+				this->invalidWarning(node["EquipLevelMax"], "Maximum equip level %d exceeds MAX_LEVEL (%d), capping to MAX_LEVEL.\n", lv, MAX_LEVEL);
 			lv = MAX_LEVEL;
 		}
 
@@ -614,7 +708,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> view_data = item_db.search_aegisname( view.c_str() );
 
 		if (view_data == nullptr) {
-			this->invalidWarning(node["AliasName"], "Unable to change the alias because %s is an unknown item.\n", view.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["AliasName"], "%s은(는) 알수 없는 아이템이므로 별명을 달 수 없습니다.\n", view.c_str());
+			else
+				this->invalidWarning(node["AliasName"], "Unable to change the alias because %s is an unknown item.\n", view.c_str());
 			return 0;
 		}
 
@@ -634,7 +731,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (!itemdb_isstackable2(item.get()) && active) {
-				this->invalidWarning(flagNode["BuyingStore"], "Non-stackable item cannot be enabled for buying store.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(flagNode["BuyingStore"], "중첩 불가능한 아이템은 구매상점에 사용할 수 없습니다.\n");
+				else
+					this->invalidWarning(flagNode["BuyingStore"], "Non-stackable item cannot be enabled for buying store.\n");
 				active = false;
 			}
 
@@ -675,7 +775,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (!itemdb_isstackable2(item.get()) && active) {
-				this->invalidWarning(flagNode["UniqueId"], "Non-stackable item cannot be enabled for UniqueId.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(flagNode["UniqueId"], "UniqueId에 대해 중첩 할 수 없는 아이템은 활성화 할 수 없습니다.\n");
+				else
+					this->invalidWarning(flagNode["UniqueId"], "Non-stackable item cannot be enabled for UniqueId.\n");
 				active = false;
 			}
 
@@ -736,7 +839,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(effect_constant.c_str(), &constant) || constant < DROPEFFECT_NONE || constant > DROPEFFECT_MAX) {
-				this->invalidWarning(flagNode["DropEffect"], "Invalid item drop effect %s, defaulting to DROPEFFECT_NONE.\n", effect.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(flagNode["DropEffect"], "%s은(는) 잘못된 아이템 드롭 효과입니다. 기본값인 DROPEFFECT_NONE으로 조정.\n", effect.c_str());
+				else
+					this->invalidWarning(flagNode["DropEffect"], "Invalid item drop effect %s, defaulting to DROPEFFECT_NONE.\n", effect.c_str());
 				constant = DROPEFFECT_NONE;
 			}
 
@@ -762,6 +868,16 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	if (this->nodeExists(node, "Delay")) {
 		const auto& delayNode = node["Delay"];
 
+		if (this->nodeExists(delayNode, "CheckStatus")) {
+			bool active;
+			if (!this->asBool(delayNode, "CheckStatus", active))
+				return 0;
+			item->delay.checkstatus = active;
+		} else {
+			if (!exists)
+				item->delay.checkstatus = false;
+		}
+		
 		if (this->nodeExists(delayNode, "Duration")) {
 			uint32 duration;
 
@@ -784,7 +900,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(status_constant.c_str(), &constant) || constant < SC_NONE || constant >= SC_MAX) {
-				this->invalidWarning(delayNode[c4::to_csubstr(status)], "Invalid item delay status %s, defaulting to SC_NONE.\n", status.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(delayNode[c4::to_csubstr(status)], "%s은(는) 잘못된 아이템 딜레이 상태입니다. 기본값인 SC_NONE으로 조정.\n", status.c_str());
+				else
+					this->invalidWarning(delayNode[c4::to_csubstr(status)], "Invalid item delay status %s, defaulting to SC_NONE.\n", status.c_str());
 				constant = SC_NONE;
 			}
 
@@ -810,7 +929,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (!itemdb_isstackable2(item.get())) {
-				this->invalidWarning(stackNode["Amount"], "Non-stackable item cannot be enabled for stacking.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(stackNode["Amount"], "중첩 할 수 없는 아이템은 중첩 할 수 없습니다.\n");
+				else
+					this->invalidWarning(stackNode["Amount"], "Non-stackable item cannot be enabled for stacking.\n");
 				amount = 0;
 			}
 
@@ -887,7 +1009,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (override > 100) {
-				this->invalidWarning(nouseNode["Override"], "Item no use override level %d exceeds 100, capping to 100.\n", override);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(nouseNode["Override"], "사용할 수 없는 아이템 override 레벨 %d이(가) 100을 초과합니다. 100으로 조정.\n", override);
+				else
+					this->invalidWarning(nouseNode["Override"], "Item no use override level %d exceeds 100, capping to 100.\n", override);
 				override = 100;
 			}
 
@@ -925,7 +1050,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (override > 100) {
-				this->invalidWarning(tradeNode["Override"], "Item trade override level %d exceeds 100, capping to 100.\n", override);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(tradeNode["Override"], "아이템 거래 override 레벨 %d이(가) 100을 초과합니다. 100으로 조정.\n", override);
+				else
+					this->invalidWarning(tradeNode["Override"], "Item trade override level %d exceeds 100, capping to 100.\n", override);
 				override = 100;
 			}
 
@@ -1128,32 +1256,50 @@ void ItemDatabase::loadingFinished(){
 
 		if( item->type == IT_WEAPON ){
 			if( item->weapon_level == 0 ){
-				ShowWarning( "Item %s is a weapon, but does not have a weapon level. Consider adding it. Defaulting to 1.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 무기인데 무기 레벨이 없습니다. 기본값인 1로 설정.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is a weapon, but does not have a weapon level. Consider adding it. Defaulting to 1.\n", item->name.c_str() );
 				item->weapon_level = 1;
 			}
 
 			if( item->armor_level != 0 ){
-				ShowWarning( "Item %s is a weapon, but has an armor level. Defaulting to 0.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 무기인데 방어구 레벨설정이 있습니다. 0으로 조정합니다.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is a weapon, but has an armor level. Defaulting to 0.\n", item->name.c_str() );
 				item->armor_level = 0;
 			}
 		}else if( item->type == IT_ARMOR ){
 			if( item->armor_level == 0 ){
-				ShowWarning( "Item %s is an armor, but does not have an armor level. Consider adding it. Defaulting to 1.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 방어구인데 방어구 레벨이 설정되어있지 안습니다. 기본값인 1로 설정.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is an armor, but does not have an armor level. Consider adding it. Defaulting to 1.\n", item->name.c_str() );
 				item->armor_level = 1;
 			}
 
 			if( item->weapon_level != 0 ){
-				ShowWarning( "Item %s is an armor, but has a weapon level. Defaulting to 0.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 방어구인데 무기레벨이 설정되어있습니다. 0으로 설정합니다.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is an armor, but has a weapon level. Defaulting to 0.\n", item->name.c_str() );
 				item->weapon_level = 0;
 			}
 		}else{
 			if( item->weapon_level != 0 ){
-				ShowWarning( "Item %s is not a weapon, but has a weapon level. Defaulting to 0.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 무기가 아닌데 무기 레벨이 설정되어있습니다. 0으로 설정합니다.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is not a weapon, but has a weapon level. Defaulting to 0.\n", item->name.c_str() );
 				item->weapon_level = 0;
 			}
 
 			if( item->armor_level != 0 ){
-				ShowWarning( "Item %s is not an armor, but has an armor level. Defaulting to 0.\n", item->name.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning( "아이템 %s은(는) 방어구가 아닌데 방어구 레벨이 설정되어있습니다. 0으로 설정합니다.\n", item->name.c_str() );
+				else
+					ShowWarning( "Item %s is not an armor, but has an armor level. Defaulting to 0.\n", item->name.c_str() );
 				item->armor_level = 0;
 			}
 		}
@@ -1188,13 +1334,19 @@ void ItemDatabase::loadingFinished(){
 			item->value_sell = item->value_buy / 2;
 
 		if (item->value_buy / 124. < item->value_sell / 75.) {
-			ShowWarning("Buying/Selling [%d/%d] price of %s (%u) allows Zeny making exploit through buying/selling at discounted/overcharged prices! Defaulting Sell to 1 Zeny.\n", item->value_buy, item->value_sell, item->name.c_str(), item->nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("아이템 %s (%u)의 설정된 구매/판매[%d/%d] 가격이  디스카운트/오버차지를 이용하여 구매/판매시 부당한 이익이 발생될 수 있습니다. 기본 판매가를 1 Zeny로 설정합니다.\n", item->name.c_str(), item->nameid, item->value_buy, item->value_sell);
+			else
+				ShowWarning("Buying/Selling [%d/%d] price of %s (%u) allows Zeny making exploit through buying/selling at discounted/overcharged prices! Defaulting Sell to 1 Zeny.\n", item->value_buy, item->value_sell, item->name.c_str(), item->nameid);
 			item->value_sell = 1;
 		}
 
 		// Shields need to have a view ID to be able to be recognized by ST_SHIELD check in skill.cpp
 		if( item->type == IT_ARMOR && ( item->equip & EQP_SHIELD ) != 0 && item->look == 0 ){
-			ShowWarning( "Item %s (%u) is a shield and should have a view id. Defaulting to Guard...\n", item->name.c_str(), item->nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "아이템 %s (%u)은(는) 방패이므로 view id가 있어야 합니다. 기본값으로 조정합니다...\n", item->name.c_str(), item->nameid );
+			else
+				ShowWarning( "Item %s (%u) is a shield and should have a view id. Defaulting to Guard...\n", item->name.c_str(), item->nameid );
 			item->look = 1;
 		}
 	}
@@ -1232,7 +1384,10 @@ e_sex ItemDatabase::defaultGender( const ryml::NodeRef& node, std::shared_ptr<it
 	if( id->type == IT_WEAPON ){
 		if( id->subtype == W_MUSICAL ){
 			if( id->sex != SEX_MALE ){
-				this->invalidWarning( node, "Musical instruments are always male-only, defaulting to SEX_MALE.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					this->invalidWarning( node, "악기는 남성 전용입니다. SEX_MALE로 조정합니다.\n" );
+				else
+					this->invalidWarning( node, "Musical instruments are always male-only, defaulting to SEX_MALE.\n" );
 			}
 
 			return SEX_MALE;
@@ -1240,7 +1395,10 @@ e_sex ItemDatabase::defaultGender( const ryml::NodeRef& node, std::shared_ptr<it
 
 		if( id->subtype == W_WHIP ){
 			if( id->sex != SEX_FEMALE ){
-				this->invalidWarning( node, "Whips are always female-only, defaulting to SEX_FEMALE.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					this->invalidWarning( node, "휩은 여성 전용입니다. SEX_FEMALE로 조정합니다.\n" );
+				else
+					this->invalidWarning( node, "Whips are always female-only, defaulting to SEX_FEMALE.\n" );
 			}
 
 			return SEX_FEMALE;
@@ -1280,9 +1438,12 @@ std::shared_ptr<item_data> ItemDatabase::searchname( const char *name ){
 * @return <ITEML> string for the item
 * @author [Cydh]
 **/
-std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<item_data>& data){
+std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<item_data>& data, bool slot){
 	if( data == nullptr ){
-		ShowError( "Tried to create itemlink for unknown item %u.\n", item.nameid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "알 수 없는 아이템 %u을(를) 링크 할 수 없습니다.\n", item.nameid );
+		else
+			ShowError( "Tried to create itemlink for unknown item %u.\n", item.nameid );
 		return "Unknown item";
 	}
 
@@ -1304,7 +1465,10 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 		itemstr += start_tag;
 
 		itemstr += util::string_left_pad(util::base62_encode(id->equip), '0', 5);
-		itemstr += itemdb_isequip2(id) ? "1" : "0";
+		if (slot)
+			itemstr += "0";
+		else
+			itemstr += itemdb_isequip2(id) ? "1" : "0";
 		itemstr += util::base62_encode(item.nameid);
 		if (item.refine > 0) {
 			itemstr += "%" + util::string_left_pad(util::base62_encode(item.refine), '0', 2);
@@ -1354,9 +1518,7 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 		}
 
 		itemstr += closing_tag;
-		if ((itemdb_isequip2(id)) && (data->slots == 0))
-			itemstr += " [" + std::to_string(data->slots) + "]";
-
+		
 		return itemstr;
 	}
 #endif
@@ -1368,10 +1530,17 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 
 	itemstr += data->ename;
 
-	if (itemdb_isequip2(id))
+	if (itemdb_isequip2(id) && (data->slots >= 0))
 		itemstr += "[" + std::to_string(data->slots) + "]";
 
 	return itemstr;
+}
+
+std::string ItemDatabase::create_item_link( std::shared_ptr<item_data>& data, bool slot ){
+	struct item it = {};
+	it.nameid = data->nameid;
+
+	return this->create_item_link( it, data, slot );
 }
 
 std::string ItemDatabase::create_item_link( std::shared_ptr<item_data>& data ){
@@ -1513,7 +1682,10 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+			else
+				this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
@@ -1542,12 +1714,18 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		int64 constant;
 
 		if( !script_get_constant( ( "IG_" + name ).c_str(), &constant ) ){
-			this->invalidWarning( node["RewardGroup"], "Unknown reward group \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["RewardGroup"], "\"%s\"은(는) 알 수 없는 보상 그룹입니다..\n", name.c_str() );
+			else
+				this->invalidWarning( node["RewardGroup"], "Unknown reward group \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
 		if( !itemdb_group.exists( (uint16)constant ) ){
-			this->invalidWarning( node["RewardGroup"], "Unknown reward group ID \"%" PRId64 "\".\n", constant );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["RewardGroup"], "\"%" PRId64 "\"은(는) 알 수 없는 보상 그룹 ID입니다.\n", constant );
+			else
+				this->invalidWarning( node["RewardGroup"], "Unknown reward group ID \"%" PRId64 "\".\n", constant );
 			return 0;
 		}
 
@@ -1583,7 +1761,10 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 			if( id == nullptr ){
-				this->invalidWarning( requirementNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( requirementNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+				else
+					this->invalidWarning( requirementNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
 				return 0;
 			}
 
@@ -1603,7 +1784,10 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( amount > MAX_AMOUNT ){
-					this->invalidWarning( requirementNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( requirementNode["Amount"], "%hu은(는) 너무 높은 개수입니다. MAX_AMOUNT으로 재설정합니다...\n", amount );
+					else
+						this->invalidWarning( requirementNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
 					amount = MAX_AMOUNT;
 				}
 
@@ -1628,7 +1812,10 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MinimumRefine"], "%hu은(는) 너무 높은 최소 제련수입니다. MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1647,7 +1834,10 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MaximumRefine"], "%hu은(는) 너무 높은 최대 제련수입니다. MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1684,7 +1874,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다..\n", name.c_str() );
+			else
+				this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
@@ -1713,7 +1906,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		uint16 id;
 
 		if( !random_option_group.option_get_id( name, id ) ){
-			this->invalidWarning( node["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["RandomOptionGroup"], "\"%s\"은(는) 알 수 없는 랜덤 옵션 그룹입니다.\n", name.c_str() );
+			else
+				this->invalidWarning( node["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
@@ -1735,7 +1931,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 			if( id == nullptr ){
-				this->invalidWarning( targetNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( targetNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+				else
+					this->invalidWarning( targetNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
 				return 0;
 			}
 
@@ -1753,7 +1952,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MinimumRefine"], "최소 제련 %hu은(는) 너무 높습니다. MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1772,7 +1974,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MaximumRefine"], "최대 제련 %hu은(는) 너무 높습니다. MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1791,7 +1996,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( amount > MAX_ITEM_RDM_OPT ){
-			this->invalidWarning( node["RequiredRandomOptions"], "Required random option amount %hu is too high, capping to MAX_ITEM_RDM_OPT...\n", amount );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["RequiredRandomOptions"], "필요한 랜덤 옵션 갯수 %hu은(는) 너무 높습니다. MAX_ITEM_RDM_OPT으로 재설정합니다...\n", amount );
+			else
+				this->invalidWarning( node["RequiredRandomOptions"], "Required random option amount %hu is too high, capping to MAX_ITEM_RDM_OPT...\n", amount );
 			amount = MAX_ITEM_RDM_OPT;
 		}
 
@@ -1824,7 +2032,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["ResultRefine"], "Result refine %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["ResultRefine"], "%hu은(는) 너무 높은 제련값입니다. MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["ResultRefine"], "Result refine %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1843,7 +2054,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["ResultRefineMinimum"], "Result refine minimum %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["ResultRefineMinimum"], "최소 제련 수치 %hu은(는) 너무 높아 MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["ResultRefineMinimum"], "Result refine minimum %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1862,7 +2076,10 @@ uint64 LaphineUpgradeDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["ResultRefineMaximum"], "Result refine maximum %hu is too high, capping to MAX_REFINE...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["ResultRefineMaximum"], "최대 제련 수치 %hu은(는) 너무 높아 MAX_REFINE으로 재설정합니다...\n", refine );
+			else
+				this->invalidWarning( node["ResultRefineMaximum"], "Result refine maximum %hu is too high, capping to MAX_REFINE...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -1899,7 +2116,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+			else
+				this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
@@ -1932,7 +2152,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 				if( id == nullptr ){
-					this->invalidWarning( baseNode["BaseItem"], "Unknown item \"%s\".\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["BaseItem"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+					else
+						this->invalidWarning( baseNode["BaseItem"], "Unknown item \"%s\".\n", name.c_str() );
 					return 0;
 				}
 
@@ -1959,7 +2182,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( refine > MAX_REFINE ){
-					this->invalidWarning( baseNode["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["MinimumRefine"], "최소 제련 수치(MinimumRefine) %hu은(는) 너무 큽니다.MAX_REFINE으로 조정됨...\n", refine );
+					else
+						this->invalidWarning( baseNode["MinimumRefine"], "Minimum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 					refine = MAX_REFINE;
 				}
 
@@ -1978,7 +2204,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( refine > MAX_REFINE ){
-					this->invalidWarning( baseNode["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["MaximumRefine"], "최대 제련 수치 %hu은(는) 너무 큽니다. MAX_REFINE으로 조정됨...\n", refine );
+					else
+						this->invalidWarning( baseNode["MaximumRefine"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 					refine = MAX_REFINE;
 				}
 
@@ -1997,7 +2226,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( amount > MAX_ITEM_RDM_OPT ){
-					this->invalidWarning( baseNode["RequiredRandomOptions"], "Required random option amount %hu is too high, capping to MAX_ITEM_RDM_OPT...\n", amount );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["RequiredRandomOptions"], "필수 랜덤 옵션 갯수 %hu이(가) 너무 많습니다. MAX_ITEM_RDM_OPT으로 조정됨...\n", amount );
+					else
+						this->invalidWarning( baseNode["RequiredRandomOptions"], "Required random option amount %hu is too high, capping to MAX_ITEM_RDM_OPT...\n", amount );
 					amount = MAX_ITEM_RDM_OPT;
 				}
 
@@ -2033,7 +2265,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 					if( id == nullptr ){
-						this->invalidWarning( materialNode["Material"], "Unknown item \"%s\".\n", name.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( materialNode["Material"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+						else
+							this->invalidWarning( materialNode["Material"], "Unknown item \"%s\".\n", name.c_str() );
 						return 0;
 					}
 
@@ -2047,7 +2282,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( amount > MAX_AMOUNT ){
-							this->invalidWarning( materialNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( materialNode["Amount"], "갯수 %hu은(는) 너무 많습니다. MAX_AMOUNT으로 조정됨...\n", amount );
+							else
+								this->invalidWarning( materialNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
 							amount = MAX_AMOUNT;
 						}
 					}else{
@@ -2074,7 +2312,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 				if( id == nullptr ){
-					this->invalidWarning( baseNode["ResultItem"], "Unknown item \"%s\".\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["ResultItem"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+					else
+						this->invalidWarning( baseNode["ResultItem"], "Unknown item \"%s\".\n", name.c_str() );
 					return 0;
 				}
 
@@ -2089,10 +2330,16 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( refine > MAX_REFINE ){
-					this->invalidWarning( baseNode["MaximumRefine"], "Refine change %hu is too high, capping to MAX_REFINE...\n", refine );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["MaximumRefine"], "제련 체인지 %hu이(가) 너무 큽니다. MAX_REFINE으로 조정됨...\n", refine );
+					else
+						this->invalidWarning( baseNode["MaximumRefine"], "Refine change %hu is too high, capping to MAX_REFINE...\n", refine );
 					refine = MAX_REFINE;
 				}else if( refine < -MAX_REFINE ){
-					this->invalidWarning( baseNode["MaximumRefine"], "Refine change %hu is too low, capping to -MAX_REFINE...\n", refine );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["MaximumRefine"], "제련 체인지 %hu은(는) 너무 작습니다. -MAX_REFINE으로 조정됨...\n", refine );
+					else
+						this->invalidWarning( baseNode["MaximumRefine"], "Refine change %hu is too low, capping to -MAX_REFINE...\n", refine );
 					refine = -MAX_REFINE;
 				}
 
@@ -2113,7 +2360,10 @@ uint64 ItemReformDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				uint16 id;
 
 				if( !random_option_group.option_get_id( name, id ) ){
-					this->invalidWarning( baseNode["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( baseNode["RandomOptionGroup"], "\"%s\"은(는) 알 수 없는 랜덤 옵션 그룹입니다.\n", name.c_str() );
+					else
+						this->invalidWarning( baseNode["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
 					return 0;
 				}
 
@@ -2183,7 +2433,10 @@ bool ItemEnchantDatabase::parseMaterials( const ryml::NodeRef& node, std::unorde
 			std::shared_ptr<item_data> item = item_db.search_aegisname( name.c_str() );
 
 			if( item == nullptr ){
-				this->invalidWarning( materialNode["Material"], "Unknown item \"%s\".\n", name.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( materialNode["Material"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+				else
+					this->invalidWarning( materialNode["Material"], "Unknown item \"%s\".\n", name.c_str() );
 				return false;
 			}
 
@@ -2197,7 +2450,10 @@ bool ItemEnchantDatabase::parseMaterials( const ryml::NodeRef& node, std::unorde
 				}
 
 				if( amount > MAX_AMOUNT ){
-					this->invalidWarning( materialNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( materialNode["Amount"], "갯수 %hu은(는) 너무 많습니다. MAX_AMOUNT으로 조정됨...\n", amount );
+					else
+						this->invalidWarning( materialNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
 					amount = MAX_AMOUNT;
 				}
 			}else{
@@ -2249,7 +2505,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			std::shared_ptr<item_data> item = item_db.search_aegisname( name.c_str() );
 
 			if( item == nullptr ){
-				this->invalidWarning( it, "Unknown item \"%s\".\n", name.c_str() );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( it, "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+				else
+					this->invalidWarning( it, "Unknown item \"%s\".\n", name.c_str() );
 				return 0;
 			}
 
@@ -2261,13 +2520,19 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 			if( enable ){
 				if( util::vector_exists( enchant->target_item_ids, item->nameid ) ){
-					this->invalidWarning( it, "Target item \"%s\" is already in the list.\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( it, "대상 아이템 \"%s\"은(는) 이미 목록에 존재합니다.\n", name.c_str() );
+					else
+						this->invalidWarning( it, "Target item \"%s\" is already in the list.\n", name.c_str() );
 				}else{
 					enchant->target_item_ids.push_back( item->nameid );
 				}
 			}else{
 				if( !util::vector_exists( enchant->target_item_ids, item->nameid ) ){
-					this->invalidWarning( it, "Target item \"%s\" is not in the list.\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( it, "대상 아이템 \"%s\"은(는) 목록에 없습니다.\n", name.c_str() );
+					else
+						this->invalidWarning( it, "Target item \"%s\" is not in the list.\n", name.c_str() );
 				}else{
 					util::vector_erase_if_exists( enchant->target_item_ids, item->nameid );
 				}
@@ -2283,7 +2548,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( refine > MAX_REFINE ){
-			this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu exceeds MAX_REFINE. Capping...\n", refine );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MinimumRefine"], "최소 제련 수치 %hu은(는) MAX_REFINE 보다 큽니다. 조정됨...\n", refine );
+			else
+				this->invalidWarning( node["MinimumRefine"], "Minimum refine %hu exceeds MAX_REFINE. Capping...\n", refine );
 			refine = MAX_REFINE;
 		}
 
@@ -2302,7 +2570,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if( enchantgrade > MAX_ENCHANTGRADE ){
-			this->invalidWarning( node["MinimumEnchantgrade"], "Minimum enchantgrade %hu exceeds MAX_ENCHANTGRADE. Capping...\n", enchantgrade );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["MinimumEnchantgrade"], "최소 enchantgrade 수치 %hu은(는) MAX_ENCHANTGRADE보다 큽니다. 조정됨...\n", enchantgrade );
+			else
+				this->invalidWarning( node["MinimumEnchantgrade"], "Minimum enchantgrade %hu exceeds MAX_ENCHANTGRADE. Capping...\n", enchantgrade );
 			enchantgrade = MAX_ENCHANTGRADE;
 		}
 
@@ -2352,7 +2623,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if( zeny > MAX_ZENY ){
-				this->invalidWarning( resetNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( resetNode["Price"], "비용 %u은(는) MAX_ZENY값보다 큽니다. 조정됨...\n", zeny );
+				else
+					this->invalidWarning( resetNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
 				zeny = MAX_ZENY;
 			}
 
@@ -2383,7 +2657,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if( slot >= MAX_SLOTS ){
-				this->invalidWarning( it, "Slot %hu exceeds MAX_SLOTS...\n", slot );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( it, "슬롯 수 %hu은(는) MAX_SLOTS수 보다 큽니다...\n", slot );
+				else
+					this->invalidWarning( it, "Slot %hu exceeds MAX_SLOTS...\n", slot );
 				return 0;
 			}
 
@@ -2400,7 +2677,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if( slot >= MAX_SLOTS ){
-				this->invalidWarning( slotNode["Slot"], "Slot %hu exceeds MAX_SLOTS...\n", slot );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning( slotNode["Slot"], "슬롯 수 %hu은(는) MAX_SLOTS수 보다 큽니다...\n", slot );
+				else
+					this->invalidWarning( slotNode["Slot"], "Slot %hu exceeds MAX_SLOTS...\n", slot );
 				return 0;
 			}
 
@@ -2424,7 +2704,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 
 				if( zeny > MAX_ZENY ){
-					this->invalidWarning( slotNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( slotNode["Price"], "비용 %u은(는) MAX_ZENY보다 큽니다. 조정됨...\n", zeny );
+					else
+						this->invalidWarning( slotNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
 					zeny = MAX_ZENY;
 				}
 
@@ -2462,7 +2745,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( enchantgrade > MAX_ENCHANTGRADE ){
-						this->invalidWarning( enchantgradeNode["Enchantgrade"], "Enchant grade %hu exceeds MAX_ENCHANTGRADE.\n", enchantgrade );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( enchantgradeNode["Enchantgrade"], "인첸트 grade %hu은(는) MAX_ENCHANTGRADE보다 큽니다.\n", enchantgrade );
+						else
+							this->invalidWarning( enchantgradeNode["Enchantgrade"], "Enchant grade %hu exceeds MAX_ENCHANTGRADE.\n", enchantgrade );
 						return 0;
 					}
 
@@ -2485,7 +2771,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( enchantgrade > MAX_ENCHANTGRADE ){
-						this->invalidWarning( enchantNode["Enchantgrade"], "Enchant grade %hu exceeds MAX_ENCHANTGRADE...\n", enchantgrade );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( enchantNode["Enchantgrade"], "인첸트 grade %hu은(는) MAX_ENCHANTGRADE보다 큽니다...\n", enchantgrade );
+						else
+							this->invalidWarning( enchantNode["Enchantgrade"], "Enchant grade %hu exceeds MAX_ENCHANTGRADE...\n", enchantgrade );
 						return 0;
 					}
 
@@ -2508,7 +2797,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 							std::shared_ptr<item_data> enchant_item = item_db.search_aegisname( enchant_name.c_str() );
 
 							if( enchant_item == nullptr ){
-								this->invalidWarning( itemNode["Item"], "Unknown item \"%s\".\n", enchant_name.c_str() );
+								if(strcmpi(MessageLang_Yml,"KOR") == 0)
+									this->invalidWarning( itemNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", enchant_name.c_str() );
+								else
+									this->invalidWarning( itemNode["Item"], "Unknown item \"%s\".\n", enchant_name.c_str() );
 								return 0;
 							}
 
@@ -2557,7 +2849,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					std::shared_ptr<item_data> enchant_item = item_db.search_aegisname( enchant_name.c_str() );
 
 					if( enchant_item == nullptr ){
-						this->invalidWarning( enchantNode["Item"], "Unknown item \"%s\".\n", enchant_name.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( enchantNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", enchant_name.c_str() );
+						else
+							this->invalidWarning( enchantNode["Item"], "Unknown item \"%s\".\n", enchant_name.c_str() );
 						return 0;
 					}
 
@@ -2577,7 +2872,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( zeny > MAX_ZENY ){
-							this->invalidWarning( enchantNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( enchantNode["Price"], "비용 %u이(가) MAX_ZENY보다 큽니다. 조정됨...\n", zeny );
+							else
+								this->invalidWarning( enchantNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
 							zeny = MAX_ZENY;
 						}
 
@@ -2609,7 +2907,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					std::shared_ptr<item_data> enchant_item = item_db.search_aegisname( enchant_name.c_str() );
 
 					if( enchant_item == nullptr ){
-						this->invalidWarning( upgradeNode["Enchant"], "Unknown item \"%s\".\n", enchant_name.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( upgradeNode["Enchant"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", enchant_name.c_str() );
+						else
+							this->invalidWarning( upgradeNode["Enchant"], "Unknown item \"%s\".\n", enchant_name.c_str() );
 						return 0;
 					}
 
@@ -2635,7 +2936,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						std::shared_ptr<item_data> upgrade_item = item_db.search_aegisname( upgrade_name.c_str() );
 
 						if( upgrade_item == nullptr ){
-							this->invalidWarning( upgradeNode["Upgrade"], "Unknown item \"%s\".\n", upgrade_name.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( upgradeNode["Upgrade"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", upgrade_name.c_str() );
+							else
+								this->invalidWarning( upgradeNode["Upgrade"], "Unknown item \"%s\".\n", upgrade_name.c_str() );
 							return 0;
 						}
 
@@ -2650,7 +2954,10 @@ uint64 ItemEnchantDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 
 						if( zeny > MAX_ZENY ){
-							this->invalidWarning( upgradeNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( upgradeNode["Price"], "비용 %u이(가) MAX_ZENY보다 큽니다. 조정됨...\n", zeny );
+							else
+								this->invalidWarning( upgradeNode["Price"], "Price %u exceeds MAX_ZENY. Capping...\n", zeny );
 							zeny = MAX_ZENY;
 						}
 
@@ -2703,7 +3010,10 @@ uint64 ItemPackageDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 		if( id == nullptr ){
-			this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning( node["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+			else
+				this->invalidWarning( node["Item"], "Unknown item \"%s\".\n", name.c_str() );
 			return 0;
 		}
 
@@ -2752,7 +3062,10 @@ uint64 ItemPackageDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				std::shared_ptr<item_data> id = item_db.search_aegisname( name.c_str() );
 
 				if( id == nullptr ){
-					this->invalidWarning( itemNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning( itemNode["Item"], "\"%s\"은(는) 알 수 없는 아이템입니다.\n", name.c_str() );
+					else
+						this->invalidWarning( itemNode["Item"], "Unknown item \"%s\".\n", name.c_str() );
 					return 0;
 				}
 
@@ -2772,11 +3085,17 @@ uint64 ItemPackageDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( amount > MAX_AMOUNT ){
-						this->invalidWarning( itemNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( itemNode["Amount"], "갯수 %hu은(는) 너무 많습니다. MAX_AMOUNT로 조정됩니다...\n", amount );
+						else
+							this->invalidWarning( itemNode["Amount"], "Amount %hu is too high, capping to MAX_AMOUNT...\n", amount );
 						amount = MAX_AMOUNT;
 					}else if( amount == 0 ){
 						if( !package_item_exists ){
-							this->invalidWarning( itemNode["Amount"], "Trying to remove non existant item \"%s\".\n", name.c_str() );
+							if(strcmpi(MessageLang_Yml,"KOR") == 0)
+								this->invalidWarning( itemNode["Amount"], "존재하지 않는 아이템 \"%s\"을(를) 삭제 할 수는 없습니다.\n", name.c_str() );
+							else
+								this->invalidWarning( itemNode["Amount"], "Trying to remove non existant item \"%s\".\n", name.c_str() );
 							return 0;
 						}else{
 							group->items.erase( id->nameid );
@@ -2812,7 +3131,10 @@ uint64 ItemPackageDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if( refine > MAX_REFINE ){
-						this->invalidWarning( itemNode["Refine"], "Refine %hu is too high, capping to MAX_REFINE...\n", refine );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( itemNode["Refine"], "Refine %hu은(는) 너무 높습니다. MAX_REFINE으로 조정합니다...\n", refine );
+						else
+							this->invalidWarning( itemNode["Refine"], "Refine %hu is too high, capping to MAX_REFINE...\n", refine );
 						refine = MAX_REFINE;
 					}
 
@@ -2833,7 +3155,10 @@ uint64 ItemPackageDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					uint16 option_group_id;
 
 					if( !random_option_group.option_get_id( name, option_group_id ) ){
-						this->invalidWarning( itemNode["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( itemNode["RandomOptionGroup"], "\"%s\"은(는) 알 수 없는 랜덤 옵션 그룹입니다.\n", name.c_str() );
+						else
+							this->invalidWarning( itemNode["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
 						return 0;
 					}
 
@@ -2912,15 +3237,24 @@ std::shared_ptr<s_item_group_entry> ItemGroupDatabase::get_random_entry(uint16 g
 	std::shared_ptr<s_item_group_db> group = this->find(group_id);
 
 	if (group == nullptr) {
-		ShowError("get_random_entry: Invalid group id %hu.\n", group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("get_random_entry: %hu은(는) 잘못된 그룹아이디입니다.\n", group_id);
+		else
+			ShowError("get_random_entry: Invalid group id %hu.\n", group_id);
 		return nullptr;
 	}
 	if (group->random.empty()) {
-		ShowError("get_random_entry: No item entries for group id %hu.\n", group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("get_random_entry: 그룹 id %hu에 대한 항목이 없습니다.\n", group_id);
+		else
+			ShowError("get_random_entry: No item entries for group id %hu.\n", group_id);
 		return nullptr;
 	}
 	if (group->random.count(sub_group) == 0) {
-		ShowError("get_random_entry: No item entries for group id %hu and sub group %hu.\n", group_id, sub_group);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("get_random_entry: 그룹 id %hu와 서브 그룹 %hu에 대한 아이템 항목이 없습니다.\n", group_id, sub_group);
+		else
+			ShowError("get_random_entry: No item entries for group id %hu and sub group %hu.\n", group_id, sub_group);
 		return nullptr;
 	}
 
@@ -3014,7 +3348,10 @@ uint8 ItemGroupDatabase::pc_get_itemgroup( uint16 group_id, bool identify, map_s
 	std::shared_ptr<s_item_group_db> group = this->find(group_id);
 
 	if (group == nullptr) {
-		ShowError("pc_get_itemgroup: Invalid group id '%d' specified.\n",group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("pc_get_itemgroup: 잘못된 그룹 ID '%d'이(가) 지정되었습니다.\n",group_id);
+		else
+			ShowError("pc_get_itemgroup: Invalid group id '%d' specified.\n",group_id);
 		return 2;
 	}
 	if (group->random.empty())
@@ -3135,7 +3472,10 @@ struct item_data* itemdb_search(t_itemid nameid) {
 	std::shared_ptr<item_data> id;
 
 	if (!(id = item_db.find(nameid))) {
-		ShowWarning("itemdb_search: Item ID %u does not exists in the item_db. Using dummy data.\n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("itemdb_search: 아이템 ID %u은(는) item_db에 존재하지 않습니다. 더미 데이터 사용.\n", nameid);
+		else
+			ShowWarning("itemdb_search: Item ID %u does not exists in the item_db. Using dummy data.\n", nameid);
 		id = item_db.find(ITEMID_DUMMY);
 	}
 	return id.get();
@@ -3267,10 +3607,17 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	int64 constant;
 
 	if (!script_get_constant(group_name_constant.c_str(), &constant) || constant < IG_BLUEBOX) {
-		if (strncasecmp(group_name.c_str(), "IG_", 3) != 0)
-			this->invalidWarning(node["Group"], "Invalid group %s.\n", group_name.c_str());
-		else
-			this->invalidWarning(node["Group"], "Invalid group %s. Note that 'IG_' is automatically appended to the group name.\n", group_name.c_str());
+		if (strncasecmp(group_name.c_str(), "IG_", 3) != 0) {
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Group"], "%s은(는) 잘못된 그룹입니다.\n", group_name.c_str());
+			else
+				this->invalidWarning(node["Group"], "Invalid group %s.\n", group_name.c_str());
+		} else {
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Group"], "%s은(는) 잘못된 그룹입니다. 'IG_'는 그룹이름에 자동으로 추가됩니다.\n", group_name.c_str());
+			else
+				this->invalidWarning(node["Group"], "Invalid group %s. Note that 'IG_' is automatically appended to the group name.\n", group_name.c_str());
+		}
 		return 0;
 	}
 
@@ -3294,8 +3641,12 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				if (!this->asUInt16(subit, "Clear", id))
 					continue;
 
-				if (group->random.erase(id) == 0)
-					this->invalidWarning(subit["Clear"], "The SubGroup %hu doesn't exist in the group %s. Clear failed.\n", id, group_name.c_str());
+				if (group->random.erase(id) == 0) {
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(subit["Clear"], "SubGroup %hu이(가) 그룹 %s에 존재하지 않습니다. 지우기 실패.\n", id, group_name.c_str());
+					else
+						this->invalidWarning(subit["Clear"], "The SubGroup %hu doesn't exist in the group %s. Clear failed.\n", id, group_name.c_str());
+				}
 
 				continue;
 			}
@@ -3335,7 +3686,10 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (random->data.erase(index) == 0)
-						this->invalidWarning(listit["Clear"], "Index %u doesn't exist in the SubGroup %hu (group %s). Clear failed.\n", index, subgroup, group_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(listit["Clear"], "%u 색인 %hu 서브그룹(%s 그룹)에 없습니다. 지우기에 실패했습니다.\n", index, subgroup, group_name.c_str());
+						else
+							this->invalidWarning(listit["Clear"], "Index %u doesn't exist in the SubGroup %hu (group %s). Clear failed.\n", index, subgroup, group_name.c_str());
 
 					continue;
 				}
@@ -3392,11 +3746,17 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				}
 
 				if (subgroup == 0 && entry->rate > 0) {
-					this->invalidWarning(listit["Item"], "SubGroup 0 is reserved for item without Rate ('must' item). Defaulting Rate to 0.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(listit["Item"], "서브그룹 0은 확율이 없는 아이템('필수' 아이템)에 대해 예약되어 있습니다. Rate를 0으로 조정.\n");
+					else
+						this->invalidWarning(listit["Item"], "SubGroup 0 is reserved for item without Rate ('must' item). Defaulting Rate to 0.\n");
 					entry->rate = 0;
 				}
 				if (subgroup != 0 && entry->rate == 0) {
-					this->invalidWarning(listit["Item"], "Entry must have a Rate for group above 0, skipping.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(listit["Item"], "항목이 0보다 큰 그룹에 대한 Rate를 가져합니다. 건너뜀.\n");
+					else
+						this->invalidWarning(listit["Item"], "Entry must have a Rate for group above 0, skipping.\n");
 					continue;
 				}
 
@@ -3482,7 +3842,10 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 bound;
 
 					if (!script_get_constant(bound_name_constant.c_str(), &bound) || bound < BOUND_NONE || bound >= BOUND_MAX) {
-						this->invalidWarning(listit["Group"], "Invalid Bound %s.\n", bound_name.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(listit["Group"], "%s은(는) 잘못된 Bound입니다.\n", bound_name.c_str());
+						else
+							this->invalidWarning(listit["Group"], "Invalid Bound %s.\n", bound_name.c_str());
 						continue;
 					}
 
@@ -3502,7 +3865,10 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					uint16 id;
 
 					if( !random_option_group.option_get_id( name, id ) ){
-						this->invalidWarning( listit["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( listit["RandomOptionGroup"], "\"%s\"은(는) 알 수 없는 랜덤 옵션 그룹입니다.\n", name.c_str() );
+						else
+							this->invalidWarning( listit["RandomOptionGroup"], "Unknown random option group \"%s\".\n", name.c_str() );
 						return 0;
 					}
 
@@ -3521,7 +3887,10 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					}
 
 					if( refine > MAX_REFINE ){
-						this->invalidWarning( listit["RefineMinimum"], "Minimum refine % hu is too high, capping to MAX_REFINE...\n", refine );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( listit["RefineMinimum"], "%hu은(는) 너무 높은 최소 제련수입니다. MAX_REFINE으로 설정합니다...\n", refine );
+						else
+							this->invalidWarning( listit["RefineMinimum"], "Minimum refine % hu is too high, capping to MAX_REFINE...\n", refine );
 						refine = MAX_REFINE;
 					}
 
@@ -3540,7 +3909,10 @@ uint64 ItemGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					}
 
 					if( refine > MAX_REFINE ){
-						this->invalidWarning( listit["RefineMaximum"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning( listit["RefineMaximum"], "%hu은(는) 너무 높은 최대 제련수입니다. MAX_REFINE으로 설정합니다...\n", refine );
+						else
+							this->invalidWarning( listit["RefineMaximum"], "Maximum refine %hu is too high, capping to MAX_REFINE...\n", refine );
 						refine = MAX_REFINE;
 					}
 
@@ -3600,7 +3972,10 @@ static bool itemdb_read_noequip( char* str[], size_t columns, size_t current ){
 
 	if( id == nullptr )
 	{
-		ShowWarning("itemdb_read_noequip: Invalid item id %u.\n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("itemdb_read_noequip: 아이템 %u이(가) 잘못되었습니다.\n", nameid);
+		else
+			ShowWarning("itemdb_read_noequip: Invalid item id %u.\n", nameid);
 		return false;
 	}
 
@@ -3650,7 +4025,10 @@ uint64 ComboDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		const ryml::NodeRef& comboNode = comboit["Combo"];
 
 		if (!comboNode.is_seq()) {
-			this->invalidWarning(comboNode, "%s should be a sequence.\n", nodeName.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(comboNode, "%s은(는) 시퀀스여야 합니다.\n", nodeName.c_str());
+			else
+				this->invalidWarning(comboNode, "%s should be a sequence.\n", nodeName.c_str());
 			return 0;
 		}
 
@@ -3663,7 +4041,10 @@ uint64 ComboDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			std::shared_ptr<item_data> item = item_db.search_aegisname(item_name.c_str());
 
 			if (item == nullptr) {
-				this->invalidWarning(it, "Invalid item %s, skipping.\n", item_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it, "%s은(는) 잘못된 아이템이므로 건너뜁니다.\n", item_name.c_str());
+				else
+					this->invalidWarning(it, "Invalid item %s, skipping.\n", item_name.c_str());
 				return 0;
 			}
 
@@ -3671,12 +4052,18 @@ uint64 ComboDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 
 		if (items.empty()) {
-			this->invalidWarning(comboNode, "Empty combo, skipping.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(comboNode, "Combo가 비어있으므로 건너뜁니다.\n");
+			else
+				this->invalidWarning(comboNode, "Empty combo, skipping.\n");
 			return 0;
 		}
 
 		if (items.size() < 2) {
-			this->invalidWarning(comboNode, "Not enough item to make a combo (need at least 2). Skipping.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(comboNode, "Combo를 만들기엔 아이템이 부족합니다. (최소 2가 필요합니다.). 건너뜀.\n");
+			else
+				this->invalidWarning(comboNode, "Not enough item to make a combo (need at least 2). Skipping.\n");
 			return 0;
 		}
 
@@ -3685,7 +4072,10 @@ uint64 ComboDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	}
 
 	if (items_list.empty()) {
-		this->invalidWarning(combosNode, "No combos defined, skipping.\n");
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(combosNode, "Combo로 정의된게 없어 건너뜁니다.\n");
+		else
+			this->invalidWarning(combosNode, "No combos defined, skipping.\n");
 		return 0;
 	}
 
@@ -3701,7 +4091,10 @@ uint64 ComboDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				uint16 id = this->find_combo_id(itemsit);
 
 				if (id == 0) {
-					this->invalidWarning(node["Clear"], "Unable to clear the combo.\n");
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(node["Clear"], "Combo를 지울수 없습니다.\n");
+					else
+						this->invalidWarning(node["Clear"], "Unable to clear the combo.\n");
 					return 0;
 				}
 
@@ -3799,15 +4192,24 @@ bool itemdb_parse_roulette_db(void)
 			Sql_GetData(mmysql_handle, 4, &data, nullptr); flag = atoi(data);
 
 			if (!item_db.exists(item_id)) {
-				ShowWarning("itemdb_parse_roulette_db: Unknown item ID '%u' in level '%d'\n", item_id, level);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("itemdb_parse_roulette_db: '%d'레벨에 '%h'는 알수 없는 아이템ID번호입니다.\n", level, item_id);
+				else		
+					ShowWarning("itemdb_parse_roulette_db: Unknown item ID '%u' in level '%d'\n", item_id, level);
 				continue;
 			}
 			if (amount < 1 || amount > MAX_AMOUNT){
-				ShowWarning("itemdb_parse_roulette_db: Unsupported amount '%hu' for item ID '%u' in level '%d'\n", amount, item_id, level);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("itemdb_parse_roulette_db: '%d'레벨에서 '%hu'은(는) 아이템ID번호 '%u'에 대한 지원되지 않는 갯수 입니다.\n", level, amount, item_id);
+				else
+					ShowWarning("itemdb_parse_roulette_db: Unsupported amount '%hu' for item ID '%u' in level '%d'\n", amount, item_id, level);
 				continue;
 			}
 			if (flag < 0 || flag > 1) {
-				ShowWarning("itemdb_parse_roulette_db: Unsupported flag '%d' for item ID '%u' in level '%d'\n", flag, item_id, level);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("itemdb_parse_roulette_db: '%d'레벨에서 '%d'는(은) 아이템ID번호 '%u'에 대한 지원되지 않는 플래그입니다.\n", level, flag, item_id);
+				else
+					ShowWarning("itemdb_parse_roulette_db: Unsupported flag '%d' for item ID '%u' in level '%d'\n", flag, item_id, level);
 				continue;
 			}
 
@@ -3834,13 +4236,19 @@ bool itemdb_parse_roulette_db(void)
 			continue;
 
 		if (rd.items[i] > limit) {
-			ShowWarning("itemdb_parse_roulette_db: level %d has %d items, only %d supported, capping...\n", i + 1, rd.items[i], limit);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("itemdb_parse_roulette_db: 레벨 %d인 아이템이 %d개가 있지만 %d개만 지원됩니다. 규제중..\n", i + 1, rd.items[i], limit);
+			else	
+				ShowWarning("itemdb_parse_roulette_db: level %d has %d items, only %d supported, capping...\n", i + 1, rd.items[i], limit);
 			rd.items[i] = limit;
 			continue;
 		}
 
 		/** this scenario = rd.items[i] < limit **/
-		ShowWarning("itemdb_parse_roulette_db: Level %d has %d items, %d are required. Filling with Apples...\n", i + 1, rd.items[i], limit);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("itemdb_parse_roulette_db: 레벨 %d인 아이템이 %d개가 있지만, %d개가 필수입니다. 사과로 채우는중...\n", i + 1, rd.items[i], limit);
+		else
+			ShowWarning("itemdb_parse_roulette_db: Level %d has %d items, %d are required. Filling with Apples...\n", i + 1, rd.items[i], limit);
 
 		rd.items[i] = limit;
 		RECREATE(rd.nameid[i], t_itemid, rd.items[i]);
@@ -3857,7 +4265,10 @@ bool itemdb_parse_roulette_db(void)
 		}
 	}
 
-	ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, roulette_table);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%u" CL_RESET "'개의 항목을 읽어왔습니다.\n", roulette_table, count);
+	else
+		ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, roulette_table);
 
 	return true;
 }
@@ -4227,7 +4638,10 @@ static int itemdb_read_sqldb(void) {
 		// process rows one by one
 		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) {
 #ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus( "Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, item_db_name[fi] );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowStatus( "'" CL_WHITE "%s" CL_RESET "'에서 [%" PRIu64 "/%" PRIu64 "] 줄을 불러오는 중 " CL_CLL "\r", item_db_name[fi], ++rows, total_rows );
+			else
+				ShowStatus( "Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, item_db_name[fi] );
 #endif
 			std::vector<std::string> data = {};
 
@@ -4249,7 +4663,10 @@ static int itemdb_read_sqldb(void) {
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, item_db_name[fi]);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowStatus("'" CL_WHITE "%s" CL_RESET "'에서 '" CL_WHITE "%" PRIu64 "" CL_RESET "'개의 항목을 읽어왔습니다.\n", item_db_name[fi], count);
+		else
+			ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, item_db_name[fi]);
 	}
 
 	item_db.loadingFinished();
@@ -4312,7 +4729,10 @@ uint64 RandomOptionDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (randopt->name.compare(name) != 0 && random_option_db.option_exists(name)) {
-			this->invalidWarning(node["Option"], "Found duplicate random option name for %s, skipping.\n", name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Option"], "%s에 대한 중복된 랜덤 옵션 이름을 발견했습니다. 통과됨.\n", name.c_str());
+			else
+				this->invalidWarning(node["Option"], "Found duplicate random option name for %s, skipping.\n", name.c_str());
 			return 0;
 		}
 
@@ -4409,7 +4829,10 @@ bool RandomOptionGroupDatabase::add_option(const ryml::NodeRef& node, std::share
 			return false;
 
 		if (!random_option_db.option_get_id(opt_name, option_id)) {
-			this->invalidWarning(node["Option"], "Invalid Random Option name %s given.\n", opt_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+				this->invalidWarning(node["Option"], "잘못된 옵션 이름 %s이(가) 지정되었습니다.\n", opt_name.c_str());
+			else
+				this->invalidWarning(node["Option"], "Invalid Random Option name %s given.\n", opt_name.c_str());
 			return false;
 		}
 	} else {
@@ -4443,7 +4866,10 @@ bool RandomOptionGroupDatabase::add_option(const ryml::NodeRef& node, std::share
 	}
 
 	if (entry->min_value > entry->max_value) {
-		this->invalidWarning(node["MaxValue"], "MinValue %d is greater than MaxValue %d, setting MaxValue to MinValue + 1.\n", entry->min_value, entry->max_value);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["MaxValue"], "최소값 %d이(가) 최대값 %d보다 큽니다. 최대값을 최소값+1로 설정합니다.\n", entry->min_value, entry->max_value);
+		else
+			this->invalidWarning(node["MaxValue"], "MinValue %d is greater than MaxValue %d, setting MaxValue to MinValue + 1.\n", entry->min_value, entry->max_value);
 		entry->max_value = entry->min_value + 1;
 	}
 
@@ -4583,7 +5009,10 @@ uint64 RandomOptionGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (randopt->name.compare(name) != 0 && random_option_group.option_exists(name)) {
-			this->invalidWarning(node["Group"], "Found duplicate random option group name for %s, skipping.\n", name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Group"], "%s에 대한 중복된 랜덤옵션 그룹 이름을 발견했습니다. 통과됨.\n", name.c_str());
+			else
+				this->invalidWarning(node["Group"], "Found duplicate random option group name for %s, skipping.\n", name.c_str());
 			return 0;
 		}
 
@@ -4594,7 +5023,10 @@ uint64 RandomOptionGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		const auto& slotsNode = node["Slots"];
 		for (const ryml::NodeRef& slotNode : slotsNode) {
 			if (randopt->slots.size() >= MAX_ITEM_RDM_OPT) {
-				this->invalidWarning(slotNode, "Reached maximum of %d Random Option group options. Skipping the remaining slots...\n", MAX_ITEM_RDM_OPT);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(slotNode, "%d개의 최대 Random Option 그룹 옵션에 도달했습니다. 나머지 슬롯 건너뜀...\n", MAX_ITEM_RDM_OPT);
+				else
+					this->invalidWarning(slotNode, "Reached maximum of %d Random Option group options. Skipping the remaining slots...\n", MAX_ITEM_RDM_OPT);
 				break;
 			}
 
@@ -4604,12 +5036,18 @@ uint64 RandomOptionGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (slot < 1 || slot > MAX_ITEM_RDM_OPT) {
-				this->invalidWarning(slotNode["Slot"], "Invalid Random Opton Slot number %hu given, must be between 1~%d, skipping.\n", slot, MAX_ITEM_RDM_OPT);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(slotNode["Slot"], "잘못된 Random Option Slot 번호 %hu이(가) 지정되었습니다. 1~%d사이어야 합니다. 통과됨.\n", slot, MAX_ITEM_RDM_OPT);
+				else
+					this->invalidWarning(slotNode["Slot"], "Invalid Random Opton Slot number %hu given, must be between 1~%d, skipping.\n", slot, MAX_ITEM_RDM_OPT);
 				return 0;
 			}
 
 			if (!this->nodeExists(slotNode, "Options")) {
-				this->invalidWarning(slotNode, "Random option slot does not contain Options node, skipping.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(slotNode, "랜덤 옵션 슬롯에 옵션 노드가 없습니다. 건너뜁니다.\n");
+				else
+					this->invalidWarning(slotNode, "Random option slot does not contain Options node, skipping.\n");
 				return 0;
 			}
 
@@ -4635,7 +5073,10 @@ uint64 RandomOptionGroupDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (max > MAX_ITEM_RDM_OPT) {
-			this->invalidWarning(node["MaxRandom"], "Exceeds the maximum of %d Random Option group options, capping to MAX_ITEM_RDM_OPT.\n", MAX_ITEM_RDM_OPT);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["MaxRandom"], "최대 %d개의 Random Option 그룹 옵션 초과입니다. MAX_ITEM_RDM_OPT으로 조정.\n", MAX_ITEM_RDM_OPT);
+			else
+				this->invalidWarning(node["MaxRandom"], "Exceeds the maximum of %d Random Option group options, capping to MAX_ITEM_RDM_OPT.\n", MAX_ITEM_RDM_OPT);
 			max = MAX_ITEM_RDM_OPT;
 		}
 
@@ -4772,7 +5213,10 @@ int item_data::inventorySlotNeeded(int quantity)
 
 void itemdb_gen_itemmoveinfo()
 {
-	ShowInfo("itemdb_gen_itemmoveinfo: Generating itemmoveinfov5.txt.\n");
+	if(strcmpi(MessageLang_Yml,"KOR") == 0)
+		ShowInfo("itemdb_gen_itemmoveinfo: itemmoveinfov5.txt을(를) 생성중입니다.\n");
+	else
+		ShowInfo("itemdb_gen_itemmoveinfo: Generating itemmoveinfov5.txt.\n");
 	auto starttime = std::chrono::system_clock::now();
 	auto os = std::ofstream("./generated/clientside/data/itemmoveinfov5.txt", std::ios::trunc);
 	std::map<t_itemid, std::shared_ptr<item_data>> sorted_itemdb(item_db.begin(), item_db.end());
@@ -4793,7 +5237,10 @@ void itemdb_gen_itemmoveinfo()
 	os.close();
 
 	auto currenttime = std::chrono::system_clock::now();
-	ShowInfo("itemdb_gen_itemmoveinfo: Done generating itemmoveinfov5.txt. The process took %lldms\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
+	if(strcmpi(MessageLang_Yml,"KOR") == 0)
+		ShowInfo("itemdb_gen_itemmoveinfo: itemmoveinfov5.txt 생성이 완료되었습니다. 소요시간: %lldms 시간\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
+	else
+		ShowInfo("itemdb_gen_itemmoveinfo: Done generating itemmoveinfov5.txt. The process took %lldms\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
 }
 
 /**

@@ -1,0 +1,34 @@
+
+Header:
+  Type: ITEM_DB
+  Version: 2
+
+Body:
+  - Id: 100626   # GrayWolf_7_Ticket
+    Script: |
+      upgradeui 100626;
+  - Id: 100627   # GrayWolf_9_Ticket
+    Script: |
+      upgradeui 100627;
+  - Id: 100650   # Pontifex_Courage
+    Script: |
+      upgradeui 100650;
+  - Id: 100651   # Pontifex_Wisdom
+    Script: |
+      upgradeui 100651;
+  - Id: 100652   # Pontifex_Tenacity
+    Script: |
+      upgradeui 100652;
+  - Id: 100653   # Pontifex_Belief
+    Script: |
+      upgradeui 100653;
+  - Id: 100655
+    AegisName: Blue_Prints_Scroll
+    Name: Cleansing Blueprint Bundle
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      /* todo */
+      getitem rand(1000475,1000500),3;

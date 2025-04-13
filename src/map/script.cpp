@@ -30,6 +30,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"
@@ -61,6 +62,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "stall.hpp"
 #include "storage.hpp"
 
 using namespace rathena;
@@ -88,7 +90,10 @@ static bool script_accid2sd_(struct script_state *st, uint8 loc, map_session_dat
 	if (script_hasdata(st, loc)) {
 		int id_ = script_getnum(st, loc);
 		if (!(*sd = map_id2sd(id_))){
-			ShowError("%s: Player with account id '%d' is not found.\n", func, id_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%s: 계정ID가 '%d'인 플레이어를 찾을 수 없습니다.\n", func, id_);
+			else
+				ShowError("%s: Player with account id '%d' is not found.\n", func, id_);
 			return false;
 		}else{
 			return true;
@@ -109,7 +114,10 @@ static bool script_charid2sd_(struct script_state *st, uint8 loc, map_session_da
 	if (script_hasdata(st, loc)) {
 		int id_ = script_getnum(st, loc);
 		if (!(*sd = map_charid2sd(id_))){
-			ShowError("%s: Player with char id '%d' is not found.\n", func, id_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%s: 케릭터ID가 '%d'인 플레이어를 찾을 수 없습니다.\n", func, id_);
+			else
+				ShowError("%s: Player with char id '%d' is not found.\n", func, id_);
 			return false;
 		}else{
 			return true;
@@ -130,7 +138,10 @@ static bool script_nick2sd_(struct script_state *st, uint8 loc, map_session_data
 	if (script_hasdata(st, loc)) {
 		const char *name_ = script_getstr(st, loc);
 		if (!(*sd = map_nick2sd(name_,false))){
-			ShowError("%s: Player with nick '%s' is not found.\n", func, name_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%s: 닉네임이 '%s'인 플레이어를 찾을 수 없습니다.\n", func, name_);
+			else
+				ShowError("%s: Player with nick '%s' is not found.\n", func, name_);
 			return false;
 		}else{
 			return true;
@@ -151,7 +162,10 @@ static bool script_mapid2sd_(struct script_state *st, uint8 loc, map_session_dat
 	if (script_hasdata(st, loc)) {
 		int id_ = script_getnum(st, loc);
 		if (!(*sd = map_id2sd(id_))){
-			ShowError("%s: Player with map id '%d' is not found.\n", func, id_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("%s: 플레이어와 맵ID '%d'을(를) 찾을 수 없습니다.\n", func, id_);
+			else
+				ShowError("%s: Player with map id '%d' is not found.\n", func, id_);
 			return false;
 		}else{
 			return true;
@@ -179,7 +193,10 @@ static bool script_rid2bl_(struct script_state *st, uint8 loc, struct block_list
 	if ( *bl )
 		return true;
 	else {
-		ShowError("%s: Unit with ID '%d' is not found.\n", func, unit_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("%s: ID가 '%d'인 유닛을 찾을 수 없습니다.\n", func, unit_id);
+		else
+			ShowError("%s: Unit with ID '%d' is not found.\n", func, unit_id);
 		return false;
 	}
 }
@@ -438,7 +455,10 @@ const char* script_op2name(int op)
 	RETURN_OP_NAME(C_SUB_PRE);
 
 	default:
-		ShowDebug("script_op2name: unexpected op=%d\n", op);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("script_op2name: 얘기치 않은 op=%d\n", op);
+		else
+			ShowDebug("script_op2name: unexpected op=%d\n", op);
 		return "???";
 	}
 #undef RETURN_OP_NAME
@@ -500,18 +520,40 @@ static void script_reportsrc(struct script_state *st)
 	switch( bl->type ) {
 		case BL_NPC: {
 			struct npc_data* nd = (struct npc_data*)bl;
-
-			if( bl->m >= 0 )
-				ShowDebug("Source (NPC): %s at %s (%d,%d)\n", nd->name, map_mapid2mapname(bl->m), bl->x, bl->y);
-			else
-				ShowDebug("Source (NPC): %s (invisible/not on a map)\n", nd->name);
-			ShowDebug( "Source (NPC): %s is located in: %s\n", nd->name, nd->path );
-			} break;
+	
+			if( bl->m >= 0 ) {
+				if(strcmpi(MessageLang, "KOR") == 0) {
+					ShowDebug("출처 (NPC): %s 위치 %s (%d,%d)\n", nd->name, map_mapid2mapname(bl->m), bl->x, bl->y);
+				} else {
+					ShowDebug("Source (NPC): %s at %s (%d,%d)\n", nd->name, map_mapid2mapname(bl->m), bl->x, bl->y);
+				}
+			} else {
+				if(strcmpi(MessageLang, "KOR") == 0) {
+					ShowDebug("출처 (NPC): %s (보이지 않음/맵에 없음)\n", nd->name);
+				} else {
+					ShowDebug("Source (NPC): %s (invisible/not on a map)\n", nd->name);
+				}
+			}
+			if(strcmpi(MessageLang, "KOR") == 0) {
+				ShowDebug("출처 (NPC): %s의 위치: %s\n", nd->name, nd->path);
+			} else {
+				ShowDebug("Source (NPC): %s is located in: %s\n", nd->name, nd->path);
+			}
+		} break;
 		default:
-			if( bl->m >= 0 )
-				ShowDebug("Source (Non-NPC type %d): name %s at %s (%d,%d)\n", bl->type, status_get_name(bl), map_mapid2mapname(bl->m), bl->x, bl->y);
-			else
-				ShowDebug("Source (Non-NPC type %d): name %s (invisible/not on a map)\n", bl->type, status_get_name(bl));
+			if( bl->m >= 0 ) {
+				if(strcmpi(MessageLang, "KOR") == 0) {
+					ShowDebug("출처 (비-NPC 타입 %d): 이름 %s 위치 %s (%d,%d)\n", bl->type, status_get_name(bl), map_mapid2mapname(bl->m), bl->x, bl->y);
+				} else {
+					ShowDebug("Source (Non-NPC type %d): name %s at %s (%d,%d)\n", bl->type, status_get_name(bl), map_mapid2mapname(bl->m), bl->x, bl->y);
+				}
+			} else {
+				if(strcmpi(MessageLang, "KOR") == 0) {
+					ShowDebug("출처 (비-NPC 타입 %d): 이름 %s (보이지 않음/맵에 없음)\n", bl->type, status_get_name(bl));
+				} else {
+					ShowDebug("Source (Non-NPC type %d): name %s (invisible/not on a map)\n", bl->type, status_get_name(bl));
+				}
+			}
 			break;
 	}
 }
@@ -523,37 +565,69 @@ static void script_reportdata(struct script_data* data)
 		return;
 	switch( data->type ) {
 		case C_NOP:// no value
-			ShowDebug("Data: nothing (nil)\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("데이터: 아무것도 (없음)\n");
+			else
+				ShowDebug("Data: nothing (nil)\n");
 			break;
 		case C_INT:// number
-			ShowDebug("Data: number value=%" PRId64 "\n", data->u.num);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("데이터: 숫자 값=%" PRId64 "\n", data->u.num);
+			else
+				ShowDebug("Data: number value=%" PRId64 "\n", data->u.num);
 			break;
 		case C_STR:
 		case C_CONSTSTR:// string
 			if( data->u.str ) {
-				ShowDebug("Data: string value=\"%s\"\n", data->u.str);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("데이터: 문자 값=\"%s\"\n", data->u.str);
+				else
+					ShowDebug("Data: string value=\"%s\"\n", data->u.str);
 			} else {
-				ShowDebug("Data: string value=nullptr\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("데이터: 문자 값=nullptr\n");
+				else
+					ShowDebug("Data: string value=nullptr\n");
 			}
 			break;
 		case C_NAME:// reference
 			if( reference_tovariable(data) ) {// variable
 				const char* name = reference_getname(data);
-				ShowDebug("Data: variable name='%s' index=%d\n", name, reference_getindex(data));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("데이터: 변수 이름='%s' 인덱스=%d\n", name, reference_getindex(data));
+				else
+					ShowDebug("Data: variable name='%s' index=%d\n", name, reference_getindex(data));
 			} else if( reference_toconstant(data) ) {// constant
-				ShowDebug("Data: constant name='%s' value=%" PRId64 "\n", reference_getname(data), reference_getconstant(data));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("데이터: 상수 이름='%s' 값=%d" PRId64 "\n", reference_getname(data), reference_getconstant(data));
+				else
+					ShowDebug("Data: constant name='%s' value=%" PRId64 "\n", reference_getname(data), reference_getconstant(data));
 			} else if( reference_toparam(data) ) {// param
-				ShowDebug("Data: param name='%s' type=%" PRId64 "\n", reference_getname(data), reference_getparamtype(data));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("데이터: 파라메터 이름='%s' 타입=%d" PRId64 "\n", reference_getname(data), reference_getparamtype(data));
+				else
+					ShowDebug("Data: param name='%s' type=%" PRId64 "\n", reference_getname(data), reference_getparamtype(data));
 			} else {// ???
-				ShowDebug("Data: reference name='%s' type=%s\n", reference_getname(data), script_op2name(data->type));
-				ShowDebug("Please report this!!! - script->str_data.type=%s\n", script_op2name(str_data[reference_getid(data)].type));
+				if(strcmpi(MessageLang,"KOR") == 0) {
+					ShowDebug("데이터: 레퍼런스 이름='%s' 타입=%s\n", reference_getname(data), script_op2name(data->type));
+					ShowDebug("이것을 보고하세요 - script->str_data.type=%s\n", script_op2name(str_data[reference_getid(data)].type));
+				} else {
+					ShowDebug("Data: reference name='%s' type=%s\n", reference_getname(data), script_op2name(data->type));
+					ShowDebug("Please report this!!! - script->str_data.type=%s\n", script_op2name(str_data[reference_getid(data)].type));
+				}
 			}
 			break;
 		case C_POS:// label
-			ShowDebug("Data: label pos=%" PRId64 "\n", data->u.num);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("데이터: 라벨 위치=%" PRId64 "\n", data->u.num);
+			else	
+				ShowDebug("Data: label pos=%" PRId64 "\n", data->u.num);
 			break;
 		default:
-			ShowDebug("Data: %s\n", script_op2name(data->type));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("데이터: %s\n", script_op2name(data->type));
+			else
+				ShowDebug("Data: %s\n", script_op2name(data->type));
 			break;
 	}
 }
@@ -583,7 +657,10 @@ static void script_reportfunc(struct script_state* st)
 	if( params > 0 )
 	{
 		int i;
-		ShowDebug("Function: %s (%d parameter%s):\n", get_str(id), params, ( params == 1 ) ? "" : "s");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("함수: %s (%d 파라메터%s):\n", get_str(id), params, ( params == 1 ) ? "" : "s");
+		else
+			ShowDebug("Function: %s (%d parameter%s):\n", get_str(id), params, ( params == 1 ) ? "" : "s");
 
 		for( i = 2; i <= script_lastdata(st); i++ )
 		{
@@ -592,7 +669,10 @@ static void script_reportfunc(struct script_state* st)
 	}
 	else
 	{
-		ShowDebug("Function: %s (no parameters)\n", get_str(id));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("함수: %s (파라메터 없음)\n", get_str(id));
+		else
+			ShowDebug("Function: %s (no parameters)\n", get_str(id));
 	}
 }
 /*==========================================
@@ -616,7 +696,10 @@ static void check_event(struct script_state *st, const char *evt)
 {
 	if( evt && evt[0] && !stristr(evt, "::On") )
 	{
-		ShowWarning("NPC event parameter deprecated! Please use 'NPCNAME::OnEVENT' instead of '%s'.\n", evt);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("NPC 이벤트 파라메터가 사용되지 않았습니다. '%s'대신 'NPCNAME::OnEVENT'를 사용하세요.\n", evt);
+		else
+			ShowWarning("NPC event parameter deprecated! Please use 'NPCNAME::OnEVENT' instead of '%s'.\n", evt);
 		script_reportsrc(st);
 	}
 }
@@ -843,11 +926,17 @@ void set_label(int l,int pos, const char* script_pos_cur)
 
 	if(str_data[l].type==C_INT || str_data[l].type==C_PARAM || str_data[l].type==C_FUNC)
 	{	//Prevent overwriting constants values, parameters and built-in functions [Skotlex]
-		disp_error_message("set_label: invalid label name",script_pos_cur);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("라벨 설정(set_label): 잘못된 라벨 이름입니다.",script_pos_cur);
+		else
+			disp_error_message("set_label: invalid label name",script_pos_cur);
 		return;
 	}
 	if(str_data[l].label!=-1){
-		disp_error_message("set_label: dup label ",script_pos_cur);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("라벨 설정(set_label): 라벨이 중복됩니다. ",script_pos_cur);
+		else
+			disp_error_message("set_label: dup label ",script_pos_cur);
 		return;
 	}
 	str_data[l].type=(str_data[l].type == C_USERFUNC ? C_USERFUNC_POS : C_POS);
@@ -880,7 +969,10 @@ const char* skip_space(const char* p)
 			for(;;)
 			{
 				if( *p == '\0' ) {
-					disp_warning_message("script:script->skip_space: end of file while parsing block comment. expected " CL_BOLD "*/" CL_NORM, p);
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_warning_message("script:script->skip_space: 블록 주석을 구문 분석하는 동안 파일의 끝에 도달했습니다. " CL_BOLD "*/" CL_NORM "이 없는것으로 예상됨.", p);
+					else
+						disp_warning_message("script:script->skip_space: end of file while parsing block comment. expected " CL_BOLD "*/" CL_NORM, p);
 					return p;
 				}
 				if( *p == '*' && p[1] == '/' )
@@ -936,10 +1028,12 @@ static int add_word(const char* p)
 
 	// Check for a word
 	size_t len = skip_word( p ) - p;
-
-	if( len == 0 )
-		disp_error_message("script:add_word: invalid word. A word consists of undercores and/or alphanumeric characters, and valid variable prefixes/postfixes.", p);
-
+	if( len == 0 ) {
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("script:add_word: 단어가 잘못되었습니다. 단어는 밑줄 및 / 또는 영숫자 문자 및 유효한 변수 접두사/접미사로 구성됩니다.", p);
+		else
+			disp_error_message("script:add_word: invalid word. A word consists of undercores and/or alphanumeric characters, and valid variable prefixes/postfixes.", p);
+	}
 	// Duplicate the word
 	word = (char*)aMalloc(len+1);
 	memcpy(word, p, len);
@@ -969,8 +1063,13 @@ const char* parse_callfunc(const char* p, int require_paren, int is_custom)
 		arg = buildin_func[str_data[func].val].arg;
 #if defined(SCRIPT_COMMAND_DEPRECATION)
 		if( str_data[func].deprecated ){
-			ShowWarning( "Usage of deprecated script function '%s'.\n", get_str(func) );
-			ShowWarning( "This function was deprecated on '%s' and could become unavailable anytime soon.\n", buildin_func[str_data[func].val].deprecated );
+			if(strcmpi(MessageLang,"KOR") == 0) {
+				ShowWarning( "'%s'은(는) 더 이상 사용되지 않는 스크립트 함수입니다.\n", get_str(func) );
+				ShowWarning( "이 함수는 '%s'에서 사용되지 않으며 곧 사용할 수 없게 될 수 있습니다.\n", buildin_func[str_data[func].val].deprecated );
+			} else {
+				ShowWarning( "Usage of deprecated script function '%s'.\n", get_str(func) );
+				ShowWarning( "This function was deprecated on '%s' and could become unavailable anytime soon.\n", buildin_func[str_data[func].val].deprecated );
+			}
 		}
 #endif
 	} else if( str_data[func].type == C_USERFUNC || str_data[func].type == C_USERFUNC_POS ){
@@ -979,14 +1078,21 @@ const char* parse_callfunc(const char* p, int require_paren, int is_custom)
 		add_scriptc(C_ARG);
 		add_scriptl(func);
 		arg = buildin_func[str_data[buildin_callsub_ref].val].arg;
-		if( *arg == 0 )
-			disp_error_message("parse_callfunc: callsub has no arguments, please review its definition",p);
+		if( *arg == 0 ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_callfunc: callsub에 대한 인수가 없습니다. 이 함수에 대한 정의를 다시 확인해보세요.",p);
+			else
+				disp_error_message("parse_callfunc: callsub has no arguments, please review its definition",p);
+		}
 		if( *arg != '*' )
 			++arg; // count func as argument
 	} else {
 		const char* name = get_str(func);
 		if( !is_custom && strdb_get(userfunc_db, name) == nullptr ) {
-			disp_error_message("parse_line: expect command, missing function name or calling undeclared function",p);
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_line: 함수 이름이 누락되었거나 선언되지 않은 함수를 호출하려 합니다. ",p);
+			else
+				disp_error_message("parse_line: expect command, missing function name or calling undeclared function",p);
 		} else {;
 			add_scriptl(buildin_callfunc_ref);
 			add_scriptc(C_ARG);
@@ -1017,8 +1123,12 @@ const char* parse_callfunc(const char* p, int require_paren, int is_custom)
 	} else
 	{// <func name> <arg list>
 		if( require_paren ){
-			if( *p != '(' )
-				disp_error_message("need '('",p);
+			if( *p != '(' ) {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("'('이 필요함",p);
+				else
+					disp_error_message("need '('",p);
+			}
 			++p; // skip '('
 			syntax.curly[syntax.curly_count].flag = ARGLIST_PAREN;
 		} else if( *p == '(' ){
@@ -1041,13 +1151,25 @@ const char* parse_callfunc(const char* p, int require_paren, int is_custom)
 		}
 		--syntax.curly_count;
 	}
-	if( *arg && *arg != '?' && *arg != '*' )
-		disp_error_message2("parse_callfunc: not enough arguments, expected ','", p, script_config.warn_func_mismatch_paramnum);
-	if( syntax.curly[syntax.curly_count].type != TYPE_ARGLIST )
-		disp_error_message("parse_callfunc: DEBUG last curly is not an argument list",p);
+	if( *arg && *arg != '?' && *arg != '*' ) {
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message2("parse_callfunc: 인수가 모자랍니다. ','이(가) 요구됨.", p, script_config.warn_func_mismatch_paramnum);
+		else
+			disp_error_message2("parse_callfunc: not enough arguments, expected ','", p, script_config.warn_func_mismatch_paramnum);
+	}
+	if( syntax.curly[syntax.curly_count].type != TYPE_ARGLIST ) {
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_callfunc: 디버그! 괄호가 열려만 있거나 닫혀만 있습니다.",p);
+		else
+			disp_error_message("parse_callfunc: DEBUG last curly is not an argument list",p);
+	}
 	if( syntax.curly[syntax.curly_count].flag == ARGLIST_PAREN ){
-		if( *p != ')' )
-			disp_error_message("parse_callfunc: expected ')' to close argument list",p);
+		if( *p != ')' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_callfunc:  ')'은(는) 닫는 인수목록에 요구됩니다.",p);
+			else
+				disp_error_message("parse_callfunc: expected ')' to close argument list",p);
+		}
 		++p;
 	}
 	add_scriptc(C_FUNC);
@@ -1089,9 +1211,12 @@ void parse_variable_sub_push(int word, const char *p2)
 		p3 = parse_subexpr(p2 + 1, 1);
 		p3 = skip_space(p3);
 
-		if( *p3 != ']' ) // Closing parenthesis is required for this script
-			disp_error_message("Missing closing ']' parenthesis for the variable assignment.", p3);
-
+		if( *p3 != ']' ) { // Closing parenthesis is required for this script
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("변수 할당에 닫는 ']'괄호가 없습니다.", p3);
+			else
+				disp_error_message("Missing closing ']' parenthesis for the variable assignment.", p3);
+		}
 		// Push the closing function stack operator onto the stack
 		add_scriptc(C_FUNC);
 		p3++;
@@ -1134,7 +1259,10 @@ const char* parse_variable(const char* p) {
 		}
 
 		if( !(p = skip_space(p)) ) {// end of line or invalid characters remaining
-			disp_error_message("Missing right expression or closing bracket for variable.", p);
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("변수에 오른쪽 또는 왼쪽 대괄호가 누락되었습니다.", p);
+			else
+				disp_error_message("Missing right expression or closing bracket for variable.", p);
 		}
 	}
 
@@ -1214,9 +1342,12 @@ const char* parse_variable(const char* p) {
 	// parse the variable currently being modified
 	word = add_word(var);
 
-	if( str_data[word].type == C_FUNC || str_data[word].type == C_USERFUNC || str_data[word].type == C_USERFUNC_POS ) // cannot assign a variable which exists as a function or label
-		disp_error_message("Cannot modify a variable which has the same name as a function or label.", p);
-
+	if( str_data[word].type == C_FUNC || str_data[word].type == C_USERFUNC || str_data[word].type == C_USERFUNC_POS ) { // cannot assign a variable which exists as a function or label
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("함수 또는 라벨과 동일한 이름을 가진 변수는 수정할 수 없습니다.", p);
+		else
+			disp_error_message("Cannot modify a variable which has the same name as a function or label.", p);
+	}
 	parse_variable_sub_push(word, p2); // Push variable onto the stack
 
 	if( type != C_EQ )
@@ -1293,8 +1424,12 @@ const char* parse_simpleexpr(const char *p)
 	int64 i;
 	p=skip_space(p);
 
-	if(*p==';' || *p==',')
-		disp_error_message("parse_simpleexpr: unexpected end of expression",p);
+	if(*p==';' || *p==',') {
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_simpleexpr: 예상치 못한 식의 끝입니다.",p);
+		else
+			disp_error_message("parse_simpleexpr: unexpected end of expression",p);
+	}
 	if(*p=='('){
 		if( (i=syntax.curly_count-1) >= 0 && syntax.curly[i].type == TYPE_ARGLIST )
 			++syntax.curly[i].count;
@@ -1309,8 +1444,12 @@ const char* parse_simpleexpr(const char *p)
 			} else
 				syntax.curly[i].flag = ARGLIST_NO_PAREN;
 		}
-		if( *p != ')' )
-			disp_error_message("parse_simpleexpr: unmatched ')'",p);
+		if( *p != ')' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_simpleexpr: ')'이 일치하지 않음.",p);
+			else	
+				disp_error_message("parse_simpleexpr: unmatched ')'",p);
+		}
 		++p;
 	} else if(is_number(p)) {
 		char *np;
@@ -1325,10 +1464,16 @@ const char* parse_simpleexpr(const char *p)
 
 		if( i < SCRIPT_INT_MIN || ( error && i == INT64_MIN ) ){
 			i = SCRIPT_INT_MIN;
-			disp_warning_message( "parse_simpleexpr: underflow detected, capping value to SCRIPT_INT_MIN", p );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				disp_warning_message("parse_simpleexpr: SCRIPT_INT_MIN에 설정된 최소값보다 적습니다. ",p);
+			else
+				disp_warning_message( "parse_simpleexpr: underflow detected, capping value to SCRIPT_INT_MIN", p );
 		}else if( i > SCRIPT_INT_MAX || ( error && i == INT64_MAX ) ){
 			i = SCRIPT_INT_MAX;
-			disp_warning_message( "parse_simpleexpr: overflow detected, capping value to SCRIPT_INT_MAX", p );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				disp_warning_message("parse_simpleexpr: SCRIPT_INT_MAX에 설정된 값보다 큽니다.",p);
+			else
+				disp_warning_message( "parse_simpleexpr: overflow detected, capping value to SCRIPT_INT_MAX", p );
 		}
 
 		add_scripti(i);
@@ -1342,18 +1487,30 @@ const char* parse_simpleexpr(const char *p)
 				char buf[8];
 				size_t len = skip_escaped_c(p) - p;
 				size_t n = sv_unescape_c(buf, p, len);
-				if( n != 1 )
-					ShowDebug("parse_simpleexpr: unexpected length %d after unescape (\"%.*s\" -> %.*s)\n", (int)n, (int)len, p, (int)n, buf);
+				if( n != 1 ) {
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						ShowDebug("parse_simpleexpr: %d은(는) 언이스케이프 (\"%.*s\" -> %.*s)후 예상치 못한 길이입니다.\n", (int)n, (int)len, p, (int)n, buf);
+					else		
+						ShowDebug("parse_simpleexpr: unexpected length %d after unescape (\"%.*s\" -> %.*s)\n", (int)n, (int)len, p, (int)n, buf);
+				}
 				p += len;
 				add_scriptb(*buf);
 				continue;
 			}
-			else if( *p == '\n' )
-				disp_error_message("parse_simpleexpr: unexpected newline @ string",p);
+			else if( *p == '\n' ) {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_simpleexpr: 예상치 못한 줄바꿈이 발견됨. @ 문자열",p);
+				else	
+					disp_error_message("parse_simpleexpr: unexpected newline @ string",p);
+			}
 			add_scriptb(*p++);
 		}
-		if(!*p)
-			disp_error_message("parse_simpleexpr: unexpected eof @ string",p);
+		if(!*p) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_simpleexpr: 예상치 못한 끝을 발견했습니다. @ 문자열",p);
+			else
+				disp_error_message("parse_simpleexpr: unexpected eof @ string",p);
+		}
 		add_scriptb(0);
 		p++;	//'"'
 	} else {
@@ -1361,9 +1518,12 @@ const char* parse_simpleexpr(const char *p)
 		const char* pv;
 
 		// label , register , function etc
-		if(skip_word(p)==p)
-			disp_error_message("parse_simpleexpr: unexpected character",p);
-
+		if(skip_word(p)==p) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_simpleexpr: 예기치 못한 문자입니다.",p);
+			else
+				disp_error_message("parse_simpleexpr: unexpected character",p);
+		}
 		l=add_word(p);
 		if( str_data[l].type == C_FUNC || str_data[l].type == C_USERFUNC || str_data[l].type == C_USERFUNC_POS)
 			return parse_callfunc(p,1,0);
@@ -1381,11 +1541,23 @@ const char* parse_simpleexpr(const char *p)
 
 #if defined(SCRIPT_CONSTANT_DEPRECATION)
 		if( str_data[l].type == C_INT && str_data[l].deprecated ){
-			ShowWarning( "Usage of deprecated constant '%s'.\n", get_str(l) );
-			ShowWarning( "This constant was deprecated and could become unavailable anytime soon.\n" );
-			if (str_data[l].name)
-				ShowWarning( "Please use '%s' instead!\n", str_data[l].name );
-			disp_warning_message("parse_simpleexpr: deprecated constant", p);
+			if(strcmpi(MessageLang,"KOR") == 0) {
+				ShowWarning( "사용되지 않는 상수 '%s'이(가) 사용되었습니다.\n", get_str(l) );
+				ShowWarning( "이 상수는 더 이상 사용되지 않으며 곧 사용할 수 없게 될 수 있습니다.\n" );
+			} else {
+				ShowWarning( "Usage of deprecated constant '%s'.\n", get_str(l) );
+				ShowWarning( "This constant was deprecated and could become unavailable anytime soon.\n" );
+			}
+			if (str_data[l].name) {
+				if(strcmpi(MessageLang,"KOR") == 0) 
+					ShowWarning( "대신 '%s'을(를) 사용하십시오!\n", str_data[l].name );
+				else 
+					ShowWarning( "Please use '%s' instead!\n", str_data[l].name );
+			}
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_warning_message("parse_simpleexpr: 사용되지 않는 상수입니다.", p);
+			else
+				disp_warning_message("parse_simpleexpr: deprecated constant", p);
 		}
 #endif
 
@@ -1398,8 +1570,12 @@ const char* parse_simpleexpr(const char *p)
 
 			p=parse_subexpr(p+1,-1);
 			p=skip_space(p);
-			if( *p != ']' )
-				disp_error_message("parse_simpleexpr: unmatched ']'",p);
+			if( *p != ']' ) {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_simpleexpr: ']'이(가) 일치하지 않습니다.",p);
+				else		
+					disp_error_message("parse_simpleexpr: unmatched ']'",p);
+			}
 			++p;
 			add_scriptc(C_FUNC);
 		}else
@@ -1460,8 +1636,12 @@ const char* parse_subexpr(const char* p,int limit)
 		if(op == C_OP3) {
 			p=parse_subexpr(p,-1);
 			p=skip_space(p);
-			if( *(p++) != ':')
-				disp_error_message("parse_subexpr: expected ':'", p-1);
+			if( *(p++) != ':') {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_subexpr: ':'이(가) 요구됩니다.", p-1);
+				else
+					disp_error_message("parse_subexpr: expected ':'", p-1);
+			}
 			p=parse_subexpr(p,-1);
 		} else {
 			p=parse_subexpr(p,opl);
@@ -1481,7 +1661,10 @@ const char* parse_expr(const char *p)
 	switch(*p){
 	case ')': case ';': case ':': case '[': case ']':
 	case '}':
-		disp_error_message("parse_expr: unexpected character",p);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_expr: 예기치 못한 문자",p);
+		else
+			disp_error_message("parse_expr: unexpected character",p);
 	}
 	p=parse_subexpr(p,-1);
 	return p;
@@ -1531,11 +1714,19 @@ const char* parse_line(const char* p)
 	p = skip_space(p);
 
 	if(parse_syntax_for_flag) {
-		if( *p != ')' )
-			disp_error_message("parse_line: expected ')'",p);
+		if( *p != ')' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_line: ')'(이)가 요구됨.",p);
+			else	
+				disp_error_message("parse_line: expected ')'",p);
+		}
 	} else {
-		if( *p != ';' )
-			disp_error_message("parse_line: expected ';'",p);
+		if( *p != ';' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_line: ';'이(가) 요구됨.",p);
+			else
+				disp_error_message("parse_line: expected ';'",p);
+		}
 	}
 
 	//Binding decision for if(), for(), while()
@@ -1548,7 +1739,10 @@ const char* parse_line(const char* p)
 const char* parse_curly_close(const char* p)
 {
 	if(syntax.curly_count <= 0) {
-		disp_error_message("parse_curly_close: unexpected string",p);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_curly_close: 예기치 않은 문자열",p);
+		else
+			disp_error_message("parse_curly_close: unexpected string",p);
 		return p + 1;
 	} else if(syntax.curly[syntax.curly_count-1].type == TYPE_NULL) {
 		syntax.curly_count--;
@@ -1595,7 +1789,10 @@ const char* parse_curly_close(const char* p)
 		p = parse_syntax_close(p + 1);
 		return p;
 	} else {
-		disp_error_message("parse_curly_close: unexpected string",p);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_curly_close: 예기치 않은 문자열",p);
+		else
+			disp_error_message("parse_curly_close: unexpected string",p);
 		return p + 1;
 	}
 }
@@ -1631,15 +1828,22 @@ const char* parse_syntax(const char* p)
 				pos--;
 			}
 			if(pos < 0) {
-				disp_error_message("parse_syntax: unexpected 'break'",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: 예기치 않은 'break'",p);
+				else		
+					disp_error_message("parse_syntax: unexpected 'break'",p);
 			} else {
 				syntax.curly[syntax.curly_count++].type = TYPE_NULL;
 				parse_line(label);
 				syntax.curly_count--;
 			}
 			p = skip_space(p2);
-			if(*p != ';')
-				disp_error_message("parse_syntax: expected ';'",p);
+			if(*p != ';') {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: ';'이 요구됨.",p);
+				else
+					disp_error_message("parse_syntax: expected ';'",p);
+			}
 			// Closing decision if, for , while
 			p = parse_syntax_close(p + 1);
 			return p;
@@ -1651,7 +1855,10 @@ const char* parse_syntax(const char* p)
 			//Processing case
 			int pos = syntax.curly_count-1;
 			if(pos < 0 || syntax.curly[pos].type != TYPE_SWITCH) {
-				disp_error_message("parse_syntax: unexpected 'case' ",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: 예기치 않은 'case' ",p);
+				else
+					disp_error_message("parse_syntax: unexpected 'case' ",p);
 				return p+1;
 			} else {
 				char label[256];
@@ -1673,7 +1880,10 @@ const char* parse_syntax(const char* p)
 				//Decision statement switch
 				p = skip_space(p2);
 				if(p == p2) {
-					disp_error_message("parse_syntax: expected a space ' '",p);
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax: ' '의 빈공간이 요구됨.",p);
+					else
+						disp_error_message("parse_syntax: expected a space ' '",p);
 				}
 				// check whether case label is integer or not
 				if(is_number(p)) {
@@ -1682,21 +1892,33 @@ const char* parse_syntax(const char* p)
 					if((*p == '-' || *p == '+') && ISDIGIT(p[1])) // pre-skip because '-' can not skip_word
 						p++;
 					p = skip_word(p);
-					if(np != p)
-						disp_error_message("parse_syntax: 'case' label is not an integer",np);
+					if(np != p) {
+						if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+							disp_error_message("parse_syntax: 'case' 라벨은 정수가 아닙니다.",np);
+						else	
+							disp_error_message("parse_syntax: 'case' label is not an integer",np);
+					}
 				} else {
 					//Check for constants
 					p2 = skip_word(p);
 					v = (int)(size_t) (p2-p); // length of word at p2
 					memcpy(label,p,static_cast<int>(v));
 					label[v]='\0';
-					if( !script_get_constant(label, &v) )
-						disp_error_message("parse_syntax: 'case' label is not an integer",p);
+					if( !script_get_constant(label, &v) ) {
+						if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+							disp_error_message("parse_syntax: 'case' 라벨은 정수가 아닙니다.",p);
+						else
+							disp_error_message("parse_syntax: 'case' label is not an integer",p);
+					}
 					p = skip_word(p);
 				}
 				p = skip_space(p);
-				if(*p != ':')
-					disp_error_message("parse_syntax: expect ':'",p);
+				if(*p != ':') {
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax: ':'이 필요합니다.",p);
+					else
+						disp_error_message("parse_syntax: expect ':'",p);
+				}
 				sprintf(label,"if(%" PRId64 " != $@__SW%x_VAL) goto __SW%x_%x;",
 					v,syntax.curly[pos].index,syntax.curly[pos].index,syntax.curly[pos].count+1);
 				syntax.curly[syntax.curly_count++].type = TYPE_NULL;
@@ -1711,8 +1933,12 @@ const char* parse_syntax(const char* p)
 					set_label(l,script_pos,p);
 				}
 				// check duplication of case label [Rayce]
-				if(linkdb_search(&syntax.curly[pos].case_label, (void*)__64BPRTSIZE(v)) != nullptr)
-					disp_error_message("parse_syntax: dup 'case'",p);
+				if(linkdb_search(&syntax.curly[pos].case_label, (void*)__64BPRTSIZE(v)) != nullptr) {
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax: 이중 'case'",p);
+					else
+						disp_error_message("parse_syntax: dup 'case'",p);
+				}
 				linkdb_insert(&syntax.curly[pos].case_label, (void*)__64BPRTSIZE(v), (void*)1);
 
 				sprintf(label,"set $@__SW%x_VAL,0;",syntax.curly[pos].index);
@@ -1742,15 +1968,22 @@ const char* parse_syntax(const char* p)
 				pos--;
 			}
 			if(pos < 0) {
-				disp_error_message("parse_syntax: unexpected 'continue'",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: 'continue'는 필요없습니다.",p);
+				else
+					disp_error_message("parse_syntax: unexpected 'continue'",p);
 			} else {
 				syntax.curly[syntax.curly_count++].type = TYPE_NULL;
 				parse_line(label);
 				syntax.curly_count--;
 			}
 			p = skip_space(p2);
-			if(*p != ';')
-				disp_error_message("parse_syntax: expected ';'",p);
+			if(*p != ';') {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: ';'이 필요합니다.",p);
+				else
+					disp_error_message("parse_syntax: expected ';'",p);
+			}
 			//Closing decision if, for , while
 			p = parse_syntax_close(p + 1);
 			return p;
@@ -1762,16 +1995,25 @@ const char* parse_syntax(const char* p)
 			// Switch - default processing
 			int pos = syntax.curly_count-1;
 			if(pos < 0 || syntax.curly[pos].type != TYPE_SWITCH) {
-				disp_error_message("parse_syntax: unexpected 'default'",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: 'default'은(는) 필요 없습니다.",p);
+				else
+					disp_error_message("parse_syntax: unexpected 'default'",p);
 			} else if(syntax.curly[pos].flag) {
-				disp_error_message("parse_syntax: dup 'default'",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: 이중 'default'",p);
+				else
+					disp_error_message("parse_syntax: dup 'default'",p);
 			} else {
 				char label[256];
 				int l;
 				// Put the label location
 				p = skip_space(p2);
 				if(*p != ':') {
-					disp_error_message("parse_syntax: expected ':'",p);
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax: ':'이(가) 필요합니다.",p);
+					else
+						disp_error_message("parse_syntax: expected ':'",p);
 				}
 				sprintf(label,"__SW%x_%x",syntax.curly[pos].index,syntax.curly[pos].count);
 				l=add_str(label);
@@ -1823,8 +2065,12 @@ const char* parse_syntax(const char* p)
 
 			p=skip_space(p2);
 
-			if(*p != '(')
-				disp_error_message("parse_syntax: expected '('",p);
+			if(*p != '(') {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: '('이(가) 필요합니다.",p);
+				else
+					disp_error_message("parse_syntax: expected '('",p);
+			}
 			p++;
 
 			// Execute the initialization statement
@@ -1851,8 +2097,12 @@ const char* parse_syntax(const char* p)
 				add_scriptl(add_str(label));
 				add_scriptc(C_FUNC);
 			}
-			if(*p != ';')
-				disp_error_message("parse_syntax: expected ';'",p);
+			if(*p != ';') {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: ';'이(가) 필요합니다.",p);
+				else
+					disp_error_message("parse_syntax: expected ';'",p);
+			}
 			p++;
 
 			// Skip to the beginning of the loop
@@ -1892,8 +2142,12 @@ const char* parse_syntax(const char* p)
 
 			func_name = skip_space(p2);
 			p = skip_word(func_name);
-			if( p == func_name )
-				disp_error_message("parse_syntax:function: function name is missing or invalid", p);
+			if( p == func_name ) {
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax:function: 함수 이름이 빠졌거나 잘못되었습니다.", p);
+				else
+					disp_error_message("parse_syntax:function: function name is missing or invalid", p);
+			}
 			p2 = skip_space(p);
 			if( *p2 == ';' )
 			{// function <name> ;
@@ -1904,9 +2158,12 @@ const char* parse_syntax(const char* p)
 					str_data[l].type = C_USERFUNC;
 				else if( str_data[l].type == C_USERFUNC )
 					;  // already registered
-				else
-					disp_error_message("parse_syntax:function: function name is invalid", func_name);
-
+				else {
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax:function: 함수 이름이 잘못되었습니다.", func_name);
+					else
+						disp_error_message("parse_syntax:function: function name is invalid", func_name);
+				}
 				// Close condition of if, for, while
 				p = parse_syntax_close(p2 + 1);
 				return p;
@@ -1938,14 +2195,20 @@ const char* parse_syntax(const char* p)
 					if( parse_options&SCRIPT_USE_LABEL_DB )
 						strdb_iput(scriptlabel_db, get_str(l), script_pos);
 				}
-				else
-					disp_error_message("parse_syntax:function: function name is invalid", func_name);
-
+				else {
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("parse_syntax:function: 함수 이름이 잘못되었습니다.", func_name);
+					else
+						disp_error_message("parse_syntax:function: function name is invalid", func_name);
+				}
 				return skip_space(p);
 			}
 			else
 			{
-				disp_error_message("expect ';' or '{' at function syntax",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("함수 문법에 ';' 또는 '{'이(가) 필요합니다.",p);
+				else
+					disp_error_message("expect ';' or '{' at function syntax",p);
 			}
 		}
 		break;
@@ -1956,7 +2219,10 @@ const char* parse_syntax(const char* p)
 			char label[256];
 			p=skip_space(p2);
 			if(*p != '(') { //Prevent if this {} non-c syntax. from Rayce (jA)
-				disp_error_message("need '('",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("'(' 이 필요함.",p);
+				else		
+					disp_error_message("need '('",p);
 			}
 			syntax.curly[syntax.curly_count].type  = TYPE_IF;
 			syntax.curly[syntax.curly_count].count = 1;
@@ -1980,7 +2246,10 @@ const char* parse_syntax(const char* p)
 			char label[256];
 			p=skip_space(p2);
 			if(*p != '(') {
-				disp_error_message("need '('",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("'('이(가) 필요합니다.",p);
+				else
+					disp_error_message("need '('",p);
 			}
 			syntax.curly[syntax.curly_count].type  = TYPE_SWITCH;
 			syntax.curly[syntax.curly_count].count = 1;
@@ -1994,7 +2263,10 @@ const char* parse_syntax(const char* p)
 			p=parse_expr(p);
 			p=skip_space(p);
 			if(*p != '{') {
-				disp_error_message("parse_syntax: expected '{'",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("parse_syntax: '{'이(가) 필요합니다.",p);
+				else
+					disp_error_message("parse_syntax: expected '{'",p);
 			}
 			add_scriptc(C_FUNC);
 			return p + 1;
@@ -2007,7 +2279,10 @@ const char* parse_syntax(const char* p)
 			char label[256];
 			p=skip_space(p2);
 			if(*p != '(') {
-				disp_error_message("need '('",p);
+				if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+					disp_error_message("'('이 필요함",p);
+				else
+					disp_error_message("need '('",p);
 			}
 			syntax.curly[syntax.curly_count].type  = TYPE_WHILE;
 			syntax.curly[syntax.curly_count].count = 1;
@@ -2086,7 +2361,10 @@ const char* parse_syntax_close_sub(const char* p,int* flag)
 				// else - if
 				p=skip_space(p2);
 				if(*p != '(') {
-					disp_error_message("need '('",p);
+					if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+						disp_error_message("'('이(가) 필요함",p);
+					else		
+						disp_error_message("need '('",p);
 				}
 				sprintf(label,"__IF%x_%x",syntax.curly[pos].index,syntax.curly[pos].count);
 				add_scriptl(add_str("jump_zero"));
@@ -2132,12 +2410,18 @@ const char* parse_syntax_close_sub(const char* p,int* flag)
 		// Skip to the end point if the condition is false
 		p = skip_space(p);
 		p2 = skip_word(p);
-		if(p2 - p != 5 || strncasecmp(p,"while",5))
-			disp_error_message("parse_syntax: expected 'while'",p);
-
+		if(p2 - p != 5 || strncasecmp(p,"while",5)) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_syntax: 'while' 이 필요합니다.",p);
+			else
+				disp_error_message("parse_syntax: expected 'while'",p);
+		}
 		p = skip_space(p2);
 		if(*p != '(') {
-			disp_error_message("need '('",p);
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("'('이(가) 필요합니다.",p);
+			else
+				disp_error_message("need '('",p);
 		}
 
 		// do-block end is a new line
@@ -2163,7 +2447,10 @@ const char* parse_syntax_close_sub(const char* p,int* flag)
 		set_label(l2,script_pos,p);
 		p = skip_space(p);
 		if(*p != ';') {
-			disp_error_message("parse_syntax: expected ';'",p);
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("parse_syntax: ';'이(가) 필요합니다.",p);
+			else
+				disp_error_message("parse_syntax: expected ';'",p);
 			return p+1;
 		}
 		p++;
@@ -2244,9 +2531,15 @@ static void add_buildin_func(void)
 		while( *p == '?' ) ++p;
 		if( *p == '*' ) ++p;
 		if( *p != 0){
-			ShowWarning("add_buildin_func: ignoring function \"%s\" with invalid arg \"%s\".\n", buildin_func[i].name, buildin_func[i].arg);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("add_buildin_func: 잘못된 인수 \"%s\"가 있는 함수 \"%s\"을(를) 무시합니다..\n", buildin_func[i].arg, buildin_func[i].name);
+			else
+				ShowWarning("add_buildin_func: ignoring function \"%s\" with invalid arg \"%s\".\n", buildin_func[i].name, buildin_func[i].arg);
 		} else if( *skip_word(buildin_func[i].name) != 0 ){
-			ShowWarning("add_buildin_func: ignoring function with invalid name \"%s\" (must be a word).\n", buildin_func[i].name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("add_buildin_func: 잘못된 이름 \"%s\"이(가) 있는 함수는 무시됩니다. (단어이어야 함.)\n", buildin_func[i].name);
+			else
+				ShowWarning("add_buildin_func: ignoring function with invalid name \"%s\" (must be a word).\n", buildin_func[i].name);
 		} else {
 			int n = add_str(buildin_func[i].name);
 			str_data[n].type = C_FUNC;
@@ -2322,10 +2615,19 @@ bool script_get_constant(const char* name, int64* value)
 
 #if defined(SCRIPT_CONSTANT_DEPRECATION)
 	if( str_data[n].deprecated ){
-		ShowWarning( "Usage of deprecated constant '%s'.\n", name );
-		ShowWarning( "This constant was deprecated and could become unavailable anytime soon.\n" );
-		if (str_data[n].name)
-			ShowWarning( "Please use '%s' instead!\n", str_data[n].name );
+		if(strcmpi(MessageLang,"KOR") == 0) {
+			ShowWarning( "사용되지 않는 상수 '%s'이(가) 사용되고 있습니다.\n", name );
+			ShowWarning( "이 상수는 더 이상 사용되지 않으며 곧 사용할 수 없게 될 수 있습니다.\n" );
+		} else {
+			ShowWarning( "Usage of deprecated constant '%s'.\n", name );
+			ShowWarning( "This constant was deprecated and could become unavailable anytime soon.\n" );
+		}
+		if (str_data[n].name) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "'%s'을(를) 대신 사용하세요!\n", str_data[n].name );
+			else
+				ShowWarning( "Please use '%s' instead!\n", str_data[n].name );
+		}
 	}
 #endif
 
@@ -2346,11 +2648,17 @@ void script_set_constant_(const char* name, int64 value, const char* constant_na
 	}
 	else if( str_data[n].type == C_PARAM || str_data[n].type == C_INT )
 	{// existing parameter or constant
-		ShowError("script_set_constant: Attempted to overwrite existing %s '%s' (old value=%" PRId64 ", new value=%" PRId64 ").\n", ( str_data[n].type == C_PARAM ) ? "parameter" : "constant", name, str_data[n].val, value);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script_set_constant: 기존의 %s '%s'을(를) 덮어씌웠습니다. (예전 값=%" PRId64 ", 새로운 값=%" PRId64 ").\n", ( str_data[n].type == C_PARAM ) ? "파라메터" : "상수", name, str_data[n].val, value);
+		else
+			ShowError("script_set_constant: Attempted to overwrite existing %s '%s' (old value=%" PRId64 ", new value=%" PRId64 ").\n", ( str_data[n].type == C_PARAM ) ? "parameter" : "constant", name, str_data[n].val, value);
 	}
 	else
 	{// existing name
-		ShowError("script_set_constant: Invalid name for %s '%s' (already defined as %s).\n", isparameter ? "parameter" : "constant", name, script_op2name(str_data[n].type));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script_set_constant:  %s '%s'의 이름이 잘못되었습니다. (%s으(로) 이미 정의됨).\n", isparameter ? "파라메터" : "상수", name, script_op2name(str_data[n].type));
+		else
+			ShowError("script_set_constant: Invalid name for %s '%s' (already defined as %s).\n", isparameter ? "parameter" : "constant", name, script_op2name(str_data[n].type));
 	}
 }
 
@@ -2367,7 +2675,10 @@ uint64 ConstantDatabase::parseBodyNode( const ryml::NodeRef& node ) {
 	char name[1024];
 
 	if (sscanf(constant_name.c_str(), "%1023[A-Za-z0-9/_]", name) != 1) {
-		this->invalidWarning( node["Name"], "Invalid constant definition \"%s\", skipping.\n", constant_name.c_str() );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			this->invalidWarning( node["Name"], "\"%s\"은(는) 잘못된 상수 정의이므로 건너뜁니다.\n", constant_name.c_str() );
+		else
+			this->invalidWarning( node["Name"], "Invalid constant definition \"%s\", skipping.\n", constant_name.c_str() );
 		return 0;
 	}
 
@@ -2533,8 +2844,12 @@ struct script_code* parse_script_( const char *src, const char *file, int line, 
 	}
 	else
 	{// requires brackets around the script
-		if( *p != '{' )
-			disp_error_message("not found '{'",p);
+		if( *p != '{' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("'{'을(를) 찾을 수 없습니다.",p);
+			else
+				disp_error_message("not found '{'",p);
+		}
 		p = skip_space(p+1);
 		if( *p == '}' && !(options&SCRIPT_RETURN_EMPTY_SCRIPT) )
 		{// empty script and can return nullptr
@@ -2561,8 +2876,12 @@ struct script_code* parse_script_( const char *src, const char *file, int line, 
 
 	while( syntax.curly_count != 0 || *p != end )
 	{
-		if( *p == '\0' )
-			disp_error_message("unexpected end of script",p);
+		if( *p == '\0' ) {
+			if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+				disp_error_message("예상치 않은 스크립트의 끝을 만났습니다.",p);
+			else
+				disp_error_message("unexpected end of script",p);
+		}
 		// Special handling only label
 		tmpp=skip_space(skip_word(p));
 		if(*tmpp==':' && !(!strncasecmp(p,"default:",8) && p + 7 == tmpp)){
@@ -2602,14 +2921,20 @@ struct script_code* parse_script_( const char *src, const char *file, int line, 
 		}
 		else if( str_data[i].type == C_USERFUNC )
 		{// 'function name;' without follow-up code
-			ShowError("parse_script: function '%s' declared but not defined.\n", str_buf+str_data[i].str);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("parse_script: 함수 '%s'이(가) 선언되었지만 정의되지 않았습니다.\n", str_buf+str_data[i].str);
+			else
+				ShowError("parse_script: function '%s' declared but not defined.\n", str_buf+str_data[i].str);
 			unresolved_names = true;
 		}
 	}
 
 	if( unresolved_names )
 	{
-		disp_error_message("parse_script: unresolved function references", p);
+		if(strcmpi(MessageLang,"KOR") == 0 && strcmpi(MessageLang_Disp,"KOR") == 0)
+			disp_error_message("parse_script: 확인되지 않은 함수를 참조합니다.", p);
+		else
+			disp_error_message("parse_script: unresolved function references", p);
 	}
 
 #ifdef DEBUG_DISP
@@ -2668,7 +2993,10 @@ static bool script_rid2sd_( struct script_state *st, map_session_data** sd, cons
 	if( *sd ){
 		return true;
 	}else{
-		ShowError("%s: fatal error ! player not attached!\n",func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script_rid2sd: 치명적인 오류!! 플레이어가 연결(Attached)되지 않았습니다.\n");
+		else
+			ShowError("%s: fatal error ! player not attached!\n",func);
 		script_reportfunc(st);
 		script_reportsrc(st);
 		st->state = END;
@@ -2699,11 +3027,17 @@ struct script_data *get_val_(struct script_state* st, struct script_data* data, 
 	if( !reference_toconstant(data) && not_server_variable(prefix) ) {
 		if( sd == nullptr && !script_rid2sd(sd) ) {// needs player attached
 			if( postfix == '$' ) {// string variable
-				ShowWarning("script:get_val: cannot access player variable '%s', defaulting to \"\"\n", name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("script:get_val: 플레이어 변수 '%s'에 액세스 할 수 없습니다. 기본값을 \"\"으로..\n", name);
+				else
+					ShowWarning("script:get_val: cannot access player variable '%s', defaulting to \"\"\n", name);
 				data->type = C_CONSTSTR;
 				data->u.str = const_cast<char *>("");
 			} else {// integer variable
-				ShowWarning("script:get_val: cannot access player variable '%s', defaulting to 0\n", name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("script:get_val: 플레이어 변수 '%s'에 엑세스 할 수 없습니다. 기본값을 0으로..\n", name);
+				else
+					ShowWarning("script:get_val: cannot access player variable '%s', defaulting to 0\n", name);
 				data->type = C_INT;
 				data->u.num = 0;
 			}
@@ -2752,7 +3086,10 @@ struct script_data *get_val_(struct script_state* st, struct script_data* data, 
 					if (n)
 						data->u.str = (char*)i64db_get(n,reference_getuid(data));
 					else {
-						ShowWarning("script:get_val: cannot access instance variable '%s', defaulting to \"\"\n", name);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("script:get_val: 인스턴스 변수 '%s'을(를) 엑세스 할 수 없습니다. 기본값을 \"\"으로.\n", name);
+						else
+							ShowWarning("script:get_val: cannot access instance variable '%s', defaulting to \"\"\n", name);
 						data->u.str = nullptr;
 					}
 					break;
@@ -2818,7 +3155,10 @@ struct script_data *get_val_(struct script_state* st, struct script_data* data, 
 						if (n)
 							data->u.num = i64db_i64get(n,reference_getuid(data));
 						else {
-							ShowWarning("script:get_val: cannot access instance variable '%s', defaulting to 0\n", name);
+							if(strcmpi(MessageLang,"KOR") == 0)
+								ShowWarning("script:get_val: 인스턴스 변수 '%s'을(를) 엑세스 할 수 없습니다. 기본값을 0으로..\n", name);
+							else
+								ShowWarning("script:get_val: cannot access instance variable '%s', defaulting to 0\n", name);
 							data->u.num = 0;
 						}
 						break;
@@ -2851,7 +3191,10 @@ const char* get_val2_str( struct script_state* st, int64 uid, struct reg_db* ref
 	const char* value = "";
 
 	if( data->type == C_INT ){
-		ShowError( "get_val2_num: Invalid call. Variable %s is a numeric type.\n", reference_getname( data ) );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "get_val2_num: 잘못된 호출입니다. 변수 %s은(는) 숫자 형식입니다.\n", reference_getname( data ) );
+		else	
+			ShowError( "get_val2_num: Invalid call. Variable %s is a numeric type.\n", reference_getname( data ) );
 	}else{
 		value = data->u.str;
 	}
@@ -2874,7 +3217,10 @@ int64 get_val2_num( struct script_state* st, int64 uid, struct reg_db* ref ){
 	if( data->type == C_INT ){
 		value = data->u.num;
 	}else{
-		ShowError( "get_val2_num: Invalid call. Variable %s is not a numeric type.\n", reference_getname( data ) );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "get_val2_num: 잘못된 호출입니다. 변수 %s은(는) 숫자 형식이 아닙니다.\n", reference_getname( data ) );
+		else	
+			ShowError( "get_val2_num: Invalid call. Variable %s is not a numeric type.\n", reference_getname( data ) );
 	}
 
 	script_removetop( st, -1, 0 );
@@ -3142,7 +3488,10 @@ bool set_reg_str( struct script_state* st, map_session_data* sd, int64 num, cons
 	size_t vlen = 0;
 
 	if( !script_check_RegistryVariableLength( 0, name, &vlen ) ){
-		ShowError( "set_reg: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "set_reg: 변수 이름의 길이가 너무 깁니다. (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
+		else
+			ShowError( "set_reg: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
 		return false;
 	}
 
@@ -3206,7 +3555,10 @@ bool set_reg_str( struct script_state* st, map_session_data* sd, int64 num, cons
 						script_array_update( src, num, empty );
 					}
 				}else{
-					ShowError( "script_set_reg: cannot write instance variable '%s', NPC not in a instance!\n", name );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "script_set_reg: 인스턴스 변수 '%s'에 작성 할 수 없습니다. NPC가 인스턴스안에 없습니다!\n", name );
+					else
+						ShowError( "script_set_reg: cannot write instance variable '%s', NPC not in a instance!\n", name );
 					script_reportsrc( st );
 				}
 
@@ -3222,7 +3574,10 @@ bool set_reg_num( struct script_state* st, map_session_data* sd, int64 num, cons
 	size_t vlen = 0;
 
 	if( !script_check_RegistryVariableLength( 0, name, &vlen ) ){
-		ShowError( "set_reg: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "set_reg:  변수 이름이 너무 깁니다. (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
+		else
+			ShowError( "set_reg: Variable name length is too long (aid: %d, cid: %d): '%s' sz=%" PRIuPTR "\n", sd ? sd->status.account_id : -1, sd ? sd->status.char_id : -1, name, vlen );
 		return false;
 	}
 
@@ -3234,7 +3589,10 @@ bool set_reg_num( struct script_state* st, map_session_data* sd, int64 num, cons
 	if( str_data[script_getvarid(num)].type == C_PARAM ){
 		if( pc_setparam( sd, str_data[script_getvarid(num)].val, value ) == 0 ){
 			if( st != nullptr ) {
-				ShowError( "script_set_reg: failed to set param '%s' to %" PRId64 ".\n", name, value );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "script_set_reg: 파라메터 '%s'에 %" PRId64 "으(로) 설정하는데 실패했습니다.\n", name, value );
+				else
+					ShowError( "script_set_reg: failed to set param '%s' to %" PRId64 ".\n", name, value );
 				script_reportsrc( st );
 				st->state = END;
 			}
@@ -3300,7 +3658,10 @@ bool set_reg_num( struct script_state* st, map_session_data* sd, int64 num, cons
 						script_array_update( src, num, empty );
 					}
 				}else{
-					ShowError( "script_set_reg: cannot write instance variable '%s', NPC not in a instance!\n", name );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "script_set_reg: 인스턴스 변수 '%s'에 작성을 할 수 없습니다. NPC가 인스턴스 안에 없습니다!\n", name );
+					else
+						ShowError( "script_set_reg: cannot write instance variable '%s', NPC not in a instance!\n", name );
 					script_reportsrc( st );
 				}
 
@@ -3361,7 +3722,10 @@ const char* conv_str_(struct script_state* st, struct script_data* data, map_ses
 	}
 	else
 	{// unsupported data type
-		ShowError("script:conv_str: cannot convert to string, defaulting to \"\"\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:conv_str: 문자열로 변환 할 수 없습니다. 기본값은 \"\"입니다.\n");
+		else
+			ShowError("script:conv_str: cannot convert to string, defaulting to \"\"\n");
 		script_reportdata(data);
 		script_reportsrc(st);
 		data->type = C_CONSTSTR;
@@ -3401,12 +3765,18 @@ int64 conv_num_(struct script_state* st, struct script_data* data, map_session_d
 
 		if( num < SCRIPT_INT_MIN || ( error && num == INT64_MIN ) ){
 			num = SCRIPT_INT_MIN;
-			ShowError( "script:conv_num: underflow detected, capping value to %" PRId64 "", SCRIPT_INT_MIN );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:conv_num: 언더 플로가 감지되고 %" PRId64 "(으)로 캐핑되었습니다.\n", SCRIPT_INT_MIN);
+			else	
+				ShowError( "script:conv_num: underflow detected, capping value to %" PRId64 "", SCRIPT_INT_MIN );
 			script_reportdata(data);
 			script_reportsrc(st);
 		}else if( num > SCRIPT_INT_MAX || ( error && num == INT64_MAX ) ){
 			num = SCRIPT_INT_MAX;
-			ShowError( "script:conv_num: overflow detected, capping value to %" PRId64 "", SCRIPT_INT_MAX );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:conv_num: 오버플로가 감지되고 %" PRId64 "(으)로 캐핑되었습니다.\n", SCRIPT_INT_MAX);
+			else
+				ShowError( "script:conv_num: overflow detected, capping value to %" PRId64 "", SCRIPT_INT_MAX );
 			script_reportdata(data);
 			script_reportsrc(st);
 		}
@@ -3421,7 +3791,10 @@ int64 conv_num_(struct script_state* st, struct script_data* data, map_session_d
 	// probably other stuff [FlavioJS]
 	else
 	{// unsupported data type
-		ShowError("script:conv_num: cannot convert to number, defaulting to 0\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:conv_num: 숫자로 변환할 수 없습니다. 기본값을 0으로 합니다.\n");
+		else
+			ShowError("script:conv_num: cannot convert to number, defaulting to 0\n");
 		script_reportdata(data);
 		script_reportsrc(st);
 		data->type = C_INT;
@@ -3505,7 +3878,10 @@ struct script_data* push_copy(struct script_stack* stack, int pos)
 			return push_str(stack, C_STR, aStrdup(stack->stack_data[pos].u.str));
 			break;
 		case C_RETINFO:
-			ShowFatalError("script:push_copy: can't create copies of C_RETINFO. Exiting...\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowFatalError("script:push_copy: C_RETINFO의 복사본을 만들 수 없습니다. 종료중...\n");
+			else
+				ShowFatalError("script:push_copy: can't create copies of C_RETINFO. Exiting...\n");
 			exit(1);
 			break;
 		default:
@@ -3647,7 +4023,10 @@ struct script_state* script_alloc_state(struct script_code* rootscript, int pos,
 	else {
 		struct npc_data *nd = map_id2nd(oid);
 
-		ShowError("Over 65k instances of '%s' script are being run!\n",nd ? nd->name : "unknown");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("65,000개가 넘는 '%s' 인스턴스 스크립트가 실행 중입니다!\n",nd ? nd->name : "알수없는");
+		else
+			ShowError("Over 65k instances of '%s' script are being run!\n",nd ? nd->name : "unknown");
 	}
 
 	if (!st->script->local.vars)
@@ -3669,9 +4048,12 @@ void script_free_state(struct script_state* st)
 	if (idb_exists(st_db, st->id)) {
 		map_session_data *sd = st->rid ? map_id2sd(st->rid) : nullptr;
 
-		if (st->bk_st) // backup was not restored
-			ShowDebug("script_free_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
-
+		if (st->bk_st) { // backup was not restored
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("script_free_state: 이전 스크립트의 상태가 손실되었습니다. (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+			else
+				ShowDebug("script_free_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+		}
 		if (sd && sd->st == st) { // Current script is aborted.
 			if(sd->state.using_fake_npc) {
 				clif_clearunit_single( sd->npc_id, CLR_OUTSIGHT, *sd );
@@ -3775,7 +4157,10 @@ void op_3(struct script_state* st, int op)
 		flag = data->u.num == 0 ? 0 : 1;// 0 -> false
 	else
 	{
-		ShowError("script:op_3: invalid data for the ternary operator test\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:op_3: 3차 연산 테스트를 위한 적합하지 않은 데이터입니다.\n");
+		else
+			ShowError("script:op_3: invalid data for the ternary operator test\n");
 		script_reportdata(data);
 		script_reportsrc(st);
 		script_removetop(st, -3, 0);
@@ -3817,7 +4202,10 @@ void op_2str(struct script_state* st, int op, const char* s1, const char* s2)
 				return;
 			}
 		default:
-			ShowError("script:op2_str: unexpected string operator %s\n", script_op2name(op));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:op2_str: 예기치 않은 문자열 연산자 %s\n", script_op2name(op));
+			else
+				ShowError("script:op2_str: unexpected string operator %s\n", script_op2name(op));
 			script_reportsrc(st);
 			script_pushnil(st);
 			st->state = END;
@@ -3850,7 +4238,10 @@ void op_2num( struct script_state* st, int op, int64 i1, int64 i2 ){
 		case C_MOD:
 			if( i2 == 0 )
 			{
-				ShowError("script:op_2num: division by zero detected op=%s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("script:op_2num: 나눈 값이 0임을(를) 감지했습니다. op = %s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+				else
+					ShowError("script:op_2num: division by zero detected op=%s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
 				script_reportsrc(st);
 				script_pushnil(st);
 				st->state = END;
@@ -3870,14 +4261,20 @@ void op_2num( struct script_state* st, int op, int64 i1, int64 i2 ){
 				case C_SUB: overflow = util::safe_substraction( i1, i2, ret ); break;
 				case C_MUL: overflow = util::safe_multiplication( i1, i2, ret ); break;
 				default:
-					ShowError("script:op_2num: unexpected number operator %s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("script:op_2num: 얘기치 않은 숫자 연산자 %s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+					else
+						ShowError("script:op_2num: unexpected number operator %s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
 					script_reportsrc(st);
 					script_pushnil(st);
 					return;
 			}
 
 			if( overflow ){
-				ShowWarning("script:op_2num: overflow detected op=%s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("script:op_2num: 오버플로우가 감지됨 op=%s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
+				else
+					ShowWarning("script:op_2num: overflow detected op=%s i1=%" PRId64 " i2=%" PRId64 "\n", script_op2name(op), i1, i2);
 				script_reportsrc(st);
 				script_pushnil(st);
 				st->state = END;
@@ -3949,7 +4346,10 @@ void op_2(struct script_state *st, int op)
 	}
 	else
 	{// invalid argument
-		ShowError("script:op_2: invalid data for operator %s\n", script_op2name(op));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:op_2: 연산자 %s에 대한 데이터가 유효하지 않습니다.\n", script_op2name(op));
+		else
+			ShowError("script:op_2: invalid data for operator %s\n", script_op2name(op));
 		script_reportdata(left);
 		script_reportdata(right);
 		script_reportsrc(st);
@@ -3972,7 +4372,10 @@ void op_1(struct script_state* st, int op)
 
 	if( !data_isint(data) )
 	{// not a number
-		ShowError("script:op_1: argument is not a number (op=%s)\n", script_op2name(op));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:op_1: 인수가 숫자가 아닙니다. (op=%s)\n", script_op2name(op));
+		else
+			ShowError("script:op_1: argument is not a number (op=%s)\n", script_op2name(op));
 		script_reportdata(data);
 		script_reportsrc(st);
 		script_pushnil(st);
@@ -3988,7 +4391,10 @@ void op_1(struct script_state* st, int op)
 		case C_NOT: i1 = ~i1; break;
 		case C_LNOT: i1 = !i1; break;
 		default:
-			ShowError("script:op_1: unexpected operator %s i1=%" PRId64 "\n", script_op2name(op), i1);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:op_1: 얘기치 않은 연산자 %s i1=%" PRId64 "\n", script_op2name(op), i1);
+			else
+				ShowError("script:op_1: unexpected operator %s i1=%" PRId64 "\n", script_op2name(op), i1);
 			script_reportsrc(st);
 			script_pushnil(st);
 			st->state = END;
@@ -4018,7 +4424,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 		}
 		else if( type == 0 )
 		{// more arguments than necessary ( should not happen, as it is checked before )
-			ShowWarning("Found more arguments than necessary. unexpected arg type %s\n",script_op2name(data->type));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("필요한 것보다 더 많은 인수를 발견했습니다. 얘기치 않은 인수 타입 %s\n",script_op2name(data->type));
+			else
+				ShowWarning("Found more arguments than necessary. unexpected arg type %s\n",script_op2name(data->type));
 			invalid++;
 			break;
 		}
@@ -4036,7 +4445,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 				case 'v':
 					if( !data_isstring(data) && !data_isint(data) && !data_isreference(data) )
 					{// variant
-						ShowWarning("Unexpected type for argument %d. Expected string, number or variable.\n", idx-1);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("인수 %d의 예상치 못한 타입입니다. 문자열, 숫자 또는 변수가 필요합니다.\n", idx-1);
+						else	
+							ShowWarning("Unexpected type for argument %d. Expected string, number or variable.\n", idx-1);
 						script_reportdata(data);
 						invalid++;
 					}
@@ -4044,7 +4456,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 				case 's':
 					if( !data_isstring(data) && !( data_isreference(data) && is_string_variable(name) ) )
 					{// string
-						ShowWarning("Unexpected type for argument %d. Expected string.\n", idx-1);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("인수 %d의 예상치 못한 타입입니다. 문자열이 필요합니다.\n", idx-1);
+						else	
+							ShowWarning("Unexpected type for argument %d. Expected string.\n", idx-1);
 						script_reportdata(data);
 						invalid++;
 					}
@@ -4052,7 +4467,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 				case 'i':
 					if( !data_isint(data) && !( data_isreference(data) && ( reference_toparam(data) || reference_toconstant(data) || !is_string_variable(name) ) ) )
 					{// int ( params and constants are always int )
-						ShowWarning("Unexpected type for argument %d. Expected number.\n", idx-1);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("인수 %d의 예상치 못한 타입입니다. 숫자가 필요합니다.\n", idx-1);
+						else
+							ShowWarning("Unexpected type for argument %d. Expected number.\n", idx-1);
 						script_reportdata(data);
 						invalid++;
 					}
@@ -4060,7 +4478,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 				case 'r':
 					if( !data_isreference(data) )
 					{// variables
-						ShowWarning("Unexpected type for argument %d. Expected variable, got %s.\n", idx-1,script_op2name(data->type));
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("인수 %d의 예상치 못한 타입입니다. 변수 %s이(가) 필요합니다.\n", idx-1,script_op2name(data->type));
+						else
+							ShowWarning("Unexpected type for argument %d. Expected variable, got %s.\n", idx-1,script_op2name(data->type));
 						script_reportdata(data);
 						invalid++;
 					}
@@ -4068,7 +4489,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 				case 'l':
 					if( !data_islabel(data) && !data_isfunclabel(data) )
 					{// label
-						ShowWarning("Unexpected type for argument %d. Expected label, got %s\n", idx-1,script_op2name(data->type));
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("인수 %d의 예상치 못한 타입입니다. 라벨 %s이(가) 필요합니다.\n", idx-1,script_op2name(data->type));
+						else
+							ShowWarning("Unexpected type for argument %d. Expected label, got %s\n", idx-1,script_op2name(data->type));
 						script_reportdata(data);
 						invalid++;
 					}
@@ -4079,7 +4503,10 @@ static void script_check_buildin_argtype(struct script_state* st, int func)
 
 	if(invalid)
 	{
-		ShowDebug("Function: %s\n", get_str(func));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("함수: %s\n", get_str(func));
+		else
+			ShowDebug("Function: %s\n", get_str(func));
 		script_reportsrc(st);
 	}
 }
@@ -4097,7 +4524,10 @@ int run_func(struct script_state *st)
 		if( st->stack->stack_data[i].type == C_ARG )
 			break;
 	if( i == 0 ) {
-		ShowError("script:run_func: C_ARG not found. please report this!!!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:run_func: C_ARG를 찾을 수 없습니다. 이것을 보고하십시오!!!\n");
+		else
+			ShowError("script:run_func: C_ARG not found. please report this!!!\n");
 		st->state = END;
 		script_reportsrc(st);
 		return 1;
@@ -4111,7 +4541,10 @@ int run_func(struct script_state *st)
 		func = (int)data->u.num;
 		st->funcname = reference_getname(data);
 	} else {
-		ShowError("script:run_func: not a buildin command.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:run_func: 스크립트 명령어가 아닙니다.\n");
+		else
+			ShowError("script:run_func: not a buildin command.\n");
 		script_reportdata(data);
 		script_reportsrc(st);
 		st->state = END;
@@ -4125,19 +4558,30 @@ int run_func(struct script_state *st)
 	if(str_data[func].func) {
 #if defined(SCRIPT_COMMAND_DEPRECATION)
 		if( buildin_func[str_data[func].val].deprecated ){
-			ShowWarning( "Usage of deprecated script function '%s'.\n", get_str(func) );
-			ShowWarning( "This function was deprecated on '%s' and could become unavailable anytime soon.\n", buildin_func[str_data[func].val].deprecated );
+			if(strcmpi(MessageLang,"KOR") == 0) {
+				ShowWarning( "사용되지 않는 함수 '%s'를 사용하고 있습니다.\n", get_str(func) );
+				ShowWarning( "이 함수는 '%s'에서 사용되지 않으며 곧 사용할 수 없게 될 수 있습니다.\n", buildin_func[str_data[func].val].deprecated );
+			} else {	
+				ShowWarning( "Usage of deprecated script function '%s'.\n", get_str(func) );
+				ShowWarning( "This function was deprecated on '%s' and could become unavailable anytime soon.\n", buildin_func[str_data[func].val].deprecated );
+			}
 			script_reportsrc(st);
 		}
 #endif
 
 		if (str_data[func].func(st) == SCRIPT_CMD_FAILURE) {
 			//Report error
-			ShowWarning("Script command '%s' returned failure.\n", get_str(func));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("스크립트 명령어 '%s'이(가) 오류를 반환했습니다.\n", get_str(func));
+			else
+				ShowWarning("Script command '%s' returned failure.\n", get_str(func));
 			script_reportsrc(st);
 		}
 	} else {
-		ShowError("script:run_func: '%s' (id=%d type=%s) has no C function. please report this!!!\n", get_str(func), func, script_op2name(str_data[func].type));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:run_func: '%s' (id=%d type=%s)에는 C 함수가 없습니다. 이것을 보고하십시오!!!\n", get_str(func), func, script_op2name(str_data[func].type));
+		else
+			ShowError("script:run_func: '%s' (id=%d type=%s) has no C function. please report this!!!\n", get_str(func), func, script_op2name(str_data[func].type));
 		script_reportsrc(st);
 		st->state = END;
 	}
@@ -4155,7 +4599,10 @@ int run_func(struct script_state *st)
 		pop_stack(st, st->stack->defsp, st->start);// pop distractions from the stack
 		if( st->stack->defsp < 1 || st->stack->stack_data[st->stack->defsp-1].type != C_RETINFO )
 		{
-			ShowWarning("script:run_func: return without callfunc or callsub!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("script:run_func: callfunc 또는 callsub없이 리턴되었습니다!\n");
+			else
+				ShowWarning("script:run_func: return without callfunc or callsub!\n");
 			script_reportsrc(st);
 			st->state = END;
 			return 1;
@@ -4235,7 +4682,10 @@ TIMER_FUNC(run_script_timer){
 			st->state = END;
 		// Character mismatch. Cancel execution.
 		}else if( sd->status.char_id != id ){
-			ShowWarning( "Script sleep timer detected a character mismatch CID %d != %d\n", sd->status.char_id, id );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "스크립트 슬립 타이머가 케릭터 불일치를 발견했습니다. CID %d != %d\n", sd->status.char_id, id );
+			else
+				ShowWarning( "Script sleep timer detected a character mismatch CID %d != %d\n", sd->status.char_id, id );
 			script_reportsrc(st);
 			st->rid = 0;
 			st->state = END;
@@ -4333,7 +4783,10 @@ static void script_detach_state(struct script_state* st, bool dequeue_event)
 	}
 	else if(st->bk_st)
 	{// rid was set to 0, before detaching the script state
-		ShowError("script_detach_state: Found previous script state without attached player (rid=%d, oid=%d, state=%d, bk_npcid=%d)\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script_detach_state: 연결된(attached) 플레이어가 없는 이전 스크립트 상태를 발견했습니다. (rid=%d, oid=%d, state=%d, bk_npcid=%d)\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+		else
+			ShowError("script_detach_state: Found previous script state without attached player (rid=%d, oid=%d, state=%d, bk_npcid=%d)\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
 		script_reportsrc(st->bk_st);
 
 		script_free_state(st->bk_st);
@@ -4353,7 +4806,10 @@ void script_attach_state(struct script_state* st){
 		{
 			if(st->bk_st)
 			{// there is already a backup
-				ShowDebug("script_attach_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug("script_attach_state: 이전 스크립트 상태가 손실되었습니다. (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
+				else		
+					ShowDebug("script_attach_state: Previous script state lost (rid=%d, oid=%d, state=%d, bk_npcid=%d).\n", st->bk_st->rid, st->bk_st->oid, st->bk_st->state, st->bk_npcid);
 			}
 			st->bk_st = sd->st;
 			st->bk_npcid = sd->npc_id;
@@ -4393,9 +4849,12 @@ void run_script_main(struct script_state *st)
 		enum c_op c = get_com(st->script->script_buf,&st->pos);
 		switch(c){
 		case C_EOL:
-			if( stack->defsp > stack->sp )
-				ShowError("script:run_script_main: unexpected stack position (defsp=%d sp=%d). please report this!!!\n", stack->defsp, stack->sp);
-			else
+			if( stack->defsp > stack->sp ) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("script:run_script_main: 예기치 않은 스택 위치 (defsp=%d sp=%d). 이것을 보고하십시오!!!\n", stack->defsp, stack->sp);
+				else
+					ShowError("script:run_script_main: unexpected stack position (defsp=%d sp=%d). please report this!!!\n", stack->defsp, stack->sp);
+			} else
 				pop_stack(st, stack->defsp, stack->sp);// pop unused stack data. (unused return value)
 			break;
 		case C_INT:
@@ -4418,7 +4877,10 @@ void run_script_main(struct script_state *st)
 			if(st->state==GOTO){
 				st->state = RUN;
 				if( !st->freeloop && gotocount>0 && (--gotocount)<=0 ){
-					ShowError("script:run_script_main: infinity loop !\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("script:run_script_main: 무한 루프!!\n");
+					else	
+						ShowError("script:run_script_main: infinity loop !\n");
 					script_reportsrc(st);
 					st->state=END;
 				}
@@ -4465,12 +4927,18 @@ void run_script_main(struct script_state *st)
 			break;
 
 		default:
-			ShowError("script:run_script_main:unknown command : %d @ %d\n",c,st->pos);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:run_script_main: 알수 없는 명령어 : %d @ %d\n",c,st->pos);
+			else
+				ShowError("script:run_script_main:unknown command : %d @ %d\n",c,st->pos);
 			st->state=END;
 			break;
 		}
 		if( !st->freeloop && cmdcount>0 && (--cmdcount)<=0 ){
-			ShowError("script:run_script_main: infinity loop !\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:run_script_main: 무한 루프 !\n");
+			else
+				ShowError("script:run_script_main: infinity loop !\n");
 			script_reportsrc(st);
 			st->state=END;
 		}
@@ -4487,12 +4955,22 @@ void run_script_main(struct script_state *st)
 	} else if(st->state != END && st->rid) {
 		//Resume later (st is already attached to player).
 		if(st->bk_st) {
-			ShowWarning("Unable to restore stack! Double continuation!\n");
-			//Report BOTH scripts to see if that can help somehow.
-			ShowDebug("Previous script (lost):\n");
-			script_reportsrc(st->bk_st);
-			ShowDebug("Current script:\n");
-			script_reportsrc(st);
+			if(strcmpi(MessageLang,"KOR") == 0) {
+
+				ShowWarning("두번연속 스택을 복원할 수 없습니다.\n");
+				//Report BOTH scripts to see if that can help somehow.
+				ShowDebug("이전 스크립트 (손실):\n");
+				script_reportsrc(st->bk_st);
+				ShowDebug("현재 스크립트:\n");
+				script_reportsrc(st);
+			} else {
+				ShowWarning("Unable to restore stack! Double continuation!\n");
+				//Report BOTH scripts to see if that can help somehow.
+				ShowDebug("Previous script (lost):\n");
+				script_reportsrc(st->bk_st);
+				ShowDebug("Current script:\n");
+				script_reportsrc(st);
+			}
 
 			script_free_state(st->bk_st);
 			st->bk_st = nullptr;
@@ -4565,7 +5043,10 @@ int script_config_read(const char *cfgName)
 			script_config_read(w2);
 		}
 		else {
-			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("%s 파일에서 알수 없는 '%s'으(로) 설정되었습니다.\n", cfgName, w1);
+			else
+				ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
 		}
 	}
 	fclose(fp);
@@ -4669,7 +5150,10 @@ void script_setarray_pc(map_session_data* sd, const char* varname, uint32 idx, i
 	int key;
 
 	if( idx >= SCRIPT_MAX_ARRAYSIZE ) {
-		ShowError("script_setarray_pc: Variable '%s' has invalid index '%u' (char_id=%d).\n", varname, idx, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script_setarray_pc: 변수 '%s'의 인덱스 '%u'이(가) 잘못되었습니다. (케릭터ID=%d).\n", varname, idx, sd->status.char_id);
+		else
+			ShowError("script_setarray_pc: Variable '%s' has invalid index '%u' (char_id=%d).\n", varname, idx, sd->status.char_id);
 		return;
 	}
 
@@ -4762,7 +5246,10 @@ void do_final_script() {
 			double mean=0.0f;
 			double median=0.0f;
 
-			ShowNotice("Dumping script str hash information to hash_dump.txt\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowNotice("스크립트 str 해시 정보를 hash_dump.txt로 덤프합니다.\n");
+			else
+				ShowNotice("Dumping script str hash information to hash_dump.txt\n");
 			memset(count, 0, sizeof(count));
 			fprintf(fp,"num : hash : data_name\n");
 			fprintf(fp,"---------------------------------------------------------------\n");
@@ -4943,7 +5430,10 @@ BUILDIN_FUNC(next)
 	map_session_data* sd;
 
 	if (!st->mes_active) {
-		ShowWarning("buildin_next: There is no mes active.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_next: 활성화된 mes 가 없습니다.\n");
+		else
+			ShowWarning("buildin_next: There is no mes active.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -4965,7 +5455,10 @@ BUILDIN_FUNC(clear)
 	TBL_PC* sd;
 
 	if (!st->mes_active) {
-		ShowWarning("buildin_clear: There is no mes active.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_clear: 활성화된 mes 가 없습니다.\n");
+		else
+			ShowWarning("buildin_clear: There is no mes active.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -4997,7 +5490,10 @@ BUILDIN_FUNC(close)
 
 	if( !st->mes_active ) {
 		st->state = END; // Keep backwards compatibility.
-		ShowWarning("buildin_close: Incorrect use of '%s' command!\n", command);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("'close'명령을 잘못 사용했습니다.");
+		else
+			ShowWarning("buildin_close: Incorrect use of '%s' command!\n", command);
 		script_reportsrc(st);
 	} else {
 		st->state = CLOSE;
@@ -5106,7 +5602,10 @@ BUILDIN_FUNC(menu)
 
 		if( script_lastdata(st) % 2 == 0 )
 		{// argument count is not even (1st argument is at index 2)
-			ShowError("buildin_menu: Illegal number of arguments (%d).\n", (script_lastdata(st) - 1));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_menu: 인수 (%d)의 잘못된 수입니다.\n", (script_lastdata(st) - 1));
+			else
+				ShowError("buildin_menu: Illegal number of arguments (%d).\n", (script_lastdata(st) - 1));
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -5124,7 +5623,10 @@ BUILDIN_FUNC(menu)
 			if( !data_islabel(data) )
 			{// not a label
 				StringBuf_Destroy(&buf);
-				ShowError("buildin_menu: Argument #%d (from 1) is not a label or label not found.\n", i);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_menu: 인수 #%d (1에서)는 없는 라벨이거나 또는 라벨을 찾을 수 없습니다.\n", i);
+				else	
+					ShowError("buildin_menu: Argument #%d (from 1) is not a label or label not found.\n", i);
 				script_reportdata(data);
 				st->state = END;
 				return SCRIPT_CMD_FAILURE;
@@ -5149,7 +5651,10 @@ BUILDIN_FUNC(menu)
 			char* menu;
 			CREATE(menu, char, 2048);
 			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("buildin_menu: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_menu: NPC 메뉴가 너무 깁니다! (소스:%s / 길이:%d)\n",nd?nd->name:"알수없음",StringBuf_Length(&buf));
+			else
+				ShowWarning("buildin_menu: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
 			clif_scriptmenu( *sd, st->oid, menu );
 			aFree(menu);
 		} else
@@ -5159,7 +5664,10 @@ BUILDIN_FUNC(menu)
 
 		if( sd->npc_menu >= 0xff )
 		{// client supports only up to 254 entries; 0 is not used and 255 is reserved for cancel; excess entries are displayed but cause 'uint8' overflow
-			ShowWarning("buildin_menu: Too many options specified (current=%d, max=254).\n", sd->npc_menu);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_menu: 지정한 옵션이 너무 많습니다. (현재=%d, 최대=254).\n", sd->npc_menu);
+			else
+				ShowWarning("buildin_menu: Too many options specified (current=%d, max=254).\n", sd->npc_menu);
 			script_reportsrc(st);
 		}
 	}
@@ -5175,7 +5683,10 @@ BUILDIN_FUNC(menu)
 		sd->state.menu_or_input = 0;
 		if( sd->npc_menu <= 0 )
 		{
-			ShowDebug("buildin_menu: Unexpected selection (%d)\n", sd->npc_menu);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("buildin_menu: 예상치 못한 선택 (%d개)\n", sd->npc_menu);
+			else
+				ShowDebug("buildin_menu: Unexpected selection (%d)\n", sd->npc_menu);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -5190,13 +5701,19 @@ BUILDIN_FUNC(menu)
 		}
 		if( sd->npc_menu > 0 )
 		{// Invalid selection
-			ShowDebug("buildin_menu: Selection is out of range (%d pairs are missing?) - please report this\n", sd->npc_menu);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("buildin_menu: 선택이 범위를 벗어났습니다. (%d쌍이 빠졌습니까?) - 이것을 보고하세요.\n", sd->npc_menu);
+			else
+				ShowDebug("buildin_menu: Selection is out of range (%d pairs are missing?) - please report this\n", sd->npc_menu);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
 		if( !data_islabel(script_getdata(st, i + 1)) )
 		{// TODO remove this temporary crash-prevention code (fallback for multiple scripts requesting user input)
-			ShowError("buildin_menu: Unexpected data in label argument\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_menu: 라벨 인수에서 예기치 않은 데이터입니다.\n");
+			else
+				ShowError("buildin_menu: Unexpected data in label argument\n");
 			script_reportdata(script_getdata(st, i + 1));
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
@@ -5253,7 +5770,10 @@ BUILDIN_FUNC(select)
 			char* menu;
 			CREATE(menu, char, 2048);
 			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("buildin_select: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_select: NPC 메뉴가 너무 깁니다. (소스:%s / 길이:%d)\n",nd?nd->name:"알수없음",StringBuf_Length(&buf));
+			else
+				ShowWarning("buildin_select: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
 			clif_scriptmenu( *sd, st->oid, menu );
 			aFree(menu);
 		} else
@@ -5331,7 +5851,10 @@ BUILDIN_FUNC(prompt)
 			char* menu;
 			CREATE(menu, char, 2048);
 			safestrncpy(menu, StringBuf_Value(&buf), 2047);
-			ShowWarning("buildin_prompt: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_prompt: NPC 메뉴가 너무 깁니다. (소스:%s / 길이:%d)\n",nd?nd->name:"알수없음",StringBuf_Length(&buf));
+			else
+				ShowWarning("buildin_prompt: NPC Menu too long! (source:%s / length:%d)\n",nd?nd->name:"Unknown",StringBuf_Length(&buf));
 			clif_scriptmenu( *sd, st->oid, menu );
 			aFree(menu);
 		} else
@@ -5340,7 +5863,10 @@ BUILDIN_FUNC(prompt)
 
 		if( sd->npc_menu >= 0xff )
 		{
-			ShowWarning("buildin_prompt: Too many options specified (current=%d, max=254).\n", sd->npc_menu);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_prompt: 너무 많은 옵션이 지정되었습니다. (현재=%d, 최대=254).\n", sd->npc_menu);
+			else
+				ShowWarning("buildin_prompt: Too many options specified (current=%d, max=254).\n", sd->npc_menu);
 			script_reportsrc(st);
 		}
 	}
@@ -5381,7 +5907,10 @@ BUILDIN_FUNC(goto)
 {
 	if( !data_islabel(script_getdata(st,2)) )
 	{
-		ShowError("buildin_goto: Not a label\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_goto: 라벨이 아닙니다.\n");
+		else
+			ShowError("buildin_goto: Not a label\n");
 		script_reportdata(script_getdata(st,2));
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -5405,7 +5934,10 @@ BUILDIN_FUNC(callfunc)
 
 	scr = (struct script_code*)strdb_get(userfunc_db, str);
 	if(!scr) {
-		ShowError("buildin_callfunc: Function not found! [%s]\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_callfunc: [%s]인 함수를 찾을 수 없습니다.\n", str);
+		else
+			ShowError("buildin_callfunc: Function not found! [%s]\n", str);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -5464,7 +5996,10 @@ BUILDIN_FUNC(callsub)
 	struct reg_db *ref = nullptr;
 
 	if( !data_islabel(script_getdata(st,2)) && !data_isfunclabel(script_getdata(st,2)) ) {
-		ShowError("buildin_callsub: Argument is not a label\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_callsub: 인수가 라벨이 아닙니다.\n");
+		else
+			ShowError("buildin_callsub: Argument is not a label\n");
 		script_reportdata(script_getdata(st,2));
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -5516,7 +6051,10 @@ BUILDIN_FUNC(getarg)
 
 	if( st->stack->defsp < 1 || st->stack->stack_data[st->stack->defsp - 1].type != C_RETINFO )
 	{
-		ShowError("buildin_getarg: No callfunc or callsub!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getarg: callfunc 또는 callsub가 없음!\n");
+		else
+			ShowError("buildin_getarg: No callfunc or callsub!\n");
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -5530,7 +6068,10 @@ BUILDIN_FUNC(getarg)
 		script_pushcopy(st, 3);
 	else
 	{
-		ShowError("buildin_getarg: Index (idx=%d) out of range (nargs=%d) and no default value found\n", idx, ri->nargs);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getarg: 인덱스 (idx=%d)가 범위 (nargs=%d)를 벗어났고 기본값이 없습니다.\n", idx, ri->nargs);
+		else
+			ShowError("buildin_getarg: Index (idx=%d) out of range (nargs=%d) and no default value found\n", idx, ri->nargs);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -5641,7 +6182,10 @@ BUILDIN_FUNC(warp)
 		ret = pc_setpos(sd,mapindex_name2id(str),x,y,CLR_OUTSIGHT);
 
 	if( ret ) {
-		ShowError("buildin_warp: moving player '%s' to \"%s\",%d,%d failed.\n", sd->status.name, str, x, y);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_warp: 플레이어 '%s'이(가) \"%s\",%d,%d으(로) 이동 하는데 실패 했습니다.\n", sd->status.name, str, x, y);
+		else
+			ShowError("buildin_warp: moving player '%s' to \"%s\",%d,%d failed.\n", sd->status.name, str, x, y);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -5839,7 +6383,10 @@ BUILDIN_FUNC(warpparty)
 			} while ((map_getcell(m,x,y,CELL_CHKNOPASS) || (!battle_config.teleport_on_portal && npc_check_areanpc(1,m,x,y,1))) && (i++) < 1000);
 
 			if (i >= 1000) {
-				ShowError("buildin_warpparty: moving player '%s' to \"%s\",%d,%d failed.\n", sd->status.name, str, x, y);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_warpparty: 플레이어 '%s'이(가) \"%s\",%d,%d으(로) 이동을 실패 했습니다.\n", sd->status.name, str, x, y);
+				else
+					ShowError("buildin_warpparty: moving player '%s' to \"%s\",%d,%d failed.\n", sd->status.name, str, x, y);
 				return SCRIPT_CMD_FAILURE;
 			}
 			} break;
@@ -5916,7 +6463,10 @@ BUILDIN_FUNC(warpparty)
 		}
 
 		if( ret != SETPOS_OK ) {
-			ShowError("buildin_warpparty: moving player '%s' to \"%s\",%d,%d failed.\n", pl_sd->status.name, str, x, y);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_warpparty: 플레이어 '%s'이(가) \"%s\",%d,%d으(로) 이동을 실패 했습니다.\n", pl_sd->status.name, str, x, y);
+			else
+				ShowError("buildin_warpparty: moving player '%s' to \"%s\",%d,%d failed.\n", pl_sd->status.name, str, x, y);
 			if ( ( type == WARPPARTY_RANDOMALL || type == WARPPARTY_RANDOMALLAREA ) && (rx || ry) )
 				continue;
 			else
@@ -6144,7 +6694,10 @@ BUILDIN_FUNC(input)
 
 	data = script_getdata(st,2);
 	if( !data_isreference(data) ){
-		ShowError("script:input: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:input: 변수가 아닙니다.\n");
+		else
+			ShowError("script:input: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -6208,7 +6761,10 @@ BUILDIN_FUNC(setr)
 	//datavalue = script_getdata(st,3);
 	if( !data_isreference(data) )
 	{
-		ShowError("script:set: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:set: 변수가 아닙니다.\n");
+		else
+			ShowError("script:set: not a variable\n");
 		script_reportdata(script_getdata(st,2));
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -6222,7 +6778,10 @@ BUILDIN_FUNC(setr)
 		pos = 5;
 
 	if (not_server_variable(prefix) && !script_charid2sd(pos,sd)) {
-		ShowError("buildin_set: No player attached for player variable '%s'\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_set: 플레이어 변수 '%s'에 연결된(Attached) 플레이어가 없습니다.\n", name);
+		else
+			ShowError("buildin_set: No player attached for player variable '%s'\n", name);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -6235,13 +6794,19 @@ BUILDIN_FUNC(setr)
 		{// array variable being copied into another array variable
 			if( sd == nullptr && not_server_variable(*namevalue) && !(sd = script_rid2sd(st)) )
 			{// player must be attached in order to copy a player variable
-				ShowError("script:set: no player attached for player variable '%s'\n", namevalue);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("script:set: 플레이어 변수 '%s'에 연결된(Attached) 플레이어가 없습니다.\n", namevalue);
+				else		
+					ShowError("script:set: no player attached for player variable '%s'\n", namevalue);
 				return SCRIPT_CMD_SUCCESS;
 			}
 
 			if( is_string_variable(namevalue) != is_string_variable(name) )
 			{// non-matching array value types
-				ShowWarning("script:set: two array variables do not match in type.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("script:set: 두개의 배열 변수가 타입이 일치하지 않습니다.\n");
+				else
+					ShowWarning("script:set: two array variables do not match in type.\n");
 				return SCRIPT_CMD_SUCCESS;
 			}
 
@@ -6291,7 +6856,10 @@ BUILDIN_FUNC(setarray)
 	data = script_getdata(st, 2);
 	if( !data_isreference(data) )
 	{
-		ShowError("script:setarray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:setarray: 변수가 아닙니다.\n");
+		else
+			ShowError("script:setarray: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -6340,7 +6908,10 @@ BUILDIN_FUNC(cleararray)
 	data = script_getdata(st, 2);
 	if( !data_isreference(data) )
 	{
-		ShowError("script:cleararray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:cleararray: 변수가 아닙니다.\n");
+		else
+			ShowError("script:cleararray: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -6399,7 +6970,10 @@ BUILDIN_FUNC(copyarray)
 	data2 = script_getdata(st, 3);
 	if( !data_isreference(data1) || !data_isreference(data2) )
 	{
-		ShowError("script:copyarray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:copyarray: 변수가 아닙니다.\n");
+		else
+			ShowError("script:copyarray: not a variable\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6416,7 +6990,10 @@ BUILDIN_FUNC(copyarray)
 	bool is_string = is_string_variable( name1 );
 
 	if( is_string != is_string_variable( name2 ) ){
-		ShowError("script:copyarray: type mismatch\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:copyarray: 타입이 일치하지 않습니다.\n");
+		else
+			ShowError("script:copyarray: type mismatch\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6484,7 +7061,10 @@ BUILDIN_FUNC(getarraysize)
 	data = script_getdata(st, 2);
 	if( !data_isreference(data) )
 	{
-		ShowError("script:getarraysize: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:getarraysize: 변수가 아닙니다.\n");
+		else
+			ShowError("script:getarraysize: not a variable\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -6523,7 +7103,10 @@ BUILDIN_FUNC(deletearray)
 
 	data = script_getdata(st, 2);
 	if( !data_isreference(data) ) {
-		ShowError("script:deletearray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:deletearray: 변수가 아닙니다.\n");
+		else
+			ShowError("script:deletearray: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -6539,7 +7122,10 @@ BUILDIN_FUNC(deletearray)
 	}
 
 	if (!(src = script_array_src(st, sd, name, reference_getref(data)))) {
-		ShowError("script:deletearray: not a array\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:deletearray: 배열이 아닙니다.\n");
+		else
+			ShowError("script:deletearray: not a array\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -6640,7 +7226,10 @@ BUILDIN_FUNC(getelementofarray)
 	data = script_getdata(st, 2);
 	if( !data_isreference(data) )
 	{
-		ShowError("script:getelementofarray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:getelementofarray: 변수가 아닙니다.\n");
+		else
+			ShowError("script:getelementofarray: not a variable\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -6651,7 +7240,10 @@ BUILDIN_FUNC(getelementofarray)
 
 	i = script_getnum(st, 3);
 	if (i < 0 || i >= SCRIPT_MAX_ARRAYSIZE) {
-		ShowWarning("script:getelementofarray: index out of range (%" PRId64 ")\n", i);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script:getelementofarray: 인덱스 범위가 벗어났습니다. (%" PRId64 ")\n", i);
+		else
+			ShowWarning("script:getelementofarray: index out of range (%" PRId64 ")\n", i);
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -6677,7 +7269,10 @@ BUILDIN_FUNC(inarray)
 
 	if (!data_isreference(data))
 	{
-		ShowError("buildin_inarray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_inarray: 변수가 아닙니다.\n");
+		else
+			ShowError("buildin_inarray: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -6699,7 +7294,10 @@ BUILDIN_FUNC(inarray)
 
 	if (array_size >= SCRIPT_MAX_ARRAYSIZE)
 	{
-		ShowError("buildin_inarray: The array is too large.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_inarray: 배열크기가 너무 큽니다.\n");
+		else
+			ShowError("buildin_inarray: The array is too large.\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -6757,7 +7355,10 @@ BUILDIN_FUNC(countinarray)
 
 	if (!data_isreference(data1) || !data_isreference(data2))
 	{
-		ShowError("buildin_countinarray: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_countinarray: 변수가 아닙니다.\n");
+		else
+			ShowError("buildin_countinarray: not a variable\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6783,7 +7384,10 @@ BUILDIN_FUNC(countinarray)
 
 	if (array_size1 >= SCRIPT_MAX_ARRAYSIZE || array_size2 >= SCRIPT_MAX_ARRAYSIZE)
 	{
-		ShowError("buildin_countinarray: The array is too large.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_countinarray: 배열크기가 너무 큽니다.\n");
+		else
+			ShowError("buildin_countinarray: The array is too large.\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6794,7 +7398,10 @@ BUILDIN_FUNC(countinarray)
 	uint32 j = reference_getindex(data2);
 	if (i > array_size1 - 1 || j > array_size2 - 1)
 	{	//To prevent unintended behavior
-		ShowError("buildin_countinarray: The given index of the array is higher than the array size.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_countinarray: 배열의 지정된 인덱스가 배열의 크기보다 큽니다.\n");
+		else
+			ShowError("buildin_countinarray: The given index of the array is higher than the array size.\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6835,7 +7442,10 @@ BUILDIN_FUNC(countinarray)
 			}
 		}
 	}else{
-		ShowError("buildin_countinarray: Arrays do not match , You can't compare an int array to a string array.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_countinarray: 배열이 일치하지 않으므로 정수 배열과 문자열 배열을 비교할 수 없습니다.\n");
+		else
+			ShowError("buildin_countinarray: Arrays do not match , You can't compare an int array to a string array.\n");
 		script_reportdata(data1);
 		script_reportdata(data2);
 		st->state = END;
@@ -6960,7 +7570,10 @@ BUILDIN_FUNC(viewpointmap) {
 	int16 mapid = map_mapname2mapid(map);
 
 	if (mapid < 0) {
-		ShowError("buildin_viewpointmap: Unknown map name %s.\n", map);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_viewpointmap: %s은(는) 알 수 없는 맵 이름입니다.\n", map);
+		else
+			ShowError("buildin_viewpointmap: Unknown map name %s.\n", map);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -6992,18 +7605,27 @@ static bool script_getitem_randomoption(struct script_state *st, map_session_dat
 	if( not_server_variable(opt_id_var[0]) && sd == nullptr ){
 		// If no player is attached
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_id_var );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 변수 \"%s\" 는 서버 변수가 아닙니다. 하지만 그 어떤 플레이어와도 연결(attached)되지 않았습니다.\n", funcname, opt_id_var);
+			else
+				ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_id_var );
 			return false;
 		}
 	}
 
 	if( !data_isreference(opt_id) || !script_array_src( st, sd, opt_id_var, reference_getref(opt_id) ) ){
-		ShowError( "buildin_%s: The option id parameter is not an array.\n", funcname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_%s: 옵션 id 파라메터는 배열이 아닙니다.\n", funcname );
+		else
+			ShowError( "buildin_%s: The option id parameter is not an array.\n", funcname );
 		return false;
 	}
 
 	if (is_string_variable(opt_id_var)) {
-		ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_id_var);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 배열 %s은(는) 숫자형이 아닙니다.\n", funcname, opt_id_var);
+		else
+			ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_id_var);
 		return false;
 	}
 
@@ -7011,18 +7633,27 @@ static bool script_getitem_randomoption(struct script_state *st, map_session_dat
 	if( not_server_variable(opt_val_var[0]) && sd == nullptr ){
 		// If no player is attached
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_val_var );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 변수 \"%s\" 는 서버 변수가 아닙니다. 하지만 그 어떤 플레이어와도 연결(attached)되지 않았습니다.\n", funcname, opt_id_var);
+			else
+				ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_val_var );
 			return false;
 		}
 	}
 
 	if( !data_isreference(opt_val) || !script_array_src( st, sd, opt_val_var, reference_getref(opt_val) ) ){
-		ShowError( "buildin_%s: The option value parameter is not an array.\n", funcname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 옵션 값 파라메터는 배열이 아닙니다.\n", funcname);
+		else
+			ShowError( "buildin_%s: The option value parameter is not an array.\n", funcname );
 		return false;
 	}
 
 	if (is_string_variable(opt_val_var)) {
-		ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_val_var);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 배열 %s은(는) 숫자형이 아닙니다.\n", funcname, opt_val_var);
+		else
+			ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_val_var);
 		return false;
 	}
 
@@ -7030,18 +7661,27 @@ static bool script_getitem_randomoption(struct script_state *st, map_session_dat
 	if( not_server_variable(opt_param_var[0]) && sd == nullptr ){
 		// If no player is attached
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_param_var );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_%s: 변수 \"%s\" 서버변수가 아닙니다. 하지만 그 어떤 플레이어도 연결(attached)되지 않았습니다.\n", funcname, opt_param_var );
+			else
+				ShowError( "buildin_%s: variable \"%s\" was not a server variable, but no player was attached.\n", funcname, opt_param_var );
 			return false;
 		}
 	}
 
 	if( !data_isreference(opt_param) || !script_array_src( st, sd, opt_param_var, reference_getref(opt_param) ) ){
-		ShowError( "buildin_%s: The option param parameter is not an array.\n", funcname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_%s: 옵션 param 파라메터는 배열이 아닙니다.\n", funcname );
+		else
+			ShowError( "buildin_%s: The option param parameter is not an array.\n", funcname );
 		return false;
 	}
 
 	if (is_string_variable(opt_param_var)) {
-		ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_param_var);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 배열 %s은(는) 숫자형이 아닙니다.\n", funcname, opt_param_var);
+		else
+			ShowError("buildin_%s: The array %s is not numeric type.\n", funcname, opt_param_var);
 		return false;
 	}
 
@@ -7118,7 +7758,10 @@ static int script_countitem_sub(struct item *items, std::shared_ptr<item_data> i
 
 		if (expanded&2) {
 			if (!sd) {
-				ShowError("buildin_countitem3: Player not attached.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_countitem3: 플레이어가 연결(attached)되지 않았습니다.\n");
+				else
+					ShowError("buildin_countitem3: Player not attached.\n");
 				return -1;
 			}
 
@@ -7197,7 +7840,10 @@ BUILDIN_FUNC(countitem)
 		id = item_db.find( script_getnum( st, 2 ) );
 
 	if (!id) {
-		ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: '%s'은(는) 잘못된 아이템입니다.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		else
+			ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7232,7 +7878,10 @@ BUILDIN_FUNC(cartcountitem)
 		return SCRIPT_CMD_FAILURE;
 
 	if (!pc_iscarton(sd)) {
-		ShowError("buildin_%s: Player doesn't have cart (CID:%d).\n", command, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: (케릭터ID:%d)인 플레이어는 카트가 없습니다.\n", command, sd->status.char_id);
+		else
+			ShowError("buildin_%s: Player doesn't have cart (CID:%d).\n", command, sd->status.char_id);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7245,7 +7894,10 @@ BUILDIN_FUNC(cartcountitem)
 		id = item_db.find( script_getnum( st, 2 ) );
 
 	if (!id) {
-		ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: '%s'은(는) 잘못된 아이템입니다.\n", command, script_getstr(st,2));  // returns string, regardless of what it was
+		else
+			ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7287,7 +7939,10 @@ BUILDIN_FUNC(storagecountitem)
 		id = item_db.find( script_getnum( st, 2 ) );
 
 	if (!id) {
-		ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: '%s'은(는) 잘못된 아이템입니다.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		else
+			ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7334,7 +7989,10 @@ BUILDIN_FUNC(guildstoragecountitem)
 		id = item_db.find( script_getnum( st, 2 ) );
 
 	if (!id) {
-		ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: '%s'은(는) 잘못된 아이템입니다.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		else
+			ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7401,7 +8059,10 @@ BUILDIN_FUNC(rentalcountitem)
 		id = item_db.find( script_getnum( st, 2 ) );
 
 	if (!id) {
-		ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: '%s'은(는) 잘못된 아이템입니다.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
+		else
+			ShowError("buildin_%s: Invalid item '%s'.\n", command, script_getstr(st, 2)); // returns string, regardless of what it was
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7435,7 +8096,10 @@ BUILDIN_FUNC(checkweight)
 
 	nbargs = script_lastdata(st)+1;
 	if(nbargs%2) {
-		ShowError("buildin_checkweight: Invalid nb of args should be a multiple of 2.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_checkweight: 인수(args)의 잘못된 nb는 2의 배수 여야합니다.\n");
+		else
+			ShowError("buildin_checkweight: Invalid nb of args should be a multiple of 2.\n");
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -7450,7 +8114,10 @@ BUILDIN_FUNC(checkweight)
 		else // item id
 			id = item_db.find( script_getnum( st, i ) );
 		if( id == nullptr ){
-			ShowError("buildin_checkweight: Invalid item '%s'.\n", script_getstr(st,i));  // returns string, regardless of what it was
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_checkweight: '%s'은(는) 잘못된 아이템입니다.\n", script_getstr(st,i));  // returns string, regardless of what it was
+			else
+				ShowError("buildin_checkweight: Invalid item '%s'.\n", script_getstr(st,i));  // returns string, regardless of what it was
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -7458,7 +8125,10 @@ BUILDIN_FUNC(checkweight)
 
 		amount = script_getnum(st,i+1);
 		if( amount < 1 ) {
-			ShowError("buildin_checkweight: Invalid amount '%d'.\n", amount);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_checkweight: '%d'은(는) 잘못된 갯수(수량)입니다.\n", amount);
+			else
+				ShowError("buildin_checkweight: Invalid amount '%d'.\n", amount);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -7526,7 +8196,10 @@ BUILDIN_FUNC(checkweight2)
 	data_nb = script_getdata(st, 3);
 
 	if( !data_isreference(data_it) || !data_isreference(data_nb)) {
-		ShowError("buildin_checkweight2: parameter not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_checkweight2: 파라메터는 변수가 아닙니다.\n");
+		else
+			ShowError("buildin_checkweight2: parameter not a variable\n");
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;// not a variable
 	}
@@ -7539,14 +8212,20 @@ BUILDIN_FUNC(checkweight2)
 	name_nb = reference_getname(data_nb);
 
 	if(is_string_variable(name_it) || is_string_variable(name_nb)) {
-		ShowError("buildin_checkweight2: illegal type, need int\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_checkweight2: 잘못된 타입, 정수(int)가 필요합니다.\n");
+		else
+			ShowError("buildin_checkweight2: illegal type, need int\n");
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;// not supported
 	}
 	nb_it = script_array_highest_key(st, sd, reference_getname(data_it), reference_getref(data_it));
 	nb_nb = script_array_highest_key(st, sd, reference_getname(data_nb), reference_getref(data_nb));
 	if(nb_it != nb_nb) {
-		ShowError("buildin_checkweight2: Size mistmatch: nb_it=%d, nb_nb=%d\n",nb_it,nb_nb);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_checkweight2: 크기 불일치: nb_it=%d, nb_nb=%d\n",nb_it,nb_nb);
+		else
+			ShowError("buildin_checkweight2: Size mistmatch: nb_it=%d, nb_nb=%d\n",nb_it,nb_nb);
 		fail = 1;
 	}
 
@@ -7559,12 +8238,18 @@ BUILDIN_FUNC(checkweight2)
 			continue; //cpntonie to depop rest
 
 		if (!item_db.exists(nameid)) {
-			ShowError("buildin_checkweight2: Invalid item '%u'.\n", nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_checkweight2: '%d'은(는) 잘못된 아이템입니다.\n", nameid);
+			else
+				ShowError("buildin_checkweight2: Invalid item '%u'.\n", nameid);
 			fail=1;
 			continue;
 		}
 		if(amount == 0 ) {
-			ShowError("buildin_checkweight2: Invalid amount '%d'.\n", amount);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_checkweight2: '%d'은(는) 잘못된 갯수(수량)입니다.\n", amount);
+			else
+				ShowError("buildin_checkweight2: Invalid amount '%d'.\n", amount);
 			fail = 1;
 			continue;
 		}
@@ -7627,7 +8312,10 @@ BUILDIN_FUNC(getitem)
 		id = item_db.searchname( name );
 
 		if( id == nullptr ){
-			ShowError("buildin_getitem: Nonexistant item %s requested.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getitem: 존재하지 않는 아이템 %s이(가) 요청되었습니다.\n", name);
+			else
+				ShowError("buildin_getitem: Nonexistant item %s requested.\n", name);
 			return SCRIPT_CMD_FAILURE; //No item created.
 		}
 		nameid = id->nameid;
@@ -7637,7 +8325,10 @@ BUILDIN_FUNC(getitem)
 		id = item_db.find( nameid );
 
 		if( id == nullptr ){
-			ShowError("buildin_getitem: Nonexistant item %u requested.\n", nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getitem: 존재하지 않는 아이템 %u이(가) 요청되었습니다.\n", nameid);
+			else
+				ShowError("buildin_getitem: Nonexistant item %u requested.\n", nameid);
 			return SCRIPT_CMD_FAILURE; //No item created.
 		}
 	}
@@ -7655,7 +8346,10 @@ BUILDIN_FUNC(getitem)
 	if( !strcmp(command,"getitembound") ) {
 		char bound = script_getnum(st,4);
 		if( bound < BOUND_NONE || bound >= BOUND_MAX ) {
-			ShowError("script_getitembound: Not a correct bound type! Type=%d\n",bound);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script_getitembound: 올바른 바인딩 타입이 아닙니다! 타입=%d\n",bound);
+			else
+				ShowError("script_getitembound: Not a correct bound type! Type=%d\n",bound);
 			return SCRIPT_CMD_FAILURE;
 		}
 		script_mapid2sd(5,sd);
@@ -7729,7 +8423,10 @@ BUILDIN_FUNC(getitem2)
 		int aid_pos = 12;
 		bound = script_getnum(st,11);
 		if( bound < BOUND_NONE || bound >= BOUND_MAX ) {
-			ShowError("script_getitembound2: Not a correct bound type! Type=%d\n",bound);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script_getitembound2: 올바른 바인딩 타입이 아닙니다. 타입=%d\n",bound);
+			else
+				ShowError("script_getitembound2: Not a correct bound type! Type=%d\n",bound);
 			return SCRIPT_CMD_FAILURE;
 		}
 		if (command[strlen(command)-1] == '3') {
@@ -7768,7 +8465,10 @@ BUILDIN_FUNC(getitem2)
 		item_data = item_db.searchname( name );
 
 		if( item_data == nullptr ){
-			ShowError("buildin_getitem2: Nonexistant item %s requested (by conv_str).\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getitem2: 존재하지 않는 아이템 %s이(가) 요청되었습니다. (by conv_str).\n", name);
+			else
+				ShowError("buildin_getitem2: Nonexistant item %s requested (by conv_str).\n", name);
 			return SCRIPT_CMD_FAILURE; //No item created.
 		}
 		nameid = item_data->nameid;
@@ -7778,7 +8478,10 @@ BUILDIN_FUNC(getitem2)
 		item_data = item_db.find( nameid );
 
 		if( item_data == nullptr ){
-			ShowError("buildin_getitem2: Nonexistant item %u requested (by conv_num).\n", nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getitem2: 존재하지 않는 아이템 %u이(가) 요청되었습니다. (by conv_num).\n", nameid);
+			else
+				ShowError("buildin_getitem2: Nonexistant item %u requested (by conv_num).\n", nameid);
 			return SCRIPT_CMD_FAILURE; //No item created.
 		}
 	}
@@ -7826,7 +8529,10 @@ BUILDIN_FUNC(getitem2)
 			if (grade_offset > 0) {
 				int grade = script_getnum(st, grade_offset);
 				if (grade < ENCHANTGRADE_NONE || grade > MAX_ENCHANTGRADE) {
-					ShowError("buildin_getitem2: Not a correct grade! Grade=%d\n", grade);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_getitem2: 정확한 점수가 아닙니다! Grade=%d\n", grade);
+					else
+						ShowError("buildin_getitem2: Not a correct grade! Grade=%d\n", grade);
 					return SCRIPT_CMD_FAILURE;
 				}
 				item_tmp.enchantgrade = static_cast<e_enchantgrade>(grade);
@@ -7878,7 +8584,10 @@ BUILDIN_FUNC(rentitem) {
 		std::shared_ptr<item_data> itd = item_db.searchname( name );
 
 		if( itd == nullptr ){
-			ShowError("buildin_rentitem: Nonexistant item %s requested.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_rentitem: 존재하지 않는 아이템 %s이(가) 요청되었습니다.\n", name);
+			else
+				ShowError("buildin_rentitem: Nonexistant item %s requested.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 		nameid = itd->nameid;
@@ -7888,7 +8597,10 @@ BUILDIN_FUNC(rentitem) {
 		nameid = script_getnum(st, 2);
 		if( !item_db.exists(nameid) )
 		{
-			ShowError("buildin_rentitem: Nonexistant item %u requested.\n", nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_rentitem: 존재하지 않는 아이템 %hu이(가) 요청했습니다.\n", nameid);
+			else
+				ShowError("buildin_rentitem: Nonexistant item %u requested.\n", nameid);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -7942,7 +8654,10 @@ BUILDIN_FUNC(rentitem2) {
 		id = item_db.searchname( name );
 
 		if( id == nullptr ) {
-			ShowError("buildin_rentitem2: Nonexistant item %s requested.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_rentitem2: 존재하지 않는 아이템 %s이(가) 요청했습니다.\n", name);
+			else	
+				ShowError("buildin_rentitem2: Nonexistant item %s requested.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 		nameid = id->nameid;
@@ -7952,7 +8667,10 @@ BUILDIN_FUNC(rentitem2) {
 		id = item_db.find( nameid );
 
 		if( id == nullptr ){
-			ShowError("buildin_rentitem2: Nonexistant item %u requested.\n", nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_rentitem2: 존재하지 않는 아이템 %u이(가) 요청했습니다.\n", nameid);
+			else
+				ShowError("buildin_rentitem2: Nonexistant item %u requested.\n", nameid);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -8005,7 +8723,10 @@ BUILDIN_FUNC(rentitem2) {
 
 		int grade = script_getnum(st, 11);
 		if (grade < ENCHANTGRADE_NONE || grade > MAX_ENCHANTGRADE) {
-			ShowError("buildin_rentitem2: Not a correct grade! Grade=%d\n", grade);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_rentitem2: 정확한 점수가 아닙니다! Grade=%d\n", grade);
+			else
+				ShowError("buildin_rentitem2: Not a correct grade! Grade=%d\n", grade);
 			return SCRIPT_CMD_FAILURE;
 		}
 		it.enchantgrade = static_cast<e_enchantgrade>(grade);
@@ -8095,7 +8816,10 @@ BUILDIN_FUNC(grouprandomitem) {
 	FETCH(3, sub_group);
 	std::shared_ptr<s_item_group_entry> entry = itemdb_group.get_random_entry(script_getnum(st,2),sub_group);
 	if (!entry) {
-		ShowError("buildin_grouprandomitem: Invalid item group with group_id '%d', sub_group '%d'.\n", script_getnum(st,2), sub_group);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_grouprandomitem: group_id가 '%d', sub_group이 '%d'인 아이템 그룹이 잘못되었습니다.\n", script_getnum(st,2), sub_group);
+		else
+			ShowError("buildin_grouprandomitem: Invalid item group with group_id '%d', sub_group '%d'.\n", script_getnum(st,2), sub_group);
 		script_pushint(st,UNKNOWN_ITEM_ID);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -8122,7 +8846,10 @@ BUILDIN_FUNC(makeitem) {
 		if( item_data )
 			nameid = item_data->nameid;
 		else{
-			ShowError( "buildin_makeitem: Unknown item %s\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_makeitem: %s은(는) 알수없는 아이템입니다.\n", name );
+			else
+				ShowError( "buildin_makeitem: Unknown item %s\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -8137,7 +8864,10 @@ BUILDIN_FUNC(makeitem) {
 		}
 
 		if( !item_db.exists( nameid ) ){
-			ShowError( "buildin_makeitem: Unknown item id %u\n", nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_makeitem: %u은(는) 알수없는 아이템 번호입니다.\n", nameid );
+			else
+				ShowError( "buildin_makeitem: Unknown item id %u\n", nameid );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -8190,14 +8920,20 @@ BUILDIN_FUNC(makeitem2) {
 		if( item_data ){
 			nameid = item_data->nameid;
 		}else{
-			ShowError( "buildin_%s: Unknown item %s\n", funcname, name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_%s: %s은(는) 알수없는 아이템입니다.\n", funcname,name );
+			else
+				ShowError( "buildin_%s: Unknown item %s\n", funcname, name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else{
 		nameid = (t_itemid)script_getnum( st, 2 );
 
 		if( !item_db.exists( nameid ) ){
-			ShowError( "buildin_%s: Unknown item id %u\n", funcname, nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_%s: %u은(는) 알수없는 아이템 번호입니다.\n", funcname,nameid );
+			else
+				ShowError( "buildin_%s: Unknown item id %u\n", funcname, nameid );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -8259,7 +8995,10 @@ BUILDIN_FUNC(makeitem2) {
 
 				int grade = script_getnum(st, 14);
 				if (grade < ENCHANTGRADE_NONE || grade > MAX_ENCHANTGRADE) {
-					ShowError( "buildin_%s: Not a correct grade! Grade=%d\n", funcname, grade );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "buildin_%s: 정확한 점수가 아닙니다! Grade=%d\n", funcname, grade );
+					else
+						ShowError( "buildin_%s: Not a correct grade! Grade=%d\n", funcname, grade );
 					return SCRIPT_CMD_FAILURE;
 				}
 				item_tmp.enchantgrade = static_cast<e_enchantgrade>(grade);
@@ -8543,7 +9282,10 @@ BUILDIN_FUNC(delitem)
 	}
 
 	if (loc == TABLE_CART && !pc_iscarton(sd)) {
-		ShowError("buildin_cartdelitem: player doesn't have cart (CID=%d).\n", sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_cartdelitem: (케릭터ID=%d)인 플레이어는 카트가 없습니다.\n", sd->status.char_id);
+		else
+			ShowError("buildin_cartdelitem: player doesn't have cart (CID=%d).\n", sd->status.char_id);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -8562,7 +9304,10 @@ BUILDIN_FUNC(delitem)
 		std::shared_ptr<item_data> id = item_db.searchname(item_name);
 
 		if( id == nullptr ){
-			ShowError("buildin_%s: unknown item \"%s\".\n", command, item_name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: \"%s\"은(는) 알수 없는 아이템입니다.\n", command, item_name);
+			else	
+				ShowError("buildin_%s: unknown item \"%s\".\n", command, item_name);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -8573,7 +9318,10 @@ BUILDIN_FUNC(delitem)
 		it.nameid = script_getnum(st, 2);// <item id>
 		if( !item_db.exists( it.nameid ) )
 		{
-			ShowError("buildin_%s: unknown item \"%u\".\n", command, it.nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: \"%u\"은(는) 알수없는 아이템 번호입니다.\n", command, it.nameid);
+			else
+				ShowError("buildin_%s: unknown item \"%u\".\n", command, it.nameid);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -8589,7 +9337,10 @@ BUILDIN_FUNC(delitem)
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_%s: failed to delete %d items (AID=%d item_id=%u).\n", command, it.amount, sd->status.account_id, it.nameid);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_%s: %d개 아이템을 삭제하지 못했습니다. (계정ID=%d item_id=%u).\n", command, it.amount, sd->status.account_id, it.nameid);
+	else
+		ShowError("buildin_%s: failed to delete %d items (AID=%d item_id=%u).\n", command, it.amount, sd->status.account_id, it.nameid);
 	st->state = END;
 	st->mes_active = 0;
 	clif_scriptclose( *sd, st->oid );
@@ -8637,7 +9388,10 @@ BUILDIN_FUNC(delitem2)
 	}
 
 	if (loc == TABLE_CART && !pc_iscarton(sd)) {
-		ShowError("buildin_cartdelitem: player doesn't have cart (CID=%d).\n", sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_cartdelitem: (케릭터ID=%d)인 플레이어는 카트가 없습니다.\n", sd->status.char_id);
+		else
+			ShowError("buildin_cartdelitem: player doesn't have cart (CID=%d).\n", sd->status.char_id);
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -8658,7 +9412,10 @@ BUILDIN_FUNC(delitem2)
 		std::shared_ptr<item_data> id = item_db.searchname( item_name );
 
 		if( id == nullptr ){
-			ShowError("buildin_%s: unknown item \"%s\".\n", command, item_name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: \"%s\"은(는) 알수 없는 아이템입니다.\n", command, item_name);
+			else
+				ShowError("buildin_%s: unknown item \"%s\".\n", command, item_name);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -8669,7 +9426,10 @@ BUILDIN_FUNC(delitem2)
 		it.nameid = script_getnum(st, 2);// <item id>
 		if( !item_db.exists( it.nameid ) )
 		{
-			ShowError("buildin_%s: unknown item \"%u\".\n", command, it.nameid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: \"%u\"은(는) 알수 없는 아이템입니다.\n", command, it.nameid);
+			else
+				ShowError("buildin_%s: unknown item \"%u\".\n", command, it.nameid);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -8694,7 +9454,10 @@ BUILDIN_FUNC(delitem2)
 
 			int grade = script_getnum(st, 11);
 			if (grade < ENCHANTGRADE_NONE || grade > MAX_ENCHANTGRADE) {
-				ShowError( "buildin_%s: Not a correct grade! Grade=%d\n", command, grade );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_%s: 정확한 점수가 아닙니다! Grade=%d\n", command, grade );
+				else
+					ShowError( "buildin_%s: Not a correct grade! Grade=%d\n", command, grade );
 				return SCRIPT_CMD_FAILURE;
 			}
 			it.enchantgrade = static_cast<e_enchantgrade>(grade);
@@ -8714,7 +9477,10 @@ BUILDIN_FUNC(delitem2)
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_%s: failed to delete %d items (AID=%d item_id=%u).\n", command, it.amount, sd->status.account_id, it.nameid);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_%s: %d개의 아이템을 삭제하지 못했습니다. (계정ID=%d item_id=%hu).\n", command, it.amount, sd->status.account_id, it.nameid);
+	else
+		ShowError("buildin_%s: failed to delete %d items (AID=%d item_id=%u).\n", command, it.amount, sd->status.account_id, it.nameid);
 	st->state = END;
 	st->mes_active = 0;
 	clif_scriptclose( *sd, st->oid );
@@ -8734,13 +9500,19 @@ BUILDIN_FUNC(delitemidx) {
 
 	int idx = script_getnum(st, 2);
 	if (idx < 0 || idx >= MAX_INVENTORY) {
-		ShowWarning("buildin_delitemidx: Index %d is out of the range 0-%d.\n", idx, MAX_INVENTORY - 1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_delitemidx: Index %d은(는) 범위 0-%d을(를) 벗어났습니다.\n", idx, MAX_INVENTORY - 1);
+		else
+			ShowWarning("buildin_delitemidx: Index %d is out of the range 0-%d.\n", idx, MAX_INVENTORY - 1);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (sd->inventory_data[idx] == nullptr) {
-		ShowWarning("buildin_delitemidx: No item can be deleted from index %d of player %s (AID: %u, CID: %u).\n", idx, sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_delitemidx: 플레이어 %s (AID: %u, CID: %u)의 Index %d에서 삭제할 수 있는 아이템이 없습니다..\n", sd->status.name, sd->status.account_id, sd->status.char_id, idx);
+		else
+			ShowWarning("buildin_delitemidx: No item can be deleted from index %d of player %s (AID: %u, CID: %u).\n", idx, sd->status.name, sd->status.account_id, sd->status.char_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -8846,7 +9618,10 @@ BUILDIN_FUNC(getcharid)
 	case 4: script_pushint(st,sd->bg_id); break;
 	case 5: script_pushint(st,sd->status.clan_id); break;
 	default:
-		ShowError("buildin_getcharid: invalid parameter (%d).\n", num);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getcharid: %d은(는) 잘못된 파라메터 입니다.\n", num);
+		else
+			ShowError("buildin_getcharid: invalid parameter (%d).\n", num);
 		script_pushint(st,0);
 		break;
 	}
@@ -8877,7 +9652,10 @@ BUILDIN_FUNC(getnpcid)
 			script_pushint(st,nd ? nd->bl.id : st->oid);
 			break;
 		default:
-			ShowError("buildin_getnpcid: invalid parameter (%d).\n", num);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getnpcid: 잘못된 파라메터 (%d)입니다.\n", num);
+			else
+				ShowError("buildin_getnpcid: invalid parameter (%d).\n", num);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -8932,19 +9710,28 @@ BUILDIN_FUNC(getpartymember)
 		if (script_hasdata(st,4)) {
 			data = script_getdata(st, 4);
 			if (!data_isreference(data)) {
-				ShowError("buildin_getpartymember: Error in argument! Please give a variable to store values in.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_getpartymember: 인수에 오류가 있습니다. 값을 저장할 변수를 지정하십시오.\n");
+				else
+					ShowError("buildin_getpartymember: Error in argument! Please give a variable to store values in.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			varname = reference_getname(data);
 			if (type <= 0 && varname[strlen(varname)-1] != '$') {
-				ShowError("buildin_getpartymember: The array %s is not string type.\n", varname);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_getpartymember: 배열 %s은(는) 문자열 타입이 아닙니다.\n", varname);
+				else
+					ShowError("buildin_getpartymember: The array %s is not string type.\n", varname);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (not_server_variable(*varname)) {
 				map_session_data *sd;
 
 				if (!script_rid2sd(sd)) {
-					ShowError("buildin_getpartymember: Cannot use a player variable '%s' if no player is attached.\n", varname);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_getpartymember: 플레이어가 연결(attached)이 되어있지 않으면 플레이어 변수 '%s'은(는) 사용할 수 없습니다.\n", varname);
+					else
+						ShowError("buildin_getpartymember: Cannot use a player variable '%s' if no player is attached.\n", varname);
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -9111,7 +9898,10 @@ BUILDIN_FUNC(strcharinfo)
 			script_pushconststr(st,map_getmapdata(sd->bl.m)->name);
 			break;
 		default:
-			ShowWarning("buildin_strcharinfo: unknown parameter.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_strcharinfo: 알수 없는 파라메터입니다.\n");
+			else
+				ShowWarning("buildin_strcharinfo: unknown parameter.\n");
 			script_pushconststr(st,"");
 			break;
 	}
@@ -9197,7 +9987,10 @@ BUILDIN_FUNC(getequipid)
 	else if (equip_index_check(num)) // get inventory position of item
 		i = pc_checkequip(sd, equip_bitmask[num]);
 	else {
-		ShowError( "buildin_getequipid: Unknown equip index '%d'\n", num );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getequipid: '%d'은(는) 알수없는 장착 슬롯 번호입니다.\n", num );
+		else
+			ShowError( "buildin_getequipid: Unknown equip index '%d'\n", num );
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -9537,7 +10330,10 @@ BUILDIN_FUNC(getequiparmorlv){
 	}else if( equip_index_check( num ) ){
 		i = pc_checkequip( sd, equip_bitmask[num] );
 	}else{
-		ShowError( "buildin_getequiparmorlv: unsupported equip index %d.\n", num );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getequiparmorlv: 장착 index %d은(는) 지원되지 않습니다..\n", num );
+		else
+			ShowError( "buildin_getequiparmorlv: unsupported equip index %d.\n", num );
 		script_pushint( st, 0 );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -9667,7 +10463,10 @@ BUILDIN_FUNC(successrefitem) {
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_successrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_successrefitem: %d 위치에 장착된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_successrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st, -1);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -9701,7 +10500,10 @@ BUILDIN_FUNC(failedrefitem) {
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_failedrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_failedrefitem: %d 위치에 장착된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_failedrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st, 0);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -9750,7 +10552,10 @@ BUILDIN_FUNC(downrefitem) {
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_downrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_downrefitem: %d 위치에 장착된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_downrefitem: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st, -1);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -9778,7 +10583,10 @@ BUILDIN_FUNC(delequip) {
 		ret = !(pc_delitem(sd,i,1,0,2,LOG_TYPE_SCRIPT));
 	}
 	else {
-		ShowError("buildin_delequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_delequip: %d 위치에 장착된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+		else
+			ShowError("buildin_delequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -9810,7 +10618,10 @@ BUILDIN_FUNC(breakequip) {
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_breakequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_breakequip: %d 위치에 장착된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_breakequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st,0);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -9865,7 +10676,10 @@ BUILDIN_FUNC(traitstatusup)
 	int type = script_getnum( st, 2 );
 
 	if( type < SP_POW || type > SP_CRT ){
-		ShowError( "buildin_traitstatusup: Unknown trait type %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_traitstatusup: %d은(는) 알 수 없는 특성 타입입니다.\n", type );
+		else
+			ShowError( "buildin_traitstatusup: Unknown trait type %d\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -9887,7 +10701,10 @@ BUILDIN_FUNC(traitstatusup2)
 	int type = script_getnum( st, 2 );
 
 	if( type < SP_POW || type > SP_CRT ){
-		ShowError( "buildin_traitstatusup2: Unknown trait type %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_traitstatusup2: %d은(는) 알 수 없는 특성 타입입니다.\n", type );
+		else
+			ShowError( "buildin_traitstatusup2: Unknown trait type %d\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -9941,14 +10758,20 @@ BUILDIN_FUNC(bonus)
 				const char *name = script_getstr(st, 3);
 
 				if (!(val1 = skill_name2id(name))) {
-					ShowError("buildin_bonus: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_bonus: 아이템 보너스에 잘못된 스킬이름 %s이(가) 있습니다. 통과됨.\n", name);
+					else	
+						ShowError("buildin_bonus: Invalid skill name %s passed to item bonus. Skipping.\n", name);
 					return SCRIPT_CMD_FAILURE;
 				}
 			} else {
 				val1 = script_getnum(st, 3);
 
 				if (strcmpi(script_getfuncname(st), "bonus") && !skill_get_index(val1)) { // Only check skill ID for bonus2, bonus3, bonus4, or bonus5
-					ShowError("buildin_bonus: Invalid skill ID %d passed to item bonus. Skipping.\n", val1);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_bonus: 아이템 보너스에 잘못된 스킬번호 %d이(가) 있습니다. 통과됨.\n", val1);
+					else	
+						ShowError("buildin_bonus: Invalid skill ID %d passed to item bonus. Skipping.\n", val1);
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -9995,7 +10818,10 @@ BUILDIN_FUNC(bonus)
 			pc_bonus5(sd, type, val1, val2, val3, val4, val5);
 			break;
 		default:
-			ShowDebug("buildin_bonus: unexpected number of arguments (%d)\n", (script_lastdata(st) - 1));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("buildin_bonus: 예상치 못한 인수(%d)의 갯수입니다.\n", (script_lastdata(st) - 1));
+			else	
+				ShowDebug("buildin_bonus: unexpected number of arguments (%d)\n", (script_lastdata(st) - 1));
 			break;
 	}
 
@@ -10098,14 +10924,20 @@ BUILDIN_FUNC(autobonus3)
 		const char *name = script_getstr(st, 5);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_autobonus3: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_autobonus3: 아이템 보너스에 잘못된 스킬이름 %s이(가) 있습니다. 통과됨.\n", name);
+			else
+				ShowError("buildin_autobonus3: Invalid skill name %s passed to item bonus. Skipping.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 5);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_autobonus3: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_autobonus3: 아이템 보너스에 잘못된 스킬번호 %d이(가) 있습니다. 통과됨.\n", skill_id);
+			else
+				ShowError("buildin_autobonus3: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -10135,7 +10967,10 @@ BUILDIN_FUNC(petautobonus) {
 	const char *command = script_getfuncname(st);
 
 	if (sd->pd == nullptr) {
-		ShowError("buildin_%s: Requires an active pet.\n", command);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 펫 부화는 필수입니다.\n", command);
+		else
+			ShowError("buildin_%s: Requires an active pet.\n", command);
 		return SCRIPT_CMD_FAILURE; // No pet attached to player
 	}
 
@@ -10174,7 +11009,10 @@ BUILDIN_FUNC(petautobonus3) {
 		return SCRIPT_CMD_SUCCESS; // No player attached
 
 	if (sd->pd == nullptr) {
-		ShowError("buildin_petautobonus3: Requires an active pet.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_petautobonus3: 펫 부화는 필수입니다.\n");
+		else
+			ShowError("buildin_petautobonus3: Requires an active pet.\n");
 		return SCRIPT_CMD_FAILURE; // No pet attached to player
 	}
 
@@ -10192,14 +11030,20 @@ BUILDIN_FUNC(petautobonus3) {
 		const char *name = script_getstr(st, 5);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_petautobonus3: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_petautobonus3: 잘못된 스킬 이름 %s이(가) 아이템 보너스로 지정되었습니다. 건너뜀.\n", name);
+			else
+				ShowError("buildin_petautobonus3: Invalid skill name %s passed to item bonus. Skipping.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 5);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_petautobonus3: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_petautobonus3: 잘못된 스킬 ID %d이(가) 아이템 보너스로 지정되었습니다. 건너뜀.\n", skill_id);
+			else
+				ShowError("buildin_petautobonus3: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -10674,7 +11518,10 @@ BUILDIN_FUNC(setmadogear)
 		type = script_getnum(st, 3);
 
 		if (type == MADO_UNUSED || type >= MADO_MAX) {
-			ShowError("buildin_setmadogear: Invalid mado gear type %hu, defaulting to robot...\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_setmadogear: %hu은(는) 잘못된 마도기어 타입입니다. 로봇으로 설정됨...\n", type);
+			else
+				ShowError("buildin_setmadogear: Invalid mado gear type %hu, defaulting to robot...\n", type);
 			type = MADO_ROBOT;
 		}
 	}
@@ -10724,7 +11571,10 @@ BUILDIN_FUNC(savepoint)
 
 	// Check for valid coordinates if map in local map-server
 	if (m != -1 && !map_getcell(m, x, y, CELL_CHKPASS)) {
-		ShowError("buildin_savepoint: Invalid coordinates %d,%d at map %s.\n", x, y, str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_savepoint: %s 맵에 잘못된 좌표 %d, %d이(가) 있습니다.\n", str, x, y);
+		else
+			ShowError("buildin_savepoint: Invalid coordinates %d,%d at map %s.\n", x, y, str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -10789,7 +11639,10 @@ BUILDIN_FUNC(gettime)
 	type = script_getnum(st,2);
 
 	if( type <= DT_MIN || type >= DT_MAX ){
-		ShowError( "buildin_gettime: Invalid date type %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_gettime: %d은(는) 잘못된 날짜 타입입니다.\n", type );
+		else
+			ShowError( "buildin_gettime: Invalid date type %d\n", type );
 		script_reportsrc(st);
 		script_pushint(st,-1);
 	}else{
@@ -10815,7 +11668,10 @@ BUILDIN_FUNC(gettimestr)
 
 	if (script_hasdata(st, 4)) {
 		if (script_getnum(st, 4) < 0) {
-			ShowWarning("buildin_gettimestr: a positive value must be supplied to be valid.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_gettimestr: 유효하려면 양수 값을 제공해야합니다.\n");
+			else		
+				ShowWarning("buildin_gettimestr: a positive value must be supplied to be valid.\n");
 			return SCRIPT_CMD_FAILURE;
 		} else
 			now = (time_t)script_getnum(st, 4);
@@ -10859,7 +11715,10 @@ BUILDIN_FUNC(guildopenstorage)
 
 BUILDIN_FUNC(guildopenstorage_log){
 #if PACKETVER < 20140205
-	ShowError( "buildin_guildopenstorage_log: This command requires PACKETVER 2014-02-05 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_guildopenstorage_log: 이 명령어를 사용하려면 PACKETVER 2014-02-05 이상이 필요합니다.\n" );
+	else		
+		ShowError( "buildin_guildopenstorage_log: This command requires PACKETVER 2014-02-05 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -10884,12 +11743,18 @@ BUILDIN_FUNC(guild_has_permission){
 	int permission = script_getnum(st,2);
 
 	if( permission == 0 ){
-		ShowError( "buildin_guild_has_permission: No permission given.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_guild_has_permission: 권한이 없습니다.\n" );
+		else
+			ShowError( "buildin_guild_has_permission: No permission given.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( ( permission & GUILD_PERM_ALL ) == 0 ){
-		ShowError( "buildin_guild_has_permission: Invalid permission '%d'.\n", permission );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_guild_has_permission: '%d'은(는) 잘못된 권한입니다.\n", permission );
+		else
+			ShowError( "buildin_guild_has_permission: Invalid permission '%d'.\n", permission );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -10931,14 +11796,20 @@ BUILDIN_FUNC(itemskill)
 		const char *name = script_getstr(st, 2);
 
 		if (!(id = skill_name2id(name))) {
-			ShowError("buildin_itemskill: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_itemskill: 아이템 보너스에 잘못된 스킬이름 %s이(가) 있습니다. 통과됨.\n", name);
+			else
+				ShowError("buildin_itemskill: Invalid skill name %s passed to item bonus. Skipping.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		id = script_getnum(st, 2);
 
 		if (!skill_get_index(id)) {
-			ShowError("buildin_itemskill: Invalid skill ID %d passed to item bonus. Skipping.\n", id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_itemskill: 아이템 보너스에 잘못된 스킬번호 %d이(가) 있습니다. 통과됨.\n", id);
+			else
+				ShowError("buildin_itemskill: Invalid skill ID %d passed to item bonus. Skipping.\n", id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11001,7 +11872,10 @@ BUILDIN_FUNC(makepet)
 	std::shared_ptr<s_pet_db> pet = pet_db.find(mob_id);
 
 	if( !pet ){
-		ShowError( "buildin_makepet: failed to create a pet with mob id %hu\n", mob_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_makepet: 몬스터ID번호가 %hu 인 큐펫을 만들지 못했습니다.\n", mob_id);
+		else
+			ShowError( "buildin_makepet: failed to create a pet with mob id %hu\n", mob_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11028,19 +11902,28 @@ BUILDIN_FUNC(getexp){
 	int64 base = script_getnum64( st, 2 );
 
 	if( base < 0 ){
-		ShowError( "buildin_getexp: Called with negative base exp.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getexp: 음수의 베이스 경험치가 호출되었습니다.\n" );
+		else
+			ShowError( "buildin_getexp: Called with negative base exp.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 	
 	int64 job = script_getnum64( st, 3 );
 
 	if( job < 0 ){
-		ShowError( "buildin_getexp: Called with negative job exp.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getexp: 음수의 직업 경험치가 호출되었습니다.\n" );
+		else
+			ShowError( "buildin_getexp: Called with negative job exp.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( base == 0 && job == 0 ){
-		ShowError( "buildin_getexp: Called with base and job exp 0.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getexp: 0의 베이스 경험치 및 직업 경험치가 호출되었습니다.\n" );
+		else
+			ShowError( "buildin_getexp: Called with base and job exp 0.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11074,12 +11957,18 @@ BUILDIN_FUNC(guildgetexp){
 	int64 exp = script_getnum64( st, 2 );
 
 	if( exp <= 0 ){
-		ShowError( "buildin_guildgetexp: Called with exp <= 0.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_guildgetexp: 경험치 <= 0으로 호출되었습니다.\n" );
+		else
+			ShowError( "buildin_guildgetexp: Called with exp <= 0.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( sd->status.guild_id <= 0 ){
-		ShowError( "buildin_guildgetexp: Called for player %s (AID: %u, CID: %u) without a guild.\n", sd->status.name, sd->status.account_id, sd->status.char_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_guildgetexp: 호출된 플레이어 %s (AID: %u, CID: %u)은(는) 길드에 소속되어있지 않습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id );
+		else
+			ShowError( "buildin_guildgetexp: Called for player %s (AID: %u, CID: %u) without a guild.\n", sd->status.name, sd->status.account_id, sd->status.char_id );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11136,7 +12025,10 @@ BUILDIN_FUNC(monster)
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( name );
 
 		if( mob == nullptr ){
-			ShowWarning( "buildin_monster: Attempted to spawn non-existing monster \"%s\"\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_monster: 존재하지 않는 몬스터 \"%s\"을(를) 생성하려고 시도했습니다.\n", name);
+			else
+				ShowWarning( "buildin_monster: Attempted to spawn non-existing monster \"%s\"\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -11145,7 +12037,10 @@ BUILDIN_FUNC(monster)
 		class_ = script_getnum( st, 6 );
 
 		if( class_ >= 0 && !mobdb_checkid( class_ ) ){
-			ShowWarning( "buildin_monster: Attempted to spawn non-existing monster class %d\n", class_ );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_monster: 존재하지 않는 몬스터 클래스 %d을(를) 생성하려고 시도했습니다.\n", class_);
+			else
+				ShowWarning( "buildin_monster: Attempted to spawn non-existing monster class %d\n", class_ );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11158,7 +12053,10 @@ BUILDIN_FUNC(monster)
 	if (script_hasdata(st, 9)) {
 		size = script_getnum(st, 9);
 		if (size > SZ_BIG) {
-			ShowWarning("buildin_monster: Attempted to spawn non-existing size %d for monster class %d\n", size, class_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_monster: 존재하지 않는 크기 %d인 몬스터 클래스 %d을(를) 생성하려고 시도했습니다.\n", size, class_);
+			else
+				ShowWarning("buildin_monster: Attempted to spawn non-existing size %d for monster class %d\n", size, class_);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11166,7 +12064,10 @@ BUILDIN_FUNC(monster)
 	if (script_hasdata(st, 10)) {
 		ai = static_cast<enum mob_ai>(script_getnum(st, 10));
 		if (ai >= AI_MAX) {
-			ShowWarning("buildin_monster: Attempted to spawn non-existing ai %d for monster class %d\n", ai, class_);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_monster: 존재하지 않는 AI %d인 몬스터 클래스 %d을(를) 생성하려고 시도했습니다\n", ai, class_);
+			else
+				ShowWarning("buildin_monster: Attempted to spawn non-existing ai %d for monster class %d\n", ai, class_);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11260,7 +12161,10 @@ BUILDIN_FUNC(areamonster)
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( name );
 
 		if( mob == nullptr ){
-			ShowWarning( "buildin_areamonster: Attempted to spawn non-existing monster \"%s\"\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_areamonster: 존재하지 않는 몬스터 \"%s\"을(를) 생성하려고 했습니다.\n", name );
+			else
+				ShowWarning( "buildin_areamonster: Attempted to spawn non-existing monster \"%s\"\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -11269,7 +12173,10 @@ BUILDIN_FUNC(areamonster)
 		class_ = script_getnum( st, 8 );
 
 		if( class_ >= 0 && !mobdb_checkid( class_ ) ){
-			ShowWarning( "buildin_areamonster: Attempted to spawn non-existing monster class %d\n", class_ );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_areamonster: 존재하지 않는 몬스터 클래스 %d을(를) 생성하려고 했습니다.\n", class_ );
+			else
+				ShowWarning( "buildin_areamonster: Attempted to spawn non-existing monster class %d\n", class_ );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11282,7 +12189,10 @@ BUILDIN_FUNC(areamonster)
 	if (script_hasdata(st, 11)) {
 		size = script_getnum(st, 11);
 		if (size > 3) {
-			ShowWarning( "buildin_areamonster: Attempted to spawn non-existing size %d for monster class %d\n", size, class_ );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_areamonster: 몬스터 클래스 %d에 대한 존재하지 않는 크기 %d을(를) 생성하려고 시도했습니다.\n", class_, size);
+			else
+				ShowWarning( "buildin_areamonster: Attempted to spawn non-existing size %d for monster class %d\n", size, class_ );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11290,7 +12200,10 @@ BUILDIN_FUNC(areamonster)
 	if (script_hasdata(st, 12)) {
 		ai = static_cast<enum mob_ai>(script_getnum(st, 12));
 		if (ai >= AI_MAX) {
-			ShowWarning( "buildin_areamonster: Attempted to spawn non-existing ai %d for monster class %d\n", ai, class_ );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_monster: 몬스터 클래스 %d에 대한 존재하지 않는 AI %d을(를) 생성하려고 시도했습니다.\n", class_, ai);
+			else
+				ShowWarning( "buildin_areamonster: Attempted to spawn non-existing ai %d for monster class %d\n", ai, class_ );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -11500,7 +12413,10 @@ BUILDIN_FUNC(donpcevent)
 	check_event(st, event);
 	if( !npc_event_do(event) ) {
 		struct npc_data * nd = map_id2nd(st->oid);
-		ShowDebug("NPCEvent '%s' not found! (source: %s)\n",event,nd?nd->name:"Unknown");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("NPC이벤트 '%s'을(를) 찾을 수 없습니다. (소스: %s)\n",event,nd?nd->name:"알수없음");
+		else
+			ShowDebug("NPCEvent '%s' not found! (source: %s)\n",event,nd?nd->name:"Unknown");
 		script_pushint(st, 0);
 	} else
 		script_pushint(st, 1);
@@ -11522,7 +12438,10 @@ BUILDIN_FUNC(cmdothernpc)	// Added by RoVeRT
 		script_pushint(st, true);
 	}else{
 		struct npc_data * nd = map_id2nd(st->oid);
-		ShowDebug("NPCEvent '%s' not found! (source: %s)\n", event, nd ? nd->name : "Unknown");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("NPC 이벤트 '%s'을(를) 찾을 수 없습니다. (소스: %s)\n", event, nd ? nd->name : "알수없음");
+		else
+			ShowDebug("NPCEvent '%s' not found! (source: %s)\n", event, nd ? nd->name : "Unknown");
 		script_pushint(st, false);
 	}
 
@@ -11546,7 +12465,10 @@ BUILDIN_FUNC(addtimer)
 	check_event(st, event);
 
 	if (!pc_addeventtimer(sd,tick,event)) {
-		ShowWarning("buildin_addtimer: Event timer is full, can't add new event timer. (cid:%d timer:%s)\n",sd->status.char_id,event);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_addtimer: 이벤트 타이머가 꽉 차서 새 이벤트 타이머를 추가 할 수 없습니다. (케릭터ID:%d 타이머:%s)\n",sd->status.char_id,event);
+		else
+			ShowWarning("buildin_addtimer: Event timer is full, can't add new event timer. (cid:%d timer:%s)\n",sd->status.char_id,event);
 		return SCRIPT_CMD_FAILURE;
 	}
 	return SCRIPT_CMD_SUCCESS;
@@ -11717,7 +12639,10 @@ BUILDIN_FUNC(getnpctimer)
 	if( !nd || nd->bl.type != BL_NPC )
 	{
 		script_pushint(st,0);
-		ShowError("getnpctimer: Invalid NPC.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("getnpctimer: 잘못된 NPC입니다.\n");
+		else
+			ShowError("getnpctimer: Invalid NPC.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11730,7 +12655,10 @@ BUILDIN_FUNC(getnpctimer)
 			sd = map_id2sd(nd->u.scr.rid);
 			if( !sd )
 			{
-				ShowError("buildin_getnpctimer: Attached player not found!\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_getnpctimer: 연결된(Attached) 플레이어를 찾을 수 없습니다.\n");
+				else	
+					ShowError("buildin_getnpctimer: Attached player not found!\n");
 				break;
 			}
 			val = (sd->npc_timer_id != INVALID_TIMER);
@@ -11761,7 +12689,10 @@ BUILDIN_FUNC(setnpctimer)
 	if( !nd || nd->bl.type != BL_NPC )
 	{
 		script_pushint(st,1);
-		ShowError("setnpctimer: Invalid NPC.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("setnpctimer: 잘못된 NPC입니다.\n");
+		else
+			ShowError("setnpctimer: Invalid NPC.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11781,13 +12712,19 @@ BUILDIN_FUNC(attachnpctimer)
 	if( !nd || nd->bl.type != BL_NPC )
 	{
 		script_pushint(st,1);
-		ShowError("setnpctimer: Invalid NPC.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("setnpctimer: 잘못된 NPC입니다.\n");
+		else
+			ShowError("setnpctimer: Invalid NPC.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( !script_nick2sd(2,sd) ){
 		script_pushint(st,1);
-		ShowWarning("attachnpctimer: Invalid player.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("attachnpctimer: 잘못된 플레이어입니다.\n");
+		else
+			ShowWarning("attachnpctimer: Invalid player.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11811,7 +12748,10 @@ BUILDIN_FUNC(detachnpctimer)
 	if( !nd || nd->bl.type != BL_NPC )
 	{
 		script_pushint(st,1);
-		ShowError("detachnpctimer: Invalid NPC.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("detachnpctimer: 잘못된 NPC입니다.\n");
+		else
+			ShowError("detachnpctimer: Invalid NPC.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -11984,7 +12924,10 @@ BUILDIN_FUNC(getusers)
 			val = map_getusers();
 			break;
 		default:
-			ShowWarning("buildin_getusers: Unknown type %d.\n", flag);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_getusers: 알수 없는 타입 %d.\n", flag);
+			else
+				ShowWarning("buildin_getusers: Unknown type %d.\n", flag);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -12090,7 +13033,10 @@ BUILDIN_FUNC(getunits)
 		if ((m = map_mapname2mapid(str)) < 0) {
 			script_pushint(st, -1);
 			st->state = END;
-			ShowWarning("buildin_%s: Unknown map '%s'.\n", command, str);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_%s: '%s'은(는) 알수 없는 맵입니다.\n", command, str);
+			else
+				ShowWarning("buildin_%s: Unknown map '%s'.\n", command, str);
 			return SCRIPT_CMD_FAILURE;
 		}
 		if (script_hasdata(st, 4))
@@ -12102,7 +13048,10 @@ BUILDIN_FUNC(getunits)
 		if ((m = map_mapname2mapid(str)) < 0) {
 			script_pushint(st, -1);
 			st->state = END;
-			ShowWarning("buildin_%s: Unknown map '%s'.\n", command, str);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_%s: '%s'은(는) 알수 없는 맵입니다.\n", command, str);
+			else
+				ShowWarning("buildin_%s: Unknown map '%s'.\n", command, str);
 			return SCRIPT_CMD_FAILURE;
 		}
 		x0 = min(script_getnum(st, 4), script_getnum(st, 6));
@@ -12123,7 +13072,10 @@ BUILDIN_FUNC(getunits)
 	{
 		if (!data_isreference(data))
 		{
-			ShowError("buildin_%s: not a variable\n", command);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 변수가 아닙니다.\n", command);
+			else
+				ShowError("buildin_%s: not a variable\n", command);
 			script_reportdata(data);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
@@ -12133,7 +13085,10 @@ BUILDIN_FUNC(getunits)
 		name = reference_getname(data);
 
 		if (not_server_variable(*name) && !script_rid2sd(sd)) {
-			ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", command, name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 플레이어가 연결(attached)되어 있지 않으면 플레이어 변수 '%s'을(를) 사용할 수 없습니다.\n", command, name);
+			else
+				ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", command, name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -12194,14 +13149,20 @@ BUILDIN_FUNC(getareadropitem)
 		if( item_data )
 			nameid=item_data->nameid;
 		else{
-			ShowError( "buildin_getareadropitem: Unknown item %s\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_getareadropitem: %s은(는) 알수 없는 아이템입니다.\n", name );
+			else
+				ShowError( "buildin_getareadropitem: Unknown item %s\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else{
 		nameid = script_getnum(st, 7);
 
 		if( !item_db.exists( nameid ) ){
-			ShowError( "buildin_getareadropitem: Unknown item id %u\n", nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_getareadropitem: %d은(는) 알수 없는 아이템 번호입니다.\n", nameid );
+			else
+				ShowError( "buildin_getareadropitem: Unknown item id %u\n", nameid );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -12242,15 +13203,25 @@ BUILDIN_FUNC(enablenpc)
 	else if (!strcmp(command,"cloakonnpc") || !strcmp(command,"cloakonnpcself"))
 		flag = NPCVIEW_CLOAKON;
 	else{
-		ShowError( "buildin_enablenpc: Undefined command \"%s\".\n", command );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_enablenpc: \"%s\"은(는) 정의되지 않은 명령어입니다.\n", command );
+		else
+			ShowError( "buildin_enablenpc: Undefined command \"%s\".\n", command );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (!nd) {
-		if (script_hasdata(st, 2))
-			ShowError("buildin_%s: Attempted to %s a non-existing NPC '%s' (flag=%d).\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", command, script_getstr(st,2), flag);
-		else
-			ShowError("buildin_%s: Attempted to %s a non-existing NPC (flag=%d).\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", command, flag);
+		if (script_hasdata(st, 2)) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 존재하지 않는 NPC '%s'을(를) %s려 했습니다. (flag=%d).\n", command, script_getstr(st,2), (flag & NPCVIEW_VISIBLE) ? "보이게 하" : "숨기", flag);
+			else
+				ShowError("buildin_%s: Attempted to %s a non-existing NPC '%s' (flag=%d).\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", command, script_getstr(st,2), flag);
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_%s: 존재하지 않는 NPC를 %s려 했습니다. (flag=%d).\n", (flag & NPCVIEW_VISIBLE) ? "보이게 하" : "숨기", command, flag);
+			else
+				ShowError("buildin_%s: Attempted to %s a non-existing NPC (flag=%d).\n", (flag & NPCVIEW_VISIBLE) ? "show" : "hide", command, flag);
+		}
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -12285,7 +13256,8 @@ BUILDIN_FUNC(sc_start)
 	TBL_NPC * nd = map_id2nd(st->oid);
 	struct block_list* bl;
 	enum sc_type type;
-	int tick, val1, val2, val3, val4=0, rate, flag;
+	int val1, val2, val3, val4=0, rate, flag;
+	int64 tick;
 	char start_type;
 	const char* command = script_getfuncname(st);
 
@@ -12297,7 +13269,7 @@ BUILDIN_FUNC(sc_start)
 		start_type = 1;
 
 	type = (sc_type)script_getnum(st,2);
-	tick = script_getnum(st,3);
+	tick = script_getnum64(st,3);
 	val1 = script_getnum(st,4);
 
 	//If from NPC we make default flag 1 to be unavoidable
@@ -12381,12 +13353,18 @@ BUILDIN_FUNC(sc_end)
 		std::shared_ptr<s_status_change_db> sc_db = status_db.find( type );
 
 		if( sc_db == nullptr ){
-			ShowError( "buildin_sc_end: Unknown status change %d.\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_sc_end: %d은(는) 알 수 없는 상태 변경입니다.\n", type );
+			else
+				ShowError( "buildin_sc_end: Unknown status change %d.\n", type );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		if( sc_db->flag[SCF_NOCLEARBUFF] && sc_db->flag[SCF_NOFORCEDEND] ){
-			ShowError( "buildin_sc_end: Status %d cannot be cleared.\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_sc_end: 상태 %d를 삭제할 수 없습니다.\n", type );
+			else
+				ShowError( "buildin_sc_end: Status %d cannot be cleared.\n", type );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -12418,7 +13396,10 @@ BUILDIN_FUNC(sc_end_class)
 		class_ = sd->status.class_;
 
 	if (!pcdb_checkid(class_)) {
-		ShowError("buildin_sc_end_class: Invalid job ID '%d' given.\n", script_getnum(st, 3));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_sc_end_class: 잘못된 직업ID '%d'이(가) 주어졌습니다.\n", script_getnum(st, 3));
+		else
+			ShowError("buildin_sc_end_class: Invalid job ID '%d' given.\n", script_getnum(st, 3));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -12466,7 +13447,10 @@ BUILDIN_FUNC(getstatus)
 
 	if( id <= SC_NONE || id >= SC_MAX )
 	{// invalid status type given
-		ShowWarning("script.cpp:getstatus: Invalid status type given (%d).\n", id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script.c:getstatus: 주어진 상태 유형이 잘못되었습니다 (%d).\n", id);
+		else
+			ShowWarning("script.cpp:getstatus: Invalid status type given (%d).\n", id);
 		return SCRIPT_CMD_SUCCESS;
 	}
 
@@ -13409,7 +14393,10 @@ BUILDIN_FUNC(setmapflagnosave)
 	mapindex = mapindex_name2id(str2);
 
 	if(m < 0) {
-		ShowWarning("buildin_setmapflagnosave: Invalid map name %s.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setmapflagnosave: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_setmapflagnosave: Invalid map name %s.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -13431,14 +14418,20 @@ BUILDIN_FUNC(getmapflag)
 
 	m = map_mapname2mapid(str);
 	if (m < 0) {
-		ShowWarning("buildin_getmapflag: Invalid map name %s.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getmapflag: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_getmapflag: Invalid map name %s.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	mf = script_getnum(st, 3);
 
 	if( mf < MF_MIN || mf > MF_MAX ){
-		ShowError( "buildin_getmapflag: Unsupported mapflag '%d'.\n", mf );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getmapflag: %d은(는) 지원되지 않는 맵 플레그입니다..\n", mf);
+		else
+			ShowError( "buildin_getmapflag: Unsupported mapflag '%d'.\n", mf );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -13464,14 +14457,20 @@ BUILDIN_FUNC(setmapflag)
 
 	m = map_mapname2mapid(str);
 	if (m < 0) {
-		ShowWarning("buildin_setmapflag: Invalid map name %s.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setmapflag: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_setmapflag: Invalid map name %s.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	mf = script_getnum(st, 3);
 
 	if( mf < MF_MIN || mf > MF_MAX ){
-		ShowError( "buildin_setmapflag: Unsupported mapflag '%d'.\n", mf );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setmapflag: %d은(는) 지원되지 않는 맵 플레그입니다..\n", mf);
+		else
+			ShowError( "buildin_setmapflag: Unsupported mapflag '%d'.\n", mf );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -13482,7 +14481,10 @@ BUILDIN_FUNC(setmapflag)
 			if (script_hasdata(st, 4) && script_hasdata(st, 5))
 				args.skill_damage.rate[script_getnum(st, 5)] = script_getnum(st, 4);
 			else {
-				ShowWarning("buildin_setmapflag: Unable to set skill_damage mapflag as flag data is missing.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_setmapflag: 플래그 데이터가 없어 skill_damage 맵 플래그를 설정할 수 없습니다.\n");
+				else
+					ShowWarning("buildin_setmapflag: Unable to set skill_damage mapflag as flag data is missing.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			break;
@@ -13491,12 +14493,18 @@ BUILDIN_FUNC(setmapflag)
 				args.skill_duration.skill_id = script_getnum(st, 4);
 
 				if (!skill_get_index(args.skill_duration.skill_id)) {
-					ShowError("buildin_setmapflag: Invalid skill ID %d for skill_duration mapflag.\n", args.skill_duration.skill_id);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_setmapflag: %d은(는) skill_duration 맵 플래그에 대한 잘못된 스킬 ID입니다.\n", args.skill_duration.skill_id);
+					else
+						ShowError("buildin_setmapflag: Invalid skill ID %d for skill_duration mapflag.\n", args.skill_duration.skill_id);
 					return SCRIPT_CMD_FAILURE;
 				}
 				args.skill_duration.per = script_getnum(st, 5);
 			} else {
-				ShowWarning("buildin_setmapflag: Unable to set skill_duration mapflag as flag data is missing.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_setmapflag: 플래그 데이터에 없는 skill_duration 맵 플래그는 설정할 수 없습니다.\n");
+				else
+					ShowWarning("buildin_setmapflag: Unable to set skill_duration mapflag as flag data is missing.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			break;
@@ -13531,14 +14539,20 @@ BUILDIN_FUNC(removemapflag)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_removemapflag: Invalid map name %s.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_removemapflag: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_removemapflag: Invalid map name %s.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	mf = script_getnum(st, 3);
 
 	if( mf < MF_MIN || mf > MF_MAX ){
-		ShowError( "buildin_removemapflag: Unsupported mapflag '%d'.\n", mf );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_removemapflag: '%d'은(는) 지원되지 않는 맵 플래그입니다.\n", mf );
+		else
+			ShowError( "buildin_removemapflag: Unsupported mapflag '%d'.\n", mf );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -13557,7 +14571,10 @@ BUILDIN_FUNC(pvpon)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_pvpon: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_pvpon: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_pvpon: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!map_getmapflag(m, MF_PVP))
@@ -13574,7 +14591,10 @@ BUILDIN_FUNC(pvpoff)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_pvpoff: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_pvpoff: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_pvpoff: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (map_getmapflag(m, MF_PVP))
@@ -13591,7 +14611,10 @@ BUILDIN_FUNC(gvgon)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_gvgon: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_gvgon: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_gvgon: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!map_getmapflag(m, MF_GVG))
@@ -13608,7 +14631,10 @@ BUILDIN_FUNC(gvgoff)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_gvgoff: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_gvgoff: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_gvgoff: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (map_getmapflag(m, MF_GVG))
@@ -13625,7 +14651,10 @@ BUILDIN_FUNC(gvgon3)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_gvgon3: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_gvgon3: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_gvgon3: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!map_getmapflag(m, MF_GVG_TE))
@@ -13642,7 +14671,10 @@ BUILDIN_FUNC(gvgoff3)
 	m = map_mapname2mapid(str);
 
 	if (m < 0) {
-		ShowWarning("buildin_gvgoff3: Unknown map '%s'.\n", str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_gvgoff3: %s은(는) 잘못된 맵 이름입니다.\n", str);
+		else
+			ShowWarning("buildin_gvgoff3: Unknown map '%s'.\n", str);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (map_getmapflag(m, MF_GVG_TE))
@@ -13661,12 +14693,18 @@ BUILDIN_FUNC(emotion)
 	int type = script_getnum(st,2);
 
 	if (type < ET_SURPRISE || type >= ET_MAX) {
-		ShowWarning("buildin_emotion: Unknown emotion %d (min=%d, max=%d).\n", type, ET_SURPRISE, (ET_MAX-1));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_emotion: %d은(는) 알수 없는 이모션입니다. (최소=%d, 최대=%d).\n", type, ET_SURPRISE, (ET_MAX-1));
+		else
+			ShowWarning("buildin_emotion: Unknown emotion %d (min=%d, max=%d).\n", type, ET_SURPRISE, (ET_MAX-1));
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (script_hasdata(st, 3) && !script_rid2bl(3, bl)) {
-		ShowWarning("buildin_emotion: Unknown game ID supplied %d.\n", script_getnum(st, 3));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_emotion: 알수 없는 게임ID %d이(가) 지정되었습니다.\n", script_getnum(st, 3));
+		else
+			ShowWarning("buildin_emotion: Unknown game ID supplied %d.\n", script_getnum(st, 3));
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!bl)
@@ -13841,9 +14879,15 @@ BUILDIN_FUNC(flagemblem)
 
 	nd = (TBL_NPC*)map_id2nd(st->oid);
 	if( nd == nullptr ) {
-		ShowError("script:flagemblem: npc %d not found\n", st->oid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:flagemblem: %d인 NPC를 찾을 수 없습니다.\n", st->oid);
+		else
+			ShowError("script:flagemblem: npc %d not found\n", st->oid);
 	} else if( nd->subtype != NPCTYPE_SCRIPT ) {
-		ShowError("script:flagemblem: unexpected subtype %d for npc %d '%s'\n", nd->subtype, st->oid, nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:flagemblem: NPC %d '%s'에 대한 예기치 못한 하위타입 %d입니다.\n", st->oid, nd->exname, nd->subtype);
+		else
+			ShowError("script:flagemblem: unexpected subtype %d for npc %d '%s'\n", nd->subtype, st->oid, nd->exname);
 	} else {
 		bool changed = ( nd->u.scr.guild_id != g_id )?true:false;
 		nd->u.scr.guild_id = g_id;
@@ -13874,7 +14918,10 @@ BUILDIN_FUNC(getcastledata)
 
 	if (gc == nullptr) {
 		script_pushint(st,0);
-		ShowWarning("buildin_getcastledata: guild castle for map '%s' not found\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getcastledata: 맵 '%s'의 길드 성을 찾을 수 없습니다\n", mapname);
+		else
+			ShowWarning("buildin_getcastledata: guild castle for map '%s' not found\n", mapname);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -13903,7 +14950,10 @@ BUILDIN_FUNC(getcastledata)
 				break;
 			}
 			script_pushint(st,0);
-			ShowWarning("buildin_getcastledata: index = '%d' is out of allowed range\n", index);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_getcastledata: index = '%d'은(는) 허용범위를 벗어났습니다.\n", index);
+			else
+				ShowWarning("buildin_getcastledata: index = '%d' is out of allowed range\n", index);
 			return SCRIPT_CMD_FAILURE;
 	}
 	return SCRIPT_CMD_SUCCESS;
@@ -13917,12 +14967,18 @@ BUILDIN_FUNC(setcastledata)
 	std::shared_ptr<guild_castle> gc = castle_db.mapname2gc(mapname);
 
 	if (gc == nullptr) {
-		ShowWarning("buildin_setcastledata: guild castle for map '%s' not found\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setcastledata: 맵 '%s'의 길드 성을 찾을 수 없습니다.\n", mapname);
+		else
+			ShowWarning("buildin_setcastledata: guild castle for map '%s' not found\n", mapname);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (index <= CD_NONE || index >= CD_MAX) {
-		ShowWarning("buildin_setcastledata: index = '%d' is out of allowed range\n", index);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setcastledata: index = '%d'은(는) 허용된 범위를 벗어났습니다.\n", index);
+		else
+			ShowWarning("buildin_setcastledata: index = '%d' is out of allowed range\n", index);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -14496,7 +15552,10 @@ BUILDIN_FUNC(delwall)
 	const char *name = script_getstr(st,2);
 
 	if( !map_iwall_remove(name) ){
-		ShowError( "buildin_delwall: wall \"%s\" does not exist.\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_delwall: wall \"%s\"이(가) 존재하지 않습니다.\n", name);
+		else
+			ShowError( "buildin_delwall: wall \"%s\" does not exist.\n", name );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -14711,7 +15770,10 @@ BUILDIN_FUNC(setiteminfo)
 		case ITEMINFO_WEAPONLEVEL:
 			if( i_data->type == IT_WEAPON ){
 				if( value > MAX_WEAPON_LEVEL ){
-					ShowError( "buildin_setiteminfo: weapon level %d is above maximum %d.\n", value, MAX_WEAPON_LEVEL );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "buildin_setiteminfo: 무기 레벨 %d이(가) 최대 %d보다 높습니다.\n", value, MAX_WEAPON_LEVEL );
+					else
+						ShowError( "buildin_setiteminfo: weapon level %d is above maximum %d.\n", value, MAX_WEAPON_LEVEL );
 					script_pushint( st, -1 );
 					return SCRIPT_CMD_FAILURE;
 				}
@@ -14719,14 +15781,20 @@ BUILDIN_FUNC(setiteminfo)
 				i_data->weapon_level = static_cast<uint16>(value);
 				break;
 			}else{
-				ShowError( "buildin_setiteminfo: Can not set a weapon level for %d.\n", i_data->nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_setiteminfo: %d에 대한 무기 레벨을 설정할 수 없습니다.\n", i_data->nameid );
+				else
+					ShowError( "buildin_setiteminfo: Can not set a weapon level for %d.\n", i_data->nameid );
 				script_pushint( st, -1 );
 				return SCRIPT_CMD_FAILURE;
 			}
 		case ITEMINFO_ARMORLEVEL:
 			if( i_data->type == IT_ARMOR ){
 				if( value > MAX_ARMOR_LEVEL ){
-					ShowError( "buildin_setiteminfo: armor level %d is above maximum %d.\n", value, MAX_ARMOR_LEVEL );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "buildin_setiteminfo: 방어구 레벨 %d이(가) 최대 %d보다 높습니다.\n", value, MAX_ARMOR_LEVEL );
+					else
+						ShowError( "buildin_setiteminfo: armor level %d is above maximum %d.\n", value, MAX_ARMOR_LEVEL );
 					script_pushint( st, -1 );
 					return SCRIPT_CMD_FAILURE;
 				}
@@ -14734,7 +15802,10 @@ BUILDIN_FUNC(setiteminfo)
 				i_data->armor_level = static_cast<uint16>(value);
 				break;
 			}else{
-				ShowError( "buildin_setiteminfo: Can not set an armor level for %d.\n", i_data->nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_setiteminfo: %d에 대한 방어구 레벨을 설정하지 못했습니다.\n", i_data->nameid );
+				else
+					ShowError( "buildin_setiteminfo: Can not set an armor level for %d.\n", i_data->nameid );
 				script_pushint( st, -1 );
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -15044,7 +16115,10 @@ BUILDIN_FUNC(misceffect)
 	type=script_getnum(st,2);
 
 	if( type <= EF_NONE || type >= EF_MAX ){
-		ShowError( "buildin_misceffect: unsupported effect id %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_misceffect: %d은(는) 지원되지 않는 이펙트(효과) ID번호입니다.\n", type );
+		else		
+			ShowError( "buildin_misceffect: unsupported effect id %d\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15187,7 +16261,10 @@ BUILDIN_FUNC(soundeffectall)
 	}
 	else
 	{
-		ShowError("buildin_soundeffectall: insufficient arguments for specific area broadcast.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_soundeffectall: 특정 지역 방송에 대한 인수가 충분하지 않습니다.\n");
+		else
+			ShowError("buildin_soundeffectall: insufficient arguments for specific area broadcast.\n");
 	}
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -15240,7 +16317,10 @@ BUILDIN_FUNC(petskillattack)
 
 	id = (script_isstring(st, 2) ? skill_name2id(script_getstr(st,2)) : skill_get_index(script_getnum(st,2)));
 	if (!id) {
-		ShowError("buildin_petskillattack: Invalid skill defined!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_petskillattack: 잘못된 스킬 정의입니다.\n");
+		else
+			ShowError("buildin_petskillattack: Invalid skill defined!\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15273,7 +16353,10 @@ BUILDIN_FUNC(petskillattack2)
 
 	id = (script_isstring(st, 2) ? skill_name2id(script_getstr(st,2)) : skill_get_index(script_getnum(st,2)));
 	if (!id) {
-		ShowError("buildin_petskillattack2: Invalid skill defined!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_petskillattack2: 잘못된 스킬 정의입니다.\n");
+		else
+			ShowError("buildin_petskillattack2: Invalid skill defined!\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15306,7 +16389,10 @@ BUILDIN_FUNC(petskillsupport)
 
 	id = (script_isstring(st, 2) ? skill_name2id(script_getstr(st,2)) : skill_get_index(script_getnum(st,2)));
 	if (!id) {
-		ShowError("buildin_petskillsupport: Invalid skill defined!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_petskillsupport: 잘못된 스킬 정의입니다.\n");
+		else
+			ShowError("buildin_petskillsupport: Invalid skill defined!\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15370,7 +16456,10 @@ BUILDIN_FUNC(skilleffect)
 	skill_lv = script_getnum(st,3);
 
 	if (skill_db.find(skill_id) == nullptr) {
-		ShowError("buildin_skilleffect: Invalid skill defined (%s)!\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_skilleffect: %s은(는) 잘못된 스킬 정의입니다.\n", script_getstr(st, 2));
+		else
+			ShowError("buildin_skilleffect: Invalid skill defined (%s)!\n", script_getstr(st, 2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15396,7 +16485,10 @@ BUILDIN_FUNC(npcskilleffect)
 	struct block_list *bl= map_id2bl(st->oid);
 
 	if (bl == nullptr) {
-		ShowError("buildin_npcskilleffect: Invalid object attached to NPC.");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_npcskilleffect: 잘못된 객체에 NPC가 연결(attached)되었습니다.");
+		else
+			ShowError("buildin_npcskilleffect: Invalid object attached to NPC.");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15409,7 +16501,10 @@ BUILDIN_FUNC(npcskilleffect)
 	y=script_getnum(st,5);
 
 	if (skill_db.find(skill_id) == nullptr) {
-		ShowError("buildin_npcskilleffect: Invalid skill defined (%s)!\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_npcskilleffect: %s은(는) 잘못된 스킬 정의입니다.", script_getstr(st, 2));
+		else
+			ShowError("buildin_npcskilleffect: Invalid skill defined (%s)!\n", script_getstr(st, 2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15431,7 +16526,10 @@ BUILDIN_FUNC(specialeffect)
 		return SCRIPT_CMD_SUCCESS;
 
 	if( type <= EF_NONE || type >= EF_MAX ){
-		ShowError( "buildin_specialeffect: unsupported effect id %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_specialeffect: %d은(는) 지원되지 않는 이펙트(효과) ID번호입니다.\n", type );
+		else
+			ShowError( "buildin_specialeffect: unsupported effect id %d\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15442,7 +16540,10 @@ BUILDIN_FUNC(specialeffect)
 		if(nd)
 			bl = &nd->bl;
 		else{
-			ShowError( "buildin_specialeffect: Unknown NPC \"%s\"\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_specialeffect: \"%s\"은(는) 알 수 없는 NPC입니다.\n", name );
+			else
+				ShowError( "buildin_specialeffect: Unknown NPC \"%s\"\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -15468,7 +16569,10 @@ BUILDIN_FUNC(specialeffect2)
 		enum send_target target = script_hasdata(st,3) ? (send_target)script_getnum(st,3) : AREA;
 
 		if( type <= EF_NONE || type >= EF_MAX ){
-			ShowError( "buildin_specialeffect2: unsupported effect id %d\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_specialeffect2: %d은(는) 지원되지 않는 이펙트(효과) ID번호입니다.\n", type );
+			else	
+				ShowError( "buildin_specialeffect2: unsupported effect id %d\n", type );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -15482,7 +16586,10 @@ BUILDIN_FUNC(removespecialeffect)
 	const char* command = script_getfuncname(st);
 
 #if PACKETVER < 20181002
-	ShowError("buildin_%s: This command is not supported for PACKETVER older than 2018-10-02.\n", command);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_%s: 2018-10-02이하의 PACKETVER에는 이 명령어는 지원되지 않습니다.\n", command);
+	else
+		ShowError("buildin_%s: This command is not supported for PACKETVER older than 2018-10-02.\n", command);
 
 	return SCRIPT_CMD_FAILURE;
 #endif
@@ -15490,7 +16597,10 @@ BUILDIN_FUNC(removespecialeffect)
 	int effect = script_getnum(st, 2);
 
 	if (effect <= EF_NONE || effect >= EF_MAX) {
-		ShowError("buildin_%s: unsupported effect id %d.\n", command, effect);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: %d은(는) 지원되지 않는 이펙트(효과) id입니다.\n", command, effect);
+		else
+			ShowError("buildin_%s: unsupported effect id %d.\n", command, effect);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -15505,14 +16615,20 @@ BUILDIN_FUNC(removespecialeffect)
 			bl_src = map_id2bl(st->oid);
 
 			if (bl_src == nullptr) {
-				ShowError("buildin_%s: npc not attached.\n", command);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_%s: npc가 연결되지 않았습니다\n", command);
+				else
+					ShowError("buildin_%s: npc not attached.\n", command);
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
 		else {
 			struct npc_data *nd = npc_name2id(script_getstr(st, 4));
 			if (nd == nullptr) {
-				ShowError("buildin_%s: unknown npc %s.\n", command, script_getstr(st, 4));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_%s: %s은(는) 알 수 없는 NPC입니다..\n", command, script_getstr(st, 4));
+				else
+					ShowError("buildin_%s: unknown npc %s.\n", command, script_getstr(st, 4));
 				return SCRIPT_CMD_FAILURE;
 			}
 			bl_src = &nd->bl;
@@ -15592,7 +16708,10 @@ int atcommand_sub(struct script_state* st,int type) {
 	}
 
 	if (!is_atcommand(fd, sd, cmd, type)) {
-		ShowWarning("buildin_atcommand: failed to execute command '%s'\n", cmd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_atcommand: 명령어 '%s'을(를) 실행하지 못했습니다.\n", cmd);
+		else
+			ShowWarning("buildin_atcommand: failed to execute command '%s'\n", cmd);
 		script_reportsrc(st);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -15690,7 +16809,10 @@ BUILDIN_FUNC(recovery)
 			if(script_hasdata(st,5)) {//Bad maps shouldn't cause issues
 				map_idx = map_mapname2mapid(script_getstr(st,5));
 				if(map_idx < 1) { //But we'll check anyways
-					ShowDebug("recovery: bad map name given (%s)\n", script_getstr(st,5));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowDebug("recovery: 잘못된 맵 이름(%s)이 주어졌습니다.\n", script_getstr(st,5));
+					else		
+						ShowDebug("recovery: bad map name given (%s)\n", script_getstr(st,5));
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -15717,7 +16839,10 @@ BUILDIN_FUNC(recovery)
 			if(script_hasdata(st,5)) {//Bad maps shouldn't cause issues
 				map_idx = map_mapname2mapid(script_getstr(st,5));
 				if(map_idx < 1) { //But we'll check anyways
-					ShowDebug("recovery: bad map name given (%s)\n", script_getstr(st,5));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowDebug("recovery: 잘못된 맵이름 (%s)이 주어졌습니다.\n", script_getstr(st,5));
+					else	
+						ShowDebug("recovery: bad map name given (%s)\n", script_getstr(st,5));
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -15761,7 +16886,10 @@ BUILDIN_FUNC(recovery)
 			break;
 		}
 		default:
-			ShowWarning("script: buildin_recovery: Invalid type %d\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("script: buildin_recovery: 잘못된 타입 %d\n", type);
+			else
+				ShowWarning("script: buildin_recovery: Invalid type %d\n", type);
 			script_pushint(st,-1);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -15902,7 +17030,10 @@ BUILDIN_FUNC(getmercinfo)
 		case 7: script_pushint(st,md->db->lv); break;
 		case 8: script_pushint(st,md->bl.id); break;
 		default:
-			ShowError("buildin_getmercinfo: Invalid type %d (char_id=%d).\n", type, sd->status.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_getmercinfo: 잘못된 타입 %d (케릭터ID=%d).\n", type, sd->status.char_id);
+			else
+				ShowError("buildin_getmercinfo: Invalid type %d (char_id=%d).\n", type, sd->status.char_id);
 			script_pushnil(st);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -15946,7 +17077,10 @@ BUILDIN_FUNC(jump_zero)
 	if(!sel) {
 		int pos;
 		if( !data_islabel(script_getdata(st,3)) ){
-			ShowError("script: jump_zero: not label !\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script: jump_zero: 라벨이 아닙니다!\n");
+			else
+				ShowError("script: jump_zero: not label !\n");
 			st->state=END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -15972,7 +17106,10 @@ BUILDIN_FUNC(movenpc)
 	y = script_getnum(st,4);
 
 	if ((nd = npc_name2id(npc)) == nullptr){
-		ShowError("script: movenpc: NPC with ID '%s' was not found!\n", npc );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script: movenpc: ID가 '%s'인 NPC를 찾을 수 없습니다!\n", npc );
+		else
+			ShowError("script: movenpc: NPC with ID '%s' was not found!\n", npc );
 		return -1;
 	}
 
@@ -16279,35 +17416,53 @@ BUILDIN_FUNC(getmapxy)
 	char mapname[MAP_NAME_LENGTH];
 
 	if( !data_isreference(script_getdata(st,2)) ) {
-		ShowWarning("script: buildin_getmapxy: mapname value is not a variable.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: mapname 값은 변수가 아닙니다.\n");
+		else
+			ShowWarning("script: buildin_getmapxy: mapname value is not a variable.\n");
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if( !data_isreference(script_getdata(st,3)) ) {
-		ShowWarning("script: buildin_getmapxy: mapx value is not a variable.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: mapx 값은 변수가 아닙니다.\n");
+		else
+			ShowWarning("script: buildin_getmapxy: mapx value is not a variable.\n");
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if( !data_isreference(script_getdata(st,4)) ) {
-		ShowWarning("script: buildin_getmapxy: mapy value is not a variable.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: mapy 값은 변수가 아닙니다.\n");
+		else
+			ShowWarning("script: buildin_getmapxy: mapy value is not a variable.\n");
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( !is_string_variable(reference_getname(script_getdata(st, 2))) ) {
-		ShowWarning("script: buildin_getmapxy: %s is not a string variable.\n",reference_getname(script_getdata(st, 2)));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: %s은(는) 문자열 변수가 아닙니다.\n",reference_getname(script_getdata(st, 2)));
+		else
+			ShowWarning("script: buildin_getmapxy: %s is not a string variable.\n",reference_getname(script_getdata(st, 2)));
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( is_string_variable(reference_getname(script_getdata(st, 3))) ) {
-		ShowWarning("script: buildin_getmapxy: %s is a string variable, should be an INT.\n",reference_getname(script_getdata(st, 3)));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: %s은(는) 문자열 변수입니다. 이 변수는 INT형이어야합니다.\n",reference_getname(script_getdata(st, 3)));
+		else
+			ShowWarning("script: buildin_getmapxy: %s is a string variable, should be an INT.\n",reference_getname(script_getdata(st, 3)));
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( is_string_variable(reference_getname(script_getdata(st, 4))) ) {
-		ShowWarning("script: buildin_getmapxy: %s is a string variable, should be an INT.\n",reference_getname(script_getdata(st, 4)));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getmapxy: %s은(는) 문자열 변수입니다. 이 변수는 INT형이어야합니다.\n",reference_getname(script_getdata(st, 4)));
+		else
+			ShowWarning("script: buildin_getmapxy: %s is a string variable, should be an INT.\n",reference_getname(script_getdata(st, 4)));
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -16351,7 +17506,10 @@ BUILDIN_FUNC(getmapxy)
 				bl = &sd->ed->bl;
 			break;
 		default:
-			ShowWarning("script: buildin_getmapxy: Invalid type %d.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("script: buildin_getmapxy: %d은(는) 잘못된 타입입니다.\n", type);
+			else
+				ShowWarning("script: buildin_getmapxy: Invalid type %d.\n", type);
 			script_pushint(st,-1);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -16374,7 +17532,10 @@ BUILDIN_FUNC(getmapxy)
 
 	if(not_server_variable(prefix)){
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_getmapxy: variable '%s' for mapname is not a server variable, but no player is attached!", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_getmapxy: 맵이름(mapname)에 대한 변수 '%s'이(가) 서버변수($)가 아니고 연결된(attached) 플레이어도 아무도 없습니다.", name );
+			else
+				ShowError( "buildin_getmapxy: variable '%s' for mapname is not a server variable, but no player is attached!", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else
@@ -16388,7 +17549,10 @@ BUILDIN_FUNC(getmapxy)
 
 	if(not_server_variable(prefix)){
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_getmapxy: variable '%s' for mapX is not a server variable, but no player is attached!", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_getmapxy: 맵 x좌표(mapX)에 대한 변수 '%s'이(가) 서버변수($)가 아닙니다. 하지만 연결된(attached) 플레이어는 아무도 없습니다.", name );
+			else
+				ShowError( "buildin_getmapxy: variable '%s' for mapX is not a server variable, but no player is attached!", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else
@@ -16402,7 +17566,10 @@ BUILDIN_FUNC(getmapxy)
 
 	if(not_server_variable(prefix)){
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_getmapxy: variable '%s' for mapY is not a server variable, but no player is attached!", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_getmapxy: 맵 y좌표(mapY)에 대한 변수 '%s'이(가) 서버변수($)가 아닙니다. 하지만 연결된(attached) 플레이어는 아무도 없습니다.", name );
+			else
+				ShowError( "buildin_getmapxy: variable '%s' for mapY is not a server variable, but no player is attached!", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else
@@ -16446,7 +17613,10 @@ BUILDIN_FUNC(logmes)
 		struct npc_data* nd = map_id2nd(st->oid);
 
 		if( !nd ){
-			ShowError( "buildin_logmes: Invalid usage without player or npc.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_logmes: 플레이어 또는 NPC가 없는 잘못된 사용입니다.\n" );
+			else
+				ShowError( "buildin_logmes: Invalid usage without player or npc.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -16743,7 +17913,10 @@ BUILDIN_FUNC(unequip) {
 			return SCRIPT_CMD_SUCCESS;
 		}
 	}
-	ShowError("buildin_unequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_unequip: %d위치에 장작된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_unequip: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st, 0);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -16771,7 +17944,10 @@ BUILDIN_FUNC(equip) {
 		}
 	}
 
-	ShowError("buildin_equip: Item %u cannot be equipped\n",nameid);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_equip: %u 아이템을 장착 할 수 없습니다.\n",nameid);
+	else
+		ShowError("buildin_equip: Item %u cannot be equipped\n",nameid);
 	script_pushint(st,0);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -16784,13 +17960,19 @@ BUILDIN_FUNC(autoequip)
 
 	if( id == nullptr )
 	{
-		ShowError("buildin_autoequip: Invalid item '%u'.\n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_autoequip: '%u'은(는) 잘못된 아이템입니다.\n", nameid);
+		else	
+			ShowError("buildin_autoequip: Invalid item '%u'.\n", nameid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( !itemdb_isequip2(id.get()) )
 	{
-		ShowError("buildin_autoequip: Item '%u' cannot be equipped.\n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_autoequip: '%u' 아이템을 착용할 수 없습니다.\n", nameid);
+		else
+			ShowError("buildin_autoequip: Item '%u' cannot be equipped.\n", nameid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -16809,10 +17991,16 @@ BUILDIN_FUNC(setbattleflag)
 	flag = script_getstr(st,2);
 	value = script_getstr(st,3);  // HACK: Retrieve number as string (auto-converted) for battle_set_value
 
-	if (battle_set_value(flag, value) == 0)
-		ShowWarning("buildin_setbattleflag: unknown battle_config flag '%s'\n",flag);
-	else {
-		ShowInfo("buildin_setbattleflag: battle_config flag '%s' is now set to '%s'.\n",flag,value);
+	if (battle_set_value(flag, value) == 0) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setbattleflag: '%s'은(는) 알수없는 battle_config 플래그입니다. \n",flag);
+		else
+			ShowWarning("buildin_setbattleflag: unknown battle_config flag '%s'\n",flag);
+	} else {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("buildin_setbattleflag: battle_config 플래그 '%s'이(가) '%s'(으)로 설정되었습니다.\n",flag,value);
+		else
+			ShowInfo("buildin_setbattleflag: battle_config flag '%s' is now set to '%s'.\n",flag,value);
 
 		if (script_hasdata(st, 4) && script_getnum(st, 4)) { // Only attempt to reload monster data if told to
 			const char *expdrop_flags[] = { // Only certain flags require a reload, check for those types
@@ -17074,7 +18262,10 @@ BUILDIN_FUNC(explode)
 	temp = (char*)aMalloc(len + 1);
 
 	if( !data_isreference(data) ) {
-		ShowError("script:explode: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:explode: 변수가 아닙니다.\n");
+		else
+			ShowError("script:explode: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -17085,7 +18276,10 @@ BUILDIN_FUNC(explode)
 	name = reference_getname(data);
 
 	if( !is_string_variable(name) ) {
-		ShowError("script:explode: not string array\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:explode: 문자 배열이 아닙니다.\n");
+		else
+			ShowError("script:explode: not string array\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// data type mismatch
@@ -17124,7 +18318,10 @@ BUILDIN_FUNC(implode)
 	struct script_data* data = script_getdata(st, 2);
 
 	if( !data_isreference(data) ) {
-		ShowError("script:implode: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:implode: 변수가 아닙니다.\n");
+		else
+			ShowError("script:implode: not a variable\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -17134,7 +18331,10 @@ BUILDIN_FUNC(implode)
 	const char* name = reference_getname( data );
 
 	if( !is_string_variable(name) ) {
-		ShowError("script:implode: not string array\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:implode: 문자 배열이 아닙니다.\n");
+		else
+			ShowError("script:implode: not string array\n");
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// data type mismatch
@@ -17150,7 +18350,10 @@ BUILDIN_FUNC(implode)
 	const uint32 array_size = script_array_highest_key( st, sd, name, reference_getref( data ) );
 
 	if(array_size == 0) {
-		ShowWarning("script:implode: array length = 0\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script:implode: 배열 길이= 0\n");
+		else
+			ShowWarning("script:implode: array length = 0\n");
 		script_pushstrcopy( st, "NULL" );
 	} else {
 		const char *glue = nullptr, *temp;
@@ -17268,14 +18471,20 @@ BUILDIN_FUNC(sprintf)
 		}
 
 		if(*p == 'n') {  // %n
-			ShowWarning("buildin_sprintf: Format %%n not supported! Skipping...\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_sprintf: %%n 형식은 지원되지 않습니다! 건너 뛰는 중 ...\n");
+			else
+				ShowWarning("buildin_sprintf: Format %%n not supported! Skipping...\n");
 			script_reportsrc(st);
 			q+=2;
 			continue;
 		}
 
 		if(arg >= argc) {
-			ShowError("buildin_sprintf: Not enough arguments passed!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_sprintf: 충분한 인수가 전달되지 않았습니다!\n");
+			else
+				ShowError("buildin_sprintf: Not enough arguments passed!\n");
 			if(buf) aFree(buf);
 			if(buf2) aFree(buf2);
 			StringBuf_Destroy(&final_buf);
@@ -17315,7 +18524,10 @@ BUILDIN_FUNC(sprintf)
 			else  // var Int
 				StringBuf_Printf(&final_buf, buf2, script_getnum(st, arg+3));
 		} else {  // Unsupported type
-			ShowError("buildin_sprintf: Unknown argument type!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_sprintf: 알수 없는 인수 타입!\n");
+			else
+				ShowError("buildin_sprintf: Unknown argument type!\n");
 			if(buf) aFree(buf);
 			if(buf2) aFree(buf2);
 			StringBuf_Destroy(&final_buf);
@@ -17332,7 +18544,10 @@ BUILDIN_FUNC(sprintf)
 
 	// Passed more, than needed
 	if(arg < argc) {
-		ShowWarning("buildin_sprintf: Unused arguments passed.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_sprintf: 사용되지 않은 인수가 전달되었습니다.\n");
+		else
+			ShowWarning("buildin_sprintf: Unused arguments passed.\n");
 		script_reportsrc(st);
 	}
 
@@ -17395,7 +18610,10 @@ BUILDIN_FUNC(sscanf){
 			continue;
 		}
 		if(arg>=argc){
-			ShowError("buildin_sscanf: Not enough arguments passed!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_sscanf: 인수가 충분하지 않습니다!\n");
+			else
+				ShowError("buildin_sscanf: Not enough arguments passed!\n");
 			script_pushint(st, -1);
 			if(buf) aFree(buf);
 			if(ref_str) aFree(ref_str);
@@ -17411,7 +18629,10 @@ BUILDIN_FUNC(sscanf){
 		// Validate output
 		data = script_getdata(st, arg+4);
 		if(!data_isreference(data) || !reference_tovariable(data)){
-			ShowError("buildin_sscanf: Target argument is not a variable!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_sscanf: 타겟 인수는 변수가 아닙니다!\n");
+			else
+				ShowError("buildin_sscanf: Target argument is not a variable!\n");
 			script_pushint(st, -1);
 			if(buf) aFree(buf);
 			if(ref_str) aFree(ref_str);
@@ -17521,7 +18742,10 @@ BUILDIN_FUNC(replacestr)
 	size_t i = 0, f = 0;
 
 	if(findlen == 0) {
-		ShowError("script:replacestr: Invalid search length.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:replacestr: 검색 길이가 잘못되었습니다.\n");
+		else
+			ShowError("script:replacestr: Invalid search length.\n");
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -17530,7 +18754,10 @@ BUILDIN_FUNC(replacestr)
 		if( script_isint(st, 5) )
 			usecase = script_getnum(st, 5) != 0;
 		else {
-			ShowError("script:replacestr: Invalid usecase value. Expected int got string\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:replacestr: 올바르지 않은 usecase 값입니다. int 형식에 문자열을 지정한것 같습니다.\n");
+			else
+				ShowError("script:replacestr: Invalid usecase value. Expected int got string\n");
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -17539,7 +18766,10 @@ BUILDIN_FUNC(replacestr)
 	if(script_hasdata(st, 6)) {
 		count = script_getnum(st, 6);
 		if(count == 0) {
-			ShowError("script:replacestr: Invalid count value. Expected int got string\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:replacestr: 카운트 값이 잘못되었습니다. int 형식에 문자열을 지정한것 같습니다.\n");
+			else
+				ShowError("script:replacestr: Invalid count value. Expected int got string\n");
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -17601,7 +18831,10 @@ BUILDIN_FUNC(countstr)
 	int numFinds = 0;
 
 	if(findlen == 0) {
-		ShowError("script:countstr: Invalid search length.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:countstr: 잘못된 검색 길이입니다.\n");
+		else
+			ShowError("script:countstr: Invalid search length.\n");
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -17610,7 +18843,10 @@ BUILDIN_FUNC(countstr)
 		if( script_isint(st, 4) )
 			usecase = script_getnum(st, 4) != 0;
 		else {
-			ShowError("script:countstr: Invalid usecase value. Expected int got string\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:countstr: 잘못된 usecase 값입니다. int형식에 문자열을 지정한 것 같습니다.\n");
+			else
+				ShowError("script:countstr: Invalid usecase value. Expected int got string\n");
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -17843,7 +19079,10 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 				}
 			}
 		} else {
-			ShowError("script:query_sql: not a variable\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:query_sql: 변수가 아닙니다.\n");
+			else
+				ShowError("script:query_sql: not a variable\n");
 			script_reportdata(data);
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
@@ -17869,10 +19108,16 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 	// Count the number of columns to store
 	num_cols = Sql_NumColumns(handle);
 	if( num_vars < num_cols ) {
-		ShowWarning("script:query_sql: Too many columns, discarding last %u columns.\n", (unsigned int)(num_cols-num_vars));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script:query_sql: 컬럼이 너무 많아서 마지막 %u 컬럼을 삭제합니다.\n", (unsigned int)(num_cols-num_vars));
+		else
+			ShowWarning("script:query_sql: Too many columns, discarding last %u columns.\n", (unsigned int)(num_cols-num_vars));
 		script_reportsrc(st);
 	} else if( num_vars > num_cols ) {
-		ShowWarning("script:query_sql: Too many variables (%u extra).\n", (unsigned int)(num_vars-num_cols));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script:query_sql: 변수가 너무 많습니다. (%u 추가).\n", (unsigned int)(num_vars-num_cols));
+		else
+			ShowWarning("script:query_sql: Too many variables (%u extra).\n", (unsigned int)(num_vars-num_cols));
 		script_reportsrc(st);
 	}
 
@@ -17894,7 +19139,10 @@ int buildin_query_sql_sub(struct script_state* st, Sql* handle)
 		}
 	}
 	if( i == max_rows && max_rows < Sql_NumRows(handle) ) {
-		ShowWarning("script:query_sql: Only %d/%u rows have been stored.\n", max_rows, (unsigned int)Sql_NumRows(handle));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script:query_sql: %d/%u 행만 저장되었습니다.\n", max_rows, (unsigned int)Sql_NumRows(handle));
+		else
+			ShowWarning("script:query_sql: Only %d/%u rows have been stored.\n", max_rows, (unsigned int)Sql_NumRows(handle));
 		script_reportsrc(st);
 	}
 
@@ -17910,7 +19158,10 @@ BUILDIN_FUNC(query_sql) {
 
 BUILDIN_FUNC(query_logsql) {
 	if( !log_config.sql_logs ) {// logmysql_handle == nullptr
-		ShowWarning("buildin_query_logsql: SQL logs are disabled, query '%s' will not be executed.\n", script_getstr(st,2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_query_logsql: SQL 로그가 비활성화 되었습니다. 질의(쿼리) '%s'이(가) 실행되지 않았습니다.\n", script_getstr(st,2));
+		else
+			ShowWarning("buildin_query_logsql: SQL logs are disabled, query '%s' will not be executed.\n", script_getstr(st,2));
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -17965,7 +19216,10 @@ BUILDIN_FUNC(callshop)
 		flag = script_getnum(st,3);
 	nd = npc_name2id(shopname);
 	if( !nd || nd->bl.type != BL_NPC || (nd->subtype != NPCTYPE_SHOP && nd->subtype != NPCTYPE_CASHSHOP && nd->subtype != NPCTYPE_ITEMSHOP && nd->subtype != NPCTYPE_POINTSHOP && nd->subtype != NPCTYPE_MARKETSHOP && nd->subtype != NPCTYPE_BARTER) ) {
-		ShowError("buildin_callshop: Shop [%s] not found (or NPC is not shop type)\n", shopname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_callshop: 상점 [%s]을(를) 찾을 수 없습니다. (또는 NPC가 상점 타입이 아님)\n", shopname);
+		else
+			ShowError("buildin_callshop: Shop [%s] not found (or NPC is not shop type)\n", shopname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -18048,7 +19302,10 @@ BUILDIN_FUNC(npcshopitem)
 		std::shared_ptr<item_data> id = item_db.find(nameid);
 
 		if( !id ){
-			ShowError( "builtin_npcshopitem: Item ID %u does not exist.\n", nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "builtin_npcshopitem: 아이템 ID %u은(는) 존재하지 않습니다.\n", nameid );
+			else
+				ShowError( "builtin_npcshopitem: Item ID %u does not exist.\n", nameid );
 			script_pushint( st, 0 );
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -18103,7 +19360,10 @@ BUILDIN_FUNC(npcshopadditem)
 			std::shared_ptr<item_data> id = item_db.find(nameid);
 
 			if( !id ){
-				ShowError( "builtin_npcshopadditem: Item ID %u does not exist.\n", nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "builtin_npcshopadditem: 아이템 ID %u은(는) 존재하지 않습니다.\n", nameid );
+				else
+					ShowError( "builtin_npcshopadditem: Item ID %u does not exist.\n", nameid );
 				script_pushint( st, 0 );
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -18124,7 +19384,10 @@ BUILDIN_FUNC(npcshopadditem)
 
 			int32 stock = script_getnum(st, i + 2);
 			if( stock < -1 ){
-				ShowError( "builtin_npcshopadditem: Invalid stock amount in marketshop '%s'.\n", nd->exname );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "builtin_npcshopadditem: 마켓샵 %s의 재고 수량이 잘못되었습니다.\n", nd->exname );
+				else
+					ShowError( "builtin_npcshopadditem: Invalid stock amount in marketshop '%s'.\n", nd->exname );
 				script_pushint( st, 0 );
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -18148,7 +19411,10 @@ BUILDIN_FUNC(npcshopadditem)
 		std::shared_ptr<item_data> id = item_db.find(nameid);
 
 		if( !id ){
-			ShowError( "builtin_npcshopadditem: Item ID %u does not exist.\n", nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "builtin_npcshopadditem: 아이템 ID %u은(는) 존재하지 않습니다.\n", nameid );
+			else
+				ShowError( "builtin_npcshopadditem: Item ID %u does not exist.\n", nameid );
 			script_pushint( st, 0 );
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -18300,10 +19566,17 @@ BUILDIN_FUNC(addmonsterdrop)
 		mob = mob_db.find(script_getnum(st, 2));
 
 	if (mob == nullptr) {
-		if (script_isstring(st, 2))
-			ShowError("addmonsterdrop: bad mob name given %s\n", script_getstr(st, 2));
-		else
-			ShowError("addmonsterdrop: bad mob id given %d\n", script_getnum(st, 2));
+		if (script_isstring(st, 2)) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("addmonsterdrop: %s은(는) 잘못된 몬스터 이름입니다.\n", script_getstr(st, 2));
+			else
+				ShowError("addmonsterdrop: bad mob name given %s\n", script_getstr(st, 2));
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("addmonsterdrop: %d은(는) 잘못된 몬스터 ID입니다.\n", script_getnum(st, 2));
+			else
+				ShowError("addmonsterdrop: bad mob id given %d\n", script_getnum(st, 2));
+		}
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -18312,7 +19585,10 @@ BUILDIN_FUNC(addmonsterdrop)
 	std::shared_ptr<item_data> itm = item_db.find(item_id);
 
 	if (itm == nullptr) {
-		ShowError("addmonsterdrop: Nonexistant item %u requested.\n", item_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("addmonsterdrop: 존재하지 않는 아이템 %u이(가) 요청되었습니다.\n", item_id);
+		else
+			ShowError("addmonsterdrop: Nonexistant item %u requested.\n", item_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -18320,7 +19596,10 @@ BUILDIN_FUNC(addmonsterdrop)
 	int rate = script_getnum(st, 4);
 
 	if (rate < 1 || rate > 10000) {
-		ShowError("addmonsterdrop: Invalid rate %d (min 1, max 10000).\n", rate);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("addmonsterdrop: %d은(는) 잘못된 확율입니다. (최소 1, 최대 10000).\n", rate);
+		else
+			ShowError("addmonsterdrop: Invalid rate %d (min 1, max 10000).\n", rate);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -18352,12 +19631,18 @@ BUILDIN_FUNC(addmonsterdrop)
 		group = script_getnum(st, 6);
 
 		if (!random_option_group.exists(group)) {
-			ShowError("buildin_addmonsterdrop: Unknown random option group %d.\n", group);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_addmonsterdrop: %d은(는) 알 수 없는 랜덤 옵션 그룹입니다..\n", group);
+			else
+				ShowError("buildin_addmonsterdrop: Unknown random option group %d.\n", group);
 			script_pushint(st, false);
 			return SCRIPT_CMD_FAILURE;
 		}
 		if (itm->type != IT_WEAPON && itm->type != IT_ARMOR && itm->type != IT_SHADOWGEAR) {
-			ShowError("buildin_addmonsterdrop: Random option group can't be used with this type of item (item Id: %d).\n", item_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_addmonsterdrop: 이 아이템 타입 (아이템 ID: %d)에는 랜덤 옵션 그룹을 사용할 수 없습니다.\n", item_id);
+			else
+				ShowError("buildin_addmonsterdrop: Random option group can't be used with this type of item (item Id: %d).\n", item_id);
 			script_pushint(st, false);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -18395,7 +19680,10 @@ BUILDIN_FUNC(delmonsterdrop)
 	t_itemid item_id=script_getnum(st,3);
 
 	if(!item_db.exists(item_id)){
-		ShowError("delmonsterdrop: Nonexistant item %u requested.\n", item_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("delmonsterdrop: 존재하지 않는 아이템 %u을(를) 요청했습니다.\n", item_id );
+		else
+			ShowError("delmonsterdrop: Nonexistant item %u requested.\n", item_id );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -18415,7 +19703,10 @@ BUILDIN_FUNC(delmonsterdrop)
 		//No drop on that monster
 		script_pushint(st,0);
 	} else {
-		ShowWarning("delmonsterdrop: bad mob id given %d\n",script_getnum(st,2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("delmonsterdrop: 잘못된 몬스터ID %d을(를) 지정했습니다.\n",script_getnum(st,2));
+		else
+			ShowWarning("delmonsterdrop: bad mob id given %d\n",script_getnum(st,2));
 		return SCRIPT_CMD_FAILURE;
 	}
 	return SCRIPT_CMD_SUCCESS;
@@ -18434,14 +19725,20 @@ BUILDIN_FUNC(getrandmobid)
 	int type = script_getnum(st, 2);
 
 	if (type < MOBG_BRANCH_OF_DEAD_TREE || type >= MOBG_MAX) {
-		ShowWarning("buildin_getrandmobid: Invalid type %d.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getrandmobid: %d은(는) 잘못된 타입입니다.\n", type);
+		else
+			ShowWarning("buildin_getrandmobid: Invalid type %d.\n", type);
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	int flag = script_hasdata(st, 3) ? script_getnum(st, 3) : RMF_MOB_NOT_BOSS;
 	if (flag < RMF_NONE || flag > RMF_ALL) {
-		ShowWarning("buildin_getrandmobid: Invalid flag %d.\n", flag);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getrandmobid: %d은(는) 잘못된 플레그입니다.\n", flag);
+		else
+			ShowWarning("buildin_getrandmobid: Invalid flag %d.\n", flag);
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -18451,7 +19748,10 @@ BUILDIN_FUNC(getrandmobid)
 		lv = script_getnum(st, 4);
 		
 		if (lv <= 0) {
-			ShowWarning("buildin_getrandmobid: Invalid level %d.\n", lv);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_getrandmobid: %d은(는) 잘못된 레벨입니다.\n", lv);
+			else
+				ShowWarning("buildin_getrandmobid: Invalid level %d.\n", lv);
 			script_pushint(st, 0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -18607,7 +19907,10 @@ BUILDIN_FUNC(searchitem)
 
 	if( !data_isreference(data) )
 	{
-		ShowError("buildin_searchitem: Argument %s is not a variable.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_searchitem: %s 인수는 변수가 아닙니다.\n", name);
+		else
+			ShowError("buildin_searchitem: Argument %s is not a variable.\n", name);
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
@@ -18615,7 +19918,10 @@ BUILDIN_FUNC(searchitem)
 
 	if( is_string_variable(name) )
 	{// string array
-		ShowError("buildin_searchitem: Argument %s is not an integer array.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_searchitem: %s 인수는 정수형 배열이 아닙니다.\n", name);
+		else
+			ShowError("buildin_searchitem: Argument %s is not an integer array.\n", name);
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not supported
@@ -18662,12 +19968,18 @@ BUILDIN_FUNC(rid2name)
 			case BL_HOM: script_pushstrcopy(st,((TBL_HOM*)bl)->homunculus.name); break;
 			case BL_MER: script_pushstrcopy(st,((TBL_MER*)bl)->db->name.c_str()); break;
 			default:
-				ShowError("buildin_rid2name: BL type unknown.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_rid2name: BL 타입을 알수 없습니다.\n");
+				else
+					ShowError("buildin_rid2name: BL type unknown.\n");
 				script_pushconststr(st,"");
 				break;
 		}
 	} else {
-		ShowError("buildin_rid2name: invalid RID\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_rid2name: 잘못된 RID입니다.\n");
+		else
+			ShowError("buildin_rid2name: invalid RID\n");
 		script_pushconststr(st,"(null)");
 	}
 	return SCRIPT_CMD_SUCCESS;
@@ -18841,7 +20153,10 @@ BUILDIN_FUNC(getunitdata)
 	char* name = reference_getname(data);
 
 	if (not_server_variable(*name) && !script_rid2sd(sd)) {
-		ShowError("buildin_getunitdata: Cannot use a player variable '%s' if no player is attached.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getunitdata: 연결된 플레이어가 없으면 플레이어 변수 '%s'을(를) 사용할 수 없습니다.\n", name);
+		else
+			ShowError("buildin_getunitdata: Cannot use a player variable '%s' if no player is attached.\n", name);
 		return SCRIPT_CMD_FAILURE;
 	}else{
 		sd = nullptr;
@@ -18890,6 +20205,7 @@ BUILDIN_FUNC(getunitdata)
 			getunitdata_sub(UMOB_ATKMAX, md->status.rhw.atk2);
 			getunitdata_sub(UMOB_MATKMIN, md->status.matk_min);
 			getunitdata_sub(UMOB_MATKMAX, md->status.matk_max);
+			getunitdata_sub(UMOB_MATK, md->status.rhw.matk);
 			getunitdata_sub(UMOB_DEF, md->status.def);
 			getunitdata_sub(UMOB_MDEF, md->status.mdef);
 			getunitdata_sub(UMOB_HIT, md->status.hit);
@@ -19141,7 +20457,10 @@ BUILDIN_FUNC(getunitdata)
 			} break;
 
 		default:
-			ShowWarning("buildin_getunitdata: Unknown object type!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_getunitdata: 알수 없는 객체 타입입니다!\n");
+			else
+				ShowWarning("buildin_getunitdata: Unknown object type!\n");
 			return SCRIPT_CMD_FAILURE;
 	}
 
@@ -19239,7 +20558,10 @@ BUILDIN_FUNC(setunitdata)
 				if (value > 0) {
 					TBL_MOB *md2 = nullptr;
 					if (!md->master_id || !(md2 = map_id2md(md->master_id))) {
-						ShowWarning("buildin_setunitdata: Trying to set UMOB_SLAVECPYMSTRMD on mob without master!\n");
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowWarning("buildin_setunitdata: 마스터가 없는 몬스터에 UMOB_SLAVECPYMSTRMD를 설정하려고 했습니다!\n");
+						else
+							ShowWarning("buildin_setunitdata: Trying to set UMOB_SLAVECPYMSTRMD on mob without master!\n");
 						break;
 					}
 					md->base_status->mode = md2->status.mode;
@@ -19254,6 +20576,7 @@ BUILDIN_FUNC(setunitdata)
 			case UMOB_ATKMAX: md->base_status->rhw.atk2 = (unsigned short)value; calc_status = true; break;
 			case UMOB_MATKMIN: md->base_status->matk_min = (unsigned short)value; calc_status = true; break;
 			case UMOB_MATKMAX: md->base_status->matk_max = (unsigned short)value; calc_status = true; break;
+			case UMOB_MATK: md->base_status->rhw.matk = (unsigned short)value; calc_status = true; break;
 			case UMOB_DEF: md->base_status->def = (defType)value; calc_status = true; break;
 			case UMOB_MDEF: md->base_status->mdef = (defType)value; calc_status = true; break;
 			case UMOB_HIT: md->base_status->hit = (short)value; calc_status = true; break;
@@ -19273,7 +20596,10 @@ BUILDIN_FUNC(setunitdata)
 				}
 				struct block_list* target = map_id2bl(value);
 				if (!target) {
-					ShowWarning("buildin_setunitdata: Error in finding target for BL_MOB!\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("buildin_setunitdata: BL_MOB에 대한 타겟을 찾는 도중 에러가 발생했습니다.\n");
+					else
+						ShowWarning("buildin_setunitdata: Error in finding target for BL_MOB!\n");
 					return SCRIPT_CMD_FAILURE;
 				}
 				mob_target(md,target,0);
@@ -19286,8 +20612,19 @@ BUILDIN_FUNC(setunitdata)
 			case UMOB_RES: md->base_status->res = (short)value; calc_status = true; break;
 			case UMOB_MRES: md->base_status->mres = (short)value; calc_status = true; break;
 			case UMOB_DAMAGETAKEN: md->damagetaken = (unsigned short)value; break;
+			case UMOB_BODYSIZE: {
+				struct unit_data* ud = unit_bl2ud(bl);
+				ud->body_size = cap_value(value, 1, 255);	// 100 = normal size
+
+				clif_body_size(bl, ud->body_size);
+				break;
+			}
+ 			
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_MOB.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_MOB에 대해 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_MOB.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (calc_status)
@@ -19344,7 +20681,10 @@ BUILDIN_FUNC(setunitdata)
 				}
 				struct block_list* target = map_id2bl(value);
 				if (!target) {
-					ShowWarning("buildin_setunitdata: Error in finding target for BL_HOM!\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("buildin_setunitdata: BL_HOM에 대한 타겟을 찾던 중 오류가 발생되었습니다.!\n");
+					else
+						ShowWarning("buildin_setunitdata: Error in finding target for BL_HOM!\n");
 					return SCRIPT_CMD_FAILURE;
 				}
 				unit_attack(&hd->bl, target->id, 1);
@@ -19352,7 +20692,10 @@ BUILDIN_FUNC(setunitdata)
 			}
 			case UHOM_GROUP_ID: hd->ud.group_id = value; unit_refresh(bl); break;
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_HOM.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_HOM에 대한 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_HOM.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (calc_status)
@@ -19405,7 +20748,10 @@ BUILDIN_FUNC(setunitdata)
 			case UPET_DMOTION: pd->status.dmotion = (short)value; break;
 			case UPET_GROUP_ID: pd->ud.group_id = value; unit_refresh(bl); break;
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_PET.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_PET에 대한 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_PET.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 
@@ -19460,7 +20806,10 @@ BUILDIN_FUNC(setunitdata)
 				}
 				struct block_list* target = map_id2bl(value);
 				if (!target) {
-					ShowWarning("buildin_setunitdata: Error in finding target for BL_MER!\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("buildin_setunitdata: BL_MER에 대한 타겟을 찾던 중 오류가 발생되었습니다.!\n");
+					else
+						ShowWarning("buildin_setunitdata: Error in finding target for BL_MER!\n");
 					return SCRIPT_CMD_FAILURE;
 				}
 				unit_attack(&mc->bl, target->id, 1);
@@ -19468,7 +20817,10 @@ BUILDIN_FUNC(setunitdata)
 			}
 			case UMER_GROUP_ID: mc->ud.group_id = value; unit_refresh(bl); break;
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_MER.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_MER에 대한 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_MER.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (calc_status)
@@ -19530,7 +20882,10 @@ BUILDIN_FUNC(setunitdata)
 				}
 				struct block_list* target = map_id2bl(value);
 				if (!target) {
-					ShowWarning("buildin_setunitdata: Error in finding target for BL_ELEM!\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("buildin_setunitdata: BL_ELEM에 대한 타겟을 찾던 중 오류가 발생되었습니다!\n");
+					else
+						ShowWarning("buildin_setunitdata: Error in finding target for BL_ELEM!\n");
 					return SCRIPT_CMD_FAILURE;
 				}
 				elemental_change_mode(ed, EL_MODE_AGGRESSIVE);
@@ -19539,7 +20894,10 @@ BUILDIN_FUNC(setunitdata)
 			}
 			case UELE_GROUP_ID: ed->ud.group_id = value; unit_refresh(bl); break;
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_ELEM.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_ELEM에 대한 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_ELEM.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (calc_status)
@@ -19604,14 +20962,27 @@ BUILDIN_FUNC(setunitdata)
 			case UNPC_BODY2: clif_changelook(bl, LOOK_BODY2, (unsigned short)value); break;
 			case UNPC_DEADSIT: nd->vd.dead_sit = (char)value; unit_refresh(bl); break;
 			case UNPC_GROUP_ID: nd->ud.group_id = value; unit_refresh(bl); break;
+			case UNPC_BODYSIZE: {
+				struct unit_data* ud = unit_bl2ud(bl);
+				ud->body_size = value;
+
+				clif_body_size(bl, ud->body_size);
+				break;
+			}
 			default:
-				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_NPC.\n", type);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_setunitdata: %d은(는) BL_NPC에 대한 알수 없는 데이터 식별자입니다.\n", type);
+				else
+					ShowError("buildin_setunitdata: Unknown data identifier %d for BL_NPC.\n", type);
 				return SCRIPT_CMD_FAILURE;
 			}
 		} break;
 
 	default:
-		ShowWarning("buildin_setunitdata: Unknown object type!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setunitdata: 알수 없는 객체 타입입니다!\n");
+		else
+			ShowWarning("buildin_setunitdata: Unknown object type!\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -19660,34 +21031,49 @@ BUILDIN_FUNC(setunitname)
 		case BL_HOM:  hd = map_id2hd(bl->id); break;
 		case BL_PET:  pd = map_id2pd(bl->id); break;
 		default:
-			ShowWarning("buildin_setunitname: Invalid object type!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_setunitname: 잘못된 객체형식입니다!\n");
+			else		
+				ShowWarning("buildin_setunitname: Invalid object type!\n");
 			return SCRIPT_CMD_FAILURE;
 	}
 
 	switch (bl->type) {
 		case BL_MOB:
 			if (!md) {
-				ShowWarning("buildin_setunitname: Error in finding object BL_MOB!\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_setunitname: BL_MOB 개체를 찾는 중 오류가 발생했습니다.\n");
+				else
+					ShowWarning("buildin_setunitname: Error in finding object BL_MOB!\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			safestrncpy(md->name, script_getstr(st, 3), NAME_LENGTH);
 			break;
 		case BL_HOM:
 			if (!hd) {
-				ShowWarning("buildin_setunitname: Error in finding object BL_HOM!\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_setunitname: BL_HOM 개체를 찾는 중 오류가 발생했습니다.\n");
+				else
+					ShowWarning("buildin_setunitname: Error in finding object BL_HOM!\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			safestrncpy(hd->homunculus.name, script_getstr(st, 3), NAME_LENGTH);
 			break;
 		case BL_PET:
 			if (!pd) {
-				ShowWarning("buildin_setunitname: Error in finding object BL_PET!\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_setunitname: BL_PET 개체를 찾는 중 오류가 발생했습니다.\n");
+				else
+					ShowWarning("buildin_setunitname: Error in finding object BL_PET!\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			safestrncpy(pd->pet.name, script_getstr(st, 3), NAME_LENGTH);
 			break;
 		default:
-			ShowWarning("buildin_setunitname: Unknown object type!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_setunitname: 알수 없는 객체 타입입니다!\n");
+			else
+				ShowWarning("buildin_setunitname: Unknown object type!\n");
 			return SCRIPT_CMD_FAILURE;
 	}
 	clif_name_area(bl); // Send update to client.
@@ -19705,14 +21091,20 @@ BUILDIN_FUNC(setunittitle)
 	block_list *bl = map_id2bl(gid);
 
 	if (bl == nullptr) {
-		ShowWarning("buildin_setunittitle: Unable to find object with given game ID %d!\n", gid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setunittitle: 지정된 게임 ID가 %d인 객체를 찾을 수 없습니다!\n", gid);
+		else
+			ShowWarning("buildin_setunittitle: Unable to find object with given game ID %d!\n", gid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	unit_data *ud = unit_bl2ud(bl);
 
 	if (ud == nullptr) {
-		ShowWarning("buildin_setunittitle: Unable to find unit_data for given game ID %d!\n", gid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_setunittitle: 지정된 게임 ID가 %d인 unit_data을(를) 찾을 수 없습니다!\n", gid);
+		else
+			ShowWarning("buildin_setunittitle: Unable to find unit_data for given game ID %d!\n", gid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -19731,14 +21123,20 @@ BUILDIN_FUNC(getunittitle)
 	block_list *bl = map_id2bl(gid);
 
 	if (bl == nullptr) {
-		ShowWarning("buildin_getunittitle: Unable to find object with given game ID %d!\n", gid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getunittitle: 지정된 게임 ID가 %d인 객체를 찾을 수 없습니다!\n", gid);
+		else
+			ShowWarning("buildin_getunittitle: Unable to find object with given game ID %d!\n", gid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	unit_data *ud = unit_bl2ud(bl);
 
 	if (ud == nullptr) {
-		ShowWarning("buildin_getunittitle: Unable to find unit_data for given game ID %d!\n", gid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getunittitle: 지정된 게임 ID가 %d인 unit_data을(를) 찾을 수 없습니다!\n", gid);
+		else
+			ShowWarning("buildin_getunittitle: Unable to find unit_data for given game ID %d!\n", gid);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -19769,7 +21167,10 @@ BUILDIN_FUNC(unitwalk)
 	// Unit was already forced to walk.
 	if (ud != nullptr && ud->state.force_walk) {
 		script_pushint(st, 0);
-		ShowWarning("buildin_%s: Unit has already been forced to walk and not reached it's destination yet.\n", cmd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_%s: 유닛은 이미 강제로 걸어서 목적지에 도착하지 않았습니다.\n", cmd);
+		else
+			ShowWarning("buildin_%s: Unit has already been forced to walk and not reached it's destination yet.\n", cmd);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -19793,7 +21194,10 @@ BUILDIN_FUNC(unitwalk)
 		struct block_list* tbl = map_id2bl(script_getnum(st,3));
 
 		if (!tbl) {
-			ShowError("buildin_unitwalk: Bad target destination.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitwalk: 대상의 목적이 잘못되었습니다.\n");
+			else
+				ShowError("buildin_unitwalk: Bad target destination.\n");
 			script_pushint(st, 0);
 			return SCRIPT_CMD_FAILURE;
 		} else if (script_pushint(st, unit_can_reach_bl(bl, tbl, distance_bl(bl, tbl)+1, 0, nullptr, nullptr))) {
@@ -19909,7 +21313,10 @@ BUILDIN_FUNC(unitattack)
 			((TBL_PET *)unit_bl)->target_id = target_bl->id;
 			break;
 		default:
-			ShowError("buildin_unitattack: Unsupported source unit type %d.\n", unit_bl->type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitattack: %d은(는) 지원되지 않는 소스 유닛 타입입니다.\n", unit_bl->type);
+			else
+				ShowError("buildin_unitattack: Unsupported source unit type %d.\n", unit_bl->type);
 			script_pushint(st, false);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -19953,7 +21360,10 @@ BUILDIN_FUNC(unitstopwalk)
 			ud->state.force_walk = false;
 
 		if (unit_stop_walking(bl, flag) == 0 && flag != USW_FORCE_STOP) {
-			ShowWarning("buildin_unitstopwalk: Unable to find unit or unit is not walking.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_unitstopwalk: 유닛을 찾을 수 없거나 유닛이 걸어가고 있지 않습니다.\n");
+			else
+				ShowWarning("buildin_unitstopwalk: Unable to find unit or unit is not walking.\n");
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -19986,7 +21396,10 @@ BUILDIN_FUNC(unittalk)
 		if (script_hasdata(st, 4)) {
 			if (script_getnum(st, 4) == BC_SELF) {
 				if (map_id2sd(bl->id) == nullptr) {
-					ShowWarning("script: unittalk: bc_self can't be used for non-players objects.\n");
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning("script: unittalk: 플레이어가 아닌 객체에 대해서는 bc_self를 사용할 수 없습니다.\n");
+					else
+						ShowWarning("script: unittalk: bc_self can't be used for non-players objects.\n");
 					return SCRIPT_CMD_FAILURE;
 				}
 				target = SELF;
@@ -20017,14 +21430,20 @@ BUILDIN_FUNC(unitskilluseid)
 		const char *name = script_getstr(st, 3);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_unitskilluseid: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitskilluseid: 아이템 보너스에 잘못된 스킬 이름 %s이(가) 지정되었습니다. 통과함.\n", name);
+			else	
+				ShowError("buildin_unitskilluseid: Invalid skill name %s passed to item bonus. Skipping.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 3);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_unitskilluseid: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitskilluseid: 아이템 보너스에 잘못된 스킬 ID %s이(가) 지정되었습니다. 통과함.\n", skill_id);
+			else	
+				ShowError("buildin_unitskilluseid: Invalid skill ID %d passed to item bonus. Skipping.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -20038,7 +21457,10 @@ BUILDIN_FUNC(unitskilluseid)
 	if(script_rid2bl(2,bl)){
 		if (msg_id > 0) {
 			if (bl->type != BL_MOB) {
-				ShowError("buildin_unitskilluseid: Msg can only be used for monster.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_unitskilluseid: 메시지는 몬스터만 사용할 수 있습니다.\n");
+				else
+					ShowError("buildin_unitskilluseid: Msg can only be used for monster.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			TBL_MOB* md = map_id2md(bl->id);
@@ -20071,14 +21493,20 @@ BUILDIN_FUNC(unitskillusepos)
 		const char *name = script_getstr(st, 3);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_unitskillusepos: Invalid skill name %s.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitskillusepos: %s은(는) 잘못된 스킬 이름입니다.\n", name);
+			else	
+				ShowError("buildin_unitskillusepos: Invalid skill name %s.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 3);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_unitskillusepos: Invalid skill ID %d.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_unitskillusepos: %d은(는) 잘못된 스킬 번호입니다.\n", skill_id);
+			else	
+				ShowError("buildin_unitskillusepos: Invalid skill ID %d.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -20093,7 +21521,10 @@ BUILDIN_FUNC(unitskillusepos)
 	if(script_rid2bl(2,bl)){
 		if (msg_id > 0) {
 			if (bl->type != BL_MOB) {
-				ShowError("buildin_unitskilluseid: Msg can only be used for monster.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_unitskilluseid: 메세지는 몬스터만 사용할 수 있습니다.\n");
+				else
+					ShowError("buildin_unitskilluseid: Msg can only be used for monster.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			TBL_MOB* md = map_id2md(bl->id);
@@ -20126,7 +21557,10 @@ BUILDIN_FUNC(sleep)
 		ticks = script_getnum(st, 2);
 
 		if (ticks <= 0) {
-			ShowError("buildin_sleep: negative or zero amount('%d') of milli seconds is not supported\n", ticks);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_sleep2: 밀리초의 음수('%d')는 지원되지 않습니다.\n", ticks);
+			else	
+				ShowError("buildin_sleep: negative or zero amount('%d') of milli seconds is not supported\n", ticks);
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -20159,12 +21593,18 @@ BUILDIN_FUNC(sleep2)
 		ticks = script_getnum(st, 2);
 
 		if (ticks <= 0) {
-			ShowError( "buildin_sleep2: negative or zero amount('%d') of milli seconds is not supported\n", ticks );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_sleep2: 밀리초의 음수('%d')는 지원되지 않습니다.\n", ticks );
+			else
+				ShowError( "buildin_sleep2: negative or zero amount('%d') of milli seconds is not supported\n", ticks );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		if (map_id2bl(st->rid) == nullptr) {
-			ShowError( "buildin_sleep2: no unit is attached\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_sleep2: 연결된 유닛이 없습니다.\n" );
+			else
+				ShowError( "buildin_sleep2: no unit is attached\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 		
@@ -20199,7 +21639,10 @@ BUILDIN_FUNC(awake)
 	struct npc_data* nd;
 
 	if ((nd = npc_name2id(script_getstr(st, 2))) == nullptr) {
-		ShowError("buildin_awake: NPC \"%s\" not found\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_awake: NPC \"%s\"을(를) 찾을 수 없습니다.\n", script_getstr(st, 2));
+		else
+			ShowError("buildin_awake: NPC \"%s\" not found\n", script_getstr(st, 2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -20248,7 +21691,10 @@ BUILDIN_FUNC(getvariableofnpc)
 	data = script_getdata(st,2);
 	if( !data_isreference(data) )
 	{// Not a reference (aka varaible name)
-		ShowError("buildin_getvariableofnpc: not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvariableofnpc: 변수가 아닙니다.\n");
+		else
+			ShowError("buildin_getvariableofnpc: not a variable\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -20258,7 +21704,10 @@ BUILDIN_FUNC(getvariableofnpc)
 	name = reference_getname(data);
 	if( *name != '.' || name[1] == '@' )
 	{// not a npc variable
-		ShowError("buildin_getvariableofnpc: invalid scope (not npc variable)\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvariableofnpc: 잘못된 범위입니다. (npc 변수가 아닙니다.)\n");
+		else
+			ShowError("buildin_getvariableofnpc: invalid scope (not npc variable)\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -20268,7 +21717,10 @@ BUILDIN_FUNC(getvariableofnpc)
 	nd = npc_name2id(script_getstr(st,3));
 	if( nd == nullptr || nd->subtype != NPCTYPE_SCRIPT || nd->u.scr.script == nullptr )
 	{// NPC not found or has no script
-		ShowError("buildin_getvariableofnpc: can't find npc %s\n", script_getstr(st,3));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvariableofnpc: %s NPC를 찾을 수 없습니다.\n", script_getstr(st,3));
+		else
+			ShowError("buildin_getvariableofnpc: can't find npc %s\n", script_getstr(st,3));
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -20299,7 +21751,10 @@ BUILDIN_FUNC(warpportal)
 
 	bl = map_id2bl(st->oid);
 	if( bl == nullptr ) {
-		ShowError("buildin_warpportal: NPC is needed\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_warpportal: NPC가 필요합니다.\n");
+		else
+			ShowError("buildin_warpportal: NPC is needed\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -20310,7 +21765,10 @@ BUILDIN_FUNC(warpportal)
 	tpy = script_getnum(st,6);
 
 	if( mapindex == 0 ) {
-		ShowError("buildin_warpportal: Target map not found %s.\n", script_getstr(st, 4));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_warpportal: 대상 맵 %s이(가) 없습니다.\n", script_getstr(st, 4));
+		else
+			ShowError("buildin_warpportal: Target map not found %s.\n", script_getstr(st, 4));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -20339,7 +21797,10 @@ BUILDIN_FUNC(openmail)
 
 	return SCRIPT_CMD_SUCCESS;
 #else
-	ShowError( "buildin_openmail: This command is not supported for PACKETVER 2015-05-13 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_openmail: 이 명령어는 PACKETVER 2015-05-13 이상의 버전에선 지원하지 않습니다.\n" );
+	else
+		ShowError( "buildin_openmail: This command is not supported for PACKETVER 2015-05-13 or newer.\n" );
 
 	return SCRIPT_CMD_FAILURE;
 #endif
@@ -20425,31 +21886,50 @@ BUILDIN_FUNC(getfreecell)
 	int rx = -1, ry = -1, flag = 1;
 
 	if (!data_isreference(data_x)) {
-		ShowWarning("script: buildin_getfreecell: rX is not a variable.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getfreecell: rX는 변수가 아닙니다.\n");
+		else
+			ShowWarning("script: buildin_getfreecell: rX is not a variable.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!data_isreference(data_y)) {
-		ShowWarning("script: buildin_getfreecell: rY is not a variable.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getfreecell: rY는 변수가 아닙니다.\n");
+		else
+			ShowWarning("script: buildin_getfreecell: rY is not a variable.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 	name_x = reference_getname(data_x),
 	name_y = reference_getname(data_y);
 
 	if (is_string_variable(name_x)) {
-		ShowWarning("script: buildin_getfreecell: rX is a string, must be an INT.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getfreecell: rX가 문자열입니다. INT형이어야 합니다.\n");
+		else
+			ShowWarning("script: buildin_getfreecell: rX is a string, must be an INT.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (is_string_variable(name_y)) {
-		ShowWarning("script: buildin_getfreecell: rY is a string, must be an INT.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("script: buildin_getfreecell: rY가 문자열입니다. INT형이어야 합니다.\n");
+		else
+			ShowWarning("script: buildin_getfreecell: rY is a string, must be an INT.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (not_server_variable(*name_x) || not_server_variable(*name_y)) {
 		if (!script_rid2sd(sd)) {
-			if (not_server_variable(*name_x))
-				ShowError( "buildin_getfreecell: variable '%s' for mapX is not a server variable, but no player is attached!", name_x );
-			else
-				ShowError( "buildin_getfreecell: variable '%s' for mapY is not a server variable, but no player is attached!", name_y );
+			if (not_server_variable(*name_x)) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_getfreecell: mapX에 대한 변수 '%s'은(는) 서버변수가 아닙니다. 그 어떤 플레이어도 연결(attached)되지 않았습니다.", name_x );
+				else
+					ShowError( "buildin_getfreecell: variable '%s' for mapX is not a server variable, but no player is attached!", name_x );
+			} else {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_getfreecell: mapY에 대한 변수 '%s'은(는) 서버변수가 아닙니다. 그 어떤 플레이어도 연결(attached)되지 않았습니다.", name_y );
+				else
+					ShowError( "buildin_getfreecell: variable '%s' for mapY is not a server variable, but no player is attached!", name_y );
+			}
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -20513,14 +21993,20 @@ BUILDIN_FUNC(mercenary_delete)
 		return SCRIPT_CMD_FAILURE;
 
 	if( sd->md == nullptr ) {
-		ShowWarning("buildin_mercenary_delete: Tried to delete a non existant mercenary from player '%s' (AID: %u, CID: %u)\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_mercenary_delete: 존재하지 않는 용병을 플레이어 '%s' (AID: %u, CID: %u)에서 삭제하려 했습니다.\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+		else
+			ShowWarning("buildin_mercenary_delete: Tried to delete a non existant mercenary from player '%s' (AID: %u, CID: %u)\n", sd->status.name, sd->status.account_id, sd->status.char_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( script_hasdata(st, 3) ) {
 		type = script_getnum(st, 3);
 		if( type < 0 || type > 3 ) {
-			ShowWarning("buildin_mercenary_delete: invalid type value of %d.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_mercenary_delete: %d에 대한 잘못된 타입 값입니다.\n", type);
+			else
+				ShowWarning("buildin_mercenary_delete: invalid type value of %d.\n", type);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -20611,7 +22097,10 @@ BUILDIN_FUNC(mercenary_set_calls)
 			calls = &sd->status.sword_calls;
 			break;
 		default:
-			ShowError("buildin_mercenary_set_calls: Invalid guild '%d'.\n", guild);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_mercenary_set_calls: '%d'은(는) 잘못된 길드입니다.\n", guild);
+			else
+				ShowError("buildin_mercenary_set_calls: Invalid guild '%d'.\n", guild);
 			return SCRIPT_CMD_SUCCESS; // Invalid Guild
 	}
 
@@ -20670,7 +22159,10 @@ BUILDIN_FUNC(mercenary_set_faith)
 			calls = &sd->status.sword_faith;
 			break;
 		default:
-			ShowError("buildin_mercenary_set_faith: Invalid guild '%d'.\n", guild);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_mercenary_set_faith: '%d'은(는) 잘못된 길드입니다.\n", guild);
+			else
+				ShowError("buildin_mercenary_set_faith: Invalid guild '%d'.\n", guild);
 			return SCRIPT_CMD_SUCCESS; // Invalid Guild
 	}
 
@@ -20710,7 +22202,10 @@ BUILDIN_FUNC(questinfo)
 	TBL_NPC* nd = map_id2nd(st->oid);
 
 	if (!nd || nd->bl.m == -1) {
-		ShowError("buildin_questinfo: No NPC attached.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_questinfo: NPC가 연결(attached)되지 않았습니다.\n");
+		else
+			ShowError("buildin_questinfo: No NPC attached.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -20755,7 +22250,10 @@ BUILDIN_FUNC(questinfo)
 	if (script_hasdata(st, 3)) {
 		color = script_getnum(st, 3);
 		if (color < QMARK_NONE || color >= QMARK_MAX) {
-			ShowWarning("buildin_questinfo: invalid color '%d', defaulting to QMARK_NONE.\n",color);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_questinfo: '%d'은(는) 잘못된 색상이어서, 기본값인 QMARK_NONE으(로) 변경합니다.\n",color);
+			else
+				ShowWarning("buildin_questinfo: invalid color '%d', defaulting to QMARK_NONE.\n",color);
 			script_reportfunc(st);
 			color = QMARK_NONE;
 		}
@@ -20944,7 +22442,10 @@ BUILDIN_FUNC(showevent)
 	if (script_hasdata(st, 3)) {
 		color = script_getnum(st, 3);
 		if (color < QMARK_NONE || color >= QMARK_MAX) {
-			ShowWarning("buildin_showevent: Invalid color '%d', defaulting to QMARK_NONE.\n",color);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_showevent: '%d'은(는) 잘못된 색상이어서 기본값인 QMARK_NONE으(로) 변경합니다.\n",color);
+			else
+				ShowWarning("buildin_showevent: Invalid color '%d', defaulting to QMARK_NONE.\n",color);
 			script_reportfunc(st);
 			color = QMARK_NONE;
 		}
@@ -21054,7 +22555,10 @@ BUILDIN_FUNC(waitingroom2bg_single)
 		y = bg->cemetery.y;
 	}
 	if (!map_getmapflag(map_mapindex2mapid(mapindex), MF_BATTLEGROUND)) {
-		ShowWarning("buildin_waitingroom2bg_single: Map %s requires the mapflag MF_BATTLEGROUND.\n", mapindex_id2name(mapindex));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_waitingroom2bg_single: %s 맵은 MF_BATTLEGROUND 플래그가 필요합니다.\n", mapindex_id2name(mapindex));
+		else
+			ShowWarning("buildin_waitingroom2bg_single: Map %s requires the mapflag MF_BATTLEGROUND.\n", mapindex_id2name(mapindex));
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -21144,7 +22648,10 @@ BUILDIN_FUNC(bg_join) {
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (!map_getmapflag(map_mapindex2mapid(mapindex), MF_BATTLEGROUND)) {
-		ShowWarning("buildin_bg_join: Map %s requires the mapflag MF_BATTLEGROUND.\n", mapindex_id2name(mapindex));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_bg_join: %s 맵은 MF_BATTLEGROUND 플래그가 필요합니다.\n", mapindex_id2name(mapindex));
+		else
+			ShowWarning("buildin_bg_join: Map %s requires the mapflag MF_BATTLEGROUND.\n", mapindex_id2name(mapindex));
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -21308,7 +22815,10 @@ BUILDIN_FUNC(bg_get_data)
 			script_pushint(st, i);
 			break;
 		default:
-			ShowError("script:bg_get_data: unknown data identifier %d\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("script:bg_get_data: %d은(는) 알수 없는 데이터 식별자입니다.\n", type);
+			else
+				ShowError("script:bg_get_data: unknown data identifier %d\n", type);
 			break;
 		}
 	} else
@@ -21326,8 +22836,12 @@ BUILDIN_FUNC(bg_reserve)
 	const char *str = script_getstr(st, 2);
 	bool ended = script_hasdata(st, 3) ? script_getnum(st, 3) != 0 : false;
 
-	if (!bg_queue_reserve(str, ended))
-		ShowWarning("buildin_bg_reserve: Could not reserve battleground with name %s\n", str);
+	if (!bg_queue_reserve(str, ended)) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_bg_reserve: %s 이름은 전장에 예약할 수 없습니다.\n", str);
+		else
+			ShowWarning("buildin_bg_reserve: Could not reserve battleground with name %s\n", str);
+	}
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -21339,8 +22853,12 @@ BUILDIN_FUNC(bg_unbook)
 {
 	const char *str = script_getstr(st, 2);
 
-	if (!bg_queue_unbook(str))
-		ShowWarning("buildin_bg_unbook: Could not unreserve battleground with name %s\n", str);
+	if (!bg_queue_unbook(str)) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_bg_unbook: %s라는 전장 이름은 예약 취소를 할 수 없습니다.\n", str);
+		else
+			ShowWarning("buildin_bg_unbook: Could not unreserve battleground with name %s\n", str);
+	}
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -21353,7 +22871,10 @@ BUILDIN_FUNC(bg_info)
 	std::shared_ptr<s_battleground_type> bg = bg_search_name(script_getstr(st, 2));
 
 	if (!bg) {
-		ShowError("bg_info: Invalid Battleground name %s.\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("bg_info: %s은(는) 잘못된 전장 이름입니다.\n", script_getstr(st, 2));
+		else
+			ShowError("bg_info: Invalid Battleground name %s.\n", script_getstr(st, 2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21390,7 +22911,10 @@ BUILDIN_FUNC(bg_info)
 			script_pushint(st, bg->deserter_time);
 			break;
 		default:
-			ShowError("bg_info: Unknown battleground info type %d given.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("bg_info: %d라는 알수 없는 전장 정보 타입이 지정되었습니다.\n", type);
+			else
+				ShowError("bg_info: Unknown battleground info type %d given.\n", type);
 			return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21467,7 +22991,10 @@ BUILDIN_FUNC(instance_create)
 		mode = static_cast<e_instance_mode>(script_getnum(st, 3));
 
 		if (mode < IM_NONE || mode >= IM_MAX) {
-			ShowError("buildin_instance_create: Unknown instance mode %d for '%s'\n", mode, script_getstr(st, 2));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_instance_create: %d은(는) '%s'에 대한 알수 없는 인스턴스 모드입니다.\n", mode, script_getstr(st, 2));
+			else
+				ShowError("buildin_instance_create: Unknown instance mode %d for '%s'\n", mode, script_getstr(st, 2));
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -21498,7 +23025,10 @@ BUILDIN_FUNC(instance_create)
 					owner_id = sd->status.clan_id;
 				break;
 			default:
-				ShowError("buildin_instance_create: Invalid instance mode (instance name: %s)\n", script_getstr(st, 2));
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_instance_create: 잘못된 인스턴스 모드입니다. (인스턴스 이름: %s)\n", script_getstr(st, 2));
+				else
+					ShowError("buildin_instance_create: Invalid instance mode (instance name: %s)\n", script_getstr(st, 2));
 				return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -21523,7 +23053,10 @@ BUILDIN_FUNC(instance_destroy)
 		instance_id = script_instancegetid(st);
 
 	if( instance_id == 0 ) {
-		ShowError("buildin_instance_destroy: Trying to destroy invalid instance %d.\n", instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_destroy: 잘못된 인스턴스 %d을(를) 삭제하려고합니다.\n", instance_id);
+		else
+			ShowError("buildin_instance_destroy: Trying to destroy invalid instance %d.\n", instance_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21582,7 +23115,10 @@ BUILDIN_FUNC(instance_npcname)
 		snprintf(npcname, sizeof(npcname), "dup_%d_%d", instance_id, nd->bl.id);
 		script_pushconststr(st,npcname);
 	} else {
-		ShowError("buildin_instance_npcname: Invalid instance NPC (instance_id: %d, NPC name: \"%s\".)\n", instance_id, str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_npcname: 잘못된 인스턴스 NPC입니다. (인스턴스 ID: %d, NPC 이름: \"%s\".)\n", instance_id, str);
+		else
+			ShowError("buildin_instance_npcname: Invalid instance NPC (instance_id: %d, NPC name: \"%s\".)\n", instance_id, str);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -21628,7 +23164,10 @@ BUILDIN_FUNC(instance_id)
 		mode = script_getnum(st, 2);
 
 		if (mode <= IM_NONE || mode >= IM_MAX) {
-			ShowError("buildin_instance_id: Unknown instance mode %d.\n", mode);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_instance_id: %d은(는) 알수 없는 인스턴스 모드입니다.\n", mode);
+			else
+				ShowError("buildin_instance_id: Unknown instance mode %d.\n", mode);
 			script_pushint(st, 0);
 			return SCRIPT_CMD_SUCCESS;
 		}
@@ -21715,7 +23254,10 @@ BUILDIN_FUNC(instance_warpall)
 	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, instance_id);
 
 	if (!idata) {
-		ShowError("buildin_instance_warpall: Instance is not found.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_warpall: 인스턴스를 찾을 수 없습니다.\n");
+		else
+			ShowError("buildin_instance_warpall: Instance is not found.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21754,7 +23296,10 @@ BUILDIN_FUNC(instance_announce) {
 	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, instance_id);
 
 	if (instance_id <= 0 || !idata) {
-		ShowError("buildin_instance_announce: Instance not found.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_announce: 인스턴스를 찾을 수 없습니다.\n");
+		else
+			ShowError("buildin_instance_announce: Instance not found.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21869,10 +23414,16 @@ BUILDIN_FUNC(instance_check_guild)
 	max  = script_hasdata(st,5) ? script_getnum(st,5) : MAX_LEVEL; // Maxium Level allowed to join the Instance.
 
 	if (min < 1 || min > MAX_LEVEL) {
-		ShowError("buildin_instance_check_guild: Invalid min level, %d\n", min);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_check_guild: %d은(는) 잘못된 최소 레벨입니다.\n", min);
+		else
+			ShowError("buildin_instance_check_guild: Invalid min level, %d\n", min);
 		return SCRIPT_CMD_FAILURE;
 	} else if (max < 1 || max > MAX_LEVEL) {
-		ShowError("buildin_instance_check_guild: Invalid max level, %d\n", max);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_check_guild: %d은(는) 잘못된 최대 레벨입니다.\n", max);
+		else
+			ShowError("buildin_instance_check_guild: Invalid max level, %d\n", max);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21932,10 +23483,16 @@ BUILDIN_FUNC(instance_check_clan)
 	max  = script_hasdata(st,5) ? script_getnum(st,5) : MAX_LEVEL; // Maxium Level allowed to join the Instance.
 
 	if (min < 1 || min > MAX_LEVEL) {
-		ShowError("buildin_instance_check_clan: Invalid min level, %d\n", min);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_check_clan: %d은(는) 잘못된 최소레벨입니다.\n", min);
+		else
+			ShowError("buildin_instance_check_clan: Invalid min level, %d\n", min);
 		return SCRIPT_CMD_FAILURE;
 	} else if (max < 1 || max > MAX_LEVEL) {
-		ShowError("buildin_instance_check_clan: Invalid max level, %d\n", max);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_check_clan: %d은(는) 잘못된 최대레벨입니다\n", max);
+		else
+			ShowError("buildin_instance_check_clan: Invalid max level, %d\n", max);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -21989,7 +23546,10 @@ BUILDIN_FUNC(instance_info)
 	std::shared_ptr<s_instance_db> db = instance_search_db_name(name);
 
 	if (!db) {
-		ShowError( "buildin_instance_info: Unknown instance name \"%s\".\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_instance_info: \"%s\"은(는) 알수 없는 인스턴스 이름입니다.\n", name );
+		else
+			ShowError( "buildin_instance_info: Unknown instance name \"%s\".\n", name );
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -22018,7 +23578,10 @@ BUILDIN_FUNC(instance_info)
 			break;
 		case IIT_MAP:
 			if( !script_hasdata(st, 4) || script_isstring(st, 4) ){
-				ShowError( "buildin_instance_info: Type IIT_MAP requires a numeric index argument.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_instance_info: 타입 IIT_MAP에는 숫자 인덱스 인수가 필요합니다.\n" );
+				else	
+					ShowError( "buildin_instance_info: Type IIT_MAP requires a numeric index argument.\n" );
 				script_pushconststr(st, "");
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -22026,13 +23589,19 @@ BUILDIN_FUNC(instance_info)
 			index = script_getnum(st, 4);
 
 			if( index < 0 ){
-				ShowError( "buildin_instance_info: Type IIT_MAP does not support a negative index argument.\n" );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_instance_info: 타입 IIT_MAP은 음수 인덱스 인수를 지원하지 않습니다.\n" );
+				else
+					ShowError( "buildin_instance_info: Type IIT_MAP does not support a negative index argument.\n" );
 				script_pushconststr(st, "");
 				return SCRIPT_CMD_FAILURE;
 			}
 
 			if( index > UINT8_MAX ){
-				ShowError( "buildin_instance_info: Type IIT_MAP does only support up to index %hu.\n", UINT8_MAX );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_instance_info: 타입 IIT_MAP는 인덱스를 최대 %hu까지만 지원합니다.\n", UINT8_MAX );
+				else
+					ShowError( "buildin_instance_info: Type IIT_MAP does only support up to index %hu.\n", UINT8_MAX );
 				script_pushconststr(st, "");
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -22041,7 +23610,10 @@ BUILDIN_FUNC(instance_info)
 			break;
 
 		default:
-			ShowError("buildin_instance_info: Unknown instance information type \"%d\".\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_instance_info: \"%d\"은(는) 알수 없는 인스턴스 정보 타입입니다.\n", type );
+			else
+				ShowError("buildin_instance_info: Unknown instance information type \"%d\".\n", type );
 			script_pushint(st, -1);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -22061,7 +23633,10 @@ BUILDIN_FUNC(instance_live_info)
 	int id = 0;
 
 	if (type < ILI_NAME || type > ILI_OWNER) {
-		ShowError("buildin_instance_live_info: Unknown instance information type \"%d\".\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_live_info: \"%d\"은(는) 알수 없는 인스턴스 정보 타입입니다.\n", type );
+		else
+			ShowError("buildin_instance_live_info: Unknown instance information type \"%d\".\n", type);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -22111,7 +23686,10 @@ BUILDIN_FUNC(instance_list)
 {
 	int src_id = map_mapname2mapid(script_getstr(st, 2));
 	if (src_id == 0) {
-		ShowError("buildin_instance_list: map '%s' doesn't exist\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_instance_list: 맵'%s'이(가) 존재하지 않습니다.\n", script_getstr(st, 2));
+		else
+			ShowError("buildin_instance_list: map '%s' doesn't exist\n", script_getstr(st, 2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -22119,7 +23697,10 @@ BUILDIN_FUNC(instance_list)
 	if (script_hasdata(st, 3)) {
 		mode = static_cast<e_instance_mode>(script_getnum(st, 3));
 		if (mode < IM_NONE || mode >= IM_MAX) {
-			ShowError("buildin_instance_list: Unknown instance mode %d for '%s'\n", mode, script_getstr(st, 3));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_instance_list: %d은(는) '%s'에 대한 알 수 없는 인스턴스 모드입니다.\n", mode, script_getstr(st, 3));
+			else
+				ShowError("buildin_instance_list: Unknown instance mode %d for '%s'\n", mode, script_getstr(st, 3));
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -22209,7 +23790,10 @@ BUILDIN_FUNC(areamobuseskill)
 	int16 m;
 
 	if( (m = map_mapname2mapid(script_getstr(st,2))) < 0 ) {
-		ShowError("areamobuseskill: invalid map name.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("areamobuseskill: 잘못된 맵 이름입니다.\n");
+		else
+			ShowError("areamobuseskill: invalid map name.\n");
 		return SCRIPT_CMD_SUCCESS;
 	}
 
@@ -22225,7 +23809,10 @@ BUILDIN_FUNC(areamobuseskill)
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( name );
 
 		if( mob == nullptr ){
-			ShowWarning( "buildin_areamobuseskill: Attempted to use skill of non-existing monster \"%s\"\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_areamobuseskill: 존재하지 않는 몬스터 \"%s\"의 스킬을 사용하려고 했습니다.\n", name );
+			else
+				ShowWarning( "buildin_areamobuseskill: Attempted to use skill of non-existing monster \"%s\"\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -22234,7 +23821,10 @@ BUILDIN_FUNC(areamobuseskill)
 		mobid = script_getnum( st, 6 );
 
 		if( !mob_db.exists( mobid ) ){
-			ShowWarning( "buildin_areamobuseskill: Attempted to use skill of non-existing monster class %d\n", mobid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_areamobuseskill: 존재하지 않는 몬스터 클래스 %d의 스킬을 사용하려고 했습니다.\n", mobid );
+			else
+				ShowWarning( "buildin_areamobuseskill: Attempted to use skill of non-existing monster class %d\n", mobid );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -22245,14 +23835,20 @@ BUILDIN_FUNC(areamobuseskill)
 		const char *name = script_getstr(st, 7);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_areamobuseskill: Invalid skill name %s.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_areamobuseskill: %s은(는) 잘못된 스킬 이름입니다.\n", name);
+			else
+				ShowError("buildin_areamobuseskill: Invalid skill name %s.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 7);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_areamobuseskill: Invalid skill ID %d.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_areamobuseskill: %s은(는) 잘못된 스킬 번호입니다.\n", skill_id);
+			else
+				ShowError("buildin_areamobuseskill: Invalid skill ID %d.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -22376,7 +23972,10 @@ BUILDIN_FUNC(pushpc)
 
 	if(dir >= DIR_MAX)
 	{
-		ShowWarning("buildin_pushpc: Invalid direction %d specified.\n", dir);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_pushpc: 잘못된 방향 %d이(가) 지정되었습니다.\n", dir);
+		else
+			ShowWarning("buildin_pushpc: Invalid direction %d specified.\n", dir);
 		script_reportsrc(st);
 
 		dir%= DIR_MAX;  // trim spin-over
@@ -22443,7 +24042,10 @@ BUILDIN_FUNC(searchstores)
 
 	if (uses < 1 || uses > UINT8_MAX)
 	{
-		ShowError("buildin_searchstores: The amount of uses must be a number between 1 and %u.\n", UINT8_MAX);
+		if(strcmpi(MessageLang, "KOR") == 0)
+		    ShowError("buildin_searchstores: 사용 횟수는 1과 %u 사이의 숫자여야 합니다.\n", UINT8_MAX);
+		else
+		    ShowError("buildin_searchstores: The amount of uses must be a number between 1 and %u.\n", UINT8_MAX);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -22451,7 +24053,10 @@ BUILDIN_FUNC(searchstores)
 
 	if( effect < SEARCHSTORE_EFFECT_NORMAL || effect >= SEARCHSTORE_EFFECT_MAX )
 	{
-		ShowError("buildin_searchstores: Invalid effect id %d, specified.\n", effect);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_searchstores: 유효하지 않은 이펙트 ID %d가 지정되었습니다.\n", effect);
+		else
+			ShowError("buildin_searchstores: Invalid effect id %d, specified.\n", effect);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -22513,13 +24118,19 @@ BUILDIN_FUNC(showdigit)
 		case 3:
 			value = abs(value);
 			if( value > 99 ){
-				ShowWarning("buildin_showdigit: type 3 can display 2 digits at max. Capping value %d to 99...\n", value);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_showdigit: 타입 3은 최대 2자리 숫자를 표시할 수 있습니다. %d~99사이의 값...\n", value);
+				else		
+					ShowWarning("buildin_showdigit: type 3 can display 2 digits at max. Capping value %d to 99...\n", value);
 				script_reportsrc(st);
 				value = 99;
 			}
 			break;
 		default:
-			ShowError("buildin_showdigit: Invalid type %u.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_showdigit: %u은(는) 잘못된 타입입니다.\n", type);
+			else
+				ShowError("buildin_showdigit: Invalid type %u.\n", type);
 			return SCRIPT_CMD_FAILURE;
 	}
 
@@ -22583,7 +24194,10 @@ BUILDIN_FUNC(setdragon) {
 					   color == 4 ? OPTION_DRAGON4 :
 					   color == 5 ? OPTION_DRAGON5 : 0);
 			if( !option ) {
-				ShowWarning("script_setdragon: Unknown Color %d used; changing to green (1)\n",color);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("script_setdragon: 알수 없는 색상 %d 사용; 녹색드래곤(1)으로 변경합니다.\n",color);
+				else
+					ShowWarning("script_setdragon: Unknown Color %d used; changing to green (1)\n",color);
 				option = OPTION_DRAGON1;
 			}
 		}
@@ -22642,7 +24256,10 @@ BUILDIN_FUNC(getargcount) {
 	struct script_retinfo* ri;
 
 	if( st->stack->defsp < 1 || st->stack->stack_data[st->stack->defsp - 1].type != C_RETINFO ) {
-		ShowError("script:getargcount: used out of function or callsub label!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("script:getargcount: 함수 또는 callsub 라벨 밖에서 사용되었습니다!\n");
+		else
+			ShowError("script:getargcount: used out of function or callsub label!\n");
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -22888,7 +24505,10 @@ BUILDIN_FUNC(checkre)
 			#endif
 			break;
 		default:
-			ShowWarning("buildin_checkre: unknown parameter.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_checkre: 알수 없는 파라메터입니다.\n");
+			else
+				ShowWarning("buildin_checkre: unknown parameter.\n");
 			break;
 	}
 	return SCRIPT_CMD_SUCCESS;
@@ -22907,7 +24527,10 @@ BUILDIN_FUNC(getrandgroupitem) {
 	group = script_getnum(st,2);
 
 	if (!group) {
-		ShowError("buildin_getrandgroupitem: Invalid group id (%d)!\n",script_getnum(st,2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getrandgroupitem: (%d)은(는) 잘못된 그룹ID입니다.\n",script_getnum(st,2));
+		else
+			ShowError("buildin_getrandgroupitem: Invalid group id (%d)!\n",script_getnum(st,2));
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -22978,7 +24601,10 @@ BUILDIN_FUNC(getgroupitem) {
 	}
 	
 	if( itemdb_group.pc_get_itemgroup( group_id, identify, *sd ) ){
-		ShowError("buildin_getgroupitem: Invalid group id '%d' specified.\n",group_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getgroupitem: 잘못된 그룹ID '%d'이(가) 지정되었습니다.\n",group_id);
+		else
+			ShowError("buildin_getgroupitem: Invalid group id '%d' specified.\n",group_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -23015,7 +24641,10 @@ BUILDIN_FUNC(cleanmap)
 		if (x0 > 0 && y0 > 0 && x1 > 0 && y1 > 0) {
 			map_foreachinallarea(atcommand_cleanfloor_sub, m, x0, y0, x1, y1, BL_ITEM);
 		} else {
-			ShowError("cleanarea: invalid coordinate defined!\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("cleanarea: 잘못된 좌표가 정의되었습니다.\n");
+			else
+				ShowError("cleanarea: invalid coordinate defined!\n");
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -23041,14 +24670,20 @@ BUILDIN_FUNC(npcskill)
 		const char *name = script_getstr(st, 2);
 
 		if (!(skill_id = skill_name2id(name))) {
-			ShowError("buildin_npcskill: Invalid skill name %s.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_npcskill: %s은(는) 잘못된 스킬 이름입니다.\n", name);
+			else
+				ShowError("buildin_npcskill: Invalid skill name %s.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
 		skill_id = script_getnum(st, 2);
 
 		if (!skill_get_index(skill_id)) {
-			ShowError("buildin_npcskill: Invalid skill ID %d.\n", skill_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_npcskill: %d은(는) 잘못된 스킬 번호입니다.\n", skill_id);
+			else
+				ShowError("buildin_npcskill: Invalid skill ID %d.\n", skill_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -23058,11 +24693,17 @@ BUILDIN_FUNC(npcskill)
 	nd			= (struct npc_data *)map_id2bl(sd->npc_id);
 
 	if (stat_point > battle_config.max_third_parameter) {
-		ShowError("npcskill: stat point exceeded maximum of %d.\n",battle_config.max_third_parameter );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npcskill: 최대 스텟포인트 %d을(를) 초과했습니다.\n",battle_config.max_third_parameter );
+		else
+			ShowError("npcskill: stat point exceeded maximum of %d.\n",battle_config.max_third_parameter );
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (npc_level > MAX_LEVEL) {
-		ShowError("npcskill: level exceeded maximum of %d.\n", MAX_LEVEL);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("npcskill: 최대레벨 %d을(를) 초과했습니다.\n", MAX_LEVEL);
+		else
+			ShowError("npcskill: level exceeded maximum of %d.\n", MAX_LEVEL);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (nd == nullptr) { //ain't possible, but I don't trust people.
@@ -23104,7 +24745,10 @@ BUILDIN_FUNC(consumeitem)
 		item_data = item_db.searchname( name );
 
 		if( item_data == nullptr ){
-			ShowError( "buildin_consumeitem: Nonexistant item %s requested.\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_consumeitem: 존재하지 않는 아이템 %s이(가) 요청되었습니다.\n", name );
+			else
+				ShowError( "buildin_consumeitem: Nonexistant item %s requested.\n", name );
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
@@ -23113,7 +24757,10 @@ BUILDIN_FUNC(consumeitem)
 		item_data = item_db.find( nameid );
 
 		if( item_data == nullptr ){
-			ShowError("buildin_consumeitem: Nonexistant item %u requested.\n", nameid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_consumeitem: 존재하지 않는 아이템 %u이(가) 요청되었습니다.\n", nameid );
+			else
+				ShowError("buildin_consumeitem: Nonexistant item %u requested.\n", nameid );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -23443,7 +25090,10 @@ BUILDIN_FUNC(vip_status) {
 				script_pushint(st, 0);
 			break;
 		default:
-			ShowError( "buildin_vip_status: Unsupported type %d.\n", type );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_vip_status: %d은(는) 지원되지않는 타입입니다.\n", type );
+			else	
+				ShowError( "buildin_vip_status: Unsupported type %d.\n", type );
 			return SCRIPT_CMD_FAILURE;
 	}
 #else
@@ -23507,10 +25157,17 @@ BUILDIN_FUNC(montransform) {
 		type = SC_NONE;
 
 	if (mob_id == 0) {
-		if( script_isstring(st, 2) )
-			ShowWarning("buildin_montransform: Attempted to use non-existing monster '%s'.\n", script_getstr(st, 2));
-		else
-			ShowWarning("buildin_montransform: Attempted to use non-existing monster of ID '%d'.\n", script_getnum(st, 2));
+		if( script_isstring(st, 2) ) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_montransform: 존재하지 않는 몬스터 '%s'을(를) 사용하려고했습니다.\n", script_getstr(st, 2));
+			else
+				ShowWarning("buildin_montransform: Attempted to use non-existing monster '%s'.\n", script_getstr(st, 2));
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_montransform: ID가 '%d'인 존재하지 않는 몬스터를 사용하려고했습니다.\n", script_getnum(st, 2));
+			else
+				ShowWarning("buildin_montransform: Attempted to use non-existing monster of ID '%d'.\n", script_getnum(st, 2));
+		}
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -23520,7 +25177,10 @@ BUILDIN_FUNC(montransform) {
 	}
 
 	if (!(type >= SC_NONE && type < SC_MAX)) {
-		ShowWarning("buildin_montransform: Unsupported status change id %d\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_montransform: %d은(는) 지원되지 않는 상태 변경 ID입니다.\n", type);
+		else
+			ShowWarning("buildin_montransform: Unsupported status change id %d\n", type);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -23591,12 +25251,18 @@ BUILDIN_FUNC(bonus_script) {
 
 	// No Script string, No Duration!
 	if (script_str[0] == '\0' || !dur) {
-		ShowError("buildin_bonus_script: Invalid! Script: \"%s\". Duration: %d\n", script_str, dur);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_bonus_script: 잘못됐습니다! 스크립트: \"%s\". 지속: %d\n", script_str, dur);
+		else
+			ShowError("buildin_bonus_script: Invalid! Script: \"%s\". Duration: %d\n", script_str, dur);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if (strlen(script_str) >= MAX_BONUS_SCRIPT_LENGTH) {
-		ShowError("buildin_bonus_script: Script string to long: \"%s\".\n", script_str);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_bonus_script: 긴 문자열 스크립트: \"%s\".\n", script_str);
+		else
+			ShowError("buildin_bonus_script: Script string to long: \"%s\".\n", script_str);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -23679,19 +25345,28 @@ BUILDIN_FUNC(getguildmember)
 		if (script_hasdata(st,4)) {
 			data = script_getdata(st, 4);
 			if (!data_isreference(data)) {
-				ShowError("buildin_getguildmember: Error in argument! Please give a variable to store values in.\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_getguildmember: 인수에 오류가 있습니다. 값을 저장할 변수를 지정하십시오.\n");
+				else	
+					ShowError("buildin_getguildmember: Error in argument! Please give a variable to store values in.\n");
 				return SCRIPT_CMD_FAILURE;
 			}
 			varname = reference_getname(data);
 			if (type <= 0 && varname[strlen(varname)-1] != '$') {
-				ShowError("buildin_getguildmember: The array %s is not string type.\n", varname);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_getguildmember: 배열 %s은(는) 문자열 타입이 아닙니다.\n", varname);
+				else
+					ShowError("buildin_getguildmember: The array %s is not string type.\n", varname);
 				return SCRIPT_CMD_FAILURE;
 			}
 			if (not_server_variable(*varname)) {
 				map_session_data *sd;
 
 				if (!script_rid2sd(sd)) {
-					ShowError("buildin_getguildmember: Cannot use a player variable '%s' if no player is attached.\n", varname);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("buildin_getguildmember: 연결(attached)된 플레이어가 없으면 플레이어 변수는 사용 할 수 없습니다.\n", varname);
+					else
+						ShowError("buildin_getguildmember: Cannot use a player variable '%s' if no player is attached.\n", varname);
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -23851,7 +25526,10 @@ BUILDIN_FUNC(mergeitem2) {
 			std::shared_ptr<item_data> id = item_db.searchname( name );
 
 			if( id == nullptr ){
-				ShowError("buildin_mergeitem2: Nonexistant item %s requested.\n", name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_mergeitem2: 존재하지 않는 아이템 %s이(가) 요청되었습니다.\n", name);
+				else
+					ShowError("buildin_mergeitem2: Nonexistant item %s requested.\n", name);
 				script_pushint(st, count);
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -23859,7 +25537,10 @@ BUILDIN_FUNC(mergeitem2) {
 		} else {// <item id>
 			nameid = script_getnum(st, 2);
 			if (!item_db.exists(nameid)) {
-				ShowError("buildin_mergeitem: Nonexistant item %u requested.\n", nameid);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_mergeitem: 존재하지 않는 아이템 %u이(가) 요청되었습니다.\n", nameid);
+				else
+					ShowError("buildin_mergeitem: Nonexistant item %u requested.\n", nameid);
 				script_pushint(st, count);
 				return SCRIPT_CMD_FAILURE;
 			}
@@ -23927,7 +25608,10 @@ BUILDIN_FUNC(npcshopupdate) {
 	int32 stock = script_hasdata(st,5) ? script_getnum(st,5) : -1;
 
 	if( stock < -1 ){
-		ShowError( "buildin_npcshopupdate: Invalid stock amount in marketshop '%s'.\n", nd->exname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_npcshopupdate: 마켓샵 '%s'의 재고량이 잘못되었습니다.\n", nd->exname );
+		else
+			ShowError( "buildin_npcshopupdate: Invalid stock amount in marketshop '%s'.\n", nd->exname );
 		script_pushint( st, 0 );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -23940,7 +25624,10 @@ BUILDIN_FUNC(npcshopupdate) {
 	}
 	
 	if (!nd->u.shop.count) {
-		ShowError("buildin_npcshopupdate: Attempt to update empty shop from '%s'.\n", nd->exname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_npcshopupdate: 빈 샵(상점)을 '%s'으로부터 업데이트 하려고합니다.\n", nd->exname);
+		else
+			ShowError("buildin_npcshopupdate: Attempt to update empty shop from '%s'.\n", nd->exname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24031,13 +25718,19 @@ BUILDIN_FUNC(getvar) {
 	const char *name = nullptr;
 
 	if (!sd) {
-		ShowError("buildin_getvar: No player found with char id '%d'.\n", char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvar: 케릭터 ID가 '%d'인 플레이어를 찾을 수 없습니다.\n", char_id);
+		else
+			ShowError("buildin_getvar: No player found with char id '%d'.\n", char_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	data = script_getdata(st, 2);
 	if (!data_isreference(data)) {
-		ShowError("buildin_getvar: Not a variable\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvar: 변수가 아닙니다.\n");
+		else
+			ShowError("buildin_getvar: Not a variable\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -24047,7 +25740,10 @@ BUILDIN_FUNC(getvar) {
 	name = reference_getname(data);
 
 	if (reference_toparam(data)) {
-		ShowError("buildin_getvar: '%s' is a parameter - please use readparam instead\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvar: '%s'은(는) 파라메터입니다. - 대신 readparam을 사용하십시오.\n", name);
+		else
+			ShowError("buildin_getvar: '%s' is a parameter - please use readparam instead\n", name);
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -24055,7 +25751,10 @@ BUILDIN_FUNC(getvar) {
 	}
 
 	if (name[0] == '.' || name[0] == '$' || name[0] == '\'') { // Not a PC variable
-		ShowError("buildin_getvar: Invalid scope (not PC variable)\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getvar: 잘못된 범위입니다. (PC변수가 아닙니다.)\n");
+		else
+			ShowError("buildin_getvar: Invalid scope (not PC variable)\n");
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -24093,7 +25792,10 @@ BUILDIN_FUNC(showscript) {
 	}
 
 	if (!bl) {
-		ShowError("buildin_showscript: Script not attached. (id=%d, rid=%d, oid=%d)\n", id, st->rid, st->oid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_showscript: 스크립트가 연결(Attached)되지 않았습니다. (id=%d, rid=%d, oid=%d)\n", id, st->rid, st->oid);
+		else
+			ShowError("buildin_showscript: Script not attached. (id=%d, rid=%d, oid=%d)\n", id, st->rid, st->oid);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24101,7 +25803,10 @@ BUILDIN_FUNC(showscript) {
 	if (script_hasdata(st, 4)) {
 		target = static_cast<send_target>(script_getnum(st, 4));
 		if (target == SELF && map_id2sd(bl->id) == nullptr) {
-			ShowWarning("script: showscript: self can't be used for non-players objects.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("script: showscript: 자기 자신을 플레이어가 아닌 객체에 사용할 수 없습니다.\n");
+			else
+				ShowWarning("script: showscript: self can't be used for non-players objects.\n");
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -24168,7 +25873,10 @@ BUILDIN_FUNC(geteleminfo) {
 			script_pushint(st, ed->elemental.class_);
 			break;
 		default:
-			ShowError("buildin_geteleminfo: Invalid type '%d'.\n", type);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_geteleminfo: '%d'은(는) 잘못된 타입입니다.\n", type);
+			else
+				ShowError("buildin_geteleminfo: Invalid type '%d'.\n", type);
 			script_pushint(st, 0);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -24249,7 +25957,10 @@ BUILDIN_FUNC(adopt)
 
 		sd = map_nick2sd(name,false);
 		if (sd == nullptr) {
-			ShowError("buildin_adopt: Non-existant parent character %s requested.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_adopt: 존재하지 않는 상위 케릭터 %s이(가) 요청되었습니다.\n", name);
+			else
+				ShowError("buildin_adopt: Non-existant parent character %s requested.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
@@ -24257,7 +25968,10 @@ BUILDIN_FUNC(adopt)
 
 		sd = map_charid2sd(char_id);
 		if (sd == nullptr) {
-			ShowError("buildin_adopt: Non-existant parent character %d requested.\n", char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_adopt: 존재하지 않는 상위 케릭터 %d이(가) 요청되었습니다.\n", char_id);
+			else
+				ShowError("buildin_adopt: Non-existant parent character %d requested.\n", char_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -24267,7 +25981,10 @@ BUILDIN_FUNC(adopt)
 
 		b_sd = map_nick2sd(name,false);
 		if (b_sd == nullptr) {
-			ShowError("buildin_adopt: Non-existant baby character %s requested.\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_adopt: 존재하지 않는 베이비 케릭터 %s이(가) 요청되었습니다.\n", name);
+			else
+				ShowError("buildin_adopt: Non-existant baby character %s requested.\n", name);
 			return SCRIPT_CMD_FAILURE;
 		}
 	} else {
@@ -24275,7 +25992,10 @@ BUILDIN_FUNC(adopt)
 
 		b_sd = map_charid2sd(char_id);
 		if (b_sd == nullptr) {
-			ShowError("buildin_adopt: Non-existant baby character %d requested.\n", char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_adopt: 존재하지 않는 베이비 케릭터 %d이(가) 요청되었습니다.\n", char_id);
+			else
+				ShowError("buildin_adopt: Non-existant baby character %d requested.\n", char_id);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
@@ -24317,7 +26037,10 @@ BUILDIN_FUNC(minmax){
 	i = 2;
 
 	if( !script_hasdata( st, i ) ){
-		ShowError( "buildin_%s: no arguments given!\n", functionname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_%s: 인수가 주어지지 않았습니다!\n", functionname );
+		else
+			ShowError( "buildin_%s: no arguments given!\n", functionname );
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24329,7 +26052,10 @@ BUILDIN_FUNC(minmax){
 		value = SCRIPT_INT_MIN;
 		func = i64max;
 	}else{
-		ShowError( "buildin_%s: Unknown call case for min/max!\n", functionname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_%s: 최소/최대에 대한 알수 없는 콜 케이스!\n", functionname );
+		else
+			ShowError( "buildin_%s: Unknown call case for min/max!\n", functionname );
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24355,7 +26081,10 @@ BUILDIN_FUNC(minmax){
 
 			// Check if it's a string variable
 			if( is_string_variable( name ) ){
-				ShowError( "buildin_%s: illegal type, need integer!\n", functionname );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_%s: 잘못된 타입, 정수가 필요합니다!\n", functionname );
+				else
+					ShowError( "buildin_%s: illegal type, need integer!\n", functionname );
 				script_reportdata( data );
 				st->state = END;
 				return SCRIPT_CMD_FAILURE;
@@ -24365,13 +26094,19 @@ BUILDIN_FUNC(minmax){
 			sd = st->rid ? map_id2sd(st->rid) : nullptr;
 
 			if (not_server_variable(*name) && !script_rid2sd(sd)) {
-				ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", functionname, name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_%s: 연결된(attached) 플레이어가 없으면 플레이어 변수는 사용할 수 없습니다.\n", functionname, name);
+				else
+					ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", functionname, name);
 				return SCRIPT_CMD_FAILURE;
 			}
 
 			// Try to find the array's source pointer
 			if( !script_array_src( st, sd, name, reference_getref( data ) ) ){
-				ShowError( "buildin_%s: not a array!\n", functionname );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_%s: 배열이 아닙니다!\n", functionname );
+				else
+					ShowError( "buildin_%s: not a array!\n", functionname );
 				script_reportdata( data );
 				st->state = END;
 				return SCRIPT_CMD_FAILURE;
@@ -24397,7 +26132,10 @@ BUILDIN_FUNC(minmax){
 				value = func( value, 0 );
 			}
 		}else{
-			ShowError( "buildin_%s: not a supported data type!\n", functionname );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_%s: 지원되는 데이터 타입이 아닙니다!\n", functionname );
+			else
+				ShowError( "buildin_%s: not a supported data type!\n", functionname );
 			script_reportdata( data );
 			st->state = END;
 			return SCRIPT_CMD_FAILURE;
@@ -24433,7 +26171,10 @@ BUILDIN_FUNC(getexp2) {
 		return SCRIPT_CMD_FAILURE;
 
 	if( base_exp == 0 && job_exp == 0 ){
-		ShowError( "buildin_getexp2: Called with base and job exp 0.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getexp2: 베이스 및 직업 경험치가 0으로 호출되었습니다.");
+		else	
+			ShowError( "buildin_getexp2: Called with base and job exp 0.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -24475,7 +26216,10 @@ BUILDIN_FUNC(hateffect){
 	bool enable = script_getnum(st,3) ? true : false;
 
 	if( effectID <= HAT_EF_MIN || effectID >= HAT_EF_MAX ){
-		ShowError( "buildin_hateffect: unsupported hat effect id %d\n", effectID );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_hateffect: %d은(는) 지원되지 않는 모자 효과입니다.\n", effectID );
+		else	
+			ShowError( "buildin_hateffect: unsupported hat effect id %d\n", effectID );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -24525,7 +26269,10 @@ BUILDIN_FUNC(getrandomoptinfo) {
 				val = sd->inventory.u.items_inventory[current_equip_item_index].option[current_equip_opt_index].param;
 				break;
 			default:
-				ShowWarning("buildin_getrandomoptinfo: Invalid attribute type %d (Max %d).\n", param, MAX_ITEM_RDM_OPT);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("buildin_getrandomoptinfo: 잘못된 속성 타입 %d (최대 %d).\n", param, MAX_ITEM_RDM_OPT);
+				else	
+					ShowWarning("buildin_getrandomoptinfo: Invalid attribute type %d (Max %d).\n", param, MAX_ITEM_RDM_OPT);
 				val = 0;
 				break;
 		}
@@ -24554,14 +26301,20 @@ BUILDIN_FUNC(getequiprandomoption) {
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (index < 0 || index >= MAX_ITEM_RDM_OPT) {
-		ShowError("buildin_getequiprandomoption: Invalid random option index %d.\n", index);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getequiprandomoption: 랜덤 옵션 인덱스 %d이(가) 잘못되었습니다.\n", index);
+		else
+			ShowError("buildin_getequiprandomoption: Invalid random option index %d.\n", index);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (equip_index_check(pos))
 		i = pc_checkequip(sd, equip_bitmask[pos]);
 	if (i < 0) {
-		ShowError("buildin_getequiprandomoption: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getequiprandomoption: %d위치에 착용된 아이템이 없습니다 (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+		else
+			ShowError("buildin_getequiprandomoption: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24577,7 +26330,10 @@ BUILDIN_FUNC(getequiprandomoption) {
 			val = sd->inventory.u.items_inventory[i].option[index].param;
 			break;
 		default:
-			ShowWarning("buildin_getequiprandomoption: Invalid attribute type %d (Max %d).\n", type, MAX_ITEM_RDM_OPT);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_getequiprandomoption: 잘못된 속성 타입 %d (최대 %d).\n", type, MAX_ITEM_RDM_OPT);
+			else
+				ShowWarning("buildin_getequiprandomoption: Invalid attribute type %d (Max %d).\n", type, MAX_ITEM_RDM_OPT);
 			val = 0;
 			break;
 	}
@@ -24606,12 +26362,18 @@ BUILDIN_FUNC(setrandomoption) {
 	std::shared_ptr<s_random_opt_data> opt = random_option_db.find(static_cast<uint16>(id));
 
 	if (opt == nullptr) {
-		ShowError("buildin_setrandomoption: Random option ID %d does not exists.\n", id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_setrandomoption: 랜덤 옵션 ID %d이(가) 없습니다.\n", id);
+		else
+			ShowError("buildin_setrandomoption: Random option ID %d does not exists.\n", id);
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (index < 0 || index >= MAX_ITEM_RDM_OPT) {
-		ShowError("buildin_setrandomoption: Invalid random option index %d.\n", index);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_setrandomoption: 랜덤 옵션 ID %d이(가) 잘못되었습니다.\n", index);
+		else
+			ShowError("buildin_setrandomoption: Invalid random option index %d.\n", index);
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24632,7 +26394,10 @@ BUILDIN_FUNC(setrandomoption) {
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	ShowError("buildin_setrandomoption: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_setrandomoption: %d위치에 착용된 아이템이 없습니다. (케릭터ID=%d/계정ID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
+	else
+		ShowError("buildin_setrandomoption: No item equipped at pos %d (CID=%d/AID=%d).\n", pos, sd->status.char_id, sd->status.account_id);
 	script_pushint(st, 0);
 	return SCRIPT_CMD_FAILURE;
 }
@@ -24667,7 +26432,10 @@ BUILDIN_FUNC(needed_trait_point) {
 	int type = script_getnum( st, 2 );
 
 	if( type < SP_POW || type > SP_CRT ){
-		ShowError( "buildin_needed_trait_point: Unknown trait type %d\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_needed_trait_point: %d은(는) 알 수 없는 특성 타입입니다.\n", type );
+		else
+			ShowError( "buildin_needed_trait_point: Unknown trait type %d\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -24694,7 +26462,10 @@ BUILDIN_FUNC(jobcanentermap) {
 	}
 	m = map_mapindex2mapid(mapidx);
 	if (m == -1) { // Map is on different map server
-		ShowError("buildin_jobcanentermap: Map '%s' is not found in this server.\n", mapname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_jobcanentermap: 서버에서 맵 '%s'을(를) 찾을 수 없습니다.\n", mapname);
+		else
+			ShowError("buildin_jobcanentermap: Map '%s' is not found in this server.\n", mapname);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24744,12 +26515,18 @@ BUILDIN_FUNC(getguildalliance)
 	auto guild_data2 = guild_search(guild_id2);
 
 	if (guild_data1 == nullptr) {
-		ShowWarning("buildin_getguildalliance: Requesting non-existent GuildID1 '%d'.\n", guild_id1);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getguildalliance: 존재하지 않는 길드ID1 '%d'을(를) 요청합니다.\n", guild_id1);
+		else
+			ShowWarning("buildin_getguildalliance: Requesting non-existent GuildID1 '%d'.\n", guild_id1);
 		script_pushint(st, -2);
 		return SCRIPT_CMD_FAILURE;
 	}
 	if (guild_data2 == nullptr) {
-		ShowWarning("buildin_getguildalliance: Requesting non-existent GuildID2 '%d'.\n", guild_id2);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_getguildalliance: 존재하지 않는 길드ID2 '%d'을(를) 요청합니다.\n", guild_id2);
+		else
+			ShowWarning("buildin_getguildalliance: Requesting non-existent GuildID2 '%d'.\n", guild_id2);
 		script_pushint(st, -1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24781,7 +26558,10 @@ BUILDIN_FUNC(openstorage2) {
 	}
 
 	if (!storage_exists(stor_id)) {
-		ShowError("buildin_openstorage2: Invalid storage_id '%d'!\n", stor_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_openstorage2: '%d'은(는) 잘못된 창고ID입니다.\n", stor_id);
+		else
+			ShowError("buildin_openstorage2: Invalid storage_id '%d'!\n", stor_id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -24801,7 +26581,10 @@ BUILDIN_FUNC(channel_create) {
 	TBL_PC *sd = nullptr;
 
 	if (i != 0) {
-		ShowError("buildin_channel_create: Channel name '%s' is invalid. Errno %d\n", chname, i);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_create: '%s'은(는) 잘못된 채널이름입니다. 에러번호: %d\n", chname, i);
+		else	
+			ShowError("buildin_channel_create: Channel name '%s' is invalid. Errno %d\n", chname, i);
 		script_pushint(st,i);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24811,7 +26594,10 @@ BUILDIN_FUNC(channel_create) {
 	if (script_hasdata(st,8)) {
 		tmp_chan.char_id = script_getnum(st,8);
 		if (!(sd = map_charid2sd(tmp_chan.char_id))) {
-			ShowError("buildin_channel_create: Player with char id '%d' is not found.\n", tmp_chan.char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_create: 캐릭터 ID가 '%d'인 플레이어를 찾을 수 없습니다.\n", tmp_chan.char_id);
+			else		
+				ShowError("buildin_channel_create: Player with char id '%d' is not found.\n", tmp_chan.char_id);
 			script_pushint(st,-5);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -24841,7 +26627,10 @@ BUILDIN_FUNC(channel_create) {
 		tmp_chan.color = i ? channel_config.private_channel.color : channel_getColor("Default");
 
 	if (!(ch = channel_create(&tmp_chan))) {
-		ShowError("buildin_channel_create: Cannot create channel '%s'.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_create: '%s' 채널을 생성할 수 없습니다.\n", chname);
+		else
+			ShowError("buildin_channel_create: Cannot create channel '%s'.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24893,7 +26682,10 @@ BUILDIN_FUNC(channel_setopt) {
 	int opt = script_getnum(st,3), value = script_getnum(st,4);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_setopt: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_setopt: '%s' 채널이름은 잘못되었습니다.\n", chname);
+		else
+			ShowError("buildin_channel_setopt: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24915,7 +26707,10 @@ BUILDIN_FUNC(channel_setopt) {
 			ch->msg_delay = value;
 			break;
 		default:
-			ShowError("buildin_channel_setopt: Invalid option %d!\n", opt);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_setopt: %d은(는) 잘못된 옵션입니다!\n", opt);
+			else	
+				ShowError("buildin_channel_setopt: Invalid option %d!\n", opt);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -24933,7 +26728,10 @@ BUILDIN_FUNC(channel_getopt) {
 	const char *chname = script_getstr(st, 2);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_getopt: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_getopt: '%s'은(는) 잘못된 채널 이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_getopt: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24954,7 +26752,10 @@ BUILDIN_FUNC(channel_getopt) {
 			script_pushint(st, ch->msg_delay);
 			break;
 		default:
-			ShowError("buildin_channel_getopt: Invalid option %d!\n", opt);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_getopt: %d은(는) 잘못된 옵션입니다!\n", opt);
+			else
+				ShowError("buildin_channel_getopt: Invalid option %d!\n", opt);
 			script_pushint(st, false);
 			return SCRIPT_CMD_FAILURE;
 	}
@@ -24973,7 +26774,10 @@ BUILDIN_FUNC(channel_setcolor) {
 	int color = script_getnum(st,3);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_setcolor: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_setcolor: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_setcolor: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -24994,7 +26798,10 @@ BUILDIN_FUNC(channel_setpass) {
 	const char *chname = script_getstr(st,2), *passwd = script_getstr(st,3);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_setpass: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_setpass: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_setpass: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25018,7 +26825,10 @@ BUILDIN_FUNC(channel_setgroup) {
 	int i, n = 0, group = 0;
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_setgroup: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_setgroup: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_setgroup: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25029,7 +26839,10 @@ BUILDIN_FUNC(channel_setgroup) {
 		int32 id, idx;
 
 		if (varname[strlen(varname)-1] == '$') {
-			ShowError("buildin_channel_setgroup: The array %s is not numeric type.\n", varname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_setgroup: %s 배열은 숫자형이 아닙니다.\n", varname);
+			else	
+				ShowError("buildin_channel_setgroup: The array %s is not numeric type.\n", varname);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -25038,14 +26851,20 @@ BUILDIN_FUNC(channel_setgroup) {
 			map_session_data *sd;
 
 			if (!script_rid2sd(sd)) {
-				ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", funcname, varname);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_%s: 연결된(attached) 플레이어가 없으면 플레이어 변수는 사용할 수 없습니다.\n", funcname, varname);
+				else
+					ShowError("buildin_%s: Cannot use a player variable '%s' if no player is attached.\n", funcname, varname);
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
 
 		n = script_array_highest_key(st, nullptr, reference_getname(data), reference_getref(data));
 		if (n < 1) {
-			ShowError("buildin_channel_setgroup: No group id listed.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_setgroup: 그룹 ID가 목록안에 없습니다.\n");
+			else
+				ShowError("buildin_channel_setgroup: No group id listed.\n");
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -25065,7 +26884,10 @@ BUILDIN_FUNC(channel_setgroup) {
 			}
 			RECREATE(ch->groups, unsigned short, ++ch->group_count);
 			ch->groups[ch->group_count-1] = group;
-			ShowInfo("buildin_channel_setgroup: (2) Added group %d. Num: %d\n", ch->groups[ch->group_count-1], ch->group_count);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("buildin_channel_setgroup: (2) %d의 그룹이 추가되었습니다. 갯수: %d\n", ch->groups[ch->group_count-1], ch->group_count);
+			else
+				ShowInfo("buildin_channel_setgroup: (2) Added group %d. Num: %d\n", ch->groups[ch->group_count-1], ch->group_count);
 		}
 	}
 	else {
@@ -25073,7 +26895,10 @@ BUILDIN_FUNC(channel_setgroup) {
 		n = script_lastdata(st)-1;
 
 		if (n < 1) {
-			ShowError("buildin_channel_setgroup: Please input at least 1 group_id.\n");
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_setgroup: 적어도 1개의 group_id를 입력하십시오.\n");
+			else
+				ShowError("buildin_channel_setgroup: Please input at least 1 group_id.\n");
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -25091,7 +26916,10 @@ BUILDIN_FUNC(channel_setgroup) {
 		CREATE(ch->groups, unsigned short, n);
 		for (i = 3; i < n+2; i++) {
 			ch->groups[ch->group_count++] = script_getnum(st,i);
-			ShowInfo("buildin_channel_setgroup: (1) Added group %d. Num: %d\n", ch->groups[ch->group_count-1], ch->group_count);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("buildin_channel_setgroup: (1) %d의 그룹이 추가되었습니다. 갯수: %d\n", ch->groups[ch->group_count-1], ch->group_count);
+			else
+				ShowInfo("buildin_channel_setgroup: (1) Added group %d. Num: %d\n", ch->groups[ch->group_count-1], ch->group_count);
 		}
 	}
 	script_pushint(st,n);
@@ -25113,12 +26941,18 @@ BUILDIN_FUNC(channel_chat) {
 	if (chname[0] != '#') { // By Map
 		int m = mapindex_name2id(chname);
 		if (!m || (m = map_mapindex2mapid(m)) < 0) {
-			ShowError("buildin_channel_chat: Invalid map '%s'.\n", chname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_chat: '%s'은(는) 잘못된 맵입니다.\n", chname);
+			else
+				ShowError("buildin_channel_chat: Invalid map '%s'.\n", chname);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
 		if (!(ch = map_getmapdata(m)->channel)) {
-			ShowDebug("buildin_channel_chat: Map '%s' doesn't have local channel yet.\n", chname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("buildin_channel_chat: 맵 '%s'에 아직 지역채널이 없습니다.\n", chname);
+			else
+				ShowDebug("buildin_channel_chat: Map '%s' doesn't have local channel yet.\n", chname);
 			script_pushint(st,0);
 			return SCRIPT_CMD_SUCCESS;
 		}
@@ -25126,17 +26960,26 @@ BUILDIN_FUNC(channel_chat) {
 	else if (strcmpi(chname+1,channel_config.map_tmpl.name) == 0) {
 		TBL_NPC *nd = map_id2nd(st->oid);
 		if (!nd || nd->bl.m == -1) {
-			ShowError("buildin_channel_chat: Floating NPC needs map name instead '%s'.\n", chname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_chat: 유동적인 NPC는 '%s'대신 맵이름이 필요합니다.\n", chname);
+			else
+				ShowError("buildin_channel_chat: Floating NPC needs map name instead '%s'.\n", chname);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
 		if (!(ch = map_getmapdata(nd->bl.m)->channel)) {
-			ShowDebug("buildin_channel_chat: Map '%s' doesn't have local channel yet.\n", chname);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowDebug("buildin_channel_chat: 맵 '%s'에 아직 지역채널이 없습니다.\n", chname);
+			else
+				ShowDebug("buildin_channel_chat: Map '%s' doesn't have local channel yet.\n", chname);
 			script_pushint(st,0);
 			return SCRIPT_CMD_SUCCESS;
 		}
 	}
 	else if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_chat: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
 		ShowError("buildin_channel_chat: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
@@ -25168,7 +27011,10 @@ BUILDIN_FUNC(channel_ban) {
 	TBL_PC *tsd;
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_ban: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_ban: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_ban: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25216,7 +27062,10 @@ BUILDIN_FUNC(channel_unban) {
 	unsigned int char_id = script_getnum(st,3);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("buildin_channel_unban: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_unban: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_unban: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25257,7 +27106,10 @@ BUILDIN_FUNC(channel_kick) {
 		const char *name = script_getstr(st, 3);
 
 		if (!(tsd = map_nick2sd(name,false))) {
-			ShowError("buildin_channel_kick: Player with nick '%s' is not online\n", name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_kick: 닉네임이 '%s'인 플레이어는 접속중이 아닙니다.\n", name);
+			else	
+				ShowError("buildin_channel_kick: Player with nick '%s' is not online\n", name);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -25265,14 +27117,20 @@ BUILDIN_FUNC(channel_kick) {
 		int char_id = script_getnum(st, 3);
 
 		if (!(tsd = map_charid2sd(char_id))) {
-			ShowError("buildin_channel_kick: Player with char_id '%d' is not online\n", char_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_channel_kick: 케릭터ID번호가 '%d'인 플레이어는 접속중이 아닙니다.\n", char_id);
+			else
+				ShowError("buildin_channel_kick: Player with char_id '%d' is not online\n", char_id);
 			script_pushint(st,0);
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
 
 	if (!(ch = channel_name2channel((char *)chname, tsd, 0))) {
-		ShowError("buildin_channel_kick: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_channel_kick: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("buildin_channel_kick: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25308,7 +27166,10 @@ BUILDIN_FUNC(channel_delete) {
 	const char *chname = script_getstr(st,2);
 
 	if (!(ch = channel_name2channel((char *)chname, nullptr, 0))) {
-		ShowError("channel_delete: Channel name '%s' is invalid.\n", chname);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("channel_delete: '%s'은(는) 잘못된 채널이름입니다.\n", chname);
+		else
+			ShowError("channel_delete: Channel name '%s' is invalid.\n", chname);
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25325,11 +27186,17 @@ BUILDIN_FUNC(unloadnpc) {
 	nd = npc_name2id(name);
 
 	if( nd == nullptr ){
-		ShowError( "buildin_unloadnpc: npc '%s' was not found.\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_unloadnpc: NPC '%s'을(를) 찾을 수 없습니다.\n", name );
+		else
+			ShowError( "buildin_unloadnpc: npc '%s' was not found.\n", name );
 		return SCRIPT_CMD_FAILURE;
 	} else if ( nd->bl.id == st->oid ) {
 		// Supporting self-unload isn't worth the problem it may cause. [Secret]
-		ShowError("buildin_unloadnpc: You cannot self-unload NPC '%s'.\n.", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_unloadnpc: '%s' 엔피씨를 스스로 언로드 시킬 수는 없습니다.\n.", name);
+		else
+			ShowError("buildin_unloadnpc: You cannot self-unload NPC '%s'.\n.", name);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25351,7 +27218,10 @@ BUILDIN_FUNC(duplicate)
 	npc_data* nd = npc_name2id( old_npcname );
 
 	if( nd == nullptr ){
-		ShowError( "buildin_duplicate: No such NPC '%s'.\n", old_npcname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate: '%s'인 NPC를 찾지 못했습니다.\n", old_npcname );
+		else
+			ShowError( "buildin_duplicate: No such NPC '%s'.\n", old_npcname );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25360,7 +27230,10 @@ BUILDIN_FUNC(duplicate)
 	int16 mapid = map_mapname2mapid( mapname );
 
 	if( mapid < 0 ){
-		ShowError( "buildin_duplicate: map '%s' in not found!\n", mapname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate: 맵 '%s'에서 찾지 못했습니다!\n", mapname );
+		else
+			ShowError( "buildin_duplicate: map '%s' in not found!\n", mapname );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25369,7 +27242,10 @@ BUILDIN_FUNC(duplicate)
 
 	if( mapdata == nullptr ){
 		// Should not happen, but who knows...
-		ShowError( "buildin_duplicate: mapdata for '%s' is unavailable!\n", mapname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate: '%s'에 대한 맵 데이터를 사용할 수 없습니다!\n", mapname );
+		else
+			ShowError( "buildin_duplicate: mapdata for '%s' is unavailable!\n", mapname );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25377,7 +27253,10 @@ BUILDIN_FUNC(duplicate)
 	int16 x = script_getnum( st, 4 );
 
 	if( x < 0 || x >= mapdata->xs ){
-		ShowError( "buildin_duplicate: x coordinate %hd is out of bounds for map %s[0-%hd]!\n", x, mapname, mapdata->xs );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate: X좌표 %hd이(가) 맵 %s[0-%hd]의 범위를 벗어납니다!\n", x, mapname, mapdata->xs );
+		else
+			ShowError( "buildin_duplicate: x coordinate %hd is out of bounds for map %s[0-%hd]!\n", x, mapname, mapdata->xs );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25385,7 +27264,10 @@ BUILDIN_FUNC(duplicate)
 	int16 y = script_getnum( st, 5 );
 
 	if( y < 0 || y >= mapdata->ys ){
-		ShowError( "buildin_duplicate: y coordinate %hd is out of bounds for map %s[0-%hd]!\n", y, mapname, mapdata->ys );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate: Y좌표 %hd이(가) 맵 %s[0-%hd]의 범위를 벗어납니다!\n", y, mapname, mapdata->ys );
+		else
+			ShowError( "buildin_duplicate: y coordinate %hd is out of bounds for map %s[0-%hd]!\n", y, mapname, mapdata->ys );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25396,7 +27278,10 @@ BUILDIN_FUNC(duplicate)
 		const char* new_name = script_getstr( st, 6 );
 
 		if( strlen( new_name ) > NPC_NAME_LENGTH ){
-			ShowError( "buildin_duplicate: new NPC name \"%s\" is too long!\n", new_name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_duplicate: 신규 NPC 이름 \"%s\"은(는) 너무 깁니다!\n", new_name );
+			else
+				ShowError( "buildin_duplicate: new NPC name \"%s\" is too long!\n", new_name );
 			script_pushstrcopy( st, "" );
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -25459,7 +27344,10 @@ BUILDIN_FUNC(duplicate_dynamic){
 	struct npc_data* nd = npc_name2id( old_npcname );
 
 	if( nd == nullptr ){
-		ShowError( "buildin_duplicate_dynamic: No such NPC '%s'.\n", old_npcname );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_duplicate_dynamic: NPC '%s'을(를) 찾을 수 없습니다.\n", old_npcname );
+		else
+			ShowError( "buildin_duplicate_dynamic: No such NPC '%s'.\n", old_npcname );
 		script_pushstrcopy( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25496,7 +27384,10 @@ BUILDIN_FUNC(achievementadd) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementadd: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementadd: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementadd: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25528,7 +27419,10 @@ BUILDIN_FUNC(achievementremove) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementremove: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementremove: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementremove: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_SUCCESS;
 	}
@@ -25559,7 +27453,10 @@ BUILDIN_FUNC(achievementinfo) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementinfo: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementinfo: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementinfo: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25588,7 +27485,10 @@ BUILDIN_FUNC(achievementcomplete) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementcomplete: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementcomplete: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementcomplete: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25620,7 +27520,10 @@ BUILDIN_FUNC(achievementexists) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementexists: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementexists: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementexists: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_SUCCESS;
 	}
@@ -25654,7 +27557,10 @@ BUILDIN_FUNC(achievementupdate) {
 	}
 
 	if (achievement_db.exists(achievement_id) == false) {
-		ShowWarning("buildin_achievementupdate: Achievement '%d' doesn't exist.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementupdate: 달성과제 '%d'이(가) 존재하지 않습니다.\n", achievement_id);
+		else
+			ShowWarning("buildin_achievementupdate: Achievement '%d' doesn't exist.\n", achievement_id);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25681,7 +27587,10 @@ BUILDIN_FUNC(achievementupdate) {
 	else if (type == ACHIEVEINFO_GOTREWARD)
 		sd->achievement_data.achievements[i].rewarded = value;
 	else {
-		ShowWarning("buildin_achievementupdate: Unknown type '%d'.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("buildin_achievementupdate: '%d'은(는) 알수 없는 타입입니다.\n", type);
+		else
+			ShowWarning("buildin_achievementupdate: Unknown type '%d'.\n", type);
 		script_pushint(st, false);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -25768,7 +27677,10 @@ BUILDIN_FUNC(round) {
 	char* func = script_getfuncname(st);
 
 	if (precision <= 0) {
-		ShowError("buildin_round: Attempted to use zero or negative number as arbitrary precision.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_round: 0 또는 음수를 사용하려고 시도했습니다.\n");
+		else
+			ShowError("buildin_round: Attempted to use zero or negative number as arbitrary precision.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25798,7 +27710,10 @@ BUILDIN_FUNC(getequiptradability) {
 	if (equip_index_check(num))
 		i = pc_checkequip(sd, equip_bitmask[num]);
 	else{
-		ShowError("buildin_getequiptradability: Unknown equip index '%d'\n",num);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getequiptradability: '%d'은(는) 알수 없는 장착 인덱스 번호입니다.\n",num);
+		else 
+			ShowError("buildin_getequiptradability: Unknown equip index '%d'\n",num);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25815,14 +27730,20 @@ static inline bool mail_sub( struct script_state *st, struct script_data *data, 
 
 	// Check if it is a variable
 	if( !data_isreference(data) ){
-		ShowError("buildin_mail: argument %d is not a variable.\n", i );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_mail: %d은(는) 변수가 아닙니다.\n", i );
+		else
+			ShowError("buildin_mail: argument %d is not a variable.\n", i );
 		return false;
 	}
 
 	name = reference_getname(data);
 
 	if( is_string_variable(name) ){
-		ShowError( "buildin_mail: variable \"%s\" is a string variable.\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_mail: \"%s\"은(는) 문자열 변수입니다.\n", name );
+		else
+			ShowError( "buildin_mail: variable \"%s\" is a string variable.\n", name );
 		return false;
 	}
 
@@ -25830,14 +27751,20 @@ static inline bool mail_sub( struct script_state *st, struct script_data *data, 
 	if( not_server_variable(*name) && sd == nullptr ){
 		// If no player is attached
 		if( !script_rid2sd(sd) ){
-			ShowError( "buildin_mail: variable \"%s\" was not a server variable, but no player was attached.\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_mail: \"%s\"은(는) 서버변수가 아닙니다. 그 어떤 플레이어도 연결(attached)되지 않았습니다.\n", name );
+			else
+				ShowError( "buildin_mail: variable \"%s\" was not a server variable, but no player was attached.\n", name );
 			return false;
 		}
 	}
 
 	// Try to find the array's source pointer
 	if( !script_array_src( st, sd, name, reference_getref(data) ) ){
-		ShowError( "buildin_mail: variable \"%s\" is not an array.\n", name );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mail: \"%s\"은(는) 배열이 아닙니다.\n", name );
+		else
+			ShowError( "buildin_mail: variable \"%s\" is not an array.\n", name );
 		return false;
 	}
 
@@ -25870,7 +27797,10 @@ BUILDIN_FUNC(mail){
 	sender = script_getstr(st, 3);
 
 	if( strlen(sender) > NAME_LENGTH ){
-		ShowError( "buildin_mail: sender name can not be longer than %d characters.\n", NAME_LENGTH );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mail: 보낸 사람이름은 %d자를 초과할 수 없습니다.\n", NAME_LENGTH );
+		else
+			ShowError( "buildin_mail: sender name can not be longer than %d characters.\n", NAME_LENGTH );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25879,7 +27809,10 @@ BUILDIN_FUNC(mail){
 	title = script_getstr(st, 4);
 
 	if( strlen(title) > MAIL_TITLE_LENGTH ){
-		ShowError( "buildin_mail: title can not be longer than %d characters.\n", MAIL_TITLE_LENGTH );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mail: 제목은 %d자를 초과할 수 없습니다.\n", MAIL_TITLE_LENGTH );
+		else
+			ShowError( "buildin_mail: title can not be longer than %d characters.\n", MAIL_TITLE_LENGTH );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25888,7 +27821,10 @@ BUILDIN_FUNC(mail){
 	body = script_getstr(st, 5);
 
 	if( strlen(body) > MAIL_BODY_LENGTH ){
-		ShowError( "buildin_mail: body can not be longer than %d characters.\n", MAIL_BODY_LENGTH );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mail: 본문 내용은 %d자를 초과할 수 없습니다.\n", MAIL_BODY_LENGTH );
+		else
+			ShowError( "buildin_mail: body can not be longer than %d characters.\n", MAIL_BODY_LENGTH );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -25898,10 +27834,16 @@ BUILDIN_FUNC(mail){
 		int zeny = script_getnum(st, 6);
 
 		if( zeny < 0 ){
-			ShowError( "buildin_mail: a negative amount of zeny can not be sent.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_mail: 제니는 0 이하일 수 없습니다.\n");
+			else
+				ShowError( "buildin_mail: a negative amount of zeny can not be sent.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}else if( zeny > MAX_ZENY ){
-			ShowError( "buildin_mail: amount of zeny %u is exceeding maximum of %u. Capping...\n", zeny, MAX_ZENY );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_mail: %u제니는 제한량을 넘었습니다. (최대: %u) 재설정합니다.. \n", zeny, MAX_ZENY );
+			else
+				ShowError( "buildin_mail: amount of zeny %u is exceeding maximum of %u. Capping...\n", zeny, MAX_ZENY );
 			zeny = MAX_ZENY;
 		}
 
@@ -25920,12 +27862,18 @@ BUILDIN_FUNC(mail){
 		num_items = end - start;
 
 		if( num_items == 0 ){
-			ShowWarning( "buildin_mail: array \"%s\" contained no items.\n", name );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_mail: 배열 \"%s\"에는 아무 아이템도 없습니다.\n", name );
+			else
+				ShowWarning( "buildin_mail: array \"%s\" contained no items.\n", name );
 			break;
 		}
 
 		if( num_items > MAIL_MAX_ITEM ){
-			ShowWarning( "buildin_mail: array \"%s\" contained %d items, capping to maximum of %d...\n", name, num_items, MAIL_MAX_ITEM );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning( "buildin_mail: 배열 \"%s\"에는 %d개의 아이템이 있습니다. 최대 %d개로 조정함...\n", name, num_items, MAIL_MAX_ITEM );
+			else
+				ShowWarning( "buildin_mail: array \"%s\" contained %d items, capping to maximum of %d...\n", name, num_items, MAIL_MAX_ITEM );
 			num_items = MAIL_MAX_ITEM;
 		}
 
@@ -25934,14 +27882,20 @@ BUILDIN_FUNC(mail){
 			msg.item[i].identify = 1;
 
 			if( !item_db.exists(msg.item[i].nameid) ){
-				ShowError( "buildin_mail: invalid item id %u.\n", msg.item[i].nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_mail: %u은(는) 잘못된 아이템 번호입니다.\n", msg.item[i].nameid );
+				else
+					ShowError( "buildin_mail: invalid item id %u.\n", msg.item[i].nameid );
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
 
 		// Amounts
 		if( !script_hasdata(st,8) ){
-			ShowError("buildin_mail: missing item count variable at position %d.\n", 8);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_mail: %d 위치에 있는 변수에 아이템 갯수가 빠졌습니다.\n", 8);
+			else
+				ShowError("buildin_mail: missing item count variable at position %d.\n", 8);
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -25957,18 +27911,27 @@ BUILDIN_FUNC(mail){
 			msg.item[i].amount = (short)get_val2_num( st, reference_uid( id, start ), reference_getref( data ) );
 
 			if( msg.item[i].amount <= 0 ){
-				ShowError( "buildin_mail: amount %d for item %u is invalid.\n", msg.item[i].amount, msg.item[i].nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_mail: %d개는 아이템 %u에 대한 잘못된 갯수입니다.\n", msg.item[i].amount, msg.item[i].nameid );
+				else
+					ShowError( "buildin_mail: amount %d for item %u is invalid.\n", msg.item[i].amount, msg.item[i].nameid );
 				return SCRIPT_CMD_FAILURE;
 			}else if( itemdb_isstackable2(itm.get()) ){
 				uint16 max = itm->stack.amount > 0 ? itm->stack.amount : MAX_AMOUNT;
 
 				if( msg.item[i].amount > max ){
-					ShowWarning( "buildin_mail: amount %d for item %u is exceeding the maximum of %d. Capping...\n", msg.item[i].amount, msg.item[i].nameid, max );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning( "buildin_mail: %d개는 아이템 %u에 대한 최대 갯수 %d개 보다 많습니다. 통과됨...\n", msg.item[i].amount, msg.item[i].nameid, max );
+					else
+						ShowWarning( "buildin_mail: amount %d for item %u is exceeding the maximum of %d. Capping...\n", msg.item[i].amount, msg.item[i].nameid, max );
 					msg.item[i].amount = max;
 				}
 			}else{
 				if( msg.item[i].amount > 1 ){
-					ShowWarning( "buildin_mail: amount %d is invalid for non-stackable item %u.\n", msg.item[i].amount, msg.item[i].nameid );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowWarning( "buildin_mail: %u 아이템은 여러개를 지정 할 수 없습니다.\n", msg.item[i].amount, msg.item[i].nameid );
+					else
+						ShowWarning( "buildin_mail: amount %d is invalid for non-stackable item %u.\n", msg.item[i].amount, msg.item[i].nameid );
 					msg.item[i].amount = 1;
 				}
 			}
@@ -26015,7 +27978,10 @@ BUILDIN_FUNC(mail){
 			msg.item[i].bound = (char)get_val2_num( st, reference_uid( id, start ), reference_getref( data ) );
 
 			if( msg.item[i].bound < BOUND_NONE || msg.item[i].bound >= BOUND_MAX ){
-				ShowError( "buildin_mail: bound %d for item %u is invalid.\n", msg.item[i].bound, msg.item[i].nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_mail: %d은(는) 아이템 %u에 대한 잘못된 묶음(bound)입니다.\n", msg.item[i].bound, msg.item[i].nameid );
+				else
+					ShowError( "buildin_mail: bound %d for item %u is invalid.\n", msg.item[i].bound, msg.item[i].nameid );
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
@@ -26046,7 +28012,10 @@ BUILDIN_FUNC(mail){
 				}
 
 				if( !item_db.exists( msg.item[k].card[i] ) ){
-					ShowError( "buildin_mail: invalid card id %u.\n", msg.item[k].card[i] );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "buildin_mail: %u은(는) 잘못된 카드 번호입니다.\n", msg.item[k].card[i] );
+					else
+						ShowError( "buildin_mail: invalid card id %u.\n", msg.item[k].card[i] );
 					return SCRIPT_CMD_FAILURE;
 				}
 			}
@@ -26111,13 +28080,19 @@ BUILDIN_FUNC(mail){
 
 BUILDIN_FUNC(open_roulette){
 #if PACKETVER < 20141022
-	ShowError( "buildin_open_roulette: This command requires PACKETVER 2014-10-22 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_open_roulette: 이 명령을 사용하려면 PACKETVER 2014-10-22 이상이어야 합니다.\n" );
+	else
+		ShowError( "buildin_open_roulette: This command requires PACKETVER 2014-10-22 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
 
 	if( !battle_config.feature_roulette ){
-		ShowError( "buildin_open_roulette: Roulette system is disabled.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_open_roulette: 룰렛 시스템이 비활성화 상태입니다.\n" );
+		else
+			ShowError( "buildin_open_roulette: Roulette system is disabled.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26211,7 +28186,10 @@ BUILDIN_FUNC(is_party_leader)
 
 BUILDIN_FUNC( camerainfo ){
 #if PACKETVER < 20160525
-	ShowError("buildin_camerainfo: This command requires PACKETVER 2016-05-25 or newer.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("buildin_camerainfo: 이 명령을 사용하려면 PACKETVER 2016-05-25 이상이 필요합니다.\n");
+	else
+		ShowError("buildin_camerainfo: This command requires PACKETVER 2016-05-25 or newer.\n");
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -26246,7 +28224,10 @@ BUILDIN_FUNC(getinstancevar)
 	struct script_data* data = script_getdata(st, 2);
 
 	if (!data_isreference(data)) {
-		ShowError("buildin_getinstancevar: %s is not a variable.\n", script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getinstancevar: %s은(는) 변수가 아닙니다.\n", script_getstr(st, 2));
+		else
+			ShowError("buildin_getinstancevar: %s is not a variable.\n", script_getstr(st, 2));
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -26256,7 +28237,10 @@ BUILDIN_FUNC(getinstancevar)
 	const char* name = reference_getname(data);
 
 	if (*name != '\'') {
-		ShowError("buildin_getinstancevar: Invalid scope. %s is not an instance variable.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getinstancevar: 유효하지 않은 범위입니다. %s은(는) 인스턴스 변수가 아닙니다.\n", name);
+		else
+			ShowError("buildin_getinstancevar: Invalid scope. %s is not an instance variable.\n", name);
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -26266,7 +28250,10 @@ BUILDIN_FUNC(getinstancevar)
 	int instance_id = script_getnum(st, 3);
 
 	if (instance_id <= 0) {
-		ShowError("buildin_getinstancevar: Invalid instance ID %d.\n", instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getinstancevar: %d은(는) 잘못된 인스턴스 번호입니다.\n", instance_id);
+		else
+			ShowError("buildin_getinstancevar: Invalid instance ID %d.\n", instance_id);
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -26275,7 +28262,10 @@ BUILDIN_FUNC(getinstancevar)
 	std::shared_ptr<s_instance_data> im = util::umap_find(instances, instance_id);
 
 	if (im->state != INSTANCE_BUSY) {
-		ShowError("buildin_getinstancevar: Unknown instance ID %d.\n", instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_getinstancevar: %d은(는) 알수 없는 인스턴스 번호입니다.\n", instance_id);
+		else
+			ShowError("buildin_getinstancevar: Unknown instance ID %d.\n", instance_id);
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -26297,7 +28287,10 @@ BUILDIN_FUNC(setinstancevar)
 	struct script_data* data = script_getdata(st, 2);
 
 	if (!data_isreference(data)) {
-		ShowError("buildin_%s: %s is not a variable.\n", command, script_getstr(st, 2));
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: %s은(는) 변수가 아닙니다.\n", command, script_getstr(st, 2));
+		else
+			ShowError("buildin_%s: %s is not a variable.\n", command, script_getstr(st, 2));
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -26307,7 +28300,10 @@ BUILDIN_FUNC(setinstancevar)
 	const char* name = reference_getname(data);
 
 	if (*name != '\'') {
-		ShowError("buildin_%s: Invalid scope. %s is not an instance variable.\n", command, name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: 잘못된 범위입니다. %s은(는) 인스턴스 변수가 아닙니다.\n", command, name);
+		else
+			ShowError("buildin_%s: Invalid scope. %s is not an instance variable.\n", command, name);
 		script_reportdata(data);
 		script_pushnil(st);
 		st->state = END;
@@ -26317,7 +28313,10 @@ BUILDIN_FUNC(setinstancevar)
 	int instance_id = script_getnum(st, 4);
 
 	if (instance_id <= 0) {
-		ShowError("buildin_%s: Invalid instance ID %d.\n", command, instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: %d은(는) 잘못된 인스턴스 ID입니다.\n", command, instance_id);
+		else
+			ShowError("buildin_%s: Invalid instance ID %d.\n", command, instance_id);
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -26326,7 +28325,10 @@ BUILDIN_FUNC(setinstancevar)
 	std::shared_ptr<s_instance_data> im = util::umap_find(instances, instance_id);
 
 	if (im->state != INSTANCE_BUSY) {
-		ShowError("buildin_%s: Unknown instance ID %d.\n", command, instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_%s: %d은(는) 알 수 없는 인스턴스 ID입니다.\n", command, instance_id);
+		else
+			ShowError("buildin_%s: Unknown instance ID %d.\n", command, instance_id);
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -26369,7 +28371,10 @@ BUILDIN_FUNC(convertpcinfo) {
 	case CPC_ACCOUNT:
 		break;
 	default:
-		ShowError("buildin_convertpcinfo: Unknown type %d.\n", type);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_convertpcinfo: %d은(는) 알수 없는 타입입니다..\n", type);
+		else
+			ShowError("buildin_convertpcinfo: Unknown type %d.\n", type);
 		script_pushnil(st);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
@@ -26407,10 +28412,17 @@ BUILDIN_FUNC(isnpccloaked)
 		nd = map_id2nd(st->oid);
 
 	if (!nd) {
-		if (script_hasdata(st, 2))
-			ShowError("buildin_isnpccloaked: %s is a non-existing NPC.\n", script_getstr(st, 2));
-		else
-			ShowError("buildin_isnpccloaked: non-existing NPC.\n");
+		if (script_hasdata(st, 2)) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_isnpccloaked: %s은(는) 존재하지 않는 NPC입니다.\n", script_getstr(st, 2));
+			else
+				ShowError("buildin_isnpccloaked: %s is a non-existing NPC.\n", script_getstr(st, 2));
+		} else {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("buildin_isnpccloaked: 존재하지 않는 NPC입니다.\n");
+			else
+				ShowError("buildin_isnpccloaked: non-existing NPC.\n");
+		}
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26425,7 +28437,10 @@ BUILDIN_FUNC(isnpccloaked)
 
 BUILDIN_FUNC(refineui){
 #if PACKETVER < 20161012
-	ShowError( "buildin_refineui: This command requires packet version 2016-10-12 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_refineui: 이 명령어를 사용하려면 패킷 버전이 2016-10-12 이상이어야 합니다..\n" );
+	else
+		ShowError( "buildin_refineui: This command requires packet version 2016-10-12 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -26435,7 +28450,10 @@ BUILDIN_FUNC(refineui){
 	}
 
 	if( !battle_config.feature_refineui ){
-		ShowError( "buildin_refineui: This command is disabled via configuration.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_refineui: 설정에서 이 명령어를 사용하지 않도록 지정되어있습니다.\n" );
+		else
+			ShowError( "buildin_refineui: This command is disabled via configuration.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26467,7 +28485,10 @@ BUILDIN_FUNC(getenchantgrade){
 	else if (equip_index_check(position))
 		index = pc_checkequip(sd, equip_bitmask[position]);
 	else {
-		ShowError( "buildin_getenchantgrade: Unknown equip index '%d'\n", position );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getenchantgrade: '%d'은(는) 알 수 없는 장착 index입니다.\n", position );
+		else
+			ShowError( "buildin_getenchantgrade: Unknown equip index '%d'\n", position );
 		script_pushint(st,-1);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -26522,7 +28543,10 @@ BUILDIN_FUNC(mob_setidleevent){
 	}
 
 	if( bl->type != BL_MOB ){
-		ShowError( "buildin_mob_setidleevent: the target GID was not a monster.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mob_setidleevent: 타겟 GID가 몬스터가 아닙니다.\n" );
+		else
+			ShowError( "buildin_mob_setidleevent: the target GID was not a monster.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26541,7 +28565,10 @@ BUILDIN_FUNC(mob_setidleevent){
 BUILDIN_FUNC( openstylist ){
 #if PACKETVER >= 20151104
 	if( !battle_config.feature_stylist ){
-		ShowError( "buildin_openstylist: stylist is disabled.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_openstylist: 스타일리스트가 꺼져있습니다.\n" );
+		else
+			ShowError( "buildin_openstylist: stylist is disabled.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26555,7 +28582,10 @@ BUILDIN_FUNC( openstylist ){
 
 	return SCRIPT_CMD_SUCCESS;
 #else
-	ShowError( "buildin_openstylist: This command requires packet version 2015-11-04 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_openstylist: 이 명령어를 사용하려면 2015-11-04 이상의 패킷버전이 필요합니다..\n" );
+	else
+		ShowError( "buildin_openstylist: This command requires packet version 2015-11-04 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #endif
 }
@@ -26586,7 +28616,10 @@ BUILDIN_FUNC(getitempos) {
 	}
 
 	if( current_equip_item_index == -1 ){
-		ShowError( "buildin_getitempos: Invalid usage detected. This command should only be used inside item scripts.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_getitempos: 잘못된 사용방법입니다. 이 명령어는 아이템 스크립트 내에서만 사용 가능합니다.\n" );
+		else
+			ShowError( "buildin_getitempos: Invalid usage detected. This command should only be used inside item scripts.\n" );
 		script_pushint(st, 0);
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -26612,7 +28645,10 @@ BUILDIN_FUNC( laphine_synthesis ){
 			std::shared_ptr<item_data> item = item_db.searchname( item_name );
 
 			if( item == nullptr ){
-				ShowError("buildin_laphine_synthesis: Item \"%s\" does not exist.\n", item_name );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_laphine_synthesis: 아이템 \"%s\"은(는) 존재하지 않습니다.\n", item_name );
+				else
+					ShowError("buildin_laphine_synthesis: Item \"%s\" does not exist.\n", item_name );
 				return SCRIPT_CMD_FAILURE;
 			}
 
@@ -26621,18 +28657,27 @@ BUILDIN_FUNC( laphine_synthesis ){
 			item_id = script_getnum( st, 2 );
 
 			if( !item_db.exists( item_id ) ){
-				ShowError( "buildin_laphine_synthesis: Item ID %u does not exist.\n", item_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_laphine_synthesis: 아이템 ID %u은(는) 존재하지 않습니다.\n", item_id );
+				else
+					ShowError( "buildin_laphine_synthesis: Item ID %u does not exist.\n", item_id );
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
 	}else{
 		if( sd->itemid == 0 ){
-			ShowError( "buildin_laphine_synthesis: Called outside of an item script without item id.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_laphine_synthesis: 아이템 번호가 없는 아이템 스크립트가 외부에서 호출되었습니다.\n" );
+			else
+				ShowError( "buildin_laphine_synthesis: Called outside of an item script without item id.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		if( sd->inventory_data[sd->itemindex]->flag.delay_consume == 0 ){
-			ShowError( "buildin_laphine_synthesis: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_laphine_synthesis: 아이템 %u에서 호출된 것이며, consumed delayed가 아닙니다.\n", sd->itemid );
+			else
+				ShowError( "buildin_laphine_synthesis: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -26640,14 +28685,20 @@ BUILDIN_FUNC( laphine_synthesis ){
 	}
 
 	if( sd->state.laphine_synthesis != 0 ){
-		ShowError( "buildin_laphine_synthesis: Laphine Synthesis window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_synthesis: Laphine Synthesis 창이 이미 열려있습니다. 플레이어 %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		else
+			ShowError( "buildin_laphine_synthesis: Laphine Synthesis window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	std::shared_ptr<s_laphine_synthesis> synthesis = laphine_synthesis_db.find( item_id );
 
 	if( synthesis == nullptr ){
-		ShowError( "buildin_laphine_synthesis: %u is not a valid Laphine Synthesis item.\n", item_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_synthesis: %u은(는) 유효한 Laphine Synthesis 아이템이 아닙니다.\n", item_id );
+		else
+			ShowError( "buildin_laphine_synthesis: %u is not a valid Laphine Synthesis item.\n", item_id );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26664,24 +28715,36 @@ BUILDIN_FUNC( laphine_upgrade ){
 	}
 
 	if( sd->itemid == 0 ){
-		ShowError( "buildin_laphine_upgrade: Called outside of an item script without item id.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_upgrade: 아이템 번호가 없는 아이템 스크립트가 외부에서 호출되었습니다.\n" );
+		else
+			ShowError( "buildin_laphine_upgrade: Called outside of an item script without item id.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( sd->inventory_data[sd->itemindex]->flag.delay_consume == 0 ){
-		ShowError( "buildin_laphine_upgrade: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_upgrade: 아이템 %u에서 호출된 것이며, consumed delayed가 아닙니다.\n", sd->itemid );
+		else
+			ShowError( "buildin_laphine_upgrade: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	if( sd->state.laphine_upgrade != 0 ){
-		ShowError( "buildin_laphine_upgrade: Laphine Upgrade window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_upgrade: Laphine Upgrade 창은 이미 열려있습니다. 플레이어 %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		else
+			ShowError( "buildin_laphine_upgrade: Laphine Upgrade window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
 		return SCRIPT_CMD_FAILURE;
 	}
 
 	std::shared_ptr<s_laphine_upgrade> upgrade = laphine_upgrade_db.find( sd->itemid );
 
 	if( upgrade == nullptr ){
-		ShowError( "buildin_laphine_upgrade: %u is not a valid Laphine Upgrade item.\n", sd->itemid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_laphine_upgrade: %u은(는) 유효한 Laphine Upgrade 아이템이 아닙니다.\n", sd->itemid );
+		else
+			ShowError( "buildin_laphine_upgrade: %u is not a valid Laphine Upgrade item.\n", sd->itemid );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26697,7 +28760,10 @@ BUILDIN_FUNC(randomoptgroup)
 	auto group = random_option_group.find(id);
 
 	if (group == nullptr) {
-		ShowError("buildin_randomoptgroup: Invalid random option group id (%d)!\n", id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("buildin_randomoptgroup: 잘못된 랜덤 옵션 그룹 ID입니다. (%d)!\n", id);
+		else
+			ShowError("buildin_randomoptgroup: Invalid random option group id (%d)!\n", id);
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26716,7 +28782,10 @@ BUILDIN_FUNC(randomoptgroup)
 
 BUILDIN_FUNC( open_quest_ui ){
 #if PACKETVER < 20151202
-	ShowError( "buildin_open_quest_ui: This command requires PACKETVER 20151202 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_open_quest_ui: 이 명령을 사용하려면 PACKETVER 20151202 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_open_quest_ui: This command requires PACKETVER 20151202 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -26729,8 +28798,12 @@ BUILDIN_FUNC( open_quest_ui ){
 	if( quest_id != 0 ){
 		int i;
 		ARR_FIND(0, sd->avail_quests, i, sd->quest_log[i].quest_id == quest_id);
-		if (i == sd->avail_quests)
-			ShowWarning("buildin_open_quest_ui: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		if (i == sd->avail_quests) {
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_open_quest_ui: 케릭터 %d에 퀘스트 %d이(가) 없습니다.\n", sd->status.char_id, quest_id);
+			else
+				ShowWarning("buildin_open_quest_ui: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		}
 	}
 
 	clif_ui_open( *sd, OUT_UI_QUEST, quest_id );
@@ -26741,7 +28814,10 @@ BUILDIN_FUNC( open_quest_ui ){
 
 BUILDIN_FUNC(openbank){
 #if PACKETVER < 20151202
-	ShowError( "buildin_openbank: This command requires PACKETVER 20151202 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_openbank: 이 명령을 사용하려면 PACKETVER 20150128 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_openbank: This command requires PACKETVER 20151202 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd = nullptr;
@@ -26751,7 +28827,10 @@ BUILDIN_FUNC(openbank){
 	}
 
 	if( !battle_config.feature_banking ){
-		ShowError( "buildin_openbank: banking is disabled.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_openbank: 뱅킹이 비활성화 되어있습니다.\n" );
+		else
+			ShowError( "buildin_openbank: banking is disabled.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26770,7 +28849,10 @@ BUILDIN_FUNC(getbaseexp_ratio){
 	int32 percent = script_getnum( st, 2 );
 
 	if( percent < 0 || percent > 100 ){
-		ShowError( "getbaseexp_ratio: percentage is out of range.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "getbaseexp_ratio: 퍼센테이지가 범위를 벗어났습니다.\n" );
+		else
+			ShowError( "getbaseexp_ratio: percentage is out of range.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26780,14 +28862,20 @@ BUILDIN_FUNC(getbaseexp_ratio){
 		base_level = script_getnum( st, 3 );
 
 		if( base_level < 1 ){
-			ShowError( "getbaseexp_ratio: level cannot be below 1.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "getbaseexp_ratio: 레벨이 1보다 작을 수 없습니다.\n" );
+			else
+				ShowError( "getbaseexp_ratio: level cannot be below 1.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		uint32 max_level = job_db.get_maxBaseLv( sd->status.class_ );
 
 		if( base_level > max_level ){
-			ShowError( "getbaseexp_ratio: level is above maximum base level %u for job %s.\n", max_level, job_name( sd->status.class_ ) );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "getbaseexp_ratio: 레벨이 직업 %s에 대한 최대 베이스 레벨 %u을(를) 초과합니다.\n", job_name( sd->status.class_ ), max_level );
+			else
+				ShowError( "getbaseexp_ratio: level is above maximum base level %u for job %s.\n", max_level, job_name( sd->status.class_ ) );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else{
@@ -26797,7 +28885,10 @@ BUILDIN_FUNC(getbaseexp_ratio){
 	t_exp class_exp = job_db.get_baseExp( sd->status.class_, base_level );
 
 	if( class_exp <= 0 ){
-		ShowError( "getbaseexp_ratio: No base experience defined for class %s at base level %d.\n", job_name( sd->status.class_ ), base_level );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "getbaseexp_ratio: 클래스 %s의 베이스 레벨 %d에 대한 경험치가 정의되어있지 않습니다..\n", job_name( sd->status.class_ ), base_level );
+		else
+			ShowError( "getbaseexp_ratio: No base experience defined for class %s at base level %d.\n", job_name( sd->status.class_ ), base_level );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26817,7 +28908,10 @@ BUILDIN_FUNC(getjobexp_ratio){
 	int32 percent = script_getnum( st, 2 );
 
 	if( percent < 0 || percent > 100 ){
-		ShowError( "getjobexp_ratio: percentage is out of range.\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "getjobexp_ratio: 퍼센테이지가 범위를 벗어납니다.\n" );
+		else
+			ShowError( "getjobexp_ratio: percentage is out of range.\n" );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26827,14 +28921,20 @@ BUILDIN_FUNC(getjobexp_ratio){
 		job_level = script_getnum( st, 3 );
 
 		if( job_level < 1 ){
-			ShowError( "getjobexp_ratio: level cannot be below 1.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "getjobexp_ratio: 레벨이 1보다 작을 수 없습니다.\n" );
+			else
+				ShowError( "getjobexp_ratio: level cannot be below 1.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		uint32 max_level = job_db.get_maxJobLv( sd->status.class_ );
 
 		if( job_level > max_level ){
-			ShowError( "getjobexp_ratio: level is above maximum job level %u for job %s.\n", max_level, job_name( sd->status.class_ ) );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "getjobexp_ratio: 레벨이 직업 %s에 대한 최대 직업 레벨 %u을(를) 초과합니다.\n", job_name( sd->status.class_ ), max_level );
+			else
+				ShowError( "getjobexp_ratio: level is above maximum job level %u for job %s.\n", max_level, job_name( sd->status.class_ ) );
 			return SCRIPT_CMD_FAILURE;
 		}
 	}else{
@@ -26844,7 +28944,10 @@ BUILDIN_FUNC(getjobexp_ratio){
 	t_exp class_exp = job_db.get_baseExp( sd->status.class_, job_level );
 
 	if( class_exp <= 0 ){
-		ShowError( "getjobexp_ratio: No job experience defined for class %s at job level %d.\n", job_name( sd->status.class_ ), job_level );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "getjobexp_ratio: 직업 %s의 직업 레벨 %d에 대한 직업 경험치가 정의되어 있지 않습니다.\n", job_name( sd->status.class_ ), job_level );
+		else
+			ShowError( "getjobexp_ratio: No job experience defined for class %s at job level %d.\n", job_name( sd->status.class_ ), job_level );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26866,7 +28969,10 @@ BUILDIN_FUNC( enchantgradeui ){
 
 	return SCRIPT_CMD_SUCCESS;
 #else
-	ShowError( "buildin_enchantgradeui: This command requires PACKETVER 2020-07-24 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_enchantgradeui: 이 명령어를 사용하려면 PACKETVER 2020-07-24 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_enchantgradeui: This command requires PACKETVER 2020-07-24 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #endif
 }
@@ -26882,7 +28988,10 @@ BUILDIN_FUNC(set_reputation_points){
 	std::shared_ptr<s_reputation> reputation = reputation_db.find( type );
 
 	if( reputation == nullptr ){
-		ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_set_reputation_points: %" PRIi64 "은(는) 알 수 없는 평판 타입입니다.\n", type );
+		else
+			ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26910,7 +29019,10 @@ BUILDIN_FUNC(get_reputation_points){
 	std::shared_ptr<s_reputation> reputation = reputation_db.find( type );
 
 	if( reputation == nullptr ){
-		ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_set_reputation_points:  %" PRIi64 "은(는) 알 수 없는 평판 타입입니다.\n", type );
+		else
+			ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26935,7 +29047,10 @@ BUILDIN_FUNC(add_reputation_points)
 	std::shared_ptr<s_reputation> reputation = reputation_db.find( type );
 
 	if( reputation == nullptr ){
-		ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_set_reputation_points: %" PRIi64 "은(는) 알 수 없는 평판 타입입니다.\n", type );
+		else
+			ShowError( "buildin_set_reputation_points: Unknown reputation type %" PRIi64 ".\n", type );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -26954,7 +29069,10 @@ BUILDIN_FUNC(add_reputation_points)
 
 BUILDIN_FUNC(item_reform){
 #if PACKETVER < 20211103
-	ShowError( "buildin_item_reform: This command requires packet version 2021-11-03 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_item_reform: 이 명령어를 사용하려면 패킷 버전 2021-11-03 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_item_reform: This command requires packet version 2021-11-03 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -26971,7 +29089,10 @@ BUILDIN_FUNC(item_reform){
 			std::shared_ptr<item_data> item = item_db.searchname( item_name );
 
 			if( item == nullptr ){
-				ShowError("buildin_item_reform: Item \"%s\" does not exist.\n", item_name );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("buildin_item_reform: 아이템 \"%s\"은(는) 존재하지 않습니다.\n", item_name );
+				else
+					ShowError("buildin_item_reform: Item \"%s\" does not exist.\n", item_name );
 				return SCRIPT_CMD_FAILURE;
 			}
 
@@ -26980,18 +29101,27 @@ BUILDIN_FUNC(item_reform){
 			item_id = script_getnum( st, 2 );
 
 			if( !item_db.exists( item_id ) ){
-				ShowError( "buildin_item_reform: Item ID %u does not exist.\n", item_id );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError( "buildin_item_reform: 아이템 ID %u은(는) 존재하지 않습니다.\n", item_id );
+				else
+					ShowError( "buildin_item_reform: Item ID %u does not exist.\n", item_id );
 				return SCRIPT_CMD_FAILURE;
 			}
 		}
 	}else{
 		if( sd->itemid == 0 ){
-			ShowError( "buildin_item_reform: Called outside of an item script without item id.\n" );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_item_reform: 아이템 ID 없이 아이템 스크립트 외부에서 호출됩니다.\n" );
+			else
+				ShowError( "buildin_item_reform: Called outside of an item script without item id.\n" );
 			return SCRIPT_CMD_FAILURE;
 		}
 
 		if( sd->inventory_data[sd->itemindex]->flag.delay_consume == 0 ){
-			ShowError( "buildin_item_reform: Called from item %u, which is not a DelayConsume type.\n", sd->itemid );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError( "buildin_item_reform: 아이템 %u에서 호출되었지만, DelayConsume 타입이 아닙니다.\n", sd->itemid );
+			else
+				ShowError( "buildin_item_reform: Called from item %u, which is not a DelayConsume type.\n", sd->itemid );
 			return SCRIPT_CMD_FAILURE;
 		}
 
@@ -26999,7 +29129,10 @@ BUILDIN_FUNC(item_reform){
 	}
 
 	if( !item_reform_db.exists( item_id ) ){
-		ShowError( "buildin_item_reform: Item ID %u is not in the Item Reform database.\n", item_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_item_reform: 아이템 ID %u은(는) 아이템 리폼 데이터베이스에 없습니다.\n", item_id );
+		else
+			ShowError( "buildin_item_reform: Item ID %u is not in the Item Reform database.\n", item_id );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27011,7 +29144,10 @@ BUILDIN_FUNC(item_reform){
 
 BUILDIN_FUNC(item_enchant){
 #if !( PACKETVER_RE_NUM >= 20211103 || PACKETVER_MAIN_NUM >= 20220330 )
-	ShowError( "buildin_item_enchant: This command requires packet version 2021-11-03 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_item_enchant: 이 명령어를 사용하려면 패킷 버전 2021-11-03 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_item_enchant: This command requires packet version 2021-11-03 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -27023,7 +29159,10 @@ BUILDIN_FUNC(item_enchant){
 	uint64 clientLuaIndex = script_getnum64( st, 2 );
 
 	if( !item_enchant_db.exists( clientLuaIndex ) ){
-		ShowError( "buildin_item_enchant: %" PRIu64 " is not a valid item enchant index.\n", clientLuaIndex );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_item_enchant: %" PRIu64 "은(는) 올바른 인챈트 인덱스가 아닙니다.\n", clientLuaIndex );
+		else
+			ShowError( "buildin_item_enchant: %" PRIu64 " is not a valid item enchant index.\n", clientLuaIndex );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27045,7 +29184,10 @@ BUILDIN_FUNC(itemlink)
 	item.nameid = script_getnum(st, 2);
 	
 	if( !item_db.exists( item.nameid ) ){
-		ShowError( "buildin_itemlink: Item ID %u does not exists.\n", item.nameid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_itemlink: 아이템 ID %u은(는) 존재하지 않습니다.\n", item.nameid );
+		else
+			ShowError( "buildin_itemlink: Item ID %u does not exists.\n", item.nameid );
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -27074,7 +29216,10 @@ BUILDIN_FUNC(mesitemlink){
 	std::shared_ptr<item_data> data = item_db.find( nameid );
 	
 	if( data == nullptr ){
-		ShowError( "buildin_mesitemlink: Item ID %u does not exists.\n", nameid );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_mesitemlink: Item ID %u인 아이템이 존재하지 않습니다.\n", nameid );
+		else
+			ShowError( "buildin_mesitemlink: Item ID %u does not exists.\n", nameid );
 		script_pushconststr( st, "" );
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -27204,7 +29349,10 @@ BUILDIN_FUNC(autoloot) {
 		rate = script_getnum(st, 2);
 
 		if (rate < 0 || rate > 10000) {
-			ShowWarning("buildin_autoloot: Invalid rate value %d, should be between 0 ~ 10000.\n", rate);		
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("buildin_autoloot: 비율 값 %d이(가) 잘못되었습니다. 0 ~ 10000 사이여야 합니다.\n", rate);
+			else
+				ShowWarning("buildin_autoloot: Invalid rate value %d, should be between 0 ~ 10000.\n", rate);
 			script_pushint(st, false);
 			return SCRIPT_CMD_FAILURE;
 		}
@@ -27220,7 +29368,10 @@ BUILDIN_FUNC(autoloot) {
 
 BUILDIN_FUNC(opentips){
 #if PACKETVER < 20171122
-	ShowError( "buildin_opentips: This command requires PACKETVER 20171122 or newer.\n" );
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError( "buildin_opentips: 이 명령에는 PACKETVER 20171122 이상이 필요합니다.\n" );
+	else
+		ShowError( "buildin_opentips: This command requires PACKETVER 20171122 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #else
 	map_session_data* sd;
@@ -27234,6 +29385,55 @@ BUILDIN_FUNC(opentips){
 #endif
 }
 
+BUILDIN_FUNC( open_stall ){
+	map_session_data* sd;
+	uint16 skill_id, skill_lv;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (script_isstring(st, 2)) {
+		const char *name = script_getstr(st, 2);
+
+		if (!(skill_id = skill_name2id(name))) {
+			ShowError("buildin_unitskilluseid: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			return SCRIPT_CMD_FAILURE;
+		}
+	}
+	skill_lv = script_getnum(st,3);
+
+	if( sd->itemid == 0 ){
+		ShowError( "open_stall: Called outside of an item script without item id.\n" );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if( sd->inventory.u.items_inventory[sd->itemindex].expire_time == 0 ){
+		ShowError( "open_stall: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if( sd->state.stall_ui_open != 0 ){
+		ShowError( "open_stall: Stall window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	sd->stall_expire_time = sd->inventory.u.items_inventory[sd->itemindex].expire_time;
+	sd->stallvending_level = skill_lv;
+
+	// todo check if already set
+
+	short type = (skill_id == ALL_ASSISTANT_BUYING) ? 1 : 0;
+	if (stall_isStallOpen(sd->status.char_id, type)) {
+		clif_skill_fail(*sd, skill_id, USESKILL_FAIL_EXIST_STORE_ASSISTANT, 0, skill_id);
+		return SCRIPT_CMD_SUCCESS;
+	}
+
+	unit_skilluse_id(&sd->bl, sd->bl.id, skill_id, skill_lv);
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 BUILDIN_FUNC(setdialogalign){
 	map_session_data *sd;
 
@@ -27244,7 +29444,10 @@ BUILDIN_FUNC(setdialogalign){
 	int32 align = script_getnum( st, 2 );
 	
 	if( align < DIALOG_ALIGN_LEFT || align > DIALOG_ALIGN_BOTTOM ){
-		ShowError( "buildin_setdialogalign: Unknown align value %d\n", align );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setdialogalign: 알 수 없는 정렬 값 %d\n", align );
+		else
+			ShowError( "buildin_setdialogalign: Unknown align value %d\n", align );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27264,14 +29467,20 @@ BUILDIN_FUNC(setdialogsize){
 	int32 x = script_getnum( st, 2 );
 	
 	if( x < 0 || x > INT16_MAX ){
-		ShowError( "buildin_setdialogsize: x size %d is out of range [0,%d]\n", x, INT16_MAX );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setdialogsize: x 크기 %d이(가) [0,%d] 범위를 벗어났습니다.\n", x, INT16_MAX );
+		else
+			ShowError( "buildin_setdialogsize: x size %d is out of range [0,%d]\n", x, INT16_MAX );
 		return SCRIPT_CMD_FAILURE;
 	}
 	
 	int32 y = script_getnum( st, 3 );
 	
 	if( y < 0 || y > INT16_MAX ){
-		ShowError( "buildin_setdialogsize: y size %d is out of range [0,%d]\n", y, INT16_MAX );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setdialogsize: y 크기 %d이(가) [0,%d] 범위를 벗어났습니다.\n", y, INT16_MAX );
+		else
+			ShowError( "buildin_setdialogsize: y size %d is out of range [0,%d]\n", y, INT16_MAX );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27291,14 +29500,20 @@ BUILDIN_FUNC(setdialogpos){
 	int32 x = script_getnum( st, 2 );
 	
 	if( x < 0 || x > INT16_MAX ){
-		ShowError( "buildin_setdialogpos: x position %d is out of range [0,%d]\n", x, INT16_MAX );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setdialogpos: x 위치 %d이(가) [0,%d] 범위를 벗어났습니다.\n", x, INT16_MAX );
+		else
+			ShowError( "buildin_setdialogpos: x position %d is out of range [0,%d]\n", x, INT16_MAX );
 		return SCRIPT_CMD_FAILURE;
 	}
 	
 	int32 y = script_getnum( st, 3 );
 	
 	if( y < 0 || y > INT16_MAX ){
-		ShowError( "buildin_setdialogpos: y position %d is out of range [0,%d]\n", y, INT16_MAX );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "buildin_setdialogpos: y 위치 %d이(가) [0,%d] 범위를 벗어났습니다.\n", y, INT16_MAX );
+		else
+			ShowError( "buildin_setdialogpos: y position %d is out of range [0,%d]\n", y, INT16_MAX );
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27348,7 +29563,11 @@ BUILDIN_FUNC(permission_check)
 	int permission = script_getnum(st, 2);
 
 	if (permission < PC_PERM_TRADE || permission >= PC_PERM_MAX) {
-		ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		if(strcmpi(MessageLang, "KOR") == 0) {
+			ShowError("buildin_permission_check: 잘못된 권한 %d\n", permission);
+		} else {
+			ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		}
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27372,7 +29591,11 @@ BUILDIN_FUNC(permission_add)
 	int permission = script_getnum(st, 2);
 
 	if (permission < PC_PERM_TRADE || permission >= PC_PERM_MAX) {
-		ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		if(strcmpi(MessageLang, "KOR") == 0) {
+			ShowError("buildin_permission_check: 잘못된 권한 %d\n", permission);
+		} else {
+			ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		}
 		return SCRIPT_CMD_FAILURE;
 	}
 
@@ -27383,6 +29606,38 @@ BUILDIN_FUNC(permission_add)
 
 	return SCRIPT_CMD_SUCCESS;
 }
+
+BUILDIN_FUNC( runeui ){
+#if PACKETVER_MAIN_NUM >= 20200916 || PACKETVER_RE_NUM >= 20200724
+	map_session_data* sd;
+
+	if( !script_charid2sd( 2, sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_rune_ui_open( sd );
+
+	return SCRIPT_CMD_SUCCESS;
+#else
+	ShowError( "buildin_runeui: This command requires PACKETVER 2020-07-24 or newer.\n" );
+	return SCRIPT_CMD_FAILURE;
+#endif
+}
+
+BUILDIN_FUNC( getupgrade_rune ){
+#if PACKETVER_MAIN_NUM >= 20200916 || PACKETVER_RE_NUM >= 20200724
+	map_session_data* sd;
+	if( !script_rid2sd(sd) )
+		return SCRIPT_CMD_FAILURE;
+
+	script_pushint(st,sd->runeactivated_data.upgrade);
+	return SCRIPT_CMD_SUCCESS;
+#else
+	ShowError( "buildin_getupgrade_rune: This command requires PACKETVER 2020-07-24 or newer.\n" );
+	return SCRIPT_CMD_FAILURE;
+#endif
+}
+
 
 #include <custom/script.inc>
 
@@ -27426,7 +29681,10 @@ BUILDIN_FUNC(preg_match) {
 
 	return SCRIPT_CMD_SUCCESS;
 #else
-	ShowDebug("script:preg_match: cannot run without PCRE library enabled.\n");
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowDebug("script:preg_match: PCRE 라이브러리를 사용하지 않으면 실행할 수 없습니다.\n");
+	else
+		ShowDebug("script:preg_match: cannot run without PCRE library enabled.\n");
 	script_pushint(st,0);
 	return SCRIPT_CMD_SUCCESS;
 #endif
@@ -28140,9 +30398,12 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(getfamerank, "?"),
 	BUILDIN_DEF(isdead, "?"),
 	BUILDIN_DEF(macro_detector, "?"),
+	BUILDIN_DEF(runeui, ""),
+	BUILDIN_DEF(getupgrade_rune, ""),
 	BUILDIN_DEF(has_autoloot,"?"),
 	BUILDIN_DEF(autoloot,"??"),
 	BUILDIN_DEF(opentips, "i?"),
+	BUILDIN_DEF(open_stall,"si"),
 
 	BUILDIN_DEF(setdialogalign, "i"),
 	BUILDIN_DEF(setdialogsize, "ii"),

@@ -14,93 +14,96 @@
 //= 1.4a Fixed a little Typo error in duplicates. (bugreport:749) [Samuray22]
 //============================================================ 
 
--	script	Smile Assistance::SmileHelper	92,{
-	mes "[Smile Girl]";
-	mes "Hi ~ Hi ~";
-	mes "This is Smile Assistance.";
-	mes "How may I help you ?";
+-	script	SmileHelper	92,{
+	mes "[스마일걸]";
+	mes "안녕하세요 ♬ 안녕하세요 ♬";
+	mes "스마일도우미 입니다.";
+	mes "무엇을 도와드릴까요 ?";
 	next;
-	switch(select("^3355FFMr. Smile^000000 ?:Construct ^3355FFMr. Smile^000000 :Quit")) {
+	switch(select("^3355FF스마일 가면^000000 에 대하여:^3355FF스마일가면^000000 을 제작한다:대화를 종료한다")) {
 	case 1:
-		mes "[Smile Girl]";
-		mes "National Event held by the command of ^5577FFHis majesty Tristram the 3rd^000000,";
-		mes "that intends to encourage the nation of the Rune-Midgarts Kingdom";
-		mes " to play in more enjoyable atmosphere!";
-		mes "I am ^3355FF' Smile Assistance '^000000,";
-		mes ".. who leads the national event under the name of ";
-		mes "^3355FFSmile throughout the Rune-Midgarts Kingdom~^000000";
+		mes "[스마일걸]";
+		mes "^5577FF트리스탄 3세^000000 국왕폐하께서";
+		mes "즐거운 라그나로크를 이룩하기 위해";
+		mes "실시하고 있는 이벤트 !";
+		mes "^3355FF전 국민의 얼굴에 웃음을 ♥'^000000";
+		mes ".. 을 진행하고 있는";
+		mes "' ^3355FF스마일 도우미^000000 ' 입니다";
 		next;
-		mes "[Smile Girl]";
-		mes "With simple and easy-to-get items,";
-		mes "I can provide you";
-		mes "^3355FF' Mr. Smile '^000000.";
-		mes "The requirements are followings.";
+		mes "[스마일걸]";
+		mes "간단한 재료로써";
+		mes "여러분에게 ^3355FF' 스마일 가면 '^000000을";
+		mes "제조해 드리고 있습니다";
+		mes "필요한 재료로는 다음과 같습니다";
 		next;
-		mes "[Smile Girl]";
-		mes "^3355FF10 Jellopy^000000";
-		mes "^3355FF10 Fluff^000000";
-		mes "^3355FF10 Clover^000000";
+		mes "[스마일걸]";
+		mes "^3355FF젤로피 10 개^000000";
+		mes "^3355FF솜털 10 개^000000";
+		mes "^3355FF클로버 10 개^000000";
 		next;
-		mes "[Smile Girl]";
-		mes "With this event";
-		mes "Everybody will be happy and smile,";
-		mes "getting together with other people,";
-		mes "And will try to make Ragnarok the most enjoyable game in the world.";
+		mes "[스마일걸]";
+		mes "이번 이벤트를 계기로";
+		mes "내가 아닌 다른 사람들을 배려하고";
+		mes "웃으며 살아 갈 수 있는";
+		mes "세상이 되었으면 좋겠습니다";
 		close;
 	case 2:
 		if (countitem(909) > 9 && countitem(914) > 9 && countitem(705) > 9) {
-			mes "[Smile Girl]";
-			mes "Congratulations !";
-			mes "Now please take this Mr.Smile.";
+			mes "[스마일걸]";
+			mes "축하드립니다 !";
+			mes "여기 스마일 가면을 받으세요";
 			next;
 			delitem 909,10; //Jellopy
 			delitem 914,10; //Fluff
 			delitem 705,10; //Clover
 			getitem 2278,1; //Mr_Smile
-			mes "[Smile Girl]";
-			mes "His majesty,Tristram the 3rd";
-			mes "has promised to try his best to make Ragnarok better and more enjoyable.";
+			mes "[스마일걸]";
+			mes "트리스탄 3세 폐하께서는";
+			mes "밝은 라그나로크를 이룩하기 위해";
+			mes "룬 미드가츠 왕국이 앞으로";
+			mes "최선의 노력을 다할 것임을";
+			mes "약속 하셨습니다";
 			next;
-			mes "The fact mentioned above";
-			mes "was announced by";
-			mes "the Public Information Bureau of the Rune-Midgarts Kingom.";
+			mes "이상";
+			mes "룬 미드가츠 공보처에서";
+			mes "알려드렸습니다";
 			close;
 		}
 		else {
-			mes "[Smile Girl]";
-			mes "Oh - unfortunately";
-			mes "You have not brought";
-			mes "enough items for Mr. Smile.";
-			mes "^3355FF10 Jellopy^000000";
-			mes "^3355FF10 Fluff^000000";
-			mes "^3355FF10 Clover^000000";
-			mes "Please check the requirements above.";
+			mes "[스마일걸]";
+			mes "아 - 안타깝게도";
+			mes "귀하가 가지고 계신";
+			mes "아이템의 갯수가 부족합니다";
+			mes "^3355FF젤로피 10 개^000000";
+			mes "^3355FF솜털 10 개^000000";
+			mes "^3355FF클로버 10 개^000000 의";
+			mes "갯수를 확인하시기 바랍니다";
 			close;
 		}
 	case 3:
-		mes "[Smile Girl]";
-		mes "Thank you for visiting us.";
-		mes "We ..";
-		mes "The Rune-Midgarts Kingdom";
-		mes "always try to make Ragnarok";
-		mes "better and more enjoyable game.";
+		mes "[스마일걸]";
+		mes "이용해 주셔서 감사합니다";
+		mes "저희는 ..";
+		mes "룬 미드가츠 왕국에서는";
+		mes "항상 밝은 라그나로크를";
+		mes "위해 노력하고 있습니다";
 		next;
-		mes "[Smile Girl]";
-		mes "We sincerely ask you";
-		mes "to cooperate.";
-		mes "The fact mentioned above";
-		mes "was announced by the Public Information Bureau of the Rune-Midgarts Kingom.";
+		mes "[스마일걸]";
+		mes "국민 여러문의";
+		mes "많은 협조 부탁드립니다";
+		mes "이상";
+		mes "룬 미드가츠 공보처 였습니다";
 		close;
 	}
 }
 
-// Additional Smile Assistance staff
-alberta,113,53,4	duplicate(SmileHelper)	Smile Assistance#alb	92
-aldebaran,136,135,4	duplicate(SmileHelper)	Smile Assistance#alde	92
-geffen,119,107,4	duplicate(SmileHelper)	Smile Assistance#gef	92
-moc_ruins,59,154,3	duplicate(SmileHelper)	Smile Assistance#moc	92
-payon,186,104,5	duplicate(SmileHelper)	Smile Assistance#pay	92
-prontera,157,187,4	duplicate(SmileHelper)	Smile Assistance#prt	92
+// Additional 스마일 도우미 staff
+alberta,113,53,4	duplicate(SmileHelper)	스마일 도우미#alb	92
+aldebaran,136,135,4	duplicate(SmileHelper)	스마일 도우미#alde	92
+geffen,119,107,4	duplicate(SmileHelper)	스마일 도우미#gef	92
+moc_ruins,59,154,3	duplicate(SmileHelper)	스마일 도우미#moc	92
+payon,186,104,5	duplicate(SmileHelper)	스마일 도우미#pay	92
+prontera,157,187,4	duplicate(SmileHelper)	스마일 도우미#prt	92
 
 //============================================================ 
 // Old changelog

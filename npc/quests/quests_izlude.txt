@@ -1,98 +1,91 @@
 //===== rAthena Script ======================================= 
 //= Quest NPCs related to Izlude
 //===== By: ================================================== 
-//= Evera and The rAthena Dev Team
-//= L0ne_W0lf
-//===== Current Version: ===================================== 
-//= 1.1
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Edgar's Offer:
-//= - [Official Conversion]
-//= - Variables in use: MISC_QUEST (Bit 16)
-//===== Additional Comments: ================================= 
-//= 1.0 Initial release [Evera]
-//= 1.1 Updated to 10.3 standard. [L0ne_W0lf]
-//============================================================
-
-// Edgar's Offer :: iz_npc
+//번역 스카이러브
 //============================================================
 -	script	::Edgar_izlude	-1,{
 	if (MISC_QUEST & 16) {
-		mes "[Edgar]";
-		mes "So are you heading to Alberta again? Let me give you the same discount and only charge 250 Zeny, just like the last time.";
-		mes "How's that sound?";
+		mes "[에드가]";
+		mes "이번에도 알베르타에 가려고 날찾았나?";
+		mes "저번과 같이 250제니에 알베르타까지";
+		mes "태워다 주겠네.";
 		next;
-		if (select("Alrighty~!:Why are you being so nice to me?!") == 1) {
+		mes "[에드가]";
+		mes "어떻게 할텐가?";
+		next;
+		if (select("알베르타로 이동~!:그만둔다") == 1) {
 			if (Zeny < 250) {
-				mes "[Edgar]";
-				mes "Um...";
-				mes "This isn't";
-				mes "enough money.";
-				mes "Why don't you go";
-				mes "get some more cash?";
+				mes "[에드가]";
+				mes "이런 돈이 모자르지 않나! 좀 더";
+				mes "모아가지고  오라고.";
 				close ;
 			}
 			set Zeny, Zeny-250;
 			warp "alberta",195,164;
 			end;
 		}
-		mes "[Edgar]";
-		mes "It's just the way I am. That, and your devilish smile reminds me of my beloved blond haired son who left home years ago to become a Sailor on his own ship. Bless his soul, wherever he is.";
+		mes "[에드가]";
+		mes "그래 잘 가라구~";
 		close;
 	}
-	mes "[Edgar]";
-	mes "My town, Izlude, is connected to Alberta by the harbor in the West. There is so much traffic between us, I almost become an Albertian.  Hehehe~";
+	mes "[에드가]";
+	mes "우리 이즈루드와 알베르타는 항구로";
+	mes "연결되어있지 서로 많이 왔다 갔다";
+	mes "하니 나도 이제 그쪽사람 다됐지 허허.";
+	mes "특히 펠릭스란친구랑 친하게 지내는데";
+	mes "그녀석 어찌나 깐깐한지 그녀석에겐";
+	mes "공짜바라면 큰코다치지";
 	next;
-	mes "[Edgar]";
-	mes "There's this guy I know pretty well, Phelix, who lives in Alberta. That guy is really stingy... He charges for everything!";
+	mes "[에드가]";
+	mes "하지만 원래 심성은 착해서 누굴";
+	mes "도와주는건 좋아한다네 게다가";
+	mes "손은커서 조금의 조건만붙는다면 팍팍";
+	mes "지원을 아끼지 않는녀석이기도 하지";
 	next;
-	mes "[Edgar]";
-	mes "But he's really a nice guy and likes helping other people. He has a good heart and will give you his support if you meet his price.";
+	mes "[에드가]";
+	mes "요즘은 알베르타에서 은근슬쩍";
+	mes "젤로피라는걸 구실로 삼아 사람들을";
+	mes "돕는다니.. 뭐 사정이 어려우면 한번쯤";
+	mes "들러보는것도 좋을꺼야.";
 	next;
-	mes "[Edgar]";
-	mes "Lately, people in Alberta say that he is really trying to help folks and that his demand for Jellopies is just a coverup.  Well, you should take a look at what he has to offer.";
-	next;
-	if (select("Can you tell me how to get to Alberta?:End Conversation") == 1) {
-		mes "[Edgar]";
-		mes "Huh? Well, you can use your feet and just walk.  But if you have money, I'd like to suggest that you take a ship.";
+	if (select("알베르타까지는 어떻게 가나요?:대화를 끝낸다") == 1) {
+		mes "[에드가]";
+		mes "응? 알베라트에 가려면 두다리를";
+		mes "사용해 열심히 걸어가도 좋겠지만 돈이";
+		mes "있다면 저기 배를타면 금방";
+		mes "알베르타에 도착할수 있지.";
 		next;
-		if (select("Okay, gotcha.:But I'm sick of walking and I'm broke!") == 1) {
-			mes "[Edgar]";
-			mes "Alrighty, take care~";
+		if (select("네 알겠습니다.:걸어가기도 싫고 돈도 없는걸요.") == 1) {
+			mes "[에드가]";
+			mes "그래 몸조심히 가라구";
 			close;
 		}
-		mes "[Edgar]";
-		mes "Okay...";
-		mes "You don't want to walk AND you've got no cash, but you still want to go there? Oh geez...";
+		mes "[에드가]";
+		mes "뭐 그만큼의 돈도 없고 걸어가고싶진";
+		mes "않지만 알베르타엔 가고싶다고? 어허";
+		mes "참..";
+		mes "그래 이 나도 선장인데 너하나쯤";
+		mes "태워다 주지 못하겠나. 내 특별히 250";
+		mes "제니만 받고 알베르타까지 태워다";
+		mes "주리다.";
 		next;
-		mes "[Edgar]";
-		mes "Fine fine. Me, being the captain of a ship, can afford to bring you there at a lower price. How does 250 Zeny sound?";
-		next;
-		if (select("Alrighty~!:Bah, what a rip off!!") == 1) {
+		if (select("알베르타로 출발~!:그만둔다") == 1) {
 			set MISC_QUEST,MISC_QUEST | 16;
 			if (Zeny < 250) {
-				mes "[Edgar]";
-				mes "Um...";
-				mes "This isn't";
-				mes "enough money.";
-				mes "Go and get";
-				mes "some more.";
+				mes "[에드가]";
+				mes "이런 돈이 모자르지 않나! 좀 더";
+				mes "모아가지고 오라고.";
 				close;
 			}
 			set Zeny, Zeny-250;
 			warp "alberta",195,164;
 			end;
 		}
-		mes "[Edgar]";
-		mes "Boy oh boy,";
-		mes "if you think";
-		mes "that's a rip off...";
+		mes "[에드가]";
+		mes "사람 참 싱겁기는...";
 		close;
 	}
-	mes "[Edgar]";
-	mes "Yeah, alright.";
-	mes "See you later~";
+	mes "[에드가]";
+	mes "그래 몸조심히 가라구~";
 	close;
 }

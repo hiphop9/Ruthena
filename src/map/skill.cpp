@@ -20,6 +20,7 @@
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "achievement.hpp"
 #include "battle.hpp"
@@ -44,6 +45,7 @@
 #include "pet.hpp"
 #include "script.hpp"
 #include "status.hpp"
+#include "stall.hpp"
 #include "unit.hpp"
 
 using namespace rathena;
@@ -1165,7 +1167,10 @@ struct s_skill_unit_layout *skill_get_unit_layout(uint16 skill_id, uint16 skill_
 	uint8 dir;
 
 	if (pos < -1 || pos >= MAX_SKILL_UNIT_LAYOUT) {
-		ShowError("skill_get_unit_layout: unsupported layout type %d for skill %d (level %d)\n", pos, skill_id, skill_lv);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_get_unit_layout: 레이아웃 타입 '%d'은(는) 스킬 '%d'에 대해 지원되지 않습니다. (레벨 %d)\n", pos, skill_id, skill_lv);
+		else
+			ShowError("skill_get_unit_layout: unsupported layout type %d for skill %d (level %d)\n", pos, skill_id, skill_lv);
 		pos = cap_value(pos, 0, MAX_SQUARE_LAYOUT); // cap to nearest square layout
 	}
 
@@ -1193,7 +1198,10 @@ struct s_skill_unit_layout *skill_get_unit_layout(uint16 skill_id, uint16 skill_
 	else if( skill_id == GN_WALLOFTHORN )
 		return &skill_unit_layout[wallofthorn_unit_pos + dir];
 
-	ShowError("skill_get_unit_layout: unknown unit layout for skill %d (level %d)\n", skill_id, skill_lv);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowError("skill_get_unit_layout: 스킬 %d에 대해 알수 없는 유닛 레이아웃입니다. (레벨 %d)\n", skill_id, skill_lv);
+	else
+		ShowError("skill_get_unit_layout: unknown unit layout for skill %d (level %d)\n", skill_id, skill_lv);
 	return &skill_unit_layout[0]; // default 1x1 layout
 }
 
@@ -3580,7 +3588,7 @@ int64 skill_attack (int attack_type, struct block_list* src, struct block_list *
 	dmg = battle_calc_attack(attack_type,src,bl,skill_id,skill_lv,flag&0xFFF);
 
 	//If the damage source is a unit, the damage is not delayed
-	if (src != dsrc && skill_id != GS_GROUNDDRIFT)
+	if (src != dsrc)
 		dmg.amotion = 0;
 
 	//! CHECKME: This check maybe breaks the battle_calc_attack, and maybe need better calculation.
@@ -4263,7 +4271,10 @@ static int skill_check_unit_range (struct block_list *bl, int x, int y, uint16 s
 	int range = bl->type==BL_PC?skill_get_unit_range(skill_id, skill_lv):0;
 	int layout_type = skill_get_unit_layout_type(skill_id,skill_lv);
 	if (layout_type==-1 || layout_type>MAX_SQUARE_LAYOUT) {
-		ShowError("skill_check_unit_range: unsupported layout type %d for skill %d\n",layout_type,skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_check_unit_range: %d은(는) 스킬 %d에 대해 지원되지 않는 레이아웃 타입입니다.\n",layout_type,skill_id);
+		else
+			ShowError("skill_check_unit_range: unsupported layout type %d for skill %d\n",layout_type,skill_id);
 		return 0;
 	}
 
@@ -4324,7 +4335,10 @@ static int skill_check_unit_range2 (struct block_list *bl, int x, int y, uint16 
 					int layout_type = skill_get_unit_layout_type(skill_id,skill_lv);
 
 					if (layout_type == -1 || layout_type > MAX_SQUARE_LAYOUT) {
-						ShowError("skill_check_unit_range2: unsupported layout type %d for skill %d\n",layout_type,skill_id);
+						if(strcmpi(MessageLang,"KOR") == 0)
+							ShowError("skill_check_unit_range2: %d은(는) 스킬 %d에 대해 지원되지 않는 레이아웃 타입입니다.\n",layout_type,skill_id);
+						else	
+							ShowError("skill_check_unit_range2: unsupported layout type %d for skill %d\n",layout_type,skill_id);
 						return 0;
 					}
 					range = skill_get_unit_range(skill_id,skill_lv) + layout_type;
@@ -7135,7 +7149,10 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
  		break;
 
 	default:
-		ShowWarning("skill_castend_damage_id: Unknown skill used:%d\n",skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_castend_damage_id: 사용된 알 수 없는 스킬ID:%d\n",skill_id);
+		else
+			ShowWarning("skill_castend_damage_id: Unknown skill used:%d\n",skill_id);
 		clif_skill_damage(src, bl, tick, status_get_amotion(src), tstatus->dmotion,
 			0, abs(skill_get_num(skill_id, skill_lv)),
 			skill_id, skill_lv, skill_get_hit(skill_id));
@@ -7214,12 +7231,18 @@ static int skill_castend_song(struct block_list* src, uint16 skill_id, uint16 sk
 	nullpo_ret(src);
 
 	if (src->type != BL_PC) {
-		ShowWarning("skill_castend_song: Expected player type for src!\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_castend_song: 케스터에 대한 플레이어 타입이 필요합니다!\n");
+		else
+			ShowWarning("skill_castend_song: Expected player type for src!\n");
 		return 0;
 	}
 
 	if (!(skill_get_inf2_(skill_id, { INF2_ISSONG, INF2_ISENSEMBLE }))) {
-		ShowWarning("skill_castend_song: Unknown song skill ID: %u\n", skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_castend_song: 알수 없는 노래 스킬 번호: %u\n", skill_id);
+		else
+			ShowWarning("skill_castend_song: Unknown song skill ID: %u\n", skill_id);
 		return 0;
 	}
 
@@ -8040,6 +8063,10 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		clif_skill_damage(src, bl, tick, status_get_amotion(src), 0, -30000, 1, skill_id, skill_lv, DMG_SINGLE);
 		break;
 
+	case DE_BERSERKAIZER:
+		clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
+		break;
+
 	// EDP also give +25% WATK poison pseudo element to user.
 	case ASC_EDP:
 		clif_skill_nodamage(src,bl,skill_id,skill_lv,
@@ -8820,7 +8847,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case NPC_SELFDESTRUCTION:
 		//Self Destruction hits everyone in range (allies+enemies)
 		//Except for Summoned Marine spheres on non-versus maps, where it's just enemy.
-		i = ((!md || md->special_state.ai == AI_SPHERE) && !map_flag_vs(src->m))?
+		i = ((!md || md->special_state.ai == AI_SPHERE) && !map_flag_vs(src->m) || md && map_getmapflag(src->m, MF_NO_NPC_SELFDESTRUCTION_ON_ALL))?
 			BCT_ENEMY:BCT_ALL;
 		clif_skill_nodamage(src, src, skill_id, -1, 1);
 		map_delblock(src); //Required to prevent chain-self-destructions hitting back.
@@ -9312,6 +9339,28 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					sd->state.pending_vending_ui = false;
 					clif_openvendingreq( *sd, 2+skill_lv );
 				}
+			}
+		}
+		break;
+
+	case ALL_ASSISTANT_BUYING:
+	case ALL_ASSISTANT_VENDING:
+		if(sd) {
+			if ( !pc_can_give_items(sd) ){	//Prevent vending of GMs with unnecessary Level to trade/drop. [Skotlex]
+				clif_skill_fail(*sd,skill_id,USESKILL_FAIL_LEVEL,0);
+				if(skill_id == ALL_ASSISTANT_VENDING)
+					clif_stall_ui_close(sd,100,0);
+				else
+					clif_stall_ui_close(sd,101,0);
+
+			} else {
+				sd->state.prevend = 1;
+				sd->state.workinprogress = WIP_DISABLE_ALL;
+				sd->stall_skill_lv = skill_lv;
+				if(skill_id == ALL_ASSISTANT_VENDING)
+					clif_skill_nodamage(src, bl, skill_id, skill_lv, stall_ui_open(sd, skill_lv, 0) ? 0 : 1);
+				else
+					clif_skill_nodamage(src, bl, skill_id, skill_lv, stall_ui_open(sd, skill_lv, 1) ? 0 : 1);
 			}
 		}
 		break;
@@ -12038,6 +12087,13 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case GN_CHANGEMATERIAL:
+#if PACKETVER >= 20230802
+		if (sd) {
+			clif_ui_open2(*sd, OUT_UI_CHANGE_MATERIAL);
+			clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
+		}
+	break;
+#endif
 	case SO_EL_ANALYSIS:
 		if( sd ) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
@@ -12989,7 +13045,10 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 	default: {
 		std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
-		ShowWarning("skill_castend_nodamage_id: missing code case for skill %s(%d)\n", skill ? skill->name : "UNKNOWN", skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_castend_nodamage_id: 스킬 %s(%d)에 대한 코드 케이스가 빠졌습니다.\n", skill ? skill->name : "UNKNOWN", skill_id);
+		else
+			ShowWarning("skill_castend_nodamage_id: missing code case for skill %s(%d)\n", skill ? skill->name : "UNKNOWN", skill_id);
 		clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 		map_freeblock_unlock();
 		return 1;
@@ -13212,7 +13271,10 @@ TIMER_FUNC(skill_castend_id){
 
 	if(ud->skill_id != SA_CASTCANCEL && ud->skill_id != SO_SPELLFIST) {// otherwise handled in unit_skillcastcancel()
 		if( ud->skilltimer != tid ) {
-			ShowError("skill_castend_id: Timer mismatch %d!=%d!\n", ud->skilltimer, tid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("skill_castend_id: 타이머가 일치하지 않음 %d!=%d!\n", ud->skilltimer, tid);
+			else	
+				ShowError("skill_castend_id: Timer mismatch %d!=%d!\n", ud->skilltimer, tid);
 			ud->skilltimer = INVALID_TIMER;
 			return 0;
 		}
@@ -13561,7 +13623,10 @@ TIMER_FUNC(skill_castend_pos){
 
 	if( ud->skilltimer != tid )
 	{
-		ShowError("skill_castend_pos: Timer mismatch %d!=%d\n", ud->skilltimer, tid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_castend_pos: 타이머가 일치하지 않음 %d!=%d\n", ud->skilltimer, tid);
+		else
+			ShowError("skill_castend_pos: Timer mismatch %d!=%d\n", ud->skilltimer, tid);
 		ud->skilltimer = INVALID_TIMER;
 		return 0;
 	}
@@ -13626,10 +13691,15 @@ TIMER_FUNC(skill_castend_pos){
 				clif_emotion(src, md->db->skill[md->skill_idx]->emotion);
 		}
 
-		if(battle_config.skill_log && battle_config.skill_log&src->type)
-			ShowInfo("Type %d, ID %d skill castend pos [id =%d, lv=%d, (%d,%d)]\n",
-				src->type, src->id, ud->skill_id, ud->skill_lv, ud->skillx, ud->skilly);
-
+		if(battle_config.skill_log && battle_config.skill_log & src->type) {
+			if(strcmpi(MessageLang, "KOR") == 0) {
+				ShowInfo("타입 %d, ID %d 스킬 시전 종료 위치 [id = %d, lv = %d, (%d, %d)]\n",
+					src->type, src->id, ud->skill_id, ud->skill_lv, ud->skillx, ud->skilly);
+			} else {
+				ShowInfo("Type %d, ID %d skill castend pos [id = %d, lv = %d, (%d, %d)]\n",
+					src->type, src->id, ud->skill_id, ud->skill_lv, ud->skillx, ud->skilly);
+			}
+		}
 		if (ud->walktimer != INVALID_TIMER)
 			unit_stop_walking(src,1);
 
@@ -14733,7 +14803,10 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 		break;
 
 	default:
-		ShowWarning("skill_castend_pos2: Unknown skill used:%d\n",skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_castend_pos2: 사용된 알수 없는 스킬ID:%d\n",skill_id);
+		else
+			ShowWarning("skill_castend_pos2: Unknown skill used:%d\n",skill_id);
 		return 1;
 	}
 
@@ -14781,9 +14854,12 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 
 	pc_stop_attack(sd);
 
-	if(battle_config.skill_log && battle_config.skill_log&BL_PC)
-		ShowInfo("PC %d skill castend skill =%d map=%s\n",sd->bl.id,skill_id,mapname);
-
+	if(battle_config.skill_log && battle_config.skill_log&BL_PC) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("%d인 사용자의 케스팅 종료된 스킬은 %d이며 맵은 '%s'입니다.\n",sd->bl.id,skill_id,mapname);
+		else
+			ShowInfo("PC %d skill castend skill =%d map=%s\n",sd->bl.id,skill_id,mapname);
+	}
 	if(strcmp(mapname,"cancel")==0) {
 		skill_failed(sd);
 		return 0;
@@ -14945,9 +15021,14 @@ static bool skill_dance_switch(struct skill_unit* unit, int flag)
 		return false;
 
 	if( flag == prevflag ) { //Protection against attempts to read an empty backup/write to a full backup
-		ShowError("skill_dance_switch: Attempted to %s (skill_id=%d, skill_lv=%d, src_id=%d).\n",
-			flag ? "read an empty backup" : "write to a full backup",
-			group->skill_id, group->skill_lv, group->src_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_dance_switch: %s이(가) 시도되었습니다. (스킬ID=%d, 스킬레벨=%d, src_id=%d).\n",
+				flag ? "빈 백업 읽기" : "전체 백업하기",
+				group->skill_id, group->skill_lv, group->src_id);
+		else
+			ShowError("skill_dance_switch: Attempted to %s (skill_id=%d, skill_lv=%d, src_id=%d).\n",
+				flag ? "read an empty backup" : "write to a full backup",
+				group->skill_id, group->skill_lv, group->src_id);
 		return false;
 	}
 
@@ -19697,7 +19778,10 @@ void skill_weaponrefine( map_session_data& sd, int idx ){
 			}
 
 			if( cost->nameid != material[ditem->weapon_level - 1] ){
-				ShowDebug( "skill_weaponrefine: The hardcoded refine requirement %d for weapon level %d does not match %d from the refine database.\n", material[ditem->weapon_level - 1], ditem->weapon_level, cost->nameid );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowDebug( "skill_weaponrefine: 무기 레벨 %d에 대한 하드 코딩된 제련 요구 사항 %d이(가) 제련 데이터베이스의 %d과(와) 일치하지 않습니다.\n",  ditem->weapon_level,material[ditem->weapon_level - 1], cost->nameid );
+				else
+					ShowDebug( "skill_weaponrefine: The hardcoded refine requirement %d for weapon level %d does not match %d from the refine database.\n", material[ditem->weapon_level - 1], ditem->weapon_level, cost->nameid );
 				clif_skill_fail( sd, sd.menuskill_id );
 				return;
 			}
@@ -20915,7 +20999,10 @@ static int skill_get_new_group_id(void)
 				return skill_unit_group_newid++;// available
 		}
 		// full loop, nothing available
-		ShowFatalError("skill_get_new_group_id: All ids are taken. Exiting...");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowFatalError("skill_get_new_group_id: 모든 ID를 갖고 있습니다. 종료중...");
+		else
+			ShowFatalError("skill_get_new_group_id: All ids are taken. Exiting...");
 		exit(1);
 	}
 }
@@ -20988,14 +21075,20 @@ int skill_delunitgroup_(std::shared_ptr<s_skill_unit_group> group, const char* f
 	int link_group_id;
 
 	if( group == nullptr ) {
-		ShowDebug("skill_delunitgroup: group is nullptr (source=%s:%d, %s)! Please report this! (#3504)\n", file, line, func);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("skill_delunitgroup: 그룹이 nullptr입니다. (소스=%s:%d, %s) 이것을 보고하세요! (#3504)\n", file, line, func);
+		else
+			ShowDebug("skill_delunitgroup: group is nullptr (source=%s:%d, %s)! Please report this! (#3504)\n", file, line, func);
 		return 0;
 	}
 
 	src = map_id2bl(group->src_id);
 	ud = unit_bl2ud(src);
 	if (!src || !ud) {
-		ShowError("skill_delunitgroup: Group's source not found! (src_id: %d skill_id: %d)\n", group->src_id, group->skill_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_delunitgroup: 그룹의 소스를 찾을 수 없습니다. (src_id: %d 스킬ID: %d)\n", group->src_id, group->skill_id);
+		else
+			ShowError("skill_delunitgroup: Group's source not found! (src_id: %d skill_id: %d)\n", group->src_id, group->skill_id);
 		return 0;
 	}
 
@@ -21127,9 +21220,12 @@ int skill_delunitgroup_(std::shared_ptr<s_skill_unit_group> group, const char* f
 
 	link_group_id = group->link_group_id;
 
-	if (skillunit_group_db.erase(group->group_id) != 1)
-		ShowError("skill_delunitgroup: Group not found! (src_id: %d skill_id: %d)\n", group->src_id, group->skill_id);
-
+	if (skillunit_group_db.erase(group->group_id) != 1) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_delunitgroup: 그룹을 찾을 수 없습니다. (src_id: %d 스킬ID: %d)\n", group->src_id, group->skill_id);
+		else
+			ShowError("skill_delunitgroup: Group not found! (src_id: %d skill_id: %d)\n", group->src_id, group->skill_id);
+	}
 	util::vector_erase_if_exists(ud->skillunits, group);
 
 	if(link_group_id) {
@@ -21197,7 +21293,10 @@ struct skill_unit_group_tickset *skill_unitgrouptickset_search(struct block_list
 	}
 
 	if (j == -1) {
-		ShowWarning ("skill_unitgrouptickset_search: tickset is full\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning ("skill_unitgrouptickset_search: 티켓이 꽉찼습니다.\n");
+		else
+			ShowWarning ("skill_unitgrouptickset_search: tickset is full\n");
 		j = id % MAX_SKILLUNITGROUPTICKSET;
 	}
 
@@ -21952,7 +22051,10 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 					y = x;
 				pc_delitem(sd,j,y,0,0,LOG_TYPE_PRODUCE);
 			} else {
-				ShowError("skill_produce_mix: material item error\n");
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("skill_produce_mix: 재료 아이템 에러!\n");
+				else
+					ShowError("skill_produce_mix: material item error\n");
 				return false;
 			}
 			x -= y;
@@ -22977,7 +23079,10 @@ TIMER_FUNC(skill_blockpc_end){
 		return 0;
 
 	if (!sd->scd[i] || sd->scd[i]->timer != tid) {
-		ShowWarning("skill_blockpc_end: Invalid Timer or not Skill Cooldown.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_blockpc_end: 타이머가 잘못되었거나 스킬 재사용 대기시간이 아닙니다.\n");
+		else
+			ShowWarning("skill_blockpc_end: Invalid Timer or not Skill Cooldown.\n");
 		return 0;
 	}
 
@@ -23020,7 +23125,10 @@ int skill_blockpc_start(map_session_data *sd, int skill_id, t_tick tick) {
 
 		return 1;
 	} else {
-		ShowWarning("skill_blockpc_start: Too many skillcooldowns, increase MAX_SKILLCOOLDOWN.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("skill_blockpc_start: 스킬 재사용 대기시간이 너무 많습니다. MAX_SKILLCOOLDOWN을 늘리십시오.\n");
+		else
+			ShowWarning("skill_blockpc_start: Too many skillcooldowns, increase MAX_SKILLCOOLDOWN.\n");
 		return 0;
 	}
 }
@@ -23340,7 +23448,10 @@ void skill_init_unit_layout (void) {
 					}
 					break;
 				default:
-					ShowError("unknown unit layout at skill %d\n",i);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("스킬 %d에 알수 없는 유닛 레이아웃.\n",i);
+					else	
+						ShowError("unknown unit layout at skill %d\n",i);
 					break;
 			}
 		}
@@ -23466,8 +23577,12 @@ void skill_init_unit_layout (void) {
 		pos++;
 	}
 
-	if( pos >= MAX_SKILL_UNIT_LAYOUT )
-		ShowError("skill_init_unit_layout: The skill_unit_layout has met the limit or overflowed (pos=%d)\n", pos);
+	if( pos >= MAX_SKILL_UNIT_LAYOUT ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_init_unit_layout: skill_unit_layout이 한계를 초과했거나 넘쳤습니다. (pos=%d)\n", pos);
+		else
+			ShowError("skill_init_unit_layout: The skill_unit_layout has met the limit or overflowed (pos=%d)\n", pos);
+	}
 }
 
 void skill_init_nounit_layout (void) {
@@ -23633,8 +23748,12 @@ void skill_init_nounit_layout (void) {
 		pos++;
 	}
 
-	if( pos >= MAX_SKILL_UNIT_LAYOUT2 )
-		ShowError("skill_init_nounit_layout: The skill_nounit_layout has met the limit or overflowed (pos=%d)\n", pos);
+	if( pos >= MAX_SKILL_UNIT_LAYOUT2 ) {
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_init_nounit_layout: skill_nounit_layout이 한계를 초과했거나 넘쳤습니다. (위치=%d)\n", pos);
+		else
+			ShowError("skill_init_nounit_layout: The skill_nounit_layout has met the limit or overflowed (pos=%d)\n", pos);
+	}
 }
 
 int skill_block_check(struct block_list *bl, sc_type type , uint16 skill_id) {
@@ -23772,7 +23891,10 @@ template<typename T, size_t S> bool SkillDatabase::parseNode(const std::string& 
 				continue;
 
 			if (skill_lv > MAX_SKILL_LEVEL) {
-				this->invalidWarning(it["Level"], "%s Level exceeds the maximum skill level of %d, skipping.\n", nodeName.c_str(), MAX_SKILL_LEVEL);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["Level"], "%s 레벨은 최대 스킬 레벨 %d에 도달했습니다. 통과됨.\n", nodeName.c_str(), MAX_SKILL_LEVEL);
+				else
+					this->invalidWarning(it["Level"], "%s Level exceeds the maximum skill level of %d, skipping.\n", nodeName.c_str(), MAX_SKILL_LEVEL);
 				return false;
 			}
 
@@ -23867,7 +23989,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (skill_lv == 0 || skill_lv > MAX_SKILL_LEVEL) {
-			this->invalidWarning(node["MaxLevel"], "MaxLevel %hu does not meet the bounds of 1~%d.\n", skill_lv, MAX_SKILL_LEVEL);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["MaxLevel"], "최대 레벨 %hu은(는) 범위 1~%d을(를) 벗어났습니다.\n", skill_lv, MAX_SKILL_LEVEL);
+			else
+				this->invalidWarning(node["MaxLevel"], "MaxLevel %hu does not meet the bounds of 1~%d.\n", skill_lv, MAX_SKILL_LEVEL);
 			return 0;
 		}
 
@@ -23885,12 +24010,18 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(type_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Type"], "Type %s is invalid.\n", type.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Type"], "%s은(는) 잘못된 타입입니다.\n", type.c_str());
+			else
+				this->invalidWarning(node["Type"], "Type %s is invalid.\n", type.c_str());
 			return 0;
 		}
 
 		if (constant < BF_NONE || constant > BF_MISC) {
-			this->invalidWarning(node["Type"], "Constant Type %s is not a supported skill type.\n", type_constant.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Type"], "상수 유형 %s은(는) 지원되지 않는 스킬 타입입니다.\n", type_constant.c_str());
+			else
+				this->invalidWarning(node["Type"], "Constant Type %s is not a supported skill type.\n", type_constant.c_str());
 			return 0;
 		}
 
@@ -23910,7 +24041,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(inf_constant.c_str(), &constant)) {
-			this->invalidWarning(node["TargetType"], "TargetType %s is invalid.\n", inf.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["TargetType"], "%s은(는) 잘못된 TargetType입니다.\n", inf.c_str());
+			else
+				this->invalidWarning(node["TargetType"], "TargetType %s is invalid.\n", inf.c_str());
 			return 0;
 		}
 
@@ -23927,7 +24061,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(nk_constant.c_str(), &constant)) {
-				this->invalidWarning(damageNode, "DamageFlags %s is invalid.\n", nk.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(damageNode, "%s은(는) 잘못된 DamageFlags입니다.\n", nk.c_str());
+				else
+					this->invalidWarning(damageNode, "DamageFlags %s is invalid.\n", nk.c_str());
 				return 0;
 			}
 
@@ -23953,7 +24090,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(inf2_constant.c_str(), &constant)) {
-				this->invalidWarning(infoNode, "Flag %s is invalid, skipping.\n", inf2.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(infoNode, "%s은(는) 잘못된 Flag입니다. 통과됨.\n", inf2.c_str());
+				else
+					this->invalidWarning(infoNode, "Flag %s is invalid, skipping.\n", inf2.c_str());
 				continue;
 			}
 
@@ -23987,7 +24127,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(hit_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Hit"], "Hit %s is invalid.\n", hit.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Hit"], "%s은(는) 잘못된 Hit입니다.\n", hit.c_str());
+			else
+				this->invalidWarning(node["Hit"], "Hit %s is invalid.\n", hit.c_str());
 			return 0;
 		}
 
@@ -24017,12 +24160,18 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(element_constant.c_str(), &constant)) {
-				this->invalidWarning(elementNode["Element"], "Element %s is invalid.\n", element.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(elementNode["Element"], "%s은(는) 잘못된 Element입니다.\n", element.c_str());
+				else
+					this->invalidWarning(elementNode["Element"], "Element %s is invalid.\n", element.c_str());
 				return 0;
 			}
 
 			if (constant == ELE_NONE) {
-				this->invalidWarning(elementNode["Element"], "%s is not a valid element.\n", element.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(elementNode["Element"], "%s은(는) 유효하지 않은 요소(element)입니다.\n", element.c_str());
+				else
+					this->invalidWarning(elementNode["Element"], "%s is not a valid element.\n", element.c_str());
 				return 0;
 			}
 
@@ -24035,7 +24184,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					continue;
 
 				if (skill_lv > MAX_SKILL_LEVEL) {
-					this->invalidWarning(it["Level"], "Element Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it["Level"], "Element Level이 최대 스킬 레벨인 %d에 도달했습니다. 통과됨.\n", MAX_SKILL_LEVEL);
+					else
+						this->invalidWarning(it["Level"], "Element Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
 					return false;
 				}
 
@@ -24046,12 +24198,18 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				int64 constant;
 
 				if (!script_get_constant(element_constant.c_str(), &constant)) {
-					this->invalidWarning(elementNode["Element"], "Element %s is invalid.\n", element.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(elementNode["Element"], "%s은(는) 잘못된 Element입니다.\n", element.c_str());
+					else
+						this->invalidWarning(elementNode["Element"], "Element %s is invalid.\n", element.c_str());
 					return 0;
 				}
 
 				if (constant == ELE_NONE) {
-					this->invalidWarning(elementNode["Element"], "%s is not a valid element.\n", element.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(elementNode["Element"], "%s은(는) 유효하지 않은 요소(element)입니다.\n", element.c_str());
+					else
+						this->invalidWarning(elementNode["Element"], "%s is not a valid element.\n", element.c_str());
 					return 0;
 				}
 
@@ -24117,7 +24275,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					skill->copyable.option &= SKILL_COPY_REPRODUCE;
 			}
 		} else {
-			this->invalidWarning(copyNode, "CopyFlags requires a Skill copy type.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(copyNode, "CopyFlags에는 스킬 카피 타입이 필요합니다.\n");
+			else
+				this->invalidWarning(copyNode, "CopyFlags requires a Skill copy type.\n");
 			return 0;
 		}
 
@@ -24131,7 +24292,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				int64 constant;
 
 				if (!script_get_constant(req_constant.c_str(), &constant)) {
-					this->invalidWarning(copyreqNode, "CopyFlags RemoveRequirement %s is invalid.\n", req.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(copyreqNode, "CopyFlags의 RemoveRequirement %s은(는) 잘못되었습니다.\n", req.c_str());
+					else
+						this->invalidWarning(copyreqNode, "CopyFlags RemoveRequirement %s is invalid.\n", req.c_str());
 					return 0;
 				}
 
@@ -24168,7 +24332,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				int64 constant;
 
 				if (!script_get_constant(type_constant.c_str(), &constant)) {
-					this->invalidWarning(npctypeNode, "NoNearNPC Type %s is invalid.\n", type.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(npctypeNode, "NoNearNPC Type %s은(는) 잘못되었습니다.\n", type.c_str());
+					else
+						this->invalidWarning(npctypeNode, "NoNearNPC Type %s is invalid.\n", type.c_str());
 					return 0;
 				}
 
@@ -24280,7 +24447,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(flag_constant.c_str(), &constant)) {
-				this->invalidWarning(castNode, "CastTimeFlags %s option is invalid.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(castNode, "CastTimeFlags %s은(는) 잘못된 옵션입니다.\n", flag.c_str());
+				else
+					this->invalidWarning(castNode, "CastTimeFlags %s option is invalid.\n", flag.c_str());
 				return 0;
 			}
 
@@ -24306,7 +24476,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(flag_constant.c_str(), &constant)) {
-				this->invalidWarning(castNode, "CastDelayFlags %s option is invalid.\n", flag.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(castNode, "CastDelayFlags %s은(는) 잘못된 옵션입니다.\n", flag.c_str());
+				else
+					this->invalidWarning(castNode, "CastDelayFlags %s option is invalid.\n", flag.c_str());
 				return 0;
 			}
 
@@ -24408,7 +24581,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(weapon_constant.c_str(), &constant)) {
-						this->invalidWarning(weaponNode, "Requires Weapon %s is invalid.\n", weapon.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(weaponNode, "Requires의 Weapon %s은(는) 잘못되었습니다.\n", weapon.c_str());
+						else
+							this->invalidWarning(weaponNode, "Requires Weapon %s is invalid.\n", weapon.c_str());
 						return 0;
 					}
 
@@ -24447,7 +24623,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					int64 constant;
 
 					if (!script_get_constant(ammo_constant.c_str(), &constant)) {
-						this->invalidWarning(ammoNode, "Requires Ammo %s is invalid.\n", ammo.c_str());
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(ammoNode, "Requires의 Ammo %s은(는) 잘못되었습니다.\n", ammo.c_str());
+						else
+							this->invalidWarning(ammoNode, "Requires Ammo %s is invalid.\n", ammo.c_str());
 						return 0;
 					}
 
@@ -24469,7 +24648,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		if (this->nodeExists(requireNode, "AmmoAmount")) {
 			if (skill->require.ammo == 0) {
-				this->invalidWarning(requireNode["AmmoAmount"], "An ammo type is required before specifying ammo amount.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(requireNode["AmmoAmount"], "탄약량을 지정하기 전에 탄약 타입이 필요합니다.\n");
+				else
+					this->invalidWarning(requireNode["AmmoAmount"], "An ammo type is required before specifying ammo amount.\n");
 				return 0;
 			}
 
@@ -24490,7 +24672,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(state_constant.c_str(), &constant)) {
-				this->invalidWarning(requireNode["State"], "Requires State %s is invalid.\n", state.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(requireNode["State"], "Requires의 State %s은(는) 잘못되었습니다.\n", state.c_str());
+				else
+					this->invalidWarning(requireNode["State"], "Requires State %s is invalid.\n", state.c_str());
 				return 0;
 			}
 
@@ -24507,7 +24692,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				int64 constant;
 
 				if (!script_get_constant(status_constant.c_str(), &constant)) {
-					this->invalidWarning(statusNode, "Requires Status %s is invalid.\n", status.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(statusNode, "Requires의 Status %s은(는) 잘못되었습니다.\n", status.c_str());
+					else
+						this->invalidWarning(statusNode, "Requires Status %s is invalid.\n", status.c_str());
 					return 0;
 				}
 
@@ -24546,7 +24734,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 				if (item == nullptr) {
-					this->invalidWarning(it["Item"], "Requires ItemCost Item %s does not exist.\n", item_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it["Item"], "Requires의 ItemCost에 지정된 아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str());
+					else
+						this->invalidWarning(it["Item"], "Requires ItemCost Item %s does not exist.\n", item_name.c_str());
 					return 0;
 				}
 
@@ -24562,7 +24753,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 						continue;
 
 					if (cost_level < 1 || cost_level > skill->max) {
-						this->invalidWarning(it["Level"], "Requires ItemCost Level %d is not within %s's level range of 1~%d.\n", cost_level, skill->name, skill->max);
+						if(strcmpi(MessageLang_Yml,"KOR") == 0)
+							this->invalidWarning(it["Level"], "Requires ItemCost Level %d이(가) 스킬 %s의 레벨 범위(1~%d)에 포함되지 않습니다.\n", cost_level, skill->name, skill->max);
+						else
+							this->invalidWarning(it["Level"], "Requires ItemCost Level %d is not within %s's level range of 1~%d.\n", cost_level, skill->name, skill->max);
 						return 0;
 					}
 
@@ -24588,7 +24782,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 				if (item == nullptr) {
-					this->invalidWarning(it, "Requires Equipment %s does not exist.\n", item_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it, "Requires의 Equipment %s은(는) 존재하지 않습니다.\n", item_name.c_str());
+					else
+						this->invalidWarning(it, "Requires Equipment %s does not exist.\n", item_name.c_str());
 					return 0;
 				}
 
@@ -24634,7 +24831,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 			skill->unit_id = static_cast<uint16>(constant);
 		} else {
-			this->invalidWarning(unitNode["Id"], "Unit requires an Id.\n");
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(unitNode["Id"], "Unit에는 Id이(가) 필수입니다..\n");
+			else
+				this->invalidWarning(unitNode["Id"], "Unit requires an Id.\n");
 			return 0;
 		}
 
@@ -24648,7 +24848,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(unit_constant.c_str(), &constant)) {
-				this->invalidWarning(unitNode["AlternateId"], "Alternate Unit Id %s is invalid.\n", unit.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(unitNode["AlternateId"], "Alternate의 Unit Id %s은(는) 잘못되었습니다.\n", unit.c_str());
+				else
+					this->invalidWarning(unitNode["AlternateId"], "Alternate Unit Id %s is invalid.\n", unit.c_str());
 				return 0;
 			}
 
@@ -24697,7 +24900,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int64 constant;
 
 			if (!script_get_constant(target_constant.c_str(), &constant)) {
-				this->invalidWarning(unitNode["Target"], "Unit Target %s is invalid.\n", target.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(unitNode["Target"], "Unit의 Target %s은(는) 잘못되었습니다.\n", target.c_str());
+				else
+					this->invalidWarning(unitNode["Target"], "Unit Target %s is invalid.\n", target.c_str());
 				return 0;
 			}
 
@@ -24717,7 +24923,10 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				int64 constant;
 
 				if (!script_get_constant(flag_constant.c_str(), &constant)) {
-					this->invalidWarning(it, "Skill Unit Flag %s is invalid.\n", flag.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(it, "Skill의 Unit Flag %s은(는) 잘못되었습니다.\n", flag.c_str());
+					else
+						this->invalidWarning(it, "Skill Unit Flag %s is invalid.\n", flag.c_str());
 					return 0;
 				}
 
@@ -24762,12 +24971,18 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		int64 constant;
 
 		if (!script_get_constant(status_constant.c_str(), &constant)) {
-			this->invalidWarning(node["Status"], "Status %s is invalid.\n", status.c_str());
+			if(strcmpi(MessageLang,"KOR") == 0)
+				this->invalidWarning(node["Status"], "Status %s이(가) 잘못되었습니다.\n", status.c_str());
+			else
+				this->invalidWarning(node["Status"], "Status %s is invalid.\n", status.c_str());
 			return 0;
 		}
 
 		if (constant < SC_NONE || constant >= SC_MAX) {
-			this->invalidWarning(node["Status"], "Status %s is unknown. Defaulting to SC_NONE.\n", status.c_str());
+			if(strcmpi(MessageLang,"KOR") == 0)
+				this->invalidWarning(node["Status"], "Status %s은(는) 알 수 없습니다. SC_NONE으로 조정합니다.\n", status.c_str());
+			else
+				this->invalidWarning(node["Status"], "Status %s is unknown. Defaulting to SC_NONE.\n", status.c_str());
 			constant = SC_NONE;
 		}
 
@@ -24794,7 +25009,10 @@ void SkillDatabase::clear() {
 
 void SkillDatabase::loadingFinished(){
 	if( this->skill_num > MAX_SKILL ){
-		ShowError( "There are more skills defined in the skill database (%d) than the MAX_SKILL (%d) define. Please increase it and recompile.\n", this->skill_num, MAX_SKILL );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			ShowError( "스킬 데이터베이스(%d)에는 MAX_SKILL(%d)이 정의하는 것보다 더 많은 스킬이 정의되어 있습니다. 추가 후 다시 컴파일 해줒세요.\n", this->skill_num, MAX_SKILL );
+		else
+			ShowError( "There are more skills defined in the skill database (%d) than the MAX_SKILL (%d) define. Please increase it and recompile.\n", this->skill_num, MAX_SKILL );
 	}
 
 	TypesafeCachedYamlDatabase::loadingFinished();
@@ -24810,7 +25028,10 @@ uint16 SkillDatabase::get_index( uint16 skill_id, bool silent, const char *func,
 	uint16 idx = this->skilldb_id2idx[skill_id];
 
 	if( idx == 0 && skill_id != 0 && !silent ){
-		ShowError( "Skill '%d' is undefined! %s:%d::%s\n", skill_id, file, line, func );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			ShowError( "스킬 '%d'은(는) 정의되어 있지 않습니다! %s:%d::%s\n", skill_id, file, line, func );
+		else
+			ShowError( "Skill '%d' is undefined! %s:%d::%s\n", skill_id, file, line, func );
 	}
 
 	return idx;
@@ -24835,12 +25056,18 @@ uint64 ReadingSpellbookDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	uint16 skill_id = skill_name2id(skill_name.c_str());
 
 	if (skill_id == 0) {
-		this->invalidWarning(node["Skill"], "Invalid skill name \"%s\", skipping.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "\"%s\"은(는) 잘못된 스킬 이름입니다. 통과됨.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Invalid skill name \"%s\", skipping.\n", skill_name.c_str());
 		return 0;
 	}
 
 	if (skill_get_inf(skill_id) ==	INF_PASSIVE_SKILL) {
-		this->invalidWarning(node["Skill"], "Passive skill %s cannot be memorized in a Spell Book.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "패시브 스킬 %s은(는) 스팰링 북으로 외울 수 없습니다.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Passive skill %s cannot be memorized in a Spell Book.\n", skill_name.c_str());
 		return 0;
 	}
 
@@ -24864,7 +25091,10 @@ uint64 ReadingSpellbookDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( book_name.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(node["Book"], "Book item %s does not exist.\n", book_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(node["Book"], "책 아이템 %s은(는) 존재하지 않습니다.\n", book_name.c_str());
+			else
+				this->invalidWarning(node["Book"], "Book item %s does not exist.\n", book_name.c_str());
 			return 0;
 		}
 
@@ -24921,12 +25151,18 @@ uint64 MagicMushroomDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	uint16 skill_id = skill_name2id(skill_name.c_str());
 
 	if (!skill_id) {
-		this->invalidWarning(node["Skill"], "Invalid Magic Mushroom skill name \"%s\", skipping.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "\"%s\"은(는) 잘못된 마법 버섯 스킬 이름입니다. 통과됨.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Invalid Magic Mushroom skill name \"%s\", skipping.\n", skill_name.c_str());
 		return 0;
 	}
 
 	if (!skill_get_inf(skill_id)) {
-		this->invalidWarning(node["Skill"], "Passive skill %s cannot be casted by Magic Mushroom.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "패시브 스킬 %s은(는) 마법 버섯으로 캐스팅 할 수 없습니다.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Passive skill %s cannot be casted by Magic Mushroom.\n", skill_name.c_str());
 		return 0;
 	}
 
@@ -24967,7 +25203,10 @@ static bool skill_parse_row_producedb( char* split[], size_t columns, size_t cur
 	bool found = false;
 
 	if (id >= ARRAYLENGTH(skill_produce_db)) {
-		ShowError("skill_parse_row_producedb: Maximum db entries reached.\n");
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_parse_row_producedb: 최대 DB항목 수에 도달했습니다.\n");
+		else	
+			ShowError("skill_parse_row_producedb: Maximum db entries reached.\n");
 		return false;
 	}
 
@@ -24980,7 +25219,10 @@ static bool skill_parse_row_producedb( char* split[], size_t columns, size_t cur
 	}
 
 	if (!item_db.exists(nameid)) {
-		ShowError("skill_parse_row_producedb: Invalid item %u.\n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_parse_row_producedb: %u은(는) 잘못된 아이템입니다.\n", nameid);
+		else
+			ShowError("skill_parse_row_producedb: Invalid item %u.\n", nameid);
 		return false;
 	}
 
@@ -25018,7 +25260,10 @@ uint64 SkillArrowDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	std::shared_ptr<item_data> item = item_db.search_aegisname( source_name.c_str() );
 
 	if (item == nullptr) {
-		this->invalidWarning(node["Source"], "Item %s does not exist.\n", source_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Source"], "아이템 %s은(는) 존재하지 않습니다.\n", source_name.c_str());
+		else
+			this->invalidWarning(node["Source"], "Item %s does not exist.\n", source_name.c_str());
 		return 0;
 	}
 
@@ -25043,7 +25288,10 @@ uint64 SkillArrowDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		std::shared_ptr<item_data> item = item_db.search_aegisname( item_name.c_str() );
 
 		if (item == nullptr) {
-			this->invalidWarning(it["Item"], "Item %s does not exist.\n", item_name.c_str());
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(it["Item"], "아이템 %s은(는) 존재하지 않습니다.\n", item_name.c_str());
+			else
+				this->invalidWarning(it["Item"], "Item %s does not exist.\n", item_name.c_str());
 			return 0;
 		}
 
@@ -25053,12 +25301,19 @@ uint64 SkillArrowDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			return 0;
 
 		if (amount == 0) {
-			if (arrow->created.erase(item->nameid) == 0)
-				this->invalidWarning(it["Amount"], "Failed to remove %s, the entry doesn't exist in Source %s.\n", item_name.c_str(), source_name.c_str());
+			if (arrow->created.erase(item->nameid) == 0) {
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)
+					this->invalidWarning(it["Amount"], "소스 %s의 항목에 존재하지 않아 %s을(를) 제거하는데 실패 했습니다.\n", source_name.c_str(), item_name.c_str());
+				else
+					this->invalidWarning(it["Amount"], "Failed to remove %s, the entry doesn't exist in Source %s.\n", item_name.c_str(), source_name.c_str());
+			}
 			continue;
 		}
 		if (amount > MAX_AMOUNT) {
-			this->invalidWarning(it["Amount"], "Amount %hu exceeds %hu, skipping.\n", amount, MAX_AMOUNT);
+			if(strcmpi(MessageLang_Yml,"KOR") == 0)
+				this->invalidWarning(it["Amount"], "Amount %hu은(는) 최대값 %hu을(를) 초과하여 건너뜁니다..\n", amount, MAX_AMOUNT);
+			else
+				this->invalidWarning(it["Amount"], "Amount %hu exceeds %hu, skipping.\n", amount, MAX_AMOUNT);
 			continue;
 		}
 
@@ -25089,12 +25344,18 @@ uint64 AbraDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	uint16 skill_id = skill_name2id(skill_name.c_str());
 
 	if (!skill_id) {
-		this->invalidWarning(node["Skill"], "Invalid Abra skill name \"%s\", skipping.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "\"%s\"은(는) 잘못된 아브라카다브라 스킬 이름입니다., skipping.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Invalid Abra skill name \"%s\", skipping.\n", skill_name.c_str());
 		return 0;
 	}
 
 	if (!skill_get_inf(skill_id)) {
-		this->invalidWarning(node["Skill"], "Passive skill %s cannot be casted by Abra.\n", skill_name.c_str());
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)
+			this->invalidWarning(node["Skill"], "패시브 스킬 %s은(는) 아브라카다브라로 캐스팅 할 수 없습니다.\n", skill_name.c_str());
+		else
+			this->invalidWarning(node["Skill"], "Passive skill %s cannot be casted by Abra.\n", skill_name.c_str());
 		return 0;
 	}
 
@@ -25125,7 +25386,10 @@ uint64 AbraDatabase::parseBodyNode(const ryml::NodeRef& node) {
 					continue;
 
 				if (skill_lv > MAX_SKILL_LEVEL) {
-					this->invalidWarning(probNode["Level"], "Probability Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0)
+						this->invalidWarning(probNode["Level"], "Probability의 Level은 최대 스킬 레벨 %d에 도달했습니다. 통과됨.\n", MAX_SKILL_LEVEL);
+					else
+						this->invalidWarning(probNode["Level"], "Probability Level exceeds the maximum skill level of %d, skipping.\n", MAX_SKILL_LEVEL);
 					return 0;
 				}
 
@@ -25157,7 +25421,10 @@ static bool skill_parse_row_changematerialdb( char* split[], size_t columns, siz
 	int x, y;
 
 	if (id >= MAX_SKILL_CHANGEMATERIAL_DB) {
-		ShowError("skill_parse_row_changematerialdb: Maximum amount of entries reached (%d), increase MAX_SKILL_CHANGEMATERIAL_DB\n",MAX_SKILL_CHANGEMATERIAL_DB);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_parse_row_changematerialdb: 최대 항목의 갯수(%d)에 도달했습니다. MAX_SKILL_CHANGEMATERIAL_DB를 늘리세요.\n",MAX_SKILL_CHANGEMATERIAL_DB);
+		else
+			ShowError("skill_parse_row_changematerialdb: Maximum amount of entries reached (%d), increase MAX_SKILL_CHANGEMATERIAL_DB\n",MAX_SKILL_CHANGEMATERIAL_DB);
 		return false;
 	}
 
@@ -25183,7 +25450,10 @@ static bool skill_parse_row_changematerialdb( char* split[], size_t columns, siz
 	}
 
 	if (x >= MAX_SKILL_PRODUCE_DB) {
-		ShowError("skill_parse_row_changematerialdb: Not supported item ID (%u) for Change Material. \n", nameid);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_parse_row_changematerialdb: 재료 변경에 지원되는 아이템 ID (%d)가 아닙니다. \n", nameid);
+		else
+			ShowError("skill_parse_row_changematerialdb: Not supported item ID (%u) for Change Material. \n", nameid);
 		return false;
 	}
 
@@ -25216,7 +25486,10 @@ static bool skill_parse_row_skilldamage( char* split[], size_t columns, size_t c
 		value = strtol(split[0], &result, 10);
 
 		if (*result) {
-			ShowError("skill_parse_row_skilldamage: Invalid skill %s given, skipping.\n", result);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("skill_parse_row_skilldamage: 알수 없는 스킬 %s이(가) 지정되었습니다. 통과중.\n", result);
+			else
+				ShowError("skill_parse_row_skilldamage: Invalid skill %s given, skipping.\n", result);
 			return false;
 		}
 
@@ -25235,14 +25508,20 @@ static bool skill_parse_row_skilldamage( char* split[], size_t columns, size_t c
 		value = strtol(split[1], &result, 10);
 
 		if (*result) {
-			ShowError("skill_parse_row_skilldamage: Invalid caster %s given for skill %d, skipping.\n", result, id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("skill_parse_row_skilldamage: %d 스킬에 대한 잘못된 케스터 %s이(가) 지정되었습니다.\n", id, result);
+			else
+				ShowError("skill_parse_row_skilldamage: Invalid caster %s given for skill %d, skipping.\n", result, id);
 			return false;
 		}
 
 		caster = value;
 	} else { // Try to parse caster as constant
 		if (!script_get_constant(split[1], &caster_tmp)) {
-			ShowError("skill_parse_row_skilldamage: Invalid caster constant given for skill %d, skipping.\n", id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("skill_parse_row_skilldamage: %d 스킬에 대한 잘못된 케스터 상수가 지정되었습니다.\n", id);
+			else
+				ShowError("skill_parse_row_skilldamage: Invalid caster constant given for skill %d, skipping.\n", id);
 			return false;
 		}
 		caster = static_cast<uint16>(caster_tmp);
@@ -25252,7 +25531,10 @@ static bool skill_parse_row_skilldamage( char* split[], size_t columns, size_t c
 	value = strtol(split[2], &result, 10);
 
 	if (*result) {
-		ShowError("skill_parse_row_skilldamage: Invalid map %s given for skill %d, skipping.\n", result, id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("skill_parse_row_skilldamage: %d 스킬에 대한 잘못된 맵 %s이(가) 지정되었습니다.\n", id, result);
+		else
+			ShowError("skill_parse_row_skilldamage: Invalid map %s given for skill %d, skipping.\n", result, id);
 		return false;
 	}
 
@@ -25262,7 +25544,10 @@ static bool skill_parse_row_skilldamage( char* split[], size_t columns, size_t c
 		value = strtol(split[offset], &result, 10);
 
 		if (*result && *result != ' ') {
-			ShowError("skill_parse_row_skilldamage: Invalid damage %s given for skill %d, defaulting to 0.\n", result, id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("skill_parse_row_skilldamage: %d 스킬에 대한 잘못된 대미지 %s이(가) 지정되었습니다.\n", id, result);
+			else
+				ShowError("skill_parse_row_skilldamage: Invalid damage %s given for skill %d, defaulting to 0.\n", result, id);
 			value = 0;
 		}
 		skill->damage.rate[i] = cap_value(value, -100, 100000);

@@ -7448,193 +7448,189 @@ dic_fild01,228,159,4	script	Jahbong#pa0829	496,{
 
 // Cat Paw Agent
 //============================================================
-moc_para01,44,19,3	script	Cat Paw Agent#gekk	496,{
+moc_para01,44,19,3	script	고양이손 요원::Cat Paw Agent#gekk	496,{
 	if (BaseLevel < 70)	{
-		mes "[Cat Paw Agent]";
-		mes "Hey, human! Did you come to make a request, too? When will it be my turn?";
+		mes "[고양이손 요원]";
+		mes "이봐! 자네도 여기 의뢰를 하러 온 거냐? 대체 내 차례는 언제야?";
 		next;
-		mes "[Cat Paw Agent]";
-		mes "Our Cat Paw Merchant group really needs any help it can get. But by the looks of all those requests that Ebenor is holding in his hand, Cat Paw Merchant will be closed by the time my request is put up on the board!";
+		mes "[고양이손 요원]";
+		mes "우리 고양이손 상단은 정말 고양이 손이라도 빌리고  싶은 심정인데, 저 이베노르란 사람 손에 든 의뢰서 뭉치를 보니 내 의뢰가 게시판에 걸리기 전에 우리 상단이 쫄딱 망하게 생겼다.";
 		next;
-		mes "[Cat Paw Agent]";
-		mes "It breaks my heart to think my colleagues will be shivering in the blizzard. I hope I don't get into trouble since I can't do anything about it, right?";
+		mes "[고양이손 요원]";
+		mes "눈보라 속에서 오들오들 떨고 있을 우리 동료를 생각하면 눈물도 모자라 콧물까지 나올 지경이지만, 현실이 이러니 설마 갸륵이 날 야단치지 않겠지?";
 		close;
 	}
 	if (ep13_start != 100) {
-		mes "[Cat Paw Agent]";
-		mes "Hey, human! Did you come to make a request, too? When will it be my turn?";
+		mes "[고양이손 요원]";
+		mes "이봐! 자네도 여기 의뢰를 하러 온 거냐? 대체 내 차례는 언제야?";
 		next;
-		mes "[Cat Paw Agent]";
-		mes "Our Cat Paw Merchant group really needs any help it can get. But by the looks of all those requests that Ebenor is holding in his hand, Cat Paw Merchant will be closed by the time my request is put up on the board!";
+		mes "[고양이손 요원]";
+		mes "우리 고양이손 상단은 정말 고양이 손이라도 빌리고  싶은 심정인데, 저 이베노르란 사람 손에 든 의뢰서 뭉치를 보니 내 의뢰가 게시판에 걸리기 전에 우리 상단이 쫄딱 망하게 생겼다.";
 		next;
-		mes "[Cat Paw Agent]";
-		mes "It breaks my heart to think my colleagues will be shivering in the blizzard. I hope I don't get into trouble since I can't do anything about it, right?";
+		mes "[고양이손 요원]";
+		mes "눈보라 속에서 오들오들 떨고 있을 우리 동료를 생각하면 눈물도 모자라 콧물까지 나올 지경이지만, 현실이 이러니 설마 갸륵이 날 야단치지 않겠지?";
 		next;
-		if (select ("Why don't you collect it yourself?:I'm sorry to hear that.") == 1) {
-				emotion ET_HUK;
-				mes "[Cat Paw Agent]";
-				mes "Human!! You're a genius!!";
-				mes "How did you come up with that?";
+		if (select ("왜 직접 가서 찾지 않지?:안타깝네요.") == 1) {
+			emotion ET_HUK;
+			mes "[고양이손 요원]";
+			mes "인간!! 당신은 천재군요!!";
+			mes "어떻게 그런 생각을 했죠?";
+			next;
+			mes "[게크 요원]";
+			mes "나는 고양이손 상인단의 게크 요원입니다.";
+			mes "고양이손 상인단은 우리 고향을 잃은 후로 이 미드가르드 세계를 오래 헤매고 있었습니다.";
+			next;
+			mes "[게크 요원]";
+			mes "하지만 이제 우리는 미드가르드에 우리 자리가 없다는 걸 깨달았습니다.";
+			mes "게크, 기아룩, 그리고 고르륵이 그에 대해 많은 고민을 했습니다.";
+			next;
+			mes "[게크 요원]";
+			mes "하지만 드디어 정착할 곳을 찾았습니다!";
+			mes "조금 춥긴 하지만 그곳에는 카프라나 존다가 없습니다!";
+			mes "우리는 새로운 땅에서 입지를 다질 것입니다!";
+			next;
+			mes "[게크 요원]";
+			mes "하지만 물론, 우리는 그곳에서 시작할 영향력이 없습니다.";
+			mes "그러나 우리는 그곳에서 노력을 아끼지 않을 계획입니다.";
+			next;
+			mes "[게크 요원]";
+			mes "인간!! 모로크 마을 근처에 큰 구멍이 있다는 거 알고 있었나요?";
+			mes "그 구멍을 통해 새로운 지역으로 여행할 수 있다고 합니다!";
+			next;
+			mes "[게크 요원]";
+			mes "하지만 그곳에 가기 전에 테스트와 조사를 거쳐야 한다고 합니다.";
+			mes "내 생각엔 그렇게 고생할 필요가 없다고 봐요!";
+			next;
+			mes "[게크 요원]";
+			mes "우리는 가능한 빨리 사람을 보내서 그 지역을 탐험해야 합니다.";
+			mes "인간들이 시간을 낭비하는 동안, 우리 고양이손 상인은 먼저 정착하고 연구를 계속해야 합니다.";
+			next;
+			if (select ("나도 상인들을 돕고 싶어.:관심 없어.") == 1) {
+				mes "[게크 요원]";
+				mes "당신은 다른 인간들보다 낫군요!";
+				mes "정말로 그렇게 생각한다면 여기 서명하세요.";
+				mes "나는 기아룩의 마음에 들려고 서명을 모으고 있습니다... 신경 쓰지 마세요. 당신이 내 후원자라는 걸 알려주겠습니다!";
 				next;
-				mes "[Agent Geck]";
-				mes "I'm Agent Geck from the Cat Paw Merchant.";
-				mes "Car Paw Merchant has been wandering for a long time in this Midgard world ever since we lost our homeland.";
+				input .@inputstr$;
+				mes "[게크 요원]";
+				mes "" + strcharinfo(0) + "? 인간의 이름은 나에게는 이상하군요.";
 				next;
-				mes "[Agent Geck]";
-				mes "But now we realize there is no place for our group here in Midgard.";
-				mes "Geck, Gyareuk and Gorureung did a lot of thinking about it.";
+				mes "[게크 요원]";
+				mes "이제 당신은 게크의 개인 노... 후원자입니다.";
+				mes "왜 상인 후원자가 아닌지 묻지 마세요.";
+				mes "좋은 인간은 남의 일에 끼어들지 않는 법입니다.";
 				next;
-				mes "[Agent Geck]";
-				mes "But we finally found a place to settle!";
-				mes "It may be a bit cold but there are no Kafra or Jonda there!";
-				mes "We will gain ground in our new land!";
+				mes "[게크 요원]";
+				mes "이제 당신이 서명했으니, 우리가 해야 할 일은 다른 세계로 떠나는 것뿐입니다.";
+				mes "인간들은 그곳을 애쉬-배큠이라고 부른다고 들었습니다.";
+				mes "게크에게 왜 그렇게 불리는지는 아무도 설명해주지 않았습니다.";
 				next;
-				mes "[Agent Geck]";
-				mes "But of course, we don't have any influence over there to start with.";
-				mes "However, we plan to spare no efforts on it.";
+				mes "[게크 요원]";
+				mes "하지만 인간.";
+				mes "당신은 애쉬-배큠에 가기 위해 비용을 지불해야 합니다.";
+				mes "게크가 직접 당신을 보내는 데는 비용이 들지 않겠지만, 다른 요원들의 도움을 받아야 합니다.";
 				next;
-				mes "[Agent Geck]";
-				mes "Human!! Did you know there is a huge hole near the Morocc village and nearby area?";
-				mes "They say you can travel to a new area through the hole!";
+				mes "[게크 요원]";
+				mes "그래서 도움을 주는 요원들에게 줄 물고기를 사기 위해 약간의 돈이 필요합니다.";
+				mes "묻지도 따지지도 않고 당신을 다른 세계로 보내줄 요원을 소개하겠습니다, 단 50,000 제니만 주면 됩니다.";
 				next;
-				mes "[Agent Geck]";
-				mes "But you will have to go through tests and research to get to a place before trying it out.";
-				mes "To me, I think its all nonsense to go through the trouble!";
-				next;
-				mes "[Agent Geck]";
-				mes "We must send someone as soon as possible to start exploring the area.";
-				mes "While the humans are frittering away, our Cat Paw Merchant should settle first and continue with our research.";
-				next;
-				if (select ("I also want to go and help the merchants.:I'm not interested.") == 1) {
-						mes "[Agent Geck]";
-						mes "You are better than other humans!";
-						mes "If you really mean it, then sign here.";
-						mes "I'm collecting signs to get on Gyareuk's good side... never mind. I will let them know you are my sponsor!";
-						next;
-						input .@inputstr$;
-						mes "[Agent Geck]";
-						mes "" + strcharinfo(0) + "? Human names are strange to me.";
-						next;
-						mes "[Agent Geck]";
-						mes "Now you are Geck's personal slav... sponsor.";
-						mes "Don't ask why you aren't Merchant sponsor.";
-						mes "A good human does not poke around where they are not supposed to.";
-						next;
-						mes "[Agent Geck]";
-						mes "Now since you've signed, all we need to do is leave for the other world.";
-						mes "I heard humans call it Ash-Vacuum.";
-						mes "Nobody explained to Geck why it was called that.";
-						next;
-						mes "[Agent Geck]";
-						mes "But human.";
-						mes "You will need to pay to get to the Ash-Vacuum.";
-						mes "There wouldn't be any expense for Geck to send you there myself but we must ask for help from other agents.";
-						next;
-						mes "[Agent Geck]";
-						mes "So you will need some money to buy fish for agents who help you.";
-						mes "I will introduce you to an agent who will send you to the other world with no questions asked for only 50,000 zeny.";
-						next;
-						if (select ("Pay 50,000 zeny.:No way!") == 1) {
-								if (Zeny < 50000) {
-									mes "[Agent Geck]";
-									mes "Geck learned not to deal with people who can't pay.";
-									close;
-								}
-								mes "[Agent Geck]";
-								mes "With this, our contract is now complete.";
-								mes "Geck will help you to get to Ash-Vacuum in one piece.";
-								set Zeny, Zeny - 50000;
-								set ep13_start, 100;
-								next;
-								mes "[Agent Geck]";
-								mes "Don't forget, human. The reason why Geck is helping you is to help the Cat Paw Merchant working hard in the other world.";
-								next;
-								mes "[Agent Geck]";
-								mes "Now, I will transport you. Go meet our agent in the right corner.";
-								close2;
-								warp "moc_fild20", 342, 198;
-								end;
-						}
-						mes "[Agent Geck]";
-						mes "Geck doesn't force humans.";
-						mes "But I think you will change your mind.";
+				if (select ("50,000 제니를 지불한다.:절대 안 돼!") == 1) {
+					if (Zeny < 50000) {
+						mes "[게크 요원]";
+						mes "게크는 지불할 수 없는 사람들과 거래하지 않는 법을 배웠습니다.";
 						close;
+					}
+					mes "[게크 요원]";
+					mes "이로써 우리 계약은 완료되었습니다.";
+					mes "게크는 당신이 애쉬-배큠에 무사히 도착하도록 도울 것입니다.";
+					set Zeny, Zeny - 50000;
+					set ep13_start, 100;
+					next;
+					mes "[게크 요원]";
+					mes "잊지 마세요, 인간. 게크가 당신을 돕는 이유는 다른 세계에서 열심히 일하는 고양이손 상인을 돕기 위해서입니다.";
+					next;
+					mes "[게크 요원]";
+					mes "이제 내가 전송해 줄 테니, 오른쪽 구석에 있는 우리 요원을 만나러 가세요.";
+					close2;
+					warp "moc_fild20", 342, 198;
+					end;
 				}
-				mes "[Agent Geck]";
-				mes "Did you meet the Cat Paw Merchant in Ash-Vacuum, human?";
+				mes "[게크 요원]";
+				mes "애쉬-배큠에서 고양이손 상인을 만났나요, 인간?";
 				close;
 		}
-		mes "[Cat Paw Agent]";
-		mes "But our Cat Paw Merchant will overcome any obstacle!";
+		mes "[고양이손 요원]";
+		mes "하지만 우리 고양이손 상인은 어떤 장애물도 극복할 것입니다!";
 		close;
 	}
-	mes "[Agent Geck]";
-	mes "Did you meet the Cat Paw Merchant in Ash-Vacuum, human?";
+	mes "[게크 요원]";
+	mes "애쉬-배큠에서 고양이손 상인을 만났나요, 인간?";
 	next;
-	if (select ("Send me back:I'm busy") == 1) {
-		mes "[Agent Geck]";
-		mes "There is no time to waste, human!";
-		mes "I'll send you back right away!";
+	if (select ("나를 다시 보내줘:바빠") == 1) {
+		mes "[게크 요원]";
+		mes "낭비할 시간이 없습니다, 인간!";
+		mes "바로 다시 보내드리겠습니다!";
 		warp "moc_fild20", 342, 198;
 		close;
 	}
-	mes "[Agent Geck]";
-	mes "Hey, human! Didn't you say you will help the Cat Paw Merchant!";
+	mes "[게크 요원]";
+	mes "이봐, 인간! 고양이손 상인을 돕겠다고 하지 않았나요!";
 	close;
+	}
 }
 
-moc_fild20,368,197,3	script	Cat#to22	876,{
+moc_fild20,368,197,3	script	고양이#to22	876,{
 	if (ep13_start != 100) {
-		mes "[Cat]";
-		mes "Meow~";
+		mes "[고양이]";
+		mes "야옹~";
 		close;
 	}
-	mes "A small Cat Paw Agent looks at you and nods its head towards the back.";
-	mes "Looks like it wants you to step up on its back to climb over the wall.";
+	mes "작은 고양이손 요원이 당신을 바라보며 고개를 뒤쪽으로 끄덕입니다.";
+	mes "벽을 넘기 위해 자신의 등을 밟고 올라오라는 것 같습니다.";
 	next;
-	if (select ("But you are so cute...:Let's do this!") == 1) {
-		mes "The small Cat Paw Agent has small black patterns as if it were stamped on it's white fur.";
+	if (select ("너무 귀여운데...:좋아, 해보자!") == 1) {
+		mes "작은 고양이손 요원의 하얀 털에는 마치 찍어 놓은 듯한 작은 검은 무늬들이 있습니다.";
 		next;
-		mes "The small body isn't as tall as your ankle and its small but thick paws look like little cushions. The ears that bent backwards when it looked at how big you were stirred up your protective instinct.";
+		mes "작은 몸은 당신의 발목 높이도 안 되며, 작고 두꺼운 발바닥은 작은 쿠션처럼 보입니다. 당신의 덩치를 보며 뒤로 젖혀졌던 귀는 보호 본능을 자극했습니다.";
 		next;
-		mes "You don't seem to have the nerve to step on the Cat Paw Agent.";
+		mes "고양이손 요원을 밟고 올라설 용기가 나지 않습니다.";
 		emotion ET_CRY;
 		close;
 	}
-	mes "You look at the Cat Paw Agent's small back and climb over the wall as quick as possible so that it wouldn't notice your weight.";
+	mes "당신은 고양이손 요원의 작은 등을 바라보며 자신의 무게를 느끼지 않도록 최대한 빨리 벽을 넘습니다.";
 	close2;
 	warp "moc_fild22b", 175, 159;
 	end;
 }
 
-moc_fild22b,182,179,3	script	Cat Paw Agent#Tat	495,{
+moc_fild22b,182,179,3	script	고양이손 요원::Cat Paw Agent#Tat	495,{
 	if (ep13_start != 100) {
-		mes "[Cat Paw Agent]";
-		mes "This place as no meaning for us.";
+		mes "[고양이손 요원]";
+		mes "이곳은 우리에게 아무 의미가 없습니다.";
 		close;
 	}
-	mes "[Cat Paw Agent]";
-	mes "Heard from Geck.";
-	mes "I'm the Cat Paw Merchant's rising star, Tat.";
+	mes "[고양이손 요원]";
+	mes "게크에게 들었어요.";
+	mes "나는 고양이손 상인의 떠오르는 스타, 타트입니다.";
 	next;
-	mes "[Tat]";
-	mes "I heard you are offering high-quality fish to pay for our passage.";
-	mes "I also heard the fish is very fresh and has shiny golden scales.";
+	mes "[타트]";
+	mes "당신이 우리를 위한 통행료로 고급 생선을 제공한다고 들었습니다.";
+	mes "또한 그 생선이 매우 신선하고 반짝이는 황금 비늘을 가지고 있다고 들었습니다.";
 	next;
-	mes "[Tat]";
-	mes "I usually only allow our Cat Paw Merchant agents to go through but since you are here on Geck's behalf and seeing you are reliable, I'll let you through.";
+	mes "[타트]";
+	mes "나는 보통 우리 고양이손 상인 요원들만 통과시키지만, 당신이 게크의 부탁을 받고 왔고 신뢰할 수 있는 사람인 것을 보니, 통과를 허락하겠습니다.";
 	next;
-	mes "[Tat]";
-	mes "Are you ready?";
+	mes "[타트]";
+	mes "준비되었나요?";
 	next;
-	if (select ("To the other world!:I need some time.") == 1) {
-		mes "[Tat]";
-		mes "Don't forget you are in debt to the Cat Paw Merchant, human!";
+	if (select ("다른 세계로 가자!:조금 시간이 필요해요.") == 1) {
+		mes "[타트]";
+		mes "고양이손 상인에게 빚을 졌다는 것을 잊지 마세요, 인간!";
 		close2;
 		warp "mid_camp", 210, 291;
 		end;
 	}
-	mes "[Tat]";
-	mes "Aren't you suppose to be done getting ready before you come here?";
+	mes "[타트]";
+	mes "여기에 오기 전에 준비가 다 된 상태여야 하지 않나요?";
 	close;
 }

@@ -7,6 +7,7 @@
 #include <common/socket.hpp> // set_eof
 #include <common/strlib.hpp> // strcmpi
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "atcommand.hpp" // AtCommandType
 #include "pc.hpp" // map_session_data
@@ -30,7 +31,10 @@ bool PlayerGroupDatabase::parseCommands( const ryml::NodeRef& node, std::vector<
 		}
 
 		if( !atcommand_exists( command.c_str() ) ){
-			this->invalidWarning( it, "Unknown atcommand: %s\n", command.c_str() );
+			if(strcmpi(MessageLang,"KOR") == 0)
+				this->invalidWarning( it, "알 수 없는 AtCommand: %s\n", command.c_str() );
+			else
+				this->invalidWarning( it, "Unknown atcommand: %s\n", command.c_str() );
 			return false;
 		}
 
@@ -38,14 +42,20 @@ bool PlayerGroupDatabase::parseCommands( const ryml::NodeRef& node, std::vector<
 
 		if( allowed ){
 			if( util::vector_exists( commands, command ) ){
-				this->invalidWarning( it, "Group already has command \"%s\". Please check your data.\n", command.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					this->invalidWarning( it, "그룹에 이미 \"%s\" 명령어가 있습니다. 확인해보세요.\n", command.c_str() );
+				else
+					this->invalidWarning( it, "Group already has command \"%s\". Please check your data.\n", command.c_str() );
 				return false;
 			}else{
 				commands.push_back( command );
 			}
 		}else{
 			if( !util::vector_exists( commands, command ) ){
-				this->invalidWarning( it, "Group does not have command \"%s\". Please check your data.\n", command.c_str() );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					this->invalidWarning( it, "그룹에 \"%s\" 명령어가 없습니다. 다시 확인해보세요.\n", command.c_str() );
+				else
+					this->invalidWarning( it, "Group does not have command \"%s\". Please check your data.\n", command.c_str() );
 				return false;
 			}else{
 				util::vector_erase_if_exists( commands, command );
@@ -94,7 +104,10 @@ uint64 PlayerGroupDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if (level > 99) {
-			this->invalidWarning(node["Level"], "Group level %u exceeds 99, capping.\n", level);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				this->invalidWarning(node["Level"], "그룹 레벨 %u이(가) 99를 초과합니다. 99로 설정합니다.\n", level);
+			else
+				this->invalidWarning(node["Level"], "Group level %u exceeds 99, capping.\n", level);
 			level = 99;
 		}
 
@@ -163,7 +176,10 @@ uint64 PlayerGroupDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if( !found ){
-				this->invalidWarning( it, "Unknown permission: %s\n", str );
+				if(strcmpi(MessageLang,"KOR") == 0)
+					this->invalidWarning( it, "알 수 없는 권한: %s\n", str );
+				else
+					this->invalidWarning( it, "Unknown permission: %s\n", str );
 				return 0;
 			}
 		}
@@ -193,7 +209,10 @@ uint64 PlayerGroupDatabase::parseBodyNode( const ryml::NodeRef& node ){
 				}
 			}else{
 				if( !util::vector_exists( inheritanceVector, inherit ) ){
-					this->invalidWarning( it, "Trying to remove inheritance of non-inherited group %s\n", inherit.c_str() );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						this->invalidWarning( it, "상속되지 않은 그룹 %s의 상속을 제거합니다.\n", inherit.c_str() );
+					else
+						this->invalidWarning( it, "Trying to remove inheritance of non-inherited group %s\n", inherit.c_str() );
 					return 0;
 				}
 
@@ -276,7 +295,10 @@ void PlayerGroupDatabase::loadingFinished(){
 					it = entry.second.erase( it );
 					continue;
 				}else if( !found ){
-					ShowError( "Inherited group \"%s\" for group id %u does not exist.\n", otherName.c_str(), group->id );
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError( "그룹 ID %u에 대한 상속된 그룹 \"%s\"이(가) 없습니다.\n", group->id, otherName.c_str() );
+					else
+						ShowError( "Inherited group \"%s\" for group id %u does not exist.\n", otherName.c_str(), group->id );
 					it = entry.second.erase( it );
 					continue;
 				}else{
@@ -291,7 +313,10 @@ void PlayerGroupDatabase::loadingFinished(){
 	}
 
 	if( i == MAX_CYCLES && !this->inheritance.empty() ){
-		ShowError( "Could not process inheritance rules, check your config for cycles...\n" );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "상속 규칙을 처리할 수 없습니다. 구성을 확인하세요...\n" );
+		else
+			ShowError( "Could not process inheritance rules, check your config for cycles...\n" );
 	}
 
 	// Not needed anymore
@@ -342,10 +367,18 @@ void pc_group_pc_load(map_session_data * sd) {
 	std::shared_ptr<s_player_group> group = player_group_db.find( sd->group_id );
 
 	if( group == nullptr ){
-		ShowWarning("pc_group_pc_load: %s (AID:%d) logged in with unknown group id (%d)! kicking...\n",
+		if(strcmpi(MessageLang, "KOR") == 0) {
+			ShowWarning("pc_group_pc_load: %s (AID:%d)가 알 수 없는 그룹 ID(%d)로 로그인했습니다! 강제 종료 중...\n",
+						sd->status.name,
+						sd->status.account_id,
+						sd->group_id);
+		}
+		else {
+			ShowWarning("pc_group_pc_load: %s (AID:%d) logged in with unknown group id (%d)! kicking...\n",
 					sd->status.name,
 					sd->status.account_id,
 					sd->group_id);
+		}
 		set_eof(sd->fd);
 		return;
 	}

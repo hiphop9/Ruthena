@@ -13,50 +13,38 @@
 //= arg(1): Zeny cost.
 //= arg(2): Potion given.
 //===== Additional Comments: =================================
-//= 1.0 Fully working. [DZeroX]
-//= 1.0a Minor fixes [Lupus]
-//= 1.1 Added changed the dialogs and name to fit the
-//=     the official information. [DZeroX]
-//= 1.1a Removed .GATs [Lupus]
-//= 1.1b Fixed a bug in Orange Potion creating. Copy&Pasting = bad. [L0ne_W0lf]
-//= 1.2 Added checkweight, and input min/max values. [L0ne_W0lf]
-//= 1.3 Fixed minor condition check bug. (bugreport:597) [L0ne_W0lf]
-//= 1.4 Updated to match AEGIS script. [Kisuka]
+//한글번역 스카이러브
 //============================================================
 
-alberta_in,16,28,4	script	Pharmacist	61,{
+alberta_in,16,28,4	script	약사 할아버지	1_M_PUBMASTER,{
 	if (checkweight(1201,1) == 0) {
-		mes "- Wait a moment! -";
-		mes "- Currently you're carrying -";
-		mes "- too many items with you. -";
-		mes "- Please come back later -";
-		mes "- after you put some items into kafra storage. -";
+		mes "- 잠깐만요! -";
+		mes "- 현재 당신은 너무 많은 물건을 가지고 다니고 있습니다. -";
+		mes "- 카프라 창고에 아이템을 넣어두신 후 나중에 다시 방문해 주세요. -";
 		close;
 	}
-	mes "[Old Pharmacist]";
-	mes "Ummmm...";
-	mes "What brings you here...?";
+	mes "[제약사 할아버지]";
+	mes "에에..... 손님이냐...?";
 	next;
-	switch(select("Make Potion:Talk.:Mixing Information:Cancel")) {
+	switch( select( "물약을 만든다.", "대화한다.", "조합 안내를 듣는다.", "그만둔다." )) {
 	case 1:
 		if (MaxWeight - Weight < 5000) {
-			mes "[Old Pharmacist]";
-			mes "Why are you carrying these so many!";
-			mes "Don't be greedy, carry only as much you need!";
+			mes "[제약사 할아버지]";
+			mes "이걸 왜 이렇게 많이 들고 다니세요!";
+			mes "욕심 갖지 말고 필요한 만큼만 가지고 다니세요!";
 			next;
-			mes "[Old Pharmacist]";
-			mes "You are too heavy to receive potions from me...";
-			mes "Go store some items in your storage first!";
+			mes "[제약사 할아버지]";
+			mes "너는 나한테 물약을 받기엔 너무 무거워...";
+			mes "먼저 창고에 물건을 좀 넣어두세요!";
 			close;
 		} else {
-			mes "[Old Pharmacist]";
-			mes "You have all the stuff ready, right? Which one would you like?";
+			mes "[제약사 할아버지]";
+			mes "물건은 다 준비 되겠지? 어떤 것으로 조합해 주길 원해?";
 			next;
-			switch(select("Red Potion.:Orange Potion.:Yellow Potion.:White Potion.:Blue Potion.:Green Potion.:Actually, I don't want anything.")) {
+			switch( select( "빨간포션.", "주홍포션.", "노란포션.", "하얀포션.", "파란포션.", "초록포션.", "생각해보니 관둘래요." )) {
 			case 1:
 				callsub L_Making,507,3,501;
 			case 2:
-				mes "[Old Pharmacist]";
 				if (countitem(507) < countitem(713)) {
 					set .@max,countitem(507);
 				}
@@ -67,22 +55,25 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 					set .@max,countitem(713);
 				}
 				if ((countitem(507) < 1) || (countitem(508) < 1) || (countitem(713) == 0)) {
-					mes "You rascal! What did you expect?! Coming here with nothing. Tsk!";
-					mes "Get lost!";
+					mes "[제약사 할아버지]";
+					mes "이러언 성의없는 녀석! 재료도 없는 놈이 만들긴 뭘 만들어!";
+					mes "썩 물러가라 이놈!";
 					close;
 				}
 				if (Zeny < 3) {
-					mes "You rascal! What did you expect?! Coming here with nothing. Tsk!";
-					mes "Get lost!";
+					mes "[제약사 할아버지]";
+					mes "이러언 성의없는 녀석! 돈도 없는 놈이 만들긴 뭘 만들어!";
+					mes "썩 물러가라 이놈!";
 					close;
 				}
-				mes "How many?";
+				mes "[제약사 할아버지]";
+				mes "얼마나?";
 				next;
-				switch(select("Make as many as I can.:I want to choose an amount.:Actually, I don't want anything.")) {
+				switch( select( "있는대로 모두 조합해 주세요.", "갯수를 정할께요.", "생각해보니 관둘래요." )) {
 				case 1:
 					if ((countitem(507) < .@max) || (countitem(508) < .@max) || (countitem(713) < .@max) || (Zeny < .@max*3)) {
-						mes "[Old Pharmacist]";
-						mes "You rascal! You don't even have all the materials and you want me to make you potions?!";
+						mes "[제약사 할아버지]";
+						mes "이 녀석! 재료도 충분치 못하면서 만들어 달라고?!";
 						close;
 					}
 					set Zeny,Zeny-(.@max*5);
@@ -92,23 +83,24 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 					getitem 502,.@max; //Orange_Potion
 					break;
 				case 2:
-					mes "[Old Pharmacist]";
-					mes "Then pick a number below 100. If you don't want any, just enter '0'. With the materials you have, you can make about "+.@max+" potions.";
+					mes "[제약사 할아버지]";
+					mes "그럼 100 이하로 적어 봐. 아니다 싶으면 '0'으로 적고.";
+					mes "네가 있는 재료로는 한 "+ .@max +" 개 정도 만들 수 있겠는걸?";
 					next;
 					input .@amount,0,101;
 					if (.@amount == 0) {
-						mes "[Old Pharmacist]";
-						mes "Make up your mind, will you?!";
+						mes "[제약사 할아버지]";
+						mes "제대로 정하지 못해?!";
 						close;
 					}
 					if (.@amount > 100) {
-						mes "[Old Pharmacist]";
-						mes "Are you deaf? I said less than 100!";
+						mes "[제약사 할아버지]";
+						mes "가는 귀가 먹었나? 100 개 이하로 정하라니깐!";
 						close;
 					}
 					if ((countitem(507) < .@amount) || (countitem(508) < .@amount) || (countitem(713) < .@amount) || (Zeny < .@amount*3)) {
-						mes "[Old Pharmacist]";
-						mes "You rascal! You don't even have all the materials and you want me to make you potions?!";
+						mes "[제약사 할아버지]";
+						mes "이 녀석! 재료도 충분치 못하면서 만들어 달라고?!";
 						close;
 					}
 					next;
@@ -119,15 +111,13 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 					getitem 502,.@amount; //Orange_Potion
 					break;
 				case 3:
-					mes "[Old Pharmacist]";
-					mes "What?!";
-					mes "Grrr...";
-					mes "Bleh!";
-					mes "Get lost!";
+					mes "[제약사 할아버지]";
+					mes "뭐라고?! 이 녀석... 에이! 썩 나가거라!";
 					close;
 				}
-				mes "[Old Pharmacist]";
-				mes "Here you go. It's all done so you can take it. But remember! Abusing medicine is not good.";
+				mes "[제약사 할아버지]";
+				mes "옛다. 다 만들었으니 가져가거라.";
+				mes "명심해! 약은 남용하면 좋지 않다는걸.";
 				close;
 			case 3:
 				callsub L_Making,508,10,503;
@@ -138,45 +128,38 @@ alberta_in,16,28,4	script	Pharmacist	61,{
 			case 6:
 				callsub L_Making,511,3,506;
 			case 7:
-				mes "[Old Pharmacist]";
-				mes "What?!";
-				mes "Grrr...";
-				mes "Bleh!";
-				mes "Get lost!";
 				close;
 			}
 		}
 	case 2:
-		mes "[Old Pharmacist]";
-		mes "With medicine, you can increase a person's ability to regenerate. But, they're only good up to a point. *Sigh* I'm starting to think of the days when I was young. I must be getting old.";
-		next;
-		mes "[Old Pharmacist]";
-		mes "Anyways, a potion is merely a potion. Nothing more and nothing less.";
+		mes "[제약사 할아버지]";
+		mes "약으론 인간의 회복능력을 향상 시킬수 있지. 어디까지 인간의 회복능력을 극대화 시켜주는 것에 지나지 않아야해...";
+		mes "에이구... 나이를 먹으니 또 옛생각이 나려고 하는군.";
+		mes "어쨋든 물약은 약일 뿐이야... 그 이상도 그 이하도 아니지.";
 		close;
 	case 3:
-		mes "[Old Pharmacist]";
-		mes "Hrrrmm...";
-		mes "You young ones can be quite annoying. But, since you asked, I'll explain.";
+		mes "[제약사 할아버지]";
+		mes "끙... 어린 녀석들이 꽤나 귀찮게 구는군... 좋아, 어차피 물어본거니 자세히 설명해 주지.";
 		next;
-		mes "[Old Pharmacist]";
-		mes "Herbs work well by themselves, but if you use my special techniques and skills to make potions out of them, the effect is much much greater.";
+		mes "[제약사 할아버지]";
+		mes "허브는 그냥 사용해도 효과는 있지만 나만이 알고 있는 특수한 비법과 뛰어난 능력을 십분 발휘하여 물약으로 만든다면 그 효과는 더욱 높아지지.";
 		next;
-		mes "[Old Pharmacist]";
-		mes "If you ask eagerly and politely, I will make them for you. But, not for free... Don't worry though, I only charge a small fee, so it's not that expensive.";
+		mes "[제약사 할아버지]";
+		mes "네가 간절히 부탁한다면 만들어 주겠다. 하지만, 공짜로 만들어 준다는건 아니고.... 약간의 수수료가 붙는데 내 용돈 정도 벌려고 하는 거니깐 그렇게 큰 숫자는 아니야.";
 		next;
-		mes "[Old Pharmacist]";
-		mes "Red Potion - ^0098E52 Red Herbs, 1 Empty Bottle, 2 zeny fee.^000000";
-		mes "Orange Potion - ^0098E51 Red Herb, 1 Yellow Herb, 1 Empty Bottle, 5 zeny fee.^000000";
-		mes "Yellow Potion - ^0098E52 Yellow Herbs, 1 Empty Bottle, 10 zeny.^000000";
+		mes "[제약사 할아버지]";
+		mes "빨간포션 - ^0098E5빨간허브 2개, 빈병 1개, 수수료 3 제니.^000000";
+		mes "주홍포션 - ^0098E5빨간허브 1개, 노란허브 1개, 빈병 1개, 수수료 5 제니.^000000";
+		mes "노란포션 - ^0098E5노란허브 2개, 빈병 1개, 수수료 10 제니.^000000";
 		next;
-		mes "[Old Pharmacist]";
-		mes "White Potion - ^0098E52 White Herbs, 1 Empty Bottle, 20 zeny fee.^000000";
-		mes "Blue Potion - ^0098E52 Blue Herbs, 1 Empty Bottle, 30 zeny fee.^000000";
-		mes "Green Potion - ^0098E52 Green Herbs, 1 Empty Bottle, 3 zeny fee.^000000";
+		mes "[제약사 할아버지]";
+		mes "하얀포션 - ^0098E5하얀허브 2개, 빈병 1개, 수수료 20 제니.^000000";
+		mes "파란포션 - ^0098E5파란허브 2개, 빈병 1개, 수수료 30 제니.^000000";
+		mes "초록포션 - ^0098E5초록허브 2개, 빈병 1개, 수수료 3 제니.^000000";
 		close;
 	case 4:
-		mes "[Old Pharmacist]";
-		mes "What a boring person. If you have something to say, why don't you say it?!";
+		mes "[제약사 할아버지]";
+		mes "이런 싱거운 놈을 봤나. 아 할말이 있으면 하구 가지 왜 그냥 가?!";
 		close;
 	}
 	
@@ -184,29 +167,29 @@ L_Making:
 	.@item_req = getarg(0);
 	.@req_amount = getarg(1);
 
-	mes "[Old Pharmacist]";
+	mes "[제약사 할아버지]";
 	if ((countitem(.@item_req)/2) < countitem(713)) {
 		.@max = countitem(.@item_req) /2;
 	} else {
 		.@max = countitem(713);
 	}
 	if (countitem(.@item_req) < 2 || countitem(713) == 0) {
-		mes "You rascal! What did you expect?! Coming here with nothing. Tsk!";
-		mes "Get lost!";
+		mes "이러언 성의없는 녀석! 재료도 없는 놈이 만들긴 뭘 만들어!";
+		mes "썩 물러가라 이놈!";
 		close;
 	}
 	if (Zeny < 3) {
-		mes "You rascal! What did you expect?! Coming here with nothing. Tsk!";
-		mes "Get lost!";
+		mes "이러언 성의없는 녀석! 돈도 없는 놈이 만들긴 뭘 만들어!";
+		mes "썩 물러가라 이놈!";
 		close;
 	}
-	mes "How many?";
+	mes "얼마나?";
 	next;
-	switch(select("Make as many as I can.:I want to choose an amount.:Actually, I don't want anything.")) {
+	switch( select( "있는대로 모두 조합해 주세요.", "갯수를 정할께요.", "생각해보니 관둘래요." )) {
 	case 1:
 		if ((countitem(.@item_req) < .@max*2) || countitem(713) < .@max || (Zeny < .@max*.@req_amount)) {
-			mes "[Old Pharmacist]";
-			mes "You rascal! You don't even have all the materials and you want me to make you potions?!";
+			mes "[제약사 할아버지]";
+			mes "이 녀석! 재료도 충분치 못하면서 만들어 달라고?!";
 			close;
 		}
 		Zeny = Zeny - (.@max*.@req_amount);
@@ -215,23 +198,24 @@ L_Making:
 		getitem getarg(2),.@max; 
 		break;
 	case 2:
-		mes "[Old Pharmacist]";
-		mes "Then pick a number below 100. If you don't want any, just enter '0'. With the materials you have, you can make about "+.@max+" potions.";
+		mes "[제약사 할아버지]";
+		mes "그럼 100 이하로 적어 봐. 아니다 싶으면 '0'으로 적고.";
+		mes "네가 있는 재료로는 한 "+ .@max +" 개 정도 만들 수 있겠는걸?";
 		next;
 		input .@amount;
 		if (.@amount == 0) {
-			mes "[Old Pharmacist]";
-			mes "Make up your mind, will you?!";
+			mes "[제약사 할아버지]";
+			mes "제대로 정하지 못해?!";
 			close;
 		}
 		if (.@amount > 100) {
-			mes "[Old Pharmacist]";
-			mes "Are you deaf? I said less than 100!";
+			mes "[제약사 할아버지]";
+			mes "가는 귀가 먹었나? 100 개 이하로 정하라니깐!";
 			close;
 		}
 		if ((countitem(.@item_req) < .@amount*2) || countitem(713) < .@amount || (Zeny < .@amount*.@req_amount)) {
-			mes "[Old Pharmacist]";
-			mes "You rascal! You don't even have all the materials and you want me to make you potions?!";
+			mes "[제약사 할아버지]";
+			mes "이 녀석! 재료도 충분치 못하면서 만들어 달라고?!";
 			close;
 		}
 		Zeny = Zeny - (.@max*.@req_amount);
@@ -240,14 +224,12 @@ L_Making:
 		getitem getarg(2),.@amount; 
 		break;
 	case 3:
-		mes "[Old Pharmacist]";
-		mes "What?!";
-		mes "Grrr...";
-		mes "Bleh!";
-		mes "Get lost!";
+		mes "[제약사 할아버지]";
+		mes "뭐라고?! 이 녀석... 에이! 썩 나가거라!";
 		close;
 	}
-	mes "[Old Pharmacist]";
-	mes "Here you go. It's all done so you can take it. But remember! Abusing medicine is not good.";
+	mes "[제약사 할아버지]";
+	mes "옛다. 다 만들었으니 가져가거라.";
+	mes "명심해! 약은 남용하면 좋지 않다는걸.";
 	close;
 }

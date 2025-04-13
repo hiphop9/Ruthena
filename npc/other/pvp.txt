@@ -20,134 +20,160 @@
 
 // Information
 //============================================================ 
--	script	PVP Narrator::pvpe	-1,{
-	mes "[PVP Narrator]";
-	mes "Hello and welcome!";
-	mes "I am in charge of";
-	mes "explaining the PVP Modes.";
-	mes "I am the PVP Narrator!";
+-	script	PVP가이드#pvpe	-1,{
+	mes "[PVP가이드]";
+	mes "안녕하세요 !";
+	mes "PVP 모드에 관한";
+	mes "설명을 담당한";
+	mes "PVP 가이드 입니다 !";
 	next;
-	switch(select("What is PVP?:What are the PVP Modes?:What are the rules for PVP?:Save Position.:End Dialog.")) {
+	switch(select("' ^0000cdPVP 모드^000000 '?:PVP 모드란 ?:PVP 모드의 룰은 ?:현재 위치로 저장한다:대화를 그만둔다")) {
 	case 1:
-		mes "[PVP Narrator]";
-		mes "In short, PVP means";
+		mes "[PVP가이드]";
+		mes "PVP 모드란";
 		mes "' Player VS Player Mode '";
-		mes "It's a unique place for people";
-		mes "to duel with each other.";
+		mes "의 약자로서 ..";
+		mes "가상의 세게에서 유저간의";
+		mes "대전을 통해 짜릿한 긴장감과";
 		next;
-		mes "[PVP Narrator]";
-		mes "Just tell the";
-		mes "^3355FFGate Keeper^000000";
-		mes "that you want to try. He will";
-		mes "let you enter the PVP square.";
+		mes "[PVP가이드]";
+		mes "스펙타클한 전투를 느낄 수 있는";
+		mes "일종의 아레나 모드  랍니다";
+		mes "제 바로 옆 사람인";
+		mes "^3355FF도어맨^000000 에게 대화를";
+		mes "시도하시면";
 		next;
-		mes "[PVP Narrator]";
-		mes "But, you need to be at";
-		mes "least level 31. And you";
-		mes "must pay 500 zeny entrance fee in order";
-		mes "to enter a PVP fight square.";
+		mes "[PVP가이드]";
+		mes "PVP 모드를 준비할 수";
+		mes "있는 대기실로";
+		mes "갈 수 있게 됩니다";
+		mes "PVP 모드는 레벨 31";
+		mes "이상의 유저에게만";
+		next;
+		mes "[PVP가이드]";
+		mes "참가 자격이 부여되며";
+		mes "크게 두가지로";
+		mes "나이트메어 모드 요요 모드";
+		mes "가 있답니다";
+		next;
+		mes "[PVP가이드]";
+		mes "나이트메어 모드에서는";
+		mes "던전룰이 그대로";
+		mes "적용되기 때문에";
+		mes "아이템을 떨어뜨릴";
+		mes "확률이 다소 있으므로";
+		next;
+		mes "[PVP가이드]";
+		mes "이를 숙지하셔서";
+		mes "원치않는 불이익을 받지 않으시도록";
+		mes "한번 더 생각하시고 입장해주세요.";
 		break;
 	case 2:
-		mes "[PVP Narrator]";
-		mes "When you are qualified, you";
-		mes "can choose one of the two modes.";
-		mes "Yoyo Mode or Nightmare Mode.";
+		mes "[PVP가이드]";
+		mes "제 옆의 ' PVP도어맨 '";
+		mes "의 도움을 받으시면";
+		mes "500 Zeny 상당의 요금으로";
+		mes "PVP 모드의 대기실로";
+		mes "이동이 가능하게 됩니다";
 		next;
-		mes "[PVP Narrator]";
-		mes "Yoyo Mode is risk free.";
-		mes "You can experience PVP";
-		mes "without any restriction or";
-		mes "punishment. It is recommended";
-		mes "that you practice your skills";
-		mes "here before you move on.";
+		mes "[PVP가이드]";
+		mes "대기실은 크게 두종류인";
+		mes "요요 모드와";
+		mes "나이트메어 모드로";
+		mes "나뉘어져 있으며";
+		mes "각 대기실마다";
 		next;
-		mes "[PVP Narrator]";
-		mes "Nightmare Mode is very";
-		mes "dangerous! Please be cautious,";
-		mes "you will lose some of your";
-		mes "EXP when you are defeated. And";
-		mes "there is a small chance that";
-		mes "you will drop some equipment.";
+		mes "[PVP가이드]";
+		mes "PVP 모드의 세계로 안내하는";
+		mes "수명의 안내인이 있습니다";
+		mes "각 안내인은";
+		mes "레벨 31 이상의";
+		mes "참여자를 10 레벨씩";
 		next;
-		mes "[PVP Narrator]";
-		mes "However, if you win, the";
-		mes "rewards can be great!";
-		mes "To avoid misunderstanding,";
-		mes "you should think twice";
-		mes "before you go there...";
-		mes "Good Luck!";
+		mes "[PVP가이드]";
+		mes "나누어저 있으며 방은";
+		mes "열가지의 PVP 전용 맵중에";
+		mes "원하는 곳을 선택하여";
+		mes "이동하실 수 있습니다.";
+		mes "안내인 머리위에 뜨는";
+		next;
+		mes "[PVP가이드]";
+		mes "창으로 . 제한레벨을";
+		mes "알 수 있으며";
+		mes "방의 목록에서 그 방에서";
+		mes "플레이 하고 있는 인원수를";
+		mes "확인 하실 수 있습니다.";
+		next;
+		mes "[PVP가이드]";
+		mes "한 맵에는 맵당 정해진 인원의";
+		mes "유ㅓ가 참여할 수 있고";
+		mes "창에는 ' 참여인원 / 총인원 '";
+		mes "이라고 뜨게 됩니다";
+		next;
+		mes "[PVP가이드]";
+		mes "참고로 ..";
+		mes "전용 맵은 물론";
+		mes "대기실에서는";
+		mes "위치기억이";
+		mes "불가능하오니";
+		next;
+		mes "[PVP가이드]";
+		mes "이점을 꼭 기억하세요.";
 		break;
 	case 3:
-		mes "[PVP Narrator]";
-		mes "Each of the fight squares";
-		mes "have a row of Narrators and";
-		mes "choose them based on your";
-		mes "qualifications.";
+		mes "[PVP가이드]";
+		mes "PVP 모드에 진입하게 되면";
+		mes "화면 상단에 카운터가";
+		mes "뜨게 되는데 이것은";
+		mes "현재 해당맵에서의";
+		mes "자신의 랭크 / 플레이 인원을";
 		next;
-		mes "[PVP Narrator]";
-		mes "Each Narrator will ask";
-		mes "which of the five PVP maps";
-		mes "you wish to go to.";
-		mes "Choose, and go in!";
+		mes "[PVP가이드]";
+		mes "나타내는 수치입니다";
+		mes "PVP 모드에서의 경험치는";
+		mes "오직 PVP 모드에서만";
+		mes "작용하며";
+		mes "처음 가지고 시작하는";
 		next;
-		mes "[PVP Narrator]";
-		mes "Each map has a limitation on";
-		mes "the number of people who can";
-		mes "participate. So you will see";
-		mes "figures in the corner showing";
-		mes "'Attendee/Total'.";
+		mes "[PVP가이드]";
+		mes "기본값은 ' 5 '입니다";
+		mes "맵안에서 상대방과";
+		mes "대전후 승리했을 때";
+		mes "얻는 값은 1 이며";
+		mes "상대방에게 패했을";
 		next;
-		mes "[PVP Narrator]";
-		mes "Also, there is a hidden EXP";
-		mes "value in PVP mode. This EXP";
-		mes "score will only apply inside";
-		mes "of the PVP zone, so do not";
-		mes "worry.";
+		mes "[PVP가이드]";
+		mes "경우에는  - 5의";
+		mes "패널티를 얻게 됩니다";
+		mes "패널티에 의해";
+		mes "점수가 0 이하의 수치로";
+		mes "떨어졌을 경우에는";
 		next;
-		mes "[PVP Narrator]";
-		mes "Every player's EXP at the";
-		mes "beginning is usually 5 points.";
-		mes "If you win, it will";
-		mes "increase by 1 point";
+		mes "[PVP가이드]";
+		mes "PVP 모드 바깥세상으로";
+		mes "뒹겨져 나가게 됩니다";
+		mes "하지만 점수가 0 이상이고";
+		mes "기절해 있다고 하면";
+		mes "다른 동료 또는";
 		next;
-		mes "[PVP Narrator]";
-		mes "In the same way, when you";
-		mes "lose... Your EXP will";
-		mes "drop by 5 points.";
-		mes "So be careful!";
+		mes "[PVP가이드]";
+		mes "플레이어의 도움을 받아";
+		mes "체력을 회복하여";
+		mes "계속 게임에 참가 할 수";
+		mes "있게 됩니다";
 		next;
-		mes "[PVP Narrator]";
-		mes "When you are defeated";
-		mes "And your EXP is equal";
-		mes "to or less than 0,";
-		mes "You will be removed from PVP";
-		mes "and your duel is finished!";
-		next;
-		mes "[PVP Narrator]";
-		mes "However, if your EXP is more";
-		mes "than 0. You can still get help";
-		mes "through other players healing...";
-		mes "Do you get it?";
-		next;
-		mes "[PVP Narrator]";
-		mes "The fighting commands inside of";
-		mes "PVP are the same as the normal.";
-		mes "All the basic controls are the";
-		mes "same.";
-		next;
-		mes "[PVP Narrator]";
-		mes "However, there is one thing...";
-		mes "Within the PVP fight square";
-		mes "and PVP fighting zones,";
-		mes "you cannot save your position.";
-		mes "Remember well... These rules";
-		mes "can help to ensure your victory.";
+		mes "[PVP가이드]";
+		mes "상대방과의 대전룰은";
+		mes "바깥세상에서의";
+		mes "기본적인 전투룰과";
+		mes "동일 합니다";
 		break;
 	case 4:
-		mes "[PVP Narrator]";
-		mes "Position successfully saved...";
-		mes "Thank you very much!";
-		mes "We will see you again soon.";
+		mes "[PVP가이드]";
+		mes "위치 저장에";
+		mes "성공하였습니다";
+		mes "이용해 주셔서";
+		mes "감사합니다";
 		if(strnpcinfo(4) == "morocc_in") { savepoint "morocc_in",141,139,1,1; }
 		if(strnpcinfo(4) == "alberta_in") { savepoint "alberta_in",22,148,1,1; }
 		if(strnpcinfo(4) == "prt_in") { savepoint "prt_in",54,137,1,1; }
@@ -155,101 +181,103 @@
 		if(strnpcinfo(4) == "payon_in01") { savepoint "payon_in01",142,46,1,1; }
 		break;
 	case 5:
-		mes "[PVP Narrator]";
-		mes "With war raging between monsters";
-		mes "and humans, this competition";
-		mes "among people - PVP -";
-		mes "encourages us all to get";
-		mes "stronger. Come again,";
-		mes "we welcome your challenge!";
+		mes "[PVP가이드]";
+		mes "유저와 유저간의";
+		mes "대전으로 좀 더 신나는";
+		mes "전투를 즐기는 것이 가능한";
+		mes "흥미진진한 PVP 모드 !";
+		mes "여러분의 용기를";
+		mes "기다리고 있습니다 !";
 		break;
 	}
 	close;
 }
-morocc_in,144,138,4	duplicate(pvpe)	PVP Narrator#pe1	84
-alberta_in,22,146,4	duplicate(pvpe)	PVP Narrator#pe2	84
-prt_in,56,140,4	duplicate(pvpe)	PVP Narrator#pe3	84
-geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe4	84
-payon_in01,142,50,4	duplicate(pvpe)	PVP Narrator#pe5	84
-geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe6	84
+morocc_in,144,138,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe1	84
+alberta_in,22,146,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe2	84
+prt_in,56,140,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe3	84
+geffen_in,67,63,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe4	84
+payon_in01,142,50,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe5	84
+geffen_in,67,63,4	duplicate(PVP가이드#pvpe)	PVP 가이드#pe6	84
 
 // Mode Select
 //============================================================ 
--	script	Gate Keeper::gkut	-1,{
-	mes "[Gate Keeper]";
-	mes "Glad to be of service.";
-	mes "I will open the PVP fight";
-	mes "square for you! If you have";
-	mes "any questions about the PVP";
-	mes "modes or rules, Please ask";
-	mes "the Narrator...";
+-	script	PVP도어맨#gkut	-1,{
+	mes "[PVP도어맨]";
+	mes "PVP 대기실로 향하는";
+	mes "공간을 열어드리는";
+	mes "' PVP 모어맨 ' 입니다";
+	mes "PVP 모드에 관한 설명은";
+	mes "옆 친구인 가이드에게";
+	mes "문의 부탁드립니다 !";
 	next;
-	switch(select("^FF5533' PvP Nightmare Mode'^000000:^3355FF' PvP Yoyo Mode'^000000:^3355FF' PvP Event Mode'^000000:Quit")) {
+	switch(select("^FF5533' PvP 나이트메어 모드 '^000000 대기실로:^3355FF' PvP 요요모드 '^000000 대기실로:^3355FF' PvP 이벤트 모드 '^000000 대기실로:대화를 그만둔다")) {
 		case 1:
-			mes "[Gate Keeper]";
-			mes "I am sorry, but currently the Nightmare mode service is not available.";
-			mes "Please use the Yoyo Mode instead. We apologize for the inconvenience.";
+			mes "[PVP도어맨]";
+			mes "PVP 나이트메어 모든는";
+			mes "현재 사용이 중지되어";
+			mes "있습니다. PVP를 원하시면";
+			mes "요요 모드를 이용해주세요.";
 			break;
 		case 2:
-			mes "[Gate Keeper]";
-			mes "The admission fee is 500 Zeny.";
-			mes "Do you want to move";
-			mes "to the Yoyo Mode";
-			mes "fight square?";
+			mes "[PVP도어맨]";
+			mes "참가비는 500 Zeny 입니다";
+			mes "요요 모드";
+			mes "대기실로 이동을";
+			mes "희망하십니까 ?";
 			next;
-			switch(select("Move:Cancel")) {
+			switch(select("이동:취소")) {
 			case 1:
 				if ((Zeny > 499) && (BaseLevel > 30)) {
 					set Zeny, Zeny - 500;
 					callsub L_Warp,"pvp_y_room";
 				}
 				else {
-					mes "[Gate Keeper]";
-					mes "Excuse me, but";
-					mes "did you not come prepared?";
-					mes "Double check that you have the";
-					mes "500 Zeny entrance fee, and";
-					mes "that you are at least level 31!";
+					mes "[PVP도어맨]";
+					mes "어이쿠 손님 !";
+					mes "500 제니에 해당하는";
+					mes "참가비가 주머니에";
+					mes "없으시거나 기본레벨이";
+					mes "31 이 안되시나 봅니다요 !";
 				}
 				close;
 			case 2:
-				mes "[Gate Keeper]";
-				mes "With war raging between monsters";
-				mes "and humans, this competition";
-				mes "among people - PVP -";
-				mes "encourages us all to get";
-				mes "stronger. Come again,";
-				mes "we welcome your challenge!";
+				mes "[PVP도어맨]";
+				mes "유저와 유저간의";
+				mes "실력을 고스란히";
+				mes "겨루어 볼 수 있는";
+				mes "흥미진진한 PVP 모드 !";
+				mes "여러분의 용기를";
+				mes "기다리고 있습니다 !";
 				close;
 			}
 		case 3:
-			mes "[Gate Keeper]";
-			mes "Welcome!";
-			mes "Please double check";
-			mes "that you have the admission or viewing ticket.";
+			mes "[PVP도어맨]";
+			mes "어서 오십시오.";
+			mes "대전의 증명 또는 대전 관람권을";
+			mes "확인하겠습니다.";
 			next;
 			if ((countitem(7028) == 0) && (countitem(7029) == 0)) {
-				mes "[Gate Keeper]";
-				mes "Eh? You don't have it? Then I";
-				mes "am sorry, this fight square is";
-				mes "only for people who have";
-				mes "admission or viewing tickets.";
-				mes "You cannot come in without it.";
+				mes "[PVP도어맨]";
+				mes "..... 에?없으시다고요?";
+				mes "지송합니다만, 이 곳은";
+				mes "대전 참가권 또는 대전 관람권을";
+				mes "소지하고 계신 분들만 입장이";
+				mes "가능합니다.";
 				close;
 			}
-			mes "[Gate Keeper]";
-			mes "Yes, thank you for participating. Have fun!";
+			mes "[PVP도어맨]";
+			mes "네, 참여해 주셔서 감사합니다. 재미있게 보내세요!";
 			if (Zeny >= 500) set Zeny, Zeny - 500;
 			callsub L_Warp,"pvp_room";
 			break;
 		case 4:
-			mes "[Gate Keeper]";
-			mes "With war raging between monsters";
-			mes "and humans, This competition";
-			mes "among people - PVP -";
-			mes "encourages us all to get";
-			mes "stronger. Come again,";
-			mes "we welcome your challenge!";
+			mes "[PVP도어맨]";
+			mes "유저와 유저간의";
+			mes "실력을 고스란히";
+			mes "겨루어 볼 수 있는";
+			mes "흥미진진한 PVP 모드 !";
+			mes "여러분의 용기를";
+			mes "기다리고 있습니다 !";
 			break;
 	}
 	close;
@@ -273,11 +301,11 @@ L_Warp:
 		warp .@map$,51,23;
 	return;
 }
-morocc_in,144,142,4	duplicate(gkut)	Gate Keeper#gke1	83
-alberta_in,26,146,4	duplicate(gkut)	Gate Keeper#gke2	83
-prt_in,52,140,4	duplicate(gkut)	Gate Keeper#gke3	83
-geffen_in,63,63,4	duplicate(gkut)	Gate Keeper#gke4	83
-payon_in01,140,53,4	duplicate(gkut)	Gate Keeper#gke5	83
+morocc_in,144,142,4	duplicate(PVP도어맨#gkut)	PVP도어맨#gke1	83
+alberta_in,26,146,4	duplicate(PVP도어맨#gkut)	PVP도어맨#gke2	83
+prt_in,52,140,4	duplicate(PVP도어맨#gkut)	PVP도어맨#gke3	83
+geffen_in,63,63,4	duplicate(PVP도어맨#gkut)	PVP도어맨#gke4	83
+payon_in01,140,53,4	duplicate(PVP도어맨#gkut)	PVP도어맨#gke5	83
 
 // PVP Warper Function
 //============================================================ 
@@ -288,7 +316,7 @@ function	script	F_PVP_FSRS	{
 	if (getargcount()) {
 		setarray .@lvl[0], getarg(0), getarg(1);
 		if (BaseLevel < .@lvl[0] || BaseLevel > .@lvl[1]) {
-			mes "[PVP Fight Square Reception Staff]";
+			mes "[시합장 접수원]";
 			mes "Sorry, but you base level has to be between LV "+ .@lvl[0] +" and LV "+ .@lvl[1] +".";
 			close;
 		}
@@ -296,7 +324,7 @@ function	script	F_PVP_FSRS	{
 	if (strnpcinfo(4) == "pvp_y_room") {
 		set .@base$, "pvp_y_"+strnpcinfo(2);
 		setarray .@Maps$[0],	.@base$+"-1",	.@base$+"-2",	.@base$+"-3",	.@base$+"-4",	.@base$+"-5";
-		setarray .@Name$[0],	"Prontera",		"Izlude",		"Payon",		"Alberta",		"Morocc";
+		setarray .@Name$[0],	"프론테라",		"이즈루드",		"페이욘   ",		"알베르타",		"모로크   ";
 		setarray .@Limit[0],	128,			128,			128,			128,			128;
 	} else {
 		setarray .@Maps$[0],	"pvp_n_8-1",	"pvp_n_8-2",	"pvp_n_8-3",	"pvp_n_8-4",	"pvp_n_8-5";
@@ -305,12 +333,12 @@ function	script	F_PVP_FSRS	{
 	}
 	for(set .@i,0; .@i<5; set .@i,.@i+1)
 		set .@menu$, .@menu$+.@Name$[.@i]+" ["+getmapusers(.@Maps$[.@i])+" / "+.@Limit[.@i]+"]:";
-	set .@menu$, .@menu$+"Cancel.";
+	set .@menu$, .@menu$+"취소.";
 	set .@i, select(.@menu$)-1;
 	if (.@i == 5) close;
 	if (getmapusers(.@Maps$[.@i]) >= .@Limit[.@i]) {
-		mes "[PVP Fight Square Reception Staff]";
-		mes "This map is currently full.";
+		mes "[시합장 접수원]";
+		mes "이 맵은 현재 인원이 가득 찼습니다..";
 		close;
 	}
 	warp .@Maps$[.@i],0,0;

@@ -14,6 +14,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "char.hpp"
 #include "char_logif.hpp"
@@ -199,7 +200,10 @@ void chmapif_send_maps( int fd, int map_id, size_t count, unsigned char* mapbuf 
 	uint16 x;
 
 	if (count == 0) {
-		ShowWarning("Map-server %d has NO maps.\n", map_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("맵서버에 %d 맵이 존재하지 않습니다.\n", map_id);
+		else
+			ShowWarning("Map-server %d has NO maps.\n", map_id);
 	}
 	else {
 		unsigned char buf[INT16_MAX];
@@ -262,9 +266,15 @@ int chmapif_parse_getmapname(int fd, int id){
 	mapbuf = RFIFOP(fd,4);
 	RFIFOSKIP(fd,RFIFOW(fd,2));
 
-	ShowStatus("Map-Server %d connected: %" PRIuPTR " maps, from IP %d.%d.%d.%d port %d.\n",
+	if(strcmpi(MessageLang,"KOR") == 0) {
+		ShowStatus("연결된 맵서버 %d: %" PRIuPTR "개의 맵이 IP=> %d.%d.%d.%d 포트=> %d에서 연결됨.\n",
 				id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
-	ShowStatus("Map-server %d loading complete.\n", id);
+		ShowStatus("맵서버 %d의 로딩이 완료되었습니다.\n", id);
+	} else {
+		ShowStatus("Map-Server %d connected: %" PRIuPTR " maps, from IP %d.%d.%d.%d port %d.\n",
+				id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
+		ShowStatus("Map-server %d loading complete.\n", id);
+	}
 
 	chmapif_send_misc(fd);
 	chmapif_send_fame_list(fd); //Send fame list.
@@ -313,8 +323,12 @@ int chmapif_parse_askscdata(int fd){
 				Sql_GetData(sql_handle, 5, &data, nullptr); scdata.val4 = atoi(data);
 				memcpy(WFIFOP(fd, 14+count*sizeof(struct status_change_data)), &scdata, sizeof(struct status_change_data));
 			}
-			if (count >= 50)
-				ShowWarning("Too many status changes for %d:%d, some of them were not loaded.\n", aid, cid);
+			if (count >= 50) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("%d:%d에 대한 상태 변경이 너무 많아서 일부는 로드 되지 않았습니다.\n", aid, cid);
+				else
+					ShowWarning("Too many status changes for %d:%d, some of them were not loaded.\n", aid, cid);
+			}
 			if (count > 0)
 			{
 				WFIFOW( fd, 2 ) = static_cast<int16>( 14 + count * sizeof( struct status_change_data ) );
@@ -348,7 +362,10 @@ int chmapif_parse_getusercount(int fd, int id){
 		return 0;
 	if (RFIFOW(fd,2) != map_server[id].users) {
 		map_server[id].users = RFIFOW(fd,2);
-		ShowInfo("User Count: %d (Server: %d)\n", map_server[id].users, id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowInfo("유저 수: %d (서버: %d)\n", map_server[id].users, id);
+		else
+			ShowInfo("User Count: %d (Server: %d)\n", map_server[id].users, id);
 	}
 	RFIFOSKIP(fd, 4);
 	return 1;
@@ -380,8 +397,12 @@ int chmapif_parse_regmapuser(int fd, int id){
 
 			if( character != nullptr ){
 				if( character->server > -1 && character->server != id ){
-					ShowNotice("Set map user: Character (%d:%d) marked on map server %d, but map server %d claims to have (%d:%d) online!\n",
-						character->account_id, character->char_id, character->server, id, aid, cid);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowNotice("Set map user: 케릭터(%d:%d)을(를) 맵 서버 %d에 등록하려 했으나 맵서버 %d에는 (%d:%d)이(가) 이미 온라인입니다.\n",
+							character->account_id, character->char_id, character->server, id, aid, cid);
+					else
+						ShowNotice("Set map user: Character (%d:%d) marked on map server %d, but map server %d claims to have (%d:%d) online!\n",
+							character->account_id, character->char_id, character->server, id, aid, cid);
 					mapif_disconnectplayer(map_server[character->server].fd, character->account_id, character->char_id, 2);
 				}
 			}else{
@@ -414,7 +435,10 @@ int chmapif_parse_reqsavechar(int fd, int id){
 
 		if (size - 13 != sizeof(struct mmo_charstatus))
 		{
-			ShowError("parse_from_map (save-char): Size mismatch! %d != %" PRIuPTR "\n", size-13, sizeof(struct mmo_charstatus));
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("맵의 분석 (케릭터 저장): 크기가 일치하지 않습니다! %d != %" PRIuPTR "\n", size-13, sizeof(struct mmo_charstatus));
+			else
+				ShowError("parse_from_map (save-char): Size mismatch! %d != %" PRIuPTR "\n", size-13, sizeof(struct mmo_charstatus));
 			RFIFOSKIP(fd,size);
 			return 1;
 		}
@@ -427,7 +451,10 @@ int chmapif_parse_reqsavechar(int fd, int id){
 			memcpy(&char_dat, RFIFOP(fd,13), sizeof(struct mmo_charstatus));
 			char_mmo_char_tosql(cid, &char_dat);
 		} else {	//This may be valid on char-server reconnection, when re-sending characters that already logged off.
-			ShowError("parse_from_map (save-char): Received data for non-existant/offline character (%d:%d).\n", aid, cid);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("맵의 분석 (케릭터 저장): 존재하지 않거나 오프라인인 케릭터(%d:%d)에 대한 데이터를 받았습니다.\n", aid, cid);
+			else
+				ShowError("parse_from_map (save-char): Received data for non-existant/offline character (%d:%d).\n", aid, cid);
 			char_set_char_online(id, cid, aid);
 		}
 
@@ -570,8 +597,12 @@ int chmapif_parse_req_skillcooldown(int fd){
 				Sql_GetData(sql_handle, 1, &data, nullptr); scd.tick = strtoll( data, nullptr, 10 );
 				memcpy(WFIFOP(fd,14+count*sizeof(struct skill_cooldown_data)), &scd, sizeof(struct skill_cooldown_data));
 			}
-			if( count >= MAX_SKILLCOOLDOWN )
-				ShowWarning("Too many skillcooldowns for %d:%d, some of them were not loaded.\n", aid, cid);
+			if( count >= MAX_SKILLCOOLDOWN ) {
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowWarning("%d:%d에 대한 스킬쿨다운이 너무 많아 일부는 로드 되지 않았습니다.\n", aid, cid);
+				else
+					ShowWarning("Too many skillcooldowns for %d:%d, some of them were not loaded.\n", aid, cid);
+			}
 			if( count > 0 )
 			{
 				WFIFOW( fd, 2 ) = static_cast<int16>( 14 + count * sizeof( struct skill_cooldown_data ) );
@@ -1100,7 +1131,10 @@ int chmapif_parse_updmapip(int fd, int id){
 	if (RFIFOREST(fd) < 6) 
 		return 0;
 	map_server[id].ip = ntohl(RFIFOL(fd, 2));
-	ShowInfo("Updated IP address of map-server #%d to %d.%d.%d.%d.\n", id, CONVIP(map_server[id].ip));
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("맵서버 #%d의 IP주소를 %d.%d.%d.%d으(로) 업데이트 했습니다.\n", id, CONVIP(map_server[id].ip));
+	else
+		ShowInfo("Updated IP address of map-server #%d to %d.%d.%d.%d.\n", id, CONVIP(map_server[id].ip));
 	RFIFOSKIP(fd,6);
 	return 1;
 }
@@ -1329,7 +1363,10 @@ int chmapif_bonus_script_get(int fd) {
 
 			WFIFOSET(fd, size);
 
-			ShowInfo("Bonus Script loaded for CID=%d. Total: %d.\n", cid, i);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("CID=%d의 보너스 스크립트가 로드되었습니다. (총: %d개)\n", cid, i);
+			else
+				ShowInfo("Bonus Script loaded for CID=%d. Total: %d.\n", cid, i);
 
 			if (SQL_ERROR == SqlStmt_Prepare(stmt,"DELETE FROM `%s` WHERE `char_id`='%d'",schema_config.bonus_script_db,cid) ||
 				SQL_ERROR == SqlStmt_Execute(stmt))
@@ -1376,7 +1413,10 @@ int chmapif_bonus_script_save(int fd) {
 				Sql_ShowDebug(sql_handle);
 
 			StringBuf_Destroy(&buf);
-			ShowInfo("Bonus Script saved for CID=%d. Total: %d.\n", cid, count);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowInfo("CID=%d의 보너스 스크립트가 저장 되었습니다.(총: %d개)\n", cid, count);
+			else
+				ShowInfo("Bonus Script saved for CID=%d. Total: %d.\n", cid, count);
 		}
 		RFIFOSKIP(fd,RFIFOW(fd,2));
 	}
@@ -1408,7 +1448,10 @@ int chmapif_parse(int fd){
 	ARR_FIND( 0, ARRAYLENGTH(map_server), id, map_server[id].fd == fd );
 	if( id == ARRAYLENGTH(map_server) )
 	{// not a map server
-		ShowDebug("parse_frommap: Disconnecting invalid session #%d (is not a map-server)\n", fd);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowDebug("parse_frommap: 잘못된 세션 #%d의 연결을 끊습니다. (맵 서버가 아닙니다.)\n", fd);
+		else
+			ShowDebug("parse_frommap: Disconnecting invalid session #%d (is not a map-server)\n", fd);
 		do_close(fd);
 		return 0;
 	}
@@ -1458,7 +1501,10 @@ int chmapif_parse(int fd){
 					if (r == 1) break;		// processed
 					if (r == 2) return 0;	// need more packet
 					// no inter server packet. no char server packet -> disconnect
-					ShowError("Unknown packet 0x%04x from map server, disconnecting.\n", RFIFOW(fd,0));
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("맵 서버에서 알수 없는 패킷 0x%04x으(로) 인해 연결이 해제 되었습니다.\n", RFIFOW(fd,0));
+					else
+						ShowError("Unknown packet 0x%04x from map server, disconnecting.\n", RFIFOW(fd,0));
 					set_eof(fd);
 					return 0;
 			}
@@ -1542,7 +1588,10 @@ void chmapif_server_reset(int id){
  * @param id: id of map-serv (should be >0, FIXME)
  */
 void chmapif_on_disconnect(int id){
-	ShowStatus("Map-server #%d has disconnected.\n", id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowStatus("맵 서버 #%d의 연결이 끊어졌습니다.\n", id);
+	else
+		ShowStatus("Map-server #%d has disconnected.\n", id);
 	chmapif_server_reset(id);
 }
 

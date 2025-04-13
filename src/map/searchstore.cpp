@@ -7,9 +7,11 @@
 #include <common/malloc.hpp>  // aMalloc, aRealloc, aFree
 #include <common/showmsg.hpp>  // ShowError, ShowWarning
 #include <common/strlib.hpp>  // safestrncpy
+#include <config/custom.hpp>
 
 #include "battle.hpp"  // battle_config.*
 #include "clif.hpp"  // clif_open_search_store_info, clif_search_store_info_*
+#include "stall.hpp"
 #include "pc.hpp"  // map_session_data
 
 /// Type for shop search function
@@ -125,7 +127,10 @@ void searchstore_query(map_session_data& sd, e_searchstore_searchtype type, unsi
 		return;
 
 	if( ( store_searchall = searchstore_getsearchallfunc(type) ) == nullptr ) {
-		ShowError("searchstore_query: Unknown search type %u (account_id=%d).\n", type, sd.bl.id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("searchstore_query: %u은(는) 알수 없는 검색 타입입니다. (계정ID=%d).\n", type, sd.bl.id);
+		else
+			ShowError("searchstore_query: Unknown search type %u (account_id=%d).\n", type, sd.bl.id);
 		return;
 	}
 
@@ -152,7 +157,10 @@ void searchstore_query(map_session_data& sd, e_searchstore_searchtype type, unsi
 	// validate lists
 	for( i = 0; i < item_count; i++ ) {
 		if( !item_db.exists(itemlist[i].itemId) ) {
-			ShowWarning("searchstore_query: Client resolved item %u is not known.\n", itemlist[i].itemId);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("searchstore_query: 클라이언트는 아이템 %u을(를) 알 수 없습니다.\n", itemlist[i].itemId);
+			else	
+				ShowWarning("searchstore_query: Client resolved item %u is not known.\n", itemlist[i].itemId);
 			clif_search_store_info_failed(sd, SSI_FAILED_NOTHING_SEARCH_ITEM);
 
 			// update uses
@@ -162,7 +170,10 @@ void searchstore_query(map_session_data& sd, e_searchstore_searchtype type, unsi
 	}
 	for( i = 0; i < card_count; i++ ) {
 		if( !item_db.exists(cardlist[i].itemId) ) {
-			ShowWarning("searchstore_query: Client resolved card %u is not known.\n", cardlist[i].itemId);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowWarning("searchstore_query: 클라이언트에서 확인된 카드 %u을(를) 알 수 없습니다.\n", cardlist[i].itemId);
+			else
+				ShowWarning("searchstore_query: Client resolved card %u is not known.\n", cardlist[i].itemId);
 			clif_search_store_info_failed(sd, SSI_FAILED_NOTHING_SEARCH_ITEM);
 
 			// update uses
@@ -194,6 +205,16 @@ void searchstore_query(map_session_data& sd, e_searchstore_searchtype type, unsi
 		}
 
 		if( !store_searchall(pl_sd, &s) ) { // exceeded result size
+			clif_search_store_info_failed(sd, SSI_FAILED_OVER_MAXCOUNT);
+			break;
+		}
+	}
+
+	for (auto& itStalls : stall_db){
+		if(itStalls->owner_id == sd.status.char_id) // skip own shop, if any
+			continue;
+
+		if( !stall_searchall(pl_sd, &s, itStalls, type) ) { // exceeded result size
 			clif_search_store_info_failed(sd, SSI_FAILED_OVER_MAXCOUNT);
 			break;
 		}
@@ -294,49 +315,77 @@ void searchstore_click(map_session_data& sd, uint32 account_id, int store_id, t_
 
 	ARR_FIND( 0, sd.searchstore.items.size(), i, sd.searchstore.items[i]->store_id == store_id && sd.searchstore.items[i]->account_id == account_id && sd.searchstore.items[i]->nameid == nameid );
 	if( i == sd.searchstore.items.size() ) { // no such result, crafted
-		ShowWarning("searchstore_click: Received request with item %u of account %d, which is not part of current result set (account_id=%d, char_id=%d).\n", nameid, account_id, sd.bl.id, sd.status.char_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowWarning("searchstore_click: %d계정의 %u 아이템에 대한 요청이 수신되었지만, 현재 결과 세트의 일부가 아닙니다. (계정ID=%d, 케릭터ID=%d).\n", nameid, account_id, sd.bl.id, sd.status.char_id);
+		else
+			ShowWarning("searchstore_click: Received request with item %u of account %d, which is not part of current result set (account_id=%d, char_id=%d).\n", nameid, account_id, sd.bl.id, sd.status.char_id);
 		clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
 		return;
 	}
 
-	if( ( pl_sd = map_id2sd(account_id) ) == nullptr ) { // no longer online
-		clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
-		return;
-	}
+	if(store_id < START_STALL_NUM){
+		if ((pl_sd = map_id2sd(account_id)) == nullptr) { // no longer online
+			clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
+			return;
+		}
 
-	if( !searchstore_hasstore(*pl_sd, sd.searchstore.type) || searchstore_getstoreid(*pl_sd, sd.searchstore.type) != store_id ) { // no longer vending/buying or not same shop
-		clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
-		return;
-	}
+		if( !searchstore_hasstore(*pl_sd, sd.searchstore.type) || searchstore_getstoreid(*pl_sd, sd.searchstore.type) != store_id ) { // no longer vending/buying or not same shop
+			clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
+			return;
+		}
 
-	store_search = searchstore_getsearchfunc(sd.searchstore.type);
+		store_search = searchstore_getsearchfunc(sd.searchstore.type);
 
 	if( !store_search(pl_sd, nameid) ) {// item no longer being sold/bought
-		clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
-		return;
+			clif_search_store_info_failed(sd, SSI_FAILED_SSILIST_CLICK_TO_OPEN_STORE);
+			return;
+		}
 	}
 
 	switch( sd.searchstore.effect ) {
 		case SEARCHSTORE_EFFECT_NORMAL:
 			// display coords
-			if( sd.bl.m != pl_sd->bl.m ) // not on same map, wipe previous marker
-				clif_search_store_info_click_ack(sd, -1, -1);
-			else
-				clif_search_store_info_click_ack(sd, pl_sd->bl.x, pl_sd->bl.y);
-			break;
+			if(store_id >= START_STALL_NUM){
+				struct s_stall_data* st;
+				if( (st = map_id2st(store_id)) == NULL )
+					return;
+				if( sd.bl.m != st->bl.m ) // not on same map, wipe previous marker
+					clif_search_store_info_click_ack(sd, -1, -1);
+				else
+					clif_search_store_info_click_ack(sd, st->bl.x, st->bl.y);
+			} else {
+				if( sd.bl.m != pl_sd->bl.m ) // not on same map, wipe previous marker
+					clif_search_store_info_click_ack(sd, -1, -1);
+				else
+					clif_search_store_info_click_ack(sd, pl_sd->bl.x, pl_sd->bl.y);
+			}
+ 			break;
 		case SEARCHSTORE_EFFECT_REMOTE:
 			// open remotely
 			// to bypass range checks
 			sd.searchstore.remote_id = account_id;
 
-			switch( sd.searchstore.type ) {
-				case SEARCHTYPE_VENDING:      vending_vendinglistreq(&sd, account_id); break;
-				case SEARCHTYPE_BUYING_STORE: buyingstore_open(&sd, account_id);       break;
+			if(store_id >= START_STALL_NUM){
+				struct s_stall_data* st;
+				if( (st = map_id2st(store_id)) == NULL )
+					return;
+				switch( sd.searchstore.type ) {
+					case SEARCHTYPE_VENDING:      clif_stall_vending_list( &sd, st ); break;
+					case SEARCHTYPE_BUYING_STORE: clif_stall_buying_list( &sd, st );  break;
+				}
+			} else {
+				switch( sd.searchstore.type ) {
+					case SEARCHTYPE_VENDING:      vending_vendinglistreq(&sd, account_id); break;
+					case SEARCHTYPE_BUYING_STORE: buyingstore_open(&sd, account_id);       break;
+				}
 			}
 			break;
 		default:
 			// unknown
-			ShowError("searchstore_click: Unknown search store effect %u (account_id=%d).\n", sd.searchstore.effect, sd.bl.id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("searchstore_click: 알수 없는 검색 상점 효과 %u (계정ID=%d).\n", sd.searchstore.effect, sd.bl.id);
+			else
+				ShowError("searchstore_click: Unknown search store effect %u (account_id=%d).\n", sd.searchstore.effect, sd.bl.id);
 	}
 }
 

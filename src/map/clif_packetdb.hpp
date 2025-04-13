@@ -2152,6 +2152,17 @@
 	packet(0x0A9B,-1);
 	parseable_packet(0x0A9C,2,clif_parse_equipswitch_request,0);
 	packet(0x0A9D,4);
+	packet( HEADER_ZC_STALL_VENDING_UI_OPEN, -1 );
+	packet( HEADER_ZC_STALL_UI_CLOSE, sizeof( struct PACKET_ZC_STALL_UI_CLOSE ) );
+	packet( HEADER_ZC_STALL_CHAR_DETAILS, sizeof( struct PACKET_ZC_STALL_CHAR_DETAILS ) );
+	parseable_packet( HEADER_CZ_STALL_CLOSE, sizeof( struct PACKET_CZ_STALL_CLOSE ), clif_parse_stall_close, 0 );
+	parseable_packet( HEADER_CZ_STALL_VENDING_SET, -1, clif_parse_stall_vending_set, 0 );
+	packet( HEADER_ZC_STALL_VENDING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_VENDING_LIST_REQUEST ) );
+	parseable_packet( HEADER_CZ_STALL_VENDING_CANCEL, sizeof( struct PACKET_CZ_STALL_VENDING_CANCEL ), clif_parse_stall_vending_cancel, 0 );
+	packet( HEADER_ZC_STALL_BUYING_UI_OPEN, sizeof( struct PACKET_ZC_STALL_BUYING_UI_OPEN ) );
+	parseable_packet( HEADER_CZ_STALL_BUYING_SET, -1, clif_parse_stall_buying_set, 0 );
+	packet( HEADER_ZC_STALL_BUYING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_BUYING_LIST_REQUEST ) );
+	parseable_packet(HEADER_CZ_STALL_BUYING_CANCEL, sizeof(struct PACKET_CZ_STALL_BUYING_CANCEL), clif_parse_stall_buying_cancel, 0);
 #endif
 
 // 2017-04-19bRagexeRE
@@ -2219,7 +2230,9 @@
 	packet(0x0ADD, 22);
 #endif
 
-#if PACKETVER >= 20180516
+#if PACKETVER >= 20231218
+	parseable_packet( HEADER_CZ_REQ_STYLE_CHANGE3, sizeof( PACKET_CZ_REQ_STYLE_CHANGE3 ), clif_parse_stylist_buy, 0 );
+#elif PACKETVER >= 20180516
 	parseable_packet( HEADER_CZ_REQ_STYLE_CHANGE2, sizeof( PACKET_CZ_REQ_STYLE_CHANGE2 ), clif_parse_stylist_buy, 0 );
 #endif
 
@@ -2319,6 +2332,40 @@
 
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203
 	parseable_packet( HEADER_CZ_RESET_SKILL, sizeof( struct PACKET_CZ_RESET_SKILL ), clif_parse_reset_skill, 0 );
+#endif
+
+#if PACKETVER_RE_NUM >= 20230802 || PACKETVER_MAIN_NUM >= 20230802
+	parseable_packet( HEADER_CZ_ASK_TAG_LOAD_RUNE, sizeof( struct PACKET_CZ_ASK_TAG_LOAD_RUNE ), clif_parse_asktag_rune, 0 );
+	packet( HEADER_ZC_BOOK_INFO_RUNE, -1 );
+	packet( HEADER_ZC_SET_INFO_RUNE, -1);
+	parseable_packet( HEADER_CZ_BOOK_ACTIVATE_RUNE, sizeof( struct PACKET_CZ_BOOK_ACTIVATE_RUNE ), clif_parse_bookactivate_rune, 0 );
+	packet( HEADER_ZC_BOOK_RESULT_RUNE, sizeof( PACKET_ZC_BOOK_RESULT_RUNE ));
+	parseable_packet( HEADER_CZ_SET_ACTIVATE_RUNE, sizeof( struct PACKET_CZ_SET_ACTIVATE_RUNE ), clif_parse_setactivate_rune, 0 );
+	packet( HEADER_ZC_SET_RESULT_RUNE, sizeof( PACKET_ZC_SET_RESULT_RUNE ) );
+	parseable_packet( HEADER_CZ_SET_UPGRADE_RUNE, sizeof( struct PACKET_CZ_SET_UPGRADE_RUNE ), clif_parse_setupgrade_rune, 0 );
+	packet( HEADER_ZC_SET_RESULT_RUNE2, sizeof( PACKET_ZC_SET_RESULT_RUNE2 ) );
+	packet( HEADER_ZC_REFRESH_ENABLE_RUNE2, sizeof( PACKET_ZC_REFRESH_ENABLE_RUNE2 ) );
+	parseable_packet( HEADER_CZ_ENABLE_RUNE, sizeof( struct PACKET_CZ_ENABLE_RUNE ), clif_parse_enable_rune, 0 );
+	packet( HEADER_ZC_REFRESH_ENABLE_RUNE, sizeof( PACKET_ZC_REFRESH_ENABLE_RUNE ) );
+	parseable_packet( HEADER_CZ_RUNE_DECOMPO, sizeof( PACKET_CZ_RUNE_DECOMPO ), clif_parse_decompo_rune, 0 );
+	packet( HEADER_ZC_RESULT_RUNE_DECOMPO, sizeof( PACKET_ZC_RESULT_RUNE_DECOMPO ) );
+	packet( HEADER_ZC_OPEN_RUNE_UI, sizeof( PACKET_ZC_OPEN_RUNE_UI ) );
+	parseable_packet( HEADER_CZ_RESULT_OPEN_RUNE_UI, sizeof( struct PACKET_CZ_RESULT_OPEN_RUNE_UI ), clif_parse_result_rune_ui_open, 0 );
+	packet( HEADER_ZC_ONLOG_ENABLE_RUNE, sizeof( PACKET_ZC_ONLOG_ENABLE_RUNE ) );
+#endif
+
+#if PACKETVER >= 20230802
+	parseable_packet(HEADER_CZ_REQ_EMOTION2, sizeof(struct PACKET_CZ_REQ_EMOTION2), clif_parse_emotion2, 0);
+	packet(HEADER_ZC_EMOTION_SUCCESS, sizeof(struct PACKET_ZC_EMOTION_SUCCESS));
+	packet(HEADER_ZC_EMOTION_FAIL, sizeof(struct PACKET_ZC_EMOTION_FAIL));
+	parseable_packet(HEADER_CZ_EMOTION_EXPANTION_REQ, sizeof(struct PACKET_CZ_EMOTION_EXPANTION_REQ), clif_parse_emotion_expansion_request, 0);
+	packet(HEADER_ZC_EMOTION_EXPANSION_SUCCESS, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS));
+	packet(HEADER_ZC_EMOTION_EXPANSION_FAIL, sizeof(struct PACKET_ZC_EMOTION_EXPANSION_FAIL));
+	packet(HEADER_ZC_EMOTION_EXPANTION_LIST, -1);
+#endif
+
+#if (PACKETVER_MAIN_NUM >= 20240516)
+	parseable_packet(HEADER_CZ_QUEST_STATUS_REQ, -1, clif_parse_quest_status, 0);
 #endif
 
 #endif /* CLIF_PACKETDB_HPP */

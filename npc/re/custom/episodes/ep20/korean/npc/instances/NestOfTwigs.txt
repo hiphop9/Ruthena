@@ -1,0 +1,511 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Nest of Twigs from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 44 (instance NestOfTwigs)
+jor_twice,164,244,5	script(CLOAKED)	레하르#e20pn05::ep20_jor_twice_164_244	4_EP19_LEHAR,{
+	if (ep20_main < 42)
+		end;
+	if (ep20_main == 42) {
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "레이지 씨는 저기서 혼자 뭐 하시는 걸까요? 얼음 사이에 뭐가 있나?";
+		close3;
+	}
+	// note: (debug) ep20_main == 44 is custom (need check on official)
+	if (ep20_main == 43 || ep20_main == 44) {
+		if (is_party_leader() == false) {
+			cutin "ep19_lehar01.png",2;
+			mes "[레하르]";
+			mes "앗, 모험가님! 출발하시려면 1인 파티를 맺고 저한테 다시 말을 걸어주세요!";
+			close3;
+		}
+		.@md_name$ = "작은 가지의 둥지";
+		
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "" + strcharinfo(0) + "님! 한시가 급해요, 저랑 같이 레온 님이랑 오렐리 님 찾으러 가요, 어서!";
+		next;
+		switch( select( "" + .@md_name$ + " 탐사 준비", "" + .@md_name$ + " 입장", "잠시만..." ) ) {
+		case 1:
+			cutin "ep19_lehar01.png",2;
+			mes "[레하르]";
+			mes "준비되셨으면 본격적으로 따라가볼까요? 휴, 뭐가 나올지 예상이 안 돼서 긴장되네요.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close3;
+		case 2:
+			if (is_party_leader() == false)
+				end;
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[레하르]";
+				mes "어떻게 그렇게 태연하실 수가 있어요?";
+				mes "전 이렇게 마음이 급한데!";
+				next;
+				mes "[레하르]";
+				mes " 준비되시면 지체없이 저한테 말을 걸어주셔야 해요, 아시겠죠? 네?";
+				close3;
+			case IE_OK:
+				// warp "1@twig",209,176;
+				end;
+			}
+			end;
+		case 3: 
+			cutin "ep19_lehar01.png",2;
+			mes "[레하르]";
+			mes "잠시만요, 빠뜨린 게 있어요. 조금만 기다렸다가 다시 말을 걸어주세요!";
+			close3;
+		}
+		end;
+	}
+	if (ep20_main == 45) {
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "저희도 할 수 있는 일이 있어서 다행이에요, 그렇죠?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(23106) == 1" );
+	end;
+}
+
+
+1@twig,209,176,0	script	#ep20_twig1	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('step == 0) {
+		'step = 1;
+		enablenpc instance_npcname("ep20_1twig_207_178_A");
+		end;
+	}
+	end;
+OnInstanceInit:
+	'step = 0;
+	'map_twig$ = instance_mapname("1@twig");
+	end;
+}
+
+1@twig,66,181,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_66_181	EP20_JORMUNGUARD1
+1@twig,62,182,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_62_182	EP20_JORMUNGUARD2
+1@twig,67,177,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_67_177	EP20_JORMUNGUARD2
+1@twig,135,65,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_135_65	EP20_JORMUNGUARD2
+1@twig,135,61,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_135_61	EP20_JORMUNGUARD1
+1@twig,135,69,3	duplicate(dummy_disabled_npc)	요르문간드 가디언#twig::ep20_1twig_135_69	EP20_JORMUNGUARD2
+
+
+1@twig,207,178,5	script(DISABLED)	레하르#ep20twigtemp::ep20_1twig_207_178_A	EP19_NPC_LEHAR,{
+	if (is_party_leader() == false)
+		end;
+	if ('step != 1)
+		end;
+	cutin "ep19_lehar05.png",2;
+	mes "[레하르]";
+	mes "우와, 이게 다 뭐야? 이런 지형은 처음 보는데요...";
+	next;
+	cutin "ep19_lehar01.png",2;
+	mes "[레하르]";
+	mes "저기 발자국이 보여요. 레온 님이랑 오렐리 님은 이 길을 따라 가신 것 같으니 저희도 힘내서 가보죠!";
+	specialeffect2 EF_POTION8;
+	sc_start SC_INCREASEAGI,240000,10;
+	next;
+	mes "[레하르]";
+	mes "발을 가볍게 만들어드렸으니 서두르자고요!";
+	close2;
+	cutin "",255;
+	if ('step == 1) {
+		'step = 2;
+		disablenpc();
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_1";	// move 1
+	}
+	end;
+}
+
+
+1@twig,207,178,5	script(DISABLED)	레하르#e20twig::ep20_1twig_207_178_B	EP19_NPC_LEHAR,{
+	if (is_party_leader() == false)
+		end;
+	if ('step < 3)
+		end;
+	if ('step == 3) {	// spawn 1
+		'step = 4;
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnSpawn_1";
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "어라, 저건 대체 뭐죠...? 꼭 저희를 막으려는 것처럼 서 있네요...";
+		close2;
+		npctalk "레하르: 어어? 어어어?";
+		cutin "",255;
+		end;
+	}
+	if ('step == 4) {
+		npctalk "레하르: 모험가님, 지금 얘기할 때가 아니에요!";
+		end;
+	}
+	if ('step == 5) {	// move 2
+		'step = 6;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "갑자기 공격할 줄이야! 깜짝 놀랐어요. 사방이 적이군요... 다시 출발해볼까요?";
+		specialeffect2 EF_POTION8;
+		sc_start SC_INCREASEAGI,240000,10;
+		close2;
+		if ('step == 6)
+			donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_2";
+		cutin "",255;
+		end;
+	}
+	if ('step == 6)	// (npc is moving)
+		end;
+	if ('step == 7) {	// spawn 2
+		'step = 8;
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnSpawn_2";
+		cutin "ep19_lehar04.png",2;
+		mes "[레하르]";
+		mes "으, 아까 그 녀석들인데요? 이번에도 처리하고 넘어가죠!";
+		close3;
+	}
+	if ('step == 8) {
+		npctalk "레하르: 모험가님, 아직 혼내줘야 할 녀석들이 남았어요!";
+		end;
+	}
+	if ('step == 9) {	// move 3
+		'step = 10;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "레온 님이랑 오렐리 님은 어떻게 이 사이를 뚫고 가신 걸까요...?";
+		specialeffect2 EF_POTION8;
+		sc_start SC_INCREASEAGI,240000,10;
+		close2;
+		if ('step == 10)
+			donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_3";
+		cutin "",255;
+		end;
+	}
+	if ('step == 10)	// (npc is moving)
+		end;
+	cutin "ep19_lehar01.png",2;
+	mes "[레하르]";
+	mes "전부터 생각했지만, 인간으로서 신과 뜻을 함께하는 것은 쉬운 일이 아닌 것 같아요.";
+	next;
+	cutin "ep19_lehar02.png",2;
+	mes "[레하르]";
+	mes "헷, 제가 너무 당연한 말을 했나요? 잊어주세요!";
+	close3;
+
+OnMove_1:
+	enablenpc();
+	enablenpc instance_npcname("ep20_1twig_66_181");
+	enablenpc instance_npcname("ep20_1twig_62_182");
+	enablenpc instance_npcname("ep20_1twig_67_177");
+
+	npcspeed 150;
+	'npc_gid = getnpcid(0);
+	'npc_name$ = instance_npcname("ep20_1twig_207_178_B");
+	'move[0] = 0;
+	donpcevent 'npc_name$ + "::OnMove_1_ByStep";
+	end;
+OnMove_1_ByStep:
+	setarray .@coord[0],
+		197,188,
+		187,198,
+		177,208,
+		167,211,
+		157,216,	// npctalk
+		147,216,
+		137,217,
+		124,215,
+		114,213,
+		104,210,
+		 94,204,
+		 84,194,
+		 74,184;
+	.@size = getarraysize(.@coord) / 2;
+
+	if ('move[0] == 4)
+		npctalk "레하르: 여기, 신기하게 생겼네요!";
+	else if ('move[0] == .@size) {
+		npctalk "레하르: 어라, 앞에 이상한 게 막고 있는데요?";
+		'step = 3;	// move final
+		end;
+	}
+	.@r = 'move[0] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_1_ByStep";
+	'move[0]++;
+	end;
+OnSpawn_1:
+	disablenpc instance_npcname("ep20_1twig_66_181");
+	disablenpc instance_npcname("ep20_1twig_62_182");
+	disablenpc instance_npcname("ep20_1twig_67_177");
+	monster 'map_twig$,66,181,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,62,182,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,67,177,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	end;
+OnDead_1:
+	if (mobcount( 'map_twig$, 'npc_name$ + "::OnDead_1" ) > 0)
+		end;
+	npctalk "레하르: 고생하셨어요!";
+	'step = 5;
+	end;
+
+OnMove_2:
+	enablenpc instance_npcname("ep20_1twig_135_65");
+	enablenpc instance_npcname("ep20_1twig_135_61");
+	enablenpc instance_npcname("ep20_1twig_135_69");
+	'move[1] = 0;
+	donpcevent 'npc_name$ + "::OnMove_2_ByStep";
+	end;
+OnMove_2_ByStep:
+	setarray .@coord[0],
+		64,174,
+		57,164,
+		56,154,
+		56,144,
+		56,134,
+		60,124,
+		61,114,	// npctalk
+		68,104,
+		78,94,
+		88,84,
+		98,74,
+		108,67,
+		118,65,
+		128,65;
+	.@size = getarraysize(.@coord) / 2;
+
+	if ('move[1] == 6)
+		npctalk "레하르: 왜... 왜 이렇게까지 긴 거지?";
+	else if ('move[1] == .@size) {
+		npctalk "레하르: 아니, 또 나타났잖아?";
+		'step = 7;	// move final
+		end;
+	}
+	.@r = 'move[1] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_2_ByStep";
+	'move[1]++;
+	end;
+OnSpawn_2:
+	disablenpc instance_npcname("ep20_1twig_135_65");
+	disablenpc instance_npcname("ep20_1twig_135_61");
+	disablenpc instance_npcname("ep20_1twig_135_69");
+	monster 'map_twig$,135,61,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,135,69,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,135,65,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	end;
+OnDead_2:
+	if (mobcount( 'map_twig$, 'npc_name$ + "::OnDead_2" ) > 0)
+		end;
+	npctalk "레하르: 고생하셨어요!";
+	'step = 9;
+	end;
+
+OnMove_3:
+	'move[2] = 0;
+	donpcevent 'npc_name$ + "::OnMove_3_ByStep";
+	enablenpc instance_npcname("ep20_1twig_117_151");
+	enablenpc instance_npcname("ep20_1twig_116_145");
+	enablenpc instance_npcname("ep20_1twig_119_149");
+	end;
+OnMove_3_ByStep:
+	setarray .@coord[0],
+		138,65,
+		148,72,
+		158,78,
+		166,88,
+		173,98,
+		178,108,
+		179,118,
+		176,128,
+		168,138,
+		158,148,
+		148,154,
+		138,155,
+		128,158;
+	.@size = getarraysize(.@coord) / 2;
+	
+	if ('move[2] == .@size) {
+		'step = 11;	// move final
+		end;
+	}
+	.@r = 'move[2] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_3_ByStep";
+	'move[2]++;
+	end;
+}
+
+// unknown effect
+// 1@twig,121,156,0	script	#ep20_twig2	HIDDEN_WARP_NPC,2,2
+
+1@twig,117,151,3	script(DISABLED)	오렐리#e20pn06::ep20_1twig_117_151	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",2;
+	mes "[오렐리]";
+	mes "이렇게 결계를 쳐 뒀으니 지금까지 찾아내지 못한 것도 당연해. 이 마력의 구조는...";
+	next;
+	mes "[오렐리]";
+	mes "(혼자만의 생각에 골몰해 중얼거리고 있다.)";
+	close3;
+}
+
+1@twig,116,145,7	script(DISABLED)	하얀 고양이#e20pn06::ep20_1twig_116_145	4_EP20_NYAR,{
+	cutin "ep20_nyar04.png",2;
+	mes "[하얀 고양이]";
+	mes "애우웅.";
+	close3;
+}
+
+1@twig,119,149,3	script(DISABLED)	레온#e20pn06::ep20_1twig_119_149	4_EP19_LEON,{
+	if ('step < 11)
+		end;
+	if ('step == 11) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "으아아, 드디어 찾았다. 레온 님, 오렐리 님!";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "아, 레하르. 다들 사라져서 놀랐습니다. 기다렸어요.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "그건 저희가 할 말이에요! 일언반구도 없이 갑자기 가버리시고! 걸음은 또 어찌나 빠르신지!";
+		next;
+		mes "[레하르]";
+		mes "이상한 물체들이 공격하는데 어떻게 여기까지 오신 거예요?";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[레온]";
+		mes "네? 그럴 리가... 다들 알아차리지 않았나요? 요르문간드의 힘이잖습니까. 그 힘이 우리를 공격할 리가...";
+		next;
+		cutin "ep19_leon05.png",2;
+		mes "[레온]";
+		mes "...아, 이런.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "죄송합니다. 요르문간드의 의지가 너무나 강렬하게 느껴지는 나머지, 저희 모두에게 전해졌다고 착각해버렸군요.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "그래도 놓치지는 않았으니까 괜찮아요. 어떻게 된 일인지 설명부터 해 주세요, 빨리요!";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "음, 결론부터 말하자면 저희는 이 장소와, 여기 있는 이 세계수를 지켜야 합니다.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "...레온 님, 진도가 너무 빨라요! 이해가 하나도 안 되는데 차근차근 풀어서 말해주시면 안 될까요?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "아, 그도 그렇군요... 잠시 생각을 정리할 시간을 주시겠습니까? 저희가 이 곳에서 들은 것을 전해드리겠습니다.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "신의 마력을 나눠받아 수호자가 된다는 것도 예삿일이 아니긴 하네요...";
+		if ('step == 11)
+			'step = 12;
+		close3;
+	}
+	if ('step == 12) {
+		if (checkweight(1001217,20) == 0) {	// custom
+			mes "소지하고 계신 아이템의 수량이 많아 대화를 진행 할 수 없습니다.";
+			mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+			close;
+		}
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "좋아요, 처음부터 차근차근 얘기해보죠. 오렐리, 도와주겠니?";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "레온과 나는 전에도 말했다시피, 이스가르드의 수호자야. 이스가르드를 수호하는 대신, 요르문간드의 축복을 받아 영생을 유지하지. 그러니만큼 요르문간드의 마력을 모를 수가 없고.";
+		next;
+		mes "[오렐리]";
+		mes "그 전까지 요르문간드로 추정되는 동물의 흔적을 아윈들이 발견했다는 얘기는 들었지만…정말로 모습을 보인 적은 없었어. 지금 우리 앞에 나타난 걸 보면 생각보다 상황이 더 좋지 않은지도 몰라.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "이 땅에서 요르문간드의 마력을 느낄 수 있는 것은 저희뿐만이 아닙니다. 요르문간드 교단의 르간들도 요르문간드의 마력에서 태어났으니, 그들도 같은 것을 느낄 수 있을 거예요.";
+		next;
+		mes "[레온]";
+		mes "이 근처에서 그 일당을 만나셨다고 하셨던가요? 그렇다면 그들이 저희보다 한 발 빠르게 같은 것을 느끼고, 근원지를 찾으려고 하고 있는지도 모르겠습니다. 느긋하게 있으면 안 되겠군요.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "이 곳은 이스가르드 결계의 중심지, 세계수의 가지를 잡고 있어. 지금은 보호막으로 가려져 있지만, 요르문간드 교단이 낌새를 눈치챘다면 그들이 이곳에 침입하는 것은 시간문제야.";
+		next;
+		mes "[오렐리]";
+		mes "이 성지가 파괴되면 이스가르드의 결계는 깨질 것이고, 이 대륙에 붙잡혀 있던 라스간드는 미드가르드로 그 마수를 뻗칠 수 있겠지.";
+		next;
+		mes "[오렐리]";
+		mes "그러니 우리는 여기를 지켜야 해. 이 정도면 이해하겠니?";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[레하르]";
+		mes "지킨다고 하면... 정확히 어떤 방식으로 지키는 건가요?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "이 결계에 힘을 보태줄 수 있으면 좋겠지만, 마력을 어디서 충당해야 할 지가 문제입니다. 저와 오렐리가 힘 닿는 대로 해봐야지요.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[레하르]";
+		mes "저, 그러면... 방법을 찾기 전까지는 좀 단순하게 생각해 보면 어떨까요?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[레하르]";
+		mes "저나 모험가님이 결계 자체에 힘을 보탤 수는 없겠지만, 적어도 조사만 못 하게 해도 효과가 있는 거 아닌가요? 오는 르간마다 두들겨 패서 돌려보내죠!";
+		npctalk "" + strcharinfo(0) + " : 진담이야?", "";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "흠, 과연. 지금으로서는 그게 최선인 것 같습니다. 애써주시는 동안 저희도 더 나은 방법을 강구해보죠.";
+		npctalk "" + strcharinfo(0) + " : 정말? 이렇게?", "";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[오렐리]";
+		mes "레하르 말대로 하는 게 좋겠구나. 요르문간드 또한 르간들이 보호막을 훼손하는 것과, 이 지역의 마력을 채취하는 것을 원하지 않아. 그들은 이 대지에 한 가지 해악만 끼치지 않거든...";
+		next;
+		mes "[오렐리]";
+		mes "그럼 일단 이 곳을 나갈까? 바깥에서 기다리는 사람들도 상황을 알아야지.";
+		if ('step == 12 && ep20_main == 43) {
+			ep20_main = 44;
+			erasequest 23106;
+			setquest 23108;
+			getitem 1001217,10;	// Ep20_Cat_Whiskers
+			getexp2 136611959,0;
+			getexp 0,22271670;
+			add_reputation_points( REPU_EP20, 70 );
+		}
+		close2;
+		cutin "",255;
+		warp "jor_safty1",331,150;
+		end;
+	}
+	// debug
+	warp "jor_safty1",331,150;
+	end;
+}

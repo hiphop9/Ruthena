@@ -16,6 +16,7 @@
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
+#include <config/custom.hpp>
 
 #include "clan.hpp"
 #include "clif.hpp"
@@ -56,7 +57,10 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		return 0;
 
 	if (instance_id <= 0) {
-		this->invalidWarning(node, "Instance Id is invalid. Valid range 1~%d, skipping.\n", INT_MAX);
+		if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+			this->invalidWarning(node, "인스턴스 번호가 잘못되었습니다. (가능 범위: 1~%d) 통과됨.\n", INT_MAX);
+		else
+			this->invalidWarning(node, "Instance Id is invalid. Valid range 1~%d, skipping.\n", INT_MAX);
 		return 0;
 	}
 
@@ -79,7 +83,10 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 
 		for (const auto &instance : instance_db) {
 			if (instance.second->name.compare(name) == 0) {
-				this->invalidWarning(node["Name"], "Instance name %s already exists, skipping.\n", name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(node["Name"], "인스턴스 이름 %s이(가) 이미 존재합니다. 통과됨.\n", name.c_str());
+				else
+					this->invalidWarning(node["Name"], "Instance name %s already exists, skipping.\n", name.c_str());
 				return 0;
 			}
 		}
@@ -174,7 +181,10 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			uint16 mapindex = mapindex_name2idx( map.c_str(), nullptr );
 
 			if( mapindex == 0 ){
-				this->invalidWarning(enterNode["Map"], "Map %s is not a valid map, skipping.\n", map.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(enterNode["Map"], "%s 맵이 올바른 맵이 아니어서 건너뜁니다.\n", map.c_str());
+				else
+					this->invalidWarning(enterNode["Map"], "Map %s is not a valid map, skipping.\n", map.c_str());
 				return 0;
 			}
 
@@ -195,14 +205,20 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (x == 0) {
-				this->invalidWarning(enterNode["X"], "X has to be greater than zero.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(enterNode["X"], "X는 0보다 커야 합니다.\n");
+				else
+					this->invalidWarning(enterNode["X"], "X has to be greater than zero.\n");
 				return 0;
 			}
 
 			map_data *md = map_getmapdata(instance->enter.map);
 
 			if (x >= md->xs) {
-				this->invalidWarning(enterNode["X"], "X has to be smaller than %hu.\n", md->xs);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(enterNode["X"], "X는 %hu보다 작아야 합니다.\n", md->xs);
+				else
+					this->invalidWarning(enterNode["X"], "X has to be smaller than %hu.\n", md->xs);
 				return 0;
 			}
 
@@ -216,14 +232,20 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				return 0;
 
 			if (y == 0) {
-				this->invalidWarning(enterNode["Y"], "Y has to be greater than zero.\n");
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(enterNode["Y"], "Y는 0보다 커야 합니다.\n");
+				else
+					this->invalidWarning(enterNode["Y"], "Y has to be greater than zero.\n");
 				return 0;
 			}
 
 			map_data *md = map_getmapdata(instance->enter.map);
 
 			if (y >= md->ys) {
-				this->invalidWarning(enterNode["Y"], "Y has to be smaller than %hu.\n", md->ys);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(enterNode["Y"], "Y는 %hu보다 작아야 합니다.\n", md->ys);
+				else
+					this->invalidWarning(enterNode["Y"], "Y has to be smaller than %hu.\n", md->ys);
 				return 0;
 			}
 
@@ -241,12 +263,18 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			int16 m = map_mapname2mapid(map.c_str());
 
 			if (m == instance->enter.map) {
-				this->invalidWarning(mapNode, "Additional Map %s is already listed as the EnterMap.\n", map.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(mapNode, "추가 맵 %s(이)가 이미 EnterMap으로 목록에 있습니다.\n", map.c_str());
+				else
+					this->invalidWarning(mapNode, "Additional Map %s is already listed as the EnterMap.\n", map.c_str());
 				continue;
 			}
 
 			if (m == -1) {
-				this->invalidWarning(mapNode, "Additional Map %s is not a valid map, skipping.\n", map.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0)	
+					this->invalidWarning(mapNode, "추가 하려는 맵 %s은(는) 올바른 맵이 아니어서 건너뜁니다.\n", map.c_str());
+				else
+					this->invalidWarning(mapNode, "Additional Map %s is not a valid map, skipping.\n", map.c_str());
 				return 0;
 			}
 
@@ -609,7 +637,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 	std::shared_ptr<s_instance_db> db = instance_search_db_name(name);
 
 	if (!db) {
-		ShowError("instance_create: Unknown instance %s creation was attempted.\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("instance_create: 알수 없는 인스턴스 %s을(를) 생성하려 했습니다.\n", name);
+		else
+			ShowError("instance_create: Unknown instance %s creation was attempted.\n", name);
 		return -1;
 	}
 
@@ -623,7 +654,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 			break;
 		case IM_CHAR:
 			if (!(sd = map_charid2sd(owner_id))) {
-				ShowError("instance_create: Character %d not found for instance '%s'.\n", owner_id, name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("instance_create: 인스턴스 '%s'에 대한 케릭터 '%d'을(를) 찾을 수 없습니다.\n", name, owner_id);
+				else
+					ShowError("instance_create: Character %d not found for instance '%s'.\n", owner_id, name);
 				return -2;
 			}
 			if (sd->instance_id > 0)
@@ -631,7 +665,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 			break;
 		case IM_PARTY:
 			if (!(pd = party_search(owner_id))) {
-				ShowError("instance_create: Party %d not found for instance '%s'.\n", owner_id, name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("instance_create: 인스턴스 '%s'에 대한 파티 '%d'을(를) 찾을 수 없습니다.\n", name, owner_id);
+				else
+					ShowError("instance_create: Party %d not found for instance '%s'.\n", owner_id, name);
 				return -2;
 			}
 			if (pd->instance_id > 0)
@@ -639,7 +676,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 			break;
 		case IM_GUILD:
 			if (!(gd = guild_search(owner_id))) {
-				ShowError("instance_create: Guild %d not found for instance '%s'.\n", owner_id, name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("instance_create: 인스턴스 '%s'에 대한 길드 '%d'을(를) 찾을 수 없습니다.\n", name, owner_id);
+				else
+					ShowError("instance_create: Guild %d not found for instance '%s'.\n", owner_id, name);
 				return -2;
 			}
 			if (gd->instance_id > 0)
@@ -647,14 +687,20 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 			break;
 		case IM_CLAN:
 			if (!(cd = clan_search(owner_id))) {
-				ShowError("instance_create: Clan %d not found for instance '%s'.\n", owner_id, name);
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("instance_create: 인스턴스 '%s'에 대한 클랜 '%d'을(를) 찾을 수 없습니다.\n", name, owner_id);
+				else
+					ShowError("instance_create: Clan %d not found for instance '%s'.\n", owner_id, name);
 				return -2;
 			}
 			if (cd->instance_id > 0)
 				return -3; // Clan already instancing
 			break;
 		default:
-			ShowError("instance_create: Unknown mode %u for owner_id %d and name %s.\n", mode, owner_id, name);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("instance_create: owner_id %d 및 이름 %s에 대해 알수 없는 모드 %u.\n", owner_id, name, mode);
+			else
+				ShowError("instance_create: Unknown mode %u for owner_id %d and name %s.\n", mode, owner_id, name);
 			return -2;
 	}
 
@@ -699,7 +745,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 	clif_instance_create(instance_id, instance_wait.id.size());
 	instance_subscription_timer(0,0,0,0);
 
-	ShowInfo("[Instance] Created: %s (%d)\n", name, instance_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("[인스턴스] 생성됨: %s (%d).\n", name, instance_id);
+	else
+		ShowInfo("[Instance] Created: %s (%d)\n", name, instance_id);
 
 	// Start the instance timer on instance creation
 	instance_startkeeptimer(entry, instance_id);
@@ -740,7 +789,10 @@ size_t instance_addmap( int instance_id ){
 
 	// Add initial map
 	if ((m = map_addinstancemap(db->enter.map, instance_id, db->nomapflag)) < 0) {
-		ShowError("instance_addmap: Failed to create initial map for instance '%s' (%d).\n", db->name.c_str(), instance_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("instance_addmap: 인스턴스 '%s'(%d)에 대한 맵을 초기화 하는데 실패 했습니다.\n", db->name.c_str(), instance_id);
+		else
+			ShowError("instance_addmap: Failed to create initial map for instance '%s' (%d).\n", db->name.c_str(), instance_id);
 		return 0;
 	}
 
@@ -753,7 +805,10 @@ size_t instance_addmap( int instance_id ){
 	// Add extra maps (if any)
 	for (const auto &it : db->maplist) {
 		if ((m = map_addinstancemap(it, instance_id, db->nomapflag)) < 0) { // An error occured adding a map
-			ShowError("instance_addmap: No maps added to instance '%s' (%d).\n", db->name.c_str(), instance_id);
+			if(strcmpi(MessageLang,"KOR") == 0)
+				ShowError("instance_addmap: 인스턴스 '%s'(%d)에 추가된 맵이 없습니다.\n", db->name.c_str(), instance_id);
+			else
+				ShowError("instance_addmap: No maps added to instance '%s' (%d).\n", db->name.c_str(), instance_id);
 			return 0;
 		} else {
 			entry.m = m;
@@ -823,7 +878,10 @@ int16 instance_mapid(int16 m, int instance_id)
 	const char *name = map_mapid2mapname(m);
 
 	if (name == nullptr) {
-		ShowError("instance_mapid: Map ID %d does not exist.\n", m);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("instance_mapid: 맵 ID %d이(가) 없습니다.\n",m);
+		else
+			ShowError("instance_mapid: Map ID %d does not exist.\n", m);
 		return -1;
 	}
 
@@ -1032,7 +1090,10 @@ bool instance_destroy(int instance_id)
 	if( idata->regs.arrays )
 		idata->regs.arrays->destroy(idata->regs.arrays, script_free_array_db);
 
-	ShowInfo("[Instance] Destroyed: %s (%d)\n", instance_db.find(idata->id)->name.c_str(), instance_id);
+	if(strcmpi(MessageLang,"KOR") == 0)
+		ShowInfo("[인스턴스] %s (%d)이(가) 삭제되었습니다.\n", instance_db.find(idata->id)->name.c_str(), instance_id);
+	else
+		ShowInfo("[Instance] Destroyed: %s (%d)\n", instance_db.find(idata->id)->name.c_str(), instance_id);
 
 	instances.erase(instance_id);
 
@@ -1055,7 +1116,10 @@ e_instance_enter instance_enter(map_session_data *sd, int instance_id, const cha
 	std::shared_ptr<s_instance_db> db = instance_search_db_name(name);
 
 	if (!db) {
-		ShowError("instance_enter: Unknown instance \"%s\".\n", name);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError( "인스턴스 입장: \"%s\"은(는) 알수 없는 인스턴스입니다.\n", name );
+		else
+			ShowError("instance_enter: Unknown instance \"%s\".\n", name);
 		return IE_OTHER;
 	}
 
@@ -1281,14 +1345,21 @@ void do_reload_instance(void)
 					instance_id = cd->instance_id;
 					break;
 				default:
-					ShowError("do_reload_instance: Unexpected instance mode for instance %s (id=%d, mode=%u).\n", (db) ? db->name.c_str() : "Unknown", mapdata->instance_id, (uint8)idata->mode);
+					if(strcmpi(MessageLang,"KOR") == 0)
+						ShowError("do_reload_instance: %s 인스턴스에 대한 예기치 않은 인스턴스 모드입니다. (id=%d, mode=%u).\n", (db) ? db->name.c_str() : "알수 없음", mapdata->instance_id, (uint8)idata->mode);
+					else
+						ShowError("do_reload_instance: Unexpected instance mode for instance %s (id=%d, mode=%u).\n", (db) ? db->name.c_str() : "Unknown", mapdata->instance_id, (uint8)idata->mode);
 					continue;
 			}
 			if (db && instance_enter(sd, instance_id, db->name.c_str(), -1, -1) == IE_OK) { // All good
 				clif_displaymessage(sd->fd, msg_txt(sd, 515)); // Instance has been reloaded
 				instance_reqinfo(sd, instance_id);
-			} else // Something went wrong
-				ShowError("do_reload_instance: Error setting character at instance start: character_id=%d instance=%s.\n", sd->status.char_id, db->name.c_str());
+			} else { // Something went wrong
+				if(strcmpi(MessageLang,"KOR") == 0)
+					ShowError("do_reload_instance: 인스턴스 시작하는 중 케릭터 설정 오류: 케릭터 ID=%d 인스턴스=%s.\n", sd->status.char_id, db->name.c_str());
+				else
+					ShowError("do_reload_instance: Error setting character at instance start: character_id=%d instance=%s.\n", sd->status.char_id, db->name.c_str());
+			}
 		}
 	}
 	mapit_free(iter);

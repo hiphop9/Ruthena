@@ -17,6 +17,7 @@
 #include <common/strlib.hpp>
 #include <common/utilities.hpp>
 #include <common/utils.hpp>
+#include <config/custom.hpp>
 
 #include "battle.hpp"
 #include "chrif.hpp"
@@ -76,7 +77,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 		int64 constant;
 
 		if( !script_get_constant( group_name_constant.c_str(), &constant ) ){
-			this->invalidWarning( node, "Invalid Group %s for achievement %d, skipping.\n", group_name.c_str(), achievement_id );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node, "%s은(는) 도전과제 %d에 대한 잘못된 그룹입니다. 통과중.\n", group_name.c_str(), achievement_id );
+			else
+				this->invalidWarning( node, "Invalid Group %s for achievement %d, skipping.\n", group_name.c_str(), achievement_id );
 			return 0;
 		}
 
@@ -107,7 +111,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 			}
 
 			if( targetId >= MAX_ACHIEVEMENT_OBJECTIVES ){
-				this->invalidWarning( targetNode["Id"], "Target Id is out of valid range [0,%d], skipping.\n", MAX_ACHIEVEMENT_OBJECTIVES );
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( targetNode["Id"], "대상 Id의 유효범위 [0,%d]을(를) 벗어났습니다. 통과됨.\n", MAX_ACHIEVEMENT_OBJECTIVES );
+				else
+					this->invalidWarning( targetNode["Id"], "Target Id is out of valid range [0,%d], skipping.\n", MAX_ACHIEVEMENT_OBJECTIVES );
 				continue;
 			}
 
@@ -116,7 +123,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 			if( !targetExists ){
 				if( !this->nodeExists( targetNode, "Count" ) && !this->nodeExists( targetNode, "Mob" ) ){
-					this->invalidWarning( targetNode, "Target has no data specified, skipping.\n" );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning( targetNode, "Target에 지정된 데이터가 없습니다. 통과중.\n" );
+					else
+						this->invalidWarning( targetNode, "Target has no data specified, skipping.\n" );
 					return 0;
 				}
 
@@ -135,7 +145,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 						achievement->targets.erase( targetId );
 						continue;
 					}else{
-						this->invalidWarning( targetNode["Count"], "Target count has to be > 0, skipping.\n" );
+						if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+							this->invalidWarning( targetNode["Count"], "타겟의 갯수는 0보다 커야 합니다. 통과됨..\n" );
+						else
+							this->invalidWarning( targetNode["Count"], "Target count has to be > 0, skipping.\n" );
 						return 0;
 					}
 				}
@@ -149,7 +162,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 			if( this->nodeExists( targetNode, "Mob" ) ){
 				if( achievement->group != AG_BATTLE && achievement->group != AG_TAMING ){
-					this->invalidWarning( targets, "Target Mob is only supported for targets in group AG_BATTLE or AG_TAMING, skipping.\n" );
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning( targets, "대상 Mob은 AG_BATTLE 또는 AG_TAMING 그룹의 대상을 위해서만 지원됩니다. 통과됨.\n" );
+					else
+						this->invalidWarning( targets, "Target Mob is only supported for targets in group AG_BATTLE or AG_TAMING, skipping.\n" );
 					continue;
 				}
 
@@ -162,7 +178,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 				std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname( mob_name.c_str() );
 
 				if (mob == nullptr) {
-					this->invalidWarning(targetNode["Mob"], "Target Mob %s does not exist, skipping.\n", mob_name.c_str());
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(targetNode["Mob"], "대상 몬스터 %s은(는) 존재하지 않습니다. 통과됨.\n", mob_name.c_str() );
+					else
+						this->invalidWarning(targetNode["Mob"], "Target Mob %s does not exist, skipping.\n", mob_name.c_str());
 					return 0;
 				}
 
@@ -207,7 +226,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 	if( this->nodeExists( node, "Map" ) ){
 		if( achievement->group != AG_CHATTING ){
-			this->invalidWarning( node, "Map can only be used with the group AG_CHATTING, skipping.\n" );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node, "Map은 AG_CHATTING 그룹에서만 사용할 수 있습니다. 건너뜀.\n" );
+			else
+				this->invalidWarning( node, "Map can only be used with the group AG_CHATTING, skipping.\n" );
 			return 0;
 		}
 
@@ -220,7 +242,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 		achievement->mapindex = map_mapname2mapid( mapname.c_str() );
 
 		if( achievement->mapindex == -1 ){
-			this->invalidWarning( node["Map"], "Map %s does not exist, skipping.\n", mapname.c_str() );
+			if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+				this->invalidWarning( node["Map"], "맵 '%s'은(는) 존재하지 않습니다. 건너뜀.\n", mapname.c_str() );
+			else
+				this->invalidWarning( node["Map"], "Map %s does not exist, skipping.\n", mapname.c_str() );
 			return 0;
 		}
 	}else{
@@ -243,12 +268,18 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 
 			if (active) {
 				if (std::find(achievement->dependent_ids.begin(), achievement->dependent_ids.end(), dependent_achievement_id) != achievement->dependent_ids.end()) {
-					this->invalidWarning(dependentNode, "Dependent achievement %d is already part of the list, skipping.\n", dependent_achievement_id);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(dependentNode, "선행 달성과제 %d이(가) 이미 목록에 있으므로 건너뜁니다.\n", dependent_achievement_id);
+					else
+						this->invalidWarning(dependentNode, "Dependent achievement %d is already part of the list, skipping.\n", dependent_achievement_id);
 					continue;
 				}
 
 				if (achievement->dependent_ids.size() >= MAX_ACHIEVEMENT_DEPENDENTS) {
-					this->invalidWarning(dependentNode, "Maximum amount (%d) of dependent achievements reached, skipping.\n", MAX_ACHIEVEMENT_DEPENDENTS);
+					if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+						this->invalidWarning(dependentNode, "선행 달성과제(%d)가 최대에 도달했습니다. 건너뜁니다.\n", MAX_ACHIEVEMENT_DEPENDENTS);
+					else
+						this->invalidWarning(dependentNode, "Maximum amount (%d) of dependent achievements reached, skipping.\n", MAX_ACHIEVEMENT_DEPENDENTS);
 					break;
 				}
 
@@ -271,7 +302,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 			std::shared_ptr<item_data> item = item_db.search_aegisname(item_name.c_str());
 
 			if (item == nullptr) {
-				this->invalidWarning(rewardNode["Item"], "Reward Item %s does not exist, skipping.\n", item_name.c_str());
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning( rewardNode["Item"], "보상아이템 %s은(는) 존재하지 않아 건너뜁니다..\n", item_name.c_str() );
+				else
+					this->invalidWarning(rewardNode["Item"], "Reward Item %s does not exist, skipping.\n", item_name.c_str());
 				return 0;
 			}
 
@@ -317,7 +351,10 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 			}
 
 			if (title < TITLE_BASE || title > TITLE_MAX) {
-				this->invalidWarning(rewardNode["TitleId"], "Reward Title ID %u does not exist (%hu~%hu), skipping.\n", title, TITLE_BASE, TITLE_MAX);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					this->invalidWarning(rewardNode["TitleId"], "보상 타이틀 ID %u(은)는 존재하지 않습니다. (%hu~%hu), 건너뜀.\n", title, TITLE_BASE, TITLE_MAX);
+				else
+					this->invalidWarning(rewardNode["TitleId"], "Reward Title ID %u does not exist (%hu~%hu), skipping.\n", title, TITLE_BASE, TITLE_MAX);
 				return 0;
 			}
 
@@ -354,7 +391,10 @@ void AchievementDatabase::loadingFinished(){
 
 		for (auto dep = ach->dependent_ids.begin(); dep != ach->dependent_ids.end(); dep++) {
 			if (!this->exists(*dep)) {
-				ShowWarning("achievement_read_db: An invalid Dependent ID %d was given for Achievement %d. Removing from list.\n", *dep, ach->achievement_id);
+				if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+					ShowWarning("achievement_read_db: 잘못된 Dependent ID %d이(가) 달성과제 %d에 지정되었습니다. 목록에서 제거합니다.\n", *dep, ach->achievement_id);
+				else
+					ShowWarning("achievement_read_db: An invalid Dependent ID %d was given for Achievement %d. Removing from list.\n", *dep, ach->achievement_id);
 				dep = ach->dependent_ids.erase(dep);
 
 				if (dep == ach->dependent_ids.end()) {
@@ -401,7 +441,10 @@ uint64 AchievementLevelDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	}
 
 	if( level == 0 ){
-		this->invalidWarning( node, "Invalid achievement level %hu (minimum value: 1), skipping.\n", level );
+		if(strcmpi(MessageLang_Yml,"KOR") == 0) 
+			this->invalidWarning( node, "%hu은(는) 잘못된 도전과제 레벨입니다. (최소값: 1) 건너뜀.\n", level );
+		else
+			this->invalidWarning( node, "Invalid achievement level %hu (minimum value: 1), skipping.\n", level );
 		return 0;
 	}
 
@@ -448,13 +491,19 @@ struct achievement *achievement_add(map_session_data *sd, int achievement_id)
 	std::shared_ptr<s_achievement_db> adb = achievement_db.find( achievement_id );
 
 	if( adb == nullptr ){
-		ShowError( "achievement_add: Achievement %d not found in DB.\n", achievement_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 추가: 데이터베이스(DB)에서 달성 과제 %d을(를) 찾을 수 없습니다.\n", achievement_id);
+		else
+			ShowError( "achievement_add: Achievement %d not found in DB.\n", achievement_id );
 		return nullptr;
 	}
 
 	ARR_FIND(0, sd->achievement_data.count, i, sd->achievement_data.achievements[i].achievement_id == achievement_id);
 	if (i < sd->achievement_data.count) {
-		ShowError("achievement_add: Character %d already has achievement %d.\n", sd->status.char_id, achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 추가: 이 케릭터(케릭터 ID번호:%d)에는 이미 달성 과제(달성 과제 ID번호: %d)이 존재합니다.\n", sd->status.char_id, achievement_id);
+		else
+			ShowError("achievement_add: Character %d already has achievement %d.\n", sd->status.char_id, achievement_id);
 		return nullptr;
 	}
 
@@ -493,13 +542,19 @@ bool achievement_remove(map_session_data *sd, int achievement_id)
 	nullpo_retr(false, sd);
 
 	if (!achievement_db.exists(achievement_id)) {
-		ShowError("achievement_delete: Achievement %d not found in DB.\n", achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 삭제: 데이터베이스(DB)에서 달성 과제(달성 과제 ID번호: %d)을 찾을 수 없습니다.\n", achievement_id);
+		else
+			ShowError("achievement_delete: Achievement %d not found in DB.\n", achievement_id);
 		return false;
 	}
 
 	ARR_FIND(0, sd->achievement_data.count, i, sd->achievement_data.achievements[i].achievement_id == achievement_id);
 	if (i == sd->achievement_data.count) {
-		ShowError("achievement_delete: Character %d doesn't have achievement %d.\n", sd->status.char_id, achievement_id);
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 삭제: 이 케릭터(케릭터 ID번호:%d)에는 달성 과제(달성 과제 ID번호: %d)이 존재하지 않습니다.\n", sd->status.char_id, achievement_id);
+		else
+			ShowError("achievement_delete: Character %d doesn't have achievement %d.\n", sd->status.char_id, achievement_id);
 		return false;
 	}
 
@@ -667,7 +722,10 @@ void achievement_get_reward(map_session_data *sd, int achievement_id, time_t rew
 	std::shared_ptr<s_achievement_db> adb = achievement_db.find( achievement_id );
 
 	if( adb == nullptr ){
-		ShowError( "achievement_reward: Inter server sent a reward claim for achievement %d not found in DB.\n", achievement_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 보상: 데이터베이스(DB)에서 찾지 못한 달성 과제(달성 과제ID 번호:%d)에 대한 보상을 인터서버(Inter Server)가 요청했습니다.\n", achievement_id);
+		else
+			ShowError( "achievement_reward: Inter server sent a reward claim for achievement %d not found in DB.\n", achievement_id );
 		return;
 	}
 
@@ -708,7 +766,10 @@ void achievement_check_reward(map_session_data *sd, int achievement_id)
 	std::shared_ptr<s_achievement_db> adb = achievement_db.find( achievement_id );
 
 	if( adb == nullptr ){
-		ShowError( "achievement_reward: Trying to reward achievement %d not found in DB.\n", achievement_id );
+		if(strcmpi(MessageLang,"KOR") == 0)
+			ShowError("달성 과제 보상: 데이터베이스(DB)에서 찾지 못한 달성 과제(달성 과제ID번호: %d)에 대한 보상을 하려고 합니다.\n", achievement_id);
+		else
+			ShowError( "achievement_reward: Trying to reward achievement %d not found in DB.\n", achievement_id );
 		clif_achievement_reward_ack( sd->fd, 0, achievement_id );
 		return;
 	}

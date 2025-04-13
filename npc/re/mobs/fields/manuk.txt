@@ -16,22 +16,23 @@
 //==================================================
 // man_fild01 - Manuk Field
 //==================================================
-man_fild01,0,0	monster	Nepenthes	1988,148,5000
-man_fild01,0,0	monster	Centipede Larva	1999,42,5000
-man_fild01,0,0	monster	Hillslion	1989,14,5000
-man_fild01,0,0	monster	Centipede	1987,2,5000
+man_fild01,0,0	monster	네펜데스	1988,148,5000
+man_fild01,0,0	monster	센티페데 유충	1999,42,5000
+man_fild01,0,0	monster	힐스리온	1989,14,5000
+man_fild01,0,0	monster	센티페데	1987,2,5000
 
 //==================================================
 // man_fild02 - Manuk Field
 //==================================================
-man_fild02,0,0	monster	Bradium Golem	2024,75,5000
-man_fild02,0,0	monster	Centipede	1987,52,5000
-man_fild02,0,0	monster	Tatacho	1986,37,5000
+man_fild02,0,0	monster	브라디움 골렘	2024,75,5000
+man_fild02,0,0	monster	센티페데	1987,52,5000
+man_fild02,0,0	monster	따따초	1986,37,5000
 
 //==================================================
 // man_fild03 - Manuk Field
 //==================================================
-man_fild03,0,0	monster	Hillslion	1989,33,5000
-man_fild03,0,0	monster	Tatacho	1986,33,5000
-man_fild03,0,0	monster	Centipede	1987,33,5000
-man_fild03,0,0	monster	Hardrock Mammoth	1990,1,14400000
+man_fild03,0,0	monster	힐스리온	1989,33,5000
+man_fild03,0,0	monster	따따초	1986,33,5000
+man_fild03,0,0	monster	센티페데	1987,33,5000
+man_fild03,0,0	monster	하드락 맘모스	1990,1,14400000
+

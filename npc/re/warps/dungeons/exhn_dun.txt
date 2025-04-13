@@ -1,0 +1,18 @@
+//===== rAthena Script =======================================
+//= Scaraba Hole Warp Script
+//===== By: ==================================================
+//= Chilly, Muad_Dib
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Warp Points for Scaraba Hole
+//===== Additional Comments: =================================
+//= 1.0 First Version.
+//= 1.1 Updated to match official script. [Joseph]
+//============================================================
+
+1@exhn,177,30,0	warp	supernovice0001	1,1,1@exhn,189,141
+1@exhn,189,138,0	warp	supernovice0002	1,1,1@exhn,177,28
+1@exhn,168,17,0	warp	supernovice0003	1,1,aldebaran,111,69

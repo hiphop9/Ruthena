@@ -12,8 +12,10 @@
 //============================================================
 
 // Prontera Invasion
-prt_q,0,0	monster	Zombie Guard	3452,60
-prt_q,0,0	monster	Ghoul	1036,10
-prt_q,0,0	monster	Immortal Corps	3451,30
-prt_q,0,0	monster	Hunter Fly	1035,10
-prt_q,0,0	monster	Immortal Commander	3490,1
+prt_q,0,0	monster	되살아난 경비병	3452,60
+prt_q,0,0	monster	구울	1036,10
+prt_q,0,0	monster	불사의 군단병	3451,30
+prt_q,0,0	monster	헌터 플라이	1035,10
+prt_q,0,0	monster	불사의 군단 장교	3490,1
+
+

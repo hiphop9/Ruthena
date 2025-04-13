@@ -1,0 +1,270 @@
+From 4f5675e541f96ebd4de753665f45462e7ce09e48 Mon Sep 17 00:00:00 2001
+From: Atemo <capucrath@gmail.com>
+Date: Sun, 16 Jul 2023 01:48:00 +0200
+Subject: [PATCH] Patch EP20
+
+---
+ src/custom/script.inc        | 20 ++++++++++++++++++++
+ src/custom/script_def.inc    |  2 ++
+ src/map/clif.cpp             | 17 +++++++++++++++++
+ src/map/clif.hpp             |  3 +++
+ src/map/script.cpp           | 16 ++++++++++++++++
+ src/map/script.hpp           |  3 +++
+ src/map/script_constants.hpp |  3 +++
+ src/map/status.cpp           | 10 ++++++++++
+ src/map/unit.hpp             |  1 +
+ 9 files changed, 75 insertions(+)
+
+diff --git a/src/custom/script.inc b/src/custom/script.inc
+index 839b990cb..92b52d16c 100644
+--- a/src/custom/script.inc
++++ b/src/custom/script.inc
+@@ -17,3 +17,23 @@
+ //	script_pushint(st,1);
+ //	return 0;
+ //}
++
++BUILDIN_FUNC(specialeffect3)
++{
++	int type = script_getnum(st, 2);
++	enum send_target target = script_hasdata(st, 3) ? (send_target)script_getnum(st, 3) : AREA;
++
++	struct block_list* bl;
++
++	if (!script_rid2bl(4, bl))
++		return SCRIPT_CMD_SUCCESS;
++
++	if( type <= EF_NONE || type >= EF_MAX ){
++		ShowError( "buildin_specialeffect3: unsupported effect id %d.\n", type );
++		return SCRIPT_CMD_FAILURE;
++	}
++
++	clif_specialeffect(bl, type, target);
++
++	return SCRIPT_CMD_SUCCESS;
++}
+diff --git a/src/custom/script_def.inc b/src/custom/script_def.inc
+index 886399273..031fa1f83 100644
+--- a/src/custom/script_def.inc
++++ b/src/custom/script_def.inc
+@@ -9,3 +9,5 @@
+  **/
+ 
+ //BUILDIN_DEF(example,""),
++
++BUILDIN_DEF(specialeffect3,"iii"), // skill effect on unit
+diff --git a/src/map/clif.cpp b/src/map/clif.cpp
+index 991b5b1b8..a4ba0f0c1 100644
+--- a/src/map/clif.cpp
++++ b/src/map/clif.cpp
+@@ -1686,6 +1686,7 @@ static inline bool clif_npc_mayapurple(block_list *bl) {
+  **/
+ int clif_spawn( struct block_list *bl, bool walking ){
+ 	struct view_data *vd;
++	struct unit_data* ud = unit_bl2ud(bl);
+ 
+ 	vd = status_get_viewdata(bl);
+ 	if( !vd || vd->class_ == JT_INVISIBLE )
+@@ -1701,6 +1702,8 @@ int clif_spawn( struct block_list *bl, bool walking ){
+ 		clif_spawn_unit( bl, AREA_WOS );
+ 	}
+ 
++	if (ud->body_size)
++		clif_body_size(bl, ud->body_size);
+ 	if (vd->cloth_color)
+ 		clif_refreshlook(bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,AREA_WOS);
+ 	if (vd->body_style)
+@@ -1986,6 +1989,8 @@ static void clif_move2( struct block_list *bl, struct view_data *vd, struct unit
+ 
+ 	clif_set_unit_walking( bl, nullptr, ud, AREA_WOS );
+ 
++	if (ud->body_size)
++		clif_body_size(bl, ud->body_size);
+ 	if(vd->cloth_color)
+ 		clif_refreshlook(bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,AREA_WOS);
+ 	if(vd->body_style)
+@@ -5083,6 +5088,8 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
+ 		clif_set_unit_idle( bl, false, SELF, &sd->bl );
+ 	}
+ 
++	if (ud->body_size)
++		clif_body_size(bl, ud->body_size);
+ 	if (vd->cloth_color)
+ 		clif_refreshlook(&sd->bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,SELF);
+ 	if (vd->body_style)
+@@ -6547,6 +6554,16 @@ void clif_status_change_sub(struct block_list *bl, int id, int type, int flag, t
+ 	clif_send(buf, packet_len(WBUFW(buf,0)), bl, target_type);
+ }
+ 
++void clif_body_size(struct block_list *bl, int val1) {
++	map_session_data *sd = NULL;
++
++	nullpo_retv(bl);
++
++	sd = BL_CAST(BL_PC, bl);
++
++	clif_status_change_sub(bl, bl->id, 1421, 1, 9999, val1, 0, 0, ((sd ? (pc_isinvisible(sd) ? SELF : AREA) : AREA_WOS)));
++}
++
+ /* Sends status effect to clients around the bl
+  * @param bl Object that has the effect
+  * @param type Status icon see enum efst_type
+diff --git a/src/map/clif.hpp b/src/map/clif.hpp
+index 1bf10b262..19e5cb2ef 100644
+--- a/src/map/clif.hpp
++++ b/src/map/clif.hpp
+@@ -1253,4 +1253,7 @@ void clif_macro_reporter_status(map_session_data &sd, e_macro_report_status styp
+ 
+ void clif_dynamicnpc_result( map_session_data& sd, e_dynamicnpc_result result );
+ 
++// Body Size Controller
++void clif_body_size(struct block_list* bl, int val1);
++
+ #endif /* CLIF_HPP */
+diff --git a/src/map/script.cpp b/src/map/script.cpp
+index 027587945..3c8ae4639 100644
+--- a/src/map/script.cpp
++++ b/src/map/script.cpp
+@@ -18748,6 +18748,7 @@ BUILDIN_FUNC(getunitdata)
+ 			getunitdata_sub(UMOB_ATKMAX, md->status.rhw.atk2);
+ 			getunitdata_sub(UMOB_MATKMIN, md->status.matk_min);
+ 			getunitdata_sub(UMOB_MATKMAX, md->status.matk_max);
++			getunitdata_sub(UMOB_MATK, md->status.rhw.matk);
+ 			getunitdata_sub(UMOB_DEF, md->status.def);
+ 			getunitdata_sub(UMOB_MDEF, md->status.mdef);
+ 			getunitdata_sub(UMOB_HIT, md->status.hit);
+@@ -19144,6 +19145,7 @@ BUILDIN_FUNC(setunitdata)
+ 			case UMOB_ATKMAX: md->base_status->rhw.atk2 = (unsigned short)value; calc_status = true; break;
+ 			case UMOB_MATKMIN: md->base_status->matk_min = (unsigned short)value; calc_status = true; break;
+ 			case UMOB_MATKMAX: md->base_status->matk_max = (unsigned short)value; calc_status = true; break;
++			case UMOB_MATK: md->base_status->rhw.matk = (unsigned short)value; calc_status = true; break;
+ 			case UMOB_DEF: md->base_status->def = (defType)value; calc_status = true; break;
+ 			case UMOB_MDEF: md->base_status->mdef = (defType)value; calc_status = true; break;
+ 			case UMOB_HIT: md->base_status->hit = (short)value; calc_status = true; break;
+@@ -19176,6 +19178,13 @@ BUILDIN_FUNC(setunitdata)
+ 			case UMOB_RES: md->base_status->res = (short)value; calc_status = true; break;
+ 			case UMOB_MRES: md->base_status->mres = (short)value; calc_status = true; break;
+ 			case UMOB_DAMAGETAKEN: md->damagetaken = (unsigned short)value; break;
++			case UMOB_BODYSIZE: {
++				struct unit_data* ud = unit_bl2ud(bl);
++				ud->body_size = cap_value(value, 1, 255);	// 100 = normal size
++
++				clif_body_size(bl, ud->body_size);
++				break;
++			}
+ 			default:
+ 				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_MOB.\n", type);
+ 				return SCRIPT_CMD_FAILURE;
+@@ -19483,6 +19492,13 @@ BUILDIN_FUNC(setunitdata)
+ 			case UNPC_BODY2: clif_changelook(bl, LOOK_BODY2, (unsigned short)value); break;
+ 			case UNPC_DEADSIT: nd->vd.dead_sit = (char)value; unit_refresh(bl); break;
+ 			case UNPC_GROUP_ID: nd->ud.group_id = value; unit_refresh(bl); break;
++			case UNPC_BODYSIZE: {
++				struct unit_data* ud = unit_bl2ud(bl);
++				ud->body_size = value;
++
++				clif_body_size(bl, ud->body_size);
++				break;
++			}
+ 			default:
+ 				ShowError("buildin_setunitdata: Unknown data identifier %d for BL_NPC.\n", type);
+ 				return SCRIPT_CMD_FAILURE;
+diff --git a/src/map/script.hpp b/src/map/script.hpp
+index 818f8d8ae..75d4dd2ab 100644
+--- a/src/map/script.hpp
++++ b/src/map/script.hpp
+@@ -496,6 +496,8 @@ enum unitdata_mobtypes {
+ 	UMOB_RES,
+ 	UMOB_MRES,
+ 	UMOB_DAMAGETAKEN,
++	UMOB_BODYSIZE,
++	UMOB_MATK,
+ };
+ 
+ enum unitdata_homuntypes {
+@@ -714,6 +716,7 @@ enum unitdata_npctypes {
+ 	UNPC_BODY2,
+ 	UNPC_DEADSIT,
+ 	UNPC_GROUP_ID,
++	UNPC_BODYSIZE,
+ };
+ 
+ enum navigation_service {
+diff --git a/src/map/script_constants.hpp b/src/map/script_constants.hpp
+index 72685b2bf..fd402ee9a 100644
+--- a/src/map/script_constants.hpp
++++ b/src/map/script_constants.hpp
+@@ -4798,6 +4798,7 @@
+ 	export_constant(UMOB_ATKMAX);
+ 	export_constant(UMOB_MATKMIN);
+ 	export_constant(UMOB_MATKMAX);
++	export_constant(UMOB_MATK);
+ 	export_constant(UMOB_DEF);
+ 	export_constant(UMOB_MDEF);
+ 	export_constant(UMOB_HIT);
+@@ -4818,6 +4819,7 @@
+ 	export_constant(UMOB_RES);
+ 	export_constant(UMOB_MRES);
+ 	export_constant(UMOB_DAMAGETAKEN);
++	export_constant(UMOB_BODYSIZE);
+ 
+ 	/* unit control - homunculus */
+ 	export_constant(UHOM_SIZE);
+@@ -5032,6 +5034,7 @@
+ 	export_constant(UNPC_BODY2);
+ 	export_constant(UNPC_DEADSIT);
+ 	export_constant(UNPC_GROUP_ID);
++	export_constant(UNPC_BODYSIZE);
+ 
+ 	export_constant(NAV_NONE);
+ 	export_constant(NAV_AIRSHIP_ONLY);
+diff --git a/src/map/status.cpp b/src/map/status.cpp
+index 13aa873ec..d053138de 100644
+--- a/src/map/status.cpp
++++ b/src/map/status.cpp
+@@ -5682,6 +5682,10 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
+ 			status->watk2 = status_calc_watk(bl, sc, b_status->watk2);
+ 		}
+ 		else status->watk = status_calc_watk(bl, sc, b_status->watk);
++
++		// Monsters still use these in renewal so they are necessary
++		status->rhw.atk = status_calc_watk(bl, sc, b_status->rhw.atk);
++		status->rhw.atk2 = status_calc_watk(bl, sc, b_status->rhw.atk2);
+ #endif
+ 	}
+ 
+@@ -5837,6 +5841,10 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
+ 	* if(flag[SCB_RANGE])
+ 	**/
+ 
++	if (flag[SCB_RANGE]) {
++		status->rhw.range = b_status->rhw.range;
++	}
++
+ 	if(flag[SCB_MAXHP]) {
+ 		if( bl->type&BL_PC ) {
+ 			status->max_hp = status_calc_maxhpsp_pc(sd,status->vit,true);
+@@ -5888,6 +5896,8 @@ void status_calc_bl_main(struct block_list *bl, std::bitset<SCB_MAX> flag)
+ 		 * MATK = (sMATK + wMATK + eMATK) * Multiplicative Modifiers
+ 		 **/
+ 		int lv = status_get_lv(bl);
++		// We are using status instead of base_status to include INT changes, but base MATK isn't yet in status so copy it.
++		status->rhw.matk = b_status->rhw.matk;
+ 		status->matk_min = status_base_matk_min(bl, status, lv);
+ 		status->matk_max = status_base_matk_max(bl, status, lv);
+ 
+diff --git a/src/map/unit.hpp b/src/map/unit.hpp
+index cfd932615..22a8db352 100644
+--- a/src/map/unit.hpp
++++ b/src/map/unit.hpp
+@@ -46,6 +46,7 @@ struct unit_data {
+ 	uint8 dir;
+ 	unsigned char walk_count;
+ 	unsigned char target_count;
++	uint8 body_size;
+ 	struct s_udState {
+ 		unsigned change_walk_target : 1 ;
+ 		unsigned skillcastcancel : 1 ;
+-- 
+2.25.0.windows.1
+

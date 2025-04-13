@@ -15,48 +15,47 @@
 //= 1.6 Added Illusion of Underwater exchange [Capuche]
 //= 1.7 Added Illusion of Twins enchanter [Capuche]
 //= 1.8 Added Illusion Merchant [Haydrich]
-//= 1.9 Added Illusion of Teddy Bear exchange [Atemo]
 //============================================================
 
 //============================================================
 //= Illusion of Moonlight
 //============================================================
-pay_d03_i,160,45,3	script	Gemcutter#ilp20	4_TOWER_17,3,3,{
-	mes "[ Gemcutter ]";
-	mes "Do you have business with me?";
+pay_d03_i,160,45,3	script	보석세공사::Gemcutter#ilp20	4_TOWER_17,3,3,{
+	mes "[보석세공사]";
+	mes "나랑 볼 일 있어?";
 	next;
-	switch( select( "What are you doing here?", "Upgrade equipments" ) ) {
+	switch( select( "여기서 뭐해?", "장비 업그레이드" ) ) {
 	case 1:
-		mes "[ Gemcutter ]";
-		mes "I came to the ruined village,";
-		mes "looking for some materials. Touched some strange light, and now I'm here.";
+		mes "[보석세공사]";
+		mes "폐허가 된 마을에 왔습니다.";
+		mes "재료를 찾고 있어요. 이상한 빛에 닿아서 지금 여기 있어요.";
 		next;
-		mes "[ Gemcutter ]";
-		mes "I've decided to stick around for a little while. Figured I'd be safe so long as I stay close to this soldier.";
-		mes "I have a proposition for you. I want some materials that can only be found in this place.";
+		mes "[보석세공사]";
+		mes "저는 잠시 머물기로 했어요. 이 병사 옆에 있으면 안전할 거라 생각했어요.";
+		mes "당신에게 제안할 게 있어요. 이곳에서만 구할 수 있는 재료를 좀 갖고 싶어요.";
 		next;
-		mes "[ Gemcutter ]";
-		mes "Get them for me, and I'll improve your equipment in exchange. Just so you know, I can only improve certain types.";
+		mes "[보석세공사]";
+		mes "그걸 구해 주시면 장비를 개선해 드리겠습니다. 아시다시피 저는 특정 유형의 장비만 개선할 수 있습니다.";
 		next;
-		mes "[ Gemcutter ]";
-		mes "If you're interested, we can discuss the details of our bargain.";
+		mes "[보석세공사]";
+		mes "관심이 있으시면 거래 세부사항에 대해 논의해보겠습니다.";
 		close;
 	case 2:
-		mes "[ Gemcutter ]";
-		mes "Make sure ^0000FFyour equipment is refined to at least +9^000000 before bringing it to me.";
-		mes "That's the minimum requirement for my upgrade service to have any visible effects on your equipment.";
+		mes "[보석세공사]";
+		mes "장비를 가져오기 전에 ^0000FF장비가 9^000000 이상으로 정제되었는지 확인하세요.";
+		mes "이것이 귀하의 장비에 눈에 띄는 영향을 미치기 위한 업그레이드 서비스의 최소 요구 사항입니다.";
 		next;
-		mes "[ Gemcutter ]";
-		mes "Make sure you're ^0000FFequipped with the item that you want to improve.^000000";
-		mes "Otherwise, I can't evaluate its condition.";
+		mes "[보석세공사]";
+		mes "^0000FF개선하고 싶은 아이템이 장착되어 있는지 확인하세요.^000000";
+		mes "그렇지 않으면 상태를 평가할 수 없습니다.";
 		next;
-		mes "[ Gemcutter ]";
-		mes "As you may have guessed, your equipment will transform into something new after this.";
-		mes "In other words, ^0000FFIt'll lose its current refining levels, cards and enchantments.^000000";
+		mes "[보석세공사]";
+		mes "예상하셨겠지만 이 이후에는 장비가 새로운 것으로 변신할 것입니다.";
+		mes "즉, ^0000FF현재의 제련도, 카드, 마법부여를 잃게 됩니다.^000000";
 		next;
-		mes "[ Gemcutter ]";
-		mes "And I need ^0000FFIllusion Stones and some other materials^000000 to upgrade your equipment.";
-		mes "Pick an item you want and I'll tell you what I need.";
+		mes "[보석세공사]";
+		mes "그리고 장비를 업그레이드하려면 ^0000FF환상석과 기타 재료^000000가 필요합니다.";
+		mes "원하는 물건을 선택하시면 필요한 물건을 알려드리겠습니다.";
 		close2;
 		callshop( "barter_ill_moonlight" );
 		end;
@@ -65,7 +64,7 @@ pay_d03_i,160,45,3	script	Gemcutter#ilp20	4_TOWER_17,3,3,{
 
 OnTouch:
 	if (illusion_moonlight > 7)
-		npctalk "What kind of place is this?", "", bc_self;
+		npctalk "이곳은 어떤 곳인가요?", "", bc_self;
 	end;
 }
 
@@ -73,104 +72,104 @@ OnTouch:
 //============================================================
 //= Illusion of Vampire
 //============================================================
-gef_dun01,139,228,3	script	Great Merchant#illgef	4_M_HUMERCHANT,{
-	mes "[Great Merchant]";
-	mes "Adventurer, do you have ^0000cdIllusion Stones^000000? If you have a ^0000cdweapon, a piece armor^000000, or ^0000cdan accessory at Refining Level 9 or higher^000000, ";
-	mes "then I can exchange it for something better at the cost of some Illusion Stones and other materials.";
+gef_dun01,139,228,3	script	대상인::Great Merchant#illgef	4_M_HUMERCHANT,{
+	mes "[대상인]";
+	mes "모험가님, ^0000cd환상석^000000 가지고 계시나요? ^0000cd무기, 조각 방어구^000000, 제련 9레벨 이상 ^0000cdan 악세사리^000000를 가지고 계시다면,";
+	mes "그럼 일루젼스톤이나 다른 재료를 좀 더 주고 더 좋은 것으로 교환할 수 있겠네요.";
 	next;
-	mes "[Great Merchant]";
-	mes "So, what do you want?";
+	mes "[대상인]";
+	mes "그럼 뭘 원하세요?";
 	next;
-	switch( select( "Exchange illusion equipment", "What are Illusion Stones?", "Can I strengthen the exchanged item?", "Cancel" ) ) {
+	switch( select( "환상 장비 교환", "환상석이 무엇인가요?", "교환한 아이템을 강화할 수 있나요?", "취소" ) ) {
 	case 1:
 		specialeffect EF_HFLIMOON3;
 		emotion ET_BEST;
-		mes "[Great Merchant]";
-		mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
+		mes "[대상인]";
+		mes "잘 사용하시고 나중에 일루젼스톤 더 찾으면 저한테 놀러오세요! *웃음*";
 		close2;
 		callshop( "barter_ill_vampire" );
 		end;
 	case 2:
-		mes "[Great Merchant]";
-		mes "What are ^0000cdIllusion Stones^000000, you ask? Well... I don't think anyone knows exactly what they are.";
+		mes "[대상인]";
+		mes "^0000cdIllusion Stones^000000이 무엇인지 물어보시나요? 음... 그게 뭔지 정확히 아는 사람은 없는 것 같아요.";
 		next;
-		mes "[Great Merchant]";
-		mes "I only know they're rare and can only be found in some special places, and I'm here to collect them for my clients.";
+		mes "[대상인]";
+		mes "저는 그것들이 희귀하고 특별한 장소에서만 발견될 수 있다는 것만 알고 있습니다. 그래서 저는 제 고객을 위해 그것들을 수집하기 위해 여기에 있습니다.";
 		next;
-		mes "[Great Merchant]";
-		mes "My clients want to figure out what these stones are. They're paying me a lot of money,";
+		mes "[대상인]";
+		mes "내 고객은 이 돌이 무엇인지 알고 싶어합니다. 그들은 나에게 많은 돈을 지불하고 있습니다.";
 		next;
-		mes "[Great Merchant]";
-		mes "so I could offer adventurers like you ^0000cdexpensive equipment in exchange for the stones^000000, and still fetch a profit.";
+		mes "[대상인]";
+		mes "그래서 당신 같은 모험가들에게 ^0000c돌^000000과 교환하여 비싼 장비를 제공하고 여전히 이익을 얻을 수 있습니다.";
 		next;
-		mes "[Great Merchant]";
-		mes "Bring ^0000cda piece of refined equipment, Illusion Stones^000000, and various materials that are only found in this place. I'll ^0000cdupgrade the equipment, weapon, armor, or accessory?^000000for you.";
+		mes "[대상인]";
+		mes "^0000cda제련된 장비와 일루전스톤^000000, 이 곳에서만 구할 수 있는 다양한 재료를 가져오세요. ^0000cd장비, 무기, 방어구, 장신구를 업그레이드해드릴까요?^000000";
 		next;
-		mes "[Great Merchant]";
-		mes "This benefits both of us. Let me know if you're interested in my proposition.";
+		mes "[대상인]";
+		mes "이것은 우리 모두에게 이익이 됩니다. 제 제안에 관심이 있으시면 알려주세요.";
 		close;
 	case 3:
-		mes "[Great Merchant]";
-		mes "So, you want to reinforce the equipment you get. You're thorough. I like that!";
+		mes "[대상인]";
+		mes "그러니까, 얻은 장비를 강화하고 싶다는 거군요. 꼼꼼하시네요. 마음에 드네요!";
 		next;
-		mes "[Great Merchant]";
-		mes "A while ago, an adventurer who passed through this place told me that a chemist in Prontera refines the Illusion equipment in exchange for Illusion Stones.";
+		mes "[대상인]";
+		mes "얼마 전 이 곳을 지나던 모험가님이 프론테라의 화학자가 일루젼 스톤을 주고 일루젼 장비를 정제해준다고 하더군요.";
 		next;
-		mes "[Great Merchant]";
-		mes "It seems Illusion Stones are a popular topic everywhere. Everyone wants to know about what they are.";
+		mes "[대상인]";
+		mes "환상의 돌는 어디에서나 인기 있는 주제인 것 같습니다. 모두가 자신이 무엇인지 알고 싶어합니다.";
 		next;
-		mes "[Great Merchant]";
-		mes "If you want to refine your equipment, then go to the <NAVI>Illusion Enchanter<INFO>prontera,90,115,000,0,</INFO></NAVI> near the Town Office.";
+		mes "[대상인]";
+		mes "장비를 개선하고 싶다면<NAVI>환상 인챈터<INFO>prontera,90,115,000,0,</INFO></NAVI> 구청 근처.";
 		close;
 	case 4:
-		mes "[Great Merchant]";
-		mes "Did you find anything you liked? If you need anything, please let me know at any time.";
+		mes "[대상인]";
+		mes "마음에 드는 것을 찾으셨나요? 필요하신 사항이 있으시면 언제든지 말씀해주세요.";
 		close;
 	}
 	end;
 }
 
 //============================================================
-//= Illusion of Frozen
+//= 겨울왕국의 환상
 //============================================================
 
 // illusion exchange npc - trade items for illusion gears
-ice_dun02,153,18,3	script	Illusion Stone Research	4_M_ALCHE_B,{
+ice_dun02,153,18,3	script	환상석 연구가::Illusion Stone Research	4_M_ALCHE_B,{
 	disable_items;
-	mes "[Illusion Stone Researcher]";
-	mes "Ah, Illusion Stones are truly mysterious...";
+	mes "[환상석 연구가]";
+	mes "아, 일루젼스톤은 정말 신비롭네요...";
 	next;
-	switch( select( "What are you doing here?", "Upgrade equipments", "Cancel" ) ) {
+	switch( select( "여기서 뭐해?", "장비 업그레이드", "취소" ) ) {
 	case 1:
-		mes "[Illusion Stone Researcher]";
-		mes "I'm here to find some Illusion Stones that I need for my research.";
+		mes "[환상석 연구가]";
+		mes "연구에 필요한 일루젼스톤을 찾으러 왔습니다.";
 		next;
-		mes "[Illusion Stone Researcher]";
-		mes "This cave is very mysterious, but I'm not strong enough to explore it by myself.";
-		mes "If you go in there, could you procure some things for me?";
+		mes "[환상석 연구가]";
+		mes "이 동굴은 정말 신비롭습니다. 하지만 저는 혼자서 탐험할 만큼 강하지 않습니다.";
+		mes "그곳에 가면 물건 좀 구해 주실 수 있나요?";
 		next;
-		mes "[Illusion Stone Researcher]";
-		mes "In exchange, I'll improve your equipment.";
-		mes "What do you say?";
+		mes "[환상석 연구가]";
+		mes "그 대가로 당신의 장비를 개선해 드리겠습니다.";
+		mes "무슨 소리야?";
 		close;
 	case 2:
-		mes "[Illusion Stone Researcher]";
-		mes "Make sure ^4d4dffyour equipment is refined to at least +9^000000 before bringing it to me.";
-		mes "Make sure you're ^4d4dffequipped with the item that you want to improve^000000.";
+		mes "[환상석 연구가]";
+		mes "^4d4dff장비를 나에게 가져오기 전에 최소 9^000000까지 정제되었는지 확인하세요.";
+		mes "^4d4dff개선하고 싶은 아이템이 장착되어 있는지 확인하세요^000000.";
 		next;
-		mes "[Illusion Stone Researcher]";
-		mes "As you may have guessed, your equipment will transform into something new after this.";
-		mes "In other words, ^4d4dffit'll lose its current Refining and Upgrade levels.^000000";
+		mes "[환상석 연구가]";
+		mes "예상하셨겠지만 이 이후에는 장비가 새로운 것으로 변신할 것입니다.";
+		mes "즉, ^4d4dffit는 현재의 정제 및 업그레이드 레벨을 잃게 됩니다.^000000";
 		next;
-		mes "[Illusion Stone Researcher]";
-		mes "And I need ^4d4dffIllusion Stones and some other materials^000000 to upgrade your equipment.";
-		mes "Pick an item you want. I'll tell you what I need.";
+		mes "[환상석 연구가]";
+		mes "그리고 장비를 업그레이드하려면 ^4d4dff환영석과 기타 재료^000000가 필요합니다.";
+		mes "원하는 물건을 선택하세요. 필요한 것을 알려드리겠습니다.";
 		close2;
 		callshop( "barter_ill_frozen" );
 		end;
 	case 3:
-		mes "[Illusion Stone Researcher]";
-		mes "It's just hard to get..";
+		mes "[환상석 연구가]";
+		mes "구하기가 힘들어요..";
 		close;
 	}
 	end;
@@ -179,81 +178,81 @@ ice_dun02,153,18,3	script	Illusion Stone Research	4_M_ALCHE_B,{
 
 // illusion enhancing - enhance the illusion gears
 // note: unknown enhance rate
-prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
+prontera,90,115,5	script	환상의 강화사::Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
-		mes "I'm overweight. I'd better lighten my bag first.";
+		mes "나는 과체중이다. 우선 가방을 가볍게 하는 게 좋겠어요.";
 		close;
 	}
 	disable_items;
 	if (isbegin_quest(12415) == 0) {
-		mes "[Illusion Enchanter]";
-		mes "Oh, do you have Illusion equipment?";
+		mes "[환상의 강화사]";
+		mes "아, 일루젼 장비도 있나요?";
 		next;
-		select("No. I don't even know what Illusion equipment is.");
-		mes "[Illusion Enchanter]";
-		mes "Oops, I'm sorry. I should've introduced myself first.";
+		select("아뇨. 일루젼 장비가 뭔지도 모르겠어요.");
+		mes "[환상의 강화사]";
+		mes "아 죄송해요. 자기소개를 먼저 했어야 했는데.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "I'm a chemist specializing in the study of Illusion Stones, which have been circulating among adventurers.";
+		mes "[환상의 강화사]";
+		mes "저는 모험가들 사이에 유통되고 있는 환영석 연구를 전문으로 하는 화학자입니다.";
 		next;
-		select("Illusion Stones?");
-		mes "[Illusion Enchanter]";
-		mes "You don't know, don't you? They're the hottest trend these days.";
+		select("일루젼스톤?");
+		mes "[환상의 강화사]";
+		mes "당신은 모르지, 그렇지? 요즘 가장 핫한 트렌드죠.";
 		next;
-		select("I don't care about trends.");
-		mes "[Illusion Enchanter]";
-		mes "You must have heard about the strange places that have sprung up here and there lately. Illusion Stones are only found in those places,";
+		select("나는 트렌드에 관심이 없습니다.");
+		mes "[환상의 강화사]";
+		mes "최근 여기저기서 이상한 곳들이 생겨났다는 이야기를 들어보셨을 텐데요. 일루젼 스톤은 그 곳에서만 발견됩니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "and their atomic structure is unlike any mineral I've seen. *Blah Blah* ...Their chemical chains... *Blah Blah*";
+		mes "[환상의 강화사]";
+		mes "그리고 그 원자 구조는 내가 본 어떤 광물과도 다릅니다. *어쩌고* ...그들의 화학적 사슬이... *어쩌고*";
 		next;
-		select("(Uh-oh, he's zoning out!)");
-		mes "[Illusion Enchanter]";
-		mes "Anyway, I can enchant equipment that is exchanged for or purchased with Illusion Stones. I call them the Illusion equipment.";
+		select("(어-오, 그는 멍하니 있다!)");
+		mes "[환상의 강화사]";
+		mes "아무튼 일루젼스톤으로 교환하거나 구매한 장비에 인챈트를 할 수 있습니다. 일루젼장비라고 부릅니다.";
 		next;
-		select("(He has no sense when it comes to names.)");
-		mes "[Illusion Enchanter]";
-		mes "This equipment at least responds positively to Illusion Stones, or it has the potential to be enchanted successfully.";
+		select("(그는 이름에 관해서는 감각이 없습니다.)");
+		mes "[환상의 강화사]";
+		mes "이 장비는 최소한 환영석에 긍정적인 반응을 보이거나 마법부여에 성공할 가능성이 있습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "Explore the worlds of illusions, collect Illusion Stones, and exchange them for equipment. I can enchant the equipment for you.";
+		mes "[환상의 강화사]";
+		mes "환상의 세계를 탐험하고 환상석을 모아 장비와 교환해 보세요. 장비에 마법을 부여해드릴 수 있습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "This benefits both of us. I need Illusion Stones for my studies, and you need powerful equipment for your adventures.";
+		mes "[환상의 강화사]";
+		mes "이것은 우리 모두에게 이익이 됩니다. 나는 공부를 위해 일루전 스톤이 필요하고, 모험을 위해서는 강력한 장비가 필요합니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "That said, my service is not for free. It requires a few Illusion Stones and Zeny.";
+		mes "[환상의 강화사]";
+		mes "그렇지만 제 서비스는 무료가 아닙니다. 일루젼스톤과 제니가 필요합니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "If you're interested, how'd you like to get a membership for my service? You can get discounts that way!";
+		mes "[환상의 강화사]";
+		mes "관심이 있으시다면 제 서비스에 회원가입을 어떻게 하시겠습니까? 회원가입을 하면 할인을 받으실 수 있습니다!";
 		next;
-		if (select( "Sure!", "Not interested." ) == 2) {
-			mes "[Illusion Enchanter]";
-			mes "Okay, but let me know if you change your mind.";
+		if (select( "물론이죠!", "관심 없어요." ) == 2) {
+			mes "[환상의 강화사]";
+			mes "알겠습니다. 하지만 마음이 바뀌면 알려주세요.";
 			close;
 		}
-		mes "[Illusion Enchanter]";
-		mes "Alright, then I'll add you to my member list. I hope you'll have some Illusion equipment next time I see you.";
+		mes "[환상의 강화사]";
+		mes "알겠습니다. 그러면 회원 목록에 추가하겠습니다. 다음에 만날 때 일루젼 장비를 갖고 계셨으면 좋겠습니다.";
 		setquest 12415;
 		completequest 12415;
 		close;
 	}
-	mes "[Illusion Enchanter]";
-	mes "I can enchant Illusion equipment.";
+	mes "[환상의 강화사]";
+	mes "일루젼 장비에 마법을 부여할 수 있습니다.";
 	next;
-	switch( select( "How much do you charge?", "Add stats to Illusion equipment.", "Reset enchanted Illusion equipment." ) ) {
+	switch( select( "얼마나 충전되나요?", "환상 장비에 능력치를 추가합니다.", "인챈트된 환상 장비를 초기화합니다.") ) {
 	case 1:
-		mes "[Illusion Enchanter]";
-		mes "First, let me tell you that I can only enchant certain types of Illusion equipment.";
+		mes "[환상의 강화사]";
+		mes "우선, 특정 종류의 환상 장비에만 마법을 부여할 수 있다는 점을 말씀드리고 싶습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "Up to 2 sockets can be enchanted, and enchanting each socket requires 5 Illusion Stones. You can reset enchanted Illusion equipment at any time.";
+		mes "[환상의 강화사]";
+		mes "인챈트는 최대 2개까지 가능하며, 각 소켓에 일루전스톤 5개가 필요합니다. 인챈트된 일루젼 장비는 언제든지 초기화할 수 있습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "Enchanting never fails, but resetting sometimes failes. Even modern science can't change that.";
+		mes "[환상의 강화사]";
+		mes "인챈트는 절대로 실패하지 않지만, 초기화는 가끔 실패합니다. 현대 과학도 그것을 바꿀 수는 없습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "Resetting requires a different amount of Zeny depending on the success chance you choose. Select the menu if you'd like to see the available payment options.";
+		mes "[환상의 강화사]";
+		mes "초기화에는 선택한 성공 확률에 따라 다른 금액의 Zeny가 필요합니다. 사용 가능한 결제 옵션을 보려면 메뉴를 선택하세요.";
 		close;
 	case 2:
 		.@reset = false;
@@ -263,7 +262,7 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 		break;
 	}
 	setarray .@location[0], EQI_HAND_R, EQI_ARMOR, EQI_SHOES, EQI_GARMENT, EQI_ACC_R, EQI_ACC_L, EQI_HEAD_TOP, EQI_HAND_L;
-	.@s = select( "Right-handed Weapon", "Armor", "Shoes", "Garment", "Right Accessory", "Left accessory", "Helm (Upper)", "Left-handed Weapon/Shield" ) - 1;
+	.@s = select( "오른 손잡이 무기", "방어구", "신발", "복장", "오른쪽 장신구", "왼쪽 장신구", "투구(상단)", "왼손 무기/방패" ) - 1;
 	.@loc = .@location[.@s];
 	.@eq_id = getequipid(.@loc);
 
@@ -351,18 +350,18 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 		case 490070:	// Morrigane's_Pendant_IL
 			break;
 		case -1:
-			mes "[Illusion Enchanter]";
-			mes "You must be equipped with an item in the selected location to have it enchanted.";
+			mes "[환상의 강화사]";
+			mes "마법을 부여하려면 선택한 위치에 아이템을 장착해야 합니다.";
 			close;
 		default:
-			mes "[Illusion Enchanter]";
-			mes "This equipment is not from a world of fantastic illusions. I'm offended that you even showed it to me.";
+			mes "[환상의 강화사]";
+			mes "이 장비는 환상적인 환상의 세계에서 나온 것이 아닙니다. 나한테까지 보여줬다니 속상하다.";
 			close;
 	}
 
 	for ( .@i = 0; .@i < MAX_ITEM_RDM_OPT-1; ++.@i ) {
 		if (getequiprandomoption(.@loc, .@i, ROA_ID) > 0) {
-			mes "^ff0000Random options are checked for that equipment. The equipment cannot be enchanted.^000000";
+			mes "^ff0000해당 장비에 대해 무작위 옵션이 확인됩니다. 장비에 마법을 부여할 수 없습니다..^000000";
 			close;
 		}
 	}
@@ -380,14 +379,14 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 			.@loc_enchant = EQI_HAND_R;	// the equipment is a weapon so the enchantments must be for weapons
 		break;
 	default:	// illusion weapon level 4 can't be enhanced
-		mes "[Illusion Enchanter]";
-		mes "This is the best of all Illusion equipment. There's no technology available in this day and age that can enchant it. Even the most skilled enchanter can't do that.";
+		mes "[환상의 강화사]";
+		mes "이것은 Illusion 장비 중 최고입니다. 요즘 시대에는 그것을 매혹시킬 수 있는 기술이 없습니다. 가장 숙련된 마법부여사라도 그런 일은 할 수 없습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "Well, not unless he's willing to risk his mental and physical health.";
+		mes "[환상의 강화사]";
+		mes "글쎄, 그가 정신적, 육체적 건강을 위험에 빠뜨리려는 의지가 없다면 그렇지 않습니다.";
 		next;
-		mes "[Illusion Enchanter]";
-		mes "But who knows? Maybe someday you'll meet someone who is talented enough to handle this precious equipment.";
+		mes "[환상의 강화사]";
+		mes "하지만 누가 알겠어요? 어쩌면 언젠가 당신은 이 귀중한 장비를 다룰 만큼 재능이 있는 사람을 만나게 될 것입니다.";
 		close;
 	}
 
@@ -403,17 +402,17 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 		.@item_req_count = 5;
 
 		if (.@card[2] > 0 && .@card[3] > 0) {
-			mes "[Illusion Enchanter]";
-			mes "This equipment is already enchanted to the maximum limit.";
+			mes "[환상의 강화사]";
+			mes "이 장비는 이미 최대 한도까지 마법이 부여되어 있습니다.";
 			close;
 		}
 		if (.@weapon_lvl > 0) {
-			mes "[Illusion Enchanter]";
-			mes "What kind of effect would you like to add?";
+			mes "[환상의 강화사]";
+			mes "어떤 효과를 추가하고 싶으신가요?";
 			next;
-			.@weapon_enchant_type = select( "Melee", "Ranged", "Magic" );
+			.@weapon_enchant_type = select("근접", "원거리", "마법" );
 		}
-		mes "[Illusion Enchanter]";
+		mes "[환상의 강화사]";
 		if (.@card[3] > 0) {
 			.@slot = 2;
 			.@string$ = "second";
@@ -422,16 +421,16 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 			.@slot = 3;
 			.@string$ = "first";
 		}
-		mes "I'll try to enchant the " + .@string$ + " ability for your item. ^ff0000Its existing Refining level and cards will not be damaged. It will not be destroyed, even if this attempt fails.^000000 Do you want to continue?";
+		mes "귀하의 아이템에 " + .@string$ + " 능력을 부여해 보겠습니다. ^ff0000기존 제련 레벨과 카드는 손상되지 않습니다. 이 시도가 실패하더라도 파괴되지 않습니다.^000000 계속하시겠습니까?";
 		next;
-		if (select( "I'll come back later.", "Sure!" ) == 1) {
-			mes "[Illusion Enchanter]";
-			mes "No problem. Come back if you change your mind.";
+		if (select( "나중에 또 올게요.", "그럼요!" ) == 1) {
+			mes "[환상의 강화사]";
+			mes "괜찮아요. 마음이 바뀌면 다시 오세요.";
 			close;
 		}
 		if (countitem(.@item_req) < .@item_req_count) {
-			mes "[Illusion Enchanter]";
-			mes "This item requires " + .@item_req_count + " " + getitemname(.@item_req) + ", and you don't have all that I need from you.";
+			mes "[환상의 강화사]";
+			mes "이 항목에는 " + .@item_req_count + " " + getitemname(.@item_req) + "가 필요하지만 제가 필요한 모든 항목이 귀하에게 없습니다.";
 			close;
 		}
 
@@ -443,32 +442,32 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 		delitem .@item_req, .@item_req_count;
 		delequip .@loc;
 		getitem2 .@eq_id,1,1,.@refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
-		mes "[Illusion Enchanter]";
-		mes "It's done. Please check.";
+		mes "[환상의 강화사]";
+		mes "끝났다. 확인해주십시오.";
 		specialeffect2 EF_REPAIRWEAPON;
 		close;
 
 	case true:
 		if (!F_IsCharm(.@card[2]) || !F_IsCharm(.@card[3])) {
-			mes "[Illusion Enchanter]";
-			mes "Only fully enchanted items can be reset. Please enchant it twice, and if you still want to reset it, then bring it to me.";
+			mes "[환상의 강화사]";
+			mes "인챈트가 완전히 적용된 아이템만 초기화가 가능합니다. 두번 인챈트를 해주시고, 그래도 초기화를 원하시면 가져오세요.";
 			close;
 		}
-		mes "[Illusion Enchanter]";
-		mes "Your resetting chance varies, depending on the amount of Zeny you pay. What would you like to do?";
+		mes "[환상의 강화사]";
+		mes "지불한 Zeny 금액에 따라 초기화 확률이 달라집니다. 어떻게 하시겠습니까?";
 		next;
-		.@s = select( "I'll come back later.", "100,000 Zeny (50%)", "200,000 Zeny (60%)", "300,000 Zeny (70%)", "400,000 Zeny (80%)", "500,000 Zeny (90%)" ) - 1;
+		.@s = select( "나중에 또 올게요.", "10만제니(50%)", "20만제니(60%)", "30만제니(70%)", "40만제니(80%)", "50만제니( 90%)" ) - 1;
 		if (.@s == 0) {
-			mes "[Illusion Enchanter]";
-			mes "No problem. Come back if you change your mind.";
+			mes "[환상의 강화사]";
+			mes "문제없습니다. 마음이 바뀌면 다시 오세요.";
 			close;
 		}
 		.@cost = 100000 * .@s;
 		.@rate = 40 + 10 * .@s;
 
 		if (Zeny < .@cost) {
-			mes "[Illusion Enchanter]";
-			mes "You don't have enough money.";
+			mes "[환상의 강화사]";
+			mes "돈이 부족해요.";
 			close;
 		}
 
@@ -480,13 +479,13 @@ prontera,90,115,5	script	Illusion Enchanter#0	4_GEFFEN_09,3,3,{
 		delequip .@loc;
 		if (rand(100) < .@rate) {
 			getitem2 .@eq_id,1,1,.@refine,0,.@card[0],.@card[1],0,0;
-			mes "[Illusion Enchanter]";
-			mes "It's done. Please check.";
+			mes "[환상의 강화사]";
+			mes "완료되었습니다. 확인해주세요.";
 			specialeffect2 EF_REPAIRWEAPON;
 			close;
 		}
-		mes "[Illusion Enchanter]";
-		mes "Ah, that was unfortunate. Well, you can't always be lucky.";
+		mes "[환상의 강화사]";
+		mes "아, 아쉽네요. 항상 운이 좋을 순 없잖아요.";
 		specialeffect2 EF_LORD;
 		close;
 	}
@@ -724,46 +723,46 @@ S_Enchant:
 
 OnTouch:
 	if (isbegin_quest(12415) == 0)
-		npctalk "Illusion Enchanter: Come talk to me if you're interested in the Illusion equipment!", "", bc_self;
+		npctalk "환상 강화사: 환상 장비에 관심이 있다면 나에게 말해주세요!", "", bc_self;
 	end;
 }
 
 
 //============================================================
-//= Illusion of Turtle
+//= 거북이의 환상
 //============================================================
 
 // Exchange npc
-alberta,226,28,3	script	Equipment Researcher	4_TOWER_15,{
+alberta,226,28,3	script	장비 연구가::Equipment Researcher	4_TOWER_15,{
 	.@illusion_stone_name$ = getitemname(25271);
 
-	mes "[Equipment Researcher]";
-	mes "I'm the one who researches " + .@illusion_stone_name$ + " to enhance armors and weapons.";
-	mes "If you have the materials I need for my research, wouldn't you hand them over?";
-	mes "If you give me some equipment and some materials, I'll exchange them for my reinforced equipment.";
+	mes "[장비 연구가]";
+	mes "저는 방어구와 무기의 강화를 위해 " + .@illusion_stone_name$ + "을 연구하는 사람입니다.";
+	mes "제가 연구에 필요한 자료가 있다면 건네주시지 않겠습니까?";
+	mes "장비와 재료를 주시면 강화된 장비로 교환해 드리겠습니다.";
 	next;
-	switch( select( "What are you doing here?", "Exchange equipment" ) ) {
+	switch( select( "여기서 뭐해?", "장비 교환" ) ) {
 	case 1:
-		mes "[Equipment Researcher]";
-		mes "I'm working on how to use an " + .@illusion_stone_name$ + " to strengthen equipment.";
-		mes "I went to go to the place where " + .@illusion_stone_name$ + " was found, and I barely got back..";
+		mes "[장비 연구가]";
+		mes ""+ .@illusion_stone_name$ +"을 사용하여 장비를 강화하는 방법을 연구 중입니다.";
+		mes ""+ .@illusion_stone_name$ +"이 발견된 곳으로 갔다가 간신히 돌아왔네요..";
 		next;
-		mes "[Equipment Researcher]";
-		mes "I think I met a girl...";
-		mes "Anyway, after that, I couldn't find a way to go back.";
-		mes "Here, we're getting research materials from adventurers with " + .@illusion_stone_name$ + ", and I'm offering enhanced equipment instead.";
+		mes "[장비 연구가]";
+		mes "나 여자 만난 것 같아...";
+		mes "아무튼 그 이후에는 돌아갈 방법을 찾지 못했어요.";
+		mes "여기서는 " + .@illusion_stone_name$ + "을(를) 사용하는 모험가들로부터 연구자료를 받고, 대신 강화된 장비를 제공하고 있습니다.";
 		close;
 	case 2:
-		mes "[Equipment Researcher]";
-		mes "What are the equipment I can exchange? Wait a minute. I'll let you know.";
+		mes "[장비 연구가]";
+		mes "교환할 수 있는 장비는 무엇인가요? 잠시만 기다려주세요. 알려드리겠습니다.";
 		next;
-		mes "[Equipment Researcher]";
-		mes "As a material, you can bring ^0000CDexisting equipment that have been refined to +9 or higher.^000000";
-		mes "And I need some ^0000CD" + .@illusion_stone_name$ + " and other materials.^000000";
+		mes "[장비 연구가]";
+		mes "재료로 ^0000C9이상 제련된 기존 장비를 가져올 수 있습니다.^000000";
+		mes "그리고 ^0000CD"+ .@illusion_stone_name$ +"와 다른 재료도 필요합니다.^000000";
 		next;
-		mes "[Equipment Researcher]";
-		mes "Of course, we're giving you new equipment, so don't forget that all the existing ^0000CDsmelting and enchantments^000000 will disappear.";
-		mes "So, what kind of weapon do you want?";
+		mes "[장비 연구가]";
+		mes "물론 새로운 장비도 드리기 때문에 기존의 ^0000CD제련과 인챈트^000000는 모두 사라지게 된다는 점 잊지 마세요.";
+		mes "그럼 어떤 무기를 원하시나요?";
 		close2;
 		callshop( "barter_ill_turtle" );
 		end;
@@ -776,17 +775,18 @@ alberta,226,28,3	script	Equipment Researcher	4_TOWER_15,{
 //============================================================
 
 // Exchange npc
-com_d02_i,234,266,6	script	Village Soap#Lu	4_M_ORIENT01,{
-	mes "[Village Soap]";
-	mes "I've also rolled up my sleeves for the adventurers who work hard for the village. Can I make your equipment stronger? Is there anything on the list you want?";
+com_d02_i,234,266,6	script	마을장인 비누::Village Soap#Lu	4_M_ORIENT01,{
+	mes "[마을장인 비누]";
+	mes "마을을 위해 애쓰시는 모험가님들을 위해 저도 팔을 걷어붙였습니다. 장비를 더 강하게 만들 수 있나요?";
+	mes "목록에 원하는 것이 있나요?";
 	next;
-	if (select( "Look at the illusion equipment", "Cancel" ) == 2) {
-		mes "[Village Soap]";
-		mes "Please come later. Just bring the ingredients and I'll make it for you.";
+	if (select( "환상 장비 좀 보세요", "취소" ) == 2) {
+		mes "[마을장인 비누]";
+		mes "나중에 오세요. 재료만 가져오시면 제가 만들어 드리겠습니다.";
 		close;
 	}
-	mes "[Village Soap]";
-	mes "Who made it? It might be useful for you to take it with you.";
+	mes "[마을장인 비누]";
+	mes "누가 만들었나요? 가지고 다니시면 유용할 것 같습니다.";
 	close2;
 	callshop( "barter_ill_luanda" );
 	end;
@@ -794,47 +794,47 @@ com_d02_i,234,266,6	script	Village Soap#Lu	4_M_ORIENT01,{
 
 
 //============================================================
-//= Illusion of Underwater
+//= 수중의 환상
 //============================================================
 
-iz_d04_i,134,228,4	script	Horen#Horen	4_M_BIBI,{
+iz_d04_i,134,228,4	script	호렌::Horen#Horen	4_M_BIBI,{
 	if (checkweight(1201,3) == 0) {
-		mes "Conversation cannot proceed because you have too many items.";
-		mes "Please clean up your inventory and try again.";
+		mes "항목이 너무 많아 대화를 진행할 수 없습니다.";
+		mes "인벤토리를 정리한 후 다시 시도해 주세요.";
 		close;
 	}
-	mes "[Horen]";
-	mes "Hello. If you have rare materials from this place, I can enhance your equipment.";
+	mes "[호렌]";
+	mes "안녕하세요. 이곳에서 희귀한 재료가 있다면 장비를 강화해드릴 수 있습니다.";
 	next;
-	mes "[Horen]";
-	mes "Would you like to see upgradeable equipment?";
+	mes "[호렌]";
+	mes "업그레이드 가능한 장비를 보시겠어요?";
 	next;
-	if (select( "Yes", "No" ) == 2) {
-		mes "[Horen]";
-		mes "Come back if interested.";
+	if (select( "예", "아니요" ) == 2) {
+		mes "[호렌]";
+		mes "관심이 있으시면 다시 오세요.";
 		close;
 	}
-	mes "[Horen]";
-	mes "There are many types, so take your time. If you want something, I can enhance it right away.";
+	mes "[호렌]";
+	mes "종류가 많으니 천천히 해보세요. 원하는 것이 있으면 바로 강화해드릴 수 있습니다.";
 	close2;
 	callshop( "barter_ill_underwater" );
 	end;
 }
 
 //============================================================
-//= Illusion of Twins
+//= 쌍둥이의 환상
 //============================================================
 // ant_d02_i,175,186,3	script	From#iltw	MECHANIC,{
-ant_d02_i,175,186,3	script	From#iltw	HIDDEN_NPC,{
+ant_d02_i,175,186,3	script	프롬::From#iltw	HIDDEN_NPC,{
 	if (checkweight(1201,3) == 0) {
-		mes "- You cannot proceed with the quest because you have too many items. -";
+		mes "- 아이템이 너무 많아 퀘스트를 진행할 수 없습니다.-";
 		close;
 	}
-	mes "[From]";
-	mes "I feel like I'm going crazy.";
-	mes "It's because of my mood. I'm human and it's not like you're mistaken.";
-	mes "I'll help you if you get a lot here.";
-	mes "Do you want to enhance your equipment?";
+	mes "[프롬]";
+	mes "미칠 것 같은 느낌이 들어요.";
+	mes "기분 탓이에요. 나도 사람인데 틀린 말은 아닌 것 같다.";
+	mes "여기서 많이 얻으면 도와줄게.";
+	mes "장비를 강화하시겠습니까?";
 	close2;
 	callshop( "barter_ill_twins" );
 	end;
@@ -850,23 +850,23 @@ OnInit:
 }
 
 //============================================================
-//= Illusion Merchant
+//= 환영 상인
 //============================================================
 -	marketshop	market_resonance_stone	-1,100003:2000000:99999,100004:2000000:99999
-prontera,88,113,5	script	Illusion Merchant#0829	HIDDEN_NPC,{
-	mes "[Illusion Merchant]";
-	mes "I'm selling two random optional weapon grant scrolls that I made myself. You can choose the payment method you like.";
+prontera,88,113,5	script	환상의 상인::Illusion Merchant#0829	HIDDEN_NPC,{
+	mes "[환상의 상인]";
+	mes "제가 직접 제작한 랜덤 옵션 무기 부여 스크롤 2개를 판매합니다. 원하시는 결제수단을 선택하시면 됩니다.";
 	next;
-	switch( select( "Purchase with Zeny.", "Purchase with Illusion Stones" )) {
+	switch( select( "제니로 구매하세요.", "일루젼스톤으로 구매하세요." )) {
 		case 1:
-			mes "[Illusion Merchant]";
-			mes "I hope you like it.";
+			mes "[환상의 상인]";
+			mes "나는 그것을 좋아하면 좋겠.";
 			close2;
 			callshop "market_resonance_stone";
 			end;
 		case 2:
-			mes "[Illusion Merchant]";
-			mes "I hope you like it.";
+			mes "[환상의 상인]";
+			mes "나는 그것을 좋아하면 좋겠.";
 			close2;
 			callshop "resonance_stone_barter";
 			end;
@@ -883,55 +883,5 @@ OnInit:
 	// Restock
 	npcshopupdate "market_resonance_stone",100003,2000000,99999;
 	npcshopupdate "market_resonance_stone",100004,2000000,99999;
-	end;
-}
-
-
-//============================================================
-//= Illusion of Teddy Bear
-//============================================================
-
-ein_d02_i,177,158,3	script	Bear Wanting Illusion Stone#ITB	4_NASARIAN,{
-	.@item_name$ = getitemname(25271); // IllusionStone
-	mes "[Bear Wanting " + .@item_name$ + "]";
-	mes "If you give me an " + .@item_name$ + ", I'll do something nice for you!";
-	next;
-	switch( select( "Reason for being here", "Good thing [Illusion equipment]", "Quit" ) ) {
-	case 1:
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "I don't know why...!";
-		mes "The other teddy bears were in line, so I was in line too!";
-		mes "Whoaaaaaa!!!!";
-		mes "I didn't know it was here!";
-		next;
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "A teddy bear with an " + .@item_name$ + "!";
-		mes "Strong!";
-		mes "I don't have any " + .@item_name$ + "s!";
-		mes "Less... stronger...";
-		next;
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "What are " + .@item_name$ + "s?";
-		mes "I don't know but I want some!";
-		close;
-	case 2:
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "Makes you good with what you have!";
-		next;
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "If you want to do well, bring equipment refined to ^ff0000+9 or higher. It'll all disappear... haha?^000000";
-		next;
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "^ff0000" + .@item_name$ + "^000000!!! " + .@item_name$ + " is the most important thing, but... other materials are also needed.";
-		mes "For every good thing you need another good thing.";
-		next;
-		close2;
-		callshop( "barter_ill_teddy" );
-		end;
-	case 3:
-		mes "[Bear Wanting " + .@item_name$ + "]";
-		mes "Okay...";
-		close;
-	}
 	end;
 }

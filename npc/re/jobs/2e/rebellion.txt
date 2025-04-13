@@ -1,546 +1,546 @@
-//===== rAthena Script =======================================
-//= Rebellion Job Quest
-//===== Description: =========================================
-//= [Official Conversion]
-//= Job change Quest from Gunslinger -> Rebellion.
-//===== Changelogs: ==========================================
-//= 1.0 First version. [exneval]
-//= 1.1 Syntax change. [Capuche]
-//============================================================
+//===== rAthena 스크립트 ======================================= 
+// = 반란 직업 퀘스트 
+//===== 설명: ===================================== ==== 
+//= [공식 전환] 
+//= 건슬링거 -> 반란에서 전직 퀘스트. 
+//===== 변경 내역: ========================================= = 
+//= 1.0 첫 번째 버전. [exneval] 
+//= 1.1 구문 변경. [카푸체] 
+//============================================ =============== 
 
-moc_fild12,261,318,3	script	Suspicious Man	4_M_MOCASS2,2,2,{
-	end;
-OnTouch:
-	if (Class == Job_Gunslinger && BaseLevel >= 99 && JobLevel >= 70) {
-		if (isbegin_quest(12340) == 0) {
-			mes "[Suspicious Man]";
-			mes "Finally I've found you, Vagabond Spike! Your neck is mine!";
+moc_fild12,261,318,3	script	수상한 남자::Suspicious Man	4_M_MOCASS2,2,2,{
+	end; 
+OnTouch: 
+	if (Class == Job_Gunslinger && BaseLevel >= 99 && JobLevel >= 70) { 
+		if (isbegin_quest(12340) == 0) { 
+			mes "[수상한 남자]";
+			mes "드디어 찾았다, 배가본드 스파이크! 네 목은 내 꺼야!"; 
 			next;
-			select("Say what?");
-			mes "[Suspicious Man]";
-			mes "*Snort* Don't pretend like you don't know. Look at this poster! You're in it!";
+			select("무엇을 말하시겠습니까?"); 
+			mes "[수상한 남자]"; 
+			mes "*코웃음* 모르는 척 하지 마세요. 이 포스터를 보세요! 당신도 그 안에 있어요!"; 
 			next;
-			select("I see the resemblance, but that's not me.");
-			mes "["+strcharinfo(0)+"]";
-			mes "Forget the resemblance. Where did you get that poster? I've never committed a crime.";
+			select("닮은 것 같은데, 그건 제가 아닙니다."); 
+			mes "["+strcharinfo(0)+"]"; 
+			mes "닮은 점은 잊어버리세요. 저 포스터는 어디서 구하셨나요? 저는 범죄를 저지른 적이 없습니다."; 
 			next;
-			mes "[Suspicious Man]";
-			mes "I knew you'd try to lie your way out.";
+			mes "[수상한 남자]"; 
+			mes "네가 거짓말을 해서 빠져나가려고 할 줄 알았어."; 
+			next; 
+			mes "[수상한 남자]"; 
+			mes "^0000ffEinbroch Private Pub^000000에서 그 수배 포스터를 공개했습니다. 당신 뒤에는 나 같은 현상금 사냥꾼이 많이 있습니다.";
 			next;
-			mes "[Suspicious Man]";
-			mes "The ^0000ffEinbroch Private Pub^000000 has released that wanted poster. You have many bounty hunters like me on your heels.";
-			next;
-			mes "[Suspicious Man]";
-			mes "I don't care if you're the right one so long as you look it and I can take you dead or alive.";
-		}
-		else {
-			mes "[Suspicious Man]";
-			mes "It's you again! You've got guts to come back here!";
-		}
+			mes "[수상한 남자]"; 
+			mes "당신이 옳은 사람인지는 상관하지 않습니다. 당신이 보기만 하면 나는 당신을 죽든 살든 데려갈 수 있습니다."; 
+		} 
+		else { 
+			mes "[수상한 남자]"; 
+			mes "또 너야! 여기로 돌아올 용기가 있구나!"; 
+		} 
 		next;
-		if (select("Make a run for it.:Fight him.") == 1)
-			mes "^0000ffI should run for now and think about this later.^000000";
-		else
-			mes "^0000ffHe's not the only bounty hunter after me, if he's telling the truth. I need time to strategize.^000000";
-		close2;
+		if (select("뛰어보세요.:그와 싸워보세요.") == 1) 
+			mes "^0000ff지금은 달려보고 나중에 생각해봐야겠습니다.^000000"; 
+		else 
+			mes "^0000ff그가 진실을 말하고 있다면 그 사람이 나 다음으로 유일한 현상금 사냥꾼은 아닙니다. 전략을 세울 시간이 필요해요.";
+	close2;
 		if (isbegin_quest(12340) == 0)
 			setquest 12340;// Rebellion Job Change Quest
 		warp "moc_fild12",186,83;
 	}
 	end;
-}
+} 
 
 einbroch,54,97,3	script	Bouncer	4_M_REBELLION,{
-	if (BaseClass != Job_Gunslinger) {
-		mes "[Bouncer]";
-		mes "No loitering around the venue.";
-		close;
-	}
-	switch( isbegin_quest(12340) ) {
+	if (BaseClass != Job_Gunslinger) { 
+		mes "[Bouncer]"; 
+		mes "공연장 주변을 배회하지 마세요."; 
+		close; 
+	} 
+	switch( isbegin_quest(12340) ) { 
 	case 0:
-		mes "[Bouncer]";
-		mes "Under construction, can't get in.";
+		mes "[Bouncer]"; 
+		mes "공사중이라 들어갈 수 없습니다."; 
 		close;
 	case 1:
-		mes "[Bouncer]";
-		mes "*Gasp* You! I thought you were already captured. Ooh, doesn't matter now. You're my Get Out of Jail Free card!";
+		mes "[Bouncer]"; 
+		mes "*헉* 너! 이미 잡힌 줄 알았는데. 오, 이제 상관없어. 넌 내 감옥 탈출 카드야!"; 
 		next;
-		select("I'm not the criminal you think I am!");
+		select("나는 당신이 생각하는 범죄자가 아닙니다!");
 		mes "[Bouncer]";
-		mes "You aren't?";
+		mes "그렇지 않습니까?";
+		next; 
+		mes "^0000ff경원이 당신의 얼굴을 살펴봅니다.^000000"; 
+		next; 
+		mes "[바운서]"; 
+		mes "흠, 당신은 그 범죄 스파이크만큼 위협적이지는 않지만 눈에 띄게 닮았어요"; 
 		next;
-		mes "^0000ffThe bouncer examines your face.^000000";
-		next;
-		mes "[Bouncer]";
-		mes "Hm, you bear a striking resemblance, though you don't look not as menacing as that criminal Spike";
-		next;
-		select("I want to talk to the poster publisher.");
-		mes "[Bouncer]";
-		mes "Your problem is a bit out of my league. Get in. If I find out you're the real deal all along, I'll see that you'll never see the outside again.";
+		select("포스터 출판사와 통화하고 싶습니다."); 
+		mes "[바운서]"; 
+		mes "당신의 문제는 내 수준에서 조금 벗어난 것 같아요. 들어가세요. 당신이 진짜 거래자라는 것을 알게 되면, 당신은 다시는 밖을 볼 수 없게 될 것입니다."; 
 		close2;
 		warp "job_gun",81,29;
 		end;
-	case 2:
-		mes "[Bouncer]";
-		mes "You're back. Why?";
+	case 2: 
+		mes "[Bouncer]"; 
+		mes "돌아왔어. 왜?"; 
 		next;
 		if (select("I want in.:I was passing by.") == 2) {
 			mes "[Bouncer]";
 			mes "You're silly.";
 			close;
-		}
-		mes "[Bouncer]";
-		mes "Go ahead. Stay out of trouble.";
+		} 
+		mes "[바운서]"; 
+		mes "계속하세요. 문제가 발생하지 않도록 하세요."; 
 		close2;
 		warp "job_gun",70,28;
 		end;
-	}
-}
+	} 
+} 
 
 job_gun,68,33,3	script	Ruthless Rebellion	4_F_REBELLION,{
-	mes "[Ruthless Rebellion]";
-	mes "Do you know how to use a gun?";
-	close;
-}
+	mes "[무자비한 반란]"; 
+	mes "총 쓸 줄 아세요?"; 
+	close; 
+} 
 
 job_gun,78,33,3	script	Suspicious Gunslinger	4_M_JOB_BLACKSMITH,{
-	mes "[Suspicious Gunslinger]";
-	mes "...";
+	mes "[수상한 총잡이]"; 
+	mes "..."; 
 	next;
-	mes "[Quiet Gunslinger]";
-	mes "Don't say I look like a blacksmith you know.";
-	close;
-}
+	mes "[조용한 총잡이]"; 
+	mes "내가 대장장이 같다고 말하지 마세요."; 
+	close; 
+} 
 
 job_gun,74,24,6	script	Drunken Man	4_M_LIEMAN,{
-	mes "[Drunken Man]";
-	mes "*Hiccups* Oh, I'm the owner here.";
-	mes "Oh wait, am I in the pub or someplace else? Zzz...";
-	close;
-}
+	mes "*딸꾹질* 아, 여기 주인은 나예요."; 
+	mes "아 잠깐만요, 제가 술집에 있는 건가요"; 
+	mes "아니면 다른 곳에 있는 건가요? Zzz..."; 
+	close; 
+} 
 
-job_gun,64,33,6	script	Anxious Man	4_M_ALCHE_A,{
-	mes "[Anxious Man]";
-	mes "Maybe I'm in the wrong place. This place doesn't look like a pub.";
-	close;
-}
+job_gun,64,33,6	script	Anxious Man	4_M_ALCHE_A,{ 
+	mes "[불안한 남자]"; 
+	mes "제가 잘못 찾아온 것 같습니다. 이곳은 술집처럼 보이지 않습니다."; 
+	close; 
+} 
 
 job_gun,86,29,3	script	Kulbertinov	4_M_REBELLION,{
-	if (Class == Job_Rebellion) {
-		mes "[Kulbertinov]";
-		mes "Do you want to see the boss?";
+	if (Class == Job_Rebellion) { 
+		mes "[Kulbertinov]"; 
+		mes "사장님 만나실래요?"; 
 		next;
-		if (select("Yes.:No.") == 1) {
-			close2;
+		if (select("예.:아니요.") == 1) { 
+			close2; 
 			warp "job_gun",220,130;
 			end;
-		}
-		end;
-	}
+		} 
+		end; 
+	} 
 	if (Class != Job_Gunslinger) {
-		mes "[Kulbertinov]";
-		mes "Are you looking for me?";
-		close;
-	}
-	switch( isbegin_quest(12340) ) {
-	case 0:
-		mes "[Kulbertinov]";
-		mes "Can I help you?";
-		close;
-	case 1:
-		mes "[Kulbertinov]";
-		mes "What do you want?";
+		mes "[쿨베르티노프]"; 
+		mes "나를 찾고 있나요?"; 
+		close; 
+	} 
+	switch( isbegin_quest(12340) ) { 
+	case 0: 
+		mes "[Kulbertinov]"; 
+		mes "도와드릴까요?"; 
+		close; 
+	case 1: 
+		mes "[Kulbertinov]"; 
+		mes "무엇을 원하세요?"; 
 		next;
-		select("I'm mistaken for a criminal!.");
-		mes "[Kulbertinov]";
-		mes "Wait a minute... Mwah hah hah!";
+		select("저는 범인으로 착각합니다!."); 
+		mes "[쿨베르티노프]"; 
+		mes "잠깐만... 으하하하!"; 
 		next;
-		mes "^0000ffHe scans your face, then guffaws.^000000";
+		mes "^0000ff그가 당신의 얼굴을 스캔하고는 웃습니다.^000000"; 
 		next;
-		mes "[Kulbertinov]";
-		mes "I'm sorry. For a moment, I thought Spike came back to life. He was found dead three days ago.";
+		mes "[쿨베르티노프]"; 
+		mes "미안해요. 잠시만요. 스파이크가 다시 살아난 줄 알았는데. 사흘 전 숨진 채 발견됐다.";
 		next;
-		select("He was captured already?");
-		mes "[Kulbertinov]";
-		mes "Yes, and the bounty hunter was already paid. The news hasn't spread, and you're the spitting image of him. Go figure.";
+		select("이미 포로로 잡혔나요?"); 
+		mes "[쿨베르티노프]"; 
+		mes "그렇습니다. 그리고 현상금 사냥꾼은 이미 돈을 받았습니다. 소식은 퍼지지 않았고 당신은 그 사람의 촌스러운 이미지입니다. 생각해 보세요."; 
 		next;
-		select("You have to do something!");
-		mes "[Kulbertinov]";
-		mes "I'm sorry, but I can't talk to every single bounty hunter for you. Of course, I'm willing to compensate for your inconvenience.";
+		select("뭔가를 해야 해!"); 
+		mes "[쿨베르티노프]"; 
+		mes "죄송하지만 현상금 사냥꾼 한 분 한 분과 통화를 할 수는 없습니다. 물론 불편을 끼쳐드린 점은 보상해 드리겠습니다."; 
 		next;
-		mes "[Kulbertinov]";
-		mes "Hey, how about you join our ranks? At the very last, you won't get shot.";
+		mes "[쿨베르티노프]"; 
+		mes "야, 우리 대열에 합류하는 게 어때? 마지막에는 총에 맞지 않을 거야."; 
 		next;
-		select("You want me become a bounty hunter?");
-		mes "[Kulbertinov]";
-		mes "No, bounty hunting is just a pastime. We're the experts of all the firearms in the world.";
+		select("나를 현상금 사냥꾼으로 만들고 싶으신가요?"); 
+		mes "[쿨베르티노프]";
+		mes "아뇨, 현상금 사냥은 그저 오락일 뿐입니다. 우리는 세상의 모든 총기에 대한 전문가입니다."; 
 		next;
-		mes "[Kulbertinov]";
-		mes "Carefree spirits!";
-		mes "Magical spitfires!";
-		mes "We call ourselves the ^0000ffRebellion^000000.";
+		mes "[쿨베르티노프]"; 
+		mes "평온한 영혼들!"; 
+		mes "마법의 스피트파이어!"; 
+		mes "우리는 스스로를 ^0000ff반란^000000이라고 부릅니다."; 
 		next;
-		mes "[Kulbertinov]";
-		mes "You look like you know how to use a gun. How'd you like to join our ranks? You won't have to worry about other bounty hunters anymore too.";
+		mes "[쿨베르티노프]"; 
+		mes "당신은 총을 다룰 줄 아는 것 같군요. 우리 대열에 합류하고 싶나요? 다른 현상금 사냥꾼들에 대해서도 더 이상 걱정하지 않아도 됩니다."; 
 		next;
-		if (select("Let me think it over.:I don't think I have a choice.") == 1) {
-			mes "[Kulbertinov]";
-			mes "You can think it over and over, but the answer won't change. Just take the offer.";
-		}
+		if (select("생각해 보겠습니다.:선택의 여지가 없는 것 같습니다.") == 1) { 
+			mes "[Kulbertinov]"; 
+			mes "계속해서 생각해봐도 답은 바뀌지 않습니다.";
+			}
 		else {
-			mes "[Kulbertinov]";
-			mes "Good thinking. Might as well do it now and get it over with.";
-		}
+			mes "[쿨베르티노프]"; 
+			mes "좋은 생각이에요. 지금 하고 끝내는 게 좋을 것 같아요."; 
+		} 
 		next;
-		mes "[Kulbertinov]";
-		mes "Talk to Enwin Conick. She guides drifting spirits like you to the way of the Rebellion. I'll send word to her. Ah, and don't point your gun at her.";
-		completequest 12340;
-		setquest 12341;// Rebellion Job Change Quest
-		close2;
+		mes "[쿨베르티노프]"; 
+		mes "엔윈 코닉과 대화해 보세요. 그녀는 당신과 같은 표류하는 영혼을 반란의 길로 인도합니다. 내가 그녀에게 소식을 전할 것입니다. 아, 그리고 그녀에게 총을 겨누지 마십시오."; 
+		completequest 12340; 
+		setquest 12341;// 반란 전직 퀘스트 
+		close2; 
 		warp "job_gun",19,15;
 		end;
-	case 2:
-		mes "[Kulbertinov]";
-		mes "Do you have business with Elwin Conick?";
+	case 2: 
+		mes "[Kulbertinov]"; 
+		mes "엘윈 코닉과 거래 중이신가요?"; 
 		next;
 		if (select("No.:Send me to Elwin Conick.") == 1) {
-			mes "[Kulbertinov]";
-			mes "All right. Care for a shot of vodka?";
-			close;
-		}
-		mes "[Kulbertinov]";
-		mes "Okay, I'll let her know.";
+			mes "[Kulbertinov]"; 
+			mes "알겠습니다. 보드카 한잔 드실래요?";
+			close; 
+		} 
+		mes "[쿨베르티노프]"; 
+		mes "알겠습니다. 제가 알려드릴게요."; 
 		close2;
 		warp "job_gun",19,15;
 		end;
-	}
-}
+	} 
+} 
 
 job_gun,19,24,3	script	Elwin Conick#1	4_F_REBELLION,{
-	if (Class != Job_Gunslinger) {
-		mes "[Elwin Conick]";
-		mes "If you don't want to join Rebellions, just get out.";
+	if (Class != Job_Gunslinger) { 
+		mes "[엘윈 코닉]"; 
+		mes "반란에 합류하기 싫으면 그냥 나가세요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (isbegin_quest(12341) == 1) {
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (isbegin_quest(12341) == 1) { 
+		mes "[엘윈 코닉]"; 
+		mes "우리의 반란에 동참하시겠습니까?"; 
+		next;
+		mes "^0000ff예리한 눈을 가진 키 작은 여자가 당신의 눈을 응시합니다.";
+		next;
 		mes "[Elwin Conick]";
-		mes "Do you to join us Rebellions?";
+		mes "여기에 서명하세요."; 
 		next;
-		mes "^0000ffThe short woman with keen eyes stares into your eyes.^000000";
+		mes "^0000ff아래 서명한 '_____'님은 테스트 중 발생할 수 있는 예상치 못한 사고로 인해 부상, 절단, 사망을 당하더라도 테스트에 대해 언급하지 않습니다.^000000";
 		next;
-		mes "[Elwin Conick]";
-		mes "Sign here.";
+		select("뭐야?!"); 
+		mes "[엘윈 코닉]"; 
+		mes "우리와 함께 하시겠습니까, 말 건가요?"; 
 		next;
-		mes "^0000ffThe undersigned party '_____' will not speak of the test even if he or she suffers injury, mutilation, or death in an unforeseen accident that may occur during the test.^000000";
-		next;
-		select("WHAT?!");
-		mes "[Elwin Conick]";
-		mes "Do you want join us or not?";
-		next;
-		if (select("I give up.:...I'll sign.") == 1) {
-			mes "[Elwin Conick]";
-			mes "Your choice.";
+		if (select("포기합니다.:...서명하겠습니다.") == 1) { 
+			mes "[엘윈 코닉]"; 
+			mes "당신의 선택입니다."; 
 			close2;
-			warp "job_gun",81,29;
-			end;
-		}
-		mes "[Elwin Conick]";
-		mes "Good. Now, follow me.";
+			warp "job_gun",81,29; 
+			end; 
+		} 
+		mes "[엘윈 코닉]"; 
+		mes "좋아. 자, 따라와.";
 		close2;
 		warp "job_gun",117,41;
 		end;
 	}
-	if (isbegin_quest(12342) == 1) {
-		mes "[Elwin Conick]";
-		mes "Do you want to try again?";
+			if (isbegin_quest(12342) == 1) { 
+		mes "[엘윈 코닉]"; 
+		mes "다시 시도하시겠습니까?"; 
 		next;
-		if (select("I give up.:Do it.") == 1) {
-			mes "[Elwin Conick]";
-			mes "Your choice.";
+		if (select("포기합니다.:하겠습니다.") == 1) { 
+			mes "[엘윈 코닉]"; 
+			mes "당신의 선택입니다."; 
 			close2;
-			warp "job_gun",81,29;
-			end;
-		}
-		mes "[Elwin Conick]";
-		mes "Follow me.";
+			warp "job_gun",81,29; 
+			end; 
+		} 
+		mes "[엘윈 코닉]"; 
+		mes "나를 따르라."; 
 		close2;
-		warp "job_gun",117,41;
-		end;
-	}
-	if (isbegin_quest(12343) > 0) {
-		mes "[Elwin Conick]";
-		if (isbegin_quest(12343) == 1)
-			mes "You still have Ivan's shooting test, do you want to try again?";
+		warp "job_gun",117,41; 
+		end; 
+	} 
+	if (isbegin_quest(12343) > 0) { 
+		mes "[엘윈 코닉]"; 
+		if (isbegin_quest(12343) == 1) 
+			mes "아직 이반의 슈팅 테스트가 남았습니다.";
 		else
-			mes "Ivan's shooting test have not finished yet, do you want to try again?";
+			mes "이반의 슈팅 테스트가 아직 끝나지 않았습니다. 다시 시도하시겠습니까?"; 
 		next;
-		if (select("I give up.:Do it.") == 1) {
-			mes "[Elwin Conick]";
-			mes "It's not worth to give up, now go out and relax.";
+		if (select("포기합니다.:하겠습니다.") == 1) { 
+			mes "[엘윈 코닉]"; 
+			mes "포기할 가치도 없으니까 이제 나가서 편히 쉬세요."; 
 			close2;
-			warp "job_gun",81,29;
-			end;
-		}
-		mes "[Elwin Conick]";
-		mes "Remember to give your best.";
+			warp "job_gun",81,29; 
+			end; 
+		} 
+		mes "[엘윈 코닉]"; 
+		mes "최선을 다하는 것을 잊지 마세요."; 
 		close2;
-		warp "job_gun",120,130;
-		end;
-	}
-	if (isbegin_quest(12345) == 1) {
-		mes "[Elwin Conick]";
-		mes "Ivan is waiting for you, go find him.";
+		warp "job_gun",120,130; 
+		end; 
+	} 
+	if (isbegin_quest(12345) == 1) { 
+		mes "[엘윈 코닉]"; 
+		mes "이반이 당신을 기다리고 있으니 가서 찾아보세요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	mes "[Elwin Conick]";
-	mes "You have no more test to take. Why don't you go out and have a drink?";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	mes "[엘윈 코닉]";
+	mes "더 이상 시험 볼 날이 없으니 나가서 한잔 하는 게 어때?"; 
 	close2;
-	warp "job_gun",81,29;
-	end;
-}
+	warp "job_gun",81,29; 
+	end; 
+} 
 
 job_gun,117,46,3	script	Elwin Conick#2	4_F_REBELLION,{
-	if (Class != Job_Gunslinger) {
-		mes "[Elwin Conick]";
-		mes "If you don't want to join Rebellions, just get out.";
+	if (Class != Job_Gunslinger) { 
+		mes "[엘윈 코닉]"; 
+		mes "반란에 합류하기 싫으면 그냥 나가세요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	.@emt_chk = getstatus(SC_MONSTER_TRANSFORM,1);
-	.@quest_12341 = isbegin_quest(12341);
-	.@quest_12342 = isbegin_quest(12342);
-	if (.@emt_chk == 3169) {
-		mes "^0000ffYou are already in the test form. If you have finished all your tests, report to Elwin Conick in the Assembly Room^000000.";
-		close;
-	}
-	if (.@emt_chk) {
-		mes "[Elwin Conick]";
-		mes "Look at yourself, do you really want to test?";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	.@emt_chk = getstatus(SC_MONSTER_TRANSFORM,1); 
+	.@quest_12341 = isbegin_quest(12341); 
+	.@quest_12342 = isbegin_quest(12342); 
+	if (.@emt_chk == 3169) { 
+		mes "^0000ff이미 테스트 양식에 들어가셨습니다. 모든 테스트를 마치셨다면,";
+		close; 
+	} 
+	if (.@emt_chk) { 
+		mes "[엘윈 코닉]"; 
+		mes "너 자신을 봐봐, 정말 시험해보고 싶니?"; 
 		next;
-		mes "^0000ffElwin see you turn into another form and she is very angry. Wait for your current form ends, and then find her again.^000000";
+		mes "^0000ff엘윈, 당신이 다른 모습으로 변하는 모습을 보니 그녀는 매우 화를 내고 있습니다. 현재의 모습이 끝날 때까지 기다렸다가 다시 그녀를 찾으세요.^000000"; 
 		next;
-		if (select("Wait.:Go away.") == 2) {
-			mes "[Elwin Conick]";
-			mes "Come back when you aren't in any form.";
+		if (select("잠깐.:저리 가세요.") == 2) { 
+			mes "[엘윈 코닉]"; 
+			mes "아무 형태도 없으면 다시 오세요."; 
 			close2;
-			warp "job_gun",81,29;
-			end;
-		}
-		mes "[Elwin Conick]";
-		mes "It's not worth to give up, now go out and relax.";
-		close;
-	}
-	if (.@quest_12341 == 1 || .@quest_12342 == 1) {
-		if (countitem(6746)) {
-			mes "[Elwin Conick]";
-			mes "Any leftover Steel Artifacts must be returned after the test.";
-			delitem 6746,countitem(6746);// Steel_Article
-			close;
-		}
-		if (countitem(6747)) {
-			mes "[Elwin Conick]";
-			mes "Any leftover Steel Artifacts must be returned after the test.";
-			delitem 6747,countitem(6747);// Steel_Article_
-			close;
-		}
-		if ((countitem(13118) - isequipped(13118)) > 0) {
-			mes "[Elwin Conick]";
-			mes "Time over. You failed the test. Let me take all your leftover test materials.";
+			warp "job_gun",81,29; 
+			end; 
+		} 
+		mes "[엘윈 코닉]"; 
+		mes "포기할 가치도 없으니까 이제 나가서 편히 쉬세요."; 
+		close; 
+	} 
+		if (.@quest_12341 == 1 || .@quest_12342 == 1) {
+		if (countitem(6746)) { 
+			mes "[엘윈 코닉]"; 
+			mes "남은 강철 유물은 테스트 후 반드시 반납해주세요."; 
+			delitem 6746,countitem(6746);// Steel_Article 
+			close; 
+		} 
+		if (countitem(6747)) { 
+			mes "[엘윈 코닉]"; 
+			mes "남은 강철 유물은 테스트 후 반드시 반납해주세요."; 
+			delitem 6747,countitem(6747);// Steel_Article_ 
+			close; 
+		} 
+		if ((countitem(13118) - isequipped(13118)) > 0) { 
+			mes "[엘윈 코닉]"; 
+			mes "시간이 끝났습니다. 시험에 떨어졌어요. 남은 시험자료는 제가 가져가겠습니다."; 
 			delitem 13118,1;// Tiny_Flame
 			close;
-		}
+		} 
 		if (.@quest_12342 == 1)
-			.@menu$ = "Got it.";
-		else {
-			.@menu$ = "Okay.";
-			setquest 12342;// Rebellion Job Change Quest
-			completequest 12341;
-		}
-		mes "[Elwin Conick]";
-		mes "Listen up. I'm not going to great lengths trying to explain the test to you.";
+			.@menu$ = "Got it."; 
+		else { 
+			.@menu$ = "Okay."; 
+			setquest 12342;// 반란 전직 퀘스트 
+			completequest 12341; 
+		} 
+		mes "[엘윈 코닉]"; 
+		mes "잘 들어보세요. 테스트에 대해 길게 설명하지 않겠습니다."; 
 		next;
-		select( .@menu$ );
-		mes "[Elwin Conick]";
-		if (.@quest_12341 == 1) {
-			mes "This is where the firearm molds are cast. Everywhere you can see Steel Artifacts are being produced.";
+		select( .@menu$ ); 
+		mes "[엘윈 코닉]"; 
+		if (.@quest_12341 == 1) { 
+			mes "총기 주형을 주조하는 곳입니다. 곳곳에서 강철 유물이 생산되고 있는 모습을 볼 수 있습니다."; 
 			next;
-			mes "[Elwin Conick]";
-			mes "We Rebellions are weapon experts at heart. Here you will learn to create and assemble firearms.";
+			mes "[엘윈 코닉]"; 
+			mes "We Rebellions는 무기 전문가입니다. 여기에서 총기를 만들고 조립하는 방법을 배우게 됩니다.";
 			next;
-			mes "[Elwin Conick]";
-			mes "You'll be asked to control the furnace controller near the entrance and select 5 standard Steel Artifacts.";
+			mes "[엘윈 코닉]"; 
+			mes "입구 근처에 있는 화로 조절기를 조종하고, 표준 강철 아티팩트 5개를 선택하라는 메시지가 나옵니다."; 
 			next;
-			mes "[Elwin Conick]";
-			mes "You'll then take them to the next Assembly Room and assemble them info a firearm. You'll be given 3 minutes to do all that. You'd better be fast and focused, or you will fail the test.";
+			mes "[엘윈 코닉]"; 
+			mes "그런 다음 그들을 다음 회의실로 데려가 총을 조립하고 총기를 만듭니다. 모든 작업에 3분의 시간이 주어집니다. 빠르고 집중하는 것이 좋습니다. 그렇지 않으면 시험에 실패할 것입니다."; 
 			next;
-			mes "[Elwin Conick]";
-			mes "I'll be in the next room, waiting for you to bring me a complete firearm. To check the elapsed time, you'll be transformed into a different job. ^0000ffIf you pass 3 minutes and turn back to normal, go back to me and start the test again.^000000.";
-		}
+			mes "[엘윈 코닉]"; 
+			mes "저는 옆방에서 완전한 총기를 가져오기를 기다리고 있을게요. 경과시간을 확인하기 위해 다른 직업으로 변신하게 됩니다. ^0000ff3분 지나고 다시 정상으로 돌아오면 가세요. 나에게 돌아와서 다시 테스트를 시작하세요.^000000."; 
+		} 
 		else {
-			mes "You'll be asked to control switches on the machine and select 5 standard Steel Artifacts.";
+			mes "기계의 switch를 제어하고 5개의 표준 강철 유물을 선택하라는 메시지가 표시됩니다."; 
 			next;
-			mes "[Elwin Conick]";
-			mes "You'll then take them to the next Assembly Room and assemble them into a complete firearm. You'll be given 3 minutes to finish all that. ^0000ffTo check the elapsed time, you'll be transformed into a different job^000000.";
+			mes "[엘윈 코닉]"; 
+			mes "다음 회의실로 가져가서 완전한 총기로 조립하면 됩니다. 모든 작업을 완료하는 데 3분의 시간이 주어집니다. ^0000ff경과 시간을 확인하기 위해 다른 직업으로 변신하게 됩니다^ 000000."; 
 			next;
-			mes "[Elwin Conick]";
-			mes "I'll be in the next room, waiting for you to bring me a complete firearm. Remember, ^0000ffyou fail the test when your transformation expires after 3 minutes^000000.";
-		}
+			mes "[엘윈 코닉]"; 
+			mes "저는 옆방에서 당신이 완전한 총기를 가져오기를 기다리고 있을 겁니다. ^0000ff당신의 변신이 3분 후에 만료되면 테스트에 실패한다는 것을 기억하세요^000000."; 
+		} 
 		transform 3169,180000;
-		close;
-	}
-	mes "[Elwin Conick]";
-	mes "Ah? Are you lost? You need to register first and then get back here.";
+		close; 
+	} 
+	mes "[엘윈 코닉]";
+	mes "아? 길을 잃었나요? 먼저 회원가입을 하고 다시 와야 해요."; 
 	close2;
-	warp "job_gun",81,29;
-	end;
-}
+	warp "job_gun",81,29; 
+	end; 
+} 
 
 job_gun,198,39,3	script	Elwin Conick#3	4_F_REBELLION,{
-	if (Class != Job_Gunslinger) {
-		mes "[Elwin Conick]";
-		mes "If you don't want to join Rebellions, just get out.";
+	if (Class != Job_Gunslinger) { 
+		mes "[엘윈 코닉]"; 
+		mes "반란에 합류하기 싫으면 그냥 나가세요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (isbegin_quest(12342) == 1) {
-		.@emt_chk = getstatus(SC_MONSTER_TRANSFORM,1);
-		if (.@emt_chk == 3169) {
-			if ((countitem(13118) - isequipped(13118)) < 1) {// don't count if equipped
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (isbegin_quest(12342) == 1) { 
+		.@emt_chk = getstatus(SC_MONSTER_TRANSFORM,1); 
+		if (.@emt_chk == 3169) { 
+			if ((countitem(13118) - isequipped(13118)) < 1) {// 장착된 경우 계산하지 않음 
 				mes "[Elwin Conick]";
-				mes "Are you done? I don't see any completed firearm in your inventory.";
-				close;
-			}
-			mes "[Elwin Conick]";
-			mes "It's shoddy but not bad, given the time. You passed.";
-			delitem 13118,1;// Tiny_Flame
-			next;
-			mes "[Elwin Conick]";
-			mes "Let me take all your leftover test materials.";
-			delitem 6746,countitem(6746);// Iron_Artifact
-			delitem 6747,countitem(6747);// Steel_Artifact
-			next;
-			mes "[Elwin Conick]";
-			mes "Now you can move on to the next course. Ivan Sidorenko will oversee your test.";
+				mes "다 끝났어요? 인벤토리에 완성된 총기가 하나도 없어요."; 
+				close; 
+			} 
+			mes "[엘윈 코닉]"; 
+			mes "조잡하긴 하지만 시간을 고려하면 나쁘지는 않아요. 합격했어요."; 
+			delitem 13118,1;// Tiny_Flame 
+			next; 
+			mes "[엘윈 코닉]"; 
+			mes "남은 시험자료는 제가 모두 가져가겠습니다."; 
+			delitem 6746,countitem(6746);// Iron_Artifact 
+			delitem 6747,countitem(6747);// Steel_Artifact 
+			next; 
+			mes "[엘윈 코닉]"; 
+			mes "이제 다음 코스로 넘어갈 수 있습니다. Ivan Sidorenko가 테스트를 감독할 것입니다."; 
 			completequest 12342;
 			close2;
 			warp "job_gun",120,133;
 			end;
 		}
-		if (.@emt_chk) {
-			mes "[Elwin Conick]";
-			mes "Look at yourself, do you really want to test?";
+		if (.@emt_chk) { 
+			mes "[엘윈 코닉]"; 
+			mes "너 자신을 봐봐, 정말 시험해보고 싶니?"; 
 			next;
-			mes "^0000ffElwin see you turn into another form and she is very angry. Wait for your current form ends, and then find her again.^000000";
+			mes "^0000ff엘윈, 당신이 다른 모습으로 변하는 모습을 보니 그녀는 매우 화를 내고 있습니다. 현재의 모습이 끝날 때까지 기다렸다가 다시 그녀를 찾으세요.^000000"; 
 			next;
-			if (select("Wait.:Go away.") == 2) {
-				mes "[Elwin Conick]";
-				mes "Come back when you aren't in any form.";
+			if (select("잠깐.:저리 가세요.") == 2) { 
+				mes "[엘윈 코닉]"; 
+				mes "아무 형태도 없으면 다시 오세요."; 
 				close2;
-				warp "job_gun",81,29;
-				end;
-			}
-			mes "[Elwin Conick]";
-			mes "It's not worth to give up, now go out and relax.";
+				warp "job_gun",81,29; 
+				end; 
+			} 
+			mes "[엘윈 코닉]"; 
+			mes "포기할 가치도 없으니 이제 나가서 편히 쉬세요.";
 			close;
 		}
 		mes "[Elwin Conick]";
-		mes "Time over. You failed the test. Let me take all your leftover test materials.";
-		delitem 6746,countitem(6746);// Iron_Artifact
-		delitem 6747,countitem(6747);// Steel_Artifact
-		delitem 13118,(countitem(13118) - isequipped(13118));// Tiny_Flame
-		next;
-		mes "[Elwin Conick]";
-		mes "Let's start again.";
+		mes "시간이 끝났습니다. 시험에 떨어졌어요. 남은 시험자료는 제가 가져가겠습니다."; 
+		delitem 6746,countitem(6746);// Iron_Artifact 
+		delitem 6747,countitem(6747);// Steel_Artifact 
+		delitem 13118,(countitem(13118) - isequipped(13118));// Tiny_Flame 
+		next; 
+		mes "[엘윈 코닉]"; 
+		mes "다시 시작하자."; 
 		close2;
-		warp "job_gun",117,41;
-		end;
-	}
-	mes "[Elwin Conick]";
-	mes "Ah? Are you lost? You need to register first and then get back here.";
+		warp "job_gun",117,41; 
+		end; 
+	} 
+	mes "[엘윈 코닉]"; 
+	mes "아? 길을 잃었나요? 먼저 회원가입을 하고 다시 와야 해요."; 
 	close2;
-	warp "job_gun",81,29;
-	end;
-}
+	warp "job_gun",81,29; 
+	end; 
+} 
 
 job_gun,165,18,0	script	Furnace Controller#1	CLEAR_NPC,{
 	if (Class != Job_Gunslinger) {
-		mes "Only authorized user can do the operation.";
-		close;
-	}
-	if (getstatus(SC_MONSTER_TRANSFORM,1) == 3169) {// J_REB_SHECIL1
-		if (isbegin_quest(12342) == 1) {
-			mes "Do you want to dredge the mold up from the furnace?";
+		mes "인증된 사용자만이 작업을 할 수 있습니다."; 
+		close; 
+	} 
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 3169) {// J_REB_SHECIL1 
+		if (isbegin_quest(12342) == 1) { 
+			mes "용광로에서 주형을 준설하시겠습니까?"; 
 			next;
-			if (select("Quit.:Begin.") == 1) {
-				mes "Switch to the Standby mode.";
-				close;
-			}
-			mes "Initializing Furnace Controller ZX-3100...";
+			if (select("Quit.:Begin.") == 1) { 
+				mes "대기 모드로 전환합니다."; 
+				close; 
+			} 
+			mes "퍼니스 컨트롤러 ZX-3100 초기화 중..."; 
 			disablenpc "Furnace Controller#1";
-			donpcevent "Furnace Controller#2::OnStart";
-			close;
-		}
-	}
-	mes "Not an authorized user. Abort the operation.";
-	close;
+			donpcevent "Furnace Controller#2::OnStart"; 
+			close; 
+		} 
+	} 
+	mes "인증된 사용자가 아닙니다. 작업을 중단합니다."; 
+	close; 
 }
 
 job_gun,214,36,0	script	Auto Anvil#1	CLEAR_NPC,{
-	if (Class != Job_Gunslinger) {
-		mes "Only authorized user can do the operation.";
-		close;
-	}
-	if ((countitem(13118) - isequipped(13118)) > 0) {// Tiny_Flame
-		mes "Unauthorized firearm creation has been detected. Report to Manager Elwin.";
-		close;
-	}
-	if (getstatus(SC_MONSTER_TRANSFORM,1) == 3169) {
-		if (countitem(6747) < 5) {// Steel_Article_
-			mes "You do not have standard Steel Artifacts.";
-			close;
-		}
-		if (isbegin_quest(12342) == 1) {
-			mes "Do you want to use the auto anvil and shape the standard Steel Artifacts into a firearm?";
+	if (Class != Job_Gunslinger) { 
+		mes "인증된 사용자만이 작업을 수행할 수 있습니다."; 
+		close; 
+	} 
+	if ((countitem(13118) - isequipped(13118)) > 0) {// Tiny_Flame 
+		mes "무단 총기 제작이 감지되었습니다. 엘윈 매니저에게 보고하세요."; 
+		close; 
+	} 
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 3169) { 
+		if (countitem(6747) < 5) {// Steel_Article_ 
+			mes "표준 강철 유물이 없습니다."; 
+			close; 
+		} 
+		if (isbegin_quest(12342) == 1) { 
+			mes "자동 모루를 사용하여 표준 강철 유물을 총기로 형상화하시겠습니까?"; 
 			next;
-			if (select("Quit.:Begin.") == 1) {
-				mes "For your safety, please step away from the auto anvil.";
-				close;
-			}
-			if (rand(1,10) > 6) {
-				mes "You have successfully created a firearm using the auto anvil. ^ff0000Please report before your transformation expires^000000.";
+			if (select("Quit.:Begin.") == 1) { 
+				mes "안전을 위해 자동모루에서 물러나주세요."; 
+				close; 
+			} 
+			if (rand(1,10) > 6) { 
+				mes "자동 모루를 사용하여 총기를 성공적으로 생성했습니다. ^ff0000변환이 만료되기 전에 보고해주세요^000000."; 
 				specialeffect EF_REPAIRWEAPON;
-				getitem 13118,1;// Tiny_Flame
-			}
-			else {
-				mes "Failed to create a firearm.";
+				getitem 13118,1;// Tiny_Flame 
+			} 
+			else { 
+				mes "총기를 생성하지 못했습니다."; 
 				specialeffect EF_SUI_EXPLOSION;
-			}
-			delitem 6747,5;// Steel_Article_
-			close;
-		}
-	}
-	mes "Not an authorized user. Abort the operation.";
-	close;
+			} 
+			delitem 6747,5;// Steel_Article_ 
+			close; 
+		} 
+	} 
+	mes "인증된 사용자가 아닙니다. 작업을 중단합니다."; 
+	close; 
 }
 
-job_gun,165,18,0	script	Furnace Controller#2	CLEAR_NPC,{
-	mes "The system is busy dredging a completed mold from the furnace.";
-	close;
+job_gun,165,18,0	script	Furnace Controller#2	CLEAR_NPC,{ 
+	mes "시스템이 용광로에서 완성된 주형을 준설하는 중입니다."; 
+	close; 
 
-OnStart:
+OnStart: 
 	enablenpc "Furnace Controller#2";
 	sleep 3000;
-	mapannounce "job_gun","Furnace Controller: Dredging a mold up from the furnace... Workers, stand by at the production line.",bc_map,"0x00ff44";
-	sleep 500;
-	for ( .@i = 0; .@i < 30; ++.@i ) {
-		.@eff_rnd = rand(1,100);
-		if (.@eff_rnd < 33)
+	mapannounce "job_gun","용광로 컨트롤러: 용광로에서 주형 준설 중... 작업자 여러분, 생산 라인에서 대기하십시오.",bc_map,"0x00ff44"; 
+	sleep 500; 
+	for ( .@i = 0; .@i < 30; ++.@i ) { 
+		.@eff_rnd = rand(1,100); 
+		if (.@eff_rnd < 33) 
 			donpcevent "Heating Furnace#3::OnStart";
 		else if (.@eff_rnd > 66)
 			donpcevent "Heating Furnace#4::OnStart";
@@ -553,17 +553,17 @@ OnStart:
 		if (rand(1,10) > 7)
 			makeitem 6747,1,"job_gun",.@d_itemx,.@d_itemy;// Steel_Article_
 		sleep 500;
-	}
-	sleep 2000;
-	mapannounce "job_gun","Furnace Controller: Finishing the operation... Entering Standby mode in 15 seconds.",bc_map,"0x00ff44";
-	sleep 15000;
+	} 
+	sleep 2000; 
+	mapannounce "job_gun","퍼니스 컨트롤러: 작업을 완료하는 중... 15초 후에 대기 모드로 들어갑니다.",bc_map,"0x00ff44"; 
+	sleep 15000; 
 	disablenpc "Furnace Controller#2";
 	enablenpc "Furnace Controller#1";
 	end;
 OnInit:
 	disablenpc "Furnace Controller#2";
 	end;
-}
+} 
 
 job_gun,130,31,0	script	Heating Furnace#3	CLEAR_NPC,{
 	end;
@@ -577,106 +577,106 @@ job_gun,136,31,0	duplicate(Heating Furnace#3)	Heating Furnace#4	CLEAR_NPC
 job_gun,141,31,0	duplicate(Heating Furnace#3)	Heating Furnace#5	CLEAR_NPC
 
 job_gun,120,138,3	script	Ivan Sidorenko#1	4_M_REBELLION,{
-	if (Class != Job_Gunslinger) {
-		mes "[Ivan Sidorenko]";
-		mes "This is shooting test area, you can't come here as you like.";
+	if (Class != Job_Gunslinger) { 
+		mes "[Ivan Sidorenko]"; 
+		mes "여기는 사격시험장이라 마음대로 올 수는 없어요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (isbegin_quest(12342) < 2) {
-		mes "[Ivan Sidorenko]";
-		mes "There seems to be a mistake, you can't stay here.";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (isbegin_quest(12342) < 2) { 
+		mes "[Ivan Sidorenko]"; 
+		mes "뭔가 착오가 있는 것 같은데, 여기서 계속 있을 수는 없어요.";
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (isbegin_quest(12343) == 0) {
-		mes "[Ivan Sidorenko]";
-		mes "Hey, stay focused--we're using live ammo here, and you can get shot anytime.";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (isbegin_quest(12343) == 0) { 
+		mes "[Ivan Sidorenko]"; 
+		mes "자, 집중하세요. 여기서는 실탄을 사용하고 있으니 언제든지 총에 맞을 수 있습니다."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "Let me make this quick. Basically you'll be running in this shooting range consisting of 5 sections.";
+		mes "[이반 시도렌코]"; 
+		mes "빨리 설명하겠습니다. 기본적으로 5개 구역으로 구성된 사격장에서 뛰게 됩니다."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "The objective is to find enemies in the midst of a crowd quickly and without fail.";
+		mes "[이반 시도렌코]"; 
+		mes "군중 속에서도 적들을 빠르고 확실하게 찾아내는 것이 목표입니다."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "Among all the targets, you must shoot only the ^0000ffStandard-issue Targets^000000. If you make a mistake, you'll lose points.";
+		mes "[이반 시도렌코]"; 
+		mes "모든 표적 중 ^0000ff표준 규격 표적^000000만 사격해야 합니다. 실수하면,";
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "Let's try. There aren't many ^0000ffStandard-issue Targets^000000, so keep your eyes peeled.";
+		mes "[이반 시도렌코]"; 
+		mes "한번 해보자. ^0000ff표준이슈 대상^000000이 많지 않으니 눈을 떼지 마세요."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "^0000ffYou have 3 minutes to finish this test. If you can't finish before your transformation expires^000000, you'll fail. If that happens, just follow the path back to me.";
+		mes "[이반 시도렌코]"; 
+		mes "^0000ff이 테스트를 완료하는 데 3분의 시간이 주어집니다. 변환이 만료되기 전에 완료하지 못하면^000000, 실패하게 됩니다. 그런 일이 발생하면 나에게로 돌아가는 길을 따라가세요."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "^0000ffYou'll fail if you miss a Standard-issue Target, or shoot 3 incorrect targets^000000. Let's get started.";
-		setquest 12343;// Rebellion Job Change Quest
-		setquest 12344;// Rebellion Job Change Quest
-		transform 3169,180000;
+		mes "[이반 시도렌코]"; 
+		mes "^0000ff표준 표적을 놓치거나 잘못된 표적 3개를 쏘면 실패합니다^000000. 시작하겠습니다."; 
+		setquest 12343;// 반란군 직업 전직 퀘스트 
+		setquest 12344;// 반란군 직업 전직 퀘스트 
+		transform 3169,180000; 
 		close2;
-		warp "job_gun",102,146;
-		end;
+		warp "job_gun",102,146; 
+		end; 
 	}
-	if (isbegin_quest(12343) == 1) {
-		if (checkquest(12343,HUNTING) == 2)
-			.@j_r_s = 10;
-		if (checkquest(12344,HUNTING) == 2)
-			.@j_r_f = 2;
-		if (getstatus(SC_MONSTER_TRANSFORM,1) != 3169)
-			.@j_r_t = 5;
-		.@j_r_c = .@j_r_s - .@j_r_f - .@j_r_t;
-		if (.@j_r_c > 9) {
-			mes "[Ivan Sidorenko]";
-			mes "Good job. I didn't think you could pass so quickly.";
-			completequest 12343;
-			completequest 12344;
-			setquest 12345;// Rebellion Job Change Quest
-			next;
-			mes "[Ivan Sidorenko]";
-			mes "You may leave and wait outside. I'll bring other instructors' evaluation reports to see you.";
+	if (isbegin_quest(12343) == 1) { 
+		if (checkquest(12343,HUNTING) == 2) 
+			.@j_r_s = 10; 
+		if (checkquest(12344,HUNTING) == 2) 
+			.@j_r_f = 2; 
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 3169) 
+			.@j_r_t = 5; 
+		.@j_r_c = .@j_r_s - .@j_r_f - .@j_r_t; 
+		if (.@j_r_c > 9) { 
+			mes "[Ivan Sidorenko]"; 
+			mes "수고했어요. 이렇게 빨리 합격할 줄은 몰랐어요."; 
+			completequest 12343; 
+			completequest 12344; 
+			setquest 12345;// 반란 전직 퀘스트 
+			next; 
+			mes "[이반 시도렌코]"; 
+			mes "밖으로 나가서 기다리시면 됩니다. 다른 강사님들의 평가서를 가지고 뵙도록 하겠습니다.";
 			close2;
-			warp "job_gun",210,132;
-			end;
+			warp "job_gun",210,132; 
+			end; 
+		} 
+		if (.@j_r_c == 8) { 
+			mes "[Ivan Sidorenko]"; 
+			mes "당신은 충분히 빠르지만 너무 많은 잘못된 목표물을 쏘았습니다. 실패했습니다."; 
+		} 
+		else if (.@j_r_c == 5) { 
+			mes "[Ivan Sidorenko]"; 
+			mes "당신은 충분히 정확하지만 시간이 너무 많이 걸렸습니다. 느린 반란은 오래 살아남지 못합니다."; 
+		} 
+		else if (.@j_r_c < 5) { 
+			mes "[Ivan Sidorenko]"; 
+			mes "속도와 정확도 모두 실패했는데 어떻게 이렇게 오래 살아남았나요?"; 
+		} 
+		else { 
+			mes "[이반 시도렌코]"; 
+			mes "문제가 생겼어. 통계가 잘못된 것 같습니다. 음... 이런 일이 가끔 일어날 수 있습니다.";
 		}
-		if (.@j_r_c == 8) {
-			mes "[Ivan Sidorenko]";
-			mes "You're quick enough, but you shot too many incorrect targets. You failed.";
-		}
-		else if (.@j_r_c == 5) {
-			mes "[Ivan Sidorenko]";
-			mes "You accurate enough, but you took too much time. Slow Rebellions don't survive long enough.";
-		}
-		else if (.@j_r_c < 5) {
-			mes "[Ivan Sidorenko]";
-			mes "You failed at both speed and accuracy. How did you survive this long?";
-		}
-		else {
-			mes "[Ivan Sidorenko]";
-			mes "There's a problem, the statistic seems to be wrong. Well... This can happen sometimes.";
-		}
-		erasequest 12343;
-		erasequest 12344;
+		erasequest 12343; 
+		erasequest 12344; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "Let's try again. Be more careful this time.";
+		mes "[이반 시도렌코]"; 
+		mes "다시 한번 해보자. 이번엔 좀 더 조심하자."; 
 		setquest 12343;
 		setquest 12344;
 		transform 3169,180000;
 		close2;
-		warp "job_gun",102,146;
-		end;
-	}
-	mes "[Ivan Sidorenko]";
-	mes "How did you not leave?";
+		warp "job_gun",102,146; 
+		end; 
+	} 
+	mes "[이반 시도렌코]"; 
+	mes "어떻게 안 떠나셨어요?"; 
 	next;
-	mes "[Ivan Sidorenko]";
-	mes "You may leave and wait outside. I'll bring other instructors' evaluation reports to see you.";
+	mes "[이반 시도렌코]"; 
+	mes "밖에서 기다리시면 됩니다. 다른 강사님들의 평가서를 가지고 가겠습니다."; 
 	close2;
-	warp "job_gun",210,132;
-	end;
-}
+	warp "job_gun",210,132; 
+	end; 
+} 
 
 job_gun,1,4,0	script	#target	CLEAR_NPC,{
 	end;
@@ -699,18 +699,18 @@ OnMyMobDead:
 			monster "job_gun",rand(119,134),rand(156,160),"Standard-issue Target",3169,1,"#target::OnMyMobDead";
 	}
 	end;
-}
+} 
 
 job_gun,1,5,0	script	#nontarget	CLEAR_NPC,{
-	end;
-OnStart:
-	killmonster "job_gun","#nontarget::OnMyMobDead";
-OnInit:
-OnMyMobDead:
-	hideonnpc "#nontarget";
-	while( mobcount("job_gun","#nontarget::OnMyMobDead") < 56 ) {
-		.@m_rg = rand(1,5);
-		if (.@m_rg == 1)
+	end; 
+OnStart: 
+	killmonster "job_gun","#nontarget::OnMyMobDead"; 
+OnInit: 
+OnMyMobDead: 
+	hideonnpc "#nontarget"; 
+	while( mobcount("job_gun","#nontarget::OnMyMobDead") < 56 ) { 
+		.@m_rg = rand(1,5); 
+		if (.@m_rg == 1) 
 			monster "job_gun",rand(88,99),rand(143,147),"Defective Target",3170,1,"#nontarget::OnMyMobDead";
 		else if (.@m_rg == 2)
 			monster "job_gun",rand(92,96),rand(95,122),"Defective Target",3170,1,"#nontarget::OnMyMobDead";
@@ -725,82 +725,82 @@ OnMyMobDead:
 }
 
 job_gun,220,132,3	script	Ivan Sidorenko#2	10062,{
-	if (!checkweight(1201,1)) {
-		mes "You have too many items, please reduce them to continue.";
-		close;
-	}
-	if ((MaxWeight - Weight) < 1000) {
-		mes "The items in your inventory are weighing you down. Lighten your weight first.";
-		close;
-	}
-	if (isbegin_quest(12345) == 0) {
-		mes "[Ivan Sidorenko]";
-		mes "There must have been a mistake. You aren't supposed to remain here.";
+	if (!checkweight(1201,1)) { 
+		mes "항목이 너무 많습니다. 계속하려면 항목을 줄여주세요.";
+		close; 
+	} 
+	if ((MaxWeight - Weight) < 1000) { 
+		mes "인벤토리에 있는 아이템이 당신을 짓누르고 있습니다. 우선 몸을 가볍게 하세요.";
+		close; 
+	} 
+	if (isbegin_quest(12345) == 0) { 
+		mes "[Ivan Sidorenko]"; 
+		mes "실수였나봐요. 여기 남아 있으면 안 돼요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (Class == Job_Gunslinger) {
-		if (BaseLevel < 99 || JobLevel < 70) {
-			mes "[Ivan Sidorenko]";
-			mes "Huh? You look so weak? I have nothing more to say.";
-			close;
-		}
-		if (SkillPoint) {
-			mes "[Ivan Sidorenko]";
-			mes "Oh no~ You still have Skill Points.";
-			close;
-		}
-		mes "[Ivan Sidorenko]";
-		mes "Kulbertinov, Elwin, and I've evaluated your Rebellion test results.";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (Class == Job_Gunslinger) { 
+		if (BaseLevel < 99 || JobLevel < 70) { 
+			mes "[Ivan Sidorenko]"; 
+			mes "어? 너무 약해 보여요? 더 이상 할 말이 없네요."; 
+			close; 
+		} 
+		if (SkillPoint) { 
+			mes "[이반 시도렌코]"; 
+			mes "아 안돼~ 아직 스킬포인트가 남아있잖아."; 
+			close; 
+		} 
+		mes "[이반 시도렌코]";
+		mes "쿨베르티노프, 엘윈, 그리고 나는 당신의 반란 테스트 결과를 평가했습니다."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "And...";
+		mes "[이반 시도렌코]"; 
+		mes "그리고..."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "You've met all our requirements including the attitude and the test performance.";
+		mes "[이반 시도렌코]"; 
+		mes "당신은 태도와 테스트 수행능력을 포함한 우리의 모든 요구사항을 충족시켰습니다."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "That's right, you're now a member of the Rebellion. Get ready to be wowed.";
+		mes "[이반 시도렌코]"; 
+		mes "그렇습니다. 이제 당신은 반란군의 일원이 되었습니다. 감탄할 준비를 하세요."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "And Elwin wants you to have this. Take good care of it. He made it for you.";
+		mes "[이반 시도렌코]"; 
+		mes "그리고 엘윈은 이것을 당신이 갖기를 원합니다. 잘 관리하세요. 그가 당신을 위해 만든 것입니다."; 
 		jobchange Job_Rebellion;
-		completequest 12345;
-		getitem 13119,1;// Freedom_Flame
+		completequest 12345; 
+		getitem 13119, 	1;// Freedom_Flame
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "See you later.";
+		mes "[이반 시도렌코]";
+		mes "나중에 봐요."; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	if (Class == Job_Rebellion) {
-		mes "[Ivan Sidorenko]";
-		mes "This life should be fun, not boring.";
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	if (Class == Job_Rebellion) { 
+		mes "[Ivan Sidorenko]"; 
+		mes "이번 삶은 지루하지 않고 재미있어야 해요."; 
 		next;
-		mes "[Ivan Sidorenko]";
-		mes "And by becoming a Rebellion your life should be upgraded. So, go and create a great journey, make us proud!";
+		mes "[이반 시도렌코]"; 
+		mes "그리고 반란군이 됨으로써 당신의 삶은 업그레이드되어야 합니다. 그러니 가서 멋진 여행을 만들어 우리를 자랑스럽게 만들어주세요!"; 
 		close2;
-		warp "job_gun",81,29;
-		end;
-	}
-	mes "[Ivan Sidorenko]";
-	mes "Do you have something to say to me, don't you?";
-	close;
-}
+		warp "job_gun",81,29; 
+		end; 
+	} 
+	mes "[이반 시도렌코]"; 
+	mes "나한테 할 말 없지?"; 
+	close; 
+} 
 
 job_gun,220,138,4	shop	Prop Vending Machine	2_VENDING_MACHINE1,13210:-1,13211:-1,13212:-1,13213:-1,13214:-1,7663:-1,7664:-1,7665:-1
 
 job_gun,216,138,4	script	Butler Karlex	1_M_01,{
-	mes "[Butler Karlex]";
-	mes "Use this temporary storage to keep your items safe while on the Advancement test.";
+	mes "[집사 칼렉스]"; 
+	mes "승급시험 기간 동안 아이템을 안전하게 보관하기 위해 임시 보관함을 이용하세요."; 
 	next;
-	.@s = select("Quit.:Open the storage.");
-	mes "[Butler Karlex]";
-	mes "Thank you for using the service.";
+	.@s = select("종료.:저장소를 엽니다."); 
+	mes "[집사 칼렉스]"; 
+	mes "서비스를 이용해 주셔서 감사합니다."; 
 	close2;
-	if (.@s == 2)
+	if (.@s == 2) 
 		openstorage;
 	end;
 }
@@ -817,16 +817,16 @@ job_gun,130,146,0	warp	shootingrange#5	3,3,job_gun,120,130
 
 
 job_gun,1,1,0	script	Admin1	CLEAR_NPC,{
-	callfunc "F_GM_NPC";
-	if (callfunc("F_GM_NPC",1854,0) != 1)
-		end;
-	mes "[Time Manager]";
-	mes "What time would you like to return?";
+	callfunc "F_GM_NPC"; 
+	if (callfunc("F_GM_NPC",1854,0) != 1) 
+		end; 
+	mes "[시간 관리자]"; 
+	mes "몇시에 돌아오시겠어요?"; 
 	next;
-	switch( select("Cancel:Test monster spawn:Start from beginning:Furnace Zone:Shooting Zone:Complete the test") ) {
-	case 1:
-		end;
-	case 2:
+	switch( select("취소:몬스터 스폰 테스트:처음부터 시작:화로 구역:사격 구역:테스트 완료") ) { 
+	case 1: 
+		end; 
+	case 2: 
 		donpcevent "#target::OnStart";
 		donpcevent "#nontarget::OnStart";
 		end;
@@ -841,15 +841,15 @@ job_gun,1,1,0	script	Admin1	CLEAR_NPC,{
 	}
 	end;
 
-S_Quest:
-	setarray .@arguments[0], getarg(0), getarg(1);
-	for ( .@quest = 12340; .@quest <= 12345; ++.@quest ) {
-		if (isbegin_quest(.@quest) > 0)
+S_Quest: 
+	setarray .@arguments[0], getarg(0), getarg(1); 
+	for ( .@quest = 12340; .@quest <= 12345; ++.@quest ) { 
+		if (isbegin_quest(.@quest) > 0) 
 			erasequest .@quest;
-		if (.@quest <= .@arguments[0])
-			setquest .@quest;
-		if (.@quest <= .@arguments[1])
-			completequest .@quest;
-	}
-	end;
+		if (.@quest <= .@arguments[0]) 
+			setquest .@quest; 
+		if (.@quest <= .@arguments[1]) 
+			completequest .@quest; 
+	} 
+	end; 
 }

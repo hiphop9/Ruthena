@@ -24,7 +24,7 @@
  extern const char* LOGIN_CONF_NAME;
 //common
  extern const char* LAN_CONF_NAME; //char-login
- extern const char* MSG_CONF_NAME_EN; //all
+ extern const char* MSG_CONF_NAME_KOR; //all
 
 extern void display_helpscreen(bool exit);
 bool cli_hasevent();

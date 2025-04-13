@@ -18,8 +18,8 @@
 //= 1.4 Added VIP features. [Euphy]
 //============================================================
 
-alde_alche,35,186,5	script	Alchemist Union Member	805,{
-	mes "[Alchemist Union Member]";
+alde_alche,35,186,5	script	알케미스트 조합원	805,{
+	mes "[알케미스트 조합원]";
 	if (BaseLevel > 98 && JobLevel > 49){
 		if (BaseJob == Job_Alchemist) {
 			if (SkillPoint != 0) {
@@ -29,26 +29,26 @@ alde_alche,35,186,5	script	Alchemist Union Member	805,{
 			if (job_gen == 0) {
 				mes "Our Alchemist Union brings up many junior alchemists with various promotions and investigations.";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "They have spread to all corners of Midgard and were active in many fields like sciences or special item production methods.";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "We call the members of our new union ^3131FF'Geneticists'^000000.";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "Geneticists are the ones who have reached their peak potential in the world of Alchemy. They are the ones who currently spearhead alchemy throughout all of Midgard.";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "It looks like you are an expert in this field, how about meeting other geneticists?";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "Not long ago there was a Geneticist who announced a sensational new life studying research.";
 				mes "You are very knowledgeable. Do you think you might understand her work?";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "Her study may help you gain the knowledge to help you make a Geneticist!";
 				next;
-				mes "[Alchemist Union Member]";
+				mes "[알케미스트 조합원]";
 				mes "How's that sound? Do you want to meet a Geneticist?";
 				next;
 				switch(select("Of course, I want to meet a Geneticist.:I don't want to meet a Geneticist.")) {
@@ -59,17 +59,17 @@ alde_alche,35,186,5	script	Alchemist Union Member	805,{
 						setquest 2215;
 						next;
 					}
-					mes "[Alchemist Union Member]";
+					mes "[알케미스트 조합원]";
 					mes "Wise choice!";
 					mes "The infamous Geneticist 'Devries'.";
 					next;
-					mes "[Alchemist Union Member]";
+					mes "[알케미스트 조합원]";
 					mes "You can find her in the Alchemy Lab at the western part of Lighthalzen. There is also another Geneticist studying weaponry there, you might want to pay her a visit as well.";
 					set job_gen,1;
 					setquest 2215;
 					close;
 				case 2:
-					mes "[Alchemist Union Member]";
+					mes "[알케미스트 조합원]";
 					mes "Aren't you interested in the study of life?";
 					close;
 				}
@@ -79,16 +79,28 @@ alde_alche,35,186,5	script	Alchemist Union Member	805,{
 			close;
 		}
 	}
-	mes "Our Alchemist Union brings up many junior alchemists with various promotions and investigations.";
+	mes "우리 알케미스트 조합은 최근 갖은";
+	mes "홍보와 연구의 노력 끝에 많은";
+	mes "알케미스트 후배들을 앵성할 수";
+	mes "있었습니다.";
 	next;
-	mes "[Alchemist Union Member]";
-	mes "They have spread to all corners of Midgard and were active in many fields like sciences or special item production methods.";
+	mes "[알케미스트 조합원]";
+	mes "그들은 미드가르드 각자로 퍼져";
+	mes "생명연구 및 특수아이템 제조법 등";
+	mes "다양한 방면으로활동하며 연금술의";
+	mes "위대함을 알리거나, 갖은 연구 논문";
+	mes "발표를 통해 학문의 발전을 꾀하곤";
+	mes "했지요.";
 	next;
-	mes "[Alchemist Union Member]";
-	mes "We call the members of our new union ^3131FF'Geneticists'^000000.";
+	mes "[알케미스트 조합원]";
+	mes "조합에서는 그 중 뛰어난 성과를";
+	mes "이룩한 조합원을 통틀어 ^3131FF'제네릭'^000000이라";
+	mes "칭하고 있습니다.";
 	next;
-	mes "[Alchemist Union Member]";
-	mes "Geneticists are the ones who have reached their peak potential in the world of Alchemy. They are the ones who currently spearhead alchemy throughout all of Midgard.";
+	mes "[알케미스트 조합원]";
+	mes "제넥릭은 그냐말로 '정점'에 달한 자로,";
+	mes "현 미드가르드 연금술을 가장 선두에서";
+	mes "이끌어가는 분들이죠.";
 	close;
 }
 

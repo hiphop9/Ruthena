@@ -1,0 +1,5629 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Issgard Land of Snow Flowers
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Daily quests for Episode 19
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Daily quest - Select Menu for Lunch
+jor_back2,250,30,0	script	점심등장용#flunch	HIDDEN_WARP_NPC,20,20,{
+	end;
+OnTouch:
+	if (ep19_main == 12) {
+		cloakoffnpcself( "ep19_flunch_1" );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 어?! 저 청년은?", bc_self;
+		end;
+	}
+	if (ep19_main > 12) {
+		cloakoffnpcself( "ep19_flunch_2" );
+		end;
+	}
+}
+
+jor_back2,250,30,2	script	의문의 청년#flunch::ep19_flunch_1	4_EP19_LUNCH,{
+	if (ep19_main == 12) {
+		cutin "ep19_lunch01.png",2;
+		mes "[의문의 청년]";
+		mes "어라?! 또 뵙네요!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "앗! 너구나 실험체 친구!";
+		next;
+		mes "[의문의 청년]";
+		mes "오! 친구라니 저 친구는 처음이에요. 친구.. 친구 좋아요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "참! 그러고 보니 통성명도 안 했지? 우리. 이름이 뭐야? 내가 뭐라고 불러야 할까?";
+		next;
+		mes "[의문의 청년]";
+		mes "이름?";
+		next;
+		mes "[의문의 청년]";
+		mes "아! 부르는 명칭을 말하시는 건가요? 그거라면 HU-210426라고 해요.";
+		next;
+		mes "[의문의 청년]";
+		mes "제 머리에 새겨진 바코드를 찍어 보시면 알 수 있으실 텐데..";
+		next;
+		mes "[의문의 청년]";
+		mes "일루시온의 과학자가 아니시라 그런 장비는 가지고 있지 않으신 가봐요. 여러모로 안심이에요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "앗! 미안 네가 실험체라는 걸 깜빡했어. 그래도 HU-210426라고 부르는 건 어려우니까.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "점심 어때? 아침이 보다 형 같고 따지고 보면 아침이랑 완전 남도 아닐 거 같은데?";
+		next;
+		cloakonnpcself( "ep19_flunch_1" );
+		cloakoffnpcself( "ep19_flunch_2" );
+		mes "[의문의 청년]";
+		mes "점심.. 점심..";
+		mes "부르기 좋은 이름이네요. 그럼 앞으로 점심이라고 불러주세요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그래 점심아! 그리고 괴로울 수도 있는데 탈출을 어떻게 하게 되었는지 이야기해줄 수 있을까?";
+		next;
+		mes "[점심]";
+		mes "괴롭긴요. 어디서부터 이야기하는 게 좋을까요? 아! 그 부분부터 말하면 되겠네요.";
+		next;
+		mes "[점심]";
+		mes "어떤 큰 저택에서 평소처럼 과학자들에게 이것저것 실험을 당하던 날이었어요.";
+		next;
+		mes "[점심]";
+		mes "그런데 갑자기 과학자들이 막 짐을 챙기기 시작했어요.";
+		next;
+		mes "[점심]";
+		mes "그 과정에서 버려지거나 폐기되는 실험체들도 많았지만, 저는 과학자들과 비공정을 타고 여기까지 왔어요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "힘들었겠구나?";
+		next;
+		mes "[점심]";
+		mes "힘들긴요. 버려지거나 폐기되는 일은 흔한 일인 걸요. 이어서 할게요.";
+		next;
+		mes "[점심]";
+		mes "과학자들이 여기 와서 만난 건 몸이 길쭉한 녀석들이었어요. 르간이라는 종족들인데.";
+		next;
+		mes "[점심]";
+		mes "과학자들이 그 종족들과 뭐를 하는지는 모르지만, 저를 비롯해 큰 저택에서 데리고 온 실험체들에게 관심을 가지지 않게 됐어요.";
+		next;
+		mes "[점심]";
+		mes "아니다 관심이 없었다기보다는 다른 실험에 정신이 팔려 저희의 존재를 잊어버린 것 같았어요.";
+		next;
+		mes "[점심]";
+		mes "뭐 실험에 푹 빠진 과학자들에게는 흔히 있는 일이니까요.";
+		next;
+		mes "[점심]";
+		mes "방치된 다른 실험체들은 하나 둘 쓰러졌어요. 뭐 저는 아무거나 먹어서 에너지를 생산할 수 있는 개체였지만..";
+		next;
+		mes "[점심]";
+		mes "다른 실험체들은 그렇지 못했거든요.";
+		next;
+		mes "[점심]";
+		mes "그렇게 시간이 흘러서 남아있던 마지막 실험체까지 잠들어 움직이지 않게 됐어요..";
+		next;
+		mes "[점심]";
+		mes "저는 심심하기도 했고.. 겸사겸사 주변에 지나다니던 작은 동물로 변해 갇혀있던 우리를 탈출했어요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "뭐? 작은 동물로 변했다고?";
+		next;
+		mes "[점심]";
+		mes "아! 제 능력 중에 하나가 다른 존재로 변신할 수 있는 능력이거든요.";
+		next;
+		mes "[점심]";
+		mes "엄청나지 않아요?";
+		mes "초기 개체는 할 수 없었던 엄청나게 발전한 저만의 능력이죠! 과학자들도 아마 이 능력 때문에 저를 여기까지 데리고 왔었을 거예요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "혹시 다른 존재도 변신시킬 수 있니?";
+		next;
+		mes "[점심]";
+		mes "어.. 저랑은 다르게 약간의 재료가 필요하긴 하고.. 전부 변신할 수 있는 건 아니지만..";
+		next;
+		mes "[점심]";
+		mes "불가능한 건 아니에요. 예를 들면 르간 종족 같은 거? 정도는 누구나 쉽게 변신할 수 있어요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그래! 혹시 그거 나에게도 만들어 줄 수 있겠니?";
+		next;
+		mes "[점심]";
+		mes "약간의 재료만 주신다면요. 르간의 저급 마력핵 2개 정도랑 2천제니 정도?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "제니? 돈 말하는 거야?";
+		next;
+		mes "[점심]";
+		mes "네!! 예전에 프론테라라는 곳은 능력만 있다면 누구나 차별 받지 않고 살아갈 수 있는 곳이라고 들었거든요.";
+		next;
+		mes "[점심]";
+		mes "제니를 많이 모아서 프론테라에 집을 사고 그 집에서 평생 살 거에요!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "힘들겠지만, 응원할 게..";
+		next;
+		mes "[점심]";
+		mes "참! 친구에게 부탁할 게 있어요.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "부탁? 부탁이 뭐야?";
+		next;
+		mes "[점심]";
+		mes "제가 한동안 여기에 있을 건데 여기는 먹어서 에너지로 삼을만한 물건이 거의 없어요.";
+		next;
+		mes "[점심]";
+		mes "얼음은 에너지 변환 효율이 너무 낮기도 하고.. 혹시 내가 먹을 밥을 친구가 준비해줄 수 있나요?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "그 정도야 쉽지.";
+		next;
+		mes "[점심]";
+		mes "히히 날 다시 찾아온 친구라면 부탁을 들어줄 거라고 생각했어요.";
+		next;
+		ep19_main = 13;
+		erasequest 5983;
+		setquest 5984;
+		setquest 5985;
+		getitem 101162,1;	// Ep19_Rgan_Scroll
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		mes "[점심]";
+		mes "이거는 내가 친구에게 주는 선물이에요. 내일부터 잘 부탁해요.";
+		close2;
+		navigateto("icecastle",27,126);
+		cutin "",255;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5983) == 1" );
+	cloakonnpc();
+	end;
+}
+
+jor_back2,250,30,2	script	점심#lunch::ep19_flunch_2	4_EP19_LUNCH,{
+	if (ep19_main < 12)
+		end;
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_lunch01.png",2;
+
+	setarray .@data[0],	// <quest id>, <item required>
+		5986, 7158,	// Broken_Wine_Vessel
+		5987, 7162,	// Cloud_Piece
+		5988, 7299,	// Bamboo_Basket
+		5989, 7266,	// Dragon_Fang
+		5990, 7762,	// Yaga_Pestle
+		5991, 7171,	// Leopard_Skin
+		5992, 6405,	// Cendrawasih_F
+		5993, 6498,	// Jejellopy
+		5994, 25285,	// BrownRatTail
+		5995, 7150;	// Bamboo_Cut
+	.@size = getarraysize(.@data);
+
+	for ( .@i = 0; .@i < .@size; .@i += 2 ) {
+		if (isbegin_quest(.@data[.@i]) > 0)
+			break;
+	}
+
+	if (.@i < .@size) {
+		if (countitem(.@data[.@i+1]) > 9) {	// Note: condition splitted, short-circuiting not implemented yet
+			npctalk "점심: 오!", "", bc_self;
+			sleep2 1000;
+			cutin "ep19_lunch02.png",2;
+			erasequest .@data[.@i];
+			delitem .@data[.@i+1], 10;
+			setquest 5985;
+			// note: no reputation given
+			getitem 101162,1;	// Ep19_Rgan_Scroll
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			sleep2 1000;
+			npctalk "점심: 에너지원을 챙겨주셔서 감사합니다. 복받으실 거예요.", "", bc_self;
+			cutin "",255;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		npctalk .@data[.@i+1] + " : ffffffffffff";
+	}
+
+	.@playtime = checkquest(5985,PLAYTIME);
+	switch( .@playtime ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		.@waiting$ = "[대기]";
+		break;
+	case 2:
+		erasequest 5985;
+		.@playtime = -1;
+		sleep2 1000;
+		cutin "ep19_lunch03.png",2;
+		emotion ET_HUK;
+		emotion ET_STARE_ABOUT;
+		npctalk "꼬- 르륵-", "", bc_self;
+		sleep2 500;
+		emotion ET_SCRATCH;
+		sleep2 500;
+		break;
+	}
+	npctalk "점심: - - · · 　· 　- - 　- - · 　- - · - 　· - · · 　　　· - - · 　· · · · 　- · -", "", bc_self;
+	sleep2 500;
+	emotion ET_HUK;
+	sleep2 500;
+	npctalk "점심: 앗! 오셨나요?", "", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+
+	if (.@i < .@size)	// quest ongoing
+		.@menu$ = "^777777점심이 식사 챙겨주기.^000000";
+	else
+		.@menu$ = .@waiting$ + "점심이 식사 챙겨주기.";
+
+	switch( select( .@menu$, "변신 스크롤을 만들고 싶은데..", "점심이와 잡담하기" ) ) {
+	case 1:
+		if (.@i < .@size) {	// quest ongoing
+			npctalk "점심: 부탁드린 " + getitemname(.@data[.@i+1]) + "는 아직일까요?", "", bc_self;
+			sleep2 500;
+			npctalk "점심: 에너지 절약 모드로 변환하면, 1년은 거뜬하지만 일부 테이터가 소실될 수 있어..", "", bc_self;
+			sleep2 1000;
+			npctalk "점심: 그다지 하고 싶지 않아서요.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		if (.@playtime == 0 || .@playtime == 1) {
+			npctalk "점심: 다른 생명체는 하루에 3번 식사를 한다고 듣긴 했습니다만..", "", bc_self;
+			sleep2 849;
+			npctalk "점심: 저는 효율이 좋은 실험체라서요.", "", bc_self;
+			sleep2 967;
+			npctalk "점심: 에너지원 섭취는 하루에 1번 정도라면, 충분합니다. 마음만 받을게요.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		.@i = rand(.@size/2) * 2;
+		npctalk "점심: 지금이라면.. " + getitemname(.@data[.@i+1]) + "가 에너지 변환 효율이 가장 좋을 것 같습니다.", "", bc_self;
+		sleep2 1000;
+		npctalk "점심: 그리고 수량은 10개 정도면 충분할 듯 하고요.", "", bc_self;
+		if (select( "가져온다.", "급한 일이 생겼다." ) == 2) {
+			cutin "ep19_lunch03.png",2;
+			sleep2 500;
+			npctalk "점심: 오! 바쁘신 것 같네요.", "", bc_self;
+			sleep2 1000;
+			npctalk "점심: 그럼 저도 저 나름대로 에너지원을 확보할 방법을 찾아 보겠습니다.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 점심아 조금만 기다려 가져다줄게.", bc_self;
+		setquest .@data[.@i];
+		sleep2 1000;
+		cutin "ep19_lunch02.png",2;
+		npctalk "점심: 그럼 기다리겠습니다.", "", bc_self;
+		sleep2 500;
+		cutin "",255;
+		end;
+	case 2:
+		cutin "ep19_lunch02.png",2;
+		npctalk "점심: 히히 만들어드릴게요. 몇 개나 필요해요?", "", bc_self;
+		callshop "barter_Ep19_Rgan_Scroll";
+		sleep2 1000;
+		cutin "",255;
+		end;
+	case 3:
+		npctalk "점심: 그러고 보니 모험가님은 얼음의 성 쪽 아윈들과 친하시죠?", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 그쪽에서 왔으니까 아무래도 그런 편이지?", bc_self;
+		sleep2 1000;
+		npctalk "점심: 부럽네요. 아윈들 귀여워서 친해지고 싶은데..", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 친해지면 되잖아.", bc_self;
+		sleep2 1000;
+		npctalk "점심: 얼음의 성 쪽이 자원도 비교적 많고 해서 거처를 그쪽으로 옮기고 싶어 몇 번 시도해 봤는데요.", "", bc_self;
+		sleep2 1000;
+		cutin "ep19_lunch03.png",2;
+		sleep2 500;
+		emotion ET_CRY;
+		npctalk "점심: 제가 드문드문 허리가 길어져서 그런지 절 르간으로 착각하고 공격을 하더라고요", "", bc_self;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 저런..", bc_self;
+		sleep2 500;
+		cutin "",255;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main > 12 && checkquest(5985,PLAYTIME) == -1 && queststatus_between(5986,5995) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5985,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5986) == 1 && countitem(7158) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5987) == 1 && countitem(7162) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5988) == 1 && countitem(7299) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5989) == 1 && countitem(7266) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5990) == 1 && countitem(7762) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5991) == 1 && countitem(7171) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5992) == 1 && countitem(6405) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5993) == 1 && countitem(6498) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5994) == 1 && countitem(25285) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5995) == 1 && countitem(7150) > 9" );
+	end;
+}
+//
+
+
+
+// Daily quest : Finding an Underground Hideout
+// (part of the Main Quest: Step 16, 61)
+icecastle,27,126,0	script	#e19ms00	HIDDEN_WARP_NPC,3,5,{
+	end;
+OnTouch:
+	if (ep19_main == 13 || ep19_main == 51 || ep19_main == 100) {
+		cloakoffnpcself( "ep19_if19msdq" );
+		end;
+	}
+	end;
+}
+
+icecastle,27,126,3	script	호르르#if19msdq::ep19_if19msdq	4_EP19_IWIN,{
+	if (ep19_main < 13)
+		end;
+	if (ep19_main == 13) {
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "인간?? 인간이 왜...?";
+		emotion ET_QUESTION;
+		next;
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "아!! 이번에 결계 너머에서 왔다는 모험가로군? 반갑소. 이스가르드는 처음인가? 처음이겠지. 그래, 이름이 뭔가?";
+		emotion ET_SURPRISE;
+		next;
+		cutin "",255;
+		select( "누구신지...?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[호르르]";
+		mes "어이쿠, 내 소개도 안하고. 내가 이렇게 예의 없는 사람은 아닌데, 멀리까지 정찰을 나갔다 돌아 오니 낯선 사람들이 있어 좀 흥분을 했네.";
+		next;
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "^0000cd호르르^000000일세. 정식 이름은 있지만, 인간들은 말하기 힘들어 한다지? 그냥 호르르로 부르게나.";
+		mes "그런데, 어딜 다녀오는 길인가? 이 근처는 혼자 다녀도 괜찮지만, 멀리까지는 가지 말게. 위험하니.";
+		next;
+		cutin "",255;
+		select( "정찰을 다녀왔습니다." );
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "정찰을? 호... 자네 실력이 제법인가 보군? 그럼 보고 하러 가는 길이겠군?";
+		mes "나도 가는 길이니 동행함세. 지금쯤 식사를 마친 뒤니 <NAVI>[식당]<INFO>icas_in,34,189,0,101,0</INFO></NAVI>에 있겠군.";
+		ep19_main = 14;
+		erasequest 5984;
+		setquest 17639;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		end;
+	}
+	if (ep19_main == 51) {
+		cutin "ep19_iwin07.png",2;
+		mes "[호르르]";
+		mes "이게 뭐요? 르간을 왜 여기까지 데리고 왔지??";
+		next;
+		cutin "",255;
+		select( "일단 눕힐 곳이 필요한데요." );
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "내 <NAVI>[집]<INFO>icas_in,247,116,0,101,0</INFO></NAVI>이 여기서 가까우니 일단 그리로 갑시다. 마침 초대한 손님들도 있고 하니 이야기는 그리 가서 듣지.";
+		erasequest 16661;
+		setquest 17640;
+		ep19_main = 52;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",247,116);
+		end;
+	}
+	if (ep19_main != 100) {
+		cloakonnpcself();
+		end;
+	}
+
+	// daily
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계신 아이템의 수량이 많아 대화를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	switch( checkquest(17662,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "모험가, 좀 쉬었소? 헌데 왜 찾아왔소? " + getitemname(1000842) + "를 묻는 일이라면 걱정하지 않아도 되겠소. 아직 배터리가 방전되려면 멀었으니 말이오. 좀 더 쉬는 것이 좋겠소.";
+		close3;
+	case 2:
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "모험가 오셨소이까? " + getitemname(1000842) + "의 배터리가 방전기 전에 교체할까 하는데, 오늘도 도움을 주시겠소?";
+		next;
+		if (select( "알겠어요.", "그냥 지나던 참이에요." ) == 2) {
+			mes "[호르르]";
+			mes "그렇소이까? 내 바쁜 사람을 붙잡았군. 그럼 산책 마저 하시오. 좋은 하루 보내시오!";
+			close3;
+		}
+		mes "[호르르]";
+		mes "도움에 감사하오. 그럼 ^0000cd얼어붙은 비늘 평원과 빙하^000000에 표시해둔 ^0000cd10군데의 장소^000000에 이걸 묻고 오시오. 둘 다 르간들이 드나들던 출입구가 있던 곳이오.";
+		erasequest 17662;
+		setquest 17651;
+		setquest 17652;
+		setquest 17653;
+		setquest 17654;
+		setquest 17655;
+		setquest 17656;
+		setquest 17657;
+		setquest 17658;
+		setquest 17659;
+		setquest 17660;
+		getitem 1000842,10;	// Ep19_HS_FEELER
+		close3;
+	}
+	if (isbegin_quest(17650) == 1) {	// Side quest : Surveillance for an Underground Hideout (2)
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "우리가 뱀 소굴 을 감시하고 밖에서 또 다른 입구를 찾는 수색을 하기로 했잖소?";
+		next;
+		mes "[호르르]";
+		mes "뱀 소굴 안쪽에는 감시조를 이미 보내 놨고. 바깥에서 그쪽으로 드나드는 입구를 찾아야 하는데...";
+		next;
+		mes "[호르르]";
+		mes "우리가 뱀 소굴의 지상에서 지반이 약한 곳 위주로 입구를 파고 나올 만한 곳을 몇 군데 추려 놓기는 했소.";
+		next;
+		cutin "",255;
+		select( "빠르군요." );
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "그래서 그쪽을 수색해야 하는데. 한두군데가 아니다보니 인력이 부족해서 모험가에게 도움을 청하게 됐소이다.";
+		next;
+		cutin "",255;
+		select( "그곳을 한번 돌고 오면 되나요?" );
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "아니, 그곳에 ^0000cd상주^000000해야 되오.";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_HUK, playerattached();
+		select( "네???" );
+		cutin "ep19_iwin08.png",2;
+		mes "[호르르]";
+		mes "그들이 언제 입구를 새로 파서 나올 줄을 알고 자리를 비운단 말이오?";
+		cloakoffnpcself( "ep19_icecastle_25_126" );
+		cloakoffnpcself( "ep19_icecastle_29_125" );
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "모험가!! 여기 있었구나. 수색 임무를 나간다고 해서 도움을 주러 왔는데!";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "지금 입구로 추정되는 곳에 상주하면서 감시하겠다고 했어? 이 추위에?";
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[호르르]";
+		mes "우리는 추위를 타지 않아 괜찮소이다.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "여기 사는 사람들은 모두 돌았어. 이게 춥지 않은 거라니?";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "융케아님 인간이야말로 그렇게 얇게 입고선 무슨 소리야?";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[융케아]";
+		mes "나야 당연히 발열 장치를 만들어서 장착했지.";
+		npctalk "우리 융케아님 인간이 이렇게 유능해.", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[융케아]";
+		mes "그러는 너는? 기껏 두텁게 입고 앞은 왜 다 풀어헤쳤어?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "아, 이거? 나 몸에 열이 좀 많은데다 답답한 걸 싫어하거든.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "사실 이정도 날씨엔 이런 거 안 입어도 괜찮은데 보는 사람들이 추워할까 봐 입은 거야.";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[레이지]";
+		mes "내가 이 날씨에 이 장소에서 평소의 관광객 차림으로 있어 봐. 보는 사람들이 더 춥지 않겠어?";
+		next;
+		select( "그건 좀 곤란하겠네요." );
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "그렇지? 나는 다른 사람의 안구 온도를 배려해서 답답한 걸 참으면서 입은 거라고. 내가 이렇게 배려심이 넘치는 사람이야.";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[융케아]";
+		mes "아, 아. 알았으니까 더 이상 말하지 마. 말하는 걸 듣고만 있어도 피곤해지니까.";
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[융케아]";
+		mes "그런데 너는 필요 없는데 대체 왜 따라온 거야? 도망은 안 간다니까. 어차피 저 결계를 뚫을 수도 없는데 도망을 가 봤자 이곳이겠지. 감시는 안 해도 돼.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "무슨 소리야 당연히 구경하러 나온 거지. 그러는 융케아님 인간이야말로 왜 왔어? 내가 전해준다고 했잖아?";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[융케아]";
+		mes "...햇빛 쬐러.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[레이지]";
+		mes "아, 그래. 융케아님 인간은 햇빛이 좀 필요하겠다. 그 굴속에서 얼마나 있었던 거야?";
+		npctalk "누가 이분에게 햇빛 좀 주시겠어요?", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[호르르]";
+		mes "그런데 여기엔 왜 다들 몰려 왔소이까? 다들 감시를 도와주러 온 것이오?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "아, 그렇지. 여기 이 융케아님 인간이 감시에 도움이 될 만한 유용한 걸 만들었는데 말이야. 그걸 전해주려고. 자, 여기서부터는 전문가가 설명해.";
+		next;
+		mes "[레이지]";
+		mes "저기 저 사람들은 다 과학을 모르는 사람들이니까 오늘 태어난 신생아도 알아들을 수 있게 설명 부탁해.";
+		npctalk "실제로 태어난지 얼마 안됐거든. 응애-", "ep19_icecastle_25_126", bc_self;
+		npctalk "...정말 싫다.", "ep19_icecastle_29_125", bc_self;
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[융케아]";
+		mes "르간들의 굴에 마력이 얼마 남지 않았다고 한 것 기억하지? 그걸 반대로 이용한 장치야.";
+		next;
+		mes "[융케아]";
+		mes "르간이 가진 고유의 마력 파장만을 감지하는 건데, 이걸 근처에 파묻고 기다리다가 르간이 이 장치 근처에 나타나면 그걸 포착해서 이쪽으로 신호를 보내는 거지.";
+		next;
+		mes "[융케아]";
+		mes "파묻은 곳의 좌표값을 알 수 있으니 근처에 대기하고 있던 이쪽 사람들이 빠르게 대응할 수 있을 거야.";
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[호르르]";
+		mes "이걸 ^0000cd르간이 나타날만한 곳에 묻으면^000000 된다는 거요?";
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[융케아]";
+		mes "그래. 근데 단점이 있어. 아주 사소한 거지만? 배터리의 유효 기간이 약 하루 정도야.";
+		npctalk "이 추위에 그 정도를 견딘다는 건 아주 대단한 기술이래. 융케아님 인간이 그랬어.", "ep19_icecastle_25_126", bc_self;
+		npctalk "......", "ep19_icecastle_29_125", bc_self;
+		next;
+		select( "매일 새것으로 교체해야겠네요." );
+		cutin "ep19_iwin06.png",1;
+		sleep2 500;
+		npctalk "그래.", "ep19_icecastle_29_125", bc_self;
+		mes "[호르르]";
+		mes "그거야 쉽지. 24시간 같은 곳에 서서 감시하는 것보다야 훨씬 좋소. 고맙소. 덕분에 감시 인력은 다른 곳에 투입할 수 있겠소.";
+		next;
+		select( "꼭 조개처럼 생겼네요." );
+		cutin "ep19_juncea01.png",2;
+		mes "[융케아]";
+		mes "그래야 그곳 주변 생물들이 관심을 가지지 않을 테니까? 참고로 이름은 내가 지은 거 아니다.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "이름은 내가 지었어! ^0000cd" + getitemname(1000842) + "^000000! 정말 직관적이지 않아? 누구라도 들으면 바로 알 수 있도록 고심해서 지었다고.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : 레이지씨는 나중에 작명소 같은거 차리면 안되겠어요.", bc_self;
+		npctalk "동감이야.", "ep19_icecastle_29_125", bc_self;
+		npctalk "흥! 융케아님 인간이라면 HSF-001같은 걸로 지었겠지!!", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[호르르]";
+		mes "도움을 주어 정말 고맙소. 대원들이 나눠서 빠르게 묻어버리면 되겠소. 모험가에게는 ^0000cd10군데^000000를 부탁하지.";
+		next;
+		cutin "",255;
+		select( "알겠어요." );
+		cutin "ep19_iwin06.png",1;
+		mes "[호르르]";
+		mes "그럼 ^0000cd얼어붙은 비늘 평원과 빙하^000000에 표시해둔 곳에 이걸 묻고 오시오. 둘 다 르간들이 자주 나타나던 곳이오.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[레이지]";
+		mes "잘 다녀와!!";
+		completequest 17650;
+		setquest 17651;
+		setquest 17652;
+		setquest 17653;
+		setquest 17654;
+		setquest 17655;
+		setquest 17656;
+		setquest 17657;
+		setquest 17658;
+		setquest 17659;
+		setquest 17660;
+		getitem 1000842,10;	// Ep19_HS_FEELER
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		close3;
+	}
+	if (queststatus_between(17651,17660) != 0) {
+		if (countitem(1000842) < 1) {	// note: one by one only
+			cutin "ep19_iwin06.png",2;
+			mes "[호르르]";
+			mes "아직 ^0000cd얼어붙은 비늘 평원^000000에 " + getitemname(1000842) + "를 다 묻고 오지 못한 모양이오.";
+			next;
+			mes "[호르르]";
+			mes "혹시 " + getitemname(1000842) + "가 더 필요해서 온 거요?";
+			next;
+			if (select( "아뇨, 괜찮아요.", "하나만 더 주세요." ) == 1) {
+				mes "[호르르]";
+				mes "알겠소. 수고 좀 해주시오.";
+				close3;
+			}
+			mes "[호르르]";
+			mes "알겠소. 마침 넉넉히 받았으니. 이번엔 잃어버리지 않도록 조심하시오.";
+			getitem 1000842,1;	// Ep19_HS_FEELER
+			close3;
+		}
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "아직 ^0000cd얼어붙은 비늘 평원^000000에 " + getitemname(1000842) + "를 다 묻고 오지 못한 모양이오.";
+		mes "수고 좀 해주시오.";
+		close3;
+	}
+	if (isbegin_quest(17661) == 1) {
+		cutin "ep19_iwin06.png",2;
+		mes "[호르르]";
+		mes "모험가, 오셨구려. 작업은 순탄했소? 고생 많았소이다. 오늘은 이만 쉬고 내일 다시 작업을 부탁드리지.";
+		erasequest 17661;
+		setquest 17662;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close3;
+	}
+	// (shouldn't happen)
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	// (main quest)
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5984) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16661) == 1" );
+
+	// (daily quest)
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17650) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17661) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17650) == 2 && queststatus_between(17651,17661) == 0 && checkquest(17662,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17662,PLAYTIME) == 2" );
+	end;
+}
+
+icecastle,25,126,5	script	레이지#if19msdq::ep19_icecastle_25_126	4_EP19_LAZY,{
+	npctalk "이곳은 좀 둘러 봤어?", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icecastle,29,125,3	script	융케아#if19msdq::ep19_icecastle_29_125	4_EP19_JUNCEA,{
+	npctalk "춥지만 공기가 신선하고 깨끗해.", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+jor_back2,222,123,7	script	표시된 곳#e19ms01::ep19_jor_back2_222_123	4_POINT_WHITE,{
+	if (isbegin_quest(17661) == 1) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "<NAVI>[호르르]<INFO>icecastle,27,126,0,101,0</INFO></NAVI>씨에게 돌아가서 더듬이를 다 묻었다고 보고하자.";
+		close;
+	}
+	.@num = atoi( replacestr(strnpcinfo(2), "e19ms", "") );
+	.@quest_id = 17650 + .@num;
+
+	if (isbegin_quest(.@quest_id) == 1) {
+		if (countitem(1000842) < 1) {
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 어? " + getitemname(1000842) + "는 어디갔지? 호르르씨한테 다시 받아와야겠다.", bc_self;
+			end;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "여긴가? 여기다 파 묻으면 되나?";
+		next;
+		progressbar_npc "FFFF00",1;
+		if (rand(100) < 50) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "생각보다 잘 안 파지네. 다시 해 보자.";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "이쯤 묻으면 되겠지!";
+		if (countitem(1000842) < 1)	// shouldn't happen
+			close;
+		delitem 1000842,1;	// Ep19_HS_FEELER
+		erasequest .@quest_id;
+		questinfo_refresh();
+		if (queststatus_between(17651,17660) != 0) {
+			mes "이제 다른 곳에 묻으러 가야지.";
+			close;
+		}
+		mes "이제 <NAVI>[호르르]<INFO>icecastle,27,126,0,101,0</INFO></NAVI>씨에게 돌아가서 보고하면 되겠어.";
+		setquest 17661;
+		close;
+	}
+	unittalk getcharid(3), "" + strcharinfo(0) + " : 하얀 눈과 얼음뿐인 땅이다.", bc_self;
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "e19ms", "") );
+	.@quest_id = 17650 + .@num;
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+jor_back2,49,175,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms02	4_POINT_WHITE
+jor_back2,308,99,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms03	4_POINT_WHITE
+jor_back2,113,235,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms04	4_POINT_WHITE
+jor_back2,279,307,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms05	4_POINT_WHITE
+jor_back3,152,359,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms06	4_POINT_WHITE
+jor_back3,328,277,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms07	4_POINT_WHITE
+jor_back3,128,138,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms08	4_POINT_WHITE
+jor_back3,264,133,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms09	4_POINT_WHITE
+jor_back3,46,324,7	duplicate(ep19_jor_back2_222_123)	표시된 곳#e19ms10	4_POINT_WHITE
+//
+
+
+// Daily quest : Secret Fun
+icas_in,33,53,8	script	일병 호리류#in_iwp	EP19_NPC_IWIN,{
+	if (ep19_main < 11) {
+		setpcblock PCBLOCK_NPC, true;
+		cutin "ep19_iwin05.png",2;
+		sleep2 500;
+		setpcblock PCBLOCK_NPC, false;
+		npctalk "z Z zz Z..", "", bc_self;
+		mes "아윈 하나가 침상에 앉아 꾸벅꾸벅 졸고 있다.";
+		close3;
+	}
+	if (isbegin_quest(5980) == 0) {
+		mes "대부분의 아윈이 잠든 순찰대 병영에 한 아윈이 혼자 부산하게 움직이고 있다. 무슨 일이 있는 걸까?";
+		next;
+		select( "말을 걸어 본다." );
+		cutin "ep19_iwin08.png",2;
+		emotion ET_BLABLA;
+		npctalk "일병 호리류: 일병 호리류!", "", bc_self;
+		sleep2 1000;
+		cutin "ep19_iwin09.png",2;
+		mes "[일병 호리류]";
+		mes "엇! 뭐야 선임 아윈이 아니네. 에이.. 김새네..";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "뭐야 무슨 일인데?";
+		next;
+		cutin "ep19_iwin07.png",2;
+		emotion ET_FRET;
+		mes "[일병 호리류]";
+		mes "우리 본적 있어? 왜 갑자기 반말이냐?";
+		next;
+		emotion ET_THINK;
+		sleep2 500;
+		emotion ET_THINK, playerattached();
+		sleep2 1000;
+		cutin "ep19_iwin10.png",2;
+		mes "[일병 호리류]";
+		mes "하하하 쫄지 말라고 농담이니까. 배포가 있는 녀석인지 알아볼 겸 했던 테스트니까.";
+		next;
+		mes "[일병 호리류]";
+		mes "상황 설명을 좀 할게. 모험가 친구도 여기를 둘러보면 알겠지만, 전부 얼음이야.";
+		next;
+		cutin "ep19_iwin05.png",2;
+		sleep2 500;
+		emotion ET_OTL;
+		mes "[일병 호리류]";
+		mes "어딜 둘러봐도 죄다 얼음뿐이라고! 추워! 추워도 너무 춥다고!!";
+		next;
+		cutin "ep19_iwin10.png",2;
+		mes "[일병 호리류]";
+		mes "그러던 중 밖에서 왔다는 모험가들에 대한 소문을 들었지..";
+		next;
+		cutin "ep19_iwin04.png",2;
+		mes "[일병 호리류]";
+		mes "그전에 모험가 친구 내가 하나 물어보고 싶은 게 있는데.. 밖.. 밖에는 따듯한 깃털이 많은 세상이겠지?";
+		next;
+		emotion ET_QUESTION, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "네 따듯한 세.. 네?! 깃털이요?";
+		next;
+		emotion ET_QUESTION;
+		sleep2 500;
+		cutin "ep19_iwin09.png",2;
+		mes "[일병 호리류]";
+		mes "왜 놀라는 건가? 당연히";
+		mes "[ 따뜻 = 깃털 ]은 공식 아닌가?";
+		next;
+		mes "[일병 호리류]";
+		mes "아무튼! 모험가 친구는 밖으로 자유롭게 다닐 수 있는 것 같으니 밖에서 깃털을 좀 조달해주게.";
+		next;
+		cutin "ep19_iwin11.png",2;
+		mes "[일병 호리류]";
+		mes "같은 종류로 10개를 가져오면, 깃털 상태를 보고 적당한 보상을 지급해주지.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "왜 10개에요?";
+		next;
+		mes "[일병 호리류]";
+		mes "그건 보급품을 몰래 바꾸는 거니까. 그러지. 우선 내 거부터 바꾸고 신병들부터 차근차근 바꿔줘야지.";
+		next;
+		mes "[일병 호리류]";
+		mes "어때? 도와줄 수 있겠어?";
+		next;
+		if (select( "이정도 쯤이야.", "바쁜데.." ) == 2) {
+			setquest 5980;
+			completequest 5980;
+			emotion ET_HNG;
+			mes "[일병 호리류]";
+			mes "바쁘면 어쩔 수 없지. 나중에라도 시간 내달라고 그동안 우린 춥게 있을 테니까 말이야.";
+			close3;
+		}
+	
+		setquest 5980;
+		completequest 5980;
+		emotion ET_HNG;
+		mes "[일병 호리류]";
+		mes "바쁘면 어쩔 수 없지. 나중에라도 시간 내달라고 그동안 우린 춥게 있을 테니까 말이야.";
+		close3;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	switch( checkquest(5981,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep19_iwin08.png",2;
+		mes "[일병 호리류]";
+		mes "쉿! 보급품을 다른 걸로 몰래 바꾼다고 동네방네 소문낼 일 있나? 내일 은밀하게 찾아오게.";
+		close3;
+	case 2:
+		erasequest 5981;
+		emotion ET_SPARK;
+		npctalk "일병 호리류: 쉿! 은밀해야 하는 거 알지?", "", bc_self;
+		break;
+	}
+	switch( isbegin_quest(5982) ) {
+	case 0:
+		cutin "ep19_iwin10.png",2;
+		mes "[일병 호리류]";
+		mes "은밀하게 깃털을 가져와주겠나?";
+		next;
+		if (select( "가져오겠다.", "바쁘다." ) == 2) {
+			mes "[일병 호리류]";
+			mes "바쁘면 어쩔 수 없지. 나중에라도 시간 내달라고 그동안 우린 춥게 있을 테니까 말이야.";
+			close3;
+		}
+		cutin "ep19_iwin09.png",2;
+		setquest 5982;
+		mes "[일병 호리류]";
+		mes "은밀하게.. 알지?";
+		close3;
+	case 1:
+		cutin "ep19_iwin10.png",2;
+		mes "[일병 호리류]";
+		mes "이봐 모험가 친구 깃털을 가져왔나?";
+		next;
+		if (select( "가져왔다.", "아직.." ) == 2) {
+			mes "[일병 호리류]";
+			mes "좋아! 어떤 깃털이든 좋으니 같은 종류로 10개 부탁해. 얼마든지 기다려 주지!";
+			close3;
+		}
+		cutin "ep19_iwin11.png",2;
+		mes "[일병 호리류]";
+		mes "잠시 자네의 가방을 좀 살펴보겠네.";
+
+		while(1) {
+			next;
+			cutin "ep19_iwin11.png",2;
+			// note: the order may be wrong
+			// Round_Feather, Soft_Feather, BurningFeather, Feather_Of_Birds, Red_Feather,
+			// Cendrawasih_F, Peco_Wing_Feather, Blue_Feather, Harpy's_Feather
+			callsub( S_Item, 6393,	45713321, 2500000, "흠.. 이 깃털은? 우리 아윈의 깃털과 느낌이 비슷한데.. 이 녀석들은 숲풀에서라도 사는 건가? 따듯한 등급으로 치면 중급이군." );
+			callsub( S_Item, 7063,	45713321, 2500000, "흠.. 이 깃털은? 무언가 애매한 깃털이군. 부드럽기는 한데 따듯한 등급으로 치면 중급 정도 되겠군." );
+			callsub( S_Item, 6691,	52243795, 3000000, "오.. 이 깃털은? 그냥 봐도 따뜻하겠군. 운이 안 좋으면 내 깃털도 홀라당 태워 먹을 위험성이 있지만.. 따듯한 등급으로 치면 상급이군." );
+			callsub( S_Item, 916,	39182846, 2000000, "뭐야? 이 조잡한 깃털은 지급 보급품에 있는 깃털과 크게 다를 바가 없군, 따듯한 등급으로 치면 하급도 많이 쳐주겠군." );
+			callsub( S_Item, 7440,	52243795, 3000000, "흠.. 이 깃털은? 이 은은한 마력 꽤 위험한 녀석에게 얻은 깃털 같은데? 따듯한 등급으로 치면 상급 정도 되겠군" );
+			callsub( S_Item, 6405,	39182846, 2000000, "흠.. 이 깃털은? 습한 곳에 사는 녀석의 꼬리 깃털인가? 화려해서 탐나기는 한데.. 따듯한 등급으로 치면 하급이군." );
+			callsub( S_Item, 7101,	45713321, 2500000, "흠.. 이 깃털은? 사막에 사는 녀석들의 깃털인가? 따듯한 등급으로 치면 중급 정도 되겠군." );
+			callsub( S_Item, 7441,	52243795, 3000000, "흠.. 이 깃털은? 이 은은한 마력 꽤 위험한 녀석에게 얻은 깃털 같은데? 따듯한 등급으로 치면 상급 정도 되겠군" );
+			callsub( S_Item, 7115,	45713321, 2500000, "흠.. 이 깃털은? 건조한 지역에 사는 녀석들의 깃털인가? 따듯한 등급으로 치면 중급 정도 되겠군." );
+			cutin "ep19_iwin10.png",2;
+			mes "[일병 호리류]";
+			mes "가방에 깃털은 없어 보이는 군. 다시 살펴 볼까?";
+			next;
+			if (select( "다시 살핀다.", "그만둔다." ) == 2) {
+				mes "[일병 호리류]";
+				mes "좋아! 어떤 깃털이든 좋으니 같은 종류로 10개 부탁해. 얼마든지 기다려 주지!";
+				close3;
+			}
+		}
+	}
+	end;
+
+// give the reward according to the feather found (if the player accept)
+
+S_Item:
+	.@item_id = getarg(0);
+	.@baseexp = getarg(1);
+	.@jobexp = getarg(2);
+	.@string$ = getarg(3);
+
+	if (countitem(.@item_id) < 10)
+		return;
+
+	mes "[일병 호리류]";
+	mes .@string$;
+	next;
+	mes "[일병 호리류]";
+	mes "이 <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM>을 내게 주겠나?";
+	next;
+	if (select( "그러겠다.", "다른 깃털을 가져왔다." ) == 1) {
+		erasequest 5982;
+		setquest 5981;
+		delitem .@item_id,10;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 .@baseexp,0;
+		getexp 0,.@jobexp;
+		mes "[일병 호리류]";
+		mes "방금 받은 <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM>에는 이 정도 보상을 책정했네. 뭐 협상은 없는 보상이니까 토 달지는 말고.";
+		next;
+		cutin "ep19_iwin10.png",2;
+		mes "[일병 호리류]";
+		mes "좋아! 오늘 자네가 가져다 준 <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM>은 내가 보급품과 잘 바꿔 놓을 테니 내일 또 부탁하지.";
+		close3;
+	}
+	mes "[일병 호리류]";
+	mes "다른 깃털이라..";
+	next;
+	return;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep19_main >= 11 && isbegin_quest(5980) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(5980) == 2 && isbegin_quest(5982) == 0 && checkquest(5981,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(5981,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6393) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7063) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6691) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(916) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7440) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6405) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7101) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7441) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7115) >= 10" );
+	end;
+}
+//
+
+
+// Daily quest : Procurement of Research Materials for Vellgunde
+icas_in,185,63,3	script	벨군드#ep19vell02	4_EP19_VELLGUNDE,{
+	if (ep19_main < 11) {
+		cutin "ep19_vellgunde01.png",2;
+		mes "[벨군드]";
+		mes "이번에 대륙에서 넘어왔다는 모험가가 너니?";
+		mes "나? 난 벨군드 게오보르그. 이 곳에서 요르문간드의 마력을 연구하고 있지.";
+		close3;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	.@playtime = checkquest(18131,PLAYTIME);
+	if (.@playtime == 2) {
+		erasequest 18131;
+		.@playtime = -1;
+	}
+
+	if (isbegin_quest(18130) == 1 && countitem(1000706) >= 3) {
+		cutin "ep19_vellgunde01.png",2;
+		mes "[벨군드]";
+		mes "무슨 일이야?";
+		mes "오, " + getitemname(1000706) + "을 가져왔구나!";
+		mes "매번 고맙네.";
+		mes "확실히 사람이 느니까 편하구나.";
+		next;
+		cutin "ep19_vellgunde03.png",2;
+		mes "[벨군드]";
+		mes "대신 설화의 꽃잎을 줄게.";
+		mes "무기나 방어구 강화할 때 필요할 거다.";
+		delitem 1000706,3;	// Ep19_Purified_Core
+		erasequest 18130;
+		setquest 18131;
+		.@playtime = 1;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			.@bonus = 1;
+		getitem 1000608,2+.@bonus;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		next;
+	}
+	cutin "ep19_vellgunde01.png",2;
+	mes "[벨군드]";
+	mes "내게 무슨 용무가 있니?";
+	mes "평소에 요르문간드와 르간들의 마력을 연구하고 있거든.";
+	mes "서로 도울 수 있는 게 있다면 돕자고.";
+	next;
+	switch( select( "벨군드의 연구 재료 조달", "빙화 마석 추출", "빙화 마력 추출", "설화의 방어구, 글레이시아 인챈트" ) ) {
+	case 1:
+		switch( .@playtime ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			cutin "ep19_vellgunde02.png",2;
+			mes "[벨군드]";
+			mes "응? 아니 괜찮아.";
+			mes "네가 가져다 준 마력핵 아직 충분히 남아 있거든.";
+			mes "나중에 또 필요하면 요청할게.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( isbegin_quest(18130) ) {
+		case 0:
+			cutin "ep19_vellgunde01.png",2;
+			mes "[벨군드]";
+			mes "내가 필요한 건 르간의 마력핵을 정화한 거야.";
+			mes "르간들을 처치하다 보면 르간의 저급 마력핵을 얻을 수 있을 거야.";
+			next;
+			mes "[벨군드]";
+			mes "그것도 요르문간드의 잔여 마력을 흡수한 것의 결정체거든?";
+			mes "잘 정화하면 설화의 꽃잎처럼 사용할 수 있다는 거지.";
+			next;
+			cutin "ep19_vellgunde02.png",2;
+			mes "[벨군드]";
+			mes "물론 효율도 떨어지고 땔감 정도로나 쓰겠지만.";
+			mes "난 르간과 요르문간드의 마력 성분을 연구중인 거라서 그게 필요해.";
+			next;
+			mes "[벨군드]";
+			mes "저급 마력핵을 적당히 모아서 ^4d4dff프리데리케^000000라던가, 성당에서 온 걔.";
+			mes "걔가 정화할 줄 아니까, 정화 받아서 가져다 주겠니?";
+			mes "^4d4dff3개^000000 정도면 충분하겠는데.";
+			next;
+			if (select( "그럴게요.", "다음에요." ) == 2) {
+				cutin "ep19_vellgunde01.png",2;
+				mes "[벨군드]";
+				mes "괜찮아. 부담 가질 필요는 없지.";
+				mes "레하르 시키면 되니까.";
+				close3;
+			}
+			cutin "ep19_vellgunde01.png",2;
+			mes "[벨군드]";
+			mes "그럼 기대할게.";
+			setquest 18130;
+			close3;
+		case 1:
+			cutin "ep19_vellgunde01.png",2;
+			mes "[벨군드]";
+			mes "저급 마력핵을 적당히 모아서 ^4d4dff프리데리케^000000라던가, 성당에서 온 걔.";
+			mes "걔가 정화할 줄 아니까, 정화 받아서 가져다 주겠니?";
+			mes "^4d4dff3개^000000 정도면 충분해.";
+			next;
+			cutin "ep19_vellgunde02.png",2;
+			mes "[벨군드]";
+			mes "르간의 저급 마력핵은 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "이나 하급 르간들을 처치하면 얻을 수 있단다.";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[벨군드]";
+		mes "빙화 마석이 필요하다고?";
+		mes "설화의 꽃잎으로 만들 수 있는건데...";
+		mes "이게 약간 운이 따라야 하는 거라서 말이야.";
+		next;
+		mes "[벨군드]";
+		mes "약간의 불운도 감당하겠다면 만들어 줄 순 있어.";
+		mes "^4d4dff설화의 꽃잎 35개^000000 정도 갈아 넣고 압축해야 하거든.";
+		while(1) {
+			next;
+			if (select( "빙화 마석을 추출한다.", "하지 않는다." ) == 2) {
+				cutin "ep19_vellgunde02.png",2;
+				mes "[벨군드]";
+				mes "나중에라도 뭐 필요하면 찾아오던가.";
+				close3;
+			}
+			if (countitem(1000608) < 35) {
+				mes "[벨군드]";
+				mes "빙화 마석을 만들려면 ^4d4dff설화의 꽃잎 35개^000000가 필요해.";
+				mes "그게 마력의 결정이란 말이야?";
+				mes "그래서 여기저기서 연료로도 쓰거든.";
+				next;
+				mes "[벨군드]";
+				mes "아윈들 사이에선 화폐 역할도 하고 있으니 주변의 아윈들의 일이라도 대신 해봐.";
+				mes "꽃잎을 얻을 수도 있겠지.";
+				close3;
+			}
+			delitem 1000608,35;	// Ep19_Snow_Flower
+			getgroupitem(IG_ICE_F_STONE_BOX2);
+			mes "[벨군드]";
+			mes "자, 여기 마석 결과란다.";
+			mes "뭐 필요한 만큼 잘 나왔나?";
+			specialeffect2 EF_SPHERE;
+			next;
+			mes "[벨군드]";
+			mes "마석 추출 더 할 거니?";
+		}
+		end;
+	case 3:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[벨군드]";
+		mes "빙화 마력을 추출하겠다고...?";
+		mes "재료는 다 챙겨왔어?";
+		mes "일단 뭐 여기 추출기에 넣어보든가.";
+		close2;
+		cutin "",255;
+		laphine_synthesis("Ice_F_Stone_Box2");
+		end;
+	case 4:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[벨군드]";
+		mes "내가 말야. 르간과 요르문간드의 마력 연구를 시작할때는 이렇게 무기까지 손 댈 줄은 몰랐거든.";
+		mes "어쨌든 넌 여기서 큰 도움이 되고 있으니 나도 널 도와야겠지?";
+		next;
+		mes "[벨군드]";
+		mes "그래서 능력을 부여하고 싶은 장비가 뭐야?";
+		next;
+		switch( select( "설화의 갑옷/로브", "설화의 망토/머플러", "설화의 부츠/슈즈", "설화의 펜던트/목걸이", "설화의 반지/귀걸이", "글레이시아 무기" ) ) {
+		case 1:
+			mes "[벨군드]";
+			mes "좋아 좋아.";
+			mes "내가 심혈을 기울여 만든 방어구잖아.";
+			mes "뭐든 해보자고.";
+			close2;
+			cutin "",255;
+			item_enchant(26);
+			end;
+		case 2:
+			mes "[벨군드]";
+			mes "좋아 좋아.";
+			mes "내가 심혈을 기울여 만든 것들이잖아.";
+			mes "뭐든 붙여보자고.";
+			close2;
+			cutin "",255;
+			item_enchant(27);
+			end;
+		case 3:
+			mes "[벨군드]";
+			mes "아하, 신발?";
+			mes "확실히 이런 곳에선 신발이 중요하지.";
+			mes "자자, 원하는게 뭐라고?";
+			close2;
+			cutin "",255;
+			item_enchant(28);
+			end;
+		case 4:
+			mes "[벨군드]";
+			mes "사실 어떤 마법을 부여하기에는 장신구가 제일 적당해.";
+			mes "보석들이 마법이랑 친하거든.";
+			close2;
+			cutin "",255;
+			item_enchant(29);
+			end;
+		case 5:
+			mes "[벨군드]";
+			mes "사실 어떤 마법을 부여하기에는 장신구가 제일 적당해.";
+			mes "보석들이 마법이랑 친하거든.";
+			close2;
+			cutin "",255;
+			item_enchant(30);
+			end;
+		case 6:
+			mes "[벨군드]";
+			mes "글레이시아 무기류라면 뭐든 붙겠지.";
+			mes "그러니까 뭐든 말이야.";
+			close2;
+			cutin "",255;
+			item_enchant(31);
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18130) == 1 && countitem(1000706) >= 3" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18131,PLAYTIME) == -1 && isbegin_quest(18130) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18131,PLAYTIME) == 2" );
+	end;
+}
+//
+
+
+// Daily quest - Help Moryara Fish
+// (Kill 20x Shining Seaweed)
+jor_tail,48,241,3	script	모랴라#0kb20	4_EP19_MORYARA,{
+	if (ep19_main < 11) {
+		mes "[모랴라]";
+		mes "인간이 찾아온다는 이야기는 들었는데...";
+		mes "외출 허가는 받았는가? 허락 없는 단독행동은 위험하다.";
+		mes "우리 둥지로 돌아가라.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	switch( checkquest(8785,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[모랴라]";
+		mes "오늘은 미역이 충분해.";
+		mes "어린이들이 좋아하겠어.";
+		close;
+	case 2:
+		erasequest 8785;
+		break;
+	}
+	switch( isbegin_quest(8784) ) {
+	case 0:	// first time
+	case 1:
+		switch( checkquest(8784,HUNTING) ) {
+		case -1:
+			mes "[모랴라]";
+			mes "...";
+			mes "쉿.";
+			mes "도망간다. 사냥감.";
+			next;
+			mes "낚시를 하던 아윈은 가까이 다가가자 고개도 돌리지 않고 조용히 말했다.";
+			next;
+			mes "[모랴라]";
+			mes "인간, 네가 아무리 쪼만해도 물고기보다는 크니 이 근처에서는 살살 걸어 달라.";
+			mes "모랴라는 지금 낚시를 하는 중이다.";
+			next;
+			select( "그렇게 작은 물고기가 먹을 만해?", "낚시 잘 하나 봐?" );
+			mes "[모랴라]";
+			mes "매번이 월척이 아니라도 여러 종류의 생선을 준비하는 것은 중요하다.";
+			mes "식탁이 좀 더 다채로워진다면 말이야.";
+			mes "인간, 낚시는 잘 하는가?";
+			next;
+			select( "그럭저럭", "해본 적은 있어", "조금" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "모험가를 하다 보면 몇 번은 할 일이 생기긴 해.";
+			next;
+			mes "[모랴라]";
+			mes "호오...";
+			mes "그럼 미끼는 꿰어 봤겠군. 이걸 잠시 도와주겠는가?";
+			next;
+			mes "아윈은 그제서야 이 쪽을 돌아보고 자기 옆을 가리켰다.";
+			next;
+			mes "[모랴라]";
+			mes "자, 여기 아직 설치 못 한 낚싯대의 바늘에 이 쪽에 있는 미끼를 꽂고...";
+			next;
+			mes "[모랴라]";
+			mes "이렇게...";
+			mes "저렇게...";
+			next;
+			mes "[모랴라]";
+			mes "...";
+			next;
+			mes "생각보다 재미있는 작업이다.";
+			mes "차가운 바다를 한 번씩 바라보며 마음 속을 정리하기에 딱 좋은 장소다.";
+			next;
+			mes "[모랴라]";
+			mes "...!";
+			next;
+			mes "낚시꾼 아윈은 큰 덩치를 날렵하게 움직여 낚싯대 하나를 당겼다.";
+			next;
+			mes "[모랴라]";
+			mes "허어... 오늘은 큰 게 잡혔군.";
+			mes "옆에서 도와준 인간 덕이다.";
+			mes "인간도 한 번 낚시를 해 보면 어떻겠나?";
+			next;
+			select( "한 번 정도면야" );
+			mes "[모랴라]";
+			mes "그럼 지금 이 낚싯대를 빌려 주지. 미끼만 다시 꿰어서 던져 봐.";
+			next;
+			mes "아윈의 말대로 미끼를 꿰어, 다시 바다로 낚싯줄을 드리웠다.";
+			next;
+			mes "아윈의 말대로 미끼를 꿰어, 다시 바다로 낚싯줄을 드리웠다.";
+			mes "...";
+			next;
+			mes "아윈의 말대로 미끼를 꿰어, 다시 바다로 낚싯줄을 드리웠다.";
+			mes "...";
+			mes "......";
+			next;
+			mes "아윈의 말대로 미끼를 꿰어, 다시 바다로 낚싯줄을 드리웠다.";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "!";
+			next;
+			mes "[모랴라]";
+			mes "오오! 이것은... 미역이군.";
+			mes "맛있겠는걸. 진짜 재능이 있어.";
+			next;
+			mes "[모랴라]";
+			mes "우리 식량 비축에 큰 도움이 되겠어!";
+			mes "바쁜 것은 알겠지만 좀 더 그 손을 빌려 줄 생각이 있는가?";
+			next;
+			select( "내가 보기에는 낚시에 재능이 없는데" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...내 생각에는 난 낚시보다 사냥을 더 잘 하는 것 같아.";
+			next;
+			mes "[모랴라]";
+			mes "호오! 그렇지, 물에서 잡은 것만으로는 부족하지. 역시 백전연마의 용사는 마음가짐이 다르군.";
+			mes "그렇다면 여기 근처에...";
+			mes "" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "이 자생하고 있는데 말이야. 20마리만 잡아와 주겠나?";
+			next;
+			if (select( "수락한다.", "바빠서 이만." ) == 2) {
+				mes "[모랴라]";
+				mes "바쁘다니 어쩔 수 없지.";
+				mes "아아... 미역을 낚는 재능 같은 것은 아무나 갖고 태어나지 않는데...";
+				close;
+			}
+			mes "[모랴라]";
+			mes "이렇게 고마울 데가!";
+			mes "그것들은 소리는 귀엽지만 하는 짓은 귀엽지 않아. 조심하게.";
+			setquest 8784;
+			close;
+		case 0:
+		case 1:
+			mes "[모랴라]";
+			mes "이 근방에 자생하는";
+			mes "^0000FF" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "^000000을 20마리 토벌해 주게.";
+			close;
+		case 2:
+			mes "[모랴라]";
+			mes "오오, 인간이 돌아왔군.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "..." + strcharinfo(0) + ".";
+			mes "이름으로 불러.";
+			next;
+			mes "[모랴라]";
+			mes "오오오, " + strcharinfo(0) + "!";
+			mes "멋들어진 이름이 아닌가.";
+			mes "나는 모랴라라고 불러도 되지만, 인간이 좀 더 부르기 쉬울 발음으로는 아샤 스칼렛 애기 그라시아 카시아 카레나 에바 알로하라고 한다.";
+			mes "편하게 불러 주게.";
+			next;
+			mes "[모랴라]";
+			mes "" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "을 잡았다고?";
+			mes "이거 감사한 일이군. 나는 보다시피 생선밖에 낚지 못해서 말이야. 둥지의 어린이들이 좋아하겠어.";
+			mes "혹시 시간이 되면 내일도 낚시 한 번 어떤가?";
+			completequest 8784;
+			setquest 8785;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			getexp2 9280800,6821600;
+			close;
+		}
+		end;
+	case 2:	// daily
+		break;
+	}
+	switch( checkquest(8786,HUNTING) ) {
+	case -1:
+		mes "[모랴라]";
+		mes "또 왔는가, " + strcharinfo(0) + "?";
+		mes "오늘이야말로 낚시 어떤가?";
+		mes "...싫다고?";
+		mes "그렇다면 혹시 시간이 있다면, 이 주변에 자생하는 " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + " 20마리만 잡아와 주겠나?";
+		next;
+		if (select( "수락한다.", "바빠서 이만." ) == 2) {
+			mes "[모랴라]";
+			mes "바쁘다니 어쩔 수 없지.";
+			mes "낚시라도...";
+			mes "아니네. 아니야.";
+			close;
+		}
+		mes "[모랴라]";
+		mes "이렇게 고마울 데가!";
+		mes "그것들은 소리는 귀엽지만 하는 짓은 귀엽지 않아. 조심하게.";
+		setquest 8786;
+		close;
+	case 0:
+	case 1:
+		mes "[모랴라]";
+		mes "이 근방에 자생하는";
+		mes "^0000FF" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "^000000을 20마리 토벌해 주게.";
+		close;
+	case 2:
+		mes "[모랴라]";
+		mes "오, " + strcharinfo(0) + "! 돌아왔군.";
+		next;
+		mes "[모랴라]";
+		mes "" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "을 잡았다고?";
+		mes "이거 감사한 일이군. 나는 보시다시피 생선밖에 낚지 못해서 말이야. 둥지의 어린이들이 좋아하겠어.";
+		mes "혹시 시간이 되면 내일이야말로 낚시를...";
+		erasequest 8786;
+		setquest 8785;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 9280800,6821600;	// (affected by drop modifier)
+		next;
+		mes "[모랴라]";
+		mes "내일 생각해 보자고!";
+		close;
+	}
+	end;
+
+OnInit:
+	// first time
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 11 && isbegin_quest(8784) == 0 && checkquest(8785,PLAYTIME) == -1" );	// note: !
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8784,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8784) == 2 && isbegin_quest(8786) == 0 && checkquest(8785,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8786,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8785,PLAYTIME) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : For Safe Work
+// (Kill 20x Limacina and 20x Calmaring)
+jor_nest,257,26,5	script	하나더사라간드#ep19r	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[하나더사라간드]";
+		mes "끼야아아아악!!!!!!!! 인간!! 일터!! 여기 아님!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[하나더사라간드]";
+		mes "요거만사라는 살았을까...";
+		mes "그거다사라는 물려갔는데...";
+		mes "어...?";
+		close;
+	}
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	switch( checkquest(18144,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[하나더사라간드]";
+		mes "얼음 캐러 가야. 갑니다.";
+		mes "안전? 안전 하지요 사제님?";
+		mes "얼음 캐러 갑니다.";
+		close;
+	case 2:
+		erasequest 18144;
+		break;
+	}
+	switch( checkquest(18143,HUNTING) ) {
+	case -1:
+		mes "[하나더사라간드]";
+		mes "사제님 사제님";
+		mes "도움 요청.. 긴급. 살려주세요.";
+		mes "너무 무섭다.";
+		next;
+		if (select( "무슨 일이야?", "다른 사제 찾아봐." ) == 2) {
+			mes "[하나더사라간드]";
+			mes "알겠습니다.";
+			mes "다른 사제님. 다른 사제님...";
+			close;
+		}
+		mes "[하나더사라간드]";
+		mes "동굴 입구 앞에 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " 무섭다.";
+		mes "살려주세요. 사제님.";
+		mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "도 무섭다. 사제님.";
+		next;
+		mes "[하나더사라간드]";
+		mes "불쌍한 일꾼이 얼음 캐게 도와주세요.";
+		mes "무서운 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + ". " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + ".. 치워 주세요.";
+		next;
+		select( "동굴 밖 몬스터를 치워달라고?" );
+		mes "[하나더사라간드]";
+		mes "맞다. 맞다.";
+		mes "얼음 캐다가 하나 죽었다. 둘 죽었습니다.";
+		mes "하나더사라는 얼음 캐고 싶어요.";
+		mes "도와주세요. 사제님.";
+		next;
+		if (select( "알았어.", "역시 다른 사제를 찾아봐." ) == 2) {
+			mes "[하나더사라간드]";
+			mes "알겠습니다.";
+			mes "다른 사제님. 다른 사제님...";
+			close;
+		}
+		mes "[하나더사라간드]";
+		mes "그러면 그러면 동굴 앞 치우고 알려주세요.";
+		mes "부탁합니다. 얼음 캐러 가야해요.";
+		mes "부탁합니다. 사제님.";
+		setquest 18143;
+		close;
+	case 0:
+	case 1:
+		mes "[하나더사라간드]";
+		mes "동굴 입구 앞에 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " 무섭다.";
+		mes "살려주세요. 사제님.";
+		mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "도 무섭다. 사제님.";
+		next;
+		mes "[하나더사라간드]";
+		mes "불쌍한 일꾼이 얼음 캐게 도와주세요.";
+		mes "무서운 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + ". " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + ".. 치워 주세요.";
+		close;
+	case 2:
+		mes "[하나더사라간드]";
+		mes "이제 가도 되나요?";
+		mes "사제님. 얼음 캐러 가도 되나요?";
+		mes "감사합니다. 감사합니다.";
+		mes "이거 모은 거 다 드릴게요. 감사합니다.";
+		erasequest 18143;
+		setquest 18144;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 20508000,5000000;
+		getexp 0,5000000;	// note: 5000000 x2
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 21 && checkquest(18143,HUNTING) == -1 && checkquest(18144,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18144,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(18143,HUNTING) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : Rgan to Work
+// (Kill 20x Primitive Rgan)
+jor_nest,239,244,5	script	시드르간드#1	4_EP19_RGAN_SR3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "끼야아아아악!!!!!!!! 인간!! 일터!! 여기 아님!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	switch( checkquest(8797,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[시드르간드]";
+		mes "내일 또 보자!";
+		mes "내일도 우리 세력을 위해 친목을 도모해 보자고.";
+		close;
+	case 2:
+		erasequest 8797;
+		break;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	if (isbegin_quest(8796) < 2) {
+		switch( checkquest(8796,HUNTING) ) {	// first time
+		case -1:
+			mes "[시드르간드]";
+			mes "어머어머!";
+			mes "처음 보는 애네!";
+			mes "어머~ 비늘 봐. 반딱반딱 빛이 나네~";
+			mes "이렇게 깨끗한 애는 별로 본 적이 없는데~";
+			next;
+			mes "[시드르간드]";
+			mes "너 맘에 들었다.";
+			mes "부화장 출신 아니지?";
+			mes "요동안 바깥에 나갔을 때 괜찮은 알 본 적이 없는데~";
+			mes "갑자기 이렇게 반드르르한 애가 툭 튀어나와~";
+			next;
+			mes "[시드르간드]";
+			mes "내 눈썰미는 아직도 멀었다니까~";
+			mes "난 시드르간드야.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "세네키오간드예요.";
+			next;
+			mes "[시드르간드]";
+			mes "비늘 좀 줄 수 없을까?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "네??";
+			next;
+			mes "[시드르간드]";
+			mes "걱정마, 사제님.";
+			mes "내가 계급이 높지만 그렇다고 함부로 뭘 어떻게 하겠다는 건 아니고...";
+			mes "아, 피는 어때?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "네??";
+			next;
+			mes "[시드르간드]";
+			mes "안 되나... 그럼 할 수 없지.";
+			mes "어차피 탈피도 하고... 할 거잖아? 그 때 껍질은 어때?";
+			next;
+			mes "[시드르간드]";
+			mes "어우... 그렇게 노골적으로 싫은 얼굴 하지 마.";
+			mes "귀여운데 미간에 주름이 잡히잖아.";
+			next;
+			mes "[시드르간드]";
+			mes "안 넘어가네~.";
+			next;
+			select( "원하는 걸 얻은 적 있는지 물어본다" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...비늘 준...";
+			mes "...동족... 있나요?";
+			next;
+			mes "[시드르간드]";
+			mes "없지!";
+			mes "아이참, 그걸 물어보면 어떡해!";
+			next;
+			mes "[시드르간드]";
+			mes "내 비늘하고 바꿔준다고 했는데도 싫다더라고!";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "(당연히 싫겠지...)";
+			next;
+			mes "[시드르간드]";
+			mes "나도 세상에 나온 지 얼마 안 되긴 했지만 말야.";
+			mes "어쨌든 우리 종족이 매우 불리한 곳에 있는 건 사실인 것 같아!";
+			next;
+			mes "[시드르간드]";
+			mes "마찬가지로 금방 태어난 것 같은 너한테 이런 이야기 하는 거도 웃기긴 한데.";
+			mes "쉬르륵 쉬르륵...";
+			next;
+			mes "그의 입에서 뱀이 기어가는 것같은 소리가 난다.";
+			mes "나름 웃고 있는 모양이다.";
+			next;
+			mes "[시드르간드]";
+			mes "너도 밖에 나가 보면 알겠지만 말야. 추워!";
+			mes "이런 척박한 곳에서 복수를 도모한다는 거, 정말 대단한 거 아니야?";
+			next;
+			mes "[시드르간드]";
+			mes "그럼 그런 만큼 할 수 있는 건 모두 해 봐야지!";
+			mes "내 세력도 늘리고... 동조자도 늘리고...";
+			mes "너! 너 말야, 내 밑에 안 들어올래?";
+			next;
+			mes "[시드르간드]";
+			mes "늙은이들하고 뭘 하자니 대체 기다리라고만 하고 비늘도 안 주고 피도 안 주고...";
+			mes "그래서야 우리가 무슨 발전을 하겠냐구!";
+			next;
+			mes "[시드르간드]";
+			mes "빠진 비늘도 없어?";
+			next;
+			select( "없어욧" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...없어욧.";
+			next;
+			mes "[시드르간드]";
+			mes "비늘만 반드르르했지 도움이 안 되네.";
+			mes "그럼 밖에 구경 나가는 셈치고 나가서 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + " 20마리만 잡아 봐.";
+			next;
+			mes "[시드르간드]";
+			mes "그리고 감상을 나에게 말해 주면 좋겠어.";
+			mes "쉬르륵 쉬르륵...";
+			next;
+			if (select( "수락한다.", "싫어욧" ) == 2) {
+				mes "[" + strcharinfo(0) + "]";
+				mes "...싫어욧.";
+				next;
+				mes "[시드르간드]";
+				mes "별 수 없지!";
+				mes "흥이야, 흥!";
+				mes "그럼... 비늘이라도...";
+				mes "...야, 어디 가?";
+				mes "야!";
+				close;
+			}
+			mes "[시드르간드]";
+			mes "그래, 너도 늙은이들 밑에서 이래라저래라 잔소리 듣는 것보단 나을 거야!";
+			mes "조심하고!";
+			setquest 8796;
+			close;
+		case 0:
+		case 1:
+			mes "[시드르간드]";
+			mes "^0000FF" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 20마리를 잡아 보고 너와의 차이에 대한 감상을 말해 주길 바라.";
+			close;
+		case 2:
+			mes "[시드르간드]";
+			mes "어, 왔어?";
+			next;
+			mes "[시드르간드]";
+			mes "자연에는 원래도 동족을 죽이는 동물이 많다는 이야기를 또 늙은이 누가 해 준 적이 있는데.";
+			mes "나도 늙은이도 이 추운 대륙 밖으로 나가 본 적 없으니 잘 모르지만...";
+			mes "아마 인간도 똑같다던데.";
+			next;
+			mes "[시드르간드]";
+			mes "그냥 그런 거 아닐까? 자원은 아껴 써야 하니까.";
+			mes "그래, " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "은 잡아 봤어?";
+			mes "동족이란 느낌이 들던가?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "...그다지.";
+			next;
+			mes "[시드르간드]";
+			mes "그렇지? 나도 그랬어.";
+			mes "그리고 그렇게 사라지면 남는 건 자잘한 마력석 뿐이라니, 대체 우리는 왜 태어나는 걸까?";
+			mes "저기서 교리를 설법하는 베르나간드라는 영감쟁이한테 물어보면 가르쳐 줄까?";
+			completequest 8796;
+			setquest 8797;
+			getitem 1000608,10;	// Ep19_Snow_Flower
+			getexp2 10154320,0;
+			getexp 0,7254000;
+			next;
+			mes "[시드르간드]";
+			mes "내일 또 보자!";
+			mes "내일도 우리 세력을 위해 친목을 도모해 보자고.";
+			close;
+		}
+		end;
+	}
+	switch( checkquest(8798,HUNTING) ) {
+	case -1:
+		mes "[시드르간드]";
+		mes "혹시 이 빠진 거 있어?";
+		mes "비늘은?";
+		mes "...없어?";
+		next;
+		mes "[시드르간드]";
+		mes "그럼 ^0000FF" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 20마리는 어때?";
+		next;
+		if (select( "수락한다.", "싫어욧" ) == 2) {
+			mes "[시드르간드]";
+			mes "할 일 뭐 있어?";
+			mes "다른 데 가서 붙으려고?";
+			mes "그러지 말고 나랑 편 먹자니까, 응?";
+			mes "야, 야!";
+			mes "가지마! 놀아줘!";
+			close;
+		}
+		mes "[시드르간드]";
+		mes "그래, 너도 늙은이들 밑에서 이래라저래라 잔소리 듣는 것보단 나을 거야!";
+		mes "조심하고!";
+		setquest 8798;
+		close;
+	case 0:
+	case 1:
+		mes "[시드르간드]";
+		mes "저기 밖에 나가서";
+		mes "^0000FF" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000을 20마리 잡고 와.";
+		close;
+	case 2:
+		mes "[시드르간드]";
+		mes "그럼 오늘도 동족을 사냥하는 느낌에 대해 토론을 좀...";
+		mes "뭐, 그렇게 노골적으로 싫은 표정 짓지 마!";
+		mes "...아, 좀 놀아 달라니까!";
+		erasequest 8798;
+		setquest 8797;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 10154320,7254000;	// affected by server drop rate
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8796) == 0 && checkquest(8796,HUNTING) == -1 && checkquest(8797,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8796) == 2 && checkquest(8798,HUNTING) == -1 && checkquest(8797,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8797,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8796,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8798,HUNTING) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : Elegant Hobbies
+// (Gather items)
+jor_nest,37,75,1	script	베르베르간드#ep19r	4_EP19_RGAN_R1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "끼야아아아악!!!!!!!! 인간!! 일터!! 여기 아님!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (isbegin_quest(18138) != 2) {	// First time quest: "Our Precious Food" required
+		mes "[베르베르간드]";
+		mes "어마? 애기 사제!";
+		mes "하급 부화장의 알에서 깨어났다는 그 소문의 주인공이잖아?";
+		next;
+		mes "[베르베르간드]";
+		mes "뭘 그렇게 보고 있어?";
+		mes "저기 미미르간드 님께서 널 부르잖아.";
+		close;
+	}
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	switch( checkquest(18142,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[베르베르간드]";
+		mes "흐음. 뭘 만들지?";
+		mes "허리띠? 신발? 노리개?";
+		mes "아아 비녀도 괜찮겠다.";
+		mes "멋지게 만들어지면 라스간드 님께 진상해야지.";
+		next;
+		mes "[베르베르간드]";
+		mes "재료가 남으면 네 것도 만들까?";
+		mes "아아 바쁘다. 바빠.";
+		close;
+	case 2:
+		erasequest 18142;
+		break;
+	}
+	switch( isbegin_quest(18141) ) {
+	case 0:
+		mes "[베르베르간드]";
+		mes "응? 뭔가 어수선하다고?";
+		mes "아니 뭐 가끔 있는 일이야.";
+		mes "여기보다 더 마력이 많이 남은 곳으로 이동하는 거야.";
+		mes "그건 아무래도 좋고.";
+		next;
+		mes "[베르베르간드]";
+		mes "얘, 너 시간 있으면 나 좀 도와줄래?";
+		mes "장신구를 좀 만들려고 하는데 재료가 애매해서 말이야.";
+		next;
+		mes "[베르베르간드]";
+		mes "불신자 놈들이 가져온 것도 좋지만 난 역시 전통 방식으로 만든 게 좋더라.";
+		mes "그러니까 수공예 말이야.";
+		next;
+		mes "[베르베르간드]";
+		mes "미미르간드 님의 장신구도 내가 만든 거야. 알지?";
+		mes "요르문간드 님의 비늘 옷도 예쁘지만 산호 장식을 얹으면 더 화려하단 말이야.";
+		next;
+		mes "[베르베르간드]";
+		mes "하지만 이 곳에서 얻을 수 있는 재료로는 한계가 있지.";
+		mes "좀 더 알록달록하게 만들려면 바깥 것들이 필요해.";
+		mes "네가 좀 도와줄래?";
+		next;
+		if (select( "그럴까?", "미안, 지금 바쁘네." ) == 2) {
+			mes "[베르베르간드]";
+			mes "혹시 빙하나 평원 지역으로 마실 나가면 알려줘.";
+			mes "부탁할 일이 있거든.";
+			close;
+		}
+		mes "[베르베르간드]";
+		mes "좋아! 그럼 섬세한 장신구 제작에 필요한 재료를 불러 줄게!";
+		mes "전부 빙하랑 평원 지역에 서식하는 것들을 잡으면 얻을 수 있거든.";
+		next;
+		mes "[베르베르간드]";
+		mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "의 " + getitemname(1000824) + " 10개";
+		mes "" + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "의 " + getitemname(7326) + " 10개";
+		mes "얼지 않는 꽃의 " + getitemname(1000829) + " 10개";
+		mes "아이스 스트로우의 " + getitemname(1000830) + " 10개";
+		next;
+		mes "[베르베르간드]";
+		mes "기억했어? 잊어버리면 안 된다?";
+		mes "난 비늘 손질하면서 있을 거니까 꼭 구해 와!";
+		setquest 18141;
+		close;
+	case 1:
+		if (countitem(1000824) < 10 || countitem(7326) < 10 || countitem(1000829) < 10 || countitem(1000830) < 10) {
+			mes "[베르베르간드]";
+			mes "음? 재료 다시 불러줘? 잘 들어.";
+			mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "의 " + getitemname(1000824) + " 10개";
+			mes "" + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "의 " + getitemname(7326) + " 10개";
+			mes "얼지 않는 꽃의 " + getitemname(1000829) + " 10개";
+			mes "아이스 스트로우의 " + getitemname(1000830) + " 10개";
+			next;
+			mes "[베르베르간드]";
+			mes "빙하랑 평원 지역에서 모두 볼 수 있는 것들이야.";
+			mes "설마 어려워?";
+			mes "너 정도면 충분할 거 같은데. 구해주면 내가 모아둔 설화의 꽃잎 줄게.";
+			mes "솔깃하지?";
+			close;
+		}
+		mes "[베르베르간드]";
+		mes "반질반질한 깔라피!";
+		mes "염료로 사용할 형광액체!";
+		mes "동글 동글 방울 꽃!";
+		mes "그리고 편물짜기에 좋은 껍질까지...!";
+		next;
+		mes "[베르베르간드]";
+		mes "훌륭하다, 훌륭해!";
+		mes "역시 은총 넉넉하게 받은 사제였구나?";
+		next;
+		mes "[베르베르간드]";
+		mes "자, 이건 거래였지?";
+		mes "네 수고에 대한 보답이다.";
+		mes "혹시 여유되면 다음에도 또 부탁할게.";
+		delitem 1000824,10;	// EP19_Calapy
+		delitem 7326,10;	// Fluorescent_Liquid
+		delitem 1000829,10;	// EP19_Bell_Flower
+		delitem 1000830,10;	// EP19_Thin_Shell
+		erasequest 18141;
+		setquest 18142;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(18138) == 2 && isbegin_quest(18141) == 0 && checkquest(18142,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18142,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18141) == 1 && countitem(1000824) >= 10 && countitem(7326) >= 10 && countitem(1000829) >= 10 && countitem(1000830) >= 10" );
+	end;
+}
+//
+
+
+// Daily quest : Priest, Have Mercy??
+// (Gather 30 Shell of Rgan)
+jor_nest,235,57,3	script	파부야사비간드#1	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[중급 르간]";
+		mes "인간이다! 인간이 나타났다!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[파부야사비간드]";
+		mes "...";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	switch( checkquest(8791,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[파부야사비간드]";
+		mes "사제님 아까 구해 주신 껍질 감사해요다요예요!";
+		mes "우리가 먹지 않으니 걱정없다예요!";
+		close;
+	case 2:
+		erasequest 8791;
+		break;
+	}
+	switch( isbegin_quest(8790) ) {	// first time
+	case 0:
+		mes "[파부야사비간드]";
+		mes "...";
+		mes "...";
+		mes "...?";
+		mes "처음 보는 사제님.";
+		mes "나는 파부야사비간드.";
+		next;
+		mes "[파부야사비간드]";
+		mes "라스간드 님 직속 부하.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "직속?";
+		next;
+		mes "[파부야사비간드]";
+		mes "한 번도 뵌 적 없지만 나랑...";
+		next;
+		mes "[파부야사비간드]";
+		mes "여기 가누리자미간드.";
+		mes "그리고 일하러 간 수모프와누간드랑... 또 몇이 직속 부하다. 요.";
+		mes "라스간드 님께 껍질을 모아다 바치는 일을 한다. 요.";
+		next;
+		mes "[가누리자미간드]";
+		mes "그렇다. 우리는 큰 도움이 되는 일을 한다. 요.";
+		mes "비록 중급이지만...";
+		next;
+		mes "두 르간은 갑자기 침울한 분위기가 되었다.";
+		next;
+		mes "[파부야사비간드]";
+		mes "요새... 우리 임무가 힘들다요.";
+		mes "르간 아닌 인간이 우리가 일하던 구역에 들락거리는 바람에 껍질을 모아 오는 게 어려워졌다요.";
+		next;
+		select( "여기도 부화장이 있잖아" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "여기도 부화장이 있잖아.";
+		next;
+		mes "[가누리자미간드]";
+		mes "우리는 부화장 담당이 아니다요.";
+		mes "우리 일은 라스간드 님에게 바칠 껍질을 뱀신의 온기에서 찾아 오는 거다요.";
+		next;
+		mes "[가누리자미간드]";
+		mes "그런데 거기, 인간들이 들락날락하며 우리가 애써 닦아 놓은 길을 멋대로 쓴다요.";
+		mes "그런데 보다시피 우린 평신도다요.";
+		mes "막을 방법은 없는데... 그렇다고 길을 더 뚫을 힘도 없다요.";
+		next;
+		mes "[가누리자미간드]";
+		mes "사제님은 처음 보는데 엄청 강해 보인다요.";
+		mes "혹시...";
+		mes "혹시...";
+		next;
+		mes "[파부야사비간드]";
+		mes "<ITEM>[껍질]<INFO>1000822</INFO></ITEM> 남는 거 있으면... 라스간드 님께 드릴 건데... 쪼금만...";
+		mes "30개만...";
+		next;
+		mes "뻔뻔한 건지 용감한 건지 모르겠다.";
+		next;
+		if (select( "나눠 주기로 한다", "거절한다" ) == 2) {
+			mes "[파부야사비간드]";
+			mes "사제님 광택도 반들반들하고 멋있어서 부탁해 봤는데...";
+			mes "안 들어준다, 요.";
+			mes "라스간드 님... 죄송하다요...";
+			close;
+		}
+		mes "[파부야사비간드]";
+		mes "감사해요다요예요!";
+		mes "우린 여기 입구 근처에 있을 거다요.";
+		setquest 8790;
+		close;
+	case 1:
+		if (countitem(1000822) < 30) {
+			mes "[파부야사비간드]";
+			mes "<ITEM>[껍질]<INFO>1000822</INFO></ITEM>... 필요한데...";
+			mes "사제님...";
+			mes "30개...";
+			close;
+		}
+		mes "[파부야사비간드]";
+		mes "사제님!";
+		mes "껍질을 걷어 왔다고요?";
+		mes "우릴 위해?";
+		next;
+		mes "[파부야사비간드]";
+		mes "이렇게 감사할 데가!";
+		mes "요르문간드님의 은혜!";
+		mes "감사해요다요예요!";
+		npctalk "감사해요다요예요!", "ep19_jor_nest_232_55", bc_self;
+		mes "내일은 또 필요하지만...";
+		mes "그건 내일이 오면 생각한다, 요!";
+		delitem 1000822,30;	// EP19_Shell_Of_Rgan
+		completequest 8790;
+		setquest 8791;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(8792) ) {
+	case 0:
+		mes "[파부야사비간드]";
+		mes "사제님... 오늘도 <ITEM>[껍질]<INFO>1000822</INFO></ITEM> 남는 거 있으면... 라스간드 님께 드릴 건데... 쪼금만...";
+		mes "30개만...";
+		next;
+		mes "뻔뻔한 건지 용감한 건지 모르겠다.";
+		next;
+		if (select( "나눠 주기로 한다", "거절한다" ) == 2) {
+			mes "[파부야사비간드]";
+			mes "사제님 광택도 반들반들하고 멋있어서 부탁해 봤는데...";
+			mes "안 들어준다, 요.";
+			mes "라스간드 님... 죄송하다요...";
+			close;
+		}
+		mes "[파부야사비간드]";
+		mes "감사해요다요예요!";
+		mes "우린 여기 입구 근처에 있을 거다요.";
+		setquest 8792;
+		close;
+	case 1:
+	case 2:
+		if (countitem(1000822) < 30) {
+			mes "[파부야사비간드]";
+			mes "<ITEM>[껍질]<INFO>1000822</INFO></ITEM>... 필요한데...";
+			mes "사제님...";
+			mes "30개...";
+			close;
+		}
+		mes "[파부야사비간드]";
+		mes "사제님!";
+		mes "껍질을 걷어 왔다고요?";
+		mes "우릴 위해?";
+		next;
+		mes "[파부야사비간드]";
+		mes "이렇게 감사할 데가!";
+		mes "요르문간드님의 은혜!";
+		mes "감사해요다요예요!";
+		npctalk "감사해요다요예요!", "ep19_jor_nest_232_55", bc_self;
+		mes "내일은 또 필요하지만...";
+		mes "그건 내일이 오면 생각한다, 요!";
+		delitem 1000822,30;	// EP19_Shell_Of_Rgan
+		erasequest 8792;
+		setquest 8791;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8790) == 0 && checkquest(8791,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8790) == 2 && isbegin_quest(8792) == 0 && checkquest(8791,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8791,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8790) == 1 && countitem(1000822) >= 30" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8792) == 1 && countitem(1000822) >= 30" );
+	end;
+}
+
+jor_nest,232,55,7	script	가누리자미간드#1::ep19_jor_nest_232_55	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[중급 르간]";
+		mes "인간이다! 인간이 나타났다!";
+		close;
+	}
+	mes "[가누리자미간드]";
+	mes "아직도 뭐가 뭔지 잘 모르겠다.";
+	mes "예요.";
+	close;
+}
+//
+
+
+// Daily quest : Our Precious Food
+// (Gather 30 Rgan's Low-Grade Magic Core)
+jor_nest,34,79,5	script	미미르간드#ep19r	4_EP19_RGAN_SR1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "끼야아아아악!!!!!!!! 인간!! 일터!! 여기 아님!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[베르베르간드]";
+		mes "으흠흠.";
+		mes "불신자들은 모르겠지?";
+		mes "요르문간드 님의 은총을...";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	switch( checkquest(18140,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[미미르간드]";
+		mes "어린 사제야.";
+		mes "너는 다른 신도를 이끌어 줄 의무가 있단다.";
+		mes "둥지를 천천히 돌아보며 네 할일을 스스로 찾아보련.";
+		close;
+	case 2:
+		erasequest 18140;
+		break;
+	}
+	switch( isbegin_quest(18138) ) {	// first time
+	case 0:
+		mes "[미미르간드]";
+		mes "호오, 네가 이번에 새로 태어난 사제구나?";
+		mes "이리와서 여기 앉아보련.";
+		mes "내 이야기를 하나 해주마.";
+		next;
+		mes "[미미르간드]";
+		mes "혹독한 환경 속에서는 혹독한 생존법이 있기마련이지.";
+		mes "우리는 위대한 요르문간드 님의 마력을 잇는 자.";
+		next;
+		mes "[미미르간드]";
+		mes "그게 뭘 의미하는 지 알고 있니?";
+		next;
+		select( "우리 생명의 근원!" );
+		mes "[미미르간드]";
+		mes "잘 들어라.";
+		mes "과거 조상들은 요르문간드 님의 마력을 바탕으로 저 미드가르드 대륙을 지배했다.";
+		next;
+		mes "[미미르간드]";
+		mes "그러나 간악한 인간들의 발악으로 요르문간드 님은 봉인이 되었지.";
+		mes "하지만 그 순간에도 요르문간드 님은 우리를 위해 당신의 몸을 남겨주었다.";
+		next;
+		mes "[미미르간드]";
+		mes "그래. 그게 바로 이스가르드다.";
+		mes "우리는 요르문간드 님이 보호한 마지막 르간인 라스간드님의 피로 뿌리를 내리고";
+		mes "요르문간드 님이 남기신 당신의 몸의 마력으로 성장하지.";
+		next;
+		mes "[미미르간드]";
+		mes "허나, 몸까지 내어주며 내리신 은총을 제대로 받지 못해 버러지 같은 것들도 같이 태어났다.";
+		mes "그게 무엇인지 아느냐?";
+		next;
+		select( "하급 르간들?" );
+		mes "[미미르간드]";
+		mes "오, 역시 사제급이다 이건가.";
+		mes "제대로 알고 있군.";
+		mes "그래, 마력의 은총을 제대로 받지 못한 것들은 버러지고 죄인이지.";
+		next;
+		mes "[미미르간드]";
+		mes "그들은 추악하게 서로의 마력을 탐하고 상급의 마력을 탐한다.";
+		mes "본디 마력에 대한 갈망은 모든 르간이 가지고 있으나 저것들은 앞뒤 분간을 못하는 게지.";
+		next;
+		mes "[미미르간드]";
+		mes "저급한 것들이 쥐꼬리만한 마력을 탐하는 것을 더이상 봐줄 수 없구나.";
+		mes "내 너에게 중한 일을 하나 맡기마.";
+		next;
+		mes "[미미르간드]";
+		mes "죄인과 버러지가 품은 요르문간드 님의 마력을 회수하는 일이다.";
+		mes "당신이 남긴 마력은 한정되었지.";
+		mes "저것들이 감히 품고 있을 마력이 아니란다.";
+		next;
+		mes "[미미르간드]";
+		mes "마력은 한정되어있고, 우리가 정진하고 요르문간드 님의 뜻, 라스간드 님의 뜻을 펼치려면 마력을 허투루 쓸 수 없지.";
+		next;
+		mes "[미미르간드]";
+		mes "죄인이 가져간 마력을 회수해 르간의 미래를 위해 다시 쓰는 것.";
+		mes "그것이 지금의 우리가 할 일이란다.";
+		next;
+		mes "[미미르간드]";
+		mes "그리고 너와 같은 은총을 타고난 아이들을 위해서도 마력을 회수해야지.";
+		next;
+		select( "동족상잔이 아닌지?" );
+		mes "[미미르간드]";
+		mes "그 버러지들을 같은 동종으로 볼 것 없다.";
+		mes "그것들은 죄악이다.";
+		mes "그것들은 또한 제물이다.";
+		mes "은총을 받지 못한 죄악에게서 마력을 회수하는 것은 당연한 것.";
+		next;
+		mes "[미미르간드]";
+		mes "이게 얼음땅에 갇힌 우리의 생존방식이란다.";
+		mes "그러니 어린 사제야.";
+		mes "가서 죄인들을 처단하고 그들의 마력을 받아오너라.";
+		setquest 18138;
+		close;
+	case 1:
+		if (countitem(1000707) < 10 || checkquest(18138,HUNTING) != 2) {
+			mes "[미미르간드]";
+			mes "죄악이 어디에 있냐고?";
+			mes "어린 사제야. 하급 부화장에서 깨어났다 하지 않았니?";
+			next;
+			mes "[미미르간드]";
+			mes "그 곳을 메우고 있는 저급한 것들을 말하는 거란다.";
+			mes "^4d4dff" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + ", " + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000들이 죄악이고 버러지다.";
+			next;
+			mes "[미미르간드]";
+			mes "그것들을 처리하고 ^4d4dff" + getitemname(1000707) + "^000000을 10개를 회수하는 게 네 일이다.";
+			close;
+		}
+		mes "[미미르간드]";
+		mes "제대로 일을 수행한 모양이네.";
+		mes "이리다오.";
+		mes "마력핵은 순환시켜야 하니.";
+		next;
+		mes "[미미르간드]";
+		mes "마력핵을 흡수하면 더 강해지지 않냐고?";
+		mes "그럴수도 있지.";
+		mes "실제로 저기 존재하지 않니?";
+		next;
+		select( "하급 르간 말인가요?" );
+		mes "[미미르간드]";
+		mes "그래. 간혹 지능이란 게 있는 하급들이 있지.";
+		mes "그것들은 노역을 하며 죄를 씻고 있단다.";
+		next;
+		mes "[미미르간드]";
+		mes "그렇다고 하급이 하급을 잡아먹고 중급이 되는 건 아니야.";
+		mes "어찌되었든 각자가 은총으로 타고난 그릇의 크기가 다르니까.";
+		next;
+		mes "[미미르간드]";
+		mes "바다에 돌 하나 던진다고 그게 티나 나겠니?";
+		mes "하지만 작은 연못에 산을 깎아 넣는다면 다른 결과가 있겠지.";
+		next;
+		mes "[미미르간드]";
+		mes "마력을 탐하는 본능만 남아 서로 잡아먹고 잡아먹고 종국에 그릇을 채운 녀석이 간혹 등장하지.";
+		next;
+		mes "[미미르간드]";
+		mes "하지만 그릇의 크기가 바뀌진 않는구나.";
+		mes "그 또한 타고난 은총의 차이 아니겠느냐.";
+		next;
+		mes "[미미르간드]";
+		mes "하지만 라스간드 님께서 그런 천것들도 구제할 방법을 강구하고 계신지는 모르지.";
+		mes "후천적으로 은총의 크기를 키울 수 있다면 더 바랄게 없구나.";
+		next;
+		select( "그럼 마력핵은 어디에 쓰나요?" );
+		mes "[미미르간드]";
+		mes "생명체를 가진 것이 활동을 하려면 뭐가 필요하지?";
+		mes "그래. 양식이 필요하지.";
+		next;
+		mes "[미미르간드]";
+		mes "우리는 이것을 양식으로 삼는다.";
+		mes "일부는 라스간드 님의 연구에 사용이 되고, 일부는 소진한 마력을 회복하는데 사용되지.";
+		next;
+		mes "[미미르간드]";
+		mes "너도 마력이 소진되었다 느껴지거든 마력핵을 흡수하렴.";
+		mes "편해질 거란다.";
+		next;
+		mes "[미미르간드]";
+		mes "어찌되었든, 내 일을 도와줘서 고맙구나.";
+		mes "이 또한 사제인 네가 해야 할 일이다.";
+		mes "수고했다.";
+		delitem 1000707,10;	// Ep19_Rgan_Core_F
+		completequest 18138;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(18139) ) {
+	case 0:
+		mes "[미미르간드]";
+		mes "어린 사제야.";
+		mes "오늘도 교단을 위해 그 한 몸 바치지 않겠니?";
+		mes "신성한 노동의 의무를 하란 소리다.";
+		next;
+		if (select( "무슨 일인데요?", "기도하러 갑니다." ) == 2) {
+			mes "[미미르간드]";
+			mes "기도를?";
+			mes "정말이지?";
+			mes "참된 마음으로 그 신앙을 고하러 가는 게지?";
+			mes "거짓이 아니어야 할 것이야.";
+			close;
+		}
+		mes "[미미르간드]";
+		mes "뱀의 온기를 기어다니는 버러지들을 처리하고 마력을 회수하란 말이다.";
+		mes "일하는 것들이 허기져하는 꼴을 볼 수는 없지 않니.";
+		next;
+		mes "[미미르간드]";
+		mes "어차피 우리 일이다.";
+		mes "누군가는 할 일이고.";
+		mes "그러니 다녀오련.";
+		setquest 18139;
+		close;
+	case 1:
+		if (countitem(1000707) < 30) {
+			mes "[미미르간드]";
+			mes "^4d4dff" + getitemname(1000707) + "^000000 30개를 수거해 오련.";
+			mes "그것이 신성한 우리의 의무잖니.";
+			close;
+		}
+		mes "[미미르간드]";
+		mes "오늘도 이렇게 일용할 양식을 모아왔구나.";
+		mes "이것은 다른 르간들의 피요 땀이요 살이다.";
+		mes "이것은 다른 르간들의 피가 되고 살이 되고 혼이 될 것이다.";
+		next;
+		mes "[미미르간드]";
+		mes "죄악은 정화되고 새로운 피로 다시 태어날 것이다.";
+		mes "오늘도 성심을 다했구나.";
+		delitem 1000707,30;	// Ep19_Rgan_Core_F
+		erasequest 18139;
+		setquest 18140;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(18138) == 0 && checkquest(18140,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(18138) == 2 && isbegin_quest(18139) == 0 && checkquest(18140,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18140,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18138) == 1 && countitem(1000707) >= 10 && checkquest(18138,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18139) == 1 && countitem(1000707) >= 30" );
+	end;
+}
+//
+
+
+// Side quest
+jor_nest,74,100,5	script	알레이간드#1	4_EP19_RGAN_SR3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "끼야아아아악!!!!!!!! 인간!! 일터!! 여기 아님!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "아무 르간에게 잘못 말을 걸었다가 들키면 곤란하다.";
+		mes "눈치를 조금 봐야겠다.";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	switch( isbegin_quest(8794) ) {
+	case 0:
+		mes "[알레이간드]";
+		mes "...?";
+		mes "너.";
+		mes "너 처음 본다. 이리 좀 와 봐.";
+		next;
+		mes "말이 끝나기도 전에 최상급 르간은 팔뚝을 잡아채더니 끌어당겨, 이를 들이댔다!";
+		mes "들켰나!?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "아야!";
+		next;
+		mes "[알레이간드]";
+		mes "쯧. 엄살은.";
+		mes "안 물었어, 안 물었어.";
+		mes "안 먹었어.";
+		next;
+		mes "[알레이간드]";
+		mes "얘는 좀 엄살이 심하네?";
+		mes "겁쟁이인가 보다. 너, 이 알레이간드가 무섭냐?";
+		next;
+		select( "무섭다", "무섭지 않다" );	// the selection doesn't change the dialog
+		mes "[알레이간드]";
+		mes "말대답은...";
+		mes "기껏 안 먹었더니.";
+		next;
+		if (select( "왜 이런 행동을 하는지 물어본다", "빨리 도망가자..." ) == 2) {
+			mes "[알레이간드]";
+			mes "하하! 겁쟁이!";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "왜 이런 행동을 하냐...요?";
+		next;
+		mes "[알레이간드]";
+		mes "태어난 지 얼마 안 됐나? 생긴 건 안 그런데 되게 평신도같이 말을 하네?";
+		mes "근데 평신도면 이런 생각도 못 하겠지. 똑똑하긴 한가 보네.";
+		next;
+		mes "[알레이간드]";
+		mes "다들 똑같은 조건에서 똑같이 태어나는데 왜 이렇게들 성격이고 생각이고 다 다르지? 너무 재미있지 않느냐!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "????";
+		next;
+		mes "[알레이간드]";
+		mes "뭐야. 좀 놀려 봤어.";
+		mes "이렇게 순진하기까지 하다니.";
+		mes "정말 누가 팔 하나 뜯어먹어도 모른다?";
+		next;
+		mes "[알레이간드]";
+		mes "내가 말이야~. 구무미간드가 하지 말래서 안 하긴 하는데.";
+		mes "구무미간드 알아? 만난 적 있냐?";
+		mes "몰라? 하는 수 없지.";
+		next;
+		mes "[알레이간드]";
+		mes "어쨌든 내가 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "을 어떻게 먹을지 고민하고 있으니 걔가 그러더라고.";
+		mes "뭘 어떻게 해도 달라지는 건 없는데 왜 그걸 괴롭히냐는 거야.";
+		mes "아이구, 어이가 없어서.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(어이가 없는 건 이 쪽인데...)";
+		next;
+		mes "[알레이간드]";
+		mes "우리가 아무리 신의 마력이 깃든 땅에서... 선조의 피로 만들어져 이렇게 마력체로서 생명을 얻어서, 다른 생물하고 좀 다르다고 해도 말야.";
+		mes "핵석으로 만들지 않고 그냥 흡수해 봐도 되는 거 아니야?";
+		next;
+		mes "[알레이간드]";
+		mes "인간들은 뭔가 먹을 때 요리 같은 거 한다며?";
+		mes "난 그게 해 보고 싶었는데~!!";
+		mes "내가 이 날까지 살며 안해본 거라고는...";
+		next;
+		mes "[알레이간드]";
+		mes "그래서 구무미간드가...";
+		mes "...해서...";
+		mes "그게...";
+		next;
+		mes "굉장히 무서운 이야기를 들었다.";
+		mes "하지만 이야기에 나오는 구무미간드가 보통 르간들의 사고방식을 갖고 있다면, 원칙적으로는 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "을 직접 먹는 일은 없는 것 같다.";
+		next;
+		mes "[알레이간드]";
+		mes "...그러니까 가서 <ITEM>[르간의 저급 마력핵]<INFO>1000707</INFO></ITEM> 15개 정도 가져와.";
+		mes "없으면 네가 구해와.";
+		next;
+		mes "[알레이간드]";
+		mes "어서!";
+		setquest 8794;
+		close;
+	case 1:
+		if (countitem(1000707) < 15) {
+			mes "굉장히 무서운 이야기를 들었다.";
+			mes "하지만 이야기에 나오는 구무미간드가 보통 르간들의 사고방식을 갖고 있다면, 원칙적으로는 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "을 직접 먹는 일은 없는 것 같다.";
+			next;
+			mes "[알레이간드]";
+			mes "...그러니까 가서 <ITEM>[르간의 저급 마력핵]<INFO>1000707</INFO></ITEM> 15개 정도 가져와.";
+			mes "없으면 네가 구해와.";
+			next;
+			mes "[알레이간드]";
+			mes "어서!";
+			close;
+		}
+		mes "[알레이간드]";
+		mes "이걸 가져오란다고 정말 가져오냐?";
+		mes "거 진짜 크게 될 놈이네...";
+		mes "어쩌다 이런 애가 나왔지?";
+		mes "대체 누구 피에서 태어난 거야? 나는 아니겠지?";
+		next;
+		mes "[알레이간드]";
+		mes "진짜 와... 내가 불쌍해서 이건... 야. 가져가라.";
+		mes "너 어디 가서 또 그렇게 순진하게 시킨다고 다 하지 말고. 알았지?";
+		delitem 1000707,15;	// Ep19_Rgan_Core_F
+		completequest 8794;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		mes "[알레이간드]";
+		mes "쉬르륵.";
+		mes "가까이 오지 마.";
+		mes "난 기분이 별로야.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8794) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8794) == 1 && countitem(1000707) >= 15" );
+	end;
+}
+//
+
+
+// Daily quest : Do not Feed Wildlife
+// (Retrieve 1 Monster's Feed from a sand pile)
+icecastle,97,177,4	script	보급관#iws	EP19_NPC_IWIN_SR,{
+	if (ep19_main < 11) {
+		emotion ET_FRET;
+		mes "[보급관 고리르]";
+		mes "아니 어떤 녀석들이 벌레 꼬이게 얼어붙은 비늘 언덕에 먹이를 가져다 놓는 거야?";
+		next;
+		mes "[보급관 고리르]";
+		mes "응? 자넨?";
+		mes "아! 최근에 흘러 들어왔다는 모험가인가? 내 매서운 눈이 노려보고 있을 테니 허튼짓은 하지 않는 게 좋을 거야.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 21530) {
+		setpcblock PCBLOCK_NPC, true;
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "보급관 고리르: 아! 깜짝이야.", "", bc_self;
+		sleep2 500;
+		npctalk "보급관 고리르: 응? 이곳에 르간이?", "", bc_self;
+		sleep2 1000;
+		emotion ET_THINK;
+		sleep2 500;
+		npctalk "보급관 고리르: ... ... ...", "", bc_self;
+		sleep2 2500;
+		emotion ET_SURPRISE;
+		sleep2 500;
+		npctalk "보급관 고리르: 르간으로 변신한다는 요원이 자네였군. 그래 요원이면 그 정도는 해야지.", "", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+	}
+
+	switch( checkquest(5977,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		emotion ET_STARE_ABOUT;
+		mes "[보급관 고리르]";
+		mes "아하하.. 오늘 날씨가 참 따듯하구나. 모험가 분도 좋은 하루 보내시게..";
+		next;
+		mes "보급관 고리르는 날 보고 필사적으로 모르는 척하려는 것 같다. 임무가 아닐 때는 모르는 척하는 뭐 그런 규칙이라도 있는 건가?";
+		close;
+	case 2:
+		erasequest 5977;
+		emotion ET_SPARK;
+		npctalk "보급관 고리르: 촉이 온다.. 촉이와..", "", bc_self;
+		break;
+	}
+	if (isbegin_quest(5979) == 1) {	// completed
+		if (countitem(528) < 1) {
+			emotion ET_QUESTION;
+			mes "[보급관 고리르]";
+			mes "왔나? 그래 요원! 물론 물건은 회수해왔겠지?";
+			next;
+			mes "[보급관 고리르]";
+			mes "근데 왜 빈손이지? 요원이 무슨 착각을 했나 보군. 임무 중에 그럴 수도 있지 기다려 주겠네.";
+			close;
+		}
+		emotion ET_QUESTION;
+		mes "[보급관 고리르]";
+		mes "왔나? 그래 요원! 물론 물건은 회수해왔겠지?";
+		next;
+		mes "[보급관 고리르]";
+		mes "지금 손에 든 그것이 그 물건인가? 흠.. 어제 배식으로 나왔던 음식이군. 이걸 숨기다니 신원 미상의 존재도 제법이야.";
+		next;
+		erasequest 5979;
+		setquest 5977;
+		delitem 528,1;	// Monster's_Feed
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		mes "[보급관 고리르]";
+		mes "요원 자네의 헌신과 배려에 대한 보답일세. 물론 자네는 이런 걸 바라지 않겠지. 그 마음 다 아네..";
+		next;
+		emotion ET_COOL;
+		mes "[보급관 고리르]";
+		mes "하지만 내일도 부탁하기 위한 내 작은 마음이라고 생각해 주게나.";
+		close;
+	}
+	if (isbegin_quest(5976) == 0) {	// first time
+		mes "[보급관 고리르]";
+		mes "최근 어떤 신원 미상의 존재가 얼어붙은 비늘 언덕의 야생동물에게 먹이를 가져다 놓는다는 첩보가 접수되었다.";
+		next;
+		mes "[보급관 고리르]";
+		mes "그대로 방치하면, 벌레가 꼬이는 등 여러 문제를 야기할 수 있는 상황이다.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "저기요?";
+		next;
+		mes "[보급관 고리르]";
+		mes "동정심에 먹이를 챙겨줄 수는 있고 얼핏 보면 착한 행동 같아 보이지만, 그 행동 하나하나가 모이면 생태계를 파괴할 수도 있는 아주 위험한 행동이다.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "저 저기...";
+		next;
+		mes "[보급관 고리르]";
+		mes "응? 마침 기다렸다는 듯 여기 한가한 요원이 있군. 요원! 자네에게 임무를 하달하겠다.";
+		next;
+		mes "[보급관 고리르]";
+		mes "신원 미상의 존재가 얼어붙은 비늘 언덕에 가져다 둔 먹이를 회수해 오도록!";
+		next;
+		select( "하겠다.", "기꺼이 하겠다.", "얼마든지 하겠다.", "아니 선택지 상태가?" );
+		emotion ET_STARE;
+		mes "[보급관 고리르]";
+		mes "원래 요원에게는 거절이란 존재하지 않는다.";
+		next;
+		setquest 5976;
+		completequest 5976;
+		setquest 5978;
+		mes "[보급관 고리르]";
+		mes "요원! 자네의 헌신에 늘 감사하고 있네.";
+		next;
+		mes "[보급관 고리르]";
+		mes "회수 임무는 극비로.. 순찰 임무 도중이나, 개인적으로 얼어붙은 비늘 언덕을 지날 때 라던지..";
+		next;
+		mes "[보급관 고리르]";
+		mes "어느 타이밍에 처리할지는 전적으로 요원 자네에게 일임하겠네.";
+		next;
+		emotion ET_BEST;
+		mes "[보급관 고리르]";
+		mes "그럼 행운을 비네 요원!";
+		close;
+	}
+	switch( isbegin_quest(5978) ) {
+	case 0:
+		mes "[보급관 고리르]";
+		mes "누군가 또 먹이를 가져다 놨다는 첩보가 들어왔다. 이번에도 함께하겠나 요원?";
+		next;
+		if (select( "함께하겠다.", "그것은 거짓 정보다." ) == 2) {
+			emotion ET_HUK;
+			mes "[보급관 고리르]";
+			mes "헛! 거짓 정보? 이거 내가 큰 실수를 할 뻔했군. 더 확인해 보고 임무를 전달하겠네.";
+			close;
+		}
+		setquest 5978;
+		mes "[보급관 고리르]";
+		mes "이번에도 임무에 대한 모든 것을 요원 자네에게 일임하겠네. 행운을 비네 요원!";
+		close;
+	case 1:
+		mes "[보급관 고리르]";
+		mes "이 임무에 대한 모든 것은 전적으로 요원 자네에게 일임하겠네.";
+		next;
+		mes "[보급관 고리르]";
+		mes "아! 조언이라면 조언이고 아니라면 아닌데. 하지 말라는 행동을 하면서까지 뭔가를 숨겨 놓는 녀석들의 심리는 뻔해!";
+		next;
+		emotion ET_BEST;
+		mes "[보급관 고리르]";
+		mes "이 정도면 안 보이겠지 하는 안일한 생각으로 누가 봐도 티 나게 숨겨놨을 거야. 행운을 비네 요원!";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<독수리 순찰대>" );
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5979) == 1 && countitem(528) > 0" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 11 && isbegin_quest(5976) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(5976) == 2 && isbegin_quest(5978) == 0 && checkquest(5977,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5977,PLAYTIME) == 2" );
+	end;
+}
+
+jor_back1,359,349,0	script	무언가#ff01::hode_ff00	HODE,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 소지하고 계신 아이템이 많아 진행할 수 없습니다. -";
+		close;
+	}
+	mes "「^4A94F7무언가^000000」가 흙으로 살짝 덮여있는 것 같다. 움직이는 것 같은데 이거 흙 맞지?";
+	next;
+	if (select( "들춰 본다.", "그냥 둔다." ) == 2) {
+		mes "그래! 무서운 「무언가」가 나올지도 모르니 그냥 두도록 하자.";
+		close;
+	}
+	progressbar "FFFFFF",1;
+
+	.@r = rand(100);
+	if (.@r < 35 || isbegin_quest(5978) == 0) {
+		mes "에이.. 뭐야 그냥 평범한 흙더미잖아?";
+		disablenpc();
+		initnpctimer;
+		close;
+	}
+	if (.@r < 50) {
+		mes "으악! 벌레잖아? 대체 뭐가 있었던 거야?!";
+		disablenpc();
+		initnpctimer;
+		getmapxy .@map$,.@x,.@y, BL_NPC;
+		monster .@map$,.@x,.@y,"--ja--",1608,5, strnpcinfo(0) + "::OnMobDead";	// G_THIEF_BUG__
+		close;
+	}
+	erasequest 5978;
+	setquest 5979;
+	getitem 528,1;	// Monster's_Feed
+	disablenpc();
+	initnpctimer;
+	mes "누군가 이곳에 둔 먹이를 찾았다. 보급관 고리르에게 가져다 주자.";
+	close;
+
+OnTimer30000:
+	enablenpc();
+	stopnpctimer;
+	killmonster "jor_back1", strnpcinfo(0) + "::OnMobDead";
+	end;
+
+OnMobDead:
+	end;
+}
+jor_back1,113,142,0	duplicate(hode_ff00)	무언가#ff01	HODE
+jor_back1,342,292,0	duplicate(hode_ff00)	무언가#ff02	HODE
+jor_back1,292,259,0	duplicate(hode_ff00)	무언가#ff03	HODE
+jor_back1,265,154,0	duplicate(hode_ff00)	무언가#ff04	HODE
+jor_back1,278,103,0	duplicate(hode_ff00)	무언가#ff05	HODE
+jor_back1,152,60,0	duplicate(hode_ff00)	무언가#ff06	HODE
+jor_back1,100,70,0	duplicate(hode_ff00)	무언가#ff07	HODE
+jor_back1,136,175,0	duplicate(hode_ff00)	무언가#ff08	HODE
+jor_back1,149,239,0	duplicate(hode_ff00)	무언가#ff09	HODE
+//
+
+
+// Daily quest : Searching for Survivors
+icas_in,42,252,5	script	수호자 레온#ep19leon02	4_EP19_LEON,{
+	switch( isbegin_quest(18133) ) {	// side quest
+	case 0:
+		break;
+	case 1:
+		mes "[레온]";
+		mes "성에 일손이 늘어 다행입니다.";
+		mes "그 전에는 레하르 혼자서 열심이었거든요.";
+		mes "그럼 자세한 이야기는 미리암 님과 나누시죠.";
+		close;
+	case 2:
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "풀 한 포기 안 자라는 설원에서 벽난로라니 이상한가요?";
+		mes "간간히 발견되는 마력의 결정체인 설화의 꽃잎과 르간들이 축적한 마력핵을 연료로 사용하는 거랍니다.";
+		next;
+		mes "[레온]";
+		mes "오셔서 몸을 좀 녹이고 가세요.";
+		close3;
+	}
+	switch( isbegin_quest(18132) ) {
+	case 0:
+		mes "[레온]";
+		mes "뭔가 필요한 용건이라도?";
+		mes "다른 분들은 숙소나 식당에 계실겁니다.";
+		close;
+	case 1:
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "혹시 레하르의 전언을 받고 오셨습니까?";
+		mes "한창 바쁜 와중에 오라가라해서 미안하군요.";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[레온]";
+		mes "따로 부탁드릴 일이 있었는데 잘 오셨습니다.";
+		mes "다름 아니라 지난번에 르간이 거처를 수색할 때 노역자들을 구출하지 않았습니까?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "그때 구조한 이들은 마람과 레이지 님이 인솔하여 귀환했습니다만..?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "당시에 르간의 거처에서 밖으로 탈출한 이들이 있는 듯 합니다.";
+		mes "순찰을 돌던 아윈이 빙하와 평원 지역에서 조난자를 발견한 모양이에요.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "확실히 그럴 가능성이 있겠군요.";
+		mes "조난자가 여럿일 수도 있고요.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "아윈들이 주변을 정찰하고 있긴 하지만 모든 지역을 꼼꼼히 둘러보기는 힘들어서 여러분께 도움을 구하고자 합니다.";
+		next;
+		cutin "ep19_leon05.png",2;
+		mes "[레온]";
+		mes ".....";
+		next;
+		select( "뭔가 신경쓰이는 부분이라도?" );
+		mes "[레온]";
+		mes "결계는 미드가르드와 이스가르드를 완전히 분리하기 위해 만들어진 것입니다.";
+		mes "명확하게 말하자면 르간을 분리시킨 것입니다만....";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "초대장 없이도 오가는 이들이 있다는 건, 명백히 결계가 약해졌다는 증거.";
+		mes "수백년의 세월을 죽지않고 버틴 우리의 존재는 이 날을 위해서였을까 라는 생각이 스쳤습니다.";
+		next;
+		select( "수백년.." );
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "나와 오렐리는 요르문간드의 뜻을 이어받아 이 곳을 지키고 있습니다.";
+		mes "여러분이 아시는 것처럼 요르문간드는 악신이 아니에요.";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[레온]";
+		mes "요르문간드를 악신으로 여겨지게 만든 것은 요르문간드 교단이라 스스로를 칭하며 대륙을 도탄에 빠트린 르간들 때문이죠.";
+		next;
+		select( "요르문간드의 저주는?" );
+		cutin "ep19_leon05.png",2;
+		mes "[레온]";
+		mes "요르문간드 교단의 수장이 마지막 발악으로 피의 저주를 건 겁니다.";
+		mes "그들은 항상 깃발에 요르문간드를 내세웠으니 그리 전해진거지요.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "어쨌든 요르문간드는 스스로의 신체를 버리면서까지 대륙을 구하는데 일조한 반신입니다.";
+		mes "요르문간드의 의지를 잇기 위해서도 르간은 이 땅을 벗어나면 안됩니다.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "무거운 이야기입니다.";
+		mes "기록된 역사가 진실이 아닐수도 있다는 건 이해하지만...";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "그때도 지금도 우리는 우리가 할 수 있는 최선을 하면 되는 거겠죠?";
+		mes "결계는 나와 오렐리가 유지할 겁니다.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[레온]";
+		mes "여러분은 우선 조난자들을 구조해 주시겠어요?";
+		mes "조난자에 대한 것은 일임하도록 하겠습니다.";
+		next;
+		cutin "ep19_leon03.png",2;
+		mes "[레온]";
+		mes "물론 지원은 아끼지 않고 다 할 생각입니다.";
+		mes "어떻게 구한 대륙인데요.";
+		mes "그 후손은 당연히 지켜야하지 않습니까?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "레온 님 뜻은 잘 알겠습니다.";
+		mes "모험가 님, 그럼 구체적인 계획을 짜볼까요?";
+		completequest 18132;
+		setquest 18133;
+		close3;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18132) == 1" );
+	end;
+}
+
+icas_in,48,252,3	script	미리암#ep19miriam05	4_EP18_MIRIAM,{
+	switch( isbegin_quest(18133) ) {	// side quest
+	case 0:
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "레온 님께서 뭔가 하실 말씀이 있나봅니다.";
+		close3;
+	case 1:
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "얼어붙은 비늘 빙하 지역과 평원 지역을 나눠서 수색하면 될 것 같은데 어떠십니까?";
+		next;
+		select( "구출한 조난자는?" );
+		mes "[미리암]";
+		mes "우선 얼음성의 숙소로 데려와 몸을 추스린다음 마람과 레이지 씨를 통해 대륙으로 보내야겠죠.";
+		next;
+		mes "[미리암]";
+		mes "모험가님이 한 지역을 맡이 주시면 나머지는 제가 찾아보겠습니다.";
+		mes "르간의 거처도 아윈과 레하르 님께 요청해서 수색하도록 하죠.";
+		next;
+		mes "[미리암]";
+		mes "아무래도 목표지가 명확한 장소는 그 분들이 맡아주는게 나을 것 같네요.";
+		mes "수색하는 시간이 짧을테니까요.";
+		next;
+		mes "[미리암]";
+		mes "조난자 수색 자체가 힘든 환경을 저랑 모험가님이 돌아봐야겠죠.";
+		mes "준비가 되시면 말을 걸어주세요.";
+		completequest 18133;
+		close3;
+	case 2:
+		break;
+	}
+	switch( checkquest(18137,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "설원을 언제까지나 헤맬 수는 없는 노릇이지요.";
+		mes "충분한 휴식을 취하고 다시 수색에 나서는게 좋겠습니다.";
+		close3;
+	case 2:
+		erasequest 18137;
+		break;
+	}
+	if (isbegin_quest(18136) == 1) {	// final step
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "구조한 조난자는 모험가 숙소로 안내하시죠.";
+		mes "마람이 기다리고 있을 겁니다.";
+		close3;
+	}
+	if (isbegin_quest(18134) == 1) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "얼어붙은 비늘 빙하 지역을 수색해 주십시오.";
+		mes "평원은 제가 수색하겠습니다.";
+		mes "조난자를 발견하면 바로 얼음성 숙소로 데려와야 합니다.";
+		close3;
+	}
+	if (isbegin_quest(18135) == 1) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "얼어붙은 비늘 평원 지역을 수색해 주십시오.";
+		mes "빙하는 제가 수색하겠습니다.";
+		mes "조난자를 발견하면 바로 얼음성 숙소로 데려와야 합니다.";
+		close3;
+	}
+	cutin "ep18_miriam_01.png",0;
+	mes "[미리암]";
+	mes "그럼 조난자 수색 구역을 나눠볼까요?";
+	mes "빙하와 평원 둘 중 하나를 선택하시면 나머지 구역을 제가 수색하죠.";
+	next;
+	switch( select( "빙하를 수색한다.", "평원을 수색한다." ) ) {
+	case 1:
+		mes "[미리암]";
+		mes "그럼 전 평원 지역을 살펴보죠.";
+		mes "조난자를 발견하면 즉시 얼음성의 숙소로 데려오시면 됩니다.";
+		next;
+		mes "[미리암]";
+		mes "마람에게는 미리 말 해두었습니다.";
+		mes "한 명이라도 발견하면 즉시 귀환하도록 해요.";
+		setquest 18134;
+		ep19_survivor = rand(1,10);	// note: the npc to talk to doesn't change
+		close3;
+	case 2:
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "그럼 전 빙하 지역을 살펴보죠.";
+		mes "조난자를 발견하면 즉시 얼음성의 숙소로 데려오시면 됩니다.";
+		next;
+		mes "[미리암]";
+		mes "마람에게는 미리 말 해두었습니다.";
+		mes "한 명이라도 발견하면 즉시 귀환하도록 해요.";
+		setquest 18135;
+		ep19_survivor = rand(1,10);	// note: the npc to talk to doesn't change
+		close3;
+	}
+	end;
+
+OnInit:
+	// side quest
+	questinfo( QTYPE_QUEST, QMARK_NONE, "isbegin_quest(18133) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18133) == 2 && isbegin_quest(18134) == 0 && isbegin_quest(18135) == 0 && isbegin_quest(18136) == 0 && checkquest(18137,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18137,PLAYTIME) == 2" );
+	end;
+}
+
+jor_back2,365,39,3	script	구덩이#ep19_2_1::ep19_jor_back2_365_39	4_CRACK,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_2_", "") );
+
+	if (ep19_survivor == .@num && isbegin_quest(18135) == 1) {
+		mes "눈더미 사이로 구덩이가 파져있다.";
+		if (select( "구덩이를 파 본다.", "잘 덮는다." ) == 2) {
+			mes "눈더미를 잘 덮었다.";
+			close;
+		}
+		progressbar "4D4DFF",2;
+		mes "이럴수가!";
+		mes "조난자가 눈구덩이를 파고 웅크리고 있었다.";
+		mes "얼음성으로 데려가 몸을 녹이자.";
+		ep19_survivor = 0;
+		erasequest 18135;
+		setquest 18136;
+		close;
+	}
+	mes "눈더미를 파헤친 흔적이 있다.";
+	mes "주변에 특별한 것은 보이지 않는다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(18135) == 1" );
+	end;
+}
+jor_back2,354,53,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_2	4_CRACK
+jor_back2,256,197,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_3	4_CRACK
+jor_back2,125,295,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_4	4_CRACK
+jor_back2,195,161,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_5	4_CRACK
+jor_back2,274,178,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_6	4_CRACK
+jor_back2,216,336,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_7	4_CRACK
+jor_back2,142,91,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_8	4_CRACK
+jor_back2,127,34,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_9	4_CRACK
+jor_back2,20,130,3	duplicate(ep19_jor_back2_365_39)	구덩이#ep19_2_10	4_CRACK
+
+jor_back3,344,296,3	script	구덩이#ep19_3_1::ep19_jor_back3_344_296	4_CRACK,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_3_", "") );
+
+	if (ep19_survivor == .@num && isbegin_quest(18134) == 1) {
+		mes "눈더미 사이로 구덩이가 파져있다.";
+		if (select( "구덩이를 파 본다.", "잘 덮는다." ) == 2) {
+			mes "눈더미를 잘 덮었다.";
+			close;
+		}
+		progressbar "4D4DFF",2;
+		mes "이럴수가!";
+		mes "조난자가 눈구덩이를 파고 웅크리고 있었다.";
+		mes "얼음성으로 데려가 몸을 녹이자.";
+		ep19_survivor = 0;
+		erasequest 18134;
+		setquest 18136;
+		close;
+	}
+	mes "눈더미를 파헤친 흔적이 있다.";
+	mes "주변에 특별한 것은 보이지 않는다.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(18134) == 1" );
+	end;
+}
+jor_back3,320,208,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_2	4_CRACK
+jor_back3,182,305,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_3	4_CRACK
+jor_back3,110,269,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_4	4_CRACK
+jor_back3,277,208,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_5	4_CRACK
+jor_back3,197,178,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_6	4_CRACK
+jor_back3,107,298,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_7	4_CRACK
+jor_back3,231,68,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_8	4_CRACK
+jor_back3,151,74,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_9	4_CRACK
+jor_back3,39,322,3	duplicate(ep19_jor_back3_344_296)	구덩이#ep19_3_10	4_CRACK
+
+icas_in,253,171,0	script	#ep19_evt07_	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (isbegin_quest(18136) == 1) {
+		cloakoffnpcself( "ep19_icas_in_262_179" );
+		cloakoffnpcself( "ep19_icas_in_260_180" );
+		cloakoffnpcself( "ep19_icas_in_261_186" );
+		cloakoffnpcself( "ep19_icas_in_262_184" );
+		end;
+	}
+	end;
+}
+
+icas_in,262,179,3	script	마람#ep19maram05::ep19_icas_in_262_179	4_EP18_MARAM,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "소지하고 계시는 아이템의 갯수가 많아 퀘스트를 진행 할 수 없습니다.";
+		mes "아이템을 정리한 뒤 다시 시도해 주시기 바랍니다.";
+		close;
+	}
+	if (isbegin_quest(18136) == 1) {
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "구조한 조난자 분들은 몸을 녹이고 계세요.";
+		mes "이 분들은 제가 비공정으로 데려다 드릴 예정이에요.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "큰 일 나기 전에 발견해서 다행이지.";
+		mes "먹고 사는게 힘들어서 요르문간드라는 새로운 종교로 알고 따라나선 이들도 있는 것 같아.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[마람]";
+		mes "흠. 어쨌든 이 분들은 나랑 레이지 씨가 알아서 다독여서 집으로 돌려보낼게.";
+		mes "모험가님도 고생하셨어요. 좀 쉬세요.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[미리암]";
+		mes "그래요.";
+		mes "오늘은 이만 쉬고, 내일 다시 수색을 해봐요.";
+		erasequest 18136;
+		setquest 18137;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			.@bonus = 1;
+		getitem 1000608,2+.@bonus;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[마람]";
+	mes "조난자 분들이 어느정도 안정을 찾을때까지 기다렸다가 출발할 예정입니다.";
+	mes "필요한 물품이 있으면 겸사 겸사 사올게요.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18136) == 1" );
+	cloakonnpc();
+	end;
+}
+
+icas_in,260,180,5	script	미리암#ep19miriam06::ep19_icas_in_260_180	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",0;
+	mes "[미리암]";
+	mes "수색 힘들었죠?";
+	mes "잠시 몸을 녹이는 게 어떻습니까?";
+	close3;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icas_in,261,186,7	script	구조한 조난자#ep19_01::ep19_icas_in_261_186	4_M_SITDOWN,{
+	npctalk "..이..이게 그리웠어. 따뜻한 불 맛..!", "", bc_self;
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icas_in,262,184,7	script	구조한 조난자#ep19_02::ep19_icas_in_262_184	4_F_SITDOWN,{
+	npctalk "구.. 구해주셔서 감사 감사합니다. 어흑.. 얼어죽는 줄 알았네.", "", bc_self;
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+//
+
+
+// Daily quest : Happy Lunch Time with Zoryara
+// (Gather 15 Tough Thin Shell)
+icas_in,241,66,3	script	조랴라#ep19in::ep19_icas_in_241_66	4_EP19_ZORYARA,{
+	if (ep19_main < 11) {
+		mes "[조랴라]";
+		mes "인간이 찾아온다는 이야기는 들었는데...";
+		mes "외출 허가는 받았는가? 우리는 말하자면 전시 상태라 허락 없는 단독행동은 위험하다.";
+		mes "우리 둥지로 돌아가라.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 소지하고 계신 아이템이 많아 퀘스트를 진행할 수 없습니다. -";
+		close;
+	}
+	switch( checkquest(8788,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[조랴라]";
+		mes "애들이 기뻐하니 나도 한시름 덜었군.";
+		mes "이렇게 타 종족을 우리 육아에 끼게 하다니... 허허 참.";
+		close;
+	case 2:
+		erasequest 8788;
+		break;
+	}
+	switch( isbegin_quest(8787) ) {	// first time
+	case 0:
+		mes "[조랴라]";
+		mes "이번에 헬록과 같이 왔다는 인간인가? 반갑네.";
+		mes "나는 조...";
+		mes "앨빈 알렉산드리아 아델 다비드 카시아 해리 아폴로다.";
+		mes "편하게 불러라.";
+		next;
+		mes "[호랴라]";
+		mes "우리 큰오빠 이름은 조랴라야!";
+		mes "나는 호랴라고.";
+		next;
+		mes "[조랴라]";
+		mes "...호랴라!";
+		next;
+		mes "[조랴라]";
+		mes "...흠흠.";
+		mes "우리 조수가 실언을 했군.";
+		next;
+		mes "[조랴라]";
+		mes "여긴 보다시피 주방 겸 식당이다.";
+		mes "주방은 모두에게 개방되어 있지만 식재 관리는 내가 담당한다.";
+		mes "요리라기는 뭐하지만... 자르고, 다지고, 써는 것도 필요하다면 내가 한다.";
+		next;
+		mes "[조랴라]";
+		mes "어차피 모두 얼어 있어서...";
+		mes "상할 걱정은 없는 것이 다행이다.";
+		mes "그리고 불을 쓰면 결과물이 줄어든다.";
+		mes "관리를 맡아 보니 어쨌든 양이 많아야 하는 시기가 종종 있다.";
+		next;
+		mes "[조랴라]";
+		mes "...나 혼자 주절주절 떠들었군.";
+		mes "모랴라가 낚시를 나가면 호랴라는 내가 봐야 해서...";
+		npctalk "호랴라 : 내가 오빠를 보고 있는 거야!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[조랴라]";
+		mes "우리 부모님은 순찰대 소속이라 말이야.";
+		mes "호랴라는 거의 나와 둘째인 모랴라가 맡아 길렀지.";
+		npctalk "호랴라 : 내가 오빠를 봐 준 거야!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[조랴라]";
+		mes "조수. 손님하고 이야기 중이잖니.";
+		npctalk "호랴라 : 넵!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[조랴라]";
+		mes "이해해 주게.";
+		npctalk "호랴라 : 아이스 스트로우 먹고 싶다!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[조랴라]";
+		mes "...";
+		next;
+		mes "[조랴라]";
+		mes "<ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM> 말이냐... 그거 재고가 똑 떨어졌는데.";
+		mes "20개 정도 있으면 어떻게 되겠다만...";
+		npctalk "토라룽 : 나두!", "ep19_icas_in_232_59", bc_self;
+		next;
+		mes "[조랴라]";
+		mes "...";
+		next;
+		mes "탁아소였나 보다.";
+		next;
+		if (select( "대신 사냥을 나선다", "위로한다" ) == 1) {
+			mes "[조랴라]";
+			mes "늘 있는 일이긴 하지만...";
+			mes "그래. 늘 있는 일이지...";
+			npctalk "토라룽 : 조랴라, 놀아줘!", "ep19_icas_in_232_59", bc_self;
+			close;
+		}
+		mes "[조랴라]";
+		mes "이렇게 고마울 데가!";
+		mes "아이들은 내가 돌보고 있을 테니... 아, 물론 인간, 자네는 우리 애들하고 아무 상관도 없지만...";
+		mes "<ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM>은 아이스 스트로우를 사냥하면 구할 수 있어.";
+		mes "20개만 좀 부탁하네!";
+		setquest 8787;
+		close;
+	case 1:
+		if (countitem(1000830) < 15) {
+			mes "[조랴라]";
+			mes "<ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM> 15개를 구해다 주지 않겠나...";
+			mes "애들이 먹고 싶다니 어쩔 수가 없군.";
+			npctalk "호랴라 : 조랴라는 사냥을 못해!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 칼은 잘 써!", "ep19_icas_in_232_59", bc_self;
+			npctalk "조랴라 : 이녀석들이...", "", bc_self;
+			close;
+		}
+		mes "[조랴라]";
+		mes "고맙다, 인간!";
+		npctalk "호랴라 : 고맙다, 인간!", "ep19_icas_in_235_57", bc_self;
+		npctalk "고맙다, 인간!", "ep19_icas_in_232_59", bc_self;
+		delitem 1000830,15;	// EP19_Thin_Shell
+		completequest 8787;
+		setquest 8788;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		next;
+		mes "[조랴라]";
+		mes "...";
+		mes "어휴...";
+		emotion ET_CRY;
+		next;
+		mes "[조랴라]";
+		mes "자자... 잘게 썰어 줄 테니까 멀리 떨어져 있으렴.";
+		mes "얼음조각이 튀면 위험하다.";
+		mes "인간, 구경할 거면 조금 뒤로 물러서라.";
+		mes "자, 그럼 칼질을 해 보실까...";
+		npctalk "조랴라 : 필살! 아윈 수호자아류 속절검!", "", bc_self;
+		npctalk "호랴라 : 조랴라 멋있다!", "ep19_icas_in_235_57", bc_self;
+		npctalk "조랴라 멋있다!", "ep19_icas_in_232_59", bc_self;
+		close;
+	case 2:
+		break;
+	}
+
+	if (isbegin_quest(8789) == 1) {
+		if (countitem("EP19_Thin_Shell") < 15) {
+			mes "[조랴라]";
+			mes "<ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM> 15개를 구해다 주지 않겠나...";
+			mes "애들이 먹고 싶다니 어쩔 수가 없군.";
+			npctalk "호랴라 : 조랴라는 사냥을 못해!", "ep19_icas_in_235_57", bc_self;
+			npctalk "토라룽 : 칼은 잘 써!", "ep19_icas_in_232_59", bc_self;
+			npctalk "조랴라 : 이녀석들이...", "", bc_self;
+			close;
+		}
+		mes "[조랴라]";
+		mes "고맙다, 인간!";
+		npctalk "호랴라 : 고맙다, 인간!", "ep19_icas_in_235_57", bc_self;
+		npctalk "토라룽 : 고맙다, 인간!", "ep19_icas_in_232_59", bc_self;
+		delitem 1000830,15;	// EP19_Thin_Shell
+		erasequest 8789;
+		setquest 8788;
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		next;
+		mes "[조랴라]";
+		mes "...";
+		mes "어휴...";
+		emotion ET_CRY;
+		next;
+		mes "[조랴라]";
+		mes "자자... 잘게 썰어 줄 테니까 멀리 떨어져 있으렴.";
+		mes "얼음조각이 튀면 위험하다.";
+		mes "인간, 구경할 거면 조금 뒤로 물러서라.";
+		mes "자, 그럼 칼질을 해 보실까...";
+		npctalk "조랴라 : 필살! 아윈 수호자아류 속절검!", "", bc_self;
+		npctalk "호랴라 : 조랴라 멋있다!", "ep19_icas_in_235_57", bc_self;
+		npctalk "조랴라 멋있다!", "ep19_icas_in_232_59", bc_self;
+		close;
+	}
+	mes "[조랴라]";
+	mes "헉, 헉...";
+	mes "인간, 반갑다...";
+	next;
+	select( "오늘도 바쁘구나" );
+	mes "[조랴라]";
+	mes "아니... 그러니까 저기.";
+	npctalk "호랴라 : 젤로피 먹고 싶다!", "ep19_icas_in_235_57", bc_self;
+	npctalk "토라룽 : 나도!", "ep19_icas_in_232_59", bc_self;
+	next;
+	mes "[조랴라]";
+	mes "...그러니까 저기.";
+	mes "재고 관리가 안 되는 것이 아니라... 애들이 원래 좋아해서.";
+	mes "혹시 <ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM> 15개를 구해다 주지 않겠나...";
+	next;
+	if (select( "수락한다.", "바빠서 이만" ) == 2) {
+		mes "[조랴라]";
+		mes "어쩔 수 없지...";
+		npctalk "호랴라 : 조수가 갔다 올까?", "ep19_icas_in_235_57", bc_self;
+		npctalk "토라룽 : 나도 갈래!", "ep19_icas_in_232_59", bc_self;
+		npctalk "조랴라 : 너희는 아직 멀었어! 자 자, 여기서 노는 거야... 여기서.", "", bc_self;
+		close;
+	}
+	mes "[조랴라]";
+	mes "고맙네...";
+	mes "<ITEM>[얇고 질긴 껍질]<INFO>1000830</INFO></ITEM>은 아이스 스트로우를 사냥하면 구할 수 있어.";
+	npctalk "호랴라 : 인간 다녀올 때까지 놀아줘!", "ep19_icas_in_235_57", bc_self;
+	npctalk "나도!", "ep19_icas_in_232_59", bc_self;
+	setquest 8789;
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "isbegin_quest(8787) == 0 && ep19_main >= 11" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(8787) == 1 && countitem(1000830) >= 15" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(8789) == 1 && countitem(1000830) >= 15" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8788,PLAYTIME) == -1 && isbegin_quest(8789) == 0 && isbegin_quest(8787) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8788,PLAYTIME) == 2" );
+	end;
+}
+
+icas_in,235,57,3	script	호랴라#ep19in::ep19_icas_in_235_57	4_EP19_IWIN,{
+	mes "[호랴라]";
+	mes "나는 호랴라다!";
+	mes "장래에 위대한 수호자가 될 거야!";
+	close;
+}
+
+icas_in,232,59,5	script	토라룽#ep19in::ep19_icas_in_232_59	4_EP19_IWIN,{
+	mes "[토라룽]";
+	mes "나는 토라룽이다!";
+	mes "장래에...";
+	mes "장래에... 훌륭한 수호자가 될 거야!";
+	mes "이렇게 말하는 거 맞아?";
+	npctalk "호랴라 : 맞아!", "ep19_icas_in_235_57", bc_self;
+	npctalk "토라룽 : 휴.", "ep19_icas_in_232_59", bc_self;
+	close;
+}
+//
+
+// (cloakoff in side quest)
+// icas_in,33,112,0	script	#내부인원제한	HIDDEN_WARP_NPC,1,1,{
+
+// Daily quest : Friederike's Day
+// (Kill 10x Primitive Rgan and 10x Lowest Rgan)
+// (Gather 10 Rgan's Magic Core)
+// Side quest : Frozen Sea. Step 7, 20
+icas_in,32,123,5	script	프리데리케#ep19_room	4_EP19_FRIEDERIKE,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 여기서 잠깐 !! -";
+		mes "- 가지고 계신 아이템이 너무 많아 -";
+		mes "- 퀘스트를 진행할 수 없습니다. -";
+		mes "- 몸을 가볍게 하시고 -";
+		mes "- 다시 시도해주세요. -";
+		close;
+	}
+	// Side quest Purification Saint
+	// Unlock the 2 Side Quests : Frozen Sea / Friederike's Day
+	if (ep19_side_saint == 18) {
+		mes "[프리데리케]";
+		mes "여기가 내 방이야?";
+		mes "귀여워!";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_6" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[보클린드]";
+		mes "우리 아가들 왔구나.";
+		mes "오느라 고생 많았다.";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_healrock_3" );
+		next;
+		mes "[프리데리케]";
+		mes "앗!!!";
+		mes "보클린드님 저 왔어요~";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[마크]";
+		mes "아… 안녕하십니까!";
+		mes "왕녀 폐하!!!";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[듀]";
+		mes "<FONT SIZE = 16><B>와…왕녀폐하?!</FONT></B>";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[보클린드]";
+		mes "어머머!";
+		mes "엘리스의 동생이구나.";
+		mes "그렇게 딱딱하게 굴지 않아도 된단다.";
+		mes "보클린드 이모라고 부르렴.";
+		mes "옆엔 친구들이니?";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[마크]";
+		mes "네.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "잘 왔다!";
+		mes "그렇지 않아도 일손이 부족한데.";
+		mes "<FONT SIZE = 16><B>호호호!</FONT></B>";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "그럼 난 이만 프리데리케가 온 걸 확인했으니 돌아갈게.";
+		mes "할 일이 너무 많네.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[프리데리케]";
+		mes "에~";
+		mes "벌써 가세요?";
+		cutin "ep19_friederike04.png",2;
+		npctalk "프리데리케 : 이제 막 만났는데!", "", bc_self;
+		next;
+		mes "[보클린드]";
+		mes "좀 한가해지면 부를게.";
+		mes "맛있는 차랑 과자도 준비해 뒀단다.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[프리데리케]";
+		mes "정말?";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "그러엄~~";
+		mes "네가 온다고 해서 특별한 걸루 부탁해 뒀지.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "어휴!";
+		mes "시간이 벌써 이렇게!";
+		mes "정말 빨리 가봐야겠다.";
+		mes "^e5555e레하르^000000 뒤는 부탁해.";
+		mes "믿는다.";
+		cutin "ep19_voglinde01.png",0;
+		npctalk "보클린드 : 거기 두 명은 날 따라오렴.", "ep19_healrock_3", bc_self;
+		next;
+		mes "[레하르]";
+		mes "네…? 네!";
+		cutin "ep19_lehar05.png",2;
+		npctalk "듀 : 네?!", "ep19_healrock_4", bc_self;
+		npctalk "마기 : 네!", "ep19_healrock_6", bc_self;
+		cloakonnpcself( "ep19_healrock_3" );
+		cloakonnpcself( "ep19_healrock_4" );
+		cloakonnpcself( "ep19_healrock_6" );
+		ep19_side_saint = 19;
+		erasequest 11810;
+		setquest 11811;
+		close3;
+	}
+	if (ep19_side_saint == 19) {
+		mes "[프리데리케]";
+		mes "레하르.";
+		mes "보클린드님이 뭐라고 하셨어?";
+		cutin "ep19_friederike02.png",2;
+		close3;
+	}
+	if (ep19_side_saint < 20)	// the player shouldn't be able to come here without the pre-requisite quests
+		end;
+
+	// Side quest : Frozen Sea. Step 7
+	if (ep19_side_sea == 7) {
+		mes "[프리데리케]";
+		mes "왔어요?";
+		mes "엄청 춥죠?";
+		mes "다들 이리와요.";
+		mes "여긴 깃털이 깔려있어서 엄청 따듯해.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[마크]";
+		mes "쉬고 싶은 생각은 굴뚝같지만 지금은 그럴 때가 아니라서.";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[마크]";
+		mes "외투 입어.";
+		mes "갈데가 있어.";
+		next;
+		mes "[프리데리케]";
+		mes "어디가?";
+		mes "밖에 나가는 거야?";
+		mes "이렇게 추운데?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[마크]";
+		mes "^e5555e독이 가득한 구덩이^000000를 발견했거든 아마 타마린이 거기에 빠져서 저렇게 된 것 같아.";
+		mes "정화 해두지 않으면 또 피해자가 나오겠지.";
+		mes "슈르르씨의 마력핵도 깨져버렸데.";
+		cutin "ep18_mark_01.png",0;
+		npctalk "타타링 : 아이고 죽겠다!!!", "ep19_healrock_2", bc_self;
+		next;
+		mes "[프리데리케]";
+		mes "마력핵이 깨질 정도면 그냥 빠지면 죽을 지도 몰라.";
+		mes "누군가가 다치는 건 싫으니까…";
+		mes "어서 가보자.";
+		cutin "ep19_friederike02.png",2;
+		ep19_side_sea = 8;
+		erasequest 11820;
+		setquest 11821;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_5" );
+		end;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[프리데리케]";
+		mes "마력핵이 깨질 정도면 그냥 빠지면 죽을 지도 몰라.";
+		mes "누군가가 다치는 건 싫으니까…";
+		mes "어서 가보자.";
+		cutin "ep19_friederike02.png",2;
+		close3;
+	}
+	// Side quest : Frozen Sea. Step final
+	if (ep19_side_sea == 16) {
+		mes "[프리데리케]";
+		mes "왔어요?";
+		mes "어디 다친 덴 없어요?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		next;
+		mes "[레하르]";
+		mes "무사해서 정말 다행이예요.";
+		mes "마기님께 소식을 전해 듣고 얼마나 놀랐는지.";
+		cutin "ep19_lehar01.png",2;
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[레하르]";
+		mes "그래서 안 쪽은 어때요?";
+		mes "위험 정도에 따라 이모님께 빨리 보고하지 않으면…";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "그럴 거 없다.";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_healrock_3" );
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_6" );
+		next;
+		mes "[레하르]";
+		mes "<FONT SIZE = 16>이모님!</FONT>";
+		mes "어떻게…";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[보클린드]";
+		mes "프리데리케가 와서 ^e5555e썩은 구덩이를 정화^000000했다고 얼마나 자랑을 하던지.";
+		mes "그래서 무슨 일인지 확인하러 왔지.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[보클린드]";
+		mes "마침 다들 무사히 돌아온 것 같네.";
+		mes "안 다쳐서 정~말 다행이다.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "그런 것도 찾아내고 우리 아가들이 역시 이모의 기대를 저버리지 않는 다니까.";
+		mes "최고!";
+		next;
+		mes "[보클린드]";
+		mes "그런 게 있는 건 뭐 좋은 소식은 아닌데 큰 사고가 터지기 전에 미리 발견했으니 얼마나 다행이라니.";
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[슈르르]";
+		mes "<FONT SIZE = 14><B>보클린드님!</FONT></B>";
+		mes "<FONT SIZE = 14><B>구덩이는 안 쪽이 꽤 넒긴 했지만 다른 곳으로 연결된 것 같아 보이진 않았습니다.</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "<FONT SIZE = 14><B>하지만 뭔가 변형 르간과 몬스터들이 득실거려서 그냥 두기엔 위험하다고 생각됩니다!</FONT></B>";
+		next;
+		mes "[보클린드]";
+		mes "그래?";
+		mes "어떻게 다른데?";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[슈르르]";
+		mes "<FONT SIZE = 14><B>르간들은 뭔가 움직임도 부자연스럽고 기괴하게 뒤틀려 있었습니다.</FONT></B>";
+		mes "<FONT SIZE = 14><B>몬스터들은 색도 이상하고… 밖에서는 보지 못한 것도 있었습니다!</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "기괴하게 뒤틀린 르간이라…";
+		mes "그렇다면 거긴… 자연적으로 생겨난 것 일수도 있지만 ^e5555e르간들의 쓰레기통^000000일 가능성도 배제할 순 없겠네.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		select( "쓰레기통?" );
+		mes "[보클린드]";
+		mes "르간들은 자신들이 원하는 기준에 못 미치는 것들은 같은 종족이라도 잔인할 정도로 차별하니까 말야.";
+		mes "그렇게 버려 버리는 거지.";
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[슈르르]";
+		mes "<FONT SIZE = 14><B>그리고 여기 고기도 조금 가져 왔습니다.</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "앗… 그래?";
+		mes "내…냄새가 정말 엄청나구나.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[보클린드]";
+		mes "프리데리케 정화 좀 해줄래?";
+		mes "코가 삐뚤어 지겠다.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[프리데리케]";
+		mes "네.";
+		mes "정화 했어요.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[슈르르]";
+		mes "음.";
+		mes "정화하니 냄새도 안 나고 육질도 부드럽고 고소하네요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[듀]";
+		mes "먹었어?!";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[보클린드]";
+		mes "뭐 우리들 기준으로는 좀 이상하지만 얘네 기준으로 르간은 그냥 ^e5555e벌레^000000 그 이상도 이하도 아니니까.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[슈르르]";
+		mes "배탈이 난다면 프리데리케님이 정화해 주실 거라고 굳게 믿고있어요.";
+		mes "후후";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그럼 전 다시 사냥을 나가볼 게요.";
+		next;
+		mes "[레하르]";
+		mes "슈르르 너무 무리하는 거 아닌가요?";
+		mes "좀 쉬는게 어때요?";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[슈르르]";
+		mes "타타링도 쓰러진 상황이라 무리 라도 하지 않으면 ^e5555e식량이 바닥^000000나 버릴 거야.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[레하르]";
+		mes "마음은 이해하지만…";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[타타링]";
+		mes "나도 몸이 회복되면 바로 도울 테니까 지금은 조금이라도 쉬어.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그래…";
+		mes "알았어.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[보클린드]";
+		mes "그래.";
+		mes "식량 조달은 다른 애들도 도와줄 테니 지금은 좀 쉬어 둬.";
+		mes "아직 할일이 많단다.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[보클린드]";
+		mes "그럼 난 바빠서 이만…";
+		mes "잘 쉬고들 있으렴.";
+		next;
+		mes "[레하르]";
+		mes "우리만 걱정하실 게 아니라 이모님도 좀 쉬시면 좋을 텐데…";
+		mes "걱정이네요.";
+		cutin "ep19_lehar04.png",2;
+		cloakonnpcself( "ep19_healrock_3" );
+		cloakonnpcself( "ep19_healrock_6" );
+		cloakonnpcself( "ep19_healrock_4" );
+		ep19_side_sea = 17;
+		completequest 11829;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 10));
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_7" );
+		cloakonnpcself( "ep19_healrock_5" );
+		cloakonnpcself( "ep19_healrock_8" );
+		end;
+	}
+	//
+
+	// Daily quest - Friederike's Day
+	if (checkquest(11813,HUNTING) == 2 && countitem(1000705) >= 10) {
+		mes "[프리데리케]";
+		mes "" + strcharinfo(0) + "님!!!";
+		mes "벌써 돌아오셨네요.";
+		mes "어때요?";
+		mes "축복의 효과는 있었나요?";
+		cutin "ep19_friederike01.png",2;
+		delitem 1000705,10;	// Ep19_Rgan_Core
+		erasequest 11813;
+		setquest 11814;
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp 10000000,7000000;	// affected by server drop rate
+		next;
+		mes "[프리데리케]";
+		mes "와!";
+		mes "가져온 마력핵을 보니 확실히 효과는 좀 있었나 보네요.";
+		mes "끈적거리지도 않고!";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "이 정도의 온전한 마력핵이라면 좀 더 쉽게 굉장한 걸 만들 수 있어요!";
+		mes "어서 벨군드님께 오늘 결과도 알려드려야지!";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "도와주셔서 너무 감사해요.";
+		mes "" + strcharinfo(0) + "님도 어서 푹 쉬세요.";
+		mes "제가 늘 기도할게요.";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	}
+	if (isbegin_quest(11812) == 0) {
+		mes "[프리데리케]";
+		mes "그러고 보니 아까 보클린드님께 들었는데요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "레온님이나 오렐리님은 오염이나 르간의 마력핵을 정화는 할 수 있지만, 마력 소모가 심해서 그간 고생이 많으셨나 봐요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "마력핵을 정화하면 그걸 ^e5555e벨군드^000000님이…";
+		mes "음… 설명은 해 주셨는데 저는 잘 모르는 분야라서…";
+		cutin "ep19_friederike03.png",2;
+		npctalk "프리데리케 : 뭔가 이렇게 저렇게…", "", bc_self;
+		next;
+		mes "[프리데리케]";
+		mes "아무튼 추출해서 여러 가지 마력 결정체로 만들어 주신대요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그걸 여러 가지 용도로 사용하고 있는 거죠.";
+		mes "음식을 만든다던가 방을 환하게 한다던가……";
+		npctalk "프리데리케 : 잠수복에 붙인다던가…", "", bc_self;
+		next;
+		mes "[프리데리케]";
+		mes "그렇게 고생해서 정화한 마력핵을 그런 일에 쓰는 건 아깝다고 말했다가 보클린드님께 혼났어요.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "보클린드님은 자원이 풍부한 룬-미드가츠 같은 곳에서는 평범하게 누릴 수 있는 사소한 일들이지만,";
+		npctalk "프리데리케 : 여긴 나무도 자라지 않는데요.", "", bc_self;
+		next;
+		mes "[프리데리케]";
+		mes "이스가르드에서는 방에 불을 켜는 것, 물을 정화하는 것, 사소한 일 하나하나가 살아가기 위해 꼭 필요한 일이래요.";
+		next;
+		mes "[프리데리케]";
+		mes "그래서 앞으로는 레온님이나 오렐리님을 대신해서 정화가 특기인 제가!";
+		mes "마력핵 정화를 하게 되었어요!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그러니까 " + strcharinfo(0) + "님도 르간에게서 ^e5555e마력핵^000000을 얻으면 저에게 가져다주세요.";
+		mes "제가 깨끗하게 정화해서 돌려드릴게요.";
+		next;
+		mes "[프리데리케]";
+		mes "아!";
+		mes "그리고 그간 정화를 못해서 쌓인 한 엄청난 양의 마력핵이 있는 창고가 있다는 얘길 들어서 생각한 건데,";
+		npctalk "프리데리케 : 앞으로 제가 할 숙제래요.", "", bc_self;
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "보통 마력핵은 ^e5555e등급이 낮은 르간^000000에게서 얻은 거라.";
+		mes "더럽기도 하고 가공도 힘들고…";
+		mes "냄새도 나고 그 주변 땅도 오염되고…";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그래서 제 정화의 축복을 받고 ^e5555e르간의 저급 마력핵^000000을 얻으면 어느 정도 정화 효과가 있을지 알아보는 중이에요.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그것만으로도 작업이 훨씬 편해질 것 같거든요.";
+		mes "" + strcharinfo(0) + "님도 관심 있으면 참여해 보시겠어요?";
+		cutin "ep19_friederike05.png",2;
+		setquest 11812;
+		completequest 11812;
+	}
+	else {
+		mes "[프리데리케]";
+		mes "이스가르드 조사는 잘 되어가고 있나요?";
+		mes "밖이 엄청 춥죠?";
+		mes "어서 일이 끝나고 방에서 쉬면 좋을 텐데.";
+		cutin "ep19_friederike02.png",2;
+	}
+	next;
+	switch( select( "프리데리케를 돕는다.", "저급 마력핵을 정화한다.", "잡담을 한다." ) ) {
+	case 1:
+		switch( checkquest(11814,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[프리데리케]";
+			mes "이 정도의 온전한 마력핵이라면 좀 더 쉽게 굉장한 걸 만들 수 있어요!";
+			mes "어서 벨군드님께 오늘 결과도 알려드려야지!";
+			cutin "ep19_friederike05.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "도와주셔서 너무 감사해요.";
+			mes "" + strcharinfo(0) + "님도 어서 푹 쉬세요.";
+			mes "제가 늘 기도할게요.";
+			cutin "ep19_friederike03.png",2;
+			close3;
+		case 2:
+			erasequest 11814;
+			break;
+		}
+		switch( checkquest(11813,HUNTING) ) {
+		case -1:
+			mes "[프리데리케]";
+			mes "그럼 ^e5555e" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000이나 ^e5555e" + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000을 ^e5555e각각 10마리 이상^000000 처치하고 ^e5555e르간의 마력핵^000000을 ^e5555e10개 이상^000000 가져와 주세요.";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "제 예상이 맞다면 ^e5555e저급 마력핵^000000이 아니라 좀 더 나은 ^e5555e마력핵^000000을 얻을 수 있을 거예요.";
+			next;
+			mes "[프리데리케]";
+			mes "너무 무리는 하지 말고 무사히 돌아 오셔야 해요!";
+			mes "알았죠?";
+			cutin "ep19_friederike04.png",2;
+			setquest 11813;
+			close3;
+		case 0:
+		case 1:
+			mes "[프리데리케]";
+			mes "그럼 ^e5555e" + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000이나 ^e5555e" + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000을 ^e5555e각각 10마리 이상^000000 처치하고 ^e5555e르간의 마력핵^000000을 ^e5555e10개 이상^000000 가져와 주세요.";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "제 예상이 맞다면 ^e5555e저급 마력핵^000000이 아니라 좀 더 나은 ^e5555e마력핵^000000을 얻을 수 있을 거예요.";
+			next;
+			mes "[프리데리케]";
+			mes "너무 무리는 하지 말고 무사히 돌아 오셔야 해요!";
+			mes "알았죠?";
+			cutin "ep19_friederike04.png",2;
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		if (countitem(1000707) < 10) {
+			mes "[프리데리케]";
+			mes "좋아요!";
+			mes "그럼 실력 발휘 좀 해볼까요?";
+			next;
+			mes "[프리데리케]";
+			mes "어라…";
+			mes "^e5555e르간의 저급 마력핵^000000은 ^e5555e10개^000000는 있어야 뭔가 쓸만한 걸 만들 수 있어요.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[프리데리케]";
+			mes "너무 미약한 마력이라…";
+			close3;
+		}
+		mes "[프리데리케]";
+		mes "좋아요!";
+		mes "그럼 실력 발휘 좀 해볼까요?";
+		next;
+		mes "[프리데리케]";
+		mes "^e5555e르간의 저급 마력핵^000000을 정화한, 마력핵 부스러기를 잘 뭉치면!!!";
+		mes "아주 유용한 ^e5555e" + getitemname(1000706) + "^000000이 된답니다!";
+		delitem 1000707,10;	// Ep19_Rgan_Core_F
+		getitem 1000706,1;	// Ep19_Purified_Core
+		next;
+		mes "[프리데리케]";
+		mes "^e5555e벨군드^000000님께 가져가면 좋아하실 거예요!";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	case 3:
+		mes "[프리데리케]";
+		mes "와!";
+		mes "오늘은 어떤 재미있는 이야기를 해주실 건가요?";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	// Side quest : Frozen Sea. Step 7 and final
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11820) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11829) == 1" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11810) == 1" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11813,HUNTING) == 2 && countitem(1000705) >= 10" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "ep19_side_saint == 20 && checkquest(11814,PLAYTIME) == -1 && checkquest(11813,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11814,PLAYTIME) == 2" );
+	end;
+}
+
+
+// Side quest : Frozen Sea (Purification Saint side quest pre-requise). Step 1
+// Daily quests : Abandoned Pit Fl 1, Abandoned Pit Fl 2, Dig and Dig
+icas_in,27,116,5	script	슈르르#ep19_room::ep19_healrock_1	4_EP19_IWIN,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 여기서 잠깐 !! -";
+		mes "- 가지고 계신 아이템이 너무 많아 -";
+		mes "- 퀘스트를 진행할 수 없습니다. -";
+		mes "- 몸을 가볍게 하시고 -";
+		mes "- 다시 시도해주세요. -";
+		close;
+	}
+	if (ep19_side_saint < 20) {
+		mes "[슈르르]";
+		mes "깃털이 젖으면 몸도 무겁고 감기에 걸리기 쉽죠.";
+		mes "언제나 실내에서 잘 말려주는 것이 중요합니다.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+
+	// Side quest : Frozen Sea
+	if (ep19_side_sea == 1) {
+		mes "[슈르르]";
+		mes "레하르님!!";
+		mes "데려왔어!";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep19_healrock_2" );
+		next;
+		mes "[레하르]";
+		mes "큭… 뭐죠.";
+		mes "이 이상한 냄새는…";
+		cutin "ep19_lehar03.png",2;
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[슈르르]";
+		mes "자세한 건 나도 몰라.";
+		mes "얘가 깨어나면 알 수 있겠지.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[레하르]";
+		mes "프리데리케님 일단 이 분도 정화 좀…";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "자꾸 이상한 것만 시키구…";
+		mes "냄새나…";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[???]";
+		mes "으으…";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16><B>흐억!!!!</FONT></B>";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[슈르르]";
+		mes "타타링 정신이 드나?";
+		mes "괜찮아!?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "감사합니다.";
+		mes "레하르님!";
+		mes "프리…데리케님…?";
+		next;
+		mes "[타타링]";
+		mes "으허허헉";
+		mes "죽다 살았네…";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[듀]";
+		mes "앗!!!";
+		mes "타마린!!";
+		mes "여기서 뭐하는 거야!";
+		cutin "ep18_dew_02.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		next;
+		mes "[타타링]";
+		mes "헛!!";
+		mes "듀!";
+		mes "여긴 어떻게 온 거예요!!!";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[듀]";
+		mes "나도 몰라!!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[마크]";
+		mes "정말 어떻게 된 거예요?";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[타타링]";
+		mes "마크까지?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[레하르]";
+		mes "아는 분인가요?";
+		mes "^e5555e이스가르드는 초대장 없이는 들어올 수 없을 텐데^000000 어떻게 여기까지 오셨죠?";
+		cutin "ep19_lehar04.png",2;
+		ep19_side_sea = 2;
+		setquest 11815;
+		close3;
+	}
+	if (ep19_side_sea == 2) {
+		mes "[슈르르]";
+		mes "타타링 정신이 드나?";
+		mes "괜찮아!?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "감사합니다.";
+		mes "레하르님!";
+		mes "프리…데리케님…?";
+		next;
+		mes "[타타링]";
+		mes "으허허헉";
+		mes "죽다 살았네…";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[듀]";
+		mes "앗!!!";
+		mes "타마린!!";
+		mes "여기서 뭐하는 거야!";
+		cutin "ep18_dew_02.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		next;
+		mes "[타타링]";
+		mes "헛!!";
+		mes "듀!";
+		mes "여긴 어떻게 온 거예요!!!";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[듀]";
+		mes "나도 몰라!!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[마크]";
+		mes "정말 어떻게 된 거예요?";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[타타링]";
+		mes "마크까지?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[레하르]";
+		mes "아는 분인가요?";
+		mes "^e5555e이스가르드는 초대장 없이는 들어올 수 없을 텐데^000000 어떻게 여기까지 오셨죠?";
+		cutin "ep19_lehar04.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[슈르르]";
+		mes "깃털이 젖으면 몸도 무겁고 감기에 걸리기 쉽죠.";
+		mes "언제나 실내에서 잘 말려주는 것이 중요합니다.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+
+	// daily
+	// quest(s) completed
+	if (checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20 || checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20 || isbegin_quest(11849) == 1) {
+		mes "[슈르르]";
+		mes "돌아오셨군요.";
+		mes "무사하셔서 정말 다행이에요.";
+		cutin "ep19_iwin03.png",2;
+		if (checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20) {
+			delitem 1000708,20;	// Ep19_Ice_Meat
+			erasequest 11833;
+			setquest 11834;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,3;	// Ep19_Snow_Flower	// Note: 3 is not a mistake!
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 20000000,0;	// (affected by drop modifier)
+			getexp 0,14000000;	// unknown jexp
+			next;
+			// Note: this text is only for 11833
+			mes "[슈르르]";
+			mes "이렇게 고기를 잔뜩 받을 때마다";
+			next;
+			mes "[슈르르]";
+			mes "그 구덩이가 계속 잘 유지되면 좋겠다는 마음과 그런 끔찍한 구덩이는 빨리 메워버리고 싶다는 마음이 엄청나게 싸우고 있어요.";
+			close3;
+		}
+		if (checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20) {
+			delitem 1000708,20;	// Ep19_Ice_Meat
+			erasequest 11831;
+			setquest 11832;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 18000000,0;	// (affected by drop modifier)
+			getexp 0,14000000;
+		}
+		if (isbegin_quest(11849) == 1) {
+			erasequest 11835;
+			erasequest 11849;
+			setquest 11850;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp2 52243795,0;
+			getexp 0,3000000;
+		}
+		close3;
+	}
+
+	if (isbegin_quest(11830) == 0) {
+		mes "[슈르르]";
+		mes "후…";
+		mes "정말 끔찍한 구덩이였어요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그런 게 발견된 것 자체가 골치 아픈 일이지만 그나마 다행인 건 ^e5555e상급 르간^000000이 없는 것 같아 보이는 정도네요.";
+		next;
+		mes "[슈르르]";
+		mes "르간은 머리를 쓸 줄 아는 녀석이 없으면 그저 오합지졸 몬스터에 불과하니까요.";
+		next;
+		mes "[슈르르]";
+		mes "게다가 상급 르간이 보이지 않는다는 건 르간들이 그 구덩이에 대해서는 신경도 쓰지 않는다는 거니까,";
+		next;
+		mes "[슈르르]";
+		mes "우리 쪽에서 잘 막으면 더 악화하지는 않을 거예요.";
+		mes "여차하면 프리데리케님의 힘을 빌릴 수밖에 없겠지만요.";
+		next;
+		mes "[슈르르]";
+		mes "그렇게만 된다면 식량을 채집할 수 있는 장소도 늘어나고 나쁜 점만 있는 건 아니에요.";
+		next;
+		mes "[슈르르]";
+		mes "저도 계속해서 구덩이를 조사해보긴 하겠지만 지금 일손이 많이 부족한 상태라 여러분들도 시간이 날 때 도와주시면 좋겠네요.";
+		setquest 11830;
+		completequest 11830;
+	}
+	else {
+		mes "[슈르르]";
+		mes "안녕하세요.";
+		mes "몸은 좀 어떠세요?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "혹시라도 중독 증상이 있다거나 아픈 곳이 있으면 치료를 받는 게 좋아요.";
+	}
+	next;
+	switch( select( "버려질 만한 장소(1)-220lv", "버려질 만한 장소(2)-240lv", "파고 또 파고", "잡담 한다." ) ) {
+	case 1:
+		if (BaseLevel < 220) {
+			mes "[슈르르]";
+			mes "거긴 지금 가기엔 너무 위험해요.";
+			mes "그 외에도 일거리라면 얼마든지 있으니까";
+			mes "다른 것부터 해보는 건 어떨까요?";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "^4d4dff220레벨 이상 수행 가능한 퀘스트 입니다.^000000";
+			close;
+		}
+		switch( checkquest(11832,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[슈르르]";
+			mes "오늘은 여기까지!";
+			mes "이미 큰 도움이 되고 계시니까 이젠 푹 쉬세요.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11832;
+			break;
+		}
+		if (checkquest(11831,HUNTING) == -1) {
+			mes "[슈르르]";
+			mes "그런 위험한 곳에 또 가시겠다니 " + strcharinfo(0) + "님도 정말 못 말리겠네요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "그럼 ^e5555e버려진 구덩이 1층^000000에서 몬스터를 ^e5555e40마리 정도^000000 처치하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e20개 정도^000000 가져다 주세요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "그리고 혹시라도 위험할 것 같으면 그냥 돌아오세요.";
+			mes "목숨보다 소중한 건 없으니까요.";
+			setquest 11831;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",113,10);
+			end;
+		}
+		// note: same text without items/hunting ongoing
+		mes "[슈르르]";
+		mes "^e5555e버려진 구덩이 1층^000000에서 몬스터를 ^e5555e40마리 정도^000000 처치하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e20개 정도^000000 가져다 주세요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그리고 혹시라도 위험할 것 같으면 그냥 돌아오세요.";
+		mes "목숨보다 소중한 건 없으니까요.";
+		close2;
+		cutin "",255;
+		navigateto("jor_ab01",113,10);
+		end;
+	case 2:
+		if (BaseLevel < 240) {
+			mes "[슈르르]";
+			mes "거긴 지금 가기엔 너무 위험해요.";
+			mes "그 외에도 일거리라면 얼마든지 있으니까";
+			mes "다른 것부터 해보는 건 어떨까요?";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "^4d4dff240레벨 이상 수행 가능한 퀘스트 입니다.^000000";
+			close3;
+		}
+		switch( checkquest(11834,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[슈르르]";
+			mes "오늘은 여기까지!";
+			mes "이미 큰 도움이 되고 계시니까 이젠 푹 쉬세요.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11834;
+			break;
+		}
+		if (checkquest(11833,HUNTING) == -1) {
+			mes "[슈르르]";
+			mes "그런 위험한 곳에 또 가시겠다니 " + strcharinfo(0) + "님도 정말 못 말리겠네요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "그럼 ^e5555e버려진 구덩이 2층^000000에서 몬스터를 ^e5555e40마리 정도^000000 처치하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e20개 정도^000000 가져다 주세요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "그리고 혹시라도 위험할 것 같으면 그냥 돌아오세요.";
+			mes "목숨보다 소중한 건 없으니까요.";
+			setquest 11833;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab02",281,87);
+			end;
+		}
+		mes "[슈르르]";
+		mes "^e5555e버려진 구덩이 2층^000000에서 몬스터를 ^e5555e40마리 정도^000000 처치하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e20개 정도^000000 가져다 주세요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그리고 혹시라도 위험할 것 같으면 그냥 돌아오세요.";
+		mes "목숨보다 소중한 건 없으니까요.";
+		close2;
+		cutin "",255;
+		navigateto("jor_ab02",281,87);
+		end;
+	case 3:
+		switch( checkquest(11850,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[슈르르]";
+			mes "오늘은 여기까지!";
+			mes "이미 큰 도움이 되고 계시니까 이젠 푹 쉬세요.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11850;
+			break;
+		}
+		switch( isbegin_quest(11835) ) {
+		case 0:
+			mes "[슈르르]";
+			mes "버려진 구덩이는 아직은 큰 문제가 발견되지 않았지만 언제 무슨 일이 일어날지 모르니 항상 꼼꼼하게 조사하고 있어요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "오늘도 ^e5555e알프^000000님이 먼저 조사 하러 가셨는데 혼자 하기엔 시간이 오래 걸리고 위험하니 도울 건 없는지 가서 물어봐 주세요.";
+			setquest 11835;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		case 1:
+			mes "[슈르르]";
+			mes "버려진 구덩이는 아직은 큰 문제가 발견되지 않았지만 언제 무슨 일이 일어날지 모르니 항상 꼼꼼하게 조사하고 있어요.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[슈르르]";
+			mes "오늘도 ^e5555e알프^000000님이 먼저 조사 하러 가셨는데 혼자 하기엔 시간이 오래 걸리고 위험하니 도울 건 없는지 가서 물어봐 주세요.";
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		case 2:
+			mes "[슈르르]";
+			mes "^e5555e알프^000000님은 만나셨나요?";
+			cutin "ep19_iwin03.png",2;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		}
+		end;
+	case 4:
+		mes "[슈르르]";
+		mes "하하하하하.";
+		mes "아윈은 깃털이 풍성할수록 멋있는 거니까요.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	// side quest
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep19_side_saint == 20 && ep19_side_sea == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11849) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11831) == 0 && checkquest(11832,PLAYTIME) == -1 && BaseLevel >= 220" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11832,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11833) == 0 && checkquest(11834,PLAYTIME) == -1 && BaseLevel >= 240" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11834,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11835) == 0 && checkquest(11850,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11850,PLAYTIME) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 2
+// icas_in,27,122,5	script	타타링#ep19_room::ep19_healrock_2	4_EP19_TAMARIN,{
+
+// Side quest : Frozen Sea. Step 3
+jor_back1,300,272,3	script	사냥덫#ep19_1	4_ROPEPILE,{
+	if (ep19_side_sea == 4) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "낡은 것 외엔 별 문제가 없어 보인다. -";
+		next;
+		mes "- 좀 더 북쪽을 조사해보는게 좋을 것 같다. -";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",346,203);
+		end;
+	}
+	if (ep19_side_sea == 3) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "낡은 것 외엔 별 문제가 없어 보인다. -";
+		next;
+		mes "[아이스윈드 사냥병]";
+		mes "누구야!";
+		mes "사냥병도 아닌 것 같은데 우리 덫은 왜 만지고 있는 거지?";
+		mes "적이냐?!";
+		cutin "ep19_iwin09.png",2;
+		next;
+		select( "사정을 이야기한다." );
+		mes "[아이스윈드 사냥병]";
+		mes "그렇군요.";
+		mes "실례했습니다.";
+		next;
+		mes "[아이스윈드 사냥병]";
+		mes "이 주변은 별다른 문제는 없어요.";
+		mes "사냥감이 좀 줄어든 느낌은 있지만…";
+		next;
+		mes "[아이스윈드 사냥병]";
+		mes "이쪽 보다는 좀 더 북쪽을 조사해보는게 좋을 것 같아요.";
+		mes "확실히 요즘 들어 몬스터들이 더 사나워진 것 같기도 하고…";
+		ep19_side_sea = 4;
+		erasequest 11816;
+		setquest 11817;
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",346,203);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11816) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 4
+jor_back2,346,203,3	script	사냥덫#ep19_2	4_ROPEPILE,{
+	if (ep19_side_sea == 5) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "낡은 것 외엔 별 문제가 없어 보인다. -";
+		next;
+		mes "- 구덩이가 있다는 위치 주변을 조사해보는 게 좋겠다. -";
+		close2;
+		navigateto("jor_back2",260,294);
+		end;
+	}
+	if (ep19_side_sea == 4) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "낡은 것 외엔 별 문제가 없어 보인다. -";
+		next;
+		mes "- 구덩이가 있다는 위치 주변을 조사해보는 게 좋겠다. -";
+		ep19_side_sea = 5;
+		erasequest 11817;
+		setquest 11818;
+		close2;
+		navigateto("jor_back2",260,294);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11817) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 5
+jor_back2,260,294,3	script	사냥덫#ep19_3	4_ROPEPILE,{
+	if (ep19_side_sea == 5) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "기묘하게 부패한 흔적이 있다. -";
+		next;
+		mes "[알프]";
+		mes "…독인가?";
+		mes "타마린에게 묻어있던 것과 비슷한 성분인 것 같군…";
+		cutin "ep18_alf_01.png",2;
+		cloakoffnpcself( "ep19_jor_back2_260_296" );
+		cloakoffnpcself( "ep19_jor_back2_258_295" );
+		next;
+		mes "[마크]";
+		mes "역시 뭔가 있는 걸까요?";
+		mes "그 구덩이에 빠졌던 몬스터가 덫에 걸렸던 거 라던가…";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[알프]";
+		mes "그렇다기엔 여기 연결부분…";
+		mes "여기에 집중적으로 독이 묻어있다.";
+		mes "누군가 ^e5555e일부러 망가뜨리려고 한 것^000000 처럼.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[알프]";
+		mes "…일단 슈르르에게 보고하지.";
+		mes "누구 때문에 덫이 망가진 건지는 모르지만 어쨌든 구덩이랑 연관이 있을 것 같으니…";
+		ep19_side_sea = 6;
+		erasequest 11818;
+		setquest 11819;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_260_296" );
+		cloakonnpcself( "ep19_jor_back2_258_295" );
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	if (ep19_side_sea == 6) {
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "기묘하게 부패한 흔적이 있다.";
+		mes "슈르르에게 보고하자. -";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11818) == 1" );
+	end;
+}
+
+jor_back2,260,296,5	duplicate(dummy_cloaked_npc)	알프#ep19_jor2::ep19_jor_back2_260_296	4_EP18_ALF
+jor_back2,258,295,3	duplicate(dummy_cloaked_npc)	마크#ep19_jor2::ep19_jor_back2_258_295	4_EP18_MARK
+
+
+// Side quest : Frozen Sea. Step 6, 9, 10
+jor_back2,255,312,5	script	슈르르#ep19_1	4_EP19_IWIN_DIVER,{
+	if (ep19_side_sea == 6) {
+		mes "[슈르르]";
+		mes "오셨군요.";
+		mes "구덩이의 독은 생각보다 더 지독한 것 같아요.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "잠수복이 어느정도 버틸 수 있을 줄 알았는데 ^e5555e구덩이에 들어가자마자 잠수복에 장착된 마력핵이 깨져^000000 버렸어요.";
+		next;
+		mes "[마크]";
+		mes "흠…";
+		mes "더 이상의 조사는 의미가 없을 것 같아요.";
+		mes "일단 돌아가서 ^e5555e프리데리케^000000를 데려오죠.";
+		cutin "ep18_mark_01.png",0;
+		cloakoffnpcself( "ep19_jor_back2_255_312" );
+		next;
+		mes "[마크]";
+		mes "아까 타마린의 독도 정화했으니 이 구덩이도 정화할 수 있을 거에요.";
+		next;
+		mes "[마크]";
+		mes "이럴 줄 알았으면 처음부터 데려올 걸.";
+		cutin "ep18_mark_03.png",0;
+		ep19_side_sea = 7;
+		erasequest 11819;
+		setquest 11820;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_255_312" );
+		navigateto("icas_in",32,120);
+		end;
+	}
+	if (ep19_side_sea == 7) {
+		mes "[슈르르]";
+		mes "지금은 얼음의 성으로 가서 ^e5555e프리데리케^000000님을 모셔오는 게 최선인 것 같아요.";
+		cutin "ep19_iwin_diver01.png",2;
+		close3;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[슈르르]";
+		mes "프리데리케님도 오셨으니 어서 ^e5555e구덩이^000000를 정화하죠!";
+		cutin "ep19_iwin_diver01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",258,314);
+		end;
+	}
+	switch( checkquest(11822,HUNTING) ) {
+	case -1:
+		end;	// note: no text
+	case 0:
+	case 1:
+		mes "[슈르르]";
+		mes "다른 분들은 ^e5555e주변에 몬스터가 다가오지 않도록 정리^000000를 좀 부탁드려요.";
+		mes "그리고 가능하다면 ^e5555e얼어 붙은 고기를 3개^000000정도 채집해 주시겠어요?";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "혹시 이 구덩이에 영향을 받은 몬스터가 있는지 조사해볼 필요가 있을 것 같아요.";
+		close3;
+	case 2:
+		if (countitem(1000708) < 3) {
+			mes "[슈르르]";
+			mes "다른 분들은 ^e5555e주변에 몬스터가 다가오지 않도록 정리^000000를 좀 부탁드려요.";
+			mes "그리고 가능하다면 ^e5555e얼어 붙은 고기를 3개^000000정도 채집해 주시겠어요?";
+			cutin "ep19_iwin_diver01.png",2;
+			next;
+			mes "[슈르르]";
+			mes "혹시 이 구덩이에 영향을 받은 몬스터가 있는지 조사해볼 필요가 있을 것 같아요.";
+			close3;
+		}
+		mes "[슈르르]";
+		mes "하아…";
+		mes "우리가 끔찍한 걸 발견해 버렸는지도 몰라요…";
+		cutin "ep19_iwin_diver01.png",2;
+		delitem 1000708,3;	// Ep19_Ice_Meat
+		ep19_side_sea = 10;
+		erasequest 11822;
+		setquest 11823;
+		next;
+		mes "[슈르르]";
+		mes "구덩이로 잠수했더니 한명이 겨우 지나갈 수 있는 정도로 좁은 통로가 이어져 있었고 끝에 바위로 막혀 있었어요.";
+		mes "바위를 치웠더니 물이 빠지면서 엄청난 공간이 나오더군요.";
+		next;
+		mes "[슈르르]";
+		mes "^e5555e르간^000000 같이 생긴 걸 본 것 같은데 혼자 조사하기엔 너무 위험 한 것 같아 조심스럽게 도망쳤어요.";
+		next;
+		mes "[슈르르]";
+		mes "일단 ^e5555e다시 내려가서 조사^000000를 해보는게 좋겠어요.";
+		mes "이 구덩이가 정말 위험하다면 어서 보클린드님께 알려야겠죠.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",258,314);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11819) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11822,HUNTING) == 2 && countitem(1000708) >= 5" );
+	end;
+}
+
+jor_back2,261,312,3	duplicate(dummy_cloaked_npc)	마크#ep19_ab::ep19_jor_back2_255_312	4_EP18_MARK
+
+// Side quest : Frozen Sea. Step 7
+// icas_in,32,123,5	script	프리데리케#ep19_room	4_EP19_FRIEDERIKE,{
+
+
+// Side quest : Frozen Sea. Step 8
+jor_back2,258,315,0	script	#to_jor_ab01	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_sea < 8) {
+		mes "- 탁하고 끈적한 액체로 막혀 있어 들어갈 수 없다. -";
+		close;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[프리데리케]";
+		mes "추워…";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_jor_back2_263_311" );
+		cloakoffnpcself( "ep19_jor_back2_255_312" );
+		cloakoffnpcself( "ep19_jor_back2_260_312" );
+		next;
+		mes "[프리데리케]";
+		mes "여기 기분 나빠…";
+		mes "이 주변을 전부 정화한다해도 다시 독기가 올라올 거예요.";
+		mes "깊은 곳에서 독을 계속 뿜어내는 뭔가가 있는게 느껴져요.";
+		next;
+		mes "[슈르르]";
+		mes "이 주변을 전부 정화하는 건 무리입니다.";
+		mes "일단 독이 고여있는 이 구덩이 부분만이라도 정화해서 조사해보도록 하죠.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "구덩이는 이미 정화했…취!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[마크]";
+		mes "앗!";
+		mes "그럼 이후는 우리가 조사할 테니 어서 돌아가.";
+		mes "감기라도 걸렸다가는 내가 감옥에 갈지도 몰라.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[프리데리케]";
+		mes "그럼 난 텔레포트로 돌아갈게.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[프리데리케]";
+		mes "그리고 이거 아까 정화한 마력핵 모두의 옷에 하나씩 붙여 줄게요.";
+		mes "다치지 말고 돌아와요.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		cloakonnpcself( "ep19_jor_back2_260_312" );
+		mes "[슈르르]";
+		mes "프리데리케님 같은 분이 이 얼음성에 와주셔서 얼마나 다행인지 모르겠어요.";
+		mes "이렇게 마력핵도 준비해 주시고…";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "방금 전까지 토사물 같던 구덩이가 이렇게 맑은 물로 바뀌다니…";
+		next;
+		mes "[슈르르]";
+		mes "…아참!";
+		mes "이러고 있을게 아니라 독기가 다시 올라오기전에 제가 먼저 들어가 볼게요.";
+		next;
+		mes "[슈르르]";
+		mes "다른 분들은 ^e5555e주변에 몬스터가 다가오지 않도록 정리^000000를 좀 부탁드려요.";
+		mes "그리고 가능하다면 ^e5555e얼어 붙은 고기를 3개^000000정도 채집해 주시겠어요?";
+		next;
+		mes "[슈르르]";
+		mes "혹시 이 구덩이에 영향을 받은 몬스터가 있는지 조사해볼 필요가 있을 것 같아요.";
+		ep19_side_sea = 9;
+		erasequest 11821;
+		setquest 11822;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_263_311" );
+		cloakonnpcself( "ep19_jor_back2_255_312" );
+		end;
+	}
+	if (ep19_side_sea == 9) {
+		if (checkquest(11822,HUNTING) != 2 && countitem(1000708) < 5) {
+			mes "- 슈르르가 조사하는 동안 몬스터가 다가오지 않도록 ^e5555e주변 몬스터를 10마리 처치하고 얼어 붙은 고기를 3개^000000정도 채집하자.";
+			close;
+		}
+		mes "- 슈르르가 조사를 마친 것 같다.";
+		mes "^e5555e슈르르와 먼저 대화^000000하자. -";
+		close2;
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	if (ep19_side_sea == 10) {
+		ep19_side_sea = 11;
+		erasequest 11823;
+		setquest 11824;
+	}
+	warp "jor_ab01",113,10;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11821) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11823) == 1" );
+	end;
+}
+jor_back2,263,311,5	duplicate(dummy_cloaked_npc)	알프#ep19_ab::ep19_jor_back2_263_311	4_EP18_ALF
+jor_back2,260,312,5	duplicate(dummy_cloaked_npc)	프리데리케#ep19_ab::ep19_jor_back2_260_312	4_EP19_FRIEDERIKE
+
+// Side quest : Frozen Sea. Step 9, 10
+// jor_back2,255,312,5	script	슈르르#ep19_1	4_EP19_IWIN_DIVER,{
+
+
+// Side quest : Frozen Sea - Step 11
+jor_ab01,116,11,3	duplicate(dummy_cloaked_npc)	슈르르#ep19_ab::ep19_jor_ab01_116_11	4_EP19_IWIN_DIVER
+
+jor_ab01,115,14,3	script	알프#ep19_1_ab	4_EP18_ALF,{
+	if (ep19_side_sea == 11 || ep19_side_sea == 12) {
+		mes "[알프]";
+		mes "이것들은 다 뭐지?";
+		mes "뱀인가?";
+		mes "지렁이??";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "르간이라는 종족입니다.";
+		mes "요르문간드를 섬기는 골칫덩어리들이죠.";
+		cloakoffnpcself( "ep19_jor_ab01_116_11" );
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "뱀의 둥지는 좀 더 안쪽에 있을 텐데 이런 곳에서 르간들이 모여있는 곳이 발견되다니.";
+		mes "일단 안쪽을 좀더 조사해보죠.";
+		next;
+		mes "[슈르르]";
+		mes "르간도 되도록이면 자극하지 않는게 좋겠지만 이동하면서 조용히 몇 ^e5555e마리 잡아서 조사^000000해보는 게 좋겠어요.";
+		cutin "ep19_iwin_diver02.png",2;
+		if (ep19_side_sea == 11) {
+			ep19_side_sea = 12;
+			erasequest 11824;
+			setquest 11825;
+		}
+		close2;
+		cloakonnpcself( "ep19_jor_ab01_116_11" );
+		cutin "",255;
+		navigateto("jor_ab01",222,107);
+		end;
+	}
+	if (isbegin_quest(11835) > 0) {
+		mes "[알프]";
+		mes "왔군…";
+		mes "그럼 난 이쪽을 조사할 테니 넌 다른 곳을 조사해줘.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[알프]";
+		mes "버려진 구덩이 조사가 끝나면 ^e5555e슈르르^000000에게 직접 보고해.";
+		if (isbegin_quest(11835) == 1) {
+			completequest 11835;
+			setquest 11836;
+			// give 2 quests in ab01 and 2 quests in ab02 (not random)
+			switch( rand(3) ) {
+			case 0:
+				setquest 11839;
+				setquest 11840;
+				setquest 11845;
+				setquest 11846;
+				break;
+			case 1:
+				setquest 11837;
+				setquest 11838;
+				setquest 11847;
+				setquest 11848;
+				break;
+			case 2:
+				setquest 11841;
+				setquest 11842;
+				setquest 11843;
+				setquest 11844;
+				break;
+			}
+		}
+		close3;
+	}
+	if (isbegin_quest(11849) == 1) {
+		mes "[알프]";
+		mes "끝났나?";
+		mes "그럼 얼음의 성으로 돌아가 ^e5555e슈르르^000000에게 직접 보고해.";
+		cutin "ep18_alf_01.png",2;
+		close2;
+		navigateto("icas_in",27,116);
+		end;
+	}
+	mes "[알프]";
+	mes "…으.";
+	mes "끔찍한 곳이야.";
+	cutin "ep18_alf_01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11824) == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11835) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 12, 13
+jor_ab01,223,107,3	script	수상한 흔적#ep19_1_ab1	4_ENERGY_BLACK,{
+	switch( checkquest(11825,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		mes "- 주면의 몬스터를 조사하기 위해 몇 마리 처치하는 것이 좋겠다. -";
+		close;
+	case 2:
+		mes "[마크]";
+		mes "이 곳에서 독기가 새어 나오는 걸까요?";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[알프]";
+		mes "흠…";
+		mes "부패 독의 일종인 것 같군…";
+		mes "자연적으로 발생한 건지 인위적으로 만들어진 건지 까지는 잘 모르겠지만…";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "확실히 몬스터들도 모습이 좀 이상해요.";
+		mes "^e5555e방해되는 몬스터들은 처리^000000하면서 좀 더 이동해 보죠.";
+		cutin "ep19_iwin_diver01.png",2;
+		ep19_side_sea = 13;
+		erasequest 11825;
+		setquest 11826;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11825,HUNTING) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 14, 15
+jor_ab01,104,270,3	script	수상한 흔적#ep19_1_ab2	4_ENERGY_BLACK,{
+	switch( checkquest(11826,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		end;
+	case 2:
+		mes "[알프]";
+		mes "여기도 마찬가지군…";
+		mes "독기가 새어 나오고 있어.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "게다가 여기, 생각보다 더 넓어요.";
+		mes "이정도 규모라면 간단히 처리 될 문제가 아닌 것 같아요.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[마크]";
+		mes "헉헉…";
+		mes "큰일이에요.";
+		mes "여러분.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[슈르르]";
+		mes "무슨 일이에요?";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[마크]";
+		mes "저 안쪽에 뭔가 다른 곳으로 연결된 것 같은 통로가 있어요.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[슈르르]";
+		mes "여기가 끝이 아니라고?!";
+		mes "어서 가봐요.";
+		mes "몬스터 변형에 대해서도 알리는게 좋겠어요.";
+		mes "가면서 ^e5555e몬스터를 처치해서 얼어 붙은 고기의 표본도 조금 채집^000000해 두죠.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[마크]";
+		mes "그게 좋겠네요.";
+		mes "이쪽으로 따라오세요.";
+		cutin "ep18_mark_04.png",0;
+		ep19_side_sea = 14;
+		erasequest 11826;
+		setquest 11827;
+		close2;
+		cutin "",255;
+		navigateto("jor_ab01",16,235);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11826,HUNTING) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 16, 17
+jor_ab01,8,238,0	script	#to_jor_ab02	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_sea == 15) {
+		warp "jor_ab02",281,87;
+		navigateto("jor_ab02",28,253);
+		end;
+	}
+	if (ep19_side_sea > 15) {
+		warp "jor_ab02",281,87;
+		end;
+	}
+	switch( checkquest(11827,HUNTING) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		break;
+	case 2:
+		if (countitem(1000708) < 2)
+			break;
+		mes "[마크]";
+		mes "여기에요.";
+		mes "보이시죠?";
+		mes "이 통로…";
+		cutin "ep18_mark_01.png",0;
+		delitem 1000708,2;	// Ep19_Ice_Meat
+		ep19_side_sea = 15;
+		erasequest 11827;
+		setquest 11828;
+		next;
+		mes "[슈르르]";
+		mes "하아…";
+		mes "입구에 고여 있던 만큼은 아니지만 조금씩 독기가 쌓이는 것 같아요.";
+		mes "마력핵도 거의 한계인 것 같고 더 이상은 위험하니 이 아래는 빠르게 조사하고 돌아가죠.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "^e5555e몬스터를 처치하면서 얼어 붙은 고기의 표본도 조금 채집^000000하고 저 길 끝에서 만나요.";
+		close3;
+	}
+	mes "- 아직 갈 수 없다.";
+	mes "^e5555e몬스터를 처치하면서 얼어 붙은 고기의 표본도 조금 채집^000000하는 것이 좋겠다. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11827,HUNTING) == 2 && countitem(1000708) >= 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 18, 19
+jor_ab02,28,254,3	script	구덩이의 끝#ep19_1_ab	4_ENERGY_BLACK,{
+	switch( checkquest(11828,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		end;
+	case 2:
+		if (countitem(1000708) < 3) {
+			end;
+		}
+		mes "[슈르르]";
+		mes "여기가 끝인 것 같네요.";
+		mes "처음 보는 몬스터가 있었다는 것 외엔 특별한 건 없는 것 같은데 혹시 뭔가 발견한 것 있나요?";
+		cutin "ep19_iwin_diver01.png",2;
+		delitem 1000708,2;	// Ep19_Ice_Meat
+		ep19_side_sea = 16;
+		erasequest 11828;
+		setquest 11829;
+		next;
+		mes "[마크]";
+		mes "다행히 다른 장소로 더 연결 된 길도 보이지 않는 것 같아요.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[알프]";
+		mes "…";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "이게 끝이라면 그나마 다행이긴 한데…";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그럼 어서 돌아가서 레하르님께 보고하죠.";
+		mes "더 이상 여기에 있고 싶지도 않네요.";
+		next;
+		mes "[마크]";
+		mes "저도 속이 좀 안좋아지는 것 같은데…";
+		mes "어서 돌아 가요.";
+		cutin "ep18_mark_01.png",0;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11828,HUNTING) == 2 && countitem(1000708) >= 2" );
+	end;
+}
+
+jor_ab02,286,87,0	warp2	#to_jor_ab01_	1,1,jor_ab01,12,238
+
+// Side quest : Frozen Sea - Step 20
+// icas_in,32,123,5	script	프리데리케#ep19_room	4_EP19_FRIEDERIKE,{
+//
+
+
+// Daily quest : Do We Need a Refrigerator? (Kill 20x Monsters in jor_back2 and gather 10 Frozen Meat - not 20)
+// Daily quest : Crispy Tools
+icas_in,27,122,5	script	타타링#ep19_room::ep19_healrock_2	4_EP19_TAMARIN,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- 여기서 잠깐 !! -";
+		mes "- 가지고 계신 아이템이 너무 많아 -";
+		mes "- 퀘스트를 진행할 수 없습니다. -";
+		mes "- 몸을 가볍게 하시고 -";
+		mes "- 다시 시도해주세요. -";
+		close;
+	}
+	// Side quest : Frozen Sea. Step 2
+	if (ep19_side_sea == 2) {
+		mes "[타타링]";
+		mes "이야기 하자면 긴데…";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[타타링]";
+		mes "그러니까…";
+		mes "제가 바르문트 저택에서 일할 때 였어요.";
+		mes "지하수로가 또 부서졌단 보고를 듣고 수리를 하러 갔는데 갑자기 ^e5555e일루시온^000000들이 나타나서 절 공격했죠.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "^e5555e비공정^000000 같은 것에 태워진 것 같은데…";
+		mes "정신을 차렸을 땐 ^e5555e썩은 내가 진동하는 동굴^000000 같은 곳이었어요.";
+		next;
+		mes "[타타링]";
+		mes "주변엔 저처럼 ^e5555e잡혀온 사람들^000000이 많이 있었는데 몇몇은 겨우 도망 쳤지만 다른 분들은 무사한지 모르겠네요.";
+		next;
+		mes "[타타링]";
+		mes "동굴을 겨우 탈출해서 도망치다 쓰러져 있는걸 여기 있는 슈르르가 발견해서 구해줬어요.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[슈르르]";
+		mes "앗!";
+		mes "타타링 너 아이스 윈드가 아니었던 거야?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "아니 내가 어딜 봐서 아이스 윈드예요.";
+		mes "어쩐지 불쌍하다면서 깃털을 자꾸 주더라…";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그렇구만!";
+		mes "그럼 뭐 그런 사소한 건 넘어가고.";
+		mes "아까는 어떻게 된 거야 갑자기 바닥에 쓰러져 있어서 얼마나 놀랐는지 알아?";
+		cutin "ep19_iwin03.png",2;
+		npctalk "타타링 : 아니 사소하다니…", "ep19_healrock_2", bc_self;
+		next;
+		mes "[슈르르]";
+		mes "정신은 못 차라지 몸은 점점 차가워지지 그대로 죽는 줄 알았다고!";
+		next;
+		mes "[타타링]";
+		mes "그냥 평소처럼 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "를 사냥하고 있었을 뿐인데…";
+		mes "갑자기 바닥이 꺼지면서 빠져 버렸어요.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "처음엔 그냥 얼음이 깨지면서 물에 빠진 거라고 생각했는데 물색도 이상하고 얼른 빠져 나왔어요.";
+		mes "그리고는… 기억이 없네요.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[레하르]";
+		mes "음…";
+		mes "그거 위험한 거 아닌가요?";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[타타링]";
+		mes "그렇네요.";
+		mes "그러고보니 구덩이에 빠지기 전에 살펴봤던 ^e5555e덫도 망가져^000000 있었던 것 같은데.";
+		mes "덕분에 덫에 걸린 " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "가 풀려나서 공격당했죠.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[슈르르]";
+		mes "덫이 망가져 있는 건 흔한 일이잖아.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "그게 아니라… 누군가가 일부러 망가뜨린 것 같은 흔적이 있었어요.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "그 구덩이를 의심하지 않을 수 없구만…";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "역시 조사해보는 편이 좋을 것 같아요.";
+		mes "또 누가 다치면 곤란하니까요.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[슈르르]";
+		mes "무리 하지마!";
+		mes "넌 쉬고 있어.";
+		mes "내가 가서 조사해볼 테니.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[마크]";
+		mes "저희도 도울 게요.";
+		mes "혼자서 조사하다가 사고라도 당하면 큰일이니까요.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[슈르르]";
+		mes "감사합니다.";
+		mes "그럼 여러분은 주변의 덫을 조사해 주세요.";
+		mes "전 타타링을 찾았던 곳 주변을 먼저 조사하고 있을게요.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		select( "위험하다." );
+		mes "[슈르르]";
+		mes "걱정 마세요.";
+		mes "^e5555e" + getitemname(1000706) + "으로 강화한 잠수 장비^000000를 입고 있으니 어느정도는 버틸 수 있어요.";
+		next;
+		mes "[슈르르]";
+		mes "그럼 ^e5555e덫을 조사^000000하다가 뭔가 발견하면 얼어붙은 비늘 평원의 북서쪽으로 와주세요.";
+		ep19_side_sea = 3;
+		erasequest 11815;
+		setquest 11816;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_8" );
+		cloakonnpcself( "ep19_healrock_4" );
+		cloakonnpcself( "ep19_healrock_5" );
+		navigateto("jor_back1",300,272);
+		end;
+	}
+	if (ep19_side_sea == 3) {
+		mes "[타타링]";
+		mes "그러고보니 구덩이에 빠지기 전에 살펴봤던 ^e5555e덫도 망가져^000000 있었던 것 같은데.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[타타링]";
+		mes "누군가가 일부러 망가뜨린 것 같은 흔적이 있었어요.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "역시 조사해보는 편이 좋을 것 같아요.";
+		mes "또 누가 다치면 곤란하니까요.";
+		cutin "ep19_tamarin03.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[타타링]";
+		mes "아… 아이고 죽겠다.";
+		cutin "ep19_tamarin03.png",2;
+		close3;
+	}
+	// daily
+	if (checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10 || isbegin_quest(11858) == 1) {	// quest completed
+		mes "[타타링]";
+		mes "으헉…";
+		mes "" + strcharinfo(0) + "님 오셨군요.";
+		mes "깜박 잠들었네요.";
+		cutin "ep19_tamarin02.png",2;
+		if (checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10) {
+			delitem 1000708,10;	// Ep19_Ice_Meat
+			erasequest 11852;
+			setquest 11853;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 9000000,7000000;	// affected by server drop rate
+		}
+		if (isbegin_quest(11858) == 1) {
+			erasequest 11854;
+			erasequest 11855;
+			erasequest 11856;
+			erasequest 11857;
+			erasequest 11858;
+			setquest 11859;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp2 52243795,0;
+			getexp 0,3000000;
+		}
+		next;
+		mes "[타타링]";
+		mes "정말 고생 많으셨어요.";
+		mes "저도 어서 회복해서 합류할게요.";
+		cutin "ep19_tamarin04.png",2;
+		close3;
+	}
+	if (isbegin_quest(11851) == 0) {
+		mes "[타타링]";
+		mes "아… 아이고…";
+		mes "속도 울렁거리고…";
+		mes "발도 저릿저릿한 게…";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "몸이 생각처럼 회복되지 않네요.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[타타링]";
+		mes "빨리 사냥을 나가지 않으면 냉장고가 금방 바닥나 버릴 텐데.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[타타링]";
+		mes "프리데리케님은 안 죽은 것만 해도 다행이라고 하시긴 하지만…";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[타타링]";
+		mes "지금은 슈르르도 구덩이 조사 때문에 사냥에 참여하지 못하고 있어서 다른 사냥병들이 눈코 뜰 새 없이 바쁘게 일하고있다고 하네요.";
+		next;
+		mes "[타타링]";
+		mes "환경도 이렇다 보니 사냥 도구나 덫도 금방 바삭바삭해져 버리는 것 같고.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[타타링]";
+		mes "" + strcharinfo(0) + "님도 혹시 몬스터를 잡게 되면 그냥 지나치지 말고 갈무리해서 가져와 주세요.";
+		next;
+		mes "[타타링]";
+		mes "냉장고에 넣어두면 오랫동안 신선하게 먹을 수 있답니다.";
+		cutin "ep19_tamarin04.png",2;
+		setquest 11851;
+		completequest 11851;
+	}
+	else {
+		mes "[타타링]";
+		mes "아… 아이고…";
+		mes "속도 울렁거리고…";
+		mes "발도 저릿저릿한 게…";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[타타링]";
+		mes "몸이 생각처럼 회복되지 않네요.";
+		cutin "ep19_tamarin01.png",2;
+	}
+	next;
+	switch( select( "냉장고가 필요한가?", "바삭바삭한 도구", "걱정 한다." ) ) {
+	case 1:
+		switch( checkquest(11853,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[타타링]";
+			mes "오늘 필요한 만큼은 충분하니까.";
+			mes "무리하지 마시고 푹 쉬세요.";
+			mes "내일은 내일의 고기가 필요하다구요!";
+			cutin "ep19_tamarin04.png",2;
+			close3;
+		case 2:
+			erasequest 11853;
+			break;
+		}
+		if (checkquest(11852,HUNTING) == -1) {
+			mes "[타타링]";
+			mes "그럼요!";
+			mes "이 날씨에 고기를 그냥 밖에 두면 얼어서 부스러져 버린다구요.";
+			cutin "ep19_tamarin04.png",2;
+			next;
+			mes "[타타링]";
+			mes "냉장고에 넣는 건 다른 아윈들에게 부탁할 테니 " + strcharinfo(0) + "님은 고기만 구해오시면 돼요!";
+			next;
+			mes "[타타링]";
+			mes "그럼 ^e5555e얼어붙은 비늘 평원^000000에서 몬스터를 ^e5555e20마리 이상^000000 사냥하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e10개 이상^000000 구해 주세요.";
+			next;
+			mes "[타타링]";
+			mes "냉장고를 좀 채워 놔야 두발 뻗고 쉴 수 있을 것 같아요.";
+			cutin "ep19_tamarin03.png",2;
+			setquest 11852;
+			close2;
+			cutin "",255;
+			navigateto("jor_back2",211,26);
+			end;
+		}
+		// note: same text without items/hunting ongoing
+		mes "[타타링]";
+		mes "그럼 ^e5555e얼어붙은 비늘 평원^000000에서 몬스터를 ^e5555e20마리 이상^000000 사냥하고 ^e5555e얼어 붙은 고기^000000를 ^e5555e10개 이상^000000 구해 주세요.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[타타링]";
+		mes "냉장고를 좀 채워 놔야 두발 뻗고 쉴 수 있을 것 같아요.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",211,26);
+		end;
+	case 2:
+		switch( checkquest(11859,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[타타링]";
+			mes "오늘 필요한 만큼은 충분하니까.";
+			mes "무리하지 마시고 푹 쉬세요.";
+			mes "내일은 내일의 고기가 필요하다구요!";
+			cutin "ep19_tamarin04.png",2;
+			close3;
+		case 2:
+			erasequest 11859;
+			break;
+		}
+		mes "[타타링]";
+		mes "믿기 어려우시겠지만 정말 그렇게 됩니다.";
+		mes "그래서 계속 정비를 해줘야 하죠.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[타타링]";
+		mes "예전에 며칠 방치된 덫을 수리하려고 건드렸더니 가루가 되어 바람에 흩날려져 버리더군요.";
+		next;
+		mes "[타타링]";
+		mes "그렇게 되기 전에 ^e5555e얼어붙은 비늘 평원에 있는 덫^000000들을 살펴봐 주세요.";
+		next;
+		mes "[타타링]";
+		mes "부서지면 새로 만들 재료를 구하는 것부터가 더 고통이라구요.";
+		cutin "ep19_tamarin03.png",2;
+		if (isbegin_quest(11854) == 0)
+			setquest 11854;
+		close2;
+		cutin "",255;
+		if (isbegin_quest(11854) == 1)
+			navigateto("jor_back2",367,36);
+		else if (isbegin_quest(11855) == 1)
+			navigateto("jor_back2",84,88);
+		else if (isbegin_quest(11856) == 1)
+			navigateto("jor_back2",158,320);
+		else if (isbegin_quest(11857) == 1)
+			navigateto("jor_back2",190,184);
+		end;
+	case 3:
+		mes "[타타링]";
+		mes "괜찮아요.";
+		mes "금방 낫겠죠 뭐.";
+		cutin "ep19_tamarin04.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11815) == 1" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && checkquest(11852,HUNTING) == -1 && checkquest(11853,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11853,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11854) == 0 && checkquest(11859,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11859,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11858) == 1" );
+	end;
+}
+
+jor_back2,367,36,3	script	얼어붙은 덫#ep19_1::ep19_jor_back2_367_36	4_ROPEPILE,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11854 + .@num - 1;
+
+	switch( isbegin_quest(.@quest_id) ) {
+	case 0:
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "많이 낡았지만 잘 정비하면 아직 쓸 수 있다. -";
+		close;
+	case 1:
+		mes "- 차갑게 얼어있는 사냥덫.";
+		mes "많이 낡았지만 잘 정비하면 아직 쓸 수 있다. -";
+		next;
+		progressbar "FFFF00",3;
+		mes "[" + strcharinfo(0) + "]";
+		mes "잘 버텨주면 좋을텐데…";
+		next;
+		mes "- 정비를 완료 했다.";
+		if (.@quest_id != 11857)
+			mes "다음 덫을 살펴 보자. -";
+		else
+			mes "타타링에게 돌아가 보고하자. -";
+		completequest .@quest_id;
+		setquest .@quest_id+1;
+		break;
+	case 2:
+		mes "- 정비를 완료 했다.";
+		mes "다음 덫을 살펴 보자. -";
+		break;
+	}
+	close2;
+	switch( .@quest_id ) {
+	case 11854:
+		navigateto("jor_back2",84,88);
+		break;
+	case 11855:
+		navigateto("jor_back2",158,320);
+		break;
+	case 11856:
+		navigateto("jor_back2",190,184);
+		break;
+	case 11857:
+		navigateto("icas_in",28,119);
+		break;
+	}
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11854 + .@num - 1;
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+jor_back2,84,88,3	duplicate(ep19_jor_back2_367_36)	얼어붙은 덫#ep19_2	4_ROPEPILE
+jor_back2,158,320,3	duplicate(ep19_jor_back2_367_36)	얼어붙은 덫#ep19_3	4_ROPEPILE
+jor_back2,190,184,3	duplicate(ep19_jor_back2_367_36)	얼어붙은 덫#ep19_4	4_ROPEPILE
+//
+
+
+// Daily quest : Dig and Dig - Step 3
+jor_ab01,163,253,3	script	불길한 흔적#ep19_1::ep19_jor_ab01_163_253	4_ENERGY_BLACK,{
+	if (isbegin_quest(11849) == 1) {
+		mes "- 조사를 모두 완료했다.";
+		mes "슈르르에게 돌아가자. -";
+		close2;
+		navigateto("icas_in",27,116);
+		end;
+	}
+	if (isbegin_quest(11836) == 0)
+		end;
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11837 + .@num - 1;
+
+	if (isbegin_quest(.@quest_id) == 1) {
+		progressbar "B04A23",3;
+		switch( .@quest_id ) {
+		case 11837:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 큭… 역겨운 냄새…", bc_self;
+			break;
+		case 11838:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 뜯어 먹은 것 같은 흔적이 있군…", bc_self;
+			break;
+		case 11839:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 수상한 손자국이 있네.", bc_self;
+			break;
+		case 11840:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 파헤친 흔적이 있네.", bc_self;
+			break;
+		case 11841:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 으… 찐득해…", bc_self;
+			break;
+		case 11842:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 뭔가를 묻은 흔적인가?", bc_self;
+			break;
+
+		case 11843:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 뭔가 계속 흘러나오는데?", bc_self;
+			break;
+		case 11844:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 토할 것 같아…", bc_self;
+			break;
+		case 11845:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 뭔가 있었던 것 같은 흔적이…", bc_self;
+			break;
+		case 11846:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 완전히 썩었어…", bc_self;
+			break;
+		case 11847:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 뭐지?", bc_self;
+			break;
+		case 11848:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : 손톱으로 긁은 것 같은 자국이네…", bc_self;
+			break;
+		}
+		erasequest .@quest_id;
+		questinfo_refresh();
+		if (queststatus_between(11837,11848) == 0) {// all removed
+			erasequest 11836;
+			setquest 11849;
+			mes "- 조사를 모두 완료했다.";
+			mes "슈르르에게 돌아가자. -";
+			close2;
+			navigateto("icas_in",27,116);
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11837 + .@num - 1;
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+
+jor_ab01,117,141,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_2	4_ENERGY_BLACK
+jor_ab01,222,125,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_3	4_ENERGY_BLACK
+jor_ab01,196,260,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_4	4_ENERGY_BLACK
+jor_ab01,112,62,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_5	4_ENERGY_BLACK
+jor_ab01,25,265,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_6	4_ENERGY_BLACK
+
+jor_ab02,151,272,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_7	4_ENERGY_BLACK
+jor_ab02,139,148,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_8	4_ENERGY_BLACK
+jor_ab02,182,83,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_9	4_ENERGY_BLACK
+jor_ab02,48,27,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_10	4_ENERGY_BLACK
+jor_ab02,208,48,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_11	4_ENERGY_BLACK
+jor_ab02,201,184,3	duplicate(ep19_jor_ab01_163_253)	불길한 흔적#ep19_12	4_ENERGY_BLACK

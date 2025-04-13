@@ -22,49 +22,42 @@
 //============================================================ 
 
 -	script	Mercenary Manager#main	-1,{
-	setarray .@name$, 	"Spear", 			"Sword", 			"Bow";
+	setarray .@name$, 	"창", 			"검", 			"활";
 	setarray .@faith$, 	"SPEAR_MERC_GUILD",	"SWORD_MERC_GUILD",	"ARCH_MERC_GUILD";
 	setarray .@item, 	12182,				12172,				12162;
 	.@npc$ = strnpcinfo(2);
 	for (.@size = getarraysize(.@name$); .@type < .@size; .@type++)
 		if( compare( .@npc$,.@name$[.@type] ) ) break;
 	.@faith_merc = mercenary_get_faith(getd(.@faith$[.@type]));
-	mes "[Mercenary Manager]";
-	mes "Welcome to the";
-	mes .@name$[.@type] + " Mercenary Guild.";
-	mes "What can I do for you?";
+	mes "[용병 관리인]";
+	mes "어서오세요.";
+	mes "여기는 "+ .@name$[.@type] +"용병 길드입니다.";
+	mes "무슨 일로 오셨나요?";
 	next;
-	switch(select("Hire Mercenary:Mercenary Info:Nothing:10th Grade Mercenaries")) {
+	switch(select("용병과 계약하러 왔습니다.", "용병이요?", "아무 것도 아닙니다.", "10레벨 용병은 없나요?")) {
 		case 1:
-			mes "[Mercenary Manager]";
-			mes "You want to hire a";
-			mes .@name$[.@type] + " Mercenary?";
-			mes "Which Grade were you";
-			mes "interested in hiring?";
+			mes "[용병 관리인]";
+			mes "오... 그래요, 어떤 용병과 계약을 하러 왔나요?";
 			next;
 			for (.@i = 1; .@i <= 9; .@i++)
-				.@menu$ = .@menu$ + callfunc("F_GetNumSuffix",.@i) + " Grade " + .@name$[.@type] + " Mercenary:";
+				.@menu$ = .@menu$ + .@i + "등급 " + .@name$[.@type] + "용병:";
 			.@Grade = select(.@menu$);
 			.@BaseLevel = 5 + (.@Grade * 10);
 			.@BaseLevel = (.@val > 90)? 90 : .@BaseLevel;
-			.@ZenyCost = 7 * .@Grade;
+			.@ZenyCost = 10 * .@Grade;
 			setarray .@FaithCost[7], 50,100,300;
 			.@FaithCost = .@FaithCost[.@Grade];
-			mes "[Mercenary Manager]";
-			mes "So you want to hire a " + callfunc("F_GetNumSuffix",.@Grade);
-			mes "Grade " + .@name$[.@type] + " Mercenary?";
-			mes "You need to have attained";
-			mes "Base Level " + .@BaseLevel + " or higher, and";
-			mes "must pay the " + .@ZenyCost + ",000 zeny fee.";
+			mes "[용병 관리인]";
+			mes .@Grade + "등급 " + .@name$[.@type] + "용병과 계약 할텐가?";
+			mes .@Grade + "등급 과 계약은 자신의 레벨이 "+ .@BaseLevel;
+			mes "이상이면 된다네.";
+			mes "그리고 계약금은" +.@ZenyCost + "000z라네.";
+			mes "용병과 계약을 맺겠나?";
 			next;
-			if(select("Yes:No") == 2) {
-				mes "[Mercenary Manager]";
-				mes "Oh, really? Well, now";
-				mes "might not be a good time";
-				mes "for you to consider hiring";
-				mes "a Mercenary, but please feel";
-				mes "free to come back if your";
-				mes "needs change. Thank you~";
+			if(select("예", "아니오") == 2) {
+				mes "[용병 관리인]";
+				mes "그런가? 그럼 다음에 이용해주게.";
+				close;
 			}
 			else if(.@FaithCost && .@faith_merc < .@FaithCost) {
 				mes "[Mercenary Manager]";
@@ -103,82 +96,87 @@
 			}
 			close;
 		case 2:
-			mes "[Mercenary Manager]";
-			mes "Mercenaries are soldiers";
-			mes "that will fight at your side";
-			mes "on the battlefield, but there";
-			mes "are a few terms and conditions";
-			mes "you must fulfill to hire them.";
+			mes "[용병 관리인]";
+			mes "용병은 말이지 말그대로 자신의";
+			mes "옆에서 자신을 도와 전투를 해주는";
+			mes "존재라네.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "You must fulfill a level";
-			mes "requirement and pay a zeny";
-			mes "fee to hire a Mercenary.";
-			mes "Higher grade Mercenaries";
-			mes "will also require that you";
-			mes "build a Loyalty rating with us.";
+			mes "[용병 관리인]";
+			mes "하지만 무작정 도와주는 것이 아니라";
+			mes "자신의 능력, 용병 길드와의 관계";
+			mes "등등 여러가지 조건에 따라 계약할";
+			mes "수 있는 용병의 등급도 달라진다네.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "Mercenary contracts can't be";
-			mes "transferred to other people,";
-			mes "and we only allow a 5 Base Level difference between the Mercenary";
-			mes "and client so you can't hire one much stronger than you.";
+			mes "[용병 관리인]";
+			mes "그리고 가장 최상급의 용병은 특별한";
+			mes "조건을 만족해야만 계약을 할 수";
+			mes "있기 때문에 계약을 맺기 아주";
+			mes "까다롭지.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "Well, you can figure out the";
-			mes "details when you actually form";
-			mes "a contract with one of our";
-			mes "Mercenaries, and receive";
-			mes "the Summon Scroll that will";
-			mes "call a Mercenary to your side.";
+			mes "[용병 관리인]";
+			mes "그리고 용병과 함번 계약을 맺으면";
+			mes "그 용병을 다른 사람에게 건낼 수";
+			mes "없다네. 자신의 레벨에 비해 아주";
+			mes "강한 용병도 계약을 맺을 수 없고,";
+			mes "최소한 자신과 용병의 레벨 차이가";
+			mes "5레벨 이상 차이나면 안된다네.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "You can't give this scroll";
-			mes "to anyone else, and the";
-			mes "Mercenary will only remain";
-			mes "with you for 30 minutes after";
-			mes "you summon him. Don't forget";
-			mes "about the time limit, okay?";
+			mes "[용병 관리인]";
+			mes "또 한가지 조건은 용병 길드와의";
+			mes "신뢰도라네, 낮은 등급의 용병들은";
+			mes "상관없지만 일정 이상 등급의";
+			mes "용병들은 용병 길드와의 신뢰도가";
+			mes "일정 수준 이상 되야하지.";
+			next;
+			mes "[용병 관리인]";
+			mes "자세한 조건은 자네가 용병과 계약을";
+			mes "맺을때 설명해주겠네.";
+			next;
+			mes "[용병 관리인]";
+			mes "아 그리고 중요한 걸 깜박했군.";
+			mes "용병과 계약을 하면 소환 스크롤을";
+			mes "받게 된다네.";
+			next;
+			mes "[용병 관리인]";
+			mes "그 스크롤은 타인에게 양도할 수";
+			mes "없고, 스크롤을 사용하여 용병을";
+			mes "불러냈을 때 30분간만 존재한다네.";
+			mes "그 점을 주의해주게나.";
 			close;
 		case 3:
-			mes "[Mercenary Manager]";
-			mes "No? You didn't need any";
-			mes "help? Well, feel free to";
-			mes "ask me if you have any";
-			mes "questions about Mercenaries.";
-			close;
+				mes "[용병 관리인]";
+				mes "원 사람하곤 싱겁긴.";
+				mes "그럼 나중에 보세나.";
+				close;
 		case 4:
-			mes "[Mercenary Manager]";
-			mes "10th Grade Mercenaries are";
-			mes "the best we have to offer,";
-			mes "and we use different criteria";
-			mes "for our clients to hire them.";
-			mes "There's no zeny fee, but you";
-			mes "must have 500 Loyalty.";
+			mes "[용병 관리인]";
+			mes "10레벨 용병은 상당히 특이한";
+			mes "존재입니다. 그 뛰어난 능력 때문에";
+			mes "쉽게 계약할 수 없습니다.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "Once you make a contract";
-			mes "with a 10th Grade Mercenary,";
-			mes "your Loyalty rating will be";
-			mes "decreased by 400. In other";
-			mes "words, you pay 400 Loyalty";
-			mes "to hire a 10th Grade Mercenary.";
+			mes "[용병 관리인]";
+			mes "일단 그들과 계약을 하는데는 돈이";
+			mes "필요 없습니다. 필요한건 오직";
+			mes "길드와의 신뢰도 뿐이죠.";
+			mes "10레벨 용병과 계약하기 위한 최소";
+			mes "조건은 길드 신뢰도 500입니다.";
 			next;
-			mes "[Mercenary Manager]";
-			mes "You must also be at";
-			mes "Base Level 90 or higher to";
-			mes "hire a 10th Grade Mercenary.";
-			mes "Are you still interested in";
-			mes "forming this contract?";
+			mes "[용병 관리인]";
+			mes "그리고 계약을 할때 400의 신뢰도가";
+			mes "감소하죠. 10레벨 용병을 데리고";
+			mes "다닌다는건 그만큼 위험한 일을";
+			mes "하는 것이라고 판단해서 개인의";
+			mes "길드의 신뢰도가 감소하는 것이지요.";
 			next;
-			if (select("Yes:No") == 2) {
-				mes "[Mercenary Manager]";
-				mes "I understand... It takes";
-				mes "hard work and sacrifice to";
-				mes "even reach the point where";
-				mes "you can hire a 10th Grade";
-				mes "Mercenary. Have you considered";
-				mes "hiring a lower grade Mercenary?";
+			mes "[용병 관리인]";
+			mes "그리고 계약하시는 분의 레벨이 90";
+			mes "이상이어야 합니다.";
+			mes "그럼 10레벨 용병과 계약하시겠습니까?";
+			next;
+			if (select("예", "아니오") == 2) {
+				mes "[용병 관리인]";
+				mes "역시 10레벨 용병과 일을 한다는건 쉬운 일은 아니죠.";
+				close;
 			}
 			else if (.@faith_merc < 500) {
 				mes "[Mercenary Manager]";
@@ -216,25 +214,23 @@ pay_arche,99,167,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Bow	4_M_J
 // Mercenary Merchant NPCs
 //============================================================
 -	script	Mercenary Merchant#dummy::MercMerchant	-1,{
-	mes "[Mercenary Goods Merchant]";
-	mes "Hello, I sell goods";
-	mes "that Mercenaries can";
-	mes "use. Is there anything";
-	mes "in particular that";
-	mes "you're looking for?";
+	mes "[물품 판매상]";
+	mes "안녕하세요.";
+	mes "용병에 관한 물품을 판매하고 있습니다.";
+	mes "뭘 찾으시나요?";
 	next;
 	setarray .@item, 12184,	12185,	12241,	12242,	12243;
-	setarray .@cost, 1750,	3000,	560,	1050,	2100;
+	setarray .@cost, 2500,	5000,	800,	1500,	3000;
 	for (.@size = getarraysize(.@item); .@i < .@size; .@i++)
 		.@menu$ = .@menu$ + getitemname(.@item[.@i]) + ":";
 	.@m = select(.@menu$)-1;
 	.@str$ = .@cost[.@m] + "";
 	.@len = getstrlen(.@str$);
 	.@str_cost$ = (.@len <= 3)? .@str$ : insertchar(.@str$,",",.@len-3);
-	mes "[Mercenary Goods Merchant]";
-	mes getitemname(.@item[.@m]);
-	mes "each cost " + .@str_cost$ + " zeny.";
-	mes "How many would you like?";
+	mes "[물품 판매상]";
+	mes "'"+getitemname(.@item[.@m])+"' 이신가요?";
+	mes "개당 "+ .@str_cost$ +"z 에 판매하고 있습니다.";
+	mes "얼마나 필요하신가요?";
 	next;
 	input .@input;
 	if (!.@input) {
@@ -255,35 +251,25 @@ pay_arche,99,167,4	duplicate(Mercenary Manager#main)	Mercenary Manager#Bow	4_M_J
 		close;
 	}
 	else if (set(.@total_po, .@input * .@cost[.@m]) > Zeny) {
-		mes "[Mercenary Goods Merchant]";
-		mes "I'm sorry, but you don't";
-		mes "have enough zeny for this";
-		mes "many potions. Well, I'll be";
-		mes "be here when you're ready";
-		mes "to purchase something";
-		mes "for your Mercenaries.";
+		mes "[물품 판매상]";
+		mes "가지고 계신 제니가 부족하시군요.";
+		mes "가지고 계신 제니량 내에서 정해주세요.";
 		close;
 	}
 	else if (!checkweight(.@item[.@m], .@input)) {
-		mes "[Mercenary Goods Merchant]";
-		mes "If I gave you that many";
-		mes "potions, you wouldn't be";
-		mes "able to carry them with you.";
-		mes "Please come back after";
-		mes "you free up some space";
-		mes "in your Inventory.";
+		mes "[용병 상인]";
+		mes "내가 너한테 그렇게 많이 줬더라면";
+		mes "물약, 넌 그렇지 않을 거야";
+		mes "당신과 함께 가지고 다닐 수 있습니다.";
+		mes "다음에 다시 오세요";
+		mes "공간을 좀 확보하세요";
+		mes "인벤토리에 있습니다.";
 		close;
 	}
-	mes "[Mercenary Goods Merchant]";
-	if (.@input == 1) 
-		mes "Here's your " + getitemname(.@item[.@m]) + ".";
-	else {
-		mes "Here you are, this is exactly";
-		mes callfunc("F_InsertPlural",.@input,getitemname(.@item[.@m])) + ".";
-	}
-	mes "Thank you, and please come";
-	mes "again when you need more";
-	mes "potions for your Mercenaries.";
+	mes "[물품 판매상]";
+	mes "이용해주셔서 감사합니다.";
+	mes "주문하신 물품은 '" + getitemname(.@item[.@m]) + "'";
+	mes .@input +"개 입니다.";
 	Zeny = Zeny - .@total_po;
 	getitem .@item[.@m], .@input;
 	close;
